@@ -1,0 +1,914 @@
+{
+  "seed": 99108,
+  "run": "tbleth",
+  "anchorCommit": "9d78f3ffb811",
+  "days": 71,
+  "gameDays": 70,
+  "endReason": "village-lost",
+  "won": false,
+  "villageLost": true,
+  "maxWave": 4,
+  "spawnsW4": 3,
+  "tbCalls": 1,
+  "fieldCallsW4": 0,
+  "exposures": [
+    {
+      "seq": 1,
+      "type": "tb",
+      "day": 70,
+      "mid": "influencer",
+      "wave": 4,
+      "fightId": "fmgpspifd_ekkv70",
+      "scholarAtStart": "ruth_goldstein",
+      "leadVid": "ruth_goldstein",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "ruth_goldstein",
+          "hpStart": 100,
+          "maxHp": 100,
+          "gear": {
+            "vid": "ruth_goldstein",
+            "armorP": 50,
+            "armed": true,
+            "weapon": null,
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "influencer",
+          "hpStart": 850,
+          "maxHp": 850,
+          "wave": 4,
+          "joinedMidFight": false
+        }
+      ],
+      "leadGear": {
+        "vid": "ruth_goldstein",
+        "armorP": 50,
+        "armed": true,
+        "weapon": null,
+        "vpFound": true,
+        "readError": null
+      },
+      "scholarStart": {
+        "health": 100,
+        "energy": 100,
+        "food": "UNRECORDED"
+      },
+      "trickKnown": false,
+      "hits": [
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "influencer",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 5,
+          "returned": 8,
+          "hpBefore": 850,
+          "hpAfter": 842,
+          "hpDelta": -8,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "influencer",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 6,
+          "returned": 9,
+          "hpBefore": 842,
+          "hpAfter": 833,
+          "hpDelta": -9,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 5,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "influencer",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 5,
+          "returned": 8,
+          "hpBefore": 833,
+          "hpAfter": 825,
+          "hpDelta": -8,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 6,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "influencer",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 3,
+          "returned": 5,
+          "hpBefore": 825,
+          "hpAfter": 820,
+          "hpDelta": -5,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 6,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "influencer's attack",
+          "requested": 45,
+          "returned": 16,
+          "hpBefore": 100,
+          "hpAfter": 84,
+          "hpDelta": -16,
+          "sourceClass": "other"
+        },
+        {
+          "round": 7,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "influencer",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 5,
+          "returned": 9,
+          "hpBefore": 820,
+          "hpAfter": 811,
+          "hpDelta": -9,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 8,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "influencer",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 7,
+          "returned": 13,
+          "hpBefore": 811,
+          "hpAfter": 798,
+          "hpDelta": -13,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 8,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "influencer's Ratio",
+          "requested": 56,
+          "returned": 19,
+          "hpBefore": 84,
+          "hpAfter": 65,
+          "hpDelta": -19,
+          "sourceClass": "other"
+        },
+        {
+          "round": 9,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "influencer",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 2,
+          "returned": 4,
+          "hpBefore": 798,
+          "hpAfter": 794,
+          "hpDelta": -4,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 9,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "influencer's Ratio",
+          "requested": 53,
+          "returned": 18,
+          "hpBefore": 65,
+          "hpAfter": 47,
+          "hpDelta": -18,
+          "sourceClass": "other"
+        },
+        {
+          "round": 10,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "influencer",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 4,
+          "returned": 8,
+          "hpBefore": 794,
+          "hpAfter": 786,
+          "hpDelta": -8,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 11,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "influencer",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 5,
+          "returned": 9,
+          "hpBefore": 786,
+          "hpAfter": 777,
+          "hpDelta": -9,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 11,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "influencer's Ratio",
+          "requested": 43,
+          "returned": 15,
+          "hpBefore": 47,
+          "hpAfter": 32,
+          "hpDelta": -15,
+          "sourceClass": "other"
+        },
+        {
+          "round": 12,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "influencer's Ratio",
+          "requested": 40,
+          "returned": 14,
+          "hpBefore": 32,
+          "hpAfter": 18,
+          "hpDelta": -14,
+          "sourceClass": "other"
+        },
+        {
+          "round": 13,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "influencer's Ratio",
+          "requested": 40,
+          "returned": 14,
+          "hpBefore": 18,
+          "hpAfter": 4,
+          "hpDelta": -14,
+          "sourceClass": "other"
+        },
+        {
+          "round": 14,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "influencer's Ratio",
+          "requested": 48,
+          "returned": 17,
+          "hpBefore": 4,
+          "hpAfter": -13,
+          "hpDelta": -17,
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "You wake with a start — something is wrong."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🤳 The Influencer's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📱 The ring light BRIGHTENS — a new follower crawls out of the glow, phone-first, already filming. (1 followers. Each one sharpens the Ratio and drinks your favor.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🤳 The Influencer's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📱 1 follower turn the audience — care packages thin, the System's favor trickles away. (-1 favor.)"
+        },
+        {
+          "kind": "say",
+          "line": "📱 The ring light BRIGHTENS before it acts — RATIO incoming, sharpened by 1 followers."
+        },
+        {
+          "kind": "say",
+          "line": "‘This Ratio is brought to you by—’ The followers glow with sponsored light. They hit harder now. (Allied monsters +4 damage, 2 turns.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "say",
+          "line": "(influencer's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the influencer for 8."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🤳 The Influencer's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📱 The ring light BRIGHTENS — a new follower crawls out of the glow, phone-first, already filming. (2 followers. Each one sharpens the Ratio and drinks your favor.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "say",
+          "line": "(influencer's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the influencer for 9."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🤳 The Influencer's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📱 2 followers turn the audience — care packages thin, the System's favor trickles away. (-2 favor.)"
+        },
+        {
+          "kind": "say",
+          "line": "📱 The ring light BRIGHTENS before it acts — RATIO incoming, sharpened by 2 followers."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 5!"
+        },
+        {
+          "kind": "say",
+          "line": "(influencer's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the influencer for 8."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🤳 The Influencer's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📱 The ring light BRIGHTENS — a new follower crawls out of the glow, phone-first, already filming. (3 followers. Each one sharpens the Ratio and drinks your favor.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 6!"
+        },
+        {
+          "kind": "say",
+          "line": "(influencer's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the influencer for 5."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🤳 The Influencer's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📱 3 followers turn the audience — care packages thin, the System's favor trickles away. (-3 favor.)"
+        },
+        {
+          "kind": "say",
+          "line": "📱 The ring light BRIGHTENS before it acts — RATIO incoming, sharpened by 3 followers."
+        },
+        {
+          "kind": "say",
+          "line": "💥 influencer's attack finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 29."
+        },
+        {
+          "kind": "say",
+          "line": "Influencer's attack hits you for 16."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Ratio — locks onto one target — moving won't dodge it. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 7!"
+        },
+        {
+          "kind": "say",
+          "line": "(influencer's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the influencer for 9."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🤳 The Influencer's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📱 The ring light BRIGHTENS — a new follower crawls out of the glow, phone-first, already filming. (4 followers. Each one sharpens the Ratio and drinks your favor.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 8!"
+        },
+        {
+          "kind": "say",
+          "line": "(influencer's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the influencer for 13."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🤳 The Influencer's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📱 4 followers turn the audience — care packages thin, the System's favor trickles away. (-4 favor.)"
+        },
+        {
+          "kind": "say",
+          "line": "📱 The ring light BRIGHTENS before it acts — RATIO incoming, sharpened by 4 followers."
+        },
+        {
+          "kind": "say",
+          "line": "💥 influencer's Ratio finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 37."
+        },
+        {
+          "kind": "say",
+          "line": "Influencer's Ratio hits you for 19."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 9!"
+        },
+        {
+          "kind": "say",
+          "line": "(influencer's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the influencer for 4."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🤳 The Influencer's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📱 4 followers turn the audience — care packages thin, the System's favor trickles away. (-4 favor.)"
+        },
+        {
+          "kind": "say",
+          "line": "📱 The ring light BRIGHTENS before it acts — RATIO incoming, sharpened by 4 followers."
+        },
+        {
+          "kind": "say",
+          "line": "💥 influencer's Ratio finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 35."
+        },
+        {
+          "kind": "say",
+          "line": "Influencer's Ratio hits you for 18."
+        },
+        {
+          "kind": "say",
+          "line": "‘This Ratio is brought to you by—’ The followers glow with sponsored light. They hit harder now. (Allied monsters +4 damage, 2 turns.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 10!"
+        },
+        {
+          "kind": "say",
+          "line": "(influencer's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "💪 Your Strength grows — 6. The work is changing you."
+        },
+        {
+          "kind": "say",
+          "line": "✨ True Swing — Your strikes land cleaner. (tier 1)"
+        },
+        {
+          "kind": "say",
+          "line": "💪 Your Agility grows — 6. The work is changing you."
+        },
+        {
+          "kind": "say",
+          "line": "✨ Footwork — You move without thinking. (tier 1)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the influencer for 8."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🤳 The Influencer's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📱 4 followers turn the audience — care packages thin, the System's favor trickles away. (-4 favor.)"
+        },
+        {
+          "kind": "say",
+          "line": "📱 The ring light BRIGHTENS before it acts — RATIO incoming, sharpened by 4 followers."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 11!"
+        },
+        {
+          "kind": "say",
+          "line": "(influencer's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the influencer for 9."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🤳 The Influencer's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📱 4 followers turn the audience — care packages thin, the System's favor trickles away. (-4 favor.)"
+        },
+        {
+          "kind": "say",
+          "line": "📱 The ring light BRIGHTENS before it acts — RATIO incoming, sharpened by 4 followers."
+        },
+        {
+          "kind": "say",
+          "line": "💥 influencer's Ratio finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 28."
+        },
+        {
+          "kind": "say",
+          "line": "Influencer's Ratio hits you for 15."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 12!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🤳 The Influencer's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📱 4 followers turn the audience — care packages thin, the System's favor trickles away. (-4 favor.)"
+        },
+        {
+          "kind": "say",
+          "line": "📱 The ring light BRIGHTENS before it acts — RATIO incoming, sharpened by 4 followers."
+        },
+        {
+          "kind": "say",
+          "line": "💥 influencer's Ratio finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 26."
+        },
+        {
+          "kind": "say",
+          "line": "Influencer's Ratio hits you for 14."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 13!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🤳 The Influencer's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📱 4 followers turn the audience — care packages thin, the System's favor trickles away. (-4 favor.)"
+        },
+        {
+          "kind": "say",
+          "line": "📱 The ring light BRIGHTENS before it acts — RATIO incoming, sharpened by 4 followers."
+        },
+        {
+          "kind": "say",
+          "line": "💥 influencer's Ratio finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 26."
+        },
+        {
+          "kind": "say",
+          "line": "Influencer's Ratio hits you for 14."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 14!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🤳 The Influencer's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📱 4 followers turn the audience — care packages thin, the System's favor trickles away. (-4 favor.)"
+        },
+        {
+          "kind": "say",
+          "line": "📱 The ring light BRIGHTENS before it acts — RATIO incoming, sharpened by 4 followers."
+        },
+        {
+          "kind": "say",
+          "line": "💥 influencer's Ratio finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 31."
+        },
+        {
+          "kind": "say",
+          "line": "Influencer's Ratio hits you for 17."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Ruth Goldstein is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "RUTH — GONE. 2 open questions closed unanswered."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Ruth Goldstein is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Ruth kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "\"Ruth's gone.\" Sholpan looks at you for a long moment. \"You're not Ruth.\" No heat in it. Just fact. You'll have to earn this face."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Ella blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Calming Panic (Level 1). Ground them: 5 things you see, 4 you hear, 3 you touch. Breathe with them. Slow is fast."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Keeping Morale (Level 1). People need small wins. Celebrate the little things. Despair is the real killer."
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Ruth Goldstein, 70 days. The mantle passes to Ella Johnson."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Ella Johnson, 67 — an ESL teacher. Her hands know different work now: Green Whisper, Scream Cheese, Green Thumb, Literally."
+        },
+        {
+          "kind": "say",
+          "line": "You knew Ruth — not the office, the person. The fire keeps expecting her, and so do you. That's a heavier kind of stepping up. (+5 trauma)"
+        },
+        {
+          "kind": "say",
+          "line": "At the grave, Sholpan, Boris speak for Ella — \"Ruth trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew Ella before the Codex did — her name already carried weight here."
+        }
+      ],
+      "transcriptOverflow": false,
+      "abilityUses": [],
+      "shoutUses": 0,
+      "offerFoodUses": 0,
+      "end": {
+        "result": "lost",
+        "day": 70,
+        "round": 14,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "influencer",
+            "alive": true,
+            "fled": false,
+            "hp": 777,
+            "maxHp": 850
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "ruth_goldstein",
+            "alive": false,
+            "fled": false,
+            "hp": -13,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "ruth_goldstein"
+        ],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false
+    }
+  ],
+  "killsW4": 0,
+  "killRows": [],
+  "unlinkedKills": [],
+  "spawns": [
+    {
+      "day": 69,
+      "id": "reunion",
+      "tx": 6,
+      "ty": 1
+    },
+    {
+      "day": 69,
+      "id": "eulogy",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 70,
+      "id": "influencer",
+      "tx": 5,
+      "ty": 2
+    }
+  ],
+  "orphanTbEnds": [],
+  "wrapCounts": {
+    "spawnWorldMonster": 50,
+    "fieldFight": 59,
+    "recordWaveKill": 42,
+    "useAbility": 30,
+    "startCombat": 14,
+    "tbEnd": 14,
+    "tbDamage": 131
+  },
+  "instrumentErrors": [],
+  "notes": []
+}

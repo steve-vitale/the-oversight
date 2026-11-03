@@ -1,0 +1,2807 @@
+{
+  "seed": 99106,
+  "run": "tbleth",
+  "anchorCommit": "9d78f3ffb811",
+  "days": 95,
+  "gameDays": 96,
+  "endReason": "village-lost",
+  "won": false,
+  "villageLost": true,
+  "maxWave": 4,
+  "spawnsW4": 9,
+  "tbCalls": 5,
+  "fieldCallsW4": 0,
+  "exposures": [
+    {
+      "seq": 1,
+      "type": "tb",
+      "day": 75,
+      "mid": "reunion",
+      "wave": 4,
+      "fightId": "fmgpspio1_edhw00",
+      "scholarAtStart": "maya_singh",
+      "leadVid": "maya_singh",
+      "partySizeStart": 2,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "maya_singh",
+          "hpStart": 100,
+          "maxHp": 100,
+          "gear": {
+            "vid": "maya_singh",
+            "armorP": 60,
+            "armed": true,
+            "weapon": "Kitchen knife",
+            "vpFound": true,
+            "readError": null
+          }
+        },
+        {
+          "key": "v_sofia_chen",
+          "kind": "villager",
+          "vid": "sofia_chen",
+          "hpStart": 81,
+          "maxHp": 100,
+          "gear": {
+            "vid": "sofia_chen",
+            "armorP": 48,
+            "armed": true,
+            "weapon": "Sling",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "reunion",
+          "hpStart": 900,
+          "maxHp": 1200,
+          "wave": 4,
+          "joinedMidFight": false
+        },
+        {
+          "key": "m_1",
+          "mid": "reunion",
+          "hpStart": 1301,
+          "maxHp": 1301,
+          "wave": 4,
+          "joinedMidFight": false
+        }
+      ],
+      "leadGear": {
+        "vid": "maya_singh",
+        "armorP": 60,
+        "armed": true,
+        "weapon": "Kitchen knife",
+        "vpFound": true,
+        "readError": null
+      },
+      "scholarStart": {
+        "health": 100,
+        "energy": 95,
+        "food": "UNRECORDED"
+      },
+      "trickKnown": false,
+      "hits": [
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "reunion",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 9,
+          "returned": 11,
+          "hpBefore": 900,
+          "hpAfter": 889,
+          "hpDelta": -11,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "reunion",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 7,
+          "returned": 9,
+          "hpBefore": 889,
+          "hpAfter": 880,
+          "hpDelta": -9,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "your own move, returned",
+          "requested": 61,
+          "returned": 25,
+          "hpBefore": 100,
+          "hpAfter": 75,
+          "hpDelta": -25,
+          "sourceClass": "other"
+        },
+        {
+          "round": 3,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_1",
+          "sourceLabel": "your own move, returned",
+          "requested": 62,
+          "returned": 23,
+          "hpBefore": 75,
+          "hpAfter": 52,
+          "hpDelta": -23,
+          "sourceClass": "other"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "reunion",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 9,
+          "returned": 11,
+          "hpBefore": 880,
+          "hpAfter": 869,
+          "hpDelta": -11,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "reunion 1's attack",
+          "requested": 66,
+          "returned": 26,
+          "hpBefore": 52,
+          "hpAfter": 26,
+          "hpDelta": -26,
+          "sourceClass": "other"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_1",
+          "sourceLabel": "reunion 2's Your Move",
+          "requested": 77,
+          "returned": 29,
+          "hpBefore": 26,
+          "hpAfter": -3,
+          "hpDelta": -29,
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "🚶 Wei is back with Maya."
+        },
+        {
+          "kind": "say",
+          "line": "— NIGHT — Camp. Rest — or risk the dark."
+        },
+        {
+          "kind": "say",
+          "line": "Night. The treeline is just a sound now. The fire is the whole argument against it."
+        },
+        {
+          "kind": "say",
+          "line": "No path there."
+        },
+        {
+          "kind": "sysSay",
+          "line": "Sofia's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Sofia runs for it!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion 1's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion 2's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "say",
+          "line": "(reunion 1's hide absorbs 12.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the reunion 1 for 11 (Kitchen knife)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion 1's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion 2's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "say",
+          "line": "(reunion 1's hide absorbs 12.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the reunion 1 for 9 (Kitchen knife)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion 1's turn"
+        },
+        {
+          "kind": "say",
+          "line": "👥 Faces surface on its body — your own snarl. It knows \"strike\" — it watched you do it 2 times. YOUR MOVE, back at you."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 40."
+        },
+        {
+          "kind": "say",
+          "line": "Sofia gasps. \"You're hit — move!\""
+        },
+        {
+          "kind": "say",
+          "line": "Your own move, returned hits you for 25."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion 2's turn"
+        },
+        {
+          "kind": "say",
+          "line": "👥 Faces surface on its body — your own snarl. It knows \"strike\" — it watched you do it 2 times. YOUR MOVE, back at you."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 39."
+        },
+        {
+          "kind": "say",
+          "line": "Your own move, returned hits you for 23."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "say",
+          "line": "(reunion 1's hide absorbs 12.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the reunion 1 for 11 (Kitchen knife)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion 1's turn"
+        },
+        {
+          "kind": "say",
+          "line": "💥 reunion 1's attack finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 44."
+        },
+        {
+          "kind": "say",
+          "line": "Reunion 1's attack hits you for 26."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Your Move — locks onto one target — moving won't dodge it. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion 2's turn"
+        },
+        {
+          "kind": "say",
+          "line": "💥 reunion 2's Your Move finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 48."
+        },
+        {
+          "kind": "say",
+          "line": "Reunion 2's Your Move hits you for 29."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Maya Singh is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Maya Singh is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Maya kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "\"Maya's gone.\" Elif looks at you for a long moment. \"You're not Maya.\" No heat in it. Just fact. You'll have to earn this face."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Amina blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Maya Singh, 75 days. The mantle passes to Amina Diallo."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Amina Diallo, 29 — a Midwife. Her hands know different work now: Green Whisper, Beard Moss, Translator."
+        },
+        {
+          "kind": "say",
+          "line": "You knew Maya — not the office, the person. The fire keeps expecting her, and so do you. That's a heavier kind of stepping up. (+5 trauma)"
+        },
+        {
+          "kind": "say",
+          "line": "At the grave, Elif, Wei speak for Amina — \"Maya trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew Amina before the Codex did — her name already carried weight here."
+        }
+      ],
+      "transcriptOverflow": false,
+      "abilityUses": [],
+      "shoutUses": 0,
+      "offerFoodUses": 0,
+      "end": {
+        "result": "lost",
+        "day": 75,
+        "round": 4,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "reunion",
+            "alive": true,
+            "fled": false,
+            "hp": 869,
+            "maxHp": 1200
+          },
+          {
+            "key": "m_1",
+            "mid": "reunion",
+            "alive": true,
+            "fled": false,
+            "hp": 1301,
+            "maxHp": 1301
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "maya_singh",
+            "alive": false,
+            "fled": false,
+            "hp": -3,
+            "maxHp": 100
+          },
+          {
+            "key": "v_sofia_chen",
+            "kind": "villager",
+            "vid": "sofia_chen",
+            "alive": true,
+            "fled": true,
+            "hp": 81,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 2,
+        "humansDead": [
+          "maya_singh"
+        ],
+        "humansFled": [
+          "sofia_chen"
+        ],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 2,
+      "type": "tb",
+      "day": 85,
+      "mid": "reunion",
+      "wave": 4,
+      "fightId": "fmgpspird_ehbt4e",
+      "scholarAtStart": "elif_demir",
+      "leadVid": "elif_demir",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "elif_demir",
+          "hpStart": 100,
+          "maxHp": 100,
+          "gear": {
+            "vid": "elif_demir",
+            "armorP": 46,
+            "armed": true,
+            "weapon": "Machete",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "reunion",
+          "hpStart": 900,
+          "maxHp": 1200,
+          "wave": 4,
+          "joinedMidFight": false
+        }
+      ],
+      "leadGear": {
+        "vid": "elif_demir",
+        "armorP": 46,
+        "armed": true,
+        "weapon": "Machete",
+        "vpFound": true,
+        "readError": null
+      },
+      "scholarStart": {
+        "health": 100,
+        "energy": 90,
+        "food": "UNRECORDED"
+      },
+      "trickKnown": false,
+      "hits": [
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "reunion",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 36,
+          "returned": 45,
+          "hpBefore": 900,
+          "hpAfter": 855,
+          "hpDelta": -45,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 2,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "reunion's Your Move",
+          "requested": 64,
+          "returned": 28,
+          "hpBefore": 100,
+          "hpAfter": 72,
+          "hpDelta": -28,
+          "sourceClass": "other"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "reunion",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 38,
+          "returned": 48,
+          "hpBefore": 855,
+          "hpAfter": 807,
+          "hpDelta": -48,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "your own move, returned",
+          "requested": 56,
+          "returned": 25,
+          "hpBefore": 72,
+          "hpAfter": 47,
+          "hpDelta": -25,
+          "sourceClass": "other"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "reunion",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 39,
+          "returned": 49,
+          "hpBefore": 807,
+          "hpAfter": 758,
+          "hpDelta": -49,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "reunion's Your Move",
+          "requested": 62,
+          "returned": 27,
+          "hpBefore": 47,
+          "hpAfter": 20,
+          "hpDelta": -27,
+          "sourceClass": "other"
+        },
+        {
+          "round": 6,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "reunion's Your Move",
+          "requested": 66,
+          "returned": 29,
+          "hpBefore": 20,
+          "hpAfter": -9,
+          "hpDelta": -29,
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "🫂 It moves."
+        },
+        {
+          "kind": "say",
+          "line": "🚶 Fatima is back with Vasyl."
+        },
+        {
+          "kind": "say",
+          "line": "🌿 Vasyl returns from foraging the wilds: +109 kcal to the pantry — the shelves are full, so 108 kcal is eaten at the fire instead."
+        },
+        {
+          "kind": "say",
+          "line": "— NIGHT — Camp. Rest — or risk the dark."
+        },
+        {
+          "kind": "say",
+          "line": "Night. The treeline is just a sound now. The fire is the whole argument against it."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 Big Big's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "say",
+          "line": "(reunion's hide absorbs 12.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the reunion for 45 (Machete)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 Big Big's turn"
+        },
+        {
+          "kind": "say",
+          "line": "💥 reunion's Your Move finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 36."
+        },
+        {
+          "kind": "say",
+          "line": "Reunion's Your Move hits you for 28."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "say",
+          "line": "(reunion's hide absorbs 12.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the reunion for 48 (Machete)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 Big Big's turn"
+        },
+        {
+          "kind": "say",
+          "line": "👥 Faces surface on its body — your own snarl. It knows \"strike\" — it watched you do it 2 times. YOUR MOVE, back at you."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 31."
+        },
+        {
+          "kind": "say",
+          "line": "Your own move, returned hits you for 25."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "say",
+          "line": "(reunion's hide absorbs 12.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the reunion for 49 (Machete)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 Big Big's turn"
+        },
+        {
+          "kind": "say",
+          "line": "💥 reunion's Your Move finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 35."
+        },
+        {
+          "kind": "say",
+          "line": "Reunion's Your Move hits you for 27."
+        },
+        {
+          "kind": "say",
+          "line": "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 5!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 Big Big's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 6!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 Big Big's turn"
+        },
+        {
+          "kind": "say",
+          "line": "💥 reunion's Your Move finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 37."
+        },
+        {
+          "kind": "say",
+          "line": "Reunion's Your Move hits you for 29."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Elif Demir is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Elif Demir is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Elif kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "\"Elif's gone.\" Vasyl looks at you for a long moment. \"You're not Elif.\" No heat in it. Just fact. You'll have to earn this face."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Wei blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Beekeeping (Level 1). Smoke calms bees. Work slow, work covered, never swat."
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Elif Demir, 85 days. The mantle passes to Wei Chen."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Wei Chen, 31 — a Beekeeper. His hands know different work now: Night Eyes, Lucky Rock, Green Whisper."
+        },
+        {
+          "kind": "say",
+          "line": "The village's quarrel was with Elif — and Elif is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers."
+        },
+        {
+          "kind": "say",
+          "line": "You knew Elif — not the office, the person. The fire keeps expecting her, and so do you. That's a heavier kind of stepping up. (+5 trauma)"
+        },
+        {
+          "kind": "say",
+          "line": "At the grave, Fatima, Sofia, Vasyl speak for Wei — \"Elif trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew Wei before the Codex did — his name already carried weight here."
+        }
+      ],
+      "transcriptOverflow": false,
+      "abilityUses": [],
+      "shoutUses": 0,
+      "offerFoodUses": 0,
+      "end": {
+        "result": "lost",
+        "day": 85,
+        "round": 6,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "reunion",
+            "alive": true,
+            "fled": false,
+            "hp": 758,
+            "maxHp": 1200
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "elif_demir",
+            "alive": false,
+            "fled": false,
+            "hp": -9,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "elif_demir"
+        ],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 3,
+      "type": "tb",
+      "day": 86,
+      "mid": "suburb",
+      "wave": 4,
+      "fightId": "fmgpspisc_h8smn",
+      "scholarAtStart": "chen_wei",
+      "leadVid": "chen_wei",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "chen_wei",
+          "hpStart": 100,
+          "maxHp": 100,
+          "gear": {
+            "vid": "chen_wei",
+            "armorP": 48,
+            "armed": true,
+            "weapon": "Machete",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "suburb",
+          "hpStart": 975,
+          "maxHp": 1300,
+          "wave": 4,
+          "joinedMidFight": false
+        }
+      ],
+      "leadGear": {
+        "vid": "chen_wei",
+        "armorP": 48,
+        "armed": true,
+        "weapon": "Machete",
+        "vpFound": true,
+        "readError": null
+      },
+      "scholarStart": {
+        "health": 100,
+        "energy": 90,
+        "food": "UNRECORDED"
+      },
+      "trickKnown": false,
+      "hits": [
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 37,
+          "returned": 46,
+          "hpBefore": 975,
+          "hpAfter": 929,
+          "hpDelta": -46,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's attack",
+          "requested": 35,
+          "returned": 12,
+          "hpBefore": 100,
+          "hpAfter": 88,
+          "hpDelta": -12,
+          "sourceClass": "other"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 34,
+          "returned": 43,
+          "hpBefore": 929,
+          "hpAfter": 886,
+          "hpDelta": -43,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's attack",
+          "requested": 52,
+          "returned": 18,
+          "hpBefore": 88,
+          "hpAfter": 70,
+          "hpDelta": -18,
+          "sourceClass": "other"
+        },
+        {
+          "round": 5,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 33,
+          "returned": 41,
+          "hpBefore": 886,
+          "hpAfter": 845,
+          "hpDelta": -41,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 5,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's Property Tax",
+          "requested": 35,
+          "returned": 12,
+          "hpBefore": 70,
+          "hpAfter": 58,
+          "hpDelta": -12,
+          "sourceClass": "other"
+        },
+        {
+          "round": 7,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 36,
+          "returned": 45,
+          "hpBefore": 845,
+          "hpAfter": 800,
+          "hpDelta": -45,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 7,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's Property Tax",
+          "requested": 41,
+          "returned": 14,
+          "hpBefore": 58,
+          "hpAfter": 44,
+          "hpDelta": -14,
+          "sourceClass": "other"
+        },
+        {
+          "round": 8,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 37,
+          "returned": 46,
+          "hpBefore": 800,
+          "hpAfter": 754,
+          "hpDelta": -46,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 8,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's HOA Fine",
+          "requested": 31,
+          "returned": 11,
+          "hpBefore": 44,
+          "hpAfter": 33,
+          "hpDelta": -11,
+          "sourceClass": "other"
+        },
+        {
+          "round": 10,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's Property Tax",
+          "requested": 49,
+          "returned": 17,
+          "hpBefore": 33,
+          "hpAfter": 16,
+          "hpDelta": -17,
+          "sourceClass": "other"
+        },
+        {
+          "round": 11,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's HOA Fine",
+          "requested": 37,
+          "returned": 13,
+          "hpBefore": 16,
+          "hpAfter": 3,
+          "hpDelta": -13,
+          "sourceClass": "other"
+        },
+        {
+          "round": 12,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's Property Tax",
+          "requested": 44,
+          "returned": 15,
+          "hpBefore": 3,
+          "hpAfter": -12,
+          "hpDelta": -15,
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "💧 Fatima returns with water: +2 clean."
+        },
+        {
+          "kind": "say",
+          "line": "— NIGHT — Camp. Rest — or risk the dark."
+        },
+        {
+          "kind": "say",
+          "line": "Night settles. The fire is the whole world now. No watches posted. The dark feels bigger than it should."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "The streets rearrange — every road curves back. You were going somewhere. You are going in a circle now."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "say",
+          "line": "(suburb's hide absorbs 14.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the suburb for 46 (Machete)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 It connects!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 23."
+        },
+        {
+          "kind": "say",
+          "line": "Suburb's attack hits you for 12."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: HOA Fine — strikes one target after a windup. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "say",
+          "line": "(suburb's hide absorbs 14.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the suburb for 43 (Machete)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 It connects!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 34."
+        },
+        {
+          "kind": "say",
+          "line": "Sofia shouts: \"Move! MOVE!\""
+        },
+        {
+          "kind": "say",
+          "line": "Suburb's attack hits you for 18."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Property Tax — strikes one target after a windup. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 5!"
+        },
+        {
+          "kind": "say",
+          "line": "(suburb's hide absorbs 14.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the suburb for 41 (Machete)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Property Tax!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 23."
+        },
+        {
+          "kind": "say",
+          "line": "Suburb's Property Tax hits you for 12."
+        },
+        {
+          "kind": "say",
+          "line": "The streets rearrange — every road curves back. You were going somewhere. You are going in a circle now."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 6!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 7!"
+        },
+        {
+          "kind": "say",
+          "line": "(suburb's hide absorbs 14.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the suburb for 45 (Machete)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Property Tax!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 27."
+        },
+        {
+          "kind": "say",
+          "line": "Suburb's Property Tax hits you for 14."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 8!"
+        },
+        {
+          "kind": "say",
+          "line": "(suburb's hide absorbs 14.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the suburb for 46 (Machete)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 HOA Fine!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 20."
+        },
+        {
+          "kind": "say",
+          "line": "Suburb's HOA Fine hits you for 11."
+        },
+        {
+          "kind": "say",
+          "line": "The streets rearrange — every road curves back. You were going somewhere. You are going in a circle now."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 9!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 10!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Property Tax!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 32."
+        },
+        {
+          "kind": "say",
+          "line": "Suburb's Property Tax hits you for 17."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 11!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 HOA Fine!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 24."
+        },
+        {
+          "kind": "say",
+          "line": "Suburb's HOA Fine hits you for 13."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 12!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Property Tax!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 29."
+        },
+        {
+          "kind": "say",
+          "line": "Suburb's Property Tax hits you for 15."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Wei Chen is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "WEI — GONE. 1 open question closed unanswered."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Wei Chen is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Wei kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "\"Wei's gone.\" Fatima looks at you for a long moment. \"You're not Wei.\" No heat in it. Just fact. You'll have to earn this face."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Vasyl blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Fire in Rain (Level 1). Split wood — the inside is dry even when the outside is soaked. Feather sticks catch fast."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Debris Shelter (Level 1). A lean-to of branches and leaves beats nothing. Dead air is insulation."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Star Navigation (Level 1). North Star is constant. Find the Big Dipper, follow the pointer stars. You always know north."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Wire Snares (Level 1). A loop of wire on a game trail. Simple, effective, ancient. Check at dawn."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Small Unit Tactics (Level 1). Flank, don't charge. High ground matters. Never split your group unless you have to."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Improvised Weapons (Level 1). Everything is a weapon if you're desperate. A rock, a stick, a handful of dirt in the eyes."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Managing Fear (Level 1). Fear is data, not orders. Acknowledge it, then decide anyway. Courage is fear that kept going."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Tracking People (Level 1). People leave sign: broken twigs, footprints, disturbed earth. You can follow."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Night Hunting (Level 1). Hunting at night is not hunting blind. It is hunting by ear, by smell, by patience."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Shield Wall (Level 1). Shoulder to shoulder in the wilds, you brace as one. While an ally fights beside you, blows that reach you land softer — the line holds together or not at all."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Tripwire (Level 1). You string a wire at ankle height. The next monster that moves eats dirt — prone, stunned, and embarrassed. (Sets up the party.)"
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Wei Chen, 86 days. The mantle passes to Vasyl Shevchenko."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Vasyl Shevchenko, 34 — an infantry soldier. His hands know different work now: Beast-calm."
+        },
+        {
+          "kind": "say",
+          "line": "You knew Wei — not the office, the person. The fire keeps expecting him, and so do you. That's a heavier kind of stepping up. (+5 trauma)"
+        },
+        {
+          "kind": "say",
+          "line": "At the grave, Fatima, Sofia speak for Vasyl — \"Wei trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew Vasyl — solid ground, earned at this fire."
+        }
+      ],
+      "transcriptOverflow": false,
+      "abilityUses": [],
+      "shoutUses": 0,
+      "offerFoodUses": 0,
+      "end": {
+        "result": "lost",
+        "day": 86,
+        "round": 12,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "suburb",
+            "alive": true,
+            "fled": false,
+            "hp": 754,
+            "maxHp": 1300
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "chen_wei",
+            "alive": false,
+            "fled": false,
+            "hp": -12,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "chen_wei"
+        ],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 4,
+      "type": "tb",
+      "day": 92,
+      "mid": "eater",
+      "wave": 4,
+      "fightId": "fmgpspiu6_1wedxt",
+      "scholarAtStart": "vasyl_shevchenko",
+      "leadVid": "vasyl_shevchenko",
+      "partySizeStart": 2,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "vasyl_shevchenko",
+          "hpStart": 71,
+          "maxHp": 100,
+          "gear": {
+            "vid": "vasyl_shevchenko",
+            "armorP": 67,
+            "armed": true,
+            "weapon": "Machete",
+            "vpFound": true,
+            "readError": null
+          }
+        },
+        {
+          "key": "v_fatima_hassan",
+          "kind": "villager",
+          "vid": "fatima_hassan",
+          "hpStart": 66,
+          "maxHp": 100,
+          "gear": {
+            "vid": "fatima_hassan",
+            "armorP": 22,
+            "armed": true,
+            "weapon": "Kitchen knife",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "eater",
+          "hpStart": 703,
+          "maxHp": 950,
+          "wave": 4,
+          "joinedMidFight": false
+        }
+      ],
+      "leadGear": {
+        "vid": "vasyl_shevchenko",
+        "armorP": 67,
+        "armed": true,
+        "weapon": "Machete",
+        "vpFound": true,
+        "readError": null
+      },
+      "scholarStart": {
+        "health": 71,
+        "energy": 70,
+        "food": "UNRECORDED"
+      },
+      "trickKnown": false,
+      "hits": [
+        {
+          "round": 2,
+          "targetKey": "v_fatima_hassan",
+          "targetKind": "villager",
+          "targetVid": "fatima_hassan",
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "The Eater",
+          "requested": 58,
+          "returned": 34,
+          "hpBefore": 66,
+          "hpAfter": 32,
+          "hpDelta": -34,
+          "sourceClass": "other"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eater",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 38,
+          "returned": 48,
+          "hpBefore": 703,
+          "hpAfter": 655,
+          "hpDelta": -48,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eater",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 37,
+          "returned": 46,
+          "hpBefore": 655,
+          "hpAfter": 609,
+          "hpDelta": -46,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 5,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eater's attack",
+          "requested": 83,
+          "returned": 26,
+          "hpBefore": 71,
+          "hpAfter": 45,
+          "hpDelta": -26,
+          "sourceClass": "other"
+        },
+        {
+          "round": 5,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "The Eater",
+          "requested": 68,
+          "returned": 21,
+          "hpBefore": 45,
+          "hpAfter": 24,
+          "hpDelta": -21,
+          "sourceClass": "other"
+        },
+        {
+          "round": 10,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eater's Smack-Rush",
+          "requested": 66,
+          "returned": 21,
+          "hpBefore": 24,
+          "hpAfter": 3,
+          "hpDelta": -21,
+          "sourceClass": "other"
+        },
+        {
+          "round": 15,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eater's Smack-Rush",
+          "requested": 82,
+          "returned": 26,
+          "hpBefore": 3,
+          "hpAfter": -23,
+          "hpDelta": -26,
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "👄 It moves."
+        },
+        {
+          "kind": "say",
+          "line": "🩹 Fatima is hurting (66 HP) — You patch them up before they head out. (66 → 91 HP)"
+        },
+        {
+          "kind": "say",
+          "line": "Fatima heads out for water. \"Off to the well — back with a full skin.\""
+        },
+        {
+          "kind": "say",
+          "line": "Sofia heads out for water. \"Thirst doesn't negotiate. Going.\""
+        },
+        {
+          "kind": "say",
+          "line": "— NIGHT — Camp. Rest — or risk the dark."
+        },
+        {
+          "kind": "say",
+          "line": "No watches tonight. Everyone sleeps with one ear open and pretends not to."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "👄 The Eater's turn"
+        },
+        {
+          "kind": "say",
+          "line": "👄 SMACKING — audible chewing from a mile off. It eats forage (300 kcal). The belly swells. (+0 damage growth. Total eaten: 600 kcal. Poison the meal, starve the field, or end it.)"
+        },
+        {
+          "kind": "say",
+          "line": "The Eater is on Fatima — no warning, just teeth."
+        },
+        {
+          "kind": "say",
+          "line": "Fatima's gear absorbs 24."
+        },
+        {
+          "kind": "say",
+          "line": "Fatima takes the hit and runs — while running still works."
+        },
+        {
+          "kind": "say",
+          "line": "The Eater hits Fatima for 34."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "👄 The Eater's turn"
+        },
+        {
+          "kind": "say",
+          "line": "👄 SMACKING — audible chewing from a mile off. It eats forage (300 kcal). The belly swells. (+0 damage growth. Total eaten: 900 kcal. Poison the meal, starve the field, or end it.)"
+        },
+        {
+          "kind": "say",
+          "line": "(eater's hide absorbs 12.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eater for 48 (Machete)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "say",
+          "line": "The belly jolts — something inside sloshes wrong."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "👄 The Eater's turn"
+        },
+        {
+          "kind": "say",
+          "line": "👄 SMACKING — audible chewing from a mile off. It eats forage (300 kcal). The belly swells. (+0 damage growth. Total eaten: 1200 kcal. Poison the meal, starve the field, or end it.)"
+        },
+        {
+          "kind": "say",
+          "line": "(eater's hide absorbs 12.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eater for 46 (Machete)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 5!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "👄 The Eater's turn"
+        },
+        {
+          "kind": "say",
+          "line": "👄 SMACKING — audible chewing from a mile off. It eats forage (300 kcal). The belly swells. (+0 damage growth. Total eaten: 1500 kcal. Poison the meal, starve the field, or end it.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 It slams through!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 57."
+        },
+        {
+          "kind": "say",
+          "line": "Fatima shouts: \"Move! MOVE!\""
+        },
+        {
+          "kind": "say",
+          "line": "Eater's attack hits you for 26."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Smack-Rush — charges in a straight line, trampling everything in its path. You won't forget this."
+        },
+        {
+          "kind": "say",
+          "line": "The Eater is on you — no warning, just teeth."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 47."
+        },
+        {
+          "kind": "say",
+          "line": "The Eater hits you for 21."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 6!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "👄 The Eater's turn"
+        },
+        {
+          "kind": "say",
+          "line": "👄 SMACKING — audible chewing from a mile off. It eats forage (300 kcal). The belly swells. (+0 damage growth. Total eaten: 1800 kcal. Poison the meal, starve the field, or end it.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 7!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "👄 The Eater's turn"
+        },
+        {
+          "kind": "say",
+          "line": "👄 SMACKING — audible chewing from a mile off. It eats forage (300 kcal). The belly swells. (+0 damage growth. Total eaten: 2100 kcal. Poison the meal, starve the field, or end it.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 8!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "👄 The Eater's turn"
+        },
+        {
+          "kind": "say",
+          "line": "👄 SMACKING — audible chewing from a mile off. It eats forage (300 kcal). The belly swells. (+0 damage growth. Total eaten: 2400 kcal. Poison the meal, starve the field, or end it.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 9!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "👄 The Eater's turn"
+        },
+        {
+          "kind": "say",
+          "line": "👄 SMACKING — audible chewing from a mile off. It eats forage (300 kcal). The belly swells. (+0 damage growth. Total eaten: 2700 kcal. Poison the meal, starve the field, or end it.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 10!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "👄 The Eater's turn"
+        },
+        {
+          "kind": "say",
+          "line": "👄 SMACKING — audible chewing from a mile off. It eats forage (300 kcal). The belly swells. (+0 damage growth. Total eaten: 3000 kcal. Poison the meal, starve the field, or end it.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Smack-Rush!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 45."
+        },
+        {
+          "kind": "say",
+          "line": "Eater's Smack-Rush hits you for 21."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 11!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "👄 The Eater's turn"
+        },
+        {
+          "kind": "say",
+          "line": "👄 SMACKING — audible chewing from a mile off. It eats forage (300 kcal). The belly swells. (+0 damage growth. Total eaten: 3300 kcal. Poison the meal, starve the field, or end it.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 12!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "👄 The Eater's turn"
+        },
+        {
+          "kind": "say",
+          "line": "👄 SMACKING — audible chewing from a mile off. It eats forage (300 kcal). The belly swells. (+0 damage growth. Total eaten: 3600 kcal. Poison the meal, starve the field, or end it.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 13!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "👄 The Eater's turn"
+        },
+        {
+          "kind": "say",
+          "line": "👄 SMACKING — audible chewing from a mile off. It eats forage (300 kcal). The belly swells. (+0 damage growth. Total eaten: 3900 kcal. Poison the meal, starve the field, or end it.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 14!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "👄 The Eater's turn"
+        },
+        {
+          "kind": "say",
+          "line": "👄 SMACKING — audible chewing from a mile off. It eats forage (300 kcal). The belly swells. (+0 damage growth. Total eaten: 4200 kcal. Poison the meal, starve the field, or end it.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 15!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "👄 The Eater's turn"
+        },
+        {
+          "kind": "say",
+          "line": "👄 SMACKING — audible chewing from a mile off. It eats forage (300 kcal). The belly swells. (+0 damage growth. Total eaten: 4500 kcal. Poison the meal, starve the field, or end it.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Smack-Rush!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 56."
+        },
+        {
+          "kind": "say",
+          "line": "Eater's Smack-Rush hits you for 26."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Vasyl Shevchenko is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Vasyl Shevchenko is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Vasyl kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "\"Vasyl's gone.\" Sofia looks at you for a long moment. \"You're not Vasyl.\" No heat in it. Just fact. You'll have to earn this face."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Fatima blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Vasyl Shevchenko, 92 days. The mantle passes to Fatima Hassan."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Fatima Hassan, 48 — a paramedic. Her hands know different work now: Green Whisper."
+        },
+        {
+          "kind": "say",
+          "line": "You knew Vasyl — not the office, the person. The fire keeps expecting him, and so do you. That's a heavier kind of stepping up. (+5 trauma)"
+        },
+        {
+          "kind": "say",
+          "line": "At the grave, Sofia speaks for Fatima — \"Vasyl trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew Fatima before the Codex did — her name already carried weight here."
+        }
+      ],
+      "transcriptOverflow": false,
+      "abilityUses": [],
+      "shoutUses": 0,
+      "offerFoodUses": 0,
+      "end": {
+        "result": "lost",
+        "day": 92,
+        "round": 15,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "eater",
+            "alive": true,
+            "fled": false,
+            "hp": 609,
+            "maxHp": 950
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "vasyl_shevchenko",
+            "alive": false,
+            "fled": false,
+            "hp": -23,
+            "maxHp": 100
+          },
+          {
+            "key": "v_fatima_hassan",
+            "kind": "villager",
+            "vid": "fatima_hassan",
+            "alive": true,
+            "fled": true,
+            "hp": 32,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "vasyl_shevchenko"
+        ],
+        "humansFled": [
+          "fatima_hassan"
+        ],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 5,
+      "type": "tb",
+      "day": 93,
+      "mid": "eulogy",
+      "wave": 4,
+      "fightId": "fmgpspivd_8qubjc",
+      "scholarAtStart": "fatima_hassan",
+      "leadVid": "fatima_hassan",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "fatima_hassan",
+          "hpStart": 100,
+          "maxHp": 100,
+          "gear": {
+            "vid": "fatima_hassan",
+            "armorP": 49,
+            "armed": true,
+            "weapon": "Machete",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "eulogy",
+          "hpStart": 675,
+          "maxHp": 900,
+          "wave": 4,
+          "joinedMidFight": false
+        }
+      ],
+      "leadGear": {
+        "vid": "fatima_hassan",
+        "armorP": 49,
+        "armed": true,
+        "weapon": "Machete",
+        "vpFound": true,
+        "readError": null
+      },
+      "scholarStart": {
+        "health": 100,
+        "energy": 95,
+        "food": "UNRECORDED"
+      },
+      "trickKnown": false,
+      "hits": [
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 41,
+          "returned": 51,
+          "hpBefore": 675,
+          "hpAfter": 624,
+          "hpDelta": -51,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 2,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's attack",
+          "requested": 36,
+          "returned": 13,
+          "hpBefore": 100,
+          "hpAfter": 87,
+          "hpDelta": -13,
+          "sourceClass": "other"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 38,
+          "returned": 48,
+          "hpBefore": 624,
+          "hpAfter": 576,
+          "hpDelta": -48,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's attack",
+          "requested": 51,
+          "returned": 19,
+          "hpBefore": 87,
+          "hpAfter": 68,
+          "hpDelta": -19,
+          "sourceClass": "other"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 42,
+          "returned": 53,
+          "hpBefore": 576,
+          "hpAfter": 523,
+          "hpDelta": -53,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 68,
+          "returned": 25,
+          "hpBefore": 68,
+          "hpAfter": 43,
+          "hpDelta": -25,
+          "sourceClass": "other"
+        },
+        {
+          "round": 5,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 37,
+          "returned": 46,
+          "hpBefore": 523,
+          "hpAfter": 477,
+          "hpDelta": -46,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 5,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 64,
+          "returned": 24,
+          "hpBefore": 43,
+          "hpAfter": 19,
+          "hpDelta": -24,
+          "sourceClass": "other"
+        },
+        {
+          "round": 6,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "the narrated ending",
+          "requested": 9999,
+          "returned": 3683,
+          "hpBefore": 19,
+          "hpAfter": -3664,
+          "hpDelta": -3683,
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "📖 Sofia is sorting their finds, setting each one in its place before the bundle gets tied."
+        },
+        {
+          "kind": "say",
+          "line": "— DUSK — Animals stir again. Shadows lengthen."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they stood their ground, poor brave fools.\" The spotlight widens. (No weight yet — just the story starting.) (5 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 51 (Machete)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they ran, and the spotlight followed.\" The spotlight narrows. Your dodge feels watched. (-10% dodge.) (4 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 eulogy's attack finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 23."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's attack hits you for 13."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Epitaph — locks onto one target — moving won't dodge it. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 48 (Machete)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they bled, politely, where everyone could see.\" The narration lingers on your wounds. (Bleeds last 1 round longer.) (3 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 It connects!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 32."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's attack hits you for 19."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Final Chapter — strikes one target after a windup. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 53 (Machete)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they knelt, and the story approved.\" The story leans in. (The Eulogy's attacks +15.) (2 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 43."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 25."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 5!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 46 (Machete)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then — this is the last line — they ended.\" The last line hangs in the air. (It finishes next round.) (1 verse remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 40."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 24."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 6!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 \"...they ended.\" The last line lands like a lid. (The story finishes — you die as narrated.)"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 6316."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Fatima Hassan is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Fatima Hassan is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Fatima kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Sofia blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Reading the Land (Level 1). Eat the landscape with your eyes first: green + water + sun means food grows here. Start where those three meet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: The Forager’s Eye (Level 1). You walk slower and see more. Food was always there; now you notice it."
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Fatima Hassan, 93 days. The mantle passes to Sofia Chen."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Sofia Chen, 29 — a community gardener. Her hands know different work now: Beast-calm."
+        },
+        {
+          "kind": "say",
+          "line": "You knew Fatima — not the office, the person. The fire keeps expecting her, and so do you. That's a heavier kind of stepping up. (+5 trauma)"
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew Sofia — solid ground, earned at this fire."
+        }
+      ],
+      "transcriptOverflow": false,
+      "abilityUses": [],
+      "shoutUses": 0,
+      "offerFoodUses": 0,
+      "end": {
+        "result": "lost",
+        "day": 93,
+        "round": 6,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "eulogy",
+            "alive": true,
+            "fled": false,
+            "hp": 477,
+            "maxHp": 900
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "fatima_hassan",
+            "alive": false,
+            "fled": false,
+            "hp": -3664,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "fatima_hassan"
+        ],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false
+    }
+  ],
+  "killsW4": 0,
+  "killRows": [],
+  "unlinkedKills": [],
+  "spawns": [
+    {
+      "day": 64,
+      "id": "suburb",
+      "tx": 0,
+      "ty": 4
+    },
+    {
+      "day": 64,
+      "id": "influencer",
+      "tx": 1,
+      "ty": 0
+    },
+    {
+      "day": 66,
+      "id": "reunion",
+      "tx": 0,
+      "ty": 3
+    },
+    {
+      "day": 67,
+      "id": "reunion",
+      "tx": 4,
+      "ty": 5
+    },
+    {
+      "day": 68,
+      "id": "reunion",
+      "tx": 4,
+      "ty": 2
+    },
+    {
+      "day": 75,
+      "id": "eater",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 75,
+      "id": "suburb",
+      "tx": 1,
+      "ty": 4
+    },
+    {
+      "day": 75,
+      "id": "eulogy",
+      "tx": 0,
+      "ty": 2
+    },
+    {
+      "day": 79,
+      "id": "suburb",
+      "tx": 4,
+      "ty": 3
+    }
+  ],
+  "orphanTbEnds": [],
+  "wrapCounts": {
+    "spawnWorldMonster": 49,
+    "fieldFight": 130,
+    "recordWaveKill": 72,
+    "useAbility": 54,
+    "startCombat": 23,
+    "tbDamage": 197,
+    "tbEnd": 23
+  },
+  "instrumentErrors": [],
+  "notes": []
+}

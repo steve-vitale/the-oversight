@@ -1,0 +1,1823 @@
+{
+  "seed": 99107,
+  "run": "tbleth",
+  "anchorCommit": "9d78f3ffb811",
+  "days": 80,
+  "gameDays": 80,
+  "endReason": "village-lost",
+  "won": false,
+  "villageLost": true,
+  "maxWave": 4,
+  "spawnsW4": 3,
+  "tbCalls": 2,
+  "fieldCallsW4": 0,
+  "exposures": [
+    {
+      "seq": 1,
+      "type": "tb",
+      "day": 74,
+      "mid": "suburb",
+      "wave": 4,
+      "fightId": "fmgpspio3_zt7pj",
+      "scholarAtStart": "ursula_weber",
+      "leadVid": "ursula_weber",
+      "partySizeStart": 3,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "ursula_weber",
+          "hpStart": 100,
+          "maxHp": 100,
+          "gear": {
+            "vid": "ursula_weber",
+            "armorP": 27,
+            "armed": true,
+            "weapon": "Phase blade",
+            "vpFound": true,
+            "readError": null
+          }
+        },
+        {
+          "key": "v_zoe_adams",
+          "kind": "villager",
+          "vid": "zoe_adams",
+          "hpStart": 100,
+          "maxHp": 100,
+          "gear": {
+            "vid": "zoe_adams",
+            "armorP": 17,
+            "armed": true,
+            "weapon": "Hatchet",
+            "vpFound": true,
+            "readError": null
+          }
+        },
+        {
+          "key": "v_sam_wilson",
+          "kind": "villager",
+          "vid": "sam_wilson",
+          "hpStart": 95,
+          "maxHp": 100,
+          "gear": {
+            "vid": "sam_wilson",
+            "armorP": 12,
+            "armed": true,
+            "weapon": "Machete",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "suburb",
+          "hpStart": 926,
+          "maxHp": 1300,
+          "wave": 4,
+          "joinedMidFight": false
+        }
+      ],
+      "leadGear": {
+        "vid": "ursula_weber",
+        "armorP": 27,
+        "armed": true,
+        "weapon": "Phase blade",
+        "vpFound": true,
+        "readError": null
+      },
+      "scholarStart": {
+        "health": 100,
+        "energy": 30,
+        "food": "UNRECORDED"
+      },
+      "trickKnown": false,
+      "hits": [
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": "v_sam_wilson",
+          "sourceLabel": "Sam",
+          "requested": 26,
+          "returned": 33,
+          "hpBefore": 926,
+          "hpAfter": 893,
+          "hpDelta": -33,
+          "sourceClass": "ally"
+        },
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": "v_zoe_adams",
+          "sourceLabel": "Zoe",
+          "requested": 13,
+          "returned": 16,
+          "hpBefore": 893,
+          "hpAfter": 877,
+          "hpDelta": -16,
+          "sourceClass": "ally"
+        },
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 69,
+          "returned": 108,
+          "hpBefore": 877,
+          "hpAfter": 769,
+          "hpDelta": -108,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": "v_sam_wilson",
+          "sourceLabel": "Sam",
+          "requested": 23,
+          "returned": 29,
+          "hpBefore": 769,
+          "hpAfter": 740,
+          "hpDelta": -29,
+          "sourceClass": "ally"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": "v_zoe_adams",
+          "sourceLabel": "Zoe",
+          "requested": 15,
+          "returned": 19,
+          "hpBefore": 740,
+          "hpAfter": 721,
+          "hpDelta": -19,
+          "sourceClass": "ally"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 72,
+          "returned": 113,
+          "hpBefore": 721,
+          "hpAfter": 608,
+          "hpDelta": -113,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's attack",
+          "requested": 43,
+          "returned": 21,
+          "hpBefore": 100,
+          "hpAfter": 79,
+          "hpDelta": -21,
+          "sourceClass": "other"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": "v_sam_wilson",
+          "sourceLabel": "Sam",
+          "requested": 22,
+          "returned": 22,
+          "hpBefore": 608,
+          "hpAfter": 586,
+          "hpDelta": -22,
+          "sourceClass": "ally"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": "v_zoe_adams",
+          "sourceLabel": "Zoe",
+          "requested": 15,
+          "returned": 15,
+          "hpBefore": 586,
+          "hpAfter": 571,
+          "hpDelta": -15,
+          "sourceClass": "ally"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 73,
+          "returned": 91,
+          "hpBefore": 571,
+          "hpAfter": 480,
+          "hpDelta": -91,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 5,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": "v_sam_wilson",
+          "sourceLabel": "Sam",
+          "requested": 22,
+          "returned": 22,
+          "hpBefore": 480,
+          "hpAfter": 458,
+          "hpDelta": -22,
+          "sourceClass": "ally"
+        },
+        {
+          "round": 5,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": "v_zoe_adams",
+          "sourceLabel": "Zoe",
+          "requested": 13,
+          "returned": 13,
+          "hpBefore": 458,
+          "hpAfter": 445,
+          "hpDelta": -13,
+          "sourceClass": "ally"
+        },
+        {
+          "round": 5,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 73,
+          "returned": 91,
+          "hpBefore": 445,
+          "hpAfter": 354,
+          "hpDelta": -91,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 5,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's Property Tax",
+          "requested": 49,
+          "returned": 24,
+          "hpBefore": 79,
+          "hpAfter": 55,
+          "hpDelta": -24,
+          "sourceClass": "other"
+        },
+        {
+          "round": 6,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 67,
+          "returned": 84,
+          "hpBefore": 354,
+          "hpAfter": 270,
+          "hpDelta": -84,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 6,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's HOA Fine",
+          "requested": 39,
+          "returned": 19,
+          "hpBefore": 79,
+          "hpAfter": 60,
+          "hpDelta": -19,
+          "sourceClass": "other"
+        },
+        {
+          "round": 7,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": "v_sam_wilson",
+          "sourceLabel": "Sam",
+          "requested": 25,
+          "returned": 25,
+          "hpBefore": 270,
+          "hpAfter": 245,
+          "hpDelta": -25,
+          "sourceClass": "ally"
+        },
+        {
+          "round": 7,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": "v_zoe_adams",
+          "sourceLabel": "Zoe",
+          "requested": 12,
+          "returned": 12,
+          "hpBefore": 245,
+          "hpAfter": 233,
+          "hpDelta": -12,
+          "sourceClass": "ally"
+        },
+        {
+          "round": 7,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 70,
+          "returned": 88,
+          "hpBefore": 233,
+          "hpAfter": 145,
+          "hpDelta": -88,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 8,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": "v_sam_wilson",
+          "sourceLabel": "Sam",
+          "requested": 25,
+          "returned": 25,
+          "hpBefore": 145,
+          "hpAfter": 120,
+          "hpDelta": -25,
+          "sourceClass": "ally"
+        },
+        {
+          "round": 8,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": "v_zoe_adams",
+          "sourceLabel": "Zoe",
+          "requested": 12,
+          "returned": 12,
+          "hpBefore": 120,
+          "hpAfter": 108,
+          "hpDelta": -12,
+          "sourceClass": "ally"
+        },
+        {
+          "round": 8,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 71,
+          "returned": 89,
+          "hpBefore": 108,
+          "hpAfter": 19,
+          "hpDelta": -89,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 8,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's Property Tax",
+          "requested": 47,
+          "returned": 23,
+          "hpBefore": 60,
+          "hpAfter": 37,
+          "hpDelta": -23,
+          "sourceClass": "other"
+        },
+        {
+          "round": 9,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": "v_sam_wilson",
+          "sourceLabel": "Sam",
+          "requested": 23,
+          "returned": 23,
+          "hpBefore": 19,
+          "hpAfter": -4,
+          "hpDelta": -23,
+          "sourceClass": "ally"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "🏘️ It moves."
+        },
+        {
+          "kind": "say",
+          "line": "💧 Ursula returns with 13L of creek water. Risky until the hearth boils it."
+        },
+        {
+          "kind": "say",
+          "line": "Sam heads out for water. \"Off to the well — back with a full skin.\""
+        },
+        {
+          "kind": "say",
+          "line": "— DUSK — Animals stir again. Shadows lengthen."
+        },
+        {
+          "kind": "say",
+          "line": "No path there."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Too close. The suburb's attention SNAPS to you — proximity overrules patience."
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Sam's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Sam strikes the Suburb."
+        },
+        {
+          "kind": "say",
+          "line": "Sam hits suburb for 33."
+        },
+        {
+          "kind": "say",
+          "line": "A mailbox falls over. The street doesn't know how to react."
+        },
+        {
+          "kind": "sysSay",
+          "line": "Zoe's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Zoe strikes the Suburb."
+        },
+        {
+          "kind": "say",
+          "line": "Zoe hits suburb for 16."
+        },
+        {
+          "kind": "say",
+          "line": "A mailbox falls over. The street doesn't know how to react."
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(suburb's hide absorbs 14.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the suburb for 108 (Phase blade)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "say",
+          "line": "A mailbox falls over. The street doesn't know how to react."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Too close. The suburb's attention SNAPS to Sam — proximity overrules patience."
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 It connects!"
+        },
+        {
+          "kind": "say",
+          "line": "The Suburb lashes at sand-ghosts near you. Missed. (pocket_sand)"
+        },
+        {
+          "kind": "say",
+          "line": "You're not where it landed. Clean dodge."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +15 style — dodged the the attack!"
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: HOA Fine — strikes one target after a windup. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Sam's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Sam strikes the Suburb."
+        },
+        {
+          "kind": "say",
+          "line": "Sam hits suburb for 29."
+        },
+        {
+          "kind": "sysSay",
+          "line": "Zoe's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Zoe strikes the Suburb."
+        },
+        {
+          "kind": "say",
+          "line": "Zoe hits suburb for 19."
+        },
+        {
+          "kind": "say",
+          "line": "A mailbox falls over. The street doesn't know how to react."
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(suburb's hide absorbs 14.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "suburb is BLEEDING — and it likes it. Louder, faster, no more feints."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the suburb for 113 (Phase blade)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "say",
+          "line": "A mailbox falls over. The street doesn't know how to react."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Too close. The suburb's attention SNAPS to Sam — proximity overrules patience."
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 It connects!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 22."
+        },
+        {
+          "kind": "say",
+          "line": "Zoe gasps. \"You're hit — move!\""
+        },
+        {
+          "kind": "say",
+          "line": "Suburb's attack hits you for 21."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Property Tax — strikes one target after a windup. You won't forget this."
+        },
+        {
+          "kind": "say",
+          "line": "The streets rearrange — every road curves back. You were going somewhere. You are going in a circle now."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Sam's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Sam strikes the Suburb."
+        },
+        {
+          "kind": "say",
+          "line": "Sam hits suburb for 22."
+        },
+        {
+          "kind": "sysSay",
+          "line": "Zoe's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Zoe strikes the Suburb."
+        },
+        {
+          "kind": "say",
+          "line": "Zoe hits suburb for 15."
+        },
+        {
+          "kind": "say",
+          "line": "A mailbox falls over. The street doesn't know how to react."
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(suburb's hide absorbs 14.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the suburb for 91 (Phase blade)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "say",
+          "line": "A mailbox falls over. The street doesn't know how to react."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Too close. The suburb's attention SNAPS to Sam — proximity overrules patience."
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 5!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Sam's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Sam strikes the Suburb."
+        },
+        {
+          "kind": "say",
+          "line": "Sam hits suburb for 22."
+        },
+        {
+          "kind": "sysSay",
+          "line": "Zoe's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Zoe strikes the Suburb."
+        },
+        {
+          "kind": "say",
+          "line": "Zoe hits suburb for 13."
+        },
+        {
+          "kind": "say",
+          "line": "A mailbox falls over. The street doesn't know how to react."
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(suburb's hide absorbs 14.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the suburb for 91 (Phase blade)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "say",
+          "line": "A mailbox falls over. The street doesn't know how to react."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Too close. The suburb's attention SNAPS to Sam — proximity overrules patience."
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Property Tax!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 25."
+        },
+        {
+          "kind": "say",
+          "line": "Suburb's Property Tax hits you for 24."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 6!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Sam's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Sam patches you up (+12 HP). \"Hold still!\""
+        },
+        {
+          "kind": "sysSay",
+          "line": "Zoe's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Zoe patches you up (+12 HP). \"Hold still!\""
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(suburb's hide absorbs 14.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the suburb for 84 (Phase blade)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "say",
+          "line": "A mailbox falls over. The street doesn't know how to react."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 HOA Fine!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 20."
+        },
+        {
+          "kind": "say",
+          "line": "Suburb's HOA Fine hits you for 19."
+        },
+        {
+          "kind": "say",
+          "line": "The streets rearrange — every road curves back. You were going somewhere. You are going in a circle now."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 7!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Sam's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Sam strikes the Suburb."
+        },
+        {
+          "kind": "say",
+          "line": "Sam hits suburb for 25."
+        },
+        {
+          "kind": "say",
+          "line": "A mailbox falls over. The street doesn't know how to react."
+        },
+        {
+          "kind": "sysSay",
+          "line": "Zoe's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Zoe strikes the Suburb."
+        },
+        {
+          "kind": "say",
+          "line": "Zoe hits suburb for 12."
+        },
+        {
+          "kind": "say",
+          "line": "A mailbox falls over. The street doesn't know how to react."
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(suburb's hide absorbs 14.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the suburb for 88 (Phase blade)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "say",
+          "line": "A mailbox falls over. The street doesn't know how to react."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Too close. The suburb's attention SNAPS to Sam — proximity overrules patience."
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 8!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Sam's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Sam strikes the Suburb."
+        },
+        {
+          "kind": "say",
+          "line": "Sam hits suburb for 25."
+        },
+        {
+          "kind": "sysSay",
+          "line": "Zoe's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Zoe strikes the Suburb."
+        },
+        {
+          "kind": "say",
+          "line": "Zoe hits suburb for 12."
+        },
+        {
+          "kind": "say",
+          "line": "A mailbox falls over. The street doesn't know how to react."
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(suburb's hide absorbs 14.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the suburb for 89 (Phase blade)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "say",
+          "line": "A mailbox falls over. The street doesn't know how to react."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Too close. The suburb's attention SNAPS to Sam — proximity overrules patience."
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Property Tax!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 24."
+        },
+        {
+          "kind": "say",
+          "line": "Suburb's Property Tax hits you for 23."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 9!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Sam's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Sam strikes the Suburb."
+        },
+        {
+          "kind": "say",
+          "line": "Sam hits suburb for 23."
+        },
+        {
+          "kind": "say",
+          "line": "The Suburb falls."
+        },
+        {
+          "kind": "say",
+          "line": "📺 SYSTEM: \"Oh — OH. Everybody saw that, right? Sam just put down The Suburb... on CAMERA. That's a veteran kill, folks. REMEMBER the name.\""
+        },
+        {
+          "kind": "say",
+          "line": "Zoe: \"That's how it's done. Somebody write it down.\""
+        },
+        {
+          "kind": "sysSay",
+          "line": "◈ The Records: An apex thing died by village hands: The Suburb. The Records hold it up to the light."
+        },
+        {
+          "kind": "say",
+          "line": "Zoe nods, slow. \"Remind me not to cross you.\""
+        },
+        {
+          "kind": "sysSay",
+          "line": "WINNER! Style score: 50. The gamblers are ecstatic!"
+        },
+        {
+          "kind": "say",
+          "line": "It is a cul-de-sac. Do not eat the cul-de-sac."
+        },
+        {
+          "kind": "say",
+          "line": "✨ ALIEN LOOT: Neural Weave. Threads of your own hair, your people's hair, woven while you talked through the night. It's on the body — search it."
+        },
+        {
+          "kind": "say",
+          "line": "You came back bloody. Nobody asks. Someone saves you the good seat by the fire."
+        },
+        {
+          "kind": "sysSay",
+          "line": "◈ LEVEL UP — COMBAT 1. \"We've been counting: 18 fights. Pick one.\""
+        },
+        {
+          "kind": "say",
+          "line": "◈ TRIAL RECOGNIZED — the System has been watching. You took a beating that should have ended you — and kept moving. Noted. (Combat track +)"
+        }
+      ],
+      "transcriptOverflow": false,
+      "abilityUses": [],
+      "shoutUses": 0,
+      "offerFoodUses": 0,
+      "end": {
+        "result": "won",
+        "day": 74,
+        "round": 9,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "suburb",
+            "alive": false,
+            "fled": false,
+            "hp": -4,
+            "maxHp": 1300
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "ursula_weber",
+            "alive": true,
+            "fled": false,
+            "hp": 37,
+            "maxHp": 100
+          },
+          {
+            "key": "v_zoe_adams",
+            "kind": "villager",
+            "vid": "zoe_adams",
+            "alive": true,
+            "fled": false,
+            "hp": 100,
+            "maxHp": 100
+          },
+          {
+            "key": "v_sam_wilson",
+            "kind": "villager",
+            "vid": "sam_wilson",
+            "alive": true,
+            "fled": false,
+            "hp": 95,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 1,
+        "monsterTotalW4": 1,
+        "humansDead": [],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [
+        {
+          "day": 74,
+          "fn": "recordWaveKill",
+          "pyrrhic": false,
+          "mid": "suburb",
+          "wave": 4,
+          "by": "sam_wilson",
+          "via": "companion",
+          "scholarAtKill": "ursula_weber",
+          "linkSeq": 1,
+          "linkHow": "tb-open"
+        }
+      ],
+      "superseded": false
+    },
+    {
+      "seq": 2,
+      "type": "tb",
+      "day": 76,
+      "mid": "congregation",
+      "wave": 4,
+      "fightId": "fmgpspior_2ef0jj",
+      "scholarAtStart": "ursula_weber",
+      "leadVid": "ursula_weber",
+      "partySizeStart": 2,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "ursula_weber",
+          "hpStart": 62.80555555555556,
+          "maxHp": 100,
+          "gear": {
+            "vid": "ursula_weber",
+            "armorP": 27,
+            "armed": true,
+            "weapon": "Phase blade",
+            "vpFound": true,
+            "readError": null
+          }
+        },
+        {
+          "key": "v_jesse_cortez",
+          "kind": "villager",
+          "vid": "jesse_cortez",
+          "hpStart": 85,
+          "maxHp": 100,
+          "gear": {
+            "vid": "jesse_cortez",
+            "armorP": 12,
+            "armed": true,
+            "weapon": "Crowbar",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "congregation",
+          "hpStart": 675,
+          "maxHp": 900,
+          "wave": 4,
+          "joinedMidFight": false
+        }
+      ],
+      "leadGear": {
+        "vid": "ursula_weber",
+        "armorP": 27,
+        "armed": true,
+        "weapon": "Phase blade",
+        "vpFound": true,
+        "readError": null
+      },
+      "scholarStart": {
+        "health": 62.80555555555556,
+        "energy": 55,
+        "food": "UNRECORDED"
+      },
+      "trickKnown": false,
+      "hits": [
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "congregation",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 96,
+          "returned": 120,
+          "hpBefore": 675,
+          "hpAfter": 555,
+          "hpDelta": -120,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 5,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "congregation",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 110,
+          "returned": 138,
+          "hpBefore": 555,
+          "hpAfter": 417,
+          "hpDelta": -138,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 6,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "congregation",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 105,
+          "returned": 131,
+          "hpBefore": 417,
+          "hpAfter": 286,
+          "hpDelta": -131,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 7,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "congregation",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 116,
+          "returned": 145,
+          "hpBefore": 286,
+          "hpAfter": 141,
+          "hpDelta": -145,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 8,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "congregation",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 108,
+          "returned": 135,
+          "hpBefore": 141,
+          "hpAfter": 6,
+          "hpDelta": -135,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 8,
+          "targetKey": "v_jesse_cortez",
+          "targetKind": "villager",
+          "targetVid": "jesse_cortez",
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "congregation's attack",
+          "requested": 51,
+          "returned": 36,
+          "hpBefore": 85,
+          "hpAfter": 49,
+          "hpDelta": -36,
+          "sourceClass": "other"
+        },
+        {
+          "round": 9,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "congregation",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 116,
+          "returned": 116,
+          "hpBefore": 6,
+          "hpAfter": -110,
+          "hpDelta": -116,
+          "sourceClass": "leader"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "Sari heads out for water. \"Water first. Everything else waits.\""
+        },
+        {
+          "kind": "say",
+          "line": "Sam heads out to forage. \"There's food out there. Going to find it.\""
+        },
+        {
+          "kind": "say",
+          "line": "Cuc heads out for water. \"Thirst doesn't negotiate. Going.\""
+        },
+        {
+          "kind": "say",
+          "line": "Zoe heads out for water. \"Fetching water. Somebody has to.\""
+        },
+        {
+          "kind": "say",
+          "line": "Jesse heads out to forage. \"Back before dark. Probably.\""
+        },
+        {
+          "kind": "say",
+          "line": "Iron cold. Even the ticks are shelved."
+        },
+        {
+          "kind": "say",
+          "line": "— MIDDAY — Honest work hours. Heat builds."
+        },
+        {
+          "kind": "sysSay",
+          "line": "Jesse's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Jesse patches you up (+12 HP). \"Hold still!\""
+        },
+        {
+          "kind": "sysSay",
+          "line": "⛪ The Congregation's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🔔 The steeple RINGS — one clear note. The chapel doors swing wide. \"Come. Be washed. Trauma, grief, the whole weight — laid down. The price is obedience, a little geas, nothing you'd miss.\" (Accept: heal 40 + cleanse. Refuse: no leash, but no washing.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Jesse's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "⛪ The Congregation's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🔔 The steeple RINGS — the bell is the telegraph. ABSOLUTION falls like a beam."
+        },
+        {
+          "kind": "say",
+          "line": "‘COME.’ The invitation, extended like a hand. The pews fill with shapes. It must invite before it can compel — and the invited come stronger. (Allied monsters +4 damage, 2 turns.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Jesse's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "⛪ The Congregation's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🔔 The steeple RINGS — one clear note. The chapel doors swing wide. \"Come. Be washed. Trauma, grief, the whole weight — laid down. The price is obedience, a little geas, nothing you'd miss.\" (Accept: heal 40 + cleanse. Refuse: no leash, but no washing.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.49 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(congregation's hide absorbs 10.)"
+        },
+        {
+          "kind": "say",
+          "line": "💪 Your Strength grows — 6. The work is changing you."
+        },
+        {
+          "kind": "say",
+          "line": "✨ True Swing — Your strikes land cleaner. (tier 1)"
+        },
+        {
+          "kind": "say",
+          "line": "💪 Your Agility grows — 6. The work is changing you."
+        },
+        {
+          "kind": "say",
+          "line": "✨ Footwork — You move without thinking. (tier 1)"
+        },
+        {
+          "kind": "say",
+          "line": "It's reeling — the party sees the opening and piles on! (+25% vs controlled)"
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the congregation for 120 (Phase blade)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Jesse's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "⛪ The Congregation's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🔔 The steeple RINGS — the bell is the telegraph. ABSOLUTION falls like a beam."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 5!"
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.49 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(congregation's hide absorbs 10.)"
+        },
+        {
+          "kind": "say",
+          "line": "congregation is BLEEDING — and it likes it. Louder, faster, no more feints."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the congregation for 138 (Phase blade)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Jesse's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "⛪ The Congregation's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🔔 The steeple RINGS — one clear note. The chapel doors swing wide. \"Come. Be washed. Trauma, grief, the whole weight — laid down. The price is obedience, a little geas, nothing you'd miss.\" (Accept: heal 40 + cleanse. Refuse: no leash, but no washing.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 6!"
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.49 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(congregation's hide absorbs 10.)"
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the congregation for 131 (Phase blade)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Jesse's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "⛪ The Congregation's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🔔 The steeple RINGS — the bell is the telegraph. ABSOLUTION falls like a beam."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 7!"
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.49 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(congregation's hide absorbs 10.)"
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the congregation for 145 (Phase blade)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Jesse's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "⛪ The Congregation's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🔔 The steeple RINGS — one clear note. The chapel doors swing wide. \"Come. Be washed. Trauma, grief, the whole weight — laid down. The price is obedience, a little geas, nothing you'd miss.\" (Accept: heal 40 + cleanse. Refuse: no leash, but no washing.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 8!"
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.49 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(congregation's hide absorbs 10.)"
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the congregation for 135 (Phase blade)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Jesse's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "⛪ The Congregation's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🔔 The steeple RINGS — the bell is the telegraph. ABSOLUTION falls like a beam."
+        },
+        {
+          "kind": "say",
+          "line": "💥 The light hits!"
+        },
+        {
+          "kind": "say",
+          "line": "The Congregation lashes at sand-ghosts near you. Missed. (pocket_sand)"
+        },
+        {
+          "kind": "say",
+          "line": "Jesse's gear absorbs 15."
+        },
+        {
+          "kind": "say",
+          "line": "Jesse takes the hit and runs — while running still works."
+        },
+        {
+          "kind": "say",
+          "line": "Congregation's attack hits Jesse for 36."
+        },
+        {
+          "kind": "say",
+          "line": "You're not where it landed. Clean dodge."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +15 style — dodged the the attack!"
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Absolution — fires in a straight line from itself. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 9!"
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.49 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(congregation's hide absorbs 10.)"
+        },
+        {
+          "kind": "say",
+          "line": "The Congregation falls."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the congregation for 116 (Phase blade)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "say",
+          "line": "📺 +20 style — dropped the Congregation!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "📺 WAVE LEDGER — wave 4 is halfway there (2/3 kills — the ledger counts kills only, not near-misses)."
+        },
+        {
+          "kind": "say",
+          "line": "Jesse laughs, disbelieving. \"Did you SEE that?\""
+        },
+        {
+          "kind": "sysSay",
+          "line": "WINNER! Style score: 65. The gamblers are ecstatic!"
+        },
+        {
+          "kind": "say",
+          "line": "It is a church. Do not eat the church."
+        },
+        {
+          "kind": "say",
+          "line": "Grave robber: its tooth necklace is on the body. The dead don't need it — but you'll have to take it."
+        },
+        {
+          "kind": "say",
+          "line": "You came back bloody. Nobody asks. Someone saves you the good seat by the fire."
+        }
+      ],
+      "transcriptOverflow": false,
+      "abilityUses": [],
+      "shoutUses": 0,
+      "offerFoodUses": 0,
+      "end": {
+        "result": "won",
+        "day": 76,
+        "round": 9,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "congregation",
+            "alive": false,
+            "fled": false,
+            "hp": -110,
+            "maxHp": 900
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "ursula_weber",
+            "alive": true,
+            "fled": false,
+            "hp": 74.80555555555556,
+            "maxHp": 100
+          },
+          {
+            "key": "v_jesse_cortez",
+            "kind": "villager",
+            "vid": "jesse_cortez",
+            "alive": true,
+            "fled": true,
+            "hp": 49,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 1,
+        "monsterTotalW4": 1,
+        "humansDead": [],
+        "humansFled": [
+          "jesse_cortez"
+        ],
+        "monstersFled": []
+      },
+      "kills": [
+        {
+          "day": 76,
+          "fn": "recordWaveKill",
+          "pyrrhic": false,
+          "mid": "congregation",
+          "wave": 4,
+          "by": "ursula_weber",
+          "via": "player",
+          "scholarAtKill": "ursula_weber",
+          "linkSeq": 2,
+          "linkHow": "tb-open"
+        }
+      ],
+      "superseded": false
+    }
+  ],
+  "killsW4": 2,
+  "killRows": [
+    {
+      "day": 74,
+      "fn": "recordWaveKill",
+      "pyrrhic": false,
+      "mid": "suburb",
+      "wave": 4,
+      "by": "sam_wilson",
+      "via": "companion",
+      "scholarAtKill": "ursula_weber",
+      "linkSeq": 1,
+      "linkHow": "tb-open"
+    },
+    {
+      "day": 76,
+      "fn": "recordWaveKill",
+      "pyrrhic": false,
+      "mid": "congregation",
+      "wave": 4,
+      "by": "ursula_weber",
+      "via": "player",
+      "scholarAtKill": "ursula_weber",
+      "linkSeq": 2,
+      "linkHow": "tb-open"
+    }
+  ],
+  "unlinkedKills": [],
+  "spawns": [
+    {
+      "day": 69,
+      "id": "suburb",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 71,
+      "id": "congregation",
+      "tx": 3,
+      "ty": 4
+    },
+    {
+      "day": 75,
+      "id": "strike",
+      "tx": 5,
+      "ty": 0
+    }
+  ],
+  "orphanTbEnds": [],
+  "wrapCounts": {
+    "spawnWorldMonster": 55,
+    "fieldFight": 54,
+    "recordWaveKill": 47,
+    "startCombat": 11,
+    "tbDamage": 127,
+    "tbEnd": 11,
+    "useAbility": 2
+  },
+  "instrumentErrors": [],
+  "notes": []
+}
