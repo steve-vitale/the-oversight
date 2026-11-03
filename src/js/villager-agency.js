@@ -228,17 +228,37 @@
           // 'expedition_launch' — same predicate, same threshold.
           if (this.npcTrigger && this.npcTrigger(rid, 'expedition_launch')) continue;
         } catch (e) {}
+        // WIN PLAN (winnability push track 2, 2026-11-03): a villager on
+        // a win plan is evaluated at Haven first (stage transitions from
+        // their own gear / a broadcast beat / a companion they can see),
+        // then gated at departure (gear hold, party launch, veteran guard).
+        // 'hold'/'launch' skip the chance roll; 'normal' falls through
+        // untouched. Chain-safe: the module may be absent.
+        try { if (this.winPlanHavenTick) this.winPlanHavenTick(rid, hx, hy); } catch (e) {}
+        try {
+          if (this.winPlanDepart) {
+            var _wpd = this.winPlanDepart(rid, hx, hy, playerAtHaven);
+            if (_wpd === 'hold' || _wpd === 'launch') continue;
+          }
+        } catch (e) {}
         var chance = prof === 'explorer' ? 0.09 : 0.045;
         if (a.potential[rid]) chance *= 1.6;
         if (R() < chance) this.startExpedition(rid, hx, hy, playerAtHaven);
       }
+      // WIN PLAN BONDS (winnability push track 2, Arm 4 blueprint):
+      // once per tick the plan-holders home at Haven tend marginal
+      // bonds and stand down a window-threatening hungry muster.
+      // Weekly / one-shot guards live inside the ticks; calling them
+      // every tick is safe and keeps no per-villager state.
+      try { if (this.winPlanBondsTick) this.winPlanBondsTick(hx, hy); } catch (e) {}
+      try { if (this.winPlanMusterTick) this.winPlanMusterTick(hx, hy); } catch (e) {}
       // rising stars with the 'lead' goal: the village starts looking at them.
       // The existing contender-heat machinery takes it from there.
       try { this.agencyLeadershipTick(); } catch (e) {}
       // the village talks about what its people did. Ambient, honest.
       try { if (playerAtHaven && R() < 0.12) this.agencyDeedTalk(); } catch (e) {}
     },
-    startExpedition(vid, hx, hy, announce) {
+    startExpedition(vid, hx, hy, announce, opts) {
       var a = this.agencyOf(vid);
       var st = this.agencyState();
       // GEAR-UP + HEAL CHECK (Steve 2026-10-09): expeditions arm up from the
@@ -263,13 +283,22 @@
       // AMMO (gap-ammo 2026-10-27): the expedition is really launching —
       // pocket stones / craft a batch from the pile before leaving.
       try { if (this.villagerPocketAmmo) this.villagerPocketAmmo(vid); } catch (e) {}
-      // target: a node out there, at real distance
+      // target: a node out there, at real distance — unless the caller
+      // supplies one (WIN PLAN party launch: inviter + companion share
+      // the target so their legs stay together and the fight engine can
+      // find the party). Shared-target callers pass {tx, ty, duration}.
       var dist = 1 + Math.floor(R() * maxD);
       var dirs = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, -1], [1, -1], [-1, 1]];
       var d = pick(dirs);
       var tx = Math.max(0, Math.min(8, hx + d[0] * dist)); // 9x9 world (2026-10-07)
       var ty = Math.max(0, Math.min(8, hy + d[1] * dist)); // 9x9 world (2026-10-07)
       var duration = 8 + Math.floor(R() * 13); // 2-5 days of parts
+      if (opts && opts.tx != null && opts.ty != null) {
+        tx = Math.max(0, Math.min(8, opts.tx));
+        ty = Math.max(0, Math.min(8, opts.ty));
+        dist = Math.max(1, Math.abs(tx - hx) + Math.abs(ty - hy));
+        if (opts.duration != null) duration = opts.duration;
+      }
       st.exped[vid] = {
         tx: tx, ty: ty, dist: dist, legs: 0,
         sinceDay: this.state.scholar.day, sincePart: this.dayPart,
@@ -372,13 +401,24 @@
       // villagers (same outdoor crew, in earshot) arrive as allies through
       // the fieldFight machinery. Trust-ordered: friends answer, strangers
       // don't. The depth probe measured calledHelp 0/531 before this.
+      // WIN PLAN pre-fight gate: outmatched -> go back for help (no
+      // fight, plan falls back to gathering); seeking -> walk in on
+      // purpose (awareness evade skipped). Null = the old path, untouched.
+      var _wpg = null;
+      try { _wpg = this.winPlanFightGate ? this.winPlanFightGate(vid, m) : null; } catch (e) { _wpg = null; }
+      if (_wpg && _wpg.avoid) {
+        try { if (st.exped[vid]) st.exped[vid].encounters.push('gave ' + (m.id || 'it') + ' room — not ready alone, going back for help'); } catch (e) {}
+        return;
+      }
+      var _wpSeek = !!(_wpg && _wpg.seek);
       var allyVids = [];
       try { allyVids = this.villagerFightAllies ? this.villagerFightAllies(vid) : []; } catch (e) { allyVids = []; }
       // POST-FLEE REST: entry HP, so a vFlee below 25% of max can be
       // recognized after the fight's wounds land (max = max(100, entry)).
       var _pfEntryHp = 100;
       try { var _vh = (this.state.village || {}).health || {}; if (_vh[vid] !== undefined) _pfEntryHp = _vh[vid]; } catch (e) {}
-      var rec = this.fieldFight(vid, m, null, { awareness: true, allies: allyVids.length, allyVids: allyVids });
+      var rec = this.fieldFight(vid, m, null, { awareness: !_wpSeek, allies: allyVids.length, allyVids: allyVids });
+      try { if (this.winPlanNoteFight) this.winPlanNoteFight(vid, allyVids); } catch (e) {}
       // The village hears about a rescue — gossip fodder, honestly sourced.
       // "Mara ran into the treeline when she heard James scream."
       if (rec.calledHelp && rec.allyVid) {
@@ -394,6 +434,9 @@
         a.know[vid].monsters++;
         a.xp[vid].tracking += 2 * (st.potential[vid] ? 2 : 1);
         st.exped[vid].encounters.push('evaded ' + (m.id || 'it'));
+        // A hard beast seen and given room is a reason, not just a
+        // sighting: it seeds a gather plan for that species and ground.
+        try { if (this.winPlanSeedFromFight) this.winPlanSeedFromFight(vid, m, 'evaded'); } catch (e) {}
         return;
       }
       // contact: they fought. Fighting teaches, whatever the ending.
@@ -406,6 +449,7 @@
         // WAVE GATE (break-it 2026-10-09): village-wide kill minimums —
         // see resolveWildMonsterEncounter. The expedition's kill counts too.
         try { this.recordWaveKill(m.id, vid, 'agency', this.trickSummary ? this.trickSummary(rec) : null); } catch (e) {}
+        try { if (this.winPlanNoteKill) this.winPlanNoteKill(vid, m); } catch (e) {}
         // MAP MEMORY (villager-mapmem 2026-10-13): the kill used to leave no
         // body at all — the meat vanished. Now the body is really there
         // (registerDeath with node override, real rot clock, real meat
@@ -473,6 +517,9 @@
         if (_endHp / Math.max(100, _pfEntryHp) <= 0.25) _pfRest = this.markPostFleeRest ? !!this.markPostFleeRest(vid) : false;
       } catch (e) {}
       if (_pfRest && st.exped[vid]) st.exped[vid].encounters.push('fled ' + (m.id || 'it') + ' — staying out of sight for the rest of the day, too hurt to meet it again');
+      // Fled a hard beast: that is the plan's seed — go back geared, and
+      // not alone. (Wave-gated inside winPlanSeedFromFight.)
+      try { if (this.winPlanSeedFromFight) this.winPlanSeedFromFight(vid, m, 'fled'); } catch (e) {}
       return this.expedHurt(vid, mName + ' (' + fightNote + ')', nm);
     },
     expedHurt(vid, mName, nm) {
