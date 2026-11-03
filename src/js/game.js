@@ -20390,18 +20390,38 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // PARTY-UP (Steve 2026-10-09): same outdoor-crew rule as patrols — a
       // villager jumped in the wild can call to whoever's out there with them.
       // PARTY WIRING (Steve 2026-10-12): trust-ordered — friends answer first.
+      // GAP-ENCOUNTER leg 3 (2026-11-02, ported to current master for the
+      // winnability push 2026-11-03): the wild router used to read ONLY
+      // the _outdoorCrew snapshot, which the depth probe found always empty
+      // when fights actually happen (assignments resolve before the world
+      // tick) — so the fieldkill census showed 202/202 wild fights solo,
+      // calledHelp 0/202, while the engine joins allies fine when opts
+      // carry them. The sensing helper villagerFightAllies (same outdoor
+      // crew read LIVE from assignments, plus villagers on/adjacent to the
+      // fighter's node — in earshot) is the same rule, from live senses
+      // instead of a stale snapshot; it already keeps the snapshot as a
+      // backup source. No roster feed: only co-tasked or co-located
+      // villagers, trust-ordered, capped at 2 by the helper.
       let wAllies = 0; const wAllyVids = [];
       try {
-        const _wt = (this.state.village || {}).trust || {};
-        const _tOf = (rid) => (_wt[rid] === undefined ? 10 : _wt[rid]);
-        const _crew = [];
-        for (const rid of (this._outdoorCrew || [])) {
-          if (rid !== vid && (this.state.village.roster || []).includes(rid)) _crew.push(rid);
-        }
-        _crew.sort((a, b) => _tOf(b) - _tOf(a));
-        for (const rid of _crew) {
-          wAllies++;
-          if (wAllyVids.length < 2) wAllyVids.push(rid);
+        if (typeof this.villagerFightAllies === 'function') {
+          const _sensed = this.villagerFightAllies(vid) || [];
+          for (const rid of _sensed) {
+            wAllies++;
+            if (wAllyVids.length < 2) wAllyVids.push(rid);
+          }
+        } else {
+          const _wt = (this.state.village || {}).trust || {};
+          const _tOf = (rid) => (_wt[rid] === undefined ? 10 : _wt[rid]);
+          const _crew = [];
+          for (const rid of (this._outdoorCrew || [])) {
+            if (rid !== vid && (this.state.village.roster || []).includes(rid)) _crew.push(rid);
+          }
+          _crew.sort((a, b) => _tOf(b) - _tOf(a));
+          for (const rid of _crew) {
+            wAllies++;
+            if (wAllyVids.length < 2) wAllyVids.push(rid);
+          }
         }
       } catch (e) {}
       // HELP FIGHTS BLOW-BY-BLOW (audit 2026-10-14): same routing as
