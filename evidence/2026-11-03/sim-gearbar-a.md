@@ -294,7 +294,8 @@ measures against, not a claim that the wall moved.
   - 89e4ac4dd sim-gearbar-a prereg (before any judged sim)
   - b781a238 sim-gearbar-a instruments: gear recount + driver +
     analyzer + proof 16/16 (zero src/js)
-  - (pilot + evidence commit below)
+  - cdafb0bde sim-gearbar-a pilot + evidence (this landing note added
+    in the follow-up commit)
 - Files: prereg + evidence in `evidence/2026-11-03/sim-gearbar-a*.md`;
   per-seed JSON in `evidence/2026-11-03/perseed-gearbar-a/` (8 files,
   gearbar-pilot run); scripts `gearbar-instrument-20261103.js`,
