@@ -1,0 +1,15 @@
+SEED 69501 day5Start={"x":4,"y":4} moved=[true,true,true,true,true,true] control=PASS
+SEED 69502 day5Start={"x":4,"y":4} moved=[true,true,true,true,true,false] control=PASS
+SEED 69503 day5Start={"x":4,"y":4} moved=[false] control=PASS
+SEED 69504 day5Start={"x":4,"y":4} moved=[true,true,true,true,true,true] control=PASS
+SEED 69505 day5Start={"x":4,"y":4} moved=[true,true,true,true,true,true] control=PASS
+SEED 69506 day5Start={"x":4,"y":4} moved=[true,true,true,true,true,true] control=PASS
+SEED 69507 day5Start={"x":4,"y":4} moved=[true,false] control=PASS
+SEED 69508 day5Start={"x":4,"y":4} moved=[false] control=PASS
+FIDELITY totalForcedHops=34 ePass=28 ePassMoved=24 ePassRefused=4 fidelity=0.8571 eFailMoved=6 eFailRefused=0 legsAtHaven=8/8
+REFUSED seed=69502 7,2->7,1 entryTypes=["creek"] engineType=creek tile={"type":"creek","needsBridge":true,"bridged":false,"blockFrom":{"dx":1,"dy":0,"type":"fallen_tree"}} swimmer=false
+REFUSED seed=69503 4,4->5,4 entryTypes=["creek"] engineType=creek tile={"type":"creek","needsBridge":true,"bridged":false,"blockFrom":null} swimmer=false
+REFUSED seed=69507 5,4->6,4 entryTypes=["washed_out"] engineType=washed_out tile={"type":"forest_floor","needsBridge":false,"bridged":false,"blockFrom":{"dx":-1,"dy":0,"type":"washed_out"}} swimmer=true
+REFUSED seed=69508 4,4->5,4 entryTypes=["creek"] engineType=creek tile={"type":"creek","needsBridge":true,"bridged":false,"blockFrom":null} swimmer=false
+CENSUS {"entry[creek] engine[creek]":3,"entry[washed_out] engine[washed_out]":1}
+VERDICT-INPUT DIAG unclassifiedRefusals=0
