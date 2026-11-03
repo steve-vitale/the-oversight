@@ -23906,7 +23906,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const cast = this.castMonster();
         const monsterId = cast.id || cast; // castMonster returns {id, veteran}
         const isVeteran = cast.veteran || false;
-        this.wanderer = { x: s.x, y: s.y, dir: Math.random() < 0.5 ? 1 : -1, monsterId, veteran: isVeteran };
+        this.wanderer = { x: s.x, y: s.y, dir: Math.random() < 0.5 ? 1 : -1, monsterId, veteran: isVeteran, bornDay: scholar.day };
         this.encounterDone = false; // per-wanderer: the moveWanderer contact guard keys off this
         // EAST NILE (alien virus): the crows speak and you understand the shape
         // of it — their screaming names the direction of danger.
@@ -23971,6 +23971,29 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     moveWanderer() {
       const w = this.wanderer;
       if (!w) return;
+      // WANDERER GIVE-UP (gap-w5window 2026-11-02): a wanderer paces ONE row
+      // forever, and checkEncounter only casts a new one when !wanderer —
+      // so a beast whose row never meets the player (or that keeps bouncing
+      // off a safe Haven tile) blocked the cast channel for the whole run:
+      // the w5faced corpus shows 2-7 casts per 86-180d run and ZERO wave-5
+      // casts/triggers, with one early wanderer still pacing at day 90.
+      // A wanderer sweeps its 9-wide row several times over in 7 days (4
+      // steps/day); uncontacted that long it is definitionally stuck, not
+      // merely slow — the designed recurrence is contact + 4 days. It
+      // moves on, announced, the slot frees, and the next non-safe tile
+      // entry casts anew at the CURRENT wave. No threshold, window,
+      // rate, or win condition changes: this repairs the stuck slot, it
+      // does not retune how often the System casts. Legacy wanderers
+      // (saved before bornDay existed) are stamped on first sight and get
+      // their full 7 days from load, never an instant expiry.
+      const wDay = (this.state.scholar && this.state.scholar.day) || 1;
+      if (w.bornDay == null) { w.bornDay = wDay; }
+      else if (wDay - w.bornDay >= 7) {
+        this.say('The pacing in the woods fades — whatever was out there has moved on.');
+        this.wanderer = null;
+        this.state.wandererNextDay = wDay;
+        return;
+      }
       const nx = w.x + w.dir;
       if (nx < 0 || nx > 8) { w.dir *= -1; return; } // 9x9 world (2026-10-07)
       w.x = nx;
