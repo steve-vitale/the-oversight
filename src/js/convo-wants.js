@@ -1950,6 +1950,7 @@
     // The turn handler speaks the beat (from the def); this moves the stage.
     // kind: 'engage' -> stage 2 | 'deflect' -> stage 3 'deflected' |
     //        'commit' -> stage 3 with the def's resolution ('promised' etc.)
+    //        'stated' -> stage 3 'stated' (blocked commit: heard, deferred)
     convoWantEngage(vid, kind) {
       const c = this.convoGet(vid);
       if (!c || !c.want) return;
@@ -1960,6 +1961,15 @@
       } else if (kind === 'deflect') {
         want.stage = 3;
         want.resolution = 'deflected';
+      } else if (kind === 'stated') {
+        // BLOCKED-COMMIT RESOLUTION (journey-deepening r87 2026-11-02):
+        // a commit the game refuses (away villager, open commitment) is
+        // heard and deferred, not promised and not still live — resolving
+        // here stops the refusal re-firing verbatim on every re-press.
+        // 'stated' already names this resolution at conversation end
+        // (defaultResolution); this just reaches it at the refused turn.
+        want.stage = 3;
+        want.resolution = 'stated';
       } else if (kind === 'commit') {
         want.stage = 3;
         // The resolution names what the commitment MEANS per want.

@@ -532,7 +532,6 @@
           this.sayLine(vid, line);
           return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
         }
-        try { this.resolveConsequence(vid, { trust: 3, mood: 1, temper: 'kind', name: 'dlg:commit' }); } catch (e) {}
         let beat = null;
         let committed = true;
         try {
@@ -563,14 +562,28 @@
           }
         } catch (e) { beat = null; }
         if (!beat) beat = '"Thank you. Seriously — thank you."';
+        // COMMIT-REWARD TIMING (journey-deepening r87 2026-11-02): the
+        // +3 trust / +1 mood fired BEFORE the commit outcome was known,
+        // so every REFUSED commit (away guard, open commitment) farmed
+        // trust — 8 refused commits in the r87 transcript. The reward
+        // fires only on a real commitment, below.
+        if (committed) {
+          try { this.resolveConsequence(vid, { trust: 3, mood: 1, temper: 'kind', name: 'dlg:commit' }); } catch (e) {}
+        }
         // The obligation was just created: its confirmation must be spoken,
         // even when another villager recently used the same thank-you.
         this.sayLine(vid, beat, { diegeticAct: true });
         // 'commit' ONLY when a real commitment was made. A blocked favor
         // commit is heard ('stated' via defaultResolution), never 'promised'
         // — 'engaged'/'promised' without an obligation would be the
-        // false-engagement lie.
-        this.convoWantEngage(vid, committed ? 'commit' : 'engage');
+        // false-engagement lie. BLOCKED-COMMIT RESOLUTION (r87): the old
+        // 'engage' transition left the want at stage 2, so dlg:commit
+        // stayed offered and the refusal re-fired verbatim forever (8x in
+        // the r87 transcript). A blocked commit resolves the want as
+        // 'stated': heard and deferred ("find me when I'm back"), not
+        // promised — the favor itself stays open and can be asked again
+        // when they return.
+        this.convoWantEngage(vid, committed ? 'commit' : 'stated');
         return { line: beat, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
 
