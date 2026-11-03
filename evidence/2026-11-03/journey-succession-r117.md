@@ -99,7 +99,12 @@ Every village that lived past its first month passed the mantle at least once, a
 - (e) is now re-baselined on 31202's split panel record; the next succession run should keep the SPLIT-PANEL checks and retire any remaining r91-trajectory language.
 
 ## Closeout
-- (TO FILL: commit hash, merge, rotation 4, lock deletion, heartbeat stop.)
+- Commit: 2fe6ac13 ("[needs-eyes] journey succession r117: rolepick/namepick lines now enter the conversation transcript; 6-seed panel, split re-baseline", 105 files) + a follow-up commit updating this section. Safe-commit index clobber hit on the first commit (staged deletions in the main index); repaired via `git update-index --add --cacheinfo` from HEAD blobs, verified `git status --short` empty and `git diff HEAD` empty.
+- Merge: `git merge --ff-only journey2-succession-r117` from the main tree (base verified current before merging — no rebase needed).
+- Rotation: `journey-rotation-b.txt` written to 4 (endgame) and re-read to verify.
+- Lock: deleted only after verifying it still carried this run's run_id.
+- Heartbeat loop stopped after release; worktree released and branch deleted; final reap run; main tree verified clean.
+- Report: merged locally, pending ship (no version tag; the ship loop owns bumps, pushes, and live verification).
 
 ## Carried items
 - Orphan aimed-shot dodge fix: NOT recoverable from `~/workspace/worktrees/journey2-succession/` — that dir is not a git repo, its files differ from current master across ~19 src/js files (stale since 2026-10-30, swamped by drift), and no `aimedShot` identifier exists on current master, so the +3/-3 hunk cannot be isolated from the orphan copy. If the dodge-default defect still exists on master it needs a fresh probe, not an orphan rescue. Carried for a combat-focused run; the orphan dir was not touched.
