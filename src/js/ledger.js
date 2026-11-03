@@ -917,6 +917,17 @@
       // Fingers' caught-stealing trust hit landed on a corpse. The save KEY
       // stays stable via state.runKey; this only fixes identity.
       s.villagerId = newId;
+      // SHELTER FLAG RESET (journey-crisis r116 2026-11-03): the successor
+      // stops being an NPC when the mantle passes — and the shelter verb
+      // never musters the scholar, so a shelter flag on the new bearer is
+      // stale NPC state by construction. Left in place it made a
+      // sheltered successor pickable as a "sheltered villager" convo
+      // target (11601 d102: the driver talked to Ruth Goldstein the day
+      // after she inherited, while she WAS the player — the engine
+      // correctly blocked the self-favor, but the conversation itself
+      // was self-talk). Only the successor's flag clears; every other
+      // villager's shelter state survives succession untouched.
+      try { if (v.sheltered && v.sheltered[newId]) delete v.sheltered[newId]; } catch (e) {}
       // FRESH SOCIAL LEDGER (longsim scale-wall r8 2026-10-13, lever 5): the
       // takes/gives book is per-PERSON, and the successor's NPC-era communal
       // meals sat in v.takes[newId] as "mystery takes" under the new bearer's id

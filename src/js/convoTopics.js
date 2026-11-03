@@ -1231,9 +1231,16 @@
           } catch (e) {}
           const who = (p) => { try { return this.firstRef(p[0]); } catch (e) { return 'someone'; } };
           const p0 = props[0], p1 = props[1];
+          // SPEAKER-SELF (journey-crisis r116 2026-11-03; W4 class: r103
+          // Jamal, r114 Simone): a villager must not report their own
+          // proposal in third person from their own mouth ("Simone is
+          // pushing 'The Loud Beast'" said by Simone). First person when
+          // the first proposal's proposer is the speaker; third person
+          // unchanged for everyone else.
+          const p0self = !!(p0 && String(p0[0]) === String(vid));
           return [
             '"Have you heard what they\'re calling ' + desc + '? ' +
-              (p0 ? who(p0) + ' is pushing \'' + p0[1] + '\'. ' : '') +
+              (p0 ? (p0self ? 'I\'m pushing \'' + p0[1] + '\'. ' : who(p0) + ' is pushing \'' + p0[1] + '\'. ') : '') +
               'Everyone\'s got a name for it and nobody agrees."',
             '"The whole fire was arguing about ' + desc + ' last night — what to even CALL it. ' +
               (p1 ? '\'' + p1[1] + '\' got shouted down. ' : '') + 'What\'s your vote?"',
