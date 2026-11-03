@@ -1,0 +1,978 @@
+{
+  "seed": 99105,
+  "run": "tbpolicy-base",
+  "policy": "competent",
+  "anchorCommit": "865be47713d2",
+  "days": 136,
+  "gameDays": 136,
+  "endReason": "village-lost",
+  "won": false,
+  "villageLost": true,
+  "maxWave": 4,
+  "identity": "DIVERGED",
+  "spawnsW4": 5,
+  "tbCalls": 3,
+  "tbStarted": 3,
+  "fieldsW4": 3,
+  "exposures": [
+    {
+      "seq": 1,
+      "type": "tb",
+      "day": 105,
+      "mid": "influencer",
+      "wave": 4,
+      "fightId": "fmgpspirg_d26s8p",
+      "scholarAtStart": "nino_kapanadze",
+      "leadVid": "nino_kapanadze",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "vid": "nino_kapanadze",
+          "kind": "player",
+          "gear": {
+            "vid": "nino_kapanadze",
+            "armorP": 43,
+            "armed": true,
+            "weapon": "Phase blade",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "mid": "influencer",
+          "alive": true,
+          "hp": 850
+        }
+      ],
+      "leadGear": {
+        "vid": "nino_kapanadze",
+        "armorP": 43,
+        "armed": true,
+        "weapon": "Phase blade",
+        "vpFound": true,
+        "readError": null
+      },
+      "end": {
+        "result": "won",
+        "day": 106,
+        "monsters": [
+          {
+            "mid": "influencer",
+            "alive": false,
+            "hp": -100
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "nino_kapanadze",
+            "alive": true,
+            "hp": 66
+          }
+        ],
+        "monsterDeadW4": 1,
+        "monsterTotalW4": 1,
+        "humansDead": []
+      },
+      "kills": [
+        {
+          "day": 106,
+          "fn": "recordWaveKill",
+          "pyrrhic": false,
+          "mid": "influencer",
+          "wave": 4,
+          "by": "nino_kapanadze",
+          "via": "player",
+          "scholarAtKill": "nino_kapanadze",
+          "wasScholar": true,
+          "logLenBefore": 48,
+          "logLenAfter": 49,
+          "entryAdded": true,
+          "linkSeq": 1,
+          "linkHow": "tb-open",
+          "killerDeadAtRecord": false
+        }
+      ],
+      "superseded": false
+    },
+    {
+      "seq": 2,
+      "type": "tb",
+      "day": 107,
+      "mid": "eulogy",
+      "wave": 4,
+      "fightId": "fmgpspiry_8zjvph",
+      "scholarAtStart": "nino_kapanadze",
+      "leadVid": "nino_kapanadze",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "vid": "nino_kapanadze",
+          "kind": "player",
+          "gear": {
+            "vid": "nino_kapanadze",
+            "armorP": 43,
+            "armed": true,
+            "weapon": "Phase blade",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "mid": "eulogy",
+          "alive": true,
+          "hp": 1060
+        }
+      ],
+      "leadGear": {
+        "vid": "nino_kapanadze",
+        "armorP": 43,
+        "armed": true,
+        "weapon": "Phase blade",
+        "vpFound": true,
+        "readError": null
+      },
+      "end": {
+        "result": "lost",
+        "day": 107,
+        "monsters": [
+          {
+            "mid": "eulogy",
+            "alive": true,
+            "hp": 764
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "nino_kapanadze",
+            "alive": false,
+            "hp": -2
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "nino_kapanadze"
+        ]
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 3,
+      "type": "field",
+      "day": 122,
+      "mid": "strike",
+      "wave": 4,
+      "leadVid": "visjoin_118",
+      "partySizeStart": 3,
+      "offeredAllies": 2,
+      "offeredAllyVids": [
+        "elijah_scott",
+        "visjoin_72"
+      ],
+      "leadGear": {
+        "vid": "visjoin_118",
+        "armorP": 4,
+        "armed": true,
+        "weapon": "Sling",
+        "vpFound": true,
+        "readError": null
+      },
+      "end": {
+        "outcome": "vFlee",
+        "day": 122,
+        "rounds": 3,
+        "partySizeEnd": 3,
+        "allyVid": "elijah_scott",
+        "calledHelp": true,
+        "vTaken": 80,
+        "mDealt": 37,
+        "vHpLeft": 37,
+        "mHpLeft": 963,
+        "intent": "engage"
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 4,
+      "type": "field",
+      "day": 122,
+      "mid": "strike",
+      "wave": 4,
+      "leadVid": "visjoin_118",
+      "partySizeStart": 3,
+      "offeredAllies": 2,
+      "offeredAllyVids": [
+        "elijah_scott",
+        "visjoin_72"
+      ],
+      "leadGear": {
+        "vid": "visjoin_118",
+        "armorP": 4,
+        "armed": true,
+        "weapon": "Sling",
+        "vpFound": true,
+        "readError": null
+      },
+      "end": {
+        "outcome": "vDie",
+        "day": 122,
+        "rounds": 1,
+        "partySizeEnd": 3,
+        "allyVid": null,
+        "calledHelp": false,
+        "vTaken": 65,
+        "mDealt": 0,
+        "vHpLeft": 0,
+        "mHpLeft": 963,
+        "intent": "engage"
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 5,
+      "type": "tb",
+      "day": 128,
+      "mid": "strike",
+      "wave": 4,
+      "fightId": "fmgpspiye_29s3gr",
+      "scholarAtStart": "tashi_sherpa",
+      "leadVid": "tashi_sherpa",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "vid": "tashi_sherpa",
+          "kind": "player",
+          "gear": {
+            "vid": "tashi_sherpa",
+            "armorP": 70,
+            "armed": true,
+            "weapon": "Shard spear",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "mid": "strike",
+          "alive": true,
+          "hp": 963
+        }
+      ],
+      "leadGear": {
+        "vid": "tashi_sherpa",
+        "armorP": 70,
+        "armed": true,
+        "weapon": "Shard spear",
+        "vpFound": true,
+        "readError": null
+      },
+      "end": {
+        "result": "won",
+        "day": 128,
+        "monsters": [
+          {
+            "mid": "strike",
+            "alive": false,
+            "hp": -40
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "tashi_sherpa",
+            "alive": true,
+            "hp": 100
+          }
+        ],
+        "monsterDeadW4": 1,
+        "monsterTotalW4": 1,
+        "humansDead": []
+      },
+      "kills": [
+        {
+          "day": 128,
+          "fn": "recordWaveKill",
+          "pyrrhic": false,
+          "mid": "strike",
+          "wave": 4,
+          "by": "tashi_sherpa",
+          "via": "player",
+          "scholarAtKill": "tashi_sherpa",
+          "wasScholar": true,
+          "logLenBefore": 54,
+          "logLenAfter": 55,
+          "entryAdded": true,
+          "linkSeq": 5,
+          "linkHow": "tb-open",
+          "killerDeadAtRecord": false
+        }
+      ],
+      "superseded": false
+    },
+    {
+      "seq": 6,
+      "type": "field",
+      "day": 134,
+      "mid": "suburb",
+      "wave": 4,
+      "leadVid": "visjoin_92",
+      "partySizeStart": 3,
+      "offeredAllies": 2,
+      "offeredAllyVids": [
+        "elijah_scott",
+        "visjoin_72"
+      ],
+      "leadGear": {
+        "vid": "visjoin_92",
+        "armorP": 12,
+        "armed": true,
+        "weapon": "Sharpened stick",
+        "vpFound": true,
+        "readError": null
+      },
+      "end": {
+        "outcome": "vFlee",
+        "day": 134,
+        "rounds": 3,
+        "partySizeEnd": 3,
+        "allyVid": "elijah_scott",
+        "calledHelp": true,
+        "vTaken": 44,
+        "mDealt": 78,
+        "vHpLeft": 42,
+        "mHpLeft": 1402,
+        "intent": "engage"
+      },
+      "kills": [],
+      "superseded": false
+    }
+  ],
+  "killRows": [
+    {
+      "day": 106,
+      "fn": "recordWaveKill",
+      "pyrrhic": false,
+      "mid": "influencer",
+      "wave": 4,
+      "by": "nino_kapanadze",
+      "via": "player",
+      "scholarAtKill": "nino_kapanadze",
+      "wasScholar": true,
+      "logLenBefore": 48,
+      "logLenAfter": 49,
+      "entryAdded": true,
+      "linkSeq": 1,
+      "linkHow": "tb-open",
+      "killerDeadAtRecord": false
+    },
+    {
+      "day": 128,
+      "fn": "recordWaveKill",
+      "pyrrhic": false,
+      "mid": "strike",
+      "wave": 4,
+      "by": "tashi_sherpa",
+      "via": "player",
+      "scholarAtKill": "tashi_sherpa",
+      "wasScholar": true,
+      "logLenBefore": 54,
+      "logLenAfter": 55,
+      "entryAdded": true,
+      "linkSeq": 5,
+      "linkHow": "tb-open",
+      "killerDeadAtRecord": false
+    }
+  ],
+  "unlinkedKills": [],
+  "spawns": [
+    {
+      "day": 88,
+      "id": "influencer",
+      "tx": 3,
+      "ty": 4
+    },
+    {
+      "day": 98,
+      "id": "eulogy",
+      "tx": 3,
+      "ty": 4
+    },
+    {
+      "day": 101,
+      "id": "reunion",
+      "tx": 5,
+      "ty": 4
+    },
+    {
+      "day": 103,
+      "id": "strike",
+      "tx": 3,
+      "ty": 4
+    },
+    {
+      "day": 125,
+      "id": "suburb",
+      "tx": 5,
+      "ty": 4
+    }
+  ],
+  "deathEvents": [
+    {
+      "day": 7,
+      "kind": "monster",
+      "who": "rut_king",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 7,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "sanjun",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "lockpick_raccoon",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "sanjun",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 9,
+      "kind": "villager",
+      "who": "gen_s6o77ws",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 9,
+      "kind": "monster",
+      "who": "warranty_caller",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 9,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 10,
+      "kind": "monster",
+      "who": "bulldozer",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 11,
+      "kind": "monster",
+      "who": "statickite",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 12,
+      "kind": "monster",
+      "who": "union_rep",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 12,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 15,
+      "kind": "monster",
+      "who": "nevermore",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 15,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 16,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 16,
+      "kind": "monster",
+      "who": "mirror_stag",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 16,
+      "kind": "monster",
+      "who": "sunbasker",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "villager",
+      "who": "diana_osei",
+      "cause": "The Heckler",
+      "player": false
+    },
+    {
+      "day": 20,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 20,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 21,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 21,
+      "kind": "monster",
+      "who": "moderator",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 21,
+      "kind": "monster",
+      "who": "anaconda_empress",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 23,
+      "kind": "monster",
+      "who": "nightcourt",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 23,
+      "kind": "monster",
+      "who": "speedbump_turtle",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 23,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 26,
+      "kind": "monster",
+      "who": "sweeps_week",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 30,
+      "kind": "monster",
+      "who": "murkcap",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 32,
+      "kind": "villager",
+      "who": "sanne_bakker",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 33,
+      "kind": "monster",
+      "who": "landlord",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 34,
+      "kind": "villager",
+      "who": "gen_l19g802",
+      "cause": "The Focus Group",
+      "player": false
+    },
+    {
+      "day": 37,
+      "kind": "monster",
+      "who": "ad_break",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 41,
+      "kind": "monster",
+      "who": "giant_mosquito",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 41,
+      "kind": "monster",
+      "who": "gallowdeer",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 41,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 41,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 42,
+      "kind": "villager",
+      "who": "gen_433xz3d",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 48,
+      "kind": "monster",
+      "who": "review_drone",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 49,
+      "kind": "villager",
+      "who": "gen_imdatzd",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 49,
+      "kind": "villager",
+      "who": "gen_2crvazv",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 51,
+      "kind": "villager",
+      "who": "app_mgpsphkk46",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 56,
+      "kind": "villager",
+      "who": "gen_5yg74m1",
+      "cause": "contest",
+      "player": true
+    },
+    {
+      "day": 56,
+      "kind": "villager",
+      "who": "zoltan_nagy",
+      "cause": "starvation",
+      "player": false
+    },
+    {
+      "day": 63,
+      "kind": "monster",
+      "who": "ad_break",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 67,
+      "kind": "monster",
+      "who": "understudy",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 68,
+      "kind": "monster",
+      "who": "spool",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 68,
+      "kind": "villager",
+      "who": "katarina_novak",
+      "cause": "Don't-Look",
+      "player": false
+    },
+    {
+      "day": 68,
+      "kind": "villager",
+      "who": "mia_andersson",
+      "cause": "The Loud Thing",
+      "player": false
+    },
+    {
+      "day": 68,
+      "kind": "villager",
+      "who": "henry_zhang",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 76,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 84,
+      "kind": "monster",
+      "who": "memory_projector",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 84,
+      "kind": "monster",
+      "who": "mirror_stag",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 85,
+      "kind": "monster",
+      "who": "callback",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 85,
+      "kind": "villager",
+      "who": "tom_baker",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 93,
+      "kind": "monster",
+      "who": "mirror_stag",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 93,
+      "kind": "villager",
+      "who": "visjoin_83",
+      "cause": "contest",
+      "player": false
+    },
+    {
+      "day": 93,
+      "kind": "villager",
+      "who": "luis_fernandez",
+      "cause": "the arena",
+      "player": true
+    },
+    {
+      "day": 96,
+      "kind": "monster",
+      "who": "landlord",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 98,
+      "kind": "monster",
+      "who": "spool",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 102,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 106,
+      "kind": "monster",
+      "who": "influencer",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 107,
+      "kind": "villager",
+      "who": "nino_kapanadze",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 108,
+      "kind": "monster",
+      "who": "nevermore",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 109,
+      "kind": "monster",
+      "who": "warranty_caller",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 122,
+      "kind": "villager",
+      "who": "visjoin_118",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 125,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 127,
+      "kind": "monster",
+      "who": "statickite",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 127,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 128,
+      "kind": "monster",
+      "who": "strike",
+      "cause": "combat",
+      "player": false
+    }
+  ],
+  "orphanTbEnds": [],
+  "wrapCounts": {
+    "spawnWorldMonster": 54,
+    "fieldFight": 146,
+    "recordWaveKill": 55,
+    "startCombat": 18,
+    "tbEnd": 18
+  },
+  "instrumentErrors": [],
+  "tbDerived": [
+    {
+      "seq": 1,
+      "day": 105,
+      "mid": "influencer",
+      "partySizeStart": 1,
+      "result": "won",
+      "kills": 1,
+      "hpDealtPct": 100,
+      "playerTurns": 10,
+      "barrierPushes": 0
+    },
+    {
+      "seq": 2,
+      "day": 107,
+      "mid": "eulogy",
+      "partySizeStart": 1,
+      "result": "lost",
+      "kills": 0,
+      "hpDealtPct": 27.9,
+      "playerTurns": 5,
+      "barrierPushes": 0
+    },
+    {
+      "seq": 5,
+      "day": 128,
+      "mid": "strike",
+      "partySizeStart": 1,
+      "result": "won",
+      "kills": 1,
+      "hpDealtPct": 100,
+      "playerTurns": 24,
+      "barrierPushes": 0
+    }
+  ],
+  "w4TurnsCount": 3,
+  "barrierPushesW4": 0,
+  "tbTurnsZipMismatch": false
+}

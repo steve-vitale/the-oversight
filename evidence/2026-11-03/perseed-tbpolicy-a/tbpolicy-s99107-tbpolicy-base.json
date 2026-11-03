@@ -1,0 +1,715 @@
+{
+  "seed": 99107,
+  "run": "tbpolicy-base",
+  "policy": "competent",
+  "anchorCommit": "865be47713d2",
+  "days": 80,
+  "gameDays": 80,
+  "endReason": "village-lost",
+  "won": false,
+  "villageLost": true,
+  "maxWave": 4,
+  "identity": "MATCH",
+  "spawnsW4": 3,
+  "tbCalls": 2,
+  "tbStarted": 2,
+  "fieldsW4": 0,
+  "exposures": [
+    {
+      "seq": 1,
+      "type": "tb",
+      "day": 74,
+      "mid": "suburb",
+      "wave": 4,
+      "fightId": "fmgpspio3_zt7pj",
+      "scholarAtStart": "ursula_weber",
+      "leadVid": "ursula_weber",
+      "partySizeStart": 3,
+      "party": [
+        {
+          "vid": "ursula_weber",
+          "kind": "player",
+          "gear": {
+            "vid": "ursula_weber",
+            "armorP": 27,
+            "armed": true,
+            "weapon": "Phase blade",
+            "vpFound": true,
+            "readError": null
+          }
+        },
+        {
+          "vid": "zoe_adams",
+          "kind": "villager",
+          "gear": {
+            "vid": "zoe_adams",
+            "armorP": 17,
+            "armed": true,
+            "weapon": "Hatchet",
+            "vpFound": true,
+            "readError": null
+          }
+        },
+        {
+          "vid": "sam_wilson",
+          "kind": "villager",
+          "gear": {
+            "vid": "sam_wilson",
+            "armorP": 12,
+            "armed": true,
+            "weapon": "Machete",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "mid": "suburb",
+          "alive": true,
+          "hp": 926
+        }
+      ],
+      "leadGear": {
+        "vid": "ursula_weber",
+        "armorP": 27,
+        "armed": true,
+        "weapon": "Phase blade",
+        "vpFound": true,
+        "readError": null
+      },
+      "end": {
+        "result": "won",
+        "day": 74,
+        "monsters": [
+          {
+            "mid": "suburb",
+            "alive": false,
+            "hp": -4
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "ursula_weber",
+            "alive": true,
+            "hp": 37
+          },
+          {
+            "key": "v_zoe_adams",
+            "kind": "villager",
+            "vid": "zoe_adams",
+            "alive": true,
+            "hp": 100
+          },
+          {
+            "key": "v_sam_wilson",
+            "kind": "villager",
+            "vid": "sam_wilson",
+            "alive": true,
+            "hp": 95
+          }
+        ],
+        "monsterDeadW4": 1,
+        "monsterTotalW4": 1,
+        "humansDead": []
+      },
+      "kills": [
+        {
+          "day": 74,
+          "fn": "recordWaveKill",
+          "pyrrhic": false,
+          "mid": "suburb",
+          "wave": 4,
+          "by": "sam_wilson",
+          "via": "companion",
+          "scholarAtKill": "ursula_weber",
+          "wasScholar": false,
+          "logLenBefore": 44,
+          "logLenAfter": 45,
+          "entryAdded": true,
+          "linkSeq": 1,
+          "linkHow": "tb-open",
+          "killerDeadAtRecord": false
+        }
+      ],
+      "superseded": false
+    },
+    {
+      "seq": 2,
+      "type": "tb",
+      "day": 76,
+      "mid": "congregation",
+      "wave": 4,
+      "fightId": "fmgpspior_2ef0jj",
+      "scholarAtStart": "ursula_weber",
+      "leadVid": "ursula_weber",
+      "partySizeStart": 2,
+      "party": [
+        {
+          "vid": "ursula_weber",
+          "kind": "player",
+          "gear": {
+            "vid": "ursula_weber",
+            "armorP": 27,
+            "armed": true,
+            "weapon": "Phase blade",
+            "vpFound": true,
+            "readError": null
+          }
+        },
+        {
+          "vid": "jesse_cortez",
+          "kind": "villager",
+          "gear": {
+            "vid": "jesse_cortez",
+            "armorP": 12,
+            "armed": true,
+            "weapon": "Crowbar",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "mid": "congregation",
+          "alive": true,
+          "hp": 675
+        }
+      ],
+      "leadGear": {
+        "vid": "ursula_weber",
+        "armorP": 27,
+        "armed": true,
+        "weapon": "Phase blade",
+        "vpFound": true,
+        "readError": null
+      },
+      "end": {
+        "result": "won",
+        "day": 76,
+        "monsters": [
+          {
+            "mid": "congregation",
+            "alive": false,
+            "hp": -110
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "ursula_weber",
+            "alive": true,
+            "hp": 74.80555555555556
+          },
+          {
+            "key": "v_jesse_cortez",
+            "kind": "villager",
+            "vid": "jesse_cortez",
+            "alive": true,
+            "hp": 49
+          }
+        ],
+        "monsterDeadW4": 1,
+        "monsterTotalW4": 1,
+        "humansDead": []
+      },
+      "kills": [
+        {
+          "day": 76,
+          "fn": "recordWaveKill",
+          "pyrrhic": false,
+          "mid": "congregation",
+          "wave": 4,
+          "by": "ursula_weber",
+          "via": "player",
+          "scholarAtKill": "ursula_weber",
+          "wasScholar": true,
+          "logLenBefore": 45,
+          "logLenAfter": 46,
+          "entryAdded": true,
+          "linkSeq": 2,
+          "linkHow": "tb-open",
+          "killerDeadAtRecord": false
+        }
+      ],
+      "superseded": false
+    }
+  ],
+  "killRows": [
+    {
+      "day": 74,
+      "fn": "recordWaveKill",
+      "pyrrhic": false,
+      "mid": "suburb",
+      "wave": 4,
+      "by": "sam_wilson",
+      "via": "companion",
+      "scholarAtKill": "ursula_weber",
+      "wasScholar": false,
+      "logLenBefore": 44,
+      "logLenAfter": 45,
+      "entryAdded": true,
+      "linkSeq": 1,
+      "linkHow": "tb-open",
+      "killerDeadAtRecord": false
+    },
+    {
+      "day": 76,
+      "fn": "recordWaveKill",
+      "pyrrhic": false,
+      "mid": "congregation",
+      "wave": 4,
+      "by": "ursula_weber",
+      "via": "player",
+      "scholarAtKill": "ursula_weber",
+      "wasScholar": true,
+      "logLenBefore": 45,
+      "logLenAfter": 46,
+      "entryAdded": true,
+      "linkSeq": 2,
+      "linkHow": "tb-open",
+      "killerDeadAtRecord": false
+    }
+  ],
+  "unlinkedKills": [],
+  "spawns": [
+    {
+      "day": 69,
+      "id": "suburb",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 71,
+      "id": "congregation",
+      "tx": 3,
+      "ty": 4
+    },
+    {
+      "day": 75,
+      "id": "strike",
+      "tx": 5,
+      "ty": 0
+    }
+  ],
+  "deathEvents": [
+    {
+      "day": 3,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 4,
+      "kind": "monster",
+      "who": "anaconda_empress",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 7,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 7,
+      "kind": "monster",
+      "who": "gallowdeer",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 7,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 10,
+      "kind": "monster",
+      "who": "giant_mosquito",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 12,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 12,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 16,
+      "kind": "monster",
+      "who": "giant_mosquito",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 16,
+      "kind": "monster",
+      "who": "murkcap",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "villager",
+      "who": "gen_p6rxbj6",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "monster",
+      "who": "gallowdeer",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "monster",
+      "who": "moderator",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 18,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 18,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 20,
+      "kind": "monster",
+      "who": "mirrormoth",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 22,
+      "kind": "monster",
+      "who": "understudy",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 24,
+      "kind": "monster",
+      "who": "mirrormoth",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 28,
+      "kind": "monster",
+      "who": "giant_mosquito",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 28,
+      "kind": "monster",
+      "who": "ducks_in_a_row",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 29,
+      "kind": "villager",
+      "who": "gen_wtgp59s",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 29,
+      "kind": "monster",
+      "who": "ducks_in_a_row",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 30,
+      "kind": "villager",
+      "who": "gen_p3t9bfw",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 30,
+      "kind": "villager",
+      "who": "gen_8s63jkj",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 34,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 34,
+      "kind": "monster",
+      "who": "understudy",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 38,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 38,
+      "kind": "monster",
+      "who": "moderator",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 38,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 39,
+      "kind": "monster",
+      "who": "gallowdeer",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 45,
+      "kind": "villager",
+      "who": "lena_ruiz",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 47,
+      "kind": "monster",
+      "who": "chorus_line",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 47,
+      "kind": "monster",
+      "who": "speedbump_turtle",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 47,
+      "kind": "villager",
+      "who": "nikolai_volkov",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 49,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 49,
+      "kind": "monster",
+      "who": "white_noise_heron",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 53,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 54,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 54,
+      "kind": "villager",
+      "who": "ava_garcia",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 54,
+      "kind": "monster",
+      "who": "redactor",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 54,
+      "kind": "monster",
+      "who": "sunback",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 55,
+      "kind": "monster",
+      "who": "callback",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 61,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 61,
+      "kind": "monster",
+      "who": "white_noise_heron",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 61,
+      "kind": "villager",
+      "who": "benoit_lambert",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 61,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 62,
+      "kind": "monster",
+      "who": "spool",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 70,
+      "kind": "villager",
+      "who": "ruby_callaghan",
+      "cause": "contest",
+      "player": false
+    },
+    {
+      "day": 73,
+      "kind": "villager",
+      "who": "gen_o1rzo6o",
+      "cause": "the arena",
+      "player": true
+    },
+    {
+      "day": 74,
+      "kind": "villager",
+      "who": "gen_owyg07b",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 74,
+      "kind": "monster",
+      "who": "suburb",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 76,
+      "kind": "monster",
+      "who": "congregation",
+      "cause": "combat",
+      "player": false
+    }
+  ],
+  "orphanTbEnds": [],
+  "wrapCounts": {
+    "spawnWorldMonster": 55,
+    "fieldFight": 54,
+    "recordWaveKill": 47,
+    "startCombat": 11,
+    "tbEnd": 11
+  },
+  "instrumentErrors": [],
+  "tbDerived": [
+    {
+      "seq": 1,
+      "day": 74,
+      "mid": "suburb",
+      "partySizeStart": 3,
+      "result": "won",
+      "kills": 1,
+      "hpDealtPct": 100,
+      "playerTurns": 8,
+      "barrierPushes": 0
+    },
+    {
+      "seq": 2,
+      "day": 76,
+      "mid": "congregation",
+      "partySizeStart": 2,
+      "result": "won",
+      "kills": 1,
+      "hpDealtPct": 100,
+      "playerTurns": 9,
+      "barrierPushes": 0
+    }
+  ],
+  "w4TurnsCount": 2,
+  "barrierPushesW4": 0,
+  "tbTurnsZipMismatch": false
+}

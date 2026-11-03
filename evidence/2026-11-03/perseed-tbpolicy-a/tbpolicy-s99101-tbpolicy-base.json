@@ -1,0 +1,1313 @@
+{
+  "seed": 99101,
+  "run": "tbpolicy-base",
+  "policy": "competent",
+  "anchorCommit": "865be47713d2",
+  "days": 119,
+  "gameDays": 118,
+  "endReason": "village-lost",
+  "won": false,
+  "villageLost": true,
+  "maxWave": 4,
+  "identity": "DIVERGED",
+  "spawnsW4": 13,
+  "tbCalls": 6,
+  "tbStarted": 5,
+  "fieldsW4": 7,
+  "exposures": [
+    {
+      "seq": 1,
+      "type": "tb",
+      "day": 59,
+      "mid": "suburb",
+      "wave": 4,
+      "fightId": "fmgpspiey_3jep3r",
+      "scholarAtStart": "gen_xfqo4bd",
+      "leadVid": "gen_xfqo4bd",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "vid": "gen_xfqo4bd",
+          "kind": "player",
+          "gear": {
+            "vid": "gen_xfqo4bd",
+            "armorP": 34,
+            "armed": true,
+            "weapon": "Hardlight knife",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "mid": "suburb",
+          "alive": true,
+          "hp": 975
+        }
+      ],
+      "leadGear": {
+        "vid": "gen_xfqo4bd",
+        "armorP": 34,
+        "armed": true,
+        "weapon": "Hardlight knife",
+        "vpFound": true,
+        "readError": null
+      },
+      "end": {
+        "result": "lost",
+        "day": 59,
+        "monsters": [
+          {
+            "mid": "suburb",
+            "alive": true,
+            "hp": 780
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "gen_xfqo4bd",
+            "alive": false,
+            "hp": -16
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "gen_xfqo4bd"
+        ]
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 2,
+      "type": "field",
+      "day": 69,
+      "mid": "algorithm",
+      "wave": 4,
+      "leadVid": "greta_hansen",
+      "partySizeStart": 3,
+      "offeredAllies": 2,
+      "offeredAllyVids": [
+        "naran_tumen",
+        "vasyl_shevchenko"
+      ],
+      "leadGear": {
+        "vid": "greta_hansen",
+        "armorP": 8,
+        "armed": true,
+        "weapon": "Machete",
+        "vpFound": true,
+        "readError": null
+      },
+      "end": {
+        "outcome": "vFlee",
+        "day": 69,
+        "rounds": 2,
+        "partySizeEnd": 3,
+        "allyVid": "naran_tumen",
+        "calledHelp": true,
+        "vTaken": 91,
+        "mDealt": 47,
+        "vHpLeft": 9,
+        "mHpLeft": 953,
+        "intent": "engage"
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 3,
+      "type": "field",
+      "day": 71,
+      "mid": "algorithm",
+      "wave": 4,
+      "leadVid": "nora_wilson",
+      "partySizeStart": 3,
+      "offeredAllies": 2,
+      "offeredAllyVids": [
+        "gen_ca2ijvi",
+        "naran_tumen"
+      ],
+      "leadGear": {
+        "vid": "nora_wilson",
+        "armorP": 15,
+        "armed": true,
+        "weapon": "Kitchen knife",
+        "vpFound": true,
+        "readError": null
+      },
+      "end": {
+        "outcome": "vDie",
+        "day": 71,
+        "rounds": 3,
+        "partySizeEnd": 3,
+        "allyVid": "gen_ca2ijvi",
+        "calledHelp": true,
+        "vTaken": 103,
+        "mDealt": 73,
+        "vHpLeft": 0,
+        "mHpLeft": 880,
+        "intent": "engage"
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 4,
+      "type": "field",
+      "day": 75,
+      "mid": "algorithm",
+      "wave": 4,
+      "leadVid": "greta_hansen",
+      "partySizeStart": 3,
+      "offeredAllies": 2,
+      "offeredAllyVids": [
+        "gen_ca2ijvi",
+        "naran_tumen"
+      ],
+      "leadGear": {
+        "vid": "greta_hansen",
+        "armorP": 8,
+        "armed": true,
+        "weapon": "Machete",
+        "vpFound": true,
+        "readError": null
+      },
+      "end": {
+        "outcome": "vDie",
+        "day": 75,
+        "rounds": 2,
+        "partySizeEnd": 3,
+        "allyVid": null,
+        "calledHelp": false,
+        "vTaken": 85,
+        "mDealt": 46,
+        "vHpLeft": 0,
+        "mHpLeft": 584,
+        "intent": "engage"
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 5,
+      "type": "field",
+      "day": 77,
+      "mid": "audit",
+      "wave": 4,
+      "leadVid": "catalina_reyes",
+      "partySizeStart": 3,
+      "offeredAllies": 2,
+      "offeredAllyVids": [
+        "vasyl_shevchenko",
+        "gen_ca2ijvi"
+      ],
+      "leadGear": {
+        "vid": "catalina_reyes",
+        "armorP": 12,
+        "armed": true,
+        "weapon": "Sharpened stick",
+        "vpFound": true,
+        "readError": null
+      },
+      "end": {
+        "outcome": "vFlee",
+        "day": 77,
+        "rounds": 3,
+        "partySizeEnd": 3,
+        "allyVid": "vasyl_shevchenko",
+        "calledHelp": true,
+        "vTaken": 88,
+        "mDealt": 98,
+        "vHpLeft": 12,
+        "mHpLeft": 727,
+        "intent": "engage"
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 6,
+      "type": "tb",
+      "day": 78,
+      "mid": "algorithm",
+      "wave": 4,
+      "fightId": "fmgpspinq_41qy9z",
+      "scholarAtStart": "gen_o1uj9aa",
+      "leadVid": "gen_o1uj9aa",
+      "partySizeStart": 3,
+      "party": [
+        {
+          "vid": "gen_o1uj9aa",
+          "kind": "player",
+          "gear": {
+            "vid": "gen_o1uj9aa",
+            "armorP": 40,
+            "armed": true,
+            "weapon": "Hunting spear",
+            "vpFound": true,
+            "readError": null
+          }
+        },
+        {
+          "vid": "catalina_reyes",
+          "kind": "villager",
+          "gear": {
+            "vid": "catalina_reyes",
+            "armorP": 12,
+            "armed": true,
+            "weapon": "Sharpened stick",
+            "vpFound": true,
+            "readError": null
+          }
+        },
+        {
+          "vid": "vasyl_shevchenko",
+          "kind": "villager",
+          "gear": {
+            "vid": "vasyl_shevchenko",
+            "armorP": 27,
+            "armed": true,
+            "weapon": "Crowbar",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "mid": "algorithm",
+          "alive": true,
+          "hp": 577
+        }
+      ],
+      "leadGear": {
+        "vid": "gen_o1uj9aa",
+        "armorP": 40,
+        "armed": true,
+        "weapon": "Hunting spear",
+        "vpFound": true,
+        "readError": null
+      },
+      "end": {
+        "result": "lost",
+        "day": 78,
+        "monsters": [
+          {
+            "mid": "algorithm",
+            "alive": true,
+            "hp": 308
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "gen_o1uj9aa",
+            "alive": false,
+            "hp": -18
+          },
+          {
+            "key": "v_catalina_reyes",
+            "kind": "villager",
+            "vid": "catalina_reyes",
+            "alive": false,
+            "hp": -17
+          },
+          {
+            "key": "v_vasyl_shevchenko",
+            "kind": "villager",
+            "vid": "vasyl_shevchenko",
+            "alive": true,
+            "hp": 52
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "gen_o1uj9aa",
+          "catalina_reyes"
+        ]
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 7,
+      "type": "tb",
+      "day": 78,
+      "mid": "audit",
+      "wave": 4,
+      "fightId": "fmgpspioc_dfchl2",
+      "scholarAtStart": "vasyl_shevchenko",
+      "leadVid": "vasyl_shevchenko",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "vid": "vasyl_shevchenko",
+          "kind": "player",
+          "gear": {
+            "vid": "vasyl_shevchenko",
+            "armorP": 27,
+            "armed": true,
+            "weapon": "Crowbar",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "mid": "audit",
+          "alive": true,
+          "hp": 727
+        }
+      ],
+      "leadGear": {
+        "vid": "vasyl_shevchenko",
+        "armorP": 27,
+        "armed": true,
+        "weapon": "Crowbar",
+        "vpFound": true,
+        "readError": null
+      },
+      "end": {
+        "result": "lost",
+        "day": 78,
+        "monsters": [
+          {
+            "mid": "audit",
+            "alive": true,
+            "hp": 727
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "vasyl_shevchenko",
+            "alive": false,
+            "hp": -10
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "vasyl_shevchenko"
+        ]
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 8,
+      "type": "tb",
+      "day": 78,
+      "mid": "audit",
+      "wave": 4,
+      "fightId": "fmgpspiol_55a9cl",
+      "scholarAtStart": "ethan_hunt",
+      "leadVid": "ethan_hunt",
+      "partySizeStart": 3,
+      "party": [
+        {
+          "vid": "ethan_hunt",
+          "kind": "player",
+          "gear": {
+            "vid": "ethan_hunt",
+            "armorP": 17,
+            "armed": true,
+            "weapon": "Hatchet",
+            "vpFound": true,
+            "readError": null
+          }
+        },
+        {
+          "vid": "gen_ca2ijvi",
+          "kind": "villager",
+          "gear": {
+            "vid": "gen_ca2ijvi",
+            "armorP": 16,
+            "armed": true,
+            "weapon": "Hatchet",
+            "vpFound": true,
+            "readError": null
+          }
+        },
+        {
+          "vid": "naran_tumen",
+          "kind": "villager",
+          "gear": {
+            "vid": "naran_tumen",
+            "armorP": 35,
+            "armed": true,
+            "weapon": "Crowbar",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "mid": "audit",
+          "alive": true,
+          "hp": 727
+        }
+      ],
+      "leadGear": {
+        "vid": "ethan_hunt",
+        "armorP": 17,
+        "armed": true,
+        "weapon": "Hatchet",
+        "vpFound": true,
+        "readError": null
+      },
+      "end": {
+        "result": "lost",
+        "day": 78,
+        "monsters": [
+          {
+            "mid": "audit",
+            "alive": true,
+            "hp": 727
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "ethan_hunt",
+            "alive": false,
+            "hp": -20
+          },
+          {
+            "key": "v_gen_ca2ijvi",
+            "kind": "villager",
+            "vid": "gen_ca2ijvi",
+            "alive": true,
+            "hp": 98
+          },
+          {
+            "key": "v_naran_tumen",
+            "kind": "villager",
+            "vid": "naran_tumen",
+            "alive": true,
+            "hp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "ethan_hunt"
+        ]
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 9,
+      "type": "tb",
+      "day": 78,
+      "mid": "audit",
+      "wave": 4,
+      "fightId": "fmgpspip4_en4y1z",
+      "scholarAtStart": "gen_ca2ijvi",
+      "leadVid": "gen_ca2ijvi",
+      "partySizeStart": 2,
+      "party": [
+        {
+          "vid": "gen_ca2ijvi",
+          "kind": "player",
+          "gear": {
+            "vid": "gen_ca2ijvi",
+            "armorP": 16,
+            "armed": true,
+            "weapon": "Hatchet",
+            "vpFound": true,
+            "readError": null
+          }
+        },
+        {
+          "vid": "naran_tumen",
+          "kind": "villager",
+          "gear": {
+            "vid": "naran_tumen",
+            "armorP": 35,
+            "armed": true,
+            "weapon": "Crowbar",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "mid": "audit",
+          "alive": true,
+          "hp": 727
+        }
+      ],
+      "leadGear": {
+        "vid": "gen_ca2ijvi",
+        "armorP": 16,
+        "armed": true,
+        "weapon": "Hatchet",
+        "vpFound": true,
+        "readError": null
+      },
+      "end": {
+        "result": "lost",
+        "day": 78,
+        "monsters": [
+          {
+            "mid": "audit",
+            "alive": true,
+            "hp": 727
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "gen_ca2ijvi",
+            "alive": false,
+            "hp": -33
+          },
+          {
+            "key": "v_naran_tumen",
+            "kind": "villager",
+            "vid": "naran_tumen",
+            "alive": true,
+            "hp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "gen_ca2ijvi"
+        ]
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 10,
+      "type": "field",
+      "day": 91,
+      "mid": "reunion",
+      "wave": 4,
+      "leadVid": "ella_johnson",
+      "partySizeStart": 2,
+      "offeredAllies": 1,
+      "offeredAllyVids": [
+        "chantal_mukendi"
+      ],
+      "leadGear": {
+        "vid": "ella_johnson",
+        "armorP": 42,
+        "armed": true,
+        "weapon": "Sling",
+        "vpFound": true,
+        "readError": null
+      },
+      "end": {
+        "outcome": "vFlee",
+        "day": 91,
+        "rounds": 2,
+        "partySizeEnd": 2,
+        "allyVid": "chantal_mukendi",
+        "calledHelp": true,
+        "vTaken": 73,
+        "mDealt": 11,
+        "vHpLeft": 8,
+        "mHpLeft": 1189,
+        "intent": "engage"
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 11,
+      "type": "field",
+      "day": 94,
+      "mid": "reunion",
+      "wave": 4,
+      "leadVid": "visjoin_92",
+      "partySizeStart": 3,
+      "offeredAllies": 2,
+      "offeredAllyVids": [
+        "chantal_mukendi",
+        "boris_kowalski"
+      ],
+      "leadGear": {
+        "vid": "visjoin_92",
+        "armorP": 5,
+        "armed": true,
+        "weapon": "Crowbar",
+        "vpFound": true,
+        "readError": null
+      },
+      "end": {
+        "outcome": "vDie",
+        "day": 94,
+        "rounds": 2,
+        "partySizeEnd": 3,
+        "allyVid": null,
+        "calledHelp": false,
+        "vTaken": 133,
+        "mDealt": 13,
+        "vHpLeft": 0,
+        "mHpLeft": 1176,
+        "intent": "engage"
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 12,
+      "type": "field",
+      "day": 103,
+      "mid": "reunion",
+      "wave": 4,
+      "leadVid": "visjoin_100",
+      "partySizeStart": 2,
+      "offeredAllies": 1,
+      "offeredAllyVids": [
+        "boris_kowalski"
+      ],
+      "leadGear": {
+        "vid": "visjoin_100",
+        "armorP": 19,
+        "armed": true,
+        "weapon": "Machete",
+        "vpFound": true,
+        "readError": null
+      },
+      "end": {
+        "outcome": "vDie",
+        "day": 103,
+        "rounds": 2,
+        "partySizeEnd": 2,
+        "allyVid": null,
+        "calledHelp": false,
+        "vTaken": 96,
+        "mDealt": 26,
+        "vHpLeft": 0,
+        "mHpLeft": 1174,
+        "intent": "engage"
+      },
+      "kills": [],
+      "superseded": false
+    }
+  ],
+  "killRows": [],
+  "unlinkedKills": [],
+  "spawns": [
+    {
+      "day": 49,
+      "id": "reunion",
+      "tx": 8,
+      "ty": 4
+    },
+    {
+      "day": 49,
+      "id": "suburb",
+      "tx": 3,
+      "ty": 6
+    },
+    {
+      "day": 49,
+      "id": "audit",
+      "tx": 0,
+      "ty": 1
+    },
+    {
+      "day": 59,
+      "id": "suburb",
+      "tx": 4,
+      "ty": 8
+    },
+    {
+      "day": 60,
+      "id": "influencer",
+      "tx": 4,
+      "ty": 5
+    },
+    {
+      "day": 62,
+      "id": "algorithm",
+      "tx": 5,
+      "ty": 4
+    },
+    {
+      "day": 69,
+      "id": "audit",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 71,
+      "id": "audit",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 78,
+      "id": "algorithm",
+      "tx": 5,
+      "ty": 3
+    },
+    {
+      "day": 79,
+      "id": "reunion",
+      "tx": 8,
+      "ty": 1
+    },
+    {
+      "day": 90,
+      "id": "reunion",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 96,
+      "id": "suburb",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 111,
+      "id": "eulogy",
+      "tx": 4,
+      "ty": 3
+    }
+  ],
+  "deathEvents": [
+    {
+      "day": 4,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 7,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 7,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 7,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 7,
+      "kind": "monster",
+      "who": "anaconda_empress",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 7,
+      "kind": "monster",
+      "who": "nevermore",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 7,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "rut_king",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 9,
+      "kind": "monster",
+      "who": "understudy",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 9,
+      "kind": "monster",
+      "who": "ducks_in_a_row",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 9,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 9,
+      "kind": "monster",
+      "who": "review_drone",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 9,
+      "kind": "villager",
+      "who": "gen_cqgh878",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 12,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 14,
+      "kind": "monster",
+      "who": "landlord",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 14,
+      "kind": "monster",
+      "who": "ducks_in_a_row",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 15,
+      "kind": "monster",
+      "who": "sunbasker",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 15,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 15,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 15,
+      "kind": "monster",
+      "who": "voice_mimic_radio",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 16,
+      "kind": "monster",
+      "who": "voice_mimic_radio",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 16,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "villager",
+      "who": "diana_osei",
+      "cause": "Choir Toad",
+      "player": false
+    },
+    {
+      "day": 20,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 24,
+      "kind": "monster",
+      "who": "mirror_stag",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 24,
+      "kind": "monster",
+      "who": "understudy",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 25,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 26,
+      "kind": "villager",
+      "who": "sanne_bakker",
+      "cause": "sickness",
+      "player": false
+    },
+    {
+      "day": 29,
+      "kind": "villager",
+      "who": "gen_0tkxrod",
+      "cause": "a wound that wouldn't close",
+      "player": false
+    },
+    {
+      "day": 32,
+      "kind": "villager",
+      "who": "lucas_brown",
+      "cause": "a wound that wouldn't close",
+      "player": false
+    },
+    {
+      "day": 32,
+      "kind": "villager",
+      "who": "aria_thompson",
+      "cause": "sickness",
+      "player": false
+    },
+    {
+      "day": 36,
+      "kind": "monster",
+      "who": "understudy",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 43,
+      "kind": "villager",
+      "who": "yuki_mori",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 45,
+      "kind": "monster",
+      "who": "memory_projector",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 45,
+      "kind": "monster",
+      "who": "callback",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 46,
+      "kind": "monster",
+      "who": "chorus_line",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 47,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 48,
+      "kind": "monster",
+      "who": "terms_of_service",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 48,
+      "kind": "monster",
+      "who": "voice_mimic_radio",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 48,
+      "kind": "monster",
+      "who": "focus_group",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 48,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 49,
+      "kind": "monster",
+      "who": "terms_of_service",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 58,
+      "kind": "monster",
+      "who": "memory_projector",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 58,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 59,
+      "kind": "villager",
+      "who": "gen_xfqo4bd",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 61,
+      "kind": "villager",
+      "who": "gen_ceypn1u",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 71,
+      "kind": "villager",
+      "who": "nora_wilson",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 72,
+      "kind": "monster",
+      "who": "sunback",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 72,
+      "kind": "monster",
+      "who": "mirrormoth",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 74,
+      "kind": "monster",
+      "who": "chorus_line",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 75,
+      "kind": "villager",
+      "who": "greta_hansen",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 76,
+      "kind": "monster",
+      "who": "spool",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 78,
+      "kind": "person",
+      "who": "catalina_reyes",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 78,
+      "kind": "villager",
+      "who": "gen_o1uj9aa",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 78,
+      "kind": "villager",
+      "who": "vasyl_shevchenko",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 78,
+      "kind": "villager",
+      "who": "ethan_hunt",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 78,
+      "kind": "villager",
+      "who": "gen_ca2ijvi",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 82,
+      "kind": "monster",
+      "who": "giant_mosquito",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 91,
+      "kind": "villager",
+      "who": "ella_johnson",
+      "cause": "starvation",
+      "player": false
+    },
+    {
+      "day": 94,
+      "kind": "villager",
+      "who": "visjoin_92",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 103,
+      "kind": "villager",
+      "who": "visjoin_100",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 116,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "villager combat",
+      "player": false
+    }
+  ],
+  "orphanTbEnds": [
+    {
+      "day": 79,
+      "result": "routed",
+      "monsters": [
+        {
+          "mid": "audit",
+          "alive": true,
+          "hp": 727
+        }
+      ]
+    }
+  ],
+  "wrapCounts": {
+    "spawnWorldMonster": 51,
+    "fieldFight": 72,
+    "recordWaveKill": 44,
+    "startCombat": 13,
+    "tbEnd": 13
+  },
+  "instrumentErrors": [],
+  "tbDerived": [
+    {
+      "seq": 1,
+      "day": 59,
+      "mid": "suburb",
+      "partySizeStart": 1,
+      "result": "lost",
+      "kills": 0,
+      "hpDealtPct": 20,
+      "playerTurns": 10,
+      "barrierPushes": 0
+    },
+    {
+      "seq": 6,
+      "day": 78,
+      "mid": "algorithm",
+      "partySizeStart": 3,
+      "result": "lost",
+      "kills": 0,
+      "hpDealtPct": 46.6,
+      "playerTurns": 17,
+      "barrierPushes": 0
+    },
+    {
+      "seq": 7,
+      "day": 78,
+      "mid": "audit",
+      "partySizeStart": 1,
+      "result": "lost",
+      "kills": 0,
+      "hpDealtPct": 0,
+      "playerTurns": 6,
+      "barrierPushes": 0
+    },
+    {
+      "seq": 8,
+      "day": 78,
+      "mid": "audit",
+      "partySizeStart": 3,
+      "result": "lost",
+      "kills": 0,
+      "hpDealtPct": 0,
+      "playerTurns": 5,
+      "barrierPushes": 0
+    },
+    {
+      "seq": 9,
+      "day": 78,
+      "mid": "audit",
+      "partySizeStart": 2,
+      "result": "lost",
+      "kills": 0,
+      "hpDealtPct": 0,
+      "playerTurns": 5,
+      "barrierPushes": 0
+    }
+  ],
+  "w4TurnsCount": 5,
+  "barrierPushesW4": 0,
+  "tbTurnsZipMismatch": false
+}
