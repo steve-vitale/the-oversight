@@ -1,0 +1,332 @@
+{
+  "seeds": [
+    96101,
+    96102,
+    96103,
+    96104,
+    96105,
+    96106,
+    96107,
+    96108
+  ],
+  "wall": [
+    {
+      "seed": 96101,
+      "daysAlive": 100,
+      "endReason": "survived",
+      "rank": null,
+      "wave": 4,
+      "arc": 3,
+      "win": false,
+      "national": false,
+      "deaths": 11,
+      "meals": 719,
+      "packMeals": 29
+    },
+    {
+      "seed": 96102,
+      "daysAlive": 64,
+      "endReason": "village-lost",
+      "rank": null,
+      "wave": 3,
+      "arc": 3,
+      "win": false,
+      "national": false,
+      "deaths": 15,
+      "meals": 444,
+      "packMeals": 57
+    },
+    {
+      "seed": 96103,
+      "daysAlive": 50,
+      "endReason": "village-lost",
+      "rank": null,
+      "wave": 3,
+      "arc": 3,
+      "win": false,
+      "national": false,
+      "deaths": 9,
+      "meals": 409,
+      "packMeals": 49
+    },
+    {
+      "seed": 96104,
+      "daysAlive": 22,
+      "endReason": "village-lost",
+      "rank": null,
+      "wave": 2,
+      "arc": 3,
+      "win": false,
+      "national": false,
+      "deaths": 8,
+      "meals": 201,
+      "packMeals": 24
+    },
+    {
+      "seed": 96105,
+      "daysAlive": 30,
+      "endReason": "village-lost",
+      "rank": null,
+      "wave": 2,
+      "arc": 3,
+      "win": false,
+      "national": false,
+      "deaths": 9,
+      "meals": 293,
+      "packMeals": 12
+    },
+    {
+      "seed": 96106,
+      "daysAlive": 100,
+      "endReason": "survived",
+      "rank": null,
+      "wave": 3,
+      "arc": 3,
+      "win": false,
+      "national": false,
+      "deaths": 3,
+      "meals": 848,
+      "packMeals": 30
+    },
+    {
+      "seed": 96107,
+      "daysAlive": 66,
+      "endReason": "village-lost",
+      "rank": null,
+      "wave": 4,
+      "arc": 3,
+      "win": false,
+      "national": false,
+      "deaths": 7,
+      "meals": 586,
+      "packMeals": 70
+    },
+    {
+      "seed": 96108,
+      "daysAlive": 100,
+      "endReason": "survived",
+      "rank": null,
+      "wave": 3,
+      "arc": 3,
+      "win": false,
+      "national": false,
+      "deaths": 9,
+      "meals": 734,
+      "packMeals": 57
+    }
+  ],
+  "nPrimary": 327,
+  "nDupGroups": 1,
+  "dups": [
+    {
+      "seed": 96101,
+      "key": "gen_362zi8p|18",
+      "calls": [
+        {
+          "take": 1183,
+          "want": 1183,
+          "poolBefore": null,
+          "topUpDoneBefore": null
+        },
+        {
+          "take": 17,
+          "want": 1214,
+          "poolBefore": 17.353875923201485,
+          "topUpDoneBefore": true
+        }
+      ]
+    }
+  ],
+  "shortfall": {
+    "mean": 15.2,
+    "median": 0,
+    "shareGt0": 0.024,
+    "shareGe100": 0.021,
+    "shareGe500": 0.012,
+    "max": 1462
+  },
+  "takeWant": {
+    "mean": 0.978,
+    "median": 1,
+    "shareFull": 0.976
+  },
+  "dawnGap": {
+    "mean": -111,
+    "median": -112
+  },
+  "topUp": {
+    "mean": 0,
+    "median": 0
+  },
+  "dawn": {
+    "mean": 693,
+    "median": 600
+  },
+  "want": {
+    "mean": 582,
+    "median": 489
+  },
+  "decomposition": {
+    "totalShortfallKcal": 4957,
+    "topUpGapShare": 1,
+    "theftGapShare": 0,
+    "residualShare": 0,
+    "meanTopUpGap": 15.2,
+    "meanTheftGap": 0,
+    "meanResidual": 0,
+    "nTopUpBinding": 8,
+    "nTheftBinding": 0,
+    "nResidualLtNeg100": 0,
+    "nResidualGt100": 0
+  },
+  "hunger": {
+    "meanAtPack": 93.5,
+    "shareGe70AtPack": 0.969,
+    "meanDawnGapHungry": -111.8,
+    "meanDawnGapNotHungry": -87
+  },
+  "pantry": {
+    "meanBefore": 20899.5,
+    "shortfallWithPantryShort": 8,
+    "shortfallWithPantryEnough": 0,
+    "shortfallPantryUnknown": 0,
+    "meanPantryBeforeShort": 150,
+    "meanPantryBeforeFull": 21419.8
+  },
+  "roster": {
+    "meanPantryBeforeFirstHalf": 20270.3,
+    "meanPantryBeforeSecondHalf": 21783,
+    "shortfallRateFirstHalf": 0.026,
+    "shortfallRateSecondHalf": 0.022
+  },
+  "adequacy": {
+    "packDayAdequate": 0.985,
+    "selfFedAwayDays": 797,
+    "selfFedAdequate": 0.995,
+    "fastingAwayDays": 0
+  },
+  "reseedDayParts": {
+    "4": 327
+  },
+  "starvationDeaths": [
+    {
+      "seed": 96102,
+      "day": 26,
+      "who": "Katarina",
+      "awayAtDeath": true,
+      "pantry": 0,
+      "fresh": 0
+    },
+    {
+      "seed": 96102,
+      "day": 63,
+      "who": "Claudete",
+      "awayAtDeath": true,
+      "pantry": 0,
+      "fresh": 0
+    },
+    {
+      "seed": 96104,
+      "day": 19,
+      "who": "Luke",
+      "awayAtDeath": false,
+      "pantry": 0,
+      "fresh": 0
+    },
+    {
+      "seed": 96104,
+      "day": 19,
+      "who": "Leo",
+      "awayAtDeath": false,
+      "pantry": 0,
+      "fresh": 0
+    },
+    {
+      "seed": 96104,
+      "day": 20,
+      "who": "Adaeze",
+      "awayAtDeath": false,
+      "pantry": 0,
+      "fresh": 0
+    },
+    {
+      "seed": 96104,
+      "day": 20,
+      "who": "Aurora",
+      "awayAtDeath": false,
+      "pantry": 0,
+      "fresh": 0
+    },
+    {
+      "seed": 96104,
+      "day": 20,
+      "who": "Jovan",
+      "awayAtDeath": false,
+      "pantry": 0,
+      "fresh": 0
+    },
+    {
+      "seed": 96105,
+      "day": 28,
+      "who": "Norman",
+      "awayAtDeath": false,
+      "pantry": 0,
+      "fresh": 0
+    },
+    {
+      "seed": 96105,
+      "day": 28,
+      "who": "Kavya",
+      "awayAtDeath": false,
+      "pantry": 0,
+      "fresh": 0
+    },
+    {
+      "seed": 96105,
+      "day": 29,
+      "who": "Tom",
+      "awayAtDeath": false,
+      "pantry": 0,
+      "fresh": 0
+    },
+    {
+      "seed": 96105,
+      "day": 29,
+      "who": "Giulia",
+      "awayAtDeath": false,
+      "pantry": 0,
+      "fresh": 0
+    },
+    {
+      "seed": 96105,
+      "day": 29,
+      "who": "Simone",
+      "awayAtDeath": false,
+      "pantry": 0,
+      "fresh": 0
+    },
+    {
+      "seed": 96105,
+      "day": 29,
+      "who": "Sari",
+      "awayAtDeath": false,
+      "pantry": 0,
+      "fresh": 0
+    }
+  ],
+  "nStarvationDeaths": 13,
+  "awayLinesSample": [
+    "s96101 d49 Liam eats away from the haven — 1354 kcal from the pack — while hurt (health 5/100), far from the haven's shelves.",
+    "s96101 d84 Umberto eats away from the haven — 1353 kcal from the pack — while hurt (health 7/100), far from the haven's shelves.",
+    "s96102 d8 Arturo eats away from the haven — 1390 kcal from the pack — while hurt (health 4/100), far from the haven's shelves.",
+    "s96102 d9 Arturo eats away from the haven — 1236 kcal from the pack — while hurt (health 7/100), far from the haven's shelves.",
+    "s96102 d26 Katarina eats away from the haven on a short pack meal — 1200 kcal from the pack, 1269 wanted — while hurt (health 4/100). The haven's shelves can't reach them out here.",
+    "s96102 d63 Claudete is away from the haven, hurt (health 1/100), and their pack is empty — nothing to eat out here.",
+    "s96103 d45 Sung eats away from the haven — 1273 kcal from the pack — while hurt (health 3/100), far from the haven's shelves.",
+    "s96104 d10 Emily eats away from the haven — 1434 kcal from the pack — while hurt (health 6/100), far from the haven's shelves.",
+    "s96105 d27 Norman eats away from the haven — 1485 kcal from the pack — while hurt (health 4/100), far from the haven's shelves.",
+    "s96108 d89 Nina eats away from the haven — 1251 kcal from the pack — while hurt (health 6/100), far from the haven's shelves."
+  ],
+  "nAwayLines": 10,
+  "errors": []
+}
