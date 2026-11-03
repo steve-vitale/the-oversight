@@ -107,7 +107,39 @@ ok('alive-but-uncounted killer', function () {
   assert.strictEqual(s.perKiller[0].class, 'alive-but-uncounted');
 });
 
-// 9. Live harness smoke: real recordWaveKill + real readiness.
+// 9. Census instrument wiring on a stub Game (no harness needed).
+ok('census instrument rows', function () {
+  const CENS = require(path.join(__dirname, 'vetbar-census-instrument-20261103'));
+  const stub = {
+    state: { scholar: { day: 5, monster: null }, village: { roster: [] }, waveKillLog: [] },
+    data: { monsters: [{ id: 'm4', wave: 4 }, { id: 'm3', wave: 3 }], villagers: [] },
+    villagerId: 'v_scholar', pendingMonsterId: null, pendingEncounter: false,
+    spawnWorldMonster: function () { return { id: 'm4', wave: 4 }; },
+    startCombat: function () { return null; },
+    tbEnd: function () { return null; },
+    fieldFight: function () { return { outcome: 'vKill' }; },
+    recordWaveKill: function () { return null; },
+  };
+  const inst = CENS.install(stub);
+  stub.spawnWorldMonster({ id: 'm4' }, 1, 2, {});
+  stub.pendingMonsterId = 'm4'; stub.pendingEncounter = true;
+  stub.startCombat('m4');
+  stub.tbfight = { fighters: [{ kind: 'monster', mdef: { id: 'm4' }, alive: false, hp: 0 }] };
+  stub.tbEnd('won');
+  stub.fieldFight('v_x', { id: 'm4' }, { id: 'm4' }, {});
+  stub.recordWaveKill('m4', 'v_x', 'wild', null);
+  assert.strictEqual(inst.t.spawns.length, 1);
+  assert.strictEqual(inst.t.starts.length, 1);
+  assert.strictEqual(inst.t.tbEnds.length, 1);
+  assert.strictEqual(inst.t.tbEnds[0].result, 'won');
+  assert.strictEqual(inst.t.fields.length, 1);
+  assert.strictEqual(inst.t.fields[0].outcome, 'vKill');
+  assert.strictEqual(inst.t.killRows.length, 1);
+  assert.strictEqual(inst.t.instrumentErrors.length, 0);
+  inst.uninstall();
+});
+
+// 10. Live harness smoke: real recordWaveKill + real readiness.
 (async function () {
   const { loadGame, setupGame } = require(path.join(__dirname, 'sim-harness'));
   const INST = require(path.join(__dirname, 'vetbar-instrument-20261103'));
@@ -135,5 +167,5 @@ ok('alive-but-uncounted killer', function () {
   } finally {
     try { inst.uninstall(); } catch (e) {}
   }
-  console.log('VETBAR-PROOF ' + pass + '/9 PASS');
+  console.log('VETBAR-PROOF ' + pass + ' PASS');
 })().catch(function (e) { console.error('VETBAR-PROOF FAIL: ' + (e && e.stack)); process.exitCode = 1; });
