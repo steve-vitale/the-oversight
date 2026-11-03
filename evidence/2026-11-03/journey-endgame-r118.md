@@ -339,12 +339,23 @@ break. The re-seed proposal stands.
 
 ## Closeout
 
-- Commit: (to be filled at landing — instrument scripts
-  (probe + analyzer + compare, r110 renames + the r118
-  instruments) + evidence files (prereg, pilot log/err,
-  det log/err, sweep log/err, analysis txt/err, checkquick log,
-  run note, 14 perseed JSON/transcript files, 6 r118-pilot
-  snapshot files, heartbeat log). Zero src/js diff.
+- Commit 1: d3312f95 (instrument scripts (probe + analyzer +
+  compare, r110 renames + the r118 instruments) + evidence files
+  (prereg, pilot log/err, det log/err, sweep log/err, analysis
+  txt/err, checkquick log, run note, 14 perseed JSON/transcript
+  files, 6 r118-pilot snapshot files). Zero src/js diff.
+- Index-clobber incident (house lesson, third class sighted):
+  after the safe-commit, the worktree index showed all 34
+  committed files as staged deletions, and a mid-repair
+  `git diff HEAD` read 189,990 deletions — a torn-index
+  phantom, NOT file loss. Repair: per-file `git update-index
+  --add --cacheinfo` from HEAD blobs (34 files); verified after:
+  `git status` empty, `git diff HEAD` empty, `git diff
+  --cached` empty, hash-object == HEAD blob on spot-checked
+  files, all 7 perseed JSONs parse with correct fight counts.
+  The commit itself was always correct (34 files, 189,990
+  insertions).
+- Commit 2: (this closeout section) — run-note closeout only.
 - Rebase/merge/release: (to be filled at landing).
 - Rotation-b written 4->5, verified by re-read (social life
   next). Lock deleted only after verifying it still carries
