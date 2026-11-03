@@ -3,7 +3,9 @@
 // description: The galactic table — integrated endgame. Prices the run (never gates on godhood), offers the seven earned paths (feared, indispensable, beloved, witness, defiant, assimilated, relay), each a played failable challenge with light/dark branches earned from real behavior. Failure resolves the story (lesser frames, tribute, people) — never deletes the run. Grounding (humanity) is the two-way cost of integration. NPC ascension + facilitation credited honestly.
 // provides:
 //   - tableSeat()
-//   - tableSeatLine(), tableWithdrawLine(), fullSeatShortfall() — seat voicing; the shortfall names what a full seat still wants, in plain words
+//   - tableSeatLine()
+//   - tableWithdrawLine()
+//   - fullSeatShortfall()
 //   - tableEarnedPaths()
 //   - tableBranch(pathId)
 //   - tableRegisterPath(def)
