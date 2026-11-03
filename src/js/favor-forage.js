@@ -198,10 +198,22 @@
     const res=this.doAction('forage');
     if(this.over||this.villagerId!==r.bearer){this.save();return{ok:false,incomplete:true,line:'This life has ended. The outing did not finish.'};}
     if(!res){
-     // The solo press itself said why (pack full, nothing here). Nothing
-     // was gathered, so nothing is recorded — no free haul, no free talk.
+     // The solo press itself said why (pack full, nothing here) into
+     // narration — but the favor dialogue shows THIS return line, and
+     // it used to hedge ("the patch, or your pack, said no"), leaving
+     // the player unsure which problem to fix. GAP-BATCH 17: name the
+     // actual refusal. A pack with less than one cell's take (~0.4kg)
+     // free cannot fit anything from this patch, so the refusal is
+     // the pack; otherwise it is the patch. Nothing was gathered, so
+     // nothing is recorded — no free haul, no free talk.
+     // Both lines keep the old "Nothing came of that press" prefix:
+     // journey-deepening drivers count that substring as the press-
+     // failed bucket, and the discriminator after it is what names
+     // the actual refusal for the player.
+     let line='Nothing came of that press. This patch has nothing left to give right now — walk to another green patch.';
+     try{ if(!this.canCarry||!this.canCarry(0.4)) line='Nothing came of that press — your pack is full, so nothing from this patch could fit. Eat something, or leave some for the woods, and press again.'; }catch(e){ console.warn('favor forage pack check', e); }
      this.save();
-     return{ok:false,incomplete:true,line:'Nothing came of that press. The patch, or your pack, said no.'};
+     return{ok:false,incomplete:true,line};
     }
     const fresh=(s.inventory||[]).filter(it=>!before.has(it));
     const edible=fresh.filter(it=>(it.kcalEach||0)>0&&it.edible!==false);

@@ -1194,7 +1194,20 @@
             const pieceName = cdef.name || pick.recipe.name || pick.rid;
             if (!success) {
               try { if (this.tele) this.tele('armor_craft', { vid: vid, item: pick.rid, ok: false }); } catch (e) {}
-              // no silent actions: a failed craft is witnessed when you're home
+              // SILENT-ARMOR-CRAFT DECISION (gap-batch 2026-11-03, item
+              // 17): the craft speaks ONLY when you're home to witness
+              // it, and stays silent when you're away — deliberately.
+              // Standing intent, not a new rule: "If you don't know,
+              // it doesn't show" (DIRECTIVES.md), and home narration
+              // is presence-gated across systems (game.js
+              // home_narration_presence: villageLives/ambientSocial/
+              // firesideTeaching narrate only when playerAtHaven()).
+              // The no-silent-actions rule is still honored: the
+              // RESULT is visible (the piece enters spares, the spares
+              // flow moves it to whoever gains most, the villager
+              // wears it, and the tele event records it) — only the
+              // unwitnessable moment stays silent. A failed craft is
+              // witnessed when you're home:
               if (atHaven) { try { this.say(`${nm} spent the afternoon sewing, and the ${pieceName} came apart in their hands. The bark strips are wasted.`); } catch (e) {} }
               continue; // materials already consumed above — the woods keep them
             }

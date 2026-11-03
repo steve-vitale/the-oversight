@@ -9237,6 +9237,51 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     takeQuarantineNotice() { try { return S.state.takeQuarantineNotice(); } catch (e) { return null; } },
     listQuarantines() { try { return S.state.listQuarantines(); } catch (e) { return []; } },
     restoreQuarantine(qkey) { try { return S.state.restoreQuarantine(qkey); } catch (e) { return false; } },
+    // DEAD-PROMISE MIGRATION (gap-batch 2026-11-03, item 13): promises
+    // released at removal time (betrayal.js removeVillager, break-it
+    // social r9: a promise to the removed is neither kept nor broken,
+    // it's released) — but only for removals that happen AFTER that
+    // code landed. An old save can therefore carry a still-open
+    // promise to someone who is already a corpse: the journal shows
+    // it OPEN forever, and the favor call returns 'no longer
+    // available' without ever closing it. On load, release exactly
+    // those: open promises whose holder is dead by SAVE-PERSISTED
+    // evidence (village.deathSeen, a person-corpse naming them, or a
+    // dead-marked rosterChars record), plus the same-session
+    // deadMarked read when it fires. This mirrors the live-death
+    // release exactly: kept='released', codex row updated, favorLedger
+    // untouched (the call-time backstop still speaks for the favor
+    // itself, as it does after a live death). Idempotent: released
+    // promises are skipped on the next load. Returns the count.
+    // Deliberately NOT extended to off-roster-but-living holders: a
+    // promise to someone who walked away alive is not a corpse case,
+    // and this migration cannot tell it from a stale removal.
+    migrateDeadPromises() {
+      let released = 0;
+      try {
+        const v = (this.state || {}).village || {};
+        const promises = v.promises || {};
+        const deathSeen = v.deathSeen || {};
+        const corpseVids = {};
+        for (const c of (this.state.corpses || [])) {
+          if (c && c.villagerId) corpseVids[c.villagerId] = true;
+        }
+        for (const vid of Object.keys(promises)) {
+          const p = promises[vid];
+          if (!p || p.kept) continue;
+          if (vid === this.villagerId) continue;
+          let dead = !!deathSeen[vid] || !!corpseVids[vid];
+          if (!dead && this.deadMarked) {
+            try { dead = !!this.deadMarked(vid); } catch (e) { console.warn('[promises] migrateDeadPromises deadMarked', e); }
+          }
+          if (!dead) continue;
+          p.kept = 'released';
+          released++;
+          try { if (this.journalFavorPromise) this.journalFavorPromise(vid, p); } catch (e) { console.warn('[promises] migrateDeadPromises journal', e); }
+        }
+      } catch (e) { console.warn('[promises] migrateDeadPromises', e); }
+      return released;
+    },
     load(key) {
       const s = S.state.load(key);
       // SCHOLAR GUARD (break-it persistence 2026-10-09): a save without a
@@ -9405,6 +9450,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const movedLanes = this.migrateAbilityLanes();
         if (movedLanes > 0) this.say(`(Your human know-how now lives in Skills, not ability slots — ${this.pluralize(movedLanes, 'ability', 'abilities')} moved; nothing was lost.)`);
       } catch (e) { console.warn('[lanes] migrateAbilityLanes', e); }
+
       // SYNERGIES: recompute on load (saves predate the resonance system).
       // Discovered ones stay discovered; no re-announcement (checkSynergies only says on new).
       this.recomputeActiveSynergies();
@@ -9657,6 +9703,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           } // end else: fighters.length > 0
         }
       } catch (e) {}
+      // DEAD PROMISES (gap-batch 2026-11-03, item 13): close old-save
+      // corpse cases at the load boundary — see migrateDeadPromises.
+      // Placed last so the save below persists fully-restored state.
+      // Saves only when something was actually released, like the
+      // favor migrations' wrappers do.
+      try {
+        const releasedDead = this.migrateDeadPromises();
+        if (releasedDead > 0) {
+          this.say(`(Promises you made to ${releasedDead === 1 ? 'someone who has since died' : 'people who have since died'} were closed on this load — released, not broken. Nothing is owed on them anymore.)`);
+          try { this.save(); } catch (e2) { console.warn('[promises] migrateDeadPromises save', e2); }
+        }
+      } catch (e) { console.warn('[promises] migrateDeadPromises', e); }
       return true;
     },
     // ENDING COPY (journey-crisis r37 2026-10-21): the village-lost end screen
@@ -21135,7 +21193,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         ? (exposed ? `(${netTxt} health, restless night.${conservedNote}${exposureNote})`
                    : `(${netTxt} health, wrung-out morning.${conservedNote}${exposureNote})`)
         : `(${netTxt} health, energy restored.${conservedNote} ${prev.note})`;
-      this.say(`Dawn. You wake ${rested}. ${wakeAcct}${nightmareNote}`);
+      // NIGHT-OUT (gap-batch 2026-11-03, item 17): the wake line reported
+      // health and rest but never said in plain words that the night
+      // was spent OUT — away from Haven, still out here at dawn. A
+      // night in the hall or a bunk needs no such line; a night in the
+      // wild does, because "where did I wake up" is the first thing a
+      // player out on a trip needs to know.
+      let nightOutNote = '';
+      try {
+        const t = this.playerTile ? this.playerTile() : null;
+        if (t && t.type !== 'haven') nightOutNote = ` You spent the night out here, away from Haven — and you're still out here at dawn.`;
+      } catch (e) { console.warn('night-out line', e); }
+      this.say(`Dawn. You wake ${rested}. ${wakeAcct}${nightmareNote}${nightOutNote}`);
       // DISEASE (Steve 2026-10-09): real rest helps the slow-folk sicknesses.
       try { this.sickRestTick('sleep'); } catch (e) {}
       // DIAGNOSTIC removed 2026-10-12 (see comment above): was
