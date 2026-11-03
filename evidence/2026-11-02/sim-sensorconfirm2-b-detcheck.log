@@ -1,0 +1,6 @@
+sim-sensorconfirm2-b determinism spot-check (prereg: first 3 legs in seed order, since fewer than 3 collapsing seeds exist)
+seed 81001: MATCH (byte-identical full JSON line on re-run)
+seed 81002: MATCH (byte-identical full JSON line on re-run)
+seed 81003: MATCH (byte-identical full JSON line on re-run)
+Result: 3/3 byte-identical. Judged legs run on first-run lines, per prereg.
+Tracer re-runs via verbatim scripts/trace-gatecover-b.js, one node process per seed, env POLICY=competent COMPETENT_FEAST=0 SEATDRIVE=0 PLENTYDEPRI=0 DEPOSITGATE=1 DAYS=30.
