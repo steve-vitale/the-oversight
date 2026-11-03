@@ -1,0 +1,759 @@
+{
+  "seed": 99105,
+  "run": "tbpolicy-var",
+  "policy": "tbhold",
+  "anchorCommit": "b159a111b647",
+  "days": 112,
+  "gameDays": 111,
+  "endReason": "village-lost",
+  "won": false,
+  "villageLost": true,
+  "maxWave": 4,
+  "identity": "DIVERGED",
+  "spawnsW4": 4,
+  "tbCalls": 2,
+  "tbStarted": 2,
+  "fieldsW4": 0,
+  "exposures": [
+    {
+      "seq": 1,
+      "type": "tb",
+      "day": 105,
+      "mid": "influencer",
+      "wave": 4,
+      "fightId": "fmgpspirg_d26s8p",
+      "scholarAtStart": "nino_kapanadze",
+      "leadVid": "nino_kapanadze",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "vid": "nino_kapanadze",
+          "kind": "player",
+          "gear": {
+            "vid": "nino_kapanadze",
+            "armorP": 43,
+            "armed": true,
+            "weapon": "Phase blade",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "mid": "influencer",
+          "alive": true,
+          "hp": 850
+        }
+      ],
+      "leadGear": {
+        "vid": "nino_kapanadze",
+        "armorP": 43,
+        "armed": true,
+        "weapon": "Phase blade",
+        "vpFound": true,
+        "readError": null
+      },
+      "end": {
+        "result": "won",
+        "day": 106,
+        "monsters": [
+          {
+            "mid": "influencer",
+            "alive": false,
+            "hp": -54
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "nino_kapanadze",
+            "alive": true,
+            "hp": 41
+          }
+        ],
+        "monsterDeadW4": 1,
+        "monsterTotalW4": 1,
+        "humansDead": []
+      },
+      "kills": [
+        {
+          "day": 106,
+          "fn": "recordWaveKill",
+          "pyrrhic": false,
+          "mid": "influencer",
+          "wave": 4,
+          "by": "nino_kapanadze",
+          "via": "player",
+          "scholarAtKill": "nino_kapanadze",
+          "wasScholar": true,
+          "logLenBefore": 48,
+          "logLenAfter": 49,
+          "entryAdded": true,
+          "linkSeq": 1,
+          "linkHow": "tb-open",
+          "killerDeadAtRecord": false
+        }
+      ],
+      "superseded": false
+    },
+    {
+      "seq": 2,
+      "type": "tb",
+      "day": 107,
+      "mid": "eater",
+      "wave": 4,
+      "fightId": "fmgpspis1_g6uasg",
+      "scholarAtStart": "nino_kapanadze",
+      "leadVid": "nino_kapanadze",
+      "partySizeStart": 2,
+      "party": [
+        {
+          "vid": "nino_kapanadze",
+          "kind": "player",
+          "gear": {
+            "vid": "nino_kapanadze",
+            "armorP": 43,
+            "armed": true,
+            "weapon": "Phase blade",
+            "vpFound": true,
+            "readError": null
+          }
+        },
+        {
+          "vid": "tashi_sherpa",
+          "kind": "villager",
+          "gear": {
+            "vid": "tashi_sherpa",
+            "armorP": 30,
+            "armed": true,
+            "weapon": "Kitchen knife",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "mid": "eater",
+          "alive": true,
+          "hp": 1113
+        }
+      ],
+      "leadGear": {
+        "vid": "nino_kapanadze",
+        "armorP": 43,
+        "armed": true,
+        "weapon": "Phase blade",
+        "vpFound": true,
+        "readError": null
+      },
+      "end": {
+        "result": "lost",
+        "day": 107,
+        "monsters": [
+          {
+            "mid": "eater",
+            "alive": true,
+            "hp": 401
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "nino_kapanadze",
+            "alive": false,
+            "hp": -25
+          },
+          {
+            "key": "v_tashi_sherpa",
+            "kind": "villager",
+            "vid": "tashi_sherpa",
+            "alive": true,
+            "hp": 65
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "nino_kapanadze"
+        ]
+      },
+      "kills": [],
+      "superseded": false
+    }
+  ],
+  "killRows": [
+    {
+      "day": 106,
+      "fn": "recordWaveKill",
+      "pyrrhic": false,
+      "mid": "influencer",
+      "wave": 4,
+      "by": "nino_kapanadze",
+      "via": "player",
+      "scholarAtKill": "nino_kapanadze",
+      "wasScholar": true,
+      "logLenBefore": 48,
+      "logLenAfter": 49,
+      "entryAdded": true,
+      "linkSeq": 1,
+      "linkHow": "tb-open",
+      "killerDeadAtRecord": false
+    }
+  ],
+  "unlinkedKills": [],
+  "spawns": [
+    {
+      "day": 88,
+      "id": "influencer",
+      "tx": 3,
+      "ty": 4
+    },
+    {
+      "day": 98,
+      "id": "eulogy",
+      "tx": 3,
+      "ty": 4
+    },
+    {
+      "day": 101,
+      "id": "reunion",
+      "tx": 5,
+      "ty": 4
+    },
+    {
+      "day": 103,
+      "id": "strike",
+      "tx": 3,
+      "ty": 4
+    }
+  ],
+  "deathEvents": [
+    {
+      "day": 7,
+      "kind": "monster",
+      "who": "rut_king",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 7,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "sanjun",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "lockpick_raccoon",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "sanjun",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 9,
+      "kind": "villager",
+      "who": "gen_s6o77ws",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 9,
+      "kind": "monster",
+      "who": "warranty_caller",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 9,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 10,
+      "kind": "monster",
+      "who": "bulldozer",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 11,
+      "kind": "monster",
+      "who": "statickite",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 12,
+      "kind": "monster",
+      "who": "union_rep",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 12,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 15,
+      "kind": "monster",
+      "who": "nevermore",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 15,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 16,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 16,
+      "kind": "monster",
+      "who": "mirror_stag",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 16,
+      "kind": "monster",
+      "who": "sunbasker",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "villager",
+      "who": "diana_osei",
+      "cause": "The Heckler",
+      "player": false
+    },
+    {
+      "day": 20,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 20,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 21,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 21,
+      "kind": "monster",
+      "who": "moderator",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 21,
+      "kind": "monster",
+      "who": "anaconda_empress",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 23,
+      "kind": "monster",
+      "who": "nightcourt",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 23,
+      "kind": "monster",
+      "who": "speedbump_turtle",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 23,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 26,
+      "kind": "monster",
+      "who": "sweeps_week",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 30,
+      "kind": "monster",
+      "who": "murkcap",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 32,
+      "kind": "villager",
+      "who": "sanne_bakker",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 33,
+      "kind": "monster",
+      "who": "landlord",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 34,
+      "kind": "villager",
+      "who": "gen_l19g802",
+      "cause": "The Focus Group",
+      "player": false
+    },
+    {
+      "day": 37,
+      "kind": "monster",
+      "who": "ad_break",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 41,
+      "kind": "monster",
+      "who": "giant_mosquito",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 41,
+      "kind": "monster",
+      "who": "gallowdeer",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 41,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 41,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 42,
+      "kind": "villager",
+      "who": "gen_433xz3d",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 48,
+      "kind": "monster",
+      "who": "review_drone",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 49,
+      "kind": "villager",
+      "who": "gen_imdatzd",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 49,
+      "kind": "villager",
+      "who": "gen_2crvazv",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 51,
+      "kind": "villager",
+      "who": "app_mgpsphkk46",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 56,
+      "kind": "villager",
+      "who": "gen_5yg74m1",
+      "cause": "contest",
+      "player": true
+    },
+    {
+      "day": 56,
+      "kind": "villager",
+      "who": "zoltan_nagy",
+      "cause": "starvation",
+      "player": false
+    },
+    {
+      "day": 63,
+      "kind": "monster",
+      "who": "ad_break",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 67,
+      "kind": "monster",
+      "who": "understudy",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 68,
+      "kind": "monster",
+      "who": "spool",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 68,
+      "kind": "villager",
+      "who": "katarina_novak",
+      "cause": "Don't-Look",
+      "player": false
+    },
+    {
+      "day": 68,
+      "kind": "villager",
+      "who": "mia_andersson",
+      "cause": "The Loud Thing",
+      "player": false
+    },
+    {
+      "day": 68,
+      "kind": "villager",
+      "who": "henry_zhang",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 76,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 84,
+      "kind": "monster",
+      "who": "memory_projector",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 84,
+      "kind": "monster",
+      "who": "mirror_stag",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 85,
+      "kind": "monster",
+      "who": "callback",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 85,
+      "kind": "villager",
+      "who": "tom_baker",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 93,
+      "kind": "monster",
+      "who": "mirror_stag",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 93,
+      "kind": "villager",
+      "who": "visjoin_83",
+      "cause": "contest",
+      "player": false
+    },
+    {
+      "day": 93,
+      "kind": "villager",
+      "who": "luis_fernandez",
+      "cause": "the arena",
+      "player": true
+    },
+    {
+      "day": 96,
+      "kind": "monster",
+      "who": "landlord",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 98,
+      "kind": "monster",
+      "who": "spool",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 102,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 106,
+      "kind": "monster",
+      "who": "influencer",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 107,
+      "kind": "monster",
+      "who": "warranty_caller",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 107,
+      "kind": "villager",
+      "who": "nino_kapanadze",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 108,
+      "kind": "monster",
+      "who": "nightcourt",
+      "cause": "expedition",
+      "player": false
+    }
+  ],
+  "orphanTbEnds": [],
+  "wrapCounts": {
+    "spawnWorldMonster": 54,
+    "fieldFight": 130,
+    "recordWaveKill": 51,
+    "startCombat": 15,
+    "tbEnd": 15
+  },
+  "instrumentErrors": [],
+  "tbDerived": [
+    {
+      "seq": 1,
+      "day": 105,
+      "mid": "influencer",
+      "partySizeStart": 1,
+      "result": "won",
+      "kills": 1,
+      "hpDealtPct": 100,
+      "playerTurns": 9,
+      "barrierPushes": 0,
+      "ctxDelta": {
+        "struck": 7,
+        "fled": 0,
+        "fledBad": 0,
+        "closed": 1,
+        "beastTricks": 0,
+        "abilityPresses": 0,
+        "barrierPushes": 0,
+        "dirWalks": 0,
+        "fleeBlocked": 0,
+        "fledHeld": 0
+      }
+    },
+    {
+      "seq": 2,
+      "day": 107,
+      "mid": "eater",
+      "partySizeStart": 2,
+      "result": "lost",
+      "kills": 0,
+      "hpDealtPct": 64,
+      "playerTurns": 6,
+      "barrierPushes": 0,
+      "ctxDelta": {
+        "struck": 5,
+        "fled": 0,
+        "fledBad": 0,
+        "closed": 1,
+        "beastTricks": 0,
+        "abilityPresses": 0,
+        "barrierPushes": 0,
+        "dirWalks": 0,
+        "fleeBlocked": 0,
+        "fledHeld": 0
+      }
+    }
+  ],
+  "w4TurnsCount": 2,
+  "barrierPushesW4": 0,
+  "w4CtxDeltasCount": 2,
+  "tbTurnsZipMismatch": false
+}

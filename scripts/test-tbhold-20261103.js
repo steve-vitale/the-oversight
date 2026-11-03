@@ -1,6 +1,12 @@
 #!/usr/bin/env node
 // test-tbhold-20261103.js — proof for the TB-HOLD variant (arm
-// sim-tbpolicy-a). Proves on fixtures + a live-harness drive + analyzer
+// sim-tbpolicy-a). ARCHIVED 2026-11-03: the variant was KILLED by its
+// own prereg (kills/TB 0.2424 vs GO bar 0.50) and its policy module
+// (scripts/policies/tbhold.js) was deleted before the final commit, so
+// this test can no longer run — it fails at require time on the missing
+// module. It passed 10/10 before the judged leg and on re-run after all
+// driver edits; it is kept as the proof record, not as a live test.
+// Proves on fixtures + a live-harness drive + analyzer
 // math, BEFORE the judged variant leg:
 //  (1) on a fresh wave-4 fight the variant takes a fighting turn, never a
 //      flee turn (ctx.fled stays 0, a strike or close happens);

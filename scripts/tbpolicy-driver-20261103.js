@@ -30,11 +30,33 @@ if (!SEEDS.length) { console.error('TBPOLICY STOP: SEEDS required.'); process.ex
 let ANCHOR = 'unknown';
 try { ANCHOR = execSync('git rev-parse HEAD', { cwd: REPO }).toString().trim().slice(0, 12); } catch (e) {}
 
-const outDir = path.join(REPO, 'evidence', '2026-11-03', 'perseed-tbpolicy-a');
-fs.mkdirSync(outDir, { recursive: true });
-for (const seed of SEEDS) {
-  const file = path.join(outDir, 'tbpolicy-s' + seed + '-' + RUN + '.json');
-  if (fs.existsSync(file)) { console.error('TBPOLICY STOP: refusing to overwrite ' + file); process.exit(3); }
+const outDir = process.env.TBPOLICY_OUTDIR || path.join(REPO, 'evidence', '2026-11-03', 'perseed-tbpolicy-a');
+// TBPOLICY_STDOUT_JSON=1: print each seed's full JSON to stdout (one
+// compact line per seed) and write NO files. Rationale (2026-11-03):
+// a long-lived driver process that has run the game gets EPERM on
+// write(2) to files it opens itself, while its stdout writes and all
+// fresh-process writes succeed. Redirecting stdout to the target file
+// from bash (which opens the file, not node) routes around it.
+const STDOUT_JSON = process.env.TBPOLICY_STDOUT_JSON === '1';
+function say(x) { if (STDOUT_JSON) console.error(x); else console.log(x); }
+if (!STDOUT_JSON) fs.mkdirSync(outDir, { recursive: true });
+// Resume-friendly: already-written seeds are SKIPPED (logged), never
+// overwritten — a flap-killed run resumes by re-running the same command.
+let RUN_SEEDS = SEEDS;
+{
+  const missing = [];
+  for (const seed of SEEDS) {
+    const file = path.join(outDir, 'tbpolicy-s' + seed + '-' + RUN + '.json');
+    let ok = false;
+    try { JSON.parse(fs.readFileSync(file, 'utf8')); ok = true; } catch (e) { ok = false; }
+    if (ok) { say(JSON.stringify({ seed: seed, skipped: 'already-written' })); }
+    else {
+      if (!STDOUT_JSON) { try { fs.unlinkSync(file); } catch (e2) {} }
+      missing.push(seed);
+    }
+  }
+  RUN_SEEDS = missing;
+  if (!RUN_SEEDS.length) { say('TBPOLICY ALL-PRESENT'); }
 }
 
 function loadPolicy() {
@@ -205,20 +227,66 @@ async function oneRun(seed, basePolicy) {
   };
 }
 
+// EPERM-flap hardening (2026-11-03: the host intermittently denies
+// write(2) host-wide for minutes at a time, leaving 0-byte files).
+// Strategy: compute ALL seeds first (results held in memory), print a
+// compact per-seed summary to stdout as each seed completes (so the
+// verdict numbers survive even if files never land), then write files
+// with long-gap retries (20s x 90 = 30 min) at the end. A failed write
+// that left a 0-byte file is retried, never kept.
+function writeVerified(file, content) {
+  // Short retries here: the outer shell loop re-runs for missing seeds,
+  // so a wedged long retry only burns time. On final failure the caller
+  // prints tbDerived to stdout, preserving the analysis input.
+  let lastErr = null;
+  for (let i = 0; i < 6; i++) {
+    try {
+      fs.writeFileSync(file, content);
+      const back = fs.readFileSync(file, 'utf8');
+      JSON.parse(back);
+      if (back.length === content.length) return true;
+      lastErr = new Error('short write: ' + back.length + ' of ' + content.length);
+    } catch (e) { lastErr = e; }
+    try { execSync('sleep 10', { stdio: 'ignore' }); } catch (e2) {}
+  }
+  throw lastErr;
+}
+
+function compactSummary(out) {
+  const tb = out.tbDerived || [];
+  const hps = tb.map(function (d) { return d.hpDealtPct; }).filter(function (x) { return x != null; }).sort(function (a, b) { return a - b; });
+  const med = hps.length ? (hps.length % 2 ? hps[Math.floor(hps.length / 2)] : +((hps[hps.length / 2 - 1] + hps[hps.length / 2]) / 2).toFixed(1)) : null;
+  return {
+    seed: out.seed, days: out.days, end: out.endReason, identity: out.identity,
+    spawnsW4: out.spawnsW4, tbStarted: out.tbStarted, fieldsW4: out.fieldsW4,
+    killsW4: out.killRows.length, tbKills: tb.reduce(function (a, d) { return a + d.kills; }, 0),
+    results: tb.reduce(function (a, d) { a[d.result] = (a[d.result] || 0) + 1; return a; }, {}),
+    medianHpDealtPct: med,
+    turns: tb.map(function (d) { return d.playerTurns; }),
+    fledTurns: tb.reduce(function (a, d) { return a + ((d.ctxDelta || {}).fled || 0); }, 0),
+    struckTurns: tb.reduce(function (a, d) { return a + ((d.ctxDelta || {}).struck || 0); }, 0),
+    zipMismatch: out.tbTurnsZipMismatch, barrierPushesW4: out.barrierPushesW4,
+    errors: out.instrumentErrors.length,
+  };
+}
+
 (async function () {
   const basePolicy = loadPolicy();
-  for (const seed of SEEDS) {
+  const pending = [];
+  for (const seed of RUN_SEEDS) {
     const out = await oneRun(seed, basePolicy);
-    const file = path.join(outDir, 'tbpolicy-s' + seed + '-' + RUN + '.json');
-    fs.writeFileSync(file, JSON.stringify(out, null, 2) + '\n');
-    const tb = out.tbDerived;
-    console.log(JSON.stringify({
-      seed: out.seed, days: out.days, end: out.endReason, identity: out.identity,
-      spawnsW4: out.spawnsW4, tbStarted: out.tbStarted, fieldsW4: out.fieldsW4,
-      killsW4: out.killRows.length, tbKills: tb.reduce(function (a, d) { return a + d.kills; }, 0),
-      results: tb.reduce(function (a, d) { a[d.result] = (a[d.result] || 0) + 1; return a; }, {}),
-      zipMismatch: out.tbTurnsZipMismatch, barrierPushesW4: out.barrierPushesW4,
-      errors: out.instrumentErrors.length,
-    }));
+    say(JSON.stringify(Object.assign({ kind: 'seed-summary' }, compactSummary(out))));
+    if (STDOUT_JSON) { console.log(JSON.stringify(out)); continue; }
+    pending.push(out);
+  }
+  for (const out of pending) {
+    const file = path.join(outDir, 'tbpolicy-s' + out.seed + '-' + RUN + '.json');
+    try {
+      writeVerified(file, JSON.stringify(out, null, 2) + '\n');
+      say(JSON.stringify({ kind: 'file-written', seed: out.seed, file: file }));
+    } catch (e) {
+      say(JSON.stringify({ kind: 'file-FAILED', seed: out.seed, error: String((e && e.message) || e).slice(0, 120), tbDerived: out.tbDerived }));
+      process.exitCode = 1;
+    }
   }
 })().catch(function (e) { console.error(e.stack); process.exitCode = 1; });
