@@ -8434,6 +8434,40 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return flowed;
     },
 
+    // JOINT-FAVOR DAWN SIGNAL (journey-establishment r79): a promised
+    // forage/water outing waits on a dawn the player can actually use —
+    // before this, nothing named the waiting partner at dawn, so promises
+    // rotted while the partner waited at home (r78 blank #2). One line per
+    // waiting partner, once per favor per day, only when the player is at
+    // Haven. Reuses the existing forageFavorWaiting / waterFavorWaiting
+    // predicates (window + partner-at-home + dayPart 0); NOT gated on
+    // System arrival, because promises predate it in principle.
+    jointFavorDawnSignal() {
+      try {
+        const v = this.state.village || {};
+        if (!this.playerAtHaven || !this.playerAtHaven()) return [];
+        const day = (this.state.scholar || {}).day || 0;
+        const out = [];
+        for (const vid of (v.roster || [])) {
+          const f = (v.favorLedger || {})[vid];
+          if (!f || (f.kind !== 'forage_help' && f.kind !== 'water_haul')) continue;
+          if (f.dawnSignaledDay === day) continue;
+          let waiting = false;
+          try { waiting = f.kind === 'forage_help' ? !!this.forageFavorWaiting?.(vid) : !!this.waterFavorWaiting?.(vid); } catch (e) { waiting = false; }
+          if (!waiting) continue;
+          const p = (v.promises || {})[vid] || {};
+          const due = this.promiseDueDay ? this.promiseDueDay(p) : f.deadline;
+          const first = (() => { try { return this.displayName(vid).split(' ')[0]; } catch (e) { return 'Someone'; } })();
+          const job = f.kind === 'forage_help' ? 'head out to forage together' : 'walk to the creek together';
+          const line = `${first} is waiting at Haven to ${job} — the promise is due day ${due}. Talk to them before you leave today.`;
+          f.dawnSignaledDay = day;
+          try { this.say(line); } catch (e) {}
+          out.push({ vid, kind: f.kind, day, due, line });
+        }
+        return out;
+      } catch (e) { return []; }
+    },
+
     // morning briefing: shared knowledge flows, assignments report.
     // Called at dawn (in endDay, after System arrival check).
     villageBriefing() {
@@ -32481,6 +32515,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       this.dayPart = 0; this.ap = 1;
       scholar.dayTicks = 0; scholar.actionClock = 0; // action clock: new day, fresh budget
       this.say(`— DAY ${scholar.day} DAWN — ${DAY_PART_HINT.dawn}`);
+      // JOINT-FAVOR DAWN SIGNAL (r79): after the dawn header, dayPart is 0,
+      // so the waiting predicates read true; after checkPromises, so a
+      // promise that broke this dawn does not signal.
+      try { this.jointFavorDawnSignal(); } catch (e) {}
       // SPOILAGE (hunter loop): overnight, rotten food leaves the pack —
       // announced, never silent. Neglect has a visible cost.
       try { this.sweepSpoiled(); } catch (e) {}
