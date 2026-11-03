@@ -24055,7 +24055,25 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         return;
       }
       const nx = w.x + w.dir;
-      if (nx < 0 || nx > 8) { w.dir *= -1; return; } // 9x9 world (2026-10-07)
+      // GAP-ENCOUNTER leg 6 (2026-11-02): on an edge bounce, range one
+      // row toward Haven's row. A wanderer used to pace ONE row forever
+      // — the 1915Z corpus shows a day-3 wanderer still on its row on
+      // day 91 while the player lives around another row, so the
+      // wanderer-contact path (triggerEncounter) fired 0 times on all
+      // 8 seeds and the cast slot stayed blocked for the whole run. The
+      // drift target is a PLACE (the village's tile row, the smoke and
+      // noise of habitation), never a roster or the player's position —
+      // the same bias-as-not-homing the Herald steer already uses.
+      // Safe tiles still turn it away; havens stay safe.
+      if (nx < 0 || nx > 8) {
+        w.dir *= -1;
+        try {
+          const hy = (this.state.village && this.state.village.py != null) ? this.state.village.py : 4;
+          if (w.y < hy) w.y += 1;
+          else if (w.y > hy) w.y -= 1;
+        } catch (e) {}
+        return;
+      } // 9x9 world (2026-10-07)
       w.x = nx;
       // contact check after it moves (it can walk into you)
       if (w.x === this.map.px && w.y === this.map.py && !this.encounterDone) {
