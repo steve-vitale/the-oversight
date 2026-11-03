@@ -1,0 +1,27 @@
+(pre-talk seed: ask_favor planted d88; takenWantDay=0; convoCount=6)
+=== seed 85091 day 90 — conversation with Yasmin (visjoin_61) ===
+occupation=programmer temperament=mischievous trust=56 dead=false
+want: ask_favor (stage 2)
+open thread: want fromSeed=true
+picker: subject-first gossip-first
+
+THEM: "About the food I needed — still need hands. Are you in?"
+(turn0 choices: dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Good question." "That was me — headed out for water."
+YOU: [dlg:more] "I’m listening."
+THEM: "People are talking about me. Take it for what it's worth."
+YOU: [dlg:react] (listen)
+THEM: "Nurzhamal? A zookeeper, back before. Solid person."
+YOU: [dlg:more] "Tell me more."
+THEM: "I left. Walked back in like I'd never left, apparently."
+YOU: [dlg:react] (listen)
+THEM: "Nurzhamal headed out to forage."
+YOU: [dlg:more] "Go on."
+THEM: "Jack headed out for water."
+YOU: (leave)
+pre-close: want ask_favor stage 2 thread gossip
+closing line: "I should — yeah. Later."
+(gossip picks this sitting: 1)

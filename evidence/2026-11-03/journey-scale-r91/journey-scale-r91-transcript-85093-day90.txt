@@ -1,0 +1,25 @@
+(pre-talk seed: ask_favor planted d89; takenWantDay=0; convoCount=12)
+=== seed 85093 day 90 — conversation with Jenny (gen_ls7qaai) ===
+occupation=Wild food forager temperament=warm trust=90 dead=false
+want: ask_favor (stage 2)
+open thread: goal fromSeed=true
+picker: subject-first gossip-first
+
+THEM: Every name, every day, every meal. The boring stuff is the important stuff.
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Jenny has been stockpiling where nobody looks. "Take half. You've got the hands for it." (+4 wood, +4 fiber to the village stash.)
+YOU: [dlg:more] "Tell me more."
+THEM: "Someone has to be the memory of this place. I've volunteered. No take-backs."
+YOU: [dlg:react] (listen)
+THEM: "I wrote down what happened today. All of it. The boring parts too — future scholars will thank me."
+YOU: [dlg:more] "Tell me more."
+THEM: "A hundred years from now someone should know we were here and what it cost."
+YOU: [dlg:react] (listen)
+THEM: "Anyway." A small smile.
+YOU: [dlg:more] "Tell me more."
+THEM: "If we don't write it down, it didn't happen. I'm writing it all down."
+YOU: (leave)
+pre-close: want ask_favor stage 2 thread goal
+closing line: "Anyway. I'm glad we talked. Really."
+(gossip picks this sitting: 0)
