@@ -111,9 +111,15 @@ fields (tileAt); and E's own greedy/commit-first structure
   at every probe to confirm.
 - C10 SWIMMER GAIN/LOSS: gaining swimmer OPENS creek hops
   (wrong direction for a closer); no ability-loss path in
-  competent play. Recorded per probe; a flip window with a
-  swimmer change is flagged swimmer-confounded and is NOT
-  attributed to another class alone.
+  competent play. Recorded per probe. DIRECTION NOTE
+  (amendment, see below): a swimmer gain biases AGAINST
+  flips — it can only open creek hops — so a flip observed
+  in a swimmer-gain pair is NOT explained by the swimmer,
+  and a single-class counterfactual reproduction in such a
+  pair still attributes the flip to that class (with the
+  co-occurrence noted). The same logic holds for reveal
+  events, bridge builds, and blockage clears: all bias
+  toward opening, never toward closing.
 - C11 BEYOND-TILE GENERATION: a generated beyond tile can
   (a) become a new lateral candidate (opens), (b) change the
   greedy direct path (C3 variant), or (c) turn an
@@ -147,6 +153,47 @@ simulates against live state and mutates nothing (as at
 destfirst); the probe driver never calls genDetail, never
 installs the guard, never vetoes. The competent trajectory
 is ordinary competent.daily throughout.
+
+## AMENDMENT (before any judged leg; driven by smoke only)
+
+Smoke seed 69899 (never judged) showed two facts that
+correct the prereg's reading, not its verdict rule:
+
+1. SWIMMER DIRECTION: the scholar gained swimmer between
+   probes 6->7 and ~57 tiles flipped pocket/lateral ->
+   direct in that one pair (mass opening). C10's "flagged
+   swimmer-confounded, NOT attributed alone" clause is
+   therefore replaced by the direction note in C10 above:
+   openings cannot explain closings. A flip in a swimmer-
+   gain pair is attributable via single-class counterfactual
+   like any other flip, with the co-occurrence noted.
+2. MORNING PROBES: probes sit at daily() entries, i.e.
+   morning states after endDay regrow. Scholar position at
+   every smoke probe was haven (4,4): under plain competent
+   play the scholar wakes at home each morning (unlike the
+   construct-policy campers at atimescale). Consequences,
+   recorded not re-scored: (a) the scholar-at-tile flag
+   means "scholar woke at the tile" — a stricter condition
+   than "camped at day-end" — and will rarely fire; flips
+   elsewhere still answer the prereg's map-state question.
+   (b) A closing that forms intraday and regrows overnight
+   on an unvisited tile would not be captured; foraged-to-0
+   tiles persist to morning (the detailRegrow gate blocks
+   the abstract overnight top-up on visited tiles), so
+   camper-relevant closings are captured. Morning-to-morning
+   flips remain the measured quantity.
+3. DETAIL RECONCILIATION: smoke pair 6->7 also showed a
+   board-wide stock/maxStock 3->2 shift on unvisited tiles:
+   first genDetail visit reconciles abstract stock to the
+   detail count ("the world is the truth"). Stock-class
+   diffs therefore include reconciliation drops, not only
+   foraging depletion; only drops TO 0 can close a lateral,
+   and the ledger's stockZero counts already use that rule.
+   When a flip's trigger is a stock drop, the evidence
+   names whether the tile was foraged-to-0 or reconciled.
+
+No judged leg has run at this amendment's commit; the GO /
+DIAG / PARTIAL rules below are unchanged.
 
 ## Procedure (fixed here, before any judged leg)
 
