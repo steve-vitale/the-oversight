@@ -1,0 +1,2018 @@
+{
+  "judgedVerdict": "INSUFFICIENT-DATA",
+  "judgedVerdictReason": "Tracer verification failure unrepairable by re-run: seeds 83373 (rows 19 vs daysAlive 20) and 83377 (rows 25 vs daysAlive 26) fail rows==daysAlive on the tracer leg and on the single allowed tracer re-run each. Per the prereg, no seed is judged on a mismatched row count, so no judged legs table exists for this run; the analyzer verdict fields below are descriptive only and are superseded by judgedVerdict.",
+  "verification": {
+    "failedSeeds": [
+      83373,
+      83377
+    ],
+    "failedDetail": [
+      {
+        "seed": 83373,
+        "rows": 19,
+        "daysAlive": 20,
+        "gameDays": 19
+      },
+      {
+        "seed": 83377,
+        "rows": 25,
+        "daysAlive": 26,
+        "gameDays": 25
+      }
+    ],
+    "screenReruns": "reproduced identically",
+    "tracerReruns": "reproduced identically",
+    "determinismSpotCheck": "3/3 byte-identical (83230, 83286, 83379)",
+    "tracerVsScreenByteEquality": "28/28",
+    "membershipAgreement": "28/28"
+  },
+  "analyzerFullCorpusDescriptiveOnly": {
+    "seeds": [
+      {
+        "seed": 83230,
+        "survived": false,
+        "collapsed": true,
+        "collapsing": true,
+        "daysAlive": 21,
+        "endReason": "village-lost",
+        "maxWaveUnlocked": 2,
+        "firstStarvationDay": 16,
+        "referenceDay": 16,
+        "c": {
+          "day": 15,
+          "lead": 1
+        },
+        "cIndependentDay": 15,
+        "crossCheckMatch": true,
+        "e": {
+          "day": 13,
+          "clause": "E2-cliff",
+          "standDownDay": 10,
+          "standDownPantry": 21700,
+          "pantry": 13250,
+          "peak": 21700,
+          "falls": 2,
+          "lead": 3
+        },
+        "f": {
+          "day": 14,
+          "clause": "F-fallback",
+          "standDownDay": 10,
+          "standDownPantry": 21700,
+          "pantry": 10000,
+          "peak": 21700,
+          "falls": 3
+        },
+        "v": {
+          "day": 13,
+          "clause": "E2-cliff",
+          "standDownDay": 10,
+          "standDownPantry": 21700,
+          "pantry": 13250,
+          "peak": 21700,
+          "falls": 2,
+          "lead": 3
+        },
+        "leadComparison": {
+          "beatsOrTies": true,
+          "strictlyBeats": true
+        },
+        "role": "candidate"
+      },
+      {
+        "seed": 83248,
+        "survived": false,
+        "collapsed": true,
+        "collapsing": true,
+        "daysAlive": 30,
+        "endReason": "village-lost",
+        "maxWaveUnlocked": 2,
+        "firstStarvationDay": 20,
+        "referenceDay": 20,
+        "c": {
+          "day": 17,
+          "lead": 3
+        },
+        "cIndependentDay": 17,
+        "crossCheckMatch": true,
+        "e": {
+          "day": 18,
+          "clause": "E1-envelope",
+          "standDownDay": 14,
+          "standDownPantry": 17430,
+          "pantry": 13400,
+          "peak": 17430,
+          "falls": 4,
+          "lead": 2
+        },
+        "f": {
+          "day": 18,
+          "clause": "F-fallback",
+          "standDownDay": 14,
+          "standDownPantry": 17430,
+          "pantry": 13400,
+          "peak": 17430,
+          "falls": 4
+        },
+        "v": {
+          "day": 18,
+          "clause": "E1-envelope",
+          "standDownDay": 14,
+          "standDownPantry": 17430,
+          "pantry": 13400,
+          "peak": 17430,
+          "falls": 4,
+          "lead": 2
+        },
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "candidate"
+      },
+      {
+        "seed": 83263,
+        "survived": false,
+        "collapsed": true,
+        "collapsing": true,
+        "daysAlive": 28,
+        "endReason": "village-lost",
+        "maxWaveUnlocked": 2,
+        "firstStarvationDay": 20,
+        "referenceDay": 20,
+        "c": {
+          "day": 20,
+          "lead": 0
+        },
+        "cIndependentDay": 20,
+        "crossCheckMatch": true,
+        "e": {
+          "day": 19,
+          "clause": "E2-cliff",
+          "standDownDay": 17,
+          "standDownPantry": 10693,
+          "pantry": 4830,
+          "peak": 10693,
+          "falls": 2,
+          "lead": 1
+        },
+        "f": {
+          "day": 20,
+          "clause": "F-fallback",
+          "standDownDay": 17,
+          "standDownPantry": 10693,
+          "pantry": 3030,
+          "peak": 10693,
+          "falls": 3
+        },
+        "v": {
+          "day": 19,
+          "clause": "E2-cliff",
+          "standDownDay": 17,
+          "standDownPantry": 10693,
+          "pantry": 4830,
+          "peak": 10693,
+          "falls": 2,
+          "lead": 1
+        },
+        "leadComparison": {
+          "beatsOrTies": true,
+          "strictlyBeats": true
+        },
+        "role": "candidate"
+      },
+      {
+        "seed": 83272,
+        "survived": false,
+        "collapsed": true,
+        "collapsing": true,
+        "daysAlive": 27,
+        "endReason": "village-lost",
+        "maxWaveUnlocked": 2,
+        "firstStarvationDay": 25,
+        "referenceDay": 25,
+        "c": {
+          "day": 21,
+          "lead": 4
+        },
+        "cIndependentDay": 21,
+        "crossCheckMatch": true,
+        "e": {
+          "day": 20,
+          "clause": "E1-envelope",
+          "standDownDay": 16,
+          "standDownPantry": 20711,
+          "pantry": 22486,
+          "peak": 26467,
+          "falls": 3,
+          "lead": 5
+        },
+        "f": {
+          "day": 21,
+          "clause": "F-fallback",
+          "standDownDay": 16,
+          "standDownPantry": 20711,
+          "pantry": 17100,
+          "peak": 26467,
+          "falls": 4
+        },
+        "v": {
+          "day": 20,
+          "clause": "E1-envelope",
+          "standDownDay": 16,
+          "standDownPantry": 20711,
+          "pantry": 22486,
+          "peak": 26467,
+          "falls": 3,
+          "lead": 5
+        },
+        "leadComparison": {
+          "beatsOrTies": true,
+          "strictlyBeats": true
+        },
+        "role": "candidate"
+      },
+      {
+        "seed": 83281,
+        "survived": false,
+        "collapsed": true,
+        "collapsing": true,
+        "daysAlive": 30,
+        "endReason": "village-lost",
+        "maxWaveUnlocked": 3,
+        "firstStarvationDay": 28,
+        "referenceDay": 28,
+        "c": {
+          "day": 28,
+          "lead": 0
+        },
+        "cIndependentDay": 28,
+        "crossCheckMatch": true,
+        "e": {
+          "day": 28,
+          "clause": "E2-cliff",
+          "standDownDay": 25,
+          "standDownPantry": 9185,
+          "pantry": 1595,
+          "peak": 9185,
+          "falls": 3,
+          "lead": 0
+        },
+        "f": {
+          "day": 28,
+          "clause": "F-fallback",
+          "standDownDay": 25,
+          "standDownPantry": 9185,
+          "pantry": 1595,
+          "peak": 9185,
+          "falls": 3
+        },
+        "v": {
+          "day": 28,
+          "clause": "E2-cliff",
+          "standDownDay": 25,
+          "standDownPantry": 9185,
+          "pantry": 1595,
+          "peak": 9185,
+          "falls": 3,
+          "lead": 0
+        },
+        "leadComparison": {
+          "beatsOrTies": true,
+          "strictlyBeats": false
+        },
+        "role": "candidate"
+      },
+      {
+        "seed": 83284,
+        "survived": false,
+        "collapsed": true,
+        "collapsing": true,
+        "daysAlive": 26,
+        "endReason": "village-lost",
+        "maxWaveUnlocked": 2,
+        "firstStarvationDay": 22,
+        "referenceDay": 22,
+        "c": {
+          "day": 23,
+          "lead": -1
+        },
+        "cIndependentDay": 23,
+        "crossCheckMatch": true,
+        "e": {
+          "day": 21,
+          "clause": "E2-cliff",
+          "standDownDay": 20,
+          "standDownPantry": 8012,
+          "pantry": 4474,
+          "peak": 8012,
+          "falls": 1,
+          "lead": 1
+        },
+        "f": {
+          "day": 23,
+          "clause": "F-fallback",
+          "standDownDay": 20,
+          "standDownPantry": 8012,
+          "pantry": 400,
+          "peak": 8012,
+          "falls": 3
+        },
+        "v": {
+          "day": 21,
+          "clause": "E2-cliff",
+          "standDownDay": 20,
+          "standDownPantry": 8012,
+          "pantry": 4474,
+          "peak": 8012,
+          "falls": 1,
+          "lead": 1
+        },
+        "leadComparison": {
+          "beatsOrTies": true,
+          "strictlyBeats": true
+        },
+        "role": "candidate"
+      },
+      {
+        "seed": 83286,
+        "survived": false,
+        "collapsed": true,
+        "collapsing": true,
+        "daysAlive": 20,
+        "endReason": "village-lost",
+        "maxWaveUnlocked": 2,
+        "firstStarvationDay": 17,
+        "referenceDay": 17,
+        "c": {
+          "day": 17,
+          "lead": 0
+        },
+        "cIndependentDay": 17,
+        "crossCheckMatch": true,
+        "e": {
+          "day": 16,
+          "clause": "E2-cliff",
+          "standDownDay": 14,
+          "standDownPantry": 8700,
+          "pantry": 5600,
+          "peak": 8700,
+          "falls": 2,
+          "lead": 1
+        },
+        "f": {
+          "day": 17,
+          "clause": "F-fallback",
+          "standDownDay": 14,
+          "standDownPantry": 8700,
+          "pantry": 1480,
+          "peak": 8700,
+          "falls": 3
+        },
+        "v": {
+          "day": 16,
+          "clause": "E2-cliff",
+          "standDownDay": 14,
+          "standDownPantry": 8700,
+          "pantry": 5600,
+          "peak": 8700,
+          "falls": 2,
+          "lead": 1
+        },
+        "leadComparison": {
+          "beatsOrTies": true,
+          "strictlyBeats": true
+        },
+        "role": "candidate"
+      },
+      {
+        "seed": 83336,
+        "survived": false,
+        "collapsed": true,
+        "collapsing": true,
+        "daysAlive": 28,
+        "endReason": "village-lost",
+        "maxWaveUnlocked": 3,
+        "firstStarvationDay": 27,
+        "referenceDay": 27,
+        "c": {
+          "day": 25,
+          "lead": 2
+        },
+        "cIndependentDay": 25,
+        "crossCheckMatch": true,
+        "e": {
+          "day": 21,
+          "clause": "E1-envelope",
+          "standDownDay": 19,
+          "standDownPantry": 10450,
+          "pantry": 8250,
+          "peak": 10450,
+          "falls": 2,
+          "lead": 6
+        },
+        "f": {
+          "day": 23,
+          "clause": "F-fallback",
+          "standDownDay": 19,
+          "standDownPantry": 10450,
+          "pantry": 7600,
+          "peak": 10450,
+          "falls": 3
+        },
+        "v": {
+          "day": 21,
+          "clause": "E1-envelope",
+          "standDownDay": 19,
+          "standDownPantry": 10450,
+          "pantry": 8250,
+          "peak": 10450,
+          "falls": 2,
+          "lead": 6
+        },
+        "leadComparison": {
+          "beatsOrTies": true,
+          "strictlyBeats": true
+        },
+        "role": "candidate"
+      },
+      {
+        "seed": 83341,
+        "survived": false,
+        "collapsed": true,
+        "collapsing": true,
+        "daysAlive": 23,
+        "endReason": "village-lost",
+        "maxWaveUnlocked": 2,
+        "firstStarvationDay": 21,
+        "referenceDay": 21,
+        "c": {
+          "day": 15,
+          "lead": 6
+        },
+        "cIndependentDay": 15,
+        "crossCheckMatch": true,
+        "e": {
+          "day": 14,
+          "clause": "E2-cliff",
+          "standDownDay": 12,
+          "standDownPantry": 7930,
+          "pantry": 5050,
+          "peak": 7930,
+          "falls": 2,
+          "lead": 7
+        },
+        "f": {
+          "day": 15,
+          "clause": "F-fallback",
+          "standDownDay": 12,
+          "standDownPantry": 7930,
+          "pantry": 2650,
+          "peak": 7930,
+          "falls": 3
+        },
+        "v": {
+          "day": 14,
+          "clause": "E2-cliff",
+          "standDownDay": 12,
+          "standDownPantry": 7930,
+          "pantry": 5050,
+          "peak": 7930,
+          "falls": 2,
+          "lead": 7
+        },
+        "leadComparison": {
+          "beatsOrTies": true,
+          "strictlyBeats": true
+        },
+        "role": "candidate"
+      },
+      {
+        "seed": 83373,
+        "survived": false,
+        "collapsed": true,
+        "collapsing": true,
+        "daysAlive": 20,
+        "endReason": "village-lost",
+        "maxWaveUnlocked": 2,
+        "firstStarvationDay": 16,
+        "referenceDay": 16,
+        "c": {
+          "day": 17,
+          "lead": -1
+        },
+        "cIndependentDay": 17,
+        "crossCheckMatch": true,
+        "e": {
+          "day": 16,
+          "clause": "E2-cliff",
+          "standDownDay": 14,
+          "standDownPantry": 6590,
+          "pantry": 3446,
+          "peak": 6590,
+          "falls": 2,
+          "lead": 0
+        },
+        "f": {
+          "day": 17,
+          "clause": "F-fallback",
+          "standDownDay": 14,
+          "standDownPantry": 6590,
+          "pantry": 0,
+          "peak": 6590,
+          "falls": 3
+        },
+        "v": {
+          "day": 16,
+          "clause": "E2-cliff",
+          "standDownDay": 14,
+          "standDownPantry": 6590,
+          "pantry": 3446,
+          "peak": 6590,
+          "falls": 2,
+          "lead": 0
+        },
+        "leadComparison": {
+          "beatsOrTies": true,
+          "strictlyBeats": true
+        },
+        "role": "candidate"
+      },
+      {
+        "seed": 83377,
+        "survived": false,
+        "collapsed": true,
+        "collapsing": true,
+        "daysAlive": 26,
+        "endReason": "village-lost",
+        "maxWaveUnlocked": 3,
+        "firstStarvationDay": 25,
+        "referenceDay": 25,
+        "c": {
+          "day": 15,
+          "lead": 10
+        },
+        "cIndependentDay": 15,
+        "crossCheckMatch": true,
+        "e": {
+          "day": 14,
+          "clause": "E1-envelope",
+          "standDownDay": 12,
+          "standDownPantry": 13900,
+          "pantry": 11500,
+          "peak": 13900,
+          "falls": 2,
+          "lead": 11
+        },
+        "f": {
+          "day": 15,
+          "clause": "F-fallback",
+          "standDownDay": 12,
+          "standDownPantry": 13900,
+          "pantry": 9054,
+          "peak": 13900,
+          "falls": 3
+        },
+        "v": {
+          "day": 14,
+          "clause": "E1-envelope",
+          "standDownDay": 12,
+          "standDownPantry": 13900,
+          "pantry": 11500,
+          "peak": 13900,
+          "falls": 2,
+          "lead": 11
+        },
+        "leadComparison": {
+          "beatsOrTies": true,
+          "strictlyBeats": true
+        },
+        "role": "candidate"
+      },
+      {
+        "seed": 83379,
+        "survived": false,
+        "collapsed": true,
+        "collapsing": true,
+        "daysAlive": 30,
+        "endReason": "village-lost",
+        "maxWaveUnlocked": 2,
+        "firstStarvationDay": 28,
+        "referenceDay": 28,
+        "c": {
+          "day": 24,
+          "lead": 4
+        },
+        "cIndependentDay": 24,
+        "crossCheckMatch": true,
+        "e": {
+          "day": 23,
+          "clause": "E1-envelope",
+          "standDownDay": 20,
+          "standDownPantry": 9997,
+          "pantry": 7335,
+          "peak": 10110,
+          "falls": 2,
+          "lead": 5
+        },
+        "f": {
+          "day": 24,
+          "clause": "F-fallback",
+          "standDownDay": 20,
+          "standDownPantry": 9997,
+          "pantry": 6415,
+          "peak": 10110,
+          "falls": 3
+        },
+        "v": {
+          "day": 23,
+          "clause": "E1-envelope",
+          "standDownDay": 20,
+          "standDownPantry": 9997,
+          "pantry": 7335,
+          "peak": 10110,
+          "falls": 2,
+          "lead": 5
+        },
+        "leadComparison": {
+          "beatsOrTies": true,
+          "strictlyBeats": true
+        },
+        "role": "candidate"
+      },
+      {
+        "seed": 83201,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": {
+          "day": 15,
+          "lead": null
+        },
+        "cIndependentDay": 15,
+        "crossCheckMatch": true,
+        "e": {
+          "day": 15,
+          "clause": "E1-envelope",
+          "standDownDay": 12,
+          "standDownPantry": 23550,
+          "pantry": 18489,
+          "peak": 23550,
+          "falls": 3,
+          "lead": null
+        },
+        "f": {
+          "day": 15,
+          "clause": "F-fallback",
+          "standDownDay": 12,
+          "standDownPantry": 23550,
+          "pantry": 18489,
+          "peak": 23550,
+          "falls": 3
+        },
+        "v": {
+          "day": 15,
+          "clause": "E1-envelope",
+          "standDownDay": 12,
+          "standDownPantry": 23550,
+          "pantry": 18489,
+          "peak": 23550,
+          "falls": 3,
+          "lead": null
+        },
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83202,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 3,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83203,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 3,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83204,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 3,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83205,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 3,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83206,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 3,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83207,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83208,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 3,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83209,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 3,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83210,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 3,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83211,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 3,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83212,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 3,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83213,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83214,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83215,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 3,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83216,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 3,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      }
+    ],
+    "stillCollapsing": [
+      83230,
+      83248,
+      83263,
+      83272,
+      83281,
+      83284,
+      83286,
+      83336,
+      83341,
+      83373,
+      83377,
+      83379
+    ],
+    "excludedCandidates": [],
+    "costSurvivors": [
+      83201,
+      83202,
+      83203,
+      83204,
+      83205,
+      83206,
+      83207,
+      83208,
+      83209,
+      83210,
+      83211,
+      83212,
+      83213,
+      83214,
+      83215,
+      83216
+    ],
+    "newlyCollapsingCost": [],
+    "firingCostSurvivors": [
+      83201
+    ],
+    "crossCheckMismatches": [],
+    "legs": {
+      "countGate": true,
+      "survivorGate": true,
+      "fireLeg": true,
+      "tieLeg": false,
+      "strictLeg": true,
+      "leadOneLeg": true,
+      "costLeg": true,
+      "crossCheckLeg": true
+    },
+    "verdict": "PILOT-NO-GO"
+  },
+  "analyzerVerifiedOnlyDescriptiveOnly": {
+    "seeds": [
+      {
+        "seed": 83230,
+        "survived": false,
+        "collapsed": true,
+        "collapsing": true,
+        "daysAlive": 21,
+        "endReason": "village-lost",
+        "maxWaveUnlocked": 2,
+        "firstStarvationDay": 16,
+        "referenceDay": 16,
+        "c": {
+          "day": 15,
+          "lead": 1
+        },
+        "cIndependentDay": 15,
+        "crossCheckMatch": true,
+        "e": {
+          "day": 13,
+          "clause": "E2-cliff",
+          "standDownDay": 10,
+          "standDownPantry": 21700,
+          "pantry": 13250,
+          "peak": 21700,
+          "falls": 2,
+          "lead": 3
+        },
+        "f": {
+          "day": 14,
+          "clause": "F-fallback",
+          "standDownDay": 10,
+          "standDownPantry": 21700,
+          "pantry": 10000,
+          "peak": 21700,
+          "falls": 3
+        },
+        "v": {
+          "day": 13,
+          "clause": "E2-cliff",
+          "standDownDay": 10,
+          "standDownPantry": 21700,
+          "pantry": 13250,
+          "peak": 21700,
+          "falls": 2,
+          "lead": 3
+        },
+        "leadComparison": {
+          "beatsOrTies": true,
+          "strictlyBeats": true
+        },
+        "role": "candidate"
+      },
+      {
+        "seed": 83248,
+        "survived": false,
+        "collapsed": true,
+        "collapsing": true,
+        "daysAlive": 30,
+        "endReason": "village-lost",
+        "maxWaveUnlocked": 2,
+        "firstStarvationDay": 20,
+        "referenceDay": 20,
+        "c": {
+          "day": 17,
+          "lead": 3
+        },
+        "cIndependentDay": 17,
+        "crossCheckMatch": true,
+        "e": {
+          "day": 18,
+          "clause": "E1-envelope",
+          "standDownDay": 14,
+          "standDownPantry": 17430,
+          "pantry": 13400,
+          "peak": 17430,
+          "falls": 4,
+          "lead": 2
+        },
+        "f": {
+          "day": 18,
+          "clause": "F-fallback",
+          "standDownDay": 14,
+          "standDownPantry": 17430,
+          "pantry": 13400,
+          "peak": 17430,
+          "falls": 4
+        },
+        "v": {
+          "day": 18,
+          "clause": "E1-envelope",
+          "standDownDay": 14,
+          "standDownPantry": 17430,
+          "pantry": 13400,
+          "peak": 17430,
+          "falls": 4,
+          "lead": 2
+        },
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "candidate"
+      },
+      {
+        "seed": 83263,
+        "survived": false,
+        "collapsed": true,
+        "collapsing": true,
+        "daysAlive": 28,
+        "endReason": "village-lost",
+        "maxWaveUnlocked": 2,
+        "firstStarvationDay": 20,
+        "referenceDay": 20,
+        "c": {
+          "day": 20,
+          "lead": 0
+        },
+        "cIndependentDay": 20,
+        "crossCheckMatch": true,
+        "e": {
+          "day": 19,
+          "clause": "E2-cliff",
+          "standDownDay": 17,
+          "standDownPantry": 10693,
+          "pantry": 4830,
+          "peak": 10693,
+          "falls": 2,
+          "lead": 1
+        },
+        "f": {
+          "day": 20,
+          "clause": "F-fallback",
+          "standDownDay": 17,
+          "standDownPantry": 10693,
+          "pantry": 3030,
+          "peak": 10693,
+          "falls": 3
+        },
+        "v": {
+          "day": 19,
+          "clause": "E2-cliff",
+          "standDownDay": 17,
+          "standDownPantry": 10693,
+          "pantry": 4830,
+          "peak": 10693,
+          "falls": 2,
+          "lead": 1
+        },
+        "leadComparison": {
+          "beatsOrTies": true,
+          "strictlyBeats": true
+        },
+        "role": "candidate"
+      },
+      {
+        "seed": 83272,
+        "survived": false,
+        "collapsed": true,
+        "collapsing": true,
+        "daysAlive": 27,
+        "endReason": "village-lost",
+        "maxWaveUnlocked": 2,
+        "firstStarvationDay": 25,
+        "referenceDay": 25,
+        "c": {
+          "day": 21,
+          "lead": 4
+        },
+        "cIndependentDay": 21,
+        "crossCheckMatch": true,
+        "e": {
+          "day": 20,
+          "clause": "E1-envelope",
+          "standDownDay": 16,
+          "standDownPantry": 20711,
+          "pantry": 22486,
+          "peak": 26467,
+          "falls": 3,
+          "lead": 5
+        },
+        "f": {
+          "day": 21,
+          "clause": "F-fallback",
+          "standDownDay": 16,
+          "standDownPantry": 20711,
+          "pantry": 17100,
+          "peak": 26467,
+          "falls": 4
+        },
+        "v": {
+          "day": 20,
+          "clause": "E1-envelope",
+          "standDownDay": 16,
+          "standDownPantry": 20711,
+          "pantry": 22486,
+          "peak": 26467,
+          "falls": 3,
+          "lead": 5
+        },
+        "leadComparison": {
+          "beatsOrTies": true,
+          "strictlyBeats": true
+        },
+        "role": "candidate"
+      },
+      {
+        "seed": 83281,
+        "survived": false,
+        "collapsed": true,
+        "collapsing": true,
+        "daysAlive": 30,
+        "endReason": "village-lost",
+        "maxWaveUnlocked": 3,
+        "firstStarvationDay": 28,
+        "referenceDay": 28,
+        "c": {
+          "day": 28,
+          "lead": 0
+        },
+        "cIndependentDay": 28,
+        "crossCheckMatch": true,
+        "e": {
+          "day": 28,
+          "clause": "E2-cliff",
+          "standDownDay": 25,
+          "standDownPantry": 9185,
+          "pantry": 1595,
+          "peak": 9185,
+          "falls": 3,
+          "lead": 0
+        },
+        "f": {
+          "day": 28,
+          "clause": "F-fallback",
+          "standDownDay": 25,
+          "standDownPantry": 9185,
+          "pantry": 1595,
+          "peak": 9185,
+          "falls": 3
+        },
+        "v": {
+          "day": 28,
+          "clause": "E2-cliff",
+          "standDownDay": 25,
+          "standDownPantry": 9185,
+          "pantry": 1595,
+          "peak": 9185,
+          "falls": 3,
+          "lead": 0
+        },
+        "leadComparison": {
+          "beatsOrTies": true,
+          "strictlyBeats": false
+        },
+        "role": "candidate"
+      },
+      {
+        "seed": 83284,
+        "survived": false,
+        "collapsed": true,
+        "collapsing": true,
+        "daysAlive": 26,
+        "endReason": "village-lost",
+        "maxWaveUnlocked": 2,
+        "firstStarvationDay": 22,
+        "referenceDay": 22,
+        "c": {
+          "day": 23,
+          "lead": -1
+        },
+        "cIndependentDay": 23,
+        "crossCheckMatch": true,
+        "e": {
+          "day": 21,
+          "clause": "E2-cliff",
+          "standDownDay": 20,
+          "standDownPantry": 8012,
+          "pantry": 4474,
+          "peak": 8012,
+          "falls": 1,
+          "lead": 1
+        },
+        "f": {
+          "day": 23,
+          "clause": "F-fallback",
+          "standDownDay": 20,
+          "standDownPantry": 8012,
+          "pantry": 400,
+          "peak": 8012,
+          "falls": 3
+        },
+        "v": {
+          "day": 21,
+          "clause": "E2-cliff",
+          "standDownDay": 20,
+          "standDownPantry": 8012,
+          "pantry": 4474,
+          "peak": 8012,
+          "falls": 1,
+          "lead": 1
+        },
+        "leadComparison": {
+          "beatsOrTies": true,
+          "strictlyBeats": true
+        },
+        "role": "candidate"
+      },
+      {
+        "seed": 83286,
+        "survived": false,
+        "collapsed": true,
+        "collapsing": true,
+        "daysAlive": 20,
+        "endReason": "village-lost",
+        "maxWaveUnlocked": 2,
+        "firstStarvationDay": 17,
+        "referenceDay": 17,
+        "c": {
+          "day": 17,
+          "lead": 0
+        },
+        "cIndependentDay": 17,
+        "crossCheckMatch": true,
+        "e": {
+          "day": 16,
+          "clause": "E2-cliff",
+          "standDownDay": 14,
+          "standDownPantry": 8700,
+          "pantry": 5600,
+          "peak": 8700,
+          "falls": 2,
+          "lead": 1
+        },
+        "f": {
+          "day": 17,
+          "clause": "F-fallback",
+          "standDownDay": 14,
+          "standDownPantry": 8700,
+          "pantry": 1480,
+          "peak": 8700,
+          "falls": 3
+        },
+        "v": {
+          "day": 16,
+          "clause": "E2-cliff",
+          "standDownDay": 14,
+          "standDownPantry": 8700,
+          "pantry": 5600,
+          "peak": 8700,
+          "falls": 2,
+          "lead": 1
+        },
+        "leadComparison": {
+          "beatsOrTies": true,
+          "strictlyBeats": true
+        },
+        "role": "candidate"
+      },
+      {
+        "seed": 83336,
+        "survived": false,
+        "collapsed": true,
+        "collapsing": true,
+        "daysAlive": 28,
+        "endReason": "village-lost",
+        "maxWaveUnlocked": 3,
+        "firstStarvationDay": 27,
+        "referenceDay": 27,
+        "c": {
+          "day": 25,
+          "lead": 2
+        },
+        "cIndependentDay": 25,
+        "crossCheckMatch": true,
+        "e": {
+          "day": 21,
+          "clause": "E1-envelope",
+          "standDownDay": 19,
+          "standDownPantry": 10450,
+          "pantry": 8250,
+          "peak": 10450,
+          "falls": 2,
+          "lead": 6
+        },
+        "f": {
+          "day": 23,
+          "clause": "F-fallback",
+          "standDownDay": 19,
+          "standDownPantry": 10450,
+          "pantry": 7600,
+          "peak": 10450,
+          "falls": 3
+        },
+        "v": {
+          "day": 21,
+          "clause": "E1-envelope",
+          "standDownDay": 19,
+          "standDownPantry": 10450,
+          "pantry": 8250,
+          "peak": 10450,
+          "falls": 2,
+          "lead": 6
+        },
+        "leadComparison": {
+          "beatsOrTies": true,
+          "strictlyBeats": true
+        },
+        "role": "candidate"
+      },
+      {
+        "seed": 83341,
+        "survived": false,
+        "collapsed": true,
+        "collapsing": true,
+        "daysAlive": 23,
+        "endReason": "village-lost",
+        "maxWaveUnlocked": 2,
+        "firstStarvationDay": 21,
+        "referenceDay": 21,
+        "c": {
+          "day": 15,
+          "lead": 6
+        },
+        "cIndependentDay": 15,
+        "crossCheckMatch": true,
+        "e": {
+          "day": 14,
+          "clause": "E2-cliff",
+          "standDownDay": 12,
+          "standDownPantry": 7930,
+          "pantry": 5050,
+          "peak": 7930,
+          "falls": 2,
+          "lead": 7
+        },
+        "f": {
+          "day": 15,
+          "clause": "F-fallback",
+          "standDownDay": 12,
+          "standDownPantry": 7930,
+          "pantry": 2650,
+          "peak": 7930,
+          "falls": 3
+        },
+        "v": {
+          "day": 14,
+          "clause": "E2-cliff",
+          "standDownDay": 12,
+          "standDownPantry": 7930,
+          "pantry": 5050,
+          "peak": 7930,
+          "falls": 2,
+          "lead": 7
+        },
+        "leadComparison": {
+          "beatsOrTies": true,
+          "strictlyBeats": true
+        },
+        "role": "candidate"
+      },
+      {
+        "seed": 83379,
+        "survived": false,
+        "collapsed": true,
+        "collapsing": true,
+        "daysAlive": 30,
+        "endReason": "village-lost",
+        "maxWaveUnlocked": 2,
+        "firstStarvationDay": 28,
+        "referenceDay": 28,
+        "c": {
+          "day": 24,
+          "lead": 4
+        },
+        "cIndependentDay": 24,
+        "crossCheckMatch": true,
+        "e": {
+          "day": 23,
+          "clause": "E1-envelope",
+          "standDownDay": 20,
+          "standDownPantry": 9997,
+          "pantry": 7335,
+          "peak": 10110,
+          "falls": 2,
+          "lead": 5
+        },
+        "f": {
+          "day": 24,
+          "clause": "F-fallback",
+          "standDownDay": 20,
+          "standDownPantry": 9997,
+          "pantry": 6415,
+          "peak": 10110,
+          "falls": 3
+        },
+        "v": {
+          "day": 23,
+          "clause": "E1-envelope",
+          "standDownDay": 20,
+          "standDownPantry": 9997,
+          "pantry": 7335,
+          "peak": 10110,
+          "falls": 2,
+          "lead": 5
+        },
+        "leadComparison": {
+          "beatsOrTies": true,
+          "strictlyBeats": true
+        },
+        "role": "candidate"
+      },
+      {
+        "seed": 83201,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": {
+          "day": 15,
+          "lead": null
+        },
+        "cIndependentDay": 15,
+        "crossCheckMatch": true,
+        "e": {
+          "day": 15,
+          "clause": "E1-envelope",
+          "standDownDay": 12,
+          "standDownPantry": 23550,
+          "pantry": 18489,
+          "peak": 23550,
+          "falls": 3,
+          "lead": null
+        },
+        "f": {
+          "day": 15,
+          "clause": "F-fallback",
+          "standDownDay": 12,
+          "standDownPantry": 23550,
+          "pantry": 18489,
+          "peak": 23550,
+          "falls": 3
+        },
+        "v": {
+          "day": 15,
+          "clause": "E1-envelope",
+          "standDownDay": 12,
+          "standDownPantry": 23550,
+          "pantry": 18489,
+          "peak": 23550,
+          "falls": 3,
+          "lead": null
+        },
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83202,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 3,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83203,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 3,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83204,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 3,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83205,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 3,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83206,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 3,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83207,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83208,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 3,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83209,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 3,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83210,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 3,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83211,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 3,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83212,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 3,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83213,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83214,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 2,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83215,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 3,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      },
+      {
+        "seed": 83216,
+        "survived": true,
+        "collapsed": false,
+        "collapsing": false,
+        "daysAlive": 30,
+        "endReason": "survived",
+        "maxWaveUnlocked": 3,
+        "firstStarvationDay": null,
+        "referenceDay": null,
+        "c": null,
+        "cIndependentDay": null,
+        "crossCheckMatch": true,
+        "e": null,
+        "f": null,
+        "v": null,
+        "leadComparison": {
+          "beatsOrTies": false,
+          "strictlyBeats": false
+        },
+        "role": "cost"
+      }
+    ],
+    "stillCollapsing": [
+      83230,
+      83248,
+      83263,
+      83272,
+      83281,
+      83284,
+      83286,
+      83336,
+      83341,
+      83379
+    ],
+    "excludedCandidates": [],
+    "costSurvivors": [
+      83201,
+      83202,
+      83203,
+      83204,
+      83205,
+      83206,
+      83207,
+      83208,
+      83209,
+      83210,
+      83211,
+      83212,
+      83213,
+      83214,
+      83215,
+      83216
+    ],
+    "newlyCollapsingCost": [],
+    "firingCostSurvivors": [
+      83201
+    ],
+    "crossCheckMismatches": [],
+    "legs": {
+      "countGate": true,
+      "survivorGate": true,
+      "fireLeg": true,
+      "tieLeg": false,
+      "strictLeg": true,
+      "leadOneLeg": true,
+      "costLeg": true,
+      "crossCheckLeg": true
+    },
+    "verdict": "PILOT-NO-GO"
+  },
+  "base": "9818ac98abd61223c8ad90d81b56ca78d062245d"
+}

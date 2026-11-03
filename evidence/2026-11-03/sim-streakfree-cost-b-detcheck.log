@@ -1,0 +1,13 @@
+sim-streakfree-cost-b determinism + verification log
+Judging base: 9818ac98abd61223c8ad90d81b56ca78d062245d (screen and tracer both on this base)
+Determinism spot-check (first/middle/last still-collapsing in seed order):
+  83230 byte-identical=true
+  83286 byte-identical=true
+  83379 byte-identical=true
+  (re-run files: sim-streakfree-cost-b-detcheck-<seed>.jsonl)
+Tracer-vs-screen byte-equality: 28/28 legs identical (same base; cf. adopt run 10/26 across bases)
+Membership screen-vs-tracer agreement: 28/28 (12 still-collapsing, 16 survivors; no exclusions, no drift)
+Tracer verification rows==daysAlive: 26/28 first try; failures 83373 (19 vs 20), 83377 (25 vs 26)
+Tracer re-runs (one allowed each): 83373 still 19 vs 20; 83377 still 25 vs 26 (deterministic)
+Screen re-runs (same two seeds): reproduced the mismatch identically (rows==gameDays in all four lines)
+Verdict consequence (prereg): tracer verification failure unrepairable by re-run => INSUFFICIENT-DATA
