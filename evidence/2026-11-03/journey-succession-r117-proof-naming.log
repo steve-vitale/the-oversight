@@ -1,0 +1,147 @@
+PASS FIXTURE seed 26151 named=2/5 — got named=2 total=5 dead=Sierra
+PASS FIXTURE seed 26151 no collision, no missing — collision=false missing=0
+PASS FIXTURE seed 26152 named=1/4 — got named=1 total=4 dead=Violet
+PASS FIXTURE seed 26152 no collision, no missing — collision=false missing=0
+PASS FIXTURE seed 26153 named=1/5 — got named=1 total=5 dead=Jorge
+PASS FIXTURE seed 26153 no collision, no missing — collision=false missing=0
+PASS FIXTURE seed 26154 named=1/5 — got named=1 total=5 dead=Nancy
+PASS FIXTURE seed 26154 no collision, no missing — collision=false missing=0
+PASS FIXTURE seed 26155 named=0/5 — got named=0 total=5 dead=Marta
+PASS FIXTURE seed 26155 no collision, no missing — collision=false missing=0
+PASS FIXTURE seed 26156 named=3/4 — got named=3 total=4 dead=Natalie
+PASS FIXTURE seed 26156 no collision, no missing — collision=false missing=0
+PASS FIXTURE pooled 8/28 — got 8/28
+PASS WRONG-NAME control 26151-as-Violet gives 0 naming — got named=0 lines=0
+PASS ANY-RECENT seed 27151 namedAny >= named — named=2 namedAny=2 recentDead=[{"first":"Sergio","day":12},{"first":"Satomi","day":32},{"first":"Donna","day":52},{"first":"Rebecca","day":62},{"first":"Desmond","day":73}]
+PASS ANY-RECENT seed 27152 namedAny >= named — named=3 namedAny=3 recentDead=[{"first":"Carolina","day":40},{"first":"Jae-sung","day":60}]
+PASS ANY-RECENT seed 27153 namedAny >= named — named=3 namedAny=3 recentDead=[{"first":"Vito","day":17},{"first":"Abigail","day":37},{"first":"Ruby","day":57},{"first":"Maricela","day":67},{"first":"Dylan","day":77}]
+PASS ANY-RECENT seed 27154 namedAny >= named — named=2 namedAny=4 recentDead=[{"first":"Kavya","day":18},{"first":"Jorge","day":25}]
+PASS ANY-RECENT seed 27155 namedAny >= named — named=3 namedAny=3 recentDead=[{"first":"Patricia","day":24},{"first":"Mercedes","day":89}]
+PASS ANY-RECENT seed 27156 namedAny >= named — named=4 namedAny=4 recentDead=[{"first":"Donna","day":41}]
+PASS ANY-RECENT 27154 gains over first-bearer (Jorge mechanism) — named=2 namedAny=4
+PASS ANY-RECENT 27154 anyHitLines actually name Jorge — jorgeLines=5 e.g. NPC: "Short version — Jorge and I never finished talking about what's been happening — we left it mid-thought, 4 days back. You're wearing Jorge's shoes now — want to pick it up? 'A comfortable quiet 
+PASS ANY-RECENT pooled any >= pooled first-bearer — named=17 namedAny=19 transcripts=27
+
+PRE-DEATH d6: bearer <redacted>, topTrust=[{"id":"Caleb","t":36},{"id":"Eamon","t":27},{"id":"Grace","t":24},{"id":"Quinn","t":22}], roster=12
+INH readable=true scripted=true deadItems=6 distinct=6 transferred=0 vanished=1 keptPlants=4 inheritedPlants=5 keptSkills=1 inheritedSkills=2 succTrustPre=36 succTrustPost=20
+PARITY readable=true equal=true inherited=[] pre=["green_whisper"] post=["green_whisper"]
+DEATH d6 (a hushwolf, scripted): Paolo -> Caleb | passed=true lin=true mo=true trust=20 vouchers=0
+
+SECOND-KILL d+4: Eamon -> ? (scripted r64 chain probe)
+SECOND DEATH d+4: Eamon -> Enrique passed=true lin=true mo=true
+  BURIAL d+4: corpse found=true respects=true bury=true
+  INH d+4: transferred=1 vanished=1 of 6 distinct dead-bearer items
+  CONVO d+3 with Grace (refused=false)
+  CONVO d+3 with Quinn (refused=false)
+  BOND-CONVO d+3 with Alikhan (depth=0 v=6 refused=false)
+
+THIRD-KILL d+3 since second death: Enrique -> ? (scripted r79 chain probe)
+THIRD DEATH d+3 since second death: Enrique -> Grace passed=true lin=true mo=true
+  CONVO d+7 with Alikhan (refused=false)
+  CONVO d+7 with Mateo (refused=false)
+
+FOURTH-KILL d+3 since third death: Grace -> ? (scripted r79 chain probe)
+FOURTH DEATH d+3 since third death: Grace -> Alikhan passed=true lin=true mo=true
+
+FIFTH-KILL d+3 since fourth death: Alikhan -> ? (scripted r117 chain probe)
+FIFTH DEATH d+3 since fourth death: Alikhan -> Mateo passed=true lin=true mo=true
+  CONVO d+14 with Quinn (refused=false)
+  CONVO d+14 with Noah (refused=false)
+  BOND-CONVO d+14 with Amina (depth=0 v=4 refused=false)
+  CONVO d+30 with Noah (refused=false)
+  CONVO d+30 with Quinn (refused=false)
+
+FUNERAL: deathBeat=6 recover=1 vouch=0 (eligible=0) echo=0 organicBurial={"respects":false,"bury":false} halfRation=0
+
+MEAL-GATE: audited=30 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=30 signals={"levelUp":true,"systemVoice":45,"offerLines":34,"codexPlantsDelta":23,"codexSkillsDelta":21,"codexAbilitiesDelta":7,"xpDelta":55,"any":true} pantry 27300->25154
+TRUST-DIALS: office 20->46 (+26, climb) | villageMean 17.1->60.5 (+43.4, climb) | ge60 0->4 | movers>=5: [{"id":"Amina","from":13,"to":90,"delta":77},{"id":"Noah","from":15,"to":90,"delta":75},{"id":"Quinn","from":22,"to":90,"delta":68},{"id":"Theo","from":10,"to":56,"delta":46}]
+DEED-LEDGER: calls=14 summary={"teachPlant":{"calls":14,"ok":14,"deltaSum":0,"deltaN":14,"positive":0,"meanDelta":0}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a="n/a (none eligible)" m2b=false m3=false(echoMentions=0 (convo=0, say=0)) m4=true m5=manual | endDay=36 alive=9 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=30
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+30) t2=true(deedCalls=14) trustVerdict={"readable":true,"officeMantle":20,"officeLast":46,"officeDelta":26,"officeClass":"climb","villageMantle":17.1,"villageLast":60.5,"villageDelta":43.4,"villageClass":"climb","villageGe60Mantle":0,"villageGe60Last":4,"movers":[{"id":"Amina","from":13,"to":90,"delta":77},{"id":"Noah","from":15,"to":90,"delta":75},{"id":"Quinn","from":22,"to":90,"delta":68},{"id":"Theo","from":10,"to":56,"delta":46}]}
+E6/CALLCHECK: e6={"callMoves":4,"withCensus":4,"chainHandoffs":4,"trustMoves":0} callCheck={"dailyMoveDays":4,"callMoveDays":4,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=false(echoV2b=1 (v2=1, excludedLoot=0))
+E7/R47: e7={"trustMoves":0,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":0,"both":0,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":0,"v2":1,"v2Say":1,"v2Delta":1,"arcExcluded":1,"teleWeek2":2,"collision":[]} e2={"chainN":5,"known":5,"unknown":0} e3={"dailyDays":31,"moves":4}
+PASS DRIVER fifthDeath present, scripted, passed — fifthDeath={"day":19,"dplus":3,"dplusThird":6,"dplusSecond":9,"dplusFirst":13,"oldFirst":"Alikhan","newFirst":"Mateo","scripted":true,"passed":true,"linOk":true,"moOk":true}
+PASS DRIVER chain records scripted kills in order 2-3-4-5, one flag each — seq=2345 chain=Caleb->Eamon,Eamon->Enrique,Enrique->Grace,Grace->Alikhan,Alikhan->Mateo
+PASS DRIVER scripted chain entries all via playerDeath wrapper — vias=playerDeath,playerDeath,playerDeath,playerDeath
+PASS DRIVER wrote d+3/d+7 convoReads (week-1 instrument present) — w1 reads=5
+PASS DRIVER d+3/d+7 transcript files exist on disk (actual-day names) — files=5/5 late=[Grace label d+3 -> file d+4; Quinn label d+3 -> file d+4; Alikhan label d+3 -> file d+4]
+PASS DRIVER late checkpoint filed under actual day, not label — late=[Grace label d+3 -> file d+4; Quinn label d+3 -> file d+4; Alikhan label d+3 -> file d+4]
+PASS DRIVER proof scratch deleted — leftovers=
+PASS MIX 28152 unasked panel: total 4, nonVerbal 2, draws 0 — mix={"total":4,"nonVerbal":2,"draws":0,"grief":0,"debate":0,"other":0,"unclassified":0}
+PASS MIX 28154 debate >= 1 (Brian Lockpick debate) and grief >= 1 — mix={"total":5,"nonVerbal":0,"draws":2,"grief":1,"debate":1,"other":0,"unclassified":0}
+PASS MIX 28151 grief 2, unclassified 0 (prompt family covers both draws) — mix={"total":4,"nonVerbal":0,"draws":2,"grief":2,"debate":0,"other":0,"unclassified":0}
+PASS MIX seed 28151 topic counts sum to draws — mix={"total":4,"nonVerbal":0,"draws":2,"grief":2,"debate":0,"other":0,"unclassified":0}
+PASS MIX seed 28152 topic counts sum to draws — mix={"total":4,"nonVerbal":2,"draws":0,"grief":0,"debate":0,"other":0,"unclassified":0}
+PASS MIX seed 28153 topic counts sum to draws — mix={"total":4,"nonVerbal":0,"draws":1,"grief":1,"debate":0,"other":0,"unclassified":0}
+PASS MIX seed 28154 topic counts sum to draws — mix={"total":5,"nonVerbal":0,"draws":2,"grief":1,"debate":1,"other":0,"unclassified":0}
+PASS REPLAY RED control: old scriptedFifth entry deadFirst != fifthDeath.oldFirst (collapse present) — oldFifthEntry=Ava->Catalina fifthDeath.oldFirst=Petra
+
+ORGANIC DEATH d25: Patrick -> Darius, topTrust=[{"id":"Kavya","t":90},{"id":"Violet","t":90},{"id":"Latifa","t":72},{"id":"Darius","t":55}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=11 inheritedPlants=0 keptSkills=2 inheritedSkills=0 succTrustPre=90 succTrustPost=55
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","bird_whisperer"] post=["beast_calm","bird_whisperer"]
+DEATH d25 (organic (phase A)): Patrick -> Darius | passed=true lin=true mo=true trust=55 vouchers=3
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Kavya (refused=false)
+  CONVO d+3 with Violet (refused=false)
+  CONVO d+7 with Kavya (refused=false)
+  CONVO d+7 with Latifa (refused=false)
+  CONVO d+14 with Kavya (refused=false)
+  CONVO d+14 with Latifa (refused=false)
+
+SECOND-KILL d+21: Darius -> ? (scripted r64 chain probe)
+SECOND DEATH d+21: Darius -> Kavya passed=true lin=true mo=true
+  CONVO d+30 with Ava (refused=false)
+  CONVO d+30 with Dmitri (refused=false)
+
+THIRD-KILL d+20 since second death: Latifa -> ? (scripted r79 chain probe)
+THIRD DEATH d+20 since second death: Latifa -> Ava passed=true lin=true mo=true
+  CONVO d+45 with Liezl (refused=false)
+  CONVO d+45 with Dmitri (refused=false)
+
+FOURTH-KILL d+10 since third death: Ava -> ? (scripted r79 chain probe)
+FOURTH DEATH d+10 since third death: Ava -> Dmitri passed=true lin=true mo=true
+  CONVO d+53 with Liezl (refused=false)
+  CONVO d+53 with Ruby (refused=false)
+
+FIFTH-KILL d+10 since fourth death: Dmitri -> ? (scripted r117 chain probe)
+FIFTH DEATH d+10 since fourth death: Dmitri -> Ruby passed=true lin=true mo=true
+  CONVO d+64 with Liezl (refused=false)
+  CONVO d+64 with Nikos (refused=false)
+
+FUNERAL: deathBeat=5 recover=1 vouch=1 (eligible=3) echo=3 organicBurial={"respects":false,"bury":false} halfRation=0
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":52,"offerLines":69,"codexPlantsDelta":26,"codexSkillsDelta":20,"codexAbilitiesDelta":16,"xpDelta":52,"any":true} pantry 8343->0
+TRUST-DIALS: office 55->78 (+23, climb) | villageMean 53.8->51.9 (-1.9, flat) | ge60 3->2 | movers>=5: [{"id":"Liezl","from":14,"to":90,"delta":76},{"id":"Nikos","from":42,"to":90,"delta":48}]
+DEED-LEDGER: calls=9 summary={"teachPlant":{"calls":6,"ok":6,"deltaSum":0,"deltaN":6,"positive":0,"meanDelta":0},"donateToPantry":{"calls":3,"ok":3,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=3 (convo=3, say=0)) m4=true m5=manual | endDay=95 alive=9 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=9) trustVerdict={"readable":true,"officeMantle":55,"officeLast":78,"officeDelta":23,"officeClass":"climb","villageMantle":53.8,"villageLast":51.9,"villageDelta":-1.9,"villageClass":"flat","villageGe60Mantle":3,"villageGe60Last":2,"movers":[{"id":"Liezl","from":14,"to":90,"delta":76},{"id":"Nikos","from":42,"to":90,"delta":48}]}
+E6/CALLCHECK: e6={"callMoves":9,"withCensus":9,"chainHandoffs":5,"trustMoves":4} callCheck={"dailyMoveDays":9,"callMoveDays":9,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=4 (v2=5, excludedLoot=1))
+E7/R47: e7={"trustMoves":4,"soloOffice":1,"soloOfficeDeltas":[1],"soloBearerDeltaExact":[1],"singleMoverBearer":0,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":0,"both":4,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":3,"v2":5,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":5,"known":5,"unknown":0} e3={"dailyDays":71,"moves":9}
+PASS SPLIT-PANEL chain length 12 (first death Layla->Clarence is rec.death, not a chain entry) — chain=12
+PASS SPLIT-PANEL fifth handoff Eamon->Ivy, scriptedFifth, passed — fifthDeath={"day":94,"dplus":10,"dplusThird":20,"dplusSecond":40,"dplusFirst":61,"oldFirst":"Eamon","newFirst":"Ivy","scripted":true,"passed":true,"linOk":true,"moOk":true} fifthEntry=Eamon->Ivy
+PASS SPLIT-PANEL iter-61 quadruple recorded distinctly, in order, all via playerDeath — iter61=Ivy->Wanjiru,Wanjiru->Daniyar,Daniyar->Ruth,Ruth->Paola
+PASS SPLIT-PANEL iter-62 triple recorded distinctly, in order, all via playerDeath — iter62=Paola->Amina,Amina->Adaeze,Adaeze->Aroha
+PASS SPLIT-PANEL full chain continuous (no collapsed entry) — chain=Clarence->Peyton,Peyton->Nagisa,Nagisa->Ines,Ines->Eamon,Eamon->Ivy,Ivy->Wanjiru,Wanjiru->Daniyar,Daniyar->Ruth,Ruth->Paola,Paola->Amina,Amina->Adaeze,Adaeze->Aroha
+PASS SPLIT-PANEL tele deaths.bearer = chain + 1 (first death) — tele=13 chain=12
+PASS REPLAY2 chain is a continuous bearer sequence — chain=Darius->Kavya,Kavya->Latifa,Latifa->Ava,Ava->Dmitri,Dmitri->Ruby
+PASS REPLAY2 every chain entry via playerDeath wrapper — vias=playerDeath,playerDeath,playerDeath,playerDeath,playerDeath
+PASS REPLAY2 fifthDeath matches chain scriptedFifth entry (when both present) — fifthDeath={"day":86,"dplus":10,"dplusThird":20,"dplusSecond":40,"dplusFirst":61,"oldFirst":"Dmitri","newFirst":"Ruby","scripted":true,"passed":true,"linOk":true,"moOk":true} scr5=Dmitri->Ruby
+PASS REPLAY2 tele deaths.bearer >= chain length (first death is not a chain entry) — tele=6 chain=5
+REPLAY2 current-master 28152 trajectory: Darius->Kavya,Kavya->Latifa,Latifa->Ava,Ava->Dmitri,Dmitri->Ruby fifth=Dmitri->Ruby teleBearer=6
+PASS REPLAY proof scratch deleted — leftovers=
+
+ALL PASS

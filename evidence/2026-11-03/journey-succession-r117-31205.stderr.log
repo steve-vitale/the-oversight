@@ -1,0 +1,47 @@
+
+ORGANIC DEATH d40: Giovanni -> Catalina, topTrust=[{"id":"Seymour","t":90},{"id":"Victor","t":88},{"id":"Catalina","t":82},{"id":"Lily","t":75}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=19 inheritedPlants=0 keptSkills=6 inheritedSkills=0 succTrustPre=90 succTrustPost=82
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","echo_location"] post=["beast_calm","echo_location"]
+DEATH d40 (organic (phase A)): Giovanni -> Catalina | passed=true lin=true mo=true trust=82 vouchers=7
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Seymour (refused=false)
+  CONVO d+3 with Victor (refused=false)
+  CONVO d+7 with Victor (refused=false)
+  CONVO d+7 with Jorge (refused=false)
+  CONVO d+14 with Victor (refused=false)
+  CONVO d+14 with Jorge (refused=false)
+
+SECOND-KILL d+20: Catalina -> ? (scripted r64 chain probe)
+SECOND DEATH d+20: Catalina -> Victor passed=true lin=true mo=true
+  CONVO d+30 with Nino (refused=false)
+  CONVO d+30 with Jorge (refused=false)
+
+THIRD-KILL d+20 since second death: Sigrun -> ? (scripted r79 chain probe)
+THIRD DEATH d+20 since second death: Sigrun -> Nino passed=true lin=true mo=true
+  CONVO d+45 with Jorge (refused=false)
+  CONVO d+45 with Serwaa (refused=false)
+
+FOURTH-KILL d+10 since third death: Serwaa -> ? (scripted r79 chain probe)
+FOURTH DEATH d+10 since third death: Serwaa -> Nadia passed=true lin=true mo=true
+  CONVO d+53 with David (refused=false)
+
+FIFTH-KILL d+10 since fourth death: Aroha -> ? (scripted r117 chain probe)
+FIFTH DEATH d+10 since fourth death: Aroha -> David passed=true lin=true mo=true
+
+FUNERAL: deathBeat=6 recover=1 vouch=1 (eligible=7) echo=4 organicBurial={"respects":false,"bury":false} halfRation=8
+
+MEAL-GATE: audited=60 violations=1 noMealDays=1 newBodyGatedDays=9 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+  VIOLATION d+61: David trust=18 kcal=0 halfVoice=true
+SUCCESSOR-LIFE: dayAdv=62 signals={"levelUp":true,"systemVoice":34,"offerLines":49,"codexPlantsDelta":24,"codexSkillsDelta":27,"codexAbilitiesDelta":12,"xpDelta":-10,"any":true} pantry 141395->0
+TRUST-DIALS: office 82->84 (+2, flat) | villageMean 74.4->52.3 (-22.1, fall) | ge60 7->3 | movers>=5: [{"id":"Jorge","from":66,"to":90,"delta":24},{"id":"Grace","from":65,"to":85,"delta":20},{"id":"Nino","from":73,"to":90,"delta":17}]
+DEED-LEDGER: calls=34 summary={"donateToPantry":{"calls":34,"ok":34,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=5 grief-excluded=3
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=4 (convo=4, say=0)) m4=true m5=manual | endDay=102 alive=0 over=true
+anomalies: 0
+S-METRICS: s1=false s2=true s3=true s4=false s5=false dayAdv=62
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30) t2=true(deedCalls=34) trustVerdict={"readable":true,"officeMantle":82,"officeLast":84,"officeDelta":2,"officeClass":"flat","villageMantle":74.4,"villageLast":52.3,"villageDelta":-22.1,"villageClass":"fall","villageGe60Mantle":7,"villageGe60Last":3,"movers":[{"id":"Jorge","from":66,"to":90,"delta":24},{"id":"Grace","from":65,"to":85,"delta":20},{"id":"Nino","from":73,"to":90,"delta":17}]}
+E6/CALLCHECK: e6={"callMoves":22,"withCensus":22,"chainHandoffs":9,"trustMoves":13} callCheck={"dailyMoveDays":21,"callMoveDays":21,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=11 (v2=11, excludedLoot=0))
+E7/R47: e7={"trustMoves":13,"soloOffice":4,"soloOfficeDeltas":[1,2,2,1],"soloBearerDeltaExact":[1,2,2,1],"singleMoverBearer":0,"singleMoverOther":3,"eventClass":{"event-only":1,"deed-only":2,"both":10,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":4,"v2":11,"v2Say":7,"v2Delta":7,"arcExcluded":3,"teleWeek2":10,"collision":[]} e2={"chainN":13,"known":13,"unknown":0} e3={"dailyDays":61,"moves":21}

@@ -746,12 +746,25 @@
         const names = c.pendingPartyNames || [];
         const name = names[idx] || names[0];
         if (!name) return { line: '"...Never mind."', youSaid: null };
-        const r = this.nameParty(name);
+        // ROLEPICK-HANDOVER (journey-succession r117): nameParty's spoken
+        // line went to the main log only — the old code returned line null
+        // on ok, so the conversation transcript never showed the naming.
+        // Capture the say lines emitted by the pick and return them as
+        // the turn line, so the beat ENTERS the transcript (r67
+        // principle). The main log still receives them via origSay.
+        const said = [];
+        const origSay = this.say;
+        const self = this;
+        try {
+          this.say = function (text) { said.push(String(text)); if (typeof origSay === 'function') return origSay.call(self, text); };
+        } catch (e) { console.warn('[party] namepick say capture', e); }
+        let r;
+        try { r = this.nameParty(name); } finally { try { this.say = origSay; } catch (e) { console.warn('[party] namepick say restore', e); } }
         try { this.convoDeepTick(vid); } catch (e) {}
         // r67: a completed pick clears the pending sub-menu, so the menu
         // stops offering name picks and moves on to roles.
         if (r.ok) c.pendingPartyNames = null;
-        return { line: r.ok ? null : r.msg, youSaid: `"${name}."` };
+        return { line: r.ok ? (said.join('\n') || null) : r.msg, youSaid: `"${name}."` };
       }
       if (choiceId === 'party_role') {
         // r67: remember the open sub-menu so the menu builder can offer
@@ -772,11 +785,26 @@
       }
       if (choiceId.indexOf('party_rolepick:') === 0) {
         const role = choiceId.split(':')[1];
-        const r = this.assignRole(vid, role);
+        // ROLEPICK-HANDOVER (journey-succession r117): assignRole's spoken
+        // lines — the handover ("X nods, stepping back") and the
+        // assignment ("Y is Scout now") — went to the main log only.
+        // The old code returned line null on ok, so a re-pick read in
+        // the transcript as two people holding scout. Capture the say
+        // lines emitted by the pick and return them as the turn line,
+        // so the beat ENTERS the transcript (r67 principle). The main
+        // log still receives them via origSay.
+        const said = [];
+        const origSay = this.say;
+        const self = this;
+        try {
+          this.say = function (text) { said.push(String(text)); if (typeof origSay === 'function') return origSay.call(self, text); };
+        } catch (e) { console.warn('[party] rolepick say capture', e); }
+        let r;
+        try { r = this.assignRole(vid, role); } finally { try { this.say = origSay; } catch (e) { console.warn('[party] rolepick say restore', e); } }
         try { this.convoDeepTick(vid); } catch (e) {}
         // r67: a completed pick clears the pending sub-menu.
         if (r.ok) c.pendingPartyRole = false;
-        return { line: r.ok ? null : r.msg, youSaid: `"${role}."` };
+        return { line: r.ok ? (said.join('\n') || null) : r.msg, youSaid: `"${role}."` };
       }
       return null;
     },
