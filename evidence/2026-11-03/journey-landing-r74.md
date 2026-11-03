@@ -177,6 +177,20 @@ so the checker reads 0. No other LOUD lines. NO baseline rolled.
 
 ## Closeout note
 
+- Rebase addendum (post-commit, pre-merge): master moved twice during
+  this run (siblings + batch ship to ba36659f9), so the branch rebased
+  cleanly onto ba36659f9 (1 pick, no conflicts — the commit adds only
+  new files). Proof re-run on the rebased tree: both drivers
+  node --check clean; seed-902 replay exit 0 with the live-run pass
+  logging correctly (Maya live/promised/haul 0+0 on days 12–13, Nina
+  correctly still blocked day 13). The 14-loop horizon ended on day 13
+  on the new base (day skips; win-intel changed NPC behavior), so the
+  day-14 end+deliver sequence did not recur in that replay — a DAYS=16
+  replay on the rebased tree closed it: day-15 dawn, Maya broken →
+  END ok=true (runReturned=true in census). Nina had already broken by
+  then (due 14), so no deliver followed on the new base; the
+  end-to-end end→start→deliver chain remains proven by the pre-rebase
+  replay (810 kcal, kept=true). No panel re-scoring from any replay.
 - Quick suite: `node scripts/check.js --quick` run TWICE (second run with
   full output to /tmp/check-quick-r74.log): 284 passed, 6 failed both
   times (742s / 757s). The 6 failures are pre-existing on this base and
