@@ -73,7 +73,15 @@ function persistenceRuns(snapshots, vid) {
 
 function classifySeed(s) {
   const daily = s.daily || [];
-  const last = daily[daily.length - 1] || {};
+  // END SNAPSHOT (instrument correction, not a metric change): the final
+  // snapshot of a lost village is post-collapse (roster wiped, 0 living
+  // fighters), so "end" means the last snapshot with >= 1 living fighter;
+  // only if no snapshot has a living fighter do we fall back to the last.
+  let endIdx = daily.length - 1;
+  for (let i = daily.length - 1; i >= 0; i--) {
+    if ((daily[i].fighters || []).some(function (f) { return f.living; })) { endIdx = i; break; }
+  }
+  const last = daily[endIdx] || {};
   const totalsEnd = villageTotals(last);
   const gateMismatchDays = daily.filter(function (snap) {
     return snap.readiness5 && (snap.recountArmored != null) &&
