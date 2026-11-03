@@ -17129,13 +17129,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (source && !(cur.sources || []).includes(source)) cur.sources = [...(cur.sources || []), source];
         cx.abilities[aid] = cur;
         const nm = def.name || aid;
+        // JOURNAL MARKUP (gap-playtest9 2026-11-02): these lines used to
+        // carry bold markers into a plain-text stream — the narration
+        // box strips HTML and escapes text, so the asterisks printed
+        // literally around the ability name. No surface ever rendered
+        // them as bold, so the markup is stripped at the source instead
+        // of adding a renderer: every surface (narration, Messages,
+        // saved log slices) now reads clean.
         if (level === 1) {
-          this.say(`📓 ${this.state.systemArrived ? 'Codex' : 'Journal'}: you've heard of **${nm}**. ${this.codexAbilityRumor(aid)}`);
+          this.say(`📓 ${this.state.systemArrived ? 'Codex' : 'Journal'}: you've heard of ${nm}. ${this.codexAbilityRumor(aid)}`);
         } else if (level === 2) {
-          this.say(`📓 ${this.state.systemArrived ? 'Codex' : 'Journal'}: you've SEEN **${nm}** now. ${def.description || ''}`);
+          this.say(`📓 ${this.state.systemArrived ? 'Codex' : 'Journal'}: you've SEEN ${nm} now. ${def.description || ''}`);
         } else if (level >= 3) {
           const links = this.codexAbilitySynergyHints(aid);
-          this.say(`📓 ${this.state.systemArrived ? 'Codex' : 'Journal'}: you UNDERSTAND **${nm}**.${links ? ' It resonates with: ' + links + '.' : ''}`);
+          this.say(`📓 ${this.state.systemArrived ? 'Codex' : 'Journal'}: you UNDERSTAND ${nm}.${links ? ' It resonates with: ' + links + '.' : ''}`);
         }
         return true;
       } catch (e) { return false; }
