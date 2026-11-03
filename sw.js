@@ -88,6 +88,7 @@ const ASSETS = [
   "./src/js/party-wiring.js?v=e483747cc-20261103-234611",
   "./src/js/party-bond.js?v=e483747cc-20261103-234611",
   "./src/js/villager-objectives.js?v=e483747cc-20261103-234611",
+  "./src/js/villager-goals.js?v=e483747cc-20261103-234611",
   "./src/js/villager-mapmem.js?v=e483747cc-20261103-234611",
   "./src/js/codex-people.js?v=e483747cc-20261103-234611",
   "./src/js/fallen-memorial.js?v=e483747cc-20261103-234611",

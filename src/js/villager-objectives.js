@@ -500,12 +500,21 @@
       // into hall life; legacy villagers teach when they can (the honest
       // 'teach' gate in the build below keeps the chore real).
       cands.push({ kind: 'HAVEN_CHORE', w: (prof === 'homebody' ? 3 : 1.4) + gwChore, chore: gwChoreTag });
+      // VILLAGER GOALS (goals-sys 2026-11-03): persistent-goal bias from
+      // villager-goals.js — adds weight to existing candidates only, no
+      // new RNG draws, no candidate suppressed. Fails silent by design:
+      // a missing module means the lottery runs exactly as before.
+      try { if (typeof this.vgoalBiasCands === 'function') this.vgoalBiasCands(vid, cands); } catch (e) {}
       var tot = 0, i;
       for (i = 0; i < cands.length; i++) tot += cands[i].w;
       var r = R() * tot, chosen = cands[cands.length - 1];
       for (i = 0; i < cands.length; i++) { r -= cands[i].w; if (r <= 0) { chosen = cands[i]; break; } }
 
       o.kind = chosen.kind; o.targetVid = chosen.targetVid || null;
+      // VILLAGER GOALS (goals-sys 2026-11-03): carry the contributing goal
+      // onto the objective so the departure line can say why (see below).
+      // Set before the kind chain: every early return carries o forward.
+      if (chosen.vgoal) { o.goal = chosen.vgoal; o.goalLine = chosen.vgoalLine || null; }
       o.companion = null; o.indoor = false; o.state = 'ready';
       var dist = 1;
       if (chosen.kind === 'FORAGE') {
@@ -1043,6 +1052,10 @@
         hunt: 'sets out to hunt ' + (function () { try { var _mn = this.monsterDisplayName ? this.monsterDisplayName(obj.huntMid) : 'the beast'; return this.articlePhrase ? this.articlePhrase(_mn) : _mn; } catch (e) { return 'the beast'; } }.call(this)) + '. "It was there. Going back for it."',
       }[obj.purpose] || 'heads out.';
       }
+      // VILLAGER GOALS (goals-sys 2026-11-03): when a goal contributed
+      // weight to this objective, say why — no silent actions. The line
+      // is a plain-words reason clause, never a new verb or surface.
+      if (obj.goalLine) purposeLine += ' ' + obj.goalLine;
       if (playerAtHaven) this.say((obj.companion ? '👥 ' : '') + nm + ' ' + purposeLine);
       // leaving is gossip-worthy. Two witnesses so the rumor can travel.
       var dims = { who: vid };

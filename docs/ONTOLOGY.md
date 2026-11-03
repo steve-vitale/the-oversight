@@ -1933,6 +1933,16 @@ PARITY (Steve 2026-10-14: "Villagers and players should get the same XP, when in
 
 **Consumes:** Game.data.abilities, Game.data.synergies, Game.data.tracks, Game.data.items, state.village.npcAbilities, npcSkills, npcXp, npcKnow, npcBuild, rosterChars (person.items/equipped/stashed), state.scholar.abilities, state.codex.abilities, stashState().weapons, Scattering.equipment (autoEquip, weaponBonusOf, armorOf, slotForItem, isRangedWeapon)
 
+### villager-goals (`villager-goals.js`)
+Persistent per-villager goals (drives) that bias the dawn objective lottery by character type, gated strictly by what the villager personally perceived or learned.
+
+**Provides:** vgoalWeights(vid), vgoalGate(vid, goalId), vgoalBiasCands(vid, cands), vgoalTop(vid, weights), vgoalState(vid)
+
+**Rules:**
+- vgoal_perception_only: a goal scores only what its villager personally perceived or learned (code: vgoalGate)
+
+**Consumes:** —
+
 ### villager-mapmem (`villager-mapmem.js`)
 Villager map memory + cross-node objectives. Villagers remember resource sites on other nodes (v1: corpses) and form haul objectives that carry past whatever node they're on — kills become the resources they are.
 
