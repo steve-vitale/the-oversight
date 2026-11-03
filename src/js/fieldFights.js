@@ -17,6 +17,8 @@
 //   - awareness: the pre-fight evade check ("saw it, gave it room") decides contact, not outcome. (code: fieldFight)
 //   - determinism: opts.rng supplies every random draw (the contest engine's seeded resolution stream) — without it, Math.random/combat.roll exactly as before; the live path is untouched. (code: fieldFight, break-it 2026-10-08)
 //   - gear: the villager re-equips at fight entry (villagerGearUp, acquire=false — deterministic, no mid-fight crafting) and strikes with the tactical formula; equipped armor absorbs via diminishing returns (r = P/(P+20); absorb = min(hit-1, round(hit*r)) — at least 1 always lands) — mirroring the tactical engine, never full immunity. (code: fieldFight, 2026-10-09)
+//   - ally gear parity (code: fieldFight, WINFIELD-DMG 2026-11-03): the ally re-equips at join and strikes with their own weapon on the same tactical formula, and their own armor absorbs hits on them on the same curve — the old flat [3,6] ally strike and unarmored ally body made every party solo in practice.
+//   - party morale (code: fieldFight, WINFIELD-DMG 2026-11-03): with a live ally standing, hopeless/winning compare party HP pool vs total incoming, not the leader alone. Solo fights are unchanged.
 //   - aid_allies_from_start: allied aid parties already at the door (opts.allyFromStart) join from round 1 as real combatants — they came to fight, not to watch; foreign allies carry their own names via opts.foreignAllies. (code: fieldFight, comms 2026-10-10)
 //   - smoke_draws_company: the signal fire's attention arrives as real pack members (opts.packBonus) — blow by blow, never a modifier. (code: fieldFight, comms 2026-10-10)
 //   - foreign_ally_fall: a fallen foreign ally lands on the inter-village link via aidAllyDown (trust, gossip, debt forgiven in blood) — not on a villager record. (code: fieldFight, comms 2026-10-10)
@@ -1170,6 +1172,42 @@
       // This is a Muse call under standing intent (villagers follow the
       // same rules as the player), NOT a Steve ruling — Steve can overrule it.
       var allyEntryHp = 0;
+      // WINFIELD-DMG (2026-11-03): the ally's real gear, computed at join
+      // (same entry gear-up the leader gets, acquire=false). Null = no
+      // villager record (foreign ally) — those keep the old flat strike
+      // and no armor, since there is no gear to read. allyStrikeMult is
+      // the ally's own fed/held strike multiplier (the leader's strikes
+      // pass through GPf.fieldStrike and pick up the fed overcharge
+      // x1.3; the ally's never did, so an equally fed ally hit at x1.0).
+      // Read from the ally's own fieldBegin state — numbers only, no
+      // counter consumption (no harry/birds side effects borrowed
+      // from the leader's state).
+      var allyWb = null, allyArmor = 0, allyStrikeMult = 1;
+      var allyGear = function (id) {
+        try {
+          if ((opts.foreignAllies || {})[id]) return false;
+          if (_G.villagerGearUp) _G.villagerGearUp(id, false);
+          var ap = ((_G.data.villagers || []).find(function (x) { return x.id === id; }) ||
+                    (_G.data.background_survivors || []).find(function (x) { return x.id === id; })) || null;
+          if (!ap) return false;
+          if (S.equipment && S.equipment.weaponBonusOf)
+            allyWb = Math.round(((S.equipment.weaponBonusOf(ap, _G.data.items, 'melee') || 0) +
+                                 (S.equipment.weaponBonusOf(ap, _G.data.items, 'ranged') || 0)) / 2);
+          else allyWb = 0;
+          if (S.equipment && S.equipment.armorOf) allyArmor = S.equipment.armorOf(ap, _G.data.items) || 0;
+          try {
+            var _aAbs = [];
+            if (typeof _G.npcHasAbility === 'function')
+              _aAbs = (typeof _G.npcOwnedIds === 'function') ? _G.npcOwnedIds(id)
+                : (((_G.state.village || {}).npcAbilities || {})[id] || []).slice();
+            if (GPf && GPf.fieldBegin) {
+              var _aGp = GPf.fieldBegin(_G, id, _aAbs);
+              if (_aGp) allyStrikeMult = ((_aGp.strikeMult || 1) * (_aGp.power || 1));
+            }
+          } catch (e) {}
+          return true;
+        } catch (e) { return false; }
+      };
       var allyBody = function (id) {
         try {
           if ((opts.foreignAllies || {})[id]) return { entry: 70, max: 70 };
@@ -1187,6 +1225,7 @@
         helpCalled = true; allyIn = true;
         allyVid = allyVids.shift(); allies--;
         var _ab0 = allyBody(allyVid); allyHp = _ab0.entry; allyMax = _ab0.max; allyEntryHp = _ab0.entry;
+        allyGear(allyVid);
         try {
           var _fa0 = (opts.foreignAllies || {})[allyVid];
           allyName = (_fa0 && _fa0.name) || opts.allyName || refName(allyVid);
@@ -1401,7 +1440,7 @@
                 rec.log.push('  still off-balance from the failed parley, ' + vName + ' takes it worse. (Peacemaker — exposed)');
               }
               // PARTY-UP: the pack splits its attention — the ally who rushed
-              // in is exposed (no armor) and draws some of the hits.
+              // in draws some of the hits (in their own armor, WINFIELD-DMG).
               // TANK — DRAW FIRE (2026-10-12): the taunter makes themselves
               // the problem. The beast's eye stays on them: ally hit share
               // 40% -> 10%. Honest: it doesn't reduce damage, it moves it.
@@ -1448,6 +1487,20 @@
                 var absorbed = Math.min(total - 1, Math.round(total * r));
                 total = total - absorbed;
                 rec.log.push(vName + "'s gear absorbs " + absorbed + '.');
+              }
+              // WINFIELD-DMG (2026-11-03): the same curve for the ally.
+              // The old code skipped armor entirely on ally hits, so a
+              // villager wearing T4 armor died to unarmored 50-70 hits
+              // in 1-2 rounds. "Villagers wear armor now — the fight
+              // must respect it" applies to the second fighter too.
+              if (hittingAlly && allyArmor > 0 && total > 0) {
+                var pierceA = 0;
+                try { pierceA = (mdef && mdef.pierce) || 0; } catch (e) {}
+                var effPA = allyArmor * (1 - Math.min(0.9, Math.max(0, pierceA)));
+                var rA = effPA / (effPA + 20);
+                var absorbedA = Math.min(total - 1, Math.round(total * rA));
+                total = total - absorbedA;
+                rec.log.push(allyName + "'s gear absorbs " + absorbedA + '.');
               }
               total = this.wornDamage(hittingAlly ? allyVid : vid, total, { rng: RR, log: rec.log, scene: 'field' });
               if (hittingAlly) {
@@ -1954,11 +2007,18 @@
             }
             // the ally fights too — a second pair of hands, off-balance from
             // rushing in. A new combatant, not a buff to anyone's stats.
+            // WINFIELD-DMG (2026-11-03): the ally strikes with their OWN
+            // weapon on the same tactical formula as the leader
+            // ([4+wb, 8+wb], wb = halved fold-in). The old flat [3,6]
+            // made a machete ally deal ~4/round while the same machete
+            // in the leader's hands dealt ~24 — the "party" was solo
+            // in practice. Foreign allies (no gear record) keep [3,6].
             if (allyIn && allyHp > 0 && lead.hp > 0) {
-              var ad = lroll([3, 6]);
+              var ad = (allyWb != null) ? lroll([4 + allyWb, 8 + allyWb]) : lroll([3, 6]);
+              if (allyWb != null && allyStrikeMult !== 1) ad = Math.round(ad * allyStrikeMult);
               lead.hp -= ad; rec.mDealt += ad; rec.allyDealt += ad;
               if (lead.hp <= 0) lead.alive = false;
-              rec.log.push('R' + round + ': ' + allyName + ' strikes for ' + ad + ' (' + Math.max(0, lead.hp) + ' left)');
+              rec.log.push('R' + round + ': ' + allyName + ' strikes for ' + ad + (allyStrikeMult !== 1 ? ' (x' + allyStrikeMult.toFixed(1) + ')' : '') + ' (' + Math.max(0, lead.hp) + ' left)');
               // GEARTIER-A (abilities pass): Live Broadcast — the ally
               // fights louder for two rounds. The counter is set by
               // fieldAct on the call round and consumed here, one
@@ -1966,7 +2026,8 @@
               // round one of the two.
               if (gpF && gpF.broadcastN > 0 && lead.hp > 0) {
                 gpF.broadcastN--;
-                var _bd = lroll([3, 6]);
+                var _bd = (allyWb != null) ? lroll([4 + allyWb, 8 + allyWb]) : lroll([3, 6]);
+                if (allyWb != null && allyStrikeMult !== 1) _bd = Math.round(_bd * allyStrikeMult);
                 lead.hp -= _bd; rec.mDealt += _bd; rec.allyDealt += _bd;
                 if (lead.hp <= 0) lead.alive = false;
                 rec.log.push('R' + round + ': ' + allyName + ' strikes again, louder — ' + _bd + ' (' + Math.max(0, lead.hp) + ' left). (Live Broadcast)');
@@ -2040,6 +2101,15 @@
             var vDpr = rec.mDealt / round, mDpr = rec.vTaken / round;
             var rtk = mlead.hp / Math.max(1, vDpr);  // rounds to drop the lead
             var rtd = vHp / Math.max(1, mDpr);       // rounds until the villager drops
+            // WINFIELD-DMG (2026-11-03): with a live ally standing, the
+            // honest comparison is the PARTY's survival against the
+            // beast's TTK — two bodies, total incoming — not the
+            // leader's alone. mDealt already counts party damage, so
+            // only the survival side changes. Solo fights are identical.
+            if (allyIn && allyHp > 0 && allyEntryHp > 0) {
+              var _allyTakenLive = Math.max(0, allyEntryHp - Math.max(0, allyHp));
+              rtd = (vHp + allyHp) / Math.max(1, (rec.vTaken + _allyTakenLive) / round);
+            }
             hopeless = rtd < rtk * 0.85;              // losing before the lead falls — slow bleeds count (loosened 2026-10-13, was 0.6)
             // COUNTERWIRE (2026-10-16): trick-aware morale. A villager
             // performing a KNOWN trick (rec.trickLog non-empty) is not
@@ -2052,6 +2122,19 @@
             if (hopeless && rec.trickLog && rec.trickLog.length && vHp > vHpMax * 0.25) {
               hopeless = false;
               rec.log.push(vName + ' holds the line — working the trick, not the damage race.');
+            }
+            // WINFIELD-DMG (2026-11-03): the same hold for a fighter who
+            // KNOWS the trick but has not performed it yet. The round-2
+            // damage race cannot see the trick's effect — congregation
+            // argue first fires on round 3, after the round-2 hopeless
+            // check — so a knowledgeable villager fled before ever
+            // using the counterplay they knew. Hold on the same terms
+            // (>25% HP); below that, normal morale applies. Floor flee
+            // and death are untouched, and fighters who know no trick
+            // (intentWhy !== 'trick-known') are byte-identical.
+            if (hopeless && !(rec.trickLog && rec.trickLog.length) && rec.intentWhy === 'trick-known' && vHp > vHpMax * 0.25) {
+              hopeless = false;
+              rec.log.push(vName + ' holds the line — they know how this one is fought, and have not had their turn to prove it.');
             }
             winning = rtk <= rtd * 1.1;              // drops the lead first (or trades)
             if (winning) rec.everWinning = true;
@@ -2078,6 +2161,7 @@
           helpCalled = true; allyIn = true;
           allyVid = allyVids.shift(); allies--;
           var _ab1 = allyBody(allyVid); allyHp = _ab1.entry; allyMax = _ab1.max; allyEntryHp = _ab1.entry;
+          allyGear(allyVid);
           // AID (comms 2026-10-10): foreign allies carry their own names.
           try {
             var _fa2 = (opts.foreignAllies || {})[allyVid];

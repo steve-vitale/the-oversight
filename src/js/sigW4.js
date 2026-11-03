@@ -872,10 +872,19 @@
         // Bound by liturgy, it spends the beam-round on the debate instead.
         if (rec.trickArgue) {
           rec.trickArgue = 0;
+          // WINFIELD-DMG (2026-11-03): the debate REPLACES the beam — the
+          // old code narrated "(No beam.)" but left the base Absolution
+          // roll standing, so arguing did nothing mechanically.
+          total = 0;
           say(this, '⛪ The Congregation turns from the beam to the argument — ' + vName + ' cited the liturgy of the lost. It MUST engage. (No beam.)');
         } else {
+          // WINFIELD-DMG (2026-11-03): narrate only. The field engine
+          // already rolled Absolution [50,70] as this round's attack, and
+          // the TB hook says "let the generic Absolution beam run" — the
+          // beam IS that attack. The old extra [50,70] here made beam
+          // rounds deal double damage off-screen, a parity break the
+          // player never faces (one beam per turn in TB).
           say(this, '🔔 The Congregation rings — ' + vName + ' refuses the absolution and takes the beam instead.');
-          total += lroll([50, 70]);
         }
       } else if (id === 'strike' && rec.trickStoodDown) {
         // COUNTERWIRE (2026-10-16): one demand met — the picket stands down
@@ -928,8 +937,10 @@
           say(this, '👥 The Reunion watches ' + vName + ' — learning their moves.');
         }
       } else if (id === 'suburb' && round % 2 === 1) {
+        // WINFIELD-DMG (2026-11-03): narrate only — the TB hook says
+        // "generic Property Tax [35,55] runs", and the field engine
+        // already rolled it. The old extra roll doubled odd-round damage.
         say(this, '🏘️ The Suburb hums comfort at ' + vName + ' — Property Tax for resisting.');
-        total += lroll([35, 55]);
       } else if (id === 'eulogy') {
         // COUNTERWIRE (2026-10-16): contradict the narration. Verses tick
         // down every 2 rounds (matches the old 5-floor(round/2) formula); a
@@ -964,13 +975,22 @@
           total = Math.round(total * 0.5);
           say(this, '🖱️ The Algorithm predicts a fighter and finds ' + vName + ' standing still — soft prediction. Its model goes mushy. (halved)');
         } else {
+          // WINFIELD-DMG (2026-11-03): narrate only — the TB hook says
+          // "generic Engagement [45,65] runs", already rolled by the
+          // field engine. The old extra roll doubled every round.
+          // (The TB repeat-counter x1.5 is deliberately NOT ported: the
+          // off-screen fighter's verb is a strike nearly every round,
+          // so a repeat rule would fire almost always and misrepresent
+          // the choice TB players make.)
           say(this, '🖱️ The Algorithm trailers its next move at ' + vName + ' — the predictable get countered.');
-          total += lroll([45, 65]);
         }
       } else if (id === 'eater') {
         var growth = Math.floor(round / 2) * 15;
         say(this, '👄 The Eater gorges on the field — +' + growth + ' damage growth. (' + vName + ' should have poisoned the meal.)');
-        total += lroll([45, 75]) + growth;
+        // WINFIELD-DMG (2026-11-03): growth only. The TB hook says
+        // "generic Gorge [45,75] + growth runs" — the field engine
+        // already rolled Gorge, so the old code dealt Gorge twice.
+        total += growth;
       }
       ctx.total = total;
       return total;
