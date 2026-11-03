@@ -1137,14 +1137,23 @@
     // One tending per week per link (tendedWeek): trust is a relationship,
     // not a meter — you can't buy a season in an afternoon. Refuses during
     // their mourning (grief is not bought off; the grain waits).
+    // PEER TENDING (journey-scale r92 2026-11-03): the same verb extends
+    // to covenant/trade links (a/b shape, primary null) — the covenant
+    // road stalled one tending short of national in r91 with NO player
+    // verb at all, while the panel already offered the button and the
+    // engine refused it. Same pricing, cadence, choke, and credit; the
+    // seasoned bar itself is untouched. BELONG links (Haven subordinate)
+    // still refuse: tending your overlord is not this verb.
     tendLink(linkId) {
       var links = this.hierarchyState();
       var link = null;
       for (var i = 0; i < links.length; i++) if (links[i].id === linkId) { link = links[i]; break; }
-      if (!link || link.status !== 'active' || link.primary !== HOME) {
+      var isPeer = link && (link.kind === 'covenant' || link.kind === 'trade') && link.primary == null && (link.a === HOME || link.b === HOME);
+      if (!link || link.status !== 'active' || !(link.primary === HOME || isPeer)) {
         this.say('There is no bond of ours to tend there.');
         return 0;
       }
+      var other = (link.primary === HOME) ? link.subordinate : this._linkOther(link, HOME);
       var day = (this.state.scholar || {}).day || 0;
       var week = this._week();
       if (link.tendedWeek === week) {
@@ -1157,7 +1166,7 @@
       }
       var paid = this._removePantryKcal(1500);
       if (!(paid > 0)) {
-        this.say(`The pantry is bare — there is no grain to send to ${this._ovName(link.subordinate)}. They'll hear we came empty-handed, and they'll hear why.`);
+        this.say(`The pantry is bare — there is no grain to send to ${this._ovName(other)}. They'll hear we came empty-handed, and they'll hear why.`);
         return 0;
       }
       var frac = Math.min(1, paid / 1500);
@@ -1171,14 +1180,14 @@
       // the credit rides the same guarded block as the trust gain, credited
       // at the ACTUAL paid amount (partial pantries aid partially).
       try {
-        var _sov = this._otherVillage(link.subordinate);
+        var _sov = this._otherVillage(other);
         if (_sov && paid > 0) _sov.pantryKcal = Math.max(0, (_sov.pantryKcal || 0)) + paid;
       } catch (e) {}
-      var onm = this._ovName(link.subordinate);
+      var onm = this._ovName(other);
       this._linkNote(link, 'tended', 'Haven sent grain (' + paid.toLocaleString() + ' kcal, trust +' + tGain + '); the bond is fed.');
       if (frac >= 1) this.say(`🌾 Haven sends ${paid.toLocaleString()} kcal of grain to ${onm}'s fire — not tribute, the other way around. Someone's grandmother over there will remember who fed her. (Trust +${tGain}.)`);
       else this.say(`🌾 Haven sends ${paid.toLocaleString()} of 1,500 kcal to ${onm} — all the pantry holds. They count the gap, and they count the trying. (Trust +${tGain}.)`);
-      try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'tended:' + link.subordinate); } catch (e) {}
+      try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'tended:' + other); } catch (e) {}
       return paid;
     },
 

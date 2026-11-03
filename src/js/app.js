@@ -17612,15 +17612,25 @@
                 // so the beats were never answerable in practice. Append.
                 const netLive = !!Game.state.networkLive;
                 html += `<div style="margin-top:4px"><p class="small"><b>⛓️ ${netLive ? 'NETWORK (regional)' : 'Links'}:</b></p>` + links.map(l => {
-                  const other = l.subordinate === 'haven' ? l.primary : l.subordinate;
+                  // PEER TENDING (journey-scale r92): peer links (covenant/
+                  // trade) carry no primary/subordinate — resolving the far
+                  // end via subordinate alone rendered them as "them bows
+                  // to Haven" and threw on the missing tribute field. Peers
+                  // are equals: league/charter wording, pool/tariff terms.
+                  const isPeerLink = (l.kind === 'covenant' || l.kind === 'trade') && l.primary == null;
+                  const other = l.subordinate === 'haven' ? l.primary : (l.subordinate || (typeof Game._linkOther === 'function' ? Game._linkOther(l, 'haven') : null));
                   const nm = Game._ovName(other);
                   const sub = l.subordinate === 'haven';
                   const paid = (l.tributePaidWeek >= Math.floor(Game.state.scholar.day / 7));
-                  let h = `<p class="small">⛓️ ${sub ? 'Bows to ' + nm : nm + ' bows to Haven'} · trust ${l.trust} · tribute ${l.tributeKcalPerWeek.toLocaleString()} kcal/wk${sub ? (paid ? ' (paid ✓)' : ' (DUE ⚠)') : ''}`;
+                  const termsSeg = isPeerLink ? (l.kind === 'covenant' ? `pool ${(l.poolKcalPerWeek || 2000).toLocaleString()} kcal/wk` : `tariff ${(l.tariffRate || 1000).toLocaleString()} kcal/wk`) : `tribute ${(l.tributeKcalPerWeek || 0).toLocaleString()} kcal/wk`;
+                  const relSeg = sub ? 'Bows to ' + nm : (isPeerLink ? (l.kind === 'covenant' ? 'League with ' : 'Charter with ') + nm : nm + ' bows to Haven');
+                  let h = `<p class="small">⛓️ ${relSeg} · trust ${l.trust} · ${termsSeg}${sub ? (paid ? ' (paid ✓)' : ' (DUE ⚠)') : ''}`;
                   if (sub && !paid) h += ` <button class="btn sm" data-link-pay="${l.id}">Pay tribute</button>`;
                   // SCALE-WALL FIX (2026-10-12): "send grain" — the tending
-                  // verb for our subordinates. Canon demands tending; the
-                  // engine finally has the verb. 1,500 kcal → +8 trust,
+                  // verb for our subordinates, extended to peer leagues/
+                  // charters in journey-scale r92 (the engine refused
+                  // peers until then). Canon demands tending; the engine
+                  // finally has the verb. 1,500 kcal → +8 trust,
                   // once per week per link.
                   if (!sub) {
                     const tended = (l.tendedWeek >= Math.floor(Game.state.scholar.day / 7));
