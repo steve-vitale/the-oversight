@@ -246,7 +246,14 @@
     let score = 0;
 
     if (slot === 'melee' || slot === 'ranged') {
-      if (def.class !== 'weapon' || !def.weapon) return -1;
+      // WEAPON PROFILE, NOT CLASS LABEL (gap audit 2026-11-02, leg 7): an
+      // item with a weapon profile is a weapon for equip purposes, whatever
+      // its class label — a tool-class machete with +20 in prose but no
+      // weapon object was never picked, and with one it must be. (The only
+      // other non-weapon-class weapon profile in data is chefs_knife, bonus
+      // 8, which becomes a last-resort melee pick — a knife in hand beats
+      // bare hands, and it still loses to every real weapon.)
+      if (!def.weapon) return -1;
       const wantRanged = slot === 'ranged';
       if (isRangedWeapon(def) !== wantRanged) return -1;
       score = (def.weapon.bonus || 0) * 10;

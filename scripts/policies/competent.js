@@ -1984,7 +1984,10 @@ function gearUp(Game, ctx) {
       const out = [];
       const add = (it, fromSlot) => {
         const def = it && defOf(it);
-        if (!def || def.class !== 'weapon' || (it.units == null ? 1 : it.units) <= 0) return;
+        // WEAPON PROFILE, NOT CLASS LABEL (gap audit 2026-11-02, leg 7):
+        // same widening as equipment.js equipScore — a tool-class machete
+        // carrying a weapon profile counts as a weapon here too.
+        if (!def || !def.weapon || (it.units == null ? 1 : it.units) <= 0) return;
         const w = def.weapon || {};
         out.push({ it, fromSlot, w, bonus: w.bonus || 0, slot: weaponSlot(def, w), id: it.itemId || it.id });
       };
