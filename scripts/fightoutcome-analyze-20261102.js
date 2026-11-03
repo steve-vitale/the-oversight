@@ -27,6 +27,7 @@
 'use strict';
 const path = require('path');
 const fs = require('fs');
+const { splitFromLegacy } = require(path.join(__dirname, 'fightoutcome-tableflags'));
 
 const dir = process.argv[2];
 if (!dir) { console.error('FIGHTOUTCOME-ANALYZE STOP: per-seed dir required.'); process.exit(2); }
@@ -90,7 +91,11 @@ function analyzeOne(rec) {
   if (driverUnresolved.length !== missing.length) {
     problems.push('driver unresolved (' + driverUnresolved.length + ') != re-derived missing (' + missing.length + ')');
   }
+  // TABLEDONE SPLIT (20261103): per-seed split via splitFromLegacy.
+  // Legacy table=1 records report null (unknown), never a guess.
+  const split = splitFromLegacy(rec);
   return { seed: rec.seed, run: rec.run, callDay: rec.callDay,
+    tableWaiting: split.tableWaiting, tableDone: split.tableDone,
     attempts: attempts.length, fought: fought.length, foughtTb: foughtTb.length, bypass: bypass.length,
     tbFights: tbFights.length,
     fieldFights: fieldFights.length, titanTb: titanTbCount,
@@ -101,7 +106,7 @@ function analyzeOne(rec) {
 
 const perSeed = [];
 let totFought = 0, totTb = 0, totField = 0, totTitanTb = 0, totMissing = 0, totOrphan = 0, totProblems = 0;
-let wallNational = 0, wallTable = 0, wallWon = 0, wallW4 = 0, wallW5 = 0;
+let wallNational = 0, wallTable = 0, wallTableWaiting = 0, wallTableDone = 0, wallTableUnknown = 0, wallWon = 0, wallW4 = 0, wallW5 = 0;
 const survivals = [];
 files.forEach(function (f) {
   const rec = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
@@ -111,6 +116,11 @@ files.forEach(function (f) {
   totFought += a.fought; totTb += a.tbFights; totField += a.fieldFights; totTitanTb += a.titanTb;
   totMissing += a.missing.length; totOrphan += a.orphanTb.length; totProblems += a.problems.length;
   wallNational += rec.national || 0; wallTable += rec.table || 0; wallWon += rec.won || 0;
+  // Split wall sums are ADDITIVE ONLY: wallTable above is untouched,
+  // so old corpora keep their old wall.table exactly. Unknown counts
+  // legacy table=1 (or table-less) records whose split is unrecoverable.
+  if (a.tableWaiting === null || a.tableDone === null) wallTableUnknown += 1;
+  else { wallTableWaiting += a.tableWaiting; wallTableDone += a.tableDone; }
   wallW4 += rec.wave4 || 0; wallW5 += rec.wave5 || 0;
   if (rec.gameDays != null) survivals.push(rec.gameDays);
 });
@@ -142,7 +152,7 @@ const out = { seeds: perSeed.length, files: files,
     missingOutcomes: totMissing, orphanOutcomes: totOrphan, problems: totProblems },
   floor: { titanTb: floorTitan, fieldFight: floorField },
   legs: { leg1_complete: leg1, leg2_noFalse: leg2, floor: floorTitan && floorField },
-  wall: { national: wallNational, table: wallTable, won: wallWon, wave4: wallW4, wave5: wallW5,
+  wall: { national: wallNational, table: wallTable, tableWaiting: wallTableWaiting, tableDone: wallTableDone, tableUnknown: wallTableUnknown, won: wallWon, wave4: wallW4, wave5: wallW5,
     medianSurvival: medianSurvival, maxSurvival: survivals.length ? survivals[survivals.length - 1] : null,
     survivals: survivals },
   determinism: det, perSeed: perSeed };
@@ -152,7 +162,7 @@ console.log('fought TB: ' + totFought + ' | tbFight rows: ' + totTb + ' | missin
 console.log('field fights: ' + totField + ' | titan TB fights: ' + totTitanTb + ' | problems: ' + totProblems);
 console.log('floor titanTb=' + floorTitan + ' field=' + floorField);
 console.log('leg1_complete=' + leg1 + ' leg2_noFalse=' + leg2);
-console.log('wall: national=' + wallNational + ' table=' + wallTable + ' won=' + wallWon + ' wave4=' + wallW4 + ' wave5=' + wallW5 + ' medianSurvival=' + medianSurvival);
+console.log('wall: national=' + wallNational + ' table=' + wallTable + ' tableWaiting=' + wallTableWaiting + ' tableDone=' + wallTableDone + ' tableUnknown=' + wallTableUnknown + ' won=' + wallWon + ' wave4=' + wallW4 + ' wave5=' + wallW5 + ' medianSurvival=' + medianSurvival);
 if (det) det.forEach(d => console.log('det ' + d.file + ' == ' + d.r2 + ' : ' + d.equal));
 perSeed.forEach(function (s) {
   console.log('seed ' + s.seed + ' call=' + s.callDay + ' fought=' + s.fought + ' (tb=' + s.foughtTb + ' bypass=' + s.bypass + ') tb=' + s.tbFights + ' field=' + s.fieldFights + ' titanTb=' + s.titanTb + ' problems=' + s.problems.length);

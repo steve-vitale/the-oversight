@@ -36,6 +36,7 @@ const TR = require(path.join(REPO, 'scripts', 'policies', 'titanroute'));
 const MC = require(path.join(REPO, 'scripts', 'policies', 'musterclose'));
 const MG = require(path.join(REPO, 'scripts', 'policies', 'mustergap'));
 const REC = require(path.join(REPO, 'scripts', 'fightoutcome-recorder'));
+const { tableFlags } = require(path.join(REPO, 'scripts', 'fightoutcome-tableflags'));
 
 for (const k of ['FEASTSCALE_R13', 'TRIBFLOOR', 'WINPURSUIT', 'WINDEFER', 'SEATDRIVE', 'FULLSEAT', 'HERALD']) {
   if (process.env[k] !== '1') { console.error(`FIGHTOUTCOME STOP: ${k}=1 is required.`); process.exit(2); }
@@ -137,9 +138,15 @@ async function oneRun(seed) {
   try { uninstall(); } catch (e) { errors.push('uninstall: ' + String(e.message).slice(0, 80)); }
 
   const st = Game.state || {};
-  let national = 0, table = 0;
+  let national = 0;
+  // TABLEDONE SPLIT (20261103): emit tableWaiting and tableDone as
+  // DISTINCT fields read from the same progState() the old latch
+  // read. Legacy `table` (= waiting OR done) is kept alongside so
+  // existing screens keep working; new screens must use the split
+  // fields, never the latch, where the distinction matters.
+  let table = 0, tableWaiting = 0, tableDone = 0;
   try { const r = (Game.scaleRank ? Game.scaleRank() : 'village') || 'village'; if (r === 'national' || r === 'global') national = 1; } catch (e) { errors.push('rank: ' + String(e.message).slice(0, 80)); }
-  try { const pg = Game.progState ? Game.progState() : {}; if (pg.tableWaiting || pg.tableDone) table = 1; } catch (e) { errors.push('prog: ' + String(e.message).slice(0, 80)); }
+  try { const pg = Game.progState ? Game.progState() : {}; const tf = tableFlags(pg); tableWaiting = tf.tableWaiting; tableDone = tf.tableDone; table = tf.table; } catch (e) { errors.push('prog: ' + String(e.message).slice(0, 80)); }
   let won = 0;
   try { won = !!Game.won ? 1 : 0; } catch (e) { /* won stays 0 */ }
   const gameDays = (st.scholar && st.scholar.day) || 0;
@@ -194,7 +201,7 @@ async function oneRun(seed) {
     callCount: anchoredLines.filter(l => /THE CALL GOES OUT/.test(l.line)).length,
     anchoredLines: anchoredLines,
     maxWave: maxWave, wave4: maxWave >= 4 ? 1 : 0, wave5: maxWave >= 5 ? 1 : 0,
-    national: national, table: table, won: won,
+    national: national, table: table, tableWaiting: tableWaiting, tableDone: tableDone, won: won,
     days: result.days, gameDays: gameDays, endReason: result.endReason,
     deaths: ((result.samples || {}).deaths || []).length,
     errors: errors.concat(t.instrumentErrors || []),
@@ -217,7 +224,7 @@ async function oneRun(seed) {
       unresolved: rec.unresolved,
       fieldFights: rec.fieldFightCount,
       titanOutcomes: (rec.titanOutcomesEnd || []).map(function (o) { return { day: o.day, titan: o.titan, outcome: o.outcome }; }),
-      maxWave: rec.maxWave, national: rec.national, table: rec.table, won: rec.won,
+      maxWave: rec.maxWave, national: rec.national, table: rec.table, tableWaiting: rec.tableWaiting, tableDone: rec.tableDone, won: rec.won,
       gameDays: rec.gameDays, endReason: rec.endReason, deaths: rec.deaths,
       errors: rec.errors.length, file: path.relative(REPO, file) };
     console.log(JSON.stringify(line));
