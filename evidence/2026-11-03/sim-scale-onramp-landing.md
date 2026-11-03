@@ -138,6 +138,17 @@ gorge continues — the muster gate working as designed.
   batch ship 112500) is an ANCESTOR of local master, local 13 ahead
   — no divergence, no stale-base hazard; the rebased branch contains
   origin's tip.
+- SECOND rebase (same run, before merge): master moved again while
+  this run verified — gap-playtest9 legs a–d landed as d87f49731
+  (Haven panel, journal markup, forage buttons, pantry wording;
+  touches src/js/app.js, the arm's file). Rebase clean 3/3; the
+  combined app.js diff vs new master is byte-identical to the
+  original arm diff (same two hunks — gap changes sit in other
+  regions). Post-rebase re-verification: proof ALL GREEN, adjacent
+  36/36 + 9/9 + 19/19, and gap-playtest9's own four suites all pass
+  (forage, journal, pantry, UI). Branch state at second rebase:
+  f99c6cc3e (evidence) on c8ea5a6dd (arm) on 774fbf9e7 (prereg);
+  this addendum is committed on top before the merge.
 - Merge to local master via --ff-only (this run's closeout step),
   worktree released + removed, branch deleted, final reap, main
   tree verified clean. Merged locally, pending ship — no push, no
