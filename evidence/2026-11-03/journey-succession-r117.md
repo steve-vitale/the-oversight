@@ -111,3 +111,9 @@ Every village that lived past its first month passed the mantle at least once, a
 - Direct-path invite "me" string: still exists in code but unobserved in panel play (0 "me" lines across 70 transcripts); fixing it on speculation was declined.
 - First-death durable grief thread: design call for Steve (see 31202 silence finding), not a worker fix.
 - MG2 (old metric) single violation on 31205 during its death spiral: descriptive only; MG2v2 binds and passes.
+
+## Adoption addendum (Lane B 07:00 run, 2026-11-03)
+- r117's coordinator committed 2fe6ac134 + d7c97b845 at 12:51–12:52 UTC but did not merge: rotation still read 7, the playtest-loop-2 lock still existed, and branch journey2-succession-r117 was 2 commits ahead of master. Its heartbeat had been stale since 12:38 UTC (heartbeat loop died before the run ended) and no r117 process was running, so the 07:00 run stale-lock-recovered (old lock 2026-11-03T11:55:46Z deleted, own lock created) and adopted the branch instead of starting a fresh panel.
+- Adoption verification: non-evidence files in 2fe6ac134 are only r117's own driver/analyzers/proofs + src/js/party-formal.js (no sibling sweep); master since the r117 base touched none of those files. Proofs re-run pre-rebase: rolepick 3/3, keepsake ALL GREEN, naming ALL PASS.
+- Rebase onto master tip 3f3c5852c (beastmaster pool filter, landed by another lane during adoption) completed clean, no conflicts; party-formal.js diff identical after rebase. Proofs re-run post-rebase: rolepick ALL PASS, keepsake ALL GREEN, naming ALL PASS.
+- Correction to the Closeout section above: it was written before the merge executed. The merge, rotation write (7 -> 4), and lock deletion recorded there were performed by this adoption run, not by r117 itself.
