@@ -30034,21 +30034,79 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // A hurt traveler eating from a pack away from the haven used to
     // leave no line at all — their decline existed only in the meal
     // log while the haven ate on-screen (Stan, David, Misky sightings).
-    // This line names the traveler and what they carry / ate, nothing
-    // else: it invents no history, reason, or fate, and it changes no
-    // number, draw, or outcome — packMeal's amounts above are untouched,
-    // no Math.random is read, and the armed trajectory must match the
-    // baseline exactly (the sweep's meal/death identity proof checks it).
+    // This line names the traveler and what they carry / ate, plus —
+    // since sim-hurttraveler-b 2026-11-03 — the TRUE, state-derived
+    // reason they are still out (awayReasonSentence below): the away
+    // record's purpose and the return clock's remainder, computed with
+    // the same arithmetic as npcNodeTravel's return branch. It still
+    // invents no history or fate, and it changes no number, draw, or
+    // outcome — packMeal's amounts above are untouched, no Math.random
+    // is read, and the armed trajectory must match the baseline
+    // exactly (the sweep's meal/death identity proof checks it).
     // The name comes from THIS meal's own vid via getPerson — never a
     // haven speaker's name — so the line cannot borrow a name the way
-    // the generic haven beats did. It fires only for away villagers
-    // (packMeal's only caller is the away branch of villagerMealDay, and
-    // the away check below holds even if a future caller misuses it),
-    // only at health <= 7 (the upper bound of the 3–7 HP death shape
-    // from sim-awayration-size-b), and at most once per (vid,day): the
-    // second villagerMealDay caller found by pantrystarve/fullpantry
-    // would otherwise print twice. The day-marker writes narration
-    // bookkeeping only — no amount, draw, or outcome passes through it.
+    // the generic haven beats did; a visit/guard target name comes
+    // from that trip's own obj.targetVid, never a bystander. It fires
+    // only for away villagers (packMeal's only caller is the away
+    // branch of villagerMealDay, and the away check below holds even
+    // if a future caller misuses it), only at health <= 7 (the upper
+    // bound of the 3–7 HP death shape from sim-awayration-size-b),
+    // and at most once per (vid,day): the second villagerMealDay
+    // caller found by pantrystarve/fullpantry would otherwise print
+    // twice. The day-marker writes narration bookkeeping only — no
+    // amount, draw, or outcome passes through it.
+    //
+    // awayReasonSentence(vid): the reason sentence for the line above.
+    // WHY a hurt villager is still out (sim-hurttraveler-b diag, 23/23
+    // cases on current master): departures are health-gated
+    // (objHealGate patches or sits out the hurt before they leave),
+    // but the return branch checks ONLY the clock (partsAway >=
+    // away.duration) — no health check, no early return. So the
+    // traveler was hurt WHILE away (monster on the trip, same day in
+    // every sampled case) and the trip simply isn't over yet. This
+    // sentence says exactly that, from the away record + objective
+    // state + the return clock — never a guessed errand, never an ETA
+    // the clock doesn't state. Returns '' when there is no away
+    // record or the reason cannot be derived (the line then stands
+    // without it, as before — never a wrong reason).
+    awayReasonSentence(vid) {
+      try {
+        const v = this.state.village;
+        if (!v || !(v.away && v.away[vid])) return '';
+        const aw = v.away[vid];
+        const dayNow = (this.state.scholar || {}).day || 0;
+        const partNow = this.dayPart || 0;
+        // Same arithmetic as npcNodeTravel's return branch.
+        const partsAway = (dayNow - (aw.sinceDay || dayNow)) * 4 + (partNow - (aw.sincePart || 0));
+        const partsLeft = (aw.duration || 4) - partsAway;
+        let obj = null;
+        try { obj = this.objOf ? this.objOf(vid) : null; } catch (e) {}
+        let targetFirst = null;
+        try {
+          if (obj && obj.targetVid && this.displayName) {
+            const tn = this.displayName(obj.targetVid);
+            if (tn && tn !== 'Someone') targetFirst = String(tn).split(' ')[0];
+          }
+        } catch (e) {}
+        if (aw.purpose === 'leave') return "They walked away from Haven and haven't come back.";
+        let errand = '';
+        if (aw.purpose === 'expedition' || aw.purpose === 'explore') errand = 'still out on a long trek';
+        else if (aw.purpose === 'forage') errand = 'still out foraging';
+        else if (aw.purpose === 'water') errand = 'still out fetching water';
+        else if (aw.purpose === 'traps') errand = 'still out checking the snares';
+        else if (aw.purpose === 'visit') errand = targetFirst ? ('still out visiting ' + targetFirst) : 'still out on a visit';
+        else if (aw.purpose === 'guard') errand = targetFirst ? ('still out walking with ' + targetFirst) : 'still out walking with a companion';
+        else if (aw.purpose === 'haul') errand = 'still out on a haul';
+        else if (aw.purpose === 'hunt') errand = 'still out hunting';
+        const returning = !!(obj && obj.state === 'returning');
+        let tail = '';
+        if (returning) tail = 'already walking home';
+        else if (partsLeft <= 0) tail = 'due home — the trip\'s time is up, they just haven\'t walked in yet';
+        else tail = 'the trip isn\'t over yet';
+        if (errand) return "They're " + errand + ' — ' + tail + '.';
+        return "They're " + tail + '.';
+      } catch (e) { return ''; }
+    },
     awayHungerVoice(vid, want, take, pool) {
       try {
         const v = this.state.village;
@@ -30063,9 +30121,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         mark.seen[mkey] = true;
         const person = this.getPerson ? this.getPerson(vid) : null;
         const first = String((person && person.name) || 'Someone').split(' ')[0];
-        if (take <= 0) this.say(`${first} is away from the haven, hurt (health ${hp}/100), and their pack is empty — nothing to eat out here.`);
-        else if (take < want) this.say(`${first} eats away from the haven on a short pack meal — ${Math.round(take)} kcal from the pack, ${Math.round(want)} wanted — while hurt (health ${hp}/100). The haven's shelves can't reach them out here.`);
-        else this.say(`${first} eats away from the haven — ${Math.round(take)} kcal from the pack — while hurt (health ${hp}/100), far from the haven's shelves.`);
+        let reason = '';
+        try { reason = this.awayReasonSentence ? (this.awayReasonSentence(vid) || '') : ''; } catch (e) { reason = ''; }
+        const rs = reason ? (' ' + reason) : '';
+        if (take <= 0) this.say(`${first} is away from the haven, hurt (health ${hp}/100), and their pack is empty — nothing to eat out here.${rs}`);
+        else if (take < want) this.say(`${first} eats away from the haven on a short pack meal — ${Math.round(take)} kcal from the pack, ${Math.round(want)} wanted — while hurt (health ${hp}/100). The haven's shelves can't reach them out here.${rs}`);
+        // (sim-hurttraveler-b: the old "far from the haven's shelves"
+        // tail is dropped — it was false on sampled cases already
+        // standing on the haven node but still ledger-away, and the
+        // reason sentence now carries the line's meaning instead.)
+        else this.say(`${first} eats away from the haven — ${Math.round(take)} kcal from the pack — while hurt (health ${hp}/100).${rs}`);
       } catch (e) {}
     },
 
