@@ -226,7 +226,57 @@ this addendum — it names the confirm band only. The confirm verdict
 is judged by the SAME legs on the confirm band; a confirm miss means
 the pilot GO does not stand, and the arm is KILLED.
 
+## CORRECTION — pilot GO withdrawn, arm KILLED (2026-11-03 adoption run)
+
+The "Confirm band" paragraph above is SUPERSEDED by this correction.
+It was written from the JSON recomputation alone, which gives
+wrap-based b2 = 0. That number is instrument-zero, not measured
+safety, and the pilot GO claimed on it does not stand:
+
+- INSTRUMENT DEFECT: the driver's faceFeastDraw wrap records an arm
+  fight only if `Game.tbfight.id` is set AFTER the wrapped call
+  returns. In node, combat runs synchronously and `tbfight` is
+  nulled at fight end (game.js, party.js), so the post-return check
+  can never fire. Proof in the pilot data itself: fdArmFightCount
+  = 0 across all 15 layer draws while deed fights for drawn
+  monsters exist (e.g. variant 98601: audit drawn day 70, audit
+  deed fight day 70). The tele wrap then has no fight ids to
+  match, so attributedDeaths is structurally 0 on every seed.
+- TRUE b2 BY FIGHT-SEQUENCE ATTRIBUTION (circling line -> fight
+  header -> "You go down" -> death line -> mantle transfer, no
+  intervening fight; strictly stronger than a day join, and the
+  fight identity the prereg's b2 intends): THREE scholar deaths
+  inside layer-draw fights — variant 98601 day 70, THE AUDIT
+  (Amina dead); variant 98604 day 62, THE EATER (Carolina dead);
+  variant 98606 day 44, THE CALLBACK (Emilio dead). The full
+  mantle enumeration for all five drawing seeds (mantle count =
+  scholarDeaths on every seed) leaves no other draw-fight death
+  and no draw-day+1 candidate. True b2 = 3 > 2: the cost leg
+  FAILS. Per the prereg ("anything else = KILLED"), the arm is
+  KILLED. The other three legs as recomputed (seeds>=1w4 +2,
+  starvation 2->2, median 86->86) are unaffected and are reported
+  in evidence for the record; they do not rescue a failed cost
+  leg.
+- CONFIRM: NOT run to verdict. The confirm sweep was stopped
+  during its baseline leg once the pilot kill was established;
+  its two partial baseline outputs (98701, 98702) were deleted as
+  unjudged and are judged by nothing. The band 98701–98712 was
+  never judged, influenced no verdict, and remains fresh.
+- KILL PROTOCOL (per prereg): policy file and proof test
+  deleted; prereg + driver + pilot per-seed JSONs + compare +
+  evidence kept. Verdict: KILLED. No cadence change is deployed,
+  and none is held for deployment — the arm is dead, not
+  validated.
+
 ## Metric review
 
-(To be filled at closeout. A miss here is NO-GO; a wrong metric is
-proposed for the NEXT run, never re-scored in this one.)
+A miss here is NO-GO; a wrong metric is proposed for the NEXT run,
+never re-scored in this one. This run's lesson, for the next run:
+never reuse a post-return `tbfight.id` attribution wrap — capture
+fight identity at fight START (wrap `startCombat` entry, or match
+tele deaths against the live fight's fighters during the fight),
+and prove the wrap fires on a pilot seed with a known draw fight
+before any judged leg uses it. A zero from an attribution wrap
+must be accompanied by its fire count (here fdArmFightCount = 0
+was the tell, present in the data from the start). Full review in
+evidence/2026-11-03/sim-feastdraww4-a.md.
