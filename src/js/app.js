@@ -1319,9 +1319,15 @@
       let labels = [];
       try { labels = Game.cellActions(cx, cy) || []; } catch (e) { continue; }
       for (const label of labels) {
-        // dedupe: same action label once (nearest cell wins)
-        if (seen.has(label)) continue;
-        seen.add(label);
+        // dedupe: same action label once (nearest cell wins) — EXCEPT
+        // forage: one button per direction (gap-playtest9 2026-11-02).
+        // The old dedupe collapsed every nearby green cell into a single
+        // "Forage ↖" button, so a player ringed by green saw one direction
+        // and could not tell the other patches existed. Forage buttons
+        // keep their direction arrow each, so all nearby green reads.
+        const key = label.startsWith('Forage') ? label + '@' + cx + ',' + cy : label;
+        if (seen.has(key)) continue;
+        seen.add(key);
         items.push({ cx, cy, label });
       }
     }
@@ -18505,12 +18511,25 @@
         // never overwritten by the cell underneath. People are not grass.
         // (Player was skipped here and the cell glyph overwrote the sprite —
         //  Steve 2026-10-06: player invisible on grid.)
+        // STOOD-ON GLYPH (gap-playtest9 2026-11-02): the overlay below
+        // replaces the cell glyph with the player token, so the ground
+        // underfoot became invisible — a player standing on a plant saw
+        // only themselves and could not tell the tile was forageable.
+        // Keep the cell's glyph as a small corner chip on the token.
+        const _stoodGlyph = (isMe && g) ? String(g) : '';
+        const _stoodName = isMe ? (cls.includes('emptybush') ? 'a picked-clean bush'
+          : cls.includes('berrybush') || cls.includes('knownbush') ? 'a berry bush'
+          : cls.includes('knownplant') ? 'a known plant'
+          : cls.includes('plantcell') ? 'a plant'
+          : cls.includes('c-bigtree') ? 'a big tree'
+          : cls.includes('c-tree') ? 'a tree' : cell) : '';
         if (isMe) {
           const _alert2 = tgPlayerAlertClasses(_tg, _gwDive, pmx, pmy).join(' ');
           const meVp2 = Game.data.villagers.find(v => v.id === Game.villagerId) || (Game.data.background_survivors || []).find(v => v.id === Game.villagerId);
           const _mspr2 = villagerSpriteHtml(meVp2);
           const meName2 = meVp2 ? meVp2.name.split(' ')[0] : 'You';
-          g = `<span class="vent${_alert2 ? ' ' + _alert2 : ''}" data-ent="me"><span class="vtoken">${_mspr2 || '🧍'}</span>` + (meName2 ? `<span class="vname">${esc(meName2)}</span>` : '') + `</span>`;
+          g = `<span class="vent${_alert2 ? ' ' + _alert2 : ''}" data-ent="me"><span class="vtoken">${_mspr2 || '🧍'}</span>` + (meName2 ? `<span class="vname">${esc(meName2)}</span>` : '') + `</span>` +
+            (_stoodGlyph ? `<span class="stood-glyph${isDepleted ? ' depleted' : ''}" title="Standing on ${_stoodName}" aria-hidden="true">${_stoodGlyph}</span>` : '');
           // TITAN FIGHT (Steve 2026-10-11): spotlight the player among the ants
           try {
             if (document.body.classList.contains('titan-fight')) cls += ' player-spotlight';

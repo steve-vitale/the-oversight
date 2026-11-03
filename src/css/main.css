@@ -577,6 +577,18 @@ body.system-live .ord-narration .inlinecard .inline-btns {
 .cell.me .vtoken .vsprite svg.sprite { width: 100%; height: 100%; display: block;
   overflow: visible; }
 .cell.villager .vtoken .vsprite { display: inline-block; width: 2em; height: 2em; vertical-align: -0.2em; }
+/* STOOD-ON GLYPH (gap-playtest9 2026-11-02): the ground under the player's
+   feet stays visible as a small corner chip — the player token no longer
+   hides whether the stood-on tile is a plant, bush or tree. Taps still land
+   on the cell (pointer-events:none); the chip is a marker, not a button. */
+.cell.me .stood-glyph { position: absolute; right: 1px; bottom: 1px; z-index: 3;
+  width: 36%; height: 36%; min-width: 14px; min-height: 14px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(10, 12, 18, .72); border: 1px solid rgba(255, 255, 255, .25);
+  border-radius: 6px; font-size: 12px; line-height: 1; pointer-events: none; overflow: hidden; }
+.cell.me .stood-glyph svg { width: 100% !important; height: 100% !important; display: block; }
+.cell.me .stood-glyph .plantsprite, .cell.me .stood-glyph .treesprite { width: 100%; height: 100%; display: flex; }
+.cell.me .stood-glyph.depleted { opacity: .55; filter: grayscale(.7); }
 /* HARD CONSTRAINT (Steve 2026-10-06): sprites must not break the grid layout.
    Villager/monster sprites capped at 40px. Player has its own larger cap above. */
 .cell .vsprite, .detail .vsprite { max-width: 100% !important; max-height: 100% !important; }

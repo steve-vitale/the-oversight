@@ -26789,7 +26789,37 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // CITY PAVEMENT (fixall-map slice 3): streets and plazas never
         // regrow — "nothing left today" would lie about tomorrow. Name it.
         if (t.type === 'street' || t.type === 'plaza') { if (S.buildarounds) S.buildarounds.onForage(this, false); this.say('Bare pavement — nothing grows here.'); return null; }
-        if (!S.forage.canForage(t)) { if (S.buildarounds) S.buildarounds.onForage(this, false); this.say('Nothing left to take here today.'); return null; }
+        // PATCH-TRUTH GATE (gap-playtest9 2026-11-02): the abstract stock
+        // gate used to veto ground that visibly holds plants. The Haven
+        // tile carries stock 0 by design, so its teaching garden patch —
+        // planted precisely so a new player learns the forage verb — refused
+        // every press with "Nothing left to take here today." The grid is
+        // the inventory: when the 3x3 patch around you holds un-picked
+        // forageable cells, the sweep runs even if abstract stock reads 0
+        // (stripGround already no-ops on a zero-cap tile, and detailRegrow
+        // still paces the patch's 3-day recovery). When the patch holds
+        // nothing, the refusal names the real state instead of "today".
+        const _patchState = (() => {
+          const FORAGEABLE = { plant: 1, bush: 1, tree: 1, bigtree: 1 };
+          let green = false, regrowing = false, otherGreen = false, otherRegrowing = false;
+          for (let cy = 0; cy < 9; cy++) for (let cx = 0; cx < 9; cx++) {
+            const c = detail[cy] && detail[cy][cx];
+            if (!FORAGEABLE[c] || this.cellScorched(cx, cy)) continue;
+            const inPatch = Math.abs(cx - mx) <= 1 && Math.abs(cy - my) <= 1;
+            if (t.detailRegrow && t.detailRegrow[cx + ',' + cy]) { if (inPatch) regrowing = true; else otherRegrowing = true; continue; }
+            if (inPatch) green = true; else otherGreen = true;
+          }
+          return { green, regrowing, otherGreen, otherRegrowing };
+        })();
+        if (!S.forage.canForage(t) && !_patchState.green) {
+          if (S.buildarounds) S.buildarounds.onForage(this, false);
+          if (_patchState.regrowing) this.say('This patch is picked clean — it comes back in a few days. Work another green patch meanwhile.');
+          else if (_patchState.otherGreen) this.say('Nothing within reach. Walk to the green first.');
+          else if (_patchState.otherRegrowing) this.say('This ground is picked clean — it comes back in a few days. Wild ground further out may still have green.');
+          else if (t.type === 'haven') this.say('Nothing grows to take on the Haven grounds right now. Walk out past the door to wild ground.');
+          else this.say('Nothing within reach. Walk to the green first.');
+          return null;
+        }
         // AREA SWEEP (Steve): forage is an area action, not a tile action. One
         // press works the patch around you — your cell + the 8 around it. The
         // yield is whatever's actually there; the game knows every species,
