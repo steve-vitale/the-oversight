@@ -24,6 +24,8 @@
 //   - refuseTheScale()
 //   - answerDemand(a, b)
 //   - payTribute(a, b)
+//   - callInArrears(linkId)
+//   - forgiveArrears(linkId)
 //   - tendLink(linkId)
 //   - primaryDemand(linkId)
 //   - proveWorth(linkId, vid, mag)
@@ -83,6 +85,8 @@
 //   - tribute_partials_dont_double_count: weekly tribute payments accumulate (tributePaidKcal); linkTick charges the true shortfall once — paying half is strictly better than paying nothing. (code: hierarchy.js)
 //   - debts_survive_the_break: re-linking a broken pair inherits the latest broken link's outstanding arrears — break to wipe the debt is an exploit the engine refuses, and says so. (code: hierarchy.js)
 //   - the_table_burns_the_books: bidForPrimacy's flip clears old arrears (the new primary writes the books) and SAYS so — silent forgiveness was an exploit-shaped honesty hole. (code: hierarchy.js)
+//   - arrears_can_be_called_in (gap-arrears 2026-11-02): a Haven-primary link's arrears are a callable debt, not a dead ledger. callInArrears stages the call; later weekly ticks take back-payment from the subordinate's own pantry AFTER that week's tribute, week by week, until the ledger is clean. Real food, never minted; the national x1.25 routing applies exactly as to weekly tribute. Full settlement earns trust +3 via _trustGain (the payTribute full-week number); a partial back-payment costs no trust (they tried); an empty pantry costs nothing extra (hunger isn't defiance, and the weekly shortfall already charged). A deposit-gate waived week defers collection, like the tribute itself. (code: hierarchy.js)
+//   - arrears_can_be_forgiven (gap-arrears 2026-11-02): forgiveArrears wipes a Haven-primary link's arrears as mercy. The cost is the food forgone, said aloud with the amount; trust +6 via _trustGain (mourning still chokes the gain, never the forgiveness). Forgiveness also clears a staged call-in. Neither verb retunes tribute rates or gates — the BELONG bar (arrears 0) is unchanged; this only supplies a path to reach it. (code: hierarchy.js)
 //   - tribute_is_real_food: when our subordinate pays, the kcal arrive as a real spoil-dated pantry item — "the pantry grows" is engine, not copy. (code: hierarchy.js)
 //   - their_fields_pay: a subordinate's tribute is debited from THEIR pantry — a starving fire can't pay 4,000 kcal/week from nothing. Shortfalls are said aloud, cost trust, and accrue arrears (sibling of league_pool_is_real_food's thin-air fix). The System's x1.25 national routing still applies to what actually arrives, and the arrival line names the true amount. (code: hierarchy.js)
 //   - the_moment_survives: a pending accord killed by a broken first link is said aloud and restaged on the next link (accordUnanswered) — the Regional Dawn moment is never lost silently. (code: hierarchy.js)
@@ -1054,6 +1058,69 @@
       return paid;
     },
 
+    // callInArrears: Haven-as-primary calls a subordinate's old debt due.
+    // The verb itself moves no food and no trust — it stages the call
+    // (link.arrearsCalled), and the weekly tick collects it: back-payment
+    // from the subordinate's own pantry after that week's tribute, week by
+    // week, until the ledger is clean (see linkTick's primary branch).
+    // Refuses peer links (no primary), subordinate-Haven links (Haven owes
+    // THEM — payTribute is that direction's verb), links with no arrears,
+    // and a call already out. The call dies with the link if it breaks; a
+    // re-formed link inherits the debt but not the call — the new table
+    // must call it in fresh. Blocked for exiled / joined-away answerers
+    // (see _blockIfNotHaven below), like tendLink.
+    callInArrears(linkId) {
+      var links = this.hierarchyState();
+      var link = null;
+      for (var i = 0; i < links.length; i++) if (links[i].id === linkId) { link = links[i]; break; }
+      if (!link || link.status !== 'active' || link.primary !== HOME) {
+        this.say('There is no subordinate debt to call in there.');
+        return null;
+      }
+      if (!(link.arrears > 0)) {
+        this.say(`${this._ovName(link.subordinate)} owes Haven nothing old — the ledger is already clean.`);
+        return 0;
+      }
+      if (link.arrearsCalled) {
+        this.say(`The call is already out — ${this._ovName(link.subordinate)} knows the old debt is due. The wagons take what their fields can spare, week by week.`);
+        return 0;
+      }
+      link.arrearsCalled = true;
+      this._linkNote(link, 'arrears', 'Haven called in the old debt: ' + link.arrears.toLocaleString() + ' kcal. Back-payment rides after each week\'s tribute until clean.');
+      try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'arrears-called:' + link.subordinate); } catch (e) {}
+      this.say(`📜 Haven calls in the old debt: ${link.arrears.toLocaleString()} kcal owed by ${this._ovName(link.subordinate)}. No new tribute rate, no new gate — just the ledger, settled. Their wagons will carry what their fields can spare after each week's tribute, until the books are clean.`);
+      return true;
+    },
+
+    // forgiveArrears: Haven-as-primary wipes a subordinate's old debt as
+    // mercy. The cost is real and named — the food forgone, said aloud
+    // with the amount — and the trust gain (+6) routes through _trustGain,
+    // so mourning still chokes the gain while the forgiveness itself
+    // stands. Also clears a staged call-in: mercy ends the collection.
+    // Same direction guards as callInArrears. Returns the kcal forgiven.
+    forgiveArrears(linkId) {
+      var links = this.hierarchyState();
+      var link = null;
+      for (var i = 0; i < links.length; i++) if (links[i].id === linkId) { link = links[i]; break; }
+      if (!link || link.status !== 'active' || link.primary !== HOME) {
+        this.say('There is no subordinate debt to forgive there.');
+        return null;
+      }
+      if (!(link.arrears > 0)) {
+        this.say(`${this._ovName(link.subordinate)} owes Haven nothing old — there is nothing to forgive.`);
+        return 0;
+      }
+      var owed = link.arrears;
+      link.arrears = 0;
+      link.arrearsCalled = false;
+      var gain = this._trustGain(link, 6);
+      this._linkNote(link, 'arrears', 'Haven forgave ' + owed.toLocaleString() + ' kcal of old debt (trust +' + gain + ').');
+      try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'arrears-forgiven:' + link.subordinate); } catch (e) {}
+      if (gain > 0) this.say(`🕊️ Haven forgives the old debt: ${owed.toLocaleString()} kcal owed by ${this._ovName(link.subordinate)} is wiped from the ledger. That grain will never arrive — mercy costs what it costs. (Trust +${gain}.)`);
+      else this.say(`🕊️ Haven forgives the old debt: ${owed.toLocaleString()} kcal owed by ${this._ovName(link.subordinate)} is wiped from the ledger. That grain will never arrive — mercy costs what it costs. The trust waits: they're still burying their dead, and grief is not bought off.`);
+      return owed;
+    },
+
     _ovName(id) {
       if (id === HOME) return 'Haven';
       var ov = this._otherVillage(id);
@@ -1309,6 +1376,53 @@
                     link.trust = Math.max(0, link.trust - 2);
                     self._linkNote(link, 'tribute', self._ovName(link.subordinate) + ' paid nothing — empty fields. Arrears +' + _want.toLocaleString() + '.');
                     self.say(`🌾 Nothing comes from ${self._ovName(link.subordinate)} this week — their fields are as empty as the wagons look. Hunger isn't defiance, but the ledger doesn't know the difference. (Arrears +${_want.toLocaleString()} kcal, trust -2.)`);
+                  }
+                  // ARREARS, CALLED IN (gap-arrears 2026-11-02): the week's
+                  // tribute is settled above; the OLD debt is settled here,
+                  // only while the call is out (link.arrearsCalled, staged
+                  // by callInArrears). What their fields can spare AFTER
+                  // this week's tribute rides home as back-payment: their
+                  // pantry debited, Haven's pantry credited through the
+                  // same deposit path and the same national x1.25 routing
+                  // as weekly tribute, arrears reduced by what they SENT
+                  // (pre-route kcal — the ledger is denominated in what
+                  // was owed, not what the System's routing adds). Full
+                  // settlement: trust +3 via _trustGain (the payTribute
+                  // full-week number; mourning chokes the gain, never the
+                  // settlement). Partial: no trust move — they tried.
+                  // Empty: no extra penalty — the weekly shortfall above
+                  // already charged, and hunger isn't defiance. A waived
+                  // week (deposit gate) never reaches this branch: the
+                  // wagons were waved home, and the old debt waits.
+                  if (link.arrearsCalled && (link.arrears || 0) > 0) {
+                    var _ahave = Math.max(0, Math.round((_sov && _sov.pantryKcal) || 0));
+                    var _agive = Math.min(link.arrears, _ahave);
+                    if (_sov) _sov.pantryKcal = _ahave - _agive;
+                    var _aamt = Math.round(_agive * _mult);
+                    if (_aamt > 0) {
+                      try {
+                        self.depositPantryPieces(_v, { name: 'Back-paid tribute from ' + self._ovName(link.subordinate), kcalEach: _aamt, units: 1, spoilDay: _day + 21, safe: true }, 500);
+                      } catch (_e3) { /* back-payment lost on the road — the ledger below still counts what they sent */ }
+                    }
+                    if (_agive > 0) {
+                      link.arrears -= _agive;
+                      if (link.arrears <= 0) {
+                        link.arrears = 0;
+                        link.arrearsCalled = false;
+                        var _again = self._trustGain(link, 3);
+                        self._linkNote(link, 'arrears', self._ovName(link.subordinate) + ' back-paid ' + _agive.toLocaleString() + ' kcal. The old debt is settled (trust +' + _again + ').');
+                        try { if (self.ledgerAdd) self.ledgerAdd('hierarchy', 'arrears-paid:' + link.subordinate); } catch (e4) {}
+                        if (_again > 0) self.say(`📜 ${self._ovName(link.subordinate)}'s wagons carry the last of the old debt — ${_agive.toLocaleString()} kcal of back-paid tribute, and the ledger is clean. Debts end when they're paid. (Trust +${_again}.)`);
+                        else self.say(`📜 ${self._ovName(link.subordinate)}'s wagons carry the last of the old debt — ${_agive.toLocaleString()} kcal of back-paid tribute, and the ledger is clean. Debts end when they're paid. The trust waits: they're still burying their dead.`);
+                      } else {
+                        self._linkNote(link, 'arrears', self._ovName(link.subordinate) + ' back-paid ' + _agive.toLocaleString() + ' kcal. Old debt now ' + link.arrears.toLocaleString() + ' kcal.');
+                        try { if (self.ledgerAdd) self.ledgerAdd('hierarchy', 'arrears-paid:' + link.subordinate); } catch (e4) {}
+                        self.say(`📜 ${self._ovName(link.subordinate)} sends ${_agive.toLocaleString()} kcal against the old debt — all their fields could spare after this week's tribute. The ledger still holds ${link.arrears.toLocaleString()} kcal. The call stays out; the debt waits, week by week.`);
+                      }
+                    } else {
+                      self._linkNote(link, 'arrears', self._ovName(link.subordinate) + ' could back-pay nothing — empty fields after this week\'s tribute. The old debt waits.');
+                      self.say(`📜 The wagons came for ${self._ovName(link.subordinate)}'s old debt and found empty fields — this week's tribute took what there was. The debt waits; hunger isn't defiance.`);
+                    }
                   }
                   } // end else (no DEPOSITGATE waiver — the normal receive path)
                 } catch (e) {}
@@ -3867,5 +3981,10 @@
   _blockIfNotHaven(G, 'refuseTheScale');
   _blockIfNotHaven(G, 'drawLeaguePool');
   _blockIfNotHaven(G, 'tendLink');
+  // ARREARS VERBS (gap-arrears 2026-11-02): calling in or forgiving
+  // Haven's debt from the road would pledge Haven's ledger from exile —
+  // same class as tendLink above.
+  _blockIfNotHaven(G, 'callInArrears');
+  _blockIfNotHaven(G, 'forgiveArrears');
 
 })();

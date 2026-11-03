@@ -16966,6 +16966,10 @@
     document.querySelectorAll('[data-link-pay]').forEach(b => b.onclick = () => { Game.payTribute(b.dataset.linkPay); refresh(); });
     // SCALE-WALL FIX (2026-10-12): tendLink wiring — same pattern as payTribute.
     document.querySelectorAll('[data-link-tend]').forEach(b => b.onclick = () => { Game.tendLink(b.dataset.linkTend); refresh(); });
+    // ARREARS (gap-arrears 2026-11-02): call in / forgive a subordinate's
+    // old debt — same wiring pattern as tendLink.
+    document.querySelectorAll('[data-link-arrears-call]').forEach(b => b.onclick = () => { Game.callInArrears(b.dataset.linkArrearsCall); refresh(); });
+    document.querySelectorAll('[data-link-arrears-forgive]').forEach(b => b.onclick = () => { Game.forgiveArrears(b.dataset.linkArrearsForgive); refresh(); });
     // AID DEBT (parity 2026-10-10): repayable aloud — was engine-only.
     document.querySelectorAll('[data-link-repay]').forEach(b => b.onclick = () => { Game.repayAidDebt(b.dataset.linkRepay); refresh(); });
     // SAFETY NETS (2026-10-10): request aid from a linked village.
@@ -17598,6 +17602,15 @@
                   if (!sub) {
                     const tended = (l.tendedWeek >= Math.floor(Game.state.scholar.day / 7));
                     h += ` <button class="btn sm ghost" data-link-tend="${l.id}"${tended ? ' disabled' : ''}>🌾 Send grain (1,500 kcal)${tended ? ' ✓' : ''}</button>`;
+                  }
+                  // ARREARS (gap-arrears 2026-11-02): a subordinate's old
+                  // debt used to sit on the ledger forever with no verb
+                  // to clear it. The player can now call it in (weekly
+                  // back-payment from their pantry until clean) or
+                  // forgive it (trust +6, the food forgone). Shown only
+                  // while arrears stand, on Haven-primary links.
+                  if (!sub && (l.arrears || 0) > 0) {
+                    h += `<br>📜 Old debt: ${l.arrears.toLocaleString()} kcal${l.arrearsCalled ? ' — called in, their wagons carry what they can after each week\'s tribute' : ''} <button class="btn sm ghost" data-link-arrears-call="${l.id}"${l.arrearsCalled ? ' disabled' : ''}>📜 Call in the old debt${l.arrearsCalled ? ' ✓' : ''}</button> <button class="btn sm ghost" data-link-arrears-forgive="${l.id}">🕊️ Forgive the old debt</button>`;
                   }
                   // AID DEBT (parity 2026-10-10): their foragers left their
                   // fields — repayable aloud via repayAidDebt (was
