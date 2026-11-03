@@ -121,4 +121,42 @@ check('reused files unmodified vs HEAD', () => {
   assert.strictEqual(df, '', 'HEAD diff in reused files');
 });
 
+check('trace driver: 7d armed 69604 reports daily/sleep boundaries + detects a bearer change', () => {
+  const root = path.join(__dirname, '..');
+  const env = Object.assign({}, process.env, { COMPETENT_FEAST: '0', SEATDRIVE: '0',
+    PLENTYDEPRI: '0', DEPOSITGATE: '0', POLICY: 'construct-armed', SEEDS: '69604',
+    TRACE_DAYS: '7', CONSTRUCT_SHAPE: 'C' });
+  const out = execSync('node scripts/guardcasc-b-trace-driver.js', { cwd: root, env }).toString();
+  const lines = out.split('\n').filter((l) => l.trim()).map((l) => JSON.parse(l));
+  for (let ld = 1; ld <= 7; ld++) {
+    assert.ok(lines.some((l) => l.type === 'daily-entry' && l.loopDay === ld), 'missing daily-entry ' + ld);
+    assert.ok(lines.some((l) => l.type === 'daily-exit' && l.loopDay === ld), 'missing daily-exit ' + ld);
+  }
+  assert.ok(lines.some((l) => l.type === 'sleep-entry'), 'missing sleep-entry');
+  assert.ok(lines.some((l) => l.type === 'sleep-exit'), 'missing sleep-exit');
+  for (const l of lines) {
+    if (l.type === 'summary') continue;
+    assert.ok('bearer' in l && 'pos' in l && 'kcal' in l && 'day' in l, 'identity fields missing on ' + l.type);
+  }
+  // Bearer-change detection: walk the boundary-ordered identity
+  // events and require at least one bearer change (the known
+  // day-6 succession); print where it happens for the log.
+  const order = [];
+  for (const l of lines) {
+    if (l.type === 'daily-entry' || l.type === 'daily-exit' || l.type === 'sleep-entry' || l.type === 'sleep-exit') {
+      order.push(l.type + '@loop' + l.loopDay + ':' + l.bearer + ':' + (l.name || '?') +
+        '@(' + l.pos.x + ',' + l.pos.y + ')/' + l.kcal + '/day' + l.day);
+    }
+  }
+  let changes = 0;
+  for (let i = 1; i < order.length; i++) {
+    const prev = order[i - 1].split(':')[1], cur = order[i].split(':')[1];
+    if (prev !== cur) { changes++; console.log('  bearer change: ' + order[i - 1] + ' -> ' + order[i]); }
+  }
+  assert.ok(changes >= 1, 'trace driver detected no bearer change; order: ' + order.join(' | '));
+  const summary = lines.find((l) => l.type === 'summary');
+  assert.ok(summary && summary.playerDeaths.some((d) => d.day === 6 && d.cause === 'the wild'),
+    'summary lacks day-6 wild player death');
+});
+
 console.log('test-guardcasc-b: ' + pass + ' checks passed');
