@@ -106,8 +106,15 @@ check('fixture: 69502 hop E pass + creek entry + refused',
   && hop69502.ap.entryBlockers[0].blockType === 'creek' && hop69502.hop.moved === false && hop69502.ap.allow === false, hop69502);
 
 // (c) Reused files unmodified.
+// RULE-4 NOTE (gap-guardedeploy 2026-11-02): scripts/policies/
+// competent-homewardstep-b.js is EXEMPT from this check — this deploy
+// INTENTIONALLY edits the guard file (entry-checked allow deploy:
+// allow' = E ok AND entry clear, plus entry veto wording and the
+// roadwork credit-pool carve-out). The exemption covers exactly that
+// deploy change, not drift: the recorder, competent.js, and src/js
+// must still be unmodified.
 {
-  const guarded = ['scripts/policies/competent-homewardstep-b.js', 'scripts/creekhop-b-recorder.js', 'scripts/policies/competent.js'];
+  const guarded = ['scripts/creekhop-b-recorder.js', 'scripts/policies/competent.js'];
   let clean = true, detail = {};
   for (const f of guarded) {
     try {
@@ -122,7 +129,7 @@ check('fixture: 69502 hop E pass + creek entry + refused',
     detail['src/js'] = { status: srcDiff };
     if (srcDiff) clean = false;
   } catch (e) { clean = false; detail['src/js'] = { error: String(e.message).slice(0, 200) }; }
-  check('reused-files-unmodified (guard policy, recorder, competent.js, src/js)', clean, detail);
+  check('reused-files-unmodified (recorder, competent.js, src/js; guard policy exempt: intentionally modified by this deploy)', clean, detail);
 }
 
 // (d) Analyzer on the fixture reproduces both fidelities.
