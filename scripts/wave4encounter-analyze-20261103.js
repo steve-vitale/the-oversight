@@ -35,7 +35,7 @@ for (const f of files) {
     if ((d.unlocked || 0) >= 4) { unlockDay = d.day; unlockSnap = d; break; }
   }
   const unlockDays = daily.filter(function (d) { return (d.unlocked || 0) >= 4; }).length;
-  const targetW4 = w4(r.targetRows);
+  const targetW4 = (r.targetRows || []).filter(function (x) { return x.target === 4; });
   const spawnW4 = w4(r.spawnRows);
   const castW4 = w4(r.castRows);
   const triggerW4 = w4(r.triggerRows);
