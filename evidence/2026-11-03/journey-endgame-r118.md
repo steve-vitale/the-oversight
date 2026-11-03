@@ -355,8 +355,17 @@ break. The re-seed proposal stands.
   files, all 7 perseed JSONs parse with correct fight counts.
   The commit itself was always correct (34 files, 189,990
   insertions).
-- Commit 2: (this closeout section) — run-note closeout only.
-- Rebase/merge/release: (to be filled at landing).
+- Commit 2: b4d029f0 (rebased as 763d42842) — run-note closeout
+  section (commit-1 hash + index-clobber incident).
+- Rebase: clean onto new master 0e6cbeb8 (12 sibling commits
+  landed during the run: win-intel, win-drives track 3,
+  gap-seatshort, journey-scale r91, winfunnel) as f230fe8fd +
+  763d42842; analyzer re-run on the rebased tree byte-identical
+  to the committed analysis (PRIMARY NO-GO | ALL NO-GO, exit 1
+  verdict-driven). Merge to local master follows; the merge
+  result is reported in the run's closeout message (this note
+  was committed before the merge, so it cannot cite the merge
+  itself).
 - Rotation-b written 4->5, verified by re-read (social life
   next). Lock deleted only after verifying it still carries
   this run's run_id (loop2-20261103T155953Z).
