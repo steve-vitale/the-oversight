@@ -14812,6 +14812,24 @@
     if (Game.isFinishedFood(it) && (it.units ?? 1) > 0 && !it.bonded && !(Game.isKeepsake && Game.isKeepsake(it))) {
       html += `<button class="btn ghost sm" data-stash-food="${idx}">Pack food (2 ticks)</button>`;
     }
+    // PLAYER COUNTER-TEST (gap round 2026-11-02): villagers test counter
+    // flesh through the meat channel (game.js villagerExperimentBeat),
+    // but the player had no counter test button — takePrepFood refuses
+    // unknown flesh (not finished food) and cooking it does not teach.
+    // Offer the same cautious protocol the pack already offers
+    // (data-meattest), under exactly the villager counter scan's guard:
+    // cleaned-or-cooked monster flesh, still unknown. A raw carcass on
+    // the counter (an animal's, e.g. deer) is not monster flesh to test,
+    // and monsterFoodSafe is codex-only (false for animals), so the
+    // gated check is what keeps the button off animal flesh.
+    try {
+      const mid = String(it.plantId || '').replace(/^meat_/, '');
+      if (it.foodKind === 'meat' && it.edible === false
+          && (it.foodState === 'cleaned' || it.foodState === 'cooked')
+          && mid && Game.monsterMeatGated(mid) && !Game.monsterFoodSafe(mid)) {
+        html += ` <button class="btn ghost sm" data-stash-meattest="${idx}" title="Taste it cautiously, the way the village tests unknown flesh: small taste, wait, learn if it is food or poison. Honest risk.">Test cautiously</button>`;
+      }
+    } catch (e) {}
     if (it.lump) {
       html += `<button class="btn ghost sm" data-stash-sort="${idx}">Sort the bag</button>`;
       try {
@@ -15443,6 +15461,12 @@
     slot.querySelectorAll('[data-stash-food]').forEach(b => b.onclick = rewire(() => Game.takePrepFood(+b.dataset.stashFood), null));
     slot.querySelectorAll('[data-stash-sortask]').forEach(b => b.onclick = rewire(() => Game.sortBag(b.dataset.vid, +b.dataset.stashSortask, stashOf()), 'Sorted.'));
     slot.querySelectorAll('[data-stash-test]').forEach(b => b.onclick = rewire(() => Game.testCautiously(+b.dataset.stashTest, {}, stashOf()), 'Tested.'));
+    // PLAYER COUNTER-TEST (gap round 2026-11-02): the counter row's test
+    // button runs the existing cautious monster-meat protocol against
+    // the prep stash itself — same call the pack button makes against
+    // the pack, same learn/risk outcomes (safe -> revealed food, toxic
+    // -> poison label + energy cost). No new engine rule.
+    slot.querySelectorAll('[data-stash-meattest]').forEach(b => b.onclick = rewire(() => Game.testMonsterMeat(+b.dataset.stashMeattest, stashOf()), 'Tested.'));
     slot.querySelectorAll('[data-stash-experiment]').forEach(b => b.onclick = rewire(() => Game.experimentWith(+b.dataset.stashExperiment, stashOf()), 'Nibbled.'));
     slot.querySelectorAll('[data-stash-rush]').forEach(b => b.onclick = rewire(() => Game.testCautiously(+b.dataset.stashRush, { rush: true }, stashOf()), 'Rushed.'));
     slot.querySelectorAll('[data-stash-watch]').forEach(b => b.onclick = rewire(() => Game.watchFauna(+b.dataset.stashWatch, stashOf()), 'Watched.'));
