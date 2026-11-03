@@ -124,12 +124,13 @@ async function oneRun(seed) {
     fs.writeFileSync(file, JSON.stringify(out, null, 2) + '\n');
     fs.writeFileSync(path.join(saysDir, `w4-says-s${seed}-${RUN}.jsonl`), says.map(s => JSON.stringify(s)).join('\n') + '\n');
     const w4 = function (rows) { return rows.filter(function (r) { return r.wave === 4; }); };
+    const targetW4Count = out.targetRows.filter(function (r) { return r.target === 4; }).length;
     const line = {
       seed: out.seed, run: out.run, days: out.days, endReason: out.endReason,
       won: out.won, scaleRank: out.scaleRank, maxWave: out.maxWave,
       tableLatch: out.tableLatch, seat: out.tableSeat,
       gateW4: out.endGate ? out.endGate.w4 : null, gateW5: out.endGate ? out.endGate.w5 : null,
-      targetW4: w4(out.targetRows).length, castW4: w4(out.castRows).length,
+      targetW4: targetW4Count, castW4: w4(out.castRows).length,
       spawnW4: w4(out.spawnRows).length, triggerW4: w4(out.triggerRows).length,
       startW4: w4(out.startRows).length, fieldW4: w4(out.fieldRows).length,
       removeW4: w4(out.removeRows).length,
