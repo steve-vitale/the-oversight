@@ -211,6 +211,21 @@ layer draw ever fires, one feast-draw stretch) from the kept say
 transcript, and judge meaning, coherence, consequences — not just
 counts.
 
+## Confirm band (added after the pilot judged GO, before any confirm sim)
+
+Pilot result (see evidence/2026-11-03/sim-feastdraww4-a.md): seeds
+with >=1 wave-4 fought 3/8 baseline -> 5/8 variant (delta +2, exactly
+the GO bar); starvation 2 -> 2 (bar baseline+2); fighter-attributed
+arm deaths 0 (bar <= 2); median survival 86d -> 86d (bar 0.8x). All
+four prereg legs pass, so the prereg's confirm round is triggered.
+Confirm band: 98701–98712 (12 fresh seeds, same prereg, same stack,
+same env, same 180d death-aware cap). Freshness verified before this
+addendum by the same seed-field pattern check (zero judged uses,
+zero filenames). No threshold, metric, or policy change is made by
+this addendum — it names the confirm band only. The confirm verdict
+is judged by the SAME legs on the confirm band; a confirm miss means
+the pilot GO does not stand, and the arm is KILLED.
+
 ## Metric review
 
 (To be filled at closeout. A miss here is NO-GO; a wrong metric is
