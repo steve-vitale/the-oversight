@@ -2021,7 +2021,19 @@
       b._turncoatTarget = a.key; b._turncoatRounds = 2;
       var la = game.encSubject ? game.encSubject(a) : (a.name || 'it');
       var lb = game.encSubject ? game.encSubject(b) : (b.name || 'it');
-      game.say('You explain to them, very reasonably, why the OTHER one is the real problem. ' + la + ' and ' + lb + ' believe you — for 2 rounds, anyway. (Turncoat: they fight each other.)');
+      // r131: the opener rotates per fight — one fight used Turncoat 5
+      // times and printed the same line verbatim 5 times. Mechanics are
+      // untouched (same targets, same 2 rounds, same tail); the counter
+      // lives on the fight object so no RNG stream is consumed and a
+      // fresh fight restarts at the first opener.
+      var turnLines = [
+        'You explain to them, very reasonably, why the OTHER one is the real problem. ',
+        'You lay it out, calm as a ledger: the OTHER one is the problem, and here is why. ',
+        'You plant the doubt where it grows fastest — the OTHER one started this. '
+      ];
+      var li = (f._turncoatLineIdx || 0) % turnLines.length;
+      f._turncoatLineIdx = (f._turncoatLineIdx || 0) + 1;
+      game.say(turnLines[li] + la + ' and ' + lb + ' believe you — for 2 rounds, anyway. (Turncoat: they fight each other.)');
       return true;
     },
 
