@@ -3610,14 +3610,14 @@
       var onm = this._ovName(other);
       var kindName = link.kind === 'covenant' ? 'covenant' : 'charter';
       link.trust = Math.max(0, link.trust - 10);
-      this._linkNote(link, 'crisis', 'Crisis: ' + (why || 'strain') + '.');
+      this._linkNote(link, 'crisis', 'Crisis: ' + (why || 'strain') + ' (trust -10).');
       try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'covenant-crisis:' + other); } catch (e) {}
       if (why === 'their-speaker-died') {
-        this.say(`🕯️ ${onm}'s speaker is dead — and the ${kindName} shakes. Their council wants new terms, or out. CONCEDE (better terms, the league holds), HOLD the line (they may walk), or RELEASE them with honor.`);
+        this.say(`🕯️ ${onm}'s speaker is dead — and the ${kindName} shakes. Their council wants new terms, or out. CONCEDE (better terms, the league holds), HOLD the line (they may walk), or RELEASE them with honor. (Trust -10.)`);
       } else if (why === 'leader-death') {
-        this.say(`🕯️ Haven grieves — and ${onm} tests the ${kindName} in the chaos. Their speaker wants new terms, or out. CONCEDE, HOLD, or RELEASE.`);
+        this.say(`🕯️ Haven grieves — and ${onm} tests the ${kindName} in the chaos. Their speaker wants new terms, or out. CONCEDE, HOLD, or RELEASE. (Trust -10.)`);
       } else {
-        this.say(`⚡ ${onm} challenges the ${kindName} — the strain got loud. Their speaker names their price, or the door. CONCEDE (better terms), HOLD the line, or RELEASE them with honor.`);
+        this.say(`⚡ ${onm} challenges the ${kindName} — the strain got loud. Their speaker names their price, or the door. CONCEDE (better terms), HOLD the line, or RELEASE them with honor. (Trust -10.)`);
       }
       return 'crisis';
     },

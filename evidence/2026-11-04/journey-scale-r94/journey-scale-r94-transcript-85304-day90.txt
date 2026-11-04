@@ -1,0 +1,19 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=19)
+=== seed 85304 day 90 — conversation with James (james_okonkwo) ===
+occupation=carpenter temperament=steady trust=92 dead=false
+want: ask_favor (stage 1)
+open thread: want fromSeed=false
+picker: subject-first
+
+THEM: "Never mind the pantry run — we got it handled. Thanks anyway. Water's almost gone — 4 liters. Haul the creek with me at dawn? Two buckets each, there and back."
+(turn0 choices: dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "I checked the cistern three times hoping I misread it. 4 liters. We walk together and each carry two liters back. Creek water still needs boiling."
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+YOU: (leave)
+pre-close: want ask_favor stage 3 thread want
+closing line: "Good talking. We'll figure it out."
+(gossip picks this sitting: 0)

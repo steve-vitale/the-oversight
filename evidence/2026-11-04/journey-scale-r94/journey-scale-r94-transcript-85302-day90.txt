@@ -1,0 +1,27 @@
+(pre-talk seed: ask_favor planted d88; takenWantDay=0; convoCount=17)
+=== seed 85302 day 90 — conversation with Elijah (elijah_scott) ===
+occupation=Social worker temperament=warm trust=9 dead=false
+want: ask_favor (stage 2)
+open thread: small fromSeed=true
+picker: subject-first
+
+THEM: "We're going to be okay. I don't know that, but I believe it, and belief counts."
+(turn0 choices: dlg:favor_requirements, dlg:details, dlg:cant, dlg:commit, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Petra headed out for water."
+YOU: [dlg:more] "I’m listening."
+THEM: "Ella headed out to forage."
+YOU: [dlg:react] (listen)
+THEM: They nod slowly, not quite done, not quite continuing.
+YOU: [dlg:more] "Go on."
+THEM: "Nothing new. Which is new, if you think about it."
+YOU: [dlg:react] (listen)
+THEM: "Anyway." A small smile.
+YOU: [dlg:more] "Tell me more."
+THEM: "Quiet lately. Too quiet, maybe."
+YOU: (leave)
+pre-close: want ask_favor stage 2 thread gossip
+closing line: "Take care of yourself, yeah? I mean it."
+(gossip picks this sitting: 1)

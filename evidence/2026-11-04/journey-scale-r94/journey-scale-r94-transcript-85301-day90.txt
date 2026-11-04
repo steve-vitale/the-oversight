@@ -1,0 +1,17 @@
+(pre-talk seed: curious planted d85; takenWantDay=0; convoCount=1)
+=== seed 85301 day 90 — conversation with Violet (visjoin_80) ===
+occupation=postal worker temperament=cautious trust=33 dead=false
+want: curious (stage 1)
+open thread: want fromSeed=true
+picker: subject-first
+
+THEM: "I asked Taha about what you dream about — Taha's gone. Do you dream about before? Or is it all — this — now?"
+(turn0 choices: ans:q_dream:a_before, ans:q_dream:a_now, ans:q_dream:a_none, deflect_q, leave, silence)
+YOU: [ans:q_dream:a_before] "Before. Every night. It's the only place it still exists."
+THEM: "Then it's not gone. Not really. Keep going back."
+YOU: [goon] "Take your time."
+THEM: Something shutters in their face. Tread carefully.
+YOU: (leave)
+pre-close: want curious stage 2 thread want
+closing line: "I should — yeah. Later."
+(gossip picks this sitting: 0)

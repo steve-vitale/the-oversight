@@ -1,0 +1,27 @@
+(pre-talk seed: ask_favor planted d117; takenWantDay=0; convoCount=27)
+=== seed 85302 day 120 — conversation with Elijah (elijah_scott) ===
+occupation=Social worker temperament=warm trust=21 dead=false
+want: ask_favor (stage 2)
+open thread: want fromSeed=true
+picker: subject-first
+
+THEM: "About the pantry run — I still haven't found anyone. Any chance?"
+(turn0 choices: dlg:favor_requirements, dlg:details, dlg:cant, dlg:commit, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Good question." "Ella hums at the beans and they climb faster. Laugh if you want. I've watched."
+YOU: [dlg:more] "I’m listening."
+THEM: "Xaver? A piano tuner, back before. Solid person."
+YOU: [dlg:react] (listen)
+THEM: "Xaver walked out of Duel. Alive. That's the whole story and it's enough."
+YOU: [dlg:more] "Go on."
+THEM: "Did you hear? You won Duel on the cameras. People are still talking about it."
+YOU: [dlg:react] (listen)
+THEM: "Well." A breath. "That's where things stand."
+YOU: [dlg:more] "Tell me more."
+THEM: "Ella headed out to find someone."
+YOU: (leave)
+pre-close: want ask_favor stage 2 thread gossip
+closing line: "Anyway. I'm glad we talked. Really."
+(gossip picks this sitting: 1)

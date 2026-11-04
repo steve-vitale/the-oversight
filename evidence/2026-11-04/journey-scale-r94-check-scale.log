@@ -1,0 +1,70 @@
+check.js: 10 scripts, 4 parallel (only "scale")
+F..FF.FFFF
+
+  FAIL scripts/test-catchup-depletion-scale.js (exit 1, 1.9s)
+      FATAL Text is not defined
+
+  FAIL scripts/test-scale-onramp-20261010.js (exit 2, 4.2s)
+      HARNESS ERROR ReferenceError: Text is not defined
+          at Object.genCharacter (eval at <anonymous> (/home/hatch/workspace/worktrees/journey-scale/scripts/test-scale-onramp-20261010.js:50:16), <anonymous>:1044:20)
+          at Game.genCharacter (eval at <anonymous> (/home/hatch/workspace/worktrees/journey-scale/scripts/test-scale-onramp-20261010.js:50:16), <anonymous>:602:48)
+          at Object.genRoster (eval at <anonymous> (/home/hatch/workspace/worktrees/journey-scale/scripts/test-scale-onramp-20261010.js:50:16), <anonymous>:1677:25)
+          at G.genRoster (eval at <anonymous> (/home/hatch/workspace/worktrees/journey-scale/scripts/test-scale-onramp-20261010.js:50:16), <anonymous>:829:19)
+          at G.genRoster (eval at <anonymous> (/home/hatch/workspace/worktrees/journey-scale/scripts/test-scale-onramp-20261010.js:50:16), <anonymous>:1466:43)
+          at /home/hatch/workspace/worktrees/journey-scale/scripts/test-scale-onramp-20261010.js:62:8
+
+  FAIL scripts/test-scale-pacing.js (exit 2, 4.9s)
+      HARNESS ERROR ReferenceError: Text is not defined
+          at Object.genCharacter (eval at <anonymous> (/home/hatch/workspace/worktrees/journey-scale/scripts/test-scale-pacing.js:59:16), <anonymous>:1044:20)
+          at Game.genCharacter (eval at <anonymous> (/home/hatch/workspace/worktrees/journey-scale/scripts/test-scale-pacing.js:59:16), <anonymous>:602:48)
+          at Object.genRoster (eval at <anonymous> (/home/hatch/workspace/worktrees/journey-scale/scripts/test-scale-pacing.js:59:16), <anonymous>:1677:25)
+          at G.genRoster (eval at <anonymous> (/home/hatch/workspace/worktrees/journey-scale/scripts/test-scale-pacing.js:59:16), <anonymous>:829:19)
+          at G.genRoster (eval at <anonymous> (/home/hatch/workspace/worktrees/journey-scale/scripts/test-scale-pacing.js:59:16), <anonymous>:1466:43)
+          at /home/hatch/workspace/worktrees/journey-scale/scripts/test-scale-pacing.js:77:8
+
+  FAIL scripts/test-scale-scenarios.js (exit 2, 5.5s)
+      FAIL scaleDawn runs
+      FAIL dawn: bond 21+ days
+      FATAL TypeError: Cannot read properties of null (reading 'networkLive')
+          at /home/hatch/workspace/worktrees/journey-scale/scripts/test-scale-scenarios.js:79:44
+
+  FAIL scripts/test-structural-scale-a-foreign-20261010.js (exit 2, 4.9s)
+      hooks:
+      HARNESS ERROR ReferenceError: Text is not defined
+          at Object.genCharacter (eval at <anonymous> (/home/hatch/workspace/worktrees/journey-scale/scripts/test-structural-scale-a-foreign-20261010.js:51:16), <anonymous>:1044:20)
+          at Game.genCharacter (eval at <anonymous> (/home/hatch/workspace/worktrees/journey-scale/scripts/test-structural-scale-a-foreign-20261010.js:51:16), <anonymous>:602:48)
+          at Object.genRoster (eval at <anonymous> (/home/hatch/workspace/worktrees/journey-scale/scripts/test-structural-scale-a-foreign-20261010.js:51:16), <anonymous>:1677:25)
+          at G.genRoster (eval at <anonymous> (/home/hatch/workspace/worktrees/journey-scale/scripts/test-structural-scale-a-foreign-20261010.js:51:16), <anonymous>:829:19)
+          at G.genRoster (eval at <anonymous> (/home/hatch/workspace/worktrees/journey-scale/scripts/test-structural-scale-a-foreign-20261010.js:51:16), <anonymous>:1466:43)
+          at freshGame (/home/hatch/workspace/worktrees/journey-scale/scripts/test-structural-scale-a-foreign-20261010.js:64:8)
+          at /home/hatch/workspace/worktrees/journey-scale/scripts/test-structural-scale-a-foreign-20261010.js:93:17
+
+  FAIL scripts/test-scalecourt-climb-20261012.js (exit 1, 6.8s)
+      policy: /home/hatch/workspace/worktrees/journey-scale/scripts/policies/scalecourt.js
+      phase A: scholar at Haven, village at opinion 5 (below bar)
+        ok: AFTER: proposeCovenant NOT called for the below-bar village
+        FAIL: AFTER: codex pilgrimage started
+      phase B: scholar walks to their fire (teleport for determinism), study fires
+        FAIL: AFTER: studyVillageCodex called at their fire — []
+        FAIL: AFTER: opinion rose (+3 climb verb) — opinion 5 -> 5
+        FAIL: AFTER: codex marked given (once-only)
+      
+      RESULT: 4 FAILURES
+
+  FAIL scripts/test-scale-lead-fix-20261012.js (exit null, 120.1s)
+        new_healthy_T30: p=0.7547 (need >=40 p>=0.6) PASS
+        new_half_T30: p=0.7685 (need >=25 p>=0.5) PASS
+        new_starving_T30: p=1 (need <20 p>=0.6) PASS
+        old_healthy_T30: p=1 (need <40 p>=0.05) PASS
+        PASS new_tended seasons in weeks — p=0.9974
+        PASS new_healthy creeps to 40 (tending is the accelerator) — p=0.7547
+        PASS new_half bleeds slowly, not collapse — p=0.7685 hold>=25
+        PASS new_starving decays audibly not instantly — p=1 below 20 by wk8
+        PASS old lottery FAILS the bar (bug demonstrated) — p=1 reach 40 (need <0.05)
+      PART B — live sims (leadcourt x 4 seeds x 150d)
+      
+      [check.js] TIMEOUT after 120s
+
+  slowest: scripts/test-scale-lead-fix-20261012.js 120s
+
+check.js: 3 passed, 7 failed in 122s
