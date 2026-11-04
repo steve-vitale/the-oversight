@@ -56,12 +56,13 @@ eq('holds holdShare', AN.analyzeSeed(baseOut({ daily: daysRange(60, 90, function
     daysRange(60, 88, function (d) { return snap(d, 102, [link('l1', 70, true), link('l2', 80, true), link('l3', 54, true)]); }),
     daysRange(89, 100, function (d) { return snap(d, 0, [link('l1', 70, true), link('l2', 80, true), link('l3', 38, false)]); }));
   const s = AN.analyzeSeed(baseOut({ daily: daily,
-    courtshipEvents: [{ day: 56, fn: 'tendLink', target: 'l3' }] }));
+    courtshipEvents: [{ day: 56, fn: 'tendLink', target: 'l3' }, { day: 110, fn: 'tendLink', target: 'l3' }] }));
   eq('collapse trajectory', s.trajectory, 'collapses');
   eq('collapse drop cause', s.drops[0].cause, 'trust-unseason');
   eq('collapse drop day', s.drops[0].dropDay, 89);
   eq('collapse unseasoned link', s.drops[0].unseasoned[0].id, 'l3');
   eq('collapse last tend', s.drops[0].lastTendByLink.l3, 56);
+  eq('collapse post-drop tend excluded', s.drops[0].lastTendByLink.l3 !== 110, true);
   eq('collapse classified', s.classified, true);
   eq('collapse holdShare', s.holdShare, 29 / 41);
 })();

@@ -92,10 +92,13 @@ function analyzeSeed(out) {
         if (prevMap[id] && prevMap[id].status === 'active' && curMap[id].status !== 'active') broken.push({ id: id, status: curMap[id].status, trustAt: curMap[id].trust });
       }
       const pantryAt = (p.snap && typeof p.snap.pantryKcal === 'number') ? p.snap.pantryKcal : null;
+      // Last tend AT OR BEFORE the drop day: post-drop tends (a
+      // resumed-tending attempt) must not masquerade as pre-drop
+      // upkeep — the 99402 case turns on exactly this distinction.
       const lastTend = {};
       for (const u of unseasoned.concat(broken)) {
-        const lt = tends[u.id];
-        lastTend[u.id] = (lt == null ? null : lt);
+        const days = (out.courtshipEvents || []).filter(function (e) { return e.fn === 'tendLink' && String(e.target) === u.id && e.day <= p.day; }).map(function (e) { return e.day; });
+        lastTend[u.id] = days.length ? Math.max.apply(null, days) : null;
       }
       const drop = { dropDay: p.day, prevDay: prev ? prev.day : null,
         unseasoned: unseasoned, broken: broken, pantryAtDrop: pantryAt, lastTendByLink: lastTend,
