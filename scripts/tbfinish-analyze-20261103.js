@@ -83,8 +83,23 @@ function classifyTurn(ex, turn) {
   const dealt = turnHits(ex, turn).filter(function (h) {
     return h.targetKind === 'monster' && (h.hpDelta || 0) < 0;
   }).reduce(function (s, h) { return s + (-h.hpDelta); }, 0);
-  const movesSpent = (sp.moveLeft != null && turn.end && turn.end.player && turn.end.player.moveLeft != null)
-    ? (sp.moveLeft - turn.end.player.moveLeft) : null;
+  // movesSpent / movesAvailable read ACTION pre/post moveLeft, never
+  // turn start/end snapshots: the turn-start snapshot predates
+  // tbBeginTurn's moveLeft reset (stale leftover), and the turn-end
+  // snapshot postdates the policy's endTurn zeroing (always 0).
+  // Action snapshots are the ground truth for the movement budget.
+  let movesSpent = 0, movesAvailable = null, movesKnown = false;
+  for (const a of acts) {
+    if (a.pre && a.pre.player && a.pre.player.moveLeft != null) {
+      movesKnown = true;
+      if (movesAvailable == null || a.pre.player.moveLeft > movesAvailable) movesAvailable = a.pre.player.moveLeft;
+    }
+    if (a.kind === 'move' && a.pre && a.pre.player && a.pre.player.moveLeft != null &&
+        a.post && a.post.player && a.post.player.moveLeft != null) {
+      movesSpent += (a.pre.player.moveLeft - a.post.player.moveLeft);
+    }
+  }
+  if (!movesKnown) movesAvailable = null;
   const dists = start.dists || [];
   const minDist = dists.length ? Math.min.apply(null, dists.map(function (d) { return d.dist; }).filter(function (d) { return d != null; })) : null;
   const range = (start.weapon || {}).range;
@@ -97,7 +112,8 @@ function classifyTurn(ex, turn) {
   const flags = { outOfRangeAtStart: outOfRangeAtStart, endOutOfRange: endOutOfRange,
     stunned: (sp.stunned || 0) > 0, blind: (sp.blindTurns || 0) > 0,
     edgeAtEnd: edgeAtEnd, fleeAttempt: fleeAttempt, extra: !!turn.extra,
-    movesSpent: movesSpent, minDistStart: minDist, endMinDist: endMinDist,
+    movesSpent: movesSpent, movesAvailable: movesAvailable,
+    minDistStart: minDist, endMinDist: endMinDist,
     strikesAttempted: strikes.length, strikesLanded: landed.length, dealt: dealt };
 
   let cls = null, reason = null;

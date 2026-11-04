@@ -51,6 +51,20 @@ ok('turn classes: all nine + move variants', function () {
   const oor = mkTurn({ start: { player: { mx: 4, my: 4, moveLeft: 3, acted: false, hp: 80, stunned: 0, stunFull: false, blindTurns: 0 }, weapon: { range: 1 }, dists: [{ key: 'm_0', mid: 'm4', dist: 3, inRange: false }] } });
   assert.strictEqual(A.classifyTurn(ex, oor).flags.outOfRangeAtStart, true);
   assert.strictEqual(A.classifyTurn(ex, oor).flags.minDistStart, 3);
+  // movesSpent reads ACTION pre/post moveLeft, never turn start/end
+  // snapshots (start predates tbBeginTurn's reset, end postdates the
+  // policy's endTurn zeroing): a strike turn with start ml 3, end ml 0
+  // and strike action pre/post ml 1 spends 0 moves, budget 1.
+  const strikeTurn = mkTurn({ actions: [{ fn: 'x', kind: 'strike', args: [], returned: true,
+    pre: { player: { acted: false, moveLeft: 1 } }, post: { player: { acted: true, moveLeft: 1 } } }],
+    start: { player: { mx: 4, my: 4, moveLeft: 3, acted: false, hp: 80, stunned: 0, stunFull: false, blindTurns: 0 }, weapon: { range: 1 }, dists: [{ key: 'm_0', mid: 'm4', dist: 1, inRange: true }] },
+    end: { player: { mx: 4, my: 4, moveLeft: 0, acted: true, hp: 80 }, dists: [{ key: 'm_0', mid: 'm4', dist: 1, inRange: true }] } });
+  assert.strictEqual(A.classifyTurn(ex, strikeTurn).flags.movesSpent, 0);
+  assert.strictEqual(A.classifyTurn(ex, strikeTurn).flags.movesAvailable, 1);
+  const moveTurn = mkTurn({ actions: [{ fn: 'x', kind: 'move', args: [], returned: true,
+    pre: { player: { acted: false, moveLeft: 3 } }, post: { player: { acted: false, moveLeft: 1 } } }] });
+  assert.strictEqual(A.classifyTurn(ex, moveTurn).flags.movesSpent, 2);
+  assert.strictEqual(A.classifyTurn(ex, moveTurn).flags.movesAvailable, 3);
 });
 
 // 2. NPC turn classes.
