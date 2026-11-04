@@ -1,0 +1,40 @@
+
+-- Felipe (gen_fxtphar) occ=truck driver --
+OPENING: "Did you leave someone behind? ...Sorry. You don't have to answer that."
+YOU: [ans:q_left_behind:a_yes] "Yes."
+THEM: Just: "Yeah." A long quiet. "Me too."
+YOU: [goon] "Yeah?"
+THEM: "I don't talk about that. Not because it's secret — because saying it out loud makes it real in a way I can't afford yet. Someday. Not today."
+YOU: [dlg:doubt] "That doesn't quite add up."
+THEM: "...What's that supposed to mean?" Their voice goes careful.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on who you left behind."
+YOU: [goon] "Yeah?"
+THEM: The warmth pulls back a notch. They're weighing something.
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Finally. I was wondering when you'd see my value."
+YOU: [goon] "Yeah?"
+THEM: "I should go. You know where to find me."
+YOU: [agree] "You're right."
+THEM: "Fine. You're right. Don't quote me."
+(ended by engine)
+
+-- Harold (gen_jszaw3b) occ=crossing guard --
+OPENING: "Never mind the pantry run — we got it handled. Thanks anyway."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Gang? An infantry soldier, back before. Solid person."
+YOU: [goon] "What else did you hear?"
+THEM: Their friendliness thins — still there, just held at arm's length.
+YOU: [goon] "What else did you hear?"
+THEM: "Help me haul something back? Too much for one."
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Halfway to the cache spot, Harold freezes. Fresh tracks — big. "We go back now. Quietly." You do. The wild, reminding you.
+YOU: [dlg:more] "Tell me more."
+THEM: "Omar? A piano tuner, back before. Solid person."
+YOU: [dlg:react] (listen)
+THEM: "Gang headed out to check the snares."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the gossip."
+closing: "I should get back to it — but this was nice."
