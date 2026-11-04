@@ -45455,24 +45455,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // (vDie parity). One observation per distinct beast type per fight.
       // First-person narration — never silent. Villager field-fight paths
       // untouched (byte-identical).
-      // TB-OBSERVATION-FEED (sim-tbobsfeed 2026-11-04): 'won' joins the
-      // outcomes above — a scholar who WINS a TB fight lived to tell it
-      // about every kind fought, with the same bar, threshold, and
-      // narration. Won fights previously fed 0 observations (excluded by
-      // the result test; and the alive filter below would have fed
-      // nothing anyway, since a won fight's monsters are dead). The
-      // result test keeps the branches exclusive — a fight ends once —
-      // so no fight can feed twice, and the per-kind Set keeps at most
-      // 1 fed observation per kind per fight. Threshold 2 untouched.
       try {
-        if ((result === 'fled' || result === 'routed' || result === 'calmed' || result === 'won') &&
+        if ((result === 'fled' || result === 'routed' || result === 'calmed') &&
             this.noteScholarTrickObservation) {
           const _po = this.tbFighter('p');
           if (_po && _po.alive !== false && (_po.hp || 0) > 0 && f && f.fighters) {
             const _seenT = new Set();
             for (const _m of f.fighters) {
-              if (_m.kind !== 'monster' || !_m.mdef) continue;
-              if (result !== 'won' && !_m.alive) continue;
+              if (_m.kind !== 'monster' || !_m.alive || !_m.mdef) continue;
               const _tmid = _m.mdef.id;
               if (_seenT.has(_tmid)) continue;
               _seenT.add(_tmid);

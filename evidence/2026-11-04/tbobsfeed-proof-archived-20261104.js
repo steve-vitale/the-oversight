@@ -1,3 +1,7 @@
+// ARCHIVED 2026-11-04 — proof for the REVERTED TB-observation-feed lever (arm sim-tbobsfeed-a).
+// Confirm band NO-GO (see evidence/2026-11-04/sim-tbobsfeed-a.md); the feed was reverted, so this
+// file MUST NOT run as part of the suite — it tests deleted code. Kept here as the record of
+// what was proven while the lever lived (14/14 on the armed code). Original: scripts/test-tbobsfeed-20261104.js
 // test-tbobsfeed-20261104.js — proof for arm sim-tbobsfeed-a.
 // Drives the REAL Game.tbEnd on synthetic TB fights (harness-loaded
 // game, setupGame state) and asserts the TB-observation-feed lever:
