@@ -33550,9 +33550,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try { if (typeof this.scoreLedgerKill === 'function') this.scoreLedgerKill(monsterId); } catch (e) {}
       // Wave 4 slain feeds readiness
       if (wave === 4) this.state.wave4Slain = (this.state.wave4Slain || 0) + 1;
-      // Kills feed the unlock gates from every path (player combat AND
-      // villager field fights) — the beat must land whichever path earned it.
-      try { this.checkWaveUnlockBeat(); } catch (e) {}
       // KILL ATTRIBUTION (2026-10-13): channel tag for telemetry — which
       // system scored this kill ('patrol' | 'wild' | 'aid-crisis' |
       // 'contest' | 'agency' | 'player' | 'companion' | 'unknown').
@@ -33562,6 +33559,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // reads these keys. Gated with Game._attrKills (default
       // true) so the honesty control can run the identical sim with logging
       // off and prove byte-identical state.
+      // ORDER (sim-holdbeatfix-b, 2026-11-04): this block sits BEFORE
+      // the unlock check below ON PURPOSE. The veteran count the
+      // readiness gate reads (waveCombatReadiness) comes from this log,
+      // so a kill's own unlock-check beat must read the kill: before
+      // this move, the beat fired here read the pre-kill count
+      // (sim-holdbeat-a Q2: "0 of 2 veterans" inside the kill that made
+      // veteran #1). The block itself is unchanged — only its position
+      // moved; dedupe, the 1000-entry cap, and the channel counters
+      // behave exactly as before.
       try {
         if (this._attrKills !== false) {
           const _log = this.state.waveKillLog || (this.state.waveKillLog = []);
@@ -33588,6 +33594,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           _byCh[_k] = (_byCh[_k] || 0) + 1;
         }
       } catch (e) {}
+      // Kills feed the unlock gates from every path (player combat AND
+      // villager field fights) — the beat must land whichever path earned it.
+      // The log entry above is already in place when this runs, so the
+      // beat a kill triggers counts the kill (see ORDER note above).
+      try { this.checkWaveUnlockBeat(); } catch (e) {}
     },
 
     // companionKillBeat: the fiction notices a companion's wave-3+ killing

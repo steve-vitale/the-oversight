@@ -73,4 +73,109 @@ ok('trajectoryDiff: hold-beat numbers ignored, everything else compared', functi
   assert.ok(diffs.some(function (d) { return d.indexOf('killEvents') === 0; }), 'kill change reported: ' + diffs.join('; '));
 });
 
-console.log('PASS ' + pass + '/' + pass + ' (pure stage; live stage appended with the fix)');
+// --- live harness stage (ordering probe) ---
+// The probe wraps checkWaveUnlockBeat AFTER setupGame, so every probe
+// call inside a recordWaveKill call below is that kill's own unlock
+// check. PASS requires the just-made entry to ALREADY be in
+// waveKillLog at probe time. On baseline code this stage FAILS (the
+// entry lands after the check) — that red is the bug, not a test bug.
+(async function () {
+  const { loadGame, setupGame } = require(path.join(__dirname, 'sim-harness'));
+  const { Game } = await loadGame({ seed: 99101, mode: 'holdbeatfix-proof', fullTelemetry: false });
+  await setupGame(Game);
+  const log = function () { return (Game.state && Game.state.waveKillLog) || []; };
+  const probe = [];
+  const origCheck = Game.checkWaveUnlockBeat;
+  Game.checkWaveUnlockBeat = function () {
+    try {
+      const entries = log().slice();
+      probe.push({ logLen: entries.length, tail: entries.length ? entries[entries.length - 1] : null });
+    } catch (e) {}
+    return origCheck.apply(this, arguments);
+  };
+  const m4s = (Game.data.monsters || []).filter(function (m) { return m && (m.wave || 1) === 4; });
+  assert.ok(m4s.length >= 1, 'a wave-4 monster def must exist');
+  const roster = ((Game.state || {}).village || {}).roster || [];
+  const vid = roster.find(function (id) { return id && id !== Game.villagerId; }) || Game.villagerId;
+  const scholar = Game.villagerId;
+  const day = ((Game.state || {}).scholar || {}).day || 0;
+  // NOTE (probe calibration, found by stack trace): one recordWaveKill
+  // call drives TWO checkWaveUnlockBeat calls — the kill's OWN check
+  // inside recordWaveKill (probe[before], the one this fix moves after
+  // the log push) and a second check from the progression deed wrapper
+  // (recordDeedFight) AFTER recordWaveKill returns, when the log is
+  // already pushed either way. Only probe[before] is the deciding
+  // observation. The weekly beat cadence (_standingDeferBeat day stamp)
+  // is why the artifact survives: the pre-credit first check consumes
+  // the week's beat slot, so the post-credit second check stays silent.
+  function probeFor(mid, by, via, detail) {
+    const before = probe.length;
+    Game.recordWaveKill(mid, by, via, detail);
+    assert.ok(probe.length > before, 'unlock check ran during recordWaveKill');
+    return probe[before];
+  }
+  function entryMatches(tail, mid, by, via, detail) {
+    return !!tail && tail.mid === mid && (tail.by || null) === (by || null)
+      && (tail.via || 'unknown') === (via || 'unknown') && (tail.trick || null) === (detail || null);
+  }
+
+  // 1. villager field kill: entry present at unlock-check time; side effects pinned.
+  const mA = m4s[0].id;
+  const wkBefore = ((Game.state.waveKills || {})[4] | 0);
+  const vsBefore = ((Game.state.villageSlain || {})[mA] | 0);
+  const chBefore = (((Game.state.waveKillByChannel || {})['wild.w4']) | 0);
+  const logBefore = log().length;
+  const p1 = probeFor(mA, vid, 'wild', 't-fix-wild');
+  assert.ok(entryMatches(p1.tail, mA, vid, 'wild', 't-fix-wild'), 'wild kill entry present at unlock check');
+  assert.strictEqual(log().length, logBefore + 1, 'wild kill appends exactly one entry');
+  assert.strictEqual(((Game.state.waveKills || {})[4] | 0), wkBefore + 1, 'waveKills[4] +1');
+  assert.strictEqual(((Game.state.villageSlain || {})[mA] | 0), vsBefore + 1, 'villageSlain +1');
+  assert.strictEqual((((Game.state.waveKillByChannel || {})['wild.w4']) | 0), chBefore + 1, 'channel counter +1');
+  pass++; console.log('ok ' + pass + ' - live: wild villager kill entry present at unlock check, counters pinned');
+
+  // 2. player kill path.
+  const p2 = probeFor(mA, scholar, 'player', 't-fix-player');
+  assert.ok(entryMatches(p2.tail, mA, scholar, 'player', 't-fix-player'), 'player kill entry present at unlock check');
+  pass++; console.log('ok ' + pass + ' - live: player kill entry present at unlock check');
+
+  // 3. companion kill path.
+  const p3 = probeFor(mA, vid, 'companion', 't-fix-comp');
+  assert.ok(entryMatches(p3.tail, mA, vid, 'companion', 't-fix-comp'), 'companion kill entry present at unlock check');
+  pass++; console.log('ok ' + pass + ' - live: companion kill entry present at unlock check');
+
+  // 4. pyrrhic path: pyrrhic + waveKill log exactly once, no dup.
+  const mB = m4s.length > 1 ? m4s[1].id : mA;
+  const logBefore4 = log().length;
+  Game.recordPyrrhicKill(mB, vid, 'wild', 't-fix-pyrrhic');
+  const logAfterPyrrhic = log().length;
+  assert.strictEqual(logAfterPyrrhic, logBefore4 + 1, 'pyrrhic kill appends one entry');
+  const p4 = probeFor(mB, vid, 'wild', 't-fix-pyrrhic');
+  assert.ok(entryMatches(p4.tail, mB, vid, 'wild', 't-fix-pyrrhic'), 'pyrrhic entry present at waveKill unlock check');
+  assert.strictEqual(log().length, logBefore4 + 1, 'pyrrhic + waveKill still one entry (dedupe)');
+  pass++; console.log('ok ' + pass + ' - live: pyrrhic path logs exactly once, dedupe holds');
+
+  // 5. duplicate call: one entry, counters still count the call (pinned existing behavior).
+  const logBefore5 = log().length;
+  const wkBefore5 = ((Game.state.waveKills || {})[4] | 0);
+  Game.recordWaveKill(mA, vid, 'wild', 't-fix-dup');
+  Game.recordWaveKill(mA, vid, 'wild', 't-fix-dup');
+  assert.strictEqual(log().length, logBefore5 + 1, 'duplicate call logs once');
+  assert.strictEqual(((Game.state.waveKills || {})[4] | 0), wkBefore5 + 2, 'duplicate call still counts twice in waveKills');
+  pass++; console.log('ok ' + pass + ' - live: duplicate call deduped in log, counted in counters');
+
+  // 6. _attrKills === false: no entry, unlock check still runs, no crash.
+  const logBefore6 = log().length;
+  const probeBefore6 = probe.length;
+  Game._attrKills = false;
+  try {
+    Game.recordWaveKill(mA, vid, 'wild', 't-fix-off');
+  } finally {
+    try { delete Game._attrKills; } catch (e) {}
+  }
+  assert.strictEqual(log().length, logBefore6, 'attr-off logs nothing');
+  assert.ok(probe.length > probeBefore6, 'attr-off still runs the unlock check');
+  pass++; console.log('ok ' + pass + ' - live: _attrKills=false logs nothing, check still runs');
+
+  Game.checkWaveUnlockBeat = origCheck;
+  console.log('PASS ' + pass + '/' + pass);
+})().catch(function (e) { console.error(e.stack); process.exitCode = 1; });
