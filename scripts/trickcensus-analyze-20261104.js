@@ -80,6 +80,24 @@ function fightCensus(ex) {
     turns: turns.length,
   };
 }
+// Round-1 correction (pilot finding): the pending-buffer hypothesis was
+// wrong. Round-1 player actions do NOT run inside startCombat: startCombat
+// only advances AI turns until the player turn arrives, then returns;
+// the policy's round-1 action runs AFTER startCombat returns, when the
+// exposure already exists — but the round-1 TURN record was never opened,
+// because tbBeginTurn fired inside startCombat while no exposure existed.
+// The action itself IS in actionAvailLog (round 1, turnIndex 0): that log,
+// not ex.round1Actions, is the round-1 census. round1Actions stays empty
+// by construction and must not be read as "no round-1 action".
+function round1Summary(out) {
+  const bySeq = {};
+  for (const l of (out.actionAvailLog || [])) {
+    if (l.round !== 1 || l.seq == null) continue;
+    if (!bySeq[l.seq]) bySeq[l.seq] = [];
+    bySeq[l.seq].push(l.fn);
+  }
+  return { fightsWithRound1: Object.keys(bySeq).length, bySeq: bySeq };
+}
 function summarizeSeed(out) {
   const exps = out.exposures || [];
   const fights = exps.map(fightCensus);
@@ -94,7 +112,7 @@ function summarizeSeed(out) {
   for (const f of fights) for (const id of Object.keys(f.pressedCounts)) pressCounts[id] = (pressCounts[id] || 0) + f.pressedCounts[id];
   const neverPressedPool = {};
   for (const f of fights) for (const id of f.neverPressed) neverPressedPool[id] = (neverPressedPool[id] || 0) + 1;
-  const withRound1 = fights.filter(function (f) { return f.round1Actions.length > 0; }).length;
+  const withRound1 = round1Summary(out).fightsWithRound1;
   const unclassifiedFighters = fights.filter(function (f) { return !f.scholarAbilitiesAtStart; }).length;
   return {
     seed: out.seed, days: out.days, endReason: out.endReason,
@@ -111,4 +129,5 @@ function summarizeSeed(out) {
   };
 }
 module.exports = { barsOf: barsOf, lastSnap: lastSnap, trickShortfallCause: trickShortfallCause,
-  barShortDays: barShortDays, fightCensus: fightCensus, summarizeSeed: summarizeSeed };
+  barShortDays: barShortDays, fightCensus: fightCensus, summarizeSeed: summarizeSeed,
+  round1Summary: round1Summary };

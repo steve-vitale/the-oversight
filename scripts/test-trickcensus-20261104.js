@@ -56,6 +56,15 @@ const DEM = { armored: 4, armorP: 15, armed: 6, tricks: 3, veterans: 2 };
   check('fightCensus round1 kept', f.round1Actions[0] === 'tbPlayerMove');
   check('fightCensus unclassified=0 shape', !!f.scholarAbilitiesAtStart);
 })();
+// 4b. round1Summary reads round-1 actions from actionAvailLog, not
+// from the (empty by construction) ex.round1Actions buffer.
+(function () {
+  const out = { actionAvailLog: [
+    { round: 1, seq: 1, fn: 'tbPlayerMove' }, { round: 2, seq: 1, fn: 'tbPlayerStrike' },
+    { round: 1, seq: 2, fn: 'tbPlayerMove' } ], exposures: [] };
+  const r = AN.round1Summary(out);
+  check('round1Summary counts fights from avail log', r.fightsWithRound1 === 2 && r.bySeq[1][0] === 'tbPlayerMove', JSON.stringify(r));
+})();
 // 4. summarizeSeed aggregates press counts + unclassified fighters.
 (function () {
   const out = mkSeed(null, [2], {});
