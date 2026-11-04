@@ -18,14 +18,14 @@ for (const seed of SEEDS) {
   // Q1 trips from postrace
   const pr = read(path.join(EVIDIR, `journey-scale-r96-postrace-${seed}.txt`)).split('\n').filter(Boolean);
   const rows = pr.map(l => {
-    const m = l.match(/^d(\d+) (\w+) (\S+) at=\((\d+),(\d+)\) target=\((\d+|null),(\d+|null)\) dist=(\d+|null)(?: after=\((\d+),(\d+)\) dist2=(\d+))?(?: reason=(\w+))?/);
+    const m = l.match(/^d(\d+) (\w+) (\S+) at=\((\d+),(\d+)\) target=\((\d+|null|undefined),(\d+|null|undefined)\) dist=(\d+|null|undefined)(?: after=\((\d+),(\d+)\) dist2=(\d+))?(?: reason=(\w+))?/);
     if (!m) return null;
-    return { day: +m[1], stage: m[2], vid: m[3], px: +m[4], py: +m[5], dist: m[8] === 'null' ? null : +m[8], dist2: m[11] ? +m[11] : null, reason: m[12] || null };
+    return { day: +m[1], stage: m[2], vid: m[3], px: +m[4], py: +m[5], dist: (m[8] === 'null' || m[8] === 'undefined') ? null : +m[8], dist2: m[11] ? +m[11] : null, reason: m[12] || null };
   }).filter(Boolean);
   const trips = [];
   let cur = null;
   for (const r of rows) {
-    if (r.stage === 'eval') { if (cur) trips.push(cur); cur = { vid: r.vid, start: r.day, evals: [], walks: [], outcome: 'open' }; cur.evals.push(r); }
+    if (r.stage === 'eval') { if (!cur || cur.vid !== r.vid) { if (cur) trips.push(cur); cur = { vid: r.vid, start: r.day, evals: [], walks: [], outcome: 'open' }; } cur.evals.push(r); }
     else if (cur) {
       if (r.stage === 'walk') cur.walks.push(r);
       else if (r.stage === 'study') { cur.outcome = 'study'; cur.end = r.day; trips.push(cur); cur = null; }

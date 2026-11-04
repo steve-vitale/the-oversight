@@ -1,0 +1,25 @@
+(pre-talk seed: ask_favor planted d90; takenWantDay=0; convoCount=18)
+=== seed 85503 day 90 — conversation with Victor (victor_lopez) ===
+occupation=mason temperament=steady trust=90 dead=false
+want: ask_favor (stage 2)
+open thread: grief fromSeed=true
+picker: subject-first
+
+THEM: "I keep expecting to see them by the fire. Then I remember."
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: On the way, Victor stops and actually teaches you something — how they read a slope for water, how their grandmother did it. (Knowledge, freely given. The Codex notes it.)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "You're kind. Don't let this place change that."
+YOU: [ask:gossip] "Any good gossip? I'm bored."
+THEM: "Huh. Let me think about that." "Did you hear? Francois won Siege on the cameras. People are still talking about it."
+YOU: [dlg:more] "I’m listening."
+THEM: "I left. Walked back in like I'd never left, apparently."
+YOU: [dlg:react] (listen)
+THEM: "Well." A breath. "That's where things stand."
+YOU: [dlg:more] "Tell me more."
+THEM: "Julio headed out for water."
+YOU: (leave)
+pre-close: want ask_favor stage 2 thread gossip
+closing line: "Talking helps. A little. Thank you."
+(gossip picks this sitting: 1)

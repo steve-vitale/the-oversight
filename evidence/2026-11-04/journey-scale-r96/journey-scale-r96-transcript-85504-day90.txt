@@ -1,0 +1,17 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=0)
+=== seed 85504 day 90 — conversation with Owen (owen_smith) ===
+occupation=hunting guide temperament=withdrawn trust=23 dead=false
+want: curious (stage 1)
+open thread: want fromSeed=false
+picker: subject-first
+
+THEM: "Okay, real question: what's the funniest thing you've seen since we got here? I desperately need it."
+(turn0 choices: ans:q_laugh:a_story, ans:q_laugh:a_nothing, ans:q_laugh:a_dark, deflect_q, leave, silence)
+YOU: [ans:q_laugh:a_story] (tell them something funny)
+THEM: They laugh — really laugh, the first real one you've heard in days. "Okay. Okay, that's good. I needed that."
+YOU: [goon] "Wait, what? Go on —"
+THEM: "…Me? I laughed yesterday and it scared me — the sound of it. Like my body remembered something my head hadn't approved. Laughter's a mutiny. A good one."
+YOU: (leave)
+pre-close: want curious stage 2 thread want
+closing line: "Okay. Bye. This was — fine. It was fine."
+(gossip picks this sitting: 0)
