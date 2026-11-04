@@ -33,12 +33,22 @@ function intentOfProposal(ev) {
 // the diplo instrument's SAY_RE only via COUNTER LEARNED, a keepsake
 // bond, an internal "proposed relief" journal line, gossip
 // "opinions", or a reluctance "Not today" is over-catch, not
-// diplomacy. Strict diplomacy lines name a proposal / counter
-// negotiation / decline / polity / codex-study event concerning
-// another village, a "Word will travel" opinion line, the
-// "don't know them well enough" knowledge gate, or "They're watching".
+// diplomacy. STRICT diplomacy is deliberately narrow — a bare
+// "counter" must NOT qualify, because the corpus is flooded with
+// combat-tactic "Counter:" journal/codex lines and pantry
+// "onto the counter" lines, none of which are diplomacy. A
+// counter/decline/alliance line counts as strict ONLY with
+// village/tribute/primacy/terms context. Strict lines: a "Word
+// will travel" opinion line, the "don't know them well enough"
+// knowledge gate, "They're watching", a proposal line (other
+// than "proposed relief"), a covenant / trade-league / polity
+// line, or a village-context counter/decline/alliance line.
+const VILLAGE_CTX = /Stonebridge|Emberhold|Thornfield|Ashford|Hungry Road|tribute|primacy|terms|village/i;
 function classifySay(line) {
   const s = String(line || '');
+  // Combat-tactic journal/codex "Counter:" lines are not diplomacy
+  // even when they contain words like "terms" ("on your terms").
+  if (/^📓 (Journal|Codex): Counter:/i.test(s) || /^(Journal|Codex): Counter:/i.test(s)) return 'other';
   if (/COUNTER LEARNED/i.test(s)) return 'overcatch-counter-learned';
   if (/keepsake/i.test(s) && /bond/i.test(s)) return 'overcatch-keepsake-bond';
   if (/proposed relief/i.test(s)) return 'overcatch-proposed-relief';
@@ -47,7 +57,9 @@ function classifySay(line) {
   if (/word will travel/i.test(s)) return 'strict-diplomacy';
   if (/don't know them well enough/i.test(s)) return 'strict-diplomacy';
   if (/they'?re watching/i.test(s)) return 'strict-diplomacy';
-  if (/propos|covenant|trade league|counter|declin|polity|alliance|codex/i.test(s)) return 'strict-diplomacy';
+  if (/propos/i.test(s)) return 'strict-diplomacy';
+  if (/covenant|trade league|polity/i.test(s)) return 'strict-diplomacy';
+  if (/counter|declin|alliance/i.test(s) && VILLAGE_CTX.test(s)) return 'strict-diplomacy';
   return 'other';
 }
 
@@ -145,6 +157,8 @@ function analyzeSeed(d) {
   const captured = (d.sayLines || []).length;
   const overcatch = Object.keys(sayCounts).filter((k) => k.startsWith('overcatch'))
     .reduce((a, k) => a + sayCounts[k], 0);
+  const wordWillTravel = (d.sayLines || []).filter((s) => /word will travel/i.test(s.line || '')).length;
+  const politySystem = (d.sayLines || []).filter((s) => /GOVERNANCE LAYER|built a realm/i.test(s.line || '')).length;
   const w4faced = Math.max(0, ...((d.daily || []).map((x) => x.w4faced || 0)));
   const w5faced = Math.max(0, ...((d.daily || []).map((x) => x.w5faced || 0)));
   const ready5days = (d.daily || []).filter((x) => x.readiness5 && x.readiness5.ready).length;
@@ -155,7 +169,7 @@ function analyzeSeed(d) {
     maxWave: d.maxWave, endUnlockedWave: d.endUnlockedWave,
     w4faced, w5faced, ready5days, maxDiplomacy, regionalPlusDays,
     links: Object.values(links), proposals, acceptedCounters, flips,
-    sayCaptured: captured, sayCounts, overcatch,
+    sayCaptured: captured, sayCounts, overcatch, wordWillTravel, politySystem,
     strictDiplomacyLineCount: strictDiplomacyLines.length,
     strictDiplomacySample: strictDiplomacyLines.slice(0, 12).map((s) => ({ day: s.day, line: s.line })),
     dailyShape };

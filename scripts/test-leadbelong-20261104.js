@@ -33,6 +33,10 @@ t('reluctance Not today is overcatch', A.classifySay('Domingo hesitates, then ba
 t('Word will travel is strict', A.classifySay('Word will travel: Haven is clean hands (Opinion +2 with every village that knows you)') === 'strict-diplomacy');
 t('knowledge gate is strict', A.classifySay("We don't know them well enough to propose.") === 'strict-diplomacy');
 t('counter negotiation is strict', A.classifySay('Stonebridge counters: they ask for tribute, not primacy.') === 'strict-diplomacy');
+t('combat Counter journal line is NOT strict', A.classifySay('Journal: Counter: Hit it while it folds — the Wing Flash only fires FORWARD.') === 'other');
+t('pantry counter line is NOT strict', A.classifySay('2 unprocessed hauls onto the counter — the clock is ticking.') === 'other');
+t('bare counter line is NOT strict', A.classifySay('You catch fragments — something about a counter.') === 'other');
+t('pool-food counter line is NOT strict', A.classifySay('Someone by the fire nods at the counter. "We pool food here."') === 'other');
 t('unrelated line is other', A.classifySay('Your chewing echoes off the trees.') === 'other');
 // analyzeSeed on a synthetic mini-corpus: LEAD link seasons and
 // holds; BELONG link from a counter-accept flip breaks early.
