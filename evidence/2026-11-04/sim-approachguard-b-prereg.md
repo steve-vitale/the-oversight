@@ -93,6 +93,19 @@ starvation tele record, not a counting artifact — and read at least
 one armed and one baseline fight transcript. Judge meaning and
 coherence, never just counts. Flag anything robotic.
 
+## Anchor note (added before any judged sim; GO bars unchanged)
+
+- Prereg game base: 3f92c4d3dba1037c148ea82ca5b4f9aed691d24b.
+- Sweep anchor: the HEAD at sweep start (the driver records it into
+  every corpus file's anchorCommit field; the evidence file reports
+  the value). The commits between the game base and the sweep anchor
+  touch ONLY evidence/ (this prereg) and scripts/ tooling (the guard
+  driver/summarizer/test) — verified by
+  scripts/test-approachguard-20261104.js check 5+6, which asserts
+  `git diff <base> HEAD -- src/js scripts/policies` is empty. All 24
+  legs therefore run on one game base, identical in game and policy
+  bytes to the prereg base. No pull/rebase mid-sweep.
+
 ## Proofs (committed before judged sims where stated)
 
 - scripts/test-approachguard-20261104.js proves: the counting rule
