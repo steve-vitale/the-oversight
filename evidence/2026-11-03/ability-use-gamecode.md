@@ -254,3 +254,88 @@ yardstick), not a silent pass.
 - Every commit [needs-eyes]. Safe-commit only. No merge, no push,
   no bump, no live verification — branch ready for main-session
   review.
+
+## PREREG AMENDMENTS (written before the after-leg; the before-leg involves no twins, so it is unaffected)
+
+- Hogtie row: NO rope requirement. The base-five precedent governs:
+  NPC abilities in tbVillagerAbility pay no player inventory costs;
+  pantry-tier gating wraps the whole call. Once-per-fight flag
+  (_vBound), tbPlayerBind's gate (controlled + adjacent + size <= 1),
+  diminishing rounds (3 - prevBinds, min 1). The earlier "needs rope
+  in the villager's own kit" wording is superseded by this amendment.
+- Dead_aim row: the armor-piercing half is vacuous for villager
+  strikes. tbDamage applies no monster armor to villager strikes
+  (monster armor lives in tbPlayerStrike only), so there is nothing
+  to pierce. The twin is x3 only. Stated, not hidden.
+- Damage-setup twins (ambush, haymaker, dead_aim, patient_aim,
+  trade_open, brawler_instinct) gate on nontrivial (totalMaxHp >= 40
+  or 2+ monsters), the cascade's proven rule against wasting a setup
+  turn on trivia. War_cry, tripwire, stare_down, walk_in, goad,
+  hogtie, settle_debt carry their own triggers, not the nontrivial
+  gate (settle needs _taken > 0, which already implies a real fight).
+- Twin flag names, finalized at implementation (tbVillagerAbility,
+  after the shove block; consumption in tbVillagerTurn's strike
+  block, strike-only, harry leaves flags loaded):
+  war_cry -> _warCried (SHARED with the hopeless-path cry, never
+  double); tripwire -> f._tripwireSet (the player flag itself);
+  intimidating_presence -> _vStared; peacemaker -> _vWalkedIn;
+  come_get_some -> _vGoaded + m._goadedBy = v.key; hogtie -> _vBound
+  + m._bound/_bindCount; ambush -> _vAmbushed + _vAmbushReady {mult
+  2}; haymaker -> _vHaymakerPressed + _vHaymakerReady {mult 2.5}
+  (pressed strike skips the automatic every-3rd-swing x2, no x4
+  stack); dead_aim -> _vDeadAimed + _vDeadAim {mult 3};
+  patient_aim -> _vAimed + _vAimBonus {mult 2.5} + exposedTurns 1;
+  trade_of_blows open -> _vTradeOpened + _vTradeOpen {attacksLeft 3,
+  bonus 0.5}; settle -> _vDebtSettled + _vSettleDebtBonus =
+  round(_taken x 0.5); brawler_instinct -> _vReadFight + speed +2
+  + f.orderDirty.
+- Asymmetries, stated not hidden: open_trade's 10 HP player cost has
+  no NPC translation (base-five precedent: no per-cast NPC costs);
+  haymaker's -30% accuracy has none (no accuracy roll on the
+  villager strike path); dead_aim's armor-pierce has none (above).
+  The hopeless-path war cry still serves villagers above 50% HP
+  (helpful flee line 70%); the twin shadows it only below 50%,
+  with a stronger effect, once per fight.
+- Before-leg anchor note (recorded, not a re-score): the current
+  master moved since the prior arm's diagnosis (wild ally-join,
+  field-fight damage+staying, goals system landed). The before-leg
+  below is the baseline for the after-leg, NOT the prior arm's
+  numbers. Exposure density on this band is now 26 TB fights / 8
+  seeds (vs 51 in the diagnosis leg) — T1 is judged as written
+  (>= 10 twin rows); if it misses on thin exposure, that is a
+  NO-GO on T1 with a metric-review note, never a re-score.
+
+## BEFORE-LEG RESULTS (twins-before + passive-gc, stock policy, 140d, seeds 99101-99108)
+
+- Corpora: evidence/2026-11-03/perseed-abilityuse-gc-before/
+  (RUN twins-before) and perseed-abilityuse-gc-passive/ (RUN
+  passive-gc). Instrument errors 0 in all 16 files. One run served
+  both legs (passiveuse-driver-20261103.js); seed 99107 was
+  calibrated first, then the remaining 7 seeds ran after a runtime
+  restart killed the first attempt mid-99102 — 99101's files were
+  verified intact (full 140d, 0 errors) and only the 6 missing
+  seeds re-ran (the driver refuses overwrites).
+- Panel: 42 wave-4 spawns, 26 TB fights, 18 field fights, 5 wave-4
+  kills, 1/8 villages survived 140d (99101). 59 NPC ability calls,
+  0 fired (base five silent on this band — consistent with the
+  diagnosis era's rarity, now thinner: 26 fights vs 51).
+- KIT PATH: kitDiffs EMPTY across all 59 calls — zero godpath kit
+  casts (static_toss, cheese_wheel, bird_strike, turncoat,
+  freeze_tag, retribution) in the before-leg. Cause, from the
+  passive corpus: NO NPC ally in any of the 26 fights held a kit
+  ability at all. This is a HOLDING gap, not a gate gap and not a
+  missing path — the path exists (godpath villagerCast) and the
+  holdings do not. Per prereg, no duplicate path is built; the
+  follow-up is villager ability acquisition, flagged in the final
+  report, not silently added here.
+- NPC twin-eligible holdings in-panel are nearly absent: across 12
+  villager fight-slots, combat-action holdings are brawler_instinct
+  1, shoulder_check 1, hogtie 1, scream_cheese 1 (the last two
+  already base-five). The scholar, by contrast, holds the twin
+  abilities abundantly (patient_aim 25/26 fights, haymaker 26/26,
+  intimidating_presence 15, peacemaker 16, tripwire 10, dead_aim 6,
+  ambush 2, brawler_instinct 8, shoulder_check 16). The twins give
+  villagers the same effects — but on this panel, the binding
+  constraint after twins is that villagers rarely HOLD combat
+  abilities at all. T1's >= 10 rows assumed diagnosis-era holding
+  density; the after-leg will show what the rare holdings do.

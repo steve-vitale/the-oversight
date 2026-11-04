@@ -39206,6 +39206,248 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
       }
 
+      // NPC SKILL TWINS (ability-use game-code 2026-11-03, Steve: abilities
+      // as impactful as gear): the skill actions the policy fix proved
+      // valuable had NO villager path anywhere — no tbVillagerAbility
+      // branch, no godpath verb, no KIT entry. Each twin mirrors its
+      // player impl's numbers with villager-side flags (v._v*), consumed
+      // in tbVillagerTurn's strike block. Twins NEVER call useAbility —
+      // that charges the SCHOLAR's kcal and sets SCHOLAR flags. Pantry-tier
+      // gating comes from the foodPower wrapper around this whole call,
+      // same as the base five. Triggers read only this fighter's own
+      // position/HP and live monsters on its tiles (perception law).
+      // Fighters are built fresh per fight, so plain _v* booleans are
+      // per-fight, same as the base five. Damage-setup twins gate on
+      // nontrivial (totalMaxHp >= 40 or 2+ monsters) — the cascade's proven
+      // rule against wasting a setup turn on trivia.
+      const vHpFrac = (v.hp || 0) / Math.max(1, v.maxHp || 1);
+      const losing = vHpFrac < 0.5;
+      const totalMaxHp = liveMonsters.reduce((s, m) => s + (m.maxHp || m.hp || 0), 0);
+      const nontrivial = totalMaxHp >= 40 || liveMonsters.length >= 2;
+      const weakest = () => {
+        let best = null;
+        for (const m of liveMonsters) if (!best || (m.hp || 0) < (best.hp || 0)) best = m;
+        return best;
+      };
+      const cheb = (m) => Math.max(Math.abs((m.mx || 0) - (v.mx || 0)), Math.abs((m.my || 0) - (v.my || 0)));
+
+      // WAR CRY (losing): the full bellow, sharing _warCried with the
+      // hopeless-path cry so the two never double. Player numbers: 60%
+      // courage fail (morale flat 1 — villagers carry no scholar morale
+      // mods); skittish/curious non-fearless fail outright 25% of fails.
+      // The hopeless-path cry still serves villagers above 50% HP (its
+      // flee line for helpful villagers is 70%) — the twin shadows it
+      // only below 50%, with a stronger effect, once per fight.
+      if (losing && !v._warCried) {
+        if (this.npcHasAbility(vid, 'war_cry')) {
+          v._warCried = true;
+          let affected = 0, fled = 0;
+          for (const m of liveMonsters) {
+            if (Math.random() < 0.6) {
+              const fearless = m.fearless || (m.mdef && m.mdef.fearless);
+              const skittish = m.mdef && (m.mdef.aggression === 'skittish' || m.mdef.aggression === 'curious');
+              if (!fearless && skittish && Math.random() < 0.25) { m.fled = true; fled++; }
+              else {
+                try { this.applyStatus(m, 'stun', { turns: 1, source: 'War Cry' }); }
+                catch (e) { m.stunned = (m.stunned || 0) + 1; }
+                affected++;
+              }
+            }
+          }
+          try { this.tbEndCheck(); } catch (e) { console.warn('[twin] tbEndCheck', e); }
+          this.say(`${v.name} BELLOWS — raw, wordless, from the gut.${affected ? ' ' + affected + ' of them flinch, losing their next turn.' : ''}${fled ? ' ' + fled + ' bolt outright.' : ''}${(!affected && !fled) ? ' They hold their ground, but they heard them.' : ''} (War Cry)`);
+          return true;
+        }
+      }
+
+      // TRIPWIRE: the same fight flag the player sets; the monster-move
+      // consumer fires it. Once per fight by construction (flag gate).
+      if (!f._tripwireSet) {
+        if (this.npcHasAbility(vid, 'tripwire')) {
+          f._tripwireSet = true;
+          this.say(`${v.name} strings a wire at ankle height, almost invisible. The next monster that moves eats dirt. (Tripwire: set.)`);
+          return true;
+        }
+      }
+
+      // STARE DOWN: weakest live monster, 50% flat (villagers carry no
+      // scholar social.intimidate mods). Fearless holds honestly; the
+      // turn is spent either way, like the player's.
+      if (!v._vStared) {
+        if (this.npcHasAbility(vid, 'intimidating_presence')) {
+          const m = weakest();
+          if (m) {
+            v._vStared = true;
+            const fearless = m.fearless || (m.mdef && m.mdef.fearless);
+            if (fearless) {
+              this.say(`${v.name} locks eyes. It doesn't blink. This one doesn't know fear — or doesn't care. It's still coming. (Stare Down — truly fearless.)`);
+            } else if (Math.random() < 0.5) {
+              m.fled = true;
+              try { this.tbEndCheck(); } catch (e) { console.warn('[twin] tbEndCheck', e); }
+              this.say(`${v.name} locks eyes and doesn't look away. It falters — then backs off, disengaging. Smart. (Stare Down — it backed down.)`);
+            } else {
+              this.say(`${v.name} locks eyes. It meets the stare and holds. Respect — but it's not backing down. (Stare Down — it held.)`);
+            }
+            return true;
+          }
+        }
+      }
+
+      // WALK IN: losing gambit, 35% flat (no scholar drama.resolve_bonus
+      // for villagers). Success ends the fight for non-elders; failure
+      // exposes (tbDamage's dodge block reads exposedTurns on any fighter).
+      if (losing && !v._vWalkedIn) {
+        if (this.npcHasAbility(vid, 'peacemaker')) {
+          v._vWalkedIn = true;
+          const talkable = liveMonsters.filter(m => !m.elderCalm);
+          if (talkable.length && Math.random() * 100 < 35) {
+            for (const m of talkable) { m.fled = true; if (m.telegraph) m.telegraph = null; }
+            try { this.tbEndCheck(); } catch (e) { console.warn('[twin] tbEndCheck', e); }
+            this.say(`${v.name} walks in open-handed, talking — low, steady, unafraid. And impossibly, they listen. They stand down. (Walk In: the fight ends.)`);
+          } else {
+            v.exposedTurns = 1;
+            this.say(`${v.name} walks in open-handed — and it goes wrong. They don't want peace. Exposed, off-balance, nowhere to slip to until the next turn. (Walk In failed.)`);
+          }
+          return true;
+        }
+      }
+
+      // GOAD: blinded monster within 3 (Chebyshev, same as tbPlayerGoad).
+      // The monster-move consumer resolves _goadedBy through tbFighter,
+      // so a villager key works exactly like 'p'.
+      if (!v._vGoaded) {
+        if (this.npcHasAbility(vid, 'come_get_some')) {
+          let best = null, bd = 1e9;
+          for (const m of liveMonsters) {
+            if (!((m.blind || 0) > 0)) continue;
+            const d = cheb(m);
+            if (d <= 3 && d < bd) { bd = d; best = m; }
+          }
+          if (best) {
+            v._vGoaded = true;
+            best._goadedBy = v.key;
+            this.say(`${v.name} whistles, sharp — ${mname(best)} cocks its head and lurches toward the sound! (Goaded: its next move comes to them.)`);
+            return true;
+          }
+        }
+      }
+
+      // HOGTIE: tbPlayerBind's gate (controlled + adjacent + size-1; the
+      // bar's _bound-inclusive gate is a pre-existing mismatch, not
+      // followed here). No rope: base-five precedent — NPC abilities pay
+      // no player inventory costs; pantry-tier gating covers the call.
+      // Diminishing rounds match the player impl.
+      if (!v._vBound) {
+        if (this.npcHasAbility(vid, 'hogtie')) {
+          const bindable = liveMonsters.filter(m =>
+            ((m.stunned || 0) > 0 || (m._frozen || 0) > 0 || (m.blind || 0) > 0 || (m.hesitate || 0) > 0) &&
+            cheb(m) <= 1 && (this.fighterSize(m) || 1) <= 1);
+          if (bindable.length) {
+            const m = bindable[0];
+            const prevBinds = m._bindCount || 0;
+            const rounds = Math.max(1, 3 - prevBinds);
+            m._bindCount = prevBinds + 1;
+            m._bound = rounds;
+            v._vBound = true;
+            try { this.tbRefreshTelegraphUI(); } catch (e) { console.warn('[twin] tbRefreshTelegraphUI', e); }
+            this.say(`${v.name} hogties ${mname(m)} while it can't fight back — ${rounds} round${rounds > 1 ? 's' : ''}, it isn't going anywhere and can't wind up for anything big. (Bind: rooted, no telegraphs.${prevBinds ? ' Diminishing — it\'s learning the rope.' : ''})`);
+            return true;
+          }
+        }
+      }
+
+      // AMBUSH: setup turn, next strike x2. tbVillagerAbility runs before
+      // the strike decision every turn, so a held ambush with no
+      // higher-priority twin firing ALWAYS lands before the villager's
+      // first strike — the "has not struck yet" trigger is structural.
+      if (!v._vAmbushed && nontrivial) {
+        if (this.npcHasAbility(vid, 'ambush')) {
+          v._vAmbushed = true;
+          v._vAmbushReady = { mult: 2.0 };
+          this.say(`${v.name} picks their ground, settles their weight, and waits. Next attack: 2x damage — they never see it coming. (Ambush — prepared.)`);
+          return true;
+        }
+      }
+
+      // HAYMAKER (pressed): next strike x2.5. The automatic every-3rd
+      // swing x2 stays live, but the strike block skips it on the pressed
+      // strike so the two never stack. No accuracy roll exists on the
+      // villager strike path, so the player's -30% has no NPC translation
+      // (stated, not hidden).
+      if (!v._vHaymakerPressed && nontrivial) {
+        if (this.npcHasAbility(vid, 'haymaker')) {
+          const { d } = nearest(v.mx, v.my);
+          if (d <= 1) {
+            v._vHaymakerPressed = true;
+            v._vHaymakerReady = { mult: 2.5 };
+            this.say(`${v.name} winds up — telegraphed, wild, devastating. Next strike: 2.5x damage. (Haymaker — swing to fire.)`);
+            return true;
+          }
+        }
+      }
+
+      // DEAD AIM: next strike x3. The armor-piercing half has no
+      // villager-strike translation: tbDamage applies no monster armor to
+      // villager strikes (armor lives in tbPlayerStrike only), so there
+      // is nothing to pierce. The x3 is the whole twin.
+      if (!v._vDeadAimed && nontrivial) {
+        if (this.npcHasAbility(vid, 'dead_aim')) {
+          v._vDeadAimed = true;
+          v._vDeadAim = { mult: 3.0 };
+          this.say(`${v.name} takes one breath. One shot. 3x damage. They plant their feet — not moving this turn. (Dead Aim — the shot is ready, strike to fire it.)`);
+          return true;
+        }
+      }
+
+      // TAKE AIM: next strike x2.5, exposed until next turn (the same
+      // flag tbDamage's dodge block reads).
+      if (!v._vAimed && nontrivial) {
+        if (this.npcHasAbility(vid, 'patient_aim')) {
+          v._vAimed = true;
+          v._vAimBonus = { mult: 2.5 };
+          v.exposedTurns = 1;
+          this.say(`${v.name} goes still. Breath slows. The world narrows to the target. Next shot: 2.5x damage, cannot miss. But they're exposed — enemies hit easier until the next turn. (Take Aim)`);
+          return true;
+        }
+      }
+
+      // OPEN THE TRADE: next 3 strikes +50%. The player pays 10 HP for
+      // the window; the twin does not (base-five precedent — no per-cast
+      // costs for NPC abilities). Noted as an asymmetry in the arm's
+      // evidence, not hidden.
+      if (!v._vTradeOpened && nontrivial) {
+        if (this.npcHasAbility(vid, 'trade_of_blows')) {
+          v._vTradeOpened = true;
+          v._vTradeOpen = { attacksLeft: 3, bonus: 0.5 };
+          this.say(`${v.name} lets one through — takes the hit, feels where it lands. The pain focuses them. The next 3 attacks deal +50% damage. (Open the Trade.)`);
+          return true;
+        }
+      }
+
+      // SETTLE THE DEBT: flat bonus from damage taken this fight (the
+      // _taken ledger tbDamage already keeps for villagers).
+      if (!v._vDebtSettled && (v._taken || 0) > 0) {
+        if (this.npcHasAbility(vid, 'trade_of_blows')) {
+          const bonus = Math.round((v._taken || 0) * 0.5);
+          v._vDebtSettled = true;
+          v._vSettleDebtBonus = bonus;
+          this.say(`${v.name} cashes in every bruise, every cut. +${bonus} damage on the next strike — the pain pays out. (Settle the Debt — once per fight.)`);
+          return true;
+        }
+      }
+
+      // READ THE FIGHT: +2 speed, re-sorts from next round (turn order
+      // is speed-based). Same as the player impl.
+      if (!v._vReadFight && nontrivial) {
+        if (this.npcHasAbility(vid, 'brawler_instinct')) {
+          v._vReadFight = true;
+          v.speed = (v.speed || 3) + 2;
+          f.orderDirty = true;
+          this.say(`${v.name} sizes up the room, the angles, the exits. +2 speed for the rest of the fight. (Read the Fight)`);
+          return true;
+        }
+      }
+
       return false;
     },
 
@@ -39339,6 +39581,48 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             dmg = Math.round(dmg * 2);
             _vRaged = true;
           }
+          // NPC SKILL TWINS (ability-use game-code 2026-11-03): consume
+          // villager-side flags set by tbVillagerAbility, same numbers as
+          // the player's _applyAbilityActionMods. Strike-only — a harry
+          // leaves flags loaded, like the player path. Lines are collected
+          // here (damage is modified before tbDamage) and narrated after
+          // tbDamage returns, following the villager convention below.
+          let _vTwinLines = [];
+          let _hmPressed = false;
+          if (a.type === 'strike') {
+            if (v._vAimBonus) {
+              dmg = Math.round(dmg * v._vAimBonus.mult);
+              _vTwinLines.push(`TAKE AIM: the shot lands exactly where pictured. ×${v._vAimBonus.mult}.`);
+              delete v._vAimBonus;
+            }
+            if (v._vDeadAim) {
+              dmg = Math.round(dmg * v._vDeadAim.mult);
+              _vTwinLines.push(`DEAD AIM: one perfect shot. ×${v._vDeadAim.mult}.`);
+              delete v._vDeadAim;
+            }
+            if (v._vAmbushReady) {
+              dmg = Math.round(dmg * v._vAmbushReady.mult);
+              _vTwinLines.push(`AMBUSH: they never saw it coming. ×${v._vAmbushReady.mult}.`);
+              delete v._vAmbushReady;
+            }
+            if (v._vHaymakerReady) {
+              dmg = Math.round(dmg * v._vHaymakerReady.mult);
+              _vTwinLines.push(`HAYMAKER: a wild, devastating swing. ×${v._vHaymakerReady.mult}.`);
+              delete v._vHaymakerReady;
+              _hmPressed = true;
+            }
+            if (v._vTradeOpen && v._vTradeOpen.attacksLeft > 0) {
+              dmg = Math.round(dmg * (1 + v._vTradeOpen.bonus));
+              v._vTradeOpen.attacksLeft -= 1;
+              _vTwinLines.push(`TRADE OF BLOWS: the pain pays out. +${Math.round(v._vTradeOpen.bonus * 100)}%. (${v._vTradeOpen.attacksLeft} left.)`);
+              if (v._vTradeOpen.attacksLeft <= 0) delete v._vTradeOpen;
+            }
+            if (v._vSettleDebtBonus) {
+              dmg += v._vSettleDebtBonus;
+              _vTwinLines.push(`SETTLE THE DEBT: +${v._vSettleDebtBonus} from everything endured.`);
+              delete v._vSettleDebtBonus;
+            }
+          }
           // HAYMAKER (parity audit 2026-10-10): a villager ally with haymaker
           // puts their whole body into every third swing — same rhythm as
           // the player's haymaker (round-counted, telegraphed, honestly
@@ -39351,7 +39635,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // the number that LANDED, announced after tbDamage returns it.
           let _hmSwung = false;
           try {
-            if (a.type === 'strike' && v.villagerId && this.npcHasAbility && this.npcHasAbility(v.villagerId, 'haymaker')) {
+            // _hmPressed (twin, above): a pressed haymaker skips the
+            // automatic rhythm this strike so the two never stack.
+            if (a.type === 'strike' && !_hmPressed && v.villagerId && this.npcHasAbility && this.npcHasAbility(v.villagerId, 'haymaker')) {
               v._haymakerSwings = (v._haymakerSwings || 0) + 1;
               if (v._haymakerSwings % 3 === 0) { dmg = Math.round(dmg * 2); _hmSwung = true; }
             }
@@ -39372,6 +39658,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           v._dealt = (v._dealt || 0) + _landed;
           if (_hmSwung) this.say(`${v.name} puts everything into the swing — HAYMAKER! (${_landed})`);
           if (_vRaged) this.say(`${v.name} strikes through the red haze — RAGE! (${_landed})${v._vRageRounds > 0 ? ` (${v._vRageRounds} raging strikes left)` : ' (rage spent)'}`);
+          for (const _tl of _vTwinLines) this.say(`${v.name}: ${_tl} (${_landed})`);
           // HIGHBEAM: hurting the deer moves them to the front of its list.
           try { const tt = this.tbFighter(t.key); if (tt && this.encUsesFifo(tt)) this.encNoticesPain(tt, v.key); } catch (e) {}
         }

@@ -1,0 +1,2229 @@
+{
+  "seed": 99102,
+  "run": "passive-gc",
+  "anchorCommit": "12e273904382",
+  "days": 127,
+  "gameDays": 126,
+  "endReason": "village-lost",
+  "passive": {
+    "fights": [
+      {
+        "seq": 1,
+        "day": 59,
+        "mid": "eulogy",
+        "fightId": "fmgpspihn_g5ravm",
+        "scholar": {
+          "held": [
+            {
+              "id": "beast_calm",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "monster.detect_chance",
+                  "op": "multiply",
+                  "value": 0.75,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "echo_location",
+              "level": 1,
+              "modifiers": []
+            },
+            {
+              "id": "steady_hands",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "craft.success",
+                  "op": "multiply",
+                  "value": 1.25,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "game_sense",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "hunt.find_chance",
+                  "op": "multiply",
+                  "value": 1.4,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "patient_aim",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "combat.strike_damage",
+                  "op": "multiply",
+                  "value": 2,
+                  "scale": null,
+                  "condition": "round:1"
+                }
+              ]
+            },
+            {
+              "id": "field_dressing",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "hunt.meat_yield",
+                  "op": "multiply",
+                  "value": 1.3,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "preservation_instinct",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "food.spoilage_days",
+                  "op": "add",
+                  "value": 2,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "soft_step",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "travel.encounter_chance",
+                  "op": "multiply",
+                  "value": 0.7,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "tracker",
+              "level": 1,
+              "modifiers": []
+            },
+            {
+              "id": "diplomat",
+              "level": 2,
+              "modifiers": []
+            },
+            {
+              "id": "scrounger",
+              "level": 1,
+              "modifiers": []
+            },
+            {
+              "id": "thief",
+              "level": 2,
+              "modifiers": []
+            },
+            {
+              "id": "compost_king",
+              "level": 2,
+              "modifiers": []
+            },
+            {
+              "id": "mediator",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "drama.resolve_bonus",
+                  "op": "add",
+                  "value": 0.25,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "wanderer",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "travel.cost_mult",
+                  "op": "multiply",
+                  "value": 0.9,
+                  "scale": null,
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "herbal_remedy",
+              "level": 2,
+              "modifiers": []
+            },
+            {
+              "id": "gossip_network",
+              "level": 1,
+              "modifiers": []
+            },
+            {
+              "id": "peacemaker",
+              "level": 1,
+              "modifiers": []
+            },
+            {
+              "id": "pathfinder",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "travel.cost_mult",
+                  "op": "multiply",
+                  "value": 0.85,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "eagle_eye",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "ruin.find_mult",
+                  "op": "add",
+                  "value": 0.25,
+                  "scale": null,
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "stalk",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "stealth.move_silent",
+                  "op": "add",
+                  "value": 0.15,
+                  "scale": null,
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "blood_trail",
+              "level": 1,
+              "modifiers": []
+            },
+            {
+              "id": "animal_ken",
+              "level": 1,
+              "modifiers": []
+            },
+            {
+              "id": "haymaker",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "combat.heavy_damage",
+                  "op": "multiply",
+                  "value": 1.2,
+                  "scale": null,
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "still_hands",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "craft.success",
+                  "op": "multiply",
+                  "value": 1.3,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "storm_ear",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "water.rain_catch",
+                  "op": "multiply",
+                  "value": 1.5,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "hogtie",
+              "level": 2,
+              "modifiers": []
+            }
+          ],
+          "resolved": {
+            "strike_damage": 1,
+            "strike_damage_r1": 2,
+            "first_strike_damage": 1,
+            "heavy_damage": 1.2,
+            "dodge_chance": 0,
+            "armor_flat": 0,
+            "max_add": 0,
+            "trade_window": 0,
+            "enemy_morale": 1
+          },
+          "readError": null
+        },
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "gen_iw0q5ci",
+            "hp": 81,
+            "maxHp": 100,
+            "scholarPassives": {
+              "held": [
+                {
+                  "id": "beast_calm",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "monster.detect_chance",
+                      "op": "multiply",
+                      "value": 0.75,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "echo_location",
+                  "level": 1,
+                  "modifiers": []
+                },
+                {
+                  "id": "steady_hands",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "craft.success",
+                      "op": "multiply",
+                      "value": 1.25,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "game_sense",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "hunt.find_chance",
+                      "op": "multiply",
+                      "value": 1.4,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "patient_aim",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "combat.strike_damage",
+                      "op": "multiply",
+                      "value": 2,
+                      "scale": null,
+                      "condition": "round:1"
+                    }
+                  ]
+                },
+                {
+                  "id": "field_dressing",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "hunt.meat_yield",
+                      "op": "multiply",
+                      "value": 1.3,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "preservation_instinct",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "food.spoilage_days",
+                      "op": "add",
+                      "value": 2,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "soft_step",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "travel.encounter_chance",
+                      "op": "multiply",
+                      "value": 0.7,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "tracker",
+                  "level": 1,
+                  "modifiers": []
+                },
+                {
+                  "id": "diplomat",
+                  "level": 2,
+                  "modifiers": []
+                },
+                {
+                  "id": "scrounger",
+                  "level": 1,
+                  "modifiers": []
+                },
+                {
+                  "id": "thief",
+                  "level": 2,
+                  "modifiers": []
+                },
+                {
+                  "id": "compost_king",
+                  "level": 2,
+                  "modifiers": []
+                },
+                {
+                  "id": "mediator",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "drama.resolve_bonus",
+                      "op": "add",
+                      "value": 0.25,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "wanderer",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "travel.cost_mult",
+                      "op": "multiply",
+                      "value": 0.9,
+                      "scale": null,
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "herbal_remedy",
+                  "level": 2,
+                  "modifiers": []
+                },
+                {
+                  "id": "gossip_network",
+                  "level": 1,
+                  "modifiers": []
+                },
+                {
+                  "id": "peacemaker",
+                  "level": 1,
+                  "modifiers": []
+                },
+                {
+                  "id": "pathfinder",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "travel.cost_mult",
+                      "op": "multiply",
+                      "value": 0.85,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "eagle_eye",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "ruin.find_mult",
+                      "op": "add",
+                      "value": 0.25,
+                      "scale": null,
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "stalk",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "stealth.move_silent",
+                      "op": "add",
+                      "value": 0.15,
+                      "scale": null,
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "blood_trail",
+                  "level": 1,
+                  "modifiers": []
+                },
+                {
+                  "id": "animal_ken",
+                  "level": 1,
+                  "modifiers": []
+                },
+                {
+                  "id": "haymaker",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "combat.heavy_damage",
+                      "op": "multiply",
+                      "value": 1.2,
+                      "scale": null,
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "still_hands",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "craft.success",
+                      "op": "multiply",
+                      "value": 1.3,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "storm_ear",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "water.rain_catch",
+                      "op": "multiply",
+                      "value": 1.5,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "hogtie",
+                  "level": 2,
+                  "modifiers": []
+                }
+              ],
+              "resolved": {
+                "strike_damage": 1,
+                "strike_damage_r1": 2,
+                "first_strike_damage": 1,
+                "heavy_damage": 1.2,
+                "dodge_chance": 0,
+                "armor_flat": 0,
+                "max_add": 0,
+                "trade_window": 0,
+                "enemy_morale": 1
+              },
+              "readError": null
+            },
+            "npcPassives": null
+          },
+          {
+            "key": "v_sari_wulandari",
+            "kind": "villager",
+            "vid": "sari_wulandari",
+            "hp": 100,
+            "maxHp": 100,
+            "scholarPassives": null,
+            "npcPassives": {
+              "held": [
+                {
+                  "id": "beast_calm",
+                  "modifiers": [
+                    {
+                      "target": "monster.detect_chance",
+                      "op": "multiply",
+                      "value": 0.75,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "game_sense",
+                  "modifiers": [
+                    {
+                      "target": "hunt.find_chance",
+                      "op": "multiply",
+                      "value": 1.4,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "field_dressing",
+                  "modifiers": [
+                    {
+                      "target": "hunt.meat_yield",
+                      "op": "multiply",
+                      "value": 1.3,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "soft_step",
+                  "modifiers": [
+                    {
+                      "target": "travel.encounter_chance",
+                      "op": "multiply",
+                      "value": 0.7,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "tracker",
+                  "modifiers": []
+                },
+                {
+                  "id": "wanderer",
+                  "modifiers": [
+                    {
+                      "target": "travel.cost_mult",
+                      "op": "multiply",
+                      "value": 0.9,
+                      "scale": null,
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "pathfinder",
+                  "modifiers": [
+                    {
+                      "target": "travel.cost_mult",
+                      "op": "multiply",
+                      "value": 0.85,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "blood_trail",
+                  "modifiers": []
+                },
+                {
+                  "id": "animal_ken",
+                  "modifiers": []
+                }
+              ],
+              "readError": null
+            }
+          }
+        ],
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "eulogy",
+            "hp": 412,
+            "maxHp": 900
+          }
+        ],
+        "dmgRows": [
+          {
+            "targetKey": "m_0",
+            "targetKind": "monster",
+            "requested": 14,
+            "landed": 14,
+            "sourceKey": "v_sari_wulandari",
+            "sourceKind": "villager",
+            "sourceLabel": "Sari"
+          },
+          {
+            "targetKey": "m_0",
+            "targetKind": "monster",
+            "requested": 13,
+            "landed": 13,
+            "sourceKey": "v_sari_wulandari",
+            "sourceKind": "villager",
+            "sourceLabel": "Sari"
+          },
+          {
+            "targetKey": "v_sari_wulandari",
+            "targetKind": "villager",
+            "requested": 37,
+            "landed": 15,
+            "sourceKey": "m_0",
+            "sourceKind": "monster",
+            "sourceLabel": "eulogy's Epitaph"
+          },
+          {
+            "targetKey": "m_0",
+            "targetKind": "monster",
+            "requested": 43,
+            "landed": 54,
+            "sourceKey": null,
+            "sourceKind": null,
+            "sourceLabel": "you"
+          },
+          {
+            "targetKey": "m_0",
+            "targetKind": "monster",
+            "requested": 13,
+            "landed": 13,
+            "sourceKey": "v_sari_wulandari",
+            "sourceKind": "villager",
+            "sourceLabel": "Sari"
+          },
+          {
+            "targetKey": "p",
+            "targetKind": "player",
+            "requested": 60,
+            "landed": 23,
+            "sourceKey": "m_0",
+            "sourceKind": "monster",
+            "sourceLabel": "eulogy's attack"
+          },
+          {
+            "targetKey": "m_0",
+            "targetKind": "monster",
+            "requested": 47,
+            "landed": 59,
+            "sourceKey": null,
+            "sourceKind": null,
+            "sourceLabel": "you"
+          },
+          {
+            "targetKey": "p",
+            "targetKind": "player",
+            "requested": 62,
+            "landed": 23,
+            "sourceKey": "m_0",
+            "sourceKind": "monster",
+            "sourceLabel": "eulogy's Final Chapter"
+          },
+          {
+            "targetKey": "m_0",
+            "targetKind": "monster",
+            "requested": 47,
+            "landed": 59,
+            "sourceKey": null,
+            "sourceKind": null,
+            "sourceLabel": "you"
+          },
+          {
+            "targetKey": "m_0",
+            "targetKind": "monster",
+            "requested": 12,
+            "landed": 12,
+            "sourceKey": "v_sari_wulandari",
+            "sourceKind": "villager",
+            "sourceLabel": "Sari"
+          },
+          {
+            "targetKey": "p",
+            "targetKind": "player",
+            "requested": 53,
+            "landed": 0,
+            "sourceKey": "m_0",
+            "sourceKind": "monster",
+            "sourceLabel": "eulogy's Final Chapter"
+          },
+          {
+            "targetKey": "m_0",
+            "targetKind": "monster",
+            "requested": 46,
+            "landed": 58,
+            "sourceKey": null,
+            "sourceKind": null,
+            "sourceLabel": "you"
+          },
+          {
+            "targetKey": "m_0",
+            "targetKind": "monster",
+            "requested": 15,
+            "landed": 15,
+            "sourceKey": "v_sari_wulandari",
+            "sourceKind": "villager",
+            "sourceLabel": "Sari"
+          },
+          {
+            "targetKey": "p",
+            "targetKind": "player",
+            "requested": 9999,
+            "landed": 3780,
+            "sourceKey": "m_0",
+            "sourceKind": "monster",
+            "sourceLabel": "the narrated ending"
+          }
+        ],
+        "end": "lost",
+        "endHumans": [
+          {
+            "key": "p",
+            "hp": -3733,
+            "alive": false,
+            "fled": false
+          },
+          {
+            "key": "v_sari_wulandari",
+            "hp": 85,
+            "alive": true,
+            "fled": false
+          }
+        ],
+        "endMonsters": [
+          {
+            "key": "m_0",
+            "hp": 115,
+            "alive": true,
+            "fled": false
+          }
+        ],
+        "superseded": false
+      },
+      {
+        "seq": 2,
+        "day": 62,
+        "mid": "algorithm",
+        "fightId": "fmgpspiip_3jffu1",
+        "scholar": {
+          "held": [
+            {
+              "id": "beast_calm",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "monster.detect_chance",
+                  "op": "multiply",
+                  "value": 0.75,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "lucky_rock",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "luck.global",
+                  "op": "multiply",
+                  "value": 1.05,
+                  "scale": null,
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "steady_hands",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "craft.success",
+                  "op": "multiply",
+                  "value": 1.25,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "game_sense",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "hunt.find_chance",
+                  "op": "multiply",
+                  "value": 1.4,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "patient_aim",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "combat.strike_damage",
+                  "op": "multiply",
+                  "value": 2,
+                  "scale": null,
+                  "condition": "round:1"
+                }
+              ]
+            },
+            {
+              "id": "field_dressing",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "hunt.meat_yield",
+                  "op": "multiply",
+                  "value": 1.3,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "preservation_instinct",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "food.spoilage_days",
+                  "op": "add",
+                  "value": 2,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "soft_step",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "travel.encounter_chance",
+                  "op": "multiply",
+                  "value": 0.7,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "tracker",
+              "level": 1,
+              "modifiers": []
+            },
+            {
+              "id": "diplomat",
+              "level": 2,
+              "modifiers": []
+            },
+            {
+              "id": "scrounger",
+              "level": 1,
+              "modifiers": []
+            },
+            {
+              "id": "thief",
+              "level": 2,
+              "modifiers": []
+            },
+            {
+              "id": "compost_king",
+              "level": 2,
+              "modifiers": []
+            },
+            {
+              "id": "mediator",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "drama.resolve_bonus",
+                  "op": "add",
+                  "value": 0.25,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "wanderer",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "travel.cost_mult",
+                  "op": "multiply",
+                  "value": 0.9,
+                  "scale": null,
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "herbal_remedy",
+              "level": 2,
+              "modifiers": []
+            },
+            {
+              "id": "gossip_network",
+              "level": 1,
+              "modifiers": []
+            },
+            {
+              "id": "peacemaker",
+              "level": 1,
+              "modifiers": []
+            },
+            {
+              "id": "pathfinder",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "travel.cost_mult",
+                  "op": "multiply",
+                  "value": 0.85,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "eagle_eye",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "ruin.find_mult",
+                  "op": "add",
+                  "value": 0.25,
+                  "scale": null,
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "stalk",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "stealth.move_silent",
+                  "op": "add",
+                  "value": 0.15,
+                  "scale": null,
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "blood_trail",
+              "level": 1,
+              "modifiers": []
+            },
+            {
+              "id": "animal_ken",
+              "level": 1,
+              "modifiers": []
+            },
+            {
+              "id": "haymaker",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "combat.heavy_damage",
+                  "op": "multiply",
+                  "value": 1.2,
+                  "scale": null,
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "still_hands",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "craft.success",
+                  "op": "multiply",
+                  "value": 1.3,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "storm_ear",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "water.rain_catch",
+                  "op": "multiply",
+                  "value": 1.5,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "hogtie",
+              "level": 2,
+              "modifiers": []
+            }
+          ],
+          "resolved": {
+            "strike_damage": 1,
+            "strike_damage_r1": 2,
+            "first_strike_damage": 1,
+            "heavy_damage": 1.2,
+            "dodge_chance": 0,
+            "armor_flat": 0,
+            "max_add": 0,
+            "trade_window": 0,
+            "enemy_morale": 1
+          },
+          "readError": null
+        },
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "sari_wulandari",
+            "hp": 97.2,
+            "maxHp": 100,
+            "scholarPassives": {
+              "held": [
+                {
+                  "id": "beast_calm",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "monster.detect_chance",
+                      "op": "multiply",
+                      "value": 0.75,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "lucky_rock",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "luck.global",
+                      "op": "multiply",
+                      "value": 1.05,
+                      "scale": null,
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "steady_hands",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "craft.success",
+                      "op": "multiply",
+                      "value": 1.25,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "game_sense",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "hunt.find_chance",
+                      "op": "multiply",
+                      "value": 1.4,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "patient_aim",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "combat.strike_damage",
+                      "op": "multiply",
+                      "value": 2,
+                      "scale": null,
+                      "condition": "round:1"
+                    }
+                  ]
+                },
+                {
+                  "id": "field_dressing",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "hunt.meat_yield",
+                      "op": "multiply",
+                      "value": 1.3,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "preservation_instinct",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "food.spoilage_days",
+                      "op": "add",
+                      "value": 2,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "soft_step",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "travel.encounter_chance",
+                      "op": "multiply",
+                      "value": 0.7,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "tracker",
+                  "level": 1,
+                  "modifiers": []
+                },
+                {
+                  "id": "diplomat",
+                  "level": 2,
+                  "modifiers": []
+                },
+                {
+                  "id": "scrounger",
+                  "level": 1,
+                  "modifiers": []
+                },
+                {
+                  "id": "thief",
+                  "level": 2,
+                  "modifiers": []
+                },
+                {
+                  "id": "compost_king",
+                  "level": 2,
+                  "modifiers": []
+                },
+                {
+                  "id": "mediator",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "drama.resolve_bonus",
+                      "op": "add",
+                      "value": 0.25,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "wanderer",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "travel.cost_mult",
+                      "op": "multiply",
+                      "value": 0.9,
+                      "scale": null,
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "herbal_remedy",
+                  "level": 2,
+                  "modifiers": []
+                },
+                {
+                  "id": "gossip_network",
+                  "level": 1,
+                  "modifiers": []
+                },
+                {
+                  "id": "peacemaker",
+                  "level": 1,
+                  "modifiers": []
+                },
+                {
+                  "id": "pathfinder",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "travel.cost_mult",
+                      "op": "multiply",
+                      "value": 0.85,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "eagle_eye",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "ruin.find_mult",
+                      "op": "add",
+                      "value": 0.25,
+                      "scale": null,
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "stalk",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "stealth.move_silent",
+                      "op": "add",
+                      "value": 0.15,
+                      "scale": null,
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "blood_trail",
+                  "level": 1,
+                  "modifiers": []
+                },
+                {
+                  "id": "animal_ken",
+                  "level": 1,
+                  "modifiers": []
+                },
+                {
+                  "id": "haymaker",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "combat.heavy_damage",
+                      "op": "multiply",
+                      "value": 1.2,
+                      "scale": null,
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "still_hands",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "craft.success",
+                      "op": "multiply",
+                      "value": 1.3,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "storm_ear",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "water.rain_catch",
+                      "op": "multiply",
+                      "value": 1.5,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "hogtie",
+                  "level": 2,
+                  "modifiers": []
+                }
+              ],
+              "resolved": {
+                "strike_damage": 1,
+                "strike_damage_r1": 2,
+                "first_strike_damage": 1,
+                "heavy_damage": 1.2,
+                "dodge_chance": 0,
+                "armor_flat": 0,
+                "max_add": 0,
+                "trade_window": 0,
+                "enemy_morale": 1
+              },
+              "readError": null
+            },
+            "npcPassives": null
+          }
+        ],
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "algorithm",
+            "hp": 1150,
+            "maxHp": 1150
+          }
+        ],
+        "dmgRows": [
+          {
+            "targetKey": "m_0",
+            "targetKind": "monster",
+            "requested": 20,
+            "landed": 25,
+            "sourceKey": null,
+            "sourceKind": null,
+            "sourceLabel": "you"
+          },
+          {
+            "targetKey": "p",
+            "targetKind": "player",
+            "requested": 54,
+            "landed": 23,
+            "sourceKey": "m_0",
+            "sourceKind": "monster",
+            "sourceLabel": "algorithm's attack"
+          },
+          {
+            "targetKey": "m_0",
+            "targetKind": "monster",
+            "requested": 17,
+            "landed": 21,
+            "sourceKey": null,
+            "sourceKind": null,
+            "sourceLabel": "you"
+          },
+          {
+            "targetKey": "m_0",
+            "targetKind": "monster",
+            "requested": 21,
+            "landed": 26,
+            "sourceKey": null,
+            "sourceKind": null,
+            "sourceLabel": "you"
+          },
+          {
+            "targetKey": "p",
+            "targetKind": "player",
+            "requested": 51,
+            "landed": 22,
+            "sourceKey": "m_0",
+            "sourceKind": "monster",
+            "sourceLabel": "algorithm's attack"
+          },
+          {
+            "targetKey": "m_0",
+            "targetKind": "monster",
+            "requested": 18,
+            "landed": 23,
+            "sourceKey": null,
+            "sourceKind": null,
+            "sourceLabel": "you"
+          },
+          {
+            "targetKey": "p",
+            "targetKind": "player",
+            "requested": 59,
+            "landed": 25,
+            "sourceKey": "m_0",
+            "sourceKind": "monster",
+            "sourceLabel": "algorithm's Engagement"
+          },
+          {
+            "targetKey": "p",
+            "targetKind": "player",
+            "requested": 38,
+            "landed": 16,
+            "sourceKey": "m_0",
+            "sourceKind": "monster",
+            "sourceLabel": "algorithm's Recommended For You"
+          },
+          {
+            "targetKey": "p",
+            "targetKind": "player",
+            "requested": 46,
+            "landed": 20,
+            "sourceKey": "m_0",
+            "sourceKind": "monster",
+            "sourceLabel": "algorithm's Engagement"
+          }
+        ],
+        "end": "lost",
+        "endHumans": [
+          {
+            "key": "p",
+            "hp": -8.799999999999997,
+            "alive": false,
+            "fled": false
+          }
+        ],
+        "endMonsters": [
+          {
+            "key": "m_0",
+            "hp": 1055,
+            "alive": true,
+            "fled": false
+          }
+        ],
+        "superseded": false
+      },
+      {
+        "seq": 3,
+        "day": 112,
+        "mid": "reunion",
+        "fightId": "fmgpspitt_3ty8mg",
+        "scholar": {
+          "held": [
+            {
+              "id": "green_whisper",
+              "level": 2,
+              "modifiers": [
+                {
+                  "target": "forage.gift_chance",
+                  "op": "multiply",
+                  "value": 1.4,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "lucky_rock",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "luck.global",
+                  "op": "multiply",
+                  "value": 1.05,
+                  "scale": null,
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "steady_hands",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "craft.success",
+                  "op": "multiply",
+                  "value": 1.25,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "game_sense",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "hunt.find_chance",
+                  "op": "multiply",
+                  "value": 1.4,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "patient_aim",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "combat.strike_damage",
+                  "op": "multiply",
+                  "value": 2,
+                  "scale": null,
+                  "condition": "round:1"
+                }
+              ]
+            },
+            {
+              "id": "field_dressing",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "hunt.meat_yield",
+                  "op": "multiply",
+                  "value": 1.3,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "preservation_instinct",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "food.spoilage_days",
+                  "op": "add",
+                  "value": 2,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "soft_step",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "travel.encounter_chance",
+                  "op": "multiply",
+                  "value": 0.7,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "tracker",
+              "level": 1,
+              "modifiers": []
+            },
+            {
+              "id": "diplomat",
+              "level": 2,
+              "modifiers": []
+            },
+            {
+              "id": "scrounger",
+              "level": 1,
+              "modifiers": []
+            },
+            {
+              "id": "thief",
+              "level": 2,
+              "modifiers": []
+            },
+            {
+              "id": "poisoner",
+              "level": 2,
+              "modifiers": [
+                {
+                  "target": "hunt.trap_catch",
+                  "op": "multiply",
+                  "value": 1.5,
+                  "scale": null,
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "grave_robber",
+              "level": 2,
+              "modifiers": []
+            },
+            {
+              "id": "compost_king",
+              "level": 2,
+              "modifiers": []
+            },
+            {
+              "id": "mediator",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "drama.resolve_bonus",
+                  "op": "add",
+                  "value": 0.25,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "wanderer",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "travel.cost_mult",
+                  "op": "multiply",
+                  "value": 0.9,
+                  "scale": null,
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "herbal_remedy",
+              "level": 2,
+              "modifiers": []
+            },
+            {
+              "id": "gossip_network",
+              "level": 1,
+              "modifiers": []
+            },
+            {
+              "id": "peacemaker",
+              "level": 1,
+              "modifiers": []
+            },
+            {
+              "id": "pathfinder",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "travel.cost_mult",
+                  "op": "multiply",
+                  "value": 0.85,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "eagle_eye",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "ruin.find_mult",
+                  "op": "add",
+                  "value": 0.25,
+                  "scale": null,
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "stalk",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "stealth.move_silent",
+                  "op": "add",
+                  "value": 0.15,
+                  "scale": null,
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "blood_trail",
+              "level": 1,
+              "modifiers": []
+            },
+            {
+              "id": "animal_ken",
+              "level": 1,
+              "modifiers": []
+            },
+            {
+              "id": "haymaker",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "combat.heavy_damage",
+                  "op": "multiply",
+                  "value": 1.2,
+                  "scale": null,
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "still_hands",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "craft.success",
+                  "op": "multiply",
+                  "value": 1.3,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "storm_ear",
+              "level": 1,
+              "modifiers": [
+                {
+                  "target": "water.rain_catch",
+                  "op": "multiply",
+                  "value": 1.5,
+                  "scale": "level",
+                  "condition": null
+                }
+              ]
+            },
+            {
+              "id": "draw_fire",
+              "level": 2,
+              "modifiers": []
+            },
+            {
+              "id": "rally",
+              "level": 2,
+              "modifiers": []
+            },
+            {
+              "id": "shoulder_check",
+              "level": 2,
+              "modifiers": []
+            },
+            {
+              "id": "hogtie",
+              "level": 2,
+              "modifiers": []
+            }
+          ],
+          "resolved": {
+            "strike_damage": 1.15,
+            "strike_damage_r1": 2.3,
+            "first_strike_damage": 1,
+            "heavy_damage": 1.2,
+            "dodge_chance": 0,
+            "armor_flat": 0,
+            "max_add": 0,
+            "trade_window": 0,
+            "enemy_morale": 1
+          },
+          "readError": null
+        },
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "visjoin_63",
+            "hp": 100,
+            "maxHp": 100,
+            "scholarPassives": {
+              "held": [
+                {
+                  "id": "green_whisper",
+                  "level": 2,
+                  "modifiers": [
+                    {
+                      "target": "forage.gift_chance",
+                      "op": "multiply",
+                      "value": 1.4,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "lucky_rock",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "luck.global",
+                      "op": "multiply",
+                      "value": 1.05,
+                      "scale": null,
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "steady_hands",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "craft.success",
+                      "op": "multiply",
+                      "value": 1.25,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "game_sense",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "hunt.find_chance",
+                      "op": "multiply",
+                      "value": 1.4,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "patient_aim",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "combat.strike_damage",
+                      "op": "multiply",
+                      "value": 2,
+                      "scale": null,
+                      "condition": "round:1"
+                    }
+                  ]
+                },
+                {
+                  "id": "field_dressing",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "hunt.meat_yield",
+                      "op": "multiply",
+                      "value": 1.3,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "preservation_instinct",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "food.spoilage_days",
+                      "op": "add",
+                      "value": 2,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "soft_step",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "travel.encounter_chance",
+                      "op": "multiply",
+                      "value": 0.7,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "tracker",
+                  "level": 1,
+                  "modifiers": []
+                },
+                {
+                  "id": "diplomat",
+                  "level": 2,
+                  "modifiers": []
+                },
+                {
+                  "id": "scrounger",
+                  "level": 1,
+                  "modifiers": []
+                },
+                {
+                  "id": "thief",
+                  "level": 2,
+                  "modifiers": []
+                },
+                {
+                  "id": "poisoner",
+                  "level": 2,
+                  "modifiers": [
+                    {
+                      "target": "hunt.trap_catch",
+                      "op": "multiply",
+                      "value": 1.5,
+                      "scale": null,
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "grave_robber",
+                  "level": 2,
+                  "modifiers": []
+                },
+                {
+                  "id": "compost_king",
+                  "level": 2,
+                  "modifiers": []
+                },
+                {
+                  "id": "mediator",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "drama.resolve_bonus",
+                      "op": "add",
+                      "value": 0.25,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "wanderer",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "travel.cost_mult",
+                      "op": "multiply",
+                      "value": 0.9,
+                      "scale": null,
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "herbal_remedy",
+                  "level": 2,
+                  "modifiers": []
+                },
+                {
+                  "id": "gossip_network",
+                  "level": 1,
+                  "modifiers": []
+                },
+                {
+                  "id": "peacemaker",
+                  "level": 1,
+                  "modifiers": []
+                },
+                {
+                  "id": "pathfinder",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "travel.cost_mult",
+                      "op": "multiply",
+                      "value": 0.85,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "eagle_eye",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "ruin.find_mult",
+                      "op": "add",
+                      "value": 0.25,
+                      "scale": null,
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "stalk",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "stealth.move_silent",
+                      "op": "add",
+                      "value": 0.15,
+                      "scale": null,
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "blood_trail",
+                  "level": 1,
+                  "modifiers": []
+                },
+                {
+                  "id": "animal_ken",
+                  "level": 1,
+                  "modifiers": []
+                },
+                {
+                  "id": "haymaker",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "combat.heavy_damage",
+                      "op": "multiply",
+                      "value": 1.2,
+                      "scale": null,
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "still_hands",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "craft.success",
+                      "op": "multiply",
+                      "value": 1.3,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "storm_ear",
+                  "level": 1,
+                  "modifiers": [
+                    {
+                      "target": "water.rain_catch",
+                      "op": "multiply",
+                      "value": 1.5,
+                      "scale": "level",
+                      "condition": null
+                    }
+                  ]
+                },
+                {
+                  "id": "draw_fire",
+                  "level": 2,
+                  "modifiers": []
+                },
+                {
+                  "id": "rally",
+                  "level": 2,
+                  "modifiers": []
+                },
+                {
+                  "id": "shoulder_check",
+                  "level": 2,
+                  "modifiers": []
+                },
+                {
+                  "id": "hogtie",
+                  "level": 2,
+                  "modifiers": []
+                }
+              ],
+              "resolved": {
+                "strike_damage": 1.15,
+                "strike_damage_r1": 2.3,
+                "first_strike_damage": 1,
+                "heavy_damage": 1.2,
+                "dodge_chance": 0,
+                "armor_flat": 0,
+                "max_add": 0,
+                "trade_window": 0,
+                "enemy_morale": 1
+              },
+              "readError": null
+            },
+            "npcPassives": null
+          }
+        ],
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "reunion",
+            "hp": 886,
+            "maxHp": 1200
+          }
+        ],
+        "dmgRows": [
+          {
+            "targetKey": "m_0",
+            "targetKind": "monster",
+            "requested": 5,
+            "landed": 6,
+            "sourceKey": null,
+            "sourceKind": null,
+            "sourceLabel": "you"
+          },
+          {
+            "targetKey": "p",
+            "targetKind": "player",
+            "requested": 66,
+            "landed": 38,
+            "sourceKey": "m_0",
+            "sourceKind": "monster",
+            "sourceLabel": "reunion's Your Move"
+          },
+          {
+            "targetKey": "m_0",
+            "targetKind": "monster",
+            "requested": 5,
+            "landed": 6,
+            "sourceKey": null,
+            "sourceKind": null,
+            "sourceLabel": "you"
+          },
+          {
+            "targetKey": "p",
+            "targetKind": "player",
+            "requested": 53,
+            "landed": 30,
+            "sourceKey": "m_0",
+            "sourceKind": "monster",
+            "sourceLabel": "your own move, returned"
+          },
+          {
+            "targetKey": "p",
+            "targetKind": "player",
+            "requested": 72,
+            "landed": 41,
+            "sourceKey": "m_0",
+            "sourceKind": "monster",
+            "sourceLabel": "reunion's Your Move"
+          }
+        ],
+        "end": "lost",
+        "endHumans": [
+          {
+            "key": "p",
+            "hp": -9,
+            "alive": false,
+            "fled": false
+          }
+        ],
+        "endMonsters": [
+          {
+            "key": "m_0",
+            "hp": 874,
+            "alive": true,
+            "fled": false
+          }
+        ],
+        "superseded": false
+      }
+    ],
+    "instrumentErrors": [],
+    "wrapCounts": {
+      "startCombat": 20,
+      "tbDamage": 167,
+      "tbEnd": 20
+    }
+  }
+}

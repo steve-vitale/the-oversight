@@ -438,6 +438,23 @@ function install(Game) {
   } else { err('install._actionAvailable', new Error('not a function')); }
 
   // --- NPC ability selection (outermost wrap: sees foodPower + god wraps) ---
+  // GAMECODE-ARM EXTENSION (2026-11-03, marked): monster-flag diffs around
+  // the call, so godpath KIT casts (bird/static/turncoat/freeze/cheese/
+  // retribution, which set monster flags or deal damage instead of villager
+  // flags) are NAMED in the analyzer instead of lumped as wrapped-unknown.
+  // Pure reads; trajectory-neutral.
+  function monFlagSnap() {
+    const out = {};
+    try {
+      const f = Game.tbfight || null;
+      for (const m of ((f && f.fighters) || [])) {
+        if (!m || m.kind !== 'monster') continue;
+        out[m.key || ''] = { hp: m.hp != null ? m.hp : null, bird: (m._birdStrike || 0),
+          frozen: (m._frozen || 0), turncoat: (m._turncoatRounds || 0) };
+      }
+    } catch (e) {}
+    return out;
+  }
   if (typeof Game.tbVillagerAbility === 'function') {
     orig.tbVillagerAbility = Game.tbVillagerAbility;
     Game.tbVillagerAbility = function (v) {
@@ -446,12 +463,26 @@ function install(Game) {
       const inFight = !!(ex && Game.tbfight === openTb.fight);
       const flagsBefore = v ? { screamedDay: (v._vScreamedDay != null ? v._vScreamedDay : null),
         sand: !!v._vSandThrown, loomed: !!v._vLoomed, raged: !!v._vRaged, shoved: !!v._vShoved } : null;
+      const monsBefore = inFight ? monFlagSnap() : null;
       let r;
       try { r = orig.tbVillagerAbility.apply(this, arguments); } catch (e) { throw e; }
       try {
         if (inFight && ex && v) {
           const flagsAfter = { screamedDay: (v._vScreamedDay != null ? v._vScreamedDay : null),
             sand: !!v._vSandThrown, loomed: !!v._vLoomed, raged: !!v._vRaged, shoved: !!v._vShoved };
+          const monsAfter = monFlagSnap();
+          const kitDiffs = [];
+          if (monsBefore) {
+            for (const k of Object.keys(monsAfter)) {
+              const b = monsBefore[k] || {}, a = monsAfter[k] || {};
+              const d = [];
+              if ((a.bird || 0) > (b.bird || 0)) d.push('bird_up');
+              if ((a.frozen || 0) > (b.frozen || 0)) d.push('frozen_up');
+              if ((a.turncoat || 0) > (b.turncoat || 0)) d.push('turncoat_up');
+              if ((a.hp != null && b.hp != null) && a.hp < b.hp) d.push('hp_down:' + (b.hp - a.hp));
+              if (d.length) kitDiffs.push({ key: k, diffs: d });
+            }
+          }
           const fired = [];
           if (flagsBefore) {
             if (flagsAfter.screamedDay !== flagsBefore.screamedDay) fired.push('scream_cheese');
@@ -463,7 +494,8 @@ function install(Game) {
           if (r && !fired.length) fired.push('wrapped-unknown');
           ex.npcAbilityCalls.push({ vid: v.villagerId || null,
             round: (Game.tbfight && Game.tbfight.round != null) ? Game.tbfight.round : null,
-            returned: !!r, fired: fired, flagsBefore: flagsBefore, flagsAfter: flagsAfter });
+            returned: !!r, fired: fired, flagsBefore: flagsBefore, flagsAfter: flagsAfter,
+            kitDiffs: kitDiffs });
           if (ex._npcTurnOpen) ex._npcTurnOpen.abilityCalled = true;
         }
       } catch (e) { err('tbVillagerAbility.post', e); }
