@@ -1,0 +1,40 @@
+
+-- Aroha (aroha_ngata) occ=comic shop owner --
+OPENING: "Listen — What's your first memory? Like, ever. The earliest thing."
+YOU: [ans:q_first_memory:a_tell] "A kitchen. Morning light. I must've been three."
+THEM: "Three. That's young. The brain keeps what it needs, I guess."
+YOU: [goon] "Wait, what? Go on —"
+THEM: "Mine's Auckland, New Zealand, I think — heat on pavement, someone's hand huge around mine. Or I invented it. First memories are half real and half the story you needed. No time to waste."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on your first memory."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Alright. But I'm not carrying your stuff."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? How are you holding up, though?"
+YOU: [ask:personal] "I don't even know your story. Tell me?"
+THEM: "Good question." "The others think I've got it together. Cute. Very cute."
+YOU: [dlg:more] "Tell me more."
+THEM: "Sleep's the real currency now. I'm rich in dreams and broke in rest."
+YOU: [dlg:react] (listen)
+THEM: "Anyway." A small smile.
+closing: "Take care of yourself."
+
+-- Tashi (tashi_sherpa) occ=arborist --
+OPENING: I've talked down three fights this month. It's a skill. A tiring one.
+YOU: [dlg:more] "I’m listening."
+THEM: "You two sort it out, or I will, and nobody likes my version."
+YOU: [dlg:react] (listen)
+THEM: "Hold it together. That's my whole philosophy. Hold it together."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on wanting to keep the peace."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Not right now. I've got my own things to handle."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway — that's my cross to carry. What's on your mind?"
+YOU: [offer_help] "Want help? I'm pretty good at... stuff."
+THEM: "Fair." A slow nod. "Most people just say the words."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "Alright, duty calls. This was a good pause."
+YOU: [more] "One more thing —"
+THEM: "Arguments cost calories. I do the math out loud until people stop."
+(ended by engine)
