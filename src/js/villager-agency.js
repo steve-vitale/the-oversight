@@ -697,6 +697,17 @@
         if (meatUnknown > 0) bits.push(`strange meat (unknown flesh — test it cautiously)`);
         if ((ex.encounters || []).length) bits.push(`${ex.encounters.length} ${ex.encounters.length === 1 ? 'story' : 'stories'}`);
         if (a.scars[vid].length) bits.push('a new scar');
+        // (exphurt-land-a): a hurt return reads as hurt. The homecoming
+        // line is the return's lasting meaning and never mentioned the
+        // hurt that cut the trip short — append a hurt clause when the
+        // returnee is hurt AT return (hp 1..7, the shouldHurtReturn
+        // gate; encounters-includes-'hurt' is deliberately NOT the
+        // predicate, so a villager hurt mid-trip but healed before
+        // return reads as healthy). Healthy returns never reach this
+        // push, so their template stays byte-identical; the
+        // direction draw below is untouched and still drawn once.
+        var hpAtReturn = (this.state.village.health || {})[vid];
+        if (typeof hpAtReturn === 'number' && hpAtReturn >= 1 && hpAtReturn <= 7) bits.push('hurt on the way home');
         var suffix = bits.length ? ` (${bits.join(', ')})` : '. "Nothing out there but weather."';
         var dirs = ['north', 'south', 'east', 'west'];
         this.say(`🧭 ${nm} is back from ${dist >= 4 ? 'far past' : 'past'} the ${pick(dirs)}${suffix} (Ask them what they saw.)`);
