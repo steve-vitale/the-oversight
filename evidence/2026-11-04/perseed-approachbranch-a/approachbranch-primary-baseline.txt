@@ -1,0 +1,10 @@
+scenario=primary leg=baseline gates=none (gate-off) map=4,4 blocked=3,5 primed=true
+turn 1 round 2 hp 100 [4,4]->[4,4] branch=approach tbPlayerMove(3,5) SAY: No path there. counters={"marks":0,"waits":0,"repickSteps":0,"stuckTurns":0,"fleeBlocked":false,"approachBlocked":false}
+turn 2 round 3 hp 100 [4,4]->[4,4] branch=approach tbPlayerMove(3,5) SAY: No path there. counters={"marks":0,"waits":0,"repickSteps":0,"stuckTurns":0,"fleeBlocked":false,"approachBlocked":false}
+turn 3 round 4 hp 100 [4,4]->[4,4] branch=approach tbPlayerMove(3,5) SAY: No path there. counters={"marks":0,"waits":0,"repickSteps":0,"stuckTurns":0,"fleeBlocked":false,"approachBlocked":false}
+turn 4 round 5 hp 56 [4,4]->[4,4] branch=approach tbPlayerMove(3,5) SAY: No path there. counters={"marks":0,"waits":0,"repickSteps":0,"stuckTurns":0,"fleeBlocked":false,"approachBlocked":false}
+turn 5 round 6 hp 56 [4,4]->[4,4] branch=approach tbPlayerMove(3,5) SAY: No path there. counters={"marks":0,"waits":0,"repickSteps":0,"stuckTurns":0,"fleeBlocked":false,"approachBlocked":false}
+turn 6 round 7 hp 56 [4,4]->[4,4] branch=approach tbPlayerMove(3,5) SAY: No path there. counters={"marks":0,"waits":0,"repickSteps":0,"stuckTurns":0,"fleeBlocked":false,"approachBlocked":false}
+turn 7 round 8 hp 56 [4,4]->[4,4] branch=approach tbPlayerMove(3,5) SAY: No path there. counters={"marks":0,"waits":0,"repickSteps":0,"stuckTurns":0,"fleeBlocked":false,"approachBlocked":false}
+turn 8 round 9 hp 25 [4,4]->[4,4] branch=flee tbPlayerMove(0,4) SAY: Too far — 3 squares left. counters={"marks":0,"waits":0,"repickSteps":0,"stuckTurns":0,"fleeBlocked":false,"approachBlocked":false}
+SUMMARY {"turns":8,"fightOver":false,"finalPos":[4,4],"moves":8,"noPathLines":7,"waits":0,"strikes":0,"barrierExits":0,"maxSameTargetBlockedRun":7,"firstMarkTurn":null,"postFiringMaxRun":0,"branches":["approach","approach","approach","approach","approach","approach","approach","flee"],"countersFinal":{"marks":0,"waits":0,"repickSteps":0,"stuckTurns":0,"fleeBlocked":false,"approachBlocked":false},"firstNonLoopTurn":null}

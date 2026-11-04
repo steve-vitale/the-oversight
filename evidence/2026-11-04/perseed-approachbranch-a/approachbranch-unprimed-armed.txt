@@ -1,0 +1,10 @@
+scenario=unprimed leg=armed gates=variant-file (4 gates) map=4,4 blocked=3,5 primed=false
+turn 1 round 2 hp 100 [4,4]->[4,4] branch=approach tbPlayerMove(3,5) SAY: No path there. counters={"marks":0,"waits":0,"repickSteps":0,"stuckTurns":1,"fleeBlocked":false,"approachBlocked":false}
+turn 2 round 3 hp 100 [4,4]->[4,4] branch=approach tbPlayerMove(3,5) SAY: No path there. counters={"marks":0,"waits":0,"repickSteps":0,"stuckTurns":2,"fleeBlocked":false,"approachBlocked":false}
+turn 3 round 4 hp 100 [4,4]->[4,4] branch=approach tbPlayerMove(3,5) SAY: No path there. counters={"marks":1,"waits":0,"repickSteps":0,"stuckTurns":3,"fleeBlocked":false,"approachBlocked":true}
+turn 4 round 5 hp 56 [4,4]->[4,5] branch=approach-repick tbPlayerMove(4,5) counters={"marks":1,"waits":0,"repickSteps":1,"stuckTurns":3,"fleeBlocked":false,"approachBlocked":false}
+turn 5 round 6 hp 56 [4,5]->[4,5] branch=strike tbPlayerStrike(m_0) counters={"marks":1,"waits":0,"repickSteps":1,"stuckTurns":3,"fleeBlocked":false,"approachBlocked":false}
+turn 6 round 7 hp 56 [4,5]->[4,5] branch=strike tbPlayerStrike(m_0) counters={"marks":1,"waits":0,"repickSteps":1,"stuckTurns":3,"fleeBlocked":false,"approachBlocked":false}
+turn 7 round 8 hp 56 [4,5]->[4,5] branch=strike tbPlayerStrike(m_0) counters={"marks":1,"waits":0,"repickSteps":1,"stuckTurns":3,"fleeBlocked":false,"approachBlocked":false}
+turn 8 round 9 hp 25 [4,5]->[4,5] branch=strike tbPlayerStrike(m_0) counters={"marks":1,"waits":0,"repickSteps":1,"stuckTurns":3,"fleeBlocked":false,"approachBlocked":false}
+SUMMARY {"turns":8,"fightOver":false,"finalPos":[4,5],"moves":4,"noPathLines":3,"waits":0,"strikes":4,"barrierExits":0,"maxSameTargetBlockedRun":3,"firstMarkTurn":3,"postFiringMaxRun":0,"branches":["approach","approach","approach","approach-repick","strike","strike","strike","strike"],"countersFinal":{"marks":1,"waits":0,"repickSteps":1,"stuckTurns":3,"fleeBlocked":false,"approachBlocked":false},"firstNonLoopTurn":4}

@@ -1,0 +1,437 @@
+{
+  "scenario": "cornercut",
+  "leg": "armed",
+  "gates": "variant-file (4 gates)",
+  "mapNode": [
+    4,
+    4
+  ],
+  "blockedTiles": [
+    "4,5"
+  ],
+  "primed": true,
+  "geometry": {
+    "playerStart": [
+      4,
+      4
+    ],
+    "monster": "influencer",
+    "monsterPos": [
+      4,
+      6
+    ],
+    "monsterHp": [
+      322,
+      850
+    ],
+    "weapon": "Machete",
+    "weaponRange": 1,
+    "moveLeftPerTurn": 3
+  },
+  "turns": [
+    {
+      "turn": 1,
+      "round": 2,
+      "hpStart": 100,
+      "pre": {
+        "mx": 4,
+        "my": 4,
+        "hp": 100
+      },
+      "post": {
+        "mx": 3,
+        "my": 5,
+        "hp": 100,
+        "moveLeft": 0,
+        "acted": true
+      },
+      "handled": true,
+      "actions": [
+        {
+          "fn": "tbPlayerMove",
+          "args": [
+            3,
+            5
+          ],
+          "returned": true
+        }
+      ],
+      "say": [],
+      "endTurnCalls": 1,
+      "countersBefore": {
+        "marks": 0,
+        "waits": 0,
+        "repickSteps": 0,
+        "stuckTurns": 0,
+        "fleeBlocked": false,
+        "approachBlocked": false
+      },
+      "countersAfter": {
+        "marks": 0,
+        "waits": 0,
+        "repickSteps": 0,
+        "stuckTurns": 0,
+        "fleeBlocked": false,
+        "approachBlocked": false
+      },
+      "branch": "approach"
+    },
+    {
+      "turn": 2,
+      "round": 3,
+      "hpStart": 100,
+      "pre": {
+        "mx": 3,
+        "my": 5,
+        "hp": 100
+      },
+      "post": {
+        "mx": 3,
+        "my": 5,
+        "hp": 100,
+        "moveLeft": 0,
+        "acted": true
+      },
+      "handled": true,
+      "actions": [
+        {
+          "fn": "tbPlayerStrike",
+          "args": [
+            "m_0"
+          ],
+          "returned": true
+        }
+      ],
+      "say": [],
+      "endTurnCalls": 1,
+      "countersBefore": {
+        "marks": 0,
+        "waits": 0,
+        "repickSteps": 0,
+        "stuckTurns": 0,
+        "fleeBlocked": false,
+        "approachBlocked": false
+      },
+      "countersAfter": {
+        "marks": 0,
+        "waits": 0,
+        "repickSteps": 0,
+        "stuckTurns": 0,
+        "fleeBlocked": false,
+        "approachBlocked": false
+      },
+      "branch": "strike"
+    },
+    {
+      "turn": 3,
+      "round": 4,
+      "hpStart": 100,
+      "pre": {
+        "mx": 3,
+        "my": 5,
+        "hp": 100
+      },
+      "post": {
+        "mx": 3,
+        "my": 5,
+        "hp": 100,
+        "moveLeft": 0,
+        "acted": true
+      },
+      "handled": true,
+      "actions": [
+        {
+          "fn": "tbPlayerStrike",
+          "args": [
+            "m_0"
+          ],
+          "returned": true
+        }
+      ],
+      "say": [],
+      "endTurnCalls": 1,
+      "countersBefore": {
+        "marks": 0,
+        "waits": 0,
+        "repickSteps": 0,
+        "stuckTurns": 0,
+        "fleeBlocked": false,
+        "approachBlocked": false
+      },
+      "countersAfter": {
+        "marks": 0,
+        "waits": 0,
+        "repickSteps": 0,
+        "stuckTurns": 0,
+        "fleeBlocked": false,
+        "approachBlocked": false
+      },
+      "branch": "strike"
+    },
+    {
+      "turn": 4,
+      "round": 5,
+      "hpStart": 56,
+      "pre": {
+        "mx": 3,
+        "my": 5,
+        "hp": 56
+      },
+      "post": {
+        "mx": 3,
+        "my": 5,
+        "hp": 56,
+        "moveLeft": 0,
+        "acted": true
+      },
+      "handled": true,
+      "actions": [
+        {
+          "fn": "tbPlayerStrike",
+          "args": [
+            "m_0"
+          ],
+          "returned": true
+        }
+      ],
+      "say": [],
+      "endTurnCalls": 1,
+      "countersBefore": {
+        "marks": 0,
+        "waits": 0,
+        "repickSteps": 0,
+        "stuckTurns": 0,
+        "fleeBlocked": false,
+        "approachBlocked": false
+      },
+      "countersAfter": {
+        "marks": 0,
+        "waits": 0,
+        "repickSteps": 0,
+        "stuckTurns": 0,
+        "fleeBlocked": false,
+        "approachBlocked": false
+      },
+      "branch": "strike"
+    },
+    {
+      "turn": 5,
+      "round": 6,
+      "hpStart": 56,
+      "pre": {
+        "mx": 3,
+        "my": 5,
+        "hp": 56
+      },
+      "post": {
+        "mx": 3,
+        "my": 5,
+        "hp": 56,
+        "moveLeft": 0,
+        "acted": true
+      },
+      "handled": true,
+      "actions": [
+        {
+          "fn": "tbPlayerStrike",
+          "args": [
+            "m_0"
+          ],
+          "returned": true
+        }
+      ],
+      "say": [],
+      "endTurnCalls": 1,
+      "countersBefore": {
+        "marks": 0,
+        "waits": 0,
+        "repickSteps": 0,
+        "stuckTurns": 0,
+        "fleeBlocked": false,
+        "approachBlocked": false
+      },
+      "countersAfter": {
+        "marks": 0,
+        "waits": 0,
+        "repickSteps": 0,
+        "stuckTurns": 0,
+        "fleeBlocked": false,
+        "approachBlocked": false
+      },
+      "branch": "strike"
+    },
+    {
+      "turn": 6,
+      "round": 7,
+      "hpStart": 56,
+      "pre": {
+        "mx": 3,
+        "my": 5,
+        "hp": 56
+      },
+      "post": {
+        "mx": 3,
+        "my": 5,
+        "hp": 56,
+        "moveLeft": 0,
+        "acted": true
+      },
+      "handled": true,
+      "actions": [
+        {
+          "fn": "tbPlayerStrike",
+          "args": [
+            "m_0"
+          ],
+          "returned": true
+        }
+      ],
+      "say": [],
+      "endTurnCalls": 1,
+      "countersBefore": {
+        "marks": 0,
+        "waits": 0,
+        "repickSteps": 0,
+        "stuckTurns": 0,
+        "fleeBlocked": false,
+        "approachBlocked": false
+      },
+      "countersAfter": {
+        "marks": 0,
+        "waits": 0,
+        "repickSteps": 0,
+        "stuckTurns": 0,
+        "fleeBlocked": false,
+        "approachBlocked": false
+      },
+      "branch": "strike"
+    },
+    {
+      "turn": 7,
+      "round": 8,
+      "hpStart": 56,
+      "pre": {
+        "mx": 3,
+        "my": 5,
+        "hp": 56
+      },
+      "post": {
+        "mx": 3,
+        "my": 5,
+        "hp": 56,
+        "moveLeft": 0,
+        "acted": true
+      },
+      "handled": true,
+      "actions": [
+        {
+          "fn": "tbPlayerStrike",
+          "args": [
+            "m_0"
+          ],
+          "returned": true
+        }
+      ],
+      "say": [],
+      "endTurnCalls": 1,
+      "countersBefore": {
+        "marks": 0,
+        "waits": 0,
+        "repickSteps": 0,
+        "stuckTurns": 0,
+        "fleeBlocked": false,
+        "approachBlocked": false
+      },
+      "countersAfter": {
+        "marks": 0,
+        "waits": 0,
+        "repickSteps": 0,
+        "stuckTurns": 0,
+        "fleeBlocked": false,
+        "approachBlocked": false
+      },
+      "branch": "strike"
+    },
+    {
+      "turn": 8,
+      "round": 9,
+      "hpStart": 25,
+      "pre": {
+        "mx": 3,
+        "my": 5,
+        "hp": 25
+      },
+      "post": {
+        "mx": 3,
+        "my": 5,
+        "hp": 25,
+        "moveLeft": 0,
+        "acted": true
+      },
+      "handled": true,
+      "actions": [
+        {
+          "fn": "tbPlayerStrike",
+          "args": [
+            "m_0"
+          ],
+          "returned": true
+        }
+      ],
+      "say": [],
+      "endTurnCalls": 1,
+      "countersBefore": {
+        "marks": 0,
+        "waits": 0,
+        "repickSteps": 0,
+        "stuckTurns": 0,
+        "fleeBlocked": false,
+        "approachBlocked": false
+      },
+      "countersAfter": {
+        "marks": 0,
+        "waits": 0,
+        "repickSteps": 0,
+        "stuckTurns": 0,
+        "fleeBlocked": false,
+        "approachBlocked": false
+      },
+      "branch": "strike"
+    }
+  ],
+  "summary": {
+    "turns": 8,
+    "fightOver": false,
+    "finalPos": [
+      3,
+      5
+    ],
+    "moves": 1,
+    "noPathLines": 0,
+    "waits": 0,
+    "strikes": 7,
+    "barrierExits": 0,
+    "maxSameTargetBlockedRun": 0,
+    "firstMarkTurn": null,
+    "postFiringMaxRun": 0,
+    "branches": [
+      "approach",
+      "strike",
+      "strike",
+      "strike",
+      "strike",
+      "strike",
+      "strike",
+      "strike"
+    ],
+    "countersFinal": {
+      "marks": 0,
+      "waits": 0,
+      "repickSteps": 0,
+      "stuckTurns": 0,
+      "fleeBlocked": false,
+      "approachBlocked": false
+    },
+    "firstNonLoopTurn": 1
+  }
+}
