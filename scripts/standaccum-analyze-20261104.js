@@ -129,6 +129,30 @@ function summarizeSeed(out) {
   } : null;
   const evs = (anchor && base) ? windowEvents(daily, base.day + 1, anchorDay) : [];
   const ledgerGrewPrior30 = evs.some(function (e) { return e.kind === 'ledger-gain'; });
+  // Peak-day prior-30d window: the window that answers "what moved it"
+  // at the standing peak (first-gear-ready anchors are often day 2,
+  // before any 30-day window exists, so their prior30 is null by
+  // construction — the peak window is the substantive one).
+  const peakBase = peak ? snapAtOrBefore(daily, peak.day - 30) : null;
+  const peakDeltas = (peak && peakBase && peak.standing && peakBase.standing) ? {
+    raw: (peak.standing.total | 0) - (peakBase.standing.total | 0),
+    war: (peak.standing.war | 0) - (peakBase.standing.war | 0),
+    diplomacy: (peak.standing.diplomacy | 0) - (peakBase.standing.diplomacy | 0),
+    plenty: (peak.standing.plenty | 0) - (peakBase.standing.plenty | 0),
+    baseDay: peakBase.day, anchorDay: peak.day,
+  } : null;
+  const peakEvs = (peak && peakBase) ? windowEvents(daily, peakBase.day + 1, peak.day) : [];
+  const peakEvCounts = peakEvs.reduce(function (acc, e) { acc[e.kind] = (acc[e.kind] || 0) + 1; return acc; }, {});
+  // Standing across gear-ready days (first / last / max).
+  const gearSnaps = daily.filter(gearReady);
+  const gearDayStanding = gearSnaps.length ? {
+    firstDay: gearSnaps[0].day,
+    firstRaw: gearSnaps[0].standing ? (gearSnaps[0].standing.total | 0) : null,
+    lastDay: gearSnaps[gearSnaps.length - 1].day,
+    lastRaw: gearSnaps[gearSnaps.length - 1].standing ? (gearSnaps[gearSnaps.length - 1].standing.total | 0) : null,
+    maxRaw: Math.max.apply(null, gearSnaps.map(function (s) { return s.standing ? (s.standing.total | 0) : 0; })),
+    maxDay: gearSnaps.reduce(function (best, s) { const v = s.standing ? (s.standing.total | 0) : 0; return (best === null || v > best.v) ? { day: s.day, v: v } : best; }, null).day,
+  } : null;
   // Top missing source at peak day (gate-effective components).
   let topMissing = null;
   if (peak && peak.standing) {
@@ -155,6 +179,8 @@ function summarizeSeed(out) {
     peakFeasts: peak && peak.feasts ? { total: peak.feasts.total, qualifying: peak.feasts.qualifying, subquality: peak.feasts.subquality } : null,
     readyDays: readyDays, gearReadyDays: gearDays, maxBars: maxBars,
     anchorDay: anchorDay, prior30deltas: deltas, prior30events: evs,
+    peakPrior30deltas: peakDeltas, peakPrior30eventCounts: peakEvCounts,
+    gearDayStanding: gearDayStanding,
     ledgerGrewPrior30: ledgerGrewPrior30, topMissing: topMissing,
     w4faced: peak ? peak.w4faced : null,
   };
@@ -177,6 +203,8 @@ if (require.main === module) {
       peakFeasts: s.peakFeasts, traj: s.trajectory, topMissing: s.topMissing,
       readyDays: s.readyDays, gearDays: s.gearReadyDays, maxBars: s.maxBars,
       anchorDay: s.anchorDay, prior30: s.prior30deltas,
+      peakPrior30: s.peakPrior30deltas, peakPrior30events: s.peakPrior30eventCounts,
+      gearDayStanding: s.gearDayStanding,
       errors: s.instrumentErrors,
     }));
   });

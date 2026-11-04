@@ -121,6 +121,18 @@ ok('prior-30d deltas anchor on first gear-ready day', function () {
   assert.strictEqual(s.prior30deltas.raw, 34);
 });
 
+ok('peak prior-30d deltas + gear-day standing summary', function () {
+  const s = AN.summarizeSeed(seedOut([
+    snap(10, { standing: { total: 40, war: 0, diplomacy: 0, plenty: 40, warPts: 0, links: 0, feasts: 2 } }),
+    snap(40, { gated: 74, standing: { total: 74, war: 0, diplomacy: 34, plenty: 40, warPts: 0, links: 1, feasts: 2 },
+      readiness5: { ready: false, armored: 4, armed: 6, tricks: 2, veterans: 0 },
+      links: [{ key: 'a', reason: 'counts' }] }),
+  ]));
+  assert.strictEqual(s.peakPrior30deltas.diplomacy, 34);
+  assert.strictEqual(s.peakPrior30deltas.baseDay, 10);
+  assert.deepStrictEqual(s.gearDayStanding, { firstDay: 40, firstRaw: 74, lastDay: 40, lastRaw: 74, maxRaw: 74, maxDay: 40 });
+});
+
 (async function () {
   const { loadGame, setupGame } = require(path.join(__dirname, 'sim-harness'));
   const INST = require(path.join(__dirname, 'standaccum-instrument-20261104'));
