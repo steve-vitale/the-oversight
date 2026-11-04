@@ -42,6 +42,25 @@ Clause (a) fails for every candidate, so nothing was touched in src/.
   journey-scale-r96-checkquick.log. Lesson carried from r95, sharpened:
   a heartbeat loop is not a heartbeat — verify by read-back — and a
   long suite run without a log file is not evidence.
+- **Closeout incident — failed merge + premature release, recovered
+  without loss (read this before trusting any "merged" stamp from
+  this run's middle):** after the first rebase (onto 82feb7fa4) the
+  `git merge --ff-only journey-scale` FAILED — master had moved again
+  mid-closeout to 732abd418 (a sibling coordinator landing) — but the
+  closeout script then ran `worktree-release.sh journey-scale merged`
+  UNCONDITIONALLY and `git worktree remove --force`, deleting the
+  worktree before the merge was verified. No work was lost: `git
+  branch -d` correctly refused (branch not fully merged), and the
+  branch tip 88e851fab with both r96 commits was verified intact
+  (`git merge-base --is-ancestor` = NO). Recovery: re-registered the
+  worktree on the existing branch (the register script attaches to
+  it), appended this section, re-based onto the then-current master,
+  re-ran proof checks + analyzer, and merged ONLY under a guarded
+  command that releases/removes/deletes solely if the merge itself
+  succeeds and ancestry verifies. Lesson, stated as a rule for the
+  next closeout: NEVER run release/remove/delete after a merge
+  except inside the same guarded command that just proved the merge
+  — a failed ff-only merge must stop the closeout cold.
 - **Analyzer first-pass bug, found and fixed before scoring:** the
   r96 analyzer's trip grouping split one trip at every eval row
   (85503 first read as 25 trips) and its postrace regex dropped
