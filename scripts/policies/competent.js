@@ -2730,6 +2730,15 @@ function dirFleeOn() { return process.env.COMPETENT_DIRECTIONAL_FLEE === '1'; }
 // on a consumed push, mark the fight unfleeable so the policy fights it
 // out instead of hammering the barrier and spamming barrier say-lines.
 function exitVerifiedFleeOn() { return process.env.COMPETENT_EXIT_VERIFIED_FLEE === '1'; }
+// FLEE REPAIR (longsim scale-onramp 2026-11-04, arm sim-fleerepair-a):
+// repairs the DIRECTIONAL branch only (the legacy branch is untouched):
+// (1) a barrier push consumed without exiting marks the fight unfleeable,
+// (2) a flee step that moves nowhere falls through to a strike when a
+// monster is in range instead of ending the turn, (3) 3 consecutive
+// zero-progress flee turns mark the fight unfleeable (the legacy stuck
+// resolution, extended to the branch that actually runs). Gate off =
+// directional branch byte-identical to before.
+function fleeRepairOn() { return process.env.COMPETENT_FLEE_REPAIR === '1'; }
 
 // Haven sits at the 9x9 center (game.js: hx=4, hy=4).
 const DIR_FLEE_HAVEN = { x: 4, y: 4 };
@@ -3371,6 +3380,13 @@ const competent = {
         // nearest edge. At the haven node: HOLD (no push leads toward
         // safety) — return false so fight() falls through to normal combat.
         if (dirFleeOn()) {
+          // FLEE REPAIR (sim-fleerepair-a): a fight already marked
+          // unfleeable (consumed push, or 3 stuck turns) fights it out —
+          // return false BEFORE endTurn so fight() falls through.
+          if (fleeRepairOn() && ctx._fleeBlockedFor === f.id) {
+            ctx.fleeBlocked = (ctx.fleeBlocked || 0) + 1;
+            return false;
+          }
           try {
             const px = p.mx != null ? p.mx : 4, py = p.my != null ? p.my : 4;
             const mpx = Game.map.px, mpy = Game.map.py;
@@ -3391,6 +3407,14 @@ const competent = {
               // moving — no recovery window for a push that went nowhere.)
               if (Game.map.px !== bx || Game.map.py !== by || !Game.tbfight || Game.tbfight.over) {
                 markRecover(Game, ctx);
+              } else if (fleeRepairOn() && (dir.dx || dir.dy)) {
+                // FLEE REPAIR (1): push consumed WITHOUT exiting (sealed,
+                // blocked far side, stasis). Mark unfleeable now; the next
+                // flee() call fights it out instead of hammering the
+                // barrier. The push spent this turn, so end it below.
+                ctx._fleeBlockedFor = f.id;
+                ctx.fleeBlocked = (ctx.fleeBlocked || 0) + 1;
+                ctx.fleeRepairConsumedPush = (ctx.fleeRepairConsumedPush || 0) + 1;
               }
             } else {
               // Not on the chosen edge yet: step toward it one tile (the
@@ -3399,6 +3423,44 @@ const competent = {
               // lands on a later turn once the edge is reached.
               try { Game.tbPlayerMove(px + dir.dx, py + dir.dy); } catch (e) {}
               ctx.dirWalks = (ctx.dirWalks || 0) + 1;
+              if (fleeRepairOn()) {
+                const nx = p.mx != null ? p.mx : 4, ny = p.my != null ? p.my : 4;
+                if (nx === px && ny === py) {
+                  // FLEE REPAIR (2)+(3): the step moved NOWHERE — the
+                  // directional equivalent of the legacy "No path there"
+                  // loop. Count the stuck turn; fall through to a strike
+                  // when a monster is in range (the turn is still the
+                  // player's — do NOT end it); at 3 stuck turns, mark
+                  // unfleeable and fight it out from now on.
+                  let fst = ctx._fleeStuckDir;
+                  if (!fst || fst.for !== f.id) fst = ctx._fleeStuckDir = { for: f.id, turns: 0 };
+                  fst.turns += 1;
+                  ctx.fleeRepairStuckTurns = (ctx.fleeRepairStuckTurns || 0) + 1;
+                  let inRange = false;
+                  try {
+                    const w = (Game.equippedWeapon && Game.equippedWeapon()) || { range: 1 };
+                    const range = w.range || 1;
+                    const alive = (f.fighters || []).filter(function (x) { return x && x.kind === 'monster' && (x.hp || 0) > 0; });
+                    for (const m of alive) {
+                      let d = null;
+                      try { if (typeof Game.fighterDistTo === 'function') d = Game.fighterDistTo(m, nx, ny); } catch (e2) {}
+                      if (d == null) d = Math.max(Math.abs((m.mx != null ? m.mx : 4) - nx), Math.abs((m.my != null ? m.my : 4) - ny));
+                      if (d != null && d <= range) { inRange = true; break; }
+                    }
+                  } catch (e2) {}
+                  if (inRange) {
+                    ctx.fleeRepairFallthrough = (ctx.fleeRepairFallthrough || 0) + 1;
+                    return false;
+                  }
+                  if (fst.turns >= 3) {
+                    ctx._fleeBlockedFor = f.id;
+                    ctx.fleeBlocked = (ctx.fleeBlocked || 0) + 1;
+                    return false;
+                  }
+                } else if (ctx._fleeStuckDir && ctx._fleeStuckDir.for === f.id) {
+                  ctx._fleeStuckDir.turns = 0;
+                }
+              }
             }
             ctx.fled = (ctx.fled || 0) + 1;
           } catch (e) {}
@@ -3649,7 +3711,7 @@ const competent = {
   },
 };
 
-module.exports = { competent, competentEat, packEatOnce, beastStrikeTarget, walkTo, walkHome, thirstWalkHome, goHomeStanding, standingHomeOn, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, keepPromises, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE, armorWantsVine };
+module.exports = { competent, competentEat, packEatOnce, beastStrikeTarget, walkTo, walkHome, thirstWalkHome, goHomeStanding, standingHomeOn, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, keepPromises, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, fleeRepairOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE, armorWantsVine };
 
 
 // The public shared gearing routine, also used by prepared policy proofs.
