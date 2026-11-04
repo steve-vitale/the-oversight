@@ -78,15 +78,19 @@ function dead(vid, day, cause) { return { villagerId: vid, day: day, cause: caus
 
 // 6. Counterfactual-ready day: snapshot gated>=200, short=[veterans],
 //    shape 2 on that day -> counted; short with another leg -> not.
+//    V2 (raw): raw>=200 + short==[veterans] + shape 2 -> counted even
+//    when gated is capped at 199 (the hold cap makes V1 circular).
 (function () {
   const base = row(6, [kill(10, 'A'), kill(20, 'B')], [dead('A', 12)], 30);
   base.daily = [
-    { day: 25, gated: 200, readiness5: { veterans: 0, short: ['veterans'] } },
-    { day: 26, gated: 210, readiness5: { veterans: 0, short: ['veterans', 'tricks'] } },
-    { day: 27, gated: 199, readiness5: { veterans: 0, short: ['veterans'] } },
+    { day: 25, gated: 200, raw: 210, readiness5: { veterans: 0, short: ['veterans'] } },
+    { day: 26, gated: 210, raw: 220, readiness5: { veterans: 0, short: ['veterans', 'tricks'] } },
+    { day: 27, gated: 199, raw: 199, readiness5: { veterans: 0, short: ['veterans'] } },
+    { day: 28, gated: 199, raw: 250, readiness5: { veterans: 0, short: ['veterans'] } },
   ];
   const r = VS.analyzeSeed(base);
   check('cf-ready day counted only when gated>=200 and short==[veterans]', eq(r.counterfactualReadyDays, [25]), r.counterfactualReadyDays);
+  check('cf-ready-raw counts held-cap days (d25 + d28) but not raw<200 (d27) or other-leg-short (d26)', eq(r.counterfactualReadyDaysRaw, [25, 28]), r.counterfactualReadyDaysRaw);
 })();
 
 // 7. Corpus agreement: vetprod corpus reproduces vetprod's published table.

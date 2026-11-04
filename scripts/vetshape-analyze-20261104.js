@@ -57,14 +57,24 @@ function analyzeSeed(row) {
   const w4kills = (row.waveKillLog || []).filter(function (e) { return ((e.w | 0) >= 4); }).length;
 
   // Counterfactual-ready days from daily snapshots.
+  // V1 (gated): Shape(day) >= 2 AND gated >= 200 AND readiness5.short
+  // subset of {veterans}. NOTE (found before judging, see evidence
+  // metric review): V1 is circular — the engine caps gated standing at
+  // 199 while the village is held, so gated >= 200 can never fire on a
+  // held seed. V1 is kept for transparency and always reads 0 there.
+  // V2 (raw, the real counterfactual): Shape(day) >= 2 AND raw >= 200
+  // AND readiness5.short subset of {veterans} (every other readiness
+  // leg already met, so counting dead killers is the ONLY change).
   const cfDays = [];
+  const cfDaysRaw = [];
   (row.daily || []).forEach(function (s) {
-    if (s.gated == null || s.gated < 200) return;
     const short = (s.readiness5 && s.readiness5.short) || null;
     if (short == null) return;
     if (!short.every(function (leg) { return leg === 'veterans'; })) return;
     const shapeOnDay = fates.filter(function (f) { return f.firstDay <= s.day; }).length;
-    if (shapeOnDay >= 2) cfDays.push(s.day);
+    if (shapeOnDay < 2) return;
+    if (s.gated != null && s.gated >= 200) cfDays.push(s.day);
+    if (s.raw != null && s.raw >= 200) cfDaysRaw.push(s.day);
   });
 
   // Died-before-second-banked: >= 2 killers ever, killer1 dead strictly
@@ -105,6 +115,7 @@ function analyzeSeed(row) {
     daysAtWindow2: { 14: countAtLeast(traj.windows[14], 2), 30: countAtLeast(traj.windows[30], 2), 60: countAtLeast(traj.windows[60], 2) },
     firstDayWindow2: { 14: firstDayAtLeast(traj.days, traj.windows[14], 2), 30: firstDayAtLeast(traj.days, traj.windows[30], 2), 60: firstDayAtLeast(traj.days, traj.windows[60], 2) },
     counterfactualReadyDays: cfDays,
+    counterfactualReadyDaysRaw: cfDaysRaw,
     diedBeforeSecondBanked: diedBeforeSecond,
     killToDeathIntervals: intervals, medianKillToDeath: medianInterval,
     deathCauses: causes,
@@ -140,6 +151,7 @@ function analyzeDir(dir, prefix) {
     medianKillToDeathAll: medianAll, killToDeathIntervalsAll: allIntervals,
     deathCausesAll: causeTotals,
     counterfactualReadySeeds: seeds.filter(function (s) { return s.counterfactualReadyDays.length > 0; }).map(function (s) { return s.seed; }),
+    counterfactualReadySeedsRaw: seeds.filter(function (s) { return s.counterfactualReadyDaysRaw.length > 0; }).map(function (s) { return s.seed; }),
     seeds: seeds,
   };
 }
