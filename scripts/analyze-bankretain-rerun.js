@@ -70,8 +70,18 @@ function classifyRetention(postBank, firstUp) {
   const pbEdible = (postBank && postBank.edibleKcal) || 0;
   let verdict;
   if (shortfalls.length === 0) verdict = 'RETAINED';
-  else if (fuEdible === 0 && pbEdible > 0) verdict = 'VANISHED';
+  // NOTE (substrate-a instrument correction, spec-conformant): the
+  // spoil check MUST precede the vanish check. A FULL dawn sweep —
+  // every edible stack's spoilDay arrived, so fuEdible is 0 — is a
+  // fully-named spoil sweep under the prereg's definition ("every
+  // shortfall is a named per-form dawn spoil sweep"), not a vanish.
+  // The previous ordering (fuEdible==0 => VANISHED first) mislabeled
+  // exactly that case; it was caught on screen event 17021/51
+  // (Muscadine Grapes spoilDay 52, swept on scholarDay 52, the only
+  // shortfall, named). VANISHED now means only: food gone with at
+  // least one UNNAMED shortfall.
   else if (shortfalls.every((s) => s.namedSpoil)) verdict = 'RETAINED-SPOIL-SWEPT';
+  else if (fuEdible === 0 && pbEdible > 0) verdict = 'VANISHED';
   else verdict = 'PARTIAL-UNEXPLAINED';
   return { verdict, shortfalls, fuEdible, pbEdible };
 }

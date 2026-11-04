@@ -91,5 +91,26 @@ function retainedInst(seed, loopDay, gameDay, beforeEd, postEd, fuEd, kcalFu, kc
   check('three distinct keys from two seeds', u.totals.distinctJudged === 3, JSON.stringify(u.totals));
   check('screened seeds with judged counted', u.totals.screenedSeedsWithJudged === 2, JSON.stringify(u.totals));
 }
+// ---- substrate-a: full dawn sweep is spoil-swept, not vanished ----
+// Instrument correction to match the prereg definition ("every
+// shortfall is a named per-form dawn spoil sweep"): when every edible
+// stack's spoilDay has arrived, fuEdible is 0 AND every shortfall is
+// named — that is RETAINED-SPOIL-SWEPT (screen event 17021/51).
+// A full loss with any UNNAMED shortfall stays VANISHED.
+{
+  const { classifyRetention } = require('./analyze-bankretain-rerun');
+  const pb = pack(270, [st('Muscadine Grapes', 3, 90, 52)]);
+  const fu = { scholarDay: 52, pack: pack(0, []) };
+  const c = classifyRetention(pb, fu);
+  check('full named dawn sweep is spoil-swept, not vanished', c.verdict === 'RETAINED-SPOIL-SWEPT', c.verdict);
+  check('full sweep shortfall named', c.shortfalls.length === 1 && c.shortfalls[0].namedSpoil === true);
+}
+{
+  const { classifyRetention } = require('./analyze-bankretain-rerun');
+  const pb = pack(270, [st('Muscadine Grapes', 3, 90, 99)]);
+  const fu = { scholarDay: 52, pack: pack(0, []) };
+  const c = classifyRetention(pb, fu);
+  check('full unnamed loss stays vanished', c.verdict === 'VANISHED', c.verdict);
+}
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);
