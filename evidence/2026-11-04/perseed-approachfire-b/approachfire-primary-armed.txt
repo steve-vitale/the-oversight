@@ -1,0 +1,4 @@
+scenario=primary leg=armed gates=variant-file (4 gates) map=4,2 blocked=0,7
+turn 1 round 2 hp 33.88333333333333 [4,7]->[4,8] branch=flee tbPlayerMove(4,8) counters={"marks":0,"waits":0,"repickSteps":0,"stuckTurns":0,"fleeBlocked":false,"approachBlocked":false}
+turn 2 round 3 hp 33.88333333333333 [4,8]->[4,8] branch=flee-exit tbBarrierExit(0,1) counters={"marks":0,"waits":0,"repickSteps":0,"stuckTurns":0,"fleeBlocked":false,"approachBlocked":false}
+SUMMARY {"turns":2,"fightOver":true,"finalPos":[4,8],"moves":1,"noPathLines":0,"waits":0,"strikes":0,"barrierExits":1,"maxSameTargetBlockedRun":0,"branches":["flee","flee-exit"],"countersFinal":{"marks":0,"waits":0,"repickSteps":0,"stuckTurns":0,"fleeBlocked":false,"approachBlocked":false},"firstNonLoopTurn":1}

@@ -1,0 +1,154 @@
+{
+  "scenario": "primary",
+  "leg": "armed",
+  "gates": "variant-file (4 gates)",
+  "mapNode": [
+    4,
+    2
+  ],
+  "blockedTiles": [
+    "0,7"
+  ],
+  "geometry": {
+    "playerStart": [
+      4,
+      7
+    ],
+    "playerHpStart": 33.88333333333333,
+    "monster": "influencer",
+    "monsterPos": [
+      4,
+      5
+    ],
+    "monsterHp": [
+      637,
+      850
+    ],
+    "weapon": "Phase blade",
+    "weaponRange": 1,
+    "moveLeftPerTurn": 1
+  },
+  "turns": [
+    {
+      "turn": 1,
+      "round": 2,
+      "hpStart": 33.88333333333333,
+      "pre": {
+        "mx": 4,
+        "my": 7,
+        "hp": 33.88333333333333
+      },
+      "post": {
+        "mx": 4,
+        "my": 8,
+        "hp": 33.88333333333333,
+        "moveLeft": 0,
+        "acted": true
+      },
+      "handled": true,
+      "actions": [
+        {
+          "fn": "tbPlayerMove",
+          "args": [
+            4,
+            8
+          ],
+          "returned": true
+        }
+      ],
+      "say": [],
+      "endTurnCalls": 1,
+      "countersBefore": {
+        "marks": 0,
+        "waits": 0,
+        "repickSteps": 0,
+        "stuckTurns": 0,
+        "fleeBlocked": false,
+        "approachBlocked": false
+      },
+      "countersAfter": {
+        "marks": 0,
+        "waits": 0,
+        "repickSteps": 0,
+        "stuckTurns": 0,
+        "fleeBlocked": false,
+        "approachBlocked": false
+      },
+      "branch": "flee"
+    },
+    {
+      "turn": 2,
+      "round": 3,
+      "hpStart": 33.88333333333333,
+      "pre": {
+        "mx": 4,
+        "my": 8,
+        "hp": 33.88333333333333
+      },
+      "post": {
+        "mx": 4,
+        "my": 8,
+        "hp": 33.88333333333333,
+        "moveLeft": 0,
+        "acted": true
+      },
+      "handled": true,
+      "actions": [
+        {
+          "fn": "tbBarrierExit",
+          "args": [
+            0,
+            1
+          ],
+          "returned": true
+        }
+      ],
+      "say": [],
+      "endTurnCalls": 1,
+      "countersBefore": {
+        "marks": 0,
+        "waits": 0,
+        "repickSteps": 0,
+        "stuckTurns": 0,
+        "fleeBlocked": false,
+        "approachBlocked": false
+      },
+      "countersAfter": {
+        "marks": 0,
+        "waits": 0,
+        "repickSteps": 0,
+        "stuckTurns": 0,
+        "fleeBlocked": false,
+        "approachBlocked": false
+      },
+      "branch": "flee-exit"
+    }
+  ],
+  "summary": {
+    "turns": 2,
+    "fightOver": true,
+    "finalPos": [
+      4,
+      8
+    ],
+    "moves": 1,
+    "noPathLines": 0,
+    "waits": 0,
+    "strikes": 0,
+    "barrierExits": 1,
+    "maxSameTargetBlockedRun": 0,
+    "branches": [
+      "flee",
+      "flee-exit"
+    ],
+    "countersFinal": {
+      "marks": 0,
+      "waits": 0,
+      "repickSteps": 0,
+      "stuckTurns": 0,
+      "fleeBlocked": false,
+      "approachBlocked": false
+    },
+    "firstNonLoopTurn": 1
+  }
+}
