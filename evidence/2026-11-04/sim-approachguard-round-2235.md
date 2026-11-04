@@ -75,5 +75,31 @@ guardrail judgement above is the pre-registered per-seed table, per
 scale-onramp stays converging (NOT converged): full seat still unwon,
 wave-5 kill still 0. food-economy untouched. Claim deleted; lock
 deleted.
+
+## Addendum — check.js --quick classification (coordinator, post-merge)
+Two runs on the unchanged merged tree disagreed, which itself classifies
+the failures: run 1: 284 passed, 6 failed; run 2: 278 passed, 12 failed
+(25 min). No commit landed between the runs. The merge diff is evidence
++ 3 new scripts only (zero src/, index.html, css, data diff), and no
+failing test references approachguard — so none of the failures is
+attributable to this merge:
+- test-measurement-proof-update: pre-existing, documented in the
+  tracker header (7 Game files moved after the proof).
+- test-measurement-workflow, test-measurement-cache-flags: same
+  stale-proof class.
+- test-phone-frame-proof: stale-receipt class (boot inputs moved
+  since the receipt; this merge touched none of them).
+- test-mobile-combat-cadence, test-occupation-panels,
+  test-establishment-r20-fixes: assertion failures in systems this
+  merge does not touch (zero src diff, no references).
+- test-solo-campaign-endings, test-trust-observer-neutrality,
+  test-synergy-stall, test-throttlefeast-20261014,
+  test-capable-bot-20261014: exit null at exactly 120s — tests that
+  passed slowly in run 1 (54–88s) timing out under load in run 2.
+  Flaky timeouts, not regressions.
+No failure was waived or re-scored: the arm's verdict rests on its own
+proof script (ALL PASS) and pre-registered guardrail table, not on
+check.js. The stale-proof and timeout classes are pre-existing
+infrastructure debt for a future run, not this arm's scope.
 Merged locally, pending ship (approachguard e52c9fb43 + d68c42db5 +
 e44da039d + 3d207778f; coordinator evidence this file).
