@@ -1,0 +1,40 @@
+
+-- Sal (gen_ieepd06) occ=barber --
+OPENING: "Can I tell you something? Before the scattering, I said something cruel. I think about it every day."
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: It's quiet at the hollow. Sal doesn't say much. Sometimes that's the whole point.
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them American Hazelnut — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+YOU: [confront:d_y46t8w6] "I've been watching. Things don't add up. Talk to me."
+THEM: "Ha. Funny." The laugh is dry. "Is this what we're doing now? Interrogations?"
+YOU: [dlg:react] (listen)
+THEM: "Well." A breath. "That's where things stand."
+YOU: [dlg:doubt] "That doesn't quite add up."
+THEM: "...What's that supposed to mean?" Their voice goes careful.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on what they confided."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "I should go. You know where to find me."
+YOU: [agree] "You're right."
+THEM: "I keep coming back to the same conclusion. So: yes."
+(ended by engine)
+
+-- Nadin (gen_lg3diem) occ=tattoo artist --
+OPENING: I'm fine on my own. I was fine before all this. Don't take it personally.
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: "I buried this before the Scattering. Seemed stupid to keep it secret." Nadin digs up a wrapped bundle — food, still good. (+1387 kcal to the pantry.)
+YOU: [dlg:more] "Tell me more."
+THEM: "Groups have gravity. They pull you into their problems. I stay in my own orbit."
+YOU: [dlg:react] (listen)
+THEM: "So." They look at the fire for a moment.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on wanting to be left alone."
+YOU: [goon] "Go on. I'm listening."
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [goon] "Go on. I'm listening."
+THEM: They glance away, then back. Different subject, same worry:
+YOU: [goon] "Go on. I'm listening."
+THEM: "Any regrets? The real kind, not the small stuff."
+YOU: [ans:q_regret:a_tell] "I didn't say what I needed to say. To someone. Now I can't."
+THEM: Quiet. "Yeah. I think everyone's carrying one of those."
+closing: "I'll think about what you said. Carefully. That's how I do things."

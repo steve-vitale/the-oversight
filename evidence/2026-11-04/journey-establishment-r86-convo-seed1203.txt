@@ -1,0 +1,40 @@
+
+-- Noah (gen_ji507wv) occ=HVAC tech --
+OPENING: "I asked Otis about this wound — Otis's gone. Still need hands. Are you in?"
+YOU: [goon] "I'm here. Go on."
+THEM: They light up a little when they see you.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Ground Elder. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Cassava. Leaf, stem, smell. You won't forget it now."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to them, on the same side of the Haven door, to help.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Amina? A Midwife, back before. Solid person."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Alright. But I'm not carrying your stuff."
+closing: "Talking helps. A little. Thank you."
+
+-- Roberto (gen_1qlf9rk) occ=infantry soldier --
+OPENING: "I asked Otis about what you think happened to us — Otis's gone. I've been turning something over. What do YOU think actually happened to us? Anyway — how are YOU doing?"
+YOU: [ans:q_theory:a_aliens] "Something took us. Something big."
+THEM: "That's where I keep landing too. The question is what it wants."
+YOU: [goon] "Take your time."
+THEM: The conversation cools to something businesslike.
+YOU: [goon] "Take your time."
+THEM: "My theory changes weekly. This week's: we're the control group. Somewhere there's a village that got instructions, and we're the ones they just... watched. Cheerful thought, right? That's the priority."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on what you think happened to us."
+YOU: [goon] "Take your time."
+THEM: "So what's your plan here? Just... get through it?"
+YOU: [ans:q_plan:a_survive] "One day at a time."
+THEM: "Honest. I can work with honest. Doesn't matter now."
+YOU: [goon] "Take your time."
+THEM: "Mine's simple: learn one useful thing a week. This week it's fishing. A plan's just a direction you argue with. ...sorry."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "...Fine. This had better be worth it."
+closing: "Sorry. I need a minute. This was... thank you. I need a minute."
