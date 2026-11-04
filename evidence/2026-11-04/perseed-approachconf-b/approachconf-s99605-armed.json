@@ -1,0 +1,1867 @@
+{
+  "seed": 99605,
+  "run": "armed",
+  "policy": "approachfall",
+  "anchorCommit": "980de94f372b",
+  "days": 140,
+  "gameDays": 141,
+  "endReason": "survived",
+  "won": false,
+  "villageLost": false,
+  "maxWave": 4,
+  "spawnsW4": 17,
+  "tbCalls": 1,
+  "fieldCallsW4": 2,
+  "exposures": [
+    {
+      "seq": 1,
+      "type": "tb",
+      "day": 62,
+      "mid": "audit",
+      "wave": 4,
+      "fightId": "fmgpspigc_3mph5w",
+      "scholarAtStart": "gen_3u5ufas",
+      "leadVid": "gen_3u5ufas",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "gen_3u5ufas",
+          "hpStart": 75,
+          "maxHp": 100,
+          "gear": {
+            "vid": "gen_3u5ufas",
+            "armorP": 12,
+            "armed": true,
+            "weapon": "Hardlight knife",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "audit",
+          "hpStart": 1102,
+          "maxHp": 1102,
+          "wave": 4,
+          "joinedMidFight": false
+        }
+      ],
+      "leadGear": {
+        "vid": "gen_3u5ufas",
+        "armorP": 12,
+        "armed": true,
+        "weapon": "Hardlight knife",
+        "vpFound": true,
+        "readError": null
+      },
+      "scholarStart": {
+        "health": 75,
+        "energy": 80,
+        "food": "UNRECORDED"
+      },
+      "trickKnown": false,
+      "hits": [
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "audit",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 47,
+          "returned": 59,
+          "hpBefore": 1102,
+          "hpAfter": 1043,
+          "hpDelta": -59,
+          "turnSeq": 1,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 2,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "audit's attack",
+          "requested": 72,
+          "returned": 53,
+          "hpBefore": 75,
+          "hpAfter": 22,
+          "hpDelta": -53,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "audit",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 50,
+          "returned": 63,
+          "hpBefore": 1043,
+          "hpAfter": 980,
+          "hpDelta": -63,
+          "turnSeq": 2,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "processing fees",
+          "requested": 20,
+          "returned": 15,
+          "hpBefore": 22,
+          "hpAfter": 7,
+          "hpDelta": -15,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "audit",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 51,
+          "returned": 64,
+          "hpBefore": 980,
+          "hpAfter": 916,
+          "hpDelta": -64,
+          "turnSeq": 3,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "audit's Assessment",
+          "requested": 57,
+          "returned": 42,
+          "hpBefore": 7,
+          "hpAfter": -35,
+          "hpDelta": -42,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "sysSay",
+          "line": "🧾 The Audit's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "say",
+          "line": "(audit's hide absorbs 10.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the audit for 59 (Hardlight knife)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🧾 The Audit's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🧾 Abacus beads click, once. Audit tomorrow. (The clipboard is showing — read it, or get janky.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 audit's attack finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 19."
+        },
+        {
+          "kind": "say",
+          "line": "Rosa gasps. \"You're hit — move!\""
+        },
+        {
+          "kind": "say",
+          "line": "Audit's attack hits you for 53."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Assessment — locks onto one target — moving won't dodge it. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "say",
+          "line": "(audit's hide absorbs 10.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the audit for 63 (Hardlight knife)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🧾 The Audit's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🧾 The abacus beads CLICK — AUDIT DAY. The clipboard flips to YOUR sheet: \"strike\" flagged INEFFICIENT. Taxed: half strength for 2 rounds. (Deliberate jank between audits keeps the good stuff off the sheet.)"
+        },
+        {
+          "kind": "say",
+          "line": "🧾 Plus the bill: 500 kcal, or 20 HP in \"processing fees.\" (Read the clipboard to see it coming.)"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 5."
+        },
+        {
+          "kind": "say",
+          "line": "Processing fees hits you for 15."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "say",
+          "line": "(audit's hide absorbs 10.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the audit for 64 (Hardlight knife)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🧾 The Audit's turn"
+        },
+        {
+          "kind": "say",
+          "line": "💥 audit's Assessment finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 15."
+        },
+        {
+          "kind": "say",
+          "line": "Audit's Assessment hits you for 42."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "sysSay",
+          "line": "📺 ───"
+        },
+        {
+          "kind": "sysSay",
+          "line": "📺 While you fought your fight, they fought theirs."
+        },
+        {
+          "kind": "sysSay",
+          "line": "📺 Wave 1: The lead never reached Nikolai — it fell to the volley, and the pack's coordination shatters with it. (0 rounds, 0 taken)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "📺 Wave 2: The lead never reached Nikolai — it fell to the volley, and the pack's coordination shatters with it. (0 rounds, 0 taken)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "📺 Wave 3: The lead falls — the pack's coordination shatters. The rest scatter or die. (2 rounds, 20 taken)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "📺 Nikolai WON. You didn't see it — you had your own arena. The village will tell you about it for weeks."
+        },
+        {
+          "kind": "sysSay",
+          "line": "📺 Prize for Nikolai: the winner's share — alien rations for the pantry. The village eats tonight."
+        },
+        {
+          "kind": "sysSay",
+          "line": "📺 The System presses something humming into Nikolai's hands: Harvest Scythe. It was made for wheat. It works on everything. The swing is the same."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Pamela Bauer is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "Pamela is gone — dead. The errand dies with them; nobody's waiting on those dandelions now."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Pamela Bauer is dead — the arena. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Pamela kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "\"Pamela's gone.\" Nikolai looks at you for a long moment. \"You're not Pamela.\" No heat in it. Just fact. You'll have to earn this face."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Rachel blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Generous Heart (Level 1). Donating gives 2x trust."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Come Get Some (Level 1). Make exactly the right noise and the blind thing comes to investigate. Goad a blinded monster within 3 tiles: it lurches toward the sound on its next move. Stand where you want it."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Steady Hands (Level 1). Fine work under pressure. Dressing game, stitching wounds, tying snares — no shake."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Wound Care (Level 1). Clean it, close it, cover it. Pressure stops bleeding. Clean water is better than dirty hands."
+        },
+        {
+          "kind": "say",
+          "line": "⚡ TECHNIQUE UNLOCKED: Precise Mend! Your healing knows where to go. +50% effectiveness. (Your knowledge of Wound Care amplifies your field_medicine.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "\"OH! OH! PRECISE MEND! The audience did NOT see that coming! Knowledge AMPLIFIES power! The gamblers are recalculating EVERYTHING!\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Herbal Medicine (Level 1). Willow bark = aspirin. Yarrow stops bleeding. Plantain draws out infection. The pharmacy is outside."
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Pamela Bauer, 62 days. The mantle passes to Rachel Adeyemi."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Rachel Adeyemi, 62 — a bartender. Her hands know different work now: Green Whisper, Scream Cheese, Echo Location."
+        },
+        {
+          "kind": "say",
+          "line": "The village's quarrel was with Pamela — and Pamela is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers."
+        },
+        {
+          "kind": "say",
+          "line": "At the grave, Nikolai speaks for Rachel — \"Pamela trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew Rachel before the Codex did — her name already carried weight here."
+        }
+      ],
+      "transcriptOverflow": false,
+      "abilityUses": [],
+      "shoutUses": 0,
+      "offerFoodUses": 0,
+      "turns": [
+        {
+          "turnSeq": 1,
+          "round": 2,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 3,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 75,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Hardlight knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "mx": 3,
+                "my": 0,
+                "hp": 1102,
+                "maxHp": 1102,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "dist": 0,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 3,
+                  "my": 0,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 75,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Hardlight knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "mx": 3,
+                    "my": 0,
+                    "hp": 1102,
+                    "maxHp": 1102,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "dist": 0,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 3,
+                  "my": 0,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 75,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Hardlight knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "mx": 3,
+                    "my": 0,
+                    "hp": 1043,
+                    "maxHp": 1102,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "dist": 0,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 2,
+          "end": {
+            "player": {
+              "mx": 3,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 75,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Hardlight knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "mx": 3,
+                "my": 0,
+                "hp": 1043,
+                "maxHp": 1102,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "dist": 0,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(audit's hide absorbs 10.)",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "You STRIKE the audit for 59 (Hardlight knife).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 2,
+          "round": 3,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 3,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 22,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Hardlight knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "mx": 3,
+                "my": 0,
+                "hp": 1043,
+                "maxHp": 1102,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "dist": 0,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 3,
+                  "my": 0,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 22,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Hardlight knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "mx": 3,
+                    "my": 0,
+                    "hp": 1043,
+                    "maxHp": 1102,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "dist": 0,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 3,
+                  "my": 0,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 22,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Hardlight knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "mx": 3,
+                    "my": 0,
+                    "hp": 980,
+                    "maxHp": 1102,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "dist": 0,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 14,
+          "end": {
+            "player": {
+              "mx": 3,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 22,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Hardlight knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "mx": 3,
+                "my": 0,
+                "hp": 980,
+                "maxHp": 1102,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "dist": 0,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(audit's hide absorbs 10.)",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "You STRIKE the audit for 63 (Hardlight knife).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 3,
+          "round": 4,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 3,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 7,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Hardlight knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "mx": 3,
+                "my": 0,
+                "hp": 980,
+                "maxHp": 1102,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "dist": 0,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 3,
+                  "my": 0,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 7,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Hardlight knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "mx": 3,
+                    "my": 0,
+                    "hp": 980,
+                    "maxHp": 1102,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "dist": 0,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 3,
+                  "my": 0,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 7,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Hardlight knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "mx": 3,
+                    "my": 0,
+                    "hp": 916,
+                    "maxHp": 1102,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "dist": 0,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 24,
+          "end": {
+            "player": {
+              "mx": 3,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 7,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Hardlight knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "mx": 3,
+                "my": 0,
+                "hp": 916,
+                "maxHp": 1102,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "dist": 0,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(audit's hide absorbs 10.)",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "You STRIKE the audit for 64 (Hardlight knife).",
+            "📺 +5 style — solid hit"
+          ]
+        }
+      ],
+      "npcTurns": [
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "audit",
+          "vid": null,
+          "round": 1,
+          "pre": {
+            "pos": {
+              "mx": 3,
+              "my": 0
+            },
+            "hp": 1102,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 3,
+              "my": 0
+            },
+            "hp": 1102,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "audit",
+          "vid": null,
+          "round": 2,
+          "pre": {
+            "pos": {
+              "mx": 3,
+              "my": 0
+            },
+            "hp": 1043,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 3,
+              "my": 0
+            },
+            "hp": 1043,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 72,
+              "hpDelta": -53,
+              "round": 2
+            }
+          ],
+          "sayLines": [
+            "🧾 Abacus beads click, once. Audit tomorrow. (The clipboard is showing — read it, or get janky.)",
+            "💥 audit's attack finds you — no dodging it.",
+            "Armor absorbs 19.",
+            "Rosa gasps. \"You're hit — move!\"",
+            "Audit's attack hits you for 53.",
+            "📖 Codex: Assessment — locks onto one target — moving won't dodge it. You won't forget this."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "audit",
+          "vid": null,
+          "round": 3,
+          "pre": {
+            "pos": {
+              "mx": 3,
+              "my": 0
+            },
+            "hp": 980,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 3,
+              "my": 0
+            },
+            "hp": 980,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 20,
+              "hpDelta": -15,
+              "round": 3
+            }
+          ],
+          "sayLines": [
+            "🧾 The abacus beads CLICK — AUDIT DAY. The clipboard flips to YOUR sheet: \"strike\" flagged INEFFICIENT. Taxed: half strength for 2 rounds. (Deliberate jank between audits keeps the good stuff off the sheet.)",
+            "🧾 Plus the bill: 500 kcal, or 20 HP in \"processing fees.\" (Read the clipboard to see it coming.)",
+            "Armor absorbs 5.",
+            "Processing fees hits you for 15."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "audit",
+          "vid": null,
+          "round": 4,
+          "pre": {
+            "pos": {
+              "mx": 3,
+              "my": 0
+            },
+            "hp": 916,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 3,
+              "my": 0
+            },
+            "hp": 916,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 57,
+              "hpDelta": -42,
+              "round": 4
+            }
+          ],
+          "sayLines": [
+            "💥 audit's Assessment finds you — no dodging it.",
+            "Armor absorbs 15.",
+            "Audit's Assessment hits you for 42.",
+            "You go down.",
+            "OH. Oh no. ...The gamblers are very quiet.",
+            "📺 ───",
+            "📺 While you fought your fight, they fought theirs.",
+            "📺 Wave 1: The lead never reached Nikolai — it fell to the volley, and the pack's coordination shatters with it. (0 rounds, 0 taken)",
+            "📺 Wave 2: The lead never reached Nikolai — it fell to the volley, and the pack's coordination shatters with it. (0 rounds, 0 taken)",
+            "📺 Wave 3: The lead falls — the pack's coordination shatters. The rest scatter or die. (2 rounds, 20 taken)",
+            "📺 Nikolai WON. You didn't see it — you had your own arena. The village will tell you about it for weeks.",
+            "📺 Prize for Nikolai: the winner's share — alien rations for the pantry. The village eats tonight.",
+            "📺 The System presses something humming into Nikolai's hands: Harvest Scythe. It was made for wheat. It works on everything. The swing is the same.",
+            "📖 The Codex turns a page on its own. Pamela Bauer is dead. You didn't ask. It knew.",
+            "Nobody's talking much. The fire feels smaller tonight.",
+            "Pamela is gone — dead. The errand dies with them; nobody's waiting on those dandelions now.",
+            "🕯️ Pamela Bauer is dead — the arena. The village stops. Somebody screams. Somebody else starts digging.",
+            "What Pamela kept close goes into the ground with them — keepsakes are buried, never taken from the body.",
+            "\"Pamela's gone.\" Nikolai looks at you for a long moment. \"You're not Pamela.\" No heat in it. Just fact. You'll have to earn this face.",
+            "The Codex doesn't pause for grief. Rachel blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+            "📖 LEARNED: Generous Heart (Level 1). Donating gives 2x trust.",
+            "📖 LEARNED: Come Get Some (Level 1). Make exactly the right noise and the blind thing comes to investigate. Goad a blinded monster within 3 tiles: it lurches toward the sound on its next move. Stand where you want it.",
+            "📖 LEARNED: Steady Hands (Level 1). Fine work under pressure. Dressing game, stitching wounds, tying snares — no shake.",
+            "📖 LEARNED: Wound Care (Level 1). Clean it, close it, cover it. Pressure stops bleeding. Clean water is better than dirty hands.",
+            "⚡ TECHNIQUE UNLOCKED: Precise Mend! Your healing knows where to go. +50% effectiveness. (Your knowledge of Wound Care amplifies your field_medicine.)",
+            "\"OH! OH! PRECISE MEND! The audience did NOT see that coming! Knowledge AMPLIFIES power! The gamblers are recalculating EVERYTHING!\"",
+            "📖 LEARNED: Herbal Medicine (Level 1). Willow bark = aspirin. Yarrow stops bleeding. Plantain draws out infection. The pharmacy is outside.",
+            "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+            "📖 The Codex turns a page: Pamela Bauer, 62 days. The mantle passes to Rachel Adeyemi.",
+            "🪞 You wake up somebody else. Rachel Adeyemi, 62 — a bartender. Her hands know different work now: Green Whisper, Scream Cheese, Echo Location.",
+            "The village's quarrel was with Pamela — and Pamela is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers.",
+            "At the grave, Nikolai speaks for Rachel — \"Pamela trusted them. We saw it. Give them the fire's hearing.\" The village listens.",
+            "The fire knew Rachel before the Codex did — her name already carried weight here."
+          ],
+          "threw": null
+        }
+      ],
+      "end": {
+        "result": "lost",
+        "day": 62,
+        "round": 4,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "audit",
+            "alive": true,
+            "fled": false,
+            "hp": 916,
+            "maxHp": 1102
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "gen_3u5ufas",
+            "alive": false,
+            "fled": false,
+            "hp": -35,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "gen_3u5ufas"
+        ],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false
+    }
+  ],
+  "killsW4": 0,
+  "killRows": [],
+  "unlinkedKills": [],
+  "spawns": [
+    {
+      "day": 61,
+      "id": "influencer",
+      "tx": 4,
+      "ty": 5
+    },
+    {
+      "day": 66,
+      "id": "reunion",
+      "tx": 1,
+      "ty": 1
+    },
+    {
+      "day": 71,
+      "id": "reunion",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 72,
+      "id": "suburb",
+      "tx": 4,
+      "ty": 0
+    },
+    {
+      "day": 78,
+      "id": "algorithm",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 79,
+      "id": "eulogy",
+      "tx": 4,
+      "ty": 5
+    },
+    {
+      "day": 83,
+      "id": "eulogy",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 84,
+      "id": "audit",
+      "tx": 4,
+      "ty": 0
+    },
+    {
+      "day": 96,
+      "id": "reunion",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 98,
+      "id": "suburb",
+      "tx": 4,
+      "ty": 2
+    },
+    {
+      "day": 105,
+      "id": "algorithm",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 110,
+      "id": "suburb",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 111,
+      "id": "audit",
+      "tx": 4,
+      "ty": 2
+    },
+    {
+      "day": 116,
+      "id": "reunion",
+      "tx": 4,
+      "ty": 5
+    },
+    {
+      "day": 120,
+      "id": "algorithm",
+      "tx": 4,
+      "ty": 5
+    },
+    {
+      "day": 122,
+      "id": "eulogy",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 125,
+      "id": "audit",
+      "tx": 4,
+      "ty": 5
+    }
+  ],
+  "orphanTbEnds": [],
+  "wrapCounts": {
+    "spawnWorldMonster": 64,
+    "fieldFight": 91,
+    "recordWaveKill": 48,
+    "useAbility": 94,
+    "startCombat": 5,
+    "tbBeginTurn": 74,
+    "tbAdvance": 72,
+    "tbMonsterTurn": 27,
+    "tbPlayerOfferFood": 1,
+    "tbEnd": 6,
+    "tbPlayerStrike": 10,
+    "tbDamage": 32,
+    "tbPlayerMove": 10,
+    "tbPlayerWait": 41
+  },
+  "instrumentErrors": [],
+  "notes": [],
+  "deaths": [
+    {
+      "day": 3,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 4,
+      "kind": "monster",
+      "who": "nevermore",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 4,
+      "kind": "monster",
+      "who": "murkcap",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 5,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 6,
+      "kind": "monster",
+      "who": "sanjun",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 6,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 6,
+      "kind": "monster",
+      "who": "lockpick_raccoon",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 7,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 7,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 9,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 9,
+      "kind": "monster",
+      "who": "rut_king",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 11,
+      "kind": "monster",
+      "who": "nightlight_catfish",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 11,
+      "kind": "monster",
+      "who": "understudy",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 12,
+      "kind": "monster",
+      "who": "nightcourt",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 13,
+      "kind": "monster",
+      "who": "murkcap",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 13,
+      "kind": "monster",
+      "who": "rut_king",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 13,
+      "kind": "monster",
+      "who": "murkcap",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 13,
+      "kind": "monster",
+      "who": "ducks_in_a_row",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 13,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 14,
+      "kind": "monster",
+      "who": "sunbasker",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 14,
+      "kind": "person",
+      "who": "meera_reddy",
+      "cause": "ambush",
+      "player": false
+    },
+    {
+      "day": 18,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 19,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 20,
+      "kind": "monster",
+      "who": "understudy",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 20,
+      "kind": "villager",
+      "who": "gen_tkiwobm",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 21,
+      "kind": "monster",
+      "who": "sunbasker",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 21,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 25,
+      "kind": "monster",
+      "who": "nightlight_catfish",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 31,
+      "kind": "monster",
+      "who": "voice_mimic_radio",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 32,
+      "kind": "villager",
+      "who": "rafael_torres",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 32,
+      "kind": "monster",
+      "who": "sanjun",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 32,
+      "kind": "monster",
+      "who": "understudy",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 32,
+      "kind": "monster",
+      "who": "warranty_caller",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 34,
+      "kind": "monster",
+      "who": "sunback",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 35,
+      "kind": "monster",
+      "who": "white_noise_heron",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 35,
+      "kind": "monster",
+      "who": "speedbump_turtle",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 35,
+      "kind": "monster",
+      "who": "chorus_line",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 38,
+      "kind": "villager",
+      "who": "chantal_mukendi",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 42,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 44,
+      "kind": "monster",
+      "who": "redactor",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 46,
+      "kind": "villager",
+      "who": "gen_y73rvhu",
+      "cause": "sickness",
+      "player": false
+    },
+    {
+      "day": 50,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 51,
+      "kind": "monster",
+      "who": "ducks_in_a_row",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 51,
+      "kind": "monster",
+      "who": "focus_group",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 51,
+      "kind": "villager",
+      "who": "jorge_silva",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 52,
+      "kind": "villager",
+      "who": "gen_6b131ne",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 60,
+      "kind": "monster",
+      "who": "redactor",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 62,
+      "kind": "monster",
+      "who": "voice_mimic_radio",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 62,
+      "kind": "villager",
+      "who": "gen_3u5ufas",
+      "cause": "the arena",
+      "player": true
+    },
+    {
+      "day": 62,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 66,
+      "kind": "villager",
+      "who": "gen_1aynmmt",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 66,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 74,
+      "kind": "villager",
+      "who": "gen_r5wq8ic",
+      "cause": "starvation",
+      "player": false
+    },
+    {
+      "day": 111,
+      "kind": "monster",
+      "who": "nevermore",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 128,
+      "kind": "villager",
+      "who": "visjoin_101",
+      "cause": "a wound that wouldn't close",
+      "player": false
+    },
+    {
+      "day": 129,
+      "kind": "villager",
+      "who": "nikolai_volkov",
+      "cause": "a stranger",
+      "player": true
+    },
+    {
+      "day": 133,
+      "kind": "monster",
+      "who": "gavel",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 136,
+      "kind": "villager",
+      "who": "visjoin_65",
+      "cause": "contest",
+      "player": false
+    }
+  ],
+  "resultKeys": [
+    "days",
+    "gameDays",
+    "maxWaveUnlocked",
+    "waveKills",
+    "endReason",
+    "stop",
+    "communityExposure",
+    "telemetry",
+    "samples",
+    "learnedPlants",
+    "learnedSkills",
+    "pacing",
+    "ms",
+    "manifest",
+    "policyId",
+    "notes"
+  ],
+  "scaleSamples": [
+    [
+      30,
+      "village"
+    ],
+    [
+      60,
+      "village"
+    ],
+    [
+      90,
+      "village"
+    ],
+    [
+      120,
+      "village"
+    ]
+  ],
+  "standingSamples": [
+    [
+      30,
+      0
+    ],
+    [
+      60,
+      100
+    ],
+    [
+      90,
+      100
+    ],
+    [
+      120,
+      100
+    ]
+  ],
+  "scaleRankFinal": "village",
+  "standingFinal": 125,
+  "arcFinal": 3,
+  "tableWaiting": false,
+  "tableEntered": false,
+  "nationalReached": false,
+  "maxStanding": 125,
+  "scaleReadError": null
+}
