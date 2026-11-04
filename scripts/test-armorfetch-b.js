@@ -21,9 +21,19 @@
 //  11. weapon fetch unaffected: same day, armor fetch then weapon fetch
 //      both fire (separate day flags — armor must not block the weapon).
 // Part C: corpus assertions, run only when the after-corpus dir exists
-// (after the judged sweeps): acceptance seeds 16103/16101/16109 show
-// stash-loss + kit arrival within 7 game days, the before corpus
-// (stashfetch-b) shows none, and the band cost bar holds.
+// (after the judged sweeps). ITEM-AGNOSTIC since sim-armorfetch-c-a
+// (backlog #1693): for each seed in band 16101-16116, the spawn armor
+// is derived at run time from that seed's spawn snapshot
+// (spawnSnap.pool.stashed filtered by the armor defs in
+// src/data/items.json — the same derivation as
+// scripts/analyze-stasharmor-a.js), then the unchanged verdict()
+// (stash-loss + kit arrival within 7 game days) is applied to every
+// spawned armor item. A seed with no spawn armor is reported NO-SPAWN
+// (untestable, not a miss). The before corpus (stashfetch-b) is still
+// shown per item for comparison, and the band cost bar still holds.
+// NO hard-coded item per seed lives here: spawn generation drifts
+// with other landings, and a literal map turns the next confirm into
+// a spawn audit (the stale-map C1 false-fail this rewrite fixes).
 // Usage: node scripts/test-armorfetch-b.js [afterCorpusDir]
 'use strict';
 const fs = require('fs');
@@ -176,7 +186,10 @@ function check(name, cond, extra) {
   const afterDir = process.argv[2] || path.join(__dirname, '..', 'evidence', '2026-10-30', 'sim-armorfetch-b-corpus');
   const beforeDir = path.join(__dirname, '..', 'evidence', '2026-10-30', 'sim-stashfetch-b-corpus');
   if (fs.existsSync(afterDir) && fs.readdirSync(afterDir).some((f) => f.endsWith('.json'))) {
-    const ACCEPT = { 16103: 'swat_vest', 16101: 'bark_armor', 16109: 'farstrider_boots' };
+    const itemsRaw = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'src', 'data', 'items.json'), 'utf8'));
+    const itemDefs = Array.isArray(itemsRaw) ? itemsRaw : (itemsRaw.items || []);
+    const armorIds = new Set(itemDefs.filter((d) => d && d.armor).map((d) => d.id));
+    const spawnArmorOf = (d) => (((d.spawnSnap || {}).pool || {}).stashed || []).filter((id) => armorIds.has(id));
     const load = (dir) => {
       const out = {};
       for (const f of fs.readdirSync(dir).filter((x) => x.endsWith('.json'))) {
@@ -204,14 +217,23 @@ function check(name, cond, extra) {
     };
     const aft = load(afterDir);
     const bef = load(beforeDir);
-    let ok = 0;
-    for (const seed of [16103, 16101, 16109]) {
-      const v = aft[seed] ? verdict(aft[seed], ACCEPT[seed]) : 'MISSING';
-      const bv = bef[seed] ? verdict(bef[seed], ACCEPT[seed]) : 'MISSING';
-      if (v === 'WORN' || v === 'FETCHED') ok++;
-      console.log('CORPUS seed ' + seed + ' ' + ACCEPT[seed] + ' -> after=' + v + ' before=' + bv);
+    let ok = 0, testable = 0, nogo = 0;
+    const noSpawn = [];
+    for (let seed = 16101; seed <= 16116; seed++) {
+      if (!aft[seed]) { console.log('CORPUS seed ' + seed + ' -> MISSING'); nogo++; continue; }
+      const items = spawnArmorOf(aft[seed]);
+      if (!items.length) { noSpawn.push(seed); console.log('CORPUS seed ' + seed + ' -> NO-SPAWN (no spawn armor, untestable)'); continue; }
+      for (const item of items) {
+        const v = verdict(aft[seed], item);
+        const bv = bef[seed] ? verdict(bef[seed], item) : 'MISSING';
+        testable++;
+        if (v === 'WORN' || v === 'FETCHED') ok++;
+        else nogo++;
+        console.log('CORPUS seed ' + seed + ' ' + item + ' -> after=' + v + ' before=' + bv);
+      }
     }
-    check('C1 acceptance WORN-or-FETCHED >= 2/3', ok >= 2, { ok });
+    console.log('CORPUS band: testable=' + testable + ' worn-or-fetched=' + ok + ' nogo=' + nogo + ' no-spawn=' + JSON.stringify(noSpawn));
+    check('C1 band WORN-or-FETCHED for every spawned armor', testable > 0 && nogo === 0, { testable, ok, nogo, noSpawn });
     const band = (corpus) => {
       const rs = Object.keys(corpus).map((s) => corpus[s]);
       const lost = rs.filter((r) => r.endReason === 'village-lost').length;
