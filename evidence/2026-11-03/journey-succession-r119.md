@@ -363,11 +363,38 @@ the calibration run, not a fix.
   instrument data. It held on 32203 this run (death,
   chain, pickCtx, bonds, ledger identical).
 
-## Closeout
-- PENDING — commit, merge, rotation write (7 -> 4),
-  lock deletion, heartbeat-loop stop, worktree release,
-  and main-tree clean verification appended below after
-  the regression suite completes.
+## Closeout (Lane B 18:00 CST recovery run, 2026-11-04Z)
+- r119's coordinator timed out before closeout (its
+  check.js pid had exited, registry heartbeat frozen at
+  2026-11-03T22:48Z). The 18:00 run stale-lock-recovered
+  it: old lock 2026-11-03T21:56:43Z deleted (124 min old,
+  heartbeat 72+ min stale — dead by the guard, not by age
+  alone), worktree journey2-succession-r115 adopted (no
+  writes since 23:30Z, branch tip 38433bc49 carrying no
+  r119 commits, 71 untracked files all r119's own, no
+  sibling sweep). No fresh panel was played: r119's
+  6-seed panel was complete, and replaying succession
+  the same day would duplicate it.
+- Commit de1dee138 ("journey succession r119 (closeout
+  recovery): successor second-life panel, pick-time
+  decomposition, no game change", 72 files) after the
+  check re-run; safe-commit index clobber hit and was
+  repaired via HEAD-blob cacheinfo, verified status
+  empty + diff HEAD empty. Rebases onto master clean
+  (no conflicts — new files only). Merged --ff-only
+  into master; no bump, no push, no live check (ship
+  loop owns those). Report: merged locally, pending ship.
+- Rotation: journey-rotation-b.txt written 7 -> 4 and
+  re-read to verify (next Lane B run plays endgame).
+- Lock: this run's lock deleted only after the merge
+  verified; worktree released and branch deleted; final
+  reap run; main tree verified clean.
+- Registry note: a ~00:14–00:32Z REGISTRY.lock wedge
+  stalled heartbeats across lanes (register/heartbeat/
+  reap commands stuck at 0 CPU); heartbeats landed
+  before and after the wedge, and the adopted tree was
+  dirty throughout, so the reaper would have preserved
+  it regardless. No registry file was force-edited.
 
 ## Carried items
 - Pick-time bar revision (score npcCalls rank) for the
