@@ -57,7 +57,7 @@ function summarizeSeed(out) {
   const qualifying = (maxBarsMet >= 3) || (bestCapped >= 150) || (readyDayCount > 0);
   const st = (best && best.standing) || {};
   const raw = (st.total == null ? null : (st.total | 0));
-  const cappedBest = (best && best.capped == null ? null : (best.capped | 0));
+  const cappedBest = (best == null ? null : (best.capped == null ? null : (best.capped | 0)));
   const shave = (st.plenty == null ? null : Math.max(0, (st.plenty | 0) - 100));
   const gap = (cappedBest == null ? null : Math.max(0, 200 - cappedBest));
   const funnel = (best && best.linkFunnel) || null;
@@ -88,11 +88,18 @@ function summarizeSeed(out) {
     const c = d.cause || d.kind || 'unknown';
     deathCauses[c] = (deathCauses[c] | 0) + 1;
   }
-  // Standing-line classification.
-  const holdLines = [], releaseLines = [], otherLines = [];
+  // Standing-line classification. NOTE: the standing release beat
+  // ("RATINGS ARE UP... Wave 4 talent has been released. The Mirror
+  // Draft opens." / "greenlit the fifth draft") is NOT the sector
+  // release line ("Wave N talent has been released into your
+  // sector") — the two share "RATINGS ARE UP" but only the 📡
+  // ellipsis beat is a standing release. Conflating them inflated
+  // release counts on earlier drafts of this analyzer.
+  const holdLines = [], standingReleaseLines = [], sectorReleaseLines = [], otherLines = [];
   for (const l of (out.standingLines || [])) {
     if (/fifth draft stays in the wings|next act is (not|still)/i.test(l.line)) holdLines.push(l);
-    else if (/RATINGS ARE UP|greenlit|talent has been released/i.test(l.line)) releaseLines.push(l);
+    else if (/RATINGS ARE UP\.\.\.|greenlit the fifth draft/i.test(l.line)) standingReleaseLines.push(l);
+    else if (/talent has been released into your sector/i.test(l.line)) sectorReleaseLines.push(l);
     else otherLines.push(l);
   }
   const endSnap = daily.length ? daily[daily.length - 1] : null;
@@ -119,7 +126,7 @@ function summarizeSeed(out) {
     mismatchDays: mismatchDays, negDeltas: negDeltas,
     deathCauses: deathCauses, deathCount: (out.deathEvents || []).length,
     killWaves: (function () { const c = {}; for (const k of (out.killEvents || [])) c['w' + k.wave] = (c['w' + k.wave] | 0) + 1; return c; })(),
-    holdLines: holdLines.length, releaseLines: releaseLines.length, otherLines: otherLines.length,
+    holdLines: holdLines.length, standingReleaseLines: standingReleaseLines.length, sectorReleaseLines: sectorReleaseLines.length, otherLines: otherLines.length,
     traced: traced, traceKind: traceKind,
     instrumentErrors: (out.instrumentErrors || []).length,
   };

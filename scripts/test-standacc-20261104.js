@@ -131,6 +131,20 @@ ok('ready days and ready-but-unreleased days', function () {
   assert.strictEqual(s.firstCapped200, 10);
 });
 
+ok('standing-line classification separates standing releases from sector releases', function () {
+  const s = AN.summarizeSeed(seed({ standingLines: [
+    { day: 10, via: 'sysSay', line: '📡 The fifth draft stays in the wings. It wants a village that can fight — blood your fighters (0 of 2 veterans).' },
+    { day: 11, via: 'sysSay', line: '📡 RATINGS ARE UP... Wave 4 talent has been released. The Mirror Draft opens.' },
+    { day: 12, via: 'sysSay', line: '📡 RATINGS ARE UP... the Producers have greenlit the fifth draft. Wave 5 talent has been released.' },
+    { day: 13, via: 'say', line: '📺 RATINGS ARE UP! The producers are pleased. New casting directives incoming — Wave 3 talent has been released into your sector.' },
+    { day: 14, via: 'say', line: '📈 your showbiz fans +3 — ratings stunt (favor: 7)' },
+  ] }));
+  assert.strictEqual(s.holdLines, 1);
+  assert.strictEqual(s.standingReleaseLines, 2);
+  assert.strictEqual(s.sectorReleaseLines, 1);
+  assert.strictEqual(s.otherLines, 1);
+});
+
 ok('judgeGo: same-kind trace on all judged seeds', function () {
   const mk = function (kind) {
     return { qualifying: true, traced: true, traceKind: kind };
