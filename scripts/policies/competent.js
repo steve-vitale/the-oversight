@@ -2739,6 +2739,30 @@ function exitVerifiedFleeOn() { return process.env.COMPETENT_EXIT_VERIFIED_FLEE 
 // resolution, extended to the branch that actually runs). Gate off =
 // directional branch byte-identical to before.
 function fleeRepairOn() { return process.env.COMPETENT_FLEE_REPAIR === '1'; }
+// APPROACH FALLBACK (longsim scale-onramp 2026-11-04, arm sim-approachfall-b):
+// mirrors the flee repair for the CLOSE THE DISTANCE path, which has no
+// blocked-step fallback today — a step whose path is blocked ("No path
+// there.") re-issues identically every turn until the fighter dies
+// without a blow (fleerepair confirm: 5 fights, 34 turns). Gate on:
+// (1) 3 consecutive zero-movement approach steps mark the fight
+// approach-blocked, (2) a blocked fight first re-picks a different
+// adjacent tile with a real findPath route, (3) with no reachable
+// adjacent tile it WAITS (tbPlayerWait auto-advances; never endTurn
+// after it) so the monster's turn can change the geometry, re-probing
+// the step after 5 frozen waits. Strike-anyway is NOT a fallback:
+// striking out of range is a documented no-op (see CLOSE THE DISTANCE).
+// A monster-geometry change resets the state (fresh geometry = fresh
+// attempts). Gate off = approach block byte-identical to before.
+function approachFallbackOn() { return process.env.COMPETENT_APPROACH_FALLBACK === '1'; }
+// Monster-geometry signature for the approach fallback: positions of
+// live monsters in the fight. A change means the blocked geometry may
+// have opened, so the fallback state resets and approach is retried.
+function approachMonsterSig(f) {
+  try {
+    return (f.fighters || []).filter(function (x) { return x && x.kind === 'monster' && x.alive; })
+      .map(function (x) { return (x.key || '?') + ':' + x.mx + ',' + x.my; }).sort().join('|');
+  } catch (e) { return ''; }
+}
 
 // Haven sits at the 9x9 center (game.js: hx=4, hy=4).
 const DIR_FLEE_HAVEN = { x: 4, y: 4 };
@@ -3664,6 +3688,88 @@ const competent = {
         const w = (Game.equippedWeapon && Game.equippedWeapon()) || { range: 1 };
         const d0 = Math.max(Math.abs(tmx - px), Math.abs(tmy - py));
         if (d0 > (w.range || 1)) {
+          // APPROACH FALLBACK (sim-approachfall-b, gate on only): a fight
+          // already marked approach-blocked does NOT re-issue the failed
+          // step. Re-pick a reachable adjacent tile first; with none,
+          // WAIT so the monster's turn can change the geometry.
+          if (approachFallbackOn()) {
+            const sig = approachMonsterSig(f);
+            if (ctx._approachSig !== sig) {
+              ctx._approachSig = sig;
+              ctx._approachStuck = null;
+              ctx._approachBlockedFor = null;
+              ctx._approachWaits = 0;
+              ctx._approachFailedTiles = {};
+            }
+            if (ctx._approachBlockedFor === f.id) {
+              let alt = null;
+              if (typeof Game.findPath === 'function') {
+                const occ2 = new Set(
+                  f.fighters.filter(x => x.alive && x.key !== 'p').map(x => x.mx + ',' + x.my));
+                const cands = [];
+                for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) {
+                  if (!dx && !dy) continue;
+                  const cx = tmx + dx, cy = tmy + dy;
+                  if (cx < 0 || cx > 8 || cy < 0 || cy > 8) continue;
+                  if (occ2.has(cx + ',' + cy)) continue;
+                  // Skip tiles a step already failed on this geometry
+                  // (the "Too far" case: findPath succeeds but the step
+                  // still moves nowhere — re-picking it would loop).
+                  if (ctx._approachFailedTiles && ctx._approachFailedTiles[cx + ',' + cy]) continue;
+                  cands.push({ cx: cx, cy: cy, dd: Math.max(Math.abs(cx - px), Math.abs(cy - py)) });
+                }
+                cands.sort(function (a, b) { return a.dd - b.dd; });
+                for (const c of cands) {
+                  try {
+                    const rp = Game.findPath(px, py, c.cx, c.cy);
+                    if (rp && rp.length) { alt = c; break; }
+                  } catch (e) {}
+                }
+              }
+              if (alt) {
+                // Same STEP-DON'T-TELEPORT rule as the live path below.
+                try {
+                  let dx = alt.cx, dy = alt.cy;
+                  const ml = (p.moveLeft || 0);
+                  if (ml > 0 && typeof Game.findPath === 'function') {
+                    const path = Game.findPath(px, py, alt.cx, alt.cy);
+                    if (path && path.length > ml) {
+                      const step = path[ml - 1];
+                      dx = step[0]; dy = step[1];
+                    }
+                  }
+                  Game.tbPlayerMove(dx, dy);
+                } catch (e) {}
+                ctx.closed = (ctx.closed || 0) + 1;
+                let moved = false;
+                try { const pa = Game.tbFighter('p'); moved = !!(pa && (pa.mx !== px || pa.my !== py)); } catch (e) {}
+                if (moved) {
+                  ctx._approachBlockedFor = null;
+                  ctx._approachStuck = null;
+                  ctx._approachWaits = 0;
+                  ctx.approachRepickSteps = (ctx.approachRepickSteps || 0) + 1;
+                } else {
+                  // Re-pick step failed too: blacklist this tile for this
+                  // geometry so the next blocked turn tries another tile
+                  // or waits instead of re-issuing the same failed step.
+                  if (!ctx._approachFailedTiles) ctx._approachFailedTiles = {};
+                  ctx._approachFailedTiles[alt.cx + ',' + alt.cy] = 1;
+                }
+                endTurn();
+                return true;
+              }
+              // No reachable adjacent tile: WAIT (auto-advances; never
+              // endTurn after it). After 5 frozen waits, re-probe the
+              // step next turn in case a wall expired.
+              if (typeof Game.tbPlayerWait === 'function') {
+                try { Game.tbPlayerWait(); } catch (e) {}
+                ctx.approachFallbackWaits = (ctx.approachFallbackWaits || 0) + 1;
+              } else { endTurn(); }
+              ctx._approachWaits = (ctx._approachWaits || 0) + 1;
+              if (ctx._approachWaits >= 5) { ctx._approachBlockedFor = null; ctx._approachWaits = 0; }
+              return true;
+            }
+          }
           const occupied = new Set(
             f.fighters.filter(x => x.alive && x.key !== 'p').map(x => x.mx + ',' + x.my));
           let bx = null, by = null, bd = 1e9;
@@ -3695,6 +3801,33 @@ const competent = {
               Game.tbPlayerMove(dx, dy);
             } catch (e) {}
             ctx.closed = (ctx.closed || 0) + 1;
+            // APPROACH FALLBACK bookkeeping (gate on only): a step that
+            // moves nowhere counts toward the 3-stuck-turn mark; a step
+            // that moves clears the state. Turns with no step attempt
+            // (bx == null) are not counted — the analyzer's failed-step
+            // definition needs a move action to read.
+            if (approachFallbackOn()) {
+              let moved = false;
+              try { const pa = Game.tbFighter('p'); moved = !!(pa && (pa.mx !== px || pa.my !== py)); } catch (e) {}
+              if (moved) {
+                ctx._approachStuck = null;
+                ctx._approachBlockedFor = null;
+                ctx._approachWaits = 0;
+              } else {
+                let st = ctx._approachStuck;
+                if (!st || st.for !== f.id) st = ctx._approachStuck = { for: f.id, turns: 0 };
+                st.turns++;
+                ctx.approachStuckTurns = (ctx.approachStuckTurns || 0) + 1;
+                // Blacklist the failed tile for this geometry so the
+                // blocked branch's re-pick does not re-choose it.
+                if (!ctx._approachFailedTiles) ctx._approachFailedTiles = {};
+                ctx._approachFailedTiles[bx + ',' + by] = 1;
+                if (st.turns >= 3 && ctx._approachBlockedFor !== f.id) {
+                  ctx._approachBlockedFor = f.id;
+                  ctx.approachFallbackMarks = (ctx.approachFallbackMarks || 0) + 1;
+                }
+              }
+            }
           }
           endTurn();
           return true;
@@ -3711,7 +3844,7 @@ const competent = {
   },
 };
 
-module.exports = { competent, competentEat, packEatOnce, beastStrikeTarget, walkTo, walkHome, thirstWalkHome, goHomeStanding, standingHomeOn, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, keepPromises, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, fleeRepairOn, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE, armorWantsVine };
+module.exports = { competent, competentEat, packEatOnce, beastStrikeTarget, walkTo, walkHome, thirstWalkHome, goHomeStanding, standingHomeOn, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, keepPromises, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, fleeRepairOn, approachFallbackOn, approachMonsterSig, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE, armorWantsVine };
 
 
 // The public shared gearing routine, also used by prepared policy proofs.
