@@ -30424,6 +30424,104 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (eV) { console.warn('[depositgate] day voice', eV); }
     },
 
+    // FIRENARR (sim-firenarr-deploy-b 2026-11-04): firing-evening
+    // narration for the (v**) = (e**) OR (F) store-fall sensor.
+    // Spec: evidence/2026-11-03/sim-firenarr-b.md §3, lifted
+    // verbatim. Called once from endDay() immediately after
+    // villageEats(), so the store read is the post-meal evening
+    // store (Game.pantryKcal()) and hungryStreak is tonight's
+    // post-meal value — NOT the pre-sleep policy.daily read the
+    // old tracer used (pre-meal store, pre-update streak). The
+    // two read points differ by the night's meals; firings are
+    // judged over this method's own reads, never assumed to
+    // match the old tracer evening-for-evening.
+    // A "stretch" is a run of evenings with the deposit gate NOT
+    // engaged; an engaged evening ends the stretch (state reset,
+    // no firing that evening). Stretch state lives on the
+    // village object (plain JSON, save-safe) so a reload does
+    // not re-fire a stretch's first line. endDay re-entry for
+    // the same game day is a no-op (lastDay guard). No RNG.
+    // NARRATION ONLY: no gate, throttle, price, deed, or
+    // readiness change; the only game-visible effect is say().
+    _firenarrEvening() {
+      try {
+        const v = this.state.village || null;
+        if (!v || !v.roster) return null;
+        const day = (this.state.scholar || {}).day || 0;
+        if (!(day > 0)) return null;
+        const st = v._firenarr || (v._firenarr = {
+          lastDay: 0, stretch: 0, start: 0, peak: 0, prev: null,
+          falls: 0, fired: null, escalation: false,
+        });
+        if (st.lastDay === day) return null;
+        st.lastDay = day;
+        // ONE named constant for the E1 envelope fraction (the
+        // currently judged value). The sibling sim-fracchoice-b
+        // arm owns the fraction decision; this deploy does not
+        // re-tune it and does not block on the sibling.
+        const FIRENARR_E1_FRACTION = 0.85;
+        const FIRENARR_CLIFF_FRACTION = 0.65;
+        const FIRENARR_FALLBACK_FRACTION = 0.80;
+        const ELIGIBLE_DAY = 8;
+        let engaged = false;
+        try { engaged = !!this._depositGateEngaged(); } catch (eG) { engaged = false; }
+        if (engaged) {
+          st.start = 0; st.peak = 0; st.prev = null;
+          st.falls = 0; st.fired = null; st.escalation = false;
+          return null;
+        }
+        let store = 0;
+        try { store = Math.round(this.pantryKcal()); } catch (eP) { return null; }
+        let streak = 0;
+        try { const pg = this.progState(); streak = pg ? (pg.hungryStreak || 0) : 0; } catch (eS) { streak = 0; }
+        if (!st.start) {
+          st.stretch += 1;
+          st.start = day; st.peak = store; st.prev = store;
+          st.falls = 0; st.fired = null; st.escalation = false;
+          return null;
+        }
+        if (st.prev != null && store < st.prev) st.falls += 1;
+        if (store > st.peak) st.peak = store;
+        st.prev = store;
+        if (!(day >= ELIGIBLE_DAY && day > st.start)) return null;
+        const again = st.stretch > 1;
+        const T = {
+          E1: again
+            ? '⚠ The store has fallen from its recent high again — the shelves are thinning.'
+            : '⚠ The store has fallen from its recent high — the shelves are thinning.',
+          E2: again
+            ? '⚠ The store has fallen far from its recent high again — the shelves are nearly bare.'
+            : '⚠ The store has fallen far from its recent high — the shelves are nearly bare.',
+          F: again
+            ? '⚠ The store keeps slipping from its recent high again — evening after evening, lower.'
+            : '⚠ The store keeps slipping from its recent high — evening after evening, lower.',
+          ESC: '⚠ The store has fallen further still from its recent high.',
+        };
+        if (!st.fired) {
+          const e2 = streak >= 1 && store <= FIRENARR_CLIFF_FRACTION * st.peak;
+          const e1 = streak >= 1 && st.falls >= 2 && store <= FIRENARR_E1_FRACTION * st.peak;
+          const f = st.falls >= 3 && store <= FIRENARR_FALLBACK_FRACTION * st.peak;
+          // (e**) checked first: on a tie evening (e**) wins, and
+          // E2 (deeper) wins over E1 when both (e**) clauses hold.
+          if (e2) { st.fired = 'E2'; this.say(T.E2); return 'E2'; }
+          if (e1) { st.fired = 'E1'; this.say(T.E1); return 'E1'; }
+          if (f) { st.fired = 'F'; this.say(T.F); return 'F'; }
+          return null;
+        }
+        // One escalation per stretch, on a LATER evening than the
+        // first firing, when the store reaches the cliff band
+        // after an E1 or (F) first firing. E2-first stretches
+        // never escalate; repeats are otherwise silent.
+        if (!st.escalation && (st.fired === 'E1' || st.fired === 'F')
+          && store <= FIRENARR_CLIFF_FRACTION * st.peak) {
+          st.escalation = true;
+          this.say(T.ESC);
+          return 'ESC';
+        }
+        return null;
+      } catch (eV) { console.warn('[firenarr] evening', eV); return null; }
+    },
+
     // DEPOSITGATE holdback helper: eases ONE haul deposit at the decision.
     // kind is 'return' (away.return) or 'bighaul' (ambient.bighaul).
     // Returns the held-back kcal (0 when the gate is off or not engaged —
@@ -32524,6 +32622,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try { this.healerRounds(); } catch (e) {}
       this.villageLives();
       this.villageEats();
+      // FIRENARR (sim-firenarr-deploy-b 2026-11-04): firing-evening
+      // narration, spec evidence/2026-11-03/sim-firenarr-b.md §3.
+      // Narration only: this call adds say lines and stretch
+      // bookkeeping, never a gate, price, or gameplay effect.
+      try { this._firenarrEvening(); } catch (eF) { console.warn('[firenarr] evening', eF); }
       // EXTINCTION (journey-crisis r25 2026-10-18): the scattering is not the
       // only death. A village ground to zero living villagers by violence or
       // disease kept simulating a ghost village (observed: a 120-day run with
