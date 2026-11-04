@@ -231,6 +231,13 @@ async function oneInstance(seed) {
   const pbStore = newBfStore();
   const dayPolicy = withBankfood(warmed, pbStore);
   const policy = Object.assign({}, base, {
+    upkeep(Game2, ctx) {
+      // Wire the bankfood wrapper's upkeep (first-upkeep-of-new-day
+      // snapshot) — runDays calls policy.upkeep, NOT dayPolicy.upkeep,
+      // so without this delegation the true-morning snapshot never fires.
+      // BANKFOOD=0 delegates untouched inside the wrapper.
+      return dayPolicy.upkeep ? dayPolicy.upkeep(Game2, ctx) : (base.upkeep ? base.upkeep(Game2, ctx) : undefined);
+    },
     daily(Game2, ctx) {
       callIdx++;
       // MORNING position + wood + adjacent sources: post-sleep,
