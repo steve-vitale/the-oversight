@@ -1,0 +1,84 @@
+seeds: 24 (99933,99934,99935,99936,99937,99938,99939,99940,99941,99942,99943,99944,99945,99946,99947,99948,99949,99950,99951,99952,99953,99954,99955,99956)
+per-seed: 99933:d88/village-lost/w4/cases1/err0 99934:d51/village-lost/w3/cases4/err0 99935:d87/village-lost/w4/cases1/err0 99936:d66/village-lost/w3/cases3/err0 99937:d100/survived/w4/cases3/err0 99938:d91/village-lost/w4/cases1/err0 99939:d100/survived/w4/cases3/err0 99940:d100/survived/w4/cases2/err0 99941:d14/village-lost/w2/cases0/err0 99942:d45/village-lost/w3/cases0/err0 99943:d100/survived/w4/cases4/err0 99944:d61/village-lost/w3/cases4/err0 99945:d100/survived/w4/cases1/err0 99946:d94/village-lost/w4/cases2/err0 99947:d37/village-lost/w3/cases0/err0 99948:d88/village-lost/w4/cases3/err0 99949:d100/survived/w4/cases2/err0 99950:d38/village-lost/w2/cases0/err0 99951:d100/survived/w4/cases4/err0 99952:d100/survived/w3/cases2/err0 99953:d52/village-lost/w4/cases7/err0 99954:d61/village-lost/w3/cases5/err0 99955:d31/village-lost/w3/cases1/err0 99956:d70/village-lost/w4/cases2/err0
+median daysAlive: 88 (sorted: 14,31,37,38,45,51,52,61,61,66,70,87,88,88,91,94,100,100,100,100,100,100,100,100)
+instrument errors total: 0; unclassified cases: 0; hurt-return lines: 40; retro-opened: 0
+fixed-capture: stored-vs-fixed case deltas: 0; stored/fixed line-identity mismatches: 0; ambiguous attributions: 0
+all cases: 55; by purpose: {"water":6,"visit":6,"forage":10,"expedition":20,"leave":12,"traps":1}; by outcome: {"returned-hurt":38,"died":9,"healed-away":8}
+D-open: disconnected 3/20 = 0.150; expedShorter 3/20 = 0.150; median signed gap 0
+D-last: disconnected 3/20 = 0.150; expedShorter 3/20 = 0.150; median signed gap 0
+M1: expedition line mentions hurt 17/17 = 1.000
+M1-all: expedition line mentions hurt over ALL returned-hurt 17/17 = 1.000
+M2: any closing line mentions hurt 17/17 = 1.000
+M3: announced at all 17/17 = 1.000
+
+== DISCONNECTED (LAST-HURT) EXPEDITION CASES (gap >= 2) ==
+s99943 Owen outcome=returned-hurt expedOpen=13 expedLast=13 away=17 gapLast=4 gapOpen=4 legsLast=12 encountersHurt=true hpAtEvent=7 latency=0
+s99948 Carolina outcome=returned-hurt expedOpen=2 expedLast=2 away=16 gapLast=14 gapOpen=14 legsLast=13 encountersHurt=true hpAtEvent=1 latency=1
+s99951 Mateo outcome=returned-hurt expedOpen=2 expedLast=2 away=19 gapLast=17 gapOpen=17 legsLast=8 encountersHurt=true hpAtEvent=5 latency=1
+
+== RETURNED-HURT EXPEDITION CASES + CLOSING LINES ==
+s99937 Earl expedOpen=14 expedLast=14 away=14 gapLast=0 playerAtHaven=true lines=2
+    [exp=false hurt-line=true mentionsHurt=true] 🧭 Earl returns from the wilds hurt (health 6/100) — the trip cut short.
+    [exp=true hurt-line=false mentionsHurt=true] 🧭 Earl is back from far past the north (+1058 kcal for the pantry, strange meat (unknown flesh — test it cautiously), 5 stories, hurt on the way home) (Ask them what they saw.)
+s99937 Earl expedOpen=8 expedLast=8 away=8 gapLast=0 playerAtHaven=true lines=2
+    [exp=false hurt-line=true mentionsHurt=true] 🧭 Earl returns from the wilds hurt (health 6/100) — the trip cut short.
+    [exp=true hurt-line=false mentionsHurt=true] 🧭 Earl is back from far past the north (+2188 kcal for the pantry, 1 story, hurt on the way home) (Ask them what they saw.)
+s99939 Raul expedOpen=12 expedLast=12 away=12 gapLast=0 playerAtHaven=true lines=2
+    [exp=false hurt-line=true mentionsHurt=true] 🧭 Raul returns from the wilds hurt (health 2/100) — the trip cut short.
+    [exp=true hurt-line=false mentionsHurt=true] 🧭 Raul is back from past the west (2 stories, a new scar, hurt on the way home) (Ask them what they saw.)
+s99943 Owen expedOpen=13 expedLast=13 away=17 gapLast=4 playerAtHaven=true lines=2
+    [exp=false hurt-line=true mentionsHurt=true] 🧭 Owen returns from the wilds hurt (health 4/100) — the trip cut short.
+    [exp=true hurt-line=false mentionsHurt=true] 🧭 Owen is back from past the east (+1054 kcal for the pantry, 4 stories, a new scar, hurt on the way home) (Ask them what they saw.)
+s99944 Catalina expedOpen=19 expedLast=19 away=19 gapLast=0 playerAtHaven=true lines=2
+    [exp=false hurt-line=true mentionsHurt=true] 🧭 Catalina returns from the wilds hurt (health 4/100) — the trip cut short.
+    [exp=true hurt-line=false mentionsHurt=true] 🧭 Catalina is back from past the south (strange meat (unknown flesh — test it cautiously), 3 stories, hurt on the way home) (Ask them what they saw.)
+s99945 Mateo expedOpen=14 expedLast=14 away=14 gapLast=0 playerAtHaven=true lines=2
+    [exp=false hurt-line=true mentionsHurt=true] 🧭 Mateo returns from the wilds hurt (health 4/100) — the trip cut short.
+    [exp=true hurt-line=false mentionsHurt=true] 🧭 Mateo is back from past the north (+409 kcal for the pantry, 2 stories, a new scar, hurt on the way home) (Ask them what they saw.)
+s99946 Bill expedOpen=20 expedLast=20 away=20 gapLast=0 playerAtHaven=true lines=2
+    [exp=false hurt-line=true mentionsHurt=true] 🧭 A man, maybe 40s, with a limp returns from the wilds hurt (health 2/100) — the trip cut short.
+    [exp=true hurt-line=false mentionsHurt=true] 🧭 A man, maybe 40s, with a limp is back from far past the west (strange meat (unknown flesh — test it cautiously), 4 stories, a new scar, hurt on the way home) (Ask them what they saw.)
+s99946 Bill expedOpen=20 expedLast=20 away=20 gapLast=0 playerAtHaven=true lines=2
+    [exp=false hurt-line=true mentionsHurt=true] 🧭 Bill returns from the wilds hurt (health 3/100) — the trip cut short.
+    [exp=true hurt-line=false mentionsHurt=true] 🧭 Bill is back from far past the north (+1214 kcal for the pantry, +2250 kcal of meat, 2 stories, a new scar, hurt on the way home) (Ask them what they saw.)
+s99948 Carolina expedOpen=2 expedLast=2 away=16 gapLast=14 playerAtHaven=true lines=2
+    [exp=false hurt-line=true mentionsHurt=true] 🧭 Carolina returns from the wilds hurt (health 1/100) — the trip cut short.
+    [exp=true hurt-line=false mentionsHurt=true] 🧭 Carolina is back from past the south (6 stories, a new scar, hurt on the way home) (Ask them what they saw.)
+s99951 Mateo expedOpen=2 expedLast=2 away=19 gapLast=17 playerAtHaven=true lines=2
+    [exp=false hurt-line=true mentionsHurt=true] 🧭 Mateo returns from the wilds hurt (health 5/100) — the trip cut short.
+    [exp=true hurt-line=false mentionsHurt=true] 🧭 Mateo is back from past the east (+1891 kcal for the pantry, 4 stories, a new scar, hurt on the way home) (Ask them what they saw.)
+s99951 Hannah expedOpen=19 expedLast=19 away=19 gapLast=0 playerAtHaven=true lines=2
+    [exp=false hurt-line=true mentionsHurt=true] 🧭 Hannah returns from the wilds hurt (health 6/100) — the trip cut short.
+    [exp=true hurt-line=false mentionsHurt=true] 🧭 Hannah is back from past the west (+1125 kcal for the pantry, +1400 kcal of meat, 3 stories, hurt on the way home) (Ask them what they saw.)
+s99952 Cheyenne expedOpen=12 expedLast=12 away=12 gapLast=0 playerAtHaven=true lines=2
+    [exp=false hurt-line=true mentionsHurt=true] 🧭 Cheyenne returns from the wilds hurt (health 1/100) — the trip cut short.
+    [exp=true hurt-line=false mentionsHurt=true] 🧭 Cheyenne is back from far past the east (4 stories, a new scar, hurt on the way home) (Ask them what they saw.)
+s99953 Arnold expedOpen=17 expedLast=17 away=17 gapLast=0 playerAtHaven=true lines=2
+    [exp=false hurt-line=true mentionsHurt=true] 🧭 Arnold returns from the wilds hurt (health 5/100) — the trip cut short.
+    [exp=true hurt-line=false mentionsHurt=true] 🧭 Arnold is back from far past the east (+2737 kcal for the pantry, strange meat (unknown flesh — test it cautiously), 4 stories, hurt on the way home) (Ask them what they saw.)
+s99954 Pavel expedOpen=9 expedLast=9 away=9 gapLast=0 playerAtHaven=true lines=2
+    [exp=false hurt-line=true mentionsHurt=true] 🧭 Pavel returns from the wilds hurt (health 6/100) — the trip cut short.
+    [exp=true hurt-line=false mentionsHurt=true] 🧭 Pavel is back from far past the north (3 stories, a new scar, hurt on the way home) (Ask them what they saw.)
+s99954 Marcus expedOpen=8 expedLast=8 away=8 gapLast=0 playerAtHaven=true lines=2
+    [exp=false hurt-line=true mentionsHurt=true] 🧭 Marcus returns from the wilds hurt (health 4/100) — the trip cut short.
+    [exp=true hurt-line=false mentionsHurt=true] 🧭 Marcus is back from past the east (2 stories, a new scar, hurt on the way home) (Ask them what they saw.)
+s99954 Pavel expedOpen=20 expedLast=20 away=20 gapLast=0 playerAtHaven=true lines=2
+    [exp=false hurt-line=true mentionsHurt=true] 🧭 Pavel returns from the wilds hurt (health 2/100) — the trip cut short.
+    [exp=true hurt-line=false mentionsHurt=true] 🧭 Pavel is back from past the north (+2250 kcal of meat, strange meat (unknown flesh — test it cautiously), 6 stories, a new scar, hurt on the way home) (Ask them what they saw.)
+s99954 Pavel expedOpen=19 expedLast=19 away=19 gapLast=0 playerAtHaven=true lines=2
+    [exp=false hurt-line=true mentionsHurt=true] 🧭 Pavel returns from the wilds hurt (health 5/100) — the trip cut short.
+    [exp=true hurt-line=false mentionsHurt=true] 🧭 Pavel is back from far past the north (+4699 kcal for the pantry, +4000 kcal of meat, 4 stories, a new scar, hurt on the way home) (Ask them what they saw.)
+
+== WALK-OUT (leave) CASES, SEPARATE POPULATION ==
+s99940 Samat outcome=healed-away away=999 hpAtEvent=7
+s99940 Valeria outcome=healed-away away=999 hpAtEvent=6
+s99943 Omar outcome=died away=999 hpAtEvent=6
+s99944 Anatoly outcome=died away=999 hpAtEvent=6
+s99948 Aria outcome=died away=999 hpAtEvent=2
+s99951 Mason outcome=died away=999 hpAtEvent=4
+s99953 Elena outcome=healed-away away=999 hpAtEvent=3
+s99953 Elena outcome=healed-away away=999 hpAtEvent=7
+s99953 Elena outcome=healed-away away=999 hpAtEvent=7
+s99953 Elena outcome=died away=999 hpAtEvent=5
+s99954 Daniyar outcome=died away=999 hpAtEvent=4
+s99955 Nino outcome=died away=999 hpAtEvent=6
