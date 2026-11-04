@@ -1,0 +1,26 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=1)
+=== seed 85203 day 90 — conversation with Daljit (visjoin_84) ===
+occupation=Rancher temperament=gentle trust=30 dead=false
+want: seek_comfort (stage 0)
+open thread: grief fromSeed=false
+picker: subject-first
+
+THEM: "If I may — Have you — sorry. I keep thinking about them."
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Daljit shows you where they go to think. "Don't tell the others. Everyone needs one place."
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "You're kind. Don't let this place change that."
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "I dreamed Nathan was still here. Woke up angry at the dream. Stupid."
+YOU: [dlg:more] "I’m listening."
+THEM: "I wake before anyone else. It doesn't bring anyone back. It just keeps my hands from shaking."
+YOU: [dlg:react] (listen)
+THEM: "We bury, we grieve, we keep going. There's no step four."
+YOU: [dlg:more] "I’m listening."
+THEM: "I'm picking up Nathan's share of the work. Someone should, and it might as well be me."
+YOU: [teach] "Here — let me show you."
+THEM: "Go on, then. I'll be thinking good thoughts at you."
+YOU: (leave)
+pre-close: want seek_comfort stage 2 thread lately
+(gossip picks this sitting: 0)
