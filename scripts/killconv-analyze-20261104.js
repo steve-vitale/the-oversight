@@ -276,8 +276,8 @@ for (const k of killDetails) {
     console.log([k.seed, k.channel.toUpperCase(), 'd' + k.kill.day, k.kill.mid, 'by ' + k.kill.by, 'via ' + k.kill.via,
       'r' + k.ff.rounds, 'pty' + k.ff.partySize, 'mDealt' + k.ff.mDealt, 'vTaken' + k.ff.vTaken,
       'ally' + k.ff.allyDealt, 'vHpLeft' + k.ff.vHpLeft, 'mHpLeft' + k.ff.mHpLeft,
-      'mHpStart:' + k.ff.mHpStart,
-      'wpn:' + k.ff.weapon].join(' '));
+      'mHpStart:' + (k.ff.pre ? k.ff.pre.mHpStart : null),
+      'wpn:' + (k.ff.pre && k.ff.pre.gear ? k.ff.pre.gear.weapon : null)].join(' '));
   }
 }
 console.log('=== KILLER TRACES ===');
