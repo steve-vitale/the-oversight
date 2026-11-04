@@ -438,3 +438,52 @@ the ship loop.
   test-approachconf-20261104.js
 - Variant used verbatim (untouched by this arm): scripts/policies/
   competent-approachfall-b.js, scripts/policies/competent.js
+
+---
+
+## CORRECTION — 2026-11-04 (arm sim-approachbranch-a, Loop B run fleshout-20261104T1326Z)
+
+Metric binding (§14): the original text above is left intact. This
+appendix supersedes ONLY the lines it names. The branch split in
+scripts/approachbranch-analyze-20261104.js (proof: scripts/
+test-approachbranch-20261104.js, ALL PASS) re-classifies every old
+APPROACH-STEP turn in this confirm's own 24-file corpus by issuing
+branch (flee vs CLOSE THE DISTANCE vs other, from policy precedence
++ recorded HP/round/target).
+
+OVERTURNED LABELS (confirm corpus, 24 files):
+
+- The confirm's one baseline "approach-loop fight", 99605 seq 2, is
+  NOT an approach loop. Its 14 old approach steps split into flee
+  14, approach 0 (every turn HP below the 35% flee line, target
+  (0,7) = the legacy flee walk to the nearest x-edge). Under the
+  split loop definition (fighter-died + 0 strikes + max true-
+  approach run >= 4) it is a FLEE loop, and true-approach loops in
+  this confirm's corpus number 0, not 1.
+- Baseline old approach steps 18 split into flee 15, approach 3,
+  other 0. Armed old approach steps 6 split into approach 6, other
+  0, flee 0. Corpus totals: old 24 -> flee 15, approach 9, other 0;
+  old loops 1 -> true loops 0.
+- The 99604 seq 5 fight's 4 old steps split into approach 3 (turns
+  18-20, HP 1.00/0.54/0.54, target (3,6)) + flee 1 (turn 21, HP 0.24,
+  target (0,7)). Its fallback-proxy event (3 approach steps, then a
+  zero-tile move to edge tile (0,7)) is therefore, under the split,
+  a flee-branch target change after the fighter dropped below the
+  flee line — consistent with, and strengthening, the proxy-confound
+  warning already in this file's Metric review.
+
+CONSEQUENCE FOR THIS FILE'S VERDICT: the confirm's bar (b)
+("baseline approach-loop fights >= 1: PASS, exactly 1") does NOT
+pass under the corrected taxonomy — the signal fight was a flee
+loop, so the confirm never put a true approach loop in front of
+the armed policy. The confirm's other numbers stand (armed loops
+0 under either taxonomy; cost bar clean as measured), and its
+THIN qualification stands, but the headline must now read: the
+confirm showed 0 loops under the armed policy with no harm on a
+band whose only old-class loop was a flee loop — it did not test
+the fallback against a true approach loop at all. The live
+fallback firing remains unproven, as sim-approachfire-b already
+concluded for the 99605 geometry. This correction aligns this
+file with sim-approachfire-b.md, which had already classified
+99605 seq 2 as a flee loop; the confirm's text predates that
+classification and is superseded on this point only.
