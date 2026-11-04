@@ -1,0 +1,4544 @@
+{
+  "seed": 99105,
+  "run": "fleerepair",
+  "policy": "fleerepair",
+  "anchorCommit": "0018227b2eb7",
+  "days": 82,
+  "gameDays": 82,
+  "endReason": "village-lost",
+  "won": false,
+  "villageLost": true,
+  "maxWave": 4,
+  "spawnsW4": 3,
+  "tbCalls": 3,
+  "fieldCallsW4": 0,
+  "exposures": [
+    {
+      "seq": 1,
+      "type": "tb",
+      "day": 78,
+      "mid": "reunion",
+      "wave": 4,
+      "fightId": "fmgpspin9_f6dj4x",
+      "scholarAtStart": "app_mgpsphm9815",
+      "leadVid": "app_mgpsphm9815",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "app_mgpsphm9815",
+          "hpStart": 100,
+          "maxHp": 100,
+          "gear": {
+            "vid": "app_mgpsphm9815",
+            "armorP": 22,
+            "armed": true,
+            "weapon": "Shard spear",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "reunion",
+          "hpStart": 1358,
+          "maxHp": 1358,
+          "wave": 4,
+          "joinedMidFight": false
+        }
+      ],
+      "leadGear": {
+        "vid": "app_mgpsphm9815",
+        "armorP": 22,
+        "armed": true,
+        "weapon": "Shard spear",
+        "vpFound": true,
+        "readError": null
+      },
+      "scholarStart": {
+        "health": 100,
+        "energy": 80,
+        "food": "UNRECORDED"
+      },
+      "trickKnown": false,
+      "hits": [
+        {
+          "round": 2,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "your own move, returned",
+          "requested": 53,
+          "returned": 33,
+          "hpBefore": 100,
+          "hpAfter": 67,
+          "hpDelta": -33,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "reunion",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 29,
+          "returned": 36,
+          "hpBefore": 1358,
+          "hpAfter": 1322,
+          "hpDelta": -36,
+          "turnSeq": 2,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "reunion's attack",
+          "requested": 64,
+          "returned": 40,
+          "hpBefore": 67,
+          "hpAfter": 27,
+          "hpDelta": -40,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "reunion",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 23,
+          "returned": 29,
+          "hpBefore": 1322,
+          "hpAfter": 1293,
+          "hpDelta": -29,
+          "turnSeq": 3,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "reunion's Your Move",
+          "requested": 67,
+          "returned": 42,
+          "hpBefore": 27,
+          "hpAfter": -15,
+          "hpDelta": -42,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion's turn"
+        },
+        {
+          "kind": "say",
+          "line": "👥 Faces surface on its body — your own stride. It knows \"move\" — it watched you do it 2 times. YOUR MOVE, back at you."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 20."
+        },
+        {
+          "kind": "say",
+          "line": "Your own move, returned hits you for 33."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "say",
+          "line": "(reunion's hide absorbs 12.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the reunion for 36 (Shard spear)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "say",
+          "line": "✨ Now you understand it. The Shard spear: Melee. Bonus +25.."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion's turn"
+        },
+        {
+          "kind": "say",
+          "line": "💥 reunion's attack finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 24."
+        },
+        {
+          "kind": "say",
+          "line": "Reunion's attack hits you for 40."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Your Move — locks onto one target — moving won't dodge it. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "say",
+          "line": "(reunion's hide absorbs 12.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the reunion for 29 (Shard spear)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion's turn"
+        },
+        {
+          "kind": "say",
+          "line": "💥 reunion's Your Move finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 25."
+        },
+        {
+          "kind": "say",
+          "line": "Reunion's Your Move hits you for 42."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Odette Wembo is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Odette Wembo is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Odette kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "\"Odette's gone.\" Ingrid looks at you for a long moment. \"You're not Odette.\" No heat in it. Just fact. You'll have to earn this face."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Wilson blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Mediation (Level 1). Let each side talk without interruption. Repeat back what you heard. People de-escalate when heard."
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Odette Wembo, 78 days. The mantle passes to Wilson Rangel."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Wilson Rangel, 53 — a carpenter. Their hands know different work now: Beast-calm."
+        },
+        {
+          "kind": "say",
+          "line": "The village's quarrel was with Odette — and Odette is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers."
+        },
+        {
+          "kind": "say",
+          "line": "You knew Odette — not the office, the person. The fire keeps expecting her, and so do you. That's a heavier kind of stepping up. (+5 trauma)"
+        },
+        {
+          "kind": "say",
+          "line": "At the grave, Ingrid speaks for Wilson — \"Odette trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew Wilson before the Codex did — their name already carried weight here."
+        }
+      ],
+      "transcriptOverflow": false,
+      "abilityUses": [],
+      "shoutUses": 0,
+      "offerFoodUses": 0,
+      "turns": [
+        {
+          "turnSeq": 1,
+          "round": 2,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 3,
+              "my": 6,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Shard spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "mx": 6,
+                "my": 3,
+                "hp": 1358,
+                "maxHp": 1358,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "dist": 3,
+                "inRange": false
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerMove",
+              "kind": "move",
+              "args": [
+                "5",
+                "4"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 3,
+                  "my": 6,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Shard spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "mx": 6,
+                    "my": 3,
+                    "hp": 1358,
+                    "maxHp": 1358,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "dist": 3,
+                    "inRange": false
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 5,
+                  "my": 4,
+                  "moveLeft": 1,
+                  "acted": false,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Shard spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "mx": 6,
+                    "my": 3,
+                    "hp": 1358,
+                    "maxHp": 1358,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 2,
+          "end": {
+            "player": {
+              "mx": 5,
+              "my": 4,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Shard spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "mx": 6,
+                "my": 3,
+                "hp": 1358,
+                "maxHp": 1358,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": []
+        },
+        {
+          "turnSeq": 2,
+          "round": 3,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 5,
+              "my": 4,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 67,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Shard spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "mx": 6,
+                "my": 3,
+                "hp": 1358,
+                "maxHp": 1358,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 5,
+                  "my": 4,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 67,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Shard spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "mx": 6,
+                    "my": 3,
+                    "hp": 1358,
+                    "maxHp": 1358,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 5,
+                  "my": 4,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 67,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Shard spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "mx": 6,
+                    "my": 3,
+                    "hp": 1322,
+                    "maxHp": 1358,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 7,
+          "end": {
+            "player": {
+              "mx": 5,
+              "my": 4,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 67,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Shard spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "mx": 6,
+                "my": 3,
+                "hp": 1322,
+                "maxHp": 1358,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(reunion's hide absorbs 12.)",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "You STRIKE the reunion for 36 (Shard spear).",
+            "📺 +5 style — solid hit",
+            "✨ Now you understand it. The Shard spear: Melee. Bonus +25.."
+          ]
+        },
+        {
+          "turnSeq": 3,
+          "round": 4,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 5,
+              "my": 4,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 27,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Shard spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "mx": 6,
+                "my": 3,
+                "hp": 1322,
+                "maxHp": 1358,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 5,
+                  "my": 4,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 27,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Shard spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "mx": 6,
+                    "my": 3,
+                    "hp": 1322,
+                    "maxHp": 1358,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 5,
+                  "my": 4,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 27,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Shard spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "mx": 6,
+                    "my": 3,
+                    "hp": 1293,
+                    "maxHp": 1358,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 18,
+          "end": {
+            "player": {
+              "mx": 5,
+              "my": 4,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 27,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Shard spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "mx": 6,
+                "my": 3,
+                "hp": 1293,
+                "maxHp": 1358,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(reunion's hide absorbs 12.)",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "You STRIKE the reunion for 29 (Shard spear).",
+            "📺 +5 style — solid hit"
+          ]
+        }
+      ],
+      "npcTurns": [
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "reunion",
+          "vid": null,
+          "round": 1,
+          "pre": {
+            "pos": {
+              "mx": 6,
+              "my": 3
+            },
+            "hp": 1358,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 6,
+              "my": 3
+            },
+            "hp": 1358,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "reunion",
+          "vid": null,
+          "round": 2,
+          "pre": {
+            "pos": {
+              "mx": 6,
+              "my": 3
+            },
+            "hp": 1358,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 6,
+              "my": 3
+            },
+            "hp": 1358,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 53,
+              "hpDelta": -33,
+              "round": 2
+            }
+          ],
+          "sayLines": [
+            "👥 Faces surface on its body — your own stride. It knows \"move\" — it watched you do it 2 times. YOUR MOVE, back at you.",
+            "Armor absorbs 20.",
+            "Your own move, returned hits you for 33."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "reunion",
+          "vid": null,
+          "round": 3,
+          "pre": {
+            "pos": {
+              "mx": 6,
+              "my": 3
+            },
+            "hp": 1322,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 6,
+              "my": 3
+            },
+            "hp": 1322,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 64,
+              "hpDelta": -40,
+              "round": 3
+            }
+          ],
+          "sayLines": [
+            "💥 reunion's attack finds you — no dodging it.",
+            "Armor absorbs 24.",
+            "Reunion's attack hits you for 40.",
+            "📖 Codex: Your Move — locks onto one target — moving won't dodge it. You won't forget this."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "reunion",
+          "vid": null,
+          "round": 4,
+          "pre": {
+            "pos": {
+              "mx": 6,
+              "my": 3
+            },
+            "hp": 1293,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 6,
+              "my": 3
+            },
+            "hp": 1293,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 67,
+              "hpDelta": -42,
+              "round": 4
+            }
+          ],
+          "sayLines": [
+            "💥 reunion's Your Move finds you — no dodging it.",
+            "Armor absorbs 25.",
+            "Reunion's Your Move hits you for 42.",
+            "You go down.",
+            "OH. Oh no. ...The gamblers are very quiet.",
+            "📖 The Codex turns a page on its own. Odette Wembo is dead. You didn't ask. It knew.",
+            "Nobody's talking much. The fire feels smaller tonight.",
+            "🕯️ Odette Wembo is dead — the wild. The village stops. Somebody screams. Somebody else starts digging.",
+            "What Odette kept close goes into the ground with them — keepsakes are buried, never taken from the body.",
+            "\"Odette's gone.\" Ingrid looks at you for a long moment. \"You're not Odette.\" No heat in it. Just fact. You'll have to earn this face.",
+            "The Codex doesn't pause for grief. Wilson blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+            "📖 LEARNED: Mediation (Level 1). Let each side talk without interruption. Repeat back what you heard. People de-escalate when heard.",
+            "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+            "📖 The Codex turns a page: Odette Wembo, 78 days. The mantle passes to Wilson Rangel.",
+            "🪞 You wake up somebody else. Wilson Rangel, 53 — a carpenter. Their hands know different work now: Beast-calm.",
+            "The village's quarrel was with Odette — and Odette is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers.",
+            "You knew Odette — not the office, the person. The fire keeps expecting her, and so do you. That's a heavier kind of stepping up. (+5 trauma)",
+            "At the grave, Ingrid speaks for Wilson — \"Odette trusted them. We saw it. Give them the fire's hearing.\" The village listens.",
+            "The fire knew Wilson before the Codex did — their name already carried weight here."
+          ],
+          "threw": null
+        }
+      ],
+      "end": {
+        "result": "lost",
+        "day": 78,
+        "round": 4,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "reunion",
+            "alive": true,
+            "fled": false,
+            "hp": 1293,
+            "maxHp": 1358
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "app_mgpsphm9815",
+            "alive": false,
+            "fled": false,
+            "hp": -15,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "app_mgpsphm9815"
+        ],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 2,
+      "type": "tb",
+      "day": 79,
+      "mid": "reunion",
+      "wave": 4,
+      "fightId": "fmgpspio2_ca9smh",
+      "scholarAtStart": "ingrid_vik",
+      "leadVid": "ingrid_vik",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "ingrid_vik",
+          "hpStart": 100,
+          "maxHp": 100,
+          "gear": {
+            "vid": "ingrid_vik",
+            "armorP": 8,
+            "armed": true,
+            "weapon": null,
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "reunion",
+          "hpStart": 1200,
+          "maxHp": 1200,
+          "wave": 4,
+          "joinedMidFight": false
+        }
+      ],
+      "leadGear": {
+        "vid": "ingrid_vik",
+        "armorP": 8,
+        "armed": true,
+        "weapon": null,
+        "vpFound": true,
+        "readError": null
+      },
+      "scholarStart": {
+        "health": 100,
+        "energy": 90,
+        "food": "UNRECORDED"
+      },
+      "trickKnown": false,
+      "hits": [
+        {
+          "round": 1,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "reunion",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 5,
+          "returned": 6,
+          "hpBefore": 1200,
+          "hpAfter": 1194,
+          "hpDelta": -6,
+          "turnSeq": null,
+          "actorKey": null,
+          "actorKind": null,
+          "phase": "between-turns",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "reunion",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 2,
+          "returned": 3,
+          "hpBefore": 1194,
+          "hpAfter": 1191,
+          "hpDelta": -3,
+          "turnSeq": 4,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 2,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "your own move, returned",
+          "requested": 62,
+          "returned": 51,
+          "hpBefore": 100,
+          "hpAfter": 49,
+          "hpDelta": -51,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "reunion",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 2,
+          "returned": 3,
+          "hpBefore": 1191,
+          "hpAfter": 1188,
+          "hpDelta": -3,
+          "turnSeq": 5,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "reunion",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 1,
+          "returned": 1,
+          "hpBefore": 1188,
+          "hpAfter": 1187,
+          "hpDelta": -1,
+          "turnSeq": 6,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "reunion's Your Move",
+          "requested": 67,
+          "returned": 55,
+          "hpBefore": 49,
+          "hpAfter": -6,
+          "hpDelta": -55,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "— NIGHT — Camp. Rest — or risk the dark."
+        },
+        {
+          "kind": "say",
+          "line": "No watches tonight. Everyone sleeps with one ear open and pretends not to."
+        },
+        {
+          "kind": "say",
+          "line": "You wake with a start — something is wrong."
+        },
+        {
+          "kind": "say",
+          "line": "AMBUSH: first blood. ×1.5."
+        },
+        {
+          "kind": "say",
+          "line": "(reunion's hide absorbs 12.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the reunion for 6."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "say",
+          "line": "(reunion's hide absorbs 12.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the reunion for 3."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion's turn"
+        },
+        {
+          "kind": "say",
+          "line": "👥 Faces surface on its body — your own snarl. It knows \"strike\" — it watched you do it 2 times. YOUR MOVE, back at you."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 11."
+        },
+        {
+          "kind": "say",
+          "line": "Your own move, returned hits you for 51."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "say",
+          "line": "(reunion's hide absorbs 12.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the reunion for 3."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "say",
+          "line": "(reunion's hide absorbs 11.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the reunion for 1."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion's turn"
+        },
+        {
+          "kind": "say",
+          "line": "💥 reunion's Your Move finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 12."
+        },
+        {
+          "kind": "say",
+          "line": "Reunion's Your Move hits you for 55."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Ingrid Vik is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Ingrid Vik is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Ingrid kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Ursula blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Grave Robber (Level 1). You can loot the dead (villagers, monsters). Good gear. -15 trust if seen."
+        },
+        {
+          "kind": "say",
+          "line": "The warm hum behind your ribs is gone. The reactor went with Ingrid's body — it does not come out, and it does not pass on. Hunger is back on the table. (One reactor per world, and the world already spent its one.)"
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "sysSay",
+          "line": "◈ LEVEL UP — STRANGE 1. \"We've been counting: 19 brushes with the System. Pick one.\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Ingrid Vik, 79 days. The mantle passes to Ursula Weber."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Ursula Weber, 57 — a Mortician. Her hands know different work now: Beast-calm."
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew Ursula — solid ground, earned at this fire."
+        }
+      ],
+      "transcriptOverflow": false,
+      "abilityUses": [],
+      "shoutUses": 0,
+      "offerFoodUses": 0,
+      "turns": [
+        {
+          "turnSeq": 4,
+          "round": 2,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 0,
+              "my": 4,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "your hands",
+              "unarmed": true
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "mx": 0,
+                "my": 5,
+                "hp": 1194,
+                "maxHp": 1200,
+                "alive": true,
+                "fled": false,
+                "telegraph": false,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 0,
+                  "my": 4,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "your hands",
+                  "unarmed": true
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "mx": 0,
+                    "my": 5,
+                    "hp": 1194,
+                    "maxHp": 1200,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": false,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 0,
+                  "my": 4,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "your hands",
+                  "unarmed": true
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "mx": 0,
+                    "my": 5,
+                    "hp": 1191,
+                    "maxHp": 1200,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": false,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 11,
+          "end": {
+            "player": {
+              "mx": 0,
+              "my": 4,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "your hands",
+              "unarmed": true
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "mx": 0,
+                "my": 5,
+                "hp": 1191,
+                "maxHp": 1200,
+                "alive": true,
+                "fled": false,
+                "telegraph": false,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(reunion's hide absorbs 12.)",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "You STRIKE the reunion for 3.",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 5,
+          "round": 3,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 0,
+              "my": 4,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 49,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "your hands",
+              "unarmed": true
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "mx": 0,
+                "my": 5,
+                "hp": 1191,
+                "maxHp": 1200,
+                "alive": true,
+                "fled": false,
+                "telegraph": false,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 0,
+                  "my": 4,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 49,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "your hands",
+                  "unarmed": true
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "mx": 0,
+                    "my": 5,
+                    "hp": 1191,
+                    "maxHp": 1200,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": false,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 0,
+                  "my": 4,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 49,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "your hands",
+                  "unarmed": true
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "mx": 0,
+                    "my": 5,
+                    "hp": 1188,
+                    "maxHp": 1200,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": false,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 20,
+          "end": {
+            "player": {
+              "mx": 0,
+              "my": 4,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 49,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "your hands",
+              "unarmed": true
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "mx": 0,
+                "my": 5,
+                "hp": 1188,
+                "maxHp": 1200,
+                "alive": true,
+                "fled": false,
+                "telegraph": false,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(reunion's hide absorbs 12.)",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "You STRIKE the reunion for 3.",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 6,
+          "round": 4,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 0,
+              "my": 4,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 49,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "your hands",
+              "unarmed": true
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "mx": 0,
+                "my": 5,
+                "hp": 1188,
+                "maxHp": 1200,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 0,
+                  "my": 4,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 49,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "your hands",
+                  "unarmed": true
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "mx": 0,
+                    "my": 5,
+                    "hp": 1188,
+                    "maxHp": 1200,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 0,
+                  "my": 4,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 49,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "your hands",
+                  "unarmed": true
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "mx": 0,
+                    "my": 5,
+                    "hp": 1187,
+                    "maxHp": 1200,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 26,
+          "end": {
+            "player": {
+              "mx": 0,
+              "my": 4,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 49,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "your hands",
+              "unarmed": true
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "mx": 0,
+                "my": 5,
+                "hp": 1187,
+                "maxHp": 1200,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(reunion's hide absorbs 11.)",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "You STRIKE the reunion for 1.",
+            "📺 +5 style — solid hit"
+          ]
+        }
+      ],
+      "npcTurns": [
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "reunion",
+          "vid": null,
+          "round": 1,
+          "pre": {
+            "pos": {
+              "mx": 0,
+              "my": 5
+            },
+            "hp": 1194,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 0,
+              "my": 5
+            },
+            "hp": 1194,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [
+            "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)"
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "reunion",
+          "vid": null,
+          "round": 2,
+          "pre": {
+            "pos": {
+              "mx": 0,
+              "my": 5
+            },
+            "hp": 1191,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 0,
+              "my": 5
+            },
+            "hp": 1191,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 62,
+              "hpDelta": -51,
+              "round": 2
+            }
+          ],
+          "sayLines": [
+            "👥 Faces surface on its body — your own snarl. It knows \"strike\" — it watched you do it 2 times. YOUR MOVE, back at you.",
+            "Armor absorbs 11.",
+            "Your own move, returned hits you for 51."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "reunion",
+          "vid": null,
+          "round": 3,
+          "pre": {
+            "pos": {
+              "mx": 0,
+              "my": 5
+            },
+            "hp": 1188,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 0,
+              "my": 5
+            },
+            "hp": 1188,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "reunion",
+          "vid": null,
+          "round": 4,
+          "pre": {
+            "pos": {
+              "mx": 0,
+              "my": 5
+            },
+            "hp": 1187,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 0,
+              "my": 5
+            },
+            "hp": 1187,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 67,
+              "hpDelta": -55,
+              "round": 4
+            }
+          ],
+          "sayLines": [
+            "💥 reunion's Your Move finds you — no dodging it.",
+            "Armor absorbs 12.",
+            "Reunion's Your Move hits you for 55.",
+            "You go down.",
+            "OH. Oh no. ...The gamblers are very quiet.",
+            "📖 The Codex turns a page on its own. Ingrid Vik is dead. You didn't ask. It knew.",
+            "Nobody's talking much. The fire feels smaller tonight.",
+            "🕯️ Ingrid Vik is dead — the wild. The village stops. Somebody screams. Somebody else starts digging.",
+            "What Ingrid kept close goes into the ground with them — keepsakes are buried, never taken from the body.",
+            "The Codex doesn't pause for grief. Ursula blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+            "📖 LEARNED: Grave Robber (Level 1). You can loot the dead (villagers, monsters). Good gear. -15 trust if seen.",
+            "The warm hum behind your ribs is gone. The reactor went with Ingrid's body — it does not come out, and it does not pass on. Hunger is back on the table. (One reactor per world, and the world already spent its one.)",
+            "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+            "◈ LEVEL UP — STRANGE 1. \"We've been counting: 19 brushes with the System. Pick one.\"",
+            "📖 The Codex turns a page: Ingrid Vik, 79 days. The mantle passes to Ursula Weber.",
+            "🪞 You wake up somebody else. Ursula Weber, 57 — a Mortician. Her hands know different work now: Beast-calm.",
+            "The fire knew Ursula — solid ground, earned at this fire."
+          ],
+          "threw": null
+        }
+      ],
+      "end": {
+        "result": "lost",
+        "day": 79,
+        "round": 4,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "reunion",
+            "alive": true,
+            "fled": false,
+            "hp": 1187,
+            "maxHp": 1200
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "ingrid_vik",
+            "alive": false,
+            "fled": false,
+            "hp": -6,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "ingrid_vik"
+        ],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 3,
+      "type": "tb",
+      "day": 79,
+      "mid": "reunion",
+      "wave": 4,
+      "fightId": "fmgpspioc_l6fcz",
+      "scholarAtStart": "ursula_weber",
+      "leadVid": "ursula_weber",
+      "partySizeStart": 2,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "ursula_weber",
+          "hpStart": 100,
+          "maxHp": 100,
+          "gear": {
+            "vid": "ursula_weber",
+            "armorP": 9,
+            "armed": true,
+            "weapon": "Machete",
+            "vpFound": true,
+            "readError": null
+          }
+        },
+        {
+          "key": "v_lucas_brown",
+          "kind": "villager",
+          "vid": "lucas_brown",
+          "hpStart": 81,
+          "maxHp": 100,
+          "gear": {
+            "vid": "lucas_brown",
+            "armorP": 19,
+            "armed": true,
+            "weapon": "Sling",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "reunion",
+          "hpStart": 1187,
+          "maxHp": 1200,
+          "wave": 4,
+          "joinedMidFight": false
+        },
+        {
+          "key": "m_1",
+          "mid": "reunion",
+          "hpStart": 1307,
+          "maxHp": 1307,
+          "wave": 4,
+          "joinedMidFight": false
+        }
+      ],
+      "leadGear": {
+        "vid": "ursula_weber",
+        "armorP": 9,
+        "armed": true,
+        "weapon": "Machete",
+        "vpFound": true,
+        "readError": null
+      },
+      "scholarStart": {
+        "health": 100,
+        "energy": 100,
+        "food": "UNRECORDED"
+      },
+      "trickKnown": false,
+      "hits": [
+        {
+          "round": 1,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "reunion",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 62,
+          "returned": 62,
+          "hpBefore": 1187,
+          "hpAfter": 1125,
+          "hpDelta": -62,
+          "turnSeq": null,
+          "actorKey": null,
+          "actorKind": null,
+          "phase": "between-turns",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "reunion",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 38,
+          "returned": 38,
+          "hpBefore": 1125,
+          "hpAfter": 1087,
+          "hpDelta": -38,
+          "turnSeq": 7,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 2,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "your own move, returned",
+          "requested": 54,
+          "returned": 46,
+          "hpBefore": 100,
+          "hpAfter": 54,
+          "hpDelta": -46,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 2,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_1",
+          "sourceLabel": "your own move, returned",
+          "requested": 62,
+          "returned": 53,
+          "hpBefore": 54,
+          "hpAfter": 1,
+          "hpDelta": -53,
+          "turnSeq": null,
+          "actorKey": "m_1",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "reunion",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 38,
+          "returned": 38,
+          "hpBefore": 1087,
+          "hpAfter": 1049,
+          "hpDelta": -38,
+          "turnSeq": 8,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "reunion",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 38,
+          "returned": 38,
+          "hpBefore": 1049,
+          "hpAfter": 1011,
+          "hpDelta": -38,
+          "turnSeq": 9,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "reunion 1's Your Move",
+          "requested": 78,
+          "returned": 66,
+          "hpBefore": 1,
+          "hpAfter": -65,
+          "hpDelta": -66,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "🍂 Ursula gathers deadfall — 2 sticks + 1 fiber. The pile grows. (7 sticks now.)"
+        },
+        {
+          "kind": "say",
+          "line": "Lucas is feeding the fire one stick at a time, watching the flame take."
+        },
+        {
+          "kind": "say",
+          "line": "📯 ALL CLEAR — the treeline is quiet. The hall door unbars; the village breathes out and goes back to work."
+        },
+        {
+          "kind": "say",
+          "line": "🌙 Night. The lingering The Loud Beast gorges at the treeline — 250 kcal gone from the stores. Endure it (they drift off within ~6 nights — the gorge is the price), or send a sortie: fighters, rations, real risk."
+        },
+        {
+          "kind": "say",
+          "line": "That night, they bring Odette home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours."
+        },
+        {
+          "kind": "say",
+          "line": "That night, they bring Wilson home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours."
+        },
+        {
+          "kind": "say",
+          "line": "⚠ WARNING: reserves critical. Eat tomorrow or the spiral begins."
+        },
+        {
+          "kind": "say",
+          "line": "No food in the pantry. The village is hungry. You still get your 1L water."
+        },
+        {
+          "kind": "say",
+          "line": "Ursula is showing everyone Mugwort by the fire. \"See the leaves? Like that. Don't mix it up.\" The Codex grows — the human way."
+        },
+        {
+          "kind": "say",
+          "line": "— DAY 80 DAWN — The world wakes. Animals are active."
+        },
+        {
+          "kind": "say",
+          "line": "🎁 You find a small bundle tucked where you'll find it. No one saw it left there."
+        },
+        {
+          "kind": "say",
+          "line": "\"They're sending Vex after you tomorrow. He's bored. Be somewhere else.\""
+        },
+        {
+          "kind": "say",
+          "line": "(210 kcal of dried meat and clean water. Nothing traceable.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "\"Betting pools favor you 3-to-1 now. The smart money says you're learning faster than the monsters.\""
+        },
+        {
+          "kind": "say",
+          "line": "Your stomach is a fist. Eat — anything real, now."
+        },
+        {
+          "kind": "say",
+          "line": "AMBUSH: first blood. ×1.5."
+        },
+        {
+          "kind": "say",
+          "line": "(reunion 1's hide absorbs 12.)"
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the reunion 1 for 62 (Machete)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Lucas's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion 1's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion 2's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "say",
+          "line": "(reunion 1's hide absorbs 12.)"
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the reunion 1 for 38 (Machete)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Lucas's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion 1's turn"
+        },
+        {
+          "kind": "say",
+          "line": "👥 Faces surface on its body — your own snarl. It knows \"strike\" — it watched you do it 2 times. YOUR MOVE, back at you."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 12."
+        },
+        {
+          "kind": "say",
+          "line": "Lucas gasps. \"You're hit — move!\""
+        },
+        {
+          "kind": "say",
+          "line": "Your own move, returned hits you for 46."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion 2's turn"
+        },
+        {
+          "kind": "say",
+          "line": "👥 Faces surface on its body — your own snarl. It knows \"strike\" — it watched you do it 2 times. YOUR MOVE, back at you."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 13."
+        },
+        {
+          "kind": "say",
+          "line": "Your own move, returned hits you for 53."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "say",
+          "line": "(reunion 1's hide absorbs 12.)"
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the reunion 1 for 38 (Machete)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Lucas's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion 1's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion 2's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "say",
+          "line": "(reunion 1's hide absorbs 12.)"
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the reunion 1 for 38 (Machete)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Lucas's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion 1's turn"
+        },
+        {
+          "kind": "say",
+          "line": "💥 reunion 1's Your Move finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 16."
+        },
+        {
+          "kind": "say",
+          "line": "Reunion 1's Your Move hits you for 66."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Ursula Weber is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Ursula Weber is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Ursula kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Lucas blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Ursula Weber, 80 days. The mantle passes to Lucas Brown."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Lucas Brown, 44 — a Police officer. His hands know different work now: Green Whisper."
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew Lucas — solid ground, earned at this fire."
+        }
+      ],
+      "transcriptOverflow": false,
+      "abilityUses": [],
+      "shoutUses": 0,
+      "offerFoodUses": 0,
+      "turns": [
+        {
+          "turnSeq": 7,
+          "round": 2,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 4,
+              "my": 4,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Machete",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "mx": 5,
+                "my": 3,
+                "hp": 1125,
+                "maxHp": 1200,
+                "alive": true,
+                "fled": false,
+                "telegraph": false,
+                "telegraphCells": null
+              },
+              {
+                "key": "m_1",
+                "mid": "reunion",
+                "mx": 2,
+                "my": 2,
+                "hp": 1307,
+                "maxHp": 1307,
+                "alive": true,
+                "fled": false,
+                "telegraph": false,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "dist": 1,
+                "inRange": true
+              },
+              {
+                "key": "m_1",
+                "mid": "reunion",
+                "dist": 2,
+                "inRange": false
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 4,
+                  "my": 4,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Machete",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "mx": 5,
+                    "my": 3,
+                    "hp": 1125,
+                    "maxHp": 1200,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": false,
+                    "telegraphCells": null
+                  },
+                  {
+                    "key": "m_1",
+                    "mid": "reunion",
+                    "mx": 2,
+                    "my": 2,
+                    "hp": 1307,
+                    "maxHp": 1307,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": false,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "dist": 1,
+                    "inRange": true
+                  },
+                  {
+                    "key": "m_1",
+                    "mid": "reunion",
+                    "dist": 2,
+                    "inRange": false
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 4,
+                  "my": 4,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Machete",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "mx": 5,
+                    "my": 3,
+                    "hp": 1087,
+                    "maxHp": 1200,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": false,
+                    "telegraphCells": null
+                  },
+                  {
+                    "key": "m_1",
+                    "mid": "reunion",
+                    "mx": 2,
+                    "my": 2,
+                    "hp": 1307,
+                    "maxHp": 1307,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": false,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "dist": 1,
+                    "inRange": true
+                  },
+                  {
+                    "key": "m_1",
+                    "mid": "reunion",
+                    "dist": 2,
+                    "inRange": false
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 25,
+          "end": {
+            "player": {
+              "mx": 4,
+              "my": 4,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Machete",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "mx": 5,
+                "my": 3,
+                "hp": 1087,
+                "maxHp": 1200,
+                "alive": true,
+                "fled": false,
+                "telegraph": false,
+                "telegraphCells": null
+              },
+              {
+                "key": "m_1",
+                "mid": "reunion",
+                "mx": 2,
+                "my": 2,
+                "hp": 1307,
+                "maxHp": 1307,
+                "alive": true,
+                "fled": false,
+                "telegraph": false,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "dist": 1,
+                "inRange": true
+              },
+              {
+                "key": "m_1",
+                "mid": "reunion",
+                "dist": 2,
+                "inRange": false
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(reunion 1's hide absorbs 12.)",
+            "You STRIKE the reunion 1 for 38 (Machete).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 8,
+          "round": 3,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 4,
+              "my": 4,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 1,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Machete",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "mx": 5,
+                "my": 3,
+                "hp": 1087,
+                "maxHp": 1200,
+                "alive": true,
+                "fled": false,
+                "telegraph": false,
+                "telegraphCells": null
+              },
+              {
+                "key": "m_1",
+                "mid": "reunion",
+                "mx": 2,
+                "my": 2,
+                "hp": 1307,
+                "maxHp": 1307,
+                "alive": true,
+                "fled": false,
+                "telegraph": false,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "dist": 1,
+                "inRange": true
+              },
+              {
+                "key": "m_1",
+                "mid": "reunion",
+                "dist": 2,
+                "inRange": false
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 4,
+                  "my": 4,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 1,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Machete",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "mx": 5,
+                    "my": 3,
+                    "hp": 1087,
+                    "maxHp": 1200,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": false,
+                    "telegraphCells": null
+                  },
+                  {
+                    "key": "m_1",
+                    "mid": "reunion",
+                    "mx": 2,
+                    "my": 2,
+                    "hp": 1307,
+                    "maxHp": 1307,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": false,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "dist": 1,
+                    "inRange": true
+                  },
+                  {
+                    "key": "m_1",
+                    "mid": "reunion",
+                    "dist": 2,
+                    "inRange": false
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 4,
+                  "my": 4,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 1,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Machete",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "mx": 5,
+                    "my": 3,
+                    "hp": 1049,
+                    "maxHp": 1200,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": false,
+                    "telegraphCells": null
+                  },
+                  {
+                    "key": "m_1",
+                    "mid": "reunion",
+                    "mx": 2,
+                    "my": 2,
+                    "hp": 1307,
+                    "maxHp": 1307,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": false,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "dist": 1,
+                    "inRange": true
+                  },
+                  {
+                    "key": "m_1",
+                    "mid": "reunion",
+                    "dist": 2,
+                    "inRange": false
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 39,
+          "end": {
+            "player": {
+              "mx": 4,
+              "my": 4,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 1,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Machete",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "mx": 5,
+                "my": 3,
+                "hp": 1049,
+                "maxHp": 1200,
+                "alive": true,
+                "fled": false,
+                "telegraph": false,
+                "telegraphCells": null
+              },
+              {
+                "key": "m_1",
+                "mid": "reunion",
+                "mx": 2,
+                "my": 2,
+                "hp": 1307,
+                "maxHp": 1307,
+                "alive": true,
+                "fled": false,
+                "telegraph": false,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "dist": 1,
+                "inRange": true
+              },
+              {
+                "key": "m_1",
+                "mid": "reunion",
+                "dist": 2,
+                "inRange": false
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(reunion 1's hide absorbs 12.)",
+            "You STRIKE the reunion 1 for 38 (Machete).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 9,
+          "round": 4,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 4,
+              "my": 4,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 1,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Machete",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "mx": 5,
+                "my": 3,
+                "hp": 1049,
+                "maxHp": 1200,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              },
+              {
+                "key": "m_1",
+                "mid": "reunion",
+                "mx": 2,
+                "my": 2,
+                "hp": 1307,
+                "maxHp": 1307,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "dist": 1,
+                "inRange": true
+              },
+              {
+                "key": "m_1",
+                "mid": "reunion",
+                "dist": 2,
+                "inRange": false
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 4,
+                  "my": 4,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 1,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Machete",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "mx": 5,
+                    "my": 3,
+                    "hp": 1049,
+                    "maxHp": 1200,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  },
+                  {
+                    "key": "m_1",
+                    "mid": "reunion",
+                    "mx": 2,
+                    "my": 2,
+                    "hp": 1307,
+                    "maxHp": 1307,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "dist": 1,
+                    "inRange": true
+                  },
+                  {
+                    "key": "m_1",
+                    "mid": "reunion",
+                    "dist": 2,
+                    "inRange": false
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 4,
+                  "my": 4,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 1,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Machete",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "mx": 5,
+                    "my": 3,
+                    "hp": 1011,
+                    "maxHp": 1200,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  },
+                  {
+                    "key": "m_1",
+                    "mid": "reunion",
+                    "mx": 2,
+                    "my": 2,
+                    "hp": 1307,
+                    "maxHp": 1307,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "dist": 1,
+                    "inRange": true
+                  },
+                  {
+                    "key": "m_1",
+                    "mid": "reunion",
+                    "dist": 2,
+                    "inRange": false
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 46,
+          "end": {
+            "player": {
+              "mx": 4,
+              "my": 4,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 1,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Machete",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "mx": 5,
+                "my": 3,
+                "hp": 1011,
+                "maxHp": 1200,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              },
+              {
+                "key": "m_1",
+                "mid": "reunion",
+                "mx": 2,
+                "my": 2,
+                "hp": 1307,
+                "maxHp": 1307,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "dist": 1,
+                "inRange": true
+              },
+              {
+                "key": "m_1",
+                "mid": "reunion",
+                "dist": 2,
+                "inRange": false
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(reunion 1's hide absorbs 12.)",
+            "You STRIKE the reunion 1 for 38 (Machete).",
+            "📺 +5 style — solid hit"
+          ]
+        }
+      ],
+      "npcTurns": [
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_lucas_brown",
+          "mid": null,
+          "vid": "lucas_brown",
+          "round": 1,
+          "pre": {
+            "pos": {
+              "mx": 7,
+              "my": 7
+            },
+            "hp": 81,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 7,
+              "my": 7
+            },
+            "hp": 81,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "reunion",
+          "vid": null,
+          "round": 1,
+          "pre": {
+            "pos": {
+              "mx": 5,
+              "my": 3
+            },
+            "hp": 1125,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 5,
+              "my": 3
+            },
+            "hp": 1125,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [
+            "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)"
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_1",
+          "mid": "reunion",
+          "vid": null,
+          "round": 1,
+          "pre": {
+            "pos": {
+              "mx": 2,
+              "my": 2
+            },
+            "hp": 1307,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 2,
+              "my": 2
+            },
+            "hp": 1307,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [
+            "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)"
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_lucas_brown",
+          "mid": null,
+          "vid": "lucas_brown",
+          "round": 2,
+          "pre": {
+            "pos": {
+              "mx": 7,
+              "my": 7
+            },
+            "hp": 81,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 7,
+              "my": 7
+            },
+            "hp": 81,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "reunion",
+          "vid": null,
+          "round": 2,
+          "pre": {
+            "pos": {
+              "mx": 5,
+              "my": 3
+            },
+            "hp": 1087,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 5,
+              "my": 3
+            },
+            "hp": 1087,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 54,
+              "hpDelta": -46,
+              "round": 2
+            }
+          ],
+          "sayLines": [
+            "👥 Faces surface on its body — your own snarl. It knows \"strike\" — it watched you do it 2 times. YOUR MOVE, back at you.",
+            "Armor absorbs 12.",
+            "Lucas gasps. \"You're hit — move!\"",
+            "Your own move, returned hits you for 46."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_1",
+          "mid": "reunion",
+          "vid": null,
+          "round": 2,
+          "pre": {
+            "pos": {
+              "mx": 2,
+              "my": 2
+            },
+            "hp": 1307,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 2,
+              "my": 2
+            },
+            "hp": 1307,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 62,
+              "hpDelta": -53,
+              "round": 2
+            }
+          ],
+          "sayLines": [
+            "👥 Faces surface on its body — your own snarl. It knows \"strike\" — it watched you do it 2 times. YOUR MOVE, back at you.",
+            "Armor absorbs 13.",
+            "Your own move, returned hits you for 53."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_lucas_brown",
+          "mid": null,
+          "vid": "lucas_brown",
+          "round": 3,
+          "pre": {
+            "pos": {
+              "mx": 7,
+              "my": 7
+            },
+            "hp": 81,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 7,
+              "my": 7
+            },
+            "hp": 81,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "reunion",
+          "vid": null,
+          "round": 3,
+          "pre": {
+            "pos": {
+              "mx": 5,
+              "my": 3
+            },
+            "hp": 1049,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 5,
+              "my": 3
+            },
+            "hp": 1049,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_1",
+          "mid": "reunion",
+          "vid": null,
+          "round": 3,
+          "pre": {
+            "pos": {
+              "mx": 2,
+              "my": 2
+            },
+            "hp": 1307,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 2,
+              "my": 2
+            },
+            "hp": 1307,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_lucas_brown",
+          "mid": null,
+          "vid": "lucas_brown",
+          "round": 4,
+          "pre": {
+            "pos": {
+              "mx": 7,
+              "my": 7
+            },
+            "hp": 81,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 7,
+              "my": 7
+            },
+            "hp": 81,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "reunion",
+          "vid": null,
+          "round": 4,
+          "pre": {
+            "pos": {
+              "mx": 5,
+              "my": 3
+            },
+            "hp": 1011,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 5,
+              "my": 3
+            },
+            "hp": 1011,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 78,
+              "hpDelta": -66,
+              "round": 4
+            }
+          ],
+          "sayLines": [
+            "💥 reunion 1's Your Move finds you — no dodging it.",
+            "Armor absorbs 16.",
+            "Reunion 1's Your Move hits you for 66.",
+            "You go down.",
+            "OH. Oh no. ...The gamblers are very quiet.",
+            "📖 The Codex turns a page on its own. Ursula Weber is dead. You didn't ask. It knew.",
+            "Nobody's talking much. The fire feels smaller tonight.",
+            "🕯️ Ursula Weber is dead — the wild. The village stops. Somebody screams. Somebody else starts digging.",
+            "What Ursula kept close goes into the ground with them — keepsakes are buried, never taken from the body.",
+            "The Codex doesn't pause for grief. Lucas blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+            "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+            "📖 The Codex turns a page: Ursula Weber, 80 days. The mantle passes to Lucas Brown.",
+            "🪞 You wake up somebody else. Lucas Brown, 44 — a Police officer. His hands know different work now: Green Whisper.",
+            "The fire knew Lucas — solid ground, earned at this fire."
+          ],
+          "threw": null
+        }
+      ],
+      "end": {
+        "result": "lost",
+        "day": 80,
+        "round": 4,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "reunion",
+            "alive": true,
+            "fled": false,
+            "hp": 1011,
+            "maxHp": 1200
+          },
+          {
+            "key": "m_1",
+            "mid": "reunion",
+            "alive": true,
+            "fled": false,
+            "hp": 1307,
+            "maxHp": 1307
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "ursula_weber",
+            "alive": false,
+            "fled": false,
+            "hp": -65,
+            "maxHp": 100
+          },
+          {
+            "key": "v_lucas_brown",
+            "kind": "villager",
+            "vid": "lucas_brown",
+            "alive": true,
+            "fled": false,
+            "hp": 81,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 2,
+        "humansDead": [
+          "ursula_weber"
+        ],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false
+    }
+  ],
+  "killsW4": 0,
+  "killRows": [],
+  "unlinkedKills": [],
+  "spawns": [
+    {
+      "day": 71,
+      "id": "suburb",
+      "tx": 8,
+      "ty": 0
+    },
+    {
+      "day": 71,
+      "id": "reunion",
+      "tx": 3,
+      "ty": 0
+    },
+    {
+      "day": 81,
+      "id": "reunion",
+      "tx": 2,
+      "ty": 1
+    }
+  ],
+  "orphanTbEnds": [],
+  "wrapCounts": {
+    "spawnWorldMonster": 54,
+    "fieldFight": 60,
+    "recordWaveKill": 39,
+    "startCombat": 21,
+    "tbBeginTurn": 171,
+    "tbAdvance": 166,
+    "tbMonsterTurn": 185,
+    "tbPlayerMove": 26,
+    "tbDamage": 244,
+    "tbPlayerStrike": 113,
+    "tbEnd": 21,
+    "tbVillagerTurn": 83,
+    "useAbility": 34,
+    "tbBarrierExit": 1
+  },
+  "instrumentErrors": [],
+  "notes": [],
+  "deaths": [
+    {
+      "day": 4,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 4,
+      "kind": "monster",
+      "who": "murkcap",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 5,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "speedbump_turtle",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "villager",
+      "who": "gen_433xz3d",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "ducks_in_a_row",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 9,
+      "kind": "villager",
+      "who": "gen_s6o77ws",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 9,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 9,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 9,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 9,
+      "kind": "monster",
+      "who": "gallowdeer",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 11,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "villager",
+      "who": "luis_fernandez",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "monster",
+      "who": "voice_mimic_radio",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 24,
+      "kind": "monster",
+      "who": "rut_king",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 25,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 26,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 29,
+      "kind": "villager",
+      "who": "gen_imdatzd",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 29,
+      "kind": "monster",
+      "who": "mirrormoth",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 30,
+      "kind": "villager",
+      "who": "gen_2crvazv",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 30,
+      "kind": "monster",
+      "who": "gallowdeer",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 31,
+      "kind": "villager",
+      "who": "gen_5yg74m1",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 36,
+      "kind": "monster",
+      "who": "review_drone",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 36,
+      "kind": "monster",
+      "who": "mirrormoth",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 38,
+      "kind": "monster",
+      "who": "sweeps_week",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 40,
+      "kind": "monster",
+      "who": "murkcap",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 43,
+      "kind": "monster",
+      "who": "nightcourt",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 43,
+      "kind": "monster",
+      "who": "voice_mimic_radio",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 43,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 43,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 44,
+      "kind": "villager",
+      "who": "gen_l19g802",
+      "cause": "contest",
+      "player": true
+    },
+    {
+      "day": 47,
+      "kind": "monster",
+      "who": "memory_projector",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 48,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 51,
+      "kind": "villager",
+      "who": "diana_osei",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 52,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 52,
+      "kind": "monster",
+      "who": "memory_projector",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 52,
+      "kind": "monster",
+      "who": "giant_mosquito",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 53,
+      "kind": "villager",
+      "who": "nino_kapanadze",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 53,
+      "kind": "villager",
+      "who": "sanne_bakker",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 60,
+      "kind": "villager",
+      "who": "app_mgpspi1y373",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 63,
+      "kind": "monster",
+      "who": "chorus_line",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 64,
+      "kind": "villager",
+      "who": "tom_baker",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 64,
+      "kind": "monster",
+      "who": "chorus_line",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 64,
+      "kind": "monster",
+      "who": "giant_mosquito",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 64,
+      "kind": "villager",
+      "who": "wanjiru_kamau",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 70,
+      "kind": "villager",
+      "who": "app_mgpsphmx451",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 70,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 71,
+      "kind": "monster",
+      "who": "spool",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 71,
+      "kind": "villager",
+      "who": "henry_zhang",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 71,
+      "kind": "monster",
+      "who": "spool",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 75,
+      "kind": "villager",
+      "who": "app_mgpsphzu172",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 78,
+      "kind": "villager",
+      "who": "app_mgpsphm9815",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 78,
+      "kind": "villager",
+      "who": "app_mgpsphil431",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 79,
+      "kind": "villager",
+      "who": "ingrid_vik",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 80,
+      "kind": "villager",
+      "who": "ursula_weber",
+      "cause": "the wild",
+      "player": true
+    }
+  ],
+  "resultKeys": [
+    "days",
+    "gameDays",
+    "maxWaveUnlocked",
+    "waveKills",
+    "endReason",
+    "stop",
+    "communityExposure",
+    "telemetry",
+    "samples",
+    "learnedPlants",
+    "learnedSkills",
+    "pacing",
+    "ms",
+    "manifest",
+    "policyId",
+    "notes"
+  ]
+}

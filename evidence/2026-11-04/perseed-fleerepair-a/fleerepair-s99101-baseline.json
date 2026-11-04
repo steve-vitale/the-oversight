@@ -1,0 +1,3011 @@
+{
+  "seed": 99101,
+  "run": "baseline",
+  "policy": "competent",
+  "anchorCommit": "0018227b2eb7",
+  "days": 140,
+  "gameDays": 141,
+  "endReason": "survived",
+  "won": false,
+  "villageLost": false,
+  "maxWave": 4,
+  "spawnsW4": 7,
+  "tbCalls": 1,
+  "fieldCallsW4": 0,
+  "exposures": [
+    {
+      "seq": 1,
+      "type": "tb",
+      "day": 134,
+      "mid": "eulogy",
+      "wave": 4,
+      "fightId": "fmgpspiq9_30b05n",
+      "scholarAtStart": "gen_o1uj9aa",
+      "leadVid": "gen_o1uj9aa",
+      "partySizeStart": 3,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "gen_o1uj9aa",
+          "hpStart": 100,
+          "maxHp": 100,
+          "gear": {
+            "vid": "gen_o1uj9aa",
+            "armorP": 35,
+            "armed": true,
+            "weapon": "Phase blade",
+            "vpFound": true,
+            "readError": null
+          }
+        },
+        {
+          "key": "v_app_mgpsphkk753",
+          "kind": "villager",
+          "vid": "app_mgpsphkk753",
+          "hpStart": 88,
+          "maxHp": 100,
+          "gear": {
+            "vid": "app_mgpsphkk753",
+            "armorP": 21,
+            "armed": true,
+            "weapon": "Fire-hardened spear",
+            "vpFound": true,
+            "readError": null
+          }
+        },
+        {
+          "key": "v_aria_thompson",
+          "kind": "villager",
+          "vid": "aria_thompson",
+          "hpStart": 100,
+          "maxHp": 100,
+          "gear": {
+            "vid": "aria_thompson",
+            "armorP": 25,
+            "armed": true,
+            "weapon": "Stone knife",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "eulogy",
+          "hpStart": 440,
+          "maxHp": 900,
+          "wave": 4,
+          "joinedMidFight": false
+        }
+      ],
+      "leadGear": {
+        "vid": "gen_o1uj9aa",
+        "armorP": 35,
+        "armed": true,
+        "weapon": "Phase blade",
+        "vpFound": true,
+        "readError": null
+      },
+      "scholarStart": {
+        "health": 100,
+        "energy": 90,
+        "food": "UNRECORDED"
+      },
+      "trickKnown": false,
+      "hits": [
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_aria_thompson",
+          "sourceLabel": "Aria",
+          "requested": 11,
+          "returned": 14,
+          "hpBefore": 440,
+          "hpAfter": 426,
+          "hpDelta": -14,
+          "turnSeq": null,
+          "actorKey": "v_aria_thompson",
+          "actorKind": "ally",
+          "phase": "npc-turn",
+          "sourceClass": "ally"
+        },
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_app_mgpsphkk753",
+          "sourceLabel": "Samorn",
+          "requested": 4,
+          "returned": 5,
+          "hpBefore": 426,
+          "hpAfter": 421,
+          "hpDelta": -5,
+          "turnSeq": null,
+          "actorKey": "v_app_mgpsphkk753",
+          "actorKind": "ally",
+          "phase": "npc-turn",
+          "sourceClass": "ally"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_aria_thompson",
+          "sourceLabel": "Aria",
+          "requested": 10,
+          "returned": 13,
+          "hpBefore": 421,
+          "hpAfter": 408,
+          "hpDelta": -13,
+          "turnSeq": null,
+          "actorKey": "v_aria_thompson",
+          "actorKind": "ally",
+          "phase": "npc-turn",
+          "sourceClass": "ally"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_app_mgpsphkk753",
+          "sourceLabel": "Samorn",
+          "requested": 5,
+          "returned": 6,
+          "hpBefore": 408,
+          "hpAfter": 402,
+          "hpDelta": -6,
+          "turnSeq": null,
+          "actorKey": "v_app_mgpsphkk753",
+          "actorKind": "ally",
+          "phase": "npc-turn",
+          "sourceClass": "ally"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 69,
+          "returned": 108,
+          "hpBefore": 402,
+          "hpAfter": 294,
+          "hpDelta": -108,
+          "turnSeq": 2,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_aria_thompson",
+          "sourceLabel": "Aria",
+          "requested": 8,
+          "returned": 10,
+          "hpBefore": 294,
+          "hpAfter": 284,
+          "hpDelta": -10,
+          "turnSeq": null,
+          "actorKey": "v_aria_thompson",
+          "actorKind": "ally",
+          "phase": "npc-turn",
+          "sourceClass": "ally"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_app_mgpsphkk753",
+          "sourceLabel": "Samorn",
+          "requested": 4,
+          "returned": 5,
+          "hpBefore": 284,
+          "hpAfter": 279,
+          "hpDelta": -5,
+          "turnSeq": null,
+          "actorKey": "v_app_mgpsphkk753",
+          "actorKind": "ally",
+          "phase": "npc-turn",
+          "sourceClass": "ally"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 76,
+          "returned": 119,
+          "hpBefore": 279,
+          "hpAfter": 160,
+          "hpDelta": -119,
+          "turnSeq": 3,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 5,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_aria_thompson",
+          "sourceLabel": "Aria",
+          "requested": 8,
+          "returned": 8,
+          "hpBefore": 160,
+          "hpAfter": 152,
+          "hpDelta": -8,
+          "turnSeq": null,
+          "actorKey": "v_aria_thompson",
+          "actorKind": "ally",
+          "phase": "npc-turn",
+          "sourceClass": "ally"
+        },
+        {
+          "round": 5,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_app_mgpsphkk753",
+          "sourceLabel": "Samorn",
+          "requested": 5,
+          "returned": 5,
+          "hpBefore": 152,
+          "hpAfter": 147,
+          "hpDelta": -5,
+          "turnSeq": null,
+          "actorKey": "v_app_mgpsphkk753",
+          "actorKind": "ally",
+          "phase": "npc-turn",
+          "sourceClass": "ally"
+        },
+        {
+          "round": 5,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 73,
+          "returned": 91,
+          "hpBefore": 147,
+          "hpAfter": 56,
+          "hpDelta": -91,
+          "turnSeq": 4,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 5,
+          "targetKey": "v_aria_thompson",
+          "targetKind": "villager",
+          "targetVid": "aria_thompson",
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's attack",
+          "requested": 72,
+          "returned": 38,
+          "hpBefore": 100,
+          "hpAfter": 62,
+          "hpDelta": -38,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 6,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_aria_thompson",
+          "sourceLabel": "Aria",
+          "requested": 10,
+          "returned": 10,
+          "hpBefore": 56,
+          "hpAfter": 46,
+          "hpDelta": -10,
+          "turnSeq": null,
+          "actorKey": "v_aria_thompson",
+          "actorKind": "ally",
+          "phase": "npc-turn",
+          "sourceClass": "ally"
+        },
+        {
+          "round": 6,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_app_mgpsphkk753",
+          "sourceLabel": "Samorn",
+          "requested": 8,
+          "returned": 8,
+          "hpBefore": 46,
+          "hpAfter": 38,
+          "hpDelta": -8,
+          "turnSeq": null,
+          "actorKey": "v_app_mgpsphkk753",
+          "actorKind": "ally",
+          "phase": "npc-turn",
+          "sourceClass": "ally"
+        },
+        {
+          "round": 6,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 71,
+          "returned": 89,
+          "hpBefore": 38,
+          "hpAfter": -51,
+          "hpDelta": -89,
+          "turnSeq": 5,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "👥 Aria sets out to find Naran. \"Won't be long.\" Company makes the road shorter."
+        },
+        {
+          "kind": "say",
+          "line": "👥 Samorn walks out with Aria. \"Nobody walks alone today.\" The pantry won't fill itself."
+        },
+        {
+          "kind": "say",
+          "line": "💧 Vasyl returns with water: +2 clean."
+        },
+        {
+          "kind": "say",
+          "line": "— NIGHT — Camp. Rest — or risk the dark."
+        },
+        {
+          "kind": "say",
+          "line": "Night settles. The fire is the whole world now. No watches posted. The dark feels bigger than it should."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "The Eulogy is still frozen from your scream."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Aria's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Aria strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "Aria hits eulogy for 14."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "Samorn's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Samorn strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "Samorn hits eulogy for 5."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "The Eulogy is shaking it off."
+        },
+        {
+          "kind": "say",
+          "line": "Too close. The eulogy's attention SNAPS to you — proximity overrules patience."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they stood their ground, poor brave fools.\" The spotlight widens. (No weight yet — just the story starting.) (5 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Aria's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Aria strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "Aria hits eulogy for 13."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "Samorn's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Samorn strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "Samorn hits eulogy for 6."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 108 (Phase blade)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they ran, and the spotlight followed.\" The spotlight narrows. Your dodge feels watched. (-10% dodge.) (4 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "eulogy's attack swipes at sand-ghosts. Missed. (pocket_sand)"
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Epitaph — locks onto one target — moving won't dodge it. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Aria's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Aria strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "Aria hits eulogy for 10."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "Samorn's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Samorn strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "Samorn hits eulogy for 5."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "💪 Your Strength grows — 7. The work is changing you."
+        },
+        {
+          "kind": "say",
+          "line": "💪 Your Agility grows — 7. The work is changing you."
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 119 (Phase blade)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they bled, politely, where everyone could see.\" The narration lingers on your wounds. (Bleeds last 1 round longer.) (3 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 It connects!"
+        },
+        {
+          "kind": "say",
+          "line": "The Eulogy lashes at sand-ghosts near Aria. Missed. (pocket_sand)"
+        },
+        {
+          "kind": "say",
+          "line": "You're not where it landed. Clean dodge."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +15 style — dodged the the attack!"
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Final Chapter — strikes one target after a windup. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 5!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Aria's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Aria strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "Aria hits eulogy for 8."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "Samorn's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Samorn strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "Samorn hits eulogy for 5."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 91 (Phase blade)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they knelt, and the story approved.\" The story leans in. (The Eulogy's attacks +15.) (2 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 It connects!"
+        },
+        {
+          "kind": "say",
+          "line": "Aria's gear absorbs 34."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's attack hits Aria for 38."
+        },
+        {
+          "kind": "say",
+          "line": "You're not where it landed. Clean dodge."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +15 style — dodged the the attack!"
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Denouement — strikes one target after a windup. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 6!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Aria's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Aria strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "Aria hits eulogy for 10."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "Samorn's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Samorn strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "Samorn hits eulogy for 8."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "The Eulogy falls."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 89 (Phase blade)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +20 style — dropped the Eulogy!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "📡 The fifth draft stays in the wings. It wants a village that can fight — blood your fighters (0 of 2 veterans)."
+        },
+        {
+          "kind": "sysSay",
+          "line": "◈ The Records: An apex thing died by village hands: The Eulogy. The Records hold it up to the light."
+        },
+        {
+          "kind": "say",
+          "line": "Aria nods, slow. \"Remind me not to cross you.\""
+        },
+        {
+          "kind": "sysSay",
+          "line": "WINNER! Style score: 70. The gamblers are ecstatic!"
+        },
+        {
+          "kind": "say",
+          "line": "It is a prestige drama. Do not eat the prestige drama."
+        },
+        {
+          "kind": "say",
+          "line": "Grave robber: its bone knife is on the body. The dead don't need it — but you'll have to take it."
+        },
+        {
+          "kind": "say",
+          "line": "You came back bloody. Nobody asks. Someone saves you the good seat by the fire."
+        }
+      ],
+      "transcriptOverflow": false,
+      "abilityUses": [],
+      "shoutUses": 0,
+      "offerFoodUses": 0,
+      "turns": [
+        {
+          "turnSeq": 1,
+          "round": 2,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 8,
+              "my": 7,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 2,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Phase blade",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 5,
+                "hp": 421,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": false,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 3,
+                "inRange": false
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerMove",
+              "kind": "move",
+              "args": [
+                "6",
+                "5"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 8,
+                  "my": 7,
+                  "moveLeft": 2,
+                  "acted": false,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 2,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Phase blade",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 5,
+                    "my": 5,
+                    "hp": 421,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": false,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 3,
+                    "inRange": false
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 6,
+                  "my": 5,
+                  "moveLeft": 0,
+                  "acted": false,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 2,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Phase blade",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 5,
+                    "my": 5,
+                    "hp": 421,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": false,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 16,
+          "end": {
+            "player": {
+              "mx": 6,
+              "my": 5,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 2,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Phase blade",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 5,
+                "hp": 421,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": false,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": []
+        },
+        {
+          "turnSeq": 2,
+          "round": 3,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 6,
+              "my": 5,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 2,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Phase blade",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 5,
+                "hp": 402,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 6,
+                  "my": 5,
+                  "moveLeft": 2,
+                  "acted": false,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 2,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Phase blade",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 5,
+                    "my": 5,
+                    "hp": 402,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 6,
+                  "my": 5,
+                  "moveLeft": 2,
+                  "acted": true,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 2,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Phase blade",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 5,
+                    "my": 5,
+                    "hp": 294,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 29,
+          "end": {
+            "player": {
+              "mx": 6,
+              "my": 5,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 2,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Phase blade",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 5,
+                "hp": 294,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(eulogy's hide absorbs 8.)",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "You STRIKE the eulogy for 108 (Phase blade).",
+            "📺 +5 style — solid hit",
+            "The narration stumbles — a page flutters loose from the script."
+          ]
+        },
+        {
+          "turnSeq": 3,
+          "round": 4,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 6,
+              "my": 5,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 2,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Phase blade",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 5,
+                "hp": 279,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 6,
+                  "my": 5,
+                  "moveLeft": 2,
+                  "acted": false,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 2,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Phase blade",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 5,
+                    "my": 5,
+                    "hp": 279,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 6,
+                  "my": 5,
+                  "moveLeft": 2,
+                  "acted": true,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 2,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Phase blade",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 5,
+                    "my": 5,
+                    "hp": 160,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 47,
+          "end": {
+            "player": {
+              "mx": 6,
+              "my": 5,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 2,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Phase blade",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 5,
+                "hp": 160,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(eulogy's hide absorbs 8.)",
+            "💪 Your Strength grows — 7. The work is changing you.",
+            "💪 Your Agility grows — 7. The work is changing you.",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "You STRIKE the eulogy for 119 (Phase blade).",
+            "📺 +5 style — solid hit",
+            "The narration stumbles — a page flutters loose from the script."
+          ]
+        },
+        {
+          "turnSeq": 4,
+          "round": 5,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 6,
+              "my": 5,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 2,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Phase blade",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 5,
+                "hp": 147,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 6,
+                  "my": 5,
+                  "moveLeft": 2,
+                  "acted": false,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 2,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Phase blade",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 5,
+                    "my": 5,
+                    "hp": 147,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 6,
+                  "my": 5,
+                  "moveLeft": 2,
+                  "acted": true,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 2,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Phase blade",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 5,
+                    "my": 5,
+                    "hp": 56,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 70,
+          "end": {
+            "player": {
+              "mx": 6,
+              "my": 5,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 2,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Phase blade",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 5,
+                "hp": 56,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(eulogy's hide absorbs 8.)",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "You STRIKE the eulogy for 91 (Phase blade).",
+            "📺 +5 style — solid hit",
+            "The narration stumbles — a page flutters loose from the script."
+          ]
+        },
+        {
+          "turnSeq": 5,
+          "round": 6,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 6,
+              "my": 5,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 2,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Phase blade",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 5,
+                "hp": 38,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 6,
+                  "my": 5,
+                  "moveLeft": 2,
+                  "acted": false,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 2,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Phase blade",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 5,
+                    "my": 5,
+                    "hp": 38,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": null,
+                "weapon": {
+                  "range": 1,
+                  "name": "Phase blade",
+                  "unarmed": false
+                },
+                "monsters": [],
+                "dists": []
+              }
+            }
+          ],
+          "sayMark": 92,
+          "end": {
+            "player": {
+              "mx": 6,
+              "my": 5,
+              "moveLeft": 2,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 2,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Phase blade",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 5,
+                "hp": -51,
+                "maxHp": 900,
+                "alive": false,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": []
+          },
+          "closeReason": "fight-end",
+          "sayLines": [
+            "(eulogy's hide absorbs 8.)",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "The Eulogy falls.",
+            "You STRIKE the eulogy for 89 (Phase blade).",
+            "📺 +5 style — solid hit",
+            "The narration stumbles — a page flutters loose from the script.",
+            "📺 +20 style — dropped the Eulogy!"
+          ]
+        }
+      ],
+      "npcTurns": [
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 1,
+          "pre": {
+            "pos": {
+              "mx": 5,
+              "my": 5
+            },
+            "hp": 440,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 5,
+              "my": 5
+            },
+            "hp": 440,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [
+            "The Eulogy is still frozen from your scream."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_aria_thompson",
+          "mid": null,
+          "vid": "aria_thompson",
+          "round": 2,
+          "pre": {
+            "pos": {
+              "mx": 4,
+              "my": 7
+            },
+            "hp": 100,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 4,
+              "my": 7
+            },
+            "hp": 100,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "m_0",
+              "targetKind": "monster",
+              "targetMid": "eulogy",
+              "sourceClass": "ally",
+              "requested": 11,
+              "hpDelta": -14,
+              "round": 2
+            }
+          ],
+          "sayLines": [
+            "Aria strikes the Eulogy.",
+            "Aria hits eulogy for 14.",
+            "The narration stumbles — a page flutters loose from the script."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_app_mgpsphkk753",
+          "mid": null,
+          "vid": "app_mgpsphkk753",
+          "round": 2,
+          "pre": {
+            "pos": {
+              "mx": 7,
+              "my": 5
+            },
+            "hp": 88,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 7,
+              "my": 5
+            },
+            "hp": 88,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "m_0",
+              "targetKind": "monster",
+              "targetMid": "eulogy",
+              "sourceClass": "ally",
+              "requested": 4,
+              "hpDelta": -5,
+              "round": 2
+            }
+          ],
+          "sayLines": [
+            "Samorn strikes the Eulogy.",
+            "Samorn hits eulogy for 5.",
+            "The narration stumbles — a page flutters loose from the script."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 2,
+          "pre": {
+            "pos": {
+              "mx": 5,
+              "my": 5
+            },
+            "hp": 421,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 5,
+              "my": 5
+            },
+            "hp": 421,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [
+            "The Eulogy is shaking it off.",
+            "Too close. The eulogy's attention SNAPS to you — proximity overrules patience.",
+            "📖 The Eulogy narrates, honestly, always: \"and then they stood their ground, poor brave fools.\" The spotlight widens. (No weight yet — just the story starting.) (5 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_aria_thompson",
+          "mid": null,
+          "vid": "aria_thompson",
+          "round": 3,
+          "pre": {
+            "pos": {
+              "mx": 4,
+              "my": 7
+            },
+            "hp": 100,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 4,
+              "my": 7
+            },
+            "hp": 100,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "m_0",
+              "targetKind": "monster",
+              "targetMid": "eulogy",
+              "sourceClass": "ally",
+              "requested": 10,
+              "hpDelta": -13,
+              "round": 3
+            }
+          ],
+          "sayLines": [
+            "Aria strikes the Eulogy.",
+            "Aria hits eulogy for 13.",
+            "The narration stumbles — a page flutters loose from the script."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_app_mgpsphkk753",
+          "mid": null,
+          "vid": "app_mgpsphkk753",
+          "round": 3,
+          "pre": {
+            "pos": {
+              "mx": 7,
+              "my": 5
+            },
+            "hp": 88,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 7,
+              "my": 5
+            },
+            "hp": 88,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "m_0",
+              "targetKind": "monster",
+              "targetMid": "eulogy",
+              "sourceClass": "ally",
+              "requested": 5,
+              "hpDelta": -6,
+              "round": 3
+            }
+          ],
+          "sayLines": [
+            "Samorn strikes the Eulogy.",
+            "Samorn hits eulogy for 6.",
+            "The narration stumbles — a page flutters loose from the script."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 3,
+          "pre": {
+            "pos": {
+              "mx": 5,
+              "my": 5
+            },
+            "hp": 294,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 5,
+              "my": 5
+            },
+            "hp": 294,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [],
+          "sayLines": [
+            "📖 The Eulogy narrates, honestly, always: \"and then they ran, and the spotlight followed.\" The spotlight narrows. Your dodge feels watched. (-10% dodge.) (4 verses remain. Contradict it — do the opposite — or give it a better ending.)",
+            "eulogy's attack swipes at sand-ghosts. Missed. (pocket_sand)",
+            "📖 Codex: Epitaph — locks onto one target — moving won't dodge it. You won't forget this."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_aria_thompson",
+          "mid": null,
+          "vid": "aria_thompson",
+          "round": 4,
+          "pre": {
+            "pos": {
+              "mx": 4,
+              "my": 7
+            },
+            "hp": 100,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 4,
+              "my": 7
+            },
+            "hp": 100,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "m_0",
+              "targetKind": "monster",
+              "targetMid": "eulogy",
+              "sourceClass": "ally",
+              "requested": 8,
+              "hpDelta": -10,
+              "round": 4
+            }
+          ],
+          "sayLines": [
+            "Aria strikes the Eulogy.",
+            "Aria hits eulogy for 10.",
+            "The narration stumbles — a page flutters loose from the script."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_app_mgpsphkk753",
+          "mid": null,
+          "vid": "app_mgpsphkk753",
+          "round": 4,
+          "pre": {
+            "pos": {
+              "mx": 7,
+              "my": 5
+            },
+            "hp": 88,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 7,
+              "my": 5
+            },
+            "hp": 88,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "m_0",
+              "targetKind": "monster",
+              "targetMid": "eulogy",
+              "sourceClass": "ally",
+              "requested": 4,
+              "hpDelta": -5,
+              "round": 4
+            }
+          ],
+          "sayLines": [
+            "Samorn strikes the Eulogy.",
+            "Samorn hits eulogy for 5.",
+            "The narration stumbles — a page flutters loose from the script."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 4,
+          "pre": {
+            "pos": {
+              "mx": 5,
+              "my": 5
+            },
+            "hp": 160,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "post": {
+            "pos": {
+              "mx": 5,
+              "my": 5
+            },
+            "hp": 160,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [],
+          "sayLines": [
+            "📖 The Eulogy narrates, honestly, always: \"and then they bled, politely, where everyone could see.\" The narration lingers on your wounds. (Bleeds last 1 round longer.) (3 verses remain. Contradict it — do the opposite — or give it a better ending.)",
+            "💥 It connects!",
+            "The Eulogy lashes at sand-ghosts near Aria. Missed. (pocket_sand)",
+            "You're not where it landed. Clean dodge.",
+            "📺 +15 style — dodged the the attack!",
+            "📖 Codex: Final Chapter — strikes one target after a windup. You won't forget this."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_aria_thompson",
+          "mid": null,
+          "vid": "aria_thompson",
+          "round": 5,
+          "pre": {
+            "pos": {
+              "mx": 4,
+              "my": 7
+            },
+            "hp": 100,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 4,
+              "my": 7
+            },
+            "hp": 100,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "m_0",
+              "targetKind": "monster",
+              "targetMid": "eulogy",
+              "sourceClass": "ally",
+              "requested": 8,
+              "hpDelta": -8,
+              "round": 5
+            }
+          ],
+          "sayLines": [
+            "Aria strikes the Eulogy.",
+            "Aria hits eulogy for 8.",
+            "The narration stumbles — a page flutters loose from the script."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_app_mgpsphkk753",
+          "mid": null,
+          "vid": "app_mgpsphkk753",
+          "round": 5,
+          "pre": {
+            "pos": {
+              "mx": 7,
+              "my": 5
+            },
+            "hp": 88,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 7,
+              "my": 5
+            },
+            "hp": 88,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "m_0",
+              "targetKind": "monster",
+              "targetMid": "eulogy",
+              "sourceClass": "ally",
+              "requested": 5,
+              "hpDelta": -5,
+              "round": 5
+            }
+          ],
+          "sayLines": [
+            "Samorn strikes the Eulogy.",
+            "Samorn hits eulogy for 5.",
+            "The narration stumbles — a page flutters loose from the script."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 5,
+          "pre": {
+            "pos": {
+              "mx": 5,
+              "my": 5
+            },
+            "hp": 56,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "post": {
+            "pos": {
+              "mx": 5,
+              "my": 5
+            },
+            "hp": 56,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [
+            {
+              "targetKey": "v_aria_thompson",
+              "targetKind": "villager",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 72,
+              "hpDelta": -38,
+              "round": 5
+            }
+          ],
+          "sayLines": [
+            "📖 The Eulogy narrates, honestly, always: \"and then they knelt, and the story approved.\" The story leans in. (The Eulogy's attacks +15.) (2 verses remain. Contradict it — do the opposite — or give it a better ending.)",
+            "💥 It connects!",
+            "Aria's gear absorbs 34.",
+            "Eulogy's attack hits Aria for 38.",
+            "You're not where it landed. Clean dodge.",
+            "📺 +15 style — dodged the the attack!",
+            "📖 Codex: Denouement — strikes one target after a windup. You won't forget this."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_aria_thompson",
+          "mid": null,
+          "vid": "aria_thompson",
+          "round": 6,
+          "pre": {
+            "pos": {
+              "mx": 4,
+              "my": 7
+            },
+            "hp": 62,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 4,
+              "my": 7
+            },
+            "hp": 62,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "m_0",
+              "targetKind": "monster",
+              "targetMid": "eulogy",
+              "sourceClass": "ally",
+              "requested": 10,
+              "hpDelta": -10,
+              "round": 6
+            }
+          ],
+          "sayLines": [
+            "Aria strikes the Eulogy.",
+            "Aria hits eulogy for 10.",
+            "The narration stumbles — a page flutters loose from the script."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_app_mgpsphkk753",
+          "mid": null,
+          "vid": "app_mgpsphkk753",
+          "round": 6,
+          "pre": {
+            "pos": {
+              "mx": 7,
+              "my": 5
+            },
+            "hp": 88,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 7,
+              "my": 5
+            },
+            "hp": 88,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "m_0",
+              "targetKind": "monster",
+              "targetMid": "eulogy",
+              "sourceClass": "ally",
+              "requested": 8,
+              "hpDelta": -8,
+              "round": 6
+            }
+          ],
+          "sayLines": [
+            "Samorn strikes the Eulogy.",
+            "Samorn hits eulogy for 8.",
+            "The narration stumbles — a page flutters loose from the script."
+          ],
+          "threw": null
+        }
+      ],
+      "end": {
+        "result": "won",
+        "day": 134,
+        "round": 6,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "eulogy",
+            "alive": false,
+            "fled": false,
+            "hp": -51,
+            "maxHp": 900
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "gen_o1uj9aa",
+            "alive": true,
+            "fled": false,
+            "hp": 100,
+            "maxHp": 100
+          },
+          {
+            "key": "v_app_mgpsphkk753",
+            "kind": "villager",
+            "vid": "app_mgpsphkk753",
+            "alive": true,
+            "fled": false,
+            "hp": 88,
+            "maxHp": 100
+          },
+          {
+            "key": "v_aria_thompson",
+            "kind": "villager",
+            "vid": "aria_thompson",
+            "alive": true,
+            "fled": false,
+            "hp": 62,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 1,
+        "monsterTotalW4": 1,
+        "humansDead": [],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [
+        {
+          "day": 134,
+          "fn": "recordWaveKill",
+          "pyrrhic": false,
+          "mid": "eulogy",
+          "wave": 4,
+          "by": "gen_o1uj9aa",
+          "via": "player",
+          "scholarAtKill": "gen_o1uj9aa",
+          "linkSeq": 1,
+          "linkHow": "tb-open"
+        }
+      ],
+      "superseded": false
+    }
+  ],
+  "killsW4": 1,
+  "killRows": [
+    {
+      "day": 134,
+      "fn": "recordWaveKill",
+      "pyrrhic": false,
+      "mid": "eulogy",
+      "wave": 4,
+      "by": "gen_o1uj9aa",
+      "via": "player",
+      "scholarAtKill": "gen_o1uj9aa",
+      "linkSeq": 1,
+      "linkHow": "tb-open"
+    }
+  ],
+  "unlinkedKills": [],
+  "spawns": [
+    {
+      "day": 96,
+      "id": "influencer",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 108,
+      "id": "reunion",
+      "tx": 4,
+      "ty": 5
+    },
+    {
+      "day": 115,
+      "id": "congregation",
+      "tx": 1,
+      "ty": 0
+    },
+    {
+      "day": 121,
+      "id": "reunion",
+      "tx": 5,
+      "ty": 4
+    },
+    {
+      "day": 123,
+      "id": "audit",
+      "tx": 5,
+      "ty": 4
+    },
+    {
+      "day": 125,
+      "id": "influencer",
+      "tx": 1,
+      "ty": 0
+    },
+    {
+      "day": 126,
+      "id": "eulogy",
+      "tx": 4,
+      "ty": 3
+    }
+  ],
+  "orphanTbEnds": [],
+  "wrapCounts": {
+    "spawnWorldMonster": 60,
+    "fieldFight": 128,
+    "recordWaveKill": 58,
+    "useAbility": 85,
+    "startCombat": 16,
+    "tbBeginTurn": 239,
+    "tbAdvance": 228,
+    "tbMonsterTurn": 309,
+    "tbVillagerTurn": 28,
+    "tbDamage": 92,
+    "tbPlayerStrike": 46,
+    "tbEnd": 16,
+    "tbPlayerMove": 160
+  },
+  "instrumentErrors": [],
+  "notes": [],
+  "deaths": [
+    {
+      "day": 4,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 4,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 5,
+      "kind": "monster",
+      "who": "sunbasker",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 5,
+      "kind": "monster",
+      "who": "sunback",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 5,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 7,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 7,
+      "kind": "monster",
+      "who": "nightlight_catfish",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 10,
+      "kind": "monster",
+      "who": "nightcourt",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 10,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 10,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 10,
+      "kind": "monster",
+      "who": "nightlight_catfish",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 13,
+      "kind": "monster",
+      "who": "sunback",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 15,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 15,
+      "kind": "monster",
+      "who": "anaconda_empress",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 16,
+      "kind": "person",
+      "who": "gen_ceypn1u",
+      "cause": "ambush",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "monster",
+      "who": "sunbasker",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "monster",
+      "who": "mirror_stag",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 19,
+      "kind": "monster",
+      "who": "murkcap",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 20,
+      "kind": "monster",
+      "who": "lockpick_raccoon",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 22,
+      "kind": "monster",
+      "who": "sweeps_week",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 22,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 23,
+      "kind": "monster",
+      "who": "lockpick_raccoon",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 25,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 25,
+      "kind": "monster",
+      "who": "understudy",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 25,
+      "kind": "villager",
+      "who": "gen_ca2ijvi",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 25,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 27,
+      "kind": "villager",
+      "who": "gen_cqgh878",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 30,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 31,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 31,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 31,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 32,
+      "kind": "villager",
+      "who": "gen_xfqo4bd",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 32,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 33,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 48,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 52,
+      "kind": "villager",
+      "who": "lucas_brown",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 57,
+      "kind": "monster",
+      "who": "lockpick_raccoon",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 63,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 64,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 64,
+      "kind": "monster",
+      "who": "voice_mimic_radio",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 64,
+      "kind": "monster",
+      "who": "buffering",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 64,
+      "kind": "monster",
+      "who": "callback",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 73,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 74,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 79,
+      "kind": "monster",
+      "who": "voice_mimic_radio",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 82,
+      "kind": "monster",
+      "who": "spool",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 90,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 92,
+      "kind": "villager",
+      "who": "diana_osei",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 92,
+      "kind": "monster",
+      "who": "callback",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 118,
+      "kind": "monster",
+      "who": "sunback",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 120,
+      "kind": "monster",
+      "who": "lockpick_raccoon",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 134,
+      "kind": "monster",
+      "who": "spool",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 134,
+      "kind": "monster",
+      "who": "eulogy",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 135,
+      "kind": "villager",
+      "who": "gen_o1uj9aa",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 136,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 139,
+      "kind": "villager",
+      "who": "aria_thompson",
+      "cause": "the night",
+      "player": true
+    }
+  ],
+  "resultKeys": [
+    "days",
+    "gameDays",
+    "maxWaveUnlocked",
+    "waveKills",
+    "endReason",
+    "stop",
+    "communityExposure",
+    "telemetry",
+    "samples",
+    "learnedPlants",
+    "learnedSkills",
+    "pacing",
+    "ms",
+    "manifest",
+    "policyId",
+    "notes"
+  ]
+}
