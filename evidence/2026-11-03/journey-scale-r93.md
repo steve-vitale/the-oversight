@@ -250,5 +250,26 @@ seed 85203: fusionInstallDay=null fusionPelletDay=null fusionFlips=0 feastGrants
 seed 85204: fusionInstallDay=15 fusionPelletDay=15 fusionFlips=2 feastGrants=6 feastRefReactor=2 feastRefDevotion=0 villagerDays=368 knowerDays=167 armed(stick-only=0 real=146 both=21 srcEq=0 srcPack=0 srcBoth=167) weaponless=0 weaponlessKnower=0 eligibleDays=0 attempts(Cd)=0 unexplained=0 stickBlocked=0 wcLines=3 deadfallDuty=21 tendRefusals=0 tendPeerLines=0 censusTendPeer=0 censusTended=0 captureDiff=null gossipPicks=0 gossipThem=0 sittings=0
 
 ## Closeout
-(to be completed at merge: safe-commit files, merge result, release
-verification, rotation write, lock deletion, heartbeat-loop verification)
+- Safe-commit: f031f5823 (80 files) on base d86c1854a; post-commit
+  index clobber (all 80 files staged-as-deleted, the known
+  safe-commit.sh class) repaired via per-file `git update-index
+  --add --cacheinfo` from HEAD blobs; verified `git status` empty +
+  `git diff HEAD` empty. Commit itself was always correct.
+- Rebase onto new master f085d5df0 (Loop B coordinator evidence,
+  landed during this run): clean, 1/1, new hash 640a99208; proof
+  re-run post-rebase 12/12 + node --check on both r93 scripts green.
+- check.js --quick on the worktree: 280 passed, 10 failed in 1051s.
+  Failures are NOT regressions from this run: the change set has zero
+  src/js diff vs d86 and touches no existing test file (verified via
+  `git diff d86c1854a HEAD -- src/js/` = empty). One failure
+  reproduced standalone (test-establishment-r20-fixes racks-full gate:
+  "next day voices once more: expected 2, got 1") on unchanged code,
+  i.e. pre-existing on base; the remaining failures include 120s
+  harness timeouts under a heavily contended box (succession-grief,
+  table-endings, capable-bot). Full failure list was not retained
+  (output piped through tail) — recorded here, not hidden.
+- Merged locally, pending ship (ship loop owns bump/push/live verify).
+  No [needs-eyes]: no src/js, no UI, no combat change.
+- Heartbeat loop: beats verified landed 02:12:34Z and 02:21:52Z by
+  read-back of REGISTRY.json + the loop's log file; loop killed at
+  closeout. Rotation 3→0 written; lock deleted.
