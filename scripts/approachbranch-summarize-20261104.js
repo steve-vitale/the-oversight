@@ -24,8 +24,13 @@ function main() {
   const dir = process.argv[2];
   const filter = process.argv[3] || '';
   if (!dir) { console.error('SUMMARIZE STOP: per-seed dir required'); process.exit(2); }
+  // Panel files ONLY: approachbranch-s<digits>-<run>.json. The replay
+  // corpus in the same dir (approachbranch-seq5-*.json, etc.) must
+  // never be counted as a panel leg — a prefix match on
+  // 'approachbranch-s' alone sweeps it in (found 2026-11-04: 9 files,
+  // median polluted with a null day).
   const files = fs.readdirSync(dir).filter(function (f) {
-    return f.indexOf('approachbranch-s') === 0 && f.endsWith('.json') && (!filter || f.slice(0, -5).endsWith(filter));
+    return /^approachbranch-s\d+-.*\.json$/.test(f) && (!filter || f.slice(0, -5).endsWith(filter));
   }).sort();
   const perSeed = [];
   const survDays = [];
