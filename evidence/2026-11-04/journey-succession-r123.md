@@ -370,5 +370,29 @@ an expedition, the funeral arc goes quiet.
   panel effectively organic, and the note must say so.
 
 ## Closeout
-- PENDING — filled at merge time (commit hash, merge, rotation
-  verification, lock deletion).
+- Commit 63efd7000 ("journey succession r123 (Lane B): bond
+  calibration + pick-time bar panel, no game change", 54 files:
+  r123 driver + calibration analyzer + prereg + run note +
+  analyzer output + 4 stdout JSONs + 4 stderr logs + 4 tele
+  JSONs + 34 transcripts + checkquick log). Safe-commit index
+  clobber hit and repaired via HEAD-blob cacheinfo (status
+  empty + diff HEAD empty verified; commit content verified:
+  54 files, all r123).
+- Lane A landed first (master moved def4f8f40 → 4a5c619ee,
+  journey-landing r95, main tree clean throughout): branch
+  rebased onto the new master cleanly (no conflicts — new
+  files only), new tip dfa617e34. Proof re-runs post-rebase:
+  rolepick 3/3 PASS; calibration analyzer re-run byte-identical
+  to the pre-rebase output. Check.js (284/6, standing families
+  only) was run on the pre-rebase base; the rebase adds no
+  change to this run's files.
+- Merged --ff-only into master (main tree, read-only except
+  the merge); no bump, no push, no live check (ship loop owns
+  those). Report: merged locally, pending ship.
+- Worktree journey2-succession-r123 released and removed,
+  branch deleted, final reap run, main tree verified clean.
+- Rotation: journey-rotation-b.txt written 7 -> 4 and re-read
+  to verify (next Lane B run plays endgame).
+- Lock: this run's lock deleted only after the merge verified
+  (verified it still carried this run's run_id first).
+- Heartbeat loop stopped after release.
