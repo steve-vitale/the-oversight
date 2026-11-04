@@ -56,7 +56,12 @@ async function oneRun(seed) {
     killRows: t.killRows, unlinkedKills: t.unlinkedKills,
     spawns: t.spawns, orphanTbEnds: t.orphanTbEnds, wrapCounts: t.wrapCounts,
     instrumentErrors: t.instrumentErrors.concat(errors), notes: t.notes,
-    deathEvents: result.deathEvents || null, resultKeys: result ? Object.keys(result) : [],
+    // LIVE DEATH CAPTURE (sim-harness runDays): samples.deaths holds the
+    // live-captured death tele records {day, kind, who, cause, player} —
+    // the cost bar's starvation accounting reads from here. (Driver v1
+    // saved result.deathEvents, which runDays does not return — null on
+    // all v1 legs; fixed here, baseline re-run to reproduce + capture.)
+    deaths: (result.samples && result.samples.deaths) || null, resultKeys: result ? Object.keys(result) : [],
   };
 }
 
