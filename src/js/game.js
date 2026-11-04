@@ -16903,23 +16903,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
     },
 
-    // HURT-RETURN (sim-hurthome-fix-a 2026-11-04): a hurt traveler on a
-    // trip with an end date comes home at the next travel tick, not when
-    // the trip clock runs out. Walk-outs (purpose 'leave') are excluded
-    // outright: their clock has no end in sight and this rule must not
-    // pull them home. Threshold matches the awayHungerVoice gate
-    // (hp <= 7, alive). Reads only; no RNG, no state writes — safe to
-    // call from the return branch and from tests on fixture state.
-    shouldHurtReturn(rid) {
-      try {
-        const v = this.state && this.state.village;
-        if (!v) return false;
-        const away = (v.away || {})[rid];
-        if (!away || away.purpose === 'leave') return false;
-        const hp = (v.health || {})[rid];
-        return typeof hp === 'number' && hp >= 1 && hp <= 7;
-      } catch (e) { return false; }
-    },
     // npcNodeTravel: ONCE PER DAY-PART, NPCs move between world nodes.
     // Called from advancePart. This is how the world lives without you:
     // foragers go out, explorers wander, the restless leave.
@@ -16951,22 +16934,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // AWAY NPCs: check if they come back.
         if (away) {
           const partsAway = (s.day - (away.sinceDay || s.day)) * 4 + (this.dayPart - (away.sincePart || 0));
-          const hurtReturn = this.shouldHurtReturn ? !!this.shouldHurtReturn(rid) : false;
-          const shouldReturn = partsAway >= (away.duration || 4) || hurtReturn;
+          const shouldReturn = partsAway >= (away.duration || 4);
           if (shouldReturn) {
             // They come home. Foragers bring food. Explorers bring news.
             this.npcSetNode(rid, hx, hy);
             delete v.away[rid];
             const first = this.displayName(rid);
-            // HURT-RETURN (sim-hurthome-fix-a): when the hurt check, not
-            // the clock, brings them home, say so — the old return lines
-            // celebrate haul and scars and never mention the hurt that
-            // cut the trip short. Only announced if you're at Haven to
-            // see it, like every other return line here.
-            if (hurtReturn && this.map.px === hx && this.map.py === hy) {
-              const hpNow = (v.health || {})[rid];
-              this.say(`🧭 ${first} returns from the wilds hurt (health ${hpNow}/100) — the trip cut short.`);
-            }
             if (away.purpose !== 'forage' && S.buildarounds) S.buildarounds.onForage(this, false, rid);
             if (away.purpose === 'forage') {
               const BAForage = S.buildarounds;
