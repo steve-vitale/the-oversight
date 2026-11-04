@@ -1,0 +1,91 @@
+
+===== SEED 85501 =====
+Q1 trips: 1 (postrace rows 4); persistence-breaks (walk-in-range then next-day eval out-of-range): 0
+  trip village_1 d27->d28 study evals=2 evalDists=[4,0] walkEnds=[0]
+  hungerwatch last: d38 pantry=0 hungryDays=2 pilgrim=village_3 returning=false pilg=2 studies=1 propPeer=0 courtPoor=9 pool=0
+Q1b morntrace rows=114 resets=0 {} heldNights=2 courtMoves=1
+Q2 rank transitions: none; courtNational answers: 0
+Q4 census: day=38 over=true pop=3/3 pantry=0 rank=village seat=none arc=3 waiting=false lead=1/0 tends=0 pilgrimages=2 studies=1
+  peer village_0 kind=primary-sub trust=38 formed=d25 ageAtLast=13d seasoned=false
+
+===== SEED 85502 =====
+Q1 trips: 2 (postrace rows 4); persistence-breaks (walk-in-range then next-day eval out-of-range): 0
+  trip village_2 d27->d27 study evals=1 evalDists=[1] walkEnds=[]
+  trip village_2 d29->d29 study evals=1 evalDists=[1] walkEnds=[]
+  hungerwatch last: d29 pantry=0 hungryDays=2 pilgrim=- returning=true pilg=2 studies=2 propPeer=0 courtPoor=5 pool=0
+Q1b morntrace rows=87 resets=0 {} heldNights=2 courtMoves=0
+Q2 rank transitions: none; courtNational answers: 0
+Q4 census: day=29 over=true pop=6/6 pantry=0 rank=village seat=none arc=3 waiting=false lead=1/0 tends=0 pilgrimages=2 studies=2
+  peer village_1 kind=primary-sub trust=20 formed=d25 ageAtLast=4d seasoned=false
+
+===== SEED 85503 =====
+Q1 trips: 6 (postrace rows 50); persistence-breaks (walk-in-range then next-day eval out-of-range): 14
+  trip village_1 d27->d28 study evals=2 evalDists=[3,0] walkEnds=[0]
+  trip village_3 d30->d31 study evals=2 evalDists=[3,0] walkEnds=[0]
+  trip village_2 d33->d34 study evals=2 evalDists=[4,0] walkEnds=[0]
+  trip village_spl_28_58496 d36->d51 drop:stale evals=15 evalDists=[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5] walkEnds=[0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+  trip village_spl_25_88474 d51->d52 study evals=2 evalDists=[4,0] walkEnds=[0]
+  trip village_spl_28_58496 d55->d56 study evals=2 evalDists=[5,0] walkEnds=[0]
+  hungerwatch last: d121 pantry=0 hungryDays=4 pilgrim=- returning=false pilg=6 studies=5 propPeer=5 courtPoor=47 pool=0
+Q1b morntrace rows=363 resets=14 {"COMPETENT":14} heldNights=25 courtMoves=14
+  RESET d37 village_spl_28_58496 seg=COMPETENT from=(8,5)->(4,4) target=(8,5) edge=true hydEntry=8 dThirst=1 dForage=3 dStanding=0 dDetours=0
+  RESET d38 village_spl_28_58496 seg=COMPETENT from=(8,5)->(4,4) target=(8,5) edge=true hydEntry=0 dThirst=1 dForage=3 dStanding=0 dDetours=0
+  RESET d39 village_spl_28_58496 seg=COMPETENT from=(8,5)->(4,4) target=(8,5) edge=true hydEntry=0 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d40 village_spl_28_58496 seg=COMPETENT from=(8,5)->(4,4) target=(8,5) edge=true hydEntry=0 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d41 village_spl_28_58496 seg=COMPETENT from=(8,5)->(4,4) target=(8,5) edge=true hydEntry=0 dThirst=1 dForage=2 dStanding=0 dDetours=0
+  RESET d42 village_spl_28_58496 seg=COMPETENT from=(8,5)->(4,4) target=(8,5) edge=true hydEntry=0 dThirst=1 dForage=3 dStanding=0 dDetours=0
+  RESET d43 village_spl_28_58496 seg=COMPETENT from=(8,5)->(4,4) target=(8,5) edge=true hydEntry=0 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d44 village_spl_28_58496 seg=COMPETENT from=(8,5)->(4,4) target=(8,5) edge=true hydEntry=0 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d45 village_spl_28_58496 seg=COMPETENT from=(8,5)->(4,4) target=(8,5) edge=true hydEntry=0 dThirst=1 dForage=2 dStanding=0 dDetours=0
+  RESET d46 village_spl_28_58496 seg=COMPETENT from=(8,5)->(4,4) target=(8,5) edge=true hydEntry=0 dThirst=1 dForage=2 dStanding=0 dDetours=0
+  RESET d47 village_spl_28_58496 seg=COMPETENT from=(8,5)->(4,4) target=(8,5) edge=true hydEntry=0 dThirst=1 dForage=3 dStanding=0 dDetours=0
+  RESET d48 village_spl_28_58496 seg=COMPETENT from=(8,5)->(4,4) target=(8,5) edge=true hydEntry=0 dThirst=1 dForage=2 dStanding=0 dDetours=0
+  RESET d49 village_spl_28_58496 seg=COMPETENT from=(8,5)->(4,4) target=(8,5) edge=true hydEntry=0 dThirst=1 dForage=3 dStanding=0 dDetours=0
+  RESET d51 village_spl_28_58496 seg=COMPETENT from=(8,5)->(4,4) target=(8,5) edge=true hydEntry=0 dThirst=1 dForage=2 dStanding=0 dDetours=0
+Q2 rank transitions: d47 village->regional; courtNational answers: 0
+  NAT: 🕯️ Haven grieves — and Stonebridge tests the charter in the chaos. Their speaker wants new terms, or out. CONCEDE, HOLD, or RELEASE. (Trust -10.)
+  NAT: 🕯️ Haven grieves — and The Red Table tests the charter in the chaos. Their speaker wants new terms, or out. CONCEDE, HOLD, or RELEASE. (Trust -10.)
+  NAT: 🤝 Haven concedes: the Stonebridge route tariff drops to 750 kcal a week. The charter holds — bought, honestly.
+  NAT: 🤝 Haven concedes: the The Red Table route tariff drops to 750 kcal a week. The charter holds — bought, honestly.
+  NAT: 🕯️ Haven grieves — and Stonebridge tests the charter in the chaos. Their speaker wants new terms, or out. CONCEDE, HOLD, or RELEASE. (Trust -10.)
+  NAT: 🕯️ Haven grieves — and The Red Table tests the charter in the chaos. Their speaker wants new terms, or out. CONCEDE, HOLD, or RELEASE. (Trust -10.)
+  NAT: 🤝 Haven concedes: the Stonebridge route tariff drops to 563 kcal a week. The charter holds — bought, honestly.
+  NAT: 🤝 Haven concedes: the The Red Table route tariff drops to 563 kcal a week. The charter holds — bought, honestly.
+  NAT: 🕯️ Haven grieves — and Stonebridge tests the charter in the chaos. Their speaker wants new terms, or out. CONCEDE, HOLD, or RELEASE. (Trust -10.)
+  NAT: 🕯️ Haven grieves — and The Red Table tests the charter in the chaos. Their speaker wants new terms, or out. CONCEDE, HOLD, or RELEASE. (Trust -10.)
+  NAT: 🤝 Haven concedes: the Stonebridge route tariff drops to 500 kcal a week. The charter holds — bought, honestly.
+  NAT: 🤝 Haven concedes: the The Red Table route tariff drops to 500 kcal a week. The charter holds — bought, honestly.
+Q4 census: day=121 over=true pop=1/1 pantry=0 rank=regional seat=lesser arc=4 waiting=true lead=1/1 tends=0 pilgrimages=6 studies=5
+  peer village_0 kind=primary-sub trust=70 formed=d25 ageAtLast=96d seasoned=true
+  peer village_2 kind=covenant trust=29 formed=d70 ageAtLast=51d seasoned=false
+  peer village_3 kind=covenant trust=25 formed=d76 ageAtLast=45d seasoned=false
+  peer village_spl_28_58496 kind=covenant trust=30 formed=d78 ageAtLast=43d seasoned=false
+  peer village_1 kind=trade trust=29 formed=d86 ageAtLast=35d seasoned=false
+  peer village_spl_25_88474 kind=trade trust=28 formed=d95 ageAtLast=26d seasoned=false
+
+===== SEED 85504 =====
+Q1 trips: 3 (postrace rows 38); persistence-breaks (walk-in-range then next-day eval out-of-range): 14
+  trip village_1 d27->d28 study evals=2 evalDists=[3,0] walkEnds=[0]
+  trip village_2 d34->d48 drop:stale evals=15 evalDists=[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4] walkEnds=[0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+  trip village_2 d49->d50 study evals=2 evalDists=[4,0] walkEnds=[0]
+  hungerwatch last: d112 pantry=1399 hungryDays=0 pilgrim=- returning=false pilg=3 studies=2 propPeer=2 courtPoor=26 pool=0
+Q1b morntrace rows=336 resets=14 {"COMPETENT":14} heldNights=19 courtMoves=9
+  RESET d35 village_2 seg=COMPETENT from=(3,1)->(4,4) target=(3,1) edge=false hydEntry=28 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d36 village_2 seg=COMPETENT from=(3,1)->(4,4) target=(3,1) edge=false hydEntry=14 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d37 village_2 seg=COMPETENT from=(3,1)->(4,4) target=(3,1) edge=false hydEntry=9 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d38 village_2 seg=COMPETENT from=(3,1)->(4,4) target=(3,1) edge=false hydEntry=0 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d39 village_2 seg=COMPETENT from=(3,1)->(4,4) target=(3,1) edge=false hydEntry=0 dThirst=1 dForage=1 dStanding=0 dDetours=0
+  RESET d40 village_2 seg=COMPETENT from=(3,1)->(4,4) target=(3,1) edge=false hydEntry=0 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d41 village_2 seg=COMPETENT from=(3,1)->(4,4) target=(3,1) edge=false hydEntry=0 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d42 village_2 seg=COMPETENT from=(3,1)->(4,4) target=(3,1) edge=false hydEntry=0 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d43 village_2 seg=COMPETENT from=(3,1)->(4,4) target=(3,1) edge=false hydEntry=0 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d44 village_2 seg=COMPETENT from=(3,1)->(4,4) target=(3,1) edge=false hydEntry=0 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d45 village_2 seg=COMPETENT from=(3,1)->(4,4) target=(3,1) edge=false hydEntry=0 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d46 village_2 seg=COMPETENT from=(3,1)->(4,4) target=(3,1) edge=false hydEntry=0 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d47 village_2 seg=COMPETENT from=(3,1)->(4,4) target=(3,1) edge=false hydEntry=0 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d48 village_2 seg=COMPETENT from=(3,1)->(4,4) target=(3,1) edge=false hydEntry=0 dThirst=1 dForage=1 dStanding=0 dDetours=0
+Q2 rank transitions: d47 village->regional; courtNational answers: 0
+Q4 census: day=113 over=true pop=0/0 pantry=0 rank=regional seat=lesser arc=4 waiting=true lead=1/0 tends=0 pilgrimages=3 studies=2
+  peer village_0 kind=primary-sub trust=30 formed=d25 ageAtLast=87d seasoned=false
+  peer village_1 kind=covenant trust=60 formed=d52 ageAtLast=60d seasoned=true
+  peer village_2 kind=covenant trust=31 formed=d68 ageAtLast=44d seasoned=false

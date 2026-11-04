@@ -7702,7 +7702,11 @@
         ? this.convoPickCycle(vid, 'foreign:react:' + kind, narrPools[kind])
         : 'You gesture.';
       const frag = this.maybeEnglishFragment(vid);
-      return `${r ? r.text : 'They answer at length.'} ${narr}${frag ? ` "${frag}"` : ''}${mediatedNote}`;
+      // FRAG-FRAME (journey-scale r97): the verbal path frames a Mario-moment
+      // fragment as pride ("they grin, proud of the one English they know"),
+      // but this react path quoted it bare — in a no-words sitting a bare
+      // "Fuck you." reads as hostility, not the designed moment. Same framing.
+      return `${r ? r.text : 'They answer at length.'} ${narr}${frag ? ` "${frag}" — they grin, proud of the one English they know.` : ''}${mediatedNote}`;
     },
 
     // nvEndLine: gesture exits. No fluent English goodbyes from someone
