@@ -239,7 +239,7 @@ to tune — it is a whole road nobody walks: bonds.
   no bump, no live verification by this worker):
   - 798a5fe3f sim-standaccum-b prereg (before any judged sim)
   - 4b7f3da9d sim-standaccum-b instruments + proof 12/12 (zero src/js)
-  - [pilot commit below] sim-standaccum-b pilot + evidence
+  - c6c11ae29 sim-standaccum-b pilot + evidence
     (analyzer peak-window + gear-day-standing additions with
     proof now 13/13; per-seed JSONs)
 - Files: prereg + evidence in `evidence/2026-11-04/
