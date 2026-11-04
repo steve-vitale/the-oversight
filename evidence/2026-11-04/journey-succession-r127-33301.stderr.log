@@ -1,0 +1,40 @@
+
+ORGANIC DEATH d24: Gilberto -> Joyce, topTrust=[{"id":"Thabo","t":58},{"id":"Oliver","t":53},{"id":"Laura","t":48},{"id":"Joyce","t":46}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=15 inheritedPlants=0 keptSkills=5 inheritedSkills=0 succTrustPre=90 succTrustPost=46
+PARITY readable=true equal=true inherited=[] pre=["green_whisper","lucky_rock"] post=["green_whisper","lucky_rock"]
+DEATH d24 (organic (phase A)): Gilberto -> Joyce | passed=true lin=true mo=true trust=46 vouchers=0
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Thabo (refused=false)
+  CONVO d+3 with Oliver (refused=false)
+  BOND-CONVO d+3 with Karen (depth=1 v=32 refused=false)
+  CONVO d+7 with Laura (refused=false)
+  CONVO d+7 with Oliver (refused=false)
+  CONVO d+14 with Laura (refused=false)
+  CONVO d+14 with Oliver (refused=false)
+  BOND-CONVO d+14 with Karen (depth=1 v=32 refused=false)
+  CONVO d+30 with Laura (refused=false)
+  CONVO d+30 with Oliver (refused=false)
+  CONVO d+45 with Oliver (refused=false)
+  CONVO d+45 with Thabo (refused=false)
+  CONVO d+53 with Thabo (refused=false)
+  CONVO d+53 with Hailu (refused=false)
+  CONVO d+64 with Thabo (refused=false)
+  CONVO d+64 with Hailu (refused=false)
+
+FUNERAL: deathBeat=5 recover=1 vouch=0 (eligible=0) echo=6 organicBurial={"respects":false,"bury":false} halfRation=2
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":60,"offerLines":119,"codexPlantsDelta":25,"codexSkillsDelta":5,"codexAbilitiesDelta":6,"xpDelta":106,"any":true} pantry 21234->31290
+TRUST-DIALS: office 46->65 (+19, climb) | villageMean 40.7->75.6 (+34.9, climb) | ge60 0->5 | movers>=5: [{"id":"Fatima","from":29,"to":87,"delta":58},{"id":"Karen","from":24,"to":80,"delta":56},{"id":"Sigrun","from":33,"to":80,"delta":47},{"id":"Thabo","from":58,"to":91,"delta":33}]
+DEED-LEDGER: calls=56 summary={"teachPlant":{"calls":14,"ok":14,"deltaSum":0,"deltaN":14,"positive":0,"meanDelta":0},"donateToPantry":{"calls":18,"ok":18,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"giveFood":{"calls":24,"ok":24,"deltaSum":104,"deltaN":24,"positive":24,"meanDelta":4.33}}
+
+IDENTITY TRIPS: raw=1 grief-excluded=0
+METRICS: m1=true m2a="n/a (none eligible)" m2b=false m3=true(echoMentions=6 (convo=6, say=0)) m4=true m5=manual | endDay=94 alive=8 over=false
+anomalies: 0
+say dump -> evidence/2026-11-04/journey-succession-r127-33301.saydump.txt
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=56) trustVerdict={"readable":true,"officeMantle":46,"officeLast":65,"officeDelta":19,"officeClass":"climb","villageMantle":40.7,"villageLast":75.6,"villageDelta":34.9,"villageClass":"climb","villageGe60Mantle":0,"villageGe60Last":5,"movers":[{"id":"Fatima","from":29,"to":87,"delta":58},{"id":"Karen","from":24,"to":80,"delta":56},{"id":"Sigrun","from":33,"to":80,"delta":47},{"id":"Thabo","from":58,"to":91,"delta":33}]}
+E6/CALLCHECK: e6={"callMoves":25,"withCensus":25,"chainHandoffs":0,"trustMoves":25} callCheck={"dailyMoveDays":25,"callMoveDays":21,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=7 (v2=7, excludedLoot=0))
+E7/R47: e7={"trustMoves":25,"soloOffice":1,"soloOfficeDeltas":[1],"soloBearerDeltaExact":[1],"singleMoverBearer":1,"singleMoverOther":6,"eventClass":{"event-only":0,"deed-only":8,"both":16,"neither":1},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":6,"v2":7,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":0,"known":0,"unknown":0} e3={"dailyDays":71,"moves":25}
