@@ -132,3 +132,22 @@ what already passes.
   telemetry skill rows + npcKnowsSkill checks are the only skill
   sources. Do not re-add a census-skills instrument without finding
   the real field first.
+
+## Instrument correction (pre-scoring, pilot seed 1401 only)
+The v1 driver checked ONLY the opening menu for `skill_teach:`. Pilot
+1401 on v1 scored 42/42 'mismatch' — but that was the instrument, not
+the game: conversation.js suppresses pivots (including skill lessons)
+while a direct question hangs (`suppressPivot = reactiveQ ||
+genericQ || grief/cheer thread`, line 4628), and skill lessons also
+ride the subject menu (`dlg:subject` -> subject menu appends
+convoSkillChoices). A real player answers the question and/or changes
+the subject; the v1 driver ended the convo at the opening menu instead.
+v2 driver navigates like a player: answer `ans:*` choices, then take
+`dlg:subject`/`subject` (then `dlg:more` at most 3 turns), up to 8 turns,
+picking any `skill_teach:*` offer found, and records every menu visited
+(`menusVisited`) when none is found (kind `nomenu`). M1's bar is
+UNCHANGED (>= 1 verified player lesson on >= 3/4 seeds); only the search
+procedure changes, to match real play. Pilot seed 1401 is re-run on v2
+so the whole panel shares one instrument; the v1 pilot is discarded
+from scoring (its trajectories are not comparable — v1 convos ended
+immediately, v2 convos answer and navigate).

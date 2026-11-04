@@ -78,23 +78,37 @@ function attemptTeach(Game, day, startIdx) {
   let knewBefore = null;
   try { knewBefore = Game.npcKnowsSkill ? !!Game.npcKnowsSkill(vid, skill) : null; } catch (e) {}
   const lines = [];
+  const menusVisited = [];
   try {
     let r = Game.startConvo(vid);
     lines.push(`TEACH d${day} ${nm}: OPENING: ${r.line}`);
-    const choices = (r.choices && r.choices.length) ? r.choices : [];
-    const learnOffers = choices.filter(ch => String(ch.id || '').indexOf('skill_learn:') === 0).map(ch => ch.id);
-    const teachChoice = choices.find(ch => ch.id === 'skill_teach:' + skill);
-    if (!teachChoice) {
-      try { const end = Game.endConvo(vid, 'done'); if (end && end.line) lines.push('TEACH closing: ' + end.line); } catch (e) { lines.push('TEACH endConvo: ' + e.message); }
-      return { record: { day, kind: 'mismatch', vid: String(vid), name: nm, skill, choiceIds: choices.map(ch => ch.id), learnOffers }, lines, nextStartIdx: (startIdx + candidate.rotIdx + 1) % living.length };
+    let picked = null;
+    for (let turn = 0; turn < 8; turn++) {
+      const choices = (r.choices && r.choices.length) ? r.choices : [];
+      menusVisited.push(choices.map(ch => ch.id));
+      if (r.ended || !choices.length) { lines.push('TEACH (convo ended before a teach offer)'); break; }
+      const teachChoice = choices.find(ch => String(ch.id || '').indexOf('skill_teach:') === 0);
+      if (teachChoice) { picked = teachChoice; break; }
+      const ans = choices.find(ch => String(ch.id || '').indexOf('ans:') === 0);
+      if (ans) { lines.push(`TEACH YOU: [${ans.id}] ${(ans.label || '').slice(0, 60)}`); r = Game.convoTurn(vid, ans.id); lines.push(`TEACH THEM: ${r.line == null ? '(null)' : r.line}`); continue; }
+      const subj = choices.find(ch => ch.id === 'dlg:subject' || ch.id === 'subject');
+      if (subj) { lines.push(`TEACH YOU: [${subj.id}] ${(subj.label || '').slice(0, 60)}`); r = Game.convoTurn(vid, subj.id); lines.push(`TEACH THEM: ${r.line == null ? '(null)' : r.line}`); continue; }
+      const more = choices.find(ch => ch.id === 'dlg:more');
+      if (more && turn < 3) { lines.push(`TEACH YOU: [${more.id}] ${(more.label || '').slice(0, 60)}`); r = Game.convoTurn(vid, more.id); lines.push(`TEACH THEM: ${r.line == null ? '(null)' : r.line}`); continue; }
+      lines.push('TEACH (navigation exhausted: no teach offer, no answer, no subject choice)');
+      break;
     }
-    lines.push(`TEACH YOU: [${teachChoice.id}] ${(teachChoice.label || '').slice(0, 80)}`);
-    r = Game.convoTurn(vid, teachChoice.id);
+    if (!picked) {
+      try { const end = Game.endConvo(vid, 'done'); if (end && end.line) lines.push('TEACH closing: ' + end.line); } catch (e) { lines.push('TEACH endConvo: ' + e.message); }
+      return { record: { day, kind: 'nomenu', vid: String(vid), name: nm, skill, menusVisited }, lines, nextStartIdx: (startIdx + candidate.rotIdx + 1) % living.length };
+    }
+    lines.push(`TEACH YOU: [${picked.id}] ${(picked.label || '').slice(0, 80)}`);
+    r = Game.convoTurn(vid, picked.id);
     lines.push(`TEACH THEM: ${r.line == null ? '(null)' : r.line}`);
     let knowsAfter = null;
-    try { knowsAfter = Game.npcKnowsSkill ? !!Game.npcKnowsSkill(vid, skill) : null; } catch (e) {}
+    try { knowsAfter = Game.npcKnowsSkill ? !!Game.npcKnowsSkill(vid, picked.id.split(':')[1]) : null; } catch (e) {}
     try { const end = Game.endConvo(vid, 'done'); if (end && end.line) lines.push('TEACH closing: ' + end.line); } catch (e) { lines.push('TEACH endConvo: ' + e.message); }
-    return { record: { day, kind: 'lesson', vid: String(vid), name: nm, skill, knewBefore, knowsAfter, line: (r.line == null ? null : String(r.line).slice(0, 300)), learnOffers }, lines, nextStartIdx: (startIdx + candidate.rotIdx + 1) % living.length };
+    return { record: { day, kind: 'lesson', vid: String(vid), name: nm, skill: picked.id.split(':')[1], knewBefore, knowsAfter, line: (r.line == null ? null : String(r.line).slice(0, 300)), menusVisited }, lines, nextStartIdx: (startIdx + candidate.rotIdx + 1) % living.length };
   } catch (e) {
     try { Game.endConvo(vid, 'done'); } catch (e2) {}
     lines.push('TEACH ERROR: ' + e.message);

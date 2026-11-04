@@ -73,6 +73,7 @@ for (const seed of SEEDS) {
   console.log(`  TEACH: days=${td.length} kinds=${JSON.stringify(tk)} playerLessonsTele=${playerLessons.length} [${playerLessons.map(r => `${r.learner}:${r.skill}@d${r.day}`).join(' | ') || '-'}]`);
   console.log(`  TEACH-LESSONS: ${JSON.stringify(td.filter(r => r.kind === 'lesson').map(r => ({ day: r.day, learner: r.name, skill: r.skill, knewBefore: r.knewBefore, knowsAfter: r.knowsAfter })))}`);
   console.log(`  TEACH-MISMATCH: ${JSON.stringify(td.filter(r => r.kind === 'mismatch').map(r => ({ day: r.day, learner: r.name, skill: r.skill, choiceIds: r.choiceIds })))}`);
+  console.log(`  TEACH-NOMENU: ${JSON.stringify(td.filter(r => r.kind === 'nomenu').map(r => ({ day: r.day, learner: r.name, skill: r.skill, menus: r.menusVisited })))}`);
   console.log(`  TEACH-GATES(nocandidate days): ${JSON.stringify(gateTotals)}`);
   for (const pl of playerLessons) {
     const onward = (j.skillRows || []).filter(r => r.type === 'skill_lesson' && r.teacher === pl.learner && r.skill === pl.skill && r.day > pl.day);
