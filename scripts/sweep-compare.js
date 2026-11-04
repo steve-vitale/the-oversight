@@ -85,14 +85,6 @@ try { const m = require('./policies/competent-multisweep-b'); POLICY_REGISTRY['c
 // (§15) can build its column. Additive; zero behavior change to existing
 // entries (the variant stays default-OFF: nothing loads it unless named).
 try { const pr = require('./policies/competent-patchrot-b'); POLICY_REGISTRY['competent-patchrot-b'] = pr.patchrot; } catch (e) {}
-// askplus instrument (sim-askplus-a, 2026-11-04, Loop B diplomacy):
-// the competent + proposing/courtship policy, registered so the
-// balanced panel (§15) can build its column. Additive; zero behavior
-// change to existing entries (the variant stays default-OFF: nothing
-// loads it unless named). Reverted with the policy file if the arm
-// is killed.
-try { const ap = require('./policies/competent-askplus'); POLICY_REGISTRY['competent-askplus'] = ap.competentAskplus; } catch (e) {}
-
 const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
 
 function stdSnapshot(Game) {
