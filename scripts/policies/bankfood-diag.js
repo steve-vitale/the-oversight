@@ -76,6 +76,41 @@ function branchCount(Game) {
   } catch (e) { return null; }
 }
 
+// Late-work place phrase (sim-latework-creek-a, 2026-11-04): the old
+// line hardcoded "at the creek" on every terrain. The place now comes
+// from the player's tile AT SAY TIME (after any evening walk, this is
+// where the work happened), falling back to the evening-start tile
+// type, then to no place name at all. Terrain names are only names
+// the engine already carries: TILE_NAME values (src/js/game.js)
+// for creek/forest floor/grove/meadow/thicket/wetland/Haven, and the
+// engine's nodeEpithet narration names for trail_edge/ruin/street/
+// plaza/cache ('the old trail', 'the old place', 'the old street',
+// 'the old plaza', 'a buried cache'). Only the preposition is chosen
+// here. Returns { phrase, type }: phrase is the full "at/on/in ..."
+// fragment or '' when no terrain name is available; type is the
+// resolved tile type or null. Exported for the fixture.
+const LATE_WORK_PLACE = {
+  creek: 'at the creek',
+  forest_floor: 'on the forest floor',
+  grove: 'in the grove',
+  meadow: 'in the meadow',
+  thicket: 'in the thicket',
+  wetland: 'at the wetland',
+  trail_edge: 'on the old trail',
+  ruin: 'at the old place',
+  haven: 'at Haven',
+  building: 'at the building',
+  street: 'on the old street',
+  plaza: 'on the old plaza',
+  cache: 'at a buried cache',
+};
+function lateWorkPlace(Game, fallbackType) {
+  let ty = null;
+  try { const t = (Game && typeof Game.playerTile === 'function') ? Game.playerTile() : null; ty = t ? (t.type || null) : null; } catch (e) { ty = null; }
+  if (!ty) ty = fallbackType || null;
+  return { phrase: (ty && LATE_WORK_PLACE[ty]) || '', type: ty || null };
+}
+
 // Canonical pack snapshot. edibleKcal counts only edible-now food
 // (edible !== false, kcalEach > 0); grossKcal counts every kcalEach > 0
 // stack regardless of edible flag; lumpUnits counts unknown-lump units
@@ -368,8 +403,12 @@ function withBankfood(inner, store) {
           const g = rec.actions.filter((a) => a.kind === 'gather').length;
           const f = rec.actions.filter((a) => a.kind === 'forage').length;
           try {
-            Game.say(`You work late at the creek — ${g} deadfall gathers and ${f} forages — until the night is too far gone for real sleep.`);
+            const wp = lateWorkPlace(Game, eveTileType);
+            Game.say(wp.phrase
+              ? `You work late ${wp.phrase} — ${g} deadfall gathers and ${f} forages — until the night is too far gone for real sleep.`
+              : `You work late — ${g} deadfall gathers and ${f} forages — until the night is too far gone for real sleep.`);
             rec.sayLine = 'late-work-line';
+            rec.sayPlace = wp.type;
           } catch (e) { /* narration must never break the record */ }
           rec.packAfter = packSnap(Game);
         }
@@ -379,4 +418,4 @@ function withBankfood(inner, store) {
   });
 }
 
-module.exports = { withBankfood, newStore, packSnap, pressTotals, findGatherTarget, strandedEveningDecision, strandedMorningDecision };
+module.exports = { withBankfood, newStore, packSnap, pressTotals, findGatherTarget, strandedEveningDecision, strandedMorningDecision, lateWorkPlace };
