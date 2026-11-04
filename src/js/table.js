@@ -381,11 +381,11 @@
           let ks;
           if (kills.length >= 2 && nameOf(kills[1]) === n0) {
             ks = `◈ THE WAR PATH — ${framings[frame]} ${n0} twice.`;
-            if (kills.length > 2) ks += ` ${kills.length - 2} more tooth${kills.length - 2 === 1 ? '' : 's'} after that.`;
+            if (kills.length > 2) ks += ` ${kills.length - 2} more ${kills.length - 2 === 1 ? 'tooth' : 'teeth'} after that.`;
           } else {
             ks = `◈ THE WAR PATH — ${framings[frame]} ${n0}.`;
             if (kills.length === 2) ks += ` ${nameOf(kills[1])}.`;
-            else if (kills.length > 2) ks += ` ${nameOf(kills[1])} — and ${kills.length - 2} more tooth${kills.length - 2 === 1 ? '' : 's'} after.`;
+            else if (kills.length > 2) ks += ` ${nameOf(kills[1])} — and ${kills.length - 2} more ${kills.length - 2 === 1 ? 'tooth' : 'teeth'} after.`;
           }
           lines.push(ks);
         }
