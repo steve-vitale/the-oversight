@@ -1,0 +1,61 @@
+SEEDS: 41501 d141, 41502 d42, 41503 d69, 41504 d37
+
+seed 41501: days=141 endReason=survived fullConvs=130 naturalEnds=122 feasts=20 moots=3
+  decisions: {"lure:decline":1,"party:accept":7,"lure:accept":1,"party:decline":3}
+  plot plot_1 d7 leader=Hattie inviter=Ines target=Sari sprung=true gT->L=0 gT->I=0 gA->Tmax=0 gI->T=0
+  armWrapped=true springWrapped=true
+  ARM d7 plot_1 Hattie->Sari inviter=Ines motive={"score":43.52000000000001,"reasons":["grievance"]} gT->L=54.400000000000006 gL->T=54.400000000000006 accMotives=[{"who":"Ines","score":25,"reasons":["ambition"],"grievance":0},{"who":"James","score":0,"reasons":[],"grievance":0}] trust={"leader":56,"Ines":16,"James":32} goal=alone
+  SPRING d8 plot_1 Hattie->Sari outcome=killed case=case_2 endCase=case_2 charge=murder status=acquitted heardDay=10 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=2
+  expireWrapped=true expiredEvents=0
+  village fallen: 14 by cause: {"monster":7,"Loud-Eyes":1,"Big Big":1,"The Influencer":1,"the wild":1,"The Algorithm":1,"a wound that wouldn't close":2}
+  death clusters (>=3/day): none
+  ambush-caused fallen: []
+  (samples.deaths, all recorded incl. outsiders: 67 — NOT village deaths)
+  census: seed 41501, day 141, alive 5 | - Hattie (beekeeper, ?) trust=46 mood=warm npcAbilities=0
+
+seed 41502: days=42 endReason=village-lost fullConvs=50 naturalEnds=49 feasts=5 moots=2
+  decisions: {"lure:decline":2,"lure:accept":2,"party:decline":4,"party:accept":1}
+  plot plot_1 d6 leader=Penelope inviter=Zlatoslava target=Nikolai sprung=true gT->L=60 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_3 d10 leader=Nikolai inviter=Dakota target=Penelope sprung=true gT->L=0 gT->I=0 gA->Tmax=0 gI->T=0
+  armWrapped=true springWrapped=true
+  ARM d6 plot_1 Penelope->Nikolai inviter=Zlatoslava motive={"score":39.040000000000006,"reasons":["grievance"]} gT->L=48.800000000000004 gL->T=48.800000000000004 accMotives=[{"who":"Zlatoslava","score":0,"reasons":[],"grievance":0},{"who":"Dakota","score":25,"reasons":["ambition"],"grievance":0}] trust={"leader":27,"Zlatoslava":11,"Dakota":19} goal=survive
+  ARM d10 plot_3 Nikolai->Penelope inviter=Dakota motive={"score":80,"reasons":["grievance"]} gT->L=45.6 gL->T=100 accMotives=[{"who":"Dakota","score":25,"reasons":["ambition"],"grievance":0},{"who":"Naran","score":0,"reasons":[],"grievance":0}] trust={"leader":22,"Dakota":22,"Naran":42} goal=legacy
+  SPRING d7 plot_1 Penelope->Nikolai outcome=hurt case=case_2 endCase=case_2 charge=ambush status=resolved heardDay=9 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=2
+  SPRING d11 plot_3 Nikolai->Penelope outcome=killed case=case_4 endCase=case_4 charge=murder status=acquitted heardDay=12 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=2
+  expireWrapped=true expiredEvents=0
+  village fallen: 11 by cause: {"sickness":3,"The Union Rep":1,"a wound that wouldn't close":1,"the wild":5,"combat":1}
+  death clusters (>=3/day): d41x4
+  ambush-caused fallen: []
+  (samples.deaths, all recorded incl. outsiders: 41 — NOT village deaths)
+  census: seed 41502, day 42, alive 0 | fallen: 11
+
+seed 41503: days=69 endReason=village-lost fullConvs=62 naturalEnds=49 feasts=9 moots=3
+  decisions: {"party:accept":4,"party:decline":1}
+  armWrapped=true springWrapped=true
+  expireWrapped=true expiredEvents=0
+  village fallen: 20 by cause: {"monster":12,"a wound that wouldn't close":1,"The Terms of Service":1,"the arena":1,"the wild":5}
+  death clusters (>=3/day): d66x3
+  ambush-caused fallen: []
+  (samples.deaths, all recorded incl. outsiders: 70 — NOT village deaths)
+  census: seed 41503, day 69, alive 2 | - Yuki (scavenger, ?) trust=40 mood=neutral npcAbilities=0
+
+seed 41504: days=37 endReason=village-lost fullConvs=47 naturalEnds=47 feasts=5 moots=1
+  decisions: {"party:accept":2,"party:decline":3}
+  armWrapped=true springWrapped=true
+  expireWrapped=true expiredEvents=0
+  village fallen: 12 by cause: {"monster":1,"the wild":10,"the arena":1}
+  death clusters (>=3/day): d35x5 d36x3
+  ambush-caused fallen: []
+  (samples.deaths, all recorded incl. outsiders: 56 — NOT village deaths)
+  census: seed 41504, day 37, alive 0 | fallen: 12
+
+PANEL lure/party decisions: {"lure:decline":3,"party:accept":14,"lure:accept":3,"party:decline":11}
+PANEL plots: 3 (late d30+: 0)
+PANEL plots with grievanceTargetToLeader > 0: 1
+PANEL grievance-holder -> later leader cases: 1
+  {"seed":41502,"plot":"plot_3","leader":"Nikolai","plotDay":10,"grievances":["ambushed->Penelope d7 sev60"]}
+PANEL arms: 3 (late d30+: 0) grievance-linked at arming: 3
+PANEL springs: 3 outcomes: {"killed":2,"hurt":1}
+PANEL escaped springs: 0
+PANEL expired plots: 0
+PANEL villages past d100: 1/4

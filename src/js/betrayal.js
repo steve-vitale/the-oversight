@@ -1021,6 +1021,18 @@
           witnesses: this.witnesses ? (this.witnesses(6) || []) : [],
         });
       } catch (e) {}
+      // FALLEN RECORD (journey-social r125): registerDeath makes the
+      // corpse + grief + case, but village.fallen is pushed by each death
+      // path separately — and this path never pushed it, so ambush-murder
+      // victims vanished from the village's own death record while every
+      // other death (monster, wild, sickness, wounds, combat, contest)
+      // is recorded there. Push here; simNpcAmbush is the only caller
+      // of removeVillager('ambushed'), so this cannot double-count.
+      try {
+        const v = this.state.village; v.fallen = v.fallen || [];
+        v.fallen.push({ villagerId: plot.target, day: this.state.scholar.day,
+          cause: 'ambush', name: this.fallenName ? this.fallenName(plot.target) : this.displayName(plot.target) });
+      } catch (e) {}
       this.removeVillager(plot.target, 'ambushed');
       try { this.recordTrauma('killed'); } catch (e) {}
     }
