@@ -151,3 +151,19 @@ procedure changes, to match real play. Pilot seed 1401 is re-run on v2
 so the whole panel shares one instrument; the v1 pilot is discarded
 from scoring (its trajectories are not comparable — v1 convos ended
 immediately, v2 convos answer and navigate).
+
+## Instrument correction #2 (pre-scoring, pilot seed 1401 only)
+v2 still undercounted: it stopped at the first subject menu without
+paging, and it could not answer generic questions (`gq:*` menus have
+no `ans:` choice, no subject choice, and no teach offer until
+answered). Pilot v2's 40 `nomenu` days include subject menus ending
+in `menu:more` (a second page never visited) and `gq:yn` menus (a
+yes/no question never answered). v3 navigates like a player: answer
+`ans:*` (preferring honest_pass, then vague, then deflect) and `gq:*`
+(preferring unsure, then honest_pass), take `dlg:subject`/`subject`,
+page through `menu:more` (max 4 pages, repeat-menu guard), up to 14
+turns, picking any `skill_teach:*` found. Betrayal case menus
+(`betrayal:accept/decline` only) are NOT decided by the driver — a
+verdict is a story decision, not navigation — and stay `nomenu`.
+M1's bar is UNCHANGED; only the search procedure changes. Pilot 1401
+is re-run on v3; v2 pilot discarded from scoring like v1.

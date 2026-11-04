@@ -83,20 +83,32 @@ function attemptTeach(Game, day, startIdx) {
     let r = Game.startConvo(vid);
     lines.push(`TEACH d${day} ${nm}: OPENING: ${r.line}`);
     let picked = null;
-    for (let turn = 0; turn < 8; turn++) {
+    const seenMenus = new Set();
+    let morePages = 0;
+    for (let turn = 0; turn < 14; turn++) {
       const choices = (r.choices && r.choices.length) ? r.choices : [];
       menusVisited.push(choices.map(ch => ch.id));
       if (r.ended || !choices.length) { lines.push('TEACH (convo ended before a teach offer)'); break; }
       const teachChoice = choices.find(ch => String(ch.id || '').indexOf('skill_teach:') === 0);
       if (teachChoice) { picked = teachChoice; break; }
-      const ans = choices.find(ch => String(ch.id || '').indexOf('ans:') === 0);
-      if (ans) { lines.push(`TEACH YOU: [${ans.id}] ${(ans.label || '').slice(0, 60)}`); r = Game.convoTurn(vid, ans.id); lines.push(`TEACH THEM: ${r.line == null ? '(null)' : r.line}`); continue; }
-      const subj = choices.find(ch => ch.id === 'dlg:subject' || ch.id === 'subject');
-      if (subj) { lines.push(`TEACH YOU: [${subj.id}] ${(subj.label || '').slice(0, 60)}`); r = Game.convoTurn(vid, subj.id); lines.push(`TEACH THEM: ${r.line == null ? '(null)' : r.line}`); continue; }
-      const more = choices.find(ch => ch.id === 'dlg:more');
-      if (more && turn < 3) { lines.push(`TEACH YOU: [${more.id}] ${(more.label || '').slice(0, 60)}`); r = Game.convoTurn(vid, more.id); lines.push(`TEACH THEM: ${r.line == null ? '(null)' : r.line}`); continue; }
-      lines.push('TEACH (navigation exhausted: no teach offer, no answer, no subject choice)');
-      break;
+      const sig = choices.map(ch => ch.id).join('|');
+      if (seenMenus.has(sig)) { lines.push('TEACH (menu repeats: pagination loop)'); break; }
+      seenMenus.add(sig);
+      const pickPref = (pred, prefs) => {
+        const cands = choices.filter(pred);
+        if (!cands.length) return null;
+        for (const pf of prefs) { const hit = cands.find(ch => String(ch.id).indexOf(pf) >= 0); if (hit) return hit; }
+        return cands[0];
+      };
+      let next = pickPref(ch => String(ch.id || '').indexOf('ans:') === 0, ['honest_pass', 'a_vague', 'a_deflect']);
+      if (!next) next = pickPref(ch => String(ch.id || '').indexOf('gq:') === 0, ['unsure', 'honest_pass']);
+      if (!next) next = choices.find(ch => ch.id === 'dlg:subject' || ch.id === 'subject');
+      if (!next && morePages < 4) { next = choices.find(ch => ch.id === 'menu:more'); if (next) morePages++; }
+      if (!next) next = choices.find(ch => ch.id === 'dlg:more');
+      if (!next) { lines.push('TEACH (navigation exhausted: no teach offer, no answer, no subject, no more page)'); break; }
+      lines.push(`TEACH YOU: [${next.id}] ${(next.label || '').slice(0, 60)}`);
+      r = Game.convoTurn(vid, next.id);
+      lines.push(`TEACH THEM: ${r.line == null ? '(null)' : r.line}`);
     }
     if (!picked) {
       try { const end = Game.endConvo(vid, 'done'); if (end && end.line) lines.push('TEACH closing: ' + end.line); } catch (e) { lines.push('TEACH endConvo: ' + e.message); }
