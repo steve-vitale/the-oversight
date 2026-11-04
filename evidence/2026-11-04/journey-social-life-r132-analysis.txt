@@ -1,0 +1,63 @@
+SEEDS: 41601 d61, 41602 d50, 41603 d70, 41604 d112
+
+seed 41601: days=61 endReason=village-lost fullConvs=53 naturalEnds=42 feasts=8 moots=1
+  decisions: {"lure:decline":3,"lure:accept":1,"party:accept":3,"party:decline":4}
+  plot plot_1 d7 leader=Harold inviter=Hannah target=Wiebke sprung=true gT->L=34.4 gT->I=0 gA->Tmax=0 gI->T=0
+  armWrapped=true springWrapped=true
+  ARM d7 plot_1 Harold->Wiebke inviter=Hannah motive={"score":35.84,"reasons":["grievance"]} gT->L=44.800000000000004 gL->T=44.800000000000004 accMotives=[{"who":"Hannah","score":0,"reasons":[],"grievance":0},{"who":"Yara","score":0,"reasons":[],"grievance":0}] trust={"leader":17,"Hannah":10,"Yara":21} goal=peace
+  SPRING d10 plot_1 Harold->Wiebke outcome=escaped case=case_2 endCase=case_2 charge=ambush status=acquitted heardDay=11 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=1
+  expireWrapped=true expiredEvents=0
+  village fallen: 14 by cause: {"the wild":12,"monster":2}
+  death clusters (>=3/day): d61x5
+  ambush-caused fallen: []
+  (samples.deaths, all recorded incl. outsiders: 53 — NOT village deaths)
+  census: seed 41601, day 61, alive 0 | fallen: 14
+
+seed 41602: days=50 endReason=village-lost fullConvs=45 naturalEnds=42 feasts=6 moots=3
+  decisions: {"party:accept":2,"party:decline":1}
+  armWrapped=true springWrapped=true
+  expireWrapped=true expiredEvents=0
+  village fallen: 12 by cause: {"a wound that wouldn't close":1,"The Terms of Service":1,"the wild":8,"combat":1,"a stranger":1}
+  death clusters (>=3/day): d48x3
+  ambush-caused fallen: []
+  (samples.deaths, all recorded incl. outsiders: 63 — NOT village deaths)
+  census: seed 41602, day 50, alive 0 | fallen: 12
+
+seed 41603: days=70 endReason=village-lost fullConvs=55 naturalEnds=48 feasts=10 moots=0
+  decisions: {"lure:decline":3,"lure:accept":2,"party:decline":5,"party:accept":3}
+  plot plot_1 d6 leader=Willow inviter=Maricela target=Elijah sprung=true gT->L=0 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_3 d8 leader=Willow inviter=Maricela target=Elijah sprung=true gT->L=0 gT->I=0 gA->Tmax=0 gI->T=0
+  armWrapped=true springWrapped=true
+  ARM d6 plot_1 Willow->Elijah inviter=Maricela motive={"score":37.120000000000005,"reasons":["grievance"]} gT->L=46.400000000000006 gL->T=46.400000000000006 accMotives=[{"who":"Maricela","score":0,"reasons":[],"grievance":0},{"who":"Maya","score":25,"reasons":["ambition"],"grievance":0}] trust={"leader":76,"Maricela":19,"Maya":9} goal=survive
+  ARM d8 plot_3 Willow->Elijah inviter=Maricela motive={"score":35.84,"reasons":["grievance"]} gT->L=44.800000000000004 gL->T=44.800000000000004 accMotives=[{"who":"Maya","score":25,"reasons":["ambition"],"grievance":0},{"who":"Maricela","score":0,"reasons":[],"grievance":0}] trust={"leader":90,"Maya":8,"Maricela":27} goal=survive
+  SPRING d7 plot_1 Willow->Elijah outcome=escaped case=case_2 endCase=case_2 charge=ambush status=acquitted heardDay=9 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=3
+  SPRING d10 plot_3 Willow->Elijah outcome=escaped case=case_4 endCase=case_4 charge=ambush status=acquitted heardDay=12 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=3
+  expireWrapped=true expiredEvents=0
+  village fallen: 13 by cause: {"the wild":11,"monster":1,"combat":1}
+  death clusters (>=3/day): d65x4
+  ambush-caused fallen: []
+  (samples.deaths, all recorded incl. outsiders: 61 — NOT village deaths)
+  census: seed 41603, day 70, alive 1 | - Vasyl (soldier, ?) trust=60 mood=cool npcAbilities=0
+
+seed 41604: days=112 endReason=village-lost fullConvs=101 naturalEnds=81 feasts=16 moots=1
+  decisions: {"lure:decline":3,"lure:accept":1,"party:decline":12,"party:accept":5}
+  plot plot_1 d8 leader=Kate inviter=Adel target=Sanne sprung=true gT->L=60 gT->I=0 gA->Tmax=0 gI->T=0
+  armWrapped=true springWrapped=true
+  ARM d8 plot_1 Kate->Sanne inviter=Adel motive={"score":39.68000000000001,"reasons":["grievance"]} gT->L=49.6 gL->T=49.6 accMotives=[{"who":"Adel","score":0,"reasons":[],"grievance":0},{"who":"Yannick","score":25,"reasons":["ambition"],"grievance":0}] trust={"leader":48,"Adel":38,"Yannick":38} goal=belong
+  SPRING d11 plot_1 Kate->Sanne outcome=hurt case=case_2 endCase=case_2 charge=ambush status=acquitted heardDay=13 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=1
+  expireWrapped=true expiredEvents=0
+  village fallen: 18 by cause: {"monster":5,"contest":1,"The Loud Beast":1,"the wild":6,"a wound that wouldn't close":2,"the arena":1,"Gavel":1,"betrayal":1}
+  death clusters (>=3/day): none
+  ambush-caused fallen: []
+  (samples.deaths, all recorded incl. outsiders: 81 — NOT village deaths)
+  census: seed 41604, day 112, alive 1 | - Adel (pharmacist, ?) trust=65 mood=warm npcAbilities=0
+
+PANEL lure/party decisions: {"lure:decline":9,"lure:accept":4,"party:accept":13,"party:decline":22}
+PANEL plots: 4 (late d30+: 0)
+PANEL plots with grievanceTargetToLeader > 0: 2
+PANEL grievance-holder -> later leader cases: 0
+PANEL arms: 4 (late d30+: 0) grievance-linked at arming: 4
+PANEL springs: 4 outcomes: {"escaped":3,"hurt":1}
+PANEL escaped springs: 3
+PANEL expired plots: 0
+PANEL villages past d100: 1/4
