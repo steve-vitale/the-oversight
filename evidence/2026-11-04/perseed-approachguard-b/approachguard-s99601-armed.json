@@ -1,0 +1,1770 @@
+{
+  "seed": 99601,
+  "run": "armed",
+  "policy": "approachfall",
+  "anchorCommit": "e44da039d8c7",
+  "days": 79,
+  "gameDays": 80,
+  "endReason": "village-lost",
+  "won": false,
+  "villageLost": true,
+  "maxWave": 4,
+  "spawnsW4": 0,
+  "tbCalls": 1,
+  "fieldCallsW4": 0,
+  "exposures": [
+    {
+      "seq": 1,
+      "type": "tb",
+      "day": 74,
+      "mid": "eulogy",
+      "wave": 4,
+      "fightId": "fmgpspipx_5n8nql",
+      "scholarAtStart": "gen_1bg01x2",
+      "leadVid": "gen_1bg01x2",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "gen_1bg01x2",
+          "hpStart": 100,
+          "maxHp": 100,
+          "gear": {
+            "vid": "gen_1bg01x2",
+            "armorP": 16,
+            "armed": true,
+            "weapon": "Fire-hardened spear",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "eulogy",
+          "hpStart": 972,
+          "maxHp": 972,
+          "wave": 4,
+          "joinedMidFight": false
+        }
+      ],
+      "leadGear": {
+        "vid": "gen_1bg01x2",
+        "armorP": 16,
+        "armed": true,
+        "weapon": "Fire-hardened spear",
+        "vpFound": true,
+        "readError": null
+      },
+      "scholarStart": {
+        "health": 100,
+        "energy": 90,
+        "food": "UNRECORDED"
+      },
+      "trickKnown": false,
+      "hits": [
+        {
+          "round": 1,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 73,
+          "returned": 148,
+          "hpBefore": 972,
+          "hpAfter": 824,
+          "hpDelta": -148,
+          "turnSeq": null,
+          "actorKey": null,
+          "actorKind": null,
+          "phase": "between-turns",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 22,
+          "returned": 45,
+          "hpBefore": 824,
+          "hpAfter": 779,
+          "hpDelta": -45,
+          "turnSeq": 1,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 2,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's attack",
+          "requested": 50,
+          "returned": 32,
+          "hpBefore": 100,
+          "hpAfter": 68,
+          "hpDelta": -32,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 18,
+          "returned": 37,
+          "hpBefore": 779,
+          "hpAfter": 742,
+          "hpDelta": -37,
+          "turnSeq": 2,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's attack",
+          "requested": 57,
+          "returned": 37,
+          "hpBefore": 68,
+          "hpAfter": 31,
+          "hpDelta": -37,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 19,
+          "returned": 39,
+          "hpBefore": 742,
+          "hpAfter": 703,
+          "hpDelta": -39,
+          "turnSeq": 3,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 66,
+          "returned": 42,
+          "hpBefore": 31,
+          "hpAfter": -11,
+          "hpDelta": -42,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "PATIENT AIM: first strike, doubled."
+        },
+        {
+          "kind": "say",
+          "line": "AMBUSH: first blood. ×1.5."
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "FEASTED ×2.03: the feast was the weapon."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 148 (Fire-hardened spear)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they stood their ground, poor brave fools.\" The spotlight widens. (No weight yet — just the story starting.) (5 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "FEASTED ×2.03: the feast was the weapon."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 45 (Fire-hardened spear)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they ran, and the spotlight followed.\" The spotlight narrows. Your dodge feels watched. (-10% dodge.) (4 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 eulogy's attack finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 18."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's attack hits you for 32."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Epitaph — locks onto one target — moving won't dodge it. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "FEASTED ×2.03: the feast was the weapon."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 37 (Fire-hardened spear)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they bled, politely, where everyone could see.\" The narration lingers on your wounds. (Bleeds last 1 round longer.) (3 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 It connects!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 20."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's attack hits you for 37."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Final Chapter — strikes one target after a windup. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "FEASTED ×2.03: the feast was the weapon."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 39 (Fire-hardened spear)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they knelt, and the story approved.\" The story leans in. (The Eulogy's attacks +15.) (2 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 24."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 42."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Valentina West is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Valentina West is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Valentina kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "\"Valentina's gone.\" Nathan looks at you for a long moment. \"You're not Valentina.\" No heat in it. Just fact. You'll have to earn this face."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Kanat blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Calming Panic (Level 1). Ground them: 5 things you see, 4 you hear, 3 you touch. Breathe with them. Slow is fast."
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Valentina West, 74 days. The mantle passes to Kanat Galymov."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Kanat Galymov, 28 — an emergency dispatcher. His hands know different work now: Green Whisper, Dowsing, War Cry, Scream Cheese."
+        },
+        {
+          "kind": "say",
+          "line": "You knew Valentina — not the office, the person. The fire keeps expecting them, and so do you. That's a heavier kind of stepping up. (+5 trauma)"
+        },
+        {
+          "kind": "say",
+          "line": "At the grave, Nathan, Pavel, Sofia and 1 more speak for Kanat — \"Valentina trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew Kanat before the Codex did — his name already carried weight here."
+        }
+      ],
+      "transcriptOverflow": false,
+      "abilityUses": [],
+      "shoutUses": 0,
+      "offerFoodUses": 0,
+      "turns": [
+        {
+          "turnSeq": 1,
+          "round": 2,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 8,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 2,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Fire-hardened spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 7,
+                "my": 1,
+                "hp": 824,
+                "maxHp": 972,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 8,
+                  "my": 0,
+                  "moveLeft": 2,
+                  "acted": false,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 2,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Fire-hardened spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 7,
+                    "my": 1,
+                    "hp": 824,
+                    "maxHp": 972,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 8,
+                  "my": 0,
+                  "moveLeft": 2,
+                  "acted": true,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 2,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Fire-hardened spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 7,
+                    "my": 1,
+                    "hp": 779,
+                    "maxHp": 972,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 9,
+          "end": {
+            "player": {
+              "mx": 8,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 2,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Fire-hardened spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 7,
+                "my": 1,
+                "hp": 779,
+                "maxHp": 972,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(eulogy's hide absorbs 8.)",
+            "FEASTED ×2.03: the feast was the weapon.",
+            "You STRIKE the eulogy for 45 (Fire-hardened spear).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 2,
+          "round": 3,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 8,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 68,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 2,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Fire-hardened spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 7,
+                "my": 1,
+                "hp": 779,
+                "maxHp": 972,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 8,
+                  "my": 0,
+                  "moveLeft": 2,
+                  "acted": false,
+                  "hp": 68,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 2,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Fire-hardened spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 7,
+                    "my": 1,
+                    "hp": 779,
+                    "maxHp": 972,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 8,
+                  "my": 0,
+                  "moveLeft": 2,
+                  "acted": true,
+                  "hp": 68,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 2,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Fire-hardened spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 7,
+                    "my": 1,
+                    "hp": 742,
+                    "maxHp": 972,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 20,
+          "end": {
+            "player": {
+              "mx": 8,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 68,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 2,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Fire-hardened spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 7,
+                "my": 1,
+                "hp": 742,
+                "maxHp": 972,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(eulogy's hide absorbs 8.)",
+            "FEASTED ×2.03: the feast was the weapon.",
+            "You STRIKE the eulogy for 37 (Fire-hardened spear).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 3,
+          "round": 4,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 8,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 31,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 2,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Fire-hardened spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 7,
+                "my": 1,
+                "hp": 742,
+                "maxHp": 972,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 8,
+                  "my": 0,
+                  "moveLeft": 2,
+                  "acted": false,
+                  "hp": 31,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 2,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Fire-hardened spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 7,
+                    "my": 1,
+                    "hp": 742,
+                    "maxHp": 972,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 8,
+                  "my": 0,
+                  "moveLeft": 2,
+                  "acted": true,
+                  "hp": 31,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 2,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Fire-hardened spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 7,
+                    "my": 1,
+                    "hp": 703,
+                    "maxHp": 972,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 31,
+          "end": {
+            "player": {
+              "mx": 8,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 31,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 2,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Fire-hardened spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 7,
+                "my": 1,
+                "hp": 703,
+                "maxHp": 972,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(eulogy's hide absorbs 8.)",
+            "FEASTED ×2.03: the feast was the weapon.",
+            "You STRIKE the eulogy for 39 (Fire-hardened spear).",
+            "📺 +5 style — solid hit"
+          ]
+        }
+      ],
+      "npcTurns": [
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 1,
+          "pre": {
+            "pos": {
+              "mx": 7,
+              "my": 1
+            },
+            "hp": 824,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 7,
+              "my": 1
+            },
+            "hp": 824,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [
+            "📖 The Eulogy narrates, honestly, always: \"and then they stood their ground, poor brave fools.\" The spotlight widens. (No weight yet — just the story starting.) (5 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 2,
+          "pre": {
+            "pos": {
+              "mx": 7,
+              "my": 1
+            },
+            "hp": 779,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 7,
+              "my": 1
+            },
+            "hp": 779,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 50,
+              "hpDelta": -32,
+              "round": 2
+            }
+          ],
+          "sayLines": [
+            "📖 The Eulogy narrates, honestly, always: \"and then they ran, and the spotlight followed.\" The spotlight narrows. Your dodge feels watched. (-10% dodge.) (4 verses remain. Contradict it — do the opposite — or give it a better ending.)",
+            "💥 eulogy's attack finds you — no dodging it.",
+            "Armor absorbs 18.",
+            "Eulogy's attack hits you for 32.",
+            "📖 Codex: Epitaph — locks onto one target — moving won't dodge it. You won't forget this."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 3,
+          "pre": {
+            "pos": {
+              "mx": 7,
+              "my": 1
+            },
+            "hp": 742,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "post": {
+            "pos": {
+              "mx": 7,
+              "my": 1
+            },
+            "hp": 742,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 57,
+              "hpDelta": -37,
+              "round": 3
+            }
+          ],
+          "sayLines": [
+            "📖 The Eulogy narrates, honestly, always: \"and then they bled, politely, where everyone could see.\" The narration lingers on your wounds. (Bleeds last 1 round longer.) (3 verses remain. Contradict it — do the opposite — or give it a better ending.)",
+            "💥 It connects!",
+            "Armor absorbs 20.",
+            "Eulogy's attack hits you for 37.",
+            "📖 Codex: Final Chapter — strikes one target after a windup. You won't forget this."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 4,
+          "pre": {
+            "pos": {
+              "mx": 7,
+              "my": 1
+            },
+            "hp": 703,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "post": {
+            "pos": {
+              "mx": 7,
+              "my": 1
+            },
+            "hp": 703,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 66,
+              "hpDelta": -42,
+              "round": 4
+            }
+          ],
+          "sayLines": [
+            "📖 The Eulogy narrates, honestly, always: \"and then they knelt, and the story approved.\" The story leans in. (The Eulogy's attacks +15.) (2 verses remain. Contradict it — do the opposite — or give it a better ending.)",
+            "💥 Final Chapter!",
+            "Armor absorbs 24.",
+            "Eulogy's Final Chapter hits you for 42.",
+            "You go down.",
+            "OH. Oh no. ...The gamblers are very quiet.",
+            "📖 The Codex turns a page on its own. Valentina West is dead. You didn't ask. It knew.",
+            "Nobody's talking much. The fire feels smaller tonight.",
+            "🕯️ Valentina West is dead — the wild. The village stops. Somebody screams. Somebody else starts digging.",
+            "What Valentina kept close goes into the ground with them — keepsakes are buried, never taken from the body.",
+            "\"Valentina's gone.\" Nathan looks at you for a long moment. \"You're not Valentina.\" No heat in it. Just fact. You'll have to earn this face.",
+            "The Codex doesn't pause for grief. Kanat blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+            "📖 LEARNED: Calming Panic (Level 1). Ground them: 5 things you see, 4 you hear, 3 you touch. Breathe with them. Slow is fast.",
+            "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+            "📖 The Codex turns a page: Valentina West, 74 days. The mantle passes to Kanat Galymov.",
+            "🪞 You wake up somebody else. Kanat Galymov, 28 — an emergency dispatcher. His hands know different work now: Green Whisper, Dowsing, War Cry, Scream Cheese.",
+            "You knew Valentina — not the office, the person. The fire keeps expecting them, and so do you. That's a heavier kind of stepping up. (+5 trauma)",
+            "At the grave, Nathan, Pavel, Sofia and 1 more speak for Kanat — \"Valentina trusted them. We saw it. Give them the fire's hearing.\" The village listens.",
+            "The fire knew Kanat before the Codex did — his name already carried weight here."
+          ],
+          "threw": null
+        }
+      ],
+      "end": {
+        "result": "lost",
+        "day": 74,
+        "round": 4,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "eulogy",
+            "alive": true,
+            "fled": false,
+            "hp": 703,
+            "maxHp": 972
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "gen_1bg01x2",
+            "alive": false,
+            "fled": false,
+            "hp": -11,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "gen_1bg01x2"
+        ],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false
+    }
+  ],
+  "killsW4": 0,
+  "killRows": [],
+  "unlinkedKills": [],
+  "spawns": [],
+  "orphanTbEnds": [],
+  "wrapCounts": {
+    "spawnWorldMonster": 49,
+    "fieldFight": 106,
+    "recordWaveKill": 58,
+    "startCombat": 19,
+    "tbBeginTurn": 182,
+    "tbAdvance": 175,
+    "tbVillagerTurn": 55,
+    "tbDamage": 140,
+    "tbPlayerMove": 16,
+    "tbMonsterTurn": 461,
+    "tbPlayerStrike": 72,
+    "tbEnd": 19,
+    "useAbility": 35,
+    "tbBarrierExit": 1,
+    "recordPyrrhicKill": 1
+  },
+  "instrumentErrors": [],
+  "notes": [],
+  "deaths": [
+    {
+      "day": 7,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "mirrormoth",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "sunback",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 10,
+      "kind": "monster",
+      "who": "dustboar",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 13,
+      "kind": "villager",
+      "who": "gen_bl9ova7",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 13,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 14,
+      "kind": "monster",
+      "who": "gallowdeer",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 14,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 18,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 18,
+      "kind": "villager",
+      "who": "gen_5kdgx4r",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 18,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 18,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 18,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 23,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 24,
+      "kind": "monster",
+      "who": "dustboar",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 25,
+      "kind": "monster",
+      "who": "understudy",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 25,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 27,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 29,
+      "kind": "monster",
+      "who": "voice_mimic_radio",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 30,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 32,
+      "kind": "monster",
+      "who": "lockpick_raccoon",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 32,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 32,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 38,
+      "kind": "monster",
+      "who": "terms_of_service",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 46,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 47,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 48,
+      "kind": "monster",
+      "who": "understudy",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 49,
+      "kind": "monster",
+      "who": "lockpick_raccoon",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 49,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 49,
+      "kind": "monster",
+      "who": "anaconda_empress",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 50,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 50,
+      "kind": "monster",
+      "who": "terms_of_service",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 50,
+      "kind": "monster",
+      "who": "landlord",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 52,
+      "kind": "monster",
+      "who": "ducks_in_a_row",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 53,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 53,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 55,
+      "kind": "monster",
+      "who": "statickite",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 55,
+      "kind": "monster",
+      "who": "mirrormoth",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 55,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 55,
+      "kind": "villager",
+      "who": "gen_0yolyrf",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 55,
+      "kind": "monster",
+      "who": "sweeps_week",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 57,
+      "kind": "monster",
+      "who": "dustboar",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 57,
+      "kind": "monster",
+      "who": "speedbump_turtle",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 57,
+      "kind": "villager",
+      "who": "jovan_milic",
+      "cause": "The Focus Group",
+      "player": false
+    },
+    {
+      "day": 61,
+      "kind": "villager",
+      "who": "yuki_mori",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 62,
+      "kind": "monster",
+      "who": "understudy",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 62,
+      "kind": "monster",
+      "who": "callback",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 62,
+      "kind": "monster",
+      "who": "understudy",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 66,
+      "kind": "monster",
+      "who": "mirror_stag",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 66,
+      "kind": "villager",
+      "who": "gen_pp8q2lh",
+      "cause": "the arena",
+      "player": true
+    },
+    {
+      "day": 71,
+      "kind": "monster",
+      "who": "chorus_line",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 74,
+      "kind": "villager",
+      "who": "gen_1bg01x2",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 75,
+      "kind": "monster",
+      "who": "callback",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 76,
+      "kind": "monster",
+      "who": "warranty_caller",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 78,
+      "kind": "villager",
+      "who": "gen_ftni53c",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 78,
+      "kind": "villager",
+      "who": "nathan_lee",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 78,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 79,
+      "kind": "villager",
+      "who": "pavel_dubinin",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 79,
+      "kind": "villager",
+      "who": "sofia_chen",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 80,
+      "kind": "monster",
+      "who": "focus_group_eye",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 80,
+      "kind": "villager",
+      "who": "sigrun_eiriksdottir",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 80,
+      "kind": "villager",
+      "who": "nadia_khoury",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 80,
+      "kind": "villager",
+      "who": "app_mgpspimn21",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 80,
+      "kind": "villager",
+      "who": "app_mgpspin3818",
+      "cause": "the wild",
+      "player": true
+    }
+  ],
+  "resultKeys": [
+    "days",
+    "gameDays",
+    "maxWaveUnlocked",
+    "waveKills",
+    "endReason",
+    "stop",
+    "communityExposure",
+    "telemetry",
+    "samples",
+    "learnedPlants",
+    "learnedSkills",
+    "pacing",
+    "ms",
+    "manifest",
+    "policyId",
+    "notes"
+  ],
+  "scaleSamples": [
+    [
+      30,
+      "village"
+    ],
+    [
+      60,
+      "village"
+    ]
+  ],
+  "standingSamples": [
+    [
+      30,
+      0
+    ],
+    [
+      60,
+      50
+    ]
+  ],
+  "scaleRankFinal": "village",
+  "standingFinal": 145,
+  "arcFinal": 3,
+  "tableWaiting": false,
+  "tableEntered": false,
+  "nationalReached": false,
+  "maxStanding": 145,
+  "scaleReadError": null
+}
