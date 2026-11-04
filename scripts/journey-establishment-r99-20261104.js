@@ -160,11 +160,22 @@ async function runSeed(seed) {
   // r99: skill-economy rows (read-only slice of telemetry).
   const SKILL_TYPES = ['skill_lesson','skill_taught','villager_skill','villager_grant','villager_level_up','villager_seek_knowledge'];
   const skillRows = [];
+  const resolveWho = (w) => {
+    if (w == null) return null;
+    if (w === 'player') return 'player';
+    try { const n = nameOf(Game, w); return n || String(w); } catch (e) { return String(w); }
+  };
   for (const t of tele) {
     if (!t || SKILL_TYPES.indexOf(t.type) < 0) continue;
-    let who = null; try { who = t.who ? nameOf(Game, t.who) : null; } catch (e) { who = String(t.who); }
-    let skill = null; try { skill = t.skill || t.skillId || t.name || t.id || null; } catch (e) {}
-    skillRows.push({ day: t.day, type: t.type, who, skill: skill == null ? null : String(skill).slice(0,80) });
+    // Emission shapes (from src, not assumed): skill_lesson {teacher,learner,skill};
+    // villager_skill {vid,skill}; skill_taught {ability} with NO actor;
+    // villager_seek_knowledge {vid,teacher,ability}; villager_grant {vid,ability};
+    // villager_level_up {vid,track}. tele() itself adds day/type only.
+    let skill = null; try { skill = t.skill || t.ability || t.track || t.skillId || t.name || t.id || null; } catch (e) {}
+    skillRows.push({ day: t.day, type: t.type,
+      who: resolveWho(t.vid != null ? t.vid : (t.teacher != null ? t.teacher : null)),
+      teacher: resolveWho(t.teacher), learner: resolveWho(t.learner),
+      skill: skill == null ? null : String(skill).slice(0,80) });
   }
   const skillCounts = {}; for (const r of skillRows) skillCounts[r.type] = (skillCounts[r.type] || 0) + 1;
   const deaths = [];
@@ -198,7 +209,7 @@ async function runSeed(seed) {
   try { const sp = Game.getPerson ? Game.getPerson(Game.villagerId) : null; playerEquipped = Object.values((sp && sp.equipped) || {}).map(x => x && x.itemId).filter(Boolean); } catch (e) {}
   let playerRecipes = null;
   try { const rc = ((Game.state.codex || {}).recipes) || {}; playerRecipes = { bark_armor: (rc.bark_armor || {}).level || 0, hide_armor: (rc.hide_armor || {}).level || 0 }; } catch (e) {}
-  const contestTele = tele.filter(t => t && typeof t.type === 'string' && /contest/i.test(t.type)).map(t => ({ day: t.day, type: t.type, result: t.result || t.outcome || null, who: t.who ? nameOf(Game, t.who) : null }));
+  const contestTele = tele.filter(t => t && typeof t.type === 'string' && /contest/i.test(t.type)).map(t => ({ day: t.day, type: t.type, id: t.id || null, result: t.outcome || t.result || null }));
   const contestCounts = {};
   for (const t of contestTele) contestCounts[t.type] = (contestCounts[t.type] || 0) + 1;
 

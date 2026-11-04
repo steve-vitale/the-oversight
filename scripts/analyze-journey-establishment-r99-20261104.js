@@ -55,9 +55,12 @@ for (const seed of SEEDS) {
   console.log(`  M6 armor guardrail: playerCraft=${playerAttempts} ${JSON.stringify(j.craftLog || [])} npcBeatCalls=${(j.npcCraftLog || []).length} npcNonzeroRet=${npcNonzero} npcAttempts=${npcAttempts.length} [${npcAttemptDays}] wornEnd=${worn.length} [${wornNames.join('; ') || '-'}] playerPack=${JSON.stringify(j.playerPackArmor)} playerEquipped=${JSON.stringify(j.playerEquipped)} recipes=${JSON.stringify(j.playerRecipes)}`);
   const sr = j.skillRows || [];
   const sc = {}; const actors = new Set(); const skillNames = new Set(); let firstTaught = null;
-  for (const r of sr) { sc[r.type] = (sc[r.type] || 0) + 1; if (r.who) actors.add(r.who); if (r.skill) skillNames.add(r.skill); if (r.type === 'skill_taught' && firstTaught == null) firstTaught = r.day; }
+  const lessonPairs = []; const npcTaught = [];
+  for (const r of sr) { sc[r.type] = (sc[r.type] || 0) + 1; if (r.who) actors.add(r.who); if (r.learner) actors.add(r.learner); if (r.skill) skillNames.add(r.skill); if (r.type === 'skill_taught' && firstTaught == null) firstTaught = r.day;
+    if (r.type === 'skill_lesson') { lessonPairs.push(`${r.teacher || '?'}->${r.learner || '?' }:${r.skill || '?'}`); if (r.teacher && r.teacher !== 'player' && r.learner && r.learner !== 'player') npcTaught.push(`${r.teacher}->${r.learner}:${r.skill}`); } }
   const fired = (j.contestCounts || {}).contest_fired || 0, ended = (j.contestCounts || {}).contest_end || 0;
   console.log(`  SKILLS: rows=${sr.length} byType=${JSON.stringify(sc)} actors=${actors.size} [${[...actors].slice(0,12).join(', ')}] skills=[${[...skillNames].slice(0,12).join(', ')}] firstTaughtDay=${firstTaught}`);
+  console.log(`  LESSONS: pairs=${lessonPairs.length} [${lessonPairs.slice(0,10).join(' | ')}] npcToNpc=${npcTaught.length} [${npcTaught.slice(0,6).join(' | ')}]`);
   console.log(`  CONTESTS2: fired=${fired} ended=${ended} dangling=${fired - ended}`);
   console.log(`  contests: ${JSON.stringify(j.contestCounts)} firedDays=${(j.contestTele || []).filter(t => t.type === 'contest_fired').map(t => t.day).join(',')}`);
   console.log(`  deaths by cause/kind: ${JSON.stringify((j.deaths || []).reduce((a, d) => { const k = `${d.cause}/${d.kind}`; a[k] = (a[k] || 0) + 1; return a; }, {}))}`);

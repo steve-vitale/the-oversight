@@ -93,3 +93,21 @@ plus the player alone?
   any fix gets its own proof test and a re-run of affected seeds.
 - No live-build screenshot pass this run (no dialogue/UI change is in
   scope); the people check is transcript-based, as in r81–r86.
+
+## Instrument correction (pre-scoring, pilot seed 1301 only)
+The pilot exposed a mapping error, fixed BEFORE any panel scoring:
+skill rows carry no `who` field — tele() adds day/type only. Actual
+emission shapes, read from src/js: skill_lesson {teacher,learner,skill},
+villager_skill {vid,skill}, skill_taught {ability} with NO actor,
+villager_seek_knowledge {vid,teacher,ability}, villager_grant
+{vid,ability}, villager_level_up {vid,track}. The driver now maps those
+fields (teacher/learner resolved to names, 'player' kept literal).
+M1's bar is UNCHANGED (>= 2 distinct learners + >= 1 skill_taught row on
+>= 3/4 seeds); only the crossing evidence moves from skill_taught
+(which cannot name an actor) to skill_lesson teacher->learner pairs,
+where villager->villager teaching is directly visible. Contest rows
+likewise fixed to the real emission shape (contest_fired {id},
+contest_end {id,outcome}). Pilot seed 1301 is re-run on the fixed
+driver so the whole panel shares one instrument; its game-over story
+(day-21 pantry collapse, below) is unchanged by the re-run's instrument
+only — trajectories must be re-verified identical on headline fields.
