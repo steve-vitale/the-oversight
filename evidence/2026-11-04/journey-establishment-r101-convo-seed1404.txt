@@ -1,0 +1,408 @@
+=== R101 TEACHING CONVOS (one dawn attempt/day, player-teaches only) ===
+TEACH d1 A person, maybe 30s, with thick glasses: OPENING: "Okay, real question: what's the funniest thing you've seen since we got here? I desperately need it."
+TEACH YOU: [ans:q_laugh:a_story] (tell them something funny)
+TEACH THEM: They laugh — really laugh, the first real one you've heard in days. "Okay. Okay, that's good. I needed that."
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Sorry — I shouldn't load that on you. What's up? Hm."
+TEACH YOU: [skill_teach:steady_hands] "I could show you Steady Hands."
+TEACH THEM: You walk them through Steady Hands, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "Steady as she goes. We'll talk again."
+TEACH d2 A woman, maybe 50s: OPENING: "...Hi. Sorry. I'm not good at the talking-to-strangers part."
+TEACH YOU: [ans:q_quiet:a_kind] "Neither am I, honestly."
+TEACH THEM: Something eases in their shoulders. "Oh. Okay. That's... that's fine, then."
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Forget I said anything. What did you want?"
+TEACH YOU: [skill_teach:tool_knap] "I could show you Stone Tools."
+TEACH THEM: You walk them through Stone Tools, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "Okay. Bye. This was — fine. It was fine."
+TEACH d3 A person, maybe 40s: OPENING: "Look — What did you do for fun? Before. The thing you'd do on a perfect Saturday."
+TEACH YOU: [ans:q_fun:honest_pass] "I'd rather not say."
+TEACH THEM: An easy shrug. "Your call. I'm just glad you're talking at all."
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Sorry — I shouldn't load that on you. What's up?"
+TEACH YOU: [skill_teach:tool_knap] "I could show you Stone Tools."
+TEACH THEM: You walk them through Stone Tools, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "Good talking. We'll figure it out."
+TEACH d5 A man, maybe 40s, with sun-creased eyes: OPENING: "Can we talk?" Thabo sits down near you. "Just... talk. Like people used to."
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Yeah? What's up? That's the priority."
+TEACH YOU: [menu:more] More things to say (1/3)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:steady_hands] "I could show you Steady Hands."
+TEACH THEM: You walk them through Steady Hands, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "Well. That happened."
+TEACH d6 Hassan: OPENING: "About what you're hoping for — What are you hoping for? Not the big stuff. The small thing."
+TEACH YOU: [ans:q_hope:honest_pass] "I'd rather not say."
+TEACH THEM: "Okay." They don't push. "Not everything needs saying out loud."
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Sorry — I shouldn't load that on you. What's up? That's the whole of it."
+TEACH YOU: [menu:more] More things to say (1/3)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:gossip_network] "I could show you Gossip Network."
+TEACH THEM: You walk them through Gossip Network, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "Alright. Back to work."
+TEACH d7 Ines: OPENING: "About your plan here — So what's your plan here? Just... get through it? Anyway — how are YOU doing?"
+TEACH YOU: [ans:q_plan:a_survive] "One day at a time."
+TEACH THEM: "Honest. I can work with honest. Makes sense to me."
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Forget I said anything. What did you want? How are you holding up, though?"
+TEACH YOU: [menu:more] More things to say (1/3)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:steady_hands] "I could show you Steady Hands."
+TEACH THEM: You walk them through Steady Hands, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "Take care of yourself. I mean that."
+TEACH d8 Naomi: OPENING: "They'd tell me to keep working. So I'm working. That's the whole plan."
+TEACH (navigation exhausted: no teach offer, no answer, no subject, no more page)
+TEACH closing: "I should — yeah. Later."
+TEACH d9 Antonia: OPENING: "Have you — sorry. I keep thinking about them."
+TEACH (navigation exhausted: no teach offer, no answer, no subject, no more page)
+TEACH closing: "Thanks. I just... need some air."
+TEACH d9 Somsri: OPENING: "It's quiet today. Wrong kind of quiet."
+TEACH (navigation exhausted: no teach offer, no answer, no subject, no more page)
+TEACH closing: "I'll be okay. Don't worry about me. Worry about... actually, don't worry at all."
+TEACH d11 Onni: OPENING: "The pantry's nearly bare. Come forage with me tomorrow — two of us can fill packs."
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Sorry — I shouldn't load that on you. What's up?"
+TEACH YOU: [menu:more] More things to say (1/4)
+TEACH THEM: (null)
+TEACH YOU: [menu:more] More things to say (2/4)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:steady_hands] "I could show you Steady Hands."
+TEACH THEM: You walk them through Steady Hands, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "Well. We'll see how it goes."
+TEACH d12 Hassan: OPENING: "We're eating through stores faster than we replace them. Will you forage with me tomorrow? Two pairs of eyes, twice the ground."
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Forget I said anything. What did you want?"
+TEACH YOU: [menu:more] More things to say (1/5)
+TEACH THEM: (null)
+TEACH YOU: [menu:more] More things to say (2/5)
+TEACH THEM: (null)
+TEACH YOU: [menu:more] More things to say (3/5)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:tool_knap] "I could show you Stone Tools."
+TEACH THEM: You walk them through Stone Tools, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "Steady as she goes. We'll talk again."
+TEACH d12 Ines: OPENING: "You said one day at a time. How's that holding — still day by day, or are you thinking further out yet?"
+TEACH YOU: [gq:open:unsure] "I don't know how to answer that yet."
+TEACH THEM: They nod, giving you room to think.
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Sure — what's on your mind?"
+TEACH YOU: [menu:more] More things to say (1/5)
+TEACH THEM: (null)
+TEACH YOU: [menu:more] More things to say (2/5)
+TEACH THEM: (null)
+TEACH YOU: [menu:more] More things to say (3/5)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:gossip_network] "I could show you Gossip Network."
+TEACH THEM: You walk them through Gossip Network, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "Anyway. I'm glad we talked. Really."
+TEACH d14 Zoltan: OPENING: "About the most useful thing you've learned — What's the most useful thing you've learned since we got here?"
+TEACH YOU: [ans:q_useful:a_hunger] "How to be hungry and keep going anyway."
+TEACH THEM: "I… The fundamental skill. Everything else is decoration."
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Forget I said anything. What did you want? I won't forget that."
+TEACH YOU: [menu:more] More things to say (1/3)
+TEACH THEM: (null)
+TEACH YOU: [menu:more] More things to say (2/3)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:steady_hands] "I could show you Steady Hands."
+TEACH THEM: You walk them through Steady Hands, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "...I'm going to go be quiet somewhere else now."
+TEACH d15 Naomi: OPENING: "Are you angry? At whoever did this. At the sky. At anything."
+TEACH YOU: [ans:q_angry:honest_pass] "I'd rather not say."
+TEACH THEM: They accept it without a flicker. "Plenty I don't say either."
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Forget I said anything. What did you want?"
+TEACH YOU: [menu:more] More things to say (1/4)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:gossip_network] "I could show you Gossip Network."
+TEACH THEM: You walk them through Gossip Network, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "Good talk."
+TEACH d16 Joseph: OPENING: "This cut — I can't clean it properly one-handed. Could you take a look?"
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Sorry — I shouldn't load that on you. What's up?"
+TEACH YOU: [menu:more] More things to say (1/4)
+TEACH THEM: (null)
+TEACH YOU: [menu:more] More things to say (2/4)
+TEACH THEM: (null)
+TEACH YOU: [menu:more] More things to say (3/4)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:steady_hands] "I could show you Steady Hands."
+TEACH THEM: You walk them through Steady Hands, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "That's enough talking for me."
+TEACH d17 Antonia: OPENING: "About what happened to my taken kin — You talk to it -- the System. Have you ever asked? About the taken -- about Claudia? ...sorry, lost it."
+TEACH YOU: [gq:yn:unsure] "I don't know."
+TEACH THEM: "It's all right if you don't know."
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Sorry — I shouldn't load that on you. What's up? I mean it."
+TEACH YOU: [menu:more] More things to say (1/4)
+TEACH THEM: (null)
+TEACH YOU: [menu:more] More things to say (2/4)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:preserve_food] "I could show you Food Preservation."
+TEACH THEM: You walk them through Food Preservation, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "I need some air. Alone air. You understand."
+TEACH d18 Somsri: OPENING: "Can I tell you something? At night I cry quietly so no one hears."
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Don't tell anyone I told you. What's on your mind?"
+TEACH YOU: [menu:more] More things to say (1/5)
+TEACH THEM: (null)
+TEACH YOU: [menu:more] More things to say (2/5)
+TEACH THEM: (null)
+TEACH YOU: [menu:more] More things to say (3/5)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:preserve_food] "I could show you Food Preservation."
+TEACH THEM: You walk them through Food Preservation, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "Alright. One thing at a time. That's how we get through."
+TEACH d19 Hassan: OPENING: "I can't reach this properly. Could you take a look?"
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Sorry — I shouldn't load that on you. What's up?"
+TEACH YOU: [menu:more] More things to say (1/5)
+TEACH THEM: (null)
+TEACH YOU: [menu:more] More things to say (2/5)
+TEACH THEM: (null)
+TEACH YOU: [menu:more] More things to say (3/5)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:shoulder_check] "I could show you Shoulder Check."
+TEACH THEM: You walk them through Shoulder Check, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "I should — yeah. Later."
+TEACH d20 Ines: OPENING: "About this wound — still need hands. Are you in?"
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Sorry — I shouldn't load that on you. What's up?"
+TEACH YOU: [menu:more] More things to say (1/3)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:preserve_food] "I could show you Food Preservation."
+TEACH THEM: You walk them through Food Preservation, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+TEACH d21 Zoltan: OPENING: "You said the most useful thing you learned is being hungry and going anyway. Still the lesson?"
+TEACH (navigation exhausted: no teach offer, no answer, no subject, no more page)
+TEACH closing: "Thanks. I think. I'm going to go process that somewhere quiet."
+TEACH d21 Naomi: OPENING: "My wound needs a second pair of hands. Will you help me clean it?"
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Sorry — I shouldn't load that on you. What's up?"
+TEACH YOU: [menu:more] More things to say (1/4)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:shoulder_check] "I could show you Shoulder Check."
+TEACH THEM: You walk them through Shoulder Check, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "Good. That's settled, then. Onward."
+TEACH d23 Joseph: OPENING: "About the sickness I'm fighting — still need hands. Are you in?"
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Forget I said anything. What did you want?"
+TEACH YOU: [menu:more] More things to say (1/3)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:preserve_food] "I could show you Food Preservation."
+TEACH THEM: You walk them through Food Preservation, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "Good talk."
+TEACH d24 Somsri: OPENING: "Never mind the food I needed — we got it handled. Thanks anyway."
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Forget I said anything. What did you want?"
+TEACH YOU: [menu:more] More things to say (1/4)
+TEACH THEM: (null)
+TEACH YOU: [menu:more] More things to say (2/4)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:shoulder_check] "I could show you Shoulder Check."
+TEACH THEM: You walk them through Shoulder Check, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "Steady as she goes. We'll talk again."
+TEACH d25 Onni: OPENING: "Can we talk?" Onni sits down near you. "Just... talk. Like people used to."
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Sure — what's on your mind?"
+TEACH YOU: [menu:more] More things to say (1/4)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:preserve_food] "I could show you Food Preservation."
+TEACH THEM: You walk them through Food Preservation, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "This stays between us, right? Right."
+TEACH d26 Hassan: OPENING: "This wound — I haven't stopped thinking about it."
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Forget I said anything. What did you want?"
+TEACH YOU: [menu:more] More things to say (1/4)
+TEACH THEM: (null)
+TEACH YOU: [menu:more] More things to say (2/4)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:weld] "I could show you Welding & Metalwork."
+TEACH THEM: You walk them through Welding & Metalwork, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "Steady as she goes. See you at dinner."
+TEACH d27 Somsri: OPENING: Somsri: "You. Yeah, you. What do you make of this?"
+TEACH YOU: [gq:open:unsure] "I don't know how to answer that yet."
+TEACH THEM: They nod, giving you room to think.
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Yeah? What's up? That matters to me."
+TEACH YOU: [menu:more] More things to say (1/4)
+TEACH THEM: (null)
+TEACH YOU: [menu:more] More things to say (2/4)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:gossip_network] "I could show you Gossip Network."
+TEACH THEM: You walk them through Gossip Network, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "Sorry. I need a minute."
+TEACH d27 Onni: OPENING: "Every laugh out there feels wrong today. Then I feel wrong for thinking it."
+TEACH (navigation exhausted: no teach offer, no answer, no subject, no more page)
+TEACH closing: "Thanks. I just... need some air."
+TEACH d29 Ines: OPENING: "I don't know what to do with my hands today."
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Sorry — I got lost in it for a second. What did you want to ask?"
+TEACH YOU: [menu:more] More things to say (1/3)
+TEACH THEM: (null)
+TEACH YOU: [menu:more] More things to say (2/3)
+TEACH THEM: (null)
+TEACH YOU: [menu:more] More things to say (3/3)
+TEACH THEM: (null)
+TEACH (menu repeats: pagination loop)
+TEACH closing: "I'll be okay. Don't worry about me. Worry about... actually, don't worry at all."
+TEACH d30 Zoltan: OPENING: "They'd tell me to keep working. So I'm working. That's the whole plan."
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "...Anyway. Sorry. What's on your mind?"
+TEACH YOU: [menu:more] More things to say (1/2)
+TEACH THEM: (null)
+TEACH YOU: [menu:more] More things to say (2/2)
+TEACH THEM: (null)
+TEACH (menu repeats: pagination loop)
+TEACH closing: "Sorry. I need a minute. This was... thank you. I need a minute."
+TEACH d31 Somsri: OPENING: "We never finished talking about that foraging help — we left it mid-thought, 7 days back. 'You walk them through Shoulder Check, then let them try. Clumsy, then less so. Huh. I can see how that'd…'"
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Sorry — I shouldn't load that on you. What's up?"
+TEACH YOU: [menu:more] More things to say (1/4)
+TEACH THEM: (null)
+TEACH YOU: [menu:more] More things to say (2/4)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:field_dressing] "I could show you Field Dressing."
+TEACH THEM: You walk them through Field Dressing, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+TEACH d32 Onni: OPENING: "I'm going hungry — have you got anything to spare? Anything? I can't keep going like this."
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Forget I said anything. What did you want?"
+TEACH YOU: [menu:more] More things to say (1/4)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:field_dressing] "I could show you Field Dressing."
+TEACH THEM: You walk them through Field Dressing, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "Talking helps. A little. Thank you."
+TEACH d33 Fatima: OPENING: "Have you — sorry. I keep thinking about them."
+TEACH (navigation exhausted: no teach offer, no answer, no subject, no more page)
+TEACH closing: "I should — yeah. Later."
+TEACH d34 Somsri: OPENING: "We never finished talking about that wound care — we left it mid-thought, 3 days back. 'You walk them through Field Dressing, then let them try. Clumsy, then less so. Huh. I can see how that'd…'"
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Forget I said anything. What did you want?"
+TEACH YOU: [menu:more] More things to say (1/4)
+TEACH THEM: (null)
+TEACH YOU: [menu:more] More things to say (2/4)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:shelter_debris] "I could show you Debris Shelter."
+TEACH THEM: You walk them through Debris Shelter, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "Thanks. I just... need some air."
+TEACH d35 Onni: OPENING: "I can't reach this properly. Will you help me clean it?"
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Sorry — I shouldn't load that on you. What's up?"
+TEACH YOU: [menu:more] More things to say (1/4)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:shoulder_check] "I could show you Shoulder Check."
+TEACH THEM: You walk them through Shoulder Check, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "Later."
+TEACH d36 Zoltan: OPENING: "Pantry's thin and getting thinner. Come forage with me tomorrow — two of us can fill packs."
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Sorry — I shouldn't load that on you. What's up?"
+TEACH YOU: [menu:more] More things to say (1/3)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:shoulder_check] "I could show you Shoulder Check."
+TEACH THEM: You walk them through Shoulder Check, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "Okay. Bye. This was — fine. It was fine."
+TEACH d37 Fatima: OPENING: "About the pantry run — I hate to ask twice, but it's still open. Will you?"
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Forget I said anything. What did you want?"
+TEACH YOU: [menu:more] More things to say (1/3)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:steady_hands] "I could show you Steady Hands."
+TEACH THEM: You walk them through Steady Hands, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "Alright. One thing at a time. That's how we get through."
+TEACH d38 Meera: OPENING: "The pantry's nearly bare. Will you forage with me tomorrow? Two pairs of eyes, twice the ground."
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Forget I said anything. What did you want?"
+TEACH YOU: [menu:more] More things to say (1/3)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:preserve_food] "I could show you Food Preservation."
+TEACH THEM: You walk them through Food Preservation, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "Well. That was conversation."
+TEACH d39 Yuki: OPENING: "Got a read on anyone here yet? Who should I be watching? Not that it matters."
+TEACH YOU: [ans:q_read:honest_pass] "I'd rather not say."
+TEACH THEM: An easy shrug. "Your call. I'm just glad you're talking at all."
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Sorry — I shouldn't load that on you. What's up? You'd know about that."
+TEACH YOU: [menu:more] More things to say (1/3)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:gossip_network] "I could show you Gossip Network."
+TEACH THEM: You walk them through Gossip Network, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "I'll think about what you said. Carefully. That's how I do things."
+TEACH d40 Somsri: OPENING: "Never mind this wound — we got it handled. Thanks anyway."
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Sorry — I shouldn't load that on you. What's up?"
+TEACH YOU: [menu:more] More things to say (1/4)
+TEACH THEM: (null)
+TEACH YOU: [menu:more] More things to say (2/4)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:diplomat] "I could show you Diplomatic Incident."
+TEACH THEM: You walk them through Diplomatic Incident, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "Good. That's settled, then. Onward."
+TEACH d41 Onni: OPENING: "The pantry run — I haven't stopped thinking about it."
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Forget I said anything. What did you want?"
+TEACH YOU: [menu:more] More things to say (1/3)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:diplomat] "I could show you Diplomatic Incident."
+TEACH THEM: You walk them through Diplomatic Incident, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "Take care of yourself."
+TEACH d42 Zoltan: OPENING: "About who you don't trust — Is there someone here you don't trust? Be honest."
+TEACH YOU: [ans:q_someone:honest_pass] "I'd rather not say."
+TEACH THEM: "...Sorry, lost my train of thought."
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Forget I said anything. What did you want? You know?"
+TEACH YOU: [menu:more] More things to say (1/3)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:diplomat] "I could show you Diplomatic Incident."
+TEACH THEM: You walk them through Diplomatic Incident, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "I need some air. Alone air. You understand."
+TEACH d43 Fatima: OPENING: "About the pantry run — I still haven't found anyone. Any chance?"
+TEACH YOU: [dlg:subject] "Can I ask you something else?"
+TEACH THEM: "Sorry — I shouldn't load that on you. What's up?"
+TEACH YOU: [menu:more] More things to say (1/3)
+TEACH THEM: (null)
+TEACH YOU: [skill_teach:preserve_food] "I could show you Food Preservation."
+TEACH THEM: You walk them through Food Preservation, then let them try. Clumsy, then less so. "Huh. I can see how that'd keep me alive."
+TEACH closing: "Steady as she goes. We'll talk again."
+=== END TEACHING CONVOS; end-of-run people check follows ===
+
+-- Somsri (gen_if8y4j8) occ=barber --
+OPENING: "I keep dreaming about rows of pods. Humming. Tell me I'm not the only one."
+YOU: [dlg:more] "Tell me about them."
+THEM: "It's my nephew, Nazar. Went with his father in the Taking. The System says the little ones are cozy. I do not know what cozy means at that scale. Some nights I swear I hear them before I sleep -- the pods, rows deep, humming. Then morning comes and I can't say whether it was real."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Saw things with too many joints. Give them room. That's the whole lesson."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person."
+YOU: [goon] "Go on. I'm listening."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [goon] "Go on. I'm listening."
+THEM: "I've been turning something over. What do YOU think actually happened to us?"
+YOU: [ans:q_theory:a_aliens] "Something took us. Something big."
+THEM: "That's where I keep landing too. The question is what it wants. I really mean that."
+YOU: [goon] "Go on. I'm listening."
+THEM: "My theory changes weekly. This week's: we're the control group. Somewhere there's a village that got instructions, and we're the ones they just... watched. Cheerful thought, right?"
+closing: "Later."
+
+-- Onni (onni_korhonen) occ=chimney sweep --
+OPENING: "We never finished talking about that foraging help — we left it mid-thought, 3 days back. 'You walk them through Diplomatic Incident, then let them try. Clumsy, then less so. Huh. I can see how…'"
+YOU: [dlg:help] "What do you need?"
+THEM: "Another day like today and we're choosing who eats. Meet me at the old burn east of camp and we'll fill packs before dark."
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Good. The old burn east of camp, morning, early. Bring the big pack if you have it."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that foraging help."
+YOU: [goon] "Go on. I'm listening."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Good question." "Zoltan headed out to find someone."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Alright — carefully, now. Both of us."
+YOU: [joke] (crack a joke)
+THEM: "Chuckles despite the risk assessment. "Worth it."
+(ended by engine)
