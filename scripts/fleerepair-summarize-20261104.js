@@ -27,7 +27,12 @@ function main() {
   const survDays = [];
   let starvationDeaths = 0;
   const deathCauses = {};
-  const wall = { wins: 0, national: 0, table: 0, wave4faced: 0, wave4kills: 0, wave5faced: 0 };
+  // Wall numbers are MEASURED from per-seed scale fields (confirm
+  // extension, 2026-11-04) — never hard-coded. Files without the fields
+  // (pilot corpus) count under scaleMeasured: 0, not as national 0.
+  const wall = { wins: 0, national: 0, table: 0, tableWaiting: 0, wave4faced: 0, wave4kills: 0, wave5faced: 0,
+    scaleMeasured: 0, maxStanding: null, medianStandingFinal: null };
+  const standingFinals = [];
   for (const f of files) {
     const j = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
     const sums = (j.exposures || []).map(function (ex) { return A.summarize(ex); });
@@ -83,14 +88,31 @@ function main() {
     wall.wave4faced += (j.exposures || []).length + (j.fieldCallsW4 || 0);
     wall.wave4kills += (j.killRows || []).length;
     if ((j.maxWave || 1) >= 5) wall.wave5faced++;
+    if (j.nationalReached !== undefined) {
+      wall.scaleMeasured++;
+      if (j.nationalReached) wall.national++;
+      if (j.tableEntered) wall.table++;
+      if (j.tableWaiting) wall.tableWaiting++;
+      if (Number.isFinite(j.maxStanding) && (wall.maxStanding == null || j.maxStanding > wall.maxStanding)) wall.maxStanding = j.maxStanding;
+      if (Number.isFinite(j.standingFinal)) standingFinals.push(j.standingFinal);
+    }
     perSeed.push({ seed: j.seed, days: j.days, end: j.endReason, won: !!j.won,
       spawnsW4: j.spawnsW4, tbCalls: j.tbCalls, exposures: (j.exposures || []).length,
       fieldW4: j.fieldCallsW4, kills: (j.killRows || []).length, escapes: seedEscapes,
       fleeTriggered: seedFleeTrig, pushes: seedPushes, turns: seedTurns,
       orphans: (j.orphanTbEnds || []).length,
       errors: (j.instrumentErrors || []).length,
-      unended: (j.exposures || []).filter(function (e) { return !e.end; }).length });
+      unended: (j.exposures || []).filter(function (e) { return !e.end; }).length,
+      rankFinal: j.scaleRankFinal !== undefined ? j.scaleRankFinal : null,
+      standingFinal: j.standingFinal !== undefined ? j.standingFinal : null,
+      maxStanding: j.maxStanding !== undefined ? j.maxStanding : null,
+      national: j.nationalReached !== undefined ? !!j.nationalReached : null,
+      tableEntered: j.tableEntered !== undefined ? !!j.tableEntered : null,
+      tableWaiting: j.tableWaiting !== undefined ? !!j.tableWaiting : null,
+      arcFinal: j.arcFinal !== undefined ? j.arcFinal : null,
+      scaleReadError: j.scaleReadError !== undefined ? j.scaleReadError : null });
   }
+  wall.medianStandingFinal = median(standingFinals);
   console.log(JSON.stringify({ files: files, perSeed: perSeed,
     totals: { exposures: exposures, tbKillsLinked: kills, escapes: escapes,
       fleeTriggeredFights: fleeTriggered, barrierPushes: barrierPushes,

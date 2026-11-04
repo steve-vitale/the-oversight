@@ -47,6 +47,33 @@ async function oneRun(seed) {
   await quietLog(async function () { result = await runDays(Game, policy, { days: DAYS, manifest: undefined, sampleEvery: 30 }); });
   try { inst.uninstall(); } catch (e) { errors.push('uninstall: ' + String(e.message).slice(0, 80)); }
   const st = Game.state || {};
+  // SCALE SNAPSHOT (confirm extension, 2026-11-04 — fixes the pilot
+  // caveat that national/table were hard-coded 0 in the summarizer).
+  // Pure reads behind try/catch; a hostile read must never kill a leg.
+  // Failures land in scaleReadError, never in instrumentErrors.
+  const scaleSnap = { rankFinal: null, standingFinal: null, arcFinal: null,
+    tableWaiting: false, tableEntered: false, scaleReadError: null };
+  try { scaleSnap.rankFinal = Game.scaleRank ? (Game.scaleRank() || null) : null; }
+  catch (e) { scaleSnap.scaleReadError = 'scaleRank: ' + String(e.message).slice(0, 80); }
+  try { const vs = Game.villageStanding ? Game.villageStanding() : null;
+    scaleSnap.standingFinal = vs ? (vs.total | 0) : null; }
+  catch (e) { scaleSnap.scaleReadError = (scaleSnap.scaleReadError || '') + ' villageStanding: ' + String(e.message).slice(0, 80); }
+  try { const pg = Game.progState ? Game.progState() : {};
+    scaleSnap.arcFinal = pg.arc || null; scaleSnap.tableWaiting = !!pg.tableWaiting;
+    scaleSnap.tableEntered = !!pg.tableDone; }
+  catch (e) { scaleSnap.scaleReadError = (scaleSnap.scaleReadError || '') + ' progState: ' + String(e.message).slice(0, 80); }
+  const scaleSamples = (result.samples && result.samples.scale) || null;
+  const standingSamples = (result.samples && result.samples.standing) || null;
+  const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
+  let nationalReached = false;
+  if (scaleSamples) for (const row of scaleSamples) {
+    if (row && (RANK_ORDER[row[1]] || 0) >= 2) nationalReached = true;
+  }
+  if ((RANK_ORDER[scaleSnap.rankFinal] || 0) >= 2) nationalReached = true;
+  let maxStanding = scaleSnap.standingFinal;
+  if (standingSamples) for (const row of standingSamples) {
+    if (row && Number.isFinite(row[1]) && (maxStanding == null || row[1] > maxStanding)) maxStanding = row[1];
+  }
   return {
     seed: seed, run: RUN, policy: POLICY, anchorCommit: ANCHOR, days: result.days, gameDays: (st.scholar && st.scholar.day) || 0,
     endReason: result.endReason, won: !!Game.won, villageLost: !!Game.villageLost,
@@ -62,6 +89,11 @@ async function oneRun(seed) {
     // saved result.deathEvents, which runDays does not return — null on
     // all v1 legs; fixed here, baseline re-run to reproduce + capture.)
     deaths: (result.samples && result.samples.deaths) || null, resultKeys: result ? Object.keys(result) : [],
+    scaleSamples: scaleSamples, standingSamples: standingSamples,
+    scaleRankFinal: scaleSnap.rankFinal, standingFinal: scaleSnap.standingFinal,
+    arcFinal: scaleSnap.arcFinal, tableWaiting: scaleSnap.tableWaiting,
+    tableEntered: scaleSnap.tableEntered, nationalReached: nationalReached,
+    maxStanding: maxStanding, scaleReadError: scaleSnap.scaleReadError,
   };
 }
 
@@ -82,6 +114,10 @@ async function oneRun(seed) {
       unlinked: out.unlinkedKills.length, orphans: out.orphanTbEnds.length,
       hits: hits, turns: turns, npcTurns: npc, errors: out.instrumentErrors.length, notes: out.notes,
       wrapCounts: out.wrapCounts,
+      rankFinal: out.scaleRankFinal, national: out.nationalReached,
+      standingFinal: out.standingFinal, maxStanding: out.maxStanding,
+      tableEntered: out.tableEntered, tableWaiting: out.tableWaiting,
+      scaleReadError: out.scaleReadError,
     }));
   }
 })().catch(function (e) { console.error(e.stack); process.exitCode = 1; });

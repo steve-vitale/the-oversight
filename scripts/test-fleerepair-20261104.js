@@ -176,6 +176,48 @@ async function main() {
     console.log('variant: three gates on, DPS_RACE off, competent unchanged');
   }
 
+  // 8. Summarizer scale fields are MEASURED, not hard-coded 0 (confirm
+  // extension, 2026-11-04). Fixture corpus in /tmp (never in the repo):
+  // one national+table leg, one village leg. The summarizer must report
+  // exactly the fixture values, and must report scaleMeasured so a
+  // pilot-era file without the fields is never silently counted as 0.
+  {
+    const fs = require('fs');
+    const os = require('os');
+    const cp = require('child_process');
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'fleerepair-summ-'));
+    try {
+      const base = { exposures: [], killRows: [], deaths: [], days: 140,
+        endReason: 'survived', won: false, spawnsW4: 0, tbCalls: 0,
+        fieldCallsW4: 0, maxWave: 4, orphanTbEnds: [], instrumentErrors: [] };
+      fs.writeFileSync(path.join(dir, 'fleerepair-s90001-confirm-baseline.json'),
+        JSON.stringify(Object.assign({}, base, { seed: 90001,
+          scaleRankFinal: 'national', standingFinal: 150, maxStanding: 150,
+          nationalReached: true, tableEntered: true, tableWaiting: true,
+          arcFinal: 3, scaleReadError: null })) + '\n');
+      fs.writeFileSync(path.join(dir, 'fleerepair-s90002-confirm-baseline.json'),
+        JSON.stringify(Object.assign({}, base, { seed: 90002,
+          scaleRankFinal: 'village', standingFinal: 40, maxStanding: 55,
+          nationalReached: false, tableEntered: false, tableWaiting: false,
+          arcFinal: 1, scaleReadError: null })) + '\n');
+      const out = cp.execFileSync(process.execPath,
+        [path.join(REPO, 'scripts', 'fleerepair-summarize-20261104.js'), dir, 'confirm-baseline'],
+        { encoding: 'utf8' });
+      const sum = JSON.parse(out);
+      assert.strictEqual(sum.totals.wall.national, 1, 'summarizer: national counts measured legs only');
+      assert.strictEqual(sum.totals.wall.table, 1, 'summarizer: table counts measured legs only');
+      assert.strictEqual(sum.totals.wall.tableWaiting, 1, 'summarizer: tableWaiting counts measured legs');
+      assert.strictEqual(sum.totals.wall.scaleMeasured, 2, 'summarizer: scaleMeasured covers both fixtures');
+      assert.strictEqual(sum.totals.wall.maxStanding, 150, 'summarizer: maxStanding is the fixture max');
+      assert.strictEqual(sum.totals.wall.medianStandingFinal, 95, 'summarizer: median standing final');
+      assert.strictEqual(sum.perSeed[0].national, true, 'summarizer: per-seed national passes through');
+      assert.strictEqual(sum.perSeed[1].national, false, 'summarizer: per-seed national false passes through');
+      console.log('summarizer: scale fields measured (national 1/2, table 1/2, maxStanding 150)');
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  }
+
   console.log('test-fleerepair-20261104: ALL PASS');
 }
 
