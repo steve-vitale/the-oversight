@@ -179,7 +179,9 @@ exposures) + national/table unmeasured (driver needs scale field).
   diff zero after. Fleerepair coordinator rebase clean (5/5).
 - Safe-commit index clobber hit the fleerepair worker commit (repaired via
   HEAD-blob cacheinfo, verified) and all five tbobsfeed worker commits
-  (same repair each time); coordinator commits clean. No EPERM flap blocked
+  (same repair each time); the coordinator evidence commit itself also hit
+  the clobber (repaired via HEAD-blob cacheinfo, commit verified correct
+  before merge). No EPERM flap blocked
   this run. check.js --quick NOT re-run on merged master (fleerepair proof
   green on merged master; tbobsfeed net src/ diff zero; tbobsfeed worker's
   --quick attempt stalled under concurrent sibling test load and was
