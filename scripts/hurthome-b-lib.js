@@ -96,6 +96,31 @@ function closeHealed(open, vid, day, part, hp) {
   return c;
 }
 
+// Retrospective case (sim-hurthome-fix-c coverage fix, ordered by
+// fix-b's metric review): when a hurt-return line fires for a villager
+// with NO open case, the line itself is the event record. Open a case
+// whose event IS the return tick, so the travel scan closes it
+// returned-hurt at latency 0 in the same tick. Refuses when a case is
+// already open (the normal path owns it), when purpose is 'leave'
+// (walk-outs never fire this line), or when hp is not hurt hp.
+// Returns { action, case }: 'opened' | 'none'.
+function retroCase(open, vid, day, part, purpose, hp, name) {
+  if (!vid || purpose === 'leave') return { action: 'none', case: null };
+  if (!isHurtHp(hp)) return { action: 'none', case: null };
+  if (open.has(vid)) return { action: 'none', case: null };
+  const c = {
+    vid: String(vid), eventDay: day, eventPart: part, tripKey: 'retro|' + String(purpose || '?'),
+    purpose: purpose || null, sinceDay: null, sincePart: null, awayDuration: null,
+    hpAtEvent: hp, lastHp: hp, hurtCount: 1,
+    source: 'retro-line', cause: 'retro-line', dmg: null,
+    outcome: 'open', closeDay: null, closePart: null,
+    returnPreHp: null, deathCause: null, censorNote: 'retroLineCase',
+    name: name || null,
+  };
+  open.set(vid, c);
+  return { action: 'opened', case: c };
+}
+
 function closeCensored(open, day, part) {
   const out = [];
   for (const [vid, c] of open.entries()) {
@@ -116,5 +141,5 @@ function median(nums) {
   return xs.length % 2 ? xs[m] : (xs[m - 1] + xs[m]) / 2;
 }
 
-module.exports = { HURT_MAX, tripKey, isHurtHp, latencyParts, hurtStep,
+module.exports = { HURT_MAX, tripKey, isHurtHp, latencyParts, hurtStep, retroCase,
   closeReturned, closeDied, closeHealed, closeCensored, median };
