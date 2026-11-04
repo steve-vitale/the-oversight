@@ -1,0 +1,598 @@
+{
+  "seed": 99113,
+  "run": "killconv",
+  "anchorCommit": "10b68d05b849",
+  "days": 72,
+  "gameDays": 72,
+  "endReason": "village-lost",
+  "won": false,
+  "villageLost": true,
+  "maxWave": 4,
+  "spawnsW4": 4,
+  "tbCalls": 0,
+  "fieldCallsW4": 2,
+  "exposures": [],
+  "killsW4": 0,
+  "killRows": [],
+  "unlinkedKills": [],
+  "fieldFights": [
+    {
+      "callId": 40,
+      "day": 59,
+      "vid": "visjoin_57",
+      "mid": "congregation",
+      "wave": 4,
+      "pre": {
+        "vid": "visjoin_57",
+        "mid": "congregation",
+        "wave": 4,
+        "day": 59,
+        "gear": {
+          "vid": "visjoin_57",
+          "armorP": 4,
+          "armed": true,
+          "weapon": "Sharpened stick",
+          "vpFound": true,
+          "readError": null
+        },
+        "hpStart": 91,
+        "mHpStart": 900,
+        "allies": 2,
+        "allyVids": [
+          "giulia_bianchi",
+          "app_mgpsphls397"
+        ],
+        "def": {
+          "hp": [
+            900,
+            1100
+          ],
+          "armor": 10,
+          "attackDamage": [
+            50,
+            70
+          ],
+          "attackName": "Absolution",
+          "speed": 2
+        }
+      },
+      "outcome": "vDie",
+      "rounds": 2,
+      "vTaken": 106,
+      "mDealt": 11,
+      "vHpLeft": 0,
+      "mHpLeft": 889,
+      "packCount": 1,
+      "partySize": 3,
+      "intent": "engage",
+      "intentWhy": "party",
+      "allyDealt": 0,
+      "calledHelp": false,
+      "allyVid": null,
+      "mHpStartRec": 900,
+      "log": [
+        "R1: Shynar locks eyes. It meets the stare and holds. Respect — but it's not backing down. (Stare Down — it held)",
+        "Shynar's gear absorbs 7.",
+        "R1: Absolution hits Shynar for 47 (44 left)",
+        "R2: Shynar strikes for 11 (889 left)",
+        "Shynar's gear absorbs 8.",
+        "R2: Absolution hits Shynar for 59 (0 left)"
+      ],
+      "killsDuring": [],
+      "deathsDuring": [],
+      "sayLines": [
+        "🔔 The Congregation rings — Shynar refuses the absolution and takes the beam instead.",
+        "The village feels it — the bond dips, but holds. They endure together."
+      ],
+      "threw": null
+    },
+    {
+      "callId": 42,
+      "day": 70,
+      "vid": "visjoin_68",
+      "mid": "eulogy",
+      "wave": 4,
+      "pre": {
+        "vid": "visjoin_68",
+        "mid": "eulogy",
+        "wave": 4,
+        "day": 70,
+        "gear": {
+          "vid": "visjoin_68",
+          "armorP": 5,
+          "armed": true,
+          "weapon": "Crossbow",
+          "vpFound": true,
+          "readError": null
+        },
+        "hpStart": 76,
+        "mHpStart": 900,
+        "allies": 0,
+        "allyVids": [],
+        "def": {
+          "hp": [
+            900,
+            1100
+          ],
+          "armor": 8,
+          "attackDamage": [
+            50,
+            70
+          ],
+          "attackName": "Final Chapter",
+          "speed": 1
+        }
+      },
+      "outcome": "vFlee",
+      "rounds": 1,
+      "vTaken": 52,
+      "mDealt": 22,
+      "vHpLeft": 24,
+      "mHpLeft": 878,
+      "packCount": 1,
+      "partySize": 1,
+      "intent": "learn",
+      "intentWhy": "learn-first",
+      "allyDealt": 0,
+      "calledHelp": false,
+      "allyVid": null,
+      "mHpStartRec": 900,
+      "log": [
+        "Luiz has Crossbow but no arrows — the string stays drawn, useless.",
+        "R1: Luiz strikes for 22 (878 left)",
+        "Luiz's gear absorbs 9.",
+        "R1: Final Chapter hits Luiz for 52 (24 left)",
+        "Luiz is past holding — they run while running still works."
+      ],
+      "killsDuring": [],
+      "deathsDuring": [],
+      "sayLines": [
+        "📖 The Eulogy narrates: \"Luiz faltered.\" (5 verses remain.)"
+      ],
+      "threw": null
+    }
+  ],
+  "deathEvents": [
+    {
+      "day": 4,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 4,
+      "kind": "monster",
+      "who": "lockpick_raccoon",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 5,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 5,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "nightcourt",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "sunback",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 11,
+      "kind": "monster",
+      "who": "moderator",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 12,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 14,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 17,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "expedition",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 17,
+      "kind": "monster",
+      "who": "memory_projector",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 18,
+      "kind": "monster",
+      "who": "sunback",
+      "cause": "combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 19,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 19,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 20,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 20,
+      "kind": "villager",
+      "who": "caleb_jones",
+      "cause": "monster",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 22,
+      "kind": "villager",
+      "who": "gen_v3qkvvx",
+      "cause": "sickness",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 23,
+      "kind": "villager",
+      "who": "yuki_mori",
+      "cause": "sickness",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 28,
+      "kind": "monster",
+      "who": "sweeps_week",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 28,
+      "kind": "monster",
+      "who": "anaconda_empress",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 29,
+      "kind": "monster",
+      "who": "anaconda_empress",
+      "cause": "combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 30,
+      "kind": "monster",
+      "who": "memory_projector",
+      "cause": "combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 30,
+      "kind": "villager",
+      "who": "mia_andersson",
+      "cause": "sickness",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 31,
+      "kind": "villager",
+      "who": "gen_1sjkyqz",
+      "cause": "starvation",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 31,
+      "kind": "villager",
+      "who": "gen_kjrhmib",
+      "cause": "sickness",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 33,
+      "kind": "villager",
+      "who": "gen_alfduqg",
+      "cause": "a wound that wouldn't close",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 35,
+      "kind": "villager",
+      "who": "gen_fmgbeat",
+      "cause": "sickness",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 36,
+      "kind": "villager",
+      "who": "ursula_weber",
+      "cause": "sickness",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 40,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 43,
+      "kind": "monster",
+      "who": "spool",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 44,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 50,
+      "kind": "monster",
+      "who": "statickite",
+      "cause": "expedition",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 50,
+      "kind": "monster",
+      "who": "callback",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 52,
+      "kind": "monster",
+      "who": "redactor",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 52,
+      "kind": "villager",
+      "who": "marcus_webb",
+      "cause": "Choir Toad",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 52,
+      "kind": "monster",
+      "who": "callback",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 52,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 53,
+      "kind": "villager",
+      "who": "gen_kao3s6u",
+      "cause": "the wild",
+      "player": true,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 59,
+      "kind": "villager",
+      "who": "visjoin_57",
+      "cause": "monster",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 70,
+      "kind": "monster",
+      "who": "giant_mosquito",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 72,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 72,
+      "kind": "monster",
+      "who": "white_noise_heron",
+      "cause": "combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 72,
+      "kind": "monster",
+      "who": "statickite",
+      "cause": "combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 72,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "expedition",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    }
+  ],
+  "killerTrace": {},
+  "spawns": [
+    {
+      "day": 53,
+      "id": "eulogy",
+      "tx": 5,
+      "ty": 4
+    },
+    {
+      "day": 58,
+      "id": "congregation",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 63,
+      "id": "reunion",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 66,
+      "id": "eulogy",
+      "tx": 8,
+      "ty": 0
+    }
+  ],
+  "orphanTbEnds": [],
+  "wrapCounts": {
+    "spawnWorldMonster": 42,
+    "fieldFight": 47,
+    "recordWaveKill": 35,
+    "startCombat": 10,
+    "tbBeginTurn": 47,
+    "tbAdvance": 39,
+    "tbPlayerStrike": 16,
+    "tbDamage": 39,
+    "tbEnd": 10,
+    "tbMonsterTurn": 36,
+    "tbPlayerMove": 14,
+    "useAbility": 5,
+    "tbVillagerTurn": 8
+  },
+  "instrumentErrors": [],
+  "notes": []
+}

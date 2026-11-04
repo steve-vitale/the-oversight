@@ -9,8 +9,15 @@ const fs = require('fs');
 const path = require('path');
 const dir = process.argv[2] || path.join(__dirname, '..', 'evidence', '2026-11-04', 'perseed-killconv-a');
 const filter = process.argv[3] || null;
+const seedFilter = process.env.SEEDS ? process.env.SEEDS.split(',').map(function (s) { return s.trim(); }) : null;
 const files = fs.readdirSync(dir).filter(function (f) {
-  return f.endsWith('.json') && (!filter || f.indexOf(filter) !== -1);
+  if (!f.endsWith('.json')) return false;
+  if (filter && f.indexOf(filter) === -1) return false;
+  if (seedFilter) {
+    const m = f.match(/-s(\d+)-/);
+    if (!m || seedFilter.indexOf(m[1]) === -1) return false;
+  }
+  return true;
 }).sort();
 const seeds = files.map(function (f) { return JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')); });
 
@@ -46,9 +53,15 @@ let instrumentErrors = 0, unended = 0, unclassified = 0;
 for (const s of seeds) {
   instrumentErrors += (s.instrumentErrors || []).length;
   for (const o of (s.orphanTbEnds || [])) {
-    const untouched = (o.monsters || []).every(function (m) { return m.hp === null || m.hp === m.maxHp; });
-    orphans.push({ seed: s.seed, day: o.day, result: o.result, monsters: (o.monsters || []).map(function (m) { return m.mid + ' ' + m.hp + '/' + m.maxHp; }), class: untouched ? 'scripted-rout' : 'UNCLASSIFIED-ORPHAN' });
-    if (!untouched) unclassified++;
+    // Routed + monster fled = the zero-turn episode family: proven by
+    // the 99116 debug run (startCombat with before==after null, tbEnd
+    // routed round 1 inside the call, zero player strikes/moves inside
+    // any startCombat). A wounded monster (prior wound carried in)
+    // does NOT disqualify it — the d77 audit carried exactly its d74
+    // field-fight wound (783). Anything else stays unclassified.
+    const routed = o.result === 'routed' && (o.monsters || []).every(function (m) { return !!m.fled; });
+    orphans.push({ seed: s.seed, day: o.day, result: o.result, monsters: (o.monsters || []).map(function (m) { return m.mid + ' ' + m.hp + '/' + m.maxHp; }), class: routed ? 'scripted-rout' : 'UNCLASSIFIED-ORPHAN' });
+    if (!routed) unclassified++;
   }
   for (const ex of (s.exposures || [])) {
     const cls = classify(ex);

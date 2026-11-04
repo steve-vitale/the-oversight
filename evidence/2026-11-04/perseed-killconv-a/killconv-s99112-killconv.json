@@ -1,0 +1,5693 @@
+{
+  "seed": 99112,
+  "run": "killconv",
+  "anchorCommit": "10b68d05b849",
+  "days": 98,
+  "gameDays": 97,
+  "endReason": "village-lost",
+  "won": false,
+  "villageLost": true,
+  "maxWave": 4,
+  "spawnsW4": 3,
+  "tbCalls": 2,
+  "fieldCallsW4": 1,
+  "exposures": [
+    {
+      "seq": 1,
+      "type": "tb",
+      "day": 85,
+      "mid": "suburb",
+      "wave": 4,
+      "fightId": "fmgpspiko_wwqnp",
+      "scholarAtStart": "nora_wilson",
+      "leadVid": "nora_wilson",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "nora_wilson",
+          "hpStart": 100,
+          "maxHp": 100,
+          "gear": {
+            "vid": "nora_wilson",
+            "armorP": 15,
+            "armed": true,
+            "weapon": "Phase blade",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "suburb",
+          "hpStart": 1451,
+          "maxHp": 1451,
+          "wave": 4,
+          "joinedMidFight": false
+        }
+      ],
+      "leadGear": {
+        "vid": "nora_wilson",
+        "armorP": 15,
+        "armed": true,
+        "weapon": "Phase blade",
+        "vpFound": true,
+        "readError": null
+      },
+      "scholarStart": {
+        "health": 100,
+        "energy": 85,
+        "food": "UNRECORDED"
+      },
+      "trickKnown": false,
+      "hits": [
+        {
+          "round": 2,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's attack",
+          "requested": 37,
+          "returned": 23,
+          "hpBefore": 100,
+          "hpAfter": 77,
+          "hpDelta": -23,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 59,
+          "returned": 74,
+          "hpBefore": 1451,
+          "hpAfter": 1377,
+          "hpDelta": -74,
+          "turnSeq": 2,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 56,
+          "returned": 70,
+          "hpBefore": 1377,
+          "hpAfter": 1307,
+          "hpDelta": -70,
+          "turnSeq": 3,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's Property Tax",
+          "requested": 35,
+          "returned": 22,
+          "hpBefore": 77,
+          "hpAfter": 55,
+          "hpDelta": -22,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 5,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 61,
+          "returned": 76,
+          "hpBefore": 1307,
+          "hpAfter": 1231,
+          "hpDelta": -76,
+          "turnSeq": 4,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 5,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's attack",
+          "requested": 41,
+          "returned": 26,
+          "hpBefore": 55,
+          "hpAfter": 29,
+          "hpDelta": -26,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 6,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's Property Tax",
+          "requested": 35,
+          "returned": 22,
+          "hpBefore": 29,
+          "hpAfter": 7,
+          "hpDelta": -22,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 7,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's Property Tax",
+          "requested": 41,
+          "returned": 26,
+          "hpBefore": 7,
+          "hpAfter": -19,
+          "hpDelta": -26,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 It connects!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 14."
+        },
+        {
+          "kind": "say",
+          "line": "Suburb's attack hits you for 23."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Property Tax — strikes one target after a windup. You won't forget this."
+        },
+        {
+          "kind": "say",
+          "line": "The streets rearrange — every road curves back. You were going somewhere. You are going in a circle now."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "say",
+          "line": "(suburb's hide absorbs 14.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the suburb for 74 (Phase blade)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "say",
+          "line": "✨ Now you understand it. The Phase blade: +60 damage, ignores armor."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "say",
+          "line": "(suburb's hide absorbs 14.)"
+        },
+        {
+          "kind": "say",
+          "line": "💪 Your Agility grows — 6. The work is changing you."
+        },
+        {
+          "kind": "say",
+          "line": "✨ Footwork — You move without thinking. (tier 1)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the suburb for 70 (Phase blade)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Property Tax!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 13."
+        },
+        {
+          "kind": "say",
+          "line": "Suburb's Property Tax hits you for 22."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 5!"
+        },
+        {
+          "kind": "say",
+          "line": "(suburb's hide absorbs 14.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the suburb for 76 (Phase blade)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 It connects!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 15."
+        },
+        {
+          "kind": "say",
+          "line": "Suburb's attack hits you for 26."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: HOA Fine — strikes one target after a windup. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 6!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Property Tax!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 13."
+        },
+        {
+          "kind": "say",
+          "line": "Suburb's Property Tax hits you for 22."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 7!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Property Tax!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 15."
+        },
+        {
+          "kind": "say",
+          "line": "Suburb's Property Tax hits you for 26."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "sysSay",
+          "line": "📺 ───"
+        },
+        {
+          "kind": "sysSay",
+          "line": "📺 While you fought your fight, they fought theirs."
+        },
+        {
+          "kind": "sysSay",
+          "line": "📺 Wave 1: The lead falls — the pack's coordination shatters. The rest scatter or die. (1 rounds, 5 taken)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "📺 Wave 2: The lead falls — the pack's coordination shatters. The rest scatter or die. (1 rounds, 4 taken)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "📺 Wave 3: The lead falls — the pack's coordination shatters. The rest scatter or die. (1 rounds, 5 taken)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "📺 Boris WON. You didn't see it — you had your own arena. The village will tell you about it for weeks."
+        },
+        {
+          "kind": "sysSay",
+          "line": "📺 Prize for Boris: the winner's share — alien rations for the pantry. The village eats tonight."
+        },
+        {
+          "kind": "sysSay",
+          "line": "📺 The System presses something humming into Boris's hands: Conqueror's Plate. Dented in forty places. Each dent is someone who tried."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Nora Wilson is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Nora Wilson is dead — the arena. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Nora kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "\"Nora's gone.\" Boris looks at you for a long moment. \"You're not Nora.\" No heat in it. Just fact. You'll have to earn this face."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Benjamin blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Engines (Level 1). Air, fuel, spark. Every dead engine is missing one of the three — diagnose in that order."
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Nora Wilson, 85 days. The mantle passes to Benjamin Bezerra."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Benjamin Bezerra, 48 — a mechanic. His hands know different work now: Green Whisper, Dowsing."
+        },
+        {
+          "kind": "say",
+          "line": "You knew Nora — not the office, the person. The fire keeps expecting her, and so do you. That's a heavier kind of stepping up. (+5 trauma)"
+        },
+        {
+          "kind": "say",
+          "line": "At the grave, Ingrid, Boris, Ishaan speak for Benjamin — \"Nora trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew Benjamin before the Codex did — his name already carried weight here."
+        }
+      ],
+      "transcriptOverflow": false,
+      "abilityUses": [],
+      "shoutUses": 0,
+      "offerFoodUses": 0,
+      "turns": [
+        {
+          "turnSeq": 1,
+          "round": 2,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 8,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Phase blade",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "mx": 6,
+                "my": 1,
+                "hp": 1451,
+                "maxHp": 1451,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "dist": 2,
+                "inRange": false
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerMove",
+              "kind": "move",
+              "args": [
+                "7",
+                "0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 8,
+                  "my": 0,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Phase blade",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "mx": 6,
+                    "my": 1,
+                    "hp": 1451,
+                    "maxHp": 1451,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "dist": 2,
+                    "inRange": false
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 7,
+                  "my": 0,
+                  "moveLeft": 2,
+                  "acted": false,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Phase blade",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "mx": 6,
+                    "my": 1,
+                    "hp": 1451,
+                    "maxHp": 1451,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 3,
+          "end": {
+            "player": {
+              "mx": 7,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Phase blade",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "mx": 6,
+                "my": 1,
+                "hp": 1451,
+                "maxHp": 1451,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": []
+        },
+        {
+          "turnSeq": 2,
+          "round": 3,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 7,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 77,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Phase blade",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "mx": 6,
+                "my": 1,
+                "hp": 1451,
+                "maxHp": 1451,
+                "alive": true,
+                "fled": false,
+                "telegraph": false,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 7,
+                  "my": 0,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 77,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Phase blade",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "mx": 6,
+                    "my": 1,
+                    "hp": 1451,
+                    "maxHp": 1451,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": false,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 7,
+                  "my": 0,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 77,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Phase blade",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "mx": 6,
+                    "my": 1,
+                    "hp": 1377,
+                    "maxHp": 1451,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": false,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 11,
+          "end": {
+            "player": {
+              "mx": 7,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 77,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Phase blade",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "mx": 6,
+                "my": 1,
+                "hp": 1377,
+                "maxHp": 1451,
+                "alive": true,
+                "fled": false,
+                "telegraph": false,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(suburb's hide absorbs 14.)",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "You STRIKE the suburb for 74 (Phase blade).",
+            "📺 +5 style — solid hit",
+            "✨ Now you understand it. The Phase blade: +60 damage, ignores armor."
+          ]
+        },
+        {
+          "turnSeq": 3,
+          "round": 4,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 7,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 77,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Phase blade",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "mx": 6,
+                "my": 1,
+                "hp": 1377,
+                "maxHp": 1451,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 7,
+                  "my": 0,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 77,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Phase blade",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "mx": 6,
+                    "my": 1,
+                    "hp": 1377,
+                    "maxHp": 1451,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 7,
+                  "my": 0,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 77,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Phase blade",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "mx": 6,
+                    "my": 1,
+                    "hp": 1307,
+                    "maxHp": 1451,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 19,
+          "end": {
+            "player": {
+              "mx": 7,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 77,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Phase blade",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "mx": 6,
+                "my": 1,
+                "hp": 1307,
+                "maxHp": 1451,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(suburb's hide absorbs 14.)",
+            "💪 Your Agility grows — 6. The work is changing you.",
+            "✨ Footwork — You move without thinking. (tier 1)",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "You STRIKE the suburb for 70 (Phase blade).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 4,
+          "round": 5,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 7,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 55,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Phase blade",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "mx": 6,
+                "my": 1,
+                "hp": 1307,
+                "maxHp": 1451,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 7,
+                  "my": 0,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 55,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Phase blade",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "mx": 6,
+                    "my": 1,
+                    "hp": 1307,
+                    "maxHp": 1451,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 7,
+                  "my": 0,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 55,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Phase blade",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "mx": 6,
+                    "my": 1,
+                    "hp": 1231,
+                    "maxHp": 1451,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 31,
+          "end": {
+            "player": {
+              "mx": 7,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 55,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Phase blade",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "mx": 6,
+                "my": 1,
+                "hp": 1231,
+                "maxHp": 1451,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(suburb's hide absorbs 14.)",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "You STRIKE the suburb for 76 (Phase blade).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 5,
+          "round": 6,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 7,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 29,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Phase blade",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "mx": 6,
+                "my": 1,
+                "hp": 1231,
+                "maxHp": 1451,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerMove",
+              "kind": "move",
+              "args": [
+                "8",
+                "0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 7,
+                  "my": 0,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 29,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Phase blade",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "mx": 6,
+                    "my": 1,
+                    "hp": 1231,
+                    "maxHp": 1451,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 8,
+                  "my": 0,
+                  "moveLeft": 2,
+                  "acted": false,
+                  "hp": 29,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Phase blade",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "mx": 6,
+                    "my": 1,
+                    "hp": 1231,
+                    "maxHp": 1451,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "dist": 2,
+                    "inRange": false
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 42,
+          "end": {
+            "player": {
+              "mx": 8,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 29,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Phase blade",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "mx": 6,
+                "my": 1,
+                "hp": 1231,
+                "maxHp": 1451,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "dist": 2,
+                "inRange": false
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": []
+        },
+        {
+          "turnSeq": 6,
+          "round": 7,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 8,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 7,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Phase blade",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "mx": 6,
+                "my": 1,
+                "hp": 1231,
+                "maxHp": 1451,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "dist": 2,
+                "inRange": false
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerMove",
+              "kind": "move",
+              "args": [
+                "8",
+                "0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 8,
+                  "my": 0,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 7,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Phase blade",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "mx": 6,
+                    "my": 1,
+                    "hp": 1231,
+                    "maxHp": 1451,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "dist": 2,
+                    "inRange": false
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 8,
+                  "my": 0,
+                  "moveLeft": 2,
+                  "acted": false,
+                  "hp": 7,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Phase blade",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "mx": 6,
+                    "my": 1,
+                    "hp": 1231,
+                    "maxHp": 1451,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "dist": 2,
+                    "inRange": false
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 48,
+          "end": {
+            "player": {
+              "mx": 8,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 7,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Phase blade",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "mx": 6,
+                "my": 1,
+                "hp": 1231,
+                "maxHp": 1451,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "dist": 2,
+                "inRange": false
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": []
+        }
+      ],
+      "npcTurns": [
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "suburb",
+          "vid": null,
+          "round": 1,
+          "pre": {
+            "pos": {
+              "mx": 6,
+              "my": 1
+            },
+            "hp": 1451,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 6,
+              "my": 1
+            },
+            "hp": 1451,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [],
+          "sayLines": [
+            "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "suburb",
+          "vid": null,
+          "round": 2,
+          "pre": {
+            "pos": {
+              "mx": 6,
+              "my": 1
+            },
+            "hp": 1451,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "post": {
+            "pos": {
+              "mx": 6,
+              "my": 1
+            },
+            "hp": 1451,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 37,
+              "hpDelta": -23,
+              "round": 2
+            }
+          ],
+          "sayLines": [
+            "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)",
+            "💥 It connects!",
+            "Armor absorbs 14.",
+            "Suburb's attack hits you for 23.",
+            "📖 Codex: Property Tax — strikes one target after a windup. You won't forget this.",
+            "The streets rearrange — every road curves back. You were going somewhere. You are going in a circle now."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "suburb",
+          "vid": null,
+          "round": 3,
+          "pre": {
+            "pos": {
+              "mx": 6,
+              "my": 1
+            },
+            "hp": 1377,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 6,
+              "my": 1
+            },
+            "hp": 1377,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [],
+          "sayLines": [
+            "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "suburb",
+          "vid": null,
+          "round": 4,
+          "pre": {
+            "pos": {
+              "mx": 6,
+              "my": 1
+            },
+            "hp": 1307,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "post": {
+            "pos": {
+              "mx": 6,
+              "my": 1
+            },
+            "hp": 1307,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 35,
+              "hpDelta": -22,
+              "round": 4
+            }
+          ],
+          "sayLines": [
+            "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)",
+            "💥 Property Tax!",
+            "Armor absorbs 13.",
+            "Suburb's Property Tax hits you for 22."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "suburb",
+          "vid": null,
+          "round": 5,
+          "pre": {
+            "pos": {
+              "mx": 6,
+              "my": 1
+            },
+            "hp": 1231,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "post": {
+            "pos": {
+              "mx": 6,
+              "my": 1
+            },
+            "hp": 1231,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 41,
+              "hpDelta": -26,
+              "round": 5
+            }
+          ],
+          "sayLines": [
+            "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)",
+            "💥 It connects!",
+            "Armor absorbs 15.",
+            "Suburb's attack hits you for 26.",
+            "📖 Codex: HOA Fine — strikes one target after a windup. You won't forget this."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "suburb",
+          "vid": null,
+          "round": 6,
+          "pre": {
+            "pos": {
+              "mx": 6,
+              "my": 1
+            },
+            "hp": 1231,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "post": {
+            "pos": {
+              "mx": 6,
+              "my": 1
+            },
+            "hp": 1231,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 35,
+              "hpDelta": -22,
+              "round": 6
+            }
+          ],
+          "sayLines": [
+            "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)",
+            "💥 Property Tax!",
+            "Armor absorbs 13.",
+            "Suburb's Property Tax hits you for 22."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "suburb",
+          "vid": null,
+          "round": 7,
+          "pre": {
+            "pos": {
+              "mx": 6,
+              "my": 1
+            },
+            "hp": 1231,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "post": {
+            "pos": {
+              "mx": 6,
+              "my": 1
+            },
+            "hp": 1231,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 41,
+              "hpDelta": -26,
+              "round": 7
+            }
+          ],
+          "sayLines": [
+            "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)",
+            "💥 Property Tax!",
+            "Armor absorbs 15.",
+            "Suburb's Property Tax hits you for 26.",
+            "You go down.",
+            "OH. Oh no. ...The gamblers are very quiet.",
+            "📺 ───",
+            "📺 While you fought your fight, they fought theirs.",
+            "📺 Wave 1: The lead falls — the pack's coordination shatters. The rest scatter or die. (1 rounds, 5 taken)",
+            "📺 Wave 2: The lead falls — the pack's coordination shatters. The rest scatter or die. (1 rounds, 4 taken)",
+            "📺 Wave 3: The lead falls — the pack's coordination shatters. The rest scatter or die. (1 rounds, 5 taken)",
+            "📺 Boris WON. You didn't see it — you had your own arena. The village will tell you about it for weeks.",
+            "📺 Prize for Boris: the winner's share — alien rations for the pantry. The village eats tonight.",
+            "📺 The System presses something humming into Boris's hands: Conqueror's Plate. Dented in forty places. Each dent is someone who tried.",
+            "📖 The Codex turns a page on its own. Nora Wilson is dead. You didn't ask. It knew.",
+            "Nobody's talking much. The fire feels smaller tonight.",
+            "🕯️ Nora Wilson is dead — the arena. The village stops. Somebody screams. Somebody else starts digging.",
+            "What Nora kept close goes into the ground with them — keepsakes are buried, never taken from the body.",
+            "\"Nora's gone.\" Boris looks at you for a long moment. \"You're not Nora.\" No heat in it. Just fact. You'll have to earn this face.",
+            "The Codex doesn't pause for grief. Benjamin blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+            "📖 LEARNED: Engines (Level 1). Air, fuel, spark. Every dead engine is missing one of the three — diagnose in that order.",
+            "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+            "📖 The Codex turns a page: Nora Wilson, 85 days. The mantle passes to Benjamin Bezerra.",
+            "🪞 You wake up somebody else. Benjamin Bezerra, 48 — a mechanic. His hands know different work now: Green Whisper, Dowsing.",
+            "You knew Nora — not the office, the person. The fire keeps expecting her, and so do you. That's a heavier kind of stepping up. (+5 trauma)",
+            "At the grave, Ingrid, Boris, Ishaan speak for Benjamin — \"Nora trusted them. We saw it. Give them the fire's hearing.\" The village listens.",
+            "The fire knew Benjamin before the Codex did — his name already carried weight here."
+          ],
+          "threw": null
+        }
+      ],
+      "end": {
+        "result": "lost",
+        "day": 85,
+        "round": 7,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "suburb",
+            "alive": true,
+            "fled": false,
+            "hp": 1231,
+            "maxHp": 1451
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "nora_wilson",
+            "alive": false,
+            "fled": false,
+            "hp": -19,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "nora_wilson"
+        ],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false,
+      "openingActions": [],
+      "openingHits": [],
+      "openingSay": [
+        "The village is rattled. Everyone's jumpy — eyes on the treeline.",
+        "You don't know what that was. A street that wasn't there yesterday. Someone at the haven should hear about this.",
+        "⚔ THE SUBURB! You're on your own.",
+        "Turn-based now. Tap a tile to move — speed is squares. Then act.",
+        "COMBAT! THE SUBURB! The gamblers lean in. ROUND 1 — FIGHT!"
+      ],
+      "def": {
+        "hp": [
+          1300,
+          1500
+        ],
+        "armor": 14,
+        "attackDamage": [
+          35,
+          55
+        ],
+        "attackName": "Property Tax",
+        "speed": 1
+      }
+    },
+    {
+      "seq": 2,
+      "type": "tb",
+      "day": 97,
+      "mid": "eulogy",
+      "wave": 4,
+      "fightId": "fmgpspio5_8lt7lh",
+      "scholarAtStart": "gen_iggym7l",
+      "leadVid": "gen_iggym7l",
+      "partySizeStart": 4,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "gen_iggym7l",
+          "hpStart": 100,
+          "maxHp": 100,
+          "gear": {
+            "vid": "gen_iggym7l",
+            "armorP": 30,
+            "armed": true,
+            "weapon": "Crude bow",
+            "vpFound": true,
+            "readError": null
+          }
+        },
+        {
+          "key": "v_boris_kowalski",
+          "kind": "villager",
+          "vid": "boris_kowalski",
+          "hpStart": 81,
+          "maxHp": 100,
+          "gear": {
+            "vid": "boris_kowalski",
+            "armorP": 46,
+            "armed": true,
+            "weapon": "Starfall bow",
+            "vpFound": true,
+            "readError": null
+          }
+        },
+        {
+          "key": "v_app_mgpsphl9633",
+          "kind": "villager",
+          "vid": "app_mgpsphl9633",
+          "hpStart": 72,
+          "maxHp": 100,
+          "gear": {
+            "vid": "app_mgpsphl9633",
+            "armorP": 14,
+            "armed": true,
+            "weapon": "Harvest Scythe",
+            "vpFound": true,
+            "readError": null
+          }
+        },
+        {
+          "key": "v_visjoin_91",
+          "kind": "villager",
+          "vid": "visjoin_91",
+          "hpStart": 20,
+          "maxHp": 100,
+          "gear": {
+            "vid": "visjoin_91",
+            "armorP": 9,
+            "armed": true,
+            "weapon": "Fire-hardened spear",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "eulogy",
+          "hpStart": 675,
+          "maxHp": 900,
+          "wave": 4,
+          "joinedMidFight": false
+        }
+      ],
+      "leadGear": {
+        "vid": "gen_iggym7l",
+        "armorP": 30,
+        "armed": true,
+        "weapon": "Crude bow",
+        "vpFound": true,
+        "readError": null
+      },
+      "scholarStart": {
+        "health": 100,
+        "energy": 100,
+        "food": "UNRECORDED"
+      },
+      "trickKnown": false,
+      "hits": [
+        {
+          "round": 1,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_app_mgpsphl9633",
+          "sourceLabel": "Ishaan",
+          "requested": 27,
+          "returned": 34,
+          "hpBefore": 675,
+          "hpAfter": 641,
+          "hpDelta": -34,
+          "turnSeq": null,
+          "actorKey": "v_app_mgpsphl9633",
+          "actorKind": "ally",
+          "phase": "npc-turn",
+          "sourceClass": "ally"
+        },
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 23,
+          "returned": 29,
+          "hpBefore": 641,
+          "hpAfter": 612,
+          "hpDelta": -29,
+          "turnSeq": 7,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_app_mgpsphl9633",
+          "sourceLabel": "Ishaan",
+          "requested": 24,
+          "returned": 30,
+          "hpBefore": 612,
+          "hpAfter": 582,
+          "hpDelta": -30,
+          "turnSeq": null,
+          "actorKey": "v_app_mgpsphl9633",
+          "actorKind": "ally",
+          "phase": "npc-turn",
+          "sourceClass": "ally"
+        },
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_visjoin_91",
+          "sourceLabel": "Yawo",
+          "requested": 4,
+          "returned": 5,
+          "hpBefore": 582,
+          "hpAfter": 577,
+          "hpDelta": -5,
+          "turnSeq": null,
+          "actorKey": "v_visjoin_91",
+          "actorKind": "ally",
+          "phase": "npc-turn",
+          "sourceClass": "ally"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 23,
+          "returned": 29,
+          "hpBefore": 577,
+          "hpAfter": 548,
+          "hpDelta": -29,
+          "turnSeq": 8,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_app_mgpsphl9633",
+          "sourceLabel": "Ishaan",
+          "requested": 26,
+          "returned": 33,
+          "hpBefore": 548,
+          "hpAfter": 515,
+          "hpDelta": -33,
+          "turnSeq": null,
+          "actorKey": "v_app_mgpsphl9633",
+          "actorKind": "ally",
+          "phase": "npc-turn",
+          "sourceClass": "ally"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_visjoin_91",
+          "sourceLabel": "Yawo",
+          "requested": 7,
+          "returned": 9,
+          "hpBefore": 515,
+          "hpAfter": 506,
+          "hpDelta": -9,
+          "turnSeq": null,
+          "actorKey": "v_visjoin_91",
+          "actorKind": "ally",
+          "phase": "npc-turn",
+          "sourceClass": "ally"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 23,
+          "returned": 23,
+          "hpBefore": 506,
+          "hpAfter": 483,
+          "hpDelta": -23,
+          "turnSeq": 9,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_app_mgpsphl9633",
+          "sourceLabel": "Ishaan",
+          "requested": 26,
+          "returned": 26,
+          "hpBefore": 483,
+          "hpAfter": 457,
+          "hpDelta": -26,
+          "turnSeq": null,
+          "actorKey": "v_app_mgpsphl9633",
+          "actorKind": "ally",
+          "phase": "npc-turn",
+          "sourceClass": "ally"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_visjoin_91",
+          "sourceLabel": "Yawo",
+          "requested": 4,
+          "returned": 4,
+          "hpBefore": 457,
+          "hpAfter": 453,
+          "hpDelta": -4,
+          "turnSeq": null,
+          "actorKey": "v_visjoin_91",
+          "actorKind": "ally",
+          "phase": "npc-turn",
+          "sourceClass": "ally"
+        },
+        {
+          "round": 4,
+          "targetKey": "v_app_mgpsphl9633",
+          "targetKind": "villager",
+          "targetVid": "app_mgpsphl9633",
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 62,
+          "returned": 42,
+          "hpBefore": 72,
+          "hpAfter": 30,
+          "hpDelta": -42,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 5,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 26,
+          "returned": 26,
+          "hpBefore": 453,
+          "hpAfter": 427,
+          "hpDelta": -26,
+          "turnSeq": 10,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 5,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_visjoin_91",
+          "sourceLabel": "Yawo",
+          "requested": 5,
+          "returned": 5,
+          "hpBefore": 427,
+          "hpAfter": 422,
+          "hpDelta": -5,
+          "turnSeq": null,
+          "actorKey": "v_visjoin_91",
+          "actorKind": "ally",
+          "phase": "npc-turn",
+          "sourceClass": "ally"
+        },
+        {
+          "round": 5,
+          "targetKey": "v_visjoin_91",
+          "targetKind": "villager",
+          "targetVid": "visjoin_91",
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Epitaph",
+          "requested": 53,
+          "returned": 40,
+          "hpBefore": 40,
+          "hpAfter": 0,
+          "hpDelta": -40,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 6,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 22,
+          "returned": 22,
+          "hpBefore": 422,
+          "hpAfter": 400,
+          "hpDelta": -22,
+          "turnSeq": 11,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 6,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_boris_kowalski",
+          "sourceLabel": "Boris",
+          "requested": 6,
+          "returned": 6,
+          "hpBefore": 400,
+          "hpAfter": 394,
+          "hpDelta": -6,
+          "turnSeq": null,
+          "actorKey": "v_boris_kowalski",
+          "actorKind": "ally",
+          "phase": "npc-turn",
+          "sourceClass": "ally"
+        },
+        {
+          "round": 6,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "the narrated ending",
+          "requested": 9999,
+          "returned": 4878,
+          "hpBefore": 100,
+          "hpAfter": -4778,
+          "hpDelta": -4878,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "You catch fragments by the fire — Boris telling Ishaan about you. The retelling is already better than the event."
+        },
+        {
+          "kind": "say",
+          "line": "👥 Out here, of all places — Boris and Ibtihal run into each other. They stop and talk a while."
+        },
+        {
+          "kind": "say",
+          "line": "Ishaan heads out for water. \"Off to the well — back with a full skin.\" The pantry won't fill itself."
+        },
+        {
+          "kind": "say",
+          "line": "💧 Esperanza returns with water: +4 clean."
+        },
+        {
+          "kind": "say",
+          "line": "Iron cold. Even the ticks are shelved."
+        },
+        {
+          "kind": "say",
+          "line": "— MIDDAY — Honest work hours. Heat builds."
+        },
+        {
+          "kind": "say",
+          "line": "No path there."
+        },
+        {
+          "kind": "sysSay",
+          "line": "Ishaan's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Ishaan strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "It's reeling — the party sees the opening and piles on! (+25% vs controlled)"
+        },
+        {
+          "kind": "say",
+          "line": "Ishaan hits eulogy for 34."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "Boris's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Yawo's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Yawo stops mid-fight and binds the wound — field medicine, +20 HP."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Too close. The eulogy's attention SNAPS to Yawo — proximity overrules patience."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they stood their ground, poor brave fools.\" The spotlight widens. (No weight yet — just the story starting.) (5 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 29 (Crude bow)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "Ishaan's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Ishaan strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "Ishaan hits eulogy for 30."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "Boris's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Yawo's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Yawo strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "Yawo hits eulogy for 5."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Too close. The eulogy's attention SNAPS to Ishaan — proximity overrules patience."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they ran, and the spotlight followed.\" The spotlight narrows. Your dodge feels watched. (-10% dodge.) (4 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "eulogy's Epitaph swipes at sand-ghosts. Missed. (pocket_sand)"
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Epitaph — locks onto one target — moving won't dodge it. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 29 (Crude bow)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "Ishaan's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Ishaan strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "Ishaan hits eulogy for 33."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "Boris's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Yawo's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Yawo strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "Yawo hits eulogy for 9."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Too close. The eulogy's attention SNAPS to Ishaan — proximity overrules patience."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they bled, politely, where everyone could see.\" The narration lingers on your wounds. (Bleeds last 1 round longer.) (3 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 It connects!"
+        },
+        {
+          "kind": "say",
+          "line": "The Eulogy lashes at sand-ghosts near Ishaan. Missed. (pocket_sand)"
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Final Chapter — strikes one target after a windup. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 23 (Crude bow)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "Ishaan's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Ishaan strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "Ishaan hits eulogy for 26."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "Boris's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Yawo's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Yawo strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "Yawo hits eulogy for 4."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Too close. The eulogy's attention SNAPS to Ishaan — proximity overrules patience."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they knelt, and the story approved.\" The story leans in. (The Eulogy's attacks +15.) (2 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Ishaan's gear absorbs 20."
+        },
+        {
+          "kind": "say",
+          "line": "Ishaan takes the hit and runs — while running still works."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits Ishaan for 42."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 5!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "eulogy is BLEEDING — and it likes it. Louder, faster, no more feints."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 26 (Crude bow)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "Boris's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Yawo's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Yawo strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "Yawo hits eulogy for 5."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then — this is the last line — they ended.\" The last line hangs in the air. (It finishes next round.) (1 verse remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 eulogy's Epitaph finds Yawo — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Yawo's gear absorbs 13."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Epitaph hits Yawo for 40."
+        },
+        {
+          "kind": "say",
+          "line": "☠ Yawo falls."
+        },
+        {
+          "kind": "say",
+          "line": "You carry the weight of it. They died beside you."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The entry for Yawo is finished. No more pages."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 6!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 22 (Crude bow)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "Boris's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Boris strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "Boris hits eulogy for 6."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 \"...they ended.\" The last line lands like a lid. (The story finishes — you die as narrated.)"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 5121."
+        },
+        {
+          "kind": "say",
+          "line": "Boris winces. \"You're bleeding!\""
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Benjamin Bezerra is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Benjamin Bezerra is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Benjamin kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "\"Benjamin's gone.\" Ingrid looks at you for a long moment. \"You're not Benjamin.\" No heat in it. Just fact. You'll have to earn this face."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Boris blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Stone Tools (Level 1). Flint, chert, obsidian — they break with sharp edges. You can make a cutting tool in minutes."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Welding & Metalwork (Level 1). Join metal with heat: clean the joint, mind the arc, let it cool slow."
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Benjamin Bezerra, 97 days. The mantle passes to Boris Kowalski."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Boris Kowalski, 55 — a blacksmith. His hands know different work now: Iron Stomach, War Cry, Echo Location."
+        },
+        {
+          "kind": "say",
+          "line": "The village's quarrel was with Benjamin — and Benjamin is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers."
+        },
+        {
+          "kind": "say",
+          "line": "You knew Benjamin — not the office, the person. The fire keeps expecting him, and so do you. That's a heavier kind of stepping up. (+5 trauma)"
+        },
+        {
+          "kind": "say",
+          "line": "At the grave, Ingrid, Ishaan, Esperanza speak for Boris — \"Benjamin trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew Boris before the Codex did — his name already carried weight here."
+        }
+      ],
+      "transcriptOverflow": false,
+      "abilityUses": [],
+      "shoutUses": 0,
+      "offerFoodUses": 0,
+      "turns": [
+        {
+          "turnSeq": 7,
+          "round": 2,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 4,
+              "my": 7,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 5,
+              "name": "Crude bow",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 4,
+                "my": 5,
+                "hp": 641,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 2,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 4,
+                  "my": 7,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 5,
+                  "name": "Crude bow",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 4,
+                    "my": 5,
+                    "hp": 641,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 2,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 4,
+                  "my": 7,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 5,
+                  "name": "Crude bow",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 4,
+                    "my": 5,
+                    "hp": 612,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 2,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 19,
+          "end": {
+            "player": {
+              "mx": 4,
+              "my": 7,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 5,
+              "name": "Crude bow",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 4,
+                "my": 5,
+                "hp": 612,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 2,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(eulogy's hide absorbs 8.)",
+            "You STRIKE the eulogy for 29 (Crude bow).",
+            "📺 +5 style — solid hit",
+            "The narration stumbles — a page flutters loose from the script."
+          ]
+        },
+        {
+          "turnSeq": 8,
+          "round": 3,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 4,
+              "my": 7,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 5,
+              "name": "Crude bow",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 4,
+                "my": 5,
+                "hp": 577,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 2,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 4,
+                  "my": 7,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 5,
+                  "name": "Crude bow",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 4,
+                    "my": 5,
+                    "hp": 577,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 2,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 4,
+                  "my": 7,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 5,
+                  "name": "Crude bow",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 4,
+                    "my": 5,
+                    "hp": 548,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 2,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 38,
+          "end": {
+            "player": {
+              "mx": 4,
+              "my": 7,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 5,
+              "name": "Crude bow",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 4,
+                "my": 5,
+                "hp": 548,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 2,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(eulogy's hide absorbs 8.)",
+            "You STRIKE the eulogy for 29 (Crude bow).",
+            "📺 +5 style — solid hit",
+            "The narration stumbles — a page flutters loose from the script."
+          ]
+        },
+        {
+          "turnSeq": 9,
+          "round": 4,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 4,
+              "my": 7,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 5,
+              "name": "Crude bow",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 4,
+                "my": 5,
+                "hp": 506,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 2,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 4,
+                  "my": 7,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 5,
+                  "name": "Crude bow",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 4,
+                    "my": 5,
+                    "hp": 506,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 2,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 4,
+                  "my": 7,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 5,
+                  "name": "Crude bow",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 4,
+                    "my": 5,
+                    "hp": 483,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 2,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 58,
+          "end": {
+            "player": {
+              "mx": 4,
+              "my": 7,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 5,
+              "name": "Crude bow",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 4,
+                "my": 5,
+                "hp": 483,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 2,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(eulogy's hide absorbs 8.)",
+            "You STRIKE the eulogy for 23 (Crude bow).",
+            "📺 +5 style — solid hit",
+            "The narration stumbles — a page flutters loose from the script."
+          ]
+        },
+        {
+          "turnSeq": 10,
+          "round": 5,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 4,
+              "my": 7,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 5,
+              "name": "Crude bow",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 4,
+                "my": 5,
+                "hp": 453,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 2,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 4,
+                  "my": 7,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 5,
+                  "name": "Crude bow",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 4,
+                    "my": 5,
+                    "hp": 453,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 2,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 4,
+                  "my": 7,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 5,
+                  "name": "Crude bow",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 4,
+                    "my": 5,
+                    "hp": 427,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 2,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 79,
+          "end": {
+            "player": {
+              "mx": 4,
+              "my": 7,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 5,
+              "name": "Crude bow",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 4,
+                "my": 5,
+                "hp": 427,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 2,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(eulogy's hide absorbs 8.)",
+            "eulogy is BLEEDING — and it likes it. Louder, faster, no more feints.",
+            "You STRIKE the eulogy for 26 (Crude bow).",
+            "📺 +5 style — solid hit",
+            "The narration stumbles — a page flutters loose from the script."
+          ]
+        },
+        {
+          "turnSeq": 11,
+          "round": 6,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 4,
+              "my": 7,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 5,
+              "name": "Crude bow",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 4,
+                "my": 5,
+                "hp": 422,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 2,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 4,
+                  "my": 7,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 5,
+                  "name": "Crude bow",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 4,
+                    "my": 5,
+                    "hp": 422,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 2,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 4,
+                  "my": 7,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 5,
+                  "name": "Crude bow",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 4,
+                    "my": 5,
+                    "hp": 400,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 2,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 99,
+          "end": {
+            "player": {
+              "mx": 4,
+              "my": 7,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 5,
+              "name": "Crude bow",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 4,
+                "my": 5,
+                "hp": 400,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 2,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(eulogy's hide absorbs 8.)",
+            "You STRIKE the eulogy for 22 (Crude bow).",
+            "📺 +5 style — solid hit",
+            "The narration stumbles — a page flutters loose from the script."
+          ]
+        }
+      ],
+      "npcTurns": [
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_app_mgpsphl9633",
+          "mid": null,
+          "vid": "app_mgpsphl9633",
+          "round": 1,
+          "pre": {
+            "pos": {
+              "mx": 4,
+              "my": 4
+            },
+            "hp": 72,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 4,
+              "my": 4
+            },
+            "hp": 72,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "m_0",
+              "targetKind": "monster",
+              "targetMid": "eulogy",
+              "sourceClass": "ally",
+              "requested": 27,
+              "hpDelta": -34,
+              "round": 1
+            }
+          ],
+          "sayLines": [
+            "Ishaan strikes the Eulogy.",
+            "It's reeling — the party sees the opening and piles on! (+25% vs controlled)",
+            "Ishaan hits eulogy for 34.",
+            "The narration stumbles — a page flutters loose from the script."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_boris_kowalski",
+          "mid": null,
+          "vid": "boris_kowalski",
+          "round": 1,
+          "pre": {
+            "pos": {
+              "mx": 2,
+              "my": 5
+            },
+            "hp": 81,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 2,
+              "my": 5
+            },
+            "hp": 81,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_visjoin_91",
+          "mid": null,
+          "vid": "visjoin_91",
+          "round": 1,
+          "pre": {
+            "pos": {
+              "mx": 3,
+              "my": 4
+            },
+            "hp": 20,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 3,
+              "my": 4
+            },
+            "hp": 40,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [
+            "Yawo stops mid-fight and binds the wound — field medicine, +20 HP."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 1,
+          "pre": {
+            "pos": {
+              "mx": 4,
+              "my": 5
+            },
+            "hp": 641,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 4,
+              "my": 5
+            },
+            "hp": 641,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [
+            "Too close. The eulogy's attention SNAPS to Yawo — proximity overrules patience.",
+            "📖 The Eulogy narrates, honestly, always: \"and then they stood their ground, poor brave fools.\" The spotlight widens. (No weight yet — just the story starting.) (5 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_app_mgpsphl9633",
+          "mid": null,
+          "vid": "app_mgpsphl9633",
+          "round": 2,
+          "pre": {
+            "pos": {
+              "mx": 4,
+              "my": 4
+            },
+            "hp": 72,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 4,
+              "my": 4
+            },
+            "hp": 72,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "m_0",
+              "targetKind": "monster",
+              "targetMid": "eulogy",
+              "sourceClass": "ally",
+              "requested": 24,
+              "hpDelta": -30,
+              "round": 2
+            }
+          ],
+          "sayLines": [
+            "Ishaan strikes the Eulogy.",
+            "Ishaan hits eulogy for 30.",
+            "The narration stumbles — a page flutters loose from the script."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_boris_kowalski",
+          "mid": null,
+          "vid": "boris_kowalski",
+          "round": 2,
+          "pre": {
+            "pos": {
+              "mx": 2,
+              "my": 5
+            },
+            "hp": 81,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 2,
+              "my": 5
+            },
+            "hp": 81,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_visjoin_91",
+          "mid": null,
+          "vid": "visjoin_91",
+          "round": 2,
+          "pre": {
+            "pos": {
+              "mx": 3,
+              "my": 4
+            },
+            "hp": 40,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 3,
+              "my": 4
+            },
+            "hp": 40,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "m_0",
+              "targetKind": "monster",
+              "targetMid": "eulogy",
+              "sourceClass": "ally",
+              "requested": 4,
+              "hpDelta": -5,
+              "round": 2
+            }
+          ],
+          "sayLines": [
+            "Yawo strikes the Eulogy.",
+            "Yawo hits eulogy for 5.",
+            "The narration stumbles — a page flutters loose from the script."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 2,
+          "pre": {
+            "pos": {
+              "mx": 4,
+              "my": 5
+            },
+            "hp": 577,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 4,
+              "my": 5
+            },
+            "hp": 577,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [],
+          "sayLines": [
+            "Too close. The eulogy's attention SNAPS to Ishaan — proximity overrules patience.",
+            "📖 The Eulogy narrates, honestly, always: \"and then they ran, and the spotlight followed.\" The spotlight narrows. Your dodge feels watched. (-10% dodge.) (4 verses remain. Contradict it — do the opposite — or give it a better ending.)",
+            "eulogy's Epitaph swipes at sand-ghosts. Missed. (pocket_sand)",
+            "📖 Codex: Epitaph — locks onto one target — moving won't dodge it. You won't forget this."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_app_mgpsphl9633",
+          "mid": null,
+          "vid": "app_mgpsphl9633",
+          "round": 3,
+          "pre": {
+            "pos": {
+              "mx": 4,
+              "my": 4
+            },
+            "hp": 72,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 4,
+              "my": 4
+            },
+            "hp": 72,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "m_0",
+              "targetKind": "monster",
+              "targetMid": "eulogy",
+              "sourceClass": "ally",
+              "requested": 26,
+              "hpDelta": -33,
+              "round": 3
+            }
+          ],
+          "sayLines": [
+            "Ishaan strikes the Eulogy.",
+            "Ishaan hits eulogy for 33.",
+            "The narration stumbles — a page flutters loose from the script."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_boris_kowalski",
+          "mid": null,
+          "vid": "boris_kowalski",
+          "round": 3,
+          "pre": {
+            "pos": {
+              "mx": 2,
+              "my": 5
+            },
+            "hp": 81,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 2,
+              "my": 5
+            },
+            "hp": 81,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_visjoin_91",
+          "mid": null,
+          "vid": "visjoin_91",
+          "round": 3,
+          "pre": {
+            "pos": {
+              "mx": 3,
+              "my": 4
+            },
+            "hp": 40,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 3,
+              "my": 4
+            },
+            "hp": 40,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "m_0",
+              "targetKind": "monster",
+              "targetMid": "eulogy",
+              "sourceClass": "ally",
+              "requested": 7,
+              "hpDelta": -9,
+              "round": 3
+            }
+          ],
+          "sayLines": [
+            "Yawo strikes the Eulogy.",
+            "Yawo hits eulogy for 9.",
+            "The narration stumbles — a page flutters loose from the script."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 3,
+          "pre": {
+            "pos": {
+              "mx": 4,
+              "my": 5
+            },
+            "hp": 506,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "post": {
+            "pos": {
+              "mx": 4,
+              "my": 5
+            },
+            "hp": 506,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [],
+          "sayLines": [
+            "Too close. The eulogy's attention SNAPS to Ishaan — proximity overrules patience.",
+            "📖 The Eulogy narrates, honestly, always: \"and then they bled, politely, where everyone could see.\" The narration lingers on your wounds. (Bleeds last 1 round longer.) (3 verses remain. Contradict it — do the opposite — or give it a better ending.)",
+            "💥 It connects!",
+            "The Eulogy lashes at sand-ghosts near Ishaan. Missed. (pocket_sand)",
+            "📖 Codex: Final Chapter — strikes one target after a windup. You won't forget this."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_app_mgpsphl9633",
+          "mid": null,
+          "vid": "app_mgpsphl9633",
+          "round": 4,
+          "pre": {
+            "pos": {
+              "mx": 4,
+              "my": 4
+            },
+            "hp": 72,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 4,
+              "my": 4
+            },
+            "hp": 72,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "m_0",
+              "targetKind": "monster",
+              "targetMid": "eulogy",
+              "sourceClass": "ally",
+              "requested": 26,
+              "hpDelta": -26,
+              "round": 4
+            }
+          ],
+          "sayLines": [
+            "Ishaan strikes the Eulogy.",
+            "Ishaan hits eulogy for 26.",
+            "The narration stumbles — a page flutters loose from the script."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_boris_kowalski",
+          "mid": null,
+          "vid": "boris_kowalski",
+          "round": 4,
+          "pre": {
+            "pos": {
+              "mx": 2,
+              "my": 5
+            },
+            "hp": 81,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 2,
+              "my": 5
+            },
+            "hp": 81,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_visjoin_91",
+          "mid": null,
+          "vid": "visjoin_91",
+          "round": 4,
+          "pre": {
+            "pos": {
+              "mx": 3,
+              "my": 4
+            },
+            "hp": 40,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 3,
+              "my": 4
+            },
+            "hp": 40,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "m_0",
+              "targetKind": "monster",
+              "targetMid": "eulogy",
+              "sourceClass": "ally",
+              "requested": 4,
+              "hpDelta": -4,
+              "round": 4
+            }
+          ],
+          "sayLines": [
+            "Yawo strikes the Eulogy.",
+            "Yawo hits eulogy for 4.",
+            "The narration stumbles — a page flutters loose from the script."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 4,
+          "pre": {
+            "pos": {
+              "mx": 4,
+              "my": 5
+            },
+            "hp": 453,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "post": {
+            "pos": {
+              "mx": 4,
+              "my": 5
+            },
+            "hp": 453,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "v_app_mgpsphl9633",
+              "targetKind": "villager",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 62,
+              "hpDelta": -42,
+              "round": 4
+            }
+          ],
+          "sayLines": [
+            "Too close. The eulogy's attention SNAPS to Ishaan — proximity overrules patience.",
+            "📖 The Eulogy narrates, honestly, always: \"and then they knelt, and the story approved.\" The story leans in. (The Eulogy's attacks +15.) (2 verses remain. Contradict it — do the opposite — or give it a better ending.)",
+            "💥 Final Chapter!",
+            "Ishaan's gear absorbs 20.",
+            "Ishaan takes the hit and runs — while running still works.",
+            "Eulogy's Final Chapter hits Ishaan for 42."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_boris_kowalski",
+          "mid": null,
+          "vid": "boris_kowalski",
+          "round": 5,
+          "pre": {
+            "pos": {
+              "mx": 2,
+              "my": 5
+            },
+            "hp": 81,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 2,
+              "my": 5
+            },
+            "hp": 81,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_visjoin_91",
+          "mid": null,
+          "vid": "visjoin_91",
+          "round": 5,
+          "pre": {
+            "pos": {
+              "mx": 3,
+              "my": 4
+            },
+            "hp": 40,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 3,
+              "my": 4
+            },
+            "hp": 40,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "m_0",
+              "targetKind": "monster",
+              "targetMid": "eulogy",
+              "sourceClass": "ally",
+              "requested": 5,
+              "hpDelta": -5,
+              "round": 5
+            }
+          ],
+          "sayLines": [
+            "Yawo strikes the Eulogy.",
+            "Yawo hits eulogy for 5.",
+            "The narration stumbles — a page flutters loose from the script."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 5,
+          "pre": {
+            "pos": {
+              "mx": 4,
+              "my": 5
+            },
+            "hp": 422,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 4,
+              "my": 5
+            },
+            "hp": 422,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [
+            {
+              "targetKey": "v_visjoin_91",
+              "targetKind": "villager",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 53,
+              "hpDelta": -40,
+              "round": 5
+            }
+          ],
+          "sayLines": [
+            "📖 The Eulogy narrates, honestly, always: \"and then — this is the last line — they ended.\" The last line hangs in the air. (It finishes next round.) (1 verse remain. Contradict it — do the opposite — or give it a better ending.)",
+            "💥 eulogy's Epitaph finds Yawo — no dodging it.",
+            "Yawo's gear absorbs 13.",
+            "Eulogy's Epitaph hits Yawo for 40.",
+            "☠ Yawo falls.",
+            "You carry the weight of it. They died beside you.",
+            "Nobody's talking much. The fire feels smaller tonight.",
+            "📖 The entry for Yawo is finished. No more pages."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_boris_kowalski",
+          "mid": null,
+          "vid": "boris_kowalski",
+          "round": 6,
+          "pre": {
+            "pos": {
+              "mx": 2,
+              "my": 5
+            },
+            "hp": 81,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 3,
+              "my": 4
+            },
+            "hp": 81,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "m_0",
+              "targetKind": "monster",
+              "targetMid": "eulogy",
+              "sourceClass": "ally",
+              "requested": 6,
+              "hpDelta": -6,
+              "round": 6
+            }
+          ],
+          "sayLines": [
+            "Boris strikes the Eulogy.",
+            "Boris hits eulogy for 6.",
+            "The narration stumbles — a page flutters loose from the script."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 6,
+          "pre": {
+            "pos": {
+              "mx": 4,
+              "my": 5
+            },
+            "hp": 394,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "post": {
+            "pos": {
+              "mx": 4,
+              "my": 5
+            },
+            "hp": 394,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 9999,
+              "hpDelta": -4878,
+              "round": 6
+            }
+          ],
+          "sayLines": [
+            "📖 \"...they ended.\" The last line lands like a lid. (The story finishes — you die as narrated.)",
+            "Armor absorbs 5121.",
+            "Boris winces. \"You're bleeding!\"",
+            "You go down.",
+            "OH. Oh no. ...The gamblers are very quiet.",
+            "📖 The Codex turns a page on its own. Benjamin Bezerra is dead. You didn't ask. It knew.",
+            "Nobody's talking much. The fire feels smaller tonight.",
+            "🕯️ Benjamin Bezerra is dead — the wild. The village stops. Somebody screams. Somebody else starts digging.",
+            "What Benjamin kept close goes into the ground with them — keepsakes are buried, never taken from the body.",
+            "\"Benjamin's gone.\" Ingrid looks at you for a long moment. \"You're not Benjamin.\" No heat in it. Just fact. You'll have to earn this face.",
+            "The Codex doesn't pause for grief. Boris blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+            "📖 LEARNED: Stone Tools (Level 1). Flint, chert, obsidian — they break with sharp edges. You can make a cutting tool in minutes.",
+            "📖 LEARNED: Welding & Metalwork (Level 1). Join metal with heat: clean the joint, mind the arc, let it cool slow.",
+            "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+            "📖 The Codex turns a page: Benjamin Bezerra, 97 days. The mantle passes to Boris Kowalski.",
+            "🪞 You wake up somebody else. Boris Kowalski, 55 — a blacksmith. His hands know different work now: Iron Stomach, War Cry, Echo Location.",
+            "The village's quarrel was with Benjamin — and Benjamin is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers.",
+            "You knew Benjamin — not the office, the person. The fire keeps expecting him, and so do you. That's a heavier kind of stepping up. (+5 trauma)",
+            "At the grave, Ingrid, Ishaan, Esperanza speak for Boris — \"Benjamin trusted them. We saw it. Give them the fire's hearing.\" The village listens.",
+            "The fire knew Boris before the Codex did — his name already carried weight here."
+          ],
+          "threw": null
+        }
+      ],
+      "end": {
+        "result": "lost",
+        "day": 97,
+        "round": 6,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "eulogy",
+            "alive": true,
+            "fled": false,
+            "hp": 394,
+            "maxHp": 900
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "gen_iggym7l",
+            "alive": false,
+            "fled": false,
+            "hp": -4778,
+            "maxHp": 100
+          },
+          {
+            "key": "v_boris_kowalski",
+            "kind": "villager",
+            "vid": "boris_kowalski",
+            "alive": true,
+            "fled": false,
+            "hp": 81,
+            "maxHp": 100
+          },
+          {
+            "key": "v_app_mgpsphl9633",
+            "kind": "villager",
+            "vid": "app_mgpsphl9633",
+            "alive": true,
+            "fled": true,
+            "hp": 30,
+            "maxHp": 100
+          },
+          {
+            "key": "v_visjoin_91",
+            "kind": "villager",
+            "vid": "visjoin_91",
+            "alive": false,
+            "fled": false,
+            "hp": 0,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "gen_iggym7l",
+          "visjoin_91"
+        ],
+        "humansFled": [
+          "app_mgpsphl9633"
+        ],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false,
+      "openingActions": [],
+      "openingHits": [],
+      "openingSay": [
+        "The village is rattled. Everyone's jumpy — eyes on the treeline.",
+        "You don't know what that was. A voice practicing your name in past tense. Someone at the haven should hear about this.",
+        "⚔ THE EULOGY! Boris, Ishaan, Yawo join you!",
+        "You fling a handful of grit into its eyes. (pocket_sand: blinded)",
+        "Turn-based now. Tap a tile to move — speed is squares. Then act.",
+        "Boris plants their feet. \"Finally. A fight worth watching.\"",
+        "COMBAT! THE EULOGY! The gamblers lean in. ROUND 1 — FIGHT!",
+        "🐗 This one came with the raid on Haven — it was with the teeth at the door, not a lone wanderer."
+      ],
+      "def": {
+        "hp": [
+          900,
+          1100
+        ],
+        "armor": 8,
+        "attackDamage": [
+          50,
+          70
+        ],
+        "attackName": "Final Chapter",
+        "speed": 1
+      }
+    }
+  ],
+  "killsW4": 0,
+  "killRows": [],
+  "unlinkedKills": [],
+  "fieldFights": [
+    {
+      "callId": 59,
+      "day": 96,
+      "vid": "visjoin_91",
+      "mid": "eulogy",
+      "wave": 4,
+      "pre": {
+        "vid": "visjoin_91",
+        "mid": "eulogy",
+        "wave": 4,
+        "day": 96,
+        "gear": {
+          "vid": "visjoin_91",
+          "armorP": 9,
+          "armed": true,
+          "weapon": "Fire-hardened spear",
+          "vpFound": true,
+          "readError": null
+        },
+        "hpStart": 22,
+        "mHpStart": 675,
+        "allies": 2,
+        "allyVids": [
+          "boris_kowalski",
+          "ingrid_vik"
+        ],
+        "def": {
+          "hp": [
+            900,
+            1100
+          ],
+          "armor": 8,
+          "attackDamage": [
+            50,
+            70
+          ],
+          "attackName": "Final Chapter",
+          "speed": 1
+        }
+      },
+      "outcome": "vFlee",
+      "rounds": 1,
+      "vTaken": 33,
+      "mDealt": 0,
+      "vHpLeft": 9,
+      "mHpLeft": 675,
+      "packCount": 1,
+      "partySize": 3,
+      "intent": "engage",
+      "intentWhy": "party",
+      "allyDealt": 0,
+      "calledHelp": false,
+      "allyVid": null,
+      "mHpStartRec": 675,
+      "log": [
+        "R1: Yawo stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "Yawo's gear absorbs 10.",
+        "R1: Epitaph hits Yawo for 33 (9 left)",
+        "Yawo is past holding — they run while running still works."
+      ],
+      "killsDuring": [],
+      "deathsDuring": [],
+      "sayLines": [
+        "📖 The Eulogy narrates: \"Yawo faltered.\" (5 verses remain.)"
+      ],
+      "threw": null
+    }
+  ],
+  "deathEvents": [
+    {
+      "day": 5,
+      "kind": "monster",
+      "who": "murkcap",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 6,
+      "kind": "monster",
+      "who": "rut_king",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "speedbump_turtle",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "dustboar",
+      "cause": "expedition",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 9,
+      "kind": "monster",
+      "who": "sanjun",
+      "cause": "expedition",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 10,
+      "kind": "monster",
+      "who": "white_noise_heron",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 11,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "expedition",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 11,
+      "kind": "monster",
+      "who": "moderator",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 11,
+      "kind": "monster",
+      "who": "mirror_stag",
+      "cause": "expedition",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 12,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "expedition",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 13,
+      "kind": "monster",
+      "who": "nightlight_catfish",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 14,
+      "kind": "villager",
+      "who": "gen_bhoj7uo",
+      "cause": "monster",
+      "player": false,
+      "fieldCall": 15,
+      "tbSeq": null
+    },
+    {
+      "day": 15,
+      "kind": "monster",
+      "who": "lockpick_raccoon",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 17,
+      "kind": "monster",
+      "who": "review_drone",
+      "cause": "expedition",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 17,
+      "kind": "monster",
+      "who": "giant_mosquito",
+      "cause": "expedition",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 17,
+      "kind": "monster",
+      "who": "nevermore",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 17,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 18,
+      "kind": "villager",
+      "who": "gen_1wbp6tx",
+      "cause": "monster",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 18,
+      "kind": "villager",
+      "who": "diana_osei",
+      "cause": "monster",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 20,
+      "kind": "monster",
+      "who": "anaconda_empress",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 21,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 21,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 21,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 21,
+      "kind": "monster",
+      "who": "moderator",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 27,
+      "kind": "monster",
+      "who": "voice_mimic_radio",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 29,
+      "kind": "monster",
+      "who": "murkcap",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 30,
+      "kind": "villager",
+      "who": "gen_0eman7r",
+      "cause": "the wild",
+      "player": true,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 30,
+      "kind": "monster",
+      "who": "redactor",
+      "cause": "combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 31,
+      "kind": "villager",
+      "who": "gen_87iiezw",
+      "cause": "contest",
+      "player": true,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 36,
+      "kind": "monster",
+      "who": "memory_projector",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 36,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 36,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 37,
+      "kind": "monster",
+      "who": "focus_group",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 40,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 56,
+      "kind": "monster",
+      "who": "nightcourt",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 59,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 59,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 59,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 65,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 67,
+      "kind": "villager",
+      "who": "zoltan_nagy",
+      "cause": "monster",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 72,
+      "kind": "monster",
+      "who": "spool",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 73,
+      "kind": "monster",
+      "who": "moderator",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 74,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 74,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 74,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 74,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 75,
+      "kind": "monster",
+      "who": "dustboar",
+      "cause": "combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 76,
+      "kind": "villager",
+      "who": "meera_reddy",
+      "cause": "a stranger",
+      "player": true,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 77,
+      "kind": "monster",
+      "who": "gavel",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 80,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 80,
+      "kind": "monster",
+      "who": "callback",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 80,
+      "kind": "monster",
+      "who": "anaconda_empress",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 80,
+      "kind": "monster",
+      "who": "ducks_in_a_row",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 81,
+      "kind": "villager",
+      "who": "gen_u32zvq7",
+      "cause": "the wild",
+      "player": true,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 82,
+      "kind": "monster",
+      "who": "mirrormoth",
+      "cause": "combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 82,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 82,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 82,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 82,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 82,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 85,
+      "kind": "villager",
+      "who": "nora_wilson",
+      "cause": "the arena",
+      "player": true,
+      "fieldCall": null,
+      "tbSeq": 1
+    },
+    {
+      "day": 95,
+      "kind": "monster",
+      "who": "sweeps_week",
+      "cause": "villager combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": null
+    },
+    {
+      "day": 97,
+      "kind": "person",
+      "who": "visjoin_91",
+      "cause": "combat",
+      "player": false,
+      "fieldCall": null,
+      "tbSeq": 2
+    },
+    {
+      "day": 97,
+      "kind": "villager",
+      "who": "gen_iggym7l",
+      "cause": "the wild",
+      "player": true,
+      "fieldCall": null,
+      "tbSeq": 2
+    }
+  ],
+  "killerTrace": {},
+  "spawns": [
+    {
+      "day": 83,
+      "id": "eulogy",
+      "tx": 5,
+      "ty": 6
+    },
+    {
+      "day": 97,
+      "id": "influencer",
+      "tx": 4,
+      "ty": 6
+    },
+    {
+      "day": 97,
+      "id": "congregation",
+      "tx": 7,
+      "ty": 0
+    }
+  ],
+  "orphanTbEnds": [],
+  "wrapCounts": {
+    "spawnWorldMonster": 47,
+    "fieldFight": 59,
+    "recordWaveKill": 60,
+    "useAbility": 82,
+    "startCombat": 15,
+    "tbBeginTurn": 115,
+    "tbEnd": 16,
+    "tbAdvance": 110,
+    "tbMonsterTurn": 83,
+    "tbPlayerMove": 24,
+    "tbVillagerTurn": 121,
+    "tbDamage": 131,
+    "tbPlayerStrike": 40,
+    "tbPlayerWait": 33
+  },
+  "instrumentErrors": [],
+  "notes": []
+}
