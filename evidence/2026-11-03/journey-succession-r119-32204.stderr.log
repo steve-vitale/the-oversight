@@ -1,0 +1,34 @@
+
+PRE-DEATH d40: bearer <redacted>, topTrust=[{"id":"Scott","t":90},{"id":"Angela","t":90},{"id":"Wanjiru","t":90},{"id":"Leo","t":76}], roster=7
+INH readable=true scripted=true deadItems=30 distinct=27 transferred=3 vanished=2 keptPlants=17 inheritedPlants=3 keptSkills=5 inheritedSkills=11 succTrustPre=90 succTrustPost=60
+PARITY readable=true equal=true inherited=[] pre=["green_whisper"] post=["green_whisper"]
+DEATH d40 (a hushwolf, scripted): Ivan -> Scott | passed=true lin=true mo=true trust=60 vouchers=4
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=4 vanished=2 of 27 distinct dead-bearer items
+  CONVO d+3 with Wanjiru (refused=false)
+  CONVO d+3 with Angela (refused=false)
+  CONVO d+7 with Angela (refused=false)
+  CONVO d+7 with Leo (refused=false)
+  CONVO d+14 with Quinn (refused=false)
+  CONVO d+14 with Wanjiru (refused=false)
+  CONVO d+30 with Onni (refused=false)
+  CONVO d+30 with Ava (refused=false)
+
+FUNERAL: deathBeat=3 recover=1 vouch=1 (eligible=4) echo=2 organicBurial={"respects":false,"bury":false} halfRation=7
+
+MEAL-GATE: audited=47 violations=2 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+  VIOLATION d+47: Ava trust=70 kcal=2250 halfVoice=true
+  VIOLATION d+47: Ava trust=70 kcal=2250 halfVoice=true
+SUCCESSOR-LIFE: dayAdv=48 signals={"levelUp":true,"systemVoice":24,"offerLines":52,"codexPlantsDelta":29,"codexSkillsDelta":19,"codexAbilitiesDelta":8,"xpDelta":43,"any":true} pantry 123816->2430
+TRUST-DIALS: office 60->72 (+12, climb) | villageMean 79.6->66.5 (-13.1, fall) | ge60 4->1 | movers>=5: [{"id":"Onni","from":57,"to":83,"delta":26}]
+DEED-LEDGER: calls=25 summary={"donateToPantry":{"calls":17,"ok":17,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"giveFood":{"calls":8,"ok":8,"deltaSum":30,"deltaN":8,"positive":8,"meanDelta":3.75}}
+
+IDENTITY TRIPS: raw=2 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=2 (convo=2, say=0)) m4=true m5=manual | endDay=88 alive=0 over=true
+anomalies: 0
+S-METRICS: s1=false s2=true s3=true s4=false s5=false dayAdv=48
+T-METRICS: t1=true(panels=d+0,d+7,d+15,d+31) t2=true(deedCalls=25) trustVerdict={"readable":true,"officeMantle":60,"officeLast":72,"officeDelta":12,"officeClass":"climb","villageMantle":79.6,"villageLast":66.5,"villageDelta":-13.1,"villageClass":"fall","villageGe60Mantle":4,"villageGe60Last":1,"movers":[{"id":"Onni","from":57,"to":83,"delta":26}]}
+E6/CALLCHECK: e6={"callMoves":23,"withCensus":23,"chainHandoffs":6,"trustMoves":17} callCheck={"dailyMoveDays":23,"callMoveDays":18,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=3 (v2=3, excludedLoot=0))
+E7/R47: e7={"trustMoves":17,"soloOffice":5,"soloOfficeDeltas":[1,1,2,1,1],"soloBearerDeltaExact":[1,1,2,1,1],"singleMoverBearer":0,"singleMoverOther":6,"eventClass":{"event-only":0,"deed-only":3,"both":14,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":2,"v2":3,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":6,"known":6,"unknown":0} e3={"dailyDays":48,"moves":23}

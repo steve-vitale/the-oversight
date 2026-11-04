@@ -1,0 +1,35 @@
+
+ORGANIC DEATH d15: Marta -> Esteban, topTrust=[{"id":"Catalina","t":63},{"id":"Ethan","t":44},{"id":"Wanjiru","t":44},{"id":"Aaliyah","t":42}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=12 inheritedPlants=0 keptSkills=3 inheritedSkills=0 succTrustPre=44 succTrustPost=37
+PARITY readable=true equal=true inherited=[] pre=["green_whisper"] post=["green_whisper"]
+DEATH d15 (organic (phase A)): Marta -> Esteban | passed=true lin=true mo=true trust=37 vouchers=1
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Catalina (refused=false)
+  CONVO d+3 with Maeve (refused=false)
+  BOND-CONVO d+3 with Aaliyah (depth=0 v=24 refused=false)
+  CONVO d+7 with Catalina (refused=false)
+  CONVO d+7 with Maeve (refused=false)
+  CONVO d+14 with Maeve (refused=false)
+  CONVO d+14 with Catalina (refused=false)
+  BOND-CONVO d+14 with Aaliyah (depth=0 v=24 refused=false)
+  CONVO d+30 with Aaliyah (refused=false)
+  CONVO d+30 with Catalina (refused=false)
+  CONVO d+45 with Ruth (refused=false)
+  CONVO d+45 with Ursula (refused=false)
+
+FUNERAL: deathBeat=6 recover=1 vouch=1 (eligible=1) echo=2 organicBurial={"respects":false,"bury":false} halfRation=0
+
+MEAL-GATE: audited=45 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=46 signals={"levelUp":true,"systemVoice":57,"offerLines":51,"codexPlantsDelta":21,"codexSkillsDelta":24,"codexAbilitiesDelta":16,"xpDelta":2,"any":true} pantry 28734->22140
+TRUST-DIALS: office 37->69 (+32, climb) | villageMean 41->70.3 (+29.3, climb) | ge60 1->5 | movers>=5: [{"id":"Zhazira","from":34,"to":90,"delta":56},{"id":"Aaliyah","from":42,"to":95,"delta":53},{"id":"Sung-min","from":19,"to":70,"delta":51},{"id":"Grace","from":42,"to":90,"delta":48},{"id":"Catalina","from":63,"to":91,"delta":28}]
+DEED-LEDGER: calls=32 summary={"donateToPantry":{"calls":19,"ok":19,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"giveFood":{"calls":13,"ok":13,"deltaSum":60,"deltaN":13,"positive":12,"meanDelta":4.62}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=2 (convo=2, say=0)) m4=true m5=manual | endDay=61 alive=0 over=true
+anomalies: 0
+S-METRICS: s1=false s2=true s3=true s4=false s5=true dayAdv=46
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+31) t2=true(deedCalls=32) trustVerdict={"readable":true,"officeMantle":37,"officeLast":69,"officeDelta":32,"officeClass":"climb","villageMantle":41,"villageLast":70.3,"villageDelta":29.3,"villageClass":"climb","villageGe60Mantle":1,"villageGe60Last":5,"movers":[{"id":"Zhazira","from":34,"to":90,"delta":56},{"id":"Aaliyah","from":42,"to":95,"delta":53},{"id":"Sung-min","from":19,"to":70,"delta":51},{"id":"Grace","from":42,"to":90,"delta":48},{"id":"Catalina","from":63,"to":91,"delta":28}]}
+E6/CALLCHECK: e6={"callMoves":15,"withCensus":15,"chainHandoffs":3,"trustMoves":12} callCheck={"dailyMoveDays":15,"callMoveDays":14,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=3 (v2=4, excludedLoot=1))
+E7/R47: e7={"trustMoves":12,"soloOffice":2,"soloOfficeDeltas":[2,1],"soloBearerDeltaExact":[2,1],"singleMoverBearer":1,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":4,"both":8,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":2,"v2":4,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":6,"known":6,"unknown":0} e3={"dailyDays":46,"moves":15}
