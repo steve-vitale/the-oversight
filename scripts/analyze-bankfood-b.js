@@ -37,14 +37,23 @@ function census(inst) {
   const rows = inst.evenings || [];
   let creek = 0, still = 0, rescued = 0;
   const stillDays = [];
+  // Stranded-away (addendum 2026-11-04): nighttravel failed to bring
+  // the scholar home and the evening ends away — independent of the
+  // woodcarry bucket, which is null on out-of-reach evenings.
+  let strandedAway = 0;
+  const strandedAwayDays = [];
   for (const r of rows) {
     const wc = r.woodcarry;
-    if (!wc || wc.bucket !== 'creek') continue;
-    creek++;
-    if (wc.rescued) rescued++;
-    else { still++; stillDays.push(r.loopDay); }
+    if (wc && wc.bucket === 'creek') {
+      creek++;
+      if (wc.rescued) rescued++;
+      else { still++; stillDays.push(r.loopDay); }
+    }
+    if ((r.eveningOutcome === 'travel-refused' || r.eveningOutcome === 'out-of-reach') && r.tile !== 'haven' && r.inside !== true) {
+      strandedAway++; strandedAwayDays.push(r.loopDay);
+    }
   }
-  return { creek, still, rescued, stillDays,
+  return { creek, still, rescued, stillDays, strandedAway, strandedAwayDays,
     survived: inst.daysAlive, endReason: inst.endReason,
     bfErrs: (inst.bankfoodStore && inst.bankfoodStore.errs) || 0,
     wcErrs: (inst.woodcarryStore && inst.woodcarryStore.errs) || 0,

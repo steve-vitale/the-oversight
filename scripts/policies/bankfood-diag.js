@@ -96,7 +96,7 @@ function packSnap(Game) {
       return { name: it.name || null, units, kcalEach: (it.kcalEach === undefined ? null : it.kcalEach),
         edible: (it.edible === undefined ? null : !!it.edible),
         foodState: it.foodState || null, spoilDay: (it.spoilDay === undefined ? null : it.spoilDay),
-        material: it.material || null };
+        material: it.material || null, lump: !!it.lump };
     });
     return { edibleKcal: Math.round(edibleKcal), grossKcal: Math.round(grossKcal),
       lumpUnits, lumpSpoilDays, stacks };
@@ -199,6 +199,33 @@ function doForagePress(Game, store) {
     lumpUnitsBefore: before.lumpUnits, lumpUnitsAfter: after.lumpUnits };
 }
 
+// Stranding decisions (pure, unit-tested). ADDENDUM 2026-11-04: the
+// pilot proved the old woodcarry-bucket gate never fires on current
+// master, while genuinely stranded out-of-reach creek-tile evenings
+// DO occur (seed 15003, 9 nights). Stranding is therefore read
+// directly off the nighttravel outcome + away position, with the
+// woodcarry bucket recorded when present but never required.
+// Input o: { gameOver, combatLive, ntOutcome, tileType, insideHaven }.
+// Returns { fire: true } or { fire: false, skip: reason }.
+function strandedEveningDecision(o) {
+  if (o.gameOver) return { fire: false, skip: 'game-over' };
+  if (o.combatLive) return { fire: false, skip: 'combat' };
+  if (!(o.ntOutcome === 'travel-refused' || o.ntOutcome === 'out-of-reach')) {
+    return { fire: false, skip: 'not-stranded' };
+  }
+  if (o.tileType === 'haven' || o.insideHaven === true) return { fire: false, skip: 'haven-evening' };
+  return { fire: true };
+}
+function strandedMorningDecision(o) {
+  if (o.gameOver) return { fire: false, skip: 'game-over' };
+  if (o.combatLive) return { fire: false, skip: 'combat' };
+  if (!(o.ntOutcome === 'travel-refused' || o.ntOutcome === 'out-of-reach')) {
+    return { fire: false, skip: 'prev-not-stranded' };
+  }
+  if (o.tileType === 'haven' || o.insideHaven === true) return { fire: false, skip: 'haven-morning' };
+  return { fire: true };
+}
+
 function withBankfood(inner, store) {
   const st = store || newStore();
   let call = 0;
@@ -224,23 +251,26 @@ function withBankfood(inner, store) {
       const loopDay = call;
       if (!leverOn()) return inner.daily ? inner.daily(Game, ctx) : undefined;
       // ---- MORNING PHASE (before inner.daily; prev evening from ctx) ----
+      // Previous loop-day's nighttravel record: _ntLast is set at
+      // evening time only, so at daily start it still holds yesterday's.
       try {
-        let prev = null;
-        try { prev = (ctx && ctx._wcLast) || null; } catch (e) { prev = null; }
+        let prevNt = null, prevWc = null;
+        try { prevNt = (ctx && ctx._ntLast) || null; } catch (e) { prevNt = null; }
+        try { prevWc = (ctx && ctx._wcLast) || null; } catch (e) { prevWc = null; }
         let wakeTileType = null;
         try { const t = Game.playerTile(); wakeTileType = t ? (t.type || null) : null; } catch (e) {}
         const sch = (Game.state || {}).scholar || {};
         const insideHaven = (sch.insideHaven === undefined ? null : !!sch.insideHaven);
-        const stranded = !gameOver(Game) && !combatLive(Game) &&
-          prev && prev.outcome === 'travel-refused' && prev.bucket === 'creek' && prev.rescued === false &&
-          wakeTileType !== 'haven' && insideHaven !== true;
-        if (!stranded) {
-          let skip = 'prev-not-stranded';
-          if (gameOver(Game)) skip = 'game-over';
-          else if (combatLive(Game)) skip = 'combat';
-          else if (wakeTileType === 'haven' || insideHaven === true) skip = 'haven-morning';
-          st.mornings.push({ loopDay, skip, prevLoopDay: loopDay - 1,
-            prevBucket: prev ? prev.bucket : null, prevRescued: prev ? prev.rescued : null,
+        const gate = strandedMorningDecision({
+          gameOver: gameOver(Game), combatLive: combatLive(Game),
+          ntOutcome: prevNt ? prevNt.outcome : null,
+          tileType: wakeTileType, insideHaven,
+        });
+        if (!gate.fire) {
+          st.mornings.push({ loopDay, skip: gate.skip,
+            prevLoopDay: loopDay - 1,
+            prevOutcome: prevNt ? prevNt.outcome : null,
+            prevBucket: prevWc ? prevWc.bucket : null, prevRescued: prevWc ? prevWc.rescued : null,
             wakeTileType, insideHaven });
         } else {
           const wakeTile = (Game.map ? (Game.map.px + ',' + Game.map.py) : null);
@@ -252,7 +282,8 @@ function withBankfood(inner, store) {
             try { Game.eat(); ate = true; } catch (e) { eatErr = String((e && (e.message || e)) || e).slice(0, 300); }
           }
           st.mornings.push({ loopDay, ate, eatErr, prevLoopDay: loopDay - 1,
-            prevBucket: prev.bucket, prevRescued: prev.rescued,
+            prevOutcome: prevNt ? prevNt.outcome : null,
+            prevBucket: prevWc ? prevWc.bucket : null, prevRescued: prevWc ? prevWc.rescued : null,
             wakeTileType, insideHaven, wakeTile,
             kcalBefore, kcalAfterEat: scholarKcal(Game),
             packBefore, packAfter: packSnap(Game),
@@ -262,14 +293,24 @@ function withBankfood(inner, store) {
       // ---- INNER DAY (competent + nighttravel + woodcarry + woodwarm) ----
       if (inner.daily) inner.daily(Game, ctx);
       if (gameOver(Game) || combatLive(Game)) return;
-      // ---- EVENING PHASE (after inner.daily; still creek evenings only) ----
+      // ---- EVENING PHASE (after inner.daily; stranded-away evenings only, addendum 2026-11-04) ----
       try {
-        let wc = null;
+        let wc = null, nt = null;
         try { wc = (ctx && ctx._wcLast) || null; } catch (e) { wc = null; }
-        const still = wc && wc.bucket === 'creek' && wc.rescued === false;
-        if (!still) return;
+        try { nt = (ctx && ctx._ntLast) || null; } catch (e) { nt = null; }
+        let eveTileType = null, eveInsideHaven = null;
+        try { const t = Game.playerTile(); eveTileType = t ? (t.type || null) : null; } catch (e) {}
+        try { eveInsideHaven = ((Game.state || {}).scholar || {}).insideHaven; } catch (e) {}
+        const eveGate = strandedEveningDecision({
+          gameOver: gameOver(Game), combatLive: combatLive(Game),
+          ntOutcome: nt ? nt.outcome : null,
+          tileType: eveTileType, insideHaven: eveInsideHaven === true,
+        });
+        if (!eveGate.fire) return;
         const clock = dayTicks(Game);
         const rec = { loopDay, mode: null, skip: null, needed: null,
+          ntOutcome: nt ? nt.outcome : null,
+          wcBucket: wc ? wc.bucket : null, wcRescued: wc ? wc.rescued : null,
           clockBefore: clock, woodBefore: playerWood(Game), kcalBefore: scholarKcal(Game),
           branchesBefore: branchCount(Game), packBefore: packSnap(Game),
           actions: [], clockAfter: null, woodAfter: null, kcalAfter: null,
@@ -338,4 +379,4 @@ function withBankfood(inner, store) {
   });
 }
 
-module.exports = { withBankfood, newStore, packSnap, pressTotals, findGatherTarget };
+module.exports = { withBankfood, newStore, packSnap, pressTotals, findGatherTarget, strandedEveningDecision, strandedMorningDecision };

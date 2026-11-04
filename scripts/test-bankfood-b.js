@@ -10,7 +10,7 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
-const { packSnap, pressTotals, findGatherTarget } = require('./policies/bankfood-diag');
+const { packSnap, pressTotals, findGatherTarget, strandedEveningDecision, strandedMorningDecision } = require('./policies/bankfood-diag');
 
 let pass = 0, fail = 0;
 function check(name, cond, extra) {
@@ -61,6 +61,14 @@ function fakeGame(inv) {
   check('pressTotals unknown units', t.unknownUnits === 14, 'got ' + t.unknownUnits);
   check('pressTotals unknown forms', JSON.stringify(t.unknownForms) === '["unknown shoots"]', 'got ' + JSON.stringify(t.unknownForms));
 }
+{
+  const g = fakeGame([
+    { name: 'unknown shoots', units: 14, kcalEach: 0, edible: false, foodState: 'unknown', spoilDay: 3, lump: { dandelion: { units: 14, day: 1 } } },
+  ]);
+  const s = packSnap(g);
+  const t = pressTotals([], s.stacks);
+  check('pressTotals reads packSnap lump flag', t.unknownUnits === 14, 'got ' + t.unknownUnits);
+}
 // ---- pure: findGatherTarget on a fake grid ----
 {
   const grid = [];
@@ -72,6 +80,17 @@ function fakeGame(inv) {
   const tgt = findGatherTarget(g);
   check('findGatherTarget finds the bigtree', !!tgt && tgt.target.x === 5 && tgt.target.y === 0, JSON.stringify(tgt && tgt.target));
   check('findGatherTarget stance adjacent', !!tgt && Math.max(Math.abs(tgt.stance[0] - 5), Math.abs(tgt.stance[1] - 0)) <= 1, JSON.stringify(tgt && tgt.stance));
+}
+// ---- pure: stranding decisions (addendum 2026-11-04) ----
+{
+  check('gate: out-of-reach away fires evening', strandedEveningDecision({ gameOver: false, combatLive: false, ntOutcome: 'out-of-reach', tileType: 'creek', insideHaven: false }).fire === true);
+  check('gate: travel-refused away fires evening', strandedEveningDecision({ gameOver: false, combatLive: false, ntOutcome: 'travel-refused', tileType: 'creek', insideHaven: false }).fire === true);
+  check('gate: completed does not fire evening', strandedEveningDecision({ gameOver: false, combatLive: false, ntOutcome: 'completed', tileType: 'creek', insideHaven: false }).fire === false);
+  check('gate: haven tile does not fire evening', strandedEveningDecision({ gameOver: false, combatLive: false, ntOutcome: 'out-of-reach', tileType: 'haven', insideHaven: false }).fire === false);
+  check('gate: combat does not fire evening', strandedEveningDecision({ gameOver: false, combatLive: true, ntOutcome: 'out-of-reach', tileType: 'creek', insideHaven: false }).fire === false);
+  check('gate: out-of-reach away fires morning', strandedMorningDecision({ gameOver: false, combatLive: false, ntOutcome: 'out-of-reach', tileType: 'creek', insideHaven: false }).fire === true);
+  check('gate: haven morning does not fire', strandedMorningDecision({ gameOver: false, combatLive: false, ntOutcome: 'out-of-reach', tileType: 'haven', insideHaven: true }).fire === false);
+  check('gate: null outcome does not fire morning', strandedMorningDecision({ gameOver: false, combatLive: false, ntOutcome: null, tileType: 'creek', insideHaven: false }).fire === false);
 }
 // ---- corpus checks (only when asked) ----
 if (process.env.BANKFOOD_CORPUS_CHECK === '1') {
