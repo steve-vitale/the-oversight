@@ -54,8 +54,33 @@ function strictSayLines(out) {
   };
 }
 
+// Counter-accepted correction (askplus finding): BASE classifies a
+// proposal 'accepted' whenever a link naming its target appears within
+// 2 days — which HIDES the counter path when the counter is answered
+// and the link forms the next day (99502: 2 BELONG links). A proposal
+// is 'counter-accepted' when an answerCounter event falls on a day in
+// [proposal day, proposal day + 2] AND a link for its target forms in
+// the same window; 'countered' when a counter was answered but no link
+// followed. This recomputation uses only event rows, never say-lines.
+function reclassifyProposals(out, baseSummary) {
+  const props = (out.proposalEvents || []).filter(function (e) { return e.fn !== 'proposeAlliance'; });
+  const answers = (out.courtshipEvents || []).filter(function (e) { return e.fn === 'answerCounter'; });
+  const classified = props.map(function (ev) {
+    const base = BASE.classifyProposal(ev, out);
+    const countered = answers.some(function (a) { return a.day >= ev.day && a.day <= ev.day + 2; });
+    if (countered && base === 'accepted') return { day: ev.day, fn: ev.fn, target: ev.target, outcome: 'counter-accepted', retNull: ev.ret == null };
+    if (countered && base !== 'accepted') return { day: ev.day, fn: ev.fn, target: ev.target, outcome: 'countered', retNull: ev.ret == null };
+    return { day: ev.day, fn: ev.fn, target: ev.target, outcome: base, retNull: ev.ret == null };
+  });
+  const outcomes = {};
+  classified.forEach(function (c) { outcomes[c.outcome] = (outcomes[c.outcome] || 0) + 1; });
+  baseSummary.proposals = classified;
+  baseSummary.proposalOutcomes = outcomes;
+  return baseSummary;
+}
+
 function summarizeSeed(out) {
-  const s = BASE.summarizeSeed(out);
+  const s = reclassifyProposals(out, BASE.summarizeSeed(out));
   const daily = out.daily || [];
   let maxDiplo = 0, diploDays = 0, regDays = 0, seasDays = 0;
   for (const snap of daily) {

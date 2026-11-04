@@ -179,6 +179,34 @@ check('shape OTHER', AN.linkShape({ kind: 'weird' }) === 'OTHER');
   check('judge INSUFFICIENT-DATA with >2 bad seeds', AN.judgeAskplus(bad).verdict === 'INSUFFICIENT-DATA', AN.judgeAskplus(bad));
 })();
 
+// 7b. Counter-accepted correction: a counter answered and a link formed
+// the next day must read as counter-accepted, not plain accepted.
+(function () {
+  const snap = function (day) {
+    return {
+      day: day, scholarId: 'p', tile: { x: 0, y: 0 }, ovs: [],
+      linkFunnel: { total: 0, active: 0, seasoned: 0, regionalPlus: 0, seasonedNotRegional: 0, detail: [] },
+      pending: { counter: false, accord: false, national: false, global: false },
+      standing: { total: 0, war: 0, diplomacy: 0, plenty: 0 }, capped: 0,
+      peak: 0, scaleRank: 'village', readiness5: null, w4faced: false, w5faced: false,
+      roster: [], livingCount: 0, pantryKcal: 0,
+    };
+  };
+  const out = {
+    seed: 2, policy: 'competent-askplus', run: 'askplus', anchorCommit: 'test',
+    days: 3, gameDays: 3, endReason: 'x', won: false, villageLost: false, scaleRank: 'village',
+    maxWave: 1, endUnlockedWave: 1, peakBeforeEndCall: 0, peakAfterEndCall: 0, endCallMovedPeak: false,
+    daily: [snap(1), snap(2), snap(3)],
+    proposalEvents: [{ day: 1, fn: 'proposeLink', target: 'v1', ret: { ok: true } }],
+    courtshipEvents: [{ day: 1, fn: 'answerCounter', target: null }],
+    travelCalls: [], linkFormedEvents: [{ day: 2, link: { primary: 'v1', subordinate: 'haven' } }],
+    deathEvents: [], sayLines: [], wrapCounts: {}, instrumentErrors: [],
+  };
+  const s = AN.summarizeSeed(out);
+  check('counter-answered + next-day link reads counter-accepted', s.proposalOutcomes['counter-accepted'] === 1 && !s.proposalOutcomes.accepted, s.proposalOutcomes);
+  check('counter-accepted link shapes BELONG', s.linkShapeCounts.BELONG === 1, s.linkShapeCounts);
+})();
+
 // 8. Strict say-line recount excludes capture-noise classes.
 (function () {
   const out = { sayLines: [
