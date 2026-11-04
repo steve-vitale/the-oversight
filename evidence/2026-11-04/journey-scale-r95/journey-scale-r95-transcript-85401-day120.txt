@@ -1,0 +1,19 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=5)
+=== seed 85401 day 120 — conversation with Nirmal (visjoin_109) ===
+occupation=Firefighter temperament=prickly trust=61 dead=false
+want: ask_favor (stage 0)
+open thread: grief fromSeed=false
+picker: subject-first
+
+THEM: "They'd tell me to keep working. So I'm working. That's the whole plan."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I got lost in it for a second. What did you want to ask?"
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "No, really — it's handled. Thanks for asking, though."
+YOU: [goon] "You don't have to say it all at once."
+THEM: They relax, a fraction. This is going well.
+YOU: (leave)
+pre-close: want ask_favor stage 1 thread want
+closing line: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+(gossip picks this sitting: 0)

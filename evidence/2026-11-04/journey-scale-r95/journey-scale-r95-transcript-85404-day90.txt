@@ -1,0 +1,25 @@
+(pre-talk seed: ask_favor planted d89; takenWantDay=0; convoCount=22)
+=== seed 85404 day 90 — conversation with Meera (meera_reddy) ===
+occupation=Dentist temperament=dry trust=90 dead=false
+want: ask_favor (stage 2)
+open thread: goal fromSeed=true
+picker: subject-first
+
+THEM: I can't fix the world. But I can fix this cut, this fever, this fear.
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: "Here. I made an extra." Meera presses something into your hand — a decent tool, oiled and kept. (Useful. Keep it.)
+YOU: [dlg:more] "Tell me more."
+THEM: "Healing's slow. People want it fast. I'm learning to be patient with both."
+YOU: [dlg:react] (listen)
+THEM: "So." They look at the fire for a moment.
+YOU: [dlg:more] "Tell me more."
+THEM: "The body wants to heal. Sometimes it just needs someone to believe that with it."
+YOU: [dlg:react] (listen)
+THEM: "Every person I help is a vote for the world making sense again."
+YOU: [dlg:more] "Tell me more."
+THEM: "Bodies mend. It's the other stuff — trust, hope — that takes the real work."
+YOU: (leave)
+pre-close: want ask_favor stage 2 thread goal
+closing line: "I'm going to go stare at something else now."
+(gossip picks this sitting: 0)
