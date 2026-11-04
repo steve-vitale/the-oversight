@@ -140,13 +140,23 @@ async function main() {
     Game.npcHasAbility = () => true;
     const castStarving = Game.tbVillagerAbility(mockV);
     ok(castStarving === false, 'starving village: no casts');
-    // abundant: first cast allowed, then bonus cast (mock grants all 4 abilities:
-    // scream 1/day + sand 1/fight + rage 1/fight = 3 normal, loom's trigger fails w/ 1 monster)
+    // abundant: first cast allowed, then bonus cast (mock grants ALL abilities).
+    // Base five in this fixture: scream 1/day + sand 1/fight + rage 1/fight
+    // = 3 normal (loom's trigger fails w/ 1 monster, shove needs a
+    // controlled foe). NPC SKILL TWINS (ability-use game-code 2026-11-03)
+    // add 10 more once-per-fight casts here: war_cry (mock HP unset reads
+    // as losing), tripwire, stare_down, walk_in (losing), ambush,
+    // haymaker, dead_aim, take_aim, open_trade, read_fight (monster
+    // 50 HP clears the nontrivial gate; goad needs a blinded foe,
+    // hogtie a controlled one, settle needs damage taken — all absent).
+    // Then the abundant bonus retry re-fires sand = 1. Total 14.
+    // The tier gate itself is unchanged (starving still 0 above); only
+    // the cast surface grew, on purpose, so the count grows with it.
     v.pantry = [{ kcalEach: need * 10, units: 1 }];
     const mv2 = { villagerId: vid, name: 'TestVillager', mx: 4, my: 5, maxHp: 100, alive: true };
     let casts = 0;
-    for (let i = 0; i < 8; i++) { if (Game.tbVillagerAbility(mv2)) casts++; else break; }
-    ok(casts === 4, 'abundant: 3 normal casts + 1 bonus cast per fight', casts + ' casts');
+    for (let i = 0; i < 20; i++) { if (Game.tbVillagerAbility(mv2)) casts++; else break; }
+    ok(casts === 14, 'abundant: 3 base + 10 twin casts + 1 bonus cast per fight', casts + ' casts');
     Game.tbfight = null;
     delete Game.npcHasAbility;
   }

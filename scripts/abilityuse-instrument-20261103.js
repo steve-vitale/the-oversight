@@ -450,10 +450,22 @@ function install(Game) {
       for (const m of ((f && f.fighters) || [])) {
         if (!m || m.kind !== 'monster') continue;
         out[m.key || ''] = { hp: m.hp != null ? m.hp : null, bird: (m._birdStrike || 0),
-          frozen: (m._frozen || 0), turncoat: (m._turncoatRounds || 0) };
+          frozen: (m._frozen || 0), turncoat: (m._turncoatRounds || 0),
+          goadedBy: (m._goadedBy || null), bound: (m._bound || 0) };
       }
     } catch (e) {}
     return out;
+  }
+  // GAMECODE-ARM EXTENSION 2 (2026-11-03, marked): twin-flag diffs for the
+  // after-leg. Same pure-read diff pattern as the base five + kitDiffs.
+  function twinFlagSnap(v) {
+    if (!v) return null;
+    return { warCried: !!v._warCried, stared: !!v._vStared, walkedIn: !!v._vWalkedIn,
+      goaded: !!v._vGoaded, bound: !!v._vBound, ambushed: !!v._vAmbushed,
+      haymakerPressed: !!v._vHaymakerPressed, deadAimed: !!v._vDeadAimed,
+      aimed: !!v._vAimed, tradeOpened: !!v._vTradeOpened, debtSettled: !!v._vDebtSettled,
+      readFight: !!v._vReadFight,
+      tripwireSet: !!((Game.tbfight || {})._tripwireSet) };
   }
   if (typeof Game.tbVillagerAbility === 'function') {
     orig.tbVillagerAbility = Game.tbVillagerAbility;
@@ -463,6 +475,7 @@ function install(Game) {
       const inFight = !!(ex && Game.tbfight === openTb.fight);
       const flagsBefore = v ? { screamedDay: (v._vScreamedDay != null ? v._vScreamedDay : null),
         sand: !!v._vSandThrown, loomed: !!v._vLoomed, raged: !!v._vRaged, shoved: !!v._vShoved } : null;
+      const twinBefore = twinFlagSnap(v);
       const monsBefore = inFight ? monFlagSnap() : null;
       let r;
       try { r = orig.tbVillagerAbility.apply(this, arguments); } catch (e) { throw e; }
@@ -470,6 +483,7 @@ function install(Game) {
         if (inFight && ex && v) {
           const flagsAfter = { screamedDay: (v._vScreamedDay != null ? v._vScreamedDay : null),
             sand: !!v._vSandThrown, loomed: !!v._vLoomed, raged: !!v._vRaged, shoved: !!v._vShoved };
+          const twinAfter = twinFlagSnap(v);
           const monsAfter = monFlagSnap();
           const kitDiffs = [];
           if (monsBefore) {
@@ -491,10 +505,26 @@ function install(Game) {
             if (flagsAfter.raged && !flagsBefore.raged) fired.push('rage');
             if (flagsAfter.shoved && !flagsBefore.shoved) fired.push('shoulder_check');
           }
+          if (twinBefore && twinAfter) {
+            if (twinAfter.warCried && !twinBefore.warCried) fired.push('war_cry');
+            if (twinAfter.tripwireSet && !twinBefore.tripwireSet) fired.push('tripwire');
+            if (twinAfter.stared && !twinBefore.stared) fired.push('intimidating_presence');
+            if (twinAfter.walkedIn && !twinBefore.walkedIn) fired.push('peacemaker');
+            if (twinAfter.goaded && !twinBefore.goaded) fired.push('come_get_some');
+            if (twinAfter.bound && !twinBefore.bound) fired.push('hogtie');
+            if (twinAfter.ambushed && !twinBefore.ambushed) fired.push('ambush');
+            if (twinAfter.haymakerPressed && !twinBefore.haymakerPressed) fired.push('haymaker');
+            if (twinAfter.deadAimed && !twinBefore.deadAimed) fired.push('dead_aim');
+            if (twinAfter.aimed && !twinBefore.aimed) fired.push('patient_aim');
+            if (twinAfter.tradeOpened && !twinBefore.tradeOpened) fired.push('trade_of_blows');
+            if (twinAfter.debtSettled && !twinBefore.debtSettled) fired.push('trade_of_blows_settle');
+            if (twinAfter.readFight && !twinBefore.readFight) fired.push('brawler_instinct');
+          }
           if (r && !fired.length) fired.push('wrapped-unknown');
           ex.npcAbilityCalls.push({ vid: v.villagerId || null,
             round: (Game.tbfight && Game.tbfight.round != null) ? Game.tbfight.round : null,
             returned: !!r, fired: fired, flagsBefore: flagsBefore, flagsAfter: flagsAfter,
+            twinBefore: twinBefore, twinAfter: twinAfter,
             kitDiffs: kitDiffs });
           if (ex._npcTurnOpen) ex._npcTurnOpen.abilityCalled = true;
         }

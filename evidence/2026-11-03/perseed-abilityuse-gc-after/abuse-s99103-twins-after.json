@@ -1,0 +1,6043 @@
+{
+  "seed": 99103,
+  "run": "twins-after",
+  "anchorCommit": "a8538e12d347",
+  "days": 118,
+  "gameDays": 117,
+  "endReason": "village-lost",
+  "won": false,
+  "villageLost": true,
+  "maxWave": 4,
+  "spawnsW4": 11,
+  "tbCalls": 6,
+  "fieldCallsW4": 7,
+  "exposures": [
+    {
+      "seq": 1,
+      "type": "tb",
+      "day": 71,
+      "mid": "eulogy",
+      "wave": 4,
+      "fightId": "fmgpspilt_g0dljb",
+      "scholarAtStart": "ursula_weber",
+      "partySizeStart": 2,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "ursula_weber",
+          "hpStart": 97.52777777777777,
+          "maxHp": 100,
+          "held": [
+            {
+              "id": "pocket_sand",
+              "lane": "magic",
+              "actions": [
+                {
+                  "id": "throw_sand",
+                  "cost": {
+                    "turn": true
+                  }
+                }
+              ]
+            },
+            {
+              "id": "patient_aim",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "take_aim",
+                  "cost": {
+                    "turn": true
+                  }
+                }
+              ]
+            },
+            {
+              "id": "intimidating_presence",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "stare_down",
+                  "cost": {
+                    "turn": true
+                  }
+                }
+              ]
+            },
+            {
+              "id": "haymaker",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "throw_haymaker",
+                  "cost": {
+                    "turn": true,
+                    "kcal": 40
+                  }
+                }
+              ]
+            }
+          ],
+          "heldReadError": null
+        },
+        {
+          "key": "v_nathan_lee",
+          "kind": "villager",
+          "vid": "nathan_lee",
+          "hpStart": 100,
+          "maxHp": 100,
+          "held": [],
+          "heldReadError": null
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "eulogy",
+          "hpStart": 675,
+          "maxHp": 900,
+          "wave": 4,
+          "joinedMidFight": false,
+          "trickKnown": false
+        }
+      ],
+      "scholarHeld": [
+        {
+          "id": "pocket_sand",
+          "lane": "magic",
+          "actions": [
+            {
+              "id": "throw_sand",
+              "cost": {
+                "turn": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "patient_aim",
+          "lane": "skill",
+          "actions": [
+            {
+              "id": "take_aim",
+              "cost": {
+                "turn": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "intimidating_presence",
+          "lane": "skill",
+          "actions": [
+            {
+              "id": "stare_down",
+              "cost": {
+                "turn": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "haymaker",
+          "lane": "skill",
+          "actions": [
+            {
+              "id": "throw_haymaker",
+              "cost": {
+                "turn": true,
+                "kcal": 40
+              }
+            }
+          ]
+        }
+      ],
+      "scholarHeldReadError": null,
+      "scholarKcalStart": 2360,
+      "foodTierStart": "secure",
+      "turns": [
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 1,
+          "kcal": 2360
+        },
+        {
+          "cls": "strike",
+          "round": 2,
+          "kcal": 2360
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 2,
+          "kcal": 2360
+        },
+        {
+          "cls": "strike",
+          "round": 3,
+          "kcal": 2360
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 3,
+          "kcal": 2360
+        },
+        {
+          "cls": "strike",
+          "round": 4,
+          "kcal": 2360
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 4,
+          "kcal": 2360
+        },
+        {
+          "cls": "strike",
+          "round": 5,
+          "kcal": 2360
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 5,
+          "kcal": 2360
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 6,
+          "kcal": 2360
+        }
+      ],
+      "availSnapshots": [
+        {
+          "round": 1,
+          "kcal": 2360,
+          "avail": [
+            {
+              "id": "pocket_sand",
+              "act": "throw_sand",
+              "lane": "magic",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 97.52777777777777,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.9752777777777777
+          }
+        },
+        {
+          "round": 2,
+          "kcal": 2360,
+          "avail": [
+            {
+              "id": "pocket_sand",
+              "act": "throw_sand",
+              "lane": "magic",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 97.52777777777777,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.9752777777777777
+          }
+        },
+        {
+          "round": 2,
+          "kcal": 2360,
+          "avail": [
+            {
+              "id": "pocket_sand",
+              "act": "throw_sand",
+              "lane": "magic",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 97.52777777777777,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.9752777777777777
+          }
+        },
+        {
+          "round": 3,
+          "kcal": 2360,
+          "avail": [
+            {
+              "id": "pocket_sand",
+              "act": "throw_sand",
+              "lane": "magic",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 97.52777777777777,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.9752777777777777
+          }
+        },
+        {
+          "round": 3,
+          "kcal": 2360,
+          "avail": [
+            {
+              "id": "pocket_sand",
+              "act": "throw_sand",
+              "lane": "magic",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 97.52777777777777,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.9752777777777777
+          }
+        },
+        {
+          "round": 4,
+          "kcal": 2360,
+          "avail": [
+            {
+              "id": "pocket_sand",
+              "act": "throw_sand",
+              "lane": "magic",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 97.52777777777777,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.9752777777777777
+          }
+        },
+        {
+          "round": 4,
+          "kcal": 2360,
+          "avail": [
+            {
+              "id": "pocket_sand",
+              "act": "throw_sand",
+              "lane": "magic",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 97.52777777777777,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.9752777777777777
+          }
+        },
+        {
+          "round": 5,
+          "kcal": 2360,
+          "avail": [
+            {
+              "id": "pocket_sand",
+              "act": "throw_sand",
+              "lane": "magic",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 58.52777777777777,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.5852777777777777
+          }
+        },
+        {
+          "round": 5,
+          "kcal": 2360,
+          "avail": [
+            {
+              "id": "pocket_sand",
+              "act": "throw_sand",
+              "lane": "magic",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 58.52777777777777,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.5852777777777777
+          }
+        },
+        {
+          "round": 6,
+          "kcal": 2360,
+          "avail": [
+            {
+              "id": "pocket_sand",
+              "act": "throw_sand",
+              "lane": "magic",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2360,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 31.52777777777777,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.3152777777777777
+          }
+        }
+      ],
+      "abilityUses": [],
+      "availCalls": [],
+      "npcTurns": [
+        {
+          "vid": "nathan_lee",
+          "hp": 100,
+          "maxHp": 100,
+          "mx": 7,
+          "my": 3,
+          "stunned": 0,
+          "fled": false,
+          "fieldMedicated": false,
+          "warCried": false,
+          "screamedDay": null,
+          "sandThrown": false,
+          "loomed": false,
+          "raged": false,
+          "shoved": false,
+          "liveMonsters": [
+            {
+              "key": "m_0",
+              "mid": "eulogy",
+              "hp": 675,
+              "maxHp": 900,
+              "mx": 7,
+              "my": 1,
+              "blind": 2,
+              "stunned": 0,
+              "frozen": 0,
+              "bound": 0,
+              "hesitate": 0,
+              "elderCalm": false
+            }
+          ],
+          "foodTier": "secure",
+          "round": 1,
+          "abilityCalled": true,
+          "exitHp": 100,
+          "exitFled": true
+        }
+      ],
+      "npcAbilityCalls": [
+        {
+          "vid": "nathan_lee",
+          "round": 1,
+          "returned": false,
+          "fired": [],
+          "flagsBefore": {
+            "screamedDay": null,
+            "sand": false,
+            "loomed": false,
+            "raged": false,
+            "shoved": false
+          },
+          "flagsAfter": {
+            "screamedDay": null,
+            "sand": false,
+            "loomed": false,
+            "raged": false,
+            "shoved": false
+          },
+          "twinBefore": {
+            "warCried": false,
+            "stared": false,
+            "walkedIn": false,
+            "goaded": false,
+            "bound": false,
+            "ambushed": false,
+            "haymakerPressed": false,
+            "deadAimed": false,
+            "aimed": false,
+            "tradeOpened": false,
+            "debtSettled": false,
+            "readFight": false,
+            "tripwireSet": false
+          },
+          "twinAfter": {
+            "warCried": false,
+            "stared": false,
+            "walkedIn": false,
+            "goaded": false,
+            "bound": false,
+            "ambushed": false,
+            "haymakerPressed": false,
+            "deadAimed": false,
+            "aimed": false,
+            "tradeOpened": false,
+            "debtSettled": false,
+            "readFight": false,
+            "tripwireSet": false
+          },
+          "kitDiffs": []
+        }
+      ],
+      "hits": [
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 40,
+          "returned": 50,
+          "hpBefore": 675,
+          "hpAfter": 625,
+          "hpDelta": -50,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 41,
+          "returned": 51,
+          "hpBefore": 625,
+          "hpAfter": 574,
+          "hpDelta": -51,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 38,
+          "returned": 48,
+          "hpBefore": 574,
+          "hpAfter": 526,
+          "hpDelta": -48,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 62,
+          "returned": 39,
+          "hpBefore": 97.52777777777777,
+          "hpAfter": 58.52777777777777,
+          "hpDelta": -39,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 5,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 40,
+          "returned": 50,
+          "hpBefore": 526,
+          "hpAfter": 476,
+          "hpDelta": -50,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 5,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Epitaph",
+          "requested": 43,
+          "returned": 27,
+          "hpBefore": 58.52777777777777,
+          "hpAfter": 31.52777777777777,
+          "hpDelta": -27,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 6,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "the narrated ending",
+          "requested": 9999,
+          "returned": 6269,
+          "hpBefore": 31.52777777777777,
+          "hpAfter": -6237.472222222223,
+          "hpDelta": -6269,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "You catch fragments by the fire — Elijah telling Taiga about you. It's barely the same story now. That's what fires do."
+        },
+        {
+          "kind": "say",
+          "line": "You catch fragments by the fire — Giulia telling Sofia about Nathan. Three retellings in, nobody remembers what actually happened — but everyone has opinions."
+        },
+        {
+          "kind": "say",
+          "line": "👥 Nathan heads out for water. \"Fetching water. Somebody has to.\" The pantry won't fill itself."
+        },
+        {
+          "kind": "say",
+          "line": "👥 Zoe walks out with Nathan. \"Nobody walks alone today.\" The pantry won't fill itself."
+        },
+        {
+          "kind": "say",
+          "line": "🚶 Bo is back with Taiga."
+        },
+        {
+          "kind": "say",
+          "line": "Giulia sets out to find Nathan. \"Won't be long.\" Company makes the road shorter."
+        },
+        {
+          "kind": "say",
+          "line": "🚶 Taiga is back with Bo."
+        },
+        {
+          "kind": "say",
+          "line": "👥 Sofia heads out for water. \"The well won't fill itself.\" The pantry won't fill itself."
+        },
+        {
+          "kind": "say",
+          "line": "👥 Taiga walks out with Sofia. \"Nobody walks alone today.\" Company makes the road shorter."
+        },
+        {
+          "kind": "say",
+          "line": "Iron cold. Even the ticks are shelved."
+        },
+        {
+          "kind": "say",
+          "line": "— MIDDAY — Honest work hours. Heat builds."
+        },
+        {
+          "kind": "sysSay",
+          "line": "Nathan's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Nathan runs for it!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they stood their ground, poor brave fools.\" The spotlight widens. (No weight yet — just the story starting.) (5 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 50 (Machete)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they ran, and the spotlight followed.\" The spotlight narrows. Your dodge feels watched. (-10% dodge.) (4 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "eulogy's attack swipes at sand-ghosts. Missed. (pocket_sand)"
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Epitaph — locks onto one target — moving won't dodge it. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 51 (Machete)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they bled, politely, where everyone could see.\" The narration lingers on your wounds. (Bleeds last 1 round longer.) (3 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 It connects!"
+        },
+        {
+          "kind": "say",
+          "line": "The Eulogy lashes at sand-ghosts near you. Missed. (pocket_sand)"
+        },
+        {
+          "kind": "say",
+          "line": "You're not where it landed. Clean dodge."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +15 style — dodged the the attack!"
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Final Chapter — strikes one target after a windup. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 48 (Machete)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they knelt, and the story approved.\" The story leans in. (The Eulogy's attacks +15.) (2 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 23."
+        },
+        {
+          "kind": "say",
+          "line": "Nathan shouts: \"Move! MOVE!\""
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 39."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 5!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 50 (Machete)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then — this is the last line — they ended.\" The last line hangs in the air. (It finishes next round.) (1 verse remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 eulogy's Epitaph finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 16."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Epitaph hits you for 27."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 6!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 \"...they ended.\" The last line lands like a lid. (The story finishes — you die as narrated.)"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 3730."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Ursula Weber is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Ursula Weber is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Ursula kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "\"Ursula's gone.\" Nathan looks at you for a long moment. \"You're not Ursula.\" No heat in it. Just fact. You'll have to earn this face."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Elijah blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Generous Heart (Level 1). Donating gives 2x trust."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Mediation (Level 1). Let each side talk without interruption. Repeat back what you heard. People de-escalate when heard."
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Ursula Weber, 71 days. The mantle passes to Elijah Scott."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Elijah Scott, 58 — a Social worker. His hands know different work now: Green Whisper."
+        },
+        {
+          "kind": "say",
+          "line": "You knew Ursula — not the office, the person. The fire keeps expecting her, and so do you. That's a heavier kind of stepping up. (+5 trauma)"
+        },
+        {
+          "kind": "say",
+          "line": "At the grave, Nathan, Daniyar speak for Elijah — \"Ursula trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew Elijah before the Codex did — his name already carried weight here."
+        }
+      ],
+      "transcriptOverflow": false,
+      "end": {
+        "result": "lost",
+        "day": 71,
+        "round": 6,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "eulogy",
+            "alive": true,
+            "fled": false,
+            "hp": 476,
+            "maxHp": 900
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "ursula_weber",
+            "alive": false,
+            "fled": false,
+            "hp": -6237.472222222223,
+            "maxHp": 100
+          },
+          {
+            "key": "v_nathan_lee",
+            "kind": "villager",
+            "vid": "nathan_lee",
+            "alive": true,
+            "fled": true,
+            "hp": 100,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "ursula_weber"
+        ],
+        "humansFled": [
+          "nathan_lee"
+        ],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false,
+      "_npcTurnOpen": null
+    },
+    {
+      "seq": 2,
+      "type": "tb",
+      "day": 71,
+      "mid": "eulogy",
+      "wave": 4,
+      "fightId": "fmgpspim8_p1bh6",
+      "scholarAtStart": "elijah_scott",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "elijah_scott",
+          "hpStart": 100,
+          "maxHp": 100,
+          "held": [
+            {
+              "id": "patient_aim",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "take_aim",
+                  "cost": {
+                    "turn": true
+                  }
+                }
+              ]
+            },
+            {
+              "id": "intimidating_presence",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "stare_down",
+                  "cost": {
+                    "turn": true
+                  }
+                }
+              ]
+            },
+            {
+              "id": "peacemaker",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "walk_in",
+                  "cost": {
+                    "turn": true
+                  }
+                }
+              ]
+            },
+            {
+              "id": "haymaker",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "throw_haymaker",
+                  "cost": {
+                    "turn": true,
+                    "kcal": 40
+                  }
+                }
+              ]
+            }
+          ],
+          "heldReadError": null
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "eulogy",
+          "hpStart": 476,
+          "maxHp": 900,
+          "wave": 4,
+          "joinedMidFight": false,
+          "trickKnown": false
+        }
+      ],
+      "scholarHeld": [
+        {
+          "id": "patient_aim",
+          "lane": "skill",
+          "actions": [
+            {
+              "id": "take_aim",
+              "cost": {
+                "turn": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "intimidating_presence",
+          "lane": "skill",
+          "actions": [
+            {
+              "id": "stare_down",
+              "cost": {
+                "turn": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "peacemaker",
+          "lane": "skill",
+          "actions": [
+            {
+              "id": "walk_in",
+              "cost": {
+                "turn": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "haymaker",
+          "lane": "skill",
+          "actions": [
+            {
+              "id": "throw_haymaker",
+              "cost": {
+                "turn": true,
+                "kcal": 40
+              }
+            }
+          ]
+        }
+      ],
+      "scholarHeldReadError": null,
+      "scholarKcalStart": 2338,
+      "foodTierStart": "secure",
+      "turns": [
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 1,
+          "kcal": 2338
+        },
+        {
+          "cls": "strike",
+          "round": 2,
+          "kcal": 2338
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 2,
+          "kcal": 2338
+        },
+        {
+          "cls": "strike",
+          "round": 3,
+          "kcal": 2338
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 3,
+          "kcal": 2338
+        },
+        {
+          "cls": "strike",
+          "round": 4,
+          "kcal": 2338
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 4,
+          "kcal": 2338
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 5,
+          "kcal": 2338
+        }
+      ],
+      "availSnapshots": [
+        {
+          "round": 1,
+          "kcal": 2338,
+          "avail": [
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "peacemaker",
+              "act": "walk_in",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 100,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 1
+          }
+        },
+        {
+          "round": 2,
+          "kcal": 2338,
+          "avail": [
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "peacemaker",
+              "act": "walk_in",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 100,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 1
+          }
+        },
+        {
+          "round": 2,
+          "kcal": 2338,
+          "avail": [
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "peacemaker",
+              "act": "walk_in",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 100,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 1
+          }
+        },
+        {
+          "round": 3,
+          "kcal": 2338,
+          "avail": [
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "peacemaker",
+              "act": "walk_in",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 74,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.74
+          }
+        },
+        {
+          "round": 3,
+          "kcal": 2338,
+          "avail": [
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "peacemaker",
+              "act": "walk_in",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 74,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.74
+          }
+        },
+        {
+          "round": 4,
+          "kcal": 2338,
+          "avail": [
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "peacemaker",
+              "act": "walk_in",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 45,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.45
+          }
+        },
+        {
+          "round": 4,
+          "kcal": 2338,
+          "avail": [
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "peacemaker",
+              "act": "walk_in",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 45,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.45
+          }
+        },
+        {
+          "round": 5,
+          "kcal": 2338,
+          "avail": [
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "peacemaker",
+              "act": "walk_in",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2338,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 15,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.15
+          }
+        }
+      ],
+      "abilityUses": [],
+      "availCalls": [],
+      "npcTurns": [],
+      "npcAbilityCalls": [],
+      "hits": [
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 42,
+          "returned": 53,
+          "hpBefore": 476,
+          "hpAfter": 423,
+          "hpDelta": -53,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 2,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Epitaph",
+          "requested": 46,
+          "returned": 26,
+          "hpBefore": 100,
+          "hpAfter": 74,
+          "hpDelta": -26,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 44,
+          "returned": 55,
+          "hpBefore": 423,
+          "hpAfter": 368,
+          "hpDelta": -55,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 51,
+          "returned": 29,
+          "hpBefore": 74,
+          "hpAfter": 45,
+          "hpDelta": -29,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 46,
+          "returned": 58,
+          "hpBefore": 368,
+          "hpAfter": 310,
+          "hpDelta": -58,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 53,
+          "returned": 30,
+          "hpBefore": 45,
+          "hpAfter": 15,
+          "hpDelta": -30,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 5,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Epitaph",
+          "requested": 41,
+          "returned": 23,
+          "hpBefore": 15,
+          "hpAfter": -8,
+          "hpDelta": -23,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "🎙️ It moves."
+        },
+        {
+          "kind": "say",
+          "line": "You catch fragments by the fire — Taiga telling Sofia about Daniyar. Half of it's true anymore. You're not sure which half."
+        },
+        {
+          "kind": "say",
+          "line": "💧 Nathan returns with water: +3 clean."
+        },
+        {
+          "kind": "say",
+          "line": "🚶 Zoe is back with Nathan."
+        },
+        {
+          "kind": "say",
+          "line": "— NIGHT — Camp. Rest — or risk the dark."
+        },
+        {
+          "kind": "say",
+          "line": "No watches tonight. Everyone sleeps with one ear open and pretends not to."
+        },
+        {
+          "kind": "say",
+          "line": "No path there."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they stood their ground, poor brave fools.\" The spotlight widens. (No weight yet — just the story starting.) (5 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "eulogy is BLEEDING — and it likes it. Louder, faster, no more feints."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 53 (Harvest Scythe)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they ran, and the spotlight followed.\" The spotlight narrows. Your dodge feels watched. (-10% dodge.) (4 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 eulogy's Epitaph finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 20."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Epitaph hits you for 26."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 55 (Harvest Scythe)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they bled, politely, where everyone could see.\" The narration lingers on your wounds. (Bleeds last 1 round longer.) (3 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 22."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 29."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 58 (Harvest Scythe)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they knelt, and the story approved.\" The story leans in. (The Eulogy's attacks +15.) (2 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 23."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 30."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 5!"
+        },
+        {
+          "kind": "say",
+          "line": "No path there."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then — this is the last line — they ended.\" The last line hangs in the air. (It finishes next round.) (1 verse remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 eulogy's Epitaph finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 18."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Epitaph hits you for 23."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Elijah Scott is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Elijah Scott is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Elijah kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "\"Elijah's gone.\" Daniyar looks at you for a long moment. \"You're not Elijah.\" No heat in it. Just fact. You'll have to earn this face."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Nathan blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Debris Shelter (Level 1). A lean-to of branches and leaves beats nothing. Dead air is insulation."
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Elijah Scott, 71 days. The mantle passes to Nathan Lee."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Nathan Lee, 47 — an HVAC tech. His hands know different work now: Green Whisper, Beard Moss."
+        },
+        {
+          "kind": "say",
+          "line": "You knew Elijah — not the office, the person. The fire keeps expecting him, and so do you. That's a heavier kind of stepping up. (+5 trauma)"
+        },
+        {
+          "kind": "say",
+          "line": "At the grave, Daniyar speaks for Nathan — \"Elijah trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew Nathan before the Codex did — his name already carried weight here."
+        }
+      ],
+      "transcriptOverflow": false,
+      "end": {
+        "result": "lost",
+        "day": 71,
+        "round": 5,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "eulogy",
+            "alive": true,
+            "fled": false,
+            "hp": 310,
+            "maxHp": 900
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "elijah_scott",
+            "alive": false,
+            "fled": false,
+            "hp": -8,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "elijah_scott"
+        ],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 3,
+      "type": "tb",
+      "day": 72,
+      "mid": "eulogy",
+      "wave": 4,
+      "fightId": "fmgpspimv_9ippg3",
+      "scholarAtStart": "nathan_lee",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "nathan_lee",
+          "hpStart": 100,
+          "maxHp": 100,
+          "held": [
+            {
+              "id": "patient_aim",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "take_aim",
+                  "cost": {
+                    "turn": true
+                  }
+                }
+              ]
+            },
+            {
+              "id": "intimidating_presence",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "stare_down",
+                  "cost": {
+                    "turn": true
+                  }
+                }
+              ]
+            },
+            {
+              "id": "peacemaker",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "walk_in",
+                  "cost": {
+                    "turn": true
+                  }
+                }
+              ]
+            },
+            {
+              "id": "haymaker",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "throw_haymaker",
+                  "cost": {
+                    "turn": true,
+                    "kcal": 40
+                  }
+                }
+              ]
+            }
+          ],
+          "heldReadError": null
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "eulogy",
+          "hpStart": 310,
+          "maxHp": 900,
+          "wave": 4,
+          "joinedMidFight": false,
+          "trickKnown": false
+        }
+      ],
+      "scholarHeld": [
+        {
+          "id": "patient_aim",
+          "lane": "skill",
+          "actions": [
+            {
+              "id": "take_aim",
+              "cost": {
+                "turn": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "intimidating_presence",
+          "lane": "skill",
+          "actions": [
+            {
+              "id": "stare_down",
+              "cost": {
+                "turn": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "peacemaker",
+          "lane": "skill",
+          "actions": [
+            {
+              "id": "walk_in",
+              "cost": {
+                "turn": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "haymaker",
+          "lane": "skill",
+          "actions": [
+            {
+              "id": "throw_haymaker",
+              "cost": {
+                "turn": true,
+                "kcal": 40
+              }
+            }
+          ]
+        }
+      ],
+      "scholarHeldReadError": null,
+      "scholarKcalStart": 2383,
+      "foodTierStart": "secure",
+      "turns": [
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 1,
+          "kcal": 2383
+        },
+        {
+          "cls": "strike",
+          "round": 2,
+          "kcal": 2383
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 2,
+          "kcal": 2383
+        },
+        {
+          "cls": "strike",
+          "round": 3,
+          "kcal": 2383
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 3,
+          "kcal": 2383
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 4,
+          "kcal": 2383
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 5,
+          "kcal": 2383
+        }
+      ],
+      "availSnapshots": [
+        {
+          "round": 1,
+          "kcal": 2383,
+          "avail": [
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2383,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2383,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "peacemaker",
+              "act": "walk_in",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2383,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2383,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 100,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 1
+          }
+        },
+        {
+          "round": 2,
+          "kcal": 2383,
+          "avail": [
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2383,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2383,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "peacemaker",
+              "act": "walk_in",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2383,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2383,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 100,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 1
+          }
+        },
+        {
+          "round": 2,
+          "kcal": 2383,
+          "avail": [
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2383,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2383,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "peacemaker",
+              "act": "walk_in",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2383,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2383,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 100,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 1
+          }
+        },
+        {
+          "round": 3,
+          "kcal": 2383,
+          "avail": [
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2383,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2383,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "peacemaker",
+              "act": "walk_in",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2383,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2383,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 64,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.64
+          }
+        },
+        {
+          "round": 3,
+          "kcal": 2383,
+          "avail": [
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2383,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2383,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "peacemaker",
+              "act": "walk_in",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2383,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2383,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 64,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.64
+          }
+        },
+        {
+          "round": 4,
+          "kcal": 2383,
+          "avail": [
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2383,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2383,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "peacemaker",
+              "act": "walk_in",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2383,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2383,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 29,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.29
+          }
+        },
+        {
+          "round": 5,
+          "kcal": 2383,
+          "avail": [
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2383,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2383,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "peacemaker",
+              "act": "walk_in",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2383,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2383,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 4,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.04
+          }
+        }
+      ],
+      "abilityUses": [],
+      "availCalls": [],
+      "npcTurns": [],
+      "npcAbilityCalls": [],
+      "hits": [
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 50,
+          "returned": 63,
+          "hpBefore": 310,
+          "hpAfter": 247,
+          "hpDelta": -63,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 2,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 69,
+          "returned": 36,
+          "hpBefore": 100,
+          "hpAfter": 64,
+          "hpDelta": -36,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 53,
+          "returned": 66,
+          "hpBefore": 247,
+          "hpAfter": 181,
+          "hpDelta": -66,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 67,
+          "returned": 35,
+          "hpBefore": 64,
+          "hpAfter": 29,
+          "hpDelta": -35,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Epitaph",
+          "requested": 48,
+          "returned": 25,
+          "hpBefore": 29,
+          "hpAfter": 4,
+          "hpDelta": -25,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 5,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's attack",
+          "requested": 77,
+          "returned": 40,
+          "hpBefore": 4,
+          "hpAfter": -36,
+          "hpDelta": -40,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "🎙️ It moves."
+        },
+        {
+          "kind": "say",
+          "line": "Bo heads out for water. \"Fetching water. Somebody has to.\" The pantry won't fill itself."
+        },
+        {
+          "kind": "say",
+          "line": "Giulia sets out to find Zoe. \"Won't be long.\" Company makes the road shorter."
+        },
+        {
+          "kind": "say",
+          "line": "Taiga heads out to forage. \"Out for a forage. If I'm late, start without me.\" The pantry won't fill itself."
+        },
+        {
+          "kind": "say",
+          "line": "— DUSK — Animals stir again. Shadows lengthen."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they stood their ground, poor brave fools.\" The spotlight widens. (No weight yet — just the story starting.) (5 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "eulogy is BLEEDING — and it likes it. Louder, faster, no more feints."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 63 (Hardlight knife)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they ran, and the spotlight followed.\" The spotlight narrows. Your dodge feels watched. (-10% dodge.) (4 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 33."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 36."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 66 (Hardlight knife)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they bled, politely, where everyone could see.\" The narration lingers on your wounds. (Bleeds last 1 round longer.) (3 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 32."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 35."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they knelt, and the story approved.\" The story leans in. (The Eulogy's attacks +15.) (2 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 eulogy's Epitaph finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 23."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Epitaph hits you for 25."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 5!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then — this is the last line — they ended.\" The last line hangs in the air. (It finishes next round.) (1 verse remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 It connects!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 37."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's attack hits you for 40."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Nathan Lee is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Nathan Lee is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Nathan kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Daniyar blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Calming Panic (Level 1). Ground them: 5 things you see, 4 you hear, 3 you touch. Breathe with them. Slow is fast."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Managing Fear (Level 1). Fear is data, not orders. Acknowledge it, then decide anyway. Courage is fear that kept going."
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Nathan Lee, 72 days. The mantle passes to Daniyar Askarov."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Daniyar Askarov, 33 — a paramedic. His hands know different work now: The Touch, Green Whisper."
+        },
+        {
+          "kind": "say",
+          "line": "You knew Nathan — not the office, the person. The fire keeps expecting him, and so do you. That's a heavier kind of stepping up. (+5 trauma)"
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew Daniyar before the Codex did — his name already carried weight here."
+        }
+      ],
+      "transcriptOverflow": false,
+      "end": {
+        "result": "lost",
+        "day": 72,
+        "round": 5,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "eulogy",
+            "alive": true,
+            "fled": false,
+            "hp": 181,
+            "maxHp": 900
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "nathan_lee",
+            "alive": false,
+            "fled": false,
+            "hp": -36,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "nathan_lee"
+        ],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 4,
+      "type": "tb",
+      "day": 73,
+      "mid": "eulogy",
+      "wave": 4,
+      "fightId": "fmgpspinm_1a9pxj",
+      "scholarAtStart": "daniyar_askarov",
+      "partySizeStart": 2,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "daniyar_askarov",
+          "hpStart": 100,
+          "maxHp": 100,
+          "held": [
+            {
+              "id": "patient_aim",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "take_aim",
+                  "cost": {
+                    "turn": true
+                  }
+                }
+              ]
+            },
+            {
+              "id": "intimidating_presence",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "stare_down",
+                  "cost": {
+                    "turn": true
+                  }
+                }
+              ]
+            },
+            {
+              "id": "peacemaker",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "walk_in",
+                  "cost": {
+                    "turn": true
+                  }
+                }
+              ]
+            },
+            {
+              "id": "haymaker",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "throw_haymaker",
+                  "cost": {
+                    "turn": true,
+                    "kcal": 40
+                  }
+                }
+              ]
+            }
+          ],
+          "heldReadError": null
+        },
+        {
+          "key": "v_giulia_bianchi",
+          "kind": "villager",
+          "vid": "giulia_bianchi",
+          "hpStart": 88,
+          "maxHp": 100,
+          "held": [
+            {
+              "id": "peacemaker",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "walk_in",
+                  "cost": {
+                    "turn": true
+                  }
+                }
+              ]
+            }
+          ],
+          "heldReadError": null
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "eulogy",
+          "hpStart": 181,
+          "maxHp": 900,
+          "wave": 4,
+          "joinedMidFight": false,
+          "trickKnown": false
+        }
+      ],
+      "scholarHeld": [
+        {
+          "id": "patient_aim",
+          "lane": "skill",
+          "actions": [
+            {
+              "id": "take_aim",
+              "cost": {
+                "turn": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "intimidating_presence",
+          "lane": "skill",
+          "actions": [
+            {
+              "id": "stare_down",
+              "cost": {
+                "turn": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "peacemaker",
+          "lane": "skill",
+          "actions": [
+            {
+              "id": "walk_in",
+              "cost": {
+                "turn": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "haymaker",
+          "lane": "skill",
+          "actions": [
+            {
+              "id": "throw_haymaker",
+              "cost": {
+                "turn": true,
+                "kcal": 40
+              }
+            }
+          ]
+        }
+      ],
+      "scholarHeldReadError": null,
+      "scholarKcalStart": 2300,
+      "foodTierStart": "tight",
+      "turns": [
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 1,
+          "kcal": 2300
+        },
+        {
+          "cls": "strike",
+          "round": 2,
+          "kcal": 2300
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 2,
+          "kcal": 2300
+        },
+        {
+          "cls": "strike",
+          "round": 3,
+          "kcal": 2300
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 3,
+          "kcal": 2300
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 4,
+          "kcal": 2300
+        }
+      ],
+      "availSnapshots": [
+        {
+          "round": 1,
+          "kcal": 2300,
+          "avail": [
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2300,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2300,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "peacemaker",
+              "act": "walk_in",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2300,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2300,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 100,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 1
+          }
+        },
+        {
+          "round": 2,
+          "kcal": 2300,
+          "avail": [
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2300,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2300,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "peacemaker",
+              "act": "walk_in",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2300,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2300,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 100,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 1
+          }
+        },
+        {
+          "round": 2,
+          "kcal": 2300,
+          "avail": [
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2300,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2300,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "peacemaker",
+              "act": "walk_in",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2300,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2300,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 100,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 1
+          }
+        },
+        {
+          "round": 3,
+          "kcal": 2300,
+          "avail": [
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2300,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2300,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "peacemaker",
+              "act": "walk_in",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2300,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2300,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 52,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.52
+          }
+        },
+        {
+          "round": 3,
+          "kcal": 2300,
+          "avail": [
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2300,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2300,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "peacemaker",
+              "act": "walk_in",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2300,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2300,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 52,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.52
+          }
+        },
+        {
+          "round": 4,
+          "kcal": 2300,
+          "avail": [
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2300,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2300,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "peacemaker",
+              "act": "walk_in",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2300,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2300,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 15,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.15
+          }
+        }
+      ],
+      "abilityUses": [],
+      "availCalls": [],
+      "npcTurns": [
+        {
+          "vid": "giulia_bianchi",
+          "hp": 88,
+          "maxHp": 100,
+          "mx": 6,
+          "my": 0,
+          "stunned": 0,
+          "fled": false,
+          "fieldMedicated": false,
+          "warCried": false,
+          "screamedDay": null,
+          "sandThrown": false,
+          "loomed": false,
+          "raged": false,
+          "shoved": false,
+          "liveMonsters": [
+            {
+              "key": "m_0",
+              "mid": "eulogy",
+              "hp": 181,
+              "maxHp": 900,
+              "mx": 7,
+              "my": 1,
+              "blind": 0,
+              "stunned": 0,
+              "frozen": 0,
+              "bound": 0,
+              "hesitate": 0,
+              "elderCalm": false
+            }
+          ],
+          "foodTier": "tight",
+          "round": 1,
+          "abilityCalled": true,
+          "exitHp": 88,
+          "exitFled": false
+        },
+        {
+          "vid": "giulia_bianchi",
+          "hp": 88,
+          "maxHp": 100,
+          "mx": 6,
+          "my": 0,
+          "stunned": 0,
+          "fled": false,
+          "fieldMedicated": false,
+          "warCried": false,
+          "screamedDay": null,
+          "sandThrown": false,
+          "loomed": false,
+          "raged": false,
+          "shoved": false,
+          "liveMonsters": [
+            {
+              "key": "m_0",
+              "mid": "eulogy",
+              "hp": 127,
+              "maxHp": 900,
+              "mx": 7,
+              "my": 1,
+              "blind": 0,
+              "stunned": 0,
+              "frozen": 0,
+              "bound": 0,
+              "hesitate": 0,
+              "elderCalm": false
+            }
+          ],
+          "foodTier": "tight",
+          "round": 2,
+          "abilityCalled": true,
+          "exitHp": 88,
+          "exitFled": false
+        },
+        {
+          "vid": "giulia_bianchi",
+          "hp": 88,
+          "maxHp": 100,
+          "mx": 6,
+          "my": 0,
+          "stunned": 0,
+          "fled": false,
+          "fieldMedicated": false,
+          "warCried": false,
+          "screamedDay": null,
+          "sandThrown": false,
+          "loomed": false,
+          "raged": false,
+          "shoved": false,
+          "liveMonsters": [
+            {
+              "key": "m_0",
+              "mid": "eulogy",
+              "hp": 69,
+              "maxHp": 900,
+              "mx": 7,
+              "my": 1,
+              "blind": 0,
+              "stunned": 0,
+              "frozen": 0,
+              "bound": 0,
+              "hesitate": 0,
+              "elderCalm": false
+            }
+          ],
+          "foodTier": "tight",
+          "round": 3,
+          "abilityCalled": true,
+          "exitHp": 88,
+          "exitFled": false
+        },
+        {
+          "vid": "giulia_bianchi",
+          "hp": 88,
+          "maxHp": 100,
+          "mx": 7,
+          "my": 0,
+          "stunned": 0,
+          "fled": false,
+          "fieldMedicated": false,
+          "warCried": false,
+          "screamedDay": null,
+          "sandThrown": false,
+          "loomed": false,
+          "raged": false,
+          "shoved": false,
+          "liveMonsters": [
+            {
+              "key": "m_0",
+              "mid": "eulogy",
+              "hp": 69,
+              "maxHp": 900,
+              "mx": 7,
+              "my": 1,
+              "blind": 0,
+              "stunned": 0,
+              "frozen": 0,
+              "bound": 0,
+              "hesitate": 0,
+              "elderCalm": false
+            }
+          ],
+          "foodTier": "tight",
+          "round": 4,
+          "abilityCalled": true,
+          "exitHp": 88,
+          "exitFled": false
+        }
+      ],
+      "npcAbilityCalls": [
+        {
+          "vid": "giulia_bianchi",
+          "round": 1,
+          "returned": false,
+          "fired": [],
+          "flagsBefore": {
+            "screamedDay": null,
+            "sand": false,
+            "loomed": false,
+            "raged": false,
+            "shoved": false
+          },
+          "flagsAfter": {
+            "screamedDay": null,
+            "sand": false,
+            "loomed": false,
+            "raged": false,
+            "shoved": false
+          },
+          "twinBefore": {
+            "warCried": false,
+            "stared": false,
+            "walkedIn": false,
+            "goaded": false,
+            "bound": false,
+            "ambushed": false,
+            "haymakerPressed": false,
+            "deadAimed": false,
+            "aimed": false,
+            "tradeOpened": false,
+            "debtSettled": false,
+            "readFight": false,
+            "tripwireSet": false
+          },
+          "twinAfter": {
+            "warCried": false,
+            "stared": false,
+            "walkedIn": false,
+            "goaded": false,
+            "bound": false,
+            "ambushed": false,
+            "haymakerPressed": false,
+            "deadAimed": false,
+            "aimed": false,
+            "tradeOpened": false,
+            "debtSettled": false,
+            "readFight": false,
+            "tripwireSet": false
+          },
+          "kitDiffs": []
+        },
+        {
+          "vid": "giulia_bianchi",
+          "round": 2,
+          "returned": false,
+          "fired": [],
+          "flagsBefore": {
+            "screamedDay": null,
+            "sand": false,
+            "loomed": false,
+            "raged": false,
+            "shoved": false
+          },
+          "flagsAfter": {
+            "screamedDay": null,
+            "sand": false,
+            "loomed": false,
+            "raged": false,
+            "shoved": false
+          },
+          "twinBefore": {
+            "warCried": false,
+            "stared": false,
+            "walkedIn": false,
+            "goaded": false,
+            "bound": false,
+            "ambushed": false,
+            "haymakerPressed": false,
+            "deadAimed": false,
+            "aimed": false,
+            "tradeOpened": false,
+            "debtSettled": false,
+            "readFight": false,
+            "tripwireSet": false
+          },
+          "twinAfter": {
+            "warCried": false,
+            "stared": false,
+            "walkedIn": false,
+            "goaded": false,
+            "bound": false,
+            "ambushed": false,
+            "haymakerPressed": false,
+            "deadAimed": false,
+            "aimed": false,
+            "tradeOpened": false,
+            "debtSettled": false,
+            "readFight": false,
+            "tripwireSet": false
+          },
+          "kitDiffs": []
+        },
+        {
+          "vid": "giulia_bianchi",
+          "round": 3,
+          "returned": false,
+          "fired": [],
+          "flagsBefore": {
+            "screamedDay": null,
+            "sand": false,
+            "loomed": false,
+            "raged": false,
+            "shoved": false
+          },
+          "flagsAfter": {
+            "screamedDay": null,
+            "sand": false,
+            "loomed": false,
+            "raged": false,
+            "shoved": false
+          },
+          "twinBefore": {
+            "warCried": false,
+            "stared": false,
+            "walkedIn": false,
+            "goaded": false,
+            "bound": false,
+            "ambushed": false,
+            "haymakerPressed": false,
+            "deadAimed": false,
+            "aimed": false,
+            "tradeOpened": false,
+            "debtSettled": false,
+            "readFight": false,
+            "tripwireSet": false
+          },
+          "twinAfter": {
+            "warCried": false,
+            "stared": false,
+            "walkedIn": false,
+            "goaded": false,
+            "bound": false,
+            "ambushed": false,
+            "haymakerPressed": false,
+            "deadAimed": false,
+            "aimed": false,
+            "tradeOpened": false,
+            "debtSettled": false,
+            "readFight": false,
+            "tripwireSet": false
+          },
+          "kitDiffs": []
+        },
+        {
+          "vid": "giulia_bianchi",
+          "round": 4,
+          "returned": false,
+          "fired": [],
+          "flagsBefore": {
+            "screamedDay": null,
+            "sand": false,
+            "loomed": false,
+            "raged": false,
+            "shoved": false
+          },
+          "flagsAfter": {
+            "screamedDay": null,
+            "sand": false,
+            "loomed": false,
+            "raged": false,
+            "shoved": false
+          },
+          "twinBefore": {
+            "warCried": false,
+            "stared": false,
+            "walkedIn": false,
+            "goaded": false,
+            "bound": false,
+            "ambushed": false,
+            "haymakerPressed": false,
+            "deadAimed": false,
+            "aimed": false,
+            "tradeOpened": false,
+            "debtSettled": false,
+            "readFight": false,
+            "tripwireSet": false
+          },
+          "twinAfter": {
+            "warCried": false,
+            "stared": false,
+            "walkedIn": false,
+            "goaded": false,
+            "bound": false,
+            "ambushed": false,
+            "haymakerPressed": false,
+            "deadAimed": false,
+            "aimed": false,
+            "tradeOpened": false,
+            "debtSettled": false,
+            "readFight": false,
+            "tripwireSet": false
+          },
+          "kitDiffs": []
+        }
+      ],
+      "hits": [
+        {
+          "round": 1,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_giulia_bianchi",
+          "sourceLabel": "Giulia",
+          "requested": 6,
+          "returned": 6,
+          "hpBefore": 181,
+          "hpAfter": 175,
+          "hpDelta": -6,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "ally"
+        },
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 38,
+          "returned": 48,
+          "hpBefore": 175,
+          "hpAfter": 127,
+          "hpDelta": -48,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_giulia_bianchi",
+          "sourceLabel": "Giulia",
+          "requested": 7,
+          "returned": 7,
+          "hpBefore": 127,
+          "hpAfter": 120,
+          "hpDelta": -7,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "ally"
+        },
+        {
+          "round": 2,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's attack",
+          "requested": 77,
+          "returned": 48,
+          "hpBefore": 100,
+          "hpAfter": 52,
+          "hpDelta": -48,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 41,
+          "returned": 51,
+          "hpBefore": 120,
+          "hpAfter": 69,
+          "hpDelta": -51,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Denouement",
+          "requested": 78,
+          "returned": 49,
+          "hpBefore": 64,
+          "hpAfter": 15,
+          "hpDelta": -49,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_giulia_bianchi",
+          "sourceLabel": "Giulia",
+          "requested": 4,
+          "returned": 4,
+          "hpBefore": 69,
+          "hpAfter": 65,
+          "hpDelta": -4,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "ally"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 61,
+          "returned": 38,
+          "hpBefore": 15,
+          "hpAfter": -23,
+          "hpDelta": -38,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "Bo sets out to find Sofia. \"Won't be long.\" Company makes the road shorter."
+        },
+        {
+          "kind": "say",
+          "line": "Zoe heads out for water. \"Water first. Everything else waits.\" The pantry won't fill itself."
+        },
+        {
+          "kind": "say",
+          "line": "Giulia sets out to find Sofia. \"Won't be long.\" Company makes the road shorter."
+        },
+        {
+          "kind": "say",
+          "line": "Taiga sets out to find Bo. \"Won't be long.\" Company makes the road shorter."
+        },
+        {
+          "kind": "say",
+          "line": "💧 Sofia returns with water: +2 clean."
+        },
+        {
+          "kind": "say",
+          "line": "— DUSK — Animals stir again. Shadows lengthen."
+        },
+        {
+          "kind": "sysSay",
+          "line": "Giulia's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Giulia strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "Giulia hits eulogy for 6."
+        },
+        {
+          "kind": "say",
+          "line": "eulogy is BLEEDING — and it likes it. Louder, faster, no more feints."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Too close. The eulogy's attention SNAPS to you — proximity overrules patience."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they stood their ground, poor brave fools.\" The spotlight widens. (No weight yet — just the story starting.) (5 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 48 (Machete)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Giulia's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Giulia strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "Giulia hits eulogy for 7."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Too close. The eulogy's attention SNAPS to you — proximity overrules patience."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they ran, and the spotlight followed.\" The spotlight narrows. Your dodge feels watched. (-10% dodge.) (4 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 It connects!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 29."
+        },
+        {
+          "kind": "say",
+          "line": "Giulia gasps. \"You're hit — move!\""
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's attack hits you for 48."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Denouement — strikes one target after a windup. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 51 (Machete)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Giulia's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Giulia patches you up (+12 HP). \"Hold still!\""
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Too close. The eulogy's attention SNAPS to Giulia — proximity overrules patience."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they bled, politely, where everyone could see.\" The narration lingers on your wounds. (Bleeds last 1 round longer.) (3 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Denouement!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 29."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Denouement hits you for 49."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Giulia's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Giulia strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "Giulia hits eulogy for 4."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Too close. The eulogy's attention SNAPS to you — proximity overrules patience."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they knelt, and the story approved.\" The story leans in. (The Eulogy's attacks +15.) (2 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 23."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 38."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Daniyar Askarov is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Daniyar Askarov is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Daniyar kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Bo blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Daniyar Askarov, 73 days. The mantle passes to Bo Deng."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Bo Deng, 38 — a nurse. His hands know different work now: Green Whisper."
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew Bo — solid ground, earned at this fire."
+        }
+      ],
+      "transcriptOverflow": false,
+      "end": {
+        "result": "lost",
+        "day": 73,
+        "round": 4,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "eulogy",
+            "alive": true,
+            "fled": false,
+            "hp": 65,
+            "maxHp": 900
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "daniyar_askarov",
+            "alive": false,
+            "fled": false,
+            "hp": -23,
+            "maxHp": 100
+          },
+          {
+            "key": "v_giulia_bianchi",
+            "kind": "villager",
+            "vid": "giulia_bianchi",
+            "alive": true,
+            "fled": false,
+            "hp": 88,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "daniyar_askarov"
+        ],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false,
+      "_npcTurnOpen": null
+    },
+    {
+      "seq": 5,
+      "type": "tb",
+      "day": 74,
+      "mid": "eulogy",
+      "wave": 4,
+      "fightId": "fmgpspiom_94bd6u",
+      "scholarAtStart": "app_mgpsphiy699",
+      "partySizeStart": 2,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "app_mgpsphiy699",
+          "hpStart": 100,
+          "maxHp": 100,
+          "held": [
+            {
+              "id": "patient_aim",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "take_aim",
+                  "cost": {
+                    "turn": true
+                  }
+                }
+              ]
+            },
+            {
+              "id": "intimidating_presence",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "stare_down",
+                  "cost": {
+                    "turn": true
+                  }
+                }
+              ]
+            },
+            {
+              "id": "peacemaker",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "walk_in",
+                  "cost": {
+                    "turn": true
+                  }
+                }
+              ]
+            },
+            {
+              "id": "haymaker",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "throw_haymaker",
+                  "cost": {
+                    "turn": true,
+                    "kcal": 40
+                  }
+                }
+              ]
+            }
+          ],
+          "heldReadError": null
+        },
+        {
+          "key": "v_app_mgpspie3545",
+          "kind": "villager",
+          "vid": "app_mgpspie3545",
+          "hpStart": 100,
+          "maxHp": 100,
+          "held": [
+            {
+              "id": "peacemaker",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "walk_in",
+                  "cost": {
+                    "turn": true
+                  }
+                }
+              ]
+            }
+          ],
+          "heldReadError": null
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "eulogy",
+          "hpStart": 65,
+          "maxHp": 900,
+          "wave": 4,
+          "joinedMidFight": false,
+          "trickKnown": false
+        }
+      ],
+      "scholarHeld": [
+        {
+          "id": "patient_aim",
+          "lane": "skill",
+          "actions": [
+            {
+              "id": "take_aim",
+              "cost": {
+                "turn": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "intimidating_presence",
+          "lane": "skill",
+          "actions": [
+            {
+              "id": "stare_down",
+              "cost": {
+                "turn": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "peacemaker",
+          "lane": "skill",
+          "actions": [
+            {
+              "id": "walk_in",
+              "cost": {
+                "turn": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "haymaker",
+          "lane": "skill",
+          "actions": [
+            {
+              "id": "throw_haymaker",
+              "cost": {
+                "turn": true,
+                "kcal": 40
+              }
+            }
+          ]
+        }
+      ],
+      "scholarHeldReadError": null,
+      "scholarKcalStart": 2400,
+      "foodTierStart": "tight",
+      "turns": [
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 1,
+          "kcal": 2400
+        },
+        {
+          "cls": "strike",
+          "round": 2,
+          "kcal": 2400
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 2,
+          "kcal": 2400
+        }
+      ],
+      "availSnapshots": [
+        {
+          "round": 1,
+          "kcal": 2400,
+          "avail": [
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2400,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2400,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "peacemaker",
+              "act": "walk_in",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2400,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2400,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 100,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 1
+          }
+        },
+        {
+          "round": 2,
+          "kcal": 2400,
+          "avail": [
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2400,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2400,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "peacemaker",
+              "act": "walk_in",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2400,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2400,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 100,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 1
+          }
+        },
+        {
+          "round": 2,
+          "kcal": 2400,
+          "avail": [
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2400,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2400,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "peacemaker",
+              "act": "walk_in",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2400,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2400,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 100,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 1
+          }
+        }
+      ],
+      "abilityUses": [],
+      "availCalls": [],
+      "npcTurns": [
+        {
+          "vid": "app_mgpspie3545",
+          "hp": 100,
+          "maxHp": 100,
+          "mx": 6,
+          "my": 1,
+          "stunned": 0,
+          "fled": false,
+          "fieldMedicated": false,
+          "warCried": false,
+          "screamedDay": null,
+          "sandThrown": false,
+          "loomed": false,
+          "raged": false,
+          "shoved": false,
+          "liveMonsters": [
+            {
+              "key": "m_0",
+              "mid": "eulogy",
+              "hp": 65,
+              "maxHp": 900,
+              "mx": 7,
+              "my": 1,
+              "blind": 0,
+              "stunned": 0,
+              "frozen": 0,
+              "bound": 0,
+              "hesitate": 0,
+              "elderCalm": false
+            }
+          ],
+          "foodTier": "tight",
+          "round": 1,
+          "abilityCalled": true,
+          "exitHp": 100,
+          "exitFled": false
+        },
+        {
+          "vid": "app_mgpspie3545",
+          "hp": 100,
+          "maxHp": 100,
+          "mx": 6,
+          "my": 1,
+          "stunned": 0,
+          "fled": false,
+          "fieldMedicated": false,
+          "warCried": false,
+          "screamedDay": null,
+          "sandThrown": false,
+          "loomed": false,
+          "raged": false,
+          "shoved": false,
+          "liveMonsters": [
+            {
+              "key": "m_0",
+              "mid": "eulogy",
+              "hp": 7,
+              "maxHp": 900,
+              "mx": 7,
+              "my": 1,
+              "blind": 0,
+              "stunned": 0,
+              "frozen": 0,
+              "bound": 0,
+              "hesitate": 0,
+              "elderCalm": false
+            }
+          ],
+          "foodTier": "tight",
+          "round": 2,
+          "abilityCalled": true,
+          "exitHp": 100,
+          "exitFled": false
+        }
+      ],
+      "npcAbilityCalls": [
+        {
+          "vid": "app_mgpspie3545",
+          "round": 1,
+          "returned": false,
+          "fired": [],
+          "flagsBefore": {
+            "screamedDay": null,
+            "sand": false,
+            "loomed": false,
+            "raged": false,
+            "shoved": false
+          },
+          "flagsAfter": {
+            "screamedDay": null,
+            "sand": false,
+            "loomed": false,
+            "raged": false,
+            "shoved": false
+          },
+          "twinBefore": {
+            "warCried": false,
+            "stared": false,
+            "walkedIn": false,
+            "goaded": false,
+            "bound": false,
+            "ambushed": false,
+            "haymakerPressed": false,
+            "deadAimed": false,
+            "aimed": false,
+            "tradeOpened": false,
+            "debtSettled": false,
+            "readFight": false,
+            "tripwireSet": false
+          },
+          "twinAfter": {
+            "warCried": false,
+            "stared": false,
+            "walkedIn": false,
+            "goaded": false,
+            "bound": false,
+            "ambushed": false,
+            "haymakerPressed": false,
+            "deadAimed": false,
+            "aimed": false,
+            "tradeOpened": false,
+            "debtSettled": false,
+            "readFight": false,
+            "tripwireSet": false
+          },
+          "kitDiffs": []
+        },
+        {
+          "vid": "app_mgpspie3545",
+          "round": 2,
+          "returned": false,
+          "fired": [],
+          "flagsBefore": {
+            "screamedDay": null,
+            "sand": false,
+            "loomed": false,
+            "raged": false,
+            "shoved": false
+          },
+          "flagsAfter": {
+            "screamedDay": null,
+            "sand": false,
+            "loomed": false,
+            "raged": false,
+            "shoved": false
+          },
+          "twinBefore": {
+            "warCried": false,
+            "stared": false,
+            "walkedIn": false,
+            "goaded": false,
+            "bound": false,
+            "ambushed": false,
+            "haymakerPressed": false,
+            "deadAimed": false,
+            "aimed": false,
+            "tradeOpened": false,
+            "debtSettled": false,
+            "readFight": false,
+            "tripwireSet": false
+          },
+          "twinAfter": {
+            "warCried": false,
+            "stared": false,
+            "walkedIn": false,
+            "goaded": false,
+            "bound": false,
+            "ambushed": false,
+            "haymakerPressed": false,
+            "deadAimed": false,
+            "aimed": false,
+            "tradeOpened": false,
+            "debtSettled": false,
+            "readFight": false,
+            "tripwireSet": false
+          },
+          "kitDiffs": []
+        }
+      ],
+      "hits": [
+        {
+          "round": 1,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_app_mgpspie3545",
+          "sourceLabel": "Taiga",
+          "requested": 12,
+          "returned": 12,
+          "hpBefore": 65,
+          "hpAfter": 53,
+          "hpDelta": -12,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "ally"
+        },
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 37,
+          "returned": 46,
+          "hpBefore": 53,
+          "hpAfter": 7,
+          "hpDelta": -46,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_app_mgpspie3545",
+          "sourceLabel": "Taiga",
+          "requested": 13,
+          "returned": 13,
+          "hpBefore": 7,
+          "hpAfter": -6,
+          "hpDelta": -13,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "ally"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "🎙️ It moves."
+        },
+        {
+          "kind": "say",
+          "line": "💧 Sofia returns with water: +3 clean."
+        },
+        {
+          "kind": "say",
+          "line": "— DUSK — Animals stir again. Shadows lengthen."
+        },
+        {
+          "kind": "sysSay",
+          "line": "Taiga's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Taiga strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "Taiga hits eulogy for 12."
+        },
+        {
+          "kind": "say",
+          "line": "eulogy is BLEEDING — and it likes it. Louder, faster, no more feints."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Too close. The eulogy's attention SNAPS to you — proximity overrules patience."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they stood their ground, poor brave fools.\" The spotlight widens. (No weight yet — just the story starting.) (5 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 46 (Machete)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Taiga's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Taiga strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "Taiga hits eulogy for 13."
+        },
+        {
+          "kind": "say",
+          "line": "The Eulogy falls."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "say",
+          "line": "📺 SYSTEM: \"Oh — OH. Everybody saw that, right? Taiga just put down The Eulogy... on CAMERA. That's a veteran kill, folks. REMEMBER the name.\""
+        },
+        {
+          "kind": "say",
+          "line": "Sofia: \"I just watched something die that should not be able to die.\""
+        },
+        {
+          "kind": "sysSay",
+          "line": "◈ The Records: An apex thing died by village hands: The Eulogy. The Records hold it up to the light."
+        },
+        {
+          "kind": "say",
+          "line": "Taiga laughs, disbelieving. \"Did you SEE that?\""
+        },
+        {
+          "kind": "sysSay",
+          "line": "WINNER! Style score: 5. The gamblers nod approvingly."
+        },
+        {
+          "kind": "say",
+          "line": "It is a prestige drama. Do not eat the prestige drama."
+        },
+        {
+          "kind": "say",
+          "line": "Grave robber: its bone knife is on the body. The dead don't need it — but you'll have to take it."
+        },
+        {
+          "kind": "say",
+          "line": "You came back bloody. Nobody asks. Someone saves you the good seat by the fire."
+        }
+      ],
+      "transcriptOverflow": false,
+      "end": {
+        "result": "won",
+        "day": 74,
+        "round": 2,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "eulogy",
+            "alive": false,
+            "fled": false,
+            "hp": -6,
+            "maxHp": 900
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "app_mgpsphiy699",
+            "alive": true,
+            "fled": false,
+            "hp": 100,
+            "maxHp": 100
+          },
+          {
+            "key": "v_app_mgpspie3545",
+            "kind": "villager",
+            "vid": "app_mgpspie3545",
+            "alive": true,
+            "fled": false,
+            "hp": 100,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 1,
+        "monsterTotalW4": 1,
+        "humansDead": [],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [
+        {
+          "day": 74,
+          "fn": "recordWaveKill",
+          "pyrrhic": false,
+          "mid": "eulogy",
+          "wave": 4,
+          "by": "app_mgpspie3545",
+          "via": "companion",
+          "scholarAtKill": "app_mgpsphiy699",
+          "linkSeq": 5,
+          "linkHow": "tb-open"
+        }
+      ],
+      "superseded": false,
+      "_npcTurnOpen": null
+    },
+    {
+      "seq": 6,
+      "type": "tb",
+      "day": 80,
+      "mid": "reunion",
+      "wave": 4,
+      "fightId": "fmgpspirt_dgga3q",
+      "scholarAtStart": "app_mgpsphiy699",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "app_mgpsphiy699",
+          "hpStart": 100,
+          "maxHp": 100,
+          "held": [
+            {
+              "id": "patient_aim",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "take_aim",
+                  "cost": {
+                    "turn": true
+                  }
+                }
+              ]
+            },
+            {
+              "id": "intimidating_presence",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "stare_down",
+                  "cost": {
+                    "turn": true
+                  }
+                }
+              ]
+            },
+            {
+              "id": "peacemaker",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "walk_in",
+                  "cost": {
+                    "turn": true
+                  }
+                }
+              ]
+            },
+            {
+              "id": "haymaker",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "throw_haymaker",
+                  "cost": {
+                    "turn": true,
+                    "kcal": 40
+                  }
+                }
+              ]
+            }
+          ],
+          "heldReadError": null
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "reunion",
+          "hpStart": 900,
+          "maxHp": 1200,
+          "wave": 4,
+          "joinedMidFight": false,
+          "trickKnown": false
+        }
+      ],
+      "scholarHeld": [
+        {
+          "id": "patient_aim",
+          "lane": "skill",
+          "actions": [
+            {
+              "id": "take_aim",
+              "cost": {
+                "turn": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "intimidating_presence",
+          "lane": "skill",
+          "actions": [
+            {
+              "id": "stare_down",
+              "cost": {
+                "turn": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "peacemaker",
+          "lane": "skill",
+          "actions": [
+            {
+              "id": "walk_in",
+              "cost": {
+                "turn": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "haymaker",
+          "lane": "skill",
+          "actions": [
+            {
+              "id": "throw_haymaker",
+              "cost": {
+                "turn": true,
+                "kcal": 40
+              }
+            }
+          ]
+        }
+      ],
+      "scholarHeldReadError": null,
+      "scholarKcalStart": 2190,
+      "foodTierStart": "secure",
+      "turns": [
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 1,
+          "kcal": 2190
+        },
+        {
+          "cls": "strike",
+          "round": 2,
+          "kcal": 2190
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 2,
+          "kcal": 2190
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 3,
+          "kcal": 2190
+        }
+      ],
+      "availSnapshots": [
+        {
+          "round": 1,
+          "kcal": 2190,
+          "avail": [
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2190,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2190,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "peacemaker",
+              "act": "walk_in",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2190,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2190,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 1200,
+            "scholarHp": 100,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 1
+          }
+        },
+        {
+          "round": 2,
+          "kcal": 2190,
+          "avail": [
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2190,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2190,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "peacemaker",
+              "act": "walk_in",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2190,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2190,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 1200,
+            "scholarHp": 62,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.62
+          }
+        },
+        {
+          "round": 2,
+          "kcal": 2190,
+          "avail": [
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2190,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2190,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "peacemaker",
+              "act": "walk_in",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2190,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2190,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 1200,
+            "scholarHp": 62,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.62
+          }
+        },
+        {
+          "round": 3,
+          "kcal": 2190,
+          "avail": [
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2190,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "intimidating_presence",
+              "act": "stare_down",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2190,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "peacemaker",
+              "act": "walk_in",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2190,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "haymaker",
+              "act": "throw_haymaker",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 2190,
+              "cost": 40,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 1200,
+            "scholarHp": 25,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.25
+          }
+        }
+      ],
+      "abilityUses": [],
+      "availCalls": [],
+      "npcTurns": [],
+      "npcAbilityCalls": [],
+      "hits": [
+        {
+          "round": 2,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "reunion's attack",
+          "requested": 72,
+          "returned": 38,
+          "hpBefore": 100,
+          "hpAfter": 62,
+          "hpDelta": -38,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "reunion",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 35,
+          "returned": 44,
+          "hpBefore": 900,
+          "hpAfter": 856,
+          "hpDelta": -44,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "reunion's Your Move",
+          "requested": 71,
+          "returned": 37,
+          "hpBefore": 62,
+          "hpAfter": 25,
+          "hpDelta": -37,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "your own move, returned",
+          "requested": 55,
+          "returned": 29,
+          "hpBefore": 25,
+          "hpAfter": -4,
+          "hpDelta": -29,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "💧 Giulia returns with water: +4 clean."
+        },
+        {
+          "kind": "say",
+          "line": "🚶 Sofia is back with Giulia."
+        },
+        {
+          "kind": "say",
+          "line": "Leo heads out to check the snares. \"Wire doesn't lie.\" The pantry won't fill itself."
+        },
+        {
+          "kind": "say",
+          "line": "— DUSK — Animals stir again. Shadows lengthen."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion's turn"
+        },
+        {
+          "kind": "say",
+          "line": "💥 reunion's attack finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 34."
+        },
+        {
+          "kind": "say",
+          "line": "Reunion's attack hits you for 38."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Your Move — locks onto one target — moving won't dodge it. You won't forget this."
+        },
+        {
+          "kind": "say",
+          "line": "(reunion's hide absorbs 12.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the reunion for 44 (Machete)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion's turn"
+        },
+        {
+          "kind": "say",
+          "line": "💥 reunion's Your Move finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 34."
+        },
+        {
+          "kind": "say",
+          "line": "Reunion's Your Move hits you for 37."
+        },
+        {
+          "kind": "say",
+          "line": "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion's turn"
+        },
+        {
+          "kind": "say",
+          "line": "👥 Faces surface on its body — your own stride. It knows \"move\" — it watched you do it 2 times. YOUR MOVE, back at you."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 26."
+        },
+        {
+          "kind": "say",
+          "line": "Your own move, returned hits you for 29."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Bo Deng is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Bo Deng is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Bo kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Taiga blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Bodyguard (Level 1). In the wilds, when a blow is falling on someone beside you, you step into it. Once per fight, an attack meant for your ally lands on you instead. It hurts. That's the job."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Keeping Morale (Level 1). People need small wins. Celebrate the little things. Despair is the real killer."
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Bo Deng, 80 days. The mantle passes to Taiga Kiyohara."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Taiga Kiyohara, 60 — a teacher. Their hands know different work now: Green Whisper."
+        },
+        {
+          "kind": "say",
+          "line": "The village's quarrel was with Bo — and Bo is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers."
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew Taiga before the Codex did — their name already carried weight here."
+        }
+      ],
+      "transcriptOverflow": false,
+      "end": {
+        "result": "lost",
+        "day": 80,
+        "round": 4,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "reunion",
+            "alive": true,
+            "fled": false,
+            "hp": 856,
+            "maxHp": 1200
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "app_mgpsphiy699",
+            "alive": false,
+            "fled": false,
+            "hp": -4,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "app_mgpsphiy699"
+        ],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false
+    }
+  ],
+  "killsW4": 1,
+  "killRows": [
+    {
+      "day": 74,
+      "fn": "recordWaveKill",
+      "pyrrhic": false,
+      "mid": "eulogy",
+      "wave": 4,
+      "by": "app_mgpspie3545",
+      "via": "companion",
+      "scholarAtKill": "app_mgpsphiy699",
+      "linkSeq": 5,
+      "linkHow": "tb-open"
+    }
+  ],
+  "unlinkedKills": [],
+  "spawns": [
+    {
+      "day": 59,
+      "id": "reunion",
+      "tx": 6,
+      "ty": 6
+    },
+    {
+      "day": 60,
+      "id": "eulogy",
+      "tx": 3,
+      "ty": 2
+    },
+    {
+      "day": 63,
+      "id": "eulogy",
+      "tx": 5,
+      "ty": 4
+    },
+    {
+      "day": 68,
+      "id": "reunion",
+      "tx": 5,
+      "ty": 4
+    },
+    {
+      "day": 72,
+      "id": "reunion",
+      "tx": 3,
+      "ty": 4
+    },
+    {
+      "day": 73,
+      "id": "eater",
+      "tx": 5,
+      "ty": 4
+    },
+    {
+      "day": 84,
+      "id": "reunion",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 90,
+      "id": "algorithm",
+      "tx": 3,
+      "ty": 4
+    },
+    {
+      "day": 94,
+      "id": "eater",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 98,
+      "id": "reunion",
+      "tx": 3,
+      "ty": 4
+    },
+    {
+      "day": 101,
+      "id": "reunion",
+      "tx": 0,
+      "ty": 8
+    }
+  ],
+  "orphanTbEnds": [],
+  "wrapCounts": {
+    "spawnWorldMonster": 52,
+    "fieldFight": 73,
+    "recordWaveKill": 41,
+    "useAbility": 46,
+    "startCombat": 24,
+    "tbAfterPlayerAction": 519,
+    "tbVillagerTurn": 31,
+    "tbDamage": 168,
+    "act.strike": 210,
+    "tbVillagerAbility": 28,
+    "tbEnd": 24,
+    "recordPyrrhicKill": 3,
+    "_actionAvailable": 156
+  },
+  "instrumentErrors": [],
+  "notes": []
+}

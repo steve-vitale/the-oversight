@@ -339,3 +339,303 @@ yardstick), not a silent pass.
   constraint after twins is that villagers rarely HOLD combat
   abilities at all. T1's >= 10 rows assumed diagnosis-era holding
   density; the after-leg will show what the rare holdings do.
+
+## TWINS IMPLEMENTATION (committed a8538e12d, [needs-eyes])
+
+- tbVillagerAbility, after the shove block: 13 twin rows in the
+  preregistered order (war_cry losing, tripwire, stare_down,
+  walk_in losing, goad, hogtie, ambush, haymaker, dead_aim,
+  patient_aim, open_trade, settle_debt, read_fight), each with its
+  own once-per-fight flag, same numbers as the player impl,
+  narrated honestly, never silent. Twins NEVER call useAbility
+  (scholar kcal unchanged across a twin press — proof test).
+  Pantry-tier gating wraps the whole call via foodPower, same as
+  the base five. Triggers read only the fighter's own position/HP
+  and live monsters on its tiles (perception law).
+- tbVillagerTurn strike block, strike-only (harry leaves flags
+  loaded, like the player path): consumes _vAimBonus x2.5,
+  _vDeadAim x3, _vAmbushReady x2, _vHaymakerReady x2.5,
+  _vTradeOpen +50% per remaining attack, _vSettleDebtBonus flat;
+  a pressed-haymaker strike skips the automatic every-3rd-swing
+  x2 (no x4 stack). Multiplicative stacking otherwise mirrors
+  _applyAbilityActionMods.
+- Proof: scripts/test-abilityuse-twins-20261103.js — 31/31 (set
+  per twin: flag + narration + once-gate; trivial-fight
+  withholding; scholar-kcal-unchanged; consumption: flagged
+  strike == round(unflagged x mult) under re-seeded RNG for all
+  six damage twins + flat settle). The trivial-fight case caught
+  a real test error first: startCombat spawns hummice as a pack
+  of 4 (totalMaxHp 47, nontrivial) — the fixture now forces a
+  single 10-HP monster for the trivial case.
+- check-wired: game.js 17 unwired, none of them mine
+  (combatBarAbilityActions and tbVillagerAbility are called).
+
+## TWINS BEFORE/AFTER (identical seeds, stock policy, twins live in after)
+
+- Before (twins-before): 42 spawns, 26 TB fights, 18 field
+  fights, 5 wave-4 kills, 1/8 survived. 59 NPC ability calls, 0
+  recorded fires.
+- After (twins-after): IDENTICAL on every seed (42/26/18/5/1).
+  59 calls, 0 recorded fires.
+- True fires (flag-preset evidence — see instrument note):
+  before 1 (aria_thompson scream_cheese, round 1); after 2 (the
+  same scream + app_mgpsphkk753 read_fight, round 1 — the twin).
+  No recorded-round fire in either leg. No routed-fight movement
+  (0 routed both legs).
+- Bars: T1 (>= 10 twin rows) NO-GO — recorded 0, true 1.
+  T2 (kills/survival/routed up) NO-GO — no movement. G1
+  (flag-set-no-effect) 0 — every twin flag consumes in proof
+  tests; the panel's one twin fire (+2 speed) is a real effect.
+  G2 (dinner) PASS — git diff on src/data/abilities.json empty;
+  twins never call useAbility. G3 (instrument errors 0) PASS.
+- METRIC REVIEW (not a re-score): T1 assumed diagnosis-era
+  holding density and full-round visibility. Reality: (a)
+  twin-eligible NPC holdings are ~2 slots per 26 fights
+  (brawler_instinct 1, hogtie 1 — hogtie never triggered: needs
+  controlled + adjacent + size-1, never staged in-panel);
+  (b) the instrument misses round-1 turns: startCombat runs
+  tbAdvance synchronously (node) before the exposure opens, so
+  round-1 villager turns — and their ability calls and
+  narration — are invisible to the call log (proven: npcTurns
+  start at round 2; twinBefore.readFight true at the first
+  recorded call). The prior arm shares this blind spot, so its
+  "base five rarely fire" is also a lower bound. Both legs are
+  affected equally; the after-leg's extra fire is real but
+  small. The twins are proven by fixture (31/31); the panel
+  cannot show more because villagers rarely HOLD combat
+  abilities at all.
+- KIT PATH (both legs): 0 casts across 59 + 59 calls. Cause,
+  from the passive corpus: NO NPC ally in any of the 26 fights
+  held a kit ability. Holding gap, not gate gap, not missing
+  path — no duplicate path built (prereg rule).
+- NEXT BOTTLENECK (flagged, not built): villager ability
+  acquisition. The scholar holds twin abilities abundantly
+  (patient_aim 25/26 fights, haymaker 26/26); villagers hold
+  staples (tracker, game_sense, scrounger...) and almost no
+  combat actions. The fix direction is the villager XP/grant
+  pipeline, not more twin paths.
+
+## PASSIVE AUDIT (26 TB fights, before-leg passive corpus; yardsticks: offensive gear step +15-20/strike; defensive >= +4 absorbed/hit)
+
+- Scope: scholar-resolved values via modTarget at fight start +
+  held census. NPC modifiers do NOT resolve in TB scope (the
+  pipeline collects from the scholar only; fieldFights.js:618 is
+  the field-scope armor exception) — so the NPC TB passive audit
+  is empty by construction, stated not hidden. The 50 "neither
+  modifiers nor actions" abilities are NOT dead by default:
+  effects live in hardcoded branches (cornered_rat in the strike
+  calc and dodge) or godpath VERBS; all 34 modifier targets have
+  at least one reader. Non-combat passives (forage, trust,
+  craft...) are out of scope for a combat audit.
+- LOAD-BEARING:
+  - patient_aim, strike_damage x2 round:1 — held 25/26, resolves
+    2.0 (2.3 with the relic +15% below), read game.js:36445 with
+    round ctx. First-round strikes doubled: +10-16+wb per strike,
+    at/above one gear step on round 1 only; dead later rounds
+    by design.
+  - ambush, first_strike_damage x1.5 — held 2/26, resolves 1.5,
+    read 36456 round:1. On its held fights (patient_aim also
+    held) the marginal is +10-16+wb — at-step. Rarely held.
+  - adrenaline_surge, dodge_chance +0.15/level — held 1/26,
+    resolves 0.15, read tbDamage 37824. +15% dodge ~= -15%
+    expected damage; on a ~30-damage hit ~= 4.5/hit, at the
+    defensive yardstick. Load-bearing when held, rarely held.
+- DEAD by name:
+  - adrenaline_control, strike_damage x1.3^level — held 0/26.
+    Dead by (a) never held. (Would apply every round if held —
+    reader 36445 unconditional path — worth +3-7/strike, below
+    step anyway.)
+  - chitin_skin, armor.flat +30 — held 0/26. Dead by (a).
+    Mechanism works (armorBonus adds flat; proof test asserts
+    it): through the curve +30 prot absorbs ~60% pre-pierce,
+    ~= +18 on a 30-hit — WOULD be load-bearing if held. The gap
+    is acquisition, not mechanism.
+  - survivor, health.max_add +10 — held 0/26. Dead by (a).
+    Mechanism works (28494); +10 max HP is a +10% pool.
+  - trade_of_blows, trade_window +1 — held 0/26 (scholar).
+    Dead by (a). (+1 attack at +50% ~= +5-10 — below step.)
+  - haymaker, heavy_damage x1.2 — held 26/26, resolves 1.2, but
+    read ONLY in _applyAbilityActionMods (the haymaker press
+    path); plain strikes never read it. Marginal per pressed
+    strike +0.5x base = +5-10, below one gear step. Dead by
+    rule (c) on its only path. (The PRESS itself is x2.5, way
+    above step — the action matters, its passive leg doesn't.)
+- NO WRITER: enemy_morale resolves 1.0 on all 26 fights; no
+  ability in data targets it, though war_cry (1508) and monster
+  morale (40880) read it. Data gap note, not a passive verdict.
+- UNATTRIBUTED +15% strike_damage on 10/26 fights: no held
+  ability explains it (checked: abilities, synergies,
+  evolutions). Consistent with a bonded relic combat_damage
+  enhancement (RELIC_MOD_MAP) — inference, not proof; the
+  corpus doesn't record relics. +1.5-2.4+0.15wb/strike, below
+  step per strike, persistent all rounds.
+- WHAT "LARGE" MUST BE: to rival a gear step persistently needs
+  ~= +15-20 flat/strike EVERY round (~x1.5-2.0 on a 20-30
+  strike). Nothing held does that persistently. The closest in
+  data is chitin_skin (defensive, would-be load-bearing) —
+  never held. Patient_aim does it on round 1 only. Same
+  conclusion as twins: the large passives are in data but not
+  in hands.
+- Proof: scripts/test-abilityuse-passive-20261103.js — 4/4
+  (adrenaline_control x1.3^level, chitin_skin +30 + armorBonus
+  inclusion, patient_aim round-1-only).
+
+## COMBAT-BAR SURFACING
+
+- Game: Game.combatBarAbilityActions() in game.js — one entry
+  per held, uncovered, pressable combat action {aid, act, name,
+  kcal, ok, why, needsTarget}. It reuses activatableAbilities()
+  (ok/why straight from _actionAvailable, so a refused tap
+  never costs); covered actions (scream/shove/bind/goad) are
+  excluded; automatic actions excluded (the engine says they
+  are not tappable buttons); legacy activatables excluded (no
+  combat context). needsTarget is true exactly for
+  intimidating_presence.stare_down — every other combat impl
+  resolves a default target (nearest in range, first live,
+  first two, loudest), verified against the IMPLS map.
+- App: combatActionsHTML renders one ⚡ button per entry after
+  the existing buttons (disabled state mirrors _actionAvailable
+  exactly, title names the reason); wireCombatPanel gains one
+  generic data-combat-ability handler (stare_down picks over
+  live monsters, weakest first, via the existing enterTargeting
+  picker; everything else calls useAbility directly). No cost
+  changes, no new actions, no gate changes.
+- Proof: scripts/test-abilityuse-bar-20261103.js — 94/94
+  (each held uncovered action exactly once; covered hidden;
+  ok/why match _actionAvailable exactly; needsTarget exactly
+  stare_down; >= 1 pressable; kcal carried; empty out of
+  combat; app.js source-text: render + generic wire + picker).
+  The bar test caught one real test error first:
+  trade_of_blows is magic-lane, not skill-lane — granted
+  without force it hit the slot cap and vanished from the bar.
+- OUTSTANDING, NEVER CLAIMED: phone/browser verification at
+  390x844. Node cannot prove a tappable bar (app.js is
+  DOM-only; the repo's own rule requires browser proof for UI).
+  A main-session browser pass must tap a surfaced button
+  (e.g. Unleash Rage, Bird Strike, Take Aim) on a phone-size
+  view before this is called player-verified.
+- REGRESSION CAUGHT AND FIXED: check --quick run 2 failed
+  scripts/test-foodpower-20261014.js (abundant casts 8 vs
+  expected 4). Cause: the test mocks npcHasAbility=true and
+  counts casts; my twins legitimately add 10 once-per-fight
+  casts in its fixture (war_cry, tripwire, stare_down, walk_in,
+  ambush, haymaker, dead_aim, take_aim, open_trade, read_fight)
+  on top of the 3 base casts + 1 bonus retry. The tier gate
+  itself is intact (starving still 0, bonus still exactly 1).
+  Per the house rule (design changed on purpose: update the
+  test, say so), the expectation is now 14 with the
+  composition documented in the test comment. Standalone:
+  30/30 after the fix.
+
+## CHOICES VS GEAR (same 8 seeds, 140d, stock policy, twins live; rates, since trajectories diverge)
+
+- Arm A (as-is) IS the twins-after leg. Arms B and C as
+  preregistered (setup strip / setup weapon swap) both proved
+  VACUOUS and are reported as such, not hidden: scholars start
+  with NO abilities and NO weapon on all 8 seeds
+  (strippedSlots [] and startWeapon unarmed everywhere), so
+  B == A and C == A exactly (26 fights, 5 kills, 201.3
+  dmg/fight, 22 fighter deaths, median 105d, 1/8 survived —
+  identical numbers, not similar ones). That vacuity is itself
+  a finding: the early game is ability-less and weapon-less by
+  construction; "choices" only exist once the scholar acquires
+  things mid-run.
+- Amended mechanisms (same question, fixed mechanism,
+  documented here): B2 re-strips at every fight start (the
+  scholar ENTERS every fight without combat abilities; the
+  per-fight strip log proves it bit — e.g. 99101 day 131:
+  pocket_sand + game_sense/brawler/peacemaker/come_get_some
+  stripped pre-fight). C2 downgrades the carried weapon one
+  tier at every fight start (same type preferred; ammo
+  preserved on ranged swaps; exactly one type-change in the
+  whole leg: sling 8 ranged -> sharpened_stick 5 melee, where
+  no lower ranged weapon exists).
+- Results (TB fights only; damage = -hpDelta to monsters):
+  - A as-is: 26 fights, 5 kills, 0.192 kills/fight, 201.3
+    dmg/fight, 22 fighter deaths, median 105d, 1/8 survived.
+  - B2 no combat abilities in fights: 26 fights, 1 kill,
+    0.038 kills/fight, 183.5 dmg/fight, 25 deaths, median 89d,
+    1/8 survived.
+  - C2 one gear tier worse: 27 fights, 2 kills, 0.074
+    kills/fight, 153.9 dmg/fight, 26 deaths, median 92.5d,
+    0/8 survived.
+- Verdict (prereg rule: choices matter iff (A-B) >= half
+  (A-C) on kills or survival): KILLS: (A-B2) = 0.154, (A-C2)
+  = 0.118, half = 0.059 — 0.154 >= 0.059, and ability loss
+  exceeds the FULL gear loss. SURVIVAL: (A-B2) = 16d,
+  (A-C2) = 12.5d, half = 6.25d — 16 >= 6.25. CHOICES MATTER on
+  both, and ability choices matter MORE than a gear tier on
+  kills. The damage split sharpens it: gear cuts damage/fight
+  more (-24% vs -9%), but abilities convert fights to kills
+  (kills -80% vs -60%) — gear changes the numbers, abilities
+  change the board, exactly as Steve's law predicts.
+- Confounds, stated: small counts (5/1/2 kills — directional,
+  not precise); B2's survival delta bundles the non-combat
+  legs of stripped skills (game_sense tracking, animal_ken)
+  with fight-ability loss — the kill-rate delta is the cleaner
+  read; one C2 type-change (above); one TB call per arm lacks
+  an exposure record (startCombat re-entered while already in
+  a fight — instrumentErrors 0, not an error). B2 strips the
+  SCHOLAR only; villager twins still live in all arms.
+- Fix direction if choices had NOT mattered: not needed — they
+  do. The open problem is not ability strength but ability
+  POSSESSION (see twins section): villagers rarely hold combat
+  abilities, so the scholar-side choice delta above is the
+  ceiling, not the floor, for what villagers feel.
+
+## CHECK STATUS (node scripts/check.js --quick, 290 tests, --cacheDirectory=/tmp/jest-cache-ability-use-gamecode)
+
+- Run 1 (before the foodpower test update): 283 passed, 7
+  failed in 810s (tail showed the racks-full voice gate; the
+  full list was lost to tail -15).
+- Run 2: 282 passed, 8 failed in 862s — named failures: the
+  five standing families (measurement-proof-update,
+  measurement-workflow, mobile-combat-cadence,
+  occupation-panels, phone-frame-proof) + establishment-r20
+  (the sixth standing family) + test-foodpower-20261014
+  (outdated count — fixed, see bar section) + a
+  test-trust-observer-neutrality 120s timeout flake (it ran
+  110s in run 1). Run-to-run flake movement of +/-1 is the
+  standing pattern on this suite (prior arm 282/8 with 2
+  flakes verified standalone).
+- FINAL RUN (after all game + test changes): 284 passed,
+  6 failed in 704s — exactly the six standing families, no
+  others. Nothing in the final failure set is mine.
+- Proof tests are standalone node scripts, not part of
+  check.js: twins 31/31, bar 94/94, passive 4/4, foodpower
+  30/30 after its update.
+
+## LIMITS, STATED PLAINLY
+
+- Phone/browser verification at 390x844: OUTSTANDING (bar
+  section). Node cannot prove a tappable bar; a main-session
+  browser pass must tap a surfaced button before this is
+  called player-verified.
+- The relic +15% strike_damage attribution is inference
+  (consistent with a bonded relic combat_damage enhancement),
+  not proof — the corpora don't record relics.
+- The choices verdict is directional, not precise: 5/1/2
+  kills across 26-27 fights per arm; B2's survival delta
+  bundles non-combat skill legs; one TB call per B2/C2 arm
+  lacks an exposure record (re-entrant startCombat, not an
+  instrument error).
+- The round-1 instrument blind spot (startCombat runs
+  tbAdvance synchronously before the exposure opens) means
+  all "recorded" NPC fire counts in both legs are lower
+  bounds; true counts are derived from flag presets, not
+  directly logged. Both legs share the blind spot, so the
+  before/after comparison is still fair.
+- The panel is 8 seeds x 140d. Villager ability holdings in
+  it are thin (~2 twin-eligible slots per 26 fights); the
+  twins' fixture proof (31/31) is the evidence they work, the
+  panel is the evidence they rarely get a chance.
+- OPEN FOLLOW-UPS (flagged, not built): (1) villager ability
+  acquisition — the next bottleneck for twins, passives, and
+  kit casts alike (no NPC held a kit ability in 26 fights;
+  chitin_skin/adrenaline_control held 0 times); (2) the
+  Drum-Belly win-rate panel (parent's list, unchanged);
+  (3) phone/browser verification of the bar (above).
+- NO win-plan or villager-goals files changed. NO win prices
+  or deed gates changed. NO data-file cost changes (git diff
+  on src/data/abilities.json empty). Six-slot cap untouched
+  (bar test grants with force only in fixtures).

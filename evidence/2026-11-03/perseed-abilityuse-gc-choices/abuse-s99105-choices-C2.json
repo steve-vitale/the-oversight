@@ -1,0 +1,441 @@
+{
+  "seed": 99105,
+  "run": "choices-C2",
+  "anchorCommit": "a8538e12d347",
+  "days": 51,
+  "gameDays": 51,
+  "endReason": "village-lost",
+  "won": false,
+  "villageLost": true,
+  "maxWave": 3,
+  "spawnsW4": 0,
+  "tbCalls": 0,
+  "fieldCallsW4": 0,
+  "exposures": [],
+  "killsW4": 0,
+  "killRows": [],
+  "unlinkedKills": [],
+  "spawns": [],
+  "orphanTbEnds": [],
+  "wrapCounts": {
+    "spawnWorldMonster": 42,
+    "fieldFight": 54,
+    "recordWaveKill": 31,
+    "startCombat": 16,
+    "tbAfterPlayerAction": 225,
+    "tbDamage": 157,
+    "act.strike": 70,
+    "tbEnd": 16,
+    "tbVillagerTurn": 76,
+    "tbVillagerAbility": 74,
+    "useAbility": 47,
+    "_actionAvailable": 20,
+    "recordPyrrhicKill": 4
+  },
+  "instrumentErrors": [],
+  "notes": [],
+  "choicesHeader": {
+    "arm": "gearfight",
+    "startWeapon": {
+      "itemId": null,
+      "name": "your hands",
+      "bonus": 0,
+      "type": "melee",
+      "slot": null
+    },
+    "swap": "already-unarmed-or-none",
+    "fightGearLog": [
+      {
+        "day": 9,
+        "swap": {
+          "from": {
+            "itemId": "hatchet",
+            "bonus": 15,
+            "type": "melee"
+          },
+          "to": {
+            "id": "stone_knife",
+            "name": "Stone knife",
+            "bonus": 12,
+            "type": "melee"
+          },
+          "typeChanged": false,
+          "slot": "melee"
+        }
+      },
+      {
+        "day": 9,
+        "swap": {
+          "from": {
+            "itemId": "fire_hardened_spear",
+            "bonus": 15,
+            "type": "melee"
+          },
+          "to": {
+            "id": "stone_knife",
+            "name": "Stone knife",
+            "bonus": 12,
+            "type": "melee"
+          },
+          "typeChanged": false,
+          "slot": "ranged"
+        }
+      },
+      {
+        "day": 9,
+        "swap": {
+          "from": {
+            "itemId": "stone_knife",
+            "bonus": 12,
+            "type": "melee"
+          },
+          "to": {
+            "id": "chefs_knife",
+            "name": "Chef's Knife",
+            "bonus": 8,
+            "type": "melee"
+          },
+          "typeChanged": false,
+          "slot": "ranged"
+        }
+      },
+      {
+        "day": 16,
+        "swap": {
+          "from": {
+            "itemId": "hatchet",
+            "bonus": 15,
+            "type": "melee"
+          },
+          "to": {
+            "id": "stone_knife",
+            "name": "Stone knife",
+            "bonus": 12,
+            "type": "melee"
+          },
+          "typeChanged": false,
+          "slot": "melee"
+        }
+      },
+      {
+        "day": 22,
+        "swap": {
+          "from": {
+            "itemId": "stone_knife",
+            "bonus": 12,
+            "type": "melee"
+          },
+          "to": {
+            "id": "chefs_knife",
+            "name": "Chef's Knife",
+            "bonus": 8,
+            "type": "melee"
+          },
+          "typeChanged": false,
+          "slot": "melee"
+        }
+      },
+      {
+        "day": 32,
+        "swap": {
+          "from": {
+            "itemId": "crowbar",
+            "bonus": 12,
+            "type": "melee"
+          },
+          "to": {
+            "id": "chefs_knife",
+            "name": "Chef's Knife",
+            "bonus": 8,
+            "type": "melee"
+          },
+          "typeChanged": false,
+          "slot": "melee"
+        }
+      },
+      {
+        "day": 32,
+        "swap": {
+          "from": {
+            "itemId": "chefs_knife",
+            "bonus": 8,
+            "type": "melee"
+          },
+          "to": {
+            "id": "sharpened_stick",
+            "name": "Sharpened stick",
+            "bonus": 5,
+            "type": "melee"
+          },
+          "typeChanged": false,
+          "slot": "melee"
+        }
+      },
+      {
+        "day": 36,
+        "swap": {
+          "from": {
+            "itemId": "crowbar",
+            "bonus": 12,
+            "type": "melee"
+          },
+          "to": {
+            "id": "chefs_knife",
+            "name": "Chef's Knife",
+            "bonus": 8,
+            "type": "melee"
+          },
+          "typeChanged": false,
+          "slot": "melee"
+        }
+      },
+      {
+        "day": 39,
+        "swap": {
+          "from": {
+            "itemId": "harvest_scythe",
+            "bonus": 40,
+            "type": "melee"
+          },
+          "to": {
+            "id": "machete",
+            "name": "Machete",
+            "bonus": 35,
+            "type": "melee"
+          },
+          "typeChanged": false,
+          "slot": "melee"
+        }
+      },
+      {
+        "day": 39,
+        "swap": {
+          "from": {
+            "itemId": "kitchen_knife",
+            "bonus": 8,
+            "type": "melee"
+          },
+          "to": {
+            "id": "sharpened_stick",
+            "name": "Sharpened stick",
+            "bonus": 5,
+            "type": "melee"
+          },
+          "typeChanged": false,
+          "slot": "melee"
+        }
+      },
+      {
+        "day": 46,
+        "swap": {
+          "from": {
+            "itemId": "machete",
+            "bonus": 35,
+            "type": "melee"
+          },
+          "to": {
+            "id": "hunting_spear",
+            "name": "Hunting spear",
+            "bonus": 30,
+            "type": "melee"
+          },
+          "typeChanged": false,
+          "slot": "melee"
+        }
+      },
+      {
+        "day": 46,
+        "swap": {
+          "from": {
+            "itemId": "stone_knife",
+            "bonus": 12,
+            "type": "melee"
+          },
+          "to": {
+            "id": "chefs_knife",
+            "name": "Chef's Knife",
+            "bonus": 8,
+            "type": "melee"
+          },
+          "typeChanged": false,
+          "slot": "melee"
+        }
+      },
+      {
+        "day": 47,
+        "swap": {
+          "from": {
+            "itemId": "chefs_knife",
+            "bonus": 8,
+            "type": "melee"
+          },
+          "to": {
+            "id": "sharpened_stick",
+            "name": "Sharpened stick",
+            "bonus": 5,
+            "type": "melee"
+          },
+          "typeChanged": false,
+          "slot": "melee"
+        }
+      },
+      {
+        "day": 48,
+        "swap": {
+          "from": {
+            "itemId": "machete",
+            "bonus": 35,
+            "type": "melee"
+          },
+          "to": {
+            "id": "hunting_spear",
+            "name": "Hunting spear",
+            "bonus": 30,
+            "type": "melee"
+          },
+          "typeChanged": false,
+          "slot": "melee"
+        }
+      },
+      {
+        "day": 48,
+        "swap": {
+          "from": {
+            "itemId": "machete",
+            "bonus": 35,
+            "type": "melee"
+          },
+          "to": {
+            "id": "hunting_spear",
+            "name": "Hunting spear",
+            "bonus": 30,
+            "type": "melee"
+          },
+          "typeChanged": false,
+          "slot": "melee"
+        }
+      },
+      {
+        "day": 49,
+        "swap": {
+          "from": {
+            "itemId": "kitchen_knife",
+            "bonus": 8,
+            "type": "melee"
+          },
+          "to": {
+            "id": "sharpened_stick",
+            "name": "Sharpened stick",
+            "bonus": 5,
+            "type": "melee"
+          },
+          "typeChanged": false,
+          "slot": "melee"
+        }
+      }
+    ]
+  },
+  "weaponSnaps": [
+    {
+      "day": 9,
+      "itemId": "hatchet",
+      "bonus": 15,
+      "type": "melee"
+    },
+    {
+      "day": 9,
+      "itemId": "fire_hardened_spear",
+      "bonus": 15,
+      "type": "melee"
+    },
+    {
+      "day": 9,
+      "itemId": "stone_knife",
+      "bonus": 12,
+      "type": "melee"
+    },
+    {
+      "day": 16,
+      "itemId": "hatchet",
+      "bonus": 15,
+      "type": "melee"
+    },
+    {
+      "day": 22,
+      "itemId": "stone_knife",
+      "bonus": 12,
+      "type": "melee"
+    },
+    {
+      "day": 32,
+      "itemId": "crowbar",
+      "bonus": 12,
+      "type": "melee"
+    },
+    {
+      "day": 32,
+      "itemId": "chefs_knife",
+      "bonus": 8,
+      "type": "melee"
+    },
+    {
+      "day": 36,
+      "itemId": "crowbar",
+      "bonus": 12,
+      "type": "melee"
+    },
+    {
+      "day": 39,
+      "itemId": "harvest_scythe",
+      "bonus": 40,
+      "type": "melee"
+    },
+    {
+      "day": 39,
+      "itemId": "kitchen_knife",
+      "bonus": 8,
+      "type": "melee"
+    },
+    {
+      "day": 46,
+      "itemId": "machete",
+      "bonus": 35,
+      "type": "melee"
+    },
+    {
+      "day": 46,
+      "itemId": "stone_knife",
+      "bonus": 12,
+      "type": "melee"
+    },
+    {
+      "day": 47,
+      "itemId": "chefs_knife",
+      "bonus": 8,
+      "type": "melee"
+    },
+    {
+      "day": 48,
+      "itemId": "machete",
+      "bonus": 35,
+      "type": "melee"
+    },
+    {
+      "day": 48,
+      "itemId": "machete",
+      "bonus": 35,
+      "type": "melee"
+    },
+    {
+      "day": 49,
+      "itemId": "kitchen_knife",
+      "bonus": 8,
+      "type": "melee"
+    }
+  ],
+  "endWeapon": {
+    "itemId": "sharpened_stick",
+    "bonus": 5,
+    "type": "melee"
+  }
+}

@@ -39072,6 +39072,57 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       this.say(`${t.name} takes the hit and runs — while running still works.`);
       return true;
     },
+    // combatBarAbilityActions(): COMBAT-BAR SURFACING (ability-use
+    // game-code 2026-11-03). The bar's hardcoded buttons cover only
+    // Strike/Study/Talk/Scream/Well/Flip/Shove/Bind/Goad/Shout/Rally/
+    // War cry/Offer/Wait — every other held combat action was
+    // unpressable for a human player even though the bot presses it
+    // through useAbility. This returns one entry per held, uncovered,
+    // pressable combat action, computed in GAME code (node-provable;
+    // app.js is DOM-only and only renders + wires):
+    //   {aid, act, name, kcal, ok, why, needsTarget}
+    // ok/why come straight from _actionAvailable via
+    // activatableAbilities (the same gate the button-disabled state
+    // and useAbility's pre-payment check use), so a refused tap never
+    // costs — the bar can only offer what useAbility would accept.
+    // Automatic actions are excluded: the engine itself says they are
+    // not tappable buttons. Legacy activatables carry no combat
+    // context and are excluded too — the bar surfaces data-driven
+    // combat actions only. needsTarget is true exactly for
+    // intimidating_presence.stare_down: every other combat impl
+    // resolves a default target (nearest in range, first live, first
+    // two, loudest) when none is passed, verified against the IMPLS
+    // map; stare_down refuses targetless. No cost changes, no new
+    // actions, no gate changes.
+    combatBarAbilityActions() {
+      const COVERED = {
+        'scream_cheese.scream': true, 'shoulder_check.shove': true,
+        'hogtie.bind': true, 'come_get_some.goad': true,
+      };
+      let list = [];
+      try {
+        list = (typeof this.activatableAbilities === 'function')
+          ? this.activatableAbilities() : [];
+      } catch (e) { console.warn('[bar] activatableAbilities', e); }
+      const out = [];
+      const defs = (this.data && this.data.abilities) || [];
+      for (const e of list) {
+        if (!e || e.context !== 'combat') continue;
+        const key = e.abilityId + '.' + e.actionId;
+        if (COVERED[key]) continue;
+        const def = defs.find(a => a.id === e.abilityId);
+        const actDef = def && (def.actions || []).find(a => a.id === e.actionId);
+        if (actDef && actDef.automatic) continue;
+        out.push({
+          aid: e.abilityId, act: e.actionId, name: e.name || e.actionId,
+          kcal: (e.cost && e.cost.kcal) || 0,
+          ok: !!e.available, why: e.why || null,
+          needsTarget: key === 'intimidating_presence.stare_down',
+        });
+      }
+      return out;
+    },
+
     // tbVillagerAbility(v): villagers USE their combat abilities — the 2026-10-14
     // audit found 0.00 uses across 240 runs because villagerDecide never
     // considers abilities (only strike/harry/help/flee/wait). This checks the

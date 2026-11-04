@@ -1,0 +1,4599 @@
+{
+  "seed": 99105,
+  "run": "choices-B2",
+  "anchorCommit": "a8538e12d347",
+  "days": 95,
+  "gameDays": 95,
+  "endReason": "village-lost",
+  "won": false,
+  "villageLost": true,
+  "maxWave": 4,
+  "spawnsW4": 10,
+  "tbCalls": 6,
+  "fieldCallsW4": 2,
+  "exposures": [
+    {
+      "seq": 1,
+      "type": "tb",
+      "day": 69,
+      "mid": "eulogy",
+      "wave": 4,
+      "fightId": "fmgpspicq_cywpwu",
+      "scholarAtStart": "gen_5yg74m1",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "gen_5yg74m1",
+          "hpStart": 94,
+          "maxHp": 100,
+          "held": [],
+          "heldReadError": null
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "eulogy",
+          "hpStart": 900,
+          "maxHp": 900,
+          "wave": 4,
+          "joinedMidFight": false,
+          "trickKnown": false
+        }
+      ],
+      "scholarHeld": [],
+      "scholarHeldReadError": null,
+      "scholarKcalStart": 2400,
+      "foodTierStart": "abundant",
+      "turns": [
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 1,
+          "kcal": 2400
+        },
+        {
+          "cls": "strike",
+          "round": 2,
+          "kcal": 2400
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 2,
+          "kcal": 2400
+        },
+        {
+          "cls": "strike",
+          "round": 3,
+          "kcal": 2400
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 3,
+          "kcal": 2400
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 4,
+          "kcal": 2400
+        }
+      ],
+      "availSnapshots": [
+        {
+          "round": 1,
+          "kcal": 2400,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 94,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.94
+          }
+        },
+        {
+          "round": 2,
+          "kcal": 2400,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 94,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.94
+          }
+        },
+        {
+          "round": 2,
+          "kcal": 2400,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 94,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.94
+          }
+        },
+        {
+          "round": 3,
+          "kcal": 2400,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 55,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.55
+          }
+        },
+        {
+          "round": 3,
+          "kcal": 2400,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 55,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.55
+          }
+        },
+        {
+          "round": 4,
+          "kcal": 2400,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 18,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.18
+          }
+        }
+      ],
+      "abilityUses": [],
+      "availCalls": [],
+      "npcTurns": [],
+      "npcAbilityCalls": [],
+      "hits": [
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 75,
+          "returned": 94,
+          "hpBefore": 900,
+          "hpAfter": 806,
+          "hpDelta": -94,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 2,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's attack",
+          "requested": 62,
+          "returned": 39,
+          "hpBefore": 94,
+          "hpAfter": 55,
+          "hpDelta": -39,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 74,
+          "returned": 93,
+          "hpBefore": 806,
+          "hpAfter": 713,
+          "hpDelta": -93,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 59,
+          "returned": 37,
+          "hpBefore": 55,
+          "hpAfter": 18,
+          "hpDelta": -37,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's attack",
+          "requested": 39,
+          "returned": 24,
+          "hpBefore": 18,
+          "hpAfter": -6,
+          "hpDelta": -24,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "🎙️ It moves."
+        },
+        {
+          "kind": "say",
+          "line": "George heads out for water. \"Off to the well — back with a full skin.\" The pantry won't fill itself."
+        },
+        {
+          "kind": "say",
+          "line": "💧 Tariq returns with water: +4 clean."
+        },
+        {
+          "kind": "say",
+          "line": "— DUSK — Animals stir again. Shadows lengthen."
+        },
+        {
+          "kind": "say",
+          "line": "Too far — 3 squares left."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they stood their ground, poor brave fools.\" The spotlight widens. (No weight yet — just the story starting.) (5 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 94 (Phase blade)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they ran, and the spotlight followed.\" The spotlight narrows. Your dodge feels watched. (-10% dodge.) (4 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 It connects!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 23."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's attack hits you for 39."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Final Chapter — strikes one target after a windup. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 93 (Phase blade)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they bled, politely, where everyone could see.\" The narration lingers on your wounds. (Bleeds last 1 round longer.) (3 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 22."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 37."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "say",
+          "line": "Too far — 3 squares left."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they knelt, and the story approved.\" The story leans in. (The Eulogy's attacks +15.) (2 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 eulogy's attack finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 15."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's attack hits you for 24."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Zhanibek Bisenov is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "Zhanibek is gone — dead. The errand dies with them; nobody's waiting on those dandelions now."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Zhanibek Bisenov is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Zhanibek kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "\"Zhanibek's gone.\" Luis looks at you for a long moment. \"You're not Zhanibek.\" No heat in it. Just fact. You'll have to earn this face."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. George blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Tainted Bait (Level 1). Your bait is tainted — traps catch 50% more. (The poison’s in the bait, not your hands. Mostly.)"
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Reading Tracks (Level 1). Fresh tracks have sharp edges. Old tracks crumble. You can tell how recently something passed."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Animal Behavior (Level 1). Most animals flee. Give them an escape route and they take it. Cornered animals fight."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Tripwire (Level 1). You string a wire at ankle height. The next monster that moves eats dirt — prone, stunned, and embarrassed. (Sets up the party.)"
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Field Dressing (Level 1). Break down game fast and clean. Less waste, more meat, usable parts."
+        },
+        {
+          "kind": "say",
+          "line": "The warm hum behind your ribs is gone. The reactor went with Zhanibek's body — it does not come out, and it does not pass on. Hunger is back on the table. (One reactor per world, and the world already spent its one.)"
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Zhanibek Bisenov, 69 days. The mantle passes to George Diop."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. George Diop, 19 — an exterminator. His hands know different work now: Beast-calm, Echo Location, Berserker Rage."
+        },
+        {
+          "kind": "say",
+          "line": "The village's quarrel was with Zhanibek — and Zhanibek is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers."
+        },
+        {
+          "kind": "say",
+          "line": "You knew Zhanibek — not the office, the person. The fire keeps expecting him, and so do you. That's a heavier kind of stepping up. (+5 trauma)"
+        },
+        {
+          "kind": "say",
+          "line": "At the grave, Tom, Luis, Nino and 1 more speak for George — \"Zhanibek trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew George before the Codex did — his name already carried weight here."
+        }
+      ],
+      "transcriptOverflow": false,
+      "end": {
+        "result": "lost",
+        "day": 69,
+        "round": 4,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "eulogy",
+            "alive": true,
+            "fled": false,
+            "hp": 713,
+            "maxHp": 900
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "gen_5yg74m1",
+            "alive": false,
+            "fled": false,
+            "hp": -6,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "gen_5yg74m1"
+        ],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 2,
+      "type": "tb",
+      "day": 92,
+      "mid": "suburb",
+      "wave": 4,
+      "fightId": "fmgpspij6_cv1q6p",
+      "scholarAtStart": "luis_fernandez",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "luis_fernandez",
+          "hpStart": 96.88888888888889,
+          "maxHp": 100,
+          "held": [],
+          "heldReadError": null
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "suburb",
+          "hpStart": 1338,
+          "maxHp": 1338,
+          "wave": 4,
+          "joinedMidFight": false,
+          "trickKnown": false
+        }
+      ],
+      "scholarHeld": [],
+      "scholarHeldReadError": null,
+      "scholarKcalStart": 2400,
+      "foodTierStart": "secure",
+      "turns": [
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 1,
+          "kcal": 2400
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 2,
+          "kcal": 2400
+        },
+        {
+          "cls": "strike",
+          "round": 3,
+          "kcal": 2400
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 3,
+          "kcal": 2400
+        },
+        {
+          "cls": "strike",
+          "round": 4,
+          "kcal": 2400
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 4,
+          "kcal": 2400
+        },
+        {
+          "cls": "strike",
+          "round": 5,
+          "kcal": 2400
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 5,
+          "kcal": 2400
+        },
+        {
+          "cls": "strike",
+          "round": 6,
+          "kcal": 2400
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 6,
+          "kcal": 2400
+        },
+        {
+          "cls": "strike",
+          "round": 7,
+          "kcal": 2400
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 7,
+          "kcal": 2400
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 8,
+          "kcal": 2400
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 9,
+          "kcal": 2400
+        }
+      ],
+      "availSnapshots": [
+        {
+          "round": 1,
+          "kcal": 2400,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 1338,
+            "scholarHp": 96.88888888888889,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.9688888888888889
+          }
+        },
+        {
+          "round": 2,
+          "kcal": 2400,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 1338,
+            "scholarHp": 96.88888888888889,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.9688888888888889
+          }
+        },
+        {
+          "round": 3,
+          "kcal": 2400,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 1338,
+            "scholarHp": 79.88888888888889,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.7988888888888889
+          }
+        },
+        {
+          "round": 3,
+          "kcal": 2400,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 1338,
+            "scholarHp": 79.88888888888889,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.7988888888888889
+          }
+        },
+        {
+          "round": 4,
+          "kcal": 2400,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 1338,
+            "scholarHp": 79.88888888888889,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.7988888888888889
+          }
+        },
+        {
+          "round": 4,
+          "kcal": 2400,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 1338,
+            "scholarHp": 79.88888888888889,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.7988888888888889
+          }
+        },
+        {
+          "round": 5,
+          "kcal": 2400,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 1338,
+            "scholarHp": 55.888888888888886,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.5588888888888889
+          }
+        },
+        {
+          "round": 5,
+          "kcal": 2400,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 1338,
+            "scholarHp": 55.888888888888886,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.5588888888888889
+          }
+        },
+        {
+          "round": 6,
+          "kcal": 2400,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 1338,
+            "scholarHp": 55.888888888888886,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.5588888888888889
+          }
+        },
+        {
+          "round": 6,
+          "kcal": 2400,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 1338,
+            "scholarHp": 55.888888888888886,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.5588888888888889
+          }
+        },
+        {
+          "round": 7,
+          "kcal": 2400,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 1338,
+            "scholarHp": 37.888888888888886,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.37888888888888883
+          }
+        },
+        {
+          "round": 7,
+          "kcal": 2400,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 1338,
+            "scholarHp": 37.888888888888886,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.37888888888888883
+          }
+        },
+        {
+          "round": 8,
+          "kcal": 2400,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 1338,
+            "scholarHp": 17.888888888888886,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.17888888888888885
+          }
+        },
+        {
+          "round": 9,
+          "kcal": 2400,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 1338,
+            "scholarHp": 0.8888888888888857,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.008888888888888858
+          }
+        }
+      ],
+      "abilityUses": [],
+      "availCalls": [],
+      "npcTurns": [],
+      "npcAbilityCalls": [],
+      "hits": [
+        {
+          "round": 2,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's attack",
+          "requested": 37,
+          "returned": 17,
+          "hpBefore": 96.88888888888889,
+          "hpAfter": 79.88888888888889,
+          "hpDelta": -17,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 73,
+          "returned": 148,
+          "hpBefore": 1338,
+          "hpAfter": 1190,
+          "hpDelta": -148,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 70,
+          "returned": 142,
+          "hpBefore": 1190,
+          "hpAfter": 1048,
+          "hpDelta": -142,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's attack",
+          "requested": 53,
+          "returned": 24,
+          "hpBefore": 79.88888888888889,
+          "hpAfter": 55.888888888888886,
+          "hpDelta": -24,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 5,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 68,
+          "returned": 138,
+          "hpBefore": 1048,
+          "hpAfter": 910,
+          "hpDelta": -138,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 5,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's Property Tax",
+          "requested": 55,
+          "returned": 0,
+          "hpBefore": 55.888888888888886,
+          "hpAfter": 55.888888888888886,
+          "hpDelta": 0,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 6,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 68,
+          "returned": 138,
+          "hpBefore": 910,
+          "hpAfter": 772,
+          "hpDelta": -138,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 6,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's Property Tax",
+          "requested": 41,
+          "returned": 18,
+          "hpBefore": 55.888888888888886,
+          "hpAfter": 37.888888888888886,
+          "hpDelta": -18,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 7,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 67,
+          "returned": 136,
+          "hpBefore": 772,
+          "hpAfter": 636,
+          "hpDelta": -136,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 7,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's Property Tax",
+          "requested": 44,
+          "returned": 20,
+          "hpBefore": 37.888888888888886,
+          "hpAfter": 17.888888888888886,
+          "hpDelta": -20,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 8,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's Property Tax",
+          "requested": 39,
+          "returned": 17,
+          "hpBefore": 17.888888888888886,
+          "hpAfter": 0.8888888888888857,
+          "hpDelta": -17,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 9,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's Property Tax",
+          "requested": 55,
+          "returned": 25,
+          "hpBefore": 0.8888888888888857,
+          "hpAfter": -24.111111111111114,
+          "hpDelta": -25,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 It connects!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 20."
+        },
+        {
+          "kind": "say",
+          "line": "Suburb's attack hits you for 17."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: HOA Fine — strikes one target after a windup. You won't forget this."
+        },
+        {
+          "kind": "say",
+          "line": "The streets rearrange — every road curves back. You were going somewhere. You are going in a circle now."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(suburb's hide absorbs 14.)"
+        },
+        {
+          "kind": "say",
+          "line": "FEASTED ×2.03: the feast was the weapon."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the suburb for 148 (Phase blade)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(suburb's hide absorbs 14.)"
+        },
+        {
+          "kind": "say",
+          "line": "FEASTED ×2.03: the feast was the weapon."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the suburb for 142 (Phase blade)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 It connects!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 29."
+        },
+        {
+          "kind": "say",
+          "line": "Suburb's attack hits you for 24."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Property Tax — strikes one target after a windup. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 5!"
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(suburb's hide absorbs 14.)"
+        },
+        {
+          "kind": "say",
+          "line": "FEASTED ×2.03: the feast was the weapon."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the suburb for 138 (Phase blade)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Property Tax!"
+        },
+        {
+          "kind": "say",
+          "line": "You slip aside — it misses clean. (footwork)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 6!"
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(suburb's hide absorbs 14.)"
+        },
+        {
+          "kind": "say",
+          "line": "FEASTED ×2.03: the feast was the weapon."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the suburb for 138 (Phase blade)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Property Tax!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 23."
+        },
+        {
+          "kind": "say",
+          "line": "Suburb's Property Tax hits you for 18."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 7!"
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(suburb's hide absorbs 14.)"
+        },
+        {
+          "kind": "say",
+          "line": "💪 Your Strength grows — 8. The work is changing you."
+        },
+        {
+          "kind": "say",
+          "line": "✨ True Swing — Your strikes land cleaner. (tier 1)"
+        },
+        {
+          "kind": "say",
+          "line": "FEASTED ×2.03: the feast was the weapon."
+        },
+        {
+          "kind": "say",
+          "line": "suburb is BLEEDING — and it likes it. Louder, faster, no more feints."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the suburb for 136 (Phase blade)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Property Tax!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 24."
+        },
+        {
+          "kind": "say",
+          "line": "Suburb's Property Tax hits you for 20."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 8!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Property Tax!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 22."
+        },
+        {
+          "kind": "say",
+          "line": "Suburb's Property Tax hits you for 17."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 9!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Property Tax!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 30."
+        },
+        {
+          "kind": "say",
+          "line": "Suburb's Property Tax hits you for 25."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Luis Fernandez is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Luis Fernandez is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Luis kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "\"Luis's gone.\" Tom looks at you for a long moment. \"You're not Luis.\" No heat in it. Just fact. You'll have to earn this face."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Nino blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Reading Tracks (Level 1). Fresh tracks have sharp edges. Old tracks crumble. You can tell how recently something passed."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Animal Behavior (Level 1). Most animals flee. Give them an escape route and they take it. Cornered animals fight."
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Luis Fernandez, 92 days. The mantle passes to Nino Kapanadze."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Nino Kapanadze, 56 — a dry cleaner. Her hands know different work now: Green Whisper, Green Thumb, Literally."
+        },
+        {
+          "kind": "say",
+          "line": "The village's quarrel was with Luis — and Luis is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers."
+        },
+        {
+          "kind": "say",
+          "line": "You knew Luis — not the office, the person. The fire keeps expecting him, and so do you. That's a heavier kind of stepping up. (+5 trauma)"
+        },
+        {
+          "kind": "say",
+          "line": "At the grave, Tom, Zoltan, Tariq speak for Nino — \"Luis trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew Nino before the Codex did — her name already carried weight here."
+        }
+      ],
+      "transcriptOverflow": false,
+      "end": {
+        "result": "lost",
+        "day": 92,
+        "round": 9,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "suburb",
+            "alive": true,
+            "fled": false,
+            "hp": 636,
+            "maxHp": 1338
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "luis_fernandez",
+            "alive": false,
+            "fled": false,
+            "hp": -24.111111111111114,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "luis_fernandez"
+        ],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 3,
+      "type": "tb",
+      "day": 94,
+      "mid": "eulogy",
+      "wave": 4,
+      "fightId": "fmgpspikh_exguxf",
+      "scholarAtStart": "nino_kapanadze",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "nino_kapanadze",
+          "hpStart": 100,
+          "maxHp": 100,
+          "held": [],
+          "heldReadError": null
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "eulogy",
+          "hpStart": 869,
+          "maxHp": 900,
+          "wave": 4,
+          "joinedMidFight": false,
+          "trickKnown": false
+        }
+      ],
+      "scholarHeld": [],
+      "scholarHeldReadError": null,
+      "scholarKcalStart": 2250,
+      "foodTierStart": "secure",
+      "turns": [
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 1,
+          "kcal": 2250
+        },
+        {
+          "cls": "strike",
+          "round": 2,
+          "kcal": 2250
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 2,
+          "kcal": 2250
+        },
+        {
+          "cls": "strike",
+          "round": 3,
+          "kcal": 2250
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 3,
+          "kcal": 2250
+        },
+        {
+          "cls": "strike",
+          "round": 4,
+          "kcal": 2250
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 4,
+          "kcal": 2250
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 5,
+          "kcal": 2250
+        }
+      ],
+      "availSnapshots": [
+        {
+          "round": 1,
+          "kcal": 2250,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 100,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 1
+          }
+        },
+        {
+          "round": 2,
+          "kcal": 2250,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 100,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 1
+          }
+        },
+        {
+          "round": 2,
+          "kcal": 2250,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 100,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 1
+          }
+        },
+        {
+          "round": 3,
+          "kcal": 2250,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 71,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.71
+          }
+        },
+        {
+          "round": 3,
+          "kcal": 2250,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 71,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.71
+          }
+        },
+        {
+          "round": 4,
+          "kcal": 2250,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 52,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.52
+          }
+        },
+        {
+          "round": 4,
+          "kcal": 2250,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 52,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.52
+          }
+        },
+        {
+          "round": 5,
+          "kcal": 2250,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 24,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.24
+          }
+        }
+      ],
+      "abilityUses": [],
+      "availCalls": [],
+      "npcTurns": [],
+      "npcAbilityCalls": [],
+      "hits": [
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 28,
+          "returned": 35,
+          "hpBefore": 869,
+          "hpAfter": 834,
+          "hpDelta": -35,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 2,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 68,
+          "returned": 29,
+          "hpBefore": 100,
+          "hpAfter": 71,
+          "hpDelta": -29,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 25,
+          "returned": 31,
+          "hpBefore": 834,
+          "hpAfter": 803,
+          "hpDelta": -31,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's attack",
+          "requested": 44,
+          "returned": 19,
+          "hpBefore": 71,
+          "hpAfter": 52,
+          "hpDelta": -19,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 25,
+          "returned": 31,
+          "hpBefore": 803,
+          "hpAfter": 772,
+          "hpDelta": -31,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 66,
+          "returned": 28,
+          "hpBefore": 52,
+          "hpAfter": 24,
+          "hpDelta": -28,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 5,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 62,
+          "returned": 27,
+          "hpBefore": 24,
+          "hpAfter": -3,
+          "hpDelta": -27,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "Tariq heads out for water. \"Fetching water. Somebody has to.\" The pantry won't fill itself."
+        },
+        {
+          "kind": "say",
+          "line": "— DUSK — Animals stir again. Shadows lengthen."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ Loud-Eyes's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they stood their ground, poor brave fools.\" The spotlight widens. (No weight yet — just the story starting.) (5 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 35 (Stone knife)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ Loud-Eyes's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they ran, and the spotlight followed.\" The spotlight narrows. Your dodge feels watched. (-10% dodge.) (4 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 39."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 29."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 31 (Stone knife)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ Loud-Eyes's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they bled, politely, where everyone could see.\" The narration lingers on your wounds. (Bleeds last 1 round longer.) (3 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 eulogy's attack finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 25."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's attack hits you for 19."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Epitaph — locks onto one target — moving won't dodge it. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 31 (Stone knife)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ Loud-Eyes's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they knelt, and the story approved.\" The story leans in. (The Eulogy's attacks +15.) (2 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 38."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 28."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 5!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ Loud-Eyes's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then — this is the last line — they ended.\" The last line hangs in the air. (It finishes next round.) (1 verse remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 35."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 27."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Nino Kapanadze is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "NINO — GONE. 5 open questions closed unanswered."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Nino Kapanadze is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Nino kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "\"Nino's gone.\" Tariq looks at you for a long moment. \"You're not Nino.\" No heat in it. Just fact. You'll have to earn this face."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Tom blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Tireless Stride (Level 1). You walk like water downhill — no wasted steps, no wasted breath. Every mile costs 15% less."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Engines (Level 1). Air, fuel, spark. Every dead engine is missing one of the three — diagnose in that order."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Reading Tracks (Level 1). Fresh tracks have sharp edges. Old tracks crumble. You can tell how recently something passed."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Animal Behavior (Level 1). Most animals flee. Give them an escape route and they take it. Cornered animals fight."
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Nino Kapanadze, 94 days. The mantle passes to Tom Baker."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Tom Baker, 45 — a truck driver. His hands know different work now: Beast-calm, Echo Location, Night Eyes, Trophy Room."
+        },
+        {
+          "kind": "say",
+          "line": "◈ The System updates its file: the new bearer <redacted> \"Stalker of the Apex Predator.\" It had a word for this one before the Codex came."
+        },
+        {
+          "kind": "say",
+          "line": "You knew Nino — not the office, the person. The fire keeps expecting her, and so do you. That's a heavier kind of stepping up. (+5 trauma)"
+        },
+        {
+          "kind": "say",
+          "line": "At the grave, Zoltan, Tariq speak for Tom — \"Nino trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew Tom before the Codex did — his name already carried weight here."
+        }
+      ],
+      "transcriptOverflow": false,
+      "end": {
+        "result": "lost",
+        "day": 94,
+        "round": 5,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "eulogy",
+            "alive": true,
+            "fled": false,
+            "hp": 772,
+            "maxHp": 900
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "nino_kapanadze",
+            "alive": false,
+            "fled": false,
+            "hp": -3,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "nino_kapanadze"
+        ],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 4,
+      "type": "tb",
+      "day": 95,
+      "mid": "eulogy",
+      "wave": 4,
+      "fightId": "fmgpspikz_cl4yio",
+      "scholarAtStart": "tom_baker",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "tom_baker",
+          "hpStart": 100,
+          "maxHp": 100,
+          "held": [],
+          "heldReadError": null
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "eulogy",
+          "hpStart": 900,
+          "maxHp": 900,
+          "wave": 4,
+          "joinedMidFight": false,
+          "trickKnown": false
+        }
+      ],
+      "scholarHeld": [],
+      "scholarHeldReadError": null,
+      "scholarKcalStart": 2221,
+      "foodTierStart": "secure",
+      "turns": [
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 1,
+          "kcal": 2221
+        },
+        {
+          "cls": "strike",
+          "round": 2,
+          "kcal": 2221
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 2,
+          "kcal": 2221
+        },
+        {
+          "cls": "strike",
+          "round": 3,
+          "kcal": 2221
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 3,
+          "kcal": 2221
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 4,
+          "kcal": 2221
+        }
+      ],
+      "availSnapshots": [
+        {
+          "round": 1,
+          "kcal": 2221,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 100,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 1
+          }
+        },
+        {
+          "round": 2,
+          "kcal": 2221,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 100,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 1
+          }
+        },
+        {
+          "round": 2,
+          "kcal": 2221,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 100,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 1
+          }
+        },
+        {
+          "round": 3,
+          "kcal": 2221,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 64,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.64
+          }
+        },
+        {
+          "round": 3,
+          "kcal": 2221,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 64,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.64
+          }
+        },
+        {
+          "round": 4,
+          "kcal": 2221,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 20,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.2
+          }
+        }
+      ],
+      "abilityUses": [],
+      "availCalls": [],
+      "npcTurns": [],
+      "npcAbilityCalls": [],
+      "hits": [
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 58,
+          "returned": 73,
+          "hpBefore": 900,
+          "hpAfter": 827,
+          "hpDelta": -73,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 2,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Epitaph",
+          "requested": 51,
+          "returned": 36,
+          "hpBefore": 100,
+          "hpAfter": 64,
+          "hpDelta": -36,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 61,
+          "returned": 76,
+          "hpBefore": 827,
+          "hpAfter": 751,
+          "hpDelta": -76,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 62,
+          "returned": 44,
+          "hpBefore": 64,
+          "hpAfter": 20,
+          "hpDelta": -44,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 61,
+          "returned": 43,
+          "hpBefore": 20,
+          "hpAfter": -23,
+          "hpDelta": -43,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "🎙️ It moves."
+        },
+        {
+          "kind": "say",
+          "line": "Iron cold. Even the ticks are shelved."
+        },
+        {
+          "kind": "say",
+          "line": "— MIDDAY — Honest work hours. Heat builds."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ Loud-Eyes's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they stood their ground, poor brave fools.\" The spotlight widens. (No weight yet — just the story starting.) (5 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 73 (Hardlight knife)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ Loud-Eyes's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they ran, and the spotlight followed.\" The spotlight narrows. Your dodge feels watched. (-10% dodge.) (4 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 eulogy's Epitaph finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 15."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Epitaph hits you for 36."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 76 (Hardlight knife)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ Loud-Eyes's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they bled, politely, where everyone could see.\" The narration lingers on your wounds. (Bleeds last 1 round longer.) (3 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 18."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 44."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ Loud-Eyes's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they knelt, and the story approved.\" The story leans in. (The Eulogy's attacks +15.) (2 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 18."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 43."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Tom Baker is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Tom Baker is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Tom kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "\"Tom's gone.\" Zoltan looks at you for a long moment. \"You're not Tom.\" No heat in it. Just fact. You'll have to earn this face."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Tariq blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Wiring & Circuits (Level 1). Volts, amps, and why you respect both. Safe splices, real grounds, no shortcuts."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Reading Tracks (Level 1). Fresh tracks have sharp edges. Old tracks crumble. You can tell how recently something passed."
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Tom Baker, 95 days. The mantle passes to Tariq Mahmood."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Tariq Mahmood, 49 — an electrician. His hands know different work now: Green Whisper."
+        },
+        {
+          "kind": "say",
+          "line": "You knew Tom — not the office, the person. The fire keeps expecting him, and so do you. That's a heavier kind of stepping up. (+5 trauma)"
+        },
+        {
+          "kind": "say",
+          "line": "At the grave, Zoltan speaks for Tariq — \"Tom trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew Tariq before the Codex did — his name already carried weight here."
+        }
+      ],
+      "transcriptOverflow": false,
+      "end": {
+        "result": "lost",
+        "day": 95,
+        "round": 4,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "eulogy",
+            "alive": true,
+            "fled": false,
+            "hp": 751,
+            "maxHp": 900
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "tom_baker",
+            "alive": false,
+            "fled": false,
+            "hp": -23,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "tom_baker"
+        ],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 5,
+      "type": "tb",
+      "day": 95,
+      "mid": "eulogy",
+      "wave": 4,
+      "fightId": "fmgpspil8_48udpn",
+      "scholarAtStart": "tariq_mahmood",
+      "partySizeStart": 2,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "tariq_mahmood",
+          "hpStart": 100,
+          "maxHp": 100,
+          "held": [],
+          "heldReadError": null
+        },
+        {
+          "key": "v_zoltan_nagy",
+          "kind": "villager",
+          "vid": "zoltan_nagy",
+          "hpStart": 100,
+          "maxHp": 100,
+          "held": [
+            {
+              "id": "game_sense",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "read_stance",
+                  "cost": {
+                    "turn": true
+                  }
+                }
+              ]
+            },
+            {
+              "id": "animal_ken",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "calm_beast",
+                  "cost": {
+                    "turn": true
+                  }
+                }
+              ]
+            }
+          ],
+          "heldReadError": null
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "eulogy",
+          "hpStart": 751,
+          "maxHp": 900,
+          "wave": 4,
+          "joinedMidFight": false,
+          "trickKnown": false
+        }
+      ],
+      "scholarHeld": [],
+      "scholarHeldReadError": null,
+      "scholarKcalStart": 2300,
+      "foodTierStart": "secure",
+      "turns": [
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 1,
+          "kcal": 2300
+        },
+        {
+          "cls": "strike",
+          "round": 2,
+          "kcal": 2300
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 2,
+          "kcal": 2300
+        },
+        {
+          "cls": "strike",
+          "round": 3,
+          "kcal": 2300
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 3,
+          "kcal": 2300
+        },
+        {
+          "cls": "strike",
+          "round": 4,
+          "kcal": 2300
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 4,
+          "kcal": 2300
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 5,
+          "kcal": 2300
+        }
+      ],
+      "availSnapshots": [
+        {
+          "round": 1,
+          "kcal": 2300,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 100,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 1
+          }
+        },
+        {
+          "round": 2,
+          "kcal": 2300,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 100,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 1
+          }
+        },
+        {
+          "round": 2,
+          "kcal": 2300,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 100,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 1
+          }
+        },
+        {
+          "round": 3,
+          "kcal": 2300,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 60,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.6
+          }
+        },
+        {
+          "round": 3,
+          "kcal": 2300,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 60,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.6
+          }
+        },
+        {
+          "round": 4,
+          "kcal": 2300,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 51,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.51
+          }
+        },
+        {
+          "round": 4,
+          "kcal": 2300,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 51,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.51
+          }
+        },
+        {
+          "round": 5,
+          "kcal": 2300,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 16,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.16
+          }
+        }
+      ],
+      "abilityUses": [],
+      "availCalls": [],
+      "npcTurns": [
+        {
+          "vid": "zoltan_nagy",
+          "hp": 100,
+          "maxHp": 100,
+          "mx": 1,
+          "my": 5,
+          "stunned": 0,
+          "fled": false,
+          "fieldMedicated": false,
+          "warCried": false,
+          "screamedDay": null,
+          "sandThrown": false,
+          "loomed": false,
+          "raged": false,
+          "shoved": false,
+          "liveMonsters": [
+            {
+              "key": "m_0",
+              "mid": "eulogy",
+              "hp": 751,
+              "maxHp": 900,
+              "mx": 5,
+              "my": 3,
+              "blind": 0,
+              "stunned": 0,
+              "frozen": 0,
+              "bound": 0,
+              "hesitate": 0,
+              "elderCalm": false
+            }
+          ],
+          "foodTier": "secure",
+          "round": 1,
+          "abilityCalled": true,
+          "exitHp": 100,
+          "exitFled": false
+        },
+        {
+          "vid": "zoltan_nagy",
+          "hp": 100,
+          "maxHp": 100,
+          "mx": 3,
+          "my": 3,
+          "stunned": 0,
+          "fled": false,
+          "fieldMedicated": false,
+          "warCried": false,
+          "screamedDay": null,
+          "sandThrown": false,
+          "loomed": false,
+          "raged": false,
+          "shoved": false,
+          "liveMonsters": [
+            {
+              "key": "m_0",
+              "mid": "eulogy",
+              "hp": 732,
+              "maxHp": 900,
+              "mx": 5,
+              "my": 3,
+              "blind": 0,
+              "stunned": 0,
+              "frozen": 0,
+              "bound": 0,
+              "hesitate": 0,
+              "elderCalm": false
+            }
+          ],
+          "foodTier": "secure",
+          "round": 2,
+          "abilityCalled": true,
+          "exitHp": 100,
+          "exitFled": false
+        },
+        {
+          "vid": "zoltan_nagy",
+          "hp": 100,
+          "maxHp": 100,
+          "mx": 4,
+          "my": 2,
+          "stunned": 0,
+          "fled": false,
+          "fieldMedicated": false,
+          "warCried": false,
+          "screamedDay": null,
+          "sandThrown": false,
+          "loomed": false,
+          "raged": false,
+          "shoved": false,
+          "liveMonsters": [
+            {
+              "key": "m_0",
+              "mid": "eulogy",
+              "hp": 700,
+              "maxHp": 900,
+              "mx": 5,
+              "my": 3,
+              "blind": 0,
+              "stunned": 0,
+              "frozen": 0,
+              "bound": 0,
+              "hesitate": 0,
+              "elderCalm": false
+            }
+          ],
+          "foodTier": "secure",
+          "round": 3,
+          "abilityCalled": true,
+          "exitHp": 100,
+          "exitFled": false
+        },
+        {
+          "vid": "zoltan_nagy",
+          "hp": 100,
+          "maxHp": 100,
+          "mx": 3,
+          "my": 3,
+          "stunned": 0,
+          "fled": false,
+          "fieldMedicated": false,
+          "warCried": false,
+          "screamedDay": null,
+          "sandThrown": false,
+          "loomed": false,
+          "raged": false,
+          "shoved": false,
+          "liveMonsters": [
+            {
+              "key": "m_0",
+              "mid": "eulogy",
+              "hp": 684,
+              "maxHp": 900,
+              "mx": 5,
+              "my": 3,
+              "blind": 0,
+              "stunned": 0,
+              "frozen": 0,
+              "bound": 0,
+              "hesitate": 0,
+              "elderCalm": false
+            }
+          ],
+          "foodTier": "secure",
+          "round": 4,
+          "abilityCalled": true,
+          "exitHp": 100,
+          "exitFled": false
+        },
+        {
+          "vid": "zoltan_nagy",
+          "hp": 100,
+          "maxHp": 100,
+          "mx": 4,
+          "my": 2,
+          "stunned": 0,
+          "fled": false,
+          "fieldMedicated": false,
+          "warCried": false,
+          "screamedDay": null,
+          "sandThrown": false,
+          "loomed": false,
+          "raged": false,
+          "shoved": false,
+          "liveMonsters": [
+            {
+              "key": "m_0",
+              "mid": "eulogy",
+              "hp": 673,
+              "maxHp": 900,
+              "mx": 5,
+              "my": 3,
+              "blind": 0,
+              "stunned": 0,
+              "frozen": 0,
+              "bound": 0,
+              "hesitate": 0,
+              "elderCalm": false
+            }
+          ],
+          "foodTier": "secure",
+          "round": 5,
+          "abilityCalled": true,
+          "exitHp": 100,
+          "exitFled": false
+        }
+      ],
+      "npcAbilityCalls": [
+        {
+          "vid": "zoltan_nagy",
+          "round": 1,
+          "returned": false,
+          "fired": [],
+          "flagsBefore": {
+            "screamedDay": null,
+            "sand": false,
+            "loomed": false,
+            "raged": false,
+            "shoved": false
+          },
+          "flagsAfter": {
+            "screamedDay": null,
+            "sand": false,
+            "loomed": false,
+            "raged": false,
+            "shoved": false
+          },
+          "twinBefore": {
+            "warCried": false,
+            "stared": false,
+            "walkedIn": false,
+            "goaded": false,
+            "bound": false,
+            "ambushed": false,
+            "haymakerPressed": false,
+            "deadAimed": false,
+            "aimed": false,
+            "tradeOpened": false,
+            "debtSettled": false,
+            "readFight": false,
+            "tripwireSet": false
+          },
+          "twinAfter": {
+            "warCried": false,
+            "stared": false,
+            "walkedIn": false,
+            "goaded": false,
+            "bound": false,
+            "ambushed": false,
+            "haymakerPressed": false,
+            "deadAimed": false,
+            "aimed": false,
+            "tradeOpened": false,
+            "debtSettled": false,
+            "readFight": false,
+            "tripwireSet": false
+          },
+          "kitDiffs": []
+        },
+        {
+          "vid": "zoltan_nagy",
+          "round": 2,
+          "returned": false,
+          "fired": [],
+          "flagsBefore": {
+            "screamedDay": null,
+            "sand": false,
+            "loomed": false,
+            "raged": false,
+            "shoved": false
+          },
+          "flagsAfter": {
+            "screamedDay": null,
+            "sand": false,
+            "loomed": false,
+            "raged": false,
+            "shoved": false
+          },
+          "twinBefore": {
+            "warCried": false,
+            "stared": false,
+            "walkedIn": false,
+            "goaded": false,
+            "bound": false,
+            "ambushed": false,
+            "haymakerPressed": false,
+            "deadAimed": false,
+            "aimed": false,
+            "tradeOpened": false,
+            "debtSettled": false,
+            "readFight": false,
+            "tripwireSet": false
+          },
+          "twinAfter": {
+            "warCried": false,
+            "stared": false,
+            "walkedIn": false,
+            "goaded": false,
+            "bound": false,
+            "ambushed": false,
+            "haymakerPressed": false,
+            "deadAimed": false,
+            "aimed": false,
+            "tradeOpened": false,
+            "debtSettled": false,
+            "readFight": false,
+            "tripwireSet": false
+          },
+          "kitDiffs": []
+        },
+        {
+          "vid": "zoltan_nagy",
+          "round": 3,
+          "returned": false,
+          "fired": [],
+          "flagsBefore": {
+            "screamedDay": null,
+            "sand": false,
+            "loomed": false,
+            "raged": false,
+            "shoved": false
+          },
+          "flagsAfter": {
+            "screamedDay": null,
+            "sand": false,
+            "loomed": false,
+            "raged": false,
+            "shoved": false
+          },
+          "twinBefore": {
+            "warCried": false,
+            "stared": false,
+            "walkedIn": false,
+            "goaded": false,
+            "bound": false,
+            "ambushed": false,
+            "haymakerPressed": false,
+            "deadAimed": false,
+            "aimed": false,
+            "tradeOpened": false,
+            "debtSettled": false,
+            "readFight": false,
+            "tripwireSet": false
+          },
+          "twinAfter": {
+            "warCried": false,
+            "stared": false,
+            "walkedIn": false,
+            "goaded": false,
+            "bound": false,
+            "ambushed": false,
+            "haymakerPressed": false,
+            "deadAimed": false,
+            "aimed": false,
+            "tradeOpened": false,
+            "debtSettled": false,
+            "readFight": false,
+            "tripwireSet": false
+          },
+          "kitDiffs": []
+        },
+        {
+          "vid": "zoltan_nagy",
+          "round": 4,
+          "returned": false,
+          "fired": [],
+          "flagsBefore": {
+            "screamedDay": null,
+            "sand": false,
+            "loomed": false,
+            "raged": false,
+            "shoved": false
+          },
+          "flagsAfter": {
+            "screamedDay": null,
+            "sand": false,
+            "loomed": false,
+            "raged": false,
+            "shoved": false
+          },
+          "twinBefore": {
+            "warCried": false,
+            "stared": false,
+            "walkedIn": false,
+            "goaded": false,
+            "bound": false,
+            "ambushed": false,
+            "haymakerPressed": false,
+            "deadAimed": false,
+            "aimed": false,
+            "tradeOpened": false,
+            "debtSettled": false,
+            "readFight": false,
+            "tripwireSet": false
+          },
+          "twinAfter": {
+            "warCried": false,
+            "stared": false,
+            "walkedIn": false,
+            "goaded": false,
+            "bound": false,
+            "ambushed": false,
+            "haymakerPressed": false,
+            "deadAimed": false,
+            "aimed": false,
+            "tradeOpened": false,
+            "debtSettled": false,
+            "readFight": false,
+            "tripwireSet": false
+          },
+          "kitDiffs": []
+        },
+        {
+          "vid": "zoltan_nagy",
+          "round": 5,
+          "returned": false,
+          "fired": [],
+          "flagsBefore": {
+            "screamedDay": null,
+            "sand": false,
+            "loomed": false,
+            "raged": false,
+            "shoved": false
+          },
+          "flagsAfter": {
+            "screamedDay": null,
+            "sand": false,
+            "loomed": false,
+            "raged": false,
+            "shoved": false
+          },
+          "twinBefore": {
+            "warCried": false,
+            "stared": false,
+            "walkedIn": false,
+            "goaded": false,
+            "bound": false,
+            "ambushed": false,
+            "haymakerPressed": false,
+            "deadAimed": false,
+            "aimed": false,
+            "tradeOpened": false,
+            "debtSettled": false,
+            "readFight": false,
+            "tripwireSet": false
+          },
+          "twinAfter": {
+            "warCried": false,
+            "stared": false,
+            "walkedIn": false,
+            "goaded": false,
+            "bound": false,
+            "ambushed": false,
+            "haymakerPressed": false,
+            "deadAimed": false,
+            "aimed": false,
+            "tradeOpened": false,
+            "debtSettled": false,
+            "readFight": false,
+            "tripwireSet": false
+          },
+          "kitDiffs": []
+        }
+      ],
+      "hits": [
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 15,
+          "returned": 19,
+          "hpBefore": 751,
+          "hpAfter": 732,
+          "hpDelta": -19,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_zoltan_nagy",
+          "sourceLabel": "Zoltan",
+          "requested": 12,
+          "returned": 12,
+          "hpBefore": 732,
+          "hpAfter": 720,
+          "hpDelta": -12,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "ally"
+        },
+        {
+          "round": 2,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 70,
+          "returned": 40,
+          "hpBefore": 100,
+          "hpAfter": 60,
+          "hpDelta": -40,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 16,
+          "returned": 20,
+          "hpBefore": 720,
+          "hpAfter": 700,
+          "hpDelta": -20,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Epitaph",
+          "requested": 36,
+          "returned": 21,
+          "hpBefore": 72,
+          "hpAfter": 51,
+          "hpDelta": -21,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 13,
+          "returned": 16,
+          "hpBefore": 700,
+          "hpAfter": 684,
+          "hpDelta": -16,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_zoltan_nagy",
+          "sourceLabel": "Zoltan",
+          "requested": 11,
+          "returned": 11,
+          "hpBefore": 684,
+          "hpAfter": 673,
+          "hpDelta": -11,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "ally"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 60,
+          "returned": 35,
+          "hpBefore": 51,
+          "hpAfter": 16,
+          "hpDelta": -35,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 5,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_zoltan_nagy",
+          "sourceLabel": "Zoltan",
+          "requested": 10,
+          "returned": 10,
+          "hpBefore": 673,
+          "hpAfter": 663,
+          "hpDelta": -10,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "ally"
+        },
+        {
+          "round": 5,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 70,
+          "returned": 40,
+          "hpBefore": 16,
+          "hpAfter": -24,
+          "hpDelta": -40,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "🎙️ It moves."
+        },
+        {
+          "kind": "say",
+          "line": "🍲 Tariq cooked for the haven — meals stretched. Tariq worked the smoke racks too — 2 batches preserved (~3200 kcal, keeps a couple of weeks)."
+        },
+        {
+          "kind": "say",
+          "line": "— DUSK — Animals stir again. Shadows lengthen."
+        },
+        {
+          "kind": "say",
+          "line": "No path there."
+        },
+        {
+          "kind": "sysSay",
+          "line": "Zoltan's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ Loud-Eyes's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they stood their ground, poor brave fools.\" The spotlight widens. (No weight yet — just the story starting.) (5 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 19 (Kitchen knife)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Zoltan's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Zoltan strikes the Loud-Eyes."
+        },
+        {
+          "kind": "say",
+          "line": "Zoltan hits eulogy for 12."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ Loud-Eyes's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Too close. The eulogy's attention SNAPS to you — proximity overrules patience."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they ran, and the spotlight followed.\" The spotlight narrows. Your dodge feels watched. (-10% dodge.) (4 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 30."
+        },
+        {
+          "kind": "say",
+          "line": "Zoltan shouts: \"Move! MOVE!\""
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 40."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 20 (Kitchen knife)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Zoltan's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Zoltan patches you up (+12 HP). \"Hold still!\""
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ Loud-Eyes's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they bled, politely, where everyone could see.\" The narration lingers on your wounds. (Bleeds last 1 round longer.) (3 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 eulogy's Epitaph finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 15."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Epitaph hits you for 21."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 16 (Kitchen knife)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Zoltan's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Zoltan strikes the Loud-Eyes."
+        },
+        {
+          "kind": "say",
+          "line": "Zoltan hits eulogy for 11."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ Loud-Eyes's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Too close. The eulogy's attention SNAPS to you — proximity overrules patience."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they knelt, and the story approved.\" The story leans in. (The Eulogy's attacks +15.) (2 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 25."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 35."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 5!"
+        },
+        {
+          "kind": "say",
+          "line": "No path there."
+        },
+        {
+          "kind": "sysSay",
+          "line": "Zoltan's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Zoltan strikes the Loud-Eyes."
+        },
+        {
+          "kind": "say",
+          "line": "Zoltan hits eulogy for 10."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ Loud-Eyes's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Too close. The eulogy's attention SNAPS to you — proximity overrules patience."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then — this is the last line — they ended.\" The last line hangs in the air. (It finishes next round.) (1 verse remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 30."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 40."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Tariq Mahmood is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Tariq Mahmood is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Tariq kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Zoltan blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: The Forager’s Eye (Level 1). You walk slower and see more. Food was always there; now you notice it."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Reading Tracks (Level 1). Fresh tracks have sharp edges. Old tracks crumble. You can tell how recently something passed."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Animal Behavior (Level 1). Most animals flee. Give them an escape route and they take it. Cornered animals fight."
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Tariq Mahmood, 95 days. The mantle passes to Zoltan Nagy."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Zoltan Nagy, 52 — a Mushroom grower. His hands know different work now: Beast-calm."
+        },
+        {
+          "kind": "say",
+          "line": "You knew Tariq — not the office, the person. The fire keeps expecting him, and so do you. That's a heavier kind of stepping up. (+5 trauma)"
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew Zoltan before the Codex did — his name already carried weight here."
+        }
+      ],
+      "transcriptOverflow": false,
+      "end": {
+        "result": "lost",
+        "day": 95,
+        "round": 5,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "eulogy",
+            "alive": true,
+            "fled": false,
+            "hp": 663,
+            "maxHp": 900
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "tariq_mahmood",
+            "alive": false,
+            "fled": false,
+            "hp": -24,
+            "maxHp": 100
+          },
+          {
+            "key": "v_zoltan_nagy",
+            "kind": "villager",
+            "vid": "zoltan_nagy",
+            "alive": true,
+            "fled": false,
+            "hp": 100,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "tariq_mahmood"
+        ],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false,
+      "_npcTurnOpen": null
+    },
+    {
+      "seq": 6,
+      "type": "tb",
+      "day": 95,
+      "mid": "eulogy",
+      "wave": 4,
+      "fightId": "fmgpspill_70bnza",
+      "scholarAtStart": "zoltan_nagy",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "zoltan_nagy",
+          "hpStart": 100,
+          "maxHp": 100,
+          "held": [],
+          "heldReadError": null
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "eulogy",
+          "hpStart": 663,
+          "maxHp": 900,
+          "wave": 4,
+          "joinedMidFight": false,
+          "trickKnown": false
+        }
+      ],
+      "scholarHeld": [],
+      "scholarHeldReadError": null,
+      "scholarKcalStart": 1660,
+      "foodTierStart": "secure",
+      "turns": [
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 1,
+          "kcal": 2290
+        },
+        {
+          "cls": "strike",
+          "round": 2,
+          "kcal": 2290
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 2,
+          "kcal": 2290
+        },
+        {
+          "cls": "strike",
+          "round": 3,
+          "kcal": 2290
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 3,
+          "kcal": 2290
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 4,
+          "kcal": 2290
+        }
+      ],
+      "availSnapshots": [
+        {
+          "round": 1,
+          "kcal": 2290,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 100,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 1
+          }
+        },
+        {
+          "round": 2,
+          "kcal": 2290,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 100,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 1
+          }
+        },
+        {
+          "round": 2,
+          "kcal": 2290,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 100,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 1
+          }
+        },
+        {
+          "round": 3,
+          "kcal": 2290,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 56,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.56
+          }
+        },
+        {
+          "round": 3,
+          "kcal": 2290,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 56,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.56
+          }
+        },
+        {
+          "round": 4,
+          "kcal": 2290,
+          "avail": [],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 32,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.32
+          }
+        }
+      ],
+      "abilityUses": [],
+      "availCalls": [],
+      "npcTurns": [],
+      "npcAbilityCalls": [],
+      "hits": [
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 13,
+          "returned": 16,
+          "hpBefore": 663,
+          "hpAfter": 647,
+          "hpDelta": -16,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 2,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 69,
+          "returned": 44,
+          "hpBefore": 100,
+          "hpAfter": 56,
+          "hpDelta": -44,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 14,
+          "returned": 18,
+          "hpBefore": 647,
+          "hpAfter": 629,
+          "hpDelta": -18,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Epitaph",
+          "requested": 38,
+          "returned": 24,
+          "hpBefore": 56,
+          "hpAfter": 32,
+          "hpDelta": -24,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 57,
+          "returned": 37,
+          "hpBefore": 32,
+          "hpAfter": -5,
+          "hpDelta": -37,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "Took Foraged food (dried)."
+        },
+        {
+          "kind": "say",
+          "line": "You eat Foraged food (dried) (160 kcal)."
+        },
+        {
+          "kind": "say",
+          "line": "Took Foraged food (dried)."
+        },
+        {
+          "kind": "say",
+          "line": "You eat Foraged food (dried) (160 kcal)."
+        },
+        {
+          "kind": "say",
+          "line": "Your chewing echoes off the trees. Something out there heard. (encounters more likely tomorrow)"
+        },
+        {
+          "kind": "say",
+          "line": "Took Foraged food (dried)."
+        },
+        {
+          "kind": "say",
+          "line": "You eat Foraged food (dried) (160 kcal)."
+        },
+        {
+          "kind": "say",
+          "line": "Took Foraged food (dried)."
+        },
+        {
+          "kind": "say",
+          "line": "You eat Foraged food (dried) (160 kcal)."
+        },
+        {
+          "kind": "say",
+          "line": "Filled 1L (clean — Haven well). 3L carried (3kg). (-10 kcal hauling, 1 tick.) Cistern: 5L left."
+        },
+        {
+          "kind": "say",
+          "line": "No path there."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ Loud-Eyes's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they stood their ground, poor brave fools.\" The spotlight widens. (No weight yet — just the story starting.) (5 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 16 (Kitchen knife)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ Loud-Eyes's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they ran, and the spotlight followed.\" The spotlight narrows. Your dodge feels watched. (-10% dodge.) (4 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 25."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 44."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 18 (Kitchen knife)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ Loud-Eyes's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they bled, politely, where everyone could see.\" The narration lingers on your wounds. (Bleeds last 1 round longer.) (3 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 eulogy's Epitaph finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 14."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Epitaph hits you for 24."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "say",
+          "line": "No path there."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ Loud-Eyes's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they knelt, and the story approved.\" The story leans in. (The Eulogy's attacks +15.) (2 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 20."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 37."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Zoltan Nagy is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Zoltan Nagy is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Zoltan kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "No one is left to pick up the Codex. The village dies out — quietly, the way villages do. The season ends here."
+        }
+      ],
+      "transcriptOverflow": false,
+      "end": {
+        "result": "lost",
+        "day": 95,
+        "round": 4,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "eulogy",
+            "alive": true,
+            "fled": false,
+            "hp": 629,
+            "maxHp": 900
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "zoltan_nagy",
+            "alive": false,
+            "fled": false,
+            "hp": -5,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "zoltan_nagy"
+        ],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false
+    }
+  ],
+  "killsW4": 0,
+  "killRows": [],
+  "unlinkedKills": [],
+  "spawns": [
+    {
+      "day": 52,
+      "id": "eulogy",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 53,
+      "id": "eulogy",
+      "tx": 3,
+      "ty": 4
+    },
+    {
+      "day": 64,
+      "id": "influencer",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 74,
+      "id": "audit",
+      "tx": 5,
+      "ty": 4
+    },
+    {
+      "day": 80,
+      "id": "reunion",
+      "tx": 5,
+      "ty": 4
+    },
+    {
+      "day": 88,
+      "id": "eulogy",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 88,
+      "id": "eater",
+      "tx": 5,
+      "ty": 4
+    },
+    {
+      "day": 89,
+      "id": "congregation",
+      "tx": 8,
+      "ty": 8
+    },
+    {
+      "day": 90,
+      "id": "eulogy",
+      "tx": 5,
+      "ty": 4
+    },
+    {
+      "day": 94,
+      "id": "eulogy",
+      "tx": 3,
+      "ty": 4
+    }
+  ],
+  "orphanTbEnds": [],
+  "wrapCounts": {
+    "spawnWorldMonster": 55,
+    "fieldFight": 42,
+    "recordWaveKill": 36,
+    "startCombat": 24,
+    "tbAfterPlayerAction": 481,
+    "tbDamage": 198,
+    "act.strike": 101,
+    "tbEnd": 24,
+    "tbVillagerTurn": 92,
+    "tbVillagerAbility": 91,
+    "useAbility": 38
+  },
+  "instrumentErrors": [],
+  "notes": [],
+  "choicesHeader": {
+    "arm": "stripfight",
+    "combatActionAbilityCount": 42,
+    "strippedSlots": [],
+    "strippedSkills": [],
+    "remainingCombatHeld": [],
+    "stripList": [
+      "game_sense",
+      "patient_aim",
+      "second_wind",
+      "rage",
+      "scream_cheese",
+      "pocket_sand",
+      "fear_aura",
+      "dead_aim",
+      "leech",
+      "brawler_instinct",
+      "intimidating_presence",
+      "peacemaker",
+      "ambush",
+      "animal_ken",
+      "trade_of_blows",
+      "unbreakable",
+      "war_cry",
+      "haymaker",
+      "static_toss",
+      "cheese_wheel",
+      "bird_strike",
+      "tripwire",
+      "turncoat",
+      "freeze_tag",
+      "shoulder_check",
+      "hogtie",
+      "come_get_some",
+      "retribution",
+      "aegis_link",
+      "raise_earth",
+      "gravity_well",
+      "landslide",
+      "pack_hunt",
+      "mending_hands",
+      "blink",
+      "switcheroo",
+      "foresight",
+      "live_broadcast",
+      "the_crowd_moves",
+      "stoke",
+      "coin_guard",
+      "bribe"
+    ],
+    "fightStripLog": [
+      {
+        "day": 9,
+        "strippedSlots": [],
+        "strippedSkills": []
+      },
+      {
+        "day": 9,
+        "strippedSlots": [],
+        "strippedSkills": []
+      },
+      {
+        "day": 9,
+        "strippedSlots": [],
+        "strippedSkills": []
+      },
+      {
+        "day": 16,
+        "strippedSlots": [],
+        "strippedSkills": []
+      },
+      {
+        "day": 22,
+        "strippedSlots": [],
+        "strippedSkills": [
+          "haymaker->haymaker"
+        ]
+      },
+      {
+        "day": 26,
+        "strippedSlots": [],
+        "strippedSkills": [
+          "haymaker->haymaker"
+        ]
+      },
+      {
+        "day": 30,
+        "strippedSlots": [],
+        "strippedSkills": [
+          "haymaker->haymaker"
+        ]
+      },
+      {
+        "day": 41,
+        "strippedSlots": [
+          "rage"
+        ],
+        "strippedSkills": [
+          "game_sense->track_read",
+          "animal_ken->animal_behavior",
+          "tripwire->tripwire"
+        ]
+      },
+      {
+        "day": 41,
+        "strippedSlots": [],
+        "strippedSkills": []
+      },
+      {
+        "day": 54,
+        "strippedSlots": [],
+        "strippedSkills": [
+          "game_sense->track_read",
+          "patient_aim->patient_aim",
+          "animal_ken->animal_behavior"
+        ]
+      },
+      {
+        "day": 69,
+        "strippedSlots": [],
+        "strippedSkills": [
+          "peacemaker->mediate"
+        ]
+      },
+      {
+        "day": 69,
+        "strippedSlots": [],
+        "strippedSkills": [
+          "haymaker->haymaker"
+        ]
+      },
+      {
+        "day": 70,
+        "strippedSlots": [
+          "rage"
+        ],
+        "strippedSkills": [
+          "game_sense->track_read",
+          "animal_ken->animal_behavior",
+          "tripwire->tripwire"
+        ]
+      },
+      {
+        "day": 76,
+        "strippedSlots": [],
+        "strippedSkills": [
+          "shoulder_check->shoulder_check"
+        ]
+      },
+      {
+        "day": 76,
+        "strippedSlots": [],
+        "strippedSkills": [
+          "game_sense->track_read",
+          "animal_ken->animal_behavior"
+        ]
+      },
+      {
+        "day": 76,
+        "strippedSlots": [],
+        "strippedSkills": []
+      },
+      {
+        "day": 92,
+        "strippedSlots": [],
+        "strippedSkills": [
+          "haymaker->haymaker"
+        ]
+      },
+      {
+        "day": 92,
+        "strippedSlots": [],
+        "strippedSkills": []
+      },
+      {
+        "day": 92,
+        "strippedSlots": [],
+        "strippedSkills": []
+      },
+      {
+        "day": 92,
+        "strippedSlots": [],
+        "strippedSkills": [
+          "game_sense->track_read",
+          "animal_ken->animal_behavior"
+        ]
+      },
+      {
+        "day": 94,
+        "strippedSlots": [],
+        "strippedSkills": []
+      },
+      {
+        "day": 95,
+        "strippedSlots": [],
+        "strippedSkills": [
+          "game_sense->track_read",
+          "animal_ken->animal_behavior"
+        ]
+      },
+      {
+        "day": 95,
+        "strippedSlots": [],
+        "strippedSkills": [
+          "game_sense->track_read"
+        ]
+      },
+      {
+        "day": 95,
+        "strippedSlots": [],
+        "strippedSkills": [
+          "game_sense->track_read",
+          "animal_ken->animal_behavior"
+        ]
+      }
+    ]
+  },
+  "weaponSnaps": [
+    {
+      "day": 9,
+      "itemId": "hatchet",
+      "bonus": 15,
+      "type": "melee"
+    },
+    {
+      "day": 9,
+      "itemId": "fire_hardened_spear",
+      "bonus": 15,
+      "type": "melee"
+    },
+    {
+      "day": 9,
+      "itemId": "fire_hardened_spear",
+      "bonus": 15,
+      "type": "melee"
+    },
+    {
+      "day": 16,
+      "itemId": "hatchet",
+      "bonus": 15,
+      "type": "melee"
+    },
+    {
+      "day": 22,
+      "itemId": "hatchet",
+      "bonus": 15,
+      "type": "melee"
+    },
+    {
+      "day": 26,
+      "itemId": "hatchet",
+      "bonus": 15,
+      "type": "melee"
+    },
+    {
+      "day": 30,
+      "itemId": "hatchet",
+      "bonus": 15,
+      "type": "melee"
+    },
+    {
+      "day": 41,
+      "itemId": "hatchet",
+      "bonus": 15,
+      "type": "melee"
+    },
+    {
+      "day": 41,
+      "itemId": "hatchet",
+      "bonus": 15,
+      "type": "melee"
+    },
+    {
+      "day": 54,
+      "itemId": "harvest_scythe",
+      "bonus": 40,
+      "type": "melee"
+    },
+    {
+      "day": 69,
+      "itemId": "phase_blade",
+      "bonus": 60,
+      "type": "melee"
+    },
+    {
+      "day": 69,
+      "itemId": "phase_blade",
+      "bonus": 60,
+      "type": "melee"
+    },
+    {
+      "day": 70,
+      "itemId": "machete",
+      "bonus": 35,
+      "type": "melee"
+    },
+    {
+      "day": 76,
+      "itemId": "machete",
+      "bonus": 35,
+      "type": "melee"
+    },
+    {
+      "day": 76,
+      "itemId": "phase_blade",
+      "bonus": 60,
+      "type": "melee"
+    },
+    {
+      "day": 76,
+      "itemId": "phase_blade",
+      "bonus": 60,
+      "type": "melee"
+    },
+    {
+      "day": 92,
+      "itemId": "phase_blade",
+      "bonus": 60,
+      "type": "melee"
+    },
+    {
+      "day": 92,
+      "itemId": "phase_blade",
+      "bonus": 60,
+      "type": "melee"
+    },
+    {
+      "day": 92,
+      "itemId": "phase_blade",
+      "bonus": 60,
+      "type": "melee"
+    },
+    {
+      "day": 92,
+      "itemId": "stone_knife",
+      "bonus": 12,
+      "type": "melee"
+    },
+    {
+      "day": 94,
+      "itemId": "stone_knife",
+      "bonus": 12,
+      "type": "melee"
+    },
+    {
+      "day": 95,
+      "itemId": "hardlight_knife",
+      "bonus": 45,
+      "type": "melee"
+    },
+    {
+      "day": 95,
+      "itemId": "kitchen_knife",
+      "bonus": 8,
+      "type": "melee"
+    },
+    {
+      "day": 95,
+      "itemId": "kitchen_knife",
+      "bonus": 8,
+      "type": "melee"
+    }
+  ],
+  "endWeapon": {
+    "itemId": null,
+    "bonus": 0,
+    "type": "melee"
+  }
+}

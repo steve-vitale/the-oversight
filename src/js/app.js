@@ -17891,6 +17891,16 @@
       ${Game.sigW4CombatButtons ? Game.sigW4CombatButtons() : ''}
       ${Game.sigW5CombatButtons ? Game.sigW5CombatButtons() : ''}
       <button class="self-btn" id="c-wait" title="Hold still — forfeit the rest of the turn">⏸ Wait</button>
+      ${(() => {
+        // COMBAT-BAR ABILITIES (ability-use game-code 2026-11-03):
+        // every held combat action the hardcoded buttons don't cover,
+        // computed by Game.combatBarAbilityActions(). Disabled state
+        // mirrors _actionAvailable exactly (title names the reason);
+        // a refused tap costs nothing. Phone/browser verification at
+        // 390x844 is OUTSTANDING (node cannot prove a tappable bar).
+        const acts = Game.combatBarAbilityActions ? Game.combatBarAbilityActions() : [];
+        return acts.map(a => `<button class="self-btn" data-combat-ability="${esc(a.aid + '.' + a.act)}" ${!a.ok ? 'disabled' : ''} title="${esc(a.why || (a.name + (a.kcal ? ' (' + a.kcal + ' kcal)' : '')))}">⚡ ${esc(a.name)}${a.kcal ? ' (' + a.kcal + ')' : ''}</button>`).join('');
+      })()}
     </div>
     <div class="actions" id="c-talkrow" style="display:none"></div>`;
   }
@@ -18107,6 +18117,33 @@
         targets: monsterTargets(adj),
         onPick: (t) => { Game.tbPlayerStrike(t.key); rerender(); },
       });
+    });
+    // COMBAT-BAR ABILITIES (ability-use game-code 2026-11-03): one
+    // generic handler for every data-combat-ability button. Target
+    // need comes from the game-side entry (single source of truth);
+    // target-needing actions pick over live monsters, weakest first
+    // (mirroring the policy); everything else calls useAbility
+    // directly (impls resolve their own defaults). A refused tap
+    // costs nothing — useAbility prechecks before payment.
+    document.querySelectorAll('[data-combat-ability]').forEach(b => {
+      b.onclick = () => {
+        const key = b.dataset.combatAbility || '';
+        const dot = key.lastIndexOf('.');
+        if (dot < 0) return;
+        const aid = key.slice(0, dot), act = key.slice(dot + 1);
+        const tf = Game.tbfight; if (!tf) return;
+        const entry = (Game.combatBarAbilityActions ? Game.combatBarAbilityActions() : [])
+          .find(e => e.aid === aid && e.act === act);
+        if (entry && entry.needsTarget) {
+          const list = tf.fighters.filter(x => (x.kind === 'monster' || x.kind === 'hostile') && x.alive && !x.fled)
+            .sort((x, y) => (x.hp || 0) - (y.hp || 0));
+          if (!list.length) return;
+          if (list.length === 1) { Game.useAbility(aid, act, list[0].key); rerender(); return; }
+          enterTargeting({ prompt: '👁 Stare down which?', targets: monsterTargets(list), onPick: (t) => { Game.useAbility(aid, act, t.key); rerender(); } });
+          return;
+        }
+        Game.useAbility(aid, act); rerender();
+      };
     });
     // SIGNATURE MECHANICS (sigW3a.js, wave-3 batch A 2026-10-10): bespoke
     // mid-fight choices (gavel trial motions, focus-group dodge) surface as

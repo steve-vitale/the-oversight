@@ -1,0 +1,1726 @@
+{
+  "seed": 99106,
+  "run": "choices-C2",
+  "anchorCommit": "a8538e12d347",
+  "days": 88,
+  "gameDays": 88,
+  "endReason": "village-lost",
+  "won": false,
+  "villageLost": true,
+  "maxWave": 4,
+  "spawnsW4": 10,
+  "tbCalls": 1,
+  "fieldCallsW4": 1,
+  "exposures": [
+    {
+      "seq": 1,
+      "type": "tb",
+      "day": 86,
+      "mid": "eulogy",
+      "wave": 4,
+      "fightId": "fmgpspin7_fi655h",
+      "scholarAtStart": "elif_demir",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "elif_demir",
+          "hpStart": 100,
+          "maxHp": 100,
+          "held": [
+            {
+              "id": "game_sense",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "read_stance",
+                  "cost": {
+                    "turn": true
+                  }
+                }
+              ]
+            },
+            {
+              "id": "patient_aim",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "take_aim",
+                  "cost": {
+                    "turn": true
+                  }
+                }
+              ]
+            },
+            {
+              "id": "dead_aim",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "dead_aim_shot",
+                  "cost": {
+                    "turn": true,
+                    "kcal": 50
+                  }
+                }
+              ]
+            },
+            {
+              "id": "brawler_instinct",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "read_fight",
+                  "cost": {
+                    "turn": true
+                  }
+                }
+              ]
+            },
+            {
+              "id": "animal_ken",
+              "lane": "skill",
+              "actions": [
+                {
+                  "id": "calm_beast",
+                  "cost": {
+                    "turn": true
+                  }
+                }
+              ]
+            }
+          ],
+          "heldReadError": null
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "eulogy",
+          "hpStart": 675,
+          "maxHp": 900,
+          "wave": 4,
+          "joinedMidFight": false,
+          "trickKnown": false
+        }
+      ],
+      "scholarHeld": [
+        {
+          "id": "game_sense",
+          "lane": "skill",
+          "actions": [
+            {
+              "id": "read_stance",
+              "cost": {
+                "turn": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "patient_aim",
+          "lane": "skill",
+          "actions": [
+            {
+              "id": "take_aim",
+              "cost": {
+                "turn": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "dead_aim",
+          "lane": "skill",
+          "actions": [
+            {
+              "id": "dead_aim_shot",
+              "cost": {
+                "turn": true,
+                "kcal": 50
+              }
+            }
+          ]
+        },
+        {
+          "id": "brawler_instinct",
+          "lane": "skill",
+          "actions": [
+            {
+              "id": "read_fight",
+              "cost": {
+                "turn": true
+              }
+            }
+          ]
+        },
+        {
+          "id": "animal_ken",
+          "lane": "skill",
+          "actions": [
+            {
+              "id": "calm_beast",
+              "cost": {
+                "turn": true
+              }
+            }
+          ]
+        }
+      ],
+      "scholarHeldReadError": null,
+      "scholarKcalStart": 1447,
+      "foodTierStart": "starving",
+      "turns": [
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 1,
+          "kcal": 1447
+        },
+        {
+          "cls": "strike",
+          "round": 2,
+          "kcal": 1447
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 2,
+          "kcal": 1447
+        },
+        {
+          "cls": "strike",
+          "round": 3,
+          "kcal": 1447
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 3,
+          "kcal": 1447
+        },
+        {
+          "cls": "strike",
+          "round": 4,
+          "kcal": 1447
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 4,
+          "kcal": 1447
+        },
+        {
+          "cls": "strike",
+          "round": 5,
+          "kcal": 1447
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 5,
+          "kcal": 1447
+        },
+        {
+          "cls": "move-or-flee-or-other",
+          "round": 6,
+          "kcal": 1447
+        }
+      ],
+      "availSnapshots": [
+        {
+          "round": 1,
+          "kcal": 1447,
+          "avail": [
+            {
+              "id": "game_sense",
+              "act": "read_stance",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "dead_aim",
+              "act": "dead_aim_shot",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 50,
+              "dinnerOk": true
+            },
+            {
+              "id": "brawler_instinct",
+              "act": "read_fight",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "animal_ken",
+              "act": "calm_beast",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 100,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 1
+          }
+        },
+        {
+          "round": 2,
+          "kcal": 1447,
+          "avail": [
+            {
+              "id": "game_sense",
+              "act": "read_stance",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "dead_aim",
+              "act": "dead_aim_shot",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 50,
+              "dinnerOk": true
+            },
+            {
+              "id": "brawler_instinct",
+              "act": "read_fight",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "animal_ken",
+              "act": "calm_beast",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 100,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 1
+          }
+        },
+        {
+          "round": 2,
+          "kcal": 1447,
+          "avail": [
+            {
+              "id": "game_sense",
+              "act": "read_stance",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "dead_aim",
+              "act": "dead_aim_shot",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 50,
+              "dinnerOk": true
+            },
+            {
+              "id": "brawler_instinct",
+              "act": "read_fight",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "animal_ken",
+              "act": "calm_beast",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 100,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 1
+          }
+        },
+        {
+          "round": 3,
+          "kcal": 1447,
+          "avail": [
+            {
+              "id": "game_sense",
+              "act": "read_stance",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "dead_aim",
+              "act": "dead_aim_shot",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 50,
+              "dinnerOk": true
+            },
+            {
+              "id": "brawler_instinct",
+              "act": "read_fight",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "animal_ken",
+              "act": "calm_beast",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 81,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.81
+          }
+        },
+        {
+          "round": 3,
+          "kcal": 1447,
+          "avail": [
+            {
+              "id": "game_sense",
+              "act": "read_stance",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "dead_aim",
+              "act": "dead_aim_shot",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 50,
+              "dinnerOk": true
+            },
+            {
+              "id": "brawler_instinct",
+              "act": "read_fight",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "animal_ken",
+              "act": "calm_beast",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 81,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.81
+          }
+        },
+        {
+          "round": 4,
+          "kcal": 1447,
+          "avail": [
+            {
+              "id": "game_sense",
+              "act": "read_stance",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "dead_aim",
+              "act": "dead_aim_shot",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 50,
+              "dinnerOk": true
+            },
+            {
+              "id": "brawler_instinct",
+              "act": "read_fight",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "animal_ken",
+              "act": "calm_beast",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 64,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.64
+          }
+        },
+        {
+          "round": 4,
+          "kcal": 1447,
+          "avail": [
+            {
+              "id": "game_sense",
+              "act": "read_stance",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "dead_aim",
+              "act": "dead_aim_shot",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 50,
+              "dinnerOk": true
+            },
+            {
+              "id": "brawler_instinct",
+              "act": "read_fight",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "animal_ken",
+              "act": "calm_beast",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 64,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.64
+          }
+        },
+        {
+          "round": 5,
+          "kcal": 1447,
+          "avail": [
+            {
+              "id": "game_sense",
+              "act": "read_stance",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "dead_aim",
+              "act": "dead_aim_shot",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 50,
+              "dinnerOk": true
+            },
+            {
+              "id": "brawler_instinct",
+              "act": "read_fight",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "animal_ken",
+              "act": "calm_beast",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 43,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.43
+          }
+        },
+        {
+          "round": 5,
+          "kcal": 1447,
+          "avail": [
+            {
+              "id": "game_sense",
+              "act": "read_stance",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "dead_aim",
+              "act": "dead_aim_shot",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 50,
+              "dinnerOk": true
+            },
+            {
+              "id": "brawler_instinct",
+              "act": "read_fight",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "animal_ken",
+              "act": "calm_beast",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 43,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.43
+          }
+        },
+        {
+          "round": 6,
+          "kcal": 1447,
+          "avail": [
+            {
+              "id": "game_sense",
+              "act": "read_stance",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "patient_aim",
+              "act": "take_aim",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "dead_aim",
+              "act": "dead_aim_shot",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 50,
+              "dinnerOk": true
+            },
+            {
+              "id": "brawler_instinct",
+              "act": "read_fight",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            },
+            {
+              "id": "animal_ken",
+              "act": "calm_beast",
+              "lane": "skill",
+              "ok": false,
+              "why": "Already acted this turn.",
+              "kcal": 1447,
+              "cost": 0,
+              "dinnerOk": true
+            }
+          ],
+          "fightState": {
+            "live": 1,
+            "totalMaxHp": 900,
+            "scholarHp": 26,
+            "scholarMaxHp": 100,
+            "scholarHpPct": 0.26
+          }
+        }
+      ],
+      "abilityUses": [],
+      "availCalls": [],
+      "npcTurns": [],
+      "npcAbilityCalls": [],
+      "hits": [
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 27,
+          "returned": 27,
+          "hpBefore": 675,
+          "hpAfter": 648,
+          "hpDelta": -27,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 2,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's attack",
+          "requested": 60,
+          "returned": 19,
+          "hpBefore": 100,
+          "hpAfter": 81,
+          "hpDelta": -19,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 32,
+          "returned": 32,
+          "hpBefore": 648,
+          "hpAfter": 616,
+          "hpDelta": -32,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 52,
+          "returned": 17,
+          "hpBefore": 81,
+          "hpAfter": 64,
+          "hpDelta": -17,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 28,
+          "returned": 28,
+          "hpBefore": 616,
+          "hpAfter": 588,
+          "hpDelta": -28,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 65,
+          "returned": 21,
+          "hpBefore": 64,
+          "hpAfter": 43,
+          "hpDelta": -21,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 5,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 28,
+          "returned": 28,
+          "hpBefore": 588,
+          "hpAfter": 560,
+          "hpDelta": -28,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "leader"
+        },
+        {
+          "round": 5,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's attack",
+          "requested": 53,
+          "returned": 17,
+          "hpBefore": 43,
+          "hpAfter": 26,
+          "hpDelta": -17,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        },
+        {
+          "round": 6,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "the narrated ending",
+          "requested": 9999,
+          "returned": 3225,
+          "hpBefore": 26,
+          "hpAfter": -3199,
+          "hpDelta": -3225,
+          "abilityStack": false,
+          "rageActive": false,
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "🎙️ It moves."
+        },
+        {
+          "kind": "say",
+          "line": "Word gets around the haven. Whatever that thing was — everyone's talking about it now."
+        },
+        {
+          "kind": "say",
+          "line": "Back at the haven the argument starts: Meera is calling it \"The Loud Beast.\" They'll fight it out — weigh in if you want."
+        },
+        {
+          "kind": "say",
+          "line": "Ninh heads out for water. \"Off to the well — back with a full skin.\" The pantry won't fill itself."
+        },
+        {
+          "kind": "say",
+          "line": "— DUSK — Animals stir again. Shadows lengthen."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they stood their ground, poor brave fools.\" The spotlight widens. (No weight yet — just the story starting.) (5 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 27 (Shard spear)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they ran, and the spotlight followed.\" The spotlight narrows. Your dodge feels watched. (-10% dodge.) (4 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 It connects!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 41."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's attack hits you for 19."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Final Chapter — strikes one target after a windup. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 32 (Shard spear)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they bled, politely, where everyone could see.\" The narration lingers on your wounds. (Bleeds last 1 round longer.) (3 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 35."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 17."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 28 (Shard spear)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they knelt, and the story approved.\" The story leans in. (The Eulogy's attacks +15.) (2 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 44."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 21."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 5!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 28 (Shard spear)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then — this is the last line — they ended.\" The last line hangs in the air. (It finishes next round.) (1 verse remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 eulogy's attack finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 36."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's attack hits you for 17."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Epitaph — locks onto one target — moving won't dodge it. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 6!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 \"...they ended.\" The last line lands like a lid. (The story finishes — you die as narrated.)"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 6774."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Elif Demir is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Elif Demir is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Elif kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Ninh blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Elif Demir, 86 days. The mantle passes to Ninh Hanh."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Ninh Hanh, 34 — a zookeeper. Their hands know different work now: Night Eyes."
+        },
+        {
+          "kind": "say",
+          "line": "You knew Elif — not the office, the person. The fire keeps expecting her, and so do you. That's a heavier kind of stepping up. (+5 trauma)"
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew Ninh before the Codex did — their name already carried weight here."
+        }
+      ],
+      "transcriptOverflow": false,
+      "end": {
+        "result": "lost",
+        "day": 86,
+        "round": 6,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "eulogy",
+            "alive": true,
+            "fled": false,
+            "hp": 560,
+            "maxHp": 900
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "elif_demir",
+            "alive": false,
+            "fled": false,
+            "hp": -3199,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "elif_demir"
+        ],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false
+    }
+  ],
+  "killsW4": 0,
+  "killRows": [],
+  "unlinkedKills": [],
+  "spawns": [
+    {
+      "day": 67,
+      "id": "eulogy",
+      "tx": 3,
+      "ty": 4
+    },
+    {
+      "day": 74,
+      "id": "eulogy",
+      "tx": 2,
+      "ty": 2
+    },
+    {
+      "day": 75,
+      "id": "influencer",
+      "tx": 3,
+      "ty": 4
+    },
+    {
+      "day": 76,
+      "id": "eulogy",
+      "tx": 4,
+      "ty": 1
+    },
+    {
+      "day": 76,
+      "id": "eulogy",
+      "tx": 2,
+      "ty": 4
+    },
+    {
+      "day": 77,
+      "id": "influencer",
+      "tx": 0,
+      "ty": 7
+    },
+    {
+      "day": 77,
+      "id": "influencer",
+      "tx": 6,
+      "ty": 7
+    },
+    {
+      "day": 83,
+      "id": "reunion",
+      "tx": 5,
+      "ty": 4
+    },
+    {
+      "day": 87,
+      "id": "algorithm",
+      "tx": 1,
+      "ty": 0
+    },
+    {
+      "day": 88,
+      "id": "influencer",
+      "tx": 4,
+      "ty": 2
+    }
+  ],
+  "orphanTbEnds": [],
+  "wrapCounts": {
+    "fieldFight": 123,
+    "spawnWorldMonster": 62,
+    "recordWaveKill": 61,
+    "startCombat": 14,
+    "tbAfterPlayerAction": 385,
+    "tbVillagerTurn": 31,
+    "tbVillagerAbility": 31,
+    "tbDamage": 132,
+    "act.strike": 183,
+    "tbEnd": 15,
+    "useAbility": 91,
+    "_actionAvailable": 75,
+    "act.wait": 43
+  },
+  "instrumentErrors": [],
+  "notes": [],
+  "choicesHeader": {
+    "arm": "gearfight",
+    "startWeapon": {
+      "itemId": null,
+      "name": "your hands",
+      "bonus": 0,
+      "type": "melee",
+      "slot": null
+    },
+    "swap": "already-unarmed-or-none",
+    "fightGearLog": [
+      {
+        "day": 8,
+        "swap": null
+      },
+      {
+        "day": 18,
+        "swap": {
+          "from": {
+            "itemId": "bow",
+            "bonus": 22,
+            "type": "ranged"
+          },
+          "to": {
+            "id": "crude_bow",
+            "name": "Crude bow",
+            "bonus": 18,
+            "type": "ranged"
+          },
+          "typeChanged": false,
+          "slot": "ranged"
+        }
+      },
+      {
+        "day": 18,
+        "swap": {
+          "from": {
+            "itemId": "bow",
+            "bonus": 22,
+            "type": "ranged"
+          },
+          "to": {
+            "id": "crude_bow",
+            "name": "Crude bow",
+            "bonus": 18,
+            "type": "ranged"
+          },
+          "typeChanged": false,
+          "slot": "ranged"
+        }
+      },
+      {
+        "day": 23,
+        "swap": {
+          "from": {
+            "itemId": "hunting_spear",
+            "bonus": 30,
+            "type": "melee"
+          },
+          "to": {
+            "id": "shard_spear",
+            "name": "Shard spear",
+            "bonus": 25,
+            "type": "melee"
+          },
+          "typeChanged": false,
+          "slot": "ranged"
+        }
+      },
+      {
+        "day": 30,
+        "swap": {
+          "from": {
+            "itemId": "hunting_spear",
+            "bonus": 30,
+            "type": "melee"
+          },
+          "to": {
+            "id": "shard_spear",
+            "name": "Shard spear",
+            "bonus": 25,
+            "type": "melee"
+          },
+          "typeChanged": false,
+          "slot": "ranged"
+        }
+      },
+      {
+        "day": 36,
+        "swap": {
+          "from": {
+            "itemId": "shard_spear",
+            "bonus": 25,
+            "type": "melee"
+          },
+          "to": {
+            "id": "trailblazer_machete",
+            "name": "Trailblazer Machete",
+            "bonus": 20,
+            "type": "melee"
+          },
+          "typeChanged": false,
+          "slot": "ranged"
+        }
+      },
+      {
+        "day": 44,
+        "swap": {
+          "from": {
+            "itemId": "machete",
+            "bonus": 35,
+            "type": "melee"
+          },
+          "to": {
+            "id": "hunting_spear",
+            "name": "Hunting spear",
+            "bonus": 30,
+            "type": "melee"
+          },
+          "typeChanged": false,
+          "slot": "melee"
+        }
+      },
+      {
+        "day": 45,
+        "swap": {
+          "from": {
+            "itemId": "hunting_spear",
+            "bonus": 30,
+            "type": "melee"
+          },
+          "to": {
+            "id": "shard_spear",
+            "name": "Shard spear",
+            "bonus": 25,
+            "type": "melee"
+          },
+          "typeChanged": false,
+          "slot": "melee"
+        }
+      },
+      {
+        "day": 65,
+        "swap": {
+          "from": {
+            "itemId": "phase_sling",
+            "bonus": 35,
+            "type": "ranged"
+          },
+          "to": {
+            "id": "crossbow",
+            "name": "Crossbow",
+            "bonus": 28,
+            "type": "ranged"
+          },
+          "typeChanged": false,
+          "slot": "ranged"
+        }
+      },
+      {
+        "day": 73,
+        "swap": {
+          "from": {
+            "itemId": "hunting_spear",
+            "bonus": 30,
+            "type": "melee"
+          },
+          "to": {
+            "id": "shard_spear",
+            "name": "Shard spear",
+            "bonus": 25,
+            "type": "melee"
+          },
+          "typeChanged": false,
+          "slot": "ranged"
+        }
+      },
+      {
+        "day": 74,
+        "swap": {
+          "from": {
+            "itemId": "hatchet",
+            "bonus": 15,
+            "type": "melee"
+          },
+          "to": {
+            "id": "stone_knife",
+            "name": "Stone knife",
+            "bonus": 12,
+            "type": "melee"
+          },
+          "typeChanged": false,
+          "slot": "melee"
+        }
+      },
+      {
+        "day": 86,
+        "swap": {
+          "from": {
+            "itemId": "machete",
+            "bonus": 35,
+            "type": "melee"
+          },
+          "to": {
+            "id": "hunting_spear",
+            "name": "Hunting spear",
+            "bonus": 30,
+            "type": "melee"
+          },
+          "typeChanged": false,
+          "slot": "melee"
+        }
+      },
+      {
+        "day": 86,
+        "swap": {
+          "from": {
+            "itemId": "hunting_spear",
+            "bonus": 30,
+            "type": "melee"
+          },
+          "to": {
+            "id": "shard_spear",
+            "name": "Shard spear",
+            "bonus": 25,
+            "type": "melee"
+          },
+          "typeChanged": false,
+          "slot": "melee"
+        }
+      },
+      {
+        "day": 87,
+        "swap": {
+          "from": {
+            "itemId": "fire_hardened_spear",
+            "bonus": 15,
+            "type": "melee"
+          },
+          "to": {
+            "id": "stone_knife",
+            "name": "Stone knife",
+            "bonus": 12,
+            "type": "melee"
+          },
+          "typeChanged": false,
+          "slot": "ranged"
+        }
+      }
+    ]
+  },
+  "weaponSnaps": [
+    {
+      "day": 8,
+      "itemId": null,
+      "bonus": 0,
+      "type": "melee"
+    },
+    {
+      "day": 18,
+      "itemId": "bow",
+      "bonus": 22,
+      "type": "ranged"
+    },
+    {
+      "day": 18,
+      "itemId": "bow",
+      "bonus": 22,
+      "type": "ranged"
+    },
+    {
+      "day": 23,
+      "itemId": "hunting_spear",
+      "bonus": 30,
+      "type": "melee"
+    },
+    {
+      "day": 30,
+      "itemId": "hunting_spear",
+      "bonus": 30,
+      "type": "melee"
+    },
+    {
+      "day": 36,
+      "itemId": "shard_spear",
+      "bonus": 25,
+      "type": "melee"
+    },
+    {
+      "day": 44,
+      "itemId": "machete",
+      "bonus": 35,
+      "type": "melee"
+    },
+    {
+      "day": 45,
+      "itemId": "hunting_spear",
+      "bonus": 30,
+      "type": "melee"
+    },
+    {
+      "day": 65,
+      "itemId": "phase_sling",
+      "bonus": 35,
+      "type": "ranged"
+    },
+    {
+      "day": 73,
+      "itemId": "hunting_spear",
+      "bonus": 30,
+      "type": "melee"
+    },
+    {
+      "day": 74,
+      "itemId": "hatchet",
+      "bonus": 15,
+      "type": "melee"
+    },
+    {
+      "day": 86,
+      "itemId": "machete",
+      "bonus": 35,
+      "type": "melee"
+    },
+    {
+      "day": 86,
+      "itemId": "hunting_spear",
+      "bonus": 30,
+      "type": "melee"
+    },
+    {
+      "day": 87,
+      "itemId": "fire_hardened_spear",
+      "bonus": 15,
+      "type": "melee"
+    }
+  ],
+  "endWeapon": {
+    "itemId": "sharpened_stick",
+    "bonus": 5,
+    "type": "melee"
+  }
+}
