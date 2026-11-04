@@ -32,6 +32,8 @@ ok('stub: opening capture + def stamp + field decomposition + kill/death stampin
     startCombat: function () {
       this.tbfight = { id: 'f1', round: 1, fighters: fighters, over: false };
       this.tbPlayerMove(4, 5); // opening pass: closing move inside startCombat
+      this.say('opening narration');
+      this.tbDamage('m_0', 10, 'ally-name', 'a_0', {}); // opening hit, actor-stamped
       return null;
     },
     tbBeginTurn: function () { return null; },
@@ -75,6 +77,10 @@ ok('stub: opening capture + def stamp + field decomposition + kill/death stampin
   assert.strictEqual(t.exposures[0].openingActions[0].fn, 'tbPlayerMove', 'opening fn');
   assert.strictEqual(t.exposures[0].def.armor, 10, 'def armor stamped');
   assert.deepStrictEqual(t.exposures[0].def.hp, [900, 1100], 'def hp stamped');
+  assert.strictEqual(t.exposures[0].openingSay.length, 1, 'opening say captured');
+  assert.strictEqual(t.exposures[0].openingHits.length, 1, 'opening hit captured');
+  assert.strictEqual(t.exposures[0].openingHits[0].sourceLabel, 'ally-name', 'opening hit actor label');
+  assert.strictEqual(t.exposures[0].openingHits[0].sourceKey, 'a_0', 'opening hit actor key');
   stub.tbEnd('died');
   assert.ok(t.exposures[0].end, 'tb end attached');
   stub.fieldFight('v_x', { id: 'm4' }, { hp: 1000 }, {});
@@ -90,6 +96,14 @@ ok('stub: opening capture + def stamp + field decomposition + kill/death stampin
   assert.strictEqual(ff.sayLines.length, 1, 'field say line captured');
   assert.strictEqual(t.killRows.length, 1, 'one kill row');
   assert.strictEqual(t.killRows[0].via, 'wild', 'kill via wild');
+  // Kill recorded AFTER the fieldFight call returns (comms wrapper
+  // path): fieldCall null, lastField stamps point at the call.
+  stub.recordWaveKill('m4', 'v_x', 'wild');
+  assert.strictEqual(t.killRows.length, 2, 'second kill row');
+  assert.strictEqual(t.killRows[1].fieldCall, null, 'post-call kill has no fieldCall');
+  assert.strictEqual(t.killRows[1].lastFieldCall, ff.callId, 'post-call kill stamped lastFieldCall');
+  assert.strictEqual(t.killRows[1].lastFieldVid, 'v_x', 'post-call kill stamped lastFieldVid');
+  assert.strictEqual(t.killRows[1].lastFieldMid, 'm4', 'post-call kill stamped lastFieldMid');
   assert.strictEqual(t.instrumentErrors.length, 0, 'no instrument errors: ' + JSON.stringify(t.instrumentErrors));
   inst.uninstall();
 });

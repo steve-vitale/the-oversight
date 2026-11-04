@@ -3,12 +3,15 @@
 // (or a dir given as argv[2]) and prints the kill-conversion census,
 // damage accounting, beast-damage accounting, field decomposition,
 // killer traces, and lever quantification. Pure analysis, no Game.
-// Usage: node scripts/killconv-analyze-20261104.js [dir]
+// Usage: node scripts/killconv-analyze-20261104.js [dir] [filename-substring-filter]
 'use strict';
 const fs = require('fs');
 const path = require('path');
 const dir = process.argv[2] || path.join(__dirname, '..', 'evidence', '2026-11-04', 'perseed-killconv-a');
-const files = fs.readdirSync(dir).filter(function (f) { return f.endsWith('.json'); }).sort();
+const filter = process.argv[3] || null;
+const files = fs.readdirSync(dir).filter(function (f) {
+  return f.endsWith('.json') && (!filter || f.indexOf(filter) !== -1);
+}).sort();
 const seeds = files.map(function (f) { return JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')); });
 
 function med(a) {
@@ -18,9 +21,16 @@ function med(a) {
 }
 function sum(a) { return a.reduce(function (s, x) { return s + x; }, 0); }
 function classify(ex) {
+  // Leader-death takes precedence over ANY fled flag: in the pilot,
+  // 'fled' rows turned out to be leader-dead + companion-fled. A
+  // companion fleeing while the leader dies is a fighter-died fight
+  // with a companion-fled note, never a fled fight.
   if (!ex.end) return ex.superseded ? 'superseded' : 'UNENDED';
   if ((ex.kills && ex.kills.length) || (ex.end.monsterDeadW4 > 0)) return 'kill';
-  if (ex.end.humansFled && ex.end.humansFled.length) return 'fled';
+  const leadDead = ex.end.humansDead && ex.end.humansDead.indexOf(ex.leadVid) !== -1;
+  const leadFled = ex.end.humansFled && ex.end.humansFled.indexOf(ex.leadVid) !== -1;
+  if (leadDead) return 'fighter-died';
+  if (leadFled) return 'fled';
   if (ex.end.humansDead && ex.end.humansDead.length) return 'fighter-died';
   return 'other:' + (ex.end.result || 'unknown');
 }
@@ -66,9 +76,12 @@ for (const s of seeds) {
     const leadVid = ex.leadVid;
     const party = ex.party || [];
     const leadGear = party.find(function (p) { return p.vid === leadVid; });
+    const compFled = (ex.end && ex.end.humansFled || []).filter(function (v) { return v !== ex.leadVid; });
     const row = { seed: s.seed, day: ex.day, mid: ex.mid, class: cls,
       party: ex.partySizeStart, rounds: rounds, turns: turns,
+      compFled: compFled,
       opening: (ex.openingActions || []).map(function (a) { return a.fn; }),
+      openingHits: ex.openingHits || [],
       strikes: strikes, leadHits: leadHits.length, allyHits: allyHits.length,
       abHits: abHits.length, otherHits: otherHits.length,
       leadDmg: lead, allyDmg: ally, abDmg: ab, dealt: dealt,
@@ -100,9 +113,26 @@ for (const s of seeds) {
       weapon: ff.pre && ff.pre.gear ? ff.pre.gear.weapon : null,
       armorP: ff.pre && ff.pre.gear ? ff.pre.gear.armorP : null,
       defArmor: ff.pre && ff.pre.def ? ff.pre.def.armor : null,
+      mHpStart: ff.pre ? ff.pre.mHpStart : null,
       killsDuring: ff.killsDuring || [], deathsDuring: ff.deathsDuring || [],
       logTail: (ff.log || []).slice(-6) });
     for (const k of (ff.killsDuring || [])) killDetails.push({ seed: s.seed, channel: 'field', callId: ff.callId, ff: ff, kill: k });
+  }
+  // Field kills recorded AFTER the fieldFight call returns (comms
+  // wrapper) carry fieldCall null but lastField stamps; attribute an
+  // unlinked row to the field fight iff same day + same killer vid +
+  // same mid. Anything left is genuinely unexplained.
+  for (const k of (s.killRows || [])) {
+    if (k.linkSeq != null || k.fieldCall != null) continue;
+    const ff = (s.fieldFights || []).find(function (x) {
+      return x.day === k.day && x.vid === k.by && x.mid === k.mid;
+    });
+    if (ff) {
+      killDetails.push({ seed: s.seed, channel: 'field-attributed', callId: ff.callId, ff: ff, kill: k });
+    } else {
+      killDetails.push({ seed: s.seed, channel: 'UNEXPLAINED', callId: null, ff: null, kill: k });
+      unclassified++;
+    }
   }
   for (const vid of Object.keys(s.killerTrace || {})) {
     const tr = s.killerTrace[vid];
@@ -143,21 +173,39 @@ console.log('orphans: ' + orphans.length + ' ' + JSON.stringify(orphans.map(func
 console.log('=== TB PER-EXPOSURE ===');
 for (const r of tbRows) {
   console.log([r.seed, 'd' + r.day, r.mid, r.class, 'pty' + r.party, 'r' + r.rounds, 't' + r.turns,
-    'open:' + r.opening.join(','), 'str' + r.strikes, 'leadHit' + r.leadHits, 'allyHit' + r.allyHits,
+    'open:' + r.opening.join(','), 'openHits:' + r.openingHits.length,
+    'str' + r.strikes, 'leadHit' + r.leadHits, 'allyHit' + r.allyHits,
     'abHit' + r.abHits, 'lead' + r.leadDmg, 'ally' + r.allyDmg, 'ab' + r.abDmg, 'dealt' + r.dealt,
     'req' + r.reqSum, 'ret' + r.retSum, 'max' + r.beastMax, 'start' + r.beastStart,
-    'frac' + (r.fracMax != null ? r.fracMax.toFixed(3) : 'n/a'),
+    'fracMax' + (r.fracMax != null ? r.fracMax.toFixed(3) : 'n/a'),
+    'fracStart' + (r.fracStart != null ? r.fracStart.toFixed(3) : 'n/a'),
     'taken' + r.taken, 'wpn:' + r.weapon, 'armP:' + r.armorP, 'defArm:' + r.defArmor,
     'hp:' + r.leadHpStart + '->' + r.leadHpEnd,
-    'ab:' + r.abilities.join('|')].join(' '));
+    'ab:' + r.abilities.join('|'),
+    (r.compFled.length ? 'compFled:' + r.compFled.join(',') : '')].join(' '));
 }
 console.log('=== LOST-FIGHT MEDIANS (n=' + lost.length + ') ===');
 console.log('rounds ' + med(lost.map(function (r) { return r.rounds || 0; })) +
   ' turns ' + med(lost.map(function (r) { return r.turns; })) +
   ' strikes ' + med(lost.map(function (r) { return r.strikes; })) +
-  ' dealtFrac ' + (med(lost.map(function (r) { return r.fracMax || 0; })) || 0).toFixed(3) +
+  ' dealtFracMax ' + (med(lost.map(function (r) { return r.fracMax || 0; })) || 0).toFixed(3) +
+  ' dealtFracStart ' + (med(lost.map(function (r) { return r.fracStart || 0; })) || 0).toFixed(3) +
   ' taken ' + med(lost.map(function (r) { return r.taken; })) +
   ' leadDmgPerHit ' + (function () { const d = lost.filter(function (r) { return r.leadHits > 0; }).map(function (r) { return r.leadDmg / r.leadHits; }); return d.length ? med(d).toFixed(1) : 'n/a'; })());
+console.log('=== OPENING (ROUND 1) ===');
+(function () {
+  let withActions = 0, withHits = 0, totalHits = 0;
+  const actors = {};
+  for (const s of seeds) for (const ex of (s.exposures || [])) {
+    if ((ex.openingActions || []).length) withActions++;
+    if ((ex.openingHits || []).length) { withHits++; totalHits += ex.openingHits.length; }
+    for (const h of (ex.openingHits || [])) {
+      const a = (h.sourceLabel || '?') + '/' + (h.sourceKey == null ? '?' : h.sourceKey);
+      actors[a] = (actors[a] || 0) + 1;
+    }
+  }
+  console.log('exposures ' + tbRows.length + ' with openingActions ' + withActions + ' with openingHits ' + withHits + ' total opening hits ' + totalHits + ' actors ' + JSON.stringify(actors));
+})();
 console.log('=== DAMAGE PER STRIKE (leader hits, all TB) ===');
 (function () {
   const per = [];
@@ -177,9 +225,10 @@ console.log('=== ABILITY DAMAGE (all TB) ===');
   }
   console.log('n ' + per.length + ' total ' + sum(per) + ' median ' + (per.length ? med(per) : 'n/a'));
 })();
-console.log('=== BEAST DAMAGE PER ROUND (lost fights) ===');
+console.log('=== BEAST DAMAGE PER ROUND (lost fights; finishers split out) ===');
 (function () {
   const perRound = [];
+  const finishers = [];
   for (const s of seeds) for (const ex of (s.exposures || [])) {
     const cls = classify(ex);
     if (cls !== 'fighter-died') continue;
@@ -187,12 +236,18 @@ console.log('=== BEAST DAMAGE PER ROUND (lost fights) ===');
     for (const h of (ex.hits || [])) {
       if (h.targetKind === 'monster') continue;
       if (h.phase !== 'npc-turn') continue;
+      if ((h.requested || 0) >= 9000) { finishers.push(hitDealt(h)); continue; }
       const k = h.round == null ? '?' : h.round;
       byRound[k] = (byRound[k] || 0) + hitDealt(h);
     }
     for (const k of Object.keys(byRound)) perRound.push(byRound[k]);
   }
-  console.log('monster-turn damage rounds n ' + perRound.length + ' median ' + (perRound.length ? med(perRound) : 'n/a') + ' mean ' + (perRound.length ? (sum(perRound) / perRound.length).toFixed(1) : 0));
+  console.log('normal monster-turn damage rounds n ' + perRound.length + ' median ' + (perRound.length ? med(perRound) : 'n/a') + ' mean ' + (perRound.length ? (sum(perRound) / perRound.length).toFixed(1) : 0));
+  console.log('finisher hits n ' + finishers.length + ' dealt ' + JSON.stringify(finishers));
+  const takenNoFin = lost.map(function (r) {
+    return r.taken;
+  });
+  console.log('lost-fight taken median (incl finishers, for reference) ' + med(takenNoFin));
 })();
 console.log('=== FIELD CENSUS === total ' + fieldRows.length);
 (function () {
@@ -202,6 +257,7 @@ console.log('=== FIELD CENSUS === total ' + fieldRows.length);
   for (const f of fieldRows) {
     console.log([f.seed, 'd' + f.day, f.mid, f.outcome, 'r' + f.rounds, 'pty' + f.partySize,
       'vTaken' + f.vTaken, 'mDealt' + f.mDealt, 'vHpLeft' + f.vHpLeft, 'mHpLeft' + f.mHpLeft,
+      'mHpStart:' + f.mHpStart,
       'ally' + f.allyDealt, 'intent:' + f.intent + '/' + f.intentWhy,
       'wpn:' + f.weapon, 'armP:' + f.armorP, 'defArm:' + f.defArmor,
       'kills:' + f.killsDuring.length, 'deaths:' + f.deathsDuring.length].join(' '));
@@ -214,10 +270,13 @@ for (const k of killDetails) {
       'pty' + k.row.party, 'r' + k.row.rounds, 'str' + k.row.strikes, 'lead' + k.row.leadDmg,
       'ally' + k.row.allyDmg, 'ab' + k.row.abDmg, 'beastStart' + k.row.beastStart, 'beastMax' + k.row.beastMax,
       'wpn:' + k.row.weapon].join(' '));
+  } else if (k.channel === 'UNEXPLAINED') {
+    console.log([k.seed, 'UNEXPLAINED-KILL', 'd' + k.kill.day, k.kill.mid, 'by ' + k.kill.by, 'via ' + k.kill.via].join(' '));
   } else {
-    console.log([k.seed, 'FIELD', 'd' + k.kill.day, k.kill.mid, 'by ' + k.kill.by, 'via ' + k.kill.via,
+    console.log([k.seed, k.channel.toUpperCase(), 'd' + k.kill.day, k.kill.mid, 'by ' + k.kill.by, 'via ' + k.kill.via,
       'r' + k.ff.rounds, 'pty' + k.ff.partySize, 'mDealt' + k.ff.mDealt, 'vTaken' + k.ff.vTaken,
       'ally' + k.ff.allyDealt, 'vHpLeft' + k.ff.vHpLeft, 'mHpLeft' + k.ff.mHpLeft,
+      'mHpStart:' + k.ff.mHpStart,
       'wpn:' + k.ff.weapon].join(' '));
   }
 }

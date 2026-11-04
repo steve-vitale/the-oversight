@@ -102,7 +102,8 @@ function install(Game) {
     orphanTbEnds: [], instrumentErrors: [], notes: [],
     wrapCounts: {}, tbCalls: 0, fieldCallsW4: 0,
     fieldFights: [], deathEvents: [],
-    _opening: null, _openingHits: null, _fieldCapture: null, _fieldSeq: 0,
+    _opening: null, _openingHits: null, _openingSay: null,
+    _fieldCapture: null, _fieldSeq: 0, _lastField: null,
   };
   function defOf(mid) {
     try {
@@ -291,10 +292,10 @@ function install(Game) {
       const isW4 = !!(effId && waveOf(Game, effId) === 4);
       if (isW4) t.tbCalls++;
       const beforeFight = Game.tbfight || null;
-      const prevOpening = t._opening, prevOpeningHits = t._openingHits;
-      t._opening = []; t._openingHits = [];
+      const prevOpening = t._opening, prevOpeningHits = t._openingHits, prevOpeningSay = t._openingSay;
+      t._opening = []; t._openingHits = []; t._openingSay = [];
       let r;
-      try { r = orig.startCombat.apply(this, arguments); } catch (e) { t._opening = prevOpening; t._openingHits = prevOpeningHits; throw e; }
+      try { r = orig.startCombat.apply(this, arguments); } catch (e) { t._opening = prevOpening; t._openingHits = prevOpeningHits; t._openingSay = prevOpeningSay; throw e; }
       try {
         if (isW4) {
           const fight = Game.tbfight || null;
@@ -332,12 +333,13 @@ function install(Game) {
             const justPushed = t.exposures[t.exposures.length - 1];
             justPushed.openingActions = t._opening;
             justPushed.openingHits = t._openingHits;
+            justPushed.openingSay = t._openingSay;
             justPushed.def = defOf(effId);
             openTb = { seq: seq, fight: fight, ended: false };
           }
         }
       } catch (e) { err('start.post', e); }
-      t._opening = prevOpening; t._openingHits = prevOpeningHits;
+      t._opening = prevOpening; t._openingHits = prevOpeningHits; t._openingSay = prevOpeningSay;
       return r;
     };
   } else { err('install.startCombat', new Error('not a function')); }
@@ -453,6 +455,7 @@ function install(Game) {
       let r, threw = null;
       try { r = orig.fieldFight.apply(this, arguments); } catch (e) { threw = e; }
       const cap = t._fieldCapture; t._fieldCapture = prevCapture;
+      t._lastField = { callId: callId, day: dayOf(Game), vid: vid, mid: mid };
       try {
         if (isW4) {
           const rec = (r && typeof r === 'object') ? r : null;
@@ -531,6 +534,8 @@ function install(Game) {
         if (!ex && t._openingHits && openTarget && openHpBefore != null) {
           t._openingHits.push({ targetKey: targetKey, targetKind: openTarget.kind || null,
             targetMid: ((openTarget.mdef || {}).id || openTarget.monsterId || openTarget.id) || null,
+            sourceLabel: (sourceLabel == null ? null : String(sourceLabel)),
+            sourceKey: (sourceKey == null ? null : sourceKey),
             requested: dmg, returned: r, hpBefore: openHpBefore, hpAfter: openTarget.hp,
             hpDelta: (openTarget.hp != null ? openTarget.hp - openHpBefore : null) });
         }
@@ -580,6 +585,8 @@ function install(Game) {
           else ex.transcriptOverflow = true;
         } else if (t._fieldCapture && t._fieldCapture.lines.length < 200) {
           t._fieldCapture.lines.push(String(line));
+        } else if (t._openingSay && t._openingSay.length < 100) {
+          t._openingSay.push(String(line));
         }
       } catch (e) { err(fnName + '.post', e); }
       return r;
@@ -730,6 +737,10 @@ function install(Game) {
             linkSeq: linkSeq, linkHow: linkHow,
             fieldCall: t._fieldCapture ? t._fieldCapture.callId : null,
             tbSeq: openTb ? openTb.seq : null,
+            lastFieldCall: t._lastField ? t._lastField.callId : null,
+            lastFieldDay: t._lastField ? t._lastField.day : null,
+            lastFieldVid: t._lastField ? t._lastField.vid : null,
+            lastFieldMid: t._lastField ? t._lastField.mid : null,
           };
           t.killRows.push(row);
           if (linkSeq != null) {
