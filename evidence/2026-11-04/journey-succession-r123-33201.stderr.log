@@ -1,0 +1,29 @@
+
+PRE-DEATH d40: bearer <redacted>, topTrust=[{"id":"June","t":90},{"id":"Pedro","t":90},{"id":"Rodolfo","t":90},{"id":"Wanjiru","t":90}], roster=8
+INH readable=true scripted=true deadItems=27 distinct=26 transferred=3 vanished=4 keptPlants=23 inheritedPlants=6 keptSkills=5 inheritedSkills=13 succTrustPre=88 succTrustPost=92
+PARITY readable=true equal=true inherited=[] pre=["green_whisper","green_thumb","pyrokinesis","cornucopia"] post=["green_whisper","green_thumb","pyrokinesis","cornucopia"]
+DEATH d40 (a hushwolf, scripted): June -> Mabel | passed=true lin=true mo=true trust=92 vouchers=4
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=3 vanished=4 of 26 distinct dead-bearer items
+  CONVO d+3 with Rodolfo (refused=false)
+  CONVO d+3 with Wanjiru (refused=false)
+  BOND-CONVO d+3 with Pedro (depth=1 v=40 refused=false)
+  CONVO d+7 with Wanjiru (refused=false)
+  CONVO d+7 with Pedro (refused=false)
+
+FUNERAL: deathBeat=3 recover=1 vouch=1 (eligible=4) echo=3 organicBurial={"respects":false,"bury":false} halfRation=2
+
+MEAL-GATE: audited=20 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=21 signals={"levelUp":true,"systemVoice":18,"offerLines":24,"codexPlantsDelta":13,"codexSkillsDelta":19,"codexAbilitiesDelta":9,"xpDelta":-65,"any":true} pantry 122327->28855
+TRUST-DIALS: office 92->14 (-78, fall) | villageMean 70.2->0 (-70.2, fall) | ge60 4->0 | movers>=5: []
+DEED-LEDGER: calls=17 summary={"teachPlant":{"calls":8,"ok":8,"deltaSum":0,"deltaN":8,"positive":0,"meanDelta":0},"donateToPantry":{"calls":9,"ok":9,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=3 (convo=3, say=0)) m4=true m5=manual | endDay=61 alive=0 over=true
+anomalies: 0
+S-METRICS: s1=false s2=true s3=true s4=false s5=true dayAdv=21
+T-METRICS: t1=true(panels=d+0,d+7,d+14) t2=true(deedCalls=17) trustVerdict={"readable":true,"officeMantle":92,"officeLast":14,"officeDelta":-78,"officeClass":"fall","villageMantle":70.2,"villageLast":0,"villageDelta":-70.2,"villageClass":"fall","villageGe60Mantle":4,"villageGe60Last":0,"movers":[]}
+E6/CALLCHECK: e6={"callMoves":9,"withCensus":9,"chainHandoffs":5,"trustMoves":4} callCheck={"dailyMoveDays":9,"callMoveDays":8,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=4 (v2=4, excludedLoot=0))
+E7/R47: e7={"trustMoves":4,"soloOffice":2,"soloOfficeDeltas":[2,2],"soloBearerDeltaExact":[2,2],"singleMoverBearer":1,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":2,"both":2,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":3,"v2":4,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":8,"known":8,"unknown":0} e3={"dailyDays":21,"moves":9}
