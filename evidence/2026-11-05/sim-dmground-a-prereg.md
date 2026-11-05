@@ -235,6 +235,22 @@ STRICT matching), baseline vs armed on identical seeds 99201–99208.
 - Whether the committedFinish (twoblow) rate moved with bigger
   strikes, and whether that interaction helped or hurt.
 
+## Correction — band freshness (post-hoc, 2026-11-05)
+
+The "verified free" claim above was scoped too narrowly (only
+`evidence/2026-11-05/sim-*.md` and `perseed-*` filenames). Seeds
+99201–99208 were already named in 2026-11-04 preregs:
+`sim-standacc-b-prereg.md` lists 99201–99208 as its extension band
+(not run — its corpus is 99101–99108 only) and names 99201–99216 in
+a forbidden/contaminated band list, as do `sim-tendbelow-b`,
+`sim-diplo-b`, and `sim-tendfloor-guard-b` preregs; individual seeds
+also appear in 11-02/11-03 screen runs. No prior JUDGED pilot
+corpus on 99201–99208 exists. Corrected claim: "band previously
+named (forbidden list + extension band); no prior judged corpus on
+these seeds." The paired verdict is unaffected (identical seeds,
+identical code except the lever). See the evidence file's
+Correction section for the full accounting.
+
 ## Proof (committed with this prereg, before judged sims)
 
 `scripts/test-dmground-20261105.js` — fixture tests (instrument

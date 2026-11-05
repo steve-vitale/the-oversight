@@ -219,6 +219,35 @@ price, deed-gate, readyDemand, VETSHAPE, flee/retreat, or food
 change was made at any point; the arm-2 damage+staying toggle was
 not touched.
 
+## Correction — seed band was not fresh (post-hoc, 2026-11-05)
+
+Post-run review (a stale background grep completing after the
+verdict) showed the prereg's "verified free" check was scoped too
+narrowly: it covered only `evidence/2026-11-05/sim-*.md` and
+`perseed-*` filenames, following the finishhold prereg's stated
+scope. Seeds 99201–99208 were already named in 2026-11-04 preregs:
+`sim-standacc-b-prereg.md` lists 99201–99208 as its extension band
+(not run — its corpus is 99101–99108 only) and names 99201–99216 in
+a forbidden/contaminated band list, as do `sim-tendbelow-b`,
+`sim-diplo-b`, and `sim-tendfloor-guard-b` preregs. Individual seeds
+also appear in 11-02/11-03 screen runs (collapseband screen 99203,
+sensorresupply screen 99206, journey-scale-r93 99208). No prior
+JUDGED pilot corpus on 99201–99208 exists; the overlap is naming +
+screen use, not a consumed judged band.
+
+What this changes: the "fresh band" claim in the prereg is corrected
+to "band previously named (forbidden list + extension band); no prior
+judged corpus on these seeds." It does NOT change the verdict: the
+before/after comparison ran identical seeds on identical code except
+the lever, so the paired result (armed 12.2% < 15% bar; field kills
+0/33) is internally valid — seed reuse across arms on different code
+does not contaminate the RNG, and this arm did not select the band
+from prior results (the band came from the coordinator's task
+suggestion, checked blind). Process lesson for the next run:
+freshness checks must cover all dated preregs (not just the current
+day) and the forbidden-band list the 11-04 arms cite; a band named in
+any prior prereg is not fresh even if no corpus exists for it.
+
 ## Files
 
 - Prereg + instrument + driver + analyzer + proof: cc17440dd
