@@ -54,6 +54,7 @@ const DAYCAP = parseInt(process.env.DAYCAP || '140', 10);
 const { loadGame, setupGame, runDays } = require('./sim-harness');
 const { competent } = require('./policies/competent');
 const { socialite } = require('./policies/socialite');
+const gc = require('./policies/gossipcensus-diag'); // r141 M6 classifiers (read-only)
 
 const OUTDIR = process.env.OUTDIR ? path.resolve(process.env.OUTDIR) : path.join(ROOT, 'evidence', '2026-11-05');
 function vname(Game, vid) { try { return Game.displayName(vid) || String(vid); } catch (e) { return String(vid); } }
@@ -320,7 +321,7 @@ async function oneSeed(seed) {
     };
   } catch (e) {}
   await setupGame(Game);
-  const ctxShared = { mootNotes: [], talkReqSeen: {}, captured, lureDecisions: [], darkSnaps: [], armEvents: [], springEvents: [], expiredEvents: [], proposeCalls: [], successions: [] };
+  const ctxShared = { mootNotes: [], talkReqSeen: {}, captured, lureDecisions: [], darkSnaps: [], armEvents: [], springEvents: [], expiredEvents: [], proposeCalls: [], successions: [], nightlyNews: [] };
   // r141 succession tracking: the mantle can pass mid-run, so the bearer
   // at decision time is recorded, not the end-of-run scholar. Capture the
   // initial bearer AFTER the ctxShared literal (r136 captured before it,
@@ -472,6 +473,26 @@ async function oneSeed(seed) {
       }
       ctxShared.lastBearer = b;
     } catch (e) {}
+    // r141 M6 (read-only): nightly haven-news census. Count naming-beat
+    // lines this day delivered while the scholar was away from Haven at
+    // the day's end (same stranded notion as gossipcensus-a: not inside
+    // Haven at daily exit; per-day slice, not a sleep window — the fix
+    // gates delivery on position entirely, so ANY burst/settle/witness/
+    // tale line on a stranded day is the defect). Classifiers are the
+    // gossipcensus-a ones; no Game call changes, no RNG.
+    try {
+      const dayLines = captured.slice(c0).map(c => String(c.t || ''));
+      let burst = 0, settle = 0, witness = 0, tale = 0;
+      for (const t of dayLines) {
+        if (gc.isGossipBurstLine(t)) burst++;
+        else if (gc.isSettleLine(t)) settle++;
+        if (/came back from the treeline white-faced/.test(t)) witness++;
+        if (/The fire settles\./.test(t)) tale++;
+      }
+      let stranded = false;
+      try { stranded = !G2.scholarAtHaven(); } catch (e2) {}
+      ctxShared.nightlyNews.push({ day: d, stranded, burst, settle, witness, tale });
+    } catch (e2) {}
     if (d === 30 || d === 60 || d === 90) ctxShared.bondSnaps.push(bondSnap(G2));
     if (d === 30 || d === 60 || d === 90 || d === 120) ctxShared.darkSnaps.push(darkSnap(G2));
   };
@@ -501,6 +522,16 @@ async function oneSeed(seed) {
   try { bondEnd = bondSnap(Game); } catch (e) {}
   let darkEnd = null;
   try { darkEnd = darkSnap(Game); } catch (e) {}
+  // r141 M6: end-state naming census (read-only) — which debates kicked
+  // and settled, and what is still queued for the scholar's return.
+  let namingEnd = null;
+  try {
+    namingEnd = Object.entries((Game.state.codex || {}).monsters || {}).map(([mid, e]) => ({
+      mid, reported: !!e.reported, namingKicked: !!e.namingKicked,
+      villageName: e.villageName || null, proposals: Object.keys(e.proposals || {}).length,
+      queued: (Game.state.pendingHavenNews || []).filter(q => q.mid === mid).length,
+    }));
+  } catch (e) {}
   let ambushLines = [];
   try {
     ambushLines = captured.filter(c => /ambush|sprang|trap|betray|stands accused|Word reaches you/i.test(String(c.t || ''))).slice(0, 200);
@@ -543,6 +574,7 @@ async function oneSeed(seed) {
     springWrapped: ctxShared.springWrapped, springEvents: ctxShared.springEvents,
     expireWrapped: ctxShared.expireWrapped, expiredEvents: ctxShared.expiredEvents,
     darkSnaps: ctxShared.darkSnaps, darkEnd, ambushLines,
+    nightlyNews: ctxShared.nightlyNews, namingEnd,
     mootNotes: ctxShared.mootNotes,
     talkReqSeen: ctxShared.talkReqSeen,
     census: cen,

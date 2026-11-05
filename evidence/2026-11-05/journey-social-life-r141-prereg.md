@@ -178,3 +178,26 @@ instrumentErrors, then the panel.
   telemetry-baselines/social.json. Known schema drift: the social
   driver never emits l3.* fields, so LOUD-disappeared lines are
   explained, not a bug. Baseline NOT rolled on a single 4-seed panel.
+
+## INSTRUMENT CORRECTION (pre-judgment of M6, before any verdict is read)
+
+The first full panel (seeds 41801–41804, driver as pre-registered
+above) ran clean and its trajectories are the record — but it cannot
+judge M6: the driver records no per-night position, so there is no
+stranded-window data in its JSONs (the captured stream is not
+persisted, only ambush-filtered lines). CORRECTION (read-only, no Game
+call changes, no RNG): the driver gains a nightlyNews census — per
+day, the count of burst/settle/witness/tale lines in that day's emit
+slice plus stranded-at-daily-exit (scholarAtHaven), classified with
+the gossipcensus-a classifiers — and a namingEnd census (reported /
+namingKicked / villageName / queued per monster). The analyzer gains
+an M6 section. The first panel's JSONs are KEPT as the trajectory
+record (not verdict inputs for M6) and the panel is RE-RUN with the
+corrected driver; the determinism proof (field-level walk, `ms` +
+the two new M6 fields stripped) must show identical trajectories
+before the re-run is judged. M6's window notion is a per-day slice
+with stranded-at-daily-exit, not the census's sleep window — the fix
+gates delivery on position entirely, so ANY naming-beat line on a
+stranded day is the defect; the approximation is named here, not
+hidden. Metrics M1–M6 are unchanged — only the instrument that reads
+M6.

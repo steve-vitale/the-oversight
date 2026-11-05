@@ -95,6 +95,11 @@ for (const s of seeds) {
   console.log('  ambush-caused fallen: ' + JSON.stringify(fallen.filter(d => (d.cause || '') === 'ambush')));
   console.log('  (samples.deaths, all recorded incl. outsiders: ' + ((s.samples && s.samples.deaths) || []).length + ' — NOT village deaths)');
   console.log('  census: ' + (s.census || []).slice(0, 2).join(' | '));
+  // r141 M6: haven-news on stranded days (per-day slices).
+  const nn = s.nightlyNews || [];
+  const sd = nn.filter(n => n.stranded);
+  const sum = (k) => sd.reduce((a, n) => a + (n[k] || 0), 0);
+  console.log('  M6 nightlyNews: strandedDays=' + sd.length + ' burst=' + sum('burst') + ' settle=' + sum('settle') + ' witness=' + sum('witness') + ' tale=' + sum('tale') + ' debatesKicked=' + (s.namingEnd || []).filter(m => m.namingKicked).length + ' settled=' + (s.namingEnd || []).filter(m => m.villageName).length + ' queuedAtEnd=' + (s.namingEnd || []).reduce((a, m) => a + (m.queued || 0), 0));
 }
 console.log('\nPANEL lure/party decisions: ' + JSON.stringify(count(allLures, d => (d.kind || '?') + ':' + (d.accept ? 'accept' : 'decline'))));
 // r141 BOND panel: lure split needs each decision's recorded flag.
@@ -122,3 +127,13 @@ console.log('PANEL springs: ' + allSprings.length + ' outcomes: ' + JSON.stringi
 console.log('PANEL escaped springs: ' + allSprings.filter(x => x.outcome === 'escaped').length);
 console.log('PANEL expired plots: ' + seeds.reduce((n, s) => n + (s.expiredEvents || []).length, 0));
 console.log('PANEL villages past d100: ' + seeds.filter(s => (s.gameDay || 0) >= 100).length + '/' + seeds.length);
+// r141 M6 panel: gossip-position — naming-beat lines on stranded days.
+let m6StrandedDays = 0, m6Burst = 0, m6Settle = 0, m6Witness = 0, m6Tale = 0, m6Kicked = 0, m6Settled = 0;
+for (const s of seeds) {
+  for (const n of (s.nightlyNews || [])) {
+    if (n.stranded) { m6StrandedDays++; m6Burst += n.burst || 0; m6Settle += n.settle || 0; m6Witness += n.witness || 0; m6Tale += n.tale || 0; }
+  }
+  for (const m of (s.namingEnd || [])) { if (m.namingKicked) m6Kicked++; if (m.villageName) m6Settled++; }
+}
+console.log('PANEL M6 haven-news: strandedDays=' + m6StrandedDays + ' burstLines=' + m6Burst + ' settleLines=' + m6Settle + ' witnessLines=' + m6Witness + ' taleLines=' + m6Tale + ' debatesKicked=' + m6Kicked + ' namesSettled=' + m6Settled);
+console.log('PANEL M6 verdict: ' + ((m6Burst + m6Settle + m6Witness + m6Tale === 0 && m6Kicked >= 1) ? 'GO — no naming-beat line reached a stranded scholar, debates alive' : 'NO-GO — see counts'));
