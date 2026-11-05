@@ -1,0 +1,41 @@
+=== r105 PEOPLE CHECK (2 held convos, end of run; no teaching intervention this run) ===
+
+-- Maureen (gen_bcozu8k) occ=Veterinarian --
+OPENING: "About the pantry run — the need hasn't gone anywhere. I'm still asking."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Your partner is inside the Haven hall. Go through the door to meet them.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Then it’s set. The east treeline, before the dew dries. Pack and knife. We travel light."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Asian Persimmon. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Wild Garlic. Leaf, stem, smell. You won't forget it now."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "You want to know about that? Okay." "Ivy? A journalist, back before. Solid person."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:more] "I’m listening."
+THEM: "Someone should talk to Yara. Not me, though."
+closing: "Don't be a stranger."
+
+-- Chen (gen_6fckz2w) occ=Pharmacist --
+OPENING: "Never mind the sickness I'm fighting — we got it handled. Thanks anyway."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:gossip] "Heard anything good? About anyone?"
+THEM: "Huh. Let me think about that." "Someone should talk to Yara. Not me, though."
+YOU: [goon] "Wait, what? Go on —"
+THEM: Their friendliness thins — still there, just held at arm's length.
+YOU: [goon] "Wait, what? Go on —"
+THEM: "Come get air with me. I need to think out loud."
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: At the ridge the ground is torn up. Something was here, recently, and it wasn't careful. Chen's hand finds your sleeve. You leave together, faster than you came.
+YOU: [dlg:more] "Tell me more."
+THEM: "Maureen is back. Walked in like they'd never left."
+YOU: [dlg:react] (listen)
+THEM: They nod slowly, not quite done, not quite continuing.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the gossip."
+closing: "Take care of yourself."
