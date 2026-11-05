@@ -376,8 +376,9 @@ metric 13/13.
 ## Closeout (filled after the check gate)
 - check.js --quick: 282 passed, 8 failed in 1218s (all 8
   pre-existing, no new failures — see above).
-- Rebased onto master 555f59160 (sim-bankkiller-b landed while the
-  gate ran); proof test re-run green after the rebase (13/13).
+- Rebased onto master a6bd67b10 (sim-bankkiller-b + journey-succession
+  r142 landed while the gate ran); proof test re-run green after the
+  rebase (13/13).
 - Merged locally, pending ship (no bump/push/live-verify — ship loop
   owns those). Merge hash in the memory log.
 - Rotation 2 -> 3 written at closeout, verified by read-back (see
