@@ -25,10 +25,13 @@ let ANCHOR = 'unknown';
 try { ANCHOR = execSync('git rev-parse HEAD', { cwd: REPO }).toString().trim().slice(0, 12); } catch (e) {}
 
 const outDir = process.env.OUTDIR || path.join(REPO, 'evidence', '2026-11-05', 'perseed-standaccum2-b');
-fs.mkdirSync(outDir, { recursive: true });
-for (const seed of SEEDS) {
-  const file = path.join(outDir, 'standaccum2-s' + seed + '-' + RUN + '.json');
-  if (fs.existsSync(file)) { console.error('STANDACCUM2 STOP: refusing to overwrite ' + file); process.exit(3); }
+const STDOUT_MODE = process.env.STANDACCUM2_STDOUT === '1';
+if (!STDOUT_MODE) {
+  fs.mkdirSync(outDir, { recursive: true });
+  for (const seed of SEEDS) {
+    const file = path.join(outDir, 'standaccum2-s' + seed + '-' + RUN + '.json');
+    if (fs.existsSync(file)) { console.error('STANDACCUM2 STOP: refusing to overwrite ' + file); process.exit(3); }
+  }
 }
 
 function gday(Game) { try { return ((Game.state || {}).scholar || {}).day || 0; } catch (e) { return 0; } }
@@ -97,14 +100,42 @@ async function oneRun(seed) {
   return out;
 }
 
+// writeWithRetry: the host write flap (EPERM, Nov 3-4 evenings + this
+// run) can deny the final corpus write and leave a 0-byte stub. The sim
+// result is already computed in memory — retry the WRITE (up to
+// 120 x 10s, with size + JSON verification), never re-run the sim.
+function writeWithRetry(file, content) {
+  let lastErr = null;
+  for (let attempt = 1; attempt <= 120; attempt++) {
+    try { fs.unlinkSync(file); } catch (e) {}
+    try {
+      fs.writeFileSync(file, content);
+      const st = fs.statSync(file);
+      if (st.size === 0) throw new Error('zero-size write');
+      JSON.parse(fs.readFileSync(file, 'utf8'));
+      return;
+    } catch (e) { lastErr = e; try { console.error('WRITE-RETRY att=' + attempt + ' code=' + (e && e.code) + ' msg=' + String(e && e.message).slice(0, 120)); } catch (e2) {} Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 10000); }
+  }
+  throw lastErr;
+}
+
 (async function () {
   for (const seed of SEEDS) {
     const out = await oneRun(seed);
-    const file = path.join(outDir, 'standaccum2-s' + seed + '-' + RUN + '.json');
-    fs.writeFileSync(file, JSON.stringify(out, null, 2) + '\n');
     const last = out.daily[out.daily.length - 1] || {};
+    const file = path.join(outDir, 'standaccum2-s' + seed + '-' + RUN + '.json');
+    if (STDOUT_MODE) {
+      // Escape hatch for the host write flap: bash (not node) writes
+      // the file via shell redirection. Stdout carries ONLY the corpus
+      // JSON in this mode; the summary goes to stderr. Synchronous
+      // fd write: console.log's async flush can be lost on exit when
+      // stdout is a redirected file (observed: exit 0, 0 bytes).
+      fs.writeSync(1, JSON.stringify(out, null, 2) + '\n');
+    } else {
+      writeWithRetry(file, JSON.stringify(out, null, 2) + '\n');
+    }
     const r5 = last.readiness5 || {};
-    console.log(JSON.stringify({
+    (STDOUT_MODE ? console.error : console.log)(JSON.stringify({
       seed: out.seed, days: out.days, endReason: out.endReason, won: out.won,
       maxWave: out.maxWave, standing: out.standing,
       endGated: last.gated != null ? last.gated : null,
