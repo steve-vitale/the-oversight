@@ -129,6 +129,11 @@ revision for the NEXT run.
   3. TB round snapshots now fill the player entry's vid from the record's
      fighter id (was null — the scholar's tbfight entry carries no
      villagerId).
+  4. The TB `fighters` list now names the whole human side (scholar
+     first, then companions — was companions-only whenever companions
+     were present, so partySize undercounted by one). The strict kill
+     match accepts the record's `fighter` id as well, so r1-shaped
+     records still match.
 - The judged run is R2 (RUN finish-instrument-pilot-r2, OUTDIR
   perseed-finish-instrument-r2, same seeds 99311–99318, same
   policy/horizon). R1 files are retained as the pilot that found the

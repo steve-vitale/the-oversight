@@ -7,9 +7,10 @@
 // terminal-round signature. Kill matching is STRICT (secondkiller rule):
 // a TB 'won' is a kill only when its killMatched flag holds AND a
 // waveKillLog row matches strictly (same monster, same day, killer among
-// the fight's fighters); unmatched kill-log rows are reported, never
-// assigned. Field kills need no matching: the engine outcome vKill IS
-// the kill.
+// the fight's fighters — the scholar counts as 'player', by companion id,
+// AND by the record's fighter id, Amendment 2); unmatched kill-log rows
+// are reported, never assigned. Field kills need no matching: the engine
+// outcome vKill IS the kill.
 // Usage: node scripts/finishing-instrument-analyze-20261105.js [dir]
 'use strict';
 const fs = require('fs');
@@ -49,6 +50,18 @@ function checkFight(f, seedOut) {
       for (let i = 1; i < rounds.length; i++) {
         if (rounds[i].round !== rounds[i - 1].round + 1) { problems.push('tb-rounds-not-consecutive at idx ' + i); break; }
       }
+      // Amendment 2: TB snapshots carry per-round dealt/taken (backward
+      // deltas) and round-start/end HPs; every round must have them.
+      // No sum-equality book is checked: a monster heal between
+      // snapshots clamps that round's dealt at 0, so the per-round sum
+      // can exceed the net damageDealt.
+      for (let i = 0; i < rounds.length; i++) {
+        const r = rounds[i];
+        if (typeof r.dealt !== 'number' || r.dealt < 0) { problems.push('tb-dealt-missing r' + r.round); break; }
+        if (typeof r.taken !== 'number' || r.taken < 0) { problems.push('tb-taken-missing r' + r.round); break; }
+        if (typeof r.vHpStart !== 'number' || typeof r.vHpEnd !== 'number') { problems.push('tb-vhp-missing r' + r.round); break; }
+        if (!Array.isArray(r.abilities) || !Array.isArray(r.tricks)) { problems.push('tb-abilities-tricks-missing r' + r.round); break; }
+      }
     }
     const last3 = f.last3 || [];
     const want3 = Math.min(3, f.rounds | 0);
@@ -81,14 +94,17 @@ function analyzeSeed(out) {
   });
   // Strict kill cross-check (TB only): every wave-4+ kill-log row must
   // match a fight whose fighters include the killer (same day, same mid);
-  // every TB fight with killMatched must have such a row.
+  // every TB fight with killMatched must have such a row. The scholar
+  // counts via the record's fighter id too (Amendment 2): the log
+  // records the scholar's villager id, and `fighters` is the companion
+  // list, so a scholar kill otherwise looks unmatched.
   const log = (out.waveKillLog || []).filter(function (e2) { return ((e2.w | 0) >= 4); });
   s.w4killsLog = log.length;
   s.unmatchedKills = [];
   log.forEach(function (e2) {
     const m = fights.some(function (f) {
       return f.day === (e2.d | 0) && f.mid === e2.mid &&
-        (e2.by === 'player' || (f.fighters || []).indexOf(e2.by) >= 0);
+        (e2.by === 'player' || e2.by === f.fighter || (f.fighters || []).indexOf(e2.by) >= 0);
     });
     if (!m) s.unmatchedKills.push(e2);
   });
@@ -122,7 +138,9 @@ function analyzeDir(dir) {
   withRounds.forEach(function (f) {
     (f.last3 || []).forEach(function (r) {
       if (typeof r.dealt === 'number') last3Dealt.push(r.dealt);
-      if (f.channel === 'field' && typeof r.vHpStart === 'number') last3StartVHpFrac.push(r.vHpStart / 100);
+      // Amendment 2: TB snapshots carry vHpStart too, so both channels
+      // contribute to the last-3 HP fraction.
+      if (typeof r.vHpStart === 'number') last3StartVHpFrac.push(r.vHpStart / 100);
       if (r.tricks) last3Tricks.push(r.tricks.length);
       if (r.abilities) last3Abilities.push(r.abilities.length);
     });
@@ -140,9 +158,9 @@ function analyzeDir(dir) {
       medianFinalRoundDealt: median(lastRounds.map(function (r) { return r.dealt; })),
       medianFinalRoundTaken: median(lastRounds.map(function (r) { return (typeof r.taken === 'number') ? r.taken : null; })),
       medianFinalVHpFrac: median(fs.map(function (f) {
-        if (f.channel !== 'field') return null;
+        // Amendment 2: TB snapshots carry vHpEnd too.
         const lr = f.last3[f.last3.length - 1];
-        return lr ? lr.vHpEnd / 100 : null;
+        return (lr && typeof lr.vHpEnd === 'number') ? lr.vHpEnd / 100 : null;
       })),
     };
   });

@@ -106,6 +106,20 @@ async function liveLegs() {
       JSON.stringify(trec && { ending: trec.ending, outcomeRaw: trec.outcomeRaw, rounds: trec.rounds, rdLen: trec.roundsDetail.length }));
     const tele2 = (Game.state.telemetry || []).filter(function (t) { return t && t.type === 'fight_finish'; });
     check('tb-telemetry-event', tele2.length >= 2, 'fight_finish events=' + tele2.length);
+    if (trec && trec.roundsDetail) {
+      check('tb-rounds-have-dealt-taken', trec.roundsDetail.every(function (r) {
+        return typeof r.dealt === 'number' && r.dealt >= 0 && typeof r.taken === 'number' && r.taken >= 0 &&
+          typeof r.vHpStart === 'number' && typeof r.vHpEnd === 'number' &&
+          Array.isArray(r.abilities) && Array.isArray(r.tricks);
+      }), JSON.stringify(trec.roundsDetail.map(function (r) { return [r.round, r.dealt, r.taken]; })));
+      const p0 = ((trec.roundsDetail[0] || {}).fighters || []).find(function (x) { return x && x.kind === 'player'; });
+      check('tb-player-vid', !!p0 && p0.vid === trec.fighter, 'vid=' + (p0 && p0.vid) + ' fighter=' + trec.fighter);
+      const lastRd = trec.roundsDetail[trec.roundsDetail.length - 1];
+      check('tb-dealt-sums', trec.entryHp != null && !!lastRd &&
+        Math.max(0, trec.entryHp - (lastRd.monsterHp | 0)) === (trec.damageDealt | 0) &&
+        sum(trec.roundsDetail.map(function (r) { return r.dealt; })) >= (trec.damageDealt | 0),
+        'entryHp=' + trec.entryHp + ' lastM=' + (lastRd && lastRd.monsterHp) + ' dealt=' + trec.damageDealt);
+    }
   }
   check('instrument-errors-empty', (Game._finishLogErrors || []).length === 0, JSON.stringify(Game._finishLogErrors));
 }
@@ -157,6 +171,34 @@ async function liveLegs() {
   check('analyzer-unmatched-kill', s4.unmatchedKills.length === 1, JSON.stringify(s4.unmatchedKills));
   const s5 = AN.analyzeSeed(seedOut([fieldFight({ ending: 'kill', outcomeRaw: 'vKill', fighters: ['leader', 'outsider'] })], [killRow]));
   check('analyzer-matched-kill', s5.unmatchedKills.length === 0, JSON.stringify(s5.unmatchedKills));
+
+  // TB-shaped fight (Amendment 2): per-round dealt/taken/vHp present, and
+  // a kill-log row with by === the record's fighter (scholar) id matches
+  // even though `fighters` is the companion list.
+  function tbFight(o) {
+    const base = { channel: 'player-tb', day: 20, fighter: 'scholar1', fighters: ['ally1'], mid: 'eater', wave: 4,
+      entryHp: 1000, rounds: 2, roundsDetail: [
+        { round: 1, fighters: [{ key: 'p', kind: 'player', vid: 'scholar1', hp: 100, maxHp: 100, alive: true }, { key: 'm_0', kind: 'monster', vid: null, hp: 1000, maxHp: 1000, alive: true }], monsterHp: 1000, dealt: 0, taken: 0, leaderTaken: 0, allyTaken: 0, vHpStart: 100, vHpEnd: 100, mHpStart: 1000, mHpEnd: 1000, abilities: [], tricks: [] },
+        { round: 2, fighters: [{ key: 'p', kind: 'player', vid: 'scholar1', hp: 90, maxHp: 100, alive: true }, { key: 'm_0', kind: 'monster', vid: null, hp: 900, maxHp: 1000, alive: true }], monsterHp: 900, dealt: 100, taken: 10, leaderTaken: 10, allyTaken: 0, vHpStart: 100, vHpEnd: 90, mHpStart: 1000, mHpEnd: 900, abilities: ['x'], tricks: [] },
+      ],
+      last3: null, outcomeRaw: 'won', ending: 'kill', killMatched: true, damageDealt: 100, damageFrac: 0.1,
+      vTaken: 10, leaderTaken: 10, allyTaken: 0, abilitiesUsed: ['x'] };
+    const f = Object.assign(base, o || {});
+    f.last3 = f.roundsDetail.slice(-3);
+    return f;
+  }
+  const tbKillRow = { d: 20, mid: 'eater', w: 4, by: 'scholar1', via: 'player', trick: null };
+  const s6 = AN.analyzeSeed(seedOut([tbFight()], [tbKillRow]));
+  check('analyzer-tb-scholar-kill-matched', s6.unmatchedKills.length === 0 && s6.coverageProblems.length === 0,
+    JSON.stringify({ unmatched: s6.unmatchedKills, probs: s6.coverageProblems }));
+  const s7 = AN.analyzeSeed(seedOut([tbFight()], [{ d: 20, mid: 'eater', w: 4, by: 'outsider', via: 'wild', trick: null }]));
+  check('analyzer-tb-outsider-unmatched', s7.unmatchedKills.length === 1, JSON.stringify(s7.unmatchedKills));
+  const tbNoDealt = tbFight();
+  delete tbNoDealt.roundsDetail[1].dealt;
+  tbNoDealt.last3 = tbNoDealt.roundsDetail.slice(-3);
+  const s8 = AN.analyzeSeed(seedOut([tbNoDealt]));
+  check('analyzer-flags-tb-dealt-missing', s8.coverageProblems.some(function (p) { return /tb-dealt-missing/.test(p); }),
+    JSON.stringify(s8.coverageProblems));
 
   check('analyzer-exports', typeof AN.analyzeDir === 'function' && typeof AN.analyzeSeed === 'function');
 })();

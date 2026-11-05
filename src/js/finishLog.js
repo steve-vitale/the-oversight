@@ -119,10 +119,15 @@
 
   // ---- player turn-based fights (wraps; the engine is never edited) ----
 
-  function tbFighters(f) {
+  // scholarVid: the scholar's tbfight entry (kind 'player', key 'p')
+  // often carries no villagerId; fill it from the fight record's
+  // fighter id so the player entry names who acted (Amendment 2).
+  function tbFighters(f, scholarVid) {
     try {
       return (f.fighters || []).map(function (x) {
-        return { key: x.key || null, kind: x.kind || null, vid: x.villagerId || null, hp: (x.hp != null) ? (x.hp | 0) : null, maxHp: (x.maxHp != null) ? (x.maxHp | 0) : null, alive: !!x.alive };
+        var vid = x.villagerId || null;
+        if (!vid && x.kind === 'player' && scholarVid) vid = scholarVid;
+        return { key: x.key || null, kind: x.kind || null, vid: vid, hp: (x.hp != null) ? (x.hp | 0) : null, maxHp: (x.maxHp != null) ? (x.maxHp | 0) : null, alive: !!x.alive };
       });
     } catch (e) { return []; }
   }
@@ -148,52 +153,106 @@
     try {
       var vids = (f.fighters || []).filter(function (x) { return x && (x.kind === 'player' || x.kind === 'villager' || x.kind === 'ally') && x.villagerId; })
         .map(function (x) { return x.villagerId; });
-      // SCHOLAR-VID (secondkiller correction): the scholar's own tbfight
-      // entry often carries no villagerId (kind 'player', key 'p'), so a
-      // solo scholar fight would list no human fighters at all.
-      if (!vids.length && g.villagerId) vids = [g.villagerId];
+      // SCHOLAR-VID (secondkiller correction, Amendment 2): the
+      // scholar's own tbfight entry often carries no villagerId (kind
+      // 'player', key 'p'), so the scholar is listed first by id — the
+      // human side is scholar + companions, never companions-only, so
+      // partySize and the strict kill match both read the whole side.
+      if (g.villagerId && vids.indexOf(g.villagerId) < 0) vids.unshift(g.villagerId);
       return vids;
     } catch (e) { return g.villagerId ? [g.villagerId] : []; }
   }
 
   // snapshotTb(open): one entry per round number, holding END-of-round
-  // HPs. A second snapshot in the same round replaces the first (the
-  // round's final state); a new round number pushes a new entry.
+  // HPs plus the per-round deltas for that round (Amendment 2 — TB
+  // snapshots were HP-only, so the last-3 and terminal tables were
+  // field-only). dealt/taken are BACKWARD deltas from the previous
+  // snapshot: dealt = monster HP lost since the previous snapshot,
+  // taken = HP lost by the player + companions since the previous
+  // snapshot, split into leaderTaken (the scholar) and allyTaken.
+  // The terminal round's dealt is exact (its snapshot is the fight's
+  // end state, taken at tbEnd); interior rounds carry a one-snapshot
+  // attribution lag of the tbAdvance timing — the HP trajectories
+  // themselves are exact, only the per-round split is lagged. A second
+  // snapshot in the same round replaces the first, and the baseline for
+  // the replacement is the entry BEFORE the replaced one (or the entry
+  // state for round 1), so the round's deltas always span the whole
+  // round and the per-round dealt still sums to damageDealt.
+  // Abilities fired since the previous snapshot drain into this entry
+  // (useAbility accumulates them on the open record); TB has no trick
+  // log, so tricks is always [].
   function snapshotTb(open) {
     var f = G.tbfight;
     if (!f || !open) return;
-    var snap = { round: (f.round | 0) || 0, fighters: tbFighters(f), monsterHp: tbMonsterHp(f) };
-    var last = open.roundsDetail[open.roundsDetail.length - 1];
-    if (last && last.round === snap.round) open.roundsDetail[open.roundsDetail.length - 1] = snap;
-    else open.roundsDetail.push(snap);
+    var snap = { round: (f.round | 0) || 0, fighters: tbFighters(f, open.fighter), monsterHp: tbMonsterHp(f) };
+    var list = open.roundsDetail;
+    var last = list[list.length - 1];
+    // Replacement baseline: the state at the START of this round — the
+    // previous round's end state, or for round 1 the replaced entry
+    // itself (the startCombat snapshot, which holds the round-start
+    // HPs). Never the replaced entry's own mid-round values, or the
+    // round's deltas would span only part of the round.
+    var base;
+    if (last && last.round === snap.round) base = (list.length >= 2) ? list[list.length - 2] : last;
+    else base = last || { monsterHp: open.entryHp, fighters: [] };
+    var baseM = (base.monsterHp != null) ? base.monsterHp : open.entryHp;
+    snap.mHpStart = baseM; snap.mHpEnd = snap.monsterHp;
+    snap.dealt = Math.max(0, (baseM | 0) - (snap.monsterHp | 0));
+    var baseByKey = {};
+    (base.fighters || []).forEach(function (x) { if (x && x.key) baseByKey[x.key] = x; });
+    var taken = 0, leaderTaken = 0, allyTaken = 0, vStart = null, vEnd = null;
+    snap.fighters.forEach(function (x) {
+      if (!x || (x.kind !== 'player' && x.kind !== 'villager' && x.kind !== 'ally')) return;
+      var b = baseByKey[x.key];
+      if (x.kind === 'player') { vStart = (b && b.hp != null) ? b.hp : x.hp; vEnd = x.hp; }
+      if (b && b.hp != null && x.hp != null) {
+        var drop = Math.max(0, (b.hp | 0) - (x.hp | 0));
+        taken += drop;
+        if (x.kind === 'player') leaderTaken += drop; else allyTaken += drop;
+      }
+    });
+    snap.taken = taken; snap.leaderTaken = leaderTaken; snap.allyTaken = allyTaken;
+    snap.vHpStart = vStart; snap.vHpEnd = vEnd;
+    snap.abilities = (open.pendingAbilities || []).slice();
+    open.pendingAbilities = [];
+    snap.tricks = [];
+    if (last && last.round === snap.round) list[list.length - 1] = snap;
+    else list.push(snap);
   }
 
   function buildTbRecord(open, result, ending, killMatched) {
     var endHp = open.roundsDetail.length ? open.roundsDetail[open.roundsDetail.length - 1].monsterHp : null;
     var dealt = (open.entryHp != null && endHp != null) ? Math.max(0, open.entryHp - endHp) : null;
     var lastRound = open.roundsDetail.length ? open.roundsDetail[open.roundsDetail.length - 1].round : 0;
+    var vTaken = 0, leaderTaken = 0, allyTaken = 0;
+    open.roundsDetail.forEach(function (r) { vTaken += (r.taken | 0); leaderTaken += (r.leaderTaken | 0); allyTaken += (r.allyTaken | 0); });
     return {
       channel: 'player-tb', day: open.day, fighter: open.fighter, fighters: open.fighters,
       mid: open.mid, wave: open.wave, entryHp: open.entryHp,
       rounds: lastRound, roundsDetail: open.roundsDetail, last3: open.roundsDetail.slice(-3),
       outcomeRaw: result || null, ending: ending, killMatched: !!killMatched,
       damageDealt: dealt, damageFrac: (dealt != null && open.entryHp > 0) ? dealt / open.entryHp : null,
+      vTaken: vTaken, leaderTaken: leaderTaken, allyTaken: allyTaken,
       abilitiesUsed: (open.abilitiesUsed || []).slice(),
       gear: null, partySize: (open.fighters && open.fighters.length) || 1,
     };
   }
 
-  // STRICT KILL MATCH (secondkiller correction): a waveKillLog row makes
-  // a TB 'won' a kill only when its monster id and day match this fight
-  // AND its killer is one of this fight's fighters (the scholar counts as
-  // 'player' as well as by villager id). A 'won' with no matching row is
-  // a rout — the monster broke, nobody's kill is logged — never a kill.
+  // STRICT KILL MATCH (secondkiller correction, Amendment 2): a
+  // waveKillLog row makes a TB 'won' a kill only when its monster id and
+  // day match this fight AND its killer is one of this fight's fighters.
+  // The scholar counts three ways: as 'player', by villager id among the
+  // companions, and by the record's fighter id — the kill log records
+  // the scholar's own id, and `fighters` is the companion list, so a
+  // scholar kill missed the match until the fighter id was accepted. A
+  // 'won' with no matching row is a rout — the monster broke, nobody's
+  // kill is logged — never a kill.
   function tbKillMatched(g, open) {
     try {
       var log = ((g.state || {}).waveKillLog) || [];
       return log.some(function (e2) {
         return e2 && e2.mid === open.mid && (e2.d | 0) === (open.day | 0) &&
-          (e2.by === 'player' || (open.fighters || []).indexOf(e2.by) >= 0);
+          (e2.by === 'player' || e2.by === open.fighter || (open.fighters || []).indexOf(e2.by) >= 0);
       });
     } catch (e) { return false; }
   }
@@ -213,6 +272,7 @@
               channel: 'player-tb', day: dayOf(G), fighter: G.villagerId || null,
               fighters: tbHumanVids(f, G), mid: mid, wave: wave,
               entryHp: tbMonsterHp(f), roundsDetail: [], abilitiesUsed: [],
+              pendingAbilities: [],
             };
             snapshotTb(G._finishLogOpenTb);
           } else { G._finishLogOpenTb = null; }
@@ -239,7 +299,13 @@
       var r = origUseAbility.apply(this, arguments);
       try {
         var open = G._finishLogOpenTb;
-        if (open && arguments.length && typeof arguments[0] === 'string' && open.abilitiesUsed.indexOf(arguments[0]) < 0) open.abilitiesUsed.push(arguments[0]);
+        if (open && arguments.length && typeof arguments[0] === 'string') {
+          if (open.abilitiesUsed.indexOf(arguments[0]) < 0) open.abilitiesUsed.push(arguments[0]);
+          // Per-round attribution: drained into the next snapshot's
+          // abilities list (same one-snapshot lag as the damage deltas).
+          open.pendingAbilities = open.pendingAbilities || [];
+          open.pendingAbilities.push(arguments[0]);
+        }
       } catch (e) { err('useAbility', e); }
       return r;
     };
