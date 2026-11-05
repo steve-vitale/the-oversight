@@ -300,4 +300,27 @@ clean on driver + proof test.
 
 ## Closeout note
 
-[filled at closeout: rebase result, merge, rotation re-verification, lock deletion]
+- **Rebase:** clean, both picks applied, no sequencer stop. Rebased onto
+  master `4a065f050` (master had advanced past 5d8715e80 with the
+  sim-tbretreat-refind-b landings; the ship loop's version bump 1a898136c is
+  already in local master history — origin/master is an ancestor of local
+  master, no divergence; an early backwards ancestor check briefly suggested
+  otherwise and was corrected by the forward check). New SHAs: prereg
+  7f68a4277, run note cb42f0add. Zero file overlap with the advancing commits.
+- **Proof re-run on the rebased branch (all PASS):** shape (r94), goaround
+  (r104 replay corpus), class-F (r106), R69 regex (r108 driver).
+- **check.js --quick:** 284 passed, 6 failed (standing set, identical to r106).
+- **Telemetry:** 2 LOUD lines, both explained as aggregation artifacts, baseline
+  NOT rolled.
+- **Index clobber struck on BOTH safe-commits** (prereg 6bce0f17d and run note
+  6fc38240a): committed files showed staged-as-deleted + untracked after each
+  commit. Repaired both times via HEAD-blob `update-index --add --cacheinfo`;
+  verified status clean + diff HEAD empty + hash-object matches HEAD.
+- **Rotation re-verified at closeout: reads `1`** (the 0→1 write stuck this
+  run). Rotation-write discrepancy remains unexplained (4th sighting).
+- **EPERM flap** hit registration (~20:18Z) and cleared within minutes; no
+  data lost; the flap's 0-byte probe/tmp artifacts were not left behind in
+  this run.
+- Lock (`laneA-20261105T1945Z`, created 19:46:47Z) and heartbeat loop are
+  removed at closeout after the merge, once run_id is read back; see
+  `~/memory/2026-11-05.md` for the closeout record.
