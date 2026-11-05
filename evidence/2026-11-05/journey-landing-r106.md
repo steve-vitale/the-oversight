@@ -4,8 +4,8 @@
 master@5ffbdaa1a at branch creation; worktree `journey-landing`. Rotation read 0
 → leg 0 LANDING; 0→1 written at run start and verified by read-back.
 Prereg: evidence/2026-11-05/journey-landing-r106-prereg.md (committed
-b5e09c374 BEFORE any seed ran; the safe-commit index clobber struck on that
-commit, same class as r90/r94/r95/r97/r98/r99/r104/r105: commit correct,
+d28003c1f BEFORE any seed ran — pre-rebase b5e09c374; the safe-commit index
+clobber struck on that commit, same class as r90/r94/r95/r97/r98/r99/r104/r105: commit correct,
 index lied with the file staged-as-deleted + untracked; repaired via
 HEAD-blob cacheinfo, verified `git status` clean + `git diff HEAD` empty +
 hash-object matches).
@@ -323,11 +323,18 @@ baseline 33 → current sum 80 over 10 files (per-seed 8, mean 8.0);
   this run changes; no work in this run touches that build.
 
 ## Closeout note
-- Commit: prereg + R106 instrument (b5e09c374) + this note + class-F
-  analyzer fix/proof + r107 driver + panel + replay evidence (tooling +
-  evidence + analyzer only, zero src/js). The fix is instrument-only —
+- Commit: prereg + R106 instrument (d28003c1f) + class-F fix/proof
+  (82b4d4276) + this note + r107 driver (4fba2d57d) — pre-rebase hashes
+  b5e09c374 / b58b88ab1 / b9b0e72cc. The fix is instrument-only —
   no [needs-eyes] flag (nothing player-facing changed; the ship loop need
   not fast-track).
+- Rebase: Loop B landed first (tbretreat NO-GO revert, master 7f7475f59),
+  so the branch rebased onto the new master before merging — zero file
+  overlap; the rebase hit the known 2nd-pick sequencer stop (pick in both
+  done and todo lists, worktree clean, pick unapplied) and recovered with
+  `git rebase --continue` per the recorded recipe; all proof tests re-run
+  green on the rebased branch (class-F 6/6, shape PASS, goaround PASS).
+  Merged locally as ff-only (see below), pending ship.
 - Quick suite: `node scripts/check.js --quick` — 284 passed, 6 failed in
   538s (landing-r106-checkquick.log). The 6 are EXACTLY r104's standing
   set (measurement-proof-update, measurement-workflow, mobile-combat-cadence,
