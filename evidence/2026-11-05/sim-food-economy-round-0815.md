@@ -175,8 +175,10 @@ Merged locally, pending ship (ship loop owns push/bump/live verification).
   sim-bankadded-a-screen-guard-variant/ (64 files) + census corpus
   sim-bankadded-a-corpus/ (strandnarr-s17063.json); scripts/
   analyze-bankadded.js, test-bankadded-a.js (33/33 on merged master).
-- Hidden-files bookkeeping: claim fleshout-20261105T0515Z.json retired
-  to .DEAD with a note; this run's claim fleshout-20261105T0815Z.json
-  retired to .DEAD; lock deleted at closeout; tracker entry appended;
+- Hidden-files bookkeeping: claim fleshout-20261105T0515Z.json deleted by
+  the main session during its closeout (body's DELETE rule); this run's
+  recovery note kept as fleshout-20261105T0515Z.json.DEAD.note; this run's
+  claim fleshout-20261105T0815Z.json retired to .DEAD; lock deleted at
+  closeout; tracker entry appended;
   sim-findings.md: pantrymealword item fixed, bankadded-substrate item
   opened.
