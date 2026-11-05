@@ -1,0 +1,6686 @@
+{
+  "seed": 99740,
+  "arm": "tbretreat",
+  "run": "tbretreat-baseline",
+  "policy": "baseline",
+  "flagOn": false,
+  "anchorCommit": "436c0ca2b179",
+  "instrumentOff": false,
+  "stayStats": null,
+  "days": 70,
+  "gameDays": 70,
+  "endReason": "village-lost",
+  "won": false,
+  "over": true,
+  "villageLost": true,
+  "scaleRank": "village",
+  "maxWave": 4,
+  "unlockedWave": 4,
+  "standing": 150,
+  "readiness5": {
+    "wave": 5,
+    "ready": false,
+    "armored": 3,
+    "armed": 7,
+    "tricks": 28,
+    "veterans": 0,
+    "demand": {
+      "armored": 4,
+      "armorP": 15,
+      "armed": 6,
+      "tricks": 3,
+      "veterans": 2
+    },
+    "short": [
+      "armor",
+      "veterans"
+    ]
+  },
+  "fights": [
+    {
+      "day": 57,
+      "channel": "player-tb",
+      "fighter": "gen_570k4qh",
+      "fighters": [
+        "nadia_khoury",
+        "gen_570k4qh"
+      ],
+      "mid": "influencer",
+      "wave": 4,
+      "entryHp": 850,
+      "entryHpPrimary": 850,
+      "entryMaxHpPrimary": 850,
+      "primaryVeteran": false,
+      "worldOriginPresent": false,
+      "tileOrigin": {
+        "id": "influencer",
+        "hp": 850,
+        "maxHp": 850,
+        "tx": 3,
+        "ty": 4,
+        "lingering": false,
+        "titan": false
+      },
+      "retreatOriginRecorded": false,
+      "flagOn": false,
+      "restored": null,
+      "restoredHp": null,
+      "restoredTile": null,
+      "restoreSkippedReason": null,
+      "restoreFidelity": null,
+      "scholarHpFracAtExit": -0.11,
+      "doorStashAtEnd": false,
+      "defHpLo": 850,
+      "defHpHi": 1050,
+      "entryFracHi": 0.8095238095238095,
+      "entryFracLo": 1,
+      "entryFracHiPrimary": 0.8095238095238095,
+      "entryFracLoPrimary": 1,
+      "lifted": true,
+      "worldHpAtLift": {
+        "hp": 850,
+        "maxHp": 850
+      },
+      "liftAlias": {
+        "id": "influencer",
+        "hp": 850,
+        "maxHp": 850,
+        "veteran": false,
+        "lingering": false,
+        "titan": false,
+        "tx": 3,
+        "ty": 4
+      },
+      "pendingLive": false,
+      "pendingId": null,
+      "doorFledAtEntry": null,
+      "damageDealt": 585,
+      "damageFrac": 0.6882352941176471,
+      "rounds": 14,
+      "swingsAttempted": 3,
+      "partySize": 2,
+      "allyVid": null,
+      "allyFromStart": false,
+      "optsAllies": 0,
+      "gear": {
+        "weaponId": null,
+        "weaponBonus": null,
+        "armorId": null,
+        "armorP": 0
+      },
+      "allyGear": null,
+      "abilitiesUsed": [
+        "pocket_sand"
+      ],
+      "trickSummary": null,
+      "intent": null,
+      "intentWhy": null,
+      "focusFire": false,
+      "committedFinish": false,
+      "committedRounds": 0,
+      "shoutRound": null,
+      "everWinning": null,
+      "everHopeless": null,
+      "outcomeRaw": "lost",
+      "ending": "death",
+      "mHpLeft": 265,
+      "vTaken": null,
+      "firstDay": null,
+      "firstKiller": null,
+      "firstKillerAliveAtStart": null,
+      "daysSinceFirstBlood": null,
+      "firstKillerInFight": false,
+      "secondCandidates": [
+        "nadia_khoury",
+        "gen_570k4qh"
+      ],
+      "secondCandidatePresent": true,
+      "_open": false,
+      "mHpLeftPrimary": 265,
+      "worldOriginAtEnd": false
+    },
+    {
+      "day": 59,
+      "channel": "field",
+      "fighter": "app_mgpsphl7862",
+      "fighters": [
+        "app_mgpsphl7862",
+        "gen_qierkty"
+      ],
+      "mid": "eulogy",
+      "wave": 4,
+      "entryHp": 675,
+      "entryMaxHp": 900,
+      "entityLoc": {
+        "tx": 4,
+        "ty": 4,
+        "mx": 4,
+        "my": 3
+      },
+      "defHpLo": 900,
+      "defHpHi": 1100,
+      "entryFracHi": 0.6136363636363636,
+      "entryFracLo": 0.75,
+      "damageDealt": 12,
+      "damageFrac": 0.017777777777777778,
+      "rounds": 2,
+      "swingsAttempted": 2,
+      "partySize": 3,
+      "allyVid": "gen_qierkty",
+      "allyFromStart": false,
+      "optsAllies": 2,
+      "gear": {
+        "weaponId": null,
+        "weaponBonus": null,
+        "armorId": null,
+        "armorP": 0
+      },
+      "allyGear": {
+        "weaponId": "hatchet",
+        "weaponBonus": 15,
+        "armorId": "bark_armor",
+        "armorP": 16
+      },
+      "abilitiesUsed": null,
+      "trickSummary": null,
+      "intent": "engage",
+      "intentWhy": "party",
+      "focusFire": false,
+      "gearFull": false,
+      "committedFinish": false,
+      "committedRounds": 0,
+      "shoutRound": 2,
+      "everWinning": false,
+      "everHopeless": true,
+      "outcomeRaw": "vFlee",
+      "ending": "flee",
+      "mHpLeft": 663,
+      "vTaken": 97,
+      "firstDay": null,
+      "firstKiller": null,
+      "firstKillerAliveAtStart": null,
+      "daysSinceFirstBlood": null,
+      "firstKillerInFight": false,
+      "secondCandidates": [
+        "app_mgpsphl7862",
+        "gen_qierkty"
+      ],
+      "secondCandidatePresent": true
+    },
+    {
+      "day": 62,
+      "channel": "player-tb",
+      "fighter": "ruby_callaghan",
+      "fighters": [
+        "ruby_callaghan"
+      ],
+      "mid": "reunion",
+      "wave": 4,
+      "entryHp": 900,
+      "entryHpPrimary": 900,
+      "entryMaxHpPrimary": 1200,
+      "primaryVeteran": false,
+      "worldOriginPresent": true,
+      "tileOrigin": {
+        "id": "reunion",
+        "hp": 900,
+        "maxHp": 1200,
+        "tx": 4,
+        "ty": 4,
+        "lingering": true,
+        "titan": false
+      },
+      "retreatOriginRecorded": false,
+      "flagOn": false,
+      "restored": null,
+      "restoredHp": null,
+      "restoredTile": null,
+      "restoreSkippedReason": null,
+      "restoreFidelity": null,
+      "scholarHpFracAtExit": -0.03,
+      "doorStashAtEnd": false,
+      "defHpLo": 1200,
+      "defHpHi": 1400,
+      "entryFracHi": 0.6428571428571429,
+      "entryFracLo": 0.75,
+      "entryFracHiPrimary": 0.6428571428571429,
+      "entryFracLoPrimary": 0.75,
+      "lifted": true,
+      "worldHpAtLift": {
+        "hp": 900,
+        "maxHp": 1200
+      },
+      "liftAlias": {
+        "id": "reunion",
+        "hp": 900,
+        "maxHp": 1200,
+        "veteran": false,
+        "lingering": true,
+        "titan": false,
+        "tx": 4,
+        "ty": 4
+      },
+      "pendingLive": false,
+      "pendingId": null,
+      "doorFledAtEntry": null,
+      "damageDealt": 48,
+      "damageFrac": 0.05333333333333334,
+      "rounds": 5,
+      "swingsAttempted": 3,
+      "partySize": 1,
+      "allyVid": null,
+      "allyFromStart": false,
+      "optsAllies": 0,
+      "gear": {
+        "weaponId": null,
+        "weaponBonus": null,
+        "armorId": null,
+        "armorP": 0
+      },
+      "allyGear": null,
+      "abilitiesUsed": [],
+      "trickSummary": null,
+      "intent": null,
+      "intentWhy": null,
+      "focusFire": false,
+      "committedFinish": false,
+      "committedRounds": 0,
+      "shoutRound": null,
+      "everWinning": null,
+      "everHopeless": null,
+      "outcomeRaw": "lost",
+      "ending": "death",
+      "mHpLeft": 852,
+      "vTaken": null,
+      "firstDay": null,
+      "firstKiller": null,
+      "firstKillerAliveAtStart": null,
+      "daysSinceFirstBlood": null,
+      "firstKillerInFight": false,
+      "secondCandidates": [
+        "ruby_callaghan"
+      ],
+      "secondCandidatePresent": true,
+      "_open": false,
+      "mHpLeftPrimary": 852,
+      "worldOriginAtEnd": true
+    },
+    {
+      "day": 62,
+      "channel": "player-tb",
+      "fighter": "gen_qierkty",
+      "fighters": [
+        "ava_garcia",
+        "yara_haddad",
+        "app_mgpspiqh264",
+        "gen_qierkty"
+      ],
+      "mid": "reunion",
+      "wave": 4,
+      "entryHp": 3616,
+      "entryHpPrimary": 852,
+      "entryMaxHpPrimary": 1200,
+      "primaryVeteran": false,
+      "worldOriginPresent": true,
+      "tileOrigin": {
+        "id": "reunion",
+        "hp": 852,
+        "maxHp": 1200,
+        "tx": 4,
+        "ty": 4,
+        "lingering": true,
+        "titan": false
+      },
+      "retreatOriginRecorded": false,
+      "flagOn": false,
+      "restored": null,
+      "restoredHp": null,
+      "restoredTile": null,
+      "restoreSkippedReason": null,
+      "restoreFidelity": null,
+      "scholarHpFracAtExit": -0.26,
+      "doorStashAtEnd": false,
+      "defHpLo": 1200,
+      "defHpHi": 1400,
+      "entryFracHi": 2.5828571428571427,
+      "entryFracLo": 3.013333333333333,
+      "entryFracHiPrimary": 0.6085714285714285,
+      "entryFracLoPrimary": 0.71,
+      "lifted": true,
+      "worldHpAtLift": {
+        "hp": 852,
+        "maxHp": 1200
+      },
+      "liftAlias": {
+        "id": "reunion",
+        "hp": 852,
+        "maxHp": 1200,
+        "veteran": false,
+        "lingering": true,
+        "titan": false,
+        "tx": 4,
+        "ty": 4
+      },
+      "pendingLive": false,
+      "pendingId": null,
+      "doorFledAtEntry": null,
+      "damageDealt": 98,
+      "damageFrac": 0.027101769911504425,
+      "rounds": 3,
+      "swingsAttempted": 2,
+      "partySize": 4,
+      "allyVid": null,
+      "allyFromStart": false,
+      "optsAllies": 0,
+      "gear": {
+        "weaponId": null,
+        "weaponBonus": null,
+        "armorId": null,
+        "armorP": 0
+      },
+      "allyGear": null,
+      "abilitiesUsed": [],
+      "trickSummary": null,
+      "intent": null,
+      "intentWhy": null,
+      "focusFire": false,
+      "committedFinish": false,
+      "committedRounds": 0,
+      "shoutRound": null,
+      "everWinning": null,
+      "everHopeless": null,
+      "outcomeRaw": "lost",
+      "ending": "death",
+      "mHpLeft": 3518,
+      "vTaken": null,
+      "firstDay": null,
+      "firstKiller": null,
+      "firstKillerAliveAtStart": null,
+      "daysSinceFirstBlood": null,
+      "firstKillerInFight": false,
+      "secondCandidates": [
+        "ava_garcia",
+        "yara_haddad",
+        "app_mgpspiqh264",
+        "gen_qierkty"
+      ],
+      "secondCandidatePresent": true,
+      "_open": false,
+      "mHpLeftPrimary": 774,
+      "worldOriginAtEnd": true
+    },
+    {
+      "day": 64,
+      "channel": "player-tb",
+      "fighter": "ava_garcia",
+      "fighters": [
+        "ava_garcia"
+      ],
+      "mid": "reunion",
+      "wave": 4,
+      "entryHp": 774,
+      "entryHpPrimary": 774,
+      "entryMaxHpPrimary": 1200,
+      "primaryVeteran": false,
+      "worldOriginPresent": true,
+      "tileOrigin": {
+        "id": "reunion",
+        "hp": 774,
+        "maxHp": 1200,
+        "tx": 4,
+        "ty": 4,
+        "lingering": true,
+        "titan": false
+      },
+      "retreatOriginRecorded": false,
+      "flagOn": false,
+      "restored": null,
+      "restoredHp": null,
+      "restoredTile": null,
+      "restoreSkippedReason": null,
+      "restoreFidelity": null,
+      "scholarHpFracAtExit": 0,
+      "doorStashAtEnd": false,
+      "defHpLo": 1200,
+      "defHpHi": 1400,
+      "entryFracHi": 0.5528571428571428,
+      "entryFracLo": 0.645,
+      "entryFracHiPrimary": 0.5528571428571428,
+      "entryFracLoPrimary": 0.645,
+      "lifted": true,
+      "worldHpAtLift": {
+        "hp": 774,
+        "maxHp": 1200
+      },
+      "liftAlias": {
+        "id": "reunion",
+        "hp": 774,
+        "maxHp": 1200,
+        "veteran": false,
+        "lingering": true,
+        "titan": false,
+        "tx": 4,
+        "ty": 4
+      },
+      "pendingLive": false,
+      "pendingId": null,
+      "doorFledAtEntry": null,
+      "damageDealt": 29,
+      "damageFrac": 0.037467700258397935,
+      "rounds": 4,
+      "swingsAttempted": 3,
+      "partySize": 1,
+      "allyVid": null,
+      "allyFromStart": false,
+      "optsAllies": 0,
+      "gear": {
+        "weaponId": null,
+        "weaponBonus": null,
+        "armorId": null,
+        "armorP": 0
+      },
+      "allyGear": null,
+      "abilitiesUsed": [],
+      "trickSummary": null,
+      "intent": null,
+      "intentWhy": null,
+      "focusFire": false,
+      "committedFinish": false,
+      "committedRounds": 0,
+      "shoutRound": null,
+      "everWinning": null,
+      "everHopeless": null,
+      "outcomeRaw": "lost",
+      "ending": "death",
+      "mHpLeft": 745,
+      "vTaken": null,
+      "firstDay": null,
+      "firstKiller": null,
+      "firstKillerAliveAtStart": null,
+      "daysSinceFirstBlood": null,
+      "firstKillerInFight": false,
+      "secondCandidates": [
+        "ava_garcia"
+      ],
+      "secondCandidatePresent": true,
+      "_open": false,
+      "mHpLeftPrimary": 745,
+      "worldOriginAtEnd": true
+    },
+    {
+      "day": 65,
+      "channel": "player-tb",
+      "fighter": "gen_5mmlf9l",
+      "fighters": [
+        "aroha_ngata",
+        "gen_5mmlf9l"
+      ],
+      "mid": "reunion",
+      "wave": 4,
+      "entryHp": 2049,
+      "entryHpPrimary": 745,
+      "entryMaxHpPrimary": 1200,
+      "primaryVeteran": false,
+      "worldOriginPresent": true,
+      "tileOrigin": {
+        "id": "reunion",
+        "hp": 745,
+        "maxHp": 1200,
+        "tx": 4,
+        "ty": 4,
+        "lingering": true,
+        "titan": false
+      },
+      "retreatOriginRecorded": false,
+      "flagOn": false,
+      "restored": null,
+      "restoredHp": null,
+      "restoredTile": null,
+      "restoreSkippedReason": null,
+      "restoreFidelity": null,
+      "scholarHpFracAtExit": -0.21111111111111114,
+      "doorStashAtEnd": false,
+      "defHpLo": 1200,
+      "defHpHi": 1400,
+      "entryFracHi": 1.4635714285714285,
+      "entryFracLo": 1.7075,
+      "entryFracHiPrimary": 0.5321428571428571,
+      "entryFracLoPrimary": 0.6208333333333333,
+      "lifted": true,
+      "worldHpAtLift": {
+        "hp": 745,
+        "maxHp": 1200
+      },
+      "liftAlias": {
+        "id": "reunion",
+        "hp": 745,
+        "maxHp": 1200,
+        "veteran": false,
+        "lingering": true,
+        "titan": false,
+        "tx": 4,
+        "ty": 4
+      },
+      "pendingLive": false,
+      "pendingId": null,
+      "doorFledAtEntry": null,
+      "damageDealt": 152,
+      "damageFrac": 0.0741825280624695,
+      "rounds": 6,
+      "swingsAttempted": 2,
+      "partySize": 2,
+      "allyVid": null,
+      "allyFromStart": false,
+      "optsAllies": 0,
+      "gear": {
+        "weaponId": null,
+        "weaponBonus": null,
+        "armorId": null,
+        "armorP": 0
+      },
+      "allyGear": null,
+      "abilitiesUsed": [],
+      "trickSummary": null,
+      "intent": null,
+      "intentWhy": null,
+      "focusFire": false,
+      "committedFinish": false,
+      "committedRounds": 0,
+      "shoutRound": null,
+      "everWinning": null,
+      "everHopeless": null,
+      "outcomeRaw": "lost",
+      "ending": "death",
+      "mHpLeft": 1897,
+      "vTaken": null,
+      "firstDay": null,
+      "firstKiller": null,
+      "firstKillerAliveAtStart": null,
+      "daysSinceFirstBlood": null,
+      "firstKillerInFight": false,
+      "secondCandidates": [
+        "aroha_ngata",
+        "gen_5mmlf9l"
+      ],
+      "secondCandidatePresent": true,
+      "_open": false,
+      "mHpLeftPrimary": 593,
+      "worldOriginAtEnd": true
+    },
+    {
+      "day": 65,
+      "channel": "field",
+      "fighter": "visjoin_62",
+      "fighters": [
+        "visjoin_62",
+        "yara_haddad"
+      ],
+      "mid": "reunion",
+      "wave": 4,
+      "entryHp": 593,
+      "entryMaxHp": 1200,
+      "entityLoc": {
+        "tx": 3,
+        "ty": 4,
+        "mx": 8,
+        "my": 7
+      },
+      "defHpLo": 1200,
+      "defHpHi": 1400,
+      "entryFracHi": 0.4235714285714286,
+      "entryFracLo": 0.49416666666666664,
+      "damageDealt": 85,
+      "damageFrac": 0.1433389544688027,
+      "rounds": 3,
+      "swingsAttempted": 3,
+      "partySize": 3,
+      "allyVid": "yara_haddad",
+      "allyFromStart": false,
+      "optsAllies": 2,
+      "gear": {
+        "weaponId": "crude_bow",
+        "weaponBonus": 18,
+        "armorId": "swat_vest",
+        "armorP": 35
+      },
+      "allyGear": {
+        "weaponId": "crossbow",
+        "weaponBonus": 28,
+        "armorId": "shelter_cloak",
+        "armorP": 23
+      },
+      "abilitiesUsed": null,
+      "trickSummary": null,
+      "intent": "engage",
+      "intentWhy": "party",
+      "focusFire": false,
+      "gearFull": false,
+      "committedFinish": false,
+      "committedRounds": 0,
+      "shoutRound": 2,
+      "everWinning": false,
+      "everHopeless": true,
+      "outcomeRaw": "vFlee",
+      "ending": "flee",
+      "mHpLeft": 527,
+      "vTaken": 91,
+      "firstDay": null,
+      "firstKiller": null,
+      "firstKillerAliveAtStart": null,
+      "daysSinceFirstBlood": null,
+      "firstKillerInFight": false,
+      "secondCandidates": [
+        "visjoin_62",
+        "yara_haddad"
+      ],
+      "secondCandidatePresent": true
+    },
+    {
+      "day": 66,
+      "channel": "field",
+      "fighter": "app_mgpspiqh264",
+      "fighters": [
+        "app_mgpspiqh264"
+      ],
+      "mid": "reunion",
+      "wave": 4,
+      "entryHp": 1200,
+      "entryMaxHp": 1200,
+      "entityLoc": {
+        "tx": 4,
+        "ty": 3,
+        "mx": 8,
+        "my": 7
+      },
+      "defHpLo": 1200,
+      "defHpHi": 1400,
+      "entryFracHi": 0.8571428571428571,
+      "entryFracLo": 1,
+      "damageDealt": 13,
+      "damageFrac": 0.010833333333333334,
+      "rounds": 1,
+      "swingsAttempted": 1,
+      "partySize": 3,
+      "allyVid": null,
+      "allyFromStart": false,
+      "optsAllies": 2,
+      "gear": {
+        "weaponId": "fire_hardened_spear",
+        "weaponBonus": 15,
+        "armorId": "denim_jacket",
+        "armorP": 8
+      },
+      "allyGear": {
+        "weaponId": "crossbow",
+        "weaponBonus": 28,
+        "armorId": "shelter_cloak",
+        "armorP": 23
+      },
+      "abilitiesUsed": null,
+      "trickSummary": null,
+      "intent": "engage",
+      "intentWhy": "party",
+      "focusFire": false,
+      "gearFull": false,
+      "committedFinish": false,
+      "committedRounds": 0,
+      "shoutRound": null,
+      "everWinning": false,
+      "everHopeless": false,
+      "outcomeRaw": "vFlee",
+      "ending": "flee",
+      "mHpLeft": 1187,
+      "vTaken": 66,
+      "firstDay": null,
+      "firstKiller": null,
+      "firstKillerAliveAtStart": null,
+      "daysSinceFirstBlood": null,
+      "firstKillerInFight": false,
+      "secondCandidates": [
+        "app_mgpspiqh264"
+      ],
+      "secondCandidatePresent": true
+    },
+    {
+      "day": 67,
+      "channel": "player-tb",
+      "fighter": "aroha_ngata",
+      "fighters": [
+        "aroha_ngata"
+      ],
+      "mid": "reunion",
+      "wave": 4,
+      "entryHp": 1187,
+      "entryHpPrimary": 1187,
+      "entryMaxHpPrimary": 1200,
+      "primaryVeteran": false,
+      "worldOriginPresent": false,
+      "tileOrigin": {
+        "id": "reunion",
+        "hp": 1187,
+        "maxHp": 1200,
+        "tx": 4,
+        "ty": 3,
+        "lingering": false,
+        "titan": false
+      },
+      "retreatOriginRecorded": false,
+      "flagOn": false,
+      "restored": null,
+      "restoredHp": null,
+      "restoredTile": null,
+      "restoreSkippedReason": null,
+      "restoreFidelity": null,
+      "scholarHpFracAtExit": -0.01,
+      "doorStashAtEnd": false,
+      "defHpLo": 1200,
+      "defHpHi": 1400,
+      "entryFracHi": 0.8478571428571429,
+      "entryFracLo": 0.9891666666666666,
+      "entryFracHiPrimary": 0.8478571428571429,
+      "entryFracLoPrimary": 0.9891666666666666,
+      "lifted": true,
+      "worldHpAtLift": {
+        "hp": 1187,
+        "maxHp": 1200
+      },
+      "liftAlias": {
+        "id": "reunion",
+        "hp": 1187,
+        "maxHp": 1200,
+        "veteran": false,
+        "lingering": false,
+        "titan": false,
+        "tx": 4,
+        "ty": 3
+      },
+      "pendingLive": false,
+      "pendingId": null,
+      "doorFledAtEntry": null,
+      "damageDealt": 62,
+      "damageFrac": 0.05223251895534962,
+      "rounds": 6,
+      "swingsAttempted": 3,
+      "partySize": 1,
+      "allyVid": null,
+      "allyFromStart": false,
+      "optsAllies": 0,
+      "gear": {
+        "weaponId": null,
+        "weaponBonus": null,
+        "armorId": null,
+        "armorP": 0
+      },
+      "allyGear": null,
+      "abilitiesUsed": [],
+      "trickSummary": null,
+      "intent": null,
+      "intentWhy": null,
+      "focusFire": false,
+      "committedFinish": false,
+      "committedRounds": 0,
+      "shoutRound": null,
+      "everWinning": null,
+      "everHopeless": null,
+      "outcomeRaw": "lost",
+      "ending": "death",
+      "mHpLeft": 1125,
+      "vTaken": null,
+      "firstDay": null,
+      "firstKiller": null,
+      "firstKillerAliveAtStart": null,
+      "daysSinceFirstBlood": null,
+      "firstKillerInFight": false,
+      "secondCandidates": [
+        "aroha_ngata"
+      ],
+      "secondCandidatePresent": true,
+      "_open": false,
+      "mHpLeftPrimary": 1125,
+      "worldOriginAtEnd": false
+    }
+  ],
+  "daily": [
+    {
+      "day": 2,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 11,
+        "tricks": 0,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "tricks",
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 4,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 12,
+        "tricks": 1,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "tricks",
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 5,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 12,
+        "tricks": 2,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "tricks",
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 6,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 12,
+        "tricks": 2,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "tricks",
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 7,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 12,
+        "tricks": 2,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "tricks",
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 8,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 12,
+        "tricks": 3,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 9,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 12,
+        "tricks": 4,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 10,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 11,
+      "living": 11,
+      "raw": 0,
+      "gated": 0,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 11,
+        "tricks": 5,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 11,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 11,
+      "living": 11,
+      "raw": 0,
+      "gated": 0,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 11,
+        "tricks": 6,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 12,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 11,
+      "living": 11,
+      "raw": 0,
+      "gated": 0,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 11,
+        "tricks": 7,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 13,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 11,
+      "living": 11,
+      "raw": 0,
+      "gated": 0,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 11,
+        "tricks": 8,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 14,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 0,
+      "gated": 0,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 9,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 15,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 0,
+      "gated": 0,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 10,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 16,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 0,
+      "gated": 0,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 11,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 17,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 0,
+      "gated": 0,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 12,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 18,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 0,
+      "gated": 0,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 13,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 19,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 0,
+      "gated": 0,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 15,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 20,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 0,
+      "gated": 0,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 16,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 21,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 0,
+      "gated": 0,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 17,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 22,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 0,
+      "gated": 0,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 17,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 23,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 0,
+      "gated": 0,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 17,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 24,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 0,
+      "gated": 0,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 18,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 25,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 0,
+      "gated": 0,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 18,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 26,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 0,
+      "gated": 0,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 18,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 27,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 0,
+      "gated": 0,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 8,
+        "armed": 10,
+        "tricks": 19,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 28,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 0,
+      "gated": 0,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 8,
+        "armed": 10,
+        "tricks": 20,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 29,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 0,
+      "gated": 0,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 8,
+        "armed": 10,
+        "tricks": 21,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 30,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 0,
+      "gated": 0,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 8,
+        "armed": 10,
+        "tricks": 21,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 31,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 25,
+      "gated": 25,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 8,
+        "armed": 10,
+        "tricks": 22,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 32,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 25,
+      "gated": 25,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 8,
+        "armed": 10,
+        "tricks": 22,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 33,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 25,
+      "gated": 25,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 8,
+        "armed": 10,
+        "tricks": 22,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 34,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 25,
+      "gated": 25,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 8,
+        "armed": 10,
+        "tricks": 22,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 35,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 25,
+      "gated": 25,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 8,
+        "armed": 10,
+        "tricks": 23,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 36,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 25,
+      "gated": 25,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 8,
+        "armed": 10,
+        "tricks": 23,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 37,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 25,
+      "gated": 25,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 8,
+        "armed": 10,
+        "tricks": 23,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 38,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 25,
+      "gated": 25,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 8,
+        "armed": 10,
+        "tricks": 23,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 39,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 25,
+      "gated": 25,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 8,
+        "armed": 10,
+        "tricks": 24,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 40,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 25,
+      "gated": 25,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 8,
+        "armed": 10,
+        "tricks": 25,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 41,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 25,
+      "gated": 25,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 8,
+        "armed": 10,
+        "tricks": 25,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 42,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 25,
+      "gated": 25,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 8,
+        "armed": 10,
+        "tricks": 25,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 43,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 25,
+      "gated": 25,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 8,
+        "armed": 10,
+        "tricks": 26,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 44,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 50,
+      "gated": 50,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 8,
+        "armed": 10,
+        "tricks": 26,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 45,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 9,
+      "living": 9,
+      "raw": 50,
+      "gated": 50,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 9,
+        "tricks": 26,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 46,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 9,
+      "living": 9,
+      "raw": 75,
+      "gated": 75,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 9,
+        "tricks": 27,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 47,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 9,
+      "living": 9,
+      "raw": 100,
+      "gated": 100,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 9,
+        "tricks": 27,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 48,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 9,
+      "living": 9,
+      "raw": 100,
+      "gated": 100,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 9,
+        "tricks": 27,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 49,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 9,
+      "living": 9,
+      "raw": 100,
+      "gated": 100,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 9,
+        "tricks": 27,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 50,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 9,
+      "living": 9,
+      "raw": 100,
+      "gated": 100,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 9,
+        "tricks": 27,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 51,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 9,
+      "living": 9,
+      "raw": 100,
+      "gated": 100,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 9,
+        "tricks": 27,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 52,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 9,
+      "living": 9,
+      "raw": 100,
+      "gated": 100,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 9,
+        "tricks": 27,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 53,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 8,
+      "living": 8,
+      "raw": 150,
+      "gated": 150,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 8,
+        "tricks": 28,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 54,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 8,
+      "living": 8,
+      "raw": 150,
+      "gated": 150,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 8,
+        "tricks": 28,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 55,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 8,
+      "living": 8,
+      "raw": 150,
+      "gated": 150,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 8,
+        "tricks": 28,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 56,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 8,
+      "living": 8,
+      "raw": 150,
+      "gated": 150,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 8,
+        "tricks": 28,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 57,
+      "scholarId": "gen_570k4qh",
+      "rosterSize": 8,
+      "living": 8,
+      "raw": 150,
+      "gated": 150,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 8,
+        "tricks": 28,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 1,
+      "mapX": 3,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 58,
+      "scholarId": "nadia_khoury",
+      "rosterSize": 7,
+      "living": 7,
+      "raw": 150,
+      "gated": 150,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 7,
+        "tricks": 28,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 1,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 59,
+      "scholarId": "nadia_khoury",
+      "rosterSize": 7,
+      "living": 7,
+      "raw": 150,
+      "gated": 150,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 7,
+        "tricks": 28,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 1,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 60,
+      "scholarId": "nadia_khoury",
+      "rosterSize": 7,
+      "living": 7,
+      "raw": 150,
+      "gated": 150,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 7,
+        "tricks": 28,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 2,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 61,
+      "scholarId": "ruby_callaghan",
+      "rosterSize": 6,
+      "living": 6,
+      "raw": 150,
+      "gated": 150,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 6,
+        "tricks": 28,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 2,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 62,
+      "scholarId": "ava_garcia",
+      "rosterSize": 5,
+      "living": 5,
+      "raw": 150,
+      "gated": 150,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 3,
+        "armed": 5,
+        "tricks": 28,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "armor",
+          "weapons",
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 63,
+      "scholarId": "ava_garcia",
+      "rosterSize": 5,
+      "living": 5,
+      "raw": 150,
+      "gated": 150,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 3,
+        "armed": 5,
+        "tricks": 28,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "armor",
+          "weapons",
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 64,
+      "scholarId": "gen_5mmlf9l",
+      "rosterSize": 5,
+      "living": 5,
+      "raw": 150,
+      "gated": 150,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 4,
+        "armed": 5,
+        "tricks": 28,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "weapons",
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 65,
+      "scholarId": "aroha_ngata",
+      "rosterSize": 5,
+      "living": 5,
+      "raw": 150,
+      "gated": 150,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 3,
+        "armed": 5,
+        "tricks": 28,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "armor",
+          "weapons",
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 66,
+      "scholarId": "aroha_ngata",
+      "rosterSize": 6,
+      "living": 6,
+      "raw": 150,
+      "gated": 150,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 3,
+        "armed": 6,
+        "tricks": 28,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "armor",
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 67,
+      "scholarId": "aroha_ngata",
+      "rosterSize": 6,
+      "living": 6,
+      "raw": 150,
+      "gated": 150,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 3,
+        "armed": 6,
+        "tricks": 28,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "armor",
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3,
+      "mapX": 4,
+      "mapY": 3,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 68,
+      "scholarId": "yara_haddad",
+      "rosterSize": 6,
+      "living": 6,
+      "raw": 150,
+      "gated": 150,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 3,
+        "armed": 6,
+        "tricks": 28,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "armor",
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 69,
+      "scholarId": "yara_haddad",
+      "rosterSize": 6,
+      "living": 6,
+      "raw": 150,
+      "gated": 150,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 3,
+        "armed": 6,
+        "tricks": 28,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "armor",
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 70,
+      "scholarId": "yara_haddad",
+      "rosterSize": 6,
+      "living": 6,
+      "raw": 150,
+      "gated": 150,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 3,
+        "armed": 6,
+        "tricks": 28,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "armor",
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    },
+    {
+      "day": 70,
+      "scholarId": "yara_haddad",
+      "rosterSize": 7,
+      "living": 7,
+      "raw": 150,
+      "gated": 150,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 3,
+        "armed": 7,
+        "tricks": 28,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "armor",
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3,
+      "mapX": 4,
+      "mapY": 4,
+      "scholarAtHaven": true
+    }
+  ],
+  "killsLive": [
+    {
+      "day": 3,
+      "mid": "rut_king",
+      "wave": 1,
+      "by": "nadia_khoury",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 5,
+      "mid": "bulldozer",
+      "wave": 1,
+      "by": "diana_osei",
+      "via": "agency",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 7,
+      "mid": "dustboar",
+      "wave": 1,
+      "by": "ruby_callaghan",
+      "via": "agency",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 7,
+      "mid": "mirrormoth",
+      "wave": 1,
+      "by": "gen_mng1ff1",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 7,
+      "mid": "mirrormoth",
+      "wave": 1,
+      "by": "gen_qierkty",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 7,
+      "mid": "hushwolf",
+      "wave": 1,
+      "by": "nadia_khoury",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 7,
+      "mid": "anaconda_empress",
+      "wave": 1,
+      "by": "ava_garcia",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 8,
+      "mid": "living_wire",
+      "wave": 1,
+      "by": "nadia_khoury",
+      "via": "companion",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 8,
+      "mid": "warranty_caller",
+      "wave": 2,
+      "by": "gen_qwjsnxg",
+      "via": "agency",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 8,
+      "mid": "nightlight_catfish",
+      "wave": 1,
+      "by": "gen_qwjsnxg",
+      "via": "agency",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 9,
+      "mid": "belltoad",
+      "wave": 1,
+      "by": "diana_osei",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 12,
+      "mid": "warranty_caller",
+      "wave": 2,
+      "by": "gen_qia8o69",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 12,
+      "mid": "moderator",
+      "wave": 2,
+      "by": "gen_qierkty",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 13,
+      "mid": "mirrormoth",
+      "wave": 1,
+      "by": "aroha_ngata",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 14,
+      "mid": "speedbump_turtle",
+      "wave": 1,
+      "by": "gen_qierkty",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 14,
+      "mid": "statickite",
+      "wave": 2,
+      "by": "diana_osei",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 15,
+      "mid": "understudy",
+      "wave": 2,
+      "by": "ruby_callaghan",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 15,
+      "mid": "mirrormoth",
+      "wave": 1,
+      "by": "diana_osei",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 18,
+      "mid": "hushwolf",
+      "wave": 1,
+      "by": "gen_mng1ff1",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 18,
+      "mid": "heckler",
+      "wave": 2,
+      "by": "ava_garcia",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 18,
+      "mid": "hushwolf",
+      "wave": 1,
+      "by": "diana_osei",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 19,
+      "mid": "voice_mimic_radio",
+      "wave": 2,
+      "by": "ava_garcia",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 21,
+      "mid": "gallowdeer",
+      "wave": 1,
+      "by": "aroha_ngata",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 22,
+      "mid": "hushwolf",
+      "wave": 1,
+      "by": "diana_osei",
+      "via": "agency",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 24,
+      "mid": "paparazzo",
+      "wave": 2,
+      "by": "diana_osei",
+      "via": "agency",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 26,
+      "mid": "paparazzo",
+      "wave": 2,
+      "by": "gen_mng1ff1",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 26,
+      "mid": "union_rep",
+      "wave": 2,
+      "by": "gen_5mmlf9l",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 26,
+      "mid": "alien_tick",
+      "wave": 2,
+      "by": "diana_osei",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 26,
+      "mid": "speedbump_turtle",
+      "wave": 1,
+      "by": "aroha_ngata",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 29,
+      "mid": "sunbasker",
+      "wave": 1,
+      "by": "diana_osei",
+      "via": "agency",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 29,
+      "mid": "moderator",
+      "wave": 2,
+      "by": "gen_mng1ff1",
+      "via": "aid-crisis",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 31,
+      "mid": "hummice",
+      "wave": 1,
+      "by": "diana_osei",
+      "via": "agency",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 31,
+      "mid": "nightlight_catfish",
+      "wave": 1,
+      "by": "diana_osei",
+      "via": "agency",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 31,
+      "mid": "callback",
+      "wave": 3,
+      "by": "gen_5mmlf9l",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 34,
+      "mid": "living_wire",
+      "wave": 1,
+      "by": "gen_mng1ff1",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 34,
+      "mid": "landlord",
+      "wave": 2,
+      "by": "gen_qierkty",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 34,
+      "mid": "voice_mimic_radio",
+      "wave": 2,
+      "by": "nadia_khoury",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 34,
+      "mid": "hushwolf",
+      "wave": 1,
+      "by": "ava_garcia",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 37,
+      "mid": "heckler",
+      "wave": 2,
+      "by": "aroha_ngata",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 39,
+      "mid": "drumbelly_tanuki",
+      "wave": 1,
+      "by": "gen_5mmlf9l",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 39,
+      "mid": "memory_projector",
+      "wave": 2,
+      "by": "aroha_ngata",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 41,
+      "mid": "gallowdeer",
+      "wave": 1,
+      "by": "gen_qierkty",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 43,
+      "mid": "giant_mosquito",
+      "wave": 2,
+      "by": "aroha_ngata",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 44,
+      "mid": "focus_group",
+      "wave": 3,
+      "by": "ruby_callaghan",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 45,
+      "mid": "landlord",
+      "wave": 2,
+      "by": "nadia_khoury",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 46,
+      "mid": "terms_of_service",
+      "wave": 3,
+      "by": "gen_570k4qh",
+      "via": "player",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": true
+    },
+    {
+      "day": 46,
+      "mid": "drumbelly_tanuki",
+      "wave": 1,
+      "by": "gen_570k4qh",
+      "via": "player",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": true
+    },
+    {
+      "day": 46,
+      "mid": "glasswing",
+      "wave": 1,
+      "by": "gen_570k4qh",
+      "via": "player",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": true
+    },
+    {
+      "day": 46,
+      "mid": "hummice",
+      "wave": 1,
+      "by": "yara_haddad",
+      "via": "contest",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 46,
+      "mid": "nightlight_catfish",
+      "wave": 1,
+      "by": "yara_haddad",
+      "via": "contest",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 46,
+      "mid": "nightlight_catfish",
+      "wave": 1,
+      "by": "yara_haddad",
+      "via": "contest",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 47,
+      "mid": "callback",
+      "wave": 3,
+      "by": "nadia_khoury",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 52,
+      "mid": "understudy",
+      "wave": 2,
+      "by": "gen_qierkty",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 52,
+      "mid": "nevermore",
+      "wave": 1,
+      "by": "gen_5mmlf9l",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 52,
+      "mid": "redactor",
+      "wave": 3,
+      "by": "yara_haddad",
+      "via": "wild",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    },
+    {
+      "day": 53,
+      "mid": "spool",
+      "wave": 3,
+      "by": "nadia_khoury",
+      "via": "companion",
+      "scholarAtKill": "gen_570k4qh",
+      "scholarChannel": false
+    }
+  ],
+  "scholarDeaths": [
+    {
+      "day": 57,
+      "scholarId": "gen_570k4qh",
+      "causeArg": "the wild",
+      "atHaven": true,
+      "mapX": 3,
+      "mapY": 4,
+      "inCombat": true,
+      "pendingEncounter": false
+    },
+    {
+      "day": 61,
+      "scholarId": "nadia_khoury",
+      "causeArg": "the wild",
+      "atHaven": true,
+      "mapX": 4,
+      "mapY": 4,
+      "inCombat": true,
+      "pendingEncounter": false
+    },
+    {
+      "day": 62,
+      "scholarId": "ruby_callaghan",
+      "causeArg": "the wild",
+      "atHaven": true,
+      "mapX": 4,
+      "mapY": 4,
+      "inCombat": true,
+      "pendingEncounter": false
+    },
+    {
+      "day": 62,
+      "scholarId": "gen_qierkty",
+      "causeArg": "the wild",
+      "atHaven": true,
+      "mapX": 4,
+      "mapY": 4,
+      "inCombat": true,
+      "pendingEncounter": false
+    },
+    {
+      "day": 64,
+      "scholarId": "ava_garcia",
+      "causeArg": "the wild",
+      "atHaven": true,
+      "mapX": 4,
+      "mapY": 4,
+      "inCombat": true,
+      "pendingEncounter": false
+    },
+    {
+      "day": 65,
+      "scholarId": "gen_5mmlf9l",
+      "causeArg": "the wild",
+      "atHaven": true,
+      "mapX": 4,
+      "mapY": 4,
+      "inCombat": true,
+      "pendingEncounter": false
+    },
+    {
+      "day": 67,
+      "scholarId": "aroha_ngata",
+      "causeArg": "the wild",
+      "atHaven": true,
+      "mapX": 4,
+      "mapY": 3,
+      "inCombat": true,
+      "pendingEncounter": false
+    }
+  ],
+  "killerTrack": [],
+  "deathSays": [
+    {
+      "day": 2,
+      "line": "📋 A woman, maybe 30s, with thick glasses — 🪾 Gather deadfall. They'll report back by next part."
+    },
+    {
+      "day": 2,
+      "line": "📋 A woman, maybe 30s, with restless hands — 🪾 Gather deadfall. They'll report back by next part."
+    },
+    {
+      "day": 2,
+      "line": "🍂 A woman, maybe 30s, with thick glasses gathers deadfall — 1 stick. The pile grows. (1 sticks now.)"
+    },
+    {
+      "day": 2,
+      "line": "🍂 A woman, maybe 30s, with restless hands gathers deadfall — 1 stick + 1 fiber. The pile grows. (2 sticks now.)"
+    },
+    {
+      "day": 2,
+      "line": "📋 A woman, maybe 30s, with a gap-toothed grin — 🪾 Gather deadfall. They'll report back by next part."
+    },
+    {
+      "day": 2,
+      "line": "📋 A woman, maybe 20s — 🪾 Gather deadfall. They'll report back by next part."
+    },
+    {
+      "day": 2,
+      "line": "🍂 A woman, maybe 30s, with a gap-toothed grin gathers deadfall — 1 stick + 1 fiber. The pile grows. (1 sticks now.)"
+    },
+    {
+      "day": 2,
+      "line": "🍂 A woman, maybe 20s gathers deadfall — 1 stick. The pile grows. (2 sticks now.)"
+    },
+    {
+      "day": 4,
+      "line": "📋 Khadija — 🪾 Gather deadfall. They'll report back by next part."
+    },
+    {
+      "day": 4,
+      "line": "📋 Nadia — 🪾 Gather deadfall. They'll report back by next part."
+    },
+    {
+      "day": 4,
+      "line": "🍂 Khadija gathers deadfall — 1 stick + 1 fiber. The pile grows. (1 sticks now.)"
+    },
+    {
+      "day": 4,
+      "line": "🍂 Nadia gathers deadfall — 1 stick + 1 fiber. The pile grows. (2 sticks now.)"
+    },
+    {
+      "day": 4,
+      "line": "A shot in the dark — you take what's green: 4× unknown nuts. Into the bag, unnamed. (Not food until identified — sort them at camp.) You also gather deadfall: 2× branches. This patch is picked clean — it'll recover in a few days."
+    },
+    {
+      "day": 4,
+      "line": "📋 Nadia — 🪾 Gather deadfall. They'll report back by next part."
+    },
+    {
+      "day": 4,
+      "line": "📋 Khadija — 🪾 Gather deadfall. They'll report back by next part."
+    },
+    {
+      "day": 4,
+      "line": "🍂 Nadia gathers deadfall — 2 sticks + 1 fiber. The pile grows. (4 sticks now.)"
+    },
+    {
+      "day": 4,
+      "line": "🍂 Khadija gathers deadfall — 1 stick. The pile grows. (5 sticks now.)"
+    },
+    {
+      "day": 5,
+      "line": "📋 Nadia — 🪾 Gather deadfall. They'll report back by next part."
+    },
+    {
+      "day": 5,
+      "line": "📋 Khadija — 🪾 Gather deadfall. They'll report back by next part."
+    },
+    {
+      "day": 5,
+      "line": "🍂 Nadia gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+    },
+    {
+      "day": 5,
+      "line": "🍂 Khadija gathers deadfall — 1 stick + 1 fiber. The pile grows. (7 sticks now.)"
+    },
+    {
+      "day": 6,
+      "line": "📋 Khadija — 🪾 Gather deadfall. They'll report back by next part."
+    },
+    {
+      "day": 6,
+      "line": "📋 Nadia — 🪾 Gather deadfall. They'll report back by next part."
+    },
+    {
+      "day": 6,
+      "line": "🍂 Khadija gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+    },
+    {
+      "day": 6,
+      "line": "🍂 Nadia gathers deadfall — 1 stick + 1 fiber. The pile grows. (7 sticks now.)"
+    },
+    {
+      "day": 7,
+      "line": "You work the patch with practiced hands: 4× White Oak Acorns (in shell — shell them to eat). You also gather deadfall: 1× branches. This patch is picked clean — it'll recover in a few days."
+    },
+    {
+      "day": 7,
+      "line": "📻 \"Why do the small humans keep putting organic matter in their FACE-HOLES? We built you a fusion pellet! ...You BURIED it. WHY did you bury the pellet?!\""
+    },
+    {
+      "day": 8,
+      "line": "Long muscle, barely a bone in it. Roast it well — and make sure it's actually dead first. It can twitch a shock out for a while after. It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat rots where it lies."
+    },
+    {
+      "day": 8,
+      "line": "📖 The Codex turns a page on its own. Extended Warranty is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 8,
+      "line": "📖 The Codex turns a page on its own. Nightlight is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 8,
+      "line": "🌙 Raid — Emberhold came in the night from the west. They carried off ~1000 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+    },
+    {
+      "day": 9,
+      "line": "📖 The Codex turns a page on its own. Choir Toad is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 9,
+      "line": "📋 Khadija — 🪾 Gather deadfall. They'll report back by next part."
+    },
+    {
+      "day": 9,
+      "line": "📋 Kai — 🪾 Gather deadfall. They'll report back by next part."
+    },
+    {
+      "day": 9,
+      "line": "🍂 Khadija gathers deadfall — 2 sticks. The pile grows. (5 sticks now.)"
+    },
+    {
+      "day": 9,
+      "line": "🍂 Kai gathers deadfall — 1 stick. The pile grows. (6 sticks now.)"
+    },
+    {
+      "day": 10,
+      "line": "📖 The Codex turns a page on its own. Marvin Meyer is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 10,
+      "line": "◈ CRISIS — THE FIRST GRAVE. Marvin is dead. The village digs its first grave, and everyone understands at once: this place can kill you. It just did."
+    },
+    {
+      "day": 10,
+      "line": "📓 Codex: Marvin died while mentored in your party."
+    },
+    {
+      "day": 10,
+      "line": "You work the patch with practiced hands: 7× White Oak Acorns (in shell — shell them to eat). You also gather deadfall: 2× branches. This patch is picked clean — it'll recover in a few days."
+    },
+    {
+      "day": 12,
+      "line": "📖 The Codex turns a page on its own. Extended Warranty is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 12,
+      "line": "📖 The Codex turns a page on its own. The Moderator is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 12,
+      "line": "📋 Nadia — 🪾 Gather deadfall. Nadia nods eagerly. They'll report back by next part."
+    },
+    {
+      "day": 12,
+      "line": "📋 Ava — 🪾 Gather deadfall. They'll report back by next part."
+    },
+    {
+      "day": 12,
+      "line": "🍂 Nadia gathers deadfall — 1 stick. The pile grows. (3 sticks now.)"
+    },
+    {
+      "day": 12,
+      "line": "🍂 Ava gathers deadfall — 1 stick + 1 fiber. The pile grows. (4 sticks now.)"
+    },
+    {
+      "day": 13,
+      "line": "📖 The Codex turns a page on its own. Big Ugly is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 13,
+      "line": "You work the patch with practiced hands: 7× White Oak Acorns (in shell — shell them to eat). You also gather deadfall: 2× branches. This patch is picked clean — it'll recover in a few days."
+    },
+    {
+      "day": 13,
+      "line": "📋 Kai — 🪾 Gather deadfall. They'll report back by next part."
+    },
+    {
+      "day": 13,
+      "line": "📋 Nadia — 🪾 Gather deadfall. Nadia nods eagerly. They'll report back by next part."
+    },
+    {
+      "day": 13,
+      "line": "🍂 Kai gathers deadfall — 1 stick + 1 fiber. The pile grows. (5 sticks now.)"
+    },
+    {
+      "day": 13,
+      "line": "🍂 Nadia gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+    },
+    {
+      "day": 13,
+      "line": "📖 The Codex turns a page on its own. Kai is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 14,
+      "line": "📖 The Codex turns a page on its own. Speedbump is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 14,
+      "line": "📖 The Codex turns a page on its own. The Static Kite is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 15,
+      "line": "📖 The Codex turns a page on its own. The Understudy is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 15,
+      "line": "📖 The Codex turns a page on its own. Big Ugly is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 16,
+      "line": "You work the patch with practiced hands: 13× White Oak Acorns (in shell — shell them to eat). You also gather deadfall: 1× branches, 1× bark fiber. This patch is picked clean — it'll recover in a few days."
+    },
+    {
+      "day": 17,
+      "line": "📋 Nadia — 🪾 Gather deadfall. Nadia nods eagerly. They'll report back by next part."
+    },
+    {
+      "day": 17,
+      "line": "📋 Ava — 🪾 Gather deadfall. They'll report back by next part."
+    },
+    {
+      "day": 17,
+      "line": "🍂 Nadia gathers deadfall — 1 stick + 1 fiber. The pile grows. (5 sticks now.)"
+    },
+    {
+      "day": 17,
+      "line": "🍂 Ava gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+    },
+    {
+      "day": 18,
+      "line": "📖 The Codex turns a page on its own. Don't-Look is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 18,
+      "line": "📖 The Codex turns a page on its own. The Heckler is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 18,
+      "line": "📖 The Codex turns a page on its own. Don't-Look is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 18,
+      "line": "📋 SYSTEM QUEST: \"We have studied cooking. Step one: apply heat until food stops being food? No — wait. We had it. Teach us? Show us one cooked meal, start to finish.\""
+    },
+    {
+      "day": 19,
+      "line": "You work the patch with practiced hands: 10× White Oak Acorns (in shell — shell them to eat). You also gather deadfall: 2× branches. This patch is picked clean — it'll recover in a few days."
+    },
+    {
+      "day": 19,
+      "line": "⚔️ Khadija stood down the Highbeam Deer and kept walking — 1 round, bloodied but breathing. It's still out there, somewhere."
+    },
+    {
+      "day": 19,
+      "line": "📖 The Codex turns a page on its own. Static is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 20,
+      "line": "📋 Nadia — 🪾 Gather deadfall. Nadia nods eagerly. They'll report back by next part."
+    },
+    {
+      "day": 20,
+      "line": "📋 Ava — 🪾 Gather deadfall. They'll report back by next part."
+    },
+    {
+      "day": 20,
+      "line": "🍂 Nadia gathers deadfall — 2 sticks. The pile grows. (6 sticks now.)"
+    },
+    {
+      "day": 20,
+      "line": "🍂 Ava gathers deadfall — 1 stick. The pile grows. (7 sticks now.)"
+    },
+    {
+      "day": 21,
+      "line": "📖 The Codex turns a page on its own. Highbeam Deer is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 22,
+      "line": "You work the patch with practiced hands: 10× White Oak Acorns (in shell — shell them to eat). You also gather deadfall: 2× branches. This patch is picked clean — it'll recover in a few days."
+    },
+    {
+      "day": 22,
+      "line": "📖 The Codex turns a page on its own. Don't-Look is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 23,
+      "line": "💔 Thornfield has split over blood — the hardliners walked, and they didn't walk far. The Bloodied is a new fire in the world now — 4 people under Victor."
+    },
+    {
+      "day": 23,
+      "line": "📓 Codex: Thornfield split (hardline). The Bloodied formed; 0 petition at Haven's fire."
+    },
+    {
+      "day": 24,
+      "line": "📖 The Codex turns a page on its own. The Paparazzo is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 24,
+      "line": "You see smoke on the horizon. The Bloodied — 4 people, 24 days in. fishing folk, by the look of it. They know 5 plants — 4 new to you. They've been here the whole time."
+    },
+    {
+      "day": 24,
+      "line": "Fresh-cut stems on the northwest ground — someone else is working turf your crews use. (The Bloodied's foragers, most likely. You walk the ground yourself: it's thinner than your crews alone could strip it.)"
+    },
+    {
+      "day": 25,
+      "line": "You work the patch with practiced hands: 10× White Oak Acorns (in shell — shell them to eat). You also gather deadfall: 1× branches. This patch is picked clean — it'll recover in a few days."
+    },
+    {
+      "day": 25,
+      "line": "🧳 Word from Thornfield: Elena is dead, and Darius and Nadia both claim the fire. Thornfield is choosing — or fighting."
+    },
+    {
+      "day": 25,
+      "line": "🌙 Raid — Thornfield came in the night from the northwest. They trampled 2 garden plots into mud. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+    },
+    {
+      "day": 25,
+      "line": "The northwest ground is thinning faster than your crews alone could strip it. The Bloodied isn't slowing down — their foragers are on your turf most days now. Their speaker would probably want words. (Talk about the shared ground at their fire.)"
+    },
+    {
+      "day": 26,
+      "line": "⚔️ Yara stood down the Union Rep and kept walking — 1 round, bloodied but breathing. It's still out there, somewhere."
+    },
+    {
+      "day": 26,
+      "line": "You clear a dead bed. Sow fresh seed to start a new crop. (40 kcal.)"
+    },
+    {
+      "day": 26,
+      "line": "📋 Khadija — 🪾 Gather deadfall. Khadija nods eagerly. They'll report back by next part."
+    },
+    {
+      "day": 26,
+      "line": "📋 Nadia — 🪾 Gather deadfall. Nadia nods eagerly. They'll report back by next part."
+    },
+    {
+      "day": 26,
+      "line": "🍂 Khadija gathers deadfall — 2 sticks + 1 fiber. The pile grows. (7 sticks now.)"
+    },
+    {
+      "day": 26,
+      "line": "🍂 Nadia gathers deadfall — 1 stick. The pile grows. (8 sticks now.)"
+    },
+    {
+      "day": 26,
+      "line": "📖 The Codex turns a page on its own. The Paparazzo is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 26,
+      "line": "📖 The Codex turns a page on its own. The Union Rep is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 26,
+      "line": "📖 The Codex turns a page on its own. tick is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 26,
+      "line": "📖 The Codex turns a page on its own. Don't-Look is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 26,
+      "line": "The Bloodied's speaker sent a runner: the northwest ground feeds both villages or neither. They want to talk — properly, at their fire. Ignoring this is also an answer."
+    },
+    {
+      "day": 27,
+      "line": "You clear a dead bed. Sow fresh seed to start a new crop. (40 kcal.)"
+    },
+    {
+      "day": 27,
+      "line": "🧳 A traveler says Thornfield burned — the whole fire, gone. (Wrong. It split: the hardliners walked. The Bloodied is the new fire.)"
+    },
+    {
+      "day": 28,
+      "line": "📋 Khadija — 🪾 Gather deadfall. Khadija nods eagerly. They'll report back by next part."
+    },
+    {
+      "day": 28,
+      "line": "📋 Nadia — 🪾 Gather deadfall. Nadia nods eagerly. They'll report back by next part."
+    },
+    {
+      "day": 28,
+      "line": "🍂 Khadija gathers deadfall — 2 sticks + 1 fiber. The pile grows. (6 sticks now.)"
+    },
+    {
+      "day": 28,
+      "line": "🍂 Nadia gathers deadfall — 2 sticks + 1 fiber. The pile grows. (8 sticks now.)"
+    },
+    {
+      "day": 28,
+      "line": "A runner from The Bloodied, dusty and direct: \"Your foragers are stripping our side of the northwest ground. Back off — or we'll talk with teeth.\" (Trust -3. The commons cuts both ways.)"
+    },
+    {
+      "day": 29,
+      "line": "📖 The Codex turns a page on its own. Sunbasker is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 29,
+      "line": "📖 The Codex turns a page on its own. The Big Beast is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 29,
+      "line": "You work the patch with practiced hands: 10× White Oak Acorns (in shell — shell them to eat). You also gather deadfall: 1× branches, 1× bark fiber. This patch is picked clean — it'll recover in a few days."
+    },
+    {
+      "day": 30,
+      "line": "Diana doesn't bother arguing anymore. By dusk the Gather deadfall crews are taking orders from them, and nobody quite remembers when it changed."
+    },
+    {
+      "day": 30,
+      "line": "🍂 Diana gathers deadfall — 1 stick + 1 fiber. The pile grows. (9 sticks now.)"
+    },
+    {
+      "day": 31,
+      "line": "🍂 Diana gathers deadfall — 1 stick. The pile grows. (10 sticks now.)"
+    },
+    {
+      "day": 31,
+      "line": "📖 The Codex turns a page on its own. Hummice is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 31,
+      "line": "🍂 Diana gathers deadfall — 1 stick + 1 fiber. The pile grows. (11 sticks now.)"
+    },
+    {
+      "day": 31,
+      "line": "📖 The Codex turns a page on its own. Don't-Look is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 31,
+      "line": "🍂 Diana gathers deadfall — 1 stick. The pile grows. (12 sticks now.)"
+    },
+    {
+      "day": 31,
+      "line": "📖 The Codex turns a page on its own. The Callback is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 31,
+      "line": "🍂 Diana gathers deadfall — 2 sticks + 1 fiber. The pile grows. (14 sticks now.)"
+    },
+    {
+      "day": 31,
+      "line": "🧳 Word from Ashford: Deshawn is dead, and Darius and Hana both claim the fire. Ashford is choosing — or fighting."
+    },
+    {
+      "day": 32,
+      "line": "🍂 Diana gathers deadfall — 1 stick + 1 fiber. The pile grows. (15 sticks now.)"
+    },
+    {
+      "day": 32,
+      "line": "🍂 Diana gathers deadfall — 1 stick + 1 fiber. The pile grows. (16 sticks now.)"
+    },
+    {
+      "day": 32,
+      "line": "🍂 Diana gathers deadfall — 1 stick + 1 fiber. The pile grows. (17 sticks now.)"
+    },
+    {
+      "day": 32,
+      "line": "🍂 Diana gathers deadfall — 1 stick. The pile grows. (18 sticks now.)"
+    },
+    {
+      "day": 32,
+      "line": "🌙 Raid — Ashford came in the night from the southeast. They trampled 2 garden plots into mud. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+    },
+    {
+      "day": 33,
+      "line": "🍂 Diana gathers deadfall — 2 sticks. The pile grows. (20 sticks now.)"
+    },
+    {
+      "day": 33,
+      "line": "🍂 Diana gathers deadfall — 2 sticks. The pile grows. (22 sticks now.)"
+    },
+    {
+      "day": 33,
+      "line": "🍂 Diana gathers deadfall — 2 sticks + 1 fiber. The pile grows. (24 sticks now.)"
+    },
+    {
+      "day": 33,
+      "line": "You clear a dead bed. Sow fresh seed to start a new crop. (40 kcal.)"
+    },
+    {
+      "day": 33,
+      "line": "🍂 Diana gathers deadfall — 2 sticks. The pile grows. (26 sticks now.)"
+    },
+    {
+      "day": 34,
+      "line": "🍂 Diana gathers deadfall — 2 sticks. The pile grows. (26 sticks now.)"
+    },
+    {
+      "day": 34,
+      "line": "🍂 Diana gathers deadfall — 1 stick. The pile grows. (27 sticks now.)"
+    },
+    {
+      "day": 34,
+      "line": "You work the patch with practiced hands: 16× White Oak Acorns (in shell — shell them to eat). You also gather deadfall: 2× branches. This patch is picked clean — it'll recover in a few days."
+    },
+    {
+      "day": 34,
+      "line": "You clear a dead bed. Sow fresh seed to start a new crop. (40 kcal.)"
+    },
+    {
+      "day": 34,
+      "line": "🍂 Diana gathers deadfall — 2 sticks. The pile grows. (29 sticks now.)"
+    },
+    {
+      "day": 34,
+      "line": "🍂 Diana gathers deadfall — 1 stick. The pile grows. (30 sticks now.)"
+    },
+    {
+      "day": 34,
+      "line": "📖 The Codex turns a page on its own. The Ugly Stare is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 34,
+      "line": "📖 The Codex turns a page on its own. The Landlord is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 34,
+      "line": "📖 The Codex turns a page on its own. Big Ugly is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 34,
+      "line": "📖 The Codex turns a page on its own. Don't-Look is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 35,
+      "line": "🍂 Diana gathers deadfall — 2 sticks. The pile grows. (32 sticks now.)"
+    },
+    {
+      "day": 35,
+      "line": "🍂 Diana gathers deadfall — 2 sticks + 1 fiber. The pile grows. (34 sticks now.)"
+    },
+    {
+      "day": 35,
+      "line": "🍂 Diana gathers deadfall — 2 sticks. The pile grows. (36 sticks now.)"
+    },
+    {
+      "day": 35,
+      "line": "🍂 Diana gathers deadfall — 2 sticks. The pile grows. (38 sticks now.)"
+    },
+    {
+      "day": 35,
+      "line": "🌙 Raid — Thornfield came in the night from the northwest. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+    },
+    {
+      "day": 36,
+      "line": "🍂 Diana gathers deadfall — 2 sticks + 1 fiber. The pile grows. (38 sticks now.)"
+    },
+    {
+      "day": 36,
+      "line": "🍂 Diana gathers deadfall — 1 stick. The pile grows. (39 sticks now.)"
+    },
+    {
+      "day": 36,
+      "line": "🍂 Diana gathers deadfall — 1 stick + 1 fiber. The pile grows. (40 sticks now.)"
+    },
+    {
+      "day": 36,
+      "line": "🍂 Diana gathers deadfall — 1 stick + 1 fiber. The pile grows. (41 sticks now.)"
+    },
+    {
+      "day": 37,
+      "line": "🍂 Diana gathers deadfall — 2 sticks + 1 fiber. The pile grows. (43 sticks now.)"
+    },
+    {
+      "day": 37,
+      "line": "🍂 Diana gathers deadfall — 2 sticks. The pile grows. (45 sticks now.)"
+    },
+    {
+      "day": 37,
+      "line": "🍂 Diana gathers deadfall — 1 stick + 1 fiber. The pile grows. (46 sticks now.)"
+    },
+    {
+      "day": 37,
+      "line": "📖 The Codex turns a page on its own. Big Loud is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 37,
+      "line": "🍂 Diana gathers deadfall — 2 sticks. The pile grows. (48 sticks now.)"
+    },
+    {
+      "day": 38,
+      "line": "🍂 Diana gathers deadfall — 1 stick. The pile grows. (49 sticks now.)"
+    },
+    {
+      "day": 38,
+      "line": "🍂 Diana gathers deadfall — 1 stick. The pile grows. (50 sticks now.)"
+    },
+    {
+      "day": 38,
+      "line": "🍂 Diana gathers deadfall — 2 sticks + 1 fiber. The pile grows. (52 sticks now.)"
+    },
+    {
+      "day": 38,
+      "line": "🍂 Diana gathers deadfall — 2 sticks. The pile grows. (54 sticks now.)"
+    },
+    {
+      "day": 39,
+      "line": "🍂 Diana gathers deadfall — 1 stick + 1 fiber. The pile grows. (55 sticks now.)"
+    },
+    {
+      "day": 39,
+      "line": "🍂 Diana gathers deadfall — 1 stick + 1 fiber. The pile grows. (56 sticks now.)"
+    },
+    {
+      "day": 39,
+      "line": "🍂 Diana gathers deadfall — 1 stick + 1 fiber. The pile grows. (57 sticks now.)"
+    },
+    {
+      "day": 39,
+      "line": "📖 The Codex turns a page on its own. Drum-Belly is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 39,
+      "line": "📖 The Codex turns a page on its own. Nostalgia is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 39,
+      "line": "🍂 Diana gathers deadfall — 1 stick + 1 fiber. The pile grows. (58 sticks now.)"
+    },
+    {
+      "day": 39,
+      "line": "🌙 Raid — The Bloodied came in the night from the northwest. They trampled 2 garden plots into mud. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+    },
+    {
+      "day": 40,
+      "line": "🍂 Diana gathers deadfall — 2 sticks. The pile grows. (60 sticks now.)"
+    },
+    {
+      "day": 40,
+      "line": "🍂 Diana gathers deadfall — 2 sticks. The pile grows. (62 sticks now.)"
+    },
+    {
+      "day": 40,
+      "line": "🍂 Diana gathers deadfall — 1 stick + 1 fiber. The pile grows. (63 sticks now.)"
+    },
+    {
+      "day": 40,
+      "line": "You clear a dead bed. Sow fresh seed to start a new crop. (40 kcal.)"
+    },
+    {
+      "day": 40,
+      "line": "🍂 Diana gathers deadfall — 2 sticks + 1 fiber. The pile grows. (65 sticks now.)"
+    },
+    {
+      "day": 40,
+      "line": "🧳 Word from Thornfield: Darius was killed — Ines did it, they say. (The truth: dead is dead; the killing part is gossip.)"
+    },
+    {
+      "day": 41,
+      "line": "🍂 Diana gathers deadfall — 1 stick + 1 fiber. The pile grows. (66 sticks now.)"
+    },
+    {
+      "day": 41,
+      "line": "🍂 Diana gathers deadfall — 1 stick + 1 fiber. The pile grows. (67 sticks now.)"
+    },
+    {
+      "day": 41,
+      "line": "You clear a dead bed. Sow fresh seed to start a new crop. (40 kcal.)"
+    },
+    {
+      "day": 41,
+      "line": "🍂 Diana gathers deadfall — 2 sticks + 1 fiber. The pile grows. (69 sticks now.)"
+    },
+    {
+      "day": 41,
+      "line": "🍂 Diana gathers deadfall — 1 stick. The pile grows. (70 sticks now.)"
+    },
+    {
+      "day": 41,
+      "line": "📖 The Codex turns a page on its own. Sir Blinds-A-Lot is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 41,
+      "line": "💡 COUNTER LEARNED — The Loud Stare: Say the goodbye — properly, out loud. It wears someone you buried. Every few rounds the face shifts and borrows their swing. Speak to it AS them — say the goodbye properly, out loud — and it loses coherence; the face cannot borrow a swing from someone who has been mourned. (Khadija lived to tell it, twice — the village pieced it together.)"
+    },
+    {
+      "day": 41,
+      "line": "📓 Codex: Counter: Say the goodbye — properly, out loud — It wears someone you buried. Every few rounds the face shifts and borrows their swing. Speak to it AS them — say the goodbye properly, out loud — and it loses coherence; the face cannot borrow a swing from someone who has been mourned."
+    },
+    {
+      "day": 42,
+      "line": "🍂 Diana gathers deadfall — 2 sticks + 1 fiber. The pile grows. (72 sticks now.)"
+    },
+    {
+      "day": 42,
+      "line": "🍂 Diana gathers deadfall — 1 stick + 1 fiber. The pile grows. (73 sticks now.)"
+    },
+    {
+      "day": 42,
+      "line": "🍂 Diana gathers deadfall — 1 stick + 1 fiber. The pile grows. (74 sticks now.)"
+    },
+    {
+      "day": 42,
+      "line": "⚔️ Nadia stood down the mosquito and kept walking — 1 round, bloodied but breathing. It's still out there, somewhere."
+    },
+    {
+      "day": 42,
+      "line": "🍂 Diana gathers deadfall — 2 sticks. The pile grows. (76 sticks now.)"
+    },
+    {
+      "day": 43,
+      "line": "🍂 Diana gathers deadfall — 1 stick. The pile grows. (77 sticks now.)"
+    },
+    {
+      "day": 43,
+      "line": "🍂 Diana gathers deadfall — 2 sticks. The pile grows. (79 sticks now.)"
+    },
+    {
+      "day": 43,
+      "line": "🍂 Diana gathers deadfall — 2 sticks. The pile grows. (81 sticks now.)"
+    },
+    {
+      "day": 43,
+      "line": "📖 The Codex turns a page on its own. mosquito is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 43,
+      "line": "⚔️ Aroha stood down the Redactor and kept walking — 3 rounds, bloodied but breathing. It's still out there, somewhere."
+    },
+    {
+      "day": 43,
+      "line": "🍂 Diana gathers deadfall — 1 stick + 1 fiber. The pile grows. (82 sticks now.)"
+    },
+    {
+      "day": 44,
+      "line": "🍂 Diana gathers deadfall — 1 stick + 1 fiber. The pile grows. (83 sticks now.)"
+    },
+    {
+      "day": 44,
+      "line": "🍂 Diana gathers deadfall — 1 stick + 1 fiber. The pile grows. (84 sticks now.)"
+    },
+    {
+      "day": 44,
+      "line": "🍂 Diana gathers deadfall — 1 stick + 1 fiber. The pile grows. (85 sticks now.)"
+    },
+    {
+      "day": 44,
+      "line": "📖 The Codex turns a page on its own. The Focus Group is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 44,
+      "line": "🍂 Diana gathers deadfall — 2 sticks + 1 fiber. The pile grows. (87 sticks now.)"
+    },
+    {
+      "day": 45,
+      "line": "🍂 Diana gathers deadfall — 2 sticks + 1 fiber. The pile grows. (89 sticks now.)"
+    },
+    {
+      "day": 45,
+      "line": "📖 The Codex turns a page on its own. Diana Osei is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 45,
+      "line": "📖 The Codex turns a page on its own. The Big Beast is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 46,
+      "line": "Fatty, dark, faintly of thunder. Cook it well — and thank the drum. It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat rots where it lies."
+    },
+    {
+      "day": 46,
+      "line": "Dragonfly the size of a hawk. Gamey. The wings are like cellophane. It's dead. The carcass is there on the ground — search the body if you want the meat. But you don't know this flesh. Clean it, test it cautiously, or ask someone who knows. And don't leave it long: meat rots where it lies."
+    },
+    {
+      "day": 47,
+      "line": "📖 The Codex turns a page on its own. The Loud Stare is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 47,
+      "line": "🌙 Raid — Emberhold came in the night from the west. They carried off ~641 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+    },
+    {
+      "day": 48,
+      "line": "🌙 Raid — The Bloodied came in the night from the northwest. They carried off ~1313 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+    },
+    {
+      "day": 52,
+      "line": "📖 The Codex turns a page on its own. Wanda is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 52,
+      "line": "📖 The Codex turns a page on its own. The Big Beast is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 52,
+      "line": "📖 The Codex turns a page on its own. Nevermore is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 52,
+      "line": "📖 The Codex turns a page on its own. The Redactor is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 52,
+      "line": "🛡️ Wanda, Stephen, Khadija, Nadia and Yara met them at the door — 3 put down, 1 driven off. Wanda didn't come back. Stephen, Khadija, Nadia are hurt."
+    },
+    {
+      "day": 52,
+      "line": "🌙 Raid — Thornfield came in the night from the northwest. They carried off ~660 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+    },
+    {
+      "day": 52,
+      "line": "🌙 Raid — The Bloodied came in the night from the northwest. They carried off ~1364 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+    },
+    {
+      "day": 53,
+      "line": "🔥 The fire settles. Khadija has been quiet all evening, and now everyone knows why. \"Nevermore — I put it down today.\" \"Its shadow detaches from the branch-shadow and slides across the ground toward you — a straight black lane, growing. The bird hasn't moved. The shadow has.\" \"It climbs, laughing in a dead voice — out of spear reach, watching.\" A beat of silence, then the questions come all at once. Nadia breathes \"Tell me you didn't go alone.\" Yara says quietly \"Tell me you didn't go alone.\" Someone at the edge of the light says what everyone's thinking: \"So — what are we calling it?\""
+    },
+    {
+      "day": 53,
+      "line": "No food in these trees — but the ground gives deadfall: 2× branches. This patch is picked clean — it'll recover in a few days."
+    },
+    {
+      "day": 53,
+      "line": "⚔️ Nadia stood down the Redactor and kept walking — 3 rounds, bloodied but breathing. It's still out there, somewhere."
+    },
+    {
+      "day": 56,
+      "line": "🧳 Word from Thornfield: Ines is dead, and Tomás and Elena both claim the fire. Thornfield is choosing — or fighting."
+    },
+    {
+      "day": 57,
+      "line": "📖 The Codex turns a page on its own. Ernestine Webb is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 57,
+      "line": "🕯️ Ernestine Webb is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+    },
+    {
+      "day": 57,
+      "line": "What Ernestine kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+    },
+    {
+      "day": 57,
+      "line": "The village's quarrel was with Ernestine — and Ernestine is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers."
+    },
+    {
+      "day": 57,
+      "line": "At the grave, Stephen, Khadija, Ava and 2 more speak for Nadia — \"Ernestine trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+    },
+    {
+      "day": 58,
+      "line": "That night, they bring Ernestine home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours."
+    },
+    {
+      "day": 59,
+      "line": "You work the patch with practiced hands: 10× White Oak Acorns (in shell — shell them to eat). You also gather deadfall: 2× branches. This patch is picked clean — it'll recover in a few days."
+    },
+    {
+      "day": 59,
+      "line": "🧳 Word from Stonebridge: Omar was killed — Ben did it, they say. (The truth: dead is dead; the killing part is gossip.)"
+    },
+    {
+      "day": 59,
+      "line": "📖 The Codex turns a page on its own. Rai Solihin is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 60,
+      "line": "📨 Word came: Dmitri Sokolov of The Bloodied wants to join Haven. \"I can work. That's all I'm selling.\" — they haven't set foot here. The village will judge."
+    },
+    {
+      "day": 61,
+      "line": "📖 The Codex turns a page on its own. Nadia Khoury is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 61,
+      "line": "🕯️ Nadia Khoury is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+    },
+    {
+      "day": 61,
+      "line": "What Nadia kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+    },
+    {
+      "day": 61,
+      "line": "At the grave, Stephen, Khadija, Ava and 1 more speak for Ruby — \"Nadia trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+    },
+    {
+      "day": 61,
+      "line": "🌙 Raid — Thornfield came in the night from the northwest. They trampled 2 garden plots into mud. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+    },
+    {
+      "day": 62,
+      "line": "You don't know what that was. Everyone you've buried, standing up. Someone at the haven should hear about this."
+    },
+    {
+      "day": 62,
+      "line": "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)"
+    },
+    {
+      "day": 62,
+      "line": "📖 The Codex turns a page on its own. Ruby Callaghan is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 62,
+      "line": "🕯️ Ruby Callaghan is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+    },
+    {
+      "day": 62,
+      "line": "What Ruby kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+    },
+    {
+      "day": 62,
+      "line": "📖 LEARNED: Radios & Signals (Level 1). Continuity, batteries, and solder. Most dead electronics are just broken connections."
+    },
+    {
+      "day": 62,
+      "line": "At the grave, Khadija, Ava, Aroha speak for Stephen — \"Ruby trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+    },
+    {
+      "day": 62,
+      "line": "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)"
+    },
+    {
+      "day": 62,
+      "line": "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)"
+    },
+    {
+      "day": 62,
+      "line": "📖 The Codex turns a page on its own. Stephen Corpuz is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 62,
+      "line": "🕯️ Stephen Corpuz is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+    },
+    {
+      "day": 62,
+      "line": "What Stephen kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+    },
+    {
+      "day": 62,
+      "line": "📖 LEARNED: Ritual & Meaning (Level 1). Marking the dead matters. Even without religion, ritual holds grief."
+    },
+    {
+      "day": 62,
+      "line": "At the grave, Khadija, Aroha speak for Ava — \"Stephen trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+    },
+    {
+      "day": 62,
+      "line": "You work the patch with practiced hands: 8× White Oak Acorns (in shell — shell them to eat). You also gather deadfall: 2× branches. This patch is picked clean — it'll recover in a few days."
+    },
+    {
+      "day": 62,
+      "line": "You clear a dead bed. Sow fresh seed to start a new crop. (40 kcal.)"
+    },
+    {
+      "day": 62,
+      "line": "That night, they bring Nadia home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours."
+    },
+    {
+      "day": 62,
+      "line": "🌙 Raid — Ashford came in the night from the southeast. They trampled 2 garden plots into mud. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+    },
+    {
+      "day": 63,
+      "line": "You clear a dead bed. Sow fresh seed to start a new crop. (40 kcal.)"
+    },
+    {
+      "day": 63,
+      "line": "That night, they bring Ruby home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours."
+    },
+    {
+      "day": 63,
+      "line": "That night, they bring Stephen home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours."
+    },
+    {
+      "day": 64,
+      "line": "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)"
+    },
+    {
+      "day": 64,
+      "line": "📖 The Codex turns a page on its own. Ava Garcia is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 64,
+      "line": "🕯️ Ava Garcia is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+    },
+    {
+      "day": 64,
+      "line": "What Ava kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+    },
+    {
+      "day": 64,
+      "line": "At the grave, Aroha speaks for Khadija — \"Ava trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+    },
+    {
+      "day": 64,
+      "line": "You clear a dead bed. Sow fresh seed to start a new crop. (40 kcal.)"
+    },
+    {
+      "day": 65,
+      "line": "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)"
+    },
+    {
+      "day": 65,
+      "line": "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)"
+    },
+    {
+      "day": 65,
+      "line": "📖 The Codex turns a page on its own. Khadija Odunlami is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 65,
+      "line": "🕯️ Khadija Odunlami is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+    },
+    {
+      "day": 65,
+      "line": "What Khadija kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+    },
+    {
+      "day": 65,
+      "line": "At the grave, Yara speaks for Aroha — \"Khadija trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+    },
+    {
+      "day": 65,
+      "line": "You work the patch with practiced hands: 8× Hickory Nuts (in shell — shell them to eat). You also gather deadfall: 1× branches. This patch is picked clean — it'll recover in a few days."
+    },
+    {
+      "day": 65,
+      "line": "You clear a dead bed. Sow fresh seed to start a new crop. (40 kcal.)"
+    },
+    {
+      "day": 65,
+      "line": "📨 Word came: Nina Petrova of The Bloodied wants to join Haven. \"I can work. That's all I'm selling.\" — they haven't set foot here. The village will judge."
+    },
+    {
+      "day": 65,
+      "line": "That night, they bring Ava home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours."
+    },
+    {
+      "day": 66,
+      "line": "That night, they bring Khadija home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours."
+    },
+    {
+      "day": 67,
+      "line": "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)"
+    },
+    {
+      "day": 67,
+      "line": "📖 The Codex turns a page on its own. Aroha Ngata is dead. You didn't ask. It knew."
+    },
+    {
+      "day": 67,
+      "line": "🕯️ Aroha Ngata is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+    },
+    {
+      "day": 67,
+      "line": "What Aroha kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+    },
+    {
+      "day": 67,
+      "line": "📨 Word came: a weathered teacher of The Bloodied wants to join Haven. \"Heard about this place three valleys over. Had to try.\" — they haven't set foot here. The village will judge."
+    },
+    {
+      "day": 67,
+      "line": "🌙 Raid — Thornfield came in the night from the northwest. They trampled 2 garden plots into mud. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)"
+    },
+    {
+      "day": 68,
+      "line": "You work the patch with practiced hands: 8× White Oak Acorns (in shell — shell them to eat). You also gather deadfall: 1× branches. This patch is picked clean — it'll recover in a few days."
+    },
+    {
+      "day": 68,
+      "line": "You clear a dead bed. Sow fresh seed to start a new crop. (40 kcal.)"
+    },
+    {
+      "day": 68,
+      "line": "That night, they bring Aroha home. Nobody asks you to help carry; nobody has to. By morning the grave is dug by the fire, and the body is laid out beside it. The filling of it is yours."
+    },
+    {
+      "day": 69,
+      "line": "👂 Overheard — Dmitri: \"If the System wanted us dead we'd be dead. So what does it want instead?\""
+    },
+    {
+      "day": 69,
+      "line": "You clear a dead bed. Sow fresh seed to start a new crop. (40 kcal.)"
+    }
+  ],
+  "fightLines": [
+    {
+      "day": 1,
+      "line": "You remember the Crossbow at your space in the haven and fetch it — it rides in your pack now."
+    },
+    {
+      "day": 1,
+      "line": "You remember the Scar Tissue Wraps at your space in the haven and fetch it — it rides in your pack now."
+    },
+    {
+      "day": 2,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 2,
+      "line": "🎒 A woman, maybe 30s, with a long braid shoulders a pack. \"Going far this time. Don't wait up.\""
+    },
+    {
+      "day": 4,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 4,
+      "line": "⚔️ Nadia killed the something wearing a crown of bone with their party — 3 rounds, 19 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 5,
+      "line": "📺 A woman, maybe 30s, with a long braid killed something huge, rooting in the underbrush out past the ridge — alone — and walked home. 4 rounds, 41 taken. (The village watches the broadcast. Nobody blinks.)"
+    },
+    {
+      "day": 5,
+      "line": "📣 A woman, maybe 30s, with a long braid killed something huge, rooting in the underbrush out past the ridge — alone — and walked home. 4 rounds, 41 taken."
+    },
+    {
+      "day": 7,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 7,
+      "line": "📺 Ruby killed something heavy rooting in the grass, dust rising for no reason out past the ridge — alone — and walked home. 8 rounds, 56 taken. (The village watches the broadcast. Nobody blinks.)"
+    },
+    {
+      "day": 7,
+      "line": "📣 Ruby killed something heavy rooting in the grass, dust rising for no reason out past the ridge — alone — and walked home. 8 rounds, 56 taken."
+    },
+    {
+      "day": 8,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 8,
+      "line": "eel is hurt bad — and it knows it. Wild swings, everything committed, nothing held back. Dangerous and sloppy."
+    },
+    {
+      "day": 8,
+      "line": "📺 Marvin killed Extended Warranty out past the ridge — with Ruby charging in when it turned — and walked home. 9 rounds, 65 taken. (The village watches the broadcast. Nobody blinks.)"
+    },
+    {
+      "day": 8,
+      "line": "📣 Marvin killed Extended Warranty out past the ridge — with Ruby charging in when it turned — and walked home. 9 rounds, 65 taken."
+    },
+    {
+      "day": 8,
+      "line": "📺 Marvin killed Nightlight out past the ridge — alone — and walked home. 4 rounds, 26 taken. (The village watches the broadcast. Nobody blinks.)"
+    },
+    {
+      "day": 8,
+      "line": "📣 Marvin killed Nightlight out past the ridge — alone — and walked home. 4 rounds, 26 taken."
+    },
+    {
+      "day": 8,
+      "line": "🔥 The fire settles. Nadia has been quiet all evening, and now everyone knows why. \"Hushpuppy — I put it down today.\" \"No telegraph you can hear. Watch the birds — when they go quiet, the pack is already moving.\" \"The pack circles — nips from the edge, never committing.\" A beat of silence, then the questions come all at once. Kai asks \"We've been walking past those.\" Wanda says quietly \"And you're still standing.\" Someone at the edge of the light says what everyone's thinking: \"So — what are we calling it?\""
+    },
+    {
+      "day": 8,
+      "line": "⚔️ Wanda killed the moth the size of a dinner plate with their party — 3 rounds, 25 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 8,
+      "line": "⚔️ Stephen killed the moth the size of a dinner plate with their party — 3 rounds, 20 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 8,
+      "line": "⚔️ Nadia killed the dog-shaped silence at the treeline with their party — 3 rounds, 49 taken. Word travels fast. Took Gravity hook off the body. The village cheers."
+    },
+    {
+      "day": 8,
+      "line": "⚔️ Ava killed the something displaced a LOT of water with their party — 5 rounds, 37 taken. Word travels fast. Took Miser's Eye off the body. The village cheers."
+    },
+    {
+      "day": 8,
+      "line": "Marvin leans in, voice low. \"Here's what we figured out about Hushpuppy. Wound the lead. Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free.\""
+    },
+    {
+      "day": 8,
+      "line": "💡 COUNTER LEARNED — Hushpuppy: Wound the lead. Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free. (Someone at the haven knew the trick.)"
+    },
+    {
+      "day": 8,
+      "line": "📓 Codex: Counter: Wound the lead — Wound the lead and the pack breaks. Hit the FIRST wolf — the one that came in first — and the coordination dies. They fear fire, but breaking the lead is free."
+    },
+    {
+      "day": 8,
+      "line": "🍽️ Yara eyes the groaning pantry shelves and packs light today. \"No point hauling what'll rot. Mending the nets instead.\""
+    },
+    {
+      "day": 9,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 9,
+      "line": "Nadia eats away from the haven — 1240 kcal from the pack — while hurt (health 4/100). They're still out walking with Diana — the trip isn't over yet."
+    },
+    {
+      "day": 10,
+      "line": "🕯️ Word comes back with a torn pack and no Marvin. Inspiration, out past the ridge. The fire is quieter tonight."
+    },
+    {
+      "day": 10,
+      "line": "⚔️ Diana killed the Choir Toad with their party — 1 round, 0 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 10,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 10,
+      "line": "Stephen leans in, voice low. \"Here's what we figured out about Choir Toad. Break the chorus. The Resonant Croak needs the chorus — every throat in range joins. SHOUT and the note dies mid-croak. The hum needs the choir; scatter the choir.\""
+    },
+    {
+      "day": 10,
+      "line": "💡 COUNTER LEARNED — Choir Toad: Break the chorus. The Resonant Croak needs the chorus — every throat in range joins. SHOUT and the note dies mid-croak. The hum needs the choir; scatter the choir. (Someone at the haven knew the trick.)"
+    },
+    {
+      "day": 10,
+      "line": "📓 Codex: Counter: Break the chorus — The Resonant Croak needs the chorus — every throat in range joins. SHOUT and the note dies mid-croak. The hum needs the choir; scatter the choir."
+    },
+    {
+      "day": 10,
+      "line": "◈ RESONANCE HARMONICS — SYSTEM: \"HYPOTHESIS CONFIRMED. Objects with high observer-attention waveforms function as auxiliary capacitors. We call this RESONANCE HARMONICS. We do not know why the waveforms taste like grief. We have stopped asking.\" — Hold a keepsake. Think about them. The System will do the math. (It is not math. It is love. The System will never know.) Channel keepsakes from your pack."
+    },
+    {
+      "day": 10,
+      "line": "🐺 HOWLS in the distance. Closer than before. The System chirps: \"Oh! We made those! Are they... too many? We can make fewer?\" (New monster: hushwolf pack.)"
+    },
+    {
+      "day": 12,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 12,
+      "line": "⚔️ Kai killed the Extended Warranty with their party — 5 rounds, 83 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 12,
+      "line": "⚔️ Stephen killed the Moderator with their party — 8 rounds, 63 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 12,
+      "line": "Your pack is full (14.7 kg of 20 kg) — 60× Purslane (6 kg, 1800 kcal) goes straight to the pantry instead."
+    },
+    {
+      "day": 13,
+      "line": "⚔️ Aroha killed the Big Ugly with their party — 4 rounds, 8 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 13,
+      "line": "🍽️ Ava takes one look at the full shelves and unshoulders the pack. \"Leave the wild standing. Hauling water for the cistern.\""
+    },
+    {
+      "day": 14,
+      "line": "⚔️ Stephen killed the Speedbump with their party — 5 rounds, 52 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 14,
+      "line": "The package sits in your pack, unopened. Opening it takes a day-part — the fans demand the full unboxing. (Use it from your pack when you have a morning to spend.)"
+    },
+    {
+      "day": 15,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 15,
+      "line": "⚔️ Diana killed the Static Kite with their party — 6 rounds, 83 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 15,
+      "line": "⚔️ Ruby killed the Understudy with their party — 10 rounds, 94 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 15,
+      "line": "⚔️ Diana killed the Big Ugly with their party — 3 rounds, 24 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 16,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 16,
+      "line": "The pantry is bursting past tomorrow — most of the haul stays in your pack. The fire can wait; the road can't."
+    },
+    {
+      "day": 16,
+      "line": "Your pack is full (25 kg of 28 kg) — 60× Purslane (6 kg, 1800 kcal) goes straight to the pantry instead."
+    },
+    {
+      "day": 16,
+      "line": "Three shapes at the treeline — dog-shaped silences, circling. (A real pack is out there now: 3 of them. No names yet — nobody's lived to argue about one.)"
+    },
+    {
+      "day": 17,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 18,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 19,
+      "line": "⚔️ Wanda killed the Don't-Look with their party — 3 rounds, 52 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 19,
+      "line": "⚔️ Ava killed the Heckler with their party — 4 rounds, 38 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 19,
+      "line": "⚔️ Diana killed the Don't-Look with their party — 1 round, 29 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 19,
+      "line": "Your pack is full (22.1 kg of 28 kg) — 60× Purslane (6 kg, 1800 kcal) goes straight to the pantry instead."
+    },
+    {
+      "day": 20,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 20,
+      "line": "⚔️ Ava killed the Static with their party — 4 rounds, 35 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 20,
+      "line": "🍽️ Yara eyes the groaning pantry shelves and packs light today. \"No point hauling what'll rot. Mending the nets instead.\""
+    },
+    {
+      "day": 21,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 21,
+      "line": "⚔️ Aroha killed the Highbeam Deer with their party — 2 rounds, 11 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 21,
+      "line": "The pantry is bursting past tomorrow — most of the haul stays in your pack. The fire can wait; the road can't."
+    },
+    {
+      "day": 21,
+      "line": "Your pack is full (24.2 kg of 28 kg) — 60× Purslane (6 kg, 1800 kcal) goes straight to the pantry instead."
+    },
+    {
+      "day": 21,
+      "line": "🐪 A trader from the downriver village walks into Haven, pack heavy, smile practiced. River-mud on their boots, river-gossip on their tongue."
+    },
+    {
+      "day": 22,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 22,
+      "line": "🎒 Diana shoulders a pack. \"Going far this time. Don't wait up.\""
+    },
+    {
+      "day": 22,
+      "line": "Your pack is full (23.5 kg of 28 kg) — 60× Purslane (6 kg, 1800 kcal) goes straight to the pantry instead."
+    },
+    {
+      "day": 22,
+      "line": "📺 Diana killed Don't-Look out past the ridge — alone — and walked home. 3 rounds, 68 taken. (The village watches the broadcast. Nobody blinks.)"
+    },
+    {
+      "day": 23,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 23,
+      "line": "🍽️ Aroha eyes the groaning pantry shelves and packs light today. \"No point hauling what'll rot. Mending the nets instead.\""
+    },
+    {
+      "day": 24,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 24,
+      "line": "📺 Diana killed The Paparazzo out past the ridge — with Nadia charging in when it turned — and walked home. 3 rounds, 44 taken. (The village watches the broadcast. Nobody blinks.)"
+    },
+    {
+      "day": 24,
+      "line": "📣 Diana killed The Paparazzo out past the ridge — with Nadia charging in when it turned — and walked home. 3 rounds, 44 taken."
+    },
+    {
+      "day": 24,
+      "line": "You catch Khadija telling the fire about Diana. \"Diana killed The Paparazzo out past the ridge\" The story's already growing."
+    },
+    {
+      "day": 24,
+      "line": "Your pack is full (25.4 kg of 28 kg) — 60× Purslane (6 kg, 1800 kcal), 150× Blackberry (15 kg, 9750 kcal), 150× Blackberry (15 kg, 9750 kcal) go straight to the pantry instead."
+    },
+    {
+      "day": 25,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 25,
+      "line": "🍽️ Ava takes one look at the full shelves and unshoulders the pack. \"Leave the wild standing. Hauling water for the cistern.\""
+    },
+    {
+      "day": 26,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 26,
+      "line": "Your pack is full (25.9 kg of 28 kg) — 60× Purslane (6 kg, 1800 kcal) goes straight to the pantry instead."
+    },
+    {
+      "day": 27,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 27,
+      "line": "⚔️ Wanda killed the Paparazzo with their party — 5 rounds, 64 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 27,
+      "line": "⚔️ Khadija killed the Union Rep with their party — 6 rounds, 51 taken. Word travels fast. Took Neural Weave off the body. The village cheers."
+    },
+    {
+      "day": 27,
+      "line": "⚔️ Diana killed the tick with their party — 2 rounds, 10 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 27,
+      "line": "⚔️ Aroha killed the Don't-Look with their party — 4 rounds, 17 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 27,
+      "line": "The pantry is bursting past tomorrow — most of the haul stays in your pack. The fire can wait; the road can't."
+    },
+    {
+      "day": 28,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 28,
+      "line": "🌧️ The storm rolls over Haven like a held breath let go — rain hammering the tarps, the wind testing every knot Ruby tied. Inside, it's almost cozy. Almost."
+    },
+    {
+      "day": 28,
+      "line": "You set out every pot and skin — the storm fills them. (+1 clean water — your pack couldn't hold it all. The storm provides, the old-timers say, whether you ask or not.)"
+    },
+    {
+      "day": 28,
+      "line": "Your pack is full. Eat something, test a lump from your pack, or leave some for the woods."
+    },
+    {
+      "day": 28,
+      "line": "Your pack is full (27.3 kg of 28 kg) — 60× Purslane (6 kg, 1800 kcal) goes straight to the pantry instead."
+    },
+    {
+      "day": 29,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 29,
+      "line": "📺 Diana killed Sunbasker out past the ridge — alone — and walked home. 3 rounds, 13 taken. (The village watches the broadcast. Nobody blinks.)"
+    },
+    {
+      "day": 29,
+      "line": "📣 Diana killed Sunbasker out past the ridge — alone — and walked home. 3 rounds, 13 taken."
+    },
+    {
+      "day": 29,
+      "line": "⚔️ Wanda killed the Big Beast with their party — 8 rounds, 92 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 29,
+      "line": "Your pack is full (27.4 kg of 28 kg) — 150× Blackberry (15 kg, 9750 kcal) goes straight to the pantry instead."
+    },
+    {
+      "day": 30,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 31,
+      "line": "📺 Diana killed Hummice out past the ridge — alone — and walked home. 0 rounds. (The village watches the broadcast. Nobody blinks.)"
+    },
+    {
+      "day": 31,
+      "line": "📣 Diana killed Hummice out past the ridge — alone — and walked home. 0 rounds."
+    },
+    {
+      "day": 31,
+      "line": "📺 Diana killed Don't-Look out past the ridge — alone — and walked home. 0 rounds. (The village watches the broadcast. Nobody blinks.)"
+    },
+    {
+      "day": 31,
+      "line": "📣 Diana killed Don't-Look out past the ridge — alone — and walked home. 0 rounds."
+    },
+    {
+      "day": 31,
+      "line": "📺 SYSTEM: \"Oh — OH. Everybody saw that, right? Khadija just put down The Callback... on CAMERA. That's a veteran kill, folks. REMEMBER the name.\""
+    },
+    {
+      "day": 31,
+      "line": "⚔️ Khadija killed the Callback with their party — 7 rounds, 63 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 31,
+      "line": "The pantry is bursting past tomorrow — most of the haul stays in your pack. The fire can wait; the road can't."
+    },
+    {
+      "day": 31,
+      "line": "Your pack is full (29.6 kg of 28 kg) — 60× Purslane (6 kg, 1800 kcal) goes straight to the pantry instead."
+    },
+    {
+      "day": 31,
+      "line": "Wanda leans in, voice low. \"Here's what we figured out about Hummice. Bellow at the choir. The Swarm Hum stacks while you stand in it — but the hum needs the choir. SHOUT and the bellow scatters it. Raw noise, no words, all lungs.\""
+    },
+    {
+      "day": 31,
+      "line": "💡 COUNTER LEARNED — Hummice: Bellow at the choir. The Swarm Hum stacks while you stand in it — but the hum needs the choir. SHOUT and the bellow scatters it. Raw noise, no words, all lungs. (Someone at the haven knew the trick.)"
+    },
+    {
+      "day": 31,
+      "line": "📓 Codex: Counter: Bellow at the choir — The Swarm Hum stacks while you stand in it — but the hum needs the choir. SHOUT and the bellow scatters it. Raw noise, no words, all lungs."
+    },
+    {
+      "day": 32,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 32,
+      "line": "🍽️ Ruby eyes the groaning pantry shelves and packs light today. \"No point hauling what'll rot. Mending the nets instead.\""
+    },
+    {
+      "day": 33,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 33,
+      "line": "Your pack is full (26.7 kg of 28 kg) — 150× Blackberry (15 kg, 9750 kcal) goes straight to the pantry instead."
+    },
+    {
+      "day": 34,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 34,
+      "line": "Your pack is full (28.3 kg of 28 kg) — 60× Purslane (6 kg, 1800 kcal) goes straight to the pantry instead."
+    },
+    {
+      "day": 35,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 35,
+      "line": "Your pack is full. Eat something, test a lump from your pack, or leave some for the woods."
+    },
+    {
+      "day": 35,
+      "line": "⚔️ Wanda killed the Ugly Stare with their party — 5 rounds, 57 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 35,
+      "line": "⚔️ Stephen killed the Landlord with their party — 6 rounds, 45 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 35,
+      "line": "⚔️ Nadia killed the Big Ugly with their party — 3 rounds, 19 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 35,
+      "line": "⚔️ Ava killed the Don't-Look with their party — 4 rounds, 89 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 36,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 36,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 37,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 37,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 37,
+      "line": "⚔️ Aroha killed the Big Loud with their party — 7 rounds, 32 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 37,
+      "line": "Your pack is full (27.3 kg of 28 kg) — 150× Blackberry (15 kg, 9750 kcal), 90× Purslane (9 kg, 2700 kcal) go straight to the pantry instead."
+    },
+    {
+      "day": 38,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 38,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 38,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 38,
+      "line": "Your pack is full. Eat something, test a lump from your pack, or leave some for the woods."
+    },
+    {
+      "day": 39,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 39,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 39,
+      "line": "Your pack is full. Eat something, test a lump from your pack, or leave some for the woods."
+    },
+    {
+      "day": 39,
+      "line": "⚔️ Khadija killed the Drum-Belly with their party — 5 rounds, 11 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 39,
+      "line": "⚔️ Aroha killed the Nostalgia with their party — 6 rounds, 27 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 40,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 40,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 40,
+      "line": "Your pack is full. Eat something, test a lump from your pack, or leave some for the woods."
+    },
+    {
+      "day": 40,
+      "line": "Your pack is full (27.8 kg of 28 kg) — 90× Purslane (9 kg, 2700 kcal) goes straight to the pantry instead."
+    },
+    {
+      "day": 40,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 41,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 41,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 41,
+      "line": "Your pack is full. Eat something, test a lump from your pack, or leave some for the woods."
+    },
+    {
+      "day": 42,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 42,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 42,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 42,
+      "line": "Your pack is full. Eat something, test a lump from your pack, or leave some for the woods."
+    },
+    {
+      "day": 42,
+      "line": "⚔️ Stephen killed the Sir Blinds-A-Lot with their party — 4 rounds, 64 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 43,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 43,
+      "line": "Your pack is full. Eat something, test a lump from your pack, or leave some for the woods."
+    },
+    {
+      "day": 43,
+      "line": "⚔️ Aroha killed the mosquito with their party — 3 rounds, 9 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 44,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 44,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 44,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 44,
+      "line": "Your pack is full. Eat something, test a lump from your pack, or leave some for the woods."
+    },
+    {
+      "day": 44,
+      "line": "📺 SYSTEM: \"Oh — OH. Everybody saw that, right? Ruby just put down The Focus Group... on CAMERA. That's a veteran kill, folks. REMEMBER the name.\""
+    },
+    {
+      "day": 44,
+      "line": "⚔️ Ruby killed the Focus Group with their party — 9 rounds, 83 taken. Word travels fast. Took Tracker's Blind off the body. The village cheers."
+    },
+    {
+      "day": 44,
+      "line": "Your pack is full (27.8 kg of 28 kg) — 90× Purslane (9 kg, 2700 kcal) goes straight to the pantry instead."
+    },
+    {
+      "day": 44,
+      "line": "🍽️ Diana eyes the groaning pantry shelves and packs light today. \"No point hauling what'll rot. Mending the nets instead.\""
+    },
+    {
+      "day": 45,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 45,
+      "line": "🕯️ Word comes back with a torn pack and no Diana. Spool, out past the ridge. The fire is quieter tonight."
+    },
+    {
+      "day": 45,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 45,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 45,
+      "line": "Your pack is full. Eat something, test a lump from your pack, or leave some for the woods."
+    },
+    {
+      "day": 45,
+      "line": "⚔️ Nadia killed the Big Beast with their party — 5 rounds, 42 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 45,
+      "line": "🍽️ Khadija eyes the groaning pantry shelves and packs light today. \"No point hauling what'll rot. Mending the nets instead.\""
+    },
+    {
+      "day": 46,
+      "line": "Nadia SCREAMS — a sound like milk curdling in fast-forward. Its focus shatters. The The Terms of Service freezes. (stunned)"
+    },
+    {
+      "day": 46,
+      "line": "Nadia SCREAMS — a sound like milk curdling in fast-forward. Its focus shatters. The The Big Thing freezes. (stunned)"
+    },
+    {
+      "day": 46,
+      "line": "Nadia SCREAMS — a sound like milk curdling in fast-forward. Its focus shatters. The The Glasswing Darter freezes. (stunned)"
+    },
+    {
+      "day": 46,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 46,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 46,
+      "line": "Your pack is full. Eat something, test a lump from your pack, or leave some for the woods."
+    },
+    {
+      "day": 46,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 46,
+      "line": "Your pack is full (28.1 kg of 28 kg) — 90× Purslane (9 kg, 2700 kcal) goes straight to the pantry instead."
+    },
+    {
+      "day": 47,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 47,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 47,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 47,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 47,
+      "line": "Your pack is full. Eat something, test a lump from your pack, or leave some for the woods."
+    },
+    {
+      "day": 47,
+      "line": "📺 SYSTEM: \"Oh — OH. Everybody saw that, right? Nadia just put down The Loud Stare... on CAMERA. That's a veteran kill, folks. REMEMBER the name.\""
+    },
+    {
+      "day": 48,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 48,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 48,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 48,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 48,
+      "line": "Your pack is full. Eat something, test a lump from your pack, or leave some for the woods."
+    },
+    {
+      "day": 48,
+      "line": "⚔️ Nadia killed the Loud Stare with their party — 3 rounds, 43 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 49,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 49,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 49,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 49,
+      "line": "Your pack is full. Eat something, test a lump from your pack, or leave some for the woods."
+    },
+    {
+      "day": 49,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 49,
+      "line": "Your pack is full (28.1 kg of 28 kg) — 90× Purslane (9 kg, 2700 kcal) goes straight to the pantry instead."
+    },
+    {
+      "day": 49,
+      "line": "🍽️ Ava takes one look at the full shelves and unshoulders the pack. \"Leave the wild standing. Hauling water for the cistern.\""
+    },
+    {
+      "day": 50,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    },
+    {
+      "day": 50,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 50,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 50,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 50,
+      "line": "Your pack is full — water is heavy (1L = 1kg). Drink some or drop weight before filling."
+    },
+    {
+      "day": 51,
+      "line": "Hunger gnaws. The pack is thin — work the green, haul it back, get it named at camp. That's the whole game."
+    }
+  ],
+  "sayCount": 8859,
+  "waveKillLog": [
+    {
+      "d": 3,
+      "mid": "rut_king",
+      "w": 1,
+      "by": "nadia_khoury",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 5,
+      "mid": "bulldozer",
+      "w": 1,
+      "by": "diana_osei",
+      "via": "agency",
+      "trick": null
+    },
+    {
+      "d": 7,
+      "mid": "dustboar",
+      "w": 1,
+      "by": "ruby_callaghan",
+      "via": "agency",
+      "trick": null
+    },
+    {
+      "d": 7,
+      "mid": "mirrormoth",
+      "w": 1,
+      "by": "gen_mng1ff1",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 7,
+      "mid": "mirrormoth",
+      "w": 1,
+      "by": "gen_qierkty",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 7,
+      "mid": "hushwolf",
+      "w": 1,
+      "by": "nadia_khoury",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 7,
+      "mid": "anaconda_empress",
+      "w": 1,
+      "by": "ava_garcia",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 8,
+      "mid": "living_wire",
+      "w": 1,
+      "by": "nadia_khoury",
+      "via": "companion",
+      "trick": null
+    },
+    {
+      "d": 8,
+      "mid": "warranty_caller",
+      "w": 2,
+      "by": "gen_qwjsnxg",
+      "via": "agency",
+      "trick": null
+    },
+    {
+      "d": 8,
+      "mid": "nightlight_catfish",
+      "w": 1,
+      "by": "gen_qwjsnxg",
+      "via": "agency",
+      "trick": null
+    },
+    {
+      "d": 9,
+      "mid": "belltoad",
+      "w": 1,
+      "by": "diana_osei",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 12,
+      "mid": "warranty_caller",
+      "w": 2,
+      "by": "gen_qia8o69",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 12,
+      "mid": "moderator",
+      "w": 2,
+      "by": "gen_qierkty",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 13,
+      "mid": "mirrormoth",
+      "w": 1,
+      "by": "aroha_ngata",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 14,
+      "mid": "speedbump_turtle",
+      "w": 1,
+      "by": "gen_qierkty",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 14,
+      "mid": "statickite",
+      "w": 2,
+      "by": "diana_osei",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 15,
+      "mid": "understudy",
+      "w": 2,
+      "by": "ruby_callaghan",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 15,
+      "mid": "mirrormoth",
+      "w": 1,
+      "by": "diana_osei",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 18,
+      "mid": "hushwolf",
+      "w": 1,
+      "by": "gen_mng1ff1",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 18,
+      "mid": "heckler",
+      "w": 2,
+      "by": "ava_garcia",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 18,
+      "mid": "hushwolf",
+      "w": 1,
+      "by": "diana_osei",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 19,
+      "mid": "voice_mimic_radio",
+      "w": 2,
+      "by": "ava_garcia",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 21,
+      "mid": "gallowdeer",
+      "w": 1,
+      "by": "aroha_ngata",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 22,
+      "mid": "hushwolf",
+      "w": 1,
+      "by": "diana_osei",
+      "via": "agency",
+      "trick": null
+    },
+    {
+      "d": 24,
+      "mid": "paparazzo",
+      "w": 2,
+      "by": "diana_osei",
+      "via": "agency",
+      "trick": null
+    },
+    {
+      "d": 26,
+      "mid": "paparazzo",
+      "w": 2,
+      "by": "gen_mng1ff1",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 26,
+      "mid": "union_rep",
+      "w": 2,
+      "by": "gen_5mmlf9l",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 26,
+      "mid": "alien_tick",
+      "w": 2,
+      "by": "diana_osei",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 26,
+      "mid": "speedbump_turtle",
+      "w": 1,
+      "by": "aroha_ngata",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 29,
+      "mid": "sunbasker",
+      "w": 1,
+      "by": "diana_osei",
+      "via": "agency",
+      "trick": null
+    },
+    {
+      "d": 29,
+      "mid": "moderator",
+      "w": 2,
+      "by": "gen_mng1ff1",
+      "via": "aid-crisis",
+      "trick": null
+    },
+    {
+      "d": 31,
+      "mid": "hummice",
+      "w": 1,
+      "by": "diana_osei",
+      "via": "agency",
+      "trick": null
+    },
+    {
+      "d": 31,
+      "mid": "nightlight_catfish",
+      "w": 1,
+      "by": "diana_osei",
+      "via": "agency",
+      "trick": null
+    },
+    {
+      "d": 31,
+      "mid": "callback",
+      "w": 3,
+      "by": "gen_5mmlf9l",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 34,
+      "mid": "living_wire",
+      "w": 1,
+      "by": "gen_mng1ff1",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 34,
+      "mid": "landlord",
+      "w": 2,
+      "by": "gen_qierkty",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 34,
+      "mid": "voice_mimic_radio",
+      "w": 2,
+      "by": "nadia_khoury",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 34,
+      "mid": "hushwolf",
+      "w": 1,
+      "by": "ava_garcia",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 37,
+      "mid": "heckler",
+      "w": 2,
+      "by": "aroha_ngata",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 39,
+      "mid": "drumbelly_tanuki",
+      "w": 1,
+      "by": "gen_5mmlf9l",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 39,
+      "mid": "memory_projector",
+      "w": 2,
+      "by": "aroha_ngata",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 41,
+      "mid": "gallowdeer",
+      "w": 1,
+      "by": "gen_qierkty",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 43,
+      "mid": "giant_mosquito",
+      "w": 2,
+      "by": "aroha_ngata",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 44,
+      "mid": "focus_group",
+      "w": 3,
+      "by": "ruby_callaghan",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 45,
+      "mid": "landlord",
+      "w": 2,
+      "by": "nadia_khoury",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 46,
+      "mid": "terms_of_service",
+      "w": 3,
+      "by": "gen_570k4qh",
+      "via": "player",
+      "trick": null
+    },
+    {
+      "d": 46,
+      "mid": "drumbelly_tanuki",
+      "w": 1,
+      "by": "gen_570k4qh",
+      "via": "player",
+      "trick": null
+    },
+    {
+      "d": 46,
+      "mid": "glasswing",
+      "w": 1,
+      "by": "gen_570k4qh",
+      "via": "player",
+      "trick": null
+    },
+    {
+      "d": 46,
+      "mid": "hummice",
+      "w": 1,
+      "by": "yara_haddad",
+      "via": "contest",
+      "trick": null
+    },
+    {
+      "d": 46,
+      "mid": "nightlight_catfish",
+      "w": 1,
+      "by": "yara_haddad",
+      "via": "contest",
+      "trick": null
+    },
+    {
+      "d": 47,
+      "mid": "callback",
+      "w": 3,
+      "by": "nadia_khoury",
+      "via": "wild",
+      "trick": "farewell"
+    },
+    {
+      "d": 52,
+      "mid": "understudy",
+      "w": 2,
+      "by": "gen_qierkty",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 52,
+      "mid": "nevermore",
+      "w": 1,
+      "by": "gen_5mmlf9l",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 52,
+      "mid": "redactor",
+      "w": 3,
+      "by": "yara_haddad",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 53,
+      "mid": "spool",
+      "w": 3,
+      "by": "nadia_khoury",
+      "via": "companion",
+      "trick": null
+    }
+  ],
+  "fallen": [
+    {
+      "villagerId": "gen_qwjsnxg",
+      "day": 10,
+      "cause": "Inspiration",
+      "name": "Marvin",
+      "monsterId": "bright_idea",
+      "monsterName": "Inspiration"
+    },
+    {
+      "villagerId": "gen_qia8o69",
+      "day": 13,
+      "cause": "food poisoning (raw)",
+      "name": "Kai",
+      "monsterId": null,
+      "monsterName": null
+    },
+    {
+      "villagerId": "diana_osei",
+      "day": 45,
+      "cause": "Spool",
+      "name": "Diana",
+      "monsterId": "spool",
+      "monsterName": "Spool"
+    },
+    {
+      "villagerId": "gen_mng1ff1",
+      "day": 52,
+      "cause": "monster",
+      "name": "Wanda",
+      "monsterId": "spool",
+      "monsterName": "Spool"
+    },
+    {
+      "villagerId": "gen_570k4qh",
+      "day": 57,
+      "cause": "the wild",
+      "name": "Ernestine"
+    },
+    {
+      "villagerId": "app_mgpsphl7862",
+      "day": 59,
+      "cause": "a wound that wouldn't close",
+      "name": "Rai"
+    },
+    {
+      "villagerId": "nadia_khoury",
+      "day": 61,
+      "cause": "the wild",
+      "name": "Nadia"
+    },
+    {
+      "villagerId": "ruby_callaghan",
+      "day": 62,
+      "cause": "the wild",
+      "name": "Ruby"
+    },
+    {
+      "villagerId": "gen_qierkty",
+      "day": 62,
+      "cause": "the wild",
+      "name": "Stephen"
+    },
+    {
+      "villagerId": "ava_garcia",
+      "day": 64,
+      "cause": "the wild",
+      "name": "Ava"
+    },
+    {
+      "villagerId": "gen_5mmlf9l",
+      "day": 65,
+      "cause": "the wild",
+      "name": "Khadija"
+    },
+    {
+      "villagerId": "aroha_ngata",
+      "day": 67,
+      "cause": "the wild",
+      "name": "Aroha"
+    }
+  ],
+  "wavesFaced": {
+    "rut_king": 1,
+    "bulldozer": 1,
+    "dustboar": 1,
+    "mirrormoth": 1,
+    "hushwolf": 1,
+    "anaconda_empress": 1,
+    "living_wire": 1,
+    "warranty_caller": 2,
+    "nightlight_catfish": 1,
+    "gallowdeer": 1,
+    "belltoad": 1,
+    "moderator": 2,
+    "speedbump_turtle": 1,
+    "statickite": 2,
+    "understudy": 2,
+    "heckler": 2,
+    "voice_mimic_radio": 2,
+    "paparazzo": 2,
+    "union_rep": 2,
+    "alien_tick": 2,
+    "sunbasker": 1,
+    "callback": 3,
+    "hummice": 1,
+    "landlord": 2,
+    "drumbelly_tanuki": 1,
+    "memory_projector": 2,
+    "redactor": 3,
+    "giant_mosquito": 2,
+    "buffering": 3,
+    "focus_group": 3,
+    "terms_of_service": 3,
+    "glasswing": 1,
+    "nevermore": 1,
+    "spool": 3,
+    "influencer": 4,
+    "eulogy": 4,
+    "reunion": 4
+  },
+  "deadMap": {
+    "gen_570k4qh": true,
+    "gen_mng1ff1": true,
+    "gen_qwjsnxg": true,
+    "gen_qierkty": true,
+    "gen_5mmlf9l": true,
+    "gen_qia8o69": true,
+    "nadia_khoury": true,
+    "ava_garcia": true,
+    "diana_osei": true,
+    "yara_haddad": false,
+    "aroha_ngata": true,
+    "ruby_callaghan": true,
+    "app_mgpsphl7862": true,
+    "app_mgpspiqh264": false,
+    "visjoin_62": false,
+    "dmitri_sokolov": false,
+    "app_mgpsphmn907": false,
+    "nina_petrova": false,
+    "visjoin_69": false,
+    "lena_ruiz": false,
+    "marcus_webb": false,
+    "sofia_chen": false,
+    "james_okonkwo": false,
+    "emma_larsen": false,
+    "david_kim": false,
+    "rosa_mendez": false,
+    "tom_baker": false,
+    "yuki_mori": false,
+    "sam_wilson": false,
+    "carlos_diaz": false,
+    "grace_obi": false,
+    "henry_zhang": false,
+    "fatima_hassan": false,
+    "leo_martin": false,
+    "mia_andersson": false,
+    "raj_patel": false,
+    "ella_johnson": false,
+    "victor_lopez": false,
+    "hannah_kim": false,
+    "owen_smith": false,
+    "lucas_brown": false,
+    "chloe_dubois": false,
+    "elijah_scott": false,
+    "zoe_adams": false,
+    "nathan_lee": false,
+    "ivy_wang": false,
+    "caleb_jones": false,
+    "maya_singh": false,
+    "ethan_hunt": false,
+    "aria_thompson": false,
+    "liam_davis": false,
+    "nora_wilson": false,
+    "oliver_moore": false,
+    "mara_vasquez": false,
+    "aki_tanaka": false,
+    "priya_nair": false,
+    "theo_lindqvist": false,
+    "ruth_goldstein": false,
+    "jesse_cortez": false,
+    "amina_diallo": false,
+    "boris_kowalski": false,
+    "chen_wei": false,
+    "elena_petrova": false,
+    "farid_ahmed": false,
+    "greta_hansen": false,
+    "hassan_ali": false,
+    "ingrid_vik": false,
+    "jorge_silva": false,
+    "katarina_novak": false,
+    "luis_fernandez": false,
+    "meera_reddy": false,
+    "nikolai_volkov": false,
+    "olivia_bennett": false,
+    "pavel_dubinin": false,
+    "quinn_murphy": false,
+    "rafael_torres": false,
+    "sanne_bakker": false,
+    "tariq_mahmood": false,
+    "ursula_weber": false,
+    "vasyl_shevchenko": false,
+    "wanjiru_kamau": false,
+    "xavier_dubois": false,
+    "zoltan_nagy": false,
+    "adaeze_nwosu": false,
+    "benoit_lambert": false,
+    "catalina_reyes": false,
+    "stan_kowalski": false,
+    "petra_novak": false,
+    "devon_okafor": false,
+    "ines_duarte": false,
+    "thabo_maseko": false,
+    "sigrun_eiriksdottir": false,
+    "mateo_alvarez": false,
+    "somchai_prasert": false,
+    "brian_otieno": false,
+    "valeria_quispe": false,
+    "omar_farouk": false,
+    "elif_demir": false,
+    "sari_wulandari": false,
+    "miguel_santos": false,
+    "onni_korhonen": false,
+    "jovan_milic": false,
+    "giulia_bianchi": false,
+    "nikos_papadopoulos": false,
+    "tashi_sherpa": false,
+    "naran_tumen": false,
+    "nino_kapanadze": false,
+    "desmond_clarke": false,
+    "chantal_mukendi": false,
+    "daniyar_askarov": false,
+    "dale_hoffman": false
+  },
+  "endScholarId": "yara_haddad",
+  "teleDeaths": [
+    {
+      "day": 3,
+      "kind": "monster",
+      "who": "rut_king",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 5,
+      "kind": "monster",
+      "who": "bulldozer",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 7,
+      "kind": "monster",
+      "who": "dustboar",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 7,
+      "kind": "monster",
+      "who": "mirrormoth",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 7,
+      "kind": "monster",
+      "who": "mirrormoth",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 7,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 7,
+      "kind": "monster",
+      "who": "anaconda_empress",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "warranty_caller",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "nightlight_catfish",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 9,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 10,
+      "kind": "villager",
+      "who": "gen_qwjsnxg",
+      "cause": "Inspiration",
+      "player": false
+    },
+    {
+      "day": 12,
+      "kind": "monster",
+      "who": "warranty_caller",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 12,
+      "kind": "monster",
+      "who": "moderator",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 13,
+      "kind": "monster",
+      "who": "mirrormoth",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 13,
+      "kind": "villager",
+      "who": "gen_qia8o69",
+      "cause": "food poisoning (raw)",
+      "player": false
+    },
+    {
+      "day": 14,
+      "kind": "monster",
+      "who": "speedbump_turtle",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 14,
+      "kind": "monster",
+      "who": "statickite",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 15,
+      "kind": "monster",
+      "who": "understudy",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 15,
+      "kind": "monster",
+      "who": "mirrormoth",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 18,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 18,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 18,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 19,
+      "kind": "monster",
+      "who": "voice_mimic_radio",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 21,
+      "kind": "monster",
+      "who": "gallowdeer",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 22,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 24,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 26,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 26,
+      "kind": "monster",
+      "who": "union_rep",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 26,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 26,
+      "kind": "monster",
+      "who": "speedbump_turtle",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 29,
+      "kind": "monster",
+      "who": "sunbasker",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 29,
+      "kind": "monster",
+      "who": "moderator",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 31,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 31,
+      "kind": "monster",
+      "who": "nightlight_catfish",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 31,
+      "kind": "monster",
+      "who": "callback",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 34,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 34,
+      "kind": "monster",
+      "who": "landlord",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 34,
+      "kind": "monster",
+      "who": "voice_mimic_radio",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 34,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 37,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 39,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 39,
+      "kind": "monster",
+      "who": "memory_projector",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 41,
+      "kind": "monster",
+      "who": "gallowdeer",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 43,
+      "kind": "monster",
+      "who": "giant_mosquito",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 44,
+      "kind": "monster",
+      "who": "focus_group",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 45,
+      "kind": "villager",
+      "who": "diana_osei",
+      "cause": "Spool",
+      "player": false
+    },
+    {
+      "day": 45,
+      "kind": "monster",
+      "who": "landlord",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 46,
+      "kind": "monster",
+      "who": "terms_of_service",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 46,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 46,
+      "kind": "monster",
+      "who": "glasswing",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 47,
+      "kind": "monster",
+      "who": "callback",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 52,
+      "kind": "villager",
+      "who": "gen_mng1ff1",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 52,
+      "kind": "monster",
+      "who": "understudy",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 52,
+      "kind": "monster",
+      "who": "nevermore",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 52,
+      "kind": "monster",
+      "who": "redactor",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 53,
+      "kind": "monster",
+      "who": "spool",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 57,
+      "kind": "villager",
+      "who": "gen_570k4qh",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 59,
+      "kind": "villager",
+      "who": "app_mgpsphl7862",
+      "cause": "a wound that wouldn't close",
+      "player": false
+    },
+    {
+      "day": 61,
+      "kind": "villager",
+      "who": "nadia_khoury",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 62,
+      "kind": "villager",
+      "who": "ruby_callaghan",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 62,
+      "kind": "villager",
+      "who": "gen_qierkty",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 64,
+      "kind": "villager",
+      "who": "ava_garcia",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 65,
+      "kind": "villager",
+      "who": "gen_5mmlf9l",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 67,
+      "kind": "villager",
+      "who": "aroha_ngata",
+      "cause": "the wild",
+      "player": true
+    }
+  ],
+  "instrumentErrors": []
+}
