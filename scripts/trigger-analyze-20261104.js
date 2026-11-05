@@ -148,8 +148,18 @@ function analyzeSeed(corpus) {
       const lastSnap = daily[daily.length - 1] || {};
       it.fate = (fw.tx === lastSnap.px && fw.ty === lastSnap.py) ? 'village-died-first' : 'still-wandering-at-death';
     } else it.fate = 'vanished-no-record';
-    // Trigger sub-cause: first co-location episode end (unfought,
-    // player-reaching instances only).
+    // Trigger sub-cause: FIRST co-location episode end (unfought,
+    // player-reaching instances only). The first episode ends at the
+    // first departure OR the first removal, whichever comes first —
+    // a later return and lost-trail removal does NOT rewrite an
+    // episode that already ended by departure. Departure evidence:
+    // (a) any snapshot separation day — a listed instance on a
+    // different tile than the player was alive and separated at
+    // snapshot time, so the departure precedes any later removal
+    // (a removed instance cannot appear in later snapshots);
+    // (b) a tile-change marker after first co-location and before
+    // any removal (idx-ordered; day-ordered fallback when the
+    // first co-location has no idx).
     it.subCause = null;
     if (playerReach && !it.foughtWorld) {
       // First co-location event index (spawn-on-tile / mtCall records
@@ -164,27 +174,27 @@ function analyzeSeed(corpus) {
         firstCoIdx = (firstCoIdx == null) ? m0 : Math.min(firstCoIdx, m0);
       }
       it.firstCoIdx = firstCoIdx;
-      if (it.removal) {
+      const departedBySnap = it.sepDays.some(function (d) { return d >= it.firstCoDay; });
+      const departedByMarker = tileChanges.some(function (tc) {
+        if (firstCoIdx != null) {
+          if (tc.idx <= firstCoIdx) return false;
+          if (it.removal && tc.idx > it.removal.idx) return false;
+          return true;
+        }
+        if (tc.day <= it.firstCoDay) return false;
+        if (it.removal && tc.day >= it.removal.day) return false;
+        return true;
+      });
+      if (departedBySnap || departedByMarker) it.subCause = 'player-left-the-tile';
+      else if (it.removal) {
         const r = it.removal;
         if (r.rclass === 'monsterTurn') {
           if (it.lostJoined) it.subCause = 'monster-unseen-on-tile';
           else it.subCause = 'player-present-never-engaged';
         } else it.subCause = 'player-present-never-engaged';
-      } else {
-        // No removal: did the player ever leave after first co-location?
-        // Tile-change markers (idx-ordered when possible) OR a later
-        // snapshot showing player and monster on different tiles.
-        // A follower that chases onto the player's new tile stays
-        // co-located in snapshots, so it is NOT separation.
-        const departedByMarker = tileChanges.some(function (tc) {
-          return (it.firstCoIdx != null && tc.idx > it.firstCoIdx) ||
-            (it.firstCoIdx == null && tc.day > it.firstCoDay);
-        });
-        const departedBySnap = it.sepDays.some(function (d) { return d >= it.firstCoDay; });
-        if (departedByMarker || departedBySnap) it.subCause = 'player-left-the-tile';
-        else if (finalSeqs[it.seq]) it.subCause = 'player-present-never-engaged';
-        else it.subCause = 'unclassified';
       }
+      else if (finalSeqs[it.seq]) it.subCause = 'player-present-never-engaged';
+      else it.subCause = 'unclassified';
     }
     it.mtCount = it.mt.length;
     it.mtMinDist = it.mt.length ? Math.min.apply(null, it.mt.map(function (c) { return (c.distAfter != null ? c.distAfter : 99); })) : null;
