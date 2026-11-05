@@ -327,6 +327,24 @@ for (const f of files) {
     if (!/starv|hunger|kcal/i.test(death.cause || '')) continue;
     starvDeaths++;
     const day = death.day;
+    // R106 CLASS F: the A–E classes are adjudicated from the SCHOLAR-scoped
+    // series (scholar location, scholar pack, scholar autopsy). A villager
+    // who is not the mantle holder on that day cannot be classified from
+    // that data — the deceased's own location and feeding are unrecorded,
+    // and a nonzero pantry is famine, not a doorstep failure, when it
+    // cannot feed the village (r106 seed 891: Chloe d23 / Xiaoli d24
+    // starved with 1000–1800 kcal in the pantry for 10–11 people while the
+    // scholar's separate meal kept her fed). Label honestly instead of
+    // borrowing the scholar's 'at Haven' for someone else.
+    let scholarId = null;
+    try { scholarId = scholarIdAt(day); } catch (e) { console.log(`  STARVATION d${day} scholarIdAt ERROR: ` + (e && e.message)); }
+    const isScholar = !!(scholarId && death.who === scholarId);
+    if (!isScholar) {
+      const pan0 = (d.starvAutopsies || []).find(a => a.who === death.who && a.day === day);
+      console.log(`  STARVATION d${day} ${nameOf(death.who)} (NPC, not the scholar) pantryAtDeath=${pan0 ? pan0.pantryEdible : '?'}`);
+      console.log(`    -> CAUSE CLASS F (NPC starvation — scholar-scoped series cannot adjudicate the deceased's location or feeding; famine vs doorstep undetermined)`);
+      continue;
+    }
     // away streak: consecutive wild snapshots ending at/before death day
     let streak = 0;
     for (let i = series.length - 1; i >= 0; i--) {
@@ -362,11 +380,13 @@ for (const f of files) {
     // D = at Haven with an empty pantry (village famine, not a wild death).
     // E = at Haven with food in the pantry (the doorstep shape: the
     // scholar stood where food was and still starved).
-    // R88 D-FALLBACK (instrument fix, same run): a non-scholar starvation
-    // death carries no scholar autopsy (starvAutopsies is scholar-scoped),
-    // so the D/E join above reads pantryAtDeath='?'. The census series
-    // itself records pantry on the death day: pantry 0 on that day is
-    // famine evidence for ANY villager death, scholar or not.
+    // R106: D/E are scholar-only (see CLASS F above). The D/E join reads
+    // the SCHOLAR's location (streak, lastSnap.loc) — for a non-scholar
+    // death that location is someone else's, so the join never runs for
+    // them. (The old R88 note claimed non-scholar deaths carry no autopsy;
+    // the driver records one per starvation death, scholar or not — the
+    // autopsy pantry is the deceased's death-day pantry and is still
+    // printed on the F line.)
     if (cls === '?' && streak === 0) {
       const snapOnDay = before.filter(x => x.day === day);
       const snapDay = snapOnDay.length ? snapOnDay[snapOnDay.length - 1] : (before.length ? before[before.length - 1] : null);
