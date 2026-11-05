@@ -19,11 +19,21 @@ const REPO = path.join(__dirname, '..');
 const AN = require(path.join(REPO, 'scripts', 'tbretreat-analyze-20261105'));
 const INST = require(path.join(REPO, 'scripts', 'tbretreat-instrument-20261105'));
 
-let pass = 0, fail = 0;
+let pass = 0, fail = 0, skip = 0;
 function check(name, cond, extra) {
   if (cond) { pass++; console.log('PASS ' + name); }
   else { fail++; console.log('FAIL ' + name + (extra ? ' :: ' + extra : '')); }
 }
+function skipCheck(name, reason) { skip++; console.log('SKIP ' + name + ' :: ' + reason); }
+// Post-revert state (adoption commit, run fleshout-loop-b-20261105T1830Z):
+// the confirm NO-GO reverted the game.js lever and deleted the tbretreat
+// policy wrapper, so the live legs that assert restore behavior cannot run
+// on this tip. They were 19/19 pre-revert (see
+// evidence/2026-11-05/sim-tbretreat-b-confirm.md) and are SKIPPED, not
+// passed, while the lever is absent; they run again if it ever returns.
+const LEVER_PRESENT = (function () { try { return fs.readFileSync(path.join(REPO, 'src', 'js', 'game.js'), 'utf8').indexOf('TBRETREAT_RESTORE') !== -1; } catch (e) { return false; } })();
+const WRAPPER_PRESENT = fs.existsSync(path.join(REPO, 'scripts', 'policies', 'competent-tbretreat-b.js'));
+const SKIP_RESTORE = 'lever reverted by confirm NO-GO (sim-tbretreat-b-confirm.md); live restore un-runnable post-revert, 19/19 pre-revert';
 
 // ---- fake-Game instrument fixtures ----
 function fakeGame() {
@@ -284,30 +294,34 @@ async function liveLegs() {
   // (a fresh roll builds hp === maxHp); the origin object itself is
   // untouched at 500. The restore below is judged on the fighter's end
   // HP (300, set explicitly), which is the formula's input.
-  const on = await liveRestoreLeg({ flagOn: true });
-  check('live-restore-on-fled', on.aliasWasOrigin === true && on.entryHp != null && on.entryHp > 0 &&
+  const on = LEVER_PRESENT ? await liveRestoreLeg({ flagOn: true }) : null;
+  if (on) check('live-restore-on-fled', on.aliasWasOrigin === true && on.entryHp != null && on.entryHp > 0 &&
     on.entryHp <= 500 && on.entryMaxHp === 850 && on.entryHp < on.entryMaxHp &&
     on.recorded === true &&
     on.worldOrigin === false && on.back && on.back.hp === 300 && on.back.tx != null &&
     on.monsterFledFlag === false,
     JSON.stringify(on));
+  else skipCheck('live-restore-on-fled', SKIP_RESTORE);
   // Old-code control: flag OFF, identical setup — nothing comes back.
   const off = await liveRestoreLeg({ flagOn: false });
   check('live-restore-off-control', off.aliasWasOrigin === true && off.entryHp != null && off.entryHp > 0 &&
     off.entryHp <= 500 && off.entryMaxHp === 850 && off.recorded === false && off.back === null,
     JSON.stringify(off));
   // 'lost' does NOT restore, even with the flag on.
-  const lost = await liveRestoreLeg({ flagOn: true, result: 'lost' });
-  check('live-no-restore-on-lost', lost.recorded === true && lost.back === null,
+  const lost = LEVER_PRESENT ? await liveRestoreLeg({ flagOn: true, result: 'lost' }) : null;
+  if (lost) check('live-no-restore-on-lost', lost.recorded === true && lost.back === null,
     JSON.stringify(lost));
+  else skipCheck('live-no-restore-on-lost', SKIP_RESTORE);
   // Wave-3 never restores, even with the flag on.
-  const w3 = await liveRestoreLeg({ flagOn: true, mid: 'spool', originHp: 300, endHp: 200 });
-  check('live-no-restore-wave3', w3.recorded === true && w3.back === null,
+  const w3 = LEVER_PRESENT ? await liveRestoreLeg({ flagOn: true, mid: 'spool', originHp: 300, endHp: 200 }) : null;
+  if (w3) check('live-no-restore-wave3', w3.recorded === true && w3.back === null,
     JSON.stringify(w3));
+  else skipCheck('live-no-restore-wave3', SKIP_RESTORE);
   // Door-stash skip: the stash owns preservation, no world restore.
-  const door = await liveRestoreLeg({ flagOn: true, doorStash: true });
-  check('live-door-stash-skip', door.recorded === true && door.back === null,
+  const door = LEVER_PRESENT ? await liveRestoreLeg({ flagOn: true, doorStash: true }) : null;
+  if (door) check('live-door-stash-skip', door.recorded === true && door.back === null,
     JSON.stringify(door));
+  else skipCheck('live-door-stash-skip', SKIP_RESTORE);
   // Lingering separation: a lingering origin is never recorded on the
   // new field (its own worldOrigin path owns it).
   const ling = await liveRestoreLeg({ flagOn: true, lingering: true });
@@ -336,6 +350,8 @@ async function liveLegs() {
   delete process.env.TBRETREAT_RESTORE;
 
   // Driver smoke: both legs, 10d, seed 99721, to /tmp, 0 errors.
+  // Skipped post-revert: the driver requires the deleted wrapper at load.
+  if (WRAPPER_PRESENT) {
   const tmp = '/tmp/tbretreat-proof-' + process.pid;
   fs.mkdirSync(tmp, { recursive: true });
   const envBase = Object.assign({}, process.env, { REPO: REPO, DAYS: '10', SEEDS: '99721', OUTDIR: tmp });
@@ -350,8 +366,9 @@ async function liveLegs() {
     'baseline=' + b.days + '/' + b.endReason + '/flagOn=' + b.flagOn + ' armed=' + a.days + '/' + a.endReason + '/flagOn=' + a.flagOn +
     ' errs=' + b.instrumentErrors.length + '/' + a.instrumentErrors.length);
   try { fs.rmSync(tmp, { recursive: true, force: true }); } catch (e) {}
+  } else skipCheck('driver-smoke', 'wrapper deleted by confirm NO-GO revert; driver cannot load post-revert');
 
-  console.log(pass + '/' + (pass + fail) + ' PASS');
+  console.log(pass + '/' + (pass + fail) + ' PASS, ' + skip + ' SKIP');
   process.exit(fail ? 1 : 0);
 }
 liveLegs().catch(function (e) { console.error(e.stack); process.exit(1); });
