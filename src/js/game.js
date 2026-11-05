@@ -29443,6 +29443,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // PHYSICAL: the pantry is in the hall, not in your pack. Camp wild and
     // there's no dawn meal — eat from your pack. (Membership still has no
     // check-ins: you stay a member while away; you just don't get fed.)
+    // EXCEPTION: at Full Integration the pantry reaches you by System
+    // requisition (havenStoresAccess 'remote') — the camp-wild line says
+    // so instead of claiming no pantry meal (pantrymealword-a 2026-11-05).
     villageMeal() {
       const scholar = this.state.scholar;
       const intakeEater=this.captureIntakeEater(this.villagerId);
@@ -29492,8 +29495,23 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         return;
       }
       // Away from every fire — joined or not — you camp wild.
+      // WORDING (pantrymealword-a 2026-11-05): under Full Integration
+      // the pantry still reaches the scholar by System requisition in
+      // the morning (havenStoresAccess 'remote'), so the flat "no
+      // pantry meal" claim is false on those nights — it reads as the
+      // pantry being closed to you. The remote leg names the channel
+      // without promising an automatic meal (requisition is a morning
+      // action; tonight the scholar still eats from the pack). Under
+      // 'none' the pantry really is closed, so the old line stands.
+      // Wording only: both legs set lastPlayerMeal = 0 and return null.
       if (!this.pantryInReach()) {
-        this.say('You camp wild tonight — no pantry meal. Eat from your pack.');
+        let access = 'none';
+        try { access = (typeof this.havenStoresAccess === 'function') ? this.havenStoresAccess() : 'none'; } catch (e) {}
+        if (access === 'remote') {
+          this.say('You camp wild tonight — no hall meal, but the pantry still reaches you through System requisition. Eat from your pack tonight.');
+        } else {
+          this.say('You camp wild tonight — no pantry meal. Eat from your pack.');
+        }
         v.lastPlayerMeal = 0;
         return null;
       }

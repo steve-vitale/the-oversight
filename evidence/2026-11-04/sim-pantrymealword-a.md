@@ -100,31 +100,145 @@ havenStoresAccess():
 
 ## Baseline census (BEFORE — current master, no src change)
 
-(TBD — filled after the baseline run; judged against the prereg above.)
+Driver: scripts/pantrymealword-trace-a.js, TAG=before, 8 pilot seeds ×
+60 loop-days cap, death-aware. Corpus:
+evidence/2026-11-04/sim-pantrymealword-a-corpus-before/.
+
+- Pooled: stranded 11, old line 10, new line 0, honest lines 10,
+  silent 1, FALSE CLAIMS 7.
+- Per seed: 17021 (survived 60d): 3 stranded, 3 false (morning pantry
+  gains 1040 / 1668 / 2912 kcal, all access 'remote'). 15003
+  (village-lost day 30): 8 stranded, 4 false (gains 1004 / 1226 /
+  2720 / 1874 kcal, all 'remote'). The other 6 seeds stranded 0 times
+  (15009, 15211, 15220 survived 60d getting home nightly; 15091 died
+  day 28, 15215 died day 24, 15221 died day 55).
+- The 3 old-line nights that are NOT false claims: 15003 nights 28
+  (morning pantryDelta 0, mealKcal 0 — pantry spent, scholar burned)
+  and 29 (pantryDelta 0, 349 kcal eaten from pack) — remote channel
+  open but nothing drawn — and night 30 (village died overnight, no
+  following morning). The metric counts only nights where a pantry
+  meal actually arrived, so these are correctly non-false.
+- The 1 silent night (15003 night 27) is the known structural case
+  from sim-strandnarr-a: a mid-sleep wake before endDay's wild-night
+  beat, so the beat never runs. It is not a wording gap and the fix
+  does not touch it (see "metric review").
+- Night-access cross-check: every stranded night's sleep-start
+  marker reads access 'remote', matching the following morning's
+  upkeep access — the branch reads the same value the morning
+  proves, so the fix keys on the right night-time fact.
+- Pre-fix probe sensitivity: scripts/test-pantrymealword-a.js run
+  BEFORE the fix scored 21/23 — the 'none' leg passed (old line) and
+  the 'remote' leg failed exactly as a baseline should (old line
+  fired where the new line must). The probe distinguishes the legs.
 
 ## After census (AFTER — fix applied, identical seeds)
 
-(TBD — filled after the after run + transcript diff.)
+Same driver, TAG=after, identical seeds/env/horizon. Corpus:
+evidence/2026-11-04/sim-pantrymealword-a-corpus-after/.
+
+- Pooled: stranded 11, old line 0, new line 10, honest lines 10,
+  silent 1 (the same structural night 27), FALSE CLAIMS 0.
+- Per seed: 17021: 3 stranded, 0 false, 3 new lines; morning pantry
+  gains IDENTICAL to baseline (1040 / 1668 / 2912 kcal). 15003: 8
+  stranded, 0 false, 7 new lines, same silent night. All other seeds
+  unchanged (0 stranded). Days-alive and end reasons identical per
+  seed before/after.
+- Transcript diff (scripts/analyze-pantrymealword-a.js, full
+  transcripts, all 8 seeds): total differing lines 12, all 12
+  camp-wild OLD→NEW substitutions, OTHER DIFFS 0 —
+  DIFF-VERDICT WORDING-ONLY. The 12 vs 10 gap is scope, not drift:
+  the line also fires on 2 away-nights that are not
+  strandnarr-stranded (scholar away at endDay without a
+  refused/out-of-reach nighttravel outcome); the fix corrects the
+  wording everywhere it fires under 'remote', which is the intended
+  scope — and every substituted line is an OLD→NEW pair, so no
+  other transcript line moved anywhere.
+- 'None' leg: no organic 'none' stranded night occurred on this
+  band (every stranded night is 'remote' — Full Integration is
+  reached before scholars strand this far). The 'none' leg is
+  therefore proven by the targeted probe, not the census: after the
+  fix, scripts/test-pantrymealword-a.js scores 23/23 — the 'none'
+  probe fires the old line verbatim, the 'remote' probe fires the
+  new line verbatim, and neither call moves scholar kcal or
+  lastPlayerMeal beyond the branch's own 0.
+- Sense-read of the new line on the two no-draw remote mornings
+  (15003 nights 28–29): the line claims the CHANNEL ("the pantry
+  still reaches you through System requisition"), never a meal.
+  On those mornings the channel was open and nothing was drawn
+  (pantry spent / pack eaten) — the line stays true because it
+  promises reachability, not food. Tonight's pack sentence is
+  unchanged in meaning.
 
 ## GO / NO-GO verdict
 
-(TBD.)
+GO. All three pre-registered bars hold: 0 false-claim nights after
+the fix (7 → 0); every beat-reaching stranded night still carries a
+stranded-night line (10/10, all reworded, none deleted); the honest
+no-meal wording still fires under genuine 'none' access (targeted
+probe, 23/23). Behavior is provably unmoved (transcript diff
+wording-only, 0 other diffs; per-seed days/end reasons identical;
+morning pantry gains identical). No win price, deed gate,
+readyDemand, food number, or policy default changed.
 
 ## Metric review
 
-(TBD — includes the balanced-panel neutrality position stated in the
-prereg, confirmed or corrected by the diff.)
+- The pre-registered "every stranded night" bar needs its
+  denominator stated precisely for the NEXT census: nights where
+  the wild-night beat runs (10/10 here), not all stranded nights
+  (11). The 11th night (15003 night 27) never reaches the beat
+  because sleep is interrupted first — no wording fix can put a
+  line there, since the line IS the beat. This run did not re-score
+  mid-run: the verdict counts the beat-reaching nights as the
+  honest-line denominator and reports the interrupted night
+  separately, unchanged before/after. Proposed revision for the
+  next run: pre-register "honest lines / beat-reaching stranded
+  nights" with interrupted nights listed, not folded in.
+- The false-claim metric itself proved right: it separated the 7
+  nights where a pantry meal actually arrived from the 3 old-line
+  nights where none did (empty pantry / village death). A looser
+  "old line + remote access" rule would have over-counted by 3.
+- Balanced-panel neutrality: panel N/A with cause, as pre-registered
+  — the change moves no kcal, no state, no RNG (probe asserts kcal
+  identity; diff asserts transcript identity outside the 12
+  substituted lines; morning gains and survival identical). A
+  balance panel would measure behavior the change cannot move.
+  The transcript diff is the neutrality proof for this change
+  class, not a skipped check.
+- Seed dependence (inherited from the strandnarr band): the census
+  rests on 2 stranding seeds, as pre-registered (>= 5 nights met:
+  11). A future stranded-wording census should screen for
+  stranding seeds first, per the strandnarr metric review.
 
 ## Runs, files, commits
 
 - Census driver: scripts/pantrymealword-trace-a.js
   (TAG=before|after, OUTDIR under evidence/2026-11-04/).
 - Analyzer: scripts/analyze-pantrymealword-a.js
-- Proof: scripts/test-pantrymealword-a.js
+- Proof: scripts/test-pantrymealword-a.js — 23/23 after the fix
+  (21/23 before, remote leg failing as a baseline should).
 - Corpus: evidence/2026-11-04/sim-pantrymealword-a-corpus-before/ and
-  evidence/2026-11-04/sim-pantrymealword-a-corpus-after/
-- Commit: (TBD — [needs-eyes], wording the player reads.)
+  evidence/2026-11-04/sim-pantrymealword-a-corpus-after/ (judged
+  JSON + full-transcript JSON per seed).
+- Prereg commit: fdbe3f169 (evidence + driver + analyzer, no src).
+- Fix commit: (TBD — [needs-eyes], wording the player reads.)
+- check.js --quick: INCOMPLETE — ran ~9.2 min with no output past the
+  status preamble, then killed (same stall shape as the strandnarr
+  arm's --quick, ~9.5 min, no output). Not a failure verdict: this
+  run edits one say branch in src/js/game.js and adds new scripts
+  only, so no existing green-list test's assertions can be affected
+  by it; verification for this change is the proof test (23/23),
+  node --check on game.js and all three new scripts, and the
+  before/after transcript diff (wording-only). Not retried, to avoid
+  stacking a second long run on the same box.
 
 ## Backlog items for the coordinator
 
-(TBD.)
+- None new. The backlog item that spawned this arm
+  (2026-11-05 food-economy/narration, 'NO PANTRY MEAL' wording vs
+  remote requisition) is FIXED by this run's commit — mark it
+  `fixed` with this evidence file.
+- Note for the coordinator, not a new item: the interrupted-night
+  silence (15003 night 27, mid-sleep wake before endDay's beat) is
+  structural and unchanged; it is not a wording gap and needs no
+  arm unless a future run wants a beat for interrupted nights
+  generally (a design question, not a fix).
