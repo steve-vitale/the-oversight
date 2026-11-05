@@ -32,7 +32,10 @@ function shallow(x, keys) {
   return o;
 }
 // Proposal narration lines (the verb's own words, written in the module).
-const SAY_RE = /bond|stick together|watch each other'?s backs/i;
+// Tight on purpose: bare "bond" matches keepsake-bond noise, so match
+// the proposal phrases only (stick together / stick with me / bonded /
+// proposes a bond / watch each other's backs).
+const SAY_RE = /stick together|stick with me|watch each other'?s backs|propos\w+ a bond|bonded/i;
 
 function install(Game) {
   const t = {

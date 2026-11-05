@@ -365,7 +365,9 @@
     // accept, roll, veto, inputs, reasons}. kind 'party' = the player
     // invites a villager to the party (conversation invite_party /
     // dlg:invite); kind 'lure' = a villager invites another villager
-    // out on a walk (betrayal plots, npcPlotTick). Inputs, all read
+    // out on a walk (betrayal plots, npcPlotTick); kind 'bond' = a
+    // villager proposes a bond to another villager (bond-initiation
+    // 2026-11-05, Steve 2026-11-04: villagers initiate bonds). Inputs, all read
     // from the live record:
     //   - temperament (npcTemper), goal (npcGoal), mood (npcMood)
     //   - trust: party = the villager's trust in the player; lure = the
@@ -378,8 +380,8 @@
     // Chance is clamped to 5-95: no character band is always or never.
     // The roll reads Math.random AT CALL TIME (not the module-captured
     // R), so tests can pin it exactly; in play it is the same random
-    // source. opts.roll overrides it for tests. A sick lure target
-    // never walks out (chance 0, veto 'sick') — the same body veto the
+    // source. opts.roll overrides it for tests. A sick lure/bond target
+    // never walks out / never promises (chance 0, veto 'sick') — the same body veto the
     // player's accepted invitations already have (acceptInvite's sick
     // outcome), and the same sick gate npcInviteTick already applies
     // to new invite ideas. Party invites do not veto on sickness:
@@ -397,8 +399,9 @@
       try { goal = (this.npcGoal && this.npcGoal(invitee)) || null; } catch (e) {}
       try { mood = (this.npcMood && this.npcMood(invitee)) || 'steady'; } catch (e) {}
       try { fear = ((this.npcNeeds && this.npcNeeds(invitee)) || {}).fear || 0; } catch (e) {}
-      // Body veto (lure only): a feverish villager stays by the fire.
-      if (kind === 'lure') {
+      // Body veto (lure/bond only): a feverish villager stays by the fire.
+      // A bond is a promise for the days ahead — not made from a sickbed.
+      if (kind === 'lure' || kind === 'bond') {
         try {
           if ((v.sick || {})[invitee]) {
             return { chance: 0, accept: false, roll: null, veto: 'sick',
@@ -408,7 +411,7 @@
       }
       let chance;
       const inputs = { temp, goal, mood, fear };
-      if (kind === 'lure') {
+      if (kind === 'lure' || kind === 'bond') {
         // Old behaviour was a flat 45% spring; 45 stays the centre, and
         // character now moves it. Relationship here is the pair, not
         // the player's trust in anyone.
@@ -418,6 +421,14 @@
         inputs.affinity = affinity;
         const affAdj = Math.round(affinity * 0.25);
         if (affAdj !== 0) { chance += affAdj; reasons.push('relationship with inviter (' + (affAdj > 0 ? '+' : '') + affAdj + ')'); }
+        // BOND ONLY: a villager aching for company leans yes. pairAffinity
+        // already folds the bond in — the bond is never counted twice.
+        if (kind === 'bond') {
+          let social = 0;
+          try { social = ((this.npcNeeds && this.npcNeeds(invitee)) || {}).social || 0; } catch (e) {}
+          inputs.social = social;
+          if (social > 65) { chance += 10; reasons.push('lonely for company (+10)'); }
+        }
       } else {
         const trust = ((v.trust || {})[invitee]) || 10;
         inputs.trust = trust;
@@ -445,12 +456,16 @@
       else if (temp === 'cautious') { chance -= 10; reasons.push('cautious temperament (-10)'); }
       else if (temp === 'restless') { chance += 10; reasons.push('restless temperament (+10)'); }
       // Goal (a short walk asks less than joining a party, so lure
-      // swings are smaller).
-      if (kind === 'lure') {
+      // swings are smaller; a bond proposal asks less than a party
+      // too — it is a promise between two people, not a march).
+      if (kind === 'lure' || kind === 'bond') {
         if (goal === 'alone') { chance -= 25; reasons.push('wants to be alone (-25)'); }
         else if (goal === 'belong' || goal === 'protect' || goal === 'feed') { chance += 10; reasons.push(goal + ' goal (+10)'); }
         else if (goal === 'escape') { chance -= 10; reasons.push('wants out (-10)'); }
         else if (goal === 'lead') { chance += 10; reasons.push('wants to lead (+10)'); }
+        if (kind === 'bond') {
+          if (goal === 'remember' || goal === 'family' || goal === 'joy') { chance += 10; reasons.push(goal + ' goal (+10)'); }
+        }
       } else {
         if (goal === 'alone') { chance -= 40; reasons.push('wants to be alone (-40)'); }
         else if (goal === 'belong' || goal === 'protect' || goal === 'feed') { chance += 15; reasons.push(goal + ' goal (+15)'); }
@@ -461,7 +476,7 @@
       else if (mood === 'cheerful') { chance += 10; reasons.push('cheerful mood (+10)'); }
       else if (mood === 'lonely') { chance += 10; reasons.push('lonely mood (+10)'); }
       else if (mood === 'weary') { chance -= 10; reasons.push('weary mood (-10)'); }
-      if (kind === 'lure' && fear > 70) { chance -= 15; reasons.push('afraid to walk out (-15)'); }
+      if ((kind === 'lure' || kind === 'bond') && fear > 70) { chance -= 15; reasons.push('afraid to walk out (-15)'); }
       else if (kind === 'party' && fear > 70) { chance -= 10; reasons.push('afraid (-10)'); }
       chance = Math.max(5, Math.min(95, chance));
       const roll = (typeof opts.roll === 'number') ? opts.roll : Math.random();
@@ -4237,6 +4252,8 @@
     try { this.considerBetrayalPlot(); } catch (e) {}
     try { this.npcPlotTick(); } catch (e) {}
     try { this.npcInviteTick(); } catch (e) {}
+    try { if (this.npcBondTick) this.npcBondTick(); } catch (e) {} // BOND-INITIATION (2026-11-05): villagers initiate bonds — daily bond-proposal staging
+    try { if (this.npcLinkRaiseTick) this.npcLinkRaiseTick(); } catch (e) {} // BOND-INITIATION (2026-11-05): villagers raise village links to the bearer
     try { this.dayOneNudge(); } catch (e) {}
     try { this.considerStrangers(); } catch (e) {}
     try { this.scamDaily(); } catch (e) {} // delayed scam discovery: sharp villagers remark

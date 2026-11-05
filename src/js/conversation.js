@@ -496,14 +496,26 @@
   // A discovered introduction waits behind the current exchange, like other
   // follow-on beats. Queuing it must not claim that the player has heard it.
   function queueTraderIntro(c) {
-    if ((!c.traderIntroPending && !c.invitePending) || c.pendingQ || c.reactiveQ || c.genericQ || c.heldAsk || c.windingDown) return;
+    if ((!c.traderIntroPending && !c.invitePending && !c.bondPending && !c.linkPending) || c.pendingQ || c.reactiveQ || c.genericQ || c.heldAsk || c.windingDown) return;
     if (c.thread === 'want' && c.want && ((c.want.stage || 0) < 2 ||
         (['ask_favor','seek_comfort','seek_taken','warn_you'].includes(c.want.id) && (c.want.stage || 0) < 3))) return;
     c.heldBeats = c.heldBeats || [];
-    if (c.heldBeats.some(h => h.ask || h.traderIntro || h.invitation)) return;
+    if (c.heldBeats.some(h => h.ask || h.traderIntro || h.invitation || h.bondproposal || h.linkraise)) return;
     if (c.invitePending) {
       c.heldBeats.push({ text: c.invitePending, invitation: true });
       c.invitePending = null;
+      return;
+    }
+    // BOND-INITIATION (2026-11-05): a held bond proposal / link raise
+    // queues like a held invitation — spoken via the continuer.
+    if (c.bondPending) {
+      c.heldBeats.push({ text: c.bondPending, bondproposal: true });
+      c.bondPending = null;
+      return;
+    }
+    if (c.linkPending) {
+      c.heldBeats.push({ text: c.linkPending, linkraise: true });
+      c.linkPending = null;
       return;
     }
     c.heldBeats.push({ text: c.traderIntroPending, traderIntro: true });
@@ -4253,6 +4265,13 @@
       if (c.thread === 'ambush') owns = id => /^(betrayal:run|betrayal:talk|betrayal:fight)$/.test(id);
       else if (c.windingDown || c.spokenBeat?.tag === 'closing') owns = id => id === 'leave' || id === 'silence';
       else if (c.spokenBeat?.tag === 'invitation' && this.pendingInvite?.(vid)) owns = id => /^betrayal:(accept|decline)$/.test(id) || id === 'leave' || id === 'silence';
+      // BOND-INITIATION (2026-11-05): a spoken bond proposal / link raise
+      // owns its answers, like a spoken invitation. No stripping branch
+      // for bond:/link: choices: the talk-request opener carries the
+      // ask verbatim, so the answer stays offered whenever the pending
+      // exists — the proposal is why they came to talk.
+      else if (c.spokenBeat?.tag === 'bondproposal' && this.pendingBondProposal?.(vid)) owns = id => /^bond:(accept|decline)$/.test(id) || id === 'leave' || id === 'silence';
+      else if (c.spokenBeat?.tag === 'linkraise' && this.pendingLinkRaise?.(vid)) owns = id => /^link:(accept|decline)$/.test(id) || id === 'leave' || id === 'silence';
       else if (c.pendingQ) owns = id => id.startsWith('ans:') || ['deflect_q','leave','silence'].includes(id);
       else if (c.reactiveQ) owns = id => id.startsWith('react:') || ['leave','silence'].includes(id);
       else if (c.genericQ) owns = id => id.startsWith('gq:') || ['leave','silence'].includes(id);
@@ -5434,6 +5453,31 @@
         if (openerOwnsReply) c.invitePending = inviteBeat;
         else this.sayLine(vid, inviteBeat, { inviteBeat: true, tag: 'invitation' });
       }
+      // BOND-INITIATION (2026-11-05, Steve 2026-11-04): a pending bond
+      // proposal or link raise is spoken as its own beat, like the
+      // invite — the player is never asked to accept or decline
+      // something they were never asked (INVITATION HONESTY, r7).
+      // The staged line is reused verbatim (the talk-request opener
+      // already carried it once); a fresh line is picked only when
+      // no staged line exists. Re-spoken next sitting if undecided
+      // (r8 pattern: the pending survives the sitting).
+      let bondBeat = null, linkBeat = null;
+      try {
+        const bp = (this.pendingBondProposal && this.pendingBondProposal(vid)) || null;
+        if (bp) bondBeat = (bp.line || (this.bondProposalLine ? this.bondProposalLine(vid) : null));
+      } catch (e) {}
+      try {
+        const lr = (this.pendingLinkRaise && this.pendingLinkRaise(vid)) || null;
+        if (lr) linkBeat = (lr.line || (this.linkRaiseLine ? this.linkRaiseLine(vid) : null));
+      } catch (e) {}
+      if (bondBeat) {
+        if (openerOwnsReply || inviteBeat) c.bondPending = bondBeat;
+        else this.sayLine(vid, bondBeat, { bondBeat: true, tag: 'bondproposal' });
+      }
+      if (linkBeat) {
+        if (openerOwnsReply || inviteBeat || bondBeat) c.linkPending = linkBeat;
+        else this.sayLine(vid, linkBeat, { linkBeat: true, tag: 'linkraise' });
+      }
       // COHERENCE (Steve 2026-10-07): drift is never silent. When lived
       // events have visibly changed them since the last conversation, the
       // player SEES it — one short stage-direction beat, at most once a day.
@@ -5594,6 +5638,12 @@
       if (traderIntro && !c.traderMentioned) c.traderIntroPending = traderIntro.text;
       const invitation = c.heldBeats.find(h => h && h.invitation);
       if (invitation) c.invitePending = invitation.text;
+      // BOND-INITIATION (2026-11-05): a dodged bond proposal / link
+      // raise re-stages like a dodged invitation.
+      const bondp = c.heldBeats.find(h => h && h.bondproposal);
+      if (bondp) c.bondPending = bondp.text;
+      const linkp = c.heldBeats.find(h => h && h.linkraise);
+      if (linkp) c.linkPending = linkp.text;
       // DODGE COUNTING (socialite 2026-10-11): a queued-but-unrevealed
       // question the player moves past without tapping the continuer is being
       // dodged — by ANY choice, not just silence. r12 counted silence only;
@@ -5759,7 +5809,7 @@
             c.traderMentioned = true;
             c.thread = 'trade'; c.depth = 0;
           }
-          this.sayLine(vid, hb.text, hb.winddown ? { tag: 'closing', structural: true } : hb.invitation ? { tag: 'invitation', inviteBeat: true } : hb.traderIntro ? { tag: 'offer', topic: 'trade' } : hb.moodBeat ? { structural: true, foreign: hb.foreign } : { foreign: hb.foreign });
+          this.sayLine(vid, hb.text, hb.winddown ? { tag: 'closing', structural: true } : hb.invitation ? { tag: 'invitation', inviteBeat: true } : hb.bondproposal ? { tag: 'bondproposal', bondBeat: true } : hb.linkraise ? { tag: 'linkraise', linkBeat: true } : hb.traderIntro ? { tag: 'offer', topic: 'trade' } : hb.moodBeat ? { structural: true, foreign: hb.foreign } : { foreign: hb.foreign });
           queueTraderIntro(c);
           done(hb.text, gl);
           if (hb.winddown) {

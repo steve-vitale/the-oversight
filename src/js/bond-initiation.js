@@ -1,0 +1,649 @@
+// @ontology
+// system: bond-initiation
+// description: Villagers initiate bonds on their own — proposing a bond to a person they perceived, and raising a village link to the bearer. Steve 2026-11-04: villagers initiate bonds, because the player may inherit that villager.
+// provides:
+//   - bondProposalPerceived(initiatorVid, targetVid)
+//   - proposeBond(initiatorVid, targetVid, opts)
+//   - bondProposalMaybe(initiatorVid, targetVid)
+//   - stageBondProposal(vid)
+//   - pendingBondProposal(vid)
+//   - acceptBondProposal(vid)
+//   - declineBondProposal(vid)
+//   - npcBondTick()
+//   - stageLinkRaise(vid, villageId)
+//   - pendingLinkRaise(vid)
+//   - acceptLinkRaise(vid)
+//   - declineLinkRaise(vid)
+//   - npcLinkRaiseTick()
+//   - bondProposalLine(vid)
+//   - linkRaiseLine(vid)
+// rules:
+//   - bondinit_perception_only: a proposal fires only for a person the initiator personally perceived — same fire-group, an existing bond record (real interaction), gossip heard naming the target, or a sensed ally. Never a roster scan, never a list feed. (code: bondProposalPerceived)
+//   - bondinit_character_decision: the target decides through npcInviteDecision kind 'bond' — temperament, goal, mood, fear, pair relationship, social need; chance clamped 5-95, never always/never. (code: proposeBond)
+//   - bondinit_player_chooses_path: hierarchy propose verbs stay player-only (Steve 2026-10-26). An NPC raises a link idea; the player proposes. acceptLinkRaise first tells the bearer the lore (tellVillageLore), then calls proposeLink. (code: acceptLinkRaise)
+//   - bondinit_scholar_decides: a proposal TO the scholar is never auto-decided — it stages as a pending conversation beat the player answers. (code: stageBondProposal)
+//   - bondinit_drive_first: wild proposals fire only from VISIT arrivals, only while the villager's bonds drive is live (vgoalWeights.bonds >= 1), only to someone they do not dislike (pairAffinity >= 0) and are not already close to (bond warmth < 50, depth < 1). (code: bondProposalMaybe)
+//   - bondinit_no_spam: a refused pair cools down 14 days; an accepted bond is never re-proposed; at most one bond staging and one link-raise staging per day. (code: proposeBond, npcBondTick, npcLinkRaiseTick)
+//   - bondinit_telemetry: every proposal, staging, acceptance and refusal emits tele('bond_proposed', {initiator, target, kind, outcome, chance}). (code: proposeBond, stageBondProposal, acceptBondProposal, declineBondProposal, stageLinkRaise, acceptLinkRaise, declineLinkRaise)
+//   - bondinit_no_gate_changes: this module never writes a win price, deed gate, readiness bar, or table rule. It changes who asks, not what winning costs. (code: bond-initiation.js — only state writes are bondAdd, bumpTrust, and the bond/link request stores)
+//   - bondinit_narration: proposals speak only when the player is at Haven (say), or inside a live conversation (sayLine). No sim spam, no silent acts. (code: proposeBond, bondTurn)
+/* BOND INITIATION — src/js/bond-initiation.js
+ *
+ * Steve (2026-11-04 22:32): "Yes obviously villagers should initiate
+ * bonds. ... they need to act like the player because eventually the
+ * player may inherit that villager they encounter."
+ *
+ * Before this module, bonds formed only by accumulation (betrayal.js
+ * bondAdd: meals/visits/feasts/talk) and village links only from the
+ * player's propose verbs — no villager ever asked for either (linkseek-b
+ * DIAG-GO 2026-11-04: 0 propose verbs on 8/8 seeds). This module adds
+ * the asking, in three shapes:
+ *   1. NPC -> NPC bond proposals, fired from VISIT arrivals when the
+ *      villager's bonds drive is live. The target decides by character.
+ *   2. NPC -> scholar bond proposals, staged daily as pending
+ *      conversation beats the PLAYER answers (bond:accept/decline).
+ *   3. NPC -> bearer link raises: a villager who personally knows
+ *      another village raises the idea in conversation; accepting
+ *      calls the existing proposeLink as the player.
+ *
+ * Self-attaching module. Load after betrayal.js (bondAdd,
+ * npcInviteDecision, declineLine), villager-goals.js (vgoalWeights),
+ * villager-objectives.js (VISIT hook), hierarchy.js (villageLoreOf,
+ * tellVillageLore, proposeLink) and conversation.js (convoChoices /
+ * convoTurn wraps). All cross-module calls are defensive: a missing
+ * helper fails the proposal, never the game.
+ */
+(function () {
+  var _g = (typeof globalThis !== 'undefined') ? globalThis : (typeof global !== 'undefined' ? global : {});
+  var G = (_g.Scattering && _g.Scattering.Game) ? _g.Scattering.Game : null;
+  if (!G) return;
+
+  var REFUSE_COOLDOWN_DAYS = 14;
+  var BOND_PROPOSE_TOP_P = 0.35;
+  var BOND_PROPOSE_P = 0.15;
+
+  function dayOf() {
+    try { return (G.state.scholar || {}).day || 0; } catch (e) { return 0; }
+  }
+  function scholarId() {
+    try { return G.villagerId || null; } catch (e) { return null; }
+  }
+  function personOf(vid) {
+    try { if (G.getPerson) return G.getPerson(vid); } catch (e) {}
+    try { if (G.vpOf) return G.vpOf(vid); } catch (e) {}
+    return null;
+  }
+  function aliveOnRoster(vid) {
+    if (!vid) return false;
+    try {
+      var roster = ((G.state || {}).village || {}).roster || [];
+      if (roster.indexOf(vid) === -1) return false;
+      var vp = personOf(vid);
+      if (vp && vp.dead) return false;
+      if (typeof G.deadMarked === 'function' && G.deadMarked(vid)) return false;
+    } catch (e) { return false; }
+    return true;
+  }
+  function nameOf(vid) {
+    try { if (G.displayName) return G.displayName(vid); } catch (e) {}
+    return 'someone';
+  }
+  function playerAtHaven() {
+    try { if (G.playerAtHaven) return !!G.playerAtHaven(); } catch (e) {}
+    return false;
+  }
+  function trustOf(vid) {
+    try { return (((G.state || {}).village || {}).trust || {})[vid]; } catch (e) {}
+    return undefined;
+  }
+  function bondState() {
+    try {
+      var v = G.state.village || (G.state.village = {});
+      v.bondProposals = v.bondProposals || {};
+      return v.bondProposals;
+    } catch (e) { return {}; }
+  }
+  function bondRequests() {
+    try {
+      var v = G.state.village || (G.state.village = {});
+      v.bondRequests = v.bondRequests || {};
+      return v.bondRequests;
+    } catch (e) { return {}; }
+  }
+  function linkRaises() {
+    try {
+      var v = G.state.village || (G.state.village = {});
+      v.linkRaises = v.linkRaises || {};
+      return v.linkRaises;
+    } catch (e) { return {}; }
+  }
+  function pairKey(a, b) {
+    try { if (G.bondKey) return G.bondKey(a, b); } catch (e) {}
+    return a < b ? a + '|' + b : b + '|' + a;
+  }
+  function pick(arr) {
+    if (!arr || !arr.length) return null;
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+  function tele(data) {
+    try { if (G.tele) G.tele('bond_proposed', data); } catch (e) {}
+  }
+  // AGENTS.md: no empty catch in new code — errors surface so sims can
+  // count them. One-line accessor probes (method-absent checks) stay
+  // silent: failure there is the expected "no" answer, not an error.
+  function bondWarn(where, e) {
+    try { if (typeof console !== 'undefined' && console.warn) console.warn('[bond-initiation] ' + where, e); } catch (_) {}
+  }
+
+  // ---------- PERCEPTION GATE ----------
+  // Channels, all from the INITIATOR's own records:
+  //   firegroup — same fire-group (they started life together);
+  //   bond — a bond record exists (bondAdd fires only on real interaction);
+  //   gossip — the initiator heard gossip naming the target;
+  //   ally — the target is a sensed ally (co-tasked / co-located).
+  // The scholar is perceived by co-residence + the live conversation
+  // itself, so scholar targets are gated on the pending path (trust
+  // >= 12 + bonds drive), not on this function — proposeBond refuses
+  // scholar targets outright (see below).
+  function bondProposalPerceived(initiator, target) {
+    var channels = [];
+    try {
+      var v = G.state.village || {};
+      var groups = v.groups || [];
+      for (var gi = 0; gi < groups.length; gi++) {
+        var mem = groups[gi].members || [];
+        if (mem.indexOf(initiator) !== -1 && mem.indexOf(target) !== -1) { channels.push('firegroup'); break; }
+      }
+    } catch (e) { bondWarn('perceived:firegroup', e); }
+    try {
+      var bnd = (G.bondGet && G.bondGet(initiator, target)) || null;
+      if (bnd) channels.push('bond');
+    } catch (e) {}
+    try {
+      var gossip = ((G.state || {}).village || {}).gossip || [];
+      for (var i = 0; i < gossip.length; i++) {
+        var g = gossip[i] || {};
+        if (g.who === target && (g.heard || []).indexOf(initiator) !== -1) { channels.push('gossip'); break; }
+      }
+    } catch (e) { bondWarn('perceived:gossip', e); }
+    try {
+      if (G.villagerFightAllies) {
+        var allies = G.villagerFightAllies(initiator) || [];
+        if (allies.indexOf(target) !== -1) channels.push('ally');
+      }
+    } catch (e) {}
+    return { perceived: channels.length > 0, channels: channels };
+  }
+
+  // ---------- THE VERB ----------
+  // proposeBond(initiator, target, opts) -> {ok, accepted, outcome,
+  // chance, gate, perceived, channels, reasons}. opts.roll pins the
+  // decision roll (tests). The scholar is never auto-decided:
+  // propose to the scholar only via stageBondProposal.
+  function proposeBond(initiator, target, opts) {
+    opts = opts || {};
+    var day = dayOf();
+    if (!initiator || !target || initiator === target) {
+      return { ok: false, accepted: false, outcome: 'invalid', gate: null, perceived: false, channels: [] };
+    }
+    if (!aliveOnRoster(initiator) || !aliveOnRoster(target)) {
+      return { ok: false, accepted: false, outcome: 'invalid', gate: null, perceived: false, channels: [] };
+    }
+    if (target === scholarId()) {
+      return { ok: false, accepted: false, outcome: 'scholar-decides', gate: null, perceived: false, channels: [] };
+    }
+    var key = pairKey(initiator, target);
+    var rec = bondState()[key] || null;
+    if (rec && rec.outcome === 'accepted') {
+      return { ok: false, accepted: false, outcome: 'already-bonded', gate: true, perceived: true, channels: ['bond'] };
+    }
+    if (rec && rec.outcome === 'refused' && day - (rec.day || 0) < REFUSE_COOLDOWN_DAYS) {
+      return { ok: false, accepted: false, outcome: 'cooldown', gate: true, perceived: true, channels: ['bond'] };
+    }
+    // Already close: no need to propose what already is.
+    try {
+      var existing = (G.bondGet && G.bondGet(initiator, target)) || null;
+      if (existing && ((existing.depth || 0) >= 1 || (existing.v || 0) >= 50)) {
+        return { ok: false, accepted: false, outcome: 'already-bonded', gate: true, perceived: true, channels: ['bond'] };
+      }
+    } catch (e) {}
+    var gate = bondProposalPerceived(initiator, target);
+    if (!gate.perceived) {
+      return { ok: false, accepted: false, outcome: 'not-perceived', gate: false, perceived: false, channels: [] };
+    }
+    var decision = null;
+    try {
+      decision = G.npcInviteDecision(target, initiator, { kind: 'bond', roll: opts.roll });
+    } catch (e) {
+      bondWarn('proposeBond:decision', e);
+      return { ok: false, accepted: false, outcome: 'no-decision', gate: true, perceived: true, channels: gate.channels };
+    }
+    var accepted = !!(decision && decision.accept);
+    var outcome = accepted ? 'accepted' : 'refused';
+    // A sick target vetoes the promise, not the friendship: no cooldown.
+    if (decision && decision.veto === 'sick') {
+      tele({ initiator: initiator, target: target, kind: 'person', outcome: outcome, chance: 0, reason: 'sick' });
+      return { ok: true, accepted: false, outcome: outcome, chance: 0, gate: true, perceived: true, channels: gate.channels, reasons: decision.reasons, veto: 'sick' };
+    }
+    bondState()[key] = { day: day, outcome: outcome, initiator: initiator, target: target };
+    if (accepted) {
+      try {
+        if (G.bondAdd) G.bondAdd(initiator, target, 10, 'bond proposed');
+        var bnd = (G.bondGet && G.bondGet(initiator, target)) || null;
+        if (bnd) { bnd.proposed = true; bnd.proposedDay = day; bnd.proposer = initiator; }
+      } catch (e) { bondWarn('proposeBond:bondAdd', e); }
+    }
+    tele({ initiator: initiator, target: target, kind: 'person', outcome: outcome,
+      chance: (decision && decision.chance) != null ? decision.chance : null,
+      reason: (decision && decision.reasons) ? decision.reasons.join('; ') : null });
+    if (playerAtHaven()) {
+      try {
+        var an = nameOf(initiator), bn = nameOf(target);
+        if (accepted) {
+          G.say(pick([
+            an + ' takes ' + bn + '\'s hand. "Stick together, then — watch each other\'s backs."',
+            an + ' nods at ' + bn + '. "You and me. We look out for each other now."',
+            an + ' and ' + bn + ' shake on it. "Bonded. Whatever comes, we face it together."',
+          ]));
+        } else {
+          G.say(pick([
+            bn + ' shakes their head at ' + an + '. "Not yet. Ask me again when we\'ve been through more together."',
+            bn + ' to ' + an + ': "Thanks — but I\'m not ready to promise that."',
+            an + ' asks, and ' + bn + ' looks away. "Not like that. Not yet."',
+          ]));
+        }
+      } catch (e) { bondWarn('proposeBond:say', e); }
+    }
+    return { ok: true, accepted: accepted, outcome: outcome,
+      chance: (decision && decision.chance) != null ? decision.chance : null,
+      gate: true, perceived: true, channels: gate.channels, reasons: decision ? decision.reasons : null };
+  }
+
+  // ---------- DRIVE HOOK (VISIT arrivals) ----------
+  // bondProposalMaybe(initiator, target): called when a VISIT lands.
+  // Drive-first: the bonds goal must be live (vgoalWeights.bonds >= 1),
+  // the pair must not be disliked (pairAffinity >= 0) or already close,
+  // the perception gate must pass, and the proposal itself is a
+  // probability (0.35 when 'bonds' is the top goal, 0.15 otherwise) —
+  // a drive, not a flat roll and not a guarantee.
+  function bondProposalMaybe(initiator, target) {
+    if (!initiator || !target || initiator === target) return { ok: false, reason: 'invalid' };
+    if (!aliveOnRoster(initiator) || !aliveOnRoster(target)) return { ok: false, reason: 'invalid' };
+    if (target === scholarId()) return { ok: false, reason: 'scholar-decides' };
+    var weights = null;
+    try { weights = (G.vgoalWeights ? G.vgoalWeights(initiator) : null) || null; } catch (e) { weights = null; }
+    if (!weights || (weights.bonds || 0) < 1) return { ok: false, reason: 'no-drive' };
+    var top = null, topW = -1;
+    for (var id in weights) { if (weights[id] > topW) { topW = weights[id]; top = id; } }
+    try {
+      var aff = (G.pairAffinity ? G.pairAffinity(initiator, target) : 0) || 0;
+      if (aff < 0) return { ok: false, reason: 'disliked' };
+    } catch (e) { bondWarn('maybe:affinity', e); }
+    var gate = bondProposalPerceived(initiator, target);
+    if (!gate.perceived) return { ok: false, reason: 'not-perceived' };
+    var key = pairKey(initiator, target);
+    var rec = bondState()[key] || null;
+    if (rec && rec.outcome === 'accepted') return { ok: false, reason: 'already-bonded' };
+    if (rec && rec.outcome === 'refused' && dayOf() - (rec.day || 0) < REFUSE_COOLDOWN_DAYS) return { ok: false, reason: 'cooldown' };
+    var p = (top === 'bonds') ? BOND_PROPOSE_TOP_P : BOND_PROPOSE_P;
+    if (Math.random() >= p) return { ok: false, reason: 'drive-quiet' };
+    return proposeBond(initiator, target);
+  }
+
+  // ---------- NPC -> SCHOLAR PROPOSALS (pending beats) ----------
+  function bondProposalLine(vid) {
+    var n = nameOf(vid);
+    return pick([
+      '"Can I ask you something? ... I want us to stick together. Properly. Watch each other\'s backs."',
+      '"I\'ve been thinking. You and me — we should be bonded. Not just neighbors. Will you stick with me?"',
+      '"Hey. I want to ask it plain: will you be my bonded friend? I\'ll watch your back if you watch mine."',
+    ]);
+  }
+  function stageBondProposal(vid) {
+    var day = dayOf();
+    if (!aliveOnRoster(vid) || vid === scholarId()) return null;
+    try { if ((G.state.village.sick || {})[vid]) return null; } catch (e) {}
+    var t = trustOf(vid);
+    if (t == null || t < 12) return null;
+    var weights = null;
+    try { weights = (G.vgoalWeights ? G.vgoalWeights(vid) : null) || null; } catch (e) { weights = null; }
+    if (!weights || (weights.bonds || 0) < 1) return null;
+    if (bondRequests()[vid]) return null;
+    var key = pairKey(vid, scholarId());
+    var rec = bondState()[key] || null;
+    if (rec && rec.outcome === 'accepted') return null;
+    if (rec && rec.outcome === 'refused' && day - (rec.day || 0) < REFUSE_COOLDOWN_DAYS) return null;
+    try {
+      var existing = (G.bondGet && G.bondGet(vid, scholarId())) || null;
+      if (existing && ((existing.depth || 0) >= 1 || (existing.v || 0) >= 50)) return null;
+    } catch (e) {}
+    // Do not clobber another undelivered talk request.
+    try {
+      var treq = ((G.state.village || {}).talkRequests || {})[vid];
+      if (treq && !treq.delivered) return null;
+    } catch (e) {}
+    var pending = { vid: vid, day: day, kind: 'bond' };
+    bondRequests()[vid] = pending;
+    // JOIN-REQUEST HONESTY (journey-social r34): store the spoken ask
+    // verbatim — the talk-request opener then carries the real question,
+    // and the re-spoken beat in convoOpening uses the same line.
+    var line = bondProposalLine(vid);
+    pending.line = line;
+    try {
+      var v = G.state.village || (G.state.village = {});
+      v.talkRequests = v.talkRequests || {};
+      v.talkRequests[vid] = { line: '__NAME__: ' + line, day: day, bondProposal: true };
+    } catch (e) { bondWarn('stage:talkRequest', e); }
+    tele({ initiator: vid, target: scholarId(), kind: 'person', outcome: 'staged', chance: null });
+    return pending;
+  }
+  function pendingBondProposal(vid) {
+    try { return (bondRequests()[vid] || null); } catch (e) { return null; }
+  }
+  function consumeBondRequest(vid) {
+    try { delete bondRequests()[vid]; } catch (e) {}
+    try {
+      var treq = ((G.state.village || {}).talkRequests || {})[vid];
+      if (treq && treq.bondProposal) delete ((G.state.village || {}).talkRequests)[vid];
+    } catch (e) {}
+  }
+  function acceptBondProposal(vid) {
+    if (!pendingBondProposal(vid)) return { ok: false, reason: 'no-pending' };
+    var day = dayOf();
+    consumeBondRequest(vid);
+    var key = pairKey(vid, scholarId());
+    bondState()[key] = { day: day, outcome: 'accepted', initiator: vid, target: scholarId() };
+    try {
+      if (G.bondAdd) G.bondAdd(vid, scholarId(), 10, 'bond proposed');
+      var bnd = (G.bondGet && G.bondGet(vid, scholarId())) || null;
+      if (bnd) { bnd.proposed = true; bnd.proposedDay = day; bnd.proposer = vid; }
+    } catch (e) { bondWarn('accept:bondAdd', e); }
+    tele({ initiator: vid, target: scholarId(), kind: 'person', outcome: 'accepted', chance: null });
+    return { ok: true, line: '"Stick together, then." They look steadier already.' };
+  }
+  function declineBondProposal(vid) {
+    if (!pendingBondProposal(vid)) return { ok: false, reason: 'no-pending' };
+    consumeBondRequest(vid);
+    var key = pairKey(vid, scholarId());
+    bondState()[key] = { day: dayOf(), outcome: 'refused', initiator: vid, target: scholarId() };
+    try { if (G.bumpTrust) G.bumpTrust(vid, -1, 'declined their bond proposal'); } catch (e) {}
+    tele({ initiator: vid, target: scholarId(), kind: 'person', outcome: 'refused', chance: null });
+    var line = '"Another time, then." A small thing, pocketed.';
+    try { if (G.declineLine) line = G.declineLine(vid); } catch (e) {}
+    return { ok: true, line: line };
+  }
+  // Daily tick beside npcInviteTick (betrayalDaily): at most one
+  // staging a day, and stale pendings (> 2 days) expire like invites.
+  function npcBondTick() {
+    try {
+      var day = dayOf();
+      var reqs = bondRequests();
+      for (var vid in reqs) {
+        if (reqs[vid] && day - (reqs[vid].day || 0) > 2) {
+          consumeBondRequest(vid);
+          tele({ initiator: vid, target: scholarId(), kind: 'person', outcome: 'expired', chance: null });
+        }
+      }
+      if (Math.random() >= 0.6) return;
+      var roster = [];
+      try { roster = (G.npcIds ? G.npcIds() : (((G.state || {}).village || {}).roster || [])); } catch (e) {}
+      var cands = [];
+      for (var i = 0; i < roster.length; i++) {
+        var id = roster[i];
+        if (id === scholarId()) continue;
+        if (!aliveOnRoster(id)) continue;
+        try { if ((G.state.village.sick || {})[id]) continue; } catch (e) {}
+        var t = trustOf(id);
+        if (t == null || t < 12) continue;
+        var w = null;
+        try { w = (G.vgoalWeights ? G.vgoalWeights(id) : null) || null; } catch (e) { w = null; }
+        if (!w || (w.bonds || 0) < 1) continue;
+        if (bondRequests()[id]) continue;
+        var k = pairKey(id, scholarId());
+        var r = bondState()[k] || null;
+        if (r && r.outcome === 'accepted') continue;
+        if (r && r.outcome === 'refused' && day - (r.day || 0) < REFUSE_COOLDOWN_DAYS) continue;
+        cands.push(id);
+      }
+      if (!cands.length) return;
+      stageBondProposal(pick(cands));
+    } catch (e) { bondWarn('npcBondTick', e); }
+  }
+
+  // ---------- LINK RAISES (NPC -> bearer) ----------
+  function linkRaiseLine(vid) {
+    var pending = pendingLinkRaise(vid);
+    var vname = 'them';
+    var how = null;
+    try {
+      if (pending && pending.villageId) {
+        var ovs = ((G.state || {}).otherVillages || []);
+        for (var i = 0; i < ovs.length; i++) if (ovs[i] && ovs[i].id === pending.villageId) { vname = ovs[i].name || ovs[i].id; break; }
+        var lore = (G.villageLoreOf ? G.villageLoreOf(vid) : {}) || {};
+        how = ((lore[pending.villageId] || {}).how) || null;
+      }
+    } catch (e) {}
+    if (how === 'visit') return '"I\'ve been to ' + vname + '. I know their fires. We should link with them — we\'d be stronger together."';
+    if (how === 'seen-nearby') return '"I\'ve seen ' + vname + '\'s fires from the road. We should link with them — we\'d be stronger together."';
+    if (how === 'rumor' || how === 'told') return '"I\'ve heard good things about ' + vname + '. We should link with them — we\'d be stronger together."';
+    return '"We should link with ' + vname + '. I know them. We\'d be stronger together."';
+  }
+  function stageLinkRaise(vid, villageId) {
+    var day = dayOf();
+    if (!aliveOnRoster(vid) || vid === scholarId() || !villageId) return null;
+    var t = trustOf(vid);
+    if (t == null || t < 20) return null;
+    var weights = null;
+    try { weights = (G.vgoalWeights ? G.vgoalWeights(vid) : null) || null; } catch (e) { weights = null; }
+    if (!weights || (weights.build_standing || 0) < 1) return null;
+    // Perception: the raiser must personally know the village.
+    var lore = null;
+    try { lore = (G.villageLoreOf ? G.villageLoreOf(vid) : {}) || {}; } catch (e) { lore = {}; }
+    if (!lore[villageId]) return null;
+    if (linkRaises()[vid]) return null;
+    try {
+      if (G.linkWith && G.linkWith(villageId)) return null; // already linked
+    } catch (e) {}
+    var found = false;
+    try {
+      var ovs = ((G.state || {}).otherVillages || []);
+      for (var i = 0; i < ovs.length; i++) if (ovs[i] && ovs[i].id === villageId) { found = true; break; }
+    } catch (e) {}
+    if (!found) return null;
+    try {
+      var treq = ((G.state.village || {}).talkRequests || {})[vid];
+      if (treq && !treq.delivered) return null;
+    } catch (e) {}
+    var pending = { vid: vid, villageId: villageId, day: day, kind: 'link' };
+    linkRaises()[vid] = pending;
+    // Same verbatim-ask rule as bond proposals (see stageBondProposal).
+    var line = linkRaiseLine(vid);
+    pending.line = line;
+    try {
+      var v = G.state.village || (G.state.village = {});
+      v.talkRequests = v.talkRequests || {};
+      v.talkRequests[vid] = { line: '__NAME__: ' + line, day: day, linkRaise: true };
+    } catch (e) {}
+    tele({ initiator: vid, target: villageId, kind: 'link', outcome: 'staged', chance: null });
+    return pending;
+  }
+  function pendingLinkRaise(vid) {
+    try { return (linkRaises()[vid] || null); } catch (e) { return null; }
+  }
+  function consumeLinkRaise(vid) {
+    try { delete linkRaises()[vid]; } catch (e) {}
+    try {
+      var treq = ((G.state.village || {}).talkRequests || {})[vid];
+      if (treq && treq.linkRaise) delete ((G.state.village || {}).talkRequests)[vid];
+    } catch (e) {}
+  }
+  function acceptLinkRaise(vid) {
+    var pending = pendingLinkRaise(vid);
+    if (!pending) return { ok: false, reason: 'no-pending' };
+    consumeLinkRaise(vid);
+    // The raiser tells the bearer what they know — the player cannot
+    // propose to a village they never heard of, but their villager
+    // just told them about it. Then the PLAYER proposes (existing
+    // courtship, player's act, player's decision).
+    try {
+      if (G.tellVillageLore) G.tellVillageLore(vid, scholarId(), pending.villageId);
+    } catch (e) { bondWarn('acceptLink:tellLore', e); }
+    var res = null;
+    try { res = G.proposeLink ? G.proposeLink(pending.villageId) : null; } catch (e) { bondWarn('acceptLink:proposeLink', e); res = null; }
+    tele({ initiator: vid, target: pending.villageId, kind: 'link', outcome: 'accepted', chance: null });
+    return { ok: true, proposed: true, villageId: pending.villageId, link: res };
+  }
+  function declineLinkRaise(vid) {
+    var pending = pendingLinkRaise(vid);
+    if (!pending) return { ok: false, reason: 'no-pending' };
+    consumeLinkRaise(vid);
+    tele({ initiator: vid, target: pending.villageId, kind: 'link', outcome: 'refused', chance: null });
+    return { ok: true, line: '"Not them. Not now." The idea is set aside, not forgotten.' };
+  }
+  // Daily tick beside npcBondTick: at most one staging a day; stale
+  // pendings (> 2 days) expire.
+  function npcLinkRaiseTick() {
+    try {
+      var day = dayOf();
+      var raises = linkRaises();
+      for (var vid in raises) {
+        if (raises[vid] && day - (raises[vid].day || 0) > 2) {
+          var vId = raises[vid].villageId;
+          consumeLinkRaise(vid);
+          tele({ initiator: vid, target: vId, kind: 'link', outcome: 'expired', chance: null });
+        }
+      }
+      if (Math.random() >= 0.5) return;
+      var roster = [];
+      try { roster = (G.npcIds ? G.npcIds() : (((G.state || {}).village || {}).roster || [])); } catch (e) {}
+      var cands = [];
+      for (var i = 0; i < roster.length; i++) {
+        var id = roster[i];
+        if (id === scholarId()) continue;
+        if (!aliveOnRoster(id)) continue;
+        var tr = trustOf(id);
+        if (tr == null || tr < 20) continue;
+        var w = null;
+        try { w = (G.vgoalWeights ? G.vgoalWeights(id) : null) || null; } catch (e) { w = null; }
+        if (!w || (w.build_standing || 0) < 1) continue;
+        if (linkRaises()[id]) continue;
+        var lore = null;
+        try { lore = (G.villageLoreOf ? G.villageLoreOf(id) : {}) || {}; } catch (e) { lore = {}; }
+        var known = Object.keys(lore);
+        if (!known.length) continue;
+        cands.push({ vid: id, villages: known });
+      }
+      if (!cands.length) return;
+      var chosen = pick(cands);
+      // Prefer a village not already linked.
+      var open = chosen.villages.filter(function (villageId) {
+        try { return !(G.linkWith && G.linkWith(villageId)); } catch (e) { return true; }
+      });
+      if (!open.length) return;
+      stageLinkRaise(chosen.vid, pick(open));
+    } catch (e) { bondWarn('npcLinkRaiseTick', e); }
+  }
+
+  // ---------- CONVERSATION TURN (bond:/link: choices) ----------
+  // Mirrors betrayalTurn's finish: sayLine is the one transcript
+  // writer (diegeticAct), the wind-down budget binds the verb.
+  function bondTurn(vid, choiceId) {
+    var c = null;
+    try { c = G.convoGet(vid); } catch (e) {}
+    var parts = (choiceId || '').split(':');
+    var kind = parts[0], act = parts[1];
+    var line = null, youSaid = null;
+    function finish(l, you) {
+      line = l; youSaid = you || null;
+      try {
+        if (you && c) c.transcript.push({ who: 'you', text: you });
+        line = G.sayLine(vid, line, { diegeticAct: true }) || line;
+        if (c) c.exchanges = (c.exchanges || 0) + 1;
+      } catch (e) { bondWarn('bondTurn:finish', e); }
+      try {
+        if (typeof G.convoMaybeWinddown === 'function') {
+          var wd = G.convoMaybeWinddown(vid);
+          if (wd) return wd;
+        }
+      } catch (e) { bondWarn('bondTurn:winddown', e); }
+      return { line: line, choices: G.convoChoices(vid), ended: false, transcript: (c && c.transcript) ? c.transcript.slice() : [] };
+    }
+    if (kind === 'bond' && act === 'accept') {
+      var r = acceptBondProposal(vid);
+      return finish((r && r.line) || 'You go.', '"Yes. Stick together."');
+    }
+    if (kind === 'bond' && act === 'decline') {
+      var d = declineBondProposal(vid);
+      return finish((d && d.line) || '"Not this time."', '"Not this time."');
+    }
+    if (kind === 'link' && act === 'accept') {
+      var a = acceptLinkRaise(vid);
+      if (!a.ok) return finish('"Not them. Not now."', '"Not now."');
+      return finish('"All right — let\'s ask them." You carry the proposal to ' + (function () { try { var ovs = ((G.state || {}).otherVillages || []); for (var i = 0; i < ovs.length; i++) if (ovs[i] && ovs[i].id === a.villageId) return ovs[i].name || ovs[i].id; } catch (e) {} return 'them'; })() + '.', '"All right. Let\'s ask them."');
+    }
+    if (kind === 'link' && act === 'decline') {
+      var dl = declineLinkRaise(vid);
+      return finish((dl && dl.line) || '"Not them. Not now."', '"Not them. Not now."');
+    }
+    return finish('"..."', '"..."');
+  }
+  function bondChoices(vid) {
+    var out = [];
+    try {
+      if (pendingBondProposal(vid)) {
+        out.push({ id: 'bond:accept', label: '"Yes. Stick together."' });
+        out.push({ id: 'bond:decline', label: '"Not like that. Not yet."' });
+      }
+      if (pendingLinkRaise(vid)) {
+        out.push({ id: 'link:accept', label: '"All right. Let\'s ask them."' });
+        out.push({ id: 'link:decline', label: '"Not them. Not now."' });
+      }
+    } catch (e) { bondWarn('bondChoices', e); }
+    return out;
+  }
+
+  var methods = {
+    bondProposalPerceived: function (a, b) { return bondProposalPerceived(a, b); },
+    proposeBond: function (a, b, opts) { return proposeBond(a, b, opts); },
+    bondProposalMaybe: function (a, b) { return bondProposalMaybe(a, b); },
+    stageBondProposal: function (vid) { return stageBondProposal(vid); },
+    pendingBondProposal: function (vid) { return pendingBondProposal(vid); },
+    acceptBondProposal: function (vid) { return acceptBondProposal(vid); },
+    declineBondProposal: function (vid) { return declineBondProposal(vid); },
+    npcBondTick: function () { return npcBondTick(); },
+    stageLinkRaise: function (vid, villageId) { return stageLinkRaise(vid, villageId); },
+    pendingLinkRaise: function (vid) { return pendingLinkRaise(vid); },
+    acceptLinkRaise: function (vid) { return acceptLinkRaise(vid); },
+    declineLinkRaise: function (vid) { return declineLinkRaise(vid); },
+    npcLinkRaiseTick: function () { return npcLinkRaiseTick(); },
+    bondProposalLine: function (vid) { return bondProposalLine(vid); },
+    linkRaiseLine: function (vid) { return linkRaiseLine(vid); },
+    bondChoices: function (vid) { return bondChoices(vid); },
+    bondTurn: function (vid, choiceId) { return bondTurn(vid, choiceId); },
+  };
+  Object.assign(G, methods);
+
+  // ============ WRAPS (chain-safe: capture the current fn) ============
+  (function attach() {
+    var _convoChoices = G.convoChoices;
+    G.convoChoices = function (vid) {
+      var base = _convoChoices ? _convoChoices.call(this, vid) : [];
+      try {
+        var extra = this.bondChoices(vid);
+        if (extra && extra.length) return extra.concat(base);
+      } catch (e) { console.warn('[bond-initiation] convoChoices extra', e); }
+      return base;
+    };
+    var _convoTurn = G.convoTurn;
+    G.convoTurn = function (vid, choiceId) {
+      try {
+        if (typeof choiceId === 'string' && (choiceId.indexOf('bond:') === 0 || choiceId.indexOf('link:') === 0)) {
+          try { this.convoMarkSubstantive(vid, choiceId); } catch (e) {}
+          try { if (typeof this.convoDropUnspoken === 'function') this.convoDropUnspoken(vid, choiceId); } catch (e) {}
+          return this.bondTurn(vid, choiceId);
+        }
+      } catch (e) { bondWarn('convoTurn:bond', e); }
+      return _convoTurn.call(this, vid, choiceId);
+    };
+  })();
+})();

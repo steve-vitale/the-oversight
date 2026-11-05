@@ -129,6 +129,24 @@ Betrayal, accusation, trial & exile. Micro-quests disguise later betrayals; afte
 
 **Consumes:** village.trust, village.bonds, village.betrayal, village.visitors, village.justice.crimes
 
+### bond-initiation (`bond-initiation.js`)
+Villagers initiate bonds on their own — proposing a bond to a person they perceived, and raising a village link to the bearer. Steve 2026-11-04: villagers initiate bonds, because the player may inherit that villager.
+
+**Provides:** bondProposalPerceived(initiatorVid, targetVid), proposeBond(initiatorVid, targetVid, opts), bondProposalMaybe(initiatorVid, targetVid), stageBondProposal(vid), pendingBondProposal(vid), acceptBondProposal(vid), declineBondProposal(vid), npcBondTick(), stageLinkRaise(vid, villageId), pendingLinkRaise(vid), acceptLinkRaise(vid), declineLinkRaise(vid), npcLinkRaiseTick(), bondProposalLine(vid), linkRaiseLine(vid)
+
+**Rules:**
+- bondinit_perception_only: a proposal fires only for a person the initiator personally perceived — same fire-group, an existing bond record (real interaction), gossip heard naming the target, or a sensed ally. Never a roster scan, never a list feed. (code: bondProposalPerceived)
+- bondinit_character_decision: the target decides through npcInviteDecision kind 'bond' — temperament, goal, mood, fear, pair relationship, social need; chance clamped 5-95, never always/never. (code: proposeBond)
+- bondinit_player_chooses_path: hierarchy propose verbs stay player-only (Steve 2026-10-26). An NPC raises a link idea; the player proposes. acceptLinkRaise first tells the bearer the lore (tellVillageLore), then calls proposeLink. (code: acceptLinkRaise)
+- bondinit_scholar_decides: a proposal TO the scholar is never auto-decided — it stages as a pending conversation beat the player answers. (code: stageBondProposal)
+- bondinit_drive_first: wild proposals fire only from VISIT arrivals, only while the villager's bonds drive is live (vgoalWeights.bonds >= 1), only to someone they do not dislike (pairAffinity >= 0) and are not already close to (bond warmth < 50, depth < 1). (code: bondProposalMaybe)
+- bondinit_no_spam: a refused pair cools down 14 days; an accepted bond is never re-proposed; at most one bond staging and one link-raise staging per day. (code: proposeBond, npcBondTick, npcLinkRaiseTick)
+- bondinit_telemetry: every proposal, staging, acceptance and refusal emits tele('bond_proposed', {initiator, target, kind, outcome, chance}). (code: proposeBond, stageBondProposal, acceptBondProposal, declineBondProposal, stageLinkRaise, acceptLinkRaise, declineLinkRaise)
+- bondinit_no_gate_changes: this module never writes a win price, deed gate, readiness bar, or table rule. It changes who asks, not what winning costs. (code: bond-initiation.js — only state writes are bondAdd, bumpTrust, and the bond/link request stores)
+- bondinit_narration: proposals speak only when the player is at Haven (say), or inside a live conversation (sayLine). No sim spam, no silent acts. (code: proposeBond, bondTurn)
+
+**Consumes:** —
+
 ### broadcast (`broadcast.js`)
 The television mechanism — BROADCAST MODE. When a show, contest watch-beat, ratings summons, or Death Reel moment airs, the game becomes a TV screen: entry title card, persistent LIVE bug, broadcast-treated grid (scanlines + vignette + screen frame), running alien commentary in a ticker, lower-third name cards, CUT TO transitions, crowd reactions. Entry and exit are ALWAYS explicit — the player never wonders whether they're playing or watching. TV never kills (canon).
 

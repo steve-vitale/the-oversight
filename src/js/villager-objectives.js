@@ -1300,6 +1300,10 @@
             v.objectives[o.targetVid] = v.objectives[o.targetVid] || { kind: 'idle', state: 'idle' };
             this.seedGossip('deed', { generous: 2, who: rid }, [o.targetVid]);
           } catch (e) {}
+          // BOND-INITIATION (2026-11-05, Steve 2026-11-04): a visit that
+          // lands is when a villager asks — the bonds drive decides, the
+          // target decides by character. Perception-gated inside.
+          try { if (this.bondProposalMaybe) this.bondProposalMaybe(rid, o.targetVid); } catch (e) {}
           o.state = 'returning';
         }
       }
@@ -1506,6 +1510,10 @@
                 if (_vl) this.say(_vl);
               }
             } catch (e) {}
+            // BOND-INITIATION (2026-11-05, Steve 2026-11-04): a quiet talk
+            // at home is when a villager asks — same drive, same gates
+            // as the outdoor visit above.
+            try { if (this.bondProposalMaybe) this.bondProposalMaybe(rid, o.targetVid); } catch (e) {}
           }
         }
       }

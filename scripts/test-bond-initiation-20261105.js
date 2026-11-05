@@ -57,8 +57,12 @@ eq('summarize accept rate', AN.summarizeSeed(baseOut({
 })).acceptRate, 0.5);
 eq('summarize gate fails', AN.summarizeSeed(baseOut({
   daily: [snap(90)],
-  proposalEvents: [{ day: 10, fn: 'proposeBond', initiator: 'v1', target: 'v2', kind: 'person', ret: { ok: false, gate: false } }],
+  proposalEvents: [{ day: 10, fn: 'proposeBond', initiator: 'v1', target: 'v2', kind: 'person', ret: { ok: true, accepted: true, gate: false } }],
 })).gateFails, 1);
+eq('summarize guard rows are not gate fails', AN.summarizeSeed(baseOut({
+  daily: [snap(90)],
+  proposalEvents: [{ day: 10, fn: 'proposeBond', initiator: 'v1', target: 'v2', kind: 'person', ret: { ok: false, outcome: 'not-perceived', gate: false } }],
+})).gateFails, 0);
 eq('summarize link raises', AN.summarizeSeed(baseOut({
   daily: [snap(90)],
   bondTeleEvents: [tele(20, 'v1', null, 'link', 'staged', null), tele(22, 'v2', null, 'link', 'raised', null)],
@@ -201,9 +205,44 @@ async function live() {
     eq('scholar target not auto-decided', r.outcome, 'scholar-decides');
   }
   // --- Pending scholar proposal: stage / accept / decline. ---
-  const cand = roster.find(function (id) {
-    try { return (((Game.state.village.trust || {})[id]) || 10) >= 12; } catch (e) { return false; }
-  });
+  // Prepared-scene setup (debug-scenarios idiom: set the state a real
+  // game would have built): staging needs the bonds drive live — the
+  // villager must trust someone themselves (>= 40 in their own trust
+  // map, trustedAnyone) and the bonds weight must reach 1. Village
+  // trust >= 12 is the staging bar.
+  function findBondCand(excludeId) {
+    for (let i = 0; i < roster.length; i++) {
+      const id = roster[i];
+      if (id === excludeId || id === Game.villagerId) continue;
+      try {
+        if (((Game.state.village.sick || {})[id])) continue;
+        if ((((Game.state.village.trust || {})[id]) || 10) < 12) continue;
+        // The 2-day smoke run ahead of this scene may already have
+        // staged a proposal for this villager (the daily tick working)
+        // — the direct stage path needs a clean candidate.
+        if (Game.pendingBondProposal && Game.pendingBondProposal(id)) continue;
+        const treq = ((Game.state.village.talkRequests || {})[id]);
+        if (treq && !treq.delivered) continue;
+        const already = Game.bondGet ? Game.bondGet(id, Game.villagerId) : null;
+        if (already && ((already.depth || 0) >= 1 || (already.v || 0) >= 50)) continue;
+        const other = roster.find(function (r) { return r !== id && r !== Game.villagerId; });
+        if (!other) continue;
+        const p1 = (Game.getPerson ? Game.getPerson(id) : null);
+        const p2 = (Game.vpOf ? Game.vpOf(id) : null);
+        const p = p1 || p2;
+        if (!p) continue;
+        // They trust a fellow villager — the drive's gate. Set on both
+        // accessors in case one returns a copy.
+        p.trust = p.trust || {};
+        p.trust[other] = 45;
+        if (p2 && p2 !== p) { p2.trust = p2.trust || {}; p2.trust[other] = 45; }
+        const w = Game.vgoalWeights ? Game.vgoalWeights(id) : null;
+        if (w && (w.bonds || 0) >= 1) return id;
+      } catch (e) {}
+    }
+    return null;
+  }
+  const cand = findBondCand(null);
   if (cand) {
     const staged = Game.stageBondProposal(cand);
     eq('stage bond proposal', !!(staged && staged.vid === cand), true);
@@ -212,9 +251,7 @@ async function live() {
     eq('accept pending bond proposal', res.ok, true);
     eq('accepted pending marked initiated', !!((Game.bondGet(cand, Game.villagerId) || {}).proposed), true);
     eq('pending consumed on accept', Game.pendingBondProposal(cand), null);
-    const cand2 = roster.find(function (id) {
-      return id !== cand && (((Game.state.village.trust || {})[id]) || 10) >= 12;
-    });
+    const cand2 = findBondCand(cand);
     if (cand2) {
       Game.stageBondProposal(cand2);
       const tBefore = ((Game.state.village.trust || {})[cand2]);
@@ -223,24 +260,45 @@ async function live() {
       eq('pending consumed on decline', Game.pendingBondProposal(cand2), null);
       const tAfter = ((Game.state.village.trust || {})[cand2]);
       eq('decline costs one trust', (tAfter == null ? null : tAfter), (tBefore == null ? null : Math.max(0, tBefore - 1)));
-    } else { console.log('SKIP decline path: no second trusted villager'); }
-  } else { console.log('SKIP pending path: no villager at trust >= 12'); }
+    } else { console.log('SKIP decline path: no second villager with the bonds drive live'); }
+  } else { console.log('SKIP pending path: no villager with village trust >= 12 and the bonds drive live'); }
   // --- Link raise: stage / accept calls proposeLink. ---
+  // Prepared-scene setup: the raiser must personally know the village
+  // (lore recorded below), hold the build_standing drive (>= 1), and
+  // carry village trust >= 20 (the staging bar, set as scene state).
   const ovs = ((Game.state || {}).otherVillages || []);
   if (ovs.length) {
-    const knower = roster[0];
     const target = ovs[0].id;
-    try { if (Game.recordVillageLore) Game.recordVillageLore(knower, target, { how: 'seen-nearby' }); } catch (e) {}
-    const raised = Game.stageLinkRaise(knower, target);
-    eq('stage link raise', !!(raised && raised.vid === knower && raised.villageId === target), true);
-    eq('pending link raise reads back', !!(Game.pendingLinkRaise(knower)), true);
-    const beforeLinks = (typeof Game.hierarchyState === 'function') ? Game.hierarchyState().length : null;
-    const acc = Game.acceptLinkRaise(knower);
-    eq('accept link raise resolves', acc.ok, true);
-    eq('accept link raise consumes pending', Game.pendingLinkRaise(knower), null);
-    if (beforeLinks != null) {
-      // proposeLink may decline/counter (courtship) — the call itself is the proof.
-      eq('accept link raise called proposeLink', acc.proposed, true);
+    let knower = null;
+    for (let i = 0; i < roster.length && !knower; i++) {
+      const id = roster[i];
+      if (id === Game.villagerId) continue;
+      try {
+        if (((Game.state.village.sick || {})[id])) continue;
+        // Same clean-candidate rule as the bond path: the smoke run's
+        // daily tick may already have staged a raise for this villager.
+        if (Game.pendingLinkRaise && Game.pendingLinkRaise(id)) continue;
+        const treq = ((Game.state.village.talkRequests || {})[id]);
+        if (treq && !treq.delivered) continue;
+        if (Game.recordVillageLore) Game.recordVillageLore(id, target, { how: 'seen-nearby' });
+        const w = Game.vgoalWeights ? Game.vgoalWeights(id) : null;
+        if (w && (w.build_standing || 0) >= 1) knower = id;
+      } catch (e) {}
+    }
+    if (!knower) { console.log('SKIP link raise: no villager with build_standing >= 1'); }
+    else {
+      try { Game.state.village.trust = Game.state.village.trust || {}; Game.state.village.trust[knower] = 25; } catch (e) {}
+      const raised = Game.stageLinkRaise(knower, target);
+      eq('stage link raise', !!(raised && raised.vid === knower && raised.villageId === target), true);
+      eq('pending link raise reads back', !!(Game.pendingLinkRaise(knower)), true);
+      const beforeLinks = (typeof Game.hierarchyState === 'function') ? Game.hierarchyState().length : null;
+      const acc = Game.acceptLinkRaise(knower);
+      eq('accept link raise resolves', acc.ok, true);
+      eq('accept link raise consumes pending', Game.pendingLinkRaise(knower), null);
+      if (beforeLinks != null) {
+        // proposeLink may decline/counter (courtship) — the call itself is the proof.
+        eq('accept link raise called proposeLink', acc.proposed, true);
+      }
     }
   } else { console.log('SKIP link raise: no other villages on this seed'); }
 }

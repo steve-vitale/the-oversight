@@ -17,9 +17,12 @@ function summarizeSeed(out) {
   const accepted = personProps.filter(function (e) { return e.outcome === 'accepted'; }).length;
   const refused = personProps.filter(function (e) { return e.outcome === 'refused'; }).length;
   const personDecided = accepted + refused;
-  // Perception: every proposeBond return must carry gate=true.
+  // Perception: every DECIDED proposeBond return must carry gate=true.
+  // Guard returns (not-perceived, cooldown, already-bonded,
+  // scholar-decides, invalid) never decided anything — they are not
+  // gate failures. ok:true means the verb decided.
   const verbRows = props.filter(function (e) { return e.fn === 'proposeBond'; });
-  const gateFails = verbRows.filter(function (e) { return !(e.ret && e.ret.gate === true); });
+  const gateFails = verbRows.filter(function (e) { return e.ret && e.ret.ok === true && e.ret.gate !== true; });
   // NPC-initiated person proposals: initiator is a villager (not the scholar).
   const scholarId = last ? last.scholarId : null;
   const npcPerson = personProps.filter(function (e) { return e.initiator && e.initiator !== scholarId; });
