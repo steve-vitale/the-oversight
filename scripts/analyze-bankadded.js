@@ -64,6 +64,38 @@ function filterBankAdded(events) {
     allCensored: evs.filter((e) => !e.judged).length,
   };
 }
+// Raw evening-mode counts, INCLUDING lump-only / no-gain evenings
+// that retainedEvents drops (it only returns postEdible > 0 rows).
+// Needed for the prereg's screen-yield reporting ("how many
+// BANK-mode evenings found"): a bank-mode evening that banks only
+// lumps is a bank-mode evening with delta 0, not an absent evening.
+// Pure over one corpus instance's evening rows. Delta uses the
+// row's canonical postDailyPack when present, else the evening
+// record's packAfter; null when neither pack is available.
+function rawModeCounts(inst) {
+  const out = { bank: 0, flip: 0, skip: 0, bankDeltaPos: 0, bankDeltaZero: 0,
+    bankDeltaNeg: 0, bankDeltaNull: 0, flipDeltaPos: 0 };
+  for (const row of (inst.evenings || [])) {
+    const ev = row.bankfoodEvening;
+    if (!ev || (ev.mode !== 'bank' && ev.mode !== 'flip' && ev.mode !== 'skip')) continue;
+    out[ev.mode]++;
+    const post = row.postDailyPack || ev.packAfter || null;
+    const before = ev.packBefore || null;
+    if (!post || !before || typeof post.edibleKcal !== 'number' || typeof before.edibleKcal !== 'number') {
+      if (ev.mode === 'bank') out.bankDeltaNull++;
+      continue;
+    }
+    const delta = post.edibleKcal - before.edibleKcal;
+    if (ev.mode === 'bank') {
+      if (delta > 0) out.bankDeltaPos++;
+      else if (delta === 0) out.bankDeltaZero++;
+      else out.bankDeltaNeg++;
+    } else if (ev.mode === 'flip' && delta > 0) {
+      out.flipDeltaPos++;
+    }
+  }
+  return out;
+}
 function loadBankfoodDir(dir) {
   const out = {};
   if (!dir) return out;
@@ -88,14 +120,21 @@ function summarizeDir(dir, loader) {
     seeds: 0, bankModeEvenings: 0, bankModeWithEdible: 0,
     bankAddedTotal: 0, bankAddedJudged: 0, bankAddedCensored: 0,
     flipAddedTotal: 0, flipAddedJudged: 0, flipAddedCensored: 0,
-    allJudged: 0, allCensored: 0 } };
+    allJudged: 0, allCensored: 0,
+    rawBank: 0, rawFlip: 0, rawSkip: 0, rawBankDeltaPos: 0,
+    rawBankDeltaZero: 0, rawBankDeltaNeg: 0, rawBankDeltaNull: 0, rawFlipDeltaPos: 0 } };
   for (const seed of Object.keys(insts).sort()) {
     const inst = insts[seed];
     const evs = retainedEvents(inst);
     const f = filterBankAdded(evs);
+    const raw = rawModeCounts(inst);
     report.seeds[seed] = {
       daysAlive: inst.daysAlive, endReason: inst.endReason,
       bfErrs: (inst.bankfoodStore && inst.bankfoodStore.errs) || 0,
+      rawBank: raw.bank, rawFlip: raw.flip, rawSkip: raw.skip,
+      rawBankDeltaPos: raw.bankDeltaPos, rawBankDeltaZero: raw.bankDeltaZero,
+      rawBankDeltaNeg: raw.bankDeltaNeg, rawBankDeltaNull: raw.bankDeltaNull,
+      rawFlipDeltaPos: raw.flipDeltaPos,
       bankModeEvenings: f.bankModeEvenings,
       bankModeWithEdible: f.bankModeWithEdible,
       bankAddedTotal: f.bankAddedTotal,
@@ -124,6 +163,10 @@ function summarizeDir(dir, loader) {
     t.flipAddedCensored += f.flipAddedCensored.length;
     t.allJudged += f.allJudged;
     t.allCensored += f.allCensored;
+    t.rawBank += raw.bank; t.rawFlip += raw.flip; t.rawSkip += raw.skip;
+    t.rawBankDeltaPos += raw.bankDeltaPos; t.rawBankDeltaZero += raw.bankDeltaZero;
+    t.rawBankDeltaNeg += raw.bankDeltaNeg; t.rawBankDeltaNull += raw.bankDeltaNull;
+    t.rawFlipDeltaPos += raw.flipDeltaPos;
   }
   return report;
 }
@@ -135,4 +178,4 @@ function main() {
   console.log(JSON.stringify(report, null, 1));
 }
 if (require.main === module) main();
-module.exports = { isBankAdded, isFlipAdded, filterBankAdded, normalizeStrandnarr, summarizeDir, loadBankfoodDir, loadStrandnarrDir };
+module.exports = { isBankAdded, isFlipAdded, filterBankAdded, normalizeStrandnarr, rawModeCounts, summarizeDir, loadBankfoodDir, loadStrandnarrDir };

@@ -4,7 +4,7 @@
 // shape scripts/analyze-bankretain-rerun.js's retainedEvents
 // returns; no sims, no repo reads. Run: node scripts/test-bankadded-a.js
 'use strict';
-const { isBankAdded, isFlipAdded, filterBankAdded, normalizeStrandnarr } = require('./analyze-bankadded');
+const { isBankAdded, isFlipAdded, filterBankAdded, normalizeStrandnarr, rawModeCounts } = require('./analyze-bankadded');
 
 let pass = 0, fail = 0;
 function check(name, cond) {
@@ -60,6 +60,28 @@ check('bankfood corpus passes through identical', normalizeStrandnarr(bf) === bf
 check('null-safe normalization', normalizeStrandnarr(null) === null);
 const snNoFu = { seed: 17021, bankfoodStore: { errs: 0 } };
 check('strandnarr without firstUpkeeps passes through', normalizeStrandnarr(snNoFu) === snNoFu);
+
+// rawModeCounts: counts ALL evening records by mode, including
+// lump-only evenings retainedEvents drops; delta from postDailyPack.
+const rawInst = { evenings: [
+  { postDailyPack: { edibleKcal: 270 }, bankfoodEvening: { mode: 'bank', packBefore: { edibleKcal: 0 } } },
+  { postDailyPack: { edibleKcal: 0 }, bankfoodEvening: { mode: 'bank', packBefore: { edibleKcal: 0 } } },
+  { postDailyPack: { edibleKcal: 90 }, bankfoodEvening: { mode: 'bank', packBefore: { edibleKcal: 180 } } },
+  { bankfoodEvening: { mode: 'bank', packBefore: { edibleKcal: 0 } } },
+  { postDailyPack: { edibleKcal: 270 }, bankfoodEvening: { mode: 'flip', packBefore: { edibleKcal: 0 } } },
+  { postDailyPack: { edibleKcal: 0 }, bankfoodEvening: { mode: 'skip', packBefore: { edibleKcal: 0 } } },
+  { postDailyPack: { edibleKcal: 0 } },
+] };
+const rc = rawModeCounts(rawInst);
+check('raw bank counts all bank records', rc.bank === 4);
+check('raw flip counts flip records', rc.flip === 1);
+check('raw skip counts skip records', rc.skip === 1);
+check('raw bankDeltaPos counts bank gains', rc.bankDeltaPos === 1);
+check('raw bankDeltaZero counts bank no-gain', rc.bankDeltaZero === 1);
+check('raw bankDeltaNeg counts bank losses', rc.bankDeltaNeg === 1);
+check('raw bankDeltaNull counts missing post pack', rc.bankDeltaNull === 1);
+check('raw flipDeltaPos counts flip gains', rc.flipDeltaPos === 1);
+check('rows without evening records ignored', rc.bank + rc.flip + rc.skip === 6);
 
 console.log('test-bankadded-a: ' + pass + ' passed, ' + fail + ' failed');
 process.exit(fail ? 1 : 0);
