@@ -2676,7 +2676,7 @@
           const it = cont[i];
           if (!it || it.bonded) continue;
           if (this.isKeepsake && this.isKeepsake(it)) continue;
-          if (this.isSpoiled(it)) { lost.push(it.name || 'something'); cont.splice(i, 1); }
+          if (this.isSpoiled(it)) { lost.push((((it.units || 1) > 1 ? it.units + ' ' : '') + (it.name || 'something'))); cont.splice(i, 1); }
         }
       }
       // the village's pantry: the village throws out its own rot, not you.
