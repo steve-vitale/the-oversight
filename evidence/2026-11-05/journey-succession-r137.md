@@ -306,3 +306,50 @@ this panel. No correction commit needed.
   + transcripts journey-succession-r137-transcript-*.txt
 - No src/js change this run. [needs-eyes] is NOT attached: instrument
   only, no feel change for Steve to playtest.
+
+## Closeout addendum (main session, 2026-11-05 ~06:40 CST)
+
+The 04:00 Lane B run timed out in closeout with the work uncommitted. The
+06:00 Lane B coordinator adopted the run: it committed the work in four
+commits (prereg 4e545a02c, instrument 926de7c48, evidence 578e25c51, run
+note f2238ed19), rebased onto master 27c9839c8, merged, and released the
+worktree. This addendum records the closeout verification the salvage did
+not include.
+
+- Gate re-run (main session, worktree base e938cda83): `node scripts/check.js
+  --quick` finished 279 passed, 11 failed in 1395s (log: goal hidden_files
+  journey-succession-r137-checkquick-rerun.log). The 11 are the standing
+  profile, matching the r104 gate exactly (279/11): measurement-proof-update,
+  measurement-workflow, mobile-combat-cadence, occupation-panels,
+  measurement-cache-flags, phone-frame-proof, establishment-r20-fixes
+  ("next day voices once more: expected 2, got 1"), plus four 120s load
+  timeouts (solo-campaign-endings, trust-observer-neutrality, capable-bot,
+  table-endings). No new failure from r137 (zero src/js changes). The r133
+  selftalk proof test re-run by hand: ALL GREEN.
+- Analyzer verification: the analyzer re-run on the six panel seeds reproduces
+  analysis.txt byte-for-byte; the same re-run on the landed master files also
+  reproduces it byte-for-byte. The landed evidence is self-consistent.
+- DETERMINISM CLAIM CORRECTED: the note's "BYTE-IDENTICAL (160,484 bytes
+  each)" for the seed 33503 re-run is unverified and the figure does not match
+  the panel file — the landed 33503 stdout.json is 219,328 bytes, and the
+  scratch re-run file was not preserved. Do not cite the 160,484 figure.
+  Determinism on the CURRENT base was proven instead: seed 33506 re-run to a
+  scratch file is byte-identical to the post-rebase run (see below).
+- Post-rebase panel re-run (main session, closeout worktree, base f2238ed19):
+  all 7 seeds re-run on the rebased master, exit 0. Byte-compare vs the
+  landed panel: only 33501 identical; 33502–33506 and 33599 differ. The
+  divergence is real (deterministic on the new base), caused by the r104
+  deepening landing (convo-wants.js repay select + staleOpener voice)
+  changing conversation trajectories, plus the sweepcount narration change in
+  stderr text. SCORED VERDICTS UNCHANGED: CAP-D14 still INSUFFICIENT-DATA
+  (2/2 eligible bonded, denominator 2 < 3); 33503/33504 scored lines
+  identical; pick-rank 1 on all handoffs; selfReqDayEntries 0 everywhere;
+  FIRST-bearer undriven bonds 6. Descriptive deltas: NPC-NPC new bonds
+  35 -> 39 (33506: 0 -> 3, 33505: 3 -> 4); 33502 relEnd 94 -> 69 because the
+  village ended ~d72 instead of ~d112 (death-aware truncation; pantry 24,907
+  at end, not starvation). Post-rebase records preserved in goal hidden_files
+  journey-succession-r137-postrebase/ (7 stdout JSONs + analysis); the landed
+  panel remains the record of the run as executed.
+- Rotation-b already reads 4 (endgame next); the 06:00 run holds the Lane B
+  lock now — the dead r137 lock was retired by its stale-lock recovery, not
+  deleted here.
