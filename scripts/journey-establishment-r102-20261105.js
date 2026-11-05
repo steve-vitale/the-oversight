@@ -21,7 +21,7 @@
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
-const EVID = process.env.EVID || path.join(ROOT, 'evidence', '2026-11-04');
+const EVID = process.env.EVID || path.join(ROOT, 'evidence', '2026-11-05');
 const { loadGame, setupGame, driveFights, driveContests } = require('./sim-harness');
 const { competent } = require('./policies/competent');
 
