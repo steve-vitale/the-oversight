@@ -844,10 +844,61 @@
         return false;
       };
       candidates.sort((a, b) => (trust[b] || 0) - (trust[a] || 0));
+      // VETREST MANTLE-SKIP (sim-vetrest-b, 2026-11-05, default OFF via
+      // VETREST_MANTLE_SKIP=1): the village does not hand the Codex to a
+      // fresh wave-4 killer — they rest while the next-most-trusted leads.
+      // Grounded: killersim2-b showed blooded NPC killers inheriting
+      // during haven assault chains and dying as scholar the same day
+      // (Valeria 99316, Greta 99328), while the NPC phase itself is
+      // survivable (Greta 33 days). The skip reads the village's own
+      // witnessed kill record (state.waveKillLog — kills the village
+      // saw and cheered), never a roster scan. Fallback: if every
+      // candidate is fresh (or there is only one), the mantle passes
+      // to the unfiltered top — the village is never left with no
+      // successor. Flag-gated only; off-mode is byte-identical.
+      let _vetrestSkipped = null;
+      try {
+        const _vrOn = (typeof process !== 'undefined' && process.env && process.env.VETREST_MANTLE_SKIP === '1');
+        if (_vrOn && candidates.length > 1) {
+          const _vrDay = (s.day || 0);
+          const _vrLog = (this.state && this.state.waveKillLog) || [];
+          const _vrFresh = function (vid) {
+            for (let i = 0; i < _vrLog.length; i++) {
+              const e = _vrLog[i];
+              if (e && e.by === vid && ((e.w | 0) >= 4)) {
+                const gap = _vrDay - ((e.d | 0) || 0);
+                if (gap >= 0 && gap <= 45) return true;
+              }
+            }
+            return false;
+          };
+          if (_vrFresh(candidates[0])) {
+            const _vrRested = candidates.filter(function (c) { return !_vrFresh(c); });
+            if (_vrRested.length) {
+              _vetrestSkipped = candidates[0];
+              candidates = _vrRested;
+              try {
+                v.vetrestSkips = v.vetrestSkips || [];
+                if (v.vetrestSkips.length < 50) v.vetrestSkips.push({ day: _vrDay, skipped: _vetrestSkipped, picked: candidates[0] });
+              } catch (e2) { console.warn('vetrest skip trace failed', e2); }
+            }
+          }
+        }
+      } catch (e) { console.warn('vetrest skip failed', e); }
       const newId = candidates[0];
       const newChar = (this.data.villagers || []).find(x => x.id === newId) || {};
       const newName = newChar.name || 'someone';
       const newFirst = newName.split(' ')[0];
+      // VETREST (same arm): when the skip changed the pick, the village
+      // says so — no silent succession. Only when the flag is on and a
+      // killer was actually passed over.
+      if (_vetrestSkipped) {
+        try {
+          const _skName = ((this.data.villagers || []).find(function (x) { return x.id === _vetrestSkipped; }) || {}).name || 'Someone';
+          const _skFirst = _skName.split(' ')[0];
+          this.say(`The village looks to ${_skFirst} — but ${_skFirst} only just bled for them. Not yet. ${newFirst} takes the Codex instead.`);
+        } catch (e) { console.warn('vetrest say failed', e); }
+      }
       // "you're not her." — the village reacts to the change.
       // DEAD NEVER SPEAK (weirdness hunt 2026-10-10): the old pick read the
       // unpruned trust map, so a corpse could deliver the "you're not her"
