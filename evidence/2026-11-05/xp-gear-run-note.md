@@ -101,6 +101,63 @@ Fishing (350) and trapping (77) DO fire over 120d. Healing fires rarely
   for PROTECTION by Steve's 2026-11-05 ruling (tier-appropriate gear must
   let fighters survive); the damage fade (power moves to abilities) stands.
 
-## After-arm (to be filled in after the panel runs)
+## After-arm (filled in after the panel ran, 2026-11-05 ~14:47 CST)
 - Panel: evidence/2026-11-05/xp-gear-panel-after/ (8 seeds, same driver).
 - Analysis: evidence/2026-11-05/xp-gear-panel-analysis.md (before vs after).
+- VERDICT, bar by bar (honest — two bars PASS, two MISS, and the misses
+  have measured causes, not hand-waving):
+  - A. XP ACQUISITION — MIXED. Total deed XP 9303 -> 11077 (+19%, PASS on
+    '>'). Thresholds crossed 74 -> 129 (+74%, PASS). Craft XP 643 -> 1286
+    (exactly 2x — the starved track doubled). Craft thresholds 6 -> 20
+    (3.3x). BUT XP/villager/day 1.56 -> 1.64 (MISS on the 2x bar): the
+    denominator grew — more villagers alive longer (living at end 4.75 ->
+    7.13, survival 92 -> 100 days) — so the per-day rate is diluted even
+    though total XP rose. The 2x per-villager-day bar was too ambitious
+    given the denominator effect; the acquisition growth is real (total XP
+    +19%, thresholds +74%).
+  - B. ABILITY HOLDINGS — MIXED. Distinct abilities 9.75 -> 13.25 (+36%,
+    PASS). Abilities per living villager 3.61 -> 3.52 (MISS — flat): same
+    denominator effect (more living villagers, most of them new with few
+    abilities). The variety in the wild grew; the per-villager mean did not.
+  - C. RECOGNIZED HEALERS — MISS. Before 1 (seed 7), after 0 — and 0 in
+    EVERY daily sample, not just at the end. The fuel works (healing deed
+    credits 100 -> 537, 5.4x; craft L1 villagers 4 -> 14; craft L2 0 -> 3)
+    but the road stalls at the OFFER/PICK step: no villager reached craft
+    L3 (96 XP), healer abilities held 6 -> 5 (spread out, no one holds 3),
+    and the 3 villagers at L2 were offered healer abilities but did not
+    pick/hold them. Holding 3 healer abilities needs craft L4+ (192+ XP)
+    because the healer abilities sit at kit positions 4,5,9,14,18 — at
+    ~1-2 craft XP/day from healing, the 120-day horizon is too short for
+    the full road. The build fuels the road; it does not walk it to
+    recognition in 120 days. Follow-up (a Steve/main-session call, NOT
+    done here): surface healer abilities earlier in the craft kit order,
+    or a longer horizon.
+  - D. WAVE-4 SURVIVAL — MISS on rounds, with a real per-fight improvement
+    underneath. Rounds per fight 2.27 -> 2.26 (flat — the analyzer's
+    1.46/1.48 is a mean-of-seed-means diluted by zero-fight seeds; the
+    per-fight mean is the correct reading of the bar and it did not move).
+    BUT the per-fight death rate fell 55% -> 36% (6/11 -> 15/42), and the
+    fight count rose 11 -> 42 (villages live longer, more villagers alive,
+    so more wave-4 encounters). Absolute deaths rose (0.75 -> 1.88/seed)
+    because there are 3.8x more fights. The flee rate rose 36% -> 55% —
+    more fights end in flight, which caps rounds regardless of armor.
+    The controlled gear proof (staged reunion, same RNG: geared 2 rounds /
+    22 damage-per-round vs ungeared 1 round / 67) shows the retune's
+    per-fight effect is real; the wild rounds bar did not move because
+    staying (not armor) now binds. Kills not worse (0.13 -> 0.13/seed;
+    wave-4+ kill-log 1.00 -> 1.13).
+  - GUARDRAILS — PASS (survival 92.13 -> 99.63 days, wins 0.50 -> 0.63,
+    living at end 4.75 -> 7.13). Total deaths 55.88 -> 58.63 (up in
+    absolute terms; the death rate per villager-day is lower — more
+    villagers alive longer).
+  - MEASUREMENT GAP (own goal): the synergy's wild fire rate was NOT
+    instrumented — the driver wraps creditDeed but not creditSynergy, and
+    the teleEvents trailing sample shows 0 track_synergy events (a capped
+    300-entry window, not a census). The synergy fires in fixtures (proof
+    test 18/18) and total XP/thresholds rose, but the wild synergy count
+    is unmeasured. The driver should wrap creditSynergy in the next panel.
+  - Deed-mix moves worth noting: healing 100 -> 537, cooking 392 -> 629,
+    discovery 837 -> 1238, fight_won 712 -> 827, teaching 565 -> 630.
+    Crafting 151 -> 120 (down 20% — small, likely seed variance; the bot
+    crafted less). Hunting and trade still 0 in both arms (the actions
+    never complete in the capable panel — the measured gap reported above).
