@@ -2,7 +2,7 @@
 
 Verdict: **GO — LAND.** The dawn sweep line now states the unit
 count on every removal, pilot and fresh-seed confirm alike.
-Lever commit deec5d4d9 ([needs-eyes], narration change).
+Lever commit d78ec07dc ([needs-eyes], narration change).
 
 Worker: sim-sweepcount-a (RE-DISPATCH: the first worker on this arm
 died 11:19:51Z on a platform transport error, "sqlx error: pool
@@ -13,8 +13,10 @@ override, anchorOk true, formNamed true, countNamed false on the
 unmodified baseline, overnight line byte-identical to the spoilname
 evidence. Adopted as-is; no rewrite needed.)
 
-Base: master f72e4bd16. Prereg:
-`evidence/2026-11-05/sim-sweepcount-a-prereg.md` (commit e62001da5),
+Base: master f72e4bd16 (branch rebased onto 45c134fab, the
+batch-ship version bump, after the run — proofs re-run green
+post-rebase, spot check seed 15376 A+B). Prereg:
+`evidence/2026-11-05/sim-sweepcount-a-prereg.md` (commit c18033988),
 committed BEFORE any judged sim. Instrument:
 `scripts/test-sweepcount-a.js` (shared `scripts/sim-harness.js`
 kit, one seed + one stage per node process; TAG=before|after).
@@ -43,7 +45,7 @@ saving. You leave them for the flies." No rewording of the
 form-naming, no change to the it/them tail, no change to the
 pantry line, the corpse-rot line, or any other spoil line. No
 gates, prices, deed bars, or other systems touched. Commit
-deec5d4d9 carries [needs-eyes] (narration change).
+d78ec07dc carries [needs-eyes] (narration change).
 
 Canon: docs/PRESERVATION.md prescribes the preservation ladder
 and "spoiled meat is discarded honestly" but no sweep wording —
@@ -123,7 +125,7 @@ sweeps both behave. No clanking, no grammar break.
   by this one-line change. Change restored and verified after
   the baseline runs (`node --check` passes, count insertion
   present).
-- Commits: prereg + instrument e62001da5; lever deec5d4d9
+- Commits: prereg + instrument c18033988; lever d78ec07dc
   ([needs-eyes]).
 - Index-clobber repair applied after BOTH safe-commit.sh
   commits (commit correct throughout; index showed
