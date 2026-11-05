@@ -207,5 +207,5 @@ secondkiller.
 - `9e11d8747` prereg Amendment 2
 - `65e100beb` Amendment-2 fixes (TB per-round dealt/taken, scholar kill
   match, scholar-first fighters) + proof 35/35
-- (evidence commit: this note + R1/R2 per-seed data + prereg metric
-  review — hash to fill on commit)
+- `5339f891e` evidence: this note + R1/R2 per-seed data + prereg
+  metric review
