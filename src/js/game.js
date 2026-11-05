@@ -34611,17 +34611,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // restored, so bumping into a lingerer and running cleared it from the
       // world and the endure/sortie choice never got its say.
       if (_origin && _originIsFighter && (_origin.titan || _origin.lingering) && this.tbfight) this.tbfight.worldOrigin = _origin;
-      // TBRETREAT (sim-tbretreat-b 2026-11-05, default OFF via
-      // TBRETREAT_RESTORE=1): an ordinary wild tile monster the
-      // fighter may withdraw from is remembered the same way, so
-      // tbEnd can put it back wounded on its own tile instead of
-      // deleting the grind's progress. Titans/lingerers keep
-      // worldOrigin; this is a separate field and never touches their
-      // path. The monster never flees — only the fighter withdraws
-      // (Steve 2026-11-02).
-      if (_origin && _originIsFighter && !(_origin.titan || _origin.lingering) && this.tbfight) {
-        try { if (typeof process !== 'undefined' && process.env && process.env.TBRETREAT_RESTORE === '1') this.tbfight.tbRetreatOrigin = _origin; } catch (e) {}
-      }
       const partyNames = fighters.filter(f => f.kind === 'villager').map(f => f.name);
       const dispName = this.monsterDisplayName(mdef.id);
       this.say(`⚔ ${dispName.toUpperCase()}!${count > 1 ? ` (${count} of them!)` : ''} ${partyNames.length ? partyNames.join(', ') + (partyNames.length > 1 ? ' join' : ' joins') + ' you!' : "You're on your own."}`);
@@ -45621,36 +45610,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
         }
       } catch (e) { console.warn('[titan] piece restore', e); }
-      // TBRETREAT (sim-tbretreat-b 2026-11-05, default OFF via
-      // TBRETREAT_RESTORE=1): a wave-4+ wild tile monster the fighter
-      // WITHDREW from ('fled') stays wounded on its own tile — the
-      // village can re-find it there and the grind continues without
-      // a death. The monster never flees (Steve 2026-11-02); only the
-      // fighter withdraws. 'lost' does NOT restore (out of scope:
-      // the grind's price for a death is unchanged). Door-flee
-      // stashes own preservation (doorFledMonsters) and are skipped,
-      // so one beast is never preserved twice. Titans/lingerers are
-      // already restored above via worldOrigin and never reach this
-      // branch (tbRetreatOrigin is never recorded for them).
-      try {
-        const _trOn = (typeof process !== 'undefined' && process.env && process.env.TBRETREAT_RESTORE === '1');
-        const _trO = _trOn ? (f.tbRetreatOrigin || null) : null;
-        if (_trO && result === 'fled' && !f.worldOrigin) {
-          const _trMine = (f.fighters || []).filter(x => x && x.kind === 'monster' && (((x.mdef || {}).id || x.monsterId || x.id) === _trO.id));
-          const _trStanding = _trMine.filter(x => x.alive && (x.hp || 0) > 0);
-          const _trWave = (_trMine[0] && _trMine[0].mdef && (_trMine[0].mdef.wave | 0)) || null;
-          const _trStash = (((this.state || {}).doorFledMonsters) || []).some(w => w && w.id === _trO.id);
-          if (_trWave != null && _trWave >= 4 && _trStanding.length > 0 && !_trStash &&
-              this.worldMonsters().indexOf(_trO) < 0 && !this.monsterAt(_trO.tx, _trO.ty)) {
-            const _trPreHp = (_trO.hp != null && isFinite(_trO.hp)) ? _trO.hp : (_trO.maxHp || 1);
-            _trO.hp = Math.max(1, Math.min(_trPreHp, (_trStanding[0] && _trStanding[0].hp) || 1));
-            this.worldMonsters().push(_trO);
-            this.touchTileScene(_trO.tx, _trO.ty);
-            this.syncMonsterAlias();
-            this.say(`You slip away — it stays where you left it, bleeding. You know the ground; you can find it again.`);
-          }
-        }
-      } catch (e) { console.warn('[tbretreat] restore', e); }
       // UNIFIED TRACKS (2026-10-14): snapshot before the narration clears it —
       // facing an alien player is System contact (strange track).
       let _alienFight = false;
