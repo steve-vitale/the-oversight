@@ -1,5 +1,12 @@
-// Journey leg: LANDING R105 (2026-11-05) -- R104 CARRY, NO POLICY CHANGE:
-// R104 driver verbatim except seeds 877-886, OUTDIR landing-r105, header.
+// Journey leg: LANDING R105 (2026-11-05) -- R104 CARRY + R105-DOORSTEP-DRINK-ENTRY FIX:
+// R104 driver verbatim except seeds 877-886, OUTDIR landing-r105, header,
+// PLUS the R105 fix below (driver-only, zero src/js): guardEatOnArrival's
+// door step entered the hall only when needEat — the water branch never
+// entered, so r105 seed 883's fed scholar sat at Haven hyd 0 for 3 days
+// (d26-28) with 22+ clean liters in the village while fillWater silently
+// refused off-tile (filled=true was recorded unconditionally; bottles
+// stayed 0, drinks 0). The gate is now (needEat || needDrink) and filled
+// records only bottles actually gained. Proof: scripts/test-landing-r105-doorstep-drink-entry.js.
 // Carried: R104 WINPLAN instrument + R104-GOAROUND rescue rungs (bridge +
 // BFS detour) + R104-PROBE gate; Q1 GOAL-LIVE at d14 (5/10 seeds, 13
 // planSeeds, 16 holders); water clause untested (16 runs); doorstep GO.
@@ -2691,13 +2698,21 @@ async function runSeed(seed) {
       const needDrink = (sc.hydration || 0) < 25;
       rec.eatTriggered = needEat; rec.drinkTriggered = needDrink;
       // Door step: at the node but outside -> step inside so the pantry
-      // is reachable. Skipped when already inside, in a tent, or (for
-      // the water branch with no eat need) when nothing needs stores.
+      // is reachable. Skipped when already inside or in a tent.
+      // R105-DOORSTEP-DRINK-ENTRY: the gate used to be needEat only —
+      // the water branch was assumed to need no stores. r105 seed 883
+      // disproves that: a fed scholar (kcal 2272) sat at Haven hyd 0
+      // for 3 days (d26-28) with 22+ clean liters in the village;
+      // fillWater outside the hall silently added no bottles
+      // (filled=true recorded, bottles 0->0, drinks 0, hyd 0->0) because
+      // the cistern water is reachable only inside. A competent player
+      // who is thirsty at home walks inside and drinks. Enter whenever
+      // eating OR drinking is needed.
       // R89-LASTTILE: playerAtHaven() is a Manhattan-<=1 radius, but
       // enterBuilding requires the haven TILE — a scholar on an adjacent
       // tile (r89 Leonard d9-d16) gets enterResult=false daily while the
       // doorstep keeps firing. Walk the last tile first; record it.
-      if (needEat && !rec.insideBefore && !sc.insideTent) {
+      if ((needEat || needDrink) && !rec.insideBefore && !sc.insideTent) {
         try {
           const homeLT = outingHomePoint();
           if (Game.map.px !== homeLT.x || Game.map.py !== homeLT.y) {
@@ -2758,7 +2773,15 @@ async function runSeed(seed) {
           const t = Game.playerTile ? Game.playerTile() : null;
           let atH = false; try { atH = Game.playerAtHaven ? Game.playerAtHaven() : false; } catch (e) {}
           if ((t && /creek|well|spring|river|pond|haven/i.test(t.type || '') || atH) && (((Game.state.scholar && Game.state.scholar.water) || []).length < 3)) {
-            try { Game.fillWater(); rec.filled = true; } catch (e) { rec.fillError = String(e && e.message).slice(0, 80); }
+            // R105-DOORSTEP-DRINK-ENTRY: fillWater refuses silently
+            // (returns null, "No water here") off a water tile — the old
+            // code recorded filled=true unconditionally, so r105 seed 883
+            // showed filled=true with bottles 0->0 and no drink. Record
+            // only bottles actually gained.
+            let b0 = 0; try { b0 = ((Game.state.scholar && Game.state.scholar.water) || []).length; } catch (e) {}
+            try { Game.fillWater(); } catch (e) { rec.fillError = String(e && e.message).slice(0, 80); }
+            let b1 = b0; try { b1 = ((Game.state.scholar && Game.state.scholar.water) || []).length; } catch (e) {}
+            rec.filled = b1 > b0; rec.filledBottles = b1 - b0;
           }
         } catch (e) {}
         while (((Game.state.scholar && Game.state.scholar.hydration) || 0) < 70 && drinks < 3 && ((Game.state.scholar && Game.state.scholar.water) || []).length) {
