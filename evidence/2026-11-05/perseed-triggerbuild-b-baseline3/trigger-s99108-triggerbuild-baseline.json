@@ -1,0 +1,8950 @@
+{
+  "seed": 99108,
+  "arm": "trigger",
+  "run": "triggerbuild-baseline",
+  "anchorCommit": "b9bd0a01da95",
+  "instrumentOff": false,
+  "days": 48,
+  "gameDays": 48,
+  "endReason": "village-lost",
+  "won": false,
+  "over": true,
+  "villageLost": true,
+  "scaleRank": "village",
+  "maxWave": 3,
+  "unlockedWave": 3,
+  "standing": 20,
+  "readiness5": {
+    "wave": 5,
+    "ready": false,
+    "armored": 3,
+    "armed": 3,
+    "tricks": 19,
+    "veterans": 0,
+    "demand": {
+      "armored": 4,
+      "armorP": 15,
+      "armed": 6,
+      "tricks": 3,
+      "veterans": 2
+    },
+    "short": [
+      "armor",
+      "weapons",
+      "veterans"
+    ]
+  },
+  "spawns": [
+    {
+      "idx": 1,
+      "seq": 1,
+      "day": 3,
+      "id": "speedbump_turtle",
+      "wave": 1,
+      "tx": 2,
+      "ty": 1,
+      "mx": 3,
+      "my": 6,
+      "px": 3,
+      "py": 4,
+      "dist": 4,
+      "onPlayerTile": false,
+      "source": "background",
+      "stackFn": "Object.maintainWorldMonsters",
+      "veteran": false
+    },
+    {
+      "idx": 4,
+      "seq": 2,
+      "day": 3,
+      "id": "mirrormoth",
+      "wave": 1,
+      "tx": 3,
+      "ty": 3,
+      "mx": 3,
+      "my": 8,
+      "px": 4,
+      "py": 4,
+      "dist": 2,
+      "onPlayerTile": false,
+      "source": "background",
+      "stackFn": "Object.maintainWorldMonsters",
+      "veteran": false
+    },
+    {
+      "idx": 5,
+      "seq": 3,
+      "day": 4,
+      "id": "cliffhanger",
+      "wave": 1,
+      "tx": 7,
+      "ty": 4,
+      "mx": 0,
+      "my": 5,
+      "px": 3,
+      "py": 4,
+      "dist": 4,
+      "onPlayerTile": false,
+      "source": "background",
+      "stackFn": "Object.maintainWorldMonsters",
+      "veteran": false
+    },
+    {
+      "idx": 6,
+      "seq": 4,
+      "day": 4,
+      "id": "nightlight_catfish",
+      "wave": 1,
+      "tx": 8,
+      "ty": 7,
+      "mx": 8,
+      "my": 8,
+      "px": 5,
+      "py": 4,
+      "dist": 6,
+      "onPlayerTile": false,
+      "source": "background",
+      "stackFn": "Object.maintainWorldMonsters",
+      "veteran": false
+    },
+    {
+      "idx": 8,
+      "seq": 5,
+      "day": 5,
+      "id": "nevermore",
+      "wave": 1,
+      "tx": 4,
+      "ty": 1,
+      "mx": 5,
+      "my": 2,
+      "px": 4,
+      "py": 1,
+      "dist": 0,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "stackFn": "Object.checkEncounter",
+      "veteran": false
+    },
+    {
+      "idx": 14,
+      "seq": 6,
+      "day": 5,
+      "id": "dustboar",
+      "wave": 1,
+      "tx": 0,
+      "ty": 1,
+      "mx": 3,
+      "my": 4,
+      "px": 0,
+      "py": 1,
+      "dist": 0,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "stackFn": "Object.checkEncounter",
+      "veteran": false
+    },
+    {
+      "idx": 19,
+      "seq": 7,
+      "day": 6,
+      "id": "anaconda_empress",
+      "wave": 1,
+      "tx": 5,
+      "ty": 5,
+      "mx": 5,
+      "my": 6,
+      "px": 0,
+      "py": 0,
+      "dist": 10,
+      "onPlayerTile": false,
+      "source": "background",
+      "stackFn": "Object.maintainWorldMonsters",
+      "veteran": false
+    },
+    {
+      "idx": 22,
+      "seq": 8,
+      "day": 7,
+      "id": "lockpick_raccoon",
+      "wave": 1,
+      "tx": 1,
+      "ty": 1,
+      "mx": 6,
+      "my": 2,
+      "px": 1,
+      "py": 1,
+      "dist": 0,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "stackFn": "Object.checkEncounter",
+      "veteran": false
+    },
+    {
+      "idx": 35,
+      "seq": 9,
+      "day": 8,
+      "id": "alien_tick",
+      "wave": 2,
+      "tx": 2,
+      "ty": 1,
+      "mx": 6,
+      "my": 2,
+      "px": 1,
+      "py": 0,
+      "dist": 2,
+      "onPlayerTile": false,
+      "source": "background",
+      "stackFn": "Object.maintainWorldMonsters",
+      "veteran": false
+    },
+    {
+      "idx": 36,
+      "seq": 10,
+      "day": 8,
+      "id": "speedbump_turtle",
+      "wave": 1,
+      "tx": 3,
+      "ty": 3,
+      "mx": 0,
+      "my": 3,
+      "px": 0,
+      "py": 1,
+      "dist": 5,
+      "onPlayerTile": false,
+      "source": "background",
+      "stackFn": "Object.maintainWorldMonsters",
+      "veteran": false
+    },
+    {
+      "idx": 37,
+      "seq": 11,
+      "day": 8,
+      "id": "alien_tick",
+      "wave": 2,
+      "tx": 1,
+      "ty": 1,
+      "mx": 1,
+      "my": 2,
+      "px": 2,
+      "py": 1,
+      "dist": 1,
+      "onPlayerTile": false,
+      "source": "background",
+      "stackFn": "Object.maintainWorldMonsters",
+      "veteran": false
+    },
+    {
+      "idx": 39,
+      "seq": 12,
+      "day": 8,
+      "id": "ducks_in_a_row",
+      "wave": 1,
+      "tx": 8,
+      "ty": 4,
+      "mx": 0,
+      "my": 5,
+      "px": 1,
+      "py": 1,
+      "dist": 10,
+      "onPlayerTile": false,
+      "source": "background",
+      "stackFn": "Object.maintainWorldMonsters",
+      "veteran": false
+    },
+    {
+      "idx": 43,
+      "seq": 13,
+      "day": 9,
+      "id": "understudy",
+      "wave": 2,
+      "tx": 0,
+      "ty": 5,
+      "mx": 7,
+      "my": 3,
+      "px": 2,
+      "py": 1,
+      "dist": 6,
+      "onPlayerTile": false,
+      "source": "background",
+      "stackFn": "Object.maintainWorldMonsters",
+      "veteran": false
+    },
+    {
+      "idx": 44,
+      "seq": 14,
+      "day": 9,
+      "id": "paparazzo",
+      "wave": 2,
+      "tx": 1,
+      "ty": 0,
+      "mx": 0,
+      "my": 4,
+      "px": 2,
+      "py": 2,
+      "dist": 3,
+      "onPlayerTile": false,
+      "source": "background",
+      "stackFn": "Object.maintainWorldMonsters",
+      "veteran": false
+    },
+    {
+      "idx": 45,
+      "seq": 15,
+      "day": 9,
+      "id": "bright_idea",
+      "wave": 2,
+      "tx": 3,
+      "ty": 1,
+      "mx": 6,
+      "my": 6,
+      "px": 4,
+      "py": 3,
+      "dist": 3,
+      "onPlayerTile": false,
+      "source": "background",
+      "stackFn": "Object.maintainWorldMonsters",
+      "veteran": false
+    },
+    {
+      "idx": 47,
+      "seq": 16,
+      "day": 10,
+      "id": "rut_king",
+      "wave": 1,
+      "tx": 3,
+      "ty": 4,
+      "mx": 6,
+      "my": 3,
+      "px": 3,
+      "py": 4,
+      "dist": 0,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "stackFn": "Object.checkEncounter",
+      "veteran": false
+    },
+    {
+      "idx": 54,
+      "seq": 17,
+      "day": 11,
+      "id": "bright_idea",
+      "wave": 2,
+      "tx": 3,
+      "ty": 4,
+      "mx": 2,
+      "my": 5,
+      "px": 3,
+      "py": 4,
+      "dist": 0,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "stackFn": "Object.checkEncounter",
+      "veteran": false
+    },
+    {
+      "idx": 59,
+      "seq": 18,
+      "day": 14,
+      "id": "nightcourt",
+      "wave": 1,
+      "tx": 5,
+      "ty": 4,
+      "mx": 6,
+      "my": 5,
+      "px": 5,
+      "py": 4,
+      "dist": 0,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "stackFn": "Object.checkEncounter",
+      "veteran": false
+    },
+    {
+      "idx": 61,
+      "seq": 19,
+      "day": 15,
+      "id": "union_rep",
+      "wave": 2,
+      "tx": 4,
+      "ty": 3,
+      "mx": 6,
+      "my": 3,
+      "px": 3,
+      "py": 4,
+      "dist": 2,
+      "onPlayerTile": false,
+      "source": "background",
+      "stackFn": "Object.maintainWorldMonsters",
+      "veteran": false
+    },
+    {
+      "idx": 65,
+      "seq": 20,
+      "day": 16,
+      "id": "anaconda_empress",
+      "wave": 1,
+      "tx": 5,
+      "ty": 8,
+      "mx": 5,
+      "my": 0,
+      "px": 3,
+      "py": 4,
+      "dist": 6,
+      "onPlayerTile": false,
+      "source": "background",
+      "stackFn": "Object.maintainWorldMonsters",
+      "veteran": false
+    },
+    {
+      "idx": 71,
+      "seq": 21,
+      "day": 16,
+      "id": "anaconda_empress",
+      "wave": 1,
+      "tx": 4,
+      "ty": 7,
+      "mx": 4,
+      "my": 3,
+      "px": 4,
+      "py": 4,
+      "dist": 3,
+      "onPlayerTile": false,
+      "source": "background",
+      "stackFn": "Object.maintainWorldMonsters",
+      "veteran": false
+    },
+    {
+      "idx": 72,
+      "seq": 22,
+      "day": 16,
+      "id": "hushwolf",
+      "wave": 1,
+      "tx": 5,
+      "ty": 4,
+      "mx": 5,
+      "my": 7,
+      "px": 4,
+      "py": 4,
+      "dist": 1,
+      "onPlayerTile": false,
+      "source": "other",
+      "stackFn": "Object.evQuietWoods",
+      "veteran": false
+    },
+    {
+      "idx": 73,
+      "seq": 23,
+      "day": 16,
+      "id": "hushwolf",
+      "wave": 1,
+      "tx": 5,
+      "ty": 4,
+      "mx": 7,
+      "my": 7,
+      "px": 4,
+      "py": 4,
+      "dist": 1,
+      "onPlayerTile": false,
+      "source": "other",
+      "stackFn": "Object.evQuietWoods",
+      "veteran": false
+    },
+    {
+      "idx": 74,
+      "seq": 24,
+      "day": 16,
+      "id": "hushwolf",
+      "wave": 1,
+      "tx": 5,
+      "ty": 4,
+      "mx": 7,
+      "my": 5,
+      "px": 4,
+      "py": 4,
+      "dist": 1,
+      "onPlayerTile": false,
+      "source": "other",
+      "stackFn": "Object.evQuietWoods",
+      "veteran": false
+    },
+    {
+      "idx": 82,
+      "seq": 25,
+      "day": 18,
+      "id": "murkcap",
+      "wave": 1,
+      "tx": 3,
+      "ty": 4,
+      "mx": 6,
+      "my": 3,
+      "px": 3,
+      "py": 4,
+      "dist": 0,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "stackFn": "Object.checkEncounter",
+      "veteran": false
+    },
+    {
+      "idx": 92,
+      "seq": 26,
+      "day": 19,
+      "id": "paparazzo",
+      "wave": 2,
+      "tx": 5,
+      "ty": 2,
+      "mx": 3,
+      "my": 2,
+      "px": 4,
+      "py": 5,
+      "dist": 4,
+      "onPlayerTile": false,
+      "source": "background",
+      "stackFn": "Object.maintainWorldMonsters",
+      "veteran": false
+    },
+    {
+      "idx": 93,
+      "seq": 27,
+      "day": 20,
+      "id": "understudy",
+      "wave": 2,
+      "tx": 0,
+      "ty": 8,
+      "mx": 0,
+      "my": 1,
+      "px": 5,
+      "py": 4,
+      "dist": 9,
+      "onPlayerTile": false,
+      "source": "checkEncounter",
+      "stackFn": "Object.checkEncounter",
+      "veteran": false
+    },
+    {
+      "idx": 102,
+      "seq": 28,
+      "day": 23,
+      "id": "ducks_in_a_row",
+      "wave": 1,
+      "tx": 0,
+      "ty": 1,
+      "mx": 8,
+      "my": 4,
+      "px": 4,
+      "py": 4,
+      "dist": 7,
+      "onPlayerTile": false,
+      "source": "background",
+      "stackFn": "Object.maintainWorldMonsters",
+      "veteran": false
+    },
+    {
+      "idx": 107,
+      "seq": 29,
+      "day": 25,
+      "id": "spool",
+      "wave": 3,
+      "tx": 6,
+      "ty": 3,
+      "mx": 2,
+      "my": 6,
+      "px": 3,
+      "py": 4,
+      "dist": 4,
+      "onPlayerTile": false,
+      "source": "background",
+      "stackFn": "Object.maintainWorldMonsters",
+      "veteran": false
+    },
+    {
+      "idx": 110,
+      "seq": 30,
+      "day": 25,
+      "id": "spool",
+      "wave": 3,
+      "tx": 0,
+      "ty": 4,
+      "mx": 1,
+      "my": 1,
+      "px": 4,
+      "py": 4,
+      "dist": 4,
+      "onPlayerTile": false,
+      "source": "background",
+      "stackFn": "Object.maintainWorldMonsters",
+      "veteran": false
+    },
+    {
+      "idx": 113,
+      "seq": 31,
+      "day": 26,
+      "id": "redactor",
+      "wave": 3,
+      "tx": 5,
+      "ty": 4,
+      "mx": 3,
+      "my": 4,
+      "px": 5,
+      "py": 4,
+      "dist": 0,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "stackFn": "Object.checkEncounter",
+      "veteran": false
+    },
+    {
+      "idx": 118,
+      "seq": 32,
+      "day": 29,
+      "id": "giant_mosquito",
+      "wave": 2,
+      "tx": 3,
+      "ty": 4,
+      "mx": 4,
+      "my": 2,
+      "px": 3,
+      "py": 4,
+      "dist": 0,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "stackFn": "Object.checkEncounter",
+      "veteran": false
+    },
+    {
+      "idx": 126,
+      "seq": 33,
+      "day": 33,
+      "id": "paparazzo",
+      "wave": 2,
+      "tx": 3,
+      "ty": 4,
+      "mx": 4,
+      "my": 6,
+      "px": 3,
+      "py": 4,
+      "dist": 0,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "stackFn": "Object.checkEncounter",
+      "veteran": false
+    },
+    {
+      "idx": 143,
+      "seq": 34,
+      "day": 36,
+      "id": "hummice",
+      "wave": 1,
+      "tx": 6,
+      "ty": 2,
+      "mx": 6,
+      "my": 8,
+      "px": 3,
+      "py": 4,
+      "dist": 5,
+      "onPlayerTile": false,
+      "source": "background",
+      "stackFn": "Object.maintainWorldMonsters",
+      "veteran": false
+    },
+    {
+      "idx": 145,
+      "seq": 35,
+      "day": 36,
+      "id": "giant_mosquito",
+      "wave": 2,
+      "tx": 5,
+      "ty": 5,
+      "mx": 6,
+      "my": 0,
+      "px": 4,
+      "py": 4,
+      "dist": 2,
+      "onPlayerTile": false,
+      "source": "background",
+      "stackFn": "Object.maintainWorldMonsters",
+      "veteran": false
+    },
+    {
+      "idx": 147,
+      "seq": 36,
+      "day": 38,
+      "id": "living_wire",
+      "wave": 1,
+      "tx": 5,
+      "ty": 4,
+      "mx": 2,
+      "my": 6,
+      "px": 5,
+      "py": 4,
+      "dist": 0,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "stackFn": "Object.checkEncounter",
+      "veteran": false
+    },
+    {
+      "idx": 163,
+      "seq": 37,
+      "day": 47,
+      "id": "paparazzo",
+      "wave": 2,
+      "tx": 8,
+      "ty": 2,
+      "mx": 1,
+      "my": 4,
+      "px": 3,
+      "py": 4,
+      "dist": 7,
+      "onPlayerTile": false,
+      "source": "background",
+      "stackFn": "Object.maintainWorldMonsters",
+      "veteran": false
+    },
+    {
+      "idx": 165,
+      "seq": 38,
+      "day": 47,
+      "id": "callback",
+      "wave": 3,
+      "tx": 8,
+      "ty": 4,
+      "mx": 7,
+      "my": 4,
+      "px": 5,
+      "py": 4,
+      "dist": 3,
+      "onPlayerTile": false,
+      "source": "background",
+      "stackFn": "Object.maintainWorldMonsters",
+      "veteran": false
+    },
+    {
+      "idx": 167,
+      "seq": 39,
+      "day": 47,
+      "id": "sanjun",
+      "wave": 1,
+      "tx": 0,
+      "ty": 6,
+      "mx": 4,
+      "my": 4,
+      "px": 4,
+      "py": 5,
+      "dist": 5,
+      "onPlayerTile": false,
+      "source": "background",
+      "stackFn": "Object.maintainWorldMonsters",
+      "veteran": false
+    },
+    {
+      "idx": 169,
+      "seq": 40,
+      "day": 48,
+      "id": "redactor",
+      "wave": 3,
+      "tx": 5,
+      "ty": 4,
+      "mx": 3,
+      "my": 5,
+      "px": 5,
+      "py": 4,
+      "dist": 0,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "stackFn": "Object.checkEncounter",
+      "veteran": false
+    }
+  ],
+  "removals": [
+    {
+      "idx": 11,
+      "seq": 2,
+      "day": 5,
+      "id": "mirrormoth",
+      "stackFn": "Object.resolveWildMonsterEncounter",
+      "rclass": "fight-settlement"
+    },
+    {
+      "idx": 13,
+      "seq": 4,
+      "day": 5,
+      "id": "nightlight_catfish",
+      "stackFn": "Object.resolveWildMonsterEncounter",
+      "rclass": "fight-settlement"
+    },
+    {
+      "idx": 17,
+      "seq": 6,
+      "day": 5,
+      "id": "dustboar",
+      "stackFn": "Object.monsterTurn",
+      "rclass": "monsterTurn"
+    },
+    {
+      "idx": 26,
+      "seq": 7,
+      "day": 7,
+      "id": "anaconda_empress",
+      "stackFn": "Object.resolveWildMonsterEncounter",
+      "rclass": "fight-settlement"
+    },
+    {
+      "idx": 28,
+      "seq": 3,
+      "day": 7,
+      "id": "cliffhanger",
+      "stackFn": "Object.resolveWildMonsterEncounter",
+      "rclass": "fight-settlement"
+    },
+    {
+      "idx": 30,
+      "seq": 5,
+      "day": 7,
+      "id": "nevermore",
+      "stackFn": "Object.resolveWildMonsterEncounter",
+      "rclass": "fight-settlement"
+    },
+    {
+      "idx": 32,
+      "seq": 1,
+      "day": 7,
+      "id": "speedbump_turtle",
+      "stackFn": "Object.resolveWildMonsterEncounter",
+      "rclass": "fight-settlement"
+    },
+    {
+      "idx": 33,
+      "seq": 8,
+      "day": 8,
+      "id": "lockpick_raccoon",
+      "stackFn": "Object.startCombat",
+      "rclass": "fight-settlement"
+    },
+    {
+      "idx": 41,
+      "seq": 11,
+      "day": 8,
+      "id": "alien_tick",
+      "stackFn": "Object.monsterTurn",
+      "rclass": "monsterTurn"
+    },
+    {
+      "idx": 53,
+      "seq": 16,
+      "day": 10,
+      "id": "rut_king",
+      "stackFn": "Object.resolveWildMonsterEncounter",
+      "rclass": "fight-settlement"
+    },
+    {
+      "idx": 58,
+      "seq": 9,
+      "day": 13,
+      "id": "alien_tick",
+      "stackFn": "Object.resolveWildMonsterEncounter",
+      "rclass": "fight-settlement"
+    },
+    {
+      "idx": 68,
+      "seq": 10,
+      "day": 16,
+      "id": "speedbump_turtle",
+      "stackFn": "Object.resolveWildMonsterEncounter",
+      "rclass": "fight-settlement"
+    },
+    {
+      "idx": 70,
+      "seq": 12,
+      "day": 16,
+      "id": "ducks_in_a_row",
+      "stackFn": "Object.resolveWildMonsterEncounter",
+      "rclass": "fight-settlement"
+    },
+    {
+      "idx": 76,
+      "seq": 17,
+      "day": 17,
+      "id": "bright_idea",
+      "stackFn": "Object.resolveWildMonsterEncounter",
+      "rclass": "fight-settlement"
+    },
+    {
+      "idx": 86,
+      "seq": 18,
+      "day": 18,
+      "id": "nightcourt",
+      "stackFn": "Object.resolveWildMonsterEncounter",
+      "rclass": "fight-settlement"
+    },
+    {
+      "idx": 89,
+      "seq": 23,
+      "day": 19,
+      "id": "hushwolf",
+      "stackFn": "Object.resolveWildMonsterEncounter",
+      "rclass": "fight-settlement"
+    },
+    {
+      "idx": 91,
+      "seq": 19,
+      "day": 19,
+      "id": "union_rep",
+      "stackFn": "Object.resolveWildMonsterEncounter",
+      "rclass": "fight-settlement"
+    },
+    {
+      "idx": 98,
+      "seq": 24,
+      "day": 23,
+      "id": "hushwolf",
+      "stackFn": "Object.startCombat",
+      "rclass": "fight-settlement"
+    },
+    {
+      "idx": 101,
+      "seq": 22,
+      "day": 23,
+      "id": "hushwolf",
+      "stackFn": "Object.resolveWildMonsterEncounter",
+      "rclass": "fight-settlement"
+    },
+    {
+      "idx": 106,
+      "seq": 15,
+      "day": 24,
+      "id": "bright_idea",
+      "stackFn": "Object.resolveWildMonsterEncounter",
+      "rclass": "fight-settlement"
+    },
+    {
+      "idx": 109,
+      "seq": 20,
+      "day": 25,
+      "id": "anaconda_empress",
+      "stackFn": "Object.resolveWildMonsterEncounter",
+      "rclass": "fight-settlement"
+    },
+    {
+      "idx": 131,
+      "seq": 32,
+      "day": 33,
+      "id": "giant_mosquito",
+      "stackFn": "Object.resolveWildMonsterEncounter",
+      "rclass": "fight-settlement"
+    },
+    {
+      "idx": 134,
+      "seq": 33,
+      "day": 34,
+      "id": "paparazzo",
+      "stackFn": "Object.resolveWildMonsterEncounter",
+      "rclass": "fight-settlement"
+    },
+    {
+      "idx": 136,
+      "seq": 13,
+      "day": 34,
+      "id": "understudy",
+      "stackFn": "Object.resolveWildMonsterEncounter",
+      "rclass": "fight-settlement"
+    },
+    {
+      "idx": 139,
+      "seq": 29,
+      "day": 35,
+      "id": "spool",
+      "stackFn": "Object.startCombat",
+      "rclass": "fight-settlement"
+    },
+    {
+      "idx": 141,
+      "seq": 31,
+      "day": 35,
+      "id": "redactor",
+      "stackFn": "Object.startCombat",
+      "rclass": "fight-settlement"
+    },
+    {
+      "idx": 154,
+      "seq": 28,
+      "day": 46,
+      "id": "ducks_in_a_row",
+      "stackFn": "Object.resolveWildMonsterEncounter",
+      "rclass": "fight-settlement"
+    },
+    {
+      "idx": 156,
+      "seq": 35,
+      "day": 46,
+      "id": "giant_mosquito",
+      "stackFn": "Object.resolveWildMonsterEncounter",
+      "rclass": "fight-settlement"
+    },
+    {
+      "idx": 159,
+      "seq": 34,
+      "day": 46,
+      "id": "hummice",
+      "stackFn": "Object.resolveWildMonsterEncounter",
+      "rclass": "fight-settlement"
+    },
+    {
+      "idx": 160,
+      "seq": 14,
+      "day": 47,
+      "id": "paparazzo",
+      "stackFn": "Object.startCombat",
+      "rclass": "fight-settlement"
+    }
+  ],
+  "casts": [
+    {
+      "idx": 2,
+      "day": 3,
+      "id": "lockpick_raccoon",
+      "wave": 1,
+      "veteran": false,
+      "source": "wanderer-cast",
+      "stackFn": "Object.checkEncounter"
+    },
+    {
+      "idx": 49,
+      "day": 10,
+      "id": "paparazzo",
+      "wave": 2,
+      "veteran": false,
+      "source": "wanderer-cast",
+      "stackFn": "Object.checkEncounter"
+    },
+    {
+      "idx": 77,
+      "day": 17,
+      "id": "understudy",
+      "wave": 2,
+      "veteran": false,
+      "source": "wanderer-cast",
+      "stackFn": "Object.checkEncounter"
+    },
+    {
+      "idx": 103,
+      "day": 24,
+      "id": "paparazzo",
+      "wave": 2,
+      "veteran": false,
+      "source": "wanderer-cast",
+      "stackFn": "Object.checkEncounter"
+    },
+    {
+      "idx": 111,
+      "day": 26,
+      "id": "sanjun",
+      "wave": 1,
+      "veteran": true,
+      "source": "other",
+      "stackFn": "Object.drawFeastScavenger"
+    },
+    {
+      "idx": 123,
+      "day": 32,
+      "id": "redactor",
+      "wave": 3,
+      "veteran": false,
+      "source": "wanderer-cast",
+      "stackFn": "Object.checkEncounter"
+    },
+    {
+      "idx": 149,
+      "day": 39,
+      "id": "spool",
+      "wave": 3,
+      "veteran": false,
+      "source": "wanderer-cast",
+      "stackFn": "Object.checkEncounter"
+    },
+    {
+      "idx": 151,
+      "day": 46,
+      "id": "buffering",
+      "wave": 3,
+      "veteran": false,
+      "source": "wanderer-cast",
+      "stackFn": "Object.checkEncounter"
+    }
+  ],
+  "fights": [
+    {
+      "idx": 7,
+      "day": 5,
+      "channel": "field",
+      "fighter": "gen_21ysxqq",
+      "mid": "mirrormoth",
+      "wave": 1,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "mFlee",
+      "cls": "world",
+      "seq": 2
+    },
+    {
+      "idx": 10,
+      "day": 5,
+      "channel": "field",
+      "fighter": "gen_anmt6e3",
+      "mid": "mirrormoth",
+      "wave": 1,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "vKill",
+      "cls": "world",
+      "seq": 2
+    },
+    {
+      "idx": 12,
+      "day": 5,
+      "channel": "field",
+      "fighter": "chantal_mukendi",
+      "mid": "nightlight_catfish",
+      "wave": 1,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "vKill",
+      "cls": "world",
+      "seq": 4
+    },
+    {
+      "idx": 21,
+      "day": 6,
+      "channel": "field",
+      "fighter": "catalina_reyes",
+      "mid": "dustboar",
+      "wave": 1,
+      "optsKeys": [
+        "allies",
+        "allyVids",
+        "awareness"
+      ],
+      "outcome": "evade",
+      "cls": "other",
+      "seq": null
+    },
+    {
+      "idx": 24,
+      "day": 7,
+      "channel": "field",
+      "fighter": "catalina_reyes",
+      "mid": "lockpick_raccoon",
+      "wave": 1,
+      "optsKeys": [
+        "allies",
+        "allyVids",
+        "awareness"
+      ],
+      "outcome": "mFlee",
+      "cls": "other",
+      "seq": null
+    },
+    {
+      "idx": 25,
+      "day": 7,
+      "channel": "field",
+      "fighter": "gen_ieyw2p8",
+      "mid": "anaconda_empress",
+      "wave": 1,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "vKill",
+      "cls": "world",
+      "seq": 7
+    },
+    {
+      "idx": 27,
+      "day": 7,
+      "channel": "field",
+      "fighter": "gen_anmt6e3",
+      "mid": "cliffhanger",
+      "wave": 1,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "vKill",
+      "cls": "world",
+      "seq": 3
+    },
+    {
+      "idx": 29,
+      "day": 7,
+      "channel": "field",
+      "fighter": "lucas_brown",
+      "mid": "nevermore",
+      "wave": 1,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "vKill",
+      "cls": "world",
+      "seq": 5
+    },
+    {
+      "idx": 31,
+      "day": 7,
+      "channel": "field",
+      "fighter": "ruth_goldstein",
+      "mid": "speedbump_turtle",
+      "wave": 1,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "vKill",
+      "cls": "world",
+      "seq": 1
+    },
+    {
+      "idx": 34,
+      "day": 8,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "lockpick_raccoon",
+      "wave": 1,
+      "optsKeys": [],
+      "outcome": null,
+      "cls": "world",
+      "seq": 8
+    },
+    {
+      "idx": 52,
+      "day": 10,
+      "channel": "field",
+      "fighter": "gen_21ysxqq",
+      "mid": "rut_king",
+      "wave": 1,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "vKill",
+      "cls": "world",
+      "seq": 16
+    },
+    {
+      "idx": 56,
+      "day": 11,
+      "channel": "field",
+      "fighter": "gen_2n9s4kk",
+      "mid": "union_rep",
+      "wave": 2,
+      "optsKeys": [
+        "allies",
+        "allyVids",
+        "awareness"
+      ],
+      "outcome": "evade",
+      "cls": "other",
+      "seq": null
+    },
+    {
+      "idx": 57,
+      "day": 13,
+      "channel": "field",
+      "fighter": "catalina_reyes",
+      "mid": "alien_tick",
+      "wave": 2,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "vKill",
+      "cls": "world",
+      "seq": 9
+    },
+    {
+      "idx": 66,
+      "day": 16,
+      "channel": "field",
+      "fighter": "ruth_goldstein",
+      "mid": "nightcourt",
+      "wave": 1,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "mFlee",
+      "cls": "world",
+      "seq": 18
+    },
+    {
+      "idx": 67,
+      "day": 16,
+      "channel": "field",
+      "fighter": "gen_4j27wha",
+      "mid": "speedbump_turtle",
+      "wave": 1,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "vKill",
+      "cls": "world",
+      "seq": 10
+    },
+    {
+      "idx": 69,
+      "day": 16,
+      "channel": "field",
+      "fighter": "chantal_mukendi",
+      "mid": "ducks_in_a_row",
+      "wave": 1,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "vKill",
+      "cls": "world",
+      "seq": 12
+    },
+    {
+      "idx": 75,
+      "day": 17,
+      "channel": "field",
+      "fighter": "gen_2n9s4kk",
+      "mid": "bright_idea",
+      "wave": 2,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "vKill",
+      "cls": "world",
+      "seq": 17
+    },
+    {
+      "idx": 85,
+      "day": 18,
+      "channel": "field",
+      "fighter": "catalina_reyes",
+      "mid": "nightcourt",
+      "wave": 1,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "vKill",
+      "cls": "world",
+      "seq": 18
+    },
+    {
+      "idx": 88,
+      "day": 19,
+      "channel": "field",
+      "fighter": "henry_zhang",
+      "mid": "hushwolf",
+      "wave": 1,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "vKill",
+      "cls": "world",
+      "seq": 23
+    },
+    {
+      "idx": 90,
+      "day": 19,
+      "channel": "field",
+      "fighter": "ruth_goldstein",
+      "mid": "union_rep",
+      "wave": 2,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "vKill",
+      "cls": "world",
+      "seq": 19
+    },
+    {
+      "idx": 95,
+      "day": 22,
+      "channel": "field",
+      "fighter": "gen_4j27wha",
+      "mid": "hushwolf",
+      "wave": 1,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "vFlee",
+      "cls": "world",
+      "seq": 24
+    },
+    {
+      "idx": 96,
+      "day": 22,
+      "channel": "field",
+      "fighter": "gen_21ysxqq",
+      "mid": "bright_idea",
+      "wave": 2,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "mFlee",
+      "cls": "world",
+      "seq": 15
+    },
+    {
+      "idx": 97,
+      "day": 22,
+      "channel": "field",
+      "fighter": "gen_ieyw2p8",
+      "mid": "hushwolf",
+      "wave": 1,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "mFlee",
+      "cls": "world",
+      "seq": 22
+    },
+    {
+      "idx": 99,
+      "day": 23,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "hushwolf",
+      "wave": 1,
+      "optsKeys": [],
+      "outcome": null,
+      "cls": "contest",
+      "seq": 24
+    },
+    {
+      "idx": 100,
+      "day": 23,
+      "channel": "field",
+      "fighter": "ella_johnson",
+      "mid": "hushwolf",
+      "wave": 1,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "vKill",
+      "cls": "world",
+      "seq": 22
+    },
+    {
+      "idx": 105,
+      "day": 24,
+      "channel": "field",
+      "fighter": "gen_ieyw2p8",
+      "mid": "bright_idea",
+      "wave": 2,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "vKill",
+      "cls": "world",
+      "seq": 15
+    },
+    {
+      "idx": 108,
+      "day": 25,
+      "channel": "field",
+      "fighter": "chantal_mukendi",
+      "mid": "anaconda_empress",
+      "wave": 1,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "vKill",
+      "cls": "world",
+      "seq": 20
+    },
+    {
+      "idx": 112,
+      "day": 26,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "sanjun",
+      "wave": 1,
+      "optsKeys": [],
+      "outcome": null,
+      "cls": "feast",
+      "seq": null
+    },
+    {
+      "idx": 122,
+      "day": 29,
+      "channel": "field",
+      "fighter": "catalina_reyes",
+      "mid": "spool",
+      "wave": 3,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "vFlee",
+      "cls": "world",
+      "seq": 29
+    },
+    {
+      "idx": 125,
+      "day": 33,
+      "channel": "field",
+      "fighter": "ruth_goldstein",
+      "mid": "redactor",
+      "wave": 3,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "mFlee",
+      "cls": "world",
+      "seq": 31
+    },
+    {
+      "idx": 130,
+      "day": 33,
+      "channel": "field",
+      "fighter": "lucas_brown",
+      "mid": "giant_mosquito",
+      "wave": 2,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "vKill",
+      "cls": "world",
+      "seq": 32
+    },
+    {
+      "idx": 132,
+      "day": 34,
+      "channel": "field",
+      "fighter": "gen_2n9s4kk",
+      "mid": "redactor",
+      "wave": 3,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "vFlee",
+      "cls": "world",
+      "seq": 31
+    },
+    {
+      "idx": 133,
+      "day": 34,
+      "channel": "field",
+      "fighter": "gen_21ysxqq",
+      "mid": "paparazzo",
+      "wave": 2,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "vKill",
+      "cls": "world",
+      "seq": 33
+    },
+    {
+      "idx": 135,
+      "day": 34,
+      "channel": "field",
+      "fighter": "catalina_reyes",
+      "mid": "understudy",
+      "wave": 2,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "vKill",
+      "cls": "world",
+      "seq": 13
+    },
+    {
+      "idx": 137,
+      "day": 34,
+      "channel": "field",
+      "fighter": "lucas_brown",
+      "mid": "spool",
+      "wave": 3,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "vFlee",
+      "cls": "world",
+      "seq": 29
+    },
+    {
+      "idx": 138,
+      "day": 34,
+      "channel": "field",
+      "fighter": "ruth_goldstein",
+      "mid": "anaconda_empress",
+      "wave": 1,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "mFlee",
+      "cls": "world",
+      "seq": 21
+    },
+    {
+      "idx": 140,
+      "day": 35,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "spool",
+      "wave": 3,
+      "optsKeys": [],
+      "outcome": null,
+      "cls": "world",
+      "seq": 29
+    },
+    {
+      "idx": 142,
+      "day": 35,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "redactor",
+      "wave": 3,
+      "optsKeys": [],
+      "outcome": null,
+      "cls": "world",
+      "seq": 31
+    },
+    {
+      "idx": 153,
+      "day": 46,
+      "channel": "field",
+      "fighter": "ruth_goldstein",
+      "mid": "ducks_in_a_row",
+      "wave": 1,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "vKill",
+      "cls": "world",
+      "seq": 28
+    },
+    {
+      "idx": 155,
+      "day": 46,
+      "channel": "field",
+      "fighter": "ruth_goldstein",
+      "mid": "giant_mosquito",
+      "wave": 2,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "vKill",
+      "cls": "world",
+      "seq": 35
+    },
+    {
+      "idx": 157,
+      "day": 46,
+      "channel": "field",
+      "fighter": "ruth_goldstein",
+      "mid": "spool",
+      "wave": 3,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "vFlee",
+      "cls": "world",
+      "seq": 30
+    },
+    {
+      "idx": 158,
+      "day": 46,
+      "channel": "field",
+      "fighter": "ella_johnson",
+      "mid": "hummice",
+      "wave": 1,
+      "optsKeys": [
+        "allies",
+        "allyVids"
+      ],
+      "outcome": "vKill",
+      "cls": "world",
+      "seq": 34
+    },
+    {
+      "idx": 161,
+      "day": 47,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "paparazzo",
+      "wave": 2,
+      "optsKeys": [],
+      "outcome": null,
+      "cls": "world",
+      "seq": 14
+    }
+  ],
+  "daily": [
+    {
+      "day": 2,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "unlockedWave": 1,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 4,
+        "armed": 10,
+        "tricks": 0,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "tricks",
+          "veterans"
+        ]
+      },
+      "worldCap": 3,
+      "px": 4,
+      "py": 4,
+      "wanderer": null,
+      "world": [],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 4,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "unlockedWave": 1,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 12,
+        "tricks": 0,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "tricks",
+          "veterans"
+        ]
+      },
+      "worldCap": 3,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "lockpick_raccoon",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 1,
+          "id": "speedbump_turtle",
+          "wave": 1,
+          "tx": 2,
+          "ty": 2,
+          "mx": 3,
+          "my": 3,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 2,
+          "id": "mirrormoth",
+          "wave": 1,
+          "tx": 3,
+          "ty": 4,
+          "mx": 4,
+          "my": 7,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 5,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "unlockedWave": 1,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 12,
+        "tricks": 1,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "tricks",
+          "veterans"
+        ]
+      },
+      "worldCap": 3,
+      "px": 0,
+      "py": 1,
+      "wanderer": {
+        "id": "lockpick_raccoon",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 1,
+          "id": "speedbump_turtle",
+          "wave": 1,
+          "tx": 2,
+          "ty": 2,
+          "mx": 1,
+          "my": 8,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 3,
+          "id": "cliffhanger",
+          "wave": 1,
+          "tx": 7,
+          "ty": 4,
+          "mx": 3,
+          "my": 5,
+          "dist": 10,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 5,
+          "id": "nevermore",
+          "wave": 1,
+          "tx": 4,
+          "ty": 1,
+          "mx": 7,
+          "my": 4,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 6,
+          "id": "dustboar",
+          "wave": 1,
+          "tx": 0,
+          "ty": 1,
+          "mx": 3,
+          "my": 4,
+          "dist": 0,
+          "onPlayerTile": true,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 6,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "unlockedWave": 1,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 12,
+        "tricks": 2,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "tricks",
+          "veterans"
+        ]
+      },
+      "worldCap": 4,
+      "px": 1,
+      "py": 1,
+      "wanderer": {
+        "id": "lockpick_raccoon",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 1,
+          "id": "speedbump_turtle",
+          "wave": 1,
+          "tx": 2,
+          "ty": 2,
+          "mx": 1,
+          "my": 8,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 3,
+          "id": "cliffhanger",
+          "wave": 1,
+          "tx": 8,
+          "ty": 4,
+          "mx": 1,
+          "my": 6,
+          "dist": 10,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 5,
+          "id": "nevermore",
+          "wave": 1,
+          "tx": 5,
+          "ty": 1,
+          "mx": 7,
+          "my": 0,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 7,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 5,
+          "ty": 5,
+          "mx": 5,
+          "my": 6,
+          "dist": 8,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 7,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "unlockedWave": 1,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 12,
+        "tricks": 2,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "tricks",
+          "veterans"
+        ]
+      },
+      "worldCap": 4,
+      "px": 1,
+      "py": 1,
+      "wanderer": {
+        "id": "lockpick_raccoon",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 1,
+          "id": "speedbump_turtle",
+          "wave": 1,
+          "tx": 1,
+          "ty": 2,
+          "mx": 7,
+          "my": 2,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 3,
+          "id": "cliffhanger",
+          "wave": 1,
+          "tx": 8,
+          "ty": 4,
+          "mx": 1,
+          "my": 6,
+          "dist": 10,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 5,
+          "id": "nevermore",
+          "wave": 1,
+          "tx": 5,
+          "ty": 1,
+          "mx": 7,
+          "my": 0,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 7,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 4,
+          "ty": 5,
+          "mx": 0,
+          "my": 7,
+          "dist": 7,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 8,
+          "id": "lockpick_raccoon",
+          "wave": 1,
+          "tx": 1,
+          "ty": 1,
+          "mx": 5,
+          "my": 2,
+          "dist": 0,
+          "onPlayerTile": true,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 8,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "unlockedWave": 2,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 12,
+        "tricks": 4,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 5,
+      "px": 1,
+      "py": 1,
+      "wanderer": {
+        "id": "lockpick_raccoon",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 9,
+          "id": "alien_tick",
+          "wave": 2,
+          "tx": 2,
+          "ty": 0,
+          "mx": 4,
+          "my": 4,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 10,
+          "id": "speedbump_turtle",
+          "wave": 1,
+          "tx": 3,
+          "ty": 3,
+          "mx": 0,
+          "my": 3,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 11,
+          "id": "alien_tick",
+          "wave": 2,
+          "tx": 1,
+          "ty": 1,
+          "mx": 1,
+          "my": 2,
+          "dist": 0,
+          "onPlayerTile": true,
+          "npcCount": 0
+        },
+        {
+          "seq": 12,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 8,
+          "ty": 4,
+          "mx": 0,
+          "my": 5,
+          "dist": 10,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 9,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "unlockedWave": 2,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 12,
+        "tricks": 5,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 6,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "lockpick_raccoon",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 9,
+          "id": "alien_tick",
+          "wave": 2,
+          "tx": 2,
+          "ty": 0,
+          "mx": 4,
+          "my": 4,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 10,
+          "id": "speedbump_turtle",
+          "wave": 1,
+          "tx": 3,
+          "ty": 6,
+          "mx": 0,
+          "my": 4,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 12,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 7,
+          "ty": 6,
+          "mx": 6,
+          "my": 1,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 13,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 1,
+          "ty": 4,
+          "mx": 8,
+          "my": 1,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 1,
+          "ty": 0,
+          "mx": 0,
+          "my": 4,
+          "dist": 7,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 15,
+          "id": "bright_idea",
+          "wave": 2,
+          "tx": 2,
+          "ty": 1,
+          "mx": 5,
+          "my": 4,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 10,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "unlockedWave": 2,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 12,
+        "tricks": 6,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 5,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "paparazzo",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 9,
+          "id": "alien_tick",
+          "wave": 2,
+          "tx": 2,
+          "ty": 1,
+          "mx": 0,
+          "my": 8,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 10,
+          "id": "speedbump_turtle",
+          "wave": 1,
+          "tx": 4,
+          "ty": 6,
+          "mx": 0,
+          "my": 8,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 12,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 7,
+          "ty": 6,
+          "mx": 6,
+          "my": 1,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 13,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 2,
+          "ty": 5,
+          "mx": 8,
+          "my": 3,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 1,
+          "ty": 0,
+          "mx": 0,
+          "my": 4,
+          "dist": 7,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 15,
+          "id": "bright_idea",
+          "wave": 2,
+          "tx": 3,
+          "ty": 1,
+          "mx": 0,
+          "my": 2,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 11,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "unlockedWave": 2,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 12,
+        "tricks": 7,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 6,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "paparazzo",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 9,
+          "id": "alien_tick",
+          "wave": 2,
+          "tx": 2,
+          "ty": 1,
+          "mx": 7,
+          "my": 3,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 10,
+          "id": "speedbump_turtle",
+          "wave": 1,
+          "tx": 3,
+          "ty": 6,
+          "mx": 4,
+          "my": 3,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 12,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 7,
+          "ty": 6,
+          "mx": 6,
+          "my": 1,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 13,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 2,
+          "ty": 5,
+          "mx": 8,
+          "my": 3,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 1,
+          "ty": 0,
+          "mx": 0,
+          "my": 4,
+          "dist": 7,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 15,
+          "id": "bright_idea",
+          "wave": 2,
+          "tx": 4,
+          "ty": 0,
+          "mx": 5,
+          "my": 1,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 17,
+          "id": "bright_idea",
+          "wave": 2,
+          "tx": 3,
+          "ty": 4,
+          "mx": 2,
+          "my": 5,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 12,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "unlockedWave": 2,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 12,
+        "tricks": 8,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 6,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "paparazzo",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 9,
+          "id": "alien_tick",
+          "wave": 2,
+          "tx": 2,
+          "ty": 1,
+          "mx": 7,
+          "my": 3,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 10,
+          "id": "speedbump_turtle",
+          "wave": 1,
+          "tx": 4,
+          "ty": 7,
+          "mx": 6,
+          "my": 6,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 12,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 8,
+          "ty": 6,
+          "mx": 5,
+          "my": 2,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 13,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 2,
+          "ty": 5,
+          "mx": 8,
+          "my": 3,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 0,
+          "ty": 0,
+          "mx": 6,
+          "my": 7,
+          "dist": 8,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 15,
+          "id": "bright_idea",
+          "wave": 2,
+          "tx": 3,
+          "ty": 0,
+          "mx": 3,
+          "my": 5,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 17,
+          "id": "bright_idea",
+          "wave": 2,
+          "tx": 3,
+          "ty": 4,
+          "mx": 2,
+          "my": 5,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 13,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "unlockedWave": 2,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 12,
+        "tricks": 9,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 6,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "paparazzo",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 10,
+          "id": "speedbump_turtle",
+          "wave": 1,
+          "tx": 4,
+          "ty": 7,
+          "mx": 6,
+          "my": 6,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 12,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 8,
+          "ty": 6,
+          "mx": 5,
+          "my": 2,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 13,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 2,
+          "ty": 5,
+          "mx": 8,
+          "my": 3,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 0,
+          "ty": 0,
+          "mx": 6,
+          "my": 7,
+          "dist": 8,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 15,
+          "id": "bright_idea",
+          "wave": 2,
+          "tx": 3,
+          "ty": 0,
+          "mx": 3,
+          "my": 5,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 17,
+          "id": "bright_idea",
+          "wave": 2,
+          "tx": 3,
+          "ty": 4,
+          "mx": 2,
+          "my": 5,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 14,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "unlockedWave": 2,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 12,
+        "tricks": 9,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 6,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "paparazzo",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 10,
+          "id": "speedbump_turtle",
+          "wave": 1,
+          "tx": 4,
+          "ty": 5,
+          "mx": 2,
+          "my": 8,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 1
+        },
+        {
+          "seq": 12,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 8,
+          "ty": 6,
+          "mx": 5,
+          "my": 2,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 13,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 2,
+          "ty": 5,
+          "mx": 8,
+          "my": 3,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 0,
+          "ty": 1,
+          "mx": 3,
+          "my": 0,
+          "dist": 7,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 15,
+          "id": "bright_idea",
+          "wave": 2,
+          "tx": 3,
+          "ty": 0,
+          "mx": 3,
+          "my": 5,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 17,
+          "id": "bright_idea",
+          "wave": 2,
+          "tx": 3,
+          "ty": 5,
+          "mx": 5,
+          "my": 5,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 2
+        },
+        {
+          "seq": 18,
+          "id": "nightcourt",
+          "wave": 1,
+          "tx": 5,
+          "ty": 4,
+          "mx": 6,
+          "my": 5,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 15,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "unlockedWave": 2,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 12,
+        "tricks": 9,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 8,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "paparazzo",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 10,
+          "id": "speedbump_turtle",
+          "wave": 1,
+          "tx": 4,
+          "ty": 5,
+          "mx": 2,
+          "my": 8,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 3
+        },
+        {
+          "seq": 12,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 7,
+          "ty": 6,
+          "mx": 7,
+          "my": 8,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 13,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 2,
+          "ty": 5,
+          "mx": 8,
+          "my": 3,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 1,
+          "ty": 2,
+          "mx": 7,
+          "my": 2,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 15,
+          "id": "bright_idea",
+          "wave": 2,
+          "tx": 3,
+          "ty": 1,
+          "mx": 0,
+          "my": 4,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 17,
+          "id": "bright_idea",
+          "wave": 2,
+          "tx": 2,
+          "ty": 4,
+          "mx": 8,
+          "my": 2,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 18,
+          "id": "nightcourt",
+          "wave": 1,
+          "tx": 5,
+          "ty": 3,
+          "mx": 2,
+          "my": 4,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 19,
+          "id": "union_rep",
+          "wave": 2,
+          "tx": 4,
+          "ty": 2,
+          "mx": 0,
+          "my": 4,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 16,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "unlockedWave": 2,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 12,
+        "tricks": 10,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 9,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "paparazzo",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 13,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 2,
+          "ty": 4,
+          "mx": 8,
+          "my": 4,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 2,
+          "ty": 2,
+          "mx": 6,
+          "my": 8,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 15,
+          "id": "bright_idea",
+          "wave": 2,
+          "tx": 2,
+          "ty": 1,
+          "mx": 4,
+          "my": 3,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 17,
+          "id": "bright_idea",
+          "wave": 2,
+          "tx": 3,
+          "ty": 3,
+          "mx": 4,
+          "my": 6,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 18,
+          "id": "nightcourt",
+          "wave": 1,
+          "tx": 3,
+          "ty": 2,
+          "mx": 3,
+          "my": 6,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 19,
+          "id": "union_rep",
+          "wave": 2,
+          "tx": 5,
+          "ty": 2,
+          "mx": 7,
+          "my": 0,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 20,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 5,
+          "ty": 8,
+          "mx": 5,
+          "my": 0,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 4,
+          "ty": 7,
+          "mx": 4,
+          "my": 3,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 17,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "unlockedWave": 2,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 12,
+        "tricks": 11,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 8,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "understudy",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 13,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 2,
+          "ty": 6,
+          "mx": 3,
+          "my": 0,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 2,
+          "ty": 3,
+          "mx": 8,
+          "my": 7,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 15,
+          "id": "bright_idea",
+          "wave": 2,
+          "tx": 2,
+          "ty": 1,
+          "mx": 6,
+          "my": 5,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 18,
+          "id": "nightcourt",
+          "wave": 1,
+          "tx": 3,
+          "ty": 3,
+          "mx": 7,
+          "my": 2,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 1
+        },
+        {
+          "seq": 19,
+          "id": "union_rep",
+          "wave": 2,
+          "tx": 5,
+          "ty": 1,
+          "mx": 7,
+          "my": 2,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 20,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 5,
+          "ty": 8,
+          "mx": 5,
+          "my": 0,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 4,
+          "ty": 7,
+          "mx": 4,
+          "my": 3,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 22,
+          "id": "hushwolf",
+          "wave": 1,
+          "tx": 5,
+          "ty": 4,
+          "mx": 4,
+          "my": 7,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 23,
+          "id": "hushwolf",
+          "wave": 1,
+          "tx": 5,
+          "ty": 4,
+          "mx": 7,
+          "my": 7,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 24,
+          "id": "hushwolf",
+          "wave": 1,
+          "tx": 5,
+          "ty": 3,
+          "mx": 1,
+          "my": 0,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 18,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "unlockedWave": 2,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 12,
+        "tricks": 12,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 9,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "understudy",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 13,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 2,
+          "ty": 7,
+          "mx": 2,
+          "my": 8,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 3,
+          "ty": 2,
+          "mx": 7,
+          "my": 7,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 15,
+          "id": "bright_idea",
+          "wave": 2,
+          "tx": 1,
+          "ty": 1,
+          "mx": 1,
+          "my": 0,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 19,
+          "id": "union_rep",
+          "wave": 2,
+          "tx": 5,
+          "ty": 2,
+          "mx": 5,
+          "my": 3,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 20,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 5,
+          "ty": 8,
+          "mx": 5,
+          "my": 0,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 4,
+          "ty": 7,
+          "mx": 4,
+          "my": 3,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 22,
+          "id": "hushwolf",
+          "wave": 1,
+          "tx": 5,
+          "ty": 5,
+          "mx": 4,
+          "my": 6,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 23,
+          "id": "hushwolf",
+          "wave": 1,
+          "tx": 5,
+          "ty": 4,
+          "mx": 7,
+          "my": 7,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 1
+        },
+        {
+          "seq": 24,
+          "id": "hushwolf",
+          "wave": 1,
+          "tx": 5,
+          "ty": 3,
+          "mx": 1,
+          "my": 0,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 3,
+          "ty": 4,
+          "mx": 6,
+          "my": 3,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 19,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "unlockedWave": 2,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 12,
+        "tricks": 13,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 9,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "understudy",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 13,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 2,
+          "ty": 7,
+          "mx": 2,
+          "my": 8,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 2,
+          "ty": 3,
+          "mx": 8,
+          "my": 4,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 15,
+          "id": "bright_idea",
+          "wave": 2,
+          "tx": 2,
+          "ty": 1,
+          "mx": 8,
+          "my": 3,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 20,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 6,
+          "ty": 8,
+          "mx": 3,
+          "my": 0,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 4,
+          "ty": 7,
+          "mx": 1,
+          "my": 2,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 22,
+          "id": "hushwolf",
+          "wave": 1,
+          "tx": 5,
+          "ty": 5,
+          "mx": 4,
+          "my": 6,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 24,
+          "id": "hushwolf",
+          "wave": 1,
+          "tx": 4,
+          "ty": 3,
+          "mx": 4,
+          "my": 4,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 3,
+          "ty": 5,
+          "mx": 5,
+          "my": 2,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 5,
+          "ty": 1,
+          "mx": 2,
+          "my": 7,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 20,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "unlockedWave": 2,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 12,
+        "tricks": 14,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 9,
+      "px": 4,
+      "py": 4,
+      "wanderer": null,
+      "world": [
+        {
+          "seq": 13,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 2,
+          "ty": 7,
+          "mx": 1,
+          "my": 0,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 2,
+          "ty": 3,
+          "mx": 8,
+          "my": 4,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 15,
+          "id": "bright_idea",
+          "wave": 2,
+          "tx": 2,
+          "ty": 1,
+          "mx": 5,
+          "my": 3,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 20,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 6,
+          "ty": 7,
+          "mx": 0,
+          "my": 5,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 4,
+          "ty": 8,
+          "mx": 4,
+          "my": 4,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 22,
+          "id": "hushwolf",
+          "wave": 1,
+          "tx": 5,
+          "ty": 5,
+          "mx": 4,
+          "my": 6,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 24,
+          "id": "hushwolf",
+          "wave": 1,
+          "tx": 5,
+          "ty": 3,
+          "mx": 2,
+          "my": 5,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 2,
+          "ty": 5,
+          "mx": 2,
+          "my": 0,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 5,
+          "ty": 0,
+          "mx": 5,
+          "my": 8,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 0,
+          "ty": 8,
+          "mx": 0,
+          "my": 1,
+          "dist": 8,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 21,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "unlockedWave": 2,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 12,
+        "tricks": 14,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 9,
+      "px": 4,
+      "py": 4,
+      "wanderer": null,
+      "world": [
+        {
+          "seq": 13,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 2,
+          "ty": 6,
+          "mx": 8,
+          "my": 8,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 2,
+          "ty": 3,
+          "mx": 8,
+          "my": 4,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 15,
+          "id": "bright_idea",
+          "wave": 2,
+          "tx": 2,
+          "ty": 2,
+          "mx": 8,
+          "my": 5,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 20,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 6,
+          "ty": 7,
+          "mx": 0,
+          "my": 5,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 4,
+          "ty": 8,
+          "mx": 4,
+          "my": 4,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 22,
+          "id": "hushwolf",
+          "wave": 1,
+          "tx": 5,
+          "ty": 5,
+          "mx": 4,
+          "my": 6,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 24,
+          "id": "hushwolf",
+          "wave": 1,
+          "tx": 6,
+          "ty": 3,
+          "mx": 0,
+          "my": 1,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 1,
+          "ty": 5,
+          "mx": 7,
+          "my": 7,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 6,
+          "ty": 0,
+          "mx": 2,
+          "my": 0,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 0,
+          "ty": 8,
+          "mx": 0,
+          "my": 1,
+          "dist": 8,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 22,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "unlockedWave": 2,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 12,
+        "tricks": 14,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 9,
+      "px": 4,
+      "py": 4,
+      "wanderer": null,
+      "world": [
+        {
+          "seq": 13,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 2,
+          "ty": 6,
+          "mx": 8,
+          "my": 8,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 2,
+          "ty": 2,
+          "mx": 0,
+          "my": 7,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 15,
+          "id": "bright_idea",
+          "wave": 2,
+          "tx": 3,
+          "ty": 2,
+          "mx": 2,
+          "my": 5,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 20,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 6,
+          "ty": 7,
+          "mx": 0,
+          "my": 5,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 5,
+          "ty": 8,
+          "mx": 8,
+          "my": 2,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 22,
+          "id": "hushwolf",
+          "wave": 1,
+          "tx": 6,
+          "ty": 5,
+          "mx": 2,
+          "my": 1,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 24,
+          "id": "hushwolf",
+          "wave": 1,
+          "tx": 6,
+          "ty": 4,
+          "mx": 4,
+          "my": 0,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 1,
+          "ty": 4,
+          "mx": 7,
+          "my": 5,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 7,
+          "ty": 0,
+          "mx": 5,
+          "my": 8,
+          "dist": 7,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 1,
+          "ty": 7,
+          "mx": 4,
+          "my": 4,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 23,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "unlockedWave": 2,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 12,
+        "tricks": 14,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 9,
+      "px": 4,
+      "py": 4,
+      "wanderer": null,
+      "world": [
+        {
+          "seq": 13,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 3,
+          "ty": 6,
+          "mx": 1,
+          "my": 8,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 1,
+          "ty": 2,
+          "mx": 1,
+          "my": 2,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 15,
+          "id": "bright_idea",
+          "wave": 2,
+          "tx": 5,
+          "ty": 3,
+          "mx": 3,
+          "my": 8,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 20,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 6,
+          "ty": 7,
+          "mx": 0,
+          "my": 5,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 5,
+          "ty": 8,
+          "mx": 8,
+          "my": 2,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 1,
+          "ty": 5,
+          "mx": 6,
+          "my": 0,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 7,
+          "ty": 0,
+          "mx": 5,
+          "my": 8,
+          "dist": 7,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 2,
+          "ty": 7,
+          "mx": 1,
+          "my": 1,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 28,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 0,
+          "ty": 1,
+          "mx": 8,
+          "my": 4,
+          "dist": 7,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 24,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "unlockedWave": 2,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 12,
+        "tricks": 14,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 8,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "paparazzo",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 13,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 5,
+          "ty": 6,
+          "mx": 3,
+          "my": 7,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 0,
+          "ty": 1,
+          "mx": 5,
+          "my": 6,
+          "dist": 7,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 20,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 6,
+          "ty": 7,
+          "mx": 0,
+          "my": 5,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 6,
+          "ty": 8,
+          "mx": 2,
+          "my": 1,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 1,
+          "ty": 5,
+          "mx": 1,
+          "my": 2,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 6,
+          "ty": 0,
+          "mx": 1,
+          "my": 6,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 2,
+          "ty": 7,
+          "mx": 1,
+          "my": 1,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 28,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 1,
+          "ty": 1,
+          "mx": 0,
+          "my": 7,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 25,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 11,
+      "living": 11,
+      "raw": 0,
+      "gated": 0,
+      "unlockedWave": 3,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 11,
+        "tricks": 14,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 9,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "paparazzo",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 13,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 5,
+          "ty": 5,
+          "mx": 4,
+          "my": 8,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 0,
+          "ty": 1,
+          "mx": 5,
+          "my": 6,
+          "dist": 7,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 5,
+          "ty": 8,
+          "mx": 1,
+          "my": 2,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 1,
+          "ty": 6,
+          "mx": 7,
+          "my": 0,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 6,
+          "ty": 0,
+          "mx": 1,
+          "my": 6,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 2,
+          "ty": 6,
+          "mx": 6,
+          "my": 2,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 28,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 1,
+          "ty": 1,
+          "mx": 0,
+          "my": 7,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 29,
+          "id": "spool",
+          "wave": 3,
+          "tx": 6,
+          "ty": 2,
+          "mx": 8,
+          "my": 5,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 30,
+          "id": "spool",
+          "wave": 3,
+          "tx": 0,
+          "ty": 4,
+          "mx": 1,
+          "my": 1,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 26,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 11,
+      "living": 11,
+      "raw": 20,
+      "gated": 20,
+      "unlockedWave": 3,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 11,
+        "tricks": 15,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 9,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "paparazzo",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 13,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 6,
+          "ty": 5,
+          "mx": 1,
+          "my": 6,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 0,
+          "ty": 1,
+          "mx": 5,
+          "my": 6,
+          "dist": 7,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 4,
+          "ty": 8,
+          "mx": 6,
+          "my": 1,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 0,
+          "ty": 6,
+          "mx": 1,
+          "my": 6,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 6,
+          "ty": 0,
+          "mx": 1,
+          "my": 6,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 3,
+          "ty": 6,
+          "mx": 3,
+          "my": 2,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 28,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 0,
+          "ty": 0,
+          "mx": 3,
+          "my": 7,
+          "dist": 8,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 29,
+          "id": "spool",
+          "wave": 3,
+          "tx": 5,
+          "ty": 2,
+          "mx": 8,
+          "my": 3,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 30,
+          "id": "spool",
+          "wave": 3,
+          "tx": 0,
+          "ty": 4,
+          "mx": 1,
+          "my": 1,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 31,
+          "id": "redactor",
+          "wave": 3,
+          "tx": 5,
+          "ty": 4,
+          "mx": 3,
+          "my": 4,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 27,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 11,
+      "living": 11,
+      "raw": 20,
+      "gated": 20,
+      "unlockedWave": 3,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 11,
+        "tricks": 15,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 9,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "paparazzo",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 13,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 6,
+          "ty": 5,
+          "mx": 0,
+          "my": 8,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 0,
+          "ty": 1,
+          "mx": 5,
+          "my": 6,
+          "dist": 7,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 4,
+          "ty": 8,
+          "mx": 6,
+          "my": 1,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 1,
+          "ty": 7,
+          "mx": 1,
+          "my": 5,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 5,
+          "ty": 0,
+          "mx": 4,
+          "my": 0,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 3,
+          "ty": 5,
+          "mx": 6,
+          "my": 1,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 28,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 2,
+          "ty": 0,
+          "mx": 8,
+          "my": 0,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 29,
+          "id": "spool",
+          "wave": 3,
+          "tx": 5,
+          "ty": 2,
+          "mx": 8,
+          "my": 3,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 30,
+          "id": "spool",
+          "wave": 3,
+          "tx": 0,
+          "ty": 4,
+          "mx": 2,
+          "my": 7,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 31,
+          "id": "redactor",
+          "wave": 3,
+          "tx": 5,
+          "ty": 5,
+          "mx": 1,
+          "my": 5,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 28,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 11,
+      "living": 11,
+      "raw": 20,
+      "gated": 20,
+      "unlockedWave": 3,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 11,
+        "tricks": 15,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 9,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "paparazzo",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 13,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 6,
+          "ty": 5,
+          "mx": 0,
+          "my": 8,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 0,
+          "ty": 1,
+          "mx": 5,
+          "my": 6,
+          "dist": 7,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 4,
+          "ty": 8,
+          "mx": 6,
+          "my": 1,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 1,
+          "ty": 7,
+          "mx": 1,
+          "my": 5,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 5,
+          "ty": 0,
+          "mx": 4,
+          "my": 0,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 3,
+          "ty": 6,
+          "mx": 5,
+          "my": 4,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 28,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 2,
+          "ty": 0,
+          "mx": 8,
+          "my": 0,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 29,
+          "id": "spool",
+          "wave": 3,
+          "tx": 5,
+          "ty": 3,
+          "mx": 7,
+          "my": 8,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 30,
+          "id": "spool",
+          "wave": 3,
+          "tx": 0,
+          "ty": 5,
+          "mx": 4,
+          "my": 4,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 31,
+          "id": "redactor",
+          "wave": 3,
+          "tx": 5,
+          "ty": 4,
+          "mx": 6,
+          "my": 4,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 29,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 11,
+      "living": 11,
+      "raw": 20,
+      "gated": 20,
+      "unlockedWave": 3,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 11,
+        "tricks": 15,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 8,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "paparazzo",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 13,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 6,
+          "ty": 5,
+          "mx": 0,
+          "my": 8,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 0,
+          "ty": 1,
+          "mx": 5,
+          "my": 6,
+          "dist": 7,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 5,
+          "ty": 8,
+          "mx": 4,
+          "my": 2,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 2,
+          "ty": 7,
+          "mx": 8,
+          "my": 2,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 5,
+          "ty": 0,
+          "mx": 4,
+          "my": 0,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 3,
+          "ty": 7,
+          "mx": 0,
+          "my": 7,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 28,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 3,
+          "ty": 0,
+          "mx": 7,
+          "my": 4,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 29,
+          "id": "spool",
+          "wave": 3,
+          "tx": 5,
+          "ty": 3,
+          "mx": 7,
+          "my": 8,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 1
+        },
+        {
+          "seq": 30,
+          "id": "spool",
+          "wave": 3,
+          "tx": 0,
+          "ty": 5,
+          "mx": 4,
+          "my": 4,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 31,
+          "id": "redactor",
+          "wave": 3,
+          "tx": 5,
+          "ty": 4,
+          "mx": 6,
+          "my": 4,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 32,
+          "id": "giant_mosquito",
+          "wave": 2,
+          "tx": 3,
+          "ty": 3,
+          "mx": 7,
+          "my": 2,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 30,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 11,
+      "living": 11,
+      "raw": 20,
+      "gated": 20,
+      "unlockedWave": 3,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 11,
+        "tricks": 15,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 9,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "paparazzo",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 13,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 6,
+          "ty": 5,
+          "mx": 0,
+          "my": 8,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 0,
+          "ty": 1,
+          "mx": 5,
+          "my": 6,
+          "dist": 7,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 5,
+          "ty": 8,
+          "mx": 4,
+          "my": 2,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 2,
+          "ty": 7,
+          "mx": 8,
+          "my": 2,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 5,
+          "ty": 0,
+          "mx": 4,
+          "my": 0,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 3,
+          "ty": 7,
+          "mx": 0,
+          "my": 7,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 28,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 3,
+          "ty": 0,
+          "mx": 7,
+          "my": 4,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 29,
+          "id": "spool",
+          "wave": 3,
+          "tx": 5,
+          "ty": 3,
+          "mx": 7,
+          "my": 8,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 30,
+          "id": "spool",
+          "wave": 3,
+          "tx": 0,
+          "ty": 5,
+          "mx": 4,
+          "my": 4,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 31,
+          "id": "redactor",
+          "wave": 3,
+          "tx": 5,
+          "ty": 4,
+          "mx": 6,
+          "my": 4,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 32,
+          "id": "giant_mosquito",
+          "wave": 2,
+          "tx": 3,
+          "ty": 3,
+          "mx": 7,
+          "my": 2,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 31,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 11,
+      "living": 11,
+      "raw": 20,
+      "gated": 20,
+      "unlockedWave": 3,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 11,
+        "tricks": 15,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 9,
+      "px": 4,
+      "py": 4,
+      "wanderer": null,
+      "world": [
+        {
+          "seq": 13,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 6,
+          "ty": 5,
+          "mx": 0,
+          "my": 8,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 0,
+          "ty": 1,
+          "mx": 5,
+          "my": 6,
+          "dist": 7,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 5,
+          "ty": 8,
+          "mx": 4,
+          "my": 2,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 2,
+          "ty": 7,
+          "mx": 8,
+          "my": 2,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 5,
+          "ty": 0,
+          "mx": 4,
+          "my": 0,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 3,
+          "ty": 7,
+          "mx": 0,
+          "my": 7,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 28,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 3,
+          "ty": 0,
+          "mx": 7,
+          "my": 4,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 29,
+          "id": "spool",
+          "wave": 3,
+          "tx": 5,
+          "ty": 3,
+          "mx": 7,
+          "my": 8,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 1
+        },
+        {
+          "seq": 30,
+          "id": "spool",
+          "wave": 3,
+          "tx": 0,
+          "ty": 5,
+          "mx": 4,
+          "my": 4,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 31,
+          "id": "redactor",
+          "wave": 3,
+          "tx": 5,
+          "ty": 4,
+          "mx": 6,
+          "my": 4,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 32,
+          "id": "giant_mosquito",
+          "wave": 2,
+          "tx": 3,
+          "ty": 3,
+          "mx": 7,
+          "my": 2,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 32,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 11,
+      "living": 11,
+      "raw": 20,
+      "gated": 20,
+      "unlockedWave": 3,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 11,
+        "tricks": 15,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 9,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "redactor",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 13,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 6,
+          "ty": 5,
+          "mx": 0,
+          "my": 8,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 1,
+          "ty": 0,
+          "mx": 8,
+          "my": 0,
+          "dist": 7,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 5,
+          "ty": 7,
+          "mx": 8,
+          "my": 6,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 2,
+          "ty": 6,
+          "mx": 7,
+          "my": 5,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 5,
+          "ty": 0,
+          "mx": 4,
+          "my": 0,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 4,
+          "ty": 7,
+          "mx": 7,
+          "my": 8,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 28,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 3,
+          "ty": 1,
+          "mx": 4,
+          "my": 4,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 29,
+          "id": "spool",
+          "wave": 3,
+          "tx": 5,
+          "ty": 3,
+          "mx": 7,
+          "my": 8,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 30,
+          "id": "spool",
+          "wave": 3,
+          "tx": 0,
+          "ty": 6,
+          "mx": 3,
+          "my": 5,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 31,
+          "id": "redactor",
+          "wave": 3,
+          "tx": 5,
+          "ty": 4,
+          "mx": 6,
+          "my": 4,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 32,
+          "id": "giant_mosquito",
+          "wave": 2,
+          "tx": 3,
+          "ty": 3,
+          "mx": 7,
+          "my": 2,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 33,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 11,
+      "living": 11,
+      "raw": 20,
+      "gated": 20,
+      "unlockedWave": 3,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 11,
+        "tricks": 16,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 9,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "redactor",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 13,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 5,
+          "ty": 5,
+          "mx": 6,
+          "my": 1,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 0,
+          "ty": 0,
+          "mx": 6,
+          "my": 4,
+          "dist": 8,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 5,
+          "ty": 6,
+          "mx": 8,
+          "my": 2,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 2,
+          "ty": 6,
+          "mx": 7,
+          "my": 5,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 5,
+          "ty": 0,
+          "mx": 4,
+          "my": 0,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 4,
+          "ty": 7,
+          "mx": 5,
+          "my": 8,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 28,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 3,
+          "ty": 2,
+          "mx": 5,
+          "my": 0,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 29,
+          "id": "spool",
+          "wave": 3,
+          "tx": 5,
+          "ty": 3,
+          "mx": 7,
+          "my": 8,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 30,
+          "id": "spool",
+          "wave": 3,
+          "tx": 1,
+          "ty": 7,
+          "mx": 1,
+          "my": 2,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 31,
+          "id": "redactor",
+          "wave": 3,
+          "tx": 4,
+          "ty": 3,
+          "mx": 6,
+          "my": 4,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 33,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 5,
+          "ty": 4,
+          "mx": 0,
+          "my": 8,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 1
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 34,
+      "scholarId": "gen_ketdabj",
+      "rosterSize": 11,
+      "living": 11,
+      "raw": 20,
+      "gated": 20,
+      "unlockedWave": 3,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 11,
+        "tricks": 16,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 9,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "redactor",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 13,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 5,
+          "ty": 5,
+          "mx": 6,
+          "my": 1,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 0,
+          "ty": 0,
+          "mx": 6,
+          "my": 4,
+          "dist": 8,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 5,
+          "ty": 6,
+          "mx": 8,
+          "my": 2,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 2,
+          "ty": 6,
+          "mx": 7,
+          "my": 5,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 5,
+          "ty": 0,
+          "mx": 4,
+          "my": 0,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 4,
+          "ty": 7,
+          "mx": 5,
+          "my": 8,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 28,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 3,
+          "ty": 2,
+          "mx": 5,
+          "my": 0,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 29,
+          "id": "spool",
+          "wave": 3,
+          "tx": 5,
+          "ty": 3,
+          "mx": 7,
+          "my": 8,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 30,
+          "id": "spool",
+          "wave": 3,
+          "tx": 1,
+          "ty": 7,
+          "mx": 1,
+          "my": 2,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 31,
+          "id": "redactor",
+          "wave": 3,
+          "tx": 4,
+          "ty": 3,
+          "mx": 6,
+          "my": 4,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 1
+        },
+        {
+          "seq": 33,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 5,
+          "ty": 4,
+          "mx": 0,
+          "my": 8,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 35,
+      "scholarId": "gen_2n9s4kk",
+      "rosterSize": 9,
+      "living": 9,
+      "raw": 20,
+      "gated": 20,
+      "unlockedWave": 3,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 9,
+        "tricks": 17,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 8,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "redactor",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 0,
+          "ty": 0,
+          "mx": 6,
+          "my": 4,
+          "dist": 8,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 4,
+          "ty": 5,
+          "mx": 8,
+          "my": 2,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 2,
+          "ty": 6,
+          "mx": 7,
+          "my": 5,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 5,
+          "ty": 0,
+          "mx": 4,
+          "my": 0,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 4,
+          "ty": 7,
+          "mx": 5,
+          "my": 8,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 28,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 3,
+          "ty": 2,
+          "mx": 5,
+          "my": 0,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 30,
+          "id": "spool",
+          "wave": 3,
+          "tx": 1,
+          "ty": 7,
+          "mx": 1,
+          "my": 2,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 36,
+      "scholarId": "gen_2n9s4kk",
+      "rosterSize": 8,
+      "living": 8,
+      "raw": 20,
+      "gated": 20,
+      "unlockedWave": 3,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 8,
+        "tricks": 18,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 9,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "redactor",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 0,
+          "ty": 0,
+          "mx": 6,
+          "my": 4,
+          "dist": 8,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 4,
+          "ty": 5,
+          "mx": 8,
+          "my": 2,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 3,
+          "ty": 6,
+          "mx": 7,
+          "my": 8,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 4,
+          "ty": 0,
+          "mx": 2,
+          "my": 3,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 2,
+          "ty": 7,
+          "mx": 7,
+          "my": 3,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 28,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 3,
+          "ty": 3,
+          "mx": 2,
+          "my": 0,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 30,
+          "id": "spool",
+          "wave": 3,
+          "tx": 0,
+          "ty": 8,
+          "mx": 2,
+          "my": 5,
+          "dist": 8,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 34,
+          "id": "hummice",
+          "wave": 1,
+          "tx": 6,
+          "ty": 2,
+          "mx": 8,
+          "my": 2,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 35,
+          "id": "giant_mosquito",
+          "wave": 2,
+          "tx": 6,
+          "ty": 5,
+          "mx": 2,
+          "my": 4,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 37,
+      "scholarId": "gen_2n9s4kk",
+      "rosterSize": 8,
+      "living": 8,
+      "raw": 20,
+      "gated": 20,
+      "unlockedWave": 3,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 8,
+        "tricks": 18,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 8,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "redactor",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 0,
+          "ty": 0,
+          "mx": 6,
+          "my": 4,
+          "dist": 8,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 4,
+          "ty": 5,
+          "mx": 8,
+          "my": 2,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 4,
+          "ty": 6,
+          "mx": 0,
+          "my": 2,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 5,
+          "ty": 0,
+          "mx": 2,
+          "my": 8,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 2,
+          "ty": 8,
+          "mx": 2,
+          "my": 3,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 28,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 3,
+          "ty": 4,
+          "mx": 0,
+          "my": 3,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 30,
+          "id": "spool",
+          "wave": 3,
+          "tx": 0,
+          "ty": 8,
+          "mx": 2,
+          "my": 5,
+          "dist": 8,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 34,
+          "id": "hummice",
+          "wave": 1,
+          "tx": 6,
+          "ty": 2,
+          "mx": 8,
+          "my": 2,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 35,
+          "id": "giant_mosquito",
+          "wave": 2,
+          "tx": 5,
+          "ty": 5,
+          "mx": 4,
+          "my": 2,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 38,
+      "scholarId": "gen_2n9s4kk",
+      "rosterSize": 8,
+      "living": 8,
+      "raw": 20,
+      "gated": 20,
+      "unlockedWave": 3,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 8,
+        "tricks": 18,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 9,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "redactor",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 0,
+          "ty": 1,
+          "mx": 2,
+          "my": 4,
+          "dist": 7,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 4,
+          "ty": 5,
+          "mx": 4,
+          "my": 1,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 4,
+          "ty": 8,
+          "mx": 6,
+          "my": 7,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 5,
+          "ty": 0,
+          "mx": 6,
+          "my": 3,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 2,
+          "ty": 8,
+          "mx": 2,
+          "my": 3,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 28,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 3,
+          "ty": 4,
+          "mx": 0,
+          "my": 3,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 30,
+          "id": "spool",
+          "wave": 3,
+          "tx": 0,
+          "ty": 7,
+          "mx": 2,
+          "my": 8,
+          "dist": 7,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 34,
+          "id": "hummice",
+          "wave": 1,
+          "tx": 6,
+          "ty": 2,
+          "mx": 8,
+          "my": 2,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 35,
+          "id": "giant_mosquito",
+          "wave": 2,
+          "tx": 6,
+          "ty": 5,
+          "mx": 3,
+          "my": 3,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 36,
+          "id": "living_wire",
+          "wave": 1,
+          "tx": 5,
+          "ty": 4,
+          "mx": 2,
+          "my": 6,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 39,
+      "scholarId": "gen_2n9s4kk",
+      "rosterSize": 8,
+      "living": 8,
+      "raw": 20,
+      "gated": 20,
+      "unlockedWave": 3,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 8,
+        "tricks": 18,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 9,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "spool",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 0,
+          "ty": 2,
+          "mx": 5,
+          "my": 5,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 4,
+          "ty": 6,
+          "mx": 1,
+          "my": 6,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 4,
+          "ty": 8,
+          "mx": 6,
+          "my": 7,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 5,
+          "ty": 0,
+          "mx": 6,
+          "my": 3,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 1,
+          "ty": 8,
+          "mx": 4,
+          "my": 2,
+          "dist": 7,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 28,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 3,
+          "ty": 4,
+          "mx": 0,
+          "my": 3,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 30,
+          "id": "spool",
+          "wave": 3,
+          "tx": 1,
+          "ty": 6,
+          "mx": 0,
+          "my": 5,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 34,
+          "id": "hummice",
+          "wave": 1,
+          "tx": 6,
+          "ty": 3,
+          "mx": 1,
+          "my": 8,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 35,
+          "id": "giant_mosquito",
+          "wave": 2,
+          "tx": 6,
+          "ty": 5,
+          "mx": 4,
+          "my": 0,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 36,
+          "id": "living_wire",
+          "wave": 1,
+          "tx": 5,
+          "ty": 4,
+          "mx": 2,
+          "my": 6,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 40,
+      "scholarId": "gen_2n9s4kk",
+      "rosterSize": 8,
+      "living": 8,
+      "raw": 20,
+      "gated": 20,
+      "unlockedWave": 3,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 8,
+        "tricks": 18,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 8,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "spool",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 1,
+          "ty": 2,
+          "mx": 1,
+          "my": 6,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 4,
+          "ty": 6,
+          "mx": 1,
+          "my": 4,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 3,
+          "ty": 8,
+          "mx": 5,
+          "my": 1,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 5,
+          "ty": 0,
+          "mx": 6,
+          "my": 3,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 0,
+          "ty": 8,
+          "mx": 4,
+          "my": 2,
+          "dist": 8,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 28,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 3,
+          "ty": 4,
+          "mx": 7,
+          "my": 2,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 30,
+          "id": "spool",
+          "wave": 3,
+          "tx": 2,
+          "ty": 5,
+          "mx": 0,
+          "my": 4,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 34,
+          "id": "hummice",
+          "wave": 1,
+          "tx": 7,
+          "ty": 3,
+          "mx": 8,
+          "my": 0,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 35,
+          "id": "giant_mosquito",
+          "wave": 2,
+          "tx": 6,
+          "ty": 5,
+          "mx": 4,
+          "my": 0,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 36,
+          "id": "living_wire",
+          "wave": 1,
+          "tx": 5,
+          "ty": 4,
+          "mx": 2,
+          "my": 6,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 41,
+      "scholarId": "gen_2n9s4kk",
+      "rosterSize": 7,
+      "living": 7,
+      "raw": 20,
+      "gated": 20,
+      "unlockedWave": 3,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 7,
+        "tricks": 18,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 9,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "spool",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 2,
+          "ty": 1,
+          "mx": 2,
+          "my": 8,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 5,
+          "ty": 7,
+          "mx": 7,
+          "my": 8,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 3,
+          "ty": 7,
+          "mx": 0,
+          "my": 3,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 6,
+          "ty": 0,
+          "mx": 2,
+          "my": 1,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 0,
+          "ty": 7,
+          "mx": 3,
+          "my": 5,
+          "dist": 7,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 28,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 3,
+          "ty": 4,
+          "mx": 7,
+          "my": 2,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 30,
+          "id": "spool",
+          "wave": 3,
+          "tx": 1,
+          "ty": 6,
+          "mx": 7,
+          "my": 4,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 34,
+          "id": "hummice",
+          "wave": 1,
+          "tx": 6,
+          "ty": 4,
+          "mx": 3,
+          "my": 1,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 35,
+          "id": "giant_mosquito",
+          "wave": 2,
+          "tx": 6,
+          "ty": 5,
+          "mx": 4,
+          "my": 0,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 36,
+          "id": "living_wire",
+          "wave": 1,
+          "tx": 5,
+          "ty": 4,
+          "mx": 2,
+          "my": 6,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 42,
+      "scholarId": "gen_2n9s4kk",
+      "rosterSize": 7,
+      "living": 7,
+      "raw": 20,
+      "gated": 20,
+      "unlockedWave": 3,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 7,
+        "tricks": 18,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 9,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "spool",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 2,
+          "ty": 1,
+          "mx": 2,
+          "my": 8,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 5,
+          "ty": 8,
+          "mx": 2,
+          "my": 7,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 3,
+          "ty": 8,
+          "mx": 2,
+          "my": 5,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 6,
+          "ty": 0,
+          "mx": 2,
+          "my": 1,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 0,
+          "ty": 7,
+          "mx": 3,
+          "my": 5,
+          "dist": 7,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 28,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 3,
+          "ty": 4,
+          "mx": 7,
+          "my": 2,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 30,
+          "id": "spool",
+          "wave": 3,
+          "tx": 1,
+          "ty": 6,
+          "mx": 7,
+          "my": 4,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 34,
+          "id": "hummice",
+          "wave": 1,
+          "tx": 7,
+          "ty": 4,
+          "mx": 7,
+          "my": 1,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 35,
+          "id": "giant_mosquito",
+          "wave": 2,
+          "tx": 6,
+          "ty": 5,
+          "mx": 4,
+          "my": 0,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 36,
+          "id": "living_wire",
+          "wave": 1,
+          "tx": 6,
+          "ty": 3,
+          "mx": 2,
+          "my": 5,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 43,
+      "scholarId": "gen_2n9s4kk",
+      "rosterSize": 7,
+      "living": 7,
+      "raw": 20,
+      "gated": 20,
+      "unlockedWave": 3,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 7,
+        "tricks": 18,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 9,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "spool",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 2,
+          "ty": 1,
+          "mx": 2,
+          "my": 8,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 6,
+          "ty": 8,
+          "mx": 3,
+          "my": 6,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 3,
+          "ty": 8,
+          "mx": 2,
+          "my": 5,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 7,
+          "ty": 0,
+          "mx": 7,
+          "my": 6,
+          "dist": 7,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 0,
+          "ty": 7,
+          "mx": 3,
+          "my": 5,
+          "dist": 7,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 28,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 2,
+          "ty": 4,
+          "mx": 5,
+          "my": 4,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 30,
+          "id": "spool",
+          "wave": 3,
+          "tx": 1,
+          "ty": 7,
+          "mx": 2,
+          "my": 5,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 34,
+          "id": "hummice",
+          "wave": 1,
+          "tx": 6,
+          "ty": 4,
+          "mx": 8,
+          "my": 5,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 35,
+          "id": "giant_mosquito",
+          "wave": 2,
+          "tx": 6,
+          "ty": 5,
+          "mx": 4,
+          "my": 0,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 36,
+          "id": "living_wire",
+          "wave": 1,
+          "tx": 6,
+          "ty": 3,
+          "mx": 2,
+          "my": 5,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 44,
+      "scholarId": "gen_2n9s4kk",
+      "rosterSize": 6,
+      "living": 6,
+      "raw": 20,
+      "gated": 20,
+      "unlockedWave": 3,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 6,
+        "tricks": 18,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 9,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "spool",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 3,
+          "ty": 1,
+          "mx": 6,
+          "my": 5,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 5,
+          "ty": 7,
+          "mx": 8,
+          "my": 0,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 3,
+          "ty": 8,
+          "mx": 2,
+          "my": 5,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 7,
+          "ty": 2,
+          "mx": 1,
+          "my": 3,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 0,
+          "ty": 6,
+          "mx": 4,
+          "my": 5,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 28,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 2,
+          "ty": 5,
+          "mx": 7,
+          "my": 0,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 30,
+          "id": "spool",
+          "wave": 3,
+          "tx": 3,
+          "ty": 7,
+          "mx": 1,
+          "my": 5,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 34,
+          "id": "hummice",
+          "wave": 1,
+          "tx": 6,
+          "ty": 4,
+          "mx": 8,
+          "my": 5,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 35,
+          "id": "giant_mosquito",
+          "wave": 2,
+          "tx": 4,
+          "ty": 5,
+          "mx": 1,
+          "my": 1,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 36,
+          "id": "living_wire",
+          "wave": 1,
+          "tx": 6,
+          "ty": 2,
+          "mx": 4,
+          "my": 0,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 45,
+      "scholarId": "gen_2n9s4kk",
+      "rosterSize": 6,
+      "living": 6,
+      "raw": 20,
+      "gated": 20,
+      "unlockedWave": 3,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 6,
+        "tricks": 18,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 8,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "spool",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 3,
+          "ty": 1,
+          "mx": 6,
+          "my": 5,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 5,
+          "ty": 8,
+          "mx": 0,
+          "my": 1,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 3,
+          "ty": 8,
+          "mx": 2,
+          "my": 5,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 8,
+          "ty": 2,
+          "mx": 3,
+          "my": 3,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 0,
+          "ty": 6,
+          "mx": 4,
+          "my": 5,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 28,
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "tx": 2,
+          "ty": 5,
+          "mx": 7,
+          "my": 0,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 30,
+          "id": "spool",
+          "wave": 3,
+          "tx": 3,
+          "ty": 7,
+          "mx": 1,
+          "my": 5,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 34,
+          "id": "hummice",
+          "wave": 1,
+          "tx": 6,
+          "ty": 4,
+          "mx": 8,
+          "my": 1,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 35,
+          "id": "giant_mosquito",
+          "wave": 2,
+          "tx": 4,
+          "ty": 5,
+          "mx": 1,
+          "my": 1,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 36,
+          "id": "living_wire",
+          "wave": 1,
+          "tx": 6,
+          "ty": 1,
+          "mx": 6,
+          "my": 0,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 46,
+      "scholarId": "gen_2n9s4kk",
+      "rosterSize": 6,
+      "living": 6,
+      "raw": 20,
+      "gated": 20,
+      "unlockedWave": 3,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 6,
+        "tricks": 18,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 9,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "buffering",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 14,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 4,
+          "ty": 0,
+          "mx": 8,
+          "my": 7,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 5,
+          "ty": 8,
+          "mx": 0,
+          "my": 1,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 3,
+          "ty": 8,
+          "mx": 2,
+          "my": 5,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 8,
+          "ty": 3,
+          "mx": 1,
+          "my": 5,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 0,
+          "ty": 6,
+          "mx": 4,
+          "my": 5,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 30,
+          "id": "spool",
+          "wave": 3,
+          "tx": 4,
+          "ty": 7,
+          "mx": 0,
+          "my": 8,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 34,
+          "id": "hummice",
+          "wave": 1,
+          "tx": 7,
+          "ty": 4,
+          "mx": 7,
+          "my": 8,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 36,
+          "id": "living_wire",
+          "wave": 1,
+          "tx": 5,
+          "ty": 1,
+          "mx": 8,
+          "my": 4,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 47,
+      "scholarId": "gen_2n9s4kk",
+      "rosterSize": 6,
+      "living": 6,
+      "raw": 20,
+      "gated": 20,
+      "unlockedWave": 3,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 6,
+        "tricks": 19,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "worldCap": 9,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "buffering",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 7,
+          "ty": 8,
+          "mx": 3,
+          "my": 4,
+          "dist": 7,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 4,
+          "ty": 8,
+          "mx": 2,
+          "my": 0,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 7,
+          "ty": 3,
+          "mx": 7,
+          "my": 2,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 1,
+          "ty": 7,
+          "mx": 7,
+          "my": 2,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 30,
+          "id": "spool",
+          "wave": 3,
+          "tx": 4,
+          "ty": 5,
+          "mx": 8,
+          "my": 2,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 36,
+          "id": "living_wire",
+          "wave": 1,
+          "tx": 5,
+          "ty": 1,
+          "mx": 8,
+          "my": 4,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 37,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 8,
+          "ty": 2,
+          "mx": 1,
+          "my": 4,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 38,
+          "id": "callback",
+          "wave": 3,
+          "tx": 8,
+          "ty": 4,
+          "mx": 7,
+          "my": 4,
+          "dist": 4,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 39,
+          "id": "sanjun",
+          "wave": 1,
+          "tx": 0,
+          "ty": 6,
+          "mx": 4,
+          "my": 4,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 48,
+      "scholarId": "gen_2n9s4kk",
+      "rosterSize": 4,
+      "living": 4,
+      "raw": 20,
+      "gated": 20,
+      "unlockedWave": 3,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 3,
+        "armed": 4,
+        "tricks": 19,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "armor",
+          "weapons",
+          "veterans"
+        ]
+      },
+      "worldCap": 9,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "buffering",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 6,
+          "ty": 8,
+          "mx": 5,
+          "my": 7,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 4,
+          "ty": 7,
+          "mx": 1,
+          "my": 1,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 6,
+          "ty": 3,
+          "mx": 3,
+          "my": 3,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 0,
+          "ty": 7,
+          "mx": 7,
+          "my": 8,
+          "dist": 7,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 30,
+          "id": "spool",
+          "wave": 3,
+          "tx": 4,
+          "ty": 5,
+          "mx": 8,
+          "my": 2,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 36,
+          "id": "living_wire",
+          "wave": 1,
+          "tx": 4,
+          "ty": 1,
+          "mx": 4,
+          "my": 6,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 37,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 7,
+          "ty": 2,
+          "mx": 1,
+          "my": 5,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 38,
+          "id": "callback",
+          "wave": 3,
+          "tx": 8,
+          "ty": 3,
+          "mx": 2,
+          "my": 6,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 39,
+          "id": "sanjun",
+          "wave": 1,
+          "tx": 0,
+          "ty": 6,
+          "mx": 4,
+          "my": 4,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 40,
+          "id": "redactor",
+          "wave": 3,
+          "tx": 5,
+          "ty": 3,
+          "mx": 1,
+          "my": 0,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    },
+    {
+      "day": 48,
+      "scholarId": "gen_2n9s4kk",
+      "rosterSize": 3,
+      "living": 3,
+      "raw": 20,
+      "gated": 20,
+      "unlockedWave": 3,
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 3,
+        "armed": 3,
+        "tricks": 19,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "armor",
+          "weapons",
+          "veterans"
+        ]
+      },
+      "worldCap": 8,
+      "px": 4,
+      "py": 4,
+      "wanderer": {
+        "id": "buffering",
+        "veteran": false
+      },
+      "world": [
+        {
+          "seq": 21,
+          "id": "anaconda_empress",
+          "wave": 1,
+          "tx": 6,
+          "ty": 8,
+          "mx": 5,
+          "my": 7,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 25,
+          "id": "murkcap",
+          "wave": 1,
+          "tx": 4,
+          "ty": 7,
+          "mx": 1,
+          "my": 1,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 26,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 6,
+          "ty": 3,
+          "mx": 3,
+          "my": 3,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 27,
+          "id": "understudy",
+          "wave": 2,
+          "tx": 0,
+          "ty": 7,
+          "mx": 7,
+          "my": 8,
+          "dist": 7,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 30,
+          "id": "spool",
+          "wave": 3,
+          "tx": 4,
+          "ty": 5,
+          "mx": 8,
+          "my": 2,
+          "dist": 1,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 36,
+          "id": "living_wire",
+          "wave": 1,
+          "tx": 4,
+          "ty": 1,
+          "mx": 4,
+          "my": 6,
+          "dist": 3,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 37,
+          "id": "paparazzo",
+          "wave": 2,
+          "tx": 7,
+          "ty": 2,
+          "mx": 1,
+          "my": 5,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 38,
+          "id": "callback",
+          "wave": 3,
+          "tx": 8,
+          "ty": 3,
+          "mx": 2,
+          "my": 6,
+          "dist": 5,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 39,
+          "id": "sanjun",
+          "wave": 1,
+          "tx": 0,
+          "ty": 6,
+          "mx": 4,
+          "my": 4,
+          "dist": 6,
+          "onPlayerTile": false,
+          "npcCount": 0
+        },
+        {
+          "seq": 40,
+          "id": "redactor",
+          "wave": 3,
+          "tx": 5,
+          "ty": 3,
+          "mx": 1,
+          "my": 0,
+          "dist": 2,
+          "onPlayerTile": false,
+          "npcCount": 0
+        }
+      ],
+      "w4facedTypes": 0
+    }
+  ],
+  "mtCalls": [],
+  "tileChanges": [
+    {
+      "idx": 16,
+      "day": 5,
+      "from": [
+        4,
+        4
+      ],
+      "to": [
+        0,
+        1
+      ]
+    },
+    {
+      "idx": 20,
+      "day": 6,
+      "from": [
+        0,
+        1
+      ],
+      "to": [
+        1,
+        1
+      ]
+    },
+    {
+      "idx": 38,
+      "day": 8,
+      "from": [
+        1,
+        1
+      ],
+      "to": [
+        2,
+        1
+      ]
+    },
+    {
+      "idx": 40,
+      "day": 8,
+      "from": [
+        2,
+        1
+      ],
+      "to": [
+        1,
+        1
+      ]
+    },
+    {
+      "idx": 46,
+      "day": 9,
+      "from": [
+        1,
+        1
+      ],
+      "to": [
+        4,
+        4
+      ]
+    },
+    {
+      "idx": 63,
+      "day": 15,
+      "from": [
+        4,
+        4
+      ],
+      "to": [
+        3,
+        4
+      ]
+    },
+    {
+      "idx": 64,
+      "day": 15,
+      "from": [
+        3,
+        4
+      ],
+      "to": [
+        4,
+        4
+      ]
+    },
+    {
+      "idx": 79,
+      "day": 17,
+      "from": [
+        4,
+        4
+      ],
+      "to": [
+        5,
+        4
+      ]
+    },
+    {
+      "idx": 81,
+      "day": 17,
+      "from": [
+        5,
+        4
+      ],
+      "to": [
+        4,
+        4
+      ]
+    },
+    {
+      "idx": 84,
+      "day": 18,
+      "from": [
+        4,
+        4
+      ],
+      "to": [
+        3,
+        4
+      ]
+    },
+    {
+      "idx": 87,
+      "day": 18,
+      "from": [
+        3,
+        4
+      ],
+      "to": [
+        4,
+        4
+      ]
+    },
+    {
+      "idx": 144,
+      "day": 36,
+      "from": [
+        4,
+        4
+      ],
+      "to": [
+        3,
+        4
+      ]
+    },
+    {
+      "idx": 146,
+      "day": 36,
+      "from": [
+        3,
+        4
+      ],
+      "to": [
+        4,
+        4
+      ]
+    }
+  ],
+  "sayLines": [
+    {
+      "idx": 3,
+      "day": 3,
+      "line": "Something big is moving in the woods. The birds went quiet."
+    },
+    {
+      "idx": 9,
+      "day": 5,
+      "line": "Something moves out there — a crow that watches too long and blinks too little."
+    },
+    {
+      "idx": 15,
+      "day": 5,
+      "line": "Something moves out there — something heavy rooting in the grass, dust rising for no reason."
+    },
+    {
+      "idx": 18,
+      "day": 5,
+      "line": "You hold still behind cover. After a while, the sounds fade. It lost your trail."
+    },
+    {
+      "idx": 23,
+      "day": 7,
+      "line": "Something moves out there — a raccoon with too many fingers, working at something."
+    },
+    {
+      "idx": 42,
+      "day": 8,
+      "line": "You hold still behind cover. After a while, the sounds fade. It lost your trail."
+    },
+    {
+      "idx": 48,
+      "day": 10,
+      "line": "Something moves out there — Rut King."
+    },
+    {
+      "idx": 50,
+      "day": 10,
+      "line": "Something big is moving in the woods. The birds went quiet."
+    },
+    {
+      "idx": 51,
+      "day": 10,
+      "line": "The Rut King stops at the treeline — pacing, unwilling. The walls end the argument. It's still out there."
+    },
+    {
+      "idx": 55,
+      "day": 11,
+      "line": "Something moves out there — Inspiration."
+    },
+    {
+      "idx": 60,
+      "day": 14,
+      "line": "Something moves out there — Night Court."
+    },
+    {
+      "idx": 62,
+      "day": 15,
+      "line": "Something pads into the clearing — Inspiration. It's here."
+    },
+    {
+      "idx": 78,
+      "day": 17,
+      "line": "Something big is moving in the woods. The birds went quiet."
+    },
+    {
+      "idx": 80,
+      "day": 17,
+      "line": "The Hushpuppy stops at the treeline — pacing, unwilling. The walls end the argument. It's still out there."
+    },
+    {
+      "idx": 83,
+      "day": 18,
+      "line": "Something moves out there — Murkcap."
+    },
+    {
+      "idx": 94,
+      "day": 20,
+      "line": "Something big is HERE. In the grid with you. You can see it. It can see you."
+    },
+    {
+      "idx": 104,
+      "day": 24,
+      "line": "Something big is moving in the woods. The birds went quiet."
+    },
+    {
+      "idx": 114,
+      "day": 26,
+      "line": "Something moves out there — The Redactor."
+    },
+    {
+      "idx": 115,
+      "day": 26,
+      "line": "The Redactor stops at the treeline — pacing, unwilling. The walls end the argument. It's still out there."
+    },
+    {
+      "idx": 116,
+      "day": 27,
+      "line": "It followed you. The Redactor is here."
+    },
+    {
+      "idx": 117,
+      "day": 27,
+      "line": "The Redactor stops at the treeline — pacing, unwilling. The walls end the argument. It's still out there."
+    },
+    {
+      "idx": 119,
+      "day": 29,
+      "line": "Something moves out there — mosquito."
+    },
+    {
+      "idx": 120,
+      "day": 29,
+      "line": "The mosquito stops at the boundary — pacing, unwilling. Something else is already here. It's still out there."
+    },
+    {
+      "idx": 121,
+      "day": 29,
+      "line": "The Redactor stops at the treeline — pacing, unwilling. The walls end the argument. It's still out there."
+    },
+    {
+      "idx": 124,
+      "day": 32,
+      "line": "Something big is moving in the woods. The birds went quiet."
+    },
+    {
+      "idx": 127,
+      "day": 33,
+      "line": "Something moves out there — The Paparazzo."
+    },
+    {
+      "idx": 128,
+      "day": 33,
+      "line": "It followed you. The Paparazzo is here."
+    },
+    {
+      "idx": 129,
+      "day": 33,
+      "line": "The Paparazzo stops at the treeline — pacing, unwilling. The walls end the argument. It's still out there."
+    },
+    {
+      "idx": 148,
+      "day": 38,
+      "line": "Something moves out there — The Living Wire."
+    },
+    {
+      "idx": 150,
+      "day": 39,
+      "line": "Something big is moving in the woods. The birds went quiet."
+    },
+    {
+      "idx": 152,
+      "day": 46,
+      "line": "Something big is moving in the woods. The birds went quiet."
+    },
+    {
+      "idx": 162,
+      "day": 47,
+      "line": "It followed you. The Spool is here."
+    },
+    {
+      "idx": 164,
+      "day": 47,
+      "line": "It followed you. The Spool is here."
+    },
+    {
+      "idx": 166,
+      "day": 47,
+      "line": "It followed you. The Spool is here."
+    },
+    {
+      "idx": 168,
+      "day": 47,
+      "line": "The Spool stops at the treeline — pacing, unwilling. The walls end the argument. It's still out there."
+    },
+    {
+      "idx": 170,
+      "day": 48,
+      "line": "Something moves out there — The Loud Beast."
+    },
+    {
+      "idx": 171,
+      "day": 48,
+      "line": "The Loud Beast stops at the boundary — pacing, unwilling. Something else is already here. It's still out there."
+    },
+    {
+      "idx": 172,
+      "day": 48,
+      "line": "The Ugly-Eyes stops at the treeline — pacing, unwilling. The walls end the argument. It's still out there."
+    }
+  ],
+  "sayCount": 5323,
+  "waveKillLog": [
+    {
+      "d": 5,
+      "mid": "mirrormoth",
+      "w": 1,
+      "by": "gen_anmt6e3",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 5,
+      "mid": "nightlight_catfish",
+      "w": 1,
+      "by": "chantal_mukendi",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 7,
+      "mid": "anaconda_empress",
+      "w": 1,
+      "by": "gen_ieyw2p8",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 7,
+      "mid": "cliffhanger",
+      "w": 1,
+      "by": "gen_anmt6e3",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 7,
+      "mid": "nevermore",
+      "w": 1,
+      "by": "lucas_brown",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 7,
+      "mid": "speedbump_turtle",
+      "w": 1,
+      "by": "ruth_goldstein",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 10,
+      "mid": "rut_king",
+      "w": 1,
+      "by": "gen_21ysxqq",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 13,
+      "mid": "alien_tick",
+      "w": 2,
+      "by": "catalina_reyes",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 16,
+      "mid": "speedbump_turtle",
+      "w": 1,
+      "by": "gen_4j27wha",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 16,
+      "mid": "ducks_in_a_row",
+      "w": 1,
+      "by": "chantal_mukendi",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 17,
+      "mid": "bright_idea",
+      "w": 2,
+      "by": "gen_2n9s4kk",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 18,
+      "mid": "nightcourt",
+      "w": 1,
+      "by": "catalina_reyes",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 19,
+      "mid": "hushwolf",
+      "w": 1,
+      "by": "henry_zhang",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 19,
+      "mid": "union_rep",
+      "w": 2,
+      "by": "ruth_goldstein",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 23,
+      "mid": "hushwolf",
+      "w": 1,
+      "by": "gen_ketdabj",
+      "via": "player",
+      "trick": "strike_lead"
+    },
+    {
+      "d": 23,
+      "mid": "hushwolf",
+      "w": 1,
+      "by": "ella_johnson",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 24,
+      "mid": "bright_idea",
+      "w": 2,
+      "by": "gen_ieyw2p8",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 25,
+      "mid": "anaconda_empress",
+      "w": 1,
+      "by": "chantal_mukendi",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 26,
+      "mid": "sanjun",
+      "w": 1,
+      "by": "gen_ketdabj",
+      "via": "player",
+      "trick": null
+    },
+    {
+      "d": 33,
+      "mid": "giant_mosquito",
+      "w": 2,
+      "by": "lucas_brown",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 34,
+      "mid": "paparazzo",
+      "w": 2,
+      "by": "gen_21ysxqq",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 34,
+      "mid": "understudy",
+      "w": 2,
+      "by": "catalina_reyes",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 46,
+      "mid": "ducks_in_a_row",
+      "w": 1,
+      "by": "ruth_goldstein",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 46,
+      "mid": "giant_mosquito",
+      "w": 2,
+      "by": "ruth_goldstein",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 46,
+      "mid": "hummice",
+      "w": 1,
+      "by": "ella_johnson",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 47,
+      "mid": "paparazzo",
+      "w": 2,
+      "by": "gen_2n9s4kk",
+      "via": "player",
+      "trick": "move_windup"
+    }
+  ],
+  "fallen": [
+    {
+      "villagerId": "gen_anmt6e3",
+      "day": 24,
+      "cause": "ambush",
+      "name": "Sholpan"
+    },
+    {
+      "villagerId": "gen_21ysxqq",
+      "day": 34,
+      "cause": "monster",
+      "name": "Tomas",
+      "monsterId": "understudy",
+      "monsterName": "The Understudy"
+    },
+    {
+      "villagerId": "gen_ketdabj",
+      "day": 35,
+      "cause": "the wild",
+      "name": "Heinrich"
+    },
+    {
+      "villagerId": "gen_4j27wha",
+      "day": 35,
+      "cause": "sickness",
+      "name": "Nathan",
+      "monsterId": null,
+      "monsterName": null
+    },
+    {
+      "villagerId": "lucas_brown",
+      "day": 40,
+      "cause": "sickness",
+      "name": "Lucas",
+      "monsterId": null,
+      "monsterName": null
+    },
+    {
+      "villagerId": "henry_zhang",
+      "day": 43,
+      "cause": "sickness",
+      "name": "Henry",
+      "monsterId": null,
+      "monsterName": null
+    },
+    {
+      "villagerId": "gen_ieyw2p8",
+      "day": 47,
+      "cause": "starvation",
+      "name": "Aldi",
+      "monsterId": null,
+      "monsterName": null
+    },
+    {
+      "villagerId": "ruth_goldstein",
+      "day": 47,
+      "cause": "starvation",
+      "name": "Ruth",
+      "monsterId": null,
+      "monsterName": null
+    },
+    {
+      "villagerId": "catalina_reyes",
+      "day": 48,
+      "cause": "starvation",
+      "name": "Catalina",
+      "monsterId": null,
+      "monsterName": null
+    }
+  ],
+  "wavesFaced": {
+    "mirrormoth": 1,
+    "nightlight_catfish": 1,
+    "lockpick_raccoon": 1,
+    "anaconda_empress": 1,
+    "cliffhanger": 1,
+    "nevermore": 1,
+    "speedbump_turtle": 1,
+    "rut_king": 1,
+    "alien_tick": 2,
+    "nightcourt": 1,
+    "ducks_in_a_row": 1,
+    "bright_idea": 2,
+    "hushwolf": 1,
+    "union_rep": 2,
+    "sanjun": 1,
+    "spool": 3,
+    "redactor": 3,
+    "giant_mosquito": 2,
+    "paparazzo": 2,
+    "understudy": 2,
+    "hummice": 1
+  },
+  "finalWorld": [
+    {
+      "seq": 21,
+      "id": "anaconda_empress",
+      "wave": 1,
+      "tx": 6,
+      "ty": 8,
+      "mx": 5,
+      "my": 7
+    },
+    {
+      "seq": 25,
+      "id": "murkcap",
+      "wave": 1,
+      "tx": 4,
+      "ty": 7,
+      "mx": 1,
+      "my": 1
+    },
+    {
+      "seq": 26,
+      "id": "paparazzo",
+      "wave": 2,
+      "tx": 6,
+      "ty": 3,
+      "mx": 3,
+      "my": 3
+    },
+    {
+      "seq": 27,
+      "id": "understudy",
+      "wave": 2,
+      "tx": 0,
+      "ty": 7,
+      "mx": 7,
+      "my": 8
+    },
+    {
+      "seq": 30,
+      "id": "spool",
+      "wave": 3,
+      "tx": 4,
+      "ty": 5,
+      "mx": 8,
+      "my": 2
+    },
+    {
+      "seq": 36,
+      "id": "living_wire",
+      "wave": 1,
+      "tx": 4,
+      "ty": 1,
+      "mx": 4,
+      "my": 6
+    },
+    {
+      "seq": 37,
+      "id": "paparazzo",
+      "wave": 2,
+      "tx": 7,
+      "ty": 2,
+      "mx": 1,
+      "my": 5
+    },
+    {
+      "seq": 38,
+      "id": "callback",
+      "wave": 3,
+      "tx": 8,
+      "ty": 3,
+      "mx": 2,
+      "my": 6
+    },
+    {
+      "seq": 39,
+      "id": "sanjun",
+      "wave": 1,
+      "tx": 0,
+      "ty": 6,
+      "mx": 4,
+      "my": 4
+    },
+    {
+      "seq": 40,
+      "id": "redactor",
+      "wave": 3,
+      "tx": 5,
+      "ty": 3,
+      "mx": 1,
+      "my": 0
+    }
+  ],
+  "instrumentErrors": []
+}
