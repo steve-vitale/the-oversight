@@ -312,10 +312,12 @@ clean on driver + proof test.
 - **check.js --quick:** 284 passed, 6 failed (standing set, identical to r106).
 - **Telemetry:** 2 LOUD lines, both explained as aggregation artifacts, baseline
   NOT rolled.
-- **Index clobber struck on BOTH safe-commits** (prereg 6bce0f17d and run note
-  6fc38240a): committed files showed staged-as-deleted + untracked after each
-  commit. Repaired both times via HEAD-blob `update-index --add --cacheinfo`;
-  verified status clean + diff HEAD empty + hash-object matches HEAD.
+- **Index clobber struck on all THREE safe-commits** (prereg 6bce0f17d, run
+  note 6fc38240a, closeout f2c6708a3): the first two showed committed files
+  as staged-as-deleted + untracked; the closeout commit left a stale blob
+  in the index (index behind HEAD). Repaired each time via HEAD-blob
+  `update-index --add --cacheinfo`; verified status clean + diff HEAD empty
+  + hash-object matches HEAD.
 - **Rotation re-verified at closeout: reads `1`** (the 0→1 write stuck this
   run). Rotation-write discrepancy remains unexplained (4th sighting).
 - **EPERM flap** hit registration (~20:18Z) and cleared within minutes; no
