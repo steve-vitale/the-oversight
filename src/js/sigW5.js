@@ -675,9 +675,18 @@
       if (!f || f.over) return false;
       var p = game.tbFighter('p');
       if (!p || !p.alive) return false;
-      if (!m.fiInit) { m.fiInit = true; m.fiGrowth = 0; m.fiDealt = 0; }
+      if (!m.fiInit) { m.fiInit = true; m.fiGrowth = 0; m.fiDealt = 0; m.fiHpSeen = m.maxHp || m.hp; }
       m.fiGrowth++;
-      m.fiDealt = (m.fiDealt || 0) + (f.sigW5PDmg || 0);
+      // FIDEALT (journey-endgame r140): fiDealt is the damage the finale
+      // has TAKEN. The old line re-added the player's CUMULATIVE total
+      // (f.sigW5PDmg) on every finale turn, so the card printed a
+      // triangular sum — v1c "struck for 439 (1103 total)" = 114+222+328+439.
+      // Track the HP seen and add only the drop since the last finale turn:
+      // all sources count (player, allies, skills) and healing never
+      // subtracts, so the total is what the finale has actually taken.
+      if (m.fiHpSeen == null) m.fiHpSeen = m.maxHp || m.hp;
+      m.fiDealt = (m.fiDealt || 0) + Math.max(0, m.fiHpSeen - m.hp);
+      m.fiHpSeen = m.hp;
       // the declaration: once per fight
       // (finale-campaign 2026-10-12: the opening credits declare with a
       // longer fuse and a smaller card — overrides live on the fighter or

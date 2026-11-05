@@ -456,6 +456,14 @@
     return fx >= z.x && fx <= z.x + 2 && fy >= z.y && fy <= z.y + 2;
   }
 
+  // TAKES-LINE (journey-endgame r140): the player's fighter is named "You",
+  // so the third-person form reads "— You takes 52." — wrong. The player
+  // takes; everyone else takes. Used by the sky fall and the credits burn.
+  function fiTakesLine(x, landed) {
+    if (x.kind === 'player' || (x.name || x.key) === 'You') return '— You take ' + landed + '.';
+    return '— ' + (x.name || x.key) + ' takes ' + landed + '.';
+  }
+
   function fiResolveSky(game, f, m) {
     var zones = f.fiSkyArmed || [];
     if (!zones.length) return;
@@ -469,7 +477,7 @@
       }
     });
     if (!hit.length) {
-      game.say('🌠 The sky falls where you were standing. It hits nothing but set dressing. (MOVE works.)');
+      game.say('🌠 The sky falls where you were standing. It hits nothing but set dressing.');
       return;
     }
     game.say('🌠 THE SKY FALLS — ' + hit.length + ' caught standing under it.');
@@ -477,7 +485,7 @@
     hit.forEach(function (x) {
       var dmg = 40 + Math.floor(R() * 21);
       var landed = self.tbDamage(x.key, dmg, 'the falling sky', m.key, { undodgeable: true, sigW5NoMult: true });
-      game.say('— ' + (x.name || x.key) + ' takes ' + landed + '.');
+      game.say(fiTakesLine(x, landed));
     });
     if (game.tbEndCheck()) return;
   }
@@ -504,7 +512,7 @@
     burned.forEach(function (x) {
       var dmg = 10 + Math.floor(R() * 11);
       var landed = self.tbDamage(x.key, dmg, 'the rolling credits', m.key, { undodgeable: true, sigW5NoMult: true });
-      game.say('— ' + (x.name || x.key) + ' takes ' + landed + '. (Get IN — the middle is safe.)');
+      game.say(fiTakesLine(x, landed) + ' (Get IN — the middle is safe.)');
     });
     if (game.tbEndCheck()) return;
   }

@@ -238,6 +238,13 @@
       // close in to strike, but don't stand in telegraphs
       moveToBody(foe.f, true);
       if (distance(foe.f) <= 1) return { moves, action: { type: 'strike', target: foe.f.key } };
+      // HARRY-WHEN-STUCK (journey-endgame r140): a helpful villager who
+      // cannot close to strike — every adjacent tile blocked, as Ruth was
+      // for 16/16 trial rounds at body-distance 2 — throws a rock instead
+      // of waiting silently. Same [2,4] harry the brave branch uses at
+      // range <= 3; strikes are still preferred whenever adjacency is
+      // reachable, so the combat-survival strike rule above stands.
+      if (distance(foe.f) <= 3) return { moves, action: { type: 'harry', target: foe.f.key } };
     } else if (player) {
       moveToBody(player, true);
     }
