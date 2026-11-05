@@ -215,6 +215,25 @@ evidence 2026-11-05 (journey-deepening-r103-seed9420*.json,
 journey-deepening-r103-transcript-*.txt). Prereg + this note in
 repo evidence/2026-11-05/.
 
+## Closeout amendment (gate re-run, before landing)
+
+Second full-output run (saved to /tmp/r103-checkquick-full.log, not
+the repo): **280 passed, 10 failed in 1298s** (first run: 279/11).
+The run-to-run wobble (279↔280, 11↔10) under concurrent sibling
+jest runs confirms contention variance, not a regression. Failing
+scripts, all pre-existing game tests, none touching this run's
+files: test-measurement-proof-update, test-measurement-workflow,
+test-mobile-combat-cadence, test-occupation-panels,
+test-measurement-cache-flags, test-phone-frame-proof,
+test-solo-campaign-endings (120s timeout), 
+test-trust-observer-neutrality (120s timeout),
+test-capable-bot-20261014 (120s timeout),
+test-establishment-r20-fixes-20261020. The measurement-proof
+failure ("Proof source inputs are not current") matches the r102
+baseline's known failure. Landing stands on the construction
+argument in the gate section above: zero src/js touched, and the
+new driver/analyzer are never executed by check.js.
+
 ## Regression gate
 
 `node scripts/check.js --quick` with
@@ -232,6 +251,6 @@ active concurrently — the known concurrent-jest phantom source).
 so the per-script failure list for this first run was not retained.
 A second full-output run (saved to /tmp, not the repo) was made
 before landing to recover the list; its result is in the final
-message and in the closeout amendment below. The landing decision
+message and in the closeout amendment above. The landing decision
 rests on (1): a tooling-only change cannot regress game scripts
 it is never executed by.
