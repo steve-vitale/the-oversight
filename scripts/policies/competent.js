@@ -2746,6 +2746,15 @@ function exitVerifiedFleeOn() { return process.env.COMPETENT_EXIT_VERIFIED_FLEE 
 // resolution, extended to the branch that actually runs). Gate off =
 // directional branch byte-identical to before.
 function fleeRepairOn() { return process.env.COMPETENT_FLEE_REPAIR === '1'; }
+// IN-FIGHT RECOVERY (winnability staying 2026-11-05, arm sim-stayrecover-a):
+// a hurt fighter eats from the day ration they carry (Game.tbEatRations:
+// 250 kcal -> +25 HP, costs the action). Gate off = the eat block below
+// never runs (byte-identical). Gate on = eat when hurt (<50% HP), a
+// monster is in weapon range, the weakest living monster is not one
+// strike from death (>50 HP), and the pack holds >= 100 kcal. Flee
+// (incl. the <35% eject and the DPS race) and ability/trick play still
+// outrank eating — a fighter who can flee, flees.
+function recoverOn() { return process.env.COMPETENT_RECOVER === '1'; }
 // APPROACH FALLBACK (longsim scale-onramp 2026-11-04, arm sim-approachfall-b):
 // mirrors the flee repair for the CLOSE THE DISTANCE path, which has no
 // blocked-step fallback today — a step whose path is blocked ("No path
@@ -3689,6 +3698,53 @@ const competent = {
       // counters tactically before the generic strike-the-weakest. Never
       // overrides the walk-away assessment above.
       try { if (beastTrickPlay(Game, f, ctx, p, endTurn)) return true; } catch (e) {}
+      // IN-FIGHT RECOVERY (stayrecover 2026-11-05, gate COMPETENT_RECOVER=1):
+      // eat from the pack when hurt, instead of striking — the fighter
+      // trades one strike for ~25 HP and the rounds to land more strikes.
+      // Flee/ability/trick already had their chance above; this sits
+      // before close/strike so a hurt fighter eats instead of walking
+      // into range to die. Never eats instead of a killing blow (weakest
+      // monster <= 50 HP: strike), never eats out of range (the
+      // alternative there is closing, not striking — eat only where the
+      // tradeoff is strike-vs-heal). The engine verb refuses honestly
+      // (short pack, full HP, already acted) and spends nothing then.
+      if (recoverOn() && hpPct < 0.50 && typeof Game.tbEatRations === 'function') {
+        try {
+          const w0 = (Game.equippedWeapon && Game.equippedWeapon()) || { range: 1 };
+          const range0 = w0.range || 1;
+          const px0 = p.mx != null ? p.mx : 4, py0 = p.my != null ? p.my : 4;
+          const mons0 = (f.fighters || []).filter(function (x) { return x && (x.kind === 'monster' || x.kind === 'hostile') && (x.hp || 0) > 0 && !x.fled; });
+          let weakestHp = null, inRange = false;
+          for (const m of mons0) {
+            const d = (typeof Game.fighterDistTo === 'function')
+              ? Game.fighterDistTo(m, px0, py0)
+              : Math.max(Math.abs((m.mx != null ? m.mx : 4) - px0), Math.abs((m.my != null ? m.my : 4) - py0));
+            if (d != null && d <= range0) inRange = true;
+            if (weakestHp == null || (m.hp || 0) < weakestHp) weakestHp = m.hp || 0;
+          }
+          if (inRange && weakestHp != null && weakestHp > 50) {
+            const hpBefore = p.hp || 0;
+            let packBefore = 0;
+            try { packBefore = (Game.packKcal && Game.packKcal(Game.villagerId)) || 0; } catch (e2) {}
+            if (packBefore >= 100) {
+              const ate = Game.tbEatRations();
+              if (ate) {
+                ctx.recoverEats = (ctx.recoverEats || 0) + 1;
+                let packAfter = packBefore;
+                try { packAfter = (Game.packKcal && Game.packKcal(Game.villagerId)) || 0; } catch (e2) {}
+                ctx.recoverKcal = (ctx.recoverKcal || 0) + Math.max(0, Math.round(packBefore - packAfter));
+                ctx.recoverHp = (ctx.recoverHp || 0) + Math.max(0, (p.hp || 0) - hpBefore);
+                // END TURN only if the eat did not already advance it
+                // (tbEatRations advances when moveLeft is already 0 — e.g.
+                // after a failed flee step; endTurn after that would
+                // advance a second time and the monsters would act twice).
+                if (Game.tbIsPlayerTurn && Game.tbIsPlayerTurn()) endTurn();
+                return true;
+              }
+            }
+          }
+        } catch (e) { ctx.recoverErrors = (ctx.recoverErrors || 0) + 1; }
+      }
       const alive = f.fighters.filter(x => x.kind === 'monster' && (x.hp || 0) > 0);
       if (!alive.length) return false;
       alive.sort((a, b) => (a.hp || 0) - (b.hp || 0));
@@ -3858,7 +3914,7 @@ const competent = {
   },
 };
 
-module.exports = { competent, competentEat, packEatOnce, beastStrikeTarget, walkTo, walkHome, thirstWalkHome, goHomeStanding, standingHomeOn, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, keepPromises, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, fleeRepairOn, approachFallbackOn, approachMonsterSig, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE, armorWantsVine };
+module.exports = { competent, competentEat, packEatOnce, beastStrikeTarget, walkTo, walkHome, thirstWalkHome, goHomeStanding, standingHomeOn, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, keepPromises, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, fleeRepairOn, recoverOn, approachFallbackOn, approachMonsterSig, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE, armorWantsVine };
 
 
 // The public shared gearing routine, also used by prepared policy proofs.

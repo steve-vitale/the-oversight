@@ -1,0 +1,3820 @@
+{
+  "seed": 99620,
+  "run": "stayrecover-fleerepair",
+  "policy": "fleerepair",
+  "anchorCommit": "e5e6aa59b236",
+  "days": 78,
+  "gameDays": 78,
+  "endReason": "village-lost",
+  "won": false,
+  "villageLost": true,
+  "maxWave": 4,
+  "spawnsW4": 4,
+  "tbCalls": 3,
+  "fieldCallsW4": 1,
+  "exposures": [
+    {
+      "seq": 1,
+      "type": "tb",
+      "day": 69,
+      "mid": "eulogy",
+      "wave": 4,
+      "fightId": "fmgpspirc_5q3a3",
+      "scholarAtStart": "gen_xwq4ozq",
+      "leadVid": "gen_xwq4ozq",
+      "partySizeStart": 2,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "gen_xwq4ozq",
+          "hpStart": 110,
+          "maxHp": 110,
+          "gear": {
+            "vid": "gen_xwq4ozq",
+            "armorP": 12,
+            "armed": true,
+            "weapon": "Hunting spear",
+            "vpFound": true,
+            "readError": null
+          }
+        },
+        {
+          "key": "v_ingrid_vik",
+          "kind": "villager",
+          "vid": "ingrid_vik",
+          "hpStart": 79,
+          "maxHp": 100,
+          "gear": {
+            "vid": "ingrid_vik",
+            "armorP": 20,
+            "armed": true,
+            "weapon": "Sharpened stick",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "eulogy",
+          "hpStart": 948,
+          "maxHp": 948,
+          "wave": 4,
+          "joinedMidFight": false
+        }
+      ],
+      "leadGear": {
+        "vid": "gen_xwq4ozq",
+        "armorP": 12,
+        "armed": true,
+        "weapon": "Hunting spear",
+        "vpFound": true,
+        "readError": null
+      },
+      "scholarStart": {
+        "health": 110,
+        "energy": 80,
+        "food": "UNRECORDED"
+      },
+      "trickKnown": false,
+      "hits": [
+        {
+          "round": 1,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_ingrid_vik",
+          "sourceLabel": "Ingrid",
+          "requested": 13,
+          "returned": 16,
+          "hpBefore": 948,
+          "hpAfter": 932,
+          "hpDelta": -16,
+          "turnSeq": null,
+          "actorKey": "v_ingrid_vik",
+          "actorKind": "ally",
+          "phase": "npc-turn",
+          "sourceClass": "ally"
+        },
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 46,
+          "returned": 46,
+          "hpBefore": 932,
+          "hpAfter": 886,
+          "hpDelta": -46,
+          "turnSeq": 1,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_ingrid_vik",
+          "sourceLabel": "Ingrid",
+          "requested": 11,
+          "returned": 14,
+          "hpBefore": 886,
+          "hpAfter": 872,
+          "hpDelta": -14,
+          "turnSeq": null,
+          "actorKey": "v_ingrid_vik",
+          "actorKind": "ally",
+          "phase": "npc-turn",
+          "sourceClass": "ally"
+        },
+        {
+          "round": 2,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 50,
+          "returned": 35,
+          "hpBefore": 110,
+          "hpAfter": 75,
+          "hpDelta": -35,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 45,
+          "returned": 45,
+          "hpBefore": 872,
+          "hpAfter": 827,
+          "hpDelta": -45,
+          "turnSeq": 2,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Epitaph",
+          "requested": 39,
+          "returned": 27,
+          "hpBefore": 87,
+          "hpAfter": 60,
+          "hpDelta": -27,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 42,
+          "returned": 42,
+          "hpBefore": 827,
+          "hpAfter": 785,
+          "hpDelta": -42,
+          "turnSeq": 3,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_ingrid_vik",
+          "sourceLabel": "Ingrid",
+          "requested": 10,
+          "returned": 13,
+          "hpBefore": 785,
+          "hpAfter": 772,
+          "hpDelta": -13,
+          "turnSeq": null,
+          "actorKey": "v_ingrid_vik",
+          "actorKind": "ally",
+          "phase": "npc-turn",
+          "sourceClass": "ally"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 60,
+          "returned": 42,
+          "hpBefore": 60,
+          "hpAfter": 28,
+          "hpDelta": -32,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 5,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 42,
+          "returned": 42,
+          "hpBefore": 772,
+          "hpAfter": 730,
+          "hpDelta": -42,
+          "turnSeq": 4,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 5,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_ingrid_vik",
+          "sourceLabel": "Ingrid",
+          "requested": 14,
+          "returned": 18,
+          "hpBefore": 730,
+          "hpAfter": 712,
+          "hpDelta": -18,
+          "turnSeq": null,
+          "actorKey": "v_ingrid_vik",
+          "actorKind": "ally",
+          "phase": "npc-turn",
+          "sourceClass": "ally"
+        },
+        {
+          "round": 5,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 52,
+          "returned": 37,
+          "hpBefore": 28,
+          "hpAfter": -9,
+          "hpDelta": -37,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "sysSay",
+          "line": "Ingrid's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Ingrid strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): Ingrid fights on a full belly."
+        },
+        {
+          "kind": "say",
+          "line": "Ingrid hits eulogy for 16."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Too close. The eulogy's attention SNAPS to you — proximity overrules patience."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they stood their ground, poor brave fools.\" The spotlight widens. (No weight yet — just the story starting.) (5 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 46 (Hunting spear)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Ingrid's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Ingrid strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): Ingrid fights on a full belly."
+        },
+        {
+          "kind": "say",
+          "line": "Ingrid hits eulogy for 14."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Too close. The eulogy's attention SNAPS to you — proximity overrules patience."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they ran, and the spotlight followed.\" The spotlight narrows. Your dodge feels watched. (-10% dodge.) (4 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 15."
+        },
+        {
+          "kind": "say",
+          "line": "Ingrid gasps. \"You're hit — move!\""
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 35."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Final Chapter — strikes one target after a windup. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 45 (Hunting spear)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Ingrid's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Ingrid patches you up (+12 HP). \"Hold still!\""
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Too close. The eulogy's attention SNAPS to Ingrid — proximity overrules patience."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they bled, politely, where everyone could see.\" The narration lingers on your wounds. (Bleeds last 1 round longer.) (3 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 eulogy's Epitaph finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 12."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Epitaph hits you for 27."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Epitaph — locks onto one target — moving won't dodge it. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 42 (Hunting spear)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "Ingrid's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Ingrid strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): Ingrid fights on a full belly."
+        },
+        {
+          "kind": "say",
+          "line": "Ingrid hits eulogy for 13."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Too close. The eulogy's attention SNAPS to you — proximity overrules patience."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they knelt, and the story approved.\" The story leans in. (The Eulogy's attacks +15.) (2 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 18."
+        },
+        {
+          "kind": "say",
+          "line": "Your scars ITCH — and hold. You should be down, but the scars remember every almost-death and refuse a new one. (Scar Tissue: held at 25% HP.)"
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 42."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 5!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "💪 Your Agility grows — 8. The work is changing you."
+        },
+        {
+          "kind": "say",
+          "line": "✨ Footwork — Your feet know the ground. (tier 2)"
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 42 (Hunting spear)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Ingrid's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Ingrid strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): Ingrid fights on a full belly."
+        },
+        {
+          "kind": "say",
+          "line": "Ingrid hits eulogy for 18."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Too close. The eulogy's attention SNAPS to you — proximity overrules patience."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then — this is the last line — they ended.\" The last line hangs in the air. (It finishes next round.) (1 verse remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 15."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 37."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Rocco Wojcik is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Rocco Wojcik is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Rocco kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "\"Rocco's gone.\" Tuilelaith looks at you for a long moment. \"You're not Rocco.\" No heat in it. Just fact. You'll have to earn this face."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Ingrid blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Wound Care (Level 1). Clean it, close it, cover it. Pressure stops bleeding. Clean water is better than dirty hands."
+        },
+        {
+          "kind": "say",
+          "line": "⚡ TECHNIQUE UNLOCKED: Precise Mend! Your healing knows where to go. +50% effectiveness. (Your knowledge of Wound Care amplifies your field_medicine.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "\"OH! OH! PRECISE MEND! The audience did NOT see that coming! Knowledge AMPLIFIES power! The gamblers are recalculating EVERYTHING!\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Anatomy (Level 1). You know where the important bits are. Arteries, joints, organs. Useful for healing or hurting."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Steady Hands (Level 1). Fine work under pressure. Dressing game, stitching wounds, tying snares — no shake."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Herbal Medicine (Level 1). Willow bark = aspirin. Yarrow stops bleeding. Plantain draws out infection. The pharmacy is outside."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Food Preservation (Level 1). Salt, smoke, dry. The big three. Salt draws water out; bacteria can't live without it."
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Rocco Wojcik, 69 days. The mantle passes to Ingrid Vik."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Ingrid Vik, 35 — a physical therapy aide. Her hands know different work now: The Touch."
+        },
+        {
+          "kind": "say",
+          "line": "The village's quarrel was with Rocco — and Rocco is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers."
+        },
+        {
+          "kind": "say",
+          "line": "At the grave, Esther, Cheyenne, Tuilelaith and 4 more speak for Ingrid — \"Rocco trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew Ingrid before the Codex did — her name already carried weight here."
+        }
+      ],
+      "transcriptOverflow": false,
+      "abilityUses": [],
+      "shoutUses": 0,
+      "offerFoodUses": 0,
+      "turns": [
+        {
+          "turnSeq": 1,
+          "round": 2,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 6,
+              "my": 2,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 110,
+              "maxHp": 110,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Hunting spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 3,
+                "hp": 932,
+                "maxHp": 948,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 6,
+                  "my": 2,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 110,
+                  "maxHp": 110,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Hunting spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 5,
+                    "my": 3,
+                    "hp": 932,
+                    "maxHp": 948,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 6,
+                  "my": 2,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 110,
+                  "maxHp": 110,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Hunting spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 5,
+                    "my": 3,
+                    "hp": 886,
+                    "maxHp": 948,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 9,
+          "end": {
+            "player": {
+              "mx": 6,
+              "my": 2,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 110,
+              "maxHp": 110,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Hunting spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 3,
+                "hp": 886,
+                "maxHp": 948,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(eulogy's hide absorbs 8.)",
+            "You STRIKE the eulogy for 46 (Hunting spear).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 2,
+          "round": 3,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 6,
+              "my": 2,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 75,
+              "maxHp": 110,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Hunting spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 3,
+                "hp": 872,
+                "maxHp": 948,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 6,
+                  "my": 2,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 75,
+                  "maxHp": 110,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Hunting spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 5,
+                    "my": 3,
+                    "hp": 872,
+                    "maxHp": 948,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 6,
+                  "my": 2,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 75,
+                  "maxHp": 110,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Hunting spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 5,
+                    "my": 3,
+                    "hp": 827,
+                    "maxHp": 948,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 26,
+          "end": {
+            "player": {
+              "mx": 6,
+              "my": 2,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 75,
+              "maxHp": 110,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Hunting spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 3,
+                "hp": 827,
+                "maxHp": 948,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(eulogy's hide absorbs 8.)",
+            "You STRIKE the eulogy for 45 (Hunting spear).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 3,
+          "round": 4,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 6,
+              "my": 2,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 60,
+              "maxHp": 110,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Hunting spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 3,
+                "hp": 827,
+                "maxHp": 948,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 6,
+                  "my": 2,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 60,
+                  "maxHp": 110,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Hunting spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 5,
+                    "my": 3,
+                    "hp": 827,
+                    "maxHp": 948,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 6,
+                  "my": 2,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 60,
+                  "maxHp": 110,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Hunting spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 5,
+                    "my": 3,
+                    "hp": 785,
+                    "maxHp": 948,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 39,
+          "end": {
+            "player": {
+              "mx": 6,
+              "my": 2,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 60,
+              "maxHp": 110,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Hunting spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 3,
+                "hp": 785,
+                "maxHp": 948,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(eulogy's hide absorbs 8.)",
+            "You STRIKE the eulogy for 42 (Hunting spear).",
+            "📺 +5 style — solid hit",
+            "The narration stumbles — a page flutters loose from the script."
+          ]
+        },
+        {
+          "turnSeq": 4,
+          "round": 5,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 6,
+              "my": 2,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 28,
+              "maxHp": 110,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Hunting spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 3,
+                "hp": 772,
+                "maxHp": 948,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 6,
+                  "my": 2,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 28,
+                  "maxHp": 110,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Hunting spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 5,
+                    "my": 3,
+                    "hp": 772,
+                    "maxHp": 948,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 6,
+                  "my": 2,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 28,
+                  "maxHp": 110,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Hunting spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 5,
+                    "my": 3,
+                    "hp": 730,
+                    "maxHp": 948,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 56,
+          "end": {
+            "player": {
+              "mx": 6,
+              "my": 2,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 28,
+              "maxHp": 110,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Hunting spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 3,
+                "hp": 730,
+                "maxHp": 948,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(eulogy's hide absorbs 8.)",
+            "💪 Your Agility grows — 8. The work is changing you.",
+            "✨ Footwork — Your feet know the ground. (tier 2)",
+            "You STRIKE the eulogy for 42 (Hunting spear).",
+            "📺 +5 style — solid hit"
+          ]
+        }
+      ],
+      "npcTurns": [
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_ingrid_vik",
+          "mid": null,
+          "vid": "ingrid_vik",
+          "round": 1,
+          "pre": {
+            "pos": {
+              "mx": 7,
+              "my": 0
+            },
+            "hp": 79,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 5,
+              "my": 2
+            },
+            "hp": 79,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "m_0",
+              "targetKind": "monster",
+              "targetMid": "eulogy",
+              "sourceClass": "ally",
+              "requested": 13,
+              "hpDelta": -16,
+              "round": 1
+            }
+          ],
+          "sayLines": [
+            "Ingrid strikes the Eulogy.",
+            "OVERCHARGED ×1.25 (well-fed): Ingrid fights on a full belly.",
+            "Ingrid hits eulogy for 16.",
+            "The narration stumbles — a page flutters loose from the script."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 1,
+          "pre": {
+            "pos": {
+              "mx": 5,
+              "my": 3
+            },
+            "hp": 932,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 5,
+              "my": 3
+            },
+            "hp": 932,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [],
+          "sayLines": [
+            "Too close. The eulogy's attention SNAPS to you — proximity overrules patience.",
+            "📖 The Eulogy narrates, honestly, always: \"and then they stood their ground, poor brave fools.\" The spotlight widens. (No weight yet — just the story starting.) (5 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_ingrid_vik",
+          "mid": null,
+          "vid": "ingrid_vik",
+          "round": 2,
+          "pre": {
+            "pos": {
+              "mx": 5,
+              "my": 2
+            },
+            "hp": 79,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 5,
+              "my": 2
+            },
+            "hp": 79,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "m_0",
+              "targetKind": "monster",
+              "targetMid": "eulogy",
+              "sourceClass": "ally",
+              "requested": 11,
+              "hpDelta": -14,
+              "round": 2
+            }
+          ],
+          "sayLines": [
+            "Ingrid strikes the Eulogy.",
+            "OVERCHARGED ×1.25 (well-fed): Ingrid fights on a full belly.",
+            "Ingrid hits eulogy for 14.",
+            "The narration stumbles — a page flutters loose from the script."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 2,
+          "pre": {
+            "pos": {
+              "mx": 5,
+              "my": 3
+            },
+            "hp": 872,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "post": {
+            "pos": {
+              "mx": 5,
+              "my": 3
+            },
+            "hp": 872,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 50,
+              "hpDelta": -35,
+              "round": 2
+            }
+          ],
+          "sayLines": [
+            "Too close. The eulogy's attention SNAPS to you — proximity overrules patience.",
+            "📖 The Eulogy narrates, honestly, always: \"and then they ran, and the spotlight followed.\" The spotlight narrows. Your dodge feels watched. (-10% dodge.) (4 verses remain. Contradict it — do the opposite — or give it a better ending.)",
+            "💥 Final Chapter!",
+            "Armor absorbs 15.",
+            "Ingrid gasps. \"You're hit — move!\"",
+            "Eulogy's Final Chapter hits you for 35.",
+            "📖 Codex: Final Chapter — strikes one target after a windup. You won't forget this."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_ingrid_vik",
+          "mid": null,
+          "vid": "ingrid_vik",
+          "round": 3,
+          "pre": {
+            "pos": {
+              "mx": 5,
+              "my": 2
+            },
+            "hp": 79,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 5,
+              "my": 2
+            },
+            "hp": 79,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [
+            "Ingrid patches you up (+12 HP). \"Hold still!\""
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 3,
+          "pre": {
+            "pos": {
+              "mx": 5,
+              "my": 3
+            },
+            "hp": 827,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 5,
+              "my": 3
+            },
+            "hp": 827,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 39,
+              "hpDelta": -27,
+              "round": 3
+            }
+          ],
+          "sayLines": [
+            "Too close. The eulogy's attention SNAPS to Ingrid — proximity overrules patience.",
+            "📖 The Eulogy narrates, honestly, always: \"and then they bled, politely, where everyone could see.\" The narration lingers on your wounds. (Bleeds last 1 round longer.) (3 verses remain. Contradict it — do the opposite — or give it a better ending.)",
+            "💥 eulogy's Epitaph finds you — no dodging it.",
+            "Armor absorbs 12.",
+            "Eulogy's Epitaph hits you for 27.",
+            "📖 Codex: Epitaph — locks onto one target — moving won't dodge it. You won't forget this."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_ingrid_vik",
+          "mid": null,
+          "vid": "ingrid_vik",
+          "round": 4,
+          "pre": {
+            "pos": {
+              "mx": 5,
+              "my": 2
+            },
+            "hp": 79,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 5,
+              "my": 2
+            },
+            "hp": 79,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "m_0",
+              "targetKind": "monster",
+              "targetMid": "eulogy",
+              "sourceClass": "ally",
+              "requested": 10,
+              "hpDelta": -13,
+              "round": 4
+            }
+          ],
+          "sayLines": [
+            "Ingrid strikes the Eulogy.",
+            "OVERCHARGED ×1.25 (well-fed): Ingrid fights on a full belly.",
+            "Ingrid hits eulogy for 13.",
+            "The narration stumbles — a page flutters loose from the script."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 4,
+          "pre": {
+            "pos": {
+              "mx": 5,
+              "my": 3
+            },
+            "hp": 772,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "post": {
+            "pos": {
+              "mx": 5,
+              "my": 3
+            },
+            "hp": 772,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 60,
+              "hpDelta": -32,
+              "round": 4
+            }
+          ],
+          "sayLines": [
+            "Too close. The eulogy's attention SNAPS to you — proximity overrules patience.",
+            "📖 The Eulogy narrates, honestly, always: \"and then they knelt, and the story approved.\" The story leans in. (The Eulogy's attacks +15.) (2 verses remain. Contradict it — do the opposite — or give it a better ending.)",
+            "💥 Final Chapter!",
+            "Armor absorbs 18.",
+            "Your scars ITCH — and hold. You should be down, but the scars remember every almost-death and refuse a new one. (Scar Tissue: held at 25% HP.)",
+            "Eulogy's Final Chapter hits you for 42."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_ingrid_vik",
+          "mid": null,
+          "vid": "ingrid_vik",
+          "round": 5,
+          "pre": {
+            "pos": {
+              "mx": 5,
+              "my": 2
+            },
+            "hp": 79,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 5,
+              "my": 2
+            },
+            "hp": 79,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "m_0",
+              "targetKind": "monster",
+              "targetMid": "eulogy",
+              "sourceClass": "ally",
+              "requested": 14,
+              "hpDelta": -18,
+              "round": 5
+            }
+          ],
+          "sayLines": [
+            "Ingrid strikes the Eulogy.",
+            "OVERCHARGED ×1.25 (well-fed): Ingrid fights on a full belly.",
+            "Ingrid hits eulogy for 18.",
+            "The narration stumbles — a page flutters loose from the script."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 5,
+          "pre": {
+            "pos": {
+              "mx": 5,
+              "my": 3
+            },
+            "hp": 712,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "post": {
+            "pos": {
+              "mx": 5,
+              "my": 3
+            },
+            "hp": 712,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 52,
+              "hpDelta": -37,
+              "round": 5
+            }
+          ],
+          "sayLines": [
+            "Too close. The eulogy's attention SNAPS to you — proximity overrules patience.",
+            "📖 The Eulogy narrates, honestly, always: \"and then — this is the last line — they ended.\" The last line hangs in the air. (It finishes next round.) (1 verse remain. Contradict it — do the opposite — or give it a better ending.)",
+            "💥 Final Chapter!",
+            "Armor absorbs 15.",
+            "Eulogy's Final Chapter hits you for 37.",
+            "You go down.",
+            "OH. Oh no. ...The gamblers are very quiet.",
+            "📖 The Codex turns a page on its own. Rocco Wojcik is dead. You didn't ask. It knew.",
+            "Nobody's talking much. The fire feels smaller tonight.",
+            "🕯️ Rocco Wojcik is dead — the wild. The village stops. Somebody screams. Somebody else starts digging.",
+            "What Rocco kept close goes into the ground with them — keepsakes are buried, never taken from the body.",
+            "\"Rocco's gone.\" Tuilelaith looks at you for a long moment. \"You're not Rocco.\" No heat in it. Just fact. You'll have to earn this face.",
+            "The Codex doesn't pause for grief. Ingrid blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+            "📖 LEARNED: Wound Care (Level 1). Clean it, close it, cover it. Pressure stops bleeding. Clean water is better than dirty hands.",
+            "⚡ TECHNIQUE UNLOCKED: Precise Mend! Your healing knows where to go. +50% effectiveness. (Your knowledge of Wound Care amplifies your field_medicine.)",
+            "\"OH! OH! PRECISE MEND! The audience did NOT see that coming! Knowledge AMPLIFIES power! The gamblers are recalculating EVERYTHING!\"",
+            "📖 LEARNED: Anatomy (Level 1). You know where the important bits are. Arteries, joints, organs. Useful for healing or hurting.",
+            "📖 LEARNED: Steady Hands (Level 1). Fine work under pressure. Dressing game, stitching wounds, tying snares — no shake.",
+            "📖 LEARNED: Herbal Medicine (Level 1). Willow bark = aspirin. Yarrow stops bleeding. Plantain draws out infection. The pharmacy is outside.",
+            "📖 LEARNED: Food Preservation (Level 1). Salt, smoke, dry. The big three. Salt draws water out; bacteria can't live without it.",
+            "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+            "📖 The Codex turns a page: Rocco Wojcik, 69 days. The mantle passes to Ingrid Vik.",
+            "🪞 You wake up somebody else. Ingrid Vik, 35 — a physical therapy aide. Her hands know different work now: The Touch.",
+            "The village's quarrel was with Rocco — and Rocco is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers.",
+            "At the grave, Esther, Cheyenne, Tuilelaith and 4 more speak for Ingrid — \"Rocco trusted them. We saw it. Give them the fire's hearing.\" The village listens.",
+            "The fire knew Ingrid before the Codex did — her name already carried weight here."
+          ],
+          "threw": null
+        }
+      ],
+      "end": {
+        "result": "lost",
+        "day": 69,
+        "round": 5,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "eulogy",
+            "alive": true,
+            "fled": false,
+            "hp": 712,
+            "maxHp": 948
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "gen_xwq4ozq",
+            "alive": false,
+            "fled": false,
+            "hp": -9,
+            "maxHp": 110
+          },
+          {
+            "key": "v_ingrid_vik",
+            "kind": "villager",
+            "vid": "ingrid_vik",
+            "alive": true,
+            "fled": false,
+            "hp": 79,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "gen_xwq4ozq"
+        ],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 2,
+      "type": "tb",
+      "day": 69,
+      "mid": "eulogy",
+      "wave": 4,
+      "fightId": "fmgpspisy_97gteu",
+      "scholarAtStart": "gen_i18ejig",
+      "leadVid": "gen_i18ejig",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "gen_i18ejig",
+          "hpStart": 100,
+          "maxHp": 100,
+          "gear": {
+            "vid": "gen_i18ejig",
+            "armorP": 12,
+            "armed": true,
+            "weapon": "Kitchen knife",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "eulogy",
+          "hpStart": 743,
+          "maxHp": 900,
+          "wave": 4,
+          "joinedMidFight": false
+        }
+      ],
+      "leadGear": {
+        "vid": "gen_i18ejig",
+        "armorP": 12,
+        "armed": true,
+        "weapon": "Kitchen knife",
+        "vpFound": true,
+        "readError": null
+      },
+      "scholarStart": {
+        "health": 100,
+        "energy": 95,
+        "food": "UNRECORDED"
+      },
+      "trickKnown": false,
+      "hits": [
+        {
+          "round": 1,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 13,
+          "returned": 16,
+          "hpBefore": 743,
+          "hpAfter": 727,
+          "hpDelta": -16,
+          "turnSeq": null,
+          "actorKey": null,
+          "actorKind": null,
+          "phase": "between-turns",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 16,
+          "returned": 20,
+          "hpBefore": 727,
+          "hpAfter": 707,
+          "hpDelta": -20,
+          "turnSeq": 5,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 2,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Epitaph",
+          "requested": 35,
+          "returned": 25,
+          "hpBefore": 100,
+          "hpAfter": 75,
+          "hpDelta": -25,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 16,
+          "returned": 20,
+          "hpBefore": 707,
+          "hpAfter": 687,
+          "hpDelta": -20,
+          "turnSeq": 6,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 50,
+          "returned": 35,
+          "hpBefore": 75,
+          "hpAfter": 40,
+          "hpDelta": -35,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 11,
+          "returned": 14,
+          "hpBefore": 687,
+          "hpAfter": 673,
+          "hpDelta": -14,
+          "turnSeq": 7,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 60,
+          "returned": 42,
+          "hpBefore": 40,
+          "hpAfter": -2,
+          "hpDelta": -42,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "You catch fragments by the fire — Nathan telling Cheyenne about you. The story's getting bigger than what happened."
+        },
+        {
+          "kind": "say",
+          "line": "— NIGHT — Camp. Rest — or risk the dark."
+        },
+        {
+          "kind": "say",
+          "line": "No watches tonight. Everyone sleeps with one ear open and pretends not to."
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 16 (Kitchen knife)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they stood their ground, poor brave fools.\" The spotlight widens. (No weight yet — just the story starting.) (5 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 20 (Kitchen knife)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they ran, and the spotlight followed.\" The spotlight narrows. Your dodge feels watched. (-10% dodge.) (4 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 eulogy's Epitaph finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 10."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Epitaph hits you for 25."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 20 (Kitchen knife)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they bled, politely, where everyone could see.\" The narration lingers on your wounds. (Bleeds last 1 round longer.) (3 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 15."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 35."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 14 (Kitchen knife)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they knelt, and the story approved.\" The story leans in. (The Eulogy's attacks +15.) (2 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 18."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 42."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Tuilelaith Kirwan is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Tuilelaith Kirwan is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Tuilelaith kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "\"Tuilelaith's gone.\" Esther looks at you for a long moment. \"You're not Tuilelaith.\" No heat in it. Just fact. You'll have to earn this face."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Vasyl blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Fire in Rain (Level 1). Split wood — the inside is dry even when the outside is soaked. Feather sticks catch fast."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Debris Shelter (Level 1). A lean-to of branches and leaves beats nothing. Dead air is insulation."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Star Navigation (Level 1). North Star is constant. Find the Big Dipper, follow the pointer stars. You always know north."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Small Unit Tactics (Level 1). Flank, don't charge. High ground matters. Never split your group unless you have to."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Improvised Weapons (Level 1). Everything is a weapon if you're desperate. A rock, a stick, a handful of dirt in the eyes."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Managing Fear (Level 1). Fear is data, not orders. Acknowledge it, then decide anyway. Courage is fear that kept going."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Tracking People (Level 1). People leave sign: broken twigs, footprints, disturbed earth. You can follow."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Night Hunting (Level 1). Hunting at night is not hunting blind. It is hunting by ear, by smell, by patience."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Shield Wall (Level 1). Shoulder to shoulder in the wilds, you brace as one. While an ally fights beside you, blows that reach you land softer — the line holds together or not at all."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Tripwire (Level 1). You string a wire at ankle height. The next monster that moves eats dirt — prone, stunned, and embarrassed. (Sets up the party.)"
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Soft Step (Level 1). Move through woods like weather. Less noise, fewer surprises."
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Tuilelaith Kirwan, 69 days. The mantle passes to Vasyl Shevchenko."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Vasyl Shevchenko, 34 — an infantry soldier. His hands know different work now: Beast-calm, Berserker Rage."
+        },
+        {
+          "kind": "say",
+          "line": "You knew Tuilelaith — not the office, the person. The fire keeps expecting them, and so do you. That's a heavier kind of stepping up. (+5 trauma)"
+        },
+        {
+          "kind": "say",
+          "line": "At the grave, Esther, Cheyenne, Yara and 2 more speak for Vasyl — \"Tuilelaith trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew Vasyl before the Codex did — his name already carried weight here."
+        }
+      ],
+      "transcriptOverflow": false,
+      "abilityUses": [],
+      "shoutUses": 0,
+      "offerFoodUses": 0,
+      "turns": [
+        {
+          "turnSeq": 5,
+          "round": 2,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 4,
+              "my": 4,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Kitchen knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 3,
+                "hp": 727,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 4,
+                  "my": 4,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Kitchen knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 5,
+                    "my": 3,
+                    "hp": 727,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 4,
+                  "my": 4,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Kitchen knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 5,
+                    "my": 3,
+                    "hp": 707,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 10,
+          "end": {
+            "player": {
+              "mx": 4,
+              "my": 4,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Kitchen knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 3,
+                "hp": 707,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(eulogy's hide absorbs 8.)",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "You STRIKE the eulogy for 20 (Kitchen knife).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 6,
+          "round": 3,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 4,
+              "my": 4,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 75,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Kitchen knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 3,
+                "hp": 707,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 4,
+                  "my": 4,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 75,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Kitchen knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 5,
+                    "my": 3,
+                    "hp": 707,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 4,
+                  "my": 4,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 75,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Kitchen knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 5,
+                    "my": 3,
+                    "hp": 687,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 20,
+          "end": {
+            "player": {
+              "mx": 4,
+              "my": 4,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 75,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Kitchen knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 3,
+                "hp": 687,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(eulogy's hide absorbs 8.)",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "You STRIKE the eulogy for 20 (Kitchen knife).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 7,
+          "round": 4,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 4,
+              "my": 4,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 40,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Kitchen knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 3,
+                "hp": 687,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 4,
+                  "my": 4,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 40,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Kitchen knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 5,
+                    "my": 3,
+                    "hp": 687,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 4,
+                  "my": 4,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 40,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Kitchen knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 5,
+                    "my": 3,
+                    "hp": 673,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 30,
+          "end": {
+            "player": {
+              "mx": 4,
+              "my": 4,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 40,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Kitchen knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 3,
+                "hp": 673,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(eulogy's hide absorbs 8.)",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "You STRIKE the eulogy for 14 (Kitchen knife).",
+            "📺 +5 style — solid hit"
+          ]
+        }
+      ],
+      "npcTurns": [
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 1,
+          "pre": {
+            "pos": {
+              "mx": 5,
+              "my": 3
+            },
+            "hp": 727,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 5,
+              "my": 3
+            },
+            "hp": 727,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [
+            "📖 The Eulogy narrates, honestly, always: \"and then they stood their ground, poor brave fools.\" The spotlight widens. (No weight yet — just the story starting.) (5 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 2,
+          "pre": {
+            "pos": {
+              "mx": 5,
+              "my": 3
+            },
+            "hp": 707,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 5,
+              "my": 3
+            },
+            "hp": 707,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 35,
+              "hpDelta": -25,
+              "round": 2
+            }
+          ],
+          "sayLines": [
+            "📖 The Eulogy narrates, honestly, always: \"and then they ran, and the spotlight followed.\" The spotlight narrows. Your dodge feels watched. (-10% dodge.) (4 verses remain. Contradict it — do the opposite — or give it a better ending.)",
+            "💥 eulogy's Epitaph finds you — no dodging it.",
+            "Armor absorbs 10.",
+            "Eulogy's Epitaph hits you for 25."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 3,
+          "pre": {
+            "pos": {
+              "mx": 5,
+              "my": 3
+            },
+            "hp": 687,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "post": {
+            "pos": {
+              "mx": 5,
+              "my": 3
+            },
+            "hp": 687,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 50,
+              "hpDelta": -35,
+              "round": 3
+            }
+          ],
+          "sayLines": [
+            "📖 The Eulogy narrates, honestly, always: \"and then they bled, politely, where everyone could see.\" The narration lingers on your wounds. (Bleeds last 1 round longer.) (3 verses remain. Contradict it — do the opposite — or give it a better ending.)",
+            "💥 Final Chapter!",
+            "Armor absorbs 15.",
+            "Eulogy's Final Chapter hits you for 35."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 4,
+          "pre": {
+            "pos": {
+              "mx": 5,
+              "my": 3
+            },
+            "hp": 673,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "post": {
+            "pos": {
+              "mx": 5,
+              "my": 3
+            },
+            "hp": 673,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 60,
+              "hpDelta": -42,
+              "round": 4
+            }
+          ],
+          "sayLines": [
+            "📖 The Eulogy narrates, honestly, always: \"and then they knelt, and the story approved.\" The story leans in. (The Eulogy's attacks +15.) (2 verses remain. Contradict it — do the opposite — or give it a better ending.)",
+            "💥 Final Chapter!",
+            "Armor absorbs 18.",
+            "Eulogy's Final Chapter hits you for 42.",
+            "You go down.",
+            "OH. Oh no. ...The gamblers are very quiet.",
+            "📖 The Codex turns a page on its own. Tuilelaith Kirwan is dead. You didn't ask. It knew.",
+            "Nobody's talking much. The fire feels smaller tonight.",
+            "🕯️ Tuilelaith Kirwan is dead — the wild. The village stops. Somebody screams. Somebody else starts digging.",
+            "What Tuilelaith kept close goes into the ground with them — keepsakes are buried, never taken from the body.",
+            "\"Tuilelaith's gone.\" Esther looks at you for a long moment. \"You're not Tuilelaith.\" No heat in it. Just fact. You'll have to earn this face.",
+            "The Codex doesn't pause for grief. Vasyl blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+            "📖 LEARNED: Fire in Rain (Level 1). Split wood — the inside is dry even when the outside is soaked. Feather sticks catch fast.",
+            "📖 LEARNED: Debris Shelter (Level 1). A lean-to of branches and leaves beats nothing. Dead air is insulation.",
+            "📖 LEARNED: Star Navigation (Level 1). North Star is constant. Find the Big Dipper, follow the pointer stars. You always know north.",
+            "📖 LEARNED: Small Unit Tactics (Level 1). Flank, don't charge. High ground matters. Never split your group unless you have to.",
+            "📖 LEARNED: Improvised Weapons (Level 1). Everything is a weapon if you're desperate. A rock, a stick, a handful of dirt in the eyes.",
+            "📖 LEARNED: Managing Fear (Level 1). Fear is data, not orders. Acknowledge it, then decide anyway. Courage is fear that kept going.",
+            "📖 LEARNED: Tracking People (Level 1). People leave sign: broken twigs, footprints, disturbed earth. You can follow.",
+            "📖 LEARNED: Night Hunting (Level 1). Hunting at night is not hunting blind. It is hunting by ear, by smell, by patience.",
+            "📖 LEARNED: Shield Wall (Level 1). Shoulder to shoulder in the wilds, you brace as one. While an ally fights beside you, blows that reach you land softer — the line holds together or not at all.",
+            "📖 LEARNED: Tripwire (Level 1). You string a wire at ankle height. The next monster that moves eats dirt — prone, stunned, and embarrassed. (Sets up the party.)",
+            "📖 LEARNED: Soft Step (Level 1). Move through woods like weather. Less noise, fewer surprises.",
+            "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+            "📖 The Codex turns a page: Tuilelaith Kirwan, 69 days. The mantle passes to Vasyl Shevchenko.",
+            "🪞 You wake up somebody else. Vasyl Shevchenko, 34 — an infantry soldier. His hands know different work now: Beast-calm, Berserker Rage.",
+            "You knew Tuilelaith — not the office, the person. The fire keeps expecting them, and so do you. That's a heavier kind of stepping up. (+5 trauma)",
+            "At the grave, Esther, Cheyenne, Yara and 2 more speak for Vasyl — \"Tuilelaith trusted them. We saw it. Give them the fire's hearing.\" The village listens.",
+            "The fire knew Vasyl before the Codex did — his name already carried weight here."
+          ],
+          "threw": null
+        }
+      ],
+      "end": {
+        "result": "lost",
+        "day": 69,
+        "round": 4,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "eulogy",
+            "alive": true,
+            "fled": false,
+            "hp": 673,
+            "maxHp": 900
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "gen_i18ejig",
+            "alive": false,
+            "fled": false,
+            "hp": -2,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "gen_i18ejig"
+        ],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 3,
+      "type": "tb",
+      "day": 76,
+      "mid": "reunion",
+      "wave": 4,
+      "fightId": "fmgpspixw_gbig2t",
+      "scholarAtStart": "vasyl_shevchenko",
+      "leadVid": "vasyl_shevchenko",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "vasyl_shevchenko",
+          "hpStart": 54,
+          "maxHp": 100,
+          "gear": {
+            "vid": "vasyl_shevchenko",
+            "armorP": 27,
+            "armed": true,
+            "weapon": "Machete",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "reunion",
+          "hpStart": 1200,
+          "maxHp": 1200,
+          "wave": 4,
+          "joinedMidFight": false
+        }
+      ],
+      "leadGear": {
+        "vid": "vasyl_shevchenko",
+        "armorP": 27,
+        "armed": true,
+        "weapon": "Machete",
+        "vpFound": true,
+        "readError": null
+      },
+      "scholarStart": {
+        "health": 54,
+        "energy": 65,
+        "food": "UNRECORDED"
+      },
+      "trickKnown": false,
+      "hits": [],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "Taken: Stripped hide x1."
+        },
+        {
+          "kind": "say",
+          "line": "The body is stripped. What's left isn't worth taking."
+        },
+        {
+          "kind": "say",
+          "line": "Not in the middle of a fight."
+        },
+        {
+          "kind": "say",
+          "line": "Travel 1 tile to Haven."
+        },
+        {
+          "kind": "say",
+          "line": "While you were gone — one thing you missed:"
+        },
+        {
+          "kind": "say",
+          "line": "🩸 The Big-Eyes mauled Sofia (-13 health) over 1 round. They're lucky to be breathing. — staying out of sight for the rest of the day — too hurt to meet it again"
+        },
+        {
+          "kind": "say",
+          "line": "You keep a day's food (120 kcal) — nothing extra for the pantry this time."
+        },
+        {
+          "kind": "say",
+          "line": "You walk back into Haven. 32 Codex entries. The village is glad to see you."
+        },
+        {
+          "kind": "say",
+          "line": "🚪 BARRIER CROSSED — you crash through into Haven. The gate shuts behind you. The wild goes quiet. (Haven is safe — nothing follows you here.)"
+        },
+        {
+          "kind": "say",
+          "line": "You escape. The thicket keeps its secrets."
+        },
+        {
+          "kind": "sysSay",
+          "line": "And they're GONE! The gamblers who bet on a fight are furious. The ones who bet on running are rich."
+        },
+        {
+          "kind": "say",
+          "line": "You lived to tell it — The Reunion's moves are burned into your memory. (1/2 — one more survived encounter and you'll have its trick.)"
+        },
+        {
+          "kind": "say",
+          "line": "📓 Codex: Sighting 1/2: survived an encounter."
+        }
+      ],
+      "transcriptOverflow": false,
+      "abilityUses": [],
+      "shoutUses": 0,
+      "offerFoodUses": 0,
+      "turns": [],
+      "npcTurns": [],
+      "end": {
+        "result": "fled",
+        "day": 76,
+        "round": 1,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "reunion",
+            "alive": true,
+            "fled": true,
+            "hp": 1200,
+            "maxHp": 1200
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "vasyl_shevchenko",
+            "alive": true,
+            "fled": true,
+            "hp": 54,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [],
+        "humansFled": [
+          "vasyl_shevchenko"
+        ],
+        "monstersFled": [
+          "reunion"
+        ]
+      },
+      "kills": [],
+      "superseded": false
+    }
+  ],
+  "killsW4": 0,
+  "killRows": [],
+  "unlinkedKills": [],
+  "spawns": [
+    {
+      "day": 61,
+      "id": "eulogy",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 69,
+      "id": "eulogy",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 74,
+      "id": "reunion",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 75,
+      "id": "reunion",
+      "tx": 3,
+      "ty": 4
+    }
+  ],
+  "orphanTbEnds": [],
+  "wrapCounts": {
+    "spawnWorldMonster": 50,
+    "fieldFight": 61,
+    "recordWaveKill": 37,
+    "startCombat": 10,
+    "tbBeginTurn": 66,
+    "tbAdvance": 62,
+    "tbPlayerStrike": 49,
+    "tbDamage": 108,
+    "tbVillagerTurn": 48,
+    "tbMonsterTurn": 51,
+    "tbEnd": 10,
+    "tbPlayerMove": 2,
+    "useAbility": 4,
+    "tbBarrierExit": 1
+  },
+  "instrumentErrors": [],
+  "notes": [],
+  "deaths": [
+    {
+      "day": 5,
+      "kind": "monster",
+      "who": "rut_king",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 6,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "murkcap",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 10,
+      "kind": "monster",
+      "who": "white_noise_heron",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 10,
+      "kind": "person",
+      "who": "gen_5m2u04b",
+      "cause": "ambush",
+      "player": false
+    },
+    {
+      "day": 12,
+      "kind": "monster",
+      "who": "sweeps_week",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 12,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 12,
+      "kind": "monster",
+      "who": "ducks_in_a_row",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 12,
+      "kind": "monster",
+      "who": "sanjun",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 16,
+      "kind": "monster",
+      "who": "understudy",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 18,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 18,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 18,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 19,
+      "kind": "monster",
+      "who": "lockpick_raccoon",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 21,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 22,
+      "kind": "monster",
+      "who": "nevermore",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 22,
+      "kind": "monster",
+      "who": "understudy",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 22,
+      "kind": "monster",
+      "who": "moderator",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 31,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 33,
+      "kind": "monster",
+      "who": "voice_mimic_radio",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 34,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 34,
+      "kind": "monster",
+      "who": "sweeps_week",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 34,
+      "kind": "monster",
+      "who": "landlord",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 34,
+      "kind": "monster",
+      "who": "voice_mimic_radio",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 39,
+      "kind": "monster",
+      "who": "warranty_caller",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 43,
+      "kind": "monster",
+      "who": "spool",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 43,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 47,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 51,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 51,
+      "kind": "monster",
+      "who": "white_noise_heron",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 51,
+      "kind": "villager",
+      "who": "gen_gzs12hf",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 52,
+      "kind": "monster",
+      "who": "callback",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 58,
+      "kind": "monster",
+      "who": "voice_mimic_radio",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 60,
+      "kind": "monster",
+      "who": "redactor",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 60,
+      "kind": "monster",
+      "who": "ad_sponsor",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 60,
+      "kind": "monster",
+      "who": "ad_break",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 69,
+      "kind": "villager",
+      "who": "gen_xwq4ozq",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 69,
+      "kind": "villager",
+      "who": "ingrid_vik",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 69,
+      "kind": "villager",
+      "who": "gen_i18ejig",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 73,
+      "kind": "monster",
+      "who": "redactor",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 75,
+      "kind": "monster",
+      "who": "memory_projector",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 77,
+      "kind": "villager",
+      "who": "sofia_chen",
+      "cause": "starvation",
+      "player": false
+    }
+  ],
+  "resultKeys": [
+    "days",
+    "gameDays",
+    "maxWaveUnlocked",
+    "waveKills",
+    "endReason",
+    "stop",
+    "communityExposure",
+    "telemetry",
+    "samples",
+    "learnedPlants",
+    "learnedSkills",
+    "pacing",
+    "ms",
+    "manifest",
+    "policyId",
+    "notes"
+  ],
+  "scaleSamples": [
+    [
+      30,
+      "village"
+    ],
+    [
+      60,
+      "village"
+    ]
+  ],
+  "standingSamples": [
+    [
+      30,
+      0
+    ],
+    [
+      60,
+      100
+    ]
+  ],
+  "scaleRankFinal": "village",
+  "standingFinal": 125,
+  "arcFinal": 3,
+  "tableWaiting": false,
+  "tableEntered": false,
+  "nationalReached": false,
+  "maxStanding": 125,
+  "scaleReadError": null
+}

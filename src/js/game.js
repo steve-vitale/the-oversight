@@ -37544,6 +37544,51 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return true;
     },
 
+    // EAT RATIONS MID-FIGHT (stayrecover 2026-11-05, arm sim-stayrecover-a):
+    // a hurt fighter tears into the day ration they carry — food-powered
+    // recovery inside the fight, priced by the pack. One bite = 250 kcal
+    // for +25 HP (1 HP / 10 kcal), capped at maxHp via addHealth (the
+    // honest HP route — it syncs scholar.health and counts overheal
+    // through the build-around heal hooks). A pack holding 100–249 kcal
+    // is eaten whole for +floor(kcal/10). Under 100 kcal the verb
+    // refuses honestly and spends nothing; at full HP it refuses too
+    // (no sense spending good rations). Costs the ACTION, exactly like
+    // a strike or a wait — spendCombatAction's eating case, given a
+    // body (Steve 2026-10-05) — but not the movement: the fighter can
+    // still reposition after eating. The pack's disease risks are
+    // claimed once, by the next packMeal, exactly as today — this verb
+    // adds no risk roll and skips none. Food eaten here is food not
+    // eaten at dinner.
+    tbEatRations() {
+      const f = this.tbfight;
+      if (!f || !this.tbIsPlayerTurn()) return false;
+      const p = this.tbFighter('p');
+      if (!p || !p.alive) return false;
+      if (p.acted) { this.say('Already acted this turn.'); return false; }
+      if ((p.hp || 0) >= (p.maxHp || 100)) { this.say("You're unhurt — no sense spending good rations."); return false; }
+      const vid = this.villagerId;
+      let pack = 0;
+      try { pack = this.packKcal(vid) || 0; } catch (e) { pack = 0; }
+      if (pack < 100) {
+        this.say('Not enough left in your pack to make it worth stopping for. (' + Math.max(0, Math.round(pack)) + ' kcal left)');
+        return false;
+      }
+      const bite = Math.min(250, Math.floor(pack));
+      const heal = Math.max(1, Math.floor(bite / 10));
+      const hpBefore = p.hp || 0;
+      const left = Math.max(0, Math.round(pack - bite));
+      // packSpend is a plain subtraction that never throws for valid input
+      // (it self-seeds the pack when missing); call it directly so a
+      // real debit failure surfaces instead of healing for free.
+      this.packSpend(vid, bite);
+      this.addHealth(heal);
+      const gained = Math.max(0, (p.hp || 0) - hpBefore);
+      p.acted = true;
+      this.say('You tear into your rations mid-fight — ' + bite + ' kcal, +' + gained + ' HP. The pack is lighter now. (' + left + ' kcal left)');
+      this.tbAfterPlayerAction();
+      return true;
+    },
+
     // COMBAT HP ROUTING (Steve 2026-10-08, break-it round 2): the live HP pool
     // in a fight is the player fighter's (p.hp) — scholar.health is synced
     // FROM it by tbDamage/tbEnd. Writing scholar.health directly mid-fight

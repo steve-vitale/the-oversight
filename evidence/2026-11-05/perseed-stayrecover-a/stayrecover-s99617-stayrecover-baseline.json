@@ -1,0 +1,5746 @@
+{
+  "seed": 99617,
+  "run": "stayrecover-baseline",
+  "policy": "competent",
+  "anchorCommit": "e5e6aa59b236",
+  "days": 105,
+  "gameDays": 105,
+  "endReason": "village-lost",
+  "won": false,
+  "villageLost": true,
+  "maxWave": 4,
+  "spawnsW4": 7,
+  "tbCalls": 3,
+  "fieldCallsW4": 1,
+  "exposures": [
+    {
+      "seq": 1,
+      "type": "tb",
+      "day": 94,
+      "mid": "reunion",
+      "wave": 4,
+      "fightId": "fmgpspip6_4p1m18",
+      "scholarAtStart": "nadia_khoury",
+      "leadVid": "nadia_khoury",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "nadia_khoury",
+          "hpStart": 100,
+          "maxHp": 100,
+          "gear": {
+            "vid": "nadia_khoury",
+            "armorP": 27,
+            "armed": true,
+            "weapon": "Hardlight knife",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "reunion",
+          "hpStart": 1200,
+          "maxHp": 1200,
+          "wave": 4,
+          "joinedMidFight": false
+        }
+      ],
+      "leadGear": {
+        "vid": "nadia_khoury",
+        "armorP": 27,
+        "armed": true,
+        "weapon": "Hardlight knife",
+        "vpFound": true,
+        "readError": null
+      },
+      "scholarStart": {
+        "health": 100,
+        "energy": 85,
+        "food": "UNRECORDED"
+      },
+      "trickKnown": false,
+      "hits": [
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "reunion",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 44,
+          "returned": 55,
+          "hpBefore": 1200,
+          "hpAfter": 1145,
+          "hpDelta": -55,
+          "turnSeq": 1,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "reunion",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 49,
+          "returned": 61,
+          "hpBefore": 1145,
+          "hpAfter": 1084,
+          "hpDelta": -61,
+          "turnSeq": 2,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "your own move, returned",
+          "requested": 64,
+          "returned": 37,
+          "hpBefore": 100,
+          "hpAfter": 63,
+          "hpDelta": -37,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "reunion",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 47,
+          "returned": 59,
+          "hpBefore": 1084,
+          "hpAfter": 1025,
+          "hpDelta": -59,
+          "turnSeq": 3,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "reunion's attack",
+          "requested": 72,
+          "returned": 41,
+          "hpBefore": 63,
+          "hpAfter": 22,
+          "hpDelta": -41,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 5,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "reunion's Your Move",
+          "requested": 71,
+          "returned": 41,
+          "hpBefore": 22,
+          "hpAfter": -19,
+          "hpDelta": -41,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "🫂 It moves."
+        },
+        {
+          "kind": "say",
+          "line": "Not in the middle of a fight."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "say",
+          "line": "(reunion's hide absorbs 12.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the reunion for 55 (Hardlight knife)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "say",
+          "line": "(reunion's hide absorbs 12.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the reunion for 61 (Hardlight knife)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion's turn"
+        },
+        {
+          "kind": "say",
+          "line": "👥 Faces surface on its body — your own snarl. It knows \"strike\" — it watched you do it 2 times. YOUR MOVE, back at you."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 27."
+        },
+        {
+          "kind": "say",
+          "line": "Your own move, returned hits you for 37."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "say",
+          "line": "(reunion's hide absorbs 12.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the reunion for 59 (Hardlight knife)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion's turn"
+        },
+        {
+          "kind": "say",
+          "line": "💥 reunion's attack finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 31."
+        },
+        {
+          "kind": "say",
+          "line": "Reunion's attack hits you for 41."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Your Move — locks onto one target — moving won't dodge it. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 5!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🫂 The Reunion's turn"
+        },
+        {
+          "kind": "say",
+          "line": "💥 reunion's Your Move finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 30."
+        },
+        {
+          "kind": "say",
+          "line": "Reunion's Your Move hits you for 41."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Nadia Khoury is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "Nadia is gone — dead. The errand dies with them; nobody's waiting on those dandelions now."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Nadia Khoury is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Nadia kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Emil blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Calming Panic (Level 1). Ground them: 5 things you see, 4 you hear, 3 you touch. Breathe with them. Slow is fast."
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Nadia Khoury, 94 days. The mantle passes to Emil Wagner."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Emil Wagner, 24 — a teacher. Their hands know different work now: Green Whisper, War Cry."
+        },
+        {
+          "kind": "say",
+          "line": "The village's quarrel was with Nadia — and Nadia is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers."
+        },
+        {
+          "kind": "say",
+          "line": "You knew Nadia — not the office, the person. The fire keeps expecting her, and so do you. That's a heavier kind of stepping up. (+5 trauma)"
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew Emil before the Codex did — their name already carried weight here."
+        }
+      ],
+      "transcriptOverflow": false,
+      "abilityUses": [],
+      "shoutUses": 0,
+      "offerFoodUses": 0,
+      "turns": [
+        {
+          "turnSeq": 1,
+          "round": 2,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 8,
+              "my": 1,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Hardlight knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "mx": 7,
+                "my": 2,
+                "hp": 1200,
+                "maxHp": 1200,
+                "alive": true,
+                "fled": false,
+                "telegraph": false,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 8,
+                  "my": 1,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Hardlight knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "mx": 7,
+                    "my": 2,
+                    "hp": 1200,
+                    "maxHp": 1200,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": false,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 8,
+                  "my": 1,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Hardlight knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "mx": 7,
+                    "my": 2,
+                    "hp": 1145,
+                    "maxHp": 1200,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": false,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 5,
+          "end": {
+            "player": {
+              "mx": 8,
+              "my": 1,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Hardlight knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "mx": 7,
+                "my": 2,
+                "hp": 1145,
+                "maxHp": 1200,
+                "alive": true,
+                "fled": false,
+                "telegraph": false,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(reunion's hide absorbs 12.)",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "You STRIKE the reunion for 55 (Hardlight knife).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 2,
+          "round": 3,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 8,
+              "my": 1,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Hardlight knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "mx": 7,
+                "my": 2,
+                "hp": 1145,
+                "maxHp": 1200,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 8,
+                  "my": 1,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Hardlight knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "mx": 7,
+                    "my": 2,
+                    "hp": 1145,
+                    "maxHp": 1200,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 8,
+                  "my": 1,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Hardlight knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "mx": 7,
+                    "my": 2,
+                    "hp": 1084,
+                    "maxHp": 1200,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 11,
+          "end": {
+            "player": {
+              "mx": 8,
+              "my": 1,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Hardlight knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "mx": 7,
+                "my": 2,
+                "hp": 1084,
+                "maxHp": 1200,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(reunion's hide absorbs 12.)",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "You STRIKE the reunion for 61 (Hardlight knife).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 3,
+          "round": 4,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 8,
+              "my": 1,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 63,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Hardlight knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "mx": 7,
+                "my": 2,
+                "hp": 1084,
+                "maxHp": 1200,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 8,
+                  "my": 1,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 63,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Hardlight knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "mx": 7,
+                    "my": 2,
+                    "hp": 1084,
+                    "maxHp": 1200,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 8,
+                  "my": 1,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 63,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Hardlight knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "mx": 7,
+                    "my": 2,
+                    "hp": 1025,
+                    "maxHp": 1200,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 20,
+          "end": {
+            "player": {
+              "mx": 8,
+              "my": 1,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 63,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Hardlight knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "mx": 7,
+                "my": 2,
+                "hp": 1025,
+                "maxHp": 1200,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(reunion's hide absorbs 12.)",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "You STRIKE the reunion for 59 (Hardlight knife).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 4,
+          "round": 5,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 8,
+              "my": 1,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 22,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Hardlight knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "mx": 7,
+                "my": 2,
+                "hp": 1025,
+                "maxHp": 1200,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerMove",
+              "kind": "move",
+              "args": [
+                "8",
+                "1"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 8,
+                  "my": 1,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 22,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Hardlight knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "mx": 7,
+                    "my": 2,
+                    "hp": 1025,
+                    "maxHp": 1200,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 8,
+                  "my": 1,
+                  "moveLeft": 2,
+                  "acted": false,
+                  "hp": 22,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Hardlight knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "mx": 7,
+                    "my": 2,
+                    "hp": 1025,
+                    "maxHp": 1200,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "reunion",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 30,
+          "end": {
+            "player": {
+              "mx": 8,
+              "my": 1,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 22,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Hardlight knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "mx": 7,
+                "my": 2,
+                "hp": 1025,
+                "maxHp": 1200,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "reunion",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": []
+        }
+      ],
+      "npcTurns": [
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "reunion",
+          "vid": null,
+          "round": 1,
+          "pre": {
+            "pos": {
+              "mx": 7,
+              "my": 2
+            },
+            "hp": 1200,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 7,
+              "my": 2
+            },
+            "hp": 1200,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [
+            "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)"
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "reunion",
+          "vid": null,
+          "round": 2,
+          "pre": {
+            "pos": {
+              "mx": 7,
+              "my": 2
+            },
+            "hp": 1145,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 7,
+              "my": 2
+            },
+            "hp": 1145,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "reunion",
+          "vid": null,
+          "round": 3,
+          "pre": {
+            "pos": {
+              "mx": 7,
+              "my": 2
+            },
+            "hp": 1084,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 7,
+              "my": 2
+            },
+            "hp": 1084,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 64,
+              "hpDelta": -37,
+              "round": 3
+            }
+          ],
+          "sayLines": [
+            "👥 Faces surface on its body — your own snarl. It knows \"strike\" — it watched you do it 2 times. YOUR MOVE, back at you.",
+            "Armor absorbs 27.",
+            "Your own move, returned hits you for 37."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "reunion",
+          "vid": null,
+          "round": 4,
+          "pre": {
+            "pos": {
+              "mx": 7,
+              "my": 2
+            },
+            "hp": 1025,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 7,
+              "my": 2
+            },
+            "hp": 1025,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 72,
+              "hpDelta": -41,
+              "round": 4
+            }
+          ],
+          "sayLines": [
+            "💥 reunion's attack finds you — no dodging it.",
+            "Armor absorbs 31.",
+            "Reunion's attack hits you for 41.",
+            "📖 Codex: Your Move — locks onto one target — moving won't dodge it. You won't forget this."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "reunion",
+          "vid": null,
+          "round": 5,
+          "pre": {
+            "pos": {
+              "mx": 7,
+              "my": 2
+            },
+            "hp": 1025,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 7,
+              "my": 2
+            },
+            "hp": 1025,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 71,
+              "hpDelta": -41,
+              "round": 5
+            }
+          ],
+          "sayLines": [
+            "💥 reunion's Your Move finds you — no dodging it.",
+            "Armor absorbs 30.",
+            "Reunion's Your Move hits you for 41.",
+            "You go down.",
+            "OH. Oh no. ...The gamblers are very quiet.",
+            "📖 The Codex turns a page on its own. Nadia Khoury is dead. You didn't ask. It knew.",
+            "Nobody's talking much. The fire feels smaller tonight.",
+            "Nadia is gone — dead. The errand dies with them; nobody's waiting on those dandelions now.",
+            "🕯️ Nadia Khoury is dead — the wild. The village stops. Somebody screams. Somebody else starts digging.",
+            "What Nadia kept close goes into the ground with them — keepsakes are buried, never taken from the body.",
+            "The Codex doesn't pause for grief. Emil blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+            "📖 LEARNED: Calming Panic (Level 1). Ground them: 5 things you see, 4 you hear, 3 you touch. Breathe with them. Slow is fast.",
+            "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+            "📖 The Codex turns a page: Nadia Khoury, 94 days. The mantle passes to Emil Wagner.",
+            "🪞 You wake up somebody else. Emil Wagner, 24 — a teacher. Their hands know different work now: Green Whisper, War Cry.",
+            "The village's quarrel was with Nadia — and Nadia is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers.",
+            "You knew Nadia — not the office, the person. The fire keeps expecting her, and so do you. That's a heavier kind of stepping up. (+5 trauma)",
+            "The fire knew Emil before the Codex did — their name already carried weight here."
+          ],
+          "threw": null
+        }
+      ],
+      "end": {
+        "result": "lost",
+        "day": 94,
+        "round": 5,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "reunion",
+            "alive": true,
+            "fled": false,
+            "hp": 1025,
+            "maxHp": 1200
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "nadia_khoury",
+            "alive": false,
+            "fled": false,
+            "hp": -19,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "nadia_khoury"
+        ],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 2,
+      "type": "tb",
+      "day": 102,
+      "mid": "suburb",
+      "wave": 4,
+      "fightId": "fmgpspiqs_g718i5",
+      "scholarAtStart": "app_mgpsphu2827",
+      "leadVid": "app_mgpsphu2827",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "app_mgpsphu2827",
+          "hpStart": 100,
+          "maxHp": 100,
+          "gear": {
+            "vid": "app_mgpsphu2827",
+            "armorP": 27,
+            "armed": true,
+            "weapon": "Crossbow",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "suburb",
+          "hpStart": 975,
+          "maxHp": 1300,
+          "wave": 4,
+          "joinedMidFight": false
+        }
+      ],
+      "leadGear": {
+        "vid": "app_mgpsphu2827",
+        "armorP": 27,
+        "armed": true,
+        "weapon": "Crossbow",
+        "vpFound": true,
+        "readError": null
+      },
+      "scholarStart": {
+        "health": 100,
+        "energy": 95,
+        "food": "UNRECORDED"
+      },
+      "trickKnown": false,
+      "hits": [
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 29,
+          "returned": 29,
+          "hpBefore": 975,
+          "hpAfter": 946,
+          "hpDelta": -29,
+          "turnSeq": 5,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 29,
+          "returned": 29,
+          "hpBefore": 946,
+          "hpAfter": 917,
+          "hpDelta": -29,
+          "turnSeq": 6,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's attack",
+          "requested": 52,
+          "returned": 25,
+          "hpBefore": 100,
+          "hpAfter": 75,
+          "hpDelta": -25,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 28,
+          "returned": 28,
+          "hpBefore": 917,
+          "hpAfter": 889,
+          "hpDelta": -28,
+          "turnSeq": 7,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's attack",
+          "requested": 35,
+          "returned": 17,
+          "hpBefore": 75,
+          "hpAfter": 58,
+          "hpDelta": -17,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 5,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 27,
+          "returned": 27,
+          "hpBefore": 889,
+          "hpAfter": 862,
+          "hpDelta": -27,
+          "turnSeq": 8,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 5,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's Property Tax",
+          "requested": 39,
+          "returned": 19,
+          "hpBefore": 58,
+          "hpAfter": 39,
+          "hpDelta": -19,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 6,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "suburb",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 24,
+          "returned": 24,
+          "hpBefore": 862,
+          "hpAfter": 838,
+          "hpDelta": -24,
+          "turnSeq": 9,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 6,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's HOA Fine",
+          "requested": 32,
+          "returned": 15,
+          "hpBefore": 39,
+          "hpAfter": 24,
+          "hpDelta": -15,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 7,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's Property Tax",
+          "requested": 39,
+          "returned": 19,
+          "hpBefore": 24,
+          "hpAfter": 5,
+          "hpDelta": -19,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 9,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "suburb's HOA Fine",
+          "requested": 34,
+          "returned": 16,
+          "hpBefore": 5,
+          "hpAfter": -11,
+          "hpDelta": -16,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "— DUSK — Animals stir again. Shadows lengthen."
+        },
+        {
+          "kind": "say",
+          "line": "No path there."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "The streets rearrange — every road curves back. You were going somewhere. You are going in a circle now."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "say",
+          "line": "(suburb's hide absorbs 14.)"
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the suburb for 29 (Crossbow)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "say",
+          "line": "(suburb's hide absorbs 14.)"
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the suburb for 29 (Crossbow)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 It connects!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 27."
+        },
+        {
+          "kind": "say",
+          "line": "Suburb's attack hits you for 25."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Property Tax — strikes one target after a windup. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "say",
+          "line": "(suburb's hide absorbs 14.)"
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the suburb for 28 (Crossbow)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 It connects!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 18."
+        },
+        {
+          "kind": "say",
+          "line": "Suburb's attack hits you for 17."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: HOA Fine — strikes one target after a windup. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 5!"
+        },
+        {
+          "kind": "say",
+          "line": "(suburb's hide absorbs 14.)"
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the suburb for 27 (Crossbow)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Property Tax!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 20."
+        },
+        {
+          "kind": "say",
+          "line": "Suburb's Property Tax hits you for 19."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 6!"
+        },
+        {
+          "kind": "say",
+          "line": "(suburb's hide absorbs 14.)"
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the suburb for 24 (Crossbow)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 HOA Fine!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 17."
+        },
+        {
+          "kind": "say",
+          "line": "Suburb's HOA Fine hits you for 15."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 7!"
+        },
+        {
+          "kind": "say",
+          "line": "No path there."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Property Tax!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 20."
+        },
+        {
+          "kind": "say",
+          "line": "Suburb's Property Tax hits you for 19."
+        },
+        {
+          "kind": "say",
+          "line": "The streets rearrange — every road curves back. You were going somewhere. You are going in a circle now."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 8!"
+        },
+        {
+          "kind": "say",
+          "line": "No path there."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 9!"
+        },
+        {
+          "kind": "say",
+          "line": "No path there."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🏘️ The Suburb's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 HOA Fine!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 18."
+        },
+        {
+          "kind": "say",
+          "line": "Suburb's HOA Fine hits you for 16."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Emil Wagner is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Emil Wagner is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Emil kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Diarmait blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Emil Wagner, 102 days. The mantle passes to Diarmait Fahey."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Diarmait Fahey, 33 — a sign painter. Their hands know different work now: Iron Stomach."
+        },
+        {
+          "kind": "say",
+          "line": "You knew Emil — not the office, the person. The fire keeps expecting them, and so do you. That's a heavier kind of stepping up. (+5 trauma)"
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew Diarmait — solid ground, earned at this fire."
+        }
+      ],
+      "transcriptOverflow": false,
+      "abilityUses": [],
+      "shoutUses": 0,
+      "offerFoodUses": 0,
+      "turns": [
+        {
+          "turnSeq": 5,
+          "round": 2,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 4,
+              "my": 7,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 6,
+              "name": "Crossbow",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "mx": 3,
+                "my": 2,
+                "hp": 975,
+                "maxHp": 1300,
+                "alive": true,
+                "fled": false,
+                "telegraph": false,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "dist": 5,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 4,
+                  "my": 7,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 6,
+                  "name": "Crossbow",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "mx": 3,
+                    "my": 2,
+                    "hp": 975,
+                    "maxHp": 1300,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": false,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "dist": 5,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 4,
+                  "my": 7,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 6,
+                  "name": "Crossbow",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "mx": 3,
+                    "my": 2,
+                    "hp": 946,
+                    "maxHp": 1300,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": false,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "dist": 5,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 6,
+          "end": {
+            "player": {
+              "mx": 4,
+              "my": 7,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 6,
+              "name": "Crossbow",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "mx": 3,
+                "my": 2,
+                "hp": 946,
+                "maxHp": 1300,
+                "alive": true,
+                "fled": false,
+                "telegraph": false,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "dist": 5,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(suburb's hide absorbs 14.)",
+            "You STRIKE the suburb for 29 (Crossbow).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 6,
+          "round": 3,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 4,
+              "my": 7,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 6,
+              "name": "Crossbow",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "mx": 4,
+                "my": 3,
+                "hp": 946,
+                "maxHp": 1300,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "dist": 4,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 4,
+                  "my": 7,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 6,
+                  "name": "Crossbow",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "mx": 4,
+                    "my": 3,
+                    "hp": 946,
+                    "maxHp": 1300,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "dist": 4,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 4,
+                  "my": 7,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 6,
+                  "name": "Crossbow",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "mx": 4,
+                    "my": 3,
+                    "hp": 917,
+                    "maxHp": 1300,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "dist": 4,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 12,
+          "end": {
+            "player": {
+              "mx": 4,
+              "my": 7,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 6,
+              "name": "Crossbow",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "mx": 4,
+                "my": 3,
+                "hp": 917,
+                "maxHp": 1300,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "dist": 4,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(suburb's hide absorbs 14.)",
+            "You STRIKE the suburb for 29 (Crossbow).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 7,
+          "round": 4,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 4,
+              "my": 7,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 75,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 6,
+              "name": "Crossbow",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "mx": 4,
+                "my": 3,
+                "hp": 917,
+                "maxHp": 1300,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "dist": 4,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 4,
+                  "my": 7,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 75,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 6,
+                  "name": "Crossbow",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "mx": 4,
+                    "my": 3,
+                    "hp": 917,
+                    "maxHp": 1300,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "dist": 4,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 4,
+                  "my": 7,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 75,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 6,
+                  "name": "Crossbow",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "mx": 4,
+                    "my": 3,
+                    "hp": 889,
+                    "maxHp": 1300,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "dist": 4,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 22,
+          "end": {
+            "player": {
+              "mx": 4,
+              "my": 7,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 75,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 6,
+              "name": "Crossbow",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "mx": 4,
+                "my": 3,
+                "hp": 889,
+                "maxHp": 1300,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "dist": 4,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(suburb's hide absorbs 14.)",
+            "You STRIKE the suburb for 28 (Crossbow).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 8,
+          "round": 5,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 4,
+              "my": 7,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 58,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 6,
+              "name": "Crossbow",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "mx": 4,
+                "my": 3,
+                "hp": 889,
+                "maxHp": 1300,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "dist": 4,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 4,
+                  "my": 7,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 58,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 6,
+                  "name": "Crossbow",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "mx": 4,
+                    "my": 3,
+                    "hp": 889,
+                    "maxHp": 1300,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "dist": 4,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 4,
+                  "my": 7,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 58,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 6,
+                  "name": "Crossbow",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "mx": 4,
+                    "my": 3,
+                    "hp": 862,
+                    "maxHp": 1300,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "dist": 4,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 32,
+          "end": {
+            "player": {
+              "mx": 4,
+              "my": 7,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 58,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 6,
+              "name": "Crossbow",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "mx": 4,
+                "my": 3,
+                "hp": 862,
+                "maxHp": 1300,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "dist": 4,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(suburb's hide absorbs 14.)",
+            "You STRIKE the suburb for 27 (Crossbow).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 9,
+          "round": 6,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 4,
+              "my": 7,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 39,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 6,
+              "name": "Crossbow",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "mx": 4,
+                "my": 3,
+                "hp": 862,
+                "maxHp": 1300,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "dist": 4,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 4,
+                  "my": 7,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 39,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 6,
+                  "name": "Crossbow",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "mx": 4,
+                    "my": 3,
+                    "hp": 862,
+                    "maxHp": 1300,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "dist": 4,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 4,
+                  "my": 7,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 39,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 6,
+                  "name": "Crossbow",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "mx": 4,
+                    "my": 3,
+                    "hp": 838,
+                    "maxHp": 1300,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "dist": 4,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 41,
+          "end": {
+            "player": {
+              "mx": 4,
+              "my": 7,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 39,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 6,
+              "name": "Crossbow",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "mx": 4,
+                "my": 3,
+                "hp": 838,
+                "maxHp": 1300,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "dist": 4,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(suburb's hide absorbs 14.)",
+            "You STRIKE the suburb for 24 (Crossbow).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 10,
+          "round": 7,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 4,
+              "my": 7,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 24,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 6,
+              "name": "Crossbow",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "mx": 4,
+                "my": 3,
+                "hp": 838,
+                "maxHp": 1300,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "dist": 4,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerMove",
+              "kind": "move",
+              "args": [
+                "0",
+                "7"
+              ],
+              "returned": false,
+              "pre": {
+                "player": {
+                  "mx": 4,
+                  "my": 7,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 24,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 6,
+                  "name": "Crossbow",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "mx": 4,
+                    "my": 3,
+                    "hp": 838,
+                    "maxHp": 1300,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "dist": 4,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 4,
+                  "my": 7,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 24,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 6,
+                  "name": "Crossbow",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "mx": 4,
+                    "my": 3,
+                    "hp": 838,
+                    "maxHp": 1300,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "dist": 4,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 50,
+          "end": {
+            "player": {
+              "mx": 4,
+              "my": 7,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 24,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 6,
+              "name": "Crossbow",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "mx": 4,
+                "my": 3,
+                "hp": 838,
+                "maxHp": 1300,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "dist": 4,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "No path there."
+          ]
+        },
+        {
+          "turnSeq": 11,
+          "round": 8,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 4,
+              "my": 7,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 5,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 6,
+              "name": "Crossbow",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "mx": 4,
+                "my": 3,
+                "hp": 838,
+                "maxHp": 1300,
+                "alive": true,
+                "fled": false,
+                "telegraph": false,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "dist": 4,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerMove",
+              "kind": "move",
+              "args": [
+                "0",
+                "7"
+              ],
+              "returned": false,
+              "pre": {
+                "player": {
+                  "mx": 4,
+                  "my": 7,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 5,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 6,
+                  "name": "Crossbow",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "mx": 4,
+                    "my": 3,
+                    "hp": 838,
+                    "maxHp": 1300,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": false,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "dist": 4,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 4,
+                  "my": 7,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 5,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 6,
+                  "name": "Crossbow",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "mx": 4,
+                    "my": 3,
+                    "hp": 838,
+                    "maxHp": 1300,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": false,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "dist": 4,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 58,
+          "end": {
+            "player": {
+              "mx": 4,
+              "my": 7,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 5,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 6,
+              "name": "Crossbow",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "mx": 4,
+                "my": 3,
+                "hp": 838,
+                "maxHp": 1300,
+                "alive": true,
+                "fled": false,
+                "telegraph": false,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "dist": 4,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "No path there."
+          ]
+        },
+        {
+          "turnSeq": 12,
+          "round": 9,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 4,
+              "my": 7,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 5,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 6,
+              "name": "Crossbow",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "mx": 4,
+                "my": 3,
+                "hp": 838,
+                "maxHp": 1300,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "dist": 4,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerMove",
+              "kind": "move",
+              "args": [
+                "0",
+                "7"
+              ],
+              "returned": false,
+              "pre": {
+                "player": {
+                  "mx": 4,
+                  "my": 7,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 5,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 6,
+                  "name": "Crossbow",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "mx": 4,
+                    "my": 3,
+                    "hp": 838,
+                    "maxHp": 1300,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "dist": 4,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 4,
+                  "my": 7,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 5,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 6,
+                  "name": "Crossbow",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "mx": 4,
+                    "my": 3,
+                    "hp": 838,
+                    "maxHp": 1300,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "suburb",
+                    "dist": 4,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 62,
+          "end": {
+            "player": {
+              "mx": 4,
+              "my": 7,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 5,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 6,
+              "name": "Crossbow",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "mx": 4,
+                "my": 3,
+                "hp": 838,
+                "maxHp": 1300,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "suburb",
+                "dist": 4,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "No path there."
+          ]
+        }
+      ],
+      "npcTurns": [
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "suburb",
+          "vid": null,
+          "round": 1,
+          "pre": {
+            "pos": {
+              "mx": 4,
+              "my": 3
+            },
+            "hp": 975,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 3,
+              "my": 2
+            },
+            "hp": 975,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [
+            "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)",
+            "The streets rearrange — every road curves back. You were going somewhere. You are going in a circle now."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "suburb",
+          "vid": null,
+          "round": 2,
+          "pre": {
+            "pos": {
+              "mx": 3,
+              "my": 2
+            },
+            "hp": 946,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 4,
+              "my": 3
+            },
+            "hp": 946,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [],
+          "sayLines": [
+            "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "suburb",
+          "vid": null,
+          "round": 3,
+          "pre": {
+            "pos": {
+              "mx": 4,
+              "my": 3
+            },
+            "hp": 917,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "post": {
+            "pos": {
+              "mx": 4,
+              "my": 3
+            },
+            "hp": 917,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 52,
+              "hpDelta": -25,
+              "round": 3
+            }
+          ],
+          "sayLines": [
+            "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)",
+            "💥 It connects!",
+            "Armor absorbs 27.",
+            "Suburb's attack hits you for 25.",
+            "📖 Codex: Property Tax — strikes one target after a windup. You won't forget this."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "suburb",
+          "vid": null,
+          "round": 4,
+          "pre": {
+            "pos": {
+              "mx": 4,
+              "my": 3
+            },
+            "hp": 889,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "post": {
+            "pos": {
+              "mx": 4,
+              "my": 3
+            },
+            "hp": 889,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 35,
+              "hpDelta": -17,
+              "round": 4
+            }
+          ],
+          "sayLines": [
+            "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)",
+            "💥 It connects!",
+            "Armor absorbs 18.",
+            "Suburb's attack hits you for 17.",
+            "📖 Codex: HOA Fine — strikes one target after a windup. You won't forget this."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "suburb",
+          "vid": null,
+          "round": 5,
+          "pre": {
+            "pos": {
+              "mx": 4,
+              "my": 3
+            },
+            "hp": 862,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "post": {
+            "pos": {
+              "mx": 4,
+              "my": 3
+            },
+            "hp": 862,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 39,
+              "hpDelta": -19,
+              "round": 5
+            }
+          ],
+          "sayLines": [
+            "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)",
+            "💥 Property Tax!",
+            "Armor absorbs 20.",
+            "Suburb's Property Tax hits you for 19."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "suburb",
+          "vid": null,
+          "round": 6,
+          "pre": {
+            "pos": {
+              "mx": 4,
+              "my": 3
+            },
+            "hp": 838,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "post": {
+            "pos": {
+              "mx": 4,
+              "my": 3
+            },
+            "hp": 838,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 32,
+              "hpDelta": -15,
+              "round": 6
+            }
+          ],
+          "sayLines": [
+            "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)",
+            "💥 HOA Fine!",
+            "Armor absorbs 17.",
+            "Suburb's HOA Fine hits you for 15."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "suburb",
+          "vid": null,
+          "round": 7,
+          "pre": {
+            "pos": {
+              "mx": 4,
+              "my": 3
+            },
+            "hp": 838,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "post": {
+            "pos": {
+              "mx": 4,
+              "my": 3
+            },
+            "hp": 838,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 39,
+              "hpDelta": -19,
+              "round": 7
+            }
+          ],
+          "sayLines": [
+            "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)",
+            "💥 Property Tax!",
+            "Armor absorbs 20.",
+            "Suburb's Property Tax hits you for 19.",
+            "The streets rearrange — every road curves back. You were going somewhere. You are going in a circle now."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "suburb",
+          "vid": null,
+          "round": 8,
+          "pre": {
+            "pos": {
+              "mx": 4,
+              "my": 3
+            },
+            "hp": 838,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 4,
+              "my": 3
+            },
+            "hp": 838,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [],
+          "sayLines": [
+            "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)"
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "suburb",
+          "vid": null,
+          "round": 9,
+          "pre": {
+            "pos": {
+              "mx": 4,
+              "my": 3
+            },
+            "hp": 838,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "post": {
+            "pos": {
+              "mx": 4,
+              "my": 3
+            },
+            "hp": 838,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 34,
+              "hpDelta": -16,
+              "round": 9
+            }
+          ],
+          "sayLines": [
+            "🏘️ A FOR SALE sign ticks down: 3 rests remaining. Cul-de-sac quiet. It offers safety, warmth, normalcy. (Rest: heal 30, +1 complacency. Leave: walk to the edge. Or bring something ALIVE inside.)",
+            "💥 HOA Fine!",
+            "Armor absorbs 18.",
+            "Suburb's HOA Fine hits you for 16.",
+            "You go down.",
+            "OH. Oh no. ...The gamblers are very quiet.",
+            "📖 The Codex turns a page on its own. Emil Wagner is dead. You didn't ask. It knew.",
+            "Nobody's talking much. The fire feels smaller tonight.",
+            "🕯️ Emil Wagner is dead — the wild. The village stops. Somebody screams. Somebody else starts digging.",
+            "What Emil kept close goes into the ground with them — keepsakes are buried, never taken from the body.",
+            "The Codex doesn't pause for grief. Diarmait blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+            "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+            "📖 The Codex turns a page: Emil Wagner, 102 days. The mantle passes to Diarmait Fahey.",
+            "🪞 You wake up somebody else. Diarmait Fahey, 33 — a sign painter. Their hands know different work now: Iron Stomach.",
+            "You knew Emil — not the office, the person. The fire keeps expecting them, and so do you. That's a heavier kind of stepping up. (+5 trauma)",
+            "The fire knew Diarmait — solid ground, earned at this fire."
+          ],
+          "threw": null
+        }
+      ],
+      "end": {
+        "result": "lost",
+        "day": 102,
+        "round": 9,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "suburb",
+            "alive": true,
+            "fled": false,
+            "hp": 838,
+            "maxHp": 1300
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "app_mgpsphu2827",
+            "alive": false,
+            "fled": false,
+            "hp": -11,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "app_mgpsphu2827"
+        ],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 3,
+      "type": "tb",
+      "day": 102,
+      "mid": "eulogy",
+      "wave": 4,
+      "fightId": "fmgpspiqz_gfx2ds",
+      "scholarAtStart": "visjoin_80",
+      "leadVid": "visjoin_80",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "visjoin_80",
+          "hpStart": 100,
+          "maxHp": 100,
+          "gear": {
+            "vid": "visjoin_80",
+            "armorP": 7,
+            "armed": true,
+            "weapon": "Stone knife",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "eulogy",
+          "hpStart": 675,
+          "maxHp": 900,
+          "wave": 4,
+          "joinedMidFight": false
+        }
+      ],
+      "leadGear": {
+        "vid": "visjoin_80",
+        "armorP": 7,
+        "armed": true,
+        "weapon": "Stone knife",
+        "vpFound": true,
+        "readError": null
+      },
+      "scholarStart": {
+        "health": 100,
+        "energy": 90,
+        "food": "UNRECORDED"
+      },
+      "trickKnown": false,
+      "hits": [
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 18,
+          "returned": 18,
+          "hpBefore": 675,
+          "hpAfter": 657,
+          "hpDelta": -18,
+          "turnSeq": 13,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 2,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's attack",
+          "requested": 66,
+          "returned": 53,
+          "hpBefore": 100,
+          "hpAfter": 47,
+          "hpDelta": -53,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 14,
+          "returned": 14,
+          "hpBefore": 657,
+          "hpAfter": 643,
+          "hpDelta": -14,
+          "turnSeq": 14,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's attack",
+          "requested": 53,
+          "returned": 43,
+          "hpBefore": 47,
+          "hpAfter": 4,
+          "hpDelta": -43,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 63,
+          "returned": 51,
+          "hpBefore": 4,
+          "hpAfter": -47,
+          "hpDelta": -51,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "Word gets around the haven. Whatever that thing was — the haven's talking about nothing else."
+        },
+        {
+          "kind": "say",
+          "line": "Back at the haven the argument starts: Pyotr is calling it \"Loud-Eyes.\" Nobody agrees yet — weigh in if you want."
+        },
+        {
+          "kind": "say",
+          "line": "Someone walks in like they belong here, grinning. \"Heard about this place three valleys over. Had to see it.\" The System's show has an audience, and audiences talk."
+        },
+        {
+          "kind": "say",
+          "line": "Rain. Steady, cold, honest rain."
+        },
+        {
+          "kind": "say",
+          "line": "⚠ STARVING: health and energy falling. You went to bed on an empty stomach."
+        },
+        {
+          "kind": "say",
+          "line": "⚠ DEHYDRATED: find and treat water today."
+        },
+        {
+          "kind": "say",
+          "line": "No food in the pantry. The village is hungry."
+        },
+        {
+          "kind": "say",
+          "line": "⚠ Haven's pantry is empty. Day 2 of hunger."
+        },
+        {
+          "kind": "say",
+          "line": "— DAY 103 DAWN — The world wakes. Animals are active."
+        },
+        {
+          "kind": "sysSay",
+          "line": "\"Betting pools favor you 3-to-1 now. The smart money says you're learning faster than the monsters.\""
+        },
+        {
+          "kind": "say",
+          "line": "Your stomach is a fist. Eat — anything real, now."
+        },
+        {
+          "kind": "say",
+          "line": "Too far — 3 squares left."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they stood their ground, poor brave fools.\" The spotlight widens. (No weight yet — just the story starting.) (5 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 18 (Stone knife)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they ran, and the spotlight followed.\" The spotlight narrows. Your dodge feels watched. (-10% dodge.) (4 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 It connects!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 13."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's attack hits you for 53."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Final Chapter — strikes one target after a windup. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 14 (Stone knife)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they bled, politely, where everyone could see.\" The narration lingers on your wounds. (Bleeds last 1 round longer.) (3 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 eulogy's attack finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 10."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's attack hits you for 43."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Epitaph — locks onto one target — moving won't dodge it. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "say",
+          "line": "Too far — 3 squares left."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they knelt, and the story approved.\" The story leans in. (The Eulogy's attacks +15.) (2 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 12."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 51."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Diarmait Fahey is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Diarmait Fahey is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Diarmait kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Pyotr blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Diarmait Fahey, 103 days. The mantle passes to Pyotr Kolesnikov."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Pyotr Kolesnikov, 20 — a sign painter. His hands know different work now: Iron Stomach."
+        }
+      ],
+      "transcriptOverflow": false,
+      "abilityUses": [],
+      "shoutUses": 0,
+      "offerFoodUses": 0,
+      "turns": [
+        {
+          "turnSeq": 13,
+          "round": 2,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 4,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Stone knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 0,
+                "hp": 675,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 4,
+                  "my": 0,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Stone knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 5,
+                    "my": 0,
+                    "hp": 675,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 4,
+                  "my": 0,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 100,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Stone knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 5,
+                    "my": 0,
+                    "hp": 657,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 15,
+          "end": {
+            "player": {
+              "mx": 4,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 100,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Stone knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 0,
+                "hp": 657,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(eulogy's hide absorbs 8.)",
+            "You STRIKE the eulogy for 18 (Stone knife).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 14,
+          "round": 3,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 4,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 47,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Stone knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 0,
+                "hp": 657,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 4,
+                  "my": 0,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 47,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Stone knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 5,
+                    "my": 0,
+                    "hp": 657,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 4,
+                  "my": 0,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 47,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Stone knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 5,
+                    "my": 0,
+                    "hp": 643,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 25,
+          "end": {
+            "player": {
+              "mx": 4,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 47,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Stone knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 0,
+                "hp": 643,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(eulogy's hide absorbs 8.)",
+            "You STRIKE the eulogy for 14 (Stone knife).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 15,
+          "round": 4,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 4,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 4,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Stone knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 0,
+                "hp": 643,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerMove",
+              "kind": "move",
+              "args": [
+                "0",
+                "0"
+              ],
+              "returned": false,
+              "pre": {
+                "player": {
+                  "mx": 4,
+                  "my": 0,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 4,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Stone knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 5,
+                    "my": 0,
+                    "hp": 643,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 4,
+                  "my": 0,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 4,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Stone knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 5,
+                    "my": 0,
+                    "hp": 643,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 35,
+          "end": {
+            "player": {
+              "mx": 4,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 4,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Stone knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 5,
+                "my": 0,
+                "hp": 643,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "Too far — 3 squares left."
+          ]
+        }
+      ],
+      "npcTurns": [
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 1,
+          "pre": {
+            "pos": {
+              "mx": 5,
+              "my": 0
+            },
+            "hp": 675,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 5,
+              "my": 0
+            },
+            "hp": 675,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [],
+          "sayLines": [
+            "📖 The Eulogy narrates, honestly, always: \"and then they stood their ground, poor brave fools.\" The spotlight widens. (No weight yet — just the story starting.) (5 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 2,
+          "pre": {
+            "pos": {
+              "mx": 5,
+              "my": 0
+            },
+            "hp": 657,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "post": {
+            "pos": {
+              "mx": 5,
+              "my": 0
+            },
+            "hp": 657,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 66,
+              "hpDelta": -53,
+              "round": 2
+            }
+          ],
+          "sayLines": [
+            "📖 The Eulogy narrates, honestly, always: \"and then they ran, and the spotlight followed.\" The spotlight narrows. Your dodge feels watched. (-10% dodge.) (4 verses remain. Contradict it — do the opposite — or give it a better ending.)",
+            "💥 It connects!",
+            "Armor absorbs 13.",
+            "Eulogy's attack hits you for 53.",
+            "📖 Codex: Final Chapter — strikes one target after a windup. You won't forget this."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 3,
+          "pre": {
+            "pos": {
+              "mx": 5,
+              "my": 0
+            },
+            "hp": 643,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 5,
+              "my": 0
+            },
+            "hp": 643,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 53,
+              "hpDelta": -43,
+              "round": 3
+            }
+          ],
+          "sayLines": [
+            "📖 The Eulogy narrates, honestly, always: \"and then they bled, politely, where everyone could see.\" The narration lingers on your wounds. (Bleeds last 1 round longer.) (3 verses remain. Contradict it — do the opposite — or give it a better ending.)",
+            "💥 eulogy's attack finds you — no dodging it.",
+            "Armor absorbs 10.",
+            "Eulogy's attack hits you for 43.",
+            "📖 Codex: Epitaph — locks onto one target — moving won't dodge it. You won't forget this."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 4,
+          "pre": {
+            "pos": {
+              "mx": 5,
+              "my": 0
+            },
+            "hp": 643,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "post": {
+            "pos": {
+              "mx": 5,
+              "my": 0
+            },
+            "hp": 643,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 63,
+              "hpDelta": -51,
+              "round": 4
+            }
+          ],
+          "sayLines": [
+            "📖 The Eulogy narrates, honestly, always: \"and then they knelt, and the story approved.\" The story leans in. (The Eulogy's attacks +15.) (2 verses remain. Contradict it — do the opposite — or give it a better ending.)",
+            "💥 Final Chapter!",
+            "Armor absorbs 12.",
+            "Eulogy's Final Chapter hits you for 51.",
+            "You go down.",
+            "OH. Oh no. ...The gamblers are very quiet.",
+            "📖 The Codex turns a page on its own. Diarmait Fahey is dead. You didn't ask. It knew.",
+            "Nobody's talking much. The fire feels smaller tonight.",
+            "🕯️ Diarmait Fahey is dead — the wild. The village stops. Somebody screams. Somebody else starts digging.",
+            "What Diarmait kept close goes into the ground with them — keepsakes are buried, never taken from the body.",
+            "The Codex doesn't pause for grief. Pyotr blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+            "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+            "📖 The Codex turns a page: Diarmait Fahey, 103 days. The mantle passes to Pyotr Kolesnikov.",
+            "🪞 You wake up somebody else. Pyotr Kolesnikov, 20 — a sign painter. His hands know different work now: Iron Stomach."
+          ],
+          "threw": null
+        }
+      ],
+      "end": {
+        "result": "lost",
+        "day": 103,
+        "round": 4,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "eulogy",
+            "alive": true,
+            "fled": false,
+            "hp": 643,
+            "maxHp": 900
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "visjoin_80",
+            "alive": false,
+            "fled": false,
+            "hp": -47,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "visjoin_80"
+        ],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false
+    }
+  ],
+  "killsW4": 0,
+  "killRows": [],
+  "unlinkedKills": [],
+  "spawns": [
+    {
+      "day": 86,
+      "id": "suburb",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 90,
+      "id": "eulogy",
+      "tx": 3,
+      "ty": 4
+    },
+    {
+      "day": 92,
+      "id": "eulogy",
+      "tx": 4,
+      "ty": 5
+    },
+    {
+      "day": 94,
+      "id": "reunion",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 101,
+      "id": "eater",
+      "tx": 7,
+      "ty": 4
+    },
+    {
+      "day": 105,
+      "id": "eulogy",
+      "tx": 7,
+      "ty": 4
+    },
+    {
+      "day": 105,
+      "id": "reunion",
+      "tx": 4,
+      "ty": 5
+    }
+  ],
+  "orphanTbEnds": [],
+  "wrapCounts": {
+    "spawnWorldMonster": 61,
+    "fieldFight": 79,
+    "recordWaveKill": 46,
+    "startCombat": 14,
+    "tbBeginTurn": 79,
+    "tbEnd": 15,
+    "tbAdvance": 73,
+    "useAbility": 47,
+    "tbPlayerStrike": 31,
+    "tbDamage": 80,
+    "tbVillagerTurn": 22,
+    "tbMonsterTurn": 80,
+    "tbPlayerMove": 25,
+    "tbPlayerWait": 5
+  },
+  "instrumentErrors": [],
+  "notes": [],
+  "deaths": [
+    {
+      "day": 4,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 7,
+      "kind": "monster",
+      "who": "nevermore",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "mirrormoth",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "murkcap",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "villager",
+      "who": "gen_aua2itj",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 9,
+      "kind": "villager",
+      "who": "gen_lffghg5",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 10,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 10,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 14,
+      "kind": "monster",
+      "who": "mirror_stag",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 16,
+      "kind": "monster",
+      "who": "moderator",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "villager",
+      "who": "gen_vrh71ih",
+      "cause": "sickness",
+      "player": true
+    },
+    {
+      "day": 18,
+      "kind": "villager",
+      "who": "gen_ip1blxs",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 20,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 20,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 20,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 21,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 22,
+      "kind": "monster",
+      "who": "rut_king",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 22,
+      "kind": "monster",
+      "who": "sunback",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 24,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 25,
+      "kind": "monster",
+      "who": "glasswing",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 25,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 25,
+      "kind": "monster",
+      "who": "memory_projector",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 26,
+      "kind": "monster",
+      "who": "ducks_in_a_row",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 29,
+      "kind": "villager",
+      "who": "gen_0qfqvgo",
+      "cause": "Big-Bane",
+      "player": false
+    },
+    {
+      "day": 29,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 29,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 35,
+      "kind": "villager",
+      "who": "hassan_ali",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 35,
+      "kind": "monster",
+      "who": "moderator",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 36,
+      "kind": "monster",
+      "who": "voice_mimic_radio",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 37,
+      "kind": "villager",
+      "who": "hannah_kim",
+      "cause": "the expedition",
+      "player": true
+    },
+    {
+      "day": 38,
+      "kind": "monster",
+      "who": "nightcourt",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 41,
+      "kind": "monster",
+      "who": "voice_mimic_radio",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 45,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 45,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 51,
+      "kind": "monster",
+      "who": "sanjun",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 53,
+      "kind": "monster",
+      "who": "moderator",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 53,
+      "kind": "villager",
+      "who": "greta_hansen",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 54,
+      "kind": "villager",
+      "who": "wanjiru_kamau",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 67,
+      "kind": "monster",
+      "who": "union_rep",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 67,
+      "kind": "villager",
+      "who": "visjoin_54",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 67,
+      "kind": "villager",
+      "who": "boris_kowalski",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 67,
+      "kind": "villager",
+      "who": "priya_nair",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 68,
+      "kind": "monster",
+      "who": "callback",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 68,
+      "kind": "monster",
+      "who": "focus_group",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 70,
+      "kind": "monster",
+      "who": "giant_mosquito",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 71,
+      "kind": "monster",
+      "who": "rut_king",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 76,
+      "kind": "monster",
+      "who": "terms_of_service",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 76,
+      "kind": "villager",
+      "who": "vasyl_shevchenko",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 78,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 78,
+      "kind": "monster",
+      "who": "chorus_line",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 78,
+      "kind": "villager",
+      "who": "liam_davis",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 79,
+      "kind": "villager",
+      "who": "gen_kjnzlzo",
+      "cause": "a stranger",
+      "player": true
+    },
+    {
+      "day": 80,
+      "kind": "villager",
+      "who": "app_mgpspi3j818",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 81,
+      "kind": "monster",
+      "who": "understudy",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 82,
+      "kind": "monster",
+      "who": "spool",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 86,
+      "kind": "monster",
+      "who": "murkcap",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 94,
+      "kind": "villager",
+      "who": "nadia_khoury",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 102,
+      "kind": "villager",
+      "who": "app_mgpsphu2827",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 103,
+      "kind": "villager",
+      "who": "visjoin_80",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 104,
+      "kind": "villager",
+      "who": "visjoin_102",
+      "cause": "monster",
+      "player": false
+    }
+  ],
+  "resultKeys": [
+    "days",
+    "gameDays",
+    "maxWaveUnlocked",
+    "waveKills",
+    "endReason",
+    "stop",
+    "communityExposure",
+    "telemetry",
+    "samples",
+    "learnedPlants",
+    "learnedSkills",
+    "pacing",
+    "ms",
+    "manifest",
+    "policyId",
+    "notes"
+  ],
+  "scaleSamples": [
+    [
+      30,
+      "village"
+    ],
+    [
+      60,
+      "village"
+    ],
+    [
+      90,
+      "village"
+    ]
+  ],
+  "standingSamples": [
+    [
+      30,
+      0
+    ],
+    [
+      60,
+      0
+    ],
+    [
+      90,
+      125
+    ]
+  ],
+  "scaleRankFinal": "village",
+  "standingFinal": 125,
+  "arcFinal": 3,
+  "tableWaiting": false,
+  "tableEntered": false,
+  "nationalReached": false,
+  "maxStanding": 125,
+  "scaleReadError": null
+}

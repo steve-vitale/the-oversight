@@ -1,0 +1,2840 @@
+{
+  "seed": 99617,
+  "run": "stayrecover-recovery",
+  "policy": "stayrecover",
+  "anchorCommit": "e5e6aa59b236",
+  "days": 140,
+  "gameDays": 141,
+  "endReason": "survived",
+  "won": false,
+  "villageLost": false,
+  "maxWave": 4,
+  "spawnsW4": 9,
+  "tbCalls": 1,
+  "fieldCallsW4": 4,
+  "exposures": [
+    {
+      "seq": 1,
+      "type": "tb",
+      "day": 97,
+      "mid": "eulogy",
+      "wave": 4,
+      "fightId": "fmgpspiol_gb65z3",
+      "scholarAtStart": "nadia_khoury",
+      "leadVid": "nadia_khoury",
+      "partySizeStart": 2,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "nadia_khoury",
+          "hpStart": 87,
+          "maxHp": 100,
+          "gear": {
+            "vid": "nadia_khoury",
+            "armorP": 17,
+            "armed": true,
+            "weapon": "Hardlight knife",
+            "vpFound": true,
+            "readError": null
+          }
+        },
+        {
+          "key": "v_vasyl_shevchenko",
+          "kind": "villager",
+          "vid": "vasyl_shevchenko",
+          "hpStart": 97,
+          "maxHp": 100,
+          "gear": {
+            "vid": "vasyl_shevchenko",
+            "armorP": 12,
+            "armed": true,
+            "weapon": "Trailblazer Machete",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "eulogy",
+          "hpStart": 675,
+          "maxHp": 900,
+          "wave": 4,
+          "joinedMidFight": false
+        }
+      ],
+      "leadGear": {
+        "vid": "nadia_khoury",
+        "armorP": 17,
+        "armed": true,
+        "weapon": "Hardlight knife",
+        "vpFound": true,
+        "readError": null
+      },
+      "scholarStart": {
+        "health": 87,
+        "energy": 90,
+        "food": "UNRECORDED"
+      },
+      "trickKnown": false,
+      "hits": [
+        {
+          "round": 1,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 110,
+          "returned": 138,
+          "hpBefore": 675,
+          "hpAfter": 537,
+          "hpDelta": -138,
+          "turnSeq": null,
+          "actorKey": null,
+          "actorKind": null,
+          "phase": "between-turns",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 1,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_vasyl_shevchenko",
+          "sourceLabel": "Vasyl",
+          "requested": 17,
+          "returned": 17,
+          "hpBefore": 537,
+          "hpAfter": 520,
+          "hpDelta": -17,
+          "turnSeq": null,
+          "actorKey": "v_vasyl_shevchenko",
+          "actorKind": "ally",
+          "phase": "npc-turn",
+          "sourceClass": "ally"
+        },
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 48,
+          "returned": 60,
+          "hpBefore": 520,
+          "hpAfter": 460,
+          "hpDelta": -60,
+          "turnSeq": 1,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_vasyl_shevchenko",
+          "sourceLabel": "Vasyl",
+          "requested": 15,
+          "returned": 15,
+          "hpBefore": 460,
+          "hpAfter": 445,
+          "hpDelta": -15,
+          "turnSeq": null,
+          "actorKey": "v_vasyl_shevchenko",
+          "actorKind": "ally",
+          "phase": "npc-turn",
+          "sourceClass": "ally"
+        },
+        {
+          "round": 2,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's attack",
+          "requested": 61,
+          "returned": 38,
+          "hpBefore": 87,
+          "hpAfter": 49,
+          "hpDelta": -38,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "eulogy",
+          "sourceKey": "v_vasyl_shevchenko",
+          "sourceLabel": "Vasyl",
+          "requested": 16,
+          "returned": 16,
+          "hpBefore": 445,
+          "hpAfter": 429,
+          "hpDelta": -16,
+          "turnSeq": null,
+          "actorKey": "v_vasyl_shevchenko",
+          "actorKind": "ally",
+          "phase": "npc-turn",
+          "sourceClass": "ally"
+        },
+        {
+          "round": 3,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 51,
+          "returned": 32,
+          "hpBefore": 74,
+          "hpAfter": 42,
+          "hpDelta": -32,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 55,
+          "returned": 34,
+          "hpBefore": 67,
+          "hpAfter": 33,
+          "hpDelta": -34,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 5,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "eulogy's Final Chapter",
+          "requested": 55,
+          "returned": 34,
+          "hpBefore": 58,
+          "hpAfter": 24,
+          "hpDelta": -34,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 6,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "the narrated ending",
+          "requested": 9999,
+          "returned": 6269,
+          "hpBefore": 49,
+          "hpAfter": -6220,
+          "hpDelta": -6269,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "— NIGHT — Camp. Rest — or risk the dark."
+        },
+        {
+          "kind": "say",
+          "line": "Night. The treeline is just a sound now. The fire is the whole argument against it."
+        },
+        {
+          "kind": "say",
+          "line": "PATIENT AIM: first strike, doubled."
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 138 (Hardlight knife)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Vasyl's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Vasyl strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "Vasyl hits eulogy for 17."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Too close. The eulogy's attention SNAPS to you — proximity overrules patience."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they stood their ground, poor brave fools.\" The spotlight widens. (No weight yet — just the story starting.) (5 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "say",
+          "line": "(eulogy's hide absorbs 8.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the eulogy for 60 (Hardlight knife)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Vasyl's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Vasyl strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "Vasyl hits eulogy for 15."
+        },
+        {
+          "kind": "say",
+          "line": "eulogy is BLEEDING — and it likes it. Louder, faster, no more feints."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Too close. The eulogy's attention SNAPS to you — proximity overrules patience."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they ran, and the spotlight followed.\" The spotlight narrows. Your dodge feels watched. (-10% dodge.) (4 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 It connects!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 23."
+        },
+        {
+          "kind": "say",
+          "line": "Vasyl shouts: \"Move! MOVE!\""
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's attack hits you for 38."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Final Chapter — strikes one target after a windup. You won't forget this."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "say",
+          "line": "You tear into your rations mid-fight — 250 kcal, +25 HP. The pack is lighter now. (750 kcal left)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Vasyl's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Vasyl strikes the Eulogy."
+        },
+        {
+          "kind": "say",
+          "line": "Vasyl hits eulogy for 16."
+        },
+        {
+          "kind": "say",
+          "line": "The narration stumbles — a page flutters loose from the script."
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "Too close. The eulogy's attention SNAPS to you — proximity overrules patience."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they bled, politely, where everyone could see.\" The narration lingers on your wounds. (Bleeds last 1 round longer.) (3 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 19."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 32."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "say",
+          "line": "You tear into your rations mid-fight — 250 kcal, +25 HP. The pack is lighter now. (500 kcal left)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Vasyl's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then they knelt, and the story approved.\" The story leans in. (The Eulogy's attacks +15.) (2 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 21."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 34."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 5!"
+        },
+        {
+          "kind": "say",
+          "line": "You tear into your rations mid-fight — 250 kcal, +25 HP. The pack is lighter now. (250 kcal left)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Vasyl's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Eulogy narrates, honestly, always: \"and then — this is the last line — they ended.\" The last line hangs in the air. (It finishes next round.) (1 verse remain. Contradict it — do the opposite — or give it a better ending.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 Final Chapter!"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 21."
+        },
+        {
+          "kind": "say",
+          "line": "Eulogy's Final Chapter hits you for 34."
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 6!"
+        },
+        {
+          "kind": "say",
+          "line": "You tear into your rations mid-fight — 250 kcal, +25 HP. The pack is lighter now. (0 kcal left)"
+        },
+        {
+          "kind": "sysSay",
+          "line": "Vasyl's turn"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🎙️ The Eulogy's turn"
+        },
+        {
+          "kind": "say",
+          "line": "📖 \"...they ended.\" The last line lands like a lid. (The story finishes — you die as narrated.)"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 3730."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Nadia Khoury is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "Nadia is gone — dead. The errand dies with them; nobody's waiting on those dandelions now."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Nadia Khoury is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Nadia kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "\"Nadia's gone.\" Olzhas looks at you for a long moment. \"You're not Nadia.\" No heat in it. Just fact. You'll have to earn this face."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Vasyl blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Fire in Rain (Level 1). Split wood — the inside is dry even when the outside is soaked. Feather sticks catch fast."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Debris Shelter (Level 1). A lean-to of branches and leaves beats nothing. Dead air is insulation."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Reading Tracks (Level 1). Fresh tracks have sharp edges. Old tracks crumble. You can tell how recently something passed."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Wire Snares (Level 1). A loop of wire on a game trail. Simple, effective, ancient. Check at dawn."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Calming Panic (Level 1). Ground them: 5 things you see, 4 you hear, 3 you touch. Breathe with them. Slow is fast."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Improvised Weapons (Level 1). Everything is a weapon if you're desperate. A rock, a stick, a handful of dirt in the eyes."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Managing Fear (Level 1). Fear is data, not orders. Acknowledge it, then decide anyway. Courage is fear that kept going."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Shield Wall (Level 1). Shoulder to shoulder in the wilds, you brace as one. While an ally fights beside you, blows that reach you land softer — the line holds together or not at all."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Tripwire (Level 1). You string a wire at ankle height. The next monster that moves eats dirt — prone, stunned, and embarrassed. (Sets up the party.)"
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Herbal Medicine (Level 1). Willow bark = aspirin. Yarrow stops bleeding. Plantain draws out infection. The pharmacy is outside."
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Nadia Khoury, 97 days. The mantle passes to Vasyl Shevchenko."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Vasyl Shevchenko, 34 — an infantry soldier. His hands know different work now: Green Whisper, Berserker Rage."
+        },
+        {
+          "kind": "say",
+          "line": "The village's quarrel was with Nadia — and Nadia is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers."
+        },
+        {
+          "kind": "say",
+          "line": "You knew Nadia — not the office, the person. The fire keeps expecting her, and so do you. That's a heavier kind of stepping up. (+5 trauma)"
+        },
+        {
+          "kind": "say",
+          "line": "At the grave, Olzhas, Emil, Boris speak for Vasyl — \"Nadia trusted them. We saw it. Give them the fire's hearing.\" The village listens."
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew Vasyl before the Codex did — his name already carried weight here."
+        }
+      ],
+      "transcriptOverflow": false,
+      "abilityUses": [],
+      "shoutUses": 0,
+      "offerFoodUses": 0,
+      "turns": [
+        {
+          "turnSeq": 1,
+          "round": 2,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 1,
+              "my": 6,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 87,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Hardlight knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 2,
+                "my": 6,
+                "hp": 520,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 1,
+                  "my": 6,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 87,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Hardlight knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 2,
+                    "my": 6,
+                    "hp": 520,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 1,
+                  "my": 6,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 87,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Hardlight knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 2,
+                    "my": 6,
+                    "hp": 460,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 15,
+          "end": {
+            "player": {
+              "mx": 1,
+              "my": 6,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 87,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Hardlight knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 2,
+                "my": 6,
+                "hp": 460,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "(eulogy's hide absorbs 8.)",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "You STRIKE the eulogy for 60 (Hardlight knife).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 2,
+          "round": 3,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 1,
+              "my": 6,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 49,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Hardlight knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 2,
+                "my": 6,
+                "hp": 445,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbEatRations",
+              "kind": "eat",
+              "args": [],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 1,
+                  "my": 6,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 49,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Hardlight knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 2,
+                    "my": 6,
+                    "hp": 445,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 1,
+                  "my": 6,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 74,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Hardlight knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 2,
+                    "my": 6,
+                    "hp": 445,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 33,
+          "end": {
+            "player": {
+              "mx": 1,
+              "my": 6,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 74,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Hardlight knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 2,
+                "my": 6,
+                "hp": 445,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "You tear into your rations mid-fight — 250 kcal, +25 HP. The pack is lighter now. (750 kcal left)"
+          ]
+        },
+        {
+          "turnSeq": 3,
+          "round": 4,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 1,
+              "my": 6,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 42,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Hardlight knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 2,
+                "my": 6,
+                "hp": 429,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbEatRations",
+              "kind": "eat",
+              "args": [],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 1,
+                  "my": 6,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 42,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Hardlight knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 2,
+                    "my": 6,
+                    "hp": 429,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 1,
+                  "my": 6,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 67,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Hardlight knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 2,
+                    "my": 6,
+                    "hp": 429,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 45,
+          "end": {
+            "player": {
+              "mx": 1,
+              "my": 6,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 67,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Hardlight knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 2,
+                "my": 6,
+                "hp": 429,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "You tear into your rations mid-fight — 250 kcal, +25 HP. The pack is lighter now. (500 kcal left)"
+          ]
+        },
+        {
+          "turnSeq": 4,
+          "round": 5,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 1,
+              "my": 6,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 33,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Hardlight knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 2,
+                "my": 6,
+                "hp": 429,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbEatRations",
+              "kind": "eat",
+              "args": [],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 1,
+                  "my": 6,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 33,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Hardlight knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 2,
+                    "my": 6,
+                    "hp": 429,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 1,
+                  "my": 6,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 58,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Hardlight knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 2,
+                    "my": 6,
+                    "hp": 429,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": 1
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 53,
+          "end": {
+            "player": {
+              "mx": 1,
+              "my": 6,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 58,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Hardlight knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 2,
+                "my": 6,
+                "hp": 429,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": 1
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "You tear into your rations mid-fight — 250 kcal, +25 HP. The pack is lighter now. (250 kcal left)"
+          ]
+        },
+        {
+          "turnSeq": 5,
+          "round": 6,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 1,
+              "my": 6,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 24,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Hardlight knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 2,
+                "my": 6,
+                "hp": 429,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbEatRations",
+              "kind": "eat",
+              "args": [],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 1,
+                  "my": 6,
+                  "moveLeft": 3,
+                  "acted": false,
+                  "hp": 24,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Hardlight knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 2,
+                    "my": 6,
+                    "hp": 429,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 1,
+                  "my": 6,
+                  "moveLeft": 3,
+                  "acted": true,
+                  "hp": 49,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 3,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 1,
+                  "name": "Hardlight knife",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "mx": 2,
+                    "my": 6,
+                    "hp": 429,
+                    "maxHp": 900,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "eulogy",
+                    "dist": 1,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 61,
+          "end": {
+            "player": {
+              "mx": 1,
+              "my": 6,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 49,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 3,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 1,
+              "name": "Hardlight knife",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "mx": 2,
+                "my": 6,
+                "hp": 429,
+                "maxHp": 900,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "eulogy",
+                "dist": 1,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "You tear into your rations mid-fight — 250 kcal, +25 HP. The pack is lighter now. (0 kcal left)"
+          ]
+        }
+      ],
+      "npcTurns": [
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_vasyl_shevchenko",
+          "mid": null,
+          "vid": "vasyl_shevchenko",
+          "round": 1,
+          "pre": {
+            "pos": {
+              "mx": 4,
+              "my": 7
+            },
+            "hp": 97,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 4,
+              "my": 7
+            },
+            "hp": 97,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "m_0",
+              "targetKind": "monster",
+              "targetMid": "eulogy",
+              "sourceClass": "ally",
+              "requested": 17,
+              "hpDelta": -17,
+              "round": 1
+            }
+          ],
+          "sayLines": [
+            "Vasyl strikes the Eulogy.",
+            "Vasyl hits eulogy for 17.",
+            "The narration stumbles — a page flutters loose from the script."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 1,
+          "pre": {
+            "pos": {
+              "mx": 2,
+              "my": 6
+            },
+            "hp": 520,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 2,
+              "my": 6
+            },
+            "hp": 520,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [],
+          "sayLines": [
+            "Too close. The eulogy's attention SNAPS to you — proximity overrules patience.",
+            "📖 The Eulogy narrates, honestly, always: \"and then they stood their ground, poor brave fools.\" The spotlight widens. (No weight yet — just the story starting.) (5 verses remain. Contradict it — do the opposite — or give it a better ending.)"
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_vasyl_shevchenko",
+          "mid": null,
+          "vid": "vasyl_shevchenko",
+          "round": 2,
+          "pre": {
+            "pos": {
+              "mx": 4,
+              "my": 7
+            },
+            "hp": 97,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 4,
+              "my": 7
+            },
+            "hp": 97,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "m_0",
+              "targetKind": "monster",
+              "targetMid": "eulogy",
+              "sourceClass": "ally",
+              "requested": 15,
+              "hpDelta": -15,
+              "round": 2
+            }
+          ],
+          "sayLines": [
+            "Vasyl strikes the Eulogy.",
+            "Vasyl hits eulogy for 15.",
+            "eulogy is BLEEDING — and it likes it. Louder, faster, no more feints.",
+            "The narration stumbles — a page flutters loose from the script."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 2,
+          "pre": {
+            "pos": {
+              "mx": 2,
+              "my": 6
+            },
+            "hp": 445,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "post": {
+            "pos": {
+              "mx": 2,
+              "my": 6
+            },
+            "hp": 445,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 61,
+              "hpDelta": -38,
+              "round": 2
+            }
+          ],
+          "sayLines": [
+            "Too close. The eulogy's attention SNAPS to you — proximity overrules patience.",
+            "📖 The Eulogy narrates, honestly, always: \"and then they ran, and the spotlight followed.\" The spotlight narrows. Your dodge feels watched. (-10% dodge.) (4 verses remain. Contradict it — do the opposite — or give it a better ending.)",
+            "💥 It connects!",
+            "Armor absorbs 23.",
+            "Vasyl shouts: \"Move! MOVE!\"",
+            "Eulogy's attack hits you for 38.",
+            "📖 Codex: Final Chapter — strikes one target after a windup. You won't forget this."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_vasyl_shevchenko",
+          "mid": null,
+          "vid": "vasyl_shevchenko",
+          "round": 3,
+          "pre": {
+            "pos": {
+              "mx": 4,
+              "my": 7
+            },
+            "hp": 97,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 4,
+              "my": 7
+            },
+            "hp": 97,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "m_0",
+              "targetKind": "monster",
+              "targetMid": "eulogy",
+              "sourceClass": "ally",
+              "requested": 16,
+              "hpDelta": -16,
+              "round": 3
+            }
+          ],
+          "sayLines": [
+            "Vasyl strikes the Eulogy.",
+            "Vasyl hits eulogy for 16.",
+            "The narration stumbles — a page flutters loose from the script."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 3,
+          "pre": {
+            "pos": {
+              "mx": 2,
+              "my": 6
+            },
+            "hp": 429,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "post": {
+            "pos": {
+              "mx": 2,
+              "my": 6
+            },
+            "hp": 429,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 51,
+              "hpDelta": -32,
+              "round": 3
+            }
+          ],
+          "sayLines": [
+            "Too close. The eulogy's attention SNAPS to you — proximity overrules patience.",
+            "📖 The Eulogy narrates, honestly, always: \"and then they bled, politely, where everyone could see.\" The narration lingers on your wounds. (Bleeds last 1 round longer.) (3 verses remain. Contradict it — do the opposite — or give it a better ending.)",
+            "💥 Final Chapter!",
+            "Armor absorbs 19.",
+            "Eulogy's Final Chapter hits you for 32."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_vasyl_shevchenko",
+          "mid": null,
+          "vid": "vasyl_shevchenko",
+          "round": 4,
+          "pre": {
+            "pos": {
+              "mx": 4,
+              "my": 7
+            },
+            "hp": 97,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 3,
+              "my": 8
+            },
+            "hp": 97,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 4,
+          "pre": {
+            "pos": {
+              "mx": 2,
+              "my": 6
+            },
+            "hp": 429,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "post": {
+            "pos": {
+              "mx": 2,
+              "my": 6
+            },
+            "hp": 429,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 55,
+              "hpDelta": -34,
+              "round": 4
+            }
+          ],
+          "sayLines": [
+            "📖 The Eulogy narrates, honestly, always: \"and then they knelt, and the story approved.\" The story leans in. (The Eulogy's attacks +15.) (2 verses remain. Contradict it — do the opposite — or give it a better ending.)",
+            "💥 Final Chapter!",
+            "Armor absorbs 21.",
+            "Eulogy's Final Chapter hits you for 34."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_vasyl_shevchenko",
+          "mid": null,
+          "vid": "vasyl_shevchenko",
+          "round": 5,
+          "pre": {
+            "pos": {
+              "mx": 3,
+              "my": 8
+            },
+            "hp": 97,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 3,
+              "my": 8
+            },
+            "hp": 97,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 5,
+          "pre": {
+            "pos": {
+              "mx": 2,
+              "my": 6
+            },
+            "hp": 429,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": 1
+          },
+          "post": {
+            "pos": {
+              "mx": 2,
+              "my": 6
+            },
+            "hp": 429,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 55,
+              "hpDelta": -34,
+              "round": 5
+            }
+          ],
+          "sayLines": [
+            "📖 The Eulogy narrates, honestly, always: \"and then — this is the last line — they ended.\" The last line hangs in the air. (It finishes next round.) (1 verse remain. Contradict it — do the opposite — or give it a better ending.)",
+            "💥 Final Chapter!",
+            "Armor absorbs 21.",
+            "Eulogy's Final Chapter hits you for 34."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbVillagerTurn",
+          "kind": "ally",
+          "key": "v_vasyl_shevchenko",
+          "mid": null,
+          "vid": "vasyl_shevchenko",
+          "round": 6,
+          "pre": {
+            "pos": {
+              "mx": 3,
+              "my": 8
+            },
+            "hp": 97,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 3,
+              "my": 8
+            },
+            "hp": 97,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [],
+          "sayLines": [],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "eulogy",
+          "vid": null,
+          "round": 6,
+          "pre": {
+            "pos": {
+              "mx": 2,
+              "my": 6
+            },
+            "hp": 429,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 2,
+              "my": 6
+            },
+            "hp": 429,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 9999,
+              "hpDelta": -6269,
+              "round": 6
+            }
+          ],
+          "sayLines": [
+            "📖 \"...they ended.\" The last line lands like a lid. (The story finishes — you die as narrated.)",
+            "Armor absorbs 3730.",
+            "You go down.",
+            "OH. Oh no. ...The gamblers are very quiet.",
+            "📖 The Codex turns a page on its own. Nadia Khoury is dead. You didn't ask. It knew.",
+            "Nobody's talking much. The fire feels smaller tonight.",
+            "Nadia is gone — dead. The errand dies with them; nobody's waiting on those dandelions now.",
+            "🕯️ Nadia Khoury is dead — the wild. The village stops. Somebody screams. Somebody else starts digging.",
+            "What Nadia kept close goes into the ground with them — keepsakes are buried, never taken from the body.",
+            "\"Nadia's gone.\" Olzhas looks at you for a long moment. \"You're not Nadia.\" No heat in it. Just fact. You'll have to earn this face.",
+            "The Codex doesn't pause for grief. Vasyl blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+            "📖 LEARNED: Fire in Rain (Level 1). Split wood — the inside is dry even when the outside is soaked. Feather sticks catch fast.",
+            "📖 LEARNED: Debris Shelter (Level 1). A lean-to of branches and leaves beats nothing. Dead air is insulation.",
+            "📖 LEARNED: Reading Tracks (Level 1). Fresh tracks have sharp edges. Old tracks crumble. You can tell how recently something passed.",
+            "📖 LEARNED: Wire Snares (Level 1). A loop of wire on a game trail. Simple, effective, ancient. Check at dawn.",
+            "📖 LEARNED: Calming Panic (Level 1). Ground them: 5 things you see, 4 you hear, 3 you touch. Breathe with them. Slow is fast.",
+            "📖 LEARNED: Improvised Weapons (Level 1). Everything is a weapon if you're desperate. A rock, a stick, a handful of dirt in the eyes.",
+            "📖 LEARNED: Managing Fear (Level 1). Fear is data, not orders. Acknowledge it, then decide anyway. Courage is fear that kept going.",
+            "📖 LEARNED: Shield Wall (Level 1). Shoulder to shoulder in the wilds, you brace as one. While an ally fights beside you, blows that reach you land softer — the line holds together or not at all.",
+            "📖 LEARNED: Tripwire (Level 1). You string a wire at ankle height. The next monster that moves eats dirt — prone, stunned, and embarrassed. (Sets up the party.)",
+            "📖 LEARNED: Herbal Medicine (Level 1). Willow bark = aspirin. Yarrow stops bleeding. Plantain draws out infection. The pharmacy is outside.",
+            "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+            "📖 The Codex turns a page: Nadia Khoury, 97 days. The mantle passes to Vasyl Shevchenko.",
+            "🪞 You wake up somebody else. Vasyl Shevchenko, 34 — an infantry soldier. His hands know different work now: Green Whisper, Berserker Rage.",
+            "The village's quarrel was with Nadia — and Nadia is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers.",
+            "You knew Nadia — not the office, the person. The fire keeps expecting her, and so do you. That's a heavier kind of stepping up. (+5 trauma)",
+            "At the grave, Olzhas, Emil, Boris speak for Vasyl — \"Nadia trusted them. We saw it. Give them the fire's hearing.\" The village listens.",
+            "The fire knew Vasyl before the Codex did — his name already carried weight here."
+          ],
+          "threw": null
+        }
+      ],
+      "end": {
+        "result": "lost",
+        "day": 97,
+        "round": 6,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "eulogy",
+            "alive": true,
+            "fled": false,
+            "hp": 429,
+            "maxHp": 900
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "nadia_khoury",
+            "alive": false,
+            "fled": false,
+            "hp": -6220,
+            "maxHp": 100
+          },
+          {
+            "key": "v_vasyl_shevchenko",
+            "kind": "villager",
+            "vid": "vasyl_shevchenko",
+            "alive": true,
+            "fled": false,
+            "hp": 97,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "nadia_khoury"
+        ],
+        "humansFled": [],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false,
+      "eatUses": 4
+    }
+  ],
+  "killsW4": 0,
+  "killRows": [],
+  "unlinkedKills": [],
+  "spawns": [
+    {
+      "day": 89,
+      "id": "eulogy",
+      "tx": 0,
+      "ty": 6
+    },
+    {
+      "day": 89,
+      "id": "eulogy",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 89,
+      "id": "reunion",
+      "tx": 4,
+      "ty": 5
+    },
+    {
+      "day": 91,
+      "id": "eulogy",
+      "tx": 3,
+      "ty": 4
+    },
+    {
+      "day": 92,
+      "id": "suburb",
+      "tx": 3,
+      "ty": 4
+    },
+    {
+      "day": 109,
+      "id": "congregation",
+      "tx": 4,
+      "ty": 5
+    },
+    {
+      "day": 114,
+      "id": "strike",
+      "tx": 3,
+      "ty": 4
+    },
+    {
+      "day": 125,
+      "id": "influencer",
+      "tx": 3,
+      "ty": 4
+    },
+    {
+      "day": 140,
+      "id": "eulogy",
+      "tx": 4,
+      "ty": 3
+    }
+  ],
+  "orphanTbEnds": [],
+  "wrapCounts": {
+    "spawnWorldMonster": 71,
+    "fieldFight": 101,
+    "recordWaveKill": 63,
+    "startCombat": 15,
+    "tbBeginTurn": 96,
+    "tbEnd": 15,
+    "tbAdvance": 87,
+    "useAbility": 51,
+    "tbPlayerStrike": 32,
+    "tbDamage": 59,
+    "tbVillagerTurn": 12,
+    "tbMonsterTurn": 91,
+    "tbPlayerMove": 11,
+    "tbEatRations": 8,
+    "tbPlayerShout": 4,
+    "tbPlayerEndTurn": 1
+  },
+  "instrumentErrors": [],
+  "notes": [],
+  "deaths": [
+    {
+      "day": 4,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 7,
+      "kind": "monster",
+      "who": "nevermore",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "mirrormoth",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "murkcap",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "villager",
+      "who": "gen_aua2itj",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 9,
+      "kind": "villager",
+      "who": "gen_lffghg5",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 10,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 10,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 14,
+      "kind": "monster",
+      "who": "mirror_stag",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 16,
+      "kind": "monster",
+      "who": "moderator",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "villager",
+      "who": "gen_vrh71ih",
+      "cause": "sickness",
+      "player": true
+    },
+    {
+      "day": 18,
+      "kind": "villager",
+      "who": "gen_ip1blxs",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 20,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 20,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 20,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 21,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 22,
+      "kind": "monster",
+      "who": "rut_king",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 22,
+      "kind": "monster",
+      "who": "sunback",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 24,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 25,
+      "kind": "monster",
+      "who": "glasswing",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 25,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 25,
+      "kind": "monster",
+      "who": "memory_projector",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 26,
+      "kind": "monster",
+      "who": "ducks_in_a_row",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 29,
+      "kind": "villager",
+      "who": "gen_0qfqvgo",
+      "cause": "Big-Bane",
+      "player": false
+    },
+    {
+      "day": 29,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 29,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 35,
+      "kind": "villager",
+      "who": "hassan_ali",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 35,
+      "kind": "monster",
+      "who": "moderator",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 36,
+      "kind": "monster",
+      "who": "voice_mimic_radio",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 37,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 48,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 50,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 50,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 50,
+      "kind": "monster",
+      "who": "spool",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 50,
+      "kind": "monster",
+      "who": "understudy",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 50,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 50,
+      "kind": "monster",
+      "who": "nightcourt",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 54,
+      "kind": "villager",
+      "who": "liam_davis",
+      "cause": "Big-Bane",
+      "player": false
+    },
+    {
+      "day": 65,
+      "kind": "monster",
+      "who": "callback",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 65,
+      "kind": "monster",
+      "who": "sweeps_week",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 66,
+      "kind": "monster",
+      "who": "murkcap",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 67,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 67,
+      "kind": "monster",
+      "who": "spool",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 67,
+      "kind": "monster",
+      "who": "sanjun",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 67,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 79,
+      "kind": "monster",
+      "who": "mirror_stag",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 79,
+      "kind": "monster",
+      "who": "memory_projector",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 79,
+      "kind": "monster",
+      "who": "sunback",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 81,
+      "kind": "villager",
+      "who": "greta_hansen",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 81,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 82,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 84,
+      "kind": "villager",
+      "who": "visjoin_82",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 84,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 85,
+      "kind": "villager",
+      "who": "wanjiru_kamau",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 86,
+      "kind": "monster",
+      "who": "spool",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 86,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 86,
+      "kind": "monster",
+      "who": "voice_mimic_radio",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 87,
+      "kind": "villager",
+      "who": "hannah_kim",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 87,
+      "kind": "monster",
+      "who": "ad_break",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 97,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 97,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 97,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 97,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 97,
+      "kind": "villager",
+      "who": "nadia_khoury",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 99,
+      "kind": "monster",
+      "who": "spool",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 115,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 121,
+      "kind": "monster",
+      "who": "nightlight_catfish",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 139,
+      "kind": "monster",
+      "who": "terms_of_service",
+      "cause": "villager combat",
+      "player": false
+    }
+  ],
+  "resultKeys": [
+    "days",
+    "gameDays",
+    "maxWaveUnlocked",
+    "waveKills",
+    "endReason",
+    "stop",
+    "communityExposure",
+    "telemetry",
+    "samples",
+    "learnedPlants",
+    "learnedSkills",
+    "pacing",
+    "ms",
+    "manifest",
+    "policyId",
+    "notes"
+  ],
+  "scaleSamples": [
+    [
+      30,
+      "village"
+    ],
+    [
+      60,
+      "village"
+    ],
+    [
+      90,
+      "village"
+    ],
+    [
+      120,
+      "village"
+    ]
+  ],
+  "standingSamples": [
+    [
+      30,
+      0
+    ],
+    [
+      60,
+      25
+    ],
+    [
+      90,
+      100
+    ],
+    [
+      120,
+      100
+    ]
+  ],
+  "scaleRankFinal": "village",
+  "standingFinal": 125,
+  "arcFinal": 3,
+  "tableWaiting": false,
+  "tableEntered": false,
+  "nationalReached": false,
+  "maxStanding": 125,
+  "scaleReadError": null
+}

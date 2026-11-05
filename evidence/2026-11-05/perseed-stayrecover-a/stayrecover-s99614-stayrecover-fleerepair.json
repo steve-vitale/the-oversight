@@ -1,0 +1,3708 @@
+{
+  "seed": 99614,
+  "run": "stayrecover-fleerepair",
+  "policy": "fleerepair",
+  "anchorCommit": "e5e6aa59b236",
+  "days": 113,
+  "gameDays": 112,
+  "endReason": "village-lost",
+  "won": false,
+  "villageLost": true,
+  "maxWave": 4,
+  "spawnsW4": 5,
+  "tbCalls": 3,
+  "fieldCallsW4": 1,
+  "exposures": [
+    {
+      "seq": 1,
+      "type": "tb",
+      "day": 107,
+      "mid": "audit",
+      "wave": 4,
+      "fightId": "fmgpspj17_cfu4ga",
+      "scholarAtStart": "theo_lindqvist",
+      "leadVid": "theo_lindqvist",
+      "partySizeStart": 2,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "theo_lindqvist",
+          "hpStart": 100,
+          "maxHp": 100,
+          "gear": {
+            "vid": "theo_lindqvist",
+            "armorP": 54,
+            "armed": true,
+            "weapon": "Hunting spear",
+            "vpFound": true,
+            "readError": null
+          }
+        },
+        {
+          "key": "v_visjoin_88",
+          "kind": "villager",
+          "vid": "visjoin_88",
+          "hpStart": 89,
+          "maxHp": 100,
+          "gear": {
+            "vid": "visjoin_88",
+            "armorP": 5,
+            "armed": true,
+            "weapon": "Hatchet",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "audit",
+          "hpStart": 794,
+          "maxHp": 1100,
+          "wave": 4,
+          "joinedMidFight": false
+        }
+      ],
+      "leadGear": {
+        "vid": "theo_lindqvist",
+        "armorP": 54,
+        "armed": true,
+        "weapon": "Hunting spear",
+        "vpFound": true,
+        "readError": null
+      },
+      "scholarStart": {
+        "health": 100,
+        "energy": 100,
+        "food": "UNRECORDED"
+      },
+      "trickKnown": false,
+      "hits": [
+        {
+          "round": 1,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "audit",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 96,
+          "returned": 120,
+          "hpBefore": 794,
+          "hpAfter": 674,
+          "hpDelta": -120,
+          "turnSeq": null,
+          "actorKey": null,
+          "actorKind": null,
+          "phase": "between-turns",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 2,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "audit's attack",
+          "requested": 69,
+          "returned": 26,
+          "hpBefore": 100,
+          "hpAfter": 74,
+          "hpDelta": -26,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 2,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "audit",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 41,
+          "returned": 51,
+          "hpBefore": 674,
+          "hpAfter": 623,
+          "hpDelta": -51,
+          "turnSeq": 1,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 3,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "processing fees",
+          "requested": 20,
+          "returned": 8,
+          "hpBefore": 74,
+          "hpAfter": 66,
+          "hpDelta": -8,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 3,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "audit",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 47,
+          "returned": 59,
+          "hpBefore": 623,
+          "hpAfter": 564,
+          "hpDelta": -59,
+          "turnSeq": 2,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 4,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "audit's Assessment",
+          "requested": 62,
+          "returned": 24,
+          "hpBefore": 66,
+          "hpAfter": 42,
+          "hpDelta": -24,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 4,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "audit",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 44,
+          "returned": 55,
+          "hpBefore": 564,
+          "hpAfter": 509,
+          "hpDelta": -55,
+          "turnSeq": 3,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 5,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "audit's Field Audit",
+          "requested": 58,
+          "returned": 0,
+          "hpBefore": 42,
+          "hpAfter": 42,
+          "hpDelta": 0,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 5,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "audit",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 44,
+          "returned": 55,
+          "hpBefore": 509,
+          "hpAfter": 454,
+          "hpDelta": -55,
+          "turnSeq": 4,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 6,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "processing fees",
+          "requested": 20,
+          "returned": 8,
+          "hpBefore": 42,
+          "hpAfter": 34,
+          "hpDelta": -8,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 6,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "audit",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 42,
+          "returned": 53,
+          "hpBefore": 454,
+          "hpAfter": 401,
+          "hpDelta": -53,
+          "turnSeq": 5,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 7,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "audit's Assessment",
+          "requested": 72,
+          "returned": 0,
+          "hpBefore": 34,
+          "hpAfter": 34,
+          "hpDelta": 0,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 7,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "audit",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 41,
+          "returned": 51,
+          "hpBefore": 401,
+          "hpAfter": 350,
+          "hpDelta": -51,
+          "turnSeq": 6,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 8,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "audit's Assessment",
+          "requested": 60,
+          "returned": 23,
+          "hpBefore": 34,
+          "hpAfter": 11,
+          "hpDelta": -23,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 8,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "audit",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 49,
+          "returned": 61,
+          "hpBefore": 350,
+          "hpAfter": 289,
+          "hpDelta": -61,
+          "turnSeq": 7,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 9,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "processing fees",
+          "requested": 20,
+          "returned": 8,
+          "hpBefore": 11,
+          "hpAfter": 3,
+          "hpDelta": -8,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        },
+        {
+          "round": 9,
+          "targetKey": "m_0",
+          "targetKind": "monster",
+          "targetVid": null,
+          "targetMid": "audit",
+          "sourceKey": null,
+          "sourceLabel": "you",
+          "requested": 49,
+          "returned": 61,
+          "hpBefore": 289,
+          "hpAfter": 228,
+          "hpDelta": -61,
+          "turnSeq": 8,
+          "actorKey": "p",
+          "actorKind": "player",
+          "phase": "player-turn",
+          "sourceClass": "leader"
+        },
+        {
+          "round": 10,
+          "targetKey": "p",
+          "targetKind": "player",
+          "targetVid": null,
+          "targetMid": null,
+          "sourceKey": "m_0",
+          "sourceLabel": "audit's Assessment",
+          "requested": 72,
+          "returned": 27,
+          "hpBefore": 3,
+          "hpAfter": -24,
+          "hpDelta": -27,
+          "turnSeq": null,
+          "actorKey": "m_0",
+          "actorKind": "monster",
+          "phase": "npc-turn",
+          "sourceClass": "other"
+        }
+      ],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "You catch fragments by the fire — Feryal telling Latifa about you. Someone's added a flourish that wasn't there this morning."
+        },
+        {
+          "kind": "say",
+          "line": "🌿 Latifa returns from foraging the wilds: +224 kcal to the pantry — the shelves are full, so 223 kcal is eaten at the fire instead."
+        },
+        {
+          "kind": "say",
+          "line": "👥 Olga heads out to forage. \"Back before dark. Probably.\" The pantry won't fill itself."
+        },
+        {
+          "kind": "say",
+          "line": "👥 Latifa walks out with Olga. \"Nobody walks alone today.\""
+        },
+        {
+          "kind": "say",
+          "line": "◈ THE SYSTEM has been watching Feryal — Field 2. Three offers; they took Dowsing. Earned, chosen. (dowsing: villager level-up)"
+        },
+        {
+          "kind": "say",
+          "line": "📓 Codex: Feryal chose Dowsing (dowsing) at Field 2."
+        },
+        {
+          "kind": "say",
+          "line": "Iron cold. Even the ticks are shelved."
+        },
+        {
+          "kind": "say",
+          "line": "— MIDDAY — Honest work hours. Heat builds."
+        },
+        {
+          "kind": "say",
+          "line": "PATIENT AIM: first strike -- and your training piles on. (x2.30)"
+        },
+        {
+          "kind": "say",
+          "line": "(audit's hide absorbs 10.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the audit for 120 (Hunting spear)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 2!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🧾 The Audit's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🧾 Abacus beads click, once. Audit tomorrow. (The clipboard is showing — read it, or get janky.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 audit's attack finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 43."
+        },
+        {
+          "kind": "say",
+          "line": "Olga shouts: \"Move! MOVE!\""
+        },
+        {
+          "kind": "say",
+          "line": "Audit's attack hits you for 26."
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Assessment — locks onto one target — moving won't dodge it. You won't forget this."
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(audit's hide absorbs 10.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the audit for 51 (Hunting spear)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 3!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🧾 The Audit's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🧾 The abacus beads CLICK — AUDIT DAY. The clipboard flips to YOUR sheet: \"strike\" flagged INEFFICIENT. Taxed: half strength for 2 rounds. (Deliberate jank between audits keeps the good stuff off the sheet.)"
+        },
+        {
+          "kind": "say",
+          "line": "🧾 Plus the bill: 500 kcal, or 20 HP in \"processing fees.\" (Read the clipboard to see it coming.)"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 12."
+        },
+        {
+          "kind": "say",
+          "line": "Processing fees hits you for 8."
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(audit's hide absorbs 10.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the audit for 59 (Hunting spear)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 4!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🧾 The Audit's turn"
+        },
+        {
+          "kind": "say",
+          "line": "💥 audit's Assessment finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 38."
+        },
+        {
+          "kind": "say",
+          "line": "Audit's Assessment hits you for 24."
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(audit's hide absorbs 10.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "audit is BLEEDING — and it likes it. Louder, faster, no more feints."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the audit for 55 (Hunting spear)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 5!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🧾 The Audit's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🧾 Abacus beads click, once. Audit tomorrow. (The clipboard is showing — read it, or get janky.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 audit's Field Audit finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "You slip aside — it misses clean. (footwork)"
+        },
+        {
+          "kind": "say",
+          "line": "💪 Your Agility grows — 8. The work is changing you."
+        },
+        {
+          "kind": "say",
+          "line": "✨ Footwork — Your feet know the ground. (tier 2)"
+        },
+        {
+          "kind": "say",
+          "line": "📖 Codex: Field Audit — locks onto one target — moving won't dodge it. You won't forget this."
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(audit's hide absorbs 10.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the audit for 55 (Hunting spear)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 6!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🧾 The Audit's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🧾 The abacus beads CLICK — AUDIT DAY. The clipboard flips to YOUR sheet: \"strike\" flagged INEFFICIENT. Taxed: half strength for 2 rounds. (Deliberate jank between audits keeps the good stuff off the sheet.)"
+        },
+        {
+          "kind": "say",
+          "line": "🧾 Plus the bill: 500 kcal, or 20 HP in \"processing fees.\" (Read the clipboard to see it coming.)"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 12."
+        },
+        {
+          "kind": "say",
+          "line": "Processing fees hits you for 8."
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(audit's hide absorbs 10.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the audit for 53 (Hunting spear)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 7!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🧾 The Audit's turn"
+        },
+        {
+          "kind": "say",
+          "line": "💥 audit's Assessment finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "You slip aside — it misses clean. (footwork)"
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(audit's hide absorbs 10.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the audit for 51 (Hunting spear)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 8!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🧾 The Audit's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🧾 Abacus beads click, once. Audit tomorrow. (The clipboard is showing — read it, or get janky.)"
+        },
+        {
+          "kind": "say",
+          "line": "💥 audit's Assessment finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 37."
+        },
+        {
+          "kind": "say",
+          "line": "Audit's Assessment hits you for 23."
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(audit's hide absorbs 10.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the audit for 61 (Hunting spear)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 9!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🧾 The Audit's turn"
+        },
+        {
+          "kind": "say",
+          "line": "🧾 The abacus beads CLICK — AUDIT DAY. The clipboard flips to YOUR sheet: \"strike\" flagged INEFFICIENT. Taxed: half strength for 2 rounds. (Deliberate jank between audits keeps the good stuff off the sheet.)"
+        },
+        {
+          "kind": "say",
+          "line": "🧾 Plus the bill: 500 kcal, or 20 HP in \"processing fees.\" (Read the clipboard to see it coming.)"
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 12."
+        },
+        {
+          "kind": "say",
+          "line": "Processing fees hits you for 8."
+        },
+        {
+          "kind": "say",
+          "line": "Your strikes land harder. (x1.15 training)"
+        },
+        {
+          "kind": "say",
+          "line": "(audit's hide absorbs 10.)"
+        },
+        {
+          "kind": "say",
+          "line": "OVERCHARGED ×1.25 (well-fed): food is fuel."
+        },
+        {
+          "kind": "say",
+          "line": "You STRIKE the audit for 61 (Hunting spear)."
+        },
+        {
+          "kind": "say",
+          "line": "📺 +5 style — solid hit"
+        },
+        {
+          "kind": "sysSay",
+          "line": "ROUND 10!"
+        },
+        {
+          "kind": "sysSay",
+          "line": "🧾 The Audit's turn"
+        },
+        {
+          "kind": "say",
+          "line": "💥 audit's Assessment finds you — no dodging it."
+        },
+        {
+          "kind": "say",
+          "line": "Armor absorbs 45."
+        },
+        {
+          "kind": "say",
+          "line": "Audit's Assessment hits you for 27."
+        },
+        {
+          "kind": "say",
+          "line": "You go down."
+        },
+        {
+          "kind": "sysSay",
+          "line": "OH. Oh no. ...The gamblers are very quiet."
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page on its own. Theo Lindqvist is dead. You didn't ask. It knew."
+        },
+        {
+          "kind": "say",
+          "line": "Nobody's talking much. The fire feels smaller tonight."
+        },
+        {
+          "kind": "say",
+          "line": "🕯️ Theo Lindqvist is dead — the wild. The village stops. Somebody screams. Somebody else starts digging."
+        },
+        {
+          "kind": "say",
+          "line": "What Theo kept close goes into the ground with them — keepsakes are buried, never taken from the body."
+        },
+        {
+          "kind": "say",
+          "line": "The Codex doesn't pause for grief. Feryal blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Come Get Some (Level 1). Make exactly the right noise and the blind thing comes to investigate. Goad a blinded monster within 3 tiles: it lurches toward the sound on its next move. Stand where you want it."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Scarecrow (Level 1). You can stage a fake injury to lure monsters into traps. They fall for it. Every time."
+        },
+        {
+          "kind": "say",
+          "line": "📖 LEARNED: Field Dressing (Level 1). Break down game fast and clean. Less waste, more meat, usable parts."
+        },
+        {
+          "kind": "say",
+          "line": "The warm hum behind your ribs is gone. The reactor went with Theo's body — it does not come out, and it does not pass on. Hunger is back on the table. (One reactor per world, and the world already spent its one.)"
+        },
+        {
+          "kind": "say",
+          "line": "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\""
+        },
+        {
+          "kind": "say",
+          "line": "📖 The Codex turns a page: Theo Lindqvist, 107 days. The mantle passes to Feryal Henein."
+        },
+        {
+          "kind": "say",
+          "line": "🪞 You wake up somebody else. Feryal Henein, 29 — a hunting guide. Their hands know different work now: Beast-calm, Echo Location, Dowsing."
+        },
+        {
+          "kind": "say",
+          "line": "The village's quarrel was with Theo — and Theo is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers."
+        },
+        {
+          "kind": "say",
+          "line": "The fire knew Feryal before the Codex did — their name already carried weight here."
+        }
+      ],
+      "transcriptOverflow": false,
+      "abilityUses": [],
+      "shoutUses": 0,
+      "offerFoodUses": 0,
+      "turns": [
+        {
+          "turnSeq": 1,
+          "round": 2,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 8,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 74,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 1,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Hunting spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "mx": 8,
+                "my": 0,
+                "hp": 674,
+                "maxHp": 1100,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "dist": 0,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 8,
+                  "my": 0,
+                  "moveLeft": 1,
+                  "acted": false,
+                  "hp": 74,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 1,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Hunting spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "mx": 8,
+                    "my": 0,
+                    "hp": 674,
+                    "maxHp": 1100,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "dist": 0,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 8,
+                  "my": 0,
+                  "moveLeft": 1,
+                  "acted": true,
+                  "hp": 74,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 1,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Hunting spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "mx": 8,
+                    "my": 0,
+                    "hp": 623,
+                    "maxHp": 1100,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "dist": 0,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 21,
+          "end": {
+            "player": {
+              "mx": 8,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 74,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 1,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Hunting spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "mx": 8,
+                "my": 0,
+                "hp": 623,
+                "maxHp": 1100,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "dist": 0,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "Your strikes land harder. (x1.15 training)",
+            "(audit's hide absorbs 10.)",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "You STRIKE the audit for 51 (Hunting spear).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 2,
+          "round": 3,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 8,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 66,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 1,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Hunting spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "mx": 8,
+                "my": 0,
+                "hp": 623,
+                "maxHp": 1100,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "dist": 0,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 8,
+                  "my": 0,
+                  "moveLeft": 1,
+                  "acted": false,
+                  "hp": 66,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 1,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Hunting spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "mx": 8,
+                    "my": 0,
+                    "hp": 623,
+                    "maxHp": 1100,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "dist": 0,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 8,
+                  "my": 0,
+                  "moveLeft": 1,
+                  "acted": true,
+                  "hp": 66,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 1,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Hunting spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "mx": 8,
+                    "my": 0,
+                    "hp": 564,
+                    "maxHp": 1100,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "dist": 0,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 32,
+          "end": {
+            "player": {
+              "mx": 8,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 66,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 1,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Hunting spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "mx": 8,
+                "my": 0,
+                "hp": 564,
+                "maxHp": 1100,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "dist": 0,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "Your strikes land harder. (x1.15 training)",
+            "(audit's hide absorbs 10.)",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "You STRIKE the audit for 59 (Hunting spear).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 3,
+          "round": 4,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 8,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 42,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 1,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Hunting spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "mx": 8,
+                "my": 0,
+                "hp": 564,
+                "maxHp": 1100,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "dist": 0,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 8,
+                  "my": 0,
+                  "moveLeft": 1,
+                  "acted": false,
+                  "hp": 42,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 1,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Hunting spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "mx": 8,
+                    "my": 0,
+                    "hp": 564,
+                    "maxHp": 1100,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "dist": 0,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 8,
+                  "my": 0,
+                  "moveLeft": 1,
+                  "acted": true,
+                  "hp": 42,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 1,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Hunting spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "mx": 8,
+                    "my": 0,
+                    "hp": 509,
+                    "maxHp": 1100,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "dist": 0,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 42,
+          "end": {
+            "player": {
+              "mx": 8,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 42,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 1,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Hunting spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "mx": 8,
+                "my": 0,
+                "hp": 509,
+                "maxHp": 1100,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "dist": 0,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "Your strikes land harder. (x1.15 training)",
+            "(audit's hide absorbs 10.)",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "audit is BLEEDING — and it likes it. Louder, faster, no more feints.",
+            "You STRIKE the audit for 55 (Hunting spear).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 4,
+          "round": 5,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 8,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 42,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 1,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Hunting spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "mx": 8,
+                "my": 0,
+                "hp": 509,
+                "maxHp": 1100,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "dist": 0,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 8,
+                  "my": 0,
+                  "moveLeft": 1,
+                  "acted": false,
+                  "hp": 42,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 1,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Hunting spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "mx": 8,
+                    "my": 0,
+                    "hp": 509,
+                    "maxHp": 1100,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "dist": 0,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 8,
+                  "my": 0,
+                  "moveLeft": 1,
+                  "acted": true,
+                  "hp": 42,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 1,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Hunting spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "mx": 8,
+                    "my": 0,
+                    "hp": 454,
+                    "maxHp": 1100,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "dist": 0,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 56,
+          "end": {
+            "player": {
+              "mx": 8,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 42,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 1,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Hunting spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "mx": 8,
+                "my": 0,
+                "hp": 454,
+                "maxHp": 1100,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "dist": 0,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "Your strikes land harder. (x1.15 training)",
+            "(audit's hide absorbs 10.)",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "You STRIKE the audit for 55 (Hunting spear).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 5,
+          "round": 6,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 8,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 34,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 1,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Hunting spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "mx": 8,
+                "my": 0,
+                "hp": 454,
+                "maxHp": 1100,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "dist": 0,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 8,
+                  "my": 0,
+                  "moveLeft": 1,
+                  "acted": false,
+                  "hp": 34,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 1,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Hunting spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "mx": 8,
+                    "my": 0,
+                    "hp": 454,
+                    "maxHp": 1100,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "dist": 0,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 8,
+                  "my": 0,
+                  "moveLeft": 1,
+                  "acted": true,
+                  "hp": 34,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 1,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Hunting spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "mx": 8,
+                    "my": 0,
+                    "hp": 401,
+                    "maxHp": 1100,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "dist": 0,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 67,
+          "end": {
+            "player": {
+              "mx": 8,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 34,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 1,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Hunting spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "mx": 8,
+                "my": 0,
+                "hp": 401,
+                "maxHp": 1100,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "dist": 0,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "Your strikes land harder. (x1.15 training)",
+            "(audit's hide absorbs 10.)",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "You STRIKE the audit for 53 (Hunting spear).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 6,
+          "round": 7,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 8,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 34,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 1,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Hunting spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "mx": 8,
+                "my": 0,
+                "hp": 401,
+                "maxHp": 1100,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "dist": 0,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 8,
+                  "my": 0,
+                  "moveLeft": 1,
+                  "acted": false,
+                  "hp": 34,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 1,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Hunting spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "mx": 8,
+                    "my": 0,
+                    "hp": 401,
+                    "maxHp": 1100,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "dist": 0,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 8,
+                  "my": 0,
+                  "moveLeft": 1,
+                  "acted": true,
+                  "hp": 34,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 1,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Hunting spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "mx": 8,
+                    "my": 0,
+                    "hp": 350,
+                    "maxHp": 1100,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "dist": 0,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 76,
+          "end": {
+            "player": {
+              "mx": 8,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 34,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 1,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Hunting spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "mx": 8,
+                "my": 0,
+                "hp": 350,
+                "maxHp": 1100,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "dist": 0,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "Your strikes land harder. (x1.15 training)",
+            "(audit's hide absorbs 10.)",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "You STRIKE the audit for 51 (Hunting spear).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 7,
+          "round": 8,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 8,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 11,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 1,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Hunting spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "mx": 8,
+                "my": 0,
+                "hp": 350,
+                "maxHp": 1100,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "dist": 0,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 8,
+                  "my": 0,
+                  "moveLeft": 1,
+                  "acted": false,
+                  "hp": 11,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 1,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Hunting spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "mx": 8,
+                    "my": 0,
+                    "hp": 350,
+                    "maxHp": 1100,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "dist": 0,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 8,
+                  "my": 0,
+                  "moveLeft": 1,
+                  "acted": true,
+                  "hp": 11,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 1,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Hunting spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "mx": 8,
+                    "my": 0,
+                    "hp": 289,
+                    "maxHp": 1100,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "dist": 0,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 87,
+          "end": {
+            "player": {
+              "mx": 8,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 11,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 1,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Hunting spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "mx": 8,
+                "my": 0,
+                "hp": 289,
+                "maxHp": 1100,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "dist": 0,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "Your strikes land harder. (x1.15 training)",
+            "(audit's hide absorbs 10.)",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "You STRIKE the audit for 61 (Hunting spear).",
+            "📺 +5 style — solid hit"
+          ]
+        },
+        {
+          "turnSeq": 8,
+          "round": 9,
+          "extra": false,
+          "start": {
+            "player": {
+              "mx": 8,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 3,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 1,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Hunting spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "mx": 8,
+                "my": 0,
+                "hp": 289,
+                "maxHp": 1100,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "dist": 0,
+                "inRange": true
+              }
+            ]
+          },
+          "actions": [
+            {
+              "fn": "tbPlayerStrike",
+              "kind": "strike",
+              "args": [
+                "m_0"
+              ],
+              "returned": true,
+              "pre": {
+                "player": {
+                  "mx": 8,
+                  "my": 0,
+                  "moveLeft": 1,
+                  "acted": false,
+                  "hp": 3,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 1,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Hunting spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "mx": 8,
+                    "my": 0,
+                    "hp": 289,
+                    "maxHp": 1100,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "dist": 0,
+                    "inRange": true
+                  }
+                ]
+              },
+              "post": {
+                "player": {
+                  "mx": 8,
+                  "my": 0,
+                  "moveLeft": 1,
+                  "acted": true,
+                  "hp": 3,
+                  "maxHp": 100,
+                  "stunned": 0,
+                  "stunFull": false,
+                  "blindTurns": 0,
+                  "speed": 1,
+                  "alive": true,
+                  "fled": false
+                },
+                "weapon": {
+                  "range": 2,
+                  "name": "Hunting spear",
+                  "unarmed": false
+                },
+                "monsters": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "mx": 8,
+                    "my": 0,
+                    "hp": 228,
+                    "maxHp": 1100,
+                    "alive": true,
+                    "fled": false,
+                    "telegraph": true,
+                    "telegraphCells": null
+                  }
+                ],
+                "dists": [
+                  {
+                    "key": "m_0",
+                    "mid": "audit",
+                    "dist": 0,
+                    "inRange": true
+                  }
+                ]
+              }
+            }
+          ],
+          "sayMark": 98,
+          "end": {
+            "player": {
+              "mx": 8,
+              "my": 0,
+              "moveLeft": 0,
+              "acted": true,
+              "hp": 3,
+              "maxHp": 100,
+              "stunned": 0,
+              "stunFull": false,
+              "blindTurns": 0,
+              "speed": 1,
+              "alive": true,
+              "fled": false
+            },
+            "weapon": {
+              "range": 2,
+              "name": "Hunting spear",
+              "unarmed": false
+            },
+            "monsters": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "mx": 8,
+                "my": 0,
+                "hp": 228,
+                "maxHp": 1100,
+                "alive": true,
+                "fled": false,
+                "telegraph": true,
+                "telegraphCells": null
+              }
+            ],
+            "dists": [
+              {
+                "key": "m_0",
+                "mid": "audit",
+                "dist": 0,
+                "inRange": true
+              }
+            ]
+          },
+          "closeReason": "advance",
+          "sayLines": [
+            "Your strikes land harder. (x1.15 training)",
+            "(audit's hide absorbs 10.)",
+            "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+            "You STRIKE the audit for 61 (Hunting spear).",
+            "📺 +5 style — solid hit"
+          ]
+        }
+      ],
+      "npcTurns": [
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "audit",
+          "vid": null,
+          "round": 2,
+          "pre": {
+            "pos": {
+              "mx": 8,
+              "my": 0
+            },
+            "hp": 674,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 8,
+              "my": 0
+            },
+            "hp": 674,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 69,
+              "hpDelta": -26,
+              "round": 2
+            }
+          ],
+          "sayLines": [
+            "🧾 Abacus beads click, once. Audit tomorrow. (The clipboard is showing — read it, or get janky.)",
+            "💥 audit's attack finds you — no dodging it.",
+            "Armor absorbs 43.",
+            "Olga shouts: \"Move! MOVE!\"",
+            "Audit's attack hits you for 26.",
+            "📖 Codex: Assessment — locks onto one target — moving won't dodge it. You won't forget this."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "audit",
+          "vid": null,
+          "round": 3,
+          "pre": {
+            "pos": {
+              "mx": 8,
+              "my": 0
+            },
+            "hp": 623,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 8,
+              "my": 0
+            },
+            "hp": 623,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 20,
+              "hpDelta": -8,
+              "round": 3
+            }
+          ],
+          "sayLines": [
+            "🧾 The abacus beads CLICK — AUDIT DAY. The clipboard flips to YOUR sheet: \"strike\" flagged INEFFICIENT. Taxed: half strength for 2 rounds. (Deliberate jank between audits keeps the good stuff off the sheet.)",
+            "🧾 Plus the bill: 500 kcal, or 20 HP in \"processing fees.\" (Read the clipboard to see it coming.)",
+            "Armor absorbs 12.",
+            "Processing fees hits you for 8."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "audit",
+          "vid": null,
+          "round": 4,
+          "pre": {
+            "pos": {
+              "mx": 8,
+              "my": 0
+            },
+            "hp": 564,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 8,
+              "my": 0
+            },
+            "hp": 564,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 62,
+              "hpDelta": -24,
+              "round": 4
+            }
+          ],
+          "sayLines": [
+            "💥 audit's Assessment finds you — no dodging it.",
+            "Armor absorbs 38.",
+            "Audit's Assessment hits you for 24."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "audit",
+          "vid": null,
+          "round": 5,
+          "pre": {
+            "pos": {
+              "mx": 8,
+              "my": 0
+            },
+            "hp": 509,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 8,
+              "my": 0
+            },
+            "hp": 509,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 58,
+              "hpDelta": 0,
+              "round": 5
+            }
+          ],
+          "sayLines": [
+            "🧾 Abacus beads click, once. Audit tomorrow. (The clipboard is showing — read it, or get janky.)",
+            "💥 audit's Field Audit finds you — no dodging it.",
+            "You slip aside — it misses clean. (footwork)",
+            "💪 Your Agility grows — 8. The work is changing you.",
+            "✨ Footwork — Your feet know the ground. (tier 2)",
+            "📖 Codex: Field Audit — locks onto one target — moving won't dodge it. You won't forget this."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "audit",
+          "vid": null,
+          "round": 6,
+          "pre": {
+            "pos": {
+              "mx": 8,
+              "my": 0
+            },
+            "hp": 454,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 8,
+              "my": 0
+            },
+            "hp": 454,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 20,
+              "hpDelta": -8,
+              "round": 6
+            }
+          ],
+          "sayLines": [
+            "🧾 The abacus beads CLICK — AUDIT DAY. The clipboard flips to YOUR sheet: \"strike\" flagged INEFFICIENT. Taxed: half strength for 2 rounds. (Deliberate jank between audits keeps the good stuff off the sheet.)",
+            "🧾 Plus the bill: 500 kcal, or 20 HP in \"processing fees.\" (Read the clipboard to see it coming.)",
+            "Armor absorbs 12.",
+            "Processing fees hits you for 8."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "audit",
+          "vid": null,
+          "round": 7,
+          "pre": {
+            "pos": {
+              "mx": 8,
+              "my": 0
+            },
+            "hp": 401,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 8,
+              "my": 0
+            },
+            "hp": 401,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 72,
+              "hpDelta": 0,
+              "round": 7
+            }
+          ],
+          "sayLines": [
+            "💥 audit's Assessment finds you — no dodging it.",
+            "You slip aside — it misses clean. (footwork)"
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "audit",
+          "vid": null,
+          "round": 8,
+          "pre": {
+            "pos": {
+              "mx": 8,
+              "my": 0
+            },
+            "hp": 350,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 8,
+              "my": 0
+            },
+            "hp": 350,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 60,
+              "hpDelta": -23,
+              "round": 8
+            }
+          ],
+          "sayLines": [
+            "🧾 Abacus beads click, once. Audit tomorrow. (The clipboard is showing — read it, or get janky.)",
+            "💥 audit's Assessment finds you — no dodging it.",
+            "Armor absorbs 37.",
+            "Audit's Assessment hits you for 23."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "audit",
+          "vid": null,
+          "round": 9,
+          "pre": {
+            "pos": {
+              "mx": 8,
+              "my": 0
+            },
+            "hp": 289,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 8,
+              "my": 0
+            },
+            "hp": 289,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 20,
+              "hpDelta": -8,
+              "round": 9
+            }
+          ],
+          "sayLines": [
+            "🧾 The abacus beads CLICK — AUDIT DAY. The clipboard flips to YOUR sheet: \"strike\" flagged INEFFICIENT. Taxed: half strength for 2 rounds. (Deliberate jank between audits keeps the good stuff off the sheet.)",
+            "🧾 Plus the bill: 500 kcal, or 20 HP in \"processing fees.\" (Read the clipboard to see it coming.)",
+            "Armor absorbs 12.",
+            "Processing fees hits you for 8."
+          ],
+          "threw": null
+        },
+        {
+          "fn": "tbMonsterTurn",
+          "kind": "monster",
+          "key": "m_0",
+          "mid": "audit",
+          "vid": null,
+          "round": 10,
+          "pre": {
+            "pos": {
+              "mx": 8,
+              "my": 0
+            },
+            "hp": 228,
+            "alive": true,
+            "fled": false,
+            "telegraph": true,
+            "telegraphCells": null
+          },
+          "post": {
+            "pos": {
+              "mx": 8,
+              "my": 0
+            },
+            "hp": 228,
+            "alive": true,
+            "fled": false,
+            "telegraph": false,
+            "telegraphCells": null
+          },
+          "hits": [
+            {
+              "targetKey": "p",
+              "targetKind": "player",
+              "targetMid": null,
+              "sourceClass": "other",
+              "requested": 72,
+              "hpDelta": -27,
+              "round": 10
+            }
+          ],
+          "sayLines": [
+            "💥 audit's Assessment finds you — no dodging it.",
+            "Armor absorbs 45.",
+            "Audit's Assessment hits you for 27.",
+            "You go down.",
+            "OH. Oh no. ...The gamblers are very quiet.",
+            "📖 The Codex turns a page on its own. Theo Lindqvist is dead. You didn't ask. It knew.",
+            "Nobody's talking much. The fire feels smaller tonight.",
+            "🕯️ Theo Lindqvist is dead — the wild. The village stops. Somebody screams. Somebody else starts digging.",
+            "What Theo kept close goes into the ground with them — keepsakes are buried, never taken from the body.",
+            "The Codex doesn't pause for grief. Feryal blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers.",
+            "📖 LEARNED: Come Get Some (Level 1). Make exactly the right noise and the blind thing comes to investigate. Goad a blinded monster within 3 tiles: it lurches toward the sound on its next move. Stand where you want it.",
+            "📖 LEARNED: Scarecrow (Level 1). You can stage a fake injury to lure monsters into traps. They fall for it. Every time.",
+            "📖 LEARNED: Field Dressing (Level 1). Break down game fast and clean. Less waste, more meat, usable parts.",
+            "The warm hum behind your ribs is gone. The reactor went with Theo's body — it does not come out, and it does not pass on. Hunger is back on the table. (One reactor per world, and the world already spent its one.)",
+            "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+            "📖 The Codex turns a page: Theo Lindqvist, 107 days. The mantle passes to Feryal Henein.",
+            "🪞 You wake up somebody else. Feryal Henein, 29 — a hunting guide. Their hands know different work now: Beast-calm, Echo Location, Dowsing.",
+            "The village's quarrel was with Theo — and Theo is dead. The sentence doesn't cross the grave. You're someone else now; the docket is empty, but the village remembers.",
+            "The fire knew Feryal before the Codex did — their name already carried weight here."
+          ],
+          "threw": null
+        }
+      ],
+      "end": {
+        "result": "lost",
+        "day": 107,
+        "round": 10,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "audit",
+            "alive": true,
+            "fled": false,
+            "hp": 228,
+            "maxHp": 1100
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "theo_lindqvist",
+            "alive": false,
+            "fled": false,
+            "hp": -24,
+            "maxHp": 100
+          },
+          {
+            "key": "v_visjoin_88",
+            "kind": "villager",
+            "vid": "visjoin_88",
+            "alive": true,
+            "fled": true,
+            "hp": 89,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [
+          "theo_lindqvist"
+        ],
+        "humansFled": [
+          "visjoin_88"
+        ],
+        "monstersFled": []
+      },
+      "kills": [],
+      "superseded": false
+    },
+    {
+      "seq": 2,
+      "type": "tb",
+      "day": 112,
+      "mid": "reunion",
+      "wave": 4,
+      "fightId": "fmgpspj4c_c86bur",
+      "scholarAtStart": "visjoin_89",
+      "leadVid": "visjoin_89",
+      "partySizeStart": 1,
+      "party": [
+        {
+          "key": "p",
+          "kind": "player",
+          "vid": "visjoin_89",
+          "hpStart": 97.71666666666667,
+          "maxHp": 100,
+          "gear": {
+            "vid": "visjoin_89",
+            "armorP": 42,
+            "armed": true,
+            "weapon": "Crowbar",
+            "vpFound": true,
+            "readError": null
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "reunion",
+          "hpStart": 1200,
+          "maxHp": 1200,
+          "wave": 4,
+          "joinedMidFight": false
+        }
+      ],
+      "leadGear": {
+        "vid": "visjoin_89",
+        "armorP": 42,
+        "armed": true,
+        "weapon": "Crowbar",
+        "vpFound": true,
+        "readError": null
+      },
+      "scholarStart": {
+        "health": 97.71666666666667,
+        "energy": 45,
+        "food": "UNRECORDED"
+      },
+      "trickKnown": false,
+      "hits": [],
+      "transcript": [
+        {
+          "kind": "say",
+          "line": "Not in the middle of a fight."
+        },
+        {
+          "kind": "say",
+          "line": "Travel 1 tile to Haven."
+        },
+        {
+          "kind": "say",
+          "line": "You walk back into Haven. 69 Codex entries. The village is glad to see you."
+        },
+        {
+          "kind": "say",
+          "line": "🚪 BARRIER CROSSED — you crash through into Haven. The gate shuts behind you. The wild goes quiet. (Haven is safe — nothing follows you here.)"
+        },
+        {
+          "kind": "say",
+          "line": "You escape. The thicket keeps its secrets."
+        },
+        {
+          "kind": "sysSay",
+          "line": "And they're GONE! The gamblers who bet on a fight are furious. The ones who bet on running are rich."
+        },
+        {
+          "kind": "say",
+          "line": "You lived to tell it — The Reunion's moves are burned into your memory. (1/2 — one more survived encounter and you'll have its trick.)"
+        },
+        {
+          "kind": "say",
+          "line": "📓 Codex: Sighting 1/2: survived an encounter."
+        }
+      ],
+      "transcriptOverflow": false,
+      "abilityUses": [],
+      "shoutUses": 0,
+      "offerFoodUses": 0,
+      "turns": [],
+      "npcTurns": [],
+      "end": {
+        "result": "fled",
+        "day": 112,
+        "round": 1,
+        "monsters": [
+          {
+            "key": "m_0",
+            "mid": "reunion",
+            "alive": true,
+            "fled": true,
+            "hp": 1200,
+            "maxHp": 1200
+          }
+        ],
+        "humans": [
+          {
+            "key": "p",
+            "kind": "player",
+            "vid": "visjoin_89",
+            "alive": true,
+            "fled": true,
+            "hp": 97.71666666666667,
+            "maxHp": 100
+          }
+        ],
+        "monsterDeadW4": 0,
+        "monsterTotalW4": 1,
+        "humansDead": [],
+        "humansFled": [
+          "visjoin_89"
+        ],
+        "monstersFled": [
+          "reunion"
+        ]
+      },
+      "kills": [],
+      "superseded": false
+    }
+  ],
+  "killsW4": 0,
+  "killRows": [],
+  "unlinkedKills": [],
+  "spawns": [
+    {
+      "day": 91,
+      "id": "reunion",
+      "tx": 5,
+      "ty": 4
+    },
+    {
+      "day": 95,
+      "id": "audit",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 96,
+      "id": "eulogy",
+      "tx": 3,
+      "ty": 4
+    },
+    {
+      "day": 104,
+      "id": "reunion",
+      "tx": 4,
+      "ty": 3
+    },
+    {
+      "day": 105,
+      "id": "reunion",
+      "tx": 3,
+      "ty": 4
+    }
+  ],
+  "orphanTbEnds": [
+    {
+      "day": 107,
+      "result": "routed",
+      "monsters": [
+        {
+          "key": "m_0",
+          "mid": "audit",
+          "alive": true,
+          "fled": true,
+          "hp": 228,
+          "maxHp": 1100
+        }
+      ]
+    }
+  ],
+  "wrapCounts": {
+    "spawnWorldMonster": 56,
+    "fieldFight": 84,
+    "recordWaveKill": 48,
+    "startCombat": 25,
+    "tbBeginTurn": 175,
+    "tbAdvance": 161,
+    "tbPlayerStrike": 103,
+    "tbDamage": 193,
+    "tbVillagerTurn": 42,
+    "tbMonsterTurn": 158,
+    "tbEnd": 25,
+    "tbPlayerMove": 28,
+    "useAbility": 11,
+    "tbPlayerWait": 1,
+    "tbBarrierExit": 2
+  },
+  "instrumentErrors": [],
+  "notes": [],
+  "deaths": [
+    {
+      "day": 5,
+      "kind": "monster",
+      "who": "lockpick_raccoon",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 9,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 10,
+      "kind": "monster",
+      "who": "white_noise_heron",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 10,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 10,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 10,
+      "kind": "monster",
+      "who": "nightlight_catfish",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 10,
+      "kind": "monster",
+      "who": "gallowdeer",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 10,
+      "kind": "monster",
+      "who": "lockpick_raccoon",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 11,
+      "kind": "monster",
+      "who": "anaconda_empress",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 15,
+      "kind": "villager",
+      "who": "gen_a017hzq",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 19,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 19,
+      "kind": "villager",
+      "who": "gen_wp87auo",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 19,
+      "kind": "monster",
+      "who": "moderator",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 19,
+      "kind": "monster",
+      "who": "memory_projector",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 19,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 20,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 25,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 28,
+      "kind": "monster",
+      "who": "gallowdeer",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 32,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 32,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 33,
+      "kind": "monster",
+      "who": "voice_mimic_radio",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 33,
+      "kind": "monster",
+      "who": "warranty_caller",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 33,
+      "kind": "monster",
+      "who": "voice_mimic_radio",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 37,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 39,
+      "kind": "villager",
+      "who": "gen_f0ha675",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 39,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 39,
+      "kind": "monster",
+      "who": "nightcourt",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 40,
+      "kind": "villager",
+      "who": "gen_mwiuqsz",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 45,
+      "kind": "monster",
+      "who": "callback",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 46,
+      "kind": "monster",
+      "who": "redactor",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 47,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 47,
+      "kind": "monster",
+      "who": "anaconda_empress",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 47,
+      "kind": "monster",
+      "who": "gallowdeer",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 47,
+      "kind": "monster",
+      "who": "memory_projector",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 50,
+      "kind": "monster",
+      "who": "rut_king",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 52,
+      "kind": "monster",
+      "who": "giant_mosquito",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 54,
+      "kind": "monster",
+      "who": "sunbasker",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 55,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 55,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 55,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 55,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 55,
+      "kind": "monster",
+      "who": "terms_of_service",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 57,
+      "kind": "villager",
+      "who": "aroha_ngata",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 58,
+      "kind": "villager",
+      "who": "gen_9uk0fwi",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 58,
+      "kind": "villager",
+      "who": "gen_ht4c512",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 58,
+      "kind": "villager",
+      "who": "fatima_hassan",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 58,
+      "kind": "villager",
+      "who": "sanne_bakker",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 58,
+      "kind": "villager",
+      "who": "nikos_papadopoulos",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 58,
+      "kind": "villager",
+      "who": "lena_ruiz",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 63,
+      "kind": "villager",
+      "who": "ruth_goldstein",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 65,
+      "kind": "villager",
+      "who": "omar_farouk",
+      "cause": "contest",
+      "player": true
+    },
+    {
+      "day": 74,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 75,
+      "kind": "villager",
+      "who": "hannah_kim",
+      "cause": "starvation",
+      "player": false
+    },
+    {
+      "day": 77,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 79,
+      "kind": "monster",
+      "who": "redactor",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 79,
+      "kind": "monster",
+      "who": "white_noise_heron",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 79,
+      "kind": "monster",
+      "who": "statickite",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 81,
+      "kind": "monster",
+      "who": "nightlight_catfish",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 81,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 81,
+      "kind": "monster",
+      "who": "dustboar",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 102,
+      "kind": "monster",
+      "who": "statickite",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 104,
+      "kind": "monster",
+      "who": "buffering",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 105,
+      "kind": "villager",
+      "who": "visjoin_102",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 107,
+      "kind": "villager",
+      "who": "theo_lindqvist",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 110,
+      "kind": "villager",
+      "who": "visjoin_71",
+      "cause": "the expedition",
+      "player": true
+    }
+  ],
+  "resultKeys": [
+    "days",
+    "gameDays",
+    "maxWaveUnlocked",
+    "waveKills",
+    "endReason",
+    "stop",
+    "communityExposure",
+    "telemetry",
+    "samples",
+    "learnedPlants",
+    "learnedSkills",
+    "pacing",
+    "ms",
+    "manifest",
+    "policyId",
+    "notes"
+  ],
+  "scaleSamples": [
+    [
+      30,
+      "village"
+    ],
+    [
+      60,
+      "village"
+    ],
+    [
+      90,
+      "village"
+    ]
+  ],
+  "standingSamples": [
+    [
+      30,
+      0
+    ],
+    [
+      60,
+      75
+    ],
+    [
+      90,
+      100
+    ]
+  ],
+  "scaleRankFinal": "village",
+  "standingFinal": 125,
+  "arcFinal": 3,
+  "tableWaiting": false,
+  "tableEntered": false,
+  "nationalReached": false,
+  "maxStanding": 125,
+  "scaleReadError": null
+}

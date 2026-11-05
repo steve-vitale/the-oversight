@@ -17887,6 +17887,7 @@
       ${hasAllies ? `<button class="self-btn" id="c-rally" ${(p.acted || tf.rallyUsed) ? 'disabled' : ''} title="Rally the coalition — regroup on you, hold the line, focus your target (1/fight)">📢 Rally</button>` : ''}
       ${hasAllies ? `<button class="self-btn" id="c-warcry" ${(p.acted || tf.warCryUsed) ? 'disabled' : ''} title="War cry — stagger foes, embolden allies. They'll hear you. (1/fight)">🗣️ War cry</button>` : ''}
       <button class="self-btn" id="c-offer" ${p.acted ? 'disabled' : ''} title="Offer food — buy off the curious thief">🍖 Offer</button>
+      <button class="self-btn" id="c-eat" ${p.acted ? 'disabled' : ''} title="Eat rations — 250 kcal, +25 HP. Costs your action, not your movement.">🍗 Eat</button>
       ${Game.sigW3bCombatButtons ? Game.sigW3bCombatButtons() : ''}
       ${Game.sigW4CombatButtons ? Game.sigW4CombatButtons() : ''}
       ${Game.sigW5CombatButtons ? Game.sigW5CombatButtons() : ''}
@@ -18000,6 +18001,7 @@
   function wireCombatPanel() {
     const on = (id, fn) => { const e = document.getElementById(id); if (e) e.onclick = fn; };
     on('c-wait', () => { Game.tbPlayerWait(); rerender(); });
+    on('c-eat', () => { Game.tbEatRations(); rerender(); });
     on('c-study', () => { Game.tbPlayerStudy(); rerender(); });
     on('c-scream', () => { Game.useAbility('scream_cheese', 'scream'); rerender(); });
     // CONTROL ABILITIES (2026-10-14, Steve: verbs are ABILITIES not basic
