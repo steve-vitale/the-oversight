@@ -5,6 +5,7 @@
 //   - fieldFight(vid, mdef, m, opts)
 // rules:
 //   - rounds: initiative by speed each round; the monster acts with its real attack data (name, damage range, pattern, pack, thrash); the villager strikes with the tactical formula roll([4+wb, 8+wb]), wb = round(wbonus/2). Villager initiative uses villagerSpeed (age, wounds, temperament — 2..4), not a flat 3. (code: fieldFight, 2026-10-13)
+//   - gearfull (code: fieldFight, sim-dmground-a 2026-11-05): in a WILD wave-3+ fight the fighter is the hero — no scholar on the grid — so strikes use the full printed bonus of the best weapon in hand (wbFull = max(melee, ranged)), not the halved fold-in. Sealed arenas, raids, waves 1-2 keep the halved rule; the volley is untouched.
 //   - volley: a ranged weapon + real ammo opens the fight at range before round 1 — shots = min(ammo, clamp(1+floor(range/monster speed),1,4)), each shot costs 1 ammo, hit chance 0.85-0.06xrange (+tracking), damage lroll([4+wbR,8+wbR]) on the lead; the volley can drive the pack off (mBreak) or drop the lead (vKill). Supersedes the 2026-10-09 "range is meaningless" rule. (code: fieldFight, blitz-combatstats 2026-10-13)
 //   - field wounds carry (code: fieldFight): a Haven ally enters at their real village.health and a surviving ally's wounds settle through the fight's sealed record, so wounds carry into the next fight, including turn-based fights (tackle-wound2 2026-10-27; Muse call under standing intent, NOT a Steve ruling).
 //   - morale: flee is driven by wounds + bravery + temperament, never a flat roll. (code: fieldFight)
@@ -40,7 +41,10 @@
  *   thrash (roll([10,16]), every turn, in addition to the beam) is ported
  *   verbatim from tbAntlerThrash — closing in has a price here too.
  * - The villager strikes with the TACTICAL formula, verbatim:
- *   roll([4+wb, 8+wb]), wb = round(wbonus/2) ("helpers, not heroes").
+ *   roll([4+wb, 8+wb]), wb = round(wbonus/2) ("helpers, not heroes") —
+ *   except in a wild wave-3+ fight, where the full printed bonus of the
+ *   best weapon in hand applies (GEARFULL, sim-dmground-a 2026-11-05:
+ *   the fighter is the hero there, no scholar on the grid).
  * - Initiative is speed vs speed every round (monster mdef.speed vs the
  *   villager's villagerSpeed — age, wounds, temperament — 2..4, not the old
  *   flat 3).
@@ -509,6 +513,10 @@
         contactFinishAttempted: false, contactFinishKill: false,
         contactFinishWeapon: null, contactFinishDmg: null,
         contactFinishInstrument: null, contactFinishBeastHp: null,
+        // GEARFULL (sim-dmground-a, 2026-11-05): audit flag for the
+        // full-weapon-bonus lever (wild wave-3+ field fights). Set at
+        // the weapon-bonus computation below; read by the strike rolls.
+        gearFull: false,
         // CHORUS-HOLD (sim-chorus-a, 2026-10-31): audit count of
         // dance-round holds at the break check (see the break check
         // below). A committed fighter holds through a downbeat
@@ -567,7 +575,7 @@
       // scale as the monster speeds.
       var vSpeed = 3;
       try { if (this.villagerSpeed) vSpeed = this.villagerSpeed(vid) || 3; } catch (e) {}
-      var bravery = 0, temper = 'steady', potential = false, wb = 0, varmor = 0;
+      var bravery = 0, temper = 'steady', potential = false, wb = 0, wbFull = 0, varmor = 0;
       try { bravery = (((this.agencyOf(vid) || {}).xp || {})[vid] || {}).bravery || 0; } catch (e) {}
       // CONTESTS (Steve 2026-10-08): the crowd's roar steadies the arm —
       // watcher's cheer arrives as real bravery, not win-odds.
@@ -586,15 +594,28 @@
         // WITHOUT halving — that's a threat rating, not a damage formula.
         // The volley above is the bow's distinct identity; this fold-in only
         // governs the close-in rounds.
-        if (S.equipment && S.equipment.weaponBonusOf)
-          wb = Math.round(((S.equipment.weaponBonusOf(vp, this.data.items, 'melee') || 0) +
-                           (S.equipment.weaponBonusOf(vp, this.data.items, 'ranged') || 0)) / 2);
+        if (S.equipment && S.equipment.weaponBonusOf) {
+          var _wbMelee = S.equipment.weaponBonusOf(vp, this.data.items, 'melee') || 0;
+          var _wbRanged = S.equipment.weaponBonusOf(vp, this.data.items, 'ranged') || 0;
+          wb = Math.round((_wbMelee + _wbRanged) / 2);
+          // GEARFULL (sim-dmground-a, 2026-11-05): the full printed
+          // bonus of the best weapon in hand — one swing, one weapon,
+          // so max(), never the melee+ranged sum.
+          wbFull = Math.max(_wbMelee, _wbRanged);
+        }
         // ARMOR (Steve 2026-10-09): equipped armor absorbs, mirroring the
         // tactical engine's diminishing-returns curve (r = P/(P+20)).
         // Villagers wear armor now — the fight must respect it.
         if (S.equipment && S.equipment.armorOf)
           varmor = S.equipment.armorOf(vp, this.data.items) || 0;
       } catch (e) {}
+      // GEARFULL (sim-dmground-a, 2026-11-05): in a wild wave-3+ fight
+      // the fighter IS the hero — no scholar on the grid — so the weapon
+      // in hand hits with its full printed bonus instead of the halved
+      // "helpers, not heroes" fold-in. Sealed arenas, raids (cornered),
+      // and waves 1-2 keep the halved rule. The volley is untouched.
+      rec.gearFull = wave >= 3 && !opts.noFlee && !opts.cornered;
+      if (rec.gearFull) rec.log.push('Their weapons are in hand and they mean it — every swing lands with the full weight of the steel. (Gear full)');
 
       // VILLAGER ABILITIES (parity 2026-10-10, Worker A): the System grants
       // villagers abilities for real deeds (villagerGainXP) — but nothing
@@ -873,7 +894,7 @@
         // strike before round 1, the tactical formula, verbatim.
         if (vHasAb('ambush')) {
           ffFired('ambush');
-          var _od = lroll([4 + wb, 8 + wb]);
+          var _od = lroll([4 + (rec.gearFull ? wbFull : wb), 8 + (rec.gearFull ? wbFull : wb)]);
           members[0].hp -= _od; rec.mDealt += _od;
           if (members[0].hp <= 0) members[0].alive = false;
           rec.log.push(vName + ' was already waiting — ambush! Opening strike for ' + _od + '.');
@@ -1077,7 +1098,7 @@
           var _cfW = _cf ? String(_cf.def.name || 'a weapon') : null;
           if (_cfW) _cfW = _cfW.charAt(0).toLowerCase() + _cfW.slice(1);
           if (wave >= 3 && _cf && rec.mDealt === 0 && !opts.noFlee && members[0].hp > 0) {
-            var _cfVd = lroll([4 + wb, 8 + wb]);
+            var _cfVd = lroll([4 + (rec.gearFull ? wbFull : wb), 8 + (rec.gearFull ? wbFull : wb)]);
             rec.contactFinishAttempted = true;
             rec.contactFinishWeapon = _cf.def.name || null;
             rec.contactFinishInstrument = _cf.kind;
@@ -1188,7 +1209,7 @@
       // Read from the ally's own fieldBegin state — numbers only, no
       // counter consumption (no harry/birds side effects borrowed
       // from the leader's state).
-      var allyWb = null, allyArmor = 0, allyStrikeMult = 1;
+      var allyWb = null, allyWbFull = null, allyArmor = 0, allyStrikeMult = 1;
       var allyGear = function (id) {
         try {
           if ((opts.foreignAllies || {})[id]) return false;
@@ -1196,10 +1217,12 @@
           var ap = ((_G.data.villagers || []).find(function (x) { return x.id === id; }) ||
                     (_G.data.background_survivors || []).find(function (x) { return x.id === id; })) || null;
           if (!ap) return false;
-          if (S.equipment && S.equipment.weaponBonusOf)
-            allyWb = Math.round(((S.equipment.weaponBonusOf(ap, _G.data.items, 'melee') || 0) +
-                                 (S.equipment.weaponBonusOf(ap, _G.data.items, 'ranged') || 0)) / 2);
-          else allyWb = 0;
+          if (S.equipment && S.equipment.weaponBonusOf) {
+            var _aMelee = S.equipment.weaponBonusOf(ap, _G.data.items, 'melee') || 0;
+            var _aRanged = S.equipment.weaponBonusOf(ap, _G.data.items, 'ranged') || 0;
+            allyWb = Math.round((_aMelee + _aRanged) / 2);
+            allyWbFull = Math.max(_aMelee, _aRanged); // GEARFULL (sim-dmground-a)
+          } else { allyWb = 0; allyWbFull = 0; }
           if (S.equipment && S.equipment.armorOf) allyArmor = S.equipment.armorOf(ap, _G.data.items) || 0;
           try {
             var _aAbs = [];
@@ -1308,7 +1331,11 @@
               var _sigCtx = { vHp: vHp, wb: wb };
               var _sigDone = false;
               try { if (this.sigFieldMonster) _sigDone = !!this.sigFieldMonster(mdef, members[mi], _sigCtx, { vid: vid, vName: vName, mName: mName, round: round, RR: RR, lroll: lroll }, rec); } catch (e) {}
-              vHp = _sigCtx.vHp; wb = _sigCtx.wb;
+              // GEARFULL: a signature that taxes the weapon (redactor -2)
+              // taxes the full edge by the same amount.
+              if (_sigCtx.wb !== wb) wbFull = Math.max(0, wbFull + (_sigCtx.wb - wb));
+              wb = _sigCtx.wb;
+              vHp = _sigCtx.vHp;
               if (vHp <= 0) vAlive = false;
               if (_sigDone) continue;
               // MULTI-MOVE (2026-10-12): the monster's real kit, not just the
@@ -1947,7 +1974,8 @@
               rec.log.push('R' + round + ': ' + vName + ' reads the fight as it moves — the body tells them what the mouth won\'t. Quicker from here. (Brawler\'s Instinct: +2 speed)');
               try { (rec.actionKinds || (rec.actionKinds = [])).push('ability'); } catch (e) {}
             } else {
-              var vd = lroll([4 + wb, 8 + wb]); // tactical formula, verbatim
+              var _swb = rec.gearFull ? wbFull : wb; // GEARFULL (sim-dmground-a): full edge in wild wave-3+ fights
+              var vd = lroll([4 + _swb, 8 + _swb]); // tactical formula, verbatim
               var abNote = '';
               // SIG W3C (2026-10-10): buffering mirage — the strike lands on
               // the brightest frame (where it was), not the faintest (where it is).
@@ -2029,8 +2057,9 @@
             // in the leader's hands dealt ~24 — the "party" was solo
             // in practice. Foreign allies (no gear record) keep [3,6].
             if (allyIn && allyHp > 0 && lead.hp > 0) {
-              var ad = (allyWb != null) ? lroll([4 + allyWb, 8 + allyWb]) : lroll([3, 6]);
-              if (allyWb != null && allyStrikeMult !== 1) ad = Math.round(ad * allyStrikeMult);
+              var _awb = rec.gearFull ? allyWbFull : allyWb; // GEARFULL (sim-dmground-a): full edge in wild wave-3+ fights
+              var ad = (_awb != null) ? lroll([4 + _awb, 8 + _awb]) : lroll([3, 6]);
+              if (_awb != null && allyStrikeMult !== 1) ad = Math.round(ad * allyStrikeMult);
               lead.hp -= ad; rec.mDealt += ad; rec.allyDealt += ad;
               if (lead.hp <= 0) lead.alive = false;
               rec.log.push('R' + round + ': ' + allyName + ' strikes for ' + ad + (allyStrikeMult !== 1 ? ' (x' + allyStrikeMult.toFixed(1) + ')' : '') + ' (' + Math.max(0, lead.hp) + ' left)');
@@ -2041,8 +2070,8 @@
               // round one of the two.
               if (gpF && gpF.broadcastN > 0 && lead.hp > 0) {
                 gpF.broadcastN--;
-                var _bd = (allyWb != null) ? lroll([4 + allyWb, 8 + allyWb]) : lroll([3, 6]);
-                if (allyWb != null && allyStrikeMult !== 1) _bd = Math.round(_bd * allyStrikeMult);
+                var _bd = (_awb != null) ? lroll([4 + _awb, 8 + _awb]) : lroll([3, 6]);
+                if (_awb != null && allyStrikeMult !== 1) _bd = Math.round(_bd * allyStrikeMult);
                 lead.hp -= _bd; rec.mDealt += _bd; rec.allyDealt += _bd;
                 if (lead.hp <= 0) lead.alive = false;
                 rec.log.push('R' + round + ': ' + allyName + ' strikes again, louder — ' + _bd + ' (' + Math.max(0, lead.hp) + ' left). (Live Broadcast)');
@@ -2066,7 +2095,7 @@
             var _gpHp = GPf.fieldCheatDeath(gpF, gpC({ round: round }));
             if (_gpHp) {
               vHp = _gpHp; vAlive = true;
-              if (gpF.shedGear) { wb = 0; varmor = gpF.armorAdd || 0; gpF.shedGear = false; }
+              if (gpF.shedGear) { wb = 0; wbFull = 0; varmor = gpF.armorAdd || 0; gpF.shedGear = false; }
             }
           } catch (e) { console.warn('[godpath] cheat death', e); }
           gpTag(_gpLogN5);

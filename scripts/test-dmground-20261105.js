@@ -234,6 +234,101 @@ function ffight(o) {
     JSON.stringify(s.fights[0]));
 })();
 
+async function leverLegs() {
+  // GEARFULL gate fixtures (live harness, seed 99201): the lever fires
+  // exactly where the prereg gates it — wild wave-3+ fights — and the
+  // strikes use the full printed bonus there, the halved fold-in
+  // everywhere else. Machete (bonus 35): gated [39,43], halved [22,26].
+  // Hunting spear (bonus 30): gated [34,38], halved [19,23].
+  const { loadGame, setupGame } = require(path.join(REPO, 'scripts', 'sim-harness'));
+  const { Game } = await loadGame({ seed: 99201, mode: 'competent-dmground-lever', fullTelemetry: false });
+  await setupGame(Game);
+  const vils = Game.data.villagers || [];
+  function arm(vid, weaponId) {
+    const p = (Game.data.villagers || []).find(function (x) { return x.id === vid; }) ||
+      (Game.data.background_survivors || []).find(function (x) { return x.id === vid; });
+    p.items = [weaponId];
+    p.equipped = { melee: { itemId: weaponId } };
+    return p;
+  }
+  function strikeNums(rec) {
+    return (rec.log || []).filter(function (l) { return /strikes for \d+/.test(l); })
+      .map(function (l) { return parseInt(l.match(/strikes for (\d+)/)[1], 10); });
+  }
+  function leaderNums(rec, firstName) {
+    return (rec.log || []).filter(function (l) { return /strikes for \d+/.test(l) && l.indexOf(firstName) >= 0; })
+      .map(function (l) { return parseInt(l.match(/strikes for (\d+)/)[1], 10); });
+  }
+  function allyNums(rec, firstName) {
+    return (rec.log || []).filter(function (l) { return /strikes for \d+/.test(l) && l.indexOf(firstName) < 0; })
+      .map(function (l) { return parseInt(l.match(/strikes for (\d+)/)[1], 10); });
+  }
+  const leader = vils[0], ally = vils[1];
+  const lp = arm(leader.id, 'machete');
+  const ap = arm(ally.id, 'hunting_spear');
+  const leaderFirst = String(lp.name || '').split(' ')[0];
+  const mons = Game.data.monsters || [];
+  const eulogy = mons.find(function (m) { return m.id === 'eulogy'; });
+  const deer = mons.find(function (m) { return m.id === 'gallowdeer'; });
+  check('lever-monsters-found', !!(eulogy && eulogy.wave === 4 && deer && deer.wave === 1),
+    'eulogy=' + (eulogy && eulogy.wave) + ' deer=' + (deer && deer.wave));
+
+  const r1 = Game.fieldFight(leader.id, eulogy, null, { allies: 1 });
+  const s1 = leaderNums(r1, leaderFirst);
+  check('lever-gate-w4', r1.gearFull === true && (r1.log || []).some(function (l) { return /Gear full/.test(l); }) &&
+    s1.length >= 1 && s1.every(function (n) { return n >= 39 && n <= 43; }),
+    'gearFull=' + r1.gearFull + ' strikes=' + JSON.stringify(s1));
+
+  const r2 = Game.fieldFight(leader.id, deer, null, { allies: 1 });
+  const s2 = leaderNums(r2, leaderFirst);
+  check('lever-gate-wave1', r2.gearFull === false && s2.length >= 1 && s2.every(function (n) { return n >= 22 && n <= 26; }),
+    'gearFull=' + r2.gearFull + ' strikes=' + JSON.stringify(s2));
+
+  const r3 = Game.fieldFight(leader.id, eulogy, null, { allies: 1, noFlee: true });
+  const s3 = leaderNums(r3, leaderFirst);
+  check('lever-gate-sealed', r3.gearFull === false && s3.length >= 1 && s3.every(function (n) { return n >= 22 && n <= 26; }),
+    'gearFull=' + r3.gearFull + ' strikes=' + JSON.stringify(s3));
+
+  const r4 = Game.fieldFight(leader.id, eulogy, null, { allies: 1, cornered: true });
+  const s4 = leaderNums(r4, leaderFirst);
+  check('lever-gate-cornered', r4.gearFull === false && s4.length >= 1 && s4.every(function (n) { return n >= 22 && n <= 26; }),
+    'gearFull=' + r4.gearFull + ' strikes=' + JSON.stringify(s4));
+
+  const r5 = Game.fieldFight(leader.id, eulogy, null, { allies: 1, allyVids: [ally.id], allyFromStart: true });
+  const s5l = leaderNums(r5, leaderFirst);
+  const s5a = allyNums(r5, leaderFirst);
+  check('lever-ally-full', r5.gearFull === true &&
+    s5l.length >= 1 && s5l.every(function (n) { return n >= 39 && n <= 43; }) &&
+    s5a.length >= 1 && s5a.every(function (n) { return n >= 34 && n <= 38; }),
+    'gearFull=' + r5.gearFull + ' leader=' + JSON.stringify(s5l) + ' ally=' + JSON.stringify(s5a));
+
+  // Ambush opening strike shares the gated term: give fresh villagers
+  // the ambush ability and retry across villagers until contact is made
+  // (the evade roll may swallow an attempt; each attempt is a new
+  // villager, since wounds carry). awareness:true is required — the
+  // ambush block lives inside the awareness section. Only the opening
+  // strike is asserted (it is the raw tactical roll; round strikes from
+  // an ability-holder pick up the godpath x1.3 overcharge).
+  let amb = null, ambOpen = [];
+  for (let i = 2; i < 5 && !amb; i++) {
+    const v = vils[i];
+    if (!v) break;
+    arm(v.id, 'machete');
+    try {
+      const st = Game.state.village || (Game.state.village = {});
+      const na = st.npcAbilities || (st.npcAbilities = {});
+      na[v.id] = ['ambush'];
+    } catch (e) {}
+    const r = Game.fieldFight(v.id, eulogy, null, { allies: 1, awareness: true });
+    if (r.outcome !== 'evade') {
+      const opens = (r.log || []).filter(function (l) { return /Opening strike for \d+/.test(l); });
+      if (opens.length) { amb = r; ambOpen = opens.map(function (l) { return parseInt(l.match(/Opening strike for (\d+)/)[1], 10); }); }
+    }
+  }
+  check('lever-ambush-full', !!amb && amb.gearFull === true && ambOpen.length >= 1 && ambOpen.every(function (n) { return n >= 39 && n <= 43; }),
+    amb ? 'opening=' + JSON.stringify(ambOpen) : 'no ambush opening in 3 attempts');
+}
+
 async function liveLegs() {
   const { loadGame, setupGame, runDays, quietLog } = require(path.join(REPO, 'scripts', 'sim-harness'));
   const { competent } = require(path.join(REPO, 'scripts', 'policies', 'competent'));
@@ -275,4 +370,4 @@ async function liveLegs() {
   console.log(pass + '/' + (pass + fail) + ' PASS');
   process.exit(fail ? 1 : 0);
 }
-liveLegs().catch(function (e) { console.error(e.stack); process.exit(1); });
+leverLegs().then(function () { return liveLegs(); }).catch(function (e) { console.error(e.stack); process.exit(1); });
