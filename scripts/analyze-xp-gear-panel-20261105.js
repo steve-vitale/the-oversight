@@ -79,6 +79,19 @@ function metricsFor(r) {
   for (const c of (r.careRescues || [])) m.careRescueByVia[c.via || '?'] = (m.careRescueByVia[c.via || '?'] || 0) + 1;
   m.triages = (r.triages || []).length;
   m.healingDeedCredits = dc.filter(c => c.deed === 'healing').length;
+  // --- patrol deed + synergy + combat-42 (r104 follow-up) ---
+  // deedCredits records n (the deed's face value) AND credited (what
+  // creditDeed actually granted — 0 when the per-day cap bit). Patrol
+  // grants count only credited > 0: a second patrol the same day is
+  // capped, not granted.
+  m.patrolCredits = dc.filter(c => c.deed === 'patrol').length;
+  m.patrolGranted = dc.filter(c => c.deed === 'patrol' && (c.credited || 0) > 0).length;
+  const sc = r.synergyCredits || [];
+  m.synergyCalls = sc.length;
+  m.synergyGranted = sc.filter(s => (s.granted || 0) > 0).length;
+  m.synergyMix = {};
+  for (const s of sc) if ((s.granted || 0) > 0) m.synergyMix[s.synergy] = (m.synergyMix[s.synergy] || 0) + 1;
+  m.combat42 = r.combat42 || null;
   // --- guardrails ---
   m.gameDays = r.gameDays; m.won = r.won; m.waveReach = r.waveReach;
   m.deathsTotal = sum(Object.values(r.deaths || {}));
@@ -88,11 +101,15 @@ function metricsFor(r) {
 
 function aggregate(rows) {
   const a = {};
-  const keys = ['deedCredits', 'deedXpTotal', 'xpPerVillagerDay', 'thresholds', 'abilitiesHeld', 'abilitiesPerLiving', 'distinctAbilities', 'healers', 'w4Fights', 'w4Rounds', 'w4Kills', 'w4Deaths', 'w4VTaken', 'w4MDealt', 'w4PlusKills', 'healChecks', 'healHpGained', 'careRescues', 'triages', 'healingDeedCredits', 'gameDays', 'won', 'waveReach', 'deathsTotal', 'livingEnd'];
+  const keys = ['deedCredits', 'deedXpTotal', 'xpPerVillagerDay', 'thresholds', 'abilitiesHeld', 'abilitiesPerLiving', 'distinctAbilities', 'healers', 'w4Fights', 'w4Rounds', 'w4Kills', 'w4Deaths', 'w4VTaken', 'w4MDealt', 'w4PlusKills', 'healChecks', 'healHpGained', 'careRescues', 'triages', 'healingDeedCredits', 'gameDays', 'won', 'waveReach', 'deathsTotal', 'livingEnd', 'patrolCredits', 'patrolGranted', 'synergyCalls', 'synergyGranted'];
   for (const k of keys) a[k] = mean(rows.map(r => r[k] || 0));
   a.seeds = rows.length;
-  a.deedMix = {}; a.perTrack = {}; a.w4Outcomes = {}; a.careRescueByVia = {}; a.deedXpByTrack = {};
+  a.combat42Max = mean(rows.map(r => (r.combat42 && r.combat42.maxCombat) || 0));
+  a.combat42Crossed = sum(rows.map(r => (r.combat42 && r.combat42.crossed18) || 0));
+  a.combat42Living = mean(rows.map(r => (r.combat42 && r.combat42.living) || 0));
+  a.deedMix = {}; a.perTrack = {}; a.w4Outcomes = {}; a.careRescueByVia = {}; a.deedXpByTrack = {}; a.synergyMix = {};
   for (const r of rows) {
+    for (const [k, v] of Object.entries(r.synergyMix || {})) a.synergyMix[k] = (a.synergyMix[k] || 0) + v;
     for (const [k, v] of Object.entries(r.deedMix || {})) a.deedMix[k] = (a.deedMix[k] || 0) + v;
     for (const [k, v] of Object.entries(r.perTrack || {})) a.perTrack[k] = (a.perTrack[k] || 0) + v;
     for (const [k, v] of Object.entries(r.w4Outcomes || {})) a.w4Outcomes[k] = (a.w4Outcomes[k] || 0) + v;
@@ -155,6 +172,37 @@ if (B || A) {
   cmp('mean damage taken per wave-4 fight', b => b.w4VTaken, a => a.w4VTaken, (b, a) => a.w4VTaken < b.w4VTaken, '<');
   L.push(`  wave-4 fights (panel mean): before ${fmt(B ? B.w4Fights : null)} / after ${fmt(A ? A.w4Fights : null)}`);
   L.push(`  wave-4 outcomes (panel): before ${JSON.stringify(B ? B.w4Outcomes : {})} / after ${JSON.stringify(A ? A.w4Outcomes : {})}`);
+}
+L.push('## E. Patrol deed + synergy wild fire + combat-42 (r104 follow-up; bars unchanged, new measurement)');
+if (B || A) {
+  cmp('patrol deed credits granted (panel mean)', b => b.patrolGranted, a => a.patrolGranted, (b, a) => a.patrolGranted > b.patrolGranted, '>');
+  L.push(`  patrol deed credits raw incl. capped (panel total): before ${B ? fmt(B.patrolCredits * B.seeds, 0) : 'n/a'} / after ${A ? fmt(A.patrolCredits * A.seeds, 0) : 'n/a'} (granted after: ${A ? fmt(A.patrolGranted * A.seeds, 0) : 'n/a'})`);
+  cmp('synergy bonuses granted (panel mean)', b => b.synergyGranted, a => a.synergyGranted, (b, a) => a.synergyGranted > b.synergyGranted, '> 0 (before has no synergy table)');
+  L.push(`  synergy granted by id (panel): after ${JSON.stringify(A ? A.synergyMix : {})}`);
+  // NOTE: the before-arm JSONs predate the combat42 snapshot, so their
+  // panel mean reads 0 — the true before is r104's published 17 (section F).
+  cmp('max combat XP at day 42, living villagers (panel mean of seed maxima)', b => b.combat42Max, a => a.combat42Max, (b, a) => a.combat42Max >= 18, '>= 18 (r104 before: 17)');
+  L.push(`  villagers crossed combat 18 by day 42 (panel total): before ${B ? B.combat42Crossed : 'n/a'} / after ${A ? A.combat42Crossed : 'n/a'} (r104: 0/29)`);
+}
+// --- establishment window (r104 follow-up): competent / 42d / seeds 1501-1504 ---
+// BEFORE (published r104, master 1de41ff6f, same base/seeds/policy/horizon):
+// max combat XP 17, 0/29 living villagers crossed 18.
+const EST42_SEEDS = [1501, 1502, 1503, 1504];
+const est42 = [];
+for (const seed of EST42_SEEDS) {
+  const fp = path.join(EVID, 'xp-gear-est42-after', 'xp-gear-' + seed + '.stdout.json');
+  if (!fs.existsSync(fp)) continue;
+  const r = JSON.parse(fs.readFileSync(fp, 'utf8'));
+  if (r && !r.excluded && r.combat42) est42.push({ seed, ...r.combat42 });
+}
+if (est42.length) {
+  L.push('## F. Establishment window — 42 days, competent, seeds 1501-1504 (r104 follow-up)');
+  L.push('  BEFORE (r104 published, same base/seeds/policy/horizon): max combat XP 17, 0/29 living villagers crossed 18.');
+  for (const e of est42) L.push(`  - seed ${e.seed}: day ${e.day} living ${e.living} max combat XP ${e.maxCombat} crossed 18: ${e.crossed18}`);
+  const mx = Math.max(...est42.map(e => e.maxCombat));
+  const tot = est42.reduce((x, e) => x + e.crossed18, 0);
+  const liv = est42.reduce((x, e) => x + e.living, 0);
+  L.push(`  AFTER (this build): max combat XP ${mx}, ${tot}/${liv} living villagers crossed 18 by day 42. ${tot > 0 ? 'REACHABLE — 18 crossed in-window.' : 'NOT REACHED — 18 still uncrossed in 42 days.'}`);
 }
 L.push('## Healing (supporting)');
 if (B || A) {

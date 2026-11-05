@@ -127,3 +127,39 @@ healing gap is already proven and is the Healer road's starvation point.
   trapping (77) DO fire over 120d.
 - Guardrails: survival 92.13 days, wins 0.50/seed (4/8), deaths 55.88,
   living at end 4.75.
+
+## ADDENDUM — combat-XP velocity (2026-11-05 08:52 CST, BEFORE the re-run)
+New datum from the just-landed establishment census (master commit
+1de41ff6f, run note evidence/2026-11-05/journey-establishment-r104.md):
+across 4 seeds / 42 days (competent policy, base 6b516a7ea — this branch's
+base), 29/29 living villagers hold at least one granted ability, but ZERO
+combat-kit ability ids are held, and NO villager crosses the first combat-XP
+threshold (18) in 42 days (max observed 17 — Ethan, seed 1502). The combat
+kit is unreachable in the establishment window by construction: the combat
+track has only two deeds (fight_won 2/day 3, fight_survived 1/day 2) and
+both need a fight. Parent instruction: make 18 reachable through everyday
+combat-adjacent deeds, not just fight wins. BARS UNCHANGED (A–D + guardrails
+as written above).
+- Amendment: ONE new deed, `patrol` (combat, n=1, perDay=1) — the patrol
+  duty is the everyday combat-adjacent work that already happens and earns
+  nothing: the patroller gears up, pockets ammo, walks the perimeter armed
+  and ready. Credited in Game.resolvePatrol on completion — the uneventful
+  branch (no threat found; today the only combat XP) and the threat branch
+  (after the fight resolves, when the patroller lived; the fight deeds
+  credit separately). The player has no patrol verb, so no player site.
+  No other new deed: no guard/watch/spar/train mechanic exists in code
+  (convo-wants.js:1685 — "no playable watch handover yet"), and scouting
+  already credits `discovery`. Flee/evade already credit fight_survived
+  (fieldFights.js:2402-2403). Per-day cap KEPT (1/day); thresholds, kits,
+  recognition, gates untouched.
+- New measurement (does not change any bar): the driver records a day-42
+  combat snapshot (first daily sample with day >= 42: raw npcXp combat per
+  living villager — the same raw-store read r104 used — max, and count
+  >= 18) and wraps creditSynergy (the wild synergy-fire count owed from
+  the v1 run note). Establishment-window after-arm: POLICY=competent,
+  DAYS=42, seeds 1501–1504 (r104's seeds), output
+  evidence/2026-11-05/xp-gear-est42-after/; its BEFORE is r104's published
+  numbers (max combat XP 17, 0/29 crossed 18) on the same base/seeds/
+  policy/horizon. The 120-day capable after-arm is RE-RUN on the amended
+  build (v1 after-arm archived to xp-gear-panel-after-v1/); the before-arm
+  is untouched.

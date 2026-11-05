@@ -7989,6 +7989,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         ];
         this.say(lines[Math.floor(Math.random() * lines.length)]);
         this.bumpTrust(vid, 1);
+        // PATROL DEED (XP coverage 2026-11-05, r104 follow-up): an
+        // uneventful patrol still earns combat XP — the patroller geared
+        // up, pocketed ammo and walked the perimeter armed and ready.
+        // This is the everyday combat-adjacent deed that makes the first
+        // combat threshold (18) reachable without a fight win.
+        try { if (this.creditDeed) this.creditDeed(vid, 'patrol'); } catch (e) { console.warn('[tracks] patrol deed', e); }
         return;
       }
       const mdef = (this.data.monsters || []).find(x => x.id === m.id) || {};
@@ -8095,6 +8101,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.deathGriefBeat(vid);
         this.bumpTrust(vid, -2);
       }
+      // PATROL DEED (XP coverage 2026-11-05, r104 follow-up): the patrol
+      // duty was performed whether or not a monster showed — the fight
+      // deeds credit separately, the patrol deed credits the duty. The
+      // dead earn nothing.
+      if (rec.outcome !== 'vDie') { try { if (this.creditDeed) this.creditDeed(vid, 'patrol'); } catch (e) { console.warn('[tracks] patrol deed', e); } }
     },
 
     // hurt a villager (non-player). Tracks health, handles death.
