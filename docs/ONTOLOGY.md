@@ -1753,7 +1753,7 @@ Telemetry for the run's milestone events, which had none (sim audit 2026-10-14):
 - observe_only: every wrap calls the original first and returns its result unchanged (code: telemetry-hooks.js)
 - no_rng: no Math.random and no state writes except the telemetry ring and its own _teleSeen bookkeeping (code: telemetry-hooks.js)
 
-**Consumes:** tele(), tableScene(), tableStartPath(), tableFail(), tableResolveFinal(), useAbility(), activateAbility(), checkArc(), recomputeActiveSynergies(), scaleRank(), endDay(), Pantheon.registerAscension(), titanResolveFight()
+**Consumes:** tele(), tableScene(), tableStartPath(), tableFail(), tableResolveFinal(), useAbility(), activateAbility(), checkArc(), recomputeActiveSynergies(), scaleRank(), endDay(), Pantheon.registerAscension(), titanResolveFight(), fieldFight()
 
 ### temperature (`temperature.js`)
 Regional temperature model + heat/cold stress + expanded weather (docs/WORLD-REGIONS.md §4 #6, #18). Derives a daily °C from the region's climate calendar (season temp label, seasonal curve, day-part swing, weather modifier), names the sky (heatwave/frost/snow/storm), and applies real consequences: hydration burn, forage/travel modifiers through the modifier pipeline, mosquito pressure, and exposure stress for the player and the village. Knowledge-gated: precise readings and forecasts only after observation or a sky-reader.
