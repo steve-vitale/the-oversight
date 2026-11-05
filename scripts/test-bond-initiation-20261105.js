@@ -207,9 +207,8 @@ async function live() {
   // --- Pending scholar proposal: stage / accept / decline. ---
   // Prepared-scene setup (debug-scenarios idiom: set the state a real
   // game would have built): staging needs the bonds drive live — the
-  // villager must trust someone themselves (>= 40 in their own trust
-  // map, trustedAnyone) and the bonds weight must reach 1. Village
-  // trust >= 12 is the staging bar.
+  // villager's bond with the scholar must be warming (15 <= warmth < 50,
+  // bondDriveLive). Village trust >= 12 is the staging bar.
   function findBondCand(excludeId) {
     for (let i = 0; i < roster.length; i++) {
       const id = roster[i];
@@ -225,19 +224,15 @@ async function live() {
         if (treq && !treq.delivered) continue;
         const already = Game.bondGet ? Game.bondGet(id, Game.villagerId) : null;
         if (already && ((already.depth || 0) >= 1 || (already.v || 0) >= 50)) continue;
-        const other = roster.find(function (r) { return r !== id && r !== Game.villagerId; });
-        if (!other) continue;
-        const p1 = (Game.getPerson ? Game.getPerson(id) : null);
-        const p2 = (Game.vpOf ? Game.vpOf(id) : null);
-        const p = p1 || p2;
-        if (!p) continue;
-        // They trust a fellow villager — the drive's gate. Set on both
-        // accessors in case one returns a copy.
-        p.trust = p.trust || {};
-        p.trust[other] = 45;
-        if (p2 && p2 !== p) { p2.trust = p2.trust || {}; p2.trust[other] = 45; }
-        const w = Game.vgoalWeights ? Game.vgoalWeights(id) : null;
-        if (w && (w.bonds || 0) >= 1) return id;
+        // Warm the pair's bond into the drive window (scene setup):
+        // bondAdd creates the record through the game verb, then the
+        // warmth is set to 25 — warming, not yet close.
+        try { if (Game.bondAdd) Game.bondAdd(id, Game.villagerId, 6, 'test setup'); } catch (e) {}
+        const bnd = Game.bondGet ? Game.bondGet(id, Game.villagerId) : null;
+        if (!bnd) continue;
+        bnd.v = 25;
+        const drive = Game.bondDriveLive ? Game.bondDriveLive(id, Game.villagerId) : null;
+        if (drive && drive.live) return id;
       } catch (e) {}
     }
     return null;

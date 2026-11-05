@@ -3,6 +3,7 @@
 // description: Villagers initiate bonds on their own — proposing a bond to a person they perceived, and raising a village link to the bearer. Steve 2026-11-04: villagers initiate bonds, because the player may inherit that villager.
 // provides:
 //   - bondProposalPerceived(initiatorVid, targetVid)
+//   - bondDriveLive(vid, targetVid)
 //   - proposeBond(initiatorVid, targetVid, opts)
 //   - bondProposalMaybe(initiatorVid, targetVid)
 //   - stageBondProposal(vid)
@@ -22,7 +23,7 @@
 //   - bondinit_character_decision: the target decides through npcInviteDecision kind 'bond' — temperament, goal, mood, fear, pair relationship, social need; chance clamped 5-95, never always/never. (code: proposeBond)
 //   - bondinit_player_chooses_path: hierarchy propose verbs stay player-only (Steve 2026-10-26). An NPC raises a link idea; the player proposes. acceptLinkRaise first tells the bearer the lore (tellVillageLore), then calls proposeLink. (code: acceptLinkRaise)
 //   - bondinit_scholar_decides: a proposal TO the scholar is never auto-decided — it stages as a pending conversation beat the player answers. (code: stageBondProposal)
-//   - bondinit_drive_first: wild proposals fire only from VISIT arrivals, only while the villager's bonds drive is live (vgoalWeights.bonds >= 1), only to someone they do not dislike (pairAffinity >= 0) and are not already close to (bond warmth < 50, depth < 1). (code: bondProposalMaybe)
+//   - bondinit_drive_first: wild proposals fire only from VISIT arrivals, only while the pair's bond is warming but not yet close (bondDriveLive: 15 <= warmth < 50, depth < 1), only to someone they do not dislike (pairAffinity >= 0). Scholar proposals stage only while the villager's bond with the scholar is warming the same way. (code: bondProposalMaybe, bondDriveLive)
 //   - bondinit_no_spam: a refused pair cools down 14 days; an accepted bond is never re-proposed; at most one bond staging and one link-raise staging per day. (code: proposeBond, npcBondTick, npcLinkRaiseTick)
 //   - bondinit_telemetry: every proposal, staging, acceptance and refusal emits tele('bond_proposed', {initiator, target, kind, outcome, chance}). (code: proposeBond, stageBondProposal, acceptBondProposal, declineBondProposal, stageLinkRaise, acceptLinkRaise, declineLinkRaise)
 //   - bondinit_no_gate_changes: this module never writes a win price, deed gate, readiness bar, or table rule. It changes who asks, not what winning costs. (code: bond-initiation.js — only state writes are bondAdd, bumpTrust, and the bond/link request stores)
@@ -59,8 +60,19 @@
   if (!G) return;
 
   var REFUSE_COOLDOWN_DAYS = 14;
-  var BOND_PROPOSE_TOP_P = 0.35;
-  var BOND_PROPOSE_P = 0.15;
+  var BOND_PROPOSE_P = 0.25;
+  // WARMTH WINDOW (tuned 2026-11-05 after the armed pilot showed 0
+  // proposals in 90 days): the bonds drive is live for a pair whose
+  // bond warmth is warming but not yet close, 15 <= v < 50. The first
+  // drive read vgoalWeights.bonds >= 1, but that gate is trustedAnyone
+  // (own trust map >= 40) — and the person-trust map is NEVER written
+  // in wild play (census: maxTrust 0 across 90 days on seed 84101,
+  // while warming bond pairs grew 0 -> 26). Bond warmth is the
+  // relationship that actually grows through shared meals and visits,
+  // so the drive reads it: propose when the relationship is real but
+  // unformalized. depth >= 1 is already close whatever v says.
+  var BOND_WARM_MIN = 15;
+  var BOND_WARM_MAX = 50;
 
   function dayOf() {
     try { return (G.state.scholar || {}).day || 0; } catch (e) { return 0; }
@@ -175,6 +187,21 @@
     return { perceived: channels.length > 0, channels: channels };
   }
 
+  // ---------- DRIVE (warmth window) ----------
+  // bondDriveLive(vid, targetVid) -> {live, warmth, depth}. Live when
+  // the pair's bond is warming but not yet close (15 <= v < 50,
+  // depth < 1). No bond record yet means strangers: not live. This is
+  // the ONE definition of the drive — bondProposalMaybe, the scholar
+  // staging, and the daily tick all read it, so a tuning lands once.
+  function bondDriveLive(vid, targetVid) {
+    var bnd = null;
+    try { bnd = (G.bondGet && G.bondGet(vid, targetVid)) || null; } catch (e) { bnd = null; }
+    if (!bnd) return { live: false, warmth: 0, depth: 0 };
+    var v = bnd.v || 0, d = bnd.depth || 0;
+    var live = (v >= BOND_WARM_MIN && v < BOND_WARM_MAX && d < 1);
+    return { live: live, warmth: v, depth: d };
+  }
+
   // ---------- THE VERB ----------
   // proposeBond(initiator, target, opts) -> {ok, accepted, outcome,
   // chance, gate, perceived, channels, reasons}. opts.roll pins the
@@ -261,20 +288,16 @@
 
   // ---------- DRIVE HOOK (VISIT arrivals) ----------
   // bondProposalMaybe(initiator, target): called when a VISIT lands.
-  // Drive-first: the bonds goal must be live (vgoalWeights.bonds >= 1),
-  // the pair must not be disliked (pairAffinity >= 0) or already close,
+  // Drive-first: the pair's bond must be warming but not yet close
+  // (bondDriveLive), the pair must not be disliked (pairAffinity >= 0),
   // the perception gate must pass, and the proposal itself is a
-  // probability (0.35 when 'bonds' is the top goal, 0.15 otherwise) —
-  // a drive, not a flat roll and not a guarantee.
+  // probability (0.25) — a drive, not a flat roll and not a guarantee.
   function bondProposalMaybe(initiator, target) {
     if (!initiator || !target || initiator === target) return { ok: false, reason: 'invalid' };
     if (!aliveOnRoster(initiator) || !aliveOnRoster(target)) return { ok: false, reason: 'invalid' };
     if (target === scholarId()) return { ok: false, reason: 'scholar-decides' };
-    var weights = null;
-    try { weights = (G.vgoalWeights ? G.vgoalWeights(initiator) : null) || null; } catch (e) { weights = null; }
-    if (!weights || (weights.bonds || 0) < 1) return { ok: false, reason: 'no-drive' };
-    var top = null, topW = -1;
-    for (var id in weights) { if (weights[id] > topW) { topW = weights[id]; top = id; } }
+    var drive = bondDriveLive(initiator, target);
+    if (!drive.live) return { ok: false, reason: 'no-drive' };
     try {
       var aff = (G.pairAffinity ? G.pairAffinity(initiator, target) : 0) || 0;
       if (aff < 0) return { ok: false, reason: 'disliked' };
@@ -285,8 +308,7 @@
     var rec = bondState()[key] || null;
     if (rec && rec.outcome === 'accepted') return { ok: false, reason: 'already-bonded' };
     if (rec && rec.outcome === 'refused' && dayOf() - (rec.day || 0) < REFUSE_COOLDOWN_DAYS) return { ok: false, reason: 'cooldown' };
-    var p = (top === 'bonds') ? BOND_PROPOSE_TOP_P : BOND_PROPOSE_P;
-    if (Math.random() >= p) return { ok: false, reason: 'drive-quiet' };
+    if (Math.random() >= BOND_PROPOSE_P) return { ok: false, reason: 'drive-quiet' };
     return proposeBond(initiator, target);
   }
 
@@ -305,9 +327,10 @@
     try { if ((G.state.village.sick || {})[vid]) return null; } catch (e) {}
     var t = trustOf(vid);
     if (t == null || t < 12) return null;
-    var weights = null;
-    try { weights = (G.vgoalWeights ? G.vgoalWeights(vid) : null) || null; } catch (e) { weights = null; }
-    if (!weights || (weights.bonds || 0) < 1) return null;
+    // Drive: the villager's bond with the scholar must be warming
+    // (bondDriveLive). No perception check here — the scholar is a
+    // co-resident they live beside daily, not a stranger.
+    if (!bondDriveLive(vid, scholarId()).live) return null;
     if (bondRequests()[vid]) return null;
     var key = pairKey(vid, scholarId());
     var rec = bondState()[key] || null;
@@ -395,9 +418,7 @@
         try { if ((G.state.village.sick || {})[id]) continue; } catch (e) {}
         var t = trustOf(id);
         if (t == null || t < 12) continue;
-        var w = null;
-        try { w = (G.vgoalWeights ? G.vgoalWeights(id) : null) || null; } catch (e) { w = null; }
-        if (!w || (w.bonds || 0) < 1) continue;
+        if (!bondDriveLive(id, scholarId()).live) continue;
         if (bondRequests()[id]) continue;
         var k = pairKey(id, scholarId());
         var r = bondState()[k] || null;
@@ -604,6 +625,7 @@
 
   var methods = {
     bondProposalPerceived: function (a, b) { return bondProposalPerceived(a, b); },
+    bondDriveLive: function (a, b) { return bondDriveLive(a, b); },
     proposeBond: function (a, b, opts) { return proposeBond(a, b, opts); },
     bondProposalMaybe: function (a, b) { return bondProposalMaybe(a, b); },
     stageBondProposal: function (vid) { return stageBondProposal(vid); },

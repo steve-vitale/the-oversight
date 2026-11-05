@@ -156,3 +156,31 @@ perception-law violation and fails the run.
 - The 90d horizon may undercount link-raises (lore accrues
   slowly); if M4 is thin, the next run should try 140d rather
   than lowering the lore bar.
+
+## Tuning amendment 1 (2026-11-05, after armed pilot 1 — BEFORE re-pilot)
+
+- Armed pilot 1 (seeds 84101–84103, 90d, commit 221e23d47): 0 proposals,
+  0 link raises, 0 errors on all three seeds. Per the prereg, zero
+  proposals at pilot stage means tune the drive and re-pilot; the bars
+  (M1–M6) are UNCHANGED.
+- Root cause (diagnostic census, seed 84101, 90d): the bonds drive as
+  first written read `vgoalWeights.bonds >= 1`, whose gate is
+  `trustedAnyone` (the villager's own trust map >= 40). That map is
+  NEVER written in wild play — maxTrust 0 across all 90 days, gate
+  never opened, `bondProposalMaybe` refused 17/18 VISIT arrivals for
+  `no-drive`, `npcBondTick` staged nothing in 90 days. Meanwhile bond
+  warmth grows fine (warming pairs 0 -> 26 over the same 90 days).
+- New drive (tuned): `bondDriveLive(vid, targetVid)` — live when the
+  pair's bond warmth is warming but not yet close, 15 <= v < 50,
+  depth < 1. One definition, read by `bondProposalMaybe` (VISIT
+  arrivals, flat probability 0.25, replacing the 0.35/0.15 top-goal
+  split that could never fire either), `stageBondProposal`, and
+  `npcBondTick` (village trust >= 12 bar kept). Link raises UNCHANGED
+  (build_standing drive via lore, which accrues; judged separately).
+- Proof test updated to the new drive (warmth setup in the prepared
+  scene instead of the trust-map setup): 47/47 pass, fingerprint
+  identical across two separate processes.
+- Note for the record: the dead `trustedAnyone` gate also means the
+  villager-goals system's own bonds objective never fires in the wild.
+  That is a goals-system finding, NOT this build's to fix — no change
+  to villager-goals.js in this build.
