@@ -1,0 +1,53 @@
+
+== seed 33401: handoff d41 Felicia -> Eamon (scripted)
+   CAP: no-stranger-pool (probe: no stranger pool)
+   OPP talk-requests (distinct, d+0..d+30, self excluded): total=6 unbonded=0 selfReqDayEntries=1
+   OPP bonds d+0..d+30: NPC-NPC new=25 over 18 bond-days (median/day=1); bearer new=1 (driven-days=0, undriven-days=1)
+   CARRIED pick-time rank: 1 | funeral INCALL beat: true
+   relPost bonds=60 relD14=82 relD30=0 relEnd=88
+
+== seed 33402: handoff d40 Camila -> Gabriel (organic)
+   CAP: second-handoff-before-relEnd (probe: Jesse trust=24 want=curious refused=false)
+   OPP talk-requests (distinct, d+0..d+30, self excluded): total=3 unbonded=1 selfReqDayEntries=0
+       unbonded requesters: Valeria(d61)
+   OPP bonds d+0..d+30: NPC-NPC new=13 over 29 bond-days (median/day=0); bearer new=1 (driven-days=0, undriven-days=1)
+   CARRIED pick-time rank: 1 | funeral INCALL beat: true
+   relPost bonds=47 relD14=61 relD30=61 relEnd=65
+
+== seed 33403: handoff d34 Henry -> Oliver (organic)
+   CAP: no-stranger-pool (probe: no stranger pool)
+   OPP talk-requests (distinct, d+0..d+30, self excluded): total=3 unbonded=0 selfReqDayEntries=1
+   OPP bonds d+0..d+30: NPC-NPC new=18 over 30 bond-days (median/day=0); bearer new=1 (driven-days=0, undriven-days=1)
+   CARRIED pick-time rank: 1 | funeral INCALL beat: true
+   relPost bonds=56 relD14=62 relD30=75 relEnd=82
+
+== seed 33404: handoff d10 Piper -> Raj (organic)
+   CAP: no-stranger-pool (probe: no stranger pool)
+   OPP talk-requests (distinct, d+0..d+30, self excluded): total=5 unbonded=0 selfReqDayEntries=0
+   OPP bonds d+0..d+30: NPC-NPC new=2 over 29 bond-days (median/day=0); bearer new=0 (driven-days=0, undriven-days=0)
+   CARRIED pick-time rank: 1 | funeral INCALL beat: true
+   relPost bonds=51 relD14=53 relD30=54 relEnd=54
+
+== seed 33405: handoff d41 Heinrich -> LaToya (scripted)
+   CAP: no-stranger-pool (probe: no stranger pool)
+   OPP talk-requests (distinct, d+0..d+30, self excluded): total=6 unbonded=0 selfReqDayEntries=0
+   OPP bonds d+0..d+30: NPC-NPC new=27 over 30 bond-days (median/day=0); bearer new=4 (driven-days=2, undriven-days=2)
+   CARRIED pick-time rank: 1 | funeral INCALL beat: true
+   relPost bonds=59 relD14=73 relD30=90 relEnd=118
+
+== seed 33406: handoff d34 Aaron -> Vito (organic)
+   CAP: second-handoff-before-relEnd (probe: Yuki trust=14 want=none refused=false)
+   OPP talk-requests (distinct, d+0..d+30, self excluded): total=1 unbonded=0 selfReqDayEntries=0
+   OPP bonds d+0..d+30: NPC-NPC new=2 over 18 bond-days (median/day=0); bearer new=0 (driven-days=0, undriven-days=0)
+   CARRIED pick-time rank: 1 | funeral INCALL beat: true
+   relPost bonds=30 relD14=32 relD30=0 relEnd=32
+
+=== PANEL ===
+{"seed":"33401","cap":"no-stranger-pool","reqTotal":6,"reqUnbonded":0,"selfReqDayEntries":1,"npcNew":25,"bearerNew":1,"bearerNewUndriven":1,"pickRank":1,"incall":true}
+{"seed":"33402","cap":"second-handoff-before-relEnd","probeVid":"Jesse","reqTotal":3,"reqUnbonded":1,"selfReqDayEntries":0,"npcNew":13,"bearerNew":1,"bearerNewUndriven":1,"pickRank":1,"incall":true}
+{"seed":"33403","cap":"no-stranger-pool","reqTotal":3,"reqUnbonded":0,"selfReqDayEntries":1,"npcNew":18,"bearerNew":1,"bearerNewUndriven":1,"pickRank":1,"incall":true}
+{"seed":"33404","cap":"no-stranger-pool","reqTotal":5,"reqUnbonded":0,"selfReqDayEntries":0,"npcNew":2,"bearerNew":0,"bearerNewUndriven":0,"pickRank":1,"incall":true}
+{"seed":"33405","cap":"no-stranger-pool","reqTotal":6,"reqUnbonded":0,"selfReqDayEntries":0,"npcNew":27,"bearerNew":4,"bearerNewUndriven":2,"pickRank":1,"incall":true}
+{"seed":"33406","cap":"second-handoff-before-relEnd","probeVid":"Yuki","reqTotal":1,"reqUnbonded":0,"selfReqDayEntries":0,"npcNew":2,"bearerNew":0,"bearerNewUndriven":0,"pickRank":1,"incall":true}
+CAP verdict: bonded-by-end 0/6 eligible seeds (bar: >=3 of 4 pilot seeds with opened probe + same-bearer relEnd).
+OPP totals: unbonded talk-requests 1; bearer new bonds on undriven days 5; NPC-NPC new bonds 87.

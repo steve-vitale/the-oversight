@@ -942,6 +942,15 @@
       // was self-talk). Only the successor's flag clears; every other
       // villager's shelter state survives succession untouched.
       try { if (v.sheltered && v.sheltered[newId]) delete v.sheltered[newId]; } catch (e) {}
+      // SELF-TALK-REQUEST PURGE (journey-succession r133 2026-11-04): a
+      // talk request the successor filed as an NPC (villagerInitiative —
+      // "they come to YOU") survives the handoff keyed by their own id, so
+      // the new bearer <redacted> a pending request to talk to themselves and
+      // talkRequestNear lights the Talk badge for their own position
+      // (distance 0). The moment passed with the old office: the requester
+      // IS the player now. Only the successor's own entry clears; every
+      // other villager's request survives succession untouched.
+      try { if (v.talkRequests && v.talkRequests[newId]) delete v.talkRequests[newId]; } catch (e) {}
       // FRESH SOCIAL LEDGER (longsim scale-wall r8 2026-10-13, lever 5): the
       // takes/gives book is per-PERSON, and the successor's NPC-era communal
       // meals sat in v.takes[newId] as "mystery takes" under the new bearer's id

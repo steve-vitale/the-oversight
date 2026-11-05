@@ -1,0 +1,34 @@
+
+ORGANIC DEATH d35: Aaron -> Vito, topTrust=[{"id":"Marcus","t":98},{"id":"Daniyar","t":88},{"id":"Marina","t":68},{"id":"Fatima","t":60}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=19 inheritedPlants=0 keptSkills=4 inheritedSkills=0 succTrustPre=90 succTrustPost=58
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","lucky_rock","bird_whisperer"] post=["beast_calm","lucky_rock","bird_whisperer"]
+DEATH d34 (organic (phase A)): Aaron -> Vito | passed=true lin=true mo=true trust=58 vouchers=4
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Marcus (refused=false)
+  CONVO d+3 with Daniyar (refused=false)
+  STRANGER-PROBE d+3 with Yuki (trust=14 refused=false)
+  BOND-CONVO d+3 with Fatima (depth=1 v=36 refused=false)
+  CONVO d+7 with Daniyar (refused=false)
+  CONVO d+7 with Marcus (refused=false)
+  CONVO d+14 with Marina (refused=false)
+  CONVO d+14 with Fatima (refused=false)
+
+FUNERAL: deathBeat=3 recover=1 vouch=1 (eligible=4) echo=3 organicBurial={"respects":false,"bury":false} halfRation=1
+
+MEAL-GATE: audited=18 violations=2 noMealDays=15 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+  VIOLATION d+18: Marina trust=60 kcal=2250 halfVoice=true
+  VIOLATION d+18: Fatima trust=60 kcal=2250 halfVoice=true
+SUCCESSOR-LIFE: dayAdv=19 signals={"levelUp":true,"systemVoice":27,"offerLines":22,"codexPlantsDelta":8,"codexSkillsDelta":9,"codexAbilitiesDelta":8,"xpDelta":28,"any":true} pantry 9439->0
+TRUST-DIALS: office 58->58 (+0, flat) | villageMean 64->89 (+25, climb) | ge60 4->3 | movers>=5: [{"id":"Fatima","from":60,"to":90,"delta":30},{"id":"Marina","from":68,"to":90,"delta":22}]
+DEED-LEDGER: calls=8 summary={"giveFood":{"calls":8,"ok":8,"deltaSum":11,"deltaN":8,"positive":8,"meanDelta":1.38}}
+
+IDENTITY TRIPS: raw=10 grief-excluded=7
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=3 (convo=3, say=0)) m4=true m5=manual | endDay=53 alive=1 over=true
+anomalies: 0
+say dump -> evidence/2026-11-04/journey-succession-r133-33406.saydump.txt
+S-METRICS: s1=false s2=true s3=true s4=false s5=false dayAdv=19
+T-METRICS: t1=true(panels=d+0,d+7,d+14) t2=true(deedCalls=8) trustVerdict={"readable":true,"officeMantle":58,"officeLast":58,"officeDelta":0,"officeClass":"flat","villageMantle":64,"villageLast":89,"villageDelta":25,"villageClass":"climb","villageGe60Mantle":4,"villageGe60Last":3,"movers":[{"id":"Fatima","from":60,"to":90,"delta":30},{"id":"Marina","from":68,"to":90,"delta":22}]}
+E6/CALLCHECK: e6={"callMoves":3,"withCensus":3,"chainHandoffs":2,"trustMoves":1} callCheck={"dailyMoveDays":2,"callMoveDays":2,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=4 (v2=4, excludedLoot=0))
+E7/R47: e7={"trustMoves":1,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":0,"both":1,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":3,"v2":4,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":2,"known":2,"unknown":0} e3={"dailyDays":19,"moves":2}

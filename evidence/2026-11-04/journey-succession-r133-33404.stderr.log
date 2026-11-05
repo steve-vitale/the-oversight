@@ -1,0 +1,39 @@
+
+ORGANIC DEATH d11: Piper -> Raj, topTrust=[{"id":"Akomea","t":59},{"id":"Emmett","t":58},{"id":"Fatima","t":58},{"id":"Xavier","t":51}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=5 inheritedPlants=0 keptSkills=4 inheritedSkills=0 succTrustPre=68 succTrustPost=34
+PARITY readable=true equal=true inherited=[] pre=["beast_calm"] post=["beast_calm"]
+DEATH d10 (organic (phase A)): Piper -> Raj | passed=true lin=true mo=true trust=34 vouchers=0
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Emmett (refused=false)
+  CONVO d+3 with Akomea (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Emmett (refused=false)
+  CONVO d+7 with Xavier (refused=false)
+  CONVO d+14 with Emmett (refused=false)
+  CONVO d+14 with Thabo (refused=false)
+  CONVO d+30 with Thabo (refused=false)
+  CONVO d+30 with Emmett (refused=false)
+  CONVO d+45 with Thabo (refused=false)
+  CONVO d+45 with Emmett (refused=false)
+  CONVO d+53 with Thabo (refused=false)
+  CONVO d+53 with Emmett (refused=false)
+  CONVO d+64 with Thabo (refused=false)
+  CONVO d+64 with Emmett (refused=false)
+
+FUNERAL: deathBeat=3 recover=1 vouch=0 (eligible=0) echo=0 organicBurial={"respects":false,"bury":false} halfRation=3
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=71 signals={"levelUp":true,"systemVoice":62,"offerLines":73,"codexPlantsDelta":24,"codexSkillsDelta":9,"codexAbilitiesDelta":10,"xpDelta":101,"any":true} pantry 14400->9839
+TRUST-DIALS: office 34->33 (-1, flat) | villageMean 38.6->76.9 (+38.3, climb) | ge60 0->6 | movers>=5: [{"id":"Adaeze","from":18,"to":90,"delta":72},{"id":"Thabo","from":33,"to":94,"delta":61},{"id":"Miroslava","from":31,"to":72,"delta":41},{"id":"Xavier","from":51,"to":91,"delta":40},{"id":"Emmett","from":58,"to":91,"delta":33},{"id":"Rafael","from":44,"to":61,"delta":17},{"id":"Fatima","from":58,"to":39,"delta":-19}]
+DEED-LEDGER: calls=45 summary={"teachPlant":{"calls":23,"ok":23,"deltaSum":0,"deltaN":23,"positive":0,"meanDelta":0},"giveFood":{"calls":21,"ok":21,"deltaSum":30,"deltaN":21,"positive":12,"meanDelta":1.43},"donateToPantry":{"calls":1,"ok":1,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=4 grief-excluded=3
+METRICS: m1=true m2a="n/a (none eligible)" m2b=false m3=false(echoMentions=0 (convo=0, say=0)) m4=true m5=manual | endDay=81 alive=8 over=false
+anomalies: 0
+say dump -> evidence/2026-11-04/journey-succession-r133-33404.saydump.txt
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=71
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+71) t2=true(deedCalls=45) trustVerdict={"readable":true,"officeMantle":34,"officeLast":33,"officeDelta":-1,"officeClass":"flat","villageMantle":38.6,"villageLast":76.9,"villageDelta":38.3,"villageClass":"climb","villageGe60Mantle":0,"villageGe60Last":6,"movers":[{"id":"Adaeze","from":18,"to":90,"delta":72},{"id":"Thabo","from":33,"to":94,"delta":61},{"id":"Miroslava","from":31,"to":72,"delta":41},{"id":"Xavier","from":51,"to":91,"delta":40},{"id":"Emmett","from":58,"to":91,"delta":33},{"id":"Rafael","from":44,"to":61,"delta":17},{"id":"Fatima","from":58,"to":39,"delta":-19}]}
+E6/CALLCHECK: e6={"callMoves":5,"withCensus":5,"chainHandoffs":0,"trustMoves":5} callCheck={"dailyMoveDays":5,"callMoveDays":5,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=false(echoV2b=1 (v2=1, excludedLoot=0))
+E7/R47: e7={"trustMoves":5,"soloOffice":2,"soloOfficeDeltas":[1,1],"soloBearerDeltaExact":[1,1],"singleMoverBearer":1,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":0,"both":5,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":0,"v2":1,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":0,"known":0,"unknown":0} e3={"dailyDays":71,"moves":5}
