@@ -2928,9 +2928,9 @@
       // raiddensity r16 2026-10-15: stamp the day the court sat so the Haven
       // raid cooldown only ever covers young nationals (day - first < 60).
       // Hooks the existing formation point — never a new detector.
-      // Env-gated: with RAIDDENSITY off the field never exists (det-gate
-      // byte-identical).
-      try { if (typeof process !== 'undefined' && process.env && process.env.RAIDDENSITY === '1') this.state.nationalFirstDay = day; } catch (e) {}
+      // SHIPPED (build-smallfixes 2026-11-05): the stamp is unconditional
+      // now that the env gate is gone.
+      try { this.state.nationalFirstDay = day; } catch (e) {}
       // journey-scale-r2 2026-10-14: remember HOW it happened for the
       // villager echo (scaleDiscovery._sdNationalBeatEcho) — non-behavioral.
       if (pn && pn.shape) this.state.nationalShape = pn.shape;

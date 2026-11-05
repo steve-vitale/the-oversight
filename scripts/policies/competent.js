@@ -2341,10 +2341,13 @@ function beastStrikeTarget(Game, f, ctx, p, px, py, tgt, endTurn) {
 // ONLY if it is still the player's turn. Turn accounting reads engine
 // state, not the press return value — a fizzled press still spent the turn,
 // so nothing strikes after it.
-function abilityPressPlay(Game, f, ctx, p, endTurn) {
+function abilityPressPlay(Game, f, ctx, p, endTurn, opts) {
   try {
     if (ctx._abFight !== f) { ctx._abFight = f; ctx._abPressed = {}; }
     const pressed = ctx._abPressed;
+    // onlyLosing (build-smallfixes 2026-11-05): run ONLY the losing-control
+    // branch (step 4) — used for the pre-eject attempt in fight(), so a held
+    // losing-window control gets its window before the 35% flee check fires.
     const live = (f.fighters || []).filter(x => x && x.kind === 'monster' && (x.hp || 0) > 0 && !x.fled);
     if (!live.length) return false;
     const hpPct = (p.hp || 0) / Math.max(1, p.maxHp || p.hp || 1);
@@ -2373,21 +2376,25 @@ function abilityPressPlay(Game, f, ctx, p, endTurn) {
         return false;
       } catch (e) { return false; }
     };
+    const onlyLosing = !!(opts && opts.onlyLosing);
     // 1. Turncoat: split a multi-monster fight before anything else.
-    if (live.length >= 2 && tryPress('turncoat', 'persuade')) return true;
+    if (!onlyLosing && live.length >= 2 && tryPress('turncoat', 'persuade')) return true;
     // 2. Losing: rally first.
-    if (losing && tryPress('war_cry', 'bellow')) return true;
+    if (!onlyLosing && losing && tryPress('war_cry', 'bellow')) return true;
     // 3. Bird strike once per fight, on non-trivial fights only — never
     // spend 60 kcal of birds on a lone hummice.
-    if (!pressed.bird_strike && nontrivial && tryPress('bird_strike', 'call')) { pressed.bird_strike = 1; return true; }
+    if (!onlyLosing && !pressed.bird_strike && nontrivial && tryPress('bird_strike', 'call')) { pressed.bird_strike = 1; return true; }
     // 4. Losing: buy space with a control action, first available.
+    // pocket_sand is once per fight (build-smallfixes 2026-11-05): one press
+    // buys the 2-round blind; later losing turns must strike, move, or flee
+    // — no sand-spam loop (the rage-loop failure shape, trickcensus).
     if (losing) {
-      if (tryPress('pocket_sand', 'throw_sand')) return true;
+      if (!pressed.pocket_sand && tryPress('pocket_sand', 'throw_sand')) { pressed.pocket_sand = 1; return true; }
       if (tryPress('freeze_tag', 'tag')) return true;
       if (tryPress('fear_aura', 'loom')) return true;
     }
     // 5. Winning and non-trivial: press the advantage.
-    if (!losing && nontrivial && tryPress('rage', 'unleash_rage')) return true;
+    if (!onlyLosing && !losing && nontrivial && tryPress('rage', 'unleash_rage')) return true;
     return false;
   } catch (e) { return false; }
 }
@@ -3649,6 +3656,13 @@ const competent = {
           }
         } catch (e) {}
       }
+      // LOSING-CONTROL FIRST (build-smallfixes 2026-11-05, trickcensus):
+      // a held losing-window control (pocket_sand et al.) gets its window
+      // BEFORE the 35% eject — the eject otherwise pre-empts the 35–50%
+      // window entirely (a fighter jumping 58% → 31% in one round never
+      // reaches the press). Only presses when losing and a control is held
+      // and pressable; otherwise falls through to the eject unchanged.
+      try { if (abilityPressPlay(Game, f, ctx, p, endTurn, { onlyLosing: true })) return true; } catch (e) {}
       // COURTKILL (scale-wall r18 arm 1, via ctx._huntCommit): committed wave-3
       // hunts hold to 12% — the r16 finding says these are winnable
       // attritions and cheat-death usually holds (103/104); fleeing at 35%

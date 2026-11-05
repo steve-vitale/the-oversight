@@ -22186,17 +22186,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // ============ HAVEN RAID COOLDOWN (raiddensity r16 2026-10-15) ============
     // One Haven-side post-raid cooldown across BOTH rival-raid channels:
     // commons raids (game.js commonsRaid) and famine raids
-    // (villageAgency.js _vaStageRaidDefense). Env-gated RAIDDENSITY=1 —
-    // with the gate off every helper below returns early and touches no
-    // state (det-gate byte-identical). The cooldown is only ever enforced
-    // on YOUNG nationals (nationalLive and under 60 days from the day the
-    // court sat — stamped at the existing formation point in hierarchy.js,
-    // never a new detector). During the 7-day window the doubled watch
-    // holds: a blocked commons raid is a quiet night with scouts' fiction,
-    // a blocked famine raid devolves into a beg (never both, never silent,
-    // and a beg beats an ungated raid).
+    // (villageAgency.js _vaStageRaidDefense). SHIPPED (build-smallfixes
+    // 2026-11-05): the Oct 15 lever measured GO (young-national clusters
+    // 26 → 0) and the RAIDDENSITY env gate is removed — the cooldown is live
+    // behavior now, including in the browser where process.env never exists.
+    // The cooldown is only ever enforced on YOUNG nationals (nationalLive
+    // and under 60 days from the day the court sat — stamped at the existing
+    // formation point in hierarchy.js, never a new detector). During the
+    // 7-day window the doubled watch holds: a blocked commons raid is a
+    // quiet night with scouts' fiction, a blocked famine raid devolves into
+    // a beg (never both, never silent, and a beg beats an ungated raid).
     _rdOn() {
-      try { return typeof process !== 'undefined' && process.env && process.env.RAIDDENSITY === '1'; } catch (e) { return false; }
+      return true;
     },
     _raidCooldownYoung() {
       if (!this._rdOn()) return false;
