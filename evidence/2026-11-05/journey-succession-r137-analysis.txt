@@ -1,0 +1,52 @@
+
+== seed 33501: SKIPPED (no handoff)
+   notes: village over at d27 before any kill — seed skipped (death-aware stop)
+
+== seed 33502: handoff d42 Leroy -> Scarlett (scripted)
+   CAP-D14: no-stranger-pool (probe: no stranger pool)
+   OPP talk-requests (distinct, d+0..d+30, self excluded): total=1 unbonded=0 selfReqDayEntries=0
+   OPP bonds d+0..d+30: NPC-NPC new=9 over 30 bond-days (median/day=0); FIRST-bearer new=2 (driven-days=0, undriven-days=2); LATER-bearer new=0
+   CARRIED pick-time rank: 1 | funeral INCALL beat: true
+   relPost bonds=58 relD14=66 relD30=69 relEnd=94 relD14.selfId=gen_hccmrtm
+
+== seed 33503: handoff d12 June -> Jorge (organic)
+   CAP-D14: bonded-d14 (probe: Petra trust=44 want=ask_favor refused=false) bondedEver=true
+   OPP talk-requests (distinct, d+0..d+30, self excluded): total=8 unbonded=1 selfReqDayEntries=0
+       unbonded requesters: Deborah(d16)
+   OPP bonds d+0..d+30: NPC-NPC new=5 over 14 bond-days (median/day=0); FIRST-bearer new=2 (driven-days=1, undriven-days=1); LATER-bearer new=0
+   CARRIED pick-time rank: 1 | funeral INCALL beat: true
+   relPost bonds=39 relD14=47 relD30=0 relEnd=47 relD14.selfId=jorge_silva
+
+== seed 33504: handoff d41 Dieter -> Elijah (scripted)
+   CAP-D14: bonded-d14 (probe: Hugo trust=29 want=none refused=false) bondedEver=true
+   OPP talk-requests (distinct, d+0..d+30, self excluded): total=5 unbonded=1 selfReqDayEntries=0
+       unbonded requesters: Naran(d54)
+   OPP bonds d+0..d+30: NPC-NPC new=18 over 16 bond-days (median/day=1); FIRST-bearer new=3 (driven-days=0, undriven-days=3); LATER-bearer new=0
+   CARRIED pick-time rank: 1 | funeral INCALL beat: true
+   relPost bonds=51 relD14=69 relD30=0 relEnd=72 relD14.selfId=gen_3bxjlv3
+
+== seed 33505: handoff d37 Zoey -> Axel (organic)
+   CAP-D14: no-stranger-pool (probe: no stranger pool)
+   OPP talk-requests (distinct, d+0..d+30, self excluded): total=3 unbonded=0 selfReqDayEntries=0
+   OPP bonds d+0..d+30: NPC-NPC new=3 over 25 bond-days (median/day=0); FIRST-bearer new=0 (driven-days=0, undriven-days=0); LATER-bearer new=1
+   CARRIED pick-time rank: 1 | funeral INCALL beat: true
+   relPost bonds=55 relD14=56 relD30=0 relEnd=62 relD14.selfId=wanjiru_kamau
+
+== seed 33506: handoff d33 Devon -> Jovan (organic)
+   CAP-D14: no-stranger-pool (probe: no stranger pool)
+   OPP talk-requests (distinct, d+0..d+30, self excluded): total=2 unbonded=0 selfReqDayEntries=0
+   OPP bonds d+0..d+30: NPC-NPC new=0 over 29 bond-days (median/day=0); FIRST-bearer new=0 (driven-days=0, undriven-days=0); LATER-bearer new=0
+   CARRIED pick-time rank: 1 | funeral INCALL beat: true
+   relPost bonds=52 relD14=52 relD30=55 relEnd=62 relD14.selfId=jovan_milic
+
+=== PANEL ===
+{"seed":"33501","skipped":true}
+{"seed":"33502","cap":"no-stranger-pool","capEligible":false,"bondedEver":false,"reqTotal":1,"reqUnbonded":0,"selfReqDayEntries":0,"npcNew":9,"firstBearerNew":2,"firstBearerNewUndriven":2,"laterBearerNew":0,"pickRank":1,"incall":true}
+{"seed":"33503","cap":"bonded-d14","capEligible":true,"bondedEver":true,"probeVid":"Petra","reqTotal":8,"reqUnbonded":1,"selfReqDayEntries":0,"npcNew":5,"firstBearerNew":2,"firstBearerNewUndriven":1,"laterBearerNew":0,"pickRank":1,"incall":true}
+{"seed":"33504","cap":"bonded-d14","capEligible":true,"bondedEver":true,"probeVid":"Hugo","reqTotal":5,"reqUnbonded":1,"selfReqDayEntries":0,"npcNew":18,"firstBearerNew":3,"firstBearerNewUndriven":3,"laterBearerNew":0,"pickRank":1,"incall":true}
+{"seed":"33505","cap":"no-stranger-pool","capEligible":false,"bondedEver":false,"reqTotal":3,"reqUnbonded":0,"selfReqDayEntries":0,"npcNew":3,"firstBearerNew":0,"firstBearerNewUndriven":0,"laterBearerNew":1,"pickRank":1,"incall":true}
+{"seed":"33506","cap":"no-stranger-pool","capEligible":false,"bondedEver":false,"reqTotal":2,"reqUnbonded":0,"selfReqDayEntries":0,"npcNew":0,"firstBearerNew":0,"firstBearerNewUndriven":0,"laterBearerNew":0,"pickRank":1,"incall":true}
+CAP-D14 verdict: bonded-by-d14 2/2 eligible seeds (bar: >=3 of 4 pilot seeds with opened probe + same-bearer relD14).
+CAP-D14 non-denominator: ["no-stranger-pool","no-stranger-pool","no-stranger-pool"]
+Descriptive bondedEver (probe pair bonded in ANY snapshot): 2/2 probe-opened seeds.
+OPP totals: unbonded talk-requests 2; FIRST-bearer new bonds on undriven days 6; NPC-NPC new bonds 35; selfReqDayEntries total 0 (r133 purge regression check, expect 0).

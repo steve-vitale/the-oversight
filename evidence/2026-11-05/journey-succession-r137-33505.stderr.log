@@ -1,0 +1,31 @@
+
+ORGANIC DEATH d37: Zoey -> Axel, topTrust=[{"id":"Wanjiru","t":99},{"id":"DeAndre","t":92},{"id":"Jesse","t":92},{"id":"Kurt","t":84}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=29 inheritedPlants=0 keptSkills=6 inheritedSkills=0 succTrustPre=91 succTrustPost=60
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","green_whisper"] post=["beast_calm","green_whisper"]
+DEATH d37 (organic (phase A)): Zoey -> Axel | passed=true lin=true mo=true trust=60 vouchers=7
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Wanjiru (refused=false)
+  CONVO d+3 with DeAndre (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with DeAndre (refused=false)
+  CONVO d+7 with Jesse (refused=false)
+  CONVO d+14 with DeAndre (refused=false)
+  CONVO d+14 with Jesse (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=1 (eligible=7) echo=0 organicBurial={"respects":false,"bury":false} halfRation=1
+
+MEAL-GATE: audited=25 violations=0 noMealDays=3 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=26 signals={"levelUp":true,"systemVoice":25,"offerLines":23,"codexPlantsDelta":16,"codexSkillsDelta":21,"codexAbilitiesDelta":12,"xpDelta":-44,"any":true} pantry 39965->1000
+TRUST-DIALS: office 60->83 (+23, climb) | villageMean 72.6->81.8 (+9.2, climb) | ge60 7->8 | movers>=5: [{"id":"Mateo","from":44,"to":74,"delta":30},{"id":"Natalia","from":66,"to":82,"delta":16},{"id":"Fatima","from":46,"to":62,"delta":16},{"id":"Aisha","from":63,"to":75,"delta":12},{"id":"Nathan","from":67,"to":78,"delta":11},{"id":"Kurt","from":84,"to":91,"delta":7},{"id":"DeAndre","from":92,"to":98,"delta":6}]
+DEED-LEDGER: calls=26 summary={"teachPlant":{"calls":9,"ok":9,"deltaSum":0,"deltaN":9,"positive":0,"meanDelta":0},"donateToPantry":{"calls":7,"ok":7,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"giveFood":{"calls":10,"ok":10,"deltaSum":16,"deltaN":10,"positive":7,"meanDelta":1.6}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=false(echoMentions=0 (convo=0, say=0)) m4=true m5=manual | endDay=63 alive=0 over=true
+anomalies: 0
+say dump -> evidence/2026-11-05/journey-succession-r137-33505.saydump.txt
+S-METRICS: s1=false s2=true s3=true s4=false s5=true dayAdv=26
+T-METRICS: t1=true(panels=d+0,d+8,d+14) t2=true(deedCalls=26) trustVerdict={"readable":true,"officeMantle":60,"officeLast":83,"officeDelta":23,"officeClass":"climb","villageMantle":72.6,"villageLast":81.8,"villageDelta":9.2,"villageClass":"climb","villageGe60Mantle":7,"villageGe60Last":8,"movers":[{"id":"Mateo","from":44,"to":74,"delta":30},{"id":"Natalia","from":66,"to":82,"delta":16},{"id":"Fatima","from":46,"to":62,"delta":16},{"id":"Aisha","from":63,"to":75,"delta":12},{"id":"Nathan","from":67,"to":78,"delta":11},{"id":"Kurt","from":84,"to":91,"delta":7},{"id":"DeAndre","from":92,"to":98,"delta":6}]}
+E6/CALLCHECK: e6={"callMoves":11,"withCensus":11,"chainHandoffs":5,"trustMoves":6} callCheck={"dailyMoveDays":11,"callMoveDays":9,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=2 (v2=2, excludedLoot=0))
+E7/R47: e7={"trustMoves":6,"soloOffice":1,"soloOfficeDeltas":[1],"soloBearerDeltaExact":[1],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":2,"both":4,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":0,"v2":2,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":11,"known":11,"unknown":0} e3={"dailyDays":26,"moves":11}

@@ -1,0 +1,31 @@
+
+ORGANIC DEATH d12: June -> Jorge, topTrust=[{"id":"Diego","t":90},{"id":"Mateo","t":89},{"id":"Sam","t":55},{"id":"Jorge","t":50}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=14 inheritedPlants=0 keptSkills=5 inheritedSkills=0 succTrustPre=90 succTrustPost=50
+PARITY readable=true equal=true inherited=[] pre=["green_whisper"] post=["green_whisper"]
+DEATH d12 (organic (phase A)): June -> Jorge | passed=true lin=true mo=true trust=50 vouchers=2
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Diego (refused=false)
+  CONVO d+3 with Mateo (refused=false)
+  STRANGER-PROBE d+3 with Petra (trust=44 refused=false)
+  CONVO d+7 with Diego (refused=false)
+  CONVO d+7 with Mateo (refused=false)
+  CONVO d+14 with Sam (refused=false)
+  CONVO d+14 with Diego (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=1 (eligible=2) echo=6 organicBurial={"respects":false,"bury":false} halfRation=1
+
+MEAL-GATE: audited=14 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=14 signals={"levelUp":true,"systemVoice":36,"offerLines":13,"codexPlantsDelta":6,"codexSkillsDelta":3,"codexAbilitiesDelta":3,"xpDelta":36,"any":true} pantry 15300->0
+TRUST-DIALS: office 50->50 (+0, flat) | villageMean 41.5->51 (+9.5, climb) | ge60 2->3 | movers>=5: [{"id":"Sam","from":55,"to":86,"delta":31},{"id":"Petra","from":39,"to":46,"delta":7},{"id":"Mateo","from":89,"to":77,"delta":-12},{"id":"Diego","from":90,"to":77,"delta":-13}]
+DEED-LEDGER: calls=9 summary={"teachPlant":{"calls":3,"ok":3,"deltaSum":0,"deltaN":3,"positive":0,"meanDelta":0},"giveFood":{"calls":6,"ok":6,"deltaSum":2,"deltaN":6,"positive":2,"meanDelta":0.33}}
+
+IDENTITY TRIPS: raw=1 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=6 (convo=6, say=0)) m4=true m5=manual | endDay=26 alive=8 over=true
+anomalies: 0
+say dump -> evidence/2026-11-05/journey-succession-r137-33503.saydump.txt
+S-METRICS: s1=false s2=true s3=true s4=false s5=true dayAdv=14
+T-METRICS: t1=true(panels=d+0,d+7,d+14) t2=true(deedCalls=9) trustVerdict={"readable":true,"officeMantle":50,"officeLast":50,"officeDelta":0,"officeClass":"flat","villageMantle":41.5,"villageLast":51,"villageDelta":9.5,"villageClass":"climb","villageGe60Mantle":2,"villageGe60Last":3,"movers":[{"id":"Sam","from":55,"to":86,"delta":31},{"id":"Petra","from":39,"to":46,"delta":7},{"id":"Mateo","from":89,"to":77,"delta":-12},{"id":"Diego","from":90,"to":77,"delta":-13}]}
+E6/CALLCHECK: e6={"callMoves":0,"withCensus":0,"chainHandoffs":0,"trustMoves":0} callCheck={"dailyMoveDays":0,"callMoveDays":0,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=7 (v2=7, excludedLoot=0))
+E7/R47: e7={"trustMoves":0,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":0,"both":0,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":6,"v2":7,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":0,"known":0,"unknown":0} e3={"dailyDays":15,"moves":0}

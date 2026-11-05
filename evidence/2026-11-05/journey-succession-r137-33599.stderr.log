@@ -1,0 +1,31 @@
+
+PRE-DEATH d6: bearer <redacted>, topTrust=[{"id":"Jad","t":51},{"id":"Omar","t":38},{"id":"Luis","t":37},{"id":"Tumelo","t":34}], roster=12
+INH readable=true scripted=true deadItems=7 distinct=7 transferred=1 vanished=1 keptPlants=6 inheritedPlants=3 keptSkills=6 inheritedSkills=4 succTrustPre=51 succTrustPost=26
+PARITY readable=true equal=true inherited=[] pre=["night_eyes"] post=["night_eyes"]
+DEATH d6 (the expedition, scripted): Sophia -> Jad | passed=true lin=true mo=true trust=26 vouchers=0
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=3 vanished=1 of 7 distinct dead-bearer items
+  CONVO d+3 with Omar (refused=false)
+  CONVO d+3 with Quinn (refused=false)
+  STRANGER-PROBE d+3 with Sarah (trust=42 refused=false)
+  BOND-CONVO d+3 with Tumelo (depth=0 v=6 refused=false)
+  CONVO d+7 with Tumelo (refused=false)
+  CONVO d+7 with Quinn (refused=false)
+
+FUNERAL: deathBeat=1 recover=1 vouch=0 (eligible=0) echo=3 organicBurial={"respects":false,"bury":false} halfRation=0
+
+MEAL-GATE: audited=10 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=10 signals={"levelUp":true,"systemVoice":21,"offerLines":5,"codexPlantsDelta":10,"codexSkillsDelta":4,"codexAbilitiesDelta":4,"xpDelta":28,"any":true} pantry 24450->12450
+TRUST-DIALS: office 26->34 (+8, climb) | villageMean 22.6->30.7 (+8.1, climb) | ge60 0->2 | movers>=5: [{"id":"Stephen","from":16,"to":52,"delta":36},{"id":"Quinn","from":31,"to":65,"delta":34},{"id":"Tumelo","from":34,"to":64,"delta":30},{"id":"Luis","from":37,"to":49,"delta":12},{"id":"Walt","from":10,"to":2,"delta":-8},{"id":"Liam","from":8,"to":0,"delta":-8},{"id":"Victor","from":21,"to":1,"delta":-20}]
+DEED-LEDGER: calls=4 summary={"teachPlant":{"calls":2,"ok":2,"deltaSum":0,"deltaN":2,"positive":0,"meanDelta":0},"giveFood":{"calls":2,"ok":2,"deltaSum":11,"deltaN":2,"positive":2,"meanDelta":5.5}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a="n/a (none eligible)" m2b=false m3=true(echoMentions=3 (convo=3, say=0)) m4=true m5=manual | endDay=16 alive=10 over=false
+anomalies: 0
+say dump -> evidence/2026-11-05/journey-succession-r137-33599.saydump.txt
+S-METRICS: s1=false s2=true s3=true s4=true s5=true dayAdv=10
+T-METRICS: t1=false(panels=d+0,d+8,d+10) t2=true(deedCalls=4) trustVerdict={"readable":true,"officeMantle":26,"officeLast":34,"officeDelta":8,"officeClass":"climb","villageMantle":22.6,"villageLast":30.7,"villageDelta":8.1,"villageClass":"climb","villageGe60Mantle":0,"villageGe60Last":2,"movers":[{"id":"Stephen","from":16,"to":52,"delta":36},{"id":"Quinn","from":31,"to":65,"delta":34},{"id":"Tumelo","from":34,"to":64,"delta":30},{"id":"Luis","from":37,"to":49,"delta":12},{"id":"Walt","from":10,"to":2,"delta":-8},{"id":"Liam","from":8,"to":0,"delta":-8},{"id":"Victor","from":21,"to":1,"delta":-20}]}
+E6/CALLCHECK: e6={"callMoves":2,"withCensus":2,"chainHandoffs":1,"trustMoves":1} callCheck={"dailyMoveDays":2,"callMoveDays":2,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=4 (v2=4, excludedLoot=0))
+E7/R47: e7={"trustMoves":1,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":0,"both":1,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":3,"v2":4,"v2Say":1,"v2Delta":1,"arcExcluded":1,"teleWeek2":2,"collision":[]} e2={"chainN":1,"known":1,"unknown":0} e3={"dailyDays":11,"moves":2}
