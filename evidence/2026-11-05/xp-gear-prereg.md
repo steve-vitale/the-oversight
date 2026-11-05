@@ -163,3 +163,41 @@ as written above).
   policy/horizon. The 120-day capable after-arm is RE-RUN on the amended
   build (v1 after-arm archived to xp-gear-panel-after-v1/); the before-arm
   is untouched.
+
+## ADDENDUM 2 — the patrol deed never fires under the panel bots
+## (2026-11-05 ~15:35 CST, BEFORE the delegate panel runs)
+V2 after-arm (re-run on the amended build, 8 seeds capable 120d): the
+numbers are BYTE-IDENTICAL to v1 (total deed XP 11077, thresholds 129,
+healers 0, wave-4 rounds 1.48, guardrails identical) — because the patrol
+deed granted ZERO credits in the whole panel (deed mix has no 'patrol';
+patrolGranted 0/seed). The wiring is proven (proof test 13/13 drives
+resolvePatrol directly), so the cause is the BOT, not the deed: the
+capable/competent bots NEVER ASSIGN TASKS. delegate.js's header says it
+plainly (r11, 2026-10-17): "the competent policy never assigns tasks
+(asg={} empty on all seeds, all weeks), so the whole delegation economy
+goes unexercised in sims." Patrol is a duty — it only happens when
+someone (the player, a task lead, or a delegating bot) assigns it — so
+under capable/competent it never happens, and the patrol deed never
+fires. Same root cause as the v1 finding that hunting/trade never fire
+(hunt duty never assigned). The capable panel's combat-42 (16 villagers
+crossed 18 by day 42, max 24) is therefore FIGHT-driven, not patrol-
+driven — it shows the v1 build's effect, not the patrol deed's.
+- Targeted measurement (does NOT change any bar): run the panel with
+  POLICY=delegate (scripts/policies/delegate.js — withDelegate(competent):
+  a competent-derived bot that assigns duties the way a real delegating
+  player would, patrol to the able at r<0.35), seeds 1501–1504 (r104's
+  seeds), DAYS=42, output evidence/2026-11-05/xp-gear-delegate42-after/.
+  The driver accepts a policy-file id now (registry fallback to
+  scripts/policies/<id>.js). What it must show: patrol credits granted
+  > 0 in the wild, and villagers crossing combat 18 whose crossing is
+  decisive on patrol XP (combat42 - patrolXP < 18 <= combat42). The
+  est42 competent numbers stand as the no-delegation picture.
+- Note the est42 divergence, recorded honestly: on the build, competent
+  seed 1501's village is LOST by day 21 (r104: survived to day 43, 9
+  alive) and 1503 has 2 living at day 42 (r104: 9). The build's gameplay
+  changes (gear, synergy, healing XP) move early-game survival per seed
+  — a butterfly, same class as the seed flips the v1 run note documents.
+  The capable 120d guardrails are unchanged vs v1 (survival 99.63, wins
+  0.63), so this is a per-seed early-window swing, not a panel-wide
+  regression. Flagged for the main session; not chased here (no code in
+  this build targets competent/42d survival).

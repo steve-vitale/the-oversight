@@ -20,7 +20,13 @@ const { runComparison, POLICY_REGISTRY: registry } = require(path.join(ROOT, 'sc
 const E = (...a) => console.error(...a);
 
 async function main() {
-  const base = registry[POLICY];
+  // POLICY may name a registry id (capable, competent) or a policy file
+  // that exports its own id but is not registered (e.g. delegate.js exports
+  // { delegate } — the delegating layer competent/capable never use).
+  let base = registry[POLICY];
+  if (!base) {
+    try { const mod = require(path.join(ROOT, 'scripts', 'policies', POLICY + '.js')); base = mod && mod[POLICY]; } catch (e) { /* fall through */ }
+  }
   if (!base) throw new Error('Unknown policy ' + POLICY);
   let G = null;
   const fights = [], healChecks = [], careRescues = [], triages = [], deedCredits = [], synergyCredits = [];

@@ -204,6 +204,48 @@ if (est42.length) {
   const liv = est42.reduce((x, e) => x + e.living, 0);
   L.push(`  AFTER (this build): max combat XP ${mx}, ${tot}/${liv} living villagers crossed 18 by day 42. ${tot > 0 ? 'REACHABLE — 18 crossed in-window.' : 'NOT REACHED — 18 still uncrossed in 42 days.'}`);
 }
+// --- delegate panel (addendum 2): a bot that actually assigns patrol ---
+// NOTE on deedCredits.credited: creditDeed returns gainTrackXP's result,
+// which is the NEW TOTAL XP, not the granted amount (0 when capped). So
+// credited > 0 means "granted", and the granted amount is c.n (the deed's
+// face value — 1 for patrol). Sum n, never credited.
+const DEL_SEEDS = [1501, 1502, 1503, 1504];
+const del = [];
+for (const seed of DEL_SEEDS) {
+  const fp = path.join(EVID, 'xp-gear-delegate42-after', 'xp-gear-' + seed + '.stdout.json');
+  if (!fs.existsSync(fp)) continue;
+  const r = JSON.parse(fs.readFileSync(fp, 'utf8'));
+  if (!r || r.excluded) continue;
+  const dc = r.deedCredits || [];
+  const patrolGranted = dc.filter(c => c.deed === 'patrol' && (c.credited || 0) > 0).length;
+  const patrolXpByVid = {};
+  for (const c of dc) {
+    if (c.deed !== 'patrol' || (c.credited || 0) <= 0 || (c.day || 0) > 42) continue;
+    patrolXpByVid[c.who] = (patrolXpByVid[c.who] || 0) + (c.n || 1);
+  }
+  const c42 = r.combat42 || null;
+  const decisive = [];
+  if (c42) for (const [vid, xp] of Object.entries(c42.perVillager || {})) {
+    if ((xp || 0) >= 18) {
+      const px = patrolXpByVid[vid] || 0;
+      if (px > 0 && xp - px < 18) decisive.push(vid + ' (combat ' + xp + ', of it patrol ' + px + ')');
+    }
+  }
+  del.push({ seed, gameDays: r.gameDays, endReason: r.endReason, patrolGranted,
+    patrolRaw: dc.filter(c => c.deed === 'patrol').length,
+    combat42: c42, decisive });
+}
+if (del.length) {
+  L.push('## G. Delegate panel — 42 days, delegate policy, seeds 1501-1504 (addendum 2: the bot that assigns patrol)');
+  L.push('  (Competent/capable never assign duties, so the patrol deed cannot fire under them. Delegate is competent + task delegation.)');
+  for (const d of del) {
+    L.push(`  - seed ${d.seed}: gameDays ${d.gameDays} (${d.endReason}) patrol granted ${d.patrolGranted} (raw ${d.patrolRaw}) combat42 max ${d.combat42 ? d.combat42.maxCombat : 'n/a'} crossed 18: ${d.combat42 ? d.combat42.crossed18 : 'n/a'} decisive-on-patrol: ${d.decisive.length ? d.decisive.join('; ') : 'none'}`);
+  }
+  const totPatrol = del.reduce((x, d) => x + d.patrolGranted, 0);
+  const totDecisive = del.reduce((x, d) => x + d.decisive.length, 0);
+  const totCrossed = del.reduce((x, d) => x + ((d.combat42 && d.combat42.crossed18) || 0), 0);
+  L.push(`  DELEGATE TOTAL: patrol credits granted ${totPatrol}; villagers crossed combat 18 by day 42: ${totCrossed}, of them decisive on patrol XP: ${totDecisive}. ${totPatrol > 0 ? 'The patrol deed FIRES in the wild when patrols are assigned.' : 'The patrol deed still never fired — investigate.'}`);
+}
 L.push('## Healing (supporting)');
 if (B || A) {
   cmp('heal checks (panel mean)', b => b.healChecks, a => a.healChecks, (b, a) => a.healChecks > b.healChecks, '>');
