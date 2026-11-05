@@ -101,6 +101,18 @@ for seed in SEEDS:
     census = {str(c['id']): c for c in (j.get('census') or [])}
     hold_end = j.get('holdingsEnd') or []
     hold_start = {str(h['id']): h for h in (j.get('holdingsStart') or [])}
+    # CORRECTION (r104 run note): the roster INCLUDES the current bearer
+    # (the player), whose skills/abilities live in player stores (codex /
+    # scholar), not npc stores. Reading npc stores for the bearer yields
+    # empty holdings — an artifact, not a villager with nothing. Exclude
+    # the end-player (identified by the r103 codex-skills match) from
+    # villager counts; both raw and corrected M1a are printed.
+    codex = j.get('playerCodexSkills') or {}
+    player_vid = None
+    for cid, c in census.items():
+        if c.get('skills') is not None and set(c['skills']) == set(codex.keys()) and len(codex) > 0:
+            player_vid = cid; break
+    hold_end_v = [h for h in hold_end if str(h['id']) != str(player_vid)] if player_vid else hold_end
     # --- M0 vs r103 ---
     ref = r103.get(seed)
     m0 = None
@@ -125,8 +137,8 @@ for seed in SEEDS:
         lesson_note = f'lessons r104={sum(lk104.values())} r103={sum(lk103.values())} diff={dict(diff) if diff else "none"}'
         m0 = same and not diff
         m0_seeds.append(m0)
-    # --- holdings ---
-    living = [h for h in hold_end if not h.get('dead')]
+    # --- holdings (villagers only; the bearer is excluded above) ---
+    living = [h for h in hold_end_v if not h.get('dead')]
     granted_holders = [h for h in living if (h.get('granted') or [])]
     owned_holders = [h for h in living if (h.get('owned') or [])]
     panel_living += len(living)
@@ -158,8 +170,9 @@ for seed in SEEDS:
             nxt = next((t for t in THRESHOLDS if cur < t), None)
             if nxt is not None:
                 xp_nearest.append((nxt - cur, seed, h.get('name'), tr, cur, nxt))
-    # fires in this run's telemetry (skill_used + ability_used naming a roster villager)
-    id2name = {str(h['id']): h.get('name') for h in hold_end}
+    # fires in this run's telemetry (skill_used + ability_used naming a
+    # roster VILLAGER — the bearer's firings do not count as villager use)
+    id2name = {str(h['id']): h.get('name') for h in hold_end_v}
     for t in tele:
         if t.get('type') not in ('skill_used', 'ability_used'):
             continue
@@ -183,8 +196,8 @@ for seed in SEEDS:
         m4_seeds += 1
     print(f'\n=== seed {seed} (endDay {j.get("endDay")}, over {j.get("gameOver")}, aliveEnd {j.get("aliveEnd")}, wave {j.get("waveReached")}, pantryEnd {j.get("pantryKcalEnd")}, playerAbilities {j.get("playerAbilitiesEnd")}) ===')
     print(f'  M0 vs r103: {"PASS" if m0 else "FAIL"} {lesson_note}')
-    print(f'  HOLDINGS end: living={len(living)} grantedHolders={len(granted_holders)} ownedHolders={len(owned_holders)}')
-    for h in hold_end:
+    print(f'  HOLDINGS end: livingVillagers={len(living)} (bearer excluded: {player_vid}) grantedHolders={len(granted_holders)} ownedHolders={len(owned_holders)}')
+    for h in hold_end_v:
         g = h.get('granted') or []
         o = h.get('owned') or []
         skill_derived = [x for x in o if x not in g]
@@ -193,7 +206,7 @@ for seed in SEEDS:
         print(f'    {"DEAD " if h.get("dead") else ""}{h.get("name")}: granted={g} skillDerived={skill_derived} skills={len(h.get("skills") or [])} xpLevels={lvls if lvls else "-"}')
     print(f'  skill_used rows: {sum(1 for t in tele if t.get("type") == "skill_used")} ability_used: {sum(1 for t in tele if t.get("type") == "ability_used")}')
 
-print(f'\nPANEL: livingEnd={panel_living} grantedHolders={panel_granted_holders} ownedHolders={panel_owned_holders}')
+print(f'\nPANEL: livingVillagersEnd={panel_living} grantedHolders={panel_granted_holders} ownedHolders={panel_owned_holders} (bearer excluded per run-note correction; as-printed raw was 29/33 including 4 bearers with empty npc stores)')
 print(f'  M0 INSTRUMENT-NEUTRALITY: {sum(1 for x in m0_seeds if x)}/{len(m0_seeds)} seeds exact')
 print(f'  M1a SHARE holding >=1 granted (magic) ability: {panel_granted_holders}/{panel_living} = {(panel_granted_holders/panel_living if panel_living else 0):.2f} -> {"WIDESPREAD" if panel_living and panel_granted_holders/panel_living >= 0.5 else ("SPARSE" if panel_living and panel_granted_holders/panel_living >= 0.1 else "RARE")}')
 print(f'  M1a SHARE holding >=1 owned ability (any source): {panel_owned_holders}/{panel_living} = {(panel_owned_holders/panel_living if panel_living else 0):.2f}')

@@ -1266,6 +1266,15 @@
       var dancedThisRound = false;
       for (var round = 1; round <= MAX_ROUNDS && !rec.outcome; round++) {
         rec.rounds = round;
+        // PATIENT-AIM ROUND-START HP (r104): full health is judged at the
+        // START of the round, before anyone acts. The monster usually hits
+        // first (initiative: monster speed vs villager 2-4), so judging live
+        // HP at the villager's action made the aim unreachable against
+        // anything faster than them — a full-HP villager facing a fresh
+        // monster could never take the aim (0/12 probe fights, 0 fires in
+        // 101 r103 skill_used rows). The card's "full health, fresh
+        // monster" is about how the round opens, not about winning initiative.
+        var vHpRoundStart = vHp;
         abRoundTaken = 0;
         vStruckThisRound = false;
         dancedThisRound = false;
@@ -1835,7 +1844,7 @@
             // Full health, fresh monster: spend this turn going still. The
             // next strike is 2.5x and cannot miss — the exposure is the
             // rounds already survived un-aimed.
-            } else if (!abAimed && vHasAb('patient_aim') && !abAim && vHp >= vHpMax && lead.hp > lead.maxHp * 0.5) {
+            } else if (!abAimed && vHasAb('patient_aim') && !abAim && vHpRoundStart >= vHpMax && lead.hp > lead.maxHp * 0.5) {
               abAimed = true; abAim = true;
               ffFired('patient_aim');
               rec.log.push('R' + round + ': ' + vName + ' goes still. Breath slows. The world narrows to the target. (Take Aim — next shot 2.5x)');
