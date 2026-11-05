@@ -66,7 +66,7 @@
 
   var REFUSE_COOLDOWN_DAYS = 14;
   var BOND_PROPOSE_P = 0.25;
-  var BOND_TICK_P = 0.25;   // npcBondTick: scholar-proposal staging lottery
+  var BOND_TICK_P = 0.18;   // npcBondTick: scholar-proposal staging lottery (tuning 3, 2026-11-05: 0.25 staged ~10/90d on long-lived villages; full panel hit 13/seed vs the prereg 12 cap — trim for margin)
   var PAIR_TICK_P = 0.08;   // npcPairBondTick: NPC->NPC proposal lottery
   var LINK_TICK_P = 0.5;    // npcLinkRaiseTick: link-raise staging lottery
   var TELL_P = 0.3;         // endConvo: scholar tells a villager a village
@@ -152,15 +152,15 @@
     try { if (G.bondKey) return G.bondKey(a, b); } catch (e) {}
     return a < b ? a + '|' + b : b + '|' + a;
   }
-  // Deterministic rolls (tuning 2, 2026-11-05): this module's lotteries
-  // must NOT consume Math.random. The shared seeded stream feeds the
-  // whole sim, and 2 draws/day of drift swung identical-seed panels
-  // by -48% days (84103 pilot 1) with zero game effect behind it —
-  // the paired panel then measures noise, not the build. A hash of
-  // (what, who, day) is deterministic per seed, stable across runs,
-  // and leaves the shared stream alone. The shared character decision
-  // (npcInviteDecision) still rolls Math.random — that is existing
-  // code, and it fires only per decided proposal (a few per run).
+  // Deterministic rolls (tuning 2, completed tuning 3, 2026-11-05): this
+  // module's lotteries must NOT consume Math.random. The shared seeded
+  // stream feeds the whole sim, and drift swung identical-seed panels
+  // with zero game effect behind it — the paired panel then measures
+  // noise, not the build. A hash of (what, who, day) is deterministic
+  // per seed, stable across runs, and leaves the shared stream alone.
+  // Tuning 2 pinned the module's own lotteries; tuning 3 pinned the
+  // character decision too (proposeBond passes a bondRoll decision
+  // roll, so npcInviteDecision never draws on the bond path).
   function bondHash(str) {
     var h = 2166136261;
     for (var i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
@@ -283,8 +283,15 @@
       return { ok: false, accepted: false, outcome: 'not-perceived', gate: false, perceived: false, channels: [] };
     }
     var decision = null;
+    // Tuning 3 (2026-11-05): the decision roll is hash-pinned too. The
+    // shared character decision draws Math.random when no roll is given,
+    // and 1-4 draws/run swung identical-seed panels (84102 bonds -29%,
+    // 84103 days -18% on the full panel) with no game effect behind the
+    // swing — the paired panel then measures noise, not the build.
+    // Tests still pin the roll through opts.roll.
+    var decideRoll = (typeof opts.roll === 'number') ? opts.roll : bondRoll('bonddecide', day, initiator, target);
     try {
-      decision = G.npcInviteDecision(target, initiator, { kind: 'bond', roll: opts.roll });
+      decision = G.npcInviteDecision(target, initiator, { kind: 'bond', roll: decideRoll });
     } catch (e) {
       bondWarn('proposeBond:decision', e);
       return { ok: false, accepted: false, outcome: 'no-decision', gate: true, perceived: true, channels: gate.channels };

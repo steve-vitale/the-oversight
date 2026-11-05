@@ -196,6 +196,33 @@ async function live() {
   } else {
     console.log('SKIP refusal pair: only one fire-group pair on this seed');
   }
+  // --- Tuning 3: an unpinned proposeBond decision draws no Math.random. ---
+  // (The shared seeded stream feeds the whole sim; a draw per decision
+  // swung identical-seed panels — 84102 bonds -29%, 84103 days -18% on
+  // the full panel — with no game effect behind the swing.)
+  let pair3 = null;
+  outer3: for (let i = 0; i < roster.length; i++) {
+    for (let j = 0; j < roster.length; j++) {
+      if (i === j) continue;
+      const x = roster[i], y = roster[j];
+      if (pair && ((x === pair[0] && y === pair[1]) || (x === pair[1] && y === pair[0]))) continue;
+      if (pair2 && ((x === pair2[0] && y === pair2[1]) || (x === pair2[1] && y === pair2[0]))) continue;
+      if (Game.bondProposalPerceived(x, y).perceived) { pair3 = [x, y]; break outer3; }
+    }
+  }
+  if (pair3) {
+    const origRandom = Math.random;
+    let draws = 0;
+    Math.random = function () { draws++; return origRandom(); };
+    let res3 = null;
+    try { res3 = Game.proposeBond(pair3[0], pair3[1]); } finally { Math.random = origRandom; }
+    eq('unpinned decision decides', res3 && res3.ok, true);
+    eq('unpinned decision draws no Math.random', draws, 0);
+    const res3b = Game.proposeBond(pair3[0], pair3[1]);
+    eq('same-day re-propose is the record', res3b.outcome, res3.accepted ? 'already-bonded' : 'cooldown');
+  } else {
+    console.log('SKIP no-random pair: no third perceived pair on this seed');
+  }
   // --- Unperceived pair: different groups, no bond, no gossip, no ally. ---
   let strangers = null;
   outer: for (let i = 0; i < roster.length; i++) {

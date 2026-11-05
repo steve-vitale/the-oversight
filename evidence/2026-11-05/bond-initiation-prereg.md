@@ -237,3 +237,35 @@ perception-law violation and fails the run.
   VISIT propose 0.25. Proof test 60/60 (new: expired/succession
   fixtures, pair-tick direct + 60d hook, lore tell, link cooldown);
   fingerprint identical across two separate processes.
+
+## Amendment 3 — full-panel NO-GO, tuning 3 (2026-11-05)
+- Full armed panel (8 seeds 84101–84108, 90d, tuning-2 code) judged
+  NO-GO: M1 true (8/8 seeds, 56 pooled proposals), M2 true (8/21 =
+  38.1% accepted, n=21), M3 FALSE (8 initiated >= 4, but maxPerSeed
+  13 > 12 — seeds 84106 and 84108), M4 true (106 link raises),
+  M5 FALSE (84102 bonds 42 vs baseline 59, -29%; 84103 days 74 vs
+  baseline 90, -18%), M6 true (0 gate fails, 0 errors). Panel JSONs
+  filed under perseed-bondinit-b/panel1-nogo/; baseline unchanged.
+- M3 cause: staging dominates the count (84106: 10 staged + 3
+  decided; 84108: 10 staged + 3 decided). The 0.25 scholar-staging
+  gate stages ~10/90d on long-lived villages. Fix: staging gate
+  0.25 -> 0.18 (expected ~7 staged, total ~11/seed with margin).
+  Pair tick (3–4/seed) untouched.
+- M5 cause: RNG-stream drift, same class as tuning 2's fix 5 but
+  one draw deeper. The module's own lotteries were hash-pinned in
+  tuning 2, yet the shared character decision (npcInviteDecision)
+  still drew Math.random per decided proposal — 1 draw on 84102, 4
+  on 84103 — and a single draw shifts the whole seeded stream
+  downstream, so the paired panel measured noise (84102 bonds -29%
+  with the village living LONGER, 63d vs 55d; 84103 dying 16 days
+  earlier). No mechanism in the module reduces bonds or kills
+  villagers; per-seed bond rates move both ways across the panel.
+  Fix: proposeBond now passes a hash-pinned decision roll
+  (bondRoll('bonddecide', day, initiator, target)) to
+  npcInviteDecision; opts.roll still pins it for tests. The module
+  now consumes zero Math.random anywhere — its own rule
+  (bondinit_no_stream_drift) finally holds end to end. Proof test
+  adds an unpinned-decision-draws-zero-Math.random test (63/63).
+- Gates now: staging 0.18, pair tick 0.08, link tick 0.5, tell 0.3,
+  VISIT propose 0.25. Bars unchanged. The armed panel re-runs on
+  the same 8 seeds against the same baseline.
