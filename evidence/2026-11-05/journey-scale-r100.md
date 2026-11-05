@@ -49,6 +49,13 @@ landed here.
   (see Q1). No re-scoring was done: the gate is judged as written,
   and the control is reported alongside it.
 - Lock discipline held throughout; lock deleted at closeout.
+- **Rebase proof:** local master moved during the run (sim-
+  freshkill-a, 3 commits, evidence + sim driver, zero file overlap
+  with this branch). Branch rebased onto d661b0604 cleanly, no
+  quirk; full quad re-run on the rebased base reproduces the census
+  EXACTLY on all 4 seeds (day/over/pop/pantry/rank/pilgrimages/
+  studies/fill counters all MATCH). The proof re-run's scratch
+  dir was removed, not committed.
 
 ## Q1 — FILL ARM ELIMINATES DRY WALK-OUTS (binding)
 **FINDING clause: FAIL as a demonstration — the arm did not produce
