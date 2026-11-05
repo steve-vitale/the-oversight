@@ -224,3 +224,25 @@ stranded-day zeros are false negatives from the gap); their
 trajectories stand (determinism proof re-verified on the re-run).
 The panel is RE-RUN a second time with the corrected instrument and
 M6 is judged on that run only.
+
+## INSTRUMENT CORRECTION 3 (pre-judgment of M6 — day attribution was wrong)
+
+The second re-run's M6 read NO-GO — 4 burst + 2 settle + 3 witness +
+1 tale lines on stranded days, all on seed 41802. A probe
+(scripts/probe-r141-emittime.js, seed 41802, 55 days, socialite
+policy) classified every naming-beat line AT EMIT TIME with the
+scholar's position then: 52 burst + 26 settle + 8 witness + 22 tale
+lines emitted AT Haven, ZERO emitted away. The gate holds; the
+day-slice attribution was the artifact — a slice covers the previous
+day's parts (lines emitted at Haven mid-day) while its stranded flag
+reads the NEXT morning's position (the scholar left in the evening
+and slept wild). CORRECTION (read-only, no Game call changes, no
+RNG): the driver now classifies each naming-beat line in the emit
+wrap itself, recording position at emit time, and the daily census
+aggregates those records (plain counts = delivered at Haven;
+*Away counts = emitted while away). The M6 verdict binds on the
+*Away counts only; stranded-day plain counts are context, not a
+leak. The first THREE panel runs' nightlyNews are discarded as
+verdict inputs for M6; the panel is RE-RUN a third time and M6 is
+judged on that run only. Trajectories re-verified each time by the
+determinism proof.

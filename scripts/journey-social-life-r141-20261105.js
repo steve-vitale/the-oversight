@@ -313,10 +313,32 @@ async function oneSeed(seed) {
   // text capture ON (emit = the one text stream)
   const captured = [];
   let capDropped = 0; // r141 M6: emit-trim accounting (see below)
+  // r141 M6 (correction 3): emit-time classification of naming-beat lines.
+  // Each burst/settle/witness/tale line is recorded WITH the scholar's
+  // position at the moment it was emitted — the only position that
+  // decides whether the line reached them. (Day-slice attribution was
+  // wrong: a slice covers the previous day's parts, where the scholar
+  // may have been at Haven, while its stranded flag reads the next
+  // morning's position. probe-r141-emittime proved it: 108 classified
+  // lines on seed 41802, 0 emitted away.)
+  const newsLines = [];
   try {
     const _emit = Game.emit;
     Game.emit = function (...a) {
       try { captured.push({ d: (Game.state.scholar || {}).day || 0, s: a[1] || 'narration', t: String(a[0] || '').slice(0, 300) }); } catch (e) {}
+      try {
+        const t = String(a[0] || '');
+        let kind = null;
+        if (gc.isGossipBurstLine(t)) kind = 'burst';
+        else if (gc.isSettleLine(t)) kind = 'settle';
+        else if (/came back from the treeline white-faced/.test(t)) kind = 'witness';
+        else if (/The fire settles\./.test(t)) kind = 'tale';
+        if (kind) {
+          let atHaven = true;
+          try { atHaven = Game.scholarAtHaven(); } catch (e2) {}
+          newsLines.push({ day: (Game.state.scholar || {}).day || 0, kind, atHaven: !!atHaven });
+        }
+      } catch (e) {}
       // r141 M6: the 50k trim drops the OLDEST entries, so any index
       // recorded before a trim points past the new array's end. Track how
       // many entries were dropped so daily slices can use GLOBAL indices
@@ -478,32 +500,31 @@ async function oneSeed(seed) {
       }
       ctxShared.lastBearer = b;
     } catch (e) {}
-    // r141 M6 (read-only): nightly haven-news census. Count naming-beat
-    // lines delivered since the LAST daily call — the slice runs from the
-    // previous daily's end to this daily's end, so it covers the night's
-    // endDay beats (the naming debate fires in endDay/advancePart, AFTER
-    // policy.daily returns — a slice from this daily's start would miss
-    // them entirely; probe-r141-trim proved it: slice-method 2 burst
-    // lines vs 48 in the full stream on seed 41801). Global indices
-    // (capDropped + length) so the 50k emit-trim cannot shift the slice.
-    // Stranded = scholar away from Haven when the slice is read, i.e.
-    // where they spent the night — the position the slice's endDay lines
-    // were delivered to. Classifiers are the gossipcensus-a ones; no
-    // Game call changes, no RNG.
+    // r141 M6 (read-only, correction 3): nightly haven-news census,
+    // aggregated from the emit-time classification (newsLines), NOT from
+    // a text slice — a slice conflates WHEN a line was emitted with
+    // WHERE the scholar was the next morning. Counts per kind are split
+    // by the scholar's position AT EMIT TIME: plain counts = lines
+    // delivered at Haven (the debate alive), *Away counts = lines
+    // emitted while away (the defect — must be 0). newsLines is never
+    // trimmed, so index slicing over it is safe. Stranded is still the
+    // daily-exit notion (where they spent the night), kept for context.
+    // No Game call changes, no RNG.
     try {
-      const m6start = Math.max(0, (ctxShared._m6endGlobal || 0) - capDropped);
-      const dayLines = captured.slice(m6start).map(c => String(c.t || ''));
+      const n0 = ctxShared._newsIdx || 0;
+      const dayLines = newsLines.slice(n0);
+      ctxShared._newsIdx = newsLines.length;
       let burst = 0, settle = 0, witness = 0, tale = 0;
-      for (const t of dayLines) {
-        if (gc.isGossipBurstLine(t)) burst++;
-        else if (gc.isSettleLine(t)) settle++;
-        if (/came back from the treeline white-faced/.test(t)) witness++;
-        if (/The fire settles\./.test(t)) tale++;
+      let burstAway = 0, settleAway = 0, witnessAway = 0, taleAway = 0;
+      for (const l of dayLines) {
+        if (l.kind === 'burst') { burst++; if (!l.atHaven) burstAway++; }
+        else if (l.kind === 'settle') { settle++; if (!l.atHaven) settleAway++; }
+        else if (l.kind === 'witness') { witness++; if (!l.atHaven) witnessAway++; }
+        else if (l.kind === 'tale') { tale++; if (!l.atHaven) taleAway++; }
       }
       let stranded = false;
       try { stranded = !G2.scholarAtHaven(); } catch (e2) {}
-      ctxShared.nightlyNews.push({ day: d, stranded, burst, settle, witness, tale });
-      ctxShared._m6endGlobal = capDropped + captured.length;
+      ctxShared.nightlyNews.push({ day: d, stranded, burst, settle, witness, tale, burstAway, settleAway, witnessAway, taleAway });
     } catch (e2) {}
     if (d === 30 || d === 60 || d === 90) ctxShared.bondSnaps.push(bondSnap(G2));
     if (d === 30 || d === 60 || d === 90 || d === 120) ctxShared.darkSnaps.push(darkSnap(G2));
