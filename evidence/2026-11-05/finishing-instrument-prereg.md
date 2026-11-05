@@ -106,6 +106,34 @@ revision for the NEXT run.
   `damageDealt` minus `preRoundDealt`; the analyzer states the split
   rather than re-deriving the volley.
 
+## Amendment 2 (2026-11-05, before the judged panel run — r1 pilot findings)
+
+- The r1 pilot (RUN finish-instrument-pilot, same seeds 99311–99318, same
+  policy/horizon) fired and proved coverage on its own terms (45/45 fights
+  with rounds, 45/45 matching fight_finish events, 0 instrument errors),
+  but its analysis found two instrument gaps, fixed before the judged run:
+  1. TB round snapshots were HP-only: no per-round dealt/taken/abilities,
+     so the last-3 and terminal tables were field-only. Fixed: each TB
+     snapshot now carries dealt/taken (backward delta from the previous
+     snapshot; the terminal round's dealt is exact, interior rounds carry
+     the documented one-snapshot attribution lag of the tbAdvance timing),
+     leaderTaken/allyTaken, vHpStart/vHpEnd, mHpStart/mHpEnd, and the
+     abilities fired in that round (drained at snapshot time).
+  2. Strict kill match missed the scholar: the killer id in waveKillLog
+     is the scholar's villager id, but the analyzer only accepted
+     'player' or a companion id, while the instrument already records the
+     scholar id in the record's `fighter` field. Fixed in both the
+     instrument's tbKillMatched and the analyzer: a log row matches when
+     by === record.fighter (scholar) as well as by === 'player' or a
+     companion id.
+  3. TB round snapshots now fill the player entry's vid from the record's
+     fighter id (was null — the scholar's tbfight entry carries no
+     villagerId).
+- The judged run is R2 (RUN finish-instrument-pilot-r2, OUTDIR
+  perseed-finish-instrument-r2, same seeds 99311–99318, same
+  policy/horizon). R1 files are retained as the pilot that found the
+  gaps. Verdict rule unchanged.
+
 ## Metric review (to fill after the panel)
 
 - (pending)
