@@ -158,7 +158,6 @@ async function liveLegs() {
   const s5 = AN.analyzeSeed(seedOut([fieldFight({ ending: 'kill', outcomeRaw: 'vKill', fighters: ['leader', 'outsider'] })], [killRow]));
   check('analyzer-matched-kill', s5.unmatchedKills.length === 0, JSON.stringify(s5.unmatchedKills));
 
-  const dirOut = AN.analyzeDir ? null : null;
   check('analyzer-exports', typeof AN.analyzeDir === 'function' && typeof AN.analyzeSeed === 'function');
 })();
 
