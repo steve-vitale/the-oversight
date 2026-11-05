@@ -174,16 +174,42 @@ function analyzeSeed(corpus) {
         firstCoIdx = (firstCoIdx == null) ? m0 : Math.min(firstCoIdx, m0);
       }
       it.firstCoIdx = firstCoIdx;
+      // First co-location TILE (triggerbuild 2026-11-05, stale-marker
+      // fix): the tile the player shared with the instance at first
+      // co-location. The instrument's tile-change marker is LAZY — it
+      // is recorded on the next monsterTurn call after the tile key
+      // changes, so a parting turn's own pre-hook records the ARRIVAL
+      // onto the co-location tile (to == co-location tile) BEFORE its
+      // own mtCall record. That marker is not a departure from the
+      // tile and must not end the episode — the prereg states the
+      // parting turn "falls inside the episode". A departure marker
+      // is a tile-change whose TO tile differs from the co-location
+      // tile. Unknown tile (no spawn-on-player, no mtCall): no
+      // exclusion, old behavior.
+      let firstCoTile = null;
+      if (it.spawnOnPlayer) {
+        const sp = postSpawns.find(function (s) { return s.seq === it.seq; });
+        if (sp) firstCoTile = [sp.tx, sp.ty];
+      }
+      if (!firstCoTile && it.mt.length) {
+        const m0 = it.mt.reduce(function (a, c) { return (c.idx < a.idx) ? c : a; });
+        if (m0.px != null) firstCoTile = [m0.px, m0.py];
+      }
+      it.firstCoTile = firstCoTile;
+      function isDepartureMarker(tc) {
+        if (!firstCoTile) return true;
+        return !(tc.to && tc.to[0] === firstCoTile[0] && tc.to[1] === firstCoTile[1]);
+      }
       const departedBySnap = it.sepDays.some(function (d) { return d >= it.firstCoDay; });
       const departedByMarker = tileChanges.some(function (tc) {
         if (firstCoIdx != null) {
           if (tc.idx <= firstCoIdx) return false;
           if (it.removal && tc.idx > it.removal.idx) return false;
-          return true;
+          return isDepartureMarker(tc);
         }
         if (tc.day <= it.firstCoDay) return false;
         if (it.removal && tc.day >= it.removal.day) return false;
-        return true;
+        return isDepartureMarker(tc);
       });
       if (departedBySnap || departedByMarker) it.subCause = 'player-left-the-tile';
       else if (it.removal) {
@@ -206,13 +232,17 @@ function analyzeSeed(corpus) {
     // next call records — it falls inside the episode. A later return
     // episode's calls fall after the marker and are excluded. No marker
     // (run ended, or removal before any later call): all calls count,
-    // flagged as a fallback upper bound.
+    // flagged as a fallback upper bound. STALE-MARKER RULE (2026-11-05):
+    // a marker whose TO tile is the co-location tile is the lazy
+    // arrival record, not a departure — it is skipped, never the
+    // episode end (see firstCoTile above).
     if (playerReach && !it.foughtWorld) {
       let depIdx = null;
       if (it.firstCoIdx != null) {
         for (const tc of tileChanges) {
           if (tc.idx <= it.firstCoIdx) continue;
           if (it.removal && tc.idx > it.removal.idx) continue;
+          if (it.firstCoTile && tc.to && tc.to[0] === it.firstCoTile[0] && tc.to[1] === it.firstCoTile[1]) continue;
           depIdx = tc.idx; break;
         }
       }

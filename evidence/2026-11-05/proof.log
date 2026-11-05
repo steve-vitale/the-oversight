@@ -4,9 +4,13 @@ PASS fixture seq1: subCause player-left
 PASS fixture seq2: firstEp 0 (return-episode call excluded)
 PASS fixture seq2: no fallback (marker exists)
 PASS fixture seq3: firstEp 2 with fallback flagged
-PASS band: firstEpContact 2 of 3
+PASS fixture seq4: firstEp 1 (stale arrival marker skipped, parting turn counted)
+PASS fixture seq4: viaTravel attributed
+PASS fixture seq4: no fallback (true departure marker exists)
+PASS fixture seq4: subCause player-left
+PASS band: firstEpContact 3 of 4
 PASS band: zeroTurnPlayerLeft 1 (seq2 only)
-PASS band: partingLines 1
+PASS band: partingLines 2
 PASS legA: a travel target exists
 PASS legA: spawned wave-4 eulogy on player tile
 PASS legA: exactly one parting monsterTurn
@@ -32,4 +36,4 @@ PASS legD: no extra monsterTurn without a monster
 PASS legD: no parting line without a monster
 PASS legD: travel proceeded
 
-33 PASS, 0 FAIL
+37 PASS, 0 FAIL

@@ -73,6 +73,15 @@ function writeRetry(file, content) {
   //   fallback flagged. (Markers are global player tile changes: a
   //   marker after ANY spawn ends that instance's episode, so a
   //   no-marker fixture must spawn after the last marker.)
+  // seq 4 (STALE-MARKER regression, triggerbuild 2026-11-05): spawn on
+  //   player tile idx 32; the parting turn's own pre-hook records the
+  //   LAZY arrival marker idx 35 (to [4,4] == the co-location tile)
+  //   BEFORE the parting turn's mtCall idx 38 (viaTravel) — the stale
+  //   marker must NOT end the episode. True departure marker idx 42
+  //   (to [5,4]) ends it; return-episode call idx 45 is excluded.
+  //   Expected: firstEp 1, viaTravel true, fallback false, player-left.
+  //   (Placed before seq3's spawn so seq3's no-marker fallback stays
+  //   covered: markers 35/42 precede seq3's firstCoIdx 50.)
   const daily = [];
   for (let d = 79; d <= 116; d++) daily.push(snap(d, 199, 4, [], 4, 4));
   const c = corpus({
@@ -81,10 +90,13 @@ function writeRetry(file, content) {
       { idx: 10, seq: 1, day: 83, id: 'eulogy', wave: 4, tx: 4, ty: 4, mx: 2, my: 5, px: 4, py: 4, dist: 0, onPlayerTile: true, source: 'checkEncounter', stackFn: 'checkEncounter', veteran: false },
       { idx: 11, seq: 2, day: 84, id: 'eulogy', wave: 4, tx: 4, ty: 4, mx: 2, my: 5, px: 4, py: 4, dist: 0, onPlayerTile: true, source: 'checkEncounter', stackFn: 'checkEncounter', veteran: false },
       { idx: 50, seq: 3, day: 85, id: 'strike', wave: 4, tx: 4, ty: 4, mx: 3, my: 3, px: 4, py: 4, dist: 0, onPlayerTile: true, source: 'checkEncounter', stackFn: 'checkEncounter', veteran: false },
+      { idx: 32, seq: 4, day: 86, id: 'audit', wave: 4, tx: 4, ty: 4, mx: 3, my: 3, px: 4, py: 4, dist: 0, onPlayerTile: true, source: 'checkEncounter', stackFn: 'checkEncounter', veteran: false },
     ],
     tileChanges: [
       { idx: 30, day: 83, from: [4, 4], to: [5, 4] },
       { idx: 31, day: 84, from: [5, 4], to: [4, 4] },
+      { idx: 35, day: 86, from: [5, 4], to: [4, 4] },
+      { idx: 42, day: 86, from: [4, 4], to: [5, 4] },
     ],
     mtCalls: [
       { idx: 20, day: 83, seq: 1, id: 'eulogy', wave: 4, px: 4, py: 4, pmx: 4, pmy: 4, before: { mx: 2, my: 5, lostSight: 0, stance: null }, after: { mx: 2, my: 5, lostSight: 0, stance: 'curious' }, distBefore: 2, distAfter: 2, fightFired: false, removedFired: false, viaTravel: true },
@@ -92,9 +104,12 @@ function writeRetry(file, content) {
       { idx: 41, day: 89, seq: 2, id: 'eulogy', wave: 4, px: 4, py: 4, pmx: 4, pmy: 4, before: { mx: 2, my: 5, lostSight: 0, stance: null }, after: { mx: 2, my: 5, lostSight: 1, stance: null }, distBefore: 2, distAfter: 2, fightFired: false, removedFired: false, viaTravel: false },
       { idx: 55, day: 86, seq: 3, id: 'strike', wave: 4, px: 4, py: 4, pmx: 4, pmy: 4, before: { mx: 3, my: 3, lostSight: 0, stance: null }, after: { mx: 3, my: 3, lostSight: 0, stance: 'hungry' }, distBefore: 1, distAfter: 1, fightFired: false, removedFired: false, viaTravel: true },
       { idx: 60, day: 87, seq: 3, id: 'strike', wave: 4, px: 4, py: 4, pmx: 4, pmy: 4, before: { mx: 3, my: 3, lostSight: 0, stance: 'hungry' }, after: { mx: 3, my: 3, lostSight: 0, stance: 'hungry' }, distBefore: 1, distAfter: 1, fightFired: false, removedFired: false, viaTravel: false },
+      { idx: 38, day: 86, seq: 4, id: 'audit', wave: 4, px: 4, py: 4, pmx: 4, pmy: 4, before: { mx: 3, my: 3, lostSight: 0, stance: null }, after: { mx: 3, my: 3, lostSight: 0, stance: 'territorial' }, distBefore: 1, distAfter: 1, fightFired: false, removedFired: false, viaTravel: true },
+      { idx: 45, day: 87, seq: 4, id: 'audit', wave: 4, px: 4, py: 4, pmx: 4, pmy: 4, before: { mx: 3, my: 3, lostSight: 0, stance: 'territorial' }, after: { mx: 3, my: 3, lostSight: 1, stance: 'territorial' }, distBefore: 1, distAfter: 1, fightFired: false, removedFired: false, viaTravel: false },
     ],
     sayLines: [
       { idx: 19, day: 83, line: 'You turn to leave — behind you, the Eulogy stirs.' },
+      { idx: 37, day: 86, line: 'You turn to leave — behind you, The Audit stirs.' },
     ],
   });
   writeRetry(path.join(dir, 'trigger-s99102-proof.json'), JSON.stringify(c, null, 2) + '\n');
@@ -119,11 +134,16 @@ function writeRetry(file, content) {
   ok('fixture seq3: firstEp 2 with fallback flagged',
     bySeq[3] && bySeq[3].firstEpMt === 2 && bySeq[3].firstEpFallback === true,
     'got ' + (bySeq[3] && bySeq[3].firstEpMt) + '/' + (bySeq[3] && bySeq[3].firstEpFallback));
-  ok('band: firstEpContact 2 of 3', out.triggerbuild && out.triggerbuild.firstEpContact === 2,
+  ok('fixture seq4: firstEp 1 (stale arrival marker skipped, parting turn counted)',
+    bySeq[4] && bySeq[4].firstEpMt === 1, 'got ' + (bySeq[4] && bySeq[4].firstEpMt));
+  ok('fixture seq4: viaTravel attributed', !!(bySeq[4] && bySeq[4].firstEpViaTravel));
+  ok('fixture seq4: no fallback (true departure marker exists)', bySeq[4] && bySeq[4].firstEpFallback === false);
+  ok('fixture seq4: subCause player-left', bySeq[4] && bySeq[4].subCause === 'player-left-the-tile', bySeq[4] && bySeq[4].subCause);
+  ok('band: firstEpContact 3 of 4', out.triggerbuild && out.triggerbuild.firstEpContact === 3,
     'got ' + (out.triggerbuild && out.triggerbuild.firstEpContact));
   ok('band: zeroTurnPlayerLeft 1 (seq2 only)', out.triggerbuild && out.triggerbuild.zeroTurnPlayerLeft === 1,
     'got ' + (out.triggerbuild && out.triggerbuild.zeroTurnPlayerLeft));
-  ok('band: partingLines 1', out.triggerbuild && out.triggerbuild.partingLines === 1,
+  ok('band: partingLines 2', out.triggerbuild && out.triggerbuild.partingLines === 2,
     'got ' + (out.triggerbuild && out.triggerbuild.partingLines));
 })();
 
