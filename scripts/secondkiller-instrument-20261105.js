@@ -95,13 +95,30 @@ function install(Game) {
         const def = itemById[wid];
         if (def && def.weapon && def.weapon.bonus != null) g.weaponBonus = def.weapon.bonus;
       }
-      const a = eq.armor || null;
-      const aid = (a && (a.itemId || a.id)) || (typeof a === 'string' ? a : null);
-      if (aid) {
-        g.armorId = aid;
-        const def = itemById[aid];
-        if (def && def.armor && def.armor.protection != null) g.armorP = def.armor.protection;
-      }
+      // ARMOR SLOT FIX (post-corpus, 2026-11-05): worn armor lives in the
+      // torso/legs/shoes slots, NOT an `armor` slot — the judged corpus
+      // therefore has armorP null throughout (weaponBonus was captured
+      // correctly). Prefer the engine's own armorOf when reachable.
+      try {
+        const S = (typeof globalThis !== 'undefined' && globalThis.Scattering) ? globalThis.Scattering : null;
+        if (S && S.equipment && typeof S.equipment.armorOf === 'function') {
+          const ap = S.equipment.armorOf(p, Game.data.items);
+          if (ap != null) g.armorP = ap;
+        }
+      } catch (e) {}
+      if (g.armorP == null) {
+        const slots = [eq.torso, eq.legs, eq.shoes];
+        let sum = 0, seen = false;
+        slots.forEach(function (sl) {
+          const id = (sl && (sl.itemId || sl.id)) || (typeof sl === 'string' ? sl : null);
+          if (id) {
+            if (!g.armorId) g.armorId = id;
+            const def = itemById[id];
+            if (def && def.armor && def.armor.protection != null) { sum += def.armor.protection; seen = true; }
+          }
+        });
+        if (seen) g.armorP = sum;
+      } else if (eq.torso) { g.armorId = (eq.torso.itemId || eq.torso.id) || null; }
     } catch (e) { t.instrumentErrors.push('gear: ' + String(e.message).slice(0, 80)); }
     return g;
   }
@@ -204,10 +221,17 @@ function install(Game) {
         if (fwave != null && fwave >= 4) {
           const fb = firstBloodState();
           const humans = Game.tbfight ? humanFighterVids(Game.tbfight) : [];
-          const secondCandidates = humans.filter(function (h) { return h !== fb.firstKiller && !hasWave4Kill(h); });
+          // SCHOLAR-VID FIX (post-corpus, 2026-11-05): the scholar's own
+          // tbfight entry often carries no villagerId (kind 'player', key
+          // 'p'), so humanFighterVids returns [] for solo scholar fights
+          // and secondCandidates came out [] even though the scholar IS a
+          // fresh candidate. Compute candidates from the SAME fighter list
+          // the record carries (humans, else the scholar fallback).
+          const fightFighters = humans.length ? humans : [Game.villagerId || null];
+          const secondCandidates = fightFighters.filter(function (h) { return h && h !== fb.firstKiller && !hasWave4Kill(h); });
           openTb = {
             day: dayOf(Game), channel: 'player-tb', fighter: Game.villagerId || null,
-            fighters: humans.length ? humans : [Game.villagerId || null], mid: fmid || null, wave: fwave,
+            fighters: fightFighters, mid: fmid || null, wave: fwave,
             entryHp: Game.tbfight ? monsterHpSum(Game.tbfight) : null,
             damageDealt: null, damageFrac: null, rounds: null, swingsAttempted: 0,
             partySize: humans.length || 1, allyVid: null, allyFromStart: false, optsAllies: 0,

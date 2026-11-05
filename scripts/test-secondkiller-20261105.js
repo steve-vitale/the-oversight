@@ -21,7 +21,7 @@ function check(name, cond, extra) {
 // ---- fake-Game instrument fixtures ----
 function fakeGame() {
   const persons = {
-    leader: { equipped: { melee: { itemId: 'shard_spear' }, armor: { itemId: 'bark_armor' } } },
+    leader: { equipped: { melee: { itemId: 'shard_spear' }, torso: { itemId: 'bark_armor' } } },
     ally1: { equipped: { melee: { itemId: 'shard_spear' }, armor: null } },
     k1: { equipped: {} },
   };
@@ -109,8 +109,12 @@ function ffight(o) {
     JSON.stringify({ matched: s.w4killsMatched, unmatched: s.unmatchedKills, rate: s.killRate }));
   check('analyzer-tb-won-not-kill', s.fights[2].matchedKillBy == null && s.fights[1].matchedKillBy === 'leader' && s.fights[1].matchedKillFirst === true,
     JSON.stringify(s.fights.map(function (f) { return f.matchedKillBy; })));
+  // Corrected candidate rule: the day-22 fight's leader was blooded on
+  // day 21 (earlier day), so it is candidate-absent; the day-20/21 fights
+  // are candidate-present (the day-21 kill itself is not prior blood).
   check('analyzer-splits', s.splits['party:solo'].fights === 2 && s.splits['party:leader+1'].fights === 1 &&
-    s.splits['secondCand:present'].fights === 3 && s.splits['alive:alive'].fights === 3,
+    s.splits['secondCand:present'].fights === 2 && s.splits['secondCand:absent'].fights === 1 &&
+    s.splits['alive:alive'].fights === 3,
     JSON.stringify(s.splits));
   const s2 = AN.analyzeSeed(JSON.parse(JSON.stringify(r)));
   check('analyzer-determinism', JSON.stringify(s) === JSON.stringify(s2));
@@ -129,6 +133,58 @@ function ffight(o) {
   check('analyzer-exposure-signal', out.signals.exposureRotation.killRateFirstAlive === 0 && out.signals.exposureRotation.killRateFirstNotAlive === 1,
     JSON.stringify(out.signals.exposureRotation));
   try { fs.rmSync(dir, { recursive: true, force: true }); } catch (e) {}
+})();
+
+// 18. Strict kill matching: a same-day same-monster kill belongs to the
+// fight whose fighters include the killer, not an earlier losing fight.
+(function () {
+  const r = arow(2, {
+    fights: [ffight({ day: 20, fighters: ['jesse'], fighter: 'jesse', ending: 'death', outcomeRaw: 'lost' }),
+      ffight({ day: 20, fighters: ['boris'], fighter: 'boris', ending: 'kill-or-rout', outcomeRaw: 'won' })],
+    waveKillLog: [{ d: 20, mid: 'w4a', w: 4, by: 'boris', via: 'player' }],
+  });
+  const s = AN.analyzeSeed(JSON.parse(JSON.stringify(r)));
+  check('strict-kill-matching', s.fights[0].matchedKillBy == null && s.fights[1].matchedKillBy === 'boris' && s.w4killsMatched === 1,
+    JSON.stringify(s.fights.map(function (f) { return f.matchedKillBy; })));
+})();
+// 19. Gear armor lives in the torso slot, not an `armor` slot.
+(function () {
+  const G = fakeGame();
+  G.getPerson = function (id) {
+    if (id === 'leader') return { equipped: { melee: { itemId: 'shard_spear' }, torso: { itemId: 'bark_armor' } } };
+    return null;
+  };
+  const inst = INST.install(G);
+  G.fieldFight('leader', { id: 'w4a', wave: 4 }, { id: 'w4a', hp: 1000 }, { allies: 1, allyVids: ['ally1'] });
+  const f = inst.t.fights[0];
+  check('gear-torso-armor', f && f.gear && f.gear.armorP === 10 && f.gear.armorId === 'bark_armor', JSON.stringify(f && f.gear));
+  inst.uninstall();
+})();
+
+// 20. Solo scholar TB fight: the scholar's tbfight entry carries no
+// villagerId, so the candidate list must fall back to the scholar id.
+(function () {
+  const G = fakeGame();
+  G.startCombat = function (mid) { G.tbfight = { round: 1, fighters: [{ kind: 'player', hp: 80 }, { kind: 'monster', monsterId: 'w4a', mdef: { id: 'w4a' }, hp: 900 }] }; return true; };
+  const inst = INST.install(G);
+  G.startCombat('w4a');
+  G.tbfight.fighters[1].hp = 400; G.tbfight.round = 2;
+  G.tbEnd('won');
+  const tb = inst.t.fights[0];
+  check('tb-scholar-fallback-candidate', tb && tb.fighters[0] === 'leader' && tb.secondCandidatePresent === true && tb.secondCandidates[0] === 'leader',
+    JSON.stringify(tb && { fighters: tb.fighters, sc: tb.secondCandidates }));
+  inst.uninstall();
+})();
+// 21. Analyzer corrects the solo-scholar candidate flag from fighters +
+// earlier-day kill history.
+(function () {
+  const r = arow(3, {
+    fights: [ffight({ day: 20, fighters: ['boris'], fighter: 'boris', secondCandidatePresent: false, secondCandidates: [] })],
+    waveKillLog: [],
+  });
+  const s = AN.analyzeSeed(JSON.parse(JSON.stringify(r)));
+  check('analyzer-corrects-candidate', s.fights[0].secondCandidatePresent === true && s.fights[0].secondCandidatePresentInstrument === false,
+    JSON.stringify(s.fights[0]));
 })();
 
 async function liveLegs() {

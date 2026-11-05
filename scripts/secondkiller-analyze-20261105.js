@@ -56,17 +56,39 @@ function splitStats(fights) {
 function analyzeSeed(row) {
   const fights = (row.fights || []).filter(function (f) { return (f.wave | 0) >= 4; });
   const log = (row.waveKillLog || []).filter(function (e) { return ((e.w | 0) >= 4); });
-  // Greedy kill matching, corpus order.
+  // CORRECTED second-candidate flag (post-corpus fix, disclosed in the
+  // evidence): the judged corpus's instrument computed TB candidates from
+  // humanFighterVids, which is [] for solo scholar fights (the scholar's
+  // tbfight entry carries no villagerId), so two solo scholar kill fights
+  // were coded secondCandidatePresent=false. Recompute from the record's
+  // fighters list + kill history strictly BEFORE the fight day (day
+  // granularity: a kill earlier the same day by the same fighter is NOT
+  // excluded, stated limitation — same-day ordering inside a day is not
+  // recoverable from the log). The instrument field is preserved as
+  // secondCandidatePresentInstrument for audit; all splits use corrected.
+  fights.forEach(function (f) {
+    f.secondCandidatePresentInstrument = !!f.secondCandidatePresent;
+    const cands = (f.fighters || []).filter(function (vid) {
+      if (!vid || vid === f.firstKiller) return false;
+      return !log.some(function (e) { return e.by === vid && (e.d | 0) < (f.day | 0); });
+    });
+    f.secondCandidatesCorrected = cands;
+    f.secondCandidatePresent = cands.length > 0;
+  });
+  // Greedy kill matching, corpus order, STRICT: a kill is matched only to
+  // a fight whose fighters include the killer. The earlier fallback (first
+  // same-day same-monster fight regardless of fighters) misattributed seed
+  // 99154's day-80 eulogy kill to a different scholar's losing fight on
+  // the same day; strict matching attributes it to the killer's own won
+  // fight. Kills with no fighter-matching fight stay unmatched and are
+  // reported, never silently assigned.
   const used = {};
   fights.forEach(function (f) {
     let match = null;
     for (let i = 0; i < log.length; i++) {
       if (used[i]) continue;
       const e = log[i];
-      if ((e.d | 0) === (f.day | 0) && e.mid === f.mid) {
-        if (f.fighters && f.fighters.indexOf(e.by) >= 0) { match = i; break; }
-        if (match == null) match = i;
-      }
+      if ((e.d | 0) === (f.day | 0) && e.mid === f.mid && f.fighters && f.fighters.indexOf(e.by) >= 0) { match = i; break; }
     }
     if (match != null) {
       used[match] = true;
@@ -112,10 +134,11 @@ function analyzeSeed(row) {
         mid: f.mid, entryHp: f.entryHp, damageDealt: f.damageDealt, damageFrac: f.damageFrac,
         rounds: f.rounds, swingsAttempted: f.swingsAttempted, partySize: f.partySize,
         partyBucket: partyBucket(f), aliveBucket: aliveBucket(f),
-        secondCandidatePresent: !!f.secondCandidatePresent, secondCandidates: f.secondCandidates || [],
+        secondCandidatePresent: !!f.secondCandidatePresent, secondCandidates: f.secondCandidatesCorrected || f.secondCandidates || [],
+        secondCandidatePresentInstrument: !!f.secondCandidatePresentInstrument,
         firstKiller: f.firstKiller, firstKillerAliveAtStart: f.firstKillerAliveAtStart,
         firstKillerInFight: !!f.firstKillerInFight, daysSinceFirstBlood: f.daysSinceFirstBlood,
-        ending: f.ending, outcomeRaw: f.outcomeRaw,
+        ending: f.ending, outcomeRaw: f.outcomeRaw, allyVid: f.allyVid || null,
         matchedKillBy: f._matchedKill ? f._matchedKill.by : null,
         matchedKillFirst: !!f._matchedKillFirst,
         gear: f.gear || null, allyGear: f.allyGear || null,
@@ -168,13 +191,26 @@ function analyzeDir(dir, prefix) {
     denominatorsSmall: allFights.length < 10,
   };
   const ranked = ['production', 'finishing', 'exposureRotation'].filter(function (k) { return signals[k].implicated; });
+  const fieldFights = allFights.filter(function (f) { return f.channel === 'field'; });
+  const postBlood = allFights.filter(function (f) { return f.aliveBucket === 'alive' || f.aliveBucket === 'notAlive'; });
+  const extra = {
+    fieldAllyJoined: fieldFights.filter(function (f) { return !!f.allyVid; }).length,
+    fieldFights: fieldFights.length,
+    fieldPartySize3NoAlly: fieldFights.filter(function (f) { return (f.partySize | 0) >= 3 && !f.allyVid; }).length,
+    aliveWindowFights: allFights.filter(function (f) { return f.aliveBucket === 'alive'; }).length,
+    postFirstBloodFights: postBlood.length,
+    postFirstBloodKills: postBlood.filter(function (f) { return f.matchedKillBy; }).length,
+    postFirstBloodKillRate: postBlood.length ? postBlood.filter(function (f) { return f.matchedKillBy; }).length / postBlood.length : null,
+    tbDeathEndings: allFights.filter(function (f) { return f.channel === 'player-tb' && f.ending === 'death'; }).length,
+    tbFights: allFights.filter(function (f) { return f.channel === 'player-tb'; }).length,
+  };
   return { n: seeds.length, totalFights: allFights.length,
     totalKillsLog: seeds.reduce(function (m, s) { return m + s.w4killsLog; }, 0),
     totalKillsMatched: seeds.reduce(function (m, s) { return m + s.w4killsMatched; }, 0),
     totalUnmatchedKills: seeds.reduce(function (m, s) { return m + s.unmatchedKills; }, 0),
     overallKillRate: allFights.length ? allFights.filter(function (f) { return f.matchedKillBy; }).length / allFights.length : null,
     damageFracMedian: median(allFights.map(function (f) { return f.damageFrac; })),
-    splits: splits, signals: signals, suggestedRank: ranked,
+    splits: splits, signals: signals, suggestedRank: ranked, extra: extra,
     totalInstrumentErrors: totalErr, wall: wall, seeds: seeds, fights: allFights };
 }
 
