@@ -1,0 +1,39 @@
+
+ORGANIC DEATH d33: Christian -> Darius, topTrust=[{"id":"Eric","t":90},{"id":"Babatunde","t":90},{"id":"Nikos","t":71},{"id":"Shyngys","t":64}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=28 inheritedPlants=0 keptSkills=5 inheritedSkills=0 succTrustPre=93 succTrustPost=58
+PARITY readable=true equal=false inherited=["green_thumb"] pre=["beast_calm","green_whisper"] post=["beast_calm","green_whisper","green_thumb"]
+DEATH d33 (organic (phase A)): Christian -> Darius | passed=true lin=true mo=true trust=58 vouchers=5
+  BURIAL d+4: corpse found=true respects=true bury=true
+  CONVO d+3 with Eric (refused=false)
+  CONVO d+3 with Nikos (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Eric (refused=false)
+  CONVO d+7 with Donna (refused=false)
+  CONVO d+14 with Eric (refused=false)
+  CONVO d+14 with Donna (refused=false)
+  CONVO d+30 with Eric (refused=false)
+  CONVO d+30 with Donna (refused=false)
+  CONVO d+45 with Donna (refused=false)
+  CONVO d+45 with Shyngys (refused=false)
+  CONVO d+53 with Shyngys (refused=false)
+  CONVO d+53 with Donna (refused=false)
+  CONVO d+64 with Tariq (refused=false)
+  CONVO d+64 with Sari (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=1 (eligible=5) echo=0 organicBurial={"respects":false,"bury":false} halfRation=6
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=71 signals={"levelUp":true,"systemVoice":59,"offerLines":83,"codexPlantsDelta":25,"codexSkillsDelta":24,"codexAbilitiesDelta":16,"xpDelta":41,"any":true} pantry 6629->6898
+TRUST-DIALS: office 58->92 (+34, climb) | villageMean 63->78.2 (+15.2, climb) | ge60 5->4 | movers>=5: [{"id":"Tariq","from":57,"to":93,"delta":36},{"id":"Shyngys","from":64,"to":95,"delta":31}]
+DEED-LEDGER: calls=58 summary={"teachPlant":{"calls":22,"ok":22,"deltaSum":0,"deltaN":22,"positive":0,"meanDelta":0},"giveFood":{"calls":26,"ok":26,"deltaSum":92,"deltaN":26,"positive":26,"meanDelta":3.54},"donateToPantry":{"calls":10,"ok":10,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=4 grief-excluded=3
+METRICS: m1=true m2a=true m2b=true m3=false(echoMentions=0 (convo=0, say=0)) m4=true m5=manual | endDay=104 alive=6 over=false
+anomalies: 0
+say dump -> 1
+S-METRICS: s1=true s2=false s3=true s4=true s5=true dayAdv=71
+T-METRICS: t1=true(panels=d+0,d+7,d+15,d+30,d+71) t2=true(deedCalls=58) trustVerdict={"readable":true,"officeMantle":58,"officeLast":92,"officeDelta":34,"officeClass":"climb","villageMantle":63,"villageLast":78.2,"villageDelta":15.2,"villageClass":"climb","villageGe60Mantle":5,"villageGe60Last":4,"movers":[{"id":"Tariq","from":57,"to":93,"delta":36},{"id":"Shyngys","from":64,"to":95,"delta":31}]}
+E6/CALLCHECK: e6={"callMoves":12,"withCensus":12,"chainHandoffs":3,"trustMoves":9} callCheck={"dailyMoveDays":12,"callMoveDays":11,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=false(echoV2b=1 (v2=1, excludedLoot=0))
+E7/R47: e7={"trustMoves":9,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":4,"eventClass":{"event-only":0,"deed-only":3,"both":6,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":0,"v2":1,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":3,"known":3,"unknown":0} e3={"dailyDays":71,"moves":12}

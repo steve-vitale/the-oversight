@@ -1,0 +1,40 @@
+
+ORGANIC DEATH d36: Werner -> Gabriel, topTrust=[{"id":"Aisha","t":97},{"id":"Katarina","t":90},{"id":"Olivia","t":90},{"id":"Chantal","t":87}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=18 inheritedPlants=0 keptSkills=3 inheritedSkills=0 succTrustPre=90 succTrustPost=62
+PARITY readable=true equal=true inherited=[] pre=["iron_stomach","cold_blooded","bloodhound"] post=["iron_stomach","cold_blooded","bloodhound"]
+DEATH d35 (organic (phase A)): Werner -> Gabriel | passed=true lin=true mo=true trust=62 vouchers=8
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Aisha (refused=false)
+  CONVO d+3 with Katarina (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Chantal (refused=false)
+  CONVO d+7 with Olivia (refused=false)
+  CONVO d+14 with Harlow (refused=false)
+  CONVO d+14 with Olivia (refused=false)
+  BOND-CONVO d+14 with Chantal (depth=0 v=20 refused=false)
+  CONVO d+30 with Chen (refused=false)
+  CONVO d+30 with Nikolai (refused=false)
+  CONVO d+45 with Chen (refused=false)
+  CONVO d+45 with Nikolai (refused=false)
+  CONVO d+53 with Chen (refused=false)
+  CONVO d+53 with Nikolai (refused=false)
+  CONVO d+64 with Nikolai (refused=false)
+  CONVO d+64 with Chantal (refused=false)
+
+FUNERAL: deathBeat=3 recover=1 vouch=1 (eligible=8) echo=4 organicBurial={"respects":false,"bury":false} halfRation=10
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=71 signals={"levelUp":true,"systemVoice":46,"offerLines":84,"codexPlantsDelta":31,"codexSkillsDelta":13,"codexAbilitiesDelta":11,"xpDelta":31,"any":true} pantry 34186->11037
+TRUST-DIALS: office 62->90 (+28, climb) | villageMean 75.8->72.8 (-3, fall) | ge60 8->4 | movers>=5: [{"id":"Nikolai","from":65,"to":94,"delta":29}]
+DEED-LEDGER: calls=67 summary={"teachPlant":{"calls":38,"ok":38,"deltaSum":0,"deltaN":38,"positive":0,"meanDelta":0},"donateToPantry":{"calls":10,"ok":10,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"giveFood":{"calls":19,"ok":19,"deltaSum":73,"deltaN":19,"positive":18,"meanDelta":3.84}}
+
+IDENTITY TRIPS: raw=1 grief-excluded=1
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=4 (convo=4, say=0)) m4=true m5=manual | endDay=106 alive=7 over=false
+anomalies: 0
+say dump -> 1
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=71
+T-METRICS: t1=true(panels=d+0,d+7,d+15,d+30,d+71) t2=true(deedCalls=67) trustVerdict={"readable":true,"officeMantle":62,"officeLast":90,"officeDelta":28,"officeClass":"climb","villageMantle":75.8,"villageLast":72.8,"villageDelta":-3,"villageClass":"fall","villageGe60Mantle":8,"villageGe60Last":4,"movers":[{"id":"Nikolai","from":65,"to":94,"delta":29}]}
+E6/CALLCHECK: e6={"callMoves":13,"withCensus":13,"chainHandoffs":2,"trustMoves":11} callCheck={"dailyMoveDays":13,"callMoveDays":12,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=6 (v2=6, excludedLoot=0))
+E7/R47: e7={"trustMoves":11,"soloOffice":2,"soloOfficeDeltas":[1,2],"soloBearerDeltaExact":[1,2],"singleMoverBearer":0,"singleMoverOther":2,"eventClass":{"event-only":0,"deed-only":2,"both":9,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":4,"v2":6,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":2,"known":2,"unknown":0} e3={"dailyDays":71,"moves":13}

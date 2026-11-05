@@ -1,0 +1,42 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Dante","t":91},{"id":"Horomona","t":90},{"id":"James","t":66},{"id":"Leo","t":64}], roster=11
+INH readable=true scripted=true deadItems=18 distinct=16 transferred=1 vanished=1 keptPlants=20 inheritedPlants=3 keptSkills=17 inheritedSkills=11 succTrustPre=91 succTrustPost=55
+PARITY readable=true equal=true inherited=[] pre=["the_touch","war_cry","echo_location"] post=["the_touch","war_cry","echo_location"]
+DEATH d41 (the expedition, scripted): Seamus -> Dante | passed=true lin=true mo=true trust=55 vouchers=7
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=12 vanished=1 of 16 distinct dead-bearer items
+  CONVO d+3 with Horomona (refused=false)
+  CONVO d+3 with Caleb (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  BOND-CONVO d+3 with Karina (depth=2 v=50 refused=false)
+  CONVO d+7 with Caleb (refused=false)
+  CONVO d+7 with Horomona (refused=false)
+  CONVO d+14 with Leo (refused=false)
+  CONVO d+14 with James (refused=false)
+  BOND-CONVO d+14 with Nikolai (depth=0 v=24 refused=false)
+  CONVO d+30 with Ruth (refused=false)
+  CONVO d+30 with James (refused=false)
+  CONVO d+45 with James (refused=false)
+  CONVO d+45 with Ruth (refused=false)
+  CONVO d+53 with James (refused=false)
+  CONVO d+53 with Ruth (refused=false)
+  CONVO d+64 with James (refused=false)
+  CONVO d+64 with Ruth (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=1 (eligible=7) echo=1 organicBurial={"respects":false,"bury":false} halfRation=0
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":42,"offerLines":77,"codexPlantsDelta":29,"codexSkillsDelta":21,"codexAbilitiesDelta":5,"xpDelta":115,"any":true} pantry 72844->8164
+TRUST-DIALS: office 55->91 (+36, climb) | villageMean 66.2->70.8 (+4.6, climb) | ge60 7->4 | movers>=5: [{"id":"Daniyar","from":58,"to":93,"delta":35},{"id":"James","from":66,"to":98,"delta":32},{"id":"Ruth","from":64,"to":95,"delta":31},{"id":"Nikolai","from":64,"to":90,"delta":26}]
+DEED-LEDGER: calls=61 summary={"giveFood":{"calls":34,"ok":34,"deltaSum":66,"deltaN":34,"positive":32,"meanDelta":1.94},"teachPlant":{"calls":12,"ok":12,"deltaSum":0,"deltaN":12,"positive":0,"meanDelta":0},"donateToPantry":{"calls":15,"ok":15,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=false(echoMentions=1 (convo=1, say=0)) m4=true m5=manual | endDay=111 alive=7 over=false
+anomalies: 0
+say dump -> 1
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=61) trustVerdict={"readable":true,"officeMantle":55,"officeLast":91,"officeDelta":36,"officeClass":"climb","villageMantle":66.2,"villageLast":70.8,"villageDelta":4.6,"villageClass":"climb","villageGe60Mantle":7,"villageGe60Last":4,"movers":[{"id":"Daniyar","from":58,"to":93,"delta":35},{"id":"James","from":66,"to":98,"delta":32},{"id":"Ruth","from":64,"to":95,"delta":31},{"id":"Nikolai","from":64,"to":90,"delta":26}]}
+E6/CALLCHECK: e6={"callMoves":6,"withCensus":6,"chainHandoffs":2,"trustMoves":4} callCheck={"dailyMoveDays":6,"callMoveDays":6,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=2 (v2=3, excludedLoot=1))
+E7/R47: e7={"trustMoves":4,"soloOffice":1,"soloOfficeDeltas":[1],"soloBearerDeltaExact":[1],"singleMoverBearer":0,"singleMoverOther":2,"eventClass":{"event-only":0,"deed-only":0,"both":4,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":1,"v2":3,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":3,"known":3,"unknown":0} e3={"dailyDays":71,"moves":6}

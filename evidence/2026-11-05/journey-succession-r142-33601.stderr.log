@@ -1,0 +1,31 @@
+
+ORGANIC DEATH d23: Morris -> Aaron, topTrust=[{"id":"Tao","t":90},{"id":"Tariq","t":87},{"id":"Sam","t":70},{"id":"Aaron","t":58}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=12 inheritedPlants=0 keptSkills=7 inheritedSkills=0 succTrustPre=90 succTrustPost=58
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","echo_location"] post=["beast_calm","echo_location"]
+DEATH d23 (organic (phase A)): Morris -> Aaron | passed=true lin=true mo=true trust=58 vouchers=3
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Tao (refused=false)
+  CONVO d+3 with Tariq (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Tao (refused=false)
+  CONVO d+7 with Tariq (refused=false)
+  CONVO d+14 with Tao (refused=false)
+  CONVO d+14 with Simon (refused=false)
+
+FUNERAL: deathBeat=5 recover=1 vouch=1 (eligible=3) echo=3 organicBurial={"respects":false,"bury":false} halfRation=0
+
+MEAL-GATE: audited=15 violations=0 noMealDays=1 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=15 signals={"levelUp":true,"systemVoice":14,"offerLines":13,"codexPlantsDelta":7,"codexSkillsDelta":0,"codexAbilitiesDelta":1,"xpDelta":23,"any":true} pantry 5788->0
+TRUST-DIALS: office 58->58 (+0, flat) | villageMean 58.1->44 (-14.1, fall) | ge60 3->1 | movers>=5: [{"id":"Vasyl","from":19,"to":26,"delta":7}]
+DEED-LEDGER: calls=10 summary={"giveFood":{"calls":10,"ok":10,"deltaSum":20,"deltaN":10,"positive":10,"meanDelta":2}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=3 (convo=3, say=0)) m4=true m5=manual | endDay=38 alive=5 over=true
+anomalies: 0
+say dump -> 1
+S-METRICS: s1=false s2=true s3=true s4=false s5=true dayAdv=15
+T-METRICS: t1=true(panels=d+0,d+7,d+14) t2=true(deedCalls=10) trustVerdict={"readable":true,"officeMantle":58,"officeLast":58,"officeDelta":0,"officeClass":"flat","villageMantle":58.1,"villageLast":44,"villageDelta":-14.1,"villageClass":"fall","villageGe60Mantle":3,"villageGe60Last":1,"movers":[{"id":"Vasyl","from":19,"to":26,"delta":7}]}
+E6/CALLCHECK: e6={"callMoves":0,"withCensus":0,"chainHandoffs":0,"trustMoves":0} callCheck={"dailyMoveDays":0,"callMoveDays":0,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=4 (v2=4, excludedLoot=0))
+E7/R47: e7={"trustMoves":0,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":0,"both":0,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":3,"v2":4,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":0,"known":0,"unknown":0} e3={"dailyDays":16,"moves":0}
