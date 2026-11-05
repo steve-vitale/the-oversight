@@ -13,6 +13,7 @@
 //   - occupationLean(occId) -> {track: xp} from characterGen trackLean
 //   - creditDeed(who, deedId, trackOverride) -> track XP from the deed table for whoever did it ('player' or a villager id); the same n and the same per-day cap per doer
 //   - noteDeed(deedId, trackOverride) -> creditDeed('player', ...)
+//   - creditSynergy(who, synergyId) -> extra track XP when a deed is done synergistically (tracks.json synergies table); capped per day per doer; tele's 'track_synergy' + says a line for the player. The caller judges the shape.
 //   - convertDeedToTrackXP(key, abilityId) -> once-only track XP for a deed that used to grant magic
 //   - levelUpOffers(track, level) -> offerSize of the next 6 unheld magic abilities of the track's kit, drawn per holder/level and leaned to a recognised god path or, before one, the job path (godpath.js kitSheet, the same function villagers use)
 //   - pumpLevelUps() -> opens the next queued level-up sheet when none is pending
@@ -329,6 +330,50 @@
 
     noteDeed(deedId, trackOverride) {
       return this.creditDeed('player', deedId, trackOverride);
+    },
+
+    // creditSynergy(who, synergyId): a deed done synergistically grants MORE
+    // XP (Steve 2026-11-05). The synergy table in tracks.json maps each
+    // synergy to its base deed, track, bonus and per-day cap. The CALLER
+    // judges the shape (the deed's site knows whether an ability fired, the
+    // skill was learned from someone else, the recipe was taught, the save
+    // happened, the plant is new) and calls this only when it holds. The
+    // bonus is extra track XP on top of the deed's own n — never a granted
+    // ability (deeds grant XP; the level-up sheet grants the ability). The
+    // bonus is legible: a 'track_synergy' tele event and, for the player, a
+    // say line naming the synergy and the bonus. Per-day cap per doer, like
+    // deeds: decisions, not grinding. Returns the bonus granted, or 0.
+    creditSynergy(who, synergyId) {
+      try {
+        const T = this.trackData();
+        const s = (T.synergies || {})[synergyId];
+        if (!s) { warn('unknown synergy "' + synergyId + '"'); return 0; }
+        if (!who || this.over) return 0;
+        const isPlayer = who === 'player' || (this.villagerId && who === this.villagerId);
+        const st = this.state.scholar;
+        if (!st) return 0;
+        if (s.perDay) {
+          const day = st.day || 0;
+          let book;
+          if (isPlayer) { st.synergyDay = st.synergyDay || {}; book = st.synergyDay; }
+          else {
+            const v = this.state.village || (this.state.village = {});
+            v.npcSynergyDay = v.npcSynergyDay || {};
+            book = v.npcSynergyDay[who] = v.npcSynergyDay[who] || {};
+          }
+          const rec = book[synergyId];
+          if (!rec || rec.day !== day) book[synergyId] = { day, n: 0 };
+          if (book[synergyId].n >= s.perDay) return 0;
+          book[synergyId].n++;
+        }
+        const bonus = s.bonus || 1;
+        const r = this.gainTrackXP(isPlayer ? 'player' : who, s.track || 'craft', bonus, 'synergy:' + synergyId);
+        try { this.tele('track_synergy', { who: isPlayer ? 'player' : who, synergy: synergyId, deed: s.deed || null, track: s.track || null, bonus }); } catch (e) { warn('tele synergy', e); }
+        if (isPlayer) {
+          try { this.say(`The System notes the synergy — ${s.label || synergyId}: +${bonus} ${s.track || ''} XP.`); } catch (e) {}
+        }
+        return r ? bonus : 0;
+      } catch (e) { warn('creditSynergy', e); return 0; }
     },
 
     // convertDeedToTrackXP(key, abilityId): a trial/practice deed that used to

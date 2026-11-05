@@ -260,6 +260,19 @@
         v.skillLessons.push({ day, teacher: isPlayerWho(this, teacher) ? 'player' : teacher, learner: isPlayerWho(this, learner) ? 'player' : learner, skill: skillId });
         if (v.skillLessons.length > 200) v.skillLessons.splice(0, v.skillLessons.length - 200);
         try { if (this.creditDeed) this.creditDeed(isPlayerWho(this, teacher) ? 'player' : teacher, 'teaching'); } catch (e) { warn('teaching deed', e); }
+        // SYNERGY (2026-11-05): teaching a skill you learned from someone
+        // else teaches more — the deed for the lesson, the bonus for passing
+        // on what was passed to you. Provenance: the skill-lessons ledger
+        // (the teacher was a learner of this skill in an earlier lesson) or,
+        // for the player, the codex record (via 'taught'). Occupation skills
+        // and System-granted track skills have no such provenance and earn
+        // no bonus — they were never taught to the teacher.
+        try {
+          const teacherId = isPlayerWho(this, teacher) ? 'player' : teacher;
+          const taughtByLedger = (v.skillLessons || []).some(l => l && l.learner === teacherId && l.skill === skillId && l.day <= day);
+          const taughtByCodex = isPlayerWho(this, teacher) && ((this.state.codex.skills || {})[skillId] || {}).via === 'taught';
+          if ((taughtByLedger || taughtByCodex) && this.creditSynergy) this.creditSynergy(teacherId, 'teach_learned_skill');
+        } catch (e) { warn('teaching synergy', e); }
         try { this.tele('skill_lesson', { teacher: isPlayerWho(this, teacher) ? 'player' : teacher, learner: isPlayerWho(this, learner) ? 'player' : learner, skill: skillId, via: opts.via || null }); } catch (e) { warn('tele skill_lesson', e); }
         if (!isPlayerWho(this, teacher) && !isPlayerWho(this, learner)) {
           const nm = (id) => { try { return this.firstRef ? this.firstRef(id) : this.displayName(id); } catch (e) { return 'Someone'; } };

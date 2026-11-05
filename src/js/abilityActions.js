@@ -312,6 +312,11 @@
       if (result === false) {
         if (_said === 0) this.say('Nothing happened. (' + (def.action.name || actionId) + ' fizzled.)');
       } else {
+        // SYNERGY (XP coverage, 2026-11-05): a real ability use inside a
+        // turn-based fight marks the fight — a win with an ability in play
+        // earns the fight_with_ability synergy at settlement (game.js).
+        // The flag is descriptive only; nothing else reads it.
+        try { if (this.tbfight && !this.tbfight.over) this.tbfight._abilityUsed = true; } catch (e) {}
         // XP + synergy: only a REAL attempt counts. gainAbilityXP logs the
         // use for synergy discovery internally (game.js:14421), so a separate
         // noteAbilityUse here would double-count every activation as two

@@ -3515,6 +3515,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // by source (traps vs other). Zero gameplay effect.
       try { this.tele('craft', { id: recipeId, name: recipe.name }); } catch (e) {}
       try { if (this.noteDeed) this.noteDeed('crafting'); } catch (eT) { console.warn('[tracks] craft deed', eT); } // unified tracks: craft
+      // SYNERGY (2026-11-05): crafting from a recipe taught by another
+      // villager teaches more — the deed for the craft, the bonus for passing
+      // on what was passed to you. The codex recipe record carries via
+      // 'taught' (grantKnowledge) when a villager taught it.
+      try {
+        const rec = (this.state.codex.recipes || {})[recipeId];
+        if (rec && rec.via === 'taught' && this.creditSynergy) this.creditSynergy('player', 'craft_taught_recipe');
+      } catch (eT) { console.warn('[tracks] craft synergy', eT); }
       this.tickAction(32);
       return true;
     },
@@ -7852,7 +7860,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         v.health[vid] = Math.min(100, cur + 25);
         this.noteCareRescue && this.noteCareRescue(medic, vid, cur, v.health[vid], 100, 'heal_check', place === 'haven' ? 'haven' : 'camp');
         // VILLAGER XP (Steve 2026-10-09): doctoring is craft work.
-        try { if (medic !== this.villagerId) this.creditDeed && this.creditDeed(medic, 'healing'); } catch (e) { console.warn('[tracks] deed', e); }
+        // HEALER ROAD (2026-11-05): the player-as-medic was excluded here —
+        // a bearer who patches a departing villager earned nothing for the
+        // work. creditDeed already maps the bearer's id to the player, so
+        // the medic is credited whoever they are (parity, one XP scale).
+        try { this.creditDeed && this.creditDeed(medic, 'healing'); } catch (e) { console.warn('[tracks] deed', e); }
         try {
           const who = medic === this.villagerId ? 'You patch them up' : `${healer} patches them up`;
           if (place !== 'haven' || this.playerAtHaven())
@@ -7917,8 +7929,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (place !== 'haven' || this.playerAtHaven())
         this.say(`🩹 ${caregiverId === this.villagerId ? 'You make' : healer + ' makes'} rounds — ${nm} gets bound up properly. (${worstHp} → ${v.health[worst]} HP)`);
       try {
-        const hid = caregiverId === this.villagerId ? null : caregiverId;
-        if (hid && this.creditDeed) this.creditDeed(hid, 'healing');
+        // HEALER ROAD (2026-11-05): the player-as-caregiver was nulled out
+        // here (hid = null when the caregiver is the bearer) — a bearer who
+        // makes rounds earned nothing. creditDeed maps the bearer's id to
+        // the player, so the caregiver is credited whoever they are.
+        if (caregiverId && this.creditDeed) this.creditDeed(caregiverId, 'healing');
       } catch (e) {}
       // WOUND-CARE MEMORY (journey crisis r19 2026-10-16): the r18 care-memory
       // fix covered disease tending (villagerCareTick) but combat-wound
@@ -27750,11 +27765,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // fall through to doAction's generic tail say — every sweep narrated
         // twice. The tail owns the single narration; the branch just sets msg.)
         // discovery labels the place: the map remembers the BEST find here.
+        let _forageNewPlant = false;
         for (const pid of Object.keys(bySpecies)) {
           const plant = bySpecies[pid].plant;
           const prevBest = t.knownPlant ? this.data.plants.find(pp => pp.id === t.knownPlant) : null;
           if (!t.knownPlant || (plant.caloriesPerUnit > (prevBest ? prevBest.caloriesPerUnit : 0))) {
             const isNew = !t.knownPlant;
+            if (isNew) _forageNewPlant = true;
             t.knownPlant = pid; t.bountyKnown = true;
             if (isNew && bounty && bounty.why) this.say(`Journal: ${bounty.why}`);
             else if (!isNew) this.say(`Journal updated: ${this.plantDisplayName(pid)} grows here too — better than ${this.plantDisplayName(prevBest.id).toLowerCase()}.`);
@@ -27764,6 +27781,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (scholar.week1) scholar.week1.forage++;
         // UNIFIED TRACKS (2026-10-14): same deed as a villager's foraging — field.
         if (harvested.length) { try { if (this.noteDeed) this.noteDeed('foraging'); } catch (eT) { console.warn('[tracks] forage deed', eT); } }
+        // SYNERGY (2026-11-05): foraging a plant new to this ground maps
+        // new ground as well as filling the pantry — the deed for the forage,
+        // the bonus for the discovery.
+        if (harvested.length && _forageNewPlant) { try { if (this.creditSynergy) this.creditSynergy('player', 'forage_new_plant'); } catch (eT) { console.warn('[tracks] forage synergy', eT); } }
         this.gainAbilityXP('green_thumb', 1);
         // BETTER HUMAN: foraging is perception practice — reading the ground.
         this.practice('per', 1);
@@ -40071,6 +40092,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             const _fmHeal = Math.min(20, (v.maxHp || 0) - (v.hp || 0));
             v.hp = Math.min(v.maxHp || 0, (v.hp || 0) + 20);
             this.say(`${v.name} stops mid-fight and binds the wound — field medicine, +${_fmHeal} HP.`);
+            // HEALING DEED (XP coverage, 2026-11-05): binding a wound in a
+            // fight is healing work — the deed credits the doer.
+            try { if (this.creditDeed) this.creditDeed(v.villagerId, 'healing'); } catch (e) {}
+            // SYNERGY (XP coverage, 2026-11-05): a skill used in a fight
+            // marks the fight — a win with an ability in play earns the
+            // fight_with_ability synergy at settlement.
+            try { const _ff = this.tbfight; if (_ff && !_ff.over) { _ff._abilityUsedBy = _ff._abilityUsedBy || {}; _ff._abilityUsedBy[v.villagerId] = true; } } catch (e) {}
             return;
           }
         } catch (e) {}
@@ -40080,7 +40108,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // 0.00 uses across 240 runs. Same triggers as a competent player would
       // use: control when outmatched, rage when in melee. One ability per
       // turn; each has its own cooldown. Narrated honestly, never silent.
-      if (v.villagerId && this.tbVillagerAbility(v)) return;
+      if (v.villagerId && this.tbVillagerAbility(v)) {
+        // SYNERGY (XP coverage, 2026-11-05): the villager used an ability in
+        // this fight — mark it for the fight_with_ability synergy.
+        try { const _ff = this.tbfight; if (_ff && !_ff.over) { _ff._abilityUsedBy = _ff._abilityUsedBy || {}; _ff._abilityUsedBy[v.villagerId] = true; } } catch (e) {}
+        return;
+      }
       // HOPELESS-FLIGHT (structural-combat 2026-10-10): a hopeless fight IS
       // a purposeful reason to flee (canon) — personality sets the depth,
       // not the whether. Sealed contest arenas hold everyone (the gate is
@@ -46340,6 +46373,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             if (result === 'won') this.noteDeed('fight_won');
             else if (result === 'fled' || result === 'calmed') this.noteDeed('fight_survived');
             if (_alienFight) this.noteDeed('alien_fight');
+            // SYNERGY (2026-11-05): the player won with an ability in play
+            // (useAbility marks f._abilityUsed) — the bonus for the ability.
+            if (result === 'won' && f && f._abilityUsed && this.creditSynergy) {
+              try { this.creditSynergy('player', 'fight_with_ability'); } catch (eT) { console.warn('[tracks] fight synergy', eT); }
+            }
           } catch (eT) { console.warn('[tracks] fight deed', eT); }
           if (result === 'won') this.noteTrialDeed('win_a_fight', 1);
           const _taken = _p._taken || 0;
@@ -46363,6 +46401,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             else if (result === 'won') this.creditDeed(vid, 'fight_won');
             else if (result === 'fled' || result === 'calmed') this.creditDeed(vid, 'fight_survived');
             if (_alienFight) this.creditDeed(vid, 'alien_fight');
+            // SYNERGY (2026-11-05): this ally used an ability in the fight
+            // (tbVillagerAbility marks f._abilityUsedBy) — the bonus for it.
+            if (result === 'won' && f && f._abilityUsedBy && f._abilityUsedBy[vid] && this.creditSynergy) {
+              try { this.creditSynergy(vid, 'fight_with_ability'); } catch (eT) { console.warn('[tracks] fight synergy', eT); }
+            }
           }
         }
       } catch (e) { console.warn('[tracks] party fight deeds', e); }

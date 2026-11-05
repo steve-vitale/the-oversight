@@ -42,7 +42,11 @@ const check = (name, cond, detail) => {
     `got ${w.name}+${w.bonus} unarmed=${!!w.unarmed}`);
   check('no slot-refusal said', !said.some(t => /goes on your ranged/i.test(t)),
     said.filter(t => /goes on your/i.test(t)).join(' | ').slice(0, 120));
-  check('hide armor worn (P=20)', Game.armorBonus() === 20, 'P=' + Game.armorBonus());
+  // GEAR RETUNE (2026-11-05, Steve: tier-appropriate gear must let a
+  // fully-geared party survive wave-4 fights): hide armor protection is 30
+  // now (was 20), the mundane armor ladder x1.5. The assertion reads the
+  // data, not a hardcoded old value.
+  check('hide armor worn (P=30)', Game.armorBonus() === 30, 'P=' + Game.armorBonus());
   // stone knife (range 1) still routes melee — no regression on real melee
   s.equipped = {};
   const knife = defs.find(d => d.id === 'stone_knife');

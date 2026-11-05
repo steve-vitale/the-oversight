@@ -463,8 +463,17 @@
     }
     if (v.godpathDeeds?.[actor]?.care_survived) return;
     const watches = v.godpathCareWatch || (v.godpathCareWatch = {}), pending = watches[actor] || (watches[actor] = []);
-    if (!pending.some(r => r.patient === patient && r.day === s.day))
+    if (!pending.some(r => r.patient === patient && r.day === s.day)) {
       pending.push({ patient, day: s.day, before, after, maxHp, via, scene });
+      // SYNERGY + HEALING DEED (XP coverage + healer road, 2026-11-05): a save
+      // is healing work done synergistically — the deed for the work, the
+      // synergy bonus for the save. Battle saves (mending_hands, lifeline)
+      // have no other deed credit, so the deed is credited here; camp saves
+      // (heal_check, healer_rounds) already credit the deed at their own
+      // sites, so only the synergy is added for those.
+      try { if (via === 'mending_hands' || via === 'lifeline') game.creditDeed && game.creditDeed(actor, 'healing'); } catch (e) {}
+      try { game.creditSynergy && game.creditSynergy(actor, 'heal_save'); } catch (e) {}
+    }
   }
   function finishCareWatch(game) {
     const s = game.state.scholar, v = game.state.village, watches = v.godpathCareWatch;
@@ -956,6 +965,9 @@
       if (t === p && C.isP) {
         if (p.hp >= p.maxHp) { Game.say('Nothing to mend. (Mending Hands)'); return false; }
         Game.addHealth(base); // counts as a heal (build-around hooks)
+        // HEALING DEED (XP coverage, 2026-11-05): mending your own wound is
+        // still healing work — the deed credits the doer (per-day capped).
+        try { Game.noteDeed && Game.noteDeed('healing'); } catch (e) { warn('mending self deed', e); }
         Game.say(`You press your own wound and the System knits it: +${base} HP. (Mending Hands)`);
         return true;
       }

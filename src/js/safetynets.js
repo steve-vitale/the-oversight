@@ -802,8 +802,28 @@
       for (var w = 0; w < wounded.length; w++) {
         var vid2 = wounded[w];
         v.health = v.health || {};
-        v.health[vid2] = Math.min(100, ((v.health[vid2] !== undefined) ? v.health[vid2] : 100) + 25);
+        var _triBefore = ((v.health[vid2] !== undefined) ? v.health[vid2] : 100);
+        v.health[vid2] = Math.min(100, _triBefore + 25);
+        // HEALER ROAD (XP coverage, 2026-11-05): a wounded person tended back
+        // from the brink is a save (the care_survived shape) — record it for
+        // the camp healer, who does the tending. noteCareRescue's own
+        // presence check decides whether the scene counts; a non-critical
+        // tending simply records nothing.
+        try {
+          var _triHealer = (this.campHealerId && (this.campHealerId('haven') || this.campHealerId('here'))) || null;
+          var _triScene = (this.campHealerId && this.campHealerId('haven')) ? 'haven' : 'camp';
+          if (_triHealer && _triBefore <= 25 && v.health[vid2] > 25 && this.noteCareRescue)
+            this.noteCareRescue(_triHealer, vid2, _triBefore, v.health[vid2], 100, 'triage', _triScene);
+        } catch (e) {}
       }
+      // HEALING DEED (XP coverage, 2026-11-05): running the triage tents is
+      // healing work — the deed credits the camp healer who does the tending
+      // (the player if the bearer is the healer). No healer, no credit: the
+      // tents don't tend themselves.
+      try {
+        var _triHealer2 = (this.campHealerId && (this.campHealerId('haven') || this.campHealerId('here'))) || null;
+        if (_triHealer2 && this.creditDeed) this.creditDeed(_triHealer2, 'healing');
+      } catch (e) {}
       if (mode === 'triage-worst') {
         this.say('⛺ Triage tents go up — the worst first. ' + nurse + ' doesn\'t leave their side: broth by the spoonful, the watch in shifts, no sleep. (-' + paid.toLocaleString() + ' kcal, said aloud and spent.)');
         this.say((worstNames.length ? worstNames.join(', ') : 'The worst') + ' get intensive tending: their fevers break four days sooner and the worst of it passes — they step back from the brink. The walking sick get broth and a blessing — one day sooner. We\'re betting the mild pull through on their own.');

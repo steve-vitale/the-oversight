@@ -58,6 +58,14 @@
     "mantle":          { "track": "strange", "n": 2 },
     "death_in_family": { "track": "strange", "n": 1, "perDay": 1 }
   },
+  "_synergies": "Synergy bonuses (Steve 2026-11-05): a deed done synergistically grants MORE XP — the bonus is extra track XP on top of the deed's own n, capped per day per doer (decisions, not grinding). The condition is judged at the deed's call site, which knows the shape (an ability fired in the fight, a skill learned from someone else, a recipe taught by another villager, a save from the brink, a plant new to this ground). The bonus is legible: creditSynergy tele's 'track_synergy' and says a line for the player. Two brief examples were reframed to sites that actually know the shape: 'hunt with a party member alongside' has no party context at any hunt site, so the field synergy is foraging that finds a plant new to this ground (the site already knows isNew); 'cooking with a taught recipe' became crafting from a taught recipe, because recipes — not cooked meat — are the taught-knowledge system.",
+  "synergies": {
+    "fight_with_ability":  { "deed": "fight_won",  "track": "combat", "bonus": 1, "perDay": 1, "label": "won with an ability in play" },
+    "teach_learned_skill": { "deed": "teaching",   "track": "social", "bonus": 1, "perDay": 1, "label": "taught a skill learned from someone else" },
+    "craft_taught_recipe": { "deed": "crafting",   "track": "craft",  "bonus": 1, "perDay": 1, "label": "crafted from a recipe taught by another villager" },
+    "heal_save":           { "deed": "healing",    "track": "craft",  "bonus": 2, "perDay": 1, "label": "healed someone back from the brink" },
+    "forage_new_plant":    { "deed": "foraging",   "track": "field",  "bonus": 1, "perDay": 1, "label": "foraged a plant new to this ground" }
+  },
   "_conversions": "Deeds that used to GRANT a magic ability directly (trial-deeds, practice-deeds) now credit track XP once instead: the power comes from the track's level-up sheet.",
   "deedConversions": {
     "win_a_fight": { "track": "combat", "n": 3 },

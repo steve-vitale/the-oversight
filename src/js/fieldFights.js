@@ -1909,6 +1909,9 @@
               var _mh = Math.min(20, vHpMax - vHp);
               vHp += _mh;
               rec.log.push('R' + round + ': ' + vName + ' stops mid-fight and binds the wound — field medicine, +' + _mh + ' HP.');
+              // HEALING DEED (XP coverage, 2026-11-05): binding a wound in a
+              // fight is healing work — the deed credits the doer.
+              try { if (this.creditDeed) this.creditDeed(vid, 'healing'); } catch (e) { console.warn('[tracks] field medicine deed', e); }
               try { (rec.actionKinds || (rec.actionKinds = [])).push('heal'); } catch (e) {}
             // ABILITY — PATIENT AIM (take_aim): the patient hunter's call.
             // Full health, fresh monster: spend this turn going still. The
@@ -2519,6 +2522,11 @@
         if (vid && vid !== 'player' && this.creditDeed) {
           if (rec.outcome === 'vKill') this.creditDeed(vid, 'fight_won');
           else if (rec.outcome === 'vFlee' || rec.outcome === 'mFlee' || rec.outcome === 'evade') this.creditDeed(vid, 'fight_survived');
+        }
+        // SYNERGY (2026-11-05): a fight won with an ability in play teaches
+        // more — the deed for the win, the bonus for the ability that fired.
+        if (vid && vid !== 'player' && rec.outcome === 'vKill' && (rec.ffFired || []).length && this.creditSynergy) {
+          try { this.creditSynergy(vid, 'fight_with_ability'); } catch (e) { console.warn('[tracks] fight synergy', e); }
         }
         // VILLAGER KNOWLEDGE (parity 2026-10-14): whoever fought beside them
         // watched their abilities work — what each does (L2).
