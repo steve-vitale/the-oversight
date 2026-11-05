@@ -3425,6 +3425,88 @@ async function runSeed(seed) {
       namesKnown, namesKnownNames, flesh,
     };
   };
+  // R106-ARMS-WHY: read-only gear read replicating win-plan.js gearOf
+  // (Scattering.equipment.armorOf/weaponBonusOf + carried-weapon scan).
+  // Pure read — no mutation, no plan seeding. Returns nulls when the
+  // person or the equipment table cannot be read (unknown, not unarmed).
+  const winPlanGearRead = (vid) => {
+    try {
+      const p = person(vid);
+      if (!p || !p.id && !p.name) return { armed: null, armored: null, note: 'no-person' };
+      const items = (Game.data && Game.data.items) || [];
+      const S = (typeof globalThis !== 'undefined' ? globalThis.Scattering : null) || {};
+      const eq = S.equipment || null;
+      let armorP = 0, weaponB = 0;
+      try { armorP = (eq && eq.armorOf) ? (eq.armorOf(p, items) || 0) : 0; } catch (e) { console.log('ARMS-WHY armorOf ERROR ' + vid + ': ' + (e && e.message)); }
+      try { weaponB = (eq && eq.weaponBonusOf) ? (eq.weaponBonusOf(p, items) || 0) : 0; } catch (e) { console.log('ARMS-WHY weaponBonusOf ERROR ' + vid + ': ' + (e && e.message)); }
+      if (!eq) return { armed: null, armored: null, note: 'no-equipment-table' };
+      let carriesWeapon = false;
+      try {
+        for (let i = 0; i < ((p.items || []).length); i++) {
+          const iid = p.items[i] && (p.items[i].itemId || p.items[i].id || p.items[i]);
+          let def = null;
+          for (let j = 0; j < items.length; j++) if (items[j] && items[j].id === iid) { def = items[j]; break; }
+          if (def && def.weapon) { carriesWeapon = true; break; }
+        }
+      } catch (e) { console.log('ARMS-WHY carried-weapon ERROR ' + vid + ': ' + (e && e.message)); }
+      return { armed: !!(weaponB > 0 || carriesWeapon), armored: armorP > 0, armorP, weaponB };
+    } catch (e) { console.log('ARMS-WHY gear read ERROR ' + vid + ': ' + (e && e.message)); return { armed: null, armored: null, note: 'error' }; }
+  };
+  // R106-ARMS-WHY: read-only precondition snapshot for the silent win-plan
+  // arms (Q1). Counts the STATES each arm needs, not the arm events:
+  // prims (bondTends needs >=2 own primary links), herald muster
+  // (musterStanddowns), defer-beat waves (seek/standing isTarget),
+  // wave-4+ kills + table plans (veteranGuardHolds/trickHolds/avoidances),
+  // gear-stage holders' gear (gearHolds needs unarmed AND unarmored).
+  // All reads are raw state or public read accessors; nothing seeds,
+  // mutates, or departs anyone. Errors are logged, never swallowed.
+  const winPlanPrecond = () => {
+    try {
+      const v = Game.state.village || {};
+      const plans = v.winPlan || {};
+      const holders = Object.keys(plans);
+      const stages = {};
+      let tablePlans = 0;
+      const gearHolders = [];
+      for (const id of holders) {
+        const p = plans[id] || {};
+        const st = p.stage || null;
+        stages[st] = (stages[st] || 0) + 1;
+        if (st === 'table') tablePlans++;
+        if (st === 'gear') {
+          const g = winPlanGearRead(id);
+          gearHolders.push({ id, name: vname(id), armed: g.armed, armored: g.armored, sinceDay: (p.sinceDay != null ? p.sinceDay : null) });
+        }
+      }
+      let prims = null, primsMinTrust = null, primsUnder50 = null;
+      try {
+        const links = (typeof Game.hierarchyState === 'function') ? (Game.hierarchyState() || []) : [];
+        const own = links.filter(l => l && l.status === 'active' && l.primary === 'haven');
+        prims = own.length;
+        if (own.length) {
+          primsMinTrust = Math.min.apply(null, own.map(l => (l.trust || 0)));
+          primsUnder50 = own.filter(l => (l.trust || 0) < 50).length;
+        }
+      } catch (e) { console.log('ARMS-WHY prims ERROR: ' + (e && e.message)); }
+      let muster = null, musterAge = null;
+      try {
+        const m = (typeof Game.titanMusterState === 'function') ? Game.titanMusterState('herald') : null;
+        muster = !!m;
+        if (m) { try { musterAge = ((Game.state.scholar || {}).day || 0) - (m.day || 0); } catch (e2) { musterAge = null; } }
+      } catch (e) { console.log('ARMS-WHY muster ERROR: ' + (e && e.message)); }
+      let beat4 = null, beat5 = null;
+      try {
+        const beat = (Game.state && Game.state._standingDeferBeat) || {};
+        beat4 = beat[4] != null; beat5 = beat[5] != null;
+      } catch (e) { console.log('ARMS-WHY beat ERROR: ' + (e && e.message)); }
+      let wave4kills = 0, maxWaveKill = 0;
+      try {
+        const log = (Game.state && Game.state.waveKillLog) || [];
+        for (const e of log) { const w = (e && e.w) | 0; if (w > maxWaveKill) maxWaveKill = w; if (w >= 4) wave4kills++; }
+      } catch (e) { console.log('ARMS-WHY waveKillLog ERROR: ' + (e && e.message)); }
+      return { stages, tablePlans, gearHolders, prims, primsMinTrust, primsUnder50, muster, musterAge, beat4, beat5, wave4kills, maxWaveKill };
+    } catch (e) { console.log('ARMS-WHY precond ERROR: ' + (e && e.message)); return null; }
+  };
   // R104 WINPLAN: read-only snapshot of the win-plan system (src/js/win-plan.js).
   // Stats are copied from state.village.winPlanStats; holders are counted from
   // the raw state.village.winPlan map. NEVER via Game.winPlanOf — that accessor
@@ -3445,7 +3527,7 @@ async function runSeed(seed) {
           partySize: Array.isArray(p.party) ? p.party.length : null,
         };
       });
-      return { stats, holders, holderCount: holders.length };
+      return { stats, holders, holderCount: holders.length, precond: winPlanPrecond() };
     } catch (e) { console.log('WINPLAN SNAPSHOT ERROR: ' + (e && e.message)); return null; }
   };
   // r8: starvation-death autopsy — record context the day it happens
@@ -3680,7 +3762,9 @@ async function runSeed(seed) {
         ctx._winPlanD14 = winPlanSnapshot();
         try {
           const w = ctx._winPlanD14;
+          const pc = (w && w.precond) || {};
           console.log(`*** WINPLAN d14: planSeeds=${(w && w.stats && w.stats.planSeeds) || 0} holders=${(w && w.holderCount) || 0} stages=${JSON.stringify(((w && w.holders) || []).map(h => h.stage))}`);
+          console.log(`*** ARMS-WHY d14: prims=${pc.prims} muster=${pc.muster} beat4=${pc.beat4} beat5=${pc.beat5} wave4kills=${pc.wave4kills} maxWaveKill=${pc.maxWaveKill} tablePlans=${pc.tablePlans} gearHolders=${JSON.stringify(pc.gearHolders || [])}`);
         } catch (e) { console.log('WINPLAN d14 LOG ERROR: ' + (e && e.message)); }
       }
       // r18: mantle tracking — the journal holder can change when the

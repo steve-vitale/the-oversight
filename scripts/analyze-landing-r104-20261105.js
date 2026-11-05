@@ -1074,6 +1074,9 @@ console.log(`SUCCESSION (r60 Q-D): latencies=[${successionLatencies.join(',')}] 
   let wpSeeds = 0, wpD14Seeds = 0, wpD28Seeds = 0, wpD14Holders = 0, wpD28Holders = 0;
   const wpTotals = { d14: {}, d28: {} };
   const wpLines = [];
+  // R106-ARMS-WHY roll-up: M-A1 gear-precondition, M-A2 structural reachability.
+  let awD28 = 0, awGearUnarmed = 0, awGearUnknown = 0, awPrimsGt0 = 0, awMuster = 0, awBeat4 = 0, awBeat5 = 0, awWave4 = 0, awTable = 0;
+  const awLines = [];
   for (const f of files) {
     const seed = f.replace(/.*census-(\d+)\.json$/, '$1');
     let d = null;
@@ -1091,6 +1094,26 @@ console.log(`SUCCESSION (r60 Q-D): latencies=[${successionLatencies.join(',')}] 
       for (const k of Object.keys(st)) wpTotals[tag][k] = (wpTotals[tag][k] || 0) + (st[k] || 0);
       const stages = holders.map(h => `${h.name}:${h.stage}${h.sinceDay != null ? '@d' + h.sinceDay : ''}`).join(',');
       wpLines.push(`${seed}:${tag} planSeeds=${ps} stageAdv=${st.stageAdvances || 0} invites=${st.partyInvites || 0} departs=${st.partyDepartures || 0} waits=${st.partyWaits || 0} gearHolds=${st.gearHolds || 0} bondTends=${st.bondTends || 0} avoid=${st.avoidances || 0} seek=${st.seekContacts || 0} holders=${holders.length}${stages ? ' [' + stages + ']' : ''}`);
+      // R106-ARMS-WHY: per-seed precondition line (null precond = pre-R106 census).
+      const pc = (snap && snap.precond) || null;
+      if (!pc) { awLines.push(`${seed}:${tag} NO-PRECOND (pre-R106 census or instrument miss)`); }
+      else {
+        const gh = (pc.gearHolders || []).map(g => `${g.name}:${g.armed === null ? '?' : (g.armed ? 'armed' : 'unarmed')}/${g.armored === null ? '?' : (g.armored ? 'armored' : 'bare')}`).join(',');
+        awLines.push(`${seed}:${tag} stages=${JSON.stringify(pc.stages || {})} prims=${pc.prims} muster=${pc.muster} beat4=${pc.beat4} beat5=${pc.beat5} wave4kills=${pc.wave4kills} maxWave=${pc.maxWaveKill} table=${pc.tablePlans} gear=[${gh}]`);
+        if (tag === 'd28') {
+          awD28++;
+          for (const g of (pc.gearHolders || [])) {
+            if (g.armed === null || g.armored === null) awGearUnknown++;
+            else if (!g.armed && !g.armored) awGearUnarmed++;
+          }
+          if ((pc.prims || 0) > 0) awPrimsGt0++;
+          if (pc.muster) awMuster++;
+          if (pc.beat4) awBeat4++;
+          if (pc.beat5) awBeat5++;
+          if ((pc.wave4kills || 0) > 0) awWave4++;
+          if ((pc.tablePlans || 0) > 0) awTable++;
+        }
+      }
     }
   }
   for (const l of wpLines) console.log('  R104 WINPLAN ' + l);
@@ -1098,4 +1121,9 @@ console.log(`SUCCESSION (r60 Q-D): latencies=[${successionLatencies.join(',')}] 
     (wpSeeds === 0 ? 'NO-DATA (no winPlan field — instrument never ran)' :
      wpD14Seeds === 0 && wpD14Holders === 0 ? 'GOAL-SILENT at d14 (no plan seeded, no holder — goals do not bite in the landing window)' :
      'GOAL-LIVE at d14 (plans seeded and/or held in the first fortnight — see per-seed lines)'));
+  for (const l of awLines) console.log('  R106 ARMS-WHY ' + l);
+  console.log(`R106 ARMS-WHY: d28 censuses=${awD28} gear-stage unarmed+unarmored=${awGearUnarmed} gear-unknown=${awGearUnknown} prims>0 on ${awPrimsGt0} seeds muster on ${awMuster} beat4 on ${awBeat4} beat5 on ${awBeat5} wave4kills on ${awWave4} table-plans on ${awTable} ` +
+    (awD28 === 0 ? 'NO-DATA (no precond block — instrument never ran)' :
+     (awGearUnarmed === 0 && awGearUnknown === 0) ? 'M-A1: gearHold precondition NEVER arose at snapshot (every gear-stage holder armed-or-armored) — gearHolds unreachable-by-construction at snapshot; M-A2: ' + ((awPrimsGt0 === 0 && awMuster === 0 && awWave4 === 0 && awTable === 0) ? 'STRUCTURALLY-UNREACHABLE (prims 0, no muster, no wave-4 kills, no table plans on all d28 censuses)' : 'COUNTEREXAMPLE present (see counts) — that arm\'s silence is a live question') :
+     'M-A1: gearHold precondition AROSE (unarmed+unarmored gear-stage holder at snapshot) — 0 gearHolds needs a gate-side explanation; M-A2: ' + ((awPrimsGt0 === 0 && awMuster === 0 && awWave4 === 0 && awTable === 0) ? 'STRUCTURALLY-UNREACHABLE for the other arms (prims 0, no muster, no wave-4 kills, no table plans)' : 'COUNTEREXAMPLE present (see counts)')));
 }
