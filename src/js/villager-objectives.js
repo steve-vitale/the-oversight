@@ -266,6 +266,14 @@
     // Called at dawn (dayPart 0) and whenever a villager is idle at haven.
     objPick(vid, hx, hy) {
       var o = this.objOf(vid);
+      // FRESH PICK (journey deepening r102): a new errand must not speak
+      // the last errand's reason. The lottery sets o.goal/o.goalLine only
+      // when the drawn candidate carries a goal boost, and every early
+      // return (LEAVE/REST/EAT/SEEK/HAUL) sets no goal at all — so without
+      // this reset an unboosted pick inherits the previous objective's
+      // annotation and the departure line appends a stale goalLine. Same
+      // class as the hunt/chore resets below.
+      o.goal = null; o.goalLine = null;
       var v = this.state.village;
       var vp = {};
       try { vp = this.vpOf(vid) || {}; } catch (e) {}
@@ -942,6 +950,10 @@
       // the companion walks with them: same target, same clock, purpose 'guard'
       var co2 = this.objOf(cid);
       co2.kind = 'GUARD'; co2.purpose = 'guard'; co2.state = 'ready';
+      // FRESH ERRAND (journey deepening r102): the guard errand replaces
+      // the companion's own errand, so its goal annotation must not carry
+      // over — same stale-goal class as the objPick reset.
+      co2.goal = null; co2.goalLine = null;
       co2.tx = obj.tx; co2.ty = obj.ty; co2.targetVid = vid;
       co2.tightness = obj.tightness; co2.partsLeft = obj.partsLeft;
       co2.indoor = false; co2.companion = vid;
@@ -1361,6 +1373,10 @@
           if (ast2.exped && ast2.exped[rid]) {
             var ex = ast2.exped[rid];
             o.kind = 'EXPLORE'; o.purpose = 'expedition'; o.state = 'out';
+            // FRESH ERRAND (journey deepening r102): agency takes over
+            // this villager, so the previous errand's goal annotation
+            // must not carry onto the expedition.
+            o.goal = null; o.goalLine = null;
             o.indoor = false; o.tx = ex.tx; o.ty = ex.ty;
             o.targetVid = null; o.companion = null;
             continue; // agency moves them; nothing more to do here
