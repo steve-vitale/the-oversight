@@ -135,6 +135,7 @@ const ASSETS = [
   "./src/js/godverbs.js?v=19a98e478-20261107-123116",
   "./src/js/endingKey.js?v=19a98e478-20261107-123116",
   "./src/js/telemetry-hooks.js?v=19a98e478-20261107-123116",
+  "./src/js/finishLog.js?v=19a98e478-20261107-123116",
   "./src/js/feel.js?v=19a98e478-20261107-123116",
   "./src/js/build.js?v=19a98e478-20261107-123116",
   "./src/js/whereAreWe.js?v=19a98e478-20261107-123116",
