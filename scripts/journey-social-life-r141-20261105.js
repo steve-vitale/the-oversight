@@ -312,11 +312,16 @@ async function oneSeed(seed) {
   const { Game, manifest } = await loadGame({ seed, mode: 'journey-social-life-r141', fullTelemetry: true, narration: true });
   // text capture ON (emit = the one text stream)
   const captured = [];
+  let capDropped = 0; // r141 M6: emit-trim accounting (see below)
   try {
     const _emit = Game.emit;
     Game.emit = function (...a) {
       try { captured.push({ d: (Game.state.scholar || {}).day || 0, s: a[1] || 'narration', t: String(a[0] || '').slice(0, 300) }); } catch (e) {}
-      if (captured.length > 50000) captured.splice(0, captured.length - 50000);
+      // r141 M6: the 50k trim drops the OLDEST entries, so any index
+      // recorded before a trim points past the new array's end. Track how
+      // many entries were dropped so daily slices can use GLOBAL indices
+      // (dropped + length) instead of raw array indices.
+      if (captured.length > 50000) { capDropped += captured.length - 50000; captured.splice(0, captured.length - 50000); }
       try { return _emit.apply(this, a); } catch (e) { return a[0]; }
     };
   } catch (e) {}
@@ -474,14 +479,20 @@ async function oneSeed(seed) {
       ctxShared.lastBearer = b;
     } catch (e) {}
     // r141 M6 (read-only): nightly haven-news census. Count naming-beat
-    // lines this day delivered while the scholar was away from Haven at
-    // the day's end (same stranded notion as gossipcensus-a: not inside
-    // Haven at daily exit; per-day slice, not a sleep window — the fix
-    // gates delivery on position entirely, so ANY burst/settle/witness/
-    // tale line on a stranded day is the defect). Classifiers are the
-    // gossipcensus-a ones; no Game call changes, no RNG.
+    // lines delivered since the LAST daily call — the slice runs from the
+    // previous daily's end to this daily's end, so it covers the night's
+    // endDay beats (the naming debate fires in endDay/advancePart, AFTER
+    // policy.daily returns — a slice from this daily's start would miss
+    // them entirely; probe-r141-trim proved it: slice-method 2 burst
+    // lines vs 48 in the full stream on seed 41801). Global indices
+    // (capDropped + length) so the 50k emit-trim cannot shift the slice.
+    // Stranded = scholar away from Haven when the slice is read, i.e.
+    // where they spent the night — the position the slice's endDay lines
+    // were delivered to. Classifiers are the gossipcensus-a ones; no
+    // Game call changes, no RNG.
     try {
-      const dayLines = captured.slice(c0).map(c => String(c.t || ''));
+      const m6start = Math.max(0, (ctxShared._m6endGlobal || 0) - capDropped);
+      const dayLines = captured.slice(m6start).map(c => String(c.t || ''));
       let burst = 0, settle = 0, witness = 0, tale = 0;
       for (const t of dayLines) {
         if (gc.isGossipBurstLine(t)) burst++;
@@ -492,6 +503,7 @@ async function oneSeed(seed) {
       let stranded = false;
       try { stranded = !G2.scholarAtHaven(); } catch (e2) {}
       ctxShared.nightlyNews.push({ day: d, stranded, burst, settle, witness, tale });
+      ctxShared._m6endGlobal = capDropped + captured.length;
     } catch (e2) {}
     if (d === 30 || d === 60 || d === 90) ctxShared.bondSnaps.push(bondSnap(G2));
     if (d === 30 || d === 60 || d === 90 || d === 120) ctxShared.darkSnaps.push(darkSnap(G2));

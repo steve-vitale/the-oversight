@@ -201,3 +201,26 @@ gates delivery on position entirely, so ANY naming-beat line on a
 stranded day is the defect; the approximation is named here, not
 hidden. Metrics M1–M6 are unchanged — only the instrument that reads
 M6.
+
+## INSTRUMENT CORRECTION 2 (pre-judgment of M6 — the slice was wrong)
+
+The re-run panel's M6 read 0 lines on 8 stranded days with 113 debates
+kicked — too clean. A probe (scripts/probe-r141-trim.js, seed 41801,
+37 days, socialite policy) proved the slice itself was broken, twice
+over: (a) the slice ran from THIS daily call's start, but the naming
+beat fires in endDay/advancePart AFTER policy.daily returns, so the
+lines fell in the gap between slices — slice-method 2 burst lines vs
+48 in the full stream, 0 settle vs 22, with 25 debates kicked; (b)
+the driver's 50k emit-trim drops the oldest entries, so raw array
+indices shift after the cap (not hit on 41801's 4,780 emits, but a
+live hazard on long runs). CORRECTION (read-only, no Game call
+changes, no RNG): the slice now runs from the PREVIOUS daily call's
+end to this daily's end, using GLOBAL indices (dropped + length) so
+the trim cannot shift it; stranded is read as the scholar's position
+when the slice is read — where they spent the night, the position
+the slice's endDay lines were delivered to. The first TWO panel
+runs' nightlyNews are DISCARDED as verdict inputs for M6 (their
+stranded-day zeros are false negatives from the gap); their
+trajectories stand (determinism proof re-verified on the re-run).
+The panel is RE-RUN a second time with the corrected instrument and
+M6 is judged on that run only.
