@@ -24,6 +24,26 @@ Seeds: 7, 42, 99, 1234, 555, 777, 2026, 31337 (capable policy, 120 days). Before
 - mean damage taken per wave-4 fight: before 31.91 / after 46.65 MISS (bar: <)
   wave-4 fights (panel mean): before 1.38 / after 5.25
   wave-4 outcomes (panel): before {"vDie":6,"vFlee":4,"vKill":1} / after {"vDie":15,"vFlee":23,"evade":3,"vKill":1}
+## E. Patrol deed + synergy wild fire + combat-42 (r104 follow-up; bars unchanged, new measurement)
+- patrol deed credits granted (panel mean): before 0.00 / after 0.00 MISS (bar: >)
+  patrol deed credits raw incl. capped (panel total): before 0 / after 0 (granted after: 0)
+- synergy bonuses granted (panel mean): before 0.00 / after 70.13 PASS (bar: > 0 (before has no synergy table))
+  synergy granted by id (panel): after {"forage_new_plant":45,"fight_with_ability":399,"teach_learned_skill":103,"heal_save":14}
+- max combat XP at day 42, living villagers (panel mean of seed maxima): before 0.00 / after 24.00 PASS (bar: >= 18 (r104 before: 17))
+  villagers crossed combat 18 by day 42 (panel total): before 0 / after 16 (r104: 0/29)
+## F. Establishment window — 42 days, competent, seeds 1501-1504 (r104 follow-up)
+  BEFORE (r104 published, same base/seeds/policy/horizon): max combat XP 17, 0/29 living villagers crossed 18.
+  - seed 1502: day 42 living 8 max combat XP 17 crossed 18: 0
+  - seed 1503: day 42 living 2 max combat XP 4 crossed 18: 0
+  - seed 1504: day 42 living 7 max combat XP 14 crossed 18: 0
+  AFTER (this build): max combat XP 17, 0/17 living villagers crossed 18 by day 42. NOT REACHED — 18 still uncrossed in 42 days.
+## G. Delegate panel — 42 days, delegate policy, seeds 1501-1504 (addendum 2: the bot that assigns patrol)
+  (Competent/capable never assign duties, so the patrol deed cannot fire under them. Delegate is competent + task delegation.)
+  - seed 1501: gameDays 43 (survived) patrol granted 2 (raw 2) combat42 max 15 crossed 18: 0 decisive-on-patrol: none
+  - seed 1502: gameDays 43 (survived) patrol granted 4 (raw 4) combat42 max 12 crossed 18: 0 decisive-on-patrol: none
+  - seed 1503: gameDays 43 (survived) patrol granted 3 (raw 3) combat42 max 13 crossed 18: 0 decisive-on-patrol: none
+  - seed 1504: gameDays 43 (survived) patrol granted 3 (raw 4) combat42 max 28 crossed 18: 3 decisive-on-patrol: none
+  DELEGATE TOTAL: patrol credits granted 12; villagers crossed combat 18 by day 42: 3, of them decisive on patrol XP: 0. The patrol deed FIRES in the wild when patrols are assigned.
 ## Healing (supporting)
 - heal checks (panel mean): before 364.00 / after 420.00 PASS (bar: >)
 - care rescues — saves (panel mean): before 47.63 / after 50.38 PASS (bar: >)

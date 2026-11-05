@@ -75,6 +75,11 @@ Fishing (350) and trapping (77) DO fire over 120d. Healing fires rarely
    8 seeds (STD16 first 8). Observer-side wrappers only (fieldFight,
    villagerHealCheck, noteCareRescue, _triageRun, creditDeed) — pure
    recording, same driver both arms.
+5. PATROL DEED (follow-up, commit 3f0c9ad68 — see the follow-up section
+   below): one new deed `patrol` (combat, n=1, perDay=1) for the patrol
+   duty, credited in resolvePatrol (uneventful + threat branches, dead
+   earn nothing). Driver + analyzer extended: day-42 combat snapshot,
+   creditSynergy wrap, policy-file fallback (POLICY=delegate).
 
 ## Proof tests (all green on the build)
 - scripts/test-xp-synergy-20261105.js — 18/18 (table shape, creditSynergy
@@ -87,6 +92,9 @@ Fishing (350) and trapping (77) DO fire over 120d. Healing fires rarely
   abilities, level-2 pool contains them, healing deeds cross the first
   threshold + sheet queues, recognition names Healer of the Shepherd of the
   Dead, caregiver deed unchanged).
+- scripts/test-xp-patrol-20261105.js — 13/13 (patrol deed shape; uneventful
+  patrol +1 combat XP capped 1/day; threat patrol credits patrol + a fight
+  deed; 25 patrol days cross combat 18; dead patroller earns nothing).
 
 ## Deliberately NOT changed
 - Win prices, deed gates, food costs, six ability slots, recognition
@@ -161,3 +169,68 @@ Fishing (350) and trapping (77) DO fire over 120d. Healing fires rarely
     Crafting 151 -> 120 (down 20% — small, likely seed variance; the bot
     crafted less). Hunting and trade still 0 in both arms (the actions
     never complete in the capable panel — the measured gap reported above).
+
+## Follow-up: patrol deed + combat-42 (r104 datum, 2026-11-05 ~15:47 CST)
+New datum (journey-establishment-r104, master 1de41ff6f): 4 seeds / 42 days,
+competent, 29/29 living villagers hold a granted ability, ZERO combat-kit
+ids held, NO villager crosses combat 18 (max 17). The combat track had only
+two deeds, both needing a fight. Parent instruction: make 18 reachable
+through everyday combat-adjacent deeds, not just fight wins. Bars unchanged.
+- WHAT CHANGED (commit 3f0c9ad68 [needs-eyes], proof test 13/13):
+  one new deed, `patrol` (combat, n=1, perDay=1), credited in
+  Game.resolvePatrol on completion — the uneventful branch (no threat; the
+  everyday source) and the threat branch (after the fight, when the
+  patroller lived; fight deeds credit separately; the dead earn nothing).
+  No guard/watch/spar/train mechanic exists to wire (convo-wants.js:1685);
+  scouting already credits `discovery`; flee/evade already credit
+  fight_survived. Driver now records a day-42 combat snapshot (raw npcXp,
+  same read r104 used), wraps creditSynergy (wild synergy count owed from
+  v1), and accepts a policy-file id (registry fallback).
+- V2 AFTER-ARM (8 seeds capable 120d, re-run on the amended build): numbers
+  BYTE-IDENTICAL to v1 (total deed XP 11077, thresholds 129, healers 0,
+  wave-4 rounds 1.48, guardrails identical) — because the patrol deed
+  granted ZERO credits in the whole panel. Wiring proven (13/13), so the
+  cause is the BOT: capable/competent NEVER ASSIGN TASKS (delegate.js
+  header, r11: "asg={} empty on all seeds, all weeks"). Patrol is a duty;
+  under these bots it never happens. Same root cause as hunting/trade
+  never firing. The capable panel's combat-42 (16 villagers crossed 18 by
+  day 42, max 24) is therefore FIGHT-driven (the v1 build's effect), not
+  patrol-driven.
+- EST42 (competent, seeds 1501–1504, 42d — the direct r104 comparison):
+  0 crossed, max 17 — UNCHANGED from r104, because the competent bot
+  never assigns patrol either (0 patrol credits). Seed 1501's village is
+  LOST by day 21 (r104: survived to day 43, 9 alive); 1503 has 2 living
+  at day 42 (r104: 9). The build's gameplay changes move early-game
+  survival per seed — a butterfly, same class as the v1 seed flips. The
+  capable 120d guardrails are unchanged vs v1, so this is a per-seed
+  early-window swing, not a panel-wide regression. Flagged, not chased.
+- DELEGATE PANEL (competent + task delegation, seeds 1501–1504, 42d):
+  the patrol deed FIRES in the wild when patrols are assigned — 12
+  credits granted (2/4/3/3 per seed; one capped same-day repeat on 1504).
+  3 villagers crossed combat 18 by day 42 (all on 1504, max 28) — but
+  DECISIVE-ON-PATROL: 0. The three crossers crossed on fight XP (+ lean);
+  patrol XP did not push any of them over. And patrols are RARE even
+  under the delegating bot (12 patrols in 4 villages x 42 days — the bot
+  sends only combat-credible villagers, only when the scholar is at
+  Haven). All four delegate villages survived to day 43 (living 7/8/10/
+  10) — delegation itself helps survival, one line, small sample.
+- VERDICT ON THE DATUM (honest): the mechanism is proven — a villager
+  patrolling daily reaches 18 in 18 days (proof test: 25 patrol days ->
+  25 XP -> crosses 18), and the deed fires in the wild whenever a patrol
+  is assigned. But in BOT play the establishment window still does not
+  cross on patrol: the bots assign patrols too rarely (capable/competent:
+  never; delegate: ~0.07/village/day). The binding constraint has moved
+  from "no deed exists" to "patrols are rarely assigned" — a
+  bot/duty-assignment question (same class as hunting/trade), NOT a deed
+  question. In HUMAN play the road is walkable (a player assigning patrols
+  daily walks villagers to 18), but no bot here measures human play. A
+  follow-up that would actually move the window: the bots assigning
+  patrol (or any outdoor duty) as part of normal play — a bot-policy job,
+  not a game-code job, and NOT done here.
+- SYNERGY WILD FIRE (measured at last — the v1 measurement gap, closed):
+  561 synergy bonuses granted across the 8-seed v2 panel (70.13/seed):
+  fight_with_ability 399, teach_learned_skill 103, forage_new_plant 45,
+  heal_save 14, craft_taught_recipe 0. The fight synergy fires constantly
+  (abilities are in play in most fights now); the taught-recipe synergy
+  never fires (crafting from taught recipes is rare in the capable panel
+  — same never-completes class as hunting/trade).
