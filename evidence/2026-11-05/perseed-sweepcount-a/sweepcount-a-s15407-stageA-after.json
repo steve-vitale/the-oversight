@@ -1,0 +1,160 @@
+{
+ "seed": 15407,
+ "stage": "A",
+ "tag": "after",
+ "fixture": {
+  "berries": {
+   "plantId": "blackberry",
+   "name": "unknown berries",
+   "lumpForm": "berries",
+   "units": 12,
+   "spoilDay": 10
+  },
+  "shoots": {
+   "plantId": "wild_onion",
+   "name": "unknown shoots",
+   "lumpForm": "shoots",
+   "units": 5,
+   "spoilDay": 15
+  },
+  "roots": {
+   "plantId": "sassafras",
+   "name": "unknown roots",
+   "lumpForm": "roots",
+   "units": 4,
+   "spoilDay": 38
+  }
+ },
+ "anchorOk": true,
+ "spoilBonusDays": 0,
+ "packBefore": {
+  "lumpUnits": 21,
+  "lumpSpoilDays": [
+   10,
+   15,
+   38
+  ],
+  "stacks": [
+   {
+    "name": "Mixtape",
+    "units": 1,
+    "foodState": null,
+    "spoilDay": null,
+    "lump": false,
+    "lumpForm": null
+   },
+   {
+    "name": "Trail mix",
+    "units": 2,
+    "foodState": null,
+    "spoilDay": 61,
+    "lump": false,
+    "lumpForm": null
+   },
+   {
+    "name": "Dried meat",
+    "units": 2,
+    "foodState": null,
+    "spoilDay": 31,
+    "lump": false,
+    "lumpForm": null
+   },
+   {
+    "name": "unknown berries",
+    "units": 12,
+    "foodState": "unknown",
+    "spoilDay": 10,
+    "lump": true,
+    "lumpForm": "berries"
+   },
+   {
+    "name": "unknown shoots",
+    "units": 5,
+    "foodState": "unknown",
+    "spoilDay": 15,
+    "lump": true,
+    "lumpForm": "shoots"
+   },
+   {
+    "name": "unknown roots",
+    "units": 4,
+    "foodState": "unknown",
+    "spoilDay": 38,
+    "lump": true,
+    "lumpForm": "roots"
+   }
+  ]
+ },
+ "lumpBefore": "unknown berries x12 @10 | unknown shoots x5 @15 | unknown roots x4 @38",
+ "spoilDayUsed": 10,
+ "sweepReturn": 1,
+ "sweepLines": [
+  "Overnight, 12 unknown berries went bad — beyond saving. You leave it for the flies.",
+  "Fresh food keeps days, not weeks. Smoke it over a fire to make it last."
+ ],
+ "packAfter": {
+  "lumpUnits": 9,
+  "lumpSpoilDays": [
+   15,
+   38
+  ],
+  "stacks": [
+   {
+    "name": "Mixtape",
+    "units": 1,
+    "foodState": null,
+    "spoilDay": null,
+    "lump": false,
+    "lumpForm": null
+   },
+   {
+    "name": "Trail mix",
+    "units": 2,
+    "foodState": null,
+    "spoilDay": 61,
+    "lump": false,
+    "lumpForm": null
+   },
+   {
+    "name": "Dried meat",
+    "units": 2,
+    "foodState": null,
+    "spoilDay": 31,
+    "lump": false,
+    "lumpForm": null
+   },
+   {
+    "name": "unknown shoots",
+    "units": 5,
+    "foodState": "unknown",
+    "spoilDay": 15,
+    "lump": true,
+    "lumpForm": "shoots"
+   },
+   {
+    "name": "unknown roots",
+    "units": 4,
+    "foodState": "unknown",
+    "spoilDay": 38,
+    "lump": true,
+    "lumpForm": "roots"
+   }
+  ]
+ },
+ "lumpAfter": "unknown shoots x5 @15 | unknown roots x4 @38",
+ "overnightLines": [
+  "Overnight, 12 unknown berries went bad — beyond saving. You leave it for the flies."
+ ],
+ "formNamedInSweep": true,
+ "countNamedInSweep": true,
+ "unitsNamedInSweep": true,
+ "removalHappened": [
+  "unknown berries|12"
+ ],
+ "stacksDiffNamesForm": {
+  "gone": [
+   "unknown berries|12"
+  ],
+  "namesBerries": true
+ }
+}

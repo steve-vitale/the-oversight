@@ -1,0 +1,272 @@
+{
+ "seed": 15401,
+ "stage": "B",
+ "tag": "after",
+ "fixture": {
+  "berries": {
+   "plantId": "blackberry",
+   "name": "unknown berries",
+   "lumpForm": "berries",
+   "units": 12,
+   "spoilDay": 10
+  },
+  "shoots": {
+   "plantId": "wild_onion",
+   "name": "unknown shoots",
+   "lumpForm": "shoots",
+   "units": 5,
+   "spoilDay": 15
+  },
+  "roots": {
+   "plantId": "sassafras",
+   "name": "unknown roots",
+   "lumpForm": "roots",
+   "units": 4,
+   "spoilDay": 38
+  }
+ },
+ "anchorOk": true,
+ "spoilBonusDays": 0,
+ "packBefore": {
+  "lumpUnits": 21,
+  "lumpSpoilDays": [
+   10,
+   15,
+   38
+  ],
+  "stacks": [
+   {
+    "name": "Dispatcher's headset",
+    "units": 1,
+    "foodState": null,
+    "spoilDay": null,
+    "lump": false,
+    "lumpForm": null
+   },
+   {
+    "name": "Trail mix",
+    "units": 2,
+    "foodState": null,
+    "spoilDay": 61,
+    "lump": false,
+    "lumpForm": null
+   },
+   {
+    "name": "Dried meat",
+    "units": 2,
+    "foodState": null,
+    "spoilDay": 31,
+    "lump": false,
+    "lumpForm": null
+   },
+   {
+    "name": "unknown berries",
+    "units": 12,
+    "foodState": "unknown",
+    "spoilDay": 10,
+    "lump": true,
+    "lumpForm": "berries"
+   },
+   {
+    "name": "unknown shoots",
+    "units": 5,
+    "foodState": "unknown",
+    "spoilDay": 15,
+    "lump": true,
+    "lumpForm": "shoots"
+   },
+   {
+    "name": "unknown roots",
+    "units": 4,
+    "foodState": "unknown",
+    "spoilDay": 38,
+    "lump": true,
+    "lumpForm": "roots"
+   }
+  ]
+ },
+ "lumpBefore": "unknown berries x12 @10 | unknown shoots x5 @15 | unknown roots x4 @38",
+ "endDayOk": true,
+ "dayAfter": 10,
+ "playerAlive": true,
+ "sweepCall": {
+  "prePack": {
+   "lumpUnits": 21,
+   "lumpSpoilDays": [
+    10,
+    15,
+    38
+   ],
+   "stacks": [
+    {
+     "name": "Dispatcher's headset",
+     "units": 1,
+     "foodState": null,
+     "spoilDay": null,
+     "lump": false,
+     "lumpForm": null
+    },
+    {
+     "name": "Trail mix",
+     "units": 2,
+     "foodState": null,
+     "spoilDay": 61,
+     "lump": false,
+     "lumpForm": null
+    },
+    {
+     "name": "Dried meat",
+     "units": 2,
+     "foodState": null,
+     "spoilDay": 31,
+     "lump": false,
+     "lumpForm": null
+    },
+    {
+     "name": "unknown berries",
+     "units": 12,
+     "foodState": "unknown",
+     "spoilDay": 10,
+     "lump": true,
+     "lumpForm": "berries"
+    },
+    {
+     "name": "unknown shoots",
+     "units": 5,
+     "foodState": "unknown",
+     "spoilDay": 15,
+     "lump": true,
+     "lumpForm": "shoots"
+    },
+    {
+     "name": "unknown roots",
+     "units": 4,
+     "foodState": "unknown",
+     "spoilDay": 38,
+     "lump": true,
+     "lumpForm": "roots"
+    },
+    {
+     "name": "Crowbar",
+     "units": 1,
+     "foodState": null,
+     "spoilDay": null,
+     "lump": false,
+     "lumpForm": null
+    },
+    {
+     "name": "Alien gauntlets",
+     "units": 1,
+     "foodState": null,
+     "spoilDay": null,
+     "lump": false,
+     "lumpForm": null
+    }
+   ]
+  },
+  "preLumps": "unknown berries x12 @10 | unknown shoots x5 @15 | unknown roots x4 @38",
+  "lines": [
+   "Overnight, 12 unknown berries went bad — beyond saving. You leave it for the flies.",
+   "Fresh food keeps days, not weeks. Smoke it over a fire to make it last.",
+   "The village threw out spoiled stores: Foraged food. Kai mutters: \"Should've smoked that. Fresh stuff keeps a day or two on the shelf — the smoke rack is right there.\" (pantry)"
+  ],
+  "ret": 2,
+  "err": null
+ },
+ "dawnWindow": [
+  "— DAY 1 DAWN — The world wakes. Animals are active.",
+  "— DAY 10 DAWN — The world wakes. Animals are active.",
+  "Overnight, 12 unknown berries went bad — beyond saving. You leave it for the flies.",
+  "Fresh food keeps days, not weeks. Smoke it over a fire to make it last.",
+  "The village threw out spoiled stores: Foraged food. Kai mutters: \"Should've smoked that. Fresh stuff keeps a day or two on the shelf — the smoke rack is right there.\" (pantry)"
+ ],
+ "dawnTranscript": [
+  "— DAY 10 DAWN — The world wakes. Animals are active.",
+  "Overnight, 12 unknown berries went bad — beyond saving. You leave it for the flies.",
+  "Fresh food keeps days, not weeks. Smoke it over a fire to make it last.",
+  "The village threw out spoiled stores: Foraged food. Kai mutters: \"Should've smoked that. Fresh stuff keeps a day or two on the shelf — the smoke rack is right there.\" (pantry)",
+  "👀 Someone asks Elena a shop-talk question about chimney sweep work. The pause before the answer is long enough to hear.",
+  "📓 Codex: A woman, maybe 40s, with a shaved head — jotted down what they said. Filed."
+ ],
+ "packAfter": {
+  "lumpUnits": 9,
+  "lumpSpoilDays": [
+   15,
+   38
+  ],
+  "stacks": [
+   {
+    "name": "Dispatcher's headset",
+    "units": 1,
+    "foodState": null,
+    "spoilDay": null,
+    "lump": false,
+    "lumpForm": null
+   },
+   {
+    "name": "Trail mix",
+    "units": 2,
+    "foodState": null,
+    "spoilDay": 61,
+    "lump": false,
+    "lumpForm": null
+   },
+   {
+    "name": "Dried meat",
+    "units": 2,
+    "foodState": null,
+    "spoilDay": 31,
+    "lump": false,
+    "lumpForm": null
+   },
+   {
+    "name": "unknown shoots",
+    "units": 5,
+    "foodState": "unknown",
+    "spoilDay": 15,
+    "lump": true,
+    "lumpForm": "shoots"
+   },
+   {
+    "name": "unknown roots",
+    "units": 4,
+    "foodState": "unknown",
+    "spoilDay": 38,
+    "lump": true,
+    "lumpForm": "roots"
+   },
+   {
+    "name": "Crowbar",
+    "units": 1,
+    "foodState": null,
+    "spoilDay": null,
+    "lump": false,
+    "lumpForm": null
+   },
+   {
+    "name": "Alien gauntlets",
+    "units": 1,
+    "foodState": null,
+    "spoilDay": null,
+    "lump": false,
+    "lumpForm": null
+   }
+  ]
+ },
+ "lumpAfter": "unknown shoots x5 @15 | unknown roots x4 @38",
+ "overnightLines": [
+  "Overnight, 12 unknown berries went bad — beyond saving. You leave it for the flies."
+ ],
+ "formNamedInSweep": true,
+ "countNamedInSweep": true,
+ "unitsNamedInSweep": true,
+ "removalHappened": [
+  "unknown berries|12"
+ ],
+ "stacksDiffNamesForm": {
+  "gone": [
+   "unknown berries|12"
+  ],
+  "namesBerries": true
+ }
+}
