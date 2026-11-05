@@ -4253,6 +4253,7 @@
     try { this.npcPlotTick(); } catch (e) {}
     try { this.npcInviteTick(); } catch (e) {}
     try { if (this.npcBondTick) this.npcBondTick(); } catch (e) {} // BOND-INITIATION (2026-11-05): villagers initiate bonds — daily bond-proposal staging
+    try { if (this.npcPairBondTick) this.npcPairBondTick(); } catch (e) {} // BOND-INITIATION (2026-11-05 tuning 2): villagers ask EACH OTHER — daily NPC->NPC pair proposals
     try { if (this.npcLinkRaiseTick) this.npcLinkRaiseTick(); } catch (e) {} // BOND-INITIATION (2026-11-05): villagers raise village links to the bearer
     try { this.dayOneNudge(); } catch (e) {}
     try { this.considerStrangers(); } catch (e) {}

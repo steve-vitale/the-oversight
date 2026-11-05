@@ -136,7 +136,12 @@ function install(Game) {
       try { r = orig.tele.apply(this, arguments); } catch (e) { throw e; }
       try {
         if (type === 'bond_proposed' && data && typeof data === 'object') {
-          t.bondTeleEvents.push({ day: dayOf(Game), initiator: data.initiator || null,
+          // Scholar at EVENT time (succession changes the scholar: the
+          // final scholarId would misattribute earlier asks).
+          let sid = null;
+          try { sid = Game.villagerId || null; } catch (e) {}
+          t.bondTeleEvents.push({ day: dayOf(Game), scholarId: sid,
+            initiator: data.initiator || null,
             target: data.target || null, kind: data.kind || 'person',
             outcome: data.outcome || null, chance: (data.chance == null ? null : data.chance),
             reason: data.reason || null });

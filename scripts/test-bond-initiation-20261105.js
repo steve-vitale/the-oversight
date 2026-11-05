@@ -67,6 +67,19 @@ eq('summarize link raises', AN.summarizeSeed(baseOut({
   daily: [snap(90)],
   bondTeleEvents: [tele(20, 'v1', null, 'link', 'staged', null), tele(22, 'v2', null, 'link', 'raised', null)],
 })).linkRaises, 2);
+eq('summarize expired are not proposals', AN.summarizeSeed(baseOut({
+  daily: [snap(90, { bondsTotal: 12, bondsInitiated: 0, bondsAccumulated: 12 })],
+  bondTeleEvents: [tele(10, 'v1', 'v2', 'person', 'staged', null), tele(12, 'v1', 'v2', 'person', 'expired', null),
+    tele(20, 'v1', null, 'link', 'staged', null), tele(22, 'v1', null, 'link', 'expired', null)],
+})).proposalsPerson, 1);
+eq('summarize expired are not link raises', AN.summarizeSeed(baseOut({
+  daily: [snap(90)],
+  bondTeleEvents: [tele(20, 'v1', null, 'link', 'staged', null), tele(22, 'v1', null, 'link', 'expired', null)],
+})).linkRaises, 1);
+eq('summarize per-event scholar beats final scholar', AN.summarizeSeed(baseOut({
+  daily: [snap(90, { scholarId: 'gen_new' })],
+  bondTeleEvents: [{ day: 10, scholarId: 'gen_old', initiator: 'gen_new', target: 'v2', kind: 'person', outcome: 'staged', chance: null, reason: null }],
+})).proposalsPersonNpc, 1);
 // 2. judgePanel GO: all bars pass.
 eq('judge GO', AN.judgePanel([
   { leg: 'armed', seed: 84101, proposalsPerson: 3, proposalsPersonNpc: 3, accepted: 2, refused: 1, bondsInitiated: 2, linkRaises: 1, gateFails: 0, errors: 0, days: 90, bondsAccumulated: 9 },
@@ -294,8 +307,105 @@ async function live() {
         // proposeLink may decline/counter (courtship) — the call itself is the proof.
         eq('accept link raise called proposeLink', acc.proposed, true);
       }
+      // --- Link-raise cooldown: decline, re-stage refused, age, re-stage works. ---
+      // Same knower, second village (the cooldown is per villager+village;
+      // the accept above already recorded (knower, target) as decided).
+      const target2 = (ovs.length > 1) ? ovs[1].id : null;
+      if (target2) {
+        try { if (Game.recordVillageLore) Game.recordVillageLore(knower, target2, { how: 'seen-nearby' }); } catch (e) {}
+        const r2 = Game.stageLinkRaise(knower, target2);
+        eq('cooldown stage second raise', !!(r2 && r2.vid === knower && r2.villageId === target2), true);
+        const dec2 = Game.declineLinkRaise(knower);
+        eq('cooldown decline second raise', dec2.ok, true);
+        eq('cooldown re-stage refused', Game.stageLinkRaise(knower, target2), null);
+        try {
+          const st = Game.state.village.linkRaiseState || {};
+          const key = [knower, target2].sort().join('|');
+          if (st[key]) st[key].day = (st[key].day || 0) - 15;
+        } catch (e) {}
+        const r3 = Game.stageLinkRaise(knower, target2);
+        eq('cooldown aged re-stage works', !!(r3 && r3.vid === knower && r3.villageId === target2), true);
+        Game.declineLinkRaise(knower); // clean up the pending
+      } else { console.log('SKIP link cooldown: only one other village on this seed'); }
     }
   } else { console.log('SKIP link raise: no other villages on this seed'); }
+  // --- Lore tell: the scholar tells a villager about a village. ---
+  if (ovs.length) {
+    const tTarget = ovs[0].id;
+    try { if (Game.recordVillageLore) Game.recordVillageLore(Game.villagerId, tTarget, { how: 'rumor' }); } catch (e) {}
+    let tVid = null;
+    for (let i = 0; i < roster.length && !tVid; i++) {
+      const id = roster[i];
+      if (id === Game.villagerId) continue;
+      try {
+        const lore = (Game.villageLoreOf ? Game.villageLoreOf(id) : {}) || {};
+        if (!lore[tTarget]) tVid = id;
+      } catch (e) {}
+    }
+    if (tVid) {
+      const startDay = ((Game.state || {}).scholar || {}).day || 0;
+      let told = false;
+      for (let d = 0; d <= 40 && !told; d++) {
+        try { Game.state.scholar.day = startDay + d; } catch (e) {}
+        try {
+          Game.maybeTellVillageLore(tVid);
+          const lore = (Game.villageLoreOf ? Game.villageLoreOf(tVid) : {}) || {};
+          if (lore[tTarget]) told = true;
+        } catch (e) {}
+      }
+      try { Game.state.scholar.day = startDay; } catch (e) {}
+      eq('scholar tells villager a village', told, true);
+      const entry = (Game.villageLoreOf ? Game.villageLoreOf(tVid) : {})[tTarget] || {};
+      eq('tell is secondhand from the scholar', entry.how, 'told');
+    } else { console.log('SKIP lore tell: every villager already knows the village'); }
+  } else { console.log('SKIP lore tell: no other villages on this seed'); }
+  // --- Pair tick: villagers ask EACH OTHER in the wild (daily tick). ---
+  let warmPair = null;
+  outer2: for (let i = 0; i < roster.length; i++) {
+    for (let j = 0; j < roster.length; j++) {
+      if (i === j) continue;
+      const a = roster[i], b = roster[j];
+      if (pair && ((a === pair[0] && b === pair[1]) || (a === pair[1] && b === pair[0]))) continue;
+      if (pair2 && ((a === pair2[0] && b === pair2[1]) || (a === pair2[1] && b === pair2[0]))) continue;
+      warmPair = [a, b];
+      break outer2;
+    }
+  }
+  if (warmPair) {
+    try { if (Game.bondAdd) Game.bondAdd(warmPair[0], warmPair[1], 6, 'test setup'); } catch (e) {}
+    const wpb = Game.bondGet ? Game.bondGet(warmPair[0], warmPair[1]) : null;
+    if (wpb) wpb.v = 25;
+    // Direct call on a day the hash gate passes (deterministic per seed).
+    const startDay = ((Game.state || {}).scholar || {}).day || 0;
+    let passDay = null;
+    for (let d = startDay; d <= startDay + 90; d++) {
+      try { if (Game.bondRoll && Game.bondRoll('pairtick', d) < 0.08) { passDay = d; break; } } catch (e) {}
+    }
+    if (passDay == null) { console.log('SKIP pair tick direct: no passing day in 90'); }
+    else {
+      let directCalls = [];
+      const _pb = Game.proposeBond.bind(Game);
+      Game.proposeBond = function (a, b, o) { const r = _pb(a, b, o); directCalls.push({ a: a, b: b, ret: r }); return r; };
+      try { Game.state.scholar.day = passDay; } catch (e) {}
+      Game.npcPairBondTick();
+      Game.proposeBond = _pb;
+      try { Game.state.scholar.day = startDay; } catch (e) {}
+      eq('pair tick proposes', directCalls.length >= 1, true);
+      eq('pair tick proposal decides', directCalls.some(function (c) { return c.ret && c.ret.ok; }), true);
+    }
+    // The tick also runs daily from betrayalDaily — prove the hook by
+    // running 60 days and counting tick calls + wild proposeBond rows.
+    const inst2 = INST.install(Game);
+    let tickCalls = 0;
+    const _pt = Game.npcPairBondTick.bind(Game);
+    Game.npcPairBondTick = function () { tickCalls++; return _pt(); };
+    await quietLog(async function () { await runDays(Game, competent, { days: 60, manifest: undefined, sampleEvery: 30 }); });
+    Game.npcPairBondTick = _pt;
+    const wildRows = inst2.t.proposalEvents.filter(function (e) { return e.fn === 'proposeBond'; });
+    inst2.uninstall();
+    eq('pair tick runs daily', tickCalls >= 50, true);
+    eq('wild proposeBond calls happen', wildRows.length >= 1, true);
+  } else { console.log('SKIP pair tick: no undecided pair to warm'); }
 }
 
 (async function () {

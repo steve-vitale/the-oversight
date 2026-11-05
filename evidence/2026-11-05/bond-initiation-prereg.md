@@ -184,3 +184,56 @@ perception-law violation and fails the run.
   villager-goals system's own bonds objective never fires in the wild.
   That is a goals-system finding, NOT this build's to fix — no change
   to villager-goals.js in this build.
+
+## Tuning amendment 2 (2026-11-05, after armed pilot 2 — BEFORE re-pilot)
+
+- Armed pilot 2 (seeds 84101–84103, 90d, commit 5f6cce73a): staging
+  WORKS (12/8/7 staged per seed, by several villagers) but nothing
+  ever decides — 0 accepted, 0 refused, 0 initiated bonds, 0 link
+  raises, 0 errors, 0 gate fails. The counting as written read 24/16/14
+  "proposals" (see fix 1). Bars M1–M6 UNCHANGED.
+- Fix 1 — analyzer double-count: an expiry is the lifecycle of an
+  already-counted ask, not a new ask. 12 staged + 12 expired read as
+  24 "proposals", which also broke M3's <=12/seed spam cap by design.
+  Now `proposalsPerson` / `linkRaises` exclude outcome 'expired'.
+- Fix 2 — succession misattribution: the analyzer used the FINAL
+  scholarId, so a stager who later became scholar counted as
+  scholar-initiated (84102: 14 of 16; 84103: 14 of 14). The instrument
+  now stamps scholarId at event time; the analyzer uses the per-event
+  stamp with fallback to the final id.
+- Fix 3 — NPC->NPC path never fires: 19 VISIT arrivals in 90 days,
+  all `no-drive` for their specific pair; `proposeBond` never called.
+  New daily `npcPairBondTick` (gate 0.08, at most one pair a day):
+  picks among warming, perceived, not-disliked pairs and proposes —
+  decided at once by character, so this is the path that produces
+  wild acceptances. The VISIT-arrival path stays as the in-the-moment
+  trigger. Scholar-staging gate lowered 0.6 -> 0.25: staging alone ran
+  ~12/73d, over M3's <=12/seed cap once pair proposals add in.
+- Fix 4 — link raises never fire: `loreAny` 0 across 90 days. Only the
+  scholar gains village lore (rumors, approaches, links); villagers
+  learn it only via `tellVillageLore`, which nothing in the wild calls.
+  New `maybeTellVillageLore` on conversation end: the scholar tells
+  the villager about a village they know (told, secondhand, traced to
+  the scholar by name; gate 0.3). Silent bookkeeping — the link raise
+  is the visible moment. Plus a 14-day re-raise cooldown per
+  villager+village (decided or expired), the bond side's spam guard
+  mirrored for links.
+- Fix 5 — RNG-stream drift: the module's own Math.random draws (2/day
+  of tick gates) swung identical-seed panels with zero game effect
+  behind the swing (84103 pilot 1: days 90 -> 71, bonds 62 -> 40), so
+  M5's paired comparison measured noise. All module lotteries now use
+  hash rolls (`bondRoll`: FNV-1a + fmix32 finalizer; verified uniform —
+  pairtick 3/90 at 0.08, bondtick 20/90 at 0.25, linktick 42/90 at 0.5).
+  Raw FNV-1a without the finalizer clustered on short inputs
+  (`pairtick|N` all 0.25–0.43, so the 0.08 gate never passed) — the
+  finalizer is load-bearing, not cosmetic. `npcInviteDecision` still
+  rolls Math.random (existing code, per decided proposal only).
+- Fix 6 — wiring bug found by the proof test: internal callers used
+  the closure `proposeBond` / resolvers directly, bypassing
+  `Game.proposeBond` — the instrument (and M6's gate check) never saw
+  pair-tick / VISIT proposals or conversation resolutions. Internal
+  callers now go through the public methods with closure fallback.
+- Gates now: staging 0.25, pair tick 0.08, link tick 0.5, tell 0.3,
+  VISIT propose 0.25. Proof test 60/60 (new: expired/succession
+  fixtures, pair-tick direct + 60d hook, lore tell, link cooldown);
+  fingerprint identical across two separate processes.

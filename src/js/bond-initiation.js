@@ -4,6 +4,7 @@
 // provides:
 //   - bondProposalPerceived(initiatorVid, targetVid)
 //   - bondDriveLive(vid, targetVid)
+//   - bondRoll(...parts) (deterministic hash roll, for tests)
 //   - proposeBond(initiatorVid, targetVid, opts)
 //   - bondProposalMaybe(initiatorVid, targetVid)
 //   - stageBondProposal(vid)
@@ -11,6 +12,8 @@
 //   - acceptBondProposal(vid)
 //   - declineBondProposal(vid)
 //   - npcBondTick()
+//   - npcPairBondTick()
+//   - maybeTellVillageLore(vid)
 //   - stageLinkRaise(vid, villageId)
 //   - pendingLinkRaise(vid)
 //   - acceptLinkRaise(vid)
@@ -23,8 +26,10 @@
 //   - bondinit_character_decision: the target decides through npcInviteDecision kind 'bond' — temperament, goal, mood, fear, pair relationship, social need; chance clamped 5-95, never always/never. (code: proposeBond)
 //   - bondinit_player_chooses_path: hierarchy propose verbs stay player-only (Steve 2026-10-26). An NPC raises a link idea; the player proposes. acceptLinkRaise first tells the bearer the lore (tellVillageLore), then calls proposeLink. (code: acceptLinkRaise)
 //   - bondinit_scholar_decides: a proposal TO the scholar is never auto-decided — it stages as a pending conversation beat the player answers. (code: stageBondProposal)
-//   - bondinit_drive_first: wild proposals fire only from VISIT arrivals, only while the pair's bond is warming but not yet close (bondDriveLive: 15 <= warmth < 50, depth < 1), only to someone they do not dislike (pairAffinity >= 0). Scholar proposals stage only while the villager's bond with the scholar is warming the same way. (code: bondProposalMaybe, bondDriveLive)
-//   - bondinit_no_spam: a refused pair cools down 14 days; an accepted bond is never re-proposed; at most one bond staging and one link-raise staging per day. (code: proposeBond, npcBondTick, npcLinkRaiseTick)
+//   - bondinit_drive_first: wild proposals fire only from VISIT arrivals or the daily pair tick, only while the pair's bond is warming but not yet close (bondDriveLive: 15 <= warmth < 50, depth < 1), only to someone they do not dislike (pairAffinity >= 0). Scholar proposals stage only while the villager's bond with the scholar is warming the same way. (code: bondProposalMaybe, npcPairBondTick, bondDriveLive)
+//   - bondinit_no_spam: a refused pair cools down 14 days; an accepted bond is never re-proposed; at most one bond staging, one pair proposal, and one link-raise staging per day; a link raise decided or expired within 14 days is not re-raised. (code: proposeBond, npcBondTick, npcPairBondTick, npcLinkRaiseTick)
+//   - bondinit_lore_spread: a villager learns a village only by being told it by someone who knows it (tellVillageLore, secondhand, traced by name) — the scholar tells villagers about villages they know when a conversation ends. No bare-flag lore, ever. (code: maybeTellVillageLore)
+//   - bondinit_no_stream_drift: this module's lotteries use hash rolls (bondRoll), never Math.random — the shared seeded stream feeds the whole sim, and consuming it swings identical-seed panels with no game effect behind the swing. (code: bondRoll, bondPick)
 //   - bondinit_telemetry: every proposal, staging, acceptance and refusal emits tele('bond_proposed', {initiator, target, kind, outcome, chance}). (code: proposeBond, stageBondProposal, acceptBondProposal, declineBondProposal, stageLinkRaise, acceptLinkRaise, declineLinkRaise)
 //   - bondinit_no_gate_changes: this module never writes a win price, deed gate, readiness bar, or table rule. It changes who asks, not what winning costs. (code: bond-initiation.js — only state writes are bondAdd, bumpTrust, and the bond/link request stores)
 //   - bondinit_narration: proposals speak only when the player is at Haven (say), or inside a live conversation (sayLine). No sim spam, no silent acts. (code: proposeBond, bondTurn)
@@ -61,6 +66,11 @@
 
   var REFUSE_COOLDOWN_DAYS = 14;
   var BOND_PROPOSE_P = 0.25;
+  var BOND_TICK_P = 0.25;   // npcBondTick: scholar-proposal staging lottery
+  var PAIR_TICK_P = 0.08;   // npcPairBondTick: NPC->NPC proposal lottery
+  var LINK_TICK_P = 0.5;    // npcLinkRaiseTick: link-raise staging lottery
+  var TELL_P = 0.3;         // endConvo: scholar tells a villager a village
+  var LINK_RAISE_COOLDOWN_DAYS = 14;
   // WARMTH WINDOW (tuned 2026-11-05 after the armed pilot showed 0
   // proposals in 90 days): the bonds drive is live for a pair whose
   // bond warmth is warming but not yet close, 15 <= v < 50. The first
@@ -129,13 +139,47 @@
       return v.linkRaises;
     } catch (e) { return {}; }
   }
+  // Decided/expired link raises, keyed vid|villageId — the re-raise
+  // cooldown's record (mirrors bondState for person bonds).
+  function linkRaiseState() {
+    try {
+      var v = G.state.village || (G.state.village = {});
+      v.linkRaiseState = v.linkRaiseState || {};
+      return v.linkRaiseState;
+    } catch (e) { return {}; }
+  }
   function pairKey(a, b) {
     try { if (G.bondKey) return G.bondKey(a, b); } catch (e) {}
     return a < b ? a + '|' + b : b + '|' + a;
   }
-  function pick(arr) {
+  // Deterministic rolls (tuning 2, 2026-11-05): this module's lotteries
+  // must NOT consume Math.random. The shared seeded stream feeds the
+  // whole sim, and 2 draws/day of drift swung identical-seed panels
+  // by -48% days (84103 pilot 1) with zero game effect behind it —
+  // the paired panel then measures noise, not the build. A hash of
+  // (what, who, day) is deterministic per seed, stable across runs,
+  // and leaves the shared stream alone. The shared character decision
+  // (npcInviteDecision) still rolls Math.random — that is existing
+  // code, and it fires only per decided proposal (a few per run).
+  function bondHash(str) {
+    var h = 2166136261;
+    for (var i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
+    // fmix32 finalizer (MurmurHash3): raw FNV-1a clusters on short
+    // inputs that differ only in the last byte ('pairtick|1..90' all
+    // landed 0.25-0.43, so the 0.08 gate never passed). The finalizer
+    // avalanches the bits; verified uniform (pairtick 3/90 at 0.08,
+    // bondtick 20/90 at 0.25, linktick 42/90 at 0.5).
+    h ^= h >>> 16; h = Math.imul(h, 2246822507); h ^= h >>> 13; h = Math.imul(h, 3266489909); h ^= h >>> 16;
+    return (h >>> 0) / 4294967296;
+  }
+  function bondRoll() {
+    var s = '';
+    for (var i = 0; i < arguments.length; i++) s += (i ? '|' : '') + String(arguments[i]);
+    return bondHash(s);
+  }
+  function bondPick(arr, salt) {
     if (!arr || !arr.length) return null;
-    return arr[Math.floor(Math.random() * arr.length)];
+    return arr[Math.floor(bondRoll('pick', salt, dayOf()) * arr.length)];
   }
   function tele(data) {
     try { if (G.tele) G.tele('bond_proposed', data); } catch (e) {}
@@ -267,17 +311,17 @@
       try {
         var an = nameOf(initiator), bn = nameOf(target);
         if (accepted) {
-          G.say(pick([
+          G.say(bondPick([
             an + ' takes ' + bn + '\'s hand. "Stick together, then — watch each other\'s backs."',
             an + ' nods at ' + bn + '. "You and me. We look out for each other now."',
             an + ' and ' + bn + ' shake on it. "Bonded. Whatever comes, we face it together."',
-          ]));
+          ], 'say-accept:' + initiator + ':' + target));
         } else {
-          G.say(pick([
+          G.say(bondPick([
             bn + ' shakes their head at ' + an + '. "Not yet. Ask me again when we\'ve been through more together."',
             bn + ' to ' + an + ': "Thanks — but I\'m not ready to promise that."',
             an + ' asks, and ' + bn + ' looks away. "Not like that. Not yet."',
-          ]));
+          ], 'say-refuse:' + initiator + ':' + target));
         }
       } catch (e) { bondWarn('proposeBond:say', e); }
     }
@@ -308,18 +352,18 @@
     var rec = bondState()[key] || null;
     if (rec && rec.outcome === 'accepted') return { ok: false, reason: 'already-bonded' };
     if (rec && rec.outcome === 'refused' && dayOf() - (rec.day || 0) < REFUSE_COOLDOWN_DAYS) return { ok: false, reason: 'cooldown' };
-    if (Math.random() >= BOND_PROPOSE_P) return { ok: false, reason: 'drive-quiet' };
-    return proposeBond(initiator, target);
+    if (bondRoll('maybe', initiator, target, dayOf()) >= BOND_PROPOSE_P) return { ok: false, reason: 'drive-quiet' };
+    return (G.proposeBond || proposeBond)(initiator, target);
   }
 
   // ---------- NPC -> SCHOLAR PROPOSALS (pending beats) ----------
   function bondProposalLine(vid) {
     var n = nameOf(vid);
-    return pick([
+    return bondPick([
       '"Can I ask you something? ... I want us to stick together. Properly. Watch each other\'s backs."',
       '"I\'ve been thinking. You and me — we should be bonded. Not just neighbors. Will you stick with me?"',
       '"Hey. I want to ask it plain: will you be my bonded friend? I\'ll watch your back if you watch mine."',
-    ]);
+    ], 'bondline:' + vid);
   }
   function stageBondProposal(vid) {
     var day = dayOf();
@@ -407,7 +451,7 @@
           tele({ initiator: vid, target: scholarId(), kind: 'person', outcome: 'expired', chance: null });
         }
       }
-      if (Math.random() >= 0.6) return;
+      if (bondRoll('bondtick', day) >= BOND_TICK_P) return;
       var roster = [];
       try { roster = (G.npcIds ? G.npcIds() : (((G.state || {}).village || {}).roster || [])); } catch (e) {}
       var cands = [];
@@ -427,8 +471,49 @@
         cands.push(id);
       }
       if (!cands.length) return;
-      stageBondProposal(pick(cands));
+      stageBondProposal(bondPick(cands, 'bondtick'));
     } catch (e) { bondWarn('npcBondTick', e); }
+  }
+
+  // Daily NPC -> NPC pair proposals (tuning 2): villagers ask EACH
+  // OTHER, not only the scholar — decided at once by character, no
+  // conversation needed, so this is the path that produces wild
+  // acceptances (the scholar path stages for the player to answer).
+  // At most one pair a day. The warmth window, the perception gate,
+  // and the dislike veto all apply, plus the refused-pair cooldown
+  // the verb shares. The VISIT-arrival path alone never fires: 19
+  // arrivals in 90 days all missed the drive for their specific pair.
+  function npcPairBondTick() {
+    try {
+      var day = dayOf();
+      if (bondRoll('pairtick', day) >= PAIR_TICK_P) return;
+      var roster = [];
+      try { roster = (G.npcIds ? G.npcIds() : (((G.state || {}).village || {}).roster || [])); } catch (e) {}
+      var pairs = [];
+      for (var i = 0; i < roster.length; i++) {
+        var a = roster[i];
+        if (a === scholarId()) continue;
+        if (!aliveOnRoster(a)) continue;
+        for (var j = 0; j < roster.length; j++) {
+          var b = roster[j];
+          if (b === a || b === scholarId()) continue;
+          if (!aliveOnRoster(b)) continue;
+          if (!bondDriveLive(a, b).live) continue;
+          if (!bondProposalPerceived(a, b).perceived) continue;
+          var aff = 0;
+          try { aff = (G.pairAffinity ? G.pairAffinity(a, b) : 0) || 0; } catch (e) { aff = 0; }
+          if (aff < 0) continue;
+          var key = pairKey(a, b);
+          var rec = bondState()[key] || null;
+          if (rec && rec.outcome === 'accepted') continue;
+          if (rec && rec.outcome === 'refused' && day - (rec.day || 0) < REFUSE_COOLDOWN_DAYS) continue;
+          pairs.push([a, b]);
+        }
+      }
+      if (!pairs.length) return;
+      var chosen = bondPick(pairs, 'pairtick');
+      (G.proposeBond || proposeBond)(chosen[0], chosen[1]);
+    } catch (e) { bondWarn('npcPairBondTick', e); }
   }
 
   // ---------- LINK RAISES (NPC -> bearer) ----------
@@ -462,6 +547,11 @@
     try { lore = (G.villageLoreOf ? G.villageLoreOf(vid) : {}) || {}; } catch (e) { lore = {}; }
     if (!lore[villageId]) return null;
     if (linkRaises()[vid]) return null;
+    // No re-raise spam: the same villager raising the same village
+    // again within 14 days of a decision or expiry waits.
+    var lk = pairKey(vid, villageId);
+    var lrec = linkRaiseState()[lk] || null;
+    if (lrec && day - (lrec.day || 0) < LINK_RAISE_COOLDOWN_DAYS) return null;
     try {
       if (G.linkWith && G.linkWith(villageId)) return null; // already linked
     } catch (e) {}
@@ -502,6 +592,7 @@
     var pending = pendingLinkRaise(vid);
     if (!pending) return { ok: false, reason: 'no-pending' };
     consumeLinkRaise(vid);
+    linkRaiseState()[pairKey(vid, pending.villageId)] = { day: dayOf(), outcome: 'accepted' };
     // The raiser tells the bearer what they know — the player cannot
     // propose to a village they never heard of, but their villager
     // just told them about it. Then the PLAYER proposes (existing
@@ -518,6 +609,7 @@
     var pending = pendingLinkRaise(vid);
     if (!pending) return { ok: false, reason: 'no-pending' };
     consumeLinkRaise(vid);
+    linkRaiseState()[pairKey(vid, pending.villageId)] = { day: dayOf(), outcome: 'refused' };
     tele({ initiator: vid, target: pending.villageId, kind: 'link', outcome: 'refused', chance: null });
     return { ok: true, line: '"Not them. Not now." The idea is set aside, not forgotten.' };
   }
@@ -531,10 +623,11 @@
         if (raises[vid] && day - (raises[vid].day || 0) > 2) {
           var vId = raises[vid].villageId;
           consumeLinkRaise(vid);
+          linkRaiseState()[pairKey(vid, vId)] = { day: day, outcome: 'expired' };
           tele({ initiator: vid, target: vId, kind: 'link', outcome: 'expired', chance: null });
         }
       }
-      if (Math.random() >= 0.5) return;
+      if (bondRoll('linktick', day) >= LINK_TICK_P) return;
       var roster = [];
       try { roster = (G.npcIds ? G.npcIds() : (((G.state || {}).village || {}).roster || [])); } catch (e) {}
       var cands = [];
@@ -555,14 +648,46 @@
         cands.push({ vid: id, villages: known });
       }
       if (!cands.length) return;
-      var chosen = pick(cands);
+      var chosen = bondPick(cands, 'linktick');
       // Prefer a village not already linked.
       var open = chosen.villages.filter(function (villageId) {
-        try { return !(G.linkWith && G.linkWith(villageId)); } catch (e) { return true; }
+        try { if (G.linkWith && G.linkWith(villageId)) return false; } catch (e) {}
+        try {
+          var lr = linkRaiseState()[pairKey(chosen.vid, villageId)] || null;
+          if (lr && day - (lr.day || 0) < LINK_RAISE_COOLDOWN_DAYS) return false;
+        } catch (e) {}
+        return true;
       });
       if (!open.length) return;
-      stageLinkRaise(chosen.vid, pick(open));
+      stageLinkRaise(chosen.vid, bondPick(open, 'linktick:' + chosen.vid));
     } catch (e) { bondWarn('npcLinkRaiseTick', e); }
+  }
+
+  // Scholar -> villager lore spread (tuning 2): the scholar comes
+  // home knowing villages (rumors, approaches, links) and tells
+  // villagers about them over talk — the tellVillageLore primitive,
+  // used as its comment intends ("gossip spread ... for
+  // conversation-gossip wiring"). Told, secondhand, traced to the
+  // scholar by name; never from a bare flag. Without this, no villager
+  // ever knows a village (census: loreAny 0 across 90 days) and link
+  // raises can never fire. Silent bookkeeping — the link raise is the
+  // visible moment. Called from the endConvo wrap below.
+  function maybeTellVillageLore(vid) {
+    if (!vid || vid === scholarId()) return null;
+    if (!aliveOnRoster(vid)) return null;
+    var known = null;
+    try { known = (G.villageLoreOf ? G.villageLoreOf(scholarId()) : {}) || {}; } catch (e) { known = {}; }
+    var mine = null;
+    try { mine = (G.villageLoreOf ? G.villageLoreOf(vid) : {}) || {}; } catch (e) { mine = {}; }
+    var open = [];
+    for (var id in known) if (!mine[id]) open.push(id);
+    if (!open.length) return null;
+    if (bondRoll('tell', scholarId(), vid, dayOf()) >= TELL_P) return null;
+    var villageId = bondPick(open, 'tell:' + vid);
+    try {
+      if (G.tellVillageLore) return G.tellVillageLore(scholarId(), vid, villageId);
+    } catch (e) { bondWarn('tell:lore', e); }
+    return null;
   }
 
   // ---------- CONVERSATION TURN (bond:/link: choices) ----------
@@ -590,20 +715,20 @@
       return { line: line, choices: G.convoChoices(vid), ended: false, transcript: (c && c.transcript) ? c.transcript.slice() : [] };
     }
     if (kind === 'bond' && act === 'accept') {
-      var r = acceptBondProposal(vid);
+      var r = (G.acceptBondProposal || acceptBondProposal)(vid);
       return finish((r && r.line) || 'You go.', '"Yes. Stick together."');
     }
     if (kind === 'bond' && act === 'decline') {
-      var d = declineBondProposal(vid);
+      var d = (G.declineBondProposal || declineBondProposal)(vid);
       return finish((d && d.line) || '"Not this time."', '"Not this time."');
     }
     if (kind === 'link' && act === 'accept') {
-      var a = acceptLinkRaise(vid);
+      var a = (G.acceptLinkRaise || acceptLinkRaise)(vid);
       if (!a.ok) return finish('"Not them. Not now."', '"Not now."');
       return finish('"All right — let\'s ask them." You carry the proposal to ' + (function () { try { var ovs = ((G.state || {}).otherVillages || []); for (var i = 0; i < ovs.length; i++) if (ovs[i] && ovs[i].id === a.villageId) return ovs[i].name || ovs[i].id; } catch (e) {} return 'them'; })() + '.', '"All right. Let\'s ask them."');
     }
     if (kind === 'link' && act === 'decline') {
-      var dl = declineLinkRaise(vid);
+      var dl = (G.declineLinkRaise || declineLinkRaise)(vid);
       return finish((dl && dl.line) || '"Not them. Not now."', '"Not them. Not now."');
     }
     return finish('"..."', '"..."');
@@ -626,6 +751,7 @@
   var methods = {
     bondProposalPerceived: function (a, b) { return bondProposalPerceived(a, b); },
     bondDriveLive: function (a, b) { return bondDriveLive(a, b); },
+    bondRoll: function () { return bondRoll.apply(null, arguments); },
     proposeBond: function (a, b, opts) { return proposeBond(a, b, opts); },
     bondProposalMaybe: function (a, b) { return bondProposalMaybe(a, b); },
     stageBondProposal: function (vid) { return stageBondProposal(vid); },
@@ -633,6 +759,8 @@
     acceptBondProposal: function (vid) { return acceptBondProposal(vid); },
     declineBondProposal: function (vid) { return declineBondProposal(vid); },
     npcBondTick: function () { return npcBondTick(); },
+    npcPairBondTick: function () { return npcPairBondTick(); },
+    maybeTellVillageLore: function (vid) { return maybeTellVillageLore(vid); },
     stageLinkRaise: function (vid, villageId) { return stageLinkRaise(vid, villageId); },
     pendingLinkRaise: function (vid) { return pendingLinkRaise(vid); },
     acceptLinkRaise: function (vid) { return acceptLinkRaise(vid); },
@@ -656,6 +784,16 @@
       } catch (e) { console.warn('[bond-initiation] convoChoices extra', e); }
       return base;
     };
+    // Lore spread: when a conversation with the scholar ends, the
+    // scholar may have told the villager about a village they know.
+    var _endConvo = G.endConvo;
+    if (typeof _endConvo === 'function') {
+      G.endConvo = function (vid) {
+        var r = _endConvo.apply(this, arguments);
+        try { G.maybeTellVillageLore(vid); } catch (e) { bondWarn('endConvo:tell', e); }
+        return r;
+      };
+    }
     var _convoTurn = G.convoTurn;
     G.convoTurn = function (vid, choiceId) {
       try {

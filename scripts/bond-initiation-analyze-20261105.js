@@ -12,8 +12,11 @@ function summarizeSeed(out) {
   const decisions = out.decisionEvents || [];
   const daily = out.daily || [];
   const last = daily.length ? daily[daily.length - 1] : null;
-  const personProps = tele.filter(function (e) { return e.kind === 'person'; });
-  const linkRaises = tele.filter(function (e) { return e.kind === 'link'; });
+  // An expiry is the lifecycle of an already-counted ask, not a new
+  // ask — counting it doubled every unanswered proposal (pilot 2:
+  // 12 staged read as 24 "proposals"). Bars count asks.
+  const personProps = tele.filter(function (e) { return e.kind === 'person' && e.outcome !== 'expired'; });
+  const linkRaises = tele.filter(function (e) { return e.kind === 'link' && e.outcome !== 'expired'; });
   const accepted = personProps.filter(function (e) { return e.outcome === 'accepted'; }).length;
   const refused = personProps.filter(function (e) { return e.outcome === 'refused'; }).length;
   const personDecided = accepted + refused;
@@ -24,14 +27,18 @@ function summarizeSeed(out) {
   const verbRows = props.filter(function (e) { return e.fn === 'proposeBond'; });
   const gateFails = verbRows.filter(function (e) { return e.ret && e.ret.ok === true && e.ret.gate !== true; });
   // NPC-initiated person proposals: initiator is a villager (not the scholar).
+  // Scholar at EVENT time (per-event stamp; falls back to the final
+  // scholarId for rows written before the stamp existed) — succession
+  // otherwise misattributes a stager who later became scholar.
   const scholarId = last ? last.scholarId : null;
-  const npcPerson = personProps.filter(function (e) { return e.initiator && e.initiator !== scholarId; });
+  function eventScholar(e) { return (e.scholarId != null ? e.scholarId : scholarId); }
+  const npcPerson = personProps.filter(function (e) { return e.initiator && e.initiator !== eventScholar(e); });
   return {
     seed: out.seed, days: out.days, endReason: out.endReason,
     won: !!out.won, over: !!out.over, villageLost: !!out.villageLost,
     proposalsPerson: personProps.length,
     proposalsPersonNpc: npcPerson.length,
-    proposalsPersonScholarTarget: personProps.filter(function (e) { return e.target === scholarId; }).length,
+    proposalsPersonScholarTarget: personProps.filter(function (e) { return e.target === eventScholar(e); }).length,
     accepted: accepted, refused: refused,
     acceptRate: personDecided ? (accepted / personDecided) : null,
     linkRaises: linkRaises.length,
