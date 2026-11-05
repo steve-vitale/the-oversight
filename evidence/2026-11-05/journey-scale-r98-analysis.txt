@@ -1,0 +1,143 @@
+
+===== SEED 85501 =====
+Q1 trips: 1 (postrace rows 4); persistence-breaks (walk-in-range then next-day eval out-of-range): 0
+  trip village_1 d27->d28 study evals=2 evalDists=[4,0] walkEnds=[0]
+  hungerwatch last: d38 pantry=0 hungryDays=2 pilgrim=village_3 returning=false pilg=2 studies=1 propPeer=0 courtPoor=9 pool=0
+Q1b morntrace rows=114 resets=0 {} heldNights=2 courtMoves=1
+Q1c nights=2 first=2 (drain avg 11.0, burn avg 61.0, packWOut avg 3.0, drankNight avg 1.0) retry=0 (drain avg n/a, burn avg n/a, packWOut avg n/a, drankNight avg n/a)
+  NIGHT d27 village_1 att=1 drain=14 (100->86) burn~61 packW 3->3 (d0) tile=haven tent=0 wx=clear ticks=423 drankNight=1 pos=(4,4)
+  NIGHT d28 village_1 att=1 drain=8 (86->78) burn~61 packW 3->6 (d3) tile=creek tent=0 wx=clear ticks=439 drankNight=1 pos=(3,1)
+Q2 rank transitions: none; courtNational answers: 0
+Q4 census: day=38 over=true pop=3/3 pantry=0 rank=village seat=none arc=3 waiting=false lead=1/0 tends=0 pilgrimages=2 studies=1
+  peer village_0 kind=primary-sub trust=38 formed=d25 ageAtLast=13d seasoned=false
+
+===== SEED 85502 =====
+Q1 trips: 2 (postrace rows 4); persistence-breaks (walk-in-range then next-day eval out-of-range): 0
+  trip village_2 d27->d27 study evals=1 evalDists=[1] walkEnds=[]
+  trip village_2 d29->d29 study evals=1 evalDists=[1] walkEnds=[]
+  hungerwatch last: d29 pantry=0 hungryDays=2 pilgrim=- returning=true pilg=2 studies=2 propPeer=0 courtPoor=5 pool=0
+Q1b morntrace rows=87 resets=0 {} heldNights=2 courtMoves=0
+Q1c nights=2 first=2 (drain avg -2.5, burn avg 57.0, packWOut avg 4.5, drankNight avg 1.5) retry=0 (drain avg n/a, burn avg n/a, packWOut avg n/a, drankNight avg n/a)
+  NIGHT d27 village_2 att=1 drain=-19 (81->100) burn~52 packW 3->3 (d0) tile=haven tent=0 wx=cold ticks=423 drankNight=2 pos=(4,4)
+  NIGHT d29 village_2 att=1 drain=14 (86->72) burn~62 packW 6->6 (d0) tile=haven tent=0 wx=clear ticks=459 drankNight=1 pos=(4,4)
+Q2 rank transitions: none; courtNational answers: 0
+Q4 census: day=29 over=true pop=6/6 pantry=0 rank=village seat=none arc=3 waiting=false lead=1/0 tends=0 pilgrimages=2 studies=2
+  peer village_1 kind=primary-sub trust=20 formed=d25 ageAtLast=4d seasoned=false
+
+===== SEED 85503 =====
+Q1 trips: 6 (postrace rows 50); persistence-breaks (walk-in-range then next-day eval out-of-range): 14
+  trip village_1 d27->d28 study evals=2 evalDists=[3,0] walkEnds=[0]
+  trip village_3 d30->d31 study evals=2 evalDists=[3,0] walkEnds=[0]
+  trip village_2 d33->d34 study evals=2 evalDists=[4,0] walkEnds=[0]
+  trip village_spl_28_58496 d36->d51 drop:stale evals=15 evalDists=[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5] walkEnds=[0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+  trip village_spl_25_88474 d51->d52 study evals=2 evalDists=[4,0] walkEnds=[0]
+  trip village_spl_28_58496 d55->d56 study evals=2 evalDists=[5,0] walkEnds=[0]
+  hungerwatch last: d121 pantry=0 hungryDays=4 pilgrim=- returning=false pilg=6 studies=5 propPeer=5 courtPoor=47 pool=0
+Q1b morntrace rows=363 resets=14 {"COMPETENT":14} heldNights=25 courtMoves=14
+  RESET d37 village_spl_28_58496 seg=COMPETENT from=(8,5)->(4,4) target=(8,5) edge=true hydEntry=8 dThirst=1 dForage=3 dStanding=0 dDetours=0
+  RESET d38 village_spl_28_58496 seg=COMPETENT from=(8,5)->(4,4) target=(8,5) edge=true hydEntry=0 dThirst=1 dForage=3 dStanding=0 dDetours=0
+  RESET d39 village_spl_28_58496 seg=COMPETENT from=(8,5)->(4,4) target=(8,5) edge=true hydEntry=0 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d40 village_spl_28_58496 seg=COMPETENT from=(8,5)->(4,4) target=(8,5) edge=true hydEntry=0 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d41 village_spl_28_58496 seg=COMPETENT from=(8,5)->(4,4) target=(8,5) edge=true hydEntry=0 dThirst=1 dForage=2 dStanding=0 dDetours=0
+  RESET d42 village_spl_28_58496 seg=COMPETENT from=(8,5)->(4,4) target=(8,5) edge=true hydEntry=0 dThirst=1 dForage=3 dStanding=0 dDetours=0
+  RESET d43 village_spl_28_58496 seg=COMPETENT from=(8,5)->(4,4) target=(8,5) edge=true hydEntry=0 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d44 village_spl_28_58496 seg=COMPETENT from=(8,5)->(4,4) target=(8,5) edge=true hydEntry=0 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d45 village_spl_28_58496 seg=COMPETENT from=(8,5)->(4,4) target=(8,5) edge=true hydEntry=0 dThirst=1 dForage=2 dStanding=0 dDetours=0
+  RESET d46 village_spl_28_58496 seg=COMPETENT from=(8,5)->(4,4) target=(8,5) edge=true hydEntry=0 dThirst=1 dForage=2 dStanding=0 dDetours=0
+  RESET d47 village_spl_28_58496 seg=COMPETENT from=(8,5)->(4,4) target=(8,5) edge=true hydEntry=0 dThirst=1 dForage=3 dStanding=0 dDetours=0
+  RESET d48 village_spl_28_58496 seg=COMPETENT from=(8,5)->(4,4) target=(8,5) edge=true hydEntry=0 dThirst=1 dForage=2 dStanding=0 dDetours=0
+  RESET d49 village_spl_28_58496 seg=COMPETENT from=(8,5)->(4,4) target=(8,5) edge=true hydEntry=0 dThirst=1 dForage=3 dStanding=0 dDetours=0
+  RESET d51 village_spl_28_58496 seg=COMPETENT from=(8,5)->(4,4) target=(8,5) edge=true hydEntry=0 dThirst=1 dForage=2 dStanding=0 dDetours=0
+Q1c nights=25 first=24 (drain avg 27.2, burn avg 58.4, packWOut avg 0.9, drankNight avg 0.5) retry=1 (drain avg 14.0, burn avg 51.0, packWOut avg 3.0, drankNight avg 1.0)
+  NIGHT d27 village_1 att=1 drain=8 (82->74) burn~52 packW 3->3 (d0) tile=haven tent=0 wx=cold ticks=433 drankNight=1 pos=(4,4)
+  NIGHT d28 village_1 att=1 drain=-26 (74->100) burn~55 packW 3->4 (d1) tile=forest_floor tent=0 wx=rain ticks=421 drankNight=2 pos=(5,2)
+  NIGHT d30 village_3 att=1 drain=14 (86->72) burn~60 packW 3->3 (d0) tile=haven tent=0 wx=clear ticks=387 drankNight=1 pos=(4,4)
+  NIGHT d31 village_3 att=1 drain=-28 (72->100) burn~62 packW 3->1 (d-2) tile=trail_edge tent=0 wx=clear ticks=467 drankNight=2 pos=(4,1)
+  NIGHT d33 village_2 att=1 drain=14 (86->72) burn~60 packW 0->3 (d3) tile=haven tent=0 wx=clear ticks=406 drankNight=1 pos=(4,4)
+  NIGHT d34 village_2 att=1 drain=-28 (72->100) burn~62 packW 3->1 (d-2) tile=forest_floor tent=0 wx=clear ticks=475 drankNight=2 pos=(7,5)
+  NIGHT d36 village_spl_28_58496 att=1 drain=14 (86->72) burn~60 packW 0->0 (d0) tile=haven tent=0 wx=clear ticks=401 drankNight=1 pos=(4,4)
+  NIGHT d37 village_spl_28_58496 att=1 drain=64 (72->8) burn~63 packW 0->0 (d0) tile=forest_floor tent=0 wx=clear ticks=489 drankNight=0 pos=(8,5)
+  NIGHT d38 village_spl_28_58496 att=1 drain=58 (58->0) burn~61 packW 0->0 (d0) tile=forest_floor tent=0 wx=clear ticks=428 drankNight=0 pos=(8,5)
+  NIGHT d39 village_spl_28_58496 att=1 drain=50 (50->0) burn~62 packW 0->0 (d0) tile=forest_floor tent=0 wx=clear ticks=474 drankNight=0 pos=(8,5)
+  NIGHT d40 village_spl_28_58496 att=1 drain=50 (50->0) burn~58 packW 0->0 (d0) tile=forest_floor tent=0 wx=clear ticks=337 drankNight=0 pos=(8,5)
+  NIGHT d41 village_spl_28_58496 att=1 drain=50 (50->0) burn~56 packW 0->0 (d0) tile=forest_floor tent=0 wx=rain ticks=473 drankNight=0 pos=(8,5)
+  NIGHT d42 village_spl_28_58496 att=1 drain=50 (50->0) burn~59 packW 0->0 (d0) tile=forest_floor tent=0 wx=clear ticks=376 drankNight=0 pos=(8,5)
+  NIGHT d43 village_spl_28_58496 att=1 drain=50 (50->0) burn~63 packW 0->0 (d0) tile=forest_floor tent=0 wx=clear ticks=511 drankNight=0 pos=(8,5)
+  NIGHT d44 village_spl_28_58496 att=1 drain=50 (50->0) burn~52 packW 0->0 (d0) tile=forest_floor tent=0 wx=rain ticks=330 drankNight=0 pos=(8,5)
+  NIGHT d45 village_spl_28_58496 att=1 drain=50 (50->0) burn~57 packW 0->0 (d0) tile=forest_floor tent=0 wx=rain ticks=483 drankNight=0 pos=(8,5)
+  NIGHT d46 village_spl_28_58496 att=1 drain=50 (50->0) burn~53 packW 0->0 (d0) tile=forest_floor tent=0 wx=rain ticks=374 drankNight=0 pos=(8,5)
+  NIGHT d47 village_spl_28_58496 att=1 drain=50 (50->0) burn~54 packW 0->0 (d0) tile=forest_floor tent=0 wx=cold ticks=495 drankNight=0 pos=(8,5)
+  NIGHT d48 village_spl_28_58496 att=1 drain=50 (50->0) burn~58 packW 0->0 (d0) tile=forest_floor tent=0 wx=clear ticks=331 drankNight=0 pos=(8,5)
+  NIGHT d49 village_spl_28_58496 att=1 drain=50 (50->0) burn~63 packW 0->0 (d0) tile=forest_floor tent=0 wx=clear ticks=489 drankNight=0 pos=(8,5)
+  NIGHT d50 village_spl_28_58496 att=1 drain=50 (50->0) burn~59 packW 0->0 (d0) tile=forest_floor tent=0 wx=clear ticks=359 drankNight=0 pos=(8,5)
+  NIGHT d51 village_spl_25_88474 att=1 drain=-50 (50->100) burn~48 packW 1->3 (d2) tile=haven tent=0 wx=clear ticks=6 drankNight=1 pos=(4,4)
+  NIGHT d52 village_spl_25_88474 att=1 drain=5 (100->95) burn~62 packW 3->3 (d0) tile=creek tent=0 wx=clear ticks=472 drankNight=1 pos=(1,3)
+  NIGHT d55 village_spl_28_58496 att=1 drain=8 (100->92) burn~62 packW 3->3 (d0) tile=haven tent=0 wx=clear ticks=454 drankNight=1 pos=(4,4)
+  NIGHT d56 village_spl_28_58496 att=2 drain=14 (92->78) burn~51 packW 3->2 (d-1) tile=forest_floor tent=0 wx=rain ticks=310 drankNight=1 pos=(8,5)
+Q2 rank transitions: d47 village->regional; courtNational answers: 0
+  NAT: 🕯️ Haven grieves — and Stonebridge tests the charter in the chaos. Their speaker wants new terms, or out. CONCEDE, HOLD, or RELEASE. (Trust -10.)
+  NAT: 🕯️ Haven grieves — and The Red Table tests the charter in the chaos. Their speaker wants new terms, or out. CONCEDE, HOLD, or RELEASE. (Trust -10.)
+  NAT: 🤝 Haven concedes: the Stonebridge route tariff drops to 750 kcal a week. The charter holds — bought, honestly.
+  NAT: 🤝 Haven concedes: the The Red Table route tariff drops to 750 kcal a week. The charter holds — bought, honestly.
+  NAT: 🕯️ Haven grieves — and Stonebridge tests the charter in the chaos. Their speaker wants new terms, or out. CONCEDE, HOLD, or RELEASE. (Trust -10.)
+  NAT: 🕯️ Haven grieves — and The Red Table tests the charter in the chaos. Their speaker wants new terms, or out. CONCEDE, HOLD, or RELEASE. (Trust -10.)
+  NAT: 🤝 Haven concedes: the Stonebridge route tariff drops to 563 kcal a week. The charter holds — bought, honestly.
+  NAT: 🤝 Haven concedes: the The Red Table route tariff drops to 563 kcal a week. The charter holds — bought, honestly.
+  NAT: 🕯️ Haven grieves — and Stonebridge tests the charter in the chaos. Their speaker wants new terms, or out. CONCEDE, HOLD, or RELEASE. (Trust -10.)
+  NAT: 🕯️ Haven grieves — and The Red Table tests the charter in the chaos. Their speaker wants new terms, or out. CONCEDE, HOLD, or RELEASE. (Trust -10.)
+  NAT: 🤝 Haven concedes: the Stonebridge route tariff drops to 500 kcal a week. The charter holds — bought, honestly.
+  NAT: 🤝 Haven concedes: the The Red Table route tariff drops to 500 kcal a week. The charter holds — bought, honestly.
+Q4 census: day=121 over=true pop=1/1 pantry=0 rank=regional seat=lesser arc=4 waiting=true lead=1/1 tends=0 pilgrimages=6 studies=5
+  peer village_0 kind=primary-sub trust=70 formed=d25 ageAtLast=96d seasoned=true
+  peer village_2 kind=covenant trust=29 formed=d70 ageAtLast=51d seasoned=false
+  peer village_3 kind=covenant trust=25 formed=d76 ageAtLast=45d seasoned=false
+  peer village_spl_28_58496 kind=covenant trust=30 formed=d78 ageAtLast=43d seasoned=false
+  peer village_1 kind=trade trust=29 formed=d86 ageAtLast=35d seasoned=false
+  peer village_spl_25_88474 kind=trade trust=28 formed=d95 ageAtLast=26d seasoned=false
+
+===== SEED 85504 =====
+Q1 trips: 3 (postrace rows 38); persistence-breaks (walk-in-range then next-day eval out-of-range): 14
+  trip village_1 d27->d28 study evals=2 evalDists=[3,0] walkEnds=[0]
+  trip village_2 d34->d48 drop:stale evals=15 evalDists=[4,4,4,4,4,4,4,4,4,4,4,4,4,4,4] walkEnds=[0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+  trip village_2 d49->d50 study evals=2 evalDists=[4,0] walkEnds=[0]
+  hungerwatch last: d112 pantry=1399 hungryDays=0 pilgrim=- returning=false pilg=3 studies=2 propPeer=2 courtPoor=26 pool=0
+Q1b morntrace rows=336 resets=14 {"COMPETENT":14} heldNights=19 courtMoves=9
+  RESET d35 village_2 seg=COMPETENT from=(3,1)->(4,4) target=(3,1) edge=false hydEntry=28 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d36 village_2 seg=COMPETENT from=(3,1)->(4,4) target=(3,1) edge=false hydEntry=14 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d37 village_2 seg=COMPETENT from=(3,1)->(4,4) target=(3,1) edge=false hydEntry=9 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d38 village_2 seg=COMPETENT from=(3,1)->(4,4) target=(3,1) edge=false hydEntry=0 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d39 village_2 seg=COMPETENT from=(3,1)->(4,4) target=(3,1) edge=false hydEntry=0 dThirst=1 dForage=1 dStanding=0 dDetours=0
+  RESET d40 village_2 seg=COMPETENT from=(3,1)->(4,4) target=(3,1) edge=false hydEntry=0 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d41 village_2 seg=COMPETENT from=(3,1)->(4,4) target=(3,1) edge=false hydEntry=0 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d42 village_2 seg=COMPETENT from=(3,1)->(4,4) target=(3,1) edge=false hydEntry=0 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d43 village_2 seg=COMPETENT from=(3,1)->(4,4) target=(3,1) edge=false hydEntry=0 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d44 village_2 seg=COMPETENT from=(3,1)->(4,4) target=(3,1) edge=false hydEntry=0 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d45 village_2 seg=COMPETENT from=(3,1)->(4,4) target=(3,1) edge=false hydEntry=0 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d46 village_2 seg=COMPETENT from=(3,1)->(4,4) target=(3,1) edge=false hydEntry=0 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d47 village_2 seg=COMPETENT from=(3,1)->(4,4) target=(3,1) edge=false hydEntry=0 dThirst=1 dForage=0 dStanding=0 dDetours=0
+  RESET d48 village_2 seg=COMPETENT from=(3,1)->(4,4) target=(3,1) edge=false hydEntry=0 dThirst=1 dForage=1 dStanding=0 dDetours=0
+Q1c nights=19 first=18 (drain avg 36.6, burn avg 57.6, packWOut avg 0.3, drankNight avg 0.4) retry=1 (drain avg 14.0, burn avg 57.0, packWOut avg 2.0, drankNight avg 1.0)
+  NIGHT d27 village_1 att=1 drain=-28 (72->100) burn~61 packW 3->3 (d0) tile=haven tent=0 wx=clear ticks=422 drankNight=2 pos=(4,4)
+  NIGHT d28 village_1 att=1 drain=14 (100->86) burn~54 packW 3->5 (d2) tile=forest_floor tent=0 wx=rain ticks=405 drankNight=1 pos=(2,3)
+  NIGHT d34 village_2 att=1 drain=-28 (58->86) burn~62 packW 0->0 (d0) tile=haven tent=0 wx=clear ticks=455 drankNight=2 pos=(4,4)
+  NIGHT d35 village_2 att=1 drain=58 (86->28) burn~58 packW 0->0 (d0) tile=forest_floor tent=0 wx=clear ticks=341 drankNight=0 pos=(3,1)
+  NIGHT d36 village_2 att=1 drain=64 (78->14) burn~56 packW 0->0 (d0) tile=forest_floor tent=0 wx=rain ticks=471 drankNight=0 pos=(3,1)
+  NIGHT d37 village_2 att=1 drain=55 (64->9) burn~57 packW 0->0 (d0) tile=forest_floor tent=0 wx=clear ticks=295 drankNight=0 pos=(3,1)
+  NIGHT d38 village_2 att=1 drain=59 (59->0) burn~52 packW 0->0 (d0) tile=forest_floor tent=0 wx=cold ticks=426 drankNight=0 pos=(3,1)
+  NIGHT d39 village_2 att=1 drain=50 (50->0) burn~61 packW 0->0 (d0) tile=forest_floor tent=0 wx=clear ticks=441 drankNight=0 pos=(3,1)
+  NIGHT d40 village_2 att=1 drain=50 (50->0) burn~55 packW 0->0 (d0) tile=forest_floor tent=0 wx=rain ticks=435 drankNight=0 pos=(3,1)
+  NIGHT d41 village_2 att=1 drain=50 (50->0) burn~61 packW 0->0 (d0) tile=forest_floor tent=0 wx=clear ticks=442 drankNight=0 pos=(3,1)
+  NIGHT d42 village_2 att=1 drain=50 (50->0) burn~52 packW 0->0 (d0) tile=forest_floor tent=0 wx=cold ticks=443 drankNight=0 pos=(3,1)
+  NIGHT d43 village_2 att=1 drain=50 (50->0) burn~55 packW 0->0 (d0) tile=forest_floor tent=0 wx=rain ticks=426 drankNight=0 pos=(3,1)
+  NIGHT d44 village_2 att=1 drain=50 (50->0) burn~61 packW 0->0 (d0) tile=forest_floor tent=0 wx=clear ticks=426 drankNight=0 pos=(3,1)
+  NIGHT d45 village_2 att=1 drain=50 (50->0) burn~55 packW 0->0 (d0) tile=forest_floor tent=0 wx=rain ticks=443 drankNight=0 pos=(3,1)
+  NIGHT d46 village_2 att=1 drain=50 (50->0) burn~61 packW 0->0 (d0) tile=forest_floor tent=0 wx=clear ticks=432 drankNight=0 pos=(3,1)
+  NIGHT d47 village_2 att=1 drain=50 (50->0) burn~62 packW 0->0 (d0) tile=forest_floor tent=0 wx=clear ticks=474 drankNight=0 pos=(3,1)
+  NIGHT d48 village_2 att=1 drain=50 (50->0) burn~58 packW 0->0 (d0) tile=forest_floor tent=0 wx=clear ticks=346 drankNight=0 pos=(3,1)
+  NIGHT d49 village_2 att=1 drain=-36 (50->86) burn~56 packW 0->2 (d2) tile=haven tent=0 wx=rain ticks=458 drankNight=2 pos=(4,4)
+  NIGHT d50 village_2 att=2 drain=14 (86->72) burn~57 packW 2->1 (d-1) tile=forest_floor tent=0 wx=clear ticks=296 drankNight=1 pos=(3,1)
+Q2 rank transitions: d47 village->regional; courtNational answers: 0
+Q4 census: day=113 over=true pop=0/0 pantry=0 rank=regional seat=lesser arc=4 waiting=true lead=1/0 tends=0 pilgrimages=3 studies=2
+  peer village_0 kind=primary-sub trust=30 formed=d25 ageAtLast=87d seasoned=false
+  peer village_1 kind=covenant trust=60 formed=d52 ageAtLast=60d seasoned=true
+  peer village_2 kind=covenant trust=31 formed=d68 ageAtLast=44d seasoned=false
