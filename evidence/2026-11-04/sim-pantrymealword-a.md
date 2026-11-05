@@ -220,7 +220,9 @@ readyDemand, food number, or policy default changed.
   evidence/2026-11-04/sim-pantrymealword-a-corpus-after/ (judged
   JSON + full-transcript JSON per seed).
 - Prereg commit: fdbe3f169 (evidence + driver + analyzer, no src).
-- Fix commit: (TBD — [needs-eyes], wording the player reads.)
+- Fix commit: e3847b750 ([needs-eyes] wording the player reads;
+  src/js/game.js + proof + this evidence). Corpora commit: (this
+  commit, see log — judged + full-transcript JSONs, before/after).
 - check.js --quick: INCOMPLETE — ran ~9.2 min with no output past the
   status preamble, then killed (same stall shape as the strandnarr
   arm's --quick, ~9.5 min, no output). Not a failure verdict: this
