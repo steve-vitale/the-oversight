@@ -199,6 +199,19 @@ on identical seeds 99161–99168.
   evidence file. If the panel tool cannot run on this corpus, say so
   instead of fabricating it.
 
+## Correction — shout cannot add a second ally (closeout 2026-11-05)
+
+The lever description above says "The shout can still call a further
+ally if any remain and `helpCalled` is unset". That sentence is wrong
+as written: the focus-fire join sets `helpCalled = true`, and the
+hopeless-shout branch is gated on `!helpCalled` (fieldFights.js, the
+morale block) — so after a focus-fire join the shout can NEVER call a
+further ally. The one-ally-per-fight contract holds, satisfied at
+round 1 instead of round 2+. The lever's code comment was corrected
+the same way in the lever commit. No behavior changed; only the words
+were wrong. (Worker note: the "prereg wording correction" flagged at
+timeout was this sentence.)
+
 ## Metric review (per §14; filled at verdict time, not now)
 
 - Whether the kill-rate GO was reachable at all given the

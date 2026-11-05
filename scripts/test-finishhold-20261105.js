@@ -232,6 +232,61 @@ function ffight(o) {
     JSON.stringify(s.fights[0]));
 })();
 
+// 26. FOCUS-FIRE gate fixtures (live engine): the lever fires only
+// for wild wave-3+ mustered fights — never wave 1-2, sealed, cornered,
+// or solo — and never via the pre-existing allyFromStart path. Each
+// case loads a fresh game (seed 99161) and drives the real
+// Game.fieldFight with a seeded opts.rng, so the fight is deterministic.
+function seededRng(seed) {
+  let a = seed >>> 0;
+  return function () { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+}
+async function gateLegs() {
+  const { loadGame, setupGame, quietLog } = require(path.join(REPO, 'scripts', 'sim-harness'));
+  async function oneGate(c) {
+    const { Game } = await loadGame({ seed: 99161, mode: 'competent-finishhold-proof', fullTelemetry: false });
+    await setupGame(Game);
+    const roster = ((Game.state || {}).village || {}).roster || [];
+    const leader = roster[0], ally = roster[1];
+    const mdef = (Game.data.monsters || []).find(function (d) { return d.wave === c.wave; });
+    if (!leader || !ally || !mdef) { check('gate-setup-' + c.name, false, 'leader=' + leader + ' ally=' + ally + ' mdef=' + !!mdef); return null; }
+    const mhp = (mdef.hp && mdef.hp[1]) || 100;
+    const rec = await quietLog(async function () {
+      return Game.fieldFight(leader, mdef, { hp: mhp, maxHp: mhp },
+        { allies: c.allies, allyVids: c.allies ? [ally] : [], noFlee: !!c.noFlee, cornered: !!c.cornered, allyFromStart: !!c.allyFromStart, rng: seededRng(12345) });
+    });
+    return { rec: rec, ally: ally };
+  }
+  function hasFocusLine(rec) { return (rec.log || []).some(function (l) { return l.indexOf('(Focus fire)') >= 0; }); }
+  function hasDoorLine(rec) { return (rec.log || []).some(function (l) { return l.indexOf('already at the door') >= 0; }); }
+  let g = await oneGate({ name: 'wave4', wave: 4, allies: 1 });
+  check('gate-wave4-fires', g && g.rec.focusFire === true && g.rec.allyVid === g.ally && hasFocusLine(g.rec),
+    JSON.stringify(g && { ff: g.rec.focusFire, ally: g.rec.allyVid }));
+  check('gate-wave4-ally-strikes-round1', g && (g.rec.roundTotals || []).length > 0 && g.rec.roundTotals[0].allyDealt > 0,
+    JSON.stringify(g && g.rec.roundTotals && g.rec.roundTotals[0]));
+  g = await oneGate({ name: 'wave3', wave: 3, allies: 1 });
+  check('gate-wave3-fires', g && g.rec.focusFire === true && g.rec.allyVid === g.ally && hasFocusLine(g.rec),
+    JSON.stringify(g && { ff: g.rec.focusFire, ally: g.rec.allyVid }));
+  g = await oneGate({ name: 'wave2', wave: 2, allies: 1 });
+  check('gate-wave2-silent', g && g.rec.focusFire !== true && !hasFocusLine(g.rec),
+    JSON.stringify(g && { ff: g.rec.focusFire }));
+  g = await oneGate({ name: 'wave1', wave: 1, allies: 1 });
+  check('gate-wave1-silent', g && g.rec.focusFire !== true && !hasFocusLine(g.rec),
+    JSON.stringify(g && { ff: g.rec.focusFire }));
+  g = await oneGate({ name: 'sealed', wave: 4, allies: 1, noFlee: true });
+  check('gate-sealed-silent', g && g.rec.focusFire !== true && !hasFocusLine(g.rec),
+    JSON.stringify(g && { ff: g.rec.focusFire }));
+  g = await oneGate({ name: 'cornered', wave: 4, allies: 1, cornered: true });
+  check('gate-cornered-silent', g && g.rec.focusFire !== true && !hasFocusLine(g.rec),
+    JSON.stringify(g && { ff: g.rec.focusFire }));
+  g = await oneGate({ name: 'solo', wave: 4, allies: 0 });
+  check('gate-solo-silent', g && g.rec.focusFire !== true && !hasFocusLine(g.rec),
+    JSON.stringify(g && { ff: g.rec.focusFire }));
+  g = await oneGate({ name: 'allyfromstart', wave: 4, allies: 1, allyFromStart: true });
+  check('gate-allyfromstart-not-focusfire', g && g.rec.focusFire !== true && g.rec.allyVid === g.ally && hasDoorLine(g.rec) && !hasFocusLine(g.rec),
+    JSON.stringify(g && { ff: g.rec.focusFire, ally: g.rec.allyVid }));
+}
+
 async function liveLegs() {
   const { loadGame, setupGame, runDays, quietLog } = require(path.join(REPO, 'scripts', 'sim-harness'));
   const { competent } = require(path.join(REPO, 'scripts', 'policies', 'competent'));
@@ -269,6 +324,8 @@ async function liveLegs() {
     ' on=' + on.days + '/' + on.endReason + '/' + (on.waveKillLog || []).length +
     ' errs=' + JSON.stringify(on.instrumentErrors));
   try { fs.rmSync(tmp, { recursive: true, force: true }); } catch (e) {}
+
+  await gateLegs();
 
   console.log(pass + '/' + (pass + fail) + ' PASS');
   process.exit(fail ? 1 : 0);

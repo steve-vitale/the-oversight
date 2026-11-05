@@ -1218,10 +1218,29 @@
           return { entry: e, max: Math.max(100, e) };
         } catch (e) { return { entry: 70, max: 70 }; }
       };
+      // FOCUSFIRE (sim-finishhold-b, 2026-11-05): a mustered party fights
+      // together from the opening round. In a wild wave-3+ fight (never a
+      // sealed arena, never a cornered raid), the first mustered ally is in
+      // from round 1 — same body, gear, and entry as the hopeless-shout
+      // join and the aid path below — instead of waiting for the round-2+
+      // hopeless shout to call them. One ally per fight, as before; the
+      // shout can still call a further ally if any remain. CORRECTION
+      // (closeout 2026-11-05): that sentence was wrong. The join below
+      // sets helpCalled, and the hopeless-shout branch is gated on
+      // !helpCalled — so after a focus-fire join the shout can NEVER
+      // call a further ally. One ally per fight, period; the one ally
+      // is simply in from round 1 instead of round 2+. No damage
+      // formula, flee line, HP, or round cap changes: the party's damage
+      // concentrates on the lead from the opening, and the party-HP pool
+      // enters the round-2 hopeless math from the start. Wave 1–2 fights
+      // are byte-identical. rec.focusFire is record-only (the instrument
+      // reads it); nothing in the engine decides on it.
+      var _focusFire = !opts.noFlee && !opts.cornered && wave >= 3 && allies > 0 && allyVids.length > 0 && !opts.allyFromStart;
+      if (_focusFire) rec.focusFire = true;
       // AID (comms 2026-10-10): allied parties already at the door join from
       // round 1 — they came to fight, not to watch. A new combatant, same as
       // the hopeless-branch ally below.
-      if (opts.allyFromStart && allies > 0 && allyVids.length) {
+      if ((opts.allyFromStart || _focusFire) && allies > 0 && allyVids.length) {
         helpCalled = true; allyIn = true;
         allyVid = allyVids.shift(); allies--;
         var _ab0 = allyBody(allyVid); allyHp = _ab0.entry; allyMax = _ab0.max; allyEntryHp = _ab0.entry;
@@ -1232,7 +1251,8 @@
         } catch (e) {}
         rec.calledHelp = true;
         rec.allyVid = allyVid;
-        rec.log.push(allyName + ' is already at the door — charges in with ' + vName + '!');
+        if (_focusFire) rec.log.push(allyName + ' fights beside ' + vName + ' from the first blow — the party came together. (Focus fire)');
+        else rec.log.push(allyName + ' is already at the door — charges in with ' + vName + '!');
         try { if (this.bumpTrust) this.bumpTrust(allyVid, 1); } catch (e) {}
       }
       // ABILITY — TRIPWIRE (lootabilities Arm 4): the card is strung BEFORE
