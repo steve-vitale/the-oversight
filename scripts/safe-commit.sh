@@ -25,8 +25,10 @@ if [ ${#PATHS[@]} -eq 0 ]; then
   exit 1
 fi
 
-# Build on a private index from current HEAD
-IDX="/tmp/idx-safecommit-$$"
+do_commit() {
+# Build on a private index from current HEAD (per-attempt, so a retry
+# never reuses a flap-damaged index file)
+IDX="/tmp/idx-safecommit-$$-$ATTEMPT"
 export GIT_INDEX_FILE="$IDX"
 BASE=$(git rev-parse HEAD)
 git read-tree "$BASE"
@@ -81,3 +83,29 @@ rm -f "$IDX"
 
 echo "Committed $NEW_SHA"
 echo "$MSG"
+
+}  # end do_commit
+
+# EPERM RETRY DRIVER (2026-11-04 flap): retry the commit ONLY when the failure
+# carries the write-flap signature. All other failures (mass-deletion refusal,
+# HEAD moved, no paths) print their output and exit 1 unchanged.
+ATTEMPT=1
+while [ "$ATTEMPT" -le 6 ]; do
+  if OUT=$( ( do_commit ) 2>&1 ); then
+    printf '%s\n' "$OUT"
+    rm -f /tmp/idx-safecommit-$$-*
+    exit 0
+  fi
+  if ! printf '%s' "$OUT" | grep -qE 'Operation not permitted|write error'; then
+    printf '%s\n' "$OUT"
+    rm -f /tmp/idx-safecommit-$$-*
+    exit 1
+  fi
+  echo "safe-commit: EPERM flap on attempt $ATTEMPT, retrying in 20s..." >&2
+  rm -f /tmp/idx-safecommit-$$-*
+  ATTEMPT=$((ATTEMPT + 1))
+  sleep 20
+done
+printf '%s\n' "$OUT"
+rm -f /tmp/idx-safecommit-$$-*
+exit 1
