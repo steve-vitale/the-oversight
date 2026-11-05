@@ -221,6 +221,17 @@ metrics", not a clean bill. Baseline NOT rolled forward.
 - Quad determinism: seeds 85501/85502 end days 38/29 reproduce r98
   exactly (instrument behavior-identical); 85503/85504 end days
   96/105 vs r98's 121/113 (base change, see Infrastructure).
+- Proof re-run after rebase (Lane B r137 + sibling loops landed
+  first; branch rebased onto f2238ed19, clean, no quirk): full quad
+  re-run on the rebased base reproduces the census EXACTLY (d38/d29/
+  d96/d105) and the analyzer output byte-identical. The 4 capture
+  files differ ONLY in the overnight spoilage lines (16/3/32/50
+  lines: "unknown shoots" → "2 unknown shoots") — the rebase range
+  carries a sibling 1-line narration change in src/js/food.js
+  (e578c47e1, sim-sweepcount-a: dawn spoil sweep line now states
+  the unit count). Narration only; no state effect. The committed
+  captures are the measured run's wording; the proof re-run's
+  captures were restored to the committed versions.
 - `node scripts/check.js --quick` (on the branch code,
   `--cacheDirectory=/tmp/jest-cache-playtest`): **280 passed, 10
   failed in 1437s.** The 6 are r98's same pre-existing failures
