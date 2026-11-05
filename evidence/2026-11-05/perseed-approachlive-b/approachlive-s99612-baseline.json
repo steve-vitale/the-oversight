@@ -1,0 +1,5531 @@
+{
+  "seed": 99612,
+  "run": "baseline",
+  "policy": "competent",
+  "anchorCommit": "f4101562380d",
+  "days": 45,
+  "gameDays": 46,
+  "endReason": "village-lost",
+  "won": false,
+  "villageLost": true,
+  "maxWave": 3,
+  "spawnsW4": 0,
+  "tbCalls": 0,
+  "fieldCallsW4": 0,
+  "exposures": [],
+  "killsW4": 0,
+  "killRows": [],
+  "unlinkedKills": [],
+  "spawns": [],
+  "orphanTbEnds": [],
+  "wrapCounts": {
+    "spawnWorldMonster": 31,
+    "fieldFight": 57,
+    "recordWaveKill": 35,
+    "useAbility": 25,
+    "startCombat": 14,
+    "tbBeginTurn": 149,
+    "tbAdvance": 145,
+    "tbPlayerStrike": 78,
+    "tbDamage": 116,
+    "tbMonsterTurn": 157,
+    "tbPlayerMove": 56,
+    "tbEnd": 14,
+    "recordPyrrhicKill": 1,
+    "tbPlayerShout": 4,
+    "tbVillagerTurn": 36
+  },
+  "instrumentErrors": [],
+  "notes": [],
+  "deaths": [
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 9,
+      "kind": "monster",
+      "who": "sanjun",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 10,
+      "kind": "monster",
+      "who": "anaconda_empress",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 11,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 12,
+      "kind": "monster",
+      "who": "mirrormoth",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 15,
+      "kind": "monster",
+      "who": "understudy",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 16,
+      "kind": "monster",
+      "who": "warranty_caller",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 16,
+      "kind": "monster",
+      "who": "anaconda_empress",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 16,
+      "kind": "monster",
+      "who": "nevermore",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "villager",
+      "who": "gen_uajx4ir",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 17,
+      "kind": "monster",
+      "who": "sweeps_week",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 18,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 18,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 18,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 18,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 20,
+      "kind": "monster",
+      "who": "white_noise_heron",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 21,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 22,
+      "kind": "monster",
+      "who": "speedbump_turtle",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 22,
+      "kind": "monster",
+      "who": "sanjun",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 22,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 22,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 23,
+      "kind": "monster",
+      "who": "warranty_caller",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 24,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 24,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 24,
+      "kind": "villager",
+      "who": "chen_wei",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 24,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 25,
+      "kind": "monster",
+      "who": "dustboar",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 26,
+      "kind": "villager",
+      "who": "gen_s6u5jdt",
+      "cause": "The Redactor",
+      "player": false
+    },
+    {
+      "day": 27,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 27,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 28,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 28,
+      "kind": "monster",
+      "who": "nevermore",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 28,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 32,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 33,
+      "kind": "monster",
+      "who": "nevermore",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 33,
+      "kind": "villager",
+      "who": "gen_2z7flxw",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 34,
+      "kind": "villager",
+      "who": "gen_d195xj0",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 40,
+      "kind": "villager",
+      "who": "jorge_silva",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 40,
+      "kind": "monster",
+      "who": "callback",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 41,
+      "kind": "villager",
+      "who": "gen_27sqbfs",
+      "cause": "monster",
+      "player": false
+    },
+    {
+      "day": 41,
+      "kind": "monster",
+      "who": "spool",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 42,
+      "kind": "villager",
+      "who": "gen_qar6mp3",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 43,
+      "kind": "villager",
+      "who": "pavel_dubinin",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 44,
+      "kind": "villager",
+      "who": "boris_kowalski",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 45,
+      "kind": "villager",
+      "who": "yuki_mori",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 46,
+      "kind": "villager",
+      "who": "mateo_alvarez",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 46,
+      "kind": "villager",
+      "who": "ivy_wang",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 46,
+      "kind": "villager",
+      "who": "meera_reddy",
+      "cause": "the wild",
+      "player": true
+    },
+    {
+      "day": 46,
+      "kind": "villager",
+      "who": "valeria_quispe",
+      "cause": "the wild",
+      "player": true
+    }
+  ],
+  "resultKeys": [
+    "days",
+    "gameDays",
+    "maxWaveUnlocked",
+    "waveKills",
+    "endReason",
+    "stop",
+    "communityExposure",
+    "telemetry",
+    "samples",
+    "learnedPlants",
+    "learnedSkills",
+    "pacing",
+    "ms",
+    "manifest",
+    "policyId",
+    "notes"
+  ],
+  "scaleSamples": [
+    [
+      30,
+      "village"
+    ]
+  ],
+  "standingSamples": [
+    [
+      30,
+      0
+    ]
+  ],
+  "scaleRankFinal": "village",
+  "standingFinal": 70,
+  "arcFinal": 3,
+  "tableWaiting": false,
+  "tableEntered": false,
+  "nationalReached": false,
+  "maxStanding": 70,
+  "scaleReadError": null,
+  "fallbackCalls": [
+    {
+      "fightId": "fmgpsphpl_g81ed9",
+      "day": 17,
+      "round": 2,
+      "playerTurn": true,
+      "mids": [
+        "belltoad",
+        "belltoad"
+      ],
+      "monsterBefore": "m_0:8,1:53:a",
+      "monsterAfter": "m_0:8,1:28:a;m_spawn_1:8,2:58:a",
+      "playerBefore": [
+        7,
+        0
+      ],
+      "playerAfter": [
+        7,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpsphpl_g81ed9",
+      "day": 17,
+      "round": 3,
+      "playerTurn": true,
+      "mids": [
+        "belltoad",
+        "belltoad",
+        "belltoad"
+      ],
+      "monsterBefore": "m_0:8,1:28:a;m_spawn_1:8,2:58:a",
+      "monsterAfter": "m_0:8,1:4:a;m_spawn_1:8,2:58:a;m_spawn_2:8,2:54:a",
+      "playerBefore": [
+        7,
+        0
+      ],
+      "playerAfter": [
+        7,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpsphpl_g81ed9",
+      "day": 17,
+      "round": 4,
+      "playerTurn": true,
+      "mids": [
+        "belltoad",
+        "belltoad",
+        "belltoad"
+      ],
+      "monsterBefore": "m_0:8,1:4:a;m_spawn_1:8,2:58:a;m_spawn_2:8,2:54:a",
+      "monsterAfter": "m_0:8,1:-20:d;m_spawn_1:8,2:58:a;m_spawn_2:7,1:54:a",
+      "playerBefore": [
+        7,
+        0
+      ],
+      "playerAfter": [
+        7,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpsphpl_g81ed9",
+      "day": 17,
+      "round": 6,
+      "playerTurn": true,
+      "mids": [
+        "belltoad",
+        "belltoad",
+        "belltoad",
+        "belltoad"
+      ],
+      "monsterBefore": "m_0:8,1:-20:d;m_spawn_1:8,2:58:a;m_spawn_2:7,1:54:a",
+      "monsterAfter": "m_0:8,1:-20:d;m_spawn_1:8,1:58:a;m_spawn_2:7,1:28:a;m_spawn_3:8,2:46:a",
+      "playerBefore": [
+        7,
+        0
+      ],
+      "playerAfter": [
+        7,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpsphpl_g81ed9",
+      "day": 17,
+      "round": 7,
+      "playerTurn": true,
+      "mids": [
+        "belltoad",
+        "belltoad",
+        "belltoad",
+        "belltoad"
+      ],
+      "monsterBefore": "m_0:8,1:-20:d;m_spawn_1:8,1:58:a;m_spawn_2:7,1:28:a;m_spawn_3:8,2:46:a",
+      "monsterAfter": "m_0:8,1:-20:d;m_spawn_1:8,1:58:a;m_spawn_2:7,1:28:a;m_spawn_3:7,3:46:a",
+      "playerBefore": [
+        7,
+        0
+      ],
+      "playerAfter": [
+        8,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpsphpl_g81ed9",
+      "day": 17,
+      "round": 8,
+      "playerTurn": true,
+      "mids": [
+        "belltoad",
+        "belltoad",
+        "belltoad",
+        "belltoad"
+      ],
+      "monsterBefore": "m_0:8,1:-20:d;m_spawn_1:8,1:58:a;m_spawn_2:7,1:28:a;m_spawn_3:7,3:46:a",
+      "monsterAfter": "m_0:8,1:-20:d;m_spawn_1:7,0:58:a;m_spawn_2:8,1:28:a;m_spawn_3:7,3:46:a",
+      "playerBefore": [
+        8,
+        0
+      ],
+      "playerAfter": [
+        8,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpsphpl_g81ed9",
+      "day": 17,
+      "round": 9,
+      "playerTurn": true,
+      "mids": [
+        "belltoad",
+        "belltoad",
+        "belltoad",
+        "belltoad"
+      ],
+      "monsterBefore": "m_0:8,1:-20:d;m_spawn_1:7,0:58:a;m_spawn_2:8,1:28:a;m_spawn_3:7,3:46:a",
+      "monsterAfter": "m_0:8,1:-20:d;m_spawn_1:7,0:58:a;m_spawn_2:8,1:28:a;m_spawn_3:7,3:46:a",
+      "playerBefore": [
+        8,
+        0
+      ],
+      "playerAfter": [
+        8,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpsphpl_g81ed9",
+      "day": 17,
+      "round": 10,
+      "playerTurn": true,
+      "mids": [
+        "belltoad",
+        "belltoad",
+        "belltoad",
+        "belltoad"
+      ],
+      "monsterBefore": "m_0:8,1:-20:d;m_spawn_1:7,0:58:a;m_spawn_2:8,1:28:a;m_spawn_3:7,3:46:a",
+      "monsterAfter": "m_0:8,1:-20:d;m_spawn_1:7,0:58:a;m_spawn_2:8,1:28:a;m_spawn_3:7,3:46:a",
+      "playerBefore": [
+        8,
+        0
+      ],
+      "playerAfter": [
+        8,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpsphpl_g81ed9",
+      "day": 17,
+      "round": 11,
+      "playerTurn": true,
+      "mids": [
+        "belltoad",
+        "belltoad",
+        "belltoad",
+        "belltoad"
+      ],
+      "monsterBefore": "m_0:8,1:-20:d;m_spawn_1:7,0:58:a;m_spawn_2:8,1:28:a;m_spawn_3:7,3:46:a",
+      "monsterAfter": "m_0:8,1:-20:d;m_spawn_1:7,0:58:a;m_spawn_2:8,1:28:a;m_spawn_3:8,2:46:a",
+      "playerBefore": [
+        8,
+        0
+      ],
+      "playerAfter": [
+        8,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpsphpl_g81ed9",
+      "day": 17,
+      "round": 12,
+      "playerTurn": true,
+      "mids": [
+        "belltoad",
+        "belltoad",
+        "belltoad",
+        "belltoad"
+      ],
+      "monsterBefore": "m_0:8,1:-20:d;m_spawn_1:7,0:58:a;m_spawn_2:8,1:28:a;m_spawn_3:8,2:46:a",
+      "monsterAfter": "m_0:8,1:-20:d;m_spawn_1:7,1:58:a;m_spawn_2:7,0:28:a;m_spawn_3:8,2:46:a",
+      "playerBefore": [
+        8,
+        0
+      ],
+      "playerAfter": [
+        8,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": null,
+      "day": 17,
+      "round": null,
+      "playerTurn": true,
+      "mids": [],
+      "monsterBefore": "m_0:8,1:-20:d;m_spawn_1:7,1:58:a;m_spawn_2:7,0:28:a;m_spawn_3:8,2:46:a",
+      "monsterAfter": null,
+      "playerBefore": [
+        8,
+        0
+      ],
+      "playerAfter": null,
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpsphri_e7hu88",
+      "day": 18,
+      "round": 1,
+      "playerTurn": true,
+      "mids": [
+        "belltoad"
+      ],
+      "monsterBefore": "m_0:4,0:50:a",
+      "monsterAfter": "m_0:4,0:50:a",
+      "playerBefore": [
+        4,
+        0
+      ],
+      "playerAfter": [
+        4,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpsphri_e7hu88",
+      "day": 18,
+      "round": 2,
+      "playerTurn": true,
+      "mids": [
+        "belltoad"
+      ],
+      "monsterBefore": "m_0:4,0:50:a",
+      "monsterAfter": "m_0:4,0:43:a",
+      "playerBefore": [
+        4,
+        0
+      ],
+      "playerAfter": [
+        4,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpsphri_e7hu88",
+      "day": 18,
+      "round": 3,
+      "playerTurn": true,
+      "mids": [
+        "belltoad",
+        "belltoad"
+      ],
+      "monsterBefore": "m_0:4,0:43:a",
+      "monsterAfter": "m_0:4,0:2:a;m_spawn_1:5,1:58:a",
+      "playerBefore": [
+        4,
+        0
+      ],
+      "playerAfter": [
+        4,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpsphri_e7hu88",
+      "day": 18,
+      "round": 3,
+      "playerTurn": true,
+      "mids": [
+        "belltoad",
+        "belltoad"
+      ],
+      "monsterBefore": "m_0:4,0:2:a;m_spawn_1:5,1:58:a",
+      "monsterAfter": "m_0:4,0:2:a;m_spawn_1:6,2:58:a",
+      "playerBefore": [
+        4,
+        0
+      ],
+      "playerAfter": [
+        4,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpsphri_e7hu88",
+      "day": 18,
+      "round": 4,
+      "playerTurn": true,
+      "mids": [
+        "belltoad",
+        "belltoad"
+      ],
+      "monsterBefore": "m_0:4,0:2:a;m_spawn_1:6,2:58:a",
+      "monsterAfter": "m_0:4,0:-8:d;m_spawn_1:6,2:50:a",
+      "playerBefore": [
+        4,
+        0
+      ],
+      "playerAfter": [
+        4,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpsphri_e7hu88",
+      "day": 18,
+      "round": 5,
+      "playerTurn": true,
+      "mids": [
+        "belltoad",
+        "belltoad",
+        "belltoad"
+      ],
+      "monsterBefore": "m_0:4,0:-8:d;m_spawn_1:6,2:50:a",
+      "monsterAfter": "m_0:4,0:-8:d;m_spawn_1:6,2:46:a;m_spawn_2:5,1:58:a",
+      "playerBefore": [
+        4,
+        0
+      ],
+      "playerAfter": [
+        5,
+        2
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpsphri_e7hu88",
+      "day": 18,
+      "round": 5,
+      "playerTurn": true,
+      "mids": [
+        "belltoad",
+        "belltoad",
+        "belltoad"
+      ],
+      "monsterBefore": "m_0:4,0:-8:d;m_spawn_1:6,2:46:a;m_spawn_2:5,1:58:a",
+      "monsterAfter": "m_0:4,0:-8:d;m_spawn_1:6,2:46:a;m_spawn_2:5,1:58:a",
+      "playerBefore": [
+        5,
+        2
+      ],
+      "playerAfter": [
+        5,
+        2
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpsphri_e7hu88",
+      "day": 18,
+      "round": 6,
+      "playerTurn": true,
+      "mids": [
+        "belltoad",
+        "belltoad",
+        "belltoad"
+      ],
+      "monsterBefore": "m_0:4,0:-8:d;m_spawn_1:6,2:46:a;m_spawn_2:5,1:58:a",
+      "monsterAfter": "m_0:4,0:-8:d;m_spawn_1:6,2:17:a;m_spawn_2:5,1:46:a",
+      "playerBefore": [
+        5,
+        2
+      ],
+      "playerAfter": [
+        5,
+        2
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpsphri_e7hu88",
+      "day": 18,
+      "round": 7,
+      "playerTurn": true,
+      "mids": [
+        "belltoad",
+        "belltoad",
+        "belltoad"
+      ],
+      "monsterBefore": "m_0:4,0:-8:d;m_spawn_1:6,2:17:a;m_spawn_2:5,1:46:a",
+      "monsterAfter": "m_0:4,0:-8:d;m_spawn_1:6,2:-9:d;m_spawn_2:5,1:30:a",
+      "playerBefore": [
+        5,
+        2
+      ],
+      "playerAfter": [
+        5,
+        2
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpsphri_e7hu88",
+      "day": 18,
+      "round": 8,
+      "playerTurn": true,
+      "mids": [
+        "belltoad",
+        "belltoad",
+        "belltoad",
+        "belltoad"
+      ],
+      "monsterBefore": "m_0:4,0:-8:d;m_spawn_1:6,2:-9:d;m_spawn_2:5,1:30:a",
+      "monsterAfter": "m_0:4,0:-8:d;m_spawn_1:6,2:-9:d;m_spawn_2:5,1:-1:d;m_spawn_3:5,1:59:a",
+      "playerBefore": [
+        5,
+        2
+      ],
+      "playerAfter": [
+        5,
+        2
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpsphri_e7hu88",
+      "day": 18,
+      "round": 8,
+      "playerTurn": true,
+      "mids": [
+        "belltoad",
+        "belltoad",
+        "belltoad",
+        "belltoad"
+      ],
+      "monsterBefore": "m_0:4,0:-8:d;m_spawn_1:6,2:-9:d;m_spawn_2:5,1:-1:d;m_spawn_3:5,1:59:a",
+      "monsterAfter": "m_0:4,0:-8:d;m_spawn_1:6,2:-9:d;m_spawn_2:5,1:-1:d;m_spawn_3:5,1:59:a",
+      "playerBefore": [
+        5,
+        2
+      ],
+      "playerAfter": [
+        5,
+        2
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpsphri_e7hu88",
+      "day": 18,
+      "round": 9,
+      "playerTurn": true,
+      "mids": [
+        "belltoad",
+        "belltoad",
+        "belltoad",
+        "belltoad"
+      ],
+      "monsterBefore": "m_0:4,0:-8:d;m_spawn_1:6,2:-9:d;m_spawn_2:5,1:-1:d;m_spawn_3:5,1:59:a",
+      "monsterAfter": "m_0:4,0:-8:d;m_spawn_1:6,2:-9:d;m_spawn_2:5,1:-1:d;m_spawn_3:5,1:19:a",
+      "playerBefore": [
+        5,
+        2
+      ],
+      "playerAfter": [
+        5,
+        2
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": null,
+      "day": 18,
+      "round": null,
+      "playerTurn": true,
+      "mids": [],
+      "monsterBefore": "m_0:4,0:-8:d;m_spawn_1:6,2:-9:d;m_spawn_2:5,1:-1:d;m_spawn_3:5,1:19:a",
+      "monsterAfter": null,
+      "playerBefore": [
+        5,
+        2
+      ],
+      "playerAfter": null,
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi0q_58n7v5",
+      "day": 28,
+      "round": 2,
+      "playerTurn": true,
+      "mids": [
+        "hushwolf"
+      ],
+      "monsterBefore": "m_0:0,2:52:a",
+      "monsterAfter": "m_0:0,2:52:a",
+      "playerBefore": [
+        0,
+        0
+      ],
+      "playerAfter": [
+        1,
+        1
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi0q_58n7v5",
+      "day": 28,
+      "round": 3,
+      "playerTurn": true,
+      "mids": [
+        "hushwolf"
+      ],
+      "monsterBefore": "m_0:0,2:52:a",
+      "monsterAfter": "m_0:0,2:22:a",
+      "playerBefore": [
+        1,
+        1
+      ],
+      "playerAfter": [
+        1,
+        1
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": null,
+      "day": 28,
+      "round": null,
+      "playerTurn": true,
+      "mids": [],
+      "monsterBefore": "m_0:0,2:22:a",
+      "monsterAfter": null,
+      "playerBefore": [
+        1,
+        1
+      ],
+      "playerAfter": null,
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi0w_eolkdf",
+      "day": 28,
+      "round": 2,
+      "playerTurn": true,
+      "mids": [
+        "nevermore"
+      ],
+      "monsterBefore": "m_0:0,4:55:a",
+      "monsterAfter": "m_0:0,4:55:a",
+      "playerBefore": [
+        1,
+        1
+      ],
+      "playerAfter": [
+        2,
+        1
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi0w_eolkdf",
+      "day": 28,
+      "round": 3,
+      "playerTurn": true,
+      "mids": [
+        "nevermore"
+      ],
+      "monsterBefore": "m_0:0,4:55:a",
+      "monsterAfter": "m_0:1,1:55:a",
+      "playerBefore": [
+        2,
+        1
+      ],
+      "playerAfter": [
+        0,
+        3
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi0w_eolkdf",
+      "day": 28,
+      "round": 4,
+      "playerTurn": true,
+      "mids": [
+        "nevermore"
+      ],
+      "monsterBefore": "m_0:1,1:55:a",
+      "monsterAfter": "m_0:2,0:55:a",
+      "playerBefore": [
+        0,
+        3
+      ],
+      "playerAfter": [
+        0,
+        2
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi0w_eolkdf",
+      "day": 28,
+      "round": 5,
+      "playerTurn": true,
+      "mids": [
+        "nevermore"
+      ],
+      "monsterBefore": "m_0:2,0:55:a",
+      "monsterAfter": "m_0:2,0:55:a",
+      "playerBefore": [
+        0,
+        2
+      ],
+      "playerAfter": [
+        1,
+        1
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": null,
+      "day": 28,
+      "round": null,
+      "playerTurn": true,
+      "mids": [],
+      "monsterBefore": "m_0:2,0:55:a",
+      "monsterAfter": null,
+      "playerBefore": [
+        1,
+        1
+      ],
+      "playerAfter": null,
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi14_f3rs5k",
+      "day": 28,
+      "round": 2,
+      "playerTurn": true,
+      "mids": [
+        "hushwolf"
+      ],
+      "monsterBefore": "m_0:1,1:61:a",
+      "monsterAfter": "m_0:1,1:27:a",
+      "playerBefore": [
+        1,
+        1
+      ],
+      "playerAfter": [
+        1,
+        1
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": null,
+      "day": 28,
+      "round": null,
+      "playerTurn": true,
+      "mids": [],
+      "monsterBefore": "m_0:1,1:27:a",
+      "monsterAfter": null,
+      "playerBefore": [
+        1,
+        1
+      ],
+      "playerAfter": null,
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi4v_bcehy9",
+      "day": 34,
+      "round": 2,
+      "playerTurn": true,
+      "mids": [
+        "redactor"
+      ],
+      "monsterBefore": "m_0:0,0:288:a",
+      "monsterAfter": "m_0:0,0:288:a",
+      "playerBefore": [
+        0,
+        0
+      ],
+      "playerAfter": [
+        0,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi4v_bcehy9",
+      "day": 34,
+      "round": 3,
+      "playerTurn": true,
+      "mids": [
+        "redactor"
+      ],
+      "monsterBefore": "m_0:0,0:288:a",
+      "monsterAfter": "m_0:0,0:217:a",
+      "playerBefore": [
+        0,
+        0
+      ],
+      "playerAfter": [
+        0,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi4v_bcehy9",
+      "day": 34,
+      "round": 4,
+      "playerTurn": true,
+      "mids": [
+        "redactor"
+      ],
+      "monsterBefore": "m_0:0,0:217:a",
+      "monsterAfter": "m_0:0,0:195:a",
+      "playerBefore": [
+        0,
+        0
+      ],
+      "playerAfter": [
+        0,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi4v_bcehy9",
+      "day": 34,
+      "round": 5,
+      "playerTurn": true,
+      "mids": [
+        "redactor"
+      ],
+      "monsterBefore": "m_0:0,0:195:a",
+      "monsterAfter": "m_0:0,0:195:a",
+      "playerBefore": [
+        0,
+        0
+      ],
+      "playerAfter": [
+        0,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi4v_bcehy9",
+      "day": 34,
+      "round": 6,
+      "playerTurn": true,
+      "mids": [
+        "redactor"
+      ],
+      "monsterBefore": "m_0:0,0:195:a",
+      "monsterAfter": "m_0:0,0:217:a",
+      "playerBefore": [
+        0,
+        0
+      ],
+      "playerAfter": [
+        0,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": null,
+      "day": 34,
+      "round": null,
+      "playerTurn": true,
+      "mids": [],
+      "monsterBefore": "m_0:0,0:217:a",
+      "monsterAfter": null,
+      "playerBefore": [
+        0,
+        0
+      ],
+      "playerAfter": null,
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi8f_2ma31l",
+      "day": 42,
+      "round": 2,
+      "playerTurn": true,
+      "mids": [
+        "spool"
+      ],
+      "monsterBefore": "m_0:6,1:295:a",
+      "monsterAfter": "m_0:6,1:295:a",
+      "playerBefore": [
+        7,
+        0
+      ],
+      "playerAfter": [
+        8,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi8f_2ma31l",
+      "day": 42,
+      "round": 3,
+      "playerTurn": true,
+      "mids": [
+        "spool"
+      ],
+      "monsterBefore": "m_0:6,1:295:a",
+      "monsterAfter": "m_0:6,1:250:a",
+      "playerBefore": [
+        8,
+        0
+      ],
+      "playerAfter": [
+        8,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi8f_2ma31l",
+      "day": 42,
+      "round": 4,
+      "playerTurn": true,
+      "mids": [
+        "spool"
+      ],
+      "monsterBefore": "m_0:6,1:250:a",
+      "monsterAfter": "m_0:6,1:202:a",
+      "playerBefore": [
+        8,
+        0
+      ],
+      "playerAfter": [
+        8,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi8f_2ma31l",
+      "day": 42,
+      "round": 5,
+      "playerTurn": true,
+      "mids": [
+        "spool"
+      ],
+      "monsterBefore": "m_0:6,1:202:a",
+      "monsterAfter": "m_0:6,1:159:a",
+      "playerBefore": [
+        8,
+        0
+      ],
+      "playerAfter": [
+        8,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi8f_2ma31l",
+      "day": 42,
+      "round": 6,
+      "playerTurn": true,
+      "mids": [
+        "spool"
+      ],
+      "monsterBefore": "m_0:6,1:159:a",
+      "monsterAfter": "m_0:6,1:115:a",
+      "playerBefore": [
+        8,
+        0
+      ],
+      "playerAfter": [
+        8,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi8f_2ma31l",
+      "day": 42,
+      "round": 7,
+      "playerTurn": true,
+      "mids": [
+        "spool"
+      ],
+      "monsterBefore": "m_0:6,1:115:a",
+      "monsterAfter": "m_0:6,1:66:a",
+      "playerBefore": [
+        8,
+        0
+      ],
+      "playerAfter": [
+        8,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi8f_2ma31l",
+      "day": 42,
+      "round": 8,
+      "playerTurn": true,
+      "mids": [
+        "spool"
+      ],
+      "monsterBefore": "m_0:6,1:66:a",
+      "monsterAfter": "m_0:6,1:66:a",
+      "playerBefore": [
+        8,
+        0
+      ],
+      "playerAfter": [
+        8,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": null,
+      "day": 42,
+      "round": null,
+      "playerTurn": true,
+      "mids": [],
+      "monsterBefore": "m_0:6,1:66:a",
+      "monsterAfter": null,
+      "playerBefore": [
+        8,
+        0
+      ],
+      "playerAfter": null,
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi8y_48pk1i",
+      "day": 43,
+      "round": 2,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:4,0:303:a",
+      "monsterAfter": "m_0:4,0:303:a",
+      "playerBefore": [
+        4,
+        0
+      ],
+      "playerAfter": [
+        4,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi8y_48pk1i",
+      "day": 43,
+      "round": 3,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:4,0:303:a",
+      "monsterAfter": "m_0:4,0:263:a",
+      "playerBefore": [
+        4,
+        0
+      ],
+      "playerAfter": [
+        4,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi8y_48pk1i",
+      "day": 43,
+      "round": 4,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:4,0:263:a",
+      "monsterAfter": "m_0:4,1:263:a",
+      "playerBefore": [
+        4,
+        0
+      ],
+      "playerAfter": [
+        4,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi8y_48pk1i",
+      "day": 43,
+      "round": 5,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:4,1:263:a",
+      "monsterAfter": "m_0:4,1:263:a",
+      "playerBefore": [
+        4,
+        0
+      ],
+      "playerAfter": [
+        4,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi8y_48pk1i",
+      "day": 43,
+      "round": 6,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:4,1:263:a",
+      "monsterAfter": "m_0:4,2:263:a",
+      "playerBefore": [
+        4,
+        0
+      ],
+      "playerAfter": [
+        4,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi8y_48pk1i",
+      "day": 43,
+      "round": 7,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:4,2:263:a",
+      "monsterAfter": "m_0:4,2:232:a",
+      "playerBefore": [
+        4,
+        0
+      ],
+      "playerAfter": [
+        4,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi8y_48pk1i",
+      "day": 43,
+      "round": 8,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:4,2:232:a",
+      "monsterAfter": "m_0:4,2:232:a",
+      "playerBefore": [
+        4,
+        0
+      ],
+      "playerAfter": [
+        4,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi8y_48pk1i",
+      "day": 43,
+      "round": 9,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:4,2:232:a",
+      "monsterAfter": "m_0:4,2:232:a",
+      "playerBefore": [
+        4,
+        0
+      ],
+      "playerAfter": [
+        4,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi8y_48pk1i",
+      "day": 43,
+      "round": 10,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:4,2:232:a",
+      "monsterAfter": "m_0:4,2:232:a",
+      "playerBefore": [
+        4,
+        0
+      ],
+      "playerAfter": [
+        4,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi8y_48pk1i",
+      "day": 43,
+      "round": 11,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:4,2:232:a",
+      "monsterAfter": "m_0:6,1:199:a",
+      "playerBefore": [
+        4,
+        0
+      ],
+      "playerAfter": [
+        4,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi8y_48pk1i",
+      "day": 43,
+      "round": 12,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:6,1:199:a",
+      "monsterAfter": "m_0:6,1:199:a",
+      "playerBefore": [
+        4,
+        0
+      ],
+      "playerAfter": [
+        4,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi8y_48pk1i",
+      "day": 43,
+      "round": 13,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:6,1:199:a",
+      "monsterAfter": "m_0:6,1:199:a",
+      "playerBefore": [
+        4,
+        0
+      ],
+      "playerAfter": [
+        4,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi8y_48pk1i",
+      "day": 43,
+      "round": 14,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:6,1:199:a",
+      "monsterAfter": "m_0:5,1:199:a",
+      "playerBefore": [
+        4,
+        0
+      ],
+      "playerAfter": [
+        4,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi8y_48pk1i",
+      "day": 43,
+      "round": 15,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:5,1:199:a",
+      "monsterAfter": "m_0:5,1:159:a",
+      "playerBefore": [
+        4,
+        0
+      ],
+      "playerAfter": [
+        4,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": null,
+      "day": 43,
+      "round": null,
+      "playerTurn": true,
+      "mids": [],
+      "monsterBefore": "m_0:5,1:159:a",
+      "monsterAfter": null,
+      "playerBefore": [
+        4,
+        0
+      ],
+      "playerAfter": null,
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi98_b877gh",
+      "day": 44,
+      "round": 2,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:0,0:316:a",
+      "monsterAfter": "m_0:0,0:316:a",
+      "playerBefore": [
+        0,
+        0
+      ],
+      "playerAfter": [
+        0,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi98_b877gh",
+      "day": 44,
+      "round": 3,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:0,0:316:a",
+      "monsterAfter": "m_0:0,0:292:a",
+      "playerBefore": [
+        0,
+        0
+      ],
+      "playerAfter": [
+        0,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi98_b877gh",
+      "day": 44,
+      "round": 4,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:0,0:292:a",
+      "monsterAfter": "m_0:0,0:292:a",
+      "playerBefore": [
+        0,
+        0
+      ],
+      "playerAfter": [
+        0,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi98_b877gh",
+      "day": 44,
+      "round": 5,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:0,0:292:a",
+      "monsterAfter": "m_0:0,0:292:a",
+      "playerBefore": [
+        0,
+        0
+      ],
+      "playerAfter": [
+        0,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi98_b877gh",
+      "day": 44,
+      "round": 6,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:0,0:292:a",
+      "monsterAfter": "m_0:1,0:292:a",
+      "playerBefore": [
+        0,
+        0
+      ],
+      "playerAfter": [
+        0,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi98_b877gh",
+      "day": 44,
+      "round": 7,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:1,0:292:a",
+      "monsterAfter": "m_0:1,1:271:a",
+      "playerBefore": [
+        0,
+        0
+      ],
+      "playerAfter": [
+        0,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi98_b877gh",
+      "day": 44,
+      "round": 8,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:1,1:271:a",
+      "monsterAfter": "m_0:1,1:271:a",
+      "playerBefore": [
+        0,
+        0
+      ],
+      "playerAfter": [
+        0,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi98_b877gh",
+      "day": 44,
+      "round": 9,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:1,1:271:a",
+      "monsterAfter": "m_0:1,1:271:a",
+      "playerBefore": [
+        0,
+        0
+      ],
+      "playerAfter": [
+        0,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi98_b877gh",
+      "day": 44,
+      "round": 10,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:1,1:271:a",
+      "monsterAfter": "m_0:1,1:271:a",
+      "playerBefore": [
+        0,
+        0
+      ],
+      "playerAfter": [
+        0,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi98_b877gh",
+      "day": 44,
+      "round": 11,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:1,1:271:a",
+      "monsterAfter": "m_0:1,1:271:a",
+      "playerBefore": [
+        0,
+        0
+      ],
+      "playerAfter": [
+        0,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": null,
+      "day": 44,
+      "round": null,
+      "playerTurn": true,
+      "mids": [],
+      "monsterBefore": "m_0:1,1:271:a",
+      "monsterAfter": null,
+      "playerBefore": [
+        0,
+        0
+      ],
+      "playerAfter": null,
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi9k_5lphi",
+      "day": 45,
+      "round": 2,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:7,0:321:a",
+      "monsterAfter": "m_0:7,0:321:a",
+      "playerBefore": [
+        7,
+        0
+      ],
+      "playerAfter": [
+        8,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi9k_5lphi",
+      "day": 45,
+      "round": 3,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:7,0:321:a",
+      "monsterAfter": "m_0:6,2:295:a",
+      "playerBefore": [
+        8,
+        0
+      ],
+      "playerAfter": [
+        8,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi9k_5lphi",
+      "day": 45,
+      "round": 4,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:6,2:295:a",
+      "monsterAfter": "m_0:6,2:295:a",
+      "playerBefore": [
+        8,
+        0
+      ],
+      "playerAfter": [
+        7,
+        1
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi9k_5lphi",
+      "day": 45,
+      "round": 5,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:6,2:295:a",
+      "monsterAfter": "m_0:6,2:295:a",
+      "playerBefore": [
+        7,
+        1
+      ],
+      "playerAfter": [
+        7,
+        1
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi9k_5lphi",
+      "day": 45,
+      "round": 6,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:6,2:295:a",
+      "monsterAfter": "m_0:5,2:295:a",
+      "playerBefore": [
+        7,
+        1
+      ],
+      "playerAfter": [
+        7,
+        1
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi9k_5lphi",
+      "day": 45,
+      "round": 7,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:5,2:295:a",
+      "monsterAfter": "m_0:5,4:295:a",
+      "playerBefore": [
+        7,
+        1
+      ],
+      "playerAfter": [
+        6,
+        1
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi9k_5lphi",
+      "day": 45,
+      "round": 8,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:5,4:295:a",
+      "monsterAfter": "m_0:5,4:295:a",
+      "playerBefore": [
+        6,
+        1
+      ],
+      "playerAfter": [
+        4,
+        3
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi9k_5lphi",
+      "day": 45,
+      "round": 9,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:5,4:295:a",
+      "monsterAfter": "m_0:5,4:295:a",
+      "playerBefore": [
+        4,
+        3
+      ],
+      "playerAfter": [
+        4,
+        3
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi9k_5lphi",
+      "day": 45,
+      "round": 10,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:5,4:295:a",
+      "monsterAfter": "m_0:5,4:295:a",
+      "playerBefore": [
+        4,
+        3
+      ],
+      "playerAfter": [
+        4,
+        3
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi9k_5lphi",
+      "day": 45,
+      "round": 11,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:5,4:295:a",
+      "monsterAfter": "m_0:5,4:269:a",
+      "playerBefore": [
+        4,
+        3
+      ],
+      "playerAfter": [
+        4,
+        3
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi9k_5lphi",
+      "day": 45,
+      "round": 12,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:5,4:269:a",
+      "monsterAfter": "m_0:5,4:269:a",
+      "playerBefore": [
+        4,
+        3
+      ],
+      "playerAfter": [
+        4,
+        3
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi9k_5lphi",
+      "day": 45,
+      "round": 13,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:5,4:269:a",
+      "monsterAfter": "m_0:5,4:269:a",
+      "playerBefore": [
+        4,
+        3
+      ],
+      "playerAfter": [
+        4,
+        3
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi9k_5lphi",
+      "day": 45,
+      "round": 14,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:5,4:269:a",
+      "monsterAfter": "m_0:5,3:269:a",
+      "playerBefore": [
+        4,
+        3
+      ],
+      "playerAfter": [
+        4,
+        3
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspi9k_5lphi",
+      "day": 45,
+      "round": 15,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:5,3:269:a",
+      "monsterAfter": "m_0:5,3:269:a",
+      "playerBefore": [
+        4,
+        3
+      ],
+      "playerAfter": [
+        4,
+        3
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": null,
+      "day": 45,
+      "round": null,
+      "playerTurn": true,
+      "mids": [],
+      "monsterBefore": "m_0:5,3:269:a",
+      "monsterAfter": null,
+      "playerBefore": [
+        4,
+        3
+      ],
+      "playerAfter": null,
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspia6_8ro8lc",
+      "day": 46,
+      "round": 2,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:4,0:291:a",
+      "monsterAfter": "m_0:4,0:291:a",
+      "playerBefore": [
+        4,
+        0
+      ],
+      "playerAfter": [
+        4,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspia6_8ro8lc",
+      "day": 46,
+      "round": 3,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:4,0:291:a",
+      "monsterAfter": "m_0:5,2:213:a",
+      "playerBefore": [
+        4,
+        0
+      ],
+      "playerAfter": [
+        4,
+        0
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspia6_8ro8lc",
+      "day": 46,
+      "round": 4,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:5,2:213:a",
+      "monsterAfter": "m_0:5,2:213:a",
+      "playerBefore": [
+        4,
+        0
+      ],
+      "playerAfter": [
+        4,
+        1
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspia6_8ro8lc",
+      "day": 46,
+      "round": 5,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:5,2:213:a",
+      "monsterAfter": "m_0:5,2:213:a",
+      "playerBefore": [
+        4,
+        1
+      ],
+      "playerAfter": [
+        4,
+        1
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspia6_8ro8lc",
+      "day": 46,
+      "round": 6,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:5,2:213:a",
+      "monsterAfter": "m_0:6,2:213:a",
+      "playerBefore": [
+        4,
+        1
+      ],
+      "playerAfter": [
+        4,
+        1
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspia6_8ro8lc",
+      "day": 46,
+      "round": 7,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:6,2:213:a",
+      "monsterAfter": "m_0:7,3:213:a",
+      "playerBefore": [
+        4,
+        1
+      ],
+      "playerAfter": [
+        5,
+        1
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspia6_8ro8lc",
+      "day": 46,
+      "round": 8,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:7,3:213:a",
+      "monsterAfter": "m_0:7,3:213:a",
+      "playerBefore": [
+        5,
+        1
+      ],
+      "playerAfter": [
+        6,
+        2
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspia6_8ro8lc",
+      "day": 46,
+      "round": 9,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:7,3:213:a",
+      "monsterAfter": "m_0:7,3:213:a",
+      "playerBefore": [
+        6,
+        2
+      ],
+      "playerAfter": [
+        8,
+        2
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": null,
+      "day": 46,
+      "round": null,
+      "playerTurn": true,
+      "mids": [],
+      "monsterBefore": "m_0:7,3:213:a",
+      "monsterAfter": null,
+      "playerBefore": [
+        8,
+        2
+      ],
+      "playerAfter": null,
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiag_50jsqp",
+      "day": 46,
+      "round": 2,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:4,4:292:a",
+      "monsterAfter": "m_0:4,4:276:a",
+      "playerBefore": [
+        4,
+        4
+      ],
+      "playerAfter": [
+        4,
+        4
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiag_50jsqp",
+      "day": 46,
+      "round": 3,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:4,4:276:a",
+      "monsterAfter": "m_0:4,4:240:a",
+      "playerBefore": [
+        4,
+        4
+      ],
+      "playerAfter": [
+        4,
+        4
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiag_50jsqp",
+      "day": 46,
+      "round": 4,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:4,4:240:a",
+      "monsterAfter": "m_0:5,5:229:a",
+      "playerBefore": [
+        4,
+        4
+      ],
+      "playerAfter": [
+        4,
+        4
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiag_50jsqp",
+      "day": 46,
+      "round": 5,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:5,5:229:a",
+      "monsterAfter": "m_0:5,5:216:a",
+      "playerBefore": [
+        4,
+        4
+      ],
+      "playerAfter": [
+        4,
+        4
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiag_50jsqp",
+      "day": 46,
+      "round": 6,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:5,5:216:a",
+      "monsterAfter": "m_0:5,6:202:a",
+      "playerBefore": [
+        4,
+        4
+      ],
+      "playerAfter": [
+        4,
+        4
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiag_50jsqp",
+      "day": 46,
+      "round": 7,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:5,6:202:a",
+      "monsterAfter": "m_0:5,6:189:a",
+      "playerBefore": [
+        4,
+        4
+      ],
+      "playerAfter": [
+        4,
+        5
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiag_50jsqp",
+      "day": 46,
+      "round": 8,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:5,6:189:a",
+      "monsterAfter": "m_0:5,6:189:a",
+      "playerBefore": [
+        4,
+        5
+      ],
+      "playerAfter": [
+        4,
+        5
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiag_50jsqp",
+      "day": 46,
+      "round": 9,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:5,6:189:a",
+      "monsterAfter": "m_0:5,6:189:a",
+      "playerBefore": [
+        4,
+        5
+      ],
+      "playerAfter": [
+        4,
+        5
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiag_50jsqp",
+      "day": 46,
+      "round": 10,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:5,6:189:a",
+      "monsterAfter": "m_0:5,6:189:a",
+      "playerBefore": [
+        4,
+        5
+      ],
+      "playerAfter": [
+        4,
+        5
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiag_50jsqp",
+      "day": 46,
+      "round": 11,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:5,6:189:a",
+      "monsterAfter": "m_0:5,6:166:a",
+      "playerBefore": [
+        4,
+        5
+      ],
+      "playerAfter": [
+        4,
+        5
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": null,
+      "day": 46,
+      "round": null,
+      "playerTurn": true,
+      "mids": [],
+      "monsterBefore": "m_0:5,6:166:a",
+      "monsterAfter": null,
+      "playerBefore": [
+        4,
+        5
+      ],
+      "playerAfter": null,
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiam_9cq0ig",
+      "day": 46,
+      "round": 2,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:4,4:320:a",
+      "monsterAfter": "m_0:4,4:309:a",
+      "playerBefore": [
+        4,
+        4
+      ],
+      "playerAfter": [
+        4,
+        4
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiam_9cq0ig",
+      "day": 46,
+      "round": 3,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:4,4:309:a",
+      "monsterAfter": "m_0:4,4:261:a",
+      "playerBefore": [
+        4,
+        4
+      ],
+      "playerAfter": [
+        4,
+        4
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiam_9cq0ig",
+      "day": 46,
+      "round": 4,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:4,4:261:a",
+      "monsterAfter": "m_0:4,4:261:a",
+      "playerBefore": [
+        4,
+        4
+      ],
+      "playerAfter": [
+        4,
+        4
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiam_9cq0ig",
+      "day": 46,
+      "round": 5,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:4,4:261:a",
+      "monsterAfter": "m_0:4,4:261:a",
+      "playerBefore": [
+        4,
+        4
+      ],
+      "playerAfter": [
+        4,
+        4
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiam_9cq0ig",
+      "day": 46,
+      "round": 6,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:4,4:261:a",
+      "monsterAfter": "m_0:4,3:261:a",
+      "playerBefore": [
+        4,
+        4
+      ],
+      "playerAfter": [
+        4,
+        4
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiam_9cq0ig",
+      "day": 46,
+      "round": 7,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:4,3:261:a",
+      "monsterAfter": "m_0:4,3:230:a",
+      "playerBefore": [
+        4,
+        4
+      ],
+      "playerAfter": [
+        4,
+        4
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiam_9cq0ig",
+      "day": 46,
+      "round": 8,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:4,3:230:a",
+      "monsterAfter": "m_0:4,3:230:a",
+      "playerBefore": [
+        4,
+        4
+      ],
+      "playerAfter": [
+        4,
+        4
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiam_9cq0ig",
+      "day": 46,
+      "round": 9,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:4,3:230:a",
+      "monsterAfter": "m_0:4,3:230:a",
+      "playerBefore": [
+        4,
+        4
+      ],
+      "playerAfter": [
+        4,
+        4
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiam_9cq0ig",
+      "day": 46,
+      "round": 10,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:4,3:230:a",
+      "monsterAfter": "m_0:4,3:230:a",
+      "playerBefore": [
+        4,
+        4
+      ],
+      "playerAfter": [
+        4,
+        4
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": null,
+      "day": 46,
+      "round": null,
+      "playerTurn": true,
+      "mids": [],
+      "monsterBefore": "m_0:4,3:230:a",
+      "monsterAfter": null,
+      "playerBefore": [
+        4,
+        4
+      ],
+      "playerAfter": null,
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiau_1bsixz",
+      "day": 46,
+      "round": 2,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:4,4:312:a",
+      "monsterAfter": "m_0:4,4:312:a",
+      "playerBefore": [
+        4,
+        4
+      ],
+      "playerAfter": [
+        4,
+        4
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiau_1bsixz",
+      "day": 46,
+      "round": 3,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:4,4:312:a",
+      "monsterAfter": "m_0:4,4:296:a",
+      "playerBefore": [
+        4,
+        4
+      ],
+      "playerAfter": [
+        4,
+        4
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiau_1bsixz",
+      "day": 46,
+      "round": 4,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:4,4:296:a",
+      "monsterAfter": "m_0:3,4:296:a",
+      "playerBefore": [
+        4,
+        4
+      ],
+      "playerAfter": [
+        4,
+        4
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiau_1bsixz",
+      "day": 46,
+      "round": 5,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:3,4:296:a",
+      "monsterAfter": "m_0:3,4:296:a",
+      "playerBefore": [
+        4,
+        4
+      ],
+      "playerAfter": [
+        4,
+        4
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiau_1bsixz",
+      "day": 46,
+      "round": 6,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:3,4:296:a",
+      "monsterAfter": "m_0:2,4:296:a",
+      "playerBefore": [
+        4,
+        4
+      ],
+      "playerAfter": [
+        4,
+        4
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiau_1bsixz",
+      "day": 46,
+      "round": 7,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:2,4:296:a",
+      "monsterAfter": "m_0:2,4:296:a",
+      "playerBefore": [
+        4,
+        4
+      ],
+      "playerAfter": [
+        3,
+        3
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiau_1bsixz",
+      "day": 46,
+      "round": 8,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:2,4:296:a",
+      "monsterAfter": "m_0:2,4:296:a",
+      "playerBefore": [
+        3,
+        3
+      ],
+      "playerAfter": [
+        3,
+        3
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiau_1bsixz",
+      "day": 46,
+      "round": 9,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:2,4:296:a",
+      "monsterAfter": "m_0:2,4:296:a",
+      "playerBefore": [
+        3,
+        3
+      ],
+      "playerAfter": [
+        3,
+        3
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiau_1bsixz",
+      "day": 46,
+      "round": 10,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:2,4:296:a",
+      "monsterAfter": "m_0:2,4:296:a",
+      "playerBefore": [
+        3,
+        3
+      ],
+      "playerAfter": [
+        3,
+        3
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiau_1bsixz",
+      "day": 46,
+      "round": 11,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:2,4:296:a",
+      "monsterAfter": "m_0:1,3:278:a",
+      "playerBefore": [
+        3,
+        3
+      ],
+      "playerAfter": [
+        3,
+        3
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiau_1bsixz",
+      "day": 46,
+      "round": 12,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:1,3:278:a",
+      "monsterAfter": "m_0:1,3:278:a",
+      "playerBefore": [
+        3,
+        3
+      ],
+      "playerAfter": [
+        2,
+        2
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiau_1bsixz",
+      "day": 46,
+      "round": 13,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:1,3:278:a",
+      "monsterAfter": "m_0:1,3:278:a",
+      "playerBefore": [
+        2,
+        2
+      ],
+      "playerAfter": [
+        2,
+        2
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiau_1bsixz",
+      "day": 46,
+      "round": 14,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:1,3:278:a",
+      "monsterAfter": "m_0:0,3:278:a",
+      "playerBefore": [
+        2,
+        2
+      ],
+      "playerAfter": [
+        2,
+        2
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiau_1bsixz",
+      "day": 46,
+      "round": 15,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:0,3:278:a",
+      "monsterAfter": "m_0:1,3:278:a",
+      "playerBefore": [
+        2,
+        2
+      ],
+      "playerAfter": [
+        1,
+        2
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiau_1bsixz",
+      "day": 46,
+      "round": 16,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:1,3:278:a",
+      "monsterAfter": "m_0:1,3:278:a",
+      "playerBefore": [
+        1,
+        2
+      ],
+      "playerAfter": [
+        1,
+        2
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiau_1bsixz",
+      "day": 46,
+      "round": 17,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:1,3:278:a",
+      "monsterAfter": "m_0:1,3:278:a",
+      "playerBefore": [
+        1,
+        2
+      ],
+      "playerAfter": [
+        1,
+        2
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiau_1bsixz",
+      "day": 46,
+      "round": 18,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:1,3:278:a",
+      "monsterAfter": "m_0:1,3:278:a",
+      "playerBefore": [
+        1,
+        2
+      ],
+      "playerAfter": [
+        1,
+        2
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": "fmgpspiau_1bsixz",
+      "day": 46,
+      "round": 19,
+      "playerTurn": true,
+      "mids": [
+        "buffering"
+      ],
+      "monsterBefore": "m_0:1,3:278:a",
+      "monsterAfter": "m_0:1,3:278:a",
+      "playerBefore": [
+        1,
+        2
+      ],
+      "playerAfter": [
+        1,
+        2
+      ],
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    },
+    {
+      "fightId": null,
+      "day": 46,
+      "round": null,
+      "playerTurn": true,
+      "mids": [],
+      "monsterBefore": "m_0:1,3:278:a",
+      "monsterAfter": null,
+      "playerBefore": [
+        1,
+        2
+      ],
+      "playerAfter": null,
+      "before": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "after": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      },
+      "delta": {
+        "marks": 0,
+        "waits": 0,
+        "repicks": 0,
+        "stuck": 0
+      }
+    }
+  ],
+  "fallbackTotals": {
+    "calls": 138,
+    "marks": 0,
+    "waits": 0,
+    "repicks": 0,
+    "stuck": 0,
+    "fightsWithMarks": 0,
+    "fightsWithCalls": 15
+  },
+  "fallbackMarkedNonExposure": []
+}
