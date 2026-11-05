@@ -1,0 +1,393 @@
+{
+ "seed": 15412,
+ "stage": "B",
+ "tag": "after",
+ "fixture": {
+  "berries": {
+   "plantId": "blackberry",
+   "name": "unknown berries",
+   "lumpForm": "berries",
+   "units": 12,
+   "spoilDay": 10
+  },
+  "shoots": {
+   "plantId": "wild_onion",
+   "name": "unknown shoots",
+   "lumpForm": "shoots",
+   "units": 5,
+   "spoilDay": 15
+  },
+  "roots": {
+   "plantId": "sassafras",
+   "name": "unknown roots",
+   "lumpForm": "roots",
+   "units": 4,
+   "spoilDay": 38
+  }
+ },
+ "anchorOk": true,
+ "spoilBonusDays": 0,
+ "knowsPreserve": false,
+ "packBefore": {
+  "lumpUnits": 21,
+  "lumpSpoilDays": [
+   10,
+   15,
+   38
+  ],
+  "stacks": [
+   {
+    "name": "Seed packet",
+    "units": 1,
+    "foodState": null,
+    "spoilDay": null,
+    "lump": false,
+    "lumpForm": null
+   },
+   {
+    "name": "Trail mix",
+    "units": 2,
+    "foodState": null,
+    "spoilDay": 61,
+    "lump": false,
+    "lumpForm": null
+   },
+   {
+    "name": "Dried meat",
+    "units": 2,
+    "foodState": null,
+    "spoilDay": 31,
+    "lump": false,
+    "lumpForm": null
+   },
+   {
+    "name": "unknown berries",
+    "units": 12,
+    "foodState": "unknown",
+    "spoilDay": 10,
+    "lump": true,
+    "lumpForm": "berries"
+   },
+   {
+    "name": "unknown shoots",
+    "units": 5,
+    "foodState": "unknown",
+    "spoilDay": 15,
+    "lump": true,
+    "lumpForm": "shoots"
+   },
+   {
+    "name": "unknown roots",
+    "units": 4,
+    "foodState": "unknown",
+    "spoilDay": 38,
+    "lump": true,
+    "lumpForm": "roots"
+   }
+  ]
+ },
+ "lumpBefore": "unknown berries x12 @10 | unknown shoots x5 @15 | unknown roots x4 @38",
+ "endDayOk": true,
+ "dayAfter": 10,
+ "playerAlive": true,
+ "sweepCalls": [
+  {
+   "prePack": {
+    "lumpUnits": 21,
+    "lumpSpoilDays": [
+     10,
+     15,
+     38
+    ],
+    "stacks": [
+     {
+      "name": "Seed packet",
+      "units": 1,
+      "foodState": null,
+      "spoilDay": null,
+      "lump": false,
+      "lumpForm": null
+     },
+     {
+      "name": "Trail mix",
+      "units": 2,
+      "foodState": null,
+      "spoilDay": 61,
+      "lump": false,
+      "lumpForm": null
+     },
+     {
+      "name": "Dried meat",
+      "units": 2,
+      "foodState": null,
+      "spoilDay": 31,
+      "lump": false,
+      "lumpForm": null
+     },
+     {
+      "name": "unknown berries",
+      "units": 12,
+      "foodState": "unknown",
+      "spoilDay": 10,
+      "lump": true,
+      "lumpForm": "berries"
+     },
+     {
+      "name": "unknown shoots",
+      "units": 5,
+      "foodState": "unknown",
+      "spoilDay": 15,
+      "lump": true,
+      "lumpForm": "shoots"
+     },
+     {
+      "name": "unknown roots",
+      "units": 4,
+      "foodState": "unknown",
+      "spoilDay": 38,
+      "lump": true,
+      "lumpForm": "roots"
+     },
+     {
+      "name": "Sling",
+      "units": 1,
+      "foodState": null,
+      "spoilDay": null,
+      "lump": false,
+      "lumpForm": null
+     },
+     {
+      "name": "Work Gloves",
+      "units": 1,
+      "foodState": null,
+      "spoilDay": null,
+      "lump": false,
+      "lumpForm": null
+     }
+    ]
+   },
+   "preLumps": "unknown berries x12 @10 | unknown shoots x5 @15 | unknown roots x4 @38",
+   "prePantry": {
+    "stacks": [
+     {
+      "name": "Dried beans",
+      "units": 80,
+      "spoilDay": 366,
+      "foodState": null
+     },
+     {
+      "name": "Rice",
+      "units": 65,
+      "spoilDay": 366,
+      "foodState": null
+     },
+     {
+      "name": "Canned soup",
+      "units": 30,
+      "spoilDay": 366,
+      "foodState": null
+     },
+     {
+      "name": "Dried meat",
+      "units": 10,
+      "spoilDay": 31,
+      "foodState": null
+     },
+     {
+      "name": "Peanuts",
+      "units": 34,
+      "spoilDay": 61,
+      "foodState": null
+     },
+     {
+      "name": "Foraged food",
+      "units": 1,
+      "spoilDay": 4,
+      "foodState": null
+     },
+     {
+      "name": "Foraged food",
+      "units": 5,
+      "spoilDay": 10,
+      "foodState": "fresh"
+     },
+     {
+      "name": "Muscadine Grapes",
+      "units": 3,
+      "spoilDay": 10,
+      "foodState": "fresh"
+     },
+     {
+      "name": "Smoked fish",
+      "units": 1,
+      "spoilDay": 10,
+      "foodState": "smoked"
+     },
+     {
+      "name": "Dried beans",
+      "units": 4,
+      "spoilDay": 30,
+      "foodState": "dried"
+     }
+    ]
+   },
+   "prePantrySummary": "Dried beans x80 @366 | Rice x65 @366 | Canned soup x30 @366 | Dried meat x10 @31 | Peanuts x34 @61 | Foraged food x1 @4 | Foraged food x5 @10 | Muscadine Grapes x3 @10 | Smoked fish x1 @10 | Dried beans x4 @30",
+   "lines": [
+    "Overnight, 12 unknown berries went bad — beyond saving. You leave it for the flies.",
+    "Fresh food keeps days, not weeks. Smoke it over a fire to make it last.",
+    "The village threw out spoiled stores: Smoked fish, 3 Muscadine Grapes, 5 Foraged food, Foraged food. Ella mutters: \"Should've smoked that. Fresh stuff keeps a day or two on the shelf — the smoke rack is right there.\" (pantry)"
+   ],
+   "ret": 5,
+   "err": null,
+   "rngDrawsDuringSweep": 1
+  }
+ ],
+ "sweepCallCount": 1,
+ "dawnWindow": [
+  "— DAY 1 DAWN — The world wakes. Animals are active.",
+  "— DAY 10 DAWN — The world wakes. Animals are active.",
+  "Overnight, 12 unknown berries went bad — beyond saving. You leave it for the flies.",
+  "Fresh food keeps days, not weeks. Smoke it over a fire to make it last.",
+  "The village threw out spoiled stores: Smoked fish, 3 Muscadine Grapes, 5 Foraged food, Foraged food. Ella mutters: \"Should've smoked that. Fresh stuff keeps a day or two on the shelf — the smoke rack is right there.\" (pantry)"
+ ],
+ "dawnTranscript": [
+  "— DAY 10 DAWN — The world wakes. Animals are active.",
+  "Overnight, 12 unknown berries went bad — beyond saving. You leave it for the flies.",
+  "Fresh food keeps days, not weeks. Smoke it over a fire to make it last.",
+  "The village threw out spoiled stores: Smoked fish, 3 Muscadine Grapes, 5 Foraged food, Foraged food. Ella mutters: \"Should've smoked that. Fresh stuff keeps a day or two on the shelf — the smoke rack is right there.\" (pantry)",
+  "👀 Erich claims to belong somewhere — then spends the whole evening oriented around something they won't name. The wanting is real. The word for it isn't \"to belong somewhere\".",
+  "📓 Codex: A man, maybe 30s, with a scarred cheek — jotted down what they said. Filed.",
+  "Carlos Linares reads the sky: clear tomorrow, cold."
+ ],
+ "packAfter": {
+  "lumpUnits": 9,
+  "lumpSpoilDays": [
+   15,
+   38
+  ],
+  "stacks": [
+   {
+    "name": "Seed packet",
+    "units": 1,
+    "foodState": null,
+    "spoilDay": null,
+    "lump": false,
+    "lumpForm": null
+   },
+   {
+    "name": "Trail mix",
+    "units": 2,
+    "foodState": null,
+    "spoilDay": 61,
+    "lump": false,
+    "lumpForm": null
+   },
+   {
+    "name": "Dried meat",
+    "units": 2,
+    "foodState": null,
+    "spoilDay": 31,
+    "lump": false,
+    "lumpForm": null
+   },
+   {
+    "name": "unknown shoots",
+    "units": 5,
+    "foodState": "unknown",
+    "spoilDay": 15,
+    "lump": true,
+    "lumpForm": "shoots"
+   },
+   {
+    "name": "unknown roots",
+    "units": 4,
+    "foodState": "unknown",
+    "spoilDay": 38,
+    "lump": true,
+    "lumpForm": "roots"
+   },
+   {
+    "name": "Sling",
+    "units": 1,
+    "foodState": null,
+    "spoilDay": null,
+    "lump": false,
+    "lumpForm": null
+   },
+   {
+    "name": "Work Gloves",
+    "units": 1,
+    "foodState": null,
+    "spoilDay": null,
+    "lump": false,
+    "lumpForm": null
+   }
+  ]
+ },
+ "lumpAfter": "unknown shoots x5 @15 | unknown roots x4 @38",
+ "pantryAfter": {
+  "stacks": [
+   {
+    "name": "Dried beans",
+    "units": 80,
+    "spoilDay": 366,
+    "foodState": null
+   },
+   {
+    "name": "Rice",
+    "units": 65,
+    "spoilDay": 366,
+    "foodState": null
+   },
+   {
+    "name": "Canned soup",
+    "units": 30,
+    "spoilDay": 366,
+    "foodState": null
+   },
+   {
+    "name": "Dried meat",
+    "units": 10,
+    "spoilDay": 31,
+    "foodState": null
+   },
+   {
+    "name": "Peanuts",
+    "units": 34,
+    "spoilDay": 61,
+    "foodState": null
+   },
+   {
+    "name": "Dried beans",
+    "units": 4,
+    "spoilDay": 30,
+    "foodState": "dried"
+   }
+  ]
+ },
+ "pantryAfterSummary": "Dried beans x80 @366 | Rice x65 @366 | Canned soup x30 @366 | Dried meat x10 @31 | Peanuts x34 @61 | Dried beans x4 @30",
+ "pantryLines": [
+  "The village threw out spoiled stores: Smoked fish, 3 Muscadine Grapes, 5 Foraged food, Foraged food. Ella mutters: \"Should've smoked that. Fresh stuff keeps a day or two on the shelf — the smoke rack is right there.\" (pantry)"
+ ],
+ "overnightLines": [
+  "Overnight, 12 unknown berries went bad — beyond saving. You leave it for the flies."
+ ],
+ "formNamedInPantry": true,
+ "countNamedInPantry": true,
+ "singularIntact": true,
+ "countNamedInSweep": true,
+ "formNamedInSweep": true,
+ "pantryRemovalHappened": [
+  "Foraged food|1",
+  "Foraged food|5",
+  "Muscadine Grapes|3",
+  "Smoked fish|1"
+ ],
+ "survivorIntact": true,
+ "removalHappened": [
+  "Foraged food|1",
+  "Foraged food|5",
+  "Muscadine Grapes|3",
+  "Smoked fish|1"
+ ]
+}

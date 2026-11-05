@@ -2680,13 +2680,17 @@
         }
       }
       // the village's pantry: the village throws out its own rot, not you.
+      // PANTRY COUNT (sim-pantryspoil-a, #1758): the pantry line names its
+      // stacks; the count rides with the name, mirroring the pack sweep
+      // (sim-sweepcount-a) — singular stacks keep their bare name. VOICE
+      // ONLY: no RNG, no mechanic; spoilVoiceLine's draw discipline stands.
       try {
         const v = this.state.village;
         if (v && v.pantry) {
           for (let i = v.pantry.length - 1; i >= 0; i--) {
             const it = v.pantry[i];
             if (!it || it.bonded) continue;
-            if (this.isSpoiled(it)) { lostPantry.push(it.name || 'something'); v.pantry.splice(i, 1); }
+            if (this.isSpoiled(it)) { lostPantry.push((((it.units || 1) > 1 ? it.units + ' ' : '') + (it.name || 'something'))); v.pantry.splice(i, 1); }
           }
           v.pantryKcal = v.pantry.reduce((t, i) => t + (i.kcalEach || 0) * (i.units || 1), 0);
         }

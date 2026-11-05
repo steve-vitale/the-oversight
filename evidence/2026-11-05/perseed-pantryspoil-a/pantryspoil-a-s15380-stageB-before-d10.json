@@ -1,0 +1,387 @@
+{
+ "seed": 15380,
+ "stage": "B",
+ "tag": "before",
+ "fixture": {
+  "berries": {
+   "plantId": "blackberry",
+   "name": "unknown berries",
+   "lumpForm": "berries",
+   "units": 12,
+   "spoilDay": 10
+  },
+  "shoots": {
+   "plantId": "wild_onion",
+   "name": "unknown shoots",
+   "lumpForm": "shoots",
+   "units": 5,
+   "spoilDay": 15
+  },
+  "roots": {
+   "plantId": "sassafras",
+   "name": "unknown roots",
+   "lumpForm": "roots",
+   "units": 4,
+   "spoilDay": 38
+  }
+ },
+ "anchorOk": true,
+ "spoilBonusDays": 6,
+ "knowsPreserve": false,
+ "packBefore": {
+  "lumpUnits": 21,
+  "lumpSpoilDays": [
+   10,
+   15,
+   38
+  ],
+  "stacks": [
+   {
+    "name": "Dog Tags",
+    "units": 1,
+    "foodState": null,
+    "spoilDay": null,
+    "lump": false,
+    "lumpForm": null
+   },
+   {
+    "name": "Trail mix",
+    "units": 2,
+    "foodState": null,
+    "spoilDay": 61,
+    "lump": false,
+    "lumpForm": null
+   },
+   {
+    "name": "Dried meat",
+    "units": 2,
+    "foodState": null,
+    "spoilDay": 31,
+    "lump": false,
+    "lumpForm": null
+   },
+   {
+    "name": "unknown berries",
+    "units": 12,
+    "foodState": "unknown",
+    "spoilDay": 10,
+    "lump": true,
+    "lumpForm": "berries"
+   },
+   {
+    "name": "unknown shoots",
+    "units": 5,
+    "foodState": "unknown",
+    "spoilDay": 15,
+    "lump": true,
+    "lumpForm": "shoots"
+   },
+   {
+    "name": "unknown roots",
+    "units": 4,
+    "foodState": "unknown",
+    "spoilDay": 38,
+    "lump": true,
+    "lumpForm": "roots"
+   }
+  ]
+ },
+ "lumpBefore": "unknown berries x12 @10 | unknown shoots x5 @15 | unknown roots x4 @38",
+ "endDayOk": true,
+ "dayAfter": 10,
+ "playerAlive": true,
+ "sweepCalls": [
+  {
+   "prePack": {
+    "lumpUnits": 21,
+    "lumpSpoilDays": [
+     10,
+     15,
+     38
+    ],
+    "stacks": [
+     {
+      "name": "Dog Tags",
+      "units": 1,
+      "foodState": null,
+      "spoilDay": null,
+      "lump": false,
+      "lumpForm": null
+     },
+     {
+      "name": "Trail mix",
+      "units": 2,
+      "foodState": null,
+      "spoilDay": 61,
+      "lump": false,
+      "lumpForm": null
+     },
+     {
+      "name": "Dried meat",
+      "units": 2,
+      "foodState": null,
+      "spoilDay": 31,
+      "lump": false,
+      "lumpForm": null
+     },
+     {
+      "name": "unknown berries",
+      "units": 12,
+      "foodState": "unknown",
+      "spoilDay": 10,
+      "lump": true,
+      "lumpForm": "berries"
+     },
+     {
+      "name": "unknown shoots",
+      "units": 5,
+      "foodState": "unknown",
+      "spoilDay": 15,
+      "lump": true,
+      "lumpForm": "shoots"
+     },
+     {
+      "name": "unknown roots",
+      "units": 4,
+      "foodState": "unknown",
+      "spoilDay": 38,
+      "lump": true,
+      "lumpForm": "roots"
+     },
+     {
+      "name": "Bow",
+      "units": 1,
+      "foodState": null,
+      "spoilDay": null,
+      "lump": false,
+      "lumpForm": null
+     },
+     {
+      "name": "Flannel Shirt",
+      "units": 1,
+      "foodState": null,
+      "spoilDay": null,
+      "lump": false,
+      "lumpForm": null
+     }
+    ]
+   },
+   "preLumps": "unknown berries x12 @10 | unknown shoots x5 @15 | unknown roots x4 @38",
+   "prePantry": {
+    "stacks": [
+     {
+      "name": "Dried beans",
+      "units": 80,
+      "spoilDay": 366,
+      "foodState": null
+     },
+     {
+      "name": "Rice",
+      "units": 65,
+      "spoilDay": 366,
+      "foodState": null
+     },
+     {
+      "name": "Canned soup",
+      "units": 30,
+      "spoilDay": 366,
+      "foodState": null
+     },
+     {
+      "name": "Dried meat",
+      "units": 18,
+      "spoilDay": 31,
+      "foodState": null
+     },
+     {
+      "name": "Peanuts",
+      "units": 35,
+      "spoilDay": 61,
+      "foodState": null
+     },
+     {
+      "name": "Foraged food",
+      "units": 5,
+      "spoilDay": 10,
+      "foodState": "fresh"
+     },
+     {
+      "name": "Muscadine Grapes",
+      "units": 3,
+      "spoilDay": 10,
+      "foodState": "fresh"
+     },
+     {
+      "name": "Smoked fish",
+      "units": 1,
+      "spoilDay": 10,
+      "foodState": "smoked"
+     },
+     {
+      "name": "Dried beans",
+      "units": 4,
+      "spoilDay": 30,
+      "foodState": "dried"
+     }
+    ]
+   },
+   "prePantrySummary": "Dried beans x80 @366 | Rice x65 @366 | Canned soup x30 @366 | Dried meat x18 @31 | Peanuts x35 @61 | Foraged food x5 @10 | Muscadine Grapes x3 @10 | Smoked fish x1 @10 | Dried beans x4 @30",
+   "lines": [],
+   "ret": 0,
+   "err": null,
+   "rngDrawsDuringSweep": 0
+  }
+ ],
+ "sweepCallCount": 1,
+ "dawnWindow": [
+  "— DAY 1 DAWN — The world wakes. Animals are active.",
+  "— DAY 10 DAWN — The world wakes. Animals are active."
+ ],
+ "dawnTranscript": [
+  "— DAY 10 DAWN — The world wakes. Animals are active."
+ ],
+ "packAfter": {
+  "lumpUnits": 21,
+  "lumpSpoilDays": [
+   10,
+   15,
+   38
+  ],
+  "stacks": [
+   {
+    "name": "Dog Tags",
+    "units": 1,
+    "foodState": null,
+    "spoilDay": null,
+    "lump": false,
+    "lumpForm": null
+   },
+   {
+    "name": "Trail mix",
+    "units": 2,
+    "foodState": null,
+    "spoilDay": 61,
+    "lump": false,
+    "lumpForm": null
+   },
+   {
+    "name": "Dried meat",
+    "units": 2,
+    "foodState": null,
+    "spoilDay": 31,
+    "lump": false,
+    "lumpForm": null
+   },
+   {
+    "name": "unknown berries",
+    "units": 12,
+    "foodState": "unknown",
+    "spoilDay": 10,
+    "lump": true,
+    "lumpForm": "berries"
+   },
+   {
+    "name": "unknown shoots",
+    "units": 5,
+    "foodState": "unknown",
+    "spoilDay": 15,
+    "lump": true,
+    "lumpForm": "shoots"
+   },
+   {
+    "name": "unknown roots",
+    "units": 4,
+    "foodState": "unknown",
+    "spoilDay": 38,
+    "lump": true,
+    "lumpForm": "roots"
+   },
+   {
+    "name": "Bow",
+    "units": 1,
+    "foodState": null,
+    "spoilDay": null,
+    "lump": false,
+    "lumpForm": null
+   },
+   {
+    "name": "Flannel Shirt",
+    "units": 1,
+    "foodState": null,
+    "spoilDay": null,
+    "lump": false,
+    "lumpForm": null
+   }
+  ]
+ },
+ "lumpAfter": "unknown berries x12 @10 | unknown shoots x5 @15 | unknown roots x4 @38",
+ "pantryAfter": {
+  "stacks": [
+   {
+    "name": "Dried beans",
+    "units": 80,
+    "spoilDay": 366,
+    "foodState": null
+   },
+   {
+    "name": "Rice",
+    "units": 65,
+    "spoilDay": 366,
+    "foodState": null
+   },
+   {
+    "name": "Canned soup",
+    "units": 30,
+    "spoilDay": 366,
+    "foodState": null
+   },
+   {
+    "name": "Dried meat",
+    "units": 18,
+    "spoilDay": 31,
+    "foodState": null
+   },
+   {
+    "name": "Peanuts",
+    "units": 35,
+    "spoilDay": 61,
+    "foodState": null
+   },
+   {
+    "name": "Foraged food",
+    "units": 5,
+    "spoilDay": 10,
+    "foodState": "fresh"
+   },
+   {
+    "name": "Muscadine Grapes",
+    "units": 3,
+    "spoilDay": 10,
+    "foodState": "fresh"
+   },
+   {
+    "name": "Smoked fish",
+    "units": 1,
+    "spoilDay": 10,
+    "foodState": "smoked"
+   },
+   {
+    "name": "Dried beans",
+    "units": 4,
+    "spoilDay": 30,
+    "foodState": "dried"
+   }
+  ]
+ },
+ "pantryAfterSummary": "Dried beans x80 @366 | Rice x65 @366 | Canned soup x30 @366 | Dried meat x18 @31 | Peanuts x35 @61 | Foraged food x5 @10 | Muscadine Grapes x3 @10 | Smoked fish x1 @10 | Dried beans x4 @30",
+ "pantryLines": [],
+ "overnightLines": [],
+ "formNamedInPantry": false,
+ "countNamedInPantry": false,
+ "singularIntact": false,
+ "countNamedInSweep": false,
+ "formNamedInSweep": false,
+ "pantryRemovalHappened": [],
+ "survivorIntact": true,
+ "removalHappened": []
+}
