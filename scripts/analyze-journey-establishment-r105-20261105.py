@@ -52,13 +52,26 @@ def load(tag, seed):
 INERT = {'diplomat', 'herbal_remedy', 'preserve_food', 'wound_care'}
 AWARE = {'field_dressing', 'triage'}
 
-# --- r104 panel: M0 reference ---
+# --- M0 reference: the r104-driver CONTROL on the current base ---
+# Prereg addendum: the r104 PANEL ran on 6b516a7ea; 63 commits landed since,
+# so the panel is a stale M0 reference. The control (r104 driver, unmodified,
+# re-run on fc8390511) is the binding reference. Pass its dir via
+# R105_CONTROL_DIR. The stale panel is still loaded for a printed comparison.
+CONTROL_DIR = os.environ.get('R105_CONTROL_DIR') or ''
 r104 = {}
 for seed in SEEDS:
     try:
         r104[seed] = load('r104', seed)
     except Exception as e:
-        print(f'r104 seed {seed}: MISSING {e}')
+        print(f'r104 panel seed {seed}: MISSING {e}')
+r104ctl = {}
+for seed in SEEDS:
+    if not CONTROL_DIR:
+        continue
+    try:
+        r104ctl[seed] = json.load(open(os.path.join(CONTROL_DIR, f'journey-establishment-r104-seed{seed}.json')))
+    except Exception as e:
+        print(f'r104 control seed {seed}: MISSING {e}')
 
 m0_seeds = []
 m3_seeds = m4_seeds = 0
@@ -93,9 +106,11 @@ for seed in SEEDS:
         if c.get('skills') is not None and set(c['skills']) == set(codex.keys()) and len(codex) > 0:
             player_vid = cid; break
     hold_end_v = [h for h in hold_end if str(h['id']) != str(player_vid)] if player_vid else hold_end
-    # --- M0 vs r104 ---
-    ref = r104.get(seed)
+    # --- M0 vs r104 CONTROL (binding; prereg addendum) + stale panel (printed) ---
+    ref = r104ctl.get(seed) or r104.get(seed)
+    ref_label = 'control' if r104ctl.get(seed) else 'PANEL-STALE'
     m0 = None
+    m0_panel = None
     lesson_note = ''
     if ref:
         same = (j.get('endDay') == ref.get('endDay') and j.get('aliveEnd') == ref.get('aliveEnd')
@@ -111,11 +126,19 @@ for seed in SEEDS:
                 keys.append((str(teacher), str(t.get('skill')), t.get('day'), str(learner)))
             return Counter(keys)
         lk105 = lesson_keyset(j)
-        lk104 = lesson_keyset(ref)
-        diff = (lk105 - lk104) + (lk104 - lk105)
-        lesson_note = f'lessons r105={sum(lk105.values())} r104={sum(lk104.values())} diff={dict(diff) if diff else "none"}'
+        lkref = lesson_keyset(ref)
+        diff = (lk105 - lkref) + (lkref - lk105)
+        lesson_note = f'lessons r105={sum(lk105.values())} {ref_label}={sum(lkref.values())} diff={dict(diff) if diff else "none"}'
         m0 = same and not diff
         m0_seeds.append(m0)
+        # stale-panel comparison (record only, never gates)
+        pref = r104.get(seed)
+        if pref and ref is not pref:
+            psame = (j.get('endDay') == pref.get('endDay') and j.get('aliveEnd') == pref.get('aliveEnd')
+                     and j.get('pantryKcalEnd') == pref.get('pantryKcalEnd'))
+            lkpanel = lesson_keyset(pref)
+            pdiff = (lk105 - lkpanel) + (lkpanel - lk105)
+            m0_panel = psame and not pdiff
     # --- holdings (villagers only) for the six ids ---
     living = [h for h in hold_end_v if not h.get('dead')]
     panel_living += len(living)
@@ -207,13 +230,13 @@ for seed in SEEDS:
     if not starv:
         m4_seeds += 1
     print(f'\n=== seed {seed} (endDay {j.get("endDay")}, over {j.get("gameOver")}, aliveEnd {j.get("aliveEnd")}, wave {j.get("waveReached")}, pantryEnd {j.get("pantryKcalEnd")}) ===')
-    print(f'  M0 vs r104: {"PASS" if m0 else "FAIL"} {lesson_note}')
+    print(f'  M0 vs r104-{ref_label}: {"PASS" if m0 else "FAIL"} {lesson_note}' + (f' | vs stale r104-panel: {"PASS" if m0_panel else "FAIL"} (record only)' if m0_panel is not None else ''))
     print(f'  wraps: hunt={j.get("huntWrap")} care={j.get("careWrap")}({j.get("careCalls")} calls) healer={j.get("healerWrap")}({j.get("healerCalls")} calls) treat={j.get("treatWrap")}({j.get("treatCalls")} calls) cook={j.get("cookWrap")}')
     print(f'  huntLog={len(j.get("huntLog") or [])} careLog={len(j.get("careLog") or [])} healerLog={len(j.get("healerLog") or [])} treatLog={len(j.get("treatLog") or [])} cookLog={len(j.get("cookLog") or [])}')
     print(f'  skill_used rows: {sum(1 for t in tele if t.get("type") == "skill_used")} ability_used: {sum(1 for t in tele if t.get("type") == "ability_used")}')
 
 print(f'\nPANEL: livingVillagersEnd={panel_living}')
-print(f'  M0 INSTRUMENT-NEUTRALITY: {sum(1 for x in m0_seeds if x)}/{len(m0_seeds)} seeds exact vs r104')
+print(f'  M0 INSTRUMENT-NEUTRALITY: {sum(1 for x in m0_seeds if x)}/{len(m0_seeds)} seeds exact vs r104-control (fc8390511)')
 print(f'  M1 USE CLASSIFICATION (per id: USED / HELD-UNUSED / NEVER-HELD + INERT flag):')
 verdict_classes = {}
 for iid in ['diplomat', 'herbal_remedy', 'field_dressing', 'preserve_food', 'wound_care', 'triage']:
