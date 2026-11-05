@@ -10,6 +10,15 @@
 // and off/on neutrality legs, and a driver smoke leg into /tmp
 // (never into evidence/). Exit non-zero on any failure.
 // Usage: node scripts/test-vetrest-20261105.js
+//
+// POST-REVERT STATE (closeout of run fleshout-loop-b-20261105T1830Z):
+// the 32-seed screen (sim-vetrest-screen-b) came back NO-GO /
+// CONCEPT-DEAD (median 5d < 19d, 6 skips fired but 0 paired survival
+// gain), so the prereg's NO-GO action reverted the ledger.js lever
+// (see evidence/2026-11-05/sim-vetrest-screen-b.md). The live legs
+// that assert skip behavior are SKIPPED, not passed, while the lever
+// is absent; they were 30/30 pre-revert and run again if it ever
+// returns. The analyzer fixtures and neutrality legs still run.
 'use strict';
 const path = require('path');
 const fs = require('fs');
@@ -18,11 +27,14 @@ const REPO = path.join(__dirname, '..');
 const AN = require(path.join(REPO, 'scripts', 'vetrest-analyze-20261105'));
 const KS = require(path.join(REPO, 'scripts', 'killersim-analyze-20261105'));
 
-let pass = 0, fail = 0;
+let pass = 0, fail = 0, skip = 0;
 function check(name, cond, extra) {
   if (cond) { pass++; console.log('PASS ' + name); }
   else { fail++; console.log('FAIL ' + name + (extra ? ' :: ' + extra : '')); }
 }
+function skipCheck(name, reason) { skip++; console.log('SKIP ' + name + ' :: ' + reason); }
+const LEVER_PRESENT = (function () { try { return fs.readFileSync(path.join(REPO, 'src', 'js', 'ledger.js'), 'utf8').indexOf('VETREST_MANTLE_SKIP') !== -1; } catch (e) { return false; } })();
+const SKIP_LEVER = 'lever reverted by screen NO-GO (sim-vetrest-screen-b.md); live skip un-runnable post-revert, 30/30 pre-revert';
 
 // ---------- live-harness helpers ----------
 const { loadGame, setupGame, runDays, quietLog } = require(path.join(REPO, 'scripts', 'sim-harness'));
@@ -68,12 +80,18 @@ function captureSay(Game) {
     const day = (Game.state.scholar || {}).day || 1;
     Game.state.waveKillLog = [{ d: day, mid: 'influencer', w: 4, by: npcs.A, via: 'player', trick: null }];
     Game.playerDeath('test');
-    check('skip-fires-pick', Game.villagerId === npcs.B, 'successor=' + Game.villagerId + ' want ' + npcs.B);
-    const sk = ((Game.state.village || {}).vetrestSkips || []);
-    check('skip-fires-trace', sk.length === 1 && sk[0].skipped === npcs.A && sk[0].picked === npcs.B,
-      'trace=' + JSON.stringify(sk));
-    check('skip-fires-said', lines.some(function (l) { return l.indexOf('only just bled') >= 0; }),
-      'lines=' + lines.slice(-3).join(' | ').slice(0, 200));
+    if (LEVER_PRESENT) {
+      check('skip-fires-pick', Game.villagerId === npcs.B, 'successor=' + Game.villagerId + ' want ' + npcs.B);
+      const sk = ((Game.state.village || {}).vetrestSkips || []);
+      check('skip-fires-trace', sk.length === 1 && sk[0].skipped === npcs.A && sk[0].picked === npcs.B,
+        'trace=' + JSON.stringify(sk));
+      check('skip-fires-said', lines.some(function (l) { return l.indexOf('only just bled') >= 0; }),
+        'lines=' + lines.slice(-3).join(' | ').slice(0, 200));
+    } else {
+      skipCheck('skip-fires-pick', SKIP_LEVER);
+      skipCheck('skip-fires-trace', SKIP_LEVER);
+      skipCheck('skip-fires-said', SKIP_LEVER);
+    }
     delete process.env.VETREST_MANTLE_SKIP;
   }
   // 2. OLD-CODE CONTROL (flag OFF): same setup, the blooded killer
@@ -99,7 +117,8 @@ function captureSay(Game) {
     Game.state.scholar.day = 50;
     Game.state.waveKillLog = [{ d: 5, mid: 'influencer', w: 4, by: npcs.A, via: 'player', trick: null }];
     Game.playerDeath('test');
-    check('skip-window-45', Game.villagerId === npcs.B, 'successor=' + Game.villagerId);
+    if (LEVER_PRESENT) check('skip-window-45', Game.villagerId === npcs.B, 'successor=' + Game.villagerId);
+    else skipCheck('skip-window-45', SKIP_LEVER);
     delete process.env.VETREST_MANTLE_SKIP;
   }
   // 4. Window edge, 46d: kill 46 days ago is NOT skipped.
@@ -374,6 +393,6 @@ function captureSay(Game) {
     check('driver-smoke-flag', bf.flagOn === false && af.flagOn === true, 'flags=' + bf.flagOn + '/' + af.flagOn);
   }
 
-  console.log('\n' + pass + ' passed, ' + fail + ' failed');
+  console.log('\n' + pass + ' passed, ' + fail + ' failed, ' + skip + ' skipped');
   process.exit(fail ? 1 : 0);
 })().catch(function (e) { console.error(e.stack); process.exit(1); });
