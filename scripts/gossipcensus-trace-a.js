@@ -84,6 +84,17 @@ function morningWood(Game) {
   try { return (typeof Game.woodCount === 'function') ? Game.woodCount() : null; } catch (e) { return null; }
 }
 
+// queueLens (sim-awaynaming-cap-a 2026-11-05): observational snapshot
+// of the two haven-news queues — reads only, no RNG, no state edits.
+// awayNamingLen is 0 on pre-fix code (the field does not exist yet);
+// pendingHavenNewsLen is the r141 relay queue (cap 20, flush filters).
+function queueLens(Game2) {
+  let awayNamingLen = null, pendingHavenNewsLen = null;
+  try { const q = (Game2.state.scholar || {}).awayNaming; awayNamingLen = Array.isArray(q) ? q.length : 0; } catch (e) {}
+  try { const q = (Game2.state || {}).pendingHavenNews; pendingHavenNewsLen = Array.isArray(q) ? q.length : 0; } catch (e) {}
+  return { awayNamingLen, pendingHavenNewsLen };
+}
+
 const WOOD_LINE_RE = /wood|cut|clear|lash|bridge|tree|brush/i;
 
 async function oneInstance(seed, opts) {
@@ -152,7 +163,7 @@ async function oneInstance(seed, opts) {
       if (armed) { snStore.loopDay = callIdx; snStore.part = 0; snStore.phase = 'daily'; mark(Game2, snStore, 'daily-start'); }
       if (callIdx > 1) {
         const m = snapPos(Game2);
-        mornings.push({ loopDay: callIdx, ...m, morningWood: morningWood(Game2) });
+        mornings.push({ loopDay: callIdx, ...m, morningWood: morningWood(Game2), ...queueLens(Game2) });
       }
       const sayBefore = snStore.lines.length;
       dayPolicy.daily(Game2, ctx);
@@ -160,7 +171,7 @@ async function oneInstance(seed, opts) {
       const dayWoodLines = dayLines.filter((l) => WOOD_LINE_RE.test(l));
       const eveningSayTail = dayLines.slice(Math.max(0, dayLines.length - 30));
       const pos = snapPos(Game2);
-      const row = { loopDay: callIdx, tapDay: false, ...pos, eveningSayTail };
+      const row = { loopDay: callIdx, tapDay: false, ...pos, eveningSayTail, ...queueLens(Game2) };
       if (Game2.over) {
         row.eveningOutcome = 'game-over';
       } else {
@@ -188,11 +199,32 @@ async function oneInstance(seed, opts) {
   const result = await runDays(Game, policy, { days, manifest: null });
   try { uninstallTranscript(); } catch (e) {}
   try { if (typeof origSleep === 'function') Game.sleep = origSleep; } catch (e) {}
+  // namingLedger (sim-awaynaming-cap-a 2026-11-05): the kick ledger for
+  // ledger conservation — per monster entry, what the debate machinery
+  // kicked/settled, read at end of run. Reads only; no RNG, no state
+  // edits. endQueues records what is still held at run end (kinds +
+  // mids only). Together with the said-line counts they close the
+  // conservation identity: said + stillHeld + dropped == kicked.
+  let namingLedger = [], endQueues = { awayNaming: [], pendingHavenNews: [] };
+  try {
+    const mons = (Game.state.codex || {}).monsters || {};
+    for (const [mid, e] of Object.entries(mons)) {
+      namingLedger.push({ mid, namingKicked: !!e.namingKicked,
+        villageName: e.villageName || null,
+        proposalCount: Object.keys(e.proposals || {}).length });
+    }
+  } catch (e) {}
+  try {
+    endQueues.awayNaming = ((Game.state.scholar || {}).awayNaming || [])
+      .map((h) => ({ kind: h.kind || null, mid: h.mid || null }));
+    endQueues.pendingHavenNews = ((Game.state || {}).pendingHavenNews || [])
+      .map((h) => ({ kind: h.kind || null, mid: h.mid || null }));
+  } catch (e) {}
   return {
     seed, policy: 'nighttravel', daysAlive: result.days, endReason: result.endReason,
     gameDays: result.gameDays, maxWaveUnlocked: result.maxWaveUnlocked,
     deaths: (result.samples && result.samples.deaths) || [],
-    evenings, mornings,
+    evenings, mornings, namingLedger, endQueues,
     bankfoodStore: { mornings: pbStore.mornings, evenings: pbStore.evenings, firstUpkeeps: pbStore.firstUpkeeps, errs: pbStore.errs, errors: pbStore.errors },
     woodcarryStore: { records: wcStore.records, errs: wcStore.errs, errors: wcStore.errors },
     warmthStore: { errs: wwStore.errs, errors: wwStore.errors, acted: wwStore.acted },
@@ -365,6 +397,7 @@ async function main() {
       endReason: inst.endReason, gameDays: inst.gameDays,
       maxWaveUnlocked: inst.maxWaveUnlocked, deaths: inst.deaths,
       evenings: inst.evenings, mornings: inst.mornings,
+      namingLedger: inst.namingLedger, endQueues: inst.endQueues,
       bankfoodStore: inst.bankfoodStore, woodcarryStore: inst.woodcarryStore,
       warmthStore: inst.warmthStore,
       transcriptErrs: inst.transcript.errs, transcriptErrors: inst.transcript.errors,
