@@ -55,12 +55,15 @@ function deathChannel(fate) {
   if (split === 'alive') return null;
   let m = split.match(/^scholar-death:([^:]+):/);
   if (m) {
-    const arg = m[1];
+    // causeArg carries the article ('the arena', 'the wild') — strip it
+    // before comparing, so an arena death is the contest/arena channel.
+    const arg = m[1].replace(/^the /, '');
     if (arg === 'arena' || arg === 'contest') return 'contest/arena';
-    if (arg === 'the wild') return 'wild';
+    if (arg === 'wild') return 'wild';
     if (arg === 'expedition') return 'other:expedition';
-    return 'other:' + arg;
+    return 'other:' + m[1];
   }
+  if (split === 'the arena') return 'contest/arena';
   if (split.indexOf('monster:') === 0) return 'wild';
   if (split === 'the wild (unsplit residual)') return 'wild (unsplit residual)';
   if (split === 'unknown (no fallen entry)') return 'other:unknown';

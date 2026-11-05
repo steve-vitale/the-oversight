@@ -92,6 +92,28 @@ function oneKiller(seed, firstDay, exit) {
   }));
   check('channel-arena', K2.deathChannel(c.killers[0]) === 'contest/arena', JSON.stringify(c.killers[0].deathCauseSplit));
 })();
+// 6b. Channel: the game passes causeArg WITH the article ('the arena',
+// not 'arena') — the channel must still be contest/arena.
+(function () {
+  const c = AN.analyzeSeed(row(61, {
+    waveKillLog: [kill(40, 'w4a', 4, 'alice')],
+    killsLive: [liveKill(40, 'w4a', 4, 'alice', true)],
+    fallen: [dead('alice', 45, 'the arena')],
+    scholarDeaths: [scholarDeath('alice', 45, 'the arena', true, true)],
+    daily: [snap(40, 1, false), snap(100, 0, false)],
+  }));
+  check('channel-arena-article', K2.deathChannel(c.killers[0]) === 'contest/arena', JSON.stringify(c.killers[0].deathCauseSplit));
+})();
+// 6c. Channel: bare raw cause 'the arena' with no scholarDeath record.
+(function () {
+  const c = AN.analyzeSeed(row(62, {
+    waveKillLog: [kill(40, 'w4a', 4, 'alice')],
+    killsLive: [liveKill(40, 'w4a', 4, 'alice', true)],
+    fallen: [dead('alice', 45, 'the arena')],
+    daily: [snap(40, 1, false), snap(100, 0, false)],
+  }));
+  check('channel-bare-arena', K2.deathChannel(c.killers[0]) === 'contest/arena', JSON.stringify(c.killers[0].deathCauseSplit));
+})();
 // 7. Channel: scholar-death expedition at haven, not in combat -> other:expedition.
 (function () {
   const c = AN.analyzeSeed(row(7, {
