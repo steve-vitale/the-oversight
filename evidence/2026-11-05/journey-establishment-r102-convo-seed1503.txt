@@ -1,0 +1,41 @@
+=== R102 PEOPLE CHECK (2 held convos, end of run; no teaching intervention this run) ===
+
+-- Priya (priya_nair) occ=emergency dispatcher --
+OPENING: "My cut needs a second pair of hands. Could you take a look?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to them, on the same side of the Haven door, to help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "Yuki? A librarian, back before. Solid person."
+YOU: [confront:d_zyd9oih] "You said something odd the other day. Let's talk about it."
+THEM: "I wasn't a surgeon. I was an emergency dispatcher. You don't know what it's like, being the only nobody in a camp of somebodies."
+YOU: [confront:d_q4ls3f3] "You said something odd the other day. Let's talk about it."
+THEM: Priya looks at you, level. "I told you the truth. You can keep poking it, but it's told."
+YOU: [confront:d_zvknx6o] "You said something odd the other day. Let's talk about it."
+THEM: "That again?" Priya sighs. "I confessed that already. I'm not confessing it twice for dramatic effect."
+closing: "Take care of yourself."
+
+-- James (james_okonkwo) occ=carpenter --
+OPENING: "Never mind the food I needed — we got it handled. Thanks anyway."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:personal] "You never really told me your story."
+THEM: "Huh. Let me think about that." "Don't eat anything James hasn't looked at first. That's my rule. It's a good rule."
+YOU: [goon] "What else?"
+THEM: The ease drains out of it, a little.
+YOU: [dlg:more] "Tell me more."
+THEM: "I keep a mental list of everyone who's still kind. It's longer than you'd think."
+YOU: [dlg:react] (listen)
+THEM: "Does Lagos, Nigeria ever cross your mind at the wrong moment? Mine picks dinnertime."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on your story."
+YOU: [goon] "What else?"
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [goon] "What else?"
+THEM: "Okay, real question: what's the funniest thing you've seen since we got here? I desperately need it."
+closing: "Don't be a stranger."
