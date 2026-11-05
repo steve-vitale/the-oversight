@@ -332,6 +332,10 @@ async function oneInstance(seed) {
     bankfoodStore: { mornings: pbStore.mornings, evenings: pbStore.evenings, firstUpkeeps: pbStore.firstUpkeeps, errs: pbStore.errs, errors: pbStore.errors },
     bankaddedProbeStore: { evenings: probeStore.evenings, errs: probeStore.errs, errors: probeStore.errors },
     firstUpkeeps: pbStore.firstUpkeeps,
+    // Every-upkeep snaps (sim-banksnap-a): one record per upkeep call,
+    // before that call's inner.upkeep — the pre-snapshot window for the
+    // re-judgment (see scripts/analyze-bankadded-probe.js).
+    upkeepSnaps: pbStore.upkeepSnaps,
     wooddayStore: null,
     daysAlive: result.days, endReason: result.endReason, gameDays: result.gameDays,
     maxWaveUnlocked: result.maxWaveUnlocked, waveKills: result.waveKills,

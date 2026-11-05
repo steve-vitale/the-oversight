@@ -21,7 +21,7 @@ const fs = require('fs');
 const path = require('path');
 const { retainedEvents, classifyRetention, morningDisposition, sourceOf } = require('./analyze-bankretain-rerun');
 const { filterBankAdded } = require('./analyze-bankadded');
-const { probeStackKey, PROBE_UNITS } = require('./policies/bankadded-probe-diag');
+const { probeStackKey, PROBE_UNITS, PROBE_ADDED_KCAL } = require('./policies/bankadded-probe-diag');
 
 function args() {
   const a = {};
@@ -70,7 +70,138 @@ function injectedStackCheck(postBank, packBefore, firstUp, gameDay) {
     spoilDay, spoilDayMatch: postBankInjectedUnits === PROBE_UNITS,
     match: postBankInjectedUnits === PROBE_UNITS && firstUpInjectedUnits === PROBE_UNITS };
 }
-// Build judged/censored bank-band added events for one corpus instance.
+// ---- Pre-snapshot window (sim-banksnap-a) ----
+// The first-upkeep snapshot reads "after the first dawn upkeep eat"
+// in the sleep-refused path, so a first-upkeep VANISHED can be food
+// eaten as a morning meal BEFORE the snapshot. The every-upkeep snaps
+// (st.upkeepSnaps, one per upkeep call, before that call's inner.upkeep)
+// bracket that eat. Pure over the instance + event record.
+//   snapPre  = FIRST upkeep snap with scholarDay == gameDay AND
+//              afterDailyCalls == loopDay (first upkeep call of the
+//              following loop-day, before that call's inner.upkeep).
+//   snapPost = FIRST upkeep snap with scholarDay == gameDay+1 AND
+//              afterDailyCalls == loopDay (first upkeep of the new day
+//              inside the same loop-day's p-loop, i.e. the day rolled
+//              during the p-loop wait, not during daily).
+//   snapDrop = FIRST snap after snapPre (same loop-day p-loop) whose
+//              injected-stack units are < 18; snapEat = the snap
+//              immediately before snapDrop (the call whose inner.upkeep
+//              ate the food).
+// A staged event is RETAINED-THEN-EATEN iff E1–E5 hold (see prereg):
+// E1 food present before the eating call, E2 gone at the new-day
+// snapshot, E3 the drop localizes to one consecutive inter-snap step
+// before the roll, E4 the competentEat trigger fired at the eating
+// call, E5 the dawn spoil sweep cannot explain it (spoilDay > new
+// day). E6 (kcal accounting) is quoted, not exact-matched: the endDay
+// burn (2200) and pantry guard-loop takes share the window, so the
+// residual R = kcal(snapPost) - (kcal(snapEat) + 720 - 2200) is
+// attributed per event or named open — it corroborates, it does not
+// arbitrate (prereg: retained 17051/11 went 2240 -> 0 while retained
+// 17025/32 went 2230 -> 2090 under the same trigger state).
+// If the day rolled during/after daily (snapPost missing from the
+// loop-day p-loop) the window includes daily actions, so the drop is
+// NOT attributable to the upkeep eat: reason 'roll-after-daily'. If
+// sleep succeeded, no snapPre exists (the day had already rolled
+// before the loop-day's first upkeep) and the old snapshot was
+// already pre-eat: reason 'sleep-path', old verdict stands.
+const EAT_TRIGGER_KCAL = 2040; // 0.85 x 2400 cap, competentEat trigger
+const ENDDAY_BURN_KCAL = 2200; // ACTIVE_DAY, src/js/engine/calories.js
+function preSnapshotWindow(inst, ev) {
+  const snaps = inst.upkeepSnaps || null;
+  if (!snaps || !snaps.length) return { available: false, reason: 'no-upkeep-snaps' };
+  const gameDay = ev.gameDay, loopDay = ev.loopDay;
+  const preCands = snaps.filter((s) => s.scholarDay === gameDay && s.afterDailyCalls === loopDay);
+  const postCands = snaps.filter((s) => s.scholarDay === gameDay + 1 && s.afterDailyCalls === loopDay);
+  // No old-day snap in the following loop-day's p-loop AND a new-day
+  // snap there: the day had already rolled before that loop-day's
+  // first upkeep (sleep succeeded) — the old snapshot was already
+  // pre-eat. No new-day snap there either: the day rolled during/
+  // after daily, so the window includes daily actions.
+  if (!preCands.length && postCands.length) return { available: true, path: 'sleep-path', snapPre: null, snapPost: postCands[0] || null };
+  if (!preCands.length) return { available: true, path: 'roll-after-daily', snapPre: null, snapPost: null };
+  const snapPre = preCands[0];
+  if (!postCands.length) return { available: true, path: 'roll-after-daily', snapPre, snapPost: null };
+  const snapPost = postCands[0];
+  const key = probeStackKey();
+  const spoilDay = gameDay + 2;
+  const injectedPre = unitsOfKeySpoil(snapPre.pack, key, spoilDay);
+  const injectedPost = unitsOfKeySpoil(snapPost.pack, key, spoilDay);
+  // First snap after snapPre (same loop-day p-loop) with injected < 18.
+  const later = snaps.filter((s) => s.upkeepIndex > snapPre.upkeepIndex && s.afterDailyCalls === loopDay)
+    .sort((a, b) => a.upkeepIndex - b.upkeepIndex);
+  let snapDrop = null, snapEat = null;
+  for (const s of later) {
+    if (unitsOfKeySpoil(s.pack, key, spoilDay) < PROBE_UNITS) { snapDrop = s; break; }
+  }
+  if (snapDrop) {
+    snapEat = snaps.find((s) => s.upkeepIndex === snapDrop.upkeepIndex - 1) || snapPre;
+  }
+  const injectedDrop = snapDrop ? unitsOfKeySpoil(snapDrop.pack, key, spoilDay) : null;
+  const injectedEat = snapEat ? unitsOfKeySpoil(snapEat.pack, key, spoilDay) : null;
+  const kcalPre = snapPre.kcal, kcalPost = snapPost.kcal;
+  const kcalEat = snapEat ? snapEat.kcal : null;
+  // The drop localizes to the single inter-snap step [snapEat, snapDrop]:
+  // snapEat is the call whose inner.upkeep ate the food (snapDrop is the
+  // very next upkeep snap). dropBeforeRoll: the food was already gone
+  // before the day rolled; dropAtSnapshot: it went in the step across
+  // the roll. Either way the only pack consumer in that step is the one
+  // inner.upkeep call (plus, across the roll, endDay's spoil sweep —
+  // excluded by E5). snapEat must sit in the same loop-day p-loop.
+  const dropBeforeRoll = snapDrop ? snapDrop.scholarDay === gameDay : false;
+  const dropAtSnapshot = snapDrop ? snapDrop === snapPost : false;
+  const eatInLoopDay = snapEat ? snapEat.afterDailyCalls === loopDay : false;
+  const triggerFired = kcalEat !== null && kcalEat < EAT_TRIGGER_KCAL;
+  const spoilImmune = spoilDay > (gameDay + 1);
+  const residualKcal = (kcalPost !== null && kcalEat !== null)
+    ? kcalPost - (kcalEat + PROBE_ADDED_KCAL - ENDDAY_BURN_KCAL) : null;
+  return { available: true, path: 'refused-path', snapPre, snapPost, snapEat, snapDrop,
+    injectedPre, injectedPost, injectedEat, injectedDrop,
+    kcalPre, kcalPost, kcalEat, triggerFired, spoilImmune,
+    ediblePre: snapPre.pack ? snapPre.pack.edibleKcal : null,
+    ediblePost: snapPost.pack ? snapPost.pack.edibleKcal : null,
+    dropBeforeRoll, dropAtSnapshot, eatInLoopDay, residualKcal,
+    e1: injectedPre === PROBE_UNITS && injectedEat === PROBE_UNITS,
+    e2: injectedPost === 0,
+    e3: !!snapDrop && injectedDrop === 0 && eatInLoopDay && (dropBeforeRoll || dropAtSnapshot),
+    e4: triggerFired,
+    e5: spoilImmune };
+}
+// Re-judge one judged event under the fixed snapshot. Returns
+// { rejudgedVerdict, retainedFinal, preSnapshot }. Old verdicts stand
+// where the new instrument has nothing to add (no snaps: old corpora;
+// genuine/press-added: no injected identity); a staged VANISHED is
+// re-classified RETAINED-THEN-EATEN only on E1–E5; a staged retained
+// event must still show its 18 injected units at snapPre (food present
+// before the pre-snapshot window) or it reads DISAGREED.
+function rejudgeEvent(inst, ev) {
+  const pre = preSnapshotWindow(inst, ev);
+  const old = ev.verdict;
+  if (!pre.available) return { rejudgedVerdict: old, retainedFinal: ev.retainedAtTrueMorning, preSnapshot: pre };
+  if (pre.path === 'sleep-path' || pre.path === 'roll-after-daily') {
+    return { rejudgedVerdict: old, retainedFinal: ev.retainedAtTrueMorning, preSnapshot: pre };
+  }
+  // Defensive: refused-path must carry both snaps; a missing one is
+  // UNRESOLVED (prereg), never a silent fallback to the old verdict.
+  if (pre.path === 'refused-path' && (!pre.snapPre || !pre.snapPost)) {
+    return { rejudgedVerdict: 'UNRESOLVED-NO-PRE-SNAP', retainedFinal: false, preSnapshot: pre };
+  }
+  if (ev.kind === 'genuine' || ev.kind === 'press-added') {
+    return { rejudgedVerdict: old, retainedFinal: ev.retainedAtTrueMorning, preSnapshot: pre };
+  }
+  if (old === 'RETAINED' || old === 'RETAINED-SPOIL-SWEPT') {
+    if (pre.injectedPre === PROBE_UNITS) {
+      return { rejudgedVerdict: old, retainedFinal: true, preSnapshot: pre };
+    }
+    return { rejudgedVerdict: 'DISAGREED', retainedFinal: false, preSnapshot: pre };
+  }
+  if (old === 'VANISHED' || old === 'PARTIAL-UNEXPLAINED') {
+    if (pre.e1 && pre.e2 && pre.e3 && pre.e4 && pre.e5) {
+      return { rejudgedVerdict: 'RETAINED-THEN-EATEN', retainedFinal: true, preSnapshot: pre };
+    }
+    return { rejudgedVerdict: old, retainedFinal: false, preSnapshot: pre };
+  }
+  return { rejudgedVerdict: old, retainedFinal: ev.retainedAtTrueMorning, preSnapshot: pre };
+}
 // Staged events come from the probe store; genuine events reuse the
 // retainedEvents record for the same loop-day (same classifier,
 // same morning disposition). Pure over the instance object.
@@ -87,8 +218,15 @@ function buildProbeEvents(inst) {
       // Genuine bank-mode delta > 0: reuse the retainedEvents record.
       const re = reEvents.find((e) => e.loopDay === rec.loopDay && e.mode === 'bank' && e.bankedEdibleDelta > 0) || null;
       if (!re) { events.push({ seed: inst.seed, loopDay: rec.loopDay, gameDay: rec.gameDay, kind: 'genuine', mode: 'bank', judged: false, censoredReason: 'genuine-event-not-in-retained-events', probeRecord: true }); continue; }
-      events.push(Object.assign({}, re, { kind: 'genuine', mode: 'bank', probeRecord: true,
-        probeAddedKcal: 0, waits: rec.waits || 0, via: null, injectedStack: null }));
+      const genEv = Object.assign({}, re, { kind: 'genuine', mode: 'bank', probeRecord: true,
+        probeAddedKcal: 0, waits: rec.waits || 0, via: null, injectedStack: null });
+      if (genEv.judged) {
+        const rj = rejudgeEvent(inst, genEv);
+        genEv.preSnapshot = rj.preSnapshot;
+        genEv.rejudgedVerdict = rj.rejudgedVerdict;
+        genEv.retainedFinal = rj.retainedFinal;
+      }
+      events.push(genEv);
       continue;
     }
     if (!rec.staged && rec.kind !== 'press-added') continue; // skips are not events
@@ -148,6 +286,14 @@ function buildProbeEvents(inst) {
           grossKcal: morning.packAfter.grossKcal, lumpUnits: morning.packAfter.lumpUnits } : null,
         wakeTile: morning.wakeTile || null } : null;
       ev.morningDisposition = morningDisposition(firstUp, morning);
+      // Re-judgment under the fixed every-upkeep snapshot (sim-banksnap-a):
+      // old first-upkeep verdict kept as `verdict`; `rejudgedVerdict` /
+      // `retainedFinal` are the re-judgment. On corpora without upkeep
+      // snaps (substrate corpus) this falls back to the old verdict.
+      const rj = rejudgeEvent(inst, ev);
+      ev.preSnapshot = rj.preSnapshot;
+      ev.rejudgedVerdict = rj.rejudgedVerdict;
+      ev.retainedFinal = rj.retainedFinal;
     }
     events.push(ev);
   }
@@ -214,6 +360,15 @@ function summarizeDir(dir) {
   t.retainedSpoilSwept = j.filter((e) => e.verdict === 'RETAINED-SPOIL-SWEPT').length;
   t.vanished = j.filter((e) => e.verdict === 'VANISHED').length;
   t.partialUnexplained = j.filter((e) => e.verdict === 'PARTIAL-UNEXPLAINED').length;
+  // Re-judgment totals (sim-banksnap-a): the old `verdict` above is the
+  // first-upkeep verdict; these count the fixed-snapshot re-judgment.
+  // On corpora without upkeep snaps, rejudgedVerdict falls back to the
+  // old verdict, so these totals equal the old ones there.
+  t.retainedThenEaten = j.filter((e) => e.rejudgedVerdict === 'RETAINED-THEN-EATEN').length;
+  t.disagreed = j.filter((e) => e.rejudgedVerdict === 'DISAGREED').length;
+  t.unresolvedNoPreSnap = j.filter((e) => e.rejudgedVerdict === 'UNRESOLVED-NO-PRE-SNAP').length;
+  t.retainedFinal = j.filter((e) => e.retainedFinal).length;
+  t.unexplainedVanished = j.filter((e) => !e.retainedFinal).length;
   t.injectedStackMatch = j.filter((e) => e.kind === 'staged' && e.injectedStack && e.injectedStack.match).length;
   t.injectedStackMismatch = j.filter((e) => e.kind === 'staged' && e.injectedStack && !e.injectedStack.match).length;
   // Unanimity + GO bar (prereg): >= 3 distinct judged events, unanimous.
@@ -226,6 +381,14 @@ function summarizeDir(dir) {
   t.verdict = t.goBarMet
     ? (t.unanimousRetained ? 'GO-RETAINED' : 'GO-NOT-RETAINED')
     : (distinct < 3 ? 'INSUFFICIENT-DATA' : 'NO-GO-NON-UNANIMOUS');
+  // Re-judgment verdict (sim-banksnap-a prereg GO bar): unanimous
+  // retained-or-retained-then-eaten across the re-judged events.
+  // The prereg's "re-judge all 14" count check lives in the evidence
+  // file (distinctJudged must equal 14 there); this verdict only
+  // judges unanimity over whatever was judged.
+  t.unanimousFinal = distinct >= 1 && j.every((e) => e.retainedFinal);
+  t.reVerdict = distinct < 1 ? 'INSUFFICIENT-DATA'
+    : (t.unanimousFinal ? 'GO-RETAINED' : 'NO-GO-UNEXPLAINED');
   return report;
 }
 function main() {
@@ -234,4 +397,5 @@ function main() {
   console.log(JSON.stringify(summarizeDir(a.variant), null, 1));
 }
 if (require.main === module) main();
-module.exports = { buildProbeEvents, injectedStackCheck, summarizeDir, loadDir, unitsOfKey };
+module.exports = { buildProbeEvents, injectedStackCheck, summarizeDir, loadDir, unitsOfKey,
+  preSnapshotWindow, rejudgeEvent, EAT_TRIGGER_KCAL, ENDDAY_BURN_KCAL };

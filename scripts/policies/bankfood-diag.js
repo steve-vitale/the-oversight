@@ -21,13 +21,21 @@
 //
 // MEASUREMENT FIX vs 2026-10-31: pack is snapshotted CANONICALLY
 // from Game.state.scholar.inventory at EVERY stage (post-bank,
-// first-upkeep-of-new-day = the true post-sleep morning, daily-entry
-// morning phase), split into edible-now kcal, gross kcalEach kcal,
-// and lump units — so an evening estimate can never again be
-// compared against a morning canonical read without the split
-// showing. The old arm's evening "packAfter == E" ambiguity (press
-// estimate vs inventory) is closed by recording both the press
-// inventory-diff totals AND the canonical snapshot side by side.
+// first-upkeep-of-new-day, daily-entry morning phase), split into
+// edible-now kcal, gross kcalEach kcal, and lump units — so an evening
+// estimate can never again be compared against a morning canonical read
+// without the split showing. The old arm's evening "packAfter == E"
+// ambiguity (press estimate vs inventory) is closed by recording both
+// the press inventory-diff totals AND the canonical snapshot side by
+// side.
+// SNAPSHOT-TIMING CAVEAT (sim-banksnap-a, 2026-11-05): the
+// first-upkeep-of-new-day snapshot is the true post-sleep morning ONLY
+// when sleep succeeds. In the sleep-refused path (bank-band evenings,
+// clock >= 449) the day rolls during the next loop-day's wait, AFTER
+// upkeep #1 has run competentEat — so the first-upkeep snapshot reads
+// "after the first dawn upkeep eat". The every-upkeep snaps
+// (st.upkeepSnaps, one per upkeep call, before inner.upkeep) bracket
+// that eat instead; see the upkeep() comment.
 'use strict';
 
 function leverOn() {
@@ -35,7 +43,7 @@ function leverOn() {
 }
 
 function newStore() {
-  return { mornings: [], evenings: [], firstUpkeeps: [], errs: 0, errors: [] };
+  return { mornings: [], evenings: [], firstUpkeeps: [], upkeepSnaps: [], errs: 0, errors: [] };
 }
 
 function noteErr(store, where, e) {
@@ -269,10 +277,25 @@ function withBankfood(inner, store) {
     desc: 'nighttravel + woodcarry + woodwarm + evening bank/flip + morning pack-eat probe (BANKFOOD=1)',
     upkeep(Game, ctx) {
       if (!leverOn()) return inner.upkeep ? inner.upkeep(Game, ctx) : undefined;
-      // True post-sleep snapshot: the FIRST upkeep call of a new scholar
-      // day runs before any upkeep eat, after sleep/wait rolled the day.
+      // EVERY-UPKEEP SNAPSHOT (sim-banksnap-a, 2026-11-05): the pack
+      // is snapshotted at EVERY upkeep call, taken BEFORE delegating
+      // to inner.upkeep — the same position the first-upkeep snapshot
+      // already occupies, so a snap reads the pack before that call's
+      // upkeep eat. The first-upkeep snapshot alone cannot see food
+      // eaten by an earlier upkeep call of the same new day: in the
+      // sleep-refused path the day rolls during the next loop-day's
+      // wait, AFTER upkeep #1 has run competentEat, so the
+      // first-upkeep snapshot at upkeep #2 reads "after the first
+      // dawn upkeep eat". The every-upkeep snaps bracket that eat:
+      // the last snap of the old day (pack full) and the first snap
+      // of the new day (pack after the eat) are consecutive upkeep
+      // calls. Pure recorder addition: no state edits, no RNG draws.
       try {
         const day = ((Game.state || {}).scholar || {}).day || 0;
+        st._upkeepIndex = (st._upkeepIndex || 0) + 1;
+        st.upkeepSnaps.push({ scholarDay: day, upkeepIndex: st._upkeepIndex,
+          afterDailyCalls: call,
+          kcal: scholarKcal(Game), dayTicks: dayTicks(Game), pack: packSnap(Game) });
         if (st._lastUpkeepDay !== day) {
           st._lastUpkeepDay = day;
           st.firstUpkeeps.push({ scholarDay: day, afterDailyCalls: call,
