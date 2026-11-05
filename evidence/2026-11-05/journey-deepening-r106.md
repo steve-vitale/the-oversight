@@ -312,7 +312,28 @@ repo evidence/2026-11-05/.
 
 ## Regression gate
 
-[Closeout: filled after the check gate.]
+`node scripts/check.js --quick` with
+--cacheDirectory=/tmp/jest-cache-playtest, single run, 1218s:
+**282 passed, 8 failed** — vs r105's 277/13. All 8 are in the
+standing pre-existing set (r105 deepening's 11 + r105
+establishment's 6); NO new failures. The 8:
+test-measurement-proof-update, test-measurement-workflow,
+test-mobile-combat-cadence (same 2 sub-failures as r104/r105),
+test-occupation-panels (retained-neutrality family),
+test-measurement-cache-flags (4 sub-failures),
+test-phone-frame-proof (3 sub-failures, stale phone receipt),
+test-trust-observer-neutrality (120s timeout, exit null),
+test-establishment-r20-fixes (1 sub-failure: racks-full voice
+"next day voices once more", expected 2 got 1 — the known r103
+baseline failure). The 5 timeout flakes from r105's gate
+(synergy-stall, capable-bot, table-endings, throttlefeast,
+first-ability-magic) all PASSED this run (slowest: trust-observer
+120s, solo-campaign-endings 115s, capable-bot 95s) — a sibling
+Lane B gate ran concurrently (journey2-succession-r142), so the
+single 120s timeout is load, not a regression. This run changed
+NO src/js (only new scripts/ + evidence/), so none of the 8 can
+be caused by it. Targeted proof on the touched area: P-KEEP
+metric 13/13.
 
 ## Infrastructure notes
 
@@ -353,3 +374,11 @@ repo evidence/2026-11-05/.
 - Rotation 2 -> 3 at closeout — verified by read-back (see closeout).
 
 ## Closeout (filled after the check gate)
+- check.js --quick: 282 passed, 8 failed in 1218s (all 8
+  pre-existing, no new failures — see above).
+- Rebased onto master 555f59160 (sim-bankkiller-b landed while the
+  gate ran); proof test re-run green after the rebase (13/13).
+- Merged locally, pending ship (no bump/push/live-verify — ship loop
+  owns those). Merge hash in the memory log.
+- Rotation 2 -> 3 written at closeout, verified by read-back (see
+  rotation note in the prereg + memory log for the retry count).
