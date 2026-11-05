@@ -1737,7 +1737,15 @@
         const facIds = Object.keys(fac);
         const facAscended = asc.filter(a => fac[a.vid]);
         const unbacked = asc.filter(a => !fac[a.vid]);
-        const me = ((this.data.villagers || []).find(v => v.id === this.villagerId) || {}).name || 'the Bearer';
+        // SEAT-TAKER VOICE (journey-endgame r138): the win coda names the
+        // one who walked the scenario. A villager sitter played the walk,
+        // so the walk-out line is theirs (with their pronouns) — the
+        // bearer-named line misattributes their sitting. A self-sitter
+        // keeps the current bearer: after a trial death the mantle has
+        // passed, and the new bearer <redacted> the one who walks out.
+        const _st = (T && T.seatTaker) || null;
+        const _meId = (_st && !_st.self && _st.id) ? _st.id : this.villagerId;
+        const me = ((_st && !_st.self && _st.name) || ((this.data.villagers || []).find(v => v.id === _meId) || {}).name) || 'the Bearer';
         if (facAscended.length) {
           const names = facAscended.map(a => a.name).join(' and ');
           this.say(`◈ THE ARCHITECT — ${names} ascended through doors you built: ${facAscended.map(a => (fac[a.vid].acts || []).join(', ')).join('; ')}. The galaxy will remember the god's name. The village will remember who built the door. Both are true. Neither is small.`);
@@ -1760,9 +1768,11 @@
           // the Bearer, so it should use their pronouns — not default
           // they/them. Villagers carry gender from nameGender ('m'/'f'/null;
           // null = unfamiliar, strangers' pronouns aren't assumed).
+          // r138: the pronouns follow the sitter (see _meId above), not
+          // always the bearer.
           let pro = 'they';
           try {
-            const mv = (this.data.villagers || []).find(v => v.id === this.villagerId) || {};
+            const mv = (this.data.villagers || []).find(v => v.id === _meId) || {};
             pro = mv.gender === 'm' ? 'he' : mv.gender === 'f' ? 'she' : 'they';
           } catch (e) {}
           // OBJECT CASE (journey-endgame r41 2026-10-22): the beloved coda
