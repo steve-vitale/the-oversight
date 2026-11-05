@@ -44,23 +44,30 @@ function unitsOfKey(pack, key) {
   for (const s of pack.stacks) if (s && stackKey(s) === key) n += (s.units || 0);
   return n;
 }
-function spoilDayOfKey(pack, key) {
-  if (!pack || !Array.isArray(pack.stacks)) return null;
-  for (const s of pack.stacks) if (s && stackKey(s) === key) return (s.spoilDay === undefined ? null : s.spoilDay);
-  return null;
+function unitsOfKeySpoil(pack, key, spoilDay) {
+  if (!pack || !Array.isArray(pack.stacks)) return 0;
+  let n = 0;
+  for (const s of pack.stacks) if (s && stackKey(s) === key && s.spoilDay === spoilDay) n += (s.units || 0);
+  return n;
 }
-// Injected-stack identity check (pure). Expected: PROBE_UNITS of the
-// probe key added by the evening phase, still there at first-upkeep.
-// packBefore units of the same key are subtracted, so carried grapes
-// of the same key never count as staged food.
+// Injected-stack identity check (pure). The injected stack is identified
+// by key AND spoilDay (gameDay + 2) — not by key alone: a carried stack
+// of the same key with an earlier spoilDay can be dawn-swept overnight,
+// and subtracting packBefore units of the bare key would then undercount
+// the injected units (observed on 17025/33: a carried spoilDay-34 grape
+// stack was swept while all 18 injected spoilDay-35 grapes survived,
+// and the bare-key check reported 8/18). Units of the exact
+// (key, spoilDay) in packBefore are subtracted as the carried baseline.
 function injectedStackCheck(postBank, packBefore, firstUp, gameDay) {
   const key = probeStackKey();
-  const postBankInjectedUnits = unitsOfKey(postBank, key) - unitsOfKey(packBefore, key);
-  const firstUpInjectedUnits = unitsOfKey(firstUp.pack, key) - unitsOfKey(packBefore, key);
-  const spoilDay = spoilDayOfKey(postBank, key);
-  return { key, expectedUnits: PROBE_UNITS, expectedSpoilDay: gameDay + 2,
+  const spoilDay = gameDay + 2;
+  const carriedSameSpoil = unitsOfKeySpoil(packBefore, key, spoilDay);
+  const postBankInjectedUnits = unitsOfKeySpoil(postBank, key, spoilDay) - carriedSameSpoil;
+  const firstUpInjectedUnits = unitsOfKeySpoil(firstUp.pack, key, spoilDay) - carriedSameSpoil;
+  return { key, expectedUnits: PROBE_UNITS, expectedSpoilDay: spoilDay,
+    carriedSameSpoil,
     postBankInjectedUnits, firstUpInjectedUnits,
-    spoilDay, spoilDayMatch: spoilDay === gameDay + 2,
+    spoilDay, spoilDayMatch: postBankInjectedUnits === PROBE_UNITS,
     match: postBankInjectedUnits === PROBE_UNITS && firstUpInjectedUnits === PROBE_UNITS };
 }
 // Build judged/censored bank-band added events for one corpus instance.
