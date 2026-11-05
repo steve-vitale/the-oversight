@@ -96,7 +96,13 @@ ordering — needs the floor checked before the final resolves.
 ## Regression gate
 node scripts/check.js --quick run in the worktree during closeout
 (see goal hidden_files endgame-r140-checkquick-20261105.log):
-<result filled at closeout>.
+281 passed, 9 failed in 1034s — identical to the r104 establishment
+profile (281/9). The 9 are the standing families (measurement-proof-
+update, measurement-workflow, mobile-combat-cadence, occupation-
+panels, phone-frame-proof, establishment-r20-fixes) plus three 120s
+load timeouts (trust-observer-neutrality, capable-bot, table-
+endings), all of which pass standalone. NO new failures from this
+run's three src files. Gate passed.
 
 ## Metric review
 - The 89701 flip shows the pilot's matched-seed design working as
