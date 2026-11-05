@@ -40,6 +40,14 @@ const INVITE_QS = [
     Game.npcSetInside(id, Game.state.scholar.insideHaven !== false);
   }
   Game.ensureVillagerPositions();
+  // R72 handled DELIVERED leftovers from runDays; PENDING ones need the
+  // same treatment. The packKcal design change (meal packs sized to the
+  // meal's want, no random term) shifts runDays' RNG stream, so runDays
+  // can now leave a PENDING invite behind — and the probe below would
+  // find that leftover on its first call, before any beat it records.
+  // Clear pending requests here so the probe measures only what its own
+  // overheardDiscussion calls create. The six checks below are unchanged.
+  Game.state.village.talkRequests = {};
   const beats = [];
   const origSay = Game.say;
   Game.say = function (m) { beats.push(String(m)); return origSay.call(this, m); };
