@@ -23027,7 +23027,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (r1) prose += ` ${r1} ${pick(rverbs)} ${pick(reactions)}`;
       if (r2 && r2 !== r1) prose += ` ${r2} ${pick(rverbs)} ${pick(reactions)}`;
       prose += ` Someone at the edge of the light says what everyone's thinking: "So — what are we calling it?"`;
-      this.say(`🔥 ${prose}`);
+      // r141: the fireside telling is haven news — queued while the scholar
+      // is away, delivered at the fire on return (mechanics below run
+      // regardless: the tale log, the report, the debate wiring).
+      this.sayHavenNews(`🔥 ${prose}`, 'tale', mid);
       // TRANSCRIPT (sim-taletell): bounded log of told tales for
       // sense-testing and the nightly debate audit.
       this.state.killerTaleLog = this.state.killerTaleLog || [];
@@ -23046,6 +23049,63 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     _taleCap(s) {
       s = String(s || '');
       return s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
+    },
+    // HAVEN-NEWS RELAY (journey-social r141; sim-gossipcensus-a DIAG-GO):
+    // haven fireside narration — the monster-naming debate, killer tales —
+    // is village business the scholar can only hear AT the haven. The
+    // census proved the burst reaches a stranded scholar at the background
+    // rate (2/25 stranded sleep windows = 8.0%) and reads wrong ("Back at
+    // the haven the argument starts: ... weigh in if you want" to someone
+    // asleep miles away). scholarAtHaven is the physical test: standing on
+    // the haven tile (same notion as havenStoresAccess). While away, the
+    // lines queue in state.pendingHavenNews and flushHavenNews delivers
+    // them at the fire on the next night spent at Haven — the news waits,
+    // it is never silenced ("No silent actions"). MECHANICS ARE UNTOUCHED:
+    // kick/proposals/majority/knowers/tale-log run identically away or at
+    // Haven; only the delivery waits. No RNG is consumed on either path:
+    // the line text (including rotLine picks) is built the same way first.
+    scholarAtHaven() {
+      try { if (this.location === 'haven') return true; } catch (e) {}
+      try {
+        const t = this.playerTile ? this.playerTile() : null;
+        if (t && (t.type === 'haven' || t.isHaven)) return true;
+      } catch (e) {}
+      return false;
+    },
+    sayHavenNews(text, kind, mid) {
+      const line = String(text || '');
+      try {
+        if (this.scholarAtHaven()) { this.say(line); return 'said'; }
+      } catch (e) {}
+      try {
+        this.state.pendingHavenNews = this.state.pendingHavenNews || [];
+        this.state.pendingHavenNews.push({ text: line, kind: kind || 'news', mid: mid || null, day: (this.state.scholar || {}).day || 0 });
+        if (this.state.pendingHavenNews.length > 20) this.state.pendingHavenNews.splice(0, this.state.pendingHavenNews.length - 20);
+        return 'queued';
+      } catch (e) { return 'error'; }
+    },
+    flushHavenNews() {
+      // Deliver queued haven news at the fire. A word/debate line for a
+      // beast that already has a villageName is dropped — its settle line
+      // (itself queued) covers the outcome, so the scholar hears the
+      // ending, not a stale opening.
+      let delivered = 0;
+      try {
+        if (!this.scholarAtHaven()) return 0;
+        const q = this.state.pendingHavenNews || [];
+        if (!q.length) return 0;
+        this.state.pendingHavenNews = [];
+        for (const item of q) {
+          try {
+            const e = item.mid ? (this.state.codex.monsters || {})[item.mid] : null;
+            if (e && e.villageName && (item.kind === 'word' || item.kind === 'debate')) continue;
+            if (item.kind === 'settled' && e && !e.villageName) continue;
+            this.say(item.text);
+            delivered++;
+          } catch (e2) {}
+        }
+      } catch (e) {}
+      return delivered;
     },
     // kickMonsterNaming: the word is out — the argument starts.
     kickMonsterNaming(mid) {
@@ -23073,11 +23133,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const rosterN = ((this.state.village || {}).roster || []).length;
       const need = Math.max(1, Math.min(3, rosterN));
       if (knowers.size >= need) {
-        this.say(this.rotLine('monsterReaction', [
+        this.sayHavenNews(this.rotLine('monsterReaction', [
           'Word gets around the haven. Whatever that thing was — everyone\'s talking about it now.',
           'Word gets around the haven. Whatever that thing was — the haven\'s talking about nothing else.',
           'Word gets around the haven. Whatever that thing was — every fire has a theory tonight.',
-        ]));
+        ]), 'word', mid);
         this.kickMonsterNaming(mid);
       }
     },
@@ -23140,11 +23200,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (names.length) {
         const first = names[0];
         const who = this.firstRef(Object.keys(e.proposals)[0]);
-        this.say(this.rotLine('monsterDebate', [
+        this.sayHavenNews(this.rotLine('monsterDebate', [
           `Back at the haven the argument starts: ${who} is calling it "${first}." They'll fight it out — weigh in if you want.`,
           `Back at the haven the argument starts: ${who} is calling it "${first}." Nobody agrees yet — weigh in if you want.`,
           `Back at the haven the argument starts: ${who} is calling it "${first}." The name's up for grabs — weigh in if you want.`,
-        ]));
+        ]), 'debate', mid);
       }
       this.monsterNamingCheck(mid);
     },
@@ -23171,7 +23231,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       for (const [name, n] of Object.entries(votes)) {
         if (n >= majority) {
           e.villageName = name;
-          this.say(`It's settled. The village is calling it "${name}." The ${this.journalName()} keeps it.`);
+          this.sayHavenNews(`It's settled. The village is calling it "${name}." The ${this.journalName()} keeps it.`, 'settled', mid);
           // NAMING IS A DEED (gap-integration 2026-10-10): the village agreed
           // on a name — the System learned what to call it. Integration,
           // one-shot per monster, declining returns (the first names teach
@@ -32467,6 +32527,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
 
     endDay() {
       const scholar = this.state.scholar;
+      // HAVEN-NEWS RELAY (journey-social r141): deliver any queued fireside
+      // news now that the scholar is spending the night at Haven — before
+      // the naming loop below fires tonight's own beats.
+      try { this.flushHavenNews(); } catch (e) {}
       // NOMAD ROAD (nomad-core 2026-10-15): the party's daily upkeep (food,
       // starvation, mantle) ticks here while the road is active.
       try { if (this.nomad && this.nomad.onRoad()) this.nomad.daily(); } catch (e) { console.warn('[nomad] daily', e); }
@@ -32501,7 +32565,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             if (wit && !(e.knowers || []).includes(wit)) {
               e.knowers.push(wit);
               const first = this.firstRef(wit);
-              this.say(`${first} came back from the treeline white-faced. Saw it too. Whatever it is, it's still out there.`);
+              // r141: the witness's return is haven news — the scholar hears
+              // it at the fire, not asleep in the wild. The knowers.push
+              // above (the news spreading) stays outside the gate.
+              this.sayHavenNews(`${first} came back from the treeline white-faced. Saw it too. Whatever it is, it's still out there.`, 'witness', mid);
               this.monsterNewsCheck(mid);
             }
           }
