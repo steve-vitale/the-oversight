@@ -1,0 +1,25 @@
+(pre-talk seed: ask_favor planted d88; takenWantDay=72; convoCount=16)
+=== seed 85501 day 90 — conversation with Dongsheng (visjoin_50) ===
+occupation=crossing guard temperament=dry trust=91 dead=false
+want: ask_favor (stage 2)
+open thread: goal fromSeed=true
+picker: control
+
+THEM: Food is love out here. Not metaphorically. Literally. Calories are care.
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: It's quiet at the hollow. Dongsheng doesn't say much. Sometimes that's the whole point.
+YOU: [dlg:more] "Tell me more."
+THEM: "Every recipe I remember is a treasure. I'm spending them carefully."
+YOU: [dlg:react] (listen)
+THEM: "Anyway." A small smile.
+YOU: [dlg:more] "Tell me more."
+THEM: "Hungry people get mean. Scared people get mean. Fed people can think. It's that simple."
+YOU: [dlg:react] (listen)
+THEM: "I'd rather be the cook than the hero. Heroes get songs. Cooks get everyone through winter."
+YOU: [dlg:more] "Tell me more."
+THEM: "I dream in recipes now. That's normal. Probably."
+YOU: (leave)
+pre-close: want ask_favor stage 2 thread goal
+closing line: "I've had worse talks. Today, even."
+(gossip picks this sitting: 0)
