@@ -269,3 +269,47 @@ perception-law violation and fails the run.
 - Gates now: staging 0.18, pair tick 0.08, link tick 0.5, tell 0.3,
   VISIT propose 0.25. Bars unchanged. The armed panel re-runs on
   the same 8 seeds against the same baseline.
+
+## Amendment 4 — full-panel NO-GO #2, sensitivity diagnosis (2026-11-05)
+- Full armed panel re-run (8 seeds 84101–84108, 90d, tuning-3 code)
+  judged NO-GO again: M1 true (8/8 seeds, 47 pooled proposals),
+  M2 true (10/25 = 40% accepted), M3 FALSE (maxPerSeed 13 — seed
+  84108 again, 9 staged + 4 decided; the staging trim moved staged
+  10 -> 9 but decisions rose 3 -> 4, and the cap counts the sum),
+  M4 true (108 link raises), M5 FALSE (84103 bonds 29 vs 62 and
+  days 31 vs 90; 84105 days 77 vs 90; 84107 days 56 vs 71),
+  M6 true (0 gate fails, 0 errors). Panel JSONs filed under
+  perseed-bondinit-b/panel2-nogo/; baseline unchanged.
+- Tuning 3's hypothesis is FALSIFIED: deterministic decision rolls
+  did not stabilize M5 (2 notes -> 4 notes). The module consumes
+  zero Math.random (audited: no Math.random / Date.now / R() calls
+  in bond-initiation.js) and its only game effects are bondAdd(+10)
+  on accepts, talk-request lines, and lore tells. 84103 lost 6
+  villagers on day 26 (living 11 -> 5) after only 2 accepted bonds
+  and 1 link raise all run — nothing in the module touches combat,
+  HP, food, or wave spawns. The divergence is chaotic amplification
+  of tiny real effects, not a regression mechanism and not RNG
+  consumption: the same seed's baseline survived 90d.
+- Determinism proven, not assumed: re-running the armed driver on
+  seeds 84103/84105/84107/84108 reproduced panel-2 rows exactly
+  (days, proposals, bonds, link raises to the unit). (Note: the
+  driver labels legs by RUN=, not by code — a "baseline" re-run on
+  the armed tree reproduces armed rows. The committed baseline
+  JSONs are the pre-module run; they were moved aside and restored
+  byte-identical, git status clean.)
+- Pooled, there is NO regression: bonds 527 -> 532 (+0.9%), days
+  586 -> 579 (-1.2%). The per-seed M5 bar demands trajectory
+  neutrality from a behavior-changing feature in a chaotic sim —
+  any real behavioral effect can cascade into a per-seed breach,
+  while the pooled totals cancel out. M3's cap (12/seed over 90d)
+  is likewise tight: 13 proposals across 5+ villagers is ~1 ask
+  per villager per 35 days, not spam by any human reading.
+- RECOMMENDATION (not a re-score — bars unchanged here): the next
+  step is a measurement decision for the main session, not another
+  blind tuning round. Tuning 4 cannot fix M5 (no knob left: no RNG
+  to pin, no regression mechanism to remove). Candidates: (a) amend
+  M5 to the pooled comparison the build task itself states (pooled
+  bonds + pooled days — passes on both panels); (b) trim staging
+  further (0.18 -> 0.15) for M3 margin and re-run; (c) accept the
+  NO-GO and land on the functional bars + pooled picture. Do not
+  run a third panel until that call is made.
