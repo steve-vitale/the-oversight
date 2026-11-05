@@ -195,6 +195,7 @@ function rollAfterDailyInst() {
   check('B is RETAINED under the old snapshot', evB.verdict === 'RETAINED');
   check('B re-judgment agrees (snaps show 18 at snapPre and snapPost)',
     evB.rejudgedVerdict === 'RETAINED' && evB.preSnapshot.injectedPre === 18 && evB.preSnapshot.injectedPost === 18);
+  check('B carries no kcal residual (food eaten after the snapshot)', evB.preSnapshot.residualKcal === null);
 }
 {
   // Retained event whose snaps disagree: food already gone at snapPre.

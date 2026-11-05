@@ -152,11 +152,14 @@ function preSnapshotWindow(inst, ev) {
   const eatInLoopDay = snapEat ? snapEat.afterDailyCalls === loopDay : false;
   const triggerFired = kcalEat !== null && kcalEat < EAT_TRIGGER_KCAL;
   const spoilImmune = spoilDay > (gameDay + 1);
-  // The kcal residual is meaningful only for staged events (the 720
-  // injected kcal is the eaten amount). Genuine/press-added events
-  // carry no injected food, so their residual would be a number about
-  // nothing — null, not zero.
-  const residualKcal = (ev.kind === 'staged' && kcalPost !== null && kcalEat !== null)
+  // The kcal residual is meaningful only for staged events whose drop
+  // is at-or-before the snapshot (the 720 was eaten in the
+  // pre-snapshot window). A retained event's food is eaten AFTER the
+  // snapshot, so its residual would be a number about a meal that had
+  // not happened yet — null, not zero. Same for genuine/press-added
+  // (no injected food at all).
+  const dropAtOrBeforeSnapshot = snapDrop ? snapDrop.upkeepIndex <= snapPost.upkeepIndex : false;
+  const residualKcal = (ev.kind === 'staged' && dropAtOrBeforeSnapshot && kcalPost !== null && kcalEat !== null)
     ? kcalPost - (kcalEat + PROBE_ADDED_KCAL - ENDDAY_BURN_KCAL) : null;
   return { available: true, path: 'refused-path', snapPre, snapPost, snapEat, snapDrop,
     injectedPre, injectedPost, injectedEat, injectedDrop,
