@@ -21,6 +21,14 @@
 // errors. A fresh FLAT-20 seed with a DIFFERENT decomposition counts
 // in the flat-20 count but does NOT satisfy the GO leg — reported as
 // a second mechanism.
+// ANCHOR REPRODUCES (prereg letter, NOT flat-20): the 99145 re-run
+// meets the 99145-mechanism decomposition — war 0, w3pts 0, diplomacy
+// 0, feasts <= 1, endRaw <= 25, >= 15 wave-2+ fights. Clause C (the
+// 50-day flatness band) is a property of the FLAT-20 definition, not
+// of the anchor reproduction — the anchor's single feast step (0 ->
+// 20) inside the window widens its band to 20, so the anchor is NOT
+// flat-20 as implemented even though its decomposition reproduces
+// exactly. See the evidence file's metric review.
 // Usage: node scripts/standaccum3-analyze-20261105.js <per-seed-dir>
 //   Prints a JSON summary.
 'use strict';
@@ -146,7 +154,8 @@ function analyzeRows(rows) {
   const cleanFresh = fresh.filter(function (s) { return s.instrumentErrors === 0; });
   const errFresh = fresh.filter(function (s) { return s.instrumentErrors > 0; });
   const totalErr = seeds.reduce(function (m, s) { return m + s.instrumentErrors; }, 0);
-  const anchorReproduces = !!anchor && anchor.instrumentErrors === 0 && anchor.flat20 && anchor.sameShape;
+  const anchorReproduces = !!anchor && anchor.instrumentErrors === 0 && anchor.sameShape &&
+    anchor.endRaw <= 25 && anchor.w2plusFights >= 15;
   const flatFresh = cleanFresh.filter(function (s) { return s.flat20; });
   const flatSameShape = flatFresh.filter(function (s) { return s.sameShape; });
   const activityFloorFresh = cleanFresh.filter(function (s) { return s.w2plusFights >= 15; });

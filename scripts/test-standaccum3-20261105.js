@@ -161,6 +161,30 @@ function w2fights(n, startDay) {
   check('peak-zero-not-null', s.rawPeak === 0 && s.gatedPeak === 0, { rawPeak: s.rawPeak, gatedPeak: s.gatedPeak });
 })();
 
+// --- Fixture 13: anchor reproduces WITHOUT being flat-20 (the real
+// 99145 shape: raw 0 for 35 days, one feast step to 20 inside the
+// 50-day window, band 20) + one fresh flat-20 same-shape -> GO.
+// This is the prereg's letter: anchor reproduction is the
+// decomposition, not clause C. -------------------------------
+(function () {
+  const anchorDaily = [];
+  for (let d = 1; d <= 68; d++) {
+    const raw = d < 38 ? 0 : 20;
+    anchorDaily.push(snap(d, { raw: raw, gated: raw, capped: raw, war: 0, w3pts: 0, diplomacy: 0, plenty: raw, feasts: raw / 20, feastLogLen: raw / 20 }));
+  }
+  const anchorFights = w2fights(16, 5).concat(w2fights(18, 30).map(function (f) { f.wave = 3; f.mid = 'hydra'; return f; }));
+  const anchorRow = row(99145, anchorDaily, anchorFights, [], []);
+  const a = AN.analyzeSeed(anchorRow);
+  check('anchor-step-not-flat20', a.flat20 === false && a.sameShape === true && a.endRaw === 20, { flat20: a.flat20, failed: a.failedClauses });
+  const freshDaily = flatDaily(41, 0);
+  const rows = [anchorRow, row(99196, freshDaily, w2fights(26, 5), [], [])];
+  for (let s2 = 99191; s2 <= 99195; s2++) rows.push(row(s2, flatDaily(60, 20), w2fights(20, 5), [], []));
+  rows.push(row(99197, flatDaily(60, 20), w2fights(20, 5), [], []));
+  rows.push(row(99198, flatDaily(60, 20), w2fights(20, 5), [], []));
+  const v = AN.analyzeRows(rows);
+  check('verdict-GO-anchor-step', v.verdict === 'DIAG-GO' && v.anchorReproduces === true, { verdict: v.verdict, anchorReproduces: v.anchorReproduces });
+})();
+
 // --- Live legs -------------------------------------------------------
 async function live() {
   const { loadGame, setupGame, runDays, quietLog } = require(path.join(REPO, 'scripts', 'sim-harness'));
