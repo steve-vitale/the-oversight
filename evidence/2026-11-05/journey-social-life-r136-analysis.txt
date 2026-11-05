@@ -1,0 +1,92 @@
+SEEDS: 41701 d26, 41702 d55, 41703 d83, 41704 d70
+
+seed 41701: days=26 endReason=village-lost fullConvs=26 naturalEnds=26 feasts=3 moots=0
+  decisions: {"party:accept":1,"lure:decline":2,"lure:accept":1}
+  BOND lure-by-inviter (scholar=Jae initialBearer=?): {"player:party:accept":1,"NPC:lure:decline":2,"NPC:lure:accept":1}
+  BOND successions: [{"day":20,"from":"Jordan","to":"Jae"}]
+  BOND proposeWrapped={"proposeLink":true,"proposeCovenant":true,"proposeTrade":true} proposeCalls=0
+  BOND end bonds=58 sample={"key":"gen_uzabnnu|gen_zrrryea","val":"{\"v\":52,\"depth\":2,\"day\":19,\"dayGain\":4}"}
+  plot plot_1 d12 leader=Jae inviter=Yulia target=Quinn sprung=true gT->L=0 gT->I=0 gA->Tmax=0 gI->T=0
+  armWrapped=true springWrapped=true
+  ARM d12 plot_1 Jae->Quinn inviter=Yulia motive={"score":38.400000000000006,"reasons":["grievance"]} gT->L=48 gL->T=48 accMotives=[{"who":"Yulia","score":0,"reasons":[],"grievance":0},{"who":"Joshua","score":25,"reasons":["ambition"],"grievance":0}] trust={"leader":69,"Yulia":44,"Joshua":32} goal=alone
+  SPRING d14 plot_1 Jae->Quinn outcome=killed case=case_2 endCase=case_2 charge=murder status=resolved heardDay=16 heardPassed=true surfaced=true surfacedSnapDay=26 ambushLinesNaming=1
+  expireWrapped=true expiredEvents=0
+  village fallen: 9 by cause: {"Choir Toad":1,"ambush":1,"sickness":1,"starvation":5,"the wild":1}
+  death clusters (>=3/day): none
+  ambush-caused fallen: [{"who":"Quinn","day":14,"cause":"ambush"}]
+  (samples.deaths, all recorded incl. outsiders: 22 — NOT village deaths)
+  census: seed 41701, day 26, alive 7 | - Henry (journalist, ?) trust=39 mood=tense npcAbilities=1
+
+seed 41702: days=55 endReason=village-lost fullConvs=34 naturalEnds=28 feasts=7 moots=3
+  decisions: {"lure:decline":2,"lure:accept":1,"party:accept":2}
+  BOND lure-by-inviter (scholar=Pavel initialBearer=?): {"NPC:lure:decline":2,"NPC:lure:accept":1,"player:party:accept":2}
+  BOND successions: [{"day":8,"from":"Paloma","to":"Molly"},{"day":31,"from":"Molly","to":"Colton"},{"day":36,"from":"Colton","to":"Keltoum"},{"day":43,"from":"Keltoum","to":"Karim"},{"day":48,"from":"Karim","to":"Chantal"},{"day":49,"from":"Chantal","to":"Ella"},{"day":50,"from":"Ella","to":"Patricio"},{"day":51,"from":"Patricio","to":"James"},{"day":52,"from":"James","to":"Jack"},{"day":53,"from":"Jack","to":"Pavel"}]
+  BOND proposeWrapped={"proposeLink":true,"proposeCovenant":true,"proposeTrade":true} proposeCalls=0
+  BOND end bonds=75 sample={"key":"gen_k7tytza|gen_uluo78x","val":"{\"v\":38,\"depth\":1,\"day\":31,\"dayGain\":2}"}
+  plot plot_1 d8 leader=Keltoum inviter=Tom target=Karim sprung=true gT->L=40 gT->I=0 gA->Tmax=0 gI->T=0
+  armWrapped=true springWrapped=true
+  ARM d8 plot_1 Keltoum->Karim inviter=Tom motive={"score":51.040000000000006,"reasons":["grievance","prove"]} gT->L=48.800000000000004 gL->T=48.800000000000004 accMotives=[{"who":"Katarina","score":25,"reasons":["ambition"],"grievance":0},{"who":"Tom","score":0,"reasons":[],"grievance":0}] trust={"leader":27,"Katarina":16,"Tom":9} goal=prove
+  SPRING d10 plot_1 Keltoum->Karim outcome=escaped case=case_2 endCase=case_2 charge=ambush status=acquitted heardDay=12 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=1
+  expireWrapped=true expiredEvents=0
+  village fallen: 15 by cause: {"monster":1,"the wild":11,"Gavel":1,"a wound that wouldn't close":1,"the expedition":1}
+  death clusters (>=3/day): none
+  ambush-caused fallen: []
+  (samples.deaths, all recorded incl. outsiders: 46 — NOT village deaths)
+  census: seed 41702, day 55, alive 3 | - Pavel (pilot, ?) trust=22 mood=cool npcAbilities=0
+
+seed 41703: days=83 endReason=village-lost fullConvs=66 naturalEnds=63 feasts=11 moots=1
+  decisions: {"lure:decline":1,"lure:accept":1,"party:decline":5,"party:accept":3}
+  BOND lure-by-inviter (scholar=Fatima initialBearer=?): {"NPC:lure:decline":1,"NPC:lure:accept":1,"player:party:decline":5,"player:party:accept":3}
+  BOND successions: [{"day":15,"from":"Jayden","to":"Sofia"},{"day":25,"from":"Sofia","to":"Roman"},{"day":32,"from":"Roman","to":"Tariq"},{"day":43,"from":"Tariq","to":"Dehua"},{"day":50,"from":"Dehua","to":"Jesse"},{"day":57,"from":"Jesse","to":"Lev"},{"day":58,"from":"Lev","to":"Nathan"},{"day":71,"from":"Nathan","to":"Norkys"},{"day":74,"from":"Norkys","to":"Sabrina"},{"day":78,"from":"Sabrina","to":"Dmitri"},{"day":81,"from":"Dmitri","to":"Fatima"}]
+  BOND proposeWrapped={"proposeLink":true,"proposeCovenant":true,"proposeTrade":true} proposeCalls=0
+  BOND end bonds=121 sample={"key":"gen_o55tyd3|gen_o5om19y","val":"{\"v\":49,\"depth\":1,\"day\":21,\"dayGain\":5,\"combat\":0}"}
+  plot plot_1 d7 leader=Dehua inviter=Dmitri target=Daniyar sprung=true gT->L=0 gT->I=0 gA->Tmax=0 gI->T=0
+  armWrapped=true springWrapped=true
+  ARM d7 plot_1 Dehua->Daniyar inviter=Dmitri motive={"score":51.68000000000001,"reasons":["grievance","prove"]} gT->L=49.6 gL->T=49.6 accMotives=[{"who":"Dmitri","score":0,"reasons":[],"grievance":0},{"who":"Valeria","score":0,"reasons":[],"grievance":0}] trust={"leader":15,"Dmitri":16,"Valeria":20} goal=prove
+  SPRING d8 plot_1 Dehua->Daniyar outcome=killed case=case_2 endCase=case_2 charge=murder status=acquitted heardDay=10 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=1
+  expireWrapped=true expiredEvents=0
+  village fallen: 23 by cause: {"ambush":1,"the wild":8,"monster":10,"betrayal":1,"a stranger":1,"the arena":1,"a wound that wouldn't close":1}
+  death clusters (>=3/day): none
+  ambush-caused fallen: [{"who":"Daniyar","day":8,"cause":"ambush"}]
+  (samples.deaths, all recorded incl. outsiders: 59 — NOT village deaths)
+  census: seed 41703, day 83, alive 1 | - Fatima (paramedic, ?) trust=69 mood=warm npcAbilities=0
+
+seed 41704: days=70 endReason=village-lost fullConvs=52 naturalEnds=47 feasts=10 moots=1
+  decisions: {"lure:decline":7,"lure:accept":2,"party:accept":3,"party:decline":1}
+  BOND lure-by-inviter (scholar=Rosa initialBearer=?): {"NPC:lure:decline":7,"NPC:lure:accept":2,"player:party:accept":3,"player:party:decline":1}
+  BOND successions: [{"day":60,"from":"Ashley","to":"Hannah"},{"day":61,"from":"Hannah","to":"Larry"},{"day":62,"from":"Larry","to":"Elkin"},{"day":63,"from":"Elkin","to":"Miguel"},{"day":64,"from":"Miguel","to":"David"},{"day":69,"from":"David","to":"Rosa"}]
+  BOND proposeWrapped={"proposeLink":true,"proposeCovenant":true,"proposeTrade":true} proposeCalls=0
+  BOND end bonds=81 sample={"key":"gen_awrpndi|gen_owxjuxk","val":"{\"v\":40,\"depth\":1,\"day\":12,\"dayGain\":4,\"combat\":0}"}
+  plot plot_1 d7 leader=Katarina inviter=Larry target=Aki sprung=true gT->L=60 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_3 d11 leader=Aki inviter=Hannah target=Katarina sprung=true gT->L=0 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_5 d13 leader=Aki inviter=Hannah target=Katarina sprung=false gT->L=0 gT->I=0 gA->Tmax=0 gI->T=0
+  armWrapped=true springWrapped=true
+  ARM d7 plot_1 Katarina->Aki inviter=Larry motive={"score":42.88,"reasons":["grievance"]} gT->L=53.6 gL->T=53.6 accMotives=[{"who":"Larry","score":25,"reasons":["ambition"],"grievance":0},{"who":"David","score":0,"reasons":[],"grievance":0}] trust={"leader":19,"Larry":28,"David":13} goal=feed
+  ARM d11 plot_3 Aki->Katarina inviter=Hannah motive={"score":80,"reasons":["grievance"]} gT->L=50.400000000000006 gL->T=100 accMotives=[{"who":"Yawo","score":0,"reasons":[],"grievance":0},{"who":"Hannah","score":0,"reasons":[],"grievance":0}] trust={"leader":35,"Yawo":27,"Hannah":35} goal=remember
+  ARM d13 plot_5 Aki->Katarina inviter=Hannah motive={"score":80,"reasons":["grievance"]} gT->L=48.800000000000004 gL->T=100 accMotives=[{"who":"Yawo","score":0,"reasons":[],"grievance":0},{"who":"Hannah","score":0,"reasons":[],"grievance":0}] trust={"leader":32,"Yawo":22,"Hannah":29} goal=remember
+  SPRING d9 plot_1 Katarina->Aki outcome=hurt case=case_2 endCase=case_2 charge=ambush status=acquitted heardDay=11 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=2
+  SPRING d11 plot_3 Aki->Katarina outcome=escaped case=case_4 endCase=case_4 charge=ambush status=acquitted heardDay=13 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=2
+  expireWrapped=true expiredEvents=1
+  EXPIRED d18 plot_5 Aki->Katarina armedD13 linesNamingPairAfterExpiry=0
+  village fallen: 15 by cause: {"monster":4,"thirst":1,"sickness":1,"the wild":9}
+  death clusters (>=3/day): none
+  ambush-caused fallen: []
+  (samples.deaths, all recorded incl. outsiders: 50 — NOT village deaths)
+  census: seed 41704, day 70, alive 3 | - Rosa (line_cook, ?) trust=32 mood=cool npcAbilities=0
+
+PANEL lure/party decisions: {"party:accept":9,"lure:decline":12,"lure:accept":5,"party:decline":6}
+PANEL lure-by-inviter: {"player:party:accept":9,"NPC:lure:decline":12,"NPC:lure:accept":5,"player:party:decline":6}
+PANEL successions: [{"day":20,"from":"Jordan","to":"Jae","seed":41701},{"day":8,"from":"Paloma","to":"Molly","seed":41702},{"day":31,"from":"Molly","to":"Colton","seed":41702},{"day":36,"from":"Colton","to":"Keltoum","seed":41702},{"day":43,"from":"Keltoum","to":"Karim","seed":41702},{"day":48,"from":"Karim","to":"Chantal","seed":41702},{"day":49,"from":"Chantal","to":"Ella","seed":41702},{"day":50,"from":"Ella","to":"Patricio","seed":41702},{"day":51,"from":"Patricio","to":"James","seed":41702},{"day":52,"from":"James","to":"Jack","seed":41702},{"day":53,"from":"Jack","to":"Pavel","seed":41702},{"day":15,"from":"Jayden","to":"Sofia","seed":41703},{"day":25,"from":"Sofia","to":"Roman","seed":41703},{"day":32,"from":"Roman","to":"Tariq","seed":41703},{"day":43,"from":"Tariq","to":"Dehua","seed":41703},{"day":50,"from":"Dehua","to":"Jesse","seed":41703},{"day":57,"from":"Jesse","to":"Lev","seed":41703},{"day":58,"from":"Lev","to":"Nathan","seed":41703},{"day":71,"from":"Nathan","to":"Norkys","seed":41703},{"day":74,"from":"Norkys","to":"Sabrina","seed":41703},{"day":78,"from":"Sabrina","to":"Dmitri","seed":41703},{"day":81,"from":"Dmitri","to":"Fatima","seed":41703},{"day":60,"from":"Ashley","to":"Hannah","seed":41704},{"day":61,"from":"Hannah","to":"Larry","seed":41704},{"day":62,"from":"Larry","to":"Elkin","seed":41704},{"day":63,"from":"Elkin","to":"Miguel","seed":41704},{"day":64,"from":"Miguel","to":"David","seed":41704},{"day":69,"from":"David","to":"Rosa","seed":41704}]
+PANEL propose* calls: 0 (none observed)
+PANEL end bonds per seed: [58,75,121,81]
+PANEL bond initiator recorded by engine: NO — bond records carry no initiator field; NPC-initiated formation cannot be inferred from end bonds
+PANEL plots: 6 (late d30+: 0)
+PANEL plots with grievanceTargetToLeader > 0: 2
+PANEL grievance-holder -> later leader cases: 2
+  {"seed":41704,"plot":"plot_3","leader":"Aki","plotDay":11,"grievances":["ambushed->Katarina d9 sev60"]}
+  {"seed":41704,"plot":"plot_5","leader":"Aki","plotDay":13,"grievances":["ambushed->Katarina d9 sev60"]}
+PANEL arms: 6 (late d30+: 0) grievance-linked at arming: 6
+PANEL springs: 5 outcomes: {"killed":2,"escaped":2,"hurt":1}
+PANEL escaped springs: 2
+PANEL expired plots: 1
+PANEL villages past d100: 0/4
