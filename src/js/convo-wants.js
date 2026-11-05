@@ -961,6 +961,45 @@
           '"About last time — I haven\'t forgotten what you said you\'d do. I want to return it."',
         ]);
       },
+      staleOpener(vid) {
+        // STALE-OPENER HONESTY (journey-deepening r104 2026-11-05): the
+        // repay want reaches the default opener path now (r104 record
+        // select), so a ledger-blocked fresh opener falls to the generic
+        // stale opener — which names the want id as dialogue: "About repay
+        // — I keep turning it over." (transcript-caught, seed 94301 d80).
+        // Same defect class as ask_favor's r16 fix: a favor has a real
+        // short; name the promise in its real state, never the id. State
+        // branches mirror the opener's, reframed so the first chunk differs
+        // from the fresh line (the caller ledger-checks this too). No favor
+        // -> null (the generic fallback is still better than a dry line).
+        try {
+          const c = this.convoGet(vid);
+          const favor = (c.want && c.want.favor) || (typeof this.convoGetFavor === 'function' && this.convoGetFavor(vid)) || null;
+          const sh = favor && (favor.short || favor.kind);
+          if (!sh) return null;
+          const cap = sh[0].toUpperCase() + sh.slice(1);
+          const open = this.openFavorObligation && this.openFavorObligation(vid);
+          if (favor.state === 'fulfilled') {
+            return this.convoPickCycle(vid, 'repay:stale:' + (favor.kind || 'favor'), [
+              `"About ${sh} — I keep thinking about what you did. I want to say it right."`,
+              `"${cap} — I still owe you the thanks. Let me say it properly."`,
+            ]);
+          }
+          if (favor.state === 'broken') {
+            return this.convoPickCycle(vid, 'repay:stale:' + (favor.kind || 'favor'), [
+              `"About ${sh} — I keep turning it over. It's done now, but I haven't forgotten it."`,
+              `"${cap} — it's done now. I keep turning it over anyway."`,
+            ]);
+          }
+          if (favor.state === 'promised' && open && open.favorId === favor.id) {
+            return this.convoPickCycle(vid, 'repay:stale:' + (favor.kind || 'favor'), [
+              `"About ${sh} — still on my mind. Have you had a chance?"`,
+              `"${cap} — I keep coming back to it. Any chance yet?"`,
+            ]);
+          }
+          return null;
+        } catch (e) { return null; }
+      },
       engageBeat(vid) {
         return '"Good. Then we\'re square." They look lighter for it.';
       },
@@ -1871,6 +1910,26 @@
       if (seed && WANTS[seed.wantId]) {
         return { id: seed.wantId, def: WANTS[seed.wantId], fromSeed: true, seedNote: seed.note, seedFavorId: seed.favorId || null, seedQid: seed.qid || null };
       }
+      // UNSETTLED PROMISE (journey-deepening r104 2026-11-05): a favor the
+      // player promised, kept, or broke still needs its voice. The repay
+      // want is seed-driven only (pick() returns 0) and seeds expire after
+      // 7 days, so a promise made 15+ days before the next sitting (convo
+      // days 45/60/80) could never be named — P-KEEP ABSENT across
+      // r100–r103. The favor record outlives the seed; select repay from
+      // the record itself, mirroring the water/forage shortcuts above.
+      // Settles on speak via repay.onSurfaced, so each promise is named
+      // exactly once; settled states ('thanked', 'acknowledged', 'moot',
+      // 'declined', 'asked') never select. Seeds keep priority above —
+      // they are the more specific unfinished business.
+      try {
+        const _unfav = (typeof this.convoGetFavor === 'function') ? this.convoGetFavor(vid) : null;
+        const _open = (_unfav && _unfav.state === 'promised' && typeof this.openFavorObligation === 'function')
+          ? this.openFavorObligation(vid) : null;
+        if (_unfav && (_unfav.state === 'fulfilled' || _unfav.state === 'broken' ||
+            (_unfav.state === 'promised' && _open && _open.favorId === _unfav.id))) {
+          return { id: 'repay', def: WANTS.repay, fromSeed: false, seedFavorId: _unfav.id };
+        }
+      } catch (e) {}
       const c0 = this.convoGet(vid);
       const firstMeeting = (c0.count || 0) <= 1;
       let best = null, bestW = -1;
