@@ -800,6 +800,11 @@
         } catch (e) { console.warn('[fieldAbilities] rope spend', e); }
         return false;
       };
+      // FIRED RECORD (r103 instrument, 2026-11-05): every vHasAb firing point
+      // in this fight calls ffFired(id) where its effect actually applies, so
+      // the record names which held abilities/skills changed the fight. The
+      // telemetry-hooks wrap on fieldFight emits one skill_used row per
+      // unique id. Record-only: no RNG, no state writes, no behaviour change.
       var ffFired = function (id) { try { (rec.ffFired || (rec.ffFired = [])).push(id); } catch (e) { console.warn('[fieldAbilities] fired record', e); } };
       // "Controlled" in the tactical engine's own terms (tbPlayerShove /
       // tbPlayerBind gates): stunned, rooted, bound, blinded or hesitating.
@@ -847,9 +852,9 @@
           + (potential ? 0.05 : 0);
         // ABILITIES: game_sense reads the sign; tracker knows the patterns;
         // echo_location hears in the dark. Real attention, not luck.
-        if (vHasAb('game_sense')) evade += 0.10;
-        if (vHasAb('tracker')) evade += 0.05;
-        if (vHasAb('echo_location') && abNight) evade += 0.10;
+        if (vHasAb('game_sense')) { evade += 0.10; ffFired('game_sense'); }
+        if (vHasAb('tracker')) { evade += 0.05; ffFired('tracker'); }
+        if (vHasAb('echo_location') && abNight) { evade += 0.10; ffFired('echo_location'); }
         // DETECTION, HELD (godpath-buff 2026-10-14): the monster.detect_chance
         // modifiers a villager holds (bird_whisperer, third_eye, beast_calm)
         // read here the way they read for the player: seen first, given room.
@@ -867,6 +872,7 @@
         // made, but the monster didn't see THEM first: one free opening
         // strike before round 1, the tactical formula, verbatim.
         if (vHasAb('ambush')) {
+          ffFired('ambush');
           var _od = lroll([4 + wb, 8 + wb]);
           members[0].hp -= _od; rec.mDealt += _od;
           if (members[0].hp <= 0) members[0].alive = false;
@@ -1268,6 +1274,9 @@
         // them open (the monster's hits land +2 this round). The telegraph
         // is the price.
         abHaymakerRound = (round % 3 === 0) && vHasAb('haymaker');
+        // HAYMAKER-FIRED (r103 instrument): the windup is the use — the
+        // strike below is its payoff, the monster's +2 this round its price.
+        if (abHaymakerRound) ffFired('haymaker');
         // ABILITY stuns (war_cry / scream_cheese): the monster hesitates —
         // its whole attack phase is skipped this round.
         var mStunnedThisRound = false;
@@ -1449,6 +1458,7 @@
               if (gpF && allyIn && allyHp > 0) { try { _allyShare = GPf.fieldAllyShare(gpF, _allyShare); } catch (e) { console.warn('[godpath] ally share', e); } }
               if (vHasAb('draw_fire') && allyIn && allyHp > 0 && !abDrewFire) {
                 abDrewFire = true;
+                ffFired('draw_fire');
                 _allyShare = 0.1;
                 rec.log.push(vName + ' draws its eye — "Me. I\'m the problem." The beast turns.');
               }
@@ -1465,6 +1475,7 @@
               // on the ally lands on the guard instead. "Not them."
               if (hittingAlly && vHasAb('bodyguard') && !abBodyguarded) {
                 abBodyguarded = true;
+                ffFired('bodyguard');
                 hittingAlly = false;
                 _wardVia = 'bodyguard';
                 rec.log.push(vName + ' steps into the blow meant for ' + allyName + '. Not them.');
@@ -1551,6 +1562,7 @@
                 // once-per-fight honesty.
                 if (!abBraced && vHasAb('unbreakable') && total > 0 && vHp < vHpMax) {
                   abBraced = true;
+                  ffFired('unbreakable');
                   var _pre = total;
                   total = Math.round(total * 0.4);
                   rec.log.push(vName + ' braces — takes it on the shoulder, rolling with it. ' + _pre + ' → ' + total + '. (Unbreakable)');
@@ -1562,7 +1574,8 @@
                 if (vHasAb('shield_wall') && allyIn && allyHp > 0 && total > 0) {
                   var _pre2 = total;
                   total = Math.max(1, Math.round(total * 0.75));
-                  if (total < _pre2) rec.log.push(vName + ' holds the line with ' + allyName + ' — ' + _pre2 + ' → ' + total + '. (Shield Wall)');
+                  // r103: record only where the blow actually softened.
+                  if (total < _pre2) { ffFired('shield_wall'); rec.log.push(vName + ' holds the line with ' + allyName + ' — ' + _pre2 + ' → ' + total + '. (Shield Wall)'); }
                 }
                 vHp -= total; rec.vTaken += total; abRoundTaken += total;
                 vBeamTaken += Math.max(0, Math.min(total, Math.round(total * beamShare)));
@@ -1813,6 +1826,7 @@
               }
             } else if (!abMedicated && vHasAb('field_medicine') && vHp > 0 && vHp < vHpMax * 0.6) {
               abMedicated = true;
+              ffFired('field_medicine');
               var _mh = Math.min(20, vHpMax - vHp);
               vHp += _mh;
               rec.log.push('R' + round + ': ' + vName + ' stops mid-fight and binds the wound — field medicine, +' + _mh + ' HP.');
@@ -1823,6 +1837,7 @@
             // rounds already survived un-aimed.
             } else if (!abAimed && vHasAb('patient_aim') && !abAim && vHp >= vHpMax && lead.hp > lead.maxHp * 0.5) {
               abAimed = true; abAim = true;
+              ffFired('patient_aim');
               rec.log.push('R' + round + ': ' + vName + ' goes still. Breath slows. The world narrows to the target. (Take Aim — next shot 2.5x)');
               try { (rec.actionKinds || (rec.actionKinds = [])).push('aim'); } catch (e) {}
             // ABILITY — FREEZE TAG (lootabilities Arm 4): the card roots a
@@ -1942,17 +1957,17 @@
               // is the punctuation.
               if (abHaymakerRound) { vd = vd * 2; abNote += ' (HAYMAKER x2)'; }
               // ABILITY — STALK: the stalker's opening — first blood, +4.
-              if (round === 1 && vHasAb('stalk')) { vd += 4; abNote += ' (stalker\'s opening +4)'; }
+              if (round === 1 && vHasAb('stalk')) { ffFired('stalk'); vd += 4; abNote += ' (stalker\'s opening +4)'; }
               // ABILITY — DEAD AIM: the executioner's shot — a wounded lead
               // gets the patient kill.
-              if (lead.hp < lead.maxHp * 0.35 && vHasAb('dead_aim')) { vd = vd * 2; abNote += ' (dead aim x2)'; }
+              if (lead.hp < lead.maxHp * 0.35 && vHasAb('dead_aim')) { ffFired('dead_aim'); vd = vd * 2; abNote += ' (dead aim x2)'; }
               // ABILITY — BLOOD TRAIL: the blood tells everything — follow
               // it in, +2 against a bleeding lead.
-              else if (lead.hp < lead.maxHp * 0.5 && vHasAb('blood_trail')) { vd += 2; abNote += ' (blood trail +2)'; }
+              else if (lead.hp < lead.maxHp * 0.5 && vHasAb('blood_trail')) { ffFired('blood_trail'); vd += 2; abNote += ' (blood trail +2)'; }
               // ABILITY — TRADE OF BLOWS (settle_debt): every hit taken is a
               // hit given back with interest. Once per fight.
               if (!abDebtSettled && vHasAb('trade_of_blows') && abLastRoundTaken > 20) {
-                abDebtSettled = true; vd = Math.round(vd * 1.5); abNote += ' (debt settled 1.5x)';
+                abDebtSettled = true; ffFired('trade_of_blows'); vd = Math.round(vd * 1.5); abNote += ' (debt settled 1.5x)';
               }
               // APEXHOOK (2026-10-16): the apex-trick villager-damage effects.
               // The sigW4/sigW5 ports arm flags on the rec; the effects land
@@ -2213,9 +2228,11 @@
           // next round decides again, honestly. "For them."
           if (!abRallied && vHasAb('rally') && allyIn && allyHp > 0 && !opts.noFlee) {
             abRallied = true;
+            ffFired('rally');
             rec.log.push(vName + ' looks at ' + allyName + ' standing with them — and does not run. For them. (Rally)');
           } else if (!abWarCried && vHasAb('war_cry') && !opts.noFlee) {
             abWarCried = true; abStun = 1;
+            ffFired('war_cry');
             fleeAt = Math.max(0.05, fleeAt - 0.15);
             rec.log.push(vName + ' BELLOWS — not volume, a promise. ' + mPhraseCap + ' falters. They hold the line a little longer. (War Cry)');
           } else if (opts.noFlee) {
@@ -2234,6 +2251,7 @@
           // hurts. Worth it.
           if (!abScreamed && vHasAb('scream_cheese')) {
             abScreamed = true; abStun = 1;
+            ffFired('scream_cheese');
             rec.log.push(vName + ' SCREAMS — the milk is cheese now! ' + mPhraseCap + ' reels, dizzy. (Scream Cheese)');
           }
           // ARENA PROTOCOL: sealed — past the sane line, still in. The

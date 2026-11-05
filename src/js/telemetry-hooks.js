@@ -7,7 +7,7 @@
 //   - observe_only: every wrap calls the original first and returns its result unchanged (code: telemetry-hooks.js)
 //   - no_rng: no Math.random and no state writes except the telemetry ring and its own _teleSeen bookkeeping (code: telemetry-hooks.js)
 // consumes:
-//   - tele(), tableScene(), tableStartPath(), tableFail(), tableResolveFinal(), useAbility(), activateAbility(), checkArc(), recomputeActiveSynergies(), scaleRank(), endDay(), Pantheon.registerAscension(), titanResolveFight()
+//   - tele(), tableScene(), tableStartPath(), tableFail(), tableResolveFinal(), useAbility(), activateAbility(), checkArc(), recomputeActiveSynergies(), scaleRank(), endDay(), Pantheon.registerAscension(), titanResolveFight(), fieldFight()
 (function () {
   'use strict';
   const S = globalThis.Scattering;
@@ -51,7 +51,12 @@
     const T = tstate(g);
     if (g.won && !seen(g).tableWon) { seen(g).tableWon = true; const pg0 = g.progState ? g.progState() : {}; g.teleMilestone('table_won', Object.assign(keyFields(g), { path: T.path, branch: T.branch, seat: T.seat, key: !!pg0.networkFallen, hosts: T.final === 'hosts', overtime: pg0.overtime | 0, ending: (T.ending && T.ending.selector) || 'path', endingLevel: (T.ending && T.ending.level) || 'path', endingKind: (T.ending && T.ending.kind) || 'path', buildPlayed: (T.buildPlayed && T.buildPlayed.selector) || null })); }
   });
-  wrap('useAbility', (g, a, r) => g.teleMilestone('ability_used', { id: a[0], action: a[1], ok: r !== false && r != null }));
+  // ACTOR (r103, 2026-11-05): ability_used rows named no actor. useAbility
+  // is the player-facing entry point (app.js taps; the sim policy drives
+  // player fights through it), so the actor is the player; villager field
+  // fights translate held abilities inline and are covered by skill_used
+  // below, never by useAbility.
+  wrap('useAbility', (g, a, r) => g.teleMilestone('ability_used', { id: a[0], action: a[1], actor: 'player', ok: r !== false && r != null }));
   // WAVE UNLOCK (gap-phase2 W1, line 361): no engine telemetry event fired
   // on wave unlock, so sweeps had to sample unlockedWave() daily. The beat
   // itself (checkWaveUnlockBeat) is idempotent via _waveAnnounced; this wrap
@@ -68,7 +73,23 @@
       g.teleMilestone('wave_unlock', { from, to: w, day: (g.state.scholar || {}).day || 0 });
     }
   });
-  wrap('activateAbility', (g, a, r) => g.teleMilestone('ability_used', { id: a[0], action: 'activate', ok: r !== false && r != null }));
+  wrap('activateAbility', (g, a, r) => g.teleMilestone('ability_used', { id: a[0], action: 'activate', actor: 'player', ok: r !== false && r != null }));
+  // SKILL_USED (journey-establishment r103, 2026-11-05): villager field
+  // fights translate held abilities inline (fieldFights.js vHasAb sites)
+  // instead of calling useAbility, so no actor-attributed row ever fired
+  // for them — r102's strict-use instrument could not see a taught skill
+  // fire in a fight. fieldFight records each firing on rec.ffFired; this
+  // wrap emits one skill_used row per UNIQUE fired id, covering every
+  // return path uniformly (including the early evade return). Observe-only:
+  // no RNG, no state writes beyond the telemetry ring.
+  wrap('fieldFight', (g, a, r) => {
+    if (!r || !Array.isArray(r.ffFired) || !r.ffFired.length) return;
+    const seenIds = {};
+    for (const id of r.ffFired) {
+      if (!id || seenIds[id]) continue; seenIds[id] = 1;
+      g.teleMilestone('skill_used', { vid: a[0], skill: id, context: 'field_fight', outcome: r.outcome || null });
+    }
+  });
   wrap('checkArc', (g) => {
     const arc = (g.progState() || {}).arc || 1; const sn = seen(g);
     if (arc !== sn.arc) { sn.arc = arc; g.teleMilestone('arc', { arc }); }
