@@ -64,7 +64,21 @@ including for the unmodified r132 driver, which emits the same
 Next-run proposal: the determinism proof should compare with `ms`
 stripped (or drop `ms` from the evidence schema).
 
-## Pre-registered verdicts (BINDING metrics, §14)
+## Rebase onto new master (closeout)
+
+Master moved during the run (13 commits: Loop A pantrymealword /
+bankadded evidence, sim-postblood-b DIAG, journey-scale r98).
+The only src/js change in range: game.js +19/−1, a wording-only
+change (pantrymealword stranded-night line). Per the loop rules the
+branch was rebased onto master 11d6789c1 (clean, single pick,
+2214ef016) and the panel RE-RUN on the new base: all four seeds
+reproduce their trajectories EXACTLY — the only differences in
+the JSONs are manifest.commit (b79821db8 → 2214ef016) and the
+`ms` wall-clock field. The determinism proof was re-run on the
+rebased base too: the two 41701 JSONs differ only in `ms`
+("7s" vs "15s"). Verdicts stand unchanged on the new base. The
+re-run JSONs are committed as a second commit below; the run
+note's numbers are the same either way.
 
 - **M1 arming motive: GO — 6/6 grievance-linked at arming.**
   Every plot armed with motive 'grievance' (scores 38–80):
