@@ -1,5 +1,7 @@
 // Journey leg: LANDING R107 (2026-11-05) -- R106 CARRY, NO POLICY CHANGE:
-// R106 driver verbatim except seeds 897-906, OUTDIR landing-r107, header.
+// R106 driver verbatim except seeds 1003-1012, OUTDIR landing-r107, header.
+// (r106's prepared 897-906 band is CONTAMINATED — seeds 901-907 used 2026-10-13
+// by journey-succession corpora; r107 prereg records the freshness check.)
 // Carried: R106-ARMS-WHY instrument (win-plan arm preconditions at d14/d28)
 // + R106-STARVATION-CLASS-F analyzer fix (NPC starvation deaths classify
 // F, not E). Carried questions: the win-plan arms are proved structurally
@@ -372,7 +374,7 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const { loadGame, setupGame, driveFights, driveContests } = require('./sim-harness');
 const { competent } = require('./policies/competent');
-const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(s => parseInt(s, 10)) : [897, 898, 899, 900, 901, 902, 903, 904, 905, 906]);
+const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(s => parseInt(s, 10)) : [1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012]);
 const DAYS = parseInt(process.env.DAYS || '14', 10);
 const FAVOR_ACCEPT = process.env.FAVOR_ACCEPT !== '0'; // R15: default ON —
 // the landing leg's KIN question needs the seek_taken commit path exercised
