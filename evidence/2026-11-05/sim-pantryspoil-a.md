@@ -2,7 +2,7 @@
 
 Verdict: **GO — LAND.** The pantry spoil line now states the unit
 count on every removal, pilot and fresh-seed confirm alike.
-Lever commit: [to be filled on commit] ([needs-eyes], narration change).
+Lever commit 90b959147 ([needs-eyes], narration change).
 
 Worker: sim-pantryspoil-a, run fleshout-20261105T1215Z. Base:
 master f2238ed19 (sweepcount lever e578c47e1 already in history).
