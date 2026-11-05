@@ -12606,6 +12606,29 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // scholar.monster (debug scenarios) into the world BEFORE the tile
       // changes, so follow/continuity logic sees it on the old tile.
       this.playerMonster();
+      // THE PARTING TURN (sim-triggerbuild-b, winnability chain 2026-11-05):
+      // a wave-4+ world monster on the tile being left gets ONE monsterTurn
+      // before the position update — the stopped moment. Tile-entry spawns
+      // land on the tile the player just entered and the player's next
+      // action is very often another step, so without this the monster
+      // never gets a contact turn. Lingerers keep their own endure/sortie
+      // beat (excluded); the player must not already be in combat (the
+      // barrier exit is the legitimate mid-fight way out, and it passes
+      // combatExit while inCombat). If the turn commits to combat, travel
+      // aborts — the player stays on the tile and the fight is live.
+      // The line uses the display name (never the true name) via
+      // articlePhrase, the engine's sentence-safe composer.
+      if (!this.inCombat()) {
+        const _part = this.playerMonster();
+        if (_part && !_part.lingering && ((_part.wave | 0) >= 4)) {
+          let _pname = 'something';
+          try { _pname = this.monsterDisplayName(_part.id) || _pname; } catch (e) {}
+          try { _pname = this.articlePhrase(_pname); } catch (e) {}
+          this.say(`You turn to leave — behind you, ${_pname} stirs.`);
+          this.monsterTurn();
+          if (this.inCombat()) return null;
+        }
+      }
       const fromX = this.map.px, fromY = this.map.py;
       // CONTINUOUS TRAVEL: remember where you stood on the old node so you can
       // walk onto the new one at the matching spot — not the middle.

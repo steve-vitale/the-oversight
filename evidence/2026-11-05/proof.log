@@ -1,0 +1,35 @@
+PASS fixture seq1: firstEp 1 (parting turn inside, return call excluded)
+PASS fixture seq1: viaTravel attributed
+PASS fixture seq1: subCause player-left
+PASS fixture seq2: firstEp 0 (return-episode call excluded)
+PASS fixture seq2: no fallback (marker exists)
+PASS fixture seq3: firstEp 2 with fallback flagged
+PASS band: firstEpContact 2 of 3
+PASS band: zeroTurnPlayerLeft 1 (seq2 only)
+PASS band: partingLines 1
+PASS legA: a travel target exists
+PASS legA: spawned wave-4 eulogy on player tile
+PASS legA: exactly one parting monsterTurn
+PASS legA: travel proceeded
+PASS legA: parting line spoken
+PASS legA: travelTo did not return a blockage
+PASS legB: a travel target exists
+PASS legB: spawned committed-pending territorial eulogy
+PASS legB: travel aborted (null)
+PASS legB: player stayed on the tile
+PASS legB: fight is live
+PASS legB: parting turn ran
+PASS legC: a travel target exists
+PASS legC: spawned wave-3 redactor
+PASS legC: wave-3 gets no parting turn
+PASS legC: travel proceeded past wave-3
+PASS legC-ling: a travel target exists
+PASS legC-ling: spawned lingering wave-4 eulogy
+PASS legC-ling: lingerer gets no parting turn
+PASS legC-ling: travel proceeded past lingerer
+PASS legD: a travel target exists
+PASS legD: no extra monsterTurn without a monster
+PASS legD: no parting line without a monster
+PASS legD: travel proceeded
+
+33 PASS, 0 FAIL
