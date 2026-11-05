@@ -2511,7 +2511,12 @@ async function runSeed(seed) {
   // (2) if still not home and a block was named, Game.clearBlockage()
   // once on the named tile (honest cost: 60 kcal fallen tree, 40 rubble,
   // bridge-or-scramble washed out; creek refuses honestly), then retry
-  // the walk once. Returns { steps, nodeFinal, distFinal, atHavenFinal,
+  // the walk once. (3) R104-GOAROUND: if the block is a creek and the
+  // scholar holds >=4 wood, Game.buildBridge() on it, then retry the
+  // walk; (4) if STILL not home, detourHome() — BFS over orthogonal
+  // enterable tiles (travelBlockage as oracle, home board only), walked
+  // one tile at a time through travelTo — the "go around" the narration
+  // prescribes. Returns { steps, nodeFinal, distFinal, atHavenFinal,
   // insideHavenFinal }. Never narrates a walk home that did not happen.
   const guardRescue = (home, firstRet) => {
     const steps = [];
@@ -2536,12 +2541,81 @@ async function runSeed(seed) {
         return { reached: ok, blocked: null };
       } catch (e) { steps.push(label + ':error:' + String(e && e.message).slice(0, 80)); return null; }
     };
+    // R104-GOAROUND detourHome (driver-only): BFS from the scholar's tile
+    // to home over orthogonal steps, enterability judged by
+    // Game.travelBlockage (the same oracle travelTo uses), home board 0..8
+    // only — no beyond-board routing in this rung. A found path is walked
+    // one tile at a time through travelTo, so encounters/time cost exactly
+    // what a manual walk would meet; any refusal, combat, or death stops
+    // honestly with the position named. Returns true iff home is reached.
+    const detourHome = (home) => {
+      try {
+        const sx = Game.map.px, sy = Game.map.py;
+        const key = (x, y) => x + ',' + y;
+        const seen = new Set([key(sx, sy)]);
+        const prev = {};
+        const q = [[sx, sy]];
+        let found = false;
+        while (q.length) {
+          const cur = q.shift();
+          const cx = cur[0], cy = cur[1];
+          if (cx === home.x && cy === home.y) { found = true; break; }
+          for (const off of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+            const nx = cx + off[0], ny = cy + off[1];
+            if (nx < 0 || nx > 8 || ny < 0 || ny > 8) continue;
+            if (seen.has(key(nx, ny))) continue;
+            let block = null;
+            try { block = Game.travelBlockage ? Game.travelBlockage(nx, ny, cx, cy) : null; } catch (e) { block = { kind: 'error' }; }
+            if (block) continue;
+            seen.add(key(nx, ny));
+            prev[key(nx, ny)] = [cx, cy];
+            q.push([nx, ny]);
+          }
+        }
+        if (!found) { steps.push('detour:no-onboard-path'); return false; }
+        const path = [];
+        let cur2 = [home.x, home.y];
+        while (!(cur2[0] === sx && cur2[1] === sy)) { path.unshift(cur2); cur2 = prev[key(cur2[0], cur2[1])]; }
+        let walked = 0;
+        for (const step of path) {
+          if (Game.map.px === home.x && Game.map.py === home.y) break;
+          const before = { x: Game.map.px, y: Game.map.py };
+          try { Game.travelTo(step[0], step[1]); } catch (e) { steps.push('detour:error:' + String(e && e.message).slice(0, 60)); return false; }
+          if (Game.map.px === before.x && Game.map.py === before.y) {
+            steps.push(`detour:stopped-at:${before.x},${before.y}:to:${step[0]},${step[1]}`);
+            return false;
+          }
+          walked++;
+          if (Game.inCombat && Game.inCombat()) { steps.push('detour:interrupted:combat'); return false; }
+          if (Game.over) { steps.push('detour:interrupted:over'); return false; }
+        }
+        steps.push(`detour:walked:${walked}`);
+        return Game.map.px === home.x && Game.map.py === home.y;
+      } catch (e) { steps.push('detour:error:' + String(e && e.message).slice(0, 60)); return false; }
+    };
     let cur = snap();
     if (cur.atHaven) { steps.push('first-travelTo:arrived'); }
     else {
       steps.push('first-travelTo:not-home');
       let walk = doWalk('walkHome');
       cur = snap();
+      // R104-PROBE (env-gated, driver-only): when the walk stops on a block,
+      // dump the neighborhood so the stall can be adjudicated (bridgeable?
+      // detour open? all exits genuinely blocked?). Gated on RESCUE_PROBE=1;
+      // silent otherwise.
+      if (process.env.RESCUE_PROBE === '1' && walk && walk.interrupted === 'blocked') {
+        try {
+          const px = Game.map.px, py = Game.map.py;
+          const wood = Game.woodCount ? Game.woodCount() : null;
+          const nb = [];
+          for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+            if (!dx && !dy) continue;
+            let t = null; try { t = Game.tileAt(px + dx, py + dy); } catch (e) {}
+            nb.push(`${px + dx},${py + dy}:${t ? (t.type || '?') : 'null'}${t && t.blockFrom ? '/block:' + (t.blockFrom.type || '?') : ''}${t && t.needsBridge ? '/needsBridge' : ''}${t && t.bridged ? '/bridged' : ''}`);
+          }
+          console.log(`*** RESCUE-PROBE day${gday()} at (${px},${py}) wood=${wood} kcal=${Game.state.scholar && Game.state.scholar.kcal} walk=${JSON.stringify({ interrupted: walk.interrupted, blocked: walk.blocked, steps: walk.steps })} neighbors=[${nb.join(' | ')}]`);
+        } catch (e) { console.log('RESCUE-PROBE ERROR: ' + (e && e.message)); }
+      }
       if (!cur.atHaven) {
         let block = null;
         if (walk && walk.blocked) block = walk.blocked;
@@ -2555,6 +2629,29 @@ async function runSeed(seed) {
           steps.push('clear:unavailable');
         } else {
           steps.push('clear:no-block-named');
+        }
+        // R104-GOAROUND bridge rung: a creek block with >=4 wood gets the
+        // game's own bridge verb (clearBlockage refuses creeks honestly —
+        // "Bridge it (4 wood) or swim it"). A swimmer needs no bridge:
+        // travelTo already passes creeks for them, so walkHome would not
+        // have stopped on a creek in the first place.
+        if (!cur.atHaven && block && block.blockType === 'creek') {
+          let wood = 0;
+          try { wood = Game.woodCount ? Game.woodCount() : 0; } catch (e) { wood = 0; }
+          if (wood >= 4 && Game.buildBridge) {
+            let bok = null, bErr = null;
+            try { bok = Game.buildBridge(block.x, block.y); } catch (e) { bErr = String(e && e.message).slice(0, 60); }
+            steps.push(bErr ? ('bridge:error:' + bErr) : ('bridge:creek@' + block.x + ',' + block.y + ':' + (bok ? 'ok' : 'refused')));
+            if (bok) { doWalk('walkHome-retry'); cur = snap(); }
+          } else {
+            steps.push(`bridge:skipped:wood=${wood}`);
+          }
+        }
+        // R104-GOAROUND detour rung: walk around the block the long way.
+        if (!cur.atHaven) {
+          detourHome(home);
+          cur = snap();
+          if (!cur.atHaven) { doWalk('walkHome-retry'); cur = snap(); }
         }
       }
     }
