@@ -139,6 +139,9 @@ revision for the NEXT run.
   policy/horizon). R1 files are retained as the pilot that found the
   gaps. Verdict rule unchanged.
 
-## Metric review (to fill after the panel)
+## Metric review (filled after the panel — see sim-finishing-instrument-b.md)
 
-- (pending)
+- GO. Coverage 100% (45/45 fights, 45/45 telemetry, 0 errors, 0
+  unmatched kills), neutrality exact on 99311 + 99312, suite 280/10
+  with no new failures. Kill conversion 2/45 = 4.4%; solo 17/17 death;
+  field 0/10 kills at 2.6% median damage; two party kills at full HP.
