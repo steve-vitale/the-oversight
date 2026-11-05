@@ -8714,6 +8714,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           for (const n of news.slice(0, 5)) this.say(n);
           if (news.length > 5) this.say(`...and ${news.length - 5} more. Ask around — they'll tell you.`);
         }
+        // HELD NAMING NEWS (sim-awaynaming-cap-a 2026-11-05): debates that
+        // kicked while you were away reach you at the fire on return —
+        // verbatim, in order. Same !over && !estranged block as the away
+        // news: dead and exiled scholars never receive haven news.
+        try { this.deliverHeldNamingNews(); } catch (e) {}
         // THE BROKER'S RETURN (drifter loop, Steve 2026-10-07): knowledge you
         // learned while away comes home WITH you — never before. identifyPlant
         // queues away-learned plants in scholar.awayLearned; here the fire
@@ -23107,6 +23112,57 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) {}
       return delivered;
     },
+    // NAMING-NEWS POSITION GATE (sim-awaynaming-cap-a 2026-11-05;
+    // re-do of the killed sim-gossipfix-a gate, 86e4652b7): the naming
+    // debate is haven fireside talk. A scholar away from Haven cannot
+    // hear it — the word, the argument, and the settlement wait until
+    // they are back at the fire. The debate itself (reported/knowers/
+    // proposals/majority/villageName) proceeds exactly as before; only
+    // DELIVERY waits. Follows the established awayNews pattern
+    // (playerAtHaven gate, scholar.awayNaming queue, returnToVillage
+    // delivery). RNG-neutral by construction: rotLine draws zero RNG,
+    // proposals are seeded either way, and the held text is said
+    // verbatim on return (no fresh roll at delivery).
+    // THE CAP IS REMOVED (the gossipfix kill cause): the killed fix
+    // capped awayNaming at 12 entries and silently dropped the oldest
+    // held line — 15009 lost 1, 17010 lost 24 on a 9-night stranding.
+    // Any fixed cap re-introduces the same failure on a longer
+    // stranding (observed max held volume is 36 lines). The queue is
+    // a short-lived delivery buffer, spliced empty on every return,
+    // so it cannot accumulate across a run. NOTE the r141 haven-news
+    // relay (sayHavenNews / pendingHavenNews, cap 20 + flush filters)
+    // still owns the tale and witness kinds; only the burst/settle
+    // kinds route through this gate, verbatim and uncapped, per the
+    // preregistered shape — the relay's stale-opening filter is NOT
+    // applied to them (see sim-awaynaming-cap-a-prereg.md).
+    holdNamingNews(kind, mid, text) {
+      const s = this.state.scholar || {};
+      s.awayNaming = s.awayNaming || [];
+      s.awayNaming.push({ kind, mid, text, day: (s.day || 0) });
+    },
+    // sayNamingNews: say the line now if the scholar is at the haven;
+    // otherwise hold it for the fire on return. playerAtHaven() is the
+    // codebase's presence law for home-village narration (villageLives,
+    // ambientSocial, firesideTeaching).
+    sayNamingNews(kind, mid, text) {
+      let present = true;
+      try { present = this.playerAtHaven(); } catch (e) {}
+      if (present) { this.say(text); return; }
+      this.holdNamingNews(kind, mid, text);
+    },
+    // deliverHeldNamingNews: held naming lines reach the scholar at the
+    // fire on return, verbatim and in the order they were held, under
+    // one framing line that makes the catch-up tense honest. The queue
+    // is spliced on delivery, so a second return the same day finds
+    // nothing to repeat.
+    deliverHeldNamingNews() {
+      const s = this.state.scholar || {};
+      const held = s.awayNaming || [];
+      if (!held.length) return;
+      const news = held.splice(0);
+      this.say('While you were away, the haven argued over what to call it — they catch you up at the fire:');
+      for (const h of news) this.say(h.text);
+    },
     // kickMonsterNaming: the word is out — the argument starts.
     kickMonsterNaming(mid) {
       const e = this.ensureMonsterEntry(mid);
@@ -23133,11 +23189,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const rosterN = ((this.state.village || {}).roster || []).length;
       const need = Math.max(1, Math.min(3, rosterN));
       if (knowers.size >= need) {
-        this.sayHavenNews(this.rotLine('monsterReaction', [
+        this.sayNamingNews('word', mid, this.rotLine('monsterReaction', [
           'Word gets around the haven. Whatever that thing was — everyone\'s talking about it now.',
           'Word gets around the haven. Whatever that thing was — the haven\'s talking about nothing else.',
           'Word gets around the haven. Whatever that thing was — every fire has a theory tonight.',
-        ]), 'word', mid);
+        ]));
         this.kickMonsterNaming(mid);
       }
     },
@@ -23200,11 +23256,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (names.length) {
         const first = names[0];
         const who = this.firstRef(Object.keys(e.proposals)[0]);
-        this.sayHavenNews(this.rotLine('monsterDebate', [
+        this.sayNamingNews('debate', mid, this.rotLine('monsterDebate', [
           `Back at the haven the argument starts: ${who} is calling it "${first}." They'll fight it out — weigh in if you want.`,
           `Back at the haven the argument starts: ${who} is calling it "${first}." Nobody agrees yet — weigh in if you want.`,
           `Back at the haven the argument starts: ${who} is calling it "${first}." The name's up for grabs — weigh in if you want.`,
-        ]), 'debate', mid);
+        ]));
       }
       this.monsterNamingCheck(mid);
     },
@@ -23231,7 +23287,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       for (const [name, n] of Object.entries(votes)) {
         if (n >= majority) {
           e.villageName = name;
-          this.sayHavenNews(`It's settled. The village is calling it "${name}." The ${this.journalName()} keeps it.`, 'settled', mid);
+          this.sayNamingNews('settle', mid, `It's settled. The village is calling it "${name}." The ${this.journalName()} keeps it.`);
           // NAMING IS A DEED (gap-integration 2026-10-10): the village agreed
           // on a name — the System learned what to call it. Integration,
           // one-shot per monster, declining returns (the first names teach

@@ -16,10 +16,18 @@
 //      (namingKicked) but emits 0 word lines; seedMonsterNames seeds
 //      proposals but emits 0 debate lines.
 //   2. STRANDED settle: majority -> villageName set but 0 settle lines;
-//      the word/debate/settle lines sit queued in order.
-//   3. RETURN: back on the haven tile -> flush delivers ONLY the settle
-//      line (stale word/debate dropped, covered by the settle); queue
-//      empties.
+//      the word/debate/settle lines sit held in order.
+//   3. RETURN: back on the haven tile -> returnToVillage delivers ALL
+//      THREE lines verbatim under the catch-up framing line; the queue
+//      drains.
+//   ROUTING NOTE (sim-awaynaming-cap-a 2026-11-05): burst/settle lines
+//   (word/debate/settle) now route through the uncapped awayNaming
+//   gate (sayNamingNews / returnToVillage delivery), NOT the relay's
+//   pendingHavenNews queue — the relay's stale-opening filter (flush
+//   delivers only the settle) does not apply to them. The relay keeps
+//   the tale and witness kinds (checks 5–6). Checks 1–3 below assert
+//   the awayNaming routing; check 4 asserts in-haven lines still say
+//   immediately with both queues empty.
 //   4. CONTROL: scholar at Haven -> word/debate said immediately, queue
 //      stays empty.
 //   5. WITNESS: endDay loop with the scholar away -> the witness branch
@@ -109,24 +117,29 @@ function livingRoster(Game) {
     check('stranded kick: 0 word lines emitted', !lines.some(l => WORD_RE.test(l)), 'word lines: ' + JSON.stringify(lines.filter(l => WORD_RE.test(l))));
     check('stranded kick: 0 debate lines emitted', !lines.some(l => DEBATE_RE.test(l)), 'debate lines: ' + JSON.stringify(lines.filter(l => DEBATE_RE.test(l))));
     check('stranded kick: proposals seeded (mechanics ran)', Object.keys(e.proposals || {}).length > 0, 'proposals=' + Object.keys(e.proposals || {}).length);
-    const q1 = Game.state.pendingHavenNews || [];
-    check('stranded kick: word+debate queued', q1.map(i => i.kind).join(',') === 'word,debate', 'queue=' + JSON.stringify(q1.map(i => i.kind)));
+    const q1 = (Game.state.scholar || {}).awayNaming || [];
+    check('stranded kick: word+debate held in awayNaming', q1.map(i => i.kind).join(',') === 'word,debate', 'queue=' + JSON.stringify(q1.map(i => i.kind)));
+    check('stranded kick: nothing in the relay queue (burst/settle bypass the relay)', (Game.state.pendingHavenNews || []).length === 0, 'relay=' + JSON.stringify((Game.state.pendingHavenNews || []).map(i => i.kind)));
     // force a majority, then settle while still away
     for (const vid of roster) e.proposals[vid] = 'Old Loud';
     e.proposals[Game.villagerId] = 'Old Loud';
     Game.monsterNamingCheck(mid);
     check('stranded settle: villageName set (mechanics ran)', e.villageName === 'Old Loud', 'villageName=' + e.villageName);
     check('stranded settle: 0 settle lines emitted', !lines.some(l => SETTLE_RE.test(l)));
-    const q2 = Game.state.pendingHavenNews || [];
-    check('stranded settle: queue is word,debate,settled', q2.map(i => i.kind).join(',') === 'word,debate,settled', 'queue=' + JSON.stringify(q2.map(i => i.kind)));
-    // return to Haven and flush
+    const q2 = (Game.state.scholar || {}).awayNaming || [];
+    check('stranded settle: queue is word,debate,settle', q2.map(i => i.kind).join(',') === 'word,debate,settle', 'queue=' + JSON.stringify(q2.map(i => i.kind)));
+    check('stranded settle: relay queue still empty', (Game.state.pendingHavenNews || []).length === 0);
+    // return to Haven: returnToVillage delivers the held lines verbatim.
     moveHome(Game, hv);
     check('return: scholarAtHaven true at haven', Game.scholarAtHaven() === true);
-    const n = Game.flushHavenNews();
-    check('return: flush delivers exactly 1 line (the settle)', n === 1, 'delivered=' + n);
-    check('return: settle line delivered', lines.some(l => SETTLE_RE.test(l)));
-    check('return: stale word/debate NOT delivered', !lines.some(l => WORD_RE.test(l) || DEBATE_RE.test(l)));
-    check('return: queue emptied', (Game.state.pendingHavenNews || []).length === 0);
+    const heldTexts = q2.map(i => i.text);
+    Game.returnToVillage();
+    check('return: framing line on return', lines.some(l => /While you were away, the haven argued over what to call it/.test(l)));
+    check('return: held word line delivered verbatim', lines.includes(heldTexts[0]), 'held=' + JSON.stringify(heldTexts));
+    check('return: held debate line delivered verbatim', lines.includes(heldTexts[1]));
+    check('return: held settle line delivered verbatim', lines.includes(heldTexts[2]));
+    check('return: awayNaming queue drained', ((Game.state.scholar || {}).awayNaming || []).length === 0);
+    check('return: relay flush delivers nothing (burst/settle bypass the relay)', Game.flushHavenNews() === 0);
   }
 
   // ---- 4: control at Haven (seed 41801) ----
@@ -146,6 +159,7 @@ function livingRoster(Game) {
     check('control: word line said immediately', lines.some(l => WORD_RE.test(l)));
     check('control: debate line said immediately', lines.some(l => DEBATE_RE.test(l)));
     check('control: queue stays empty', (Game.state.pendingHavenNews || []).length === 0);
+    check('control: awayNaming stays empty (in-haven lines are said, not held)', ((Game.state.scholar || {}).awayNaming || []).length === 0);
   }
 
   // ---- 5: witness via endDay (seed 41801; 0.15/night branch) ----
