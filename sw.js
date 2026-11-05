@@ -89,6 +89,7 @@ const ASSETS = [
   "./src/js/party-bond.js?v=c9df669e0-20261106-172442",
   "./src/js/villager-objectives.js?v=c9df669e0-20261106-172442",
   "./src/js/villager-goals.js?v=c9df669e0-20261106-172442",
+  "./src/js/bond-initiation.js?v=c9df669e0-20261106-172442",
   "./src/js/villager-mapmem.js?v=c9df669e0-20261106-172442",
   "./src/js/codex-people.js?v=c9df669e0-20261106-172442",
   "./src/js/fallen-memorial.js?v=c9df669e0-20261106-172442",
