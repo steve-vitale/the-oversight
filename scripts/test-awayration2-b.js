@@ -14,8 +14,18 @@
 //     the analyzer must report zero structural errors, pack meals
 //     must exist in volume, and >= 90% of primary rows must join to
 //     a meal row (ate / ownEat coverage).
-//  C. (added with the fix) packKcal meal-path sizing + theft-path
-//     preservation fixtures — see the FIX section below.
+//  C. Fix proof (live fixture, RED on baseline, GREEN on the fix):
+//     on a fresh loaded game with a plentiful pantry, a meal-path
+//     packKcal(vid, 1200) for a HUNGRY villager must draw >= 1200
+//     (the old formula caps a hunger-100 villager at 1000, so this
+//     proves the hunger deduction is gone on the meal path); a
+//     theft-path packKcal(vid) for a hungry NON-bold villager must
+//     stay <= 1000 (old formula, hunger deduction still present);
+//     packKcal(vid, 100) must floor at >= 200; packKcal(vid, null)
+//     must fall back to the old-formula range [200, 1450]; the pantry
+//     must lose exactly the drawn kcal (honest real items, never
+//     conjured); and packMeal must still top up (reseed small, then
+//     packMeal to a bigger want takes the full want).
 //
 // Env: the sweep module asserts PLENTYDEPRI=1, DEPOSITGATE=1,
 // SEEDS (a legal list) and DAYS=100 at require time, so they are set
@@ -31,6 +41,7 @@ process.env.DAYS = '100';
 const assert = require('assert');
 const { aggregate } = require('./analyze-awayration2-b');
 const { oneRun } = require('./sweep-awayration2-b');
+const { loadGame, setupGame } = require('./sim-harness');
 
 function fixturePerSeed() {
   // One villager, three days + one dup day + one theft day.
@@ -105,6 +116,49 @@ async function main() {
   const joinRate = primaryKeys.size ? hit / primaryKeys.size : 0;
   assert.ok(joinRate >= 0.9, `meal join rate ${joinRate} < 0.9`);
   console.log(`leg B (live wiring + determinism) PASS: nPrimary=${live.nPrimary} joinRate=${joinRate.toFixed(3)} daysAlive=${r1.perSeed.daysAlive} packMeals=${r1.perSeed.packMealRows.length}`);
+
+  // --- Leg C: fix proof on a fresh fixture game ---
+  const { Game } = await loadGame({ seed: 7, mode: 'awayration2-b-fixture', fullTelemetry: false });
+  await setupGame(Game);
+  const v = Game.state.village;
+  const day = (Game.state.scholar || {}).day || 0;
+  try { if (Game.stockPantry) Game.stockPantry(50000, 'proof stock'); } catch (e) {}
+  const roster = (v.roster || []).filter(id => id && id !== Game.villagerId);
+  const fresh = (id) => { const p = (v.pack || {})[id]; return !p || p.day !== day; };
+  const pick = (pred) => roster.find(id => fresh(id) && (!pred || pred(id)));
+  // vidA: meal path, hungry — must draw >= 1200 (old formula caps at 1000).
+  const vidA = pick();
+  assert.ok(vidA, 'need a roster villager without a pack entry today (vidA)');
+  try { Game.npcNeeds(vidA).hunger = 100; } catch (e) {}
+  const pkBeforeA = Game.pantryKcalLive(v);
+  const retA = Game.packKcal(vidA, 1200);
+  const dawnA = (v.pack[vidA] || {}).dawnKcal;
+  const pkAfterA = Game.pantryKcalLive(v);
+  assert.ok(dawnA >= 1200, `meal-path dawn ${dawnA} must be >= want 1200`);
+  assert.strictEqual(pkBeforeA - pkAfterA, dawnA, 'pantry must lose exactly the drawn kcal (honest items)');
+  assert.ok(retA >= 1200, 'meal-path packKcal return must be >= want');
+  // vidB: theft path, hungry + non-bold — old formula caps at 1000.
+  const vidB = pick(id => { try { return Game.npcTemper(id) !== 'bold'; } catch (e) { return false; } });
+  assert.ok(vidB, 'need a hungry non-bold roster villager without a pack entry today (vidB)');
+  try { Game.npcNeeds(vidB).hunger = 100; } catch (e) {}
+  const retB = Game.packKcal(vidB);
+  assert.ok(retB >= 200 && retB <= 1000, `theft-path pack ${retB} must be in [200,1000] for hunger-100 non-bold (old formula)`);
+  // vidC: floor — meal-path want 100 must floor at >= 200.
+  const vidC = pick();
+  assert.ok(vidC, 'need a roster villager without a pack entry today (vidC)');
+  Game.packKcal(vidC, 100);
+  const dawnC = (v.pack[vidC] || {}).dawnKcal;
+  assert.ok(dawnC >= 200, `meal-path floor: dawn ${dawnC} must be >= 200 for want 100`);
+  // vidD: invalid mealWant falls back to the old-formula range.
+  const vidD = pick();
+  assert.ok(vidD, 'need a roster villager without a pack entry today (vidD)');
+  const retD = Game.packKcal(vidD, null);
+  assert.ok(retD >= 200 && retD <= 1450, `fallback pack ${retD} must be in old-formula range [200,1450]`);
+  // Top-up preserved: vidC's pack (~200-700 drawn) topped up to a 1500 want.
+  const exposure = Game.freshExposure ? Game.freshExposure() : { raw: [], unsafe: 0, poison: [], monster: [], spoiled: 0 };
+  const takeC = Game.packMeal(vidC, 1500, exposure);
+  assert.strictEqual(takeC, 1500, `packMeal top-up must take the full want 1500, got ${takeC}`);
+  console.log(`leg C (fix proof) PASS: mealDawn=${dawnA} theftPack=${retB} floorDawn=${dawnC} fallbackPack=${retD} topUpTake=${takeC}`);
 
   console.log('test-awayration2-b: ALL LEGS PASS');
 }

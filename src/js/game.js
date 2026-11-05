@@ -4174,17 +4174,32 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
 
     // packKcal: what this person is carrying today (kcal of rations).
     // Reseeds at dawn. Drawn from their share — the village feeds people.
-    packKcal(vid) {
+    // packKcal(vid, mealWant): the meal path (packMeal) passes the eater's
+    // actual dayWant. AWAY-RATION SIZE (sim-awayration2-b 2026-11-03):
+    // a meal-path pack is sized to dayWant — NO random term, NO hunger
+    // deduction (the hungrier carry less today, which is perverse), NO
+    // bold bonus — floored at 200, carried over from the old formula.
+    // Theft/intimidation callers pass NO mealWant and get the old
+    // formula exactly: they read packKcal directly and never reach the
+    // top-up path, so the theft pool is not resized by this change.
+    // A mealWant applies ONLY at reseed; a pack already seeded today
+    // (e.g. by a thief) stands, and the top-up still fills want − dawn.
+    packKcal(vid, mealWant) {
       const v = this.state.village;
       v.pack = v.pack || {};
       const today = this.state.scholar.day;
       let p = v.pack[vid];
       if (!p || p.day !== today) {
-        const need = this.npcNeeds(vid);
-        const temp = this.npcTemper(vid);
-        // The hungry carry less; the bold stash more. Roughly a day of food.
-        const base = 800 + Math.random() * 500 - (need.hunger || 0) * 3 + (temp === 'bold' ? 150 : 0);
-        const want = Math.max(200, Math.round(base));
+        let want;
+        if (typeof mealWant === 'number' && isFinite(mealWant) && mealWant > 0) {
+          want = Math.max(200, Math.round(mealWant));
+        } else {
+          const need = this.npcNeeds(vid);
+          const temp = this.npcTemper(vid);
+          // The hungry carry less; the bold stash more. Roughly a day of food.
+          const base = 800 + Math.random() * 500 - (need.hunger || 0) * 3 + (temp === 'bold' ? 150 : 0);
+          want = Math.max(200, Math.round(base));
+        }
         // HONEST RATIONS (2026-10-08): the ration is real items drawn from
         // the pantry at dawn — not phantom kcal. Risks ride along in
         // p.risks for the eat-time roll (claimed once, see packMeal).
@@ -30038,7 +30053,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // all. On the move, people eat what they carry.
     packMeal(vid, want, exposure) {
       const v = this.state.village;
-      const pool = this.packKcal(vid); // ensures today's ration is packed
+      // Meal-path sizing (sim-awayration2-b): size the pack to this
+      // meal's dayWant when it reseeds; a pack already seeded today
+      // stands (cache rule), and the top-up below still fills want − dawn.
+      const pool = this.packKcal(vid, want); // ensures today's ration is packed
       const p = (v.pack || {})[vid];
       // TAIL PACK TOP-UP (sim-packtail-b 2026-10-25): floor-only, meal-time
       // only. When the DAWN pack falls short of today's shortfall, top it
