@@ -71,7 +71,9 @@ pilgrimage walk-out (unload-then-fill ordering).
   Steps: (1) UNLOAD — if pack room < 3L, call `donateHaul`
   (competent's own surplus shed, exported) once; (2) FILL — call
   `Game.fillWater()` until the scholar carries 3L or a refusal
-  (null) stops the loop (max 3 calls, 10 kcal + 1 tick each). Counts
+  stops the loop (max 3 calls, 10 kcal + 1 tick each; fillWater
+  returns null on BOTH success and refusal, so the loop detects
+  success by the water count growing, not by the return value). Counts
   in ctx: `fillTopUps` (days the arm filled ≥1L), `fillTopUpLiters`,
   `fillUnloads`. The fill's own narration ("Filled 1L...") and
   refusals are the game's honest lines, not instrument text.
