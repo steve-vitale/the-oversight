@@ -94,6 +94,18 @@ A missed coverage bar is NO-GO, never re-scored against a friendlier split.
 If a metric proves wrong, write it under "metric review" and propose the
 revision for the NEXT run.
 
+## Amendment 1 (2026-11-05, before any seed ran — implementation detail)
+
+- TB `won` splits two ways: `kill` when a waveKillLog row matches this
+  fight strictly (same monster id, same day, killer among the fight's
+  fighters, scholar counting as `player`), else `rout` (the monster broke
+  and no kill is logged — never counted as a kill). The ending taxonomy
+  therefore gains `rout` for the player-TB channel only.
+- Field records carry `preRoundDealt`: damage dealt before round 1
+  (opening volley / closing strike). Per-round deltas sum to
+  `damageDealt` minus `preRoundDealt`; the analyzer states the split
+  rather than re-deriving the volley.
+
 ## Metric review (to fill after the panel)
 
 - (pending)

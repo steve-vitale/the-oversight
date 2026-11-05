@@ -537,6 +537,9 @@
         // must never read as a solo kill (fieldFightSummary used to say
         // "alone" for every vKill, including 3-fighter sortie kills).
         partySize: Math.max(1, (opts.allies || 0) + 1),
+        // FINISHLOG (2026-11-05): per-round finish records, one entry per
+        // round (see _flCloseRound). Record-only; no engine code reads it.
+        roundsDetail: [],
       };
       // LEARN-VS-FIGHT JUDGMENT (Steve 2026-10-13): default is learn-first.
       // It's much less risky to learn about a monster (observe, track,
@@ -1321,6 +1324,38 @@
       // set in the dance trick branch. Read at the break check,
       // where rec.trickDance has already been cleared.
       var dancedThisRound = false;
+      // FINISHLOG (2026-11-05): per-round close helper. _flStart holds the
+      // round-open snapshot; _flCloseRound pushes one entry per round with
+      // end-of-round HPs and that round's damage/tricks/abilities.
+      // Record-only: no RNG, no state writes, no outcome reads. When
+      // FINISHLOG_OFF=1 the capture is skipped entirely.
+      var _flOn = true;
+      try { _flOn = !(this.finishLogOff && this.finishLogOff()); } catch (e) { _flOn = true; }
+      var _flStart = null;
+      var _flCloseRound = function () {
+        try {
+          if (!_flOn || !_flStart) return;
+          var _last = rec.roundsDetail[rec.roundsDetail.length - 1];
+          if (_last && _last.round === _flStart.round) return;
+          var _allyTakenNow = (allyEntryHp > 0) ? Math.max(0, allyEntryHp - Math.max(0, allyHp)) : 0;
+          var _mHpTotal = 0;
+          for (var _mi = 0; _mi < members.length; _mi++) _mHpTotal += Math.max(0, members[_mi].hp);
+          rec.roundsDetail.push({
+            round: _flStart.round,
+            vHpStart: _flStart.vHp, mHpStart: _flStart.mHp, allyHpStart: _flStart.allyHp,
+            vHpEnd: Math.max(0, vHp), mHpEnd: Math.max(0, members[0].hp), allyHpEnd: (allyEntryHp > 0 ? allyHp : null),
+            mHpTotalEnd: _mHpTotal,
+            dealt: rec.mDealt - _flStart.mDealt, taken: rec.vTaken - _flStart.vTaken,
+            allyDealt: rec.allyDealt - _flStart.allyDealt, allyTaken: _allyTakenNow - _flStart.allyTaken,
+            abilities: (rec.ffFired || []).slice(_flStart.ffN),
+            tricks: (rec.trickLog || []).slice(_flStart.trickN),
+          });
+        } catch (e) {}
+      };
+      // Damage dealt before round 1 (opening volley / closing strike):
+      // the per-round deltas sum to damageDealt minus this, stated here so
+      // the books balance without re-deriving the volley.
+      if (_flOn) rec.flPreRoundDealt = rec.mDealt;
       for (var round = 1; round <= MAX_ROUNDS && !rec.outcome; round++) {
         rec.rounds = round;
         // FINISHERSIZE (sim-finishersize-a, 2026-11-06): the commit's
@@ -1345,6 +1380,10 @@
         // 101 r103 skill_used rows). The card's "full health, fresh
         // monster" is about how the round opens, not about winning initiative.
         var vHpRoundStart = vHp;
+        // FINISHLOG: round-open snapshot (before any damage this round).
+        try {
+          if (_flOn) _flStart = { round: round, vHp: vHp, mHp: members[0].hp, allyHp: (allyEntryHp > 0 ? allyHp : null), mDealt: rec.mDealt, vTaken: rec.vTaken, allyDealt: rec.allyDealt, allyTaken: (allyEntryHp > 0) ? Math.max(0, allyEntryHp - Math.max(0, allyHp)) : 0, ffN: (rec.ffFired || []).length, trickN: (rec.trickLog || []).length };
+        } catch (e) { _flStart = null; }
         abRoundTaken = 0;
         vStruckThisRound = false;
         dancedThisRound = false;
@@ -2191,6 +2230,9 @@
         // damage totals at morale entry (after the action phase).
         // Record only — no RNG, no stat, no decision reads this array.
         try { (rec.roundTotals = rec.roundTotals || []).push({ round: round, mDealt: rec.mDealt, vTaken: rec.vTaken, allyDealt: rec.allyDealt, allyTaken: rec.allyTaken }); } catch (e) {}
+        // FINISHLOG: the round's action phase is done (nothing after this
+        // point in the round deals damage), so close the round record here.
+        try { if (_flOn) _flCloseRound(); } catch (e) {}
         if (round >= 2) {
           var mlead = null;
           for (var lj = 0; lj < members.length; lj++) { if (members[lj].hp > 0) { mlead = members[lj]; break; } }
@@ -2487,8 +2529,13 @@
         if (abFrozenN > 0) abFrozenN--;
         if (abBoundN > 0) abBoundN--;
       }
+      // FINISHLOG (2026-11-05): close the terminal round when it broke
+      // before the morale-entry close above (kill, death, stare-down,
+      // peacemaker). Record-only; nothing reads these fields.
+      try { if (_flOn && rec.rounds > 0) _flCloseRound(); } catch (e) {}
       if (!rec.outcome) {
         // round cap: the worse-off side disengages
+        if (_flOn) rec.roundCap = true;
         var vFrac = vHp / vHpMax, mFrac = members[0].hp / members[0].maxHp;
         // ARENA PROTOCOL (Gap 4, 2026-10-10): sealed — nobody disengages.
         // The judges call it for the less-bloodied (duelFight precedent).
@@ -2650,6 +2697,10 @@
           }
         }
       } catch (e) { console.warn('[rearGuard]', e); }
+      // FINISHLOG (2026-11-05): emit the fight_finish record for wave-4+
+      // fights (finishLogField filters by wave). Record-only; the returned
+      // record is unchanged.
+      try { if (_flOn && this.finishLogField) this.finishLogField(rec, { vid: vid, mdef: mdef, wave: wave, vHpStart: vHpStart, vHpMax: vHpMax, wb: wb, varmor: varmor, vAbs: vAbs }); } catch (e) { console.warn('[finishLog] field', e); }
       var _sealEntries = [[vid, rec.vTaken,
         vid !== 'player' && vid !== this.villagerId ? { start: vHpStart, end: rec.vHpLeft } : null]];
       if (allySettles) _sealEntries.push([allyVid, allyTaken, { start: allyEntryHp, end: Math.max(0, allyHp) }]);

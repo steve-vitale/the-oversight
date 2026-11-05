@@ -792,6 +792,19 @@ THE FINALE is a three-node campaign, not one fight (Steve 2026-10-11: "super spe
 
 **Consumes:** —
 
+### finishLog (`finishLog.js`)
+Finishing instrument (2026-11-05, winnability chain): records how every wild wave-4+ fight ends, round by round, into game telemetry. Field fights carry per-round records on the returned record (built in fieldFights.js); player turn-based fights are observed via wraps here. Observe-only: no RNG, no outcome reads, no state writes except the telemetry ring and its own runtime ring.
+
+**Provides:** finishLogOff(), finishLogField(rec, meta), finishLogEmit(record), finishLogCloseOpen(reason)
+
+**Rules:**
+- observe_only: every wrap calls the original first and returns its result unchanged (tbEnd snapshots before, emits after) (code: finishLog.js)
+- no_rng: no Math.random anywhere in this module (code: finishLog.js)
+- record_only: the only writes are the telemetry ring, the runtime _finishLog ring, and record fields nothing in the engine reads (code: finishLog.js)
+- wave4_only: only wave-4+ fights are recorded or emitted (code: finishLog.js)
+
+**Consumes:** tele(), startCombat(), tbAdvance(), tbEnd(), useAbility(), waveKillLog (state)
+
 ### food (`food.js`)
 Food reality system. Food must be known-edible AND in edible state. Processing changes net calories.
 
