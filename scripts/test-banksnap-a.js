@@ -259,6 +259,7 @@ function rollAfterDailyInst() {
   check('genuine event is built + judged', ev && ev.kind === 'genuine' && ev.judged === true);
   check('genuine keeps the old RETAINED verdict', ev.rejudgedVerdict === 'RETAINED' && ev.retainedFinal === true);
   check('genuine snaps quote the food present at both ends', ev.preSnapshot.ediblePre === 360 && ev.preSnapshot.ediblePost === 360);
+  check('genuine carries no kcal residual (no injected food)', ev.preSnapshot.residualKcal === null);
 }
 
 // ---- summarizeDir: before/after on identical events ----
