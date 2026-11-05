@@ -84,7 +84,7 @@ function buildProbeEvents(inst) {
         probeAddedKcal: 0, waits: rec.waits || 0, via: null, injectedStack: null }));
       continue;
     }
-    if (!rec.staged) continue; // skips are not events
+    if (!rec.staged && rec.kind !== 'press-added') continue; // skips are not events
     const postBank = row.postDailyPack || rec.packAfter || null;
     const postEdible = postBank ? (postBank.edibleKcal || 0) : 0;
     const beforeEdible = rec.packBefore ? (rec.packBefore.edibleKcal || 0) : null;
@@ -96,11 +96,17 @@ function buildProbeEvents(inst) {
       (nextRow && nextRow.bankfoodMorning) || null;
     const judged = !!(nextRow && firstUp);
     const ev = { seed: inst.seed, loopDay: row.loopDay, gameDay: row.gameDay,
-      kind: 'staged', mode: 'bank-probe', probeRecord: true,
-      probeAddedKcal: rec.probeAddedKcal || 0, waits: rec.waits || 0, via: rec.via || null,
+      kind: rec.kind || (rec.staged ? 'staged' : 'unknown'), mode: 'bank-probe', probeRecord: true,
+      probeAddedKcal: rec.probeAddedKcal || 0, waits: rec.waits || 0,
+      rests: rec.rests || 0, presses: (rec.pressRecords || []).length,
+      via: rec.via || null,
       underlyingMode: rec.underlyingMode || null,
       packBeforeEdible: beforeEdible, postBankEdible: postEdible,
-      bankedEdibleDelta: delta, deltaMatchesProbe: delta === (rec.probeAddedKcal || 0),
+      bankedEdibleDelta: delta,
+      deltaMatchesProbe: rec.staged ? delta === (rec.probeAddedKcal || 0) : null,
+      deltaMatchesPresses: rec.kind === 'press-added' ? delta === (rec.pressDelta || 0) : null,
+      pressDelta: (rec.pressDelta === undefined ? null : rec.pressDelta),
+      pressEknown: (rec.pressEknown === undefined ? null : rec.pressEknown),
       source: sourceOf(beforeEdible, delta),
       postBank: postBank ? { edibleKcal: postBank.edibleKcal, grossKcal: postBank.grossKcal,
         lumpUnits: postBank.lumpUnits, stacks: postBank.stacks } : null,
@@ -115,7 +121,17 @@ function buildProbeEvents(inst) {
       ev.classification = classifyRetention(postBank, firstUp);
       ev.verdict = ev.classification.verdict;
       ev.retainedAtTrueMorning = ev.verdict === 'RETAINED' || ev.verdict === 'RETAINED-SPOIL-SWEPT';
-      ev.injectedStack = injectedStackCheck(postBank, rec.packBefore, firstUp, row.gameDay);
+      // Provenance: the injected-stack identity check applies to
+      // 'staged' only; 'press-added' carries press provenance.
+      if (ev.kind === 'staged') {
+        ev.injectedStack = injectedStackCheck(postBank, rec.packBefore, firstUp, row.gameDay);
+        ev.pressProvenance = null;
+      } else if (ev.kind === 'press-added') {
+        ev.injectedStack = null;
+        ev.pressProvenance = { presses: (rec.pressRecords || []).length,
+          rests: rec.rests || 0, pressEknown: rec.pressEknown || 0,
+          pressDelta: rec.pressDelta, deltaMatchesPresses: ev.deltaMatchesPresses };
+      } else { ev.injectedStack = null; ev.pressProvenance = null; }
       ev.morningPhase = morning ? { ate: morning.ate, eatErr: morning.eatErr || null,
         skip: morning.skip || null, kcalBefore: morning.kcalBefore,
         kcalAfterEat: morning.kcalAfterEat,
@@ -134,7 +150,8 @@ function summarizeDir(dir) {
   const insts = loadDir(dir);
   const report = { dir, seeds: {}, judgedEvents: [], censoredEvents: [],
     totals: { seeds: 0, strandedEvenings: 0, stagedTotal: 0, stagedJudged: 0,
-      stagedCensored: 0, genuineTotal: 0, genuineJudged: 0, genuineCensored: 0,
+      stagedCensored: 0, pressAddedTotal: 0, pressAddedJudged: 0,
+      pressAddedCensored: 0, genuineTotal: 0, genuineJudged: 0, genuineCensored: 0,
       judged: 0, censored: 0, retainedAtTrueMorning: 0, retainedClean: 0,
       retainedSpoilSwept: 0, vanished: 0, partialUnexplained: 0,
       injectedStackMatch: 0, injectedStackMismatch: 0,
@@ -160,6 +177,9 @@ function summarizeDir(dir) {
       stagedTotal: evs.filter((e) => e.kind === 'staged').length,
       stagedJudged: evs.filter((e) => e.kind === 'staged' && e.judged).length,
       stagedCensored: evs.filter((e) => e.kind === 'staged' && !e.judged).length,
+      pressAddedTotal: evs.filter((e) => e.kind === 'press-added').length,
+      pressAddedJudged: evs.filter((e) => e.kind === 'press-added' && e.judged).length,
+      pressAddedCensored: evs.filter((e) => e.kind === 'press-added' && !e.judged).length,
       genuineTotal: evs.filter((e) => e.kind === 'genuine').length,
       genuineJudged: evs.filter((e) => e.kind === 'genuine' && e.judged).length,
       genuineCensored: evs.filter((e) => e.kind === 'genuine' && !e.judged).length,
@@ -173,6 +193,7 @@ function summarizeDir(dir) {
     t.seeds++;
     t.strandedEvenings += strandedCount;
     t.stagedTotal += s.stagedTotal; t.stagedJudged += s.stagedJudged; t.stagedCensored += s.stagedCensored;
+    t.pressAddedTotal += s.pressAddedTotal; t.pressAddedJudged += s.pressAddedJudged; t.pressAddedCensored += s.pressAddedCensored;
     t.genuineTotal += s.genuineTotal; t.genuineJudged += s.genuineJudged; t.genuineCensored += s.genuineCensored;
     t.judged += judged.length; t.censored += cens.length;
     t.probeErrs += s.probeErrs; t.bfErrs += s.bfErrs;

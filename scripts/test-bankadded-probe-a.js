@@ -28,14 +28,15 @@ check('probeStackKey matches haul key', probeStackKey() === stackKey(haul));
 
 // ---- stagingDecision (pure) ----
 const base = { gameOver: false, combatLive: false, stranded: true,
-  genuineBankAdded: false, stagedSoFar: 0, cap: 2, clock: 300 };
+  genuineBankAdded: false, underlyingAdded: false, stagedSoFar: 0, cap: 2, clock: 300 };
 check('stranded + under cap stages', stagingDecision(base).stage === true);
-check('early clock stages via wait-to-band', stagingDecision(base).via === 'wait-to-band');
+check('early clock stages via advance-to-band', stagingDecision(base).via === 'advance-to-band');
 check('in-band clock stages already-in-band', stagingDecision(Object.assign({}, base, { clock: 460 })).via === 'already-in-band');
 check('game-over never stages', stagingDecision(Object.assign({}, base, { gameOver: true })).skip === 'game-over');
 check('combat never stages', stagingDecision(Object.assign({}, base, { combatLive: true })).skip === 'combat');
 check('not-stranded never stages', stagingDecision(Object.assign({}, base, { stranded: false })).skip === 'not-stranded');
 check('genuine bank-added never injects', stagingDecision(Object.assign({}, base, { genuineBankAdded: true })).skip === 'genuine-bank-added');
+check('underlying-added never injects', stagingDecision(Object.assign({}, base, { underlyingAdded: true })).skip === 'already-added');
 check('per-seed cap blocks third staging', stagingDecision(Object.assign({}, base, { stagedSoFar: 2 })).skip === 'per-seed-cap');
 check('one staged still allows second', stagingDecision(Object.assign({}, base, { stagedSoFar: 1 })).stage === true);
 
@@ -75,9 +76,12 @@ function stagedInst() {
     seed: 17063, daysAlive: 60, endReason: 'survived',
     bankfoodStore: { mornings: [morningRec(11)], evenings: [], firstUpkeeps: [], errs: 0, errors: [] },
     bankaddedProbeStore: { evenings: [
-      { loopDay: 10, gameDay: 10, mode: 'bank-probe', staged: true, genuine: false,
-        genuineDelta: null, underlyingMode: 'skip', ntOutcome: 'travel-refused',
-        clockBefore: 300, clockAfter: 449, waits: 2, via: 'wait-to-band',
+      { loopDay: 10, gameDay: 10, mode: 'bank-probe', kind: 'staged', staged: true, genuine: false,
+        genuineDelta: null, underlyingMode: 'skip', underlyingAdded: false,
+        ntOutcome: 'travel-refused',
+        clockBefore: 300, clockAfter: 449, rests: 2, restErr: null,
+        pressRecords: [], pressDelta: 0, pressEknown: 0, dayRolled: false,
+        advancerStop: null, via: 'advance-to-band',
         probeAddedKcal: 720, probeUnits: 18, probeSpoilDay: 12, skip: null,
         packBefore: emptyPack, packAfter: fullPack, kcalAfter: 100 },
     ], errs: 0, errors: [] },
@@ -101,6 +105,30 @@ check('staged source is banked (pack-before 0)', evs[0].source === 'banked');
 check('staged verdict RETAINED', evs[0].verdict === 'RETAINED' && evs[0].retainedAtTrueMorning === true);
 check('staged injected stack matches', evs[0].injectedStack && evs[0].injectedStack.match === true);
 check('staged morning still-in-pack', evs[0].morningDisposition && evs[0].morningDisposition.disposition === 'still-in-pack');
+check('staged advancer recorded rests', evs[0].rests === 2 && evs[0].presses === 0);
+
+// Press-added event: the advancer presses yielded food, no injection.
+const pressInst = stagedInst();
+pressInst.bankaddedProbeStore.evenings[0] = {
+  loopDay: 10, gameDay: 10, mode: 'bank-probe', kind: 'press-added', staged: false, genuine: false,
+  genuineDelta: null, underlyingMode: 'skip', underlyingAdded: false,
+  ntOutcome: 'travel-refused',
+  clockBefore: 300, clockAfter: 449, rests: 2, restErr: null,
+  pressRecords: [{ kind: 'forage', Eknown: 360, unknownUnits: 0, ticksBefore: 433, ticksAfter: 449 }],
+  pressDelta: 360, pressEknown: 360, dayRolled: false, advancerStop: null, via: 'advance-to-band',
+  probeAddedKcal: 0, probeUnits: 0, probeSpoilDay: null, skip: null,
+  packBefore: emptyPack, packAfter: pack([grapes(9, 12)], 360), kcalAfter: 100 };
+pressInst.evenings[0].postDailyPack = pack([grapes(9, 12)], 360);
+pressInst.firstUpkeeps = [{ scholarDay: 11, kcal: 100, dayTicks: 0, pack: pack([grapes(9, 12)], 360) }];
+pressInst.bankfoodStore.mornings = [morningRec(11, { packBefore: { edibleKcal: 360, grossKcal: 360, lumpUnits: 0 }, packAfter: { edibleKcal: 360, grossKcal: 360, lumpUnits: 0 } })];
+const pressEvs = buildProbeEvents(pressInst);
+check('press-added event is built', pressEvs.length === 1);
+check('press-added event kind', pressEvs[0].kind === 'press-added');
+check('press-added event is judged + retained', pressEvs[0].judged === true && pressEvs[0].verdict === 'RETAINED');
+check('press-added delta is 360', pressEvs[0].bankedEdibleDelta === 360);
+check('press-added delta matches presses', pressEvs[0].deltaMatchesPresses === true);
+check('press-added has no injected stack', pressEvs[0].injectedStack === null);
+check('press-added carries press provenance', pressEvs[0].pressProvenance && pressEvs[0].pressProvenance.pressEknown === 360 && pressEvs[0].pressProvenance.presses === 1);
 
 // Censored: no next loop-day row.
 const censNoNext = stagedInst();
@@ -190,6 +218,39 @@ try {
   check('2-seed temp dir: verdict INSUFFICIENT-DATA', rep2.totals.verdict === 'INSUFFICIENT-DATA');
   check('2-seed temp dir: goBarMet false', rep2.totals.goBarMet === false);
 } finally { fs.rmSync(tmp2, { recursive: true, force: true }); }
+
+const tmp3 = fs.mkdtempSync(path.join(os.tmpdir(), 'bankadded-probe-test3-'));
+try {
+  // Mixed kinds: 2 staged + 1 press-added -> GO-RETAINED, distinct 3.
+  const kinds = [[17064, 10, 'staged'], [17059, 20, 'staged'], [17063, 30, 'press-added']];
+  for (const [seed, day, kind] of kinds) {
+    const inst = stagedInst();
+    inst.seed = seed;
+    inst.bankaddedProbeStore.evenings[0].loopDay = day;
+    inst.bankaddedProbeStore.evenings[0].gameDay = day;
+    inst.evenings[0].loopDay = day; inst.evenings[0].gameDay = day;
+    inst.evenings[1].loopDay = day + 1; inst.evenings[1].gameDay = day + 1;
+    inst.evenings[1].bankfoodMorning.loopDay = day + 1;
+    inst.bankfoodStore.mornings[0].loopDay = day + 1;
+    inst.firstUpkeeps[0].scholarDay = day + 1;
+    inst.bankaddedProbeStore.evenings[0].probeSpoilDay = day + 2;
+    inst.evenings[0].postDailyPack.stacks[0].spoilDay = day + 2;
+    inst.firstUpkeeps[0].pack.stacks[0].spoilDay = day + 2;
+    if (kind === 'press-added') {
+      inst.bankaddedProbeStore.evenings[0].kind = 'press-added';
+      inst.bankaddedProbeStore.evenings[0].staged = false;
+      inst.bankaddedProbeStore.evenings[0].probeAddedKcal = 0;
+      inst.bankaddedProbeStore.evenings[0].pressDelta = 720;
+      inst.bankaddedProbeStore.evenings[0].pressEknown = 720;
+      inst.bankaddedProbeStore.evenings[0].pressRecords = [{ kind: 'forage', Eknown: 720 }];
+    }
+    writeInst(tmp3, seed, inst);
+  }
+  const rep3 = summarizeDir(tmp3);
+  check('mixed-kind temp dir: 3 distinct judged', rep3.totals.distinctJudged === 3);
+  check('mixed-kind temp dir: verdict GO-RETAINED', rep3.totals.verdict === 'GO-RETAINED');
+  check('mixed-kind temp dir: press-added counted', rep3.totals.pressAddedJudged === 1 && rep3.totals.stagedJudged === 2);
+} finally { fs.rmSync(tmp3, { recursive: true, force: true }); }
 
 console.log('test-bankadded-probe-a: ' + pass + ' passed, ' + fail + ' failed');
 if (fail) process.exit(1);
