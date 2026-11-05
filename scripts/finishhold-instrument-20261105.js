@@ -3,6 +3,9 @@
 // zero src/js. Extends secondkiller-instrument-20261105 (identical record shape, plus finishhold fields) (killsLive,
 // playerDeath context, daily snapshots, killer tracker, finalize) with
 // per-fight party/damage/swing records for wave-4+ fights:
+//  - TB fighters ALWAYS include the scholar vid (finishhold fix:
+//    companion-present fights previously dropped the scholar, so
+//    scholar kills matched no fight under the strict rule).
 //  - fieldFight wrapper: party (rec.partySize, allyVid, opts.allyFromStart),
 //    damage (mDealt + allyDealt vs entry HP), rounds (leader-strike proxy,
 //    stated), gear captured pre-fight (best-effort, null = unreadable,
@@ -231,7 +234,17 @@ function install(Game) {
           // and secondCandidates came out [] even though the scholar IS a
           // fresh candidate. Compute candidates from the SAME fighter list
           // the record carries (humans, else the scholar fallback).
-          const fightFighters = humans.length ? humans : [Game.villagerId || null];
+          // FINISHHOLD FIX (2026-11-05, pre-armed): the fallback above only
+          // covered SOLO scholar fights. With companions present, humans is
+          // non-empty and the scholar's vid was missing from fighters, so
+          // 4/11 baseline kills (all via player, scholar killer, companions
+          // present) matched NO fight under the strict rule. The scholar is
+          // always a fighter in a player TB fight, so their vid is always
+          // in the list now; firstKillerInFight reads the same list.
+          const fightFighters = humans.slice();
+          const _sv = Game.villagerId || null;
+          if (_sv && fightFighters.indexOf(_sv) < 0) fightFighters.push(_sv);
+          if (!fightFighters.length) fightFighters.push(_sv);
           const secondCandidates = fightFighters.filter(function (h) { return h && h !== fb.firstKiller && !hasWave4Kill(h); });
           openTb = {
             day: dayOf(Game), channel: 'player-tb', fighter: Game.villagerId || null,
@@ -247,7 +260,7 @@ function install(Game) {
             firstDay: fb.firstDay, firstKiller: fb.firstKiller,
             firstKillerAliveAtStart: fb.firstKillerAlive,
             daysSinceFirstBlood: fb.daysSinceFirstBlood,
-            firstKillerInFight: fb.firstKiller ? humans.indexOf(fb.firstKiller) >= 0 : false,
+            firstKillerInFight: fb.firstKiller ? fightFighters.indexOf(fb.firstKiller) >= 0 : false,
             secondCandidates: secondCandidates,
             secondCandidatePresent: secondCandidates.length > 0,
             _open: true,

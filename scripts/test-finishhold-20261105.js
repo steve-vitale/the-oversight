@@ -198,6 +198,28 @@ function ffight(o) {
     JSON.stringify(tb && { fighters: tb.fighters, sc: tb.secondCandidates }));
   inst.uninstall();
 })();
+// 25. FINISHHOLD FIX: TB with companions present — the scholar's vid must
+// be in the fighters list (their tbfight entry carries no villagerId),
+// so a scholar kill matches the fight under the strict rule.
+(function () {
+  const G = fakeGame();
+  G.startCombat = function (mid) { G.tbfight = { round: 1, fighters: [{ kind: 'villager', villagerId: 'ally1', hp: 80 }, { kind: 'player', hp: 80 }, { kind: 'monster', monsterId: 'w4a', mdef: { id: 'w4a' }, hp: 900 }] }; return true; };
+  const inst = INST.install(G);
+  G.startCombat('w4a');
+  G.tbfight.fighters[2].hp = 400; G.tbfight.round = 2;
+  G.tbEnd('won');
+  const tb = inst.t.fights[0];
+  check('tb-companion-scholar-in-fighters', tb && tb.fighters.indexOf('leader') >= 0 && tb.fighters.indexOf('ally1') >= 0 && tb.secondCandidatePresent === true,
+    JSON.stringify(tb && tb.fighters));
+  inst.uninstall();
+  const r = arow(5, {
+    fights: [ffight({ day: 20, channel: 'player-tb', fighters: ['ally1', 'leader'], fighter: 'leader', ending: 'kill-or-rout', outcomeRaw: 'won' })],
+    waveKillLog: [{ d: 20, mid: 'w4a', w: 4, by: 'leader', via: 'player' }],
+  });
+  const s5 = AN.analyzeSeed(JSON.parse(JSON.stringify(r)));
+  check('tb-companion-scholar-kill-matches', s5.w4killsMatched === 1 && s5.unmatchedKills === 0 && s5.fights[0].matchedKillBy === 'leader',
+    JSON.stringify({ matched: s5.w4killsMatched, unmatched: s5.unmatchedKills }));
+})();
 // 21. Analyzer corrects the solo-scholar candidate flag from fighters +
 // earlier-day kill history.
 (function () {
