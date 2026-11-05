@@ -1,0 +1,148 @@
+SEEDS: 41801 d37, 41802 d55, 41803 d102, 41804 d62
+
+seed 41801: days=37 endReason=village-lost fullConvs=34 naturalEnds=34 feasts=5 moots=1
+  decisions: {"party:accept":2,"lure:decline":3,"lure:accept":3,"party:decline":2}
+  BOND lure-by-inviter (scholar=Nina initialBearer=Maya): {"player:party:accept":2,"NPC:lure:decline":3,"NPC:lure:accept":3,"player:party:decline":2}
+  BOND successions: [{"day":9,"from":"Maya","to":"Naomi"},{"day":29,"from":"Naomi","to":"Sergio"},{"day":30,"from":"Sergio","to":"Netsanet"},{"day":34,"from":"Netsanet","to":"Aaliyah"},{"day":35,"from":"Aaliyah","to":"Katarina"},{"day":36,"from":"Katarina","to":"Nina"}]
+  BOND proposeWrapped={"proposeLink":true,"proposeCovenant":true,"proposeTrade":true} proposeCalls=0
+  BOND end bonds=53 sample={"key":"gen_5xt04vp|gen_mafafni","val":"{\"v\":39,\"depth\":1,\"day\":28,\"dayGain\":2}"}
+  plot plot_1 d16 leader=Katarina inviter=Vasyl target=Aaliyah sprung=true gT->L=60 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_3 d20 leader=Aaliyah inviter=Vasyl target=Katarina sprung=true gT->L=0 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_5 d23 leader=Aaliyah inviter=Vasyl target=Katarina sprung=true gT->L=0 gT->I=0 gA->Tmax=0 gI->T=0
+  armWrapped=true springWrapped=true
+  ARM d16 plot_1 Katarina->Aaliyah inviter=Vasyl motive={"score":56.36,"reasons":["grievance","ambition"]} gT->L=39.2 gL->T=39.2 accMotives=[{"who":"Rongo","score":0,"reasons":[],"grievance":0},{"who":"Vasyl","score":0,"reasons":[],"grievance":0}] trust={"leader":18,"Rongo":5,"Vasyl":6} goal=lead
+  ARM d20 plot_3 Aaliyah->Katarina inviter=Vasyl motive={"score":76.80000000000001,"reasons":["grievance"]} gT->L=36 gL->T=96 accMotives=[{"who":"Vasyl","score":0,"reasons":[],"grievance":0},{"who":"Rongo","score":0,"reasons":[],"grievance":0}] trust={"leader":90,"Vasyl":9,"Rongo":5} goal=heal
+  ARM d23 plot_5 Aaliyah->Katarina inviter=Vasyl motive={"score":74.88,"reasons":["grievance"]} gT->L=33.6 gL->T=93.6 accMotives=[{"who":"Vasyl","score":0,"reasons":[],"grievance":0},{"who":"Rongo","score":0,"reasons":[],"grievance":0}] trust={"leader":90,"Vasyl":11,"Rongo":2} goal=heal
+  SPRING d18 plot_1 Katarina->Aaliyah outcome=hurt case=case_2 endCase=case_2 charge=ambush status=resolved heardDay=19 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=4
+  SPRING d21 plot_3 Aaliyah->Katarina outcome=escaped case=case_4 endCase=case_4 charge=ambush status=acquitted heardDay=22 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=4
+  SPRING d23 plot_5 Aaliyah->Katarina outcome=escaped case=case_6 endCase=case_6 charge=ambush status=acquitted heardDay=24 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=4
+  expireWrapped=true expiredEvents=0
+  village fallen: 11 by cause: {"combat":1,"the wild":6,"monster":2,"a wound that wouldn't close":1,"starvation":1}
+  death clusters (>=3/day): none
+  ambush-caused fallen: []
+  (samples.deaths, all recorded incl. outsiders: 32 — NOT village deaths)
+  census: seed 41801, day 37, alive 4 | - Nina (mechanic, ?) trust=54 mood=neutral npcAbilities=0
+  M6 nightlyNews: strandedDays=0 burst=36 settle=18 witness=3 tale=13 | emitted-AWAY burst=0 settle=0 witness=0 tale=0 debatesKicked=18 settled=18 queuedAtEnd=0
+
+seed 41802: days=55 endReason=village-lost fullConvs=45 naturalEnds=44 feasts=7 moots=2
+  decisions: {"lure:decline":5,"party:accept":4,"party:decline":1}
+  BOND lure-by-inviter (scholar=Xavier initialBearer=Liam): {"NPC:lure:decline":5,"player:party:accept":4,"player:party:decline":1}
+  BOND successions: [{"day":36,"from":"Liam","to":"Atlas"},{"day":48,"from":"Atlas","to":"Sofia"},{"day":49,"from":"Sofia","to":"Lena"},{"day":54,"from":"Lena","to":"Nadia"},{"day":55,"from":"Nadia","to":"Ivy"}]
+  BOND proposeWrapped={"proposeLink":true,"proposeCovenant":true,"proposeTrade":true} proposeCalls=0
+  BOND end bonds=57 sample={"key":"gen_4xhj6e8|gen_7nz4esd","val":"{\"v\":49,\"depth\":1,\"day\":23,\"dayGain\":4,\"combat\":0}"}
+  plot plot_1 d11 leader=Lena inviter=Maya target=Ivy sprung=false gT->L=32.800000000000004 gT->I=0 gA->Tmax=0 gI->T=0
+  armWrapped=true springWrapped=true
+  ARM d11 plot_1 Lena->Ivy inviter=Maya motive={"score":37.120000000000005,"reasons":["grievance"]} gT->L=46.400000000000006 gL->T=46.400000000000006 accMotives=[{"who":"Yara","score":0,"reasons":[],"grievance":0},{"who":"Maya","score":25,"reasons":["ambition"],"grievance":0}] trust={"leader":58,"Yara":53,"Maya":35} goal=understand
+  expireWrapped=true expiredEvents=1
+  EXPIRED d16 plot_1 Lena->Ivy armedD11 linesNamingPairAfterExpiry=2
+  village fallen: 17 by cause: {"sickness":1,"the wild":12,"combat":1,"monster":1,"starvation":1,"the arena":1}
+  death clusters (>=3/day): d54x3 d55x7
+  ambush-caused fallen: []
+  (samples.deaths, all recorded incl. outsiders: 53 — NOT village deaths)
+  census: seed 41802, day 55, alive 0 | fallen: 17
+  M6 nightlyNews: strandedDays=6 burst=42 settle=21 witness=5 tale=15 | emitted-AWAY burst=0 settle=0 witness=0 tale=0 debatesKicked=22 settled=21 queuedAtEnd=0
+
+seed 41803: days=102 endReason=village-lost fullConvs=81 naturalEnds=74 feasts=14 moots=2
+  decisions: {"lure:accept":6,"lure:decline":2,"party:accept":6}
+  BOND lure-by-inviter (scholar=Fabrizio initialBearer=Jalen): {"NPC:lure:accept":6,"player:lure:decline":2,"player:party:accept":6}
+  BOND successions: [{"day":45,"from":"Jalen","to":"José"},{"day":54,"from":"José","to":"Maya"},{"day":62,"from":"Maya","to":"Dale"},{"day":64,"from":"Dale","to":"Nadia"},{"day":71,"from":"Nadia","to":"Victor"},{"day":72,"from":"Victor","to":"Lucas"},{"day":74,"from":"Lucas","to":"Sanne"},{"day":92,"from":"Sanne","to":"Amina"},{"day":94,"from":"Amina","to":"Huong"},{"day":101,"from":"Huong","to":"Fabrizio"}]
+  BOND proposeWrapped={"proposeLink":true,"proposeCovenant":true,"proposeTrade":true} proposeCalls=0
+  BOND end bonds=113 sample={"key":"gen_izezdai|gen_zspqs9y","val":"{\"v\":46,\"depth\":1,\"day\":26,\"dayGain\":4,\"combat\":0}"}
+  plot plot_1 d6 leader=Deirdre inviter=José target=Bac sprung=true gT->L=100 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_3 d8 leader=Deirdre inviter=José target=Bac sprung=true gT->L=100 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_5 d10 leader=Bac inviter=Lucas target=Deirdre sprung=true gT->L=60 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_7 d12 leader=Deirdre inviter=José target=Bac sprung=true gT->L=100 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_9 d13 leader=Deirdre inviter=José target=Bac sprung=true gT->L=100 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_11 d16 leader=Deirdre inviter=José target=Bac sprung=true gT->L=100 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_13 d17 leader=José inviter=Lucas target=Jalen sprung=false gT->L=0 gT->I=0 gA->Tmax=88 gI->T=22
+  plot plot_14 d24 leader=José inviter=José target=Jalen sprung=false gT->L=0 gT->I=0 gA->Tmax=88 gI->T=100
+  plot plot_15 d36 leader=José inviter=José target=Jalen sprung=false gT->L=0 gT->I=0 gA->Tmax=88 gI->T=100
+  plot plot_16 d42 leader=José inviter=José target=Jalen sprung=false gT->L=0 gT->I=0 gA->Tmax=88 gI->T=100
+  armWrapped=true springWrapped=true
+  ARM d6 plot_1 Deirdre->Bac inviter=José motive={"score":43.52000000000001,"reasons":["grievance"]} gT->L=54.400000000000006 gL->T=54.400000000000006 accMotives=[{"who":"José","score":25,"reasons":["ambition"],"grievance":0},{"who":"Dale","score":0,"reasons":[],"grievance":0}] trust={"leader":50,"José":1,"Dale":23} goal=home
+  ARM d8 plot_3 Deirdre->Bac inviter=José motive={"score":42.24000000000001,"reasons":["grievance"]} gT->L=52.800000000000004 gL->T=52.800000000000004 accMotives=[{"who":"José","score":25,"reasons":["ambition"],"grievance":0},{"who":"Dale","score":0,"reasons":[],"grievance":0}] trust={"leader":74,"José":4,"Dale":27} goal=home
+  ARM d10 plot_5 Bac->Deirdre inviter=Lucas motive={"score":80,"reasons":["grievance"]} gT->L=51.2 gL->T=100 accMotives=[{"who":"José","score":25,"reasons":["ambition"],"grievance":0},{"who":"Lucas","score":0,"reasons":[],"grievance":0}] trust={"leader":26,"José":2,"Lucas":31} goal=joy
+  ARM d12 plot_7 Deirdre->Bac inviter=José motive={"score":80,"reasons":["grievance"]} gT->L=100 gL->T=100 accMotives=[{"who":"Dale","score":0,"reasons":[],"grievance":0},{"who":"José","score":25,"reasons":["ambition"],"grievance":0}] trust={"leader":77,"Dale":5,"José":2} goal=home
+  ARM d13 plot_9 Deirdre->Bac inviter=José motive={"score":80,"reasons":["grievance"]} gT->L=100 gL->T=100 accMotives=[{"who":"Dale","score":0,"reasons":[],"grievance":0},{"who":"José","score":25,"reasons":["ambition"],"grievance":0}] trust={"leader":84,"Dale":5,"José":8} goal=home
+  ARM d16 plot_11 Deirdre->Bac inviter=José motive={"score":80,"reasons":["grievance"]} gT->L=100 gL->T=100 accMotives=[{"who":"Dale","score":0,"reasons":[],"grievance":0},{"who":"José","score":25,"reasons":["ambition"],"grievance":0}] trust={"leader":90,"Dale":8,"José":16} goal=home
+  ARM d17 plot_13 José->Jalen inviter=Lucas motive={"score":95.4,"reasons":["grievance","ambition"]} gT->L=0 gL->T=88 accMotives=[{"who":"Dale","score":52.800000000000004,"reasons":["grievance"],"grievance":66},{"who":"Lucas","score":17.6,"reasons":["grievance"],"grievance":22}] trust={"leader":12,"Dale":2,"Lucas":8} goal=lead
+  ARM d24 plot_14 José->Jalen inviter=José motive={"score":100,"reasons":["grievance","ambition"]} gT->L=0 gL->T=100 accMotives=[{"who":"Dale","score":70.4,"reasons":["grievance"],"grievance":88},{"who":"Lucas","score":17.6,"reasons":["grievance"],"grievance":22}] trust={"leader":90,"Dale":4,"Lucas":27} goal=lead
+  ARM d36 plot_15 José->Jalen inviter=José motive={"score":100,"reasons":["grievance","ambition"]} gT->L=0 gL->T=100 accMotives=[{"who":"Dale","score":70.4,"reasons":["grievance"],"grievance":88},{"who":"Lucas","score":17.6,"reasons":["grievance"],"grievance":22}] trust={"leader":90,"Dale":37,"Lucas":52} goal=lead
+  ARM d42 plot_16 José->Jalen inviter=José motive={"score":100,"reasons":["grievance","ambition"]} gT->L=0 gL->T=100 accMotives=[{"who":"Dale","score":70.4,"reasons":["grievance"],"grievance":88},{"who":"Lucas","score":17.6,"reasons":["grievance"],"grievance":22}] trust={"leader":90,"Dale":45,"Lucas":58} goal=lead
+  SPRING d6 plot_1 Deirdre->Bac outcome=escaped case=case_2 endCase=case_2 charge=ambush status=acquitted heardDay=8 heardPassed=true surfaced=true surfacedSnapDay=60 ambushLinesNaming=6
+  SPRING d8 plot_3 Deirdre->Bac outcome=hurt case=case_4 endCase=case_4 charge=ambush status=acquitted heardDay=9 heardPassed=true surfaced=true surfacedSnapDay=60 ambushLinesNaming=6
+  SPRING d10 plot_5 Bac->Deirdre outcome=hurt case=case_6 endCase=case_6 charge=ambush status=resolved heardDay=12 heardPassed=true surfaced=true surfacedSnapDay=60 ambushLinesNaming=6
+  SPRING d12 plot_7 Deirdre->Bac outcome=escaped case=case_8 endCase=case_8 charge=ambush status=acquitted heardDay=13 heardPassed=true surfaced=true surfacedSnapDay=60 ambushLinesNaming=6
+  SPRING d13 plot_9 Deirdre->Bac outcome=hurt case=case_10 endCase=case_10 charge=ambush status=acquitted heardDay=14 heardPassed=true surfaced=true surfacedSnapDay=60 ambushLinesNaming=6
+  SPRING d16 plot_11 Deirdre->Bac outcome=killed case=case_12 endCase=case_12 charge=murder status=acquitted heardDay=17 heardPassed=true surfaced=true surfacedSnapDay=60 ambushLinesNaming=6
+  expireWrapped=true expiredEvents=4
+  EXPIRED d22 plot_13 José->Jalen armedD17 linesNamingPairAfterExpiry=1
+  EXPIRED d29 plot_14 José->Jalen armedD24 linesNamingPairAfterExpiry=1
+  EXPIRED d41 plot_15 José->Jalen armedD36 linesNamingPairAfterExpiry=1
+  EXPIRED d47 plot_16 José->Jalen armedD42 linesNamingPairAfterExpiry=0
+  village fallen: 20 by cause: {"ambush":1,"monster":4,"combat":1,"the wild":13,"a wound that wouldn't close":1}
+  death clusters (>=3/day): d101x3
+  ambush-caused fallen: [{"who":"Bac","day":16,"cause":"ambush"}]
+  (samples.deaths, all recorded incl. outsiders: 76 — NOT village deaths)
+  census: seed 41803, day 102, alive 0 | fallen: 20
+  M6 nightlyNews: strandedDays=2 burst=92 settle=44 witness=11 tale=28 | emitted-AWAY burst=0 settle=0 witness=0 tale=0 debatesKicked=46 settled=46 queuedAtEnd=0
+
+seed 41804: days=62 endReason=village-lost fullConvs=58 naturalEnds=51 feasts=8 moots=0
+  decisions: {"lure:accept":5,"party:decline":4,"lure:decline":5,"party:accept":1}
+  BOND lure-by-inviter (scholar=Nikos initialBearer=Raj): {"NPC:lure:accept":5,"player:party:decline":4,"NPC:lure:decline":5,"player:party:accept":1}
+  BOND successions: [{"day":53,"from":"Raj","to":"Francisco"},{"day":58,"from":"Francisco","to":"Giulia"},{"day":60,"from":"Giulia","to":"Thamer"},{"day":61,"from":"Thamer","to":"Gina"},{"day":62,"from":"Gina","to":"Nikos"}]
+  BOND proposeWrapped={"proposeLink":true,"proposeCovenant":true,"proposeTrade":true} proposeCalls=0
+  BOND end bonds=56 sample={"key":"gen_n1ctk7k|gen_y5wrj5j","val":"{\"v\":8,\"depth\":0,\"day\":13,\"dayGain\":2,\"combat\":4}"}
+  plot plot_1 d7 leader=Michael inviter=Jorge target=Nikos sprung=true gT->L=100 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_3 d8 leader=Michael inviter=Jorge target=Nikos sprung=true gT->L=100 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_5 d11 leader=Nikos inviter=Giulia target=Michael sprung=true gT->L=60 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_7 d14 leader=Michael inviter=Jorge target=Nikos sprung=true gT->L=100 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_9 d16 leader=Michael inviter=Jorge target=Nikos sprung=true gT->L=100 gT->I=0 gA->Tmax=0 gI->T=0
+  armWrapped=true springWrapped=true
+  ARM d7 plot_1 Michael->Nikos inviter=Jorge motive={"score":67.88,"reasons":["grievance","ambition"]} gT->L=53.6 gL->T=53.6 accMotives=[{"who":"Jorge","score":12,"reasons":["prove"],"grievance":0},{"who":"Giulia","score":0,"reasons":[],"grievance":0}] trust={"leader":14,"Jorge":26,"Giulia":27} goal=lead
+  ARM d8 plot_3 Michael->Nikos inviter=Jorge motive={"score":67.24000000000001,"reasons":["grievance","ambition"]} gT->L=52.800000000000004 gL->T=52.800000000000004 accMotives=[{"who":"Jorge","score":12,"reasons":["prove"],"grievance":0},{"who":"Giulia","score":0,"reasons":[],"grievance":0}] trust={"leader":14,"Jorge":34,"Giulia":27} goal=lead
+  ARM d11 plot_5 Nikos->Michael inviter=Giulia motive={"score":80,"reasons":["grievance"]} gT->L=50.400000000000006 gL->T=100 accMotives=[{"who":"Jorge","score":12,"reasons":["prove"],"grievance":0},{"who":"Giulia","score":0,"reasons":[],"grievance":0}] trust={"leader":53,"Jorge":39,"Giulia":31} goal=survive
+  ARM d14 plot_7 Michael->Nikos inviter=Jorge motive={"score":100,"reasons":["grievance","ambition"]} gT->L=100 gL->T=100 accMotives=[{"who":"Jorge","score":12,"reasons":["prove"],"grievance":0},{"who":"Giulia","score":0,"reasons":[],"grievance":0}] trust={"leader":20,"Jorge":51,"Giulia":39} goal=lead
+  ARM d16 plot_9 Michael->Nikos inviter=Jorge motive={"score":100,"reasons":["grievance","ambition"]} gT->L=100 gL->T=100 accMotives=[{"who":"Giulia","score":0,"reasons":[],"grievance":0},{"who":"Jorge","score":12,"reasons":["prove"],"grievance":0}] trust={"leader":33,"Giulia":40,"Jorge":59} goal=lead
+  SPRING d7 plot_1 Michael->Nikos outcome=escaped case=case_2 endCase=case_2 charge=ambush status=acquitted heardDay=9 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=5
+  SPRING d8 plot_3 Michael->Nikos outcome=hurt case=case_4 endCase=case_4 charge=ambush status=acquitted heardDay=9 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=5
+  SPRING d11 plot_5 Nikos->Michael outcome=hurt case=case_6 endCase=case_6 charge=ambush status=acquitted heardDay=12 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=5
+  SPRING d15 plot_7 Michael->Nikos outcome=escaped case=case_8 endCase=case_8 charge=ambush status=resolved heardDay=17 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=5
+  SPRING d20 plot_9 Michael->Nikos outcome=hurt case=case_10 endCase=case_10 charge=ambush status=acquitted heardDay=21 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=5
+  expireWrapped=true expiredEvents=0
+  village fallen: 8 by cause: {"monster":2,"Static":1,"the wild":5}
+  death clusters (>=3/day): none
+  ambush-caused fallen: []
+  (samples.deaths, all recorded incl. outsiders: 40 — NOT village deaths)
+  census: seed 41804, day 62, alive 4 | - Nikos (aquarium_keeper, ?) trust=67 mood=friendly npcAbilities=0
+  M6 nightlyNews: strandedDays=0 burst=54 settle=26 witness=5 tale=15 | emitted-AWAY burst=0 settle=0 witness=0 tale=0 debatesKicked=27 settled=27 queuedAtEnd=0
+
+PANEL lure/party decisions: {"party:accept":13,"lure:decline":15,"lure:accept":14,"party:decline":7}
+PANEL lure-by-inviter: {"player:party:accept":13,"NPC:lure:decline":13,"NPC:lure:accept":14,"player:party:decline":7,"player:lure:decline":2}
+PANEL successions: [{"day":9,"from":"Maya","to":"Naomi","seed":41801},{"day":29,"from":"Naomi","to":"Sergio","seed":41801},{"day":30,"from":"Sergio","to":"Netsanet","seed":41801},{"day":34,"from":"Netsanet","to":"Aaliyah","seed":41801},{"day":35,"from":"Aaliyah","to":"Katarina","seed":41801},{"day":36,"from":"Katarina","to":"Nina","seed":41801},{"day":36,"from":"Liam","to":"Atlas","seed":41802},{"day":48,"from":"Atlas","to":"Sofia","seed":41802},{"day":49,"from":"Sofia","to":"Lena","seed":41802},{"day":54,"from":"Lena","to":"Nadia","seed":41802},{"day":55,"from":"Nadia","to":"Ivy","seed":41802},{"day":45,"from":"Jalen","to":"José","seed":41803},{"day":54,"from":"José","to":"Maya","seed":41803},{"day":62,"from":"Maya","to":"Dale","seed":41803},{"day":64,"from":"Dale","to":"Nadia","seed":41803},{"day":71,"from":"Nadia","to":"Victor","seed":41803},{"day":72,"from":"Victor","to":"Lucas","seed":41803},{"day":74,"from":"Lucas","to":"Sanne","seed":41803},{"day":92,"from":"Sanne","to":"Amina","seed":41803},{"day":94,"from":"Amina","to":"Huong","seed":41803},{"day":101,"from":"Huong","to":"Fabrizio","seed":41803},{"day":53,"from":"Raj","to":"Francisco","seed":41804},{"day":58,"from":"Francisco","to":"Giulia","seed":41804},{"day":60,"from":"Giulia","to":"Thamer","seed":41804},{"day":61,"from":"Thamer","to":"Gina","seed":41804},{"day":62,"from":"Gina","to":"Nikos","seed":41804}]
+PANEL propose* calls: 0 (none observed)
+PANEL end bonds per seed: [53,57,113,56]
+PANEL bond initiator recorded by engine: NO — bond records carry no initiator field; NPC-initiated formation cannot be inferred from end bonds
+PANEL plots: 19 (late d30+: 2)
+PANEL plots with grievanceTargetToLeader > 0: 13
+PANEL grievance-holder -> later leader cases: 13
+  {"seed":41801,"plot":"plot_3","leader":"Aaliyah","plotDay":20,"grievances":["ambushed->Katarina d18 sev60"]}
+  {"seed":41801,"plot":"plot_5","leader":"Aaliyah","plotDay":23,"grievances":["ambushed->Katarina d18 sev60"]}
+  {"seed":41803,"plot":"plot_5","leader":"Bac","plotDay":10,"grievances":["ambushed->Deirdre d8 sev60"]}
+  {"seed":41803,"plot":"plot_7","leader":"Deirdre","plotDay":12,"grievances":["ambushed->Bac d10 sev60","voted_guilty->Jalen d11 sev22"]}
+  {"seed":41803,"plot":"plot_9","leader":"Deirdre","plotDay":13,"grievances":["ambushed->Bac d10 sev60","voted_guilty->Jalen d11 sev22","voted_guilty->Jalen d12 sev22"]}
+  {"seed":41803,"plot":"plot_11","leader":"Deirdre","plotDay":16,"grievances":["ambushed->Bac d10 sev60","voted_guilty->Jalen d11 sev22","voted_guilty->Jalen d12 sev22"]}
+  {"seed":41803,"plot":"plot_13","leader":"José","plotDay":17,"grievances":["voted_guilty->Jalen d11 sev22","voted_guilty->Jalen d12 sev22","voted_guilty->Jalen d15 sev22"]}
+  {"seed":41803,"plot":"plot_14","leader":"José","plotDay":24,"grievances":["voted_guilty->Jalen d11 sev22","voted_guilty->Jalen d12 sev22","voted_guilty->Jalen d15 sev22","voted_guilty->Jalen d17 sev22","voted_guilty->Jalen d21 sev22"]}
+  {"seed":41803,"plot":"plot_15","leader":"José","plotDay":36,"grievances":["voted_guilty->Jalen d11 sev22","voted_guilty->Jalen d12 sev22","voted_guilty->Jalen d15 sev22","voted_guilty->Jalen d17 sev22","voted_guilty->Jalen d21 sev22","voted_for_petitioners->Jalen d29 sev14"]}
+  {"seed":41803,"plot":"plot_16","leader":"José","plotDay":42,"grievances":["voted_guilty->Jalen d11 sev22","voted_guilty->Jalen d12 sev22","voted_guilty->Jalen d15 sev22","voted_guilty->Jalen d17 sev22","voted_guilty->Jalen d21 sev22","voted_for_petitioners->Jalen d29 sev14"]}
+  {"seed":41804,"plot":"plot_5","leader":"Nikos","plotDay":11,"grievances":["ambushed->Michael d8 sev60"]}
+  {"seed":41804,"plot":"plot_7","leader":"Michael","plotDay":14,"grievances":["ambushed->Nikos d11 sev60"]}
+  {"seed":41804,"plot":"plot_9","leader":"Michael","plotDay":16,"grievances":["ambushed->Nikos d11 sev60"]}
+PANEL arms: 19 (late d30+: 2) grievance-linked at arming: 19
+PANEL springs: 14 outcomes: {"hurt":7,"escaped":6,"killed":1}
+PANEL escaped springs: 6
+PANEL expired plots: 5
+PANEL villages past d100: 1/4
+PANEL M6 haven-news: strandedDays=8 deliveredAtHaven burst=224 settle=109 witness=24 tale=71 | emittedAway burst=0 settle=0 witness=0 tale=0 debatesKicked=113 namesSettled=112
+PANEL M6 verdict: GO — no naming-beat line was emitted while the scholar was away, debates alive
