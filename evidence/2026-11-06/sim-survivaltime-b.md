@@ -3,9 +3,9 @@
 - Run: `fleshout-loop-b-20261106T1730Z`, arm 1 of 3, axis scale-onramp /
   winnability chain (Steve 2026-11-03 re-point)
 - Arm: `sim-survivaltime-b`, branch `sim-survivaltime-b`
-- Base at prereg: `dc76d9bf6`; master has since moved to `8a975ad45`
-  (journey-deepening r109, instrument-only) — rebase pending at write time,
-  see footer
+- Base at prereg: `dc76d9bf6`; rebased onto explicit master
+  `328c59f9181d5c8d90b4f2f735027f5438464102` at closeout — see Commits /
+  footer for the rebase record
 - Policy: competent verbatim, BOTH legs (the lever is game code, not policy)
 - Horizon: 150d death-aware. Seeds: **88001–88008** (fresh band, verified in
   prereg). Corpus: `evidence/2026-11-06/perseed-survivaltime-b/` (16 files,
@@ -397,21 +397,37 @@ here." No telemetry compare was fabricated. `balance-panel.js` takes no
 corpus input (`--out <panel-directory>` only — it builds a panel from its
 own configured seeds), so no panel compare.md was fabricated either.
 
-## Commits
+## Commits (rebased — SHAs below are post-rebase)
 
-- `53e4f884d` — prereg + instrument/driver/analyzer (before any judged sim)
-- `6bca8e380` — build: armor curve K=20→6 + proof 39/39; oracle/cap/bark
+- `ac17f5fc1` — prereg + instrument/driver/analyzer (before any judged sim)
+- `2910ac4e9` — build: armor curve K=20→6 + proof 39/39; oracle/cap/bark
   tests updated by design
-- `ce4ad5ba0` — evidence file + prereg metric-review fill (this file's
-  first commit); corpus in the follow-up commit below
-- `812c04765` — pilot corpus 88001–88008, 16 files both legs
-- `7bbded9ed` — aegis fix (test-only, 90 → 95) + check.js --quick
+- `1a31a3faf` — evidence file + prereg metric-review fill
+- `4059dd863` — pilot corpus 88001–88008, 16 files both legs
+- `1ee9cee63` — aegis fix (test-only, 90 → 95) + check.js --quick
   results written into this file
+- `743c129e1` — record corpus + aegis-fix commit SHAs in evidence file
+- (footer commit — this file's rebase record: SHA recorded at commit time)
+
+Rebase: branch based on master `dc76d9bf6`; rebased onto explicit master
+`328c59f9181d5c8d90b4f2f735027f5438464102` (master had moved through
+`8a975ad45` and `5ba7f167f` meanwhile). Pre-rebase HEAD was
+`3fe756ffd61f0cf47155246817353c2b3f34cc48`; post-rebase HEAD is
+`743c129e1da42cbb4a20431218dfb0c8a7fa799c`. Pre-rebase SHAs for the same
+commits: prereg `53e4f884d`, build `6bca8e380`, evidence `ce4ad5ba0`,
+corpus `812c04765`, aegis fix `7bbded9ed`, SHAs record `3fe756ffd`.
+The armed pilot leg ran on the pre-rebase build commit `6bca8e380` src,
+byte-identical to post-rebase `2910ac4e9` src (rebase replayed cleanly,
+no conflicts); the aegis fix touches no src behavior, so no re-run of
+the pilot was needed.
 
 ## Footer (filled at closeout)
 
 - check.js --quick: 282 passed, 8 failed, EXIT=1 (834s, log
   `/tmp/st-checkquick.log`). 7 pre-existing on base code; 1 (aegis)
   caused by the retune, fixed test-only (90 → 95, 12/12 green).
-- Rebase: pre-rebase HEAD / post-rebase base SHA (pending)
-- Proof test on rebased tip: (pending)
+- Rebase: pre-rebase HEAD `3fe756ffd61f0cf47155246817353c2b3f34cc48`;
+  rebased onto explicit master `328c59f9181d5c8d90b4f2f735027f5438464102`;
+  post-rebase HEAD `743c129e1da42cbb4a20431218dfb0c8a7fa799c` (before this
+  footer commit). Clean replay, no conflicts, no stop-at-pick quirk.
+- Proof test on rebased tip: (pending — run after this footer commit)
