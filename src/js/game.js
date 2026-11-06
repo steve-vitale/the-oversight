@@ -40036,12 +40036,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
 
     // tbVillagerWaitLine: the rotating hold line for a villager with
     // nothing to do this turn (journey-endgame r147 — Fix B volume).
-    // A transient fight-level counter (f._waitCount) picks the line so
-    // consecutive waits in one fight never repeat. Deterministic: no
-    // RNG, the same fight replays the same lines in the same order.
+    // A transient RUN-level counter (this._waitLineCount) picks the line
+    // so consecutive waits never repeat — per-fight counters restart at
+    // line 0, and the r147 smoke run showed the restart artifact: a
+    // fight ending on line 0 followed by a new fight opening on line 0
+    // reads as the same stuck record across the boundary. Deterministic:
+    // no RNG, the same run replays the same lines in the same order.
     // The first line stays "holds and watches" — the r143 Fix B proof
-    // (test-ruth-wait-v1a-r143 Part C) asserts a fresh fight's first
-    // wait says exactly that.
+    // (test-ruth-wait-v1a-r143 Part C) asserts a fresh run's first wait
+    // says exactly that.
     tbVillagerWaitLine(v) {
       const LINES = [
         (n) => `${n} holds and watches.`,
@@ -40050,9 +40053,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         (n) => `${n} stands ready, watching.`,
         (n) => `${n} keeps their distance and watches.`,
       ];
-      const f = this.tbfight || {};
-      const idx = (f._waitCount || 0) % LINES.length;
-      f._waitCount = (f._waitCount || 0) + 1;
+      const idx = (this._waitLineCount || 0) % LINES.length;
+      this._waitLineCount = (this._waitLineCount || 0) + 1;
       return LINES[idx](v.name);
     },
 

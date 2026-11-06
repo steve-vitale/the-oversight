@@ -95,11 +95,15 @@ THIS RUN'S BUILD — Fix B volume (r144 carry-forward, question 6):
 r144 counted "holds and watches" 547x on 89701 (r143 post-fix:
 120x), clustering in threes — the same fixed line, a stuck record.
 The build: the wait branch in game.js tbVillagerTurn rotates the
-hold line through a small fixed set via a transient fight-level
-counter (f._waitCount), so consecutive waits in one fight never
-read the same line twice. No silent turns (canon: no silent
-actions) — every wait still narrates, only the wording varies.
-Deterministic, no RNG, no mechanics change. Proof test:
+hold line through a small fixed set via a transient run-level counter
+(Game._waitLineCount), so consecutive waits never read the same line
+twice — including across fight boundaries. (CORRECTED pre-pilot from
+the first draft's fight-level counter: the r147 smoke run showed the
+fight-level counter's restart artifact — a fight ending on line 0
+followed by a new fight opening on line 0, 2 adjacent repeats in 15
+holds. The binding is unchanged; only the mechanism moved.) No
+silent turns (canon: no silent actions) — every wait still narrates,
+only the wording varies. Deterministic, no RNG, no mechanics change. Proof test:
 scripts/test-tbwait-variety-20261106.js — (1) the line rotates
 through the set without repeating adjacently across many waits in
 one fight; (2) the full set is reachable; (3) a fresh fight starts

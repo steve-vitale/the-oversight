@@ -19,7 +19,10 @@
 //   (4) the first wait says "holds and watches" (r143 compatibility);
 //   (5) no line monopolizes: the first line appears at most ceil(12/5)
 //       times across the 12 waits;
-//   (6) the rotation is per-fight: a fresh fight object starts at line 0.
+//   (6) the rotation is run-level, not per-fight: a fresh fight object
+//       continues the sequence instead of restarting at line 0 (the
+//       restart artifact produced adjacent repeats across fight
+//       boundaries in the r147 smoke run).
 // Usage: node scripts/test-tbwait-variety-20261106.js
 'use strict';
 const assert = require('assert');
@@ -49,9 +52,11 @@ function holdIndex(line) {
   assert.strictEqual(direct[1], 'Test waits, eyes on the beast.', 'rotation must advance to line 1');
   assert.strictEqual(direct[5], 'Test holds and watches.', 'rotation must wrap after 5 lines');
   for (let i = 1; i < direct.length; i++) assert.notStrictEqual(direct[i], direct[i - 1], 'adjacent direct lines must differ');
-  // Fresh fight object restarts the rotation.
+  // A new fight object CONTINUES the rotation (run-level counter) —
+  // no restart to line 0: after 6 direct calls the next line is index
+  // 6 % 5 = 1, even on a fresh fight object.
   Gu.tbfight = {};
-  assert.strictEqual(Gu.tbVillagerWaitLine({ name: 'Test' }), 'Test holds and watches.', 'a new fight must restart the rotation at line 0');
+  assert.strictEqual(Gu.tbVillagerWaitLine({ name: 'Test' }), 'Test waits, eyes on the beast.', 'a new fight must continue the rotation, not restart at line 0');
 
   // ---- Live turn check: 12 forced waits in one field fight.
   const Game2 = await L.load({ seed: 99101 });
