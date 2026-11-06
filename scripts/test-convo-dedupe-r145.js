@@ -116,5 +116,73 @@ for (const [pool, n, key] of keys) {
   const hits = lines.filter((l) => firstN(l, n) === key);
   if (hits.length > 1) fail(`${pool} [${key}] still x${hits.length}: ${hits.join(' || ')}`);
 }
+// (5) CROSS-STRUCTURE (r145 panel): goal-definition lines (goals[].lines,
+// the opener pool) vs goalFollow[goal] (the depth pool) held the SAME beat
+// in different words. The quote-normalized dedupe (conversation.js
+// convoPick, r67) catches exact twins (j=1.00, quote-style only), but
+// near-dupes (same beat, different wording) re-served in one goal thread
+// (r145 wild: chloe_dubois alone, lena_ruiz remember, oliver_moore answers,
+// lena_ruiz hunger is a single wants template, not this class). The 16
+// near-duplicate follow lines below were rewritten to distinct beats.
+// Exact twins are EXCLUDED from the same-beat check (j<0.99): they are
+// handled by convoPick; the defect is the near-dupe band 0.5<=j<0.99.
+const jaccard = (a, b) => {
+  const A = new Set(norm(a).split(' ').filter(Boolean));
+  const B = new Set(norm(b).split(' ').filter(Boolean));
+  let inter = 0; for (const w of A) if (B.has(w)) inter++;
+  return inter / (A.size + B.size - inter || 1);
+};
+const removedX = [
+  '"It\'s not that I dislike people. It\'s that I like myself better at a distance."',
+  '"I need the quiet the way other people need food. Don\'t worry about me."',
+  '"Hungry people get mean. Scared people get mean. Fed people can think. It\'s that simple."',
+  '"Everything\'s broken. People, things. I fix what I can reach."',
+  '"I want a door I can close. Not to keep people out \u2014 just to know I could."',
+  '"Four walls and a roof and I\'d make it a home in a week. Watch me."',
+  '"Someone has to be the memory of this place. I\'ve volunteered. No take-backs."',
+  '"I interrogate the world instead of praying to it. Different strategy, same silence."',
+  '"When I\'m gone, I want the story to keep my name in it. That\'s all."',
+  '"Do something worth retelling. That\'s the whole plan. The rest is logistics."',
+  '"The world took a lot. It\'s not getting my sense of humor."',
+  '"I miss laughing without checking over my shoulder first. I\'m working on it."',
+  '"Joy is a resource. I\'m foraging for it. Some days the yield is terrible."',
+  '"Somebody has to be the calm one. I\'ve taken the job. No one else applied."',
+  '"I\'ve talked down fights before. It\'s a skill. A tiring one."',
+  '"If we forget who we were, what exactly are we surviving for?"',
+];
+const addedX = [
+  '"I can do one person. Two, maybe, on a good day. A whole camp talking at once and I stop hearing any of it."',
+  '"When I\'m alone I\'m not lonely. I\'m recharging. Come find me when the fire\'s low and I\'ll be back."',
+  '"I cook for the whole camp now. A fed camp argues less and laughs more."',
+  '"I learned to set a bone before I learned to read. Hands first, always."',
+  '"I found a loose floorboard yesterday and fixed it. That\'s the first thing that\'s felt like mine."',
+  '"Give me a corner and a nail and I\'ll hang something that makes it ours."',
+  '"I write down who laughed today. The arguments write themselves."',
+  '"The System never answers, but it leaves fingerprints. I collect those."',
+  '"Someday someone will tell my story wrong. I just hope they tell it funny."',
+  '"A good story needs a fool who went first. I\'ve applied for the job."',
+  '"I laugh at the System\'s expense. It\'s the only currency it can\'t tax."',
+  '"The first time I laughed out here, I startled myself. Then I did it again on purpose."',
+  '"I ration my jokes like trail food. A bad day costs extra."',
+  '"Calm is a choice I make every morning. Some mornings it takes all day."',
+  '"Most fights start because nobody asked what the other person actually wanted. I ask."',
+  '"I keep a list of names. When I forget one, I carve it somewhere so the forgetting has to work for it."',
+];
+const gfAll = Object.values(convo.goalFollow || {}).flat().map(norm);
+for (const l of removedX) {
+  if (gfAll.includes(norm(l))) fail(`cross-structure removed line still present: ${l}`);
+}
+for (const l of addedX) {
+  if (!gfAll.includes(norm(l))) fail(`cross-structure replacement missing: ${l}`);
+}
+for (const g of (cg.goals || [])) {
+  const id = g.id || g.key;
+  const defs = g.lines || [];
+  const fol = (convo.goalFollow || {})[id] || [];
+  for (const d of defs) for (const f of fol) {
+    const j = jaccard(d, f);
+    if (j >= 0.5 && j < 0.99) fail(`cross-structure same-beat ${id} j=${j.toFixed(2)}: DEF ${d} || FOL ${f}`);
+  }
+}
 if (failures) { console.error(`RESULT: FAIL (${failures} defect(s) present)`); process.exit(1); }
-console.log(`RESULT: PASS — ${pools.length} pools, no exact dupes, 13 removed lines gone, 13 replacements present, all fixed openings unique`);
+console.log(`RESULT: PASS — ${pools.length} pools, no exact dupes, 13 removed lines gone, 13 replacements present, all fixed openings unique, 16 cross-structure lines gone, 16 replacements present, no def/follow same-beat pair`);

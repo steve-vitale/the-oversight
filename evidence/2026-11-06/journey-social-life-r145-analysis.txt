@@ -1,0 +1,246 @@
+SEEDS: 42001 d58, 42002 d59, 42003 d63, 42004 d60
+
+seed 42001: days=58 endReason=village-lost fullConvs=40 naturalEnds=36 feasts=8 moots=1
+  decisions: {"lure:accept":1,"party:decline":5,"party:accept":2}
+  BOND lure-by-inviter (scholar=Aroha initialBearer=Jian): {"NPC:lure:accept":1,"player:party:decline":5,"player:party:accept":2}
+  BOND successions: [{"day":15,"from":"Jian","to":"Carmela"},{"day":23,"from":"Carmela","to":"Tāwhiri"},{"day":29,"from":"Tāwhiri","to":"Lucas"},{"day":40,"from":"Lucas","to":"Chloe"},{"day":43,"from":"Chloe","to":"Tariq"},{"day":50,"from":"Tariq","to":"Ethan"},{"day":57,"from":"Ethan","to":"Daniel"}]
+  BOND proposeWrapped={"proposeLink":true,"proposeCovenant":true,"proposeTrade":true} proposeCalls=0
+  BOND end bonds=64 sample={"key":"chloe_dubois|gen_dgnl7ug","val":"{\"v\":14,\"depth\":0,\"day\":11,\"dayGain\":4,\"combat\":0}"}
+  plot plot_1 d7 leader=Raj inviter=Tāwhiri target=Ava sprung=true gT->L=0 gT->I=0 gA->Tmax=0 gI->T=0
+  armWrapped=true springWrapped=true
+  ARM d7 plot_1 Raj->Ava inviter=Tāwhiri motive={"score":39.040000000000006,"reasons":["grievance"]} gT->L=48.800000000000004 gL->T=48.800000000000004 accMotives=[{"who":"Tāwhiri","score":0,"reasons":[],"grievance":0},{"who":"Carmela","score":25,"reasons":["ambition"],"grievance":0}] trust={"leader":6,"Tāwhiri":20,"Carmela":6} goal=escape
+  SPRING d7 plot_1 Raj->Ava outcome=killed case=case_2 endCase=case_2 charge=murder status=acquitted heardDay=9 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=1
+  expireWrapped=true expiredEvents=0
+  village fallen: 19 by cause: {"ambush":1,"a wound that wouldn't close":1,"betrayal":1,"mosquito":1,"the wild":11,"monster":3,"sickness":1}
+  death clusters (>=3/day): d57x3
+  ambush-caused fallen: [{"who":"Ava","day":7,"cause":"ambush"}]
+  (samples.deaths, all recorded incl. outsiders: 53 — NOT village deaths)
+  census: seed 42001, day 58, alive 0 | fallen: 19
+  M6 nightlyNews: strandedDays=3 burst=48 settle=22 witness=7 tale=18 | emitted-AWAY burst=6 settle=0 witness=0 tale=0 debatesKicked=27 settled=26 queuedAtEnd=0
+  M4 transcripts=39 naturalEnds=36 nearDupFlags=11
+  M4 FLAG jaccard>=0.5 [C-friendship lucas_brown] :: Practical view: Still on whether you've hurt someone. || Look — As I said — Still on whether you've hurt someone.
+  M4 FLAG same-opening [C-friendship chloe_dubois] :: It's not that I don't like people. It's that I like breathing more. || It's not that I dislike people. It's that I like myself better at a distance.
+  M4 FLAG same-opening [C-friendship app_mgpsphzy438] :: They answer at length. They nod, holding your gaze a beat longer. || They answer at length. They nod back, a little quicker this time. "Shit." — they grin, proud of the one English they know.
+  M4 FLAG same-opening [C-friendship app_mgpsphzy438] :: They answer at length. They nod, holding your gaze a beat longer. || They answer at length. They nod back, slowly.
+  M4 FLAG same-opening [C-friendship app_mgpsphzy438] :: They answer at length. They nod, holding your gaze a beat longer. || They answer at length. They nod back, a little quicker this time.
+  M4 FLAG same-opening [C-friendship app_mgpsphzy438] :: They answer at length. They nod back, a little quicker this time. "Shit." — they grin, proud of the one English they know. || They answer at length. They nod back, slowly.
+  M4 FLAG same-opening [C-friendship app_mgpsphzy438] :: They answer at length. They nod back, a little quicker this time. "Shit." — they grin, proud of the one English they know. || They answer at length. They nod back, a little quicker this time.
+  M4 FLAG same-opening [C-friendship app_mgpsphzy438] :: They answer at length. They nod back, slowly. || They answer at length. They nod back, a little quicker this time.
+  M4 FLAG same-opening [C-friendship app_mgpsphzy438] :: They answer at length. They nod back, slowly. || They answer at length. They nod, holding your gaze a beat longer.
+  M4 FLAG same-opening [C-friendship app_mgpsphzy438] :: They answer at length. They nod back, slowly. || They answer at length. They nod back, a little quicker this time.
+  M4 FLAG same-opening [C-friendship app_mgpsphzy438] :: They answer at length. They nod, holding your gaze a beat longer. || They answer at length. They nod back, a little quicker this time.
+  M4 CANDIDATE [D-talk-request ines_duarte turns=11 naturalEnd=true]:
+    NPC: "What's something from your old life that's actually useful here?"
+    YOU: "Patience. Sounds dumb. But waiting — really waiting, without fidgeting — that's a superpower now."
+    NPC: "Not dumb at all. The people who can't wait are the ones who make mistakes. You're an asset. Just... be straight with me."
+    YOU: "Take your time. I've got nowhere to be."
+    NPC: "Hey — Being a florist taught me to read people fast — who's lying, who's scared, who needs a job. Turns out that's a survival skill. Who knew."
+    YOU: "Wait — what were we talking about?"
+    NPC: "Still on your useful old-life skills."
+    YOU: "Take your time. I've got nowhere to be."
+    NPC: "Do you still sing? ...Sorry — weird question. I just realized I haven't heard anyone sing."
+    YOU: "In the shower. Which is now the creek. So yes, badly."
+    NPC: "Ha! The creek concerts. I've heard those. Keep going."
+    YOU: "Take your time. I've got nowhere to be."
+    NPC: "What's this about? Under my breath, when I'm working. Old songs from Lisbon, Portugal. The words are half gone but the tune holds. Tunes outlast everything."
+    YOU: "Wait — what were we talking about?"
+    NPC: "As I said — Still on your useful old-life skills."
+    YOU: "Wait — what were we talking about?"
+    NPC: "Hah. Still on your useful old-life skills. That's still where we are."
+    YOU: "Wait — what were we talking about?"
+    NPC: "Like I said — Still on your useful old-life skills."
+    YOU: "Take your time. I've got nowhere to be."
+    NPC: "I wish we had longer. Soon, yeah?"
+    YOU: "..."
+    NPC: You say nothing. Neither do they, for a while — and it's fine.
+    NPC: "Good talk. I feel like I know you a little better now."
+    NPC: "Good — that foraging help, settled. Feels better said out loud."
+    NPC: "This was good." They mean it.
+
+seed 42002: days=59 endReason=village-lost fullConvs=37 naturalEnds=31 feasts=8 moots=2
+  decisions: {"party:decline":2,"party:accept":1}
+  BOND lure-by-inviter (scholar=Tom initialBearer=Carlos): {"player:party:decline":2,"player:party:accept":1}
+  BOND successions: [{"day":13,"from":"Carlos","to":"Leo"},{"day":54,"from":"Leo","to":"Maya"},{"day":58,"from":"Maya","to":"Landon"}]
+  BOND proposeWrapped={"proposeLink":true,"proposeCovenant":true,"proposeTrade":true} proposeCalls=0
+  BOND end bonds=49 sample={"key":"gen_f54tz3z|gen_wdtul34","val":"{\"v\":32,\"depth\":1,\"day\":21,\"dayGain\":2,\"combat\":0}"}
+  armWrapped=true springWrapped=true
+  expireWrapped=true expiredEvents=0
+  village fallen: 12 by cause: {"starvation":1,"monster":2,"the wild":7,"combat":1,"the arena":1}
+  death clusters (>=3/day): d58x3 d59x5
+  ambush-caused fallen: []
+  (samples.deaths, all recorded incl. outsiders: 62 — NOT village deaths)
+  census: seed 42002, day 59, alive 0 | fallen: 12
+  M6 nightlyNews: strandedDays=27 burst=26 settle=17 witness=3 tale=20 | emitted-AWAY burst=10 settle=0 witness=0 tale=0 debatesKicked=26 settled=26 queuedAtEnd=0
+  M4 transcripts=37 naturalEnds=31 nearDupFlags=7
+  M4 FLAG same-opening [D-talk-request gen_v722kh4] :: They answer at length. They nod, holding your gaze a beat longer. || They answer at length. They nod back, slowly.
+  M4 FLAG same-opening [D-talk-request gen_v722kh4] :: They answer at length. They nod, holding your gaze a beat longer. || They answer at length. They nod back, a little quicker this time.
+  M4 FLAG same-opening [D-talk-request gen_v722kh4] :: They answer at length. They nod back, slowly. || They answer at length. They nod back, a little quicker this time.
+  M4 FLAG jaccard>=0.5 [C-friendship jorge_silva] :: a spring that runs clear — I'll show you on the map sometime. It's real. || a cellar full of jars — I'll show you on the map sometime. It's real.
+  M4 FLAG same-opening [C-friendship gen_v722kh4] :: They answer at length. They nod, holding your gaze a beat longer. || They answer at length. They nod back, slowly.
+  M4 FLAG same-opening [C-friendship gen_v722kh4] :: They answer at length. They nod, holding your gaze a beat longer. || They answer at length. They nod back, a little quicker this time.
+  M4 FLAG same-opening [C-friendship gen_v722kh4] :: They answer at length. They nod back, slowly. || They answer at length. They nod back, a little quicker this time.
+  M4 CANDIDATE [D-talk-request ava_garcia turns=11 naturalEnd=true]:
+    NPC: "We gave them a good burial. Doesn't feel like enough, does it?"
+    YOU: "Are you okay?"
+    NPC: "Heh. Nobody's asked me that in a while. ...I'm alright. Getting there. Seen worse."
+    YOU: "What's new with you? Anything good, bad, or weird?"
+    NPC: "Good question." "You asked me that before. It's a different question now." "Jaxon owed me a favor. I keep thinking about collecting. Stupid."
+    YOU: "Go on."
+    NPC: They hear the warmth in it. They're not ready to let it in.
+    YOU: "Tell me more."
+    NPC: "We bury, we grieve, we keep going. There's no step four."
+    YOU: "Tell me more."
+    NPC: "I hum one note, over and over, when the dark comes for Jaxon, now. Feels right. Feels like the least I can do."
+    YOU: "Tell me more."
+    NPC: "I wish there was more to tell. That's it."
+    YOU: "Can I ask you something else?"
+    NPC: "Yeah? What's up?"
+    YOU: "What do you want me to know about you?"
+    NPC: "Huh. Let me think about that." "You're one of the good ones. Don't make me regret saying that out loud." "That's where we are."
+    YOU: "Say more."
+    NPC: A warmth settles over the conversation — they lean in a little.
+    YOU: "Say more."
+    NPC: "Rest when you can. We'll talk again soon."
+    YOU: "..."
+    NPC: You say nothing. Neither do they, for a while — and it's fine.
+    NPC: "Thanks for... you know. Just listening."
+    NPC: "This was good." They mean it.
+
+seed 42003: days=63 endReason=village-lost fullConvs=54 naturalEnds=51 feasts=9 moots=1
+  decisions: {"party:accept":3,"party:decline":3}
+  BOND lure-by-inviter (scholar=Kieran initialBearer=Hugo): {"player:party:accept":3,"player:party:decline":3}
+  BOND successions: [{"day":35,"from":"Hugo","to":"Greta"},{"day":36,"from":"Greta","to":"Wanjiru"},{"day":37,"from":"Wanjiru","to":"Lauren"},{"day":38,"from":"Lauren","to":"Lena"},{"day":50,"from":"Lena","to":"Axel"},{"day":51,"from":"Axel","to":"Sofia"},{"day":52,"from":"Sofia","to":"Yuki"},{"day":57,"from":"Yuki","to":"Kieran"}]
+  BOND proposeWrapped={"proposeLink":true,"proposeCovenant":true,"proposeTrade":true} proposeCalls=0
+  BOND end bonds=79 sample={"key":"gen_3onodyw|gen_akas5x7","val":"{\"v\":29,\"depth\":1,\"day\":33,\"dayGain\":2}"}
+  armWrapped=true springWrapped=true
+  expireWrapped=true expiredEvents=0
+  village fallen: 15 by cause: {"the wild":12,"a wound that wouldn't close":1,"starvation":1,"monster":1}
+  death clusters (>=3/day): d37x3 d38x3
+  ambush-caused fallen: []
+  (samples.deaths, all recorded incl. outsiders: 42 — NOT village deaths)
+  census: seed 42003, day 63, alive 3 | - Mía (esl_teacher, ?) trust=16 mood=cool npcAbilities=1
+  M6 nightlyNews: strandedDays=1 burst=52 settle=26 witness=4 tale=17 | emitted-AWAY burst=6 settle=0 witness=0 tale=0 debatesKicked=26 settled=26 queuedAtEnd=0
+  M4 transcripts=54 naturalEnds=51 nearDupFlags=23
+  M4 FLAG jaccard>=0.5 [B-first-meeting lena_ruiz] :: It's been days since a real meal. I can't pull my weight like this. Anything you can spare, I'll make it stretch. || My stomach's been empty so long I've stopped feeling it, and that's worse. I can't pull my weight like this. Anything you can spare, I'll make it stretch.
+  M4 FLAG same-opening [D-talk-request gen_p7889b1] :: They answer at length. They nod back, slowly. || They answer at length. They nod, holding your gaze a beat longer.
+  M4 FLAG same-opening [D-talk-request gen_p7889b1] :: They answer at length. They nod back, slowly. || They answer at length. They nod back, a little quicker this time.
+  M4 FLAG same-opening [D-talk-request gen_p7889b1] :: They answer at length. They nod, holding your gaze a beat longer. || They answer at length. They nod back, a little quicker this time.
+  M4 FLAG same-opening [D-talk-request gen_p7889b1] :: Yeah? What's up? Be kind to yourself, okay? || Yeah? What's up? Good talking.
+  M4 FLAG same-opening [D-talk-request gen_p7889b1] :: Sure — what's on your mind? You know? || Sure — what's on your mind?
+  M4 FLAG same-opening [D-talk-request gen_txr23vb] :: Sure — what's on your mind? You'd know about that. || Sure — what's on your mind? That's where we are.
+  M4 FLAG same-opening [D-talk-request gen_txr23vb] :: Yeah? What's up? That's the whole of it. || Yeah? What's up? Seen worse.
+  M4 FLAG same-opening [D-talk-request gen_txr23vb] :: Sure — what's on your mind? Not that it matters. || Sure — what's on your mind?
+  M4 FLAG same-opening [D-talk-request lena_ruiz] :: If we forget who we were, then what survived? Just bodies. I want more than that. || If we forget who we were, what exactly are we surviving for?
+  M4 FLAG jaccard>=0.5 [C-friendship greta_hansen] :: What got you through the first week? The very first days, friend. || You know what — Still on what got you through the first week.
+  M4 FLAG jaccard>=0.5 [C-friendship greta_hansen] :: Hah. As I said — Still on whether you've hurt someone. || Honestly? Like I said — Still on whether you've hurt someone.
+  M4 FLAG same-opening [C-friendship lena_ruiz] :: We were just talking. Nothing important. || We were just talking. Nothing important. That's still where we are. One step at a time.
+  M4 FLAG same-opening [C-friendship lena_ruiz] :: We were just talking. Nothing important. || We were just talking. Nothing important. Makes sense to me.
+  M4 FLAG same-opening [C-friendship lena_ruiz] :: We were just talking. Nothing important. || We were just talking. Nothing important. That's the whole of it.
+  M4 FLAG same-opening [C-friendship lena_ruiz] :: We were just talking. Nothing important. That's still where we are. One step at a time. || We were just talking. Nothing important. Makes sense to me.
+  M4 FLAG same-opening [C-friendship lena_ruiz] :: We were just talking. Nothing important. That's still where we are. One step at a time. || We were just talking. Nothing important. That's the whole of it.
+  M4 FLAG same-opening [C-friendship lena_ruiz] :: We were just talking. Nothing important. Makes sense to me. || We were just talking. Nothing important. That's the whole of it.
+  M4 FLAG jaccard>=0.5 [C-friendship sofia_chen] :: I… We were just talking. Nothing important. || We were just talking. Nothing important. That's still where we are.
+  M4 FLAG same-opening [B-first-meeting visjoin_46] :: They answer at length. They nod back, slowly. || They answer at length. They nod back, a little quicker this time. "Food?" — they grin, proud of the one English they know.
+  M4 FLAG same-opening [B-first-meeting visjoin_46] :: They answer at length. They nod back, slowly. || They answer at length. They nod, holding your gaze a beat longer.
+  M4 FLAG same-opening [B-first-meeting visjoin_46] :: They answer at length. They nod back, a little quicker this time. "Food?" — they grin, proud of the one English they know. || They answer at length. They nod, holding your gaze a beat longer.
+  M4 FLAG same-opening [D-talk-request yuki_mori] :: They answer at length. They nod back, a little quicker this time. || They answer at length. They nod back, slowly. "Water?" — they grin, proud of the one English they know.
+  M4 CANDIDATE [C-friendship greta_hansen turns=11 naturalEnd=true]:
+    NPC: "Can I tell you something? I've been hiding an injury. I'm ashamed and I can't stop."
+    YOU: (listen)
+    NPC: They nod slowly, not quite done, not quite continuing.
+    YOU: (listen)
+    NPC: "So." They look at the fire for a moment.
+    YOU: "That doesn't quite add up."
+    NPC: "...Sorry, lost my train of thought."
+    YOU: "Can I ask you something else?"
+    NPC: "Don't tell anyone I told you. What's on your mind? I've said enough."
+    YOU: "We should name this. Us."
+    NPC: "A name. Okay." You say it out loud, trying the shape of it:
+1. "MEAT AND FRIENDS" (📺 the System suggests)
+2. "The Unlost" (Greta suggests)
+3. "The Company" (or plain)
+(Which one? It'll stick.)
+    YOU: "Wait — what were we talking about?"
+    NPC: "Between us — Still on what they confided."
+    YOU: "I've been watching. Things don't add up. Talk to me."
+    NPC: A flicker at the corner of their mouth. Not quite a smile. Not quite anything.
+    NPC: *You know the counter-attack now — the anger IS the tell. It means the accusation landed. Don't flinch.*
+    YOU: "I need to ask you something."
+    NPC: Greta won't meet your eyes. "I told myself finders keepers. It wasn't finders keepers. I'm sorry."
+    YOU: "Wait — what were we talking about?"
+    NPC: "Like I said — Still on what they confided. Just... be straight with me."
+    YOU: "Wait — what were we talking about?"
+    NPC: "Still on what they confided. That's still where we are. Mark my words."
+    YOU: "Wait — what were we talking about?"
+    NPC: "As I said — Still on what they confided. I mean it."
+    NPC: "Okay — I need to move. But I'm glad we talked."
+    YOU: "..."
+    NPC: You say nothing. Neither do they, for a while — and it's fine.
+    NPC: "This was good." They mean it.
+
+seed 42004: days=60 endReason=village-lost fullConvs=56 naturalEnds=56 feasts=8 moots=2
+  decisions: {"lure:accept":1,"party:decline":4,"party:accept":4}
+  BOND lure-by-inviter (scholar=Sari initialBearer=Kurt): {"NPC:lure:accept":1,"player:party:decline":4,"player:party:accept":4}
+  BOND successions: [{"day":39,"from":"Kurt","to":"Hunter"},{"day":48,"from":"Hunter","to":"Oliver"},{"day":50,"from":"Oliver","to":"Owen"},{"day":57,"from":"Owen","to":"Lena"},{"day":58,"from":"Lena","to":"Ouarda"},{"day":59,"from":"Ouarda","to":"Sari"}]
+  BOND proposeWrapped={"proposeLink":true,"proposeCovenant":true,"proposeTrade":true} proposeCalls=0
+  BOND end bonds=60 sample={"key":"gen_lfl2n4j|gen_t71kpl7","val":"{\"v\":42,\"depth\":1,\"day\":32,\"dayGain\":2,\"combat\":0}"}
+  plot plot_1 d8 leader=Carlos inviter=Doruk target=Hank sprung=true gT->L=60 gT->I=0 gA->Tmax=0 gI->T=0
+  armWrapped=true springWrapped=true
+  ARM d8 plot_1 Carlos->Hank inviter=Doruk motive={"score":48.480000000000004,"reasons":["grievance","prove"]} gT->L=45.6 gL->T=45.6 accMotives=[{"who":"Doruk","score":25,"reasons":["ambition"],"grievance":0},{"who":"Oliver","score":0,"reasons":[],"grievance":0}] trust={"leader":36,"Doruk":5,"Oliver":32} goal=prove
+  SPRING d8 plot_1 Carlos->Hank outcome=hurt case=case_2 endCase=case_2 charge=ambush status=acquitted heardDay=9 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=1
+  expireWrapped=true expiredEvents=0
+  village fallen: 13 by cause: {"monster":3,"The Ugly Beast":1,"The Loud Beast":1,"the wild":7,"combat":1}
+  death clusters (>=3/day): none
+  ambush-caused fallen: []
+  (samples.deaths, all recorded incl. outsiders: 67 — NOT village deaths)
+  census: seed 42004, day 60, alive 0 | fallen: 13
+  M6 nightlyNews: strandedDays=2 burst=60 settle=29 witness=14 tale=20 | emitted-AWAY burst=8 settle=0 witness=0 tale=0 debatesKicked=30 settled=30 queuedAtEnd=0
+  M4 transcripts=55 naturalEnds=56 nearDupFlags=3
+  M4 FLAG same-opening [C-friendship sari_wulandari] :: We were just talking. Nothing important. || We were just talking. Nothing important. That's still where we are.
+  M4 FLAG jaccard>=0.5 [D-talk-request oliver_moore] :: Some people pray to it. I interrogate it. Different strategy, same silence. || I interrogate the world instead of praying to it. Different strategy, same silence.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_8qvf875] :: Hah. Like I said — Still on that taken person. || Look — As I said — Still on that taken person.
+  M4 CANDIDATE [D-talk-request oliver_moore turns=11 naturalEnd=true]:
+    NPC: It owes us an explanation. I'm going to collect.
+    YOU: "Tell me more."
+    NPC: "That's the whole of it. Sorry."
+    YOU: "Can I ask you something else?"
+    NPC: "Anyway — that's my cross to carry. What's on your mind?"
+    YOU: "How are you holding up — really?"
+    NPC: "Huh. Let me think about that." "You asked me that before. It's a different question now." "They took you — The Vigil, on the screens. The whole fire watched. Nobody knew where to look."
+    YOU: "Tell me more."
+    NPC: "I wish there was more to tell. That's it."
+    YOU: "Can I ask you something else?"
+    NPC: "Yeah? What's up?"
+    YOU: "How am I doing, by your lights?"
+    NPC: "Good question." "You're one of the good ones. Don't make me regret saying that out loud." "Make of that what you will."
+    YOU: "Tell me more."
+    NPC: "People here talk. What they say about you when you're not at the fire — that's the real answer to your question."
+    YOU: "Tell me more."
+    NPC: "Trust is slow out here. It's the one thing the System can't grant us."
+    YOU: "Tell me more."
+    NPC: "What do I want from you? Nothing fancy. Just — be the person you are when nobody's watching. Here."
+    YOU: "Tell me more."
+    NPC: "...Sorry, lost my train of thought."
+    NPC: "Well. My social battery is officially dead."
+    YOU: "..."
+    NPC: A comfortable quiet settles. They smile a little, and let it be.
+    NPC: "...Think about it? I'll be around."
+    NPC: They're smiling as you go. "Come back anytime."
+
+PANEL lure/party decisions: {"lure:accept":2,"party:decline":14,"party:accept":10}
+PANEL lure-by-inviter: {"NPC:lure:accept":2,"player:party:decline":14,"player:party:accept":10}
+PANEL successions: [{"day":15,"from":"Jian","to":"Carmela","seed":42001},{"day":23,"from":"Carmela","to":"Tāwhiri","seed":42001},{"day":29,"from":"Tāwhiri","to":"Lucas","seed":42001},{"day":40,"from":"Lucas","to":"Chloe","seed":42001},{"day":43,"from":"Chloe","to":"Tariq","seed":42001},{"day":50,"from":"Tariq","to":"Ethan","seed":42001},{"day":57,"from":"Ethan","to":"Daniel","seed":42001},{"day":13,"from":"Carlos","to":"Leo","seed":42002},{"day":54,"from":"Leo","to":"Maya","seed":42002},{"day":58,"from":"Maya","to":"Landon","seed":42002},{"day":35,"from":"Hugo","to":"Greta","seed":42003},{"day":36,"from":"Greta","to":"Wanjiru","seed":42003},{"day":37,"from":"Wanjiru","to":"Lauren","seed":42003},{"day":38,"from":"Lauren","to":"Lena","seed":42003},{"day":50,"from":"Lena","to":"Axel","seed":42003},{"day":51,"from":"Axel","to":"Sofia","seed":42003},{"day":52,"from":"Sofia","to":"Yuki","seed":42003},{"day":57,"from":"Yuki","to":"Kieran","seed":42003},{"day":39,"from":"Kurt","to":"Hunter","seed":42004},{"day":48,"from":"Hunter","to":"Oliver","seed":42004},{"day":50,"from":"Oliver","to":"Owen","seed":42004},{"day":57,"from":"Owen","to":"Lena","seed":42004},{"day":58,"from":"Lena","to":"Ouarda","seed":42004},{"day":59,"from":"Ouarda","to":"Sari","seed":42004}]
+PANEL propose* calls: 0 (none observed)
+PANEL end bonds per seed: [64,49,79,60]
+PANEL bond initiator recorded by engine: NO — bond records carry no initiator field; NPC-initiated formation cannot be inferred from end bonds
+PANEL plots: 2 (late d30+: 0)
+PANEL plots with grievanceTargetToLeader > 0: 1
+PANEL grievance-holder -> later leader cases: 0
+PANEL arms: 2 (late d30+: 0) grievance-linked at arming: 2
+PANEL springs: 2 outcomes: {"killed":1,"hurt":1}
+PANEL escaped springs: 0
+PANEL expired plots: 0
+PANEL villages past d100: 0/4
+PANEL M6 haven-news: strandedDays=33 deliveredAtHaven burst=186 settle=94 witness=28 tale=75 | emittedAway burst=30 settle=0 witness=0 tale=0 debatesKicked=109 namesSettled=108
+PANEL M6 verdict: NO-GO — see counts
+PANEL M4: transcripts=185 nearDupFlags=44 candidatesPrinted=4/4 — verdict in run note from the printed candidates above

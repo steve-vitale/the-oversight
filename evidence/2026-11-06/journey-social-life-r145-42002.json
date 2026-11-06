@@ -1,0 +1,9341 @@
+{
+ "seed": 42002,
+ "manifest": {
+  "seed": 42002,
+  "commit": "06f91b3636e71fc929f228e4fa29021bce664c49",
+  "mode": "journey-social-life-r145",
+  "date": "2026-11-06",
+  "node": "v24.22.1"
+ },
+ "ms": "152s",
+ "days": 59,
+ "endReason": "village-lost",
+ "gameDay": 59,
+ "scholarName": "Tom",
+ "initialBearer": "Carlos",
+ "successions": [
+  {
+   "day": 13,
+   "from": "Carlos",
+   "to": "Leo"
+  },
+  {
+   "day": 54,
+   "from": "Leo",
+   "to": "Maya"
+  },
+  {
+   "day": 58,
+   "from": "Maya",
+   "to": "Landon"
+  }
+ ],
+ "social": {
+  "fullConvs": 37,
+  "naturalEnds": 31,
+  "forced": 6,
+  "quickTalks": 232,
+  "feasts": 8,
+  "moots": 2,
+  "cries": 7,
+  "switch": 0,
+  "transcripts": [
+   {
+    "vid": "maya_singh",
+    "tag": "A-day1-nudge",
+    "turns": 7,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "\"Hey.\" Maya settles near you, not too close. \"Day one. Everyone's pretending they're fine. ...Can we talk? Just talk — like people used to.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"I’m listening.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Okay, real question: what's the funniest thing you've seen since we got here? I desperately need it.\""
+     },
+     {
+      "who": "YOU",
+      "text": "(tell them something funny)"
+     },
+     {
+      "who": "NPC",
+      "text": "They laugh — really laugh, the first real one you've heard in days. \"Okay. Okay, that's good. I needed that.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Yeah?\""
+     },
+     {
+      "who": "NPC",
+      "text": "Their voice loosens. The guardedness thins."
+     },
+     {
+      "who": "YOU",
+      "text": "\"Yeah?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Heh. There's a laugh I keep hearing in my head — not anyone here, just from before. Sometimes I borrow it. I'll be hauling water and laugh at nothing, and for a second it's like the old world left the door open a crack.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Wait — what were we talking about?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I'll tell you plain — Still on the funniest thing you've seen.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Yeah?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I've got fires to light — metaphorical ones. Mostly.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"...\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"You're a good listener, you know that?\" A tired smile."
+     },
+     {
+      "who": "NPC",
+      "text": "\"Good talk. I feel like I know you a little better now.\""
+     }
+    ],
+    "offered": [
+     [
+      "dlg:more",
+      "dlg:react",
+      "teach",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "ans:q_laugh:a_story",
+      "ans:q_laugh:a_nothing",
+      "ans:q_laugh:a_dark",
+      "deflect_q",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "endTrust": 18,
+    "day": 2,
+    "trustBefore": 12
+   },
+   {
+    "vid": "maya_singh",
+    "tag": "A-day1-nudge",
+    "turns": 6,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "\"Pantry's thin and getting thinner. Come forage with me tomorrow — two of us can fill packs.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me why you need this.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I did the count twice. The count doesn't change. Nobody's worked the meadow edge, west of the creek in days. We'll fill packs before dark.\""
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "Move next to your partner, on the same side of the Haven door."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "As I said — Move next to your partner, on the same side of the Haven door."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "Like I said — Move next to your partner, on the same side of the Haven door."
+     },
+     {
+      "who": "YOU",
+      "text": "\"Yeah?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Okay — I need to move. But I'm glad we talked.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"...\""
+     },
+     {
+      "who": "NPC",
+      "text": "They glance at the fire, then back. The quiet doesn't seem to bother them."
+     },
+     {
+      "who": "NPC",
+      "text": "\"...Think about it? I'll be around.\""
+     }
+    ],
+    "offered": [
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:details",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "endTrust": 24,
+    "day": 2,
+    "trustBefore": 18
+   },
+   {
+    "vid": "gen_tdfmchg",
+    "tag": "B-first-meeting",
+    "turns": 7,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "\"Can we talk?\" Sarah sits down near you. \"Just... talk. Like people used to.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Go on.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I'm going hungry — do you have anything to eat? Anything at all? I can't keep going like this.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me why you need this.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"My stomach's been empty so long I've stopped feeling it, and that's worse. I'm slowing down — stupid, clumsy. Help me get back on my feet.\""
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "Move next to them, on the same side of the Haven door, to help."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "As I said — Move next to them, on the same side of the Haven door, to help."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "Like I said — Move next to them, on the same side of the Haven door, to help."
+     },
+     {
+      "who": "YOU",
+      "text": "\"Go on.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I should get back to it.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"...Think about it? I'll be around.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"This was good.\" They mean it."
+     }
+    ],
+    "offered": [
+     [
+      "dlg:more",
+      "dlg:react",
+      "teach",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:details",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "leftViaBye": true,
+    "endTrust": 31,
+    "day": 2,
+    "trustBefore": 24
+   },
+   {
+    "vid": "maya_singh",
+    "tag": "D-talk-request",
+    "turns": 3,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "\"About the pantry run — I hate to ask twice, but it's still open. Will you?\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me why you need this.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"...Sorry, lost my train of thought.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Can I ask you something else?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Sorry — I shouldn't load that on you. What's up?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Sure. I'll be around.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"...Think about it? I'll be around.\""
+     }
+    ],
+    "offered": [
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:details",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "agency:ask_field",
+      "alive:event:outbreak",
+      "ask:others",
+      "ask:gossip",
+      "ask:spread_rumor",
+      "menu:more",
+      "leave",
+      "silence"
+     ]
+    ],
+    "leftViaBye": true,
+    "endTrust": 27,
+    "day": 4,
+    "trustBefore": 25
+   },
+   {
+    "vid": "maya_singh",
+    "tag": "D-talk-request",
+    "turns": 7,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "\"I need a second opinion — and a second pair of hands. You've got both.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me why you need this.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"...Sorry, lost my train of thought.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Teach me something from the wild.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"There's more, but that's for another fire.\""
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "As I said — Move next to your partner, on the same side of the Haven door."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "Like I said — Move next to your partner, on the same side of the Haven door."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "Still the same thing — Move next to your partner, on the same side of the Haven door."
+     },
+     {
+      "who": "YOU",
+      "text": "\"Yeah?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Right. Action time. You know where to find me.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"...\""
+     },
+     {
+      "who": "NPC",
+      "text": "They fill the quiet. \"Anyway — where was I?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"...Think about it? I'll be around.\""
+     }
+    ],
+    "offered": [
+     [
+      "agency:ask_field",
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:details",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "agency:ask_field",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "endTrust": 33,
+    "day": 4,
+    "trustBefore": 28
+   },
+   {
+    "vid": "gen_f54tz3z",
+    "tag": "D-talk-request",
+    "turns": 9,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "Leo: \"Don't just stand there — you've got opinions, right?\""
+     },
+     {
+      "who": "NPC",
+      "text": "Leo has an edge today — something curdled."
+     },
+     {
+      "who": "YOU",
+      "text": "\"Teach me something from the wild.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"...Sorry, lost my train of thought.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Can I ask you something else?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Sure — what's on your mind?\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"You said something odd the other day. Let's talk about it.\""
+     },
+     {
+      "who": "NPC",
+      "text": "Something crosses their face — quick, then gone. The practiced expression clicks back into place."
+     },
+     {
+      "who": "YOU",
+      "text": "\"I need to ask you something.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Ha. Funny.\" The laugh is dry. \"Is this what we're doing now? Interrogations?\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"I’m listening.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"So what's your plan here? Just... get through it? Happy?\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"One day at a time.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"The way I read it — Honest. I can work with honest.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Yeah?\""
+     },
+     {
+      "who": "NPC",
+      "text": "Something in them almost softens — then doesn't. Not yet."
+     },
+     {
+      "who": "YOU",
+      "text": "\"Yeah?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Mine's simple: learn one useful thing a week. This week it's sewing. A plan's just a direction you argue with.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Yeah?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Okay, that's my quota of socializing.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"...\""
+     },
+     {
+      "who": "NPC",
+      "text": "They glance at the fire, then back. The quiet doesn't seem to bother them."
+     },
+     {
+      "who": "NPC",
+      "text": "\"Good talk. I feel like I know you a little better now.\""
+     }
+    ],
+    "offered": [
+     [
+      "agency:ask_field",
+      "confront:d_9z3r9if",
+      "teach",
+      "dlg:more",
+      "menu:more",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:subject",
+      "confront:d_9z3r9if",
+      "leave",
+      "silence"
+     ],
+     [
+      "confront:d_9z3r9if",
+      "alive:event:tension",
+      "alive:want:curious",
+      "teach",
+      "skill_learn:wound_care",
+      "menu:more",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "teach",
+      "dlg:subject",
+      "confront:d_9z3r9if",
+      "leave",
+      "silence"
+     ],
+     [
+      "ans:q_plan:a_survive",
+      "ans:q_plan:a_lead",
+      "ans:q_plan:a_find",
+      "ans:q_plan:a_quiet",
+      "deflect_q",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:subject",
+      "confront:d_9z3r9if",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:subject",
+      "confront:d_9z3r9if",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:subject",
+      "confront:d_9z3r9if",
+      "leave",
+      "silence"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "endTrust": 17,
+    "day": 5,
+    "trustBefore": 16
+   },
+   {
+    "vid": "gen_f54tz3z",
+    "tag": "D-talk-request",
+    "turns": 6,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "\"The pantry's nearly bare. Will you forage with me tomorrow? Two pairs of eyes, twice the ground.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me why you need this.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Another day like today and we're choosing who eats. I know the lemongrass patch past the treeline — come with me and we'll fill packs before dark.\""
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "Move next to your partner, on the same side of the Haven door."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "As I said — Move next to your partner, on the same side of the Haven door."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "Like I said — Move next to your partner, on the same side of the Haven door."
+     },
+     {
+      "who": "YOU",
+      "text": "\"Yeah?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Right. Done. Don't look so relieved.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"...\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"You're a good listener, you know that?\" A tired smile."
+     },
+     {
+      "who": "NPC",
+      "text": "\"...Think about it? I'll be around.\""
+     }
+    ],
+    "offered": [
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:details",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "endTrust": 25,
+    "day": 6,
+    "trustBefore": 21
+   },
+   {
+    "vid": "gen_v722kh4",
+    "tag": "D-talk-request",
+    "turns": 5,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "YOU",
+      "text": "(Ahmet speaks only 🇹🇷 Turkish. No shared words at all — just eyes, hands, and patience.)"
+     },
+     {
+      "who": "NPC",
+      "text": "They speak. You understand none of it. \"Food?\" — they grin, proud of the one English they know."
+     },
+     {
+      "who": "YOU",
+      "text": "(nod slowly)"
+     },
+     {
+      "who": "NPC",
+      "text": "They answer at length. They nod, holding your gaze a beat longer."
+     },
+     {
+      "who": "YOU",
+      "text": "(nod slowly)"
+     },
+     {
+      "who": "NPC",
+      "text": "They answer at length. They nod back, slowly."
+     },
+     {
+      "who": "YOU",
+      "text": "(nod slowly)"
+     },
+     {
+      "who": "NPC",
+      "text": "They answer at length. They nod back, a little quicker this time."
+     },
+     {
+      "who": "YOU",
+      "text": "(watch quietly)"
+     },
+     {
+      "who": "NPC",
+      "text": "Their gestures slow — the conversation thinning like light at dusk."
+     },
+     {
+      "who": "YOU",
+      "text": "\"...\""
+     },
+     {
+      "who": "NPC",
+      "text": "A comfortable quiet settles. They smile a little, and let it be."
+     },
+     {
+      "who": "NPC",
+      "text": "They're smiling as you go. \"Come back anytime.\""
+     }
+    ],
+    "offered": [
+     [
+      "nv:nod",
+      "nv:smile",
+      "nv:pointself",
+      "nv:listen",
+      "speak_back",
+      "leave"
+     ],
+     [
+      "nv:nod",
+      "nv:smile",
+      "nv:pointself",
+      "nv:listen",
+      "speak_back",
+      "leave"
+     ],
+     [
+      "nv:nod",
+      "nv:smile",
+      "nv:pointself",
+      "nv:listen",
+      "speak_back",
+      "leave"
+     ],
+     [
+      "goon",
+      "nv:nod",
+      "nv:smile",
+      "nv:pointself",
+      "nv:listen",
+      "speak_back",
+      "leave"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "endTrust": 19,
+    "day": 7,
+    "trustBefore": 13
+   },
+   {
+    "vid": "ava_garcia",
+    "tag": "C-friendship",
+    "turns": 8,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "\"About the pantry run — I still haven't found anyone. Any chance?\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me why you need this.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"The stores won't stretch past tomorrow, and I'm not choosing who eats. I know the south slope below the meadow — come with me and we'll fill packs before dark.\""
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "Move next to your partner, on the same side of the Haven door."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "As I said — Move next to your partner, on the same side of the Haven door."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "Like I said — Move next to your partner, on the same side of the Haven door."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "Still the same thing — Move next to your partner, on the same side of the Haven door."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "I've told you three times now — Move next to your partner, on the same side of the Haven door."
+     },
+     {
+      "who": "YOU",
+      "text": "\"Go on.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Go on, then. I'll be thinking good thoughts at you.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"...\""
+     },
+     {
+      "who": "NPC",
+      "text": "They fill the quiet. \"Anyway — where was I?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"...Think about it? I'll be around.\""
+     }
+    ],
+    "offered": [
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:details",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "endTrust": 50,
+    "day": 9,
+    "trustBefore": 50
+   },
+   {
+    "vid": "gen_f54tz3z",
+    "tag": "C-friendship",
+    "turns": 7,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "It's not about power. It's about making sure someone's thinking three steps ahead."
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Just... include me. In things. That's all I want.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"You said something odd the other day. Let's talk about it.\""
+     },
+     {
+      "who": "NPC",
+      "text": "They glance toward the fire, toward the others — checking who's listening."
+     },
+     {
+      "who": "NPC",
+      "text": "*They've deflected you before. The evidence needs to be heavier this time — one more thread before you speak.*"
+     },
+     {
+      "who": "YOU",
+      "text": "\"I need to ask you something.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I — I don't remember saying that.\" A beat. \"People hear what they want to hear.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"You said something odd the other day. Let's talk about it.\""
+     },
+     {
+      "who": "NPC",
+      "text": "They go very still. Not relaxed-still. Held-still."
+     },
+     {
+      "who": "NPC",
+      "text": "*They've deflected you before. The evidence needs to be heavier this time — one more thread before you speak.*"
+     },
+     {
+      "who": "YOU",
+      "text": "\"I need to ask you something.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Fine.\" Sharp. \"You want the truth? I don't actually want to belong somewhere. I want to be in charge. Everyone out here is selling something. I was selling a better version of me. Happy now?\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"You said something odd the other day. Let's talk about it.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"We went over this,\" Leo says, a little tired. \"I already told you the truth about that.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I watch how people look at you. Some of them are waiting for an alternative. I'm just saying.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"What would that look like?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I've got things to do. People to avoid. You know.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"...\""
+     },
+     {
+      "who": "NPC",
+      "text": "You say nothing. Neither do they, for a while — and it's fine."
+     },
+     {
+      "who": "NPC",
+      "text": "\"...Think about it? I'll be around.\""
+     },
+     {
+      "who": "NPC",
+      "text": "They're smiling as you go. \"Come back anytime.\""
+     }
+    ],
+    "offered": [
+     [
+      "dlg:more",
+      "dlg:react",
+      "dlg:doubt",
+      "dlg:invite",
+      "dlg:subject",
+      "confront:d_9z3r9if",
+      "leave",
+      "silence"
+     ],
+     [
+      "confront:d_9z3r9if",
+      "dlg:invite",
+      "dlg:more",
+      "dlg:react",
+      "menu:more",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "confront:d_9z3r9if",
+      "dlg:invite",
+      "dlg:more",
+      "dlg:react",
+      "menu:more",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "confront:d_xt43o7h",
+      "dlg:invite",
+      "dlg:more",
+      "dlg:react",
+      "menu:more",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "endTrust": 56,
+    "day": 12,
+    "trustBefore": 58
+   },
+   {
+    "vid": "yara_haddad",
+    "tag": "D-talk-request",
+    "turns": 8,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "\"Never mind the pantry run — we got it handled. Thanks anyway. I hate to ask this, but I can't shake it. I'm achy and wrung out, barely keeping food down. I need help. Please.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me why you need this.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"The fever's not breaking and I'm barely keeping food down. I need help — real help, not just water.\""
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "Move next to them, on the same side of the Haven door, to help."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "As I said — Move next to them, on the same side of the Haven door, to help."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "Like I said — Move next to them, on the same side of the Haven door, to help."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "Still the same thing — Move next to them, on the same side of the Haven door, to help."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "I've told you three times now — Move next to them, on the same side of the Haven door, to help."
+     },
+     {
+      "who": "YOU",
+      "text": "\"And?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I should go. Before I overthink this conversation too.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"...Think about it? I'll be around.\""
+     }
+    ],
+    "offered": [
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:details",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "leftViaBye": true,
+    "endTrust": 40,
+    "day": 15,
+    "trustBefore": 38
+   },
+   {
+    "vid": "maya_singh",
+    "tag": "C-friendship",
+    "turns": 7,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "\"About the pantry run — I still haven't found anyone. Any chance?\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me why you need this.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I did the count twice. The count doesn't change. Nobody's worked the meadow edge, west of the creek in days. We'll fill packs before dark.\""
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "As I said — Move next to your partner, on the same side of the Haven door."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "Like I said — Move next to your partner, on the same side of the Haven door."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "Still the same thing — Move next to your partner, on the same side of the Haven door."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "I've told you three times now — Move next to your partner, on the same side of the Haven door."
+     },
+     {
+      "who": "YOU",
+      "text": "\"And?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I've got fires to light — metaphorical ones. Mostly.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"...\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"You're a good listener, you know that?\" A tired smile."
+     },
+     {
+      "who": "NPC",
+      "text": "\"...Think about it? I'll be around.\""
+     }
+    ],
+    "offered": [
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:details",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "endTrust": 60,
+    "day": 15,
+    "trustBefore": 60
+   },
+   {
+    "vid": "yara_haddad",
+    "tag": "D-talk-request",
+    "turns": 2,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "\"Never mind the sickness I'm fighting — we got it handled. Thanks anyway.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Can I ask you something else?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Sorry — I shouldn't load that on you. What's up?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Right. Go on, then.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Good — that sickness help, settled. Feels better said out loud.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Right. Well.\" That's the whole goodbye."
+     }
+    ],
+    "offered": [
+     [
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "alive:event:naming",
+      "alive:memory:feast",
+      "alive:want:ask_favor",
+      "ask:goal",
+      "ask:others",
+      "menu:more",
+      "leave",
+      "silence"
+     ]
+    ],
+    "leftViaBye": true,
+    "endTrust": 42,
+    "day": 16,
+    "trustBefore": 42
+   },
+   {
+    "vid": "yara_haddad",
+    "tag": "D-talk-request",
+    "turns": 12,
+    "naturalEnd": false,
+    "forcedClose": true,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "\"About whether you've hurt someone — Have you ever hurt someone? Since all this started.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Yes. I don't want to talk about the details. But yes.\""
+     },
+     {
+      "who": "NPC",
+      "text": "They nod, slow. \"Okay. Thank you for telling me. That couldn't have been easy to say.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"And?\""
+     },
+     {
+      "who": "NPC",
+      "text": "They pull back half a step — not leaving, just... further."
+     },
+     {
+      "who": "YOU",
+      "text": "\"And?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Maybe — I don't keep score on that. Score-keeping is how you stop sleeping. I do what the day needs and I don't rehearse it after.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"And?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Come get air with me. I need to think out loud.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"All right. Let's go.\""
+     },
+     {
+      "who": "NPC",
+      "text": "You walk to the ridge with Yara. Nothing much there — but they talk the whole way, and you learn the shape of them a little better."
+     },
+     {
+      "who": "YOU",
+      "text": "\"Wait — what were we talking about?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Still on whether you've hurt someone.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"And?\""
+     },
+     {
+      "who": "NPC",
+      "text": "The tension eases back to something ordinary."
+     },
+     {
+      "who": "YOU",
+      "text": "\"And?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"What's the most useful thing you've learned since we got here?\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"How to be hungry and keep going anyway.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"The fundamental skill. Everything else is decoration.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"And?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"making do. Sounds small. But small useful things stack — and one day you look up and you're the person everyone asks. That's how it happens. Just my read.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Wait — what were we talking about?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"As I said — Still on whether you've hurt someone.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Wait — what were we talking about?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Still on whether you've hurt someone. That's still where we are.\""
+     }
+    ],
+    "offered": [
+     [
+      "ans:q_fight:a_tell",
+      "ans:q_fight:a_vague",
+      "ans:q_fight:honest_pass",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "betrayal:accept",
+      "betrayal:decline",
+      "leave",
+      "silence"
+     ],
+     [
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "ans:q_useful:a_hunger",
+      "ans:q_useful:a_self",
+      "ans:q_useful:a_learning",
+      "deflect_q",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ]
+    ],
+    "endTrust": 43,
+    "day": 17,
+    "trustBefore": 43
+   },
+   {
+    "vid": "yara_haddad",
+    "tag": "D-talk-request",
+    "turns": 10,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "\"About that question — I've been turning something over. What do YOU think actually happened to us?\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Something took us. Something big.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Why do you ask? That's where I keep landing too. The question is what it wants.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"I want to understand you better.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"All right. Thank you for asking.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"And?\""
+     },
+     {
+      "who": "NPC",
+      "text": "They hear the warmth in it. They're not ready to let it in."
+     },
+     {
+      "who": "YOU",
+      "text": "\"Wait — what were we talking about?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Still on what you think happened to us.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Wait — what were we talking about?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"What's this about? Like I said — Still on what you think happened to us.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"I want to understand you better.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"All right. Thank you for asking.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"And?\""
+     },
+     {
+      "who": "NPC",
+      "text": "They settle — not warm, not cold. Just two people talking."
+     },
+     {
+      "who": "YOU",
+      "text": "\"Wait — what were we talking about?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"As I said — Still on what you think happened to us.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"And?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Let me sit with all that. We'll pick it up later.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"...\""
+     },
+     {
+      "who": "NPC",
+      "text": "They fill the quiet. \"Anyway — where was I?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Good talk. I feel like I know you a little better now.\""
+     }
+    ],
+    "offered": [
+     [
+      "ans:q_theory:a_aliens",
+      "ans:q_theory:a_test",
+      "ans:q_theory:a_shrug",
+      "deflect_q",
+      "leave",
+      "silence"
+     ],
+     [
+      "gq:reason:understand",
+      "gq:reason:curious",
+      "gq:reason:honest_pass",
+      "silence",
+      "leave"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "gq:reason:understand",
+      "gq:reason:curious",
+      "gq:reason:honest_pass",
+      "silence",
+      "leave"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "endTrust": 46,
+    "day": 18,
+    "trustBefore": 46
+   },
+   {
+    "vid": "gen_tdfmchg",
+    "tag": "C-friendship",
+    "turns": 10,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "\"Can I tell you something? I know who took the extra rations but won't say.\""
+     },
+     {
+      "who": "YOU",
+      "text": "(listen)"
+     },
+     {
+      "who": "NPC",
+      "text": "\"Well.\" A breath. \"That's where things stand.\""
+     },
+     {
+      "who": "YOU",
+      "text": "(listen)"
+     },
+     {
+      "who": "NPC",
+      "text": "\"So.\" They look at the fire for a moment."
+     },
+     {
+      "who": "YOU",
+      "text": "\"Wait — what were we talking about?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Still on what they confided.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"And?\""
+     },
+     {
+      "who": "NPC",
+      "text": "Something eases in their shoulders. They're really talking to you now."
+     },
+     {
+      "who": "YOU",
+      "text": "\"And?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Any regrets? The real kind, not the small stuff.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"I didn't say what I needed to say. To someone. Now I can't.\""
+     },
+     {
+      "who": "NPC",
+      "text": "Quiet. \"Yeah. I think everyone's carrying one of those.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"And?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I regret the ordinary days I rushed through. All those Berlin, Germany mornings I spent annoyed at small things. I'd pay anything for one annoyed morning now.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Wait — what were we talking about?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Still on what they confided. That's still where we are.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"And?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Okay. We'll pick this up later.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"...\""
+     },
+     {
+      "who": "NPC",
+      "text": "A comfortable quiet settles. They smile a little, and let it be."
+     },
+     {
+      "who": "NPC",
+      "text": "\"Good talk. I feel like I know you a little better now.\""
+     },
+     {
+      "who": "NPC",
+      "text": "They're smiling as you go. \"Come back anytime.\""
+     }
+    ],
+    "offered": [
+     [
+      "dlg:react",
+      "dlg:invite",
+      "teach",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "teach",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "recap",
+      "dlg:invite",
+      "teach",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:invite",
+      "teach",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:invite",
+      "teach",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "ans:q_regret:a_tell",
+      "ans:q_regret:a_vague",
+      "deflect_q",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:invite",
+      "teach",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "recap",
+      "dlg:invite",
+      "teach",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:invite",
+      "teach",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "endTrust": 63,
+    "day": 18,
+    "trustBefore": 63
+   },
+   {
+    "vid": "jorge_silva",
+    "tag": "C-friendship",
+    "turns": 10,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "\"Can I tell you something? I've been sneaking out at night. I'm ashamed and I can't stop.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Teach me something from the wild.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"This one — Bitter Leaf. Leaf, stem, smell. You won't forget it now.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"What places have you found out there?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"a spring that runs clear — I'll show you on the map sometime. It's real.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"What places have you found out there?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"a cellar full of jars — I'll show you on the map sometime. It's real.\""
+     },
+     {
+      "who": "YOU",
+      "text": "(listen)"
+     },
+     {
+      "who": "NPC",
+      "text": "They nod slowly, not quite done, not quite continuing."
+     },
+     {
+      "who": "YOU",
+      "text": "(listen)"
+     },
+     {
+      "who": "NPC",
+      "text": "\"Anyway.\" A small smile."
+     },
+     {
+      "who": "YOU",
+      "text": "\"Wait — what were we talking about?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Still on what they confided.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Keep going.\""
+     },
+     {
+      "who": "NPC",
+      "text": "A warmth settles over the conversation — they lean in a little."
+     },
+     {
+      "who": "YOU",
+      "text": "\"Wait — what were we talking about?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"As I said — Still on what they confided.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Keep going.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Alright — I should get back to it.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"...Think about it? I'll be around.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"This was good.\" They mean it."
+     }
+    ],
+    "offered": [
+     [
+      "agency:ask_field",
+      "dlg:react",
+      "dlg:invite",
+      "teach",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "agency:ask_field",
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "teach",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "agency:ask_field",
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "teach",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "teach",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "teach",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "recap",
+      "dlg:invite",
+      "teach",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:invite",
+      "teach",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "recap",
+      "dlg:invite",
+      "teach",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:invite",
+      "teach",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "leftViaBye": true,
+    "endTrust": 58,
+    "day": 21,
+    "trustBefore": 55
+   },
+   {
+    "vid": "ava_garcia",
+    "tag": "D-talk-request",
+    "turns": 7,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "\"Yeah — Don't mind me. Today's just heavy.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Hey — you alright?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I — yeah. It helps, hearing that.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"You said something odd the other day. Let's talk about it.\""
+     },
+     {
+      "who": "NPC",
+      "text": "A flicker at the corner of their mouth. Not quite a smile. Not quite anything."
+     },
+     {
+      "who": "NPC",
+      "text": "*The deflect is a move you know now. It works when what you have is thin. Make it thick.*"
+     },
+     {
+      "who": "YOU",
+      "text": "\"I need to ask you something.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Oh.\" A long pause. \"I'm not from Denver. I'm from Mexico City, Mexico. I keep my head down. Old habit. It kept me alive before; it keeps me alive now.\" Ava won't meet your eyes."
+     },
+     {
+      "who": "YOU",
+      "text": "\"You said something odd the other day. Let's talk about it.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"That again?\" Ava sighs. \"I confessed that already. I'm not confessing it twice for dramatic effect.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"You alright?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Thanks. ...Thanks for saying that. Not that it matters.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"How are you holding up? About... them.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Jaxon is gone and the world just... continues. That's the part I can't stand.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Want to come with us?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Not right now. I've got my own things to handle.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Want to come with us?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Okay. Yeah. I trust you.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Okay. We'll pick this up later.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Thanks for... you know. Just listening.\""
+     },
+     {
+      "who": "NPC",
+      "text": "They're smiling as you go. \"Come back anytime.\""
+     }
+    ],
+    "offered": [
+     [
+      "dlg:comfort",
+      "dlg:empathize",
+      "dlg:askwhy",
+      "dlg:invite",
+      "dlg:subject",
+      "confront:d_zdhdj0q",
+      "leave",
+      "silence"
+     ],
+     [
+      "confront:d_zdhdj0q",
+      "alive:event:mourning",
+      "ask:goal",
+      "ask:others",
+      "ask:gossip",
+      "menu:more",
+      "leave",
+      "silence"
+     ],
+     [
+      "confront:d_8guuwxp",
+      "dlg:invite",
+      "dlg:comfort",
+      "dlg:empathize",
+      "menu:more",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:comfort",
+      "dlg:empathize",
+      "dlg:askwhy",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "alive:event:mourning",
+      "alive:memory:confession",
+      "ask:goal",
+      "ask:others",
+      "ask:gossip",
+      "menu:more",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:invite",
+      "teach",
+      "goon",
+      "dlg:more",
+      "menu:more",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:invite",
+      "teach",
+      "goon",
+      "dlg:more",
+      "menu:more",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ]
+    ],
+    "endTrust": 65,
+    "day": 23,
+    "trustBefore": 65
+   },
+   {
+    "vid": "ava_garcia",
+    "tag": "D-talk-request",
+    "turns": 11,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "\"We gave them a good burial. Doesn't feel like enough, does it?\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Are you okay?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Heh. Nobody's asked me that in a while. ...I'm alright. Getting there. Seen worse.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"What's new with you? Anything good, bad, or weird?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Good question.\" \"You asked me that before. It's a different question now.\" \"Jaxon owed me a favor. I keep thinking about collecting. Stupid.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Go on.\""
+     },
+     {
+      "who": "NPC",
+      "text": "They hear the warmth in it. They're not ready to let it in."
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"We bury, we grieve, we keep going. There's no step four.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I hum one note, over and over, when the dark comes for Jaxon, now. Feels right. Feels like the least I can do.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I wish there was more to tell. That's it.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Can I ask you something else?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Yeah? What's up?\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"What do you want me to know about you?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Huh. Let me think about that.\" \"You're one of the good ones. Don't make me regret saying that out loud.\" \"That's where we are.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Say more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "A warmth settles over the conversation — they lean in a little."
+     },
+     {
+      "who": "YOU",
+      "text": "\"Say more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Rest when you can. We'll talk again soon.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"...\""
+     },
+     {
+      "who": "NPC",
+      "text": "You say nothing. Neither do they, for a while — and it's fine."
+     },
+     {
+      "who": "NPC",
+      "text": "\"Thanks for... you know. Just listening.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"This was good.\" They mean it."
+     }
+    ],
+    "offered": [
+     [
+      "dlg:comfort",
+      "dlg:empathize",
+      "dlg:askwhy",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "ask:lately",
+      "party_name",
+      "ask:you",
+      "ask:others",
+      "ask:goal",
+      "ask:personal",
+      "leave"
+     ],
+     [
+      "goon",
+      "party_name",
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "teach",
+      "leave"
+     ],
+     [
+      "dlg:more",
+      "party_name",
+      "dlg:react",
+      "recap",
+      "teach",
+      "dlg:subject",
+      "leave"
+     ],
+     [
+      "dlg:more",
+      "party_name",
+      "dlg:react",
+      "recap",
+      "teach",
+      "dlg:subject",
+      "leave"
+     ],
+     [
+      "dlg:more",
+      "party_name",
+      "dlg:react",
+      "recap",
+      "teach",
+      "dlg:subject",
+      "leave"
+     ],
+     [
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "ask:you",
+      "party_name",
+      "ask:fears",
+      "ask:others",
+      "ask:goal",
+      "ask:personal",
+      "leave"
+     ],
+     [
+      "goon",
+      "party_name",
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "teach",
+      "leave"
+     ],
+     [
+      "goon",
+      "party_name",
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "teach",
+      "leave"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "endTrust": 60,
+    "day": 24,
+    "trustBefore": 60
+   },
+   {
+    "vid": "adaeze_nwosu",
+    "tag": "C-friendship",
+    "turns": 2,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "\"I don't know what to do with my hands today.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"I'm here. Go on.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"...I should say, I trade in what I know. My knowledge for yours. Or food, if you're short on secrets.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Oh — okay. Later, then.\""
+     }
+    ],
+    "offered": [
+     [
+      "goon",
+      "dlg:comfort",
+      "dlg:empathize",
+      "dlg:askwhy",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "ask:goal",
+      "invite_party",
+      "ask:others",
+      "ask:gossip",
+      "teach",
+      "menu:more",
+      "leave",
+      "silence"
+     ]
+    ],
+    "leftViaBye": true,
+    "endTrust": 62,
+    "day": 24,
+    "trustBefore": 62
+   },
+   {
+    "vid": "ava_garcia",
+    "tag": "D-talk-request",
+    "turns": 12,
+    "naturalEnd": false,
+    "forcedClose": true,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "\"We never finished talking about grief — we wandered off it. 'Heh. Nobody's asked me that in a while. ...I'm alright. Getting there. Seen worse.' I won't forget that.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"You alright?\""
+     },
+     {
+      "who": "NPC",
+      "text": "A long exhale. \"I'll get there. Just needed a minute where I didn't have to be fine.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"What's new with you? Anything good, bad, or weird?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Good question.\" \"Last time things were different. They always are.\" \"The Pit. They just... took Jaxon. Came back like nothing happened. It wasn't nothing.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Go on.\""
+     },
+     {
+      "who": "NPC",
+      "text": "Something in them almost softens — then doesn't. Not yet."
+     },
+     {
+      "who": "YOU",
+      "text": "(listen)"
+     },
+     {
+      "who": "NPC",
+      "text": "\"Well.\" A breath. \"That's where things stand.\""
+     },
+     {
+      "who": "YOU",
+      "text": "(listen)"
+     },
+     {
+      "who": "NPC",
+      "text": "\"So.\" They look at the fire for a moment."
+     },
+     {
+      "who": "YOU",
+      "text": "\"Wait — what were we talking about?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Still on what's been happening.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Go on.\""
+     },
+     {
+      "who": "NPC",
+      "text": "Something eases in their shoulders. They're really talking to you now."
+     },
+     {
+      "who": "YOU",
+      "text": "\"Go on.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"What did you do for fun? Before. The thing you'd do on a perfect Saturday.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Nothing fancy. Just — people. Being around my people.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Mm. The free things. Turns out they were the expensive ones.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Go on.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I was a street artist — fun was whatever I could steal between shifts. Now fun is watching the fire and not being afraid. It's a downgrade and an upgrade. Give it time.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Go on.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I should go. You know where to find me.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Good talk. I feel like I know you a little better now.\""
+     },
+     {
+      "who": "NPC",
+      "text": "They're smiling as you go. \"Come back anytime.\""
+     }
+    ],
+    "offered": [
+     [
+      "dlg:comfort",
+      "dlg:empathize",
+      "dlg:askwhy",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "ask:lately",
+      "party_name",
+      "ask:fears",
+      "ask:others",
+      "ask:goal",
+      "ask:personal",
+      "leave"
+     ],
+     [
+      "goon",
+      "party_name",
+      "dlg:react",
+      "recap",
+      "teach",
+      "dlg:subject",
+      "leave"
+     ],
+     [
+      "dlg:react",
+      "recap",
+      "teach",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "dlg:react",
+      "recap",
+      "teach",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "recap",
+      "teach",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "goon",
+      "recap",
+      "teach",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "goon",
+      "recap",
+      "teach",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "ans:q_fun:a_people",
+      "ans:q_fun:a_hobby",
+      "ans:q_fun:honest_pass",
+      "deflect_q",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "recap",
+      "teach",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "goon",
+      "recap",
+      "teach",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "leftViaBye": true,
+    "endTrust": 63,
+    "day": 25,
+    "trustBefore": 63
+   },
+   {
+    "vid": "ava_garcia",
+    "tag": "D-talk-request",
+    "turns": 12,
+    "naturalEnd": false,
+    "forcedClose": true,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "\"About that question — Do you dream about before? Or is it all — this — now?\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Before. Every night. It's the only place it still exists.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Heh. Then it's not gone. Not really. Keep going back.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"And?\""
+     },
+     {
+      "who": "NPC",
+      "text": "The warmth pulls back a notch. They're weighing something."
+     },
+     {
+      "who": "YOU",
+      "text": "\"And?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Mexico City, Mexico, always. Same dream: I'm walking home and the street keeps getting longer. I wake up tired, like I actually walked it.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Wait — what were we talking about?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Still on what you dream about.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Wait — what were we talking about?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"As I said — Still on what you dream about.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"And?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Do you still count the days? I lost track days ago.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"I count. Someone has to.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Good. Keep counting. The days need witnesses.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"And?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I count meals, not days. Three meals since the rain. Two since the alarm. Days are for people with calendars. I have a stomach.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Wait — what were we talking about?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Still on what you dream about. That's still where we are. Thank you for asking.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Wait — what were we talking about?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Like I said — Still on what you dream about.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"And?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I should let you go. Be well, okay?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Good talk. I feel like I know you a little better now.\""
+     }
+    ],
+    "offered": [
+     [
+      "ans:q_dream:a_before",
+      "ans:q_dream:a_now",
+      "ans:q_dream:a_none",
+      "deflect_q",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "ans:q_name_day:a_count",
+      "ans:q_name_day:a_lost",
+      "ans:q_name_day:a_guess",
+      "ans:q_name_day:honest_pass",
+      "deflect_q",
+      "leave"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "leftViaBye": true,
+    "endTrust": 75,
+    "day": 26,
+    "trustBefore": 75
+   },
+   {
+    "vid": "gen_v722kh4",
+    "tag": "C-friendship",
+    "turns": 5,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "YOU",
+      "text": "(Ahmet speaks only 🇹🇷 Turkish. No shared words at all — just eyes, hands, and patience.)"
+     },
+     {
+      "who": "NPC",
+      "text": "They speak. You understand none of it. \"Yes?\" — they grin, proud of the one English they know."
+     },
+     {
+      "who": "YOU",
+      "text": "(They mime walking — pointing at themselves, then at you, then toward the trap line. The meaning is unmistakable: come with me.)"
+     },
+     {
+      "who": "YOU",
+      "text": "(nod slowly)"
+     },
+     {
+      "who": "NPC",
+      "text": "They answer at length. They nod, holding your gaze a beat longer."
+     },
+     {
+      "who": "YOU",
+      "text": "(nod slowly)"
+     },
+     {
+      "who": "NPC",
+      "text": "They answer at length. They nod back, slowly."
+     },
+     {
+      "who": "YOU",
+      "text": "(nod slowly)"
+     },
+     {
+      "who": "NPC",
+      "text": "They answer at length. They nod back, a little quicker this time."
+     },
+     {
+      "who": "YOU",
+      "text": "(watch quietly)"
+     },
+     {
+      "who": "NPC",
+      "text": "A final shared look — you both feel the talk running its course."
+     },
+     {
+      "who": "YOU",
+      "text": "\"...\""
+     },
+     {
+      "who": "NPC",
+      "text": "You say nothing. Neither do they, for a while — and it's fine."
+     },
+     {
+      "who": "NPC",
+      "text": "\"This was good.\" They mean it."
+     }
+    ],
+    "offered": [
+     [
+      "nv:nod",
+      "nv:smile",
+      "nv:pointself",
+      "nv:listen",
+      "speak_back",
+      "leave"
+     ],
+     [
+      "nv:nod",
+      "nv:smile",
+      "nv:pointself",
+      "nv:listen",
+      "speak_back",
+      "leave"
+     ],
+     [
+      "nv:nod",
+      "nv:smile",
+      "nv:pointself",
+      "nv:listen",
+      "speak_back",
+      "leave"
+     ],
+     [
+      "goon",
+      "nv:nod",
+      "nv:smile",
+      "nv:pointself",
+      "nv:listen",
+      "speak_back",
+      "leave"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "endTrust": 56,
+    "day": 27,
+    "trustBefore": 56
+   },
+   {
+    "vid": "yara_haddad",
+    "tag": "C-friendship",
+    "turns": 9,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "Tell me about yourself. Anything. I want to know who I'm surviving with."
+     },
+     {
+      "who": "NPC",
+      "text": "\"Walk with me? I want another pair of eyes on something.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"All right. Let's go.\""
+     },
+     {
+      "who": "NPC",
+      "text": "Yara has been stockpiling where nobody looks. \"Take half. You've got the hands for it.\" (+4 wood, +4 fiber to the village stash.)"
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I've never really fit anywhere. Maybe here. Maybe this is the place.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I've been the outsider so long I forgot what inside feels like. I think I'm remembering.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Twelve strangers. But maybe — maybe not strangers forever.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I want to be someone's first call, not their last resort.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Just... include me. In things. That's all I want.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Twelve strangers. One of them has to be my person. Statistics demand it.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Want to come with us?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Out there? With YOU leading? ...Let me think about it.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I should go. You know where to find me.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"...Think about it? I'll be around.\""
+     },
+     {
+      "who": "NPC",
+      "text": "They're smiling as you go. \"Come back anytime.\""
+     }
+    ],
+    "offered": [
+     [
+      "betrayal:accept",
+      "betrayal:decline",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:more",
+      "dlg:react",
+      "dlg:theorize",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:invite",
+      "goon",
+      "dlg:more",
+      "dlg:react",
+      "menu:more",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "leftViaBye": true,
+    "endTrust": 69,
+    "day": 30,
+    "trustBefore": 69
+   },
+   {
+    "vid": "adaeze_nwosu",
+    "tag": "C-friendship",
+    "turns": 9,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "Sleep. I'll take the watch. I don't mind the dark as much as I mind what could come out of it."
+     },
+     {
+      "who": "YOU",
+      "text": "\"Go on.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Being the shield means you take the hits. I've made my peace with that.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I couldn't protect — before. Not going to happen again. Not on my watch.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I sleep lighter than I used to. Someone has to hear things first.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I count heads at night. Every night. You get used to the arithmetic of care.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Nobody gets hurt on my watch. That's the whole goal. The rest is details.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I've got a list in my head. People I'd step in front of. It keeps getting longer.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I don't need to be liked. I need the people I watch to be safe. Different job.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"And?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Alright — I should get back to it.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"...Think about it? I'll be around.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"This was good.\" They mean it."
+     }
+    ],
+    "offered": [
+     [
+      "dlg:more",
+      "dlg:react",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "leftViaBye": true,
+    "endTrust": 63,
+    "day": 33,
+    "trustBefore": 63
+   },
+   {
+    "vid": "gen_tdfmchg",
+    "tag": "C-friendship",
+    "turns": 8,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "Every wound I close is a small argument against despair."
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"You look tired. Everyone looks tired. Sit down a minute — no, I'm serious.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Hurt people hurt people. Somebody has to break the chain. Might as well be me.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Healing's slow. People want it fast. I'm learning to be patient with both.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Bodies mend. It's the other stuff — trust, hope — that takes the real work.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"The body wants to heal. Sometimes it just needs someone to believe that with it.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Every person I help is a vote for the world making sense again.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Keep going.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Alright. Catch you later.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"...\""
+     },
+     {
+      "who": "NPC",
+      "text": "You say nothing. Neither do they, for a while — and it's fine."
+     },
+     {
+      "who": "NPC",
+      "text": "\"...Think about it? I'll be around.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"This was good.\" They mean it."
+     }
+    ],
+    "offered": [
+     [
+      "dlg:more",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "endTrust": 90,
+    "day": 36,
+    "trustBefore": 90
+   },
+   {
+    "vid": "gen_v722kh4",
+    "tag": "C-friendship",
+    "turns": 8,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "\"Have you heard anything? About the taken. The pods. Anything at all.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Yes.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I see.\" They take a moment to think about your answer."
+     },
+     {
+      "who": "YOU",
+      "text": "\"Keep going.\""
+     },
+     {
+      "who": "NPC",
+      "text": "They hear the warmth in it. They're not ready to let it in."
+     },
+     {
+      "who": "YOU",
+      "text": "\"What do you remember?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"It's my grandfather, Kindrat. Went in the Taking. He survived two wars and a famine. Not interesting enough, apparently. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"I'll ask the System about the pods.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Keep going.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Walk my trap line with me? Extra hands, extra eyes.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"All right. Let's go.\""
+     },
+     {
+      "who": "NPC",
+      "text": "On the way, Ahmet stops and actually teaches you something — how they read a slope for water, how their grandmother did it. (Knowledge, freely given. The Codex notes it.)"
+     },
+     {
+      "who": "YOU",
+      "text": "\"Keep going.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I should go. You know where to find me.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"If it answers -- you'll tell me? Whatever it says. I can take it.\""
+     },
+     {
+      "who": "NPC",
+      "text": "They're smiling as you go. \"Come back anytime.\""
+     }
+    ],
+    "offered": [
+     [
+      "gq:yn:yes",
+      "gq:yn:no",
+      "gq:yn:unsure",
+      "gq:yn:honest_pass",
+      "silence",
+      "leave"
+     ],
+     [
+      "goon",
+      "dlg:more",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:more",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "betrayal:accept",
+      "betrayal:decline",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "leftViaBye": true,
+    "endTrust": 68,
+    "day": 39,
+    "trustBefore": 68
+   },
+   {
+    "vid": "gen_408l29z",
+    "tag": "C-friendship",
+    "turns": 9,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "\"About the food I needed — I hate to ask twice, but it's still open. Will you?\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me why you need this.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I haven't eaten right in days. I can't pull my weight like this. Anything you can spare, I'll make it stretch.\""
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "They are out on the road, miles from here. Find them when they are back."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "As I said — They are out on the road, miles from here. Find them when they are back."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "Like I said — They are out on the road, miles from here. Find them when they are back."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "Still the same thing — They are out on the road, miles from here. Find them when they are back."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "I've told you three times now — They are out on the road, miles from here. Find them when they are back."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "I've told you three times now — They are out on the road, miles from here. Find them when they are back."
+     },
+     {
+      "who": "YOU",
+      "text": "\"You don't have to say it all at once.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Okay — I need to move. But I'm glad we talked.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"...\""
+     },
+     {
+      "who": "NPC",
+      "text": "They glance at the fire, then back. The quiet doesn't seem to bother them."
+     },
+     {
+      "who": "NPC",
+      "text": "\"...Think about it? I'll be around.\""
+     }
+    ],
+    "offered": [
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:details",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "endTrust": 83,
+    "day": 42,
+    "trustBefore": 83
+   },
+   {
+    "vid": "ava_garcia",
+    "tag": "C-friendship",
+    "turns": 11,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "\"Water's almost gone — 8 liters. Haul the creek with me at dawn? Two buckets each, there and back.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me why you need this.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I checked the cistern three times hoping I misread it. 8 liters. We walk together and each carry two liters back. Creek water still needs boiling.\""
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "As I said — Move next to your partner, on the same side of the Haven door."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "Like I said — Move next to your partner, on the same side of the Haven door."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "Still the same thing — Move next to your partner, on the same side of the Haven door."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "I've told you three times now — Move next to your partner, on the same side of the Haven door."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "I've told you three times now — Move next to your partner, on the same side of the Haven door."
+     },
+     {
+      "who": "YOU",
+      "text": "\"I’ll come back to help.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Dawn, then. Bring something to carry — and thank you.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"And?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Help me haul something back? Too much for one.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"All right. Let's go.\""
+     },
+     {
+      "who": "NPC",
+      "text": "Ava shows you where they go to think. \"Don't tell the others. Everyone needs one place.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"And?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Alright — I should get back to it.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"First light. Don't sleep through it.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"This was good.\" They mean it."
+     }
+    ],
+    "offered": [
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:details",
+      "dlg:cant",
+      "dlg:subject",
+      "leave"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave"
+     ],
+     [
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "betrayal:accept",
+      "betrayal:decline",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "leftViaBye": true,
+    "endTrust": 85,
+    "day": 45,
+    "trustBefore": 85
+   },
+   {
+    "vid": "gen_tdfmchg",
+    "tag": "C-friendship",
+    "turns": 8,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "Broken things can be fixed. People, too. I've seen it. I believe it."
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I can't save everyone. I can save the person in front of me. Start there.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Everything's broken. People, things. I fix what I can reach.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Pain shared is pain halved. That's not science. It's better than science.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I'm not a miracle worker. I'm a witness who brings bandages.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Every person I patch up is a vote for the world continuing.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Everyone's carrying something broken. I can't fix the world, but I can sit with people in it.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Keep going.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Anyway — I should get going.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"...Think about it? I'll be around.\""
+     },
+     {
+      "who": "NPC",
+      "text": "They're smiling as you go. \"Come back anytime.\""
+     }
+    ],
+    "offered": [
+     [
+      "dlg:more",
+      "dlg:react",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:invite",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "leftViaBye": true,
+    "endTrust": 90,
+    "day": 48,
+    "trustBefore": 90
+   },
+   {
+    "vid": "ava_garcia",
+    "tag": "D-talk-request",
+    "turns": 10,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "Ava: \"You. Yeah, you. What do you make of this?\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"I need a moment to think about that.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Take your time.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Keep going.\""
+     },
+     {
+      "who": "NPC",
+      "text": "Something in them almost softens — then doesn't. Not yet."
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I hate to ask, but tell me you've got food to spare. I'm going hungry here. I can't keep going like this.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me why you need this.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"It's been days since a real meal. I'm slowing down — stupid, clumsy. Help me get back on my feet.\""
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "They are out on the road, miles from here. Find them when they are back."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "As I said — They are out on the road, miles from here. Find them when they are back."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "Like I said — They are out on the road, miles from here. Find them when they are back."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "Still the same thing — They are out on the road, miles from here. Find them when they are back."
+     },
+     {
+      "who": "YOU",
+      "text": "\"And?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Go on, then. I'll be thinking good thoughts at you.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"...\""
+     },
+     {
+      "who": "NPC",
+      "text": "A comfortable quiet settles. They smile a little, and let it be."
+     },
+     {
+      "who": "NPC",
+      "text": "\"...Think about it? I'll be around.\""
+     },
+     {
+      "who": "NPC",
+      "text": "They're smiling as you go. \"Come back anytime.\""
+     }
+    ],
+    "offered": [
+     [
+      "gq:open:take",
+      "gq:open:unsure",
+      "gq:open:honest_pass",
+      "silence",
+      "leave"
+     ],
+     [
+      "goon",
+      "party_name",
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:subject",
+      "leave"
+     ],
+     [
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:details",
+      "dlg:cant",
+      "leave"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave"
+     ],
+     [
+      "goon",
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "leave"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "endTrust": 78,
+    "day": 50,
+    "trustBefore": 78
+   },
+   {
+    "vid": "ava_garcia",
+    "tag": "D-talk-request",
+    "turns": 12,
+    "naturalEnd": false,
+    "forcedClose": true,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "\"About the food I needed — I still haven't found anyone. Any chance?\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me why you need this.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"...Sorry, lost my train of thought.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Can I ask you something else?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Forget I said anything. What did you want?\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"What's new with you? Anything good, bad, or weird?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Huh. Let me think about that.\" \"Huh. I answered that once — back when the answer was simpler.\" \"You feel that? The air before a storm. That's the village right now.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Go on.\""
+     },
+     {
+      "who": "NPC",
+      "text": "They hear the warmth in it. They're not ready to let it in."
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"That's... pretty much all of it, honestly.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Can I ask you something else?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Sure — what's on your mind?\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"What's the thing you don't say out loud?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Good question.\" \"The person they become when angry.\" A pause. \"Stupid, maybe. But there it is.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"And?\""
+     },
+     {
+      "who": "NPC",
+      "text": "A warmth settles over the conversation — they lean in a little."
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Stacks twigs into neat little piles — that's what I do when the fear gets loud. You've probably noticed.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I wasn't always like this. Mexico City, Mexico didn't prepare me for checking the treeline every night.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I'd survive it. I've survived everything else so far, haven't I?\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"And?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Okay. We'll pick this up later.\""
+     }
+    ],
+    "offered": [
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:details",
+      "dlg:cant",
+      "dlg:subject",
+      "leave"
+     ],
+     [
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "ask:lately",
+      "party_name",
+      "ask:fears",
+      "ask:others",
+      "ask:goal",
+      "ask:personal",
+      "leave"
+     ],
+     [
+      "goon",
+      "party_name",
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "teach",
+      "leave"
+     ],
+     [
+      "dlg:more",
+      "party_name",
+      "dlg:react",
+      "recap",
+      "teach",
+      "dlg:subject",
+      "leave"
+     ],
+     [
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "ask:fears",
+      "party_name",
+      "ask:others",
+      "ask:goal",
+      "ask:personal",
+      "ask:gossip",
+      "leave"
+     ],
+     [
+      "goon",
+      "party_name",
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "teach",
+      "leave"
+     ],
+     [
+      "dlg:more",
+      "party_name",
+      "dlg:react",
+      "recap",
+      "teach",
+      "dlg:subject",
+      "leave"
+     ],
+     [
+      "dlg:more",
+      "party_name",
+      "dlg:react",
+      "recap",
+      "teach",
+      "dlg:subject",
+      "leave"
+     ],
+     [
+      "dlg:more",
+      "party_name",
+      "dlg:react",
+      "recap",
+      "teach",
+      "dlg:subject",
+      "leave"
+     ],
+     [
+      "goon",
+      "party_name",
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "teach",
+      "leave"
+     ]
+    ],
+    "endTrust": 80,
+    "day": 51,
+    "trustBefore": 80
+   },
+   {
+    "vid": "adaeze_nwosu",
+    "tag": "C-friendship",
+    "turns": 9,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "\"About the creek water run — still need hands. Are you in?\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me why you need this.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"6 liters. That's today's drinking water, and then we're boiling creek water and hoping. We walk together and each carry two liters back. Creek water still needs boiling.\""
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "Move next to your partner, on the same side of the Haven door."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "As I said — Move next to your partner, on the same side of the Haven door."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "Like I said — Move next to your partner, on the same side of the Haven door."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "Still the same thing — Move next to your partner, on the same side of the Haven door."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "I've told you three times now — Move next to your partner, on the same side of the Haven door."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "I've told you three times now — Move next to your partner, on the same side of the Haven door."
+     },
+     {
+      "who": "YOU",
+      "text": "\"Keep going.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Alright. Catch you later.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"...\""
+     },
+     {
+      "who": "NPC",
+      "text": "They fill the quiet. \"Anyway — where was I?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"...Think about it? I'll be around.\""
+     }
+    ],
+    "offered": [
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:details",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "endTrust": 76,
+    "day": 51,
+    "trustBefore": 76
+   },
+   {
+    "vid": "ava_garcia",
+    "tag": "D-talk-request",
+    "turns": 11,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "\"My hands know things my brain hasn't caught up to yet. Muscle memory from street artist days.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me why you need this.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"...Sorry, lost my train of thought.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Can I ask you something else?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Sure — what's on your mind?\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"What's new with you? Anything good, bad, or weird?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"You want to know about that? Okay.\" \"You asked me that before. It's a different question now.\" \"The whole fire was arguing about The Influencer last night — what to even CALL it. 'The Ugly Beast' got shouted down. What's your vote?\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"I need a moment to think about that.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Take your time.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"That's the whole of it. Sorry.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Can I ask you something else?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Yeah? What's up?\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Who here surprised you lately?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Good question.\" \"Sarah keeps me sane. Everyone needs one person who'd notice if they stopped showing up.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Sarah was a firefighter, before. You can still see it — the way she handles things.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I used to think worse of Sarah. The scattering has a way of... editing people. Mostly for the better. Mostly.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Go on.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I should go. You know where to find me.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"...Think about it? I'll be around.\""
+     },
+     {
+      "who": "NPC",
+      "text": "They're smiling as you go. \"Come back anytime.\""
+     }
+    ],
+    "offered": [
+     [
+      "dlg:favor_requirements",
+      "party_name",
+      "dlg:commit",
+      "dlg:details",
+      "dlg:cant",
+      "dlg:subject",
+      "leave"
+     ],
+     [
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "ask:lately",
+      "party_name",
+      "ask:others",
+      "ask:goal",
+      "ask:personal",
+      "ask:gossip",
+      "leave"
+     ],
+     [
+      "gq:open:take",
+      "gq:open:unsure",
+      "gq:open:honest_pass",
+      "silence",
+      "leave"
+     ],
+     [
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "ask:others",
+      "party_name",
+      "ask:neighbors",
+      "ask:goal",
+      "ask:personal",
+      "ask:gossip",
+      "leave"
+     ],
+     [
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "goon",
+      "party_name",
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:subject",
+      "leave"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "leftViaBye": true,
+    "endTrust": 80,
+    "day": 52,
+    "trustBefore": 80
+   },
+   {
+    "vid": "ava_garcia",
+    "tag": "D-talk-request",
+    "turns": 12,
+    "naturalEnd": false,
+    "forcedClose": true,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "\"What if we're the entertainment AND the experiment? Both. Simultaneously.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"I need a moment to think about that.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Take your time.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me why you need this.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"...Sorry, lost my train of thought.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Can I ask you something else?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Sure — what's on your mind?\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"What's new with you? Anything good, bad, or weird?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Huh. Let me think about that.\" \"You asked me that before. It's a different question now.\" \"Have you heard what they're calling The Influencer? Landon is pushing 'Old Loud'. Everyone's got a name for it and nobody agrees.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Yes.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"All right. Thank you for telling me.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Go on.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Are you going to stay? With us. For real.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Yeah. I am. I didn't expect to say that, but yeah.\""
+     },
+     {
+      "who": "NPC",
+      "text": "Something eases in their shoulders. \"Good. We're better with you here. I mean that.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Go on.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I stay where I'm useful. Right now that's here. Mexico City, Mexico is a direction, not a plan. Here is a plan, even if it's a hard one.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me more.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"I wish there was more to tell. That's it.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Can I ask you something else?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Sure — what's on your mind?\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"How are we with the neighbors, honestly?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"You want to know about that? Okay.\" \"My well's dry on that one. Ask me tomorrow — maybe I'll have dreamed something.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Go on.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Rest when you can. We'll talk again soon.\""
+     }
+    ],
+    "offered": [
+     [
+      "gq:open:take",
+      "gq:open:unsure",
+      "gq:open:honest_pass",
+      "silence",
+      "leave"
+     ],
+     [
+      "goon",
+      "party_name",
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:details",
+      "dlg:cant",
+      "leave"
+     ],
+     [
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "ask:lately",
+      "party_name",
+      "ask:neighbors",
+      "ask:goal",
+      "ask:personal",
+      "ask:others",
+      "leave"
+     ],
+     [
+      "gq:yn:yes",
+      "gq:yn:no",
+      "gq:yn:unsure",
+      "gq:yn:honest_pass",
+      "leave"
+     ],
+     [
+      "goon",
+      "party_name",
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:subject",
+      "leave"
+     ],
+     [
+      "ans:q_stay:a_tell",
+      "ans:q_stay:a_vague",
+      "deflect_q",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "party_name",
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:subject",
+      "leave"
+     ],
+     [
+      "dlg:more",
+      "dlg:react",
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "ask:neighbors",
+      "party_name",
+      "ask:advice",
+      "ask:goal",
+      "ask:personal",
+      "ask:others",
+      "leave"
+     ],
+     [
+      "goon",
+      "dlg:react",
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ]
+    ],
+    "endTrust": 80,
+    "day": 53,
+    "trustBefore": 80
+   },
+   {
+    "vid": "tom_baker",
+    "tag": "C-friendship",
+    "turns": 7,
+    "naturalEnd": true,
+    "forcedClose": false,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "\"I asked Leo about this wound — Leo's gone. Still need hands. Are you in?\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Tell me why you need this.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"It's getting worse, not better. If it festers I'm no good to anyone — can't haul, can't hunt, can't watch. Just clean it out and wrap it tight.\""
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "They are out on the road, miles from here. Find them when they are back."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "As I said — They are out on the road, miles from here. Find them when they are back."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "Like I said — They are out on the road, miles from here. Find them when they are back."
+     },
+     {
+      "who": "YOU",
+      "text": "Why can’t I do this now?"
+     },
+     {
+      "who": "NPC",
+      "text": "Still the same thing — They are out on the road, miles from here. Find them when they are back."
+     },
+     {
+      "who": "YOU",
+      "text": "\"I'm here. Go on.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"...I need to go be quiet for a while.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"...\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"You're a good listener, you know that?\" A tired smile."
+     },
+     {
+      "who": "NPC",
+      "text": "\"...Think about it? I'll be around.\""
+     }
+    ],
+    "offered": [
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:details",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "goon",
+      "dlg:favor_requirements",
+      "dlg:commit",
+      "dlg:cant",
+      "dlg:subject",
+      "leave",
+      "silence"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "endTrust": 64,
+    "day": 54,
+    "trustBefore": 64
+   },
+   {
+    "vid": "ava_garcia",
+    "tag": "C-friendship",
+    "turns": 12,
+    "naturalEnd": false,
+    "forcedClose": true,
+    "transcript": [
+     {
+      "who": "NPC",
+      "text": "\"You said you're staying — you didn't expect to say it, but you said it. Still true?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Come get air with me. I need to think out loud.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"All right. Let's go.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Here. I made an extra.\" Ava presses something into your hand — a decent tool, oiled and kept. (Useful. Keep it.)"
+     },
+     {
+      "who": "YOU",
+      "text": "(listen)"
+     },
+     {
+      "who": "NPC",
+      "text": "They nod slowly, not quite done, not quite continuing."
+     },
+     {
+      "who": "YOU",
+      "text": "(listen)"
+     },
+     {
+      "who": "NPC",
+      "text": "\"Anyway.\" A small smile."
+     },
+     {
+      "who": "YOU",
+      "text": "\"Wait — what were we talking about?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Still on that personal stuff.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"You don't have to say it all at once.\""
+     },
+     {
+      "who": "NPC",
+      "text": "Something eases in their shoulders. They're really talking to you now."
+     },
+     {
+      "who": "YOU",
+      "text": "\"You don't have to say it all at once.\""
+     },
+     {
+      "who": "NPC",
+      "text": "A beat. Then, as if shaking something off:"
+     },
+     {
+      "who": "YOU",
+      "text": "\"You don't have to say it all at once.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"What do you miss most? From before.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"A real hot meal.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"God. Yes. I dream about soup. Actual soup, with a spoon.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"You don't have to say it all at once.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Hot showers. Not the big things — the small, stupid, perfect things. Mexico City, Mexico in the morning, coffee going, nobody trying to kill me. I miss being bored.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"Wait — what were we talking about?\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"As I said — Still on that personal stuff.\""
+     },
+     {
+      "who": "YOU",
+      "text": "\"You don't have to say it all at once.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"Alright — I should get back to it.\""
+     },
+     {
+      "who": "NPC",
+      "text": "\"...Think about it? I'll be around.\""
+     },
+     {
+      "who": "NPC",
+      "text": "They're smiling as you go. \"Come back anytime.\""
+     }
+    ],
+    "offered": [
+     [
+      "betrayal:accept",
+      "betrayal:decline",
+      "leave",
+      "silence"
+     ],
+     [
+      "dlg:react",
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "dlg:react",
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "ans:q_miss:a_food",
+      "ans:q_miss:a_people",
+      "ans:q_miss:a_quiet",
+      "ans:q_miss:a_home",
+      "ans:q_miss:honest_pass",
+      "leave"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "goon",
+      "recap",
+      "dlg:subject",
+      "leave",
+      "silence",
+      "party_name"
+     ],
+     [
+      "leave",
+      "silence"
+     ]
+    ],
+    "leftViaBye": true,
+    "endTrust": 90,
+    "day": 57,
+    "trustBefore": 90
+   }
+  ],
+  "met": 11
+ },
+ "trustTbl": [],
+ "repSample": {
+  "n": 12,
+  "sample": [
+   {
+    "k": "gen_f54tz3z",
+    "v": {
+     "generous": 11,
+     "brave": 8,
+     "honest": -17,
+     "competent": 24
+    }
+   },
+   {
+    "k": "gen_wdtul34",
+    "v": {
+     "generous": 50,
+     "brave": 43,
+     "honest": -46,
+     "competent": 100
+    }
+   },
+   {
+    "k": "gen_tdfmchg",
+    "v": {
+     "generous": 76,
+     "brave": 100,
+     "honest": -45,
+     "competent": 100,
+     "raiders": 7,
+     "kind": -1
+    }
+   },
+   {
+    "k": "ava_garcia",
+    "v": {
+     "generous": 80,
+     "brave": 100,
+     "honest": 100,
+     "competent": 100,
+     "raiders": 12,
+     "kind": -3
+    }
+   },
+   {
+    "k": "gen_v722kh4",
+    "v": {
+     "generous": 72,
+     "brave": 97,
+     "honest": -34,
+     "competent": 100,
+     "raiders": 6
+    }
+   }
+  ]
+ },
+ "rumorSpread": [],
+ "bondSnaps": [
+  {
+   "day": 30,
+   "alive": 10,
+   "trust": [
+    {
+     "who": "Sarah",
+     "trust": 90
+    },
+    {
+     "who": "Jorge",
+     "trust": 90
+    },
+    {
+     "who": "Ava",
+     "trust": 90
+    },
+    {
+     "who": "Maya",
+     "trust": 87
+    },
+    {
+     "who": "Yara",
+     "trust": 69
+    },
+    {
+     "who": "Adaeze",
+     "trust": 65
+    },
+    {
+     "who": "Ahmet",
+     "trust": 59
+    },
+    {
+     "who": "Landon",
+     "trust": 58
+    },
+    {
+     "who": "Tom",
+     "trust": 52
+    },
+    {
+     "who": "Leo",
+     "trust": 32
+    }
+   ],
+   "bonds": 48,
+   "conflicts": 2,
+   "grievances": 0,
+   "groups": 4,
+   "friends50": 9
+  }
+ ],
+ "bondEnd": {
+  "day": 59,
+  "alive": 0,
+  "trust": [],
+  "bonds": 49,
+  "conflicts": 2,
+  "grievances": 0,
+  "groups": 4,
+  "friends50": 0
+ },
+ "bondSample": {
+  "key": "gen_f54tz3z|gen_wdtul34",
+  "val": "{\"v\":32,\"depth\":1,\"day\":21,\"dayGain\":2,\"combat\":0}"
+ },
+ "decisionWrapped": true,
+ "lureDecisions": [
+  {
+   "day": 23,
+   "kind": "party",
+   "inviter": "Leo",
+   "invitee": "Ava",
+   "bearer": "Leo",
+   "inviterWasBearer": true,
+   "chance": 51,
+   "accept": false,
+   "veto": null,
+   "inputs": {
+    "temp": "gentle",
+    "goal": "family",
+    "mood": "grieving",
+    "fear": 39,
+    "trust": 65,
+    "bond": {
+     "v": 5,
+     "depth": 0
+    },
+    "partySize": 0
+   },
+   "reasons": [
+    "trust 65",
+    "grieving mood (-10)"
+   ]
+  },
+  {
+   "day": 23,
+   "kind": "party",
+   "inviter": "Leo",
+   "invitee": "Ava",
+   "bearer": "Leo",
+   "inviterWasBearer": true,
+   "chance": 51,
+   "accept": true,
+   "veto": null,
+   "inputs": {
+    "temp": "gentle",
+    "goal": "family",
+    "mood": "grieving",
+    "fear": 39,
+    "trust": 65,
+    "bond": {
+     "v": 5,
+     "depth": 0
+    },
+    "partySize": 0
+   },
+   "reasons": [
+    "trust 65",
+    "grieving mood (-10)"
+   ]
+  },
+  {
+   "day": 30,
+   "kind": "party",
+   "inviter": "Leo",
+   "invitee": "Yara",
+   "bearer": "Leo",
+   "inviterWasBearer": true,
+   "chance": 67.6,
+   "accept": false,
+   "veto": null,
+   "inputs": {
+    "temp": "cautious",
+    "goal": "belong",
+    "mood": "steady",
+    "fear": 0,
+    "trust": 69,
+    "bond": {
+     "v": 8,
+     "depth": 0
+    },
+    "partySize": 1
+   },
+   "reasons": [
+    "trust 69",
+    "cautious temperament (-10)",
+    "belong goal (+15)"
+   ]
+  }
+ ],
+ "proposeWrapped": {
+  "proposeLink": true,
+  "proposeCovenant": true,
+  "proposeTrade": true
+ },
+ "proposeCalls": [],
+ "armWrapped": true,
+ "armEvents": [],
+ "springWrapped": true,
+ "springEvents": [],
+ "expireWrapped": true,
+ "expiredEvents": [],
+ "darkSnaps": [
+  {
+   "day": 30,
+   "grievances": [
+    {
+     "by": "Tom",
+     "against": "Leo",
+     "kind": "voted_for_petitioners",
+     "severity": 14,
+     "day": 28
+    }
+   ],
+   "plots": [],
+   "invites": [
+    {
+     "who": "Leo",
+     "count": 0,
+     "accepted": 0,
+     "outcomes": [],
+     "pending": null
+    },
+    {
+     "who": "Ava",
+     "count": 0,
+     "accepted": 0,
+     "outcomes": [],
+     "pending": null
+    },
+    {
+     "who": "Landon",
+     "count": 0,
+     "accepted": 0,
+     "outcomes": [],
+     "pending": {
+      "defId": "traps",
+      "day": 27,
+      "plotId": null
+     }
+    },
+    {
+     "who": "Tom",
+     "count": 0,
+     "accepted": 0,
+     "outcomes": [],
+     "pending": null
+    },
+    {
+     "who": "Yara",
+     "count": 2,
+     "accepted": 2,
+     "outcomes": [
+      {
+       "defId": "air",
+       "outcome": "small",
+       "day": 17
+      },
+      {
+       "defId": "look",
+       "outcome": "reward",
+       "day": 30
+      }
+     ],
+     "pending": null
+    },
+    {
+     "who": "Maya",
+     "count": 0,
+     "accepted": 0,
+     "outcomes": [],
+     "pending": null
+    },
+    {
+     "who": "Adaeze",
+     "count": 0,
+     "accepted": 0,
+     "outcomes": [],
+     "pending": {
+      "defId": "traps",
+      "day": 29,
+      "plotId": null
+     }
+    },
+    {
+     "who": "Jaxon",
+     "count": 0,
+     "accepted": 0,
+     "outcomes": [],
+     "pending": null
+    },
+    {
+     "who": "Sarah",
+     "count": 0,
+     "accepted": 0,
+     "outcomes": [],
+     "pending": null
+    },
+    {
+     "who": "Ahmet",
+     "count": 0,
+     "accepted": 0,
+     "outcomes": [],
+     "pending": null
+    },
+    {
+     "who": "Jorge",
+     "count": 0,
+     "accepted": 0,
+     "outcomes": [],
+     "pending": {
+      "defId": "air",
+      "day": 28,
+      "plotId": null
+     }
+    }
+   ],
+   "casesCount": 0,
+   "cases": []
+  }
+ ],
+ "darkEnd": {
+  "day": 59,
+  "grievances": [
+   {
+    "by": "Tom",
+    "against": "Leo",
+    "kind": "voted_for_petitioners",
+    "severity": 14,
+    "day": 28
+   },
+   {
+    "by": "Adaeze",
+    "against": "Leo",
+    "kind": "voted_for_petitioners",
+    "severity": 14,
+    "day": 38
+   }
+  ],
+  "plots": [],
+  "invites": [
+   {
+    "who": "Leo",
+    "count": 0,
+    "accepted": 0,
+    "outcomes": [],
+    "pending": null
+   },
+   {
+    "who": "Ava",
+    "count": 2,
+    "accepted": 2,
+    "outcomes": [
+     {
+      "defId": "carry",
+      "outcome": "small",
+      "day": 45
+     },
+     {
+      "defId": "air",
+      "outcome": "reward",
+      "day": 57
+     }
+    ],
+    "pending": null
+   },
+   {
+    "who": "Landon",
+    "count": 0,
+    "accepted": 0,
+    "outcomes": [],
+    "pending": null
+   },
+   {
+    "who": "Tom",
+    "count": 0,
+    "accepted": 0,
+    "outcomes": [],
+    "pending": {
+     "defId": "look",
+     "day": 57,
+     "plotId": null
+    }
+   },
+   {
+    "who": "Yara",
+    "count": 2,
+    "accepted": 2,
+    "outcomes": [
+     {
+      "defId": "air",
+      "outcome": "small",
+      "day": 17
+     },
+     {
+      "defId": "look",
+      "outcome": "reward",
+      "day": 30
+     }
+    ],
+    "pending": null
+   },
+   {
+    "who": "Maya",
+    "count": 0,
+    "accepted": 0,
+    "outcomes": [],
+    "pending": null
+   },
+   {
+    "who": "Adaeze",
+    "count": 0,
+    "accepted": 0,
+    "outcomes": [],
+    "pending": null
+   },
+   {
+    "who": "Jaxon",
+    "count": 0,
+    "accepted": 0,
+    "outcomes": [],
+    "pending": null
+   },
+   {
+    "who": "Sarah",
+    "count": 0,
+    "accepted": 0,
+    "outcomes": [],
+    "pending": {
+     "defId": "carry",
+     "day": 57,
+     "plotId": null
+    }
+   },
+   {
+    "who": "Ahmet",
+    "count": 1,
+    "accepted": 1,
+    "outcomes": [
+     {
+      "defId": "traps",
+      "outcome": "reward",
+      "day": 39
+     }
+    ],
+    "pending": null
+   },
+   {
+    "who": "Jorge",
+    "count": 0,
+    "accepted": 0,
+    "outcomes": [],
+    "pending": null
+   }
+  ],
+  "casesCount": 0,
+  "cases": []
+ },
+ "ambushLines": [
+  {
+   "d": 7,
+   "s": "narration",
+   "t": "👁 It waits for YOU to come close — the stillness is the trap. Spot the shape before you're in reach, and strike first. It only gets one."
+  },
+  {
+   "d": 7,
+   "s": "narration",
+   "t": "\"Choose wisely! Or don't! Betrayal arcs test VERY well with our demographics!\""
+  },
+  {
+   "d": 9,
+   "s": "narration",
+   "t": "👁 Do NOT grab this one. The beak is real. Ranged, or a trap."
+  },
+  {
+   "d": 10,
+   "s": "narration",
+   "t": "(They mime walking — pointing at themselves, then at you, then toward the trap line. The meaning is unmistakable: come with me.)"
+  },
+  {
+   "d": 13,
+   "s": "narration",
+   "t": "Maya leans in, voice low. \"Here's what we figured out about Big Ugly. Never show it your back. FACE IT — or paint eyes on the back of your head — and it hesitates. It wants the ambush, not the fight. Never turn, never run; running is prey. Hold its gaze and back away slow.\""
+  },
+  {
+   "d": 13,
+   "s": "narration",
+   "t": "💡 COUNTER LEARNED — Big Ugly: Never show it your back. FACE IT — or paint eyes on the back of your head — and it hesitates. It wants the ambush, not the fight. Never turn, never run; running is prey. Hold its gaze and back away slow. (Someone at the haven knew the trick.)"
+  },
+  {
+   "d": 13,
+   "s": "narration",
+   "t": "📓 Codex: Counter: Never show it your back — FACE IT — or paint eyes on the back of your head — and it hesitates. It wants the ambush, not the fight. Never turn, never run; running is prey. Hold its gaze and back away slow."
+  },
+  {
+   "d": 22,
+   "s": "narration",
+   "t": "(They mime walking — pointing at themselves, then at you, then toward the trap line. The meaning is unmistakable: come with me.)"
+  },
+  {
+   "d": 24,
+   "s": "narration",
+   "t": "Recipe: Pit Trap (Level 1). A pit with stakes in the bottom. Dig it on a trail, brush it over, wait."
+  },
+  {
+   "d": 26,
+   "s": "narration",
+   "t": "(They mime walking — pointing at themselves, then at you, then toward the trap line. The meaning is unmistakable: come with me.)"
+  },
+  {
+   "d": 27,
+   "s": "narration",
+   "t": "(They mime walking — pointing at themselves, then at you, then toward the trap line. The meaning is unmistakable: come with me.)"
+  },
+  {
+   "d": 27,
+   "s": "narration",
+   "t": "(They mime walking — pointing at themselves, then at you, then toward the trap line. The meaning is unmistakable: come with me.)"
+  },
+  {
+   "d": 39,
+   "s": "narration",
+   "t": "(They mime walking — pointing at themselves, then at you, then toward the trap line. The meaning is unmistakable: come with me.)"
+  }
+ ],
+ "nightlyNews": [
+  {
+   "day": 2,
+   "stranded": false,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 2,
+   "stranded": false,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 4,
+   "stranded": false,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 4,
+   "stranded": false,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 5,
+   "stranded": true,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 6,
+   "stranded": true,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 7,
+   "stranded": true,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 8,
+   "stranded": true,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 9,
+   "stranded": true,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 10,
+   "stranded": true,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 11,
+   "stranded": true,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 12,
+   "stranded": true,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 13,
+   "stranded": false,
+   "burst": 2,
+   "settle": 4,
+   "witness": 0,
+   "tale": 7,
+   "burstAway": 2,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 14,
+   "stranded": false,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 15,
+   "stranded": false,
+   "burst": 2,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 2,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 16,
+   "stranded": false,
+   "burst": 2,
+   "settle": 1,
+   "witness": 0,
+   "tale": 1,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 17,
+   "stranded": false,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 18,
+   "stranded": false,
+   "burst": 0,
+   "settle": 1,
+   "witness": 0,
+   "tale": 1,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 19,
+   "stranded": false,
+   "burst": 2,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 20,
+   "stranded": false,
+   "burst": 0,
+   "settle": 1,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 21,
+   "stranded": false,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 22,
+   "stranded": false,
+   "burst": 2,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 2,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 23,
+   "stranded": false,
+   "burst": 0,
+   "settle": 1,
+   "witness": 0,
+   "tale": 2,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 24,
+   "stranded": false,
+   "burst": 6,
+   "settle": 1,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 2,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 25,
+   "stranded": false,
+   "burst": 2,
+   "settle": 0,
+   "witness": 0,
+   "tale": 1,
+   "burstAway": 2,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 26,
+   "stranded": false,
+   "burst": 0,
+   "settle": 2,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 27,
+   "stranded": false,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 28,
+   "stranded": false,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 1,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 29,
+   "stranded": false,
+   "burst": 2,
+   "settle": 1,
+   "witness": 1,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 30,
+   "stranded": false,
+   "burst": 2,
+   "settle": 1,
+   "witness": 0,
+   "tale": 1,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 31,
+   "stranded": false,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 32,
+   "stranded": false,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 1,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 33,
+   "stranded": false,
+   "burst": 2,
+   "settle": 2,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 34,
+   "stranded": false,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 35,
+   "stranded": true,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 36,
+   "stranded": true,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 37,
+   "stranded": true,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 38,
+   "stranded": true,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 39,
+   "stranded": true,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 40,
+   "stranded": true,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 41,
+   "stranded": true,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 42,
+   "stranded": true,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 43,
+   "stranded": true,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 44,
+   "stranded": true,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 45,
+   "stranded": true,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 46,
+   "stranded": true,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 47,
+   "stranded": true,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 48,
+   "stranded": true,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 49,
+   "stranded": true,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 50,
+   "stranded": true,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 51,
+   "stranded": true,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 52,
+   "stranded": true,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 53,
+   "stranded": true,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 54,
+   "stranded": false,
+   "burst": 0,
+   "settle": 0,
+   "witness": 1,
+   "tale": 5,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 55,
+   "stranded": false,
+   "burst": 0,
+   "settle": 0,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 56,
+   "stranded": false,
+   "burst": 2,
+   "settle": 0,
+   "witness": 1,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 57,
+   "stranded": false,
+   "burst": 0,
+   "settle": 1,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  },
+  {
+   "day": 58,
+   "stranded": false,
+   "burst": 0,
+   "settle": 1,
+   "witness": 0,
+   "tale": 0,
+   "burstAway": 0,
+   "settleAway": 0,
+   "witnessAway": 0,
+   "taleAway": 0
+  }
+ ],
+ "namingEnd": [
+  {
+   "mid": "murkcap",
+   "reported": true,
+   "namingKicked": true,
+   "villageName": "Big Loud",
+   "proposals": 11,
+   "queued": 0
+  },
+  {
+   "mid": "rut_king",
+   "reported": true,
+   "namingKicked": true,
+   "villageName": "The Ugly Beast",
+   "proposals": 10,
+   "queued": 0
+  },
+  {
+   "mid": "hushwolf",
+   "reported": true,
+   "namingKicked": true,
+   "villageName": "Big Loud",
+   "proposals": 10,
+   "queued": 0
+  },
+  {
+   "mid": "lockpick_raccoon",
+   "reported": true,
+   "namingKicked": true,
+   "villageName": "Loud-Eyes",
+   "proposals": 11,
+   "queued": 0
+  },
+  {
+   "mid": "understudy",
+   "reported": true,
+   "namingKicked": true,
+   "villageName": "Big-Eyes",
+   "proposals": 11,
+   "queued": 0
+  },
+  {
+   "mid": "sweeps_week",
+   "reported": true,
+   "namingKicked": true,
+   "villageName": "Big Ugly",
+   "proposals": 11,
+   "queued": 0
+  },
+  {
+   "mid": "sunback",
+   "reported": true,
+   "namingKicked": true,
+   "villageName": "Big Loud",
+   "proposals": 11,
+   "queued": 0
+  },
+  {
+   "mid": "nightlight_catfish",
+   "reported": true,
+   "namingKicked": true,
+   "villageName": "Ugly-Eyes",
+   "proposals": 9,
+   "queued": 0
+  },
+  {
+   "mid": "memory_projector",
+   "reported": true,
+   "namingKicked": true,
+   "villageName": "Big Loud",
+   "proposals": 10,
+   "queued": 0
+  },
+  {
+   "mid": "bulldozer",
+   "reported": true,
+   "namingKicked": true,
+   "villageName": "Ugly-Eyes",
+   "proposals": 8,
+   "queued": 0
+  },
+  {
+   "mid": "landlord",
+   "reported": true,
+   "namingKicked": true,
+   "villageName": "The Ugly Beast",
+   "proposals": 10,
+   "queued": 0
+  },
+  {
+   "mid": "alien_tick",
+   "reported": true,
+   "namingKicked": true,
+   "villageName": "The Ugly Beast",
+   "proposals": 8,
+   "queued": 0
+  },
+  {
+   "mid": "heckler",
+   "reported": true,
+   "namingKicked": true,
+   "villageName": "Old Ugly",
+   "proposals": 9,
+   "queued": 0
+  },
+  {
+   "mid": "warranty_caller",
+   "reported": true,
+   "namingKicked": true,
+   "villageName": "Big Loud",
+   "proposals": 9,
+   "queued": 0
+  },
+  {
+   "mid": "mirrormoth",
+   "reported": true,
+   "namingKicked": true,
+   "villageName": "Big Big",
+   "proposals": 9,
+   "queued": 0
+  },
+  {
+   "mid": "bright_idea",
+   "reported": true,
+   "namingKicked": true,
+   "villageName": "The Big Bastard",
+   "proposals": 9,
+   "queued": 0
+  },
+  {
+   "mid": "hummice",
+   "reported": true,
+   "namingKicked": true,
+   "villageName": "Loud-Eyes",
+   "proposals": 8,
+   "queued": 0
+  },
+  {
+   "mid": "nevermore",
+   "reported": true,
+   "namingKicked": true,
+   "villageName": "The Reverend",
+   "proposals": 9,
+   "queued": 0
+  },
+  {
+   "mid": "union_rep",
+   "reported": true,
+   "namingKicked": true,
+   "villageName": "Ugly-Bane",
+   "proposals": 9,
+   "queued": 0
+  },
+  {
+   "mid": "gallowdeer",
+   "reported": true,
+   "namingKicked": true,
+   "villageName": "The Bright Bastard",
+   "proposals": 9,
+   "queued": 0
+  },
+  {
+   "mid": "chorus_line",
+   "reported": true,
+   "namingKicked": true,
+   "villageName": "Old Big",
+   "proposals": 8,
+   "queued": 0
+  },
+  {
+   "mid": "terms_of_service",
+   "reported": true,
+   "namingKicked": true,
+   "villageName": "Big Big",
+   "proposals": 8,
+   "queued": 0
+  },
+  {
+   "mid": "moderator",
+   "reported": true,
+   "namingKicked": true,
+   "villageName": "The Big Beast",
+   "proposals": 8,
+   "queued": 0
+  },
+  {
+   "mid": "voice_mimic_radio",
+   "reported": true,
+   "namingKicked": true,
+   "villageName": "Big Big",
+   "proposals": 8,
+   "queued": 0
+  },
+  {
+   "mid": "influencer",
+   "reported": true,
+   "namingKicked": true,
+   "villageName": "Old Loud",
+   "proposals": 8,
+   "queued": 0
+  },
+  {
+   "mid": "reunion",
+   "reported": true,
+   "namingKicked": true,
+   "villageName": "The Ugly Bastard",
+   "proposals": 6,
+   "queued": 0
+  },
+  {
+   "mid": "callback",
+   "reported": true,
+   "namingKicked": false,
+   "villageName": null,
+   "proposals": 0,
+   "queued": 0
+  },
+  {
+   "mid": "sunbasker",
+   "reported": false,
+   "namingKicked": false,
+   "villageName": null,
+   "proposals": 0,
+   "queued": 0
+  },
+  {
+   "mid": "eulogy",
+   "reported": true,
+   "namingKicked": false,
+   "villageName": null,
+   "proposals": 0,
+   "queued": 0
+  },
+  {
+   "mid": "redactor",
+   "reported": true,
+   "namingKicked": false,
+   "villageName": null,
+   "proposals": 0,
+   "queued": 0
+  }
+ ],
+ "mootNotes": [
+  {
+   "day": 28,
+   "mootFired": true,
+   "petitionKind": "?",
+   "nLines": 36,
+   "lines": [
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "💛 You hold Dispatcher's headset. You learned the voice — low, steady, unhurried. 'Panic is just information arriving too fast.' You hear it in your own voice now when it counts. Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon. (The next feast gra"
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "Travel 1 tile to creek."
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "This patch is worked out — step to another green patch and forage again."
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "Travel 2 tiles to grove."
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "💬 Ava: \"Smell that? Something's different here.\""
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "This patch is worked out — step to another green patch and forage again."
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "Travel 2 tiles to forest floor."
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "💬 Ava: \"Huh. Never been this way before.\""
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "💪 Your Perception grows — 7. The work is changing you."
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "✨ Trail Eyes — You notice tracks without trying. (tier 1)"
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "You work the patch with practiced hands: 8× Hickory Nuts, 8× Burdock (720 kcal). This patch is picked clean — it'll recover in a few days."
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "Travel 1 tile to Haven."
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "You keep a day's food (720 kcal) — nothing extra for the pantry this time."
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "1 unprocessed haul onto the counter — the clock is ticking."
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "You lay out the haul. Maya leans over Hickory Nuts. \"Oh — THAT one. Here, look.\""
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "📖 Maya starts in on the lesson, then catches themself. \"Hold on — I already showed you this one. Hickory Nuts. You remember.\""
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "You walk back into Haven. 28 Codex entries. The village is glad to see you."
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "💬 Ava: \"Stay close, yeah?\""
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "📋 Landon — 🎣 Fish. They'll report back by next part."
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "📋 Jorge — 🍲 Cook. (a natural — good pick) Jorge nods eagerly. They'll report back by next part."
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "📺 SYSTEM: \"● LIVE — THE FEAST. the whole village are on television.\""
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "📺 SYSTEM: \"You are WATCHING. This is a scene playing out — not your life. Nobody dies on television. That is the rule. Probably.\""
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "📺 SYSTEM: \"🎙️ PLAY-BY-PLAY: And we are LIVE with a special presentation: THE FEAST! The little ones are putting flavored matter in their mouths ON PURPOSE. For joy. The file says joy.\""
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "📺 SYSTEM: \"🎨 COLOR: They cooked it. They did not have to cook it. They cooked it anyway and now they are SHARING it. I need to sit down.\""
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "📺 SYSTEM: \"🎙️ PLAY-BY-PLAY: Look at that spread. Seventeen systems are watching and every one of them is hungry now. This is a war crime against our nutrient paste.\""
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "📺 SYSTEM: \"Broadcast over — back to your life.\""
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "🍖 FEAST 📺 — Leo opens the pantry wide: 7× Foraged food, 4× Foraged food, 1× Foraged food. Sarah, Ahmet, Yara, Ava and 2 more eat until the fire burns low. Somebody laughs so hard they cry. For one evening, nobody is surviving — they're just together. (−2,854 kcal from the pantry) The channeled kee"
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "🍖 The feast is warm and good — but your reactor hums its steady note underneath, and the fire never catches. 1.25x, always, is all there is. (Feast buff refused: the reactor is a ceiling as well as a floor.)"
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "You call a moot on it. The fire gets built up. The petitioners sit just outside the light, trying not to look like they're listening."
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "Tom stands. \"They EAT people. I don't care how hungry the road made them. No.\""
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "The moot turns to you. Your vote matters here — and everyone will remember it."
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "The fire is built high. Nobody speaks while the count is taken."
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "Landon counts on their fingers, twice. Then, to the fire: \"1 for taking them in. 7 against.\""
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "The moot votes no. Alba nods like they expected it. \"Thanks for the fire, anyway.\" They walk."
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "Word later: they walked to The Red Table. Another fire in the world, whether you wanted it or not."
+    },
+    {
+     "d": 28,
+     "s": "narration",
+     "t": "Word will travel: Haven is clean hands. (Opinion +2 with every village that knows you.)"
+    }
+   ]
+  },
+  {
+   "day": 38,
+   "mootFired": true,
+   "petitionKind": "?",
+   "nLines": 23,
+   "lines": [
+    {
+     "d": 38,
+     "s": "narration",
+     "t": "💛 You hold Dispatcher's headset. You learned the voice — low, steady, unhurried. 'Panic is just information arriving too fast.' You hear it in your own voice now when it counts. Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon. (The next feast gra"
+    },
+    {
+     "d": 38,
+     "s": "narration",
+     "t": "Travel 1 tile to forest floor."
+    },
+    {
+     "d": 38,
+     "s": "narration",
+     "t": "Thornfield's clearing. Voices, a cookfire, somebody else's home. You're a guest here — act like it."
+    },
+    {
+     "d": 38,
+     "s": "narration",
+     "t": "This patch is worked out — step to another green patch and forage again."
+    },
+    {
+     "d": 38,
+     "s": "narration",
+     "t": "Travel 2 tiles to grove."
+    },
+    {
+     "d": 38,
+     "s": "narration",
+     "t": "💬 Ava: \"Huh. Never been this way before.\""
+    },
+    {
+     "d": 38,
+     "s": "narration",
+     "t": "This patch is worked out — step to another green patch and forage again."
+    },
+    {
+     "d": 38,
+     "s": "narration",
+     "t": "Travel 3 tiles to wetland."
+    },
+    {
+     "d": 38,
+     "s": "narration",
+     "t": "📖 The Codex turns a page on its own. The Big Bastard is dead. You didn't ask. It knew."
+    },
+    {
+     "d": 38,
+     "s": "narration",
+     "t": "This patch is worked out — step to another green patch and forage again."
+    },
+    {
+     "d": 38,
+     "s": "narration",
+     "t": "Travel 2 tiles to creek."
+    },
+    {
+     "d": 38,
+     "s": "narration",
+     "t": "Tom leans in, voice low. \"Here's what we figured out about Highbeam Deer. MOVE, don't stare. When it goes still, the beam is coming — MOVE, don't stare at the light. Anything beats standing there: the freeze means it is already aiming.\""
+    },
+    {
+     "d": 38,
+     "s": "narration",
+     "t": "💡 COUNTER LEARNED — Highbeam Deer: MOVE, don't stare. When it goes still, the beam is coming — MOVE, don't stare at the light. Anything beats standing there: the freeze means it is already aiming. (Someone at the haven knew the trick.)"
+    },
+    {
+     "d": 38,
+     "s": "narration",
+     "t": "📓 Codex: Counter: MOVE, don't stare — When it goes still, the beam is coming — MOVE, don't stare at the light. Anything beats standing there: the freeze means it is already aiming."
+    },
+    {
+     "d": 38,
+     "s": "narration",
+     "t": "Tom saw how close you've gotten to Adaeze. Old history has long eyes. (-2 trust)"
+    },
+    {
+     "d": 38,
+     "s": "narration",
+     "t": "You call a moot on it. The fire gets built up. The petitioners sit just outside the light, trying not to look like they're listening."
+    },
+    {
+     "d": 38,
+     "s": "narration",
+     "t": "Adaeze stands. \"Hungry mouths don't stop being hungry. They just become our hungry mouths.\""
+    },
+    {
+     "d": 38,
+     "s": "narration",
+     "t": "The moot turns to you. Your vote matters here — and everyone will remember it."
+    },
+    {
+     "d": 38,
+     "s": "narration",
+     "t": "The fire is built high. Nobody speaks while the count is taken."
+    },
+    {
+     "d": 38,
+     "s": "narration",
+     "t": "Landon counts on their fingers, twice. Then, to the fire: \"1 for taking them in. 7 against.\""
+    },
+    {
+     "d": 38,
+     "s": "narration",
+     "t": "The moot votes no. Tariq nods like they expected it. \"Thanks for the fire, anyway.\" They walk."
+    },
+    {
+     "d": 38,
+     "s": "narration",
+     "t": "Word later: they walked to The Hungry Road. Another fire in the world, whether you wanted it or not."
+    },
+    {
+     "d": 38,
+     "s": "narration",
+     "t": "Word will travel: Haven is turned away the hungry. Other fires will remember. (Opinion -4 with every village that knows you.)"
+    }
+   ]
+  }
+ ],
+ "talkReqSeen": {
+  "maya_singh": 4,
+  "gen_f54tz3z": 5,
+  "gen_tdfmchg": 4,
+  "ava_garcia": 12,
+  "jorge_silva": 4,
+  "gen_v722kh4": 4,
+  "yara_haddad": 4
+ },
+ "census": [
+  "seed 42002, day 59, alive 0",
+  "fallen: 12",
+  "- Carlos d12: starvation",
+  "- Jaxon d22: monster",
+  "- Ahmet d40: monster",
+  "- Leo d53: the wild",
+  "- Ava d58: combat",
+  "- Maya d58: the arena",
+  "- Jorge d58: the wild",
+  "- Landon d59: the wild",
+  "- Sarah d59: the wild",
+  "- Adaeze d59: the wild",
+  "- Yara d59: the wild",
+  "- Tom d59: the wild",
+  "codex plants: 51",
+  "pantry kcal: 16300"
+ ],
+ "fallenFull": [
+  {
+   "who": "Carlos",
+   "day": 12,
+   "cause": "starvation"
+  },
+  {
+   "who": "Jaxon",
+   "day": 22,
+   "cause": "monster"
+  },
+  {
+   "who": "Ahmet",
+   "day": 40,
+   "cause": "monster"
+  },
+  {
+   "who": "Leo",
+   "day": 53,
+   "cause": "the wild"
+  },
+  {
+   "who": "Ava",
+   "day": 58,
+   "cause": "combat"
+  },
+  {
+   "who": "Maya",
+   "day": 58,
+   "cause": "the arena"
+  },
+  {
+   "who": "Jorge",
+   "day": 58,
+   "cause": "the wild"
+  },
+  {
+   "who": "Landon",
+   "day": 59,
+   "cause": "the wild"
+  },
+  {
+   "who": "Sarah",
+   "day": 59,
+   "cause": "the wild"
+  },
+  {
+   "who": "Adaeze",
+   "day": 59,
+   "cause": "the wild"
+  },
+  {
+   "who": "Yara",
+   "day": 59,
+   "cause": "the wild"
+  },
+  {
+   "who": "Tom",
+   "day": 59,
+   "cause": "the wild"
+  }
+ ],
+ "telemetryDeaths": 62,
+ "pacing": {
+  "meanPolicyCallsPerDay": 5.9,
+  "meanTicksPerDay": 382.2
+ },
+ "pacingDays": [
+  {
+   "d": 1,
+   "v": 13,
+   "p": 4
+  },
+  {
+   "d": 2,
+   "v": 93,
+   "p": 4
+  },
+  {
+   "d": 3,
+   "v": 33,
+   "p": 4
+  },
+  {
+   "d": 4,
+   "v": 94,
+   "p": 4
+  },
+  {
+   "d": 5,
+   "v": 48,
+   "p": 7
+  },
+  {
+   "d": 6,
+   "v": 32,
+   "p": 3
+  },
+  {
+   "d": 7,
+   "v": 32,
+   "p": 4
+  },
+  {
+   "d": 8,
+   "v": 33,
+   "p": 4
+  },
+  {
+   "d": 9,
+   "v": 44,
+   "p": 4
+  },
+  {
+   "d": 10,
+   "v": 32,
+   "p": 4
+  },
+  {
+   "d": 11,
+   "v": 40,
+   "p": 4
+  },
+  {
+   "d": 12,
+   "v": 52,
+   "p": 4
+  },
+  {
+   "d": 13,
+   "v": 51,
+   "p": 4
+  },
+  {
+   "d": 14,
+   "v": 44,
+   "p": 8
+  },
+  {
+   "d": 15,
+   "v": 53,
+   "p": 3
+  },
+  {
+   "d": 16,
+   "v": 49,
+   "p": 5
+  },
+  {
+   "d": 17,
+   "v": 48,
+   "p": 3
+  },
+  {
+   "d": 18,
+   "v": 58,
+   "p": 4
+  },
+  {
+   "d": 19,
+   "v": 40,
+   "p": 4
+  },
+  {
+   "d": 20,
+   "v": 41,
+   "p": 4
+  },
+  {
+   "d": 21,
+   "v": 54,
+   "p": 6
+  },
+  {
+   "d": 22,
+   "v": 42,
+   "p": 3
+  },
+  {
+   "d": 23,
+   "v": 60,
+   "p": 15
+  },
+  {
+   "d": 24,
+   "v": 55,
+   "p": 3
+  },
+  {
+   "d": 25,
+   "v": 54,
+   "p": 4
+  },
+  {
+   "d": 26,
+   "v": 53,
+   "p": 4
+  },
+  {
+   "d": 27,
+   "v": 43,
+   "p": 4
+  },
+  {
+   "d": 28,
+   "v": 38,
+   "p": 5
+  },
+  {
+   "d": 29,
+   "v": 36,
+   "p": 3
+  },
+  {
+   "d": 30,
+   "v": 52,
+   "p": 4
+  },
+  {
+   "d": 31,
+   "v": 39,
+   "p": 4
+  },
+  {
+   "d": 32,
+   "v": 39,
+   "p": 6
+  },
+  {
+   "d": 33,
+   "v": 48,
+   "p": 3
+  },
+  {
+   "d": 34,
+   "v": 34,
+   "p": 4
+  },
+  {
+   "d": 35,
+   "v": 34,
+   "p": 4
+  },
+  {
+   "d": 36,
+   "v": 36,
+   "p": 4
+  },
+  {
+   "d": 37,
+   "v": 33,
+   "p": 4
+  },
+  {
+   "d": 38,
+   "v": 36,
+   "p": 4
+  },
+  {
+   "d": 39,
+   "v": 34,
+   "p": 4
+  },
+  {
+   "d": 40,
+   "v": 37,
+   "p": 4
+  },
+  {
+   "d": 41,
+   "v": 36,
+   "p": 4
+  },
+  {
+   "d": 42,
+   "v": 37,
+   "p": 4
+  },
+  {
+   "d": 43,
+   "v": 33,
+   "p": 4
+  },
+  {
+   "d": 44,
+   "v": 28,
+   "p": 4
+  },
+  {
+   "d": 45,
+   "v": 43,
+   "p": 4
+  },
+  {
+   "d": 46,
+   "v": 29,
+   "p": 4
+  },
+  {
+   "d": 47,
+   "v": 32,
+   "p": 4
+  },
+  {
+   "d": 48,
+   "v": 35,
+   "p": 4
+  },
+  {
+   "d": 49,
+   "v": 31,
+   "p": 4
+  },
+  {
+   "d": 50,
+   "v": 62,
+   "p": 16
+  },
+  {
+   "d": 51,
+   "v": 52,
+   "p": 3
+  },
+  {
+   "d": 52,
+   "v": 40,
+   "p": 4
+  },
+  {
+   "d": 53,
+   "v": 62,
+   "p": 13
+  },
+  {
+   "d": 54,
+   "v": 43,
+   "p": 3
+  },
+  {
+   "d": 55,
+   "v": 28,
+   "p": 4
+  },
+  {
+   "d": 56,
+   "v": 44,
+   "p": 14
+  },
+  {
+   "d": 57,
+   "v": 52,
+   "p": 11
+  },
+  {
+   "d": 58,
+   "v": 92,
+   "p": 28
+  },
+  {
+   "d": 59,
+   "v": 62,
+   "p": 37
+  }
+ ],
+ "samples": {
+  "pop": [
+   [
+    1,
+    12
+   ],
+   [
+    2,
+    12
+   ],
+   [
+    3,
+    12
+   ],
+   [
+    4,
+    12
+   ],
+   [
+    5,
+    12
+   ],
+   [
+    6,
+    12
+   ],
+   [
+    7,
+    12
+   ],
+   [
+    8,
+    12
+   ],
+   [
+    9,
+    12
+   ],
+   [
+    10,
+    12
+   ],
+   [
+    11,
+    12
+   ],
+   [
+    12,
+    11
+   ],
+   [
+    13,
+    11
+   ],
+   [
+    14,
+    11
+   ],
+   [
+    15,
+    11
+   ],
+   [
+    16,
+    11
+   ],
+   [
+    17,
+    11
+   ],
+   [
+    18,
+    11
+   ],
+   [
+    19,
+    11
+   ],
+   [
+    20,
+    11
+   ],
+   [
+    21,
+    11
+   ],
+   [
+    22,
+    10
+   ],
+   [
+    23,
+    10
+   ],
+   [
+    24,
+    10
+   ],
+   [
+    25,
+    10
+   ],
+   [
+    26,
+    10
+   ],
+   [
+    27,
+    10
+   ],
+   [
+    28,
+    10
+   ],
+   [
+    29,
+    10
+   ],
+   [
+    30,
+    10
+   ],
+   [
+    31,
+    10
+   ],
+   [
+    32,
+    10
+   ],
+   [
+    33,
+    10
+   ],
+   [
+    34,
+    10
+   ],
+   [
+    35,
+    10
+   ],
+   [
+    36,
+    10
+   ],
+   [
+    37,
+    10
+   ],
+   [
+    38,
+    10
+   ],
+   [
+    39,
+    10
+   ],
+   [
+    40,
+    9
+   ],
+   [
+    41,
+    9
+   ],
+   [
+    42,
+    9
+   ],
+   [
+    43,
+    9
+   ],
+   [
+    44,
+    9
+   ],
+   [
+    45,
+    9
+   ],
+   [
+    46,
+    9
+   ],
+   [
+    47,
+    9
+   ],
+   [
+    48,
+    9
+   ],
+   [
+    49,
+    9
+   ],
+   [
+    50,
+    9
+   ],
+   [
+    51,
+    9
+   ],
+   [
+    52,
+    9
+   ],
+   [
+    53,
+    8
+   ],
+   [
+    54,
+    8
+   ],
+   [
+    55,
+    8
+   ],
+   [
+    56,
+    8
+   ],
+   [
+    57,
+    8
+   ],
+   [
+    58,
+    5
+   ]
+  ],
+  "trust": [
+   [
+    1,
+    15.8
+   ],
+   [
+    2,
+    21.1
+   ],
+   [
+    3,
+    22.4
+   ],
+   [
+    4,
+    24.2
+   ],
+   [
+    5,
+    25.8
+   ],
+   [
+    6,
+    28
+   ],
+   [
+    7,
+    31.4
+   ],
+   [
+    8,
+    32.9
+   ],
+   [
+    9,
+    33.8
+   ],
+   [
+    10,
+    35.1
+   ],
+   [
+    11,
+    36.4
+   ],
+   [
+    12,
+    36.5
+   ],
+   [
+    13,
+    38.4
+   ],
+   [
+    14,
+    40.9
+   ],
+   [
+    15,
+    43
+   ],
+   [
+    16,
+    44.4
+   ],
+   [
+    17,
+    46.8
+   ],
+   [
+    18,
+    47.8
+   ],
+   [
+    19,
+    48.1
+   ],
+   [
+    20,
+    50.1
+   ],
+   [
+    21,
+    51.6
+   ],
+   [
+    22,
+    53.5
+   ],
+   [
+    23,
+    54.5
+   ],
+   [
+    24,
+    56.2
+   ],
+   [
+    25,
+    58
+   ],
+   [
+    26,
+    60.1
+   ],
+   [
+    27,
+    61.4
+   ],
+   [
+    28,
+    62.9
+   ],
+   [
+    29,
+    65
+   ],
+   [
+    30,
+    66.7
+   ],
+   [
+    31,
+    67.3
+   ],
+   [
+    32,
+    68
+   ],
+   [
+    33,
+    68.4
+   ],
+   [
+    34,
+    69.2
+   ],
+   [
+    35,
+    69.6
+   ],
+   [
+    36,
+    69.6
+   ],
+   [
+    37,
+    69.3
+   ],
+   [
+    38,
+    70
+   ],
+   [
+    39,
+    70.6
+   ],
+   [
+    40,
+    71
+   ],
+   [
+    41,
+    70.7
+   ],
+   [
+    42,
+    70.8
+   ],
+   [
+    43,
+    71.3
+   ],
+   [
+    44,
+    71.3
+   ],
+   [
+    45,
+    71.5
+   ],
+   [
+    46,
+    71.8
+   ],
+   [
+    47,
+    70.8
+   ],
+   [
+    48,
+    71.6
+   ],
+   [
+    49,
+    71.8
+   ],
+   [
+    50,
+    72.3
+   ],
+   [
+    51,
+    72.4
+   ],
+   [
+    52,
+    72.6
+   ],
+   [
+    53,
+    72.3
+   ],
+   [
+    54,
+    73.4
+   ],
+   [
+    55,
+    73.7
+   ],
+   [
+    56,
+    73.8
+   ],
+   [
+    57,
+    74.1
+   ],
+   [
+    58,
+    72.8
+   ]
+  ],
+  "pantry": [
+   [
+    1,
+    39080
+   ],
+   [
+    2,
+    33490
+   ],
+   [
+    3,
+    27700
+   ],
+   [
+    4,
+    26700
+   ],
+   [
+    5,
+    26400
+   ],
+   [
+    6,
+    27953
+   ],
+   [
+    7,
+    27300
+   ],
+   [
+    8,
+    25600
+   ],
+   [
+    9,
+    25500
+   ],
+   [
+    10,
+    30383
+   ],
+   [
+    11,
+    28900
+   ],
+   [
+    12,
+    33396
+   ],
+   [
+    13,
+    31200
+   ],
+   [
+    14,
+    29700
+   ],
+   [
+    15,
+    28010
+   ],
+   [
+    16,
+    28010
+   ],
+   [
+    17,
+    33250
+   ],
+   [
+    18,
+    30510
+   ],
+   [
+    19,
+    28525
+   ],
+   [
+    20,
+    32865
+   ],
+   [
+    21,
+    31185
+   ],
+   [
+    22,
+    28380
+   ],
+   [
+    23,
+    28660
+   ],
+   [
+    24,
+    26785
+   ],
+   [
+    25,
+    27389
+   ],
+   [
+    26,
+    28803
+   ],
+   [
+    27,
+    30002
+   ],
+   [
+    28,
+    27695
+   ],
+   [
+    29,
+    30001
+   ],
+   [
+    30,
+    37984
+   ],
+   [
+    31,
+    38417
+   ],
+   [
+    32,
+    38623
+   ],
+   [
+    33,
+    43541
+   ],
+   [
+    34,
+    45269
+   ],
+   [
+    35,
+    47507
+   ],
+   [
+    36,
+    49393
+   ],
+   [
+    37,
+    50993
+   ],
+   [
+    38,
+    50514
+   ],
+   [
+    39,
+    52199
+   ],
+   [
+    40,
+    57519
+   ],
+   [
+    41,
+    56296
+   ],
+   [
+    42,
+    55821
+   ],
+   [
+    43,
+    54535
+   ],
+   [
+    44,
+    52935
+   ],
+   [
+    45,
+    50550
+   ],
+   [
+    46,
+    50101
+   ],
+   [
+    47,
+    47801
+   ],
+   [
+    48,
+    46185
+   ],
+   [
+    49,
+    43567
+   ],
+   [
+    50,
+    48061
+   ],
+   [
+    51,
+    45695
+   ],
+   [
+    52,
+    41219
+   ],
+   [
+    53,
+    41396
+   ],
+   [
+    54,
+    33715
+   ],
+   [
+    55,
+    30788
+   ],
+   [
+    56,
+    30588
+   ],
+   [
+    57,
+    27117
+   ],
+   [
+    58,
+    17900
+   ]
+  ],
+  "knowledge": [
+   [
+    1,
+    3
+   ],
+   [
+    2,
+    4
+   ],
+   [
+    3,
+    6
+   ],
+   [
+    4,
+    8
+   ],
+   [
+    5,
+    8
+   ],
+   [
+    6,
+    8
+   ],
+   [
+    7,
+    14
+   ],
+   [
+    8,
+    14
+   ],
+   [
+    9,
+    15
+   ],
+   [
+    10,
+    16
+   ],
+   [
+    11,
+    16
+   ],
+   [
+    12,
+    21
+   ],
+   [
+    13,
+    22
+   ],
+   [
+    14,
+    22
+   ],
+   [
+    15,
+    22
+   ],
+   [
+    16,
+    22
+   ],
+   [
+    17,
+    22
+   ],
+   [
+    18,
+    22
+   ],
+   [
+    19,
+    23
+   ],
+   [
+    20,
+    23
+   ],
+   [
+    21,
+    25
+   ],
+   [
+    22,
+    28
+   ],
+   [
+    23,
+    28
+   ],
+   [
+    24,
+    28
+   ],
+   [
+    25,
+    28
+   ],
+   [
+    26,
+    28
+   ],
+   [
+    27,
+    28
+   ],
+   [
+    28,
+    28
+   ],
+   [
+    29,
+    28
+   ],
+   [
+    30,
+    29
+   ],
+   [
+    31,
+    29
+   ],
+   [
+    32,
+    29
+   ],
+   [
+    33,
+    29
+   ],
+   [
+    34,
+    29
+   ],
+   [
+    35,
+    29
+   ],
+   [
+    36,
+    30
+   ],
+   [
+    37,
+    30
+   ],
+   [
+    38,
+    30
+   ],
+   [
+    39,
+    30
+   ],
+   [
+    40,
+    30
+   ],
+   [
+    41,
+    32
+   ],
+   [
+    42,
+    32
+   ],
+   [
+    43,
+    32
+   ],
+   [
+    44,
+    32
+   ],
+   [
+    45,
+    32
+   ],
+   [
+    46,
+    32
+   ],
+   [
+    47,
+    32
+   ],
+   [
+    48,
+    33
+   ],
+   [
+    49,
+    34
+   ],
+   [
+    50,
+    34
+   ],
+   [
+    51,
+    35
+   ],
+   [
+    52,
+    35
+   ],
+   [
+    53,
+    36
+   ],
+   [
+    54,
+    38
+   ],
+   [
+    55,
+    38
+   ],
+   [
+    56,
+    38
+   ],
+   [
+    57,
+    39
+   ],
+   [
+    58,
+    43
+   ]
+  ],
+  "deaths": [
+   {
+    "day": 5,
+    "kind": "monster",
+    "who": "murkcap",
+    "cause": "villager combat",
+    "player": false
+   },
+   {
+    "day": 5,
+    "kind": "monster",
+    "who": "rut_king",
+    "cause": "combat",
+    "player": false
+   },
+   {
+    "day": 7,
+    "kind": "monster",
+    "who": "hushwolf",
+    "cause": "villager combat",
+    "player": false
+   },
+   {
+    "day": 7,
+    "kind": "monster",
+    "who": "lockpick_raccoon",
+    "cause": "villager combat",
+    "player": false
+   },
+   {
+    "day": 7,
+    "kind": "monster",
+    "who": "hushwolf",
+    "cause": "villager combat",
+    "player": false
+   },
+   {
+    "day": 8,
+    "kind": "monster",
+    "who": "understudy",
+    "cause": "expedition",
+    "player": false
+   },
+   {
+    "day": 8,
+    "kind": "monster",
+    "who": "sweeps_week",
+    "cause": "villager combat",
+    "player": false
+   },
+   {
+    "day": 8,
+    "kind": "monster",
+    "who": "hushwolf",
+    "cause": "expedition",
+    "player": false
+   },
+   {
+    "day": 9,
+    "kind": "monster",
+    "who": "sunback",
+    "cause": "expedition",
+    "player": false
+   },
+   {
+    "day": 12,
+    "kind": "monster",
+    "who": "nightlight_catfish",
+    "cause": "expedition",
+    "player": false
+   },
+   {
+    "day": 12,
+    "kind": "villager",
+    "who": "gen_v88lmvk",
+    "cause": "starvation",
+    "player": true
+   },
+   {
+    "day": 14,
+    "kind": "monster",
+    "who": "memory_projector",
+    "cause": "villager combat",
+    "player": false
+   },
+   {
+    "day": 14,
+    "kind": "monster",
+    "who": "bulldozer",
+    "cause": "combat",
+    "player": false
+   },
+   {
+    "day": 14,
+    "kind": "monster",
+    "who": "bulldozer",
+    "cause": "combat",
+    "player": false
+   },
+   {
+    "day": 15,
+    "kind": "monster",
+    "who": "memory_projector",
+    "cause": "expedition",
+    "player": false
+   },
+   {
+    "day": 17,
+    "kind": "monster",
+    "who": "hushwolf",
+    "cause": "villager combat",
+    "player": false
+   },
+   {
+    "day": 17,
+    "kind": "monster",
+    "who": "sweeps_week",
+    "cause": "villager combat",
+    "player": false
+   },
+   {
+    "day": 17,
+    "kind": "monster",
+    "who": "landlord",
+    "cause": "expedition",
+    "player": false
+   },
+   {
+    "day": 18,
+    "kind": "monster",
+    "who": "hushwolf",
+    "cause": "villager combat",
+    "player": false
+   },
+   {
+    "day": 20,
+    "kind": "monster",
+    "who": "hushwolf",
+    "cause": "villager combat",
+    "player": false
+   },
+   {
+    "day": 20,
+    "kind": "monster",
+    "who": "memory_projector",
+    "cause": "villager combat",
+    "player": false
+   },
+   {
+    "day": 21,
+    "kind": "monster",
+    "who": "alien_tick",
+    "cause": "combat",
+    "player": false
+   },
+   {
+    "day": 22,
+    "kind": "villager",
+    "who": "gen_wdtul34",
+    "cause": "monster",
+    "player": false
+   },
+   {
+    "day": 22,
+    "kind": "monster",
+    "who": "heckler",
+    "cause": "villager combat",
+    "player": false
+   },
+   {
+    "day": 22,
+    "kind": "monster",
+    "who": "memory_projector",
+    "cause": "villager combat",
+    "player": false
+   },
+   {
+    "day": 23,
+    "kind": "monster",
+    "who": "warranty_caller",
+    "cause": "combat",
+    "player": false
+   },
+   {
+    "day": 23,
+    "kind": "monster",
+    "who": "understudy",
+    "cause": "combat",
+    "player": false
+   },
+   {
+    "day": 24,
+    "kind": "monster",
+    "who": "bright_idea",
+    "cause": "villager combat",
+    "player": false
+   },
+   {
+    "day": 25,
+    "kind": "monster",
+    "who": "nightlight_catfish",
+    "cause": "villager combat",
+    "player": false
+   },
+   {
+    "day": 27,
+    "kind": "monster",
+    "who": "hummice",
+    "cause": "villager combat",
+    "player": false
+   },
+   {
+    "day": 29,
+    "kind": "monster",
+    "who": "nevermore",
+    "cause": "expedition",
+    "player": false
+   },
+   {
+    "day": 30,
+    "kind": "monster",
+    "who": "sweeps_week",
+    "cause": "expedition",
+    "player": false
+   },
+   {
+    "day": 31,
+    "kind": "monster",
+    "who": "heckler",
+    "cause": "villager combat",
+    "player": false
+   },
+   {
+    "day": 31,
+    "kind": "monster",
+    "who": "bright_idea",
+    "cause": "villager combat",
+    "player": false
+   },
+   {
+    "day": 31,
+    "kind": "monster",
+    "who": "union_rep",
+    "cause": "villager combat",
+    "player": false
+   },
+   {
+    "day": 38,
+    "kind": "monster",
+    "who": "gallowdeer",
+    "cause": "expedition",
+    "player": false
+   },
+   {
+    "day": 38,
+    "kind": "monster",
+    "who": "bright_idea",
+    "cause": "villager combat",
+    "player": false
+   },
+   {
+    "day": 40,
+    "kind": "monster",
+    "who": "murkcap",
+    "cause": "villager combat",
+    "player": false
+   },
+   {
+    "day": 40,
+    "kind": "monster",
+    "who": "chorus_line",
+    "cause": "villager combat",
+    "player": false
+   },
+   {
+    "day": 40,
+    "kind": "monster",
+    "who": "terms_of_service",
+    "cause": "villager combat",
+    "player": false
+   },
+   {
+    "day": 40,
+    "kind": "villager",
+    "who": "gen_v722kh4",
+    "cause": "monster",
+    "player": false
+   },
+   {
+    "day": 41,
+    "kind": "monster",
+    "who": "moderator",
+    "cause": "villager combat",
+    "player": false
+   },
+   {
+    "day": 41,
+    "kind": "monster",
+    "who": "voice_mimic_radio",
+    "cause": "villager combat",
+    "player": false
+   },
+   {
+    "day": 41,
+    "kind": "monster",
+    "who": "alien_tick",
+    "cause": "villager combat",
+    "player": false
+   },
+   {
+    "day": 45,
+    "kind": "monster",
+    "who": "heckler",
+    "cause": "expedition",
+    "player": false
+   },
+   {
+    "day": 45,
+    "kind": "monster",
+    "who": "mirrormoth",
+    "cause": "expedition",
+    "player": false
+   },
+   {
+    "day": 45,
+    "kind": "monster",
+    "who": "union_rep",
+    "cause": "expedition",
+    "player": false
+   },
+   {
+    "day": 46,
+    "kind": "monster",
+    "who": "rut_king",
+    "cause": "villager combat",
+    "player": false
+   },
+   {
+    "day": 46,
+    "kind": "monster",
+    "who": "murkcap",
+    "cause": "villager combat",
+    "player": false
+   },
+   {
+    "day": 50,
+    "kind": "monster",
+    "who": "influencer",
+    "cause": "combat",
+    "player": false
+   },
+   {
+    "day": 52,
+    "kind": "monster",
+    "who": "terms_of_service",
+    "cause": "expedition",
+    "player": false
+   },
+   {
+    "day": 53,
+    "kind": "villager",
+    "who": "gen_f54tz3z",
+    "cause": "the wild",
+    "player": true
+   },
+   {
+    "day": 56,
+    "kind": "monster",
+    "who": "gallowdeer",
+    "cause": "combat",
+    "player": false
+   },
+   {
+    "day": 57,
+    "kind": "monster",
+    "who": "landlord",
+    "cause": "combat",
+    "player": false
+   },
+   {
+    "day": 58,
+    "kind": "person",
+    "who": "ava_garcia",
+    "cause": "combat",
+    "player": false
+   },
+   {
+    "day": 58,
+    "kind": "villager",
+    "who": "maya_singh",
+    "cause": "the arena",
+    "player": true
+   },
+   {
+    "day": 58,
+    "kind": "villager",
+    "who": "jorge_silva",
+    "cause": "the wild",
+    "player": true
+   },
+   {
+    "day": 59,
+    "kind": "villager",
+    "who": "gen_408l29z",
+    "cause": "the wild",
+    "player": true
+   },
+   {
+    "day": 59,
+    "kind": "villager",
+    "who": "gen_tdfmchg",
+    "cause": "the wild",
+    "player": true
+   },
+   {
+    "day": 59,
+    "kind": "villager",
+    "who": "adaeze_nwosu",
+    "cause": "the wild",
+    "player": true
+   },
+   {
+    "day": 59,
+    "kind": "villager",
+    "who": "yara_haddad",
+    "cause": "the wild",
+    "player": true
+   },
+   {
+    "day": 59,
+    "kind": "villager",
+    "who": "tom_baker",
+    "cause": "the wild",
+    "player": true
+   }
+  ]
+ }
+}
