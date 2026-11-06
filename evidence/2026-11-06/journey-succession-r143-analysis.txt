@@ -1,0 +1,50 @@
+
+== seed 33701: handoff d11 Chris -> Rosa (organic)
+   CAP-NC: bonded-by-deadline (newcomer-probe: Cuan arrived d+15 probe d+15 deadline d+29 trust=28 want=curious refused=false) bondedEver=true
+   CAP-D14 (descriptive): not-bonded-by-d14 (probe: Anuar trust=26 want=seek_taken refused=false) bondedEver=false
+   OPP talk-requests (distinct, d+0..d+30, self excluded): total=6 unbonded=1 selfReqDayEntries=0
+       unbonded requesters: Somchai(d36)
+   OPP bonds d+0..d+30: NPC-NPC new=20 over 30 bond-days (median/day=0); FIRST-bearer new=1 (driven-days=0, undriven-days=1); LATER-bearer new=0
+   OPP newcomers: arrivals=6 first-arrival d+15; FIRST-bearer new bonds with newcomers=1 vs pre-existing=0
+   CARRIED pick-time rank: 1 | funeral INCALL beat: true
+   relPost bonds=40 relD14=46 relD30=64 relEnd=77 relD14.selfId=rosa_mendez
+
+== seed 33702: handoff d41 Emma -> Linh (scripted)
+   CAP-NC: bonded-by-deadline (newcomer-probe: Nikolai arrived d+16 probe d+16 deadline d+30 trust=18 want=curious refused=false) bondedEver=true
+   CAP-D14 (descriptive): no-stranger-pool (probe: no stranger pool) bondedEver=n/a
+   OPP talk-requests (distinct, d+0..d+30, self excluded): total=5 unbonded=0 selfReqDayEntries=0
+   OPP bonds d+0..d+30: NPC-NPC new=10 over 30 bond-days (median/day=0); FIRST-bearer new=2 (driven-days=1, undriven-days=1); LATER-bearer new=0
+   OPP newcomers: arrivals=4 first-arrival d+16; FIRST-bearer new bonds with newcomers=2 vs pre-existing=0
+   CARRIED pick-time rank: 1 | funeral INCALL beat: true
+   relPost bonds=56 relD14=56 relD30=68 relEnd=70 relD14.selfId=gen_0sx75j8
+
+== seed 33703: handoff d12 Kate -> Heinrich (organic)
+   CAP-NC: bonded-by-deadline (newcomer-probe: Ingrid arrived d+14 probe d+14 deadline d+28 trust=27 want=curious refused=false) bondedEver=true
+   CAP-D14 (descriptive): second-handoff-before-d14 (probe: Maya trust=40 want=ask_favor refused=false) bondedEver=true
+   OPP talk-requests (distinct, d+0..d+30, self excluded): total=4 unbonded=0 selfReqDayEntries=0
+   OPP bonds d+0..d+30: NPC-NPC new=17 over 30 bond-days (median/day=0); FIRST-bearer new=1 (driven-days=0, undriven-days=1); LATER-bearer new=2
+   OPP newcomers: arrivals=3 first-arrival d+14; FIRST-bearer new bonds with newcomers=0 vs pre-existing=1
+   CARRIED pick-time rank: 1 | funeral INCALL beat: true
+   relPost bonds=45 relD14=51 relD30=67 relEnd=70 relD14.selfId=gen_3kcx3dj
+
+== seed 33799: handoff d6 Hilda -> Jesse (scripted)
+   CAP-NC: no-newcomer-arrival (newcomer-probe: no newcomer arrived) bondedEver=false
+   CAP-D14 (descriptive): bonded-d14 (probe: Rafael trust=33 want=curious refused=false) bondedEver=true
+   OPP talk-requests (distinct, d+0..d+30, self excluded): total=8 unbonded=1 selfReqDayEntries=0
+       unbonded requesters: Elif(d10)
+   OPP bonds d+0..d+30: NPC-NPC new=15 over 25 bond-days (median/day=0); FIRST-bearer new=2 (driven-days=0, undriven-days=2); LATER-bearer new=0
+   OPP newcomers: arrivals=0 first-arrival d+null; FIRST-bearer new bonds with newcomers=0 vs pre-existing=2
+   CARRIED pick-time rank: 1 | funeral INCALL beat: true
+   relPost bonds=27 relD14=44 relD30=0 relEnd=46 relD14.selfId=jesse_cortez
+
+=== PANEL ===
+{"seed":"33701","cap":"bonded-by-deadline","capEligible":true,"bondedEver":true,"probeVid":"Cuan","deadlineDplus":29,"arrivals":6,"firstArrivalDplus":15,"firstBearerNewcomer":1,"firstBearerPreexisting":0,"capD14":"not-bonded-by-d14","reqTotal":6,"reqUnbonded":1,"selfReqDayEntries":0,"npcNew":20,"firstBearerNew":1,"firstBearerNewUndriven":1,"laterBearerNew":0,"pickRank":1,"incall":true}
+{"seed":"33702","cap":"bonded-by-deadline","capEligible":true,"bondedEver":true,"probeVid":"Nikolai","deadlineDplus":30,"arrivals":4,"firstArrivalDplus":16,"firstBearerNewcomer":2,"firstBearerPreexisting":0,"capD14":"no-stranger-pool","reqTotal":5,"reqUnbonded":0,"selfReqDayEntries":0,"npcNew":10,"firstBearerNew":2,"firstBearerNewUndriven":1,"laterBearerNew":0,"pickRank":1,"incall":true}
+{"seed":"33703","cap":"bonded-by-deadline","capEligible":true,"bondedEver":true,"probeVid":"Ingrid","deadlineDplus":28,"arrivals":3,"firstArrivalDplus":14,"firstBearerNewcomer":0,"firstBearerPreexisting":1,"capD14":"second-handoff-before-d14","reqTotal":4,"reqUnbonded":0,"selfReqDayEntries":0,"npcNew":17,"firstBearerNew":1,"firstBearerNewUndriven":1,"laterBearerNew":2,"pickRank":1,"incall":true}
+{"seed":"33799","cap":"no-newcomer-arrival","capEligible":false,"bondedEver":false,"deadlineDplus":null,"arrivals":0,"firstArrivalDplus":null,"firstBearerNewcomer":0,"firstBearerPreexisting":2,"capD14":"bonded-d14","reqTotal":8,"reqUnbonded":1,"selfReqDayEntries":0,"npcNew":15,"firstBearerNew":2,"firstBearerNewUndriven":2,"laterBearerNew":0,"pickRank":1,"incall":true}
+CAP-NC verdict: bonded-by-deadline 3/3 eligible seeds.
+CAP-NC binding verdict (r143 newcomer-channel bar): PASS (capacity holds)
+CAP-NC non-denominator: ["no-newcomer-arrival"]
+Descriptive bondedEver (probe pair bonded in ANY snapshot or bondDaily): 3/3 probe-opened seeds.
+Descriptive CAP-D14 (r142 stranger probe): ["not-bonded-by-d14","no-stranger-pool","second-handoff-before-d14","bonded-d14"]
+OPP totals: unbonded talk-requests 2; FIRST-bearer new bonds on undriven days 5; NPC-NPC new bonds 62; newcomer arrivals 13; FIRST-bearer newcomer bonds 3 vs pre-existing 3; selfReqDayEntries total 0 (r133 purge regression check, expect 0).

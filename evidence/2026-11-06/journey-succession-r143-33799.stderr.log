@@ -1,0 +1,34 @@
+
+PRE-DEATH d6: bearer <redacted>, topTrust=[{"id":"Jesse","t":36},{"id":"Nasser","t":31},{"id":"Rafael","t":29},{"id":"Elif","t":29}], roster=12
+INH readable=true scripted=true deadItems=7 distinct=7 transferred=0 vanished=1 keptPlants=2 inheritedPlants=4 keptSkills=2 inheritedSkills=3 succTrustPre=36 succTrustPost=20
+PARITY readable=true equal=true inherited=[] pre=["iron_stomach"] post=["iron_stomach"]
+DEATH d6 (the expedition, scripted): Hilda -> Jesse | passed=true lin=true mo=true trust=20 vouchers=0
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=2 vanished=1 of 7 distinct dead-bearer items
+  CONVO d+3 with Nasser (refused=false)
+  CONVO d+3 with Gunther (refused=false)
+  STRANGER-PROBE d+3 with Rafael (trust=33 refused=false)
+  BOND-CONVO d+3 with Henry (depth=0 v=8 refused=false)
+  CONVO d+7 with Gunther (refused=false)
+  CONVO d+7 with Nasser (refused=false)
+  CONVO d+14 with Eric (refused=false)
+  CONVO d+14 with Gunther (refused=false)
+  BOND-CONVO d+14 with Henry (depth=0 v=8 refused=false)
+
+FUNERAL: deathBeat=1 recover=1 vouch=0 (eligible=0) echo=3 organicBurial={"respects":false,"bury":false} halfRation=1
+
+MEAL-GATE: audited=25 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=25 signals={"levelUp":true,"systemVoice":37,"offerLines":15,"codexPlantsDelta":10,"codexSkillsDelta":3,"codexAbilitiesDelta":12,"xpDelta":41,"any":true} pantry 20300->16072
+TRUST-DIALS: office 20->14 (-6, fall) | villageMean 20.9->64.5 (+43.6, climb) | ge60 0->5 | movers>=5: [{"id":"Diana","from":11,"to":87,"delta":76},{"id":"Atlas","from":18,"to":82,"delta":64},{"id":"Nelli","from":21,"to":85,"delta":64},{"id":"Gunther","from":26,"to":86,"delta":60},{"id":"Nasser","from":31,"to":86,"delta":55},{"id":"Elif","from":29,"to":50,"delta":21},{"id":"Nora","from":14,"to":24,"delta":10}]
+DEED-LEDGER: calls=16 summary={"teachPlant":{"calls":15,"ok":15,"deltaSum":0,"deltaN":15,"positive":0,"meanDelta":0},"giveFood":{"calls":1,"ok":1,"deltaSum":2,"deltaN":1,"positive":1,"meanDelta":2}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a="n/a (none eligible)" m2b=false m3=true(echoMentions=3 (convo=3, say=0)) m4=true m5=manual | endDay=31 alive=9 over=false
+anomalies: 0
+say dump -> evidence/2026-11-06/journey-succession-r143-33799.saydump.txt
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=25
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+25) t2=true(deedCalls=16) trustVerdict={"readable":true,"officeMantle":20,"officeLast":14,"officeDelta":-6,"officeClass":"fall","villageMantle":20.9,"villageLast":64.5,"villageDelta":43.6,"villageClass":"climb","villageGe60Mantle":0,"villageGe60Last":5,"movers":[{"id":"Diana","from":11,"to":87,"delta":76},{"id":"Atlas","from":18,"to":82,"delta":64},{"id":"Nelli","from":21,"to":85,"delta":64},{"id":"Gunther","from":26,"to":86,"delta":60},{"id":"Nasser","from":31,"to":86,"delta":55},{"id":"Elif","from":29,"to":50,"delta":21},{"id":"Nora","from":14,"to":24,"delta":10}]}
+E6/CALLCHECK: e6={"callMoves":3,"withCensus":3,"chainHandoffs":0,"trustMoves":3} callCheck={"dailyMoveDays":3,"callMoveDays":3,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=4 (v2=4, excludedLoot=0))
+E7/R47: e7={"trustMoves":3,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":1,"both":2,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":3,"v2":4,"v2Say":1,"v2Delta":1,"arcExcluded":1,"teleWeek2":2,"collision":[]} e2={"chainN":0,"known":0,"unknown":0} e3={"dailyDays":26,"moves":3}
