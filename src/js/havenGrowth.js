@@ -245,7 +245,14 @@
           // LINGERER ANSWER (design call #8, 2026-10-16, Steve): "Endure it"
           // is the honest default — name it and its price. The sortie is the
           // other answer, on the beats panel while they linger.
-          this.say(`🌙 Night. The lingering ${mn} gorges at the treeline — ${Math.round(got).toLocaleString()} kcal gone from the stores. Endure it (they drift off within ~6 nights — the gorge is the price), or send a sortie: fighters, rations, real risk.`);
+          // EMPTY-PANTRY (journey-endgame r143): when the stores are empty
+          // the raider takes 0 kcal — "gorges — 0 kcal gone" contradicts
+          // itself. Say what is true: it circles empty stores.
+          if (got > 0) {
+            this.say(`🌙 Night. The lingering ${mn} gorges at the treeline — ${Math.round(got).toLocaleString()} kcal gone from the stores. Endure it (they drift off within ~6 nights — the gorge is the price), or send a sortie: fighters, rations, real risk.`);
+          } else {
+            this.say(`🌙 Night. The lingering ${mn} circles the treeline, sniffing at empty stores — nothing left to take. Endure it (they drift off within ~6 nights), or send a sortie: fighters, rations, real risk.`);
+          }
           // SORTIE TARGET (sim-sortietarget-a 2026-11-03): the gorge line
           // IS the offer — record what was just announced, so an answer can
           // aim at it. Announcement memory, not a roster: one entity, the

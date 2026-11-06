@@ -226,6 +226,15 @@
       }
       moveToBody(player, true);
       if (distance(player) <= 1) return { moves, action: { type: 'help', target: player.key } };
+      // HELP-BRANCH FALLBACK (journey-endgame r143): the hurt player
+      // cannot be reached — do NOT wait silently. Fight from where she
+      // stands: strike if the foe is adjacent, harry if it is in range.
+      // No second move — her steps were spent closing on the player.
+      // (r140's Fix A patched only the strike branch below; the help
+      // branch above it kept returning 'wait' — Ruth waited 3/5 rounds
+      // in the v1a losing walk at body-distance 2 from the Finale.)
+      if (foe && distance(foe.f) <= 1) return { moves, action: { type: 'strike', target: foe.f.key } };
+      if (foe && distance(foe.f) <= 3) return { moves, action: { type: 'harry', target: foe.f.key } };
       return { moves, action: { type: 'wait' } };
     }
     // HELPFUL STRIKE (combat-survival 2026-10-13): adjacent to the enemy,

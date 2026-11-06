@@ -39856,6 +39856,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         v.fled = true;
         try { S.Godpath?.finishTacticalEscape(this, f, v); } catch (e) { console.warn('[godpath] flight', e); }
         this.say(`${v.name} runs for it!`);
+      } else {
+        // WAIT, NARRATED (journey-endgame r143 — Fix B, planned r140):
+        // no silent turns. A villager with nothing to do still does
+        // something visible: holds and watches. (Canon: no silent actions.)
+        this.say(`${v.name} holds and watches.`);
       }
     },
 
