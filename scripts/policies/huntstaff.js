@@ -31,10 +31,17 @@
 // scholar is at Haven (in-person is the honest line).
 //
 // Gate: HUNTSTAFF=1 (default OFF; unset = pure delegation to the base
-// policy, zero writes). Zero src/js changes. Policy-side only.
+// policy, zero writes). HUNTSTAFF=2 = layer on + HUNT-PREP (r108): when a
+// hunter is staffed, the village first teaches them field_dressing — if a
+// holder is at home — through the engine's own teachSkill (one lesson per
+// learner per day, shared language; the engine's gates stay the last
+// word). The prep is best-effort, never a staffing gate: the hunt happens
+// whether or not the lesson lands. Zero src/js changes. Policy-side only.
 //
 // Telemetry: ctx._hsAssignments + ctx._hsAssignLog — only written when
 // the layer fires; gate-off: zero writes (the det-gate depends on this).
+// r108: ctx._hsPrepLog — one entry per staffing-time prep evaluation,
+// only when HUNTSTAFF=2.
 'use strict';
 
 // Hunter-substrate word list (CORRECTED, from huntroster-b named fix spec
@@ -45,7 +52,112 @@ const HUNTER_WORDS = [
 ];
 
 function layerOn() {
-  return process.env.HUNTSTAFF === '1';
+  return process.env.HUNTSTAFF === '1' || process.env.HUNTSTAFF === '2';
+}
+
+// prepOn (r108): HUNTSTAFF=2 arms the hunt-prep lesson on top of the
+// layer. HUNTSTAFF=1 is r107 behaviour exactly — layer on, no prep.
+function prepOn() {
+  return process.env.HUNTSTAFF === '2';
+}
+
+// hunterHoldsFieldDressing(Game, vid): the frac read, mirrored from
+// villagerHuntResolve (game.js:6744) — npcHasAbility checks the ability
+// store OR the skill store (a skill-lane grant counts). Missing
+// npcHasAbility means unknown: the prep treats it as not-held (a lesson
+// attempt is harmless — teachSkill's own gates refuse a redundant one).
+function hunterHoldsFieldDressing(Game, vid) {
+  try {
+    if (Game.npcHasAbility) return !!Game.npcHasAbility(vid, 'field_dressing');
+  } catch (e) { /* fall through: unknown */ }
+  try {
+    const sk = (((Game.state || {}).village || {}).npcSkills || {})[vid] || [];
+    return sk.indexOf('field_dressing') >= 0;
+  } catch (e) { return false; }
+}
+
+// villagerKnowsFieldDressing(Game, vid): the TEACHER check —
+// personKnowsSkill is the engine's read (skillsKnownBy seeds background
+// skills lazily, the same write the dawn lesson pass performs for home
+// villagers). Falls back to the raw npcSkills read when the function is
+// absent (fixtures).
+function villagerKnowsFieldDressing(Game, vid) {
+  try {
+    if (Game.personKnowsSkill) return !!Game.personKnowsSkill(vid, 'field_dressing');
+  } catch (e) { /* fall through to the raw read */ }
+  try {
+    const sk = (((Game.state || {}).village || {}).npcSkills || {})[vid] || [];
+    return sk.indexOf('field_dressing') >= 0;
+  } catch (e) { return false; }
+}
+
+// findPrepTeacher(Game, hunter): the first roster villager AT HOME
+// (alive, not the scholar, not the hunter, not away) who knows
+// field_dressing. Roster order — deterministic, no RNG. A lesson is
+// in-person work: a teacher miles away cannot teach (perception law).
+// Returns the vid, or null when no holder is at home.
+function findPrepTeacher(Game, hunter) {
+  try {
+    const v = (Game.state || {}).village || {};
+    const roster = v.roster || [];
+    const away = v.away || {};
+    for (const id of roster) {
+      if (id === Game.villagerId) continue;
+      if (id === hunter) continue;
+      if (away[id]) continue;
+      let p = null;
+      try { p = Game.getPerson ? Game.getPerson(id) : null; } catch (e) {}
+      if (!p || p.dead) continue;
+      if (villagerKnowsFieldDressing(Game, id)) return id;
+    }
+    return null;
+  } catch (e) { return null; }
+}
+
+// prepFieldDressing(Game, ctx, hunter): the r108 hunt-prep lesson.
+// Called from staffHunt after the hunter is picked, before assignTask.
+// Returns the prep-log entry (also pushed to ctx._hsPrepLog). The hunt
+// proceeds whatever the prep does — the lesson is best-effort, never a
+// gate. Every outcome is a named record: 'already-holds' (no lesson
+// needed), 'no-teacher' (no holder at home), or 'lesson' with ok/why
+// (why = teachSkill's canTeachSkill reason when the lesson fails:
+// 'today' — the hunter was already taught at dawn; 'words' — no shared
+// language; 'teacher' / 'known' / 'gone').
+function prepFieldDressing(Game, ctx, hunter) {
+  ctx = ctx || {};
+  let day = 0;
+  try { day = ((Game.state || {}).scholar || {}).day || 0; } catch (e) {}
+  let hunterName = String(hunter);
+  try { const p = Game.getPerson ? Game.getPerson(hunter) : null; if (p && p.name) hunterName = String(p.name).split(' ')[0]; } catch (e) {}
+  const entry = { day, hunter: String(hunter), hunterName, teacher: null, teacherName: null, kind: null, ok: null, why: null };
+  ctx._hsPrepLog = ctx._hsPrepLog || [];
+  ctx._hsPrepLog.push(entry);
+  try {
+    if (hunterHoldsFieldDressing(Game, hunter)) { entry.kind = 'already-holds'; return entry; }
+    const teacher = findPrepTeacher(Game, hunter);
+    if (!teacher) { entry.kind = 'no-teacher'; entry.why = 'no-teacher'; return entry; }
+    entry.teacher = String(teacher);
+    try { const p = Game.getPerson ? Game.getPerson(teacher) : null; if (p && p.name) entry.teacherName = String(p.name).split(' ')[0]; } catch (e) {}
+    entry.kind = 'lesson';
+    if (typeof Game.teachSkill !== 'function') { entry.ok = false; entry.why = 'no-teach'; return entry; }
+    let ok = false;
+    try { ok = !!Game.teachSkill(teacher, hunter, 'field_dressing', { via: 'hunt-prep' }); } catch (e) { ok = false; }
+    entry.ok = ok;
+    if (!ok) {
+      try {
+        if (Game.canTeachSkill) {
+          const chk = Game.canTeachSkill(teacher, hunter, 'field_dressing');
+          entry.why = (chk && chk.why) || 'failed';
+        } else entry.why = 'failed';
+      } catch (e) { entry.why = 'failed'; }
+    }
+    return entry;
+  } catch (e) {
+    entry.kind = entry.kind || 'lesson';
+    entry.ok = false;
+    entry.why = entry.why || 'error';
+    return entry;
+  }
 }
 
 // leanDay: read-only. TRUE when the village is on a lean/starvation day.
@@ -249,6 +361,10 @@ function staffHunt(Game, ctx) {
     return cy - cx;
   });
   const vid = cands[0];
+  // r108 HUNT-PREP: prepare, then send. The lesson runs before the
+  // assignment so the hunter holds the skill when the duty resolves
+  // later today. Best-effort: whatever the prep does, the hunt proceeds.
+  if (prepOn()) { try { prepFieldDressing(Game, ctx, vid); } catch (e) { /* never break staffing */ } }
   let r = null;
   try { r = Game.assignTask(vid, 'hunt', { via: 'in-person' }); } catch (e) { return null; }
   if (!r || r.refused) return null;            // engine's obedience/Haven line said no — honest miss
@@ -285,6 +401,9 @@ function withHuntStaff(base, id, src) {
 module.exports = {
   withHuntStaff, staffHunt, leanDay, isHunterSubstrate, eligibleHunters,
   layerOn, HUNTER_WORDS,
+  // r108 hunt-prep surface: exported for proof fixtures
+  prepOn, hunterHoldsFieldDressing, villagerKnowsFieldDressing,
+  findPrepTeacher, prepFieldDressing,
   // repair surface (sim-refusestaff-b): exported for proof fixtures
   installWoundWatch, personHp, woundWithin, woundLedgerGet, refuse,
 };
