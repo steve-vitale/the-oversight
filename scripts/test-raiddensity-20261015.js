@@ -5,22 +5,26 @@
 // The lever: one Haven-side 7-day post-raid cooldown across BOTH rival-raid
 // channels (commons raids in game.js + famine raids in villageAgency.js),
 // enforced only on young nationals (nationalLive, <60d from formation).
-// Env-gated RAIDDENSITY=1, default OFF.
+// SHIPPED 2026-11-05 (build-smallfixes): the RAIDDENSITY env gate is
+// removed — the cooldown is live behavior, including in the browser where
+// process.env never exists. The unit proofs below now run with NO env var
+// set; the old gate-OFF leg is updated to assert the shipped behavior.
 //
 // Modes:
-//   default    unit proofs: mechanism absent with gate OFF, present with
-//              gate ON (both channels, boundary, old-national/not-national
-//              refusals), cross-channel conversion (famine raid -> beg),
+//   default    unit proofs: mechanism present with NO env var (both
+//              channels, boundary, old-national/not-national refusals),
+//              cross-channel conversion (famine raid -> beg),
 //              refusal-path aftermath untouched, REAL-RED on pristine code,
-//              + det-gate D1 (gate-off trajectories byte-identical).
-//   SMOKE=1    15d x {control, RAIDDENSITY=1} leadfeast runs: no crash,
-//              instrument-honesty gate (raid-line counts reported).
+//              + det-gate D1 (shipped trajectories byte-identical).
+//   SMOKE=1    15d leadfeast run: no crash, instrument-honesty gate
+//              (raid-line counts reported).
 //
 // Env: FEASTSCALE_R13=1 node scripts/test-raiddensity-20261015.js
 //      SMOKE=1 FEASTSCALE_R13=1 node scripts/test-raiddensity-20261015.js
 //
-// Env-var discipline: the suite never leaves RAIDDENSITY set after it
-// finishes (deleted in finally) so the gate-off state is the ambient one.
+// Env-var discipline: the suite sets nothing and leaves nothing set — the
+// shipped cooldown needs no env var. The finally-block delete below is
+// hygiene only (a stray RAIDDENSITY in the ambient env is inert now).
 'use strict';
 const crypto = require('crypto');
 const { loadGame, setupGame, runDays } = require('./sim-harness');
@@ -63,13 +67,13 @@ function setNational(Game, formedAgo) {
   Game.state.nationalLive = true;
   const d = gday(Game) - formedAgo;
   Game.state.nationalDay = d;
-  Game.state.nationalFirstDay = d; // stamped by hierarchy.js at formation with gate ON
+  Game.state.nationalFirstDay = d; // stamped by hierarchy.js at formation (unconditional since the ship)
 }
 
 const innerOf = (Game, v) => { try { return Game._vaInner(v); } catch (e) { return null; } };
 
 async function unitProofs() {
-  console.log('UNIT PROOFS: mechanism absent with gate OFF, present with gate ON');
+  console.log('UNIT PROOFS: mechanism present with NO env var (shipped behavior)');
   delete process.env.RAIDDENSITY;
 
   // ---- REAL-RED anchor: helpers must exist on armed code ----
@@ -83,30 +87,29 @@ async function unitProofs() {
       typeof Game._vaGuardRaidStage === 'function', 'got ' + typeof Game._vaGuardRaidStage);
   }
 
-  // ---- gate OFF: the mechanism is absent ----
+  // ---- SHIPPED: the mechanism is present with NO env var set ----
+  // (build-smallfixes 2026-11-05: the gate is gone; these checks invert the
+  // old gate-OFF leg — on pristine gated code they FAIL, which is the RED.)
   {
-    const { Game } = await loadGame({ seed: 12, mode: 'rd-off' });
+    const { Game } = await loadGame({ seed: 12, mode: 'rd-shipped' });
     await setupGame(Game);
     const day = gday(Game);
     setNational(Game, 5);
-    Game.state.havenRaidCooldownUntil = day + 7; // even a hypothetical window is inert
-    chk('gate OFF: _raidCooldownYoung() false even with window set + young national',
-      Game._raidCooldownYoung() === false);
-    const before = Game.state.havenRaidCooldownUntil;
+    Game.state.havenRaidCooldownUntil = day + 7; // a window is live
+    chk('SHIPPED: _raidCooldownYoung() true with window set + young national, no env var',
+      Game._raidCooldownYoung() === true);
+    delete Game.state.havenRaidCooldownUntil; // clear it: the raid must (re-)arm it
     const ov = mkRaider(Game, 0);
     captureSay(Game, () => Game.commonsRaid(ov));
-    chk('gate OFF: commonsRaid does not touch havenRaidCooldownUntil',
-      Game.state.havenRaidCooldownUntil === before, 'got ' + Game.state.havenRaidCooldownUntil);
+    chk('SHIPPED: commonsRaid sets havenRaidCooldownUntil = day+7',
+      Game.state.havenRaidCooldownUntil === day + 7, 'got ' + Game.state.havenRaidCooldownUntil);
     delete Game.state.havenRaidCooldownUntil;
     const ov2 = Game.state.otherVillages[1] || Game.state.otherVillages[0];
     captureSay(Game, () => Game._vaStageRaidDefense(ov2));
-    chk('gate OFF: _vaStageRaidDefense does not set havenRaidCooldownUntil',
-      Game.state.havenRaidCooldownUntil == null, 'got ' + Game.state.havenRaidCooldownUntil);
+    chk('SHIPPED: _vaStageRaidDefense sets havenRaidCooldownUntil',
+      Game.state.havenRaidCooldownUntil != null, 'got ' + Game.state.havenRaidCooldownUntil);
     Game.state.pendingRaidDefense = null;
   }
-
-  // ---- gate ON ----
-  process.env.RAIDDENSITY = '1';
 
   // cooldown fires on both channels: staging sets day+7
   {
@@ -244,7 +247,7 @@ async function unitProofs() {
 }
 
 async function detgateD1() {
-  console.log('DETGATE D1: gate-off trajectory determinism (seeds 11/22, leadfeast, 60d x2 each)');
+  console.log('DETGATE D1: shipped trajectory determinism (seeds 11/22, leadfeast, 60d x2 each)');
   delete process.env.RAIDDENSITY;
   const { leadfeast } = require('./policies/feastscale');
   async function hash60(seed) {
@@ -261,30 +264,28 @@ async function detgateD1() {
   for (const seed of [11, 22]) {
     const h1 = await hash60(seed);
     const h2 = await hash60(seed);
-    chk('D1 gate determinism byte-identical (seed ' + seed + ')', h1 === h2, h1.slice(0, 12) + ' vs ' + h2.slice(0, 12));
+    chk('D1 shipped determinism byte-identical (seed ' + seed + ')', h1 === h2, h1.slice(0, 12) + ' vs ' + h2.slice(0, 12));
   }
 }
 
 async function smoke() {
-  console.log('SMOKE: 15d x {control, RAIDDENSITY=1} leadfeast — instrument honesty');
+  console.log('SMOKE: 15d leadfeast (shipped cooldown live) — instrument honesty');
+  delete process.env.RAIDDENSITY;
   const { leadfeast } = require('./policies/feastscale');
-  for (const rd of [false, true]) {
-    if (rd) process.env.RAIDDENSITY = '1'; else delete process.env.RAIDDENSITY;
-    const { Game } = await loadGame({ seed: 11, mode: 'rd-smoke-' + (rd ? 'on' : 'off') });
-    await setupGame(Game);
-    const base = leadfeast;
-    const policy = Object.assign({}, base);
-    const origDaily = base.daily;
-    let n = 0;
-    const raidLines = [];
-    const origSay = Game.say;
-    Game.say = function (msg) { const t = String((msg && (msg.text || msg.msg || msg.message)) || msg || ''); if (/Raid|raid defense|doubled watch/i.test(t)) raidLines.push(t.slice(0, 80)); return origSay ? origSay.call(Game, msg) : msg; };
-    policy.daily = (G, ctx) => { if (origDaily) { try { origDaily(G, ctx); } catch (e) {} } n++; };
-    const r = await runDays(Game, policy, { days: 15, sampleEvery: 10 });
-    Game.say = origSay;
-    chk('SMOKE ' + (rd ? 'RAIDDENSITY=1' : 'control') + ': 15d, samples collected, instrument saw ' + raidLines.length + ' raid-class lines',
-      r.days === 15 && n >= 10, 'days=' + r.days + ' n=' + n);
-  }
+  const { Game } = await loadGame({ seed: 11, mode: 'rd-smoke-shipped' });
+  await setupGame(Game);
+  const base = leadfeast;
+  const policy = Object.assign({}, base);
+  const origDaily = base.daily;
+  let n = 0;
+  const raidLines = [];
+  const origSay = Game.say;
+  Game.say = function (msg) { const t = String((msg && (msg.text || msg.msg || msg.message)) || msg || ''); if (/Raid|raid defense|doubled watch/i.test(t)) raidLines.push(t.slice(0, 80)); return origSay ? origSay.call(Game, msg) : msg; };
+  policy.daily = (G, ctx) => { if (origDaily) { try { origDaily(G, ctx); } catch (e) {} } n++; };
+  const r = await runDays(Game, policy, { days: 15, sampleEvery: 10 });
+  Game.say = origSay;
+  chk('SMOKE shipped: 15d, samples collected, instrument saw ' + raidLines.length + ' raid-class lines',
+    r.days === 15 && n >= 10, 'days=' + r.days + ' n=' + n);
 }
 
 (async () => {

@@ -34,7 +34,8 @@ eject — let a held pocket_sand fire in its window, without breaking flee?
 
 Synthetic TB fights via the shared harness (seeded, deterministic):
 - (a) RED on baseline / GREEN armed: scholar holds pocket_sand, HP forced
-  into the 35–50% window at turn start → sand pressed, no flee move.
+  to 31% at turn start (below the 35% eject, inside the losing window —
+  the 99103 jump shape) → sand pressed, no flee move.
 - (b) GREEN both: same setup WITHOUT the ability → flee fires at <35%.
 - (c) GREEN armed: sand pressed once per fight — a second losing turn in
   the same fight does not re-press sand.
@@ -57,8 +58,8 @@ anywhere in a prereg), 140d death-aware, competent verbatim.
 Control root = master e5e6aa59b (current master); candidate root = this
 branch. Identical seeds, same observer (scripts/sweep-pocketsand-20261105.js).
 
-- **Primary:** presses in the window (turn-start HP 35–50%, sand held and
-  available) — armed ≥ 50% of window-turns; control expected 0 (the
+- **Primary:** presses in the pre-empted zone (turn-start HP < 35%, sand
+  held and available) — armed ≥ 50% of such turns; control expected 0 (the
   measured pre-emption). GO iff armed ≥ 50% AND control = 0.
 - **Guardrail:** flees at <35% with NO losing ability held — armed ≥ 0.8×
   control (flee still fires when it should).
