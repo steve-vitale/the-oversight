@@ -122,6 +122,38 @@ function fieldRec(o) {
   inst.uninstall();
 })();
 
+// ---- gearOf fix (2026-11-06): the scholar's equipped slots live in
+// state.scholar.equipped / Game.equippedWeapon(), NOT in
+// getPerson(vid).equipped — the judged corpus read weaponId null 40/40
+// while the engine showed the scholar armed 37/40. These tests pin the
+// scholar path and the getPerson divergence that caused it.
+(function () {
+  const G = fakeGame();
+  // The stale path: getPerson returns EMPTY equipped for the scholar.
+  G.getPerson = function (id) { return { equipped: {} }; };
+  // The live path: the engine's own reader + state.scholar.equipped.
+  G.state.scholar.equipped = { melee: { itemId: 'shard_spear' }, torso: { itemId: 'bark_armor' } };
+  G.equippedWeapon = function () { return { name: 'Shard spear', bonus: 25, range: 2, type: 'melee', unarmed: false, itemId: 'shard_spear' }; };
+  const inst = INST.install(G);
+  const sg = inst._helpers.gearOf('leader');
+  check('gearof-scholar-armed', sg.weaponId === 'shard_spear' && sg.weaponBonus === 25,
+    JSON.stringify(sg));
+  check('gearof-scholar-armor', sg.armorP === 10 && sg.armorId === 'bark_armor',
+    JSON.stringify(sg));
+  // Non-scholar fighters still read the getPerson path (villager gear).
+  G.getPerson = function (id) { return { equipped: { melee: { itemId: 'shard_spear' }, torso: { itemId: 'bark_armor' } } }; };
+  const vg = inst._helpers.gearOf('ally1');
+  check('gearof-villager-getperson', vg.weaponId === 'shard_spear' && vg.weaponBonus === 25 && vg.armorP === 10,
+    JSON.stringify(vg));
+  // Unarmed scholar: unarmed engine profile + empty slots -> nulls.
+  G.equippedWeapon = function () { return { name: 'your hands', bonus: 0, type: 'melee', range: 1, ammo: null, unarmed: true, itemId: null }; };
+  G.state.scholar.equipped = {};
+  const ug = inst._helpers.gearOf('leader');
+  check('gearof-scholar-unarmed', ug.weaponId === null && ug.weaponBonus === null && ug.armorP === null,
+    JSON.stringify(ug));
+  inst.uninstall();
+})();
+
 // ---- analyzer fixtures ----
 function arow(seed, opts) {
   const r = { seed: seed, run: 'fixture', days: 100, endReason: 'horizon', won: false,

@@ -106,29 +106,48 @@ function install(Game) {
     const g = { weaponId: null, weaponBonus: null, armorId: null, armorP: null };
     try {
       if (vid === 'player' || vid === 'p') vid = Game.villagerId || vid;
-      const p = (typeof Game.getPerson === 'function') ? Game.getPerson(vid) : null;
-      if (!p) return g;
-      const eq = p.equipped || {};
-      const w = eq.melee || eq.ranged || eq.weapon || null;
-      const wid = (w && (w.itemId || w.id)) || (typeof w === 'string' ? w : null);
-      if (wid) {
-        g.weaponId = wid;
-        const def = itemById[wid];
-        if (def && def.weapon && def.weapon.bonus != null) g.weaponBonus = def.weapon.bonus;
+      // GEAROF FIX (2026-11-06, sim-finishprobe-a): Game.getPerson(vid)
+      // does NOT return the scholar's live equipped slots in the harness
+      // — the judged corpus read weaponId null 40/40 while the engine's
+      // own equippedWeapon() showed the scholar armed 37/40 with real
+      // bonuses. For the scholar, read the engine's own reader plus
+      // state.scholar.equipped. Non-scholar fighters keep the getPerson
+      // path (unverified — their gear columns carry a caveat, not a claim).
+      let eq = null;
+      const isScholar = !!(vid && vid === Game.villagerId);
+      if (isScholar) {
+        try {
+          const w = (typeof Game.equippedWeapon === 'function') ? Game.equippedWeapon() : null;
+          if (w && !w.unarmed && w.itemId) {
+            g.weaponId = w.itemId;
+            if (w.bonus != null) g.weaponBonus = w.bonus;
+          }
+        } catch (e) {}
+        try { eq = (((Game.state || {}).scholar || {}).equipped) || {}; } catch (e) { eq = {}; }
+      } else {
+        const p = (typeof Game.getPerson === 'function') ? Game.getPerson(vid) : null;
+        if (!p) return g;
+        eq = p.equipped || {};
+        const w = eq.melee || eq.ranged || eq.weapon || null;
+        const wid = (w && (w.itemId || w.id)) || (typeof w === 'string' ? w : null);
+        if (wid) {
+          g.weaponId = wid;
+          const def = itemById[wid];
+          if (def && def.weapon && def.weapon.bonus != null) g.weaponBonus = def.weapon.bonus;
+        }
       }
-      // ARMOR SLOT FIX (post-corpus, 2026-11-05): worn armor lives in the
-      // torso/legs/shoes slots, NOT an `armor` slot — the judged corpus
-      // therefore has armorP null throughout (weaponBonus was captured
-      // correctly). Prefer the engine's own armorOf when reachable.
+      // Armor: prefer the engine's own armorOf over the equipped slots
+      // (it sums body slots + coordination). Pass the slots directly so
+      // the scholar path works without a person object.
       try {
         const S = (typeof globalThis !== 'undefined' && globalThis.Scattering) ? globalThis.Scattering : null;
         if (S && S.equipment && typeof S.equipment.armorOf === 'function') {
-          const ap = S.equipment.armorOf(p, Game.data.items);
+          const ap = S.equipment.armorOf({ equipped: eq }, Game.data.items);
           if (ap != null) g.armorP = ap;
         }
       } catch (e) {}
       if (g.armorP == null) {
-        const slots = [eq.torso, eq.legs, eq.shoes];
+        const slots = [eq.head, eq.torso, eq.legs, eq.hands, eq.shoes];
         let sum = 0, seen = false;
         slots.forEach(function (sl) {
           const id = (sl && (sl.itemId || sl.id)) || (typeof sl === 'string' ? sl : null);
