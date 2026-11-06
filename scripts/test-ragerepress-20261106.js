@@ -1,12 +1,17 @@
-// test-ragerepress-20261106.js — proof for the rage re-press lever
+// test-ragerepress-20261106.js — proof for the rage re-press INSTRUMENT
 // (arm sim-ragerepress-b, run fleshout-loop-b-20261106T1730Z).
-// Fixture tests for the analyzer's pure functions + policy unit fakes
-// (hold-ground, cascade order, no waveKillLog read) + live harness legs
-// (driver subprocesses into /tmp, never into evidence/): a wave-4 TB
-// fight on a real seed carries a per-turn trace with hits, verbs, and a
-// finishing classification; the instrument is neutral (off-mode ==
-// on-mode on days/endReason/kill-log length); the same seed run twice
-// is byte-identical. Exit non-zero on any failure.
+// The rage re-press POLICY was killed (pilot NO-GO on the lever —
+// refresh churn, no doubled strike delivered) and its file deleted, so
+// this proof covers what remains: fixture tests for the analyzer's pure
+// functions (including the midnight-pyrrhic ±1-day match) + live
+// harness legs (driver subprocesses into /tmp, never into evidence/):
+// a wave-4 TB fight on a real seed carries a per-turn trace with hits,
+// verbs, and a finishing classification; the instrument is neutral
+// (off-mode == on-mode on days/endReason/kill-log length); the same
+// seed run twice is byte-identical. The policy unit fakes (hold-ground,
+// cascade order, rage re-press, aim still capped) ran 57/57 on the
+// build commit c22333838 before the policy was deleted — see the
+// evidence file. Exit non-zero on any failure.
 // Usage: node scripts/test-ragerepress-20261106.js
 'use strict';
 const path = require('path');
@@ -15,7 +20,6 @@ const os = require('os');
 const { execFileSync } = require('child_process');
 const REPO = path.join(__dirname, '..');
 const AN = require(path.join(REPO, 'scripts', 'ragerepress-analyze-20261106'));
-const PD = require(path.join(REPO, 'scripts', 'policies', 'competent-ragerepress-b'));
 
 let pass = 0, fail = 0;
 function check(name, cond, extra) {
@@ -164,110 +168,13 @@ check('trace-absent-null', AN.tracePresent(null) === false);
   fs.rmSync(dir, { recursive: true, force: true });
 })();
 
-// ---------- 6. Policy unit fakes: hold ground, cascade order, no log read ----------
-(function () {
-  // Fake wave-4 TB fight: scholar at full HP vs an 800-HP beast. Competent
-  // would walk away at fight start (800 > 2.5 * 100); this policy must strike.
-  function fakeGame(opts) {
-    const o = opts || {};
-    const p = { key: 'p', kind: 'player', hp: 100, maxHp: 100, mx: 4, my: 4, moveLeft: 3, acted: false };
-    const m = { key: 'm_0', kind: 'monster', hp: 800, maxHp: 1000, alive: true, fled: false,
-      mx: 5, my: 5, monsterId: 'the_eater', mdef: { id: 'the_eater', wave: 4 } };
-    const fighters = [p, m].concat(o.allies || []);
-    const f = { round: 1, over: false, fighters: fighters, order: ['p', 'm_0'], turnIdx: 0 };
-    const calls = { strikes: [], flees: 0, rallies: 0, abilities: [], moves: [], waits: 0 };
-    let logRead = false;
-    const state = { scholar: { day: 80, kcal: 3000 } };
-    Object.defineProperty(state, 'waveKillLog', { get: function () { logRead = true; return [{ day: 1, w: 4, by: 'poisoned' }]; } });
-    const G = {
-      tbfight: f, state: state, map: { px: 4, py: 4 },
-      tbIsPlayerTurn: function () { return true; },
-      tbFighter: function (k) { return k === 'p' ? p : (k === 'm_0' ? m : null); },
-      tbAfterPlayerAction: function () { p.acted = true; },
-      tbPlayerStrike: function (k) { calls.strikes.push(k); p.acted = true; return true; },
-      tbPlayerMove: function (x, y) { p.mx = x; p.my = y; return true; },
-      tbPlayerWait: function () { calls.waits++; p.acted = true; return true; },
-      tbPlayerRally: function () { calls.rallies++; p.acted = true; return true; },
-      tbBarrierExit: function () { calls.flees++; return false; },
-      tbPlayerFlee: function () { calls.flees++; return false; },
-      hasAbility: function (aid) { return (o.abilities || []).indexOf(aid) >= 0; },
-      _actionAvailable: function () { return { ok: true }; },
-      useAbility: function (aid, act) { calls.abilities.push(aid + ':' + act); p.acted = true; return true; },
-      equippedWeapon: function () { return { range: 1 }; },
-      findPath: function () { return [[5, 5]]; },
-      data: { abilities: CASCADE_DEFS },
-    };
-    return { G: G, p: p, m: m, calls: calls, wasLogRead: function () { return logRead; } };
-  }
-  const CASCADE_DEFS = PD.CASCADE.map(function (s) {
-    return { id: s.aid, actions: [{ id: s.act, cost: { kcal: 0 } }] };
-  });
-  // (a) Hold ground: full-HP scholar vs 800-HP wave-4 beast strikes, never flees.
-  const a = fakeGame({});
-  const ctxA = {};
-  const rA = PD.ragerepressPolicy.fight(a.G, ctxA);
-  check('policy-holdground-strikes', rA === true && a.calls.strikes.length === 1 && a.calls.strikes[0] === 'm_0',
-    JSON.stringify(a.calls));
-  check('policy-holdground-never-flees', a.calls.flees === 0, 'flees=' + a.calls.flees);
-  check('policy-never-reads-kill-log', a.wasLogRead() === false, 'logRead=' + a.wasLogRead());
-  // (b) Cascade order: holding all five abilities, the first press is patient_aim.
-  const b = fakeGame({ abilities: ['patient_aim', 'freeze_tag', 'hogtie', 'rage', 'war_cry'] });
-  const ctxB = {};
-  PD.ragerepressPolicy.fight(b.G, ctxB);
-  check('policy-cascade-aim-first', b.calls.abilities.length === 1 && b.calls.abilities[0] === 'patient_aim:take_aim',
-    JSON.stringify(b.calls.abilities));
-  check('policy-cascade-press-once-per-turn', b.calls.strikes.length === 0, 'strikes=' + b.calls.strikes.length);
-  // (c) Second turn: aim already pressed, next press is freeze_tag.
-  b.p.acted = false;
-  PD.ragerepressPolicy.fight(b.G, ctxB);
-  check('policy-cascade-freeze-second', b.calls.abilities.length === 2 && b.calls.abilities[1] === 'freeze_tag:tag',
-    JSON.stringify(b.calls.abilities));
-  // (d) Non-wave-4 fight delegates to the staged base (no w4 hook): a wave-2
-  // monster must NOT run this policy's hold-ground path — the staged
-  // policy's own fight runs instead (competent strikes it normally on the
-  // fake). The proof is that the ragerepress w4 branch never fired:
-  // no rrW4plusFights counter was set on the ctx.
-  const d = fakeGame({});
-  d.m.mdef = { id: 'the_grief_counselor', wave: 2 };
-  const ctxD = {};
-  PD.ragerepressPolicy.fight(d.G, ctxD);
-  check('policy-nonw4-delegates', ctxD.rrW4plusFights == null, 'rrW4plusFights=' + ctxD.rrW4plusFights);
-  // (e) Rally on turn 1 with an ally present.
-  const e = fakeGame({ allies: [{ key: 'a_0', kind: 'ally', alive: true, fled: false, mx: 4, my: 5, villagerId: 'ally1' }] });
-  const rE = PD.ragerepressPolicy.fight(e.G, {});
-  check('policy-rally-turn1-with-ally', rE === true && e.calls.rallies === 1, JSON.stringify(e.calls));
-  // (f) CASCADE frozen order is the prereg order.
-  check('policy-cascade-order', JSON.stringify(PD.CASCADE.map(function (s) { return s.aid; })) ===
-    JSON.stringify(['patient_aim', 'freeze_tag', 'hogtie', 'rage', 'war_cry']));
-  // (g) RAGE RE-PRESS (the one change in this arm): holding ONLY rage, the
-  // policy presses it on turn 1 AND again on turn 2 — the second press is
-  // counted as a re-press. The partydamage policy would have struck on
-  // turn 2 instead (rage capped at once per fight).
-  const g = fakeGame({ abilities: ['rage'] });
-  const ctxG = {};
-  PD.ragerepressPolicy.fight(g.G, ctxG);
-  check('policy-rage-first-press', g.calls.abilities.length === 1 && g.calls.abilities[0] === 'rage:unleash_rage',
-    JSON.stringify(g.calls.abilities));
-  g.p.acted = false;
-  PD.ragerepressPolicy.fight(g.G, ctxG);
-  check('policy-rage-repress-second-turn', g.calls.abilities.length === 2 && g.calls.abilities[1] === 'rage:unleash_rage',
-    JSON.stringify(g.calls.abilities));
-  check('policy-rage-repress-counted', ctxG.rrRageRepresses === 1 && ctxG.rrRagePresses === 2,
-    'represses=' + ctxG.rrRageRepresses + ' presses=' + ctxG.rrRagePresses);
-  check('policy-rage-repress-stats', PD.ragerepressStats().rageRepresses >= 1,
-    JSON.stringify(PD.ragerepressStats()));
-  // (h) The cap still holds for every OTHER cascade ability: holding
-  // patient_aim + rage, turn 1 presses aim, turn 2 presses rage — aim is
-  // never pressed twice in the fight.
-  const h = fakeGame({ abilities: ['patient_aim', 'rage'] });
-  const ctxH = {};
-  PD.ragerepressPolicy.fight(h.G, ctxH);
-  h.p.acted = false;
-  PD.ragerepressPolicy.fight(h.G, ctxH);
-  const aimCount = h.calls.abilities.filter(function (a) { return a.indexOf('patient_aim') === 0; }).length;
-  const rageCount = h.calls.abilities.filter(function (a) { return a.indexOf('rage:') === 0; }).length;
-  check('policy-aim-still-capped', aimCount === 1 && rageCount === 1, JSON.stringify(h.calls.abilities));
-})();
+// ---------- 6. Policy unit fakes: REMOVED with the killed policy ----
+// The rage re-press policy (scripts/policies/competent-ragerepress-b.js)
+// was deleted when the pilot NO-GO'd on the lever (refresh churn). Its
+// unit fakes (hold-ground, cascade order, rage re-press on consecutive
+// turns, patient_aim still capped, no waveKillLog read) ran green as
+// part of the 57/57 proof on build commit c22333838, before deletion.
+// They are not re-runnable against a deleted file and are not faked here.
 
 // ---------- 7. Live legs (driver subprocesses, /tmp only) ----------
 // Seed 55002 reaches wave-4 TB fights by day 72 on the finishprobe band
@@ -309,23 +216,6 @@ check('trace-absent-null', AN.tracePresent(null) === false);
     check('live-neutrality-kills', (off.waveKillLog || []).length === (base.waveKillLog || []).length,
       'off=' + (off.waveKillLog || []).length + ' on=' + (base.waveKillLog || []).length);
 
-    // Armed smoke: the ragerepress leg must strike in wave-4 fights and
-    // never flee one (hold ground), with traces classified and no errors.
-    runDriver({ SEEDS: '55002', DAYS: '90', RUN: 'proof-armed', OUTDIR: path.join(tmp, 'armed'), POLICY: 'ragerepress' });
-    const armed = JSON.parse(fs.readFileSync(path.join(tmp, 'armed', 'ragerepress-s55002-proof-armed.json'), 'utf8'));
-    const w4a = (armed.traces || []).filter(function (x) { return (x.wave | 0) >= 4; });
-    check('live-armed-wave4-traces', w4a.length >= 1, 'w4 traces=' + w4a.length);
-    const armedStrikes = w4a.reduce(function (n, x) { return n + (x.verbs || []).filter(function (v) { return v.verb === 'strike' && v.ok; }).length; }, 0);
-    check('live-armed-strikes-in-w4', armedStrikes >= 1, 'strikes=' + armedStrikes);
-    const armedFlees = w4a.reduce(function (n, x) { return n + (x.verbs || []).filter(function (v) { return v.verb === 'flee'; }).length; }, 0);
-    check('live-armed-never-flees-w4', armedFlees === 0, 'flees=' + armedFlees);
-    check('live-armed-zero-instrument-errors', (armed.instrumentErrors || []).length === 0, JSON.stringify((armed.instrumentErrors || []).slice(0, 3)));
-    check('live-armed-stats-strikes', (armed.ragerepressStats && armed.ragerepressStats.strikes) >= 1,
-      JSON.stringify(armed.ragerepressStats));
-    check('live-armed-stats-rage-counters-present',
-      armed.ragerepressStats && typeof armed.ragerepressStats.ragePresses === 'number' &&
-      typeof armed.ragerepressStats.rageRepresses === 'number',
-      JSON.stringify(armed.ragerepressStats));
   } catch (e) {
     fail++;
     console.log('FAIL live-legs :: ' + (e && e.message ? String(e.message).slice(0, 400) : String(e)));

@@ -23,7 +23,11 @@ const REPO = process.env.REPO || path.join(__dirname, '..');
 const { loadGame, setupGame, runDays, quietLog } = require(path.join(REPO, 'scripts', 'sim-harness'));
 const { competent } = require(path.join(REPO, 'scripts', 'policies', 'competent'));
 const STAGED = require(path.join(REPO, 'scripts', 'policies', 'competent-stageally-a'));
-const RAGEREPRESS = require(path.join(REPO, 'scripts', 'policies', 'competent-ragerepress-b'));
+// The ragerepress policy is loaded LAZILY (below, only when
+// POLICY=ragerepress): the pilot NO-GO'd on the lever and the policy file
+// was deleted, so a top-level require would break the baseline legs and
+// the instrument proof. Asking for POLICY=ragerepress without the file
+// is a loud stop, not a silent fallback.
 const RALLY = require(path.join(REPO, 'scripts', 'policies', 'competent-rally-bankkiller-b'));
 const INST = require(path.join(REPO, 'scripts', 'ragerepress-instrument-20261106'));
 
@@ -48,7 +52,12 @@ if (!SEEDS.length) { console.error('RAGEREPRESS STOP: SEEDS required.'); process
 if (POLICY !== 'baseline' && POLICY !== 'staged' && POLICY !== 'ragerepress') { console.error('RAGEREPRESS STOP: POLICY must be baseline|staged|ragerepress.'); process.exit(2); }
 let policy = competent;
 if (POLICY === 'staged') policy = STAGED.stagedPolicy;
-if (POLICY === 'ragerepress') policy = RAGEREPRESS.ragerepressPolicy;
+let RAGEREPRESS = null;
+if (POLICY === 'ragerepress') {
+  try { RAGEREPRESS = require(path.join(REPO, 'scripts', 'policies', 'competent-ragerepress-b')); }
+  catch (e) { console.error('RAGEREPRESS STOP: POLICY=ragerepress but the policy file is gone (killed lever — see evidence/2026-11-06/sim-ragerepress-b.md).'); process.exit(4); }
+  policy = RAGEREPRESS.ragerepressPolicy;
+}
 let ANCHOR = 'unknown';
 try { ANCHOR = execSync('git rev-parse HEAD', { cwd: REPO }).toString().trim().slice(0, 12); } catch (e) {}
 
@@ -100,7 +109,7 @@ async function oneRun(seed) {
 
   try { RALLY.resetBankkillerStats(); } catch (e) { errors.push('rally-reset: ' + String(e.message).slice(0, 80)); }
   try { STAGED.resetStageallyStats(); } catch (e) { errors.push('stageally-reset: ' + String(e.message).slice(0, 80)); }
-  try { RAGEREPRESS.resetRagerepressStats(); } catch (e) { errors.push('ragerepress-reset: ' + String(e.message).slice(0, 80)); }
+  try { if (RAGEREPRESS) RAGEREPRESS.resetRagerepressStats(); } catch (e) { errors.push('ragerepress-reset: ' + String(e.message).slice(0, 80)); }
   let result = null;
   await quietLog(async function () { result = await runDays(Game, wrapped, { days: DAYS, manifest: undefined, sampleEvery: 30 }); });
   if (inst) { try { inst.snapshot(); } catch (e) {} }
@@ -113,7 +122,7 @@ async function oneRun(seed) {
   let rallyStats = null, stageStats = null, partyStats = null;
   try { rallyStats = RALLY.bankkillerStats(); } catch (e) { errors.push('rally-stats: ' + String(e.message).slice(0, 80)); }
   try { stageStats = STAGED.stageallyStats(); } catch (e) { errors.push('stageally-stats: ' + String(e.message).slice(0, 80)); }
-  try { partyStats = RAGEREPRESS.ragerepressStats(); } catch (e) { errors.push('ragerepress-stats: ' + String(e.message).slice(0, 80)); }
+  try { partyStats = RAGEREPRESS ? RAGEREPRESS.ragerepressStats() : null; } catch (e) { errors.push('ragerepress-stats: ' + String(e.message).slice(0, 80)); }
 
   const st = Game.state || {};
   const out = {
