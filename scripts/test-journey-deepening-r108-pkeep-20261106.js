@@ -170,4 +170,28 @@ check('raj-photo: betrayal-accept curious sitting is not a plant', () => {
   assert.strictEqual(pl.length, 0);
 });
 
+// 12-13. Post-panel: NAMED evidence prefers a repay-opener line over a
+// bare regex hit (r108 Colin day 60: "an experiment someone forgot to
+// label" matches "forgot" but names no promise; the sitting later says
+// "You came through on the sickness I'm fighting").
+check('pkeep: NAMED evidence prefers the repay-opener line', () => {
+  const t1 = promised(1, 45, 'v', 'ask_favor');
+  const t2 = sitting(1, 60, 'v', 'want: repay (stage 0)', [
+    '"I think we\'re an experiment someone forgot to label."',
+    '"You came through on the sickness I\'m fighting. I won\'t forget it."',
+  ], { id: 'repay', stage: 0, resolution: 'engaged' });
+  const th = classifyPromiseThreads([t1, t2], []);
+  assert.strictEqual(th[0].cls, 'NAMED');
+  assert.ok(/you came through on/i.test(th[0].evidence.line), 'evidence cites the repay line: ' + th[0].evidence.line);
+});
+check('pkeep: NAMED evidence falls back to the regex hit when no repay opener exists', () => {
+  const t1 = promised(1, 45, 'v', 'ask_favor');
+  const t2 = sitting(1, 60, 'v', 'want: just_company (stage 0)', [
+    '"You promised you would help with the stores."',
+  ], { id: 'just_company', stage: 0, resolution: 'stated' });
+  const th = classifyPromiseThreads([t1, t2], []);
+  assert.strictEqual(th[0].cls, 'NAMED');
+  assert.ok(/promised/i.test(th[0].evidence.line));
+});
+
 console.log(`RESULT: ${pass} PASS, 0 FAIL`);

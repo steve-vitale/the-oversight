@@ -170,11 +170,21 @@ function classifyPromiseThreads(transcripts, deaths) {
     const later = (bySeedVid[t.seed + '|' + t.vid] || []).filter(x => x.day > t.day);
     let cls, evidence = null, oldNamed = false, structOld = false;
     if (later.length) {
-      let hit = null, structHit = null, structHitOld = null, oldHit = null;
+      let hit = null, repayHit = null, structHit = null, structHitOld = null, oldHit = null;
       for (const lt of later) {
         const sc2 = scanPromiseTranscript(lt.text);
         const line = sc2.them.find(l => PROMISE_MENTION.test(l));
         if (line && !hit) hit = { day: lt.day, line: line.slice(0, 200) };
+        // R108 post-panel (disclosed): the NAMED evidence must cite a line
+        // that actually names the promise. The first regex hit can be a
+        // philosophical musing that merely contains "forgot" (r108 Colin
+        // day 60: "an experiment someone forgot to label"), while the
+        // sitting genuinely names the promise later ("You came through on
+        // the sickness I'm fighting"). Prefer a repay-opener line as the
+        // evidence; fall back to the first regex hit. Classification is
+        // unchanged — only the cited line moves.
+        const rline = sc2.them.find(l => REPAY_OPENER.test(l));
+        if (rline && !repayHit) repayHit = { day: lt.day, line: rline.slice(0, 200) };
         const oldLine = sc2.them.find(l => PROMISE_MENTION_OLD.test(l));
         if (oldLine && !oldHit) { oldHit = { day: lt.day, line: oldLine.slice(0, 200) }; oldNamed = true; }
         if (sc2.wantLine && /^want: repay\b/.test(sc2.wantLine)) {
@@ -187,9 +197,9 @@ function classifyPromiseThreads(transcripts, deaths) {
             if (openerLine) structHit = { day: lt.day, wantLine: sc2.wantLine, opener: openerLine.slice(0, 200) };
           }
         }
-        if (hit && structHit && structHitOld && oldHit) break;
+        if (hit && repayHit && structHit && structHitOld && oldHit) break;
       }
-      if (hit) { cls = 'NAMED'; evidence = hit; }
+      if (hit) { cls = 'NAMED'; evidence = repayHit || hit; }
       else if (structHit) { cls = 'NAMED-STRUCTURAL'; evidence = structHit; }
       else { cls = 'SILENT'; evidence = null; }
     } else if ((deaths || []).some(d => d && String(d.who) === String(t.vid) && String(d.seed) === String(t.seed) && (d.day || 0) > t.day)) {
