@@ -294,8 +294,13 @@ check('framing/summary lines match no burst/settle classifier',
   check('stranded anchor (current substrate): 17021 has 0 stranded nights',
     a.stranded.length === 0,
     'stranded=' + JSON.stringify(a.stranded.map((s) => s.loopDay)));
-  check('stranded anchor (current substrate): 17021 runs 52 days, village-lost (fresh before leg)',
-    on.daysAlive === 52 && on.endReason === 'village-lost',
+  // Re-pinned 2026-11-06 (main-session closeout): substrate moved under the
+  // arm — 17021 now runs 60d survived on master WITHOUT the fix (control:
+  // scratch worktree at fc7608ba3, gossipcensus-s17021.json, 60d survived,
+  // 0 stranded), identical to the fix-ON result here. The 52d village-lost
+  // pin was the pre-r107 substrate (enddaybeats control + fresh before leg).
+  check('stranded anchor (current substrate): 17021 runs 60 days, survived (re-pinned post-r107)',
+    on.daysAlive === 60 && on.endReason === 'survived',
     'daysAlive=' + on.daysAlive + ' end=' + on.endReason);
   check('stranded anchor (current substrate): 0 stranded sleep windows, 0 bursts',
     a.strandedSleepWindows === 0 && a.strandedEvents === 0,
