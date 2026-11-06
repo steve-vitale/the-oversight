@@ -349,4 +349,28 @@ dry-line scan), scripts/test-journey-deepening-r109-pkeep-20261106.js
 DIVERGED on both seeds — kept as the documented negative result).
 
 ## Closeout (filled after the check gate)
-- (check.js --quick result, proof re-run, merge, rotation — below)
+- check.js --quick: 283 passed, 7 failed in 421s (log /tmp/r109-checkquick.log;
+  goal hidden_files copy saved at closeout — see below). All 7 adjudicated,
+  none new, none caused by this run (r109 makes NO game-code change —
+  tooling + evidence only): 6 standing pre-existing (same as r108's 6 —
+  proof-update, workflow freshness, mobile-combat-cadence,
+  occupation-panels, phone-frame-proof stale receipt,
+  establishment-r20-fixes racks-full) + capable-bot (39 passed, 1 failed:
+  "real capable player combat earns the food deed at first use" — fails
+  standalone deterministically on this base too, same assertion it has
+  failed intermittently: passed r107, failed the 278/12 run, timeout-failed
+  r108; seed 42 grants day 36, seed 1234 unobserved — a base-health item
+  for the main session, not this run). trust-observer-neutrality and
+  measurement-cache-flags PASSED this run (both failed r108's gate).
+  No failure touches conversation / convo-wants / betrayal code or the
+  r109 tooling.
+- Proof test re-run green after the rebase (21/21).
+- Master moved during the run (1e8db620d -> dc76d9bf6, Loop B
+  sim-winnability-round-1630: partydamage + pyrrhic, scripts/evidence
+  only, zero src/js changes); rebased onto dc76d9bf6 explicitly,
+  re-verified log, merged ff-only.
+- Merged locally, pending ship (no bump/push/live-verify — ship loop
+  owns those).
+- Rotation 2 -> 3 written at closeout, verified by read-back.
+- Heartbeat loop restarted with nohup after the mid-run death; final
+  heartbeat before release verified fresh.
