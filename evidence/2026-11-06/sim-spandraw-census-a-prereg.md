@@ -63,10 +63,25 @@ the extension rule below applies.
 LEG 2 — playpath-longday pilot (the extension that can
 actually see a crossing). The playpath-b instrument with
 ONE change of policy: competent-longday-a, a wrapper that
-runs competent.daily and then an evening-work block (extra
-garden work via the exported workGarden helper + extra talk
-rounds via the exported talkRound helper, at haven, while
-the scholar has energy and kcal to work). Evening work is
+runs competent.daily and then an evening-work block. AMENDED
+2026-11-06 (before any judged sim; smoke diagnostic below):
+evening work LEADS with one extra forage trip (the exported
+forageTripSeedFirst helper — the same trip competent.daily
+already makes, repeated in the evening while there is light),
+then haven chores (sort via sortHaul, garden via workGarden,
+talk via talkRound). The trip walks home at the end (or walks
+home on a fight); with no stocked ground it spends nothing and
+the evening falls back to haven chores. SMOKE DIAGNOSTIC that
+forced the amendment: the first shape (garden + talk only)
+added ~1 tick per round — the garden is already worked by
+competent.daily, so workGarden is a no-op in the evening and
+smoke taps stayed at max 476, inside playpath-b's range. A
+second forage trip is the evening work that actually spends
+time (travel + a 16-tick forage + the walk home). The driver
+records per-tap `eveningRounds` / `eveningTicksAdded` so the
+evidence can show how much of the day's lateness the extra
+work added. No judged corpus exists yet; no verdict is
+re-scored by this amendment.
 genuine game action, never clock-setting, never a wait:
 it stops on resource grounds (energy < 20 or kcal < 800),
 on no-progress (a round adding 0 ticks), after 6 rounds,
