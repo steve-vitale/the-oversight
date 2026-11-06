@@ -1,0 +1,15 @@
+(pre-talk seed: ask_favor planted d78; takenWantDay=0; convoCount=9)
+=== seed 95703 day 90 — conversation with Hassan (hassan_ali) ===
+occupation=Butcher temperament=steady trust=6 dead=false
+want: ask_favor (stage 1)
+open thread: want fromSeed=false
+picker: control
+
+THEM: "I hate to ask, but do you have anything to eat? Anything at all? I can't keep going like this."
+(turn0 choices: dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+YOU: (leave)
+pre-close: want ask_favor stage 3 thread want
+closing line: "Alright. Back to it."
+(gossip picks this sitting: 0)
