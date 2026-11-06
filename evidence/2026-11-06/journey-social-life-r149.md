@@ -223,7 +223,37 @@ and needs the call, not a drive-by.
 
 ## Gate
 
-[FILL AT CLOSEOUT]
+- Landing gate (`node scripts/check.js --quick`) on rebased tip
+  436d1495f (base master 4a60f7f56), 2026-11-06 ~23:12Z, log
+  `hidden_files/check-r149-landing-20261106.log`: **283 passed, 7
+  failed in 743s**.
+- Failing: `test-measurement-proof-update.js`,
+  `test-measurement-workflow.js`, `test-mobile-combat-cadence.js`
+  (2 sub-failures), `test-occupation-panels.js`,
+  `test-phone-frame-proof.js` (3 sub-failures),
+  `test-capable-bot-20261014.js` (food deed at first use),
+  `test-establishment-r20-fixes-20261020.js` (racks-full next-day
+  voice).
+- Verdict: STANDING PROFILE, ZERO NEW FAILURES. All 7 are a strict
+  subset of the documented 8-failure standing profile
+  (`sim-winnability-round-2130.md`: 282/8 on merged master;
+  measurement-proof pair documented pre-existing since the Oct 29
+  rebuild audit; capable-bot #1830 + mobile-combat-cadence proven
+  pre-existing by base probe). The 8th
+  (`test-measurement-cache-flags.js`) flipped green — and Loop A
+  independently ran the same 283/7 on 2df1052b5, a base WITHOUT the
+  r149 commits, confirming none of the 7 is attributable to this
+  branch (0 src/ files changed; tooling + evidence only).
+- Proof re-run on the rebased tip: `node
+  scripts/test-journey-social-r149.js` — PASS.
+- Telemetry re-run at closeout: only LOUD-disappeared l3.*/l2prime
+  lines (known schema drift, the driver never emits them); no value
+  deviations; baseline NOT rolled.
+- Closeout (r150, this run): stale-lock recovery of the timed-out
+  r149 run (lock 2026-11-06T21:01:54Z, heartbeat 47 min stale, no
+  live processes, gate log dead mid-run at 22:12Z); rebased
+  journey2-social onto 4a60f7f56 (new tips b0c956942 /
+  436d1495f); merged locally, pending ship.
 
 ## Telemetry
 
