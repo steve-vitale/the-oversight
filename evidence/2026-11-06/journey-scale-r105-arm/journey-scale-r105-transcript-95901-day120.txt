@@ -1,0 +1,15 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=16)
+=== seed 95901 day 120 — conversation with Deepa (visjoin_95) ===
+occupation=carpenter temperament=mischievous trust=91 dead=false
+want: ask_favor (stage 1)
+open thread: want fromSeed=false
+picker: control
+
+THEM: "I'm sorry — whatever this is, it's getting worse — I'm feverish, a cut gone hot and angry. Can you do anything?"
+(turn0 choices: dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Thank you. Whatever you can do — thank you."
+YOU: (leave)
+pre-close: want ask_favor stage 3 thread want
+closing line: "Take care of yourself."
+(gossip picks this sitting: 0)

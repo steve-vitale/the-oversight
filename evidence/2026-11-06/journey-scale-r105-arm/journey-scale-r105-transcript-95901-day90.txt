@@ -1,0 +1,15 @@
+(pre-talk seed: ask_favor planted d90; takenWantDay=0; convoCount=22)
+=== seed 95901 day 90 — conversation with Elif (elif_demir) ===
+occupation=hotel housekeeper temperament=prickly trust=43 dead=false
+want: ask_favor (stage 2)
+open thread: small fromSeed=true
+picker: control
+
+THEM: "Something's different today. Can't quite place it yet."
+(turn0 choices: confront:d_bxvfoo1, dlg:commit, dlg:cant, dlg:invite, menu:more, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+YOU: (leave)
+pre-close: want ask_favor stage 3 thread small
+closing line: "Later."
+(gossip picks this sitting: 0)
