@@ -70,6 +70,21 @@ groups, no new groups vs the r145 baseline. Proof
 unique, 16 cross-structure lines gone, 16 replacements present, no
 def/follow same-beat pair.
 
+## Gate (closeout, main session)
+
+`node scripts/check.js --quick` in this worktree, post-rebase onto
+30fe8dc00: **280 passed, 10 failed in 1250s**. All 10 failures are
+the standing set, adjudicated: measurement-proof-update,
+measurement-workflow, mobile-combat-cadence, occupation-panels,
+phone-frame-proof (stale phone receipt; characterGen.json is listed
+among its boot inputs because this run changed it — the failure is
+the standing receipt requirement, not a content regression),
+establishment-r20-fixes, measurement-cache-flags (intermittent
+under load), and 120s timeouts on trust-observer-neutrality,
+synergy-stall, capable-bot (capable-bot is a base failure).
+No failure touches a r145 file. Dedupe proof re-run post-rebase:
+PASS (88 pools). r108 pkeep test (new file from master): 13/13.
+
 ## Telemetry
 
 Social baseline `telemetry-baselines/social.json`, l3.* metrics:
