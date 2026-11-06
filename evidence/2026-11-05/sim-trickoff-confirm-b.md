@@ -23,7 +23,7 @@ band was NOT re-picked. 26 probe runs total: 2 DET + 12 V-full (pass 1) +
 - (a) DET=1 byte-identical on seed 99761 (2 x 120d of the pinned tree):
   DET GREEN. Log: evidence/2026-11-05/stage0-det.log (err empty).
 - (b) V-full sweep on all 12 fresh seeds (pass 1 — the judged baseline):
-  complete, integrity 12/12. Log: stage0-vfull-pass1.log (err empty).
+  complete, integrity 12/12. Log: stage0-vfull-pass1-trickoff.log (err empty).
 - STAGING DEVIATION (pre-registered in the prereg, not silent): NO full
   V-full pass-2 repeat. Justification as prereg: the rescreen proved
   byte-identical repeat on this identical pinned base + probe (8 seeds);
@@ -349,3 +349,35 @@ itself, and the prereg staged design governs.
   trickoff outputs, logs, and this note.)
 - No push, no bump, no live check — merged locally, pending ship (ship
   loop owns version bumps, pushes, live verification).
+
+## Adoption verification (Loop B run fleshout-loop-b-20261106T0630Z, 2026-11-06 ~06:50Z)
+- Adopted the stranded branch as assigned; no new sims run. Worktree
+  heartbeated at start (registry-lock contention made it slow, exit 0).
+  Pre-rebase state verified clean: `git status --short` empty,
+  `git diff HEAD -- src/ index.html` empty (no pinned-checkout residue).
+- Pre-rebase proof (on f04244656): integrity 12/12 vfull-, 12/12
+  trickoff-; `confirm` judge: CONFIRM GO, signal 9/12, S1 flips 5,
+  S3 8, S2 1 descriptive — exact reproduction of the Stage 1 verdict.
+- Rebase note: a first rebase onto origin/master (de065b4c6, batch-ship
+  bump) was re-done onto LOCAL master 3e8b3024d, the tip the task named
+  (gearoff merged, pending ship; origin/master is behind local master
+  by 7 commits, not ahead of it — local master is the merge target).
+- Rebase conflict, resolved in-worktree (no game files involved):
+  `evidence/2026-11-05/stage0-vfull-pass1.log` collided — gearoff's
+  Stage 0 (seeds 99821–99832) on master vs trickoff's Stage 0 (seeds
+  99761–99772). Resolution preserves BOTH: master's file kept
+  byte-identical (blob 9ccb48d1), trickoff's copy saved as
+  `stage0-vfull-pass1-trickoff.log` (12 lines, blob e5486f04).
+  The Stage 1 commit then silently overwrote the rescreen's
+  `stage1-trickoff.log` (8 seeds 99651–99658, blob 93a9bd12) with the
+  confirm's 12-seed log — caught by blob comparison, not by git.
+  Same treatment: rescreen's file restored byte-identical, confirm's
+  copy saved as `stage1-trickoff-confirm-b.log` (12 lines, blob
+  cc539d24). This note's Stage 0 log reference updated to the renamed
+  file. Lesson for future arms: never share a bare log filename across
+  arms in one evidence date dir — suffix the arm name.
+- Post-rebase proof (on the rebased tip, see Commits below): integrity
+  12/12 both prefixes; CONFIRM GO, signal 9/12, S1 5, S3 8, S2 1 —
+  identical verdict, no divergence.
+- Branch tip after rebase + this note: see Commits below. Ready to
+  merge, pending ship. No game-code change in this branch, ever.
