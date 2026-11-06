@@ -366,4 +366,27 @@ on the driver.
 
 ## Closeout note
 
-- (to be filled)
+- **Rebase:** clean, all 3 picks applied, no sequencer stop. Rebased onto
+  master `b5fb49607` (master had advanced 45 commits past 49215d0f8 with
+  sim-killerwild-b DIAG evidence, sim-winnability-round-0615 closeout,
+  journey-crisis r130, and ship version bump de065b4c6; local master is 45
+  ahead of origin/master, 0 behind — no stale-base risk). New SHAs: prereg
+  cb04bed67, fix 7db5b4115, run note 831bf2944, closeout (this commit).
+- **Proof re-run on the rebased branch (all PASS):** poison-retest 4/4,
+  meat-channel e2e 8/8.
+- **check.js --quick run 2:** 282 passed, 8 failed in 1016s = standing 6 +
+  2 timeouts (adjudicated: trust-observer-neutrality passes standalone 6/6;
+  capable-bot 39/40 with 1 failure identical on pristine master). No
+  regression attributable to this branch (poison guard only; quick-list
+  total 290). See the Regression section.
+- **Telemetry:** 2 LOUD lines, both explained as aggregation artifacts,
+  baseline NOT rolled.
+- **Index clobber struck on all THREE safe-commits** (prereg 7499714c, fix
+  cb47a557d, run note 6e3b42857): committed files showed staged-as-deleted +
+  untracked after commit. Repaired each time via HEAD-blob
+  `update-index --add --cacheinfo`; verified status clean + diff HEAD empty.
+- **Rotation re-verified at closeout: reads `1`** (the 0→1 write stuck this
+  run). Rotation-write discrepancy remains unexplained (6th sighting).
+- Lock (`laneA-20261106T0745Z`, created 07:54Z) and heartbeat loop are
+  removed at closeout after the merge, once run_id is read back; see
+  `~/memory/2026-11-06.md` for the closeout record.
