@@ -126,7 +126,7 @@ function median(xs) {
 }
 
 function main() {
-const SEEDS = [56001, 56002, 56003, 56004, 56005, 56006, 56007, 56008];
+const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(function (s) { return parseInt(s.trim(), 10); }).filter(Number.isFinite) : [56001, 56002, 56003, 56004, 56005, 56006, 56007, 56008]);
 const rows = SEEDS.map(analyzeSeed);
 
 const baseDays = rows.map(r => r.baseline.days);
