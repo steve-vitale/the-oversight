@@ -472,4 +472,41 @@ per seed alongside the R66 gate.
 
 ## Closeout note
 
-- (to be filled)
+- **Rebase (twice):** clean, all 4 picks applied both times, no sequencer stop.
+  First rebase onto master `f4dafd387` (r147 closeout + stayrecover landed
+  after this run's base): new SHAs prereg 42268ab6b, fix 8976fcf8f, driver
+  83dcb2196, note be4e1781f. Proof re-run on that tip: 16/16 PASS. Master then
+  moved again — `2b9b0371e` (sim-drive-practice-a: practice moves competence,
+  pilot GO 14/16 moved, baseline 0 [needs-eyes]) landed while the proof ran.
+  Second rebase onto `2b9b0371e`: clean, new SHAs prereg dc802d8bc, fix
+  d68c4c6b1, driver 8974a1ed9, note 849afb0ae. Proof re-run on the final tip:
+  16/16 PASS. Master verified stable at `2b9b0371e` immediately before the
+  merge (0 behind origin/master's local position — local master is ahead of
+  origin, the ship loop owns the push). No stale-base risk.
+- **Practice landing vs this panel (read carefully):** the practice-moves-
+  competence game-code change landed AFTER this panel ran. The panel's
+  game-behavior verdicts (famine, solo hunts, engagement lines) are for base
+  408ba9648; the practice change is not in the measured game. A future landing
+  panel measures its effect fresh — this run does not claim anything about it.
+  The rebase only replays this run's evidence/analyzer/driver commits; no
+  panel number was re-scored.
+- **Proof re-run on the rebased branch (all PASS):** analyzer fixes 16/16.
+- **No check.js --quick this run:** zero src/js changes; the relevant suites
+  are the analyzer proof (re-run above, green) and the landing panel +
+  analyzers (exit 0). The ship loop runs the full check before pushing.
+- **Telemetry:** 2 LOUD lines, both explained as aggregation artifacts,
+  baseline NOT rolled.
+- **Index clobber struck on all 4 safe-commits** (prereg, fix, driver, run
+  note): committed files showed staged-as-deleted + untracked after commit.
+  Repaired each time via HEAD-blob `update-index --add --cacheinfo`;
+  verified status clean + diff HEAD empty.
+- **Registry lock jam:** Lane B's journey2-social register held the exclusive
+  registry lock ~7h (grinding checkout); my heartbeat went stale ~14 min
+  (20:57:34Z → 21:11:28Z) and recovered on its own when the jam cleared. No
+  data lost, nothing killed.
+- **Rotation re-verified at closeout: reads `1`** (the 0→1 write stuck this
+  run). No discrepancy this run: r105's scale run had written 0 after r110's
+  1, so the file correctly read 0 at this run's start.
+- Lock (`2026-11-06T20:41:43+00:00`, created 20:41Z) and heartbeat loop are
+  removed at closeout after the merge, once run_id is read back; see
+  `~/memory/2026-11-06.md` for the closeout record.
