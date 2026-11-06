@@ -1,0 +1,1804 @@
+{
+  "run": "proposefirst-pilot",
+  "goClauseEarly": {
+    "medianFirstProposeBaseline": 27,
+    "medianFirstProposeArmed": 7,
+    "gainDays": 20,
+    "barDays": 7,
+    "pass": true
+  },
+  "goClauseSeasoned": {
+    "seasonedBaselineTotal": 18,
+    "seasonedArmedTotal": 20,
+    "pass": true
+  },
+  "guards": {
+    "medianSurvivalBaseline": 87,
+    "medianSurvivalArmed": 108,
+    "survivalRatio": 1.24,
+    "pass": true,
+    "ledger4BaselineTotal": 8,
+    "ledger4ArmedTotal": 2,
+    "killsGuard": false
+  },
+  "verdict": "NO-GO",
+  "wall": {
+    "baseline": {
+      "wins": 0,
+      "national": 4,
+      "global": 4,
+      "table": 0,
+      "wave4unlock": 7,
+      "wave4faced": 6,
+      "wave5unlock": 2,
+      "medianDays": 87,
+      "survivors": 0
+    },
+    "armed": {
+      "wins": 0,
+      "national": 3,
+      "global": 3,
+      "table": 0,
+      "wave4unlock": 5,
+      "wave4faced": 5,
+      "wave5unlock": 0,
+      "medianDays": 108,
+      "survivors": 1
+    }
+  },
+  "rows": [
+    {
+      "seed": 72001,
+      "baseline": {
+        "days": 118,
+        "endReason": "village-lost",
+        "won": false,
+        "over": true,
+        "scaleRank": "global",
+        "maxWave": 5,
+        "unlockedWave": 5,
+        "w4faced": true,
+        "endGated": 627,
+        "endRaw": 627,
+        "peakGated": 627,
+        "peakRaw": 627,
+        "peakDiplo": 102,
+        "maxKnown": 6,
+        "firstKnownDay": 4,
+        "proposeCalls": 3,
+        "proposes": 3,
+        "proposeOutcomes": {
+          "formed": 3
+        },
+        "firstProposeDay": 25,
+        "firstProposeLag": 21,
+        "villageLags": [
+          {
+            "village": "village_0",
+            "firstKnownDay": 4,
+            "firstProposeDay": 25,
+            "lag": 21
+          },
+          {
+            "village": "village_1",
+            "firstKnownDay": 30,
+            "firstProposeDay": 30,
+            "lag": 0
+          },
+          {
+            "village": "village_2",
+            "firstKnownDay": 34,
+            "firstProposeDay": 33,
+            "lag": -1
+          },
+          {
+            "village": "village_spl_29_46961",
+            "firstKnownDay": 34,
+            "firstProposeDay": null,
+            "lag": null
+          },
+          {
+            "village": "village_spl_32_47907",
+            "firstKnownDay": 43,
+            "firstProposeDay": null,
+            "lag": null
+          },
+          {
+            "village": "village_spl_29_89228",
+            "firstKnownDay": 111,
+            "firstProposeDay": null,
+            "lag": null
+          }
+        ],
+        "travels": 57,
+        "studies": 3,
+        "counterAnswers": 0,
+        "formed": 3,
+        "seasoned": 3,
+        "dissolved": 0,
+        "linkEvents": [
+          {
+            "day": 25,
+            "kind": "formed",
+            "key": "village_0|?|haven>village_0|:",
+            "other": "village_0",
+            "trust": 30
+          },
+          {
+            "day": 30,
+            "kind": "formed",
+            "key": "village_1|?|haven>village_1|:",
+            "other": "village_1",
+            "trust": 30
+          },
+          {
+            "day": 34,
+            "kind": "formed",
+            "key": "village_2|?|haven>village_2|:",
+            "other": "village_2",
+            "trust": 30
+          },
+          {
+            "day": 55,
+            "kind": "seasoned",
+            "key": "village_0|?|haven>village_0|:",
+            "other": "village_0",
+            "trust": 92
+          },
+          {
+            "day": 60,
+            "kind": "seasoned",
+            "key": "village_1|?|haven>village_1|:",
+            "other": "village_1",
+            "trust": 67
+          },
+          {
+            "day": 64,
+            "kind": "seasoned",
+            "key": "village_2|?|haven>village_2|:",
+            "other": "village_2",
+            "trust": 88
+          }
+        ],
+        "readyDays": 29,
+        "endReady": false,
+        "endVets": 1,
+        "ledger4": 6,
+        "waveKillLogEntries": 66,
+        "snapshots": 115,
+        "instrumentErrors": 0
+      },
+      "armed": {
+        "days": 125,
+        "endReason": "village-lost",
+        "won": false,
+        "over": true,
+        "scaleRank": "global",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "w4faced": true,
+        "endGated": 199,
+        "endRaw": 392,
+        "peakGated": 199,
+        "peakRaw": 392,
+        "peakDiplo": 102,
+        "maxKnown": 4,
+        "firstKnownDay": 4,
+        "proposeCalls": 3,
+        "proposes": 3,
+        "proposeOutcomes": {
+          "counter": 1,
+          "formed": 2
+        },
+        "firstProposeDay": 7,
+        "firstProposeLag": 3,
+        "villageLags": [
+          {
+            "village": "village_0",
+            "firstKnownDay": 4,
+            "firstProposeDay": 7,
+            "lag": 3
+          },
+          {
+            "village": "village_2",
+            "firstKnownDay": 26,
+            "firstProposeDay": 26,
+            "lag": 0
+          },
+          {
+            "village": "village_spl_29_93976",
+            "firstKnownDay": 31,
+            "firstProposeDay": 31,
+            "lag": 0
+          },
+          {
+            "village": "village_spl_37_50983",
+            "firstKnownDay": 68,
+            "firstProposeDay": null,
+            "lag": null
+          }
+        ],
+        "travels": 72,
+        "studies": 0,
+        "counterAnswers": 1,
+        "formed": 3,
+        "seasoned": 3,
+        "dissolved": 0,
+        "linkEvents": [
+          {
+            "day": 8,
+            "kind": "formed",
+            "key": "village_0|?|haven>village_0|:",
+            "other": "village_0",
+            "trust": 48
+          },
+          {
+            "day": 26,
+            "kind": "formed",
+            "key": "village_2|?|haven>village_2|:",
+            "other": "village_2",
+            "trust": 30
+          },
+          {
+            "day": 31,
+            "kind": "formed",
+            "key": "village_spl_29_93976|?|haven>village_spl_29_93976|:",
+            "other": "village_spl_29_93976",
+            "trust": 30
+          },
+          {
+            "day": 38,
+            "kind": "seasoned",
+            "key": "village_0|?|haven>village_0|:",
+            "other": "village_0",
+            "trust": 64
+          },
+          {
+            "day": 56,
+            "kind": "seasoned",
+            "key": "village_2|?|haven>village_2|:",
+            "other": "village_2",
+            "trust": 78
+          },
+          {
+            "day": 61,
+            "kind": "seasoned",
+            "key": "village_spl_29_93976|?|haven>village_spl_29_93976|:",
+            "other": "village_spl_29_93976",
+            "trust": 74
+          }
+        ],
+        "readyDays": 0,
+        "endReady": false,
+        "endVets": 1,
+        "ledger4": 1,
+        "waveKillLogEntries": 45,
+        "snapshots": 123,
+        "instrumentErrors": 0
+      }
+    },
+    {
+      "seed": 72002,
+      "baseline": {
+        "days": 99,
+        "endReason": "village-lost",
+        "won": false,
+        "over": true,
+        "scaleRank": "global",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "w4faced": true,
+        "endGated": 197,
+        "endRaw": 197,
+        "peakGated": 197,
+        "peakRaw": 197,
+        "peakDiplo": 102,
+        "maxKnown": 6,
+        "firstKnownDay": 4,
+        "proposeCalls": 3,
+        "proposes": 3,
+        "proposeOutcomes": {
+          "formed": 3
+        },
+        "firstProposeDay": 27,
+        "firstProposeLag": 23,
+        "villageLags": [
+          {
+            "village": "village_0",
+            "firstKnownDay": 4,
+            "firstProposeDay": 27,
+            "lag": 23
+          },
+          {
+            "village": "village_2",
+            "firstKnownDay": 5,
+            "firstProposeDay": 47,
+            "lag": 42
+          },
+          {
+            "village": "village_spl_22_2040",
+            "firstKnownDay": 23,
+            "firstProposeDay": null,
+            "lag": null
+          },
+          {
+            "village": "village_1",
+            "firstKnownDay": 30,
+            "firstProposeDay": 46,
+            "lag": 16
+          },
+          {
+            "village": "village_spl_29_81107",
+            "firstKnownDay": 31,
+            "firstProposeDay": null,
+            "lag": null
+          },
+          {
+            "village": "village_spl_25_71687",
+            "firstKnownDay": 49,
+            "firstProposeDay": null,
+            "lag": null
+          }
+        ],
+        "travels": 8,
+        "studies": 1,
+        "counterAnswers": 0,
+        "formed": 3,
+        "seasoned": 3,
+        "dissolved": 0,
+        "linkEvents": [
+          {
+            "day": 28,
+            "kind": "formed",
+            "key": "village_0|?|haven>village_0|:",
+            "other": "village_0",
+            "trust": 40
+          },
+          {
+            "day": 46,
+            "kind": "formed",
+            "key": "village_1|?|haven>village_1|:",
+            "other": "village_1",
+            "trust": 30
+          },
+          {
+            "day": 47,
+            "kind": "formed",
+            "key": "village_2|?|haven>village_2|:",
+            "other": "village_2",
+            "trust": 30
+          },
+          {
+            "day": 57,
+            "kind": "seasoned",
+            "key": "village_0|?|haven>village_0|:",
+            "other": "village_0",
+            "trust": 50
+          },
+          {
+            "day": 76,
+            "kind": "seasoned",
+            "key": "village_1|?|haven>village_1|:",
+            "other": "village_1",
+            "trust": 57
+          },
+          {
+            "day": 77,
+            "kind": "seasoned",
+            "key": "village_2|?|haven>village_2|:",
+            "other": "village_2",
+            "trust": 52
+          }
+        ],
+        "readyDays": 0,
+        "endReady": false,
+        "endVets": 0,
+        "ledger4": 0,
+        "waveKillLogEntries": 33,
+        "snapshots": 94,
+        "instrumentErrors": 0
+      },
+      "armed": {
+        "days": 76,
+        "endReason": "village-lost",
+        "won": false,
+        "over": true,
+        "scaleRank": "regional",
+        "maxWave": 3,
+        "unlockedWave": 3,
+        "w4faced": false,
+        "endGated": 85,
+        "endRaw": 85,
+        "peakGated": 85,
+        "peakRaw": 85,
+        "peakDiplo": 0,
+        "maxKnown": 2,
+        "firstKnownDay": 4,
+        "proposeCalls": 2,
+        "proposes": 2,
+        "proposeOutcomes": {
+          "formed": 2
+        },
+        "firstProposeDay": 7,
+        "firstProposeLag": 3,
+        "villageLags": [
+          {
+            "village": "village_0",
+            "firstKnownDay": 4,
+            "firstProposeDay": 7,
+            "lag": 3
+          },
+          {
+            "village": "village_2",
+            "firstKnownDay": 5,
+            "firstProposeDay": 8,
+            "lag": 3
+          }
+        ],
+        "travels": 50,
+        "studies": 0,
+        "counterAnswers": 0,
+        "formed": 2,
+        "seasoned": 2,
+        "dissolved": 0,
+        "linkEvents": [
+          {
+            "day": 7,
+            "kind": "formed",
+            "key": "village_0|?|haven>village_0|:",
+            "other": "village_0",
+            "trust": 30
+          },
+          {
+            "day": 8,
+            "kind": "formed",
+            "key": "village_2|?|haven>village_2|:",
+            "other": "village_2",
+            "trust": 30
+          },
+          {
+            "day": 37,
+            "kind": "seasoned",
+            "key": "village_0|?|haven>village_0|:",
+            "other": "village_0",
+            "trust": 97
+          },
+          {
+            "day": 38,
+            "kind": "seasoned",
+            "key": "village_2|?|haven>village_2|:",
+            "other": "village_2",
+            "trust": 84
+          }
+        ],
+        "readyDays": 0,
+        "endReady": false,
+        "endVets": 0,
+        "ledger4": 0,
+        "waveKillLogEntries": 30,
+        "snapshots": 75,
+        "instrumentErrors": 0
+      }
+    },
+    {
+      "seed": 72003,
+      "baseline": {
+        "days": 30,
+        "endReason": "village-lost",
+        "won": false,
+        "over": true,
+        "scaleRank": "village",
+        "maxWave": 2,
+        "unlockedWave": 2,
+        "w4faced": false,
+        "endGated": 0,
+        "endRaw": 0,
+        "peakGated": 0,
+        "peakRaw": 0,
+        "peakDiplo": 0,
+        "maxKnown": 4,
+        "firstKnownDay": 4,
+        "proposeCalls": 1,
+        "proposes": 1,
+        "proposeOutcomes": {
+          "formed": 1
+        },
+        "firstProposeDay": 27,
+        "firstProposeLag": 23,
+        "villageLags": [
+          {
+            "village": "village_2",
+            "firstKnownDay": 4,
+            "firstProposeDay": null,
+            "lag": null
+          },
+          {
+            "village": "village_0",
+            "firstKnownDay": 5,
+            "firstProposeDay": 27,
+            "lag": 22
+          },
+          {
+            "village": "village_1",
+            "firstKnownDay": 14,
+            "firstProposeDay": null,
+            "lag": null
+          },
+          {
+            "village": "village_spl_27_42333",
+            "firstKnownDay": 28,
+            "firstProposeDay": null,
+            "lag": null
+          }
+        ],
+        "travels": 1,
+        "studies": 1,
+        "counterAnswers": 0,
+        "formed": 1,
+        "seasoned": 0,
+        "dissolved": 0,
+        "linkEvents": [
+          {
+            "day": 27,
+            "kind": "formed",
+            "key": "village_0|?|haven>village_0|:",
+            "other": "village_0",
+            "trust": 30
+          }
+        ],
+        "readyDays": 0,
+        "endReady": false,
+        "endVets": 0,
+        "ledger4": 0,
+        "waveKillLogEntries": 14,
+        "snapshots": 30,
+        "instrumentErrors": 0
+      },
+      "armed": {
+        "days": 103,
+        "endReason": "village-lost",
+        "won": false,
+        "over": true,
+        "scaleRank": "regional",
+        "maxWave": 3,
+        "unlockedWave": 3,
+        "w4faced": false,
+        "endGated": 75,
+        "endRaw": 75,
+        "peakGated": 75,
+        "peakRaw": 75,
+        "peakDiplo": 0,
+        "maxKnown": 4,
+        "firstKnownDay": 4,
+        "proposeCalls": 4,
+        "proposes": 4,
+        "proposeOutcomes": {
+          "counter": 1,
+          "formed": 3
+        },
+        "firstProposeDay": 7,
+        "firstProposeLag": 3,
+        "villageLags": [
+          {
+            "village": "village_2",
+            "firstKnownDay": 4,
+            "firstProposeDay": 7,
+            "lag": 3
+          },
+          {
+            "village": "village_0",
+            "firstKnownDay": 5,
+            "firstProposeDay": 8,
+            "lag": 3
+          },
+          {
+            "village": "village_1",
+            "firstKnownDay": 13,
+            "firstProposeDay": 28,
+            "lag": 15
+          },
+          {
+            "village": "village_spl_28_72774",
+            "firstKnownDay": 29,
+            "firstProposeDay": 60,
+            "lag": 31
+          }
+        ],
+        "travels": 3,
+        "studies": 1,
+        "counterAnswers": 1,
+        "formed": 4,
+        "seasoned": 3,
+        "dissolved": 1,
+        "linkEvents": [
+          {
+            "day": 8,
+            "kind": "formed",
+            "key": "village_2|?|village_2>haven|:",
+            "other": "village_2",
+            "trust": 40
+          },
+          {
+            "day": 8,
+            "kind": "formed",
+            "key": "village_0|?|haven>village_0|:",
+            "other": "village_0",
+            "trust": 30
+          },
+          {
+            "day": 28,
+            "kind": "formed",
+            "key": "village_1|?|haven>village_1|:",
+            "other": "village_1",
+            "trust": 30
+          },
+          {
+            "day": 38,
+            "kind": "seasoned",
+            "key": "village_2|?|village_2>haven|:",
+            "other": "village_2",
+            "trust": 63
+          },
+          {
+            "day": 38,
+            "kind": "seasoned",
+            "key": "village_0|?|haven>village_0|:",
+            "other": "village_0",
+            "trust": 56
+          },
+          {
+            "day": 60,
+            "kind": "formed",
+            "key": "village_spl_28_72774|?|haven>village_spl_28_72774|:",
+            "other": "village_spl_28_72774",
+            "trust": 30
+          },
+          {
+            "day": 61,
+            "kind": "seasoned",
+            "key": "village_1|?|haven>village_1|:",
+            "other": "village_1",
+            "trust": 46
+          },
+          {
+            "day": 65,
+            "kind": "dissolved-or-inactive",
+            "key": "village_2|?|village_2>haven|:",
+            "other": "village_2"
+          }
+        ],
+        "readyDays": 0,
+        "endReady": false,
+        "endVets": 0,
+        "ledger4": 0,
+        "waveKillLogEntries": 35,
+        "snapshots": 102,
+        "instrumentErrors": 0
+      }
+    },
+    {
+      "seed": 72004,
+      "baseline": {
+        "days": 148,
+        "endReason": "village-lost",
+        "won": false,
+        "over": true,
+        "scaleRank": "global",
+        "maxWave": 5,
+        "unlockedWave": 5,
+        "w4faced": true,
+        "endGated": 247,
+        "endRaw": 247,
+        "peakGated": 247,
+        "peakRaw": 247,
+        "peakDiplo": 102,
+        "maxKnown": 7,
+        "firstKnownDay": 4,
+        "proposeCalls": 3,
+        "proposes": 3,
+        "proposeOutcomes": {
+          "formed": 3
+        },
+        "firstProposeDay": 27,
+        "firstProposeLag": 23,
+        "villageLags": [
+          {
+            "village": "village_3",
+            "firstKnownDay": 4,
+            "firstProposeDay": null,
+            "lag": null
+          },
+          {
+            "village": "village_0",
+            "firstKnownDay": 17,
+            "firstProposeDay": 27,
+            "lag": 10
+          },
+          {
+            "village": "village_2",
+            "firstKnownDay": 26,
+            "firstProposeDay": 28,
+            "lag": 2
+          },
+          {
+            "village": "village_1",
+            "firstKnownDay": 33,
+            "firstProposeDay": 36,
+            "lag": 3
+          },
+          {
+            "village": "village_spl_26_29144",
+            "firstKnownDay": 45,
+            "firstProposeDay": null,
+            "lag": null
+          },
+          {
+            "village": "village_spl_30_90486",
+            "firstKnownDay": 61,
+            "firstProposeDay": null,
+            "lag": null
+          },
+          {
+            "village": "village_spl_40_97173",
+            "firstKnownDay": 68,
+            "firstProposeDay": null,
+            "lag": null
+          }
+        ],
+        "travels": 27,
+        "studies": 1,
+        "counterAnswers": 0,
+        "formed": 3,
+        "seasoned": 3,
+        "dissolved": 0,
+        "linkEvents": [
+          {
+            "day": 27,
+            "kind": "formed",
+            "key": "village_0|?|haven>village_0|:",
+            "other": "village_0",
+            "trust": 30
+          },
+          {
+            "day": 28,
+            "kind": "formed",
+            "key": "village_2|?|haven>village_2|:",
+            "other": "village_2",
+            "trust": 30
+          },
+          {
+            "day": 36,
+            "kind": "formed",
+            "key": "village_1|?|haven>village_1|:",
+            "other": "village_1",
+            "trust": 30
+          },
+          {
+            "day": 57,
+            "kind": "seasoned",
+            "key": "village_0|?|haven>village_0|:",
+            "other": "village_0",
+            "trust": 69
+          },
+          {
+            "day": 58,
+            "kind": "seasoned",
+            "key": "village_2|?|haven>village_2|:",
+            "other": "village_2",
+            "trust": 65
+          },
+          {
+            "day": 66,
+            "kind": "seasoned",
+            "key": "village_1|?|haven>village_1|:",
+            "other": "village_1",
+            "trust": 60
+          }
+        ],
+        "readyDays": 0,
+        "endReady": false,
+        "endVets": 0,
+        "ledger4": 1,
+        "waveKillLogEntries": 70,
+        "snapshots": 145,
+        "instrumentErrors": 0
+      },
+      "armed": {
+        "days": 60,
+        "endReason": "village-lost",
+        "won": false,
+        "over": true,
+        "scaleRank": "regional",
+        "maxWave": 3,
+        "unlockedWave": 3,
+        "w4faced": false,
+        "endGated": 25,
+        "endRaw": 25,
+        "peakGated": 25,
+        "peakRaw": 25,
+        "peakDiplo": 0,
+        "maxKnown": 4,
+        "firstKnownDay": 4,
+        "proposeCalls": 2,
+        "proposes": 2,
+        "proposeOutcomes": {
+          "formed": 2
+        },
+        "firstProposeDay": 7,
+        "firstProposeLag": 3,
+        "villageLags": [
+          {
+            "village": "village_3",
+            "firstKnownDay": 4,
+            "firstProposeDay": 7,
+            "lag": 3
+          },
+          {
+            "village": "village_1",
+            "firstKnownDay": 14,
+            "firstProposeDay": 14,
+            "lag": 0
+          },
+          {
+            "village": "village_spl_29_57724",
+            "firstKnownDay": 39,
+            "firstProposeDay": null,
+            "lag": null
+          },
+          {
+            "village": "village_spl_27_90138",
+            "firstKnownDay": 58,
+            "firstProposeDay": null,
+            "lag": null
+          }
+        ],
+        "travels": 0,
+        "studies": 0,
+        "counterAnswers": 0,
+        "formed": 2,
+        "seasoned": 1,
+        "dissolved": 1,
+        "linkEvents": [
+          {
+            "day": 7,
+            "kind": "formed",
+            "key": "village_3|?|haven>village_3|:",
+            "other": "village_3",
+            "trust": 30
+          },
+          {
+            "day": 14,
+            "kind": "formed",
+            "key": "village_1|?|haven>village_1|:",
+            "other": "village_1",
+            "trust": 30
+          },
+          {
+            "day": 37,
+            "kind": "seasoned",
+            "key": "village_3|?|haven>village_3|:",
+            "other": "village_3",
+            "trust": 46
+          },
+          {
+            "day": 60,
+            "kind": "dissolved-or-inactive",
+            "key": "village_1|?|haven>village_1|:",
+            "other": "village_1"
+          }
+        ],
+        "readyDays": 0,
+        "endReady": false,
+        "endVets": 0,
+        "ledger4": 0,
+        "waveKillLogEntries": 29,
+        "snapshots": 59,
+        "instrumentErrors": 0
+      }
+    },
+    {
+      "seed": 72005,
+      "baseline": {
+        "days": 54,
+        "endReason": "village-lost",
+        "won": false,
+        "over": true,
+        "scaleRank": "village",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "w4faced": false,
+        "endGated": 100,
+        "endRaw": 100,
+        "peakGated": 100,
+        "peakRaw": 100,
+        "peakDiplo": 0,
+        "maxKnown": 4,
+        "firstKnownDay": 4,
+        "proposeCalls": 1,
+        "proposes": 1,
+        "proposeOutcomes": {
+          "formed": 1
+        },
+        "firstProposeDay": 45,
+        "firstProposeLag": 41,
+        "villageLags": [
+          {
+            "village": "village_0",
+            "firstKnownDay": 4,
+            "firstProposeDay": 45,
+            "lag": 41
+          },
+          {
+            "village": "village_1",
+            "firstKnownDay": 4,
+            "firstProposeDay": null,
+            "lag": null
+          },
+          {
+            "village": "village_2",
+            "firstKnownDay": 4,
+            "firstProposeDay": null,
+            "lag": null
+          },
+          {
+            "village": "village_3",
+            "firstKnownDay": 4,
+            "firstProposeDay": null,
+            "lag": null
+          }
+        ],
+        "travels": 1,
+        "studies": 1,
+        "counterAnswers": 0,
+        "formed": 1,
+        "seasoned": 0,
+        "dissolved": 0,
+        "linkEvents": [
+          {
+            "day": 46,
+            "kind": "formed",
+            "key": "village_0|?|haven>village_0|:",
+            "other": "village_0",
+            "trust": 30
+          }
+        ],
+        "readyDays": 0,
+        "endReady": false,
+        "endVets": 0,
+        "ledger4": 0,
+        "waveKillLogEntries": 37,
+        "snapshots": 52,
+        "instrumentErrors": 0
+      },
+      "armed": {
+        "days": 108,
+        "endReason": "village-lost",
+        "won": false,
+        "over": true,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "w4faced": true,
+        "endGated": 125,
+        "endRaw": 125,
+        "peakGated": 125,
+        "peakRaw": 125,
+        "peakDiplo": 0,
+        "maxKnown": 4,
+        "firstKnownDay": 4,
+        "proposeCalls": 4,
+        "proposes": 4,
+        "proposeOutcomes": {
+          "formed": 2,
+          "counter": 2
+        },
+        "firstProposeDay": 7,
+        "firstProposeLag": 3,
+        "villageLags": [
+          {
+            "village": "village_0",
+            "firstKnownDay": 4,
+            "firstProposeDay": 7,
+            "lag": 3
+          },
+          {
+            "village": "village_1",
+            "firstKnownDay": 4,
+            "firstProposeDay": 8,
+            "lag": 4
+          },
+          {
+            "village": "village_2",
+            "firstKnownDay": 4,
+            "firstProposeDay": 9,
+            "lag": 5
+          },
+          {
+            "village": "village_3",
+            "firstKnownDay": 4,
+            "firstProposeDay": 10,
+            "lag": 6
+          }
+        ],
+        "travels": 4,
+        "studies": 1,
+        "counterAnswers": 2,
+        "formed": 4,
+        "seasoned": 2,
+        "dissolved": 3,
+        "linkEvents": [
+          {
+            "day": 7,
+            "kind": "formed",
+            "key": "village_0|?|haven>village_0|:",
+            "other": "village_0",
+            "trust": 30
+          },
+          {
+            "day": 9,
+            "kind": "formed",
+            "key": "village_1|?|village_1>haven|:",
+            "other": "village_1",
+            "trust": 40
+          },
+          {
+            "day": 10,
+            "kind": "formed",
+            "key": "village_2|?|village_2>haven|:",
+            "other": "village_2",
+            "trust": 40
+          },
+          {
+            "day": 10,
+            "kind": "formed",
+            "key": "village_3|?|haven>village_3|:",
+            "other": "village_3",
+            "trust": 30
+          },
+          {
+            "day": 37,
+            "kind": "seasoned",
+            "key": "village_0|?|haven>village_0|:",
+            "other": "village_0",
+            "trust": 44
+          },
+          {
+            "day": 43,
+            "kind": "seasoned",
+            "key": "village_3|?|haven>village_3|:",
+            "other": "village_3",
+            "trust": 40
+          },
+          {
+            "day": 80,
+            "kind": "dissolved-or-inactive",
+            "key": "village_1|?|village_1>haven|:",
+            "other": "village_1"
+          },
+          {
+            "day": 80,
+            "kind": "dissolved-or-inactive",
+            "key": "village_2|?|village_2>haven|:",
+            "other": "village_2"
+          },
+          {
+            "day": 107,
+            "kind": "dissolved-or-inactive",
+            "key": "village_3|?|haven>village_3|:",
+            "other": "village_3"
+          }
+        ],
+        "readyDays": 0,
+        "endReady": false,
+        "endVets": 0,
+        "ledger4": 0,
+        "waveKillLogEntries": 42,
+        "snapshots": 105,
+        "instrumentErrors": 0
+      }
+    },
+    {
+      "seed": 72006,
+      "baseline": {
+        "days": 75,
+        "endReason": "village-lost",
+        "won": false,
+        "over": true,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "w4faced": true,
+        "endGated": 125,
+        "endRaw": 125,
+        "peakGated": 199,
+        "peakRaw": 227,
+        "peakDiplo": 102,
+        "maxKnown": 3,
+        "firstKnownDay": 4,
+        "proposeCalls": 3,
+        "proposes": 3,
+        "proposeOutcomes": {
+          "formed": 3
+        },
+        "firstProposeDay": 28,
+        "firstProposeLag": 24,
+        "villageLags": [
+          {
+            "village": "village_2",
+            "firstKnownDay": 4,
+            "firstProposeDay": 36,
+            "lag": 32
+          },
+          {
+            "village": "village_1",
+            "firstKnownDay": 14,
+            "firstProposeDay": 31,
+            "lag": 17
+          },
+          {
+            "village": "village_0",
+            "firstKnownDay": 17,
+            "firstProposeDay": 28,
+            "lag": 11
+          }
+        ],
+        "travels": 7,
+        "studies": 1,
+        "counterAnswers": 0,
+        "formed": 3,
+        "seasoned": 3,
+        "dissolved": 0,
+        "linkEvents": [
+          {
+            "day": 28,
+            "kind": "formed",
+            "key": "village_0|?|haven>village_0|:",
+            "other": "village_0",
+            "trust": 30
+          },
+          {
+            "day": 31,
+            "kind": "formed",
+            "key": "village_1|?|haven>village_1|:",
+            "other": "village_1",
+            "trust": 30
+          },
+          {
+            "day": 36,
+            "kind": "formed",
+            "key": "village_2|?|haven>village_2|:",
+            "other": "village_2",
+            "trust": 30
+          },
+          {
+            "day": 58,
+            "kind": "seasoned",
+            "key": "village_0|?|haven>village_0|:",
+            "other": "village_0",
+            "trust": 53
+          },
+          {
+            "day": 61,
+            "kind": "seasoned",
+            "key": "village_1|?|haven>village_1|:",
+            "other": "village_1",
+            "trust": 48
+          },
+          {
+            "day": 66,
+            "kind": "seasoned",
+            "key": "village_2|?|haven>village_2|:",
+            "other": "village_2",
+            "trust": 62
+          }
+        ],
+        "readyDays": 0,
+        "endReady": false,
+        "endVets": 0,
+        "ledger4": 1,
+        "waveKillLogEntries": 41,
+        "snapshots": 71,
+        "instrumentErrors": 0
+      },
+      "armed": {
+        "days": 150,
+        "endReason": "survived",
+        "won": false,
+        "over": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "w4faced": true,
+        "endGated": 199,
+        "endRaw": 200,
+        "peakGated": 199,
+        "peakRaw": 200,
+        "peakDiplo": 0,
+        "maxKnown": 3,
+        "firstKnownDay": 4,
+        "proposeCalls": 4,
+        "proposes": 4,
+        "proposeOutcomes": {
+          "counter": 1,
+          "formed": 3
+        },
+        "firstProposeDay": 7,
+        "firstProposeLag": 3,
+        "villageLags": [
+          {
+            "village": "village_2",
+            "firstKnownDay": 4,
+            "firstProposeDay": 7,
+            "lag": 3
+          },
+          {
+            "village": "village_1",
+            "firstKnownDay": 10,
+            "firstProposeDay": 10,
+            "lag": 0
+          },
+          {
+            "village": "village_0",
+            "firstKnownDay": 18,
+            "firstProposeDay": 18,
+            "lag": 0
+          }
+        ],
+        "travels": 35,
+        "studies": 1,
+        "counterAnswers": 1,
+        "formed": 4,
+        "seasoned": 2,
+        "dissolved": 1,
+        "linkEvents": [
+          {
+            "day": 8,
+            "kind": "formed",
+            "key": "village_2|?|village_2>haven|:",
+            "other": "village_2",
+            "trust": 40
+          },
+          {
+            "day": 10,
+            "kind": "formed",
+            "key": "village_1|?|haven>village_1|:",
+            "other": "village_1",
+            "trust": 30
+          },
+          {
+            "day": 18,
+            "kind": "formed",
+            "key": "village_0|?|haven>village_0|:",
+            "other": "village_0",
+            "trust": 30
+          },
+          {
+            "day": 40,
+            "kind": "seasoned",
+            "key": "village_1|?|haven>village_1|:",
+            "other": "village_1",
+            "trust": 40
+          },
+          {
+            "day": 49,
+            "kind": "seasoned",
+            "key": "village_0|?|haven>village_0|:",
+            "other": "village_0",
+            "trust": 45
+          },
+          {
+            "day": 120,
+            "kind": "dissolved-or-inactive",
+            "key": "village_2|?|village_2>haven|:",
+            "other": "village_2"
+          },
+          {
+            "day": 130,
+            "kind": "formed",
+            "key": "village_2|?|haven>village_2|:",
+            "other": "village_2",
+            "trust": 30
+          }
+        ],
+        "readyDays": 0,
+        "endReady": false,
+        "endVets": 1,
+        "ledger4": 1,
+        "waveKillLogEntries": 55,
+        "snapshots": 148,
+        "instrumentErrors": 0
+      }
+    },
+    {
+      "seed": 72007,
+      "baseline": {
+        "days": 87,
+        "endReason": "village-lost",
+        "won": false,
+        "over": true,
+        "scaleRank": "global",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "w4faced": true,
+        "endGated": 199,
+        "endRaw": 227,
+        "peakGated": 199,
+        "peakRaw": 227,
+        "peakDiplo": 102,
+        "maxKnown": 3,
+        "firstKnownDay": 4,
+        "proposeCalls": 3,
+        "proposes": 3,
+        "proposeOutcomes": {
+          "formed": 3
+        },
+        "firstProposeDay": 25,
+        "firstProposeLag": 21,
+        "villageLags": [
+          {
+            "village": "village_0",
+            "firstKnownDay": 4,
+            "firstProposeDay": 25,
+            "lag": 21
+          },
+          {
+            "village": "village_2",
+            "firstKnownDay": 4,
+            "firstProposeDay": 27,
+            "lag": 23
+          },
+          {
+            "village": "village_1",
+            "firstKnownDay": 5,
+            "firstProposeDay": 26,
+            "lag": 21
+          }
+        ],
+        "travels": 12,
+        "studies": 1,
+        "counterAnswers": 0,
+        "formed": 3,
+        "seasoned": 3,
+        "dissolved": 0,
+        "linkEvents": [
+          {
+            "day": 25,
+            "kind": "formed",
+            "key": "village_0|?|haven>village_0|:",
+            "other": "village_0",
+            "trust": 30
+          },
+          {
+            "day": 27,
+            "kind": "formed",
+            "key": "village_1|?|haven>village_1|:",
+            "other": "village_1",
+            "trust": 30
+          },
+          {
+            "day": 28,
+            "kind": "formed",
+            "key": "village_2|?|haven>village_2|:",
+            "other": "village_2",
+            "trust": 40
+          },
+          {
+            "day": 55,
+            "kind": "seasoned",
+            "key": "village_0|?|haven>village_0|:",
+            "other": "village_0",
+            "trust": 58
+          },
+          {
+            "day": 57,
+            "kind": "seasoned",
+            "key": "village_1|?|haven>village_1|:",
+            "other": "village_1",
+            "trust": 46
+          },
+          {
+            "day": 57,
+            "kind": "seasoned",
+            "key": "village_2|?|haven>village_2|:",
+            "other": "village_2",
+            "trust": 46
+          }
+        ],
+        "readyDays": 0,
+        "endReady": false,
+        "endVets": 0,
+        "ledger4": 0,
+        "waveKillLogEntries": 47,
+        "snapshots": 84,
+        "instrumentErrors": 0
+      },
+      "armed": {
+        "days": 75,
+        "endReason": "village-lost",
+        "won": false,
+        "over": true,
+        "scaleRank": "global",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "w4faced": true,
+        "endGated": 199,
+        "endRaw": 202,
+        "peakGated": 199,
+        "peakRaw": 202,
+        "peakDiplo": 102,
+        "maxKnown": 4,
+        "firstKnownDay": 4,
+        "proposeCalls": 3,
+        "proposes": 3,
+        "proposeOutcomes": {
+          "formed": 3
+        },
+        "firstProposeDay": 7,
+        "firstProposeLag": 3,
+        "villageLags": [
+          {
+            "village": "village_0",
+            "firstKnownDay": 4,
+            "firstProposeDay": 7,
+            "lag": 3
+          },
+          {
+            "village": "village_2",
+            "firstKnownDay": 4,
+            "firstProposeDay": 8,
+            "lag": 4
+          },
+          {
+            "village": "village_1",
+            "firstKnownDay": 5,
+            "firstProposeDay": 9,
+            "lag": 4
+          },
+          {
+            "village": "village_spl_43_90132",
+            "firstKnownDay": 50,
+            "firstProposeDay": null,
+            "lag": null
+          }
+        ],
+        "travels": 29,
+        "studies": 2,
+        "counterAnswers": 0,
+        "formed": 3,
+        "seasoned": 3,
+        "dissolved": 0,
+        "linkEvents": [
+          {
+            "day": 7,
+            "kind": "formed",
+            "key": "village_0|?|haven>village_0|:",
+            "other": "village_0",
+            "trust": 30
+          },
+          {
+            "day": 8,
+            "kind": "formed",
+            "key": "village_2|?|haven>village_2|:",
+            "other": "village_2",
+            "trust": 30
+          },
+          {
+            "day": 9,
+            "kind": "formed",
+            "key": "village_1|?|haven>village_1|:",
+            "other": "village_1",
+            "trust": 30
+          },
+          {
+            "day": 37,
+            "kind": "seasoned",
+            "key": "village_0|?|haven>village_0|:",
+            "other": "village_0",
+            "trust": 83
+          },
+          {
+            "day": 38,
+            "kind": "seasoned",
+            "key": "village_2|?|haven>village_2|:",
+            "other": "village_2",
+            "trust": 70
+          },
+          {
+            "day": 39,
+            "kind": "seasoned",
+            "key": "village_1|?|haven>village_1|:",
+            "other": "village_1",
+            "trust": 74
+          }
+        ],
+        "readyDays": 0,
+        "endReady": false,
+        "endVets": 0,
+        "ledger4": 0,
+        "waveKillLogEntries": 41,
+        "snapshots": 74,
+        "instrumentErrors": 0
+      }
+    },
+    {
+      "seed": 72008,
+      "baseline": {
+        "days": 84,
+        "endReason": "village-lost",
+        "won": false,
+        "over": true,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "w4faced": true,
+        "endGated": 120,
+        "endRaw": 120,
+        "peakGated": 199,
+        "peakRaw": 222,
+        "peakDiplo": 102,
+        "maxKnown": 8,
+        "firstKnownDay": 4,
+        "proposeCalls": 3,
+        "proposes": 3,
+        "proposeOutcomes": {
+          "formed": 3
+        },
+        "firstProposeDay": 26,
+        "firstProposeLag": 22,
+        "villageLags": [
+          {
+            "village": "village_1",
+            "firstKnownDay": 4,
+            "firstProposeDay": 27,
+            "lag": 23
+          },
+          {
+            "village": "village_3",
+            "firstKnownDay": 9,
+            "firstProposeDay": 29,
+            "lag": 20
+          },
+          {
+            "village": "village_0",
+            "firstKnownDay": 14,
+            "firstProposeDay": 26,
+            "lag": 12
+          },
+          {
+            "village": "village_2",
+            "firstKnownDay": 31,
+            "firstProposeDay": null,
+            "lag": null
+          },
+          {
+            "village": "village_spl_25_77305",
+            "firstKnownDay": 47,
+            "firstProposeDay": null,
+            "lag": null
+          },
+          {
+            "village": "village_spl_27_90833",
+            "firstKnownDay": 48,
+            "firstProposeDay": null,
+            "lag": null
+          },
+          {
+            "village": "village_spl_34_89194",
+            "firstKnownDay": 59,
+            "firstProposeDay": null,
+            "lag": null
+          },
+          {
+            "village": "village_spl_32_3587",
+            "firstKnownDay": 63,
+            "firstProposeDay": null,
+            "lag": null
+          }
+        ],
+        "travels": 12,
+        "studies": 0,
+        "counterAnswers": 0,
+        "formed": 3,
+        "seasoned": 3,
+        "dissolved": 0,
+        "linkEvents": [
+          {
+            "day": 26,
+            "kind": "formed",
+            "key": "village_0|?|haven>village_0|:",
+            "other": "village_0",
+            "trust": 30
+          },
+          {
+            "day": 27,
+            "kind": "formed",
+            "key": "village_1|?|haven>village_1|:",
+            "other": "village_1",
+            "trust": 30
+          },
+          {
+            "day": 29,
+            "kind": "formed",
+            "key": "village_3|?|haven>village_3|:",
+            "other": "village_3",
+            "trust": 30
+          },
+          {
+            "day": 56,
+            "kind": "seasoned",
+            "key": "village_0|?|haven>village_0|:",
+            "other": "village_0",
+            "trust": 55
+          },
+          {
+            "day": 57,
+            "kind": "seasoned",
+            "key": "village_1|?|haven>village_1|:",
+            "other": "village_1",
+            "trust": 55
+          },
+          {
+            "day": 59,
+            "kind": "seasoned",
+            "key": "village_3|?|haven>village_3|:",
+            "other": "village_3",
+            "trust": 54
+          }
+        ],
+        "readyDays": 0,
+        "endReady": false,
+        "endVets": 0,
+        "ledger4": 0,
+        "waveKillLogEntries": 31,
+        "snapshots": 82,
+        "instrumentErrors": 0
+      },
+      "armed": {
+        "days": 143,
+        "endReason": "village-lost",
+        "won": false,
+        "over": true,
+        "scaleRank": "global",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "w4faced": true,
+        "endGated": 199,
+        "endRaw": 262,
+        "peakGated": 199,
+        "peakRaw": 262,
+        "peakDiplo": 102,
+        "maxKnown": 8,
+        "firstKnownDay": 4,
+        "proposeCalls": 4,
+        "proposes": 4,
+        "proposeOutcomes": {
+          "counter": 2,
+          "formed": 2
+        },
+        "firstProposeDay": 7,
+        "firstProposeLag": 3,
+        "villageLags": [
+          {
+            "village": "village_1",
+            "firstKnownDay": 4,
+            "firstProposeDay": 7,
+            "lag": 3
+          },
+          {
+            "village": "village_0",
+            "firstKnownDay": 9,
+            "firstProposeDay": 9,
+            "lag": 0
+          },
+          {
+            "village": "village_3",
+            "firstKnownDay": 11,
+            "firstProposeDay": 11,
+            "lag": 0
+          },
+          {
+            "village": "village_spl_23_78815",
+            "firstKnownDay": 38,
+            "firstProposeDay": 38,
+            "lag": 0
+          },
+          {
+            "village": "village_spl_26_79253",
+            "firstKnownDay": 52,
+            "firstProposeDay": null,
+            "lag": null
+          },
+          {
+            "village": "village_spl_34_99316",
+            "firstKnownDay": 63,
+            "firstProposeDay": null,
+            "lag": null
+          },
+          {
+            "village": "village_spl_31_75709",
+            "firstKnownDay": 89,
+            "firstProposeDay": null,
+            "lag": null
+          },
+          {
+            "village": "village_2",
+            "firstKnownDay": 108,
+            "firstProposeDay": null,
+            "lag": null
+          }
+        ],
+        "travels": 98,
+        "studies": 0,
+        "counterAnswers": 2,
+        "formed": 4,
+        "seasoned": 4,
+        "dissolved": 0,
+        "linkEvents": [
+          {
+            "day": 8,
+            "kind": "formed",
+            "key": "village_1|?|haven>village_1|:",
+            "other": "village_1",
+            "trust": 48
+          },
+          {
+            "day": 10,
+            "kind": "formed",
+            "key": "village_0|?|village_0>haven|:",
+            "other": "village_0",
+            "trust": 40
+          },
+          {
+            "day": 11,
+            "kind": "formed",
+            "key": "village_3|?|haven>village_3|:",
+            "other": "village_3",
+            "trust": 30
+          },
+          {
+            "day": 38,
+            "kind": "seasoned",
+            "key": "village_1|?|haven>village_1|:",
+            "other": "village_1",
+            "trust": 88
+          },
+          {
+            "day": 38,
+            "kind": "formed",
+            "key": "village_spl_23_78815|?|haven>village_spl_23_78815|:",
+            "other": "village_spl_23_78815",
+            "trust": 30
+          },
+          {
+            "day": 40,
+            "kind": "seasoned",
+            "key": "village_0|?|village_0>haven|:",
+            "other": "village_0",
+            "trust": 42
+          },
+          {
+            "day": 41,
+            "kind": "seasoned",
+            "key": "village_3|?|haven>village_3|:",
+            "other": "village_3",
+            "trust": 68
+          },
+          {
+            "day": 68,
+            "kind": "seasoned",
+            "key": "village_spl_23_78815|?|haven>village_spl_23_78815|:",
+            "other": "village_spl_23_78815",
+            "trust": 57
+          }
+        ],
+        "readyDays": 0,
+        "endReady": false,
+        "endVets": 0,
+        "ledger4": 0,
+        "waveKillLogEntries": 62,
+        "snapshots": 142,
+        "instrumentErrors": 0
+      }
+    }
+  ]
+}
