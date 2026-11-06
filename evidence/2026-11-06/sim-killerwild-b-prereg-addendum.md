@@ -51,7 +51,7 @@ lever was identified:
 1. The deaths it would need to prevent are TB-home. At haven,
    `chooseFleeDir` returns null, so the trigger HOLDs at ANY threshold —
    the one fired TB-home death (56004 dale) already proves it: the trigger
-   fired at s0.58/m0.994 and the fighter held and died where he stood.
+   fired at s0.69/m0.763 against an Audit and the fighter held and died where he stood.
    A tighter threshold changes a hold into a hold.
 2. The no-fire deaths cannot be saved by firing either: the fatal fights
    were at haven (no barrier-crossing line on any of the four fatal
