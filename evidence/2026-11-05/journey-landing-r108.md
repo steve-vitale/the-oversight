@@ -278,5 +278,26 @@ differ. `node --check` clean on the driver.
 
 ## Closeout note
 
-- (to be filled: rebase, proof re-run, check.js result, telemetry, rotation
-  re-verification, lock removal)
+- **Rebase:** clean, both picks applied, no sequencer stop. Rebased onto
+  master `a7dfc4a45` (master had advanced past 4c7bf78cc with journey-endgame
+  r140/r143 landings including src/js Fixes B/C + gorge fix; zero file
+  overlap with this branch — evidence + driver only). New SHAs: prereg
+  ca9bbb720, run note b85762f9d, closeout (this commit).
+- **Proof re-run on the rebased branch (all PASS):** shape (r94), goaround
+  (r104 replay corpus), class-F (r106), R69 regex (r108 driver).
+- **check.js --quick:** run 1: 281 passed, 9 failed in 969s; re-run: 276
+  passed, 14 failed in 1745s = standing 6 + 7 load timeouts + cache-flags
+  (adjudicated: load/state flake; passes standalone 4/4 on master and
+  worktree). No regression attributable to this branch (evidence + driver
+  only; quick-list total 290 in every run). See the Regression section.
+- **Telemetry:** 2 LOUD lines, both explained as aggregation artifacts,
+  baseline NOT rolled.
+- **Index clobber struck on all THREE safe-commits** (prereg 985e29e54, run
+  note 13a45cc91, closeout): committed files showed staged-as-deleted +
+  untracked after commit. Repaired each time via HEAD-blob
+  `update-index --add --cacheinfo`; verified status clean + diff HEAD empty.
+- **Rotation re-verified at closeout: reads `1`** (the 0→1 write stuck this
+  run). Rotation-write discrepancy remains unexplained (5th sighting).
+- Lock (`laneA-20261106T0019Z`, created 00:21:12Z) and heartbeat loop are
+  removed at closeout after the merge, once run_id is read back; see
+  `~/memory/2026-11-05.md` for the closeout record.
