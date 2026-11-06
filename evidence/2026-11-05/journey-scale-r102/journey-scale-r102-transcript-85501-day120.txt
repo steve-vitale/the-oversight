@@ -1,0 +1,19 @@
+(pre-talk seed: ask_favor planted d115; takenWantDay=0; convoCount=11)
+=== seed 85501 day 120 — conversation with Wilmer (visjoin_73) ===
+occupation=dockworker temperament=cautious trust=79 dead=false
+want: ask_favor (stage 2)
+open thread: want fromSeed=true
+picker: control
+
+THEM: "About the pantry run — I hate to ask twice, but it's still open. Will you?"
+(turn0 choices: dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Good. The old burn east of camp, before the dew dries. Two packs between us."
+YOU: [goon] "You don't have to say it all at once."
+THEM: "Come get air with me. I need to think out loud."
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Wilmer shows you where they go to think. "Don't tell the others. Everyone needs one place."
+YOU: (leave)
+pre-close: want ask_favor stage 3 thread want
+closing line: "Sorry. I need a minute. This was... thank you. I need a minute."
+(gossip picks this sitting: 0)
