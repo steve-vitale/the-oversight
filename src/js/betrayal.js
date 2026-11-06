@@ -5407,6 +5407,31 @@
       this.say(`Word goes around the fires: the moot sits again tonight, and this time the village is HERE. The accused answers — properly, in front of everyone.`);
     }
   },
+  // MOOT-GATE (sim-mootgate-a 2026-11-06): the trial moot is a
+  // full-village ceremony and the scholar's vote is cast only in
+  // conversation at the fire (convoChoices) — calling it while the
+  // scholar is miles away summons a vote they cannot cast, and the
+  // 2-day backstop then resolves the trial without them
+  // (sim-mootsummon-a: 1/22 stranded sleep windows, 52/56 moots
+  // resolved via the backstop). The LIVE broadcast, the call line,
+  // the summons, and awaitingPlayerVote all wait together until
+  // the scholar is back at Haven; the case stays open and the tick
+  // tries again tomorrow. The 2-day backstop is untouched: it
+  // covers silence AFTER the summons, which can then only happen
+  // at the fire, where silence is a choice.
+  // EXILE EXCEPTION: an exiled scholar has no vote to protect
+  // (tallyVotes already names playerVoter=false when exiled, and
+  // "The moot doesn't wait for the exiled" says so aloud) — and an
+  // exiled scholar may never return, so gating on position alone
+  // would stall the case forever. The gate holds only a scholar
+  // who could still vote. Fail-open on a missing reader: if the
+  // position question cannot be asked, convene as before.
+  mootConveneHeld() {
+    let atHaven = true, exiled = false;
+    try { atHaven = this.scholarAtHaven(); } catch (e) {}
+    try { exiled = !!(this.state && this.state.scholar && this.state.scholar.exiled); } catch (e) {}
+    return !atHaven && !exiled;
+  },
   // NPC-MOOT TICK (journey-social 2026-10-12 r7): cases where an NPC stands
   // accused (an ambush plot sprung on a villager) had NO natural path to a
   // moot. The village gossiped forever, and caseDiscoveryTick promised
@@ -5446,6 +5471,11 @@
       // one extra day over the player-accused convention (mootIn || 2): the
       // "people are choosing sides" phase, and the player's investigation window
       if (day - (c.day || 0) < (c.mootIn || 3)) continue;
+      // MOOT-GATE (sim-mootgate-a): hold the convening until the
+      // scholar is at Haven — before any announcement is said, so
+      // a held case burns no "first time" convening line and no
+      // trial RNG while it waits.
+      if (this.mootConveneHeld()) continue;
       const cname = (() => { try { return this.whoTag(caller); } catch (e) { return 'Someone'; } })();
       const aname = (() => { try { return this.whoTag(acc[0]); } catch (e) { return 'the accused'; } })();
       // REPEAT-AWARE CONVENING (social r41b 2026-10-22): the same crew
@@ -5482,6 +5512,10 @@
       // idempotent now, and this guard keeps the intent explicit.
       if (c.trial) continue;
       if (day - c.day >= (c.mootIn || 2)) {
+        // MOOT-GATE (sim-mootgate-a): the scholar stands accused
+        // here, and the trial still waits for them to be at Haven
+        // before it is called. The charge stands; the moot waits.
+        if (this.mootConveneHeld()) continue;
         // EXILED/DEAD ACCUSER (journey-social r15 2026-10-15): the accuser
         // can be gone by moot day (exiled or dead between the charge and
         // the fire) — convening the moot in their name then reads as the

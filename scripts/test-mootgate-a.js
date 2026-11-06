@@ -21,10 +21,9 @@
 //       contains a 'Word gets around the haven' line, classified
 //       non-stranded sleep with the scholar inside Haven at fire
 //       time (the strandnarr-a §2 known hit).
-// Gate leg (added with the fix commit, in the same file): convening
-// skipped while the scholar is away, fires on return; det-gate
-// ON-vs-OFF identical on a non-moot seed; anchor seed 48006
-// loop-day 9 must NOT summon after the fix.
+// Gate leg: convening skipped while the scholar is away, fires on
+// return; det-gate ON-vs-OFF identical on a non-moot seed (48002);
+// anchor seed 48006 loop-day 9 must NOT summon after the fix.
 // Usage: node scripts/test-mootgate-a.js
 // Env (the bankfood substrate gates, as in mootgate-trace-a.js):
 //   COMPETENT_FEAST=0 SEATDRIVE=0 PLENTYDEPRI=0 DEPOSITGATE=1
@@ -33,6 +32,7 @@
 const mm = require('./policies/mootsummon-diag');
 const sn = require('./policies/strandnarr-diag');
 const gc = require('./policies/gossipcensus-diag');
+const { loadGame, setupGame } = require('./sim-harness');
 const { oneInstance, analyzeInstance, sleepPair } = require('./mootgate-trace-a');
 
 let checks = 0, fails = 0;
@@ -271,25 +271,183 @@ check('stall: held days + stranded days during hold + open-at-end', (() => {
     && a.stall.openAtEnd.length === 1;
 })());
 
+// ---- gate leg (added with the fix commit): the convening ticks
+// hold while the scholar is away and fire on return; the exile
+// exception convenes anyway; the backstop is untouched. Runs
+// without the substrate env gates (it loads the game directly);
+// the seed checks at the end (48002 det-gate, 48006 anchor) run
+// only when the gates are set, like the rest of the integration leg.
+async function gateLeg(withSeeds, keyFn) {
+  // NPC case: victim alive, accused NPCs, eligible at day+3.
+  const { Game } = await loadGame({ seed: 777, mode: 'proof' });
+  await setupGame(Game);
+  const lines = [];
+  Game.say = function (t) { lines.push(String(t)); };
+  check('gate: scholar starts at Haven', Game.scholarAtHaven() === true,
+    'location=' + Game.location + ' px=' + Game.map.px + ' py=' + Game.map.py);
+  const homePx = Game.map.px, homePy = Game.map.py;
+  const npcs = (Game.npcIds() || []).filter((id) => id !== Game.villagerId);
+  check('gate: enough villagers for a plot', npcs.length >= 4, 'n=' + npcs.length);
+  const [leader, accomplice, victim, witness] = npcs;
+  const plot = { id: 'plot_mootgate_test', day: Game.state.scholar.day,
+    leader, accomplices: [accomplice], target: victim, weakest: accomplice,
+    witnesses: [witness] };
+  Game.betrayalState().plots.push(plot);
+  const c = Game.openCase(plot, 'murder');
+  check('gate: NPC-accused case opens', !!c && c.status === 'open');
+  c.day = Game.state.scholar.day - 3;
+
+  // 1. Scholar away: the tick holds — no trial, no announcement,
+  //    no convening count burned.
+  Game.map.px = 0; Game.map.py = 8; Game.location = 'wilds';
+  check('gate: scholar away is away (precondition)', Game.scholarAtHaven() === false,
+    'location=' + Game.location + ' px=' + Game.map.px + ' py=' + Game.map.py);
+  check('gate: mootConveneHeld() is true while away', Game.mootConveneHeld() === true);
+  const mark = lines.length;
+  Game.npcMootTick();
+  check('gate: no moot convened while the scholar is away', !c.trial);
+  check('gate: no announcement while the scholar is away', lines.length === mark,
+    'said=' + JSON.stringify(lines.slice(mark)));
+  const mcKey = [...c.accused].sort().join('+') + '>' + c.target;
+  check('gate: no convening count burned while held',
+    !(Game.betrayalState().mootConveneCounts || {})[mcKey],
+    'counts=' + JSON.stringify(Game.betrayalState().mootConveneCounts));
+  Game.npcMootTick();
+  check('gate: still held on a second away tick', !c.trial && lines.length === mark);
+
+  // 2. Scholar returns: the same tick convenes, first-time line.
+  Game.map.px = homePx; Game.map.py = homePy; Game.location = 'village';
+  check('gate: scholar back at Haven (precondition)', Game.scholarAtHaven() === true);
+  check('gate: mootConveneHeld() is false at Haven', Game.mootConveneHeld() === false);
+  Game.npcMootTick();
+  check('gate: moot convened on return', !!c.trial);
+  const ann = lines.slice(mark).join('\n');
+  check('gate: first-time announcement on return', /tonight they call a moot/.test(ann), ann.slice(0, 160));
+  check('gate: convening count is 1 after return',
+    (Game.betrayalState().mootConveneCounts || {})[mcKey] === 1,
+    'counts=' + JSON.stringify(Game.betrayalState().mootConveneCounts));
+
+  // 3. Backstop untouched: a trial convened at Haven still resolves
+  //    via the 2-day backstop.
+  if (c.trial.awaitingPlayerVote) {
+    Game.state.scholar.day = c.trial.day + 2;
+    Game.trialVoteTick();
+  } else {
+    Game.finishTrial(c, 0);
+  }
+  const terminal = ['convicted', 'acquitted', 'exile', 'weregild', 'schism', 'cold_war', 'resolved'];
+  check('gate: returned trial reaches a terminal state (backstop intact)',
+    terminal.includes(c.status) || !!c.resolution,
+    'status=' + c.status + ' resolution=' + c.resolution);
+
+  // 4. Exile exception: an exiled scholar away from Haven does NOT
+  //    hold the moot — their vote is already excluded, and they may
+  //    never return, so the case must not stall forever.
+  const plot2 = { id: 'plot_mootgate_exile', day: Game.state.scholar.day,
+    leader: npcs[4] || leader, accomplices: [npcs[5] || accomplice],
+    target: victim, weakest: npcs[5] || accomplice, witnesses: [witness] };
+  Game.betrayalState().plots.push(plot2);
+  const c2 = Game.openCase(plot2, 'murder');
+  c2.day = Game.state.scholar.day - 3;
+  Game.map.px = 0; Game.map.py = 8; Game.location = 'wilds';
+  Game.state.scholar.exiled = true;
+  check('gate: exiled scholar away is still away (precondition)', Game.scholarAtHaven() === false);
+  check('gate: mootConveneHeld() is false for the exiled', Game.mootConveneHeld() === false);
+  const mark2 = lines.length;
+  Game.npcMootTick();
+  check('gate: exiled-away moot still convenes', !!c2.trial);
+  check('gate: exiled-away moot says no summons (no vote to cast)',
+    !lines.slice(mark2).some((l) => /The moot turns to you/.test(l)));
+  check('gate: exiled scholar is not a voter', c2.trial && c2.trial.playerVoter === false);
+  Game.state.scholar.exiled = false;
+
+  // 5. Player-accused case (playerCaseTick): held while away,
+  //    convened on return.
+  const { Game: G2 } = await loadGame({ seed: 4242, mode: 'proof' });
+  await setupGame(G2);
+  const lines2 = [];
+  G2.say = function (t) { lines2.push(String(t)); };
+  const npcs2 = (G2.npcIds() || []).filter((id) => id !== G2.villagerId);
+  const [a2, w2, v2] = [npcs2[0], npcs2[1], npcs2[2]];
+  const plot3 = { id: 'plot_mootgate_playeracc', day: G2.state.scholar.day,
+    leader: G2.villagerId, accomplices: [a2], target: v2, weakest: a2,
+    witnesses: [w2] };
+  G2.betrayalState().plots.push(plot3);
+  const c3 = G2.openCase(plot3, 'murder');
+  check('gate: player-accused case opens with role accused',
+    !!c3 && c3.playerRole === 'accused', 'role=' + (c3 && c3.playerRole));
+  c3.day = G2.state.scholar.day - 2;
+  c3.accuser = w2;
+  G2.map.px = 0; G2.map.py = 8; G2.location = 'wilds';
+  check('gate: player-accused scholar away is away (precondition)', G2.scholarAtHaven() === false);
+  const mark3 = lines2.length;
+  G2.playerCaseTick();
+  check('gate: player-accused moot held while away', !c3.trial);
+  check('gate: no accuser announcement while away', lines2.length === mark3);
+  G2.map.px = 4; G2.map.py = 4; G2.location = 'village';
+  check('gate: player-accused scholar back at Haven (precondition)', G2.scholarAtHaven() === true,
+    'tile=' + JSON.stringify(G2.playerTile && G2.playerTile()));
+  G2.playerCaseTick();
+  check('gate: player-accused moot convened on return', !!c3.trial);
+  check('gate: player-accused announcement on return',
+    lines2.slice(mark3).some((l) => /has gathered enough voices/.test(l)),
+    JSON.stringify(lines2.slice(mark3)));
+
+  if (!withSeeds) {
+    console.log('SKIP gate seed checks: substrate gates not set (see header)');
+    return;
+  }
+  // 6. Det-gate on a NON-MOOT seed (48002: 0 summons events in the
+  //    before leg): instrument ON vs OFF trajectories identical.
+  process.env.STRANDNARR = '1';
+  const on02 = await oneInstance(48002, { days: 60 });
+  process.env.STRANDNARR = '0';
+  const off02 = await oneInstance(48002, { days: 60 });
+  check('gate det-gate: 48002 (non-moot seed) ON vs OFF identical',
+    keyFn(on02) === keyFn(off02));
+  check('gate det-gate: 48002 has 0 summons events on the fixed code',
+    analyzeInstance(on02).summonsEvents.length === 0,
+    'events=' + analyzeInstance(on02).summonsEvents.length);
+
+  // 7. Anchor: seed 48006 loop-day 9 must NOT summon after the fix.
+  process.env.STRANDNARR = '1';
+  const s48006 = await oneInstance(48006, { days: 60 });
+  const a06 = analyzeInstance(s48006);
+  check('gate anchor: 48006 has 0 stranded-loop-day summons after the fix',
+    a06.loopDayRates.strandedLoopDaysWithSummons === 0,
+    'strandedLoopDays=' + a06.loopDayRates.strandedLoopDays
+    + ' withSummons=' + a06.loopDayRates.strandedLoopDaysWithSummons);
+  check('gate anchor: 48006 loop-day 9 has no summons after the fix',
+    a06.summonsEvents.filter((e) => e.loopDay === 9).length === 0,
+    'ld9events=' + JSON.stringify(a06.summonsEvents.filter((e) => e.loopDay === 9).map((e) => e.loopDay)));
+  check('gate anchor: 48006 still strands (the fix gates moots, not travel)',
+    a06.loopDayRates.strandedLoopDays > 0,
+    'strandedLoopDays=' + a06.loopDayRates.strandedLoopDays);
+}
+
 // ---- integration leg ----
 (async () => {
-  for (const g of ['COMPETENT_FEAST', 'SEATDRIVE', 'PLENTYDEPRI']) {
-    if (process.env[g] !== '0') { console.log('SKIP integration: ' + g + '=0 required'); process.exit(fails ? 1 : 0); }
-  }
-  if (process.env.DEPOSITGATE !== '1' || process.env.POLICY !== 'nighttravel'
-    || process.env.WOODCARRY !== '1' || process.env.WOODWARM !== '0' || process.env.BANKFOOD !== '1') {
-    console.log('SKIP integration: substrate gates not set (see header)'); process.exit(fails ? 1 : 0);
-  }
-  process.env.STRANDNARR = '1';
-  const on = await oneInstance(17021, { days: 60 });
-  process.env.STRANDNARR = '0';
-  const off = await oneInstance(17021, { days: 60 });
+  const gatesSet = process.env.COMPETENT_FEAST === '0' && process.env.SEATDRIVE === '0'
+    && process.env.PLENTYDEPRI === '0' && process.env.DEPOSITGATE === '1'
+    && process.env.POLICY === 'nighttravel' && process.env.WOODCARRY === '1'
+    && process.env.WOODWARM === '0' && process.env.BANKFOOD === '1';
   const key = (inst) => JSON.stringify({
     evenings: inst.evenings.map((e) => [e.loopDay, e.eveningOutcome, e.tile, e.inside,
       e.bankfoodEvening ? [e.bankfoodEvening.mode, e.bankfoodEvening.skip, e.bankfoodEvening.kcalBefore] : null,
       e.bankfoodMorning ? [e.bankfoodMorning.kcalBefore, e.bankfoodMorning.kcalAfterEat] : null]),
     firstUpkeeps: (inst.bankfoodStore.firstUpkeeps || []).map((f) => [f.scholarDay, f.kcal]),
   });
+  await gateLeg(gatesSet, key);
+  if (!gatesSet) {
+    console.log('SKIP integration seed legs: substrate gates not set (see header)');
+    console.log('---');
+    console.log('mootgate proof: ' + (checks - fails) + '/' + checks + ' checks pass');
+    process.exit(fails ? 1 : 0);
+  }
+  process.env.STRANDNARR = '1';
+  const on = await oneInstance(17021, { days: 60 });
+  process.env.STRANDNARR = '0';
+  const off = await oneInstance(17021, { days: 60 });
   check('det-gate: ON vs OFF trajectories identical', key(on) === key(off));
   check('det-gate: transcript errs 0', on.transcript.errs === 0, 'errs=' + on.transcript.errs + ' ' + JSON.stringify(on.transcript.errors));
   const a = analyzeInstance(on);
