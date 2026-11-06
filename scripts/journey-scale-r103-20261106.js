@@ -444,6 +444,7 @@ async function playSeed(seed) {
   fusionFeast = [];
   posTrace = [];
   mornTrace = [];
+  natGateWatch = []; // R103: reset per seed like every other watch (r103 fix — the first panel run accumulated rows across seeds)
   console.log(`\n===== SEED ${seed} (covenant road — third-bond) =====`);
   const { Game } = await loadGame({ seed, mode: 'journey-scale-r103-want' });
   _G = Game;
