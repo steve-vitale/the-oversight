@@ -385,8 +385,8 @@ own configured seeds), so no panel compare.md was fabricated either.
 - `53e4f884d` — prereg + instrument/driver/analyzer (before any judged sim)
 - `6bca8e380` — build: armor curve K=20→6 + proof 39/39; oracle/cap/bark
   tests updated by design
-- (evidence commit — this file + corpus + prereg metric-review fill:
-  SHA to be recorded at commit time)
+- `ce4ad5ba0` — evidence file + prereg metric-review fill (this file's
+  first commit); corpus in the follow-up commit below
 
 ## Footer (to be filled at closeout)
 
