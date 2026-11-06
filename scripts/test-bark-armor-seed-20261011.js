@@ -8,7 +8,8 @@
 //  1. The 4 outdoorsy/maker occupations bias bark_armor first in clothing.
 //  2. genItemCandidates includes it; choosePersonalFive can pick it.
 //  3. autoEquip wears it at spawn (torso slot).
-//  4. fieldFight respects it: P=10 -> r=10/30, absorbs ~1/3 per hit.
+//  4. fieldFight respects it: P=10 -> r=10/16, absorbs ~5/8 per hit
+//     (retuned sim-survivaltime-b 2026-11-06: was r=10/30, ~1/3).
 //
 // Prepared occupation cohort, seed42; this proves spawn mechanics, not natural exposure.
 'use strict';

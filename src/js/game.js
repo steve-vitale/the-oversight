@@ -13635,6 +13635,30 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return bonus;
     },
 
+    // SURVIVAL-TIME (sim-survivaltime-b, 2026-11-06): the armor curve's
+    // reduction fraction, shared by every absorb site (tbDamage player +
+    // villager/ally blocks, fieldFights villager + ally blocks) so the
+    // copies cannot drift. r = effP/(effP+6) with
+    // effP = prot*(1-pierce), pierce clamped to [0, 0.9] as before.
+    // The 2026-10-09 constant 20 was set the day pierce was introduced
+    // and never re-tuned for it: with wave-4 pierce 0.2-0.45,
+    // tier-appropriate armor (median worn prot ~33) absorbed only ~47%
+    // of a hit, scholars died in ~6 rounds, and killing an ~850-HP beast
+    // needs ~28 rounds at competent damage rates. Steve 2026-11-05:
+    // protection per tier must let a fighter survive that tier's fights.
+    // At median worn prot, K=6 roughly halves damage through (~2x rounds
+    // survived). Every point of protection still does something; full
+    // immunity stays unreachable (prot=6 halves what gets through,
+    // prot=100 ~94%); at least 1 of any real blow still lands (the
+    // absorb sites keep the min(hit-1, ...) clamp).
+    armorReduction(prot, pierce) {
+      const p = Math.max(0, prot || 0);
+      if (!(p > 0)) return 0;
+      const pr = Math.min(0.9, Math.max(0, pierce || 0));
+      const effP = p * (1 - pr);
+      return effP / (effP + 6);
+    },
+
     isWeapon(item) {
       const def = this.data.items.find(i => i.id === (item.itemId || item.id));
       return def && def.class === 'weapon' && def.weapon;
@@ -38627,11 +38651,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // Math.min(dmg, prot) — the RAW incoming number — but union-rep
         // solidarity (+3) and pack-leader (+2) inflate final before armor.
         // State what the armor actually absorbed.
-        // ARMOR (Steve 2026-10-09): diminishing-returns curve — pieces stay
-        // additive into prot, then r = prot/(prot+20) maps it to reduction.
-        // Every point of protection always does something; full immunity is
-        // unreachable (prot=20 halves what gets through, prot=100 ~83%).
-        // At least 1 of any real blow lands.
+        // ARMOR (Steve 2026-10-09; retuned sim-survivaltime-b 2026-11-06):
+        // diminishing-returns curve — pieces stay additive into prot,
+        // then armorReduction maps it to reduction (see the helper for
+        // the constant and the sizing). Every point of protection always
+        // does something; full immunity is unreachable. At least 1 of
+        // any real blow lands.
         // ARMOR-PIERCE (Steve 2026-10-09): higher monster classes can ignore
         // a fraction of protection (mdef.pierce, 0 = none). Wave-3+ monsters
         // carry real pierce values (0.1-0.75); the attacker key MUST be
@@ -38639,8 +38664,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (prot > 0 && final > 0) {
           let pierce = 0;
           try { const atk = this.tbFighter(sourceKey); pierce = (atk && atk.mdef && atk.mdef.pierce) || 0; } catch (e) {}
-          const effP = prot * (1 - Math.min(0.9, Math.max(0, pierce)));
-          const r = effP / (effP + 20);
+          const r = this.armorReduction(prot, pierce);
           const absorb = Math.min(final - 1, Math.round(final * r));
           final = final - absorb;
           // HONESTY (break-it combat r8 2026-10-09): don't narrate a 0 —
@@ -38662,13 +38686,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // "what it bought is real" — so kind 'ally' absorbs here too.
       if ((t.kind === 'villager' || t.kind === 'ally' || (t.kind === 'hostile' && t.villagerId && !t.alienPid)) && (t.varmor || 0) > 0) {
         const prot = t.varmor;
-        // ARMOR (Steve 2026-10-09): same diminishing-returns curve as the
-        // player block — no immunity cliff. Same pierce hook.
+        // ARMOR (Steve 2026-10-09; retuned sim-survivaltime-b 2026-11-06):
+        // same diminishing-returns curve as the player block, via the
+        // shared armorReduction helper — no immunity cliff. Same pierce hook.
         if (final > 0) {
           let pierce = 0;
           try { const atk = this.tbFighter(sourceKey); pierce = (atk && atk.mdef && atk.mdef.pierce) || 0; } catch (e) {}
-          const effP = prot * (1 - Math.min(0.9, Math.max(0, pierce)));
-          const r = effP / (effP + 20);
+          const r = this.armorReduction(prot, pierce);
           const absorb = Math.min(final - 1, Math.round(final * r));
           final = final - absorb;
           // HONESTY (break-it combat r8 2026-10-09): same as the player

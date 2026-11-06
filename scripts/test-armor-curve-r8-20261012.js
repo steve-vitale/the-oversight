@@ -1,11 +1,15 @@
 #!/usr/bin/env node
 // test-armor-curve-r8-20261012.js — lever-1 r8: prove the armor model.
-// Steve's armor law (AGENTS.md ARMOR MODEL 2026-10-09): pieces stay additive
-// into P, then r = P/(P+20); absorbed = min(hit-1, round(hit*r)).
+// Steve's armor law (AGENTS.md ARMOR MODEL 2026-10-09; retuned
+// sim-survivaltime-b 2026-11-06): pieces stay additive
+// into P, then r = P/(P+6); absorbed = min(hit-1, round(hit*r)).
 // Drives the REAL tbDamage (not a copy of the formula) with controlled P
 // (armorBonus override = the measurement input; the curve is the code under
 // test) and asserts the returned damage-taken matches the documented curve.
 // Also: the hit-1 clamp (at least 1 always lands) and the pierce hook.
+// (Retune note: the 2026-10-09 constant was 20; K=6 per Steve's 2026-11-05
+// tier-protection rule — see Game.armorReduction. This test is the curve's
+// oracle and was updated in the same commit as the retune.)
 'use strict';
 const { loadGame, setupGame } = require('./sim-harness');
 
@@ -29,7 +33,7 @@ function check(name, actual, expected) {
   const expected = (P, hit, pierce) => {
     if (!(P > 0) || !(hit > 0)) return hit;
     const effP = P * (1 - Math.min(0.9, Math.max(0, pierce || 0)));
-    const r = effP / (effP + 20);
+    const r = effP / (effP + 6);
     return hit - Math.min(hit - 1, Math.round(hit * r));
   };
 
@@ -43,11 +47,12 @@ function check(name, actual, expected) {
     [10, 32, 0, 'bark-vs-32'],
     [10, 1, 0, 'bark-chip-1'],    // hit-1 clamp: at least 1 lands
     [10, 2, 0, 'bark-chip-2'],
-    [20, 20, 0, 'hide-vs-20'],    // hide_armor P=20 halves
+    [20, 20, 0, 'hide-vs-20'],    // hide_armor P=20
     [40, 60, 0, 'carapace-vs-60'], // alien_carapace P=40
     [40, 60, 0.25, 'carapace-vs-60-pierce25'], // wave-3 pierce hook
-    [100, 50, 0, 'P100-vs-50'],   // ~83% curve, never immune
+    [100, 50, 0, 'P100-vs-50'],   // ~94% curve, never immune
     [100, 3, 0, 'P100-chip-3'],   // clamp still lets 1 through
+    [6, 20, 0, 'P6-halves'],      // K=6: prot=6 halves what gets through
   ];
   for (const [P, hit, pierce, label] of cases) {
     Game.armorBonus = () => P;

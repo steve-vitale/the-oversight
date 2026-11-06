@@ -1496,14 +1496,15 @@
                 gpTag(_gpLogN1);
               }
               if (!hittingAlly && varmor > 0 && total > 0) {
-                // ARMOR (Steve 2026-10-09): diminishing-returns curve,
-                // mirroring the tactical engine — every point of protection
-                // matters, full immunity unreachable, at least 1 lands.
-                // Same pierce hook (mdef.pierce, 0 = none).
+                // ARMOR (Steve 2026-10-09; retuned sim-survivaltime-b
+                // 2026-11-06): diminishing-returns curve, mirroring the
+                // tactical engine via the shared armorReduction helper —
+                // every point of protection matters, full immunity
+                // unreachable, at least 1 lands. Same pierce hook
+                // (mdef.pierce, 0 = none).
                 var pierce = 0;
                 try { pierce = (mdef && mdef.pierce) || 0; } catch (e) {}
-                var effP = varmor * (1 - Math.min(0.9, Math.max(0, pierce)));
-                var r = effP / (effP + 20);
+                var r = this.armorReduction(varmor, pierce);
                 var absorbed = Math.min(total - 1, Math.round(total * r));
                 total = total - absorbed;
                 rec.log.push(vName + "'s gear absorbs " + absorbed + '.');
@@ -1516,8 +1517,7 @@
               if (hittingAlly && allyArmor > 0 && total > 0) {
                 var pierceA = 0;
                 try { pierceA = (mdef && mdef.pierce) || 0; } catch (e) {}
-                var effPA = allyArmor * (1 - Math.min(0.9, Math.max(0, pierceA)));
-                var rA = effPA / (effPA + 20);
+                var rA = this.armorReduction(allyArmor, pierceA);
                 var absorbedA = Math.min(total - 1, Math.round(total * rA));
                 total = total - absorbedA;
                 rec.log.push(allyName + "'s gear absorbs " + absorbedA + '.');

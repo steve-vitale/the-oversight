@@ -1,7 +1,8 @@
 #!/usr/bin/env node
-// Proof + measurement: armor diminishing-returns model (Steve 2026-10-09).
+// Proof + measurement: armor diminishing-returns model (Steve 2026-10-09;
+// retuned sim-survivaltime-b 2026-11-06: K=20 -> K=6, see Game.armorReduction).
 // Model (all three absorb sites — tbDamage player block, tbDamage villager
-// block, fieldFights): r = P/(P+20); absorbed = min(hit-1, round(hit*r));
+// block, fieldFights): r = P/(P+6); absorbed = min(hit-1, round(hit*r));
 // final = hit - absorbed. Pieces stay additive into P (armorOf, coord bonus
 // included). Monster-side mdef.armor untouched (separate system).
 //
@@ -43,10 +44,10 @@ function check(name, cond, extra) {
   if (cond) { pass++; } else { fail++; console.log('  FAIL ' + name + (extra ? ' — ' + extra : '')); }
 }
 
-// Exact model as implemented (mirror of the three sites).
+// Exact model as implemented (mirror of the three sites, via armorReduction).
 function absorb(P, hit) {
   if (P <= 0 || hit <= 0) return { absorbed: 0, final: hit };
-  const r = P / (P + 20);
+  const r = P / (P + 6);
   const absorbed = Math.min(hit - 1, Math.round(hit * r));
   return { absorbed, final: hit - absorbed };
 }
@@ -181,7 +182,9 @@ function runPlayerFight(Game, monId, gear) {
       else console.log(`    ${id}: ${lbl} took no hits in ${N} fights — immunity check vacuous (monster never attacked)`);
     }
     // boundary: hide vs bulldozer — old model granted immunity on low rolls; no absorb line may reach the hit
-    if (id === 'bulldozer' && hi.nAbs > 0) check('bulldozer: no absorb line reaches min hit 20', hi.maxAbs < 20, 'maxAbs=' + hi.maxAbs);
+    // (retune K=6: absorbed on a 28-hit is ~22, above the old min-hit bound 20 — but still below ITS OWN hit,
+    // which is the no-immunity property; Part 1 proves it per-hit. The bound here is the largest bulldozer hit.)
+    if (id === 'bulldozer' && hi.nAbs > 0) check('bulldozer: no absorb line reaches max hit 28', hi.maxAbs < 28, 'maxAbs=' + hi.maxAbs);
   }
   // unarmored baselines must be unchanged by this fix (armor code not touched for P=0)
   const expectBand = { hushwolf: [60, 95], belltoad: [10, 30], bulldozer: [2, 12], lockpick_raccoon: [0, 10] };
@@ -218,19 +221,23 @@ function runPlayerFight(Game, monId, gear) {
     if (Game.inCombat()) { try { Game.tbfight.over = true; } catch (e) {} }
     return absorbLines;
   }
-  const MINHIT = { hushwolf: 14, bulldozer: 20, belltoad: 12 };
+  const MAXHIT = { hushwolf: 20, bulldozer: 28, belltoad: 18 };
   for (const id of ['hushwolf', 'bulldozer', 'belltoad']) {
     let abs = [];
     for (let i = 0; i < 4; i++) abs.push(...runTank(id));
-    const minHit = MINHIT[id];
+    const maxHit = MAXHIT[id];
     console.log(`    ${id} P=20: ${abs.length} hits absorbed [${abs.slice(0, 12).join(',')}${abs.length > 12 ? '...' : ''}]`);
     check(`${id}: hits landed in tank mode`, abs.length > 0, 'no hits — tank broken');
     if (abs.length) {
-      check(`${id}: every absorbed < min hit ${minHit} (no immunity)`, Math.max(...abs) < minHit, 'max=' + Math.max(...abs));
+      // No immunity means absorbed < ITS OWN hit; the per-hit property is
+      // proven in Part 1. The bound here is the largest hit of the range
+      // (retune K=6: absorbed on a max hit is ~0.77x it, above the old
+      // min-hit bound but still below the hit itself).
+      check(`${id}: every absorbed < max hit ${maxHit} (no immunity)`, Math.max(...abs) < maxHit, 'max=' + Math.max(...abs));
       check(`${id}: every absorbed >= 1 (armor does something)`, Math.min(...abs) >= 1, 'min=' + Math.min(...abs));
-      // P=20 -> r=0.5, expect absorbed ~= round(hit/2)
+      // P=20 -> r=20/26~0.77, expect absorbed ~= round(hit*0.77)
       const avgA = abs.reduce((a, b) => a + b, 0) / abs.length;
-      console.log(`    ${id}: avg absorbed ${avgA.toFixed(1)} (expect ~half of [${minHit},${minHit === 14 ? 20 : minHit === 20 ? 28 : 18}])`);
+      console.log(`    ${id}: avg absorbed ${avgA.toFixed(1)} (expect ~3/4 of [${maxHit === 20 ? 14 : maxHit === 28 ? 20 : 12},${maxHit}])`);
     }
   }
 
@@ -276,16 +283,22 @@ function runPlayerFight(Game, monId, gear) {
     // unarmored
     vp.items = []; vp.equipped = {};
     v.health[vid] = 100;
-    let t0 = [], d0 = [];
-    for (let i = 0; i < 4; i++) { v.health[vid] = 100; const rec = Game.fieldFight(vid, mdef, null, {}); t0.push(rec.vTaken); d0.push(rec.outcome + '/' + rec.rounds + 'r'); }
+    let t0 = [], d0 = [], r0 = [];
+    for (let i = 0; i < 4; i++) { v.health[vid] = 100; const rec = Game.fieldFight(vid, mdef, null, {}); t0.push(rec.vTaken); d0.push(rec.outcome + '/' + rec.rounds + 'r'); r0.push(rec.rounds); }
     // hide torso only
     vp.items = ['hide_armor']; vp.equipped = { torso: { itemId: 'hide_armor', name: 'Hide Armor' } };
     v.health[vid] = 100;
-    let t1 = [], absLines = 0, d1 = [];
-    for (let i = 0; i < 4; i++) { v.health[vid] = 100; const rec = Game.fieldFight(vid, mdef, null, {}); t1.push(rec.vTaken); d1.push(rec.outcome + '/' + rec.rounds + 'r'); absLines += (rec.log || []).filter(l => /gear absorbs/.test(l)).length; }
+    let t1 = [], absLines = 0, d1 = [], r1 = [];
+    for (let i = 0; i < 4; i++) { v.health[vid] = 100; const rec = Game.fieldFight(vid, mdef, null, {}); t1.push(rec.vTaken); d1.push(rec.outcome + '/' + rec.rounds + 'r'); r1.push(rec.rounds); absLines += (rec.log || []).filter(l => /gear absorbs/.test(l)).length; }
     const avg = a => a.reduce((x, y) => x + y, 0) / a.length;
-    console.log(`    hushwolf vs villager: unarmored taken ${avg(t0).toFixed(0)} [${d0.join(' ')}], hide-armored taken ${avg(t1).toFixed(0)} [${d1.join(' ')}], absorb lines ${absLines}`);
-    check('villager: armor reduces taken', avg(t1) < avg(t0), `${avg(t1).toFixed(0)} vs ${avg(t0).toFixed(0)}`);
+    // PER-ROUND taken is the armor metric, not total taken: armor that lets
+    // a villager fight 3-6x longer (and kill the beast instead of fleeing
+    // at 2 rounds) raises TOTAL taken while cutting per-round taken — the
+    // survival-time effect itself. Total taken is reported, not judged.
+    const perRound0 = avg(t0) / Math.max(1, avg(r0));
+    const perRound1 = avg(t1) / Math.max(1, avg(r1));
+    console.log(`    hushwolf vs villager: unarmored taken ${avg(t0).toFixed(0)} (${perRound0.toFixed(1)}/round) [${d0.join(' ')}], hide-armored taken ${avg(t1).toFixed(0)} (${perRound1.toFixed(1)}/round) [${d1.join(' ')}], absorb lines ${absLines}`);
+    check('villager: armor reduces taken per round', perRound1 < perRound0, `${perRound1.toFixed(1)} vs ${perRound0.toFixed(1)} per round`);
     check('villager: armor never grants 0 taken', avg(t1) > 0, avg(t1).toFixed(0));
     check('villager: absorb path exercised', absLines > 0, String(absLines));
     vp.items = []; vp.equipped = {};
