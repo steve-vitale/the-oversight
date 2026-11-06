@@ -55,13 +55,16 @@ function liveEntry(day, mid, wave, by, via) { return { day: day, mid: mid, wave:
   // read it as pyrrhic, even with the killer in its fighters.
   const grindLog = [logEntry(80, 'strike', 4, 'scholar', 'player')];
   const grindLive = [liveEntry(80, 'strike', 4, 'scholar', 'player')];
-  const c3 = INST.classifyEnding(trace({ day: 80, mid: 'strike', outcome: 'lost', fighters: ['scholar'] }), grindLog, grindLive, 'tbEnd', false);
+  const c3 = INST.classifyEnding(trace({ day: 80, mid: 'strike', mids: ['strike'], outcome: 'lost', fighters: ['scholar'] }), grindLog, grindLive, 'tbEnd', false);
   check('pyrrhic-grind-live-excluded', c3.ending === 'scholar-death', JSON.stringify(c3));
 
   // Wrong killer / wrong day / low wave: no match, stays scholar-death.
+  // (sim-midnightkill-b: "wrong day" is now day+2 — a kill logged the
+  // NEXT day DOES match under the ±1-day join, so the old day+1 case
+  // moved to the midnightkill proof as a positive fixture.)
   const c4 = INST.classifyEnding(trace({ outcome: 'lost' }), [logEntry(65, 'reunion', 4, 'someone_else', 'companion')], [], 'tbEnd', false);
   check('pyrrhic-wrong-killer-no-match', c4.ending === 'scholar-death', JSON.stringify(c4));
-  const c5 = INST.classifyEnding(trace({ outcome: 'lost' }), [logEntry(66, 'reunion', 4, 'greta_hansen', 'companion')], [], 'tbEnd', false);
+  const c5 = INST.classifyEnding(trace({ outcome: 'lost' }), [logEntry(67, 'reunion', 4, 'greta_hansen', 'companion')], [], 'tbEnd', false);
   check('pyrrhic-wrong-day-no-match', c5.ending === 'scholar-death', JSON.stringify(c5));
   const c6 = INST.classifyEnding(trace({ outcome: 'lost' }), [logEntry(65, 'reunion', 3, 'greta_hansen', 'companion')], [], 'tbEnd', false);
   check('pyrrhic-low-wave-no-match', c6.ending === 'scholar-death', JSON.stringify(c6));
@@ -79,17 +82,17 @@ function liveEntry(day, mid, wave, by, via) { return { day: day, mid: mid, wave:
 (function () {
   const graceLog = [logEntry(80, 'strike', 4, 'grace_obi', 'player')];
   const graceLive = [liveEntry(80, 'strike', 4, 'grace_obi', 'player')];
-  const graceTr = trace({ day: 80, mid: 'strike', outcome: 'unfinished', mHpLeft: 0, mHpLeftFrac: 0, fighters: ['grace_obi'] });
+  const graceTr = trace({ day: 80, mid: 'strike', mids: ['strike'], outcome: 'unfinished', mHpLeft: 0, mHpLeftFrac: 0, fighters: ['grace_obi'] });
   const c = INST.classifyEnding(graceTr, graceLog, graceLive, 'stale', false);
   check('unclosed-basic', c.ending === 'kill-unclosed', JSON.stringify(c));
 
   // Beast alive at close: the log match must NOT promote the trace —
   // a same-day kill from a later fight stays out.
-  const c2 = INST.classifyEnding(trace({ day: 80, mid: 'strike', outcome: 'unfinished', mHpLeft: 500, mHpLeftFrac: 0.467, fighters: ['grace_obi'] }), graceLog, graceLive, 'stale', false);
+  const c2 = INST.classifyEnding(trace({ day: 80, mid: 'strike', mids: ['strike'], outcome: 'unfinished', mHpLeft: 500, mHpLeftFrac: 0.467, fighters: ['grace_obi'] }), graceLog, graceLive, 'stale', false);
   check('unclosed-beast-alive-guard', c2.ending === 'unfinished' && c2.unfinishedKind === 'dissolved', JSON.stringify(c2));
 
   // No match: the split follows the close path, not a guess.
-  const bare = trace({ day: 80, mid: 'strike', outcome: 'unfinished', mHpLeft: 400, fighters: ['grace_obi'] });
+  const bare = trace({ day: 80, mid: 'strike', mids: ['strike'], outcome: 'unfinished', mHpLeft: 400, fighters: ['grace_obi'] });
   const c3 = INST.classifyEnding(bare, [], [], 'finalize', true);
   check('unfinished-finalize-village-died', c3.ending === 'unfinished' && c3.unfinishedKind === 'village-died', JSON.stringify(c3));
   const c4 = INST.classifyEnding(bare, [], [], 'finalize', false);

@@ -75,8 +75,14 @@ function kindOf(Game, key) {
 // the committed corpus can be re-classified offline with the SAME logic
 // the live close path runs — not a copy. Log entries use {d, w};
 // killsLive entries use {day, wave}; both normalize to {day, mid, wave,
-// by, via}. A match is: wave >= 4, same day, same monster id, killer in
-// this fight's fighters list.
+// by, via}. A match is: wave >= 4, fight day ± 1 (sim-midnightkill-b,
+// 2026-11-06 — a fight that starts one day and logs its kill the next
+// scores 0 under strict same-day matching), same monster id, killer in
+// this fight's fighters list. The ±1 window NEEDS the same-beast guard:
+// without it a 'won' rout trace could match a field/contest kill by the
+// same fighter on an adjacent day, so the kill's mid must be one of the
+// trace's mids (falling back to tr.mid, and to the old day+fighter+wave
+// check only when the trace carries no monster id at all).
 //   pyrrhic match: the entry must NOT be in killsLive — recordWaveKill
 //     writes BOTH the log and killsLive, so a log-only entry is exactly
 //     the recordPyrrhicKill shape (tbEnd 'lost' branch). Without the
@@ -89,6 +95,18 @@ function kindOf(Game, key) {
 // logEntries SHOULD be the entries appended during this fight (the
 // live path slices from the trace-open snapshot); the offline path
 // passes the whole log and leans on the guards above instead.
+function sameBeast(tr, mid) {
+  if (!mid) return false;
+  try {
+    if (Array.isArray(tr.mids) && tr.mids.length) return tr.mids.indexOf(mid) >= 0;
+    if (tr.mid) return tr.mid === mid;
+  } catch (e) {}
+  return true; // trace carries no monster id at all: cannot disprove
+}
+function withinOneDay(a, b) {
+  if (a == null || b == null) return false;
+  return Math.abs((a | 0) - (b | 0)) <= 1;
+}
 function normKill(e) {
   if (!e || typeof e !== 'object') return null;
   const day = (e.d != null) ? e.d : e.day;
@@ -112,8 +130,8 @@ function matchLogKills(tr, logEntries, liveEntries, excludeLive) {
       const n = normKill(e);
       if (!n) return;
       if ((n.wave | 0) < 4) return;
-      if (n.day !== tr.day) return;
-      if (n.mid !== tr.mid) return;
+      if (!withinOneDay(n.day, tr.day)) return;
+      if (!sameBeast(tr, n.mid)) return;
       if (!tr.fighters || tr.fighters.indexOf(n.by) < 0) return;
       if (excludeLive && liveKeys[killKey(n)]) return;
       out.push(n);
@@ -123,6 +141,30 @@ function matchLogKills(tr, logEntries, liveEntries, excludeLive) {
 }
 function matchLogKill(tr, logEntries, liveEntries, excludeLive) {
   const hits = matchLogKills(tr, logEntries, liveEntries, excludeLive);
+  return hits.length ? hits[0] : null;
+}
+
+// The 'won'-branch kill join, as a list (sim-midnightkill-b): killsLive
+// entries matching this trace — wave >= 4, fight day ± 1, same beast,
+// killer fought in this fight. The live close path uses matchWonKill
+// (first match); the reclassifier counts the list for ambiguity.
+function matchWonKills(tr, liveEntries) {
+  const out = [];
+  try {
+    (liveEntries || []).forEach(function (e) {
+      const n = normKill(e);
+      if (!n) return;
+      if ((n.wave | 0) < 4) return;
+      if (!withinOneDay(n.day, tr.day)) return;
+      if (!sameBeast(tr, n.mid)) return;
+      if (!tr.fighters || tr.fighters.indexOf(n.by) < 0) return;
+      out.push(n);
+    });
+  } catch (e) {}
+  return out;
+}
+function matchWonKill(tr, liveEntries) {
+  const hits = matchWonKills(tr, liveEntries);
   return hits.length ? hits[0] : null;
 }
 
@@ -137,14 +179,12 @@ function matchLogKill(tr, logEntries, liveEntries, excludeLive) {
 function classifyEnding(tr, logEntries, liveEntries, closeKind, villageLost) {
   const outcome = (tr.outcome != null) ? String(tr.outcome) : null;
   if (outcome === 'won') {
-    let matched = false;
-    try {
-      matched = (liveEntries || []).some(function (e) {
-        const n = normKill(e);
-        return n && n.day === tr.day && ((n.wave | 0) >= 4) && tr.fighters && tr.fighters.indexOf(n.by) >= 0;
-      });
-    } catch (e) {}
-    return { ending: matched ? 'kill' : 'rout', unfinishedKind: null };
+    // ±1-day join (sim-midnightkill-b): a fight that starts one day and
+    // logs its kill the next scores as a kill, not a rout. Same-beast
+    // guard via matchWonKill — an adjacent-day kill of a different
+    // monster by the same fighter must NOT match.
+    const hit = matchWonKill(tr, liveEntries || []);
+    return { ending: hit ? 'kill' : 'rout', unfinishedKind: null };
   }
   if (outcome === 'lost') {
     const hit = matchLogKill(tr, logEntries, liveEntries, true);
@@ -469,4 +509,6 @@ function install(Game) {
 }
 
 module.exports = { install: install, classifyEnding: classifyEnding,
-  matchLogKill: matchLogKill, matchLogKills: matchLogKills, normKill: normKill };
+  matchLogKill: matchLogKill, matchLogKills: matchLogKills, normKill: normKill,
+  matchWonKill: matchWonKill, matchWonKills: matchWonKills, sameBeast: sameBeast,
+  killKey: killKey, withinOneDay: withinOneDay };

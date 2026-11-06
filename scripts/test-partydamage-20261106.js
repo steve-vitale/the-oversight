@@ -126,7 +126,7 @@ check('trace-absent-null', AN.tracePresent(null) === false);
   check('analyze-kill-rate-zero-no-kills', L.tbKillRate === 0, 'tbKillRate=' + L.tbKillRate);
   // Pyrrhic: an 'unfinished' trace + a same-day wave-4 log kill by one of
   // the fight's fighters counts as a TB kill; a log kill by a stranger does not.
-  const pyr = trace({ seq: 3, tbSeq: 3, day: 95, mid: 'the_eater', ending: 'unfinished',
+  const pyr = trace({ seq: 3, tbSeq: 3, day: 95, mid: 'the_eater', mids: ['the_eater'], ending: 'unfinished',
     outcome: 'unfinished', turns: [{ r: 1, actor: 'm_0' }],
     hits: [hit(1, 'p', 'player', 'monster', 800)] });
   const tbRow3 = { seq: 3, day: 95, mid: 'the_eater', wave: 4, alliesAtEntry: 0, partyAtEntry: 0, outcome: 'unfinished', rounds: 9 };

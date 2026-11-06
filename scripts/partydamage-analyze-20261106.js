@@ -21,6 +21,47 @@ function mean(xs) {
   return xs.reduce(function (a, b) { return a + b; }, 0) / xs.length;
 }
 
+// Pyrrhic match for 'unfinished' traces (sim-midnightkill-b): a wave-4+
+// log kill by one of this fight's fighters. The join is fight day ± 1
+// (a fight that starts one day and logs its kill the next must match),
+// with the same-beast guard — the kill's mid must be one of the trace's
+// mids (falling back to tr.mid, and to the old day+fighter+wave check
+// only when the trace carries no monster id at all). waveKillLog uses
+// {d, w}; killsLive-shaped entries use {day, wave}; accept either.
+// NOTE: unlike the fightinterior classifier's 'unfinished' branch this
+// matcher carries no mHpLeft === 0 guard — the analyzer never had one,
+// and adding it is a separate change, not this arm's. A pyrrhic match
+// here counts toward tbKillMatched, never toward a re-derived ending.
+function sameBeast(tr, mid) {
+  if (!mid) return false;
+  try {
+    if (Array.isArray(tr.mids) && tr.mids.length) return tr.mids.indexOf(mid) >= 0;
+    if (tr.mid) return tr.mid === mid;
+  } catch (e) {}
+  return true; // trace carries no monster id at all: cannot disprove
+}
+function matchPyrrhicKills(tr, log) {
+  const out = [];
+  try {
+    (log || []).forEach(function (k) {
+      if (!k || typeof k !== 'object') return;
+      const kd = (k.d != null) ? k.d : k.day;
+      const kw = (k.w != null) ? k.w : k.wave;
+      if (kd == null || !k.mid) return;
+      if ((kw | 0) < 4) return;
+      if (Math.abs((kd | 0) - (tr.day | 0)) > 1) return;
+      if (!sameBeast(tr, k.mid)) return;
+      if (!(tr.fighters || []).includes(k.by)) return;
+      out.push({ day: kd, mid: k.mid, wave: (kw | 0) || 0, by: k.by || null, via: k.via || null });
+    });
+  } catch (e) {}
+  return out;
+}
+function matchPyrrhicKill(tr, log) {
+  const hits = matchPyrrhicKills(tr, log);
+  return hits.length ? hits[0] : null;
+}
+
 // A trace counts as present when the recorder saw at least one turn or
 // one player verb inside the fight. A fight with zero turns AND zero
 // verbs means the wrappers never fired for it — an instrument failure,
@@ -249,12 +290,7 @@ function analyzeLeg(files) {
     trs.forEach(function (tr) {
       if (tr.ending === 'kill') { L.tbKillMatched++; return; }
       if (tr.ending !== 'unfinished') return;
-      const matched = log.some(function (k) {
-        // waveKillLog day key is 'd' (killsLive uses 'day'); accept either.
-        const kd = (k && k.d != null) ? k.d : (k && k.day);
-        return k && kd === tr.day && ((k.w | 0) >= 4) &&
-          (tr.fighters || []).indexOf(k.by) >= 0;
-      });
+      const matched = matchPyrrhicKill(tr, log);
       if (matched) { L.tbKillMatched++; L.pyrrhicKills++; }
     });
     L.rallyRows = L.rallyRows.concat(rallyCostRows(trs));
@@ -316,4 +352,4 @@ function main() {
 }
 
 if (require.main === module) main();
-module.exports = { analyzeLeg: analyzeLeg, tracePresent: tracePresent, damageByRound: damageByRound, bestRoundComposition: bestRoundComposition, rallyCostRows: rallyCostRows, sizeNextLever: sizeNextLever, median: median, mean: mean, ENDINGS: ENDINGS };
+module.exports = { analyzeLeg: analyzeLeg, tracePresent: tracePresent, damageByRound: damageByRound, bestRoundComposition: bestRoundComposition, rallyCostRows: rallyCostRows, sizeNextLever: sizeNextLever, median: median, mean: mean, ENDINGS: ENDINGS, matchPyrrhicKill: matchPyrrhicKill, matchPyrrhicKills: matchPyrrhicKills, sameBeast: sameBeast };

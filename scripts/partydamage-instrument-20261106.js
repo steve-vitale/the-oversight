@@ -56,6 +56,52 @@ function kindOf(Game, key) {
   return null;
 }
 
+// ---- MIDNIGHT-SPAN KILL JOIN (sim-midnightkill-b, 2026-11-06) ----
+// Pure functions over (trace, killsLive entries) so the committed
+// corpus can be re-matched offline with the SAME logic the live close
+// path runs — not a copy. A match is: wave >= 4, fight day ± 1 (a fight
+// that starts one day and logs its kill the next scores 0 under strict
+// same-day matching — e.g. 87004 armed, Nadia vs Influencer, fight day
+// 117, kill logged day 118), same monster id, killer in this fight's
+// fighters list. The ±1 window NEEDS the same-beast guard: without it
+// a 'won' rout trace could match a field/contest kill by the same
+// fighter on an adjacent day, so the kill's mid must be one of the
+// trace's mids (falling back to tr.mid, and to the old day+fighter+wave
+// check only when the trace carries no monster id at all).
+function sameBeast(tr, mid) {
+  if (!mid) return false;
+  try {
+    if (Array.isArray(tr.mids) && tr.mids.length) return tr.mids.indexOf(mid) >= 0;
+    if (tr.mid) return tr.mid === mid;
+  } catch (e) {}
+  return true; // trace carries no monster id at all: cannot disprove
+}
+function withinOneDay(a, b) {
+  if (a == null || b == null) return false;
+  return Math.abs((a | 0) - (b | 0)) <= 1;
+}
+function matchWonKills(tr, liveEntries) {
+  const out = [];
+  try {
+    (liveEntries || []).forEach(function (e) {
+      if (!e || typeof e !== 'object') return;
+      const day = (e.day != null) ? e.day : e.d;
+      const wave = (e.wave != null) ? e.wave : e.w;
+      if (day == null || !e.mid) return;
+      if ((wave | 0) < 4) return;
+      if (!withinOneDay(day, tr.day)) return;
+      if (!sameBeast(tr, e.mid)) return;
+      if (!tr.fighters || tr.fighters.indexOf(e.by) < 0) return;
+      out.push({ day: day, mid: e.mid, wave: (wave | 0) || 0, by: e.by || null, via: e.via || null });
+    });
+  } catch (e) {}
+  return out;
+}
+function matchWonKill(tr, liveEntries) {
+  const hits = matchWonKills(tr, liveEntries);
+  return hits.length ? hits[0] : null;
+}
+
 function install(Game) {
   const base = STAGEALLY.install(Game);
   const t = base.t;
@@ -290,9 +336,13 @@ function install(Game) {
         if (p) { tr.scholarHpEnd = (p.hp != null ? p.hp : null); tr.scholarHpFracEnd = +(((p.hp || 0) / Math.max(1, p.maxHp || p.hp || 1)).toFixed(3)); }
       } catch (e2) {}
       // Finishing classification from engine records (finishprobe shape):
-      // won + a same-day wave-4 kill-log match whose killer fought here
-      // is a kill; won without one is a rout (monster fled/dismissed);
-      // lost is the scholar's death; fled is the scholar's flight.
+      // won + a wave-4 kill-log match whose killer fought here is a kill;
+      // won without one is a rout (monster fled/dismissed); lost is the
+      // scholar's death; fled is the scholar's flight. The kill join is
+      // fight day ± 1 (sim-midnightkill-b): a fight that starts one day
+      // and logs its kill the next scores as a kill, not a rout — with
+      // the same-beast guard in matchWonKill, so an adjacent-day kill of
+      // a different monster by the same fighter does NOT match.
       // CORRECTION (sim-fightinterior-b, 2026-11-06): tbEnd also emits
       // result 'routed' (e.g. the 51006 d105 Strike standoff) — the
       // preregged taxonomy holds only 'rout', so un-normalized it
@@ -301,12 +351,7 @@ function install(Game) {
       let ending = tr.outcome;
       if (tr.outcome === 'won') {
         let matched = false;
-        try {
-          const kills = t.killsLive || [];
-          matched = kills.some(function (k) {
-            return k && k.day === tr.day && ((k.wave | 0) >= 4) && tr.fighters.indexOf(k.by) >= 0;
-          });
-        } catch (e2) {}
+        try { matched = !!matchWonKill(tr, t.killsLive || []); } catch (e2) {}
         ending = matched ? 'kill' : 'rout';
       } else if (tr.outcome === 'lost') ending = 'scholar-death';
       else if (tr.outcome === 'fled') ending = 'scholar-flee';
@@ -357,4 +402,5 @@ function install(Game) {
   return base;
 }
 
-module.exports = { install: install };
+module.exports = { install: install, matchWonKill: matchWonKill,
+  matchWonKills: matchWonKills, sameBeast: sameBeast, withinOneDay: withinOneDay };
