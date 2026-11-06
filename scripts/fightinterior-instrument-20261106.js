@@ -293,6 +293,11 @@ function install(Game) {
       // won + a same-day wave-4 kill-log match whose killer fought here
       // is a kill; won without one is a rout (monster fled/dismissed);
       // lost is the scholar's death; fled is the scholar's flight.
+      // CORRECTION (sim-fightinterior-b, 2026-11-06): tbEnd also emits
+      // result 'routed' (e.g. the 51006 d105 Strike standoff) — the
+      // preregged taxonomy holds only 'rout', so un-normalized it
+      // counted as UNCLASSIFIED and cost D1 by one fight. Normalize it
+      // here; the judged corpus is NOT re-run.
       let ending = tr.outcome;
       if (tr.outcome === 'won') {
         let matched = false;
@@ -305,6 +310,7 @@ function install(Game) {
         ending = matched ? 'kill' : 'rout';
       } else if (tr.outcome === 'lost') ending = 'scholar-death';
       else if (tr.outcome === 'fled') ending = 'scholar-flee';
+      else if (tr.outcome === 'routed') ending = 'rout';
       else if (tr.outcome === 'unfinished') ending = 'unfinished';
       tr.ending = ending;
       // Rally cost: did the scholar strike in the rally round? A rally
