@@ -23167,18 +23167,96 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (present) { this.say(text); return; }
       this.holdNamingNews(kind, mid, text);
     },
-    // deliverHeldNamingNews: held naming lines reach the scholar at the
-    // fire on return, verbatim and in the order they were held, under
-    // one framing line that makes the catch-up tense honest. The queue
-    // is spliced on delivery, so a second return the same day finds
-    // nothing to repeat.
+    // deliverHeldNamingNews (sim-catchup-summary-a 2026-11-06): held
+    // naming lines reach the scholar at the fire on return as
+    // SUMMARIES, not verbatim — the verbatim wall (13 lines in one
+    // daily phase on seed 17010) is the defect this shape answers.
+    // At most THREE lines per return, always in this order: the
+    // framing line once, ONE burst summary (all held word/debate
+    // lines, one clause per monster: first-proposal name + that
+    // monster's count; the header carries the word and debate counts
+    // separately so the ledger can be checked per kind), ONE settle
+    // summary (all held settle lines: villageNames; beast count ==
+    // names listed == settle lines, 1 per beast). Nothing is
+    // invented: every name comes from a held line (first proposal /
+    // villageName), every count is the exact number of held lines.
+    // The queue still holds VERBATIM entries — summarization happens
+    // at delivery only — so the ledger (said + held == kicked) is
+    // checked with summary counts in place of verbatim lines
+    // (prereg (b)). The queue is spliced on delivery, so a second
+    // return the same day finds nothing to repeat. A monster whose
+    // debate and settle are both held gets a clause in BOTH
+    // summaries; when its proposal name and settled name differ the
+    // summaries do not assert which debate led to which settlement
+    // (preregistered linkage limit). Wording is preregistered in
+    // evidence/2026-11-06/sim-catchup-summary-a-prereg.md and parsed
+    // by scripts/policies/gossipcensus-diag.js — keep the templates
+    // byte-identical or the run fails its own meter.
     deliverHeldNamingNews() {
       const s = this.state.scholar || {};
       const held = s.awayNaming || [];
       if (!held.length) return;
       const news = held.splice(0);
+      const plural = (n, one, many) => (n === 1 ? one : many);
+      // Group by monster, first-held first (queue order preserved).
+      const byMid = new Map();
+      for (const h of news) {
+        const m = h.mid || '';
+        if (!byMid.has(m)) byMid.set(m, []);
+        byMid.get(m).push(h);
+      }
+      const firstProposalName = (mid) => {
+        try {
+          const e = ((this.state.codex || {}).monsters || {})[mid];
+          const props = (e && e.proposals) || {};
+          const first = Object.values(props)[0];
+          if (first) return first;
+        } catch (e2) {}
+        try { return this.monsterDisplayName(mid); } catch (e3) { return 'something'; }
+      };
+      const settleName = (mid, heldText) => {
+        try {
+          const e = ((this.state.codex || {}).monsters || {})[mid];
+          if (e && e.villageName) return e.villageName;
+        } catch (e2) {}
+        // Fallback: the held settle line itself names the agreed name
+        // ("It's settled. The village is calling it \"X.\" ...") — the
+        // period before the closing quote is sentence punctuation, not
+        // part of the name, so the capture stops at it.
+        try {
+          const m = /The village is calling it "([^"]+?)\."/.exec(String(heldText || ''));
+          if (m) return m[1];
+        } catch (e3) {}
+        try { return this.monsterDisplayName(mid); } catch (e4) { return 'something'; }
+      };
+      let words = 0, debates = 0;
+      const burstClauses = [];
+      const settleNames = [];
+      for (const [mid, entries] of byMid) {
+        const burst = entries.filter((h) => h.kind === 'word' || h.kind === 'debate');
+        if (burst.length) {
+          words += burst.filter((h) => h.kind === 'word').length;
+          debates += burst.filter((h) => h.kind === 'debate').length;
+          burstClauses.push({ name: firstProposalName(mid), n: burst.length });
+        }
+        for (const st of entries.filter((h) => h.kind === 'settle')) {
+          settleNames.push(settleName(mid, st.text));
+        }
+      }
       this.say('While you were away, the haven argued over what to call it — they catch you up at the fire:');
-      for (const h of news) this.say(h.text);
+      if (burstClauses.length) {
+        const b = burstClauses.length;
+        const clauseText = burstClauses.map((c) => '"' + c.name + '" (' + c.n + ')').join(', ');
+        this.say('They argued over names for ' + b + ' ' + plural(b, 'beast', 'beasts')
+          + ' — ' + words + ' ' + plural(words, 'word', 'words')
+          + ', ' + debates + ' ' + plural(debates, 'debate', 'debates')
+          + ': ' + clauseText + '.');
+      }
+      if (settleNames.length) {
+        const n = settleNames.length;
+        this.say('They settled names for ' + n + ' ' + plural(n, 'beast', 'beasts')
+          + ': ' + settleNames.map((nm) => '"' + nm + '"').join(', ') + '.');
+      }
     },
     // kickMonsterNaming: the word is out — the argument starts.
     kickMonsterNaming(mid) {

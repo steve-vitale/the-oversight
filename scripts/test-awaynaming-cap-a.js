@@ -17,8 +17,10 @@
 // proposals still set while away: the debate proceeds, only delivery
 // waits); (2) settle held likewise (villageName still set while
 // away); (3) THE CAP FIX: 20 lines held directly (word/debate/settle
-// kinds) — the killed fix capped at 12 — all 20 delivered verbatim
-// on return, queue drained; (4) in-haven burst still says
+// kinds) — the killed fix capped at 12 — delivered as SUMMARIES
+// (sim-catchup-summary-a 2026-11-06): framing + burst + settle
+// summaries, at most 3 lines, parsed counts exact (7 words, 7
+// debates, 6 settles); (4) in-haven burst still says
 // immediately; (5) the framing line on delivery matches no
 // burst/settle classifier pattern. Classifier unit checks are reused
 // verbatim from test-gossipcensus-a.js where applicable (same
@@ -143,20 +145,36 @@ check('framing line matches no burst/settle pattern',
     && gc.isSettleLine(held2[2].text), JSON.stringify(held2.map((h) => h.kind)));
   const settleText = held2[2].text;
 
-  // (3) Delivered on return, verbatim, queue drained.
+// (3) Delivered on return as SUMMARIES (sim-catchup-summary-a
+  // 2026-11-06 — the verbatim delivery is replaced: framing + one
+  // burst summary + one settle summary, 3 lines, parsed counts
+  // exact, queue drained; NO verbatim held line appears).
   goHome();
   const saidBefore3 = said.length;
   Game.returnToVillage();
   const fresh3 = said.slice(saidBefore3);
-  check('delivered: framing line on return', fresh3.some((t) => /While you were away, the haven argued over what to call it/.test(t)), JSON.stringify(fresh3));
-  check('delivered: held word line appears verbatim', fresh3.includes(heldTexts[0]), JSON.stringify(fresh3));
-  check('delivered: held debate line appears verbatim', fresh3.includes(heldTexts[1]), JSON.stringify(fresh3));
-  check('delivered: held settle line appears verbatim', fresh3.includes(settleText), JSON.stringify(fresh3));
+  const delivered3 = fresh3.filter((t) => gc.parseSummaryLine(t));
+  check('delivered: framing + burst + settle summaries (3 lines)',
+    delivered3.length === 3, JSON.stringify(fresh3));
+  check('delivered: framing line on return',
+    delivered3[0] === 'While you were away, the haven argued over what to call it — they catch you up at the fire:',
+    JSON.stringify(delivered3));
+  check('delivered: burst summary carries 1 word + 1 debate',
+    (() => { const p = gc.parseSummaryLine(delivered3[1] || ''); return p && p.kind === 'burst' && p.words === 1 && p.debates === 1 && p.clauses.length === 1 && p.clauses[0].name === 'Old Loud' && p.clauses[0].n === 2 && !p.inconsistent; })(),
+    JSON.stringify(delivered3[1]));
+  check('delivered: settle summary names the village name (1 beast)',
+    (() => { const p = gc.parseSummaryLine(delivered3[2] || ''); return p && p.kind === 'settle' && p.beasts === 1 && p.names[0] === 'Old Loud' && !p.inconsistent; })(),
+    JSON.stringify(delivered3[2]));
+  check('delivered: NO verbatim held line appears',
+    !heldTexts.some((t) => fresh3.includes(t)) && !fresh3.includes(settleText), JSON.stringify(fresh3));
   check('delivered: queue drained', ((Game.state.scholar || {}).awayNaming || []).length === 0);
 
   // (4) THE CAP FIX: hold 20 lines — past the killed fix's 12-entry
-  // bound — and deliver every one verbatim. A long stranding (17010
-  // held 36 on the gossipfix corpus) must lose nothing.
+  // bound — and deliver them as SUMMARIES (sim-catchup-summary-a):
+  // the queue holds all 20, but the return still costs at most 3
+  // lines (framing + burst + settle summaries) with exact counts.
+  // A long stranding (17010 held 36 on the gossipfix corpus) must
+  // lose nothing — the revised ledger accounts every held line.
   goAway();
   const capTexts = [];
   const kinds = ['word', 'debate', 'settle'];
@@ -179,8 +197,16 @@ check('framing line matches no burst/settle pattern',
   const saidBeforeCap = said.length;
   Game.returnToVillage();
   const freshCap = said.slice(saidBeforeCap);
-  check('cap fix: all 20 held lines delivered verbatim', capTexts.every((t) => freshCap.includes(t)),
-    'delivered ' + freshCap.filter((t) => capTexts.includes(t)).length + '/20');
+  const deliveredCap = freshCap.filter((t) => gc.parseSummaryLine(t));
+  check('cap fix: big delivery is still <= 3 lines (framing + 2 summaries)',
+    deliveredCap.length === 3, JSON.stringify(deliveredCap));
+  check('cap fix: burst summary counts exact (7 words, 7 debates, 14 clauses of 1)',
+    (() => { const p = gc.parseSummaryLine(deliveredCap[1] || ''); return p && p.kind === 'burst' && p.words === 7 && p.debates === 7 && p.clauses.length === 14 && p.clauses.every((c) => c.n === 1) && !p.inconsistent; })(),
+    JSON.stringify(deliveredCap[1]));
+  check('cap fix: settle summary counts exact (6 beasts, names from held lines)',
+    (() => { const p = gc.parseSummaryLine(deliveredCap[2] || ''); return p && p.kind === 'settle' && p.beasts === 6 && p.names.length === 6 && p.names.every((n) => n === 'Old Loud') && !p.inconsistent; })(),
+    JSON.stringify(deliveredCap[2]));
+  check('cap fix: NO verbatim held line appears', !capTexts.some((t) => freshCap.includes(t)), JSON.stringify(freshCap));
   check('cap fix: queue drained after the big delivery', ((Game.state.scholar || {}).awayNaming || []).length === 0);
 
   // (5) In-haven burst still says immediately (fresh monster, no hold).

@@ -17,9 +17,11 @@
 //      proposals but emits 0 debate lines.
 //   2. STRANDED settle: majority -> villageName set but 0 settle lines;
 //      the word/debate/settle lines sit held in order.
-//   3. RETURN: back on the haven tile -> returnToVillage delivers ALL
-//      THREE lines verbatim under the catch-up framing line; the queue
-//      drains.
+//   3. RETURN: back on the haven tile -> returnToVillage delivers the
+//      held lines as SUMMARIES (sim-catchup-summary-a 2026-11-06):
+//      framing + one burst summary + one settle summary (3 lines,
+//      parsed counts exact); the queue drains; no verbatim held line
+//      appears.
 //   ROUTING NOTE (sim-awaynaming-cap-a 2026-11-05): burst/settle lines
 //   (word/debate/settle) now route through the uncapped awayNaming
 //   gate (sayNamingNews / returnToVillage delivery), NOT the relay's
@@ -129,15 +131,17 @@ function livingRoster(Game) {
     const q2 = (Game.state.scholar || {}).awayNaming || [];
     check('stranded settle: queue is word,debate,settle', q2.map(i => i.kind).join(',') === 'word,debate,settle', 'queue=' + JSON.stringify(q2.map(i => i.kind)));
     check('stranded settle: relay queue still empty', (Game.state.pendingHavenNews || []).length === 0);
-    // return to Haven: returnToVillage delivers the held lines verbatim.
+    // return to Haven: returnToVillage delivers the held lines as
+    // SUMMARIES (sim-catchup-summary-a 2026-11-06): framing + one
+    // burst summary + one settle summary (3 lines, counts exact).
     moveHome(Game, hv);
     check('return: scholarAtHaven true at haven', Game.scholarAtHaven() === true);
     const heldTexts = q2.map(i => i.text);
     Game.returnToVillage();
     check('return: framing line on return', lines.some(l => /While you were away, the haven argued over what to call it/.test(l)));
-    check('return: held word line delivered verbatim', lines.includes(heldTexts[0]), 'held=' + JSON.stringify(heldTexts));
-    check('return: held debate line delivered verbatim', lines.includes(heldTexts[1]));
-    check('return: held settle line delivered verbatim', lines.includes(heldTexts[2]));
+    check('return: burst summary (1 word, 1 debate, "Old Loud" (2))', lines.some(l => /They argued over names for 1 beast — 1 word, 1 debate: "Old Loud" \(2\)\./.test(l)), 'lines=' + JSON.stringify(lines));
+    check('return: settle summary (1 beast: "Old Loud")', lines.some(l => /They settled names for 1 beast: "Old Loud"\./.test(l)));
+    check('return: NO verbatim held line delivered', !heldTexts.some(t => lines.includes(t)), 'held=' + JSON.stringify(heldTexts));
     check('return: awayNaming queue drained', ((Game.state.scholar || {}).awayNaming || []).length === 0);
     check('return: relay flush delivers nothing (burst/settle bypass the relay)', Game.flushHavenNews() === 0);
   }
