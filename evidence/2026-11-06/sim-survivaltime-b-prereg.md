@@ -140,6 +140,20 @@
   change to that canon number under Steve's 2026-11-05 tier-protection
   rule, documented here and in code. No gate/price/deed number moves.
 
-## Metric review (to be filled after the run)
+## Metric review (filled after the run, 2026-11-06)
 
-- (pending)
+- **Primary: GO.** Armed 9/55 = 16.4% (log) / 8/55 = 14.5% (matched) vs
+  baseline 1/20 = 5.0%. The verdict does not hinge on the matcher.
+- **Secondary: MISSED.** Median rounds in lost fights 6 → 7, bar 12.
+  Per-hit mitigation landed (applied/hit 29 → 16) but rounds did not
+  double: longer fights give the monster more turns (median hits/fight
+  4 → 5) and 7/46 lost fights include a ≥100 armor-ignoring hit.
+- **Guards: both hold.** Median survival 80.5d = 0.875× control (bar
+  0.8×); starvation 3 ≤ 10.
+- **What the sizing got wrong:** the static replay held hit patterns
+  fixed; the game does not. The grind that closed kills is the village
+  re-fighting with a new scholar each time, not scholars surviving
+  losing fights. Missing metric for next time: scholar deaths per
+  wave-4 kill (baseline 19/1; armed 46/9 ≈ 5.1).
+- No bar, threshold, or verdict rule was changed after the run. The
+  verdict follows the preregistered rule: GO iff armed ≥ 10%.
