@@ -226,7 +226,12 @@
             m.lingering = false;
             let mn0 = 'it';
             try { mn0 = (this.monsterDisplayName && this.monsterDisplayName(m.id)) || 'it'; } catch (e) {}
-            this.say(`🌙 The lingering ${mn0} paces the treeline one last night, then melts back into the dark. The gorge is over — the village outlasted it.`);
+            // DRIFT-OFF RELAY (sim-gorgeharness-a 2026-11-06): one-time
+            // news — the siege ending stays true on return, so it waits
+            // for the scholar at the fire instead of reaching them in
+            // the wild. sayHavenNews says at once at Haven, queues
+            // (kind 'raid', unfiltered at flush) while away.
+            this.sayHavenNews(`🌙 The lingering ${mn0} paces the treeline one last night, then melts back into the dark. The gorge is over — the village outlasted it.`, 'raid');
             continue;
           }
           // TABLE SANCTITY (2026-10-12, Steve): while the table sits, the
@@ -248,10 +253,20 @@
           // EMPTY-PANTRY (journey-endgame r143): when the stores are empty
           // the raider takes 0 kcal — "gorges — 0 kcal gone" contradicts
           // itself. Say what is true: it circles empty stores.
-          if (got > 0) {
-            this.say(`🌙 Night. The lingering ${mn} gorges at the treeline — ${Math.round(got).toLocaleString()} kcal gone from the stores. Endure it (they drift off within ~6 nights — the gorge is the price), or send a sortie: fighters, rations, real risk.`);
-          } else {
-            this.say(`🌙 Night. The lingering ${mn} circles the treeline, sniffing at empty stores — nothing left to take. Endure it (they drift off within ~6 nights), or send a sortie: fighters, rations, real risk.`);
+          // GORGE GATE (sim-gorgeharness-a 2026-11-06): the nightly
+          // report + sortie invitation is Haven fireside talk — a
+          // scholar asleep in the wild cannot see the treeline and
+          // cannot launch a sortie. While away the line is NOT said
+          // and NOT queued (ephemeral: tonight's kcal; the next
+          // night at Haven reports fresh if the siege continues).
+          // Mechanics above (take, raidPillage, offer recording)
+          // run identically either way.
+          if (this.scholarAtHaven && this.scholarAtHaven()) {
+            if (got > 0) {
+              this.say(`🌙 Night. The lingering ${mn} gorges at the treeline — ${Math.round(got).toLocaleString()} kcal gone from the stores. Endure it (they drift off within ~6 nights — the gorge is the price), or send a sortie: fighters, rations, real risk.`);
+            } else {
+              this.say(`🌙 Night. The lingering ${mn} circles the treeline, sniffing at empty stores — nothing left to take. Endure it (they drift off within ~6 nights), or send a sortie: fighters, rations, real risk.`);
+            }
           }
           // SORTIE TARGET (sim-sortietarget-a 2026-11-03): the gorge line
           // IS the offer — record what was just announced, so an answer can
