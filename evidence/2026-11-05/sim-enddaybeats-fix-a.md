@@ -468,4 +468,4 @@ after (1 case, no_material_signal).
 
 ## Run note
 
-check.js --quick: PENDING — result to be filled below when the run lands.
+check.js --quick: 281 passed, 9 failed in 1326s on the committed tree (base 25de3b127; gate log goal hidden_files enddaybeats-fix-checkquick-20261105.log; main-session adjudication, NOT the worker's 280/10 — its failure list was incomplete). Failures, all standing/freshness class, none in the fix's code: measurement-proof-update, measurement-workflow (freshness), mobile-combat-cadence (2 sub-failures), occupation-panels, measurement-cache-flags (verified failing identically standalone on master fd2d0c5ef), phone-frame-proof (stale receipt), establishment-r20-fixes (racks-full, known since r103), trust-observer-neutrality + capable-bot (both 120s timeouts, load flake). Fix's own proof test 64/64 on the same tree. Gate verdict: no new failures — closeout bar met.
