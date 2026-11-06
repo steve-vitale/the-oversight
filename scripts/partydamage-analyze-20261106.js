@@ -250,7 +250,9 @@ function analyzeLeg(files) {
       if (tr.ending === 'kill') { L.tbKillMatched++; return; }
       if (tr.ending !== 'unfinished') return;
       const matched = log.some(function (k) {
-        return k && k.day === tr.day && ((k.w | 0) >= 4) &&
+        // waveKillLog day key is 'd' (killsLive uses 'day'); accept either.
+        const kd = (k && k.d != null) ? k.d : (k && k.day);
+        return k && kd === tr.day && ((k.w | 0) >= 4) &&
           (tr.fighters || []).indexOf(k.by) >= 0;
       });
       if (matched) { L.tbKillMatched++; L.pyrrhicKills++; }
