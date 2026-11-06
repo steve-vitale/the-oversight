@@ -481,11 +481,22 @@ function analyzeInstance(inst) {
           day: c.day, mootIn: c.mootIn, playerRole: c.playerRole,
           accused: c.accused, target: c.target,
           conveneLoopDay: null, conveneScholarDay: null,
+          firstTerminalScholarDay: null,
           lastStatus: c.status, lastResolution: c.resolution,
           lastScholarDay: (e.gameDay === undefined ? null : e.gameDay) });
         if (c.trial && rec.conveneLoopDay === null) {
           rec.conveneLoopDay = e.loopDay;
           rec.conveneScholarDay = (e.gameDay === undefined ? null : e.gameDay);
+        }
+        // A case that resolves WITHOUT a trial (e.g. accused_died)
+        // stops being held on the day its status leaves
+        // open/dormant/advisory — not at run end. (Stall-fix
+        // 2026-11-06: the first version used the last evening for
+        // every never-convened case and overstated a 2-day hold as
+        // 49 days on 48040 case_2.)
+        if (rec.firstTerminalScholarDay === null && c.status !== 'open'
+          && c.status !== 'dormant' && c.status !== 'advisory') {
+          rec.firstTerminalScholarDay = (e.gameDay === undefined ? null : e.gameDay);
         }
         rec.lastStatus = c.status; rec.lastResolution = c.resolution;
         rec.lastScholarDay = (e.gameDay === undefined ? null : e.gameDay);
@@ -510,7 +521,8 @@ function analyzeInstance(inst) {
         lastStatus: r.lastStatus, lastResolution: r.lastResolution,
         heldDays: null, strandedDaysDuringHold: 0, openAtEnd: false };
       if (eligible !== null) {
-        const endDay = r.conveneScholarDay !== null ? r.conveneScholarDay : r.lastScholarDay;
+        const endDay = r.conveneScholarDay !== null ? r.conveneScholarDay
+          : (r.firstTerminalScholarDay !== null ? r.firstTerminalScholarDay : r.lastScholarDay);
         if (endDay !== null && endDay !== undefined) {
           row.heldDays = endDay - eligible;
           let n = 0;

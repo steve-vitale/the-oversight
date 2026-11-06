@@ -222,6 +222,26 @@ check('loop-day rates: stranded loop-day with a summons counts once, any phase',
     && a.loopDayRates.nonStrandedLoopDays === 2
     && a.loopDayRates.nonStrandedLoopDaysWithSummons === 0;
 })());
+check('stall: case resolving without trial stops counting on its resolution day', (() => {
+  // Regression test for the stall-fix 2026-11-06: the first version
+  // used the last evening as the end day for every never-convened
+  // case, overstating a 2-day hold as 49 days (48040 case_2).
+  const row = (status, resolution) => ({ id: 'c9', status, day: 10, mootIn: 3,
+    accused: ['v_aria'], target: 'v_farid', playerRole: null,
+    trial: false, trialDay: null, awaitingPlayerVote: null, resolution });
+  const evenings = [];
+  for (let ld = 10; ld <= 17; ld++) {
+    const resolved = ld >= 13;
+    evenings.push({ loopDay: ld, gameDay: ld, eveningOutcome: 'policy-no-record', inside: true,
+      tile: 'haven', cases: [row(resolved ? 'resolved' : 'open', resolved ? 'accused_died' : null)] });
+  }
+  const inst = { transcript: { lines: [], markers: [] }, evenings, mornings: [] };
+  const a = analyzeInstance(inst);
+  const c9 = a.stall.cases.find((c) => c.id === 'c9');
+  return c9 && c9.heldDays === 0 && c9.conveneLoopDay === null
+    && a.stall.resolvedWithoutTrial.length === 1
+    && a.stall.openAtEnd.length === 0;
+})());
 check('stall: held days + stranded days during hold + open-at-end', (() => {
   const caseRow = (trial) => ({ id: 'c1', status: 'open', day: 10, mootIn: 3,
     accused: ['v_nikolai'], target: 'v_dante', playerRole: null,
