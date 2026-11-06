@@ -95,6 +95,7 @@ function legSummary(rows) {
   const accepted = seeds.reduce(function (m, s) { return m + (s.invitesAccepted || 0); }, 0);
   const declined = seeds.reduce(function (m, s) { return m + (s.invitesDeclined || 0); }, 0);
   const notOffered = seeds.reduce(function (m, s) { return m + (s.invitesNotOffered || 0); }, 0);
+  const answered = seeds.reduce(function (m, s) { return m + (s.inviteQuestionsAnswered || 0); }, 0);
   const pendingW4 = seeds.reduce(function (m, s) { return m + (s.pendingW4 || 0); }, 0);
   const pendingStaged = seeds.reduce(function (m, s) { return m + (s.pendingW4Staged || 0); }, 0);
   const outcomes = {};
@@ -116,7 +117,7 @@ function legSummary(rows) {
     postBloodKillRate: postBloodFights ? postBloodKills / postBloodFights : null,
     partyDays1: partyDays1, partyDays2: partyDays2,
     invites: invites, invitesAccepted: accepted, invitesDeclined: declined,
-    invitesNotOffered: notOffered,
+    invitesNotOffered: notOffered, inviteQuestionsAnswered: answered,
     pendingW4: pendingW4, pendingW4Staged: pendingStaged,
     pendingStagedShare: pendingW4 ? pendingStaged / pendingW4 : null,
   });
