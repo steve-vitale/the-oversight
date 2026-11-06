@@ -9,6 +9,17 @@ ref-arm = `competent-hunt`, HUNTSTAFF=1 (r107 lever as measured); prep-arm =
 branched from master 12cac2ec7; master has since moved to f2c4a6708
 (gorgeharness narration-only commits, no RNG change — see Telemetry).
 
+## Rebase note (after scoring)
+Master moved during the run (mootgate, gorgeharness, crisis-r132 C3,
+1415-coordination, killersurvive-a landings). The branch was rebased from
+12cac2ec7 onto master a7a443a88 — clean, no conflicts (none of the landed
+commits touch the r108 files). The proof test was re-run on the new base:
+ALL GREEN, with byte-identical P2/P2b numbers to the old base
+(5d gate-off == control-a == control-b at 6/12/20100; 20d ref-arm ==
+prep-off at 20/10/13360, 3 assignments, 3 huntLog). The scored panel above
+was run on 12cac2ec7 and stands as run; the instrument is verified neutral
+on the landing base. Merged locally as the rebase head; pending ship.
+
 ## Run provenance (stale-lock recovery + adoption)
 This run did NOT start r108. The 08:04 CST run (lock 2026-11-06T14:04:43Z,
 worktree registered 14:06:30Z) built the full substrate — huntstaff.js prep,
