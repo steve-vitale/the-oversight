@@ -79,7 +79,7 @@ const DIR = process.argv[2] || path.join(process.env.HOME || '/home/hatch',
   'workspace/goals/the-scattering-roguelite-survival-game/hidden_files/evidence/2026-11-05/landing-r104');
 const files = fs.readdirSync(DIR).filter(f => /census-\d+\.json$/.test(f)).sort();
 if (!files.length) { console.log('NO CENSUS FILES in ' + DIR); process.exit(2); }
-let scholarDeaths = 0, scholarDeathSeeds = 0, regMiss = 0, regTotal = 0;
+let scholarDeaths = 0, scholarDeathSeeds = 0, scholarDeathsUnresolved = 0, regMiss = 0, regTotal = 0;
 let wdMorePicksTotal = 0, wdMoreEmptyTotal = 0, betrayalHeld = 0, successionNoGo = 0, successionUnresolved = 0;
 let wdProbeSittings = 0, wdProbeSurfaced = 0, wdProbeMenuMore = 0, wdProbePageTurns = 0, wdProbePage3 = 0, wdProbeMaxPage = 0;
 let wdProbeCoveredSurfaced = 0, wdProbeCoveredMenuMore = 0, wdEarlyCovered = 0, wdPhase2Opened = 0, wdPhase2Yielded = 0;
@@ -97,6 +97,7 @@ let resWaterSkips = 0, resWaterComplete = 0, resWaterIncomplete = 0, resWaterEsc
 let resKcalSkips = 0, resKcalComplete = 0, resKcalIncomplete = 0, resKcalEscMiss = 0, resKcalFinArr = 0, resKcalFinNon = 0, resKcalNamed = 0, resKcalSucc = 0;
 let havenHydMaxStreak = 0, havenHydStreakSeeds = 0;
 let fleshArrivalSeeds = 0, fleshTestSeeds = 0, fleshExitSeeds = 0, fleshStuckSeeds = 0, fleshOpenSeeds = 0;
+let fleshNoArrivalTestedSeeds = 0, fleshNoArrivalUntestedSeeds = 0;
 let partyOffered = 0, partyPicks = 0, partyDry = 0, partySpoken = 0, partyAccepted = 0;
 let armorSeedSeeds = 0, armorBarkSeeds = 0, armorCraftSeeds = 0, armorTeleLineDisagree = 0, armorPileSeeds = 0;
 let outingAskSeeds = 0, outingWaitSeeds = 0, outingDepartSeeds = 0, outingKeptSeeds = 0;
@@ -254,6 +255,16 @@ for (const f of files) {
         if (e && e.safe) tested[mid] = e;
     } catch (e) {}
     const opens = trans.length > 0 && horizon < peak;
+    // r111 Fix A (r110-named): split NO-ARRIVAL into TESTED vs UNTESTED.
+    // A peak===0 seed may still have tested flesh from pack/counter before
+    // it ever sat unknown in the pantry (r110: all 4 NO-ARRIVAL seeds tested
+    // 2-3 mids, all safe). "Tested" counts transitions OR stream experiments
+    // OR experiment lines — transitions alone undercount (r110 seed 1042: 7
+    // experiments, 6 transitions; the poison test has no transition).
+    const testedAny = trans.length > 0 || (sc.experiments ?? 0) > 0 ||
+      (fa.experimentLines || []).length > 0;
+    const fleshLabel = peak === 0 ? (testedAny ? 'NO-ARRIVAL-TESTED' : 'NO-ARRIVAL-UNTESTED')
+      : (opens ? 'TAIL-MOVES' : 'STUCK');
     console.log(`  R62 FLESH kills=${(d.monsterKills || []).length} peak=${peak}` +
       (peakDay !== null ? ` (d${peakDay})` : '') + ` horizon=${horizon} ` +
       `exit=${peak - horizon} tests=${trans.length} ` +
@@ -261,7 +272,7 @@ for (const f of files) {
       `experiments=${sc.experiments ?? '?'} reveals=${sc.reveals ?? '?'} ` +
       `poison=${sc.poisonVerdicts ?? '?'} rot=${sc.rotLines ?? '?'}] ` +
       `safeAtHorizon=${Object.keys(tested).join(',') || 'none'} -> ` +
-      (peak === 0 ? 'NO-ARRIVAL' : (opens ? 'TAIL-MOVES' : 'STUCK')));
+      fleshLabel);
     for (const t of trans) console.log(`    TEST d${t.day} ${t.mid} how=${t.how} by=${t.testedBy}`);
     for (const s of (fa.experimentLines || [])) console.log(`    EXPERIMENT: ${s}`);
     for (const s of (fa.haulSeenLines || [])) console.log(`    HAUL-SEEN: ${s}`);
@@ -270,6 +281,8 @@ for (const f of files) {
     fleshExitSeeds += (peak > 0 && horizon < peak ? 1 : 0);
     fleshOpenSeeds += (peak > 0 && trans.length > 0 && horizon < peak ? 1 : 0);
     fleshStuckSeeds += (peak > 0 && horizon === peak ? 1 : 0);
+    fleshNoArrivalTestedSeeds += (peak === 0 && testedAny ? 1 : 0);
+    fleshNoArrivalUntestedSeeds += (peak === 0 && !testedAny ? 1 : 0);
   }
   for (const s of ((d.r41Summary || {}).wdMoreSamples || [])) console.log(`  WIND-DOWN MORE: ${s}`);
   for (const s of ((d.r41Summary || {}).wdProbeSamples || [])) console.log(`  WD PROBE: ${s}`);
@@ -434,8 +447,6 @@ for (const f of files) {
     const flag = (latency < 0 || latency > 4) ? ' <-- OUTSIDE [0,4] WINDOW' : (latency >= 2 ? ' <-- LIVE 2-4d LATENCY (owed item)' : '');
     console.log(`  SCHOLAR DEATH: ${nameOf(m.from)} d${dd} cause=${cause} -> mantle ${nameOf(m.to)} d${m.day} latency=${latency}${flag}`);
   }
-  scholarDeaths += seedScholarDeaths;
-  if (seedScholarDeaths) scholarDeathSeeds++;
   // No-successor check: the final holder in the chain — did they die
   // with no later mantle entry?
   const finalHolder = sortedMantle.length ? sortedMantle[sortedMantle.length - 1].to
@@ -443,17 +454,28 @@ for (const f of files) {
   if (finalHolder) {
     const fdd = deathDays.get(finalHolder);
     if (fdd !== undefined) {
-      // A mantle entry FROM the final holder would make them non-final;
-      // by construction there is none, so this death has no successor.
+      // r111 Fix B (r110-named): a final-holder death IS a scholar death
+      // even with no mantle entry from them — count it in seedScholarDeaths
+      // (r110 showed scholarDeaths=2 for 3 scholar deaths; the d28 one was
+      // invisible in the summary). A mantle entry FROM the final holder
+      // would make them non-final; by construction there is none, so this
+      // death is never double-counted with the mantle loop above.
+      seedScholarDeaths++;
       if (fdd <= horizon - 4) {
         successionNoGo++;
-        console.log(`  SCHOLAR NO-SUCCESSOR NO-GO: final holder ${nameOf(finalHolder)} died d${fdd}, horizon d${horizon}, no mantle entry follows`);
+        console.log(`  SCHOLAR NO-SUCCESSOR NO-GO: final holder ${nameOf(finalHolder)} died d${fdd}, horizon d${horizon}, no mantle entry follows — counted in scholarDeaths`);
       } else {
         successionUnresolved++;
-        console.log(`  SCHOLAR UNRESOLVED-AT-HORIZON: final holder ${nameOf(finalHolder)} died d${fdd}, horizon d${horizon} (inside +4 tail — honestly unresolved, not NO-GO)`);
+        scholarDeathsUnresolved++;
+        console.log(`  SCHOLAR UNRESOLVED-AT-HORIZON: final holder ${nameOf(finalHolder)} died d${fdd}, horizon d${horizon} (inside +4 tail — honestly unresolved, not NO-GO) — counted in scholarDeaths (unresolved)`);
       }
     }
   }
+  // Accumulate AFTER the final-holder block: seedScholarDeaths now includes
+  // final-holder deaths (Fix B), so a seed whose ONLY scholar death is the
+  // final holder still counts as a scholar-death seed.
+  scholarDeaths += seedScholarDeaths;
+  if (seedScholarDeaths) scholarDeathSeeds++;
   // --- R46 contest ledger + death autopsy (recomputed, not trusted) ---
   const ledger = d.contestLedger || [];
   const autopsies = d.contestDeathAutopsies || [];
@@ -822,7 +844,7 @@ for (const f of files) {
   void scholarIdAt;
 }
 console.log(`SUMMARY: starvationDeaths=${starvDeaths} unexplained=${starvUnexplained} ` +
-  `griefMiss=${regMiss}/${regTotal} scholarDeaths=${scholarDeaths} on ${scholarDeathSeeds}/${files.length} seeds`);
+  `griefMiss=${regMiss}/${regTotal} scholarDeaths=${scholarDeaths} (unresolved=${scholarDeathsUnresolved}) on ${scholarDeathSeeds}/${files.length} seeds`);
 console.log(`CONTEST SUMMARY: fired=${contestFired} ended=${contestEnded} openAtHorizon=${contestOpen} ` +
   `orphanEnds=${contestOrphanEnd} deathsWithContext=${contestDeathsContext} deathsMissing=${contestDeathsMissing} ` +
   `joinArtifacts=${contestJoinArtifacts} ` +
@@ -837,7 +859,7 @@ console.log(`HORIZON PANTRY (r60 Q-A): seeds=${horizonSeeds} hungry=${horizonFai
    horizonFails === 1 ? 'ONE-SEED (r58 outlier shape, watch continues)' : 'FED (no horizon collapse)'));
 console.log(`R66 REVISED GATE (r61): starvationDeaths=${starvDeaths} slideSeeds=${slideSeeds} bandSeeds=${slideBandSeeds} noSlideSeeds=${slideNoSlideSeeds} -> ` +
   (starvDeaths > 0 || slideSeeds > 0 ? 'HUNGRY (starvation death or scholar-kcal slide)' : 'NOT-HUNGRY (thin pantry alone is WATCH, not HUNGRY)'));
-console.log(`R62 FLESH (monster-meat tail): arrivalSeeds=${fleshArrivalSeeds}/${files.length} testSeeds=${fleshTestSeeds} exitSeeds=${fleshExitSeeds} stuckSeeds=${fleshStuckSeeds} openSeeds=${fleshOpenSeeds} ` +
+console.log(`R62 FLESH (monster-meat tail): arrivalSeeds=${fleshArrivalSeeds}/${files.length} testSeeds=${fleshTestSeeds} exitSeeds=${fleshExitSeeds} stuckSeeds=${fleshStuckSeeds} openSeeds=${fleshOpenSeeds} noArrivalTested=${fleshNoArrivalTestedSeeds} noArrivalUntested=${fleshNoArrivalUntestedSeeds} ` +
   (fleshArrivalSeeds === 0 ? 'VACUOUS (no flesh reached a pantry)' :
    fleshOpenSeeds > 0 ? 'CHANNEL OPENS (a seed with both a test and a pantry exit)' :
    'CHANNEL STUCK (flesh arrives but never leaves, or tests without exits)'));
