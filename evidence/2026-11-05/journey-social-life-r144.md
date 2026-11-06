@@ -250,5 +250,21 @@ driver from this note. Seed band for the next social panel must be fresh
 
 ## Closeout note
 
-- [TO BE FILLED: rebase base + SHAs, proof re-runs, gate result,
-  telemetry, rotation read-back, lock deletion.]
+- **Closeout (main session, 2026-11-06 ~02:40Z):** the 19:00 CST Lane B
+  run timed out before closeout; verified DEAD (registry heartbeat
+  01:50:29Z, zero worker processes, no heartbeat-loop process —
+  orphan-heartbeat pattern). Rebased onto master `98c68bf5e` (Loop B
+  0030Z toggle-rescreen landing) — clean, 4/4 picks, zero conflicts.
+  Branch SHAs after rebase: `4cdc81d4e` (prereg, driver + analyzer
+  M4 section), `cab71a76f` (goalFollow dedupe fix — data only —
+  + proof test), `5e9ab1705` (evidence: 4 seed JSONs, analysis,
+  panel log), `f3754630e` (run note gate result). Proof test
+  re-run on the rebased tip: `scripts/test-goal-follow-dedupe-r144.js`
+  PASS exit 0 (no exact-duplicate goalFollow lines; no lead
+  "someone asked me" pair). Gate 281/9 pre-rebase, adjudicated
+  standing 6 + cache-flags flake + 2 load timeouts (all three
+  suspects pass standalone). Telemetry: 5 l3.* keys LOUD-disappeared
+  — EXPLAINED schema drift, baseline NOT rolled. Rotation-b 5→6
+  (crisis next) and lock deletion (run_id `2026-11-06T00:55:52Z`,
+  read before deleting) follow the merge; verified by read-back and
+  recorded in the memory note + goal entry.
