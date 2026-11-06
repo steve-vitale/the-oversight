@@ -137,11 +137,32 @@ bindings hold.
 
 ## build-smallfixes recovery (parallel, landed in this closeout)
 
-[PENDING — filled after the rebase + gate + merge.]
+Merged `8ee4aed6e` (two commits: `3e82c17d1` preregs + pocket_sand
+flee-order fix + raid-cooldown ship; `8ee4aed6e` recovery: results +
+panels + gate). Pocket_sand fix (#1667): the flee check (HP<35%)
+no longer pre-empts abilityPressPlay's losing window (HP<50%).
+Raid-cooldown ship (#327): post-raid cooldown on young nationals.
+Proofs re-run post-rebase on the landed tree: pocket_sand 13/13,
+raid-density 28/28, raid-ship 8/8 — all green. Verdicts: pocket_sand
+GO (panel press rate 96.7% vs 0% control); raid-density ship GO with
+ONE disclosed marginal guardrail miss (median survival −11d vs −10d
+bar, no new death mode, no plausible harm path). The rebase needed
+three attempts: master moved twice mid-closeout (0821Z evidence,
+stageally-confirm-b, r107, then smallfixes itself); the final rebase
+was onto the explicit SHA to dodge a stale-ref read that based one
+attempt on a3f59fe35 after master had moved to 8ee4aed6e.
 
 ## Gate
 
-[PENDING — filled after the gate run.]
+`node scripts/check.js --quick` on the rebased smallfixes tree:
+**283 passed, 7 failed in 1002s** (log: goal hidden_files
+`check-smallfixes-postrebase-20261106.log`). The 7 are the standing
+set only — measurement-proof-update, measurement-workflow,
+mobile-combat-cadence, occupation-panels, phone-frame-proof,
+establishment-r20-fixes, plus capable-bot (base failure,
+control-verified). No new failures. The one test file that landed on
+master after the gate run (r107 huntwire proof) was run standalone
+on the merged tree: ALL GREEN. Gate verdict: GO for landing.
 
 ## Metric review
 
