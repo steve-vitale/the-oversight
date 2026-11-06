@@ -295,8 +295,17 @@ census.integrationStage,week2.deadBearerMentions, per seed.
 
 ## Gate
 
-[GATE PENDING — check.js --quick running in worktree at note time;
-result to be filled before commit.]
+Filled in by the main-session closeout (coordinator timed out; its gate run
+was killed mid-progress, log truncated at 1 line with no summary):
+check.js --quick on the rebased tip c26eeeb89 (base 49215d0f8):
+**283 passed, 7 failed in 728s**. The 7 failures are exactly the standing
+set (measurement-proof-update, measurement-workflow, mobile-combat-cadence,
+occupation-panels, phone-frame-proof, establishment-r20-fixes) plus
+test-capable-bot-20261014 (39/1, "food deed at first use", seed 1234) —
+the same failure the summary-a closeout control-verified as a pre-existing
+BASE failure on fc7608ba3 without any fix. Identical failure set to the
+summary-a gate 3 run. This arm changes no src/js, so the gate is clean
+for its purpose.
 
 ## Seed-band freshness re-check (skill: local_seed_band_freshness)
 
