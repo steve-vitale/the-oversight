@@ -325,6 +325,40 @@ function analyzeInstance(inst) {
       text: l.text, position: gc.positionAt(markers, l.idx) });
   }
 
+  // Catch-up summaries (sim-catchup-summary-a 2026-11-06): framing +
+  // burst/settle summary lines, with parsed counts (the revised
+  // ledger's input). A summary line must never be SAID inside a
+  // stranded window — delivery happens at the fire on return, never
+  // while away — so any summary whose idx falls inside a stranded
+  // sleep pair, or whose phase is upkeep on a stranded morning, is
+  // recorded here for the compare to fail on. Reads only.
+  const allSummaries = [];
+  for (const l of lines) {
+    const p = gc.parseSummaryLine(l.text);
+    if (!p) continue;
+    allSummaries.push({ idx: l.idx, loopDay: l.loopDay, phase: l.phase, part: l.part,
+      text: l.text, parsed: p, position: gc.positionAt(markers, l.idx) });
+  }
+  const strandedSummaries = [];
+  for (const s of stranded) {
+    const pair = sleepPair(markers, s.loopDay);
+    if (!pair) continue;
+    for (const sm of allSummaries) {
+      if (sm.idx > pair.start.idx && sm.idx < pair.end.idx) {
+        strandedSummaries.push({ idx: sm.idx, loopDay: sm.loopDay, phase: sm.phase,
+          text: sm.text, window: 'sleep', strandedLoopDay: s.loopDay });
+      }
+    }
+  }
+  for (const m of mornings) {
+    for (const sm of allSummaries) {
+      if (sm.phase === 'upkeep' && sm.loopDay === m.loopDay) {
+        strandedSummaries.push({ idx: sm.idx, loopDay: sm.loopDay, phase: sm.phase,
+          text: sm.text, window: 'upkeep', strandedLoopDay: m.loopDay - 1 });
+      }
+    }
+  }
+
   const sSleep = stranded.filter((s) => s.sleepWindow);
   const sSleepEvents = sSleep.reduce((t, s) => t + (s.sleepWindow.events || 0), 0);
   const sSleepLines = sSleep.reduce((t, s) => t + (s.sleepWindow.burstLines || 0), 0);
@@ -338,7 +372,7 @@ function analyzeInstance(inst) {
     nonStranded: { sleepWindows: nsSleepWindows, sleepEvents: nsSleepEvents, sleepLines: nsSleepLines,
       sleepHits: nsSleepHits, upkeepWindows: nsUpkeepWindows, upkeepEvents: nsUpkeepEvents,
       upkeepLines: nsUpkeepLines, upkeepHits: nsUpkeepHits },
-    allBursts, allSettles };
+    allBursts, allSettles, allSummaries, strandedSummaries };
 }
 
 // Trim a full transcript for the corpus file: keep stranded sleep
@@ -357,7 +391,7 @@ function trimTranscript(inst, analysis) {
     for (const l of lines) if (l.phase === 'upkeep' && l.loopDay === m.loopDay) keepIdx.add(l.idx);
   }
   for (const l of lines) {
-    if (gc.kindOf(l.text) || sn.mealBeat(l.text) || sn.isBeddingLine(l.text) || sn.isNightOutLine(l.text)
+    if (gc.kindOf(l.text) || gc.parseSummaryLine(l.text) || sn.mealBeat(l.text) || sn.isBeddingLine(l.text) || sn.isNightOutLine(l.text)
       || sn.isSleepRefusedLine(l.text) || sn.isWokeStartLine(l.text)
       || sn.isPantryHallLine(l.text)) keepIdx.add(l.idx);
   }

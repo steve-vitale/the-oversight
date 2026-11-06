@@ -121,7 +121,76 @@ function classifyGossipWindow(lines, markers) {
     settleLines: hits.filter((h) => h.kind === 'settle').length };
 }
 
+// ---- catch-up summaries (sim-catchup-summary-a 2026-11-06) ----
+// The summary arm replaces verbatim held-line delivery with at most
+// three lines per return: the framing line (unchanged from the rereg
+// fix) + one burst summary + one settle summary. These classifiers
+// are the SINGLE source of truth for the summary text formats — the
+// driver, the compare, and the proof test all parse through here, so
+// a wording change in game.js that breaks the parse fails the run
+// instead of silently unaccounting lines. Pure string functions: no
+// state, no RNG. The formats are preregistered in
+// evidence/2026-11-06/sim-catchup-summary-a-prereg.md — the code in
+// game.js must emit exactly these templates.
+//
+// Framing (verbatim rereg line):
+//   While you were away, the haven argued over what to call it — they catch you up at the fire:
+// Burst summary (one line per return, >= 1 held burst line):
+//   They argued over names for 4 beasts — 4 words, 4 debates: "The Loud Beast" (2), "The Ugly Beast" (2).
+//   Header carries the word count and the debate count SEPARATELY
+//   (per-kind ledger); each clause is "FirstProposal" (n) with n =
+//   that monster's held burst lines (normally 2 = 1 word + 1 debate).
+// Settle summary (one line per return, >= 1 held settle line):
+//   They settled names for 5 beasts: "Big-Eyes", "Ugly-Eyes".
+//   Beast count == names listed == held settle lines (1 per beast).
+const FRAMING_RE = /^While you were away, the haven argued over what to call it — they catch you up at the fire:$/;
+const BURST_SUMMARY_RE = /^They argued over names for (\d+) beasts? — (\d+) words?, (\d+) debates?: (.*)\.$/;
+const SETTLE_SUMMARY_RE = /^They settled names for (\d+) beasts?: (.*)\.$/;
+const SUMMARY_CLAUSE_RE = /"([^"]*)" \((\d+)\)/g;
+const SUMMARY_NAME_RE = /"([^"]*)"/g;
+
+function isFramingLine(text) { return FRAMING_RE.test(text || ''); }
+function isBurstSummaryLine(text) { return BURST_SUMMARY_RE.test(text || ''); }
+function isSettleSummaryLine(text) { return SETTLE_SUMMARY_RE.test(text || ''); }
+function isSummaryLine(text) {
+  return isFramingLine(text) || isBurstSummaryLine(text) || isSettleSummaryLine(text);
+}
+// parseSummaryLine(text): {kind:'framing'} | {kind:'burst', beasts,
+// words, debates, clauses:[{name, n}]} | {kind:'settle', beasts,
+// names:[...]} | null. Returns null (not an error) for non-summary
+// text. A burst summary whose clause counts do not sum to
+// words+debates, or a settle summary whose names do not number
+// `beasts`, parses with `inconsistent: true` — the compare fails the
+// run on it; the parser never silently repairs counts.
+function parseSummaryLine(text) {
+  if (!text) return null;
+  if (FRAMING_RE.test(text)) return { kind: 'framing' };
+  let m = BURST_SUMMARY_RE.exec(text);
+  if (m) {
+    const beasts = parseInt(m[1], 10), words = parseInt(m[2], 10), debates = parseInt(m[3], 10);
+    const clauses = [];
+    let cm;
+    SUMMARY_CLAUSE_RE.lastIndex = 0;
+    while ((cm = SUMMARY_CLAUSE_RE.exec(m[4])) !== null) clauses.push({ name: cm[1], n: parseInt(cm[2], 10) });
+    const clauseSum = clauses.reduce((t, c) => t + c.n, 0);
+    return { kind: 'burst', beasts, words, debates, clauses,
+      inconsistent: clauses.length !== beasts || clauseSum !== words + debates };
+  }
+  m = SETTLE_SUMMARY_RE.exec(text);
+  if (m) {
+    const beasts = parseInt(m[1], 10);
+    const names = [];
+    let nm;
+    SUMMARY_NAME_RE.lastIndex = 0;
+    while ((nm = SUMMARY_NAME_RE.exec(m[2])) !== null) names.push(nm[1]);
+    return { kind: 'settle', beasts, names, inconsistent: names.length !== beasts };
+  }
+  return null;
+}
+
 module.exports = { isGossipWordLine, isDebateLine, isSettleLine,
   isGossipBurstLine, kindOf, scholarPos, positionAt,
   classifyGossipWindow,
+  isFramingLine, isBurstSummaryLine, isSettleSummaryLine,
+  isSummaryLine, parseSummaryLine,
   GOSSIP_WORD_RE, GOSSIP_DEBATE_RE, SETTLE_RE };
