@@ -18,7 +18,12 @@ ALL GREEN, with byte-identical P2/P2b numbers to the old base
 (5d gate-off == control-a == control-b at 6/12/20100; 20d ref-arm ==
 prep-off at 20/10/13360, 3 assignments, 3 huntLog). The scored panel above
 was run on 12cac2ec7 and stands as run; the instrument is verified neutral
-on the landing base. Merged locally as the rebase head; pending ship.
+on the landing base.
+Second rebase: master moved again before the merge (fightinterior-b landed
+5 commits, 304ced6cf — a taxonomy-string correction in closeTrace, no r108
+file overlap). Rebased clean onto 304ced6cf; proof re-run ALL GREEN on the
+new base (same P2/P2b numbers). Merged locally as the rebase head; pending
+ship.
 
 ## Run provenance (stale-lock recovery + adoption)
 This run did NOT start r108. The 08:04 CST run (lock 2026-11-06T14:04:43Z,
