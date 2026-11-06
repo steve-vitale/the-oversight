@@ -556,20 +556,24 @@ async function liveLegs() {
     check('tb-row-no-errors', inst3.t.instrumentErrors.length === 0, JSON.stringify(inst3.t.instrumentErrors));
   })();
 
-  // 22. Live invite leg: 40 days on seed 55001 (gate opens ~day 28 there) —
+  // 22. Live invite leg: 60 days on seed 55002 (gate opens day 38 there) —
   // the staging path must ENGAGE: invites attempted, at least one ask
   // reaching a villager and getting an answer (accepted + declined > 0 —
   // the ask lands instead of dying not-offered), and a party day in the
-  // snapshots. Acceptance itself is NOT asserted here: on this seed the
-  // armed pool is alone-goal (see the prereg smoke note — 5 declines,
-  // 0 accepts is the seed's answer, not a broken probe), so whether
-  // accepts land is the judged 8-seed run's question. The smoke proves
-  // the mechanism engages; the run proves whether it stages.
+  // snapshots. Acceptance itself is NOT asserted here: whether accepts
+  // land is the judged 8-seed run's question. The smoke proves the
+  // mechanism engages; the run proves whether it stages.
+  // RE-BASELINED by the coordinator on landing (2026-11-06): master moved
+  // under the arm (journey r107 + summary-a) and seed 55001's trajectory
+  // stalls below the standing-75 gate on current master, so the 55001/40d
+  // smoke no longer engages (0 invites, deterministic). 55002 engages
+  // day 38 (verified by a 60d leg before this edit: invites 4, accepted
+  // 3, partyDays 45). Assertions unchanged; only the seed/horizon moved.
   const tmp = '/tmp/stageally-proof-' + process.pid;
   fs.mkdirSync(tmp, { recursive: true });
   const envBase = Object.assign({}, process.env, { REPO: REPO, OUTDIR: tmp, POLICY: 'staged' });
-  execSync('node scripts/stageally-driver-20261106.js', { cwd: REPO, env: Object.assign({}, envBase, { DAYS: '40', SEEDS: '55001', RUN: 'proof-invite' }), stdio: 'pipe' });
-  const inv = JSON.parse(fs.readFileSync(path.join(tmp, 'stageally-s55001-proof-invite.json'), 'utf8'));
+  execSync('node scripts/stageally-driver-20261106.js', { cwd: REPO, env: Object.assign({}, envBase, { DAYS: '60', SEEDS: '55002', RUN: 'proof-invite' }), stdio: 'pipe' });
+  const inv = JSON.parse(fs.readFileSync(path.join(tmp, 'stageally-s55002-proof-invite.json'), 'utf8'));
   const invStats = inv.stageallyStats || {};
   const partyDays = (inv.daily || []).filter(function (d) { return (d.partySize | 0) >= 1; }).length;
   const answeredAsks = (invStats.accepted || 0) + (invStats.declined || 0);
