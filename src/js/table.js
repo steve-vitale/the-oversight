@@ -5,6 +5,9 @@
 //   - tableSeat()
 //   - tableSeatLine()
 //   - tableWithdrawLine()
+//   - tableMissingBars()
+//   - tableHoldingLine()
+//   - tableReturnLine()
 //   - fullSeatShortfall()
 //   - tableEarnedPaths()
 //   - tableBranch(pathId)
@@ -193,14 +196,15 @@
       } catch (e) { return { ready: false, missing: [], line: '' }; }
     },
 
-    // tableWithdrawLine: the withdrawal beat names the failing bar aloud,
-    // extracted so the voicing is proof-testable without running the dawn flow.
-    // journey-scale r20 (2026-10-22): the old copy always blamed the deeds —
-    // but a seat can slip on integration stage while every deed stands (the
-    // r19 withdrawn-seat sim proved it live). The beat must name the real
-    // loss, never a stock excuse — the System knows exactly what slipped.
-    // With no readable detail it falls back to the old generic line.
-    tableWithdrawLine(seat) {
+    // tableMissingBars: the honest naming of what the case still lacks —
+    // the single source of truth for the withdrawal beat AND the holding
+    // beat. journey-scale r20 (2026-10-22): the old copy always blamed
+    // the deeds — but a seat can slip on integration stage while every
+    // deed stands (the r19 withdrawn-seat sim proved it live). The beat
+    // must name the real loss, never a stock excuse — the System knows
+    // exactly what slipped. With no readable detail it falls back to the
+    // old generic line.
+    tableMissingBars(seat) {
       const d = (seat && seat.detail) || {};
       const missing = [];
       try {
@@ -219,8 +223,37 @@
         if (!d.foodDeeds)
           missing.push('the food-thesis unproven');
       } catch (e) {}
-      const named = missing.length ? missing.join('; ') : 'the deeds are not all done';
+      return missing.length ? missing.join('; ') : 'the deeds are not all done';
+    },
+
+    // tableWithdrawLine: the withdrawal beat names the failing bar aloud,
+    // extracted so the voicing is proof-testable without running the dawn
+    // flow. STICKY OFFER (Steve 2026-11-06): this line now voices ONLY
+    // the pre-offer beat — a table that was never announced. Once the
+    // table has been announced, a dipped bar holds the offer instead
+    // (tableHoldingLine); the withdrawal never fires on an offered seat.
+    tableWithdrawLine(seat) {
+      const named = this.tableMissingBars(seat);
       return `◈ THE TABLE — the ring of pale light flickers... and does not come. The System is embarrassed. "YOUR CASE IS NOT COMPLETE. ${named}. WE WILL... RESCHEDULE." The table is withdrawn — for now. It will be set again when the case is complete.`;
+    },
+
+    // tableHoldingLine: the holding beat (Steve 2026-11-06, sticky offer).
+    // The offer was made and a bar has since dipped: the table does not
+    // take back what it set. It names the real loss (same naming as the
+    // withdrawal beat — never a stock excuse) and waits: the seat stands
+    // when the case is whole again. Spoken once per dip (the caller gates
+    // on pg.tableHoldingTold), never every dawn.
+    tableHoldingLine(seat) {
+      const named = this.tableMissingBars(seat);
+      return `◈ THE TABLE — the ring of pale light holds its place, and does not come tonight. "THE CASE IS NOT COMPLETE. ${named}. BUT THE TABLE DOES NOT TAKE BACK WHAT IT SET. IT WAITS — COME WHEN THE CASE IS WHOLE."`;
+    },
+
+    // tableReturnLine: the re-fire beat (Steve 2026-11-06, sticky offer).
+    // The case is whole again after a dip: the offer the table held is
+    // still the village's. Spoken once, when the dawn check first sees
+    // the seat hold again after a holding was told.
+    tableReturnLine() {
+      return `◈ THE TABLE — the ring steadies, and the light comes back. "THE CASE IS WHOLE. THE SEAT THE TABLE OFFERED IS STILL YOURS. TAKE IT FROM HAVEN WHEN YOU ARE READY."`;
     },
 
     // TABLE-DEED VOICE (2026-10-21, backlog #738): the audit never voiced
@@ -782,15 +815,29 @@
         return;
       }
       if (pg.tableDone || T.phase === 'done') return;
-      // No seat: withdraw aloud, never silently (ledger.js's law).
+      // No seat: withdraw aloud, never silently (ledger.js's law) — BUT
+      // only when the table was never announced. STICKY OFFER (Steve
+      // 2026-11-06): once the table has been announced, a dipped bar
+      // never withdraws it. The table holds (once per dip, via
+      // pg.tableHoldingTold) and re-fires when the case is whole again;
+      // tableWaiting stays true so the Haven offer returns on recovery.
       const seat = this.tableSeat();
       if (seat.seat === 'none') {
+        if (pg.tableAnnounced) {
+          if (!pg.tableHoldingTold) {
+            pg.tableHoldingTold = true;
+            this.say(this.tableHoldingLine(seat));
+          }
+          try { this.save(); } catch (e) {}
+          return;
+        }
         pg.tableWaiting = false;
         this.say(this.tableWithdrawLine(seat));
         try { this.save(); } catch (e) {}
         return;
       }
       pg.tableDone = true;
+      pg.tableHoldingTold = false; // a sitting clears any held-offer flag
       T.seat = seat.seat; T.phase = 'paths'; T.path = null;
       // SEAT-TAKER DEFAULT (Steve 2026-10-26, item 495): a sitting that
       // starts without a choice (an older flow, a debug scene, a direct
@@ -892,10 +939,34 @@
         const pg = this.progState();
         if (pg.tableDone) return;
         const seat = this.tableSeat();
-        // lost the seat: the existing withdrawal beat, and a fresh
-        // announcement if the run qualifies again later
-        if (seat.seat === 'none') { pg.tableAnnounced = false; this.tableScene(); return; }
-        if (pg.tableAnnounced) return;
+        // STICKY OFFER (Steve 2026-11-06): once the table has been
+        // announced, a dipped bar never withdraws it — the table holds
+        // (once per dip) and the offer re-fires when the case is whole
+        // again. Only a table that was never announced is withdrawn aloud
+        // (the pre-offer "does not come" path, re-extended by the TABLE
+        // RE-FIRE on re-earning). Sitting stays gated on the LIVE seat
+        // (tablePreview/tableTakeSeat, unchanged): a dipped offer cannot
+        // be sat until the case is whole again.
+        if (seat.seat === 'none') {
+          if (pg.tableAnnounced) {
+            if (!pg.tableHoldingTold) {
+              pg.tableHoldingTold = true;
+              this.say(this.tableHoldingLine(seat));
+              try { this.save(); } catch (e) {}
+            }
+            return;
+          }
+          pg.tableAnnounced = false; this.tableScene(); return;
+        }
+        if (pg.tableAnnounced) {
+          // The case is whole again after a dip: the held offer re-fires.
+          if (pg.tableHoldingTold) {
+            pg.tableHoldingTold = false;
+            this.say(this.tableReturnLine());
+            try { this.save(); } catch (e) {}
+          }
+          return;
+        }
         // NO SPOILERS (Steve 2026-10-14: "Not just greyed out before 90,
         // nonexistent. Don't spoil the game for them."): before the seat can
         // be taken, the table does not exist for the player.
