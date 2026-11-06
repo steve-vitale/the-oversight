@@ -102,6 +102,8 @@ check('trace-absent-null', AN.tracePresent(null) === false);
       seed: seed, policy: policy, days: 100, endReason: 'village-lost', won: false,
       scaleRank: 'regional', unlockedWave: 4, standing: 150, readiness5: { veterans: 0 },
       waveKillLog: kills || [], daily: [], instrumentErrors: [], tbFights: tbFights, traces: traces,
+      // wavesFaced is a per-TYPE map: strike is wave 4, cancellation wave 5.
+      wavesFaced: { strike: 2, cancellation: 0 },
     };
   }
   const tbRow = { seq: 1, day: 80, mid: 'the_congregation', wave: 4, alliesAtEntry: 1, partyAtEntry: 1, outcome: 'lost', rounds: 6 };
@@ -118,6 +120,10 @@ check('trace-absent-null', AN.tracePresent(null) === false);
   check('analyze-unclassified-one', L.unclassified === 1, 'unclassified=' + L.unclassified);
   check('analyze-ending-counted', L.endings['scholar-death'] === 2, JSON.stringify(L.endings));
   check('analyze-trace-present', L.tracePresent === 2, 'tracePresent=' + L.tracePresent);
+  // wavesFaced is a per-type map: strike faced (wave 4) counts, a zero
+  // cancellation count (wave 5) does not.
+  check('analyze-w4faced-per-type-map', L.w4faced === 2, 'w4faced=' + L.w4faced);
+  check('analyze-w5faced-per-type-map', L.w5faced === 0, 'w5faced=' + L.w5faced);
   fs.rmSync(dir, { recursive: true, force: true });
 })();
 

@@ -96,6 +96,22 @@ function sizeNextLever(traces) {
   return { lostFights: lost.length, flips: flips, flipRows: flipRows, kills: kills, total: traces.length, ceilingRate: ceilingRate };
 }
 
+function waveMap() {
+  // wavesFaced is a per-TYPE count map (monster id -> times faced), not a
+  // per-wave count — count distinct faced types per wave from the roster.
+  // Fixed 2026-11-06: the first version read wavesFaced[4]/[5] and
+  // reported 0 faced on both legs while 59 wave-4 TB fights stood in
+  // the corpus. The underlying data is unchanged; only the read is fixed.
+  try {
+    const raw = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'src', 'data', 'monsters.json'), 'utf8'));
+    const list = Array.isArray(raw) ? raw : raw.monsters;
+    const map = {};
+    (list || []).forEach(function (m) { if (m && m.id) map[m.id] = (m.wave | 0) || 1; });
+    return map;
+  } catch (e) { return {}; }
+}
+const WAVE_BY_ID = waveMap();
+
 function analyzeLeg(files) {
   const legs = {};
   files.forEach(function (file) {
@@ -116,9 +132,19 @@ function analyzeLeg(files) {
     if (run.scaleRank === 'national' || run.scaleRank === 'global') L.national++;
     if (run.wavesFaced && run.wavesFaced.table) L.table++;
     if ((run.unlockedWave | 0) >= 4) L.w4unlocks++;
-    if (run.wavesFaced && ((run.wavesFaced[4] | 0) > 0 || (run.wavesFaced.w4 | 0) > 0)) L.w4faced++;
     if ((run.unlockedWave | 0) >= 5) L.w5unlocks++;
-    if (run.wavesFaced && ((run.wavesFaced[5] | 0) > 0 || (run.wavesFaced.w5 | 0) > 0)) L.w5faced++;
+    // wavesFaced is a per-type map: count distinct wave-4/5 types faced.
+    try {
+      const wf = run.wavesFaced || {};
+      let f4 = 0, f5 = 0;
+      Object.keys(wf).forEach(function (id) {
+        if (!(wf[id] > 0)) return;
+        if (WAVE_BY_ID[id] === 4) f4++;
+        if (WAVE_BY_ID[id] === 5) f5++;
+      });
+      if (f4 > 0) L.w4faced++;
+      if (f5 > 0) L.w5faced++;
+    } catch (e) {}
     const w4k = (run.waveKillLog || []).filter(function (e) { return ((e.w | 0) >= 4); }).length;
     const w5k = (run.waveKillLog || []).filter(function (e) { return ((e.w | 0) >= 5); }).length;
     L.w4kills += w4k; L.w5kills += w5k;
