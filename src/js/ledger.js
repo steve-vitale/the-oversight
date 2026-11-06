@@ -398,7 +398,22 @@
             // says it happens. The queue + flushLedgerBeats machinery already
             // exists for gated beats; combat just borrows it.
             const inCombat = !!(this.tbfight && !this.tbfight.over);
-            if (this._beatGate(beats[i].kind) && !inCombat) this._fireBeat(dim, i);
+            // ENDDAYBEATS-FIX (sim-enddaybeats-fix-a 2026-11-05): a
+            // gossip beat that would carry the "You overhear it at
+            // the fire" prefix (the FIRST gossip beat — only it gets
+            // the prefix, in _fireBeat) cannot fire while the scholar
+            // is away from the fire. Queue it like a combat deferral
+            // instead; it fires with its prefix on return. Later
+            // gossip beats carry no fire claim in their text and fire
+            // as before. The one R() draw inside beat.text() is
+            // deferred with the firing (see the prereg's RNG note).
+            let _awayOverhear = false;
+            try {
+              _awayOverhear = beats[i].kind === 'gossip'
+                && !(this.progState() || {}).selfTalkedAbout
+                && !(this.scholarAtHaven && this.scholarAtHaven());
+            } catch (e) {}
+            if (this._beatGate(beats[i].kind) && !inCombat && !_awayOverhear) this._fireBeat(dim, i);
             else if (!q.some(e => e.k === key)) {
               q.push({ k: key, dim, idx: i });
               if (q.length > 12) q.shift();
@@ -416,7 +431,21 @@
           const e = q[i];
           const beat = (LEDGER_BEATS[e.dim] || [])[e.idx];
           if (!beat || this._beatsFired()[e.k]) { q.splice(i, 1); continue; }
-          if (this._beatGate(beat.kind)) { q.splice(i, 1); this._fireBeat(e.dim, e.idx); }
+          if (this._beatGate(beat.kind)) {
+            // ENDDAYBEATS-FIX: a queued beat that would carry the
+            // "You overhear it at the fire" prefix stays queued while
+            // the scholar is away — the flush is at endDay, and a
+            // stranded scholar's sleep is exactly when it must not
+            // fire. It fires on the first endDay at Haven.
+            let _awayOverhear = false;
+            try {
+              _awayOverhear = beat.kind === 'gossip'
+                && !(this.progState() || {}).selfTalkedAbout
+                && !(this.scholarAtHaven && this.scholarAtHaven());
+            } catch (e) {}
+            if (_awayOverhear) continue;
+            q.splice(i, 1); this._fireBeat(e.dim, e.idx);
+          }
         }
       } catch (e) {}
       return null;

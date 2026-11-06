@@ -18034,9 +18034,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
                    `The retelling is already better than the event.`];
               const fragTail = (typeof this.pickFresh === 'function')
                 ? this.pickFresh(fragTails, 'gossip_frag') : fragTails[0];
-              this.say(`You catch fragments by the fire — ${this.displayName(teller)} telling ${this.displayName(listener)} about ${aboutWho}. ${fragTail}`);
-              // TRIAL DEED (longsim abilities r4): you heard a rumor at the fire.
-              try { this.noteTrialDeed('hear_10_rumors', 1); } catch (e2) {}
+              // ENDDAYBEATS-FIX (sim-enddaybeats-fix-a 2026-11-05): the
+              // fragments line is overheard AT the fire — a scholar asleep
+              // in the wild cannot catch it. GATE the say (and the
+              // hear_10_rumors hearing note — hearing requires presence),
+              // do NOT queue: fireside chatter is ephemeral and up to 8
+              // lines a night would flood the shared 20-cap haven-news
+              // relay and evict real news. The gossip itself still
+              // spreads (heard/distortion/rep above run identically);
+              // only the scholar's overhearing waits for the fire.
+              if (this.scholarAtHaven()) {
+                this.say(`You catch fragments by the fire — ${this.displayName(teller)} telling ${this.displayName(listener)} about ${aboutWho}. ${fragTail}`);
+                // TRIAL DEED (longsim abilities r4): you heard a rumor at the fire.
+                try { this.noteTrialDeed('hear_10_rumors', 1); } catch (e2) {}
+              }
             }
           }
           // Apply reputation to the SUBJECT of the gossip, not the listener.
@@ -22227,7 +22238,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       ov.trust = Math.max(0, (ov.trust || 0) - 10);
       ov.commons.tension = Math.min(100, ov.commons.tension + 10);
-      this.say(`🌙 Raid — ${ov.name} came in the night from the ${dir}. They ${what}. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)`);
+      // ENDDAYBEATS-FIX (sim-enddaybeats-fix-a 2026-11-05): the raid
+      // on Haven's gardens/pantry is NEWS — it stays true on return,
+      // so it goes through the haven-news relay (said at the fire on
+      // the next Haven night) instead of into a stranded scholar's
+      // sleep. The take, the trust move, and the gossip seed below
+      // run identically either way.
+      this.sayHavenNews(`🌙 Raid — ${ov.name} came in the night from the ${dir}. They ${what}. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)`, 'raid');
       try { this.seedGossip('raid', { village: ov.id }, []); } catch (e) {}
     },
 
@@ -30622,7 +30639,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           const p = speaker && this.getPerson ? this.getPerson(speaker) : null;
           first = String((p && p.name) || 'Someone').split(' ')[0];
         } catch (eN) {}
-        this.say('🍽️ ' + first + ' ' + line);
+        // ENDDAYBEATS-FIX (sim-enddaybeats-fix-a 2026-11-05): the
+        // deposit-gate day-voice is village business at the fire — a
+        // scholar starving in the wild must not hear it as if watching
+        // the shelves. GATE the say only; the voiceDay stamp above is
+        // already consumed (the village said it; the absent scholar
+        // does not hear it). No queue: a same-day voice is stale by
+        // return.
+        if (this.scholarAtHaven()) this.say('🍽️ ' + first + ' ' + line);
       } catch (eV) { console.warn('[depositgate] day voice', eV); }
     },
 
@@ -30797,7 +30821,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           const p = this.getPerson ? this.getPerson(speaker) : null;
           first = String((p && p.name) || 'Someone').split(' ')[0];
         } catch (eN) {}
-        this.say('🍽️ ' + first + ' ' + line);
+        // ENDDAYBEATS-FIX (sim-enddaybeats-fix-a 2026-11-05): same
+        // gate as the deposit-gate voice — the plenty day-voice is
+        // said at the fire, not to a scholar in the wild. The
+        // voiceDay stamp above is already consumed; no queue (a
+        // same-day voice is stale by return).
+        if (this.scholarAtHaven()) this.say('🍽️ ' + first + ' ' + line);
         } // end eased voice (voiceDay-guarded above)
         // PLENTYDEPRI=2 BUFFER STAND-DOWN VOICE (2026-10-23): when the ease
         // stood down on a thin buffer, the village hears why — the villager
@@ -30823,7 +30852,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             const p2 = sdSpeaker && this.getPerson ? this.getPerson(sdSpeaker) : null;
             sdFirst = String((p2 && p2.name) || 'Someone').split(' ')[0];
           } catch (eN2) {}
-          this.say('🍽️ ' + sdFirst + ' ' + sdLine);
+          // ENDDAYBEATS-FIX (sim-enddaybeats-fix-a 2026-11-05): same
+          // gate — the stand-down voice is said at the fire.
+          // standDownVoiceDay above is already consumed; no queue.
+          if (this.scholarAtHaven()) this.say('🍽️ ' + sdFirst + ' ' + sdLine);
         }
       } catch (eV) { console.warn('[plentydepri] day voice', eV); }
     },

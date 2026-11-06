@@ -156,7 +156,11 @@
     // Player-declared — reactive, never calendar-scripted.
     raiseAidCrisis(name, wave) {
       if (this.aidCrisis()) {
-        this.say('There\'s already teeth at the door — one crisis at a time. Handle this one first.');
+        // ENDDAYBEATS-FIX (sim-enddaybeats-fix-a 2026-11-05): the
+        // already-at-the-door echo is spoken to a scholar at Haven.
+        // Away, the crisis state above is untouched and the echo is
+        // not said — the scholar hears nothing they cannot answer.
+        if (this.scholarAtHaven()) this.say('There\'s already teeth at the door — one crisis at a time. Handle this one first.');
         return null;
       }
       this.state.aidCrisis = {
@@ -166,7 +170,15 @@
       };
       this.state.aidRunners = this.state.aidRunners || [];
       this.state.pendingHelp = this.state.pendingHelp || [];
-      this.say('🚨 ' + this.state.aidCrisis.name + ' is at Haven\'s door. The village looks to you. Four ways to call: a RUNNER (slow, dangerous), a SIGNAL FIRE (fast, loud, everyone sees), the SYSTEM RELAY (if it can carry voices), or an ABILITY CRY (if your build has one). Each with honest costs.');
+      // ENDDAYBEATS-FIX (sim-enddaybeats-fix-a 2026-11-05): the summons
+      // is actionable ONLY at Haven — a scholar asleep in the wild
+      // cannot answer any of the four ways. GATE it (do NOT queue: a
+      // queued summons would arrive stale, after the village already
+      // fought or the crisis resolved). The crisis state above and the
+      // journalNote below are untouched, and the 🐗 raid line carries
+      // the news through the relay; a crisis still live on return
+      // surfaces in the Haven panel with all four call buttons.
+      if (this.scholarAtHaven()) this.say('🚨 ' + this.state.aidCrisis.name + ' is at Haven\'s door. The village looks to you. Four ways to call: a RUNNER (slow, dangerous), a SIGNAL FIRE (fast, loud, everyone sees), the SYSTEM RELAY (if it can carry voices), or an ABILITY CRY (if your build has one). Each with honest costs.');
       try { if (this.journalNote) this.journalNote('village', 'aid', this.state.aidCrisis.name + ' at the door, day ' + _day(this) + '.'); } catch (e) {}
       return this.state.aidCrisis;
     },

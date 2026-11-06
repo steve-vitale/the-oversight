@@ -561,8 +561,14 @@
       }
       try { if (this.syncMonsterAlias) this.syncMonsterAlias(); } catch (e) {}
       const names = raiders.map(mname).join(', ');
-      this.say(`🐗 RAID — ${raiders.length === 1 ? 'a raider' : raiders.length + ' raiders'} (${names}) hit Haven in the night, drawn by the smell of the pantry!` +
-        (palisade ? " The palisade's stakes take their toll as they come over the wall." : ' No walls. No warning but the noise.'));
+      // ENDDAYBEATS-FIX (sim-enddaybeats-fix-a 2026-11-05): the raid
+      // announcement is NEWS — it stays true on return, so it goes
+      // through the haven-news relay (said at the fire on the next
+      // Haven night) instead of into a stranded scholar's sleep. The
+      // draft, the palisade damage, and the crisis below run
+      // identically either way.
+      this.sayHavenNews(`🐗 RAID — ${raiders.length === 1 ? 'a raider' : raiders.length + ' raiders'} (${names}) hit Haven in the night, drawn by the smell of the pantry!` +
+        (palisade ? " The palisade's stakes take their toll as they come over the wall." : ' No walls. No warning but the noise.'), 'raid');
       // PALISADE-ESCALATION BEAT (2026-10-25, sim-palisade-a): the
       // carried blank — a wave-3+ raider at the wall used to read
       // exactly like any other name in the raid list. NARRATION ONLY:
@@ -585,7 +591,8 @@
           } catch (e) {}
         }
         if (_raidWmax >= 3 && _raidBig) {
-          this.say(`🐗⚠️ One of them is bigger than the usual teeth at the door — ${mname(_raidBig)} came with this raid, and the wall was not built for its kind.`);
+          // ENDDAYBEATS-FIX: raid news — relay, same as the 🐗 line.
+          this.sayHavenNews(`🐗⚠️ One of them is bigger than the usual teeth at the door — ${mname(_raidBig)} came with this raid, and the wall was not built for its kind.`, 'raid');
         }
       } catch (e) { console.warn('raid escalation beat', e); }
       // CONTEST COLLISION (journey crisis r40 2026-10-21): the mirror of the
@@ -598,7 +605,8 @@
         const _lc = _rcV.lastContest || null;
         if (_lc && typeof _lc.day === 'number' && day - _lc.day >= 0 && day - _lc.day <= 1 && _rcV._raidContestAckDay !== day) {
           _rcV._raidContestAckDay = day;
-          this.say(`🕯️ The treeline is still torn up from the raid when the System's light comes for them. Nobody is ready. The light doesn't wait.`);
+          // ENDDAYBEATS-FIX: raid news — relay, same as the 🐗 line.
+          this.sayHavenNews(`🕯️ The treeline is still torn up from the raid when the System's light comes for them. Nobody is ready. The light doesn't wait.`, 'raid');
         }
       } catch (e) { console.warn('raid-contest-ack', e); }
       // THE DOOR (util audit 2026-10-10): raiders at Haven are exactly the
@@ -668,7 +676,8 @@
           if (!m.lingering) { try { m.lingerSince = (this.state.scholar || {}).day || 0; } catch (e) {} }
           m.lingering = true;
           try { if (this.lingerKeyFor) this.lingerKeyFor(m); } catch (e) {}
-          this.say(`Nobody met ${this.articlePhrase(mname(m))} — it's still out there at the treeline. It'll gorge every night until it's driven off.`);
+          // ENDDAYBEATS-FIX: linger news — relay, same as the 🐗 line.
+          this.sayHavenNews(`Nobody met ${this.articlePhrase(mname(m))} — it's still out there at the treeline. It'll gorge every night until it's driven off.`, 'raid');
         }
       }
       if (defenseReport.length) {
@@ -690,7 +699,9 @@
           let line = `🛡️ ${nameList} met them at the door — ${bits.join(', ') || 'met them and lived'}.`;
           if (fallen.length) line += ` ${fallen.join(', ')} didn't come back.`;
           if (hurt.length) line += ` ${hurt.join(', ')} ${hurt.length === 1 ? 'is' : 'are'} hurt.`;
-          this.say(line);
+          // ENDDAYBEATS-FIX: defense report is raid news — relay,
+          // same as the 🐗 line. The fights above already happened.
+          this.sayHavenNews(line, 'raid');
         } catch (e) { console.warn('raid defense beat', e); }
       }
       // the player: without a palisade, one raider can reach a sleeper.

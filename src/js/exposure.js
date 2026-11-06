@@ -161,7 +161,14 @@
           `\u201cI don\u2019t say this lightly.\u201d ${namerFirst} sets their bowl down. \u201c${liarFirst}, your ${noun} isn\u2019t true, is it? I\u2019ve heard enough versions now.\u201d Nobody looks at ${liarFirst}. Everybody does.`,
           `${namerFirst} has been turning something over all evening. Finally: \u201c${liarFirst}. The ${noun} \u2014 we all eat from the same pot here, we don\u2019t get to lie about who\u2019s at it.\u201d It costs ${namerFirst} to say it; you can see the price land.`,
         ];
-        this.say(`\uD83D\uDD25 ${lines[Math.floor(Math.random() * lines.length)]}`);
+        // ENDDAYBEATS-FIX (sim-enddaybeats-fix-a 2026-11-05): the
+        // accusation is named AT the fire — a scholar asleep in the
+        // wild is not there to hear the bowl set down. GATE the say
+        // only; the rep dent, trust move, memory, and exposure record
+        // below run identically (the lie was named whether or not
+        // the scholar heard it). No queue: a fireside scene is stale
+        // by return.
+        if (this.scholarAtHaven()) this.say(`\uD83D\uDD25 ${lines[Math.floor(Math.random() * lines.length)]}`);
         // consequences are real: the liar's honesty rep dents, the naming
         // costs the relationship. Accusations have weight.
         try {
