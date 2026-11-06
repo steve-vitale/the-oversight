@@ -192,11 +192,21 @@
           `Tomorrow, you and me, re-tying? An hour's work for two.`,
         ];
         const line = '"' + problems[hh % 3] + ' ' + asks[(hh >>> 2) % 3] + '"';
+        // WHY VARIANTS (journey-succession r146): one fixed whyLine meant
+        // the run ledger dry-lined every snare-mend ask after the first
+        // ("...Sorry, lost my train of thought" for a real need). Three
+        // hash-keyed variants, same stakes, so each instance speaks its
+        // own why — like food_share/water_haul/forage_help already do.
+        const whyLines = [
+          `"No snares, no rabbits \u2014 and the protein's what keeps us going. I know every knot blindfolded; I just need a second pair of hands to hold the line taut."`,
+          `"The line's our protein. Without it we're down to stores, and the stores don't stretch. I know the knots \u2014 I just need hands to hold it taut while I tie."`,
+          `"Rabbits are the difference between eating and going hungry. I can tie every knot blindfolded, but I can't hold the line and tie it at once."`,
+        ];
         return {
           task: `help ${ctx.name} re-tie the snare line tomorrow`,
           short: 'the snare line',
           line,
-          whyLine: `"No snares, no rabbits \u2014 and the protein's what keeps us going. I know every knot blindfolded; I just need a second pair of hands to hold the line taut."`,
+          whyLine: whyLines[(hh >>> 1) % whyLines.length],
           commitLine: `"Good. The rabbits won't know what hit them."`,
           goodbye: `"Tomorrow, then. Bring patience."`,
           stakes: `No snares means no rabbits \u2014 the village's protein thins.`,
@@ -216,11 +226,19 @@
           `My watch. An hour's sleep and I'll take it back.`,
         ];
         const line = '"' + states[hh % 3] + ' ' + asks[(hh >>> 2) % 3] + '"';
+        // WHY VARIANTS (journey-succession r146): same fixed-whyLine
+        // dry-line class as snare_mend/heal_help — three hash-keyed
+        // variants, same stakes (an exhausted watcher is no watcher).
+        const whyLines = [
+          `"If I fall asleep on watch and something comes through the treeline... I don't want that on me. An hour's sleep and I'll take it back. Please."`,
+          `"My eyes keep closing on watch. If something comes through while I'm nodding off \u2014 I couldn't live with that. An hour's sleep, that's all."`,
+          `"I'm no good on watch like this \u2014 I'm fighting sleep, not watching. Give me an hour to close my eyes and I'll take it back sharp."`,
+        ];
         return {
           task: `take ${ctx.name}'s watch for a bit so they can rest`,
           short: 'the watch shift',
           line,
-          whyLine: `"If I fall asleep on watch and something comes through the treeline... I don't want that on me. An hour's sleep and I'll take it back. Please."`,
+          whyLine: whyLines[(hh >>> 1) % whyLines.length],
           commitLine: `"An hour. I'll take it back after \u2014 I swear."`,
           goodbye: `"An hour. Then I'm back on."`,
           stakes: `An exhausted watcher is no watcher at all.`,
@@ -243,11 +261,19 @@
           `Would you stay close?`,
         ];
         const line = '"' + opens[hh % 3] + ' ' + reasons[(hh >>> 2) % 3] + '"';
+        // WHY VARIANTS (journey-succession r146): same fixed-whyLine
+        // dry-line class — three hash-keyed variants, same stakes
+        // (scared, hearing things, doesn't want to be alone with it).
+        const whyLines = [
+          `"I keep hearing things past the treeline. I know it's probably nothing. I just \u2014 don't want to be alone with it tonight."`,
+          `"The dark's full of sounds tonight and my head keeps turning them into something. I don't need talking \u2014 just someone near."`,
+          `"I can't settle. Every rustle past the treeline has me up. Company tonight \u2014 that's all I'm asking. Just near."`,
+        ];
         return {
           task: `stay close to ${ctx.name} tonight`,
           short: 'staying close tonight',
           line,
-          whyLine: `"I keep hearing things past the treeline. I know it's probably nothing. I just \u2014 don't want to be alone with it tonight."`,
+          whyLine: whyLines[(hh >>> 1) % whyLines.length],
           commitLine: `"Thank you. Just knowing you're there \u2014 it helps."`,
           goodbye: `"Tonight, then. I'll be by the fire."`,
           stakes: `${ctx.name} is scared and fraying.`,
@@ -270,6 +296,16 @@
           `Could you clean it out for me? Please.`,
         ];
         const line = '"' + problems[hh % 3] + ' ' + asks[(hh >>> 2) % 3] + '"';
+        // WHY VARIANTS (journey-succession r146): the fixed whyLine was
+        // the r146 Linh fizzle — one constant string for every wounded
+        // villager, run-ledger-blocked the second time anyone said it
+        // (seed 33702 d+30, dlg:details). Three hash-keyed variants,
+        // same stakes (festering risk, can't work, clean + wrap).
+        const whyLines = [
+          `"It's getting worse, not better. If it festers I'm no good to anyone \u2014 can't haul, can't hunt, can't watch. Just clean it out and wrap it tight."`,
+          `"It keeps getting worse. I can't haul or hunt with it like this \u2014 and if it festers, I'm done for. Please, clean it out and bind it tight."`,
+          `"Every day it's angrier. I need it cleaned before it turns \u2014 I can't work a wound like this. Wrap it tight when you're done."`,
+        ];
         return {
           task: `help ${ctx.name} with their injury`,
           // FIRST-PERSON REGISTER (journey establishment r4 2026-10-12):
@@ -278,7 +314,7 @@
           // third-person; the spoken short must be first-person.
           short: 'this wound',
           line,
-          whyLine: `"It's getting worse, not better. If it festers I'm no good to anyone \u2014 can't haul, can't hunt, can't watch. Just clean it out and wrap it tight."`,
+          whyLine: whyLines[(hh >>> 1) % whyLines.length],
           commitLine: `"Careful with it. And \u2014 thank you."`,
           goodbye: `"Come find me when you have a moment."`,
           stakes: `An untreated wound festers \u2014 ${ctx.name} could go from hurt to helpless.`,
@@ -347,7 +383,7 @@
           // the sick villager says "About the sickness they're fighting —
           // ..." about their own fever. Same fix as heal_help/food_share.
           short: 'the sickness I\'m fighting',
-          line, whyLine: whyLines[0], whyLines,
+          line, whyLine: whyLines[(hh >>> 1) % whyLines.length], whyLines,
           commitLine: commitLines[0], commitLines,
           goodbye: `"I'll be resting. Come find me."`,
           stakes: `${ctx.name} is ${sym} and worsening \u2014 an untreated sickness can kill.`,
@@ -1934,6 +1970,23 @@
           : reasks[Math.floor(Math.random() * reasks.length)];
       }
       return null;
+    },
+
+    // convoFavorNeedLine: the need-naming fallback (journey-succession
+    // r146): when a favor's ask and its why are both ledger-blocked, the
+    // NPC still answers with the live need in fresh words — never the dry
+    // line. Built from the favor's own short, so it can never promise a
+    // need that isn't there. PURE: reads only; the caller checks
+    // convoWouldBlock before speaking. `still` fits the moment: the ask
+    // is new (stage 0) or already stated (dlg:details).
+    convoFavorNeedLine(vid, favor, still) {
+      try {
+        const sh = favor && favor.short;
+        if (!sh) return null;
+        return still
+          ? `"I still need help with ${sh}."`
+          : `"I need help with ${sh}."`;
+      } catch (e) { return null; }
     },
 
     // convoFavorDeadlineNote: for the repay reminder.

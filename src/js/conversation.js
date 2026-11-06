@@ -6117,6 +6117,14 @@
                 try { if (fav && typeof this.convoFavorFollowup === 'function') alt = this.convoFavorFollowup(vid, fav); } catch (e) { alt = null; }
                 if (alt && !this.convoWouldBlock(vid, alt)) wline = alt;
                 else if (fav && fav.whyLine && !this.convoWouldBlock(vid, fav.whyLine)) wline = fav.whyLine;
+                // FINAL RUNG (journey-succession r146): opener, followup
+                // and why are all ledger-blocked — the ask would dry and
+                // the player would never hear it. Name the live need
+                // fresh instead of losing the ask.
+                else if (fav && typeof this.convoFavorNeedLine === 'function') {
+                  const needLine = this.convoFavorNeedLine(vid, fav, false);
+                  if (needLine && !this.convoWouldBlock(vid, needLine)) wline = needLine;
+                }
               }
             }
             if (c.want) c.want.stage = Math.max(c.want.stage || 0, 1);

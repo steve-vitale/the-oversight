@@ -697,7 +697,20 @@
             // (The old unconditional engageBeat call was the 7x verbatim
             // repeat vector: pool cycling + ignored no-repeat signal.)
             if (w && w.id === 'ask_favor' && w.favor && (w.stage || 0) >= 2) {
-              raw = w.favor.whyLine;
+              // WHY BLOCKED (journey-succession r146): the kind's whyLine
+              // was recently spoken (same kind, another villager) — the
+              // run ledger would dry-replace it with "...Sorry, lost my
+              // train of thought." Name the need fresh instead; the want
+              // stays live. Only when that too is blocked does the dry
+              // pool below answer (raw null -> pool).
+              const wl = w.favor.whyLine;
+              if (wl && typeof this.convoWouldBlock === 'function' && this.convoWouldBlock(vid, wl)) {
+                raw = (typeof this.convoFavorNeedLine === 'function')
+                  ? this.convoFavorNeedLine(vid, w.favor, true) : null;
+                if (raw && this.convoWouldBlock(vid, raw)) raw = null;
+              } else {
+                raw = wl;
+              }
             } else if (w && w.def && typeof w.def.engageBeat === 'function') {
               raw = w.def.engageBeat.call(this, vid);
             }
