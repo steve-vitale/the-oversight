@@ -2,7 +2,7 @@
 
 - Run: `fleshout-loop-b-20261106T2130Z`, axis scale-onramp / winnability chain (Steve 2026-11-03 re-point)
 - Coordinator: adoption run. No new arms, no new seed bands, no new sims. All three arms were COMPLETE on their branches when the 1730Z run died; this run rebased each onto current master, re-ran its proof on the rebased tip, and merged ff-only.
-- Master at closeout: `2df1052b5`. This run's three arms landed as `ba6d89846`; Loop A then landed wanderspawn-a on top (3 commits, `610876144` prereg / `18359d824` fix / `2df1052b5` evidence — wanderer-spawn 20-HP fix, GO stands, median 91d, W4 kills 3→1), closing the 1630Z next blank (3). No gate, price, deed, readyDemand, or win-price change in any arm.
+- Master at closeout: `2df1052b5`. This run's three arms landed as `ba6d89846`; Loop A then landed wanderspawn-a on top (3 commits, `610876144` prereg / `18359d824` fix / `2df1052b5` evidence — wanderer-spawn 20-HP fix, GO stands, median 91d, W4 kills 3→1), closing the 1630Z next blank (3). Loop A's coordinator evidence commit `26f11200a` landed after this run's evidence commit `cf11bbdf7` from a stale base and reverted this file from the tree (stale-base revert, same class as the 2026-10-06 lesson); this file was restored byte-identical (blob `817979d58b`) on top of `26f11200a` by a follow-up commit. No gate, price, deed, readyDemand, or win-price change in any arm.
 
 ## STALE-LOCK RECOVERY (run start)
 
