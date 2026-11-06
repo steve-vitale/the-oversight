@@ -40024,11 +40024,36 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         try { S.Godpath?.finishTacticalEscape(this, f, v); } catch (e) { console.warn('[godpath] flight', e); }
         this.say(`${v.name} runs for it!`);
       } else {
-        // WAIT, NARRATED (journey-endgame r143 — Fix B, planned r140):
-        // no silent turns. A villager with nothing to do still does
-        // something visible: holds and watches. (Canon: no silent actions.)
-        this.say(`${v.name} holds and watches.`);
+        // WAIT, NARRATED + VARIED (journey-endgame r143 Fix B, planned
+        // r140; r147 volume fix): no silent turns, and no stuck record.
+        // A villager with nothing to do still does something visible —
+        // and the wording rotates, so three villagers waiting in a row
+        // never read the same line twice (r144 counted 547 identical
+        // "holds and watches" on one seed). (Canon: no silent actions.)
+        this.say(this.tbVillagerWaitLine(v));
       }
+    },
+
+    // tbVillagerWaitLine: the rotating hold line for a villager with
+    // nothing to do this turn (journey-endgame r147 — Fix B volume).
+    // A transient fight-level counter (f._waitCount) picks the line so
+    // consecutive waits in one fight never repeat. Deterministic: no
+    // RNG, the same fight replays the same lines in the same order.
+    // The first line stays "holds and watches" — the r143 Fix B proof
+    // (test-ruth-wait-v1a-r143 Part C) asserts a fresh fight's first
+    // wait says exactly that.
+    tbVillagerWaitLine(v) {
+      const LINES = [
+        (n) => `${n} holds and watches.`,
+        (n) => `${n} waits, eyes on the beast.`,
+        (n) => `${n} holds position, watching for an opening.`,
+        (n) => `${n} stands ready, watching.`,
+        (n) => `${n} keeps their distance and watches.`,
+      ];
+      const f = this.tbfight || {};
+      const idx = (f._waitCount || 0) % LINES.length;
+      f._waitCount = (f._waitCount || 0) + 1;
+      return LINES[idx](v.name);
     },
 
     // === ENCOUNTER FRAMEWORK: FIFO THREAT QUEUE ===
