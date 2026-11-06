@@ -265,5 +265,30 @@ lineage behavior), so nat-gate counts carry +1 row on day 2.
 Disclosed; immaterial (1 row in 316).
 
 ## Closeout (filled after the check gate)
-- check.js --quick: PENDING (see below)
+- check.js --quick: 281 passed, 9 failed in 1054s (log
+  evidence/2026-11-06/journey-scale-r104-checkquick.log). All 9
+  adjudicated, none new — EXACTLY the sibling mootgate run's 9 the
+  same hour (same base, different tree, no shared files): 6 standing
+  pre-existing (same as r103's 6: proof-update, workflow freshness,
+  mobile-combat-cadence, occupation-panels, phone-frame-proof stale
+  receipt, establishment-r20-fixes racks-full voice "expected 2 got
+  1") + test-measurement-cache-flags + test-trust-observer-neutrality
+  (120.1s timeout in BOTH runs — load, not code; r103 had it passing
+  in 60s on a quieter box) + 1 flaky capable-bot (exit 1 here, timeout
+  in the sibling run — load roulette, not code; this run touches no
+  combat code). No failure touches hierarchy.js / betrayal.js /
+  conversation / scale code. This run changed NO src/js (only new
+  scripts/ + evidence/), so none of the 9 can be caused by it.
+  Targeted proof on the touched area: natgate proof test 31/31.
+- Mid-run standing context (MEMORY.md updated 2026-11-06 07:06–07:07
+  CST, received during this run): TABLE OFFER IS STANDING — once the
+  table offers a seat the offer never withdraws (the d90 withdrawal
+  is a DEFECT to fix); and DIFFICULTY: SURVIVORS SCALE — deaths stay,
+  survivors must get stronger via XP/abilities/gear protection, never
+  fewer deaths. Neither changes this run's verdicts: no withdrawal
+  was observed in the panel (95703 sat lesser-waiting, arc 4, offer
+  standing), and the early deaths recorded here are the game's shape,
+  not a softening ask. The tend question now sits under the
+  survivors-scale law: tending is survivor strength (relationships
+  held), not fewer deaths.
 - (rebase/merge/release/rotation filled below as they land)
