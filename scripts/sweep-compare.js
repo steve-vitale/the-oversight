@@ -85,6 +85,12 @@ try { const m = require('./policies/competent-multisweep-b'); POLICY_REGISTRY['c
 // (§15) can build its column. Additive; zero behavior change to existing
 // entries (the variant stays default-OFF: nothing loads it unless named).
 try { const pr = require('./policies/competent-patchrot-b'); POLICY_REGISTRY['competent-patchrot-b'] = pr.patchrot; } catch (e) {}
+// linkseek instrument (sim-linkseek-b, 2026-11-06, Loop B winnability):
+// the competent + link-seeking diplomacy policy, registered so the
+// balanced panel (§15) can build its column. Additive; zero behavior
+// change to existing entries (the variant stays default-OFF: nothing
+// loads it unless named).
+try { const lk = require('./policies/linkseek'); POLICY_REGISTRY['linkseek'] = lk.linkseek; } catch (e) {}
 const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
 
 function stdSnapshot(Game) {
