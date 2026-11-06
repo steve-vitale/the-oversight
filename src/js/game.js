@@ -19178,7 +19178,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         for (const it of inv) {
           if (it && it.foodKind === 'meat' && it.edible === false) {
             const mid = String(it.plantId || '').replace(/^meat_/, '');
-            if (mid && !this.monsterFoodSafe(mid)) { meatIt = it; meatMid = mid; break; }
+            if (mid && !this.monsterFoodSafe(mid) && !this.monsterFoodPoisoned(mid)) { meatIt = it; meatMid = mid; break; }
           }
         }
       }
@@ -19192,7 +19192,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         for (const it of pan) {
           if (it && it.foodKind === 'meat' && it.edible === false) {
             const mid = String(it.plantId || '').replace(/^meat_/, '');
-            if (mid && !this.monsterFoodSafe(mid)) { meatIt = it; meatMid = mid; break; }
+            if (mid && !this.monsterFoodSafe(mid) && !this.monsterFoodPoisoned(mid)) { meatIt = it; meatMid = mid; break; }
           }
         }
       }
@@ -19213,7 +19213,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (it && it.foodKind === 'meat' && it.edible === false
               && (it.foodState === 'cleaned' || it.foodState === 'cooked')) {
             const mid = String(it.plantId || '').replace(/^meat_/, '');
-            if (mid && this.monsterMeatGated(mid) && !this.monsterFoodSafe(mid)) { meatIt = it; meatMid = mid; break; }
+            if (mid && this.monsterMeatGated(mid) && !this.monsterFoodSafe(mid) && !this.monsterFoodPoisoned(mid)) { meatIt = it; meatMid = mid; break; }
           }
         }
       }
@@ -47631,6 +47631,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     monsterFoodSafe(mid) {
       const e = (this.state.codex.monsters || {})[mid];
       return !!(e && e.foodSafe);
+    },
+    // POISON-RETEST (journey-landing r109, seed 1027): the Codex records a
+    // proven-poison verdict as foodTested='poison' with foodSafe=false, so
+    // monsterFoodSafe alone cannot tell "known poison" from "unknown" — the
+    // experiment beat kept re-tasting belltoad flesh (6 poisonings, one
+    // villager twice) after the verdict was already in. The beat must skip
+    // flesh the Codex already knows is poison; unknown flesh still tests.
+    monsterFoodPoisoned(mid) {
+      const e = (this.state.codex.monsters || {})[mid];
+      return !!(e && e.foodTested === 'poison');
     },
     // BELLTOAD (Steve 2026-10-13): the legs are a separate item
     // ('belltoad_legs') from the body meat. The part gates exactly like a
