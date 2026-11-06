@@ -224,3 +224,156 @@ two builds do not duplicate each other.
 
 Wins / national / table / wave-4 unlocks / wave-4 faced / wave-5
 unlocks / wave-5 faced / median survival, per seed and band-wide.
+
+---
+
+## STAGE 2 AMENDMENT (appended 2026-11-06, after the Stage 1 pilot was judged — committed before any Stage 2 work)
+
+### Stage 1 verdict: DIAG-GO via P3 (as pre-registered)
+
+Pilot on 55001–55008, competent verbatim, 150d, anchor 3e8b3024d34d.
+57 wild wave-4 fights, 2 kills (3.5%). TB 40: 38 scholar-death, 2 kills,
+0 scholar-flee, 0 rout. Field 17: 0 kills, 0 mFlee, 10 vFlee, 3 evade,
+2 vDie, 2 suburb-walkout. mFlee 0/57; round-cap 0; near-miss (endFrac
+<0.15) 0. P1 NO, P2 NO, **P3 FIRES** (TB kill rate 0.05 < 0.10; TB
+losses ending beast >50% HP 27/38 = 71%; abilities used 7/40 = 17.5%
+< 25%), P4 UNJUDGEABLE (pending-live n=1), P5 probe-only (ally 0/11
+vs solo 2/29 TB). Full numbers in
+evidence/2026-11-06/finishprobe-a-analysis.json and the evidence file.
+
+### Supplementary legs (instrument-only, competent verbatim, same band)
+
+Two read-only supplements were run to pin the Stage 2 build before
+writing this amendment. Both reproduced the judged corpus fight by
+fight (trajectory identity verified: same days/endReason/fights/kills
+per seed; per-fight day/channel/mid/outcomeRaw/rounds/swings/entryHp/
+mHpLeft identical). 0 instrument errors on every leg.
+
+1. **Holdings + turn-use** (/tmp/finishprobe-holdings-34174): scholars
+   hold many abilities (0/40 fights holding zero). Combat-pressable
+   holdings in 40 TB fights: patient_aim 17 (used 0), rage 8 (used 6),
+   hogtie 10 (used 0), war_cry 2 (used 0), pocket_sand 1 (used 1),
+   peacemaker 14 (never pressed by the cascade); bird_strike 0,
+   freeze_tag 0, turncoat 0 — held by nobody. Scholar kcal at fight
+   start median 2082 (1 fight <240) — kcal is NOT the binding
+   constraint. Turn budget in lost fights (n=38): rounds median 6,
+   strikes median 2, moves median 3, waits 0, abilities median 0.
+2. **Gear-engine cross-check** (/tmp/finishprobe-gear-34175): the
+   judged corpus's gear columns are WRONG — an instrument bug (see
+   below). The engine's own `Game.equippedWeapon()` shows scholars
+   ARMED in 37/40 TB fights (hunting spear +30 x6, harvest scythe
+   +40 x4, machete +35, phase blade +60 x2, fire-hardened spear +15,
+   stone knife +12, sharpened stick +5, crowbar +12, hatchet +15,
+   kitchen knife +8; unarmed 3/40) and wearing real armor (hide
+   armor, bark armor, riot gear, worldroot plate in the slots). The
+   two killers were armed (crowbar +12; harvest scythe +40 with a
+   hunting spear +30 in pack). Damage/strike scales cleanly with
+   weapon bonus (median by bonus: +5 -> 8.5, +12 -> 15.7, +15 ->
+   18.9, +25 -> 40, +30 -> 40.7, +35 -> 46.3). Weapon bonus flows
+   into strike damage; the scholars are not fighting bare-handed.
+
+### Instrument correction (gearOf bug — found by the gear cross-check)
+
+`gearOf` in both instruments reads `Game.getPerson(vid).equipped`.
+For the scholar that path returns empty slots in the harness: the
+scholar's equipped state lives in `Game.state.scholar.equipped`,
+which `Game.equippedWeapon()` reads. Result: the judged corpus
+reports weaponId None 40/40 and armorP 0 40/40 — false. The fix
+(this amendment's work, before the evidence file): `gearOf` uses
+the engine's own `Game.equippedWeapon()` + `state.scholar.equipped`
+for the scholar, keeps the getPerson path for non-scholar fighters
+with a caveat comment, and the proof test asserts gearOf returns an
+equipped weapon. The Stage 1 corpus is REGENERATED with the fixed
+instrument (read-only capture change; trajectories must verify
+identical to the judged corpus on every classification field — the
+re-run is a corpus correction, not a new judged sim) and the
+analyzer re-run. The judged verdict numbers above are unaffected:
+no classification field depends on gear.
+
+### Stage 2 assessment: NO-GO by arithmetic — no policy built, no pilot spent
+
+The P3 build as pre-registered (hold-ground + cascade extension:
+patient_aim / freeze_tag / hogtie / rage / war_cry ordering,
+never-flee-once-committed) was sized against the supplements. It
+cannot pass its own GO bar:
+
+- Entry HP floor is 350 (range 350–1325, median 712). Zero fights
+  entered below 350; 7 entered at or below 500.
+- Median survival in lost TB fights is 6 rounds; the scholar dies
+  to 35–95 damage/round at 100 HP. Damage/strike tops out at ~46
+  (best observed gear, +35 bonus).
+- Upper bound (generous to the point of unattainable): every round a
+  strike at the fight's bonus-implied damage/strike, plus one aimed
+  strike at 2.5x — zero movement, zero tricks, zero misses beyond
+  measured rates, full survived rounds granted. Under that bound
+  **at most 1 of 38 lost fights flips to a kill** (55007 d78 eater:
+  672 projected vs 664 entry, a 1% margin), and that fight is
+  pre-first-blood, so post-first-blood kills under the bound are 0.
+  The bound's kill rate would be 3/40 = 7.5% < the 10% GO bar; the
+  post-first-blood leg (needs >= 2) is 0.
+- The ceiling fight on the band proves it from the other side:
+  55002 d72 congregation, 18 rounds (longest survival), 13 swings,
+  529 damage dealt of 1052 entry with a +30 hunting spear — the
+  beast still stood at 523 HP. Even the best fight on the band dealt
+  only half a beast's HP.
+- The only kills on the band were vs Strike (32 and 46 rounds,
+  zero incoming damage — the one wave-4 monster that does not
+  attack). Every attacking wave-4 monster killed the scholar on
+  this band: algorithm 0/12, reunion 0/10, eater 0/7, suburb 0/4,
+  eulogy 0/3, congregation 0/2.
+
+The binding constraint is **survival time x damage/strike vs entry
+HP** — a game-balance fact, not a fight-policy gap. No wave-4 TB
+fight policy can open a kill window that does not exist: the scholar
+would need to survive ~15–40 rounds to grind down a 350–1325 HP
+beast at ~20–46/strike, and dies in ~6. Building the P3 policy and
+piloting it would spend a run confirming a foregone NO-GO. Per the
+task (build only if the probe names a policy-actionable finishing
+pattern) and Steve's 2026-11-01 rebuke against re-proving proven
+constraints: **Stage 2 is NO-GO. No policy file is created, so there
+is nothing to revert.** The DIAG verdict stands (P3 fired; the probe
+named the mechanism); the build does not proceed.
+
+### Named mechanism (the Stage 1 finding, in plain words)
+
+Wave-4 fights do not end with the monster getting away — the monster
+never flees (0 mFlee in 57 fights) and the fighter never escapes
+either (0 scholar-flees in 40 TB fights). They end with the scholar
+dead (38/40 TB) or walking away from a field fight after a round or
+two (10/17 field). The scholar cannot finish the beast because the
+beast has roughly ten times the scholar's health and hits hard enough
+to kill the scholar in about six rounds, while the scholar's strikes —
+even with a good weapon — take only a small bite each round. The two
+kills on the band happened only against the one monster that never
+attacks, where the scholar had all the time in the world. A finishing
+move cannot fix a fight the scholar does not live long enough to finish.
+
+### Game-code proposal (reported, NOT built — a Steve call)
+
+The levers that could open a real kill window are balance levers, not
+a fight policy: (a) survival time — armor/damage mitigation that lets
+a scholar stand 15+ rounds against wave-4 damage (scholars already
+wear the armor they own; the question is whether the mitigation curve
+is enough); (b) damage per strike — weapon tier already flows and is
+already the best owned; (c) entry HP — deeper wounding before the
+lift (the grind's price binds: six scholars died grinding one beast
+750 -> 114 HP in the grindfinish arm); (d) party damage — the sibling
+arm sim-stageally-a owns ally-staging in TB. No gate, price, or deed
+change is proposed. No src/js change is made in this arm.
+
+### P3 leg-2 honesty note
+
+P3's second leg (71% of TB losses end with the beast above half HP)
+measures entry state more than damage output: beasts enter lifted at
+a median 70% of max HP, so they end above 50% almost by construction.
+The honest damage measure is damageFrac (median 6.8% of entry HP
+dealt; median 47 damage of 712 entry). P3 fired as written; the leg
+is reported with this caveat in the evidence file.
+
+### What is still committed in this arm
+
+Corpus regeneration with the fixed instrument (classification
+identity verified), analyzer re-run, evidence file
+evidence/2026-11-06/sim-finishprobe-a.md, findings appended to
+sim-findings.md, memory note, final report: DIAG-GO (P3) + Stage 2
+NO-GO (by arithmetic, no policy built, no pilot spent).
