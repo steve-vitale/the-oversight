@@ -81,22 +81,62 @@ trajectory-neutral on both driver versions; the panel below stands as judged.
   was away at other nodes — even the gate label is nodeAway underneath when
   the bench is alive. Refusal rate 7/21 = 33% (r131 47%, r130 56%) — lowest
   yet, but above the 20% collapse trigger.
-- C3 (people check): **GO.** fabricHits 0; WRAP 32/32 marked; all 32
-  transcripts scanned for the watched patterns and 2 read in full (Eli d11,
-  Nora d56 — see below). Naming-stance wobble: NO fourth sighting — 4
-  naming debates, all reporter-asks-vote ("The whole fire was arguing about
-  X last night — what to even CALL it. 'Y' got shouted down. What's your
-  vote?"); no pusher disavows. The wobble stays a three-panel wrinkle.
-  Nonverbal nod: NOT graduated — 0 conversations carry the signing-nod
-  pair (no "sign" anywhere); the generic nod line recurs in a new variant,
-  "They nod slowly, not quite done, not quite continuing." ×3. Columbus
-  echo: GONE — 0 "not from Denver" lines. The "About unasked-for food"
-  memory-label leak did not recur (0 hits); the trap-line decline "Maybe
-  not today. The fire's got me." did not recur (0 hits). A delegated
-  full read of all 32 transcripts was in flight at closeout; its report
-  will be reconciled in the memory log and, if it overturns anything,
-  amended here — the verdict above rests on the scan + fabric/WRAP + the
-  two full reads.
+- C3 (people check): **NO-GO on the strict prereg bar** — AMENDED after the
+  delegated full read of all 32 transcripts landed (the closeout version
+  said GO on the scan; the full read overturns it — see below). fabricHits
+  0; WRAP 32/32 marked. Of 29 dialogue transcripts (3 are refusals with no
+  conversation: 13302-d43 Aibek, 13302-d53 Ozan, 13304-d83 Greta), 18 PASS
+  the meaning bar, 7 are MARGINAL, 4 FAIL. The passing transcripts are
+  genuinely good — Eli's murder-press (d12), Aroha's doctor confession
+  (d67: "I wasn't a doctor. I was a comic shop owner."), Cheyenne's
+  d11→d35 arc closing on Ruby, Kenji's two-night investigation (d12/d13)
+  — NPCs want things, options engage, endings resolve. The failures share
+  ONE mechanism: the driver re-picks the same option (recap /
+  favor_requirements / react) and the engine answers with the same line
+  plus an escalating prefix ("As I said —" / "Like I said —" / "Still the
+  same thing —" / "I've told you three times now —"). The content never
+  changes and the loop never closes, so it reads as a stuck record, not a
+  person getting annoyed. FAILs: Eli d19 (gratitude loop 7×), Cheyenne d12
+  (invite declined 3× verbatim), Soo d56 (gratitude loop 8×), Papy d42
+  (recap loop 6×). MARGINALs: Aroha d58, Boris d92, Aibek d36, Nora d56,
+  Arjun d19, Soo d41, Arjun d9 — real want at the open, verbatim loop in
+  the middle, resolution at the end.
+  New findings (all verified against the transcripts by the coordinator):
+  (a) THE CAP DOES NOT CAP: "I've told you three times now — ..." fires
+  9× in 7 files, and TWICE in one conversation on 13302-d36 and d56 — a
+  line that says "three times" and then repeats is self-falsifying.
+  (b) RECAP AFTER CLOSE: on Nora d56 the decline closes the water-haul
+  subject ("They won't raise it again.") and the very next recap still
+  says "Still on that water haul."
+  (c) STOCK LINES QUOTED AS MEMORY: Eli d30 quotes the generic silence
+  beat ("A comfortable quiet settles...") as where a debt conversation
+  "left off"; Cheyenne d12 quotes her own subject-change line as the
+  unfinished topic. No outright fabricated shared history about the
+  player's past — the fabrications are stock lines passed off as specific
+  remembered speech.
+  (d) GARBLE: Jasper d14 answers "Endgame. What is it?" with "You two
+  sort it out, or I will" — there is no second "you."
+  (e) SAMENESS: closers identical across speakers — "This was good." ×12,
+  "Come back anytime." ×10, "Take your time." ×7; mourning templates with
+  only the name swapped — "[X] owed me a favor. I keep thinking about
+  collecting. Stupid." ×3, "The fire feels smaller without [X]." ×3.
+  Naming-stance wobble: NO fourth sighting — 4 naming debates, all
+  reporter-asks-vote; Soo withholds her vote deliberately across three
+  turns (consistent, not wobbly). The wobble stays a three-panel wrinkle.
+  Nonverbal nod: NOT graduated — 0 signing-nod conversations (no "sign"
+  anywhere); the generic "They nod. 'Okay.'" is 0; the nod line that
+  recurs is "They nod slowly, not quite done, not quite continuing." ×3,
+  confined to the two failed gratitude-loop transcripts. "About" leaks:
+  NONE (only the player's own "How are you holding up? About... them."
+  ×7). Denver echo: 0. Trap-line ask itself repeats ×3 (Aroha d67, Sofia
+  d44, Miguel d70); its declines are the generic invite-decline ×4.
+  YOU completeness: 237/237 (driver fix holds).
+  The driver shares blame: its pick logic re-picks the same option while
+  alternatives exist. Next run's driver should not re-pick the same id
+  consecutively when alternatives are offered. The engine side is real
+  regardless: the cap must cap (fire once, then close/leave), recap must
+  respect a closed subject, and mourning/closer lines need per-villager
+  variation.
 - WRAP-CHECK: **GO.** Analyzer WRAP section: 32 transcripts, 32 marked,
   unmarked 0 (engine-ended 28, driver cap break 1, refused/ended 3).
 - C7b (instrument): **GO.** Corpse-cause counts match the corpse record on
@@ -196,7 +236,11 @@ the break in fight 1 binds); whether a 4+ fighter muster would clear
 (untestable: muster requests 3, engine fields leader + 1 ally); the
 missed-window strict test (7/8 over-counted, fix filed above); the eater
 drift double-count; the sortie-leader death capture gap (deathsDuring
-still misses all 3 leader deaths — muster-explained, not fixed).
+still misses all 3 leader deaths — muster-explained, not fixed); the
+conversation loop mechanism (the leg's main content gap this run: 4 FAIL +
+7 MARGINAL of 29 transcripts, one mechanism — repeated picks answered
+verbatim with only a prefix change; cap fires twice; recap after close;
+stock lines quoted as memory).
 
 ## Instrument notes
 - R57 D1 episode resets: 2 sortie resets (13301 d94, 13305 d94) + 3
@@ -251,6 +295,13 @@ still misses all 3 leader deaths — muster-explained, not fixed).
   the watch at the corrected count (1 this panel).
 - C7b is now the non-combat death count. The C7 feed columns stay for
   comparability; no run cites them as village facts.
+- C3 loop mechanism: the next run's driver must not re-pick the same
+  choice id consecutively when alternatives exist (instrument fix, cheap).
+  Engine-side items filed: cap line fires once then closes/leaves; recap
+  respects a closed subject; mourning + closer templates vary per
+  villager (the ×12/×10 closers and ×3 mourning templates are the
+  sameness to break); the Jasper "You two" garble and the Eli/Cheyenne
+  stock-as-memory quotes are content fixes.
 - Still open, unchanged: G-ID watch (8 panels at zero); naming-stance
   wobble (3 panels); nonverbal-nod wrinkle (0 signing conversations this
   panel; the nod variant changed).
@@ -273,14 +324,32 @@ defendedFights,playerFights,latelyDefenseCount` → "telemetry-check: quiet
   accept read as real people. But 13 of 14 sorties break the same way —
   one fight, one flee — and will read to a player as a gesture that costs
   55,365 kcal and three leaders' lives without ever finishing a real set.
+  On conversations: 18 of 29 read as real people, but 4 are pure filler
+  loops and 7 more carry a verbatim-repeat loop in the middle — a player
+  who asks the same thing twice, or says thanks twice, will hear the
+  identical line back with only a prefix change, and the "three times"
+  cap line can fire twice in one talk.
 - Winnable: NOT YET on this leg — 1/5 horizons, 4/5 game-overs, and the
   crisis cost (171,429 kcal gorged + 55,365 kcal rations) is paid in food
   and water the village cannot spare; the horizon seed ends with three
   alive and a pantry at 0.
 
+## Gate (closeout, main tree)
+`node scripts/check.js --quick` on the merged master b13016733: **283
+passed, 7 failed in 513s**. All 7 failures are the adjudicated standing
+set from r145 (measurement-proof-update, measurement-workflow,
+mobile-combat-cadence, occupation-panels, phone-frame-proof, capable-bot
+— "a base failure" per r145 — establishment-r20-fixes). No failure touches
+an r132 file; this run changed no src. Three of r145's 10 did not fail
+this time (measurement-cache-flags intermittent, trust-observer-neutrality
+and synergy-stall 120s timeouts — both passed inside the faster run).
+
 ## Closeout
-Determinism PASS (both driver versions), telemetry quiet, note + driver +
-analyzer + proof test committed from the r132 worktree, merged locally,
-pending ship. Rotation-b advanced 6 → 7 (succession next). No src changes
-this run (measurement panel + instrument fixes; findings filed above). No
+Determinism PASS (both driver versions), telemetry quiet, gate 283/7 all
+standing-set, note + driver + analyzer + proof test committed from the
+r132 worktree, merged locally, pending ship. The C3 section was amended by
+a follow-up commit (this amendment) after the delegated full transcript
+read landed and overturned the closeout GO to NO-GO on the strict bar.
+Rotation-b advanced 6 → 7 (succession next). No src changes this run
+(measurement panel + instrument fixes; findings filed above). No
 `[needs-eyes]` — nothing player-facing changed.
