@@ -2,8 +2,9 @@
 
 ## Prereg
 `evidence/2026-11-05/journey-establishment-r106-prereg.md` (committed
-477eec567 BEFORE any scored seed; driver + analyzer + proof committed
-6934458f2 BEFORE any scored seed). Driver
+c1bb6cac6 BEFORE any scored seed; driver + analyzer + proof committed
+0a891beba BEFORE any scored seed; rebased onto fd2d0c5ef after Lane B
+r144 landed, hashes updated here). Driver
 `scripts/journey-establishment-r106-20261105.js` (r105 driver clone +
 `withHuntStaff(competent, 'competent-hunt')` always wrapped; HUNTSTAFF=1
 arms the layer, unset = gate-off), analyzer
@@ -240,21 +241,31 @@ guardrails.deaths,guardrails.popAlive,guardrails.pantryKcal,c3.starvationDeaths`
   proof re-run ALL GREEN on this base (Part A 17/17, Part B det-gate
   4/4 clean-identical, Part C smoke).
 - No EPERM flap this run.
-- Rotation advanced 1 -> 2 (deepening next) — verified by read-back at
-  closeout.
+- Rotation advanced 1 -> 2 (deepening next) by the main-session
+  closeout — verified by read-back.
 
-## Closeout (filled after the check gate)
-- check.js --quick: **284 passed, 6 failed in 793s** — identical to the
-  standing r105 set, no new failures. The 6: test-measurement-proof-update,
-  test-measurement-workflow, test-occupation-panels (the "retained
-  neutrality proof covers the current inputs" family — the proof is stale
-  on master itself), test-mobile-combat-cadence (same 2 sub-failures as
-  r104/r105), test-phone-frame-proof and test-establishment-r20-fixes
-  (the two known baseline failures from r103). The last two were visible
-  in the full-run tail; the other four were confirmed individually via
-  `--only` (0 passed, 1 failed each). This run changed NO src/js (only
-  new scripts/ + evidence/), so none of the 6 can be caused by it.
-  Targeted proofs on the touched areas: huntwire P1 4/4 + P2 det-gate
-  identical; b4 layer proof ALL GREEN (17 pins + det-gate 4/4 + smoke).
-- Merged locally, pending ship (no bump/push/live-verify — ship loop
-  owns those). Merge hash in the memory log.
+## Closeout (main-session closeout of the timed-out 19:45 run)
+- Pre-rebase check.js --quick: **284 passed, 6 failed in 793s** — the
+  standing r105 set, no new failures (proof-update, workflow,
+  occupation-panels, mobile-combat-cadence, phone-frame-proof,
+  establishment-r20-fixes). This run changed NO src/js (only new
+  scripts/ + evidence/), so none of the 6 can be caused by it.
+- Post-rebase check.js --quick (rebased onto fd2d0c5ef, log
+  goal hidden_files/establishment-r106-checkquick-20261105.log):
+  **278 passed, 12 failed in 1779s.** 5 timeouts at exactly the 120s
+  cap (comfort-arc, solo-campaign-endings, trust-observer-neutrality,
+  capable-bot, table-endings) — load flake on a heavily loaded box.
+  7 assertion failures, all pre-existing on master and none in this
+  branch's touched areas: proof-update (stale proof inputs), workflow
+  (retained neutrality proof stale on current inputs), mobile-combat-
+  cadence (same 2 sub-failures as r104/r105), occupation-panels (real
+  CLI workflow), measurement-cache-flags (4 sub-failures — verified
+  failing identically standalone on master fd2d0c5ef itself; the branch
+  changes no src/js), phone-frame-proof (stale receipt),
+  establishment-r20-fixes (racks-full next-day count, known since
+  r103). Targeted proofs on the touched areas: huntwire P1 4/4 + P2
+  det-gate identical; b4 layer proof ALL GREEN (17 pins + det-gate
+  4/4 + smoke).
+- Merge pending: rebase onto the current master + re-run of proofs and
+  gate after the Loop A closeout lands; final numbers appended here
+  before the merge. No bump/push/live-verify — ship loop owns those.
