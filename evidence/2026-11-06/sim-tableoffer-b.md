@@ -55,8 +55,9 @@ What changed (3 edits, all in src/js/table.js):
   offered-then-dipped class, which is the defect Steve ruled on.
 
 ## Pre-registration
-See evidence/2026-11-06/sim-tableoffer-b-prereg.md (committed 3e34bef6c
-BEFORE any judged sim). Primary metric: the reproduction scenario keeps
+See evidence/2026-11-06/sim-tableoffer-b-prereg.md (committed BEFORE any
+judged sim; rebased as 9310220a4 — the fix commit is 3b00c7a4b, on top of
+local master 304ced6cf at rebase time). Primary metric: the reproduction scenario keeps
 its offer through the withdrawal trigger post-fix. GO iff (1) reproduction
 RED pre-fix, (2) GREEN post-fix (holds once, re-fires on recovery, sits),
 (3) decline preserved, (4) existing table tests green
@@ -129,9 +130,31 @@ test), offer made, integration slips 45 -> 39, dawn tableAnnounce.
   regenerated ONTOLOGY.md). Fixed by using bare one-method-per-line
   entries; validate-ontology.js now clean ("All 132 systems validated"),
   foodpower 30/30, and the regenerated ONTOLOGY.md diff is exactly the
-  3 added methods. The full quick suite is re-run on the rebased tip
-  before this arm is reported merge-ready (see below); the final count
-  is recorded there.
+  3 added methods.
+- node scripts/check.js --quick ON THE REBASED TIP (fix commit
+  3b00c7a4b, local master 304ced6cf): 275 passed, 15 failed in 481s.
+  Attribution of the 15: foodpower is FIXED (absent from the failure
+  list). 8 of the 15 are TRANSIENT EPERM write flakes, not code failures
+  — test-human-combat-parity.js, test-measurement-source-text.js,
+  test-measurement-flags.js, test-measurement-cache-flags.js,
+  test-prepared-runner-custody.js, test-proof-text-identity.js,
+  test-telemetry-check-recorder.js, test-sw-audio-cache-20261012.js —
+  every one passes on immediate individual retry (exit 0); the log shows
+  EPERM on write/writeFileSync/copyfile, the known host write-flap
+  (AGENTS.md EPERM FLAP entries). The remaining 7 are the same
+  pre-existing failures verified on the base with identical signatures
+  (measurement-proof-update, measurement-workflow,
+  mobile-combat-cadence, occupation-panels, phone-frame-proof,
+  capable-bot, establishment-r20). NET: zero failures attributable to
+  this arm on the rebased tip.
+- A temp worktree (sim-tableoffer-verify) was registered to attribute
+  the rebased-tip failures on master-without-the-change, but the
+  register stalled ~8 min behind the REGISTRY.lock queue (sibling
+  registers journey2-succession + sim-baseline9-a) and was killed before
+  creating anything (no worktree, not in the registry — verified). The
+  attribution was instead established by the retry + base-comparison
+  above. Note: a 0-byte REGISTRY.lock remains while a sibling register
+  is still waiting — left alone, not deleted (live-lock hazard).
 
 ## Sense-test (read aloud)
 - Holding: "The ring of pale light holds its place, and does not come
