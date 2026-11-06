@@ -287,8 +287,25 @@ denominator), scripts/test-journey-deepening-r107-pocketed-20261106.js
 (17 checks: 12 live-game + 5 analyzer).
 
 ## Closeout (filled after the check gate)
-- check.js --quick: (pending)
-- Telemetry: (pending — see section above)
+- check.js --quick: 283 passed, 7 failed in 691s (log goal
+  hidden_files/journey-deepening-r107-checkquick-20261106.log). All 7
+  adjudicated, none new: 6 standing pre-existing (same as r106's 8 —
+  proof-update, workflow freshness, mobile-combat-cadence,
+  occupation-panels, phone-frame-proof stale receipt,
+  establishment-r20-fixes racks-full; r106's 8th,
+  trust-observer-neutrality 120s timeout, PASSED this run) + 1 flaky
+  capable-bot (passed r106, failed the 278/12 run before — load
+  roulette, not code; this run touches no combat code). No failure
+  touches betrayal.js / convo-wants.js / conversation code. The
+  measurement-proof staleness predates this run (r106 failed the
+  same two tests with zero game changes) and its refresh needs a
+  fresh real neutral panel — a separate balance-maintenance job,
+  flagged for the main session, not this run. The first gate
+  attempt died mid-run with no summary (process reaped ~1000s in,
+  log ended mid-progress); re-ran detached with nohup to completion.
+  Proof test re-run green after the rebase (17/17).
+- Rebased onto master abc4df164 (sim-spandraw-census-a landed while
+  the gate ran); proof test re-run green after the rebase (17/17).
 - Merged locally, pending ship (no bump/push/live-verify — ship loop
   owns those).
 - Rotation 2 -> 3 written at closeout, verified by read-back.
