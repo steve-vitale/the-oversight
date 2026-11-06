@@ -1,0 +1,40 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Maya","t":90},{"id":"Dmitri","t":90},{"id":"Mia","t":90},{"id":"Divya","t":68}], roster=8
+INH readable=true scripted=true deadItems=30 distinct=27 transferred=3 vanished=4 keptPlants=22 inheritedPlants=3 keptSkills=8 inheritedSkills=6 succTrustPre=90 succTrustPost=75
+PARITY readable=true equal=true inherited=[] pre=["green_whisper","beard_moss","rage","green_thumb"] post=["green_whisper","beard_moss","rage","green_thumb"]
+DEATH d41 (the expedition, scripted): Divya -> Maya | passed=true lin=true mo=true trust=75 vouchers=2
+  NEWCOMER-PROBE d+1 with Somchai (arrived d+1, trust=27 refused=false)
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=3 vanished=4 of 27 distinct dead-bearer items
+  CONVO d+3 with Mia (refused=false)
+  CONVO d+3 with Dmitri (refused=false)
+  STRANGER-PROBE d+3 with Jorge (trust=40 refused=false)
+  BOND-CONVO d+3 with Harry (depth=0 v=16 refused=false)
+  CONVO d+7 with Mia (refused=false)
+  CONVO d+7 with Dmitri (refused=false)
+  CONVO d+14 with Grace (refused=false)
+  CONVO d+14 with Priya (refused=false)
+  CONVO d+30 with Priya (refused=false)
+  CONVO d+30 with Deirdre (refused=false)
+  CONVO d+45 with Priya (refused=false)
+  CONVO d+45 with Deirdre (refused=false)
+
+FUNERAL: deathBeat=3 recover=1 vouch=1 (eligible=2) echo=4 organicBurial={"respects":false,"bury":false} halfRation=6
+
+MEAL-GATE: audited=49 violations=2 noMealDays=1 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+  VIOLATION d+44: Grace trust=49 kcal=634 halfVoice=true
+  VIOLATION d+48: Grace trust=49 kcal=785 halfVoice=true
+SUCCESSOR-LIFE: dayAdv=49 signals={"levelUp":true,"systemVoice":32,"offerLines":57,"codexPlantsDelta":23,"codexSkillsDelta":19,"codexAbilitiesDelta":6,"xpDelta":-50,"any":true} pantry 33275->0
+TRUST-DIALS: office 75->49 (-26, fall) | villageMean 43.3->39 (-4.3, fall) | ge60 2->0 | movers>=5: [{"id":"Priya","from":0,"to":43,"delta":43}]
+DEED-LEDGER: calls=28 summary={"teachPlant":{"calls":16,"ok":16,"deltaSum":0,"deltaN":16,"positive":0,"meanDelta":0},"donateToPantry":{"calls":7,"ok":7,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"giveFood":{"calls":5,"ok":5,"deltaSum":20,"deltaN":5,"positive":5,"meanDelta":4}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=4 (convo=4, say=0)) m4=true m5=manual | endDay=90 alive=5 over=true
+anomalies: 0
+say dump -> evidence/2026-11-06/journey-succession-r146-33808.saydump.txt
+S-METRICS: s1=false s2=true s3=true s4=false s5=false dayAdv=49
+T-METRICS: t1=true(panels=d+0,d+8,d+14,d+30) t2=true(deedCalls=28) trustVerdict={"readable":true,"officeMantle":75,"officeLast":49,"officeDelta":-26,"officeClass":"fall","villageMantle":43.3,"villageLast":39,"villageDelta":-4.3,"villageClass":"fall","villageGe60Mantle":2,"villageGe60Last":0,"movers":[{"id":"Priya","from":0,"to":43,"delta":43}]}
+E6/CALLCHECK: e6={"callMoves":13,"withCensus":13,"chainHandoffs":4,"trustMoves":9} callCheck={"dailyMoveDays":13,"callMoveDays":10,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=5 (v2=5, excludedLoot=0))
+E7/R47: e7={"trustMoves":9,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":1,"eventClass":{"event-only":1,"deed-only":4,"both":4,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":4,"v2":5,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":4,"known":4,"unknown":0} e3={"dailyDays":50,"moves":13}

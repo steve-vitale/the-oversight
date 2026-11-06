@@ -1,0 +1,40 @@
+
+ORGANIC DEATH d11: Emma -> Ruth, topTrust=[{"id":"Nancy","t":39},{"id":"Christoph","t":32},{"id":"Tancredi","t":30},{"id":"Linh","t":29}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=10 inheritedPlants=0 keptSkills=2 inheritedSkills=0 succTrustPre=45 succTrustPost=24
+PARITY readable=true equal=true inherited=[] pre=["beast_calm"] post=["beast_calm"]
+DEATH d10 (organic (phase A)): Emma -> Ruth | passed=true lin=true mo=true trust=24 vouchers=0
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Tyler (refused=false)
+  CONVO d+3 with Nancy (refused=false)
+  STRANGER-PROBE d+3 with Sam (trust=28 refused=false)
+  BOND-CONVO d+3 with Raj (depth=0 v=10 refused=false)
+  CONVO d+7 with Tyler (refused=false)
+  CONVO d+7 with Nancy (refused=false)
+  CONVO d+14 with Marcus (refused=false)
+  CONVO d+14 with Nancy (refused=false)
+  BOND-CONVO d+14 with Raj (depth=0 v=10 refused=false)
+  NEWCOMER-PROBE d+19 with Owen (arrived d+19, trust=22 refused=false)
+  CONVO d+30 with Owen (refused=false)
+  CONVO d+30 with Linh (refused=false)
+  CONVO d+45 with Tancredi (refused=false)
+  CONVO d+45 with Elif (refused=false)
+  CONVO d+53 with Tancredi (refused=false)
+  CONVO d+53 with Raj (refused=false)
+
+FUNERAL: deathBeat=8 recover=1 vouch=0 (eligible=0) echo=2 organicBurial={"respects":false,"bury":false} halfRation=0
+
+MEAL-GATE: audited=61 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=62 signals={"levelUp":true,"systemVoice":71,"offerLines":61,"codexPlantsDelta":15,"codexSkillsDelta":14,"codexAbilitiesDelta":15,"xpDelta":66,"any":true} pantry 26791->0
+TRUST-DIALS: office 24->9 (-15, fall) | villageMean 25.2->72 (+46.8, climb) | ge60 0->4 | movers>=5: [{"id":"Linh","from":29,"to":89,"delta":60},{"id":"Tancredi","from":30,"to":89,"delta":59},{"id":"Caleb","from":14,"to":65,"delta":51},{"id":"Elif","from":16,"to":55,"delta":39},{"id":"Raj","from":15,"to":44,"delta":29}]
+DEED-LEDGER: calls=53 summary={"giveFood":{"calls":31,"ok":31,"deltaSum":92,"deltaN":31,"positive":31,"meanDelta":2.97},"teachPlant":{"calls":19,"ok":19,"deltaSum":0,"deltaN":19,"positive":0,"meanDelta":0},"donateToPantry":{"calls":3,"ok":3,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a="n/a (none eligible)" m2b=false m3=true(echoMentions=2 (convo=2, say=0)) m4=true m5=manual | endDay=72 alive=6 over=true
+anomalies: 0
+say dump -> evidence/2026-11-06/journey-succession-r146-33702.saydump.txt
+S-METRICS: s1=false s2=true s3=true s4=false s5=true dayAdv=62
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30) t2=true(deedCalls=53) trustVerdict={"readable":true,"officeMantle":24,"officeLast":9,"officeDelta":-15,"officeClass":"fall","villageMantle":25.2,"villageLast":72,"villageDelta":46.8,"villageClass":"climb","villageGe60Mantle":0,"villageGe60Last":4,"movers":[{"id":"Linh","from":29,"to":89,"delta":60},{"id":"Tancredi","from":30,"to":89,"delta":59},{"id":"Caleb","from":14,"to":65,"delta":51},{"id":"Elif","from":16,"to":55,"delta":39},{"id":"Raj","from":15,"to":44,"delta":29}]}
+E6/CALLCHECK: e6={"callMoves":6,"withCensus":6,"chainHandoffs":2,"trustMoves":4} callCheck={"dailyMoveDays":6,"callMoveDays":6,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=3 (v2=3, excludedLoot=0))
+E7/R47: e7={"trustMoves":4,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":1,"both":3,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":2,"v2":3,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":2,"known":2,"unknown":0} e3={"dailyDays":62,"moves":6}

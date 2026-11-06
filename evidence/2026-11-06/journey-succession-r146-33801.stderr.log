@@ -1,0 +1,40 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Harper","t":90},{"id":"Ali","t":90},{"id":"Ivy","t":72},{"id":"Sanne","t":69}], roster=8
+INH readable=true scripted=true deadItems=34 distinct=28 transferred=3 vanished=2 keptPlants=24 inheritedPlants=4 keptSkills=1 inheritedSkills=15 succTrustPre=90 succTrustPost=54
+PARITY readable=true equal=true inherited=[] pre=["night_eyes","lucky_rock","green_whisper"] post=["night_eyes","lucky_rock","green_whisper"]
+DEATH d41 (the expedition, scripted): Megan -> Harper | passed=true lin=true mo=true trust=54 vouchers=3
+  NEWCOMER-PROBE d+1 with Benedicte (arrived d+1, trust=32 refused=false)
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=3 vanished=2 of 28 distinct dead-bearer items
+  CONVO d+3 with Ali (refused=false)
+  CONVO d+3 with Ivy (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Ali (refused=false)
+  CONVO d+7 with Ivy (refused=false)
+  CONVO d+14 with Ali (refused=false)
+  CONVO d+14 with Hassan (refused=false)
+  CONVO d+30 with Sanne (refused=false)
+  CONVO d+30 with Hassan (refused=false)
+  CONVO d+45 with Benedicte (refused=false)
+  CONVO d+45 with Giulia (refused=false)
+  CONVO d+53 with Giulia (refused=false)
+  CONVO d+53 with Isabella (refused=false)
+  CONVO d+64 with Severyn (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=1 (eligible=3) echo=2 organicBurial={"respects":false,"bury":false} halfRation=6
+
+MEAL-GATE: audited=69 violations=0 noMealDays=24 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=69 signals={"levelUp":true,"systemVoice":43,"offerLines":62,"codexPlantsDelta":22,"codexSkillsDelta":18,"codexAbilitiesDelta":8,"xpDelta":-21,"any":true} pantry 70723->0
+TRUST-DIALS: office 54->89 (+35, climb) | villageMean 55.7->62.2 (+6.5, climb) | ge60 3->3 | movers>=5: [{"id":"Hassan","from":27,"to":90,"delta":63},{"id":"Sanne","from":69,"to":91,"delta":22},{"id":"Giulia","from":20,"to":32,"delta":12}]
+DEED-LEDGER: calls=39 summary={"giveFood":{"calls":15,"ok":15,"deltaSum":84,"deltaN":15,"positive":15,"meanDelta":5.6},"teachPlant":{"calls":12,"ok":12,"deltaSum":0,"deltaN":12,"positive":0,"meanDelta":0},"donateToPantry":{"calls":12,"ok":12,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=6 grief-excluded=5
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=2 (convo=2, say=0)) m4=true m5=manual | endDay=110 alive=2 over=true
+anomalies: 0
+say dump -> evidence/2026-11-06/journey-succession-r146-33801.saydump.txt
+S-METRICS: s1=false s2=true s3=true s4=false s5=true dayAdv=69
+T-METRICS: t1=true(panels=d+0,d+8,d+15,d+30) t2=true(deedCalls=39) trustVerdict={"readable":true,"officeMantle":54,"officeLast":89,"officeDelta":35,"officeClass":"climb","villageMantle":55.7,"villageLast":62.2,"villageDelta":6.5,"villageClass":"climb","villageGe60Mantle":3,"villageGe60Last":3,"movers":[{"id":"Hassan","from":27,"to":90,"delta":63},{"id":"Sanne","from":69,"to":91,"delta":22},{"id":"Giulia","from":20,"to":32,"delta":12}]}
+E6/CALLCHECK: e6={"callMoves":17,"withCensus":17,"chainHandoffs":6,"trustMoves":11} callCheck={"dailyMoveDays":17,"callMoveDays":15,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=3 (v2=3, excludedLoot=0))
+E7/R47: e7={"trustMoves":11,"soloOffice":3,"soloOfficeDeltas":[2,2,1],"soloBearerDeltaExact":[2,2,1],"singleMoverBearer":0,"singleMoverOther":3,"eventClass":{"event-only":0,"deed-only":5,"both":6,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":2,"v2":3,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":6,"known":6,"unknown":0} e3={"dailyDays":70,"moves":17}
