@@ -397,37 +397,47 @@ here." No telemetry compare was fabricated. `balance-panel.js` takes no
 corpus input (`--out <panel-directory>` only — it builds a panel from its
 own configured seeds), so no panel compare.md was fabricated either.
 
-## Commits (rebased — SHAs below are post-rebase)
+## Commits (rebased twice — SHAs below are post-second-rebase)
 
-- `ac17f5fc1` — prereg + instrument/driver/analyzer (before any judged sim)
-- `2910ac4e9` — build: armor curve K=20→6 + proof 39/39; oracle/cap/bark
+- `8e9204e05` — prereg + instrument/driver/analyzer (before any judged sim)
+- `fcf8f4433` — build: armor curve K=20→6 + proof 39/39; oracle/cap/bark
   tests updated by design
-- `1a31a3faf` — evidence file + prereg metric-review fill
-- `4059dd863` — pilot corpus 88001–88008, 16 files both legs
-- `1ee9cee63` — aegis fix (test-only, 90 → 95) + check.js --quick
+- `47b21b739` — evidence file + prereg metric-review fill
+- `984700fe9` — pilot corpus 88001–88008, 16 files both legs
+- `afea06383` — aegis fix (test-only, 90 → 95) + check.js --quick
   results written into this file
-- `743c129e1` — record corpus + aegis-fix commit SHAs in evidence file
-- (footer commit — this file's rebase record: SHA recorded at commit time)
+- `ed84ee8ba` — record corpus + aegis-fix commit SHAs in evidence file
+- `24b741be4` — rebase record (first rebase) + rebased commit SHAs
 
-Rebase: branch based on master `dc76d9bf6`; rebased onto explicit master
-`328c59f9181d5c8d90b4f2f735027f5438464102` (master had moved through
-`8a975ad45` and `5ba7f167f` meanwhile). Pre-rebase HEAD was
-`3fe756ffd61f0cf47155246817353c2b3f34cc48`; post-rebase HEAD is
-`743c129e1da42cbb4a20431218dfb0c8a7fa799c`. Pre-rebase SHAs for the same
-commits: prereg `53e4f884d`, build `6bca8e380`, evidence `ce4ad5ba0`,
-corpus `812c04765`, aegis fix `7bbded9ed`, SHAs record `3fe756ffd`.
+Rebase: branch based on master `dc76d9bf6`; rebased twice onto explicit
+master SHAs — first onto `328c59f9181d5c8d90b4f2f735027f5438464102`
+(pre-rebase HEAD `3fe756ffd61f0cf47155246817353c2b3f34cc48`, post-rebase
+HEAD `743c129e1da42cbb4a20431218dfb0c8a7fa799c`), then again onto
+`c7bf1e3088921ac06f69e569ded7924a10021ab2` after master advanced linearly
+(journey-endgame r147 closeout), post-rebase HEAD
+`24b741be491da659bf58ad5e111de5a1b3881240`. Both rebases clean, no
+conflicts, no stop-at-pick quirk. Pre-rebase SHAs for the same commits
+(first rebase): prereg `53e4f884d`, build `6bca8e380`, evidence
+`ce4ad5ba0`, corpus `812c04765`, aegis fix `7bbded9ed`, SHAs record
+`3fe756ffd`, rebase record `743c129e1`.
 The armed pilot leg ran on the pre-rebase build commit `6bca8e380` src,
-byte-identical to post-rebase `2910ac4e9` src (rebase replayed cleanly,
+byte-identical to post-rebase `fcf8f4433` src (rebases replayed cleanly,
 no conflicts); the aegis fix touches no src behavior, so no re-run of
-the pilot was needed.
+the pilot was needed. Proof test re-run green on the second rebased tip
+(see footer).
 
 ## Footer (filled at closeout)
 
 - check.js --quick: 282 passed, 8 failed, EXIT=1 (834s, log
   `/tmp/st-checkquick.log`). 7 pre-existing on base code; 1 (aegis)
   caused by the retune, fixed test-only (90 → 95, 12/12 green).
-- Rebase: pre-rebase HEAD `3fe756ffd61f0cf47155246817353c2b3f34cc48`;
-  rebased onto explicit master `328c59f9181d5c8d90b4f2f735027f5438464102`;
-  post-rebase HEAD `743c129e1da42cbb4a20431218dfb0c8a7fa799c` (before this
-  footer commit). Clean replay, no conflicts, no stop-at-pick quirk.
-- Proof test on rebased tip: (pending — run after this footer commit)
+- Rebase: rebased twice onto explicit master SHAs (see Commits):
+  first onto `328c59f9181d5c8d90b4f2f735027f5438464102`, then onto
+  `c7bf1e3088921ac06f69e569ded7924a10021ab2`. Final base
+  `c7bf1e3088921ac06f69e569ded7924a10021ab2`; final HEAD before this
+  footer commit `24b741be491da659bf58ad5e111de5a1b3881240`.
+- Proof test on rebased tip: **GREEN** — `test-survivaltime-20261106.js`
+  39 passed, 0 failed; `test-aegis-recipient.js` 12 passed, 0 failed;
+  `test-armor-curve-r8-20261012.js` 15 passed, 0 failed — all run on
+  tip `24b741be4` (base `c7bf1e30`). This footer commit is docs-only;
+  no src or test file changes after the proof run.
