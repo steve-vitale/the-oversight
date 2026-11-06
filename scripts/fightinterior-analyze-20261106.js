@@ -8,7 +8,12 @@
 const fs = require('fs');
 const path = require('path');
 
-const ENDINGS = ['kill', 'rout', 'scholar-death', 'scholar-flee', 'unfinished'];
+const ENDINGS = ['kill', 'rout', 'scholar-death', 'scholar-flee', 'unfinished', 'pyrrhic-kill', 'kill-unclosed'];
+// Endings that count as a wave-4+ kill at fight level (sim-pyrrhic-b,
+// 2026-11-06): a 'won' kill, a pyrrhic kill (beast died, scholar died
+// too), and a kill whose fight never closed through tbEnd. Every
+// kill-count reader must use KILL_ENDINGS, not ending === 'kill'.
+const KILL_ENDINGS = ['kill', 'pyrrhic-kill', 'kill-unclosed'];
 
 function median(xs) {
   if (!xs.length) return null;
@@ -91,7 +96,7 @@ function sizeNextLever(traces) {
     const flipped = bound >= entry && entry > 0;
     if (flipped) { flips++; flipRows.push({ seq: tr.seq, day: tr.day, mid: tr.mid, entry: entry, bound: bound, rounds: survived, bestRound: bestRound }); }
   });
-  const kills = traces.filter(function (tr) { return tr.ending === 'kill'; }).length;
+  const kills = traces.filter(function (tr) { return KILL_ENDINGS.indexOf(tr.ending) >= 0; }).length;
   const ceilingRate = traces.length ? (kills + flips) / traces.length : null;
   return { lostFights: lost.length, flips: flips, flipRows: flipRows, kills: kills, total: traces.length, ceilingRate: ceilingRate };
 }
@@ -121,7 +126,8 @@ function analyzeLeg(files) {
       policy: leg, seeds: [], days: [], endReasons: {}, won: 0, national: 0, table: 0,
       w4unlocks: 0, w4faced: 0, w5unlocks: 0, w5faced: 0, w4kills: 0, w5kills: 0,
       ready5days: 0, tbFights: 0, traces: 0, unclassified: 0, tracePresent: 0,
-      traceMissing: [], endings: {}, rounds: [], mHpLeftFrac: [], entryHp: [],
+      traceMissing: [], endings: {}, fightLevelKills: 0, unfinishedKinds: {},
+      rounds: [], mHpLeftFrac: [], entryHp: [],
       dmgPerRoundPlayer: [], dmgPerRoundMonster: [], verbs: {}, abilities: {},
       rallyRows: [], sizing: null, anomalies: [], instrumentErrors: 0,
     });
@@ -173,6 +179,13 @@ function analyzeLeg(files) {
     trs.forEach(function (tr) {
       if (tracePresent(tr)) L.tracePresent++;
       else L.traceMissing.push({ seed: run.seed, seq: tr.seq, day: tr.day, mid: tr.mid, outcome: tr.outcome, hasTrace: true, noTurnsOrVerbs: true });
+      // Fight-level kill count (sim-pyrrhic-b): traces whose ending is
+      // any kill ending — the number the GO compares against the log.
+      // The 'unfinished' split is tallied by unfinishedKind.
+      if (KILL_ENDINGS.indexOf(tr.ending) >= 0) L.fightLevelKills++;
+      if (tr.ending === 'unfinished' && tr.unfinishedKind) {
+        L.unfinishedKinds[tr.unfinishedKind] = (L.unfinishedKinds[tr.unfinishedKind] || 0) + 1;
+      }
       if (tr.rounds != null) L.rounds.push(tr.rounds);
       if (tr.mHpLeftFrac != null) L.mHpLeftFrac.push(tr.mHpLeftFrac);
       if (tr.entryHp != null) L.entryHp.push(tr.entryHp);
@@ -188,7 +201,8 @@ function analyzeLeg(files) {
       // Anomaly: a kill in 1 round, or a single round dealing >50% of
       // entry HP — the 53006-day-149 shape (solo 1-round Congregation
       // kill) needs a damage trace to explain; flag it, don't average it.
-      if (tr.ending === 'kill' && (tr.rounds != null && tr.rounds <= 1)) {
+      // Any kill ending counts (a 1-round pyrrhic kill is equally anomalous).
+      if (KILL_ENDINGS.indexOf(tr.ending) >= 0 && (tr.rounds != null && tr.rounds <= 1)) {
         L.anomalies.push({ kind: 'one-round-kill', seed: run.seed, seq: tr.seq, day: tr.day, mid: tr.mid, entryHp: tr.entryHp, hits: (tr.hits || []).length });
       }
       const maxRoundDmg = Object.keys(byRound).map(function (r) { return byRound[r].player; });
@@ -239,4 +253,4 @@ function main() {
 }
 
 if (require.main === module) main();
-module.exports = { analyzeLeg: analyzeLeg, tracePresent: tracePresent, damageByRound: damageByRound, rallyCostRows: rallyCostRows, sizeNextLever: sizeNextLever, median: median, mean: mean, ENDINGS: ENDINGS };
+module.exports = { analyzeLeg: analyzeLeg, tracePresent: tracePresent, damageByRound: damageByRound, rallyCostRows: rallyCostRows, sizeNextLever: sizeNextLever, median: median, mean: mean, ENDINGS: ENDINGS, KILL_ENDINGS: KILL_ENDINGS };
