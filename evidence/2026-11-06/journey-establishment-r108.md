@@ -22,8 +22,8 @@ on the landing base.
 Second rebase: master moved again before the merge (fightinterior-b landed
 5 commits, 304ced6cf — a taxonomy-string correction in closeTrace, no r108
 file overlap). Rebased clean onto 304ced6cf; proof re-run ALL GREEN on the
-new base (same P2/P2b numbers). Merged locally as the rebase head; pending
-ship.
+new base (same P2/P2b numbers). Landing base: the merge commit (see git
+log); pending ship.
 
 ## Run provenance (stale-lock recovery + adoption)
 This run did NOT start r108. The 08:04 CST run (lock 2026-11-06T14:04:43Z,
