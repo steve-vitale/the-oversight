@@ -86,6 +86,8 @@ check('arm policy exports topUpBeforeWalk', typeof fillPol.topUpBeforeWalk, 'fun
 check('control policy has no topUpBeforeWalk', typeof ctrlPol.topUpBeforeWalk, 'undefined');
 check('arm policy exports scalecourt.daily', typeof fillPol.scalecourt.daily, 'function');
 check('control policy exports scalecourt.daily', typeof ctrlPol.scalecourt.daily, 'function');
+check('driver emits fill counters into census', driverSrc.includes('c.fillTopUps = ctx.fillTopUps | 0;'), true);
+check('driver emits fill skip counters into census', driverSrc.includes('c.fillSkipStudy = ctx.fillSkipStudy | 0;'), true);
 
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

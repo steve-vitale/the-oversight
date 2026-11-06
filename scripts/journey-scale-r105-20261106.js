@@ -642,6 +642,11 @@ async function playSeed(seed) {
   c.courtAccords = ctx.courtAccords | 0;
   c.tended = ctx.tended | 0;
   c.tendPeer = ctx.tendPeer | 0;
+  c.fillTopUps = ctx.fillTopUps | 0;
+  c.fillTopUpLiters = ctx.fillTopUpLiters | 0;
+  c.fillUnloads = ctx.fillUnloads | 0;
+  c.fillSkipStudy = ctx.fillSkipStudy | 0;
+  c.fillSkipFull = ctx.fillSkipFull | 0;
   c.defenseCalls = ctx.defenseCalls | 0;
   c.courtNational = ctx.courtNational | 0;
   const deaths = [];
