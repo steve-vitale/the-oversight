@@ -29,12 +29,17 @@
 //   (a) det-gate: bankfood evenings/mornings/first-upkeep kcal series
 //       identical ON vs OFF on the FIXED code (the recorder + position
 //       reads change no trajectory);
-//   (b) stranded anchor — CURRENT-substrate pin, read from the FRESH
-//       before leg on current master (bb703eb19): 17021 has 0 stranded
-//       nights, 60 days, survived. (The gossipfix re-pin also said
-//       60d survived; verified again on this master from the fresh
-//       before leg, not trusted from the old pin. Was 57 days,
-//       village-lost on the pre-gossipfix substrate.)
+//   (b) stranded anchor — CURRENT-substrate pin, re-pinned at the
+//       2026-11-06 adoption rebase onto local master a7dfc4a45
+//       (journey-endgame r143: Fixes B/C + gorge fix moved the
+//       substrate): 17021 has 0 stranded nights, 52 days,
+//       village-lost. The old pin (60 days,
+//       survived, read from the fresh before leg on base 555f59160)
+//       no longer holds on current master — verified by a no-fix
+//       control run on master (same driver, game.js without the gate):
+//       17021 runs 52 days, village-lost there too, so the pin moved
+//       UNDER the fix, not because of it. The gate's own checks
+//       (det-gate, 0 stranded windows) are unchanged by the move.
 //   (c) non-stranded anchor: seed 15003 loop-day 7 sleep window
 //       still contains a 'Word gets around the haven' line, classified
 //       non-stranded sleep with the scholar inside Haven at fire time
@@ -221,8 +226,8 @@ check('framing line matches no burst/settle pattern',
   check('stranded anchor (current substrate): 17021 has 0 stranded nights',
     a.stranded.length === 0,
     'stranded=' + JSON.stringify(a.stranded.map((s) => s.loopDay)));
-  check('stranded anchor (current substrate): 17021 runs 60 days, survived',
-    on.daysAlive === 60 && on.endReason === 'survived',
+  check('stranded anchor (current substrate): 17021 runs 52 days, village-lost (r143 substrate)',
+    on.daysAlive === 52 && on.endReason === 'village-lost',
     'daysAlive=' + on.daysAlive + ' end=' + on.endReason);
   check('stranded anchor (current substrate): 0 stranded sleep windows, 0 bursts',
     a.strandedSleepWindows === 0 && a.strandedEvents === 0,
