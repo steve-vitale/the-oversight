@@ -1,6 +1,13 @@
 // mootsummon-diag — moot-turns-to-you summons classifiers
 // (sim-mootsummon-a, 2026-11-06, flesh-out loop, axis food-economy).
 //
+// EXTENSION (sim-mootgate-a, 2026-11-06): the dead-case line
+// classifier (isDeadCaseLine / deadCaseName — the ghost-trial
+// closure, betrayal.js ~1181) and the LIVE-line accused-set
+// extractor (accusedSetFromLive), plus 'dead-case' in BEAT_KINDS
+// so the trim keeps the line. Existing classifiers untouched;
+// the mootsummon proof (33/33) must stay green on this file.
+//
 // The transcript recorder + window machinery is REUSED VERBATIM from
 // scripts/policies/strandnarr-diag.js (sim-strandnarr-a, 2026-11-04);
 // the fire-time position reader is REUSED from
@@ -70,6 +77,9 @@ const MOOT_CALL_TRIAL_RE = /calls the moot\. The fire gets built up|You call a m
 const MOOT_CALL_PETITION_RE = /You call a moot on it\./;
 const BACKSTOP_RE = /The moot doesn't wait forever/;
 const EXILED_RE = /The moot doesn't wait for the exiled/;
+const DEAD_CASE_RE = /the moot doesn't try the dead/;
+const DEAD_CASE_NAME_RE = /^(.+?) is gone — the moot doesn't try the dead/;
+const LIVE_ACCUSED_RE = /TONIGHT: (.+?) stands? accused/;
 const VERDICT_COUNT_RE = /for guilty\. \d+ against\./;
 const VERDICT_GUILTY_RE = /"Guilty\." Nobody looks at anybody/;
 const VERDICT_ACQUIT_RE = /"Not guilty — this time\."/;
@@ -84,6 +94,31 @@ function isMootCallPetitionLine(text) { return MOOT_CALL_PETITION_RE.test(text |
 function isMootCallLine(text) { return isMootCallTrialLine(text) || isMootCallPetitionLine(text); }
 function isBackstopLine(text) { return BACKSTOP_RE.test(text || ''); }
 function isExiledLine(text) { return EXILED_RE.test(text || ''); }
+function isDeadCaseLine(text) { return DEAD_CASE_RE.test(text || ''); }
+// deadCaseName(text): the villager named in the ghost-trial closure
+// line ("<Name> is gone — the moot doesn't try the dead. ..."),
+// or null. The name is the display name (betrayal.js ~1181 uses
+// displayName); a LIVE line names the same villager by whoTag,
+// which is the npc name post-System — so the two match
+// case-insensitively once the System has arrived. Pre-System the
+// LIVE line may carry a descriptor instead of a name; then the
+// match is unknown, not a miss (see accusedSetFromLive).
+function deadCaseName(text) {
+  const m = DEAD_CASE_NAME_RE.exec(text || '');
+  return m ? m[1] : null;
+}
+// accusedSetFromLive(text): the accused set named by the trial
+// broadcast line ("TONIGHT: NIKOLAI, DANTE AND PAUL stand
+// accused — ..."), as an array of upper-cased name tokens, or
+// null when the line carries no accused set (not a LIVE line, or
+// the System has not arrived so no broadcast was said). 'YOU'
+// is kept as a token: the player can stand accused in a
+// player-case trial. A single accused returns a 1-element array.
+function accusedSetFromLive(text) {
+  const m = LIVE_ACCUSED_RE.exec(text || '');
+  if (!m) return null;
+  return m[1].split(/, | AND /).map((s) => s.trim().toUpperCase()).filter(Boolean);
+}
 function isVerdictCountLine(text) { return VERDICT_COUNT_RE.test(text || ''); }
 function isVerdictLine(text) { return VERDICT_GUILTY_RE.test(text || '') || VERDICT_ACQUIT_RE.test(text || ''); }
 function isVoteCastLine(text) { return VOTE_CAST_RE.test(text || ''); }
@@ -91,8 +126,9 @@ function isVoteLandsLine(text) { return VOTE_LANDS_RE.test(text || ''); }
 function isReturnLine(text) { return RETURN_RE.test(text || ''); }
 
 // kindOf(text): 'summons' | 'moot-live' | 'moot-call-trial' |
-// 'moot-call-petition' | 'backstop' | 'exiled' | 'verdict-count' |
-// 'verdict' | 'vote-cast' | 'vote-lands' | 'return' | null.
+// 'moot-call-petition' | 'backstop' | 'exiled' | 'dead-case' |
+// 'verdict-count' | 'verdict' | 'vote-cast' | 'vote-lands' |
+// 'return' | null.
 function kindOf(text) {
   if (!text) return null;
   if (isSummonsLine(text)) return 'summons';
@@ -101,6 +137,7 @@ function kindOf(text) {
   if (isMootCallPetitionLine(text)) return 'moot-call-petition';
   if (isBackstopLine(text)) return 'backstop';
   if (isExiledLine(text)) return 'exiled';
+  if (isDeadCaseLine(text)) return 'dead-case';
   if (isVerdictCountLine(text)) return 'verdict-count';
   if (isVerdictLine(text)) return 'verdict';
   if (isVoteCastLine(text)) return 'vote-cast';
@@ -130,8 +167,8 @@ function summonsKind(lines, summonsIdx) {
 }
 
 const BEAT_KINDS = ['summons', 'moot-live', 'moot-call-trial',
-  'moot-call-petition', 'backstop', 'exiled', 'verdict-count',
-  'verdict', 'vote-cast', 'vote-lands', 'return'];
+  'moot-call-petition', 'backstop', 'exiled', 'dead-case',
+  'verdict-count', 'verdict', 'vote-cast', 'vote-lands', 'return'];
 
 // classifyMootWindow(lines, markers): every moot line in one window,
 // with kind, verbatim text, fire-time position, and — for each
@@ -178,6 +215,7 @@ function classifyMootWindow(lines, markers) {
 
 module.exports = { isSummonsLine, isMootLiveLine, isMootCallTrialLine,
   isMootCallPetitionLine, isMootCallLine, isBackstopLine, isExiledLine,
+  isDeadCaseLine, deadCaseName, accusedSetFromLive,
   isVerdictCountLine, isVerdictLine, isVoteCastLine, isVoteLandsLine,
   isReturnLine, kindOf, summonsKind, classifyMootWindow,
   BEAT_KINDS,
