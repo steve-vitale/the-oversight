@@ -561,7 +561,20 @@
       // trust to 9 — declining their invitation PAID a hater. Penalties land
       // whole and 0 stays 0 (bumpTrust; same class as the leadership fixes).
       this.bumpTrust(vid, -1, 'declined their invitation');
-      return this.declineLine(vid);
+      const line = this.declineLine(vid);
+      // POCKETED THING (journey-deepening r107 2026-11-06): the canonical
+      // decline line pockets "a small thing" and D-THING (r95) is that it
+      // is never mentioned again. Record it on the invite history so a
+      // later sitting can name it (convo-wants.js `pocketed` want, r104
+      // repay pattern: the record outlives the 7-day seed). Only the
+      // pocketed line records — the alternates pocket nothing. The ledger
+      // fallback to pool[0] still speaks the line, so it still records.
+      try {
+        if (line === '"Another time, then." A small thing, pocketed.') {
+          hist.pocketed = { day: this.state.scholar.day, mentioned: false };
+        }
+      } catch (e) {}
+      return line;
     },
     // declineLine: DECLINE-LINE HONESTY (journey landing r5 2026-10-12). The
     // run ledger blocks the verbatim decline line when another villager's

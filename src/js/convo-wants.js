@@ -1048,6 +1048,69 @@
         return null;
       },
     },
+    pocketed: {
+      // THE POCKETED THING (journey-deepening r107 2026-11-06): a declined
+      // invitation that ended with "A small thing, pocketed." (betrayal.js
+      // declineLine) left a token nobody ever named again — D-THING, open
+      // since r95. Record-driven only (pick() returns 0, r104 repay
+      // pattern): declineInvite records hist.pocketed on the invite
+      // history, convoSelectWant selects from the record, onSurfaced
+      // marks it mentioned so it is named exactly once. The fiction
+      // never says WHAT the thing is — the decline line never did either —
+      // so the opener names only "that small thing".
+      pick(vid) { return 0; },
+      opener(vid) {
+        return this.convoPickCycle(vid, 'want:pocketed:open', [
+          '"Still carrying that small thing from last time." They pat a pocket. "Another time, then — still stands."',
+          '"That small thing I pocketed — I still have it. Some other fire, maybe."',
+        ]);
+      },
+      staleOpener(vid) {
+        // STALE-OPENER HONESTY (r104 defect class): never name the want id
+        // as dialogue ("About pocketed — ..."). Reframe in plain words.
+        // P-KEEP COLLISION RULE (r107 post-panel): no line in this want
+        // may carry P-KEEP regex words (promis/missed/debt/owe/owed/
+        // forget it/forgot/turning it over/still on my mind/had a chance/
+        // keep thinking/coming back to it) — a pocketed sitting is a later
+        // sitting of a promise thread too, and a colliding line scores a
+        // false NAMED. The panel caught two: the deflectBeat's "Forget it"
+        // and this stale line's "turning it over". Both reworded below.
+        try {
+          return this.convoPickCycle(vid, 'want:pocketed:stale', [
+            '"About that small thing I pocketed — it stays with me. Another time, then."',
+            '"That small thing — still in my pocket. I keep meaning to bring it up."',
+          ]);
+        } catch (e) { return null; }
+      },
+      engageBeat(vid) {
+        return '"Yeah. It stays pocketed till the moment\'s right. Some things keep."';
+      },
+      deflectBeat(vid) {
+        return '"Right. Never mind." They pat the pocket anyway.';
+      },
+      menuOptions(vid, stage) {
+        return [
+          { id: 'dlg:react', labels: ['"Some other time, then."', '"Keep it safe."'], temper: 'kind' },
+          { id: 'dlg:cant', labels: ['"No rush."'], temper: 'neutral' },
+        ];
+      },
+      closeLine(vid, resolution) {
+        if (resolution === 'engaged') return '"Thanks. It\'ll keep."';
+        return null;
+      },
+      onSurfaced(vid) {
+        // SETTLE-ON-SPEAK (seek_taken precedent): the gate is set only
+        // when the opener actually speaks — opener() is pure and runs
+        // even when ledger-skipped. Marking mentioned here means the
+        // thing is named exactly once; a skipped opener leaves it live
+        // for the next sitting.
+        try {
+          const h = (typeof this.inviteHistory === 'function') ? this.inviteHistory(vid) : null;
+          if (h && h.pocketed) h.pocketed.mentioned = true;
+        } catch (e) {}
+      },
+      resolve(vid, resolution) { return null; },
+    },
     seek_comfort: {
       // Only the comfort menu (dlg:comfort/dlg:empathize) engages — a
       // generic answer or reaction is not comfort.
@@ -1928,6 +1991,22 @@
         if (_unfav && (_unfav.state === 'fulfilled' || _unfav.state === 'broken' ||
             (_unfav.state === 'promised' && _open && _open.favorId === _unfav.id))) {
           return { id: 'repay', def: WANTS.repay, fromSeed: false, seedFavorId: _unfav.id };
+        }
+      } catch (e) {}
+      // POCKETED THING (journey-deepening r107 2026-11-06): a declined
+      // invitation that ended with "A small thing, pocketed." is recorded
+      // on the invite history (betrayal.js declineInvite) — the record
+      // outlives the 7-day seed, mirroring the r104 repay fix. Selected
+      // BELOW live seeds and BELOW the unsettled promise, above the
+      // weighted pick, so it never pre-empts the repay voice (the
+      // question-first half of the coverage bound: a sitting that opens
+      // on a question never gives repay its turn; pocketed must not add
+      // a fourth pre-emptor above repay). Settles on speak via
+      // pocketed.onSurfaced, so the thing is named exactly once.
+      try {
+        const _ph = (typeof this.inviteHistory === 'function') ? this.inviteHistory(vid) : null;
+        if (_ph && _ph.pocketed && !_ph.pocketed.mentioned) {
+          return { id: 'pocketed', def: WANTS.pocketed, fromSeed: false };
         }
       } catch (e) {}
       const c0 = this.convoGet(vid);
