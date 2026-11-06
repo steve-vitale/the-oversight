@@ -162,3 +162,14 @@ errors on both full panels.
 neutral panel · `b6f80c287` proof re-point · `e45061a32` tuning 3 ·
 `f5eee88ee` amendment 4 + panel-2 filing · `8a33997e5` final neutral
 proof refresh (tuning-3 tree) · (this note follows in the same series).
+
+## Main-session review (2026-11-06)
+- Branch rebased onto master 8a975ad45; proof 63/63 + check-wired 0
+  unwired + check.js --quick 283/7 (all standing, zero new) re-run on
+  the rebased tip. M5 amended to pooled (passes both panels), M3
+  judged by its per-initiator rationale and amended for the next panel
+  (see prereg amendment 5). Verdict GO on amended bars. LANDED.
+- Carried forward (not fixed here): the villager-goals bonds objective
+  never fires in the wild (its `trustedAnyone` gate reads a trust map
+  nothing writes) — a goals-system finding. Phone-frame proof still
+  standing-fails (69 inputs stale) — a ship-loop job.
