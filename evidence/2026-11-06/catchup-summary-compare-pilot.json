@@ -1,0 +1,910 @@
+{
+  "verdict": "GO",
+  "pilotOnly": true,
+  "seeds": [
+    17021,
+    15003,
+    15009,
+    15091,
+    15211,
+    15215,
+    15220,
+    15221
+  ],
+  "wall": {
+    "maxDelivery": 3,
+    "maxDeliveryWhere": {
+      "seed": 15221,
+      "loopDay": 37
+    },
+    "pass": true,
+    "parseFailures": [],
+    "inconsistent": []
+  },
+  "primary": {
+    "afterStrandedSleepEvents": 0,
+    "afterStrandedSleepWindows": 5,
+    "beforeStrandedSleepEvents": 0,
+    "beforeStrandedSleepWindows": 5,
+    "afterStrandedSettle": 0,
+    "beforeStrandedSettle": 0,
+    "strandedSummaries": 0,
+    "pass": true
+  },
+  "guardI": {
+    "basis": "ledger effective-said_after==kicked exact per kind per seed (re-registered; sleep rate descriptive only)",
+    "afterRate": 8.274231678486998,
+    "beforeRate": 8.274231678486998,
+    "pass": true
+  },
+  "guardIIa": {
+    "pass": true,
+    "failures": [],
+    "relayDroppedTotal": {
+      "word": 0,
+      "debate": 0,
+      "settle": 0
+    },
+    "myLostTotal": {
+      "word": 0,
+      "debate": 0,
+      "settle": 0
+    }
+  },
+  "guardIIb": {
+    "pass": true,
+    "failures": [],
+    "artifacts": [],
+    "unknownPositions": 0
+  },
+  "guardIIc": {
+    "pass": true,
+    "failures": []
+  },
+  "guardIII": {
+    "pass": true,
+    "mismatches": []
+  },
+  "rows": [
+    {
+      "seed": 17021,
+      "daysAlive": 52,
+      "endReason": "village-lost",
+      "strandedNights": 0,
+      "bStrandedSleep": "0/0",
+      "aStrandedSleep": "0/0",
+      "bStrandedSettle": 0,
+      "aStrandedSettle": 0,
+      "bNonStrandedSleep": "52/6",
+      "aNonStrandedSleep": "52/6",
+      "trajSame": true,
+      "strandedPosViolations": 0,
+      "strandedSummaries": 0,
+      "maxDelivery": 0,
+      "maxDeliveryDay": null,
+      "ledger": {
+        "seed": 17021,
+        "kicked": {
+          "word": 19,
+          "debate": 19,
+          "settle": 18
+        },
+        "saidB": {
+          "word": 19,
+          "debate": 19,
+          "settle": 18
+        },
+        "saidA": {
+          "word": 19,
+          "debate": 19,
+          "settle": 18
+        },
+        "saidAVerbatim": {
+          "word": 19,
+          "debate": 19,
+          "settle": 18
+        },
+        "summaryCounts": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0,
+          "framing": 0
+        },
+        "heldB": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "heldA": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "relayDropped": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "myLost": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "recon": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        }
+      }
+    },
+    {
+      "seed": 15003,
+      "daysAlive": 60,
+      "endReason": "survived",
+      "strandedNights": 0,
+      "bStrandedSleep": "0/0",
+      "aStrandedSleep": "0/0",
+      "bStrandedSettle": 0,
+      "aStrandedSettle": 0,
+      "bNonStrandedSleep": "60/3",
+      "aNonStrandedSleep": "60/3",
+      "trajSame": true,
+      "strandedPosViolations": 0,
+      "strandedSummaries": 0,
+      "maxDelivery": 0,
+      "maxDeliveryDay": null,
+      "ledger": {
+        "seed": 15003,
+        "kicked": {
+          "word": 15,
+          "debate": 15,
+          "settle": 13
+        },
+        "saidB": {
+          "word": 15,
+          "debate": 15,
+          "settle": 13
+        },
+        "saidA": {
+          "word": 15,
+          "debate": 15,
+          "settle": 13
+        },
+        "saidAVerbatim": {
+          "word": 15,
+          "debate": 15,
+          "settle": 13
+        },
+        "summaryCounts": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0,
+          "framing": 0
+        },
+        "heldB": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "heldA": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "relayDropped": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "myLost": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "recon": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        }
+      }
+    },
+    {
+      "seed": 15009,
+      "daysAlive": 60,
+      "endReason": "survived",
+      "strandedNights": 0,
+      "bStrandedSleep": "0/0",
+      "aStrandedSleep": "0/0",
+      "bStrandedSettle": 0,
+      "aStrandedSettle": 0,
+      "bNonStrandedSleep": "60/7",
+      "aNonStrandedSleep": "60/7",
+      "trajSame": true,
+      "strandedPosViolations": 0,
+      "strandedSummaries": 0,
+      "maxDelivery": 0,
+      "maxDeliveryDay": null,
+      "ledger": {
+        "seed": 15009,
+        "kicked": {
+          "word": 25,
+          "debate": 25,
+          "settle": 23
+        },
+        "saidB": {
+          "word": 25,
+          "debate": 25,
+          "settle": 23
+        },
+        "saidA": {
+          "word": 25,
+          "debate": 25,
+          "settle": 23
+        },
+        "saidAVerbatim": {
+          "word": 25,
+          "debate": 25,
+          "settle": 23
+        },
+        "summaryCounts": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0,
+          "framing": 0
+        },
+        "heldB": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "heldA": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "relayDropped": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "myLost": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "recon": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        }
+      }
+    },
+    {
+      "seed": 15091,
+      "daysAlive": 35,
+      "endReason": "village-lost",
+      "strandedNights": 0,
+      "bStrandedSleep": "0/0",
+      "aStrandedSleep": "0/0",
+      "bStrandedSettle": 0,
+      "aStrandedSettle": 0,
+      "bNonStrandedSleep": "35/6",
+      "aNonStrandedSleep": "35/6",
+      "trajSame": true,
+      "strandedPosViolations": 0,
+      "strandedSummaries": 0,
+      "maxDelivery": 0,
+      "maxDeliveryDay": null,
+      "ledger": {
+        "seed": 15091,
+        "kicked": {
+          "word": 16,
+          "debate": 16,
+          "settle": 15
+        },
+        "saidB": {
+          "word": 16,
+          "debate": 16,
+          "settle": 15
+        },
+        "saidA": {
+          "word": 16,
+          "debate": 16,
+          "settle": 15
+        },
+        "saidAVerbatim": {
+          "word": 16,
+          "debate": 16,
+          "settle": 15
+        },
+        "summaryCounts": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0,
+          "framing": 0
+        },
+        "heldB": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "heldA": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "relayDropped": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "myLost": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "recon": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        }
+      }
+    },
+    {
+      "seed": 15211,
+      "daysAlive": 60,
+      "endReason": "survived",
+      "strandedNights": 0,
+      "bStrandedSleep": "0/0",
+      "aStrandedSleep": "0/0",
+      "bStrandedSettle": 0,
+      "aStrandedSettle": 0,
+      "bNonStrandedSleep": "60/2",
+      "aNonStrandedSleep": "60/2",
+      "trajSame": true,
+      "strandedPosViolations": 0,
+      "strandedSummaries": 0,
+      "maxDelivery": 0,
+      "maxDeliveryDay": null,
+      "ledger": {
+        "seed": 15211,
+        "kicked": {
+          "word": 23,
+          "debate": 23,
+          "settle": 23
+        },
+        "saidB": {
+          "word": 23,
+          "debate": 23,
+          "settle": 23
+        },
+        "saidA": {
+          "word": 23,
+          "debate": 23,
+          "settle": 23
+        },
+        "saidAVerbatim": {
+          "word": 23,
+          "debate": 23,
+          "settle": 23
+        },
+        "summaryCounts": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0,
+          "framing": 0
+        },
+        "heldB": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "heldA": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "relayDropped": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "myLost": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "recon": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        }
+      }
+    },
+    {
+      "seed": 15215,
+      "daysAlive": 54,
+      "endReason": "village-lost",
+      "strandedNights": 0,
+      "bStrandedSleep": "0/0",
+      "aStrandedSleep": "0/0",
+      "bStrandedSettle": 0,
+      "aStrandedSettle": 0,
+      "bNonStrandedSleep": "54/4",
+      "aNonStrandedSleep": "54/4",
+      "trajSame": true,
+      "strandedPosViolations": 0,
+      "strandedSummaries": 0,
+      "maxDelivery": 0,
+      "maxDeliveryDay": null,
+      "ledger": {
+        "seed": 15215,
+        "kicked": {
+          "word": 15,
+          "debate": 15,
+          "settle": 14
+        },
+        "saidB": {
+          "word": 15,
+          "debate": 15,
+          "settle": 14
+        },
+        "saidA": {
+          "word": 15,
+          "debate": 15,
+          "settle": 14
+        },
+        "saidAVerbatim": {
+          "word": 15,
+          "debate": 15,
+          "settle": 14
+        },
+        "summaryCounts": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0,
+          "framing": 0
+        },
+        "heldB": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "heldA": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "relayDropped": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "myLost": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "recon": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        }
+      }
+    },
+    {
+      "seed": 15220,
+      "daysAlive": 60,
+      "endReason": "survived",
+      "strandedNights": 0,
+      "bStrandedSleep": "0/0",
+      "aStrandedSleep": "0/0",
+      "bStrandedSettle": 0,
+      "aStrandedSettle": 0,
+      "bNonStrandedSleep": "60/6",
+      "aNonStrandedSleep": "60/6",
+      "trajSame": true,
+      "strandedPosViolations": 0,
+      "strandedSummaries": 0,
+      "maxDelivery": 0,
+      "maxDeliveryDay": null,
+      "ledger": {
+        "seed": 15220,
+        "kicked": {
+          "word": 22,
+          "debate": 22,
+          "settle": 22
+        },
+        "saidB": {
+          "word": 22,
+          "debate": 22,
+          "settle": 22
+        },
+        "saidA": {
+          "word": 22,
+          "debate": 22,
+          "settle": 22
+        },
+        "saidAVerbatim": {
+          "word": 22,
+          "debate": 22,
+          "settle": 22
+        },
+        "summaryCounts": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0,
+          "framing": 0
+        },
+        "heldB": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "heldA": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "relayDropped": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "myLost": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "recon": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        }
+      }
+    },
+    {
+      "seed": 15221,
+      "daysAlive": 48,
+      "endReason": "village-lost",
+      "strandedNights": 5,
+      "bStrandedSleep": "5/0",
+      "aStrandedSleep": "5/0",
+      "bStrandedSettle": 0,
+      "aStrandedSettle": 0,
+      "bNonStrandedSleep": "42/1",
+      "aNonStrandedSleep": "42/1",
+      "trajSame": true,
+      "strandedPosViolations": 0,
+      "strandedSummaries": 0,
+      "maxDelivery": 3,
+      "maxDeliveryDay": 37,
+      "ledger": {
+        "seed": 15221,
+        "kicked": {
+          "word": 30,
+          "debate": 30,
+          "settle": 30
+        },
+        "saidB": {
+          "word": 30,
+          "debate": 30,
+          "settle": 30
+        },
+        "saidA": {
+          "word": 30,
+          "debate": 30,
+          "settle": 30
+        },
+        "saidAVerbatim": {
+          "word": 26,
+          "debate": 26,
+          "settle": 29
+        },
+        "summaryCounts": {
+          "word": 4,
+          "debate": 4,
+          "settle": 1,
+          "framing": 2
+        },
+        "heldB": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "heldA": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "relayDropped": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "myLost": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        },
+        "recon": {
+          "word": 0,
+          "debate": 0,
+          "settle": 0
+        }
+      }
+    }
+  ],
+  "stretchRows": [
+    {
+      "seed": 17021,
+      "stretch": [
+        46
+      ],
+      "returnDay": 47,
+      "held": 0,
+      "delivered": 0,
+      "lost": 0,
+      "qMax": 0,
+      "qEnd": 0,
+      "drops": 0,
+      "drained": false,
+      "morningR": 0,
+      "eveningR": 0,
+      "drainEvidenced": true,
+      "posHeld": {
+        "word": 0,
+        "debate": 0,
+        "settle": 0
+      },
+      "dhExcess": {
+        "word": 0,
+        "debate": 0,
+        "settle": 0
+      },
+      "unknown": 0
+    },
+    {
+      "seed": 17021,
+      "stretch": [
+        52
+      ],
+      "returnDay": null,
+      "held": 0,
+      "delivered": 0,
+      "lost": 0,
+      "qMax": 0,
+      "qEnd": 0,
+      "drops": 0,
+      "drained": false,
+      "morningR": null,
+      "eveningR": null,
+      "drainEvidenced": null,
+      "posHeld": {
+        "word": 0,
+        "debate": 0,
+        "settle": 0
+      },
+      "dhExcess": {
+        "word": 0,
+        "debate": 0,
+        "settle": 0
+      },
+      "unknown": 0
+    },
+    {
+      "seed": 15003,
+      "stretch": [
+        55
+      ],
+      "returnDay": 56,
+      "held": 0,
+      "delivered": 0,
+      "lost": 0,
+      "qMax": 0,
+      "qEnd": 0,
+      "drops": 0,
+      "drained": false,
+      "morningR": 0,
+      "eveningR": 0,
+      "drainEvidenced": true,
+      "posHeld": {
+        "word": 0,
+        "debate": 0,
+        "settle": 0
+      },
+      "dhExcess": {
+        "word": 0,
+        "debate": 0,
+        "settle": 0
+      },
+      "unknown": 0
+    },
+    {
+      "seed": 15009,
+      "stretch": [
+        57
+      ],
+      "returnDay": 58,
+      "held": 0,
+      "delivered": 0,
+      "lost": 0,
+      "qMax": 0,
+      "qEnd": 0,
+      "drops": 0,
+      "drained": false,
+      "morningR": 0,
+      "eveningR": 0,
+      "drainEvidenced": true,
+      "posHeld": {
+        "word": 0,
+        "debate": 0,
+        "settle": 0
+      },
+      "dhExcess": {
+        "word": 0,
+        "debate": 0,
+        "settle": 0
+      },
+      "unknown": 0
+    },
+    {
+      "seed": 15220,
+      "stretch": [
+        53
+      ],
+      "returnDay": 54,
+      "held": 0,
+      "delivered": 0,
+      "lost": 0,
+      "qMax": 0,
+      "qEnd": 0,
+      "drops": 0,
+      "drained": false,
+      "morningR": 0,
+      "eveningR": 0,
+      "drainEvidenced": true,
+      "posHeld": {
+        "word": 0,
+        "debate": 0,
+        "settle": 0
+      },
+      "dhExcess": {
+        "word": 0,
+        "debate": 0,
+        "settle": 0
+      },
+      "unknown": 0
+    },
+    {
+      "seed": 15221,
+      "stretch": [
+        32,
+        33,
+        34,
+        35,
+        36
+      ],
+      "returnDay": 37,
+      "held": 7,
+      "delivered": 7,
+      "lost": 0,
+      "qMax": 7,
+      "qEnd": 7,
+      "drops": 0,
+      "drained": false,
+      "morningR": 7,
+      "eveningR": 0,
+      "drainEvidenced": true,
+      "posHeld": {
+        "word": 0,
+        "debate": 0,
+        "settle": 0
+      },
+      "dhExcess": {
+        "word": -3,
+        "debate": -3,
+        "settle": -1
+      },
+      "unknown": 0
+    }
+  ],
+  "deliveryRows": [
+    {
+      "seed": 17021,
+      "maxDelivery": 0,
+      "maxDay": null,
+      "returns": 0,
+      "framing": 0,
+      "burstSummaries": 0,
+      "settleSummaries": 0,
+      "summaryWord": 0,
+      "summaryDebate": 0,
+      "summarySettle": 0
+    },
+    {
+      "seed": 15003,
+      "maxDelivery": 0,
+      "maxDay": null,
+      "returns": 0,
+      "framing": 0,
+      "burstSummaries": 0,
+      "settleSummaries": 0,
+      "summaryWord": 0,
+      "summaryDebate": 0,
+      "summarySettle": 0
+    },
+    {
+      "seed": 15009,
+      "maxDelivery": 0,
+      "maxDay": null,
+      "returns": 0,
+      "framing": 0,
+      "burstSummaries": 0,
+      "settleSummaries": 0,
+      "summaryWord": 0,
+      "summaryDebate": 0,
+      "summarySettle": 0
+    },
+    {
+      "seed": 15091,
+      "maxDelivery": 0,
+      "maxDay": null,
+      "returns": 0,
+      "framing": 0,
+      "burstSummaries": 0,
+      "settleSummaries": 0,
+      "summaryWord": 0,
+      "summaryDebate": 0,
+      "summarySettle": 0
+    },
+    {
+      "seed": 15211,
+      "maxDelivery": 0,
+      "maxDay": null,
+      "returns": 0,
+      "framing": 0,
+      "burstSummaries": 0,
+      "settleSummaries": 0,
+      "summaryWord": 0,
+      "summaryDebate": 0,
+      "summarySettle": 0
+    },
+    {
+      "seed": 15215,
+      "maxDelivery": 0,
+      "maxDay": null,
+      "returns": 0,
+      "framing": 0,
+      "burstSummaries": 0,
+      "settleSummaries": 0,
+      "summaryWord": 0,
+      "summaryDebate": 0,
+      "summarySettle": 0
+    },
+    {
+      "seed": 15220,
+      "maxDelivery": 0,
+      "maxDay": null,
+      "returns": 0,
+      "framing": 0,
+      "burstSummaries": 0,
+      "settleSummaries": 0,
+      "summaryWord": 0,
+      "summaryDebate": 0,
+      "summarySettle": 0
+    },
+    {
+      "seed": 15221,
+      "maxDelivery": 3,
+      "maxDay": 37,
+      "returns": 2,
+      "framing": 2,
+      "burstSummaries": 2,
+      "settleSummaries": 1,
+      "summaryWord": 4,
+      "summaryDebate": 4,
+      "summarySettle": 1
+    }
+  ]
+}
