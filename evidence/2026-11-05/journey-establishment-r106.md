@@ -266,6 +266,21 @@ guardrails.deaths,guardrails.popAlive,guardrails.pantryKcal,c3.starvationDeaths`
   r103). Targeted proofs on the touched areas: huntwire P1 4/4 + P2
   det-gate identical; b4 layer proof ALL GREEN (17 pins + det-gate
   4/4 + smoke).
-- Merge pending: rebase onto the current master + re-run of proofs and
-  gate after the Loop A closeout lands; final numbers appended here
-  before the merge. No bump/push/live-verify — ship loop owns those.
+- Final rebase + gate (main-session closeout, onto master 14930f086
+  after the Loop A enddaybeats landing): rebase clean 4/4, tip
+  20bf6a524. Huntwire proof re-run ALL GREEN on the rebased tip (P2
+  det-gate identical; gate-off vs control-a/b identical). Final
+  check.js --quick (log goal hidden_files/
+  establishment-r106-checkquick-20261106.log): **283 passed, 7 failed
+  in 845s** — a subset of the standing set, no new failures:
+  proof-update, workflow (freshness — substrate moved under the
+  branch since fd2d0c5ef: enddaybeats + Loop B 0130Z changed game.js
+  inputs; the branch changes no src/js), mobile-combat-cadence,
+  occupation-panels, phone-frame-proof (stale receipt),
+  establishment-r20-fixes (racks-full, known since r103),
+  trust-observer-neutrality (120s timeout, load flake). Cache-flags
+  and capable-bot, failing in the 278/12 run, pass here — load
+  roulette, not a code change. Merged ff-only to master; tree released
+  done-merged, branch deleted; playtest-loop.lock deleted after
+  reading its run_id (laneA-establishment-2026-11-06T0147Z). No
+  bump/push/live-verify — ship loop owns those.
