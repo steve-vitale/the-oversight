@@ -15,8 +15,8 @@ a deterministic reproduction, not a fresh band, not a band claim) ·
 · **Confirm corpus:**
 `evidence/2026-11-06/perseed-stageally-confirm-b/stageally-s53006-stageally-confirm-staged.json`
 (anchor 2ff11cbf) · **Prereg:**
-`evidence/2026-11-06/sim-congtrace-a-prereg.md` (committed 299379f67
-before any judged sim) · **Proof:**
+`evidence/2026-11-06/sim-congtrace-a-prereg.md` (committed 84c6739f7
+before any judged sim; rebased — see Proof and commits) · **Proof:**
 `scripts/test-congtrace-20261106.js` 36/36 green · **Analyzer:**
 `scripts/congtrace-analyze-20261106.js` (analysis
 `/tmp/congtrace-analysis.json`, working copy; this file is the record).
@@ -274,8 +274,8 @@ days, scholar deaths); no new death mode (instrument records only).
   monster-side damage separated, heresy trick bucket; determinism
   fixtures; live legs to /tmp: 2× 150d stageally-driver runs on 53006,
   byte-identical, corpus headlines reproduced).
-- Prereg committed 299379f67 before any judged sim. Driver + analyzer
-  + proof committed 360af49ed. The safe-commit index clobber hit on
+- Prereg committed 84c6739f7 before any judged sim. Driver + analyzer
+  + proof committed c649bc745. The safe-commit index clobber hit on
   both commits (files shown staged-as-deleted after correct commits);
   repaired with HEAD-blob cacheinfo each time, verified `git status`
   empty + `git diff HEAD` empty + hash-object matches.
@@ -284,6 +284,13 @@ days, scholar deaths); no new death mode (instrument records only).
   `/tmp/congtrace-analysis.json` (working copy; this file is the
   record). Probe script + output at `/tmp/congtrace-probe-20261106.js`
   and `/tmp/congtrace-probe-out.json` (working copies, not committed).
+- Rebase note: master moved during the run (sim-baseline9-a landed as
+  371486eae), so the branch was rebased onto 371486eae before merging;
+  the proof was re-run green on the new base (36/36) after the rebase,
+  and the two commit-hash references above were updated to the rebased
+  hashes. The corpus file's recorded `anchorCommit` (360af49ed) is the
+  pre-rebase driver commit, as run — it is a historical record of the
+  judged leg, not the rebased hash.
 
 ## Convergence
 
