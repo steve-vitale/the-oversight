@@ -263,5 +263,18 @@ evidence/2026-11-05/journey-scale-r102-checkquick.log.
 - Lock discipline held throughout; lock deleted at closeout.
 
 ## Closeout (filled after the check gate)
+- check.js --quick: 273 passed, 17 failed in 1825s (all pre-existing
+  / load, no new failures — see above).
+- Rebased onto master 5194acd46 (sim-winnability-round-2130 +
+  tbretreat-refind-confirm-b landed while the gate ran; zero file
+  overlap with this branch); proof test re-run green after the
+  rebase (24/24).
+- Merged locally, pending ship (no bump/push/live-verify — ship loop
+  owns those). Merge hash in the memory log.
+- Rotation 3 -> 0 written at closeout, verified by read-back (see
+  rotation note below).
 
-[TO FILL]
+## Rotation note
+Closeout write 3 -> 0 verified by read-back (up to 3 retries, 60s
+apart, per the r106 closeout practice). Start state was 3 (written
+by r106's 2 -> 3 closeout, verified then).
