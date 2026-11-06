@@ -29,8 +29,13 @@
 // STRANDNARR=0 on seed 17021 and asserts
 //   (a) det-gate: bankfood evenings/mornings/first-upkeep kcal series
 //       identical ON vs OFF;
-//   (b) 17021 CURRENT-SUBSTRATE FACTS (re-pin): 60d SURVIVED, 0
-//       stranded nights (census re-pin, current master);
+//   (b) 17021 CURRENT-SUBSTRATE FACTS (re-pin): 52d VILLAGE-LOST, 0
+//       stranded nights (census re-pin, current master). Pin moved from
+//       60d SURVIVED (set at base 25de3b127) with the substrate, NOT the
+//       fix: control run of the same driver on master ec56fdf04 (no fix)
+//       gives the identical 52d village-lost, stranded 0, sleepWindows 0
+//       (scratch worktree, 2026-11-06). Awaynaming's evidence already
+//       recorded 17021 = 52d village-lost on the r143 substrate.
 //   (c) non-stranded anchor: seed 15003 loop-day 7 sleep window
 //       contains a 'Word gets around the haven' line, classified
 //       non-stranded sleep with the scholar inside Haven at fire
@@ -336,8 +341,8 @@ function queueLen(Game) { return ((Game.state || {}).pendingHavenNews || []).len
   check('17021 re-pin (current substrate): 0 stranded nights',
     a.stranded.length === 0,
     'stranded=' + JSON.stringify(a.stranded.map((s) => s.loopDay)));
-  check('17021 re-pin (current substrate): 60 days, survived',
-    on.daysAlive === 60 && on.endReason === 'survived',
+  check('17021 re-pin (current substrate): 52 days, village-lost',
+    on.daysAlive === 52 && on.endReason === 'village-lost',
     'daysAlive=' + on.daysAlive + ' end=' + on.endReason);
   check('17021 re-pin (current substrate): 0 stranded sleep windows, 0 burst events',
     a.strandedSleepWindows === 0 && a.strandedSleepTallies['burst-event'].windows === 0,
