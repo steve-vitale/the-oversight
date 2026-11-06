@@ -1,0 +1,544 @@
+{
+ "probe": "ruth-wait-v1a-r143",
+ "fightLive": true,
+ "driveCalls": 1,
+ "turns": 20,
+ "byFighter": {
+  "Wolfgang": {
+   "name": "Wolfgang",
+   "key": "v_gen_3lygz6t",
+   "kind": "villager",
+   "ai": "helpful",
+   "turns": 5,
+   "actions": {
+    "strike": 4,
+    "help": 1
+   },
+   "wbonus": 0,
+   "distMin": 1,
+   "distMax": 2
+  },
+  "Dineo": {
+   "name": "Dineo",
+   "key": "v_gen_4rxfzqo",
+   "kind": "villager",
+   "ai": "helpful",
+   "turns": 5,
+   "actions": {
+    "strike": 4,
+    "help": 1
+   },
+   "wbonus": 0,
+   "distMin": 1,
+   "distMax": 2
+  },
+  "Lena": {
+   "name": "Lena",
+   "key": "v_lena_ruiz",
+   "kind": "villager",
+   "ai": "helpful",
+   "turns": 5,
+   "actions": {
+    "strike": 4,
+    "help": 1
+   },
+   "wbonus": 0,
+   "distMin": 1,
+   "distMax": 2
+  },
+  "Ruth": {
+   "name": "Ruth",
+   "key": "v_ruth_goldstein",
+   "kind": "villager",
+   "ai": "helpful",
+   "turns": 5,
+   "actions": {
+    "harry": 2,
+    "wait": 3
+   },
+   "wbonus": 0,
+   "distMin": 2,
+   "distMax": 3
+  }
+ },
+ "decides": [
+  {
+   "round": 1,
+   "key": "v_gen_3lygz6t",
+   "name": "Wolfgang",
+   "kind": "villager",
+   "ai": "helpful",
+   "hp": 100,
+   "maxHp": 100,
+   "speed": 3,
+   "pos": [
+    4,
+    5
+   ],
+   "distFoe": 2,
+   "action": "strike",
+   "target": "m_0",
+   "moves": 0,
+   "wbonus": 0
+  },
+  {
+   "round": 1,
+   "key": "v_gen_4rxfzqo",
+   "name": "Dineo",
+   "kind": "villager",
+   "ai": "helpful",
+   "hp": 100,
+   "maxHp": 100,
+   "speed": 3,
+   "pos": [
+    3,
+    4
+   ],
+   "distFoe": 2,
+   "action": "strike",
+   "target": "m_0",
+   "moves": 1,
+   "wbonus": 0
+  },
+  {
+   "round": 1,
+   "key": "v_lena_ruiz",
+   "name": "Lena",
+   "kind": "villager",
+   "ai": "helpful",
+   "hp": 100,
+   "maxHp": 100,
+   "speed": 3,
+   "pos": [
+    3,
+    3
+   ],
+   "distFoe": 2,
+   "action": "strike",
+   "target": "m_0",
+   "moves": 1,
+   "wbonus": 0
+  },
+  {
+   "round": 1,
+   "key": "v_ruth_goldstein",
+   "name": "Ruth",
+   "kind": "villager",
+   "ai": "helpful",
+   "hp": 100,
+   "maxHp": 100,
+   "speed": 2,
+   "pos": [
+    2,
+    3
+   ],
+   "distFoe": 3,
+   "action": "harry",
+   "target": "m_0",
+   "moves": 1,
+   "wbonus": 0
+  },
+  {
+   "round": 2,
+   "key": "v_gen_3lygz6t",
+   "name": "Wolfgang",
+   "kind": "villager",
+   "ai": "helpful",
+   "hp": 100,
+   "maxHp": 100,
+   "speed": 3,
+   "pos": [
+    4,
+    5
+   ],
+   "distFoe": 2,
+   "action": "strike",
+   "target": "m_0",
+   "moves": 0,
+   "wbonus": 0
+  },
+  {
+   "round": 2,
+   "key": "v_gen_4rxfzqo",
+   "name": "Dineo",
+   "kind": "villager",
+   "ai": "helpful",
+   "hp": 100,
+   "maxHp": 100,
+   "speed": 3,
+   "pos": [
+    4,
+    3
+   ],
+   "distFoe": 1,
+   "action": "strike",
+   "target": "m_0",
+   "moves": 0,
+   "wbonus": 0
+  },
+  {
+   "round": 2,
+   "key": "v_lena_ruiz",
+   "name": "Lena",
+   "kind": "villager",
+   "ai": "helpful",
+   "hp": 100,
+   "maxHp": 100,
+   "speed": 3,
+   "pos": [
+    4,
+    2
+   ],
+   "distFoe": 1,
+   "action": "strike",
+   "target": "m_0",
+   "moves": 0,
+   "wbonus": 0
+  },
+  {
+   "round": 2,
+   "key": "v_ruth_goldstein",
+   "name": "Ruth",
+   "kind": "villager",
+   "ai": "helpful",
+   "hp": 100,
+   "maxHp": 100,
+   "speed": 2,
+   "pos": [
+    3,
+    2
+   ],
+   "distFoe": 2,
+   "action": "harry",
+   "target": "m_0",
+   "moves": 0,
+   "wbonus": 0
+  },
+  {
+   "round": 3,
+   "key": "v_gen_3lygz6t",
+   "name": "Wolfgang",
+   "kind": "villager",
+   "ai": "helpful",
+   "hp": 100,
+   "maxHp": 100,
+   "speed": 3,
+   "pos": [
+    4,
+    5
+   ],
+   "distFoe": 2,
+   "action": "help",
+   "target": "p",
+   "moves": 0,
+   "wbonus": 0
+  },
+  {
+   "round": 3,
+   "key": "v_gen_4rxfzqo",
+   "name": "Dineo",
+   "kind": "villager",
+   "ai": "helpful",
+   "hp": 100,
+   "maxHp": 100,
+   "speed": 3,
+   "pos": [
+    4,
+    3
+   ],
+   "distFoe": 1,
+   "action": "help",
+   "target": "p",
+   "moves": 0,
+   "wbonus": 0
+  },
+  {
+   "round": 3,
+   "key": "v_lena_ruiz",
+   "name": "Lena",
+   "kind": "villager",
+   "ai": "helpful",
+   "hp": 100,
+   "maxHp": 100,
+   "speed": 3,
+   "pos": [
+    4,
+    2
+   ],
+   "distFoe": 1,
+   "action": "help",
+   "target": "p",
+   "moves": 1,
+   "wbonus": 0
+  },
+  {
+   "round": 3,
+   "key": "v_ruth_goldstein",
+   "name": "Ruth",
+   "kind": "villager",
+   "ai": "helpful",
+   "hp": 100,
+   "maxHp": 100,
+   "speed": 2,
+   "pos": [
+    3,
+    2
+   ],
+   "distFoe": 2,
+   "action": "wait",
+   "target": null,
+   "moves": 0,
+   "wbonus": 0
+  },
+  {
+   "round": 4,
+   "key": "v_gen_3lygz6t",
+   "name": "Wolfgang",
+   "kind": "villager",
+   "ai": "helpful",
+   "hp": 100,
+   "maxHp": 100,
+   "speed": 3,
+   "pos": [
+    4,
+    5
+   ],
+   "distFoe": 1,
+   "action": "strike",
+   "target": "m_0",
+   "moves": 0,
+   "wbonus": 0
+  },
+  {
+   "round": 4,
+   "key": "v_gen_4rxfzqo",
+   "name": "Dineo",
+   "kind": "villager",
+   "ai": "helpful",
+   "hp": 100,
+   "maxHp": 100,
+   "speed": 3,
+   "pos": [
+    4,
+    3
+   ],
+   "distFoe": 1,
+   "action": "strike",
+   "target": "m_0",
+   "moves": 0,
+   "wbonus": 0
+  },
+  {
+   "round": 4,
+   "key": "v_lena_ruiz",
+   "name": "Lena",
+   "kind": "villager",
+   "ai": "helpful",
+   "hp": 100,
+   "maxHp": 100,
+   "speed": 3,
+   "pos": [
+    3,
+    3
+   ],
+   "distFoe": 1,
+   "action": "strike",
+   "target": "m_0",
+   "moves": 0,
+   "wbonus": 0
+  },
+  {
+   "round": 4,
+   "key": "v_ruth_goldstein",
+   "name": "Ruth",
+   "kind": "villager",
+   "ai": "helpful",
+   "hp": 100,
+   "maxHp": 100,
+   "speed": 2,
+   "pos": [
+    3,
+    2
+   ],
+   "distFoe": 2,
+   "action": "wait",
+   "target": null,
+   "moves": 0,
+   "wbonus": 0
+  },
+  {
+   "round": 5,
+   "key": "v_gen_3lygz6t",
+   "name": "Wolfgang",
+   "kind": "villager",
+   "ai": "helpful",
+   "hp": 100,
+   "maxHp": 100,
+   "speed": 3,
+   "pos": [
+    4,
+    5
+   ],
+   "distFoe": 1,
+   "action": "strike",
+   "target": "m_0",
+   "moves": 0,
+   "wbonus": 0
+  },
+  {
+   "round": 5,
+   "key": "v_gen_4rxfzqo",
+   "name": "Dineo",
+   "kind": "villager",
+   "ai": "helpful",
+   "hp": 100,
+   "maxHp": 100,
+   "speed": 3,
+   "pos": [
+    4,
+    3
+   ],
+   "distFoe": 1,
+   "action": "strike",
+   "target": "m_0",
+   "moves": 0,
+   "wbonus": 0
+  },
+  {
+   "round": 5,
+   "key": "v_lena_ruiz",
+   "name": "Lena",
+   "kind": "villager",
+   "ai": "helpful",
+   "hp": 100,
+   "maxHp": 100,
+   "speed": 3,
+   "pos": [
+    3,
+    3
+   ],
+   "distFoe": 1,
+   "action": "strike",
+   "target": "m_0",
+   "moves": 0,
+   "wbonus": 0
+  },
+  {
+   "round": 5,
+   "key": "v_ruth_goldstein",
+   "name": "Ruth",
+   "kind": "villager",
+   "ai": "helpful",
+   "hp": 100,
+   "maxHp": 100,
+   "speed": 2,
+   "pos": [
+    3,
+    2
+   ],
+   "distFoe": 2,
+   "action": "wait",
+   "target": null,
+   "moves": 0,
+   "wbonus": 0
+  }
+ ],
+ "ruthTurnHeaders": 5,
+ "ruthDecides": [
+  {
+   "round": 1,
+   "key": "v_ruth_goldstein",
+   "name": "Ruth",
+   "kind": "villager",
+   "ai": "helpful",
+   "hp": 100,
+   "maxHp": 100,
+   "speed": 2,
+   "pos": [
+    2,
+    3
+   ],
+   "distFoe": 3,
+   "action": "harry",
+   "target": "m_0",
+   "moves": 1,
+   "wbonus": 0
+  },
+  {
+   "round": 2,
+   "key": "v_ruth_goldstein",
+   "name": "Ruth",
+   "kind": "villager",
+   "ai": "helpful",
+   "hp": 100,
+   "maxHp": 100,
+   "speed": 2,
+   "pos": [
+    3,
+    2
+   ],
+   "distFoe": 2,
+   "action": "harry",
+   "target": "m_0",
+   "moves": 0,
+   "wbonus": 0
+  },
+  {
+   "round": 3,
+   "key": "v_ruth_goldstein",
+   "name": "Ruth",
+   "kind": "villager",
+   "ai": "helpful",
+   "hp": 100,
+   "maxHp": 100,
+   "speed": 2,
+   "pos": [
+    3,
+    2
+   ],
+   "distFoe": 2,
+   "action": "wait",
+   "target": null,
+   "moves": 0,
+   "wbonus": 0
+  },
+  {
+   "round": 4,
+   "key": "v_ruth_goldstein",
+   "name": "Ruth",
+   "kind": "villager",
+   "ai": "helpful",
+   "hp": 100,
+   "maxHp": 100,
+   "speed": 2,
+   "pos": [
+    3,
+    2
+   ],
+   "distFoe": 2,
+   "action": "wait",
+   "target": null,
+   "moves": 0,
+   "wbonus": 0
+  },
+  {
+   "round": 5,
+   "key": "v_ruth_goldstein",
+   "name": "Ruth",
+   "kind": "villager",
+   "ai": "helpful",
+   "hp": 100,
+   "maxHp": 100,
+   "speed": 2,
+   "pos": [
+    3,
+    2
+   ],
+   "distFoe": 2,
+   "action": "wait",
+   "target": null,
+   "moves": 0,
+   "wbonus": 0
+  }
+ ]
+}
