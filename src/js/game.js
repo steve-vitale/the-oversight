@@ -20350,9 +20350,23 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     spawnWorldMonster(mdef, tx, ty, opts) {
       opts = opts || {};
       const id = (typeof mdef === 'string') ? mdef : mdef.id;
-      const full = (typeof mdef === 'string')
+      let full = (typeof mdef === 'string')
         ? ((this.data.monsters || []).find(m => m.id === id) || {})
         : (mdef || {});
+      // WANDERSPAWN FIX (sim-wanderspawn-a 2026-11-06): object-form mdef
+      // used to skip the def lookup entirely, so a bare {id} spawn —
+      // wanderer contact (game.js:24384), trap (23565), finale campaign
+      // nodes (finale-campaign.js:73, 359), debug button (app.js:20012)
+      // — fell back to baseHp 20. A wave-4 Congregation was born at
+      // 20/20 HP and died 74 days later to one ordinary 56-damage
+      // strike (sim-congtrace-a). When the caller object carries no hp,
+      // fill the missing def fields from the data def; caller-supplied
+      // fields always win (Object.assign order), so explicit-hp callers
+      // (fled recovery) and full-def callers are untouched.
+      if (!full.hp) {
+        const def = (this.data.monsters || []).find(m => m.id === id) || {};
+        if (def.hp) full = Object.assign({}, def, full);
+      }
       const baseHp = (full.hp && full.hp[0]) || 20;
       let mx = (opts.mx !== undefined) ? opts.mx : Math.floor(Math.random() * 9);
       let my = (opts.my !== undefined) ? opts.my : Math.floor(Math.random() * 9);
@@ -20379,7 +20393,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         maxHp: (opts.maxHp !== undefined) ? opts.maxHp : baseHp,
         stance: opts.stance || null,
         fearTurns: opts.fearTurns || 0,
-        veteran: !!opts.veteran,
+        // WANDERSPAWN FIX (sim-wanderspawn-a 2026-11-06): the wanderer
+        // call passes veteran inside mdef, not opts — it was dropped,
+        // so a veteran wanderer monster spawned non-veteran. Honor it.
+        veteran: !!(opts.veteran || (mdef && mdef.veteran)),
         variant: opts.variant || null,
         lostSight: 0,
       };
