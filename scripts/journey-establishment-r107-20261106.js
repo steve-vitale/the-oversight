@@ -28,7 +28,7 @@ const ROOT = path.join(__dirname, '..');
 const EVID = process.env.EVID || path.join(ROOT, 'evidence', '2026-11-06');
 const { loadGame, setupGame, driveFights, driveContests } = require('./sim-harness');
 const { competent } = require('./policies/competent');
-const { withHuntStaff, isHunterSubstrate } = require('./policies/huntstaff');
+const { withHuntStaff, isHunterSubstrate, leanDay, personHp, woundWithin } = require('./policies/huntstaff');
 
 const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(s => parseInt(s, 10)) : [1501]);
 const DAYS = parseInt(process.env.DAYS || '42', 10);
@@ -413,6 +413,9 @@ async function runSeed(seed) {
 
   const daily = [];
   const matTrace = [];
+  // r107 FIX 2b: per-dawn lean/eligibility trace — names the gate that holds
+  // when assignments are zero (lean day? trust? HP? wound? Haven?).
+  const leanTrace = [];
   // r107 FIX 2: ever-substrate set — villagers ever hunter-substrate while
   // alive (the end snapshot masks dead hunters; see prereg).
   const huntEligEverSet = new Set();
@@ -447,6 +450,24 @@ async function runSeed(seed) {
     // r107 FIX 2: per-dawn ever-substrate capture — isHunterSubstrate is a
     // pure read (getPerson + occupation word match; no RNG, no Game writes).
     try { for (const id of livingVids(Game)) { try { if (isHunterSubstrate(Game, id)) huntEligEverSet.add(String(id)); } catch (e) {} } } catch (e) { warnOnce('eligEver', e); }
+    // r107 FIX 2b: per-dawn lean/eligibility trace — leanDay, playerAtHaven,
+    // personHp and woundWithin are pure reads (queries + state reads; no
+    // RNG, no Game writes). Names the gate that holds on zero-assignment
+    // seeds. Runs in both legs; M0 re-verified after this change.
+    try {
+      const lean = leanDay(Game);
+      let atHaven = null; try { atHaven = Game.playerAtHaven ? !!Game.playerAtHaven() : null; } catch (e) {}
+      const subs = [];
+      for (const id of livingVids(Game)) {
+        let isSub = false; try { isSub = isHunterSubstrate(Game, id); } catch (e) {}
+        if (!isSub) continue;
+        let trust = null; try { trust = ((Game.state.village || {}).trust || {})[id]; } catch (e) {}
+        let hp = null; try { hp = personHp(Game, ctx, id, nowDay(Game)); } catch (e) {}
+        let w2 = null; try { w2 = !!woundWithin(ctx, id, nowDay(Game), 2); } catch (e) {}
+        subs.push({ name: nameOf(Game, id), trust: trust === undefined ? null : trust, hp, wounded2d: w2 });
+      }
+      leanTrace.push({ day: nowDay(Game), lean, atHaven, subs });
+    } catch (e) { warnOnce('leanTrace', e); }
     const roster = ((Game.state.village || {}).roster || []);
     const alive = roster.filter(id => !isDead(Game, id)).length;
     let wv = null, lp2 = null;
@@ -610,7 +631,7 @@ async function runSeed(seed) {
     deaths, census, daily, matTrace, craftLog, craftWrap, npcCraftLog, npcCraftWrap,
     huntLog, huntWrap, careLog, careWrap, careCalls, healerLog, healerWrap, healerCalls,
     treatLog, treatWrap, treatCalls, cookLog, cookWrap,
-    huntStaff, huntEligEnd, huntEligEver, guardrails, c3,
+    huntStaff, huntEligEnd, huntEligEver, leanTrace, guardrails, c3,
     playerPackArmor, playerEquipped, playerRecipes,
     contestTele: contestTele.slice(0, 100), contestCounts, waveSysLines: waveSysLines.slice(0, 60), teleTypes, skillRows: skillRows.slice(0, 500), skillCounts, teachDays, teleAll, playerCodexSkills, avCraftEnd };
   fs.mkdirSync(EVID, { recursive: true });

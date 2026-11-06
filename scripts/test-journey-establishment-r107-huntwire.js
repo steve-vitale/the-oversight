@@ -204,6 +204,15 @@ function runP3(j) {
     assert.ok(Array.isArray(j.huntEligEver), 'huntEligEver must be an array');
     for (const e of j.huntEligEver) assert.strictEqual(typeof e.name, 'string');
   });
+  ok('leanTrace present as a day-ordered array with lean/atHaven/subs', () => {
+    assert.ok(Array.isArray(j.leanTrace), 'leanTrace must be an array');
+    assert.ok(j.leanTrace.length >= 1, 'leanTrace needs at least one dawn');
+    for (const e of j.leanTrace) {
+      assert.strictEqual(typeof e.day, 'number');
+      assert.strictEqual(typeof e.lean, 'boolean');
+      assert.ok(Array.isArray(e.subs));
+    }
+  });
   console.log(`PART P3 green (${n} checks)`);
 }
 
