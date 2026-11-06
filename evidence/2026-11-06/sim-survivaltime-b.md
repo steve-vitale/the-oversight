@@ -404,6 +404,9 @@ own configured seeds), so no panel compare.md was fabricated either.
   tests updated by design
 - `ce4ad5ba0` — evidence file + prereg metric-review fill (this file's
   first commit); corpus in the follow-up commit below
+- `812c04765` — pilot corpus 88001–88008, 16 files both legs
+- `7bbded9ed` — aegis fix (test-only, 90 → 95) + check.js --quick
+  results written into this file
 
 ## Footer (filled at closeout)
 
