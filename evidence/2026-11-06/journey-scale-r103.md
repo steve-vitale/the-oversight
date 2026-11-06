@@ -230,13 +230,18 @@ Baseline NOT rolled forward.
   seed's own days). No scored verdict rests on the polluted run:
   the census fields were unaffected, but the nat-gate counts would
   have been wrong, so the re-run was owed, not optional.
-- **Safe-commit index clobber struck twice this run** (prereg
-  commit 211358195, driver-fix commit 166756b9a) — same class as
-  the 2026-10-22 lesson: the commit is correct, the main index
-  lies (staged-as-deleted / 1-line diff). Repaired both times via
-  HEAD-blob cacheinfo, verified clean. The pattern is now 3+ runs
-  in a row; the reaper/cleanup risk it poses (a lying index) is
-  worth a look by the main session, not this run.
+- **Safe-commit index clobber struck THREE times this run** (prereg
+  commit 211358195, driver-fix commit 166756b9a, evidence commit
+  545b9d8b7) — same class as the 2026-10-22 lesson: the commit is
+  correct, the main index lies. The third strike was the worst
+  (all 92 evidence files staged-as-deleted): the entries were
+  PURGED from the index, not marked deleted, so `git ls-files
+  --deleted` lists nothing and the repair must enumerate files
+  from the commit (`git show --name-only HEAD`) — the ls-files
+  route silently repairs zero files. Repaired all three times via
+  HEAD-blob cacheinfo, verified clean. Three strikes in one run
+  means the clobber is now the norm for safe-commit, not the
+  exception; worth a look by the main session, not this run.
 - No pre-registered metric was re-scored mid-run.
 
 ## Harness
