@@ -6356,11 +6356,62 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (has('tailor', 'seamstress', 'carpenter', 'mechanic')) mult = 1.4;
         else if (has('blacksmith', 'welder')) mult = 1.2;
       }
+      // PRACTICE (sim-drive-practice-a 2026-11-06, Steve self-improvement
+      // drive): real work moves competence up the ladder — one rung per
+      // practice step, capped at 1.4 (as good as a natural, never better).
+      // Applied to the occupation base BEFORE temperament, so temperament
+      // still modulates the practiced result exactly as it does the raw one.
+      const _steps = this.villagerPracticeSteps ? this.villagerPracticeSteps(vp, task) : 0;
+      if (_steps > 0) {
+        const _ladder = [0.7, 1.0, 1.2, 1.3, 1.4];
+        let _idx = 0;
+        for (let _i = 0; _i < _ladder.length; _i++) if (mult >= _ladder[_i] - 0.001) _idx = _i;
+        mult = _ladder[Math.min(_idx + _steps, _ladder.length - 1)];
+      }
       // temperament: bold takes risks (better results, more danger).
       // cautious plays safe (smaller hauls, fewer injuries).
       if (temp === 'bold' && (task === 'hunt' || task === 'patrol')) mult *= 1.15;
       if (temp === 'cautious') mult *= 0.9;
       return Math.round(mult * 100) / 100;
+    },
+
+    // PRACTICE LADDER (sim-drive-practice-a 2026-11-06): villagers doing
+    // real work in a task's domain accumulate practice; enough practice
+    // raises competence one rung — mirrors the scholar-side practice(stat,n)
+    // ("practice makes human", game.js:2069). Thresholds: 8 reps for the
+    // first rung, +4 per rung after (cumulative 8 / 20 / 36). Max 3 steps.
+    // Human competence only: practice never grants abilities, never touches
+    // the six slots, never changes a gate or price. Stored on the villager
+    // record (vp.practice[task]), same pattern as foodXp.
+    villagerPracticeSteps(vp, task) {
+      if (!vp || !task) return 0;
+      const reps = ((vp.practice || {})[task]) || 0;
+      let steps = 0, need = 8, cum = 0;
+      while (steps < 3) { cum += need; if (reps >= cum) steps++; else break; need += 4; }
+      return steps;
+    },
+
+    // Record one practice rep for real work done; narrate a rung gain in
+    // plain words so the improvement reads as a person getting better.
+    // Called once per resolved assignment (resolveOneAssignment tail).
+    villagerPractice(vid, task) {
+      if (!vid || !task) return 0;
+      const _tasks = ['hunt', 'forage', 'garden', 'fish', 'wood', 'stone', 'deadfall', 'water', 'scout', 'patrol', 'cook', 'tend', 'teach', 'mend'];
+      if (_tasks.indexOf(task) < 0) return 0;
+      const vp = (this.data.villagers || []).find(v => v.id === vid)
+        || (this.data.background_survivors || []).find(v => v.id === vid);
+      if (!vp) return 0;
+      const before = this.villagerPracticeSteps(vp, task);
+      vp.practice = vp.practice || {};
+      vp.practice[task] = (vp.practice[task] || 0) + 1;
+      const after = this.villagerPracticeSteps(vp, task);
+      if (after > before) {
+        const first = this.displayName(vid);
+        const names = { hunt: 'the hunt', forage: 'foraging', garden: 'the garden', fish: 'fishing', wood: 'woodcutting', stone: 'stonework', deadfall: 'deadfall', water: 'the water run', scout: 'scouting', patrol: 'patrol', cook: 'cooking', tend: 'tending the haven', teach: 'teaching', mend: 'mending' };
+        const what = names[task] || task;
+        this.say(`🌱 ${first} is getting the hang of ${what} — all that doing it, day after day, is making them surer.`);
+      }
+      return after;
     },
 
     // trust gates obedience. Low trust → refuse or do it badly.
@@ -7448,6 +7499,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } else if (a.task === 'patrol') {
         this.resolvePatrol(vid, first);
       }
+      // PRACTICE (sim-drive-practice-a): the work just done teaches them.
+      // One rep per resolved assignment, final task only (a prod-throttle
+      // redirect returns early above, so the outer call never reaches here).
+      try { this.villagerPractice && this.villagerPractice(vid, a.task); } catch (e) {}
       // assigned villagers don't also do random villageLives actions this part
       // (they were busy — mark it)
       this.remember(vid, 'task', a.task + ' (assigned)');
