@@ -304,8 +304,8 @@ denominator), scripts/test-journey-deepening-r107-pocketed-20261106.js
   attempt died mid-run with no summary (process reaped ~1000s in,
   log ended mid-progress); re-ran detached with nohup to completion.
   Proof test re-run green after the rebase (17/17).
-- Rebased onto master abc4df164 (sim-spandraw-census-a landed while
-  the gate ran); proof test re-run green after the rebase (17/17).
+- Rebased onto master 3e8b3024d (sim-spandraw-census-a + gearoff-confirm-b
+  landed while the gate ran); proof test re-run green after the rebase (17/17).
 - Merged locally, pending ship (no bump/push/live-verify — ship loop
   owns those).
 - Rotation 2 -> 3 written at closeout, verified by read-back.
