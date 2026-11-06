@@ -343,15 +343,32 @@ Oracle tests updated in the same commit (by-design retune):
 - `scripts/test-bark-armor-seed-20261011.js`: comment only (r=10/30 →
   r=10/16).
 
-`check.js --quick`: the run started before the build commit was lost when
-the session compacted (no log survived — the process is not running in
-this worktree and no output file exists). A fresh run was started after
-the analysis (`node scripts/check.js --quick
+`check.js --quick`: **282 passed, 8 failed in 834s, EXIT=1** (fresh run
+after the analysis, `node scripts/check.js --quick
 --cacheDirectory=/tmp/jest-cache-sim-survivaltime-b`, log
-`/tmp/st-checkquick.log`); its result is recorded in the footer below.
-The armed pilot leg ran on the build commit `6bca8e380`, so a green-list
-break found by that run would be a fix-and-note item, not a pilot
-invalidator, unless the fix touches src behavior.
+`/tmp/st-checkquick.log`). The run started before the build commit was
+lost when the session compacted (no log survived — the process was not
+running in this worktree and no output file existed), so it was re-run
+from scratch. Of the 8 failures, **7 reproduce identically on base code**
+(verified by swapping `src/js/game.js` + `src/js/fieldFights.js` to
+`dc76d9bf6` in the worktree only, index untouched, then restoring byte-
+identical from backup — hashes match HEAD): measurement-proof-update
+(proof inputs not current), measurement-workflow (retained neutrality
+proof does not cover current inputs), mobile-combat-cadence (2),
+occupation-panels (CLI workflow), phone-frame-proof (3, stale receipts),
+capable-bot (food deed), establishment-r20-fixes (racks voice gate).
+**1 failure was caused by this change:** `test-aegis-recipient.js`,
+"the actual NPC protector armor applies once" — it hardcoded the K=20
+outcome (varmor 20 halves a 20 blow → protector at 90 HP). Under K=6
+one application takes 5 (protector at 95 HP; twice would give ~99,
+zero would give 80). Fixed by updating the expectation 90 → 95 in the
+test only (commit below), per the green-list same-commit rule for a
+by-design retune; the test now passes 12/12. The fix touches NO src
+behavior, so the armed pilot leg (run on `6bca8e380` src, unchanged by
+the fix) is NOT re-run. The 7 pre-existing failures are recorded here,
+not fixed in this arm (out of scope; the measurement-proof ones predate
+this branch — the retained neutrality proof was already stale on the
+base).
 
 ## Scale-wall numbers (every run)
 
@@ -388,9 +405,10 @@ own configured seeds), so no panel compare.md was fabricated either.
 - `ce4ad5ba0` — evidence file + prereg metric-review fill (this file's
   first commit); corpus in the follow-up commit below
 
-## Footer (to be filled at closeout)
+## Footer (filled at closeout)
 
-- check.js --quick result: (pending — run in flight, log
-  `/tmp/st-checkquick.log`)
+- check.js --quick: 282 passed, 8 failed, EXIT=1 (834s, log
+  `/tmp/st-checkquick.log`). 7 pre-existing on base code; 1 (aegis)
+  caused by the retune, fixed test-only (90 → 95, 12/12 green).
 - Rebase: pre-rebase HEAD / post-rebase base SHA (pending)
 - Proof test on rebased tip: (pending)
