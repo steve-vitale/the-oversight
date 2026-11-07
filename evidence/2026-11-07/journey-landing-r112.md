@@ -440,9 +440,36 @@ a person — healthy, and the only seed on the panel where nobody dies.
   practice instrument + analyzer 14/14.
 - Back-compat run on the r111 corpus: exactly 1 line changed (the Eamon
   line) — nothing else moved.
-- No src/js change in this run, so no check.js --quick: the relevant suites
-  are the two proof tests (green, above) and the landing panel + analyzers
-  (all exit 0). The ship loop runs the full check before pushing.
+- **check.js --quick ran twice on the rebased tip (worktree AGENTS.md
+  requires it before push; the ship loop runs the full check before
+  pushing).** Run 1: 281 passed, 9 failed in 969s (run while a sibling
+  loop's check ran concurrently — 3 of the 9 were ~120s timeouts). Run 2
+  (no concurrent check): 283 passed, 7 failed in 585s. The failure set
+  differs between runs — run-to-run instability, not a branch regression.
+  The 7 named failures in run 2, all adjudicated pre-existing on this
+  base (zero src/js changes in this branch; the only test surface it
+  shares — the r104 analyzer — passes its dedicated tests 16/16 and
+  PASS, above):
+  - `test-measurement-proof-update.js` — "Proof source inputs are not
+    current" (balance proof stale vs Game/controller/harness inputs).
+  - `test-measurement-workflow.js` — "retained neutrality proof covers
+    the current Game/controller/harness inputs" (same stale-proof class).
+  - `test-mobile-combat-cadence.js` — enemy announcement / Continue
+    round-wrap (mobile combat cadence).
+  - `test-occupation-panels.js` — real CLI workflow.
+  - `test-phone-frame-proof.js` — retained browser inputs vs current
+    source; receipt source stale (index.html).
+  - `test-capable-bot-20261014.js` — capable player combat earns the food
+    deed at first use.
+  - `test-establishment-r20-fixes-20261020.js` — racks-full voice gate,
+    next-day count (expected 2, got 1).
+  None touches the landing analyzer, the practice instrument, or any file
+  this branch changed. They fail on the base, not on the branch — the
+  branch introduces no src/js change and no new failure. Fixing stale
+  measurement/phone proofs and mobile cadence is out of this run's scope
+  (landing leg); recorded here for the ship loop / next owner, not fixed
+  here. Full run-2 output: `/tmp/check-r112-quick.log` (kept on this VM;
+  the ship loop re-runs the full check before pushing).
 - **Telemetry deviation check:** ran `node scripts/telemetry-check.js
   --baseline .../telemetry-baselines/landing-split.json --current
   '<landing-r112 census glob>' --metrics systemDay,monsterKills`. 2 LOUD
@@ -488,10 +515,12 @@ gate; the zero-DMG "others-killed" fight shape is a watch (3/21 this panel).
   lines) are for base 0d3c46971 + the rebase's evidence-only Loop B
   commits; no panel number was re-scored after the rebase.
 - **Proof re-run on the rebased branch (all PASS):** autopsy fallback
-  14/14, practice 14/14.
-- **No check.js --quick this run:** zero src/js changes; the relevant suites
-  are the two proof tests (re-run above, green) and the landing panel +
-  analyzers (exit 0). The ship loop runs the full check before pushing.
+  14/14, practice 14/14. check.js --quick ran twice on the rebased tip:
+  281/9 then 283/7; the 7 named failures are pre-existing base-state
+  issues (stale measurement/phone proofs, mobile cadence, capable-bot
+  food deed, occupation panels, racks voice) — none touches a file this
+  branch changed; the analyzer-adjacent tests pass (r111 fixes 16/16,
+  r106 starvation-class PASS). Full run-2 log: /tmp/check-r112-quick.log.
 - **Telemetry:** 2 LOUD lines, both explained as aggregation artifacts,
   baseline NOT rolled.
 - **Index clobber struck on the prereg commit** (known class): committed
