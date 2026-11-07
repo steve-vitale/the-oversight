@@ -403,17 +403,25 @@ function main() {
     for (const d of days) snapByDay.set(d.day, d);
     const unaccounted = [];
     for (const o of (s.sickOnsets || [])) {
-      let seen = false;
-      for (const dd of [o.day, o.day + 1]) {
+      // "Later snapshot" means a snapshot taken AFTER the creation call: a
+      // villageSicknessTick onset (endDay of day D) can first appear in the
+      // day D+1 snapshot; a food/scholar onset (during day D parts) can first
+      // appear in the day D snapshot. If no such snapshot exists (the run
+      // ended before it — village died the next day), the onset is not
+      // checkable by snapshot and is exempt, not a corpus gap.
+      const appearDay = (o.vectorSource === 'villageSicknessTick') ? o.day + 1 : o.day;
+      let seen = false, checkable = false;
+      for (const dd of [appearDay, appearDay + 1]) {
         const snap = snapByDay.get(dd);
         if (!snap) continue;
+        checkable = true;
         if (o.kind === 'npc' && snap.sickMap && snap.sickMap[o.who] && snap.sickMap[o.who].name === o.name) { seen = true; break; }
         if (o.kind === 'scholar' && (snap.scholarSick || []).some(e => e.id === o.diseaseId)) { seen = true; break; }
       }
       const endSoon = (s.sickEnds || []).some(e => e.who === o.who &&
         (e.kind === 'scholar' ? e.diseaseId === o.diseaseId : e.name === o.name) &&
         e.day >= o.day && e.day <= o.day + 1);
-      if (!seen && !endSoon && o.day < s.daysAlive) unaccounted.push(o.who + ' d' + o.day + ' ' + o.name);
+      if (!seen && !endSoon && checkable) unaccounted.push(o.who + ' d' + o.day + ' ' + o.name);
     }
     const ok = lenOk && flows.length > 0 &&
       new Set(keys).size === keys.length && Array.isArray(s.deathRows) &&
