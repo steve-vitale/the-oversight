@@ -297,3 +297,18 @@ no collector/contract input — so no measurement-proof
 refresh is owed by this branch; the balance-proof manifest
 hashes nothing this branch changes. The coordinator can
 verify that at merge time.
+
+## Landing addendum (coordinator, 2026-11-07T19:1xZ)
+
+Master moved under the run after the worker's rebase: Loop A landed
+sim-prodstore-a (2f6d98e82..820b61496 — PLENTY-WEEK lever PILOT NO-GO,
+reverted, game.js byte-identical to master). Zero file overlap with
+this arm's 39 files. Coordinator rebase onto explicit master
+820b61496ff1b5f2f402ac5b04bc43b0c4f6617d: all 7 picks clean, no
+stop-at-pick quirk, new tip 49d4f967d. Proof re-run on the rebased
+tip: rejudge proof 31/31 (exit 0), frozen proof 33/33 non-smoke
+(smoke skipped, FEAR_SMOKE_SEED unset — known 53003 smoke failure
+stands as documented, not re-pinned, no sims re-run). Branch
+contribution vs master unchanged: exactly 39 files, 536,531
+insertions, 0 deletions. Merged --ff-only; merged locally, pending
+ship.
