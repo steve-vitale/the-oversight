@@ -420,3 +420,11 @@ try { const fd = require('./policies/competent-feastdrive-b'); POLICY_REGISTRY['
 // The staged/linkdrive/feastdrive files themselves are untouched —
 // this only points the registry at the composite.
 try { const lf = require('./policies/competent-linkfeast-b'); POLICY_REGISTRY['competent-linkfeast-b'] = lf.linkfeast; } catch (e) {}
+// doorwalk-b instrument (sim-doorwalk-b, 2026-11-07, Loop B
+// winnability): the frozen takeseat composite + door-walk drive
+// (DOORWALK_B=1), registered so the balanced panel (§15) can build
+// its column. Additive; zero behavior change to existing entries
+// (the door drive stays default-OFF: nothing loads it unless named,
+// and the gate-off wrapper is the baseline). The linkfeast file
+// itself is untouched — this only points the registry at the wrapper.
+try { const dw = require('./policies/competent-doorwalk-b'); POLICY_REGISTRY['competent-doorwalk-b'] = dw.doorwalk; } catch (e) {}
