@@ -14,7 +14,9 @@
   `eabf00dbae92c8508e2799a03b6918eaa244e517` (sim-grind-a evidence+corpus;
   zero file overlap — rebase clean, no conflicts). Rebased tip
   `bab86497d`; proof re-run green 39/39 on the rebased tip before analysis.
-  Final tip after the revert commit: see the commit line at the end.
+- Revert commit (branch tip): `053bd3ed3012125334534e31816e33a4eca40b48`
+  — game code byte-identical to master `eabf00dba`, proof 39/39 green
+  post-revert, worktree clean after the commit.
 - Policy: competent verbatim, BOTH legs (game-code lever; no policy file).
 - Horizon: 150d death-aware. Seeds: 88001–88008, identical on both legs.
 - Corpus: `evidence/2026-11-06/perseed-bypass-b/` (16 files). Leg anchors
