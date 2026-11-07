@@ -111,6 +111,23 @@ means, `SEM = s / sqrt(8)`, for the quantity being banded.
   as uninformative in the evidence file and the check is left as a
   vacuous-skip guard, not a band — the evidence file says so explicitly.
 
+## Addendum (pre-corpus, 2026-11-07 00:20 UTC — rule clarification, not a re-score)
+
+- **Tank avg-absorbed derivation, zero-hit batches:** a per-batch mean
+  absorbed is computed OVER LANDED HITS ONLY. A batch (seed) with zero
+  landed hits is EXCLUDED from the derivation set, not counted as 0 —
+  counting it as 0 would drag the band below the value the test itself
+  measures (mean over landed hits) and make the test fail its own band. If
+  fewer than 4 of the 8 batches have landed hits for a monster, NO
+  avg-absorbed band is derived for that monster (`band: null`) and the test
+  skips the avg check for it; the per-hit checks (every absorbed < max hit,
+  every absorbed >= 1, when >= 3 total hits) still apply.
+- **Test-run batch membership:** the cap test runs at its default seed
+  `20261009`, which is one of the 8 corpus batches, so the test's own
+  measured values are members of the derivation set the bands are built
+  from — the bands are not fitted to an external sample the test never
+  draws from.
+
 ## Metric review (§14)
 
 Judged ONLY against this prereg. If the derivation rule proves wrong
