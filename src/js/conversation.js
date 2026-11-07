@@ -4311,9 +4311,17 @@
     },
     convoNextMenu(vid) {
       const c=this.convoGet(vid);
-      if(!c.active || !(c.menuPages>1)) return {ignored:true,navigation:true,ended:!c.active,choices:c.active?this.convoChoices(vid):[],transcript:c.transcript.slice()};
+      // MENU:LINE (journey-establishment r111 2026-11-07): a pagination tap
+      // is navigation, not a new utterance — but the return still names the
+      // current line (last 'them' transcript entry, the convoUI
+      // computation), so consumers that render st.line (the inline dialogue
+      // box, which sets view.line = st.line unconditionally) keep showing
+      // what they last said instead of blanking. No transcript mutation:
+      // the line is already there; returning it only names it.
+      const cur = (() => { try { const them = (c.transcript || []).filter(t => t && t.who === 'them'); return them.length ? them[them.length - 1].text : null; } catch (e) { return null; } })();
+      if(!c.active || !(c.menuPages>1)) return {ignored:true,navigation:true,ended:!c.active,line:cur,choices:c.active?this.convoChoices(vid):[],transcript:c.transcript.slice()};
       c.menuPage=((c.menuPage || 0)+1)%c.menuPages;
-      return {navigation:true,ended:false,choices:this.convoChoices(vid),transcript:c.transcript.slice()};
+      return {navigation:true,ended:false,line:cur,choices:this.convoChoices(vid),transcript:c.transcript.slice()};
     },
     convoChoices(vid) { return this.buildMenu(vid,true); },
 
