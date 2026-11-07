@@ -1,0 +1,40 @@
+
+ORGANIC DEATH d35: Antonio -> Gabriela, topTrust=[{"id":"Carlos","t":98},{"id":"Evdokia","t":92},{"id":"Aroha","t":87},{"id":"Ebba","t":82}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=20 inheritedPlants=0 keptSkills=5 inheritedSkills=0 succTrustPre=90 succTrustPost=61
+PARITY readable=true equal=true inherited=[] pre=["green_whisper","green_thumb","beard_moss"] post=["green_whisper","green_thumb","beard_moss"]
+DEATH d34 (organic (phase A)): Antonio -> Gabriela | passed=true lin=true mo=true trust=61 vouchers=8
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Carlos (refused=false)
+  CONVO d+3 with Evdokia (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  BOND-CONVO d+3 with Isaac (depth=1 v=30 refused=false)
+  CONVO d+7 with Evdokia (refused=false)
+  CONVO d+7 with Aroha (refused=false)
+  CONVO d+14 with Evdokia (refused=false)
+  CONVO d+14 with Aroha (refused=false)
+  BOND-CONVO d+14 with Isaac (depth=1 v=30 refused=false)
+  CONVO d+30 with Elijah (refused=false)
+  CONVO d+30 with Rafael (refused=false)
+  CONVO d+45 with Jorge (refused=false)
+  CONVO d+45 with Evdokia (refused=false)
+  CONVO d+53 with Evdokia (refused=false)
+  CONVO d+53 with Elijah (refused=false)
+  CONVO d+64 with Evdokia (refused=false)
+  CONVO d+64 with Jorge (refused=false)
+
+FUNERAL: deathBeat=3 recover=1 vouch=1 (eligible=8) echo=1 organicBurial={"respects":false,"bury":false} halfRation=4
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":68,"offerLines":128,"codexPlantsDelta":22,"codexSkillsDelta":12,"codexAbilitiesDelta":9,"xpDelta":127,"any":true} pantry 75751->84105
+TRUST-DIALS: office 61->100 (+39, climb) | villageMean 74.7->92.2 (+17.5, climb) | ge60 8->9 | movers>=5: [{"id":"Farid","from":48,"to":90,"delta":42},{"id":"Elijah","from":53,"to":94,"delta":41},{"id":"Jorge","from":68,"to":95,"delta":27},{"id":"Tom","from":67,"to":90,"delta":23},{"id":"Rafael","from":77,"to":92,"delta":15},{"id":"Ebba","from":82,"to":90,"delta":8},{"id":"Aroha","from":87,"to":94,"delta":7},{"id":"Carlos","from":98,"to":90,"delta":-8}]
+DEED-LEDGER: calls=52 summary={"donateToPantry":{"calls":24,"ok":24,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"giveFood":{"calls":23,"ok":23,"deltaSum":22,"deltaN":23,"positive":22,"meanDelta":0.96},"teachPlant":{"calls":5,"ok":5,"deltaSum":0,"deltaN":5,"positive":0,"meanDelta":0}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=false(echoMentions=1 (convo=1, say=0)) m4=true m5=manual | endDay=104 alive=10 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=52) trustVerdict={"readable":true,"officeMantle":61,"officeLast":100,"officeDelta":39,"officeClass":"climb","villageMantle":74.7,"villageLast":92.2,"villageDelta":17.5,"villageClass":"climb","villageGe60Mantle":8,"villageGe60Last":9,"movers":[{"id":"Farid","from":48,"to":90,"delta":42},{"id":"Elijah","from":53,"to":94,"delta":41},{"id":"Jorge","from":68,"to":95,"delta":27},{"id":"Tom","from":67,"to":90,"delta":23},{"id":"Rafael","from":77,"to":92,"delta":15},{"id":"Ebba","from":82,"to":90,"delta":8},{"id":"Aroha","from":87,"to":94,"delta":7},{"id":"Carlos","from":98,"to":90,"delta":-8}]}
+E6/CALLCHECK: e6={"callMoves":15,"withCensus":15,"chainHandoffs":0,"trustMoves":15} callCheck={"dailyMoveDays":15,"callMoveDays":15,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=3 (v2=3, excludedLoot=0))
+E7/R47: e7={"trustMoves":15,"soloOffice":10,"soloOfficeDeltas":[1,2,1,2,1,1,1,1,1,2],"soloBearerDeltaExact":[1,2,1,2,1,1,1,1,1,2],"singleMoverBearer":1,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":5,"both":10,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":1,"v2":3,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":0,"known":0,"unknown":0} e3={"dailyDays":71,"moves":15}

@@ -1,0 +1,42 @@
+
+PRE-DEATH d42: bearer <redacted>, topTrust=[{"id":"Wei","t":90},{"id":"Jesse","t":90},{"id":"Mia","t":88},{"id":"Arailym","t":73}], roster=9
+INH readable=true scripted=true deadItems=18 distinct=17 transferred=2 vanished=4 keptPlants=15 inheritedPlants=4 keptSkills=5 inheritedSkills=7 succTrustPre=88 succTrustPost=74
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","lucky_rock","trophy_room"] post=["beast_calm","lucky_rock","trophy_room"]
+DEATH d42 (the expedition, scripted): Aisling -> Mia | passed=true lin=true mo=true trust=74 vouchers=6
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=12 vanished=4 of 17 distinct dead-bearer items
+  CONVO d+3 with Wei (refused=false)
+  CONVO d+3 with Jesse (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  BOND-CONVO d+3 with Victor (depth=1 v=26 refused=false)
+  CONVO d+7 with Wei (refused=false)
+  CONVO d+7 with Jesse (refused=false)
+  CONVO d+14 with Wei (refused=false)
+  CONVO d+14 with Jesse (refused=false)
+  BOND-CONVO d+14 with Victor (depth=1 v=26 refused=false)
+  CONVO d+30 with Hongwei (refused=false)
+  CONVO d+30 with Arailym (refused=false)
+  NEWCOMER-PROBE d+32 with Katarina (arrived d+32, trust=39 refused=false)
+  CONVO d+45 with Hongwei (refused=false)
+  CONVO d+45 with Arailym (refused=false)
+  CONVO d+53 with Wei (refused=false)
+  CONVO d+53 with Raj (refused=false)
+  CONVO d+64 with Arailym (refused=false)
+  CONVO d+64 with Wei (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=1 (eligible=6) echo=1 organicBurial={"respects":false,"bury":false} halfRation=12
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":28,"offerLines":67,"codexPlantsDelta":21,"codexSkillsDelta":18,"codexAbilitiesDelta":3,"xpDelta":-11,"any":true} pantry 40800->12821
+TRUST-DIALS: office 74->90 (+16, climb) | villageMean 69.4->77.5 (+8.1, climb) | ge60 6->6 | movers>=5: [{"id":"Raj","from":44,"to":90,"delta":46},{"id":"Arailym","from":73,"to":90,"delta":17}]
+DEED-LEDGER: calls=0 summary={}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=false(echoMentions=1 (convo=1, say=0)) m4=true m5=manual | endDay=112 alive=9 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=false(deedCalls=0) trustVerdict={"readable":true,"officeMantle":74,"officeLast":90,"officeDelta":16,"officeClass":"climb","villageMantle":69.4,"villageLast":77.5,"villageDelta":8.1,"villageClass":"climb","villageGe60Mantle":6,"villageGe60Last":6,"movers":[{"id":"Raj","from":44,"to":90,"delta":46},{"id":"Arailym","from":73,"to":90,"delta":17}]}
+E6/CALLCHECK: e6={"callMoves":6,"withCensus":6,"chainHandoffs":2,"trustMoves":4} callCheck={"dailyMoveDays":6,"callMoveDays":6,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=2 (v2=2, excludedLoot=0))
+E7/R47: e7={"trustMoves":4,"soloOffice":1,"soloOfficeDeltas":[1],"soloBearerDeltaExact":[1],"singleMoverBearer":0,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":1,"both":3,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":1,"v2":2,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":3,"known":3,"unknown":0} e3={"dailyDays":71,"moves":6}
