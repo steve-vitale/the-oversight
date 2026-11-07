@@ -509,6 +509,19 @@
         contactFinishAttempted: false, contactFinishKill: false,
         contactFinishWeapon: null, contactFinishDmg: null,
         contactFinishInstrument: null, contactFinishBeastHp: null,
+        // FINISHERSIZE (sim-finishersize-a, 2026-11-06): audit fields
+        // for the committed finish on a beast met below its break
+        // line. fsMetBelowBreak/fsMeetHp/fsMeetFrac/fsEntryVhpFrac
+        // record the contact evaluation; fsNoCommitWhy names the
+        // blocking gate when the fighter does not commit; the commit
+        // itself snapshots kind ('met-below-break'), the beast's HP
+        // and the contact strike at commit time, rounds held, and
+        // whether the 3-round cap lapsed it. Record-only except the
+        // commit's own gates below; no other engine code reads them.
+        fsMetBelowBreak: false, fsMeetHp: null, fsMeetFrac: null,
+        fsEntryVhpFrac: null, fsNoCommitWhy: null,
+        committedFinishKind: null, fsCommitMhp: null, fsCommitStrike: null,
+        fsCommitRounds: 0, fsLapsed: false, fsHoldLogged: false,
         // CHORUS-HOLD (sim-chorus-a, 2026-10-31): audit count of
         // dance-round holds at the break check (see the break check
         // below). A committed fighter holds through a downbeat
@@ -990,6 +1003,15 @@
         for (var _vj = 0; _vj < members.length; _vj++) { members[_vj].hp = 0; members[_vj].alive = false; }
         rec.log.push('The lead never reached ' + vName + ' — it fell to the volley, and the pack\'s coordination shatters with it.');
       } else if ((members[0].hp / members[0].maxHp) < mBreak) {
+        // FINISHERSIZE (sim-finishersize-a, 2026-11-06): the beast is
+        // below its break line at contact — record the meeting for the
+        // committed-finish funnel (the analyzer's below-break set).
+        // Post-volley HP here; the contact finish below further
+        // requires mDealt === 0, i.e. a true untouched meeting.
+        rec.fsMetBelowBreak = true;
+        rec.fsMeetHp = members[0].hp;
+        rec.fsMeetFrac = members[0].hp / members[0].maxHp;
+        rec.fsEntryVhpFrac = vHp / vHpMax;
         // CORNERED PARTY HOLD (sim-partyfinish-a, 2026-10-28): a beast
         // already below the break line when a mustered, armed party
         // corners it at the treeline (opts.cornered, set ONLY by
@@ -1008,6 +1030,7 @@
           && rec.mDealt === 0 && !opts.noFlee;
         if (_corneredHold) {
           rec.corneredHold = true;
+          rec.fsNoCommitWhy = 'cornered';
           rec.log.push(vName + ' and their party have ' + mPhrase + ' cornered at the treeline — broken, but it cannot simply slip away before a blow.');
         } else {
           // CONTACTFINISH (sim-contactfinish-a, 2026-10-31): a beast met
@@ -1089,16 +1112,48 @@
               for (var _cj = 0; _cj < members.length; _cj++) { members[_cj].hp = 0; members[_cj].alive = false; }
               rec.contactFinishKill = true;
               rec.log.push(vName + ' does not let it slip away — they close in and strike with the ' + _cfW + ' for ' + _cfVd + ' — ' + mPhrase + ' falls. (Contact finish)');
-            } else if (mCanFlee) {
-              rec.outcome = 'mFlee';
-              rec.log.push(vName + ' closes in and strikes with the ' + _cfW + ' for ' + _cfVd + ' (' + members[0].hp + ' left) — but ' + mPhrase + ' breaks away all the same.');
             } else {
-              // MONSTER COMMITMENT (Steve 2026-11-02): a committed beast
-              // takes the finish strike and stays — the fight proceeds
-              // to rounds, no outcome set.
-              rec.log.push(vName + ' closes in and strikes with the ' + _cfW + ' for ' + _cfVd + ' (' + members[0].hp + ' left) — but ' + mPhrase + ' holds its ground, wounded, and still coming. (Committed)');
+              // FINISHERSIZE (sim-finishersize-a, 2026-11-06): the
+              // COMMITTED finish — Steve 2026-10-27, defenders finish a
+              // crippled beast they meet if they can, risk-weighted not
+              // unconditional. One contact strike cannot finish a 41-HP
+              // beast; the fighter (or the party beside them) keeps
+              // striking it while they hold above the morale floor. The
+              // commit fires only when the kill is in sight: the beast's
+              // remaining HP is within three of the proven blow just
+              // landed (a 41-HP beast commits at ~29 left; a 125-HP
+              // beast at ~113 does not), the fighter is at >= 60% HP,
+              // and intent is engage — the twoblow gate's own gates,
+              // reused verbatim. The kill, if it comes, comes from real
+              // strikes in the following rounds; the 3-round cap (morale
+              // section) lapses the commit, and the 40% companion floor
+              // still ends the fight below it. No RNG drawn here, no
+              // state written beyond the fight record.
+              var _fsTail = members[0].hp <= 3 * _cfVd;
+              var _fsHpOk = (vHp / vHpMax) >= 0.60;
+              var _fsIntentOk = rec.intent === 'engage';
+              if (_fsTail && _fsHpOk && _fsIntentOk) {
+                rec.committedFinish = true; rec.committedFinishKind = 'met-below-break';
+                rec.fsCommitMhp = members[0].hp; rec.fsCommitStrike = _cfVd; rec.fsCommitRounds = 0;
+                rec.log.push(vName + ' sees it — ' + mPhrase + ' is broken and close enough to finish. They hold the line to end it. (Committed finish, met-below-break)');
+              } else if (!_fsTail) { rec.fsNoCommitWhy = 'above-tail'; }
+              else if (!_fsHpOk) { rec.fsNoCommitWhy = 'low-hp'; }
+              else if (!_fsIntentOk) { rec.fsNoCommitWhy = 'intent'; }
+              if (mCanFlee && !rec.committedFinish) {
+                rec.outcome = 'mFlee';
+                rec.log.push(vName + ' closes in and strikes with the ' + _cfW + ' for ' + _cfVd + ' (' + members[0].hp + ' left) — but ' + mPhrase + ' breaks away all the same.');
+              } else if (mCanFlee) {
+                rec.log.push(vName + ' closes in and strikes with the ' + _cfW + ' for ' + _cfVd + ' (' + members[0].hp + ' left) — it tries to break away, but ' + vName + ' is on it and does not let go. (Committed finish)');
+              } else {
+                // MONSTER COMMITMENT (Steve 2026-11-02): a committed beast
+                // takes the finish strike and stays — the fight proceeds
+                // to rounds, no outcome set.
+                rec.log.push(vName + ' closes in and strikes with the ' + _cfW + ' for ' + _cfVd + ' (' + members[0].hp + ' left) — but ' + mPhrase + ' holds its ground, wounded, and still coming. (Committed)');
+              }
             }
           } else if (_cf) {
+            // FINISHERSIZE: the contact finish did not fire — name why.
+            if (!rec.fsNoCommitWhy) rec.fsNoCommitWhy = (wave < 3) ? 'wave' : (rec.mDealt !== 0 ? 'volley-damage' : 'arena');
             if (mCanFlee) {
               rec.outcome = 'mFlee';
               rec.log.push(vName + ' drove ' + mPhrase + ' off with the ' + _cfW + ' — it broke before it ever closed.');
@@ -1106,6 +1161,8 @@
               rec.log.push(vName + ' drove at ' + mPhrase + ' with the ' + _cfW + ' — it staggers, holds its ground, and keeps coming. (Committed)');
             }
           } else {
+            // FINISHERSIZE: no finish instrument held — name why.
+            if (!rec.fsNoCommitWhy) rec.fsNoCommitWhy = (wave < 3) ? 'wave' : 'no-instrument';
             if (mCanFlee) {
               rec.outcome = 'mFlee';
               rec.log.push(vName + ' drove ' + mPhrase + ' off — it broke before it ever closed.');
@@ -1266,6 +1323,19 @@
       var dancedThisRound = false;
       for (var round = 1; round <= MAX_ROUNDS && !rec.outcome; round++) {
         rec.rounds = round;
+        // FINISHERSIZE (sim-finishersize-a, 2026-11-06): the commit's
+        // 3-round cap is decided here, at the top of the round, before
+        // anyone acts — a lapsed commit never buys another strike.
+        // fsCommitRounds counts rounds already held under the commit
+        // (incremented at the break check below); at the top of the
+        // 4th held round the commit lapses and normal morale decides.
+        // Once-only (!fsLapsed): if twoblow later re-commits the
+        // fighter, that is twoblow's rule working, not this commit
+        // re-forming — the lapse line must not repeat every round.
+        if (rec.committedFinish && rec.committedFinishKind === 'met-below-break' && !rec.fsLapsed && (rec.fsCommitRounds | 0) >= 3) {
+          rec.committedFinish = false; rec.fsLapsed = true;
+          rec.log.push(vName + ' has held three rounds and ' + mPhrase + ' is still standing — the finish slips away. They fall back to their own judgment. (Committed finish lapsed)');
+        }
         // PATIENT-AIM ROUND-START HP (r104): full health is judged at the
         // START of the round, before anyone acts. The monster usually hits
         // first (initiative: monster speed vs villager 2-4), so judging live
@@ -2165,6 +2235,24 @@
             if (hopeless) rec.everHopeless = true;
           }
         }
+        // FINISHERSIZE (sim-finishersize-a, 2026-11-06): the committed
+        // finish, kept. A fighter who committed at contact holds while
+        // the kill is still in sight — the 3-round cap is decided at
+        // the top of the round (see there), so the hold here is only
+        // the morale half: the hopeless flee is suppressed while the
+        // fighter holds above the 40% companion floor. Death, the
+        // floor itself, and the 5% winning floor below all still apply,
+        // and a trick round still spends the round (a Eulogy dismissal
+        // still dismisses — the commit never touches signature exits).
+        // Twoblow commits are untouched (kind !== 'met-below-break').
+        if (rec.committedFinish && rec.committedFinishKind === 'met-below-break' && members[0].hp > 0 && !opts.noFlee && (vHp / vHpMax) >= 0.40) {
+          if (hopeless && !rec.fsHoldLogged) {
+            rec.fsHoldLogged = true;
+            rec.log.push(vName + ' holds — ' + mPhrase + ' is broken and almost down. They are not letting it walk away. (Committed finish)');
+          }
+          hopeless = false;
+          fleeAt = 0.05;
+        }
         // LEARN-VS-FIGHT (Steve 2026-10-13): the situational override. A
         // learning villager reads the first exchange — good odds → commit
         // to the kill. Not winning after the opening → withdraw with the
@@ -2301,6 +2389,12 @@
         // skipped while the rope holds. It can still fight, and when the
         // rope's rounds run out the break check decides as before.
         if (abBoundN <= 0 && (members[0].hp / members[0].maxHp) < mBreak) {
+          // FINISHERSIZE (sim-finishersize-a, 2026-11-06): count this
+          // round as held under a met-below-break commit — the cap is
+          // decided at the top of the next round (see there). A bound
+          // (hogtied) round skips this whole check and does not count;
+          // the beast cannot flee while bound anyway.
+          if (rec.committedFinish && rec.committedFinishKind === 'met-below-break') rec.fsCommitRounds = (rec.fsCommitRounds | 0) + 1;
           // CHORUS-HOLD (sim-chorus-a, 2026-10-31): a fighter who
           // already committed does NOT lose the finish to a downbeat
           // dance round. The dance consumed the whole turn, so the
@@ -2335,12 +2429,30 @@
           var _tbGate = wave >= 3 && members[0].hp > 0 && twoblowLast.length === 2 &&
             (twoblowLast[0] + twoblowLast[1]) >= members[0].hp &&
             (vHp / vHpMax) >= 0.60 && rec.intent === 'engage' && vStruckThisRound && !opts.noFlee;
+          // FINISHERSIZE (sim-finishersize-a, 2026-11-06): a live
+          // met-below-break commit holds the beast the same way the
+          // two-blow gate does — while the commit is live (the top-of-
+          // round lapse already ended it past 3 held rounds, so the
+          // <= 3 here is belt-and-braces). It never creates a commit,
+          // never re-imposes or relaxes any gate.
+          var _fsGate = rec.committedFinish && rec.committedFinishKind === 'met-below-break' &&
+            members[0].hp > 0 && (rec.fsCommitRounds | 0) <= 3 && !opts.noFlee;
           if (_tbGate) {
             rec.committedFinish = true; rec.committedRounds = (rec.committedRounds | 0) + 1;
+            // FINISHERSIZE: a twoblow firing takes the commitment over —
+            // the fighter's hold is now justified by the two-blow rule,
+            // not by the met-below-break window, so the FS cap stops
+            // counting and the FS lapse can never fire on it again.
+            // (Without this the kind would keep reading 'met-below-break'
+            // while twoblow did the work, and a lapsed commit could
+            // re-form and lapse again every round — log spam, muddy audit.)
+            rec.committedFinishKind = 'two-blow';
             rec.twoblowLastTwo = twoblowLast.slice(); rec.twoblowSum = twoblowLast[0] + twoblowLast[1];
             rec.twoblowCommitMhp = members[0].hp; rec.twoblowCommitVhpFrac = vHp / vHpMax;
             rec.twoblowCommitSum = twoblowLast[0] + twoblowLast[1];
             rec.log.push(vName + ' holds — ' + mPhrase + ' is two blows from falling, and they are still strong enough to finish it. (Committed finish, two-blow)');
+          } else if (_fsGate) {
+            rec.log.push(vName + ' holds — ' + mPhrase + ' is broken and almost down, and they are still strong enough to finish it. (Committed finish, met-below-break)');
           } else if (!mCanFlee) {
           // MONSTER COMMITMENT (Steve 2026-11-02): a committed beast
           // does not break — no outcome set, no break, the loop
