@@ -1,0 +1,1919 @@
+{
+  "corpusDir": "evidence/2026-11-06/perseed-grind-a",
+  "n": 8,
+  "instrumentErrors": 0,
+  "killersEver": 15,
+  "deadKillers": 11,
+  "livingAtEnd": 4,
+  "killToDeathMedianAll": 6,
+  "killToDeathMedianW4first": 6,
+  "killToDeathDays": [
+    0,
+    1,
+    2,
+    2,
+    4,
+    6,
+    9,
+    13,
+    22,
+    22,
+    27
+  ],
+  "channelCounts": {
+    "TB-fight:reunion": 3,
+    "TB-fight:eater": 1,
+    "TB-fight:timeslot": 1,
+    "fallen:a stranger": 2,
+    "contest": 2,
+    "TB-fight:eulogy": 1,
+    "TB-fight:algorithm": 1
+  },
+  "contextCounts": {
+    "TB-fight": 7,
+    "fallen-other": 2,
+    "contest": 2
+  },
+  "causeCounts": {
+    "the wild": 7,
+    "a stranger": 2,
+    "contest": 2
+  },
+  "dominantContext": {
+    "top": "TB-fight",
+    "count": 7,
+    "share": 0.6363636363636364
+  },
+  "dominantCause": {
+    "top": "the wild",
+    "count": 7,
+    "share": 0.6363636363636364
+  },
+  "channelCountsW4first": {
+    "TB-fight:reunion": 3,
+    "TB-fight:eater": 1,
+    "TB-fight:timeslot": 1,
+    "fallen:a stranger": 2,
+    "contest": 2,
+    "TB-fight:eulogy": 1,
+    "TB-fight:algorithm": 1
+  },
+  "contextCountsW4first": {
+    "TB-fight": 7,
+    "fallen-other": 2,
+    "contest": 2
+  },
+  "causeCountsW4first": {
+    "the wild": 7,
+    "a stranger": 2,
+    "contest": 2
+  },
+  "dominantContextW4first": {
+    "top": "TB-fight",
+    "count": 7,
+    "share": 0.6363636363636364
+  },
+  "dominantCauseW4first": {
+    "top": "the wild",
+    "count": 7,
+    "share": 0.6363636363636364
+  },
+  "foughtAgainShare": 0.45454545454545453,
+  "foughtAgainCount": 5,
+  "sameChainDeaths": 0,
+  "sameMidDeaths": 0,
+  "partnerAliveShare": 0.2727272727272727,
+  "partnerAliveCount": 3,
+  "unmatched": [],
+  "pairSnapshotSeeds": 1,
+  "maxSimultaneous": 2,
+  "wall": {
+    "wins": 0,
+    "national": 0,
+    "table": 0,
+    "wave4unlocks": 8,
+    "wave5unlocks": 1,
+    "wave4kills": 16,
+    "wave5kills": 2,
+    "medianDays": 128.5
+  },
+  "seeds": [
+    {
+      "seed": 99641,
+      "days": 150,
+      "endReason": "survived",
+      "won": false,
+      "scaleRank": "village",
+      "maxWave": 5,
+      "unlockedWave": 5,
+      "standing": 400,
+      "w4kills": 7,
+      "killersEver": 5,
+      "livingAtEnd": 2,
+      "maxSimultaneous": 2,
+      "maxSimultaneousDay": 115,
+      "pairSnapshotDay": 116,
+      "hasLivingPairSnapshot": true,
+      "instrumentErrors": 0,
+      "killers": [
+        {
+          "seed": 99641,
+          "by": "chen_wei",
+          "isFirstKiller": true,
+          "firstDay": 59,
+          "firstKillWave": 4,
+          "firstKillMid": "congregation",
+          "firstKillVia": "player",
+          "kills": 1,
+          "lastDay": 59,
+          "mids": [
+            "congregation"
+          ],
+          "via": [
+            "player"
+          ],
+          "channels": [
+            "player"
+          ],
+          "deathDay": 81,
+          "killToDeathDays": 22,
+          "aliveAtEnd": false,
+          "deathCauseRaw": "the wild",
+          "deathCauseSplit": "scholar-death:the wild:at-haven:in-combat",
+          "channel": "TB-fight:reunion",
+          "channelDetail": "TB fight day 81 vs reunion (wave 4), 12 rounds, allies 0, party 0, monster HP left 53%",
+          "partyAtDeath": {
+            "size": 0,
+            "ids": []
+          },
+          "foughtAgain": [],
+          "foughtAgainCount": 0,
+          "foughtAgainFirstDay": null,
+          "sameMidAsKill": false,
+          "sameChainDeath": false,
+          "sameChainLink": null,
+          "deathMid": "reunion",
+          "healthMin": 100,
+          "healthLast": 100,
+          "atHavenShare": 1,
+          "onExpedShare": 0,
+          "postKillDaysTracked": 22,
+          "partnerAliveAtDeath": false,
+          "partnerIdsAtDeath": []
+        },
+        {
+          "seed": 99641,
+          "by": "vasyl_shevchenko",
+          "isFirstKiller": false,
+          "firstDay": 106,
+          "firstKillWave": 4,
+          "firstKillMid": "audit",
+          "firstKillVia": "wild",
+          "kills": 2,
+          "lastDay": 143,
+          "mids": [
+            "audit",
+            "timeslot"
+          ],
+          "via": [
+            "wild",
+            "companion"
+          ],
+          "channels": [
+            "npc"
+          ],
+          "deathDay": null,
+          "killToDeathDays": null,
+          "aliveAtEnd": true,
+          "deathCauseRaw": null,
+          "deathCauseSplit": "alive",
+          "channel": "alive-at-end",
+          "channelDetail": "alive at horizon (censored)",
+          "partyAtDeath": {
+            "size": 0,
+            "ids": []
+          },
+          "foughtAgain": [
+            {
+              "day": 107,
+              "channel": "field",
+              "mid": "strike",
+              "wave": 4,
+              "outcome": "vFlee"
+            },
+            {
+              "day": 114,
+              "channel": "field",
+              "mid": "strike",
+              "wave": 4,
+              "outcome": "vFlee"
+            },
+            {
+              "day": 122,
+              "channel": "field",
+              "mid": "landlord",
+              "wave": 2,
+              "outcome": "vKill"
+            },
+            {
+              "day": 126,
+              "channel": "field",
+              "mid": "callback",
+              "wave": 3,
+              "outcome": "vKill"
+            },
+            {
+              "day": 128,
+              "channel": "field",
+              "mid": "bright_idea",
+              "wave": 2,
+              "outcome": "vKill"
+            },
+            {
+              "day": 138,
+              "channel": "field",
+              "mid": "eulogy",
+              "wave": 4,
+              "outcome": "vFlee"
+            },
+            {
+              "day": 140,
+              "channel": "field",
+              "mid": "editor",
+              "wave": 5,
+              "outcome": "vFlee"
+            },
+            {
+              "day": 142,
+              "channel": "tb",
+              "mid": "timeslot",
+              "wave": 5,
+              "outcome": "won"
+            },
+            {
+              "day": 143,
+              "channel": "tb",
+              "mid": "editor",
+              "wave": 5,
+              "outcome": "won"
+            },
+            {
+              "day": 145,
+              "channel": "field",
+              "mid": "editor",
+              "wave": 5,
+              "outcome": "vFlee"
+            }
+          ],
+          "foughtAgainCount": 10,
+          "foughtAgainFirstDay": 107,
+          "sameMidAsKill": false,
+          "sameChainDeath": false,
+          "sameChainLink": null,
+          "deathMid": null,
+          "healthMin": 18,
+          "healthLast": 40,
+          "atHavenShare": 0,
+          "onExpedShare": 0,
+          "postKillDaysTracked": 45,
+          "partnerAliveAtDeath": true,
+          "partnerIdsAtDeath": [
+            "pavel_dubinin"
+          ]
+        },
+        {
+          "seed": 99641,
+          "by": "luis_fernandez",
+          "isFirstKiller": false,
+          "firstDay": 115,
+          "firstKillWave": 4,
+          "firstKillMid": "strike",
+          "firstKillVia": "player",
+          "kills": 2,
+          "lastDay": 116,
+          "mids": [
+            "strike"
+          ],
+          "via": [
+            "player"
+          ],
+          "channels": [
+            "player"
+          ],
+          "deathDay": 128,
+          "killToDeathDays": 13,
+          "aliveAtEnd": false,
+          "deathCauseRaw": "the wild",
+          "deathCauseSplit": "scholar-death:the wild:at-haven:in-combat",
+          "channel": "TB-fight:eater",
+          "channelDetail": "TB fight day 128 vs eater (wave 4), 21 rounds, allies 0, party 0, monster HP left 72%",
+          "partyAtDeath": {
+            "size": 0,
+            "ids": []
+          },
+          "foughtAgain": [
+            {
+              "day": 116,
+              "channel": "tb",
+              "mid": "strike",
+              "wave": 4,
+              "outcome": "won"
+            }
+          ],
+          "foughtAgainCount": 1,
+          "foughtAgainFirstDay": 116,
+          "sameMidAsKill": false,
+          "sameChainDeath": false,
+          "sameChainLink": null,
+          "deathMid": "eater",
+          "healthMin": 56,
+          "healthLast": 89,
+          "atHavenShare": 1,
+          "onExpedShare": 0,
+          "postKillDaysTracked": 12,
+          "partnerAliveAtDeath": true,
+          "partnerIdsAtDeath": [
+            "vasyl_shevchenko"
+          ]
+        },
+        {
+          "seed": 99641,
+          "by": "gen_iewoeql",
+          "isFirstKiller": false,
+          "firstDay": 142,
+          "firstKillWave": 4,
+          "firstKillMid": "eulogy",
+          "firstKillVia": "player",
+          "kills": 1,
+          "lastDay": 142,
+          "mids": [
+            "eulogy"
+          ],
+          "via": [
+            "player"
+          ],
+          "channels": [
+            "player"
+          ],
+          "deathDay": 142,
+          "killToDeathDays": 0,
+          "aliveAtEnd": false,
+          "deathCauseRaw": "the wild",
+          "deathCauseSplit": "scholar-death:the wild:at-haven:in-combat",
+          "channel": "TB-fight:timeslot",
+          "channelDetail": "TB fight day 142 vs timeslot (wave 5), 16 rounds, allies 0, party 0, monster HP left 33%",
+          "partyAtDeath": {
+            "size": 0,
+            "ids": []
+          },
+          "foughtAgain": [],
+          "foughtAgainCount": 0,
+          "foughtAgainFirstDay": null,
+          "sameMidAsKill": false,
+          "sameChainDeath": false,
+          "sameChainLink": null,
+          "deathMid": "timeslot",
+          "healthMin": null,
+          "healthLast": null,
+          "atHavenShare": null,
+          "onExpedShare": null,
+          "postKillDaysTracked": 0,
+          "partnerAliveAtDeath": true,
+          "partnerIdsAtDeath": [
+            "vasyl_shevchenko"
+          ]
+        },
+        {
+          "seed": 99641,
+          "by": "pavel_dubinin",
+          "isFirstKiller": false,
+          "firstDay": 143,
+          "firstKillWave": 5,
+          "firstKillMid": "editor",
+          "firstKillVia": "companion",
+          "kills": 1,
+          "lastDay": 143,
+          "mids": [
+            "editor"
+          ],
+          "via": [
+            "companion"
+          ],
+          "channels": [
+            "npc"
+          ],
+          "deathDay": null,
+          "killToDeathDays": null,
+          "aliveAtEnd": true,
+          "deathCauseRaw": null,
+          "deathCauseSplit": "alive",
+          "channel": "alive-at-end",
+          "channelDetail": "alive at horizon (censored)",
+          "partyAtDeath": {
+            "size": 0,
+            "ids": []
+          },
+          "foughtAgain": [],
+          "foughtAgainCount": 0,
+          "foughtAgainFirstDay": null,
+          "sameMidAsKill": false,
+          "sameChainDeath": false,
+          "sameChainLink": null,
+          "deathMid": null,
+          "healthMin": 1,
+          "healthLast": 51,
+          "atHavenShare": 0,
+          "onExpedShare": 0,
+          "postKillDaysTracked": 9,
+          "partnerAliveAtDeath": true,
+          "partnerIdsAtDeath": [
+            "vasyl_shevchenko"
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 99642,
+      "days": 132,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "village",
+      "maxWave": 4,
+      "unlockedWave": 4,
+      "standing": 199,
+      "w4kills": 1,
+      "killersEver": 1,
+      "livingAtEnd": 0,
+      "maxSimultaneous": 1,
+      "maxSimultaneousDay": 68,
+      "pairSnapshotDay": null,
+      "hasLivingPairSnapshot": false,
+      "instrumentErrors": 0,
+      "killers": [
+        {
+          "seed": 99642,
+          "by": "katarina_novak",
+          "isFirstKiller": true,
+          "firstDay": 68,
+          "firstKillWave": 4,
+          "firstKillMid": "strike",
+          "firstKillVia": "player",
+          "kills": 1,
+          "lastDay": 68,
+          "mids": [
+            "strike"
+          ],
+          "via": [
+            "player"
+          ],
+          "channels": [
+            "player"
+          ],
+          "deathDay": 74,
+          "killToDeathDays": 6,
+          "aliveAtEnd": false,
+          "deathCauseRaw": "a stranger",
+          "deathCauseSplit": "scholar-death:a stranger:away:in-combat",
+          "channel": "fallen:a stranger",
+          "channelDetail": "fallen day 74, cause=a stranger",
+          "partyAtDeath": {
+            "size": 0,
+            "ids": []
+          },
+          "foughtAgain": [],
+          "foughtAgainCount": 0,
+          "foughtAgainFirstDay": null,
+          "sameMidAsKill": false,
+          "sameChainDeath": false,
+          "sameChainLink": null,
+          "deathMid": null,
+          "healthMin": 87,
+          "healthLast": 100,
+          "atHavenShare": 1,
+          "onExpedShare": 1,
+          "postKillDaysTracked": 6,
+          "partnerAliveAtDeath": false,
+          "partnerIdsAtDeath": []
+        }
+      ]
+    },
+    {
+      "seed": 99643,
+      "days": 145,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "village",
+      "maxWave": 4,
+      "unlockedWave": 4,
+      "standing": 199,
+      "w4kills": 3,
+      "killersEver": 2,
+      "livingAtEnd": 1,
+      "maxSimultaneous": 1,
+      "maxSimultaneousDay": 121,
+      "pairSnapshotDay": null,
+      "hasLivingPairSnapshot": false,
+      "instrumentErrors": 0,
+      "killers": [
+        {
+          "seed": 99643,
+          "by": "olivia_bennett",
+          "isFirstKiller": true,
+          "firstDay": 121,
+          "firstKillWave": 4,
+          "firstKillMid": "influencer",
+          "firstKillVia": "player",
+          "kills": 1,
+          "lastDay": 121,
+          "mids": [
+            "influencer"
+          ],
+          "via": [
+            "player"
+          ],
+          "channels": [
+            "player"
+          ],
+          "deathDay": 123,
+          "killToDeathDays": 2,
+          "aliveAtEnd": false,
+          "deathCauseRaw": "a stranger",
+          "deathCauseSplit": "scholar-death:a stranger:away:in-combat",
+          "channel": "fallen:a stranger",
+          "channelDetail": "fallen day 123, cause=a stranger",
+          "partyAtDeath": {
+            "size": 0,
+            "ids": []
+          },
+          "foughtAgain": [],
+          "foughtAgainCount": 0,
+          "foughtAgainFirstDay": null,
+          "sameMidAsKill": false,
+          "sameChainDeath": false,
+          "sameChainLink": null,
+          "deathMid": null,
+          "healthMin": 100,
+          "healthLast": 100,
+          "atHavenShare": 1,
+          "onExpedShare": 0,
+          "postKillDaysTracked": 1,
+          "partnerAliveAtDeath": false,
+          "partnerIdsAtDeath": []
+        },
+        {
+          "seed": 99643,
+          "by": "nadia_khoury",
+          "isFirstKiller": false,
+          "firstDay": 134,
+          "firstKillWave": 4,
+          "firstKillMid": "reunion",
+          "firstKillVia": "player",
+          "kills": 2,
+          "lastDay": 144,
+          "mids": [
+            "reunion",
+            "influencer"
+          ],
+          "via": [
+            "player"
+          ],
+          "channels": [
+            "player"
+          ],
+          "deathDay": null,
+          "killToDeathDays": null,
+          "aliveAtEnd": true,
+          "deathCauseRaw": null,
+          "deathCauseSplit": "alive",
+          "channel": "alive-at-end",
+          "channelDetail": "alive at horizon (censored)",
+          "partyAtDeath": {
+            "size": 0,
+            "ids": []
+          },
+          "foughtAgain": [
+            {
+              "day": 144,
+              "channel": "tb",
+              "mid": "influencer",
+              "wave": 4,
+              "outcome": "won"
+            }
+          ],
+          "foughtAgainCount": 1,
+          "foughtAgainFirstDay": 144,
+          "sameMidAsKill": false,
+          "sameChainDeath": false,
+          "sameChainLink": null,
+          "deathMid": null,
+          "healthMin": 44,
+          "healthLast": 62,
+          "atHavenShare": 1,
+          "onExpedShare": 0,
+          "postKillDaysTracked": 12,
+          "partnerAliveAtDeath": false,
+          "partnerIdsAtDeath": []
+        }
+      ]
+    },
+    {
+      "seed": 99644,
+      "days": 71,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "village",
+      "maxWave": 4,
+      "unlockedWave": 4,
+      "standing": 175,
+      "w4kills": 1,
+      "killersEver": 1,
+      "livingAtEnd": 0,
+      "maxSimultaneous": 1,
+      "maxSimultaneousDay": 66,
+      "pairSnapshotDay": null,
+      "hasLivingPairSnapshot": false,
+      "instrumentErrors": 0,
+      "killers": [
+        {
+          "seed": 99644,
+          "by": "zoltan_nagy",
+          "isFirstKiller": true,
+          "firstDay": 66,
+          "firstKillWave": 4,
+          "firstKillMid": "eulogy",
+          "firstKillVia": "player",
+          "kills": 1,
+          "lastDay": 66,
+          "mids": [
+            "eulogy"
+          ],
+          "via": [
+            "player"
+          ],
+          "channels": [
+            "player"
+          ],
+          "deathDay": 67,
+          "killToDeathDays": 1,
+          "aliveAtEnd": false,
+          "deathCauseRaw": "contest",
+          "deathCauseSplit": "scholar-death:contest:at-haven:not-in-combat",
+          "channel": "contest",
+          "channelDetail": "scholar died in a contest on day 67, inCombat=false",
+          "partyAtDeath": {
+            "size": 0,
+            "ids": []
+          },
+          "foughtAgain": [],
+          "foughtAgainCount": 0,
+          "foughtAgainFirstDay": null,
+          "sameMidAsKill": false,
+          "sameChainDeath": false,
+          "sameChainLink": null,
+          "deathMid": null,
+          "healthMin": 83,
+          "healthLast": 83,
+          "atHavenShare": 1,
+          "onExpedShare": 0,
+          "postKillDaysTracked": 1,
+          "partnerAliveAtDeath": false,
+          "partnerIdsAtDeath": []
+        }
+      ]
+    },
+    {
+      "seed": 99645,
+      "days": 137,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "village",
+      "maxWave": 4,
+      "unlockedWave": 4,
+      "standing": 199,
+      "w4kills": 3,
+      "killersEver": 3,
+      "livingAtEnd": 0,
+      "maxSimultaneous": 1,
+      "maxSimultaneousDay": 75,
+      "pairSnapshotDay": null,
+      "hasLivingPairSnapshot": false,
+      "instrumentErrors": 0,
+      "killers": [
+        {
+          "seed": 99645,
+          "by": "gen_8m2lmql",
+          "isFirstKiller": true,
+          "firstDay": 75,
+          "firstKillWave": 4,
+          "firstKillMid": "congregation",
+          "firstKillVia": "player",
+          "kills": 1,
+          "lastDay": 75,
+          "mids": [
+            "congregation"
+          ],
+          "via": [
+            "player"
+          ],
+          "channels": [
+            "player"
+          ],
+          "deathDay": 77,
+          "killToDeathDays": 2,
+          "aliveAtEnd": false,
+          "deathCauseRaw": "the wild",
+          "deathCauseSplit": "scholar-death:the wild:at-haven:in-combat",
+          "channel": "TB-fight:reunion",
+          "channelDetail": "TB fight day 77 vs reunion (wave 4), 10 rounds, allies 0, party 0, monster HP left 59%",
+          "partyAtDeath": {
+            "size": 0,
+            "ids": []
+          },
+          "foughtAgain": [],
+          "foughtAgainCount": 0,
+          "foughtAgainFirstDay": null,
+          "sameMidAsKill": false,
+          "sameChainDeath": false,
+          "sameChainLink": null,
+          "deathMid": "reunion",
+          "healthMin": 100,
+          "healthLast": 100,
+          "atHavenShare": 1,
+          "onExpedShare": 0,
+          "postKillDaysTracked": 2,
+          "partnerAliveAtDeath": false,
+          "partnerIdsAtDeath": []
+        },
+        {
+          "seed": 99645,
+          "by": "app_mgpspio937",
+          "isFirstKiller": false,
+          "firstDay": 85,
+          "firstKillWave": 4,
+          "firstKillMid": "influencer",
+          "firstKillVia": "player",
+          "kills": 1,
+          "lastDay": 85,
+          "mids": [
+            "influencer"
+          ],
+          "via": [
+            "player"
+          ],
+          "channels": [
+            "player"
+          ],
+          "deathDay": 94,
+          "killToDeathDays": 9,
+          "aliveAtEnd": false,
+          "deathCauseRaw": "the wild",
+          "deathCauseSplit": "scholar-death:the wild:at-haven:in-combat",
+          "channel": "TB-fight:eulogy",
+          "channelDetail": "TB fight day 94 vs eulogy (wave 4), 6 rounds, allies 0, party 0, monster HP left 22%",
+          "partyAtDeath": {
+            "size": 0,
+            "ids": []
+          },
+          "foughtAgain": [
+            {
+              "day": 86,
+              "channel": "tb",
+              "mid": "terms_of_service",
+              "wave": 3,
+              "outcome": "won"
+            }
+          ],
+          "foughtAgainCount": 1,
+          "foughtAgainFirstDay": 86,
+          "sameMidAsKill": false,
+          "sameChainDeath": false,
+          "sameChainLink": null,
+          "deathMid": "eulogy",
+          "healthMin": 100,
+          "healthLast": 100,
+          "atHavenShare": 1,
+          "onExpedShare": 0,
+          "postKillDaysTracked": 9,
+          "partnerAliveAtDeath": true,
+          "partnerIdsAtDeath": [
+            "visjoin_75"
+          ]
+        },
+        {
+          "seed": 99645,
+          "by": "visjoin_75",
+          "isFirstKiller": false,
+          "firstDay": 94,
+          "firstKillWave": 4,
+          "firstKillMid": "congregation",
+          "firstKillVia": "companion",
+          "kills": 1,
+          "lastDay": 94,
+          "mids": [
+            "congregation"
+          ],
+          "via": [
+            "companion"
+          ],
+          "channels": [
+            "npc"
+          ],
+          "deathDay": 121,
+          "killToDeathDays": 27,
+          "aliveAtEnd": false,
+          "deathCauseRaw": "the wild",
+          "deathCauseSplit": "scholar-death:the wild:at-haven:in-combat",
+          "channel": "TB-fight:algorithm",
+          "channelDetail": "TB fight day 121 vs algorithm (wave 4), 9 rounds, allies 1, party 0, monster HP left 29%",
+          "partyAtDeath": {
+            "size": 0,
+            "ids": []
+          },
+          "foughtAgain": [
+            {
+              "day": 101,
+              "channel": "field",
+              "mid": "giant_mosquito",
+              "wave": 2,
+              "outcome": "vKill"
+            },
+            {
+              "day": 106,
+              "channel": "field",
+              "mid": "sanjun",
+              "wave": 1,
+              "outcome": "vKill"
+            },
+            {
+              "day": 120,
+              "channel": "field",
+              "mid": "algorithm",
+              "wave": 4,
+              "outcome": "vFlee"
+            },
+            {
+              "day": 121,
+              "channel": "tb",
+              "mid": "reunion",
+              "wave": 4,
+              "outcome": "lost"
+            }
+          ],
+          "foughtAgainCount": 4,
+          "foughtAgainFirstDay": 101,
+          "sameMidAsKill": false,
+          "sameChainDeath": false,
+          "sameChainLink": null,
+          "deathMid": "algorithm",
+          "healthMin": 27,
+          "healthLast": 91,
+          "atHavenShare": 0,
+          "onExpedShare": 0,
+          "postKillDaysTracked": 26,
+          "partnerAliveAtDeath": false,
+          "partnerIdsAtDeath": []
+        }
+      ]
+    },
+    {
+      "seed": 99646,
+      "days": 125,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "village",
+      "maxWave": 4,
+      "unlockedWave": 4,
+      "standing": 199,
+      "w4kills": 2,
+      "killersEver": 2,
+      "livingAtEnd": 1,
+      "maxSimultaneous": 1,
+      "maxSimultaneousDay": 57,
+      "pairSnapshotDay": null,
+      "hasLivingPairSnapshot": false,
+      "instrumentErrors": 0,
+      "killers": [
+        {
+          "seed": 99646,
+          "by": "gen_ks1obev",
+          "isFirstKiller": true,
+          "firstDay": 57,
+          "firstKillWave": 4,
+          "firstKillMid": "influencer",
+          "firstKillVia": "player",
+          "kills": 1,
+          "lastDay": 57,
+          "mids": [
+            "influencer"
+          ],
+          "via": [
+            "player"
+          ],
+          "channels": [
+            "player"
+          ],
+          "deathDay": 61,
+          "killToDeathDays": 4,
+          "aliveAtEnd": false,
+          "deathCauseRaw": "contest",
+          "deathCauseSplit": "scholar-death:contest:at-haven:not-in-combat",
+          "channel": "contest",
+          "channelDetail": "scholar died in a contest on day 61, inCombat=false",
+          "partyAtDeath": {
+            "size": 0,
+            "ids": []
+          },
+          "foughtAgain": [
+            {
+              "day": 60,
+              "channel": "tb",
+              "mid": "chorus_line",
+              "wave": 3,
+              "outcome": "won"
+            }
+          ],
+          "foughtAgainCount": 1,
+          "foughtAgainFirstDay": 60,
+          "sameMidAsKill": false,
+          "sameChainDeath": false,
+          "sameChainLink": null,
+          "deathMid": null,
+          "healthMin": 100,
+          "healthLast": 100,
+          "atHavenShare": 1,
+          "onExpedShare": 1,
+          "postKillDaysTracked": 3,
+          "partnerAliveAtDeath": false,
+          "partnerIdsAtDeath": []
+        },
+        {
+          "seed": 99646,
+          "by": "elena_petrova",
+          "isFirstKiller": false,
+          "firstDay": 116,
+          "firstKillWave": 4,
+          "firstKillMid": "strike",
+          "firstKillVia": "player",
+          "kills": 1,
+          "lastDay": 116,
+          "mids": [
+            "strike"
+          ],
+          "via": [
+            "player"
+          ],
+          "channels": [
+            "player"
+          ],
+          "deathDay": null,
+          "killToDeathDays": null,
+          "aliveAtEnd": true,
+          "deathCauseRaw": null,
+          "deathCauseSplit": "alive",
+          "channel": "alive-at-end",
+          "channelDetail": "alive at horizon (censored)",
+          "partyAtDeath": {
+            "size": 0,
+            "ids": []
+          },
+          "foughtAgain": [],
+          "foughtAgainCount": 0,
+          "foughtAgainFirstDay": null,
+          "sameMidAsKill": false,
+          "sameChainDeath": false,
+          "sameChainLink": null,
+          "deathMid": null,
+          "healthMin": 45,
+          "healthLast": 60,
+          "atHavenShare": 0,
+          "onExpedShare": 0,
+          "postKillDaysTracked": 11,
+          "partnerAliveAtDeath": false,
+          "partnerIdsAtDeath": []
+        }
+      ]
+    },
+    {
+      "seed": 99647,
+      "days": 99,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "village",
+      "maxWave": 4,
+      "unlockedWave": 4,
+      "standing": 175,
+      "w4kills": 1,
+      "killersEver": 1,
+      "livingAtEnd": 0,
+      "maxSimultaneous": 1,
+      "maxSimultaneousDay": 68,
+      "pairSnapshotDay": null,
+      "hasLivingPairSnapshot": false,
+      "instrumentErrors": 0,
+      "killers": [
+        {
+          "seed": 99647,
+          "by": "mia_andersson",
+          "isFirstKiller": true,
+          "firstDay": 68,
+          "firstKillWave": 4,
+          "firstKillMid": "eulogy",
+          "firstKillVia": "player",
+          "kills": 1,
+          "lastDay": 68,
+          "mids": [
+            "eulogy"
+          ],
+          "via": [
+            "player"
+          ],
+          "channels": [
+            "player"
+          ],
+          "deathDay": 90,
+          "killToDeathDays": 22,
+          "aliveAtEnd": false,
+          "deathCauseRaw": "the wild",
+          "deathCauseSplit": "scholar-death:the wild:at-haven:in-combat",
+          "channel": "TB-fight:reunion",
+          "channelDetail": "TB fight day 90 vs reunion (wave 4), 10 rounds, allies 0, party 0, monster HP left 33%",
+          "partyAtDeath": {
+            "size": 0,
+            "ids": []
+          },
+          "foughtAgain": [
+            {
+              "day": 88,
+              "channel": "tb",
+              "mid": "hummice",
+              "wave": 1,
+              "outcome": "won"
+            }
+          ],
+          "foughtAgainCount": 1,
+          "foughtAgainFirstDay": 88,
+          "sameMidAsKill": false,
+          "sameChainDeath": false,
+          "sameChainLink": null,
+          "deathMid": "reunion",
+          "healthMin": 100,
+          "healthLast": 100,
+          "atHavenShare": 1,
+          "onExpedShare": 1,
+          "postKillDaysTracked": 22,
+          "partnerAliveAtDeath": false,
+          "partnerIdsAtDeath": []
+        }
+      ]
+    },
+    {
+      "seed": 99648,
+      "days": 64,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "village",
+      "maxWave": 4,
+      "unlockedWave": 4,
+      "standing": 150,
+      "w4kills": 0,
+      "killersEver": 0,
+      "livingAtEnd": 0,
+      "maxSimultaneous": 0,
+      "maxSimultaneousDay": null,
+      "pairSnapshotDay": null,
+      "hasLivingPairSnapshot": false,
+      "instrumentErrors": 0,
+      "killers": []
+    }
+  ],
+  "killers": [
+    {
+      "seed": 99641,
+      "by": "chen_wei",
+      "isFirstKiller": true,
+      "firstDay": 59,
+      "firstKillWave": 4,
+      "firstKillMid": "congregation",
+      "firstKillVia": "player",
+      "kills": 1,
+      "lastDay": 59,
+      "mids": [
+        "congregation"
+      ],
+      "via": [
+        "player"
+      ],
+      "channels": [
+        "player"
+      ],
+      "deathDay": 81,
+      "killToDeathDays": 22,
+      "aliveAtEnd": false,
+      "deathCauseRaw": "the wild",
+      "deathCauseSplit": "scholar-death:the wild:at-haven:in-combat",
+      "channel": "TB-fight:reunion",
+      "channelDetail": "TB fight day 81 vs reunion (wave 4), 12 rounds, allies 0, party 0, monster HP left 53%",
+      "partyAtDeath": {
+        "size": 0,
+        "ids": []
+      },
+      "foughtAgain": [],
+      "foughtAgainCount": 0,
+      "foughtAgainFirstDay": null,
+      "sameMidAsKill": false,
+      "sameChainDeath": false,
+      "sameChainLink": null,
+      "deathMid": "reunion",
+      "healthMin": 100,
+      "healthLast": 100,
+      "atHavenShare": 1,
+      "onExpedShare": 0,
+      "postKillDaysTracked": 22,
+      "partnerAliveAtDeath": false,
+      "partnerIdsAtDeath": []
+    },
+    {
+      "seed": 99641,
+      "by": "vasyl_shevchenko",
+      "isFirstKiller": false,
+      "firstDay": 106,
+      "firstKillWave": 4,
+      "firstKillMid": "audit",
+      "firstKillVia": "wild",
+      "kills": 2,
+      "lastDay": 143,
+      "mids": [
+        "audit",
+        "timeslot"
+      ],
+      "via": [
+        "wild",
+        "companion"
+      ],
+      "channels": [
+        "npc"
+      ],
+      "deathDay": null,
+      "killToDeathDays": null,
+      "aliveAtEnd": true,
+      "deathCauseRaw": null,
+      "deathCauseSplit": "alive",
+      "channel": "alive-at-end",
+      "channelDetail": "alive at horizon (censored)",
+      "partyAtDeath": {
+        "size": 0,
+        "ids": []
+      },
+      "foughtAgain": [
+        {
+          "day": 107,
+          "channel": "field",
+          "mid": "strike",
+          "wave": 4,
+          "outcome": "vFlee"
+        },
+        {
+          "day": 114,
+          "channel": "field",
+          "mid": "strike",
+          "wave": 4,
+          "outcome": "vFlee"
+        },
+        {
+          "day": 122,
+          "channel": "field",
+          "mid": "landlord",
+          "wave": 2,
+          "outcome": "vKill"
+        },
+        {
+          "day": 126,
+          "channel": "field",
+          "mid": "callback",
+          "wave": 3,
+          "outcome": "vKill"
+        },
+        {
+          "day": 128,
+          "channel": "field",
+          "mid": "bright_idea",
+          "wave": 2,
+          "outcome": "vKill"
+        },
+        {
+          "day": 138,
+          "channel": "field",
+          "mid": "eulogy",
+          "wave": 4,
+          "outcome": "vFlee"
+        },
+        {
+          "day": 140,
+          "channel": "field",
+          "mid": "editor",
+          "wave": 5,
+          "outcome": "vFlee"
+        },
+        {
+          "day": 142,
+          "channel": "tb",
+          "mid": "timeslot",
+          "wave": 5,
+          "outcome": "won"
+        },
+        {
+          "day": 143,
+          "channel": "tb",
+          "mid": "editor",
+          "wave": 5,
+          "outcome": "won"
+        },
+        {
+          "day": 145,
+          "channel": "field",
+          "mid": "editor",
+          "wave": 5,
+          "outcome": "vFlee"
+        }
+      ],
+      "foughtAgainCount": 10,
+      "foughtAgainFirstDay": 107,
+      "sameMidAsKill": false,
+      "sameChainDeath": false,
+      "sameChainLink": null,
+      "deathMid": null,
+      "healthMin": 18,
+      "healthLast": 40,
+      "atHavenShare": 0,
+      "onExpedShare": 0,
+      "postKillDaysTracked": 45,
+      "partnerAliveAtDeath": true,
+      "partnerIdsAtDeath": [
+        "pavel_dubinin"
+      ]
+    },
+    {
+      "seed": 99641,
+      "by": "luis_fernandez",
+      "isFirstKiller": false,
+      "firstDay": 115,
+      "firstKillWave": 4,
+      "firstKillMid": "strike",
+      "firstKillVia": "player",
+      "kills": 2,
+      "lastDay": 116,
+      "mids": [
+        "strike"
+      ],
+      "via": [
+        "player"
+      ],
+      "channels": [
+        "player"
+      ],
+      "deathDay": 128,
+      "killToDeathDays": 13,
+      "aliveAtEnd": false,
+      "deathCauseRaw": "the wild",
+      "deathCauseSplit": "scholar-death:the wild:at-haven:in-combat",
+      "channel": "TB-fight:eater",
+      "channelDetail": "TB fight day 128 vs eater (wave 4), 21 rounds, allies 0, party 0, monster HP left 72%",
+      "partyAtDeath": {
+        "size": 0,
+        "ids": []
+      },
+      "foughtAgain": [
+        {
+          "day": 116,
+          "channel": "tb",
+          "mid": "strike",
+          "wave": 4,
+          "outcome": "won"
+        }
+      ],
+      "foughtAgainCount": 1,
+      "foughtAgainFirstDay": 116,
+      "sameMidAsKill": false,
+      "sameChainDeath": false,
+      "sameChainLink": null,
+      "deathMid": "eater",
+      "healthMin": 56,
+      "healthLast": 89,
+      "atHavenShare": 1,
+      "onExpedShare": 0,
+      "postKillDaysTracked": 12,
+      "partnerAliveAtDeath": true,
+      "partnerIdsAtDeath": [
+        "vasyl_shevchenko"
+      ]
+    },
+    {
+      "seed": 99641,
+      "by": "gen_iewoeql",
+      "isFirstKiller": false,
+      "firstDay": 142,
+      "firstKillWave": 4,
+      "firstKillMid": "eulogy",
+      "firstKillVia": "player",
+      "kills": 1,
+      "lastDay": 142,
+      "mids": [
+        "eulogy"
+      ],
+      "via": [
+        "player"
+      ],
+      "channels": [
+        "player"
+      ],
+      "deathDay": 142,
+      "killToDeathDays": 0,
+      "aliveAtEnd": false,
+      "deathCauseRaw": "the wild",
+      "deathCauseSplit": "scholar-death:the wild:at-haven:in-combat",
+      "channel": "TB-fight:timeslot",
+      "channelDetail": "TB fight day 142 vs timeslot (wave 5), 16 rounds, allies 0, party 0, monster HP left 33%",
+      "partyAtDeath": {
+        "size": 0,
+        "ids": []
+      },
+      "foughtAgain": [],
+      "foughtAgainCount": 0,
+      "foughtAgainFirstDay": null,
+      "sameMidAsKill": false,
+      "sameChainDeath": false,
+      "sameChainLink": null,
+      "deathMid": "timeslot",
+      "healthMin": null,
+      "healthLast": null,
+      "atHavenShare": null,
+      "onExpedShare": null,
+      "postKillDaysTracked": 0,
+      "partnerAliveAtDeath": true,
+      "partnerIdsAtDeath": [
+        "vasyl_shevchenko"
+      ]
+    },
+    {
+      "seed": 99641,
+      "by": "pavel_dubinin",
+      "isFirstKiller": false,
+      "firstDay": 143,
+      "firstKillWave": 5,
+      "firstKillMid": "editor",
+      "firstKillVia": "companion",
+      "kills": 1,
+      "lastDay": 143,
+      "mids": [
+        "editor"
+      ],
+      "via": [
+        "companion"
+      ],
+      "channels": [
+        "npc"
+      ],
+      "deathDay": null,
+      "killToDeathDays": null,
+      "aliveAtEnd": true,
+      "deathCauseRaw": null,
+      "deathCauseSplit": "alive",
+      "channel": "alive-at-end",
+      "channelDetail": "alive at horizon (censored)",
+      "partyAtDeath": {
+        "size": 0,
+        "ids": []
+      },
+      "foughtAgain": [],
+      "foughtAgainCount": 0,
+      "foughtAgainFirstDay": null,
+      "sameMidAsKill": false,
+      "sameChainDeath": false,
+      "sameChainLink": null,
+      "deathMid": null,
+      "healthMin": 1,
+      "healthLast": 51,
+      "atHavenShare": 0,
+      "onExpedShare": 0,
+      "postKillDaysTracked": 9,
+      "partnerAliveAtDeath": true,
+      "partnerIdsAtDeath": [
+        "vasyl_shevchenko"
+      ]
+    },
+    {
+      "seed": 99642,
+      "by": "katarina_novak",
+      "isFirstKiller": true,
+      "firstDay": 68,
+      "firstKillWave": 4,
+      "firstKillMid": "strike",
+      "firstKillVia": "player",
+      "kills": 1,
+      "lastDay": 68,
+      "mids": [
+        "strike"
+      ],
+      "via": [
+        "player"
+      ],
+      "channels": [
+        "player"
+      ],
+      "deathDay": 74,
+      "killToDeathDays": 6,
+      "aliveAtEnd": false,
+      "deathCauseRaw": "a stranger",
+      "deathCauseSplit": "scholar-death:a stranger:away:in-combat",
+      "channel": "fallen:a stranger",
+      "channelDetail": "fallen day 74, cause=a stranger",
+      "partyAtDeath": {
+        "size": 0,
+        "ids": []
+      },
+      "foughtAgain": [],
+      "foughtAgainCount": 0,
+      "foughtAgainFirstDay": null,
+      "sameMidAsKill": false,
+      "sameChainDeath": false,
+      "sameChainLink": null,
+      "deathMid": null,
+      "healthMin": 87,
+      "healthLast": 100,
+      "atHavenShare": 1,
+      "onExpedShare": 1,
+      "postKillDaysTracked": 6,
+      "partnerAliveAtDeath": false,
+      "partnerIdsAtDeath": []
+    },
+    {
+      "seed": 99643,
+      "by": "olivia_bennett",
+      "isFirstKiller": true,
+      "firstDay": 121,
+      "firstKillWave": 4,
+      "firstKillMid": "influencer",
+      "firstKillVia": "player",
+      "kills": 1,
+      "lastDay": 121,
+      "mids": [
+        "influencer"
+      ],
+      "via": [
+        "player"
+      ],
+      "channels": [
+        "player"
+      ],
+      "deathDay": 123,
+      "killToDeathDays": 2,
+      "aliveAtEnd": false,
+      "deathCauseRaw": "a stranger",
+      "deathCauseSplit": "scholar-death:a stranger:away:in-combat",
+      "channel": "fallen:a stranger",
+      "channelDetail": "fallen day 123, cause=a stranger",
+      "partyAtDeath": {
+        "size": 0,
+        "ids": []
+      },
+      "foughtAgain": [],
+      "foughtAgainCount": 0,
+      "foughtAgainFirstDay": null,
+      "sameMidAsKill": false,
+      "sameChainDeath": false,
+      "sameChainLink": null,
+      "deathMid": null,
+      "healthMin": 100,
+      "healthLast": 100,
+      "atHavenShare": 1,
+      "onExpedShare": 0,
+      "postKillDaysTracked": 1,
+      "partnerAliveAtDeath": false,
+      "partnerIdsAtDeath": []
+    },
+    {
+      "seed": 99643,
+      "by": "nadia_khoury",
+      "isFirstKiller": false,
+      "firstDay": 134,
+      "firstKillWave": 4,
+      "firstKillMid": "reunion",
+      "firstKillVia": "player",
+      "kills": 2,
+      "lastDay": 144,
+      "mids": [
+        "reunion",
+        "influencer"
+      ],
+      "via": [
+        "player"
+      ],
+      "channels": [
+        "player"
+      ],
+      "deathDay": null,
+      "killToDeathDays": null,
+      "aliveAtEnd": true,
+      "deathCauseRaw": null,
+      "deathCauseSplit": "alive",
+      "channel": "alive-at-end",
+      "channelDetail": "alive at horizon (censored)",
+      "partyAtDeath": {
+        "size": 0,
+        "ids": []
+      },
+      "foughtAgain": [
+        {
+          "day": 144,
+          "channel": "tb",
+          "mid": "influencer",
+          "wave": 4,
+          "outcome": "won"
+        }
+      ],
+      "foughtAgainCount": 1,
+      "foughtAgainFirstDay": 144,
+      "sameMidAsKill": false,
+      "sameChainDeath": false,
+      "sameChainLink": null,
+      "deathMid": null,
+      "healthMin": 44,
+      "healthLast": 62,
+      "atHavenShare": 1,
+      "onExpedShare": 0,
+      "postKillDaysTracked": 12,
+      "partnerAliveAtDeath": false,
+      "partnerIdsAtDeath": []
+    },
+    {
+      "seed": 99644,
+      "by": "zoltan_nagy",
+      "isFirstKiller": true,
+      "firstDay": 66,
+      "firstKillWave": 4,
+      "firstKillMid": "eulogy",
+      "firstKillVia": "player",
+      "kills": 1,
+      "lastDay": 66,
+      "mids": [
+        "eulogy"
+      ],
+      "via": [
+        "player"
+      ],
+      "channels": [
+        "player"
+      ],
+      "deathDay": 67,
+      "killToDeathDays": 1,
+      "aliveAtEnd": false,
+      "deathCauseRaw": "contest",
+      "deathCauseSplit": "scholar-death:contest:at-haven:not-in-combat",
+      "channel": "contest",
+      "channelDetail": "scholar died in a contest on day 67, inCombat=false",
+      "partyAtDeath": {
+        "size": 0,
+        "ids": []
+      },
+      "foughtAgain": [],
+      "foughtAgainCount": 0,
+      "foughtAgainFirstDay": null,
+      "sameMidAsKill": false,
+      "sameChainDeath": false,
+      "sameChainLink": null,
+      "deathMid": null,
+      "healthMin": 83,
+      "healthLast": 83,
+      "atHavenShare": 1,
+      "onExpedShare": 0,
+      "postKillDaysTracked": 1,
+      "partnerAliveAtDeath": false,
+      "partnerIdsAtDeath": []
+    },
+    {
+      "seed": 99645,
+      "by": "gen_8m2lmql",
+      "isFirstKiller": true,
+      "firstDay": 75,
+      "firstKillWave": 4,
+      "firstKillMid": "congregation",
+      "firstKillVia": "player",
+      "kills": 1,
+      "lastDay": 75,
+      "mids": [
+        "congregation"
+      ],
+      "via": [
+        "player"
+      ],
+      "channels": [
+        "player"
+      ],
+      "deathDay": 77,
+      "killToDeathDays": 2,
+      "aliveAtEnd": false,
+      "deathCauseRaw": "the wild",
+      "deathCauseSplit": "scholar-death:the wild:at-haven:in-combat",
+      "channel": "TB-fight:reunion",
+      "channelDetail": "TB fight day 77 vs reunion (wave 4), 10 rounds, allies 0, party 0, monster HP left 59%",
+      "partyAtDeath": {
+        "size": 0,
+        "ids": []
+      },
+      "foughtAgain": [],
+      "foughtAgainCount": 0,
+      "foughtAgainFirstDay": null,
+      "sameMidAsKill": false,
+      "sameChainDeath": false,
+      "sameChainLink": null,
+      "deathMid": "reunion",
+      "healthMin": 100,
+      "healthLast": 100,
+      "atHavenShare": 1,
+      "onExpedShare": 0,
+      "postKillDaysTracked": 2,
+      "partnerAliveAtDeath": false,
+      "partnerIdsAtDeath": []
+    },
+    {
+      "seed": 99645,
+      "by": "app_mgpspio937",
+      "isFirstKiller": false,
+      "firstDay": 85,
+      "firstKillWave": 4,
+      "firstKillMid": "influencer",
+      "firstKillVia": "player",
+      "kills": 1,
+      "lastDay": 85,
+      "mids": [
+        "influencer"
+      ],
+      "via": [
+        "player"
+      ],
+      "channels": [
+        "player"
+      ],
+      "deathDay": 94,
+      "killToDeathDays": 9,
+      "aliveAtEnd": false,
+      "deathCauseRaw": "the wild",
+      "deathCauseSplit": "scholar-death:the wild:at-haven:in-combat",
+      "channel": "TB-fight:eulogy",
+      "channelDetail": "TB fight day 94 vs eulogy (wave 4), 6 rounds, allies 0, party 0, monster HP left 22%",
+      "partyAtDeath": {
+        "size": 0,
+        "ids": []
+      },
+      "foughtAgain": [
+        {
+          "day": 86,
+          "channel": "tb",
+          "mid": "terms_of_service",
+          "wave": 3,
+          "outcome": "won"
+        }
+      ],
+      "foughtAgainCount": 1,
+      "foughtAgainFirstDay": 86,
+      "sameMidAsKill": false,
+      "sameChainDeath": false,
+      "sameChainLink": null,
+      "deathMid": "eulogy",
+      "healthMin": 100,
+      "healthLast": 100,
+      "atHavenShare": 1,
+      "onExpedShare": 0,
+      "postKillDaysTracked": 9,
+      "partnerAliveAtDeath": true,
+      "partnerIdsAtDeath": [
+        "visjoin_75"
+      ]
+    },
+    {
+      "seed": 99645,
+      "by": "visjoin_75",
+      "isFirstKiller": false,
+      "firstDay": 94,
+      "firstKillWave": 4,
+      "firstKillMid": "congregation",
+      "firstKillVia": "companion",
+      "kills": 1,
+      "lastDay": 94,
+      "mids": [
+        "congregation"
+      ],
+      "via": [
+        "companion"
+      ],
+      "channels": [
+        "npc"
+      ],
+      "deathDay": 121,
+      "killToDeathDays": 27,
+      "aliveAtEnd": false,
+      "deathCauseRaw": "the wild",
+      "deathCauseSplit": "scholar-death:the wild:at-haven:in-combat",
+      "channel": "TB-fight:algorithm",
+      "channelDetail": "TB fight day 121 vs algorithm (wave 4), 9 rounds, allies 1, party 0, monster HP left 29%",
+      "partyAtDeath": {
+        "size": 0,
+        "ids": []
+      },
+      "foughtAgain": [
+        {
+          "day": 101,
+          "channel": "field",
+          "mid": "giant_mosquito",
+          "wave": 2,
+          "outcome": "vKill"
+        },
+        {
+          "day": 106,
+          "channel": "field",
+          "mid": "sanjun",
+          "wave": 1,
+          "outcome": "vKill"
+        },
+        {
+          "day": 120,
+          "channel": "field",
+          "mid": "algorithm",
+          "wave": 4,
+          "outcome": "vFlee"
+        },
+        {
+          "day": 121,
+          "channel": "tb",
+          "mid": "reunion",
+          "wave": 4,
+          "outcome": "lost"
+        }
+      ],
+      "foughtAgainCount": 4,
+      "foughtAgainFirstDay": 101,
+      "sameMidAsKill": false,
+      "sameChainDeath": false,
+      "sameChainLink": null,
+      "deathMid": "algorithm",
+      "healthMin": 27,
+      "healthLast": 91,
+      "atHavenShare": 0,
+      "onExpedShare": 0,
+      "postKillDaysTracked": 26,
+      "partnerAliveAtDeath": false,
+      "partnerIdsAtDeath": []
+    },
+    {
+      "seed": 99646,
+      "by": "gen_ks1obev",
+      "isFirstKiller": true,
+      "firstDay": 57,
+      "firstKillWave": 4,
+      "firstKillMid": "influencer",
+      "firstKillVia": "player",
+      "kills": 1,
+      "lastDay": 57,
+      "mids": [
+        "influencer"
+      ],
+      "via": [
+        "player"
+      ],
+      "channels": [
+        "player"
+      ],
+      "deathDay": 61,
+      "killToDeathDays": 4,
+      "aliveAtEnd": false,
+      "deathCauseRaw": "contest",
+      "deathCauseSplit": "scholar-death:contest:at-haven:not-in-combat",
+      "channel": "contest",
+      "channelDetail": "scholar died in a contest on day 61, inCombat=false",
+      "partyAtDeath": {
+        "size": 0,
+        "ids": []
+      },
+      "foughtAgain": [
+        {
+          "day": 60,
+          "channel": "tb",
+          "mid": "chorus_line",
+          "wave": 3,
+          "outcome": "won"
+        }
+      ],
+      "foughtAgainCount": 1,
+      "foughtAgainFirstDay": 60,
+      "sameMidAsKill": false,
+      "sameChainDeath": false,
+      "sameChainLink": null,
+      "deathMid": null,
+      "healthMin": 100,
+      "healthLast": 100,
+      "atHavenShare": 1,
+      "onExpedShare": 1,
+      "postKillDaysTracked": 3,
+      "partnerAliveAtDeath": false,
+      "partnerIdsAtDeath": []
+    },
+    {
+      "seed": 99646,
+      "by": "elena_petrova",
+      "isFirstKiller": false,
+      "firstDay": 116,
+      "firstKillWave": 4,
+      "firstKillMid": "strike",
+      "firstKillVia": "player",
+      "kills": 1,
+      "lastDay": 116,
+      "mids": [
+        "strike"
+      ],
+      "via": [
+        "player"
+      ],
+      "channels": [
+        "player"
+      ],
+      "deathDay": null,
+      "killToDeathDays": null,
+      "aliveAtEnd": true,
+      "deathCauseRaw": null,
+      "deathCauseSplit": "alive",
+      "channel": "alive-at-end",
+      "channelDetail": "alive at horizon (censored)",
+      "partyAtDeath": {
+        "size": 0,
+        "ids": []
+      },
+      "foughtAgain": [],
+      "foughtAgainCount": 0,
+      "foughtAgainFirstDay": null,
+      "sameMidAsKill": false,
+      "sameChainDeath": false,
+      "sameChainLink": null,
+      "deathMid": null,
+      "healthMin": 45,
+      "healthLast": 60,
+      "atHavenShare": 0,
+      "onExpedShare": 0,
+      "postKillDaysTracked": 11,
+      "partnerAliveAtDeath": false,
+      "partnerIdsAtDeath": []
+    },
+    {
+      "seed": 99647,
+      "by": "mia_andersson",
+      "isFirstKiller": true,
+      "firstDay": 68,
+      "firstKillWave": 4,
+      "firstKillMid": "eulogy",
+      "firstKillVia": "player",
+      "kills": 1,
+      "lastDay": 68,
+      "mids": [
+        "eulogy"
+      ],
+      "via": [
+        "player"
+      ],
+      "channels": [
+        "player"
+      ],
+      "deathDay": 90,
+      "killToDeathDays": 22,
+      "aliveAtEnd": false,
+      "deathCauseRaw": "the wild",
+      "deathCauseSplit": "scholar-death:the wild:at-haven:in-combat",
+      "channel": "TB-fight:reunion",
+      "channelDetail": "TB fight day 90 vs reunion (wave 4), 10 rounds, allies 0, party 0, monster HP left 33%",
+      "partyAtDeath": {
+        "size": 0,
+        "ids": []
+      },
+      "foughtAgain": [
+        {
+          "day": 88,
+          "channel": "tb",
+          "mid": "hummice",
+          "wave": 1,
+          "outcome": "won"
+        }
+      ],
+      "foughtAgainCount": 1,
+      "foughtAgainFirstDay": 88,
+      "sameMidAsKill": false,
+      "sameChainDeath": false,
+      "sameChainLink": null,
+      "deathMid": "reunion",
+      "healthMin": 100,
+      "healthLast": 100,
+      "atHavenShare": 1,
+      "onExpedShare": 1,
+      "postKillDaysTracked": 22,
+      "partnerAliveAtDeath": false,
+      "partnerIdsAtDeath": []
+    }
+  ]
+}
