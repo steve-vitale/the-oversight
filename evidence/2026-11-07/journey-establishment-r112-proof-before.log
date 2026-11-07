@@ -1,0 +1,49 @@
+PASS A driver-practice-snapshot-fn
+PASS B driver-practice-d1-d14-d28-dEnd
+PASS C driver-snapshot-first-day-gte
+PASS D driver-practice-tasks-match-practicemove
+PASS E driver-practice-specs-match
+PASS F driver-navigation-logging
+PASS G driver-foodxp-reads
+PASS H ladder-GO-eight-seeds
+PASS I ladder-per-seed-line
+PASS J ladder-move-detail
+PASS K zero-ladder-NO-GO
+PASS L zero-foodXp-detail
+PASS M plus1pool-stepped-counted
+PASS N wastedXp-counted
+PASS O spec0pos-counts
+PASS P seven-of-sixteen-is-NO-GO
+PASS Q nav-normalized-neutral
+PASS R real-diff-still-drifts
+PASS S missing-snapshots-reported
+PASS R live-game-loads
+PASS T gate-selftaught-xp9-stays-zero
+FAIL U gate-selftaught-xp10-buys-one — forager butcher xp10 -> 0 (want 1)
+FAIL V gate-selftaught-xp14-stays-one — forager butcher xp14 -> 0 (want 1)
+FAIL W gate-selftaught-xp15-buys-two — forager butcher xp15 -> 0 (want 2)
+FAIL X gate-selftaught-xp20-buys-three — forager butcher xp20 -> 0 (want 3)
+FAIL Y gate-selftaught-xp100-caps-three — forager butcher xp100 -> 0 (want 3)
+PASS Z gate-holder-xp5-steps-up
+PASS AA gate-holder-xp4-holds
+PASS AB gate-baker-cook-xp5-steps-up
+FAIL AC gate-raw-record-xp10-buys-one — raw-record forager preserver xp10 -> 0 (want 1)
+PASS AD gate-raw-record-no-xp-stays-zero
+PASS AE rack-grant-preserves-a-batch
+FAIL AF rack-grant-cook-earns-preserver-xp — cook foodXp preserver before=0 after=0
+PASS AG rack-no-preserve-no-xp
+FAIL AH hunt-kill-grants-butcher-xp — kill kcal=360, butcher xp 0->0
+PASS AI hunt-fail-grants-nothing
+PASS AK menumore-opening-line
+PASS AL menumore-current-line-known
+PASS AM menumore-ignored-carries-line
+PASS AN menumore-paging-carries-line
+PASS AO menumore-paging-advances-page
+PASS AP det-gate-driver-runs
+PASS AQ det-gate-endDay
+PASS AR det-gate-day6-alive-pantry
+PASS AS det-gate-deaths-to-d6
+PASS AT det-gate-skillRows-to-d6
+PASS AU det-gate-snapshots-present
+
+39 passed, 8 failed

@@ -1233,9 +1233,20 @@
       for (const s of (SPECIALTIES[task] || [])) {
         if (occ.includes(s.m)) skill = Math.max(skill, s.s);
       }
-      // practice: they hone what they do.
-      const xp = (person._src && person._src.foodXp && person._src.foodXp[task]) || 0;
+      // practice: they hone what they do. XP lives on the person's own
+      // record (foodXp) or, for villagePeople() wrappers, on _src.foodXp —
+      // both shapes are the same store (getPerson(id) === rosterChars[id]).
+      // (establishment r112 2026-11-07: the raw-record read was missing,
+      // so the +1 rung was invisible at game.js call sites that pass a
+      // getPerson record straight in.)
+      const xp = ((person._src && person._src.foodXp && person._src.foodXp[task]) || (person.foodXp && person.foodXp[task]) || 0);
       if (skill > 0 && xp >= 5) skill = Math.min(3, skill + 1);
+      // SELF-TAUGHT LADDER (establishment r112 2026-11-07, ROLE PATHS:
+      // skill builds from zero): no occupation skill yet? Doing the work
+      // teaches it — 10 XP buys skill 1, +1 per further 5 XP (15 -> 2,
+      // 20 -> 3, cap 3). The old-life grounding still matters: holders
+      // reach their +1 at 5 XP; the self-taught pay double for the first rung.
+      else if (skill === 0 && xp >= 10) skill = Math.min(3, 1 + Math.floor((xp - 10) / 5));
       return skill;
     },
 

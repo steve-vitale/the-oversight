@@ -6805,6 +6805,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const kcal = Math.max(50, Math.round((animal.calories || 400) * frac * eff));
       try { best.wl[aid] = Math.max(0, (best.wl[aid] || 1) - 1); } catch (e) {}
       try { this.creditDeed && this.creditDeed(vid, 'hunting'); } catch (e) { console.warn('[tracks] deed', e); }
+      // PRACTICE (establishment r112 2026-11-07): cleaning the kill teaches
+      // butchering — one foodXp['butcher'] rep per kill. The same XP
+      // askSpecialist grants; the skill it buys is specialistSkill's
+      // self-taught ladder (10 XP -> 1). A failed stalk cleans nothing.
+      try { const _hp = this.getPerson ? this.getPerson(vid) : null; if (_hp) { _hp.foodXp = _hp.foodXp || {}; _hp.foodXp.butcher = (_hp.foodXp.butcher || 0) + 1; } } catch (e) {}
       try {
         this.state.codex.animalEncounters = this.state.codex.animalEncounters || {};
         this.state.codex.animalEncounters[aid] = (this.state.codex.animalEncounters[aid] || 0) + 1;
@@ -7352,6 +7357,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (n > 0) {
             preservedNote = ` ${first} worked the smoke racks too — ${n} batch${n > 1 ? 'es' : ''} preserved (~${keptKcal} kcal, keeps ${skill > 0 ? 'for weeks' : 'a couple of weeks'}).`;
             try { this.creditDeed && this.creditDeed(vid, 'preserving'); } catch (e) { console.warn('[tracks] deed', e); }
+            // PRACTICE (establishment r112 2026-11-07): working the racks
+            // teaches preserving — one foodXp['preserver'] rep per
+            // resolution that actually preserved (n>0), not per batch.
+            // The same XP askSpecialist grants; the skill it buys is
+            // specialistSkill's self-taught ladder (10 XP -> 1).
+            try { person.foodXp = person.foodXp || {}; person.foodXp.preserver = (person.foodXp.preserver || 0) + 1; } catch (e) {}
           } else if (racksFull && eligible.length) {
             // RACKSVOICE (establishment r20 2026-10-20): the cook resolves
             // ~3x/day, so the identical racks-full line fired per resolution
