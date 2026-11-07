@@ -47,15 +47,21 @@ function scholarOf(Game) { try { return (Game.state || {}).scholar || {}; } catc
 //   reactorOnline.
 // Returns { gate, missing[] } with gate in:
 //   'spent' | 'faced-unspent' | 'draw-driven-off' | 'draw-unfaced' |
-//   'grant-no-draw' | 'feast-ungranted' | 'armed-no-feast' |
-//   'never-armed'.
+//   'grant-no-draw' | 'grant-refused' | 'feast-ungranted' |
+//   'armed-no-feast' | 'never-armed'.
 // ORDER: state is checked before history — a spent deed entails the
 // whole chain passed, so it classifies 'spent' whatever the counters
 // read. A live draw that was faced entails the grant happened, so a
 // faced draw with no spend is 'faced-unspent' even if the grant
-// counter missed it. The chain order in the prereg is the order
-// things must happen; the classifier reads state, and later-link
-// evidence is the strongest evidence the earlier links passed.
+// counter missed it. GRANTED vs CALLED (correction, 2026-11-07,
+// diag-found): a grantFeastBuff CALL that returns granted:false is
+// a refusal, not a grant — the old classifier counted calls and
+// misread reactor-refused feasts as 'grant-no-draw'. 'grant-refused'
+// fires when grants were called but none granted; 'grant-no-draw'
+// fires only when a real buff was granted and drew nothing. The
+// chain order in the prereg is the order things must happen; the
+// classifier reads state, and later-link evidence is the strongest
+// evidence the earlier links passed.
 function classifyFeastGate(row) {
   row = row || {};
   if (row.spent) return { gate: 'spent', missing: [] };
@@ -68,8 +74,11 @@ function classifyFeastGate(row) {
   if (((row.draws | 0)) > 0) {
     return { gate: 'draw-unfaced', missing: [((row.draws | 0)) + ' draw(s) offered, 0 faced, 0 driven off — the beast circled and the buff died first'] };
   }
+  if (((row.granted | 0)) > 0) {
+    return { gate: 'grant-no-draw', missing: [((row.granted | 0)) + ' armed grant(s), 0 draws — the smoke drew nothing (pending already occupied, or no cast)'] };
+  }
   if (((row.grants | 0)) > 0) {
-    return { gate: 'grant-no-draw', missing: [((row.grants | 0)) + ' armed grant(s), 0 draws — the smoke drew nothing (pending already occupied, or no cast)'] };
+    return { gate: 'grant-refused', missing: [((row.grants | 0)) + ' grant call(s), 0 granted — the feast lit but the buff was refused' + (row.reactorOnline ? ' (reactor online: the grant is refused while it hums)' : ' (unarmed at grant time, or the reactor hums)')] };
   }
   if (((row.feasts | 0)) > 0) {
     return { gate: 'feast-ungranted', missing: [((row.feasts | 0)) + ' feast(s) hosted, 0 armed grants — feasts fired unarmed' + (row.reactorOnline ? ' (reactor online: the grant is refused while it hums)' : '') + '; ever armed ' + (((row.everArmed | 0)) > 0 ? 'yes' : 'no')] };
@@ -260,6 +269,8 @@ function install(Game) {
       snap.feasts = count('feasts');
       snap.armedFeasts = t.feastEvents.feasts.filter(function (f) { return !!f.preArmed; }).length;
       snap.grants = count('grants');
+      snap.granted = t.feastEvents.grants.filter(function (g) { return g.granted; }).length;
+      snap.grantsRefused = t.feastEvents.grants.filter(function (g) { return !g.granted; }).length;
       snap.draws = count('draws');
       snap.drawn = t.feastEvents.draws.filter(function (d) { return d.drawn; }).length;
       snap.faced = count('faces');

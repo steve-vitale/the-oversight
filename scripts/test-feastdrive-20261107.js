@@ -41,8 +41,14 @@ function check(name, cond, extra) {
   c = classifyFeastGate(Object.assign({}, base, { draws: 1, grants: 1, feasts: 1, everArmed: true }));
   check('feastgate-draw-unfaced', c.gate === 'draw-unfaced' && /buff died/.test(c.missing[0]), JSON.stringify(c));
   // 5. Armed grant(s), no draw at all.
-  c = classifyFeastGate(Object.assign({}, base, { grants: 2, feasts: 1, everArmed: true }));
+  c = classifyFeastGate(Object.assign({}, base, { grants: 2, granted: 2, feasts: 1, everArmed: true }));
   check('feastgate-grant-no-draw', c.gate === 'grant-no-draw' && /2 armed grant/.test(c.missing[0]), JSON.stringify(c));
+  // 5b. Grant CALLED but refused (reactor) — grant-refused, not grant-no-draw.
+  c = classifyFeastGate(Object.assign({}, base, { grants: 4, granted: 0, feasts: 4, everArmed: true, reactorOnline: true }));
+  check('feastgate-grant-refused', c.gate === 'grant-refused' && /4 grant call/.test(c.missing[0]) && /reactor online/.test(c.missing[0]), JSON.stringify(c));
+  // 5c. One granted + one refused, still no draw — the granted one rules.
+  c = classifyFeastGate(Object.assign({}, base, { grants: 2, granted: 1, feasts: 2, everArmed: true }));
+  check('feastgate-grant-mixed', c.gate === 'grant-no-draw', JSON.stringify(c));
   // 6. Feasts hosted, none granted — unarmed feasts.
   c = classifyFeastGate(Object.assign({}, base, { feasts: 3, everArmed: false, resonance: 12, l3: 1 }));
   check('feastgate-feast-ungranted', c.gate === 'feast-ungranted' && /3 feast/.test(c.missing[0]), JSON.stringify(c));
@@ -177,7 +183,7 @@ function check(name, cond, extra) {
     JSON.stringify({ ch: ch, hf: hf, gr: gr, threw: threw && threw.message }));
   const snap2 = inst.snapshot();
   check('fake-feast-counters', snap2.channels === 1 && snap2.arms === 1 && snap2.feasts === 1 &&
-    snap2.grants === 1 && snap2.draws === 1 && snap2.drawn === 1 && snap2.facedOk === 1 &&
+    snap2.grants === 1 && snap2.granted === 1 && snap2.grantsRefused === 0 && snap2.draws === 1 && snap2.drawn === 1 && snap2.facedOk === 1 &&
     snap2.spends === 1 && snap2.markedSpends === 1 && snap2.spent === true &&
     snap2.buffLive === true && snap2.drawLive === true && snap2.feastGate === 'spent' &&
     snap2.firstArmDay === 100 && snap2.firstFeastDay === 100 && snap2.firstGrantDay === 100 &&
@@ -224,7 +230,7 @@ async function liveLegs() {
   const daily = inst.t.daily;
   const gatedRows = daily.filter(function (d) { return d.feastGate != null; }).length;
   const lastRow = daily[daily.length - 1] || {};
-  const knownGates = ['spent', 'faced-unspent', 'draw-driven-off', 'draw-unfaced', 'grant-no-draw', 'feast-ungranted', 'armed-no-feast', 'never-armed'];
+  const knownGates = ['spent', 'faced-unspent', 'draw-driven-off', 'draw-unfaced', 'grant-no-draw', 'grant-refused', 'feast-ungranted', 'armed-no-feast', 'never-armed'];
   check('live-53006-runs', result && result.days === 150 && daily.length >= 140 &&
     inst.t.instrumentErrors.length === 0,
     'days=' + (result && result.days) + ' snaps=' + daily.length + ' errs=' + JSON.stringify(inst.t.instrumentErrors));
