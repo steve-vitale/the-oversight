@@ -595,13 +595,17 @@ function summarizeRequests(s) {
       if (e.outcome === 'expired' && !expired) expired = { day: e.day };
     }
     // Corroboration from the daily staged maps: the last snap day on
-    // which this vid was still staged under this kind.
+    // which THIS staging was still live. Matched on the staging's own
+    // identity (vid + staged day + village for link) and bounded to the
+    // live window — an unbounded scan misattributes a LATER staging by
+    // the same villager (r113 before-panel: a day-12 request read
+    // lastSeenStaged=95 from a day-92 re-staging).
     let lastSeenStaged = null;
     for (const sn of snaps) {
-      if (!sn || sn.day < r.stagedDay) continue;
+      if (!sn || sn.day < r.stagedDay || sn.day > r.stagedDay + 2) continue;
       const hit = r.kind === 'person'
-        ? (sn.bond || []).some(x => String(x.vid) === r.holder)
-        : (sn.link || []).some(x => String(x.vid) === r.holder);
+        ? (sn.bond || []).some(x => String(x.vid) === r.holder && (x.day == null || x.day === r.stagedDay))
+        : (sn.link || []).some(x => String(x.vid) === r.holder && (x.day == null || x.day === r.stagedDay) && (x.village == null || String(x.village) === r.village));
       if (hit) lastSeenStaged = sn.day;
     }
     const talkedDays = talkTos.filter(t => t.vid === r.holder && t.day >= r.stagedDay && t.day <= liveEnd).map(t => t.day);

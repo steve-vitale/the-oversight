@@ -122,6 +122,33 @@ const SCH = 'scholar_1';
     r.requests[0].talkableAtStaging === true && r.requests[0].onRoster === true && r.requests[0].deathDay === 43, JSON.stringify(r.requests[0]));
   ok('Q1 (7) verdict POLICY-GAP (not mislabeled untalkable)', r.verdict === 'POLICY-GAP', r.verdict);
 }
+// (8) Corroboration is bounded to the request's own live window: a
+// later re-staging by the same villager must not inflate the first
+// request's lastSeenStaged.
+{
+  const s = seedJSON();
+  s.bond.daily = [
+    { day: 12, roster: ['v_h1', 'v_h2', 'v_h3'], bond: [], link: [{ vid: 'v_h1', day: 12, village: 'village_0' }] },
+    { day: 13, roster: ['v_h1', 'v_h2', 'v_h3'], bond: [], link: [{ vid: 'v_h1', day: 12, village: 'village_0' }] },
+    { day: 14, roster: ['v_h1', 'v_h2', 'v_h3'], bond: [], link: [{ vid: 'v_h1', day: 12, village: 'village_0' }] },
+    { day: 92, roster: ['v_h1', 'v_h2', 'v_h3'], bond: [], link: [{ vid: 'v_h1', day: 92, village: 'village_1' }] },
+  ];
+  s.talkReqSnaps = [
+    { day: 12, bond: [], link: [{ vid: 'v_h1', day: 12, village: 'village_0' }], talk: [] },
+    { day: 13, bond: [], link: [{ vid: 'v_h1', day: 12, village: 'village_0' }], talk: [] },
+    { day: 14, bond: [], link: [{ vid: 'v_h1', day: 12, village: 'village_0' }], talk: [] },
+    { day: 92, bond: [], link: [{ vid: 'v_h1', day: 92, village: 'village_1' }], talk: [] },
+  ];
+  s.bond.tele = [
+    { day: 12, scholarId: SCH, initiator: 'v_h1', target: 'village_0', kind: 'link', outcome: 'staged', chance: null },
+    { day: 15, scholarId: SCH, initiator: 'v_h1', target: 'village_0', kind: 'link', outcome: 'expired', chance: null },
+    { day: 92, scholarId: SCH, initiator: 'v_h1', target: 'village_1', kind: 'link', outcome: 'staged', chance: null },
+    { day: 95, scholarId: SCH, initiator: 'v_h1', target: 'village_1', kind: 'link', outcome: 'expired', chance: null },
+  ];
+  const r = A.summarizeRequests(s);
+  ok('Q1 (8) first request lastSeenStaged stays inside its own window', r.requests[0].lastSeenStaged === 14, JSON.stringify(r.requests[0]));
+  ok('Q1 (8) second request lastSeenStaged is its own day', r.requests[1].lastSeenStaged === 92, JSON.stringify(r.requests[1]));
+}
 // scanBondChoices: offered, unanswered vs answered.
 {
   const unanswered = [{ seed: '95601', day: 45, vid: 'v_h1', text:

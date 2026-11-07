@@ -746,6 +746,13 @@ function makePolicy() {
   }
   policy.daily = function (G, ctx) {
     goInside();
+    // R113 Q1 (driver-only): answer a live bond/link request FIRST — a
+    // real sitting with the holder, played in full, before the policy
+    // runs its day (see answerLiveRequest). The before-panel proved the
+    // policy never reaches request-holders (57/84 never talked to; 27
+    // walked out on). A request-sitting costs a day-part, like any
+    // sitting: answering the ask is the competent player's priority.
+    try { answerLiveRequest(G, ctx); } catch (e) { ctx.shipWrapErrors.push('q1Request:' + String(e && e.message)); }
     BASE.daily(G, ctx);
     // R110 BOND-TELEMETRY: one snapshot per game day (day-guarded;
     // runDays may call daily more than once per day).
@@ -885,7 +892,18 @@ function makePolicy() {
         // no sitting with that villager follows that day (checked below).
         const revisitTalkable = !!(revisitVid && info.some(x => x.id === revisitVid));
         const ordered = orderSittingCandidates(revisitTalkable ? revisitVid : null, info);
-        for (const vid of ordered) {
+        // R113 Q1: live request-holders first on convo days — the
+        // backstop when the daily request-sitting could not answer
+        // (holder untalkable that day, or the once-per-day slot went to
+        // another request). Stable within each group.
+        let sittingOrder = ordered;
+        try {
+          const reqVids = liveRequestHolders(_G.state.village, gd).map(h => h.vid);
+          if (reqVids.length) {
+            sittingOrder = ordered.filter(v => reqVids.indexOf(v) >= 0).concat(ordered.filter(v => reqVids.indexOf(v) < 0));
+          }
+        } catch (e) {}
+        for (const vid of sittingOrder) {
           const wasRevisit = (vid === revisitVid);
           let fp = null;
           try { fp = runConversation(gd, vid); } catch (e) { fp = null; }
@@ -1128,10 +1146,21 @@ const MORE_IDS = ['dlg:more', 'dlg:details'];
 let _betrayalSittingIndex = 0;
 let _betrayalTaken = false;
 let _betrayalModeThisSitting = null;
+// R113 Q1 (driver-only): the same alternation shape for bond/link asks —
+// accept on even-numbered bond/link sittings across the panel run,
+// decline on odd ones (accept first), at most once per sitting. The
+// before-panel proved the scholar-facing half is never answered: the
+// policy never sits a request-holder and its daily talk walks out on
+// the ask. The panel measures that BOTH paths work, not a preference.
+let _bondSittingIndex = 0;
+let _bondTaken = false;
+let _bondModeThisSitting = null;
 function beginSitting() {
   _moreStreak = 0;
   _betrayalTaken = false;
   _betrayalModeThisSitting = null;
+  _bondTaken = false;
+  _bondModeThisSitting = null;
 }
 function pickChoiceInner(choices, turn) {
   const list = choices || [];
@@ -1144,6 +1173,24 @@ function pickChoiceInner(choices, turn) {
     const decline = list.find(x => x && x.id === 'betrayal:decline');
     if (decline) return decline;
     return betrayalAccept;
+  }
+  // R113 Q1 (driver-only): when a sitting offers a bond or link choice,
+  // ANSWER it — bond before link, mode set once per sitting (same
+  // alternation as betrayal above). After betrayal (a betrayal ask
+  // outranks a bond ask) and before generic engage: the ask is the point
+  // of the sitting. A decline-mode sitting with no decline choice
+  // offered falls back to accept, mirroring the betrayal block.
+  const bondAccept = list.find(x => x && x.id === 'bond:accept');
+  const linkAccept = list.find(x => x && x.id === 'link:accept');
+  if ((bondAccept || linkAccept) && !_bondTaken) {
+    _bondTaken = true;
+    _bondModeThisSitting = (_bondSittingIndex % 2 === 0) ? 'accept' : 'decline';
+    _bondSittingIndex++;
+    const kind = bondAccept ? 'bond' : 'link';
+    if (_bondModeThisSitting === 'accept') return bondAccept || linkAccept;
+    const decline = list.find(x => x && x.id === kind + ':decline');
+    if (decline) return decline;
+    return bondAccept || linkAccept;
   }
   const engage = _moreStreak >= 2 ? ENGAGE.filter(id => MORE_IDS.indexOf(id) === -1) : ENGAGE;
   for (const id of engage) { const c = list.find(x => x && x.id === id); if (c) return c; }
@@ -1188,6 +1235,59 @@ function orderSittingCandidates(revisitVid, info) {
   for (const x of (info || [])) { if (x && x.count >= 0 && x.count < 2) push(x.id); }
   for (const x of (info || [])) { if (x) push(x.id); }
   return out.slice(0, 3);
+}
+// R113 Q1 (driver-only, pure, proof-tested): live scholar-targeted
+// bond/link requests, from the village's talkRequests map. A request is
+// live on its staged day and the two days after (the tick expires it on
+// stagedDay+3). Bond proposals target the scholar; link raises target a
+// village (villageId from the linkRaises map). Sorted bond-first, then
+// earliest staged — the bond is the person in front of you, the link ask
+// can wait a day. Talkability (alive / roster / shared language) is NOT
+// checked here — the caller checks it against live game state, so this
+// stays pure.
+function liveRequestHolders(village, day) {
+  const v = village || {};
+  const tr = v.talkRequests || {};
+  const lr = v.linkRaises || {};
+  const out = [];
+  for (const vid of Object.keys(tr)) {
+    const e = tr[vid] || {};
+    if (!e.bondProposal && !e.linkRaise) continue;
+    const stagedDay = e.day;
+    if (stagedDay == null || day - stagedDay > 2 || day - stagedDay < 0) continue;
+    out.push({ vid: String(vid), kind: e.bondProposal ? 'bond' : 'link',
+      stagedDay, village: e.bondProposal ? null : ((lr[vid] && (lr[vid].villageId || lr[vid].village)) || null) });
+  }
+  out.sort((a, b) => (a.kind === b.kind ? a.stagedDay - b.stagedDay : (a.kind === 'bond' ? -1 : 1)));
+  return out;
+}
+// R113 Q1 (driver-only): answer a live bond/link request FIRST, with a
+// real sitting played in full, before the policy runs its day. At most
+// one request-sitting per day; each staged request is attempted once
+// (keyed holder|kind|stagedDay) so a request decided today is never
+// re-sat tomorrow. Untalkable holders (dead, off-roster, no shared
+// language) are skipped for today — the request may still be answerable
+// tomorrow, and the convo-day ordering below is the backstop.
+function answerLiveRequest(G, ctx) {
+  const day = gday();
+  const holders = liveRequestHolders((_G.state && _G.state.village) || {}, day);
+  if (!holders.length) return;
+  ctx._q1Answered = ctx._q1Answered || {};
+  for (const h of holders) {
+    const key = h.vid + '|' + h.kind + '|' + h.stagedDay;
+    if (ctx._q1Answered[key]) continue;
+    ctx._q1Answered[key] = true;
+    const p = person(h.vid);
+    if (!p || p.dead) continue;
+    try { const comm = _G.npcComm ? _G.npcComm(h.vid) : { level: 'full' }; if (comm.level === 'none') continue; } catch (e) { continue; }
+    let fp = null;
+    try { fp = runConversation(day, h.vid); } catch (e) { fp = null; }
+    if (fp) {
+      (ctx.convoFiles = ctx.convoFiles || []).push(fp);
+      (ctx.sittingLog = ctx.sittingLog || []).push({ day, vid: h.vid, betrayal: _betrayalModeThisSitting || 'none', bond: _bondModeThisSitting || 'none', q1Request: true, file: fp });
+    }
+    return; // one request-sitting per day
+  }
 }
 const CONVO_DAYS = [45, 60, 80];
 function runConversation(day, vid) {
@@ -1830,4 +1930,4 @@ async function main() {
 }
 if (require.main === module) main().catch(e => { console.error('HARNESS ERROR:', e); process.exit(2); });
 
-module.exports = { deepeningFlee, pickChoice, beginSitting, classifyFightOutcome, classifyBeastAsk, orderSittingCandidates };
+module.exports = { deepeningFlee, pickChoice, beginSitting, classifyFightOutcome, classifyBeastAsk, orderSittingCandidates, liveRequestHolders };
