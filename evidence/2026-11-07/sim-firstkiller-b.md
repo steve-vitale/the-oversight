@@ -384,11 +384,23 @@ Verdict DIAG-GO per the preregged rule.
   zero green-list files. This arm's own proof test is not on the green
   list, so it did not run inside check.js; it ran directly, 117/117
   green (twice — once before the judged run, once after the F11 fix).
-- Prereg committed 21191cc40 before any judged sim. Instruments +
-  proof committed b4f87128 before the judged run. The safe-commit
-  index clobber hit on both commits (files shown staged-as-deleted
-  after correct commits); repaired with HEAD-blob cacheinfo, verified
-  `git status` empty + `git diff HEAD` empty + hash-object matches.
+- **Rebase note (closeout):** branch rebased onto local master
+  1dafd5a49 immediately before merging (read in the main tree just
+  before rebasing; clean rebase, 4 commits, no conflicts). The delta
+  from the measurement base (41007b9d4) to 1dafd5a49 carries one game.js
+  change: the vetkilltale landing (narration-only fireside tales for
+  repeat wave-4+ kills; no RNG draws, no combat/state change affecting
+  trajectories — and the sitstep re-run on that master reproduced its
+  verdict 51/51). The judged corpus was measured on 41007b9d4 and
+  stands; the proof was re-run green (117/117) on the rebased tip,
+  including its live smoke/determinism/neutrality legs on the new base.
+  No judged re-run after the rebase.
+- Prereg committed 21191cc40 before any judged sim (rebased to
+  491bad721). Instruments + proof committed b4f87128 before the judged
+  run (rebased to 8090c278e). The safe-commit index clobber hit on
+  those commits (files shown staged-as-deleted after correct commits);
+  repaired with HEAD-blob cacheinfo, verified `git status` empty +
+  `git diff HEAD` empty + hash-object matches.
 - Judged corpus: `evidence/2026-11-07/perseed-firstkiller-b/` (16
   files, 8 baseline + 8 staged), all with 0 instrument errors.
   Analyzer output saved at `/tmp/firstkiller-analysis.json` (working
