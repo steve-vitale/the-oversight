@@ -130,7 +130,7 @@ function runSweep(env, expectCode) {
       assert.ok(r.stdout.includes(pat), pat + ' printed');
     }
   });
-  leg('L8 episode reconstruction: FIFO pairing, outcomes, treatment join, unattributed', () => {
+  leg('L8 episode reconstruction: FIFO pairing, outcomes, treatment join, unattributed, turnover, open-episode reconciliation', () => {
     const mk = (o) => Object.assign({ seed: 96301, daysAlive: 150, deathRows: [],
       daySeries: [], mealRows: [], sickOnsets: [], sickEnds: [], treatEvents: [] }, o);
     // Two spells for the same villager+name pair FIFO in order; a cure closes
@@ -210,6 +210,33 @@ function runSweep(env, expectCode) {
     assert.strictEqual(b6.eps[1].name, 'wound fever', 'turnover second is wound fever');
     assert.strictEqual(b6.eps[1].duration, 4, 'turnover second duration 17-13=4, got ' + b6.eps[1].duration);
     assert.strictEqual(b6.orphanEnds.length, 0, 'turnover: no orphan ends');
+    // Open-episode reconciliation (recorder gap found on the judged corpus):
+    // a bearer who dies outside the sickness tick leaves no end event — the
+    // deathRows join recovers the outcome. NPC joins on who; the scholar
+    // joins on isPlayer. An open episode with NO matching deathRow stays
+    // open (e.g. a villager who left the village).
+    const s7 = mk({ deathRows: [
+      { day: 33, who: 'v7', whoName: 'Eli', isPlayer: false, cause: 'monster' },
+      { day: 10, who: 'scholar', whoName: 'scholar', isPlayer: true, cause: 'starvation' },
+      { day: 40, who: 'vX', whoName: 'Zed', isPlayer: false, cause: 'the wild' },
+    ], sickOnsets: [
+      { day: 28, who: 'v7', whoName: 'Eli', kind: 'npc', name: 'wound fever', diseaseId: 'wound_fever', vector: 'wound', vectorSource: 'villageSicknessTick', daysLeft0: 5, severity: 2 },
+      { day: 9, who: 'scholar', whoName: 'scholar', kind: 'scholar', name: 'wound_fever', diseaseId: 'wound_fever', vector: 'wound', vectorSource: 'contractDisease', dayPartsLeft0: 8, severity: 1 },
+      { day: 20, who: 'v8', whoName: 'Fay', kind: 'npc', name: 'tick fever', diseaseId: 'disease', vector: 'tick', vectorSource: 'villageSicknessTick', daysLeft0: 4, severity: 1 },
+    ], sickEnds: [] });
+    const b7 = buildEpisodes(s7);
+    assert.strictEqual(b7.eps.length, 3, 'reconcile: three episodes');
+    const eli = b7.eps.find(e => e.who === 'v7');
+    const sch = b7.eps.find(e => e.who === 'scholar');
+    const fay = b7.eps.find(e => e.who === 'v8');
+    assert.strictEqual(eli.outcome, 'died (other cause: monster)', 'NPC open + deathRow reconciled, got ' + eli.outcome);
+    assert.strictEqual(eli.duration, 5, 'NPC reconciled duration 33-28=5, got ' + eli.duration);
+    assert.strictEqual(eli.reconciled, true, 'NPC reconciled flag');
+    assert.strictEqual(sch.outcome, 'died (other cause: starvation)', 'scholar open + isPlayer death reconciled, got ' + sch.outcome);
+    assert.strictEqual(sch.duration, 1, 'scholar reconciled duration 10-9=1, got ' + sch.duration);
+    assert.strictEqual(sch.reconciled, true, 'scholar reconciled flag');
+    assert.strictEqual(fay.outcome, 'open at run end', 'no matching deathRow stays open, got ' + fay.outcome);
+    assert.strictEqual(fay.duration, null, 'unreconciled open duration null');
   });
   await aleg('L9 flow accounting residual is small on the 5-day seed', async () => {
     const days = first.perSeed.daySeries, flows = first.perSeed.flowSeries;

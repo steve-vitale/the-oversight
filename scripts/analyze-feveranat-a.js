@@ -138,6 +138,33 @@ function buildEpisodes(s) {
       if (d) ep.deathCause = d.cause;
     }
   }
+  // OPEN-EPISODE RECONCILIATION (recorder gap found on the judged corpus):
+  // an episode with no end event is NOT necessarily still sick at run end.
+  // The sick record can vanish without any end when the bearer dies OUTSIDE
+  // the sickness tick: death-time v.sick deletion (removeVillager) happens
+  // before the next tick, so the tick wrapper never sees the disappearance.
+  // For the scholar, succession moves the 'scholar' slot to a new villager
+  // and the old scholar's disease entries are orphaned — never removed via
+  // seRemove, so no end event fires. deathRows prove the outcome in both
+  // cases: the first death of the bearer on/after the onset day ends the
+  // episode by that other cause. NPCs join on who; the scholar joins on
+  // isPlayer (the scholar who held the disease is the one who died next).
+  // An open episode with NO matching deathRow stays open — e.g. a villager
+  // who left the village (betrayal deletes v.sick too) — and is reported as
+  // such, not silently closed.
+  for (const ep of eps) {
+    if (ep.outcome !== 'open at run end') continue;
+    const ds = ep.kind === 'scholar'
+      ? deaths.filter(d => d.isPlayer && d.day >= ep.onsetDay)
+      : deaths.filter(d => d.who === ep.who && d.day >= ep.onsetDay);
+    ds.sort((a, b) => a.day - b.day);
+    const d = ds[0];
+    if (d) {
+      ep.endDay = d.day; ep.duration = d.day - ep.onsetDay;
+      ep.outcome = 'died (other cause: ' + d.cause + ')'; ep.deathCause = d.cause;
+      ep.reconciled = true;
+    }
+  }
   // Treatment join.
   for (const ep of eps) {
     const endD = ep.endDay == null ? s.daysAlive : ep.endDay;
@@ -226,7 +253,9 @@ function main() {
   const byOutcome = {};
   for (const e of allEps) byOutcome[e.outcome] = (byOutcome[e.outcome] || 0) + 1;
   const durs = closed.map(e => e.duration);
+  const reconciled = allEps.filter(e => e.reconciled).length;
   console.log('F2 DURATION: closed episodes=' + closed.length + ' open at run end=' + open.length +
+    ' (of which ' + reconciled + ' reconciled via deathRows: died of another cause while sick, end event never sensed)' +
     '; duration days: min=' + (durs.length ? Math.min(...durs) : 'n/a') +
     ' median=' + med(durs) + ' mean=' + r1(mean(durs)) + ' max=' + (durs.length ? Math.max(...durs) : 'n/a'));
   console.log('  by outcome=' + JSON.stringify(byOutcome));
