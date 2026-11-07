@@ -23064,10 +23064,41 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     queueKillerTale(mid, vid) {
       if (!mid || !vid) return;
       const e = (this.state.codex.monsters || {})[mid];
-      if (e && (e.reported || e.namingKicked || e.villageName)) return;
+      if (e && (e.reported || e.namingKicked || e.villageName)) {
+        // VETERAN-KILL TALE (sim-vetkilltale-a 2026-11-07): the type is
+        // already known, so there is no first telling to book — but a
+        // wave-4+ kill of a known beast still deserves its fireside
+        // moment. Route to the vet queue (narration-only; the debate is
+        // already settled and is never re-run).
+        this.queueVetKillerTale(mid, vid);
+        return;
+      }
       this.state.killerTales = this.state.killerTales || [];
       if (this.state.killerTales.some(t => t.mid === mid && !t.told)) return;
       this.state.killerTales.push({ mid, killer: vid, day: (this.state.scholar || {}).day || 0, told: false });
+    },
+    // queueVetKillerTale: a villager slew a wave-4+ type the village
+    // already knows. The killer tells it at tonight's fire, in the same
+    // beat as a first tale — but this one is narration only: the naming
+    // debate is settled, so nothing is reported, no knowers are set,
+    // monsterNewsCheck never runs. One untold vet tale per (type,
+    // killer); a second kill of the same type by the same killer before
+    // nightfall books no second tale. Wave <= 3 repeat kills stay
+    // silent, exactly as before.
+    // MEASUREMENT SWITCH (TALETELL_OFF precedent in killerTaleBeat):
+    // VETKILLTALE_OFF=1 queues nothing, so the baseline leg runs the
+    // old silence on identical seeds. Browser-safe: process is
+    // undefined there, so the lever is always on in the browser.
+    queueVetKillerTale(mid, vid) {
+      if (!mid || !vid) return;
+      try {
+        if (typeof process !== 'undefined' && process.env && process.env.VETKILLTALE_OFF === '1') return;
+      } catch (e) {}
+      const mdef = (this.data.monsters || []).find(m => m.id === mid) || {};
+      if ((mdef.wave || 1) < 4) return;
+      this.state.vetKillerTales = this.state.vetKillerTales || [];
+      if (this.state.vetKillerTales.some(t => t.mid === mid && t.killer === vid && !t.told)) return;
+      this.state.vetKillerTales.push({ mid, killer: vid, day: (this.state.scholar || {}).day || 0, told: false });
     },
     // killerTaleBeat: the night fireside beat (finding #28). Each untold
     // tale is told, in the killer's words: the monster's knowledge-gated
@@ -23087,7 +23118,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) {}
       const tales = this.state.killerTales || [];
       const pending = tales.filter(t => !t.told);
-      if (!pending.length) return;
+      // VETERAN TALES (sim-vetkilltale-a): the beat runs when EITHER
+      // queue has an untold tale — a night with only vet tales pending
+      // must not early-return on the empty first-tale queue.
+      const vetPending = (this.state.vetKillerTales || []).filter(t => !t.told);
+      if (!pending.length && !vetPending.length) return;
       const v = this.state.village || {};
       const roster = v.roster || [];
       const fallen = new Set((v.fallen || []).map(f => f.villagerId));
@@ -23101,6 +23136,21 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         t.told = true;
         t.played = true; // actually told (vs moot) — measurement reads this
         this.tellKillerTale(t.mid, t.killer, e);
+      }
+      // VETERAN TALES (sim-vetkilltale-a): same night, same fire, same
+      // dead-teller rule — a killer who died before nightfall takes the
+      // tale with them. The vet tale never touches the debate.
+      const vets = this.state.vetKillerTales || [];
+      for (const t of vetPending) {
+        const alive = roster.includes(t.killer) && !fallen.has(t.killer);
+        const e = (this.state.codex.monsters || {})[t.mid];
+        if (!alive || !e) {
+          t.told = true; // dead teller, or the codex entry is gone — moot
+          continue;
+        }
+        t.told = true;
+        t.played = true; // actually told (vs moot) — measurement reads this
+        this.tellVetKillerTale(t.mid, t.killer, e);
       }
     },
     // tellKillerTale: one tale, told. Builds the fireside prose, logs the
@@ -23162,6 +23212,51 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       e.reported = true;
       e.knowers = [vid];
       this.monsterNewsCheck(mid);
+    },
+    // tellVetKillerTale: one veteran tale, told. The beast is already
+    // named and the debate is settled, so this tale names the beast AND
+    // the killer and stops there: no "what are we calling it", no
+    // report, no knowers, no monsterNewsCheck, no proposals. The fiction
+    // marks a later kill of a known beast — the village remembering both
+    // the name and the hand that did it. Same fireside voice as
+    // tellKillerTale (telegraphs the killer actually saw, listeners at
+    // the fire), same haven-news relay, same dedicated RNG stream (a
+    // 'vet|' hash prefix, so its cosmetics never collide with a first
+    // tale's stream). The codex entry `e` is consulted, never written.
+    tellVetKillerTale(mid, vid, e) {
+      const mdef = (this.data.monsters || []).find(m => m.id === mid) || {};
+      const kName = this.firstRef(vid) || 'Someone';
+      const noun = this.monsterDisplayName(mid); // gated: descriptor or village name, never the true name
+      const seen = (mdef.attacks || []).filter(a => a && a.telegraph).slice(0, 2);
+      const beats = seen.map(a => this._taleCap(String(a.telegraph || '').trim()));
+      const others = ((this.state.village || {}).roster || [])
+        .filter(id => id !== vid && id !== ((this.state.scholar || {}).villagerId || 'player'));
+      let TR = Math.random;
+      try { TR = this.mulberry32(this._hashStr('vet|' + mid + '|' + vid + '|' + ((this.state.scholar || {}).day || 0))); } catch (e2) {}
+      const pick = (arr) => arr[Math.floor(TR() * arr.length)];
+      const r1 = others.length ? this.firstRef(pick(others)) : null;
+      const r2 = others.length > 1 ? this.firstRef(pick(others.filter(id => this.firstRef(id) !== r1))) : null;
+      const rverbs = ['mutters', 'says quietly', 'asks', 'breathes', 'says'];
+      const reactions = [
+        `"And you're still standing."`, `"So it bleeds."`, `"The fire feels smaller now."`,
+        `"Did it look at you? Before?"`, `"Say that again — slower."`,
+        `"We've been walking past those."`, `"Tell me you didn't go alone."`,
+      ];
+      let prose = `The fire settles. ${kName} leans in, and the hall goes quiet in a different way — this is not a new story. "You all know ${this._taleCap(noun)} by now. I put another one down today."`;
+      for (const b of beats) prose += ` "${b}"`;
+      prose += ` A beat of silence, then the questions come all at once.`;
+      if (r1) prose += ` ${r1} ${pick(rverbs)} ${pick(reactions)}`;
+      if (r2 && r2 !== r1) prose += ` ${r2} ${pick(rverbs)} ${pick(reactions)}`;
+      prose += ` Someone at the edge of the light nods, slow. "We know the name. We know the hand, too."`;
+      this.sayHavenNews(`🔥 ${prose}`, 'tale', mid);
+      // TRANSCRIPT (sim-vetkilltale-a): bounded log of told veteran tales,
+      // mirroring killerTaleLog for sense-testing.
+      this.state.vetKillerTaleLog = this.state.vetKillerTaleLog || [];
+      this.state.vetKillerTaleLog.push(`[day ${(this.state.scholar || {}).day || 0}] ${kName}: ${prose}`);
+      if (this.state.vetKillerTaleLog.length > 20) this.state.vetKillerTaleLog.shift();
+      try { this.tele('vet_killer_tale', { id: mid, killer: vid, day: (this.state.scholar || {}).day || 0 }); } catch (err) {}
+      // DELIBERATELY NOT HERE: e.reported / e.knowers / monsterNewsCheck.
+      // The debate is settled; this tale is narration only.
     },
     // _taleCap: capitalize a sentence opener for tale prose (unknown
     // descriptors open lowercase by design).
