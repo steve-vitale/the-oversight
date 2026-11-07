@@ -1,0 +1,326 @@
+{
+  "corpus": "/home/hatch/workspace/worktrees/sim-trajfrag-b/evidence/2026-11-07/perseed-trajfrag-b",
+  "seeds": [
+    {
+      "seed": 53002,
+      "fragile": true,
+      "diffs": [
+        "survived",
+        "w4kills"
+      ],
+      "unperturbed": {
+        "survived": true,
+        "w4kills": true,
+        "veterans": false,
+        "days": 150,
+        "endReason": "survived",
+        "standing": 150,
+        "w4killCount": 1,
+        "endVeterans": 0,
+        "maxWave": 4,
+        "unlockedWave": 4
+      },
+      "perturbed": {
+        "survived": false,
+        "w4kills": false,
+        "veterans": false,
+        "days": 133,
+        "endReason": "village-lost",
+        "standing": 199,
+        "w4killCount": 0,
+        "endVeterans": 0,
+        "maxWave": 4,
+        "unlockedWave": 4
+      },
+      "firstDivergence": {
+        "kind": "kill-ledger",
+        "day": 8,
+        "field": "waveKillLog[0]",
+        "a": "8|anaconda_empress|w1",
+        "b": "8|murkcap|w1"
+      },
+      "dailyDiff": {
+        "kind": "daily-row",
+        "day": 17,
+        "field": "scholarId",
+        "a": "gen_rwpywij",
+        "b": "gen_fma00w3"
+      },
+      "killDiff": {
+        "kind": "kill-ledger",
+        "day": 8,
+        "field": "waveKillLog[0]",
+        "a": "8|anaconda_empress|w1",
+        "b": "8|murkcap|w1"
+      },
+      "deathDiff": {
+        "kind": "scholar-deaths",
+        "day": 17,
+        "field": "scholarDeaths[0]",
+        "a": "17|gen_fma00w3|sickness",
+        "b": "52|gen_fma00w3|the wild"
+      },
+      "snapshotDiff": {
+        "kind": "daily-row",
+        "day": 3,
+        "field": "snapshot-presence",
+        "a": "present",
+        "b": "absent"
+      },
+      "errors": 0,
+      "anchors": {
+        "unperturbed": "d59dabeabd58",
+        "perturbed": "d59dabeabd58"
+      }
+    },
+    {
+      "seed": 53004,
+      "fragile": false,
+      "diffs": [],
+      "unperturbed": {
+        "survived": false,
+        "w4kills": true,
+        "veterans": false,
+        "days": 88,
+        "endReason": "village-lost",
+        "standing": 199,
+        "w4killCount": 1,
+        "endVeterans": 0,
+        "maxWave": 4,
+        "unlockedWave": 4
+      },
+      "perturbed": {
+        "survived": false,
+        "w4kills": true,
+        "veterans": false,
+        "days": 106,
+        "endReason": "village-lost",
+        "standing": 265,
+        "w4killCount": 3,
+        "endVeterans": 0,
+        "maxWave": 5,
+        "unlockedWave": 5
+      },
+      "firstDivergence": {
+        "kind": "kill-ledger",
+        "day": 7,
+        "field": "waveKillLog[0]",
+        "a": "7|drumbelly_tanuki|w1",
+        "b": "9|murkcap|w1"
+      },
+      "dailyDiff": {
+        "kind": "daily-row",
+        "day": 11,
+        "field": "living",
+        "a": 11,
+        "b": 12
+      },
+      "killDiff": {
+        "kind": "kill-ledger",
+        "day": 7,
+        "field": "waveKillLog[0]",
+        "a": "7|drumbelly_tanuki|w1",
+        "b": "9|murkcap|w1"
+      },
+      "deathDiff": {
+        "kind": "scholar-deaths",
+        "day": 63,
+        "field": "scholarDeaths[0]",
+        "a": "63|gen_93bg7ex|the wild",
+        "b": "28|gen_93bg7ex|the wild"
+      },
+      "snapshotDiff": {
+        "kind": "daily-row",
+        "day": 89,
+        "field": "snapshot-presence",
+        "a": "absent",
+        "b": "present"
+      },
+      "errors": 0,
+      "anchors": {
+        "unperturbed": "d59dabeabd58",
+        "perturbed": "d59dabeabd58"
+      }
+    },
+    {
+      "seed": 53006,
+      "fragile": true,
+      "diffs": [
+        "survived",
+        "veterans"
+      ],
+      "unperturbed": {
+        "survived": true,
+        "w4kills": true,
+        "veterans": true,
+        "days": 150,
+        "endReason": "survived",
+        "standing": 440,
+        "w4killCount": 11,
+        "endVeterans": 2,
+        "maxWave": 5,
+        "unlockedWave": 5
+      },
+      "perturbed": {
+        "survived": false,
+        "w4kills": true,
+        "veterans": false,
+        "days": 73,
+        "endReason": "village-lost",
+        "standing": 195,
+        "w4killCount": 1,
+        "endVeterans": 0,
+        "maxWave": 4,
+        "unlockedWave": 4
+      },
+      "firstDivergence": {
+        "kind": "kill-ledger",
+        "day": 7,
+        "field": "waveKillLog[0]",
+        "a": "7|drumbelly_tanuki|w1",
+        "b": "5|mirrormoth|w1"
+      },
+      "dailyDiff": {
+        "kind": "daily-row",
+        "day": 8,
+        "field": "partySize",
+        "a": 2,
+        "b": 1
+      },
+      "killDiff": {
+        "kind": "kill-ledger",
+        "day": 7,
+        "field": "waveKillLog[0]",
+        "a": "7|drumbelly_tanuki|w1",
+        "b": "5|mirrormoth|w1"
+      },
+      "deathDiff": {
+        "kind": "scholar-deaths",
+        "day": 29,
+        "field": "scholarDeaths[0]",
+        "a": "29|gen_0djky10|a stranger",
+        "b": "31|gen_0djky10|lockjaw"
+      },
+      "snapshotDiff": {
+        "kind": "daily-row",
+        "day": 74,
+        "field": "snapshot-presence",
+        "a": "present",
+        "b": "absent"
+      },
+      "errors": 0,
+      "anchors": {
+        "unperturbed": "d59dabeabd58",
+        "perturbed": "d59dabeabd58"
+      }
+    },
+    {
+      "seed": 53008,
+      "fragile": true,
+      "diffs": [
+        "survived",
+        "w4kills",
+        "veterans"
+      ],
+      "unperturbed": {
+        "survived": false,
+        "w4kills": false,
+        "veterans": false,
+        "days": 123,
+        "endReason": "village-lost",
+        "standing": 150,
+        "w4killCount": 0,
+        "endVeterans": 0,
+        "maxWave": 4,
+        "unlockedWave": 4
+      },
+      "perturbed": {
+        "survived": true,
+        "w4kills": true,
+        "veterans": true,
+        "days": 150,
+        "endReason": "survived",
+        "standing": 199,
+        "w4killCount": 1,
+        "endVeterans": 1,
+        "maxWave": 4,
+        "unlockedWave": 4
+      },
+      "firstDivergence": {
+        "kind": "kill-ledger",
+        "day": 5,
+        "field": "waveKillLog[0]",
+        "a": "5|cliffhanger|w1",
+        "b": "6|hummice|w1"
+      },
+      "dailyDiff": {
+        "kind": "daily-row",
+        "day": 14,
+        "field": "living",
+        "a": 12,
+        "b": 11
+      },
+      "killDiff": {
+        "kind": "kill-ledger",
+        "day": 5,
+        "field": "waveKillLog[0]",
+        "a": "5|cliffhanger|w1",
+        "b": "6|hummice|w1"
+      },
+      "deathDiff": {
+        "kind": "scholar-deaths",
+        "day": 49,
+        "field": "scholarDeaths[0]",
+        "a": "49|gen_7kasljf|a stranger",
+        "b": "79|gen_7kasljf|the wild"
+      },
+      "snapshotDiff": {
+        "kind": "daily-row",
+        "day": 13,
+        "field": "snapshot-presence",
+        "a": "present",
+        "b": "absent"
+      },
+      "errors": 0,
+      "anchors": {
+        "unperturbed": "d59dabeabd58",
+        "perturbed": "d59dabeabd58"
+      }
+    }
+  ],
+  "wall": {
+    "unperturbed": {
+      "national": 0,
+      "table": 0,
+      "wins": 0,
+      "w4unlock": 4,
+      "w5unlock": 1,
+      "surv": [
+        150,
+        88,
+        150,
+        123
+      ],
+      "medianSurvival": 136.5,
+      "n": 4
+    },
+    "perturbed": {
+      "national": 0,
+      "table": 0,
+      "wins": 0,
+      "w4unlock": 4,
+      "w5unlock": 1,
+      "surv": [
+        133,
+        106,
+        73,
+        150
+      ],
+      "medianSurvival": 119.5,
+      "n": 4
+    }
+  },
+  "flips": 3,
+  "total": 4,
+  "flipRate": 0.75
+}
