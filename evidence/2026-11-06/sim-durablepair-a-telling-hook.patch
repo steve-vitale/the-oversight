@@ -1,0 +1,50 @@
+diff --git a/src/js/villager-objectives.js b/src/js/villager-objectives.js
+--- a/src/js/villager-objectives.js
++++ b/src/js/villager-objectives.js
+@@ -866,6 +866,21 @@
+     // Villagers standing at the hunter's own node (up to two) gain the
+     // heard record secondhand, from this named teller. Nobody else in
+     // the world learns anything.
++    // NARRATED TELLING (sim-durablepair-a patch, for the drive's
++    // successor): the telling was silent — the drive's counters counted
++    // it, but no SAY line ever named the beast or the teller, so a
++    // transcript reader could not see the drive working (drive64: ~5,100
++    // SAY lines across the four pair windows, none a telling). One line,
++    // only when a genuinely-new heard record is born (a refresh of an
++    // existing rumor says nothing), through the haven-news relay so it
++    // queues while the scholar is away and delivers at the fire — the
++    // same channel the fireside killer tale uses. The beast is named by
++    // its knowledge-gated display name (monsterDisplayName — the
++    // descriptor with its article, or the village name; never the true
++    // name). No
++    // state change, no RNG: the line is output only; counters and
++    // trajectories are untouched (driveSeek.told counts new records
++    // only, so toldBefore/toldAfter is the new-record test).
+     objTellHuntSite(vid, hx, hy, site) {
+       try {
+         if (this.objDriveSeekOff()) return;
+@@ -877,9 +892,24 @@
+           try { var nd = this.npcNode(id); return !!(nd && nd.nx === hx && nd.ny === hy); }
+           catch (e) { return false; }
+         }, this);
++        var toldBefore = 0;
++        try { toldBefore = (((v || {}).driveSeek || {}).told || 0); } catch (e) {}
+         for (var i = 0; i < Math.min(2, mates.length); i++) {
+           try { this.objNoteHeardSighting(mates[i], site.mid, site.tx, site.ty, vid); } catch (e) {}
+         }
++        var toldAfter = 0;
++        try { toldAfter = (((v || {}).driveSeek || {}).told || 0); } catch (e) {}
++        if (toldAfter > toldBefore) {
++          try {
++            var teller = (typeof this.firstRef === 'function' ? this.firstRef(vid) : null) || 'Someone';
++            var beast = (typeof this.monsterDisplayName === 'function' ? this.monsterDisplayName(site.mid) : null) || 'something';
++            // PROSE GUARD (mirrors monsterNoun): a long punctuated
++            // descriptor is a sentence, not a noun — say 'something'
++            // rather than composing it into the line.
++            if (beast !== 'something' && /[.!?]/.test(beast) && beast.length > 50) beast = 'something';
++            this.sayHavenNews(teller + ' tells the hall: going after ' + beast + '.', 'telling', site.mid);
++          } catch (e) {}
++        }
+       } catch (e) {}
+     },
+     // objVillagerArmed(vid): the readiness gate's weapon test, reused
