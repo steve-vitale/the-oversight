@@ -124,8 +124,13 @@ if (require.main === module) {
   const args = process.argv.slice(2);
   const ci = args.indexOf('--compare');
   if (ci >= 0) {
-    const before = collectInputs(args.slice(ci + 1).filter(function (a) { return a !== '--'; }));
     const sep = args.indexOf('--', ci + 1);
+    // FS-ANALYZE FIX (2026-11-07): the baseline side is ONLY the files
+    // between --compare and --. The old code filtered '--' out of the
+    // whole tail and counted the armed files on BOTH sides (16 seeds,
+    // scholar deaths 132 = baseline+armed). Caught by the wall numbers
+    // doubling; the armed side was always correct.
+    const before = collectInputs(sep >= 0 ? args.slice(ci + 1, sep) : args.slice(ci + 1));
     const afterArgs = sep >= 0 ? args.slice(sep + 1) : [];
     const after = collectInputs(afterArgs);
     if (!before.length || !after.length) { console.error('FS-ANALYZE STOP: --compare needs baseline files and armed files after --'); process.exit(2); }
