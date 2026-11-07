@@ -345,10 +345,22 @@ neither of which will move.
 
 ## 9. Rebase record
 
-- Base at task start: 987766c0c. Master at close: 82e55062 (check
-  `git rev-parse master` at closeout; rebase done onto the explicit
-  SHA, proof re-run green on the rebased tip — see the commit log).
-- (Rebase SHAs to be filled at closeout.)
+- Base at task start: 987766c0c. Master at close: 82e55062
+  (`82e550626642b3cabfd1de685be154e5c7011142`, a batch-ship version
+  bump on top of 987766c0c). Rebased onto the explicit SHA, clean,
+  no conflicts.
+- Pre-rebase SHAs: prereg 06dc1dc4c, main commit 73f9ba7b7.
+  Post-rebase SHAs: prereg eb4aeab94, main commit 63a3c0ff1, tip
+  63a3c0ff10e38a521b30cf2dbd7d5f782021fe36.
+- Proof re-run green on the rebased tip:
+  `node scripts/test-routstall-20261106.js` 24/24.
+- `check.js --quick` was NOT run on the rebased tip: a sibling
+  check.js was in flight in another worktree (brain-design, since
+  00:07Z) and this container forbids concurrent jest (phantom
+  failures); my run sat at 0:00 CPU for ~8 min under load 29. The
+  arm is scripts + evidence only (zero src/js) and its proof is
+  green on the rebased tip. The repo-wide quick check belongs to
+  the ship loop's landing gate, not this DIAG arm.
 
 ## Metric review
 
