@@ -17,6 +17,65 @@ const fs = require('fs');
 const REPO = path.join(__dirname, '..');
 const GRIND = require(path.join(REPO, 'scripts', 'grind-analyze-20261106'));
 
+// A meeting is ADDRESSABLE (adopt-a re-judge, 2026-11-07) when the old code
+// cannot finish it: a wave-4+ below-break contact meeting whose contact
+// strike did not kill and left MORE than one strike's worth of HP
+// (post-contact HP strictly greater than the contact strike), fighter
+// intent engage, fighter entry HP at/above the 60% gate. fsEntryVhpFrac is
+// recorded only by the new code (null on the baseline leg), so the
+// denominator is computed on the armed leg, where every A-field is a
+// pre-commit property identical under both legs (the lever draws no RNG
+// before the contact strike and writes no state before it — verified on the
+// pilot corpus: both below-break meetings agree across legs on
+// contactFinishBeastHp/Dmg, fsIntent, day, vid, mid).
+function isAddressable(r) {
+  if (!r || (r.wave | 0) < 4) return false;
+  if (!r.contactFinishAttempted || r.contactFinishKill) return false;
+  if (r.contactFinishBeastHp == null || r.contactFinishDmg == null) return false;
+  const post = r.contactFinishBeastHp - r.contactFinishDmg;
+  if (!(post > r.contactFinishDmg)) return false;
+  if (r.fsIntent !== 'engage') return false;
+  if (r.fsEntryVhpFrac == null || r.fsEntryVhpFrac < 0.60) return false;
+  return true;
+}
+// CONVERTIBLE: addressable AND within the lever's tail gate (post-contact
+// HP <= 3x the contact strike). A meeting in A but above the tail is by
+// design not convertible by this lever.
+function isConvertible(r) {
+  if (!isAddressable(r)) return false;
+  const post = r.contactFinishBeastHp - r.contactFinishDmg;
+  return post <= 3 * r.contactFinishDmg;
+}
+function isCommittedKill(r) {
+  return r && r.fsCommitMhp != null && r.outcome === 'vKill';
+}
+function addressableFunnel(rows) {
+  const list = (rows || []).filter(function (r) { return r && (r.wave | 0) >= 4; });
+  const addr = list.filter(isAddressable);
+  const conv = addr.filter(isConvertible);
+  const aboveTail = addr.filter(function (r) { return !isConvertible(r); });
+  const committed = addr.filter(function (r) { return r.fsCommitMhp != null; });
+  const committedKills = addr.filter(isCommittedKill);
+  const convCommitted = conv.filter(function (r) { return r.fsCommitMhp != null; });
+  return {
+    addressable: addr.length,
+    addressableConvertible: conv.length,
+    addressableAboveTail: aboveTail.length,
+    addressableCommitted: committed.length,
+    addressableCommittedKills: committedKills.length,
+    conversionRate: addr.length ? +(committedKills.length / addr.length).toFixed(3) : null,
+    convertibleCommitRate: conv.length ? +(convCommitted.length / conv.length).toFixed(3) : null,
+    addressableEntries: addr.map(function (r) {
+      return { seed: r.seed, day: r.day, mid: r.mid, entryHp: r.entryHp,
+        contactHp: r.contactFinishBeastHp, contactDmg: r.contactFinishDmg,
+        postContactHp: r.contactFinishBeastHp - r.contactFinishDmg,
+        fsIntent: r.fsIntent, fsEntryVhpFrac: r.fsEntryVhpFrac,
+        convertible: isConvertible(r), fsKind: r.fsCommitKind,
+        fsRounds: r.fsCommitRounds, fsLapsed: r.fsLapsed, outcome: r.outcome,
+        rounds: r.rounds, mDealt: r.mDealt, vHpLeft: r.vHpLeft };
+    }),
+  };
+}
 function isBelowBreak(r) {
   if (!r || (r.wave | 0) < 4) return false;
   if (r.contactFinishAttempted) return true;
@@ -97,6 +156,7 @@ function analyzeFiles(files) {
     wall: GRIND.wallSummary(jsons),
     field: { w4: GRIND.fieldDist(allField, 4) },
     fs: fsFunnel(allField),
+    addressable: addressableFunnel(allField),
     w4killsAllChannels: w4kills,
     scholarDeaths: scholarDeaths,
     perSeed: jsons.map(function (j) {
@@ -149,6 +209,15 @@ if (require.main === module) {
         aboveTailCommitted: { baseline: b.fs.aboveTailCommitted, armed: a.fs.aboveTailCommitted },
         noCommitReasons: { baseline: b.fs.noCommitReasons, armed: a.fs.noCommitReasons },
       },
+      addressable: {
+        addressable: { baseline: b.addressable.addressable, armed: a.addressable.addressable },
+        addressableConvertible: { baseline: b.addressable.addressableConvertible, armed: a.addressable.addressableConvertible },
+        addressableAboveTail: { baseline: b.addressable.addressableAboveTail, armed: a.addressable.addressableAboveTail },
+        addressableCommitted: { baseline: b.addressable.addressableCommitted, armed: a.addressable.addressableCommitted },
+        addressableCommittedKills: { baseline: b.addressable.addressableCommittedKills, armed: a.addressable.addressableCommittedKills },
+        conversionRate: { baseline: b.addressable.conversionRate, armed: a.addressable.conversionRate },
+        convertibleCommitRate: { baseline: b.addressable.convertibleCommitRate, armed: a.addressable.convertibleCommitRate },
+      },
       guards: {
         fieldFighterDeaths: { baseline: b.fs.fieldFighterDeaths, armed: a.fs.fieldFighterDeaths },
         scholarDeaths: { baseline: b.scholarDeaths, armed: a.scholarDeaths },
@@ -156,6 +225,7 @@ if (require.main === module) {
       },
       wall: { baseline: b.wall, armed: a.wall },
       belowBreakEntries: { baseline: b.fs.belowBreakEntries, armed: a.fs.belowBreakEntries },
+      addressableEntries: { baseline: b.addressable.addressableEntries, armed: a.addressable.addressableEntries },
     }, null, 2));
   } else {
     const dir = args.length ? args : [path.join(REPO, 'evidence', '2026-11-06', 'perseed-finishersize-a')];
@@ -166,4 +236,6 @@ if (require.main === module) {
 }
 
 module.exports = { isBelowBreak: isBelowBreak, isCommittable: isCommittable,
-  isAboveTail: isAboveTail, fsFunnel: fsFunnel, analyzeFiles: analyzeFiles };
+  isAboveTail: isAboveTail, fsFunnel: fsFunnel, analyzeFiles: analyzeFiles,
+  isAddressable: isAddressable, isConvertible: isConvertible,
+  isCommittedKill: isCommittedKill, addressableFunnel: addressableFunnel };
