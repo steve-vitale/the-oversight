@@ -428,3 +428,11 @@ try { const lf = require('./policies/competent-linkfeast-b'); POLICY_REGISTRY['c
 // and the gate-off wrapper is the baseline). The linkfeast file
 // itself is untouched — this only points the registry at the wrapper.
 try { const dw = require('./policies/competent-doorwalk-b'); POLICY_REGISTRY['competent-doorwalk-b'] = dw.doorwalk; } catch (e) {}
+// feaststopspend-b instrument (sim-feaststopspend-b, 2026-11-07, Loop B
+// winnability): the frozen feast-drive policy + the stop-after-spend
+// wrapper, registered so the balanced panel (§15) can build its
+// column. Additive; zero behavior change to existing entries (the
+// wrapper stays default-OFF: nothing loads it unless named). The
+// feastdrive file itself is untouched — this only points the registry
+// at the wrapper.
+try { const fss = require('./policies/competent-feaststopspend-b'); POLICY_REGISTRY['competent-feaststopspend-b'] = fss.feaststopspend; } catch (e) {}
