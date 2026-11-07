@@ -5,10 +5,12 @@
 // determinism (G1 smoke), bare-vs-recorded fingerprint equality (G2 smoke),
 // analyzer runs on a 5-day corpus and prints F1-F6 + G2/G3/G4, episode
 // reconstruction unit test on synthetic events (FIFO pairing, outcome
-// reclassification, treatment join, unattributed handling), flow accounting
-// residual stays small, event-log well-formedness on the 5-day run.
-// Uses seed 96301 at 5 days only (smoke scale); the judged 8-seed 150d corpus
-// is produced by the sweep, not by this test.
+// reclassification, treatment join, unattributed handling, same-tick
+// turnover), flow accounting residual stays small, event-log well-formedness
+// on the 5-day run, and the 96308 d7 contractDisease-refresh regression
+// (a refresh of an existing disease is one episode, not two onsets).
+// Uses seed 96301 at 5 days only (smoke scale) except L11 (96308, 9 days);
+// the judged 8-seed 150d corpus is produced by the sweep, not by this test.
 'use strict';
 process.env.PLENTYDEPRI = '1';
 process.env.DEPOSITGATE = '1';
@@ -248,6 +250,21 @@ function runSweep(env, expectCode) {
     console.log('    5-day run: onsets=' + ps.sickOnsets.length + ' ends=' + ps.sickEnds.length +
       ' treats=' + ps.treatEvents.length + ' status=' + ps.statusEvents.length +
       ' diagnoses=' + ps.diagnoses.length + ' cures=' + ps.cureEvents.length);
+  });
+
+  // L11: contractDisease refresh is NOT a new onset (regression for the
+  // 96308 d7 phantom). The scholar eats raw Groundnut twice on day 7; the
+  // second contractDisease refreshes the same entry and returns true, but
+  // there is only ONE 'disease' entry and ONE expiry. Exactly one onset.
+  await aleg('L11 contractDisease refresh is not a new onset (96308 d7)', async () => {
+    const r8 = await oneRun(96308, 9);
+    const d7 = r8.perSeed.sickOnsets.filter(o => o.kind === 'scholar' && o.diseaseId === 'disease' && o.day === 7);
+    assert.strictEqual(d7.length, 1, 'one d7 scholar disease onset, got ' + d7.length + ': ' + JSON.stringify(d7).slice(0, 400));
+    const built = buildEpisodes(r8.perSeed);
+    assert.strictEqual(built.orphanEnds.length, 0, 'no orphan ends on 96308 9-day run');
+    assert.strictEqual(built.eps.length, r8.perSeed.sickOnsets.length, 'episodes == onsets on 96308 9-day run');
+    console.log('    96308 9-day run: onsets=' + r8.perSeed.sickOnsets.length + ' ends=' + r8.perSeed.sickEnds.length +
+      ' scholar disease d7 onsets=' + d7.length);
   });
 
   console.log('\n' + pass + ' PASS, ' + fail + ' FAIL');

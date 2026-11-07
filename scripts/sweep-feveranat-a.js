@@ -578,11 +578,19 @@ async function oneRun(seed, days, opts) {
     let inContractDisease = false;
     const oCD = Game.contractDisease;
     if (typeof oCD === 'function') Game.contractDisease = function (effectId, opts) {
+      // Pre-call presence: applyStatus REFRESHES an existing entry (and
+      // increments stacks) and still returns true, so a second contraction
+      // of a disease the scholar already has is a refresh of the SAME
+      // episode, not a new onset. Without this check the scholar eating raw
+      // food twice in one day logged two onsets for one entry (96308 d7:
+      // two 'disease' onsets, one expiry, one phantom open episode).
+      let hadIt = false;
+      try { if (Game.hasStatus) hadIt = !!Game.hasStatus('scholar', effectId); } catch (e) {}
       inContractDisease = true;
       let r = false;
       try { r = oCD.apply(this, arguments); } finally { inContractDisease = false; }
       try {
-        if (r) {
+        if (r && !hadIt) {
           const entry = (Game.seList ? Game.seList('scholar') : []).find(e => e.id === effectId);
           const src = (opts && opts.source) || null;
           const vec = vectorForScholarSource(src);
