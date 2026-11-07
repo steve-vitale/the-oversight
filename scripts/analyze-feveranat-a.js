@@ -255,15 +255,23 @@ function main() {
     console.log('    UNATTRIBUTED seed=' + e.seed + ' ' + e.whoName + ' (' + e.who + ') ' + e.name +
       ' onset d' + e.onsetDay + ' via ' + e.vectorSource + ' — ' + (e.vectorEvidence || 'no evidence recorded'));
   }
-  const woundEps = allEps.filter(e => e.vector === 'wound');
+  // Corroboration is NPC-only: scholar onsets legitimately carry no hp /
+  // drinksDirty (their evidence is the engine's own contractDisease source
+  // string, e.g. 'the creek water', 'a cut gone wrong'). NPC wound-fever
+  // onsets must show hp<40; NPC tick-fever onsets must show a forager /
+  // explorer profile; NPC gut-rot onsets must show drinksDirty.
+  const woundEps = allEps.filter(e => e.vector === 'wound' && e.kind === 'npc');
   const woundOk = woundEps.filter(e => e.hpAtOnset != null && e.hpAtOnset < 40).length;
   const tickEps = allEps.filter(e => e.vector === 'tick');
   const tickOk = tickEps.filter(e => e.rangeProfile === 'forager' || e.rangeProfile === 'explorer').length;
-  const gutEps = allEps.filter(e => e.vector === 'dirty water');
+  const gutEps = allEps.filter(e => e.vector === 'dirty water' && e.kind === 'npc');
   const gutOk = gutEps.filter(e => e.drinksDirty === true).length;
-  console.log('  corroboration: wound onsets with hp<40 at onset=' + woundOk + '/' + woundEps.length +
+  const schByVector = {};
+  for (const e of allEps.filter(e => e.kind === 'scholar')) schByVector[e.vector] = (schByVector[e.vector] || 0) + 1;
+  console.log('  corroboration (NPC): wound onsets with hp<40 at onset=' + woundOk + '/' + woundEps.length +
     '; tick onsets with forager/explorer profile=' + tickOk + '/' + tickEps.length +
-    '; gut-rot onsets with drinksDirty at onset=' + gutOk + '/' + gutEps.length);
+    '; gut-rot onsets with drinksDirty at onset=' + gutOk + '/' + gutEps.length +
+    '; scholar onsets by vector (source-string evidence)=' + JSON.stringify(schByVector));
   console.log('');
 
   // ---- F4 TREATMENT IN THE WILD ----

@@ -188,6 +188,26 @@ function runSweep(env, expectCode) {
     const b5 = buildEpisodes(s5);
     assert.strictEqual(b5.eps.length, 0, 'orphan end makes no episode');
     assert.strictEqual(b5.orphanEnds.length, 1, 'one orphan end reported');
+    // Same-tick turnover (recorder bug found by the G3 check on the judged
+    // corpus): a villager recovers from tick fever and is re-infected with
+    // wound fever in the SAME tick (candidates are computed after the
+    // recovery loop). The recorder must emit BOTH an end for the old spell
+    // and an onset for the new one on that day; the analyzer must pair them
+    // as two episodes with no orphans.
+    const s6 = mk({ sickOnsets: [
+      { day: 10, who: 'v6', whoName: 'Ana', kind: 'npc', name: 'tick fever', diseaseId: 'disease', vector: 'tick', vectorSource: 'villageSicknessTick', daysLeft0: 4, severity: 1 },
+      { day: 13, who: 'v6', whoName: 'Ana', kind: 'npc', name: 'wound fever', diseaseId: 'wound_fever', vector: 'wound', vectorSource: 'villageSicknessTick', daysLeft0: 5, severity: 2 },
+    ], sickEnds: [
+      { day: 13, who: 'v6', whoName: 'Ana', kind: 'npc', name: 'tick fever', diseaseId: 'disease', outcome: 'recovered' },
+      { day: 17, who: 'v6', whoName: 'Ana', kind: 'npc', name: 'wound fever', diseaseId: 'wound_fever', outcome: 'recovered' },
+    ] });
+    const b6 = buildEpisodes(s6);
+    assert.strictEqual(b6.eps.length, 2, 'turnover: two episodes, got ' + b6.eps.length);
+    assert.strictEqual(b6.eps[0].outcome, 'recovered', 'turnover first recovered');
+    assert.strictEqual(b6.eps[0].duration, 3, 'turnover first duration 13-10=3, got ' + b6.eps[0].duration);
+    assert.strictEqual(b6.eps[1].name, 'wound fever', 'turnover second is wound fever');
+    assert.strictEqual(b6.eps[1].duration, 4, 'turnover second duration 17-13=4, got ' + b6.eps[1].duration);
+    assert.strictEqual(b6.orphanEnds.length, 0, 'turnover: no orphan ends');
   });
   await aleg('L9 flow accounting residual is small on the 5-day seed', async () => {
     const days = first.perSeed.daySeries, flows = first.perSeed.flowSeries;

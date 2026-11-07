@@ -489,8 +489,11 @@ async function oneRun(seed, days, opts) {
         let hygiene = false;
         try { hygiene = !!((v.triageHygiene || {}).until >= dayOf()); } catch (e) {}
         const cond = {};
+        // HP for EVERY roster villager, not just the currently-healthy: a
+        // villager who recovers in this tick can be re-infected in the SAME
+        // tick (candidates are computed after the recovery loop), and the
+        // re-infection onset needs its own onset conditions.
         for (const vid of (v.roster || [])) {
-          if (before[vid]) continue;
           let hp = null; try { const h = (v.health || {})[vid]; hp = (h === undefined ? 100 : h); } catch (e) {}
           cond[vid] = { hp, drinksDirty, hygiene };
         }
@@ -504,7 +507,15 @@ async function oneRun(seed, days, opts) {
         const after = v.sick || {};
         const day = dayOf();
         for (const vid of Object.keys(after)) {
-          if (before && before[vid]) continue;
+          // SAME-TICK TURNOVER (found by the G3 check on the judged corpus):
+          // a villager who recovers in this tick is a candidate again in the
+          // SAME tick and can fall sick with a DIFFERENT disease at once.
+          // Diff by (vid, name), not vid presence: a name change is BOTH an
+          // end for the old spell and an onset for the new one. Presence-only
+          // diffing silently dropped 3 such turnovers (orphan ends + open
+          // onsets) on the first judged run.
+          const prev = before ? before[vid] : null;
+          if (prev && prev.name === after[vid].name) continue; // continuing spell
           const rec = after[vid];
           let profile = null;
           try { const a = Game.agencyState && Game.agencyState(); profile = (a && a.profiles && a.profiles[vid]) || null; } catch (e) {}
@@ -520,8 +531,11 @@ async function oneRun(seed, days, opts) {
             sayWin: W.sayWin.slice(-3) });
         }
         for (const vid of Object.keys(before || {})) {
-          if (after[vid]) continue;
           const rec = before[vid];
+          // Name change in one tick = the old spell ended (paired below by
+          // the analyzer's FIFO on (who, name)); same name still present =
+          // continuing spell, no end.
+          if (after[vid] && after[vid].name === rec.name) continue;
           const meta = beforeMeta[vid] || {};
           let aliveNow = false;
           try { const p = Game.vpOf && Game.vpOf(vid); aliveNow = (v.roster || []).includes(vid) && !(p && p.dead); } catch (e) {}
