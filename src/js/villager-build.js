@@ -682,6 +682,21 @@
           for (const l of (occL.polyglot || [])) plv[l] = 2;
           s.languages = plv;
           s.englishLevel = plv.english != null ? plv.english : 2;
+          // LANGUAGE EXPOSURE (journey-deepening r116 2026-11-07): the
+          // dead bearer's earned words died with them in languages but
+          // NOT in langExposure — exposure stayed at 25 while the heir
+          // knew none of the tongue, and the 25-grant only fires on a
+          // crossing (before<25), so the heir could never re-earn it:
+          // comm 'none' forever on 25 exposure. Exposure is the bearer's
+          // lived learning, like languages: drop it for tongues the heir
+          // doesn't know, so the heir can earn them from zero. Tongues
+          // the heir knows keep their exposure (harmless).
+          try {
+            const ex = s.langExposure || {};
+            for (const l of Object.keys(ex)) {
+              if (!(plv[l] >= 1)) delete ex[l];
+            }
+          } catch (e) { warn('mantle langExposure', e); }
         } catch (e) { warn('mantle languages', e); }
         if (person) { person.items = []; person.equipped = {}; person.stashed = []; } // the bearer's kit lives on scholar.* now — never counted twice
         // they are the bearer now: no villager records
