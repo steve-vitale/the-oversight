@@ -78,6 +78,16 @@ PROOF-NOT-GREEN, anchor decision pending). The adoption closed it:
   notes), scripts/probe-gossip-anchor-a.js (new), this evidence
   file (this addendum). Zero src/js. No push, no bump, no live
   verification — coordinator merges; ship loop owns deploys.
+- SECOND REBASE (same adoption, after the addendum commit): master
+  moved twice during the adoption (lingergorge-a landing 2cf4d19f,
+  then journey-deepening r113 38aa62dc — the latter with src/js).
+  Branch re-based onto explicit 38aa62dc, clean, tip bea8a3a49;
+  proofs re-run on THAT tip: test-mootsummon-a 33/33,
+  test-mootgate-a 60/60 (the intermediate 2cf4d19f tip also ran
+  33/33 + 60/60). Master verified still 38aa62dc at handoff, so
+  the coordinator's --ff-only merge applies. The re-pinned ld16
+  anchor held green across three bases (6a59ed7f, 2cf4d19f,
+  38aa62dc), including one with src/js changes.
 
 
 Worker: sim-mootsummon-a (Loop A, food-economy / narration).
