@@ -1,0 +1,24 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=17)
+=== seed 97001 day 90 — conversation with Ellie (gen_vrj0eek) ===
+occupation=mason temperament=prickly trust=90 dead=false
+want: seek_comfort (stage 0)
+open thread: grief fromSeed=false
+picker: control
+
+THEM: "We gave them a good burial. Doesn't feel like enough, does it? Life's funny that way."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:comfort] "You alright?"
+THEM: "I — yeah. It helps, hearing that."
+YOU: [ask:gossip] "What are people saying?"
+THEM: "You want to know about that? Okay." "Ursula headed out to forage."
+YOU: [dlg:more] "Tell me more."
+THEM: "Carlos's story has a fresh coat of paint." Ellie taps the table. "Scrape it off and you get from Veracruz, Mexico. Just don't scrape it in front of them. ...sorry."
+YOU: [dlg:react] (listen)
+THEM: "That was me — headed out to find someone. Doesn't matter now."
+YOU: [dlg:more] "Tell me more."
+THEM: "Word is there's nothing you can't do out there."
+YOU: [dlg:react] (listen)
+THEM: "Right. Done. Don't look so relieved."
+YOU: (leave)
+pre-close: want seek_comfort stage 2 thread gossip
+(gossip picks this sitting: 1)

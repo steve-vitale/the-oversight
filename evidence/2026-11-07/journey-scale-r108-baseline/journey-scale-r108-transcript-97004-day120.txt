@@ -1,0 +1,25 @@
+(pre-talk seed: ask_favor planted d118; takenWantDay=0; convoCount=16)
+=== seed 97004 day 120 — conversation with Luis (luis_fernandez) ===
+occupation=mason temperament=steady trust=90 dead=false
+want: ask_favor (stage 2)
+open thread: grief fromSeed=true
+picker: control
+
+THEM: "I don't know what to do with my hands today."
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: "Here. I made an extra." Luis presses something into your hand — a decent tool, oiled and kept. (Useful. Keep it.)
+YOU: [dlg:comfort] "You alright?"
+THEM: They shake their head, then nod — both true at once. "Talk to me a bit. That helps more than anything."
+YOU: [ask:gossip] "Any good gossip? I'm bored."
+THEM: "You want to know about that? Okay." "Nino? A dry cleaner, back before. Solid person."
+YOU: [dlg:more] "Tell me more."
+THEM: "Did you hear? Nora won Siege on the cameras. People are still talking about it."
+YOU: [dlg:react] (listen)
+THEM: They nod slowly, not quite done, not quite continuing.
+YOU: [dlg:more] "Tell me more."
+THEM: "Nino headed out for water."
+YOU: (leave)
+pre-close: want ask_favor stage 2 thread gossip
+closing line: "Thanks. I just... need some air."
+(gossip picks this sitting: 1)
