@@ -705,9 +705,18 @@
               // pool below answer (raw null -> pool).
               const wl = w.favor.whyLine;
               if (wl && typeof this.convoWouldBlock === 'function' && this.convoWouldBlock(vid, wl)) {
-                raw = (typeof this.convoFavorNeedLine === 'function')
-                  ? this.convoFavorNeedLine(vid, w.favor, true) : null;
-                if (raw && this.convoWouldBlock(vid, raw)) raw = null;
+                // BOTH-BLOCKED (journey-succession r151): same shape as
+                // the engageBeat source guard — the need-line itself can
+                // be run-ledger-blocked, so try all three fresh phrasings
+                // in order. Only when every one is blocked does the dry
+                // pool below answer (raw null -> pool).
+                raw = null;
+                if (typeof this.convoFavorNeedLine === 'function') {
+                  for (let vi = 0; vi < 3 && !raw; vi++) {
+                    const need = this.convoFavorNeedLine(vid, w.favor, true, vi);
+                    if (need && !this.convoWouldBlock(vid, need)) raw = need;
+                  }
+                }
               } else {
                 raw = wl;
               }

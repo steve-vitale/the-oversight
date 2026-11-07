@@ -772,9 +772,19 @@
           // at the source so no caller can miss it.
           const wl = favor.whyLine;
           if (wl && typeof this.convoWouldBlock === 'function' && this.convoWouldBlock(vid, wl)) {
-            const need = (typeof this.convoFavorNeedLine === 'function')
-              ? this.convoFavorNeedLine(vid, favor, true) : null;
-            if (need && !this.convoWouldBlock(vid, need)) return need;
+            // BOTH-BLOCKED (journey-succession r151): the need-line itself
+            // can be run-ledger-blocked (spoken days earlier, still inside
+            // the 48-entry window — seed 33806 d+45 Katarina dried on the
+            // r147 one-phrasing guard for exactly this). Try all three
+            // fresh phrasings in order; only when every one is blocked
+            // does the whyLine go back to the caller, whose existing
+            // fallback answers. No RNG: the order is fixed.
+            if (typeof this.convoFavorNeedLine === 'function') {
+              for (let vi = 0; vi < 3; vi++) {
+                const need = this.convoFavorNeedLine(vid, favor, true, vi);
+                if (need && !this.convoWouldBlock(vid, need)) return need;
+              }
+            }
           }
           return wl;
         }
@@ -2023,10 +2033,27 @@
     // need that isn't there. PURE: reads only; the caller checks
     // convoWouldBlock before speaking. `still` fits the moment: the ask
     // is new (stage 0) or already stated (dlg:details).
-    convoFavorNeedLine(vid, favor, still) {
+    // VARIANTS (journey-succession r151): one phrasing is not enough —
+    // the need-line itself can be run-ledger-blocked (spoken by the same
+    // villager days earlier and still inside the 48-entry window: seed
+    // 33806 d+45 Katarina dried on fixed r147 code for exactly this).
+    // Three phrasings, all from favor.short only, all distinct in first
+    // chunk (sayLine's key). Callers try them in order; `variant` defaults
+    // to 0 so existing single-try callers are unaffected.
+    convoFavorNeedLine(vid, favor, still, variant) {
       try {
         const sh = favor && favor.short;
         if (!sh) return null;
+        const v = variant || 0;
+        if (v === 1) {
+          return still
+            ? `"I still need a hand with ${sh}."`
+            : `"I need a hand with ${sh}."`;
+        }
+        if (v === 2) {
+          const cap = sh.charAt(0).toUpperCase() + sh.slice(1);
+          return `"${cap} isn't going away — I need help."`;
+        }
         return still
           ? `"I still need help with ${sh}."`
           : `"I need help with ${sh}."`;
