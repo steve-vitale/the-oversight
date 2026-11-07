@@ -266,6 +266,39 @@ fails, the lever is killed at pilot — never run 12 seeds on an
 invisible effect. Kill taxonomy (§14a) is recorded in the verdict
 section.
 
+## AMENDMENT A1 (2026-11-07, after the re-baseline, BEFORE any armed pilot)
+
+**Re-baseline measured (base 8842af2e6, band 53001–53008, 8 seeds,
+0 instrument errors):** pair days **51** (28 on 53004, 18 on 53005,
+5 on 53007, 0 elsewhere); `foodDeeds` **5/8**; surge spent 5/8;
+median survival **129d**; survived **2/8**; wave-4+ kills **31**
+(by `via`: player 22 / companion 8 / wild 1); donations **53,470
+kcal**; starvation deaths **2**; wave-4 unlock 8/8, wave-5 unlock
+2/8; national 0, table 0, wins 0. Corpus:
+`evidence/2026-11-07/perseed-pairoverlap-b-baseline/`.
+
+**Substrate sanity: PASS.** `foodDeeds` 5/8 ≥ 3; spend seeds 5 ≥
+2. The re-baseline is close to the feaststopspend a2e005cbe
+baseline (pair days 52→51, foodDeeds 5/8, median 137.5→129d,
+survived 2/2, w4 kills 31→31, donations 55,235→53,470) — the
+src/js delta in the range (party.js round-wrap, villager-build.js
+language exposure) moved trajectories only slightly (53004:
+131d→97d, pair 29→28; 53002: 118d→114d; all other seeds identical
+on days). No substrate collapse; the judged comparison is
+re-baseline vs armed, both on 8842af2e6.
+
+**Pool check (§14b): PASS.** The scholar-kill pool is 22
+via-player wave-4 kills on the re-baseline — more than double the
+delta's order of magnitude, so the bar below is achievable in
+principle and the arm is not metric-broken.
+
+**Exact GO bar (the prereg's rule applied): armed pair-days ≥
+max(35, 51 + 10) = 61, AND `foodDeeds` ≥ 5/8 (the re-baseline
+count).** Cost bar numbers: donations (armed) ≤ 53,470 kcal;
+starvation ≤ 2 + 2 = 4; median survival ≥ 0.8 × 129 = 103.2d;
+survived count reported alongside the median. The analyzer is run
+with `--pair-bar 61`. Nothing else in this prereg changes.
+
 ## Panel (§15)
 
 Before/after through `scripts/balance-panel.js` — the new policy
