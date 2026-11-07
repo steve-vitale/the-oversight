@@ -348,7 +348,7 @@ withEnv({ FEAREDDOOR_B: '1' }, () => {
       finalSeat: { seat: 'lesser' }, instrumentErrors: [],
       feareddoorStats: {
         walked: [{ day: 90, path: 'feared', branch: 'light', door: 'path:feared', fellBack: false }],
-        offers: [{ offered: ['path:feared', 'path:beloved'], assigned: 'beloved', picked: 'feared', rule: 'feared-first' }],
+        offers: [{ offered: ['feared', 'beloved'], assigned: 'beloved', picked: 'feared', rule: 'feared-first' }],
         log: [{ phase: 'challenge', path: 'feared' }, { phase: 'finals', path: 'feared', optionId: 'final:mercy' }],
         answers: 5, skips: {}, errors: 0, stalls: 0,
       },
@@ -366,7 +366,7 @@ withEnv({ FEAREDDOOR_B: '1' }, () => {
     feareddoorStats: {
       walked: [{ day: 90, path: 'feared', branch: 'dark', door: 'path:feared', fellBack: false },
                { day: 90, path: 'beloved', branch: 'light', door: 'downgrade:beloved', fellBack: true }],
-      offers: [{ offered: ['path:feared', 'path:beloved'], assigned: 'beloved', picked: 'feared', rule: 'feared-first' }],
+      offers: [{ offered: ['feared', 'beloved'], assigned: 'beloved', picked: 'feared', rule: 'feared-first' }],
       log: [{ phase: 'challenge', path: 'feared' }, { phase: 'downgrade', path: 'feared' },
             { phase: 'challenge', path: 'beloved' }, { phase: 'finals', path: 'beloved', optionId: 'final:mercy' }],
       answers: 8, skips: {}, errors: 0, stalls: 0,
@@ -474,7 +474,10 @@ withEnv({ FEAREDDOOR_B: '1' }, () => {
     assert.ok(walked.length >= 1 && walked[0].day === (s.takeseatStats || {}).seatDay, 'entry day = sit day');
     ok('LIVE SMOKE: seed ' + smokeSeed + ' walks a door on its sit day (' + walked.map(function (w) { return w.path + '@d' + w.day + '/' + (w.branch || '?'); }).join(', ') + ')', true);
     const offered = ((s.feareddoorStats || {}).offers || [])[0];
-    if (offered && offered.offered && offered.offered.indexOf('path:feared') >= 0) {
+    // The policy's offers[].offered holds UNPREFIXED door ids
+    // ('feared', 'beloved', ...); the driver's verb record holds
+    // prefixed ones ('path:feared') — do not mix the shapes.
+    if (offered && offered.offered && offered.offered.indexOf('feared') >= 0) {
       assert.strictEqual(walked[0].path, 'feared', 'feared offered -> feared walked');
       ok('LIVE SMOKE: feared was offered on ' + smokeSeed + ' and the feared door was walked', true);
     } else {

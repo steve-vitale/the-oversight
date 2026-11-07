@@ -169,7 +169,7 @@ function analyzeSeed(o) {
   const conscriptRefusals = (dw.log || []).filter(function (e) { return e.phase === 'conscript'; }).length;
   const trialOnlySkips = (dw.skips || {})['trial-only'] | 0;
   const offered = (dw.offers && dw.offers.length) ? dw.offers[0].offered : null;
-  const fearedOffered = !!(offered && offered.indexOf('path:feared') >= 0);
+  const fearedOffered = !!(offered && offered.indexOf('feared') >= 0);
   const fearedWalked = walked.filter(function (w) { return w.path === 'feared'; });
   const fearedVerbEntries = verbEntries.filter(function (e) { return e.path === 'feared'; });
   // A feared WIN: the seed won, the first walked door was feared, and
