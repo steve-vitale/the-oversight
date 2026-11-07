@@ -83,9 +83,11 @@ function tbChainGroup(traces, waveMin) {
 // ---- Field chains: same INSTANCE (WeakMap id) re-fought ----
 // Group field rows by instId (non-null only), sort by (day, seq).
 // Also same-day same-mid groups (the trail-read fallback when the
-// instance id is absent). Returns { instanceChains, sameDayGroups }.
-function fieldChainGroup(rows) {
-  const list = (rows || []).filter(function (r) { return r && r.mid; });
+// instance id is absent). waveMin filters by wave (default 0 = all).
+// Returns { instanceChains, sameDayGroups }.
+function fieldChainGroup(rows, waveMin) {
+  const w = waveMin == null ? 0 : waveMin;
+  const list = (rows || []).filter(function (r) { return r && r.mid && (r.wave | 0) >= w; });
   const byInst = {};
   list.forEach(function (r) { if (r.instId) (byInst[r.instId] = byInst[r.instId] || []).push(r); });
   const instanceChains = Object.keys(byInst).map(function (id) {
@@ -149,7 +151,7 @@ function fieldDist(rows, waveMin) {
     contactFinishKills: list.filter(function (r) { return r.contactFinishKill; }).length,
     committedFinish: list.filter(function (r) { return r.committedFinish; }).length,
     corneredHold: list.filter(function (r) { return r.corneredHold; }).length,
-    volleyKills: list.filter(function (r) { return r.outcome === 'vKill' && (r.rounds | 0) === 0; }).length,
+    volleyKills: list.filter(function (r) { return r.outcome === 'vKill' && (r.rounds | 0) === 0 && !r.contactFinishKill && r.volley && (r.volley.dmg | 0) > 0; }).length,
     scholarFighterRows: list.filter(function (r) { return r.isScholar; }).length,
     regenSuspect: list.filter(function (r) { return r.regenSuspect; }).length,
   };
@@ -184,7 +186,9 @@ function tailStats(traces, waveMin) {
 // ---- Grind windows: scholar deaths on chain-fight days vs other days ----
 function grindWindows(seedJson) {
   const chains = tbChainGroup(seedJson.traces || [], 4).filter(function (c) { return c.fights >= 2; });
-  const fChains = fieldChainGroup(seedJson.fieldFights || []).instanceChains;
+  // Field chains count ONLY wave-4+ re-fights: unfiltered, wave-1/2
+  // re-fights swamp the window (every hushwolf re-met is a "grind day").
+  const fChains = fieldChainGroup(seedJson.fieldFights || [], 4).instanceChains;
   const grindDays = {};
   const tb = (seedJson.traces || []).filter(function (t) { return (t.wave | 0) >= 4; });
   const chainKeys = {};
@@ -229,7 +233,7 @@ function analyzeFiles(files) {
   const chains = jsons.reduce(function (a, j) { return a.concat(tbChainGroup(j.traces || [], 4).map(function (c) { c.seed = j.seed; return c; })); }, []);
   const multiChains = chains.filter(function (c) { return c.fights >= 2; });
   const fChains = jsons.reduce(function (a, j) {
-    return a.concat(fieldChainGroup(j.fieldFights || []).instanceChains.map(function (c) { c.seed = j.seed; return c; }));
+    return a.concat(fieldChainGroup(j.fieldFights || [], 4).instanceChains.map(function (c) { c.seed = j.seed; return c; }));
   }, []);
   return {
     wall: wallSummary(jsons),
@@ -244,7 +248,7 @@ function analyzeFiles(files) {
       all: fieldDist(allField, 0),
       w4: fieldDist(allField, 4),
       instanceChains: fChains,
-      sameDayGroupsTotal: jsons.reduce(function (s, j) { return s + fieldChainGroup(j.fieldFights || []).sameDayGroups.length; }, 0),
+      sameDayGroupsTotal: jsons.reduce(function (s, j) { return s + fieldChainGroup(j.fieldFights || [], 4).sameDayGroups.length; }, 0),
     },
     windows: jsons.map(function (j) { return Object.assign({ seed: j.seed }, grindWindows(j)); }),
     perSeed: jsons.map(function (j) {

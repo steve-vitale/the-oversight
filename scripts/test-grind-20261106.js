@@ -112,7 +112,11 @@ function fieldRow(opts) {
   check('fielddist-committed', d.committedFinish === 1, String(d.committedFinish));
   check('fielddist-dmg-median', d.dmgPerFight.median === 40, JSON.stringify(d.dmgPerFight));
   check('fielddist-rounds-median', d.rounds.median === 1.5, JSON.stringify(d.rounds));
-  check('fielddist-volley-kill-shape', d.volleyKills === 1, String(d.volleyKills));
+  // A contact-finish kill (rounds 0, no volley) is NOT a volley kill:
+  // the old rounds===0 proxy double-counted it.
+  check('fielddist-volley-kill-shape', d.volleyKills === 0, String(d.volleyKills));
+  const volleyOnly = AN.fieldDist([fieldRow({ seq: 9, entryHp: 90, entryMaxHp: 1200, entryFrac: 0.075, rounds: 0, outcome: 'vKill', mHpLeft: 0, mDealt: 90, volley: { shots: 3, hits: 3, dmg: 90, ammoLeft: 0 } })], 4);
+  check('fielddist-volley-kill-counted', volleyOnly.volleyKills === 1, String(volleyOnly.volleyKills));
 })();
 
 // ---------- 4. tailStats: damage/round in the tail ----------
