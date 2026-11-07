@@ -197,6 +197,10 @@ withDir((dir) => {
   const navBefore = '=== r112-before PEOPLE CHECK (4 held convos, end of run) ===\n\n-- Ana (v1) occ=forager --\nOPENING: hello\nYOU: [menu:more] More things to say (1/2)\nTHEM: (menu page turned)\n(ended by engine)\nclosing: goodbye\n';
   fs.writeFileSync(path.join(dir, 'journey-establishment-r111-convo-seed1502.txt'), nav111);
   fs.writeFileSync(path.join(dir, 'journey-establishment-r112-before-convo-seed1502.txt'), navBefore);
+  // Neutrality also needs the r112-before JSON (identical funnel keys: the
+  // driver is trajectory-neutral, so the before-file matches the r111 file).
+  fs.writeFileSync(path.join(dir, 'journey-establishment-r112-before-seed1502.json'),
+    fs.readFileSync(path.join(dir, 'journey-establishment-r111-seed1502.json'), 'utf8'));
   const out = runAnalyzer(dir);
   check('Q nav-normalized-neutral', /DRIVER-NEUTRALITY vs r111: NEUTRAL/.test(out), out);
 });
@@ -213,6 +217,8 @@ withDir((dir) => {
   const navBefore = '=== r112-before PEOPLE CHECK (4 held convos, end of run) ===\n\n-- Ana (v1) occ=forager --\nOPENING: hello\nYOU: [menu:more] More things to say (1/2)\nTHEM: (menu page turned)\nTHEM: an extra line that was never said\n(ended by engine)\nclosing: goodbye\n';
   fs.writeFileSync(path.join(dir, 'journey-establishment-r111-convo-seed1502.txt'), nav111);
   fs.writeFileSync(path.join(dir, 'journey-establishment-r112-before-convo-seed1502.txt'), navBefore);
+  fs.writeFileSync(path.join(dir, 'journey-establishment-r112-before-seed1502.json'),
+    fs.readFileSync(path.join(dir, 'journey-establishment-r111-seed1502.json'), 'utf8'));
   const out = runAnalyzer(dir);
   check('R real-diff-still-drifts', /DRIVER-NEUTRALITY vs r111: DRIFT:/.test(out), out);
 });

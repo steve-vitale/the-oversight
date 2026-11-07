@@ -283,7 +283,7 @@ for seed in SEEDS:
             elif _cn is not None:
                 if normalize_nav('\n'.join(_cn.split('\n')[1:])) != normalize_nav('\n'.join(_cb.split('\n')[1:])):
                     diffs.append('convo transcript differs (neutrality — driver drift, NOT the fix)')
-            neutrality[seed] = diffs
+        neutrality[seed] = diffs
     repro[seed] = diffs
     tele = j.get('teleAll') or []
     census = {str(c['id']): c for c in (j.get('census') or [])}
@@ -478,7 +478,8 @@ for seed in SEEDS:
                 q2panel['nav_turns'] += 1
     print(f'\n=== seed {seed} (endDay {j.get("endDay")}, over {j.get("gameOver")}, aliveEnd {j.get("aliveEnd")}, wave {j.get("waveReached")}, pantryGuardrails {pantry_of(j)}, pantryEnd {j.get("pantryKcalEnd")}) ===')
     if seed == 1502:
-        print(f'  DRIVER-NEUTRALITY vs r111: {"NEUTRAL" if not neutrality.get(seed) else "DRIFT: " + "; ".join(neutrality.get(seed) or [])}')
+        _nd = neutrality.get(seed)
+        print(f'  DRIVER-NEUTRALITY vs r111: {"UNVERIFIED (no neutrality file)" if _nd is None else ("NEUTRAL" if not _nd else "DRIFT: " + "; ".join(_nd))}')
     _lb = ladder_before.get(seed) or {}
     print(f'  LADDER before={before_tag}: spec0pos={_lb.get("spec0pos", 0)} foodXp0pos={_lb.get("foodXp0pos", 0)} foodXpEnd={_lb.get("foodXpEnd", 0)} | after: spec0pos={lad.get("spec0pos", 0)} foodXp0pos={lad.get("foodXp0pos", 0)} foodXpEnd={lad.get("foodXpEnd", 0)} firstMove={first_move_window.get(seed)}')
     for _mv in lad.get('specMoves', []):
