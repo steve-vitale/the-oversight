@@ -1,0 +1,81 @@
+=== r112-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Anthony (gen_327izcs) occ=fishing guide --
+OPENING: "Please — whatever this is, it's getting worse — I'm achy and wrung out, barely keeping food down. I need help. Please."
+YOU: [goon] "Go on."
+THEM: Anthony has an edge today — something curdled.
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to them, on the same side of the Haven door, to help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "You don't know what that means to me. Thank you."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Good question." "Mateo? A barber, back before. Solid person."
+YOU: [goon] "Whoa — go on."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [dlg:more] "Go on."
+THEM: "Daniyar headed out to forage."
+YOU: [dlg:react] (listen)
+THEM: "Habiba headed out to forage."
+closing: "File that under 'productive.' Loosely defined."
+
+-- Habiba (gen_d2rmlwx) occ=interpreter --
+OPENING: "You talk to it -- the System. Have you ever asked? About the taken -- about Ignacio?"
+YOU: [gq:yn:yes] "Yes."
+THEM: They nod. "Okay."
+YOU: [goon] "I'm listening."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:more] "What do you remember?"
+THEM: "It's my uncle, Ignacio. Was taken. He could fix anything. Anything. I wonder what they even measure. Some nights I swear I hear them before I sleep -- the pods, rows deep, humming. Then morning comes and I can't say whether it was real."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [goon] "I'm listening."
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+YOU: [silence] "..."
+THEM: A comfortable quiet settles. They smile a little, and let it be.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? That's where we are."
+closing: "Don't be a stranger."
+
+-- Khadija (gen_4plz7m8) occ=Beekeeper --
+OPENING: "What do you make of all this? Really."
+YOU: [ans:q_think:a_end] "The world's ended. We're what's left."
+THEM: "Bleak. Probably true. I keep looking for the part where it's not. ...never mind."
+YOU: [goon] "I'm listening."
+THEM: "I think we're an experiment someone forgot to label. And the unlabeled part is what scares me — it means nobody's coming to check the results."
+YOU: [goon] "I'm listening."
+THEM: "Walk with me? I want another pair of eyes on something."
+YOU: [silence] "..."
+THEM: You say nothing. Neither do they, for a while — and it's fine.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on what you make of all this. Just... be straight with me."
+YOU: [goon] "I'm listening."
+THEM: "What's your first memory? Like, ever. The earliest thing."
+YOU: [ans:q_first_memory:a_tell] "A kitchen. Morning light. I must've been three."
+THEM: "Three. That's young. The brain keeps what it needs, I guess."
+YOU: [goon] "I'm listening."
+THEM: "Mine's Riyadh, Saudi Arabia, I think — heat on pavement, someone's hand huge around mine. Or I invented it. First memories are half real and half the story you needed."
+closing: "I need some air. Alone air. You understand."
+
+-- Nina (nina_petrova) occ=mechanic --
+OPENING: "Mind if I just sit with you for a bit? It'll pass."
+YOU: [dlg:react] "Yeah. Hey."
+THEM: "This is nice. Just — being around people. I forget how much I need it."
+YOU: [dlg:more] "What's on your mind?"
+THEM: "That's the whole of it. Sorry."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Anthony is back. Walked in like they'd never left."
+YOU: [goon] "Who told you that?"
+THEM: Their voice loosens. The guardedness thins.
+YOU: [goon] "Who told you that?"
+THEM: "Come see what I found. You won't believe it."
+YOU: [silence] "..."
+THEM: They fill the quiet. "Anyway — where was I?"
+YOU: [goon] "Hm. Let me think — go on, first."
+THEM: "What's the kindest thing someone's done for you out here?"
+closing: "Good talk."

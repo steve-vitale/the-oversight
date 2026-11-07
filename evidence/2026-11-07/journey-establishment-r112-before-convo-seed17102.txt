@@ -1,0 +1,81 @@
+=== r112-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Helga (gen_3buic1g) occ=army medic --
+OPENING: "Can we talk?" Helga shifts their weight. "I need something to do. Anything. Please."
+YOU: [dlg:more] "I’m listening."
+THEM: "We're down to 0 liters of clean water. I can't carry enough alone. First light, the creek, you and me?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Your partner is inside the Haven hall. Go through the door to meet them.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Huh. Let me think about that." "Dylan? A dockworker, back before. Solid person."
+YOU: [goon] "Go on. I'm listening."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [goon] "Go on. I'm listening."
+THEM: "Okay. We'll pick this up later."
+YOU: [agree] "You're right."
+THEM: "I was thinking the same thing. Didn't say it, but — yeah."
+(ended by engine)
+
+-- Dylan (gen_wgr2s88) occ=dockworker --
+OPENING: Loneliness is a slow death. I'd rather risk the group than die alone.
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Saw Palmetto. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Castor Bean. Leaf, stem, smell. You won't forget it now."
+YOU: [dlg:more] "I’m listening."
+THEM: "Home is where they save you a seat. I'm looking for my seat."
+YOU: [dlg:react] (listen)
+THEM: "I just want a place where people notice when I'm gone. Is that too much?"
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on wanting to belong somewhere."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "...Fine. This had better be worth it."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "I should get back to it."
+
+-- Joyce (gen_pthhc1d) occ=sign painter --
+OPENING: "You talk to it -- the System. Have you ever asked? About the taken -- about Odarka? You'd know about that."
+YOU: [gq:yn:yes] "Yes."
+THEM: They nod. "Okay."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Can I trust you? I mean really."
+YOU: [ans:q_trust:a_earn] "I hope to earn it."
+THEM: "That's the right answer. The wrong one would've been 'yes' too fast."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "I'll tell you what I tell everyone: watch what I do when nobody's watching. That's the whole of me. The rest is just talking. I mean it."
+YOU: [dlg:more] "Tell me about them."
+THEM: "It's my niece, Odarka. Is napping in a pod somewhere, they say. Seven years old and napping. She was never boring. Some nights I swear I hear them before I sleep -- the pods, rows deep, humming. Then morning comes and I can't say whether it was real."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Come get air with me. I need to think out loud."
+closing: "Take care of yourself."
+
+-- Hajime (gen_esruudc) occ=exterminator --
+OPENING: Hajime speaks only 🇯🇵 Japanese. No shared words at all — just eyes, hands, and patience.
+They speak. You understand none of it. "Water?" — they grin, proud of the one English they know.
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Feral Rice. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Pearl Millet. Leaf, stem, smell. You won't forget it now."
+YOU: [nv:nod] (nod slowly)
+THEM: They answer at length. They nod, holding your gaze a beat longer.
+YOU: [nv:smile] (smile)
+THEM: They answer at length. They smile back, slower this time, like it just landed.
+YOU: [nv:pointself] (point: you, them, together)
+THEM: They answer at length. You tap your chest, then theirs. Us. They nod, emphatic.
+YOU: [nv:listen] (listen hard — catch words)
+THEM: You listen hard, watching their mouth shape the words. Sounds, and the shape of meaning just out of reach.
+YOU: [speak_back] (try your Japanese)
+THEM: Hajime blinks. Then cracks up. "You said that BEAUTIFULLY. It means nothing like what you think it means." They teach you the right word, still laughing.
+YOU: [goon] (watch quietly)
+THEM: They hear the warmth in it. They're not ready to let it in.
+closing: They wave you off gently, already turning away. The conversation ends where language couldn't reach.

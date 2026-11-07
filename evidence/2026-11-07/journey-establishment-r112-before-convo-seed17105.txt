@@ -1,0 +1,77 @@
+=== r112-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Maricela (gen_p7jnpla) occ=taxi driver --
+OPENING: "About this wound — still on my mind. I keep coming back to it."
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [goon] "Please, go on."
+THEM: "Come get air with me. I need to think out loud."
+YOU: [silence] "..."
+THEM: A comfortable quiet settles. They smile a little, and let it be.
+YOU: [goon] "Please, go on."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to them, on the same side of the Haven door, to help.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "You want to know about that? Okay." "Did you hear? Omar won Pantry Raid on the cameras. People are still talking about it."
+YOU: [goon] "I'm listening, I promise."
+THEM: "I should get back to it."
+
+-- Chris (gen_zgtibi0) occ=electrician --
+OPENING: Everything's broken — bodies, tools, people. I fix things. It's what I'm for.
+YOU: [dlg:more] "Tell me more."
+THEM: "Every person I patch up is a vote for the world continuing."
+YOU: [dlg:react] (listen)
+THEM: "You look tired. Everyone looks tired. Sit down a minute — no, I'm serious."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on wanting to fix what's broken."
+YOU: [goon] "Please, go on."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Not right now. I've got my own things to handle."
+YOU: [goon] "Please, go on."
+THEM: "Alright. Catch you later."
+YOU: [more] "One more thing —"
+THEM: "I learned to set a bone before I learned to read. Hands first, always."
+(ended by engine)
+
+-- Emily (gen_ai3tyra) occ=Midwife --
+OPENING: "Have you heard anything? About the taken. The pods. Anything at all."
+YOU: [gq:yn:yes] "Yes."
+THEM: "All right. Thank you for telling me."
+YOU: [goon] "I'm listening, I promise."
+THEM: "You look handy. What did you do with your hands, before?"
+YOU: [ans:q_hands:a_tell] (tell them your trade)
+THEM: "Useful. Everything useful matters now. I mean that as a compliment."
+YOU: [goon] "I'm listening, I promise."
+THEM: "These hands? Midwife hands. Clipboards, mostly. Now they hold wire and wood, and they learn fast. Hands are honest that way."
+YOU: [dlg:more] "What do you remember?"
+THEM: "It's my grandmother, Fiona. Was taken. Eighty-one years old and they called her boring. Eighty-one years. The pods get into my sleep some nights. Row on row of them, humming like a held note -- and I wake up reaching for something that isn't there."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person."
+YOU: [goon] "I'm listening, I promise."
+THEM: "Okay. We'll pick this up later."
+
+-- Sattam (gen_ypbqkt8) occ=lifeguard --
+OPENING: "You talk to it -- the System. Have you ever asked? About the taken -- about Ahmed?"
+YOU: [gq:yn:yes] "Yes."
+THEM: They nod. "Okay."
+YOU: [dlg:more] "What do you remember?"
+THEM: "It's my uncle, Ahmed. Was taken. He could fix anything. Anything. I wonder what they even measure. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Water Lily. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Guava. Leaf, stem, smell. You won't forget it now."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? Good talking."
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "...Sorry, lost my train of thought."
+closing: "Good talk."
