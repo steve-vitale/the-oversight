@@ -228,3 +228,10 @@ gate, deed, wave, or table rule (freeze stands).
   (late newcomer arrivals + second handoffs dominate). If the next
   run wants a decisive CAP-NC verdict, it needs a longer panel or a
   band with earlier arrivals — a prereg question, not a re-score.
+
+## Adoption (main session, 2026-11-07 ~17:10 CST)
+
+- Lane B run timed out before its gate finished (gate proc killed mid-run; partial log only). Main session re-ran the gate on the rebased tip: `node scripts/check.js --quick` → **284 passed, 6 failed in 527s** (gate log evidence/2026-11-07/journey-succession-r155-gate.log).
+- The 6 failures are ALL standing, none from this fix: measurement-proof-update + measurement-workflow (retained neutrality proof stale — refresh owed at ship), mobile-combat-cadence (2 standing), occupation-panels (CLI workflow), phone-frame-proof (retained receipt stale), establishment-r20 (voices gate). Same 284/6 shape as r154/r116/feveranat/tendsick.
+- Proof test scripts/test-journey-succession-r155-opener-skip.js re-run standalone on the tip: ALL GREEN (exit 0).
+- Lock note: playtest-loop-2.lock line 1 holds a timestamp (2026-11-07T21:56:49Z), not the run UUID — worker quirk; the lock belongs to this run (only Lane B run in flight, worker timed out), deleted at closeout.
