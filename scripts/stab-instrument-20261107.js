@@ -39,7 +39,12 @@ function installDrawCounter(sampleEvery) {
       st.sampled += 1;
       try {
         const stack = new Error().stack || '';
-        const lines = stack.split('\n').slice(1);
+        // lines[0] is this wrapper's own frame (the sampled call went
+        // THROUGH the wrapper) — skip it and bucket by the CALLER, the
+        // first frame after the wrapper. Bucketing lines[0] labels every
+        // sample 'driver' (caught on the pilot's first legs: 2080/2080
+        // 'driver' on 53001 baseline).
+        const lines = stack.split('\n').slice(2);
         let bucket = 'unknown';
         for (let i = 0; i < lines.length; i++) {
           const ln = lines[i];

@@ -195,6 +195,12 @@ function endVets(row) {
     check('live-staged-53006-matches-confirm2', row.days === 150 && row.endReason === 'survived' && row.standing === 440 && w4kills(row) === 11 && row.maxWave === 5 && endVets(row) === 2,
       JSON.stringify({ days: row.days, endReason: row.endReason, standing: row.standing, w4kills: w4kills(row), maxWave: row.maxWave, endVets: endVets(row) }));
     check('live-counter-counts', (row.rngDraws || {}).total > 0, 'total=' + ((row.rngDraws || {}).total || 0));
+    check('live-samples-attribute-to-game', (function () {
+      const s = (row.rngDraws || {}).samples || {};
+      const gameKeys = Object.keys(s).filter(function (k) { return /\.js$/.test(k); });
+      const driverShare = (s.driver || 0) / Math.max(1, (row.rngDraws || {}).sampled || 1);
+      return gameKeys.length >= 1 && driverShare < 0.5;
+    })(), 'samples=' + JSON.stringify((row.rngDraws || {}).samples || {}).slice(0, 300));
     check('live-dailystage-draws', ((row.rngDraws || {}).hooks || {}).dailyStage > 0,
       'dailyStage=' + (((row.rngDraws || {}).hooks || {}).dailyStage || 0));
     check('live-pending-draws-zero', ((row.rngDraws || {}).hooks || {}).pending === 0,
