@@ -158,6 +158,14 @@ the NEXT run, not this one:
   rather than a test artifact, it belongs to a combat-pacing arm, not to
   this re-baseline.
 
+## Rebase record
+
+Arm base `987766c0c` → rebased onto explicit current master
+`82e550626` (batch-ship version bump of `987766c0c`, no code change) before
+finishing; 4 commits replayed clean, no conflicts. New tip `4228f6d1d`.
+Proof re-run green on the rebased tip: `test-armorcap-20261106.js` 42/42,
+`test-armor-cap-20261009.js` 291/0 (identical output).
+
 ## Scale-wall numbers (standing report)
 
 Not a sim arm — no panel run. The re-baseline changes no game code, so no
