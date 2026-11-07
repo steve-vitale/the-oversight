@@ -54,14 +54,18 @@ AWARE = {'field_dressing', 'triage'}
 SPLIT_WHY = {'teacher-away', 'teacher-unseeded', 'no-teacher-anywhere'}
 
 def parse_convos(text):
-    """Return {convos, stalls, stall_menus, ended_engine, names} from a -convo txt."""
+    """Return {convos, stalls, wound_down, stall_menus, ended_engine, names} from a -convo txt.
+    AMENDMENT 1: a '(no pick — winding down)' is a clean ending (the goodbye
+    was spoken; the driver just never picks leave), NOT a stall. Only a plain
+    '(no pick)' / '(choices empty)' while open and not winding down counts."""
     if text is None:
-        return {'convos': 0, 'stalls': 0, 'stall_menus': [], 'ended_engine': 0, 'names': [], 'missing': True}
+        return {'convos': 0, 'stalls': 0, 'wound_down': 0, 'stall_menus': [], 'ended_engine': 0, 'names': [], 'missing': True}
     names = re.findall(r'^-- (.+?) \([^)]+\) occ=', text, flags=re.M)
     stalls = len(re.findall(r'^\(no pick\)$', text, flags=re.M)) + len(re.findall(r'^\(choices empty\)$', text, flags=re.M))
+    wound_down = len(re.findall(r'^\(no pick \u2014 winding down\)$', text, flags=re.M))
     stall_menus = re.findall(r'^\(stall menu: (.*)\)$', text, flags=re.M)
     ended_engine = len(re.findall(r'^\(ended by engine\)$', text, flags=re.M))
-    return {'convos': len(names), 'stalls': stalls, 'stall_menus': stall_menus,
+    return {'convos': len(names), 'stalls': stalls, 'wound_down': wound_down, 'stall_menus': stall_menus,
             'ended_engine': ended_engine, 'names': names, 'missing': False}
 
 funnel_rows = []
@@ -229,7 +233,7 @@ for seed in SEEDS:
         if not d.get('player') and 'hunt' in str(d.get('cause') or '').lower():
             hunter_wound_deaths.append((seed, d.get('day'), d.get('who'), d.get('cause')))
     print(f'\n=== seed {seed} (after endDay {j.get("endDay")}, over {j.get("gameOver")}, aliveEnd {j.get("aliveEnd")}, wave {j.get("waveReached")}, pantryGuardrails {pantry_of(j)}, pantryEnd {j.get("pantryKcalEnd")}) ===')
-    print(f'  convos: before {cb["convos"]} (stalls {cb["stalls"]}, ended-engine {cb["ended_engine"]}) | after {ca["convos"]} (stalls {ca["stalls"]}, ended-engine {ca["ended_engine"]})')
+    print(f'  convos: before {cb["convos"]} (stalls {cb["stalls"]}, wound-down {cb["wound_down"]}, ended-engine {cb["ended_engine"]}) | after {ca["convos"]} (stalls {ca["stalls"]}, wound-down {ca["wound_down"]}, ended-engine {ca["ended_engine"]})')
     for sm in cb['stall_menus']:
         print(f'  STALL-BEFORE seed {seed} menu: {sm}')
     for sm in ca['stall_menus']:
@@ -247,6 +251,7 @@ print(f'\nPANEL: livingVillagersEnd(after)={panel_living}')
 print(f'  Q1 THIN-BEAT STALL (matched before/after, same driver, same seeds):')
 print(f'    convos sampled: before {tot_cb} | after {tot_ca}')
 print(f'    stalls: before {tot_sb} {dict(sorted(stall_before.items()))} | after {tot_sa} {dict(sorted(stall_after.items()))}')
+print(f'    wound-down clean endings (no-pick after goodbye, NOT stalls): before {sum(c["wound_down"] for c in convo_before.values())} | after {sum(c["wound_down"] for c in convo_after.values())}')
 if tot_sb >= 1 and tot_sa == 0:
     q1 = 'GO'
 elif tot_sb == 0:

@@ -569,6 +569,13 @@ async function runSeed(seed) {
       for (let turn = 0; turn < 8; turn++) {
         const choices = (r.choices && r.choices.length) ? r.choices : [];
         if (!choices.length) { convoLines.push('(choices empty)'); convoLines.push('(stall menu: )'); break; }
+        // AMENDMENT 1 (r109): a no-pick AFTER the goodbye was spoken is a
+        // clean ending the driver declines to click (it never picks leave),
+        // not a stall. Only a no-pick while the conversation is still open
+        // AND NOT winding down counts as a stall. r.windingDown is the last
+        // turn's return flag. This annotation changes no pick, so the
+        // before-panel trajectories are identical with or without it.
+        const windingDown = !!r.windingDown;
         let pick = null;
         if (choices.find(ch => ch.id === 'goon')) pick = choices.find(ch => ch.id === 'goon');
         else if (choices.find(ch => ch.id === 'ask:personal') && !seen['ask:personal']) pick = choices.find(ch => ch.id === 'ask:personal');
@@ -578,7 +585,7 @@ async function runSeed(seed) {
           || choices.find(ch => ch.id !== 'leave' && ch.id !== 'bye' && !seen[ch.id] && !/^betrayal:/.test(ch.id) && !/^confront:/.test(ch.id))
           || choices.find(ch => /^confront:/.test(ch.id) && !seen[ch.id])
           || null;
-        if (!pick) { convoLines.push('(no pick)'); convoLines.push('(stall menu: ' + choices.map(ch => ch.id).join('|') + ')'); break; }
+        if (!pick) { convoLines.push(windingDown ? '(no pick — winding down)' : '(no pick)'); convoLines.push('(stall menu: ' + choices.map(ch => ch.id).join('|') + ')'); break; }
         if (pick.id !== 'goon') seen[pick.id] = 1;
         convoLines.push(`YOU: [${pick.id}] ${(pick.label || '').slice(0, 80)}`);
         r = Game.convoTurn(vid, pick.id);
