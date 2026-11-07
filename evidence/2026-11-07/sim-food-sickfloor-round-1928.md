@@ -71,7 +71,7 @@ Policy-side only (scripts/policies/tendsick-a.js wraps competent; zero
 src/js). Base 018295600. The worker's pilot sweep was complete but the
 worker was cancelled before analyzing; the main session judged the arm
 from the corpora on disk. LANDED (merged --ff-only; proof 15/15
-green on the rebased tip eaed6804c; gate 284/6 — the same 6 as the r154
+green on the rebased tip f05ef89db; gate 284/6 — the same 6 as the r154
 gate: 4 standing + 2 measurement-proof staleness from r154's src changes,
 not this branch).
 
@@ -152,7 +152,7 @@ second rebase), gate 284/6, merged ac64c644c; fixed the tendsick analyzer
 regex, judged the pilot NO-GO, wrote + committed tendsick evidence
 (4caadaaf2), rebased onto ece67e0b2 (quirk 1×, on the amendment pick —
 verified unapplied via `git diff <pick>` before continuing), proof 15/15
-on tip, gate 284/6, merged (branch tip eaed6804c + this round file). Safe-commit index clobber hit
+on tip, gate 284/6, merged (branch tip f05ef89db + this round file). Safe-commit index clobber hit
 both evidence commits — repaired via `git ls-tree -r HEAD` pipe (the `-r`
 is REQUIRED for directory paths; without it the repair writes bogus
 slash-less index entries — see AGENTS.md). Master moved once under the
@@ -174,4 +174,4 @@ needs its own prereg. scale-onramp stays converging (untouched by this
 run).
 
 Evidence: evidence/2026-11-07/sim-food-sickfloor-round-1928.md (this
-file; arm 2 ac64c644c; arm 3 eaed6804c + this round-file commit).
+file; arm 2 ac64c644c; arm 3 f05ef89db + this round-file commit).
