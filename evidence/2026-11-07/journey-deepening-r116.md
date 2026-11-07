@@ -277,11 +277,21 @@ stay NO-DATA (not a fault — no tops to judge).
 ## Telemetry
 - Baseline: hidden_files/telemetry-baselines/deepening.json (4-seed
   sums, r90 panel 93301–93304). Metrics: survival, wave,
-  population, bondDecisions, linkDecisions. (See gate section for
-  the check result.)
+  population, bondDecisions, linkDecisions. Check result: QUIET
+  (9 files — 8 panel + 1 fix-proof — 5 metrics, no large
+  deviations). Baseline NOT rolled forward: no LOUD line, and the
+  panel straddles the succession fix, so rolling would mix code
+  versions.
 
 ## Regression gate
-- `node scripts/check.js --quick` in the worktree (see below).
+- `node scripts/check.js --quick` in the worktree: 284 passed,
+  6 failed in ~7 min — the 6 are exactly the known pre-existing
+  set (test-measurement-proof-update, test-measurement-workflow,
+  test-mobile-combat-cadence, test-occupation-panels,
+  test-phone-frame-proof, test-establishment-r20-fixes-20261020),
+  identical to the r114 baseline. No new failure from the
+  succession fix. (Run twice; second run captured the failure
+  list.)
 
 ## Carried
 - V-INIT: bondSittings=0 both panels — should a villager walk up
