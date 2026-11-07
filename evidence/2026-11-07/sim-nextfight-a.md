@@ -237,6 +237,14 @@ primary miss.
   ready to merge as a lever — the measurement (prereg + evidence +
   corpus + analysis) is the landing, the code is not. No push, no version
   bump, no live verification (coordinator owns the merge).
+- **Rebase note:** the branch was rebased onto master dab55c696 after
+  the pilot (sibling vetkilltale-a landed in between). Commit hashes
+  renumbered: prereg c969b1840 → 9d8e8b9a6, build 5b7d847d0 →
+  338584348, evidence 91a21b7a8 → 5f6c8a02e, revert aeba74e8e →
+  d1c6049ba. The per-seed corpus files still record the pre-rebase build
+  hash (5b7d847d0) as their anchorCommit — that is the commit the pilot
+  actually ran at; the rebased build commit (338584348) is byte-identical
+  in content. Net src/ change on the branch after the revert: zero.
 
 ## Convergence
 
