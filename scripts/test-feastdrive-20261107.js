@@ -202,6 +202,87 @@ function check(name, cond, extra) {
     inst.t.feastEvents.channels.length === 1, 'wrap not removed or call leaked');
 })();
 
+// ---------- feastdrive policy fixtures ----------
+(function () {
+  const FD = require(path.join(REPO, 'scripts', 'policies', 'competent-feastdrive-b'));
+  const fs = require('fs');
+  // 1. The policy source never references the kill log.
+  const src = fs.readFileSync(path.join(REPO, 'scripts', 'policies', 'competent-feastdrive-b.js'), 'utf8');
+  check('policy-no-killlog-ref', src.indexOf('waveKillLog') === -1, 'waveKillLog appears in the policy source');
+  // 2. armed / buffLive helpers on raw state.
+  const mk = function (prog, buff, day) {
+    return { state: { scholar: { day: day, prog: prog, feastBuff: buff } } };
+  };
+  check('policy-armed', FD.armed(mk({ feastSurge: 1.5 }, null, 10)) === true &&
+    FD.armed(mk({ feastSurge: false }, null, 10)) === false &&
+    FD.armed(mk({}, null, 10)) === false, 'armed helper');
+  check('policy-bufflive', FD.buffLive(mk({}, { untilDay: 12 }, 10)) === true &&
+    FD.buffLive(mk({}, { untilDay: 10 }, 10)) === false &&
+    FD.buffLive(mk({}, null, 10)) === false, 'buffLive helper (raw day < untilDay)');
+  // 3. donateDownToKeep: donates identified surplus above the keep,
+  // skips unknowns / unready food, honors the pantry-options cap.
+  function fakeDonor(withOptions) {
+    const fg = {
+      villagerId: 'scholar',
+      state: { scholar: { day: 20, kcal: 3000, inventory: [
+        { itemId: 'beans', kcalEach: 500, units: 6, edible: true, safe: true },
+        { itemId: 'unknown', kcalEach: 0, units: 3 },
+        { itemId: 'meat', kcalEach: 800, units: 2, needsCooking: true },
+        { itemId: 'sick', kcalEach: 400, units: 5, diseaseRisk: true },
+      ] }, village: { gives: {} } },
+      havenStoresAccess: function () { return 'open'; },
+      isSpoiled: function () { return false; },
+      pantryCapKcal: function () { return 100000; },
+      pantryKcal: function () { return 10000; },
+      donateToPantry: function (i, amount) {
+        const it = fg.state.scholar.inventory[i];
+        const kcal = it.kcalEach * amount;
+        it.units -= amount;
+        if (it.units <= 0) fg.state.scholar.inventory.splice(i, 1);
+        const g = fg.state.village.gives;
+        g[fg.villagerId] = (g[fg.villagerId] || 0) + kcal;
+      },
+    };
+    if (withOptions) fg.pantryDonationOptions = function () { return { ok: true, maxUnits: 2 }; };
+    return fg;
+  }
+  FD.resetFeastdriveStats();
+  const fg1 = fakeDonor(false);
+  // Add a second ready item: the no-options branch donates WHOLE items
+  // only when the remainder still covers the keep (the base rule), so
+  // roots (2000) go whole — remainder 3000 still covers 1200 — while
+  // beans (3000) then stay: remainder 0 < 1200.
+  fg1.state.scholar.inventory.splice(1, 0, { itemId: 'roots', kcalEach: 400, units: 5, edible: true, safe: true });
+  const r1 = FD.donateDownToKeep(fg1, {}, 1200);
+  check('policy-donate-down', r1.transferred === 1 && r1.kcal === 2000 &&
+    (fg1.state.village.gives.scholar || 0) === 2000 &&
+    fg1.state.scholar.inventory.find(function (it) { return it.itemId === 'roots'; }) === undefined &&
+    fg1.state.scholar.inventory[0].units === 6,
+    JSON.stringify(r1));
+  FD.resetFeastdriveStats();
+  const fg2 = fakeDonor(true);
+  const r2 = FD.donateDownToKeep(fg2, {}, 1200);
+  // options cap maxUnits 2 -> 2 units = 1000 kcal.
+  check('policy-donate-options-cap', r2.transferred === 1 && r2.kcal === 1000,
+    JSON.stringify(r2));
+  FD.resetFeastdriveStats();
+  const fg3 = fakeDonor(false);
+  const r3 = FD.donateDownToKeep(fg3, {}, 5000);
+  // keep above available -> nothing moves.
+  check('policy-donate-keep-blocks', r3.transferred === 0 && r3.kcal === 0 &&
+    (fg3.state.village.gives.scholar || 0) === 0, JSON.stringify(r3));
+  // 4. No donate verb -> no-op, never throws.
+  FD.resetFeastdriveStats();
+  const fg4 = { villagerId: 'scholar', state: { scholar: { day: 20, inventory: [] }, village: { gives: {} } } };
+  const r4 = FD.donateDownToKeep(fg4, {}, 1200);
+  check('policy-donate-no-verb', r4.transferred === 0 && r4.kcal === 0, JSON.stringify(r4));
+  // 5. Poisoned kill log cannot change the pure helpers (they never read it).
+  const poisoned = mk({ feastSurge: 1.5 }, { untilDay: 12 }, 10);
+  poisoned.state.waveKillLog = [{ by: 'scholar', w: 4, d: 1 }, { by: 'scholar', w: 4, d: 2 }];
+  check('policy-poisoned-log-inert', FD.armed(poisoned) === true && FD.buffLive(poisoned) === true,
+    'helpers read only scholar/prog state');
+})();
+
 // ---------- live leg: 53006 staged, 150d (structural only) ----------
 async function liveLegs() {
   const { loadGame, setupGame, runDays, quietLog } = require(path.join(REPO, 'scripts', 'sim-harness'));
@@ -243,6 +324,37 @@ async function liveLegs() {
     typeof lastRow.feasts === 'number' && typeof lastRow.grants === 'number' &&
     typeof lastRow.draws === 'number' && typeof lastRow.drivenOff === 'number',
     JSON.stringify({ ch: lastRow.channels, feasts: lastRow.feasts, grants: lastRow.grants, draws: lastRow.draws, off: lastRow.drivenOff }));
+
+  // ---------- live armed leg: 53006 feastdrive, 150d, via the driver ----------
+  // The drive must fire on the pair seed (donate-down days > 0 and at
+  // least one feast + one grant through either host) with zero
+  // instrument errors. The base eveningFeast hosts first whenever the
+  // gate is met, so the drive's own feast step is a backstop and its
+  // feastAttempts may be 0 — the instrument's feast/grant counts (not
+  // the step's) are the drive's effect. Writes only to /tmp — never
+  // into the repo.
+  const cp = require('child_process');
+  const tmpDir = '/tmp/feastdrive-proof-armed';
+  try { cp.execSync('rm -rf ' + tmpDir); } catch (e) {}
+  const env = Object.assign({}, process.env, { DAYS: '150', SEEDS: '53006', RUN: 'feastdrive-proof-armed', POLICY: 'feastdrive', OUTDIR: tmpDir });
+  try {
+    cp.execSync('node scripts/feastdrive-driver-20261107.js', { cwd: REPO, env: env, stdio: 'pipe', timeout: 600000 });
+  } catch (e) {
+    check('live-armed-53006-runs', false, 'driver failed: ' + String((e && e.stdout) || (e && e.message) || e).slice(0, 400));
+  }
+  try {
+    const armed = JSON.parse(require('fs').readFileSync(tmpDir + '/feastdrive-s53006-feastdrive-proof-armed.json', 'utf8'));
+    const aLast = (armed.daily || [])[(armed.daily || []).length - 1] || {};
+    const fds = armed.feastdriveStats || {};
+    check('live-armed-53006-runs', armed.days > 0 && (armed.daily || []).length >= 100 && (armed.instrumentErrors || []).length === 0,
+      'days=' + armed.days + ' snaps=' + (armed.daily || []).length + ' errs=' + JSON.stringify(armed.instrumentErrors));
+    check('live-armed-53006-drive-fires', (fds.donateDownDays | 0) >= 1 && (aLast.feasts | 0) >= 1 && (aLast.grants | 0) >= 1,
+      JSON.stringify({ donateDownDays: fds.donateDownDays, donatedKcal: fds.donatedKcal, feasts: aLast.feasts, grants: aLast.grants, feastAttempts: fds.feastAttempts, feastsHosted: fds.feastsHosted, skips: fds.feastSkips }));
+    check('live-armed-53006-determinism-guard', typeof aLast.spent === 'boolean' && typeof aLast.surgeResonance === 'number',
+      'spent=' + aLast.spent + ' resonance=' + aLast.surgeResonance);
+  } catch (e) {
+    check('live-armed-53006-reads', false, 'armed corpus unreadable: ' + String((e && e.message) || e).slice(0, 200));
+  }
 
   console.log(pass + '/' + (pass + fail) + ' PASS');
   process.exit(fail ? 1 : 0);

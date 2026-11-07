@@ -402,3 +402,12 @@ try { const xo = require('./policies/competent-homewardstep-outwardonly-b'); POL
 // column. Additive; zero behavior change to existing entries (the
 // variant stays default-OFF: nothing loads it unless named).
 try { const vb = require('./policies/competent-vetobudget-b'); POLICY_REGISTRY['competent-vetobudget-b'] = vb.vetobudget; } catch (e) {}
+// feastdrive-b instrument (sim-feastdrive-b, 2026-11-07, Loop B
+// winnability): the frozen staged policy + the feast drive (baseline
+// column) and the staged + feast-drive policy (armed column),
+// registered so the balanced panel (§15) can build both columns.
+// Additive; zero behavior change to existing entries (the variants
+// stay default-OFF: nothing loads them unless named). The staged file
+// itself is untouched — this only points the registry at it.
+try { const st = require('./policies/competent-stageally-a'); POLICY_REGISTRY['competent-stageally-a'] = st.stagedPolicy; } catch (e) {}
+try { const fd = require('./policies/competent-feastdrive-b'); POLICY_REGISTRY['competent-feastdrive-b'] = fd.feastdrive; } catch (e) {}
