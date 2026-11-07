@@ -171,3 +171,7 @@ Proof re-run green on the rebased tip: `test-armorcap-20261106.js` 42/42,
 Not a sim arm — no panel run. The re-baseline changes no game code, so no
 wall movement is expected or claimed: national / table / wins unchanged by
 this arm by construction.
+
+## Landing rebase record (Loop B adoption run fleshout-loop-b-20261107T0130Z)
+- Rebased 82e550626 -> master eabf00dba (Loop A grind-a landing); 5 commits replayed clean (rebase stop-at-pick quirk hit twice, recovered with verified-clean `git rebase --continue` per AGENTS.md).
+- Proofs re-run green on the rebased tip: test-armorcap-20261106.js 42/42, test-armor-cap-20261009.js 291/0.
