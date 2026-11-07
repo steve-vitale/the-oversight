@@ -1,9 +1,10 @@
 # Journey — Landing r112 (2026-11-07, Lane A leg 0)
 
 Run id `laneA-20261107T0359Z`, scheduled Fri 2026-11-06 21:45 CST, started ~04:00Z.
-Leg 0 LANDING. Branch `journey-landing`, base `0d3c46971` (master at run start;
-master moved once during the run — Loop B winnability-0230 `a2f482839` — the
-branch was rebased onto it before merging, proofs re-run).
+Leg 0 LANDING. Branch `journey-landing`, base `0d3c46971` (master at run start; master
+moved twice during the run — Loop B winnability-0230 `a2f482839`, then
+Loop B stageally-confirm2-b `85e26f498` — the branch was rebased onto
+each in turn, proofs re-run on the final tip).
 Rotation 0→1 written at run start, verified by read-back.
 
 ## Prereg (committed 5254a778c, before any seed ran)
@@ -505,22 +506,31 @@ gate; the zero-DMG "others-killed" fight shape is a watch (3/21 this panel).
 
 ## Closeout note
 
-- **Rebase:** clean, all picks applied, no sequencer stop. Rebased onto
-  master `a2f482839` (Loop B winnability-0230 landed after this run's
-  base). Proof re-run on the rebased tip: autopsy 14/14, practice 14/14.
-  Master verified stable at `a2f482839` immediately before the merge.
+- **Rebase:** clean, all picks applied, no sequencer stop on the second
+  rebase (the first rebase hit the documented stop-at-pick quirk once;
+  `git rebase --continue` sailed through). Master moved twice during the
+  run: first Loop B winnability-0230 (`a2f482839`), then Loop B
+  stageally-confirm2-b (`85e26f498`). The branch was rebased onto each in
+  turn; the final base is `85e26f498`. Proof re-run on the final tip:
+  autopsy 14/14, practice 14/14, r111 analyzer fixes 16/16, r106
+  starvation-class PASS. Master verified stable at `85e26f498`
+  immediately before the merge.
 - **Practice landing vs this panel (read carefully):** this panel IS the
   first landing measurement of the practice build (2b9b0371e in base).
   The panel's game-behavior verdicts (famine-free, solo hunts, engagement
   lines) are for base 0d3c46971 + the rebase's evidence-only Loop B
   commits; no panel number was re-scored after the rebase.
 - **Proof re-run on the rebased branch (all PASS):** autopsy fallback
-  14/14, practice 14/14. check.js --quick ran twice on the rebased tip:
-  281/9 then 283/7; the 7 named failures are pre-existing base-state
-  issues (stale measurement/phone proofs, mobile cadence, capable-bot
-  food deed, occupation panels, racks voice) — none touches a file this
-  branch changed; the analyzer-adjacent tests pass (r111 fixes 16/16,
-  r106 starvation-class PASS). Full run-2 log: /tmp/check-r112-quick.log.
+  14/14, practice 14/14. check.js --quick ran twice on the
+  `a2f482839`-based tip: 281/9 then 283/7; the 7 named failures are
+  pre-existing base-state issues (stale measurement/phone proofs, mobile
+  cadence, capable-bot food deed, occupation panels, racks voice) — none
+  touches a file this branch changed; the analyzer-adjacent tests pass
+  (r111 fixes 16/16, r106 starvation-class PASS). Full run-2 log:
+  /tmp/check-r112-quick.log. After the second rebase (onto `85e26f498`)
+  the four proof/adjacent suites were re-run green (14/14, 14/14, 16/16,
+  PASS); check.js --quick was not re-run a third time — the new base
+  adds only Loop B evidence/instrument commits, no src/js change.
 - **Telemetry:** 2 LOUD lines, both explained as aggregation artifacts,
   baseline NOT rolled.
 - **Index clobber struck on the prereg commit** (known class): committed
