@@ -200,3 +200,27 @@ table-talk — all Steve calls; (7) balance levers / flee-repair port /
 pellet-bearer — Steve calls.
 
 Claim deleted; lock deleted. **Merged locally, pending ship.**
+
+## Addendum — measurement-proof refresh (same run, after the landing)
+
+The merged branch carries a +8 additive registry entry in
+`scripts/sweep-compare.js` (pointing the panel at the new doorwalk
+policy) — flagged by the main session's adoption note as requiring a
+measurement-proof refresh at landing, and confirmed here:
+`scripts/godpath/test-measurement-proof-update.js` failed on merged
+master with "Proof source inputs are not current" (the manifest
+hashes `scripts/sweep-compare.js`). Regenerated a fresh real neutral
+panel on the landed master (`node scripts/balance-panel.js --out
+evidence/2026-11-07/neutral-doorwalk-20261107 --seeds 7 --policies
+capable,risk-aware,socialite,winseek --days 150` — the established
+4-case shape: seed 7, 4 policies, 150d; 4 rows, neutrality 4/4
+match, 0 warnings, sourcesStable, head 000b87010) and re-pinned the
+proof (`node scripts/balance-proof-update.js
+evidence/2026-11-07/neutral-doorwalk-20261107.json.gz`). Test set on
+the refreshed proof, all green: proof-update 9/9, workflow 9/9,
+scorecard 35/35, comparison 14/14, panel-contract 9/9. Committed
+a4b2210d6 (panel + `scripts/balance-proof.json`); the safe-commit
+index clobber hit both files and was repaired via HEAD-blob
+cacheinfo (hashes match, tree clean). The ship loop's 18:11 UTC push
+predates this landing, so the landing + refresh ride the next ship.
+
