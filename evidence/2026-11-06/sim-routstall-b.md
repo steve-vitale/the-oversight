@@ -392,3 +392,7 @@ in §6 is named for a build arm. The binding constraint stays the
 fight interior: this is the second 120-identical-failed-verb stall in
 the family (Strike #1821, Congregation #1825), and the failed-verb
 treatment in §6.1 is the single fix that closes both.
+
+## Landing rebase record (Loop B adoption run fleshout-loop-b-20261107T0130Z)
+- Rebased 82e550626 -> master 87fe58aa5 (incl. Loop B armorcap landing); 3 commits replayed clean, no quirk.
+- Proof re-run green on the rebased tip: test-routstall-20261106.js 24/24.
