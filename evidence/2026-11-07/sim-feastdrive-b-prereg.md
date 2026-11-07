@@ -158,6 +158,39 @@ metrics come from this arm's own driver corpora
 **Convergence state reported:** converging | converged | parked
 | killed-at-pilot, per axis scale-onramp.
 
+## Prereg v1.1 amendment (diag follow-up — committed before the probe)
+
+**Diag result (corpus `perseed-feastdrive-b-diag/`, base 2cf4d19f0):**
+baseline reproduces EXACTLY (median 114.5d, w4 kills 1/1/2/1/0/8/4/0,
+`feastSurgeUsed` false 7/8, 0 instrument errors). End feast gates
+under the v1 classifier: armed-no-feast 5, grant-no-draw 2, spent 1.
+**The frozen DIAG-GO bar is NOT met (5/8 < 6/8 on one link)** — the
+verdict is DIAG-NO-GO on the bar as written, recorded as such in
+the evidence file, not re-scored.
+
+**Classifier correction (diag-found, before any pilot sim):** the v1
+classifier counted grantFeastBuff CALLS as grants. On 53004/53006
+all 4+2 grants were REFUSED by the fusion reactor ("your reactor
+hums its steady note") — 0 granted, 0 draws — so the true first
+failure is the grant, not the draw. The instrument now records
+`granted` / `grantsRefused` per snapshot and classifies
+'grant-refused' (calls > 0, granted = 0) separately from
+'grant-no-draw' (granted > 0, draws = 0). Recomputed diag end gates:
+armed-no-feast 5, grant-refused 2, spent 1. The bar is still missed
+(5/8); the correction changes the explanation, not the verdict.
+
+**Dusk probe (same diag phase, no bar change):** the 5
+armed-no-feast seeds were armed from day ~15–25 with 42–116
+feasible-feast snapshot days and ZERO feasts hosted — the base
+policy's `eveningFeast` never fires. Its gates are dusk-time state
+the end-of-daily snapshot cannot see, so the probe
+(`scripts/feastdrive-duskprobe-20261107.js`) replays the FROZEN
+staged policy on those 5 seeds and records, at every dusk upkeep,
+at-haven / armed / plan / cumulative gives / reactor. It names
+WHICH gate blocks the feast; the drive is designed on its answer,
+not on a guess. The probe changes no threshold and re-scores
+nothing — the DIAG-NO-GO above stands whatever it finds.
+
 ## Proof (before any judged sim)
 
 `scripts/test-feastdrive-20261107.js`: instrument wrap/record
