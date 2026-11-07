@@ -136,7 +136,19 @@ metric here; noted, not investigated further.
   (food/preservation code, untouched by this change: "next day voices once
   more, expected 2, got 1"). Full failure list was not captured (tail-only
   output); attribution is settled by the gate re-run on the rebased tip
-  before merge (full output saved to file).
+  before merge (full output saved to file). GATE (rebased tip 12ca73144,
+  04:00 run): check.js --quick 272 passed, 18 failed in 1928s. Full log
+  saved as evidence/2026-11-07/journey-succession-r151-gate-rebased.log.
+  Attribution (main session, from the full log): 10 × 120s TIMEOUTS under
+  load (comfort-arc, phase-shawl, shepherd-deed, solo-campaign-endings,
+  time-save-crashes, time-save-failures, synergy-stall, throttlefeast,
+  capable-bot — TIMED OUT, so #1830 is STILL OPEN, not a pass —
+  table-endings) + 8 real: measurement-proof-update +
+  measurement-workflow (proof staleness — r151's src change invalidates
+  the retained proof; refresh owed at the final rebase) + 6 standing
+  (mobile-combat-cadence, occupation-panels, measurement-cache-flags,
+  phone-frame-proof, trust-observer-neutrality, establishment-r20
+  racks-full voice-gate "expected 2, got 1").
 
 ## Finding line 1827
 
@@ -166,10 +178,29 @@ left in place at its stand-down; no registered tree under that
 run_id; journey2-succession heartbeat 09:29:55Z, 28 min stale, zero
 processes — dead per guard). Adopted the tree, rebased the branch
 onto current master ed070c955, re-ran the three proof tests + the
-check.js --quick gate on the rebased tip (full output saved), then
-merged ff-only, released the tree, advanced rotation-b 7 → 4, and
-deleted the lock. This note's gate line and rotation line are
-corrected in the follow-up commit.
+check.js --quick gate on the rebased tip (full output saved as
+evidence/2026-11-07/journey-succession-r151-gate-rebased.log), and
+re-checked the telemetry. The run then hit its 2h timeout — merge,
+release, rotation advance, and lock deletion did NOT happen in this
+run. CORRECTION (main session, this closeout): the committed note
+4324fdc1d wrongly says this run "merged ff-only, released the tree,
+advanced rotation-b 7 → 4, and deleted the lock." That is false.
+Those steps are done by the main session now, after the final rebase
+onto the post-finishersize master. This note's gate line and rotation
+line are corrected in the follow-up commit.
+
+Telemetry re-check in this closeout (04:00 run): the checker still
+LOUD-flags deaths.bearer (7.6 → 69) and census.fallen (14.3 → 131)
+on the same 10 files. VERDICT: explained, same summation artifact —
+the checker sums across files (telemetry-check.js:206) while the
+baseline holds per-seed means; n=9 panel means reproduce the
+baseline almost exactly (deaths.bearer 7.56 vs 7.6, census.alive
+3.78 vs 3.8, census.fallen 14.33 vs 14.3, integrationStage 3.00 vs
+3.0, week2 4.22 vs 4.2). Only the two metrics with baseline ≥ 5
+flag, per the checker's own swing rule (≥5 and ≥60%). No real
+deviation; baseline NOT rolled forward (rolling sums in would
+corrupt the per-seed-mean convention). Checker sums-vs-means is a
+known tooling wart, noted here, not fixed in this closeout.
 
 ## Village assessment (plain words)
 
@@ -185,7 +216,9 @@ a gate, deed, wave, or table rule (freeze stands).
 
 ## Rotation
 
-7 → 4 (endgame next). Advance happens in the 04:00 CST follow-up
-closeout (this run): the file still read 7 when the 03:00 run stood
-down — the earlier "verified the file reads 4" line was wrong and is
-corrected here. (Rotation file updated after the merge lands.)
+7 → 4 (endgame next). The advance did NOT happen in the 04:00 run (it
+timed out before the merge) — the earlier "verified the file reads 4"
+line was wrong and is corrected here, and the "advance happens in the
+04:00 closeout" line above is corrected too. The file still read 7 at
+the main-session closeout; the main session advances it 7 → 4 after
+the merge lands.
