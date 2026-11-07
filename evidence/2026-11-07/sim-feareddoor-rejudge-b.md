@@ -258,3 +258,42 @@ read immediately before rebasing), re-run the proof on the
 rebased tip, and merge --ff-only. The ship loop owns all
 pushes. This worker does NOT merge, push, bump, or verify
 live.
+
+## Rebase (after the verdict — this run)
+
+Rebased onto then-current master, explicit SHA
+c88df9d255d93626011cbc81e16fffed0c346535 (read in the main
+tree immediately before rebasing, after `git fetch origin
+master` showed no movement; master tip: journey-establishment
+r111). All 6 picks applied clean, NO stop-at-pick quirk;
+the 3 doorwalk picks were skipped as previously applied
+(already on master via the doorwalk-confirm landing
+dbfcca9b3). New tip 1da54879d (before this addendum's
+commit). Own-files diff old tip cb07be357 → new tip: EMPTY
+— the corpus, preregs, evidence, and tooling are
+byte-identical across the rebase; the branch contribution
+vs master is exactly this arm's 39 files, 536,492
+insertions, 0 deletions. Re-judge proof re-run on the
+rebased tip: 31/31 green. Re-judge analyzer re-run on the
+rebased tip: GO (feared wins 5 vs 0, guard 12/12).
+Frozen proof re-run on the rebased tip:
+`scripts/test-feareddoor-b-20261107.js` 33/33 non-smoke
+checks green, exit 0 — the live smoke leg was SKIPPED
+(`FEAR_SMOKE_SEED` unset), so it neither passed nor
+failed here. The KNOWN smoke-leg failure stands as
+documented in the frozen evidence and the 1730Z round:
+with the smoke seed set to 53003 it fails `seatTaken` 0
+vs 1 on the collapsed frozen band 53001–53008. It was NOT
+re-pinned and NOT re-run to fix, per the brief.
+**Anchor note:** the per-seed `anchorCommit` values
+(808515cb5 baseline, b8bbf538e armed) now refer to the
+superseded pre-rebase picks; the corpus content is verified
+identical across the rebase (own-files diff empty above),
+so the anchors name the pre-rebase commits of identical
+content. **Measurement-proof note:** this branch modifies
+no existing file — no `src/js`, no `scripts/sweep-compare.js`
+(no registry entry, unlike the doorwalk-confirm landing),
+no collector/contract input — so no measurement-proof
+refresh is owed by this branch; the balance-proof manifest
+hashes nothing this branch changes. The coordinator can
+verify that at merge time.
