@@ -38891,6 +38891,29 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
         }
       } catch (e) {}
+      // BYPASS CAP (sim-bypass-b, 2026-11-06): scripted lethal hits — the
+      // Eulogy's narrated ending (9999), the Finale's title card
+      // ([150,200]) — are flagged opts.bypassDamage by their callers.
+      // No armor curve can touch a 9999 hit: the curve DOES apply
+      // (9999 -> 1214-6269 in the survivaltime corpus) but cannot matter
+      // at that magnitude, so the hit is capped AFTER all mitigation,
+      // before HP is removed, at half the target's max HP. A single
+      // scripted blow can take at most half your life: the scholar
+      // survives the ending at half health, and the doom still kills
+      // within two firings (it re-fires every monster turn), so the
+      // contradict/rewrite and feed-or-finish counterplay stays the
+      // point. Ordinary hits are never flagged and never capped here;
+      // the ledgers below record the capped number. Steve 2026-11-05:
+      // protection per tier must let a fighter survive that tier's
+      // fights — a hit that ignores all protection by magnitude is
+      // exactly that case.
+      if (opts && opts.bypassDamage && final > 0) {
+        const _cap = Math.max(1, Math.floor((t.maxHp || 100) / 2));
+        if (final > _cap) {
+          final = _cap;
+          this.say(`The blow stops at half your life — no single ending takes the whole of you. (${final})`);
+        }
+      }
       t.hp -= final;
       // SCAR TISSUE (ability-gaps 2026-10-14): once per fight, when the player
       // would drop below 25% HP, the scars remember and hold them at 25%.

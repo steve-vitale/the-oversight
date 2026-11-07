@@ -550,9 +550,9 @@
       try {
         if (game.maybeCheatDeath) {
           var cheated = game.maybeCheatDeath('p');
-          if (!cheated) game.tbDamage('p', 9999, 'the narrated ending', m.key || 'm0', { quiet: true });
+          if (!cheated) game.tbDamage('p', 9999, 'the narrated ending', m.key || 'm0', { quiet: true, bypassDamage: true });
           else say(game, '(But unkillable means unkillable — the story chokes on the exception.)');
-        } else game.tbDamage('p', 9999, 'the narrated ending', m.key || 'm0', { quiet: true });
+        } else game.tbDamage('p', 9999, 'the narrated ending', m.key || 'm0', { quiet: true, bypassDamage: true });
       } catch (e2) {}
       try { game.tbEndCheck(); } catch (e3) {}
       return true;
