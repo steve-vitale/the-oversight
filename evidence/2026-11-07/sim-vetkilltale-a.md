@@ -214,6 +214,37 @@ including the no-debate negative and first-tale-once guard. All hold.
   say counts agree on all 8 seeds); no state is ever at stake, only
   delivery order. Not a defect, noted for the record.
 
+## Measurement proof refresh (closeout, on the rebased tip)
+
+This arm changes `src/js/game.js`, one of the neutrality proof's
+tracked inputs, so the retained proof went stale on this branch by
+design (`test-measurement-proof-update.js` exit 1, "Proof source
+inputs are not current", both before and after the rebase onto
+b690777cc). Refreshed per the proofrefresh-a procedure (same spec:
+seed 7, policies capable/risk-aware/socialite/winseeker, 150d):
+
+```
+node scripts/balance-panel.js --out /tmp/neutral-vetkilltale-a \
+  --seeds 7 --policies capable,risk-aware,socialite,winseek --days 150
+cp /tmp/neutral-vetkilltale-a/panel.json.gz \
+   evidence/2026-11-07/neutral-vetkilltale-a.json.gz
+node scripts/balance-proof-update.js evidence/2026-11-07/neutral-vetkilltale-a.json.gz
+# → exit 0; panelDigest 6b2087972328265a06acfdb49875ca281fc0b1041ba48caf51d22f110b887817
+```
+
+Fresh panel: sourceHeadStart == sourceHeadEnd == `28e3fa5fb` (this
+branch's rebased tip), sourcesStable true, neutrality 4/4 match, 0
+warnings, 4 rows. `test-measurement-proof-update.js` → **9/9 green**.
+Observer-neutrality set: panel-contract-rulings 9/9,
+telemetry-check-recorder 8/8, fightopen-census 15/15,
+balance-scorecard 35/35, measurement-comparison 14/14. The `cases/`
+cache stayed in /tmp and was NOT committed. No proof hash was
+hand-edited — the pointer was rewritten only by
+`balance-proof-update.js` after it validated the real panel. Diff
+scope of the refresh commit: `scripts/balance-proof.json` +
+`evidence/2026-11-07/neutral-vetkilltale-a.json.gz` + this evidence
+file only.
+
 ## Findings for the backlog
 
 - (No new finding filed: this arm closes sim-findings.md line 1848.
@@ -245,10 +276,14 @@ including the no-debate negative and first-tale-once guard. All hold.
   runs standalone: 30/30. No src/js-adjacent green-list test touches
   this arm's files, and the tale-area tests (taletell-behavior 12/12,
   taletell-red exit 0, killbeat-20261019 19/19) pass on this tip.
-  NOTE: measurement-proof-update fails on this stale base because the
-  retained proof predates the sibling proof-refresh landing
-  (b690777cc); it is expected to clear after the rebase — re-run at
-  closeout and record the result here.
+  NOTE: measurement-proof-update failed on the pre-rebase base because
+  the retained proof predated the sibling proof-refresh landing
+  (b690777cc) — and it ALSO failed immediately after the clean rebase
+  onto b690777cc, because this arm's own src/js/game.js change is one
+  of the proof's tracked inputs, so the proof re-stales on any game
+  change by design. Per AGENTS.md it was refreshed on this tip (see
+  "Measurement proof refresh" below): the test is now 9/9 green and
+  the five observer-neutrality tests are all green.
 - Worktree contains only committed work at closeout; branch ready to
   merge. No push, no version bump, no live verification (coordinator
   owns the merge).
