@@ -184,6 +184,20 @@ game — that's the high-risk/high-reward contract.
 - Loot tie-in: contest prizes and monster loot share the alien-item pool
   (see monster loot economy work, 2026-10-05).
 
+## Alien players meddle here — see docs/ALIEN-PLAYERS.md
+
+The alien players (the human-impersonating contestants behind the
+death cause "a stranger") never fight IN a contest — no contest code
+builds an alien-player fighter. Their contest role is meddling:
+they rig outcomes (a favor-weighted lean) and, for the player only,
+the benevolent lifeline can turn a killing blow — in a contest or an
+arena loss — into a loss with the player barely alive. A villager's
+played death is never converted by a hidden roll. The full system —
+the eight-person roster, the wild and group fights, the name/reveal
+gate, the beam and armor-salvage loop — is docs/ALIEN-PLAYERS.md
+(2026-11-07, sim-alienplayer-canon-b); the fan-club side of the same
+favor lives in "Prizes — every lane" above.
+
 ## Release restoration: earned equipment (2026-10-18)
 
 The current candidate restores `reward-economy.json` and the primary branch's

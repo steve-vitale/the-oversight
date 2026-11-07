@@ -28,6 +28,7 @@ twice in one day (2026-10-09).
 | docs/MAP.md | one map: home board, beyond tiles, leg boards, macro map, region registry, way home | any map, travel, beyond-edge, leg-board, or way-home work |
 | docs/FANS.md | the audience gets faces: named alien fan personas with arcs | fans, audience, care packages, fan clubs, table testimony |
 | docs/ABILITY-REFUSALS.md | ability-action refusals (timing, button honesty, once-a-day day-roll) and pantry ledger accounting (closing, doors, span dedup, raid loot) | any ability refusal, button why, once-a-day gate, pantry number, ledger instrument |
+| docs/ALIEN-PLAYERS.md | alien players: the eight human-impersonating contestants, the stranger fights, the name/reveal gate, contest meddling | any alien player, "a stranger" death, stranger fight, reveal, beam/armor salvage |
 
 ## Standing rules that keep getting violated (read twice)
 
@@ -63,6 +64,15 @@ twice in one day (2026-10-09).
   taken at the Scattering day zero, not after week one; taken half's kids in
   stasis; the System never confirms the taken dead or alive; kids' return
   reserved for the good galactic table path.
+- 2026-11-07: docs/ALIEN-PLAYERS.md — the alien-player canon
+  (sim-alienplayer-canon-b), grounded only in src/js/alienPlayers.js,
+  src/js/encounters.js, src/data/alienPlayers.json, and the arena-b
+  evidence; closes the canon gap where the system lived only in
+  docs/ONTOLOGY.md. Corrects the roster count: eight personas in the
+  data, not the "twelve" the arena-b evidence asserted without a
+  source. Still-open items live in the doc's Open questions (roster
+  size, the overloaded word "stranger", contest opponents or
+  meddling-only), mirrored in docs/OPEN-QUESTIONS.md.
 - 2026-10-28: docs/ABILITY-REFUSALS.md — refusal + pantry-ledger canon
   (sim-refusalcanon-b), grounded only in the 2026-10-27/28 refusal and
   ledger evidence arms plus landed code; closes tracker blank 5
