@@ -30,10 +30,13 @@ function isBelowBreak(r) {
 // the contact finish actually fired (the old code's own gate: wave>=3,
 // instrument held, true contact). The baseline cannot see intent/HP, so
 // its committable count is the contact-fired count; the armed leg refines
-// it with fsNoCommitWhy.
+// it with fsNoCommitWhy. NOTE: an FS commit is counted by fsCommitMhp
+// (set at commit time), never by the end-of-fight kind — twoblow can take
+// a live FS commit over mid-fight (kind flips to 'two-blow'), and the
+// commit still fired.
 function isCommittable(r) {
   if (!isBelowBreak(r)) return false;
-  if (r.fsCommitKind) return true; // committed (either kind)
+  if (r.fsCommitMhp != null) return true; // FS commit fired (either kind at end)
   if (r.fsNoCommitWhy) return r.fsNoCommitWhy === 'above-tail';
   return !!r.contactFinishAttempted;
 }
@@ -52,10 +55,11 @@ function isAboveTail(r) {
 function fsFunnel(rows) {
   const list = (rows || []).filter(function (r) { return r && (r.wave | 0) >= 4; });
   const below = list.filter(isBelowBreak);
-  const committed = below.filter(function (r) { return r.fsCommitKind === 'met-below-break'; });
-  const twoblow = below.filter(function (r) { return r.committedFinish && r.fsCommitKind !== 'met-below-break'; });
+  const committed = below.filter(function (r) { return r.fsCommitMhp != null; });
+  const takeover = committed.filter(function (r) { return r.fsCommitKind === 'two-blow'; });
+  const twoblow = below.filter(function (r) { return r.committedFinish && r.fsCommitMhp == null; });
   const aboveTail = below.filter(isAboveTail);
-  const aboveTailCommitted = aboveTail.filter(function (r) { return !!r.fsCommitKind; });
+  const aboveTailCommitted = aboveTail.filter(function (r) { return r.fsCommitMhp != null; });
   const kills = below.filter(function (r) { return r.outcome === 'vKill'; });
   const committedKills = committed.filter(function (r) { return r.outcome === 'vKill'; });
   const lapsed = below.filter(function (r) { return r.fsLapsed; });
@@ -72,6 +76,7 @@ function fsFunnel(rows) {
     }),
     committable: below.filter(isCommittable).length,
     committedMetBelowBreak: committed.length,
+    committedTakeoverTwoBlow: takeover.length,
     committedTwoblow: twoblow.length,
     committedKills: committedKills.length,
     committedLapsed: lapsed.length,
@@ -132,6 +137,7 @@ if (require.main === module) {
         belowBreakKills: { baseline: b.fs.belowBreakKills, armed: a.fs.belowBreakKills, delta: a.fs.belowBreakKills - b.fs.belowBreakKills },
         committable: { baseline: b.fs.committable, armed: a.fs.committable },
         committedMetBelowBreak: { baseline: b.fs.committedMetBelowBreak, armed: a.fs.committedMetBelowBreak },
+        committedTakeoverTwoBlow: { baseline: b.fs.committedTakeoverTwoBlow, armed: a.fs.committedTakeoverTwoBlow },
         committedKills: { baseline: b.fs.committedKills, armed: a.fs.committedKills },
         committedLapsed: { baseline: b.fs.committedLapsed, armed: a.fs.committedLapsed },
         aboveTailMeetings: { baseline: b.fs.aboveTailMeetings, armed: a.fs.aboveTailMeetings },
