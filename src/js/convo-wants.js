@@ -755,7 +755,29 @@
         // gets their own words — never the dry line for their own suffering.
         if (favor && favor.whyLines && favor.whyLines.length)
           return this.convoPickCycle(vid, 'favor:why:' + (favor.kind || 'favor'), favor.whyLines);
-        if (favor) return favor.whyLine;
+        if (favor) {
+          // WHY BLOCKED (journey-succession r147): the single whyLine is
+          // ledger-blocked whenever the same kind was recently asked —
+          // another villager, or this villager's earlier sitting — and
+          // every engageBeat caller (dlg:details at any stage, dlg:help
+          // after a resume opener, dlg:comfort-completing, the
+          // conversation.js engage paths) would dry-line it. The r146
+          // guard covered only dlg:details at stage >= 2; the r146 panel
+          // dries (Omar/Ivy/David) and the r147 before-leg reproduction
+          // (Katarina d+30, water_haul, dlg:details at stage 0) all came
+          // through this unguarded return. Name the live need fresh
+          // instead; the want stays live. Only when that too is blocked
+          // does the whyLine go back to the caller, whose existing
+          // fallback answers. Same shape as r146's dlg:details guard,
+          // at the source so no caller can miss it.
+          const wl = favor.whyLine;
+          if (wl && typeof this.convoWouldBlock === 'function' && this.convoWouldBlock(vid, wl)) {
+            const need = (typeof this.convoFavorNeedLine === 'function')
+              ? this.convoFavorNeedLine(vid, favor, true) : null;
+            if (need && !this.convoWouldBlock(vid, need)) return need;
+          }
+          return wl;
+        }
         // DEFERRED OPENER (journey establishment 2026-10-12): the resume
         // opener can preempt the want's opener in startConvo — the want was
         // selected on a real need but its ask was never stated. Engaging the

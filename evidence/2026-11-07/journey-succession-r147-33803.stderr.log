@@ -1,0 +1,40 @@
+
+ORGANIC DEATH d32: Grayson -> Lillian, topTrust=[{"id":"Lorenzo","t":90},{"id":"Victor","t":90},{"id":"Paisley","t":77},{"id":"Stan","t":76}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=18 inheritedPlants=0 keptSkills=5 inheritedSkills=0 succTrustPre=88 succTrustPost=60
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","echo_location"] post=["beast_calm","echo_location"]
+DEATH d32 (organic (phase A)): Grayson -> Lillian | passed=true lin=true mo=true trust=60 vouchers=6
+  BURIAL d+4: corpse found=true respects=true bury=true
+  CONVO d+3 with Lorenzo (refused=false)
+  CONVO d+3 with Victor (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  BOND-CONVO d+3 with Paisley (depth=3 v=80 refused=false)
+  CONVO d+7 with Victor (refused=false)
+  CONVO d+7 with Lorenzo (refused=false)
+  CONVO d+14 with Victor (refused=false)
+  CONVO d+14 with Lorenzo (refused=false)
+  BOND-CONVO d+14 with Paisley (depth=3 v=80 refused=false)
+  NEWCOMER-PROBE d+22 with Quinton (arrived d+22, trust=33 refused=false)
+  CONVO d+30 with Stan (refused=false)
+  CONVO d+30 with Zoltan (refused=false)
+  CONVO d+45 with Gilberto (refused=false)
+  CONVO d+45 with Quinton (refused=false)
+
+FUNERAL: deathBeat=3 recover=1 vouch=1 (eligible=6) echo=0 organicBurial={"respects":false,"bury":false} halfRation=5
+
+MEAL-GATE: audited=50 violations=2 noMealDays=5 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+  VIOLATION d+41: Marcus trust=63 kcal=0 halfVoice=true
+  VIOLATION d+41: Omar trust=56 kcal=0 halfVoice=true
+SUCCESSOR-LIFE: dayAdv=51 signals={"levelUp":true,"systemVoice":43,"offerLines":46,"codexPlantsDelta":27,"codexSkillsDelta":14,"codexAbilitiesDelta":11,"xpDelta":-38,"any":true} pantry 50613->3167
+TRUST-DIALS: office 60->73 (+13, climb) | villageMean 66.4->49.4 (-17, fall) | ge60 6->3 | movers>=5: [{"id":"Zoltan","from":44,"to":80,"delta":36},{"id":"Omar","from":40,"to":57,"delta":17},{"id":"Abdul","from":52,"to":68,"delta":16},{"id":"Stan","from":76,"to":90,"delta":14}]
+DEED-LEDGER: calls=58 summary={"teachPlant":{"calls":25,"ok":25,"deltaSum":0,"deltaN":25,"positive":0,"meanDelta":0},"donateToPantry":{"calls":25,"ok":25,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"giveFood":{"calls":8,"ok":8,"deltaSum":30,"deltaN":8,"positive":8,"meanDelta":3.75}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=false(echoMentions=0 (convo=0, say=0)) m4=true m5=manual | endDay=83 alive=0 over=true
+anomalies: 0
+say dump -> evidence/2026-11-07/journey-succession-r147-33803.saydump.txt
+S-METRICS: s1=false s2=true s3=true s4=false s5=false dayAdv=51
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30) t2=true(deedCalls=58) trustVerdict={"readable":true,"officeMantle":60,"officeLast":73,"officeDelta":13,"officeClass":"climb","villageMantle":66.4,"villageLast":49.4,"villageDelta":-17,"villageClass":"fall","villageGe60Mantle":6,"villageGe60Last":3,"movers":[{"id":"Zoltan","from":44,"to":80,"delta":36},{"id":"Omar","from":40,"to":57,"delta":17},{"id":"Abdul","from":52,"to":68,"delta":16},{"id":"Stan","from":76,"to":90,"delta":14}]}
+E6/CALLCHECK: e6={"callMoves":28,"withCensus":28,"chainHandoffs":5,"trustMoves":23} callCheck={"dailyMoveDays":27,"callMoveDays":22,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=false(echoV2b=1 (v2=1, excludedLoot=0))
+E7/R47: e7={"trustMoves":23,"soloOffice":3,"soloOfficeDeltas":[2,1,2],"soloBearerDeltaExact":[2,1,2],"singleMoverBearer":0,"singleMoverOther":4,"eventClass":{"event-only":1,"deed-only":4,"both":17,"neither":1},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":0,"v2":1,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":8,"known":8,"unknown":0} e3={"dailyDays":51,"moves":27}
