@@ -169,7 +169,7 @@ async function collect(seed) {
   for (const id of ['hushwolf', 'bulldozer', 'belltoad']) {
     const fights = [];
     for (let i = 0; i < N_TANK; i++) {
-      const abs = runTank(id);
+      const abs = runTank(Game, id);
       fights.push({ nHits: abs.length, absorbs: abs,
         meanAbs: abs.length ? +(abs.reduce((a, b) => a + b, 0) / abs.length).toFixed(2) : null,
         maxAbs: abs.length ? Math.max(...abs) : 0 });
