@@ -52,13 +52,13 @@ const STATS = { raisesSeen: 0, raisesAnswered: 0, raisesLinked: 0, raisesCounter
   raisesSkippedNotReady: 0, raisesSkippedNoRaiser: 0, raisesSkippedNoVillage: 0,
   raisesSkippedLinked: 0, raisesTalkFailed: 0, raisesNotOffered: 0,
   firstRaiseTalkDay: null, firstRaiseAnswerDay: null,
-  errors: 0, events: [] };
+  errors: 0, events: [], raiseTalks: [] };
 function resetLinkraiseStats() {
   STATS.raisesSeen = 0; STATS.raisesAnswered = 0; STATS.raisesLinked = 0; STATS.raisesCountered = 0;
   STATS.raisesSkippedNotReady = 0; STATS.raisesSkippedNoRaiser = 0; STATS.raisesSkippedNoVillage = 0;
   STATS.raisesSkippedLinked = 0; STATS.raisesTalkFailed = 0; STATS.raisesNotOffered = 0;
   STATS.firstRaiseTalkDay = null; STATS.firstRaiseAnswerDay = null;
-  STATS.errors = 0; STATS.events = [];
+  STATS.errors = 0; STATS.events = []; STATS.raiseTalks = [];
 }
 function linkraiseStats() { return JSON.parse(JSON.stringify(STATS)); }
 
@@ -144,6 +144,20 @@ function linkRaiseDrive(Game, ctx) {
         STATS.errors += 1;
         event(day, 'raise-answer', r.villageId, 'error', { vid: r.vid, detSub: dj.sub });
       }
+      // R109: record the raise-answer talk (READ-ONLY — the transcript is
+      // the engine's own record; endConvo keeps it, and runConversation
+      // reads it the same way after endConvo). No RNG, no state mutation,
+      // and both legs share this file so before/after purity is preserved.
+      // The people check reads ALL raise talks from this record, not one
+      // probe. A record failure is never a run error.
+      try {
+        var _cg = null;
+        try { _cg = (typeof Game.convoGet === 'function') ? Game.convoGet(r.vid) : null; } catch (e) {}
+        var _tr = (_cg && Array.isArray(_cg.transcript)) ? _cg.transcript : [];
+        STATS.raiseTalks.push({ day: day, vid: r.vid, village: r.villageId, outcome: out,
+          lines: _tr.map(function (e) { return { who: (e && e.who) || '?', text: String((e && e.text) || '') }; }) });
+        if (STATS.raiseTalks.length > 40) STATS.raiseTalks.splice(0, STATS.raiseTalks.length - 40);
+      } catch (e) {}
     }
   } catch (e) { STATS.errors += 1; event(dayOf(Game), 'raise-drive', null, 'error', { message: String(e && e.message || e).slice(0, 80) }); }
 }
