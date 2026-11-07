@@ -713,7 +713,7 @@
           var dmg = roll(cardRange);
           try { game.audioEvent('fiTitleCard', {}); } catch (err) {}
           game.say('🎬 THE TITLE CARD FALLS. There is nowhere to be that it is not falling. (Unavoidable.)');
-          var landed = game.tbDamage('p', dmg, 'the falling title card', m.key, { undodgeable: true, sigW5NoMult: true, bypassDamage: true });
+          var landed = game.tbDamage('p', dmg, 'the falling title card', m.key, { undodgeable: true, sigW5NoMult: true });
           game.say('It lands for ' + landed + '.');
           // doom deaths flow through the single choke point — maybeCheatDeath
           // (phoenix_clause / second_wind) triggers normally. Never bypassed.

@@ -1,25 +1,27 @@
 // test-bypass-20261106.js — proof for the bypass-damage mitigation lever
 // (arm sim-bypass-b, run fleshout-loop-b-20261106T2300Z).
 //
-// The lever: scripted lethal hits (Eulogy narrated ending, Finale title
-// card) are flagged opts.bypassDamage by their callers and capped in
-// Game.tbDamage — after ALL mitigation, before HP is removed — at 50%
-// of the target's max HP. The proof demonstrates the OBSERVABLE effect,
-// not just green assertions:
+// VERDICT (2026-11-06 adoption run): NO-GO — KILLED. Primary median
+// rounds in lost wave-4 TB fights 10.5 < 12; the cap worked exactly as
+// designed and was still too small. The game code is REVERTED (game.js /
+// sigW4.js / sigW5.js byte-identical to master eabf00dba); this test now
+// proves the ABSENCE of the cap, so the measurement tooling stays green
+// and honest after the kill (ragerepress precedent: proof green
+// post-deletion). The analyzer-fixture and live-driver sections are
+// unchanged — they prove the tooling, not the lever:
 //   1. REAL tbDamage: a Eulogy-shaped doom hit (9999 requested, P=27,
-//      pierce 0.3) on a 100-HP scholar takes 50 HP, not ~2409 — the
-//      scholar survives the ending at half health. A second firing
-//      takes the other half: doom still kills within two firings.
+//      pierce 0.3) on a 100-HP scholar takes 2409 uncapped and kills
+//      outright — no half-life hold, no second firing to survive.
 //   2. The Finale-shaped card (175 requested, P=27, pierce 0.75) takes
-//      50, not 82; at godhood armor (P=138) it takes 26, under the cap,
-//      unchanged.
-//   3. The flag gates the cap: the SAME 9999 hit WITHOUT the flag takes
-//      2409. Ordinary hits (62 requested) take 16 with or without it.
-//   4. The cap is the TARGET's half-life: a maxHp-80 fighter caps at
-//      40; a naked scholar caps at 50 too (the cap is a property of
-//      the scripted hit, not of gear). Villager parity where present.
-//   5. Wiring: exactly two call sites flag bypassDamage (Eulogy doom,
-//      Finale card); the cap lives in tbDamage after mitigation.
+//      82, as the armor curve says; at godhood armor (P=138) it takes
+//      26, unchanged.
+//   3. The flag is a no-op: the SAME 9999 hit takes 2409 with or
+//      without opts.bypassDamage. Ordinary hits (62 requested) take 16
+//      with or without it.
+//   4. No half-life anywhere: a maxHp-80 fighter takes 2409; a naked
+//      scholar takes 2409. Villager parity where present.
+//   5. Wiring: zero bypassDamage occurrences anywhere in src/js/ — no
+//      cap in tbDamage, no flag at the Eulogy doom or the Finale card.
 //   6. Analyzer fixtures: legs group by run.run (not policy — the
 //      survivaltime analyzer merged both legs); the pyrrhic match is
 //      the midnightkill ±1-day join with a same-beast guard.
@@ -71,29 +73,30 @@ function uncappedApplied(P, hit, pierce) {
     return Game.tbDamage('p', hit, 'test-doom', m ? m.key : null, opts);
   }
 
-  // ---------- 1. The Eulogy-shaped doom hit ----------
+  // ---------- 1. The Eulogy-shaped doom hit (KILLED: no cap) ----------
   const doomUncapped = uncappedApplied(27, 9999, 0.3);
   check('doom-uncapped-control-is-2409', doomUncapped === 2409, 'control ' + doomUncapped);
   const doomTaken = capHit(27, 9999, 0.3, 100, 100, true);
-  check('live-doom-hit-takes-50', doomTaken === 50, 'took ' + doomTaken);
-  check('live-doom-scholar-survives-at-half', p.hp === 50, 'hp=' + p.hp);
-  // A second firing takes the other half: doom still kills within two firings.
+  check('live-doom-hit-takes-2409', doomTaken === 2409, 'took ' + doomTaken);
+  check('live-doom-scholar-dies-outright', p.hp <= 0, 'hp=' + p.hp);
+  // A second firing takes the same uncapped 2409: there is no half-life
+  // hold left to survive on.
   const doomTaken2 = capHit(27, 9999, 0.3, 50, 100, true);
-  check('live-doom-second-firing-takes-50', doomTaken2 === 50, 'took ' + doomTaken2);
-  check('live-doom-second-firing-kills', p.hp === 0, 'hp=' + p.hp);
+  check('live-doom-second-firing-takes-2409', doomTaken2 === 2409, 'took ' + doomTaken2);
+  check('live-doom-second-firing-kills', p.hp <= 0, 'hp=' + p.hp);
 
-  // ---------- 2. The Finale-shaped title card ----------
+  // ---------- 2. The Finale-shaped title card (KILLED: no cap) ----------
   const cardUncapped = uncappedApplied(27, 175, 0.75);
   check('card-uncapped-control-is-82', cardUncapped === 82, 'control ' + cardUncapped);
   const cardTaken = capHit(27, 175, 0.75, 100, 100, true);
-  check('live-card-takes-50', cardTaken === 50, 'took ' + cardTaken);
-  // Godhood armor: the card lands under the cap, unchanged.
+  check('live-card-takes-82', cardTaken === 82, 'took ' + cardTaken);
+  // Godhood armor: the card lands under the old cap value, unchanged.
   const cardGodUncapped = uncappedApplied(138, 175, 0.75);
   check('card-godhood-control-is-26', cardGodUncapped === 26, 'control ' + cardGodUncapped);
   const cardGodTaken = capHit(138, 175, 0.75, 100, 100, true);
   check('live-card-godhood-takes-26-unchanged', cardGodTaken === 26, 'took ' + cardGodTaken);
 
-  // ---------- 3. The flag gates the cap ----------
+  // ---------- 3. The flag is a no-op (KILLED: nothing gates anything) ----------
   const doomUnflagged = capHit(27, 9999, 0.3, 5000, 5000, false);
   check('live-unflagged-doom-takes-2409', doomUnflagged === 2409, 'took ' + doomUnflagged);
   const ordinary = capHit(27, 62, 0.35, 100, 100, false);
@@ -101,11 +104,11 @@ function uncappedApplied(P, hit, pierce) {
   const ordinaryFlagged = capHit(27, 62, 0.35, 100, 100, true);
   check('live-ordinary-flagged-still-16', ordinaryFlagged === 16, 'took ' + ordinaryFlagged);
 
-  // ---------- 4. The cap is the target's half-life; naked caps too ----------
+  // ---------- 4. No half-life anywhere; naked dies too (KILLED) ----------
   const smallTaken = capHit(27, 9999, 0.3, 80, 80, true);
-  check('live-maxhp-80-caps-at-40', smallTaken === 40, 'took ' + smallTaken);
+  check('live-maxhp-80-doom-takes-2409', smallTaken === 2409, 'took ' + smallTaken);
   const nakedTaken = capHit(0, 9999, 0.3, 100, 100, true);
-  check('live-naked-doom-caps-at-50', nakedTaken === 50, 'took ' + nakedTaken);
+  check('live-naked-doom-takes-9999', nakedTaken === 9999, 'took ' + nakedTaken);
   check('live-chip-1-lands', capHit(27, 1, 0.3, 100, 100, true) === 1);
   const v = Game.tbfight.fighters.find(x => x.kind === 'villager');
   if (v) {
@@ -113,34 +116,34 @@ function uncappedApplied(P, hit, pierce) {
     try { if (m && m.mdef) m.mdef.pierce = 0.3; } catch (e) {}
     const vTaken = Game.tbDamage(v.key, 9999, 'test-doom', m ? m.key : null,
       { undodgeable: true, quiet: true, bypassDamage: true });
-    check('live-villager-maxhp-80-caps-at-40', vTaken === 40, 'took ' + vTaken);
+    check('live-villager-maxhp-80-doom-takes-2409', vTaken === 2409, 'took ' + vTaken);
   } else {
-    console.log('(no villager fighter in test fight — villager cap covered by the maxHp-80 player leg + wiring check)');
+    console.log('(no villager fighter in test fight — villager doom covered by the maxHp-80 player leg + wiring check)');
   }
   Game.say = osay;
 
-  // ---------- 5. Wiring: exactly two flagged call sites ----------
+  // ---------- 5. Wiring: zero bypassDamage anywhere (KILLED) ----------
   const gameSrc = fs.readFileSync(path.join(REPO, 'src', 'js', 'game.js'), 'utf8');
   const sigW4Src = fs.readFileSync(path.join(REPO, 'src', 'js', 'sigW4.js'), 'utf8');
   const sigW5Src = fs.readFileSync(path.join(REPO, 'src', 'js', 'sigW5.js'), 'utf8');
-  check('wire-cap-in-tbdamage', /opts\.bypassDamage/.test(gameSrc));
-  check('wire-cap-is-half-maxhp', /Math\.floor\(\(t\.maxHp \|\| 100\) \/ 2\)/.test(gameSrc));
-  check('wire-eulogy-flagged', /the narrated ending', m\.key \|\| 'm0', \{ quiet: true, bypassDamage: true \}/.test(sigW4Src));
-  check('wire-finale-flagged', /the falling title card', m\.key, \{ undodgeable: true, sigW5NoMult: true, bypassDamage: true \}/.test(sigW5Src));
-  // Three occurrences of the flag across two scripted hits: the Eulogy
-  // doom carries it in BOTH branches of its maybeCheatDeath if/else
-  // (only one fires per execution), the Finale card once.
+  check('wire-no-cap-in-tbdamage', !/opts\.bypassDamage/.test(gameSrc));
+  check('wire-no-half-maxhp-cap', !/Math\.floor\(\(t\.maxHp \|\| 100\) \/ 2\)/.test(gameSrc));
+  check('wire-eulogy-unflagged', !/bypassDamage/.test(sigW4Src));
+  check('wire-finale-unflagged', !/bypassDamage/.test(sigW5Src));
+  // Zero occurrences of the flag across the scripted-hit files: the
+  // Eulogy doom carried it in BOTH branches of its maybeCheatDeath
+  // if/else, the Finale card once — all three are gone.
   let flaggedW4 = (sigW4Src.match(/bypassDamage: true/g) || []).length;
   let flaggedW5 = (sigW5Src.match(/bypassDamage: true/g) || []).length;
-  check('wire-eulogy-both-branches-flagged', flaggedW4 === 2, 'sites=' + flaggedW4);
-  check('wire-finale-once-flagged', flaggedW5 === 1, 'sites=' + flaggedW5);
+  check('wire-eulogy-zero-flagged', flaggedW4 === 0, 'sites=' + flaggedW4);
+  check('wire-finale-zero-flagged', flaggedW5 === 0, 'sites=' + flaggedW5);
   let flaggedSites = 0;
   ['game.js', 'sigW4.js', 'sigW5.js', 'finale-campaign.js'].forEach(function (f) {
     const s = fs.readFileSync(path.join(REPO, 'src', 'js', f), 'utf8');
     flaggedSites += (s.match(/bypassDamage: true/g) || []).length;
   });
-  check('wire-three-flagged-occurrences-total', flaggedSites === 3, 'sites=' + flaggedSites);
-  check('wire-no-other-bypass-flag', !/bypassDamage/.test(fs.readFileSync(path.join(REPO, 'src', 'js', 'fieldFights.js'), 'utf8')));
+  check('wire-zero-flagged-occurrences-total', flaggedSites === 0, 'sites=' + flaggedSites);
+  check('wire-no-bypass-flag-anywhere-in-src', !/bypassDamage/.test(fs.readFileSync(path.join(REPO, 'src', 'js', 'fieldFights.js'), 'utf8')));
 
   // ---------- 6. Analyzer fixtures: leg split + ±1-day join ----------
   function trace(opts) {
