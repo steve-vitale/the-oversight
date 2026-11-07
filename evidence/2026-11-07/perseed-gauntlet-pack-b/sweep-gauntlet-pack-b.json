@@ -1,0 +1,1435 @@
+{
+  "seed": 51004,
+  "arm": "gauntlet-pack-b",
+  "run": "sweep",
+  "anchorCommit": "ca126298ea29",
+  "chains": 16,
+  "unlockedWave": 4,
+  "poolSizeAtWave4": 58,
+  "fixture": "unlock gate bypassed in-test only (Game.unlockedWave -> 4 on the test-process object; live pool asserted 58 incl reunion, excl herald); draw/spawn/chain/fights are real code; staged scholar fresh 100HP no gear, partyN 4 (scholar + 3 allies)",
+  "chainsData": [
+    {
+      "chain": 0,
+      "waves": [
+        "eulogy",
+        "sunbasker",
+        "living_wire"
+      ],
+      "partyN": 5,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "eulogy",
+          "packAtStart": {
+            "eulogy": 1
+          },
+          "scholarHpAtStart": 1,
+          "partyN": 5,
+          "outcome": "died",
+          "steps": 5,
+          "scholarHpAtEnd": -0.38,
+          "monstersAtEnd": [
+            {
+              "id": "eulogy",
+              "hpFrac": 0.888,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 4
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_75b5art",
+          "causeArg": "the arena",
+          "waveIdx": 0,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "eulogy",
+          "wave": 4,
+          "hp": [
+            900,
+            1100
+          ]
+        },
+        {
+          "id": "sunbasker",
+          "wave": 1,
+          "hp": [
+            45,
+            60
+          ]
+        },
+        {
+          "id": "living_wire",
+          "wave": 1,
+          "hp": [
+            60,
+            80
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 1,
+      "waves": [
+        "gavel",
+        "murkcap",
+        "eater"
+      ],
+      "partyN": 5,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "gavel",
+          "packAtStart": {
+            "gavel": 1
+          },
+          "scholarHpAtStart": 1,
+          "partyN": 5,
+          "outcome": "died",
+          "steps": 8,
+          "scholarHpAtEnd": -0.31,
+          "monstersAtEnd": [
+            {
+              "id": "gavel",
+              "hpFrac": 0.64,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 7
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_l715xox",
+          "causeArg": "the arena",
+          "waveIdx": 0,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "gavel",
+          "wave": 3,
+          "hp": [
+            300,
+            360
+          ]
+        },
+        {
+          "id": "murkcap",
+          "wave": 1,
+          "hp": [
+            60,
+            80
+          ]
+        },
+        {
+          "id": "eater",
+          "wave": 4,
+          "hp": [
+            950,
+            1150
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 2,
+      "waves": [
+        "focus_group",
+        "strike",
+        "strike"
+      ],
+      "partyN": 5,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "focus_group",
+          "packAtStart": {
+            "focus_group": 1
+          },
+          "scholarHpAtStart": 1,
+          "partyN": 5,
+          "outcome": "died",
+          "steps": 5,
+          "scholarHpAtEnd": -0.2,
+          "monstersAtEnd": [
+            {
+              "id": "focus_group",
+              "hpFrac": 0.527,
+              "alive": true
+            },
+            {
+              "id": "focus_group_eye",
+              "hpFrac": 1,
+              "alive": true
+            },
+            {
+              "id": "focus_group_eye",
+              "hpFrac": 1,
+              "alive": true
+            },
+            {
+              "id": "focus_group_eye",
+              "hpFrac": -3,
+              "alive": false
+            },
+            {
+              "id": "focus_group_eye",
+              "hpFrac": 1,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 4
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_wck5efj",
+          "causeArg": "the arena",
+          "waveIdx": 0,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "focus_group",
+          "wave": 3,
+          "hp": [
+            240,
+            300
+          ]
+        },
+        {
+          "id": "strike",
+          "wave": 4,
+          "hp": [
+            1000,
+            1200
+          ]
+        },
+        {
+          "id": "strike",
+          "wave": 4,
+          "hp": [
+            1000,
+            1200
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 3,
+      "waves": [
+        "alien_tick",
+        "rut_king",
+        "spool"
+      ],
+      "partyN": 5,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "alien_tick",
+          "packAtStart": {
+            "alien_tick": 1
+          },
+          "scholarHpAtStart": 1,
+          "partyN": 5,
+          "outcome": "chained",
+          "steps": 3,
+          "scholarHpAtEnd": 0.92,
+          "monstersAtEnd": [
+            {
+              "id": "alien_tick",
+              "hpFrac": -0.269,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 2
+        },
+        {
+          "waveIdx": 1,
+          "mid": "rut_king",
+          "packAtStart": {
+            "rut_king": 1
+          },
+          "scholarHpAtStart": 0.92,
+          "partyN": 5,
+          "outcome": "chained",
+          "steps": 3,
+          "scholarHpAtEnd": 0.76,
+          "monstersAtEnd": [
+            {
+              "id": "rut_king",
+              "hpFrac": -0.014,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 3
+        },
+        {
+          "waveIdx": 2,
+          "mid": "spool",
+          "packAtStart": {
+            "spool": 1
+          },
+          "scholarHpAtStart": 0.76,
+          "partyN": 5,
+          "outcome": "ended",
+          "steps": 12,
+          "scholarHpAtEnd": 0.17,
+          "monstersAtEnd": [
+            {
+              "id": "spool",
+              "hpFrac": -0.024,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 11
+        }
+      ],
+      "outcome": "won",
+      "deaths": [],
+      "waveDefs": [
+        {
+          "id": "alien_tick",
+          "wave": 2,
+          "hp": [
+            45,
+            60
+          ]
+        },
+        {
+          "id": "rut_king",
+          "wave": 1,
+          "hp": [
+            65,
+            85
+          ]
+        },
+        {
+          "id": "spool",
+          "wave": 3,
+          "hp": [
+            280,
+            340
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 4,
+      "waves": [
+        "spool",
+        "statickite",
+        "sunbasker"
+      ],
+      "partyN": 5,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "spool",
+          "packAtStart": {
+            "spool": 1
+          },
+          "scholarHpAtStart": 1,
+          "partyN": 5,
+          "outcome": "chained",
+          "steps": 11,
+          "scholarHpAtEnd": 0.73,
+          "monstersAtEnd": [
+            {
+              "id": "spool",
+              "hpFrac": -0.006,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 10
+        },
+        {
+          "waveIdx": 1,
+          "mid": "statickite",
+          "packAtStart": {
+            "statickite": 1
+          },
+          "scholarHpAtStart": 0.73,
+          "partyN": 5,
+          "outcome": "chained",
+          "steps": 5,
+          "scholarHpAtEnd": 0.66,
+          "monstersAtEnd": [
+            {
+              "id": "statickite",
+              "hpFrac": -0.011,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 4
+        },
+        {
+          "waveIdx": 2,
+          "mid": "sunbasker",
+          "packAtStart": {
+            "sunbasker": 1
+          },
+          "scholarHpAtStart": 0.78,
+          "partyN": 5,
+          "outcome": "ended",
+          "steps": 3,
+          "scholarHpAtEnd": 0.78,
+          "monstersAtEnd": [
+            {
+              "id": "sunbasker",
+              "hpFrac": -0.083,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 2
+        }
+      ],
+      "outcome": "won",
+      "deaths": [],
+      "waveDefs": [
+        {
+          "id": "spool",
+          "wave": 3,
+          "hp": [
+            280,
+            340
+          ]
+        },
+        {
+          "id": "statickite",
+          "wave": 2,
+          "hp": [
+            80,
+            100
+          ]
+        },
+        {
+          "id": "sunbasker",
+          "wave": 1,
+          "hp": [
+            45,
+            60
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 5,
+      "waves": [
+        "belltoad",
+        "anaconda_empress",
+        "drumbelly_tanuki"
+      ],
+      "partyN": 5,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "belltoad",
+          "packAtStart": {
+            "belltoad": 1
+          },
+          "scholarHpAtStart": 1,
+          "partyN": 5,
+          "outcome": "chained",
+          "steps": 7,
+          "scholarHpAtEnd": 1,
+          "monstersAtEnd": [
+            {
+              "id": "belltoad",
+              "hpFrac": -0.055,
+              "alive": false
+            },
+            {
+              "id": "belltoad",
+              "hpFrac": -0.043,
+              "alive": false
+            },
+            {
+              "id": "belltoad",
+              "hpFrac": -0.018,
+              "alive": false
+            },
+            {
+              "id": "belltoad",
+              "hpFrac": 0,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 7
+        },
+        {
+          "waveIdx": 1,
+          "mid": "anaconda_empress",
+          "packAtStart": {
+            "anaconda_empress": 1
+          },
+          "scholarHpAtStart": 1,
+          "partyN": 5,
+          "outcome": "chained",
+          "steps": 5,
+          "scholarHpAtEnd": 0.67,
+          "monstersAtEnd": [
+            {
+              "id": "anaconda_empress",
+              "hpFrac": -0.043,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 4
+        },
+        {
+          "waveIdx": 2,
+          "mid": "drumbelly_tanuki",
+          "packAtStart": {
+            "drumbelly_tanuki": 1
+          },
+          "scholarHpAtStart": 0.67,
+          "partyN": 5,
+          "outcome": "ended",
+          "steps": 3,
+          "scholarHpAtEnd": 0.79,
+          "monstersAtEnd": [
+            {
+              "id": "drumbelly_tanuki",
+              "hpFrac": -0.174,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 2
+        }
+      ],
+      "outcome": "won",
+      "deaths": [],
+      "waveDefs": [
+        {
+          "id": "belltoad",
+          "wave": 1,
+          "hp": [
+            45,
+            60
+          ]
+        },
+        {
+          "id": "anaconda_empress",
+          "wave": 1,
+          "hp": [
+            90,
+            120
+          ]
+        },
+        {
+          "id": "drumbelly_tanuki",
+          "wave": 1,
+          "hp": [
+            45,
+            60
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 6,
+      "waves": [
+        "alien_tick",
+        "focus_group",
+        "focus_group"
+      ],
+      "partyN": 5,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "alien_tick",
+          "packAtStart": {
+            "alien_tick": 1
+          },
+          "scholarHpAtStart": 1,
+          "partyN": 5,
+          "outcome": "chained",
+          "steps": 3,
+          "scholarHpAtEnd": 0.87,
+          "monstersAtEnd": [
+            {
+              "id": "alien_tick",
+              "hpFrac": -0.2,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 2
+        },
+        {
+          "waveIdx": 1,
+          "mid": "focus_group",
+          "packAtStart": {
+            "focus_group": 1
+          },
+          "scholarHpAtStart": 0.87,
+          "partyN": 5,
+          "outcome": "died",
+          "steps": 5,
+          "scholarHpAtEnd": -0.1,
+          "monstersAtEnd": [
+            {
+              "id": "focus_group",
+              "hpFrac": 0.471,
+              "alive": true
+            },
+            {
+              "id": "focus_group_eye",
+              "hpFrac": 1,
+              "alive": true
+            },
+            {
+              "id": "focus_group_eye",
+              "hpFrac": 1,
+              "alive": true
+            },
+            {
+              "id": "focus_group_eye",
+              "hpFrac": 1,
+              "alive": true
+            },
+            {
+              "id": "focus_group_eye",
+              "hpFrac": -4,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 4
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_e0nat97",
+          "causeArg": "the arena",
+          "waveIdx": 1,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "alien_tick",
+          "wave": 2,
+          "hp": [
+            45,
+            60
+          ]
+        },
+        {
+          "id": "focus_group",
+          "wave": 3,
+          "hp": [
+            240,
+            300
+          ]
+        },
+        {
+          "id": "focus_group",
+          "wave": 3,
+          "hp": [
+            240,
+            300
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 7,
+      "waves": [
+        "redactor",
+        "ducks_in_a_row",
+        "paparazzo"
+      ],
+      "partyN": 5,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "redactor",
+          "packAtStart": {
+            "redactor": 1
+          },
+          "scholarHpAtStart": 1,
+          "partyN": 5,
+          "outcome": "died",
+          "steps": 6,
+          "scholarHpAtEnd": -0.19,
+          "monstersAtEnd": [
+            {
+              "id": "redactor",
+              "hpFrac": 0.564,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 5
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_p3ro5ns",
+          "causeArg": "the arena",
+          "waveIdx": 0,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "redactor",
+          "wave": 3,
+          "hp": [
+            260,
+            320
+          ]
+        },
+        {
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "hp": [
+            12,
+            18
+          ]
+        },
+        {
+          "id": "paparazzo",
+          "wave": 2,
+          "hp": [
+            70,
+            90
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 8,
+      "waves": [
+        "heckler",
+        "reunion",
+        "union_rep"
+      ],
+      "partyN": 5,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "heckler",
+          "packAtStart": {
+            "heckler": 3
+          },
+          "scholarHpAtStart": 1,
+          "partyN": 5,
+          "outcome": "chained",
+          "steps": 10,
+          "scholarHpAtEnd": 0.34,
+          "monstersAtEnd": [
+            {
+              "id": "heckler",
+              "hpFrac": -0.054,
+              "alive": false
+            },
+            {
+              "id": "heckler",
+              "hpFrac": -0.031,
+              "alive": false
+            },
+            {
+              "id": "heckler",
+              "hpFrac": -0.035,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 10
+        },
+        {
+          "waveIdx": 1,
+          "mid": "reunion",
+          "packAtStart": {
+            "reunion": 3
+          },
+          "scholarHpAtStart": 0.46,
+          "partyN": 5,
+          "outcome": "died",
+          "steps": 3,
+          "scholarHpAtEnd": -0.04,
+          "monstersAtEnd": [
+            {
+              "id": "reunion",
+              "hpFrac": 0.984,
+              "alive": true
+            },
+            {
+              "id": "reunion",
+              "hpFrac": 0.979,
+              "alive": true
+            },
+            {
+              "id": "reunion",
+              "hpFrac": 1,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 2
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_wkhi57i",
+          "causeArg": "the arena",
+          "waveIdx": 1,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "heckler",
+          "wave": 2,
+          "hp": [
+            85,
+            100
+          ]
+        },
+        {
+          "id": "reunion",
+          "wave": 4,
+          "hp": [
+            1200,
+            1400
+          ]
+        },
+        {
+          "id": "union_rep",
+          "wave": 2,
+          "hp": [
+            80,
+            105
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 9,
+      "waves": [
+        "lockpick_raccoon",
+        "mirror_stag",
+        "sweeps_week"
+      ],
+      "partyN": 5,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "lockpick_raccoon",
+          "packAtStart": {
+            "lockpick_raccoon": 1
+          },
+          "scholarHpAtStart": 1,
+          "partyN": 5,
+          "outcome": "ended",
+          "steps": 2,
+          "scholarHpAtEnd": 1,
+          "monstersAtEnd": [
+            {
+              "id": "lockpick_raccoon",
+              "hpFrac": 0.178,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "routed",
+          "rowOutcome": "routed",
+          "rowRounds": 2
+        }
+      ],
+      "outcome": "other:[\"ended\"]",
+      "deaths": [],
+      "waveDefs": [
+        {
+          "id": "lockpick_raccoon",
+          "wave": 1,
+          "hp": [
+            40,
+            55
+          ]
+        },
+        {
+          "id": "mirror_stag",
+          "wave": 2,
+          "hp": [
+            110,
+            140
+          ]
+        },
+        {
+          "id": "sweeps_week",
+          "wave": 1,
+          "hp": [
+            80,
+            100
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 10,
+      "waves": [
+        "living_wire",
+        "hushwolf",
+        "bulldozer"
+      ],
+      "partyN": 5,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "living_wire",
+          "packAtStart": {
+            "living_wire": 1
+          },
+          "scholarHpAtStart": 1,
+          "partyN": 5,
+          "outcome": "chained",
+          "steps": 3,
+          "scholarHpAtEnd": 1,
+          "monstersAtEnd": [
+            {
+              "id": "living_wire",
+              "hpFrac": -0.045,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 2
+        },
+        {
+          "waveIdx": 1,
+          "mid": "hushwolf",
+          "packAtStart": {
+            "hushwolf": 4
+          },
+          "scholarHpAtStart": 1,
+          "partyN": 5,
+          "outcome": "ended",
+          "steps": 7,
+          "scholarHpAtEnd": 0.55,
+          "monstersAtEnd": [
+            {
+              "id": "hushwolf",
+              "hpFrac": -0.019,
+              "alive": false
+            },
+            {
+              "id": "hushwolf",
+              "hpFrac": 0.283,
+              "alive": true
+            },
+            {
+              "id": "hushwolf",
+              "hpFrac": 0.492,
+              "alive": true
+            },
+            {
+              "id": "hushwolf",
+              "hpFrac": 0.889,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "routed",
+          "rowOutcome": "routed",
+          "rowRounds": 6
+        }
+      ],
+      "outcome": "other:[\"chained\",\"ended\"]",
+      "deaths": [],
+      "waveDefs": [
+        {
+          "id": "living_wire",
+          "wave": 1,
+          "hp": [
+            60,
+            80
+          ]
+        },
+        {
+          "id": "hushwolf",
+          "wave": 1,
+          "hp": [
+            50,
+            65
+          ]
+        },
+        {
+          "id": "bulldozer",
+          "wave": 1,
+          "hp": [
+            70,
+            90
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 11,
+      "waves": [
+        "callback",
+        "hushwolf",
+        "gavel"
+      ],
+      "partyN": 5,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "callback",
+          "packAtStart": {
+            "callback": 1
+          },
+          "scholarHpAtStart": 1,
+          "partyN": 5,
+          "outcome": "died",
+          "steps": 8,
+          "scholarHpAtEnd": -0.18,
+          "monstersAtEnd": [
+            {
+              "id": "callback",
+              "hpFrac": 0.203,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 7
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_ntnpy00",
+          "causeArg": "the arena",
+          "waveIdx": 0,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "callback",
+          "wave": 3,
+          "hp": [
+            260,
+            320
+          ]
+        },
+        {
+          "id": "hushwolf",
+          "wave": 1,
+          "hp": [
+            50,
+            65
+          ]
+        },
+        {
+          "id": "gavel",
+          "wave": 3,
+          "hp": [
+            300,
+            360
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 12,
+      "waves": [
+        "audit",
+        "heckler",
+        "heckler"
+      ],
+      "partyN": 5,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "audit",
+          "packAtStart": {
+            "audit": 1
+          },
+          "scholarHpAtStart": 1,
+          "partyN": 5,
+          "outcome": "died",
+          "steps": 5,
+          "scholarHpAtEnd": -0.19,
+          "monstersAtEnd": [
+            {
+              "id": "audit",
+              "hpFrac": 0.943,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 4
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_a6lwyid",
+          "causeArg": "the arena",
+          "waveIdx": 0,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "audit",
+          "wave": 4,
+          "hp": [
+            1100,
+            1300
+          ]
+        },
+        {
+          "id": "heckler",
+          "wave": 2,
+          "hp": [
+            85,
+            100
+          ]
+        },
+        {
+          "id": "heckler",
+          "wave": 2,
+          "hp": [
+            85,
+            100
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 13,
+      "waves": [
+        "belltoad",
+        "mirror_stag",
+        "eater"
+      ],
+      "partyN": 5,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "belltoad",
+          "packAtStart": {
+            "belltoad": 1
+          },
+          "scholarHpAtStart": 1,
+          "partyN": 5,
+          "outcome": "chained",
+          "steps": 8,
+          "scholarHpAtEnd": 0.74,
+          "monstersAtEnd": [
+            {
+              "id": "belltoad",
+              "hpFrac": -0.102,
+              "alive": false
+            },
+            {
+              "id": "belltoad",
+              "hpFrac": -0.061,
+              "alive": false
+            },
+            {
+              "id": "belltoad",
+              "hpFrac": -0.065,
+              "alive": false
+            },
+            {
+              "id": "belltoad",
+              "hpFrac": -0.036,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 8
+        },
+        {
+          "waveIdx": 1,
+          "mid": "mirror_stag",
+          "packAtStart": {
+            "mirror_stag": 1
+          },
+          "scholarHpAtStart": 0.74,
+          "partyN": 5,
+          "outcome": "chained",
+          "steps": 5,
+          "scholarHpAtEnd": 0.46,
+          "monstersAtEnd": [
+            {
+              "id": "mirror_stag",
+              "hpFrac": -0.08,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 4
+        },
+        {
+          "waveIdx": 2,
+          "mid": "eater",
+          "packAtStart": {
+            "eater": 1
+          },
+          "scholarHpAtStart": 0.7,
+          "partyN": 5,
+          "outcome": "died",
+          "steps": 4,
+          "scholarHpAtEnd": -0.43,
+          "monstersAtEnd": [
+            {
+              "id": "eater",
+              "hpFrac": 0.923,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 4
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_gf2lfgj",
+          "causeArg": "the arena",
+          "waveIdx": 2,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "belltoad",
+          "wave": 1,
+          "hp": [
+            45,
+            60
+          ]
+        },
+        {
+          "id": "mirror_stag",
+          "wave": 2,
+          "hp": [
+            110,
+            140
+          ]
+        },
+        {
+          "id": "eater",
+          "wave": 4,
+          "hp": [
+            950,
+            1150
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 14,
+      "waves": [
+        "algorithm",
+        "rut_king",
+        "strike"
+      ],
+      "partyN": 5,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "algorithm",
+          "packAtStart": {
+            "algorithm": 1
+          },
+          "scholarHpAtStart": 1,
+          "partyN": 5,
+          "outcome": "died",
+          "steps": 6,
+          "scholarHpAtEnd": -0.1,
+          "monstersAtEnd": [
+            {
+              "id": "algorithm",
+              "hpFrac": 0.911,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 5
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_rivqm75",
+          "causeArg": "the arena",
+          "waveIdx": 0,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "algorithm",
+          "wave": 4,
+          "hp": [
+            1000,
+            1200
+          ]
+        },
+        {
+          "id": "rut_king",
+          "wave": 1,
+          "hp": [
+            65,
+            85
+          ]
+        },
+        {
+          "id": "strike",
+          "wave": 4,
+          "hp": [
+            1000,
+            1200
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 15,
+      "waves": [
+        "paparazzo",
+        "algorithm",
+        "bulldozer"
+      ],
+      "partyN": 5,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "paparazzo",
+          "packAtStart": {
+            "paparazzo": 1
+          },
+          "scholarHpAtStart": 1,
+          "partyN": 5,
+          "outcome": "chained",
+          "steps": 6,
+          "scholarHpAtEnd": 0.59,
+          "monstersAtEnd": [
+            {
+              "id": "paparazzo",
+              "hpFrac": -0.064,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 5
+        },
+        {
+          "waveIdx": 1,
+          "mid": "algorithm",
+          "packAtStart": {
+            "algorithm": 1
+          },
+          "scholarHpAtStart": 0.59,
+          "partyN": 5,
+          "outcome": "died",
+          "steps": 4,
+          "scholarHpAtEnd": -0.3,
+          "monstersAtEnd": [
+            {
+              "id": "algorithm",
+              "hpFrac": 0.956,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 3
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_8md2b27",
+          "causeArg": "the arena",
+          "waveIdx": 1,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "paparazzo",
+          "wave": 2,
+          "hp": [
+            70,
+            90
+          ]
+        },
+        {
+          "id": "algorithm",
+          "wave": 4,
+          "hp": [
+            1000,
+            1200
+          ]
+        },
+        {
+          "id": "bulldozer",
+          "wave": 1,
+          "hp": [
+            70,
+            90
+          ]
+        }
+      ]
+    }
+  ],
+  "instrumentErrors": []
+}

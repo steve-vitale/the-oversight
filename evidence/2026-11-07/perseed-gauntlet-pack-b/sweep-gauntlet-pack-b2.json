@@ -1,0 +1,3141 @@
+{
+  "seed": 51005,
+  "arm": "gauntlet-pack-b",
+  "run": "sweep",
+  "anchorCommit": "ca126298ea29",
+  "chains": 32,
+  "unlockedWave": 4,
+  "poolSizeAtWave4": 58,
+  "fixture": "unlock gate bypassed in-test only (Game.unlockedWave -> 4 on the test-process object; live pool asserted 58 incl reunion, excl herald); draw/spawn/chain/fights are real code; staged scholar fresh 100HP no gear, partyN 4 (scholar + 3 allies)",
+  "chainsData": [
+    {
+      "chain": 0,
+      "waves": [
+        "congregation",
+        "spool",
+        "anaconda_empress"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "congregation",
+          "packAtStart": {
+            "congregation": 1
+          },
+          "alliesAtStart": [
+            "v_gen_ytt60nn",
+            "v_gen_u9tdwor"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "chained",
+          "steps": 51,
+          "scholarHpAtEnd": 1,
+          "monstersAtEnd": [
+            {
+              "id": "congregation",
+              "hpFrac": -0.01,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 50
+        },
+        {
+          "waveIdx": 1,
+          "mid": "spool",
+          "packAtStart": {
+            "spool": 1
+          },
+          "alliesAtStart": [
+            "v_gen_ytt60nn",
+            "v_gen_u9tdwor"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "chained",
+          "steps": 12,
+          "scholarHpAtEnd": 0.21,
+          "monstersAtEnd": [
+            {
+              "id": "spool",
+              "hpFrac": -0.029,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 11
+        },
+        {
+          "waveIdx": 2,
+          "mid": "anaconda_empress",
+          "packAtStart": {
+            "anaconda_empress": 1
+          },
+          "alliesAtStart": [
+            "v_gen_ytt60nn",
+            "v_gen_u9tdwor"
+          ],
+          "scholarHpAtStart": 0.21,
+          "partyN": 3,
+          "outcome": "died",
+          "steps": 3,
+          "scholarHpAtEnd": -0.11,
+          "monstersAtEnd": [
+            {
+              "id": "anaconda_empress",
+              "hpFrac": 0.468,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 2
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_drj8obx",
+          "causeArg": "the arena",
+          "waveIdx": 2,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "congregation",
+          "wave": 4,
+          "hp": [
+            900,
+            1100
+          ]
+        },
+        {
+          "id": "spool",
+          "wave": 3,
+          "hp": [
+            280,
+            340
+          ]
+        },
+        {
+          "id": "anaconda_empress",
+          "wave": 1,
+          "hp": [
+            90,
+            120
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 1,
+      "waves": [
+        "hushwolf",
+        "memory_projector",
+        "eulogy"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "hushwolf",
+          "packAtStart": {
+            "hushwolf": 4
+          },
+          "alliesAtStart": [
+            "v_gen_697lefw",
+            "v_gen_yw3c3x5"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "ended",
+          "steps": 4,
+          "scholarHpAtEnd": 0.74,
+          "monstersAtEnd": [
+            {
+              "id": "hushwolf",
+              "hpFrac": -0.037,
+              "alive": false
+            },
+            {
+              "id": "hushwolf",
+              "hpFrac": 0.72,
+              "alive": true
+            },
+            {
+              "id": "hushwolf",
+              "hpFrac": 0.887,
+              "alive": true
+            },
+            {
+              "id": "hushwolf",
+              "hpFrac": 1,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "routed",
+          "rowOutcome": "routed",
+          "rowRounds": 3
+        }
+      ],
+      "outcome": "routed",
+      "deaths": [],
+      "waveDefs": [
+        {
+          "id": "hushwolf",
+          "wave": 1,
+          "hp": [
+            50,
+            65
+          ]
+        },
+        {
+          "id": "memory_projector",
+          "wave": 2,
+          "hp": [
+            65,
+            90
+          ]
+        },
+        {
+          "id": "eulogy",
+          "wave": 4,
+          "hp": [
+            900,
+            1100
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 2,
+      "waves": [
+        "heckler",
+        "suburb",
+        "hushwolf"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "heckler",
+          "packAtStart": {
+            "heckler": 3
+          },
+          "alliesAtStart": [
+            "v_gen_lsufcsp",
+            "v_gen_ypykwu9"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "died",
+          "steps": 7,
+          "scholarHpAtEnd": -0.01,
+          "monstersAtEnd": [
+            {
+              "id": "heckler",
+              "hpFrac": 0.322,
+              "alive": true
+            },
+            {
+              "id": "heckler",
+              "hpFrac": 0.638,
+              "alive": true
+            },
+            {
+              "id": "heckler",
+              "hpFrac": 1,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 7
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_n1sju7j",
+          "causeArg": "the arena",
+          "waveIdx": 0,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "heckler",
+          "wave": 2,
+          "hp": [
+            85,
+            100
+          ]
+        },
+        {
+          "id": "suburb",
+          "wave": 4,
+          "hp": [
+            1300,
+            1500
+          ]
+        },
+        {
+          "id": "hushwolf",
+          "wave": 1,
+          "hp": [
+            50,
+            65
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 3,
+      "waves": [
+        "focus_group",
+        "voice_mimic_radio",
+        "mirror_stag"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "focus_group",
+          "packAtStart": {
+            "focus_group": 1
+          },
+          "alliesAtStart": [
+            "v_gen_zdqdqcj",
+            "v_gen_d10uwu0"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "died",
+          "steps": 3,
+          "scholarHpAtEnd": -0.08,
+          "monstersAtEnd": [
+            {
+              "id": "focus_group",
+              "hpFrac": 0.761,
+              "alive": true
+            },
+            {
+              "id": "focus_group_eye",
+              "hpFrac": 1,
+              "alive": true
+            },
+            {
+              "id": "focus_group_eye",
+              "hpFrac": 1,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 3
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_caz0b3v",
+          "causeArg": "the arena",
+          "waveIdx": 0,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "focus_group",
+          "wave": 3,
+          "hp": [
+            240,
+            300
+          ]
+        },
+        {
+          "id": "voice_mimic_radio",
+          "wave": 2,
+          "hp": [
+            65,
+            90
+          ]
+        },
+        {
+          "id": "mirror_stag",
+          "wave": 2,
+          "hp": [
+            110,
+            140
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 4,
+      "waves": [
+        "review_drone",
+        "terms_of_service",
+        "glasswing"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "review_drone",
+          "packAtStart": {
+            "review_drone": 1
+          },
+          "alliesAtStart": [
+            "v_gen_4ofdrux",
+            "v_gen_xwx51rq"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "chained",
+          "steps": 6,
+          "scholarHpAtEnd": 1,
+          "monstersAtEnd": [
+            {
+              "id": "review_drone",
+              "hpFrac": -0.022,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 5
+        },
+        {
+          "waveIdx": 1,
+          "mid": "terms_of_service",
+          "packAtStart": {
+            "terms_of_service": 1
+          },
+          "alliesAtStart": [
+            "v_gen_4ofdrux",
+            "v_gen_xwx51rq"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "died",
+          "steps": 8,
+          "scholarHpAtEnd": -0.16,
+          "monstersAtEnd": [
+            {
+              "id": "terms_of_service",
+              "hpFrac": 0.49,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 7
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_hhz46td",
+          "causeArg": "the arena",
+          "waveIdx": 1,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "review_drone",
+          "wave": 2,
+          "hp": [
+            80,
+            110
+          ]
+        },
+        {
+          "id": "terms_of_service",
+          "wave": 3,
+          "hp": [
+            340,
+            420
+          ]
+        },
+        {
+          "id": "glasswing",
+          "wave": 1,
+          "hp": [
+            18,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 5,
+      "waves": [
+        "terms_of_service",
+        "nightlight_catfish",
+        "sweeps_week"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "terms_of_service",
+          "packAtStart": {
+            "terms_of_service": 1
+          },
+          "alliesAtStart": [
+            "v_gen_oumnjkm",
+            "v_gen_ren5fh9"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "died",
+          "steps": 8,
+          "scholarHpAtEnd": -0.04,
+          "monstersAtEnd": [
+            {
+              "id": "terms_of_service",
+              "hpFrac": 0.413,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 7
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_977mq8d",
+          "causeArg": "the arena",
+          "waveIdx": 0,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "terms_of_service",
+          "wave": 3,
+          "hp": [
+            340,
+            420
+          ]
+        },
+        {
+          "id": "nightlight_catfish",
+          "wave": 1,
+          "hp": [
+            22,
+            32
+          ]
+        },
+        {
+          "id": "sweeps_week",
+          "wave": 1,
+          "hp": [
+            80,
+            100
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 6,
+      "waves": [
+        "rut_king",
+        "union_rep",
+        "murkcap"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "rut_king",
+          "packAtStart": {
+            "rut_king": 1
+          },
+          "alliesAtStart": [
+            "v_gen_dik0e29",
+            "v_gen_7hfae67"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "chained",
+          "steps": 3,
+          "scholarHpAtEnd": 0.85,
+          "monstersAtEnd": [
+            {
+              "id": "rut_king",
+              "hpFrac": 0,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 3
+        },
+        {
+          "waveIdx": 1,
+          "mid": "union_rep",
+          "packAtStart": {
+            "union_rep": 1
+          },
+          "alliesAtStart": [
+            "v_gen_dik0e29",
+            "v_gen_7hfae67"
+          ],
+          "scholarHpAtStart": 0.85,
+          "partyN": 3,
+          "outcome": "chained",
+          "steps": 9,
+          "scholarHpAtEnd": 0.78,
+          "monstersAtEnd": [
+            {
+              "id": "union_rep",
+              "hpFrac": 0,
+              "alive": false
+            },
+            {
+              "id": "mirrormoth",
+              "hpFrac": -0.071,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 8
+        },
+        {
+          "waveIdx": 2,
+          "mid": "murkcap",
+          "packAtStart": {
+            "murkcap": 1
+          },
+          "alliesAtStart": [
+            "v_gen_dik0e29",
+            "v_gen_7hfae67"
+          ],
+          "scholarHpAtStart": 0.78,
+          "partyN": 3,
+          "outcome": "ended",
+          "steps": 3,
+          "scholarHpAtEnd": 0.58,
+          "monstersAtEnd": [
+            {
+              "id": "murkcap",
+              "hpFrac": -0.093,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 3
+        }
+      ],
+      "outcome": "won",
+      "deaths": [],
+      "waveDefs": [
+        {
+          "id": "rut_king",
+          "wave": 1,
+          "hp": [
+            65,
+            85
+          ]
+        },
+        {
+          "id": "union_rep",
+          "wave": 2,
+          "hp": [
+            80,
+            105
+          ]
+        },
+        {
+          "id": "murkcap",
+          "wave": 1,
+          "hp": [
+            60,
+            80
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 7,
+      "waves": [
+        "union_rep",
+        "glasswing",
+        "memory_projector"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "union_rep",
+          "packAtStart": {
+            "union_rep": 1
+          },
+          "alliesAtStart": [
+            "v_gen_ms0r6oc",
+            "v_gen_l844kdg"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "ended",
+          "steps": 7,
+          "scholarHpAtEnd": 1,
+          "monstersAtEnd": [
+            {
+              "id": "union_rep",
+              "hpFrac": -0.032,
+              "alive": false
+            },
+            {
+              "id": "white_noise_heron",
+              "hpFrac": 0.515,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "routed",
+          "rowOutcome": "routed",
+          "rowRounds": 7
+        }
+      ],
+      "outcome": "routed",
+      "deaths": [],
+      "waveDefs": [
+        {
+          "id": "union_rep",
+          "wave": 2,
+          "hp": [
+            80,
+            105
+          ]
+        },
+        {
+          "id": "glasswing",
+          "wave": 1,
+          "hp": [
+            18,
+            26
+          ]
+        },
+        {
+          "id": "memory_projector",
+          "wave": 2,
+          "hp": [
+            65,
+            90
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 8,
+      "waves": [
+        "bright_idea",
+        "warranty_caller",
+        "dustboar"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "bright_idea",
+          "packAtStart": {
+            "bright_idea": 1
+          },
+          "alliesAtStart": [
+            "v_gen_bg9vjll",
+            "v_gen_7v0ddlc"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "ended",
+          "steps": 2,
+          "scholarHpAtEnd": 1,
+          "monstersAtEnd": [
+            {
+              "id": "bright_idea",
+              "hpFrac": 0.786,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "routed",
+          "rowOutcome": "routed",
+          "rowRounds": 1
+        }
+      ],
+      "outcome": "routed",
+      "deaths": [],
+      "waveDefs": [
+        {
+          "id": "bright_idea",
+          "wave": 2,
+          "hp": [
+            55,
+            80
+          ]
+        },
+        {
+          "id": "warranty_caller",
+          "wave": 2,
+          "hp": [
+            80,
+            110
+          ]
+        },
+        {
+          "id": "dustboar",
+          "wave": 1,
+          "hp": [
+            65,
+            85
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 9,
+      "waves": [
+        "ducks_in_a_row",
+        "nightcourt",
+        "gavel"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "ducks_in_a_row",
+          "packAtStart": {
+            "ducks_in_a_row": 14
+          },
+          "alliesAtStart": [
+            "v_gen_ybzhlbn",
+            "v_gen_v0wo8lp"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "chained",
+          "steps": 11,
+          "scholarHpAtEnd": 0.84,
+          "monstersAtEnd": [
+            {
+              "id": "ducks_in_a_row",
+              "hpFrac": -0.5,
+              "alive": false
+            },
+            {
+              "id": "ducks_in_a_row",
+              "hpFrac": -0.143,
+              "alive": false
+            },
+            {
+              "id": "ducks_in_a_row",
+              "hpFrac": -0.583,
+              "alive": false
+            },
+            {
+              "id": "ducks_in_a_row",
+              "hpFrac": -0.583,
+              "alive": false
+            },
+            {
+              "id": "ducks_in_a_row",
+              "hpFrac": -0.083,
+              "alive": false
+            },
+            {
+              "id": "ducks_in_a_row",
+              "hpFrac": 0,
+              "alive": false
+            },
+            {
+              "id": "ducks_in_a_row",
+              "hpFrac": -0.417,
+              "alive": false
+            },
+            {
+              "id": "ducks_in_a_row",
+              "hpFrac": -0.118,
+              "alive": false
+            },
+            {
+              "id": "ducks_in_a_row",
+              "hpFrac": -0.333,
+              "alive": false
+            },
+            {
+              "id": "ducks_in_a_row",
+              "hpFrac": -0.714,
+              "alive": false
+            },
+            {
+              "id": "ducks_in_a_row",
+              "hpFrac": -0.118,
+              "alive": false
+            },
+            {
+              "id": "ducks_in_a_row",
+              "hpFrac": -0.687,
+              "alive": false
+            },
+            {
+              "id": "ducks_in_a_row",
+              "hpFrac": -0.083,
+              "alive": false
+            },
+            {
+              "id": "ducks_in_a_row",
+              "hpFrac": -0.467,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 11
+        },
+        {
+          "waveIdx": 1,
+          "mid": "nightcourt",
+          "packAtStart": {
+            "nightcourt": 1
+          },
+          "alliesAtStart": [
+            "v_gen_v0wo8lp",
+            "v_gen_ybzhlbn"
+          ],
+          "scholarHpAtStart": 0.84,
+          "partyN": 3,
+          "outcome": "chained",
+          "steps": 3,
+          "scholarHpAtEnd": 0.69,
+          "monstersAtEnd": [
+            {
+              "id": "nightcourt",
+              "hpFrac": -0.333,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 2
+        },
+        {
+          "waveIdx": 2,
+          "mid": "gavel",
+          "packAtStart": {
+            "gavel": 1
+          },
+          "alliesAtStart": [
+            "v_gen_v0wo8lp",
+            "v_gen_ybzhlbn"
+          ],
+          "scholarHpAtStart": 0.69,
+          "partyN": 3,
+          "outcome": "died",
+          "steps": 5,
+          "scholarHpAtEnd": -0.11,
+          "monstersAtEnd": [
+            {
+              "id": "gavel",
+              "hpFrac": 0.718,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 4
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_8ckem9n",
+          "causeArg": "the arena",
+          "waveIdx": 2,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "ducks_in_a_row",
+          "wave": 1,
+          "hp": [
+            12,
+            18
+          ]
+        },
+        {
+          "id": "nightcourt",
+          "wave": 1,
+          "hp": [
+            55,
+            70
+          ]
+        },
+        {
+          "id": "gavel",
+          "wave": 3,
+          "hp": [
+            300,
+            360
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 10,
+      "waves": [
+        "warranty_caller",
+        "gavel",
+        "bulldozer"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "warranty_caller",
+          "packAtStart": {
+            "warranty_caller": 1
+          },
+          "alliesAtStart": [
+            "v_gen_vdp4wrw",
+            "v_gen_up9errk"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "chained",
+          "steps": 5,
+          "scholarHpAtEnd": 1,
+          "monstersAtEnd": [
+            {
+              "id": "warranty_caller",
+              "hpFrac": 0,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 4
+        },
+        {
+          "waveIdx": 1,
+          "mid": "gavel",
+          "packAtStart": {
+            "gavel": 1
+          },
+          "alliesAtStart": [
+            "v_gen_vdp4wrw",
+            "v_gen_up9errk"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "died",
+          "steps": 6,
+          "scholarHpAtEnd": -0.32,
+          "monstersAtEnd": [
+            {
+              "id": "gavel",
+              "hpFrac": 0.765,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 5
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_skkarv2",
+          "causeArg": "the arena",
+          "waveIdx": 1,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "warranty_caller",
+          "wave": 2,
+          "hp": [
+            80,
+            110
+          ]
+        },
+        {
+          "id": "gavel",
+          "wave": 3,
+          "hp": [
+            300,
+            360
+          ]
+        },
+        {
+          "id": "bulldozer",
+          "wave": 1,
+          "hp": [
+            70,
+            90
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 11,
+      "waves": [
+        "strike",
+        "paparazzo",
+        "nevermore"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "strike",
+          "packAtStart": {
+            "strike": 1
+          },
+          "alliesAtStart": [
+            "v_gen_ck15ubg",
+            "v_gen_4la1i3z"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "chained",
+          "steps": 72,
+          "scholarHpAtEnd": 1,
+          "monstersAtEnd": [
+            {
+              "id": "strike",
+              "hpFrac": -0.009,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 71
+        },
+        {
+          "waveIdx": 1,
+          "mid": "paparazzo",
+          "packAtStart": {
+            "paparazzo": 1
+          },
+          "alliesAtStart": [
+            "v_gen_4la1i3z"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 2,
+          "outcome": "chained",
+          "steps": 10,
+          "scholarHpAtEnd": 0.65,
+          "monstersAtEnd": [
+            {
+              "id": "paparazzo",
+              "hpFrac": -0.013,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 9
+        },
+        {
+          "waveIdx": 2,
+          "mid": "nevermore",
+          "packAtStart": {
+            "nevermore": 1
+          },
+          "alliesAtStart": [
+            "v_gen_4la1i3z"
+          ],
+          "scholarHpAtStart": 0.65,
+          "partyN": 2,
+          "outcome": "ended",
+          "steps": 3,
+          "scholarHpAtEnd": 0.77,
+          "monstersAtEnd": [
+            {
+              "id": "nevermore",
+              "hpFrac": -0.132,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 2
+        }
+      ],
+      "outcome": "won",
+      "deaths": [],
+      "waveDefs": [
+        {
+          "id": "strike",
+          "wave": 4,
+          "hp": [
+            1000,
+            1200
+          ]
+        },
+        {
+          "id": "paparazzo",
+          "wave": 2,
+          "hp": [
+            70,
+            90
+          ]
+        },
+        {
+          "id": "nevermore",
+          "wave": 1,
+          "hp": [
+            45,
+            60
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 12,
+      "waves": [
+        "algorithm",
+        "voice_mimic_radio",
+        "algorithm"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "algorithm",
+          "packAtStart": {
+            "algorithm": 1
+          },
+          "alliesAtStart": [
+            "v_gen_h3zr5ja",
+            "v_gen_qto4351"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "died",
+          "steps": 6,
+          "scholarHpAtEnd": -0.34,
+          "monstersAtEnd": [
+            {
+              "id": "algorithm",
+              "hpFrac": 0.931,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 5
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_ibot0q7",
+          "causeArg": "the arena",
+          "waveIdx": 0,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "algorithm",
+          "wave": 4,
+          "hp": [
+            1000,
+            1200
+          ]
+        },
+        {
+          "id": "voice_mimic_radio",
+          "wave": 2,
+          "hp": [
+            65,
+            90
+          ]
+        },
+        {
+          "id": "algorithm",
+          "wave": 4,
+          "hp": [
+            1000,
+            1200
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 13,
+      "waves": [
+        "congregation",
+        "influencer",
+        "chorus_line"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "congregation",
+          "packAtStart": {
+            "congregation": 1
+          },
+          "alliesAtStart": [
+            "v_gen_i83rb8f",
+            "v_gen_lpvztyu"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "chained",
+          "steps": 46,
+          "scholarHpAtEnd": 1,
+          "monstersAtEnd": [
+            {
+              "id": "congregation",
+              "hpFrac": -0.008,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 46
+        },
+        {
+          "waveIdx": 1,
+          "mid": "influencer",
+          "packAtStart": {
+            "influencer": 1
+          },
+          "alliesAtStart": [
+            "v_gen_i83rb8f",
+            "v_gen_lpvztyu"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "died",
+          "steps": 9,
+          "scholarHpAtEnd": -0.02,
+          "monstersAtEnd": [
+            {
+              "id": "influencer",
+              "hpFrac": 0.714,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 8
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_lfqhrdm",
+          "causeArg": "the arena",
+          "waveIdx": 1,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "congregation",
+          "wave": 4,
+          "hp": [
+            900,
+            1100
+          ]
+        },
+        {
+          "id": "influencer",
+          "wave": 4,
+          "hp": [
+            850,
+            1050
+          ]
+        },
+        {
+          "id": "chorus_line",
+          "wave": 3,
+          "hp": [
+            300,
+            360
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 14,
+      "waves": [
+        "drumbelly_tanuki",
+        "influencer",
+        "sanjun"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "drumbelly_tanuki",
+          "packAtStart": {
+            "drumbelly_tanuki": 1
+          },
+          "alliesAtStart": [
+            "v_gen_6t3i8o4",
+            "v_gen_8bfmu34"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "chained",
+          "steps": 3,
+          "scholarHpAtEnd": 1,
+          "monstersAtEnd": [
+            {
+              "id": "drumbelly_tanuki",
+              "hpFrac": 0,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 2
+        },
+        {
+          "waveIdx": 1,
+          "mid": "influencer",
+          "packAtStart": {
+            "influencer": 1
+          },
+          "alliesAtStart": [
+            "v_gen_6t3i8o4",
+            "v_gen_8bfmu34"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "died",
+          "steps": 12,
+          "scholarHpAtEnd": -0.27,
+          "monstersAtEnd": [
+            {
+              "id": "influencer",
+              "hpFrac": 0.706,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 11
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_5thplts",
+          "causeArg": "the arena",
+          "waveIdx": 1,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "drumbelly_tanuki",
+          "wave": 1,
+          "hp": [
+            45,
+            60
+          ]
+        },
+        {
+          "id": "influencer",
+          "wave": 4,
+          "hp": [
+            850,
+            1050
+          ]
+        },
+        {
+          "id": "sanjun",
+          "wave": 1,
+          "hp": [
+            80,
+            100
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 15,
+      "waves": [
+        "nightlight_catfish",
+        "dustboar",
+        "rut_king"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "nightlight_catfish",
+          "packAtStart": {
+            "nightlight_catfish": 1
+          },
+          "alliesAtStart": [
+            "v_gen_qroex8j",
+            "v_gen_mpbifpv"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "chained",
+          "steps": 2,
+          "scholarHpAtEnd": 1,
+          "monstersAtEnd": [
+            {
+              "id": "nightlight_catfish",
+              "hpFrac": 0,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 1
+        },
+        {
+          "waveIdx": 1,
+          "mid": "dustboar",
+          "packAtStart": {
+            "dustboar": 1
+          },
+          "alliesAtStart": [
+            "v_gen_qroex8j",
+            "v_gen_mpbifpv"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "chained",
+          "steps": 4,
+          "scholarHpAtEnd": 0.89,
+          "monstersAtEnd": [
+            {
+              "id": "dustboar",
+              "hpFrac": -0.169,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 3
+        },
+        {
+          "waveIdx": 2,
+          "mid": "rut_king",
+          "packAtStart": {
+            "rut_king": 1
+          },
+          "alliesAtStart": [
+            "v_gen_mpbifpv",
+            "v_gen_qroex8j"
+          ],
+          "scholarHpAtStart": 0.89,
+          "partyN": 3,
+          "outcome": "ended",
+          "steps": 4,
+          "scholarHpAtEnd": 0.73,
+          "monstersAtEnd": [
+            {
+              "id": "rut_king",
+              "hpFrac": -0.06,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 3
+        }
+      ],
+      "outcome": "won",
+      "deaths": [],
+      "waveDefs": [
+        {
+          "id": "nightlight_catfish",
+          "wave": 1,
+          "hp": [
+            22,
+            32
+          ]
+        },
+        {
+          "id": "dustboar",
+          "wave": 1,
+          "hp": [
+            65,
+            85
+          ]
+        },
+        {
+          "id": "rut_king",
+          "wave": 1,
+          "hp": [
+            65,
+            85
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 16,
+      "waves": [
+        "gavel",
+        "anaconda_empress",
+        "ad_break"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "gavel",
+          "packAtStart": {
+            "gavel": 1
+          },
+          "alliesAtStart": [
+            "v_gen_0bjznyr",
+            "v_gen_wjekbwp"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "died",
+          "steps": 6,
+          "scholarHpAtEnd": -0.05,
+          "monstersAtEnd": [
+            {
+              "id": "gavel",
+              "hpFrac": 0.782,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 5
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_k0qn6xq",
+          "causeArg": "the arena",
+          "waveIdx": 0,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "gavel",
+          "wave": 3,
+          "hp": [
+            300,
+            360
+          ]
+        },
+        {
+          "id": "anaconda_empress",
+          "wave": 1,
+          "hp": [
+            90,
+            120
+          ]
+        },
+        {
+          "id": "ad_break",
+          "wave": 3,
+          "hp": [
+            320,
+            380
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 17,
+      "waves": [
+        "memory_projector",
+        "landlord",
+        "terms_of_service"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "memory_projector",
+          "packAtStart": {
+            "memory_projector": 1
+          },
+          "alliesAtStart": [
+            "v_gen_bgd502z",
+            "v_gen_69q849o"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "chained",
+          "steps": 5,
+          "scholarHpAtEnd": 0.88,
+          "monstersAtEnd": [
+            {
+              "id": "memory_projector",
+              "hpFrac": -0.053,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 4
+        },
+        {
+          "waveIdx": 1,
+          "mid": "landlord",
+          "packAtStart": {
+            "landlord": 1
+          },
+          "alliesAtStart": [
+            "v_gen_bgd502z",
+            "v_gen_69q849o"
+          ],
+          "scholarHpAtStart": 0.88,
+          "partyN": 3,
+          "outcome": "chained",
+          "steps": 6,
+          "scholarHpAtEnd": 0.72,
+          "monstersAtEnd": [
+            {
+              "id": "landlord",
+              "hpFrac": -0.021,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 5
+        },
+        {
+          "waveIdx": 2,
+          "mid": "terms_of_service",
+          "packAtStart": {
+            "terms_of_service": 1
+          },
+          "alliesAtStart": [
+            "v_gen_bgd502z",
+            "v_gen_69q849o"
+          ],
+          "scholarHpAtStart": 0.72,
+          "partyN": 3,
+          "outcome": "died",
+          "steps": 6,
+          "scholarHpAtEnd": -0.15,
+          "monstersAtEnd": [
+            {
+              "id": "terms_of_service",
+              "hpFrac": 0.602,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 5
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_8zgj5g4",
+          "causeArg": "the arena",
+          "waveIdx": 2,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "memory_projector",
+          "wave": 2,
+          "hp": [
+            65,
+            90
+          ]
+        },
+        {
+          "id": "landlord",
+          "wave": 2,
+          "hp": [
+            90,
+            120
+          ]
+        },
+        {
+          "id": "terms_of_service",
+          "wave": 3,
+          "hp": [
+            340,
+            420
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 18,
+      "waves": [
+        "heckler",
+        "focus_group",
+        "bulldozer"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "heckler",
+          "packAtStart": {
+            "heckler": 3
+          },
+          "alliesAtStart": [
+            "v_gen_d6d1ttw",
+            "v_gen_mkr1xqk"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "died",
+          "steps": 9,
+          "scholarHpAtEnd": 0,
+          "monstersAtEnd": [
+            {
+              "id": "heckler",
+              "hpFrac": 0.256,
+              "alive": true
+            },
+            {
+              "id": "heckler",
+              "hpFrac": -0.022,
+              "alive": false
+            },
+            {
+              "id": "heckler",
+              "hpFrac": 0.846,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 9
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_7a4bgqm",
+          "causeArg": "the arena",
+          "waveIdx": 0,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "heckler",
+          "wave": 2,
+          "hp": [
+            85,
+            100
+          ]
+        },
+        {
+          "id": "focus_group",
+          "wave": 3,
+          "hp": [
+            240,
+            300
+          ]
+        },
+        {
+          "id": "bulldozer",
+          "wave": 1,
+          "hp": [
+            70,
+            90
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 19,
+      "waves": [
+        "moderator",
+        "mirror_stag",
+        "algorithm"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "moderator",
+          "packAtStart": {
+            "moderator": 1
+          },
+          "alliesAtStart": [
+            "v_gen_v1hpeo0",
+            "v_gen_aoiodv4"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "chained",
+          "steps": 8,
+          "scholarHpAtEnd": 1,
+          "monstersAtEnd": [
+            {
+              "id": "moderator",
+              "hpFrac": 0,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 11
+        },
+        {
+          "waveIdx": 1,
+          "mid": "mirror_stag",
+          "packAtStart": {
+            "mirror_stag": 1
+          },
+          "alliesAtStart": [
+            "v_gen_v1hpeo0",
+            "v_gen_aoiodv4"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "chained",
+          "steps": 6,
+          "scholarHpAtEnd": 0.74,
+          "monstersAtEnd": [
+            {
+              "id": "mirror_stag",
+              "hpFrac": -0.033,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 6
+        },
+        {
+          "waveIdx": 2,
+          "mid": "algorithm",
+          "packAtStart": {
+            "algorithm": 1
+          },
+          "alliesAtStart": [
+            "v_gen_v1hpeo0",
+            "v_gen_aoiodv4"
+          ],
+          "scholarHpAtStart": 0.74,
+          "partyN": 3,
+          "outcome": "died",
+          "steps": 5,
+          "scholarHpAtEnd": -0.25,
+          "monstersAtEnd": [
+            {
+              "id": "algorithm",
+              "hpFrac": 0.942,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 4
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_chx0486",
+          "causeArg": "the arena",
+          "waveIdx": 2,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "moderator",
+          "wave": 2,
+          "hp": [
+            150,
+            170
+          ]
+        },
+        {
+          "id": "mirror_stag",
+          "wave": 2,
+          "hp": [
+            110,
+            140
+          ]
+        },
+        {
+          "id": "algorithm",
+          "wave": 4,
+          "hp": [
+            1000,
+            1200
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 20,
+      "waves": [
+        "strike",
+        "focus_group",
+        "sanjun"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "strike",
+          "packAtStart": {
+            "strike": 1
+          },
+          "alliesAtStart": [
+            "v_gen_7eioghx",
+            "v_gen_sg89qbo"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "chained",
+          "steps": 46,
+          "scholarHpAtEnd": 1,
+          "monstersAtEnd": [
+            {
+              "id": "strike",
+              "hpFrac": -0.003,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 45
+        },
+        {
+          "waveIdx": 1,
+          "mid": "focus_group",
+          "packAtStart": {
+            "focus_group": 1
+          },
+          "alliesAtStart": [
+            "v_gen_7eioghx",
+            "v_gen_sg89qbo"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "died",
+          "steps": 6,
+          "scholarHpAtEnd": -0.17,
+          "monstersAtEnd": [
+            {
+              "id": "focus_group",
+              "hpFrac": 0.439,
+              "alive": true
+            },
+            {
+              "id": "focus_group_eye",
+              "hpFrac": 1,
+              "alive": true
+            },
+            {
+              "id": "focus_group_eye",
+              "hpFrac": 1,
+              "alive": true
+            },
+            {
+              "id": "focus_group_eye",
+              "hpFrac": 1,
+              "alive": true
+            },
+            {
+              "id": "focus_group_eye",
+              "hpFrac": 1,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 5
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_efqeqj9",
+          "causeArg": "the arena",
+          "waveIdx": 1,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "strike",
+          "wave": 4,
+          "hp": [
+            1000,
+            1200
+          ]
+        },
+        {
+          "id": "focus_group",
+          "wave": 3,
+          "hp": [
+            240,
+            300
+          ]
+        },
+        {
+          "id": "sanjun",
+          "wave": 1,
+          "hp": [
+            80,
+            100
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 21,
+      "waves": [
+        "lockpick_raccoon",
+        "spool",
+        "suburb"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "lockpick_raccoon",
+          "packAtStart": {
+            "lockpick_raccoon": 1
+          },
+          "alliesAtStart": [
+            "v_gen_g1yg8kf",
+            "v_gen_tlbjpts"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "ended",
+          "steps": 2,
+          "scholarHpAtEnd": 1,
+          "monstersAtEnd": [
+            {
+              "id": "lockpick_raccoon",
+              "hpFrac": 0.642,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "routed",
+          "rowOutcome": "routed",
+          "rowRounds": 2
+        }
+      ],
+      "outcome": "routed",
+      "deaths": [],
+      "waveDefs": [
+        {
+          "id": "lockpick_raccoon",
+          "wave": 1,
+          "hp": [
+            40,
+            55
+          ]
+        },
+        {
+          "id": "spool",
+          "wave": 3,
+          "hp": [
+            280,
+            340
+          ]
+        },
+        {
+          "id": "suburb",
+          "wave": 4,
+          "hp": [
+            1300,
+            1500
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 22,
+      "waves": [
+        "review_drone",
+        "nevermore",
+        "hummice"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "review_drone",
+          "packAtStart": {
+            "review_drone": 1
+          },
+          "alliesAtStart": [
+            "v_gen_1ovi5k2",
+            "v_gen_3o8iytr"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "chained",
+          "steps": 6,
+          "scholarHpAtEnd": 1,
+          "monstersAtEnd": [
+            {
+              "id": "review_drone",
+              "hpFrac": -0.057,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 5
+        },
+        {
+          "waveIdx": 1,
+          "mid": "nevermore",
+          "packAtStart": {
+            "nevermore": 1
+          },
+          "alliesAtStart": [
+            "v_gen_1ovi5k2",
+            "v_gen_3o8iytr"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "chained",
+          "steps": 3,
+          "scholarHpAtEnd": 1,
+          "monstersAtEnd": [
+            {
+              "id": "nevermore",
+              "hpFrac": -0.14,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 2
+        },
+        {
+          "waveIdx": 2,
+          "mid": "hummice",
+          "packAtStart": {
+            "hummice": 4
+          },
+          "alliesAtStart": [
+            "v_gen_1ovi5k2",
+            "v_gen_3o8iytr"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "ended",
+          "steps": 4,
+          "scholarHpAtEnd": 0.95,
+          "monstersAtEnd": [
+            {
+              "id": "hummice",
+              "hpFrac": -0.538,
+              "alive": false
+            },
+            {
+              "id": "hummice",
+              "hpFrac": -0.154,
+              "alive": false
+            },
+            {
+              "id": "hummice",
+              "hpFrac": 0,
+              "alive": false
+            },
+            {
+              "id": "hummice",
+              "hpFrac": 0,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 4
+        }
+      ],
+      "outcome": "won",
+      "deaths": [],
+      "waveDefs": [
+        {
+          "id": "review_drone",
+          "wave": 2,
+          "hp": [
+            80,
+            110
+          ]
+        },
+        {
+          "id": "nevermore",
+          "wave": 1,
+          "hp": [
+            45,
+            60
+          ]
+        },
+        {
+          "id": "hummice",
+          "wave": 1,
+          "hp": [
+            10,
+            14
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 23,
+      "waves": [
+        "buffering",
+        "paparazzo",
+        "callback"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "buffering",
+          "packAtStart": {
+            "buffering": 1
+          },
+          "alliesAtStart": [
+            "v_gen_eme4v1x",
+            "v_gen_25wol0w"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "died",
+          "steps": 8,
+          "scholarHpAtEnd": -0.32,
+          "monstersAtEnd": [
+            {
+              "id": "buffering",
+              "hpFrac": 0.725,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 8
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_am4hz56",
+          "causeArg": "the arena",
+          "waveIdx": 0,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "buffering",
+          "wave": 3,
+          "hp": [
+            280,
+            340
+          ]
+        },
+        {
+          "id": "paparazzo",
+          "wave": 2,
+          "hp": [
+            70,
+            90
+          ]
+        },
+        {
+          "id": "callback",
+          "wave": 3,
+          "hp": [
+            260,
+            320
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 24,
+      "waves": [
+        "speedbump_turtle",
+        "focus_group",
+        "drumbelly_tanuki"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "speedbump_turtle",
+          "packAtStart": {
+            "speedbump_turtle": 1
+          },
+          "alliesAtStart": [
+            "v_gen_ws0kavp",
+            "v_gen_cndltx2"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "died",
+          "steps": 9,
+          "scholarHpAtEnd": -0.03,
+          "monstersAtEnd": [
+            {
+              "id": "speedbump_turtle",
+              "hpFrac": 0.204,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 8
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_zkgw88j",
+          "causeArg": "the arena",
+          "waveIdx": 0,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "speedbump_turtle",
+          "wave": 1,
+          "hp": [
+            50,
+            70
+          ]
+        },
+        {
+          "id": "focus_group",
+          "wave": 3,
+          "hp": [
+            240,
+            300
+          ]
+        },
+        {
+          "id": "drumbelly_tanuki",
+          "wave": 1,
+          "hp": [
+            45,
+            60
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 25,
+      "waves": [
+        "hummice",
+        "congregation",
+        "suburb"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "hummice",
+          "packAtStart": {
+            "hummice": 4
+          },
+          "alliesAtStart": [
+            "v_gen_bliy349",
+            "v_gen_biyk3ks"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "chained",
+          "steps": 4,
+          "scholarHpAtEnd": 1,
+          "monstersAtEnd": [
+            {
+              "id": "hummice",
+              "hpFrac": -0.818,
+              "alive": false
+            },
+            {
+              "id": "hummice",
+              "hpFrac": -0.1,
+              "alive": false
+            },
+            {
+              "id": "hummice",
+              "hpFrac": -0.273,
+              "alive": false
+            },
+            {
+              "id": "hummice",
+              "hpFrac": -0.364,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 3
+        },
+        {
+          "waveIdx": 1,
+          "mid": "congregation",
+          "packAtStart": {
+            "congregation": 1
+          },
+          "alliesAtStart": [
+            "v_gen_bliy349",
+            "v_gen_biyk3ks"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "chained",
+          "steps": 53,
+          "scholarHpAtEnd": 1,
+          "monstersAtEnd": [
+            {
+              "id": "congregation",
+              "hpFrac": 0,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 52
+        },
+        {
+          "waveIdx": 2,
+          "mid": "suburb",
+          "packAtStart": {
+            "suburb": 1
+          },
+          "alliesAtStart": [
+            "v_gen_bliy349",
+            "v_gen_biyk3ks"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "died",
+          "steps": 6,
+          "scholarHpAtEnd": -0.35,
+          "monstersAtEnd": [
+            {
+              "id": "suburb",
+              "hpFrac": 0.925,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 5
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_4nngcm5",
+          "causeArg": "the arena",
+          "waveIdx": 2,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "hummice",
+          "wave": 1,
+          "hp": [
+            10,
+            14
+          ]
+        },
+        {
+          "id": "congregation",
+          "wave": 4,
+          "hp": [
+            900,
+            1100
+          ]
+        },
+        {
+          "id": "suburb",
+          "wave": 4,
+          "hp": [
+            1300,
+            1500
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 26,
+      "waves": [
+        "voice_mimic_radio",
+        "review_drone",
+        "living_wire"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "voice_mimic_radio",
+          "packAtStart": {
+            "voice_mimic_radio": 1
+          },
+          "alliesAtStart": [
+            "v_gen_834ex27",
+            "v_gen_r9sko7g"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "chained",
+          "steps": 6,
+          "scholarHpAtEnd": 0.65,
+          "monstersAtEnd": [
+            {
+              "id": "voice_mimic_radio",
+              "hpFrac": -0.225,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 5
+        },
+        {
+          "waveIdx": 1,
+          "mid": "review_drone",
+          "packAtStart": {
+            "review_drone": 1
+          },
+          "alliesAtStart": [
+            "v_gen_834ex27",
+            "v_gen_r9sko7g"
+          ],
+          "scholarHpAtStart": 0.65,
+          "partyN": 3,
+          "outcome": "chained",
+          "steps": 8,
+          "scholarHpAtEnd": 0.48,
+          "monstersAtEnd": [
+            {
+              "id": "review_drone",
+              "hpFrac": 0,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 7
+        },
+        {
+          "waveIdx": 2,
+          "mid": "living_wire",
+          "packAtStart": {
+            "living_wire": 1
+          },
+          "alliesAtStart": [
+            "v_gen_834ex27",
+            "v_gen_r9sko7g"
+          ],
+          "scholarHpAtStart": 0.48,
+          "partyN": 3,
+          "outcome": "ended",
+          "steps": 5,
+          "scholarHpAtEnd": 0.6,
+          "monstersAtEnd": [
+            {
+              "id": "living_wire",
+              "hpFrac": -0.213,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 4
+        }
+      ],
+      "outcome": "won",
+      "deaths": [],
+      "waveDefs": [
+        {
+          "id": "voice_mimic_radio",
+          "wave": 2,
+          "hp": [
+            65,
+            90
+          ]
+        },
+        {
+          "id": "review_drone",
+          "wave": 2,
+          "hp": [
+            80,
+            110
+          ]
+        },
+        {
+          "id": "living_wire",
+          "wave": 1,
+          "hp": [
+            60,
+            80
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 27,
+      "waves": [
+        "giant_mosquito",
+        "mirror_stag",
+        "union_rep"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "giant_mosquito",
+          "packAtStart": {
+            "giant_mosquito": 1
+          },
+          "alliesAtStart": [
+            "v_gen_ytik2gj",
+            "v_gen_tbs3ezu"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "chained",
+          "steps": 3,
+          "scholarHpAtEnd": 0.82,
+          "monstersAtEnd": [
+            {
+              "id": "giant_mosquito",
+              "hpFrac": -0.1,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 2
+        },
+        {
+          "waveIdx": 1,
+          "mid": "mirror_stag",
+          "packAtStart": {
+            "mirror_stag": 1
+          },
+          "alliesAtStart": [
+            "v_gen_ytik2gj",
+            "v_gen_tbs3ezu"
+          ],
+          "scholarHpAtStart": 0.82,
+          "partyN": 3,
+          "outcome": "chained",
+          "steps": 11,
+          "scholarHpAtEnd": 0.59,
+          "monstersAtEnd": [
+            {
+              "id": "mirror_stag",
+              "hpFrac": -0.041,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 10
+        },
+        {
+          "waveIdx": 2,
+          "mid": "union_rep",
+          "packAtStart": {
+            "union_rep": 1
+          },
+          "alliesAtStart": [
+            "v_gen_ytik2gj",
+            "v_gen_tbs3ezu"
+          ],
+          "scholarHpAtStart": 0.59,
+          "partyN": 3,
+          "outcome": "ended",
+          "steps": 8,
+          "scholarHpAtEnd": 0.31,
+          "monstersAtEnd": [
+            {
+              "id": "union_rep",
+              "hpFrac": -0.011,
+              "alive": false
+            },
+            {
+              "id": "sanjun",
+              "hpFrac": 1,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "routed",
+          "rowOutcome": "routed",
+          "rowRounds": 7
+        }
+      ],
+      "outcome": "routed",
+      "deaths": [],
+      "waveDefs": [
+        {
+          "id": "giant_mosquito",
+          "wave": 2,
+          "hp": [
+            30,
+            42
+          ]
+        },
+        {
+          "id": "mirror_stag",
+          "wave": 2,
+          "hp": [
+            110,
+            140
+          ]
+        },
+        {
+          "id": "union_rep",
+          "wave": 2,
+          "hp": [
+            80,
+            105
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 28,
+      "waves": [
+        "redactor",
+        "cliffhanger",
+        "hummice"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "redactor",
+          "packAtStart": {
+            "redactor": 1
+          },
+          "alliesAtStart": [
+            "v_gen_wq2ctln",
+            "v_gen_xvazyaf"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "died",
+          "steps": 16,
+          "scholarHpAtEnd": -0.03,
+          "monstersAtEnd": [
+            {
+              "id": "redactor",
+              "hpFrac": 0.107,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 15
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_ybmux50",
+          "causeArg": "the arena",
+          "waveIdx": 0,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "redactor",
+          "wave": 3,
+          "hp": [
+            260,
+            320
+          ]
+        },
+        {
+          "id": "cliffhanger",
+          "wave": 1,
+          "hp": [
+            70,
+            90
+          ]
+        },
+        {
+          "id": "hummice",
+          "wave": 1,
+          "hp": [
+            10,
+            14
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 29,
+      "waves": [
+        "living_wire",
+        "bright_idea",
+        "reunion"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "living_wire",
+          "packAtStart": {
+            "living_wire": 1
+          },
+          "alliesAtStart": [
+            "v_gen_y0di2bv",
+            "v_gen_nyn4lud"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "chained",
+          "steps": 4,
+          "scholarHpAtEnd": 1,
+          "monstersAtEnd": [
+            {
+              "id": "living_wire",
+              "hpFrac": -0.128,
+              "alive": false
+            }
+          ],
+          "tbEndResult": "won",
+          "rowOutcome": "won",
+          "rowRounds": 3
+        },
+        {
+          "waveIdx": 1,
+          "mid": "bright_idea",
+          "packAtStart": {
+            "bright_idea": 1
+          },
+          "alliesAtStart": [
+            "v_gen_nyn4lud",
+            "v_gen_y0di2bv"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "ended",
+          "steps": 2,
+          "scholarHpAtEnd": 1,
+          "monstersAtEnd": [
+            {
+              "id": "bright_idea",
+              "hpFrac": 0.721,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "routed",
+          "rowOutcome": "routed",
+          "rowRounds": 1
+        }
+      ],
+      "outcome": "routed",
+      "deaths": [],
+      "waveDefs": [
+        {
+          "id": "living_wire",
+          "wave": 1,
+          "hp": [
+            60,
+            80
+          ]
+        },
+        {
+          "id": "bright_idea",
+          "wave": 2,
+          "hp": [
+            55,
+            80
+          ]
+        },
+        {
+          "id": "reunion",
+          "wave": 4,
+          "hp": [
+            1200,
+            1400
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 30,
+      "waves": [
+        "algorithm",
+        "landlord",
+        "eulogy"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "algorithm",
+          "packAtStart": {
+            "algorithm": 1
+          },
+          "alliesAtStart": [
+            "v_gen_0h0q1ex",
+            "v_gen_7co4r92"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "died",
+          "steps": 5,
+          "scholarHpAtEnd": -0.01,
+          "monstersAtEnd": [
+            {
+              "id": "algorithm",
+              "hpFrac": 0.949,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 4
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_v8eath7",
+          "causeArg": "the arena",
+          "waveIdx": 0,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "algorithm",
+          "wave": 4,
+          "hp": [
+            1000,
+            1200
+          ]
+        },
+        {
+          "id": "landlord",
+          "wave": 2,
+          "hp": [
+            90,
+            120
+          ]
+        },
+        {
+          "id": "eulogy",
+          "wave": 4,
+          "hp": [
+            900,
+            1100
+          ]
+        }
+      ]
+    },
+    {
+      "chain": 31,
+      "waves": [
+        "terms_of_service",
+        "hummice",
+        "moderator"
+      ],
+      "partyN": 3,
+      "perWave": [
+        {
+          "waveIdx": 0,
+          "mid": "terms_of_service",
+          "packAtStart": {
+            "terms_of_service": 1
+          },
+          "alliesAtStart": [
+            "v_gen_g8m3an3",
+            "v_gen_w4dj78c"
+          ],
+          "scholarHpAtStart": 1,
+          "partyN": 3,
+          "outcome": "died",
+          "steps": 8,
+          "scholarHpAtEnd": -0.2,
+          "monstersAtEnd": [
+            {
+              "id": "terms_of_service",
+              "hpFrac": 0.492,
+              "alive": true
+            }
+          ],
+          "tbEndResult": "lost",
+          "rowOutcome": "lost",
+          "rowRounds": 7
+        }
+      ],
+      "outcome": "died",
+      "deaths": [
+        {
+          "scholarId": "gen_zw76fdd",
+          "causeArg": "the arena",
+          "waveIdx": 0,
+          "day": 30
+        }
+      ],
+      "waveDefs": [
+        {
+          "id": "terms_of_service",
+          "wave": 3,
+          "hp": [
+            340,
+            420
+          ]
+        },
+        {
+          "id": "hummice",
+          "wave": 1,
+          "hp": [
+            10,
+            14
+          ]
+        },
+        {
+          "id": "moderator",
+          "wave": 2,
+          "hp": [
+            150,
+            170
+          ]
+        }
+      ]
+    }
+  ],
+  "instrumentErrors": []
+}
