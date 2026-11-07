@@ -203,8 +203,13 @@ for seed in SEEDS:
             diffs.append('daily rows differ')
         if (cr is None) != (load_convo('r110', seed) is None):
             diffs.append('convo file presence differs')
-        elif cr is not None and cr != load_convo('r110', seed):
-            diffs.append('convo transcript differs (NOT byte-identical)')
+        elif cr is not None:
+            # The header line carries the run tag (r109 vs r110) by design;
+            # compare the conversation bodies (everything after line 1).
+            cr_body = '\n'.join(cr.split('\n')[1:])
+            ca_body = '\n'.join(load_convo('r110', seed).split('\n')[1:])
+            if cr_body != ca_body:
+                diffs.append('convo transcript differs (NOT byte-identical)')
     repro[seed] = diffs
     tele = j.get('teleAll') or []
     census = {str(c['id']): c for c in (j.get('census') or [])}
