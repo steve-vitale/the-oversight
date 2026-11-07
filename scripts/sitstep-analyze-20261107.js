@@ -72,7 +72,9 @@ files.forEach(function (f) {
 });
 
 wall.survivals.sort(function (a, b) { return a - b; });
-const mid = wall.survivals.length ? wall.survivals[Math.floor(wall.survivals.length / 2)] : null;
+const mid = wall.survivals.length ? (wall.survivals.length % 2 === 1
+  ? wall.survivals[Math.floor(wall.survivals.length / 2)]
+  : (wall.survivals[wall.survivals.length / 2 - 1] + wall.survivals[wall.survivals.length / 2]) / 2) : null;
 const focus = seeds[53006] || null;
 const contrast = seeds[53007] || null;
 let primary = null;
