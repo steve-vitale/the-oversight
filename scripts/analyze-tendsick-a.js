@@ -134,7 +134,7 @@ function seedStats(s) {
 }
 
 function loadCorpus(dir) {
-  const files = fs.readdirSync(dir).filter(f => /^tendsick-a-(competent|tendsick)-s\d+\.json$/.test(f)).sort();
+  const files = fs.readdirSync(dir).filter(f => /^tendsick-a-(competent|tendsick-a)-s\d+\.json$/.test(f)).sort();
   if (!files.length) { console.error('no per-seed files in ' + dir); process.exit(2); }
   const seeds = files.map(f => JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')));
   return { dir, files, seeds, stats: seeds.map(seedStats) };
