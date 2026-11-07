@@ -66,6 +66,7 @@ try { fs.mkdirSync(EVIDIR, { recursive: true }); } catch (e) {}
 let capture = [];
 let _currentSeed = null;
 let _G = null;
+let _ctx = null; // R114: the current seed's ctx (runConversation is top-level; runDays doesn't return ctx)
 function cap(line) {
   if (line == null) return;
   const s = String(line);
@@ -89,6 +90,15 @@ function monsterDisplay(mid) {
 function vname(vid) { try { return _G.displayName(vid) || vid; } catch (e) { return vid; } }
 function person(vid) { try { return _G.getPerson(vid) || {}; } catch (e) { return {}; } }
 function gday() { try { return (_G.state && _G.state.scholar && _G.state.scholar.day) || 0; } catch (e) { return 0; } }
+// R114 Q1-LANGGATE instrument (r114 prereg): comm level via the REAL
+// Game.commLevel (r113's driver read the nonexistent Game.npcComm).
+// Read-only state read; zero gameplay effect. 'unknown' when the API is
+// absent (never 'none' by default — an unknown is not a verdict).
+// Top-level: runConversation (top-level) records offers through it, and
+// installLangGateDecisions (inside makePolicy) records decisions.
+function commLevelOf(vid) {
+  try { const c = _G.commLevel ? _G.commLevel(vid) : null; return (c && c.level) || 'unknown'; } catch (e) { return 'unknown'; }
+}
 function waveNow() { try { return _G.unlockedWave ? _G.unlockedWave() : null; } catch (e) { return null; } }
 function scaleNow() { try { return _G.scaleRank ? _G.scaleRank() : null; } catch (e) { return null; } }
 function pantryKcal() {
@@ -455,6 +465,7 @@ function makePolicy() {
   policy.setup = function (G, ctx) {
     BASE.setup(G, ctx);
     policy._ctx = ctx; // runDays doesn't return ctx; stash it here
+    _ctx = ctx; // R114: runConversation (top-level) records langGateOffers into this
     ctx.fightsLog = [];
     ctx.regionalLog = [];
     ctx.waveLog = [];
@@ -752,17 +763,11 @@ function makePolicy() {
       (ctx.talkReqSnaps = ctx.talkReqSnaps || []).push({ day: gday(), bond, link, talk });
     } catch (e) { ctx.shipWrapErrors.push('talkReqSnap:' + String(e && e.message)); }
   }
-  // R114 Q1-LANGGATE instrument (r114 prereg): comm level via the REAL
-  // Game.commLevel (r113's driver read the nonexistent Game.npcComm).
-  // Read-only state read; zero gameplay effect. 'unknown' when the API
-  // is absent (never 'none' by default — an unknown is not a verdict).
-  function commLevelOf(vid) {
-    try { const c = _G.commLevel ? _G.commLevel(vid) : null; return (c && c.level) || 'unknown'; } catch (e) { return 'unknown'; }
-  }
   // R114 Q1-LANGGATE: wrap the four scholar-decision fns AFTER the bond
   // instrument install (this wrapper is outermost: instrument wraps the
   // original, we wrap the instrument's wrapper). Records commLevel at
-  // decision time. Installed in runSeed next to BONDINST.install.
+  // decision time (commLevelOf is top-level, next to gday). Installed in
+  // runSeed next to BONDINST.install.
   function installLangGateDecisions(G, ctx) {
     ['acceptBondProposal', 'declineBondProposal', 'acceptLinkRaise', 'declineLinkRaise'].forEach(function (fnName) {
       if (typeof G[fnName] !== 'function') return;
@@ -1359,12 +1364,17 @@ function runConversation(day, vid) {
       log(`(offered=${(choices || []).map(x => x && x.id).filter(Boolean).join(',')})`);
       const pick = pickChoice(choices, turn);
       // R114 Q1-LANGGATE: record every turn a bond:/link: choice is offered.
+      // _ctx is the current seed's ctx (set in runSeed); a missing _ctx
+      // skips recording rather than breaking the sitting.
       try {
-        const ids = (choices || []).map(x => x && x.id).filter(Boolean);
-        if (ids.some(id => id.indexOf('bond:') === 0 || id.indexOf('link:') === 0)) {
-          (ctx.langGateOffers = ctx.langGateOffers || []).push({ day, vid: String(vid), comm: commLevelOf(vid), offered: ids.filter(id => id.indexOf('bond:') === 0 || id.indexOf('link:') === 0), picked: (pick && pick.id) || null });
+        const rc = _ctx;
+        if (rc) {
+          const ids = (choices || []).map(x => x && x.id).filter(Boolean);
+          if (ids.some(id => id.indexOf('bond:') === 0 || id.indexOf('link:') === 0)) {
+            (rc.langGateOffers = rc.langGateOffers || []).push({ day, vid: String(vid), comm: commLevelOf(vid), offered: ids.filter(id => id.indexOf('bond:') === 0 || id.indexOf('link:') === 0), picked: (pick && pick.id) || null });
+          }
         }
-      } catch (e) { ctx.shipWrapErrors.push('langGateOffer:' + String(e && e.message)); }
+      } catch (e) { try { if (_ctx) (_ctx.shipWrapErrors = _ctx.shipWrapErrors || []).push('langGateOffer:' + String(e && e.message)); } catch (e2) {} }
       if (!pick || pick.id === 'leave') { log('YOU: (leave)'); break; }
       log(`YOU: [${pick.id}] ${pick.label}`);
       r = _G.convoTurn(vid, pick.id);
