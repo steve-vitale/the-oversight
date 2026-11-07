@@ -136,8 +136,17 @@ function install(Game) {
             });
             if (max > 0) row0.monsterHpFracEnd = +(hp / max).toFixed(3);
           } catch (e2) {}
-          t._currentTb = null;
-          t._currentTbFight = null;
+          // TBEND CHAIN (sim-tbend-a 2026-11-06): a nested startCombat
+          // inside tbEnd's finally (arena chain: _contestArenaAfter
+          // starts the next bout before tbEnd returns) already advanced
+          // _currentTb to the NEW fight's row. Nulling unconditionally
+          // here destroys the new fight's row pointer, so ITS tbEnd can
+          // never record its outcome (the 51002 Strike row stayed null
+          // for exactly this reason — the drumbelly bout's post-block
+          // clobbered it). Clear only pointers that still name THIS
+          // fight.
+          if (t._currentTb === row0) t._currentTb = null;
+          if (t._currentTbFight === f0) t._currentTbFight = null;
         }
       } catch (e) { t.instrumentErrors.push('tbEnd-tbrow: ' + String(e.message).slice(0, 80)); }
       return ret;

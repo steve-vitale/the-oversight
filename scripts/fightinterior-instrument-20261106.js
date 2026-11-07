@@ -252,12 +252,27 @@ function install(Game) {
       try { ret = origStart.apply(this, arguments); }
       catch (e) { throw e; }
       try {
-        // A fight that dissolved without tbEnd leaves a stale open trace;
-        // close it as unfinished before opening the new one — never two
-        // sessions open, never a silently dropped fight. Close path
-        // 'stale': the run continued, so an unclosed trace here is a
-        // dissolved fight, not a dead village (sim-pyrrhic-b).
-        if (t._trace) closeTrace('unfinished', null, null, 'stale');
+        if (t._trace) {
+          // TBEND CHAIN (sim-tbend-a 2026-11-06): a nested startCombat
+          // inside tbEnd's finally (arena chain: _contestArenaAfter starts
+          // the next bout before tbEnd returns) arrives while the
+          // just-ended fight's tbEnd is still on the stack — its fight
+          // object is already over with a real tbEnd result. That is NOT
+          // a dissolve: close the trace with the fight's own result
+          // ('won' → 'kill' when the kill is in killsLive), so the won
+          // fight is not misread as 'unfinished'. A fight that dissolved
+          // WITHOUT tbEnd carries result 'dissolved' (tbBarrierExit sets
+          // it directly) — that shape is NOT a tbEnd result and still
+          // closes 'unfinished' below.
+          const _of = t._trace._fight || null;
+          const _res = (_of && _of.over) ? _of.result : null;
+          if (_res === 'won' || _res === 'lost' || _res === 'fled' || _res === 'routed' || _res === 'calmed') {
+            const _row = (t.tbFights || []).find(function (r) { return r && r.seq === t._trace.tbSeq; }) || null;
+            closeTrace(String(_res), _of, _row, 'tbEnd');
+          } else {
+            closeTrace('unfinished', null, null, 'stale');
+          }
+        }
         const f = Game.tbfight;
         if (f && !f.over) {
           let maxWave = null, mids = [];
@@ -418,7 +433,15 @@ function install(Game) {
       try { ret = origTbEnd.apply(this, arguments); }
       catch (e) { throw e; }
       try {
-        if (trace0) closeTrace(result, f0, row0, 'tbEnd');
+        // TBEND CHAIN (sim-tbend-a 2026-11-06): a nested startCombat
+        // inside tbEnd's finally may already have closed trace0 (the
+        // over-aware close in the startCombat wrapper) and opened the
+        // next fight's trace. closeTrace reads the LIVE t._trace —
+        // closing that would stamp the OLD result onto the NEW fight.
+        // Close only the trace this tbEnd captured; anything else was
+        // already closed (or is the next fight's, and closes on its own
+        // tbEnd).
+        if (trace0 && t._trace === trace0) closeTrace(result, f0, row0, 'tbEnd');
       } catch (e) { t.instrumentErrors.push('tbEnd-trace: ' + String(e.message).slice(0, 80)); }
       return ret;
     };
