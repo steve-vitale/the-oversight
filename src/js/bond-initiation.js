@@ -721,6 +721,18 @@
       } catch (e) { bondWarn('bondTurn:winddown', e); }
       return { line: line, choices: G.convoChoices(vid), ended: false, transcript: (c && c.transcript) ? c.transcript.slice() : [] };
     }
+    // LANGUAGE GATE (journey-deepening r114, defense in depth): a bond:/
+    // link: choice that reaches here without shared words (any path that
+    // bypassed the menu gate above) is refused with an honest line and NO
+    // state change — the proposal stays pending. Fail-open if commLevel
+    // is missing.
+    if (kind === 'bond' || kind === 'link') {
+      var commB = null;
+      try { commB = (G.commLevel && G.commLevel(vid)) || null; } catch (e) { commB = null; }
+      if (commB && commB.level === 'none') {
+        return finish('"..." No shared words yet — you cannot agree to that in a language neither of you speaks.', '"..."');
+      }
+    }
     if (kind === 'bond' && act === 'accept') {
       var r = (G.acceptBondProposal || acceptBondProposal)(vid);
       return finish((r && r.line) || 'You go.', '"Yes. Stick together."');
@@ -743,6 +755,17 @@
   function bondChoices(vid) {
     var out = [];
     try {
+      // LANGUAGE GATE (journey-deepening r114): a bond/link commitment is
+      // made in words — with no shared language there is nothing to agree
+      // in. Canon (docs/CONVERSATIONS.md): no shared language -> the
+      // conversation is nonverbal (gesture choices only). 'partial' still
+      // offers: partial IS shared language. Fail-open if commLevel is
+      // missing (offer, preserving old behavior for unknown callers).
+      // The staged proposal stays staged until expiry (3 days); the
+      // villager may re-stage after the scholar learns the language.
+      var comm = null;
+      try { comm = (G.commLevel && G.commLevel(vid)) || null; } catch (e) { comm = null; }
+      if (comm && comm.level === 'none') return out;
       if (pendingBondProposal(vid)) {
         out.push({ id: 'bond:accept', label: '"Yes. Stick together."' });
         out.push({ id: 'bond:decline', label: '"Not like that. Not yet."' });
@@ -807,7 +830,31 @@
         if (typeof choiceId === 'string' && (choiceId.indexOf('bond:') === 0 || choiceId.indexOf('link:') === 0)) {
           try { this.convoMarkSubstantive(vid, choiceId); } catch (e) {}
           try { if (typeof this.convoDropUnspoken === 'function') this.convoDropUnspoken(vid, choiceId); } catch (e) {}
-          return this.bondTurn(vid, choiceId);
+          var bres = this.bondTurn(vid, choiceId);
+          // DECIDED-ASK CLEAR (journey-deepening r114): the ask is
+          // answered — its queued re-speak must not come back through the
+          // continuer. convoDropUnspoken above re-staged the queued beat
+          // into bondPending/linkPending BEFORE the decision; the decision
+          // consumed the request but not the re-staged beat, so a later
+          // goon ("And?") re-spoke it verbatim (Grace day 27, seed 95601,
+          // r113). Same shape as the r40 invite double-serve (fixed at
+          // conversation.js:5183); the bond path never got the matching
+          // clear. Clear ONLY the decided kind: an undecided ask still
+          // comes back when dodged (r8 design). Only the two kinds'
+          // pending slots and held beats are touched.
+          try {
+            var cc = (typeof this.convoGet === 'function') ? this.convoGet(vid) : null;
+            if (cc) {
+              if (choiceId.indexOf('bond:') === 0) {
+                cc.bondPending = null;
+                if (cc.heldBeats) cc.heldBeats = cc.heldBeats.filter(function (h) { return !(h && h.bondproposal); });
+              } else {
+                cc.linkPending = null;
+                if (cc.heldBeats) cc.heldBeats = cc.heldBeats.filter(function (h) { return !(h && h.linkraise); });
+              }
+            }
+          } catch (e) { bondWarn('convoTurn:clearDecided', e); }
+          return bres;
         }
       } catch (e) { bondWarn('convoTurn:bond', e); }
       return _convoTurn.call(this, vid, choiceId);
