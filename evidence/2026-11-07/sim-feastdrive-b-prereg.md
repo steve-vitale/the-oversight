@@ -191,6 +191,66 @@ WHICH gate blocks the feast; the drive is designed on its answer,
 not on a guess. The probe changes no threshold and re-scores
 nothing — the DIAG-NO-GO above stands whatever it finds.
 
+## Prereg v2 amendment (PILOT — composition frozen, before any judged pilot sim)
+
+**Dusk probe result (corpus `perseed-feastdrive-b-dusk/`, 5 seeds,
+0 instrument errors):** on 454 armed dusks the scholar IS at haven
+at dusk (453/454), the plan is ok and the pantry carries it on most
+dusks — and **recent gives are 0 on essentially every armed dusk**
+(median 0 on all 5 seeds, max 1340, never ≥ 1500). First-failing
+gate at dusk: gives-short 339, thin pantry 73, plan-not-ok 41,
+away 1, feasible 0. The blocker is competent's EAT FIRST gate
+(`eveningFeast`: recent gives ≥ 1500 kcal/week) — the scholar
+donates ~nothing because the base `donateHaul` keeps a 2400-kcal
+personal buffer and the daily identified surplus rarely exceeds
+it. Arming is NOT the blocker (resonance 99–318 vs 35 needed; arms
+day 14–25 on all 8 seeds). The reactor is a separate, by-design
+block on 2 seeds (all 4+2 grants refused while it hums — the
+drive skips feasting while it is online rather than wasting the
+pantry). The chain works end-to-end when it runs (53005: arm d16
+→ feast d20 → grant → draw → face → spend the same day).
+
+**Drive composition (FROZEN — `scripts/policies/competent-feastdrive-b.js`,
+composing onto the FROZEN staged substrate, unmodified):**
+1. **Donate-down (daily, after staged.daily):** if the devotion is
+   armed (`prog.feastSurge`) AND no feast buff is live AND recent
+   gives (7d) < 1500, donate identified surplus down to a keep of
+   0.5 × kcalCap (vs the base 2400) via the engine verb
+   `Game.donateToPantry` — the same readiness rules as the base
+   `donateSurplus` (identified, edible, safe, unspoiled). Skipped
+   when the scholar's own kcal < 0.5 × cap (eat first, honestly).
+   Once gives reach 1500/week the base keep applies again.
+2. **Feast-at-dusk (upkeep, after staged.upkeep):** at dusk, if
+   armed AND no live buff AND no reactor online AND `feastPlan`
+   ok AND have ≥ cost × 1.5 AND recent gives (7d) ≥ 1500 AND no
+   feast today → `hostFeast()`. No 7-day cadence (the base
+   cadence is the other half of the never-feast: a 2-dawn window
+   with a 7-day cadence leaves most fights unbuffed); the
+   no-live-buff check is the cadence.
+3. **Fight side: inherited, unchanged** — rally + competent fight
+   + `feastFightRoad` (faces the draw, patrols while feasted); the
+   harness faces any pending draw. No new fight logic: 53005 proves
+   face → spend works through the existing path.
+4. **What it does NOT do:** no EAT FIRST bypass (the gate stays;
+   the drive meets it by giving, not by skipping it); no feast
+   while the reactor hums; no feast while a buff is live (a
+   refresh draws nothing and wastes pantry); no channel change
+   (arming already works); no roster/list reads (arming, gives,
+   plan, buff, and haven are all scholar-knowable state).
+
+**Primary metric (frozen in v1, unchanged):** `feastSurgeUsed`
+on ≥ 3/8 seeds (baseline 0–1/8 — diag: 1/8) AND `foodDeeds`
+complete on ≥ 2/8 (baseline 0/8 — diag: 1/8).
+**Cost bar (frozen in v1, unchanged):** starvation deaths ≤
+control + 2 total AND arm-only, median survival ≥ 0.8× control.
+**Secondaries (frozen in v1, unchanged).** **Baseline leg:** the
+diag corpus (`perseed-feastdrive-b-diag/`) IS the baseline — same
+policy, same band, same base, reproduction verified exactly; no
+re-run. **Armed leg:** `perseed-feastdrive-b-armed/` via the same
+driver (`POLICY=feastdrive`). **Panel (§15):** one combined
+balance-panel campaign, both policies registered, same seeds/days;
+compare `.md` attached.
+
 ## Proof (before any judged sim)
 
 `scripts/test-feastdrive-20261107.js`: instrument wrap/record
