@@ -3,9 +3,12 @@
 // classifyGate (every link in the sit chain + edge cases), a fake-Game
 // test that the sit-attempt wraps count calls and pass results through,
 // and a live leg: seed 53006 staged, 150d, asserting the recorder runs,
-// pair days reproduce the confirm2 number (42), sit attempts are
-// counted (0), and instrument errors are 0. Exit non-zero on any
-// failure. The live leg writes nothing into the repo.
+// pair days reproduce the current-master number (51 on base dab55c69 —
+// the trajectory moved from 42 on the 41007b9d4 base when Loop A's
+// vetkilltale fireside-tale landing shifted the fragile staged leg;
+// the proof pins the CURRENT master's numbers, same rule as before),
+// sit attempts are counted (0), and instrument errors are 0. Exit
+// non-zero on any failure. The live leg writes nothing into the repo.
 // Usage: node scripts/test-sitstep-20261107.js
 'use strict';
 const path = require('path');
@@ -174,8 +177,8 @@ async function liveLegs() {
   check('live-53006-runs', result && result.days === 150 && daily.length >= 140 &&
     inst.t.instrumentErrors.length === 0,
     'days=' + (result && result.days) + ' snaps=' + daily.length + ' errs=' + JSON.stringify(inst.t.instrumentErrors));
-  check('live-53006-determinism', pairDays === 42 && (fin.standing | 0) === 440 &&
-    (fin.unlockedWave | 0) === 5 && (fin.waveKillLog || []).filter(function (e) { return ((e.w | 0) >= 4); }).length === 11,
+  check('live-53006-determinism', pairDays === 51 && (fin.standing | 0) === 415 &&
+    (fin.unlockedWave | 0) === 5 && (fin.waveKillLog || []).filter(function (e) { return ((e.w | 0) >= 4); }).length === 8,
     'pairDays=' + pairDays + ' standing=' + fin.standing + ' unlocked=' + fin.unlockedWave +
     ' w4kills=' + (fin.waveKillLog || []).filter(function (e) { return ((e.w | 0) >= 4); }).length);
   check('live-53006-sit-counted', inst.t.sitAttempts.length === 0 && (fin.sitAttempts || []).length === 0,

@@ -7,19 +7,25 @@ policy edits:** replay the frozen staged policy
 53001–53008 with a seat-gate recorder reading the live sit chain
 every day. **Verdict: DIAG-GO** — by the preregged bar: a single
 named ordered set of gates explains the no-sit on 42/42 (100%) of
-53006's pair days (bar ≥ 80%), with per-day gate state shown in the
-corpus.
+53006's pair days on the first measurement, and on 51/51 (100%) on
+the current-master re-run (bar ≥ 80%), with per-day gate state shown
+in both corpora.
 **Band:** 53001–53008 DELIBERATELY REUSED (a re-run, not a fresh
 band) · **Horizon:** 150d death-aware · **Legs:** staged replay only
 (DIAG — no baseline leg; the comparison is replay vs the confirm2
 staged headlines) · **Corpus:**
-`evidence/2026-11-07/perseed-sitstep-b/` (8 files) · **Prereg:**
+`evidence/2026-11-07/perseed-sitstep-b/` (8 files, first measurement,
+base 41007b9d4) + `evidence/2026-11-07/perseed-sitstep-b-r2/` (8 files,
+current-master re-run, base dab55c69) · **Prereg:**
 `evidence/2026-11-07/sim-sitstep-b-prereg.md` (committed 30f364275
 before any judged sim) · **Proof:**
 `scripts/test-sitstep-20261107.js` 23/23 green before the judged
-run (fixtures + fake-Game sit-wrap test + live 53006 determinism
-leg) · **Analyzer:** `scripts/sitstep-analyze-20261107.js`
-(analysis at `/tmp/sitstep-analysis.json`, working copy).
+run, re-pinned and green again after each rebase (see the
+master-move re-run below) · **Analyzer:**
+`scripts/sitstep-analyze-20261107.js` (analyses at
+`/tmp/sitstep-analysis.json` — first measurement — and
+`/tmp/sitstep-analysis-r2.json` — re-run; working copies, the
+evidence file is the record).
 
 **The one-line result, plainly:** the village never sat because the
 seat was never earned — not because anyone refused it, and not
@@ -34,6 +40,47 @@ action was never even reachable: the table preview was null on
 every day of every seed, so no policy — competent or otherwise —
 could have sat, and the "bot never sits" question is untested, not
 answered.
+
+## Master-move re-run (base dab55c69 — the verdict survives the master)
+
+While this arm was merging, Loop A landed `sim-vetkilltale-a`
+(ad665d5e5: a veteran-kill fireside tale for repeat wave-4+ kills —
+`src/js/game.js` +97/−2, a new night fireside beat on the kill
+path), and master moved from b690777cc to dab55c69. The proof's
+live determinism leg failed on the rebase (22/23): 53006 staged now
+runs 51 pair days, standing 415, 8 wave-4+ kills — not 42 / 440 /
+11. That is the trajfrag shape, not a recorder failure: a narration
+beat added to the kill path shifted the fragile staged trajectory,
+and only the kill-heavy seed moved (the other seven seeds reproduce
+byte-identically). So the whole band was re-run on the new master
+(RUN `sitstep-staged-r2`, corpus `perseed-sitstep-b-r2/`), the proof's
+determinism expectation was re-pinned to the new master's numbers
+(51 / 415 / 8), and the proof is 23/23 green again on the rebased
+tip. The verdict not only survives — it is stronger on the new
+master:
+
+| Seed | First measurement (41007b9d4) | Re-run (dab55c69) |
+|---|---|---|
+| 53001 | 106, lost, 1 kill, 0 pair days | identical |
+| 53002 | 150, survived, 1 kill, 0 pair days | identical |
+| 53003 | 92, lost, 2 kills, 0 pair days | identical |
+| 53004 | 88, lost, 1 kill, 0 pair days | identical |
+| 53005 | 89, lost, 0 kills, 0 pair days | identical |
+| 53006 | 150, survived, 11 kills, 42 pair days, standing 440 | 150, survived, 8 kills (2 wave-5), 51 pair days, standing 415 |
+| 53007 | 150, survived, 4 kills, 11 pair days | identical |
+| 53008 | 123, lost, 0 kills, 0 pair days | identical |
+
+On the re-run, 53006's 51 pair days (89–126, then 139–151) classify
+`no-seat` 51/51 (100%) on the SAME ordered set — scale `village`
+51/51, feast surge never spent 51/51. The day-90 reactor beat is
+verbatim the same, the pair still starts day 89, readiness-5 is
+still ready at the end, and the wall numbers are unchanged
+(national 0, table 0, wins 0, wave-4 unlocks 7/8, wave-5 unlock 1/8,
+median survival 114.5d). The numbers below are the first
+measurement's; the re-run's differ only where this section says so.
+A DIAG-GO that rests on one master's trajectory would be suspect —
+this one was re-measured on the next master and the gate is the
+same.
 
 ## The gate, as measured (53006, 42 pair days)
 
@@ -388,16 +435,26 @@ wall numbers above are the instrument's own.
   worktree before the judged run (12 classifyGate fixtures, 6
   fake-Game sit-wrap checks, 5 live-leg checks: 53006 staged 150d
   reproduces 42 pair days, standing 440, 11 wave-4+ kills, 0 sit
-  attempts, 0 instrument errors).
+  attempts, 0 instrument errors — the 41007b9d4-base numbers).
+  After the master move to dab55c69 the determinism leg failed
+  honestly (22/23: 51 pair days, standing 415, 8 kills — the
+  vetkilltale landing moved the fragile staged trajectory); the
+  expectation was re-pinned to the new master's numbers and the
+  proof is 23/23 green again on the rebased tip. The expectation
+  was changed because the master changed, never to force green —
+  the re-run corpus independently measures the same new numbers.
 - Prereg committed 30f364275 before any judged sim. The safe-commit
-  index clobber hit on the prereg commit and on the proof commit
-  (files shown staged-as-deleted after correct commits); repaired
-  with HEAD-blob cacheinfo, verified `git status` empty +
-  `git diff HEAD` empty + hash-object matches, both times.
-- Judged corpus: `evidence/2026-11-07/perseed-sitstep-b/` (8 files,
-  staged replay, 0 instrument errors). Analyzer output saved at
-  `/tmp/sitstep-analysis.json` (working copy; the evidence file
-  above is the record).
+  index clobber hit on the prereg commit, the proof commit, and the
+  evidence commit (files shown staged-as-deleted after correct
+  commits); repaired with HEAD-blob cacheinfo, verified `git status`
+  empty + `git diff HEAD` empty + hash-object matches, each time.
+- Judged corpora: `evidence/2026-11-07/perseed-sitstep-b/` (8 files,
+  staged replay, base 41007b9d4, 0 instrument errors) and
+  `evidence/2026-11-07/perseed-sitstep-b-r2/` (8 files, staged
+  replay, base dab55c69, 0 instrument errors). Analyzer outputs
+  saved at `/tmp/sitstep-analysis.json` (first measurement) and
+  `/tmp/sitstep-analysis-r2.json` (re-run) — working copies; the
+  evidence file above is the record.
 
 ## Convergence
 
