@@ -1,0 +1,27 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=15)
+=== seed 95914 day 120 — conversation with Sari (sari_wulandari) ===
+occupation=postal worker temperament=steady trust=91 dead=false
+want: seek_comfort (stage 0)
+open thread: grief fromSeed=false
+picker: control
+
+THEM: "They'd tell me to keep working. So I'm working. That's the whole plan."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: They shake their head, then nod — both true at once. "Talk to me a bit. That helps more than anything."
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Good question." "That was me — headed out for water."
+YOU: [dlg:more] "Go on."
+THEM: "Yara headed out for water."
+YOU: [dlg:react] (listen)
+THEM: "Hassan headed out for water."
+YOU: [dlg:more] "Tell me more."
+THEM: "I left. Walked back in like I'd never left, apparently."
+YOU: [dlg:react] (listen)
+THEM: "Farid headed out for water."
+YOU: [dlg:more] "Tell me more."
+THEM: "James ate something last month that should've killed them. They're fine."
+YOU: (leave)
+pre-close: want seek_comfort stage 2 thread gossip
+closing line: "Sorry. I need a minute."
+(gossip picks this sitting: 1)

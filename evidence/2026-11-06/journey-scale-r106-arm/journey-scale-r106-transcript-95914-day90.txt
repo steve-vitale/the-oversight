@@ -1,0 +1,25 @@
+(pre-talk seed: ask_favor planted d90; takenWantDay=0; convoCount=21)
+=== seed 95914 day 90 — conversation with Sigrun (sigrun_eiriksdottir) ===
+occupation=night security guard temperament=withdrawn trust=90 dead=false
+want: ask_favor (stage 2)
+open thread: goal fromSeed=true
+picker: control
+
+THEM: Show me what's hurt. Doesn't matter if it's a leg or a water pump. I'll look.
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Sigrun shows you where they go to think. "Don't tell the others. Everyone needs one place."
+YOU: [dlg:more] "Tell me more."
+THEM: "I learned to set a bone before I learned to read. Hands first, always."
+YOU: [dlg:react] (listen)
+THEM: "Bodies mend. It's the other stuff — trust, hope — that takes the real work."
+YOU: [dlg:more] "Tell me more."
+THEM: "I can't save everyone. I can save the person in front of me. Start there."
+YOU: [dlg:react] (listen)
+THEM: They nod slowly, not quite done, not quite continuing.
+YOU: [dlg:more] "Tell me more."
+THEM: "Healing's slow. People want it fast. I'm learning to be patient with both."
+YOU: (leave)
+pre-close: want ask_favor stage 2 thread goal
+closing line: "Good talk."
+(gossip picks this sitting: 0)
