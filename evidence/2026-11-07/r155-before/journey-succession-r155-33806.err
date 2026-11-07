@@ -1,0 +1,39 @@
+
+ORGANIC DEATH d36: Violet -> Badr, topTrust=[{"id":"Elif","t":98},{"id":"Ellie","t":90},{"id":"Badr","t":80},{"id":"Ivy","t":68}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=16 inheritedPlants=0 keptSkills=4 inheritedSkills=0 succTrustPre=90 succTrustPost=80
+PARITY readable=true equal=true inherited=[] pre=["iron_stomach","rage","green_whisper","echo_location"] post=["iron_stomach","rage","green_whisper","echo_location"]
+DEATH d36 (organic (phase A)): Violet -> Badr | passed=true lin=false mo=false trust=80 vouchers=4
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Ellie (refused=false)
+  CONVO d+3 with Ivy (refused=false)
+  STRANGER-PROBE d+3 with Brayden (trust=14 refused=false)
+  CONVO d+7 with Ivy (refused=false)
+  CONVO d+7 with David (refused=false)
+  NEWCOMER-PROBE d+8 with Petra (arrived d+8, trust=29 refused=false)
+  CONVO d+14 with Ivy (refused=false)
+  CONVO d+14 with David (refused=false)
+  CONVO d+30 with David (refused=false)
+  CONVO d+30 with Ivy (refused=false)
+  CONVO d+45 with David (refused=false)
+  CONVO d+45 with Amina (refused=false)
+  CONVO d+53 with David (refused=false)
+  CONVO d+53 with Amina (refused=false)
+  CONVO d+64 with Ivy (refused=false)
+  CONVO d+64 with David (refused=false)
+
+FUNERAL: deathBeat=8 recover=3 vouch=3 (eligible=4) echo=1 organicBurial={"respects":false,"bury":false} halfRation=13
+
+MEAL-GATE: audited=70 violations=0 noMealDays=7 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=71 signals={"levelUp":true,"systemVoice":47,"offerLines":107,"codexPlantsDelta":30,"codexSkillsDelta":19,"codexAbilitiesDelta":8,"xpDelta":25,"any":true} pantry 10995->12539
+TRUST-DIALS: office 80->86 (+6, climb) | villageMean 53.8->81.6 (+27.8, climb) | ge60 4->6 | movers>=5: [{"id":"Amina","from":30,"to":94,"delta":64},{"id":"Ella","from":30,"to":92,"delta":62},{"id":"Yara","from":50,"to":90,"delta":40},{"id":"David","from":63,"to":93,"delta":30},{"id":"Brayden","from":1,"to":22,"delta":21}]
+DEED-LEDGER: calls=38 summary={"teachPlant":{"calls":3,"ok":3,"deltaSum":0,"deltaN":3,"positive":0,"meanDelta":0},"giveFood":{"calls":16,"ok":16,"deltaSum":20,"deltaN":16,"positive":10,"meanDelta":1.25},"donateToPantry":{"calls":19,"ok":19,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=false(echoMentions=1 (convo=1, say=0)) m4=false m5=manual | endDay=107 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=false dayAdv=71
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+71) t2=true(deedCalls=38) trustVerdict={"readable":true,"officeMantle":80,"officeLast":86,"officeDelta":6,"officeClass":"climb","villageMantle":53.8,"villageLast":81.6,"villageDelta":27.8,"villageClass":"climb","villageGe60Mantle":4,"villageGe60Last":6,"movers":[{"id":"Amina","from":30,"to":94,"delta":64},{"id":"Ella","from":30,"to":92,"delta":62},{"id":"Yara","from":50,"to":90,"delta":40},{"id":"David","from":63,"to":93,"delta":30},{"id":"Brayden","from":1,"to":22,"delta":21}]}
+E6/CALLCHECK: e6={"callMoves":11,"withCensus":11,"chainHandoffs":3,"trustMoves":8} callCheck={"dailyMoveDays":11,"callMoveDays":10,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=3 (v2=3, excludedLoot=0))
+E7/R47: e7={"trustMoves":8,"soloOffice":2,"soloOfficeDeltas":[1,1],"soloBearerDeltaExact":[1,1],"singleMoverBearer":2,"singleMoverOther":3,"eventClass":{"event-only":0,"deed-only":2,"both":6,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":1,"v2":3,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":3,"known":3,"unknown":0} e3={"dailyDays":71,"moves":11}

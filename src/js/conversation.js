@@ -5562,11 +5562,27 @@
       if (bondBeat) {
         if (openerOwnsReply || inviteBeat) c.bondPending = bondBeat;
         else if (openerCarriedBond) recordStagedBeat(bondBeat, 'bondproposal');
+        // OPENER SKIP (journey-succession r155 2026-11-07): a run-blocked
+        // staged proposal must not go dry here — the talk-request opener
+        // (convoOpening #1, r19) already skipped it for the same block,
+        // and re-speaking it as the beat dries the opening ("...Sorry,
+        // lost my train of thought." right after a live opener; 33803
+        // d77 Caleb). The pending stays staged and the request stays
+        // undelivered, so it fires next conversation once the ledger
+        // slides. Holding it instead would only defer the same blocked
+        // sayLine to the goon turn.
+        else if (this.convoWouldBlock(vid, bondBeat)) { /* skip: pending stays staged */ }
         else this.sayLine(vid, bondBeat, { bondBeat: true, tag: 'bondproposal' });
       }
       if (linkBeat) {
         if (openerOwnsReply || inviteBeat || bondBeat) c.linkPending = linkBeat;
         else if (openerCarriedLink) recordStagedBeat(linkBeat, 'linkraise');
+        // OPENER SKIP (journey-succession r155 2026-11-07): same shape as
+        // the bond beat above — the staged link line is one fixed
+        // phrasing per village+how, and a second villager raising the
+        // same village first run-blocks it (33806 d39 Ivy, Stonebridge).
+        // Skip, keep staged, fire next sitting.
+        else if (this.convoWouldBlock(vid, linkBeat)) { /* skip: pending stays staged */ }
         else this.sayLine(vid, linkBeat, { linkBeat: true, tag: 'linkraise' });
       }
       // COHERENCE (Steve 2026-10-07): drift is never silent. When lived
@@ -5614,7 +5630,20 @@
       // learned the concept, you can bring it up with any trader yourself.
       if (this.isKnowledgeTrader && this.isKnowledgeTrader(vid) && !this.hasDiscovered('trade') && Math.random() < 0.5) {
         const seed = '"...I should say, I trade in what I know. My knowledge for yours. Or food, if you\'re short on secrets."';
-        if (!c.pendingQ && !c.reactiveQ && !c.genericQ && opThread !== 'request' && !inviteBeat &&
+        // OPENER SKIP (journey-succession r155 2026-11-07): the seed is
+        // ONE fixed line, so a run-ledger block dries the opening
+        // ("...Sorry, lost my train of thought." right after a live
+        // opener; 33803 d62 Owen, 33806 d39 Ivy, and 3x on r151's
+        // 33806). Skip it when blocked — and do NOT mark it mentioned:
+        // the old code set traderMentioned even on the dry line, so the
+        // mechanic read as introduced although the player never heard
+        // it. The 50% roll retries next conversation once the ledger
+        // slides. Queuing it as a held intro would only defer the same
+        // blocked sayLine to the goon turn, so a blocked seed is skipped
+        // outright, not deferred.
+        if (this.convoWouldBlock(vid, seed)) {
+          /* skip: not mentioned, not queued */
+        } else if (!c.pendingQ && !c.reactiveQ && !c.genericQ && opThread !== 'request' && !inviteBeat &&
             !(opThread === 'want' && c.want && (c.want.stage || 0) < 3)) {
           c.thread = 'trade'; c.depth = 0;
           this.sayLine(vid, seed, { tag: 'offer', topic: 'trade' });
