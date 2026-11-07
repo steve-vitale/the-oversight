@@ -13,6 +13,15 @@
 // GO bar (prereg amendment, binding): starvation deaths <= 1 AND median
 // survival >= 92.4d (baseline: 3 deaths, 115.5d). Judged by the analyzer
 // output + the evidence file, never by this sweep.
+//
+// REVERTED POST-KILL (sim-prodstore-a, 2026-11-07): the pilot NO-GO'd
+// (starvation 2 vs bar ≤1; CONCEPT-DEAD as a standalone lever — see
+// evidence/2026-11-07/sim-prodstore-a.md) and the lever hunk was reverted
+// from src/js/game.js, so PRODSTORE_LEVER=1 no longer changes anything:
+// re-running this sweep now measures the BASELINE, not the armed lever.
+// Do not re-run as an armed pilot. The armed corpus is preserved at
+// evidence/2026-11-07/prodstore-a-corpus-armed/ and the lever as measured
+// lives in the branch history (commit 471ced6d8).
 'use strict';
 const fs = require('fs');
 const path = require('path');

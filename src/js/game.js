@@ -16435,23 +16435,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return fk / burn;
     },
 
-    // PRODSTORE_LEVER (sim-prodstore-a, 2026-11-07, axis food-economy):
-    // the plenty threshold the production throttle + both easings read.
-    // Baseline 4 fresh days; armed 7. Diagnosis (8 seeds 96201-96208,
-    // 150d): the throttle engages on 662/911 village-days (72.7%) and the
-    // two easings discard 2,651,133 kcal (17.1% of produced) while
-    // villagers eat only 89.5% of need — the pantry sensor reads "plenty"
-    // from pantry draws alone, and draws are ~6% of eating, so it fires
-    // during scarcity. Armed, the village demands a full week's buffer
-    // before standing down food work. Env-gated for measurement; off =
-    // baseline byte-identical (no RNG in this path).
-    _prodstorePlentyThreshold() {
-      try {
-        if (typeof process !== 'undefined' && process.env && process.env.PRODSTORE_LEVER) return 7;
-      } catch (e) {}
-      return 4;
-    },
-
     prodThrottleEngaged() {
       // HUNGER EXEMPTION (2026-10-14): never leave food standing during a
       // genuine hunger stretch. hungryStreak >= 3 is the game's own
@@ -16461,7 +16444,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const pg = (typeof this.progState === 'function') ? this.progState() : null;
         if (pg && (pg.hungryStreak || 0) >= 3) return false;
       } catch (e) {}
-      return this.pantryFreshDays() > this._prodstorePlentyThreshold();
+      return this.pantryFreshDays() > 4;
     },
 
     // THROTTLEBEAT (2026-10-14): true exactly when the production throttle
@@ -16470,7 +16453,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // change — it only names the stand-down so the beat below can narrate
     // it and the village ledger can count it (v.throttleExemptDepth).
     prodThrottleHungerExempt() {
-      if (this.pantryFreshDays() <= this._prodstorePlentyThreshold()) return false;
+      if (this.pantryFreshDays() <= 4) return false;
       try {
         const pg = (typeof this.progState === 'function') ? this.progState() : null;
         if (pg && (pg.hungryStreak || 0) >= 3) return true;

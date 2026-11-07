@@ -225,6 +225,15 @@ pre-rebase base (eac2bfc4d + lever); the rebase replays the identical
 lever hunk onto newer master and changes no measured number — the lever
 is killed, so no pilot re-run was spent on the new base.
 
+## Revert note (killed arm leaves no trace)
+
+The lever hunk was reverted from src/js/game.js after the NO-GO (the
+`_prodstorePlentyThreshold` helper removed, `> 4` / `<= 4` restored —
+game.js is byte-identical to master). The measurement record stays:
+prereg + amendment, diagnosis instruments, both corpora, sweeps, proof
+test, and this evidence file. The lever as measured lives in branch
+history (commit 471ced6d8) and the armed corpus.
+
 ## Files
 
 - Prereg + amendment: evidence/2026-11-07/sim-prodstore-a-prereg.md
