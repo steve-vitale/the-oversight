@@ -41,10 +41,15 @@
 //       on this base agrees (60d survived both), and the parent
 //       arm's own evidence records the anchor drifting twice
 //       before (57d lost → 60d survived → 52d lost).
-//   (c) non-stranded anchor: seed 15003 loop-day 7 sleep window
+//   (c) non-stranded anchor: seed 15003 loop-day 16 sleep window
 //       contains a 'Word gets around the haven' line, classified
 //       non-stranded sleep with the scholar inside Haven at fire
-//       time (reproduces on this base, verified 2026-11-06).
+//       time (the strandnarr-a §2 known hit, re-pinned 2026-11-07:
+//       the ld7 day went stale on current master — the ld16 window
+//       holds TWO word lines, both inside Haven, verified live by
+//       scripts/probe-gossip-anchor-a.js; the 0715Z "no re-pin
+//       available on 15003" read the trimmed corpus, which discards
+//       non-stranded sleep-window gossip lines by design).
 // Usage: node scripts/test-lingergorge-a.js
 // Env (the bankfood substrate gates, as in lingergorge-trace-a.js):
 //   COMPETENT_FEAST=0 SEATDRIVE=0 PLENTYDEPRI=0 DEPOSITGATE=1
@@ -237,12 +242,12 @@ function stageLingerer(Game, opts) {
   process.env.STRANDNARR = '1';
   const s15003 = await oneInstance(15003, { days: 60 });
   const a15003 = analyzeInstance(s15003);
-  const hit7 = (a15003.nonStranded.sleepHits || []).find((h) => h.loopDay === 7 && h.kind === 'word');
-  check('non-stranded anchor: 15003 loop-day-7 sleep window has a Word-gets-around line',
-    !!hit7, 'sleepHits=' + JSON.stringify((a15003.nonStranded.sleepHits || []).map((h) => [h.loopDay, h.kind])));
+  const hit16 = (a15003.nonStranded.sleepHits || []).find((h) => h.loopDay === 16 && h.kind === 'word');
+  check('non-stranded anchor: 15003 loop-day-16 sleep window has a Word-gets-around line',
+    !!hit16, 'sleepHits=' + JSON.stringify((a15003.nonStranded.sleepHits || []).map((h) => [h.loopDay, h.kind])));
   check('non-stranded anchor: that hit fires inside Haven',
-    !!hit7 && hit7.position && hit7.position.inside === true,
-    JSON.stringify(hit7 && hit7.position));
+    !!hit16 && hit16.position && hit16.position.inside === true,
+    JSON.stringify(hit16 && hit16.position));
   console.log('---');
   console.log('lingergorge proof: ' + (checks - fails) + '/' + checks + ' checks pass');
   process.exit(fails ? 1 : 0);
