@@ -336,6 +336,24 @@ for (const f of files) {
     for (const m of mantle) if (m.day <= day) holder = m.to;
     return holder;
   };
+  // R112 Q2 EAMON FALLBACK: a starvation death landing after the last
+  // snapshot (horizon-day deaths) has no autopsy — the driver records
+  // autopsies per snapshot, and the death falls outside the write. The
+  // series snap's pantryKcal is the SAME measure as the autopsy
+  // pantryEdible (both sum pantry units x kcalEach), so fall back to the
+  // last series snap with day <= death day and label the source. The
+  // returned object keeps a .pantryEdible field so the D/E join below
+  // reads the fallback value too (a horizon-day Haven scholar death is
+  // now classified D/E on the same measure instead of unexplained).
+  const pantryAtDeathFor = (who, day) => {
+    const aut = (d.starvAutopsies || []).find(a => a.who === who && a.day === day);
+    if (aut && typeof aut.pantryEdible === 'number') return { pantryEdible: aut.pantryEdible, label: '' };
+    const before = (series || []).filter(s => s.day <= day);
+    const snap = before.length ? before[before.length - 1] : null;
+    if (snap && typeof snap.pantryKcal === 'number') return { pantryEdible: snap.pantryKcal, label: ' (series d' + snap.day + ', no autopsy)' };
+    return { pantryEdible: null, label: '' };
+  };
+  const pantryStr = (r) => (r.pantryEdible == null ? '?' : r.pantryEdible + r.label);
   for (const death of deaths) {
     if (!/starv|hunger|kcal/i.test(death.cause || '')) continue;
     starvDeaths++;
@@ -353,8 +371,8 @@ for (const f of files) {
     try { scholarId = scholarIdAt(day); } catch (e) { console.log(`  STARVATION d${day} scholarIdAt ERROR: ` + (e && e.message)); }
     const isScholar = !!(scholarId && death.who === scholarId);
     if (!isScholar) {
-      const pan0 = (d.starvAutopsies || []).find(a => a.who === death.who && a.day === day);
-      console.log(`  STARVATION d${day} ${nameOf(death.who)} (NPC, not the scholar) pantryAtDeath=${pan0 ? pan0.pantryEdible : '?'}`);
+      const pan0 = pantryAtDeathFor(death.who, day);
+      console.log(`  STARVATION d${day} ${nameOf(death.who)} (NPC, not the scholar) pantryAtDeath=${pantryStr(pan0)}`);
       console.log(`    -> CAUSE CLASS F (NPC starvation — scholar-scoped series cannot adjudicate the deceased's location or feeding; famine vs doorstep undetermined)`);
       continue;
     }
@@ -368,9 +386,9 @@ for (const f of files) {
     const zeroDays = series.filter(s => s.day <= day && s.scholarKcal === 0).length;
     const before = series.filter(s => s.day <= day);
     const traj = before.map(s => `d${s.day}:${s.loc === 'wild' ? 'W' : 'H'}/${s.scholarKcal}`).join(' ');
-    const pan = (d.starvAutopsies || []).find(a => a.who === death.who && a.day === day);
+    const pan = pantryAtDeathFor(death.who, day);
     console.log(`  STARVATION d${day} ${nameOf(death.who)} awayStreak=${streak} zeroKcalDays<=death=${zeroDays} ` +
-      `pantryAtDeath=${pan ? pan.pantryEdible : '?'}`);
+      `pantryAtDeath=${pantryStr(pan)}`);
     console.log(`    trajectory: ${traj}`);
     const awayRows = digest.filter(r => r.day <= day && r.loc === 'wild');
     let packEverKcal = 0, nothingEdibleTotal = 0, ateSomewhere = false;
