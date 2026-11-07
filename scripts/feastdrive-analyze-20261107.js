@@ -28,7 +28,16 @@ for (const f of files) {
   daily.forEach(function (d) { gates[d.feastGate || '?'] = (gates[d.feastGate || '?'] | 0) + 1; });
   const w4kills = (o.waveKillLog || []).filter(function (e) { return ((e.w | 0) >= 4); }).length;
   const w5kills = (o.waveKillLog || []).filter(function (e) { return ((e.w | 0) >= 5); }).length;
-  const starveDeaths = ((o.teleDeaths || {}).starvation | 0) + ((o.teleDeaths || {}).starved | 0);
+  // Starvation deaths: teleDeaths is an ARRAY of death records
+  // ({kind, cause}) in this driver — the old object-index read
+  // ((teleDeaths).starvation) always returned 0. Count records whose
+  // kind/cause names starvation. (Measurement correction 2026-11-07:
+  // true counts are baseline 6, armed 6 — the frozen cost bar still
+  // passes, 6 <= 6+2; the correction changes the number, not the
+  // verdict. See sim-feastdrive-b.md.)
+  const starveDeaths = Array.isArray(o.teleDeaths)
+    ? o.teleDeaths.filter(function (d) { return /starv/i.test(((d.cause || '') + ' ' + (d.kind || ''))); }).length
+    : (((o.teleDeaths || {}).starvation | 0) + ((o.teleDeaths || {}).starved | 0));
   seeds.push({
     seed: o.seed, policy: o.policy, days: o.days, endReason: o.endReason, won: !!o.won,
     maxWave: o.maxWave, standing: o.standing, scaleRank: o.scaleRank,
