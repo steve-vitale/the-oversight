@@ -1712,10 +1712,19 @@
       // obligation the keeper cannot keep. The line is spoken by the
       // dlg:commit handler (it prefers fc.line on failure). Presence is
       // prerequisite to every kind-specific gate, so this runs first.
+      // R113 (journey-deepening r113): the GUARD stays — the refusal is
+      // still correct, the dawn meet still cannot be promised while the
+      // partner is out. Only the WORDS change: the old line claimed
+      // present absence ("I'm out on the road... miles away") while the
+      // villager sat in conversation with the scholar (r110: Ellis +
+      // Jessica, day 80). Away means away from HAVEN, not absent from
+      // this conversation — a player can walk up and talk to an away
+      // villager on the road. The new line says only what is true:
+      // away from Haven, no dawn meet promised while out.
       if ((favor.kind === 'forage_help' || favor.kind === 'water_haul' || favor.kind === 'stay_close') &&
           (this.state.village || {}).away?.[vid]) {
         return { ok: false, away: true,
-          line: `"Wait — I'm out on the road. I can't ask you to meet me at dawn when I'm miles away. Find me when I'm back, and we'll set it then."` };
+          line: `"Wait — I'm away from Haven, out on the road. I can't promise a dawn meet while I'm out — find me when I'm back, and we'll set it then."` };
       }
       if (favor.kind === 'stay_close' && this.companyFavorCommitGate) {
         const gate=this.companyFavorCommitGate(vid,favor);if(!gate.ok)return{ok:false,line:gate.reason};
@@ -1799,10 +1808,23 @@
       // it gets its own plain line. Ready stays false either way; only
       // the wording changes, and only for the generic kinds (delegated
       // kinds returned above with their own wording).
-      if (v.away?.[vid]) return blocked('They are out on the road, miles from here. Find them when they are back.');
+      // R113 (journey-deepening r113): the away flag means away from
+      // HAVEN, not absent from the scholar — a player in a live sitting
+      // IS with them, so "miles from here" is false there and the block
+      // hides actions performable face-to-face (share food, tend a
+      // wound). Presence is proven by an active conversation record,
+      // read from the conv map WITHOUT creating one (this function is
+      // documented read-only). While in conversation the away block is
+      // skipped AND the away term in the adjacency check below is
+      // skipped — the adjacency check itself is the real gate (the
+      // player must actually be next to them; talk alone does not prove
+      // that). Outside a sitting — the journal path — no active convo
+      // exists, so the away block still fires and the line stays true.
+      const _inConvo = !!((((this.state || {}).village || {}).conv || {})[vid] || {}).active;
+      if (v.away?.[vid] && !_inConvo) return blocked('They are out on the road, miles from here. Find them when they are back.');
       const node = v.nodePos?.[vid] || { nx: v.px ?? 4, ny: v.py ?? 4 }, pos = v.positions?.[vid];
       const haven = this.map.px === (v.px ?? 4) && this.map.py === (v.py ?? 4);
-      if (v.away?.[vid] || node.nx !== this.map.px || node.ny !== this.map.py ||
+      if ((v.away?.[vid] && !_inConvo) || node.nx !== this.map.px || node.ny !== this.map.py ||
           (haven && !!v.npcInside?.[vid] !== (s.insideHaven !== false)) || !pos ||
           ![pos.mx, pos.my, s.mx, s.my].every(Number.isFinite) ||
           Math.max(Math.abs(pos.mx - s.mx), Math.abs(pos.my - s.my)) > 1) return blocked('Move next to them, on the same side of the Haven door, to help.');
