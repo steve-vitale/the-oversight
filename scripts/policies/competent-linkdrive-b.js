@@ -177,7 +177,7 @@ function otherVillage(Game, vid) {
 }
 function event(day, kind, village, outcome, extra) {
   var e = { day: day, kind: kind, village: village || null, outcome: outcome || null };
-  if (extra) { for (var k in extra) e[k] = extra[k]; }
+  if (extra) { for (var k in extra) { if (k !== 'day' && k !== 'kind' && k !== 'village' && k !== 'outcome') e[k] = extra[k]; } }
   STATS.events.push(e);
   if (STATS.events.length > 400) STATS.events.splice(0, STATS.events.length - 400);
 }

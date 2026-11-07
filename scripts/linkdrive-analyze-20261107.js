@@ -29,6 +29,39 @@ function shapeOf(link) {
   if (link.subordinate === 'haven') return 'BELONG';
   return '?';
 }
+// eventShapes(r): LEAD/BELONG counts from the linkdrive event log. The
+// daily link rows carry no direction (no primary/subordinate), so shape
+// is read from HOW each link formed: a raise-answer 'linked' is LEAD
+// (acceptLinkRaise proposes with no opts — as-primary); a direct propose
+// 'accepted', a propose 'counter', or a raise-answer 'counter' is BELONG
+// (direct proposes are as-subordinate; counters always offer Haven as
+// subordinate). A counter-answer forms its link the SAME day it is
+// answered (step 1 of that day's daily run), so the counter-answer event
+// maps to (village, day), not day+1. Matched against each link's first
+// seen (other, day); unmatched links count as '?'.
+function eventShapes(r) {
+  const formed = {};
+  const ld = r.linkdriveStats || {};
+  (ld.events || []).forEach(function (e) {
+    if (!e) return;
+    if (e.kind === 'propose' && (e.outcome === 'accepted' || e.outcome === 'counter')) formed[e.village + '|' + e.day] = 'BELONG';
+    else if (e.kind === 'raise-answer' && e.outcome === 'linked') formed[e.village + '|' + e.day] = 'LEAD';
+    else if (e.kind === 'raise-answer' && e.outcome === 'counter') formed[e.village + '|' + e.day] = 'BELONG';
+    else if (e.kind === 'counter-answer') formed[e.village + '|' + e.day] = 'BELONG';
+  });
+  const seen = {};
+  (r.daily || []).forEach(function (row) {
+    (row.links || []).forEach(function (l) {
+      if (l && l.id && !seen[l.id]) seen[l.id] = (l.other || '?') + '|' + (l.day == null ? '?' : l.day);
+    });
+  });
+  const shapes = {};
+  Object.keys(seen).forEach(function (id) {
+    const s = formed[seen[id]] || '?';
+    shapes[s] = (shapes[s] || 0) + 1;
+  });
+  return shapes;
+}
 function w4kills(r) { return ((r.waveKillLog || []).filter(function (e) { return ((e.w | 0) >= 4); })).length; }
 function starvation(r) { return ((r.teleDeaths || []).filter(function (e) { return e && e.cause === 'starvation'; })).length; }
 function median(xs) {
@@ -39,8 +72,7 @@ function summarize(r) {
   const daily = r.daily || [];
   const last = daily[daily.length - 1] || {};
   const links = last.links || [];
-  const shapes = {};
-  links.forEach(function (l) { const s = shapeOf(l); shapes[s] = (shapes[s] || 0) + 1; });
+  const shapes = eventShapes(r);
   const diploSeries = daily.map(function (d) { return (d.standingBreakdown && d.standingBreakdown.diplomacy) || 0; });
   const maxDiplo = diploSeries.length ? Math.max.apply(null, diploSeries) : 0;
   const endDiplo = (last.standingBreakdown && last.standingBreakdown.diplomacy) || 0;
@@ -48,8 +80,7 @@ function summarize(r) {
   const regionalDays = daily.filter(function (d) { return d.networkLive; }).length;
   const pairDays = daily.filter(function (d) { return d.pairDay; }).length;
   const ready5Days = daily.filter(function (d) { return d.readiness5; }).length;
-  const w5faced = daily.some(function (d) { return (d.w4facedTypes || []).some(function (t) { return /wave.?5|w5/i.test(String(t)); }); })
-    || ((r.wavesFaced || []).some(function (w) { return (w | 0) >= 5; }));
+  const w5faced = Object.keys(r.wavesFaced || {}).some(function (k) { return ((r.wavesFaced[k] | 0) >= 5); });
   const gateSeen = {};
   daily.forEach(function (d) { gateSeen[d.gate || '?'] = (gateSeen[d.gate || '?'] | 0) + 1; });
   const raises = last.raiseHistory || [];
