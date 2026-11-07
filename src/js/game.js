@@ -34105,22 +34105,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           _byCh[_k] = (_byCh[_k] || 0) + 1;
         }
       } catch (e) {}
-      // VETERAN'S EDGE (sim-nextfight-a, 2026-11-07 — NEXT-FIGHT SURVIVAL
-      // shape 2): a wave-4+ kill arms a one-fight edge for the killer. The
-      // killer's next wave-4+ TB fight deals x1.5 on their own blows (see
-      // claimVeteranEdge / the tbDamage hook). Armed here, at the kill —
-      // which is recorded at the END of the killing fight (tbKillRewards) —
-      // so no strike inside the first-kill fight can ever read it: the
-      // first kill is never made easier. Wave 3 and below arm nothing.
-      // Pyrrhic kills do not arm it (recordPyrrhicKill writes the log
-      // directly, bypassing this choke point — accepted, not fixed here).
-      // Defensive: an arming bug never breaks the kill path.
-      try {
-        if (wave >= 4 && killerVid) {
-          const _ve = this.state.veteranEdge || (this.state.veteranEdge = {});
-          _ve[killerVid] = true;
-        }
-      } catch (e) {}
       // Kills feed the unlock gates from every path (player combat AND
       // villager field fights) — the beat must land whichever path earned it.
       // The log entry above is already in place when this runs, so the
@@ -34481,38 +34465,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (!Number.isFinite(hp) || hp <= 0 || !Number.isFinite(maxHp) || maxHp <= 0) return null;
       return { hp: hp, maxHp: maxHp };
     },
-    // VETERAN'S EDGE — claim (sim-nextfight-a, 2026-11-07): when a fight
-    // opens against a wave-4+ monster, any human fighter carrying an armed
-    // edge (see recordWaveKill) has it moved from state.veteranEdge onto
-    // this fight object (tbfight.veteranEdge[vid]) and deleted from state.
-    // The edge then applies to that fighter's blows for the whole of THIS
-    // fight (tbDamage hook) and is gone when the fight ends — one fight,
-    // not a permanent buff. Wave 1–3 fights claim nothing, so the edge
-    // waits for the next wave-4+ fight. Entering the fight spends it even
-    // if the veteran flees or falls without landing a blow: the edge was
-    // the fight's. Only kind 'player' (the scholar, vid this.villagerId)
-    // and kind 'villager' (companions, vid fighter.villagerId) — foreign
-    // 'ally' fighters never hold our village's kill log. Pure move, no
-    // damage math here.
-    claimVeteranEdge(mdef) {
-      if (!mdef || (mdef.wave || 1) < 4) return;
-      const armed = this.state && this.state.veteranEdge;
-      if (!armed) return;
-      const f = this.tbfight;
-      if (!f || !Array.isArray(f.fighters)) return;
-      f.veteranEdge = f.veteranEdge || {};
-      for (const ft of f.fighters) {
-        if (!ft || !ft.alive || ft.fled) continue;
-        let vid = null;
-        if (ft.kind === 'player') vid = this.villagerId;
-        else if (ft.kind === 'villager') vid = ft.villagerId;
-        else continue;
-        if (vid && armed[vid]) {
-          f.veteranEdge[vid] = true;
-          delete armed[vid];
-        }
-      }
-    },
     startCombat(monsterId, options) {
       // NO SILENT CLOBBER (break-it combat 2026-10-09): re-entering a live
       // fight rebuilt the fighters from stale scholar.health — a free heal
@@ -34822,8 +34774,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         ...(tableTrial ? { tableTrial: true } : {}),
       };
       try { S.Godpath?.beginApexHunt(this, this.tbfight); } catch (e) { console.warn('[godpath] encounter opening', e); }
-      // VETERAN'S EDGE (sim-nextfight-a): claim armed edges into this fight.
-      try { this.claimVeteranEdge(mdef); } catch (e) {}
       // SIM TELEMETRY (2026-10-11, combat-lever): pack size + player HP at
       // fight entry. Zero gameplay effect. (Placed after tbfight creation —
       // the earlier top-of-startCombat placement read a null fight.)
@@ -38682,47 +38632,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             if (_feasted && typeof this.noteFeastedCombatUse === 'function') {
               try { this._feastUseSource = _vs ? ('v:' + _vs.villagerId) : 'p'; } catch (e) {}
               this.noteFeastedCombatUse();
-            }
-          }
-        }
-      } catch (e) {}
-      // VETERAN'S EDGE (sim-nextfight-a, 2026-11-07 — NEXT-FIGHT SURVIVAL
-      // shape 2, sized by sim-killersurvive-b: the median killer death
-      // fight ends with the beast at 33% HP after ~9.5 rounds, so +50%
-      // damage/round flips it): a fighter whose edge was claimed into THIS
-      // fight (tbfight.veteranEdge, see claimVeteranEdge) deals x1.5 on
-      // their own blows against wave-4+ monsters, for the whole fight.
-      // Source resolution mirrors the FEASTED hook above: the scholar is
-      // sourceKey 'p' or ('you', null); a villager companion is the fighter
-      // for sourceKey with kind 'villager' and a villagerId. The target's
-      // wave reads off its mdef (snake segments and packmates carry it).
-      // Hostile humans carry no wave and never take the edge. Applies to
-      // strikes and ability damage alike (the FEASTED convention); the
-      // monster-state multipliers below compose after it, as they do with
-      // FEASTED. One say line per fighter per fight (the claim is spent
-      // with the fight, so the line can only fire inside it). Never armor-
-      // ignoring, never a rounds-cap change, never a first-kill buff — the
-      // edge only exists after a recorded wave-4+ kill.
-      try {
-        const _tf = this.tbfight;
-        const _ve = _tf && _tf.veteranEdge;
-        const _tw = t && t.mdef && (t.mdef.wave || 1);
-        if (_ve && (t.kind === 'monster' || t.kind === 'hostile') && _tw >= 4 && final > 0) {
-          let _vid = null;
-          if (sourceKey === 'p' || (sourceLabel === 'you' && sourceKey == null)) _vid = this.villagerId;
-          else if (sourceKey) {
-            const _src = this.tbFighter(sourceKey);
-            if (_src && _src.kind === 'villager' && _src.villagerId) _vid = _src.villagerId;
-          }
-          if (_vid && _ve[_vid]) {
-            final = Math.round(final * 1.5);
-            _tf._vetEdgeNoted = _tf._vetEdgeNoted || {};
-            if (!_tf._vetEdgeNoted[_vid]) {
-              _tf._vetEdgeNoted[_vid] = true;
-              const _isSch = _vid === this.villagerId;
-              this.say(_isSch
-                ? "VETERAN'S EDGE ×1.5: you've killed one of these before — this time you know where to cut."
-                : `VETERAN'S EDGE ×1.5: ${this.displayName ? this.displayName(_vid) : 'A villager'} has killed one of these before — this time they know where to cut.`);
             }
           }
         }
