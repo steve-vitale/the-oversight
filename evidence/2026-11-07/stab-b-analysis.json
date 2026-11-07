@@ -1,0 +1,1102 @@
+{
+  "corpus": "evidence/2026-11-07/perseed-stageally-stab-b",
+  "seeds": [
+    53001,
+    53002,
+    53003,
+    53004,
+    53005,
+    53006,
+    53007,
+    53008
+  ],
+  "perPolicy": {
+    "baseline": {
+      "n": 8,
+      "flips": 5,
+      "flipRate": 0.625,
+      "pairFlips": 1,
+      "pairs": [
+        {
+          "seed": 53001,
+          "fragile": false,
+          "diffs": [],
+          "classA": {
+            "survived": false,
+            "w4kills": false,
+            "veterans": false,
+            "days": 64,
+            "endReason": "village-lost",
+            "standing": 150,
+            "w4killCount": 0,
+            "endVeterans": 0,
+            "maxWave": 4,
+            "unlockedWave": 4
+          },
+          "classB": {
+            "survived": false,
+            "w4kills": false,
+            "veterans": false,
+            "days": 47,
+            "endReason": "village-lost",
+            "standing": 125,
+            "w4killCount": 0,
+            "endVeterans": 0,
+            "maxWave": 4,
+            "unlockedWave": 4
+          },
+          "pairDaysA": 0,
+          "pairDaysB": 0,
+          "pairFlip": false,
+          "firstDivergence": {
+            "kind": "kill-ledger",
+            "day": 5,
+            "field": "waveKillLog[1]",
+            "a": "5|cliffhanger|w1",
+            "b": "5|drumbelly_tanuki|w1"
+          },
+          "snapshotNote": {
+            "kind": "daily-row",
+            "day": 48,
+            "field": "snapshot-presence",
+            "a": "present",
+            "b": "absent"
+          },
+          "trajDist": {
+            "seed": 53001,
+            "a": "baseline@stab-baseline-unperturbed",
+            "b": "baseline@stab-baseline-perturbed",
+            "dKills": 0,
+            "dStanding": 0.25,
+            "dMaxWave": 0,
+            "dDays": 0.113,
+            "dPair": 0,
+            "pairDaysA": 0,
+            "pairDaysB": 0,
+            "composite": 0.363
+          }
+        },
+        {
+          "seed": 53002,
+          "fragile": false,
+          "diffs": [],
+          "classA": {
+            "survived": false,
+            "w4kills": false,
+            "veterans": false,
+            "days": 66,
+            "endReason": "village-lost",
+            "standing": 100,
+            "w4killCount": 0,
+            "endVeterans": 0,
+            "maxWave": 4,
+            "unlockedWave": 4
+          },
+          "classB": {
+            "survived": false,
+            "w4kills": false,
+            "veterans": false,
+            "days": 108,
+            "endReason": "village-lost",
+            "standing": 120,
+            "w4killCount": 0,
+            "endVeterans": 0,
+            "maxWave": 4,
+            "unlockedWave": 4
+          },
+          "pairDaysA": 0,
+          "pairDaysB": 0,
+          "pairFlip": false,
+          "firstDivergence": {
+            "kind": "kill-ledger",
+            "day": 8,
+            "field": "waveKillLog[0]",
+            "a": "8|anaconda_empress|w1",
+            "b": "8|murkcap|w1"
+          },
+          "snapshotNote": {
+            "kind": "daily-row",
+            "day": 3,
+            "field": "snapshot-presence",
+            "a": "present",
+            "b": "absent"
+          },
+          "trajDist": {
+            "seed": 53002,
+            "a": "baseline@stab-baseline-unperturbed",
+            "b": "baseline@stab-baseline-perturbed",
+            "dKills": 0,
+            "dStanding": 0.2,
+            "dMaxWave": 0,
+            "dDays": 0.28,
+            "dPair": 0,
+            "pairDaysA": 0,
+            "pairDaysB": 0,
+            "composite": 0.48
+          }
+        },
+        {
+          "seed": 53003,
+          "fragile": true,
+          "diffs": [
+            "veterans"
+          ],
+          "classA": {
+            "survived": false,
+            "w4kills": true,
+            "veterans": false,
+            "days": 116,
+            "endReason": "village-lost",
+            "standing": 199,
+            "w4killCount": 2,
+            "endVeterans": 0,
+            "maxWave": 4,
+            "unlockedWave": 4
+          },
+          "classB": {
+            "survived": false,
+            "w4kills": true,
+            "veterans": true,
+            "days": 70,
+            "endReason": "village-lost",
+            "standing": 195,
+            "w4killCount": 1,
+            "endVeterans": 1,
+            "maxWave": 4,
+            "unlockedWave": 4
+          },
+          "pairDaysA": 0,
+          "pairDaysB": 0,
+          "pairFlip": false,
+          "firstDivergence": {
+            "kind": "kill-ledger",
+            "day": 4,
+            "field": "waveKillLog[0]",
+            "a": "4|lockpick_raccoon|w1",
+            "b": "3|nightcourt|w1"
+          },
+          "snapshotNote": {
+            "kind": "daily-row",
+            "day": 71,
+            "field": "snapshot-presence",
+            "a": "present",
+            "b": "absent"
+          },
+          "trajDist": {
+            "seed": 53003,
+            "a": "baseline@stab-baseline-unperturbed",
+            "b": "baseline@stab-baseline-perturbed",
+            "dKills": 1,
+            "dStanding": 0.04,
+            "dMaxWave": 0,
+            "dDays": 0.307,
+            "dPair": 0,
+            "pairDaysA": 0,
+            "pairDaysB": 0,
+            "composite": 1.347
+          }
+        },
+        {
+          "seed": 53004,
+          "fragile": true,
+          "diffs": [
+            "survived"
+          ],
+          "classA": {
+            "survived": false,
+            "w4kills": true,
+            "veterans": false,
+            "days": 85,
+            "endReason": "village-lost",
+            "standing": 199,
+            "w4killCount": 3,
+            "endVeterans": 0,
+            "maxWave": 4,
+            "unlockedWave": 4
+          },
+          "classB": {
+            "survived": true,
+            "w4kills": true,
+            "veterans": false,
+            "days": 150,
+            "endReason": "survived",
+            "standing": 480,
+            "w4killCount": 7,
+            "endVeterans": 0,
+            "maxWave": 5,
+            "unlockedWave": 5
+          },
+          "pairDaysA": 0,
+          "pairDaysB": 14,
+          "pairFlip": true,
+          "firstDivergence": {
+            "kind": "kill-ledger",
+            "day": 7,
+            "field": "waveKillLog[0]",
+            "a": "7|drumbelly_tanuki|w1",
+            "b": "9|murkcap|w1"
+          },
+          "snapshotNote": {
+            "kind": "daily-row",
+            "day": 86,
+            "field": "snapshot-presence",
+            "a": "absent",
+            "b": "present"
+          },
+          "trajDist": {
+            "seed": 53004,
+            "a": "baseline@stab-baseline-unperturbed",
+            "b": "baseline@stab-baseline-perturbed",
+            "dKills": 4,
+            "dStanding": 2.81,
+            "dMaxWave": 1,
+            "dDays": 0.433,
+            "dPair": 1,
+            "pairDaysA": 0,
+            "pairDaysB": 14,
+            "composite": 9.243
+          }
+        },
+        {
+          "seed": 53005,
+          "fragile": true,
+          "diffs": [
+            "w4kills",
+            "veterans"
+          ],
+          "classA": {
+            "survived": false,
+            "w4kills": false,
+            "veterans": false,
+            "days": 89,
+            "endReason": "village-lost",
+            "standing": 70,
+            "w4killCount": 0,
+            "endVeterans": 0,
+            "maxWave": 3,
+            "unlockedWave": 3
+          },
+          "classB": {
+            "survived": false,
+            "w4kills": true,
+            "veterans": true,
+            "days": 63,
+            "endReason": "village-lost",
+            "standing": 145,
+            "w4killCount": 1,
+            "endVeterans": 1,
+            "maxWave": 4,
+            "unlockedWave": 4
+          },
+          "pairDaysA": 0,
+          "pairDaysB": 0,
+          "pairFlip": false,
+          "firstDivergence": {
+            "kind": "kill-ledger",
+            "day": 5,
+            "field": "waveKillLog[0]",
+            "a": "5|nightcourt|w1",
+            "b": "5|cliffhanger|w1"
+          },
+          "snapshotNote": {
+            "kind": "daily-row",
+            "day": 64,
+            "field": "snapshot-presence",
+            "a": "present",
+            "b": "absent"
+          },
+          "trajDist": {
+            "seed": 53005,
+            "a": "baseline@stab-baseline-unperturbed",
+            "b": "baseline@stab-baseline-perturbed",
+            "dKills": 1,
+            "dStanding": 0.75,
+            "dMaxWave": 1,
+            "dDays": 0.173,
+            "dPair": 0,
+            "pairDaysA": 0,
+            "pairDaysB": 0,
+            "composite": 2.923
+          }
+        },
+        {
+          "seed": 53006,
+          "fragile": false,
+          "diffs": [],
+          "classA": {
+            "survived": false,
+            "w4kills": true,
+            "veterans": false,
+            "days": 125,
+            "endReason": "village-lost",
+            "standing": 199,
+            "w4killCount": 3,
+            "endVeterans": 0,
+            "maxWave": 4,
+            "unlockedWave": 4
+          },
+          "classB": {
+            "survived": false,
+            "w4kills": true,
+            "veterans": false,
+            "days": 125,
+            "endReason": "village-lost",
+            "standing": 175,
+            "w4killCount": 1,
+            "endVeterans": 0,
+            "maxWave": 4,
+            "unlockedWave": 4
+          },
+          "pairDaysA": 0,
+          "pairDaysB": 0,
+          "pairFlip": false,
+          "firstDivergence": {
+            "kind": "kill-ledger",
+            "day": 7,
+            "field": "waveKillLog[0]",
+            "a": "7|drumbelly_tanuki|w1",
+            "b": "5|mirrormoth|w1"
+          },
+          "snapshotNote": null,
+          "trajDist": {
+            "seed": 53006,
+            "a": "baseline@stab-baseline-unperturbed",
+            "b": "baseline@stab-baseline-perturbed",
+            "dKills": 2,
+            "dStanding": 0.24,
+            "dMaxWave": 0,
+            "dDays": 0,
+            "dPair": 0,
+            "pairDaysA": 0,
+            "pairDaysB": 0,
+            "composite": 2.24
+          }
+        },
+        {
+          "seed": 53007,
+          "fragile": true,
+          "diffs": [
+            "survived",
+            "veterans"
+          ],
+          "classA": {
+            "survived": false,
+            "w4kills": true,
+            "veterans": true,
+            "days": 103,
+            "endReason": "village-lost",
+            "standing": 199,
+            "w4killCount": 1,
+            "endVeterans": 1,
+            "maxWave": 4,
+            "unlockedWave": 4
+          },
+          "classB": {
+            "survived": true,
+            "w4kills": true,
+            "veterans": false,
+            "days": 150,
+            "endReason": "survived",
+            "standing": 199,
+            "w4killCount": 3,
+            "endVeterans": 0,
+            "maxWave": 4,
+            "unlockedWave": 4
+          },
+          "pairDaysA": 0,
+          "pairDaysB": 0,
+          "pairFlip": false,
+          "firstDivergence": {
+            "kind": "kill-ledger",
+            "day": 7,
+            "field": "waveKillLog[0]",
+            "a": "7|nightcourt|w1",
+            "b": "3|nevermore|w1"
+          },
+          "snapshotNote": {
+            "kind": "daily-row",
+            "day": 103,
+            "field": "snapshot-presence",
+            "a": "absent",
+            "b": "present"
+          },
+          "trajDist": {
+            "seed": 53007,
+            "a": "baseline@stab-baseline-unperturbed",
+            "b": "baseline@stab-baseline-perturbed",
+            "dKills": 2,
+            "dStanding": 0,
+            "dMaxWave": 0,
+            "dDays": 0.313,
+            "dPair": 0,
+            "pairDaysA": 0,
+            "pairDaysB": 0,
+            "composite": 2.313
+          }
+        },
+        {
+          "seed": 53008,
+          "fragile": true,
+          "diffs": [
+            "veterans"
+          ],
+          "classA": {
+            "survived": false,
+            "w4kills": true,
+            "veterans": false,
+            "days": 147,
+            "endReason": "village-lost",
+            "standing": 199,
+            "w4killCount": 4,
+            "endVeterans": 0,
+            "maxWave": 4,
+            "unlockedWave": 4
+          },
+          "classB": {
+            "survived": false,
+            "w4kills": true,
+            "veterans": true,
+            "days": 136,
+            "endReason": "village-lost",
+            "standing": 199,
+            "w4killCount": 1,
+            "endVeterans": 1,
+            "maxWave": 4,
+            "unlockedWave": 4
+          },
+          "pairDaysA": 0,
+          "pairDaysB": 0,
+          "pairFlip": false,
+          "firstDivergence": {
+            "kind": "kill-ledger",
+            "day": 5,
+            "field": "waveKillLog[0]",
+            "a": "5|cliffhanger|w1",
+            "b": "6|hummice|w1"
+          },
+          "snapshotNote": {
+            "kind": "daily-row",
+            "day": 13,
+            "field": "snapshot-presence",
+            "a": "present",
+            "b": "absent"
+          },
+          "trajDist": {
+            "seed": 53008,
+            "a": "baseline@stab-baseline-unperturbed",
+            "b": "baseline@stab-baseline-perturbed",
+            "dKills": 3,
+            "dStanding": 0,
+            "dMaxWave": 0,
+            "dDays": 0.073,
+            "dPair": 0,
+            "pairDaysA": 0,
+            "pairDaysB": 0,
+            "composite": 3.073
+          }
+        }
+      ]
+    },
+    "staged": {
+      "n": 8,
+      "flips": 5,
+      "flipRate": 0.625,
+      "pairFlips": 3,
+      "pairs": [
+        {
+          "seed": 53001,
+          "fragile": false,
+          "diffs": [],
+          "classA": {
+            "survived": false,
+            "w4kills": true,
+            "veterans": false,
+            "days": 106,
+            "endReason": "village-lost",
+            "standing": 199,
+            "w4killCount": 1,
+            "endVeterans": 0,
+            "maxWave": 4,
+            "unlockedWave": 4
+          },
+          "classB": {
+            "survived": false,
+            "w4kills": true,
+            "veterans": false,
+            "days": 87,
+            "endReason": "village-lost",
+            "standing": 199,
+            "w4killCount": 1,
+            "endVeterans": 0,
+            "maxWave": 4,
+            "unlockedWave": 4
+          },
+          "pairDaysA": 0,
+          "pairDaysB": 0,
+          "pairFlip": false,
+          "firstDivergence": {
+            "kind": "kill-ledger",
+            "day": 5,
+            "field": "waveKillLog[1]",
+            "a": "5|cliffhanger|w1",
+            "b": "5|drumbelly_tanuki|w1"
+          },
+          "snapshotNote": {
+            "kind": "daily-row",
+            "day": 88,
+            "field": "snapshot-presence",
+            "a": "present",
+            "b": "absent"
+          },
+          "trajDist": {
+            "seed": 53001,
+            "a": "staged@stab-staged-unperturbed",
+            "b": "staged@stab-staged-perturbed",
+            "dKills": 0,
+            "dStanding": 0,
+            "dMaxWave": 0,
+            "dDays": 0.127,
+            "dPair": 0,
+            "pairDaysA": 0,
+            "pairDaysB": 0,
+            "composite": 0.127
+          }
+        },
+        {
+          "seed": 53002,
+          "fragile": true,
+          "diffs": [
+            "survived",
+            "w4kills"
+          ],
+          "classA": {
+            "survived": true,
+            "w4kills": true,
+            "veterans": false,
+            "days": 150,
+            "endReason": "survived",
+            "standing": 150,
+            "w4killCount": 1,
+            "endVeterans": 0,
+            "maxWave": 4,
+            "unlockedWave": 4
+          },
+          "classB": {
+            "survived": false,
+            "w4kills": false,
+            "veterans": false,
+            "days": 133,
+            "endReason": "village-lost",
+            "standing": 199,
+            "w4killCount": 0,
+            "endVeterans": 0,
+            "maxWave": 4,
+            "unlockedWave": 4
+          },
+          "pairDaysA": 0,
+          "pairDaysB": 0,
+          "pairFlip": false,
+          "firstDivergence": {
+            "kind": "kill-ledger",
+            "day": 8,
+            "field": "waveKillLog[0]",
+            "a": "8|anaconda_empress|w1",
+            "b": "8|murkcap|w1"
+          },
+          "snapshotNote": {
+            "kind": "daily-row",
+            "day": 3,
+            "field": "snapshot-presence",
+            "a": "present",
+            "b": "absent"
+          },
+          "trajDist": {
+            "seed": 53002,
+            "a": "staged@stab-staged-unperturbed",
+            "b": "staged@stab-staged-perturbed",
+            "dKills": 1,
+            "dStanding": 0.49,
+            "dMaxWave": 0,
+            "dDays": 0.113,
+            "dPair": 0,
+            "pairDaysA": 0,
+            "pairDaysB": 0,
+            "composite": 1.603
+          }
+        },
+        {
+          "seed": 53003,
+          "fragile": true,
+          "diffs": [
+            "w4kills",
+            "veterans"
+          ],
+          "classA": {
+            "survived": false,
+            "w4kills": true,
+            "veterans": true,
+            "days": 92,
+            "endReason": "village-lost",
+            "standing": 199,
+            "w4killCount": 2,
+            "endVeterans": 1,
+            "maxWave": 4,
+            "unlockedWave": 4
+          },
+          "classB": {
+            "survived": false,
+            "w4kills": false,
+            "veterans": false,
+            "days": 66,
+            "endReason": "village-lost",
+            "standing": 199,
+            "w4killCount": 0,
+            "endVeterans": 0,
+            "maxWave": 4,
+            "unlockedWave": 4
+          },
+          "pairDaysA": 0,
+          "pairDaysB": 0,
+          "pairFlip": false,
+          "firstDivergence": {
+            "kind": "kill-ledger",
+            "day": 4,
+            "field": "waveKillLog[0]",
+            "a": "4|lockpick_raccoon|w1",
+            "b": "3|nightcourt|w1"
+          },
+          "snapshotNote": {
+            "kind": "daily-row",
+            "day": 67,
+            "field": "snapshot-presence",
+            "a": "present",
+            "b": "absent"
+          },
+          "trajDist": {
+            "seed": 53003,
+            "a": "staged@stab-staged-unperturbed",
+            "b": "staged@stab-staged-perturbed",
+            "dKills": 2,
+            "dStanding": 0,
+            "dMaxWave": 0,
+            "dDays": 0.173,
+            "dPair": 0,
+            "pairDaysA": 0,
+            "pairDaysB": 0,
+            "composite": 2.173
+          }
+        },
+        {
+          "seed": 53004,
+          "fragile": false,
+          "diffs": [],
+          "classA": {
+            "survived": false,
+            "w4kills": true,
+            "veterans": false,
+            "days": 88,
+            "endReason": "village-lost",
+            "standing": 199,
+            "w4killCount": 1,
+            "endVeterans": 0,
+            "maxWave": 4,
+            "unlockedWave": 4
+          },
+          "classB": {
+            "survived": false,
+            "w4kills": true,
+            "veterans": false,
+            "days": 106,
+            "endReason": "village-lost",
+            "standing": 265,
+            "w4killCount": 3,
+            "endVeterans": 0,
+            "maxWave": 5,
+            "unlockedWave": 5
+          },
+          "pairDaysA": 0,
+          "pairDaysB": 20,
+          "pairFlip": true,
+          "firstDivergence": {
+            "kind": "kill-ledger",
+            "day": 7,
+            "field": "waveKillLog[0]",
+            "a": "7|drumbelly_tanuki|w1",
+            "b": "9|murkcap|w1"
+          },
+          "snapshotNote": {
+            "kind": "daily-row",
+            "day": 89,
+            "field": "snapshot-presence",
+            "a": "absent",
+            "b": "present"
+          },
+          "trajDist": {
+            "seed": 53004,
+            "a": "staged@stab-staged-unperturbed",
+            "b": "staged@stab-staged-perturbed",
+            "dKills": 2,
+            "dStanding": 0.66,
+            "dMaxWave": 1,
+            "dDays": 0.12,
+            "dPair": 1,
+            "pairDaysA": 0,
+            "pairDaysB": 20,
+            "composite": 4.78
+          }
+        },
+        {
+          "seed": 53005,
+          "fragile": false,
+          "diffs": [],
+          "classA": {
+            "survived": false,
+            "w4kills": false,
+            "veterans": false,
+            "days": 89,
+            "endReason": "village-lost",
+            "standing": 70,
+            "w4killCount": 0,
+            "endVeterans": 0,
+            "maxWave": 3,
+            "unlockedWave": 3
+          },
+          "classB": {
+            "survived": false,
+            "w4kills": false,
+            "veterans": false,
+            "days": 51,
+            "endReason": "village-lost",
+            "standing": 95,
+            "w4killCount": 0,
+            "endVeterans": 0,
+            "maxWave": 3,
+            "unlockedWave": 3
+          },
+          "pairDaysA": 0,
+          "pairDaysB": 0,
+          "pairFlip": false,
+          "firstDivergence": {
+            "kind": "kill-ledger",
+            "day": 5,
+            "field": "waveKillLog[0]",
+            "a": "5|nightcourt|w1",
+            "b": "5|cliffhanger|w1"
+          },
+          "snapshotNote": {
+            "kind": "daily-row",
+            "day": 52,
+            "field": "snapshot-presence",
+            "a": "present",
+            "b": "absent"
+          },
+          "trajDist": {
+            "seed": 53005,
+            "a": "staged@stab-staged-unperturbed",
+            "b": "staged@stab-staged-perturbed",
+            "dKills": 0,
+            "dStanding": 0.25,
+            "dMaxWave": 0,
+            "dDays": 0.253,
+            "dPair": 0,
+            "pairDaysA": 0,
+            "pairDaysB": 0,
+            "composite": 0.503
+          }
+        },
+        {
+          "seed": 53006,
+          "fragile": true,
+          "diffs": [
+            "survived",
+            "veterans"
+          ],
+          "classA": {
+            "survived": true,
+            "w4kills": true,
+            "veterans": true,
+            "days": 150,
+            "endReason": "survived",
+            "standing": 440,
+            "w4killCount": 11,
+            "endVeterans": 2,
+            "maxWave": 5,
+            "unlockedWave": 5
+          },
+          "classB": {
+            "survived": false,
+            "w4kills": true,
+            "veterans": false,
+            "days": 73,
+            "endReason": "village-lost",
+            "standing": 195,
+            "w4killCount": 1,
+            "endVeterans": 0,
+            "maxWave": 4,
+            "unlockedWave": 4
+          },
+          "pairDaysA": 42,
+          "pairDaysB": 0,
+          "pairFlip": true,
+          "firstDivergence": {
+            "kind": "kill-ledger",
+            "day": 7,
+            "field": "waveKillLog[0]",
+            "a": "7|drumbelly_tanuki|w1",
+            "b": "5|mirrormoth|w1"
+          },
+          "snapshotNote": {
+            "kind": "daily-row",
+            "day": 74,
+            "field": "snapshot-presence",
+            "a": "present",
+            "b": "absent"
+          },
+          "trajDist": {
+            "seed": 53006,
+            "a": "staged@stab-staged-unperturbed",
+            "b": "staged@stab-staged-perturbed",
+            "dKills": 10,
+            "dStanding": 2.45,
+            "dMaxWave": 1,
+            "dDays": 0.513,
+            "dPair": 1,
+            "pairDaysA": 42,
+            "pairDaysB": 0,
+            "composite": 14.963
+          }
+        },
+        {
+          "seed": 53007,
+          "fragile": true,
+          "diffs": [
+            "survived",
+            "veterans"
+          ],
+          "classA": {
+            "survived": true,
+            "w4kills": true,
+            "veterans": true,
+            "days": 150,
+            "endReason": "survived",
+            "standing": 199,
+            "w4killCount": 4,
+            "endVeterans": 2,
+            "maxWave": 4,
+            "unlockedWave": 4
+          },
+          "classB": {
+            "survived": false,
+            "w4kills": true,
+            "veterans": false,
+            "days": 148,
+            "endReason": "village-lost",
+            "standing": 199,
+            "w4killCount": 5,
+            "endVeterans": 0,
+            "maxWave": 4,
+            "unlockedWave": 4
+          },
+          "pairDaysA": 11,
+          "pairDaysB": 0,
+          "pairFlip": true,
+          "firstDivergence": {
+            "kind": "kill-ledger",
+            "day": 7,
+            "field": "waveKillLog[0]",
+            "a": "7|nightcourt|w1",
+            "b": "3|nevermore|w1"
+          },
+          "snapshotNote": {
+            "kind": "daily-row",
+            "day": 149,
+            "field": "snapshot-presence",
+            "a": "present",
+            "b": "absent"
+          },
+          "trajDist": {
+            "seed": 53007,
+            "a": "staged@stab-staged-unperturbed",
+            "b": "staged@stab-staged-perturbed",
+            "dKills": 1,
+            "dStanding": 0,
+            "dMaxWave": 0,
+            "dDays": 0.013,
+            "dPair": 1,
+            "pairDaysA": 11,
+            "pairDaysB": 0,
+            "composite": 2.013
+          }
+        },
+        {
+          "seed": 53008,
+          "fragile": true,
+          "diffs": [
+            "survived",
+            "w4kills",
+            "veterans"
+          ],
+          "classA": {
+            "survived": false,
+            "w4kills": false,
+            "veterans": false,
+            "days": 123,
+            "endReason": "village-lost",
+            "standing": 150,
+            "w4killCount": 0,
+            "endVeterans": 0,
+            "maxWave": 4,
+            "unlockedWave": 4
+          },
+          "classB": {
+            "survived": true,
+            "w4kills": true,
+            "veterans": true,
+            "days": 150,
+            "endReason": "survived",
+            "standing": 199,
+            "w4killCount": 1,
+            "endVeterans": 1,
+            "maxWave": 4,
+            "unlockedWave": 4
+          },
+          "pairDaysA": 0,
+          "pairDaysB": 0,
+          "pairFlip": false,
+          "firstDivergence": {
+            "kind": "kill-ledger",
+            "day": 5,
+            "field": "waveKillLog[0]",
+            "a": "5|cliffhanger|w1",
+            "b": "6|hummice|w1"
+          },
+          "snapshotNote": {
+            "kind": "daily-row",
+            "day": 13,
+            "field": "snapshot-presence",
+            "a": "present",
+            "b": "absent"
+          },
+          "trajDist": {
+            "seed": 53008,
+            "a": "staged@stab-staged-unperturbed",
+            "b": "staged@stab-staged-perturbed",
+            "dKills": 1,
+            "dStanding": 0.49,
+            "dMaxWave": 0,
+            "dDays": 0.18,
+            "dPair": 0,
+            "pairDaysA": 0,
+            "pairDaysB": 0,
+            "composite": 1.67
+          }
+        }
+      ]
+    }
+  },
+  "census": {
+    "baseline-unperturbed": {
+      "n": 8,
+      "meanTotalDraws": 352563.3,
+      "meanSetupDraws": 7437.9,
+      "meanDailyBase": 22904.8,
+      "meanDailyStage": 0,
+      "meanFight": 473.8,
+      "meanRallyVerb": 0,
+      "meanPending": 0,
+      "meanEngine": 329184.8,
+      "meanDrawsPerDay": 3602.6
+    },
+    "baseline-perturbed": {
+      "n": 8,
+      "meanTotalDraws": 371023.6,
+      "meanSetupDraws": 7437.9,
+      "meanDailyBase": 24572.3,
+      "meanDailyStage": 0,
+      "meanFight": 586.3,
+      "meanRallyVerb": 0,
+      "meanPending": 0,
+      "meanEngine": 345865.1,
+      "meanDrawsPerDay": 3566.1
+    },
+    "staged-unperturbed": {
+      "n": 8,
+      "meanTotalDraws": 427636.6,
+      "meanSetupDraws": 7437.9,
+      "meanDailyBase": 27871.9,
+      "meanDailyStage": 118.3,
+      "meanFight": 762.4,
+      "meanRallyVerb": 0,
+      "meanPending": 0,
+      "meanEngine": 398884.1,
+      "meanDrawsPerDay": 3640.6
+    },
+    "staged-perturbed": {
+      "n": 8,
+      "meanTotalDraws": 366575.8,
+      "meanSetupDraws": 7437.9,
+      "meanDailyBase": 24843,
+      "meanDailyStage": 127.4,
+      "meanFight": 633.9,
+      "meanRallyVerb": 0,
+      "meanPending": 0,
+      "meanEngine": 340971.5,
+      "meanDrawsPerDay": 3656.2
+    }
+  },
+  "walls": {
+    "baseline-unperturbed": {
+      "n": 8,
+      "national": 0,
+      "table": 0,
+      "wins": 0,
+      "wave4unlock": 7,
+      "wave5unlock": 0,
+      "medianSurvival": 96,
+      "maxSurvival": 147,
+      "instrumentErrors": 0
+    },
+    "baseline-perturbed": {
+      "n": 8,
+      "national": 0,
+      "table": 0,
+      "wins": 0,
+      "wave4unlock": 8,
+      "wave5unlock": 1,
+      "medianSurvival": 116.5,
+      "maxSurvival": 150,
+      "instrumentErrors": 0
+    },
+    "staged-unperturbed": {
+      "n": 8,
+      "national": 0,
+      "table": 0,
+      "wins": 0,
+      "wave4unlock": 7,
+      "wave5unlock": 1,
+      "medianSurvival": 114.5,
+      "maxSurvival": 150,
+      "instrumentErrors": 0
+    },
+    "staged-perturbed": {
+      "n": 8,
+      "national": 0,
+      "table": 0,
+      "wins": 0,
+      "wave4unlock": 7,
+      "wave5unlock": 1,
+      "medianSurvival": 96.5,
+      "maxSurvival": 150,
+      "instrumentErrors": 0
+    }
+  },
+  "gap": {
+    "stagedFlips": 5,
+    "baselineFlips": 5,
+    "stagedN": 8,
+    "baselineN": 8,
+    "gapSeeds": 0,
+    "bar1": false
+  },
+  "bisection": {}
+}
