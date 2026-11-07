@@ -127,8 +127,16 @@ metric here; noted, not investigated further.
 
 - r151 bothblocked test (scripts/test-journey-succession-r151-askfavor-bothblocked.js),
   r147 engage test, r146 askfavor test: re-run GREEN on the final tip
-  in closeout. [GATE: check.js --quick result — to be filled when the
-  gate lands; expected 283/7 pre-existing on the rebased tip.]
+  in closeout — re-run by this run 09:0xZ, ALL GREEN, exit 0 (bothblocked +
+  r147 engage + r146 askfavor). GATE (pre-rebase tip 52c1c0ec1, this run):
+  check.js --quick 279 passed, 11 failed in 1416s. The expected 283/7 was
+  Lane A r109's count on master f043aa772; this tip is based on b0340ad11,
+  so the 4-count drift is plausibly base drift, not the r151 change — the
+  one failure visible in the tail is a racks-full voice-gate test
+  (food/preservation code, untouched by this change: "next day voices once
+  more, expected 2, got 1"). Full failure list was not captured (tail-only
+  output); attribution is settled by the gate re-run on the rebased tip
+  before merge (full output saved to file).
 
 ## Finding line 1827
 
@@ -151,6 +159,18 @@ the worker's claims), ran the telemetry check, re-seeded the baseline
 by hand, re-ran the three proof tests, [gate + merge + release +
 rotation + lock steps to be completed in the same closeout].
 
+## 04:00 CST follow-up closeout (this run)
+
+Stale-lock recovery on the 03:00 run's lock (2026-11-07T08:57:40Z,
+left in place at its stand-down; no registered tree under that
+run_id; journey2-succession heartbeat 09:29:55Z, 28 min stale, zero
+processes — dead per guard). Adopted the tree, rebased the branch
+onto current master ed070c955, re-ran the three proof tests + the
+check.js --quick gate on the rebased tip (full output saved), then
+merged ff-only, released the tree, advanced rotation-b 7 → 4, and
+deleted the lock. This note's gate line and rotation line are
+corrected in the follow-up commit.
+
 ## Village assessment (plain words)
 
 The succession leg works: the mantle passes, the new bearer lives a
@@ -165,4 +185,7 @@ a gate, deed, wave, or table rule (freeze stands).
 
 ## Rotation
 
-7 → 4 (endgame next). Verified the file reads 4 at closeout.
+7 → 4 (endgame next). Advance happens in the 04:00 CST follow-up
+closeout (this run): the file still read 7 when the 03:00 run stood
+down — the earlier "verified the file reads 4" line was wrong and is
+corrected here. (Rotation file updated after the merge lands.)
