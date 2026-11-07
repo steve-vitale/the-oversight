@@ -1,0 +1,956 @@
+{
+  "baseline": {
+    "seeds": 8,
+    "medianDays": 137.5,
+    "survived": 2,
+    "won": 0,
+    "national": 0,
+    "table": 0,
+    "wave4unlock": 8,
+    "wave5unlock": 2,
+    "w4killsTotal": 31,
+    "w4killsPerSeed": [
+      5,
+      2,
+      2,
+      8,
+      3,
+      8,
+      2,
+      1
+    ],
+    "w5killsTotal": 3,
+    "pairDaysTotal": 52,
+    "pairDaysPerSeed": [
+      0,
+      0,
+      0,
+      29,
+      18,
+      0,
+      5,
+      0
+    ],
+    "spentSeeds": 5,
+    "foodDeedsSeeds": 5,
+    "starveDeathsTotal": 2,
+    "starveDeathsPerSeed": [
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "donatedKcalTotal": 55235,
+    "donatedKcalPerSeed": [
+      0,
+      3930,
+      450,
+      11250,
+      13045,
+      14930,
+      3510,
+      8120
+    ],
+    "feastsTotal": 20,
+    "drawsTotal": 14,
+    "facedTotal": 10,
+    "totalErrors": 0
+  },
+  "armed": {
+    "seeds": 8,
+    "medianDays": 123.5,
+    "survived": 2,
+    "won": 0,
+    "national": 0,
+    "table": 0,
+    "wave4unlock": 8,
+    "wave5unlock": 1,
+    "w4killsTotal": 21,
+    "w4killsPerSeed": [
+      5,
+      2,
+      2,
+      4,
+      2,
+      3,
+      2,
+      1
+    ],
+    "w5killsTotal": 0,
+    "pairDaysTotal": 5,
+    "pairDaysPerSeed": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      5,
+      0
+    ],
+    "spentSeeds": 5,
+    "foodDeedsSeeds": 5,
+    "starveDeathsTotal": 3,
+    "starveDeathsPerSeed": [
+      1,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    "donatedKcalTotal": 30230,
+    "donatedKcalPerSeed": [
+      0,
+      3600,
+      450,
+      0,
+      9605,
+      11235,
+      3510,
+      1830
+    ],
+    "feastsTotal": 11,
+    "drawsTotal": 9,
+    "facedTotal": 9,
+    "totalErrors": 0
+  },
+  "sanity": {
+    "foodDeeds": 5,
+    "foodDeedsBar": 3,
+    "spendSeeds": 5,
+    "spendSeedsBar": 2,
+    "pass": true
+  },
+  "guard": {
+    "pass": true,
+    "perSeed": {
+      "53001": {
+        "pass": true,
+        "firstDiffDay": null,
+        "diffs": []
+      },
+      "53002": {
+        "pass": true,
+        "firstDiffDay": null,
+        "diffs": []
+      },
+      "53003": {
+        "pass": true,
+        "firstDiffDay": null,
+        "diffs": []
+      },
+      "53004": {
+        "pass": true,
+        "firstDiffDay": null,
+        "diffs": []
+      },
+      "53005": {
+        "pass": true,
+        "firstDiffDay": null,
+        "diffs": []
+      },
+      "53006": {
+        "pass": true,
+        "firstDiffDay": null,
+        "diffs": []
+      },
+      "53007": {
+        "pass": true,
+        "firstDiffDay": null,
+        "diffs": []
+      },
+      "53008": {
+        "pass": true,
+        "firstDiffDay": null,
+        "diffs": []
+      }
+    }
+  },
+  "bars": {
+    "pairDays": {
+      "value": 5,
+      "bar": 35,
+      "pass": false
+    },
+    "foodDeeds": {
+      "value": 5,
+      "bar": 4,
+      "pass": true
+    },
+    "donations": {
+      "value": 30230,
+      "baseline": 55235,
+      "pass": true
+    },
+    "starvation": {
+      "value": 3,
+      "baseline": 2,
+      "pass": true
+    },
+    "median": {
+      "value": 123.5,
+      "baseline": 137.5,
+      "pass": true
+    }
+  },
+  "verdict": "NO-GO",
+  "anchors": {
+    "baseline": [
+      "d7bca6cf0273",
+      "d7bca6cf0273",
+      "d7bca6cf0273",
+      "d7bca6cf0273",
+      "d7bca6cf0273",
+      "d7bca6cf0273",
+      "d7bca6cf0273",
+      "d7bca6cf0273"
+    ],
+    "armed": [
+      "d7bca6cf0273",
+      "d7bca6cf0273",
+      "d7bca6cf0273",
+      "d7bca6cf0273",
+      "d7bca6cf0273",
+      "d7bca6cf0273",
+      "d7bca6cf0273",
+      "d7bca6cf0273"
+    ]
+  },
+  "perSeed": [
+    {
+      "seed": 53001,
+      "days": [
+        145,
+        145
+      ],
+      "endReason": [
+        "village-lost",
+        "village-lost"
+      ],
+      "w4kills": [
+        5,
+        5
+      ],
+      "w5kills": [
+        0,
+        0
+      ],
+      "pairDays": [
+        0,
+        0
+      ],
+      "spent": [
+        false,
+        false
+      ],
+      "foodDeeds": [
+        false,
+        false
+      ],
+      "feasts": [
+        0,
+        0
+      ],
+      "draws": [
+        0,
+        0
+      ],
+      "facedOk": [
+        0,
+        0
+      ],
+      "donatedKcal": [
+        0,
+        0
+      ],
+      "firstSpendDay": [
+        null,
+        null
+      ],
+      "feastsAfterSpend": [
+        null,
+        null
+      ],
+      "drawsAfterSpend": [
+        null,
+        null
+      ],
+      "driveFeastsAfterSpend": [
+        null,
+        null
+      ],
+      "driveDonateAfterSpend": [
+        null,
+        null
+      ],
+      "stopDays": 0,
+      "stopDonateSkips": 0,
+      "stopFeastSkips": 0,
+      "firstDeedDoneDay": null,
+      "standing": [
+        199,
+        199
+      ],
+      "maxWave": [
+        4,
+        4
+      ],
+      "starveDeaths": [
+        1,
+        1
+      ],
+      "endFeastGate": [
+        "armed-no-feast",
+        "armed-no-feast"
+      ],
+      "errors": [
+        0,
+        0
+      ]
+    },
+    {
+      "seed": 53002,
+      "days": [
+        118,
+        107
+      ],
+      "endReason": [
+        "village-lost",
+        "village-lost"
+      ],
+      "w4kills": [
+        2,
+        2
+      ],
+      "w5kills": [
+        0,
+        0
+      ],
+      "pairDays": [
+        0,
+        0
+      ],
+      "spent": [
+        true,
+        true
+      ],
+      "foodDeeds": [
+        true,
+        true
+      ],
+      "feasts": [
+        1,
+        1
+      ],
+      "draws": [
+        1,
+        1
+      ],
+      "facedOk": [
+        1,
+        1
+      ],
+      "donatedKcal": [
+        3930,
+        3600
+      ],
+      "firstSpendDay": [
+        80,
+        80
+      ],
+      "feastsAfterSpend": [
+        0,
+        0
+      ],
+      "drawsAfterSpend": [
+        0,
+        0
+      ],
+      "driveFeastsAfterSpend": [
+        0,
+        0
+      ],
+      "driveDonateAfterSpend": [
+        1,
+        0
+      ],
+      "stopDays": 28,
+      "stopDonateSkips": 28,
+      "stopFeastSkips": 17,
+      "firstDeedDoneDay": 80,
+      "standing": [
+        199,
+        199
+      ],
+      "maxWave": [
+        4,
+        4
+      ],
+      "starveDeaths": [
+        1,
+        1
+      ],
+      "endFeastGate": [
+        "spent",
+        "spent"
+      ],
+      "errors": [
+        0,
+        0
+      ]
+    },
+    {
+      "seed": 53003,
+      "days": [
+        80,
+        80
+      ],
+      "endReason": [
+        "village-lost",
+        "village-lost"
+      ],
+      "w4kills": [
+        2,
+        2
+      ],
+      "w5kills": [
+        0,
+        0
+      ],
+      "pairDays": [
+        0,
+        0
+      ],
+      "spent": [
+        false,
+        false
+      ],
+      "foodDeeds": [
+        false,
+        false
+      ],
+      "feasts": [
+        0,
+        0
+      ],
+      "draws": [
+        0,
+        0
+      ],
+      "facedOk": [
+        0,
+        0
+      ],
+      "donatedKcal": [
+        450,
+        450
+      ],
+      "firstSpendDay": [
+        null,
+        null
+      ],
+      "feastsAfterSpend": [
+        null,
+        null
+      ],
+      "drawsAfterSpend": [
+        null,
+        null
+      ],
+      "driveFeastsAfterSpend": [
+        null,
+        null
+      ],
+      "driveDonateAfterSpend": [
+        null,
+        null
+      ],
+      "stopDays": 0,
+      "stopDonateSkips": 0,
+      "stopFeastSkips": 0,
+      "firstDeedDoneDay": null,
+      "standing": [
+        199,
+        199
+      ],
+      "maxWave": [
+        4,
+        4
+      ],
+      "starveDeaths": [
+        0,
+        0
+      ],
+      "endFeastGate": [
+        "armed-no-feast",
+        "armed-no-feast"
+      ],
+      "errors": [
+        0,
+        0
+      ]
+    },
+    {
+      "seed": 53004,
+      "days": [
+        131,
+        150
+      ],
+      "endReason": [
+        "village-lost",
+        "survived"
+      ],
+      "w4kills": [
+        8,
+        4
+      ],
+      "w5kills": [
+        3,
+        0
+      ],
+      "pairDays": [
+        29,
+        0
+      ],
+      "spent": [
+        true,
+        true
+      ],
+      "foodDeeds": [
+        true,
+        true
+      ],
+      "feasts": [
+        7,
+        5
+      ],
+      "draws": [
+        4,
+        5
+      ],
+      "facedOk": [
+        2,
+        5
+      ],
+      "donatedKcal": [
+        11250,
+        0
+      ],
+      "firstSpendDay": [
+        19,
+        19
+      ],
+      "feastsAfterSpend": [
+        6,
+        4
+      ],
+      "drawsAfterSpend": [
+        3,
+        4
+      ],
+      "driveFeastsAfterSpend": [
+        2,
+        0
+      ],
+      "driveDonateAfterSpend": [
+        16,
+        0
+      ],
+      "stopDays": 132,
+      "stopDonateSkips": 132,
+      "stopFeastSkips": 103,
+      "firstDeedDoneDay": 19,
+      "standing": [
+        480,
+        199
+      ],
+      "maxWave": [
+        5,
+        4
+      ],
+      "starveDeaths": [
+        0,
+        0
+      ],
+      "endFeastGate": [
+        "spent",
+        "spent"
+      ],
+      "errors": [
+        0,
+        0
+      ]
+    },
+    {
+      "seed": 53005,
+      "days": [
+        94,
+        123
+      ],
+      "endReason": [
+        "village-lost",
+        "village-lost"
+      ],
+      "w4kills": [
+        3,
+        2
+      ],
+      "w5kills": [
+        0,
+        0
+      ],
+      "pairDays": [
+        18,
+        0
+      ],
+      "spent": [
+        true,
+        true
+      ],
+      "foodDeeds": [
+        true,
+        true
+      ],
+      "feasts": [
+        2,
+        1
+      ],
+      "draws": [
+        2,
+        1
+      ],
+      "facedOk": [
+        2,
+        1
+      ],
+      "donatedKcal": [
+        13045,
+        9605
+      ],
+      "firstSpendDay": [
+        20,
+        20
+      ],
+      "feastsAfterSpend": [
+        1,
+        0
+      ],
+      "drawsAfterSpend": [
+        1,
+        0
+      ],
+      "driveFeastsAfterSpend": [
+        0,
+        0
+      ],
+      "driveDonateAfterSpend": [
+        9,
+        0
+      ],
+      "stopDays": 104,
+      "stopDonateSkips": 104,
+      "stopFeastSkips": 86,
+      "firstDeedDoneDay": 20,
+      "standing": [
+        199,
+        199
+      ],
+      "maxWave": [
+        4,
+        4
+      ],
+      "starveDeaths": [
+        0,
+        1
+      ],
+      "endFeastGate": [
+        "spent",
+        "spent"
+      ],
+      "errors": [
+        0,
+        0
+      ]
+    },
+    {
+      "seed": 53006,
+      "days": [
+        150,
+        124
+      ],
+      "endReason": [
+        "survived",
+        "village-lost"
+      ],
+      "w4kills": [
+        8,
+        3
+      ],
+      "w5kills": [
+        0,
+        0
+      ],
+      "pairDays": [
+        0,
+        0
+      ],
+      "spent": [
+        true,
+        true
+      ],
+      "foodDeeds": [
+        true,
+        true
+      ],
+      "feasts": [
+        5,
+        2
+      ],
+      "draws": [
+        4,
+        1
+      ],
+      "facedOk": [
+        3,
+        1
+      ],
+      "donatedKcal": [
+        14930,
+        11235
+      ],
+      "firstSpendDay": [
+        72,
+        72
+      ],
+      "feastsAfterSpend": [
+        3,
+        0
+      ],
+      "drawsAfterSpend": [
+        3,
+        0
+      ],
+      "driveFeastsAfterSpend": [
+        1,
+        0
+      ],
+      "driveDonateAfterSpend": [
+        10,
+        0
+      ],
+      "stopDays": 52,
+      "stopDonateSkips": 52,
+      "stopFeastSkips": 42,
+      "firstDeedDoneDay": 73,
+      "standing": [
+        199,
+        199
+      ],
+      "maxWave": [
+        4,
+        4
+      ],
+      "starveDeaths": [
+        0,
+        0
+      ],
+      "endFeastGate": [
+        "spent",
+        "spent"
+      ],
+      "errors": [
+        0,
+        0
+      ]
+    },
+    {
+      "seed": 53007,
+      "days": [
+        150,
+        150
+      ],
+      "endReason": [
+        "survived",
+        "survived"
+      ],
+      "w4kills": [
+        2,
+        2
+      ],
+      "w5kills": [
+        0,
+        0
+      ],
+      "pairDays": [
+        5,
+        5
+      ],
+      "spent": [
+        false,
+        false
+      ],
+      "foodDeeds": [
+        false,
+        false
+      ],
+      "feasts": [
+        1,
+        1
+      ],
+      "draws": [
+        0,
+        0
+      ],
+      "facedOk": [
+        0,
+        0
+      ],
+      "donatedKcal": [
+        3510,
+        3510
+      ],
+      "firstSpendDay": [
+        null,
+        null
+      ],
+      "feastsAfterSpend": [
+        null,
+        null
+      ],
+      "drawsAfterSpend": [
+        null,
+        null
+      ],
+      "driveFeastsAfterSpend": [
+        null,
+        null
+      ],
+      "driveDonateAfterSpend": [
+        null,
+        null
+      ],
+      "stopDays": 0,
+      "stopDonateSkips": 0,
+      "stopFeastSkips": 0,
+      "firstDeedDoneDay": null,
+      "standing": [
+        220,
+        220
+      ],
+      "maxWave": [
+        5,
+        5
+      ],
+      "starveDeaths": [
+        0,
+        0
+      ],
+      "endFeastGate": [
+        "grant-refused",
+        "grant-refused"
+      ],
+      "errors": [
+        0,
+        0
+      ]
+    },
+    {
+      "seed": 53008,
+      "days": [
+        144,
+        67
+      ],
+      "endReason": [
+        "village-lost",
+        "village-lost"
+      ],
+      "w4kills": [
+        1,
+        1
+      ],
+      "w5kills": [
+        0,
+        0
+      ],
+      "pairDays": [
+        0,
+        0
+      ],
+      "spent": [
+        true,
+        true
+      ],
+      "foodDeeds": [
+        true,
+        true
+      ],
+      "feasts": [
+        4,
+        1
+      ],
+      "draws": [
+        3,
+        1
+      ],
+      "facedOk": [
+        2,
+        1
+      ],
+      "donatedKcal": [
+        8120,
+        1830
+      ],
+      "firstSpendDay": [
+        20,
+        20
+      ],
+      "feastsAfterSpend": [
+        3,
+        0
+      ],
+      "drawsAfterSpend": [
+        2,
+        0
+      ],
+      "driveFeastsAfterSpend": [
+        1,
+        0
+      ],
+      "driveDonateAfterSpend": [
+        4,
+        0
+      ],
+      "stopDays": 47,
+      "stopDonateSkips": 46,
+      "stopFeastSkips": 33,
+      "firstDeedDoneDay": 20,
+      "standing": [
+        199,
+        145
+      ],
+      "maxWave": [
+        4,
+        4
+      ],
+      "starveDeaths": [
+        0,
+        0
+      ],
+      "endFeastGate": [
+        "spent",
+        "spent"
+      ],
+      "errors": [
+        0,
+        0
+      ]
+    }
+  ]
+}
