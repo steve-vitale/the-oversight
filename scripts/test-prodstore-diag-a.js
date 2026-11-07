@@ -3,7 +3,10 @@
 // Legs: guard refusals (seeds/days/env/lever-flag), oneRun structure + dedupe,
 // determinism (same seed twice => identical per-seed JSON), analyzer runs on a
 // small corpus and prints the binding-constraint + baseline lines, flow
-// accounting residual stays small (the wrappers measure what they claim).
+// accounting residual stays small (the wrappers measure what they claim),
+// L9 armed 5-day run engages the throttle no more and eases no more than
+// baseline, L10 unset run is byte-identical to the Phase-A baseline run,
+// L11 pilot sweep refuses to run unarmed.
 // Uses seed 96201 at 5 days only (smoke scale); the judged 8-seed 150d corpus
 // is produced by the sweep, not by this test.
 'use strict';
@@ -17,6 +20,7 @@ const assert = require('assert');
 
 const ROOT = path.join(__dirname, '..');
 const SWEEP = path.join(__dirname, 'sweep-prodstore-diag-a.js');
+const PILOT = path.join(__dirname, 'sweep-prodstore-pilot-a.js');
 const ANALYZE = path.join(__dirname, 'analyze-prodstore-diag-a.js');
 const TMP = path.join('/tmp', 'prodstore-diag-a-test-' + process.pid);
 
@@ -129,6 +133,45 @@ function runSweep(env, expectCode) {
     const removedKcal = flows.reduce((t, f) => t + (f.removedKcal || 0), 0);
     console.log('    residual=' + residual + ' inflows=' + inTot + ' outflows=' + outTot + ' drawGap=' + drawGap + ' removedKcal=' + removedKcal + ' share=' + (100 * share).toFixed(1) + '% of outflows');
     assert.ok(share < 0.10, 'residual share < 10% of outflows, got ' + (100 * share).toFixed(1) + '%');
+  });
+
+  // L9: armed 5-day run (PRODSTORE_LEVER=1) engages the throttle on no MORE
+  // days than baseline and eases no MORE kcal — the lever only ever raises
+  // the plenty bar, so the stand-down can only shrink. The threshold is read
+  // from process.env at call time, so toggling it in-process between oneRun
+  // calls is a faithful arm/disarm (same seed, same RNG stream).
+  await aleg('L9 armed run: throttle days <= baseline, easing <= baseline', async () => {
+    const baseDays = first.perSeed.daySeries;
+    const baseEngaged = baseDays.filter(d => d.throttleEngaged).length;
+    const baseEasing = (baseDays[baseDays.length - 1].plentyDepriKcal || 0)
+      + (baseDays[baseDays.length - 1].depositGateKcal || 0);
+    process.env.PRODSTORE_LEVER = '1';
+    let armed;
+    try { armed = await oneRun(96201, 5); } finally { delete process.env.PRODSTORE_LEVER; }
+    const armDays = armed.perSeed.daySeries;
+    const armEngaged = armDays.filter(d => d.throttleEngaged).length;
+    const armEasing = (armDays[armDays.length - 1].plentyDepriKcal || 0)
+      + (armDays[armDays.length - 1].depositGateKcal || 0);
+    console.log('    baseline engaged=' + baseEngaged + ' easing=' + baseEasing
+      + ' | armed engaged=' + armEngaged + ' easing=' + armEasing);
+    assert.ok(armEngaged <= baseEngaged, 'armed engaged days (' + armEngaged + ') <= baseline (' + baseEngaged + ')');
+    assert.ok(armEasing <= baseEasing, 'armed easing (' + armEasing + ') <= baseline (' + baseEasing + ')');
+  });
+  // L10: unset run after an armed run in the same process is byte-identical
+  // to the Phase-A baseline run — off = baseline, no state leaks across arms.
+  await aleg('L10 unset run byte-identical to baseline', async () => {
+    delete process.env.PRODSTORE_LEVER;
+    const third = await oneRun(96201, 5);
+    assert.strictEqual(JSON.stringify(third.perSeed), JSON.stringify(first.perSeed));
+    assert.strictEqual(JSON.stringify(third.diag), JSON.stringify(first.diag));
+  });
+  // L11: the pilot sweep refuses to run unarmed (guard inverted vs diagnosis).
+  leg('L11 pilot sweep refuses without PRODSTORE_LEVER=1', () => {
+    const r = cp.spawnSync(process.execPath, [PILOT], {
+      env: Object.assign({}, process.env, { SEEDS: '96201,96202,96203,96204,96205,96206,96207,96208', DAYS: '150' }),
+      encoding: 'utf8', timeout: 60000,
+    });
+    assert.strictEqual(r.status, 2, 'pilot exit 2 unarmed, got ' + r.status);
   });
 
   console.log('\n' + pass + ' PASS, ' + fail + ' FAIL');

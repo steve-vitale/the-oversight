@@ -223,7 +223,121 @@ production/storage, then design ONE small documented lever and test it.
 
 (to be filled after the sweeps — verdict judged ONLY against this header)
 
-## Metric review (post-run)
+---
+
+## PHASE-B AMENDMENT (2026-11-07 ~18:00 UTC — appended BEFORE any pilot sweep runs)
+
+### Diagnosis outcome (Phase A COMPLETE — all seven questions answered)
+- Pooled, 8 seeds 96201–96208, competent, 150d death-aware (911 village-days):
+  produced/need = **1.054** (15,539,857 / 14,741,476); ate/need = 0.895.
+- **BINDING CONSTRAINT (largest channel): throttle/easing — 2,651,133 kcal
+  (17.1% of produced)**: PLENTYDEPRI eased 1,754,448 + DEPOSITGATE eased
+  896,685. Throttle engaged 662/911 days (72.7%); engaged AND hungry on
+  130 days. Spoilage 338,708 (12.3% of stocked+stored). Cap never binds
+  (0/911 cap-flag days). Structural shortfall 0 pooled. Preservation:
+  cook resolves 928/5,680 duties; preserved stock at last snapshot mostly 0.
+- **BASELINE FOR PHASE B: starvation deaths = 3 per 8 seeds; median survival
+  = 115.5d; empty-pantry village-days = 24.** All 3 starvation deaths on ONE
+  seed (96203, d51 Franz, d58 Oscar, d58 Emma — pantry 0, freshDays 0).
+- **Caveat recorded honestly before the pilot (it does not change the
+  selection rule, it bounds the expectation):** on seed 96203 the throttle
+  was NEVER engaged during the collapse (days 35–66, freshDays 0–2.4) and
+  the easing counters froze at 11,708 / 4,032 — the easing did not cause
+  those deaths; the village produced ~70% of need for a month (a
+  production-collapse regime, pop 10→4). The lever's path to the GO bar
+  on that seed is the early buffer (its 11 engaged days, 15,740 kcal
+  eased in total) plus trajectory effects — a genuine test, not a
+  foregone conclusion. If the pilot NO-GOs on starvation, the evidence
+  will say plainly the deaths live in the collapse regime and the next
+  arm should target the production floor (knowledge factor / base
+  capacity), not the easing.
+- Accounting-closure note: per-seed residuals are small on 6 seeds
+  (≤14.4% of inflows) but 55.2% (s96204) and 55.6% (s96207) on two —
+  POSITIVE (unmeasured INFLOWS, concentrated on event days, e.g. s96204
+  days 26–38 gaining ~18k/day unmeasured). Named unmeasured inflow
+  paths in code (direct `v.pantry.push`, bypassing the wrappers): route
+  tariffs (~1k each, hierarchy.js:3397), raid spoils (hierarchy.js:3761),
+  League granary draws (hierarchy.js:3430), tribute/favor repayments,
+  relay cuts. The ranking is robust anyway: the easing channel is
+  ledger-based (not flow-derived), and even if the whole pooled residual
+  (~530k) were misattributed spoilage, spoilage (~869k) would still be
+  3× smaller than easing (2.65M). The residual is an instrument
+  limitation to record, not a diagnosis-killer. The 5-day proof-test
+  residual was 8.4% of outflows (L8 passes).
+
+### The lever (ONE small documented change — selection rule followed: target the single largest measured channel)
+- **Name: PLENTY-WEEK — the production throttle + both easings demand a
+  full week's buffer before standing down food work.**
+- **Exact change:** the plenty threshold the throttle reads goes from
+  **4 → 7 fresh days**. One helper, one number, two call sites:
+  - New method `Game._prodstorePlentyThreshold()` in `src/js/game.js`
+    (placed immediately before `prodThrottleEngaged()`): returns 7 when
+    `PRODSTORE_LEVER` is set in the environment, 4 otherwise (browser /
+    unset = baseline, byte-identical — no RNG in this path).
+  - `prodThrottleEngaged()` (game.js:16447): `pantryFreshDays() > 4`
+    becomes `pantryFreshDays() > this._prodstorePlentyThreshold()`.
+  - `prodThrottleHungerExempt()` (game.js:16456): `pantryFreshDays() <= 4`
+    becomes `<= this._prodstorePlentyThreshold()` (same sensor, so the
+    "would engage but exempt" beat stays consistent with the throttle).
+  - NOT touched: `_plentyDepriBufferClear()` (PD=2 buffer gate, a
+    different sensor — `pantryDaysEstimate()` — dormant at PD=1) and the
+    hungryStreak ≥ 3 crisis exemption (a deliberate, commented design
+    choice; this lever recalibrates the plenty sensor, it does not
+    override the crisis rule). The deposit gate follows automatically
+    (`_depositGateEngaged()` reads `prodThrottleEngaged()`).
+- **Mechanism (why this, in plain words):** the pantry sensor reads
+  "plenty" from pantry draws alone, and draws are only ~6% of what the
+  village eats (848k drawn vs 13.19M eaten) — so it calls the pantry
+  "full" at a median 5.3 fresh days while villagers eat only 89.5% of
+  need and the village throws away 17% of everything it makes. Asking
+  for a full week of buffer before food work stands down keeps the
+  buffer-building going longer. Expected recoverable share: easing on
+  days with freshDays in (4,7] is 711,964 kcal (26.9% of the easing
+  channel); 282 of 662 engaged days flip to disengaged.
+- **Env flag arming it: `PRODSTORE_LEVER=1`.** Off / unset = baseline.
+  The diagnosis sweep's FATAL guard (PRODSTORE_LEVER must be unset)
+  stays in the diagnosis sweep; the pilot uses a separate pilot sweep
+  (`scripts/sweep-prodstore-pilot-a.js`, derived from the diagnosis
+  sweep, guard inverted: REQUIRES `PRODSTORE_LEVER=1`) writing to
+  `evidence/2026-11-07/prodstore-a-corpus-armed/`.
+- **Proof test extended** (`scripts/test-prodstore-diag-a.js`, legs L9–L10):
+  L9 armed 5-day run (seed 96201) has throttleEngaged days ≤ baseline
+  and easing (plentyDepri+depositGate) ≤ baseline; L10 unset run is
+  byte-identical to the Phase-A baseline run (off = baseline). Plus
+  `node scripts/check.js --quick` after the src/js change.
+- **Canon check:** PRESERVATION.md / STORAGE.md name no plenty
+  threshold and no throttle number — the "4" is a bare engine constant,
+  not canon. No win price or deed gate is touched. No new system, no
+  multiplier without a mechanism: the lever is a recalibration of an
+  existing sensor, and its voice/ledger beats follow the existing
+  functions (the throttle beat, the plentyDepri/depositGate day voices).
+
+### Pilot GO threshold (binding — same rule as the header, baseline now known)
+- Baseline: starvation deaths = 3 per 8 seeds; median survival = 115.5d.
+- **GO: villager starvation deaths ≤ 1 (half of 3, integer) AND median
+  survival ≥ 92.4d (0.8 × 115.5d).** Both must hold. Cost bars reported
+  honestly alongside: wave reach, death-cause shares, empty-pantry
+  village-days (baseline 24), spoilage, cap-flag days.
+- The zero-baseline re-scope rule does NOT trigger (baseline is 3, not 0).
+
+### Confirm band (freshness verified in this amendment, 2026-11-07)
+- **Confirm band: 96209–96224 (16 seeds). FRESH.** Grep scope: every
+  seed checked individually against ALL dated
+  `evidence/*/sim-*-prereg.md` (0 hits), the convergence tracker (0),
+  `sim-findings.md` (0). The only hits for 96209 and 96224 are the
+  self-reference line in THIS prereg ("96209–96224 — freshness to be
+  re-verified"), i.e. this amendment itself — not a prior use. No
+  forbidden/contaminated list names the band.
+- Confirm runs ONLY on a pilot GO, same GO threshold, same policies/horizon.
+
+### Pilot plan
+- Same 8 seeds (96201–96208), competent, 150d death-aware, PLENTYDEPRI=1
+  DEPOSITGATE=1, PRODSTORE_LEVER=1, armed corpus vs the Phase-A baseline
+  corpus. Analyzer run on the armed corpus; before/after compared in the
+  evidence file (analyzer replication tables). Balanced panel attempted
+  per the header; telemetry check per the header.
+
+### Metric review (post-run)
 
 (to be filled after the sweeps)
 
