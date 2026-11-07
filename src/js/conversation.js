@@ -1318,7 +1318,7 @@
       v.conv = v.conv || {};
       if (!v.conv[vid]) v.conv[vid] = {
         active: false, exchanges: 0, budget: 4, thread: null, depth: 0,
-        said: {}, saidLines: [], transcript: [], pendingQ: null, askedQs: [],
+        said: {}, saidKeyOrder: [], saidLines: [], transcript: [], pendingQ: null, askedQs: [],
         answered: {}, recalled: {}, lastDay: -1, count: 0, over: false,
         offeredHelp: false, askedTopics: [], qCount: 0,
         theorized: [], heldBeats: [], heldAsk: false,
@@ -1327,6 +1327,7 @@
       // Normalize older convo states (saves/scenarios predate the fields).
       if (!c.heldBeats) c.heldBeats = [];
       if (!c.saidLines) c.saidLines = [];
+      if (!c.saidKeyOrder) c.saidKeyOrder = [];
       if (typeof c.heldAsk === 'undefined') c.heldAsk = false;
       if (typeof c.winddownQueued === 'undefined') c.winddownQueued = false;
       if (!c.followUsed) c.followUsed = {};
@@ -2818,6 +2819,18 @@
       }
       const line = pickPool[Math.floor(Math.random() * pickPool.length)];
       c.said[key].push(line);
+      // KEY-USE ORDER (journey-social r153): convoPickCycle's reset needs
+      // to know which keys were used most recently, so its keep window
+      // spans the globally last-served variants, not just the current
+      // key's tail. A plain list of keys in last-use order (bounded by
+      // distinct key count; maintained here so every pool recording
+      // counts, cycle or not).
+      try {
+        c.saidKeyOrder = c.saidKeyOrder || [];
+        const oi = c.saidKeyOrder.indexOf(key);
+        if (oi !== -1) c.saidKeyOrder.splice(oi, 1);
+        c.saidKeyOrder.push(key);
+      } catch (e) {}
       try { this.noteVillageLine(line); } catch (e) {}
       return line;
     },
@@ -2855,8 +2868,10 @@
         // (comfort pool: verbatim '"Thanks. ...Thanks for saying that."'
         // back-to-back, caught live; ~1/3 per exhaustion). Seed the fresh
         // list with the last line so the cycle never opens with an
-        // immediate repeat. Cross-key memory is untouched — one thread
-        // still never resurfaces in another.
+        // immediate repeat. Cross-key memory for OTHER pools is
+        // untouched — one thread still never resurfaces in another;
+        // the r153 cross-key reset below frees only THIS pool's own
+        // variants, and only when the pool has exhausted everywhere.
         // R18 MEMORY WINDOW (journey-landing r18 2026-10-16): seeding with
         // only the last line let the reshuffle repeat a distinctive line
         // 3 turns later (comfort pool: "You're kind. Don't let this place
@@ -2864,9 +2879,49 @@
         // last 3 lines — a real person wouldn't repeat a distinctive line
         // within 3 turns. Capped at pool.length - 1 so small pools still
         // cycle instead of collapsing to null.
+        // CROSS-KEY RESET (journey-social r153 2026-11-07): the reset
+        // above trimmed only the CURRENT key, but convoPick dedupes by
+        // TEXT across ALL keys — and c.said persists across sittings.
+        // A pool whose key varies (reply pools: tag+topic; voice pools:
+        // mood+age) had its variants recorded under several keys, so the
+        // trim never freed one: the pool exhausted permanently and every
+        // later offer fell back to pool[0] — the dlg:more continuer
+        // served "Tell me more." 9 times in one wild conversation and 3
+        // in a row across sittings in the seed-42301 probe, even though
+        // the pool holds 3 labels. Free this pool's variants from every
+        // key's list, keeping the last `keep` DISTINCT variants served
+        // under ANY key (saidKeyOrder lists keys by last use, most
+        // recent last; within a key the tail is most recent) so the
+        // cycle never opens with an immediate repeat even when the
+        // thread — and the key — changed since the last serving (the
+        // first version of this fix kept only the current key's tail,
+        // and a fresh key after a thread switch re-picked the
+        // just-served label). Fixed-key pools (comfort, recap, exits)
+        // are unaffected — their variants live under one key, so the
+        // cross-key part is a no-op for them.
         const keep = Math.max(1, Math.min(3, (pool || []).length - 1));
-        const last = (c.said[key] || []).slice(-keep);
-        c.said[key] = last;
+        const norm = (x) => { let t = String(x == null ? '' : x).trim(); if (t.length >= 2 && t.startsWith('"') && t.endsWith('"')) t = t.slice(1, -1); return t.trim(); };
+        const poolNorm = new Set((pool || []).map(norm));
+        const keepNorm = new Set();
+        // Recency is global: saidKeyOrder lists keys by last use (most
+        // recent last), so scanning it reversed finds the truly last-served
+        // variants first. The current key is NOT forced first — after a
+        // thread switch it may hold only stale servings from an earlier
+        // sitting while the just-served label lives under the previous
+        // key, and forcing it first filled the keep window with stale
+        // variants and let the just-served label re-pick immediately.
+        const orderedKeys = (c.saidKeyOrder && c.saidKeyOrder.length ? c.saidKeyOrder.slice().reverse() : [key]);
+        for (const k of orderedKeys) {
+          if (keepNorm.size >= keep) break;
+          const lst = c.said[k] || [];
+          for (let i = lst.length - 1; i >= 0 && keepNorm.size < keep; i--) {
+            const n = norm(lst[i]);
+            if (poolNorm.has(n)) keepNorm.add(n);
+          }
+        }
+        for (const k of Object.keys(c.said || {})) {
+          c.said[k] = (c.said[k] || []).filter(x => !poolNorm.has(norm(x)) || keepNorm.has(norm(x)));
+        }
         l = this.convoPick(vid, key, pool);
       }
       return l;
@@ -5469,6 +5524,32 @@
       // already carried it once); a fresh line is picked only when
       // no staged line exists. Re-spoken next sitting if undecided
       // (r8 pattern: the pending survives the sitting).
+      // OPENER-CARRIED SKIP (journey-social r153): when this sitting's
+      // opener IS the talk request, the staged line was already spoken
+      // verbatim at the top of the transcript (convoOpening priority 1,
+      // with the "Name: " prefix). Re-speaking it here as the beat put
+      // the same sentence twice in a row — 9 wild occurrences for link
+      // raises (bond lines usually end with a question, so the opener
+      // owns the reply and the beat is held instead — same shape, same
+      // fix). The no-repeat ledger never caught it: the opener's key
+      // carries the prefix and the beat's does not. Skip the second
+      // speaking but still record the beat, so the exclusive bond:/link:
+      // menu still owns the reply. Detection must be per-sitting:
+      // opThread === 'request' (only convoOpening's priority-1 branch
+      // returns it) plus the pending request's flag — treq.delivered
+      // alone is insufficient, since it can be true from an earlier
+      // sitting, and then the beat SHOULD be re-spoken next sitting.
+      let openerCarriedBond = false, openerCarriedLink = false;
+      try {
+        if (opThread === 'request') {
+          const treq0 = ((this.state.village || {}).talkRequests || {})[vid];
+          if (treq0 && treq0.bondProposal) openerCarriedBond = true;
+          if (treq0 && treq0.linkRaise) openerCarriedLink = true;
+        }
+      } catch (e) {}
+      const recordStagedBeat = (line, tag) => {
+        try { if (this.convoRecordSpokenBeat) this.convoRecordSpokenBeat(vid, line, { tag: tag }); } catch (e) {}
+      };
       let bondBeat = null, linkBeat = null;
       try {
         const bp = (this.pendingBondProposal && this.pendingBondProposal(vid)) || null;
@@ -5480,10 +5561,12 @@
       } catch (e) {}
       if (bondBeat) {
         if (openerOwnsReply || inviteBeat) c.bondPending = bondBeat;
+        else if (openerCarriedBond) recordStagedBeat(bondBeat, 'bondproposal');
         else this.sayLine(vid, bondBeat, { bondBeat: true, tag: 'bondproposal' });
       }
       if (linkBeat) {
         if (openerOwnsReply || inviteBeat || bondBeat) c.linkPending = linkBeat;
+        else if (openerCarriedLink) recordStagedBeat(linkBeat, 'linkraise');
         else this.sayLine(vid, linkBeat, { linkBeat: true, tag: 'linkraise' });
       }
       // COHERENCE (Steve 2026-10-07): drift is never silent. When lived
