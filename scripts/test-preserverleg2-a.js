@@ -237,7 +237,9 @@ if (corpus) {
   check('T4 corpus haul medians defined', res.medHaul && res.medHaul.invHaulKcalPd1Parent != null && res.medHaul.invHaulKcalPd1Commit != null);
   check('T4 corpus tradeoff verdict computable', res.go && (res.go.verdict === 'GO' || res.go.verdict === 'NO-GO'), res.go);
   check('T4 corpus tradeoff counts sum to seeds', Object.values(res.tradeoffCounts).reduce((a, b) => a + b, 0) === expectSeeds, res.tradeoffCounts);
-  check('T4 corpus E defined on >= 14 paired seeds', res.medE && res.medE.pairedN >= 14, res.medE);
+  // E-defined bar is scale-aware: the full 16-seed corpus needs >= 14
+  // paired seeds (validity floor); the 8-seed pilot needs all 8.
+  check('T4 corpus E defined on enough paired seeds', res.medE && res.medE.pairedN >= (pilotMode ? expectSeeds : 14), res.medE);
   check('T4 corpus fish medians defined', res.medFish && res.medFish.kcalPd1Parent != null && res.medFish.kcalPd1Commit != null);
   check('T4 corpus govern records == seeds', res.governRecords && res.governRecords.length === expectSeeds, res.governRecords && res.governRecords.length);
   check('T4 corpus rot-rule diagnostic computable', res.rotRule && (res.rotRule.verdict === 'GO' || res.rotRule.verdict === 'NO-GO'), res.rotRule);
