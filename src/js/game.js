@@ -38079,20 +38079,31 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           for (const k of Object.keys(prev)) if (!seen[k]) delete prev[k];
           f._whiffRounds = dmg > 0 ? 0 : ((f._whiffRounds || 0) + 1);
           if ((f._whiffRounds || 0) >= WHIFF_ROUNDS && !f._whiffFired) {
-            const liveMon = (f.fighters || []).some(x => x && x.kind === 'monster' && x.alive && !x.fled);
+            // WHIFF-GUARD COVERAGE (journey-crisis r154, 2026-11-07): the
+            // guard's class is "both sides whiff", not "a monster whiffs" —
+            // but liveMon only counted monsters, so a pure betrayal fight
+            // (hostile human, no monster) spun 26,001+ rounds with nobody
+            // landing a hit: r150 seed 13402 froze on day 18 (270,599 "No
+            // path there." + Wren stall lines, gameDay frozen); staged
+            // repro seed 13611 froze the same way at round 26,001 (probe
+            // scripts/probe-betrayal-stall-r154.js). Hostile humans count
+            // as foes here, and the guard marks them fled so the betrayal
+            // tbEndCheck resolves the fight as routed, not endless.
+            const liveFoe = (f.fighters || []).some(x => x && (x.kind === 'monster' || x.kind === 'hostile') && x.alive && !x.fled);
             const liveUs = (f.fighters || []).some(x => x && (x.kind === 'player' || x.kind === 'villager' || x.kind === 'ally') && x.alive && !x.fled);
             // Don't fight the chorus: if reinforcements are incoming
             // (belltoad _pendingPack), the fight has a future — let it arrive.
             // The pack is finite; the guard fires once it's exhausted.
             const packIncoming = this._pendingPack && this._pendingPack.count > 0;
-            if (liveMon && liveUs && !packIncoming) {
+            if (liveFoe && liveUs && !packIncoming) {
               f._whiffFired = true;
               // Instrumentation: global fire count for sweep measurement
               // (behavior-neutral; no RNG, no flow change).
               this._whiffGuardFiredTotal = (this._whiffGuardFiredTotal || 0) + 1;
-              this.say('It comes apart — no one in reach, no one chasing. The fight ends; they melt back into the wilds.');
+              if (f.betrayal) this.say('It comes apart — neither side can reach the other. The fight breaks off; they back away into the dark.');
+              else this.say('It comes apart — no one in reach, no one chasing. The fight ends; they melt back into the wilds.');
               for (const m of (f.fighters || [])) {
-                if (m && m.kind === 'monster' && m.alive && !m.fled) m.fled = true;
+                if (m && (m.kind === 'monster' || m.kind === 'hostile') && m.alive && !m.fled) m.fled = true;
               }
               try { this.tbEndCheck(); } catch (e) {}
             }

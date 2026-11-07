@@ -1522,8 +1522,18 @@
       f.turnIdx++;
       if (f.turnIdx >= f.order.length) {
         f.turnIdx = 0; f.round++;
-        this.sysSay(`ROUND ${f.round}!`);
-        this.audioEvent('round', { round: f.round });
+        // ROUND WRAP (journey-crisis r154, 2026-11-07): the old code
+        // inlined the ROUND announcement here and never called
+        // tbRoundWrap — so in ANY fight with a living hostile human
+        // (betrayal, uprising, justice) the whiff-forever guard, the
+        // order re-sort, the belltoad chorus and the eviction-wall
+        // expiry never ran. A betrayal stall spun 26,001+ rounds with
+        // nobody landing a hit (r150 seed 13402). tbRoundWrap already
+        // says ROUND N! and plays the round sound — call it, exactly
+        // like the sync tbAdvance does, and stop if the guard ended
+        // the fight inside the wrap.
+        this.tbRoundWrap(f);
+        if (!this.tbfight || this.tbfight.over) return;
       }
       const c = this.tbFighter(f.order[f.turnIdx]);
       if (!c || !c.alive || c.fled) continue;
