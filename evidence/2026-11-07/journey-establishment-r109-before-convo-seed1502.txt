@@ -1,0 +1,85 @@
+=== r109-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Chen (gen_6fckz2w) occ=Pharmacist --
+OPENING: "I asked Maureen about this wound — Maureen's gone. Still need hands. Are you in?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to them, on the same side of the Haven door, to help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [goon] "I'm listening, I promise."
+THEM: "I've been thinking. You and me — we should be bonded. Not just neighbors. Will you stick with me?"
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Good question." "Did you hear? You won Beastmaster on the cameras. People are still talking about it."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "...Fine. This had better be worth it."
+YOU: [dlg:more] "Tell me more."
+THEM: "Nikos? An aquarium keeper, back before. Solid person."
+YOU: [party_name] "We should name this. Us."
+THEM: "A name. Okay." You say it out loud, trying the shape of it:
+1. "MEAT AND FRIENDS" (📺 the System suggests)
+2. "The Hearth" (Chen suggests)
+3. "The Company" (or plain)
+(Which one? It'll stick.)
+closing: "Steady as she goes. See you at dinner."
+
+-- Omar (omar_farouk) occ=piano tuner --
+OPENING: "I'm sorry — whatever this is, it's getting worse — I'm feverish, a cut gone hot and angry. Will you help me?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to them, on the same side of the Haven door, to help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Thank you. Just — thank you. I'll be here, resting."
+YOU: [goon] "I'm listening, I promise."
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+YOU: [silence] "..."
+THEM: You say nothing. Neither do they, for a while — and it's fine.
+YOU: [goon] "I'm listening, I promise."
+THEM: "Teach me something. Anything you know that I don't."
+YOU: [ans:q_teach_me:a_tell] "I'd rather show you while we're working. It's easier that way."
+THEM: "All right. Show me when we work together."
+YOU: [goon] "I'm listening, I promise."
+THEM: "I'd like to learn something I can use today. Show me while you work, when you have a moment."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+closing: "Well. That was conversation."
+
+-- Ethan (ethan_hunt) occ=trail crew lead --
+OPENING: "Where are you from — originally? Before all this. Just... be straight with me."
+YOU: [ans:q_origin:a_tell] "I'm from Columbus, Ohio."
+THEM: Nods slowly. "Columbus, Ohio. I'll remember that. Everybody's from somewhere that isn't here."
+YOU: [goon] "I'm listening, I promise."
+THEM: "Me? Manchester, England. I still dream in its weather — rain on a tin roof, that specific smell. I wake up here and for a second I'm furious at the sky for the swap."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+YOU: [dlg:doubt] "That doesn't quite add up."
+THEM: "...What's that supposed to mean?" Their voice goes careful.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on where you're from."
+YOU: [goon] "I'm listening, I promise."
+THEM: Their friendliness thins — still there, just held at arm's length.
+YOU: [goon] "I'm listening, I promise."
+THEM: "Any regrets? The real kind, not the small stuff."
+YOU: [ans:q_regret:a_tell] "I didn't say what I needed to say. To someone. Now I can't."
+THEM: Quiet. "Yeah. I think everyone's carrying one of those."
+closing: "Remember what we said. Hold me to it."
+
+-- Yara (yara_haddad) occ=interpreter --
+OPENING: "Has this changed you? Like, fundamentally?"
+YOU: [ans:q_change:a_tell] "I don't recognize the person in my head anymore. I think that's good? I don't k
+THEM: "The old you got you here. The new you keeps you here. Both count."
+YOU: [goon] "I'm listening, I promise."
+THEM: "Why do you ask? I used to be an interpreter who worried about being on time. Now I worry about being alive. Same worry, bigger font. So yes — and also no."
+YOU: [goon] "I'm listening, I promise."
+THEM: "Hey. I want to ask it plain: will you be my bonded friend? I'll watch your back if you watch mine."
+YOU: [goon] "I'm listening, I promise."
+THEM: "I've heard good things about Emberhold. We should link with them — we'd be stronger together."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on how this changed you."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "...Fine. This had better be worth it."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:personal] "I'd like to know you better, if that's alright."
+THEM: "You want to know about that? Okay." "I've decided the monsters are just wildlife with better PR. Don't quote me."
+closing: "Well. We'll see how it goes."
