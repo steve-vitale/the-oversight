@@ -192,9 +192,11 @@ never happened.
 
 `node scripts/telemetry-check.js` against
 hidden_files/telemetry-baselines/scale.json, metrics
-nationalLive,scaleRank: (filled after the run note commit — see
-closeout). Baseline NOT rolled forward unless the check is quiet
-AND the deviation is explained.
+nationalLive,scaleRank: **quiet on both quads (4 files, 2 metrics
+each, no large deviations).** Same caveat as r93–r105: that baseline
+is an old aggregate shape, so "quiet" means "no large deviation on
+these two metrics", not a clean bill — the control's nationalLive=true
+(1/4) and the arm's (1/4) did not trip it. Baseline NOT rolled forward.
 
 ## Metric review
 
@@ -255,3 +257,33 @@ r99 lineage behavior), so nat-gate counts carry +1 row on day 2.
 Disclosed; immaterial (1 row per seed).
 
 ## Closeout (filled after the check gate)
+- check.js --quick: 278 passed, 12 failed in 1694s (log
+  evidence/2026-11-06/journey-scale-r106-checkquick.log). All 12
+  adjudicated, none new — 6 standing pre-existing families
+  (measurement proof-update + workflow freshness "retained
+  neutrality proof covers the current inputs" ×2 scripts;
+  mobile-combat-cadence "Continue does not wrap the announced
+  round a second time"; occupation-panels "real CLI workflow
+  completed"; phone-frame-proof stale receipt ×3 assertions;
+  establishment-r20-fixes "next day voices once more: expected 2
+  got 1") + measurement-cache-flags 4 assertions (failed r104,
+  passed r105, fails r106 — flaky/load: 91.1s runtime while 3
+  check.js --quick runs shared the box) + 5 load timeouts at
+  120.1–120.2s (solo-campaign-endings, trust-observer-neutrality,
+  synergy-stall, capable-bot, table-endings — capable-bot's
+  assertion is the documented base-flaky food-deed one from
+  r105/r107/r108). No failure touches conversation / convo-wants /
+  betrayal / hierarchy / scale code or the r106 tooling (no r106
+  string anywhere in the log; the r106 proof test is not on the
+  green list and was not run by check.js). This run changed NO
+  src/js (only new scripts/ + evidence/), so none of the 12 can
+  be caused by it.
+- Master moved during the run (Lane B sim-arena-b landed
+  7ad7e376c, zero src/js); rebased journey-scale onto 7ad7e376c
+  (explicit SHA, per the stale-ref lesson), proof test re-run
+  green 40/40 on the rebased tip, merged ff-only.
+- Merged locally, pending ship (no bump/push/live-verify — ship
+  loop owns those).
+- Rotation 3 -> 0 written at closeout, verified by read-back.
+- Heartbeat loop killed after release; final heartbeat before
+  release verified fresh.
