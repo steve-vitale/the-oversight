@@ -1,0 +1,622 @@
+{
+  "corpus": "evidence/2026-11-07/mealday-caller-a-corpus",
+  "seeds": [
+    98022,
+    98028,
+    98034,
+    98052,
+    98062,
+    98067,
+    98079,
+    98095
+  ],
+  "totalCalls": 6552,
+  "missingSite": 0,
+  "reproducedFires": 14,
+  "byH": {
+    "H1": 14
+  },
+  "byEffect": {
+    "BUG": 14
+  },
+  "bySite": {
+    "Object.villageEats (src/js/game.js:32246:24)": 14
+  },
+  "siteCounts": {
+    "Object.villageEats (src/js/game.js:32246:24)": 6552
+  },
+  "neutrality": [
+    {
+      "seed": 98022,
+      "match": true,
+      "diff": "exact"
+    },
+    {
+      "seed": 98028,
+      "match": true,
+      "diff": "exact"
+    },
+    {
+      "seed": 98034,
+      "match": true,
+      "diff": "exact"
+    },
+    {
+      "seed": 98052,
+      "match": true,
+      "diff": "exact"
+    },
+    {
+      "seed": 98062,
+      "match": true,
+      "diff": "exact"
+    },
+    {
+      "seed": 98067,
+      "match": true,
+      "diff": "exact"
+    },
+    {
+      "seed": 98079,
+      "match": true,
+      "diff": "exact"
+    },
+    {
+      "seed": 98095,
+      "match": true,
+      "diff": "exact"
+    }
+  ],
+  "detGate": {
+    "neutralityExact": true,
+    "capture100": true,
+    "everyFireClassified": true,
+    "unclassified": 0
+  },
+  "fires": [
+    {
+      "seed": 98022,
+      "vid": "rafael_torres",
+      "day": 133,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "extra-hunger"
+      ],
+      "reason": "different villageEats invocations (133 vs 134), same scholar.day 133",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32246:24)",
+        "eatsInv": 133,
+        "seq": 1,
+        "away": true,
+        "ate": 2300,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 82,
+        "hungerAfter": 30,
+        "healthBefore": 100,
+        "healthAfter": 100
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32246:24)",
+        "eatsInv": 134,
+        "seq": 1,
+        "away": true,
+        "ate": 2300,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 30,
+        "hungerAfter": 0,
+        "healthBefore": 100,
+        "healthAfter": 100
+      }
+    },
+    {
+      "seed": 98022,
+      "vid": "yara_haddad",
+      "day": 133,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "extra-hunger"
+      ],
+      "reason": "different villageEats invocations (133 vs 134), same scholar.day 133",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32246:24)",
+        "eatsInv": 133,
+        "seq": 2,
+        "away": true,
+        "ate": 1900,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 75,
+        "hungerAfter": 30,
+        "healthBefore": 100,
+        "healthAfter": 100
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32246:24)",
+        "eatsInv": 134,
+        "seq": 2,
+        "away": true,
+        "ate": 1900,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 30,
+        "hungerAfter": 0,
+        "healthBefore": 100,
+        "healthAfter": 100
+      }
+    },
+    {
+      "seed": 98022,
+      "vid": "visjoin_91",
+      "day": 133,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "extra-hunger",
+        "meal-overwritten-inflated",
+        "health-changed"
+      ],
+      "reason": "different villageEats invocations (133 vs 134), same scholar.day 133",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32246:24)",
+        "eatsInv": 133,
+        "seq": 3,
+        "away": false,
+        "ate": 1925,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 73,
+        "hungerAfter": 30,
+        "healthBefore": 95,
+        "healthAfter": 95
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32246:24)",
+        "eatsInv": 134,
+        "seq": 3,
+        "away": false,
+        "ate": 1943,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 30,
+        "hungerAfter": 0,
+        "healthBefore": 98,
+        "healthAfter": 98
+      }
+    },
+    {
+      "seed": 98022,
+      "vid": "visjoin_121",
+      "day": 133,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "double-draw",
+        "extra-hunger",
+        "meal-overwritten-lost",
+        "health-changed"
+      ],
+      "reason": "different villageEats invocations (133 vs 134), same scholar.day 133",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32246:24)",
+        "eatsInv": 133,
+        "seq": 5,
+        "away": false,
+        "ate": 1580.826271071367,
+        "drawn": 1000,
+        "fasting": false,
+        "hungerBefore": 77,
+        "hungerAfter": 33,
+        "healthBefore": 31,
+        "healthAfter": 31
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32246:24)",
+        "eatsInv": 134,
+        "seq": 4,
+        "away": false,
+        "ate": 1563.0973655017615,
+        "drawn": 1000,
+        "fasting": false,
+        "hungerBefore": 33,
+        "hungerAfter": 8,
+        "healthBefore": 44,
+        "healthAfter": 44
+      }
+    },
+    {
+      "seed": 98079,
+      "vid": "gen_2n7fip7",
+      "day": 10,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "double-draw",
+        "extra-hunger",
+        "meal-overwritten-lost",
+        "health-changed"
+      ],
+      "reason": "different villageEats invocations (10 vs 11), same scholar.day 10",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32246:24)",
+        "eatsInv": 10,
+        "seq": 1,
+        "away": true,
+        "ate": 1595.78,
+        "drawn": 1167.8304957577213,
+        "fasting": false,
+        "hungerBefore": 65,
+        "hungerAfter": 26,
+        "healthBefore": 10,
+        "healthAfter": 10
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32246:24)",
+        "eatsInv": 11,
+        "seq": 1,
+        "away": true,
+        "ate": 648.2070147746988,
+        "drawn": 3.169504242278663,
+        "fasting": false,
+        "hungerBefore": 26,
+        "hungerAfter": 33,
+        "healthBefore": 13,
+        "healthAfter": 5
+      }
+    },
+    {
+      "seed": 98079,
+      "vid": "gen_puylbjy",
+      "day": 10,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "double-draw",
+        "extra-hunger",
+        "meal-overwritten-lost",
+        "health-changed"
+      ],
+      "reason": "different villageEats invocations (10 vs 11), same scholar.day 10",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32246:24)",
+        "eatsInv": 10,
+        "seq": 2,
+        "away": true,
+        "ate": 1933.033,
+        "drawn": 702.7189912527538,
+        "fasting": false,
+        "hungerBefore": 79,
+        "hungerAfter": 30,
+        "healthBefore": 89,
+        "healthAfter": 89
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32246:24)",
+        "eatsInv": 11,
+        "seq": 2,
+        "away": true,
+        "ate": 1122.2644541626685,
+        "drawn": 47.28100874724623,
+        "fasting": false,
+        "hungerBefore": 30,
+        "hungerAfter": 20,
+        "healthBefore": 76,
+        "healthAfter": 76
+      }
+    },
+    {
+      "seed": 98079,
+      "vid": "gen_5dc11h7",
+      "day": 10,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "double-draw",
+        "extra-hunger",
+        "meal-overwritten-inflated",
+        "health-changed"
+      ],
+      "reason": "different villageEats invocations (10 vs 11), same scholar.day 10",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32246:24)",
+        "eatsInv": 10,
+        "seq": 3,
+        "away": false,
+        "ate": 1496.3604203989728,
+        "drawn": 300,
+        "fasting": false,
+        "hungerBefore": 80,
+        "hungerAfter": 41,
+        "healthBefore": 90,
+        "healthAfter": 90
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32246:24)",
+        "eatsInv": 11,
+        "seq": 3,
+        "away": false,
+        "ate": 1976.1945431469753,
+        "drawn": 408,
+        "fasting": false,
+        "hungerBefore": 41,
+        "hungerAfter": 0,
+        "healthBefore": 93,
+        "healthAfter": 93
+      }
+    },
+    {
+      "seed": 98079,
+      "vid": "gen_nuq95l2",
+      "day": 10,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "double-draw",
+        "extra-hunger",
+        "meal-overwritten-lost",
+        "health-changed"
+      ],
+      "reason": "different villageEats invocations (10 vs 11), same scholar.day 10",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32246:24)",
+        "eatsInv": 10,
+        "seq": 4,
+        "away": false,
+        "ate": 1792.7181371691172,
+        "drawn": 300,
+        "fasting": false,
+        "hungerBefore": 75,
+        "hungerAfter": 22,
+        "healthBefore": 55,
+        "healthAfter": 55
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32246:24)",
+        "eatsInv": 11,
+        "seq": 4,
+        "away": false,
+        "ate": 1435.179545281455,
+        "drawn": 350,
+        "fasting": false,
+        "hungerBefore": 22,
+        "hungerAfter": 0,
+        "healthBefore": 54,
+        "healthAfter": 54
+      }
+    },
+    {
+      "seed": 98079,
+      "vid": "gen_r3ix6qg",
+      "day": 10,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "extra-hunger"
+      ],
+      "reason": "different villageEats invocations (10 vs 11), same scholar.day 10",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32246:24)",
+        "eatsInv": 10,
+        "seq": 5,
+        "away": false,
+        "ate": 1995,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 60,
+        "hungerAfter": 23,
+        "healthBefore": 100,
+        "healthAfter": null
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32246:24)",
+        "eatsInv": 11,
+        "seq": 5,
+        "away": false,
+        "ate": 1995,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 23,
+        "hungerAfter": 0,
+        "healthBefore": 100,
+        "healthAfter": null
+      }
+    },
+    {
+      "seed": 98079,
+      "vid": "catalina_reyes",
+      "day": 10,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "meal-overwritten-inflated",
+        "health-changed"
+      ],
+      "reason": "different villageEats invocations (10 vs 11), same scholar.day 10",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32246:24)",
+        "eatsInv": 10,
+        "seq": 6,
+        "away": true,
+        "ate": 1993.9999999999998,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 34,
+        "hungerAfter": 0,
+        "healthBefore": 99,
+        "healthAfter": 99
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32246:24)",
+        "eatsInv": 11,
+        "seq": 6,
+        "away": true,
+        "ate": 2000,
+        "drawn": 0,
+        "fasting": true,
+        "hungerBefore": 0,
+        "hungerAfter": 0,
+        "healthBefore": 100,
+        "healthAfter": 100
+      }
+    },
+    {
+      "seed": 98079,
+      "vid": "katarina_novak",
+      "day": 10,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "extra-hunger",
+        "meal-overwritten-inflated",
+        "health-changed"
+      ],
+      "reason": "different villageEats invocations (10 vs 11), same scholar.day 10",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32246:24)",
+        "eatsInv": 10,
+        "seq": 7,
+        "away": true,
+        "ate": 1888.6,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 67,
+        "hungerAfter": 29,
+        "healthBefore": 98,
+        "healthAfter": 98
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32246:24)",
+        "eatsInv": 11,
+        "seq": 7,
+        "away": true,
+        "ate": 1900,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 29,
+        "hungerAfter": 0,
+        "healthBefore": 100,
+        "healthAfter": 100
+      }
+    },
+    {
+      "seed": 98079,
+      "vid": "henry_zhang",
+      "day": 10,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "extra-hunger",
+        "meal-overwritten-inflated",
+        "health-changed"
+      ],
+      "reason": "different villageEats invocations (10 vs 11), same scholar.day 10",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32246:24)",
+        "eatsInv": 10,
+        "seq": 8,
+        "away": true,
+        "ate": 1892,
+        "drawn": 200.67403434664016,
+        "fasting": false,
+        "hungerBefore": 79,
+        "hungerAfter": 30,
+        "healthBefore": 82,
+        "healthAfter": 82
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32246:24)",
+        "eatsInv": 11,
+        "seq": 8,
+        "away": true,
+        "ate": 1910,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 30,
+        "hungerAfter": 0,
+        "healthBefore": 85,
+        "healthAfter": 85
+      }
+    },
+    {
+      "seed": 98079,
+      "vid": "tashi_sherpa",
+      "day": 10,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "extra-hunger",
+        "meal-overwritten-inflated",
+        "health-changed"
+      ],
+      "reason": "different villageEats invocations (10 vs 11), same scholar.day 10",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32246:24)",
+        "eatsInv": 10,
+        "seq": 9,
+        "away": false,
+        "ate": 2039,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 72,
+        "hungerAfter": 25,
+        "healthBefore": 95,
+        "healthAfter": 95
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32246:24)",
+        "eatsInv": 11,
+        "seq": 9,
+        "away": false,
+        "ate": 2058,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 25,
+        "hungerAfter": 0,
+        "healthBefore": 98,
+        "healthAfter": 98
+      }
+    },
+    {
+      "seed": 98079,
+      "vid": "tom_baker",
+      "day": 10,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "extra-hunger",
+        "meal-overwritten-inflated",
+        "health-changed"
+      ],
+      "reason": "different villageEats invocations (10 vs 11), same scholar.day 10",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32246:24)",
+        "eatsInv": 10,
+        "seq": 11,
+        "away": true,
+        "ate": 2166.9999999999995,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 81,
+        "hungerAfter": 28,
+        "healthBefore": 95,
+        "healthAfter": 95
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32246:24)",
+        "eatsInv": 11,
+        "seq": 10,
+        "away": true,
+        "ate": 2186.8,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 28,
+        "hungerAfter": 0,
+        "healthBefore": 98,
+        "healthAfter": 98
+      }
+    }
+  ]
+}
