@@ -279,3 +279,13 @@ wave-5 arm inherits that question, not this one.
 - The arm's queue item in the Loop B re-point (arm-2 toggle / flee-repair
   / standing-on-gear-ready-seeds) is untouched by this adoption; this run
   recovered the dead 2300Z arm only.
+
+## Landing rebase record (Loop B adoption run fleshout-loop-b-20261107T0130Z)
+- Rebased eabf00dba -> master b5eb5b94e (journey-deepening r110, zero
+  overlap); 4 commits replayed (rebase stop-at-pick quirk hit once on
+  the revert pick, recovered with verified-clean `git rebase --continue`
+  per AGENTS.md — tree clean, cap present, revert unapplied).
+- Proof re-run green on the rebased tip: test-bypass-20261106.js 39/39.
+- `src/js/` diff vs master is empty (cap reverted); only tooling +
+  corpus + evidence land. New tip 14f0900b9 (replaces worker tip
+  c91060fcb; revert commit 053bd3ed3 replayed as 848d0bba8).
