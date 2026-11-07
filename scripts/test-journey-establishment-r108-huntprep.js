@@ -9,8 +9,11 @@
 //   exactly); HUNTSTAFF=2 staffs WITH the prep: a holder at home teaches
 //   the hunter field_dressing before assignTask, the hunter holds it after,
 //   the prepLog records ok; no holder / teacher away -> 'no-teacher' and
-//   staffing still proceeds; hunter already holds -> 'already-holds', no
-//   lesson call; hunter taught at dawn -> 'today', staffing still proceeds.
+//   staffing still proceeds. r109 Q2: the 'no-teacher' why splits three
+//   ways (teacher-away / teacher-unseeded / no-teacher-anywhere — see
+//   classifyNoTeacher in policies/huntstaff.js); kind stays 'no-teacher'.
+//   hunter already holds -> 'already-holds', no lesson call; hunter
+//   taught at dawn -> 'today', staffing still proceeds.
 //   The non-substrate / low-trust / wounded / not-at-Haven / non-lean gates
 //   each refuse honestly (no staffing, no prep).
 // P2 (harness, short): seed 1502, 5 days — the r108 driver gate-off
@@ -199,8 +202,8 @@ function runP1() {
     assert.strictEqual(G._attempts.length, 1);
     assert.strictEqual(ctx._hsAssignments, 1);
   });
-  ok('HUNTSTAFF=2 no holder at home: no-teacher, staffing still proceeds', () => {
-    const G = fakeGame(); // v2 is a fishing guide with no field_dressing
+  ok('HUNTSTAFF=2 no holder at home: no-teacher-anywhere, staffing still proceeds', () => {
+    const G = fakeGame(); // v2 is a fishing guide with no field_dressing; v3 an accountant — no holder, no granting occupation
     const ctx = {};
     const vid = HS.staffHunt(G, ctx);
     assert.strictEqual(vid, 'v1');
@@ -208,14 +211,32 @@ function runP1() {
     assert.strictEqual(G._attempts.length, 1);
     assert.strictEqual((ctx._hsPrepLog || []).length, 1);
     assert.strictEqual(ctx._hsPrepLog[0].kind, 'no-teacher');
-    assert.strictEqual(ctx._hsPrepLog[0].why, 'no-teacher');
+    assert.strictEqual(ctx._hsPrepLog[0].why, 'no-teacher-anywhere');
   });
-  ok('HUNTSTAFF=2 teacher away: no-teacher (a lesson is in-person work)', () => {
+  ok('HUNTSTAFF=2 teacher away: teacher-away (a lesson is in-person work)', () => {
     const G = fakeGame({ teacher: true, npcSkills: { v2: ['field_dressing'] }, away: { v2: true } });
     const ctx = {};
     assert.strictEqual(HS.staffHunt(G, ctx), 'v1');
     assert.strictEqual(G._teachCalls.length, 0);
     assert.strictEqual(ctx._hsPrepLog[0].kind, 'no-teacher');
+    assert.strictEqual(ctx._hsPrepLog[0].why, 'teacher-away');
+  });
+  ok('HUNTSTAFF=2 teacher unseeded: teacher-unseeded (a butcher on the roster, nobody holds it yet)', () => {
+    const G = fakeGame({ teacher: true }); // v2 is a butcher (granting occupation) but holds no field_dressing
+    const ctx = {};
+    assert.strictEqual(HS.staffHunt(G, ctx), 'v1');
+    assert.strictEqual(G._teachCalls.length, 0);
+    assert.strictEqual(ctx._hsPrepLog[0].kind, 'no-teacher');
+    assert.strictEqual(ctx._hsPrepLog[0].why, 'teacher-unseeded');
+  });
+  ok('classifyNoTeacher direct: the three classes are distinct pure reads', () => {
+    const away = fakeGame({ teacher: true, npcSkills: { v2: ['field_dressing'] }, away: { v2: true } });
+    assert.strictEqual(HS.classifyNoTeacher(away, 'v1'), 'teacher-away');
+    const unseeded = fakeGame({ teacher: true });
+    assert.strictEqual(HS.classifyNoTeacher(unseeded, 'v1'), 'teacher-unseeded');
+    const nowhere = fakeGame();
+    assert.strictEqual(HS.classifyNoTeacher(nowhere, 'v1'), 'no-teacher-anywhere');
+    assert.deepStrictEqual([...HS.fieldDressingGrantOccupations(away)].sort(), ['butcher', 'mortician', 'veterinarian']);
   });
   ok('HUNTSTAFF=2 hunter already holds: already-holds, no lesson call', () => {
     const G = fakeGame({ teacher: true, npcSkills: { v1: ['field_dressing'], v2: ['field_dressing'] } });

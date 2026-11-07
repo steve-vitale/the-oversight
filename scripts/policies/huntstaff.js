@@ -114,12 +114,67 @@ function findPrepTeacher(Game, hunter) {
   } catch (e) { return null; }
 }
 
+// fieldDressingGrantOccupations(Game): the occupations whose background
+// grants include field_dressing, read from the data table
+// (characterGen.occupations[].granted) — never hardcoded. Falls back to
+// the known triple (Veterinarian / Mortician / Butcher) when the data is
+// absent (fixtures). Pure read: no Game state write.
+// classifyNoTeacher(Game, hunter): WHY no at-home holder was found (r109
+// Q2 — the r108 'no-teacher' conflated three gates with different fixes).
+// Pure reads only (npcHasAbility + occupation table), so the split changes
+// no behavior — the det-gates still hold:
+//   'teacher-away' — a holder exists in the village but none is at home
+//     (fix: wait for them / meet them where they are).
+//   'teacher-unseeded' — nobody holds it yet, but a living roster member
+//     has a granting occupation (fix: wait for seeding / teach them).
+//   'no-teacher-anywhere' — no holder and no granting occupation on the
+//     roster (fix: recruit or teach a holder from outside the village).
+function fieldDressingGrantOccupations(Game) {
+  try {
+    const occs = (((Game.data || {}).characterGen || {}).occupations) || [];
+    const out = new Set();
+    for (const o of occs) {
+      if (o && Array.isArray(o.granted) && o.granted.indexOf('field_dressing') >= 0 && o.name) out.add(String(o.name).toLowerCase());
+    }
+    if (out.size) return out;
+  } catch (e) { /* fall through to the known triple */ }
+  return new Set(['veterinarian', 'mortician', 'butcher']);
+}
+
+function classifyNoTeacher(Game, hunter) {
+  try {
+    const v = (Game.state || {}).village || {};
+    const roster = v.roster || [];
+    for (const id of roster) {
+      if (id === Game.villagerId) continue;
+      if (id === hunter) continue;
+      let p = null;
+      try { p = Game.getPerson ? Game.getPerson(id) : null; } catch (e) {}
+      if (!p || p.dead) continue;
+      if (hunterHoldsFieldDressing(Game, id)) return 'teacher-away';
+    }
+    const grants = fieldDressingGrantOccupations(Game);
+    for (const id of roster) {
+      if (id === Game.villagerId) continue;
+      if (id === hunter) continue;
+      let p = null;
+      try { p = Game.getPerson ? Game.getPerson(id) : null; } catch (e) {}
+      if (!p || p.dead) continue;
+      const occ = String(p.formerOccupation || p.occupation || '').toLowerCase();
+      if (grants.has(occ)) return 'teacher-unseeded';
+    }
+    return 'no-teacher-anywhere';
+  } catch (e) { return 'no-teacher'; }
+}
+
 // prepFieldDressing(Game, ctx, hunter): the r108 hunt-prep lesson.
 // Called from staffHunt after the hunter is picked, before assignTask.
 // Returns the prep-log entry (also pushed to ctx._hsPrepLog). The hunt
 // proceeds whatever the prep does — the lesson is best-effort, never a
 // gate. Every outcome is a named record: 'already-holds' (no lesson
-// needed), 'no-teacher' (no holder at home), or 'lesson' with ok/why
+// needed), 'no-teacher' (no holder at home; r109: why splits into
+// teacher-away / teacher-unseeded / no-teacher-anywhere — see
+// classifyNoTeacher), or 'lesson' with ok/why
 // (why = teachSkill's canTeachSkill reason when the lesson fails:
 // 'today' — the hunter was already taught at dawn; 'words' — no shared
 // language; 'teacher' / 'known' / 'gone').
@@ -135,7 +190,7 @@ function prepFieldDressing(Game, ctx, hunter) {
   try {
     if (hunterHoldsFieldDressing(Game, hunter)) { entry.kind = 'already-holds'; return entry; }
     const teacher = findPrepTeacher(Game, hunter);
-    if (!teacher) { entry.kind = 'no-teacher'; entry.why = 'no-teacher'; return entry; }
+    if (!teacher) { entry.kind = 'no-teacher'; entry.why = classifyNoTeacher(Game, hunter); return entry; }
     entry.teacher = String(teacher);
     try { const p = Game.getPerson ? Game.getPerson(teacher) : null; if (p && p.name) entry.teacherName = String(p.name).split(' ')[0]; } catch (e) {}
     entry.kind = 'lesson';
@@ -404,6 +459,8 @@ module.exports = {
   // r108 hunt-prep surface: exported for proof fixtures
   prepOn, hunterHoldsFieldDressing, villagerKnowsFieldDressing,
   findPrepTeacher, prepFieldDressing,
+  // r109 Q2 split surface: exported for proof fixtures
+  fieldDressingGrantOccupations, classifyNoTeacher,
   // repair surface (sim-refusestaff-b): exported for proof fixtures
   installWoundWatch, personHp, woundWithin, woundLedgerGet, refuse,
 };
