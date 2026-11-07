@@ -342,6 +342,33 @@ system held; the people broke first.
   cause by far (monster 17, sickness 10). Wild pressure, not
   hunger, is what kills villages on this band.
 
+## Rebase addendum (2026-11-07, after judging)
+
+Master moved under this run (f5650d4eb → 1a8ead6bb) while the sweep
+was running: Loop A landed sim-prodstore-a (arm 1) and Loop B landed
+sim-feareddoor-b plus journey-establishment r111. Rebased onto the
+explicit SHA 1a8ead6bb — all 3 picks clean, zero overlap, tree clean.
+Proofs re-run on the rebased tip: 9/9 green (identical 5-day smoke
+residual −1800, 8.4% of outflows).
+
+Substrate note: the judged corpus was measured on f5650d4eb, as the
+prereg binds. The only src/js delta in the rebase is
+src/js/conversation.js (12 lines, journey-establishment r111 dialogue-
+menu fix — no food-sim effect); arm 1's PLENTY-WEEK lever was
+REVERTED before landing (820b61496: "game.js byte-identical to
+master"). The corpus therefore stands as a measurement of the
+pre-landing substrate, and the rebase changes no judged number.
+
+Sibling context (from the landed commit messages, shared repo): arm
+1's PLENTY-WEEK lever was killed at pilot (NO-GO, CONCEPT-DEAD as a
+standalone 4→7 lever; easing −29.7% but forage exposure ate the
+gain — monster deaths 17→29; 96203 rescued 66d→150d, 96207 newly
+collapsed). That pilot's 96203 rescue is consistent with this arm's
+diagnosis in one respect — easing the throttle changes the trajectory
+— and the 96207 new collapse is a second data point for the same
+exposure story. Neither changes this arm's verdict: the collapse
+regime's binding constraint on the unarmed baseline is HEALTH.
+
 ## Telemetry deviation check
 
 Ran `node scripts/telemetry-check.js --baseline
