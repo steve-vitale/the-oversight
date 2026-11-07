@@ -68,28 +68,50 @@ function vetOf(row) {
   return (row.readiness5.veterans | 0);
 }
 
-// First daily-row field difference, by day. Rows are compared by index
-// (both legs snapshot once per game day, so index == day order).
+// Day-keyed daily comparison. Rows are keyed on their game day, keeping
+// the LAST row per day: the driver takes one final snapshot after runDays,
+// which duplicates the last day. Rows are NEVER compared by index — the
+// snapshot fires only when the policy's daily hook runs, so a leg can
+// lack a day the other leg has (e.g. the scholar spent the day away
+// from any dawn decision); index comparison then misaligns every later
+// row and misreports a cadence artifact as a game event (caught on
+// 53002: index comparison named a 'day' field mismatch at index 2,
+// while the day-keyed rows agree through day 7).
+function dayMap(run) {
+  const m = {};
+  (run.daily || []).forEach(function (r) { m[(r.day | 0)] = r; });
+  return m;
+}
+
 function firstDailyDiff(a, b) {
-  const da = a.daily || [], db = b.daily || [];
+  const ma = dayMap(a), mb = dayMap(b);
   const fields = ['scholarId', 'living', 'raw', 'gated', 'w4kills', 'w4killers', 'partySize', 'scholarAtHaven'];
-  const n = Math.min(da.length, db.length);
-  for (let i = 0; i < n; i++) {
-    const ra = da[i], rb = db[i];
-    if ((ra.day | 0) !== (rb.day | 0)) {
-      return { kind: 'daily-row', day: Math.min(ra.day | 0, rb.day | 0), field: 'day', a: ra.day, b: rb.day };
-    }
+  const days = Object.keys(ma).map(Number).filter(function (d) { return mb[d] != null; }).sort(function (x, y) { return x - y; });
+  for (let i = 0; i < days.length; i++) {
+    const d = days[i], ra = ma[d], rb = mb[d];
     for (let k = 0; k < fields.length; k++) {
       const f = fields[k];
-      if (ra[f] !== rb[f]) return { kind: 'daily-row', day: (ra.day | 0), field: f, a: ra[f], b: rb[f] };
+      if (ra[f] !== rb[f]) return { kind: 'daily-row', day: d, field: f, a: ra[f], b: rb[f] };
     }
     const va = vetOf(ra), vb = vetOf(rb);
-    if (va !== vb) return { kind: 'daily-row', day: (ra.day | 0), field: 'readiness5.veterans', a: va, b: vb };
+    if (va !== vb) return { kind: 'daily-row', day: d, field: 'readiness5.veterans', a: va, b: vb };
   }
-  if (da.length !== db.length) {
-    const longer = da.length > db.length ? a : b;
-    const row = (da.length > db.length ? da : db)[n] || {};
-    return { kind: 'daily-row', day: (row.day | 0) || n, field: 'daily-length', a: da.length, b: db.length };
+  return null;
+}
+
+// Earliest day with a snapshot in one leg but not the other. This is a
+// snapshot-CADENCE note (the daily hook did not fire that day in one
+// leg), reported alongside — never the named game event on its own.
+function snapshotPresenceDiff(a, b) {
+  const ma = dayMap(a), mb = dayMap(b);
+  const days = {};
+  Object.keys(ma).forEach(function (d) { days[d] = true; });
+  Object.keys(mb).forEach(function (d) { days[d] = true; });
+  const sorted = Object.keys(days).map(Number).sort(function (x, y) { return x - y; });
+  for (let i = 0; i < sorted.length; i++) {
+    const d = sorted[i];
+    if (ma[d] != null && mb[d] == null) return { kind: 'daily-row', day: d, field: 'snapshot-presence', a: 'present', b: 'absent' };
+    if (ma[d] == null && mb[d] != null) return { kind: 'daily-row', day: d, field: 'snapshot-presence', a: 'absent', b: 'present' };
   }
   return null;
 }
@@ -135,17 +157,21 @@ function firstDeathDiff(a, b) {
 }
 
 // The first diverging event overall: the earliest-dated of the three
-// diffs (daily-row, kill-ledger, scholar-deaths). Nulls mean that
-// channel never diverges; if all three are null the legs are identical
-// on every compared channel.
+// game channels (day-keyed daily-row, kill-ledger, scholar-deaths).
+// Nulls mean that channel never diverges; if all three are null the
+// legs are identical on every compared channel. Snapshot-presence
+// (a day with no daily-hook snapshot in one leg) is reported
+// separately in the `snapshot` slot — it is a cadence note, not a
+// game event.
 function firstDivergence(a, b) {
   const d = firstDailyDiff(a, b);
   const k = firstKillDiff(a, b);
   const s = firstDeathDiff(a, b);
+  const snap = snapshotPresenceDiff(a, b);
   const cands = [d, k, s].filter(function (x) { return x != null && x.day != null; });
-  if (!cands.length) return { first: d || k || s, daily: d, kills: k, deaths: s };
+  if (!cands.length) return { first: d || k || s, daily: d, kills: k, deaths: s, snapshot: snap };
   cands.sort(function (x, y) { return (x.day | 0) - (y.day | 0); });
-  return { first: cands[0], daily: d, kills: k, deaths: s };
+  return { first: cands[0], daily: d, kills: k, deaths: s, snapshot: snap };
 }
 
-module.exports = { displace: displace, w4Kills: w4Kills, endVeterans: endVeterans, classify: classify, classDiff: classDiff, firstDailyDiff: firstDailyDiff, firstKillDiff: firstKillDiff, firstDeathDiff: firstDeathDiff, firstDivergence: firstDivergence };
+module.exports = { displace: displace, w4Kills: w4Kills, endVeterans: endVeterans, classify: classify, classDiff: classDiff, firstDailyDiff: firstDailyDiff, snapshotPresenceDiff: snapshotPresenceDiff, firstKillDiff: firstKillDiff, firstDeathDiff: firstDeathDiff, firstDivergence: firstDivergence };

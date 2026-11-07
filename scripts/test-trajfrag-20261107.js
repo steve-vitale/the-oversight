@@ -113,6 +113,21 @@ function fakeRun(o) {
   const vetFlip = { daily: daily(10, { 7: { readiness5: { veterans: 1 } }, 8: { readiness5: { veterans: 1 } }, 9: { readiness5: { veterans: 1 } }, 10: { readiness5: { veterans: 1 } } }), waveKillLog: [{ d: 8, mid: 'eulogy', w: 4 }], scholarDeaths: [{ day: 9, scholarId: 's1', causeArg: 'the wild' }] };
   const div5 = TRAJ.firstDivergence(base, vetFlip);
   check('firstdiv-veterans-field', div5.first && div5.first.day === 7 && div5.first.field === 'readiness5.veterans', JSON.stringify(div5.first));
+  // Day-keyed join: a leg missing a day's snapshot must NOT misalign
+  // later rows. Base has day 3; the flip lacks it but is otherwise
+  // identical through day 10 — the daily channel must report NO field
+  // diff, and the snapshot channel must name day 3.
+  const missingDay = { daily: daily(10).filter(function (r) { return r.day !== 3; }), waveKillLog: [{ d: 8, mid: 'eulogy', w: 4 }], scholarDeaths: [{ day: 9, scholarId: 's1', causeArg: 'the wild' }] };
+  const div6 = TRAJ.firstDivergence(base, missingDay);
+  check('firstdiv-missing-day-not-a-field-diff', div6.daily == null, JSON.stringify(div6.daily));
+  check('firstdiv-missing-day-named-in-snapshot', div6.snapshot && div6.snapshot.day === 3 && div6.snapshot.field === 'snapshot-presence', JSON.stringify(div6.snapshot));
+  check('firstdiv-missing-day-first-is-null', div6.first == null, JSON.stringify(div6.first));
+  // Duplicate final-day rows (the driver's post-run snapshot) collapse:
+  // appending a second copy of the day-10 row changes nothing.
+  const dupFinal = JSON.parse(JSON.stringify(base));
+  dupFinal.daily.push(JSON.parse(JSON.stringify(dupFinal.daily[dupFinal.daily.length - 1])));
+  const div7 = TRAJ.firstDivergence(base, dupFinal);
+  check('firstdiv-duplicate-final-ignored', div7.first == null && div7.snapshot == null, JSON.stringify(div7));
 })();
 
 // ---------- live legs (unjudged Stage-0 verification, /tmp only) ----------

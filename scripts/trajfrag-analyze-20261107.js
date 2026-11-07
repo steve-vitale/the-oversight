@@ -40,7 +40,7 @@ seeds.forEach(function (seed) {
     seed: seed,
     fragile: cd.fragile, diffs: cd.diffs,
     unperturbed: cd.a, perturbed: cd.b,
-    firstDivergence: div.first, dailyDiff: div.daily, killDiff: div.kills, deathDiff: div.deaths,
+    firstDivergence: div.first, dailyDiff: div.daily, killDiff: div.kills, deathDiff: div.deaths, snapshotDiff: div.snapshot,
     errors: (u.instrumentErrors || []).length + (p.instrumentErrors || []).length,
     anchors: { unperturbed: u.anchorCommit, perturbed: p.anchorCommit },
   };
