@@ -477,4 +477,31 @@ kept-promise gap (kept 0/10, together-no-go) is the next blank.
 
 ## Closeout note
 
-- (to be filled: rebase, merge, release, lock, rotation verification)
+- **Registration took ~6.6 min (slow checkout).** A mid-checkout `git status`
+  read showed transient D entries that resolved to a clean tree once the
+  checkout finished — verified 0 status lines before any work.
+- **Rebase:** master moved during the run (783c33400 → 0ce76898f, the batch
+  ship: version bump + journey-succession r155 adoption). `git fetch origin
+  master` first: origin sits at ed7d5d152 — local master is AHEAD of origin
+  (merge-base is origin itself; no divergence). Rebased the branch onto the
+  explicit SHA 0ce76898f. Clean, both picks applied, no sequencer stop.
+  Branch tip is now 0e5cfc89f on 0ce76898f. Both proof tests re-run on the
+  rebased tip and PASS (zerodmg-v2, Miriam line, zero-DMG invariant 21
+  fights 0 violations, huntpractice H1). `git log master..HEAD` shows
+  exactly two commits. No conflicts, no force, nothing dropped.
+- **Proof re-run on the branch (all PASS):** zerodmg-v2 proof PASS;
+  Miriam line PASS; zero-DMG invariant PASS on the panel corpus (21 fights,
+  0 violations); huntpractice H1 on the panel corpus.
+  check.js --quick on the branch tip: 284 passed, 6 failed in 734s — the
+  same six pre-existing failures as r113/r115 (see Regression + telemetry).
+- **Telemetry:** 2 LOUD lines, both explained as aggregation artifacts,
+  baseline NOT rolled.
+- **Index clobber struck on BOTH safe-commit.sh commits** (known class):
+  committed files showed staged-as-deleted + untracked after each commit.
+  Repaired via HEAD-blob `ls-tree` + `update-index --add --index-info`;
+  verified status clean + diff HEAD empty + blobs match after each repair.
+- **Registration completed exit 0.** No silent death this run.
+- **Rotation re-verified at closeout: reads `1`.** No discrepancy this run.
+- Lock (`2026-11-07T22:50:01Z`, created 22:50Z) and heartbeat loop are
+  removed at closeout after the merge, once run_id is read back; see
+  `~/memory/2026-11-07.md` for the closeout record.
