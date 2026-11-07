@@ -262,5 +262,7 @@ test-phone-frame-proof, test-capable-bot-20261014,
 test-establishment-r20-fixes-20261020), a strict subset of the documented
 8-failure profile (the sibling winnability-0130 gate failed the same 7 plus
 test-measurement-cache-flags, which passed here). Proof test re-run on the
-rebased tip: [FILL AT CLOSEOUT]. Merged locally as [FILL AT CLOSEOUT],
-pending ship. Rotation-b 6→7. Lock deleted.
+rebased tip 76b2fddf9 (rebased from base 987766c0c onto master d4fe9708b):
+ALL PROOF CHECKS PASS. The rebase moved only the base — no driver, analyzer,
+or proof file changed. Merged locally, pending ship. Rotation-b 6→7. Lock
+deleted.
