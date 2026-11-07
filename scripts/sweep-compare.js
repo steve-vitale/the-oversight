@@ -411,3 +411,12 @@ try { const vb = require('./policies/competent-vetobudget-b'); POLICY_REGISTRY['
 // itself is untouched — this only points the registry at it.
 try { const st = require('./policies/competent-stageally-a'); POLICY_REGISTRY['competent-stageally-a'] = st.stagedPolicy; } catch (e) {}
 try { const fd = require('./policies/competent-feastdrive-b'); POLICY_REGISTRY['competent-feastdrive-b'] = fd.feastdrive; } catch (e) {}
+// takeseat-b instrument (sim-takeseat-b, 2026-11-07, Loop B
+// winnability): the frozen staged policy + link drive + feast drive +
+// sit drive (TAKESEAT_B=1) composite, registered so the balanced
+// panel (§15) can build its column. Additive; zero behavior change
+// to existing entries (the sit drive stays default-OFF: nothing
+// loads it unless named, and the gate-off composite is the baseline).
+// The staged/linkdrive/feastdrive files themselves are untouched —
+// this only points the registry at the composite.
+try { const lf = require('./policies/competent-linkfeast-b'); POLICY_REGISTRY['competent-linkfeast-b'] = lf.linkfeast; } catch (e) {}
