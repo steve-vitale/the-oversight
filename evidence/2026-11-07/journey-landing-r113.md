@@ -473,7 +473,15 @@ companion.
 
 - **Service restart:** killed the first panel attempt mid-seed-1063;
   recovered by re-heartbeat + full re-run; no partial data used.
-- **Rebase:** (TO BE FILLED — master state at merge time.)
+- **Rebase:** clean, both picks applied, no sequencer stop. Master moved
+  twice during the run: first 5198d1056 → 0d63b5985 during pre-flight
+  (sim-winnability-round-1021 adoption), then 0d63b5985 → 8e5b97779 during
+  the analysis (measurement proof refresh r5, via d3132f456 r3 — both
+  evidence/instrument commits, no src/js, no overlap with this branch's
+  files). The branch was rebased onto the explicit SHA 8e5b97779 before
+  merging; proofs re-run on the rebased tip (NAV-log 5/5, classifier
+  0/90/90 on the panel corpus). Master verified stable at 8e5b97779
+  immediately before the merge.
 - **Practice landing vs this panel (read carefully):** this panel IS the
   second landing measurement of the practice build. The panel's
   game-behavior verdicts are for base 0d63b5985; no panel number was
@@ -492,7 +500,7 @@ companion.
   HEAD-blob `update-index --add --cacheinfo`; verified status clean +
   diff HEAD empty + blobs match.
 - **Registration completed exit 0 in ~3 min.** No silent death this run.
-- **Rotation re-verified at closeout: reads `1`.** (TO BE VERIFIED.)
+- **Rotation re-verified at closeout: reads `1`.** No discrepancy this run.
 - Lock (`2026-11-07T11:59:46Z`, created 11:59Z) and heartbeat loop are
   removed at closeout after the merge, once run_id is read back; see
   `~/memory/2026-11-07.md` for the closeout record.
