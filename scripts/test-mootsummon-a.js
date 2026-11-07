@@ -19,11 +19,16 @@
 //       stranded nights. If this master gives anything else, that
 //       is substrate drift reported as a finding — a miss moves
 //       this proof to FAIL.
-//   (c) non-stranded anchor: seed 15003 loop-day 7 sleep window
+//   (c) non-stranded anchor: seed 15003 loop-day 16 sleep window
 //       contains a 'Word gets around the haven' line, classified
 //       non-stranded sleep with the scholar inside Haven at fire
-//       time (the strandnarr-a §2 known hit, reproduced by
-//       gossipcensus-a and enddaybeats-a).
+//       time (the strandnarr-a §2 known hit, re-pinned 2026-11-07:
+//       the ld7 day went stale on current master — the ld16 window
+//       holds TWO word lines, both inside Haven, verified live by
+//       scripts/probe-gossip-anchor-a.js on base 6a59ed7f; the
+//       0715Z "no re-pin available on 15003" read the trimmed
+//       corpus, which discards non-stranded sleep-window gossip
+//       lines by design — see evidence/2026-11-07/sim-mootsummon-a.md).
 // Usage: node scripts/test-mootsummon-a.js
 // Env (the bankfood substrate gates, as in mootsummon-trace-a.js):
 //   COMPETENT_FEAST=0 SEATDRIVE=0 PLENTYDEPRI=0 DEPOSITGATE=1
@@ -225,15 +230,15 @@ check('follow-up: petition summons kind resolves from its own call line', (() =>
 
   process.env.STRANDNARR = '1';
   const s15003 = await oneInstance(15003, { days: 60 });
-  const pair7 = sleepPair(s15003.transcript.markers, 7);
+  const pair16 = sleepPair(s15003.transcript.markers, 16);
   let wordHit = null;
-  if (pair7) {
-    const wlines = sn.windowLines(s15003.transcript, pair7.start, pair7.end);
+  if (pair16) {
+    const wlines = sn.windowLines(s15003.transcript, pair16.start, pair16.end);
     const gw = gc.classifyGossipWindow(wlines, s15003.transcript.markers);
     wordHit = (gw.hits || []).find((h) => h.kind === 'word');
   }
-  check('non-stranded anchor: 15003 loop-day-7 sleep window has a Word-gets-around line',
-    !!wordHit, 'pair7=' + !!pair7);
+  check('non-stranded anchor: 15003 loop-day-16 sleep window has a Word-gets-around line',
+    !!wordHit, 'pair16=' + !!pair16);
   check('non-stranded anchor: that hit fires inside Haven',
     !!wordHit && wordHit.position && wordHit.position.inside === true,
     JSON.stringify(wordHit && wordHit.position));

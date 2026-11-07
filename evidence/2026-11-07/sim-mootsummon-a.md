@@ -1,5 +1,85 @@
 # sim-mootsummon-a — RE-PIN on current master (2026-11-07)
 
+## ADOPTION ADDENDUM — 2026-11-07, run fleshout-2026-11-07T1021Z (verdict updated: RE-PIN-GO)
+
+This arm was adopted stranded at branch tip cfa467f71 (CENSUS-GO,
+PROOF-NOT-GREEN, anchor decision pending). The adoption closed it:
+
+- REBASE: onto explicit master SHA 6a59ed7f (read in the main tree
+  immediately before rebasing; master had moved since the 10:21Z
+  brief — ed070c955 at brief time, 6a59ed7f at rebase time — after
+  the sim-regionalstep-b DIAG-GO landing; the first rebase attempt
+  onto the brief-time SHA was caught and redone onto the freshly
+  read SHA, per the stale-base rule). Rebase clean, no sequencer
+  quirk, no conflicts. New tip 5a4658f94 (evidence) over d398bd6b6
+  (prereg). `git log master..HEAD` = the two arm commits only.
+  The rebase added no src/js (regionalstep-b is DIAG, no src/js;
+  stageally-stab-b / capabledeed are proof/fixture), so the judged
+  census corpus (48001–48008, base f043aa772) was NOT re-run —
+  the corpus is complete and the rebase invalidates nothing in it.
+- PROOF RE-RUN ON THE REBASED TIP (before any anchor edit):
+  test-mootsummon-a 31/33, test-mootgate-a 58/60 — identical to
+  the 0715Z tallies, the ONLY failures the shared 15003 ld7
+  gossip anchor in both. The rebase changed nothing in the moot
+  substrate.
+- ANCHOR DECISION — STALE (day only), RE-PINNED, NOT A REGRESSION.
+  New probe scripts/probe-gossip-anchor-a.js scans every
+  loop-day sleep window of a live oneInstance transcript with
+  the proof's own code path (sleepPair + windowLines +
+  classifyGossipWindow). On the rebased tip, 6 seeds
+  (15003, 48001, 48005, 48006, 48008, 17021; 60 loop-days each):
+  21–38 'Word gets around' lines per seed, 26 in-sleep-window
+  word hits total across the 6 seeds, EVERY one inside Haven.
+  Seed 15003 itself holds 3 in-sleep-window hits — loop-day 16
+  (TWO lines in one window) and loop-day 39. The anchor's FORM
+  is intact; only its DAY went stale (ld7 holds no word line on
+  current master). Gossip still fires inside sleep windows on
+  every probed seed, the moot census never reads gossip, and no
+  game behavior changed — this is instrument drift, not a game
+  regression.
+  - CORRECTION to the 0715Z "no re-pin available on 15003":
+    that read inspected the DRIVER's corpus, and trimTranscript
+    (scripts/mootsummon-trace-a.js:387) keeps only stranded
+    sleep windows + moot/meal/bedding lines — a gossip line
+    inside a NON-stranded sleep window is discarded from the
+    corpus by design, so the trimmed corpus cannot show one.
+    The full in-process transcript the proof reads DOES hold
+    them (ld16 ×2, ld39 ×1 on 15003). The 0715Z conclusion was
+    a trimmed-corpus artifact, not a substrate fact. (A
+    same-base recheck on f043aa772 was not run; the re-pin is
+    verified live on the current tip, which is what the proof
+    needs.)
+  - RE-PIN: both proofs now anchor on 15003 loop-day 16 (same
+    seed, same check shape, minimal diff; ld16 chosen over ld39
+    because the window holds two word lines — redundancy if one
+    burst half drifts). Header comments in both tests record
+    the re-pin and its reason. No assertion was loosened; the
+    check still requires a word line inside a sleep window at
+    Haven.
+- PROOF RE-RUN AFTER THE RE-PIN (rebased tip 6a59ed7f):
+  test-mootsummon-a.js 33/33, test-mootgate-a.js 60/60 — GREEN.
+  Every moot classifier, every det-gate, the 17021 re-pin, the
+  48006 gate anchors, and the re-pinned 15003 ld16 anchor pass.
+- VERDICT (updated): RE-PIN-GO. CENSUS-GO stands (0 stranded
+  summons in 4 stranded sleep windows, pilot 48001–48008) AND
+  the proof is now green, so the prereg's verdict rule is met
+  in full. Finding #1793 stays [fixed]; the backlog line opened
+  by this arm (15003 anchor stale) is now closed by the re-pin
+  — the next moot-family run inherits a green anchor, not a
+  known-failing one.
+- check.js --quick: NOT run — this adoption adds no src/js and
+  no green-list test edit (the finishersize gate owns the gate
+  slot this run; per brief, targeted proof tests only).
+  Verification is the two proof tests above (33/33, 60/60),
+  node --check-clean on the three edited/new scripts, and the
+  probe run (exit 0).
+- Files in this adoption commit: scripts/test-mootsummon-a.js
+  + scripts/test-mootgate-a.js (anchor ld7 → ld16 + header
+  notes), scripts/probe-gossip-anchor-a.js (new), this evidence
+  file (this addendum). Zero src/js. No push, no bump, no live
+  verification — coordinator merges; ship loop owns deploys.
+
+
 Worker: sim-mootsummon-a (Loop A, food-economy / narration).
 Run: fleshout-2026-11-07T0715Z, axis food-economy, arm sim-mootsummon-a.
 Prereg (committed BEFORE any judged sim):
