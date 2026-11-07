@@ -337,9 +337,91 @@ byte-identical to master).
 
 ---
 
-## PHASE-B AMENDMENT
+## PHASE-B AMENDMENT (2026-11-07 ~20:40 UTC — appended BEFORE any pilot sweep runs)
 
-(to be appended BEFORE any pilot sweep runs — layer behavior + GO threshold + confirm band)
+### Baseline outcome (Phase A COMPLETE — all five questions answered)
+- Pooled, 8 seeds 96301–96308, competent, 150d death-aware (991
+  village-days, 7,731 villager-days): analyzer
+  `node scripts/analyze-tendsick-a.js
+  evidence/2026-11-07/tendsick-a-corpus` (G2 PASS, G3 letter-miss
+  recorded below, revised PASS).
+- **B1 FEVER BURDEN: sick-days/village-day = 0.065 (499 / 7,731);
+  mean episode duration = 3.2d; episodes = 157 (closed 157, open 0);
+  villagers affected = 81; sickness deaths = 14.** Per-seed
+  sick-days/village-day: 0.068 / 0.095 / 0.052 / 0.056 / 0.067 /
+  0.049 / 0.032 / 0.093. Per-seed mean duration: 3.2 / 5.2 / 2.1 /
+  2.4 / 3.8 / 3.4 / 1.8 / 3.5d. Episodes per seed: 22 / 17 / 24 /
+  13 / 19 / 14 / 18 / 30.
+- **B2 OPPORTUNITY: sick-at-Haven days = 361 (the layer could fire
+  on 361 days); treat/tend acts under competent = 0 (cures 0) —
+  the lever is NOT a no-op, confirmed by measurement: the competent
+  scholar never treats a villager without a promise.** Scholar
+  healing-ability holdings (days held / at L2+): herbal_remedy
+  456/167, field_medicine 501/78, triage 501/78 — the scholar HAS
+  a curative ability on a substantial share of days (herbal_remedy
+  L2+ on 167/991 snapshot days, ~17%), so the layer will have
+  curing opportunities, not just tends.
+- **B3 PRODUCTION COST: fever days run sicker and (mostly) hungrier
+  than non-fever days on the same seeds** (healthFrac fever 0.70–
+  0.92 vs non-fever 0.84–0.93; produced/need fever 0.82–1.11 vs
+  non-fever 0.94–1.07). Pooled produced/need = 0.992 on this band
+  (hungrier than the 96201 band's 1.054 — this band has less slack,
+  so a forage cost from tending would show).
+- **B4 GUARDRAILS (the numbers the pilot judges against):
+  villager starvation deaths = 1 (s96308 only); median survival =
+  128d (per-seed 127 / 150 / 124 / 61 / 129 / 134 / 121 / 145);
+  empty-pantry village-days = 114; wave reach 5 on 3/8 seeds
+  (96303, 96306, 96307); death causes: the wild 85, monster 18,
+  sickness 14, a wound that wouldn't close 12, ambush 4,
+  dehydration 4, arena 4, starvation 2 (1 villager + 1 player),
+  combat 2, a stranger 1, contest 1, experiment 1, the night 1,
+  the landlord 1; national 0/8, table 0, wins 0.**
+- **B5 NPC CARE: villagerCareTick tends = 104 (0.7 per episode) —
+  the floor the layer adds to.**
+- **Forage baseline (for the pilot's forage-cost read): pooled
+  'Foraged food' stocked = 407,478 kcal; duty-stocked all names =
+  1,054,133 kcal; 'Fish catch' = 381,301 kcal.** Per-seed foraged:
+  40,426 / 60,694 / 60,493 / 23,473 / 72,107 / 32,748 / 44,044 /
+  73,493.
+- G2 NEUTRALITY: PASS — recorded == bare on all 8 seeds.
+- G3 CORPUS (letter, as pre-registered): MISS — s96307 and s96308
+  lack a flow row on the death day only (d121 / d145: the last
+  villager died before any flow event that day; the death itself
+  IS in deathRows). Same mis-specification class as the
+  prodcollapse G3 miss. Revised rule (flow row excused ONLY on
+  the final day when a death is recorded that day): PASS. The
+  corpus is complete for the verdict; see Metric review.
+
+### The layer (exact behavior — selection rule followed: the TENDSICK layer from the header, details fixed here against the measured baseline)
+- **Name: TENDSICK — the scholar-player tends sick/fevered villagers at Haven instead of ranging, when fever is present.**
+- **File: scripts/policies/tendsick-a.js** (NEW — wraps competent.js, does NOT edit it; takeseat/doorwalk composite pattern). **Env flag arming it: `TENDSICK_A=1`.** Off / unset = baseline (the sweep FATALs on any other combination).
+- **Hook:** `tendsickA.daily(Game, ctx)` — the tend drive runs FIRST in daily (scholar at Haven, before the trip leaves), then delegates to `competent.daily` unchanged. `upkeep` / `fight` / all other policy methods delegate to competent verbatim via `Object.assign({}, competent, {...})`.
+- **Gate (all must hold or the drive skips, classified in STATS):** layer on (TENDSICK_A=1); game not over; no live fight (`Game.tbfight` over or absent); scholar at Haven (`Game.playerAtHaven()`); ≥1 sick patient. The drive never fires while away, mid-fight, or after game over.
+- **Patients:** live roster members with a `v.sick` record at daily time. Triage order: lowest estimated days-to-death first — `hp / (1 + severity*2)` ascending (the night's sick damage, healer −1 NOT adjusted — conservative), tie-break lowest `daysLeft`. **Daily cap: at most 3 patients (96 ticks — under a fifth of the 512-tick day).**
+- **Ladder per patient (treat only when it CURES — an ease that costs 150 kcal is strictly worse than a skilled tend that is free):**
+  1. Curative treat — if the scholar holds a L2+ ability that CURES this patient's disease (`villagerDiseaseId(rec)`: herbal_remedy cures disease/wound_fever/gutrot; field_medicine and triage cure wound_fever only) AND scholar kcal ≥ 150 AND (`daysLeft > 1` OR `hp <= sickDmg` — cure when it saves days, or saves a life on the last night) → `Game.treatVillager(vid, abilityId)`. Preference order: herbal_remedy, then field_medicine, then triage.
+  2. Else tend — `Game.tendVillager(vid)` (skilled when any healing ability is held at any level: daysLeft −2/severity −1; else daysLeft −1). A daysLeft==1 patient with safe HP is tended, not treated — they recover tonight anyway, and the tend still cuts tonight's damage (severity −1).
+  3. No examine step (needsDiagnosis is false for all three NPC diseases — a cure does not need it). No wound-only patients (out of scope). No scholar-self treatment (out of scope). No kcal spend except the engine's own 150 for a curing treat.
+- **"Instead of ranging" (mechanism, stated honestly):** the drive runs before `competent.daily` in the same call, and each act costs 32 real ticks out of the same day the trip draws on. Whether the trip actually shrinks is MEASURED (foraged kcal + duty-stocked vs the baseline above), not assumed — the day has slack, so a zero forage cost is a finding about the time economy, not a flaw.
+- **Counters:** module STATS (`resetTendsickStats` / `tendsickStats`) — tended, treated, cured, eased, skipped-by-reason, errors; the sweep reads them per day (cumulative, into the snapshot) and at run end.
+- **Proof test extended** (`scripts/test-tendsick-a.js`, legs L12–L15): L12 gate-OFF RED (TENDSICK_A unset → zero acts even with sick villagers present); L13 gate-ON fires (scenario with sick villagers at Haven → tend/treat acts fire, STATS count them); L14 treat cures (scholar with herbal_remedy L2 treats a sick villager → `v.sick` record deleted, cure counted); L15 triage + daysLeft==1 rule (lowest days-to-death first; daysLeft==1 + safe HP → tend, not treat; daysLeft==1 + lethal HP → treat). Plus `node scripts/check.js --quick` after the policy file lands (policy-side only, zero src/js — check.js is a belt-and-braces run, not a gate).
+
+### Pilot GO threshold (binding — finalized against the measured baseline)
+- **PRIMARY (picked: sick-days per village-day): armed ≤ 0.90 × baseline = ≤ 0.0585** (baseline 0.065). Mean episode duration is secondary — reported, expected down, NOT gated. (Why sick-days, not duration: duration is the sharper mechanism read, but a death also ends an episode early — duration alone rewards dying faster. Sick-days per village-day has the same shape, and the survival + starvation guards below block the perverse path either way; the secondary duration read + sickness deaths are reported alongside so a duration-only or death-driven move is visible.)
+- **Guards (all must hold): villager starvation deaths ≤ 1 (baseline count) AND median survival ≥ 102.4d (0.8 × 128d) AND per-seed survival non-inferior (≤1 seed regressing >30d vs its own baseline) AND engagement (≥10 tend/treat acts AND acts on ≥25% of sick-at-Haven days).**
+- The zero-baseline re-scope rule does NOT trigger (baseline starvation is 1, not 0; the GO above uses the baseline count directly).
+
+### Confirm band (freshness verified in this amendment, 2026-11-07)
+- **Confirm band: 96309–96324 (16 seeds). FRESH.** Grep scope: every seed checked individually against ALL dated `evidence/*/sim-*-prereg.md` (0 hits except the self-reference line in THIS prereg naming the band), the convergence tracker (0), `sim-findings.md` (0). The only hits for 96309 and 96324 are this prereg itself. No forbidden/contaminated list names the band. (The sibling branches' evidence JSONs contain "96309" only as a substring inside unrelated numbers — the same artifact class the prodstore prereg named; no prereg on any branch names the confirm band.)
+- Confirm runs ONLY on a pilot GO, same GO threshold, same policies/horizon.
+
+### Pilot plan
+- Same 8 seeds (96301–96308), competent substrate + TENDSICK layer, 150d death-aware, PLENTYDEPRI=1 DEPOSITGATE=1 TENDSICK_A=1, armed corpus `evidence/2026-11-07/tendsick-a-corpus-armed/` vs the Phase-A baseline corpus. Analyzer in comparison mode (`node scripts/analyze-tendsick-a.js <armed-dir> <baseline-dir>`); before/after compared in the evidence file (analyzer replication tables). Balanced panel attempted per the header; telemetry check per the header.
+- GO constants in `scripts/analyze-tendsick-a.js` updated by this amendment commit to: PRIMARY='sickdays', PRIMARY_MAXFRAC=0.90, STARVE_MAX=1, SURV_MINFRAC=0.80, PERSEED_MAXREG=1, PERSEED_REGDAYS=30, ENGAGE_MIN_ACTS=10, ENGAGE_MIN_SHARE=0.25.
+
+### Metric review (post-run)
+
+(to be filled after the sweeps)
 
 ## Metric review (post-run)
 

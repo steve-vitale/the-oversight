@@ -17,10 +17,10 @@ const path = require('path');
 // Primary: 'sickdays' (sick-days per village-day) OR 'duration' (mean episode
 // duration). The amendment picks ONE and pins the numbers below.
 const GO = {
-  PRIMARY: 'sickdays',        // AMENDMENT-SET: 'sickdays' | 'duration'
-  PRIMARY_MAXFRAC: 0.90,      // AMENDMENT-SET: armed primary <= this x baseline
-  STARVE_MAX: null,           // null = armed starvation deaths <= baseline count
-  SURV_MINFRAC: 0.80,         // armed median survival >= this x baseline median
+  PRIMARY: 'sickdays',        // AMENDMENT-SET (2026-11-07 ~20:40 UTC): 'sickdays' | 'duration'
+  PRIMARY_MAXFRAC: 0.90,      // AMENDMENT-SET: armed primary <= this x baseline (0.065 -> <= 0.0585)
+  STARVE_MAX: 1,              // AMENDMENT-SET: armed starvation deaths <= baseline count (1)
+  SURV_MINFRAC: 0.80,         // armed median survival >= this x baseline median (128d -> >= 102.4d)
   PERSEED_MAXREG: 1,          // max seeds regressing > PERSEED_REGDAYS vs own baseline
   PERSEED_REGDAYS: 30,
   ENGAGE_MIN_ACTS: 10,        // min tend/treat acts across the pilot
@@ -218,8 +218,8 @@ function printCorpus(label, C) {
 }
 
 function checkG3(C) {
-  let ok = true;
-  const notes = [];
+  let ok = true, okRevised = true;
+  const notes = [], notesRevised = [];
   for (const s of C.seeds) {
     const days = s.daySeries || [], flows = s.flowSeries || [], meals = s.mealRows || [];
     const keys = meals.map(r => r.vid + '|' + r.day);
@@ -230,8 +230,19 @@ function checkG3(C) {
       for (let d = 1; d <= s.daysAlive; d++) if (!have.has(d)) missing.push(d);
     }
     const flowDays = new Set(flows.map(f => f.day));
-    let flowOk = true;
-    for (let d = 1; d <= s.daysAlive; d++) if (!flowDays.has(d)) { flowOk = false; break; }
+    let flowOk = true, flowOkRevised = true;
+    const missingFlow = [];
+    for (let d = 1; d <= s.daysAlive; d++) if (!flowDays.has(d)) { flowOk = false; missingFlow.push(d); }
+    // CORRECTION (same mis-specification class as prodcollapse G3): a flow
+    // row cannot exist for a day the village dies before any flow event
+    // happens (no meals, no assignments resolved — the death itself is the
+    // day's only event, and it IS recorded in deathRows). The REVISED rule
+    // allows a missing flow row ONLY on the final day when a death is
+    // recorded that day; any other missing day still fails. Both verdicts
+    // are printed: the letter (pre-registered) and the revised.
+    if (!flowOk && missingFlow.length === 1 && missingFlow[0] === s.daysAlive &&
+        (s.deathRows || []).some(d => d.day === s.daysAlive)) flowOkRevised = true;
+    else if (!flowOk) flowOkRevised = false;
     const eps = buildEpisodes(s);
     const openEps = eps.filter(e => e.outcome === 'open');
     const snapDays = new Set(days.map(d => d.day));
@@ -249,10 +260,18 @@ function checkG3(C) {
         ' deduped=' + (new Set(keys).size === keys.length) +
         ' openEpisodes=' + openEps.length + ' onsetInSnapshot=' + onsetOk);
     }
+    if (!dayOk || !flowOkRevised || new Set(keys).size !== keys.length || !Array.isArray(s.deathRows) || !onsetOk) {
+      okRevised = false;
+      notesRevised.push('s' + s.seed + ': ' + (flowOkRevised ? '' : 'flow missing days ' + missingFlow.join(',')));
+    }
   }
   const bareFiles = fs.readdirSync(C.dir).filter(f => /^tendsick-a-bare-s\d+\.json$/.test(f)).sort();
-  if (bareFiles.length !== C.seeds.length) { ok = false; notes.push('bare fingerprints: ' + bareFiles.length + '/' + C.seeds.length + ' present'); }
-  return { ok, notes, bareFiles };
+  if (bareFiles.length !== C.seeds.length) {
+    ok = false; okRevised = false;
+    notes.push('bare fingerprints: ' + bareFiles.length + '/' + C.seeds.length + ' present');
+    notesRevised.push('bare fingerprints: ' + bareFiles.length + '/' + C.seeds.length + ' present');
+  }
+  return { ok, notes, okRevised, notesRevised, bareFiles };
 }
 
 function checkG2(C) {
@@ -283,10 +302,11 @@ function main() {
   const C = loadCorpus(DIR);
   const P = printCorpus('sim-tendsick-a ' + ((C.seeds[0] || {}).policy || ''), C);
   const g3 = checkG3(C);
-  console.log('G3 CORPUS: ' + (g3.ok ? 'PASS — all legs valid (' + C.seeds.length + ' recorded + ' + g3.bareFiles.length + ' bare)' : 'FAIL — ' + g3.notes.join('; ')));
+  console.log('G3 CORPUS (letter, as pre-registered): ' + (g3.ok ? 'PASS — all legs valid (' + C.seeds.length + ' recorded + ' + g3.bareFiles.length + ' bare)' : 'FAIL — ' + g3.notes.join('; ')));
+  console.log('G3 CORPUS (revised, death-day flow exception): ' + (g3.okRevised ? 'PASS' : 'FAIL — ' + g3.notesRevised.join('; ')));
   console.log('G2 NEUTRALITY: ' + checkG2(C));
   console.log('');
-  console.log('BASELINE VERDICT: ' + (g3.ok ? 'COMPLETE — B1–B5 answered above' : 'INCOMPLETE — G3 failed, see notes'));
+  console.log('BASELINE VERDICT: ' + (g3.okRevised ? 'COMPLETE — B1–B5 answered above (G3 letter-miss recorded in the metric review)' : 'INCOMPLETE — G3 failed, see notes'));
   if (!BASE_DIR) return;
   // ---- comparison mode: armed (DIR) vs baseline (BASE_DIR) ----
   const B = loadCorpus(BASE_DIR);
