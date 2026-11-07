@@ -246,3 +246,35 @@ the regression cover, as for r107 and regionalstep-b.
   nothing was lost, but a slow heartbeat under load looks like a dead
   run to the next guard — the lock file, not the heartbeat, is what
   protected this run.
+
+## Rebase addendum (post-judgement, on master 9aa2698fc)
+
+Master moved mid-run: the xp-gear build lane landed (gear protection
+retune, synergy bonus, patrol deed, measurement-proof refreshes) after
+the judged run's base 8ee8dcfb6. The branch rebased cleanly onto
+9aa2698fc (explicit SHA, no conflicts, per the stale-ref rule). Proof
+re-run 11/11 green on the rebased tip. Both legs were then re-run in
+full on the new base, same seeds, same driver
+(`journey-scale-r108-rebased-baseline/`, `journey-scale-r108-rebased/`,
+analysis `journey-scale-r108-rebased-analysis.txt`):
+
+- Rebased baseline: days 74/80/131/47, links ever 10, national 0/4,
+  raises 0 answered (18 staged, all expired). The baseline no longer
+  reproduces r107 (97001: 93→74 days; 97004: 133→47) — xp-gear's
+  combat/gear changes reshuffled survival on every seed.
+- Rebased armed: days 106/72/106/75, links ever 13, national **2/4**
+  (97001 d62, 97004 d71), global 2/4, raises answered 12/14, purity OK
+  on all 4 seeds.
+- **The GO reproduces on the new base** (national 0/4 → 2/4), with
+  different seeds carrying it (97001+97004 instead of 97001+97003) and
+  a smaller links gain (10→13 vs 8→15). The reshuffle is attributable
+  to xp-gear, not to the raise policy — purity holds on the rebased
+  legs too, and the lever's direction is the same on both bases.
+- One sensitivity to carry forward: on the new base, 97002's raises
+  went un-offered 9 seen-days (vs 2 before) — the talk sometimes never
+  offers `link:accept`, and which villagers raise (and when) is
+  base-sensitive. The policy still answered 2/4 there; no error, no
+  decline, no bare verb.
+
+The judged verdict above stands on its preregged base (8ee8dcfb6); this
+re-run is a robustness check on the merged base, and it agrees.

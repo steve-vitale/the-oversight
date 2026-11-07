@@ -1,0 +1,15 @@
+(pre-talk seed: ask_favor planted d90; takenWantDay=0; convoCount=8)
+=== seed 97001 day 90 — conversation with Rosa (rosa_mendez) ===
+occupation=line cook temperament=bold trust=76 dead=false
+want: ask_favor (stage 2)
+open thread: want fromSeed=true
+picker: control
+
+THEM: "About the creek water run — still need hands. Are you in?"
+(turn0 choices: dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+YOU: (leave)
+pre-close: want ask_favor stage 3 thread want
+closing line: "See you at the fire."
+(gossip picks this sitting: 0)
