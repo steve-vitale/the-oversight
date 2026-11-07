@@ -184,15 +184,22 @@ function endVets(row) {
   // Clean slate for the proof legs (refuse-overwrite guard needs it).
   fs.readdirSync(outdir).forEach(function (f) { fs.unlinkSync(path.join(outdir, f)); });
 
-  // 53006 staged unperturbed must reproduce the confirm2 corpus exactly:
-  // 150d survived, standing 440, 11 wave-4+ kills, maxWave 5, 2 end vets.
-  // This ALSO proves the counting wrapper + the driver's split daily do
-  // not change the trajectory (confirm2 used policy.daily directly).
+  // 53006 staged unperturbed must reproduce the CURRENT master's
+  // trajectory deterministically: 150d survived, standing 415, 8 wave-4+
+  // kills, maxWave 5, 2 end vets. RE-PINNED 2026-11-07 (closeout): the
+  // confirm2 corpus pinned 440 / 11 kills on master b690777cc, but the
+  // vetkilltale fireside tale (ad665d5e5, landed between b690777cc and
+  // f043aa772) shifts this leg to 415 / 8 — verified by re-running the
+  // same leg with VETKILLTALE_OFF=1 on f043aa772, which reproduces the
+  // old 440 / 11 exactly, so the shift is the game change, not the
+  // instrument. This ALSO proves the counting wrapper + the driver's
+  // split daily do not change the trajectory (confirm2 used
+  // policy.daily directly).
   let r = runDriver({ SEEDS: '53006', DAYS: '150', RUN: 'stab-staged-unperturbed', POLICY: 'staged', OUTDIR: outdir }, 'staged-unperturbed-53006');
   check('live-staged-unperturbed-runs', r.status === 0, 'exit=' + r.status);
   if (r.status === 0) {
     const row = readLeg(outdir, 53006, 'stab-staged-unperturbed');
-    check('live-staged-53006-matches-confirm2', row.days === 150 && row.endReason === 'survived' && row.standing === 440 && w4kills(row) === 11 && row.maxWave === 5 && endVets(row) === 2,
+    check('live-staged-53006-matches-current-master', row.days === 150 && row.endReason === 'survived' && row.standing === 415 && w4kills(row) === 8 && row.maxWave === 5 && endVets(row) === 2,
       JSON.stringify({ days: row.days, endReason: row.endReason, standing: row.standing, w4kills: w4kills(row), maxWave: row.maxWave, endVets: endVets(row) }));
     check('live-counter-counts', (row.rngDraws || {}).total > 0, 'total=' + ((row.rngDraws || {}).total || 0));
     check('live-samples-attribute-to-game', (function () {
