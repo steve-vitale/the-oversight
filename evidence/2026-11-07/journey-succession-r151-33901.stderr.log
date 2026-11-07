@@ -1,0 +1,35 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Egya","t":93},{"id":"Wanda","t":92},{"id":"Wanjiru","t":91},{"id":"Jorge","t":91}], roster=11
+INH readable=true scripted=true deadItems=9 distinct=8 transferred=2 vanished=1 keptPlants=21 inheritedPlants=1 keptSkills=4 inheritedSkills=12 succTrustPre=92 succTrustPost=68
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","echo_location","rage"] post=["beast_calm","echo_location","rage"]
+DEATH d41 (the expedition, scripted): Bao -> Wanda | passed=true lin=true mo=true trust=68 vouchers=9
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=3 vanished=1 of 8 distinct dead-bearer items
+  CONVO d+3 with Pearl (refused=false)
+  CONVO d+3 with Wanjiru (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  BOND-CONVO d+3 with Valeria (depth=2 v=58 refused=false)
+  CONVO d+7 with Jorge (refused=false)
+  CONVO d+7 with Egya (refused=false)
+  NEWCOMER-PROBE d+12 with Ulzhan (arrived d+12, trust=31 refused=false)
+  CONVO d+14 with Jorge (refused=false)
+  CONVO d+14 with Egya (refused=false)
+  BOND-CONVO d+14 with Omar (depth=1 v=32 refused=false)
+
+FUNERAL: deathBeat=7 recover=1 vouch=1 (eligible=9) echo=2 organicBurial={"respects":false,"bury":false} halfRation=6
+
+MEAL-GATE: audited=25 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=25 signals={"levelUp":true,"systemVoice":18,"offerLines":33,"codexPlantsDelta":15,"codexSkillsDelta":17,"codexAbilitiesDelta":6,"xpDelta":-42,"any":true} pantry 146493->40618
+TRUST-DIALS: office 68->84 (+16, climb) | villageMean 92.2->84.6 (-7.6, fall) | ge60 9->6 | movers>=5: [{"id":"Valeria","from":76,"to":90,"delta":14},{"id":"Ursula","from":83,"to":90,"delta":7}]
+DEED-LEDGER: calls=6 summary={"giveFood":{"calls":4,"ok":4,"deltaSum":4,"deltaN":4,"positive":4,"meanDelta":1},"donateToPantry":{"calls":2,"ok":2,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=1 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=2 (convo=2, say=0)) m4=true m5=manual | endDay=66 alive=0 over=true
+anomalies: 0
+say dump -> evidence/2026-11-07/journey-succession-r151-33901.saydump.txt
+S-METRICS: s1=false s2=true s3=true s4=false s5=true dayAdv=25
+T-METRICS: t1=true(panels=d+0,d+7,d+14) t2=true(deedCalls=6) trustVerdict={"readable":true,"officeMantle":68,"officeLast":84,"officeDelta":16,"officeClass":"climb","villageMantle":92.2,"villageLast":84.6,"villageDelta":-7.6,"villageClass":"fall","villageGe60Mantle":9,"villageGe60Last":6,"movers":[{"id":"Valeria","from":76,"to":90,"delta":14},{"id":"Ursula","from":83,"to":90,"delta":7}]}
+E6/CALLCHECK: e6={"callMoves":7,"withCensus":7,"chainHandoffs":5,"trustMoves":2} callCheck={"dailyMoveDays":7,"callMoveDays":6,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=3 (v2=3, excludedLoot=0))
+E7/R47: e7={"trustMoves":2,"soloOffice":2,"soloOfficeDeltas":[1,2],"soloBearerDeltaExact":[1,2],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":0,"both":2,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":2,"v2":3,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":7,"known":7,"unknown":0} e3={"dailyDays":26,"moves":7}

@@ -1,0 +1,42 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Amy","t":92},{"id":"Badr","t":91},{"id":"Ivy","t":90},{"id":"Elif","t":90}], roster=9
+INH readable=true scripted=true deadItems=22 distinct=22 transferred=3 vanished=3 keptPlants=18 inheritedPlants=0 keptSkills=3 inheritedSkills=13 succTrustPre=92 succTrustPost=59
+PARITY readable=true equal=true inherited=[] pre=["green_whisper","echo_location"] post=["green_whisper","echo_location"]
+DEATH d41 (the expedition, scripted): Violet -> Amy | passed=true lin=true mo=true trust=59 vouchers=4
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=19 vanished=3 of 22 distinct dead-bearer items
+  CONVO d+3 with Badr (refused=false)
+  CONVO d+3 with Elif (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Badr (refused=false)
+  CONVO d+7 with Ivy (refused=false)
+  CONVO d+14 with Elif (refused=false)
+  CONVO d+14 with Yara (refused=false)
+  NEWCOMER-PROBE d+15 with Katarina (arrived d+15, trust=31 refused=false)
+  BOND-CONVO d+14 with Ella (depth=0 v=24 refused=false)
+  CONVO d+30 with Yara (refused=false)
+  CONVO d+30 with Katarina (refused=false)
+  CONVO d+45 with Yara (refused=false)
+  CONVO d+45 with Katarina (refused=false)
+  CONVO d+53 with Mohsen (refused=false)
+  CONVO d+53 with Dale (refused=false)
+  CONVO d+64 with Mohsen (refused=false)
+  CONVO d+64 with Dale (refused=false)
+
+FUNERAL: deathBeat=5 recover=1 vouch=1 (eligible=4) echo=2 organicBurial={"respects":false,"bury":false} halfRation=6
+
+MEAL-GATE: audited=70 violations=0 noMealDays=14 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":55,"offerLines":87,"codexPlantsDelta":46,"codexSkillsDelta":28,"codexAbilitiesDelta":16,"xpDelta":46,"any":true} pantry 21451->9349
+TRUST-DIALS: office 59->79 (+20, climb) | villageMean 69.4->62 (-7.4, fall) | ge60 4->4 | movers>=5: []
+DEED-LEDGER: calls=28 summary={"teachPlant":{"calls":14,"ok":14,"deltaSum":0,"deltaN":14,"positive":0,"meanDelta":0},"giveFood":{"calls":12,"ok":12,"deltaSum":55,"deltaN":12,"positive":12,"meanDelta":4.58},"donateToPantry":{"calls":2,"ok":2,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=1 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=2 (convo=2, say=0)) m4=true m5=manual | endDay=111 alive=8 over=false
+anomalies: 0
+say dump -> evidence/2026-11-07/journey-succession-r151-33806.saydump.txt
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+8,d+15,d+30,d+70) t2=true(deedCalls=28) trustVerdict={"readable":true,"officeMantle":59,"officeLast":79,"officeDelta":20,"officeClass":"climb","villageMantle":69.4,"villageLast":62,"villageDelta":-7.4,"villageClass":"fall","villageGe60Mantle":4,"villageGe60Last":4,"movers":[]}
+E6/CALLCHECK: e6={"callMoves":10,"withCensus":10,"chainHandoffs":6,"trustMoves":4} callCheck={"dailyMoveDays":10,"callMoveDays":9,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=3 (v2=3, excludedLoot=0))
+E7/R47: e7={"trustMoves":4,"soloOffice":1,"soloOfficeDeltas":[2],"soloBearerDeltaExact":[2],"singleMoverBearer":1,"singleMoverOther":2,"eventClass":{"event-only":0,"deed-only":1,"both":3,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":2,"v2":3,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":7,"known":7,"unknown":0} e3={"dailyDays":71,"moves":10}

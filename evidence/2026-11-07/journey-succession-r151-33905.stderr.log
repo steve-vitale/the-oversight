@@ -1,0 +1,38 @@
+
+ORGANIC DEATH d40: Earl -> Anjali, topTrust=[{"id":"Mauricio","t":100},{"id":"David","t":85},{"id":"Jovan","t":77},{"id":"Ella","t":71}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=24 inheritedPlants=0 keptSkills=3 inheritedSkills=0 succTrustPre=90 succTrustPost=56
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","echo_location","green_whisper","green_thumb"] post=["beast_calm","echo_location","green_whisper","green_thumb"]
+DEATH d40 (organic (phase A)): Earl -> Anjali | passed=true lin=true mo=true trust=56 vouchers=5
+  BURIAL d+4: corpse found=true respects=true bury=true
+  CONVO d+3 with Mauricio (refused=false)
+  CONVO d+3 with David (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  BOND-CONVO d+3 with Somchai (depth=2 v=50 refused=false)
+  NEWCOMER-PROBE d+5 with Onni (arrived d+5, trust=22 refused=false)
+  CONVO d+7 with Mauricio (refused=false)
+  CONVO d+7 with David (refused=false)
+  CONVO d+14 with Mauricio (refused=false)
+  CONVO d+14 with David (refused=false)
+  BOND-CONVO d+14 with Somchai (depth=2 v=50 refused=false)
+  CONVO d+30 with Somchai (refused=false)
+  CONVO d+30 with Jovan (refused=false)
+  CONVO d+45 with Nikos (refused=false)
+  CONVO d+45 with Onni (refused=false)
+
+FUNERAL: deathBeat=5 recover=1 vouch=1 (eligible=5) echo=2 organicBurial={"respects":false,"bury":false} halfRation=4
+
+MEAL-GATE: audited=47 violations=0 noMealDays=3 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=47 signals={"levelUp":true,"systemVoice":47,"offerLines":55,"codexPlantsDelta":35,"codexSkillsDelta":16,"codexAbilitiesDelta":12,"xpDelta":-29,"any":true} pantry 32152->0
+TRUST-DIALS: office 56->90 (+34, climb) | villageMean 74.8->78.3 (+3.5, climb) | ge60 5->5 | movers>=5: [{"id":"Somchai","from":49,"to":100,"delta":51},{"id":"Nikos","from":67,"to":90,"delta":23},{"id":"Jovan","from":77,"to":99,"delta":22},{"id":"Ella","from":71,"to":90,"delta":19},{"id":"David","from":85,"to":92,"delta":7}]
+DEED-LEDGER: calls=50 summary={"donateToPantry":{"calls":28,"ok":28,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"teachPlant":{"calls":9,"ok":9,"deltaSum":0,"deltaN":9,"positive":0,"meanDelta":0},"giveFood":{"calls":13,"ok":13,"deltaSum":42,"deltaN":13,"positive":12,"meanDelta":3.23}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=2 (convo=2, say=0)) m4=true m5=manual | endDay=87 alive=5 over=true
+anomalies: 0
+say dump -> evidence/2026-11-07/journey-succession-r151-33905.saydump.txt
+S-METRICS: s1=false s2=true s3=true s4=false s5=true dayAdv=47
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30) t2=true(deedCalls=50) trustVerdict={"readable":true,"officeMantle":56,"officeLast":90,"officeDelta":34,"officeClass":"climb","villageMantle":74.8,"villageLast":78.3,"villageDelta":3.5,"villageClass":"climb","villageGe60Mantle":5,"villageGe60Last":5,"movers":[{"id":"Somchai","from":49,"to":100,"delta":51},{"id":"Nikos","from":67,"to":90,"delta":23},{"id":"Jovan","from":77,"to":99,"delta":22},{"id":"Ella","from":71,"to":90,"delta":19},{"id":"David","from":85,"to":92,"delta":7}]}
+E6/CALLCHECK: e6={"callMoves":21,"withCensus":21,"chainHandoffs":4,"trustMoves":17} callCheck={"dailyMoveDays":21,"callMoveDays":18,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=3 (v2=3, excludedLoot=0))
+E7/R47: e7={"trustMoves":17,"soloOffice":5,"soloOfficeDeltas":[1,1,2,2,1],"soloBearerDeltaExact":[1,1,2,2,1],"singleMoverBearer":2,"singleMoverOther":6,"eventClass":{"event-only":0,"deed-only":5,"both":12,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":2,"v2":3,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":5,"known":5,"unknown":0} e3={"dailyDays":48,"moves":21}
