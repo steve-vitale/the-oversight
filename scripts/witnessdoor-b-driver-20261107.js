@@ -250,7 +250,7 @@ async function oneRun(seed) {
       tsTaken: ts.seatTaken | 0, tsDay: ts.seatDay, tsKind: ts.seatKind, tsDoors: ts.doorsOffered,
       dwEntered: dw.doorsEntered | 0, dwWalked: (dw.walked || []).map(function (w) { return w.path + '@d' + w.day; }),
       wdEntered: wd.doorsEntered | 0, wdWalked: (wd.walked || []).map(function (w) { return w.path + '@d' + w.day + '/' + (w.branch || '?'); }),
-      wdAnswers: fd.answers | 0, wdSkips: fd.skips || {},
+      wdAnswers: wd.answers | 0, wdSkips: wd.skips || {},
       tableDoneDays: daily.filter(function (d) { return d.tableDone; }).length,
       tableChoicesDays: daily.filter(function (d) { return d.tableChoicesSurfaced; }).length,
       tableLines: (out.tableLines || []).length,
