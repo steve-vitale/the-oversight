@@ -6,9 +6,12 @@
 // convoRecapLine): if the exact recap line was already said this
 // conversation, reframe honestly ("As I said — ...") via convoPickCycle so
 // the telling varies like a real re-asked person.
-// GREEN = 1st recap is canonical; 2nd and 3rd carry an honest reframe and
-// no two consecutive full lines are verbatim identical.
+// GREEN = 1st recap is canonical; 2nd carries an honest reframe; 3rd is the
+// clearer exit (circles + ask something else) and spends; no two consecutive
+// full lines are verbatim identical.
 // RED (pre-fix) = all three calls return the identical line.
+// Note (dialog audit #6 2026-11-08): tightened from 3 reframes to 1 reframe
+// + clearer exit so hammering recap is not a bad sitting.
 'use strict';
 process.env.TRIBFLOOR = '1';
 const { loadGame, setupGame } = require('./sim-harness');
@@ -35,11 +38,14 @@ async function main() {
   let fails = 0;
   const fail = (m) => { console.log('FAIL: ' + m); fails++; };
   // 1st firing: the canonical line, no reframe.
-  if (/As I said|Like I said|still where we are/i.test(lines[0])) fail('first recap should be the canonical line, not a reframe');
-  // 2nd/3rd: honest reframe framing present.
-  for (const i of [1, 2]) {
-    if (!/As I said —|Like I said —|That's still where we are\./.test(lines[i])) fail(`recap ${i + 1} has no reframe framing: ${lines[i]}`);
+  if (/As I said|Like I said|still where we are|circles/i.test(lines[0])) fail('first recap should be the canonical line, not a reframe');
+  // 2nd: honest reframe framing present.
+  if (!/As I said —|Like I said —|That's still where we are\./.test(lines[1])) fail(`recap 2 has no reframe framing: ${lines[1]}`);
+  // 3rd: clearer exit (audit #6) — names the loop and invites subject-change.
+  if (!/going in circles/i.test(lines[2]) || !/Ask me something else/i.test(lines[2])) {
+    fail(`recap 3 should be clearer exit: ${lines[2]}`);
   }
+  if (!(c.spent && c.spent.recap)) fail('recap should spend after the 3rd clearer exit');
   // No two consecutive firings verbatim identical (the L2' bar).
   for (let i = 1; i < 3; i++) {
     if (lines[i] === lines[i - 1]) fail(`recap ${i} and ${i + 1} are verbatim identical`);
