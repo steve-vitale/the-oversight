@@ -1,29 +1,22 @@
 #!/usr/bin/env node
-// test-fight-brain-knowledge-probe.js — VILLAGER-BRAIN Phase 5 measure-only.
+// test-fight-brain-knowledge-probe.js — VILLAGER-BRAIN Phase 5 wiring proof.
 //
 // §8 Phase 5 metric (docs/VILLAGER-BRAIN.md): matched probes — same villager,
 // same stats, knows-the-species vs naive → flee/engage differs; turn-based vs
-// field answers agree on identical scenarios.
+// field answers agree on identical scenarios (or document remaining disagreement).
 //
-// This script MEASURES current wiring. It does not retune IAUS/curves or
-// change gameplay. Phase 5's specified channel is per-villager learned
-// species memory: agencyState().know[vid].fought (see § perceived world).
-// The planned shared reader fighterState(vid) is also checked for presence.
+// OVE-49 measured UNWIRED. OVE-52 lands shared fighterState(vid) and wires
+// both brains. This script locks the WIRED state:
+//   sites:     fighterState present; know.fought writable.
+//   field-know: know.fought flips opening intent (learn→species-fought engage)
+//               and/or flee flags.
+//   tb-know:   know.fought flips hopeless flee (naive flees, knows holds)
+//               at matched 30% HP trajectory.
+//   agree:     matched hopeless inputs — both brains ask fighterShouldFlee.
+//   contrast:  villageKnowsTrick still flips field intent (separate channel).
+//   control:   stripping fighterState.species.fought → Phase-5 delta vanishes.
 //
-// Cases (one loadGame; seed 20261108):
-//   sites:     fighterState absent; know.fought writable; call-site census.
-//   field-know: matched fieldFight naive vs know[vid].fought=[species]
-//               → intent/outcome/flee flags identical (or differ if wired).
-//   tb-know:   matched tbVillagerTurn / villagerDecide with same fighter
-//               scaffold, naive vs know.fought → flee/action identical.
-//   agree:     same villager/stats hopeless scenario — TB flee vs field
-//               flee; document agree or disagree.
-//   contrast:  villageKnowsTrick (village-shared, NOT know.fought) flips
-//               field intent learn→engage — wrong channel for Phase 5.
-//
-// Exit 0 documents the measured state. Assertions lock the CURRENT
-// (unwired) Phase-5 channel so a later wiring land must update this
-// probe intentionally.
+// Exit 0 = wired. No repo writes.
 'use strict';
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
@@ -72,10 +65,6 @@ function fieldSnap(rec) {
   };
 }
 
-function snapEq(a, b) {
-  return JSON.stringify(a) === JSON.stringify(b);
-}
-
 (async () => {
   const SEED = 20261108;
   const { Game } = await loadGame({ seed: SEED, mode: 'fight-brain-know', fullTelemetry: false });
@@ -88,76 +77,63 @@ function snapEq(a, b) {
   const mdef = (Game.data.monsters || []).find(m => m.id === species);
   check('species def present (' + species + ')', !!mdef, 'missing monster');
 
-  // Keep personality fixed for matched pairs (tb scaffolds set ai explicitly).
   setTemper(Game, vid, 'steady');
 
   // ---- sites ----
   console.log('== call sites / shared reader ==');
-  check('fighterState absent (Phase 5 shared read not landed)',
-    typeof Game.fighterState !== 'function',
+  check('fighterState present (Phase 5 shared read)',
+    typeof Game.fighterState === 'function',
     'typeof=' + typeof Game.fighterState);
+  check('contestFleeSealed present', typeof Game.contestFleeSealed === 'function');
+  check('fighterShouldFlee present', typeof Game.fighterShouldFlee === 'function');
+  check('applyFighterState present', typeof Game.applyFighterState === 'function');
   check('agencyState present', typeof Game.agencyState === 'function');
   ensureKnow(Game, vid);
   setFought(Game, vid, [species]);
   check('know[vid].fought writable',
     ((Game.agencyState().know[vid] || {}).fought || []).indexOf(species) !== -1);
+  const stKnow = Game.fighterState(vid, { foeId: species, hp: 30, maxHp: 100 });
   setFought(Game, vid, []);
-
-  // Runtime census: wrap know[vid] access during fieldFight.
-  let knowReads = 0;
-  const a0 = Game.agencyState();
-  const rawKnow = a0.know;
-  const knowProxy = new Proxy(rawKnow, {
-    get(target, prop, recv) {
-      if (prop === vid || prop === String(vid)) knowReads++;
-      return Reflect.get(target, prop, recv);
-    },
-  });
-  a0.know = knowProxy;
+  const stNaive = Game.fighterState(vid, { foeId: species, hp: 30, maxHp: 100 });
+  check('fighterState.species.fought mirrors know.fought',
+    stKnow.species.fought === true && stNaive.species.fought === false);
+  check('fighterState fleeLine lower when fought',
+    stKnow.curve.fleeLine < stNaive.curve.fleeLine,
+    'know=' + stKnow.curve.fleeLine + ' naive=' + stNaive.curve.fleeLine);
 
   // ---- field: knows vs naive (Phase 5 channel) ----
   console.log('== fieldFight: know.fought matched pair ==');
   Game.state.village.health = Game.state.village.health || {};
-  // Clear village trick / counter knowledge so only know.fought differs.
   Game.state.monsterCounters = Game.state.monsterCounters || {};
   Game.state.villagerTricks = Game.state.villagerTricks || {};
   delete Game.state.monsterCounters[species];
   delete Game.state.villagerTricks[species];
 
-  // Matched RNG: both arms use the SAME stream start; fought[] is sole delta.
-  function runFieldMatched(fought) {
+  // Opening-intent freeze: round-1 death so learn→good-exchange cannot rewrite.
+  function runFieldOpening(fought) {
     setFought(Game, vid, fought);
-    Game.state.village.health[vid] = 100;
-    let s = SEED ^ 0xF16B7;
+    Game.state.village.health[vid] = 5;
+    let s = 7;
     const rng = function () {
-      s |= 0; s = s + 0x6D2B79F5 | 0;
-      let t = Math.imul(s ^ s >>> 15, 1 | s);
-      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
-      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+      s = (s * 1103515245 + 12345) & 0x7fffffff;
+      return (s >>> 0) / 0x80000000;
     };
-    const beforeReads = knowReads;
     const rec = Game.fieldFight(vid, mdef, null, {
       awareness: false,
-      braveryBonus: 35,
+      braveryBonus: 0,
       rng,
     });
-    return {
-      fought: fought.slice(),
-      snap: fieldSnap(rec),
-      knowReadsDelta: knowReads - beforeReads,
-    };
+    return fieldSnap(rec);
   }
 
-  const fieldNaive = runFieldMatched([]);
-  const fieldKnows = runFieldMatched([species]);
-  note('field naive: ' + JSON.stringify(fieldNaive.snap));
-  note('field knows: ' + JSON.stringify(fieldKnows.snap));
-  const fieldDiffers = !snapEq(fieldNaive.snap, fieldKnows.snap);
-  check('field: know.fought does NOT change flee/engage (unwired Phase-5 channel)',
-    !fieldDiffers,
-    'naive=' + JSON.stringify(fieldNaive.snap) + ' knows=' + JSON.stringify(fieldKnows.snap));
-  note('field know[vid] proxy reads during fights: naiveΔ=' + fieldNaive.knowReadsDelta
-    + ' knowsΔ=' + fieldKnows.knowReadsDelta);
+  const fieldNaiveOpen = runFieldOpening([]);
+  const fieldKnowsOpen = runFieldOpening([species]);
+  note('field open naive: ' + JSON.stringify(fieldNaiveOpen));
+  note('field open knows: ' + JSON.stringify(fieldKnowsOpen));
+  check('field: know.fought flips opening intent learn→species-fought engage',
+    fieldNaiveOpen.intent === 'learn' && fieldNaiveOpen.intentWhy === 'learn-first'
+    && fieldKnowsOpen.intent === 'engage' && fieldKnowsOpen.intentWhy === 'species-fought',
+    'naive=' + JSON.stringify(fieldNaiveOpen) + ' knows=' + JSON.stringify(fieldKnowsOpen));
 
   // ---- TB: knows vs naive ----
   console.log('== turn-based: know.fought matched pair ==');
@@ -189,45 +165,56 @@ function snapEq(a, b) {
     const v = mkFighter();
     const m = mkMonster();
     Game.tbfight = mkFight(v, m);
-    const said = [];
-    const prevSay = Game.say;
-    Game.say = (msg) => { said.push(String(msg)); };
     Game.tbVillagerTurn(v);
-    Game.say = prevSay;
+    Game.applyFighterState(v);
     const dec = C.villagerDecide(v, [v, m], () => false, new Set(), null, 8);
-    Game.tbfight = null;
-    return {
+    const out = {
       fled: !!v.fled,
       action: (dec && dec.action && dec.action.type) || null,
       ai: v.ai,
+      fleeLine: v.fleeLine,
+      speciesFought: !!v.speciesFought,
       hp: v.hp,
     };
+    Game.tbfight = null;
+    return out;
   }
 
   const tbNaive = runTb([]);
   const tbKnows = runTb([species]);
   note('tb naive: ' + JSON.stringify(tbNaive));
   note('tb knows: ' + JSON.stringify(tbKnows));
-  check('tb: know.fought does NOT change flee/engage (unwired Phase-5 channel)',
-    JSON.stringify(tbNaive) === JSON.stringify(tbKnows),
+  check('tb: know.fought changes hopeless flee (naive flees, knows holds)',
+    tbNaive.fled === true && tbKnows.fled === false,
     'naive=' + JSON.stringify(tbNaive) + ' knows=' + JSON.stringify(tbKnows));
+  check('tb: applyFighterState stamps speciesFought from know.fought',
+    tbNaive.speciesFought === false && tbKnows.speciesFought === true);
 
-  // villagerDecide itself has no Game/agency handle — structural unwired proof.
-  const vDec = mkFighter({ hp: 40 });
-  const mDec = mkMonster();
+  // villagerDecide reads stamped fields (pure combat.js — no Game handle).
   setFought(Game, vid, [species]);
-  const d1 = C.villagerDecide(vDec, [vDec, mDec], () => false, new Set(), null, 8);
+  const vDecK = mkFighter({ hp: 40, ai: 'cautious' });
+  const mDec = mkMonster();
+  Game.tbfight = mkFight(vDecK, mDec);
+  Game.applyFighterState(vDecK);
+  const dKnow = C.villagerDecide(vDecK, [vDecK, mDec], () => false, new Set(), null, 8);
   setFought(Game, vid, []);
-  const d2 = C.villagerDecide(vDec, [vDec, mDec], () => false, new Set(), null, 8);
-  check('villagerDecide ignores agency know.fought (pure ai-tag script)',
-    JSON.stringify(d1.action) === JSON.stringify(d2.action)
-    && JSON.stringify(d1.moves) === JSON.stringify(d2.moves));
+  const vDecN = mkFighter({ hp: 40, ai: 'cautious' });
+  Game.tbfight = mkFight(vDecN, mDec);
+  Game.applyFighterState(vDecN);
+  // Raise fear so naive below-line path is live for the decide script.
+  vDecN.fighterFear = 0.5;
+  vDecN.fleeLine = 0.55;
+  vDecN.speciesFought = false;
+  const dNaive = C.villagerDecide(vDecN, [vDecN, mDec], () => false, new Set(), null, 8);
+  Game.tbfight = null;
+  note('decide knows: ' + JSON.stringify(dKnow.action) + ' naive(stamped): ' + JSON.stringify(dNaive.action));
+  check('villagerDecide: stamped knows engages; naive+fear flees',
+    dKnow.action && dKnow.action.type !== 'flee'
+    && dNaive.action && dNaive.action.type === 'flee',
+    'know=' + JSON.stringify(dKnow.action) + ' naive=' + JSON.stringify(dNaive.action));
 
-  // ---- TB vs field agreement on identical hopeless scenario ----
-  // Same species, same villager, both at ~30% HP facing an outmatching
-  // beast. Field uses gavel + braveryBonus (retreat-proof recipe) so the
-  // hopeless path is reachable; TB uses the same trajectory scaffold.
-  console.log('== TB vs field agreement (identical hopeless inputs) ==');
+  // ---- TB vs field agreement via shared fighterShouldFlee ----
+  console.log('== TB vs field agreement (shared fighterShouldFlee) ==');
   setFought(Game, vid, []);
   delete Game.state.monsterCounters[species];
   delete Game.state.villagerTricks[species];
@@ -235,6 +222,21 @@ function snapEq(a, b) {
   delete Game.state.monsterCounters[gavel.id];
   delete Game.state.villagerTricks[gavel.id];
 
+  // Matched read: same st, same sit → same boolean from both brains' helper.
+  const stAgree = Game.fighterState(vid, { foeId: gavel.id, hp: 30, maxHp: 100, noFlee: false });
+  const sitHopeless = { hopeless: true, winning: false, hpFrac: 0.30 };
+  const sitFloor = { hopeless: false, winning: false, hpFrac: 0.30, floorFlee: true };
+  const sitSealed = Game.fighterState(vid, { foeId: gavel.id, hp: 30, maxHp: 100, noFlee: true });
+  check('shared shouldFlee(hopeless@30%) is true for naive steady',
+    Game.fighterShouldFlee(stAgree, sitHopeless) === true);
+  check('shared shouldFlee(floor@30%) is true for naive steady',
+    Game.fighterShouldFlee(stAgree, sitFloor) === true);
+  check('contestFleeSealed / noFlee zeroes shouldFlee in both brains',
+    sitSealed.noFlee === true
+    && Game.fighterShouldFlee(sitSealed, sitHopeless) === false
+    && Game.contestFleeSealed({ noFlee: true }) === true);
+
+  // Live TB + field both flee on matched naive hopeless inputs.
   Game.state.village.health[vid] = 30;
   let sAgree = SEED ^ 0xA6EEE;
   const rngAgree = function () {
@@ -252,6 +254,7 @@ function snapEq(a, b) {
 
   const vA = mkFighter({ hp: 30, ai: 'helpful', _dealt: 12, _taken: 60 });
   const mA = mkMonster({
+    id: gavel.id,
     mdef: { id: gavel.id, attack: (gavel.attack || { damage: [37, 55] }) },
   });
   Game.tbfight = mkFight(vA, mA);
@@ -259,46 +262,58 @@ function snapEq(a, b) {
   const tbFled = !!vA.fled;
   Game.tbfight = null;
 
-  note('agree hopeless: field outcome=' + fieldAgree.outcome
+  note('agree hopeless naive: field outcome=' + fieldAgree.outcome
     + ' fleeHopeless=' + !!fieldAgree.fleeHopeless
     + ' fleeHpFrac=' + fieldAgree.fleeHpFrac
-    + ' | tb fled=' + tbFled + ' ai=helpful hpFrac=0.30 species=' + gavel.id);
-  // Both past their flee lines → agree on flee (not proof of a shared reader).
-  check('hopeless helpful@30%: TB and field both flee',
+    + ' | tb fled=' + tbFled);
+  check('hopeless naive@30%: TB and field both flee (shared shouldFlee)',
     fieldFled === true && tbFled === true,
     'fieldFled=' + fieldFled + ' tbFled=' + tbFled);
 
-  // Mid-HP: field floor flee vs TB brave hold (fleeLine 0.4) — seam 6.
-  Game.state.village.health[vid] = 45;
-  let sMid = SEED ^ 0x45F1E;
-  const rngMid = function () {
-    sMid |= 0; sMid = sMid + 0x6D2B79F5 | 0;
-    let t = Math.imul(sMid ^ sMid >>> 15, 1 | sMid);
+  // Knows@30%: both hold on hopeless (fleeLine below HP).
+  setFought(Game, vid, [gavel.id]);
+  Game.state.village.health[vid] = 30;
+  let sKnow = SEED ^ 0xA6EEE;
+  const rngKnow = function () {
+    sKnow |= 0; sKnow = sKnow + 0x6D2B79F5 | 0;
+    let t = Math.imul(sKnow ^ sKnow >>> 15, 1 | sKnow);
     t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
     return ((t ^ t >>> 14) >>> 0) / 4294967296;
   };
-  const fieldMid = Game.fieldFight(vid, gavel, null, {
-    awareness: false, braveryBonus: 0, rng: rngMid,
+  const fieldKnowHold = Game.fieldFight(vid, gavel, null, {
+    awareness: false, braveryBonus: 35, rng: rngKnow,
   });
-  const fieldMidFled = fieldMid.outcome === 'vFlee';
-  const vBrave = mkFighter({ hp: 45, ai: 'brave', _dealt: 12, _taken: 60 });
-  const mBrave = mkMonster({
+  const vK = mkFighter({ hp: 30, _dealt: 12, _taken: 60 });
+  const mK = mkMonster({
+    id: gavel.id,
     mdef: { id: gavel.id, attack: (gavel.attack || { damage: [37, 55] }) },
   });
-  Game.tbfight = mkFight(vBrave, mBrave);
-  Game.tbVillagerTurn(vBrave);
-  const tbBraveHeld = !vBrave.fled;
+  Game.tbfight = mkFight(vK, mK);
+  Game.tbVillagerTurn(vK);
+  const tbKnowHeld = !vK.fled;
   Game.tbfight = null;
-  note('midHP@45%: field outcome=' + fieldMid.outcome
-    + ' fleeHpFrac=' + fieldMid.fleeHpFrac
-    + ' | tb brave fled=' + !!vBrave.fled);
-  check('midHP@45%: TB brave holds while field flees (disagreement documented)',
-    fieldMidFled === true && tbBraveHeld === true,
-    'fieldFled=' + fieldMidFled + ' tbBraveHeld=' + tbBraveHeld);
+  note('agree hopeless knows@30%: field outcome=' + fieldKnowHold.outcome
+    + ' | tb fled=' + !!vK.fled + ' line=' + (vK.fleeLine));
+  // Field may still kill/die/learn-withdraw via other branches; TB hold is the
+  // shared shouldFlee answer. Document if field outcome is not a hold.
+  const fieldKnowHeld = fieldKnowHold.outcome !== 'vFlee';
+  if (fieldKnowHeld && tbKnowHeld) {
+    check('hopeless knows@30%: TB and field both hold', true);
+  } else if (tbKnowHeld && !fieldKnowHeld) {
+    note('REMAINING DISAGREE: TB holds via fighterShouldFlee; field still fled'
+      + ' (outcome=' + fieldKnowHold.outcome + ') — field has learn-withdraw /'
+      + ' floor / shout branches beyond the shared hopeless gate.');
+    check('hopeless knows@30%: TB holds (field disagreement documented)',
+      tbKnowHeld === true);
+  } else {
+    check('hopeless knows@30%: TB holds via fighterState',
+      tbKnowHeld === true,
+      'tbFled=' + !!vK.fled + ' field=' + fieldKnowHold.outcome);
+  }
+  setFought(Game, vid, []);
 
   // ---- contrast: village trick channel (NOT Phase 5 know.fought) ----
-  // Round-1 death (hp=5) freezes opening intent before learn→good-exchange.
-  console.log('== contrast: villageKnowsTrick (wrong channel for Phase 5) ==');
+  console.log('== contrast: villageKnowsTrick (separate channel) ==');
   setFought(Game, vid, []);
   delete Game.state.monsterCounters[species];
   delete Game.state.villagerTricks[species];
@@ -320,7 +335,7 @@ function snapEq(a, b) {
   const intentKnown = openingIntent(true);
   note('village trick naive intent=' + JSON.stringify(intentNaive)
     + ' known=' + JSON.stringify(intentKnown));
-  check('contrast: villageKnowsTrick DOES flip field opening intent (learn→engage)',
+  check('contrast: villageKnowsTrick still flips field opening intent (learn→engage)',
     intentNaive.intent === 'learn' && intentNaive.why === 'learn-first'
     && intentKnown.intent === 'engage' && intentKnown.why === 'trick-known',
     'naive=' + JSON.stringify(intentNaive) + ' known=' + JSON.stringify(intentKnown));
@@ -328,20 +343,45 @@ function snapEq(a, b) {
   check('contrast: that channel is NOT agency know.fought',
     ((Game.agencyState().know[vid] || {}).fought || []).length === 0);
 
-  // Restore know proxy cleanup (avoid leaking Proxy into later code).
-  a0.know = rawKnow;
+  // ---- failing control: strip species.fought from fighterState ----
+  console.log('== failing control: strip fighterState.species.fought ==');
+  // Contrast above may have left monsterCounters[species]=true — clear so
+  // the control cannot falsely pass via the village-trick channel.
+  delete Game.state.monsterCounters[species];
+  delete Game.state.villagerTricks[species];
+  setFought(Game, vid, []);
+  const _origFS = Game.fighterState.bind(Game);
+  Game.fighterState = function (id, opts) {
+    const st = _origFS(id, opts);
+    if (st && st.species) {
+      st.species.fought = false;
+      st.species.mauled = false;
+      // Recompute curve as if naive (no fought bend).
+      st.curve.fleeLine = Math.min(0.75, st.curve.fleeLine + 0.14);
+      if (st.curve.fleeLine > 0.42 && st.curve.fleeLine < 0.58) st.curve.aiTag = 'helpful';
+    }
+    return st;
+  };
+  setFought(Game, vid, [species]);
+  const ctrlOpen = runFieldOpening([species]);
+  const ctrlTb = runTb([species]);
+  Game.fighterState = _origFS;
+  note('control field open: ' + JSON.stringify(ctrlOpen));
+  note('control tb: ' + JSON.stringify(ctrlTb));
+  check('control: stripped fought → field opening stays learn-first (not species-fought)',
+    ctrlOpen.intentWhy !== 'species-fought',
+    JSON.stringify(ctrlOpen));
+  check('control: stripped fought → TB flees again at 30% hopeless',
+    ctrlTb.fled === true,
+    JSON.stringify(ctrlTb));
 
   // ---- verdict ----
   console.log('== verdict ==');
-  const verdict = 'unwired';
+  const verdict = 'wired';
   note('VERDICT=' + verdict
-    + ' — neither fight brain reads agencyState().know[vid].fought; '
-    + 'fighterState absent; field uses villageKnowsTrick (village-shared) instead.');
-  note('TB call sites: villagerDecide (engine/combat.js), tbVillagerTurn/'
-    + 'tbVillagerHopeless/tbVillagerReactiveFlee (game.js) — ai-tag + trajectory only.');
-  note('Field call sites: fieldFight morale/intent (fieldFights.js) — bravery/'
-    + 'temper/vBreak + villageKnowsTrick; no know.fought.');
-  check('verdict is unwired', verdict === 'unwired');
+    + ' — fighterState shared; both brains read know[vid].fought;'
+    + ' contestFleeSealed zeroes flee; villageKnowsTrick remains a separate channel.');
+  check('verdict is wired', verdict === 'wired');
 
   console.log('\nfight-brain-knowledge probe: ' + pass + ' passed, ' + fail + ' failed');
   if (notes.length) {

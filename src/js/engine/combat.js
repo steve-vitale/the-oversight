@@ -198,6 +198,32 @@
     const ally = (kind) => fighters.find(o => o.alive && !o.fled && o.kind === kind && o.key !== f.key);
     const player = ally('player');
 
+    // Phase 5: fighterState stamps fleeLine / speciesFought / fighterFear on
+    // the fighter (applyFighterState). Pure combat.js has no Game handle —
+    // when those fields are present, knows-vs-naive changes engage/flee.
+    // Absent fields → legacy ai-tag script unchanged.
+    if (f.speciesFought !== undefined) {
+      const hpFrac = (f.hp || 0) / Math.max(1, f.maxHp || 1);
+      const fleeLine = f.fleeLine != null ? f.fleeLine
+        : (f.ai === 'brave' ? 0.4 : f.ai === 'helpful' ? 0.7 : 0.5);
+      // Naive + below their personality line + scared → withdraw.
+      if (f.speciesFought === false && foe && hpFrac < fleeLine && (f.fighterFear || 0) >= 0.35) {
+        moveToBody(foe.f, false);
+        return { moves, action: { type: 'flee' } };
+      }
+      // Knows this species: even a cautious tag closes and strikes when
+      // they still have meaningful HP (lived knowledge changes engage).
+      if (f.speciesFought === true && f.ai === 'cautious' && hpFrac >= 0.35 && foe) {
+        if (distance(foe.f) <= 1) {
+          return { moves, action: { type: 'strike', target: foe.f.key } };
+        }
+        moveToBody(foe.f, true);
+        if (distance(foe.f) <= 1) return { moves, action: { type: 'strike', target: foe.f.key } };
+        if (distance(foe.f) <= 3) return { moves, action: { type: 'harry', target: foe.f.key } };
+        return { moves, action: { type: 'wait' } };
+      }
+    }
+
     if (f.ai === 'brave') {
       if (!foe) return { moves, action: { type: 'wait' } };
       if (distance(foe.f) <= 1) {

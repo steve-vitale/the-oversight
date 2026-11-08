@@ -34445,13 +34445,28 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (kind === 'hostile' && Number.isFinite(wound) && wound > 0) hp = Math.min(hp, wound);
       const temp = this.npcTemper(vid);
       const equipment = S.equipment;
+      // Phase 5: ai tag is curve output from fighterState (personality +
+      // lived fear/confidence), not a spawn-time 3-bucket collapse alone.
+      // Foe species is unknown at spawn — applyFighterState refreshes once
+      // the fight's live monsters are known (tbVillagerTurn / reactive flee).
+      let aiTag = temp === 'bold' ? 'brave' : temp === 'cautious' ? 'cautious' : 'helpful';
+      let fleeLine = aiTag === 'brave' ? 0.4 : aiTag === 'helpful' ? 0.7 : 0.5;
+      try {
+        if (this.fighterState) {
+          const st0 = this.fighterState(vid, { hp, maxHp: Math.max(100, hp) });
+          if (st0 && st0.curve) {
+            aiTag = st0.curve.aiTag || aiTag;
+            fleeLine = st0.curve.fleeLine != null ? st0.curve.fleeLine : fleeLine;
+          }
+        }
+      } catch (e) {}
       return Object.assign({
         key: (kind === 'hostile' ? 'h_' : 'v_') + vid, kind, villagerId: vid,
         name: this.displayName(vid), emoji: kind === 'hostile' ? '🔪' : '🧍',
         hp, maxHp: Math.max(100, hp), speed: this.villagerSpeed(vid),
         mx: pos.mx ?? pos.x, my: pos.my ?? pos.y,
         alive: true, fled: false, moveLeft: 0, acted: false,
-        ai: temp === 'bold' ? 'brave' : temp === 'cautious' ? 'cautious' : 'helpful', helped: false,
+        ai: aiTag, fleeLine, helped: false,
         wbonus: equipment ? equipment.weaponBonusOf(person, this.data.items) : 0,
         varmor: equipment ? equipment.armorOf(person, this.data.items) : 0,
       }, extra || {});
@@ -39639,14 +39654,25 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const f = this.tbfight;
       if (!f || f.over || !t || !t.alive || t.fled || (t.hp || 0) <= 0) return false;
       if (t.kind !== 'villager' && t.kind !== 'ally') return false;
-      const sealed = !!((this.state || {}).arenaContest) || !!(f.noFlee);
+      // Phase 5: one contest/arena gate shared with field (contestFleeSealed).
+      const sealed = this.contestFleeSealed
+        ? this.contestFleeSealed({ noFlee: !!f.noFlee, fight: f })
+        : (!!((this.state || {}).arenaContest) || !!(f.noFlee));
       if (sealed || (t.rallied || 0) > 0) return false;
       const hpFrac = (t.hp || 0) / Math.max(1, t.maxHp || 1);
-      const fleeLine = t.ai === 'brave' ? 0.4 : t.ai === 'helpful' ? 0.7 : 0.5;
+      let st = null;
+      try {
+        if (this.applyFighterState) st = this.applyFighterState(t);
+        else if (t._fighterState) st = t._fighterState;
+      } catch (e) {}
+      const fleeLine = (st && st.curve && st.curve.fleeLine != null)
+        ? st.curve.fleeLine
+        : (t.fleeLine != null ? t.fleeLine
+          : (t.ai === 'brave' ? 0.4 : t.ai === 'helpful' ? 0.7 : 0.5));
       if (hpFrac >= fleeLine) return false;
       // HELPFUL EXCEPTION (mirrors the start-of-turn read): holding for a
       // critical player is a purpose, not purposelessness.
-      if (t.ai === 'helpful' && hpFrac >= 0.25) {
+      if ((t.ai === 'helpful' || (st && st.curve && st.curve.aiTag === 'helpful')) && hpFrac >= 0.25) {
         try {
           const p = this.tbFighter('p');
           if (p && p.alive && (p.hp || 0) / Math.max(1, p.maxHp || 1) < 0.35) return false;
@@ -39660,6 +39686,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (traj.winning && hpFrac >= 0.05) return false;
       const wouldDieNextHit = final > 0 && (t.hp || 0) <= final;
       if (!traj.hopeless && !wouldDieNextHit) return false;
+      // Shared should-flee read (same answer field morale asks).
+      if (st && this.fighterShouldFlee) {
+        if (!this.fighterShouldFlee(st, { hopeless: !!traj.hopeless || wouldDieNextHit, winning: !!traj.winning, hpFrac })) {
+          return false;
+        }
+      }
       t.fled = true;
       try { S.Godpath?.finishTacticalEscape(this, f, t); } catch (e) { console.warn('[godpath] reactive escape', e); }
       this.say(`${t.name} takes the hit and runs — while running still works.`);
@@ -39728,6 +39760,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const f = this.tbfight;
       if (!f || !v.villagerId || !this.npcHasAbility) return false;
       const vid = v.villagerId;
+      // Phase 5: ability cascade reads shared fighterState (curves + species
+      // knowledge). Does not retune ability product numbers — only which
+      // lived fear/confidence the cascade can see.
+      try {
+        if (this.applyFighterState) this.applyFighterState(v);
+      } catch (e) {}
       const day = (this.state.scholar || {}).day || 0;
       const liveMonsters = (f.fighters || []).filter(m => m.kind === 'monster' && m.alive && !m.fled);
       if (!liveMonsters.length) return false;
@@ -40099,6 +40137,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const f = this.tbfight;
       // STATUS EFFECTS (Steve 2026-10-07): per-turn ticks (bleed/burn), expiry.
       if (this.seTickFighter(v)) return;
+      // Phase 5: refresh shared fighterState (species knowledge + personality
+      // curves) so hopeless-flee, abilities and villagerDecide agree with field.
+      try { if (v.villagerId && this.applyFighterState) this.applyFighterState(v); } catch (e) {}
       // RALLY / WAR-CRY STATE (2026-10-13): the coalition verbs tick here,
       // mirroring tbMonsterTurn's own buff ticks.
       //   rallyBuff: emboldened (+4 damage while >0 — the union_rep
@@ -40162,16 +40203,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // not the whether. Sealed contest arenas hold everyone (the gate is
       // shut). The helpful hold one exception: keeping a critical player
       // alive is a purpose, not purposelessness.
-      // (structural-combat r2 2026-10-10): seal reads BOTH flags — the
-      // contest-arena seal (state.arenaContest, set when the arena fight
-      // starts) and the fight-level noFlee flag. A sealed fight is sealed
-      // no matter which path sealed it.
-      const sealed = !!((this.state || {}).arenaContest) || !!((this.tbfight || {}).noFlee);
+      // Phase 5: seal is the single contestFleeSealed gate (shared with
+      // field); fleeLine / should-flee come from fighterState.
+      const sealed = this.contestFleeSealed
+        ? this.contestFleeSealed({ fight: this.tbfight || null })
+        : (!!((this.state || {}).arenaContest) || !!((this.tbfight || {}).noFlee));
       // RALLIED (2026-10-13): the speech holds — no fleeing while it lasts.
       // The already-fled stay fled; a speech can't call back the gone.
       if (!sealed && !(v.rallied > 0) && this.tbVillagerHopeless(v)) {
         const hpFrac = (v.hp || 0) / Math.max(1, v.maxHp || 1);
-        const fleeLine = v.ai === 'brave' ? 0.4 : v.ai === 'helpful' ? 0.7 : 0.5;
+        const st = v._fighterState || null;
+        const fleeLine = (st && st.curve && st.curve.fleeLine != null)
+          ? st.curve.fleeLine
+          : (v.fleeLine != null ? v.fleeLine
+            : (v.ai === 'brave' ? 0.4 : v.ai === 'helpful' ? 0.7 : 0.5));
         let holdForPlayer = false;
         if (v.ai === 'helpful' && hpFrac >= 0.25) {
           try {
@@ -40179,7 +40224,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             holdForPlayer = !!(p && p.alive && (p.hp || 0) / Math.max(1, p.maxHp || 1) < 0.35);
           } catch (e) {}
         }
-        if (!holdForPlayer && hpFrac < fleeLine) {
+        const shouldFlee = st && this.fighterShouldFlee
+          ? this.fighterShouldFlee(st, { hopeless: true, winning: false, hpFrac })
+          : (hpFrac < fleeLine);
+        if (!holdForPlayer && shouldFlee) {
           // WAR CRY (tactical parity 2026-10-13): the field engine fires this
           // INSTEAD of fleeing when the trajectory turns hopeless — once per
           // fight the cry staggers the monster (it hesitates: loses its next
