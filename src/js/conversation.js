@@ -2096,6 +2096,18 @@
         }
       }
       c._recapSaid[raw] = true;
+      // RECAP CAP (journey-social r154 2026-11-07): press-count cap — the
+      // reframe-keyed spend above only fires when the SAME raw line repeats,
+      // but a moving conversation re-anchors to a fresh line every press
+      // (each press appends a thread-log entry), so the cap never fired in
+      // the wild (r153: 7 conversations to 6 presses). Count presses per
+      // sitting; after serving the 5th, spend 'recap' whatever the line
+      // was. The r27/r31 reframe/escalation content above is untouched;
+      // the same-line spend stays as a redundant guard.
+      c._recapPresses = (c._recapPresses || 0) + 1;
+      if (c._recapPresses >= 5) {
+        try { this.convoSpendChoice(vid, 'recap'); } catch (e) {}
+      }
       return this.voiceLine(vid, line);
     },
 
@@ -5285,6 +5297,9 @@
       // RECAP REFRAMES (journey-social r31 2026-10-20): the count-aware
       // recap escalation is per-sitting — a new sitting, fresh patience.
       c._recapReframes = 0;
+      // RECAP PRESSES (journey-social r154 2026-11-07): the press-count
+      // cap is per-sitting — a new sitting, fresh patience.
+      c._recapPresses = 0;
       // FAVOR-REQUIREMENTS REFRAMES (journey-social r35 2026-10-20):
       // per-sitting like the recap/silence counters — a new sitting, fresh
       // patience. _favorReqSaid stays persistent (they told you before).
