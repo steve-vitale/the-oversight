@@ -1,0 +1,80 @@
+=== r115-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Ruth (gen_oikqjkv) occ=Pharmacist --
+OPENING: People need to know someone's got a plan. Even if the plan is 'we'll figure it out.'
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Daylily Bud. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Cowpea. Leaf, stem, smell. You won't forget it now."
+YOU: [dlg:more] "I’m listening."
+THEM: "Decisions don't make themselves. I learned that watching a group freeze once. Never again."
+YOU: [dlg:react] (listen)
+THEM: "I watch how people look at you. Some of them are waiting for an alternative. I'm just saying."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on wanting to be in charge. That is all."
+YOU: [goon] "How would that even work?"
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Yes. Absolutely. I've been hoping you'd ask." (A little too quickly.)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Right. Sorry, I go on about it. What did you want?"
+closing: "Good talk."
+
+-- Luke (gen_l8me3xy) occ=Fisherman --
+OPENING: "About what happened to my taken kin — Have you heard anything? About the taken. The pods. Anything at all. Thank you. Really."
+YOU: [gq:yn:yes] "Yes."
+THEM: They nod. "Okay."
+YOU: [goon] "Go on."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [goon] "Go on."
+THEM: "Has this changed you? Like, fundamentally?"
+YOU: [ans:q_change:a_tell] "I don't recognize the person in my head anymore. I think that's good? I don't k
+THEM: "Come here — The old you got you here. The new you keeps you here. Both count."
+YOU: [goon] "Go on."
+THEM: "I used to be a fisherman who worried about being on time. Now I worry about being alive. Same worry, bigger font. So yes — and also no."
+YOU: [dlg:more] "What do you remember?"
+THEM: "It's my sister, Ghada. Was taken at the Scattering. The boring half, they said — my sister, boring. I think about that every day. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [goon] "Go on."
+THEM: "Come get air with me. I need to think out loud."
+closing: "Take care of yourself."
+
+-- Bridget (gen_vvegl2l) occ=line cook --
+OPENING: "About what you miss most — What do you miss most? From before."
+YOU: [ans:q_miss:a_food] "A real hot meal."
+THEM: "God. Yes. I dream about soup. Actual soup, with a spoon."
+YOU: [goon] "I'm listening."
+THEM: Their friendliness thins — still there, just held at arm's length.
+YOU: [goon] "I'm listening."
+THEM: "Hot showers. Not the big things — the small, stupid, perfect things. Columbus, Ohio in the morning, coffee going, nobody trying to kill me. I miss being bored."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on what you miss most."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Not right now. I've got my own things to handle."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "People are talking about Onni. Take it for what it's worth. I really mean that."
+YOU: [goon] "Whoa — go on."
+THEM: "I should go. You know where to find me."
+
+-- Elif (elif_demir) occ=hotel housekeeper --
+OPENING: "What's the worst thing you've done since the sky changed?"
+YOU: [ans:q_guilty:a_tell] "There's something I regret. I'm not ready to talk about it."
+THEM: No judgment in their face. "We're all doing math that doesn't add up. You're still here. That counts."
+YOU: [goon] "I'm listening."
+THEM: "I don't answer that one myself. Not yet. Maybe when I've decided whether surviving counts as an excuse or just a reason."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the worst thing you've done."
+YOU: [goon] "I'm listening."
+THEM: "Did you leave someone behind? ...Sorry. You don't have to answer that."
+YOU: [ans:q_left_behind:a_yes] "Yes."
+THEM: Just: "Yeah." A long quiet. "Me too."
+YOU: [goon] "I'm listening."
+THEM: "I don't talk about that. Not because it's secret — because saying it out loud makes it real in a way I can't afford yet. Someday. Not today."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Someone should watch your back. Might as well be me."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+closing: "That's enough sharing for one day. Maybe one week."

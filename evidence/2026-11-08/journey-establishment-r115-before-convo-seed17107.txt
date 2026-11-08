@@ -1,0 +1,73 @@
+=== r115-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Linh (gen_ioj5j9t) occ=paramedic --
+OPENING: "Never mind this wound — we got it handled. Thanks anyway."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [menu:more] More things to say (1/5)
+THEM: (menu page turned)
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "No, really — it's handled. Thanks for asking, though."
+YOU: [goon] "Do go on."
+THEM: Something eases in their shoulders. They're really talking to you now.
+YOU: [silence] "..."
+THEM: You say nothing. Neither do they, for a while — and it's fine.
+(no pick)
+(stall menu: dlg:subject|leave|silence)
+closing: "Alright. Same time tomorrow, if the world allows."
+
+-- Marisol (gen_1pxvmj0) occ=pottery instructor --
+OPENING: "I keep dreaming about rows of pods. Humming. Tell me I'm not the only one."
+YOU: [goon] "Do go on."
+THEM: They grin when they spot you — unguarded, for once.
+YOU: [dlg:more] "Tell me about them."
+THEM: "It's my mother, Daryna. Was taken at the Scattering. The boring half. She made soup from nothing and they called that boring. Some nights I swear I hear them before I sleep -- the pods, rows deep, humming. Then morning comes and I can't say whether it was real."
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [menu:more] More things to say (1/2)
+THEM: (menu page turned)
+YOU: [goon] "Do go on."
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+YOU: [silence] "..."
+THEM: A comfortable quiet settles. They smile a little, and let it be.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+(no pick)
+(stall menu: betrayal:wounds:case_12|betrayal:site:case_12|betrayal:witnesses:case_12|betrayal:investigate:case_12|betrayal:moot:case_12|menu:more|leave|silence)
+closing: "Later."
+
+-- Dagmar (gen_vho0jqw) occ=carpenter --
+OPENING: "About the creek water run — I still haven't found anyone. Any chance?"
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Physic Nut. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Lemongrass. Leaf, stem, smell. You won't forget it now."
+YOU: [menu:more] More things to say (1/2)
+THEM: (menu page turned)
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to your partner, on the same side of the Haven door.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [silence] "..."
+THEM: They glance at the fire, then back. The quiet doesn't seem to bother them.
+(no pick)
+(stall menu: agency:ask_field|betrayal:wounds:case_12|betrayal:site:case_12|betrayal:witnesses:case_12|betrayal:investigate:case_12|menu:more|leave|silence)
+closing: "See you at the fire."
+
+-- Miriam (gen_ijnoty9) occ=lawyer --
+OPENING: "Never mind the pantry run — we got it handled. Thanks anyway. Water's almost gone — 0 liters. I can't carry enough alone. First light, the creek, you and me?"
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Wait — I'm away from Haven, out on the road. I can't promise a dawn meet while I'm out — find me when I'm back, and we'll set it then."
+YOU: [menu:more] More things to say (1/2)
+THEM: (menu page turned)
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that water haul."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [silence] "..."
+THEM: "You're a good listener, you know that?" A tired smile.
+(no pick)
+(stall menu: betrayal:wounds:case_12|betrayal:site:case_12|betrayal:witnesses:case_12|betrayal:investigate:case_12|betrayal:moot:case_12|menu:more|leave|silence)
+closing: "...I'm going to go be quiet somewhere else now."
