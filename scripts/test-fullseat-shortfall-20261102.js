@@ -12,8 +12,13 @@
 // Construction (honest state, no stubs): a fresh game is given deed
 // profiles through the real deedState()/progState() maps — distinct
 // wave-N fights, contests survived, crises, standing flags, integration
-// value, and the two food-thesis flags — exactly the inputs
+// value, and the keepsake-lesson flag — exactly the inputs
 // deedGateReady() reads. No gate function is stubbed or replaced.
+// LEG 2 (2026-11-08): applyProfile ALSO rigs National ladder standing
+// (40 counted points) and a delivered trade-charter capstone, so the
+// ladder bars never pollute a case that isolates a named bar; the surge
+// flag is still carried in the profile but is NO LONGER a seat bar —
+// foodDeeds is sentimentTaught alone (brief §b.4).
 //
 // GREEN means, on IDENTICAL constructed states:
 //   BEFORE (the unchanged old surfaces): tableSeatLine() for a lesser
@@ -23,8 +28,8 @@
 //   AFTER (the new surfaces): fullSeatShortfall() names EXACTLY the
 //     missing piece(s) — no more, no fewer — for every single-bar
 //     shortfall in turn (each wave 1-5, contests, crises, standing,
-//     integration, each food-thesis half, both halves), and names
-//     nothing when every bar is met.
+//     integration, the keepsake lesson; the unspent surge is NOT a
+//     bar and is never named), and names nothing when every bar is met.
 //   OFFER: tablePreview() on a lesser seat carries the same line in
 //     fullShortfall (and fullReady false); on a full seat it carries
 //     '' (and fullReady true).
@@ -66,6 +71,12 @@ function applyProfile(Game, p) {
   s.prog = s.prog || {};
   pg.sentimentTaught = !!p.sentiment;
   s.prog.feastSurgeUsed = !!p.surge;
+  // LEG 2 (2026-11-08): National ladder standing + a delivered capstone,
+  // so the ladder bars never pollute a case isolating a named bar.
+  // Fight 24 (wave-3 ledger 48) + Forage 16 (scholar field XP 192) = 40.
+  Game.state.waveLedger = { 3: { points: 48, perType: {}, perTypeX: {} } };
+  Game.playerTracks().field.xp = 192;
+  pg.ladderCapstone = 'trade_charter';
   pg.tableWaiting = true;
   pg.tableDone = false;
 }
@@ -113,10 +124,12 @@ async function main() {
       ['integration too shallow (stage 1 of 2 needed)'], 'none'],
     ['food half short: keepsake lesson not taught', { sentiment: false },
       ['the keepsake lesson has not yet been taught'], 'none'],
-    ['food half short: feast surge never spent', { surge: false },
-      ['a feast surge has not yet been spent in a real fight'], 'none'],
-    ['food both short', { sentiment: false, surge: false },
-      ['the keepsake lesson has not yet been taught', 'a feast surge has not yet been spent in a real fight'], 'none'],
+    // LEG 2 (2026-11-08): the surge is NOT a bar. Sentiment taught +
+    // surge unspent still earns the full seat; nothing is named.
+    ['food: surge unspent is NOT a bar (lesson taught alone earns the seat)', { surge: false },
+      [], 'full'],
+    ['food both short: only the lesson is named', { sentiment: false, surge: false },
+      ['the keepsake lesson has not yet been taught'], 'none'],
     ['all bars met: full seat', {},
       [], 'full'],
   ];
