@@ -228,16 +228,22 @@
 
     // PELLET BOOST + COST (Steve 2026-11-08 07:03 CST reframe: "the pellet
     // bearer should gain basically unlimited food boosts. There should be a
-    // cost though."). The reactor turns stored food into power: staying fed
-    // is free, extra power costs pantry calories. Data lever:
-    // src/data/pellet-boost.json (read defensively; defaults match the file).
+    // cost though."; 11:54 CST correction: the cost is HEALTH — radiation
+    // poisoning, Fallout-style — not pantry calories). Each paid boost adds
+    // radiation exposure to the BEARER (the person, not the pellet); the
+    // boost keeps working at any exposure, but the bearer sickens as the
+    // dose builds. Data lever: src/data/pellet-boost.json (read
+    // defensively; defaults match the file).
     pelletBoostCfg() {
       const d = (this.data && this.data.pelletBoost) || {};
       const n = (v, def) => (typeof v === 'number' && v > 0) ? v : def;
       return {
-        costKcalPerStrike: n(d.costKcalPerStrike, 50),
         boostMult: n(d.boostMult, 1.5),
         floorMult: n(d.floorMult, 1.25),
+        radsPerBoost: n(d.radsPerBoost, 2),
+        radsSickAt: n(d.radsSickAt, 10),
+        radsDecayPerDay: n(d.radsDecayPerDay, 1),
+        radsCureDrop: n(d.radsCureDrop, 10),
       };
     },
 
@@ -258,43 +264,151 @@
 
     // pelletBurn(vid, opts): one paid boost (or the free floor) for a strike
     // — or a bonus heal (opts.heal, scholar only; a heal bonus is always a
-    // boost, never a floor). Returns { mult, boosted, spent }. The boost
-    // ASKS for costKcalPerStrike; pantryDraw takes WHOLE units (Steve
-    // 2026-10-08), so the ledger records the ACTUAL kcal drawn, which can
-    // exceed the ask — and the say line names the actual number. A short
-    // pantry means the free floor for a strike, and NO bonus for a heal.
-    // The line fires only when the burn actually raises the strike's
-    // multiplier (opts.currentMult) — a floor that merely ties an overcharge
-    // is already said by the overcharge line, never twice.
+    // boost, never a floor). Returns { mult, boosted, rads }. The cost is
+    // HEALTH, not pantry food (Steve 2026-11-08 11:54 CST): every paid
+    // boost adds radsPerBoost radiation exposure to the BEARER (the
+    // person — see pelletRadiationTick). The reactor never refuses: a
+    // paid boost fires whenever it would raise the strike's multiplier,
+    // at any exposure — the power never cuts off. When a bigger mult
+    // already applies (opts.currentMult at or above the boost), the
+    // reactor does not pay for power it cannot deliver — it returns
+    // the free floor instead (the steady hum, always on). The line
+    // fires only when the burn actually raises the strike's
+    // multiplier (opts.currentMult) — a floor that merely ties an
+    // overcharge is already said by the overcharge line, never twice.
     pelletBurn(vid, opts) {
       opts = opts || {};
       const cfg = this.pelletBoostCfg();
-      if (!this._pelletBearerIs(vid)) return { mult: 1, boosted: false, spent: 0 };
-      // Never pay for power already on the strike: a live feast at or
-      // above the boost (granted before the reactor was installed) means
-      // the reactor adds nothing — draw nothing, record nothing.
-      if (!opts.heal && cfg.boostMult <= (opts.currentMult || 1)) return { mult: 1, boosted: false, spent: 0 };
+      if (!this._pelletBearerIs(vid)) return { mult: 1, boosted: false, rads: 0 };
+      // A bigger mult already on the strike: the reactor's hum still
+      // carries the floor — free, no exposure. The floor is the
+      // standing contribution, returned whenever the boost doesn't apply.
+      if (!opts.heal && cfg.boostMult <= (opts.currentMult || 1)) {
+        const L0 = this.state.pelletBoost || (this.state.pelletBoost = { rads: 0, boosts: 0, floors: 0, lastBoostDay: null });
+        L0.floors += 1;
+        return { mult: cfg.floorMult, boosted: false, rads: 0 };
+      }
       // The ledger exists only once the reactor fires — a non-bearer
       // strike leaves no trace at all.
-      const L = this.state.pelletBoost || (this.state.pelletBoost = { spent: 0, boosts: 0, floors: 0, lastBoostDay: null });
-      const v = this.state.village || {};
-      let have = 0;
-      try { have = (typeof this.pantryKcalLive === 'function') ? this.pantryKcalLive(v) : 0; } catch (e) { have = 0; }
-      if (have >= cfg.costKcalPerStrike) {
-        let drawn = null;
-        try { drawn = this.pantryDraw(v, cfg.costKcalPerStrike, {}); } catch (e) { drawn = null; }
-        const spent = Math.round((drawn && drawn.taken) || 0);
-        if (spent > 0) {
-          L.boosts += 1; L.spent += spent; L.lastBoostDay = (this.state.scholar || {}).day || 0;
-          if (opts.heal) this.say(`REACTOR — the pellet burns ${spent} kcal of pantry stores for the bonus heal.`);
-          else if (cfg.boostMult > (opts.currentMult || 1)) this.say(`REACTOR — the pellet burns ${spent} kcal of pantry stores: this strike hits ×${cfg.boostMult}.`);
-          return { mult: cfg.boostMult, boosted: true, spent };
+      const L = this.state.pelletBoost || (this.state.pelletBoost = { rads: 0, boosts: 0, floors: 0, lastBoostDay: null });
+      // RADIATION COST (Steve 2026-11-08 11:54 CST): the bearer pays in
+      // their own body. Exposure lives on the person (state.pelletRads,
+      // keyed 'p' for the scholar or a villager id) — passing the pellet
+      // does not pass the poisoning, and a fresh bearer starts at 0.
+      const key = (vid == null) ? 'p' : vid;
+      const R = this.state.pelletRads || (this.state.pelletRads = {});
+      const ent = R[key] || (R[key] = { exposure: 0, lastBoostDay: null });
+      ent.exposure = (ent.exposure || 0) + cfg.radsPerBoost;
+      ent.lastBoostDay = (this.state.scholar || {}).day || 0;
+      L.boosts += 1; L.rads = (L.rads || 0) + cfg.radsPerBoost; L.lastBoostDay = ent.lastBoostDay;
+      if (opts.heal) this.say(`REACTOR — the pellet burns hot for the bonus heal. (Radiation +${cfg.radsPerBoost}.)`);
+      else if (cfg.boostMult > (opts.currentMult || 1)) this.say(`REACTOR — the pellet burns hot: this strike hits ×${cfg.boostMult}. (Radiation +${cfg.radsPerBoost}.)`);
+      return { mult: cfg.boostMult, boosted: true, rads: cfg.radsPerBoost };
+    },
+
+    // pelletExposure(key): the bearer's radiation exposure (0 if none).
+    // key 'p' is the scholar; a villager id is that villager.
+    pelletExposure(key) {
+      try {
+        const ent = (this.state.pelletRads || {})[key];
+        return (ent && typeof ent.exposure === 'number') ? Math.max(0, ent.exposure) : 0;
+      } catch (e) { return 0; }
+    },
+
+    // pelletRadTier(exposure): the sickness tier for a dose — 0 clean,
+    // 1/2/3 sick (severity = tier on the villager record). Thresholds
+    // from the data lever (radsSickAt); tiers at 1x / 2x / 4x threshold.
+    pelletRadTier(exposure) {
+      try {
+        const cfg = this.pelletBoostCfg();
+        const at = cfg.radsSickAt || 10;
+        if (!(exposure >= at)) return 0;
+        if (exposure >= at * 4) return 3;
+        if (exposure >= at * 2) return 2;
+        return 1;
+      } catch (e) { return 0; }
+    },
+
+    // pelletRadiationCured(key): a real cure clears exposure faster
+    // (Steve 2026-11-08 13:12 CST: there must be a cure, not just
+    // handing the pellet off). Called from the cure choke points
+    // only — cureStatus (scholar engine), medicDutyCureAttempt and
+    // treatVillager (villager) — when a radiation sickness is cured.
+    // Eases do not drop exposure; only a cure does.
+    pelletRadiationCured(key) {
+      try {
+        const cfg = this.pelletBoostCfg();
+        const R = this.state.pelletRads || {};
+        const ent = R[key];
+        if (!ent) return;
+        ent.exposure = Math.max(0, (ent.exposure || 0) - (cfg.radsCureDrop || 10));
+      } catch (e) { console.warn('[pelletRads] cured drop', e); }
+    },
+
+    // pelletRadiationTick(): the daily radiation reckoning — called from
+    // endDay right after villageSicknessTick. For every living person
+    // carrying a dose: a day without boosting sheds radsDecayPerDay
+    // (slow clearing); at or above the sickness threshold the bearer
+    // sickens through the EXISTING sickness systems (a v.sick record
+    // for a villager, the radiation_sickness status entry for the
+    // scholar) — no parallel system. The record is created when
+    // absent and its severity follows the tier; daysLeft is NOT
+    // refreshed, so tending, curing, and expiry all work naturally,
+    // and the tick re-creates the record the next day while the
+    // bearer is still hot. Below the threshold an existing record is
+    // left alone — it expires on its own as the dose clears. Onset
+    // says one line per bearer per episode (throttled by
+    // lastRadSayDay on the dose entry).
+    pelletRadiationTick() {
+      try {
+        const cfg = this.pelletBoostCfg();
+        const s = this.state.scholar || {};
+        const v = this.state.village || {};
+        const R = this.state.pelletRads || {};
+        const today = s.day || 0;
+        const roster = (v.roster || []).slice();
+        const isLiving = (key) => {
+          if (key === 'p') return !s.dead;
+          try { return roster.includes(key) && !((this.vpOf(key) || {}).dead); } catch (e) { return false; }
+        };
+        for (const key of Object.keys(R)) {
+          const ent = R[key];
+          if (!ent || !isLiving(key)) continue;
+          // Slow clearing: a day without boosting sheds the dose.
+          if ((ent.lastBoostDay == null) || ent.lastBoostDay < today) {
+            ent.exposure = Math.max(0, (ent.exposure || 0) - (cfg.radsDecayPerDay || 1));
+          }
+          const exposure = ent.exposure || 0;
+          const tier = this.pelletRadTier(exposure);
+          if (tier <= 0) continue;
+          const dayKey = today;
+          if (key === 'p') {
+            let has = false;
+            try { has = (this.sickDiseases() || []).some(e => e.id === 'radiation_sickness'); } catch (e) { has = false; }
+            if (!has) {
+              try { if (typeof this.contractDisease === 'function') this.contractDisease('radiation_sickness', {}); } catch (e) { console.warn('[pelletRads] scholar contract', e); }
+              if (ent.lastRadSayDay !== dayKey) {
+                ent.lastRadSayDay = dayKey;
+                this.say('The reactor\'s fire is in you now — nausea that doesn\'t pass, weakness in the limbs. The power is still there. So is the sickness. (Radiation sickness.)');
+              }
+            }
+          } else {
+            v.sick = v.sick || {};
+            const rec = v.sick[key];
+            if (!rec) {
+              v.sick[key] = { name: 'radiation sickness', daysLeft: 4, severity: tier };
+              if (ent.lastRadSayDay !== dayKey) {
+                ent.lastRadSayDay = dayKey;
+                let nm = 'Someone';
+                try { const p = this.getPerson(key); nm = p ? String(p.name).split(' ')[0] : 'Someone'; } catch (e) {}
+                this.say(`${nm} is sick from the reactor's fire — nausea that doesn't pass, weakness in the limbs, hair coming away. The power is still there. So is the sickness. (Radiation sickness.)`);
+              }
+            } else if (rec.name === 'radiation sickness' && rec.severity !== tier) {
+              rec.severity = tier;
+            }
+          }
         }
-      }
-      if (opts.heal) return { mult: 1, boosted: false, spent: 0 };
-      L.floors += 1;
-      if (cfg.floorMult > (opts.currentMult || 1)) this.say(`REACTOR · the steady hum carries the strike ×${cfg.floorMult}.`);
-      return { mult: cfg.floorMult, boosted: false, spent: 0 };
+      } catch (e) { console.warn('[pelletRads] tick', e); }
     },
 
     // pelletBoostedToday: did the bearer pay for a boost today? The status
@@ -342,12 +456,25 @@
         // FUSION REACTOR (Steve 2026-10-12): the steady hum is visible — no
         // silent buffs. When the reactor carries the multiplier, say so. A
         // day the bearer paid for a boost reads ×1.5 (per paid strike); the
-        // floor ×1.25 is always on.
+        // floor ×1.25 is always on. The bearer's dose reads with it, so
+        // the player watches the radiation climb (Steve 2026-11-08
+        // 11:54 CST: the cost is health).
         if (!b) {
           const online = (typeof this.fusionReactorOnline === 'function') && this.fusionReactorOnline();
           if (online) {
-            if (this.pelletBoostedToday()) return 'REACTOR · damage ×1.5 boosted today · floor ×1.25 · always active';
-            return 'REACTOR · damage ×1.25 · ability bonuses · always active';
+            let radWord = '';
+            try {
+              const h = this.state.fusionReactorHolder || null;
+              const key = (h && h.who === 'villager' && h.vid) ? h.vid : 'p';
+              const exp = (typeof this.pelletExposure === 'function') ? this.pelletExposure(key) : 0;
+              const tier = (typeof this.pelletRadTier === 'function') ? this.pelletRadTier(exp) : 0;
+              if (tier === 1) radWord = ' · radiation warm';
+              else if (tier === 2) radWord = ' · radiation hot';
+              else if (tier >= 3) radWord = ' · radiation burning';
+              else if (exp > 0) radWord = ' · radiation trace';
+            } catch (e) { radWord = ''; }
+            if (this.pelletBoostedToday()) return 'REACTOR · damage ×1.5 boosted today · floor ×1.25 · always active' + radWord;
+            return 'REACTOR · damage ×1.25 · ability bonuses · always active' + radWord;
           }
           return '';
         }
@@ -444,9 +571,10 @@
         if (gained <= 0) return;
         const want = Math.max(1, Math.round(gained * ((tw.pct || 50) / 100)));
         // PELLET BOOST: when the reactor carries the form, the bonus is a
-        // PAID boost — draw pantry calories first. A short pantry means no
-        // bonus (the base heal already landed before this form ran, and it
-        // is untouched). The reactor path marks the surge as spent (Q4).
+        // PAID boost — it adds radiation exposure to the bearer (Steve
+        // 2026-11-08 11:54 CST). The reactor never refuses, so the bonus
+        // always lands while the reactor is online. The reactor path marks
+        // the surge as spent (Q4).
         const reactorForm = !this.feastedActive() && (typeof this.fusionReactorOnline === 'function') && this.fusionReactorOnline();
         if (reactorForm) {
           const burn = (typeof this.pelletBurn === 'function') ? this.pelletBurn(null, { heal: true }) : null;
