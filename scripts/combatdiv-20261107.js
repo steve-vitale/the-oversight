@@ -364,11 +364,28 @@ async function oneRun(seed) {
   return out;
 }
 
+// FLAPWRITE (sim-midshape-a, 2026-11-08): the host write-denial flap
+// (EPERM) refuses plain writes in minutes-long waves; a seed's compute
+// is worth minutes, its file write is one instant. Retry the write
+// in-process instead of losing the seed. No sim content changes: the
+// bytes written are identical; only the attempt timing moves. Non-EPERM
+// errors still throw immediately.
+function writeFileFlap(file, text) {
+  var last = null;
+  for (var i = 0; i < 60; i++) {
+    try { fs.writeFileSync(file, text); return; }
+    catch (e) { last = e; if (!e || e.code !== 'EPERM') throw e; }
+    try { Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 5000); } catch (e2) {}
+    console.error('FLAPWRITE retry ' + (i + 1) + ' for ' + file);
+  }
+  throw last;
+}
+
 (async function () {
   for (const seed of SEEDS) {
     const out = await oneRun(seed);
     const file = path.join(outDir, 'combatdiv-b-s' + seed + '-' + RUN + '.json');
-    fs.writeFileSync(file, JSON.stringify(out, null, 2) + '\n');
+    writeFileFlap(file, JSON.stringify(out, null, 2) + '\n');
     const ts = out.takeseatStats || {};
     console.log(JSON.stringify({
       seed: out.seed, days: out.days, endReason: out.endReason, won: out.won,

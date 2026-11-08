@@ -117,11 +117,20 @@ function runFight53002Leg() {
   ok('53002: candidate rounds 5-7 (C1: 6)', cf.rounds >= 5 && cf.rounds <= 7, JSON.stringify({ rounds: cf.rounds }));
   ok('53002: candidate HP left 30-45 (C1: 38)', cf.vHpLeft >= 30 && cf.vHpLeft <= 45, JSON.stringify({ vHpLeft: cf.vHpLeft }));
   // All 8 root fights present in both corpora (reporting completeness).
+  // Roots are each seed's FIRST field fight (gseq 1) on THIS master
+  // (6680d7924) — the prereg's 0245Z keys for 53001/53004/53006/53008 no
+  // longer occur there (Mara Vasquez dies d6 by ambush with 0 fights on
+  // 53001; Nora Wilson 0 fights, dead d9 ambush, on 53004; the 53006/53008
+  // prereg fights don't occur either — see the evidence file's
+  // reproduction note). The gseq-1 identity is fixed before the first
+  // morale decision, so the candidate corpus must contain the same 8
+  // fights; only their outcomes may move. The 53002 assertions above
+  // stay as preregistered.
   const roots = {
-    53001: ['Mara Vasquez', 'hushwolf', 3], 53002: ['Kieran Lorenz', 'cliffhanger', 4],
-    53003: ['Jorge Silva', 'lockpick_raccoon', 4], 53004: ['Nora Wilson', 'anaconda_empress', 7],
-    53005: ['Robin Gordon', 'nightcourt', 5], 53006: ['David ONeill', 'drumbelly_tanuki', 7],
-    53007: ['Diego Miranda', 'nightcourt', 7], 53008: ['Hassan Ali', 'cliffhanger', 5],
+    53001: ['Declan Baumann', 'hushwolf', 8], 53002: ['Kieran Lorenz', 'cliffhanger', 4],
+    53003: ['Jorge Silva', 'lockpick_raccoon', 4], 53004: ['David Kim', 'hushwolf', 6],
+    53005: ['Robin Gordon', 'nightcourt', 5], 53006: ['Rosa Mendez', 'gallowdeer', 5],
+    53007: ['Diego Miranda', 'nightcourt', 7], 53008: ['Frank Giordano', 'sanjun', 5],
   };
   for (const [seed, [name, mid, day]] of Object.entries(roots)) {
     for (const [leg, run] of [['baseline', 'midshape-a-baseline'], ['candidate', 'midshape-a-candidate']]) {
