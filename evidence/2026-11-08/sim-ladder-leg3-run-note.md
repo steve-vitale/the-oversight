@@ -231,8 +231,18 @@ Gates:
   (mobile-combat-cadence, occupation-panels, phone-frame-proof,
   establishment-r20, same signatures as legs 1/2). No NEW attributable
   failure on that tree.
-- `node scripts/check.js --quick`, FINAL run (tip `ef0798108`, after the
-  second rebase + second refresh): [FILL IN — result, breakdown, log path.]
+- `node scripts/check.js --quick`, FINAL run (tip `ef0798108` + run-note
+  update `85334280a`, log `/tmp/check-quick-ladder-leg3-final2.log`):
+  **290 passed, 8 failed in 1247s**. The run shared the box with two sibling
+  gates (three check.js processes at launch; load 2–6). Breakdown:
+  - 4 pre-existing, same signatures as legs 1/2: mobile-combat-cadence,
+    occupation-panels, phone-frame-proof, establishment-r20.
+  - 3 load-artifact timeouts (120s), each verified green standalone:
+    trust-observer-neutrality 6/6, synergy-stall exit 0, capable-bot 42/42.
+  - 1 concurrent-gate artifact: measurement-cache-flags failed all 4 of its
+    assertions in-gate (its CLI panel runs share a cache with sibling gates)
+    but passes 4/4 standalone — verified twice (after each refresh).
+  No NEW attributable failure. L3-7 green.
 
 ## Commits (branch build-ladder-leg3, after the `a111b57f` rebase)
 - `33ff73553` prereg
@@ -248,7 +258,9 @@ Gates:
 - `e3122850a` run note (first version; updated below)
 - `1b45d44b6` panel National bar drops the repeated stage name + test
 - `ef0798108` second neutral-proof refresh after the `a111b57f` rebase
-- (run note — this file, final version — committed last, SHA in the final report)
+- `85334280a` run note update (second rebase, second refresh, panel fix)
+- (run note — this file, final version with the final gate — committed last,
+  SHA in the final report)
 
 ## House notes
 - Base moved twice before the build (journey-deepening r119, journey-succession
