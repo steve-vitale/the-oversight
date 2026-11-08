@@ -3,7 +3,10 @@ const path=require('path'),root=path.resolve(process.argv[2]||path.join(__dirnam
 (async()=>{
  const store=new Map();global.localStorage={getItem:k=>store.get(String(k))??null,setItem:(k,v)=>store.set(String(k),String(v)),removeItem:k=>store.delete(String(k)),key:i=>[...store.keys()][i]??null,get length(){return store.size;}};
  const G=await K.load({seed:7});let s,v,pg;
- function fresh(){G.tbfight=null;G.over=false;G.won=false;K.newRun(G);s=G.state.scholar;v=G.state.village;pg=G.progState();s.day=100;s.kcal=1800;s.health=100;s.integration=40;s.insideHaven=true;s.monster=null;G.playerTile().type='haven';G.state.systemArrived=true;G.state.networkLive=true;pg.arc=4;pg.tableWaiting=true;pg.tableDone=false;pg.table={};pg.sentimentTaught=true;pg.feastSurgeUsed=true;pg.crises={raid:true,illness:true};pg.deeds={wavesFaced:{},contestsSurvived:2};for(const[w,n]of [[1,4],[2,4],[3,3]])for(const m of G.data.monsters.filter(m=>m.wave===w).slice(0,n))pg.deeds.wavesFaced[m.id]=w;G.tablePreview();}
+ // LEG 2 (2026-11-08): fresh() ALSO rigs Village ladder standing (12 counted
+ // points: Fight 6 from a wave-3 ledger of 12 + Forage 6 from scholar field
+ // XP 72) so the lesser seat prices — the seat needs ladder peak >= 1 now.
+ function fresh(){G.tbfight=null;G.over=false;G.won=false;K.newRun(G);s=G.state.scholar;v=G.state.village;pg=G.progState();s.day=100;s.kcal=1800;s.health=100;s.integration=40;s.insideHaven=true;s.monster=null;G.playerTile().type='haven';G.state.systemArrived=true;G.state.networkLive=true;pg.arc=4;pg.tableWaiting=true;pg.tableDone=false;pg.table={};pg.sentimentTaught=true;pg.feastSurgeUsed=true;pg.crises={raid:true,illness:true};pg.deeds={wavesFaced:{},contestsSurvived:2};for(const[w,n]of [[1,4],[2,4],[3,3]])for(const m of G.data.monsters.filter(m=>m.wave===w).slice(0,n))pg.deeds.wavesFaced[m.id]=w;G.state.waveLedger={3:{points:12,perType:{},perTypeX:{}}};G.playerTracks().field.xp=72;G.tablePreview();}
  const source=K.readSrc('src/js/app.js'),start=source.indexOf('              try {',source.indexOf('// THE TABLE SEAT (Steve 2026-10-14)')),end=source.indexOf('              if (Game.state.pendingGlobal)',start);if(start<0||end<0)throw Error('Missing actual Haven Table block');
  const render=new Function('Game','esc','let html="";\n'+source.slice(start,end)+'\nreturn html;'),handler=source.split('\n').find(l=>l.includes("document.querySelectorAll('[data-table-seat]')"));if(!handler)throw Error('Missing actual seat binding');
  function bind(button){new Function('Game','document','refresh',handler)(G,{querySelectorAll:()=>[button]},()=>{});}
@@ -15,7 +18,8 @@ const path=require('path'),root=path.resolve(process.argv[2]||path.join(__dirnam
  const locked=G.tableState().endingKey;T.ok('second seat attempt cannot re-enter the committed story',G.tableTakeSeat().ok===false&&pg.tableDone&&locked&&G.tableState().endingKey===locked);
  G.save();const key=G.state.runKey;T.ok('real save/load retains committed Table ownership',G.load(key)&&G.progState().tableDone&&G.tableActive());
  fresh();s.day=89;T.ok('no preview or explanatory ending leak before day90',G.tablePreview()===null&&G.tableTakeSeat().ok===false&&G.tableTakeSeat().msg==='');
- fresh();pg.feastSurgeUsed=false;T.ok('food-use requirement remains a real entry gate',G.tablePreview()===null&&G.tableTakeSeat().ok===false&&!pg.tableDone);
+ fresh();pg.sentimentTaught=false;T.ok('keepsake-lesson requirement remains a real entry gate (leg 2: the lesson, not the surge, gates entry)',G.tablePreview()===null&&G.tableTakeSeat().ok===false&&!pg.tableDone);
+ fresh();pg.feastSurgeUsed=false;T.ok('an unspent feast surge does NOT gate entry (leg 2)',G.tablePreview()?.ready===true&&G.tableTakeSeat().ok===true);
  fresh();pg.tableWaiting=false;T.ok('ready deeds alone do not synthesize an invitation',G.tablePreview()===null&&G.tableTakeSeat().ok===false);
  fresh();s.insideHaven=false;T.ok('outside neural-stage bearer keeps a priced but unavailable preview',G.tablePreview()?.seat==='lesser'&&G.tablePreview()?.ready===false);blocked('outside native Haven access cannot seat',/Haven/);
  fresh();s.insideHaven=false;s.integration=80;T.ok('existing full-integration remote panel access stays valid',G.havenStoresAccess()==='remote'&&G.tablePreview()?.ready===true&&G.tableTakeSeat().ok===true);
