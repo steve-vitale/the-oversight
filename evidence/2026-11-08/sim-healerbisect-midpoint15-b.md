@@ -183,7 +183,7 @@ Sweep-corpus comparison, NOT a balanced-panel verdict: rows paired by policy+see
 - Require closure verified BEFORE the smoke: 17 files, none missing (driver + the 5 REPO-joined requires + their transitive set, including `stageally-instrument-20261106`, `bankkiller-instrument-20261105`, `killerdeath-instrument-20261105`, `competent`, `idle`, `vinebank`, `snareteach`, `conversation-pages`, `competent-feastdrive-b`, `competent-linkdrive-b`, `competent-linkfeast-b`). The smoke passed on the first try (0 errors).
 - Anchor reads `d229b58f5954` (the worktree tip) in every corpus JSON. The SHA under test is recorded here (`e6ddaf32a`), not inferred from the anchor.
 - Scratch dir `scratch-e6ddaf32a/` deleted before finishing (reproducible from `git archive`); prior runs' scratch dirs (`scratch-2bc17d793/`, `scratch-685dc9ec4/`, `scratch-bal/`) left as found.
-- The safe-commit index clobber did NOT hit this run (status clean after commit — verified below).
+- The safe-commit index clobber hit the evidence commit (13 files shown as D + ?? after a correct commit `769eaf93`); repaired via `git ls-tree -r HEAD -- <paths> | git update-index --add --index-info`, status clean, `git diff HEAD` empty — same class as the 0530Z/#14/#16 runs.
 
 ## Metric review
 
