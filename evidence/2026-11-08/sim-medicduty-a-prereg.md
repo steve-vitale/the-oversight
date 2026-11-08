@@ -218,6 +218,44 @@ run adds no new seeds and claims no freshness.
 
 (to be filled after the sweeps — verdict judged ONLY against this header)
 
+## AMENDMENT A1 (written BEFORE the duty is built and BEFORE any after-leg run, 2026-11-08 ~12:05Z)
+
+SUBSTRATE MOVE — the GO bar is unachievable on this base, and the
+before-leg baseline proves it. The prereg's GO bar (share ≥ 40%,
+absent-with-medic ≤ 15) was set from the medicdiag live leg (base
+a04a6c0fc: present 141 / absent 260, share 35.2%, addressable pool
+30, ceiling share 42.6%). The before leg on THIS base (76c16eeae,
+measured just now, all three recorders exit 0) gives a different
+baseline: present 113 / absent 346, share 24.6%, addressable pool 38,
+village-days 681 (vs 821), median survival 73d (vs 113d). The ceiling
+on this base is (113+38)/459 = 32.9% — a 40% share is mathematically
+impossible even with 100% pool capture. The bar was set in good faith
+from the best available numbers, but the substrate moved underneath
+it. This is a METRIC-BROKEN bar per MEASUREMENT.md §14a (a bar the
+pilot could not have passed regardless of the concept's merit), not a
+concept failure — and per §14b the bar must be set as a fraction of
+the pool, not an absolute pulled from nowhere.
+
+CORRECTED GO (same stringency as the original bar, expressed against
+the measured before-leg pool): the original (a) required flipping
+~19 of 30 addressable sick-days (63% capture); the original (b)
+required flipping ≥15 of 30 (50% capture). Preserving those
+fractions against the new pool of 38:
+- (a) after-leg present share ≥ 30% (before 24.6%, ceiling 32.9%;
+  requires flipping ~25 of 38, ~66% capture).
+- (b) after-leg absent-with-medic sick-days ≤ 19 (before 38;
+  requires flipping ≥19 of 38, 50% capture).
+UNCHANGED: guardrail thresholds G1–G4 (their before-leg baselines
+are now measured: median survival 73d → G1 needs ≥ 58.4d;
+starvation deaths 8 → G2 needs ≤ 10; produced/need 0.995 → G4
+needs ≥ 0.965; G3 new-cause rule unchanged). The secondary NULL
+PREDICTION on treatment coverage stands (before-leg treated share
+45.5%). The verdict is judged against THIS amended header. The
+original bar is preserved above for the audit trail; this amendment
+is a pre-registration correction made before any after-leg number
+exists, not a re-score — no duty code exists yet and no after-leg
+sweep has run.
+
 ## Metric review (post-run)
 
 (to be filled after the sweeps)
