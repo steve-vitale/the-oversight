@@ -239,7 +239,17 @@
     } catch (e) {}
     return false;
   }
-  function pantryDays(G) {
+  // Believed pantry days for THIS villager (objResourceBelief). Falls
+  // back to the live estimate only when the belief helper is absent —
+  // never prefer live over a stored away/stale belief.
+  function pantryDays(G, vid) {
+    try {
+      if (G.objResourceBelief && vid) {
+        var b = G.objResourceBelief(vid) || {};
+        if (b.unknown) return null;
+        if (typeof b.pantryDays === 'number' && isFinite(b.pantryDays)) return b.pantryDays;
+      }
+    } catch (e) {}
     try {
       if (G.pantryDaysEstimate) {
         var d = G.pantryDaysEstimate();
@@ -274,7 +284,7 @@
       case 'bank_veterans': return ownW4Kill(G, vid) ? 0 : (foughtAny(G, vid) ? 1 : 0);
       case 'build_standing': return loreCount(G, vid) >= 1 ? 1 : 0;
       case 'food_security': {
-        var pd = pantryDays(G);
+        var pd = pantryDays(G, vid);
         if ((pd != null && pd < 3) || (needs.hunger || 0) > 55) return 1;
         return 0.4;
       }

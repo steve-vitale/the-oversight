@@ -1668,13 +1668,32 @@
       } catch (e) {}
       if (!need) {
         try {
-          const water = (v.water || {}).clean || 0;
-          if (water < 10) {
+          // Village-resource favor scan — believed pantry/cistern for THIS
+          // speaker (VILLAGER-BRAIN seam 4). Away/stale belief never spies
+          // live totals; unknown belief skips the village-need favor.
+          let water = null;
+          let kcal = null;
+          let rosterN = (v.roster || []).length || 1;
+          let fromBelief = false;
+          if (typeof this.objResourceBelief === 'function') {
+            const bel = this.objResourceBelief(vid) || {};
+            fromBelief = true;
+            if (bel.unknown) {
+              water = null; kcal = null;
+            } else {
+              water = (typeof bel.waterClean === 'number') ? bel.waterClean : null;
+              kcal = (typeof bel.pantryKcal === 'number') ? bel.pantryKcal : null;
+              if (typeof bel.rosterN === 'number' && bel.rosterN > 0) rosterN = bel.rosterN;
+            }
+          }
+          if (!fromBelief) {
+            water = (v.water || {}).clean || 0;
+            kcal = typeof this.pantryKcalLive === 'function' ? this.pantryKcalLive(v) : (v.pantryKcal || 0);
+          }
+          if (water != null && water < 10) {
             need = { kind: 'water_haul', urgency: 3, water };
-          } else {
-            const kcal = typeof this.pantryKcalLive === 'function' ? this.pantryKcalLive(v) : (v.pantryKcal || 0);
-            const rosterN = (v.roster || []).length || 1;
-            if (kcal < rosterN * 4000) need = { kind: 'forage_help', urgency: 2, kcal };
+          } else if (kcal != null && kcal < rosterN * 4000) {
+            need = { kind: 'forage_help', urgency: 2, kcal };
           }
         } catch (e) {}
       }

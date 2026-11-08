@@ -9,6 +9,8 @@
 //   - objNeedsEmergencyPick(vid)
 //   - objDanger(vid, tx, ty, hx, hy)
 //   - objDangerBelief(vid)
+//   - objResourceBelief(vid)
+//   - objResourceSee(vid)
 //   - objMaybeDepart(rid, node, atHaven, hx, hy)
 //   - objAwayStep(rid, node, away, hx, hy)
 //   - objAskCompanion(vid, obj, hx, hy, opts)
@@ -21,6 +23,7 @@
 //   - night_departure_ban: nobody sets out at night, hard rule kept from base (code: villager-objectives.js)
 //   - danger_gates_departure: every departure verdicts go / ask / tighten / defer via objDanger (code: villager-objectives.js)
 //   - danger_heard_filtered: door, rally and safety all read danger through objDangerBelief — gossip counts only if this villager is in its heard list (code: villager-objectives.js, VILLAGER-BRAIN seam 4)
+//   - resource_belief_filtered: food-security / FORAGE / WATER / village-resource favors read pantry+cistern through objResourceBelief — away/stale belief never uses live totals (code: villager-objectives.js, VILLAGER-BRAIN seam 4)
 //   - heal_gates_departure: objective departures get the expedition 70-HP heal check (pharmacy -> healer -> sit-out, one verdict/villager/day); LEAVE is exempt from the sit-out (code: villager-objectives.js, game.js, departure heal gate 2026-10-13)
 //   - return_names_are_honest: objective-return copy names the found one via _repName — a stranger descriptor ("A person, maybe 40s") is used whole, never its first word ("found A" read broken). (code: villager-objectives.js, travel lever r4 2026-10-12)
 //   - bark_armor_teach: a villager WEARING bark armor teaches the player its recipe L1 on return (trust 15+, player at haven, once per teacher) — the snare-lesson pattern for the occupation lottery's armor. (code: villager-objectives.js, 2026-10-13)
@@ -365,8 +368,14 @@
         try { if (typeof this.vbrainLogGate === 'function') this.vbrainLogGate(vid, 'REST', 'low_energy', { energy: n.energy }); } catch (e) {}
         return o;
       }
+      // Believed pantry/cistern (VILLAGER-BRAIN seam 4): at haven this
+      // refreshes from what they see; while away it freezes at last-seen.
+      // Never a live global read for an away/stale villager.
+      var resBelief = null;
+      try { resBelief = this.objResourceBelief ? this.objResourceBelief(vid) : null; } catch (e) {}
       var pantry = 0;
-      try { pantry = this.pantryKcalLive(v); } catch (e) {}
+      if (resBelief && typeof resBelief.pantryKcal === 'number') pantry = resBelief.pantryKcal;
+      else { try { pantry = this.pantryKcalLive(v); } catch (e) {} }
       // EAT — hungry and the pantry has food: go eat. Indoor, at the fire.
       // (meals-like-people 2026-10-08: hunger is a real need now, driven by
       // real individual meals in villageEats — the EAT objective is the
@@ -422,18 +431,23 @@
       try { needTrack = this.villagerNeedTrack ? this.villagerNeedTrack(vid) : null; } catch (e) { console.warn('[objectives] needTrack', e); }
       // DESIGNCALL 7 (2026-10-16): thirst measured in days of village supply.
       // The village shares one cistern (villageDrinks: 2L/head/day) — this is
-      // the honest signal, not a per-villager thirst stat.
+      // the honest signal, not a per-villager thirst stat. Believed via
+      // objResourceBelief so an away villager does not spy the live cistern.
       var waterDays = 99;
-      try {
-        var _wliv = 0;
-        for (var _wli = 0; _wli < (v.roster || []).length; _wli++) {
-          var _wvp = this.vpOf((v.roster || [])[_wli]);
-          if (_wvp && !_wvp.dead) _wliv++;
-        }
-        var _wdem = 2 * Math.max(1, _wliv);
-        var _wsup = ((v.water || {}).clean || 0) + ((v.water || {}).dirty || 0);
-        waterDays = _wsup / _wdem;
-      } catch (e) {}
+      if (resBelief && typeof resBelief.waterDays === 'number' && isFinite(resBelief.waterDays)) {
+        waterDays = resBelief.waterDays;
+      } else {
+        try {
+          var _wliv = 0;
+          for (var _wli = 0; _wli < (v.roster || []).length; _wli++) {
+            var _wvp = this.vpOf((v.roster || [])[_wli]);
+            if (_wvp && !_wvp.dead) _wliv++;
+          }
+          var _wdem = 2 * Math.max(1, _wliv);
+          var _wsup = ((v.water || {}).clean || 0) + ((v.water || {}).dirty || 0);
+          waterDays = _wsup / _wdem;
+        } catch (e) {}
+      }
       var cands = [];
       // DORMANT MOTIVATIONS (rogue P1, audit Talk 2 P2-2): the 11 generated
       // goals with no objPick voice now bias the lottery as visible weights
@@ -905,6 +919,132 @@
     // needle. Verdicts: go / ask (bring someone) / tighten (short errand
     // only) / defer (stay).
     //
+    // objResourceLiveSnap — live pantry kcal + cistern days, no write.
+    // Perception writers (objResourceSee / at-haven belief refresh) copy
+    // this into the per-villager belief store; away readers never call it.
+    objResourceLiveSnap() {
+      var v = this.state.village || {};
+      var pantryKcal = 0;
+      try { pantryKcal = this.pantryKcalLive ? this.pantryKcalLive(v) : 0; } catch (e) { pantryKcal = 0; }
+      var pantryDays = null;
+      try {
+        if (this.pantryDaysEstimate) {
+          var pd = this.pantryDaysEstimate();
+          if (typeof pd === 'number' && isFinite(pd)) pantryDays = pd;
+        }
+      } catch (e) {}
+      var waterClean = 0, waterDirty = 0;
+      try {
+        waterClean = ((v.water || {}).clean || 0);
+        waterDirty = ((v.water || {}).dirty || 0);
+      } catch (e) {}
+      var waterSupply = waterClean + waterDirty;
+      var liv = 0;
+      try {
+        for (var i = 0; i < (v.roster || []).length; i++) {
+          var vp = this.vpOf((v.roster || [])[i]);
+          if (vp && !vp.dead) liv++;
+        }
+      } catch (e) {}
+      var rosterN = Math.max(1, liv || ((v.roster || []).length) || 1);
+      var waterDays = waterSupply / (2 * rosterN);
+      return {
+        pantryKcal: pantryKcal,
+        pantryDays: pantryDays,
+        waterClean: waterClean,
+        waterDirty: waterDirty,
+        waterSupply: waterSupply,
+        waterDays: waterDays,
+        rosterN: rosterN,
+      };
+    },
+    // objResourceSee(vid) — perception write: this villager saw the bins
+    // and cistern (at haven, or freezing the view on departure). Writer
+    // rule: only perception / lived-event code may write belief.
+    objResourceSee(vid) {
+      if (!vid) return null;
+      var day = 0;
+      try { day = this.state.scholar.day; } catch (e) {}
+      var snap = this.objResourceLiveSnap();
+      var v = this.state.village;
+      v.resourceBelief = v.resourceBelief || {};
+      var bel = {
+        pantryKcal: snap.pantryKcal,
+        pantryDays: snap.pantryDays,
+        waterClean: snap.waterClean,
+        waterDirty: snap.waterDirty,
+        waterSupply: snap.waterSupply,
+        waterDays: snap.waterDays,
+        rosterN: snap.rosterN,
+        seenDay: day,
+      };
+      v.resourceBelief[vid] = bel;
+      return bel;
+    },
+    // objResourceBelief(vid) — ONE believed pantry/cistern read
+    // (VILLAGER-BRAIN seam 4 remainder). Food-security gate, FORAGE/WATER
+    // urgency, and village-resource favors consume this. At haven: see
+    // live and refresh the store. Away / forced-stale: last-seen only —
+    // never live globals. Unknown (never seen) fails closed: no village
+    // resource urgency invented from omniscience.
+    objResourceBelief(vid) {
+      var day = 0;
+      try { day = this.state.scholar.day; } catch (e) {}
+      var away = false;
+      try { away = !!((this.state.village.away || {})[vid]); } catch (e) {}
+      // Test / call-site seam: force a stale read without inventing away.
+      var forceStale = false;
+      try { forceStale = !!(this._resourceBeliefForceStale && this._resourceBeliefForceStale[vid]); } catch (e) {}
+      if (!away && !forceStale) {
+        var seen = null;
+        try { seen = this.objResourceSee(vid); } catch (e) {}
+        if (!seen) {
+          return {
+            pantryKcal: null, pantryDays: null, waterClean: null, waterDirty: null,
+            waterSupply: null, waterDays: null, rosterN: null,
+            seenDay: null, staleDays: null, fromLive: false, unknown: true,
+          };
+        }
+        return {
+          pantryKcal: seen.pantryKcal,
+          pantryDays: seen.pantryDays,
+          waterClean: seen.waterClean,
+          waterDirty: seen.waterDirty,
+          waterSupply: seen.waterSupply,
+          waterDays: seen.waterDays,
+          rosterN: seen.rosterN,
+          seenDay: seen.seenDay,
+          staleDays: 0,
+          fromLive: true,
+          unknown: false,
+        };
+      }
+      var stored = null;
+      try { stored = ((this.state.village.resourceBelief || {})[vid]) || null; } catch (e) {}
+      if (!stored) {
+        return {
+          pantryKcal: null, pantryDays: null, waterClean: null, waterDirty: null,
+          waterSupply: null, waterDays: null, rosterN: null,
+          seenDay: null, staleDays: null, fromLive: false, unknown: true,
+        };
+      }
+      var staleDays = day - (stored.seenDay || day);
+      if (staleDays < 0) staleDays = 0;
+      return {
+        pantryKcal: stored.pantryKcal,
+        pantryDays: stored.pantryDays,
+        waterClean: stored.waterClean,
+        waterDirty: stored.waterDirty,
+        waterSupply: stored.waterSupply,
+        waterDays: stored.waterDays,
+        rosterN: stored.rosterN,
+        seenDay: stored.seenDay,
+        staleDays: staleDays,
+        fromLive: false,
+        unknown: false,
+      };
+    },
+
     // objDangerBelief(vid) — ONE heard-filtered danger read (VILLAGER-BRAIN
     // seam 4 / game-gaps item 2). Door (objDanger), village danger
     // (objVillageDanger), rally (objRallyFreshRaid) and the safety drive
@@ -1086,6 +1226,9 @@
       this.npcSetNode(vid, obj.tx, obj.ty);
       try { this.npcSetInside(vid, false); } catch (e) {}
       v.away = v.away || {};
+      // Freeze pantry/cistern belief at departure — last seen before they
+      // walk out. Writer is perception (they just saw the bins at haven).
+      try { if (this.objResourceSee) this.objResourceSee(vid); } catch (e) {}
       v.away[vid] = {
         nx: obj.tx, ny: obj.ty, purpose: obj.purpose,
         sinceDay: s.day, sincePart: this.dayPart, duration: obj.partsLeft,

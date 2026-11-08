@@ -2041,7 +2041,7 @@ Villager map memory + cross-node objectives. Villagers remember resource sites o
 ### villager-objectives (`villager-objectives.js`)
 Villager objective AI. Villagers pursue objectives instead of drifting randomly.
 
-**Provides:** objState(), objOf(vid), objPick(vid, hx, hy), objRefreshPick(vid, hx, hy, opts), objNeedsEmergencyPick(vid), objDanger(vid, tx, ty, hx, hy), objDangerBelief(vid), objMaybeDepart(rid, node, atHaven, hx, hy), objAwayStep(rid, node, away, hx, hy), objAskCompanion(vid, obj, hx, hy, opts), objRallyFreshRaid(vid), objTick(), objHealGate(vid, obj, hx, hy, playerAtHaven)
+**Provides:** objState(), objOf(vid), objPick(vid, hx, hy), objRefreshPick(vid, hx, hy, opts), objNeedsEmergencyPick(vid), objDanger(vid, tx, ty, hx, hy), objDangerBelief(vid), objResourceBelief(vid), objResourceSee(vid), objMaybeDepart(rid, node, atHaven, hx, hy), objAwayStep(rid, node, away, hx, hy), objAskCompanion(vid, obj, hx, hy, opts), objRallyFreshRaid(vid), objTick(), objHealGate(vid, obj, hx, hy, playerAtHaven)
 
 **Rules:**
 - objectives_drive_departures: npcNodeTravel's old dice triggers are replaced by objMaybeDepart (code: villager-objectives.js)
@@ -2049,6 +2049,7 @@ Villager objective AI. Villagers pursue objectives instead of drifting randomly.
 - night_departure_ban: nobody sets out at night, hard rule kept from base (code: villager-objectives.js)
 - danger_gates_departure: every departure verdicts go / ask / tighten / defer via objDanger (code: villager-objectives.js)
 - danger_heard_filtered: door, rally and safety all read danger through objDangerBelief — gossip counts only if this villager is in its heard list (code: villager-objectives.js, VILLAGER-BRAIN seam 4)
+- resource_belief_filtered: food-security / FORAGE / WATER / village-resource favors read pantry+cistern through objResourceBelief — away/stale belief never uses live totals (code: villager-objectives.js, VILLAGER-BRAIN seam 4)
 - heal_gates_departure: objective departures get the expedition 70-HP heal check (pharmacy -> healer -> sit-out, one verdict/villager/day); LEAVE is exempt from the sit-out (code: villager-objectives.js, game.js, departure heal gate 2026-10-13)
 - return_names_are_honest: objective-return copy names the found one via _repName — a stranger descriptor ("A person, maybe 40s") is used whole, never its first word ("found A" read broken). (code: villager-objectives.js, travel lever r4 2026-10-12)
 - bark_armor_teach: a villager WEARING bark armor teaches the player its recipe L1 on return (trust 15+, player at haven, once per teacher) — the snare-lesson pattern for the occupation lottery's armor. (code: villager-objectives.js, 2026-10-13)
