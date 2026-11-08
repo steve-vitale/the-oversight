@@ -17,8 +17,8 @@
 // by this driver — left null, never faked). All other contract
 // metrics are null (not observed by this instrument).
 // Usage: node scripts/build-trialcombat-panels-20261107.js [--out evidence/2026-11-08/trialcombat-panel]
-//   Reads evidence/2026-11-08/perseed-trialcombat-b-baseline/trialcombat-b-s<seed>-trialcombat-baseline.json
-//   for the before leg and perseed-trialcombat-b-armed/trialcombat-b-s<seed>-trialcombat-armed.json
+//   Reads evidence/2026-11-08/perseed-trialcombat-b-baseline/trialcombat-b-s<seed>-trialcombat-pilot-baseline.json
+//   for the before leg and perseed-trialcombat-b-armed/trialcombat-b-s<seed>-trialcombat-pilot-armed.json
 //   for the after leg.
 'use strict';
 const fs = require('fs');
@@ -89,8 +89,8 @@ function buildPanel(rows) {
 }
 
 function main() {
-  const beforeRows = load('perseed-trialcombat-b-baseline', 'trialcombat-baseline');
-  const afterRows = load('perseed-trialcombat-b-armed', 'trialcombat-armed');
+  const beforeRows = load('perseed-trialcombat-b-baseline', 'trialcombat-pilot-baseline');
+  const afterRows = load('perseed-trialcombat-b-armed', 'trialcombat-pilot-armed');
   const beforePath = OUT_PREFIX + '-before.json.gz';
   const afterPath = OUT_PREFIX + '-after.json.gz';
   fs.writeFileSync(beforePath, zlib.gzipSync(JSON.stringify(buildPanel(beforeRows)) + '\n'));
