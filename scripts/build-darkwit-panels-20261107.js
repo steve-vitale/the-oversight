@@ -40,12 +40,15 @@ const contractDigest = crypto.createHash('sha256')
 const contract = require('./balance-metrics.json');
 
 const SEEDS = PILOT
-  ? [53201, 53202, 53203, 53204, 53205, 53206, 53207, 53208]
+  ? [53701, 53702, 53703, 53704, 53705, 53706, 53707, 53708]
   : [53201, 53202, 53203, 53204, 53205, 53206, 53207, 53208, 53209, 53210, 53211, 53212];
-const BASE_DIR = PILOT ? 'perseed-darkwit-b-pilot-baseline' : 'perseed-darkwit-b-baseline';
-const ARMED_DIR = PILOT ? 'perseed-darkwit-b-pilot-armed' : 'perseed-darkwit-b-armed';
-const BASE_RUN = PILOT ? 'darkwit-pilot-baseline' : 'darkwit-baseline';
-const ARMED_RUN = PILOT ? 'darkwit-pilot-armed' : 'darkwit-armed';
+// The judged pilot ran on the FRESH fallback band (the 53201 band
+// failed substrate sanity — see the prereg band note), so the pilot
+// corpora live in the -fresh dirs under the -53701 run names.
+const BASE_DIR = PILOT ? 'perseed-darkwit-b-pilot-baseline-fresh' : 'perseed-darkwit-b-baseline';
+const ARMED_DIR = PILOT ? 'perseed-darkwit-b-pilot-armed-fresh' : 'perseed-darkwit-b-armed';
+const BASE_RUN = PILOT ? 'darkwit-pilot-baseline-53701' : 'darkwit-baseline';
+const ARMED_RUN = PILOT ? 'darkwit-pilot-armed-53701' : 'darkwit-armed';
 const POLICIES = ['darkwit']; // pseudo-policy: case identity is the seed (paired design)
 const DAYS = 150;
 const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
