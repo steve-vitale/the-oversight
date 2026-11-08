@@ -238,6 +238,19 @@ Call-for-help chain (4 tiers) + the switchboard OFFICE — the mechanical core o
 
 **Consumes:** linkWith(), hierarchyState(), villageLinks(), _otherVillage(), _linkNote(), _nudgeOpinion(), scaleRank(), knowsVillage(), fieldFight(), tickAction(), say(), sysSay(), displayName(), isMember(), npcTemper(), repOf(), registerDeath(), leadShift(), integrationStage(), hasAbility(), genNameForOrigin(), journalNote(), _removePantryKcal(), state.aidCrisis, state.aidRunners, state.pendingHelp, state.switchboard, state.systemFavorsOwed
 
+### companion-score (`companion-score.js`)
+One shared companionScore for who to spend time with — door ask, party launch pick, and favor-company partner preference. Eligibility filters stay at call sites; ranking is this formula only (VILLAGER-BRAIN Phase 4 residual / OVE-54).
+
+**Provides:** companionScore(askerVid, candidateVid, opts) -> number, companionRank(askerVid, candidateVids, opts) -> [{id, s}, ...] sorted best-first
+
+**Rules:**
+- companion_one_score: door (objAskCompanion), party path (findCompanion), and favor-company partner scoring all rank through companionScore — no parallel private formulas for the same decision (code: companionScore, VILLAGER-BRAIN Phase 4)
+- companion_eligibility_elsewhere: trip distance, sick, alone, rally-only, ranger profile, engaged/away gates stay at the caller; this helper only scores (code: companionScore)
+- companion_relationship_reads: ranking prefers personTrustOf and pairAffinity when present; scholar-trust (state.village.trust) remains a transitional signal so early panels stay readable (code: companionScore)
+- companion_no_rng: score is a pure read — no Math.random, no writes (code: companionScore, companionRank)
+
+**Consumes:** objOf (villager-objectives.js), npcTemper, npcNeeds (game.js), personTrustOf (person-trust.js) — optional, pairAffinity (betrayal.js) — optional, state.village.trust
+
 ### contest-engine (`contestEngine.js`)
 Real off-screen contest resolution for villager contestants. Every category resolves through a real process with the contestant's real stats — fights are fought (fieldFights.js), moots are argued (social stats, rounds), ordeals are endured (costs paid from real reserves). Never a single outcome table. (Steve 2026-10-08: "contests are to be played, not as RNG.")
 
@@ -661,15 +674,16 @@ The village's memorial roll — v.fallen as readable fiction. Every ordinary dea
 ### favor-company (`favor-company.js`)
 A specific night by a shared fire, with physical attendance, saved progress and an exact promise receipt.
 
-**Provides:** companyFavorCommitGate(vid, favor), companyFavorAction(vid, favor), performCompanyFavor(vid, favor, cancel), companyFavorHolding(vid), companyFavorWaiting(vid), companyFavorReceipt(vid, favor, opts), companyFavorDeadline(favor), companyFavorOpening(vid, favor), companyMeetingStep(), migrateCompanyFavors()
+**Provides:** companyFavorCommitGate(vid, favor), companyFavorAction(vid, favor), performCompanyFavor(vid, favor, cancel), companyFavorHolding(vid), companyFavorWaiting(vid), companyFavorReceipt(vid, favor, opts), companyFavorDeadline(favor), companyFavorOpening(vid, favor), companyPartnerScore(vid, partnerVid?) -> number, companyMeetingStep(), migrateCompanyFavors()
 
 **Rules:**
 - physical_night: only actual paid clock intervals beside the same person and fire count; generic social events and direct day jumps cannot keep this promise (code: accrue, finish)
 - tonight: new promises expire at the agreed dawn; previously unavailable saved commitments receive one explicit fair meeting night (code: companyFavorCommitGate, migrateCompanyFavors)
 - no_teleport: the requester walks a legal grid step toward the fire and stays on their actual side of the door; work orders take priority (code: companyMeetingStep, companyFavorHolding)
 - canonical_time: normal world clock and Sleep costs remain; company adds no food or healing, and both awake presence and nearby sleep count (code: performCompanyFavor, install)
+- company_partner_shared_score: partner preference ranks through companionScore — same formula as door ask and party launch (code: companyPartnerScore, companion-score.js, VILLAGER-BRAIN Phase 4)
 
-**Consumes:** state.village, state.scholar, tickAction(n), checkPromises(kind, vid, opts), journalFavorPromise(vid, promise, opts)
+**Consumes:** state.village, state.scholar, tickAction(n), checkPromises(kind, vid, opts), journalFavorPromise(vid, promise, opts), companionScore (companion-score.js)
 
 ### favor-forage (`favor-forage.js`)
 Joint foraging outings for a promised pantry run: travel together, forage the same patch, split the haul, talk, bring both shares home.
@@ -2060,8 +2074,9 @@ Villager objective AI. Villagers pursue objectives instead of drifting randomly.
 - return_to_fight: a villager who fought a living world monster remembers the fight's tile, and only that villager may be offered a HUNT errand back to it (fresh memory, armed, in range, existing departure gates still apply). No villager is ever routed to a monster tile nobody fought on — knowledge gates the route, never a radar. (code: villager-objectives.js, game.js resolveWildMonsterEncounter, 2026-10-27)
 - rally_guard: on a 'go'-verdict departure within 3 days of raid gossip, a protect/prove/lead villager at haven may volunteer as GUARD via objAskCompanion (rallyOnly) — the danger check alone would send the principal out solo. Same solo/HUNT exclusions and heal gates as the 'ask' path; games without a fresh raid still skip the ask (no invite rolls). (code: villager-objectives.js, win-drives 2026-11-03)
 - companion_no_cross_write: objAskCompanion never writes another villager's objective — the GUARD offer is advertised to the companion, npcInviteDecision (kind 'lure') accepts or refuses, and only on accept does objCommitGuardOffer write the companion's OWN objective (code: objAskCompanion, objCommitGuardOffer, VILLAGER-BRAIN Phase 4)
+- companion_shared_score: door companion ranking uses companionScore / companionRank — same formula as party path and favor-company (code: objAskCompanion, companion-score.js, VILLAGER-BRAIN Phase 4)
 
-**Consumes:** village.roster, village.away, village.nodePos, village.gossip, npcNode, npcSetNode, npcInside, npcSetInside, npcTemper, npcGoal, npcNeeds, npcRangeProfile, npcMaxDist (villager-agency.js), agencyState, npcInviteDecision (betrayal.js) — companion accept/refuse arbiter
+**Consumes:** village.roster, village.away, village.nodePos, village.gossip, npcNode, npcSetNode, npcInside, npcSetInside, npcTemper, npcGoal, npcNeeds, npcRangeProfile, npcMaxDist (villager-agency.js), agencyState, npcInviteDecision (betrayal.js) — companion accept/refuse arbiter, companionScore, companionRank (companion-score.js) — shared door ranking
 
 ### voice-piper (`voice-piper.js`)
 Spoken villager dialogue via Piper TTS (open-source neural TTS, MIT voices). Piper runs in-browser through @mintplex-labs/piper-tts-web (ONNX Runtime Web + espeak-ng WASM); voice models are lazy-loaded packs cached in Origin Private File System, never in the base bundle. Each generated villager gets a deterministic voice profile from their person record (sex/age/temperament + id hash) so the same villager always sounds like themselves. Web Speech API is the fallback when packs aren't cached yet. Playback routes through the existing Game.audio graph (one unlock flow, one mute). Foreign-language lines are never voiced ("if you don't know, it doesn't show").

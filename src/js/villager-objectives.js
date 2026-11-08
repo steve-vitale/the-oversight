@@ -31,11 +31,13 @@
 //   - return_to_fight: a villager who fought a living world monster remembers the fight's tile, and only that villager may be offered a HUNT errand back to it (fresh memory, armed, in range, existing departure gates still apply). No villager is ever routed to a monster tile nobody fought on — knowledge gates the route, never a radar. (code: villager-objectives.js, game.js resolveWildMonsterEncounter, 2026-10-27)
 //   - rally_guard: on a 'go'-verdict departure within 3 days of raid gossip, a protect/prove/lead villager at haven may volunteer as GUARD via objAskCompanion (rallyOnly) — the danger check alone would send the principal out solo. Same solo/HUNT exclusions and heal gates as the 'ask' path; games without a fresh raid still skip the ask (no invite rolls). (code: villager-objectives.js, win-drives 2026-11-03)
 //   - companion_no_cross_write: objAskCompanion never writes another villager's objective — the GUARD offer is advertised to the companion, npcInviteDecision (kind 'lure') accepts or refuses, and only on accept does objCommitGuardOffer write the companion's OWN objective (code: objAskCompanion, objCommitGuardOffer, VILLAGER-BRAIN Phase 4)
+//   - companion_shared_score: door companion ranking uses companionScore / companionRank — same formula as party path and favor-company (code: objAskCompanion, companion-score.js, VILLAGER-BRAIN Phase 4)
 // consumes:
 //   - village.roster, village.away, village.nodePos, village.gossip
 //   - npcNode, npcSetNode, npcInside, npcSetInside, npcTemper, npcGoal, npcNeeds
 //   - npcRangeProfile, npcMaxDist (villager-agency.js), agencyState
 //   - npcInviteDecision (betrayal.js) — companion accept/refuse arbiter
+//   - companionScore, companionRank (companion-score.js) — shared door ranking
 /* VILLAGER OBJECTIVES — src/js/villager-objectives.js
  *
  * Steve (2026-10-08): "people don't ever seem to leave haven. They shouldn't
@@ -1190,22 +1192,27 @@
         var cmax = 1;
         try { cmax = Math.max(1, this.npcMaxDist(id)); } catch (e) {}
         if (tripDist > cmax) continue;
-        var co = this.objOf(id);
+        // Ranking is one shared companionScore (OVE-54) — eligibility
+        // filters above stay local; no private door formula.
         var s = 0;
-        if (co && !co.indoor && co.state === 'ready' && co.kind !== 'LEAVE') s += 4; // their own errand — natural pair
-        var t = 'steady';
-        try { t = this.npcTemper(id); } catch (e) {}
-        if (t === 'bold' || t === 'warm') s += 2;
-        var tr = 0;
-        try { tr = (v.trust || {})[id] || 0; } catch (e) {}
-        if (tr > 40) s += 1;
-        var nn = null;
-        try { nn = this.npcNeeds(id); } catch (e) {}
-        if (nn && (nn.social || 0) > 65) s += 1;
+        try {
+          s = this.companionScore
+            ? this.companionScore(vid, id, { context: 'door' })
+            : 0;
+        } catch (e) { s = 0; }
         if (s > 0) cands.push({ id: id, s: s });
       }
       if (!cands.length) return null;
-      cands.sort(function (a, b) { return b.s - a.s; });
+      // companionRank tie-breaks by id so door/party/company agree.
+      try {
+        if (this.companionRank) {
+          cands = this.companionRank(vid, cands.map(function (c) { return c.id; }), { context: 'door' });
+        } else {
+          cands.sort(function (a, b) { return b.s - a.s; });
+        }
+      } catch (e) {
+        cands.sort(function (a, b) { return b.s - a.s; });
+      }
       // Advertise the GUARD offer (terms the companion's arbiter weighs).
       // Walk ranked candidates: each decides via npcInviteDecision; a
       // refuse leaves that villager's objective untouched.
