@@ -5,14 +5,22 @@
 // THE BLANK: a fusion-reactor bearer can never mark feastSurgeUsed —
 // grantFeastBuff refuses while the reactor is online ("the engine that never
 // hungers never feasts"), and the pellet never comes out ("death is the only
-// uninstall"). So the lesser seat's food-thesis deed is permanently
-// uncompletable for that bearer: Arc IV never fires, the table never comes,
-// and the run sits at arc 3 in silence. Measured: seed 8907, 190 days,
-// national, 24 contests, 4 crises, stage 3 — zero table beats.
+// uninstall"). Measured: seed 8907, 190 days, national, 24 contests, 4
+// crises, stage 3 — zero table beats.
 //
 // RED (before the fix): checkArc on such a run says nothing about the table.
 // GREEN (after): it says the pellet's price aloud exactly once, naming the
 // missing deeds, and never repeats itself.
+//
+// LEG 2 (2026-11-08) PREMISE UPDATE: foodDeeds is sentimentTaught alone
+// now, so the lesson being taught means the food deed IS complete for
+// this bearer — the surge is no longer a seat bar and the pellet no
+// longer blocks the seat on food deeds. The seat here prices 'none'
+// because the standing is village (the lesser seat wants regional+),
+// while the ladder is already met (peak 1, from the codex breadth);
+// the beat's miss list names that true bar, and the pellet quote is
+// the "what it banked stands" variant since foodDeeds is true.
+// (The pellet-pass lane owns the pellet story itself.)
 //
 // Usage: node scripts/test-table-reactor-seat-honesty-20261017.js
 'use strict';
@@ -42,7 +50,9 @@ async function main() {
   }
   const pg = Game.progState();
   pg.crises = { 'first-grave': 1, 'hunger-winter': 1 };
-  pg.sentimentTaught = true; // the lesson fired; only the surge is blocked
+  pg.sentimentTaught = true; // the lesson fired, so foodDeeds is true —
+  // the surge is no longer a seat bar (leg 2); the pellet does not block
+  // the seat on food deeds any more.
   // breadth >= 12 for arc 3
   Game.state.codex = Game.state.codex || {};
   Game.state.codex.plants = Game.state.codex.plants || {};
@@ -52,9 +62,17 @@ async function main() {
   d.wavesFaced = { a: 1, b: 1, c: 1, e: 1, f: 2, g: 2, h: 2, i: 2, j: 3, k: 3, l: 3 };
   d.contestsSurvived = 3;
   Game.state.contestsHeld = 1; // deedDone for arc 2 (baseBreadth anchors on first checkArc)
-  // seat must price 'none' (the food deed is the blocker)
+  // Seat must price 'none' — the blocker here is SCALE (village rank;
+  // the lesser seat wants regional+), not the food deed: the village
+  // already holds Village Standing (ladder peak 1) from the codex breadth.
   const seat = Game.tableSeat();
   if (!seat || seat.seat !== 'none') fail('setup: expected seat none, got ' + JSON.stringify(seat && seat.seat));
+  if (!seat.detail || seat.detail.foodDeeds !== true) fail('setup: foodDeeds must be true with sentimentTaught alone (surge unspent): ' + JSON.stringify(seat && seat.detail));
+  ok('foodDeeds is true with sentimentTaught alone (surge unspent)');
+  if (!seat.detail || seat.detail.rank !== 'village') fail('setup: the blocker must be the scale (village rank): ' + JSON.stringify(seat && seat.detail));
+  ok('the blocker is the scale (village rank), not the food deed');
+  if (!seat.detail || seat.detail.ladderPeakStage !== 1) fail('setup: the ladder must already be met (peak 1): ' + JSON.stringify(seat && seat.detail));
+  ok('the ladder is already met (peak 1)');
 
   // ---- RED/GREEN ----
   const beatLines = () => lines.filter(t => /PELLET HUMS|COLD SPOT AT EVERY TABLE/.test(t));
