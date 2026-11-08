@@ -24,7 +24,7 @@
 //   - feast_surge_gate: 3 abilities at L3 (mastery lane) OR surgeResonance>=35 (code: progression.js — channelSentiment; devotion lane fed by gainAbilityXP/unlockSynergy; rework 2026-10-10 — 3-mastered fired 0/180)
 //   - arc2_deed: true (code: progression.js — checkArc requires breadth>=6 or a held contest; the beat text is honest again)
 //   - arc3_crucible: 2 crisis kinds (code: progression.js — checkArc; grave-first runs get the acknowledgment line)
-//   - arc4_deed_gate: true (code: progression.js — checkArc; Steve 2026-10-10: no knowledge gate — the table needs EVERY wave fought (5/5/4/3/2 distinct per wave 1-5), 3+ contests survived, scaleRank national+, 3+ crises; sentimentTaught + feastSurgeUsed + stage>=3 kept; retuned 2026-10-10 for the ~100-day target)
+//   - arc4_deed_gate: true (code: progression.js — checkArc; Steve 2026-10-10: no knowledge gate — the table needs EVERY wave fought (5/5/4/3/2 distinct per wave 1-5), 3+ contests survived, scaleRank national+, 3+ crises; sentimentTaught + stage>=3 kept; retuned 2026-10-10 for the ~100-day target; LADDER leg 2 2026-11-08: feastSurgeUsed DROPPED from the food deeds — the feast stops being the key, the ladder stage takes its place, brief §b.4)
 //   - sentiment_at_60: true (code: progression.js — slotMoment(60); was 80)
 //   - audience_encore: true (code: progression.js — checkAudienceEncore, recurring post-40 trials)
 // consumes:
@@ -577,8 +577,9 @@
     //     neighborhood — regional primacy is real standing but the
     //     deliberate call is: insufficient)
     //   - 3+ distinct crises weathered (pg.crises, already tracked)
-    // Plus the food-thesis deeds (sentimentTaught, feastSurgeUsed — deeds,
-    // not knowledge) and stage >= 3 (earned standing, not regional
+    // Plus the food-thesis deed (sentimentTaught alone — LADDER leg 2
+    // 2026-11-08, brief §b.4: feastSurgeUsed is dropped; the lesson stays,
+    // the one dinner goes) and stage >= 3 (earned standing, not regional
     // knowledge). Everything reactive — no calendar thresholds beyond what
     // the deed paths already imply.
     deedState() {
@@ -646,8 +647,14 @@
       // either (the lesser seat already requires regional+).
       let stage = 0;
       try { stage = (typeof this.integrationStage === 'function') ? this.integrationStage() : 0; } catch (e) {}
-      const s = this.state.scholar || {};
-      const foodDeeds = !!(pg.sentimentTaught && s.prog && s.prog.feastSurgeUsed);
+      // LADDER (2026-11-08, leg 2, brief §b.4): foodDeeds is the keepsake
+      // lesson alone — feastSurgeUsed is dropped from the full seat. The
+      // feast stops being the key; the ladder stage takes its place
+      // (tableSeat, table.js). The surge stays a real deed for the buff
+      // (feastBuff.js) — it is just not a seat bar anymore. A pellet
+      // bearer can be taught the lesson (teachSentiment needs no feast),
+      // so the pellet no longer blocks the seat on food deeds.
+      const foodDeeds = !!pg.sentimentTaught;
       const stageOk = stage >= 2;
       return { ok: !!(waves && contests && crises && stageOk && foodDeeds && scale), waves, contests, crises, scale, stageOk, foodDeeds, stage, w1, w2, w3, w4, w5, contestsN, crisesN, rank };
     },
@@ -678,9 +685,10 @@
       // landed. "You shouldn't be able to beat the game without going
       // through a majority of game content." The gate is deeds now —
       // deedGateReady() below: EVERY wave fought (per-wave distinct bars),
-      // contests survived, scale, crises. sentimentTaught + feastSurgeUsed
-      // stay (food-thesis deeds, not knowledge) and stage>=3 stays (earned
-      // standing). RETUNE 2026-10-10: every wave 1-5, ~100-day target.
+      // contests survived, scale, crises. sentimentTaught stays (the
+      // food-thesis deed, not knowledge) and stage>=3 stays (earned
+      // standing); feastSurgeUsed no longer gates anything (LADDER leg 2,
+      // brief §b.4). RETUNE 2026-10-10: every wave 1-5, ~100-day target.
       // ARC IV SEAT GATE (win-path lever 2026-10-11, docs/TABLE.md): the old
       // gate was deedGateReady() only (the FULL seat — national+, all five
       // waves). The table PRICES the run, never gates on godhood: competent
@@ -737,7 +745,11 @@
           const rk = detail.rank || 'village';
           if (!(rk === 'regional' || rk === 'national' || rk === 'global')) miss.push('a regional standing');
           if ((detail.stage | 0) < 2) miss.push('deeper integration');
-          if (!detail.foodDeeds) miss.push('the food-thesis deeds (no feast can carry the surge while the pellet hums)');
+          if (!detail.foodDeeds) miss.push('the food-thesis deed (the keepsake lesson, not yet taught)');
+          // LADDER leg 2: the seat also needs ladder standing now — name it
+          // when the village has never reached Village Standing (the seat
+          // detail carries the peak stage + counted points).
+          if ((detail.ladderPeakStage | 0) < 1) miss.push(`ladder standing (Village Standing needs 12 counted points; the village holds ${detail.ladderCounted | 0})`);
           const missTxt = miss.length ? ' The ledger still wants: ' + miss.join('; ') + '.' : '';
           // PELLET QUOTE VARIANT (journey-endgame r74 2026-10-30): the
           // never-feasted quote contradicts the record for a bearer <redacted> feasted
@@ -775,7 +787,9 @@
           const rk = detail.rank || 'village';
           if (!(rk === 'regional' || rk === 'national' || rk === 'global')) miss.push('a regional standing');
           if ((detail.stage | 0) < 2) miss.push('deeper integration');
-          if (!detail.foodDeeds) miss.push('the food-thesis deeds');
+          if (!detail.foodDeeds) miss.push('the food-thesis deed (the keepsake lesson, not yet taught)');
+          // LADDER leg 2: name the ladder bar too (see the reactor beat above).
+          if ((detail.ladderPeakStage | 0) < 1) miss.push(`ladder standing (Village Standing needs 12 counted points; the village holds ${detail.ladderCounted | 0})`);
           const missTxt = miss.length ? ' The ledger still wants: ' + miss.join('; ') + '.' : '';
           this.say('◈ THE TABLE — the ring of pale light flickers at the edge of the sky... and does not come. Not yet. The table is being set for those whose deeds are done, and yours are not done.' + missTxt + ' The climb is not over.');
           try { this.save(); } catch (e) {}
