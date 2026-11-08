@@ -75,12 +75,13 @@
   // proposals in 90 days): the bonds drive is live for a pair whose
   // bond warmth is warming but not yet close, 15 <= v < 50. The first
   // drive read vgoalWeights.bonds >= 1, but that gate is trustedAnyone
-  // (own trust map >= 40) — and the person-trust map is NEVER written
-  // in wild play (census: maxTrust 0 across 90 days on seed 84101,
-  // while warming bond pairs grew 0 -> 26). Bond warmth is the
-  // relationship that actually grows through shared meals and visits,
-  // so the drive reads it: propose when the relationship is real but
-  // unformalized. depth >= 1 is already close whatever v says.
+  // (own trust map >= 40). Through 2026-11-05 that map was never
+  // written in wild play (census: maxTrust 0 across 90 days on seed
+  // 84101, while warming bond pairs grew 0 -> 26); person-trust.js now
+  // writes it from lived events, and villager-goals can open bonds on
+  // it. Proposals still read warmth here — not the goals gate — so a
+  // relationship can be asked about while it is real but unformalized.
+  // depth >= 1 is already close whatever v says.
   var BOND_WARM_MIN = 15;
   var BOND_WARM_MAX = 50;
 
