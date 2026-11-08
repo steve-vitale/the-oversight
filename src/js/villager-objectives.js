@@ -914,6 +914,9 @@
         // gates them, but the companion departs inside the LEADER's call,
         // so without this filter the gate never sees them.
         try { if ((v.sick || {})[id]) continue; } catch (e) {}
+        // HAVEN MEDIC DUTY (sim-medicduty-a): the duty holder is never
+        // picked as a companion/guard — the camp healer stays at Haven.
+        try { if (this.medicDutyHolder && this.medicDutyHolder() === id) continue; } catch (e) {}
         // DORMANT MOTIVATIONS (rogue P1): 'alone' villagers are never asked
         // to walk guard — leave them be. Reads the GENERATED npcGoal.
         try { if (this.npcGoal && this.npcGoal(id) === 'alone') continue; } catch (e) {}
@@ -1121,6 +1124,20 @@
       try { playerAtHaven = (this.map.px === hx && this.map.py === hy); } catch (e) {}
       // escape: the desperate don't do danger checks
       if (o.kind === 'LEAVE') { this.objDepart(rid, o, hx, hy, playerAtHaven); return; }
+      // HAVEN MEDIC DUTY (sim-medicduty-a): the duty holder stays HOME.
+      // A picked outdoor objective becomes indoor chore work and the
+      // blocked departure is counted (voluntary only — LEAVE above is
+      // exempt, the desperate still walk out and the duty passes on).
+      try {
+        if (this.medicDutyHolder && this.medicDutyHolder() === rid) {
+          o.kind = 'HAVEN_CHORE'; o.purpose = 'chore'; o.indoor = true; o.state = 'indoor';
+          o.tx = hx; o.ty = hy; o.tightness = 0; o.partsLeft = 2 + Math.floor(R() * 2);
+          o.chore = pick(['fire', 'repair', 'sweep', 'cook']);
+          o.targetVid = null; o.companion = null;
+          v.medicDutyBlocked = (v.medicDutyBlocked || 0) + 1;
+          return;
+        }
+      } catch (e) {}
       var dg = this.objDanger(rid, o.tx, o.ty, hx, hy);
       if (dg.verdict === 'go') {
         // RALLY-GUARD (win-drives 2026-11-03, Drive 1): the danger check
@@ -1360,6 +1377,10 @@
       try { dawn = (this.dayPart === 0); } catch (e) {}
       var playerAtHaven = false;
       try { playerAtHaven = (this.map.px === hx && this.map.py === hy); } catch (e) {}
+      // HAVEN MEDIC DUTY (sim-medicduty-a): at dawn, (re)assign the camp
+      // healer — before anyone re-picks the day's errands, so the holder
+      // is set before the care ticks run at day's end.
+      if (dawn) { try { this.medicDutyTick(); } catch (e) {} }
       var roster = v.roster || [];
       for (var i = 0; i < roster.length; i++) {
         var rid = roster[i];

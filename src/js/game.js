@@ -33020,6 +33020,167 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try { this.villagerTickTeachTick(); } catch (e) {}
     },
 
+    // HAVEN MEDIC DUTY (sim-medicduty-a, Steve 2026-11-08; A2: roster
+    // medics CAN cure, by healing ability or proper medicine found). One
+    // roster medic stays at Haven as the camp healer. The duty assigns an
+    // existing occupation-medic — it creates NO cure, NO new ability, NO
+    // new skill; the cure channels below only READ the canon cure table
+    // (cureEffectFor / statusEffects.json, the same table treatVillager
+    // reads) and the village's own pharmacy stores. Presence is the
+    // mechanism: a holder at Haven is the camp healer, so healerRounds,
+    // villageSicknessTick's healerFor and villagerTreatTick all see them.
+    // Deterministic: roster order, triage preference, no RNG.
+    medicDutyHolder() {
+      const v = this.state.village || {};
+      const id = v.medicDuty;
+      if (!id) return null;
+      // Read-validated everywhere the duty is consulted: a departed /
+      // dead / sev-2-sick holder reads vacant.
+      let p = null;
+      try { p = this.getPerson(id); } catch (e) {}
+      if (!p || p.dead) return null;
+      if (id === this.villagerId) return null; // the scholar is never the duty holder
+      if ((v.away || {})[id]) return null;
+      const msick = (v.sick || {})[id];
+      if (msick && (msick.severity || 1) >= 2) return null; // a patient, not the holder
+      const occ = String(p.formerOccupation || '').toLowerCase();
+      if (!/nurse|medic|doctor|paramedic|midwife|veterinarian|pharmacist|herbalist|dentist/i.test(occ)) return null;
+      let atHaven = false;
+      try { atHaven = (this.campPeopleIds('haven') || []).includes(id); } catch (e) {}
+      if (!atHaven) return null;
+      return id;
+    },
+    medicDutyTick() {
+      const v = this.state.village || {};
+      if (!v || !v.roster) return null;
+      v.medicDutyBlocked = v.medicDutyBlocked || 0;
+      v.medicDutyCures = v.medicDutyCures || { ability: 0, medicine: 0 };
+      const cur = this.medicDutyHolder();
+      if (cur) return cur; // keeps the current holder while still eligible
+      const nm = (id) => {
+        try { const p = this.getPerson(id); return p ? String(p.name).split(' ')[0] : 'Someone'; }
+        catch (e) { return 'Someone'; }
+      };
+      const isMedic = (id) => {
+        if (id === this.villagerId) return false;
+        let p = null;
+        try { p = this.getPerson(id); } catch (e) {}
+        if (!p || p.dead) return false;
+        return /nurse|medic|doctor|paramedic|midwife|veterinarian|pharmacist|herbalist|dentist/i.test(String(p.formerOccupation || ''));
+      };
+      const anyMedic = (v.roster || []).some(isMedic);
+      const prev = v.medicDuty || null;
+      // Pick one living roster medic physically at Haven (not away, not
+      // sev-2 sick, not the scholar), preferring triage holders, then
+      // first in roster order — deterministic, no RNG.
+      let haven = [];
+      try { haven = this.campPeopleIds('haven') || []; } catch (e) {}
+      const cands = (v.roster || []).filter(id => {
+        if (!isMedic(id)) return false;
+        if ((v.away || {})[id]) return false;
+        const ms = (v.sick || {})[id];
+        if (ms && (ms.severity || 1) >= 2) return false;
+        return haven.includes(id);
+      });
+      cands.sort((a, b) => {
+        const ta = (this.npcHasAbility && this.npcHasAbility(a, 'triage')) ? 0 : 1;
+        const tb = (this.npcHasAbility && this.npcHasAbility(b, 'triage')) ? 0 : 1;
+        return ta - tb; // stable: roster order within each group
+      });
+      const next = cands.length ? cands[0] : null;
+      v.medicDuty = next;
+      if (next && next !== prev) {
+        this.say(`${nm(next)} is staying at Haven as the camp healer now — tending the sick instead of ranging out.`);
+      }
+      if (!next && !anyMedic) {
+        // No medic at all: one throttled line (once per 7 days, only
+        // while someone is sick) — medicdiag found zero say-lines
+        // anywhere mentioning a missing healer.
+        const sickIds = Object.keys(v.sick || {});
+        if (sickIds.length) {
+          const day = (this.state.scholar || {}).day || 0;
+          const last = (v.medicDutyNoMedicDay == null) ? -99 : v.medicDutyNoMedicDay;
+          if (day - last >= 7) {
+            v.medicDutyNoMedicDay = day;
+            this.say(`Nobody here knows doctoring, and ${nm(sickIds[0])} is burning up. The village has no healer — someone has to learn, or find one.`);
+          }
+        }
+      }
+      return next;
+    },
+    // medicDutyCureAttempt(holder, patient, nm): A2 cure channels, tried
+    // as part of the duty holder's own tend pass in villagerCareTick.
+    // Channel 1 — a healing ability the holder HOLDS (npcHasAbility is
+    // binary; NPCs have no ability levels, so the scholar-only L3
+    // shortcuts and Fever's End do not transfer). Channel 2 — proper
+    // medicine from the Haven stash pharmacy (stashState().medicine:
+    // medType + doses), matched like useMedicine (antibiotics kill
+    // bacterial, antiparasitics kill parasitic; class must match). The
+    // diagnosis gate mirrors treatVillager for the ability channel only
+    // (medicine, like useMedicine, does not need the name). Alien-pool
+    // patients are refused outright (two pools, never mix); trembles has
+    // no cure at any tier, so the table itself refuses it. Returns true
+    // when the patient is cured (record deleted); 'ease'/'support' fall
+    // through to the ordinary tend. No treatVillager call (scholar-only).
+    medicDutyCureAttempt(holder, pid, nm) {
+      const v = this.state.village || {};
+      const rec = (v.sick || {})[pid];
+      if (!rec) return false;
+      const did = this.villagerDiseaseId ? this.villagerDiseaseId(rec) : null;
+      if (!did) return false; // unnamed vector — tend, don't cure
+      let def = null;
+      try { def = this.seDef(did); } catch (e) {}
+      if (!def || def.pool === 'alien') return false;
+      const diagnosed = !!rec.diagnosed || (this.villageKnowsDisease && this.villageKnowsDisease(did));
+      const hName = nm(holder), pName = nm(pid);
+      const cureIt = (via, line) => {
+        delete v.sick[pid];
+        try { if (this.markDiseaseKnown) this.markDiseaseKnown(did); } catch (e) {}
+        try { if (this.remember) this.remember(holder, 'cured', 'cured ' + pName + ' of ' + (def.name || did), { patient: pid }); } catch (e) {}
+        try { if (this.remember) this.remember(pid, 'cured_by', 'cured of ' + (def.name || did) + ' by ' + hName, { medic: holder }); } catch (e) {}
+        try { if (this.bondAdd) this.bondAdd(holder, pid, 3, 'treated'); } catch (e) {}
+        v.medicDutyCures = v.medicDutyCures || { ability: 0, medicine: 0 };
+        v.medicDutyCures[via] = (v.medicDutyCures[via] || 0) + 1;
+        this.say(line);
+        return true;
+      };
+      // Channel 1: healing ability. Try each held ability in turn — an
+      // 'ease' from one (herbal on lockjaw) must not block a 'cure'
+      // from another (triage on the same lockjaw).
+      for (const ab of ['herbal_remedy', 'field_medicine', 'triage']) {
+        if (!this.npcHasAbility || !this.npcHasAbility(holder, ab)) continue;
+        let eff = 'no';
+        try { eff = this.cureEffectFor(did, ab); } catch (e) {}
+        if (eff === 'cure' && (!def.cure.needsDiagnosis || diagnosed)) {
+          const abName = ab === 'herbal_remedy' ? 'Herbal remedy' : ab === 'field_medicine' ? 'Field medicine' : 'Triage';
+          let flavor = '';
+          try { flavor = this.treatFlavor(ab, def, true); } catch (e) {}
+          return cureIt('ability', `${abName} on ${pName}: ${flavor} ${pName} is going to make it. (${hName} cured them — and the camp saw it.)`);
+        }
+      }
+      // Channel 2: proper medicine from the Haven pharmacy.
+      const kinds = [{ kind: 'antibiotics', cls: 'bacterial', label: 'antibiotics' }, { kind: 'antiparasitic', cls: 'parasitic', label: 'antiparasitic' }];
+      for (const k of kinds) {
+        let eff = 'no';
+        try { eff = this.cureEffectFor(did, k.kind); } catch (e) {}
+        if (eff !== 'cure') continue;
+        if (!(def['class'] === k.cls || def['class'] === 'fever')) continue;
+        let st = null;
+        try { st = this.stashState ? this.stashState() : null; } catch (e) {}
+        const meds = (st && st.medicine) || [];
+        const entry = meds.find(m => m && m.medType === k.kind && (m.doses || 0) > 0);
+        if (!entry) continue;
+        entry.doses -= 1;
+        if (entry.doses <= 0) {
+          const ix = meds.indexOf(entry);
+          if (ix >= 0) meds.splice(ix, 1);
+        }
+        try { if (this.stashLog) this.stashLog('take', entry.name || k.label, 1, holder); } catch (e) {}
+        return cureIt('medicine', `${hName} gives ${pName} the ${k.label} from the pharmacy stores. The ${(def.name || did).toLowerCase()} breaks within the day. (${pName} is going to make it.)`);
+      }
+      return false;
+    },
+
     // villagerCareTick(nm): medical villagers tend the sick — the division of
     // knowledge at work. Quiet, mostly: the remember() keeps the books.
     // ABILITY (parity 2026-10-10, Worker A): a medic holding triage (the
@@ -33045,14 +33206,37 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       });
       if (!medics.length) return;
       const tendedThisTick = new Set();
-      for (const mid of medics) {
+      // HAVEN MEDIC DUTY (sim-medicduty-a): the duty holder tends FIRST.
+      const duty = (() => { try { return this.medicDutyHolder(); } catch (e) { return null; } })();
+      const ordered = medics.slice().sort((a, b) => ((a === duty) ? 0 : 1) - ((b === duty) ? 0 : 1));
+      for (const mid of ordered) {
         let reach = 1;
         try { if (this.npcHasAbility && this.npcHasAbility(mid, 'triage')) reach = 2; } catch (e) {}
         for (let t = 0; t < reach; t++) {
-          // spread the care: prefer a patient nobody's sat with yet this tick
-          let target = sickIds.find(id => id !== mid && !tendedThisTick.has(id) && (v.sick[id].daysLeft || 0) > 1);
-          if (!target) target = sickIds.find(id => id !== mid && (v.sick[id].daysLeft || 0) > 1);
+          let target = null;
+          if (mid === duty) {
+            // The holder tends the SICKEST patient first (lowest health,
+            // tie-break lowest daysLeft), preferring someone nobody has
+            // sat with yet this tick.
+            const cands = sickIds.filter(id => id !== mid && (v.sick[id] && (v.sick[id].daysLeft || 0) > 1) && !tendedThisTick.has(id));
+            const hOf = (id) => ((v.health && v.health[id] !== undefined) ? v.health[id] : 100);
+            cands.sort((a, b) => (hOf(a) - hOf(b)) || ((v.sick[a].daysLeft || 0) - (v.sick[b].daysLeft || 0)));
+            target = cands[0] || sickIds.find(id => id !== mid && (v.sick[id] && (v.sick[id].daysLeft || 0) > 1));
+          } else {
+            // spread the care: prefer a patient nobody's sat with yet this tick
+            // (v.sick[id] guarded: the duty holder may have cured — deleted —
+            // a patient earlier in this same tick, leaving a stale id behind)
+            target = sickIds.find(id => id !== mid && !tendedThisTick.has(id) && v.sick[id] && (v.sick[id].daysLeft || 0) > 1);
+            if (!target) target = sickIds.find(id => id !== mid && v.sick[id] && (v.sick[id].daysLeft || 0) > 1);
+          }
           if (!target) break;
+          // A2: the duty holder tries to CURE before tending. A cured
+          // patient leaves v.sick and consumes that tend slot for the day.
+          if (mid === duty) {
+            let cured = false;
+            try { cured = !!this.medicDutyCureAttempt(mid, target, nm); } catch (e) {}
+            if (cured) { tendedThisTick.add(target); continue; }
+          }
           v.sick[target].daysLeft -= 1;
           tendedThisTick.add(target);
           try { if (this.remember) this.remember(mid, 'tended', 'tended ' + nm(target) + ' through the fever', { patient: target }); } catch (e) {}

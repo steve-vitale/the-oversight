@@ -88,6 +88,11 @@ function censusLeg(dir) {
     leg._blockedPerSeed = leg._blockedPerSeed || {};
     const _lastDuty = (duty.dutyDays || [])[(duty.dutyDays || []).length - 1];
     leg._blockedPerSeed[s] = _lastDuty ? _lastDuty.dutyBlocked : 0;
+    // A2 CURE METRIC (secondary, reported): cumulative cures by channel
+    // at the last recorded day (before-leg snapshots lack the field -> 0).
+    const _c = (_lastDuty && _lastDuty.dutyCures) || {};
+    leg.curesAbility = (leg.curesAbility || 0) + (_c.ability || 0);
+    leg.curesMedicine = (leg.curesMedicine || 0) + (_c.medicine || 0);
     // PRIMARY (medicdiag medicDays — authoritative medicDetail).
     for (const m of (diag.medicDays || [])) {
       leg.villageDays++;
@@ -123,7 +128,7 @@ function printLeg(tag, leg) {
   console.log(`=== sim-medicduty-a ${tag} ===`);
   console.log(`WALL: national=${leg.national}/8 table=${leg.table} wins=${leg.win} waveReach=${JSON.stringify(leg.waveReach)} medianSurvival=${leg.medianSurvival}d max=${leg.maxSurvival}d`);
   console.log(`PRIMARY: present=${leg.present} absent=${leg.absent} share=${leg.presentShare == null ? 'n/a' : (leg.presentShare * 100).toFixed(1) + '%'} absentWithMedic=${leg.absentWithMedic} absentNoMedic=${leg.absentNoMedic} (village-days=${leg.villageDays} healerDays=${leg.healerDays} medicDays=${leg.medicDays} havenAvail=${leg.havenAvail})`);
-  console.log(`DUTY: dutyDays=${leg.dutyDays}/${leg.villageDays} holders=${leg.dutyHolders.size} holderChanges=${leg.holderChanges} blockedDepartures=${leg.dutyBlocked} joinMismatches=${leg.joinMismatches}`);
+  console.log(`DUTY: dutyDays=${leg.dutyDays}/${leg.villageDays} holders=${leg.dutyHolders.size} holderChanges=${leg.holderChanges} blockedDepartures=${leg.dutyBlocked} joinMismatches=${leg.joinMismatches} curesAbility=${leg.curesAbility || 0} curesMedicine=${leg.curesMedicine || 0}`);
   console.log(`SECONDARY: episodes=${leg.episodes.length} treated=${leg.treatedEps} treatedShare=${leg.treatedShare == null ? 'n/a' : (leg.treatedShare * 100).toFixed(1) + '%'} sicknessDeaths=${leg.sicknessDeaths} woundFeverDeaths=${leg.woundFeverDeaths} starvationDeaths=${leg.starvationDeaths}`);
   console.log(`GUARDRAILS: produced/need=${leg.producedNeed == null ? 'n/a' : leg.producedNeed.toFixed(3)} deathCauses=${JSON.stringify(leg.deathCauses)}`);
 }

@@ -259,6 +259,20 @@
       try { if (playerAtHaven && R() < 0.12) this.agencyDeedTalk(); } catch (e) {}
     },
     startExpedition(vid, hx, hy, announce, opts) {
+      // HAVEN MEDIC DUTY (sim-medicduty-a): voluntary expeditions are
+      // blocked for the duty holder — the camp healer stays at Haven.
+      // DIRECTED win-plan launches (opts.tx set, win-plan.js:419) are
+      // exempt: the plan's path to the table is not the duty's to veto.
+      // Blocked first, before gear-up/heal-check, so a blocked holder
+      // burns no gear or care on a trip that never launches.
+      try {
+        const directed = !!(opts && opts.tx != null && opts.ty != null);
+        if (!directed && this.medicDutyHolder && this.medicDutyHolder() === vid) {
+          const vv = this.state.village || {};
+          vv.medicDutyBlocked = (vv.medicDutyBlocked || 0) + 1;
+          return;
+        }
+      } catch (e) {}
       var a = this.agencyOf(vid);
       var st = this.agencyState();
       // GEAR-UP + HEAL CHECK (Steve 2026-10-09): expeditions arm up from the

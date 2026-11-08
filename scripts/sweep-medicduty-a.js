@@ -149,7 +149,11 @@ async function oneRun(seed, days, opts) {
         healerVid: healerId == null ? null : String(healerId).slice(0, 24),
         dutyVid,
         dutyHolderName: dutyVid ? npcName(dutyVid) : null,
-        dutyBlocked: (v.medicDutyBlocked || 0) });
+        dutyBlocked: (v.medicDutyBlocked || 0),
+        // A2 cure metric: cumulative NPC cures by channel (0 on the
+        // before leg by construction — no duty code existed).
+        dutyCures: { ability: ((v.medicDutyCures || {}).ability || 0),
+          medicine: ((v.medicDutyCures || {}).medicine || 0) } });
     } catch (e) {}
     if (origDaily) return origDaily(G, ctx);
   };

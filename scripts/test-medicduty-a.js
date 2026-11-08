@@ -7,12 +7,14 @@
 // LEAVE is exempt; startExpedition blocks voluntary launches but not
 // directed win-plan launches; objAskCompanion never picks the holder);
 // L3 tending priority (the duty holder tends first and tends the sickest
-// patient); L4 no-cure (the duty creates no cure path: villagerCareTick
-// still only tends, treatVillager is never called by the duty, code-read
-// confirms no v.sick deletion in the duty code); L5 live leg (duty recorder
-// is neutral vs the medicdiag recorder on this base, seeds 96301+96302,
-// 150d: identical fingerprints and identical healerPresent / sickCountNPC
-// series); L6 analyzer runs on the pilot corpora and the join is clean.
+// patient — cure-aware under A2: a sickest patient the holder can cure is
+// CURED instead of tended, which still counts as handled); L4 cure
+// channels (A2, Steve 2026-11-08: ability cure, medicine cure, diagnosis
+// gate, trembles/alien no-cure, no treatVillager call); L5 live leg (duty
+// recorder is neutral vs the medicdiag recorder on this base, seeds
+// 96301+96302, 150d: identical fingerprints and identical healerPresent /
+// sickCountNPC series); L6 analyzer runs on the pilot corpora and the join
+// is clean.
 // Uses the shared harness (seeded RNG before eval). The judged 8-seed 150d
 // corpora are produced by the sweeps, not by this test.
 'use strict';
@@ -225,14 +227,17 @@ async function aleg(name, fn) {
     assert.strictEqual(picked, null, 'with only the holder as a candidate, no companion is picked');
   });
 
-  leg('L3 tending priority: the duty holder tends the sickest patient first', () => {
+  leg('L3 tending priority: the duty holder handles the sickest patients first', () => {
     const ms = prepMedics();
     const holder = Game.medicDutyTick();
     assert.ok(holder, 'holder assigned');
     // Total tend reach on this game: each medic tends 1, or 2 with triage.
     // Take reach+1 patients with ascending HPs: the reach sickest must be
-    // tended and the healthiest must not be — that ordering IS the priority,
-    // whatever the medic count on this base.
+    // handled and the healthiest must not be — that ordering IS the priority,
+    // whatever the medic count on this base. HANDLED, under A2, means
+    // tended (daysLeft 5 -> 4) OR cured (record gone: the holder can cure
+    // wound fever when they hold a healing ability) — either way the
+    // sickest got the holder's hands first.
     let totalReach = 0;
     for (const mid of ms) {
       let reach = 1;
@@ -249,15 +254,21 @@ async function aleg(name, fn) {
       v.health[id] = 20 + i * 15; // ascending HP: patients[0] is the sickest
     });
     Game.villagerCareTick(nm);
+    let handled = 0, cured = 0;
     for (let i = 0; i < totalReach; i++) {
-      assert.strictEqual(v.sick[patients[i]].daysLeft, 4, 'patient ' + (i + 1) + ' (' + (20 + i * 15) + ' HP) tended');
+      const rec = v.sick[patients[i]];
+      if (!rec) { handled++; cured++; }
+      else if (rec.daysLeft === 4) { handled++; }
+      else assert.fail('patient ' + (i + 1) + ' (' + (20 + i * 15) + ' HP) neither tended nor cured (daysLeft ' + rec.daysLeft + ')');
     }
-    assert.strictEqual(v.sick[patients[totalReach]].daysLeft, 5, 'healthiest patient not tended this tick');
-    console.log('    tended the ' + totalReach + ' sickest of ' + patients.length + ' patients, left the healthiest — sickest first');
+    assert.strictEqual(handled, totalReach, 'the ' + totalReach + ' sickest were all handled');
+    assert.ok(v.sick[patients[totalReach]], 'healthiest patient still sick');
+    assert.strictEqual(v.sick[patients[totalReach]].daysLeft, 5, 'healthiest patient not tended or cured this tick');
+    console.log('    handled the ' + totalReach + ' sickest of ' + patients.length + ' patients (' + cured + ' cured, ' + (handled - cured) + ' tended), left the healthiest — sickest first');
     for (const id of patients) delete v.sick[id];
   });
 
-  leg('L4 no-cure: the duty creates no cure path; care still only tends', () => {
+  leg('L4 cure channels (A2): ability cure, medicine cure, diagnosis gate, no-cure cases, no treatVillager call', () => {
     const ms = prepMedics();
     const holder = Game.medicDutyTick();
     assert.ok(holder, 'holder assigned');
@@ -265,22 +276,97 @@ async function aleg(name, fn) {
     let treatCalls = 0;
     const origTreat = Game.treatVillager;
     Game.treatVillager = function () { treatCalls++; return origTreat.apply(this, arguments); };
+    const stashMeds = () => {
+      try { const st = Game.stashState ? Game.stashState() : null; return (st && st.medicine) || []; }
+      catch (e) { return []; }
+    };
+    const clearMeds = () => { const m = stashMeds(); m.length = 0; };
+    // TEST SEAM (honest): the engine's villager-sickness vectors only ever
+    // produce 'wound fever' / 'gut rot' / 'tick fever' records, so the
+    // live mapper (villagerDiseaseId) maps only those three names. Lockjaw
+    // and trichinosis are real mundane diseases with needsDiagnosis cures
+    // in the canon table, but no villager vector creates them today — the
+    // duty's diagnosis gate and medicine channel for them can only be
+    // exercised by mapping the name, which is exactly what the mapper
+    // would do if the vector existed. Stub the mapper for the lockjaw
+    // sub-legs only; the duty code under test is untouched.
+    const origDiseaseId = Game.villagerDiseaseId;
+    Game.villagerDiseaseId = (rec) => {
+      if (rec && (rec.name === 'lockjaw' || rec.name === 'trichinosis')) return rec.name;
+      return origDiseaseId ? origDiseaseId.call(Game, rec) : null;
+    };
     try {
+      // L4a — ABILITY cure: grant the holder triage; a wound-fever patient
+      // (needsDiagnosis false, triage 'cure') is cured on the holder's pass.
+      assert.ok(Game.npcGrantAbility(holder, 'triage'), 'triage granted to the holder');
+      assert.ok(Game.npcHasAbility(holder, 'triage'), 'holder holds triage');
+      v.medicDutyCures = { ability: 0, medicine: 0 };
       v.sick = {};
-      const patient = roster.find(id => id !== holder && !((Game.getPerson(id) || {}).dead));
-      assert.ok(patient, 'a patient exists');
-      v.sick[patient] = { name: 'wound fever', daysLeft: 5, severity: 1 };
-      for (let i = 0; i < 10; i++) {
-        Game.medicDutyTick();
-        Game.villagerCareTick(nm);
+      const pA = roster.find(id => id !== holder && !((Game.getPerson(id) || {}).dead));
+      assert.ok(pA, 'a patient exists');
+      v.sick[pA] = { name: 'wound fever', daysLeft: 5, severity: 1 };
+      Game.villagerCareTick(nm);
+      assert.ok(!v.sick[pA], 'wound-fever patient cured by the holder\'s triage (record gone)');
+      assert.strictEqual(v.medicDutyCures.ability, 1, 'ability cure counter incremented');
+      console.log('    L4a ability cure: ' + nm(holder) + ' cured ' + nm(pA) + ' of wound fever with triage');
+      // L4b — MEDICINE cure: trichinosis is curable by NO held ability
+      // (herbal/field/triage all 'ease'), so the ability channel cannot
+      // take it — but antiparasitic from the Haven pharmacy cures it,
+      // diagnosed or not (medicine, like useMedicine, does not need the
+      // name). One dose is spent. (Trichinosis, not lockjaw: a lockjaw
+      // cure would mark lockjaw village-known and unblock the L4c gate.)
+      clearMeds();
+      stashMeds().push({ medType: 'antiparasitic', doses: 1, name: 'Antiparasitic (mebendazole)', itemId: 'med_antiparasitic' });
+      v.sick = {};
+      const pB = roster.find(id => id !== holder && !((Game.getPerson(id) || {}).dead));
+      v.sick[pB] = { name: 'trichinosis', daysLeft: 5, severity: 1 }; // undiagnosed
+      Game.villagerCareTick(nm);
+      assert.ok(!v.sick[pB], 'undiagnosed trichinosis cured by pharmacy antiparasitic');
+      assert.strictEqual(v.medicDutyCures.medicine, 1, 'medicine cure counter incremented');
+      assert.strictEqual(stashMeds().length, 0, 'the dose was spent (entry gone at 0 doses)');
+      console.log('    L4b medicine cure: ' + nm(holder) + ' cured ' + nm(pB) + ' of trichinosis with stash antiparasitic (1 dose spent)');
+      // L4c — DIAGNOSIS GATE: same lockjaw patient, no medicine in the
+      // stash: the holder's triage does NOT cure an unnamed sickness — the
+      // patient is tended instead. Once diagnosed, the same ability cures.
+      clearMeds();
+      v.sick = {};
+      const pC = roster.find(id => id !== holder && !((Game.getPerson(id) || {}).dead));
+      v.sick[pC] = { name: 'lockjaw', daysLeft: 5, severity: 1 };
+      Game.villagerCareTick(nm);
+      assert.ok(v.sick[pC], 'undiagnosed lockjaw NOT cured without medicine');
+      assert.ok(v.sick[pC].daysLeft <= 4, 'undiagnosed lockjaw tended instead (5 -> ' + v.sick[pC].daysLeft + '; other medics may sit with the same patient twice in one tick)');
+      assert.strictEqual(v.medicDutyCures.ability, 1, 'no ability cure counted for the gated case');
+      v.sick[pC].diagnosed = 'lockjaw';
+      Game.villagerCareTick(nm);
+      assert.ok(!v.sick[pC], 'diagnosed lockjaw cured by the holder\'s triage');
+      assert.strictEqual(v.medicDutyCures.ability, 2, 'ability cure counter incremented after diagnosis');
+      console.log('    L4c diagnosis gate: undiagnosed lockjaw tended, diagnosed lockjaw cured');
+      Game.villagerDiseaseId = origDiseaseId; // seam off: trembles goes through the live mapper (null -> tend)
+      // L4d — NO-CURE cases: trembles has no cure at any tier (the table
+      // itself refuses it), and the alien pool is never cured by mundane
+      // medicine. A trembles patient is tended, never cured.
+      for (const ab of ['herbal_remedy', 'field_medicine', 'triage', 'antibiotics', 'antiparasitic']) {
+        assert.strictEqual(Game.cureEffectFor('trembles', ab), 'no', 'trembles: ' + ab + ' is no');
       }
-      const rec = (Game.state.village.sick || {})[patient];
-      assert.ok(rec, 'record survives repeated duty + care ticks (never deleted)');
-      assert.strictEqual(rec.daysLeft, 1, 'care parks at daysLeft 1, got ' + rec.daysLeft);
+      for (const alien of ['eurika', 'east_nile', 'lemons']) {
+        for (const ab of ['herbal_remedy', 'field_medicine', 'triage', 'antibiotics', 'antiparasitic']) {
+          assert.strictEqual(Game.cureEffectFor(alien, ab), 'no', alien + ': ' + ab + ' is no');
+        }
+      }
+      v.sick = {};
+      const pD = roster.find(id => id !== holder && !((Game.getPerson(id) || {}).dead));
+      v.sick[pD] = { name: 'trembles', daysLeft: 5, severity: 1 };
+      Game.villagerCareTick(nm);
+      assert.ok(v.sick[pD], 'trembles patient is never cured');
+      assert.ok(v.sick[pD].daysLeft <= 4, 'trembles patient tended instead (5 -> ' + v.sick[pD].daysLeft + ')');
+      assert.strictEqual(v.medicDutyCures.ability, 2, 'no ability cure counted for trembles');
+      assert.strictEqual(v.medicDutyCures.medicine, 1, 'no medicine cure counted for trembles');
+      delete v.sick[pD];
+      console.log('    L4d no-cure: trembles + alien pool refused by the table; trembles patient tended, not cured');
       assert.strictEqual(treatCalls, 0, 'treatVillager never called by the duty');
-      delete v.sick[patient];
-    } finally { Game.treatVillager = origTreat; }
-    // Code-read: no v.sick deletion in the duty functions.
+    } finally { Game.treatVillager = origTreat; Game.villagerDiseaseId = origDiseaseId; }
+    // Code-read: the duty functions never call the scholar's cure and never
+    // delete a v.sick record except through the cure channels above.
     const gameSrc = fs.readFileSync(path.join(__dirname, '..', 'src', 'js', 'game.js'), 'utf8');
     for (const fnName of ['medicDutyTick() {', 'medicDutyHolder() {']) {
       const start = gameSrc.indexOf(fnName);
@@ -290,7 +376,7 @@ async function aleg(name, fn) {
       assert.ok(!body.includes('delete v.sick'), fnName + ' never deletes a v.sick record');
       assert.ok(!body.includes('treatVillager'), fnName + ' never calls the scholar cure');
     }
-    console.log('    duty + care: 5 -> 1, record kept, treatVillager 0 calls');
+    console.log('    duty + care: cures counted ability=' + v.medicDutyCures.ability + ' medicine=' + v.medicDutyCures.medicine + ', treatVillager 0 calls');
   });
 
   // ---- L5 live leg: duty recorder neutral vs medicdiag recorder ----
