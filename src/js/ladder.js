@@ -23,6 +23,7 @@
 //   - ladder_cap_never_silent: true (code: ladder.js — ladderLine() names every capped track with its counted-vs-total ("Fight 9 -> 7 - capped"); ladderCapBeat() says it aloud the first time a track caps on a rung.)
 //   - ladder_fail_closed: true (code: ladder.js — any missing module/data reads as 0; a missing capstone deed reads as not-ready. The ladder never opens a stage by accident.)
 //   - ladder_explore_discovery_gap: true (code: ladder.js — prereg Amendment 1, 2026-11-08: discovery deeds have no lifetime per-deed store at this base (npcXp holds per-track totals only; the per-day books hold today's counts only), so Explore (i) reads 0 and the whole summed field total counts as Forage, once, never twice. The discovery deed carries the ladder:"explore" tag in tracks.json so the split is a one-line change the moment a per-deed lifetime store exists.)
+//   - ladder_bundle_bonus: true (code: ladder.js — LEG 2 AMENDMENT 2026-11-08, brief §b.5: villageLadder() reads +4 per distinct bundleStage on feast-log bundle entries (bundle: true, written by hostFeast / feastBundleBuyOut in game.js), added to counted/total AFTER the per-track cap, once per stage. The record is the feast log itself; no new counter, no minting change, no threshold/cap change. FLAGGED in the leg-2 prereg + run note for coordinator review — leg 2's file scope is progression/table/game, and the bonus has to be read here for the seat to ever see it.)
 // consumes:
 //   - waveLedgerPoints() (waveLedger.js)
 //   - hierarchyState(), _linkSeasoned(), _linkRegionalPlus(), scaleRank() (hierarchy.js, standing.js)
@@ -251,7 +252,7 @@
         countedTracks: { fight: 0, forage: 0, craft: 0, talk: 0, explore: 0 },
         capped: [], stage: 0, stageName: 'Unranked', peakStage: 0,
         nextThreshold: 12, nextStageName: 'Village Standing', shortfall: 12,
-        detail: { fightLedger: 0, fieldXp: 0, craftXp: 0, links: 0, contests: 0, discovery: 0, breadth: 0, activeLinks: 0 },
+        detail: { fightLedger: 0, fieldXp: 0, craftXp: 0, links: 0, contests: 0, discovery: 0, breadth: 0, activeLinks: 0, bundleBonus: 0, bundleStages: [] },
       });
       try {
         const cfg = this.ladderCfg();
@@ -283,11 +284,33 @@
           + Math.floor(Math.max(0, breadth - (cfg.exploreBreadthBase || 8)) / (cfg.explorePerBreadth || 4))
           + activeLinks * (cfg.explorePerLink || 1);
         const tracks = { fight, forage, craft, talk, explore };
+        // --- BUNDLE BONUS (leg 2, brief §b.5): +4 ladder points per stage
+        // with a completed bundle, OUTSIDE the per-track cap, once per
+        // stage. The record lives on the feast-log entries themselves
+        // (bundle: true + bundleStage, written by hostFeast /
+        // feastBundleBuyOut in game.js) — no new counter, no new store.
+        // The bonus is already-earned points: it counts toward every rung
+        // (added after the cap), and a second bundle at the same stage
+        // adds nothing (distinct bundleStage values only).
+        let bundleBonus = 0;
+        const bundleStages = [];
+        try {
+          const log = (this.state && this.state.feastLog) || [];
+          const seenStages = {};
+          for (const f of log) {
+            if (!f || f.bundle !== true) continue;
+            const st = (f.bundleStage | 0) || 0;
+            if (seenStages[st]) continue;
+            seenStages[st] = true;
+            bundleStages.push(st);
+          }
+          bundleBonus = bundleStages.length * 4;
+        } catch (e) { warn('villageLadder bundle bonus', e); }
         // --- stage: highest rung whose capped total meets its threshold ---
         const capAt = (s) => Math.floor((cfg.capFrac || 0.6) * T[s - 1]);
         const countedAt = (s) => {
           const cap = capAt(s);
-          let c = 0;
+          let c = bundleBonus;
           for (const k of TRACKS) c += Math.min(tracks[k], cap);
           return c;
         };
@@ -301,7 +324,7 @@
         const cap = stage < 3 ? capAt(stage + 1) : capAt(3);
         const countedTracks = {};
         const capped = [];
-        let counted = 0;
+        let counted = bundleBonus;
         for (const k of TRACKS) {
           countedTracks[k] = Math.min(tracks[k], cap);
           counted += countedTracks[k];
@@ -309,14 +332,14 @@
         }
         const peak = Math.max(this._ladderPeakStage(), stage);
         return {
-          total: tracks.fight + tracks.forage + tracks.craft + tracks.talk + tracks.explore,
+          total: tracks.fight + tracks.forage + tracks.craft + tracks.talk + tracks.explore + bundleBonus,
           counted, cap,
           tracks, countedTracks, capped,
           stage, stageName: names[stage] || 'Unranked', peakStage: peak,
           nextThreshold,
           nextStageName: stage < 3 ? (names[stage + 1] || '') : '',
           shortfall: nextThreshold == null ? 0 : Math.max(0, nextThreshold - counted),
-          detail: { fightLedger, fieldXp, craftXp, links, contests, discovery, breadth, activeLinks },
+          detail: { fightLedger, fieldXp, craftXp, links, contests, discovery, breadth, activeLinks, bundleBonus, bundleStages: bundleStages.slice() },
         };
       } catch (e) {
         warn('villageLadder', e);
@@ -354,6 +377,9 @@
           ? `${L.stageName} reached`
           : `${L.counted}/${L.nextThreshold} to ${L.nextStageName}`;
         let line = `Ladder \u2014 ${L.stageName} ${target} (${bits.join(' \u00B7 ')})`;
+        // LEG 2: name the bundle bonus when one is banked — the bar is
+        // honest about where its points came from.
+        if (L.detail && (L.detail.bundleBonus | 0) > 0) line += ` (+${L.detail.bundleBonus | 0} feast-bundle bonus)`;
         if (L.nextThreshold != null && L.shortfall > 0) {
           const caps = L.capped.map(k => LABELS[k]).join(', ');
           line += ` \u2014 short ${L.shortfall}${caps ? `; capped: ${caps}` : ''}`;
