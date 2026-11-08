@@ -74,7 +74,11 @@ within one wave-3 fight and one crisis of it before dying honestly):
 - 2+ crises weathered (`pg.crises`)
 - scale ≥ regional (`scaleRank()`)
 - integration stage ≥ 2
-- food-thesis deeds: sentimentTaught + feastSurgeUsed
+- food-thesis deeds: sentimentTaught alone (the feast surge is no
+  longer a seat deed — the feast is an optional bundle deed on the
+  ladder, not a gate)
+- ladder peak ≥ Village Standing (peak stage 1; `ladderPeakStage()` —
+  the ladder's counted points, not a single dinner, price the seat)
 
 Below the lesser bar the table does not come (existing withdrawal beat
 in ledger.js `tableScene` stays as the no-seat path).
