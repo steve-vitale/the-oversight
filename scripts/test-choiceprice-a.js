@@ -125,10 +125,14 @@ check('static: draw offer text in feastBuff.js', feastBuff.includes('Face it whi
 check('static: driveoff line in feastBuff.js', feastBuff.includes('The devotion stays armed; the feast\'s fire still burns in you.'));
 check('static: grant line names no deed', /Strikes and abilities hit with the feast behind them\./.test(feastBuff));
 const prog = fs.readFileSync(path.join(REPO, 'src/js/progression.js'), 'utf8');
-check('static: seat-waiting flicker names food-thesis deeds', prog.includes('the food-thesis deeds') && prog.includes('The ledger still wants:'));
+// LEG 2 (2026-11-08): the food-thesis deed is singular now — foodDeeds
+// is sentimentTaught alone, the surge is no longer a seat bar.
+check('static: seat-waiting flicker names the food-thesis deed', prog.includes('the food-thesis deed') && prog.includes('The ledger still wants:'));
 check('static: pellet flicker variant exists', prog.includes('NO FEAST, NO SURGE, NOTHING HERE WE CAN PRICE'));
 const table = fs.readFileSync(path.join(REPO, 'src/js/table.js'), 'utf8');
-check('static: lesser seat prices foodDeeds conjunction', table.includes('pg.sentimentTaught && s.prog && s.prog.feastSurgeUsed'));
+// LEG 2 (2026-11-08): foodDeeds is sentimentTaught alone — the old
+// sentimentTaught && feastSurgeUsed conjunction is gone by design.
+check('static: lesser seat prices foodDeeds as sentimentTaught alone', table.includes('const foodDeeds = !!(pg && pg.sentimentTaught)'));
 check('static: lesser seat line never names food deeds', (() => {
   const i = table.indexOf('tableSeatLine(seat)');
   const j = table.indexOf('tableWithdrawLine', i);
