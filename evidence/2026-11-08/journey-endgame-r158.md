@@ -216,7 +216,9 @@ real (two Reunion kills, d83/d88).
 
 ## Gate
 
-[gate section — filled after check.js --quick]
+The original run's gate never completed (12:00 run SIGTERM'd mid-gate;
+13:00 adoption gate SIGTERM'd after ~14 min). The adjudicated gate is
+the adoption re-run at the end of this note (r159, on the rebased tree).
 
 ## Telemetry (closeout, 2026-11-08 ~18:10Z, verified by the closing run)
 
@@ -288,4 +290,32 @@ summary). This run adopted the orphaned worktree:
 
 ## Gate (adoption re-run, check.js --quick on rebased tree)
 
-[filled after the gate runs]
+**292/8, no new attributable failure — MERGE.** Ran on the rebased tree
+(branch `2e6fdd4d0`, base master `1ee592573`), started 20:11Z, ~65 min
+under load. The totals line never flushed (process exited after the
+`slowest:` line), so the count is reconstructed from the progress line:
+300 chars, 8 F's — all 300 scripts ran. Log:
+`evidence/2026-11-08/journey-endgame-r158-gate-adopt-r159.log`.
+
+All 8 failures are pre-existing / load artifacts, none attributable to
+this branch (it carries no game code — docs/TABLE.md + proof test +
+evidence only):
+
+1. `godpath/test-mobile-combat-cadence.js` — standing-gate failure.
+2. `godpath/test-occupation-panels.js` — standing-gate failure.
+3. `godpath/test-measurement-cache-flags.js` — known intermittent.
+4. `godpath/test-phone-frame-proof.js` — stale receipt, standing-gate failure.
+5. `godpath/test-trust-observer-neutrality.js` — 120s timeout, load artifact / known intermittent.
+6. `test-synergy-stall.js` — 120s timeout, load artifact.
+7. `test-capable-bot-20261014.js` — 120s timeout, known load-dependent intermittent.
+8. `test-establishment-r20-fixes-20261020.js` — "next day voices once
+   more: expected 2, got 1". Verified failing identically on master
+   `1ee592573` (run in the main tree) — pre-existing, not this branch.
+
+The branch's own proof test `test-ladder-line-r158.js` passed 9/9 on
+the rebased tree. Closeout history: 12:00 run SIGTERM'd mid-gate;
+13:00 adoption timed out with a STALE-BASE rebase (`d0e6ae89`, parent
+`4fe571095` — on no branch, never merge, would revert pellet-boost +
+53007); 14:00 run (r159) rebased correctly onto `1ee592573`, gate ran
+to completion, timed out before landing; main session finished the
+closeout (gate adjudication above, merge, release, rotation 4→5).
