@@ -1,0 +1,114 @@
+{
+  "probe": "dawn-pick-conflict",
+  "date": "2026-11-08",
+  "task": "OVE-34",
+  "sha": "aa5d9ef92d6f",
+  "seed": 20261108,
+  "vid": "gen_wco817u",
+  "fixture": {
+    "profileForced": "explorer",
+    "winPlanStageForced": "gear",
+    "pantryKcalTarget": 2500,
+    "note": "Three legacy voices bid on one person/day; live brain is the fourth column."
+  },
+  "shadows": {
+    "goals": {
+      "voice": "goals_obj_lottery",
+      "pick": "HAVEN_CHORE",
+      "reason": "lottery",
+      "corePick": "HAVEN_CHORE",
+      "vgoalTop": "gear_up",
+      "goalLine": "Better close to the fire today.",
+      "indoor": true
+    },
+    "winPlan": {
+      "voice": "win_plan",
+      "pick": "hold",
+      "reason": "gear_hold",
+      "stage": "gear"
+    },
+    "agency": {
+      "voice": "agency_expedition",
+      "pick": "EXPEDITION",
+      "reason": "chance_bid",
+      "chance": 0.09,
+      "profile": "explorer"
+    }
+  },
+  "liveBrain": {
+    "voice": "vbrain_live",
+    "materialize": "VISIT",
+    "commitKind": "HAVEN_CHORE",
+    "commitSrc": "win_plan",
+    "winPlanAction": "gear_hold",
+    "logPick": "HAVEN_CHORE",
+    "corePick": "VISIT",
+    "override": "win_plan:gear_hold",
+    "mode": "lottery",
+    "indoor": true,
+    "extras": [
+      {
+        "kind": "HAVEN_CHORE",
+        "src": "win_plan",
+        "action": "gear_hold",
+        "score": 6
+      },
+      {
+        "kind": "EXPEDITION",
+        "src": "agency_range",
+        "action": null,
+        "score": 0.55
+      }
+    ]
+  },
+  "verdict": {
+    "legacyThreeDisagree": true,
+    "contradictions": [
+      {
+        "pair": "goals_vs_agency",
+        "goals": "HAVEN_CHORE",
+        "agency": "EXPEDITION"
+      },
+      {
+        "pair": "winplan_vs_agency",
+        "winPlan": "hold",
+        "agency": "EXPEDITION"
+      },
+      {
+        "pair": "materialize_vs_commit",
+        "materialize": "VISIT",
+        "commit": "HAVEN_CHORE",
+        "override": "win_plan:gear_hold"
+      }
+    ],
+    "feedExtras": [
+      {
+        "kind": "HAVEN_CHORE",
+        "src": null,
+        "action": null,
+        "w": 1.4
+      },
+      {
+        "kind": "HAVEN_CHORE",
+        "src": "win_plan",
+        "action": "gear_hold",
+        "w": 6
+      },
+      {
+        "kind": "EXPEDITION",
+        "src": "agency_range",
+        "action": null,
+        "w": 0.55
+      }
+    ],
+    "winPlanFeederPresent": true
+  },
+  "architecture": {
+    "phase1Landed": true,
+    "vbrainOwnsDawn": true,
+    "agencyHonorsBrain": true,
+    "chanceRollFallbackStillInSource": true,
+    "note": "Chance roll runs only when vbrainOwnsDawn is absent; with brain loaded, agencyTick honors commitment."
+  },
+  "contradictoryPicksShown": true
+}
