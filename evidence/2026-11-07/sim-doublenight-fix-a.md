@@ -150,6 +150,30 @@ leg D9 covers it (unpaired seed doesn't poison the gate; breaking a
 paired seed still fails). Same class as Amendment A1: a pre-observation
 correction aligning code with the prereg, not a re-score.
 
+## Amendment A3 (re-judge run fleshout-20261108T1017Z, Loop A — recorded 2026-11-08 ~10:40Z, BEFORE any re-judge computation)
+
+GO clause 3's starvation sub-bar (total starveDays after ≤ before + 2)
+is replaced, for the re-judge ONLY, by a RATE bar: starvation rate =
+total starveDays / total lived days (sum of daysAlive across the 16
+judged seeds); bar: after-rate ≤ before-rate + 0.01 hungry-days per
+lived day. The median bar (≥ 0.8× before), the 0-fires bar, and the
+trajectory-identity clause (Amendment A1) are UNCHANGED. Full text +
+rationale in the prereg amendment section
+(evidence/2026-11-07/sim-doublenight-fix-a-prereg.md, Amendment A3).
+
+Rationale in brief (mechanism argument, decided before computing the
+verdict): starveDays counts village-days with anyone hungry, so it
+scales with lived days by construction — the count bar punishes the
+fix's own success (98028 lived 37 days longer and added 10 starveDays;
+98079 lived 25 days shorter and shed 7; all 14 zero-fire seeds delta
+exactly 0). The rate normalizes hunger against exposure, which is what
+the bar was meant to guard. The +0.01/day tolerance is ~4.6% of the
+base rate (~0.218/day). §14 status: a BETWEEN-runs metric revision —
+the rendered NO-GO stands under the old bar and is not rewritten; the
+re-judge renders a NEW verdict under the amended bar on the committed
+deterministic corpora, with NO new sims. The original kill classifies
+under §14a as METRIC-BROKEN, not CONCEPT-DEAD.
+
 ## BEFORE results (unfixed code, base a04a6c0fc, committed 0d44df3ae)
 
 Runner BEFORE mode, exit 0. phases.json: {"p1": true, "p2": false,

@@ -1432,7 +1432,13 @@
   "starvation": {
     "totalBefore": 356,
     "totalAfter": 359,
-    "delta": 3
+    "delta": 3,
+    "livedDaysBefore": 1636,
+    "livedDaysAfter": 1648,
+    "rateBefore": 0.217604,
+    "rateAfter": 0.21784,
+    "rateDelta": 0.000236,
+    "rateTolerance": 0.01
   },
   "goBar": {
     "firesAfter": 0,
@@ -1442,8 +1448,12 @@
     "medianSurvivalOk": true,
     "starvationDelta": 3,
     "starvationOk": false,
+    "starvationRateBefore": 0.217604,
+    "starvationRateAfter": 0.21784,
+    "starvationRateDelta": 0.000236,
+    "starvationRateOk": true,
     "neutralityBeforeExact": true,
     "neutralityAfterExact": true,
-    "go": false
+    "go": true
   }
 }

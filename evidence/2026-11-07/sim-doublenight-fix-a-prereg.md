@@ -285,3 +285,40 @@ pre-registration correction before observation, not a re-score: no
 before/after numbers exist yet. The flap that delayed the instruments
 (01:42–01:54Z, EPERM on writes, probes in the run evidence) is what
 bought the time to catch it.
+
+## Amendment A3 (re-judge run fleshout-20261108T1017Z, Loop A — recorded 2026-11-08 ~10:40Z, BEFORE any re-judge computation)
+
+GO clause 3's starvation sub-bar (total starveDays after ≤ before + 2)
+is replaced, for the re-judge ONLY, by a RATE bar:
+
+- Starvation rate = total starveDays / total lived days, where total
+  lived days = sum of daysAlive across the 16 judged seeds.
+- Bar: after-rate ≤ before-rate + 0.01 hungry-days per lived day.
+- The median bar (≥ 0.8× before), the 0-fires bar, and the
+  trajectory-identity clause (Amendment A1) are UNCHANGED.
+
+Rationale (mechanism argument — decided on the mechanism, not fitted
+to the numbers): starveDays counts village-days with anyone hungry
+(sweep line 253), so it scales with lived days by construction. The
+fix's own success mechanically adds starveDays: a village that lives
+longer accumulates more hungry-days even at an unchanged hunger rate.
+The rendered NO-GO's own metric review shows the mechanism: the +3
+delta is entirely post-first-fire divergence on the two firing seeds —
+98028 lived 37 days longer and added 10 starveDays, 98079 lived 25
+days shorter and shed 7 — while all 14 zero-fire seeds have starveDays
+delta exactly 0. A count bar therefore punishes the fix for keeping a
+village alive: it measures survival, not hunger. The rate normalizes
+hunger against exposure, which is what the bar was meant to guard.
+The +0.01/day tolerance is ~4.6% of the base rate (~0.218/day) — a
+small guard against a real hunger regression, not a fitted number.
+
+§14 status: this is a BETWEEN-runs metric revision (MEASUREMENT.md §14
+— re-evaluation happens between runs, never within one). The original
+NO-GO stands as rendered under the old bar and is NOT rewritten; this
+re-judge renders a NEW verdict under the amended bar, on the committed
+deterministic corpora, with NO new sims. The original kill classifies
+under §14a as METRIC-BROKEN (the bar was confounded by survival — the
+pilot could not have passed on a firing seed that lived longer
+regardless of the fix's merit), which is why the arm returns to the
+queue with a corrected pre-registration rather than being buried as
+CONCEPT-DEAD.

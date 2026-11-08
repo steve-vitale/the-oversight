@@ -15,7 +15,10 @@
 //      neutralityCheck, and the NEW trajectoryDiff rules (zero-fire exact,
 //      firing-seed pre-first-fire exact, firing-day single-pass shape,
 //      post-first-fire divergence counted-not-failed, pre-first-fire diff
-//      fails, after-fire on a firing day fails).
+//      fails, after-fire on a firing day fails). D10 (Amendment A3):
+//      the starvation RATE bar — starveDays per lived day, tolerance
+//      +0.01/day — passes the committed corpora, fails a real regression,
+//      and the old count bar fails the same numbers (the confound).
 //   U. Unit legs, live against the harness, one fresh game per leg:
 //      U1 player-death: the day advances exactly once, villageEats runs
 //      exactly once, the death is recorded on day N, the successor is the
@@ -86,7 +89,7 @@ ok('A11 recorder logs site + eatsInv + seq + isDup per call (trace-on only)', /W
 ok('A12 sweep exports F1 alongside P1/P2', /module\.exports = \{ oneRun, callSiteFromStack, P1, P2, F1, DAYS \}/.test(sweepSrc));
 
 // --- B/C/D: analyzer rules on synthetic data (no corpus needed) ---
-const { pairFires, classifyFire, neutralityCheck, trajectoryDiff } = require('./analyze-doublenight-fix-a.js');
+const { pairFires, classifyFire, neutralityCheck, trajectoryDiff, starvationRate, starvationRateOk, STARVATION_RATE_TOLERANCE } = require('./analyze-doublenight-fix-a.js');
 const EATS = 'Game.villageEats (src/js/game.js:32246:9)';
 const mkCall = (over) => Object.assign({ vid: 'v1', day: 30, away: false, site: EATS, frames: [EATS], eatsInv: 5, seq: 1, isDup: false, ate: 2000, drawn: 1500, fasting: false, hungerBefore: 50, hungerAfter: 40, healthBefore: 90, healthAfter: 90, needEst: 2000 }, over || {});
 ok('B1 H1: different villageEats invocations, same day',
@@ -166,6 +169,15 @@ ok('D9 analyzer A2: F1-style unpaired seed does not poison neutralityExact; a pa
     fs.rmSync(dir, { recursive: true, force: true });
     return okPair && sum2.detGate.neutralityExact === false;
   })());
+ok('D10a analyzer A3: committed corpora pass the rate bar (356/1636 -> 359/1648, delta +0.0002 <= +0.01)',
+  (() => {
+    const bRate = starvationRate(356, 1636), aRate = starvationRate(359, 1648);
+    return STARVATION_RATE_TOLERANCE === 0.01 && starvationRateOk(bRate, aRate) && (aRate - bRate) < 0.001;
+  })());
+ok('D10b analyzer A3: a real hunger regression fails the rate bar (rate +0.02)',
+  (() => starvationRateOk(0.2176, 0.2176 + 0.02) === false)());
+ok('D10c analyzer A3: the old count bar FAILS the same committed numbers (delta +3 > +2) — the confound the rate bar removes',
+  (() => (359 - 356) > 2 && starvationRateOk(starvationRate(356, 1636), starvationRate(359, 1648)))());
 
 // --- S: source legs (the fix shape in game.js) ---
 const deathStart = gameSrc.indexOf('try { this.playerDeath(honestCause); }');

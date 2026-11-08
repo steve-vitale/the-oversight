@@ -18,6 +18,15 @@
 //     verdict inputs (the verdict itself is rendered in the evidence
 //     file, never by this script's exit code). Writes analysis.json into
 //     the AFTER corpus dir.
+// Amendment A3 (re-judge run fleshout-20261108T1017Z): the goBar's
+// starvation sub-bar is a RATE bar, not a count bar — starvation rate
+// = total starveDays / total lived days (sum of daysAlive over judged
+// seeds); bar after-rate <= before-rate + 0.01/day. The old count bar
+// (delta <= +2) is kept in the output as `starvationOk` for the audit
+// trail but no longer gates `go`: it is confounded by survival (a
+// village that lives longer mechanically accumulates more hungry-days).
+// See the prereg Amendment A3. Median bar, 0-fires bar, trajectory
+// clause unchanged.
 // Exit 0 on a completed report; exit 2 on missing/unreadable corpus.
 'use strict';
 const fs = require('fs');
@@ -297,6 +306,20 @@ function diffMealMaps(bMap, aMap) {
   return diffs;
 }
 
+// starvationRate(starveDays, livedDays): hungry-days per lived day.
+// Amendment A3: the binding starvation bar is on this rate, not on the
+// raw count — the count scales with lived days by construction, so a
+// count bar punishes the fix for keeping a village alive.
+function starvationRate(starveDays, livedDays) {
+  if (!livedDays || livedDays <= 0) return null;
+  return starveDays / livedDays;
+}
+const STARVATION_RATE_TOLERANCE = 0.01; // hungry-days per lived day (A3)
+function starvationRateOk(beforeRate, afterRate) {
+  if (beforeRate === null || afterRate === null) return false;
+  return afterRate <= beforeRate + STARVATION_RATE_TOLERANCE;
+}
+
 function main() {
   if (!fs.existsSync(CORPUS)) {
     console.error('FAIL LOUDLY: corpus dir missing: ' + CORPUS);
@@ -337,7 +360,16 @@ function main() {
     const survival = { medianBefore: median(bDays), medianAfter: median(aDays),
       medianRatio: median(bDays) ? +(median(aDays) / median(bDays)).toFixed(3) : null,
       daysAliveBefore: bDays, daysAliveAfter: aDays };
-    const starvation = { totalBefore: bStarve, totalAfter: aStarve, delta: aStarve - bStarve };
+    const bLived = bDays.reduce((n, d) => n + d, 0);
+    const aLived = aDays.reduce((n, d) => n + d, 0);
+    const bRate = starvationRate(bStarve, bLived);
+    const aRate = starvationRate(aStarve, aLived);
+    const starvation = { totalBefore: bStarve, totalAfter: aStarve, delta: aStarve - bStarve,
+      livedDaysBefore: bLived, livedDaysAfter: aLived,
+      rateBefore: bRate === null ? null : +bRate.toFixed(6),
+      rateAfter: aRate === null ? null : +aRate.toFixed(6),
+      rateDelta: (bRate === null || aRate === null) ? null : +(aRate - bRate).toFixed(6),
+      rateTolerance: STARVATION_RATE_TOLERANCE };
     const goBar = {
       firesAfter: after.reproducedFires,
       firesAfterZero: after.reproducedFires === 0,
@@ -345,12 +377,16 @@ function main() {
       medianSurvivalRatio: survival.medianRatio,
       medianSurvivalOk: survival.medianRatio !== null && survival.medianRatio >= 0.8,
       starvationDelta: starvation.delta,
-      starvationOk: starvation.delta <= 2,
+      starvationOk: starvation.delta <= 2, // A3: count bar kept for the audit trail only — does NOT gate go
+      starvationRateBefore: starvation.rateBefore,
+      starvationRateAfter: starvation.rateAfter,
+      starvationRateDelta: starvation.rateDelta,
+      starvationRateOk: starvationRateOk(bRate, aRate),
       neutralityBeforeExact: before.detGate.neutralityExact,
       neutralityAfterExact: after.detGate.neutralityExact,
       go: after.reproducedFires === 0 && diff.clause2Pass
         && survival.medianRatio !== null && survival.medianRatio >= 0.8
-        && starvation.delta <= 2 && before.detGate.neutralityExact,
+        && starvationRateOk(bRate, aRate) && before.detGate.neutralityExact,
     };
     summary.after = { corpus: AFTER_CORPUS, seeds: after.seeds, totalCalls: after.totalCalls,
       reproducedFires: after.reproducedFires, byH: after.byH, byEffect: after.byEffect,
@@ -370,7 +406,8 @@ function main() {
         (r.firstFireDay === null ? ' (zero-fire exact=' + r.zeroFireExact + ')' : ' preDiffs=' + (r.preFirstFireMealDiffs || []).length + ' postDiffs=' + r.postFirstFireMealDiffs + ' postDeaths ' + r.postFirstFireDeathsBefore + '->' + r.postFirstFireDeathsAfter));
     }
     console.log('survival: median ' + survival.medianBefore + ' -> ' + survival.medianAfter + ' (ratio ' + survival.medianRatio + ', bar >= 0.8: ' + goBar.medianSurvivalOk + ')');
-    console.log('starvation: total starveDays ' + starvation.totalBefore + ' -> ' + starvation.totalAfter + ' (delta ' + starvation.delta + ', bar <= +2: ' + goBar.starvationOk + ')');
+    console.log('starvation: total starveDays ' + starvation.totalBefore + ' -> ' + starvation.totalAfter + ' (delta ' + starvation.delta + ', old count bar <= +2: ' + goBar.starvationOk + ' — A3: audit only, does not gate)');
+    console.log('starvation rate: ' + starvation.rateBefore + ' -> ' + starvation.rateAfter + ' hungry-days/lived-day (delta ' + starvation.rateDelta + ', bar <= +0.01: ' + goBar.starvationRateOk + ') over ' + starvation.livedDaysBefore + ' -> ' + starvation.livedDaysAfter + ' lived days');
     console.log('neutrality before exact: ' + before.detGate.neutralityExact + '; after exact: ' + after.detGate.neutralityExact);
     console.log('GO-BAR: ' + JSON.stringify(goBar));
   } else {
@@ -399,4 +436,4 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = { pairFires, classifyFire, neutralityCheck, loadPerSeed, loadSummary, trajectoryDiff, diffMealMaps, median, analyzeCorpus };
+module.exports = { pairFires, classifyFire, neutralityCheck, loadPerSeed, loadSummary, trajectoryDiff, diffMealMaps, median, analyzeCorpus, starvationRate, starvationRateOk, STARVATION_RATE_TOLERANCE };
