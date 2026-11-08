@@ -263,10 +263,24 @@ fixed and proven in-run.
   GORGE attribution: 52 nights, 55,821 kcal; single 44,
   single-unbooked 8, ambiguous 0.
 
-## CLOSEOUT (to fill)
+## CLOSEOUT
 
-- Fix commit: (to fill at commit time).
-- Evidence commit: this note + 3 panel JSONs + pilot analysis.
-- Gate: check.js --quick (log in goal hidden_files).
-- Merged ff-only to master; worktree released; lock deleted;
-  rotation-b 6→7.
+- Fix commit: b779157b1 (branch journey2-crisis, base d5223d14c).
+  Proof test-journey-crisis-r155-recap-prefix.js 11/11; RED 3 failures
+  on unfixed code; r154 recap test still ALL PASS.
+- Evidence commit: same commit (this note + 3 panel JSONs + pilot
+  analysis; post-fix JSONs byte-identical to the pilot JSONs).
+- Gate: check.js --quick 284 passed / 6 failed in 478s — EXACTLY the
+  r118/r154 baseline (the 6 are the known pre-existing failures:
+  measurement-proof-update, measurement-workflow,
+  mobile-combat-cadence, occupation-panels, phone-frame-proof,
+  establishment-r20-fixes). Log: goal hidden_files/
+  check-quick-r155-20261108.log. Exit 1 is the baseline behavior
+  (any failure exits 1); no new failure.
+- Telemetry: quiet — 3 files, 3 metrics, no large deviations
+  (defendedFights/ playerFights/latelyDefenseCount vs crisis.json
+  baseline; defendedFights total 54, inside the historical 3-seed
+  range 43–143). Baseline NOT rolled.
+- Merged ff-only to master at closeout; worktree released; lock
+  deleted; rotation-b 6→7 (succession next). Merge SHA and adoption
+  details: memory log 2026-11-08.
