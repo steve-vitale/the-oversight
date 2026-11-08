@@ -1,0 +1,111 @@
+{
+  "seed": 91015,
+  "arm": "baseline",
+  "waves": [
+    "buffering",
+    "sunback",
+    "reunion"
+  ],
+  "partyN": 4,
+  "perWave": [
+    {
+      "waveIdx": 0,
+      "mid": "buffering",
+      "packAtStart": {
+        "buffering": 1
+      },
+      "reunionCountAtStart": 0,
+      "partyN": 4,
+      "scholarHpAtStart": 1,
+      "outcome": "chained",
+      "steps": 14,
+      "scholarHpAtEnd": 0.79,
+      "monstersAtEnd": [
+        {
+          "id": "buffering",
+          "hpFrac": -0.007,
+          "alive": false
+        }
+      ],
+      "tbEndResult": "won",
+      "rowOutcome": "won",
+      "rowRounds": 13
+    },
+    {
+      "waveIdx": 1,
+      "mid": "sunback",
+      "packAtStart": {
+        "sunback": 1
+      },
+      "reunionCountAtStart": 0,
+      "partyN": 4,
+      "scholarHpAtStart": 0.79,
+      "outcome": "chained",
+      "steps": 3,
+      "scholarHpAtEnd": 0.79,
+      "monstersAtEnd": [
+        {
+          "id": "sunback",
+          "hpFrac": -0.028,
+          "alive": false
+        }
+      ],
+      "tbEndResult": "won",
+      "rowOutcome": "won",
+      "rowRounds": 2
+    },
+    {
+      "waveIdx": 2,
+      "mid": "reunion",
+      "packAtStart": {
+        "reunion": 3
+      },
+      "reunionCountAtStart": 3,
+      "partyN": 4,
+      "scholarHpAtStart": 0.79,
+      "outcome": "died",
+      "steps": 3,
+      "scholarHpAtEnd": -0.39,
+      "monstersAtEnd": [
+        {
+          "id": "reunion",
+          "hpFrac": 0.987,
+          "alive": true
+        },
+        {
+          "id": "reunion",
+          "hpFrac": 0.974,
+          "alive": true
+        },
+        {
+          "id": "reunion",
+          "hpFrac": 1,
+          "alive": true
+        }
+      ],
+      "tbEndResult": "lost",
+      "rowOutcome": "lost",
+      "rowRounds": 2
+    }
+  ],
+  "outcome": "died",
+  "deaths": [
+    {
+      "scholarId": "gen_lqd4amq",
+      "causeArg": "the arena",
+      "waveIdx": 2,
+      "day": 30
+    }
+  ],
+  "capConstant": null,
+  "reunionWave": {
+    "reached": true,
+    "outcome": "died",
+    "reunionCount": 3,
+    "partyN": 4,
+    "scholarHpAtStart": 0.79,
+    "scholarHpAtEnd": -0.39,
+    "tbEndResult": "lost"
+  },
+  "instrumentErrors": []
+}

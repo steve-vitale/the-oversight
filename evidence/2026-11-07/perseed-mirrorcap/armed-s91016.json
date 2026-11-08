@@ -1,0 +1,101 @@
+{
+  "seed": 91016,
+  "arm": "armed",
+  "waves": [
+    "buffering",
+    "sunback",
+    "reunion"
+  ],
+  "partyN": 4,
+  "perWave": [
+    {
+      "waveIdx": 0,
+      "mid": "buffering",
+      "packAtStart": {
+        "buffering": 1
+      },
+      "reunionCountAtStart": 0,
+      "partyN": 4,
+      "scholarHpAtStart": 1,
+      "outcome": "chained",
+      "steps": 19,
+      "scholarHpAtEnd": 1,
+      "monstersAtEnd": [
+        {
+          "id": "buffering",
+          "hpFrac": -0.006,
+          "alive": false
+        }
+      ],
+      "tbEndResult": "won",
+      "rowOutcome": "won",
+      "rowRounds": 18
+    },
+    {
+      "waveIdx": 1,
+      "mid": "sunback",
+      "packAtStart": {
+        "sunback": 1
+      },
+      "reunionCountAtStart": 0,
+      "partyN": 4,
+      "scholarHpAtStart": 1,
+      "outcome": "chained",
+      "steps": 3,
+      "scholarHpAtEnd": 0.84,
+      "monstersAtEnd": [
+        {
+          "id": "sunback",
+          "hpFrac": -0.028,
+          "alive": false
+        }
+      ],
+      "tbEndResult": "won",
+      "rowOutcome": "won",
+      "rowRounds": 2
+    },
+    {
+      "waveIdx": 2,
+      "mid": "reunion",
+      "packAtStart": {
+        "reunion": 1
+      },
+      "reunionCountAtStart": 1,
+      "partyN": 4,
+      "scholarHpAtStart": 0.84,
+      "outcome": "died",
+      "steps": 4,
+      "scholarHpAtEnd": -0.2,
+      "monstersAtEnd": [
+        {
+          "id": "reunion",
+          "hpFrac": 0.974,
+          "alive": true
+        }
+      ],
+      "tbEndResult": "lost",
+      "rowOutcome": "lost",
+      "rowRounds": 3
+    }
+  ],
+  "outcome": "died",
+  "deaths": [
+    {
+      "scholarId": "gen_786gofh",
+      "causeArg": "the arena",
+      "waveIdx": 2,
+      "day": 30
+    }
+  ],
+  "capConstant": 1,
+  "reunionWave": {
+    "reached": true,
+    "outcome": "died",
+    "reunionCount": 1,
+    "partyN": 4,
+    "scholarHpAtStart": 0.84,
+    "scholarHpAtEnd": -0.2,
+    "tbEndResult": "lost"
+  },
+  "instrumentErrors": []
+}
