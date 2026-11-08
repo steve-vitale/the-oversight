@@ -13,6 +13,7 @@
 //   5. Top-scoring DUTY forage → commit DUTY + align FORAGE (materialize
 //      stays core; OVE-36 honesty). No assignTask write.
 //   6. Failing control: vbrainDisableDutyPick → DUTY scores but never commits.
+//   7. Standing gardenKeeper: no DUTY ads; duty_top_score cannot override.
 //
 // Usage: node scripts/test-duty-dawn-candidates.js
 // Exit 0 = pass, 1 = fail, 2 = setup skip. No repo writes.
@@ -276,6 +277,51 @@ function dutyKinds(cands) {
     const commit2 = Game.vbrainCommit(vid);
     check('pick-control restored: DUTY commits', commit2 && commit2.kind === 'DUTY' && commit2.dutyTask === 'forage',
       JSON.stringify(commit2));
+  }
+
+  console.log('== standing gardenKeeper: no DUTY ads or pick ==');
+  {
+    plantLowBelief(Game, vid, day);
+    delete (v.assignments || {})[vid];
+    const prevKeeper = v.gardenKeeper;
+    v.gardenKeeper = vid;
+    const feed = Game.dutyFeedCands(vid) || [];
+    check('gardenKeeper: no DUTY ads', feed.length === 0, JSON.stringify(dutyKinds(feed)));
+    const dutyLoose = {
+      kind: 'DUTY', dutyTask: 'forage', w: 9.0, vbrainSrc: 'duty',
+      considerations: [{ id: 'believed_need', raw: 1, note: 'forced' }],
+    };
+    const cands = [{ kind: 'HAVEN_CHORE', w: 0.01, chore: 'fire' }, dutyLoose];
+    try {
+      const br = v.vbrain;
+      if (br && br.commit) delete br.commit[vid];
+    } catch (e) {}
+    Game.vbrainScorePick(vid, cands, { rng: () => 0 });
+    const log = Game.vbrainLastLog(vid);
+    const commit = Game.vbrainCommit(vid);
+    check('gardenKeeper: no duty_top_score override',
+      !(log && log.override === 'duty_top_score'),
+      JSON.stringify({ override: log && log.override, pick: log && log.pick }));
+    check('gardenKeeper: commit is not DUTY',
+      !(commit && commit.kind === 'DUTY'),
+      JSON.stringify(commit));
+    // Failing control: clear keeper → ads and pick return.
+    v.gardenKeeper = null;
+    const feedFree = Game.dutyFeedCands(vid) || [];
+    check('gardenKeeper cleared: DUTY ads return',
+      dutyKinds(feedFree).indexOf('forage') >= 0, JSON.stringify(dutyKinds(feedFree)));
+    try {
+      const br = v.vbrain;
+      if (br && br.commit) delete br.commit[vid];
+    } catch (e) {}
+    const duty2 = (Game.dutyFeedCands(vid) || []).find(c => c.dutyTask === 'forage');
+    const cands2 = [{ kind: 'HAVEN_CHORE', w: 0.01, chore: 'fire' }, duty2].filter(Boolean);
+    Game.vbrainScorePick(vid, cands2, { rng: () => 0 });
+    const commit2 = Game.vbrainCommit(vid);
+    check('gardenKeeper cleared: DUTY can commit',
+      commit2 && commit2.kind === 'DUTY' && commit2.dutyTask === 'forage',
+      JSON.stringify(commit2));
+    v.gardenKeeper = prevKeeper || null;
   }
 
   console.log('== summary ==');

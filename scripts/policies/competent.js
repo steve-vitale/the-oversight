@@ -1055,10 +1055,20 @@ function workGarden(Game,ctx) {
     if(inside&&Game.exitBuilding()!==true)return;
     if(!active())return;
     harvest();if(!active())return;
+    const v=Game.state.village;
+    // Appoint the standing caretaker BEFORE bed-prep ticks. makePlot advances
+    // the clock; DUTY top-score can otherwise pull every unassigned body off
+    // Haven before setGardenKeeper runs. Named gardenKeeper is suppressed in
+    // dutyFeedCands / duty_top_score — order first so that honor can apply.
+    if(Game.setGardenKeeper && !Game.gardenKeeperReady(v.gardenKeeper)){
+      const candidates=(v.roster||[]).filter(id=>Game.gardenKeeperReady(id)&&!v.assignments?.[id]);
+      const score=id=>(Game.villagerKnowsPlants(id)||[]).length+(Game.gardenMagicPlan(id)?10:0);
+      candidates.sort((a,b)=>score(b)-score(a));
+      if(candidates.length)Game.setGardenKeeper(candidates[0]);
+    }
     const target=Math.min(4,Game.gardenCapacity?Game.gardenCapacity():6);
     while(active()&&Game.gardenPlots().length<target){const n=Game.gardenPlots().length;Game.makePlot();if(Game.gardenPlots().length<=n)break;}
     if(!active())return;
-    const v=Game.state.village;
     if(Game.setGardenKeeper && !Game.gardenKeeperReady(v.gardenKeeper)){
       const candidates=(v.roster||[]).filter(id=>Game.gardenKeeperReady(id)&&!v.assignments?.[id]);
       const score=id=>(Game.villagerKnowsPlants(id)||[]).length+(Game.gardenMagicPlan(id)?10:0);

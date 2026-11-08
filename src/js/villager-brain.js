@@ -21,6 +21,7 @@
 //   - vbrain_bond_candidates: PROPOSE_BOND / RAISE_LINK from bondFeedCands enter the dawn extras list so the initiator's scorer weighs them; warmth gate and npcInviteDecision stay in bond-initiation (code: vbrainFeedExtras, VILLAGER-BRAIN Phase 4)
 //   - vbrain_duty_candidates: unassigned villagers get DUTY ads from believed village needs (objResourceBelief → forage/cook/water); player/convo assignTask stays a binding commitment — assigned people get no competing duty ads (code: dutyFeedCands, vbrainFeedExtras, VILLAGER-BRAIN Phase 6)
 //   - vbrain_duty_pick: when a DUTY extra is top-scoring vs the core lottery pick, it becomes the dawn commitment (duty_top_score); align maps forage/water/cook to real objectives — never calls assignTask (code: vbrainScorePick, vbrainAlignObjective, VILLAGER-BRAIN Phase 6)
+//   - vbrain_duty_respects_garden_keeper: standing village.gardenKeeper gets no DUTY ads and cannot duty_top_score override — caretaker order stays at Haven (code: dutyFeedCands, vbrainScorePick)
 //   - vbrain_commitment: the dawn pick writes a commitment record the same day so midday agency honors it instead of rolling again (code: vbrainScorePick, vbrainCommit)
 //   - vbrain_materialize_matches_commit: when an aimed override wins, objPick aligns the live objective kind to the commitment after core chore/facing draws (code: vbrainAlignObjective)
 //   - vbrain_midday_event_only: mid-day idle/done refresh runs only when commit day/part is stale or a perception flag fired; dawn still force-refreshes (code: vbrainShouldRefresh, vbrainMarkPerception)
@@ -357,6 +358,11 @@
         ? ((self.state.village.assignments || {})[vid] || null) : null;
       if (asg && asg.task && asg.task !== 'rest') return out;
     } catch (e) {}
+    // Standing garden caretaker — keep them at Haven; DUTY must not pull them.
+    try {
+      var gk = ((self.state || {}).village || {}).gardenKeeper;
+      if (gk && gk === vid) return out;
+    } catch (e) {}
     try {
       var vp = self.vpOf ? self.vpOf(vid) : null;
       if (vp && vp.dead) return out;
@@ -596,20 +602,28 @@
       // Phase 6: DUTY extras compete by score. When the best DUTY weight beats
       // or ties the core lottery pick, it wins the commitment (no Math.random;
       // core stream untouched). Does not call assignTask — align maps the
-      // dutyTask onto a real objective the person will pursue. Seams:
+      // dutyTask onto a real objective the person will pursue. Standing
+      // gardenKeeper never overrides (same honor as dutyFeedCands). Seams:
       // vbrainDisableDutyPick strips the pick hook (ads still score).
       if (!override) {
         try {
           if (!this.vbrainDisableDutyPick) {
-            var bestDuty = null;
-            for (i = 0; i < extras.length; i++) {
-              if (!extras[i] || extras[i].kind !== 'DUTY') continue;
-              if (!bestDuty || (extras[i].w || 0) > (bestDuty.w || 0)) bestDuty = extras[i];
-            }
-            var coreW = chosen ? (chosen.w || 0) : 0;
-            if (bestDuty && (bestDuty.w || 0) >= coreW) {
-              override = bestDuty;
-              overrideReason = 'duty_top_score';
+            var isGardenKeeper = false;
+            try {
+              var gkPick = ((this.state || {}).village || {}).gardenKeeper;
+              isGardenKeeper = !!(gkPick && gkPick === vid);
+            } catch (eGk) { isGardenKeeper = false; }
+            if (!isGardenKeeper) {
+              var bestDuty = null;
+              for (i = 0; i < extras.length; i++) {
+                if (!extras[i] || extras[i].kind !== 'DUTY') continue;
+                if (!bestDuty || (extras[i].w || 0) > (bestDuty.w || 0)) bestDuty = extras[i];
+              }
+              var coreW = chosen ? (chosen.w || 0) : 0;
+              if (bestDuty && (bestDuty.w || 0) >= coreW) {
+                override = bestDuty;
+                overrideReason = 'duty_top_score';
+              }
             }
           }
         } catch (e) {}

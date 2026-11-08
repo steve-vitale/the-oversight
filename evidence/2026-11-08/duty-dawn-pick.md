@@ -36,16 +36,21 @@ overrides; DUTY extras were log-only.
 | `writeCommit.dutyTask` | Persist task on commitment |
 | `vbrainAlignObjective` DUTY branch | forage→FORAGE, water→WATER, cook→HAVEN_CHORE/cook; hash facing outdoors |
 | Seam `vbrainDisableDutyPick` | Failing control: ads still score, never commit |
+| `gardenKeeper` honor | Standing caretaker: no DUTY ads / no `duty_top_score` |
+| `workGarden` appoint-before-prep | Name caretaker before `makePlot` ticks so honor applies |
 
 Does **not** call `assignTask` or bypass obedience. Assigned villagers
 still get no DUTY ads (OVE-60 standing-order gate).
 
 ## Probe
 
-`scripts/test-duty-dawn-candidates.js` — **37/37** (seed `20261108`).
+`scripts/test-duty-dawn-candidates.js` — **42/42** (seed `20261108`).
 
-Includes pick/commit/align assertions + `vbrainDisableDutyPick` failing
-control (remove pick hook → DUTY never commits; restore returns).
+Includes pick/commit/align assertions, `vbrainDisableDutyPick` failing
+control, and gardenKeeper ad/pick suppression + clear-restore control.
+
+`scripts/godpath/test-garden-cultivation.js` — **39/39** (DUTY no longer
+steals caretakers during competent `workGarden` prepare).
 
 Also: `check-wired` villager-brain (0 unwired), `validate-ontology` green.
 
@@ -82,7 +87,6 @@ Aimed DUTY→WATER/FORAGE mix moved the seed-84101 non-aimed errand panel
 
 ## Quick check note
 
-Leave Muse residuals alone: occupation panels (`rail_conductor`), and
-`test-garden-cultivation.js` prepare/caretaker fails under DUTY pick
-(garden lane — do not retune). Tip godpath flakes (alien-party-readiness,
-daily-voice, lunge-runtime) unchanged.
+Leave Muse residuals alone: occupation panels (`rail_conductor`). Tip
+godpath flakes (alien-party-readiness, daily-voice, lunge-runtime)
+unchanged. Garden cultivation is green after gardenKeeper honor.
