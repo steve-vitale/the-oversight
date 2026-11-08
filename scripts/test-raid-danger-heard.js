@@ -205,7 +205,15 @@ function setObjective(Game, vid, hx, hy) {
     const dg = Game.objDanger(principal, o.tx, o.ty, hx, hy);
     check('rally: principal (unhearing, bold) still go', dg.verdict === 'go',
       'verdict=' + dg.verdict + ' score=' + dg.score);
+    // Phase 4: companion accept/refuse goes through npcInviteDecision.
+    // Pin roll:0 so this prepared scene proves the hearing volunteer path,
+    // not invite RNG.
+    const _ask = Game.objAskCompanion.bind(Game);
+    Game.objAskCompanion = function (vid, obj, hx2, hy2, opts) {
+      return _ask(vid, obj, hx2, hy2, Object.assign({}, opts || {}, { roll: 0 }));
+    };
     Game.objMaybeDepart(principal, Game.npcNode(principal), true, hx, hy);
+    Game.objAskCompanion = _ask;
     const awayP = (v.away || {})[principal];
     const cid = Game.objOf(principal).companion;
     check('rally: principal departs', !!awayP);

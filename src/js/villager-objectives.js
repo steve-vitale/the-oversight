@@ -14,6 +14,7 @@
 //   - objMaybeDepart(rid, node, atHaven, hx, hy)
 //   - objAwayStep(rid, node, away, hx, hy)
 //   - objAskCompanion(vid, obj, hx, hy, opts)
+//   - objCommitGuardOffer(cid, offer)
 //   - objRallyFreshRaid(vid)
 //   - objTick()
 //   - objHealGate(vid, obj, hx, hy, playerAtHaven)
@@ -28,11 +29,13 @@
 //   - return_names_are_honest: objective-return copy names the found one via _repName — a stranger descriptor ("A person, maybe 40s") is used whole, never its first word ("found A" read broken). (code: villager-objectives.js, travel lever r4 2026-10-12)
 //   - bark_armor_teach: a villager WEARING bark armor teaches the player its recipe L1 on return (trust 15+, player at haven, once per teacher) — the snare-lesson pattern for the occupation lottery's armor. (code: villager-objectives.js, 2026-10-13)
 //   - return_to_fight: a villager who fought a living world monster remembers the fight's tile, and only that villager may be offered a HUNT errand back to it (fresh memory, armed, in range, existing departure gates still apply). No villager is ever routed to a monster tile nobody fought on — knowledge gates the route, never a radar. (code: villager-objectives.js, game.js resolveWildMonsterEncounter, 2026-10-27)
-//   - rally_guard: on a 'go'-verdict departure within 3 days of raid gossip, a protect/prove/lead villager at haven may volunteer as GUARD via objAskCompanion (rallyOnly) — the danger check alone would send the principal out solo. Same solo/HUNT exclusions and heal gates as the 'ask' path; no new RNG draws, so games without a fresh raid are bit-identical to base. (code: villager-objectives.js, win-drives 2026-11-03)
+//   - rally_guard: on a 'go'-verdict departure within 3 days of raid gossip, a protect/prove/lead villager at haven may volunteer as GUARD via objAskCompanion (rallyOnly) — the danger check alone would send the principal out solo. Same solo/HUNT exclusions and heal gates as the 'ask' path; games without a fresh raid still skip the ask (no invite rolls). (code: villager-objectives.js, win-drives 2026-11-03)
+//   - companion_no_cross_write: objAskCompanion never writes another villager's objective — the GUARD offer is advertised to the companion, npcInviteDecision (kind 'lure') accepts or refuses, and only on accept does objCommitGuardOffer write the companion's OWN objective (code: objAskCompanion, objCommitGuardOffer, VILLAGER-BRAIN Phase 4)
 // consumes:
 //   - village.roster, village.away, village.nodePos, village.gossip
 //   - npcNode, npcSetNode, npcInside, npcSetInside, npcTemper, npcGoal, npcNeeds
 //   - npcRangeProfile, npcMaxDist (villager-agency.js), agencyState
+//   - npcInviteDecision (betrayal.js) — companion accept/refuse arbiter
 /* VILLAGER OBJECTIVES — src/js/villager-objectives.js
  *
  * Steve (2026-10-08): "people don't ever seem to leave haven. They shouldn't
@@ -1112,6 +1115,29 @@
       try { return !!(this.objDangerBelief(vid) || {}).freshRaid; } catch (e) {}
       return false;
     },
+    // Companion self-commit for an accepted GUARD offer (VILLAGER-BRAIN
+    // Phase 4). Only the companion's own objective is written — never from
+    // the asker's draft. Clears goal annotation and hunt provenance the
+    // same way a fresh objPick does, so a drafted GUARD never carries a
+    // prior HUNT mid.
+    objCommitGuardOffer(cid, offer) {
+      if (!cid || !offer) return null;
+      var co2 = this.objOf(cid);
+      if (!co2) return null;
+      co2.kind = 'GUARD';
+      co2.purpose = offer.purpose || 'guard';
+      co2.state = 'ready';
+      co2.goal = null; co2.goalLine = null;
+      co2.huntMid = null; co2.huntTx = null; co2.huntTy = null; co2.huntDay = null;
+      try { co2.followsUsed = 0; } catch (e) {}
+      co2.tx = offer.tx; co2.ty = offer.ty;
+      co2.targetVid = offer.targetVid != null ? offer.targetVid : null;
+      co2.tightness = offer.tightness;
+      co2.partsLeft = offer.partsLeft;
+      co2.indoor = false;
+      co2.companion = offer.companion != null ? offer.companion : null;
+      return co2;
+    },
     // ASK: find someone to walk with. A companion with their own outdoor
     // errand is ideal; otherwise the willing (bold, warm, trusting, sociable).
     // Both are marked away together, and the village hears about it.
@@ -1119,6 +1145,12 @@
     // protection or ambition ('protect' / 'prove' / 'lead') volunteer —
     // the drive's reason IS the goal, so anyone else is not a volunteer
     // for this drive, and no fallback to other companions happens.
+    // Phase 4: the asker does NOT overwrite the companion's objective.
+    // Eligible companions receive a GUARD candidate with terms advertised;
+    // npcInviteDecision (kind 'lure') is the arbiter. On accept, the
+    // companion self-commits via objCommitGuardOffer. On refuse, try the
+    // next candidate — nobody's objective is touched. opts.roll pins the
+    // invite roll for tests (same seam as bond / party invites).
     objAskCompanion(vid, obj, hx, hy, opts) {
       var rallyOnly = !!(opts && opts.rallyOnly);
       var v = this.state.village;
@@ -1174,19 +1206,43 @@
       }
       if (!cands.length) return null;
       cands.sort(function (a, b) { return b.s - a.s; });
-      var cid = cands[0].id;
-      // the companion walks with them: same target, same clock, purpose 'guard'
-      var co2 = this.objOf(cid);
-      co2.kind = 'GUARD'; co2.purpose = 'guard'; co2.state = 'ready';
-      // FRESH ERRAND (journey deepening r102): the guard errand replaces
-      // the companion's own errand, so its goal annotation must not carry
-      // over — same stale-goal class as the objPick reset.
-      co2.goal = null; co2.goalLine = null;
-      co2.tx = obj.tx; co2.ty = obj.ty; co2.targetVid = vid;
-      co2.tightness = obj.tightness; co2.partsLeft = obj.partsLeft;
-      co2.indoor = false; co2.companion = vid;
-      obj.companion = cid;
-      return cid;
+      // Advertise the GUARD offer (terms the companion's arbiter weighs).
+      // Walk ranked candidates: each decides via npcInviteDecision; a
+      // refuse leaves that villager's objective untouched.
+      var offerBase = {
+        kind: 'GUARD',
+        purpose: 'guard',
+        tx: obj.tx,
+        ty: obj.ty,
+        tightness: obj.tightness,
+        partsLeft: obj.partsLeft,
+        targetVid: vid,
+        companion: vid,
+      };
+      for (var ci = 0; ci < cands.length; ci++) {
+        var cid = cands[ci].id;
+        var decideOpts = { kind: 'lure', offer: Object.assign({}, offerBase) };
+        if (opts && typeof opts.roll === 'number') decideOpts.roll = opts.roll;
+        var decision = null;
+        try {
+          decision = this.npcInviteDecision
+            ? this.npcInviteDecision(cid, vid, decideOpts)
+            : { accept: true, chance: 100, reasons: ['no-invite-decider'] };
+        } catch (e) { decision = null; }
+        // Stash last decision for probes (off-state; never saved).
+        try {
+          this._lastCompanionAsk = {
+            asker: vid, candidate: cid, offer: decideOpts.offer,
+            decision: decision, accepted: !!(decision && decision.accept),
+          };
+        } catch (e) {}
+        if (!(decision && decision.accept)) continue; // refuse — objective untouched
+        // Accept: companion commits the advertised GUARD terms themselves.
+        try { this.objCommitGuardOffer(cid, decideOpts.offer); } catch (e) { continue; }
+        obj.companion = cid;
+        return cid;
+      }
+      return null;
     },
     // HEAL GATE (departure heal gate, lever 2026-10-13): objective
     // departures get the expedition 70-HP heal check (villagerHealCheck in
