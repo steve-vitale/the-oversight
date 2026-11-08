@@ -1,0 +1,1917 @@
+{
+  "note": "metrics.* is authoritative for all23; row.national can disagree (maxRank snapshot vs metric). Seat kind from endings.table_won.seat.",
+  "pooledMetrics": {
+    "won": {
+      "n": 64,
+      "mean": 0.7031
+    },
+    "entered": {
+      "n": 64,
+      "mean": 0.7031
+    },
+    "table": {
+      "n": 64,
+      "mean": 0.7031
+    },
+    "national": {
+      "n": 64,
+      "mean": 0.8594
+    },
+    "survival30": {
+      "n": 64,
+      "mean": 0.9375
+    },
+    "survival60": {
+      "n": 64,
+      "mean": 0.5156
+    },
+    "playerDeaths": {
+      "n": 64,
+      "mean": 1.6719
+    },
+    "villageDeaths": {
+      "n": 64,
+      "mean": 67.5313
+    },
+    "communityLost": {
+      "n": 64,
+      "mean": 0.0625
+    },
+    "livingNpcs": {
+      "n": 64,
+      "mean": 8.6061
+    },
+    "lowFood": {
+      "n": 64,
+      "mean": 0.0066
+    },
+    "npcHungry": {
+      "n": 64,
+      "mean": 0.0876
+    },
+    "classAccess": {
+      "n": 64,
+      "mean": 0.9063
+    },
+    "npcClassAccess": {
+      "n": 64,
+      "mean": 0.2101
+    },
+    "goodGear": {
+      "n": 64,
+      "mean": 1
+    },
+    "abilityAccepted": {
+      "n": 64,
+      "mean": 100.9063
+    }
+  },
+  "pooledSeats": {
+    "full": 9,
+    "lesser": 36,
+    "none": 19
+  },
+  "byPolicy": {
+    "capable": {
+      "metrics": {
+        "won": {
+          "n": 16,
+          "mean": 0.9375,
+          "sum": 15
+        },
+        "entered": {
+          "n": 16,
+          "mean": 0.9375,
+          "sum": 15
+        },
+        "table": {
+          "n": 16,
+          "mean": 0.9375,
+          "sum": 15
+        },
+        "national": {
+          "n": 16,
+          "mean": 0.6875,
+          "sum": 11
+        },
+        "survival30": {
+          "n": 16,
+          "mean": 0.875,
+          "sum": 14
+        },
+        "survival60": {
+          "n": 16,
+          "mean": 0.25,
+          "sum": 4
+        },
+        "playerDeaths": {
+          "n": 16,
+          "mean": 1.75,
+          "sum": 28
+        },
+        "villageDeaths": {
+          "n": 16,
+          "mean": 68.5625,
+          "sum": 1097
+        },
+        "communityLost": {
+          "n": 16,
+          "mean": 0.0625,
+          "sum": 1
+        },
+        "livingNpcs": {
+          "n": 16,
+          "mean": 8.8663,
+          "sum": 141.86
+        },
+        "lowFood": {
+          "n": 16,
+          "mean": 0.0079,
+          "sum": 0.1271
+        },
+        "npcHungry": {
+          "n": 16,
+          "mean": 0.0718,
+          "sum": 1.1487
+        },
+        "classAccess": {
+          "n": 16,
+          "mean": 0.8125,
+          "sum": 13
+        },
+        "npcClassAccess": {
+          "n": 16,
+          "mean": 0.1453,
+          "sum": 2.3256
+        },
+        "goodGear": {
+          "n": 16,
+          "mean": 1,
+          "sum": 16
+        },
+        "abilityAccepted": {
+          "n": 16,
+          "mean": 101.9375,
+          "sum": 1631
+        }
+      },
+      "mismatches": [],
+      "starvLabels": {
+        "player:starvation": 1,
+        "villager:starvation": 4
+      },
+      "seats": [
+        {
+          "seed": 1,
+          "seat": "full",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 96,
+          "end": "over-other"
+        },
+        {
+          "seed": 2,
+          "seat": "full",
+          "path": "relay",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 3,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 0,
+          "days": 89,
+          "end": "over-other"
+        },
+        {
+          "seed": 4,
+          "seat": "lesser",
+          "path": "defiant",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 5,
+          "seat": "full",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 89,
+          "end": "over-other"
+        },
+        {
+          "seed": 6,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 89,
+          "end": "over-other"
+        },
+        {
+          "seed": 7,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 0,
+          "days": 88,
+          "end": "over-other"
+        },
+        {
+          "seed": 8,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 9,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 0,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 42,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 99,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 91,
+          "end": "over-other"
+        },
+        {
+          "seed": 555,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 89,
+          "end": "over-other"
+        },
+        {
+          "seed": 777,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 89,
+          "end": "over-other"
+        },
+        {
+          "seed": 2026,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 0,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 31337,
+          "seat": "lesser",
+          "path": "defiant",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        }
+      ],
+      "diedBy60": [
+        {
+          "seed": 1,
+          "surv30": 1,
+          "days": 96,
+          "end": "over-other",
+          "playerDeaths": 2,
+          "starv": []
+        },
+        {
+          "seed": 2,
+          "surv30": 1,
+          "days": 90,
+          "end": "over-other",
+          "playerDeaths": 2,
+          "starv": []
+        },
+        {
+          "seed": 3,
+          "surv30": 1,
+          "days": 89,
+          "end": "over-other",
+          "playerDeaths": 1,
+          "starv": []
+        },
+        {
+          "seed": 4,
+          "surv30": 0,
+          "days": 90,
+          "end": "over-other",
+          "playerDeaths": 1,
+          "starv": []
+        },
+        {
+          "seed": 5,
+          "surv30": 1,
+          "days": 89,
+          "end": "over-other",
+          "playerDeaths": 4,
+          "starv": []
+        },
+        {
+          "seed": 7,
+          "surv30": 1,
+          "days": 88,
+          "end": "over-other",
+          "playerDeaths": 3,
+          "starv": []
+        },
+        {
+          "seed": 8,
+          "surv30": 1,
+          "days": 90,
+          "end": "over-other",
+          "playerDeaths": 2,
+          "starv": []
+        },
+        {
+          "seed": 9,
+          "surv30": 1,
+          "days": 90,
+          "end": "over-other",
+          "playerDeaths": 3,
+          "starv": []
+        },
+        {
+          "seed": 42,
+          "surv30": 1,
+          "days": 90,
+          "end": "over-other",
+          "playerDeaths": 1,
+          "starv": []
+        },
+        {
+          "seed": 555,
+          "surv30": 1,
+          "days": 89,
+          "end": "over-other",
+          "playerDeaths": 2,
+          "starv": []
+        },
+        {
+          "seed": 1234,
+          "surv30": 0,
+          "days": 29,
+          "end": "village-lost",
+          "playerDeaths": 1,
+          "starv": [
+            [
+              "villager:starvation",
+              3
+            ]
+          ]
+        },
+        {
+          "seed": 31337,
+          "surv30": 1,
+          "days": 90,
+          "end": "over-other",
+          "playerDeaths": 2,
+          "starv": []
+        }
+      ],
+      "earlyVillageLost": [
+        {
+          "seed": 1234,
+          "days": 29
+        }
+      ],
+      "communityFirstEmptyMed": null,
+      "communityFirstEmptyN": 0,
+      "fullSeat": 3,
+      "lesserSeat": 12,
+      "noSeat": 1
+    },
+    "maker": {
+      "metrics": {
+        "won": {
+          "n": 16,
+          "mean": 0.4375,
+          "sum": 7
+        },
+        "entered": {
+          "n": 16,
+          "mean": 0.4375,
+          "sum": 7
+        },
+        "table": {
+          "n": 16,
+          "mean": 0.4375,
+          "sum": 7
+        },
+        "national": {
+          "n": 16,
+          "mean": 1,
+          "sum": 16
+        },
+        "survival30": {
+          "n": 16,
+          "mean": 0.9375,
+          "sum": 15
+        },
+        "survival60": {
+          "n": 16,
+          "mean": 0.625,
+          "sum": 10
+        },
+        "playerDeaths": {
+          "n": 16,
+          "mean": 2.1875,
+          "sum": 35
+        },
+        "villageDeaths": {
+          "n": 16,
+          "mean": 72.125,
+          "sum": 1154
+        },
+        "communityLost": {
+          "n": 16,
+          "mean": 0.125,
+          "sum": 2
+        },
+        "livingNpcs": {
+          "n": 16,
+          "mean": 8.1312,
+          "sum": 130.0994
+        },
+        "lowFood": {
+          "n": 16,
+          "mean": 0.0053,
+          "sum": 0.0847
+        },
+        "npcHungry": {
+          "n": 16,
+          "mean": 0.1365,
+          "sum": 2.1843
+        },
+        "classAccess": {
+          "n": 16,
+          "mean": 0.9375,
+          "sum": 15
+        },
+        "npcClassAccess": {
+          "n": 16,
+          "mean": 0.2312,
+          "sum": 3.6988
+        },
+        "goodGear": {
+          "n": 16,
+          "mean": 1,
+          "sum": 16
+        },
+        "abilityAccepted": {
+          "n": 16,
+          "mean": 113.6875,
+          "sum": 1819
+        }
+      },
+      "mismatches": [],
+      "starvLabels": {
+        "villager:starvation": 4,
+        "player:starvation": 1
+      },
+      "seats": [
+        {
+          "seed": 4,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 102,
+          "end": "over-other"
+        },
+        {
+          "seed": 5,
+          "seat": "full",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 88,
+          "end": "over-other"
+        },
+        {
+          "seed": 9,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 143,
+          "end": "over-other"
+        },
+        {
+          "seed": 42,
+          "seat": "full",
+          "path": "indispensable",
+          "won": 1,
+          "national": 1,
+          "days": 88,
+          "end": "over-other"
+        },
+        {
+          "seed": 555,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 99,
+          "end": "over-other"
+        },
+        {
+          "seed": 1234,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 89,
+          "end": "over-other"
+        },
+        {
+          "seed": 2026,
+          "seat": "full",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 150,
+          "end": "over-other"
+        }
+      ],
+      "diedBy60": [
+        {
+          "seed": 5,
+          "surv30": 1,
+          "days": 88,
+          "end": "over-other",
+          "playerDeaths": 3,
+          "starv": []
+        },
+        {
+          "seed": 7,
+          "surv30": 1,
+          "days": 150,
+          "end": "survived",
+          "playerDeaths": 7,
+          "starv": []
+        },
+        {
+          "seed": 8,
+          "surv30": 1,
+          "days": 150,
+          "end": "survived",
+          "playerDeaths": 2,
+          "starv": []
+        },
+        {
+          "seed": 9,
+          "surv30": 1,
+          "days": 143,
+          "end": "over-other",
+          "playerDeaths": 1,
+          "starv": []
+        },
+        {
+          "seed": 42,
+          "surv30": 1,
+          "days": 88,
+          "end": "over-other",
+          "playerDeaths": 5,
+          "starv": []
+        },
+        {
+          "seed": 1234,
+          "surv30": 0,
+          "days": 89,
+          "end": "over-other",
+          "playerDeaths": 2,
+          "starv": [
+            [
+              "villager:starvation",
+              1
+            ]
+          ]
+        }
+      ],
+      "earlyVillageLost": [],
+      "communityFirstEmptyMed": 104,
+      "communityFirstEmptyN": 2,
+      "fullSeat": 3,
+      "lesserSeat": 4,
+      "noSeat": 9
+    },
+    "merchant": {
+      "metrics": {
+        "won": {
+          "n": 16,
+          "mean": 0.8125,
+          "sum": 13
+        },
+        "entered": {
+          "n": 16,
+          "mean": 0.8125,
+          "sum": 13
+        },
+        "table": {
+          "n": 16,
+          "mean": 0.8125,
+          "sum": 13
+        },
+        "national": {
+          "n": 16,
+          "mean": 0.875,
+          "sum": 14
+        },
+        "survival30": {
+          "n": 16,
+          "mean": 1,
+          "sum": 16
+        },
+        "survival60": {
+          "n": 16,
+          "mean": 0.625,
+          "sum": 10
+        },
+        "playerDeaths": {
+          "n": 16,
+          "mean": 1.5625,
+          "sum": 25
+        },
+        "villageDeaths": {
+          "n": 16,
+          "mean": 63.875,
+          "sum": 1022
+        },
+        "communityLost": {
+          "n": 16,
+          "mean": 0.0625,
+          "sum": 1
+        },
+        "livingNpcs": {
+          "n": 16,
+          "mean": 8.7397,
+          "sum": 139.8346
+        },
+        "lowFood": {
+          "n": 16,
+          "mean": 0.0092,
+          "sum": 0.1473
+        },
+        "npcHungry": {
+          "n": 16,
+          "mean": 0.1011,
+          "sum": 1.6177
+        },
+        "classAccess": {
+          "n": 16,
+          "mean": 0.875,
+          "sum": 14
+        },
+        "npcClassAccess": {
+          "n": 16,
+          "mean": 0.2078,
+          "sum": 3.3247
+        },
+        "goodGear": {
+          "n": 16,
+          "mean": 1,
+          "sum": 16
+        },
+        "abilityAccepted": {
+          "n": 16,
+          "mean": 88.375,
+          "sum": 1414
+        }
+      },
+      "mismatches": [],
+      "starvLabels": {
+        "villager:starvation": 3
+      },
+      "seats": [
+        {
+          "seed": 2,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 89,
+          "end": "over-other"
+        },
+        {
+          "seed": 3,
+          "seat": "full",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 89,
+          "end": "over-other"
+        },
+        {
+          "seed": 4,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 89,
+          "end": "over-other"
+        },
+        {
+          "seed": 5,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 89,
+          "end": "over-other"
+        },
+        {
+          "seed": 6,
+          "seat": "lesser",
+          "path": "witness",
+          "won": 1,
+          "national": 1,
+          "days": 91,
+          "end": "over-other"
+        },
+        {
+          "seed": 8,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 93,
+          "end": "over-other"
+        },
+        {
+          "seed": 9,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 0,
+          "days": 89,
+          "end": "over-other"
+        },
+        {
+          "seed": 42,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 99,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 555,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 88,
+          "end": "over-other"
+        },
+        {
+          "seed": 777,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 146,
+          "end": "over-other"
+        },
+        {
+          "seed": 1234,
+          "seat": "lesser",
+          "path": "relay",
+          "won": 1,
+          "national": 1,
+          "days": 88,
+          "end": "over-other"
+        },
+        {
+          "seed": 31337,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        }
+      ],
+      "diedBy60": [
+        {
+          "seed": 1,
+          "surv30": 1,
+          "days": 51,
+          "end": "village-lost",
+          "playerDeaths": 1,
+          "starv": [
+            [
+              "villager:starvation",
+              2
+            ]
+          ]
+        },
+        {
+          "seed": 9,
+          "surv30": 1,
+          "days": 89,
+          "end": "over-other",
+          "playerDeaths": 2,
+          "starv": []
+        },
+        {
+          "seed": 777,
+          "surv30": 1,
+          "days": 146,
+          "end": "over-other",
+          "playerDeaths": 1,
+          "starv": []
+        },
+        {
+          "seed": 1234,
+          "surv30": 1,
+          "days": 88,
+          "end": "over-other",
+          "playerDeaths": 3,
+          "starv": []
+        },
+        {
+          "seed": 2026,
+          "surv30": 1,
+          "days": 150,
+          "end": "survived",
+          "playerDeaths": 2,
+          "starv": []
+        },
+        {
+          "seed": 31337,
+          "surv30": 1,
+          "days": 90,
+          "end": "over-other",
+          "playerDeaths": 2,
+          "starv": []
+        }
+      ],
+      "earlyVillageLost": [
+        {
+          "seed": 1,
+          "days": 51
+        }
+      ],
+      "communityFirstEmptyMed": 151,
+      "communityFirstEmptyN": 1,
+      "fullSeat": 1,
+      "lesserSeat": 12,
+      "noSeat": 3
+    },
+    "caregiver": {
+      "metrics": {
+        "won": {
+          "n": 16,
+          "mean": 0.625,
+          "sum": 10
+        },
+        "entered": {
+          "n": 16,
+          "mean": 0.625,
+          "sum": 10
+        },
+        "table": {
+          "n": 16,
+          "mean": 0.625,
+          "sum": 10
+        },
+        "national": {
+          "n": 16,
+          "mean": 0.875,
+          "sum": 14
+        },
+        "survival30": {
+          "n": 16,
+          "mean": 0.9375,
+          "sum": 15
+        },
+        "survival60": {
+          "n": 16,
+          "mean": 0.5625,
+          "sum": 9
+        },
+        "playerDeaths": {
+          "n": 16,
+          "mean": 1.1875,
+          "sum": 19
+        },
+        "villageDeaths": {
+          "n": 16,
+          "mean": 65.5625,
+          "sum": 1049
+        },
+        "communityLost": {
+          "n": 16,
+          "mean": 0,
+          "sum": 0
+        },
+        "livingNpcs": {
+          "n": 16,
+          "mean": 8.6873,
+          "sum": 138.9975
+        },
+        "lowFood": {
+          "n": 16,
+          "mean": 0.0039,
+          "sum": 0.0618
+        },
+        "npcHungry": {
+          "n": 16,
+          "mean": 0.0411,
+          "sum": 0.6571
+        },
+        "classAccess": {
+          "n": 16,
+          "mean": 1,
+          "sum": 16
+        },
+        "npcClassAccess": {
+          "n": 16,
+          "mean": 0.2562,
+          "sum": 4.0985
+        },
+        "goodGear": {
+          "n": 16,
+          "mean": 1,
+          "sum": 16
+        },
+        "abilityAccepted": {
+          "n": 16,
+          "mean": 99.625,
+          "sum": 1594
+        }
+      },
+      "mismatches": [],
+      "starvLabels": {
+        "player:starvation": 1
+      },
+      "seats": [
+        {
+          "seed": 1,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 93,
+          "end": "over-other"
+        },
+        {
+          "seed": 2,
+          "seat": "full",
+          "path": "indispensable",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 3,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 91,
+          "end": "over-other"
+        },
+        {
+          "seed": 4,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 133,
+          "end": "over-other"
+        },
+        {
+          "seed": 5,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 89,
+          "end": "over-other"
+        },
+        {
+          "seed": 9,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 0,
+          "days": 93,
+          "end": "over-other"
+        },
+        {
+          "seed": 42,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 95,
+          "end": "over-other"
+        },
+        {
+          "seed": 99,
+          "seat": "full",
+          "path": "relay",
+          "won": 1,
+          "national": 1,
+          "days": 137,
+          "end": "over-other"
+        },
+        {
+          "seed": 555,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 88,
+          "end": "over-other"
+        },
+        {
+          "seed": 777,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        }
+      ],
+      "diedBy60": [
+        {
+          "seed": 4,
+          "surv30": 1,
+          "days": 133,
+          "end": "over-other",
+          "playerDeaths": 1,
+          "starv": []
+        },
+        {
+          "seed": 5,
+          "surv30": 1,
+          "days": 89,
+          "end": "over-other",
+          "playerDeaths": 1,
+          "starv": []
+        },
+        {
+          "seed": 6,
+          "surv30": 1,
+          "days": 150,
+          "end": "survived",
+          "playerDeaths": 1,
+          "starv": []
+        },
+        {
+          "seed": 7,
+          "surv30": 0,
+          "days": 150,
+          "end": "survived",
+          "playerDeaths": 1,
+          "starv": []
+        },
+        {
+          "seed": 99,
+          "surv30": 1,
+          "days": 137,
+          "end": "over-other",
+          "playerDeaths": 4,
+          "starv": []
+        },
+        {
+          "seed": 555,
+          "surv30": 1,
+          "days": 88,
+          "end": "over-other",
+          "playerDeaths": 3,
+          "starv": []
+        },
+        {
+          "seed": 31337,
+          "surv30": 1,
+          "days": 150,
+          "end": "survived",
+          "playerDeaths": 2,
+          "starv": []
+        }
+      ],
+      "earlyVillageLost": [],
+      "communityFirstEmptyMed": null,
+      "communityFirstEmptyN": 0,
+      "fullSeat": 2,
+      "lesserSeat": 8,
+      "noSeat": 6
+    }
+  },
+  "utilization": {
+    "capable": {
+      "runs": 16,
+      "topReached": [
+        {
+          "name": "doAction",
+          "reached": 16,
+          "calls": 8613
+        },
+        {
+          "name": "maybeGrantCapstoneItem",
+          "reached": 16,
+          "calls": 7983
+        },
+        {
+          "name": "apClubBoon",
+          "reached": 16,
+          "calls": 1240
+        },
+        {
+          "name": "apDeadDrop",
+          "reached": 16,
+          "calls": 1240
+        },
+        {
+          "name": "corpseLootAll",
+          "reached": 16,
+          "calls": 986
+        },
+        {
+          "name": "giveFood",
+          "reached": 16,
+          "calls": 644
+        },
+        {
+          "name": "tbEnd",
+          "reached": 16,
+          "calls": 406
+        },
+        {
+          "name": "apCarePackage",
+          "reached": 16,
+          "calls": 400
+        },
+        {
+          "name": "apPersonaPackage",
+          "reached": 16,
+          "calls": 240
+        },
+        {
+          "name": "cleanCarcass",
+          "reached": 15,
+          "calls": 214
+        },
+        {
+          "name": "_contestEnd",
+          "reached": 16,
+          "calls": 122
+        },
+        {
+          "name": "_contestResolveOthers",
+          "reached": 16,
+          "calls": 85
+        }
+      ],
+      "notReachedCount": 24,
+      "notReachedSample": [
+        "answerCovenantCrisis",
+        "answerDefenseCall",
+        "answerTradeCall",
+        "corpseTakeItem",
+        "donateMedicine",
+        "donateWeapon",
+        "drawLeaguePool",
+        "expandStorage",
+        "makePemmican",
+        "marketNamePrice",
+        "networkSummon",
+        "orderMember",
+        "performCompanyFavor",
+        "preserveFood",
+        "proposeCovenant",
+        "proposeTrade",
+        "readBook",
+        "renderFat",
+        "takeMedicine",
+        "takePrepMaterial"
+      ],
+      "playerClasses": {
+        "forager/gardener": 4,
+        "hunter/stalker": 7,
+        "explorer/cartographer": 2,
+        "socialite/showrunner": 4,
+        "forager/feaster": 1
+      },
+      "playerGods": {},
+      "winningEndings": {
+        "feared/forager/gardener/light": 1,
+        "relay/hunter/stalker/light": 1,
+        "beloved/none/none/light": 2,
+        "defiant/hunter/stalker/light": 1,
+        "beloved/forager/feaster/light": 1,
+        "beloved/forager/gardener/light": 2,
+        "feared/hunter/stalker/light": 1,
+        "feared/socialite/showrunner/light": 1,
+        "feared/none/none/light": 3,
+        "beloved/hunter/stalker/light": 1,
+        "defiant/socialite/showrunner/light": 1
+      },
+      "counters": {
+        "convoPageReads": {
+          "sum": 13689,
+          "reportedRuns": 16
+        },
+        "convoPageNavigation": {
+          "sum": 961,
+          "reportedRuns": 16
+        },
+        "convoPageHiddenSelections": {
+          "sum": 11,
+          "reportedRuns": 7
+        }
+      },
+      "blocked": [],
+      "npcClassHolderDays": {
+        "hunter/stalker": {
+          "runs": 9,
+          "holderDays": 300,
+          "holderIdentitiesAcrossRuns": 11
+        },
+        "forager/gardener": {
+          "runs": 8,
+          "holderDays": 386,
+          "holderIdentitiesAcrossRuns": 9
+        },
+        "hunter/beastmaster": {
+          "runs": 1,
+          "holderDays": 23,
+          "holderIdentitiesAcrossRuns": 1
+        },
+        "forager/feaster": {
+          "runs": 7,
+          "holderDays": 413,
+          "holderIdentitiesAcrossRuns": 9
+        },
+        "socialite/demagogue": {
+          "runs": 1,
+          "holderDays": 30,
+          "holderIdentitiesAcrossRuns": 1
+        }
+      }
+    },
+    "maker": {
+      "runs": 16,
+      "topReached": [
+        {
+          "name": "doAction",
+          "reached": 16,
+          "calls": 13372
+        },
+        {
+          "name": "maybeGrantCapstoneItem",
+          "reached": 16,
+          "calls": 12460
+        },
+        {
+          "name": "apClubBoon",
+          "reached": 16,
+          "calls": 1902
+        },
+        {
+          "name": "apDeadDrop",
+          "reached": 16,
+          "calls": 1902
+        },
+        {
+          "name": "corpseLootAll",
+          "reached": 16,
+          "calls": 1510
+        },
+        {
+          "name": "giveFood",
+          "reached": 16,
+          "calls": 1239
+        },
+        {
+          "name": "visitorWares",
+          "reached": 16,
+          "calls": 1045
+        },
+        {
+          "name": "apCarePackage",
+          "reached": 16,
+          "calls": 649
+        },
+        {
+          "name": "tbEnd",
+          "reached": 16,
+          "calls": 424
+        },
+        {
+          "name": "apPersonaPackage",
+          "reached": 16,
+          "calls": 410
+        },
+        {
+          "name": "cleanCarcass",
+          "reached": 12,
+          "calls": 261
+        },
+        {
+          "name": "_contestEnd",
+          "reached": 16,
+          "calls": 220
+        }
+      ],
+      "notReachedCount": 17,
+      "notReachedSample": [
+        "answerCovenantCrisis",
+        "answerDefenseCall",
+        "answerTradeCall",
+        "corpseTakeItem",
+        "donateMedicine",
+        "donateWeapon",
+        "drawLeaguePool",
+        "expandStorage",
+        "makePemmican",
+        "marketNamePrice",
+        "networkSummon",
+        "orderMember",
+        "proposeCovenant",
+        "proposeTrade",
+        "renderFat",
+        "takeMedicine",
+        "takeWeapon"
+      ],
+      "playerClasses": {
+        "hunter/stalker": 7,
+        "explorer/cartographer": 2,
+        "socialite/demagogue": 1,
+        "forager/gardener": 8,
+        "hunter/beastmaster": 1,
+        "forager/feaster": 1,
+        "socialite/showrunner": 3,
+        "drifter/trickster": 1,
+        "caregiver/healer": 2
+      },
+      "playerGods": {
+        "voice_of_the_relay": 1,
+        "all_seeing": 1,
+        "shepherd_of_the_dead": 1
+      },
+      "winningEndings": {
+        "feared/none/none/light": 1,
+        "beloved/forager/gardener/light": 1,
+        "feared/forager/gardener/light": 2,
+        "indispensable/none/none/light": 1,
+        "feared/hunter/stalker/light": 1,
+        "beloved/caregiver/healer/light": 1
+      },
+      "counters": {
+        "convoPageReads": {
+          "sum": 19719,
+          "reportedRuns": 16
+        },
+        "convoPageNavigation": {
+          "sum": 1190,
+          "reportedRuns": 16
+        },
+        "convoPageHiddenSelections": {
+          "sum": 15,
+          "reportedRuns": 9
+        },
+        "livelihoodKnowledgeTrips": {
+          "sum": 219,
+          "reportedRuns": 16
+        },
+        "livelihoodHarvestTrips": {
+          "sum": 185,
+          "reportedRuns": 16
+        },
+        "livelihoodDrawsDrivenOff": {
+          "sum": 101,
+          "reportedRuns": 15
+        },
+        "livelihoodHideHandledUnits": {
+          "sum": 38,
+          "reportedRuns": 10
+        },
+        "livelihoodHideTrials": {
+          "sum": 14,
+          "reportedRuns": 10
+        },
+        "livelihoodHideTrialSuccesses": {
+          "sum": 5,
+          "reportedRuns": 5
+        },
+        "livelihoodBooksRead": {
+          "sum": 6,
+          "reportedRuns": 5
+        },
+        "livelihoodRuinSearches": {
+          "sum": 12,
+          "reportedRuns": 12
+        },
+        "livelihoodBuys": {
+          "sum": 30,
+          "reportedRuns": 9
+        },
+        "livelihoodSales": {
+          "sum": 76,
+          "reportedRuns": 8
+        },
+        "livelihoodCounterCooks": {
+          "sum": 7,
+          "reportedRuns": 2
+        },
+        "livelihoodCounterPreserves": {
+          "sum": 6,
+          "reportedRuns": 2
+        },
+        "livelihoodCounterStored": {
+          "sum": 4,
+          "reportedRuns": 2
+        },
+        "livelihoodCrafts": {
+          "sum": 2,
+          "reportedRuns": 2
+        }
+      },
+      "blocked": [],
+      "npcClassHolderDays": {
+        "hunter/stalker": {
+          "runs": 9,
+          "holderDays": 448,
+          "holderIdentitiesAcrossRuns": 11
+        },
+        "explorer/cartographer": {
+          "runs": 2,
+          "holderDays": 50,
+          "holderIdentitiesAcrossRuns": 3
+        },
+        "forager/feaster": {
+          "runs": 9,
+          "holderDays": 416,
+          "holderIdentitiesAcrossRuns": 9
+        },
+        "forager/gardener": {
+          "runs": 9,
+          "holderDays": 680,
+          "holderIdentitiesAcrossRuns": 15
+        },
+        "socialite/demagogue": {
+          "runs": 3,
+          "holderDays": 190,
+          "holderIdentitiesAcrossRuns": 5
+        },
+        "hunter/beastmaster": {
+          "runs": 1,
+          "holderDays": 11,
+          "holderIdentitiesAcrossRuns": 1
+        },
+        "socialite/showrunner": {
+          "runs": 2,
+          "holderDays": 69,
+          "holderIdentitiesAcrossRuns": 2
+        },
+        "caregiver/healer": {
+          "runs": 3,
+          "holderDays": 152,
+          "holderIdentitiesAcrossRuns": 3
+        }
+      }
+    },
+    "merchant": {
+      "runs": 16,
+      "topReached": [
+        {
+          "name": "doAction",
+          "reached": 16,
+          "calls": 10543
+        },
+        {
+          "name": "maybeGrantCapstoneItem",
+          "reached": 16,
+          "calls": 9038
+        },
+        {
+          "name": "apClubBoon",
+          "reached": 16,
+          "calls": 1425
+        },
+        {
+          "name": "apDeadDrop",
+          "reached": 16,
+          "calls": 1425
+        },
+        {
+          "name": "giveFood",
+          "reached": 16,
+          "calls": 934
+        },
+        {
+          "name": "visitorWares",
+          "reached": 16,
+          "calls": 816
+        },
+        {
+          "name": "corpseLootAll",
+          "reached": 16,
+          "calls": 678
+        },
+        {
+          "name": "apCarePackage",
+          "reached": 16,
+          "calls": 529
+        },
+        {
+          "name": "apPersonaPackage",
+          "reached": 16,
+          "calls": 288
+        },
+        {
+          "name": "tbEnd",
+          "reached": 16,
+          "calls": 287
+        },
+        {
+          "name": "_contestEnd",
+          "reached": 16,
+          "calls": 181
+        },
+        {
+          "name": "cleanCarcass",
+          "reached": 9,
+          "calls": 140
+        }
+      ],
+      "notReachedCount": 21,
+      "notReachedSample": [
+        "answerCovenantCrisis",
+        "answerDefenseCall",
+        "answerTradeCall",
+        "corpseTakeItem",
+        "donateMedicine",
+        "donateWeapon",
+        "drawLeaguePool",
+        "expandStorage",
+        "makePemmican",
+        "marketNamePrice",
+        "networkSummon",
+        "orderMember",
+        "performCompanyFavor",
+        "preserveFood",
+        "proposeCovenant",
+        "proposeTrade",
+        "readBook",
+        "renderFat",
+        "takeMedicine",
+        "takePrepMaterial"
+      ],
+      "playerClasses": {
+        "hunter/stalker": 5,
+        "socialite/showrunner": 3,
+        "explorer/cartographer": 1,
+        "forager/feaster": 2,
+        "forager/gardener": 7,
+        "brawler/juggernaut": 1,
+        "caregiver/healer": 2,
+        "drifter/trickster": 1,
+        "survivalist/furnace": 1
+      },
+      "playerGods": {
+        "voice_of_the_relay": 1,
+        "apex_predator": 1
+      },
+      "winningEndings": {
+        "feared/forager/feaster/light": 2,
+        "feared/none/none/light": 3,
+        "beloved/forager/gardener/light": 2,
+        "feared/hunter/stalker/light": 1,
+        "witness/forager/gardener/light": 1,
+        "beloved/none/none/light": 1,
+        "beloved/hunter/stalker/light": 1,
+        "feared/forager/gardener/light": 1,
+        "relay/survivalist/furnace/light": 1
+      },
+      "counters": {
+        "convoPageReads": {
+          "sum": 15556,
+          "reportedRuns": 16
+        },
+        "convoPageNavigation": {
+          "sum": 1107,
+          "reportedRuns": 16
+        },
+        "convoPageHiddenSelections": {
+          "sum": 16,
+          "reportedRuns": 7
+        },
+        "livelihoodHarvestTrips": {
+          "sum": 135,
+          "reportedRuns": 16
+        },
+        "livelihoodDrawsDrivenOff": {
+          "sum": 85,
+          "reportedRuns": 15
+        },
+        "livelihoodSales": {
+          "sum": 41,
+          "reportedRuns": 8
+        },
+        "livelihoodBuys": {
+          "sum": 25,
+          "reportedRuns": 9
+        }
+      },
+      "blocked": [],
+      "npcClassHolderDays": {
+        "hunter/stalker": {
+          "runs": 13,
+          "holderDays": 507,
+          "holderIdentitiesAcrossRuns": 13
+        },
+        "forager/gardener": {
+          "runs": 11,
+          "holderDays": 387,
+          "holderIdentitiesAcrossRuns": 12
+        },
+        "hunter/beastmaster": {
+          "runs": 2,
+          "holderDays": 72,
+          "holderIdentitiesAcrossRuns": 2
+        },
+        "forager/feaster": {
+          "runs": 5,
+          "holderDays": 499,
+          "holderIdentitiesAcrossRuns": 9
+        },
+        "explorer/cartographer": {
+          "runs": 1,
+          "holderDays": 12,
+          "holderIdentitiesAcrossRuns": 1
+        },
+        "socialite/showrunner": {
+          "runs": 2,
+          "holderDays": 78,
+          "holderIdentitiesAcrossRuns": 2
+        },
+        "socialite/demagogue": {
+          "runs": 1,
+          "holderDays": 17,
+          "holderIdentitiesAcrossRuns": 1
+        },
+        "survivalist/furnace": {
+          "runs": 1,
+          "holderDays": 3,
+          "holderIdentitiesAcrossRuns": 1
+        }
+      }
+    },
+    "caregiver": {
+      "runs": 16,
+      "topReached": [
+        {
+          "name": "maybeGrantCapstoneItem",
+          "reached": 16,
+          "calls": 12632
+        },
+        {
+          "name": "doAction",
+          "reached": 16,
+          "calls": 12235
+        },
+        {
+          "name": "apClubBoon",
+          "reached": 16,
+          "calls": 1786
+        },
+        {
+          "name": "apDeadDrop",
+          "reached": 16,
+          "calls": 1786
+        },
+        {
+          "name": "corpseLootAll",
+          "reached": 16,
+          "calls": 1082
+        },
+        {
+          "name": "apCarePackage",
+          "reached": 16,
+          "calls": 632
+        },
+        {
+          "name": "giveFood",
+          "reached": 16,
+          "calls": 559
+        },
+        {
+          "name": "apPersonaPackage",
+          "reached": 16,
+          "calls": 353
+        },
+        {
+          "name": "tbEnd",
+          "reached": 16,
+          "calls": 342
+        },
+        {
+          "name": "cleanCarcass",
+          "reached": 12,
+          "calls": 264
+        },
+        {
+          "name": "_contestEnd",
+          "reached": 16,
+          "calls": 194
+        },
+        {
+          "name": "comfort",
+          "reached": 16,
+          "calls": 134
+        }
+      ],
+      "notReachedCount": 23,
+      "notReachedSample": [
+        "answerCovenantCrisis",
+        "answerDefenseCall",
+        "answerTradeCall",
+        "corpseTakeItem",
+        "donateMedicine",
+        "donateWeapon",
+        "drawLeaguePool",
+        "expandStorage",
+        "makePemmican",
+        "marketNamePrice",
+        "networkSummon",
+        "orderMember",
+        "preserveFood",
+        "proposeCovenant",
+        "proposeTrade",
+        "readBook",
+        "renderFat",
+        "takeMedicine",
+        "takePrepMaterial",
+        "takeWeapon"
+      ],
+      "playerClasses": {
+        "socialite/showrunner": 4,
+        "socialite/demagogue": 3,
+        "forager/gardener": 10,
+        "forager/feaster": 1,
+        "hunter/stalker": 4,
+        "caregiver/healer": 2,
+        "drifter/trickster": 1
+      },
+      "playerGods": {
+        "voice_of_the_relay": 1,
+        "shepherd_of_the_dead": 1
+      },
+      "winningEndings": {
+        "beloved/socialite/showrunner/light": 1,
+        "indispensable/socialite/demagogue/light": 1,
+        "beloved/forager/gardener/light": 3,
+        "feared/forager/gardener/light": 1,
+        "feared/none/none/light": 2,
+        "relay/none/none/grey": 1,
+        "feared/drifter/trickster/light": 1
+      },
+      "counters": {
+        "convoPageReads": {
+          "sum": 18688,
+          "reportedRuns": 16
+        },
+        "convoPageNavigation": {
+          "sum": 1150,
+          "reportedRuns": 16
+        },
+        "livelihoodPatients": {
+          "sum": 784,
+          "reportedRuns": 16
+        },
+        "livelihoodDrawsDrivenOff": {
+          "sum": 132,
+          "reportedRuns": 16
+        },
+        "livelihoodComforts": {
+          "sum": 128,
+          "reportedRuns": 16
+        },
+        "convoPageHiddenSelections": {
+          "sum": 17,
+          "reportedRuns": 8
+        },
+        "livelihoodTreatments": {
+          "sum": 89,
+          "reportedRuns": 12
+        }
+      },
+      "blocked": [],
+      "npcClassHolderDays": {
+        "hunter/stalker": {
+          "runs": 11,
+          "holderDays": 801,
+          "holderIdentitiesAcrossRuns": 16
+        },
+        "forager/gardener": {
+          "runs": 8,
+          "holderDays": 686,
+          "holderIdentitiesAcrossRuns": 14
+        },
+        "hunter/beastmaster": {
+          "runs": 1,
+          "holderDays": 42,
+          "holderIdentitiesAcrossRuns": 1
+        },
+        "explorer/cartographer": {
+          "runs": 1,
+          "holderDays": 3,
+          "holderIdentitiesAcrossRuns": 1
+        },
+        "forager/feaster": {
+          "runs": 5,
+          "holderDays": 296,
+          "holderIdentitiesAcrossRuns": 6
+        },
+        "socialite/demagogue": {
+          "runs": 4,
+          "holderDays": 209,
+          "holderIdentitiesAcrossRuns": 4
+        },
+        "socialite/showrunner": {
+          "runs": 4,
+          "holderDays": 206,
+          "holderIdentitiesAcrossRuns": 6
+        },
+        "drifter/trickster": {
+          "runs": 1,
+          "holderDays": 18,
+          "holderIdentitiesAcrossRuns": 1
+        },
+        "caregiver/healer": {
+          "runs": 2,
+          "holderDays": 193,
+          "holderIdentitiesAcrossRuns": 2
+        }
+      }
+    }
+  },
+  "git": "816404356eb69894b3d28ad3cb8c9492e0f90131",
+  "seeds": [
+    7,
+    42,
+    99,
+    1234,
+    555,
+    777,
+    2026,
+    31337,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9
+  ]
+}
