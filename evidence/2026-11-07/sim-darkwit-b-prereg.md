@@ -475,3 +475,15 @@ two weak signals on this substrate: the betrayal victim
 survived (killed stayed 0 — no killed+3) and 15 hoard takes
 moved foodHoarded 0 (the food truth did not flip); the pilot
 armed leg measures both across 8 seeds.
+
+## Coordinator correction — band freshness (added at landing, 2026-11-08)
+
+The "FRESH FALLBACK BAND 53701–53712" claim in the band note above is
+wrong for 53704/53707/53708, used by sim-compvet 2026-10-18
+(`evidence/2026-10-18/sim-compvet.md` + `perseed-compvet/` corpus).
+The check grepped preregs only; sim-compvet has no prereg file, and its
+seed list lives in the evidence .md. The pilot verdict stands
+(mechanistic 0/8 — see the evidence file's coordinator correction);
+a future arm's confirm band must be re-checked against evidence .md
+files as well as preregs. 53801–53812 remains the verified-fresh
+confirm band for the fight-loop fix (fightloop prereg).

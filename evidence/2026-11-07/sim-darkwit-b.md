@@ -433,3 +433,27 @@ another run of this road.
   `scripts/build-darkwit-panels-20261107.js`,
   `scripts/test-darkwit-b-20261107.js` (proof 23/23; 25/25
   with the corrected LIVE SMOKE on seed 53703, rebased tip)
+
+## Coordinator correction — band freshness (added at landing, 2026-11-08)
+
+The "FRESH fallback band 53701–53708" claim in the prereg and in this
+file's header is WRONG for 3 of 8 seeds. Seeds 53704, 53707, 53708 were
+used by sim-compvet on 2026-10-18 (`evidence/2026-10-18/sim-compvet.md`:
+"Seeds: 8 fresh — 53704, 53707, 53708, ..."; judged corpus
+`evidence/2026-10-18/perseed-compvet/`). The prereg's freshness check
+grepped `evidence/*/sim-*-prereg.md` only; sim-compvet has no prereg
+file, and its seed list lives in the evidence .md, which the check did
+not cover — the seed-band skill requires dated screens to be searched
+the same way. Missed source named here, per the skill. The other five
+pilot seeds (53701, 53702, 53703, 53705, 53706) were not named in any
+prereg or evidence .md found by the coordinator's check.
+
+Verdict STANDS, unchanged: the finding is mechanistic, not comparative
+— the flip condition (protected ≤ 2 at sit) was unmet on all 8 seeds,
+killed stayed 0/8, and foodHoarded never beat foodShared on any seed
+including the five genuinely fresh ones; the baseline sanity reproduced
+(5/8 sits, 5/5 light witness walks won). No re-sweep: re-running on a
+fully fresh band cannot change a 0/8 mechanism finding whose cause is
+measured on every seed. The "fresh band" wording above is corrected to
+"fallback band 53701–53708 (3 seeds previously used by sim-compvet
+2026-10-18)".
