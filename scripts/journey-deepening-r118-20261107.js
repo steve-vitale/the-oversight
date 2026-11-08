@@ -19,9 +19,12 @@
 //   - Q2 needs no driver change: goalLineDays + goalSnaps already read
 //     the indoor chore/visit lines through capture (they go through
 //     say()); the analyzer adds indoorLined to the join.
-// Everything else is the r116 driver VERBATIM (including the dead npcComm
-// guards at the three talk-selection sites — the Q1 policy decision
-// answers them; they are NOT fixed before the panels, see prereg).
+// Everything else is the r116 driver VERBATIM except the two dead npcComm
+// guards, removed in the post-panel cleanup (r118 prereg: ARC-FIRES
+// policy decision — the competent player KEEPS sitting no-language
+// holders and listens; the guards read the nonexistent Game.npcComm,
+// so they always fell through to {level:'full'} and never skipped
+// anyone; removing them changes no behavior).
 // CONVO_DAYS stays r105's [45, 60, 80] (SURV-CONTROL-4 lineage).
 // The r114 fixes (bond-initiation.js language gate + decided-ask clear)
 // are IN the base; the r118 panels re-prove them as regression watches
@@ -1002,7 +1005,6 @@ function makePolicy() {
         for (const id of roster) {
           const p = person(id);
           if (p.dead) continue;
-          try { const comm = _G.npcComm ? _G.npcComm(id) : { level: 'full' }; if (comm.level === 'none') continue; } catch (e) {}
           let cnt = -1;
           try { const c0 = _G.convoGet(id); cnt = (c0 && c0.count) || 0; } catch (e) {}
           info.push({ id, count: cnt });
@@ -1419,7 +1421,6 @@ function answerLiveRequest(G, ctx) {
     ctx._q1Answered[key] = true;
     const p = person(h.vid);
     if (!p || p.dead) continue;
-    try { const comm = _G.npcComm ? _G.npcComm(h.vid) : { level: 'full' }; if (comm.level === 'none') continue; } catch (e) { continue; }
     let fp = null;
     try { fp = runConversation(day, h.vid, { q1Request: true }); } catch (e) { fp = null; }
     if (fp) {
