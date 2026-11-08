@@ -71,15 +71,15 @@ check('G1: night-only deaths land mixed/other, cause stated',
 
 // --- G3: corpus integrity on synthetic corpora ---
 function goodCorpus() {
-  // Instrument shape (Amendment 1): rows start d2, day 3 is never
-  // snapshot, the closing snapshot duplicates the final day.
+  // Instrument shape (Amendments 1–2): rows start d2, day 3 is never
+  // snapshot, the closing snapshot duplicates the final scholar day.
   const daily = [];
   for (let d = 2; d <= 10; d++) {
     if (d === 3) continue;
     daily.push({ day: d, living: d < 5 ? 12 : 11, diag: { pantryKcal: 9000, foodDays: 1.5, sickN: 0, sickList: [], woundedN: 0, woundedList: [], hungryN: 0, needsTracked: 12, pelletHolder: null, pelletPassDay: null } });
   }
   daily.push({ day: 10, living: 11, diag: { pantryKcal: 9000, foodDays: 1.5, sickN: 0, sickList: [], woundedN: 0, woundedList: [], hungryN: 0, needsTracked: 12, pelletHolder: null, pelletPassDay: null } });
-  return { seed: 53007, days: 10, endReason: 'village-lost', daily: daily, fallen: [{ day: 5, name: 'X', cause: 'sickness' }], instrumentErrors: [] };
+  return { seed: 53007, days: 10, gameDays: 10, endReason: 'village-lost', daily: daily, fallen: [{ day: 5, name: 'X', cause: 'sickness' }], instrumentErrors: [] };
 }
 check('G3: good synthetic corpus (instrument shape) PASSES integrity', A.checkCorpus(goodCorpus()).ok);
 check('G3: the d3 gap is enumerated, not failed', A.checkCorpus(goodCorpus()).gaps.join(',') === 'd2 -> d4');
@@ -92,7 +92,13 @@ check('G3: an unexplained mid-run gap is enumerated, corpus still passes',
   A.checkCorpus(gap).ok && A.checkCorpus(gap).gaps.join(',').indexOf('d5 -> d7') >= 0);
 const badFallen = goodCorpus();
 badFallen.fallen = [{ day: 6, name: 'Y', cause: 'sickness' }];
-check('G3: fallen with no living drop FAILS integrity', !A.checkCorpus(badFallen).ok);
+check('G3: fallen with no living drop is a note, not a failure (joins mask drops)',
+  A.checkCorpus(badFallen).ok && A.checkCorpus(badFallen).livingNotes.length === 1,
+  JSON.stringify(A.checkCorpus(badFallen)));
+// A last-daily != gameDays corpus still fails (the end reference is gameDays).
+const badEnd = goodCorpus();
+badEnd.gameDays = 12;
+check('G3: last daily != gameDays FAILS integrity', !A.checkCorpus(badEnd).ok);
 const withErr = goodCorpus();
 withErr.instrumentErrors = ['diag-53007: boom'];
 check('G3: instrument errors FAIL integrity', !A.checkCorpus(withErr).ok);

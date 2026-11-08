@@ -80,14 +80,15 @@ function checkCorpus(corpus) {
   if (!daily.length) problems.push('no daily rows');
   const days = daily.map(function (r) { return r.day; });
   if (days.length && days[0] !== 2) problems.push('first daily d' + days[0] + ' != d2');
+  const endDay = (corpus.gameDays != null) ? corpus.gameDays : corpus.days;
   for (let i = 1; i < days.length; i++) {
     if (days[i] === days[i - 1]) {
-      if (days[i] !== corpus.days) problems.push('duplicate daily d' + days[i] + ' (not the final day)');
+      if (days[i] !== endDay) problems.push('duplicate daily d' + days[i] + ' (not the final day d' + endDay + ')');
     } else if (days[i] !== days[i - 1] + 1) {
       gaps.push('d' + days[i - 1] + ' -> d' + days[i]);
     }
   }
-  if (days.length && days[days.length - 1] !== corpus.days) problems.push('last daily d' + days[days.length - 1] + ' != days ' + corpus.days);
+  if (days.length && days[days.length - 1] !== endDay) problems.push('last daily d' + days[days.length - 1] + ' != gameDays ' + endDay);
   if (!corpus.instrumentOff) {
     const missing = daily.filter(function (r) { return !r.diag; }).length;
     if (missing) problems.push('diag missing on ' + missing + '/' + daily.length + ' rows');
@@ -97,19 +98,20 @@ function checkCorpus(corpus) {
     if (nullSick) problems.push('sickN null on ' + nullSick + ' rows');
   }
   if ((corpus.instrumentErrors || []).length) problems.push((corpus.instrumentErrors || []).length + ' instrument errors');
-  // Fallen list consistent with daily living drops: each fallen day must
-  // show a living drop on that day or the day after (the living row lags
-  // a day when a death is recorded late in the day — xphalf-rejudge).
+  // Fallen list vs daily living drops: ENUMERATED, not failed (Amendment 2
+  // — a join the same day masks the drop; the corpus carries no join log).
+  // A mismatch is a coverage note, never a verdict by itself.
+  const livingNotes = [];
   const byDay = {};
   daily.forEach(function (r) { byDay[r.day] = r.living; });
   (corpus.fallen || []).forEach(function (f) {
     const d = f.day | 0;
     const before = byDay[d - 1], on = byDay[d], after = byDay[d + 1];
     if (before == null || on == null) return;
-    if (!(on < before || (after != null && after < on))) problems.push('fallen ' + (f.name || '?') + ' d' + d + ' (' + causeOf(f) + ') has no living drop on d' + d + '/d' + (d + 1));
+    if (!(on < before || (after != null && after < on))) livingNotes.push('fallen ' + (f.name || '?') + ' d' + d + ' (' + causeOf(f) + ') has no living drop on d' + d + '/d' + (d + 1) + ' (join may mask it)');
   });
   if (corpus.days == null || corpus.endReason == null) problems.push('missing end snapshot (days/endReason)');
-  return { ok: problems.length === 0, problems: problems, gaps: gaps };
+  return { ok: problems.length === 0, problems: problems, gaps: gaps, livingNotes: livingNotes };
 }
 
 // stripDiag(corpus): the unrecorded shape of an armed corpus.
@@ -179,7 +181,7 @@ if (require.main === module) {
   console.log('\nG3 corpus integrity:');
   seeds.forEach(function (s) {
     const ck = checkCorpus(corpora[s]);
-    console.log(s + ': ' + (ck.ok ? 'PASS' : 'FAIL — ' + ck.problems.join('; ')) + (ck.gaps.length ? ' (gaps: ' + ck.gaps.join(', ') + ')' : ''));
+    console.log(s + ': ' + (ck.ok ? 'PASS' : 'FAIL — ' + ck.problems.join('; ')) + (ck.gaps.length ? ' (gaps: ' + ck.gaps.join(', ') + ')' : '') + (ck.livingNotes.length ? ' (living notes: ' + ck.livingNotes.join('; ') + ')' : ''));
   });
   const unrecDir = process.argv[3];
   if (unrecDir) {
