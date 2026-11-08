@@ -1,0 +1,25 @@
+(pre-talk seed: ask_favor planted d84; takenWantDay=72; convoCount=24)
+=== seed 97803 day 90 — conversation with Keisha (gen_vougynn) ===
+occupation=emergency dispatcher temperament=earnest trust=91 dead=false
+want: ask_favor (stage 2)
+open thread: goal fromSeed=true
+picker: control
+
+THEM: Home wasn't a building. It was a feeling. I'm chasing the feeling.
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: At the hollow the ground is torn up. Something was here, recently, and it wasn't careful. Keisha's hand finds your sleeve. You leave together, faster than you came.
+YOU: [dlg:more] "Go on."
+THEM: "Home isn't a place. It's people who notice when you're quiet. I'm collecting those."
+YOU: [dlg:react] (listen)
+THEM: "I found a loose floorboard yesterday and fixed it. That's the first thing that's felt like mine."
+YOU: [dlg:more] "I’m listening."
+THEM: "Someone saved me a seat by the fire yesterday without thinking. That's the closest I've felt."
+YOU: [dlg:react] (listen)
+THEM: "Home's a feeling, not a place. I'm chasing the feeling. Some days I get close."
+YOU: [dlg:more] "Tell me more."
+THEM: "I'm not running from anything. I'm running toward the feeling of arriving."
+YOU: (leave)
+pre-close: want ask_favor stage 2 thread goal
+closing line: "Good. We've got a plan forming. I can feel it."
+(gossip picks this sitting: 0)

@@ -1,0 +1,17 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=0)
+=== seed 97801 day 90 — conversation with Patchara (app_mgpspis3159) ===
+occupation=mechanic temperament=sardonic trust=25 dead=false
+want: curious (stage 1)
+open thread: want fromSeed=false
+picker: control
+
+THEM: "What's the most useful thing you've learned since we got here? I mean it."
+(turn0 choices: ans:q_useful:a_hunger, ans:q_useful:a_self, ans:q_useful:a_learning, deflect_q, leave, silence)
+YOU: [ans:q_useful:a_hunger] "How to be hungry and keep going anyway."
+THEM: "The fundamental skill. Everything else is decoration. I'm sure it'll be fine."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "fishing. Sounds small. But small useful things stack — and one day you look up and you're the person everyone asks. That's how it happens."
+YOU: (leave)
+pre-close: want curious stage 2 thread want
+closing line: "Good. We've got a plan forming. I can feel it."
+(gossip picks this sitting: 0)

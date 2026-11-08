@@ -374,7 +374,7 @@
           bits.push(t > c ? `${LABELS[k]} ${t} \u2192 ${c} \u00B7 capped` : `${LABELS[k]} ${c}`);
         }
         const target = L.nextThreshold == null
-          ? `${L.stageName} reached`
+          ? 'reached'
           : `${L.counted}/${L.nextThreshold} to ${L.nextStageName}`;
         let line = `Ladder \u2014 ${L.stageName} ${target} (${bits.join(' \u00B7 ')})`;
         // LEG 2: name the bundle bonus when one is banked — the bar is

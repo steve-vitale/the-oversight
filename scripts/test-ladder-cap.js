@@ -82,6 +82,12 @@ async function main() {
   L = Game.villageLadder();
   T.ok('40 counted -> National (3)', L.stage === 3 && L.counted === 40, 'stage ' + L.stage + ' counted ' + L.counted);
   T.ok('National: no next threshold', L.nextThreshold === null);
+  // r111 (2026-11-08): the top-rung line repeated the stage name —
+  // "Ladder — National Standing National Standing reached". The stage
+  // name is already the subject; the target is just "reached".
+  const natLine = Game.ladderLine();
+  T.ok('National line reads "National Standing reached"', /^Ladder \u2014 National Standing reached \(/.test(natLine), natLine);
+  T.ok('National line never repeats the stage name', !/National Standing National Standing/.test(natLine), natLine);
 
   // --- just-below boundaries stay down ---
   resetLadderState(Game);
