@@ -94,18 +94,64 @@ function canonCause(c) {
 // files 5/5 in the same minute). Retrying in-process is futile; each child
 // reads the payload from stdin (a pipe, never a filesystem write), writes +
 // readback-verifies + renames, and exits 0/1/3.
+//
+// CHUNKED APPENDS (2026-11-08, this run): the flap changed shape — large
+// single writes are now denied while small writes pass (measured 02:07Z:
+// 100KB writes 0/60 over a minute while <=8KB writes passed repeatedly;
+// a 537KB single write landed only after ~7 min of retries, and seed
+// 96307's write then exhausted all 300 attempts and killed the baseline
+// sweep). The child therefore appends the payload in 4KB chunks (each
+// chunk its own small write), repairs a partial tail chunk by truncating
+// back to the last whole-chunk boundary, and RESUMES across child attempts
+// (progress persists in the tmp file; the parent respawns until the file
+// is complete, then a final child readback-verifies the full bytes and
+// renames). Transport only: the file bytes and the verification are
+// identical to the single-write version.
 const CHILD_WRITER = `
 // NOTE: with node -e, argv has NO script filename: args are argv[1]/argv[2].
 const fs = require('fs');
+const CHUNK = 4096;
 const tmp = process.argv[1], dest = process.argv[2];
+const t0 = Date.now();
 let data = '';
 process.stdin.setEncoding('utf8');
 process.stdin.on('data', (c) => { data += c; });
 process.stdin.on('end', () => {
   try {
-    fs.writeFileSync(tmp, data);
-    const back = fs.readFileSync(tmp, 'utf8');
-    if (back.length !== data.length) process.exit(3);
+    const payload = Buffer.from(data, 'utf8');
+    let size = 0;
+    try { size = fs.statSync(tmp).size; } catch (e) { size = 0; }
+    // Repair a partial tail chunk (a short write mid-chunk): truncate back
+    // to the last whole-chunk boundary, unless the file is already complete.
+    if (size > 0 && size < payload.length && size % CHUNK !== 0) {
+      const good = Math.floor(size / CHUNK) * CHUNK;
+      fs.truncateSync(tmp, good);
+      size = good;
+    }
+    if (size > payload.length) { fs.truncateSync(tmp, 0); size = 0; }
+    const fd = fs.openSync(tmp, 'a');
+    try {
+      while (size < payload.length) {
+        if (Date.now() - t0 > 25000) { fs.closeSync(fd); process.exit(1); }
+        const end = Math.min(size + CHUNK, payload.length);
+        const buf = payload.subarray(size, end);
+        let wrote = 0, tries = 0;
+        while (tries++ < 200) {
+          try {
+            const n = fs.writeSync(fd, buf, wrote, buf.length - wrote);
+            wrote += n;
+            if (wrote >= buf.length) break;
+          } catch (e) {
+            if (Date.now() - t0 > 25000) { fs.closeSync(fd); process.exit(1); }
+            Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 10);
+          }
+        }
+        if (wrote < buf.length) { fs.closeSync(fd); process.exit(1); }
+        size = end;
+      }
+    } finally { try { fs.closeSync(fd); } catch (e) {} }
+    const back = fs.readFileSync(tmp);
+    if (!back.equals(payload)) process.exit(3);
     fs.renameSync(tmp, dest);
     process.exit(0);
   } catch (e) { process.exit(1); }

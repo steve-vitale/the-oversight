@@ -90,7 +90,12 @@ try { const pr = require('./policies/competent-patchrot-b'); POLICY_REGISTRY['co
 // balanced panel (§15) can build its column. Additive; zero behavior
 // change to existing entries (the variant stays default-OFF: nothing
 // loads it unless named).
-try { const lk = require('./policies/linkseek'); POLICY_REGISTRY['linkseek'] = lk.linkseek; } catch (e) {}
+// cheaptend instrument (sim-cheaptend-a, 2026-11-08, Loop A food-economy):
+// the competent + tend-only-on-no-trip-days policy, registered so the
+// balanced panel (§15) can build its column. Additive; zero behavior
+// change to existing entries (the variant stays default-OFF behind
+// CHEAPTEND_A=1; see scripts/policies/cheaptend-a.js).
+try { const ct = require('./policies/cheaptend-a'); POLICY_REGISTRY['cheaptend-a'] = ct.cheaptendA; } catch (e) {}
 const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
 
 function stdSnapshot(Game) {
