@@ -94,7 +94,8 @@ function ok(cond, name, extra) {
       const o2 = Game.objOf(leader);
       o2.kind = 'FORAGE'; o2.purpose = 'forage'; o2.tx = hx + 1; o2.ty = hy;
       o2.state = 'ready'; o2.indoor = false; o2.tightness = 0;
-      asked2 = Game.objAskCompanion(leader, o2, hx, hy);
+      // roll:0 pins accept — Phase 4 routes companion through npcInviteDecision.
+      asked2 = Game.objAskCompanion(leader, o2, hx, hy, { roll: 0 });
     } catch (e) { ok(false, 'objAskCompanion no-throw (healthy pool)', e.message); }
     ok(asked2 === healthyComp || (asked2 && !(v.sick || {})[asked2]),
       'healthy companion askable, never a sick one', 'got=' + asked2);
