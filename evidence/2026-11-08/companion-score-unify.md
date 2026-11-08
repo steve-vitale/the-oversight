@@ -13,7 +13,8 @@ boot input.
 | What | SHA / note |
 |---|---|
 | Base tip | `6e53adc62` (`origin/master`, #43 phone-frame after bond/#42) |
-| Branch | `cursor/companion-score-unify-a1e9` |
+| Feature commit | `45fe1c057` on `cursor/companion-score-unify-a1e9` |
+| PR | https://github.com/steve-vitale/the-oversight/pull/45 |
 
 ## Gap (pre-fix)
 
