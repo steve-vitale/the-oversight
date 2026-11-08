@@ -246,3 +246,21 @@ coverage) acceptable, or does the cure need a wider shape (e.g. a
 radiation medicine item)? Neither blocks landing; both are
 follow-up calls. The pantry-cost version never goes live: this
 rework replaces it on the branch before the ship.
+
+## Rebase + final gate
+
+- Master moved during the run (Loop B evidence-only landings:
+  sim-53007-a, sim-flippanel-b, sim-riskdeath-b; 32 files, zero
+  overlap with this branch). Rebased 13 commits onto `d3e4eefa`
+  (explicit SHA, re-read immediately before), clean, no stops, no
+  conflicts; new tip `517f229b8`. Proofs re-verified green after
+  the rebase (rads 63/63, boost 39/39, Q4 19/19, measurement pair
+  9/9 + 9/9).
+- Final gate (post-rebase, in a free slot): `check.js --quick`
+  **296 passed, 4 failed in 702s** — the SAME 4 pre-existing
+  failures as the pre-rebase gate (478s) and the pellet-boost final
+  gate (mobile-combat-cadence, occupation-panels, phone-frame-proof,
+  establishment-r20); measurement pair green. Log: goal
+  hidden_files `check-pellet-rads-quick2.log` (first gate:
+  `check-pellet-rads-quick.log`, 296/4 in 478s).
+- Merged ff-only as (see merge step).
