@@ -35366,7 +35366,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // No tactics.packSpawn -> legacy mdef.pack (belltoad, hummice, field
       // fights — untouched).
       const partyN = 1 + fighters.filter(f => f.kind === 'villager').length;
-      let count = this.tbPackSpawnCount ? this.tbPackSpawnCount(mdef, partyN) : (mdef.pack || 1);
+      // ARENA MIRROR CAP (sim-mirrorcap 2026-11-07): _raidContestAtEntry is
+      // true exactly when state.arenaContest was live at entry — set by
+      // _contestArena before startCombat, re-set per chained wave. Arena
+      // fights cap the Reunion mirror at 1; field fights pass arena and
+      // keep min(3, partyN).
+      let count = this.tbPackSpawnCount ? this.tbPackSpawnCount(mdef, partyN, { arena: _raidContestAtEntry }) : (mdef.pack || 1);
       let packDelayed = 0;
       if (mdef.id === 'belltoad' && count > 1) {
         packDelayed = count - 1;

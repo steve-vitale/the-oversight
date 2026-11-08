@@ -44,6 +44,12 @@
  * - Spawn scales with your party: solo 2 wolves / party 4; solo 1 heckler /
  *   party 3; the Reunion mirrors your party (max 3). Solo scouts keep a fair
  *   duel. (tbPackSpawnCount, wired into startCombat)
+ * - ARENA MIRROR CAP (sim-mirrorcap 2026-11-07, Steve: "Probably cap mirror
+ *   for arenas"): in ARENA fights the Reunion spawns at most
+ *   REUNION_ARENA_MIRROR_CAP (1) mirror, whatever the party size — the
+ *   3-mirror arena pack killed 6/6 fought draws (sim-gauntlet-pack-b).
+ *   Field Reunion fights keep min(3, partyN). (tbPackSpawnCount opts.arena,
+ *   set from state.arenaContest at startCombat entry)
  * - Flanking: each packmate adjacent to the target adds +flank damage, capped.
  *   (tbFlankBonus, applied at damage time — hushwolf rush, direct resolves)
  * - Focus the isolated: a party member 3+ tiles from the group draws the
@@ -73,6 +79,16 @@
   if (!G) return;
   var SC = _g.Scattering || {};
 
+  // ARENA MIRROR CAP (sim-mirrorcap 2026-11-07): the most Reunion mirrors
+  // an ARENA fight ever spawns, whatever the party size. One mirror keeps
+  // "it knows you" (Your Move, novelty, flank/focus tactics all intact);
+  // three mirrors vs a party was a party-vs-party mirror match that
+  // killed 6/6 fought draws. Pinned by evidence/2026-11-07/
+  // sim-mirrorcap-prereg.md — do not change without a new prereg.
+  // Exposed as G.REUNION_ARENA_MIRROR_CAP so proof tests read the same
+  // number the code applies, never a second copy.
+  var REUNION_ARENA_MIRROR_CAP = 1;
+
   function cheb(ax, ay, bx, by) { return Math.max(Math.abs(ax - bx), Math.abs(ay - by)); }
   function sideOf(o) { return o && (o.kind === 'player' || o.kind === 'villager'); }
   function aliveSide(f) {
@@ -92,10 +108,18 @@
     // arrive, from mdef.tactics.packSpawn. partyN = player + allies joining.
     // No tactics.packSpawn -> legacy mdef.pack (belltoad's delayed chorus,
     // hummice swarm, field fights — untouched).
-    tbPackSpawnCount: function (mdef, partyN) {
+    // ARENA MIRROR CAP (sim-mirrorcap 2026-11-07): opts.arena caps a mirror
+    // pack at REUNION_ARENA_MIRROR_CAP (1). startCombat passes arena:true
+    // only when state.arenaContest is live at entry; every other caller
+    // (and every direct unit call without opts) keeps the old behavior.
+    tbPackSpawnCount: function (mdef, partyN, opts) {
       var t = tacticsOf(mdef).packSpawn;
       if (!t) return (mdef.pack || 1);
-      if (t.mirror) return Math.max(1, Math.min(t.max || 3, partyN || 1));
+      if (t.mirror) {
+        var n = Math.max(1, Math.min(t.max || 3, partyN || 1));
+        if (opts && opts.arena) n = Math.min(n, REUNION_ARENA_MIRROR_CAP);
+        return n;
+      }
       if ((partyN || 1) >= 3) return (t.party != null ? t.party : (mdef.pack || 1));
       return (t.solo != null ? t.solo : (mdef.pack || 1));
     },
@@ -443,6 +467,10 @@
   };
 
   Object.assign(G, methods);
+
+  // The cap constant, readable from the Game object so the proof test
+  // asserts the number the code applies (same binding, not a copy).
+  G.REUNION_ARENA_MIRROR_CAP = REUNION_ARENA_MIRROR_CAP;
 
   // Pre-turn hook registrations (run via mbRunPreTurn; declared per monster
   // in src/data/monsterBehaviors.json). Non-consuming unless noted.
