@@ -1,0 +1,4395 @@
+{
+ "policy": "armed",
+ "seed": 76405,
+ "days": 75,
+ "gameDays": 75,
+ "endReason": "village-lost",
+ "won": 0,
+ "waveReach": 4,
+ "maxArc": 4,
+ "finalRank": "regional",
+ "maxRank": "regional",
+ "nationalEver": 0,
+ "nationalFinal": 0,
+ "globalEver": 0,
+ "table": 1,
+ "entered": 0,
+ "enteredFull": 0,
+ "deaths": {
+  "villager:expedition": 30,
+  "villager:villager combat": 25,
+  "player:the wild": 5,
+  "villager:ambush": 1,
+  "villager:combat": 21,
+  "villager:monster": 2,
+  "villager:sickness": 2,
+  "villager:a wound that wouldn't close": 1,
+  "villager:contest": 1
+ },
+ "deathTotal": 88,
+ "starvationDeaths": 0,
+ "starvationDetail": [],
+ "ts": {},
+ "ctxExtra": {
+  "proposedLead": 3,
+  "courtAccords": 3
+ },
+ "finalPop": 2,
+ "finalPantry": 1500,
+ "finalKnown": 30,
+ "endSnap": {
+  "day": 75,
+  "errs": [],
+  "rank": "regional",
+  "networkLive": true,
+  "networkLiveDay": 46,
+  "regionalAge": 29,
+  "nationalLive": false,
+  "nationalDay": null,
+  "nationalShape": null,
+  "globalLive": false,
+  "scaleRefused": false,
+  "pendingNational": null,
+  "natDefer": {
+   "covenant": null,
+   "trade": null
+  },
+  "links": {
+   "active": 3,
+   "subs": 3,
+   "conqueredSubs": 0,
+   "belongLinks": 0,
+   "peerCov": 0,
+   "peerTrade": 0,
+   "seasonedSubs": 2,
+   "seasonedCov": 0,
+   "seasonedTrade": 0,
+   "subsDetail": [
+    {
+     "id": "village_0",
+     "trust": 24,
+     "age": 50,
+     "seasoned": false,
+     "conquered": false,
+     "trustGap": 16,
+     "daysToSeason": 0
+    },
+    {
+     "id": "village_2",
+     "trust": 64,
+     "age": 49,
+     "seasoned": true,
+     "conquered": false,
+     "trustGap": 0,
+     "daysToSeason": 0
+    },
+    {
+     "id": "village_3",
+     "trust": 40,
+     "age": 48,
+     "seasoned": true,
+     "conquered": false,
+     "trustGap": 0,
+     "daysToSeason": 0
+    }
+   ]
+  },
+  "qualify": {
+   "lead": false,
+   "leadShape": null,
+   "belong": false,
+   "covenant": false,
+   "trade": false,
+   "any": false,
+   "shapes": []
+  },
+  "standing": {
+   "raw": 150,
+   "war": 150,
+   "diplomacy": 0,
+   "plenty": 0,
+   "links": 0,
+   "feasts": 0,
+   "capped": 150,
+   "gated": 150,
+   "holds": [],
+   "bindingHold": [],
+   "peak": 4,
+   "rd4": {
+    "ready": false,
+    "veterans": 1,
+    "short": [
+     "armor",
+     "weapons"
+    ]
+   },
+   "rd5": {
+    "ready": false,
+    "veterans": 1,
+    "short": [
+     "armor",
+     "weapons",
+     "veterans"
+    ]
+   }
+  },
+  "unlockedWave": 4,
+  "engineGated": 150,
+  "gatedMatchesEngine": true,
+  "seat": "lesser"
+ },
+ "diag": {
+  "days": 75,
+  "errs": 0,
+  "first": {
+   "nationalDay": null,
+   "nationalShape": null,
+   "leadQualifyDay": 57
+  },
+  "maxSeasonedSubs": 3,
+  "tends": [
+   {
+    "day": 27,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "trustBefore": 40,
+    "trustAfter": 48,
+    "lift": 8,
+    "measuredDelta": 8,
+    "pantryPre": 25553,
+    "pantryPost": 25553,
+    "pantryDays": 11,
+    "week": 3,
+    "source": "engine-winplan",
+    "noteGain": 8,
+    "noteDay": 26
+   },
+   {
+    "day": 27,
+    "linkId": "link_mgpspi1m446",
+    "other": "village_2",
+    "trustBefore": 30,
+    "trustAfter": 38,
+    "lift": 8,
+    "measuredDelta": 8,
+    "pantryPre": 25553,
+    "pantryPost": 25553,
+    "pantryDays": 11,
+    "week": 3,
+    "source": "engine-winplan",
+    "noteGain": 8,
+    "noteDay": 26
+   },
+   {
+    "day": 28,
+    "linkId": "link_mgpspi28307",
+    "other": "village_3",
+    "trustBefore": 30,
+    "trustAfter": 38,
+    "lift": 8,
+    "measuredDelta": 8,
+    "pantryPre": 31172,
+    "pantryPost": 31172,
+    "pantryDays": 14,
+    "week": 4,
+    "source": "engine-winplan",
+    "noteGain": 8,
+    "noteDay": 27
+   },
+   {
+    "day": 32,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "trustBefore": 49,
+    "trustAfter": 57,
+    "lift": 8,
+    "measuredDelta": 8,
+    "pantryPre": 29800,
+    "pantryPost": 29800,
+    "pantryDays": 13,
+    "week": 4,
+    "source": "engine-winplan",
+    "noteGain": 8,
+    "noteDay": 32
+   },
+   {
+    "day": 32,
+    "linkId": "link_mgpspi1m446",
+    "other": "village_2",
+    "trustBefore": 49,
+    "trustAfter": 57,
+    "lift": 8,
+    "measuredDelta": 8,
+    "pantryPre": 29800,
+    "pantryPost": 29800,
+    "pantryDays": 13,
+    "week": 4,
+    "source": "engine-winplan",
+    "noteGain": 8,
+    "noteDay": 32
+   },
+   {
+    "day": 32,
+    "linkId": "link_mgpspi28307",
+    "other": "village_3",
+    "trustBefore": 49,
+    "trustAfter": 57,
+    "lift": 8,
+    "measuredDelta": 8,
+    "pantryPre": 29800,
+    "pantryPost": 29800,
+    "pantryDays": 13,
+    "week": 4,
+    "source": "engine-winplan",
+    "noteGain": 8,
+    "noteDay": 32
+   }
+  ],
+  "tendAttempts": [],
+  "overnight": [
+   {
+    "day": 27,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "delta": 8,
+    "trustBefore": 40,
+    "trustAfter": 48,
+    "kinds": [
+     "tended"
+    ]
+   },
+   {
+    "day": 27,
+    "linkId": "link_mgpspi1m446",
+    "other": "village_2",
+    "delta": 8,
+    "trustBefore": 30,
+    "trustAfter": 38,
+    "kinds": [
+     "tended"
+    ]
+   },
+   {
+    "day": 28,
+    "linkId": "link_mgpspi28307",
+    "other": "village_3",
+    "delta": 8,
+    "trustBefore": 30,
+    "trustAfter": 38,
+    "kinds": [
+     "tended"
+    ]
+   },
+   {
+    "day": 29,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "delta": 1,
+    "trustBefore": 48,
+    "trustAfter": 49,
+    "kinds": [
+     "tribute"
+    ]
+   },
+   {
+    "day": 29,
+    "linkId": "link_mgpspi1m446",
+    "other": "village_2",
+    "delta": 1,
+    "trustBefore": 48,
+    "trustAfter": 49,
+    "kinds": [
+     "tribute"
+    ]
+   },
+   {
+    "day": 29,
+    "linkId": "link_mgpspi28307",
+    "other": "village_3",
+    "delta": 1,
+    "trustBefore": 48,
+    "trustAfter": 49,
+    "kinds": [
+     "tribute"
+    ]
+   },
+   {
+    "day": 32,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "delta": 8,
+    "trustBefore": 49,
+    "trustAfter": 57,
+    "kinds": [
+     "tended"
+    ]
+   },
+   {
+    "day": 32,
+    "linkId": "link_mgpspi1m446",
+    "other": "village_2",
+    "delta": 8,
+    "trustBefore": 49,
+    "trustAfter": 57,
+    "kinds": [
+     "tended"
+    ]
+   },
+   {
+    "day": 32,
+    "linkId": "link_mgpspi28307",
+    "other": "village_3",
+    "delta": 8,
+    "trustBefore": 49,
+    "trustAfter": 57,
+    "kinds": [
+     "tended"
+    ]
+   },
+   {
+    "day": 36,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "delta": 1,
+    "trustBefore": 57,
+    "trustAfter": 58,
+    "kinds": [
+     "tribute"
+    ]
+   },
+   {
+    "day": 36,
+    "linkId": "link_mgpspi1m446",
+    "other": "village_2",
+    "delta": 1,
+    "trustBefore": 61,
+    "trustAfter": 62,
+    "kinds": [
+     "tribute"
+    ]
+   },
+   {
+    "day": 36,
+    "linkId": "link_mgpspi28307",
+    "other": "village_3",
+    "delta": 1,
+    "trustBefore": 57,
+    "trustAfter": 58,
+    "kinds": [
+     "tribute"
+    ]
+   },
+   {
+    "day": 43,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "delta": -2,
+    "trustBefore": 62,
+    "trustAfter": 60,
+    "kinds": [
+     "tribute"
+    ]
+   },
+   {
+    "day": 43,
+    "linkId": "link_mgpspi1m446",
+    "other": "village_2",
+    "delta": 1,
+    "trustBefore": 66,
+    "trustAfter": 67,
+    "kinds": [
+     "tribute"
+    ]
+   },
+   {
+    "day": 43,
+    "linkId": "link_mgpspi28307",
+    "other": "village_3",
+    "delta": 1,
+    "trustBefore": 58,
+    "trustAfter": 59,
+    "kinds": [
+     "tribute"
+    ]
+   },
+   {
+    "day": 46,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "delta": -8,
+    "trustBefore": 60,
+    "trustAfter": 52,
+    "kinds": [
+     "succession"
+    ]
+   },
+   {
+    "day": 46,
+    "linkId": "link_mgpspi1m446",
+    "other": "village_2",
+    "delta": -8,
+    "trustBefore": 67,
+    "trustAfter": 59,
+    "kinds": [
+     "succession"
+    ]
+   },
+   {
+    "day": 46,
+    "linkId": "link_mgpspi28307",
+    "other": "village_3",
+    "delta": -8,
+    "trustBefore": 59,
+    "trustAfter": 51,
+    "kinds": [
+     "succession"
+    ]
+   },
+   {
+    "day": 50,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "delta": -2,
+    "trustBefore": 52,
+    "trustAfter": 50,
+    "kinds": [
+     "tribute"
+    ]
+   },
+   {
+    "day": 50,
+    "linkId": "link_mgpspi1m446",
+    "other": "village_2",
+    "delta": 1,
+    "trustBefore": 63,
+    "trustAfter": 64,
+    "kinds": [
+     "tribute"
+    ]
+   },
+   {
+    "day": 50,
+    "linkId": "link_mgpspi28307",
+    "other": "village_3",
+    "delta": 1,
+    "trustBefore": 51,
+    "trustAfter": 52,
+    "kinds": [
+     "tribute"
+    ]
+   },
+   {
+    "day": 53,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "delta": -6,
+    "trustBefore": 54,
+    "trustAfter": 48,
+    "kinds": [
+     "renegotiation"
+    ]
+   },
+   {
+    "day": 53,
+    "linkId": "link_mgpspi1m446",
+    "other": "village_2",
+    "delta": -6,
+    "trustBefore": 64,
+    "trustAfter": 58,
+    "kinds": [
+     "renegotiation"
+    ]
+   },
+   {
+    "day": 53,
+    "linkId": "link_mgpspi28307",
+    "other": "village_3",
+    "delta": -6,
+    "trustBefore": 52,
+    "trustAfter": 46,
+    "kinds": [
+     "renegotiation"
+    ]
+   },
+   {
+    "day": 57,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "delta": -2,
+    "trustBefore": 48,
+    "trustAfter": 46,
+    "kinds": [
+     "tribute"
+    ]
+   },
+   {
+    "day": 57,
+    "linkId": "link_mgpspi1m446",
+    "other": "village_2",
+    "delta": 1,
+    "trustBefore": 62,
+    "trustAfter": 63,
+    "kinds": [
+     "tribute"
+    ]
+   },
+   {
+    "day": 57,
+    "linkId": "link_mgpspi28307",
+    "other": "village_3",
+    "delta": 1,
+    "trustBefore": 46,
+    "trustAfter": 47,
+    "kinds": [
+     "tribute"
+    ]
+   },
+   {
+    "day": 60,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "delta": -8,
+    "trustBefore": 41,
+    "trustAfter": 33,
+    "kinds": [
+     "succession"
+    ]
+   },
+   {
+    "day": 60,
+    "linkId": "link_mgpspi1m446",
+    "other": "village_2",
+    "delta": -8,
+    "trustBefore": 63,
+    "trustAfter": 55,
+    "kinds": [
+     "succession"
+    ]
+   },
+   {
+    "day": 60,
+    "linkId": "link_mgpspi28307",
+    "other": "village_3",
+    "delta": -8,
+    "trustBefore": 47,
+    "trustAfter": 39,
+    "kinds": [
+     "succession"
+    ]
+   },
+   {
+    "day": 64,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "delta": -2,
+    "trustBefore": 33,
+    "trustAfter": 31,
+    "kinds": [
+     "tribute"
+    ]
+   },
+   {
+    "day": 71,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "delta": -2,
+    "trustBefore": 26,
+    "trustAfter": 24,
+    "kinds": [
+     "tribute"
+    ]
+   },
+   {
+    "day": 71,
+    "linkId": "link_mgpspi1m446",
+    "other": "village_2",
+    "delta": 1,
+    "trustBefore": 59,
+    "trustAfter": 60,
+    "kinds": [
+     "tribute"
+    ]
+   },
+   {
+    "day": 71,
+    "linkId": "link_mgpspi28307",
+    "other": "village_3",
+    "delta": 1,
+    "trustBefore": 39,
+    "trustAfter": 40,
+    "kinds": [
+     "tribute"
+    ]
+   }
+  ],
+  "intradayOther": [
+   {
+    "day": 26,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "delta": 10,
+    "trustBefore": 30,
+    "trustAfter": 40,
+    "kinds": [
+     "accord"
+    ]
+   },
+   {
+    "day": 27,
+    "linkId": "link_mgpspi1m446",
+    "other": "village_2",
+    "delta": 2,
+    "trustBefore": 38,
+    "trustAfter": 48,
+    "kinds": [
+     "accord"
+    ]
+   },
+   {
+    "day": 28,
+    "linkId": "link_mgpspi28307",
+    "other": "village_3",
+    "delta": 2,
+    "trustBefore": 38,
+    "trustAfter": 48,
+    "kinds": [
+     "accord"
+    ]
+   },
+   {
+    "day": 32,
+    "linkId": "link_mgpspi28307",
+    "other": "village_3",
+    "delta": -8,
+    "trustBefore": 57,
+    "trustAfter": 57,
+    "kinds": []
+   },
+   {
+    "day": 35,
+    "linkId": "link_mgpspi1m446",
+    "other": "village_2",
+    "delta": 4,
+    "trustBefore": 57,
+    "trustAfter": 61,
+    "kinds": []
+   },
+   {
+    "day": 36,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "delta": 4,
+    "trustBefore": 58,
+    "trustAfter": 62,
+    "kinds": [
+     "aid"
+    ]
+   },
+   {
+    "day": 41,
+    "linkId": "link_mgpspi1m446",
+    "other": "village_2",
+    "delta": 4,
+    "trustBefore": 62,
+    "trustAfter": 66,
+    "kinds": []
+   },
+   {
+    "day": 47,
+    "linkId": "link_mgpspi1m446",
+    "other": "village_2",
+    "delta": 4,
+    "trustBefore": 59,
+    "trustAfter": 63,
+    "kinds": []
+   },
+   {
+    "day": 50,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "delta": 4,
+    "trustBefore": 50,
+    "trustAfter": 54,
+    "kinds": [
+     "aid"
+    ]
+   },
+   {
+    "day": 53,
+    "linkId": "link_mgpspi1m446",
+    "other": "village_2",
+    "delta": 4,
+    "trustBefore": 58,
+    "trustAfter": 62,
+    "kinds": []
+   },
+   {
+    "day": 59,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "delta": -5,
+    "trustBefore": 46,
+    "trustAfter": 41,
+    "kinds": []
+   },
+   {
+    "day": 67,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "delta": -5,
+    "trustBefore": 31,
+    "trustAfter": 26,
+    "kinds": []
+   },
+   {
+    "day": 69,
+    "linkId": "link_mgpspi1m446",
+    "other": "village_2",
+    "delta": 4,
+    "trustBefore": 55,
+    "trustAfter": 59,
+    "kinds": []
+   },
+   {
+    "day": 75,
+    "linkId": "link_mgpspi1m446",
+    "other": "village_2",
+    "delta": 4,
+    "trustBefore": 60,
+    "trustAfter": 64,
+    "kinds": []
+   }
+  ],
+  "traj": [
+   {
+    "day": 2,
+    "pantry": 41480,
+    "pantryDays": 7,
+    "rank": "village",
+    "subs": 0,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [],
+    "gateBlocked": []
+   },
+   {
+    "day": 2,
+    "pantry": 40880,
+    "pantryDays": 7,
+    "rank": "village",
+    "subs": 0,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [],
+    "gateBlocked": []
+   },
+   {
+    "day": 4,
+    "pantry": 30480,
+    "pantryDays": 6,
+    "rank": "village",
+    "subs": 0,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [],
+    "gateBlocked": []
+   },
+   {
+    "day": 4,
+    "pantry": 32084,
+    "pantryDays": 7,
+    "rank": "village",
+    "subs": 0,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [],
+    "gateBlocked": []
+   },
+   {
+    "day": 5,
+    "pantry": 27812,
+    "pantryDays": 6,
+    "rank": "village",
+    "subs": 0,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [],
+    "gateBlocked": []
+   },
+   {
+    "day": 6,
+    "pantry": 31809,
+    "pantryDays": 8,
+    "rank": "village",
+    "subs": 0,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [],
+    "gateBlocked": []
+   },
+   {
+    "day": 7,
+    "pantry": 30396,
+    "pantryDays": 8,
+    "rank": "village",
+    "subs": 0,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [],
+    "gateBlocked": []
+   },
+   {
+    "day": 8,
+    "pantry": 29666,
+    "pantryDays": 9,
+    "rank": "village",
+    "subs": 0,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [],
+    "gateBlocked": []
+   },
+   {
+    "day": 9,
+    "pantry": 31742,
+    "pantryDays": 11,
+    "rank": "village",
+    "subs": 0,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [],
+    "gateBlocked": []
+   },
+   {
+    "day": 10,
+    "pantry": 30153,
+    "pantryDays": 12,
+    "rank": "village",
+    "subs": 0,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [],
+    "gateBlocked": []
+   },
+   {
+    "day": 11,
+    "pantry": 31881,
+    "pantryDays": 14,
+    "rank": "village",
+    "subs": 0,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [],
+    "gateBlocked": []
+   },
+   {
+    "day": 12,
+    "pantry": 36004,
+    "pantryDays": 18,
+    "rank": "village",
+    "subs": 0,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [],
+    "gateBlocked": []
+   },
+   {
+    "day": 13,
+    "pantry": 43140,
+    "pantryDays": 22,
+    "rank": "village",
+    "subs": 0,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [],
+    "gateBlocked": []
+   },
+   {
+    "day": 14,
+    "pantry": 44144,
+    "pantryDays": 21,
+    "rank": "village",
+    "subs": 0,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [],
+    "gateBlocked": []
+   },
+   {
+    "day": 15,
+    "pantry": 43260,
+    "pantryDays": 19,
+    "rank": "village",
+    "subs": 0,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [],
+    "gateBlocked": []
+   },
+   {
+    "day": 16,
+    "pantry": 42761,
+    "pantryDays": 19,
+    "rank": "village",
+    "subs": 0,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [],
+    "gateBlocked": []
+   },
+   {
+    "day": 17,
+    "pantry": 41630,
+    "pantryDays": 19,
+    "rank": "village",
+    "subs": 0,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [],
+    "gateBlocked": []
+   },
+   {
+    "day": 18,
+    "pantry": 43481,
+    "pantryDays": 19,
+    "rank": "village",
+    "subs": 0,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [],
+    "gateBlocked": []
+   },
+   {
+    "day": 19,
+    "pantry": 40890,
+    "pantryDays": 18,
+    "rank": "village",
+    "subs": 0,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [],
+    "gateBlocked": []
+   },
+   {
+    "day": 20,
+    "pantry": 37174,
+    "pantryDays": 16,
+    "rank": "village",
+    "subs": 0,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [],
+    "gateBlocked": []
+   },
+   {
+    "day": 21,
+    "pantry": 34417,
+    "pantryDays": 15,
+    "rank": "village",
+    "subs": 0,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [],
+    "gateBlocked": []
+   },
+   {
+    "day": 22,
+    "pantry": 32052,
+    "pantryDays": 14,
+    "rank": "village",
+    "subs": 0,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [],
+    "gateBlocked": []
+   },
+   {
+    "day": 23,
+    "pantry": 32230,
+    "pantryDays": 14,
+    "rank": "village",
+    "subs": 0,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [],
+    "gateBlocked": []
+   },
+   {
+    "day": 24,
+    "pantry": 31522,
+    "pantryDays": 13,
+    "rank": "village",
+    "subs": 0,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [],
+    "gateBlocked": []
+   },
+   {
+    "day": 25,
+    "pantry": 30088,
+    "pantryDays": 13,
+    "rank": "village",
+    "subs": 1,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 30,
+      "age": 0,
+      "seasoned": 0,
+      "gap": 10,
+      "ageGap": 30,
+      "tendedWeek": null,
+      "mourningUntil": null,
+      "lastKeptDay": null,
+      "arrears": 0,
+      "subPantry": 0
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 26,
+    "pantry": 28490,
+    "pantryDays": 12,
+    "rank": "village",
+    "subs": 2,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 40,
+      "age": 1,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 29,
+      "tendedWeek": null,
+      "mourningUntil": null,
+      "lastKeptDay": 26,
+      "arrears": 0,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 30,
+      "age": 0,
+      "seasoned": 0,
+      "gap": 10,
+      "ageGap": 30,
+      "tendedWeek": null,
+      "mourningUntil": null,
+      "lastKeptDay": null,
+      "arrears": 0,
+      "subPantry": 0
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 27,
+    "pantry": 23553,
+    "pantryDays": 10,
+    "rank": "village",
+    "subs": 3,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 48,
+      "age": 2,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 28,
+      "tendedWeek": 3,
+      "mourningUntil": null,
+      "lastKeptDay": 26,
+      "arrears": 0,
+      "subPantry": 780
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 48,
+      "age": 1,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 29,
+      "tendedWeek": 3,
+      "mourningUntil": null,
+      "lastKeptDay": 27,
+      "arrears": 0,
+      "subPantry": 300
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 30,
+      "age": 0,
+      "seasoned": 0,
+      "gap": 10,
+      "ageGap": 30,
+      "tendedWeek": null,
+      "mourningUntil": null,
+      "lastKeptDay": null,
+      "arrears": 0,
+      "subPantry": 0
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 28,
+    "pantry": 29172,
+    "pantryDays": 13,
+    "rank": "village",
+    "subs": 3,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 48,
+      "age": 3,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 27,
+      "tendedWeek": 3,
+      "mourningUntil": null,
+      "lastKeptDay": 26,
+      "arrears": 0,
+      "subPantry": 60
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 48,
+      "age": 2,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 28,
+      "tendedWeek": 3,
+      "mourningUntil": null,
+      "lastKeptDay": 27,
+      "arrears": 0,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 48,
+      "age": 1,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 29,
+      "tendedWeek": 3,
+      "mourningUntil": null,
+      "lastKeptDay": 28,
+      "arrears": 0,
+      "subPantry": 60
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 29,
+    "pantry": 28141,
+    "pantryDays": 13,
+    "rank": "village",
+    "subs": 3,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 49,
+      "age": 4,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 26,
+      "tendedWeek": 3,
+      "mourningUntil": null,
+      "lastKeptDay": 28,
+      "arrears": 0,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 49,
+      "age": 3,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 27,
+      "tendedWeek": 3,
+      "mourningUntil": null,
+      "lastKeptDay": 28,
+      "arrears": 0,
+      "subPantry": 43734
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 49,
+      "age": 2,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 28,
+      "tendedWeek": 3,
+      "mourningUntil": null,
+      "lastKeptDay": 28,
+      "arrears": 0,
+      "subPantry": 0
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 30,
+    "pantry": 27865,
+    "pantryDays": 12,
+    "rank": "village",
+    "subs": 3,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 49,
+      "age": 5,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 25,
+      "tendedWeek": 3,
+      "mourningUntil": null,
+      "lastKeptDay": 28,
+      "arrears": 0,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 49,
+      "age": 4,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 26,
+      "tendedWeek": 3,
+      "mourningUntil": null,
+      "lastKeptDay": 28,
+      "arrears": 0,
+      "subPantry": 42534
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 49,
+      "age": 3,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 27,
+      "tendedWeek": 3,
+      "mourningUntil": null,
+      "lastKeptDay": 28,
+      "arrears": 0,
+      "subPantry": 0
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 31,
+    "pantry": 27029,
+    "pantryDays": 12,
+    "rank": "village",
+    "subs": 3,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 49,
+      "age": 6,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 24,
+      "tendedWeek": 3,
+      "mourningUntil": null,
+      "lastKeptDay": 28,
+      "arrears": 0,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 49,
+      "age": 5,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 25,
+      "tendedWeek": 3,
+      "mourningUntil": null,
+      "lastKeptDay": 28,
+      "arrears": 0,
+      "subPantry": 41334
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 49,
+      "age": 4,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 26,
+      "tendedWeek": 3,
+      "mourningUntil": null,
+      "lastKeptDay": 28,
+      "arrears": 0,
+      "subPantry": 0
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 32,
+    "pantry": 30250,
+    "pantryDays": 14,
+    "rank": "village",
+    "subs": 3,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 57,
+      "age": 7,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 23,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 32,
+      "arrears": 0,
+      "subPantry": 1600
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 57,
+      "age": 6,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 24,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 32,
+      "arrears": 0,
+      "subPantry": 41734
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 57,
+      "age": 5,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 25,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 32,
+      "arrears": 0,
+      "subPantry": 1600
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 33,
+    "pantry": 31371,
+    "pantryDays": 14,
+    "rank": "village",
+    "subs": 3,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 57,
+      "age": 8,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 22,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 32,
+      "arrears": 0,
+      "subPantry": 880
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 57,
+      "age": 7,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 23,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 32,
+      "arrears": 0,
+      "subPantry": 40534
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 57,
+      "age": 6,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 24,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 32,
+      "arrears": 0,
+      "subPantry": 880
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 34,
+    "pantry": 31003,
+    "pantryDays": 14,
+    "rank": "village",
+    "subs": 3,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 57,
+      "age": 9,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 21,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 32,
+      "arrears": 0,
+      "subPantry": 160
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 57,
+      "age": 8,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 22,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 32,
+      "arrears": 0,
+      "subPantry": 39334
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 57,
+      "age": 7,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 23,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 32,
+      "arrears": 0,
+      "subPantry": 160
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 35,
+    "pantry": 28264,
+    "pantryDays": 12,
+    "rank": "village",
+    "subs": 3,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 57,
+      "age": 10,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 20,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 32,
+      "arrears": 0,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 61,
+      "age": 9,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 21,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 32,
+      "arrears": 0,
+      "subPantry": 36018
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 57,
+      "age": 8,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 22,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 32,
+      "arrears": 0,
+      "subPantry": 0
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 36,
+    "pantry": 30809,
+    "pantryDays": 13,
+    "rank": "village",
+    "subs": 3,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 62,
+      "age": 11,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 19,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 0,
+      "subPantry": 1600
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 62,
+      "age": 10,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 20,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 0,
+      "subPantry": 78800
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 58,
+      "age": 9,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 21,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 0,
+      "subPantry": 21680
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 37,
+    "pantry": 28981,
+    "pantryDays": 13,
+    "rank": "village",
+    "subs": 3,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 62,
+      "age": 12,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 18,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 0,
+      "subPantry": 880
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 62,
+      "age": 11,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 19,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 0,
+      "subPantry": 77600
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 58,
+      "age": 10,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 20,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 0,
+      "subPantry": 20960
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 38,
+    "pantry": 24657,
+    "pantryDays": 9,
+    "rank": "village",
+    "subs": 3,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 62,
+      "age": 13,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 17,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 0,
+      "subPantry": 160
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 62,
+      "age": 12,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 18,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 0,
+      "subPantry": 76400
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 58,
+      "age": 11,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 19,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 0,
+      "subPantry": 20240
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 39,
+    "pantry": 22710,
+    "pantryDays": 8,
+    "rank": "village",
+    "subs": 3,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 62,
+      "age": 14,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 16,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 0,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 62,
+      "age": 13,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 17,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 0,
+      "subPantry": 75200
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 58,
+      "age": 12,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 18,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 0,
+      "subPantry": 19520
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 40,
+    "pantry": 24402,
+    "pantryDays": 8,
+    "rank": "village",
+    "subs": 3,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 62,
+      "age": 15,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 15,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 0,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 62,
+      "age": 14,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 16,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 0,
+      "subPantry": 74000
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 58,
+      "age": 13,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 17,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 0,
+      "subPantry": 18800
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 41,
+    "pantry": 20977,
+    "pantryDays": 6,
+    "rank": "village",
+    "subs": 3,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 62,
+      "age": 16,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 14,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 0,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 66,
+      "age": 15,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 15,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 0,
+      "subPantry": 71184
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 58,
+      "age": 14,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 16,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 0,
+      "subPantry": 18080
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 42,
+    "pantry": 19468,
+    "pantryDays": 5,
+    "rank": "village",
+    "subs": 3,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 62,
+      "age": 17,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 13,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 0,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 66,
+      "age": 16,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 14,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 0,
+      "subPantry": 69984
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 58,
+      "age": 15,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 15,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 0,
+      "subPantry": 17360
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 43,
+    "pantry": 27898,
+    "pantryDays": 8,
+    "rank": "village",
+    "subs": 3,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 60,
+      "age": 18,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 12,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 4000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 67,
+      "age": 17,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 13,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 42,
+      "arrears": 0,
+      "subPantry": 74800
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 59,
+      "age": 16,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 14,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 42,
+      "arrears": 0,
+      "subPantry": 26640
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 44,
+    "pantry": 27128,
+    "pantryDays": 7,
+    "rank": "village",
+    "subs": 3,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 60,
+      "age": 19,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 11,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 4000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 67,
+      "age": 18,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 12,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 42,
+      "arrears": 0,
+      "subPantry": 73600
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 59,
+      "age": 17,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 13,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 42,
+      "arrears": 0,
+      "subPantry": 25920
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 45,
+    "pantry": 21499,
+    "pantryDays": 6,
+    "rank": "village",
+    "subs": 3,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 60,
+      "age": 20,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 10,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 4000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 67,
+      "age": 19,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 11,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 42,
+      "arrears": 0,
+      "subPantry": 72400
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 59,
+      "age": 18,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 12,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 42,
+      "arrears": 0,
+      "subPantry": 25200
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 46,
+    "pantry": 14664,
+    "pantryDays": 4,
+    "rank": "village",
+    "subs": 3,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 52,
+      "age": 21,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 9,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 4000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 59,
+      "age": 20,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 10,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 42,
+      "arrears": 0,
+      "subPantry": 71200
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 51,
+      "age": 19,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 11,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 42,
+      "arrears": 0,
+      "subPantry": 24480
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 47,
+    "pantry": 7300,
+    "pantryDays": 2,
+    "rank": "regional",
+    "subs": 3,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 52,
+      "age": 22,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 8,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 4000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 63,
+      "age": 21,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 9,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 42,
+      "arrears": 0,
+      "subPantry": 67345
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 51,
+      "age": 20,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 10,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 42,
+      "arrears": 0,
+      "subPantry": 23760
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 48,
+    "pantry": 7905,
+    "pantryDays": 2,
+    "rank": "regional",
+    "subs": 3,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 52,
+      "age": 23,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 7,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 4000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 63,
+      "age": 22,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 8,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 42,
+      "arrears": 0,
+      "subPantry": 66145
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 51,
+      "age": 21,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 9,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 42,
+      "arrears": 0,
+      "subPantry": 23040
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 49,
+    "pantry": 5750,
+    "pantryDays": 2,
+    "rank": "regional",
+    "subs": 3,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 52,
+      "age": 24,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 6,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 4000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 63,
+      "age": 23,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 7,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 42,
+      "arrears": 0,
+      "subPantry": 64945
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 51,
+      "age": 22,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 8,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 42,
+      "arrears": 0,
+      "subPantry": 22320
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 50,
+    "pantry": 4050,
+    "pantryDays": 1,
+    "rank": "regional",
+    "subs": 3,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 54,
+      "age": 25,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 5,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 8000,
+      "subPantry": 1400
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 64,
+      "age": 24,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 6,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 49,
+      "arrears": 0,
+      "subPantry": 74800
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 52,
+      "age": 23,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 7,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 49,
+      "arrears": 0,
+      "subPantry": 38400
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 51,
+    "pantry": 4350,
+    "pantryDays": 1,
+    "rank": "regional",
+    "subs": 3,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 54,
+      "age": 26,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 4,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 8000,
+      "subPantry": 680
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 64,
+      "age": 25,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 5,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 49,
+      "arrears": 0,
+      "subPantry": 73600
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 52,
+      "age": 24,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 6,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 49,
+      "arrears": 0,
+      "subPantry": 37680
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 52,
+    "pantry": 1960,
+    "pantryDays": 0,
+    "rank": "regional",
+    "subs": 3,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 54,
+      "age": 27,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 3,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 8000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 64,
+      "age": 26,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 4,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 49,
+      "arrears": 0,
+      "subPantry": 72400
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 52,
+      "age": 25,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 5,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 49,
+      "arrears": 0,
+      "subPantry": 36960
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 53,
+    "pantry": 914,
+    "pantryDays": 0,
+    "rank": "regional",
+    "subs": 3,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 48,
+      "age": 28,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 2,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 8000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 62,
+      "age": 27,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 3,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 49,
+      "arrears": 0,
+      "subPantry": 68775
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 46,
+      "age": 26,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 4,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 49,
+      "arrears": 0,
+      "subPantry": 36240
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 54,
+    "pantry": 3539,
+    "pantryDays": 1,
+    "rank": "regional",
+    "subs": 3,
+    "sSubs": 0,
+    "shortfallSubs": 3,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 48,
+      "age": 29,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 1,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 8000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 62,
+      "age": 28,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 2,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 49,
+      "arrears": 0,
+      "subPantry": 67575
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 46,
+      "age": 27,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 3,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 49,
+      "arrears": 0,
+      "subPantry": 35520
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 55,
+    "pantry": 3539,
+    "pantryDays": 1,
+    "rank": "regional",
+    "subs": 3,
+    "sSubs": 1,
+    "shortfallSubs": 2,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 48,
+      "age": 30,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 8000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 62,
+      "age": 29,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 1,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 49,
+      "arrears": 0,
+      "subPantry": 66375
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 46,
+      "age": 28,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 2,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 49,
+      "arrears": 0,
+      "subPantry": 34800
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 56,
+    "pantry": 4407,
+    "pantryDays": 2,
+    "rank": "regional",
+    "subs": 3,
+    "sSubs": 2,
+    "shortfallSubs": 1,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 48,
+      "age": 31,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 8000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 62,
+      "age": 30,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 49,
+      "arrears": 0,
+      "subPantry": 65175
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 46,
+      "age": 29,
+      "seasoned": 0,
+      "gap": 0,
+      "ageGap": 1,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 49,
+      "arrears": 0,
+      "subPantry": 34080
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 57,
+    "pantry": 7977,
+    "pantryDays": 6,
+    "rank": "regional",
+    "subs": 3,
+    "sSubs": 3,
+    "shortfallSubs": 0,
+    "leadQ": 1,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 46,
+      "age": 32,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 12000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 63,
+      "age": 31,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 56,
+      "arrears": 0,
+      "subPantry": 74800
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 47,
+      "age": 30,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 56,
+      "arrears": 0,
+      "subPantry": 47280
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 58,
+    "pantry": 7480,
+    "pantryDays": 7,
+    "rank": "regional",
+    "subs": 3,
+    "sSubs": 3,
+    "shortfallSubs": 0,
+    "leadQ": 1,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 46,
+      "age": 33,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 12000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 63,
+      "age": 32,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 56,
+      "arrears": 0,
+      "subPantry": 73600
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 47,
+      "age": 31,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 56,
+      "arrears": 0,
+      "subPantry": 46560
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 59,
+    "pantry": 2283,
+    "pantryDays": 4,
+    "rank": "regional",
+    "subs": 3,
+    "sSubs": 3,
+    "shortfallSubs": 0,
+    "leadQ": 1,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 41,
+      "age": 34,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 35,
+      "arrears": 12000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 63,
+      "age": 33,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 56,
+      "arrears": 0,
+      "subPantry": 72400
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 47,
+      "age": 32,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": null,
+      "lastKeptDay": 56,
+      "arrears": 0,
+      "subPantry": 45840
+     }
+    ],
+    "gateBlocked": []
+   },
+   {
+    "day": 60,
+    "pantry": 760,
+    "pantryDays": 1,
+    "rank": "regional",
+    "subs": 3,
+    "sSubs": 1,
+    "shortfallSubs": 2,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 33,
+      "age": 35,
+      "seasoned": 0,
+      "gap": 7,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 35,
+      "arrears": 12000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 55,
+      "age": 34,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 56,
+      "arrears": 0,
+      "subPantry": 71200
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 39,
+      "age": 33,
+      "seasoned": 0,
+      "gap": 1,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 56,
+      "arrears": 0,
+      "subPantry": 45120
+     }
+    ],
+    "gateBlocked": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 33,
+      "gap": 7
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 39,
+      "gap": 1
+     }
+    ]
+   },
+   {
+    "day": 61,
+    "pantry": 0,
+    "pantryDays": 0,
+    "rank": "regional",
+    "subs": 3,
+    "sSubs": 1,
+    "shortfallSubs": 2,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 33,
+      "age": 36,
+      "seasoned": 0,
+      "gap": 7,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 35,
+      "arrears": 12000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 55,
+      "age": 35,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 56,
+      "arrears": 0,
+      "subPantry": 70000
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 39,
+      "age": 34,
+      "seasoned": 0,
+      "gap": 1,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 56,
+      "arrears": 0,
+      "subPantry": 44400
+     }
+    ],
+    "gateBlocked": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 33,
+      "gap": 7
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 39,
+      "gap": 1
+     }
+    ]
+   },
+   {
+    "day": 62,
+    "pantry": 0,
+    "pantryDays": 0,
+    "rank": "regional",
+    "subs": 3,
+    "sSubs": 1,
+    "shortfallSubs": 2,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 33,
+      "age": 37,
+      "seasoned": 0,
+      "gap": 7,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 35,
+      "arrears": 12000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 55,
+      "age": 36,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 56,
+      "arrears": 0,
+      "subPantry": 68800
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 39,
+      "age": 35,
+      "seasoned": 0,
+      "gap": 1,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 56,
+      "arrears": 0,
+      "subPantry": 43680
+     }
+    ],
+    "gateBlocked": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 33,
+      "gap": 7
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 39,
+      "gap": 1
+     }
+    ]
+   },
+   {
+    "day": 63,
+    "pantry": 0,
+    "pantryDays": 0,
+    "rank": "regional",
+    "subs": 3,
+    "sSubs": 1,
+    "shortfallSubs": 2,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 33,
+      "age": 38,
+      "seasoned": 0,
+      "gap": 7,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 35,
+      "arrears": 12000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 55,
+      "age": 37,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 56,
+      "arrears": 0,
+      "subPantry": 67600
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 39,
+      "age": 36,
+      "seasoned": 0,
+      "gap": 1,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 56,
+      "arrears": 0,
+      "subPantry": 42960
+     }
+    ],
+    "gateBlocked": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 33,
+      "gap": 7
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 39,
+      "gap": 1
+     }
+    ]
+   },
+   {
+    "day": 64,
+    "pantry": 1115,
+    "pantryDays": 1,
+    "rank": "regional",
+    "subs": 3,
+    "sSubs": 1,
+    "shortfallSubs": 2,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 31,
+      "age": 39,
+      "seasoned": 0,
+      "gap": 9,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 35,
+      "arrears": 15000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 55,
+      "age": 38,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 56,
+      "arrears": 0,
+      "subPantry": 75800
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 39,
+      "age": 37,
+      "seasoned": 0,
+      "gap": 1,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 56,
+      "arrears": 0,
+      "subPantry": 47280
+     }
+    ],
+    "gateBlocked": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 31,
+      "gap": 9
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 39,
+      "gap": 1
+     }
+    ]
+   },
+   {
+    "day": 65,
+    "pantry": 0,
+    "pantryDays": 0,
+    "rank": "regional",
+    "subs": 3,
+    "sSubs": 1,
+    "shortfallSubs": 2,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 31,
+      "age": 40,
+      "seasoned": 0,
+      "gap": 9,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 35,
+      "arrears": 15000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 55,
+      "age": 39,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 56,
+      "arrears": 0,
+      "subPantry": 74600
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 39,
+      "age": 38,
+      "seasoned": 0,
+      "gap": 1,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 56,
+      "arrears": 0,
+      "subPantry": 46560
+     }
+    ],
+    "gateBlocked": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 31,
+      "gap": 9
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 39,
+      "gap": 1
+     }
+    ]
+   },
+   {
+    "day": 66,
+    "pantry": 0,
+    "pantryDays": 0,
+    "rank": "regional",
+    "subs": 3,
+    "sSubs": 1,
+    "shortfallSubs": 2,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 31,
+      "age": 41,
+      "seasoned": 0,
+      "gap": 9,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 35,
+      "arrears": 15000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 55,
+      "age": 40,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 56,
+      "arrears": 0,
+      "subPantry": 73400
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 39,
+      "age": 39,
+      "seasoned": 0,
+      "gap": 1,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 56,
+      "arrears": 0,
+      "subPantry": 45840
+     }
+    ],
+    "gateBlocked": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 31,
+      "gap": 9
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 39,
+      "gap": 1
+     }
+    ]
+   },
+   {
+    "day": 67,
+    "pantry": 0,
+    "pantryDays": 0,
+    "rank": "regional",
+    "subs": 3,
+    "sSubs": 1,
+    "shortfallSubs": 2,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 26,
+      "age": 42,
+      "seasoned": 0,
+      "gap": 14,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 35,
+      "arrears": 15000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 55,
+      "age": 41,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 56,
+      "arrears": 0,
+      "subPantry": 72200
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 39,
+      "age": 40,
+      "seasoned": 0,
+      "gap": 1,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 56,
+      "arrears": 0,
+      "subPantry": 45120
+     }
+    ],
+    "gateBlocked": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 26,
+      "gap": 14
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 39,
+      "gap": 1
+     }
+    ]
+   },
+   {
+    "day": 68,
+    "pantry": 0,
+    "pantryDays": 0,
+    "rank": "regional",
+    "subs": 3,
+    "sSubs": 1,
+    "shortfallSubs": 2,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 26,
+      "age": 43,
+      "seasoned": 0,
+      "gap": 14,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 35,
+      "arrears": 15000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 55,
+      "age": 42,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 56,
+      "arrears": 0,
+      "subPantry": 71000
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 39,
+      "age": 41,
+      "seasoned": 0,
+      "gap": 1,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 56,
+      "arrears": 0,
+      "subPantry": 44400
+     }
+    ],
+    "gateBlocked": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 26,
+      "gap": 14
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 39,
+      "gap": 1
+     }
+    ]
+   },
+   {
+    "day": 69,
+    "pantry": 0,
+    "pantryDays": 0,
+    "rank": "regional",
+    "subs": 3,
+    "sSubs": 1,
+    "shortfallSubs": 2,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 26,
+      "age": 44,
+      "seasoned": 0,
+      "gap": 14,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 35,
+      "arrears": 15000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 59,
+      "age": 43,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 56,
+      "arrears": 0,
+      "subPantry": 67784
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 39,
+      "age": 42,
+      "seasoned": 0,
+      "gap": 1,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 56,
+      "arrears": 0,
+      "subPantry": 43680
+     }
+    ],
+    "gateBlocked": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 26,
+      "gap": 14
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 39,
+      "gap": 1
+     }
+    ]
+   },
+   {
+    "day": 70,
+    "pantry": 16,
+    "pantryDays": 0,
+    "rank": "regional",
+    "subs": 3,
+    "sSubs": 1,
+    "shortfallSubs": 2,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 26,
+      "age": 45,
+      "seasoned": 0,
+      "gap": 14,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 35,
+      "arrears": 15000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 59,
+      "age": 44,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 56,
+      "arrears": 0,
+      "subPantry": 66584
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 39,
+      "age": 43,
+      "seasoned": 0,
+      "gap": 1,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 56,
+      "arrears": 0,
+      "subPantry": 42960
+     }
+    ],
+    "gateBlocked": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 26,
+      "gap": 14
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 39,
+      "gap": 1
+     }
+    ]
+   },
+   {
+    "day": 71,
+    "pantry": 1500,
+    "pantryDays": 2,
+    "rank": "regional",
+    "subs": 3,
+    "sSubs": 2,
+    "shortfallSubs": 1,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 24,
+      "age": 46,
+      "seasoned": 0,
+      "gap": 16,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 35,
+      "arrears": 18000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 60,
+      "age": 45,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 70,
+      "arrears": 0,
+      "subPantry": 75800
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 40,
+      "age": 44,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 70,
+      "arrears": 0,
+      "subPantry": 44280
+     }
+    ],
+    "gateBlocked": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 24,
+      "gap": 16
+     }
+    ]
+   },
+   {
+    "day": 72,
+    "pantry": 0,
+    "pantryDays": 0,
+    "rank": "regional",
+    "subs": 3,
+    "sSubs": 2,
+    "shortfallSubs": 1,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 24,
+      "age": 47,
+      "seasoned": 0,
+      "gap": 16,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 35,
+      "arrears": 18000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 60,
+      "age": 46,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 70,
+      "arrears": 0,
+      "subPantry": 74600
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 40,
+      "age": 45,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 70,
+      "arrears": 0,
+      "subPantry": 43560
+     }
+    ],
+    "gateBlocked": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 24,
+      "gap": 16
+     }
+    ]
+   },
+   {
+    "day": 73,
+    "pantry": 0,
+    "pantryDays": 0,
+    "rank": "regional",
+    "subs": 3,
+    "sSubs": 2,
+    "shortfallSubs": 1,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 24,
+      "age": 48,
+      "seasoned": 0,
+      "gap": 16,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 35,
+      "arrears": 18000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 60,
+      "age": 47,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 70,
+      "arrears": 0,
+      "subPantry": 73400
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 40,
+      "age": 46,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 70,
+      "arrears": 0,
+      "subPantry": 42840
+     }
+    ],
+    "gateBlocked": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 24,
+      "gap": 16
+     }
+    ]
+   },
+   {
+    "day": 74,
+    "pantry": 0,
+    "pantryDays": 0,
+    "rank": "regional",
+    "subs": 3,
+    "sSubs": 2,
+    "shortfallSubs": 1,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 24,
+      "age": 49,
+      "seasoned": 0,
+      "gap": 16,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 35,
+      "arrears": 18000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 60,
+      "age": 48,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 70,
+      "arrears": 0,
+      "subPantry": 72200
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 40,
+      "age": 47,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 70,
+      "arrears": 0,
+      "subPantry": 42120
+     }
+    ],
+    "gateBlocked": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 24,
+      "gap": 16
+     }
+    ]
+   },
+   {
+    "day": 75,
+    "pantry": 0,
+    "pantryDays": 0,
+    "rank": "regional",
+    "subs": 3,
+    "sSubs": 2,
+    "shortfallSubs": 1,
+    "leadQ": 0,
+    "nat": 0,
+    "glob": 0,
+    "links": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 24,
+      "age": 50,
+      "seasoned": 0,
+      "gap": 16,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 35,
+      "arrears": 18000,
+      "subPantry": 0
+     },
+     {
+      "id": "link_mgpspi1m446",
+      "other": "village_2",
+      "trust": 64,
+      "age": 49,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 70,
+      "arrears": 0,
+      "subPantry": 68215
+     },
+     {
+      "id": "link_mgpspi28307",
+      "other": "village_3",
+      "trust": 40,
+      "age": 48,
+      "seasoned": 1,
+      "gap": 0,
+      "ageGap": 0,
+      "tendedWeek": 4,
+      "mourningUntil": 67,
+      "lastKeptDay": 70,
+      "arrears": 0,
+      "subPantry": 41400
+     }
+    ],
+    "gateBlocked": [
+     {
+      "id": "link_mgpspi0s963",
+      "other": "village_0",
+      "trust": 24,
+      "gap": 16
+     }
+    ]
+   }
+  ],
+  "gateBlocked": [
+   {
+    "day": 60,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "trust": 33,
+    "gap": 7,
+    "pantryPre": 760,
+    "pantryPost": 760
+   },
+   {
+    "day": 60,
+    "linkId": "link_mgpspi28307",
+    "other": "village_3",
+    "trust": 39,
+    "gap": 1,
+    "pantryPre": 760,
+    "pantryPost": 760
+   },
+   {
+    "day": 61,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "trust": 33,
+    "gap": 7,
+    "pantryPre": 0,
+    "pantryPost": 0
+   },
+   {
+    "day": 61,
+    "linkId": "link_mgpspi28307",
+    "other": "village_3",
+    "trust": 39,
+    "gap": 1,
+    "pantryPre": 0,
+    "pantryPost": 0
+   },
+   {
+    "day": 62,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "trust": 33,
+    "gap": 7,
+    "pantryPre": 0,
+    "pantryPost": 0
+   },
+   {
+    "day": 62,
+    "linkId": "link_mgpspi28307",
+    "other": "village_3",
+    "trust": 39,
+    "gap": 1,
+    "pantryPre": 0,
+    "pantryPost": 0
+   },
+   {
+    "day": 63,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "trust": 33,
+    "gap": 7,
+    "pantryPre": 0,
+    "pantryPost": 0
+   },
+   {
+    "day": 63,
+    "linkId": "link_mgpspi28307",
+    "other": "village_3",
+    "trust": 39,
+    "gap": 1,
+    "pantryPre": 0,
+    "pantryPost": 0
+   },
+   {
+    "day": 64,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "trust": 31,
+    "gap": 9,
+    "pantryPre": 1115,
+    "pantryPost": 1115
+   },
+   {
+    "day": 64,
+    "linkId": "link_mgpspi28307",
+    "other": "village_3",
+    "trust": 39,
+    "gap": 1,
+    "pantryPre": 1115,
+    "pantryPost": 1115
+   },
+   {
+    "day": 65,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "trust": 31,
+    "gap": 9,
+    "pantryPre": 0,
+    "pantryPost": 0
+   },
+   {
+    "day": 65,
+    "linkId": "link_mgpspi28307",
+    "other": "village_3",
+    "trust": 39,
+    "gap": 1,
+    "pantryPre": 0,
+    "pantryPost": 0
+   },
+   {
+    "day": 66,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "trust": 31,
+    "gap": 9,
+    "pantryPre": 0,
+    "pantryPost": 0
+   },
+   {
+    "day": 66,
+    "linkId": "link_mgpspi28307",
+    "other": "village_3",
+    "trust": 39,
+    "gap": 1,
+    "pantryPre": 0,
+    "pantryPost": 0
+   },
+   {
+    "day": 67,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "trust": 26,
+    "gap": 14,
+    "pantryPre": 0,
+    "pantryPost": 0
+   },
+   {
+    "day": 67,
+    "linkId": "link_mgpspi28307",
+    "other": "village_3",
+    "trust": 39,
+    "gap": 1,
+    "pantryPre": 0,
+    "pantryPost": 0
+   },
+   {
+    "day": 68,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "trust": 26,
+    "gap": 14,
+    "pantryPre": 0,
+    "pantryPost": 0
+   },
+   {
+    "day": 68,
+    "linkId": "link_mgpspi28307",
+    "other": "village_3",
+    "trust": 39,
+    "gap": 1,
+    "pantryPre": 0,
+    "pantryPost": 0
+   },
+   {
+    "day": 69,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "trust": 26,
+    "gap": 14,
+    "pantryPre": 0,
+    "pantryPost": 0
+   },
+   {
+    "day": 69,
+    "linkId": "link_mgpspi28307",
+    "other": "village_3",
+    "trust": 39,
+    "gap": 1,
+    "pantryPre": 0,
+    "pantryPost": 0
+   },
+   {
+    "day": 70,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "trust": 26,
+    "gap": 14,
+    "pantryPre": 16,
+    "pantryPost": 16
+   },
+   {
+    "day": 70,
+    "linkId": "link_mgpspi28307",
+    "other": "village_3",
+    "trust": 39,
+    "gap": 1,
+    "pantryPre": 16,
+    "pantryPost": 16
+   },
+   {
+    "day": 71,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "trust": 24,
+    "gap": 16,
+    "pantryPre": 1500,
+    "pantryPost": 1500
+   },
+   {
+    "day": 72,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "trust": 24,
+    "gap": 16,
+    "pantryPre": 0,
+    "pantryPost": 0
+   },
+   {
+    "day": 73,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "trust": 24,
+    "gap": 16,
+    "pantryPre": 0,
+    "pantryPost": 0
+   },
+   {
+    "day": 74,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "trust": 24,
+    "gap": 16,
+    "pantryPre": 0,
+    "pantryPost": 0
+   },
+   {
+    "day": 75,
+    "linkId": "link_mgpspi0s963",
+    "other": "village_0",
+    "trust": 24,
+    "gap": 16,
+    "pantryPre": 0,
+    "pantryPost": 0
+   }
+  ],
+  "gateBlockedDays": 27,
+  "nationalLost": [],
+  "beats": [],
+  "winDay": null,
+  "winSnap": null
+ }
+}
