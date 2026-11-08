@@ -20,9 +20,10 @@
 //   - vbrain_legacy_weights: phase 1 keeps existing additive candidate weights and the weighted lottery; it does NOT ship the product-of-curves formula from VILLAGER-BRAIN.md (code: vbrainScorePick)
 //   - vbrain_feeders_not_deciders: goals bias, win-plan stage intents, EXPEDITION, bond/link social ads, and duty ads from believed needs feed candidates here; agency chance-rolls and win-plan re-decides stop owning the day when this module is loaded (code: vbrainFeedExtras, vbrainExecuteDepart)
 //   - vbrain_bond_candidates: PROPOSE_BOND / RAISE_LINK from bondFeedCands enter the dawn extras list so the initiator's scorer weighs them; warmth gate and npcInviteDecision stay in bond-initiation (code: vbrainFeedExtras, VILLAGER-BRAIN Phase 4)
-//   - vbrain_duty_candidates: unassigned villagers get DUTY ads from believed village needs (objResourceBelief → forage/cook/water); player/convo assignTask stays a binding commitment — assigned people get no competing duty ads (code: dutyFeedCands, vbrainFeedExtras, VILLAGER-BRAIN Phase 6)
-//   - vbrain_duty_pick: when a DUTY extra is top-scoring vs the core lottery pick, it becomes the dawn commitment (duty_top_score); align maps forage/water/cook to real objectives — never calls assignTask (code: vbrainScorePick, vbrainAlignObjective, VILLAGER-BRAIN Phase 6)
+//   - vbrain_duty_candidates: unassigned villagers get DUTY ads from believed village needs (objResourceBelief → forage/cook/water) and combat/social opportunity (heard danger → patrol, known prey/pantry → hunt, teachable knowledge → teach); player/convo assignTask stays a binding commitment — assigned people get no competing duty ads (code: dutyFeedCands, vbrainFeedExtras, VILLAGER-BRAIN Phase 6)
+//   - vbrain_duty_pick: when a DUTY extra is top-scoring vs the core lottery pick, it becomes the dawn commitment (duty_top_score); align maps forage/water/cook/hunt/patrol/teach to real objectives — never calls assignTask (code: vbrainScorePick, vbrainAlignObjective, VILLAGER-BRAIN Phase 6)
 //   - vbrain_duty_respects_garden_keeper: standing village.gardenKeeper gets no DUTY ads and cannot duty_top_score override — caretaker order stays at Haven (code: dutyFeedCands, vbrainScorePick)
+//   - vbrain_duty_combat_social: hunt/patrol/teach DUTY ads honor vbrainDisableCombatSocialDuty failing control; same duty_top_score / gardenKeeper / assign_standing seams as survival DUTY (code: dutyFeedCands, VILLAGER-BRAIN Phase 6)
 //   - vbrain_assign_standing: obeyed standing assignTask / conversation orders feed as ASSIGN extras and win the dawn commitment (assign_standing); scorer honors the order — not a parallel decider; obedience gate unchanged (code: assignFeedCand, vbrainScorePick, vbrainAlignObjective, VILLAGER-BRAIN Phase 6)
 //   - vbrain_commitment: the dawn pick writes a commitment record the same day so midday agency honors it instead of rolling again (code: vbrainScorePick, vbrainCommit)
 //   - vbrain_materialize_matches_commit: when an aimed override wins, objPick aligns the live objective kind to the commitment after core chore/facing draws (code: vbrainAlignObjective)
@@ -34,6 +35,8 @@
 //   - vgoalBiasCands (villager-goals.js) — called by objPick before this scorer
 //   - bondFeedCands (bond-initiation.js) — optional PROPOSE_BOND / RAISE_LINK ads
 //   - objResourceBelief (villager-objectives.js) — believed pantry/cistern for duty ads
+//   - objDangerBelief (villager-objectives.js) — heard-filtered danger for patrol DUTY ads
+//   - plantsKnownBy (game.js) — teachable knowledge for teach DUTY ads
 //   - assignmentFor, delegateTasks, villagerCompetence (game.js) — standing orders + task catalog + competence consideration
 /* VILLAGER BRAIN — src/js/villager-brain.js
  *
@@ -318,7 +321,7 @@
     } catch (e) {}
     return 1.0;
   }
-  function dutyBuildCand(self, vid, task, baseW, needs) {
+  function dutyBuildCand(self, vid, task, baseW, needs, needNote) {
     var catalog = null;
     try { catalog = self.delegateTasks ? self.delegateTasks() : null; } catch (e) { catalog = null; }
     if (catalog && !catalog[task]) return null;
@@ -326,17 +329,20 @@
     // Mild competence nudge (±15%) — consideration, not a new curve family.
     var w = baseW * Math.min(1.15, Math.max(0.85, comp));
     w = Math.round(w * 1000) / 1000;
+    var note = needNote || (needs && needs.pantryVeryLow ? 'pantry_very_low'
+      : (needs && needs.pantryLow ? 'pantry_low'
+        : (needs && needs.waterLow ? 'water_low' : 'need')));
     var considerations = [
-      { id: 'believed_need', raw: 1, note: needs.pantryVeryLow ? 'pantry_very_low' : (needs.pantryLow ? 'pantry_low' : (needs.waterLow ? 'water_low' : 'need')) },
+      { id: 'believed_need', raw: 1, note: note },
       { id: 'competence', raw: Math.round(comp * 1000) / 1000, note: task },
     ];
-    if (needs.pantryKcal != null) {
+    if (needs && needs.pantryKcal != null) {
       considerations.push({ id: 'believed_pantry_kcal', raw: Math.round(needs.pantryKcal), note: needs.fromLive ? 'live' : 'stale' });
     }
-    if (needs.pantryDays != null) {
+    if (needs && needs.pantryDays != null) {
       considerations.push({ id: 'believed_pantry_days', raw: Math.round(needs.pantryDays * 1000) / 1000, note: 'days' });
     }
-    if (needs.waterDays != null && task === 'water') {
+    if (needs && needs.waterDays != null && task === 'water') {
       considerations.push({ id: 'believed_water_days', raw: Math.round(needs.waterDays * 1000) / 1000, note: 'days' });
     }
     return {
@@ -346,6 +352,50 @@
       vbrainSrc: 'duty',
       considerations: considerations,
     };
+  }
+  // Combat/social opportunity — heard danger, known prey, teachable knowledge.
+  // Independent of pantry/cistern unknown: a hearer can patrol even with no
+  // resource belief yet. Seam: vbrainDisableCombatSocialDuty.
+  function dutyKnownPrey(self) {
+    try {
+      var animals = (((self.state || {}).village || {}).animals) || {};
+      for (var aid in animals) {
+        if (!Object.prototype.hasOwnProperty.call(animals, aid)) continue;
+        var row = animals[aid];
+        if (row && (row.level || 0) >= 1) return true;
+      }
+    } catch (e) {}
+    return false;
+  }
+  function dutyTeachOpportunity(self, vid) {
+    var known = [];
+    try { known = self.plantsKnownBy ? (self.plantsKnownBy(vid) || []) : []; } catch (e) { known = []; }
+    var vp = null;
+    try { vp = self.vpOf ? self.vpOf(vid) : null; } catch (e) { vp = null; }
+    var knowsTrap = !!(vp && (vp.knowsSnare || vp.knowsPit));
+    if ((!known || !known.length) && !knowsTrap) return false;
+    var roster = ((((self.state || {}).village || {}).roster) || []);
+    for (var i = 0; i < roster.length; i++) {
+      var rid = roster[i];
+      if (!rid || rid === vid) continue;
+      try { if (rid === self.villagerId) continue; } catch (e) {}
+      var other = [];
+      try { other = self.plantsKnownBy ? (self.plantsKnownBy(rid) || []) : []; } catch (e) { other = []; }
+      for (var j = 0; j < known.length; j++) {
+        if (other.indexOf(known[j]) === -1) return true;
+      }
+      if (knowsTrap) {
+        var ovp = null;
+        try { ovp = self.vpOf ? self.vpOf(rid) : null; } catch (e) { ovp = null; }
+        if (ovp) {
+          if (vp.knowsSnare && !ovp.knowsSnare) return true;
+          if (vp.knowsPit && !ovp.knowsPit) return true;
+        } else {
+          return true;
+        }
+      }
+    }
+    return false;
   }
   function dutyFeedCandsFor(self, vid) {
     var out = [];
@@ -366,24 +416,51 @@
       if (gk && gk === vid) return out;
     } catch (e) {}
     try {
-      var vp = self.vpOf ? self.vpOf(vid) : null;
-      if (vp && vp.dead) return out;
+      var vpDead = self.vpOf ? self.vpOf(vid) : null;
+      if (vpDead && vpDead.dead) return out;
     } catch (e) {}
     var needs = dutyBelievedNeeds(self, vid);
-    if (needs.unknown) return out;
-    if (needs.pantryLow) {
-      var forageW = needs.pantryVeryLow ? 3.2 : 2.2;
-      var cookW = needs.pantryVeryLow ? 2.4 : 1.6;
-      var fc = dutyBuildCand(self, vid, 'forage', forageW, needs);
-      var cc = dutyBuildCand(self, vid, 'cook', cookW, needs);
-      if (fc) out.push(fc);
-      if (cc) out.push(cc);
+    // Survival DUTY ads still need a non-unknown resource belief.
+    if (!needs.unknown) {
+      if (needs.pantryLow) {
+        var forageW = needs.pantryVeryLow ? 3.2 : 2.2;
+        var cookW = needs.pantryVeryLow ? 2.4 : 1.6;
+        var fc = dutyBuildCand(self, vid, 'forage', forageW, needs);
+        var cc = dutyBuildCand(self, vid, 'cook', cookW, needs);
+        if (fc) out.push(fc);
+        if (cc) out.push(cc);
+      }
+      if (needs.waterLow) {
+        var ww = 3.0 + (2 - (needs.waterDays == null ? 2 : needs.waterDays)) * 1.5;
+        if (needs.waterDays != null && needs.waterDays < 1) ww = Math.max(ww, 5.5);
+        var wc = dutyBuildCand(self, vid, 'water', ww, needs);
+        if (wc) out.push(wc);
+      }
     }
-    if (needs.waterLow) {
-      var ww = 3.0 + (2 - (needs.waterDays == null ? 2 : needs.waterDays)) * 1.5;
-      if (needs.waterDays != null && needs.waterDays < 1) ww = Math.max(ww, 5.5);
-      var wc = dutyBuildCand(self, vid, 'water', ww, needs);
-      if (wc) out.push(wc);
+    // Combat + social DUTY ads (OVE-71): same DUTY shape / duty_top_score path.
+    // Do not require pantry belief — heard danger and teachable knowledge stand alone.
+    var roleDutyOff = false;
+    try { roleDutyOff = !!self.vbrainDisableCombatSocialDuty; } catch (e) { roleDutyOff = false; }
+    if (!roleDutyOff) {
+      var danger = null;
+      try { danger = self.objDangerBelief ? self.objDangerBelief(vid) : null; } catch (e) { danger = null; }
+      var heardThreat = !!(danger && (danger.threat || danger.freshRaid));
+      if (heardThreat) {
+        var patrolW = danger.freshRaid ? 3.0 : 2.5;
+        var pc = dutyBuildCand(self, vid, 'patrol', patrolW, needs, danger.freshRaid ? 'fresh_raid' : 'heard_danger');
+        if (pc) out.push(pc);
+      }
+      var preyKnown = dutyKnownPrey(self);
+      var huntFromNeed = !needs.unknown && needs.pantryLow;
+      if (preyKnown || huntFromNeed) {
+        var huntW = huntFromNeed ? (needs.pantryVeryLow ? 2.0 : 1.8) : 2.0;
+        var hc = dutyBuildCand(self, vid, 'hunt', huntW, needs, preyKnown ? 'known_prey' : 'pantry_protein');
+        if (hc) out.push(hc);
+      }
+      if (dutyTeachOpportunity(self, vid)) {
+        var tc = dutyBuildCand(self, vid, 'teach', 2.4, needs, 'teachable_knowledge');
+        if (tc) out.push(tc);
+      }
     }
     return out;
   }
@@ -606,8 +683,9 @@
       return cands;
     },
     // Dawn / probe feed: DUTY candidates for one unassigned villager from
-    // believed village needs. Empty when assigned, belief unknown, or needs
-    // are not low. Does not write assignments.
+    // believed village needs + combat/social opportunity. Empty when assigned,
+    // gardenKeeper, or no survival/role opportunity (or seams disabled).
+    // Does not write assignments.
     dutyFeedCands: function (vid) {
       try { return dutyFeedCandsFor(this, vid) || []; } catch (e) { return []; }
     },
@@ -835,14 +913,14 @@
           faceOutdoor('water', 2);
         } else if (dutyTask === 'cook') {
           faceHaven('cook');
-        } else if (c.kind === 'ASSIGN' && (dutyTask === 'garden' || dutyTask === 'tend' ||
-                   dutyTask === 'teach' || dutyTask === 'mend')) {
-          // Haven work — keep caretaker/haven semantics; gardenKeeper honor
-          // stays via gardenKeeperTurn (non-garden assign already skips care).
+        } else if (dutyTask === 'garden' || dutyTask === 'tend' ||
+                   dutyTask === 'teach' || dutyTask === 'mend') {
+          // Haven work — DUTY teach (OVE-71) and ASSIGN haven orders share this.
+          // gardenKeeper honor stays via gardenKeeperTurn / dutyFeed skip.
           faceHaven(dutyTask === 'tend' ? 'fire' : dutyTask);
-        } else if (c.kind === 'ASSIGN' && dutyTask === 'hunt') {
+        } else if (dutyTask === 'hunt') {
           faceOutdoor('hunt', 3, 'HUNT');
-        } else if (c.kind === 'ASSIGN' && (dutyTask === 'scout' || dutyTask === 'patrol')) {
+        } else if (dutyTask === 'scout' || dutyTask === 'patrol') {
           faceOutdoor('explore', 3, 'EXPLORE');
         } else if (c.kind === 'ASSIGN' && (dutyTask === 'wood' || dutyTask === 'stone' ||
                    dutyTask === 'deadfall' || dutyTask === 'fish')) {

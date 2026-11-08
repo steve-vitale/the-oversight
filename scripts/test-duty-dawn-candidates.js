@@ -155,14 +155,17 @@ function dutyKinds(cands) {
       !!(dutyScored.find(c => (c.considerations || []).some(x => x.id === 'feeder' && x.note === 'duty'))));
   }
 
-  console.log('== believed-full pantry: no DUTY ads ==');
+  console.log('== believed-full pantry: no survival DUTY ads ==');
   {
     plantFullBelief(Game, vid, day);
     const bel = Game.objResourceBelief(vid) || {};
     check('full belief: pantry not low', bel.pantryKcal >= 4000 && bel.pantryDays >= 3,
       JSON.stringify({ kcal: bel.pantryKcal, days: bel.pantryDays }));
     const feed = Game.dutyFeedCands(vid) || [];
-    check('full: feed has no DUTY', feed.length === 0, JSON.stringify(dutyKinds(feed)));
+    const survival = dutyKinds(feed).filter(t => t === 'forage' || t === 'cook' || t === 'water');
+    // OVE-71 may still advertise combat/social DUTY when opportunity exists;
+    // survival forage/cook/water must stay off when the pantry/cistern belief is fine.
+    check('full: feed has no survival DUTY', survival.length === 0, JSON.stringify(dutyKinds(feed)));
   }
 
   console.log('== assigned villager: standing order honored ==');
@@ -185,6 +188,9 @@ function dutyKinds(cands) {
   console.log('== failing control: belief hook removed ==');
   {
     plantLowBelief(Game, vid, day);
+    // Isolate the resource-belief seam from OVE-71 combat/social DUTY ads.
+    const prevRole = Game.vbrainDisableCombatSocialDuty;
+    Game.vbrainDisableCombatSocialDuty = true;
     const withHook = Game.dutyFeedCands(vid) || [];
     check('control setup: hook produces DUTY', dutyKinds(withHook).indexOf('forage') >= 0,
       JSON.stringify(dutyKinds(withHook)));
@@ -201,6 +207,7 @@ function dutyKinds(cands) {
     const restored = Game.dutyFeedCands(vid) || [];
     check('control restored: DUTY returns', dutyKinds(restored).indexOf('forage') >= 0,
       JSON.stringify(dutyKinds(restored)));
+    Game.vbrainDisableCombatSocialDuty = prevRole;
   }
 
   console.log('== top-scoring DUTY wins dawn commit + align ==');
