@@ -1,10 +1,10 @@
 // scripts/test-pellet-q4-20261108.js — Q4: a feast-surge spend counts even
 // when the spender can't eat anymore (Steve 2026-11-08 07:03 CST), plus the
-// pellet-pass rule untouched (PB-5 smoke). Prereg:
-// evidence/2026-11-08/sim-pellet-boost-prereg.md, bars PB-4 / PB-5.
+// pellet-pass rule untouched (PB-5 smoke). Prereg amendment:
+// evidence/2026-11-08/sim-pellet-rads-prereg.md, bar RB-3. The cost is
+// radiation now (not pantry): the floor fires through the currentMult
+// guard, not an empty pantry, so section 2 rigs the guard directly.
 // Uses the shared kit (scripts/sim-harness.js); rigged states, no seeds.
-// RED until the build lands: the 'reactor' path in _spendFeastedPower does
-// not exist yet.
 'use strict';
 const { loadGame, setupGame } = require('./sim-harness');
 
@@ -69,11 +69,12 @@ function strike(G, mKey, dmg, srcKey, srcLabel) {
     'used=' + prog.feastSurgeUsed + ' by=' + prog.feastSurgeBy);
 
   // --- 2. the FREE floor does not mark (costs nothing, is not a spend) ---
-  setPantry(G, []);
+  // Under the rads cost the floor fires through the currentMult guard (a
+  // bigger live mult), NOT an empty pantry — an empty pantry now pays a
+  // boost instead. Rig the guard directly.
   prog.feastSurgeUsed = false; prog.feastSurgeBy = null;
-  f = startFight(G);
-  const floorLanded = strike(G, f.m.key, BASE, 'p', 'you');
-  check('q4: floor strike still lands x1.25', floorLanded === Math.round(BASE * 1.25), 'landed=' + floorLanded);
+  const floorBurn = (() => { try { return G.pelletBurn(null, { currentMult: 1.5 }); } catch (e) { return null; } })();
+  check('q4: floor returns the free x1.25', floorBurn && floorBurn.mult === 1.25, 'burn=' + JSON.stringify(floorBurn));
   check('q4: free floor does NOT mark a surge spend', prog.feastSurgeUsed !== true && !prog.feastSurgeBy,
     'used=' + prog.feastSurgeUsed + ' by=' + prog.feastSurgeBy);
 

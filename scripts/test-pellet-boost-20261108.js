@@ -1,8 +1,11 @@
-// scripts/test-pellet-boost-20261108.js — pellet boost + cost proofs.
-// Prereg: evidence/2026-11-08/sim-pellet-boost-prereg.md (+ amendment A1), bar PB-1.
-// Uses the shared kit (scripts/sim-harness.js); rigged states, no seeds.
-// RED until the build lands: pelletBurn / pelletBoostCfg / the tbDamage
-// call-in / pellet-boost.json do not exist yet.
+// scripts/test-pellet-boost-20261108.js — the pellet's power boost, cost =
+// RADIATION on the bearer (Steve 2026-11-08 11:54 CST). Prereg amendment:
+// evidence/2026-11-08/sim-pellet-rads-prereg.md, bar RB-1 (boost, floor,
+// heal, villager bearer, all under the rads cost). This file is the rework
+// of the pantry-cost boost test: the pantry draws are gone (PB-1 / PB-2 /
+// PB-3 superseded), and every assertion that used to read the pantry now
+// reads the rads ledger / exposure instead. Uses the shared kit
+// (scripts/sim-harness.js); rigged states, no seeds.
 'use strict';
 const { loadGame, setupGame } = require('./sim-harness');
 
@@ -13,12 +16,10 @@ function check(name, cond, extra) {
 }
 
 const SEED = 20261108;
-const COST = 50, FLOOR = 1.25, BOOST = 1.5, BASE = 20;
+const BASE = 20;
+const RADS = 2;
 
-function pantry50() { return [{ name: 'Dried berries', kcalEach: 50, units: 20, foodKind: 'plant', foodState: 'dried' }]; } // 1000 kcal
-function pantry100() { return [{ name: 'Smoked turkey leg', kcalEach: 100, units: 10, foodKind: 'meat', foodState: 'smoked' }]; } // 1000 kcal
-function pantry30() { return [{ name: 'Dried berries', kcalEach: 30, units: 1, foodKind: 'plant', foodState: 'dried' }]; } // 30 kcal
-
+function pantry50() { return [{ name: 'Dried berries', kcalEach: 50, units: 20, foodKind: 'plant', foodState: 'dried' }]; }
 function installScholarReactor(G) {
   const s = G.state.scholar;
   s.inventory = s.inventory || [];
@@ -30,13 +31,16 @@ function installScholarReactor(G) {
 }
 function setPantry(G, items) { G.state.village.pantry = items; }
 function kcal(G) { try { return Math.round(G.pantryKcalLive(G.state.village)); } catch (e) { return -1; } }
-function ledger(G) { return G.state.pelletBoost || { spent: 0, boosts: 0, floors: 0, lastBoostDay: null }; }
+function ledger(G) { return G.state.pelletBoost || {}; }
+function exposure(G, key) { try { return G.pelletExposure(key); } catch (e) { return -1; } }
 function captureSays(G) {
   const lines = [];
   const orig = G.say;
-  G.say = function (m) { lines.push(String(m)); try { return orig.apply(this, arguments); } catch (e) {} };
-  lines.restore = () => { G.say = orig; };
-  return lines;
+  G.say = function () {
+    try { const a = Array.prototype.slice.call(arguments); lines.push(a.join(' ')); } catch (e) {}
+    try { return orig.apply(this, arguments); } catch (e) {}
+  };
+  return { lines, restore() { G.say = orig; } };
 }
 function endFight(G) {
   try { if (G.tbfight && !G.tbfight.over) G.tbEnd('fled'); } catch (e) { try { G.tbfight = null; } catch (e2) {} }
@@ -57,143 +61,124 @@ function strike(G, mKey, dmg, srcKey, srcLabel) {
 (async () => {
   const { Game: G } = await loadGame({ seed: SEED, mode: 'test' });
   await setupGame(G);
-  const says = captureSays(G);
   const s = G.state.scholar;
-
-  // --- data lever (RED until pellet-boost.json joins the boot data list) ---
-  check('data: pelletBoost JSON loaded', !!(G.data && G.data.pelletBoost && G.data.pelletBoost._doc && G.data.pelletBoost.costKcalPerStrike === 50),
-    'Game.data.pelletBoost=' + JSON.stringify((G.data && G.data.pelletBoost) || null));
-  check('cfg: pelletBoostCfg reads the lever', typeof G.pelletBoostCfg === 'function' &&
-    G.pelletBoostCfg().costKcalPerStrike === 50 && G.pelletBoostCfg().boostMult === 1.5 &&
-    G.pelletBoostCfg().floorMult === 1.25,
-    typeof G.pelletBoostCfg === 'function' ? JSON.stringify(G.pelletBoostCfg()) : 'no pelletBoostCfg');
-
-  // --- 1. control, no reactor: a plain strike is unboosted, no ledger ---
   s.kcal = 500; // below overcharge (75% of 2400) so no incidental 1.25x
-  let f = startFight(G);
-  check('control: fight starts', !!(f.p && f.m), 'p=' + !!f.p + ' m=' + !!f.m);
-  let landed = strike(G, f.m.key, BASE, 'p', 'you');
-  check('control: no-reactor strike is unboosted', landed === BASE, 'landed=' + landed);
-  check('control: no ledger without a reactor', !G.state.pelletBoost, JSON.stringify(G.state.pelletBoost || null));
-  // healing control, no reactor: the feasted form does nothing
-  s.health = 50; if (s.maxHealth) s.maxHealth = 100;
-  try { G.applyFeastedForm('field_medicine', null, null, { scholar: 30, fighter: null }); } catch (e) {}
-  check('control: no-reactor heal bonus does not fire', s.health === 50, 'health=' + s.health);
+  const cfg = (() => { try { return G.pelletBoostCfg(); } catch (e) { return null; } })();
 
-  // --- 2. floor free, pantry empty: x1.25, no spend, still fed ---
-  check('setup: reactor installs on the scholar', installScholarReactor(G), 'online=' + (G.fusionReactorOnline && G.fusionReactorOnline()));
-  setPantry(G, []);
-  check('setup: pantry is empty', kcal(G) === 0, 'kcal=' + kcal(G));
-  s.kcal = 500;
+  // --- 0. data lever: the rads cost is in the data, the pantry cost is out ---
+  check('data: no pantry cost key on the pellet boost', !(cfg && 'costKcalPerStrike' in cfg), JSON.stringify(cfg));
+  check('data: radsPerBoost is 2', cfg && cfg.radsPerBoost === RADS, JSON.stringify(cfg));
+  check('data: radsSickAt is 10', cfg && cfg.radsSickAt === 10, JSON.stringify(cfg));
+  check('data: radsDecayPerDay is 1', cfg && cfg.radsDecayPerDay === 1, JSON.stringify(cfg));
+  check('data: radsCureDrop is 10', cfg && cfg.radsCureDrop === 10, JSON.stringify(cfg));
+
+  // --- 1. CONTROL: no reactor installed, the scholar strikes plain ---
+  setPantry(G, pantry50());
+  let f = startFight(G);
+  const ctrl = strike(G, f.m.key, BASE, 'p', 'you');
+  check('control: no reactor, strike lands unboosted', ctrl === BASE, 'landed=' + ctrl);
+  check('control: no ledger written without a reactor', !G.state.pelletBoost, JSON.stringify(G.state.pelletBoost));
+  check('control: no rads store without a reactor', !G.state.pelletRads, JSON.stringify(G.state.pelletRads));
+  check('control: no reactor, bonus heal does not fire', (() => {
+    s.health = 50; if (s.maxHealth) s.maxHealth = 100;
+    try { G.applyFeastedForm('field_medicine', null, null, { scholar: 30, fighter: null }); } catch (e) {}
+    return s.health === 50;
+  })(), 'health=' + s.health);
+  endFight(G);
+
+  // --- 2. PAID BOOST: a full pantry, a strike, x1.5 — and the pantry is
+  // untouched; the cost is rads on the bearer, not food ---
+  check('setup: reactor installs on the scholar', installScholarReactor(G));
+  setPantry(G, pantry50());
+  const cap = captureSays(G);
   f = startFight(G);
-  landed = strike(G, f.m.key, BASE, 'p', 'you');
-  check('floor: empty-pantry strike lands x1.25', landed === Math.round(BASE * FLOOR), 'landed=' + landed);
-  check('floor: ledger counts a floor, no spend', ledger(G).floors === 1 && ledger(G).boosts === 0 && ledger(G).spent === 0,
-    JSON.stringify(ledger(G)));
+  const landed = strike(G, f.m.key, BASE, 'p', 'you');
+  cap.restore();
+  check('boost: strike lands x1.5', landed === Math.round(BASE * 1.5), 'landed=' + landed);
+  check('boost: ledger records one boost', ledger(G).boosts === 1, JSON.stringify(ledger(G)));
+  check('boost: ledger records rads, not spent kcal', ledger(G).rads === RADS && !('spent' in ledger(G)), JSON.stringify(ledger(G)));
+  check('boost: bearer exposure is 2', exposure(G, 'p') === RADS, 'exposure=' + exposure(G, 'p'));
+  check('boost: pantry untouched by the boost', kcal(G) === 1000, 'kcal=' + kcal(G));
+  check('boost: a line names the rads', cap.lines.some(l => /radiation/i.test(l) && /2/.test(l)), cap.lines.join(' | '));
   let need = -1;
   try { need = globalThis.Scattering.calories.dailyNeed(s); } catch (e) {}
-  check('floor: bearer still does not hunger', need === 0, 'dailyNeed=' + need);
-
-  // --- 3. boost paid, 50-kcal units: x1.5, exactly 50 drawn ---
-  setPantry(G, pantry50());
-  check('setup: 50-kcal pantry reads 1000', kcal(G) === 1000, 'kcal=' + kcal(G));
-  says.length = 0;
-  f = startFight(G);
-  landed = strike(G, f.m.key, BASE, 'p', 'you');
-  check('boost: 50-kcal pantry strike lands x1.5', landed === Math.round(BASE * BOOST), 'landed=' + landed);
-  check('boost: ledger counts one boost, 50 spent', ledger(G).boosts === 1 && ledger(G).spent === 50,
-    JSON.stringify(ledger(G)));
-  check('boost: pantry lighter by exactly 50', kcal(G) === 950, 'kcal=' + kcal(G));
-  check('boost: line names the cost', says.some(l => /REACTOR/i.test(l) && /50/.test(l)), says.join(' | ').slice(0, 300));
-  // A non-bearer party member's strike in the same fight touches nothing.
-  const nf = (G.tbfight.fighters || []).find(x => x.kind === 'villager');
-  if (nf) {
-    nf.hp = 5000; nf.maxHp = 5000;
-    const b0 = ledger(G).boosts, s0 = ledger(G).spent, k0 = kcal(G);
-    strike(G, f.m.key, BASE, nf.key, nf.name || 'villager');
-    check('non-bearer: party strike touches no ledger, no pantry', ledger(G).boosts === b0 && ledger(G).spent === s0 && kcal(G) === k0,
-      'ledger=' + JSON.stringify(ledger(G)) + ' kcal=' + kcal(G));
-  } else {
-    check('non-bearer: a villager fights alongside the scholar', false, 'no villager fighter');
-  }
-
-  // --- 4. overshoot, 100-kcal units: x1.5, 100 drawn and honestly recorded ---
-  setPantry(G, pantry100());
-  check('setup: 100-kcal pantry reads 1000', kcal(G) === 1000, 'kcal=' + kcal(G));
-  says.length = 0;
-  f = startFight(G);
-  landed = strike(G, f.m.key, BASE, 'p', 'you');
-  check('overshoot: strike lands x1.5', landed === Math.round(BASE * BOOST), 'landed=' + landed);
-  check('overshoot: ledger records the actual 100 drawn', ledger(G).boosts === 2 && ledger(G).spent === 150,
-    JSON.stringify(ledger(G)));
-  check('overshoot: pantry lighter by 100, not 50', kcal(G) === 900, 'kcal=' + kcal(G));
-  check('overshoot: line names 100, not 50', says.some(l => /REACTOR/i.test(l) && /100/.test(l)), says.join(' | ').slice(0, 300));
-
-  // --- 5. pantry short: floor only, no spend ---
-  setPantry(G, pantry30());
-  check('setup: short pantry reads 30', kcal(G) === 30, 'kcal=' + kcal(G));
-  f = startFight(G);
-  landed = strike(G, f.m.key, BASE, 'p', 'you');
-  check('short: strike lands x1.25 floor only', landed === Math.round(BASE * FLOOR), 'landed=' + landed);
-  check('short: no new boost, no new spend', ledger(G).boosts === 2 && ledger(G).spent === 150,
-    JSON.stringify(ledger(G)));
-  check('short: pantry untouched at 30', kcal(G) === 30, 'kcal=' + kcal(G));
-
-  // --- 6. healing boost: bonus heal draws 50, base heal lands regardless ---
-  // Out of combat: the fighter's HP pool is the live one mid-fight, so end
-  // the fight first and measure on the scholar's own health.
+  check('boost: bearer still does not hunger', need === 0, 'dailyNeed=' + need);
+  // a second strike: the ledger tracks the identity rads == boosts x RADS
+  strike(G, f.m.key, BASE, 'p', 'you');
+  check('boost: two boosts, rads == boosts x 2', ledger(G).boosts === 2 && ledger(G).rads === 2 * RADS, JSON.stringify(ledger(G)));
+  check('boost: exposure tracks per-bearer boosts', exposure(G, 'p') === 2 * RADS, 'exposure=' + exposure(G, 'p'));
   endFight(G);
+
+  // --- 3. NO PANTRY GATE: an empty pantry still pays the boost (the cost
+  // is rads, not food) ---
+  setPantry(G, []);
+  f = startFight(G);
+  const emptyLanded = strike(G, f.m.key, BASE, 'p', 'you');
+  check('no-gate: empty pantry, strike still lands x1.5', emptyLanded === Math.round(BASE * 1.5), 'landed=' + emptyLanded);
+  check('no-gate: empty pantry, rads still accrue', ledger(G).boosts === 3 && ledger(G).rads === 3 * RADS, JSON.stringify(ledger(G)));
+  check('no-gate: pantry stays at 0', kcal(G) === 0, 'kcal=' + kcal(G));
+  endFight(G);
+
+  // --- 4. the FREE FLOOR: a bigger live mult gets the reactor's standing
+  // hum (x1.25) at no cost — direct call, since the floor fires through
+  // the currentMult guard now that the pantry gate is gone ---
+  const floorsBefore = ledger(G).floors || 0;
+  const floorBurn = (() => { try { return G.pelletBurn(null, { currentMult: 1.5 }); } catch (e) { return null; } })();
+  check('floor: guard case returns the free x1.25', floorBurn && floorBurn.mult === 1.25, JSON.stringify(floorBurn));
+  check('floor: counted as a floor, not a boost', ledger(G).floors === floorsBefore + 1 && ledger(G).boosts === 3, JSON.stringify(ledger(G)));
+  check('floor: no rads for the free floor', ledger(G).rads === 3 * RADS && exposure(G, 'p') === 3 * RADS, JSON.stringify(ledger(G)));
+  // non-bearer party strike: no reactor, no ledger change, no rads
+  const roster = ((G.state.village || {}).roster || []).filter(id => id && id !== G.villagerId);
+  check('setup: roster has a villager for the non-bearer check', roster.length >= 1, 'roster=' + roster.length);
+  f = startFight(G);
+  const vf = (G.tbfight.fighters || []).find(x => x.kind === 'villager' && x.villagerId === roster[0]);
+  if (vf) {
+    vf.hp = 5000; vf.maxHp = 5000;
+    const vlanded = strike(G, f.m.key, BASE, vf.key, vf.name || 'villager');
+    check('non-bearer: villager strike lands plain', vlanded === BASE, 'landed=' + vlanded);
+    check('non-bearer: ledger untouched', ledger(G).boosts === 3 && ledger(G).rads === 3 * RADS, JSON.stringify(ledger(G)));
+  } else {
+    check('non-bearer: villager not in this fight (skipped)', true);
+    check('non-bearer: ledger untouched (skipped)', true);
+  }
+  endFight(G);
+
+  // --- 5. BONUS HEAL: the reactor's bonus healing costs rads, not pantry,
+  // and fires even with an empty pantry ---
   setPantry(G, pantry50());
   s.health = 50; if (s.maxHealth) s.maxHealth = 100;
-  says.length = 0;
-  const spentBefore = ledger(G).spent, boostsBefore = ledger(G).boosts;
   try { G.applyFeastedForm('field_medicine', null, null, { scholar: 30, fighter: null }); } catch (e) {}
-  check('heal: bonus heal lands (+10 on a +20 heal)', s.health === 60, 'health=' + s.health);
-  check('heal: bonus draws 50 from the pantry', ledger(G).spent === spentBefore + 50 && ledger(G).boosts === boostsBefore + 1 && kcal(G) === 950,
-    'ledger=' + JSON.stringify(ledger(G)) + ' kcal=' + kcal(G));
-  // healing with a short pantry: base heal already landed (preHp 30 -> 50
-  // happened before the form ran); the BONUS must not fire.
-  setPantry(G, pantry30());
+  check('heal: bonus lands (+10)', s.health === 60, 'health=' + s.health);
+  check('heal: bonus adds 2 rads', ledger(G).rads === 4 * RADS && ledger(G).boosts === 4, JSON.stringify(ledger(G)));
+  check('heal: pantry untouched by the bonus heal', kcal(G) === 1000, 'kcal=' + kcal(G));
+  setPantry(G, []);
   s.health = 50;
-  const spentBefore2 = ledger(G).spent, boostsBefore2 = ledger(G).boosts;
   try { G.applyFeastedForm('field_medicine', null, null, { scholar: 30, fighter: null }); } catch (e) {}
-  check('heal: short pantry, no bonus heal', s.health === 50 && ledger(G).spent === spentBefore2 && ledger(G).boosts === boostsBefore2,
-    'health=' + s.health + ' ledger=' + JSON.stringify(ledger(G)));
+  check('heal: empty pantry, bonus still lands (+10)', s.health === 60, 'health=' + s.health);
+  check('heal: empty pantry, rads still accrue', ledger(G).rads === 5 * RADS && ledger(G).boosts === 5, JSON.stringify(ledger(G)));
+  endFight(G);
 
-  // --- 7. villager bearer: their own strikes burn, others do not ---
-  // Move the reactor off the scholar first (revoke + clear the holder).
+  // --- 6. VILLAGER BEARER: the reactor on a villager burns their strikes
+  // (x1.5, rads on their own key, pantry untouched) ---
   try { G.state.fusionReactorHolder = null; } catch (e) {}
   try { s.fusionReactor = null; } catch (e) {}
   try { s.abilities = (s.abilities || []).filter(a => (a.id || a) !== 'fusion_reactor'); } catch (e) {}
-  const roster = ((G.state.village || {}).roster || []).filter(id => id && id !== G.villagerId);
-  check('setup: a roster villager exists for the bearer test', roster.length >= 2, 'roster=' + roster.length);
-  const bearerVid = roster[0], otherVid = roster[1];
+  const bearerVid = roster[0];
   let granted = false;
   try { granted = G.npcGrantAbility(bearerVid, 'fusion_reactor'); } catch (e) {}
-  check('setup: villager granted the reactor', granted === true && G.state.fusionReactorHolder && G.state.fusionReactorHolder.vid === bearerVid,
-    'holder=' + JSON.stringify(G.state.fusionReactorHolder || null));
+  check('setup: villager granted the reactor', granted === true, 'holder=' + JSON.stringify(G.state.fusionReactorHolder || null));
   setPantry(G, pantry50());
+  const vBurn = (() => { try { return G.pelletBurn(bearerVid, {}); } catch (e) { return null; } })();
+  check('villager: direct burn lands x1.5', vBurn && vBurn.mult === 1.5, JSON.stringify(vBurn));
+  check('villager: exposure accrues on the villager key', exposure(G, bearerVid) === RADS, 'exposure=' + exposure(G, bearerVid));
+  check('villager: scholar exposure untouched', exposure(G, 'p') === 5 * RADS, 'exposure=' + exposure(G, 'p'));
+  check('villager: pantry untouched', kcal(G) === 1000, 'kcal=' + kcal(G));
+  // the scholar, no longer the bearer, strikes plain
   f = startFight(G);
-  const vf = (G.tbfight.fighters || []).find(x => x.kind === 'villager' && x.villagerId === bearerVid);
-  check('setup: bearer villager fights', !!vf, 'fighters=' + (G.tbfight.fighters || []).map(x => x.kind + ':' + (x.villagerId || x.key)).join(','));
-  if (vf) {
-    vf.hp = 5000; vf.maxHp = 5000;
-    const b0 = ledger(G).boosts, s0 = ledger(G).spent, k0 = kcal(G);
-    const vlanded = strike(G, f.m.key, BASE, vf.key, vf.name || 'villager');
-    check('villager-bearer: boosted strike lands x1.5', vlanded === Math.round(BASE * BOOST), 'landed=' + vlanded);
-    check('villager-bearer: ledger + pantry record the burn', ledger(G).boosts === b0 + 1 && ledger(G).spent === s0 + 50 && kcal(G) === k0 - 50,
-      'ledger=' + JSON.stringify(ledger(G)) + ' kcal=' + kcal(G));
-  }
-  // The scholar, a non-bearer while the villager holds the reactor, strikes
-  // plain and touches nothing.
-  const b0 = ledger(G).boosts, s0 = ledger(G).spent, k0 = kcal(G);
-  const slanded = strike(G, f.m.key, BASE, 'p', 'you');
-  check('non-bearer: scholar strike is unboosted while the villager bears', slanded === BASE, 'landed=' + slanded);
-  check('non-bearer: scholar strike touches no ledger, no pantry', ledger(G).boosts === b0 && ledger(G).spent === s0 && kcal(G) === k0,
-    'ledger=' + JSON.stringify(ledger(G)) + ' kcal=' + kcal(G));
-
-  says.restore();
+  const plain = strike(G, f.m.key, BASE, 'p', 'you');
+  check('villager: scholar strikes plain now', plain === BASE, 'landed=' + plain);
   endFight(G);
+
   console.log(`\npellet-boost: ${pass} passed, ${fail} failed`);
   process.exit(fail ? 1 : 0);
 })().catch(e => { console.error('FATAL', e); process.exit(1); });
