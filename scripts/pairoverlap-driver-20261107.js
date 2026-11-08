@@ -157,7 +157,21 @@ async function oneRun(seed) {
   for (const seed of SEEDS) {
     const out = await oneRun(seed);
     const file = path.join(outDir, 'pairoverlap-s' + seed + '-' + RUN + '.json');
-    fs.writeFileSync(file, JSON.stringify(out, null, 2) + '\n');
+    // Write with retry: the host EPERM flap (2026-11-05+) refuses
+    // file writes in bursts while plain probes succeed seconds
+    // later. Same bytes, same path — only the write is retried, so
+    // the corpus is byte-identical to a single clean write.
+    var written = false, writeErr = null;
+    for (var w = 0; w < 60 && !written; w++) {
+      try {
+        fs.writeFileSync(file, JSON.stringify(out, null, 2) + '\n');
+        written = true;
+      } catch (e) {
+        writeErr = e;
+        if (w < 59) Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 10000);
+      }
+    }
+    if (!written) throw writeErr;
     const daily = out.daily || [];
     const pairDays = daily.filter(function (d) { return d.pairDay; }).length;
     const last = daily[daily.length - 1] || {};

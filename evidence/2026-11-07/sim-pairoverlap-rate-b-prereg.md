@@ -160,6 +160,60 @@ if the rate bar fails on the confirm, the lever is KILLED (the
 cost is real, not an artifact of the instrument — this arm spends
 its one re-instrumentation).
 
+## AMENDMENT A1 (2026-11-07, after the re-baseline, BEFORE any armed pilot)
+
+**Re-baseline measured (base ba9859e13, band 53001–53008, 8 seeds,
+0 instrument errors):** pair days **35** (18 on 53005, 17 on 53006,
+0 elsewhere); `foodDeeds` **6/8**; surge spent 6/8; median survival
+**96.5d**; survived **1/8**; wave-4+ kills **19** (by `via`: player 15
+/ companion 3 / wild 1); donations **36,310 kcal**; starvation deaths
+**1** over **822 village-days = 0.1217 per 100d** (the single death
+on 53007); wave-4 unlock 8/8, wave-5 unlock 1/8 (53006, no wave-5
+kill); national 0, table 0, wins 0. Corpus:
+`evidence/2026-11-07/perseed-pairoverlap-b-rate-baseline/`.
+
+**Substrate sanity: PASS.** `foodDeeds` 6/8 ≥ 3; spend seeds 6 ≥
+2. The substrate is live on current master — but it is WEAKER than
+on the old base (pair days 51→35, median 129→96.5d, w4 kills
+31→19, donations 53,470→36,310). The collapse is concentrated:
+53004 fell from 28 pair days / 3 kills to 0 / 1, and 53001–53003
+make 0 pair days between them. Villages die earlier across the
+band (only 53006 survived 150d). The master delta in the range
+(food.js self-taught first rung 10→5 XP, alien-expansion meddler
+moves in contests) moved trajectories substantially; the drive
+still buys the deed (6/8) and still spends (6/8), so there is no
+substrate collapse — but the judged comparison is re-baseline vs
+armed, both on ba9859e13, and the bar below is set from THIS
+re-baseline, not from the old arm's numbers.
+
+**Pool check (§14b): PASS.** The scholar-kill pool is 15
+via-player wave-4 kills on the re-baseline — above the +10
+pair-day delta's order of magnitude, so the bar below is
+achievable in principle and the arm is not metric-broken. (The
+pool is thinner than the old arm's 22, and the baseline's pair
+days are concentrated on two seeds — the yield must convert on
+53005/53006's windows or open new ones.)
+
+**Exact GO bars (the prereg's rules applied): armed pair-days ≥
+max(35, 35 + 10) = 45, AND `foodDeeds` ≥ 6/8 (the re-baseline
+count).** Rate tolerance: max(0.15, 0.5 × 0.1217) = **0.15** per
+100d (the floor binds), so the starvation-rate bar is **armed rate
+≤ 0.1217 + 0.15 = 0.2717 per 100d**. Other cost bars: donations
+(armed) ≤ 36,310 kcal; median survival ≥ 0.8 × 96.5 = 77.2d;
+survived count reported alongside the median. The analyzer is run
+with `--pair-bar 45 --rate-tol 0.15`. Nothing else in this prereg
+changes.
+
+**Infrastructure note (not a measurement change):** the EPERM
+write flap struck three times during this leg, each time killing
+the driver at the seed-output write (0-byte file left behind;
+seeds 53007's result lost twice from memory, re-run deterministically
+— identical seeds reproduce identical trajectories). The driver
+now retries the output write (60 × 10s, same bytes, same path) so
+a mid-run flap is ridden out instead of losing the seed; the retry
+is documented here and in the driver's header comment. No sim
+logic, policy, or instrument changed.
+
 ## Panel (§15)
 
 Before/after through `scripts/balance-panel.js` — the pairoverlap
