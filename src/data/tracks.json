@@ -32,14 +32,14 @@
     "craft": ["triage", "steady_hands", "preservation_instinct", "herbal_remedy", "camp_cook"],
     "strange": []
   },
-  "_deeds": "ONE deed table for everyone: creditDeed(who, id) credits {track, n} to whoever did it (the player or a villager), at most perDay times a day per doer (chores are decisions, not grinding). Same deed, same XP. noteDeed(id) = creditDeed('player', id).",
+  "_deeds": "ONE deed table for everyone: creditDeed(who, id) credits {track, n} to whoever did it (the player or a villager), at most perDay times a day per doer (chores are decisions, not grinding). Same deed, same XP. noteDeed(id) = creditDeed('player', id). LADDER TAG (victory-gating ladder, leg 1): a deed may carry an optional \"ladder\" tag naming which ladder track it mints toward (fight/forage/craft/talk/explore); default is the track's own ladder name (combat->fight, field->forage, craft->craft, social->talk). Only \"discovery\" is tagged so far (field deed, ladder explore) — the Forage/Explore split by deed id. STATUS (prereg Amendment 1, 2026-11-08): no lifetime per-deed store exists at this base, so the split cannot be computed yet; the whole field total counts as Forage and Explore (i) reads 0 until that store lands.",
   "deeds": {
     "foraging":        { "track": "field",   "n": 1, "perDay": 2 },
     "hunting":         { "track": "field",   "n": 1, "perDay": 2 },
     "fishing":         { "track": "field",   "n": 1, "perDay": 1 },
     "trapping":        { "track": "field",   "n": 1, "perDay": 1 },
     "preserving":      { "track": "field",   "n": 1, "perDay": 1 },
-    "discovery":       { "track": "field",   "n": 1, "perDay": 2 },
+    "discovery":       { "track": "field",   "n": 1, "perDay": 2, "ladder": "explore" },
     "cooking":         { "track": "craft",   "n": 1, "perDay": 1 },
     "crafting":        { "track": "craft",   "n": 1, "perDay": 2 },
     "healing":         { "track": "craft",   "n": 1, "perDay": 2 },
