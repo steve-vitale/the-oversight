@@ -1,0 +1,93 @@
+=== r113-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Linh (gen_ioj5j9t) occ=paramedic --
+OPENING: "I keep dreaming about rows of pods. Humming. Tell me I'm not the only one."
+YOU: [dlg:more] "What do you remember?"
+THEM: "It's my mother, Larissa. Was taken at the Scattering. The boring half. She made soup from nothing and they called that boring. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person…"
+YOU: [goon] "What? What were you going to say?"
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "You want to know about that? Okay." "People are talking about Diana. Take it for what it's worth."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "I should go. You know where to find me."
+YOU: [agree] "You're right."
+THEM: Nods. "Yeah."
+(ended by engine)
+
+-- Marisol (gen_1pxvmj0) occ=pottery instructor --
+OPENING: "Never mind the food I needed — we got it handled. Thanks anyway."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "You want to know about that? Okay." "The geese chase everyone but Linh. They part for Linh like water."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Alright. But I'm not carrying your stuff."
+YOU: [dlg:more] "I’m listening."
+THEM: "I left. Walked back in like I'd never left, apparently."
+YOU: [party_name] "We should name this. Us."
+THEM: "A name. Okay." You say it out loud, trying the shape of it:
+1. "THE ENSEMBLE" (📺 the System suggests)
+2. "The Second Try" (Marisol suggests)
+3. "The Company" (or plain)
+(Which one? It'll stick.)
+YOU: [party_namepick:0] "THE ENSEMBLE."
+THEM: 🤝 "THE ENSEMBLE." It hangs in the air a moment — then Linh grins. It's real now. It has a name, which means it can be lost.
+📺 THE ENSEMBLE is official. Linh, Marisol. (The village watches the broadcast. Nobody blinks.)
+📓 Codex: We named us: THE ENSEMBLE.
+YOU: [party_role] "Let's talk roles."
+THEM: "Roles. Not ranks — promises."
+🗡️ point — First in. Hits harder (+3 strike), draws the eye.
+🩹 healer — Carries the wounded, patches them up (+6 heal).
+🎒 carrier — Hauls. Carry order reaches further, steadier hands.
+🗣️ talker — The face. People join easier, leaving hurts less.
+👁️ scout — Sees trouble first. Warns the party on the road.
+(Which one is Marisol?)
+YOU: [party_rolepick:point] 🗡️ Point
+THEM: 🤝 Marisol is 🗡️ Point now. First in. Hits harder (+3 strike), draws the eye.
+closing: "Take care of yourself."
+
+-- Miriam (gen_ijnoty9) occ=lawyer --
+OPENING: "Never mind the sickness I'm fighting — we got it handled. Thanks anyway."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "Huh. Let me think about that." "Marisol is back. Walked in like they'd never left."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Not right now. I've got my own things to handle."
+YOU: [dlg:more] "Tell me more."
+THEM: "People are talking about Marisol. Take it for what it's worth."
+YOU: [dlg:react] (listen)
+THEM: "Well." A breath. "That's where things stand."
+YOU: [menu:more] More things to say (1/2)
+THEM: (menu page turned)
+YOU: [dlg:doubt] "That doesn't quite add up."
+THEM: "...What's that supposed to mean?" Their voice goes careful.
+YOU: [silence] "..."
+THEM: "You're a good listener, you know that?" A tired smile.
+closing: "Thanks. I think. I'm going to go process that somewhere quiet."
+
+-- Mara (mara_vasquez) occ=army medic --
+OPENING: "While you're here: does this look straight to you? Be honest."
+YOU: [gq:yn:yes] "Yes."
+THEM: They nod. "Okay."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: They relax, a fraction. This is going well.
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+YOU: [silence] "..."
+THEM: They glance at the fire, then back. The quiet doesn't seem to bother them.
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Hickory Nuts — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: Something eases in their shoulders. They're really talking to you now.
+YOU: [dlg:react] (listen)
+THEM: "Anyway." A small smile.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "We were just talking. Nothing important."
+closing: "Think about what I said."

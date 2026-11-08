@@ -1,0 +1,81 @@
+=== r113-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Helga (gen_3buic1g) occ=army medic --
+OPENING: "About what you dream about — Do you dream about before? Or is it all — this — now? ...never mind."
+YOU: [ans:q_dream:a_before] "Before. Every night. It's the only place it still exists."
+THEM: "Then it's not gone. Not really. Keep going back."
+YOU: [goon] "Take your time."
+THEM: That could have stung. They let it pass — you've been kind before.
+YOU: [goon] "Take your time."
+THEM: "I… Columbus, Ohio, always. Same dream: I'm walking home and the street keeps getting longer. I wake up tired, like I actually walked it."
+YOU: [goon] "Take your time."
+THEM: "Help me haul something back? Too much for one."
+YOU: [silence] "..."
+THEM: They fill the quiet. "Anyway — where was I?"
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on what you dream about."
+YOU: [goon] "Take your time."
+THEM: "Okay. That's — I need a minute. A long minute."
+(no pick — winding down)
+(stall menu: leave|silence)
+
+-- Joyce (gen_pthhc1d) occ=sign painter --
+OPENING: "Have you — sorry. I keep thinking about them."
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "Most days I don't think about it. Today I am. Appreciate you noticing."
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "You want to know about that? Okay." "People are saying things. About you. ...I'd watch how you act around the fire. Famous last words."
+YOU: [goon] "You don't have to say it all at once."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [dlg:more] "Go on."
+THEM: "People are talking about Declan. Take it for what it's worth."
+YOU: [dlg:react] (listen)
+THEM: "Yeah, that was me. Ran into the treeline when I heard the screaming. Didn't think, just ran."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the gossip. Anyway."
+YOU: [goon] "You don't have to say it all at once."
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [goon] "You don't have to say it all at once."
+THEM: "Do you still count the days? I lost track days ago."
+closing: "...Thanks for being here. That's all."
+
+-- Hajime (gen_esruudc) occ=exterminator --
+OPENING: Hajime speaks only 🇯🇵 Japanese. No shared words at all — just eyes, hands, and patience.
+They speak. You understand none of it.
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Bamboo Shoot. Leaf, stem, smell. You won't forget it now."
+YOU: [nv:nod] (nod slowly)
+THEM: They answer at length. They nod, holding your gaze a beat longer.
+YOU: [nv:smile] (smile)
+THEM: They answer at length. A grin breaks through, quick and warm. "Water?" — they grin, proud of the one English they know.
+YOU: [nv:pointself] (point: you, them, together)
+THEM: They answer at length. You point at yourself, then at them, then at the fire. Together. They get it.
+YOU: [nv:listen] (listen hard — catch words)
+THEM: You listen hard, watching their mouth shape the words. Sounds, and the shape of meaning just out of reach.
+YOU: [speak_back] (try your Japanese)
+THEM: Hajime lights up. "No, no — like this." They say it slowly, twice, watching your mouth shape it. "うんうん、そうそう。." You try again. Closer. They grin like you just scored the winning point.
+YOU: [goon] (watch quietly)
+THEM: Something eases in their shoulders. They're really talking to you now.
+YOU: [goon] (watch quietly)
+THEM: "I should go before I say something sincere."
+closing: A final nod. They touch their chest, then point at you — a promise without words.
+
+-- Declan (gen_lqbsr9h) occ=librarian --
+OPENING: "Never mind this wound — we got it handled. Thanks anyway."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Feral Rice. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Water Hemlock. Leaf, stem, smell. You won't forget it now."
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Dylan is gone and the world just... continues. That's the part I can't stand."
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Jewelweed — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Alright. But I'm not carrying your stuff."
+YOU: [goon] "And then?"
+THEM: "Help me haul something back? Too much for one."
+(no pick)
+(stall menu: betrayal:accept|betrayal:decline|leave)
+closing: "Sorry. I need a minute."
