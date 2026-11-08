@@ -206,6 +206,12 @@ async function oneRun(seed) {
           // absent). Pure read, no state writes, no RNG draws.
           vTakenP4: (rec.vTakenP4 != null) ? rec.vTakenP4 : null,
           allyTakenP4: (rec.allyTakenP4 != null) ? rec.allyTakenP4 : null,
+          // FIGHTBLEND-B (2026-11-08): hypothetical (protection-4
+          // trajectory) HP left the morale read uses after the fix; null
+          // on the unfixed leg (fields absent). Pure read, no state
+          // writes, no RNG draws.
+          vHpHypoLeft: (rec.vHpHypoLeft != null) ? rec.vHpHypoLeft : null,
+          allyHpHypoLeft: (rec.allyHpHypoLeft != null) ? rec.allyHpHypoLeft : null,
           vHpLeft: (rec.vHpLeft != null) ? rec.vHpLeft : null,
           mHpLeft: (rec.mHpLeft != null) ? rec.mHpLeft : null,
           allyDealt: (rec.allyDealt | 0) || 0, allyVid: rec.allyVid || null,
