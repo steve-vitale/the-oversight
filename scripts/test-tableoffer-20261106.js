@@ -52,6 +52,11 @@ function buildLesserProfile(Game) {
   s.integration = 45;                          // stage 2 (neural creep)
   pg.sentimentTaught = true;
   s.prog = s.prog || {}; s.prog.feastSurgeUsed = true;
+  // LEG 2 (2026-11-08): Village ladder standing (12 counted points) so
+  // the lesser seat prices. Fight 6 (wave-3 ledger 12) + Forage 6
+  // (scholar field XP 72) on top of the fresh game's own Craft/Talk.
+  Game.state.waveLedger = { 3: { points: 12, perType: {}, perTypeX: {} } };
+  Game.playerTracks().field.xp = 72;
   pg.arc = 4; pg.tableWaiting = true; pg.tableAnnounced = true; pg.tableDone = false;
   return { pg, s };
 }
