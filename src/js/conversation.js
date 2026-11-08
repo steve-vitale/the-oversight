@@ -1163,6 +1163,55 @@
       return false;
     },
 
+    // convoHasLiveUnfinished (dialog audit #4 2026-11-08): true when a real
+    // unfinished beat still exists — open topic-ledger threads, a resume
+    // that claimed unfinished business into this sitting, a live unfinished
+    // outing, or queued held beats. Used to refuse dry train-of-thought on
+    // Help/engage/goon when the unfinished work is still live.
+    convoHasLiveUnfinished(vid) {
+      const c = this.convoGet(vid);
+      if (!c || !c.active) return false;
+      try {
+        const open = (typeof this.convoOpenThreads === 'function') ? this.convoOpenThreads(vid) : [];
+        if (open && open.length) return true;
+      } catch (e) {}
+      if ((c.heldBeats || []).length) return true;
+      if (c._resumedOnce && c.thread && c.thread !== 'small' && c.thread !== 'nonverbal') return true;
+      try {
+        const favor = (c.want && c.want.favor) ||
+          (typeof this.convoGetFavor === 'function' ? this.convoGetFavor(vid) : null);
+        if (favor && (
+          (favor.kind === 'water_haul' && favor.waterRun && !favor.waterRun.returned) ||
+          (favor.kind === 'forage_help' && favor.forageRun && !favor.forageRun.returned)
+        )) return true;
+      } catch (e) {}
+      return false;
+    },
+
+    // convoUnfinishedEngageLine: honest follow-through when Help/engage/goon
+    // would otherwise dry while unfinished work remains. Names the live
+    // thread so the reply matches the opener's claim (never amnesia).
+    convoUnfinishedEngageLine(vid) {
+      const c = this.convoGet(vid);
+      let about = null;
+      try {
+        about = (typeof this.convoThreadAbout === 'function')
+          ? this.convoThreadAbout(vid, c && c.thread) : null;
+      } catch (e) { about = null; }
+      if (!about) {
+        try {
+          const open = (typeof this.convoOpenThreads === 'function') ? this.convoOpenThreads(vid) : [];
+          if (open && open[0] && open[0].label) about = open[0].label;
+        } catch (e) {}
+      }
+      const label = about || 'what we were saying';
+      return this.convoPickCycle(vid, 'engage:unfinished', [
+        `"Still on ${label}. Right — where was I."`,
+        `"${label} — we hadn't finished. Give me a second."`,
+        `"Yeah — ${label}. Let me pick that up."`,
+      ]) || `"Still on ${label}."`;
+    },
+
     // convoDryLine: honest dry lines for run-ledger blocks. The line was
     // swallowed because ANOTHER villager said it recently — the speaker
     // didn't, so "I just said" would be a lie. These admit the dropped
@@ -5995,9 +6044,38 @@
             c.traderMentioned = true;
             c.thread = 'trade'; c.depth = 0;
           }
-          this.sayLine(vid, hb.text, hb.winddown ? { tag: 'closing', structural: true } : hb.invitation ? { tag: 'invitation', inviteBeat: true } : hb.bondproposal ? { tag: 'bondproposal', bondBeat: true } : hb.linkraise ? { tag: 'linkraise', linkBeat: true } : hb.traderIntro ? { tag: 'offer', topic: 'trade' } : hb.moodBeat ? { structural: true, foreign: hb.foreign } : { foreign: hb.foreign });
+          // LIVE UNFINISHED (dialog audit #4 2026-11-08): goon delivers a
+          // queued unfinished beat. A run-ledger block must NOT dry to
+          // "lost my train of thought" while that beat (or an open
+          // unfinished thread) still exists — seed 1 Dale. Check before
+          // sayLine so dry never hits the transcript. Prefer an alternate
+          // live thread beat; else name the unfinished work structurally.
+          let goonText = hb.text;
+          let goonOpts = hb.winddown ? { tag: 'closing', structural: true }
+            : hb.invitation ? { tag: 'invitation', inviteBeat: true }
+            : hb.bondproposal ? { tag: 'bondproposal', bondBeat: true }
+            : hb.linkraise ? { tag: 'linkraise', linkBeat: true }
+            : hb.traderIntro ? { tag: 'offer', topic: 'trade' }
+            : hb.moodBeat ? { structural: true, foreign: hb.foreign }
+            : { foreign: hb.foreign };
+          const goonExempt = !!(goonOpts.structural || goonOpts.inviteBeat);
+          if (!goonExempt && typeof this.convoWouldBlock === 'function' &&
+              this.convoWouldBlock(vid, goonText)) {
+            let alt = null;
+            try { alt = (typeof this.convoThreadBeat === 'function') ? this.convoThreadBeat(vid) : null; }
+            catch (e) { alt = null; }
+            if (alt && !this.convoWouldBlock(vid, alt)) {
+              goonText = alt;
+            } else {
+              goonText = (typeof this.convoUnfinishedEngageLine === 'function')
+                ? this.convoUnfinishedEngageLine(vid)
+                : '"Still on that. Right — where was I."';
+              goonOpts = { structural: true, fallback: goonText };
+            }
+          }
+          const goonSaid = this.sayLine(vid, goonText, goonOpts);
           queueTraderIntro(c);
-          done(hb.text, gl);
+          done(goonSaid || goonText, gl);
           if (hb.winddown) {
             // The goodbye lands: one last turn of choices, then it's over.
             // Only the player's "I should go." (or the turn after) ends it —
@@ -7017,7 +7095,13 @@
       // same answer from another person, not a parrot bug.
       const inviteOutcome = choiceId === 'invite_party';
       const lessonOutcome = choiceId.indexOf('skill_learn:') === 0 || choiceId.indexOf('skill_teach:') === 0;
-      line = this.sayLine(vid, line, { fallback: () => this.convoSelfRepeatLine(vid), structural: structuralTurn || answeredGeneric, diegeticAct: inviteOutcome || lessonOutcome }) || line;
+      // PLANT TEACH IS A DIEGETIC ACT (dialog audit #4 2026-11-08): the
+      // teach branch already wrote taught/taughtByPlayer and paid trust
+      // before emission — same class as skill lessons (r86). A ledger-
+      // blocked react must not dry to train-of-thought after the lesson
+      // landed (seed 7 Ruth plant-lesson resume → teach → dry).
+      const plantTeachOutcome = choiceId === 'teach';
+      line = this.sayLine(vid, line, { fallback: () => this.convoSelfRepeatLine(vid), structural: structuralTurn || answeredGeneric, diegeticAct: inviteOutcome || lessonOutcome || plantTeachOutcome }) || line;
       // WANT ARC (convo rebuild 2026-10-11): answering their question engages
       // the want; rudely changing the subject deflects it. The core flow
       // advances the want — no wrapper needed.
