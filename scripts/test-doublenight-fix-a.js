@@ -148,6 +148,24 @@ ok('D8 trajectoryDiff: firing seed whose AFTER run still fires FAILS (no single-
     const a = mkSide({ 7: mkSeed() }, [{ seed: 7, vid: 'v1', day: 10, h: 'H1', effect: 'BUG' }]);
     const d = trajectoryDiff(b, a); return !d.clause2Pass && !d.perSeed[7].pass;
   })());
+ok('D9 analyzer A2: F1-style unpaired seed does not poison neutralityExact; a paired mismatch still fails',
+  (() => {
+    const os = require('os');
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'doublenight-a2-'));
+    const mk = (seed, trace) => ({ seed, policy: 'competent', plentydepri: 1, depositgate: 1, mealdayTrace: trace, daysAlive: 100, deathRows: [], mealRows: [], daySeries: [], mealCalls: trace === 1 ? [] : undefined });
+    // Paired seed 7: identical off/on. Unpaired seed 17901: trace-on only (F1 shape).
+    fs.writeFileSync(path.join(dir, 'doublenight-fix-a-competent-s7-trace0.json'), JSON.stringify(mk(7, 0)));
+    fs.writeFileSync(path.join(dir, 'doublenight-fix-a-competent-s7-trace1.json'), JSON.stringify(mk(7, 1)));
+    fs.writeFileSync(path.join(dir, 'doublenight-fix-a-competent-s17901-trace1.json'), JSON.stringify(mk(17901, 1)));
+    const { analyzeCorpus } = require('./analyze-doublenight-fix-a.js');
+    const sum = analyzeCorpus(dir);
+    const okPair = sum.detGate.neutralityExact === true && sum.detGate.neutralityPairedSeeds === 1;
+    // Break the paired seed: different daysAlive off vs on -> must fail.
+    fs.writeFileSync(path.join(dir, 'doublenight-fix-a-competent-s7-trace1.json'), JSON.stringify(Object.assign(mk(7, 1), { daysAlive: 99 })));
+    const sum2 = analyzeCorpus(dir);
+    fs.rmSync(dir, { recursive: true, force: true });
+    return okPair && sum2.detGate.neutralityExact === false;
+  })());
 
 // --- S: source legs (the fix shape in game.js) ---
 const deathStart = gameSrc.indexOf('try { this.playerDeath(honestCause); }');

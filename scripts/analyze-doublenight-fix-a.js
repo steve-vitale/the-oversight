@@ -161,9 +161,26 @@ function analyzeCorpus(corpus) {
     bySite[f.second.site || '(missing)'] = (bySite[f.second.site || '(missing)'] || 0) + 1;
   }
   const neutrality = neutralityCheck(trace0, trace1);
-  const neutral = neutrality.length > 0 && neutrality.every(n => n.match);
+  // AMENDMENT A2 (2026-11-08, before any after-judgment): neutralityExact
+  // aggregates over PAIRED seeds only (seeds with a trace-off file: P1/P2).
+  // F1 runs trace-on only by prereg design ("neutrality is proven on P1,
+  // not re-proven per band"), so an F1 seed has no trace-off file and its
+  // neutralityCheck row is match:false 'no trace-off file' by construction.
+  // Aggregating over ALL trace1 seeds made detGate.neutralityExact false on
+  // every corpus containing F1, which poisoned goBar.go in diff mode even
+  // with a perfect fix. The prereg's neutrality gate is defined on P1
+  // trace-off vs trace-on; this aligns the code with the prereg. The
+  // per-seed neutrality array is unchanged (F1 rows still honestly report
+  // 'no trace-off file'), and neutralityPairedSeeds records how many seeds
+  // the gate actually covers. A mismatch on ANY paired seed still fails.
+  const pairedSeeds = Object.keys(trace1).filter(s => Object.prototype.hasOwnProperty.call(trace0, s));
+  const neutral = pairedSeeds.length > 0 && pairedSeeds.every(s => {
+    const n = neutrality.find(x => x.seed === Number(s));
+    return n && n.match;
+  });
   const detGate = {
     neutralityExact: neutral,
+    neutralityPairedSeeds: pairedSeeds.length,
     capture100: fires.every(f => f.second.site && f.first && f.first.site),
     everyFireClassified: fires.every(f => f.h !== 'UNCLASSIFIED'),
     unclassified: fires.filter(f => f.h === 'UNCLASSIFIED').length,
