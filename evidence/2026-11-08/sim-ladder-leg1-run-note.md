@@ -383,6 +383,44 @@ slot. Prereg Amendment 2 records all of this. The `check.js --quick`
 re-run (L6) and the merge are attempt #2's closing steps; the
 phone-frame receipt refresh stays OWED to a browser-capable agent.
 
-## Commits (on branch build-ladder-leg1; merge section filled after merge)
+## Final gate + merge (attempt #2, 2026-11-08 ~09:35Z)
 
-[TO FILL]
+- Final `node scripts/check.js --quick` on the merged-base tree
+  (branch rebased onto `32d2ace79`, master held through the gate):
+  **288 passed, 4 failed in 584s** (log
+  `/tmp/check-ladder-leg1-final.log`). The two measurement tests are
+  GREEN (the rebase-broken pair, fixed by the panel refresh). The 4
+  failures are exactly the adjudicated set: 3 pre-existing on master
+  without ladder code (`test-mobile-combat-cadence.js`,
+  `test-occupation-panels.js`,
+  `test-establishment-r20-fixes-20261020.js` — all verified
+  identically failing standalone in the main tree on `7afad4702`) and
+  `test-phone-frame-proof.js`, which stays red until a
+  browser-capable agent refreshes the phone-frame receipts for the
+  changed `index.html` (OWED, not leg 1). No failure is attributable
+  to the ladder. Bars L1–L5 all pass on the final tree; L6 is met in
+  its intent (no new failure attributable to the change).
+- Merged ff-only to local master; master tip = branch tip at merge
+  (SHA in the coordinator report). No push, no version bump, no live
+  verification — the ship loop owns those. Status: merged locally,
+  pending ship.
+
+## Commits (branch build-ladder-leg1, rebased onto 32d2ace79)
+
+- `e42a06ddf` prereg + run note + fresh neutral panel (attempt #1)
+- `69fc5207c` Standing ladder core: ladder.js + capstone deeds +
+  tracks tag + script order [needs-eyes] (attempt #1)
+- `69bdc327b` unit proofs (cap 25/25, minting 34/34) + green-list
+  entries (attempt #1)
+- `7d00b3586` regenerated ontology + offline assets + refreshed
+  observer-neutral proof (attempt #1)
+- `1273d3e83` attempt-2 adoption: prereg Amendment 2 + run-note
+  adoption + sw.js canonical slot (attempt #2)
+- `a24e4173d` refresh neutral proof after rebase (index.html tag
+  moved; panel seed 7 x 4 policies x 150d, neutrality 4/4) + gate
+  re-run note (attempt #2)
+- `eab28a4ca` refresh neutral proof after 7afad4702 rebase
+  (conversation.js moved; panel seed 7 x 4 policies x 150d,
+  neutrality 4/4) (attempt #2)
+- plus the final-gate run-note commit (this section) — branch tip at
+  merge, SHA in the coordinator report.
