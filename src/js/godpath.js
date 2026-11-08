@@ -11,6 +11,7 @@
 //   - beginApexHunt(game, fight), observeApexHunt(game, fight, damagedKey?) -> saved original encounter evidence
 //   - finishTacticalEscape(game, fight, fighter?), finishFieldEscape(game, vid, opening, result, sealed) -> actual personal living flight
 //   - noteCareRescue(actor, patient, before, after, maxHp, via, scene) -> actual other-person rescue pending a later dawn
+//   - observeHarvestFeed(game) -> consecutive days the whole village ate a real meal from one person's harvest
 //   - godpathDeedStatus(who, godId, day?) -> read-only person-owned deed qualification
 //   - godpathDeedHint(who) -> earned-class objective, hidden after recognition
 //   - classLine(who) -> "Berserker of the One-Person Army" or null (only once recognised)
@@ -520,6 +521,79 @@
     }
     return changed;
   }
+  // Living Garden: feed every other living neighbor a real meal from your own
+  // harvestShares for `deed.days` consecutive calendar days. Personal-work and
+  // anonymous food never invent a producer. Magical Feed the Multitude stays
+  // provenance-free. Reads never create the streak book.
+  function harvestFeedLiving(game, id) {
+    if (!id || game.over) return false;
+    const person = game.vpOf && game.vpOf(id);
+    if (!person || person.id !== id || person.dead) return false;
+    const s = game.state.scholar, v = game.state.village;
+    if (!(v.roster || []).includes(id)) return false;
+    return id === game.villagerId ? s.health > 0
+      : ((v.health || {})[id] == null || v.health[id] > 0);
+  }
+  function harvestFedDay(intake, producer, others, minKcal) {
+    if (!intake || !others.length) return false;
+    for (const eater of others) {
+      const rec = intake[eater];
+      if (!rec || !(rec.kcal > 0)) return false;
+      const fromP = rec.harvestKcal?.[producer] || 0;
+      if (!(fromP >= minKcal)) return false;
+    }
+    return true;
+  }
+  function observeHarvestFeed(game) {
+    const s = game.state?.scholar, v = game.state?.village;
+    const deed = data()?.paths?.forager?.god?.deed;
+    if (!s || !v || game.over || !deed || deed.event !== 'harvest_fed') return false;
+    const fedDay = (s.day || 0) - 1;
+    if (!(fedDay >= 1)) return false;
+    const need = Number.isFinite(deed.days) && deed.days >= 1 ? deed.days : 7;
+    const minKcal = Number.isFinite(deed.minKcal) && deed.minKcal > 0 ? deed.minKcal : 400;
+    const intake = (v.harvestIntake || {})[fedDay] || null;
+    const living = (v.roster || []).filter(id => harvestFeedLiving(game, id));
+    const watches = v.godpathHarvestFeed || (v.godpathHarvestFeed = {});
+    let changed = false;
+    const candidates = new Set(living);
+    for (const id of Object.keys(watches)) candidates.add(id);
+    if (intake) {
+      for (const rec of Object.values(intake)) {
+        for (const owner of Object.keys(rec.harvestKcal || {})) candidates.add(owner);
+      }
+    }
+    for (const producer of candidates) {
+      if (v.godpathDeeds?.[producer]?.harvest_fed) {
+        if (watches[producer]) { delete watches[producer]; changed = true; }
+        continue;
+      }
+      const others = living.filter(id => id !== producer);
+      const ok = harvestFeedLiving(game, producer) && harvestFedDay(intake, producer, others, minKcal);
+      const st = watches[producer] || { streak: 0, lastDay: null };
+      if (ok) {
+        const next = (st.lastDay === fedDay - 1) ? (st.streak || 0) + 1 : 1;
+        if (st.streak !== next || st.lastDay !== fedDay) changed = true;
+        st.streak = next;
+        st.lastDay = fedDay;
+        watches[producer] = st;
+        if (st.streak >= need) {
+          const books = v.godpathDeeds || (v.godpathDeeds = {}), book = books[producer] || (books[producer] = {});
+          book.harvest_fed = { day: fedDay, streak: st.streak, fed: others.length, minKcal };
+          delete watches[producer];
+          changed = true;
+          const last = (game.state.telemetry || []).at(-1), t = Number.isFinite(last?.t) ? last.t : 0;
+          try { game.tele('godpath_deed', { t, who: producer, event: 'harvest_fed', day: fedDay, streak: st.streak, fed: others.length }); }
+          catch (e) { warn('harvest deed', e); }
+        }
+      } else if (watches[producer]) {
+        delete watches[producer];
+        changed = true;
+      }
+    }
+    if (v.godpathHarvestFeed && !Object.keys(v.godpathHarvestFeed).length) delete v.godpathHarvestFeed;
+    return changed;
+  }
   // Private outcome writer: only actual personal refusal callers reach it.
   // Borrowed Phoenix/Lifeline rescues do not spend this person's magic.
   function recordDeathRefusal(who, ability, scene) {
@@ -553,9 +627,12 @@
     const living = !!(vid && person && person.id === vid && !person.dead &&
       (isPlayer(who) ? s.health > 0 : ((v.health || {})[vid] == null || v.health[vid] > 0)));
     const now = day == null ? s.day || 0 : day;
+    let pending = false;
+    if (deed.event === 'care_survived') pending = !!(v.godpathCareWatch || {})[vid]?.length;
+    else if (deed.event === 'field_truth_shared') pending = !!Object.keys(v.godpathFieldDiscoveries?.[vid] || {}).length;
+    else if (deed.event === 'harvest_fed') pending = ((v.godpathHarvestFeed || {})[vid]?.streak || 0) > 0;
     return { complete: !!(rec && living && (!deed.afterDawn || now > rec.day)),
-      observed: !!rec, pending: deed.event === 'care_survived' ? !!(v.godpathCareWatch || {})[vid]?.length
-        : deed.event === 'field_truth_shared' && !!Object.keys(v.godpathFieldDiscoveries?.[vid] || {}).length,
+      observed: !!rec, pending,
       day: rec ? rec.day : null, hint: deed.hint };
   }
   function godpathDeedHint(who) {
@@ -1951,6 +2028,9 @@
       const r = _ed.apply(this, arguments);
       try {
         const careChanged = !this.over && this.state && finishCareWatch(this);
+        // Harvest meals settle during endDay under the day that just ended;
+        // observe after the clock advances so the ring and roster are final.
+        const harvestChanged = !this.over && this.state && observeHarvestFeed(this);
         if (!this.over && this.state && this.state.systemArrived) {
           this.checkPlayerGodhoodAscension();
           const v = this.state.village || {};
@@ -1961,7 +2041,7 @@
           }
         }
         // Persist settlement/ceremony after the core day-end save.
-        if (careChanged) this.save();
+        if (careChanged || harvestChanged) this.save();
       } catch (e) { warn('dawn check', e); }
       return r;
     };
