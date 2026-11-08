@@ -226,6 +226,87 @@
       return out;
     },
 
+    // PELLET BOOST + COST (Steve 2026-11-08 07:03 CST reframe: "the pellet
+    // bearer should gain basically unlimited food boosts. There should be a
+    // cost though."). The reactor turns stored food into power: staying fed
+    // is free, extra power costs pantry calories. Data lever:
+    // src/data/pellet-boost.json (read defensively; defaults match the file).
+    pelletBoostCfg() {
+      const d = (this.data && this.data.pelletBoost) || {};
+      const n = (v, def) => (typeof v === 'number' && v > 0) ? v : def;
+      return {
+        costKcalPerStrike: n(d.costKcalPerStrike, 50),
+        boostMult: n(d.boostMult, 1.5),
+        floorMult: n(d.floorMult, 1.25),
+      };
+    },
+
+    // _pelletBearerIs(vid): is this striker the reactor's bearer? vid null
+    // is the scholar (fusionReactorOnline: ability + holder both mine); a
+    // villager id needs the holder to name them AND the ability on them.
+    // Anyone else — a party member, a stranger — gets nothing.
+    _pelletBearerIs(vid) {
+      try {
+        if (vid == null) {
+          return (typeof this.fusionReactorOnline === 'function') && this.fusionReactorOnline();
+        }
+        const h = this.state.fusionReactorHolder || null;
+        if (!h || h.who !== 'villager' || h.vid !== vid) return false;
+        return (typeof this.npcHasAbility === 'function') ? this.npcHasAbility(vid, 'fusion_reactor') : true;
+      } catch (e) { return false; }
+    },
+
+    // pelletBurn(vid, opts): one paid boost (or the free floor) for a strike
+    // — or a bonus heal (opts.heal, scholar only; a heal bonus is always a
+    // boost, never a floor). Returns { mult, boosted, spent }. The boost
+    // ASKS for costKcalPerStrike; pantryDraw takes WHOLE units (Steve
+    // 2026-10-08), so the ledger records the ACTUAL kcal drawn, which can
+    // exceed the ask — and the say line names the actual number. A short
+    // pantry means the free floor for a strike, and NO bonus for a heal.
+    // The line fires only when the burn actually raises the strike's
+    // multiplier (opts.currentMult) — a floor that merely ties an overcharge
+    // is already said by the overcharge line, never twice.
+    pelletBurn(vid, opts) {
+      opts = opts || {};
+      const cfg = this.pelletBoostCfg();
+      if (!this._pelletBearerIs(vid)) return { mult: 1, boosted: false, spent: 0 };
+      // Never pay for power already on the strike: a live feast at or
+      // above the boost (granted before the reactor was installed) means
+      // the reactor adds nothing — draw nothing, record nothing.
+      if (!opts.heal && cfg.boostMult <= (opts.currentMult || 1)) return { mult: 1, boosted: false, spent: 0 };
+      // The ledger exists only once the reactor fires — a non-bearer
+      // strike leaves no trace at all.
+      const L = this.state.pelletBoost || (this.state.pelletBoost = { spent: 0, boosts: 0, floors: 0, lastBoostDay: null });
+      const v = this.state.village || {};
+      let have = 0;
+      try { have = (typeof this.pantryKcalLive === 'function') ? this.pantryKcalLive(v) : 0; } catch (e) { have = 0; }
+      if (have >= cfg.costKcalPerStrike) {
+        let drawn = null;
+        try { drawn = this.pantryDraw(v, cfg.costKcalPerStrike, {}); } catch (e) { drawn = null; }
+        const spent = Math.round((drawn && drawn.taken) || 0);
+        if (spent > 0) {
+          L.boosts += 1; L.spent += spent; L.lastBoostDay = this.state.day || 0;
+          if (opts.heal) this.say(`REACTOR — the pellet burns ${spent} kcal of pantry stores for the bonus heal.`);
+          else if (cfg.boostMult > (opts.currentMult || 1)) this.say(`REACTOR — the pellet burns ${spent} kcal of pantry stores: this strike hits ×${cfg.boostMult}.`);
+          return { mult: cfg.boostMult, boosted: true, spent };
+        }
+      }
+      if (opts.heal) return { mult: 1, boosted: false, spent: 0 };
+      L.floors += 1;
+      if (cfg.floorMult > (opts.currentMult || 1)) this.say(`REACTOR · the steady hum carries the strike ×${cfg.floorMult}.`);
+      return { mult: cfg.floorMult, boosted: false, spent: 0 };
+    },
+
+    // pelletBoostedToday: did the bearer pay for a boost today? The status
+    // row reads ×1.5 on a boosted day (the boost is per paid strike, the
+    // floor ×1.25 is always on).
+    pelletBoostedToday() {
+      try {
+        const L = this.state.pelletBoost || null;
+        return !!(L && L.lastBoostDay === (this.state.day || 0));
+      } catch (e) { return false; }
+    },
+
     // clearFeastBuff(expired): drop the buff. The fade line fires once, only
     // on real expiry — never on manual clears.
     clearFeastBuff(expired) {
@@ -259,10 +340,15 @@
       try {
         const b = this.feastedBuffState();
         // FUSION REACTOR (Steve 2026-10-12): the steady hum is visible — no
-        // silent buffs. When the reactor carries the multiplier, say so.
+        // silent buffs. When the reactor carries the multiplier, say so. A
+        // day the bearer paid for a boost reads ×1.5 (per paid strike); the
+        // floor ×1.25 is always on.
         if (!b) {
           const online = (typeof this.fusionReactorOnline === 'function') && this.fusionReactorOnline();
-          if (online) return 'REACTOR · damage ×1.25 · ability bonuses · always active';
+          if (online) {
+            if (this.pelletBoostedToday()) return 'REACTOR · damage ×1.5 boosted today · floor ×1.25 · always active';
+            return 'REACTOR · damage ×1.25 · ability bonuses · always active';
+          }
           return '';
         }
         const cfg = this.feastSurgeCfg();
@@ -323,13 +409,18 @@
     // ability resolved in combat while feasted counts as real use.
     applyFeastedForm(abilityId, actionId, target, preHp) {
       try {
-        if (!this.feastedActive()) return;
-        if (this.inCombat && this.inCombat()) this.noteFeastedCombatUse();
+        // PELLET BOOST: the reactor carries the feasted form for the
+        // bearer's own healing abilities — the bonus is a paid boost (see
+        // _feastHealBonus). Only the heal bonus rides the reactor; a status
+        // extension stays feast-only.
+        const reactorForm = !this.feastedActive() && (typeof this.fusionReactorOnline === 'function') && this.fusionReactorOnline();
+        if (!this.feastedActive() && !reactorForm) return;
+        if (this.inCombat && this.inCombat() && this.feastedActive()) this.noteFeastedCombatUse();
         const form = this.feastedForm(abilityId, actionId);
         const tw = form.twist;
         if (!tw || !tw.kind) return;
         if (tw.kind === 'heal_bonus') this._feastHealBonus(tw, preHp);
-        else if (tw.kind === 'status_extend') this._feastStatusExtend(tw);
+        else if (tw.kind === 'status_extend' && this.feastedActive()) this._feastStatusExtend(tw);
       } catch (e) {}
     },
 
@@ -352,13 +443,22 @@
         gained = Math.round(gained);
         if (gained <= 0) return;
         const want = Math.max(1, Math.round(gained * ((tw.pct || 50) / 100)));
+        // PELLET BOOST: when the reactor carries the form, the bonus is a
+        // PAID boost — draw pantry calories first. A short pantry means no
+        // bonus (the base heal already landed before this form ran, and it
+        // is untouched). The reactor path marks the surge as spent (Q4).
+        const reactorForm = !this.feastedActive() && (typeof this.fusionReactorOnline === 'function') && this.fusionReactorOnline();
+        if (reactorForm) {
+          const burn = (typeof this.pelletBurn === 'function') ? this.pelletBurn(null, { heal: true }) : null;
+          if (!burn || !burn.boosted) return;
+        }
         const before = this._feastHpTotal();
         try { this.addHealth(want); } catch (e) {}
         const landed = Math.max(0, Math.round(this._feastHpTotal() - before));
         if (landed <= 0) return;
         const line = String(tw.line || 'Feasted: +{bonus} HP.').replace('{bonus}', String(landed));
         this.say(line);
-        this._spendFeastedPower('healing', landed);
+        this._spendFeastedPower(reactorForm ? 'reactor' : 'healing', landed);
       } catch (e) { console.warn('[feastSurge] healing use', e); }
     },
 
@@ -404,6 +504,21 @@
     // read from prog.feastSurgeBy.
     _spendFeastedPower(kind, bonusHp) {
       try {
+        // PELLET BOOST / Q4 (Steve 2026-11-08): a PAID reactor boost is a
+        // real feast-surge spend even though the bearer can't eat anymore —
+        // the reactor is a power source, not a lock. Marks feastSurgeUsed +
+        // feastSurgeBy, leaves the feast arming (prog.feastSurge) alone, and
+        // is idempotent — the first source wins, later boosts don't re-mark.
+        if (kind === 'reactor') {
+          const s = this.state.scholar || {};
+          s.prog = s.prog || {};
+          if (s.prog.feastSurgeUsed) return;
+          s.prog.feastSurgeUsed = true;
+          s.prog.feastSurgeBy = this._feastUseSource || 'p';
+          this._feastUseSource = null;
+          this.save();
+          return;
+        }
         if (!this.feastedActive()) return;
         if (kind === 'combat') {
           if (!this.inCombat || !this.inCombat()) return;

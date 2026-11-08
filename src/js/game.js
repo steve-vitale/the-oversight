@@ -291,9 +291,9 @@
         if (r.ok === false) throw new Error('Data load failed: ' + f + ' (' + r.status + ')');
         return r.json();
       });
-      const [plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godpaths, tracks, rewardEconomy, gardening, favorRules, ladderCapstones] = await Promise.all(
-        ['plants.json', 'biomes.json', 'monsters.json', 'villagers.json', 'abilities.json', 'items.json', 'background_survivors.json', 'cell_defs.json', 'animals.json', 'recipes.json', 'books.json', 'relicEnhancements.json', 'locations.json', 'characterGen.json', 'synergies.json', 'knowledge.json', 'nameCultures.json', 'originPicker.json', 'foreignSpeech.json', 'lifeseeds.json', 'arrivalText.json', 'justiceVoice.json', 'alienPlayers.json', 'regions.json', 'monsterBehaviors.json', 'contests.json', 'events.json', 'statusEffects.json', 'cooking.json', 'build-notes.json', 'wave-ledger.json', 'feast-surge.json', 'evolutions.json', 'titans.json', 'godpaths.json', 'tracks.json', 'reward-economy.json', 'gardening.json', 'favor-rules.json', 'ladder-capstones.json'].map(get));
-      this.data = { plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godpaths, tracks, rewardEconomy, gardening, favorRules, ladderCapstones };
+      const [plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godpaths, tracks, rewardEconomy, gardening, favorRules, ladderCapstones, pelletBoost] = await Promise.all(
+        ['plants.json', 'biomes.json', 'monsters.json', 'villagers.json', 'abilities.json', 'items.json', 'background_survivors.json', 'cell_defs.json', 'animals.json', 'recipes.json', 'books.json', 'relicEnhancements.json', 'locations.json', 'characterGen.json', 'synergies.json', 'knowledge.json', 'nameCultures.json', 'originPicker.json', 'foreignSpeech.json', 'lifeseeds.json', 'arrivalText.json', 'justiceVoice.json', 'alienPlayers.json', 'regions.json', 'monsterBehaviors.json', 'contests.json', 'events.json', 'statusEffects.json', 'cooking.json', 'build-notes.json', 'wave-ledger.json', 'feast-surge.json', 'evolutions.json', 'titans.json', 'godpaths.json', 'tracks.json', 'reward-economy.json', 'gardening.json', 'favor-rules.json', 'ladder-capstones.json', 'pellet-boost.json'].map(get));
+      this.data = { plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godpaths, tracks, rewardEconomy, gardening, favorRules, ladderCapstones, pelletBoost };
       // GOD-PATH REDESIGN (2026-10-14): godpaths.json is THE god layer;
       // godhood.js derives its capstones from it (godhood.json retired).
       // REGIONS: climate calendars (world.js regionCalendar). Loaded on its
@@ -39040,10 +39040,31 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               }
             } catch (e) {}
           }
+          // PELLET BOOST (Steve 2026-11-08 reframe): the reactor bearer
+          // burns pantry calories for a paid ×1.5 strike, else the free
+          // ×1.25 floor. Bearer-only; takes the max, never lowers the
+          // multiplier. A paid boost is a real feast-surge spend (Q4) —
+          // the reactor is a power source, not a lock.
+          let _reactorRaised = false;
+          try {
+            if (typeof this.pelletBurn === 'function') {
+              const _burn = this.pelletBurn(_ps ? null : (_vs ? _vs.villagerId : undefined), { currentMult: _pm });
+              if (_burn && _burn.mult > 1) {
+                if (_burn.mult > _pm) { _pm = _burn.mult; _reactorRaised = true; }
+                if (_burn.boosted) {
+                  try { this._feastUseSource = _ps ? 'p' : (_vs ? ('v:' + _vs.villagerId) : 'p'); } catch (e) {}
+                  this._spendFeastedPower('reactor');
+                }
+              }
+            }
+          } catch (e) { console.warn('[pelletBoost] hook', e); }
           if (_pm > 1) {
             final = Math.round(final * _pm);
             const _vn = _vs ? String(_vs.name || 'A villager') : '';
-            this.say(_feasted
+            // When the reactor raised the multiplier, its own line already
+            // said so — the generic FEASTED/OVERCHARGED line would mislabel
+            // the strike (the bearer is not well-fed; there is no feast).
+            if (!_reactorRaised) this.say(_feasted
               ? (_vs ? `FEASTED ×${_pm}: ${_vn}'s blow carries the feast.` : `FEASTED ×${_pm}: the feast was the weapon.`)
               : (_vs ? `OVERCHARGED ×${_pm} (well-fed): ${_vn} fights on a full belly.` : `OVERCHARGED ×${_pm} (well-fed): food is fuel.`));
             if (_feasted && typeof this.noteFeastedCombatUse === 'function') {

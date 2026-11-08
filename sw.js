@@ -184,6 +184,7 @@ const ASSETS = [
   "./src/data/monsters.json?v=2294ef815-20261108-112829",
   "./src/data/nameCultures.json?v=2294ef815-20261108-112829",
   "./src/data/originPicker.json?v=2294ef815-20261108-112829",
+  "./src/data/pellet-boost.json?v=2294ef815-20261108-112829",
   "./src/data/plants.json?v=2294ef815-20261108-112829",
   "./src/data/presentation.json?v=2294ef815-20261108-112829",
   "./src/data/recipes.json?v=2294ef815-20261108-112829",

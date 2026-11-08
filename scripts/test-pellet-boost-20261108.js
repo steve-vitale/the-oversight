@@ -140,6 +140,9 @@ function strike(G, mKey, dmg, srcKey, srcLabel) {
   check('short: pantry untouched at 30', kcal(G) === 30, 'kcal=' + kcal(G));
 
   // --- 6. healing boost: bonus heal draws 50, base heal lands regardless ---
+  // Out of combat: the fighter's HP pool is the live one mid-fight, so end
+  // the fight first and measure on the scholar's own health.
+  endFight(G);
   setPantry(G, pantry50());
   s.health = 50; if (s.maxHealth) s.maxHealth = 100;
   says.length = 0;

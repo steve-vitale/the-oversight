@@ -78,6 +78,9 @@ function strike(G, mKey, dmg, srcKey, srcLabel) {
     'used=' + prog.feastSurgeUsed + ' by=' + prog.feastSurgeBy);
 
   // --- 3. a PAID bonus heal marks the surge too ---
+  // Out of combat: the fighter's HP pool is the live one mid-fight, so end
+  // the fight first and measure on the scholar's own health.
+  endFight(G);
   setPantry(G, pantry50());
   prog.feastSurgeUsed = false; prog.feastSurgeBy = null;
   s.health = 50; if (s.maxHealth) s.maxHealth = 100;
