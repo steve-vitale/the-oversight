@@ -16,7 +16,8 @@
 // rules:
 //   - vbrain_one_dawn_entry: every dawn lead pick (gate or lottery) is recorded through this module so one log explains the choice (code: vbrainScorePick, vbrainLogGate)
 //   - vbrain_legacy_weights: phase 1 keeps existing additive candidate weights and the weighted lottery; it does NOT ship the product-of-curves formula from VILLAGER-BRAIN.md (code: vbrainScorePick)
-//   - vbrain_feeders_not_deciders: goals bias, win-plan stage intents, and EXPEDITION feed candidates here; agency chance-rolls and win-plan re-decides stop owning the day when this module is loaded (code: vbrainFeedExtras, vbrainExecuteDepart)
+//   - vbrain_feeders_not_deciders: goals bias, win-plan stage intents, EXPEDITION, and bond/link social ads feed candidates here; agency chance-rolls and win-plan re-decides stop owning the day when this module is loaded (code: vbrainFeedExtras, vbrainExecuteDepart)
+//   - vbrain_bond_candidates: PROPOSE_BOND / RAISE_LINK from bondFeedCands enter the dawn extras list so the initiator's scorer weighs them; warmth gate and npcInviteDecision stay in bond-initiation (code: vbrainFeedExtras, VILLAGER-BRAIN Phase 4)
 //   - vbrain_commitment: the dawn pick writes a commitment record the same day so midday agency honors it instead of rolling again (code: vbrainScorePick, vbrainCommit)
 //   - vbrain_materialize_matches_commit: when an aimed override wins, objPick aligns the live objective kind to the commitment after core chore/facing draws (code: vbrainAlignObjective)
 //   - vbrain_midday_event_only: mid-day idle/done refresh runs only when commit day/part is stale or a perception flag fired; dawn still force-refreshes (code: vbrainShouldRefresh, vbrainMarkPerception)
@@ -25,6 +26,7 @@
 //   - npcRangeProfile, npcMaxDist, agencyState (villager-agency.js)
 //   - winPlanOf, winPlanHavenTick (win-plan.js) — optional feeders
 //   - vgoalBiasCands (villager-goals.js) — called by objPick before this scorer
+//   - bondFeedCands (bond-initiation.js) — optional PROPOSE_BOND / RAISE_LINK ads
 /* VILLAGER BRAIN — src/js/villager-brain.js
  *
  * Steve (2026-11-06): "Make sure all our intelligence systems are coherent
@@ -284,11 +286,13 @@
       kind: c.kind,
       score: Math.round((c.w || 0) * 1000) / 1000,
       targetVid: c.targetVid || null,
+      villageId: c.villageId || null,
       chore: c.chore || null,
       vgoal: c.vgoal || null,
       vbrainSrc: c.vbrainSrc || null,
       winPlanAction: c.winPlanAction || null,
       companion: c.companion || null,
+      bondAct: c.bondAct || null,
       considerations: considerations,
     };
   }
@@ -386,9 +390,11 @@
       writeCommit(this, vid, { kind: kind, score: 1, vbrainSrc: 'gate:' + gateId }, entry);
       return entry;
     },
-    // Append win-plan + EXPEDITION candidates onto the list. Marked with
-    // vbrainSrc so the scorer keeps them out of the core weight pool —
-    // core errand mix stays the legacy lottery; extras override in-log.
+    // Append win-plan + EXPEDITION + bond/link social candidates onto the
+    // list. Marked with vbrainSrc so the scorer keeps them out of the core
+    // weight pool — core errand mix stays the legacy lottery; extras
+    // override in-log. Bond ads are scored for the log; entry points still
+    // execute propose/stage after the initiator's bondScoreCands weigh.
     vbrainFeedExtras: function (vid, cands, hx, hy) {
       if (!cands) return cands;
       try { if (this.vbrainDisableExtras) return cands; } catch (e) {}
@@ -400,6 +406,13 @@
         var ex = expeditionCand(this, vid, hx, hy);
         if (ex) cands.push(ex);
       }
+      // Phase 4 social: PROPOSE_BOND / RAISE_LINK as scored extras.
+      try {
+        if (typeof this.bondFeedCands === 'function' && !this.vbrainDisableBondCands) {
+          var bondCands = this.bondFeedCands(vid) || [];
+          for (var bi = 0; bi < bondCands.length; bi++) cands.push(bondCands[bi]);
+        }
+      } catch (e) {}
       return cands;
     },
     // THE dawn scoring entry. Core candidates (no vbrainSrc) use the legacy
