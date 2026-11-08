@@ -200,8 +200,15 @@ null/undefined/NaN: clean. Villagers act like people:
 
 ## Regression
 
-- `node scripts/check.js --quick`: [RESULT PENDING — background job running at
-  note-writing time; result appended before commit. Baseline 284/6, r113 282/8.]
+- `node scripts/check.js --quick` (adoption run, 2026-11-08 ~09:52Z, rebased tip):
+  **286 passed, 6 failed in 410s.** All 6 failures verified pre-existing on
+  pristine master 32c47d41e (same signatures, run directly there):
+  measurement-proof-update, measurement-workflow, phone-frame-proof (known
+  maintenance-proof staleness), mobile-combat-cadence ("Continue does not wrap
+  the announced round a second time"), occupation-panels ("real CLI workflow
+  completed"), establishment-r20-fixes ("next day voices once more: expected
+  2, got 1"). No new regressions from the r114 fix. Baseline 284/6, r113
+  282/8; +2 passed vs baseline (r114 proof test + master-added tests).
 
 ## Telemetry
 
@@ -282,9 +289,11 @@ null/undefined/NaN: clean. Villagers act like people:
 
 ## Closeout
 
-- Branch `journey-establishment`, base f5cf45250, commits: prereg+substrate
-  166b24d16, fix 0dc167d9c, before-evidence 9f10bec14, after-evidence
-  681825ab7c, run note [SHA]. Rebased onto explicit master SHA [SHA], proof
-  re-run PASS, merged ff-only to [SHA], tree released and removed, main tree
-  clean.
+- Branch `journey-establishment`, rebased onto explicit master SHA 32c47d41e
+  (pre-rebase base f5cf45250), commits: prereg+substrate 4668edc82, fix
+  026da5afd, before-evidence 658598d63, after-evidence e78c9d2c8, run note
+  5bdd9ac69. Proof re-run PASS (50/50) on the rebased tip; gate 286/6, all 6
+  pre-existing. Merged ff-only to the branch tip; merge SHA recorded in
+  ~/memory/2026-11-08.md (adoption entry). Tree released and removed, main
+  tree clean.
 - Rotation written: 2. Lock deleted after read-back.
