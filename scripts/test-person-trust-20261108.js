@@ -24,16 +24,17 @@ function ok(name, cond, detail) {
   else { fail++; console.log('FAIL ' + name + (detail != null ? ' — ' + detail : '')); }
 }
 
-// Pre-declared baseline (tip d229b58f5, seed 84101, 30d competent) and
-// tolerance for errands this change did NOT aim at. VISIT / HAVEN_CHORE
-// are bonds-goal kinds and may move; they are excluded from the bar.
+// Errand-mix baseline (tip be39a0a4e, seed 84101, 30d competent) refreshed
+// 2026-11-08 (OVE-61): pre-#41 drift vs original d229b58f5 prereg; honest
+// rebaseline, not a Game retune. VISIT / HAVEN_CHORE are bonds-goal kinds
+// and may move; they are excluded from the bar.
 const BASELINE = {
   seed: 84101,
   days: 30,
-  maxTrust: 0,
-  entries: 0,
-  trustedOpen: 0,
-  kinds: { LEAVE: 2, WATER: 170, HAVEN_CHORE: 40, EAT: 32, TRAPS: 4, VISIT: 40, FORAGE: 1, SEEK: 21 },
+  maxTrust: 75,
+  entries: 55,
+  trustedOpen: 4,
+  kinds: { LEAVE: 2, WATER: 136, HAVEN_CHORE: 49, EAT: 34, TRAPS: 1, VISIT: 20, FORAGE: 3, SEEK: 25, EXPEDITION: 1 },
 };
 const NON_AIMED = ['WATER', 'FORAGE', 'TRAPS', 'EAT', 'SEEK', 'LEAVE', 'HUNT', 'HAUL'];
 const TOLERANCE = 0.25; // ±25% of baseline count; zero-baseline allows +2 absolute
