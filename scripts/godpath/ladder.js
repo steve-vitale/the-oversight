@@ -108,6 +108,11 @@ const T = K.reporter('godpath-ladder');
   for (const id of ['rage', 'blood_frenzy', 'cannibal_frenzy', 'blood_magic']) Game.npcGrantAbility(vid, id);
   Game.state.village.npcSynergies = Game.state.village.npcSynergies || {};
   Game.state.village.npcSynergies[vid] = [army.requires.synergies[0]];
+  // Prepared ceremony fixture; test-brawler-deed proves the lived fight callers.
+  const deeds = Game.state.village.godpathDeeds || (Game.state.village.godpathDeeds = {});
+  deeds[vid] = Object.assign({}, deeds[vid], {
+    outmatched_kill: { day: 84, monster: 'moderator', scene: 'tactical', actorMaxHp: 100, openingHp: 160, wound: 12 },
+  });
   Game.checkVillagerGodhoodAscension(vid);
   T.ok('a villager ascends through the same requirement model', (((Game.state.village.npcGodhood || {})[vid] || {}).active || []).includes('one_person_army'));
 
