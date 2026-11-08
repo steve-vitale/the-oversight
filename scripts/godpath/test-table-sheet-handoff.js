@@ -10,11 +10,16 @@ const K = require('./lib'), T = K.reporter('table-sheet-handoff');
   // (sim-scalegate-a): without it deedGateReady().ok is false and there is
   // no Table setting to hand off. Same fixture class as the
   // test-fullseat-superset-20261014 update in that arm.
+  // LEG 2 (2026-11-08): the full seat ALSO needs National ladder standing
+  // (40 counted points) + a delivered capstone deed.
   G.state.nationalLive = true;
   s.abilityChoices = null; s.knackChoices = null; s.relicChoices = null;
   s.integration=40;s.insideHaven=true;G.playerTile().type='haven';
   const pg=G.progState();pg.arc=4;pg.tableWaiting=true;pg.tableDone=false;pg.table={};
   pg.sentimentTaught=true;pg.feastSurgeUsed=true;pg.crises={raid:true,illness:true,fire:true};
+  G.state.waveLedger = { 3: { points: 48, perType: {}, perTypeX: {} } };
+  G.playerTracks().field.xp = 192;
+  pg.ladderCapstone = 'trade_charter';
   pg.deeds={wavesFaced:{},contestsSurvived:3};
   for(const m of G.data.monsters.filter(m=>m.wave<=5))pg.deeds.wavesFaced[m.id]=m.wave;
   T.ok('prepared actual deed, food and integration gates provide a full seat',G.tableSeat().seat==='full');
