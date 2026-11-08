@@ -13,11 +13,13 @@
 //   - vbrainLogs()
 //   - vbrainExecuteDepart(vid, hx, hy, announce)
 //   - vbrainOwnsDawn()
+//   - dutyFeedCands(vid)
 // rules:
 //   - vbrain_one_dawn_entry: every dawn lead pick (gate or lottery) is recorded through this module so one log explains the choice (code: vbrainScorePick, vbrainLogGate)
 //   - vbrain_legacy_weights: phase 1 keeps existing additive candidate weights and the weighted lottery; it does NOT ship the product-of-curves formula from VILLAGER-BRAIN.md (code: vbrainScorePick)
-//   - vbrain_feeders_not_deciders: goals bias, win-plan stage intents, EXPEDITION, and bond/link social ads feed candidates here; agency chance-rolls and win-plan re-decides stop owning the day when this module is loaded (code: vbrainFeedExtras, vbrainExecuteDepart)
+//   - vbrain_feeders_not_deciders: goals bias, win-plan stage intents, EXPEDITION, bond/link social ads, and duty ads from believed needs feed candidates here; agency chance-rolls and win-plan re-decides stop owning the day when this module is loaded (code: vbrainFeedExtras, vbrainExecuteDepart)
 //   - vbrain_bond_candidates: PROPOSE_BOND / RAISE_LINK from bondFeedCands enter the dawn extras list so the initiator's scorer weighs them; warmth gate and npcInviteDecision stay in bond-initiation (code: vbrainFeedExtras, VILLAGER-BRAIN Phase 4)
+//   - vbrain_duty_candidates: unassigned villagers get DUTY ads from believed village needs (objResourceBelief → forage/cook/water); player/convo assignTask stays a binding commitment — assigned people get no competing duty ads (code: dutyFeedCands, vbrainFeedExtras, VILLAGER-BRAIN Phase 6)
 //   - vbrain_commitment: the dawn pick writes a commitment record the same day so midday agency honors it instead of rolling again (code: vbrainScorePick, vbrainCommit)
 //   - vbrain_materialize_matches_commit: when an aimed override wins, objPick aligns the live objective kind to the commitment after core chore/facing draws (code: vbrainAlignObjective)
 //   - vbrain_midday_event_only: mid-day idle/done refresh runs only when commit day/part is stale or a perception flag fired; dawn still force-refreshes (code: vbrainShouldRefresh, vbrainMarkPerception)
@@ -27,6 +29,8 @@
 //   - winPlanOf, winPlanHavenTick (win-plan.js) — optional feeders
 //   - vgoalBiasCands (villager-goals.js) — called by objPick before this scorer
 //   - bondFeedCands (bond-initiation.js) — optional PROPOSE_BOND / RAISE_LINK ads
+//   - objResourceBelief (villager-objectives.js) — believed pantry/cistern for duty ads
+//   - assignmentFor, delegateTasks, villagerCompetence (game.js) — standing orders + task catalog + competence consideration
 /* VILLAGER BRAIN — src/js/villager-brain.js
  *
  * Steve (2026-11-06): "Make sure all our intelligence systems are coherent
@@ -272,6 +276,108 @@
       };
     } catch (e) { return null; }
   }
+  // Phase 6 — duty ads from believed village needs (VILLAGER-BRAIN seam 7).
+  // Feeder only: does not call assignTask / checkObedience. Standing player
+  // or conversation assignments stay binding — assigned villagers get no
+  // competing duty ads. Thresholds mirror objPick FORAGE/WATER + food_security
+  // pantryDays < 3; additive weights only (no IAUS product-of-curves).
+  function dutyBelievedNeeds(self, vid) {
+    var out = {
+      unknown: true, pantryLow: false, pantryVeryLow: false, waterLow: false,
+      pantryKcal: null, pantryDays: null, waterDays: null, fromLive: false,
+    };
+    // Probe seam: strip the belief hook so ads stop even when pantry is low.
+    try { if (self.vbrainDutyIgnoreBelief) return out; } catch (e) {}
+    var bel = null;
+    try { bel = self.objResourceBelief ? self.objResourceBelief(vid) : null; } catch (e) { bel = null; }
+    if (!bel || bel.unknown) return out;
+    out.unknown = false;
+    out.fromLive = !!bel.fromLive;
+    if (typeof bel.pantryKcal === 'number' && isFinite(bel.pantryKcal)) out.pantryKcal = bel.pantryKcal;
+    if (typeof bel.pantryDays === 'number' && isFinite(bel.pantryDays)) out.pantryDays = bel.pantryDays;
+    if (typeof bel.waterDays === 'number' && isFinite(bel.waterDays)) out.waterDays = bel.waterDays;
+    var kcalLow = out.pantryKcal != null && out.pantryKcal < 4000;
+    var kcalVery = out.pantryKcal != null && out.pantryKcal < 2000;
+    var daysLow = out.pantryDays != null && out.pantryDays < 3;
+    var daysVery = out.pantryDays != null && out.pantryDays < 1;
+    out.pantryLow = kcalLow || daysLow;
+    out.pantryVeryLow = kcalVery || daysVery;
+    out.waterLow = out.waterDays != null && out.waterDays < 2;
+    return out;
+  }
+  function dutyCompetenceOf(self, vid, task) {
+    try {
+      if (typeof self.villagerCompetence === 'function') {
+        var c = self.villagerCompetence(vid, task);
+        if (typeof c === 'number' && isFinite(c) && c > 0) return c;
+      }
+    } catch (e) {}
+    return 1.0;
+  }
+  function dutyBuildCand(self, vid, task, baseW, needs) {
+    var catalog = null;
+    try { catalog = self.delegateTasks ? self.delegateTasks() : null; } catch (e) { catalog = null; }
+    if (catalog && !catalog[task]) return null;
+    var comp = dutyCompetenceOf(self, vid, task);
+    // Mild competence nudge (±15%) — consideration, not a new curve family.
+    var w = baseW * Math.min(1.15, Math.max(0.85, comp));
+    w = Math.round(w * 1000) / 1000;
+    var considerations = [
+      { id: 'believed_need', raw: 1, note: needs.pantryVeryLow ? 'pantry_very_low' : (needs.pantryLow ? 'pantry_low' : (needs.waterLow ? 'water_low' : 'need')) },
+      { id: 'competence', raw: Math.round(comp * 1000) / 1000, note: task },
+    ];
+    if (needs.pantryKcal != null) {
+      considerations.push({ id: 'believed_pantry_kcal', raw: Math.round(needs.pantryKcal), note: needs.fromLive ? 'live' : 'stale' });
+    }
+    if (needs.pantryDays != null) {
+      considerations.push({ id: 'believed_pantry_days', raw: Math.round(needs.pantryDays * 1000) / 1000, note: 'days' });
+    }
+    if (needs.waterDays != null && task === 'water') {
+      considerations.push({ id: 'believed_water_days', raw: Math.round(needs.waterDays * 1000) / 1000, note: 'days' });
+    }
+    return {
+      kind: 'DUTY',
+      dutyTask: task,
+      w: w,
+      vbrainSrc: 'duty',
+      considerations: considerations,
+    };
+  }
+  function dutyFeedCandsFor(self, vid) {
+    var out = [];
+    if (!vid) return out;
+    try { if (self.vbrainDisableDutyCands) return out; } catch (e) {}
+    try { if (vid === self.villagerId) return out; } catch (e) {}
+    // Standing assignTask / conversation order — scorer honors it: no ads.
+    try {
+      var asg = null;
+      if (typeof self.assignmentFor === 'function') asg = self.assignmentFor(vid);
+      else asg = ((self.state || {}).village || {}).assignments
+        ? ((self.state.village.assignments || {})[vid] || null) : null;
+      if (asg && asg.task && asg.task !== 'rest') return out;
+    } catch (e) {}
+    try {
+      var vp = self.vpOf ? self.vpOf(vid) : null;
+      if (vp && vp.dead) return out;
+    } catch (e) {}
+    var needs = dutyBelievedNeeds(self, vid);
+    if (needs.unknown) return out;
+    if (needs.pantryLow) {
+      var forageW = needs.pantryVeryLow ? 3.2 : 2.2;
+      var cookW = needs.pantryVeryLow ? 2.4 : 1.6;
+      var fc = dutyBuildCand(self, vid, 'forage', forageW, needs);
+      var cc = dutyBuildCand(self, vid, 'cook', cookW, needs);
+      if (fc) out.push(fc);
+      if (cc) out.push(cc);
+    }
+    if (needs.waterLow) {
+      var ww = 3.0 + (2 - (needs.waterDays == null ? 2 : needs.waterDays)) * 1.5;
+      if (needs.waterDays != null && needs.waterDays < 1) ww = Math.max(ww, 5.5);
+      var wc = dutyBuildCand(self, vid, 'water', ww, needs);
+      if (wc) out.push(wc);
+    }
+    return out;
+  }
   function annotateCand(c) {
     var considerations = (c.considerations || []).slice();
     considerations.unshift({
@@ -299,6 +405,7 @@
       targetVid: c.targetVid || null,
       villageId: c.villageId || null,
       chore: c.chore || null,
+      dutyTask: c.dutyTask || null,
       vgoal: c.vgoal || null,
       vbrainSrc: c.vbrainSrc || null,
       winPlanAction: c.winPlanAction || null,
@@ -401,11 +508,12 @@
       writeCommit(this, vid, { kind: kind, score: 1, vbrainSrc: 'gate:' + gateId }, entry);
       return entry;
     },
-    // Append win-plan + EXPEDITION + bond/link social candidates onto the
-    // list. Marked with vbrainSrc so the scorer keeps them out of the core
-    // weight pool — core errand mix stays the legacy lottery; extras
-    // override in-log. Bond ads are scored for the log; entry points still
-    // execute propose/stage after the initiator's bondScoreCands weigh.
+    // Append win-plan + EXPEDITION + bond/link + duty (believed-need) ads.
+    // Marked with vbrainSrc so the scorer keeps them out of the core weight
+    // pool — core errand mix stays the legacy lottery; extras override
+    // in-log. Bond ads are scored for the log; entry points still execute
+    // propose/stage after the initiator's bondScoreCands weigh. Duty ads
+    // advertise production work from belief; they do not replace assignTask.
     vbrainFeedExtras: function (vid, cands, hx, hy) {
       if (!cands) return cands;
       try { if (this.vbrainDisableExtras) return cands; } catch (e) {}
@@ -424,7 +532,20 @@
           for (var bi = 0; bi < bondCands.length; bi++) cands.push(bondCands[bi]);
         }
       } catch (e) {}
+      // Phase 6 roles: DUTY ads from believed pantry/cistern needs.
+      try {
+        if (!this.vbrainDisableDutyCands) {
+          var dutyCands = dutyFeedCandsFor(this, vid) || [];
+          for (var di = 0; di < dutyCands.length; di++) cands.push(dutyCands[di]);
+        }
+      } catch (e) {}
       return cands;
+    },
+    // Dawn / probe feed: DUTY candidates for one unassigned villager from
+    // believed village needs. Empty when assigned, belief unknown, or needs
+    // are not low. Does not write assignments.
+    dutyFeedCands: function (vid) {
+      try { return dutyFeedCandsFor(this, vid) || []; } catch (e) { return []; }
     },
     // THE dawn scoring entry. Core candidates (no vbrainSrc) use the legacy
     // additive weighted lottery — same arithmetic as pre-brain objPick, same
