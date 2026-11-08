@@ -192,6 +192,28 @@ for (const sel of CODA_SELS) for (const m of ['light', 'dark']) {
 const endCov = {};
 for (const pid of Object.keys(ENDINGS.paths || {})) {
   const w = `endings.paths.${pid}`;
+  if (pid === 'respected-village') {
+    // CASH-OUT ENDING (ladder leg 3, brief §b.10): the one non-path
+    // ending. One light entry per ladder track (track:* selectors), light
+    // moral only, lines required, finals forbidden — cash-out plays no
+    // Table path and takes no finals. Validated here, not as a path.
+    const P = ENDINGS.paths[pid];
+    const TRACK_SELS = new Set(TRACKS.map(t => 'track:' + t));
+    for (const sel of Object.keys(P)) {
+      if (sel === '_doc') continue;
+      if (!TRACK_SELS.has(sel)) { err(`${w}['${sel}']: cash-out entries live on track:<track> selectors only`); continue; }
+      for (const m of Object.keys(P[sel])) {
+        if (m === '_doc') continue;
+        if (m !== 'light') { err(`${w}['${sel}']: unknown moral '${m}' for a cash-out ending (light only)`); continue; }
+        const E = P[sel][m] || {};
+        for (const k of Object.keys(E)) if (['title', 'lines', '_doc'].indexOf(k) < 0) err(`${w}['${sel}'].${m}: unknown field '${k}' (cash-out entries take title/lines, never finals)`);
+        if (!isStrArr(E.lines)) err(`${w}['${sel}'].${m}.lines: must be a non-empty array of lines`);
+        else checkTokens(`${w}['${sel}'].${m}.lines`, E.lines);
+        if (E.title != null) checkTokens(`${w}['${sel}'].${m}.title`, E.title);
+      }
+    }
+    continue;
+  }
   if (!PATHS[pid]) { err(`${w}: unknown Table path`); continue; }
   const P = ENDINGS.paths[pid];
   for (const sel of Object.keys(P)) {

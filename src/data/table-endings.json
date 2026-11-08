@@ -1,5 +1,5 @@
 {
-  "_doc": "COMPOSED ENDINGS (Steve 2026-10-14 round 5, on path final + one build coda: \"Nope good idea that's kinda manageable.\"). An ending = the Table path's own light/dark final (table-<path>.js, never in this file) + ONE build coda. codas.<selector> = { light: [lines], dark: [lines] }, path-independent; selectors 'god:<godId>' (10), 'class:<path>/<subclass>' (20), 'track:<track>' (5) = 70 codas. The most specific coda for the locked ending key plays: god > class/subclass > track; none = the final alone. The relay's grey band reads light or dark by relayLean (>0 light, <0 dark, 0 light), the same rule as its door gift. paths.<tablePath>.<selector>.<moral> = { title?, lines, finals?: { <finalId>: [lines that REPLACE that final's outcome] } } is a RARE BESPOKE OVERRIDE and wins over every coda (lookup god > class/subclass > class > track; morals light, dark, grey on the relay; final ids per table-<path>.js plus 'hosts' and 'poddemand', which add lines only). Tokens: {name} {class} {god} {verb} {path} (the Table path's name, e.g. 'the Beloved'). Voice: spare, second person, two lines. Validate and list what's missing: node scripts/validate-table-endings.js --todo",
+  "_doc": "COMPOSED ENDINGS (Steve 2026-10-14 round 5, on path final + one build coda: \"Nope good idea that's kinda manageable.\"). An ending = the Table path's own light/dark final (table-<path>.js, never in this file) + ONE build coda. codas.<selector> = { light: [lines], dark: [lines] }, path-independent; selectors 'god:<godId>' (10), 'class:<path>/<subclass>' (20), 'track:<track>' (5) = 70 codas. The most specific coda for the locked ending key plays: god > class/subclass > track; none = the final alone. The relay's grey band reads light or dark by relayLean (>0 light, <0 dark, 0 light), the same rule as its door gift. paths.<tablePath>.<selector>.<moral> = { title?, lines, finals?: { <finalId>: [lines that REPLACE that final's outcome] } } is a RARE BESPOKE OVERRIDE and wins over every coda (lookup god > class/subclass > class > track; morals light, dark, grey on the relay; final ids per table-<path>.js plus 'hosts' and 'poddemand', which add lines only). Tokens: {name} {class} {god} {verb} {path} (the Table path's name, e.g. 'the Beloved'). Voice: spare, second person, two lines. Validate and list what's missing: node scripts/validate-table-endings.js --todo. paths.'respected-village' is the one non-path ending: the cash-out (Respected Village) ending, one light entry per ladder track, read by ladderCashOut() — it plays no Table path and takes no finals.",
   "codas": {
     "_doc": "One build coda per selector x moral, played after the path's final. Exemplars 2026-10-14: god:one_person_army, class:caregiver/keeper, track:combat.",
     "god:one_person_army": {
@@ -424,6 +424,54 @@
           "lines": [
             "The galaxy learns the other meaning of 'no': the one that hits back. The table never prices humanity again. It never invites it again either.",
             "{name} walks home through a village that loves them and flinches when they raise a hand to wave."
+          ]
+        }
+      }
+    },
+    "respected-village": {
+      "_doc": "CASH-OUT ENDING (ladder leg 3, brief §b.10): the Respected Village — a village that ends its run with dignity instead of sitting at the table. NOT a Table path: it plays no finals and takes no path. One light entry per ladder track, picked by the village's top counted track (ladder track -> table track: fight/combat, forage/field, craft/craft, talk/social, explore/strange); ladderCashOut() reads it. Validated separately by validate-table-endings.js (track:* selectors, light only, lines required, finals forbidden).",
+      "track:combat": {
+        "light": {
+          "title": "THE RESPECTED VILLAGE",
+          "lines": [
+            "You never took the seat. You took the field instead, and every beast that came for Haven learned your name first.",
+            "The village stands because you stood. That is the whole ending, and it is enough — the next fire starts higher for it."
+          ]
+        }
+      },
+      "track:field": {
+        "light": {
+          "title": "THE RESPECTED VILLAGE",
+          "lines": [
+            "You never took the seat. You fed the village instead, and the pantry you filled outlasts every argument at the table.",
+            "Full bowls, full stores, full seasons. The village stands because it ate. That is the whole ending, and it is enough."
+          ]
+        }
+      },
+      "track:craft": {
+        "light": {
+          "title": "THE RESPECTED VILLAGE",
+          "lines": [
+            "You never took the seat. You built the village instead — every roof, every blade, every wound closed by your hands.",
+            "What you made holds. The village stands in the things you built. That is the whole ending, and it is enough."
+          ]
+        }
+      },
+      "track:social": {
+        "light": {
+          "title": "THE RESPECTED VILLAGE",
+          "lines": [
+            "You never took the seat. You made friends of the whole region instead, and every fire around Haven says its name like a neighbor.",
+            "No throne, no tribute — just doors that open when Haven knocks. That is the whole ending, and it is enough."
+          ]
+        }
+      },
+      "track:strange": {
+        "light": {
+          "title": "THE RESPECTED VILLAGE",
+          "lines": [
+            "You never took the seat. You went looking instead, and came back with the map of everything the galaxy forgot to hide.",
+            "The village knows the way now — every road, every rumor, every door. That is the whole ending, and it is enough."
           ]
         }
       }
