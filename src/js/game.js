@@ -40380,9 +40380,19 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.say(`${v.name} patches you up (+${healed} HP). "Hold still!"`);
         }
       } else if (a.type === 'flee') {
-        v.fled = true;
-        try { S.Godpath?.finishTacticalEscape(this, f, v); } catch (e) { console.warn('[godpath] flight', e); }
-        this.say(`${v.name} runs for it!`);
+        // RALLIED (2026-10-13 / OVE-68): the speech holds — no fleeing while
+        // it lasts. Hopeless-flee already gates on rallied above; villagerDecide
+        // can still return type 'flee' (cautious AI). Honor the same hold so a
+        // daily Voice / War Cry recipient cannot discard the finite rally by
+        // walking off before the next ageing tick (and so save/load still sees
+        // a living recipient).
+        if ((v.rallied || 0) > 0) {
+          this.say(this.tbVillagerWaitLine(v));
+        } else {
+          v.fled = true;
+          try { S.Godpath?.finishTacticalEscape(this, f, v); } catch (e) { console.warn('[godpath] flight', e); }
+          this.say(`${v.name} runs for it!`);
+        }
       } else {
         // WAIT, NARRATED + VARIED (journey-endgame r143 Fix B, planned
         // r140; r147 volume fix): no silent turns, and no stuck record.

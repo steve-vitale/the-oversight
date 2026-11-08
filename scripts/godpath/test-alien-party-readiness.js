@@ -38,6 +38,11 @@ const K = require('./lib'), T = K.reporter('alien-party-readiness');
   const armored = G.tbDamage(c.ally.key, 20, 'prepared physical hit', c.foe.key, { undodgeable: true });
   T.ok('carried armor reduces actual incoming physical damage', armored > 0 && armored < bare, `${armored} vs ${bare}`);
   c = scene('alien', 100, gear);
+  // OVE-52 applyFighterState refreshes ai from temperament every turn —
+  // a raw ai='brave' stamp no longer sticks. Author bold so curve.aiTag
+  // stays brave and the equipped strike path is actually taken.
+  c.person.personality = Object.assign({}, c.person.personality, { temperament: 'bold' });
+  if (typeof G.applyFighterState === 'function') G.applyFighterState(c.ally);
   c.ally.ai = 'brave'; c.foe.mx = 3; c.foe.my = 3; c.foe.hp = c.foe.maxHp = 100;
   G.tbVillagerTurn(c.ally);
   T.ok('the actual equipped companion strike lands its weapon-powered damage', c.ally._dealt > 8, c.ally._dealt);
