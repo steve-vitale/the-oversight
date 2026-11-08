@@ -12,6 +12,57 @@ function observerIdentity(root) {
   return { observerDigest:digest(observerFiles.map(readText).join('\n')), contractDigest:digest(readText('scripts/balance-metrics.json')) };
 }
 const read = file => JSON.parse(file.endsWith('.gz') ? zlib.gunzipSync(fs.readFileSync(file)) : fs.readFileSync(file, 'utf8'));
+// REGISTRATION-NORMALIZED HARNESS DIGEST (sim-comparecontract-a, 2026-11-08):
+// a panel's rows are produced by runComparison plus the policies named in
+// options.policies. A registration for any OTHER policy cannot affect those
+// rows, so a harness revision that only adds/removes/changes registrations
+// for other policies must not invalidate a later compare. The digest below
+// strips such blocks; everything else — driver code, registrations for the
+// panel's own policies — is kept, so a behavior change still moves it.
+// A block is a maximal run of consecutive registration-ish lines (comment
+// lines, lines requiring a ./policies/ module, lines touching
+// POLICY_REGISTRY[); blank lines and non-registration code break blocks.
+// A block is stripped only when it registers >=1 policy id AND every id is
+// outside the panel's policies. Blocks with no identifiable ids are KEPT
+// (conservative: never strip what cannot be attributed). The
+// POLICY_REGISTRY object literal itself is not registration-ish (no bracket
+// after the name), so the core policy assignments are always kept.
+function registrationBlockPolicies(lines) {
+  const ids = new Set();
+  for (const line of lines) {
+    for (const m of line.matchAll(/POLICY_REGISTRY\[(['"])([^'"]+)\1\]/g)) ids.add(m[2]);
+    const dyn = line.match(/POLICY_REGISTRY\[\s*(?:(['"])([^'"]*)\1\s*\+\s*)?id\s*\]/);
+    if (dyn) {
+      const arr = line.match(/for\s*\(\s*const\s+id\s+of\s*\[([^\]]*)\]/);
+      if (arr) for (const m of arr[1].matchAll(/['"]([^'"]+)['"]/g)) ids.add((dyn[2] || '') + m[1]);
+    }
+  }
+  return ids;
+}
+function registrationNormalizedSource(text, policies) {
+  const keep = new Set(policies || []);
+  const lines = text.split('\n');
+  const isReg = l => /^\s*\/\//.test(l) || /require\(['"]\.\/policies\//.test(l) || /POLICY_REGISTRY\[/.test(l);
+  const out = [];
+  for (let i = 0; i < lines.length;) {
+    if (!isReg(lines[i])) { out.push(lines[i]); i++; continue; }
+    let j = i;
+    while (j < lines.length && isReg(lines[j])) j++;
+    const ids = registrationBlockPolicies(lines.slice(i, j));
+    if (ids.size && [...ids].every(id => !keep.has(id))) {
+      // Registration-only for other policies: strip the block and the one
+      // blank line that separated it from the kept text above, so a block
+      // added with a leading blank separator normalizes identically.
+      if (out.length && /^\s*$/.test(out[out.length - 1])) out.pop();
+      i = j; continue;
+    }
+    out.push(...lines.slice(i, j)); i = j;
+  }
+  return out.join('\n');
+}
+function registrationDigest(root, policies) {
+  return digest(registrationNormalizedSource(fs.readFileSync(path.join(root, 'scripts/sweep-compare.js'), 'utf8'), policies));
+}
 function manifest(root) {
   const out = {};
   function walk(dir) { for (const e of fs.readdirSync(dir, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name))) {
@@ -286,7 +337,7 @@ async function run() {
   const observed = results.filter(x => x.identity.observe === '1').map(x => x.result).sort((a, b) => a.row.policy.localeCompare(b.row.policy) || a.row.seed - b.row.seed);
   const rows = observed.filter(r => !r.excluded), exclusions = observed.filter(r => r.excluded), neutrality = proofs.filter(p => p.kind !== 'selection');
   const sourcesStable = JSON.stringify(sources) === JSON.stringify(manifest(root)) && observerDigest === observerHash() && contractDigest === observerIdentity(observerRoot).contractDigest;
-  const panel = { schemaVersion: 1, flagCoverage:{discovered:require('./lib/simulation-flags').discover(root,sources,flagNames),rule:'Legacy flags retain explicit null defaults; additional source-declared flags enter cache inputs when set. Discovery names remain source-bound metadata, not a changed simulation setting.'}, sourceHeadStart, sourceHeadEnd: head(), sourceDigest, observerDigest, contractDigest, sources, options, validity: { sourcesStable, neutrality }, reused, rows };
+  const panel = { schemaVersion: 1, flagCoverage:{discovered:require('./lib/simulation-flags').discover(root,sources,flagNames),rule:'Legacy flags retain explicit null defaults; additional source-declared flags enter cache inputs when set. Discovery names remain source-bound metadata, not a changed simulation setting.'}, sourceHeadStart, sourceHeadEnd: head(), sourceDigest, observerDigest, contractDigest, registrationDigest: registrationDigest(root, options.policies), sources, options, validity: { sourcesStable, neutrality }, reused, rows };
   if (options.occupation != null) { panel.exclusions = exclusions; panel.validity.selection = proofs.filter(p => p.kind === 'selection'); }
   fs.writeFileSync(path.join(out, 'panel.json.gz'), zlib.gzipSync(JSON.stringify(panel) + '\n'));
   console.log(`\nSaved ${out}; ${rows.length} cases, ${reused} cached jobs.`);
@@ -312,5 +363,5 @@ function sourceHead(root) {
   if (!fs.existsSync(path.join(root, '.git'))) return null;
   return cp.execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
 }
-module.exports = { install, manifest, sourceHead, intakeSnapshot, observerIdentity, observerFiles, communityLossCoverage, deathMetrics, tableSitting };
+module.exports = { install, manifest, sourceHead, intakeSnapshot, observerIdentity, observerFiles, communityLossCoverage, deathMetrics, tableSitting, registrationNormalizedSource, registrationDigest };
 if (require.main === module) main().catch(e => { console.error(e.stack); process.exitCode = 1; });

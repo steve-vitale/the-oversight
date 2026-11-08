@@ -145,6 +145,7 @@ function comparePanels(before, after, options) {
   const flagVal = (panel, f) => (panel.options.flags && Object.hasOwn(panel.options.flags, f)) ? panel.options.flags[f] : null;
   const intervention = declared.length ? { declared, before: Object.fromEntries(declared.map(f => [f, flagVal(before, f)])), after: Object.fromEntries(declared.map(f => [f, flagVal(after, f)])) } : null;
   const withIntervention = report => intervention ? { ...report, interventionFlags: intervention } : report;
+  const withRegistration = report => registrationExemptions.length ? { ...report, registrationExemptions } : report;
   if (before.contractDigest !== contractDigest || after.contractDigest !== contractDigest) errors.push('Metric contract does not match this comparator');
   for (const field of ['schemaVersion', 'observerDigest', 'contractDigest']) if (before[field] !== after[field]) errors.push('Different ' + field);
   for (const field of ['days', 'policies', 'seeds', 'region', 'origin', 'occupation', 'flags', 'nodeVersion']) {
@@ -153,8 +154,36 @@ function comparePanels(before, after, options) {
       if (JSON.stringify(strip(before.options.flags)) !== JSON.stringify(strip(after.options.flags))) errors.push('Unmatched flags');
     } else if (JSON.stringify(before.options[field]) !== JSON.stringify(after.options[field])) errors.push('Unmatched ' + field);
   }
+  // COMPARE-CONTRACT (sim-comparecontract-a, 2026-11-08): registration-only
+  // harness churn is tolerated, and RECORDED — never silent. Two narrow
+  // cases, both provable from the panels themselves:
+  // (1) scripts/sweep-compare.js differs but both panels carry the same
+  // registration-normalized harness digest: the difference is confined to
+  // registrations for policies neither panel uses, so it cannot have
+  // produced any compared row. Panels built with older code lack the field
+  // and keep the strict raw comparison.
+  // (2) a file under scripts/policies/ present in exactly one panel (a pure
+  // addition): it cannot have produced any row in the leg that lacks it, and
+  // no used policy can require it — a missing require throws, the try/catch
+  // registration fails, and the build errors Unknown policy. Both legs built
+  // successfully with identical options.policies, so no used policy needs it.
+  // Everything else still invalidates: a modified policy file, a modified
+  // sim-harness.js, a behavior change in sweep-compare.js, a re-pointed
+  // registration for a USED policy. Behavior-changing harness changes still
+  // go through the explicit-declaration lane (lib/harness-comparison.js).
+  const registrationExemptions = [];
+  const regDigestOf = p => (typeof p.registrationDigest === 'string' && p.registrationDigest ? p.registrationDigest : null);
   for (const f of new Set([...Object.keys(before.sources), ...Object.keys(after.sources)])) {
-    if (f.startsWith('scripts/') && before.sources[f] !== after.sources[f]) errors.push('Policy/harness changed: ' + f);
+    if (!f.startsWith('scripts/') || before.sources[f] === after.sources[f]) continue;
+    if (f === 'scripts/sweep-compare.js' && regDigestOf(before) && regDigestOf(after) && regDigestOf(before) === regDigestOf(after)) {
+      registrationExemptions.push(f + ' (registration-only: normalized harness digests agree)');
+      continue;
+    }
+    if (f.startsWith('scripts/policies/') && (before.sources[f] === undefined) !== (after.sources[f] === undefined)) {
+      registrationExemptions.push(f + ' (added policy file, unused by either panel)');
+      continue;
+    }
+    errors.push('Policy/harness changed: ' + f);
   }
   const validate = panel => {
     errors.push(...cohorts.validate(panel));
@@ -164,7 +193,7 @@ function comparePanels(before, after, options) {
   validate(before); validate(after);
   const bm = new Map(before.rows.map(r => [caseKey(r), r]));
   if (!after.options.occupation && after.rows.some(r => !bm.has(caseKey(r)))) errors.push('Unmatched cases');
-  if (errors.length) return withIntervention({ decision: 'invalid', errors: [...new Set(errors)], policies: [] });
+  if (errors.length) return withRegistration(withIntervention({ decision: 'invalid', errors: [...new Set(errors)], policies: [] }));
   const policies = after.options.policies.map(policy => {
     const all = after.rows.filter(r => r.row.policy === policy), rs = all.filter(r => bm.has(caseKey(r)));
     const metrics = contract.metrics.map(m => compareMetric(rs.map(r => bm.get(caseKey(r)).metrics[m.id]), rs.map(r => r.metrics[m.id]), m, policy + '/' + m.id));
@@ -181,12 +210,13 @@ function comparePanels(before, after, options) {
     }
     return result;
   });
-  return withIntervention({ schemaVersion: 1, decision: policies.some(p => p.decision === 'review_required') ? 'review_required' : 'no_material_signal', errors: [], policies,
-    note: 'No weighted score. Exploratory paired intervals are not adjusted for multiple metrics. No material signal is not proof of equivalence; review tradeoffs and holdout evidence. Win-rate movement prompts investigation in either direction, never an automatic regression or improvement judgment.' });
+  return withRegistration(withIntervention({ schemaVersion: 1, decision: policies.some(p => p.decision === 'review_required') ? 'review_required' : 'no_material_signal', errors: [], policies,
+    note: 'No weighted score. Exploratory paired intervals are not adjusted for multiple metrics. No material signal is not proof of equivalence; review tradeoffs and holdout evidence. Win-rate movement prompts investigation in either direction, never an automatic regression or improvement judgment.' }));
 }
 function markdown(report) {
   const lines = [(report.source === 'sweep-corpus' ? '# Sweep-corpus comparison (not a balanced-panel verdict)' : '# Balanced campaign comparison'), '', '**Decision: ' + report.decision + '**', '', ...(report.errors || []).map(e => '- ' + e)];
   if (report.interventionFlags) lines.push('', `Declared intervention flags exempted from the flags match: ${report.interventionFlags.declared.join(', ')} (before ${JSON.stringify(report.interventionFlags.before)}; after ${JSON.stringify(report.interventionFlags.after)}).`);
+  if (report.registrationExemptions) lines.push('', 'Registration-only harness churn tolerated (recorded, not silent): ' + report.registrationExemptions.join('; ') + '.');
   for (const p of report.policies) {
     if (p.cohort) lines.push('', `Occupation ${p.cohort.occupation}: before ${p.cohort.before.played}/${p.cohort.before.attempted} played (${p.cohort.before.excluded} excluded); after ${p.cohort.after.played}/${p.cohort.after.attempted} played (${p.cohort.after.excluded} excluded). Only ${p.cohort.pairedPlayed} matched played cases enter metrics. Availability/roster changes: ${JSON.stringify({ unavailableBefore: p.cohort.unavailableBefore, unavailableAfter: p.cohort.unavailableAfter, rosterChanged: p.cohort.rosterChanged })}.`);
     lines.push('', '## ' + p.policy, '', `${p.cases} paired cases; ${p.confirmationSized ? 'confirmation-sized' : 'screen only'}; ${p.decision}.`, '', '| Metric | Before | After | Paired delta | 95% exploratory interval | Pairs | Status |', '| --- | ---: | ---: | ---: | --- | ---: | --- |');
