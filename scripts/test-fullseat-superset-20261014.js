@@ -9,6 +9,11 @@
 // answered — the full seat now REQUIRES national/global scale, so the
 // fixture below sets nationalLive before asserting full. The scale term
 // itself is proven exhaustively by scripts/test-scalegate-a.js.
+// UPDATE 2026-11-08 (ladder leg 2): the full seat ALSO requires National
+// ladder standing (40 counted points) + a delivered capstone deed, and
+// foodDeeds is sentimentTaught ALONE — the surge is no longer a bar. The
+// fixture rigs National + a trade-charter capstone below, and the surge
+// case now asserts the gate STAYS ok without a spent surge.
 'use strict';
 const K = require('./godpath/lib');
 (async () => {
@@ -37,15 +42,21 @@ const K = require('./godpath/lib');
   pg.sentimentTaught = true; Game.state.scholar.prog.feastSurgeUsed = true;
   T.ok('food deeds but stage 0 -> not full', !Game.deedGateReady().ok);
 
-  // stage 2 + food deeds -> full (national standing required since 2026-10-27)
+  // stage 2 + food deeds -> full (national standing required since 2026-10-27;
+  // National ladder + delivered capstone required since ladder leg 2)
   Game.state.systemArrived = true; Game.state.scholar.integration = 45;
   Game.state.nationalLive = true;
+  // LEG 2: Fight 24 (wave-3 ledger 48) + Forage 16 (scholar field XP 192) = 40.
+  Game.state.waveLedger = { 3: { points: 48, perType: {}, perTypeX: {} } };
+  Game.playerTracks().field.xp = 192;
+  pg.ladderCapstone = 'trade_charter';
   T.ok('setup: integration stage 2', Game.integrationStage() === 2);
   T.ok('setup: scaleRank national', Game.scaleRank() === 'national');
   T.ok('stage 2 + food deeds + bars -> full', Game.deedGateReady().ok && Game.tableSeat().seat === 'full');
 
-  // stage 2 but missing a food deed -> not full
+  // stage 2, no feast surge -> STILL full (leg 2: the surge is not a bar;
+  // foodDeeds is sentimentTaught alone, and the lesson is taught).
   Game.state.scholar.prog.feastSurgeUsed = false;
-  T.ok('stage 2, no feast surge -> not full', !Game.deedGateReady().ok);
+  T.ok('stage 2, no feast surge -> still full (surge is not a bar)', Game.deedGateReady().ok && Game.tableSeat().seat === 'full', JSON.stringify(Game.deedGateReady()));
   T.done();
 })();
