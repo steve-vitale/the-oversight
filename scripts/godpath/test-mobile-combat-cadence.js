@@ -6,6 +6,10 @@ const K=require('./lib'),T=K.reporter('mobile combat cadence');
  const saves=new Map();global.localStorage={getItem:k=>saves.get(String(k))??null,setItem:(k,v)=>saves.set(String(k),String(v)),removeItem:k=>saves.delete(String(k)),key:i=>[...saves.keys()][i]??null,get length(){return saves.size;}};
  const G=await K.load({seed:181026,narration:true});K.newRun(G);G.startCombat('gallowdeer');
  const f=G.tbfight,p=G.tbFighter('p');
+ // Solo duel fixture: Haven joins seat villagers into the opening order, but
+ // this proof asserts monster announce → Continue resume without a round wrap.
+ f.fighters=f.fighters.filter(x=>x.kind!=='villager');
+ f.order=f.order.filter(k=>G.tbFighter(k));
  f.turnIdx=f.order.indexOf('p');p.moveLeft=0;p.acted=false;
  const oldTimer=global.setTimeout,oldWindow=global.window,oldEvent=global.CustomEvent;
  const tasks=[],events=[],actedKeys=[];let acts=0;
