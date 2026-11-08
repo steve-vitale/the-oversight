@@ -1,0 +1,81 @@
+=== r113-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Anthony (gen_327izcs) occ=fishing guide --
+OPENING: "Have you ever hurt someone? Since all this started."
+YOU: [ans:q_fight:a_tell] "Yes. I don't want to talk about the details. But yes."
+THEM: They nod, slow. "Okay. Thank you for telling me. That couldn't have been easy to say."
+YOU: [goon] "Go on."
+THEM: "I don't keep score on that. Score-keeping is how you stop sleeping. I do what the day needs and I don't rehearse it after."
+YOU: [goon] "Go on."
+THEM: "...I should say, I trade in what I know. My knowledge for yours. Or food, if you're short on secrets."
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Chickweed — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "Well. Habiba? An interpreter, back before. Solid person."
+YOU: [dlg:more] "Go on."
+THEM: "Anjali is back. Walked in like they'd never left."
+YOU: [dlg:react] (listen)
+THEM: "Interesting — Khadija? A Beekeeper, back before. Solid person."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Between us — Still on the gossip."
+closing: "File that under 'productive.' Loosely defined."
+
+-- Anjali (gen_yj0osdq) occ=hunting guide --
+OPENING: "About the sickness I'm fighting — the need hasn't gone anywhere. I'm still asking."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to them, on the same side of the Haven door, to help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Thank you. Whatever you can do — thank you."
+YOU: [goon] "Yeah?"
+THEM: "...I should say, I trade in what I know. My knowledge for yours. Or food, if you're short on secrets."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Neem. Leaf, stem, smell. You won't forget it now."
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "People are talking about me. Take it for what it's worth."
+YOU: [goon] "What else did you hear?"
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Bittersweet Nightshade. Leaf, stem, smell. You won't forget it now."
+YOU: [dlg:more] "Go on."
+THEM: "People are talking about Mateo. Take it for what it's worth."
+closing: "Don't be a stranger."
+
+-- Habiba (gen_d2rmlwx) occ=interpreter --
+OPENING: "Never mind the sickness I'm fighting — we got it handled. Thanks anyway."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Good question." "People are talking about Mateo. Take it for what it's worth."
+YOU: [goon] "Who told you that?"
+THEM: The conversation cools to something businesslike.
+YOU: [dlg:more] "Tell me more."
+THEM: "Anthony? A fishing guide, back before. Solid person."
+YOU: [dlg:react] (listen)
+THEM: "So." They look at the fire for a moment.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the gossip."
+YOU: [goon] "Who told you that?"
+THEM: Their voice loosens. The guardedness thins.
+YOU: [goon] "Who told you that?"
+THEM: "Did you sleep? I kept hearing things out past the treeline."
+closing: "Take care of yourself."
+
+-- Khadija (gen_4plz7m8) occ=Beekeeper --
+OPENING: Arguments cost calories. I do the math out loud until people stop.
+YOU: [dlg:more] "Tell me more."
+THEM: "You two sort it out, or I will, and nobody likes my version."
+YOU: [dlg:react] (listen)
+THEM: "Peace isn't the absence of fighting. It's the presence of dinner."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on wanting to keep the peace."
+YOU: [goon] "What would that look like?"
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [goon] "What would that look like?"
+THEM: They glance away, then back. Different subject, same worry:
+YOU: [goon] "What would that look like?"
+THEM: "Did you leave someone behind? ...Sorry. You don't have to answer that."
+YOU: [ans:q_left_behind:a_yes] "Yes."
+THEM: Just: "Yeah." A long quiet. "Me too."
+YOU: [goon] "What would that look like?"
+THEM: "I don't talk about that. Not because it's secret — because saying it out loud makes it real in a way I can't afford yet. Someday. Not today."
+closing: "See you at the fire."

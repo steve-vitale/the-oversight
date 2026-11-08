@@ -1,0 +1,80 @@
+=== r113-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Ashley (gen_7ggxoqh) occ=arborist --
+OPENING: "Never mind the sickness I'm fighting — we got it handled. Thanks anyway."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "Good question." "People ask what I did before. I was an arborist. Now I'm... whatever today needs."
+YOU: [goon] "I'm listening."
+THEM: That could have stung. They let it pass — you've been kind before.
+YOU: [dlg:more] "I’m listening."
+THEM: "I wonder if Columbus, Ohio looks like this now. Empty. Quiet. Or if it's worse there."
+YOU: [dlg:react] (listen)
+THEM: "Do you ever wonder what the aliens eat? Like, do they have potlucks?"
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on your story."
+YOU: [silence] "..."
+THEM: You say nothing. Neither do they, for a while — and it's fine.
+YOU: [goon] "I'm listening."
+THEM: "I should go. You know where to find me."
+
+-- Lucia (gen_i8y761p) occ=fishing guide --
+OPENING: "Can I tell you something? Before the scattering, I froze when it mattered. I think about it every day."
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Good question." "The geese chase everyone but Ashley. They part for Ashley like water."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Out there? With YOU leading? ...Let me think about it."
+YOU: [dlg:more] "Tell me more."
+THEM: "Did you hear? Aki won Siege on the cameras. People are still talking about it."
+YOU: [dlg:react] (listen)
+THEM: "So." They look at the fire for a moment.
+YOU: [menu:more] More things to say (1/2)
+THEM: (menu page turned)
+YOU: [dlg:doubt] "That doesn't quite add up."
+THEM: "...What's that supposed to mean?" Their voice goes careful.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+YOU: [alive:event:show] "The show — did you see it?"
+THEM: "Siege. They just... took Aki. Came back like nothing happened. It wasn't nothing."
+closing: "Don't be a stranger."
+
+-- Fatma (gen_ss6lmwj) occ=postal worker --
+OPENING: "Water's almost gone — 5 liters. I need someone to haul water with me at first light. Two of us, half the trips. Will you come?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to your partner, on the same side of the Haven door.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Wait — I'm away from Haven, out on the road. I can't promise a dawn meet while I'm out — find me when I'm back, and we'll set it then."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Dog Rose Hip. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "a ridge with a view for miles — I'll show you on the map sometime. It's real."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that water haul."
+YOU: [goon] "Go on."
+THEM: "What scares you most about what's happening? The real answer."
+YOU: [ans:q_system_fear:a_tell] "That it's intentional. That someone's watching and this is all... on purpose."
+THEM: They go quiet. "Yeah. Me too. The randomness would almost be kinder."
+YOU: [goon] "Go on."
+THEM: "That we're interesting to it. Being watched means being kept. I'd rather be boring to the sky. Boring things get left alone."
+closing: "Good talk."
+
+-- Desmond (desmond_clarke) occ=sign painter --
+OPENING: "Can I tell you something? Before the scattering, I ran when I should have stayed. I think about it every day."
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Groundnut — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+YOU: [goon] "Yeah?"
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "Saw things with too many joints. Give them room. That's the whole lesson."
+YOU: [dlg:react] (listen)
+THEM: "Anyway." A small smile.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on what they confided."
+YOU: [goon] "Yeah?"
+THEM: "What did you do for fun? Before. The thing you'd do on a perfect Saturday."
+YOU: [ans:q_fun:a_people] "Nothing fancy. Just — people. Being around my people."
+THEM: "The free things. Turns out they were the expensive ones."
+YOU: [goon] "Yeah?"
+THEM: "I was a sign painter — fun was whatever I could steal between shifts. Now fun is watching the fire and not being afraid. It's a downgrade and an upgrade."
+closing: "Okay! Moving again. Can't sit still."

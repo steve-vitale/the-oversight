@@ -1,0 +1,82 @@
+=== r113-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Emma (emma_larsen) occ=Veterinarian --
+OPENING: "I don't know what to do with my hands today."
+YOU: [silence] "..."
+THEM: They glance at the fire, then back. The quiet doesn't seem to bother them.
+YOU: [goon] "Take your time."
+THEM: They let that thread drop — for now.
+YOU: [goon] "Take your time."
+THEM: "What's something you're good at that nobody here knows about?"
+YOU: [ans:q_skill:a_tell] "I'm better with my hands than people expect. You'll see."
+THEM: "Noted. Filing that under 'extremely useful.' The village needs that."
+YOU: [goon] "Take your time."
+THEM: "I can do making do. Not well — well enough that nobody's died from it yet. That's my whole résumé now: nobody's died from it yet."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "an old trapline — I'll show you on the map sometime. It's real."
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "a ridge with a view for miles — I'll show you on the map sometime. It's real."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Someone should watch your back. Might as well be me."
+closing: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+
+-- Giulia (giulia_bianchi) occ=crossing guard --
+OPENING: "They'd tell me to keep working. So I'm working. That's the whole plan."
+YOU: [dlg:comfort] "You alright?"
+THEM: "Thanks. ...Thanks for saying that."
+YOU: [ask:gossip] "Any good gossip? I'm bored."
+THEM: "You want to know about that? Okay." "Mara is back. Walked in like they'd never left."
+YOU: [goon] "You don't have to say it all at once."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [dlg:more] "I’m listening."
+THEM: "Aki is back. Walked in like they'd never left."
+YOU: [dlg:react] (listen)
+THEM: "Tashi headed out to find someone."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the gossip."
+YOU: [goon] "You don't have to say it all at once."
+THEM: They relax, a fraction. This is going well.
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "...Fine. This had better be worth it."
+closing: "Talking helps. A little. Thank you."
+
+-- Tashi (tashi_sherpa) occ=arborist --
+OPENING: Tashi speaks only 🇮🇳 Hindi. No shared words at all — just eyes, hands, and patience.
+They speak. You understand none of it. "Fuck you." — they grin, proud of the one English they know.
+YOU: [nv:nod] (nod slowly)
+THEM: They answer at length. They nod back, slowly.
+YOU: [nv:smile] (smile)
+THEM: They answer at length. They smile back, slower this time, like it just landed.
+YOU: [nv:pointself] (point: you, them, together)
+THEM: They answer at length. You press a hand to your own chest, then point at them. Together — they get it.
+YOU: [nv:listen] (listen hard — catch words)
+THEM: You listen hard, watching their mouth shape the words. Sounds, and the shape of meaning just out of reach.
+YOU: [speak_back] (try your Hindi)
+THEM: Tashi laughs — with you, mostly. "Good try! Again — यह सच है।." They walk you through it, patient as sunrise.
+YOU: [goon] (watch quietly)
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [goon] (watch quietly)
+THEM: "Alright — I should get back to it."
+(no pick — winding down)
+(stall menu: leave|nv:nod)
+closing: They press their palms together — thanks, or goodbye, or both. Then turn back to their own thoughts.
+
+-- Mara (mara_vasquez) occ=army medic --
+OPENING: "Every laugh out there feels wrong today. Then I feel wrong for thinking it. That's my read."
+YOU: [silence] "..."
+THEM: They fill the quiet. "Anyway — where was I?"
+YOU: [goon] "You don't have to say it all at once."
+THEM: They glance away, then back. Different subject, same worry:
+YOU: [goon] "You don't have to say it all at once."
+THEM: "Any regrets? The real kind, not the small stuff."
+YOU: [ans:q_regret:a_tell] "I didn't say what I needed to say. To someone. Now I can't."
+THEM: Quiet. "Yeah. I think everyone's carrying one of those."
+YOU: [goon] "You don't have to say it all at once."
+THEM: "I regret the ordinary days I rushed through. All those San Diego, California mornings I spent annoyed at small things. I'd pay anything for one annoyed morning now. Anyway."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Not right now. I've got my own things to handle."
+YOU: [dlg:comfort] "You alright?"
+THEM: They shake their head, then nod — both true at once. "Talk to me a bit. That helps more than anything."
+YOU: [ask:gossip] "Any good gossip? I'm bored."
+THEM: "You want to know about that? Okay." "Honestly? Aki is back. Walked in like they'd never left."
+closing: "...Thanks for being here. That's all."

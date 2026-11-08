@@ -1,0 +1,80 @@
+=== r113-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Sal (gen_ap42mif) occ=bus driver --
+OPENING: "We're eating through stores faster than we replace them. Forage with me tomorrow? I know the old burn east of camp."
+YOU: [goon] "I'm listening."
+THEM: Sal has an edge today — something curdled.
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Your partner is inside the Haven hall. Go through the door to meet them.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Good. The old burn east of camp, morning, early. Bring the big pack if you have it."
+YOU: [goon] "I'm listening."
+THEM: "Come see what I found. You won't believe it."
+YOU: [silence] "..."
+THEM: You say nothing. Neither do they, for a while — and it's fine.
+YOU: [goon] "I'm listening."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [goon] "I'm listening."
+THEM: "Are you angry? At whoever did this. At the sky. At anything."
+YOU: [ans:q_angry:a_yes] "Furious. Most days."
+THEM: "Good. Anger's fuel. Just — point it somewhere useful."
+closing: "Take care of yourself."
+
+-- Sa (gen_drxr6ld) occ=florist --
+OPENING: "I can't reach this properly. Could you clean it out for me? Please."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to them, on the same side of the Haven door, to help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [goon] "Yeah?"
+THEM: "Come get air with me. I need to think out loud."
+YOU: [silence] "..."
+THEM: "You're a good listener, you know that?" A tired smile.
+YOU: [goon] "Yeah?"
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [goon] "Yeah?"
+THEM: "What got you through the first week? The very first days."
+YOU: [ans:q_first_week:a_shock] "Honestly? Shock. Just kept moving."
+THEM: "Shock's underrated. It's the body's way of buying you time."
+YOU: [goon] "Yeah?"
+THEM: "Honestly? I don't think anything got me through. I just didn't stop. Some mornings that's the whole story — you keep not-stopping until not-stopping feels like a plan."
+closing: "See you at the fire."
+
+-- Nadia (nadia_khoury) occ=radio DJ --
+OPENING: "Never mind the sickness I'm fighting — we got it handled. Thanks anyway. This cut — I can't clean it properly one-handed. Could you take a look?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to them, on the same side of the Haven door, to help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [goon] "Yeah?"
+THEM: "I've heard good things about Ashford. We should link with them — we'd be stronger together."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Good question." "Did you hear? You won The Pit on the cameras. People are still talking about it."
+YOU: [goon] "Who told you that?"
+THEM: Their voice loosens. The guardedness thins.
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Not right now. I've got my own things to handle."
+YOU: [dlg:more] "Go on."
+THEM: "People need to stop whispering about Vasyl. They've done nothing wrong."
+closing: "Good talk."
+
+-- Vasyl (vasyl_shevchenko) occ=infantry soldier --
+OPENING: Vasyl speaks only 🇺🇦 Ukrainian. No shared words at all — just eyes, hands, and patience.
+They speak. You understand none of it.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+YOU: [nv:nod] (nod slowly)
+THEM: They answer at length. They nod, holding your gaze a beat longer.
+YOU: [nv:smile] (smile)
+THEM: They answer at length. A smile, tired but real. "Please?" — they grin, proud of the one English they know.
+YOU: [nv:pointself] (point: you, them, together)
+THEM: They answer at length. You press a hand to your own chest, then point at them. Together — they get it.
+YOU: [nv:listen] (listen hard — catch words)
+THEM: You listen hard, watching their mouth shape the words. Sounds, and the shape of meaning just out of reach.
+YOU: [goon] (watch quietly)
+THEM: Their gestures slow — the conversation thinning like light at dusk.
+(no pick — winding down)
+(stall menu: leave|nv:nod)
+closing: They press their palms together — thanks, or goodbye, or both. Then turn back to their own thoughts.
