@@ -5,6 +5,8 @@
 //   - objState()
 //   - objOf(vid)
 //   - objPick(vid, hx, hy)
+//   - objRefreshPick(vid, hx, hy, opts)
+//   - objNeedsEmergencyPick(vid)
 //   - objDanger(vid, tx, ty, hx, hy)
 //   - objDangerBelief(vid)
 //   - objMaybeDepart(rid, node, atHaven, hx, hy)
@@ -15,6 +17,7 @@
 //   - objHealGate(vid, obj, hx, hy, playerAtHaven)
 // rules:
 //   - objectives_drive_departures: npcNodeTravel's old dice triggers are replaced by objMaybeDepart (code: villager-objectives.js)
+//   - midday_repick_event_only: idle/done mid-day objPick runs only via objRefreshPick when commit day/part is stale or a perception flag fired; dawn force-refreshes (code: objRefreshPick, VILLAGER-BRAIN seam 9)
 //   - night_departure_ban: nobody sets out at night, hard rule kept from base (code: villager-objectives.js)
 //   - danger_gates_departure: every departure verdicts go / ask / tighten / defer via objDanger (code: villager-objectives.js)
 //   - danger_heard_filtered: door, rally and safety all read danger through objDangerBelief — gossip counts only if this villager is in its heard list (code: villager-objectives.js, VILLAGER-BRAIN seam 4)
@@ -262,6 +265,44 @@
       var o = this.objState();
       if (!o[vid]) o[vid] = { kind: 'idle', state: 'idle' };
       return o[vid];
+    },
+
+    // Hard body gates that must interrupt a settled mid-day lead (escape /
+    // rest / eat). These are emergencies inside the one pass (VILLAGER-BRAIN
+    // §5), not a lottery re-roll — but they still enter through objPick so the
+    // gate log + commit stay coherent.
+    objNeedsEmergencyPick(vid) {
+      try {
+        var goal = null;
+        try { goal = this.npcGoal(vid); } catch (e) {}
+        if (goal === 'escape') return true;
+        var n = {};
+        try { n = this.npcNeeds(vid) || {}; } catch (e) {}
+        if ((n.energy || 70) < 35) return true;
+        if ((n.hunger || 0) > 55) {
+          var pantry = 0;
+          try { pantry = this.pantryKcalLive(this.state.village); } catch (e) {}
+          if (pantry > 500) return true;
+        }
+      } catch (e) {}
+      return false;
+    },
+
+    // OVE-38 / Candidate B (seam 9): mid-day idle/done may call objPick only
+    // when the dawn commitment's day/part is stale, a perception flag fired,
+    // or an emergency body gate must interrupt. Dawn callers pass { dawn: true }.
+    // Direct objPick stays available for tests/panels.
+    objRefreshPick(vid, hx, hy, opts) {
+      opts = opts || {};
+      try {
+        if (typeof this.vbrainOwnsDawn === 'function' && this.vbrainOwnsDawn() &&
+            typeof this.vbrainShouldRefresh === 'function' &&
+            !this.vbrainShouldRefresh(vid, opts) &&
+            !this.objNeedsEmergencyPick(vid)) {
+          return this.objOf(vid);
+        }
+      } catch (e) {}
+      return this.objPick(vid, hx, hy);
     },
 
     // ---------- 1. OBJECTIVE PICKING ----------
@@ -708,12 +749,24 @@
         for (var i = 0; i < list.length; i++) {
           if (list[i] && list[i].mid === mid && list[i].tx === tx && list[i].ty === ty) {
             list[i].day = day; list[i].part = part;
+            try {
+              if (typeof this.vbrainMarkPerception === 'function') {
+                this.vbrainMarkPerception(vid, 'monster_sighting');
+              }
+            } catch (e) {}
             return list[i];
           }
         }
         var entry = { mid: mid, tx: tx, ty: ty, day: day, part: part };
         list.push(entry);
         while (list.length > 4) list.shift();
+        // Seam 9: a fought-monster memory is a perception-changing event —
+        // authorize one mid-day re-score of this villager's lead.
+        try {
+          if (typeof this.vbrainMarkPerception === 'function') {
+            this.vbrainMarkPerception(vid, 'monster_sighting');
+          }
+        } catch (e) {}
         return entry;
       } catch (e) { return null; }
     },
@@ -1141,12 +1194,13 @@
         if (_hg && _hg.day === ((this.state.scholar || {}).day || 0) && _hg.satOut) return;
       } catch (e) {}
       var o = this.objOf(rid);
-      // idle or done → pick fresh (dawn re-pick happens in objTick, but a
-      // villager can finish mid-day and should decide again, not sit)
+      // idle or done → refresh only when commit day/part is stale or a
+      // perception flag fired (OVE-38 / seam 9). Dawn force-refresh is in
+      // objTick; finishing mid-day without a new perception keeps the lead.
       if (!o.kind || o.kind === 'idle' || o.state === 'done' || o.state === 'indoor') {
         // indoor objectives are handled by objTick; nothing to depart for
         if (o.state === 'indoor') return;
-        this.objPick(rid, hx, hy);
+        this.objRefreshPick(rid, hx, hy);
         o = this.objOf(rid);
         if (!o.kind || o.kind === 'idle' || o.indoor || o.state === 'indoor') return;
       }
@@ -1435,7 +1489,9 @@
                 try { this.objReturnEffect(rid, 'haul'); } catch (e) {}
                 o = this.objOf(rid);
               }
-              if (!o.kind || o.kind === 'idle' || o.state === 'done' || o.state === 'returning') this.objPick(rid, hx, hy);
+              if (!o.kind || o.kind === 'idle' || o.state === 'done' || o.state === 'returning') {
+                this.objRefreshPick(rid, hx, hy, { dawn: true });
+              }
             }
           } catch (e) {}
           o = this.objOf(rid);
@@ -1449,10 +1505,9 @@
         try { node = this.npcNode(rid); } catch (e) { continue; }
         if (!node || node.nx !== hx || node.ny !== hy) continue;
         if (!o.indoor || o.state !== 'indoor') {
-          // no indoor objective: make sure they have one rather than sitting
-          // in the decision gap (objMaybeDepart already ran this part; the
-          // indoor set is the fallback life, not a second departure roll)
-          if (!o.kind || o.kind === 'idle' || o.state === 'done') this.objPick(rid, hx, hy);
+          // no indoor objective: mid-day refresh only when commit is stale or
+          // a perception flag fired (OVE-38). Dawn already force-refreshed above.
+          if (!o.kind || o.kind === 'idle' || o.state === 'done') this.objRefreshPick(rid, hx, hy);
           o = this.objOf(rid);
           // a fresh indoor pick starts living it THIS part, not next
           if (!o.indoor || o.state !== 'indoor') continue;
