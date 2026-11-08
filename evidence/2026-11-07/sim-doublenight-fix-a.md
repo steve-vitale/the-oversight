@@ -160,7 +160,16 @@ competent/98067 match. Panel-after + compare run in the resume run.
 PENDING — the after-runner was still in P1 trace0/trace1 at end of run.
 Partial after-corpus committed at 05:06Z: P1 trace-off 7/8 seeds
 (98067, 98052, 98079, 98062, 98034, 98095, 98022 done; 98028 in flight),
-trace-on 0/8, F1 not started, no analysis.json yet. The resume run must:
+trace-on 0/8, F1 not started, no analysis.json yet.
+BASE WARNING (05:07Z): master moved a04a6c0fc → 2ce918e0e DURING this
+run, AFTER the fix commit. This branch was NOT rebased at closeout
+because the after-runner was still mid-flight — rebasing under it would
+have let the next sweep invocation load different game code than the
+trace0 phase and silently mixed bases inside the after corpus. The
+resume run must FIRST rebase this branch onto current master, re-run
+the proof test on the rebased tip, DISCARD any uncommitted
+after-corpus files written after commit f7c2f0272 (old-base), and only
+then resume. The resume run must:
 1. `bash scripts/run-doublenight-fix-a.sh
    evidence/2026-11-07/doublenight-fix-a-corpus-after
    evidence/2026-11-07/doublenight-fix-a-corpus-before`
