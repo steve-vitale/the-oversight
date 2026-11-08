@@ -1415,6 +1415,21 @@ Perception system. Proximity hints, spotting.
 
 **Consumes:** scholar.perception
 
+### person-trust (`person-trust.js`)
+Per-villager trust map writers — each person holds a map of who THEY trust, written only from lived interaction (shared meals/visits/feasts via bondAdd, conversation consequences toward the scholar, lessons, surviving a fight together). Village-wide scholar trust (state.village.trust) stays a separate number. Closes the dead trustedAnyone bonds gate (villager-goals.js) without changing bond-initiation's warmth window.
+
+**Provides:** bumpPersonTrust(fromVid, towardVid, n, reason) -> new value, personTrustOf(fromVid, towardVid) -> number (unset reads as 0), personTrustCensus() -> {entries, maxTrust, trustedAnyoneN, pairs}
+
+**Rules:**
+- persontrust_lived_only: the map moves only from lived events (bondAdd warmth that actually applied, resolveConsequence trust deltas, successful teachSkill, noteSharedFight survivors) — never a roster seed, never a dawn sweep (code: bumpPersonTrust, wraps)
+- persontrust_not_scholar_trust: state.village.trust keeps its scholar-facing meaning; this module never writes it (code: bumpPersonTrust)
+- persontrust_directional: A trusting B is A's map entry for B; bondAdd writes both directions with the same applied warmth delta (code: wrapBondAdd)
+- persontrust_unset_is_zero: an absent entry reads as 0 (matches trustedAnyone's (t[k]||0)), never the scholar-trust default of 10 (code: personTrustOf)
+- persontrust_no_rng: writers consume no Math.random — panel determinism for unrelated rolls holds (code: bumpPersonTrust)
+- persontrust_no_gate_changes: never writes a win price, deed gate, readiness bar, or table rule; bond proposals still use bondDriveLive's warmth window (code: person-trust.js)
+
+**Consumes:** Game.getPerson, Game.bondAdd, Game.resolveConsequence, Game.teachSkill, Game.noteSharedFight, Game.villagerId, Game.tele
+
 ### pods (`pods.js`)
 The stasis pods as a standing weight (KIN.md: "a weight, not a meter", Steve 2026-10-11). No devotion score — a HISTORY of pod-related choices across the run: what you did at each intrusion, what it cost, who saw it. Intrusions fire on a dawn roll from day 14 (~1/28 per dawn, at least 8 days apart), the type weighted by context (high viewership → camera, thin pantry → famine); each is a real choice with real costs both ways. The village's social memory of those choices IS the system — mourners have opinions, broken promises surface (Witness especially). The System monetizes guilt (the Jackpot sells devotion back as entertainment). At the table, history determines what is POSSIBLE: championed runs can demand the pods opened at a real cost; shrugged runs get the callous-oversight epilogue; jackpot losses are part of the story. Adults stay unknown, always.
 

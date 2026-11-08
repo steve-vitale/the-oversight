@@ -272,6 +272,23 @@
     try { Game.tele('godpath_deed', { t, who: vid, event: 'apex_hunt', day: s.day || 0, monster: prey.monster, scene, method }); }
     catch (e) { warn('solo hunt deed', e); }
   }
+  // One-Person Army: a lived solo kill above your weight after you bled.
+  // Same opening ledger as the Apex hunt; helpers, Pack Hunt, class age and
+  // synergy cannot invent it. Distinct book key from apex_hunt.
+  function recordOutmatchedKill(vid, actorMaxHp, prey, scene, wound) {
+    const s = Game.state.scholar, v = Game.state.village, p = Game.vpOf(vid);
+    if (Game.over || !vid || !p || p.id !== vid || p.dead ||
+        (isPlayer(vid) && !(s.health > 0)) || !prey?.full ||
+        !Game.data.monsters.some(m => m.id === prey.monster) ||
+        !(Number.isFinite(actorMaxHp) && actorMaxHp > 0 && Number.isFinite(prey.hp) && prey.hp > actorMaxHp) ||
+        !(Number.isFinite(wound) && wound > 0)) return;
+    const books = v.godpathDeeds || (v.godpathDeeds = {}), book = books[vid] || (books[vid] = {});
+    if (book.outmatched_kill) return;
+    book.outmatched_kill = { day: s.day || 0, monster: prey.monster, actorMaxHp, openingHp: prey.hp, scene, wound };
+    const last = (Game.state.telemetry || []).at(-1), t = Number.isFinite(last?.t) ? last.t : 0;
+    try { Game.tele('godpath_deed', { t, who: vid, event: 'outmatched_kill', day: s.day || 0, monster: prey.monster, scene, wound }); }
+    catch (e) { warn('brawler deed', e); }
+  }
   const huntSide = x => x && ['player', 'villager', 'ally'].includes(x.kind);
   const huntPerson = (game, x) => x.kind === 'player' ? game.villagerId : x.villagerId;
   function beginApexHunt(game, f) {
@@ -352,6 +369,12 @@
         for (const a of h.actors) {
           const pack = a.pack && a.usedPack.includes(p.key);
           if (pack || h.present.length === 1) recordApexHunt(a.id, a.maxHp, p, 'tactical', pack ? 'pack' : 'solo');
+          // Brawler: only a true one-person fight after real blood lands.
+          if (h.present.length === 1) {
+            const fighter = (f.fighters || []).find(x => x.key === a.key);
+            const wound = Number(fighter && fighter._taken) || 0;
+            if (wound > 0) recordOutmatchedKill(a.id, a.maxHp, p, 'tactical', wound);
+          }
         }
       }
     }
@@ -361,6 +384,7 @@
     const pack = opening.pack && support.packUsed;
     const alone = !opening.allies && !result.calledHelp && !result.allyVid && !(result.allyDealt > 0);
     if (pack || alone) recordApexHunt(vid, opening.actorMaxHp, opening.prey, 'field', pack ? 'pack' : 'solo');
+    if (alone && (result.vTaken > 0)) recordOutmatchedKill(vid, opening.actorMaxHp, opening.prey, 'field', result.vTaken);
   }
 
   function recordWardRescue(actor, ally, via, scene, wound, day) {

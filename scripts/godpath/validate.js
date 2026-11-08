@@ -89,7 +89,7 @@ const BANNED = [
 for (const pid of PATH_IDS) {
   const g = (paths[pid] || {}).god || {};
   if (g.deed) {
-    const okEvent = ['relay_office', 'market_exchange', 'field_truth_shared', 'care_survived', 'outmatched_escape', 'ward_rescue', 'apex_hunt', 'death_refused', 'harvest_fed'].includes(g.deed.event);
+    const okEvent = ['relay_office', 'market_exchange', 'field_truth_shared', 'care_survived', 'outmatched_escape', 'ward_rescue', 'apex_hunt', 'death_refused', 'harvest_fed', 'outmatched_kill'].includes(g.deed.event);
     const okDays = g.deed.event !== 'harvest_fed' || (Number.isFinite(g.deed.days) && g.deed.days >= 1 && Number.isFinite(g.deed.minKcal) && g.deed.minKcal > 0);
     T.ok(`${pid}: authored deed has a supported event and earned hint`,
       okEvent && okDays && typeof g.deed.afterDawn === 'boolean' &&
