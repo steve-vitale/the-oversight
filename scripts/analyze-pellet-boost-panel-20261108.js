@@ -43,8 +43,22 @@ if (bearer.length) {
   } else {
     console.log('  NOTE P2-organic: no bearer reached exposure >=10 on any seed — the sickness-in-the-wild half is unobserved; see the run note.');
   }
-  const cures = bearer.filter(r => r.cureObserved).length;
-  console.log('  NOTE P2 cure observation (recorded, not a bar): ' + cures + '/' + bearer.length + ' seeds show an exposure drop larger than the 1/day decay.');
+  // Cure observation (recorded, not a bar): recomputed here from the daily
+  // series with the same-holder guard — the stored flag from the first
+  // run compared across a holder change and read a key swap as a cure.
+  // A genuine cure is an exposure drop > the 1/day decay across two days
+  // with the SAME holder.
+  function cureObservedFor(r) {
+    const d = r.daily || [];
+    for (let i = 1; i < d.length; i++) {
+      if (d[i].holder !== d[i - 1].holder) continue;
+      const a = d[i - 1].holderExposure, b = d[i].holderExposure;
+      if (a != null && b != null && (a - b) > 1) return true;
+    }
+    return false;
+  }
+  const cures = bearer.filter(r => cureObservedFor(r)).length;
+  console.log('  NOTE P2 cure observation (recorded, not a bar): ' + cures + '/' + bearer.length + ' seeds show an exposure drop larger than the 1/day decay across same-holder days.');
 }
 console.log(fail ? `\nVERDICT: ${fail} bar(s) FAIL` : '\nVERDICT: all bars PASS');
 process.exit(fail ? 1 : 0);

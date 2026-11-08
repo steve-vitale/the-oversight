@@ -160,9 +160,14 @@ function rigBearer(G, pantry) {
   const sicknessObserved = daily.some(d => d.holderSick && /radiation/i.test(String(d.holderSick)));
   const maxHolderExposure = daily.reduce((m, d) => Math.max(m, (d.holderExposure == null ? 0 : d.holderExposure)), 0);
   // Cure observed (recorded, not a bar): the holder's exposure drops by
-  // more than the 1/day decay between consecutive daily snapshots.
+  // more than the 1/day decay between consecutive daily snapshots — but
+  // ONLY across days with the SAME holder. A holder change swaps the
+  // exposure key ('p' vs a villager id), so comparing across it would
+  // read a key swap as a cure (seed 99 in the first run: 8 -> 0 on the
+  // pass day is the key changing, not a cure firing).
   let cureObserved = false;
   for (let i = 1; i < daily.length; i++) {
+    if (daily[i].holder !== daily[i - 1].holder) continue;
     const a = daily[i - 1].holderExposure, b = daily[i].holderExposure;
     if (a != null && b != null && (a - b) > 1) { cureObserved = true; break; }
   }
