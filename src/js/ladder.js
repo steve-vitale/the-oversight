@@ -121,14 +121,19 @@
 
     // _ladderLivingVeterans(minWave): living roster members with a
     // wave-minWave+ kill in state.waveKillLog — the same read standing.js
-    // uses for its readiness veterans bar (living only; the scholar is
-    // always living). Distinct killers, not kills.
+    // uses for its readiness veterans bar (living only). Distinct killers,
+    // not kills. LEG 3 (tribute scholar-readiness fix): the scholar is
+    // NEVER counted — the tribute delivery (table.js
+    // ladderDeliverCapstone) pays 2 NON-scholar veterans and honestly
+    // refuses when fewer than 2 stand, so a scholar-veteran + 1 villager
+    // used to read ready while delivery refused. Readiness and delivery
+    // agree now: only villagers the table can actually take count.
     _ladderLivingVeterans(minWave) {
       try {
         const log = (this.state && this.state.waveKillLog) || [];
         const seen = {};
         const isLiving = (vid) => {
-          if (vid === this.villagerId) return true;
+          if (!vid || vid === this.villagerId) return false;
           try { const vp = (typeof this.vpOf === 'function') ? this.vpOf(vid) : null; return !!(vp && !vp.dead); }
           catch (e) { return true; }
         };
@@ -441,9 +446,10 @@
     // ladderCapstoneReady(kind): is this capstone deed ready to be
     // delivered? A READ, not the delivery: the delivery itself (recording
     // on progState, paying the price) is leg 2's surgery.
-    //   military_tribute — living wave-4 veterans on hand >= the data
-    //     form's count (2). The veterans are the price; leg 2 records
-    //     the payment.
+    //   military_tribute — living NON-SCHOLAR wave-4 veterans on hand >=
+    //     the data form's count (2). The veterans are the price; leg 2
+    //     records the payment. (Leg 3: the scholar never counts — delivery
+    //     excludes the scholar, so readiness does too.)
     //   trade_charter — a sealed charter exists (an active trade link
     //     with chartered=true) and the scale is national+ (when
     //     scaleRank() is available; the chartered flag alone counts if
