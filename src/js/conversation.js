@@ -718,7 +718,11 @@
       } catch (e) {}
       if ((!opens.length && !closes.length) || Math.random() >= p) return line;
       const inner = t.slice(1, -1);
+      // isQ stays terminal-mark only so opener/closer RNG and mannerism
+      // cycles match prior sittings. asksQ (any "?") is the honesty gate
+      // after the pick — dialog audit #5 2026-11-08.
       const isQ = /\?\s*$/.test(inner);
+      const asksQ = /\?/.test(inner);
       // FAVOR HEADS (journey establishment r5 2026-10-12): a self-naming head
       // already opens its own discourse — a voice opener doubles it ("The way
       // I read it — Never mind the food I needed — ...", caught live). Openers
@@ -750,6 +754,22 @@
       // convoPickCycle reshuffles when the pool runs dry.
       let bit = this.convoPickCycle(vid, 'voice:' + temp + ':' + ageBand + ':' + (ageSetId || 'none') + ':' + mods.join('+') + ':' + (useOpen ? 'o' : 'c'), pool);
       if (!bit) return line;
+      // FORMAL QUESTION GUARD (dialog audit #5 2026-11-08): authored questions
+      // often trail the mark ("Okay, real question: …? I desperately need
+      // it."), so terminal-only isQ missed them and voice openers stacked
+      // ("Practical view: Okay, real question: …"). Temperament closers also
+      // answered the ask ("…laughed? Extremely normal, all of it."). Consume
+      // the mannerism cycle above for lockstep, then discard decoration that
+      // fights the question: any opener on a line that asks, any closer on a
+      // multi-clause ask, and non-soft closers on plain terminal questions.
+      // Soft address/punct closers (", friend.", "…") still fold on plain "?".
+      if (asksQ) {
+        if (useOpen || !isQ) return line;
+        const s = String(bit);
+        const tbit = s.trim();
+        const softQ = /^[.!?…]+$/.test(tbit) || /^\s*,\s+\S/.test(s);
+        if (!softQ) return line;
+      }
       // COMMA-OPENER CASE (journey deepening 2026-10-11): an opener that ends
       // in ", " ("Honestly, ", "Well, ") continues the clause — the composed
       // line must continue lowercase ("Honestly, we never finished…"), not
