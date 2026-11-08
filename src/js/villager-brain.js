@@ -20,6 +20,7 @@
 //   - vbrain_feeders_not_deciders: goals bias, win-plan stage intents, EXPEDITION, bond/link social ads, and duty ads from believed needs feed candidates here; agency chance-rolls and win-plan re-decides stop owning the day when this module is loaded (code: vbrainFeedExtras, vbrainExecuteDepart)
 //   - vbrain_bond_candidates: PROPOSE_BOND / RAISE_LINK from bondFeedCands enter the dawn extras list so the initiator's scorer weighs them; warmth gate and npcInviteDecision stay in bond-initiation (code: vbrainFeedExtras, VILLAGER-BRAIN Phase 4)
 //   - vbrain_duty_candidates: unassigned villagers get DUTY ads from believed village needs (objResourceBelief → forage/cook/water); player/convo assignTask stays a binding commitment — assigned people get no competing duty ads (code: dutyFeedCands, vbrainFeedExtras, VILLAGER-BRAIN Phase 6)
+//   - vbrain_duty_pick: when a DUTY extra is top-scoring vs the core lottery pick, it becomes the dawn commitment (duty_top_score); align maps forage/water/cook to real objectives — never calls assignTask (code: vbrainScorePick, vbrainAlignObjective, VILLAGER-BRAIN Phase 6)
 //   - vbrain_commitment: the dawn pick writes a commitment record the same day so midday agency honors it instead of rolling again (code: vbrainScorePick, vbrainCommit)
 //   - vbrain_materialize_matches_commit: when an aimed override wins, objPick aligns the live objective kind to the commitment after core chore/facing draws (code: vbrainAlignObjective)
 //   - vbrain_midday_event_only: mid-day idle/done refresh runs only when commit day/part is stale or a perception flag fired; dawn still force-refreshes (code: vbrainShouldRefresh, vbrainMarkPerception)
@@ -425,6 +426,7 @@
       vgoal: chosen.vgoal || null,
       vgoalLine: chosen.vgoalLine || null,
       chore: chosen.chore || null,
+      dutyTask: chosen.dutyTask || null,
       vbrainSrc: chosen.vbrainSrc || null,
       winPlanAction: chosen.winPlanAction || null,
       companion: chosen.companion || null,
@@ -591,6 +593,27 @@
           override = exi; overrideReason = 'win_plan:' + exi.winPlanAction; break;
         }
       }
+      // Phase 6: DUTY extras compete by score. When the best DUTY weight beats
+      // or ties the core lottery pick, it wins the commitment (no Math.random;
+      // core stream untouched). Does not call assignTask — align maps the
+      // dutyTask onto a real objective the person will pursue. Seams:
+      // vbrainDisableDutyPick strips the pick hook (ads still score).
+      if (!override) {
+        try {
+          if (!this.vbrainDisableDutyPick) {
+            var bestDuty = null;
+            for (i = 0; i < extras.length; i++) {
+              if (!extras[i] || extras[i].kind !== 'DUTY') continue;
+              if (!bestDuty || (extras[i].w || 0) > (bestDuty.w || 0)) bestDuty = extras[i];
+            }
+            var coreW = chosen ? (chosen.w || 0) : 0;
+            if (bestDuty && (bestDuty.w || 0) >= coreW) {
+              override = bestDuty;
+              overrideReason = 'duty_top_score';
+            }
+          }
+        } catch (e) {}
+      }
       // Soft EXPEDITION: only when the core pick would keep them home, so the
       // ranging brain replaces hall time rather than stealing forage/water.
       // Hash roll — no Math.random — keeps the core lottery stream intact.
@@ -671,6 +694,53 @@
         o.tx = hx; o.ty = hy; o.tightness = 0;
         if (!o.chore) o.chore = c.chore || 'repair';
         if (c.companion) o.companion = c.companion;
+        if (c.vgoal) { o.goal = c.vgoal; o.goalLine = c.vgoalLine || null; }
+        return o;
+      }
+      // DUTY top-score: map believed-need duty onto a real errand. No assignTask.
+      if (c.kind === 'DUTY') {
+        var dutyTask = c.dutyTask || null;
+        var faceOutdoor = function (purpose, partsDefault) {
+          o.kind = purpose === 'water' ? 'WATER' : 'FORAGE';
+          o.purpose = purpose;
+          o.indoor = false;
+          o.state = 'ready';
+          o.targetVid = null;
+          o.companion = null;
+          o.chore = null;
+          if (o.partsLeft == null) o.partsLeft = partsDefault;
+          // Keep core outdoor facing when materialize already left home;
+          // otherwise plant a hash facing (no Math.random — OVE-36).
+          var atHome = (o.tx == null || o.ty == null || (o.tx === hx && o.ty === hy));
+          if (atHome) {
+            var dirs = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, -1], [1, -1], [-1, 1]];
+            var di = Math.floor(dawnHashRoll(this, vid, 'duty-face-' + dutyTask) * dirs.length) % dirs.length;
+            var dist = 1 + Math.floor(dawnHashRoll(this, vid, 'duty-dist-' + dutyTask) * 2);
+            o.tx = Math.max(0, Math.min(8, hx + dirs[di][0] * dist));
+            o.ty = Math.max(0, Math.min(8, hy + dirs[di][1] * dist));
+            if (o.tx === hx && o.ty === hy) o.tx = Math.max(0, Math.min(8, hx + 1));
+            o.tightness = dist;
+          } else if (o.tightness == null) {
+            o.tightness = Math.abs((o.tx || hx) - hx) + Math.abs((o.ty || hy) - hy);
+          }
+        }.bind(this);
+        if (dutyTask === 'forage') {
+          faceOutdoor('forage', 3);
+        } else if (dutyTask === 'water') {
+          faceOutdoor('water', 2);
+        } else if (dutyTask === 'cook') {
+          o.kind = 'HAVEN_CHORE';
+          o.purpose = 'chore';
+          o.chore = 'cook';
+          o.indoor = true;
+          o.state = 'indoor';
+          o.tx = hx; o.ty = hy; o.tightness = 0;
+          o.targetVid = null;
+          o.companion = null;
+        } else {
+          // Unknown dutyTask: keep materialize; commitment still records DUTY.
+          return o;
+        }
         if (c.vgoal) { o.goal = c.vgoal; o.goalLine = c.vgoalLine || null; }
         return o;
       }
