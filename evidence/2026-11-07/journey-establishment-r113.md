@@ -423,18 +423,33 @@ accepted.
 ## Closeout note
 
 - **Registration took ~6 min (slow checkout).**
-- **Rebase:** [to fill at closeout — master movement check, explicit
-  SHA rebase, proof re-run]
-- **Proof re-run on the branch (all PASS):** [to fill]
+- **Rebase:** master moved during the run (a7a26a1ff → 2bc17d793:
+  alien expansion + sim-pairoverlap-b ×4). `git fetch origin master`
+  first: origin sits at 0ce76898f — local master is AHEAD of origin
+  (merge-base is origin itself; no divergence). The src/js/ delta is
+  ONLY alienPlayers.js (+233/−8) — no overlap with this run's food.js
+  change. Rebased the branch onto the explicit SHA 2bc17d793. Clean,
+  all five picks applied, no sequencer stop. Branch tip is now
+  7d23eac1f on 2bc17d793. `git log master..HEAD` shows exactly five
+  commits. No conflicts, no force, nothing dropped.
+- **Proof re-run on the rebased tip (all PASS):** r113 ladder proof
+  49/49 (log `/tmp/r113-proof-rebased.log`); the fix is intact at
+  food.js:1252 (threshold 5).
+- **check.js --quick on the branch tip:** 282 passed, 8 failed in
+  1089s — the 2 extra failures vs r112/r117's 284/6 are proven load
+  artifacts (both pass alone on the same tip: cache-flags 4/4,
+  trust-observer-neutrality 6/6); the other 6 are the known
+  pre-existing set. Zero new failures from this branch.
 - **Telemetry:** quiet, baseline NOT rolled.
-- **Index clobber struck on ALL FOUR safe-commit.sh commits** (known
-  class). Repaired via HEAD-blob `ls-tree` + `update-index --add
+- **Index clobber struck on ALL FIVE safe-commit.sh commits** (known
+  class — this run: prereg, before-evidence, fix, after-evidence,
+  run note). Repaired via HEAD-blob `ls-tree` + `update-index --add
   --index-info`; verified status clean + diff HEAD empty + blobs match
   after each repair.
 - **Registry-lock queue (twice):** heartbeats queued ~6–17 min behind
   a sibling's slow registration; the reaper queued behind the same
   lock, so no reap could fire. No intervention taken.
-- **Rotation re-verified at closeout: reads `2`.** [to verify]
+- **Rotation re-verified at closeout: reads `2`.**
 - Lock (`2026-11-07T23:52:56Z`, created 23:52Z) and heartbeat loop are
   removed at closeout after the merge, once run_id is read back; see
   `~/memory/2026-11-07.md` for the closeout record.
