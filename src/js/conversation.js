@@ -2079,17 +2079,29 @@
       const raw = line;
       if (c._recapSaid[raw]) {
         const inner = String(raw).replace(/^"|"$/g, '');
+        // RECAP-PREFIX STACKING (journey-crisis r155 2026-11-08): the
+        // "Still on X." body is itself a re-anchor — prefixing "As/Like I
+        // said —" doubles the repetition marker ("Like I said — Still on
+        // that sickness help.", 9/23 pilot conversations, 11 instances).
+        // For that form, reframe around the topic label instead: "As I
+        // said — we're still on X." Other bodies ("We started on...",
+        // "We were talking about...") reframe unchanged — their prefix
+        // reads fine because the body isn't itself a re-anchor.
+        let reInner = inner;
+        let topic = null;
+        const stillM = /^Still on (.+)\.$/.exec(inner);
+        if (stillM) { topic = stillM[1]; reInner = "we're still on " + topic + "."; }
         c._recapReframes = (c._recapReframes || 0) + 1;
         if (c._recapReframes <= 3) {
           line = this.convoPickCycle(vid, 'recaprepeat', [
-            `"As I said — ${inner}"`,
-            `"Like I said — ${inner}"`,
-            `"${inner} That's still where we are."`,
+            `"As I said — ${reInner}"`,
+            `"Like I said — ${reInner}"`,
+            topic ? `"${topic} — that's still where we are."` : `"${inner} That's still where we are."`,
           ]);
         } else if (c._recapReframes === 4) {
-          line = `"I've told you three times now — ${inner}"`;
+          line = `"I've told you three times now — ${reInner}"`;
         } else {
-          line = `"We're going in circles a bit — ${inner}"`;
+          line = `"We're going in circles a bit — ${reInner}"`;
           // CAP: the choice spends out for this sitting — a real person
           // stops answering, they don't find a sixth synonym.
           try { this.convoSpendChoice(vid, 'recap'); } catch (e) {}
