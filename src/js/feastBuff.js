@@ -285,7 +285,7 @@
         try { drawn = this.pantryDraw(v, cfg.costKcalPerStrike, {}); } catch (e) { drawn = null; }
         const spent = Math.round((drawn && drawn.taken) || 0);
         if (spent > 0) {
-          L.boosts += 1; L.spent += spent; L.lastBoostDay = this.state.day || 0;
+          L.boosts += 1; L.spent += spent; L.lastBoostDay = (this.state.scholar || {}).day || 0;
           if (opts.heal) this.say(`REACTOR — the pellet burns ${spent} kcal of pantry stores for the bonus heal.`);
           else if (cfg.boostMult > (opts.currentMult || 1)) this.say(`REACTOR — the pellet burns ${spent} kcal of pantry stores: this strike hits ×${cfg.boostMult}.`);
           return { mult: cfg.boostMult, boosted: true, spent };
@@ -303,7 +303,7 @@
     pelletBoostedToday() {
       try {
         const L = this.state.pelletBoost || null;
-        return !!(L && L.lastBoostDay === (this.state.day || 0));
+        return !!(L && L.lastBoostDay === ((this.state.scholar || {}).day || 0));
       } catch (e) { return false; }
     },
 
