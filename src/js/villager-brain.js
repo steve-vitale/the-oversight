@@ -7,6 +7,8 @@
 //   - vbrainFeedExtras(vid, cands, hx, hy)
 //   - vbrainAlignObjective(vid, o, hx, hy)
 //   - vbrainCommit(vid)
+//   - vbrainMarkPerception(vid, reason)
+//   - vbrainShouldRefresh(vid, opts)
 //   - vbrainLastLog(vid)
 //   - vbrainLogs()
 //   - vbrainExecuteDepart(vid, hx, hy, announce)
@@ -17,6 +19,7 @@
 //   - vbrain_feeders_not_deciders: goals bias, win-plan stage intents, and EXPEDITION feed candidates here; agency chance-rolls and win-plan re-decides stop owning the day when this module is loaded (code: vbrainFeedExtras, vbrainExecuteDepart)
 //   - vbrain_commitment: the dawn pick writes a commitment record the same day so midday agency honors it instead of rolling again (code: vbrainScorePick, vbrainCommit)
 //   - vbrain_materialize_matches_commit: when an aimed override wins, objPick aligns the live objective kind to the commitment after core chore/facing draws (code: vbrainAlignObjective)
+//   - vbrain_midday_event_only: mid-day idle/done refresh runs only when commit day/part is stale or a perception flag fired; dawn still force-refreshes (code: vbrainShouldRefresh, vbrainMarkPerception)
 //   - vbrain_chain_safe: missing feeders fail silent; agency falls back to the old chance roll only when vbrainOwnsDawn is absent (code: vbrainFeedExtras)
 // consumes:
 //   - npcRangeProfile, npcMaxDist, agencyState (villager-agency.js)
@@ -34,6 +37,8 @@
  *   - objPick early returns and the lottery both log through here;
  *   - win-plan stage intents and EXPEDITION enter as candidates;
  *   - agencyTick stops chance-rolling / re-deciding when this module loads.
+ * OVE-38 demotes seam 9's mid-day idle/done re-pick: refresh only when the
+ * commitment day/part is stale or vbrainMarkPerception fired.
  *
  * Load after villager-goals.js (goals already bias the candidate list) and
  * win-plan.js (optional feeder). Self-attaching.
@@ -59,12 +64,25 @@
     var v = villageOf(self);
     if (!v) return null;
     if (!v.vbrain) {
-      v.vbrain = { commit: {}, logs: [], stats: { picks: 0, gates: 0, expeditions: 0, winPlan: 0 } };
+      v.vbrain = { commit: {}, perception: {}, logs: [], stats: { picks: 0, gates: 0, expeditions: 0, winPlan: 0 } };
     }
     if (!v.vbrain.commit) v.vbrain.commit = {};
+    if (!v.vbrain.perception) v.vbrain.perception = {};
     if (!v.vbrain.logs) v.vbrain.logs = [];
     if (!v.vbrain.stats) v.vbrain.stats = { picks: 0, gates: 0, expeditions: 0, winPlan: 0 };
     return v.vbrain;
+  }
+  function clearPerception(br, vid) {
+    if (!br || !br.perception) return;
+    try { delete br.perception[vid]; } catch (e) { br.perception[vid] = null; }
+  }
+  // Seam 9 residual: a same-day commitment is stale only when day/part
+  // metadata is missing or the recorded day no longer matches. Advancing
+  // day-part alone does NOT stale the lead — that was the mid-day rewrite bug.
+  function commitDayPartStale(self, commit) {
+    if (!commit) return true;
+    if (commit.day == null || commit.part == null) return true;
+    return commit.day !== dayOf(self);
   }
   function pushLog(self, entry) {
     var br = ensure(self);
@@ -290,6 +308,8 @@
       companion: chosen.companion || null,
       logIndex: br.logs.length - 1,
     };
+    // A real re-score consumes the perception event that authorized it.
+    clearPerception(br, vid);
     br.stats.picks = (br.stats.picks || 0) + 1;
     if (chosen.kind === 'EXPEDITION') br.stats.expeditions = (br.stats.expeditions || 0) + 1;
     if (chosen.winPlanAction) br.stats.winPlan = (br.stats.winPlan || 0) + 1;
@@ -301,6 +321,32 @@
     vbrainCommit: function (vid) {
       var br = ensure(this);
       return (br && br.commit) ? (br.commit[vid] || null) : null;
+    },
+    // Perception-changing event → authorize one mid-day re-score (seam 9).
+    vbrainMarkPerception: function (vid, reason) {
+      var br = ensure(this);
+      if (!br) return null;
+      br.perception[vid] = {
+        reason: reason || 'event',
+        day: dayOf(this),
+        part: partOf(this),
+      };
+      return br.perception[vid];
+    },
+    // Mid-day idle/done may refresh only when commit day/part is stale or a
+    // perception flag fired. Dawn callers pass { dawn: true } / { force: true }.
+    vbrainShouldRefresh: function (vid, opts) {
+      opts = opts || {};
+      if (opts.force || opts.dawn) return true;
+      try {
+        if (typeof this.vbrainOwnsDawn !== 'function' || !this.vbrainOwnsDawn()) return true;
+      } catch (e) { return true; }
+      var br = ensure(this);
+      if (!br) return true;
+      var c = br.commit ? br.commit[vid] : null;
+      if (commitDayPartStale(this, c)) return true;
+      if (br.perception && br.perception[vid]) return true;
+      return false;
     },
     vbrainLastLog: function (vid) {
       var br = ensure(this);
