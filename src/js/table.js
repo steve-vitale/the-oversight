@@ -76,17 +76,49 @@
 
     // ============ THE SEAT: full / lesser / none ============
     // Steve 2026-10-11: the table PRICES the run, never gates on godhood.
-    // deedGateReady() is the FULL seat (all wave bars 5/5/4/3/2, 3 contests,
-    // 3 crises, stage>=2, food-thesis deeds, national/global scale per the
-    // Steve 2026-10-27 ruling — the lesser seat still needs regional+,
-    // so the full seat is no longer easier on scale than the lesser one).
+    // deedGateReady() is the FULL seat's deed half (all wave bars 5/5/4/3/2,
+    // 3 contests, 3 crises, stage>=2, food-thesis deed, national/global
+    // scale per the Steve 2026-10-27 ruling — the lesser seat still needs
+    // regional+, so the full seat is no longer easier on scale than the
+    // lesser one).
+    // LADDER (2026-11-08, leg 2, brief §b.4): the feast stops being the
+    // key. The lesser seat gains ladder PEAK stage >= Village (12 counted
+    // points); the full seat gains ladder PEAK stage >= National (40) AND
+    // a delivered capstone deed. PEAK, not live, stage (prereg decision):
+    // the seat is priced on what the village DID — a delivered capstone is
+    // irreversible, and the standing offer does not withdraw (Steve
+    // 2026-11-06) — so later deaths cannot un-price a seat the climb
+    // earned. The ladder bar still shows the LIVE stage; the detail
+    // carries both, so the voicing can name a dip honestly.
     // The LESSER seat is the reachable bar for competent non-god play — priced
     // honestly, fewer paths open, weaker terms. Below it the table does
     // not come (ledger.js's withdrawal beat handles that case).
+    // _ladderSeatRead: the ladder + capstone half of the seat, read once
+    // (guarded — a missing ladder module reads as no standing, never as
+    // a seat). Returns { live, peak, counted, line, capstone }.
+    _ladderSeatRead() {
+      const out = { live: 0, peak: 0, counted: 0, line: '', capstone: null };
+      try {
+        if (typeof this.villageLadder === 'function') {
+          const L = this.villageLadder() || {};
+          out.live = (L.stage | 0) || 0;
+          out.peak = (L.peakStage | 0) || 0;
+          out.counted = (L.counted | 0) || 0;
+        } else {
+          if (typeof this.ladderStage === 'function') out.live = (this.ladderStage() | 0) || 0;
+          if (typeof this.ladderPeakStage === 'function') out.peak = (this.ladderPeakStage() | 0) || 0;
+        }
+      } catch (e) {}
+      try { if (typeof this.ladderLine === 'function') out.line = String(this.ladderLine() || ''); } catch (e) {}
+      try { if (typeof this.ladderCapstoneDelivered === 'function') out.capstone = this.ladderCapstoneDelivered() || null; } catch (e) {}
+      return out;
+    },
     tableSeat() {
       try {
         const full = (typeof this.deedGateReady === 'function') ? this.deedGateReady() : { ok: false };
-        if (full && full.ok) return { seat: 'full', detail: full };
+        const lad = this._ladderSeatRead();
+        const ladderDetail = { ladderStage: lad.live, ladderPeakStage: lad.peak, ladderCounted: lad.counted, ladderLine: lad.line, ladderCapstone: lad.capstone };
+        if (full && full.ok && lad.peak >= 3 && lad.capstone) return { seat: 'full', detail: Object.assign({}, full, ladderDetail) };
         const d = (typeof this.deedState === 'function') ? this.deedState() : {};
         const faced = (d && d.wavesFaced) || {};
         let w1 = 0, w2 = 0, w3 = 0, w4 = 0, w5 = 0;
@@ -103,13 +135,114 @@
         const scaleOk = rank === 'regional' || rank === 'national' || rank === 'global';
         let stage = 0;
         try { stage = (typeof this.integrationStage === 'function') ? this.integrationStage() : 0; } catch (e) {}
-        const s = this.state.scholar || {};
-        const foodDeeds = !!(pg.sentimentTaught && s.prog && s.prog.feastSurgeUsed);
-        const lesser = w1 >= 4 && w2 >= 4 && w3 >= 3 && contestsN >= 2 && crisesN >= 2 && scaleOk && stage >= 2 && foodDeeds;
-        const detail = { w1, w2, w3, w4, w5, contestsN, crisesN, rank, stage, foodDeeds };
+        // LADDER leg 2: foodDeeds is sentimentTaught alone (progression.js).
+        const foodDeeds = !!(pg && pg.sentimentTaught);
+        const lesser = w1 >= 4 && w2 >= 4 && w3 >= 3 && contestsN >= 2 && crisesN >= 2 && scaleOk && stage >= 2 && foodDeeds && lad.peak >= 1;
+        const detail = Object.assign({ w1, w2, w3, w4, w5, contestsN, crisesN, rank, stage, foodDeeds }, ladderDetail);
         if (lesser) return { seat: 'lesser', detail };
         return { seat: 'none', detail };
       } catch (e) { return { seat: 'none', detail: {} }; }
+    },
+
+    // ladderDeliverCapstone(kind): the capstone DELIVERY surgery (leg 2,
+    // brief §b.9). Completing any one capstone records it on
+    // progState().ladderCapstone (like pg.tableDone records the seat) so
+    // it cannot be undone, and pays the price:
+    //   military_tribute — 2 living wave-4 veterans (never the scholar)
+    //     leave Haven in the table's service, via the one removal choke
+    //     point removeVillager(vid, 'tribute').
+    //   trade_charter — no price to pay: the sealed charter IS the deed;
+    //     the delivery records which chartered trade link it is.
+    //   feast_embassy — no price to pay: the bundle is already done.
+    // A readiness read (ladderCapstoneReady) that says ready is re-checked
+    // here at delivery time; a delivery that cannot pay refuses honestly
+    // and records nothing. KNOWN GAP (prereg): readiness counts the
+    // scholar as a payable veteran, delivery does not — a scholar-veteran
+    // + 1 villager reads ready but refuses here with 'veterans-short'
+    // (leg-1 follow-up owed). Returns { ok, kind, reason?, ... }.
+    // The delivery also OPENS the mercy window: tableActive() holds from
+    // delivery (see the sanctity clause there), so no raid or roaming
+    // monster can kill villagers between the delivery and the seat.
+    ladderDeliverCapstone(kind) { // wired-exempt: leg-3 Haven entry point (app.js panelHaven calls it; the delivery action lives there)
+      try {
+        if (this.over) return { ok: false, kind, reason: 'over' };
+        const pg = (typeof this.progState === 'function') ? this.progState() : null;
+        if (!pg) return { ok: false, kind, reason: 'read-error' };
+        if (pg.ladderCapstone) return { ok: false, kind, reason: 'delivered', delivered: pg.ladderCapstone };
+        let ready = null;
+        try { ready = (typeof this.ladderCapstoneReady === 'function') ? this.ladderCapstoneReady(kind) : null; } catch (e) { ready = null; }
+        if (!ready || !ready.ready) return { ok: false, kind, reason: (ready && ready.reason) || 'not-ready' };
+        const day = ((this.state || {}).scholar || {}).day || 0;
+        if (kind === 'military_tribute') {
+          // The price: 2 living wave-4 veterans, NEVER the scholar. Pick
+          // them in waveKillLog order (first wave-4 kill first — the
+          // longest-serving fighters go first), distinct killers only.
+          const log = (this.state && this.state.waveKillLog) || [];
+          const seen = [];
+          const isLiving = (vid) => {
+            if (!vid || vid === this.villagerId) return false;
+            try { const vp = (typeof this.vpOf === 'function') ? this.vpOf(vid) : null; return !!(vp && !vp.dead); }
+            catch (e) { return true; }
+          };
+          for (const e of log) {
+            if (!e || !e.by || ((e.w | 0) < 4)) continue;
+            if (!isLiving(e.by)) continue;
+            if (seen.indexOf(e.by) < 0) seen.push(e.by);
+            if (seen.length >= 2) break;
+          }
+          if (seen.length < 2) return { ok: false, kind, reason: 'veterans-short', veterans: seen.length, need: 2 };
+          if (typeof this.removeVillager !== 'function') return { ok: false, kind, reason: 'read-error' };
+          const names = [];
+          for (const vid of seen) {
+            try { names.push(String(this.displayName ? this.displayName(vid) : vid)); } catch (e) { names.push(vid); }
+          }
+          for (const vid of seen) this.removeVillager(vid, 'tribute');
+          // VERIFY the payment landed: both veterans off the roster. A
+          // half-paid tribute records nothing (the safe direction — no
+          // free capstone); the village can deliver again once 2 living
+          // veterans stand.
+          const roster = ((this.state && this.state.village && this.state.village.roster) || []);
+          if (roster.indexOf(seen[0]) >= 0 || roster.indexOf(seen[1]) >= 0) {
+            return { ok: false, kind, reason: 'tribute-failed', veterans: seen.slice() };
+          }
+          pg.ladderCapstone = kind;
+          pg.ladderCapstoneDay = day;
+          pg.ladderCapstoneDetail = { veterans: seen.slice(), names: names.slice() };
+          this.say(`◈ THE TRIBUTE — ${names.join(' and ')} walk out of Haven in the table's service, two fighters the galaxy asked for by name. The village is smaller tonight. The seat is open.`);
+          this.say('◈ THE TABLE — between now and the seat, the world holds its breath. Nothing out there can take this from you.');
+          try { this.save(); } catch (e) {}
+          return { ok: true, kind, veterans: seen.slice(), names: names.slice(), day };
+        }
+        if (kind === 'trade_charter') {
+          let link = null;
+          try {
+            const ls = (typeof this.hierarchyState === 'function') ? this.hierarchyState() : [];
+            link = (ls || []).find(l => l && l.status === 'active' && l.kind === 'trade' && l.chartered === true) || null;
+          } catch (e) { link = null; }
+          pg.ladderCapstone = kind;
+          pg.ladderCapstoneDay = day;
+          pg.ladderCapstoneDetail = link ? { link: (link.subordinate || link.b || link.a || null) } : {};
+          this.say('◈ THE CHARTER — the seal is set. Haven trades as a nation now, and the table has the charter on its ring. The seat is open.');
+          this.say('◈ THE TABLE — between now and the seat, the world holds its breath. Nothing out there can take this from you.');
+          try { this.save(); } catch (e) {}
+          return { ok: true, kind, day, link: (pg.ladderCapstoneDetail && pg.ladderCapstoneDetail.link) || null };
+        }
+        if (kind === 'feast_embassy') {
+          let bundleDay = null;
+          try {
+            const log = (this.state && this.state.feastLog) || [];
+            for (const f of log) if (f && f.bundle === true) bundleDay = (f.day | 0) || bundleDay;
+          } catch (e) {}
+          pg.ladderCapstone = kind;
+          pg.ladderCapstoneDay = day;
+          pg.ladderCapstoneDetail = { bundleDay };
+          this.say('◈ THE EMBASSY — the table is set, the bundle is served, and the galaxy ate from it. The seat is open.');
+          this.say('◈ THE TABLE — between now and the seat, the world holds its breath. Nothing out there can take this from you.');
+          try { this.save(); } catch (e) {}
+          return { ok: true, kind, day, bundleDay };
+        }
+        return { ok: false, kind, reason: 'unknown-capstone' };
+      } catch (e) { return { ok: false, kind, reason: 'read-error' }; }
     },
 
     // tableSeatLine: the audit's seat line, extracted so the voicing is
@@ -121,8 +254,14 @@
     // w4/w5 deeds the line is byte-identical to the old voicing.
     tableSeatLine(seat) {
       const d = (seat && seat.detail) || {};
+      // LADDER leg 2 (Q10): the audit names the ladder with ladderLine() —
+      // stage, counted points, capped tracks — so the climb is never
+      // silent. A seat built without ladder detail (old callers,
+      // hand-built seats) reads exactly as before.
+      const ladLine = (d.ladderLine && String(d.ladderLine)) || '';
+      const ladBit = ladLine ? ' ' + ladLine : '';
       if (seat && seat.seat === 'full') {
-        return `A full seat. ${d.rank || 'National'} standing, every wave faced, the deeds complete. The table rises when you enter.`;
+        return `A full seat. ${d.rank || 'National'} standing, every wave faced, the deeds complete. The table rises when you enter.${ladBit}`;
       }
       let extra = '';
       try {
@@ -131,7 +270,7 @@
         if ((d.w5 | 0) > 0) parts.push(`${d.w5 | 0} wave-5`);
         if (parts.length) extra = `, with ${parts.join(' and ')} fought`;
       } catch (e) {}
-      return `A lesser seat — ${d.rank || 'regional'} standing, waves 1–3 faced (${d.w1 || 0}/${d.w2 || 0}/${d.w3 || 0})${extra}, ${d.contestsN || 0} contests survived, ${d.crisesN || 0} crises weathered. The table does not rise. It prices.`;
+      return `A lesser seat — ${d.rank || 'regional'} standing, waves 1–3 faced (${d.w1 || 0}/${d.w2 || 0}/${d.w3 || 0})${extra}, ${d.contestsN || 0} contests survived, ${d.crisesN || 0} crises weathered. The table does not rise. It prices.${ladBit}`;
     },
 
     // fullSeatShortfall: the full-seat offer/audit path never named what
@@ -140,18 +279,21 @@
     // and heard nothing about the full seat at all. This names the
     // shortfall in plain words: which waves are short and by how many
     // distinct monsters, which deeds are short, and whether standing,
-    // integration, or the food-thesis deeds are what stands in the way.
+    // integration, the food-thesis deed, the ladder, or the capstone
+    // is what stands in the way.
     // VOICING ONLY: every bar and threshold below is deedGateReady()'s
     // own (5/5/4/3/2 distinct fought, 3 contests, 3 crises, stage>=2,
-    // food-thesis deeds, national/global standing) — nothing here
-    // retunes a gate, price, or requirement, and nothing here writes
-    // state (the food-thesis split is read defensively from
-    // scholar.prog, never created, so calling it from an audit cannot
-    // mint a deed). Accepts a tableSeat() result or nothing (live
-    // deedGateReady()). Returns { ready, missing, line }: ready true
+    // food-thesis deed, national/global standing) plus tableSeat()'s
+    // ladder bars (peak stage >= National, a delivered capstone) —
+    // nothing here retunes a gate, price, or requirement, and nothing
+    // here writes state (the food-thesis read is from progState(), never
+    // created, so calling it from an audit cannot mint a deed). Accepts
+    // a tableSeat() result or nothing (live deedGateReady() + a live
+    // ladder read). Returns { ready, missing, line }: ready true
     // means the full seat is earned and line is '' — callers speak only
     // when something is actually missing, so a full seat's text never
-    // changes.
+    // changes. LADDER leg 2: the feast surge is NOT named here anymore —
+    // it is not a seat bar (brief §b.4); naming it would lie.
     fullSeatShortfall(seat) {
       try {
         let d = (seat && seat.detail) || null;
@@ -172,24 +314,42 @@
         if (rank !== 'national' && rank !== 'global') missing.push(`standing is ${rank} — the full seat asks for national standing or higher`);
         const stage = (d.stage | 0);
         if (stage < 2) missing.push(`integration too shallow (stage ${stage} of 2 needed)`);
-        // Food-thesis split: deedGateReady() reports the pair combined
-        // (foodDeeds), but the two halves are different deeds in play —
-        // the keepsake lesson (sentimentTaught) and a feast's surge spent
-        // where it counts (feastSurgeUsed). Name the half that is
-        // actually missing; when the live split cannot be read, fall
-        // back to the combined wording rather than guessing a half.
-        let sentiment = null, surge = null;
+        // LADDER (leg 2, brief §b.4, Q10): the full seat also needs ladder
+        // peak stage >= National (40 counted points) AND a delivered
+        // capstone deed. The cap is never silent: when the peak is short,
+        // the ladder line is quoted — counted points, capped tracks, and
+        // all. Prefer the seat detail's ladder fields (a live tableSeat()
+        // carries them); otherwise read the ladder live.
+        let lad = null;
         try {
-          const spr = ((this.state || {}).scholar || {}).prog || null;
-          if (spr && typeof spr === 'object') {
-            sentiment = !!spr.sentimentTaught; surge = !!spr.feastSurgeUsed;
+          if (d && typeof d.ladderPeakStage === 'number') {
+            lad = { peak: d.ladderPeakStage | 0, counted: d.ladderCounted | 0, line: (d.ladderLine && String(d.ladderLine)) || '', capstone: d.ladderCapstone || null };
+          } else if (typeof this._ladderSeatRead === 'function') {
+            lad = this._ladderSeatRead();
           }
+        } catch (e) { lad = null; }
+        if (lad) {
+          if (lad.peak < 3) {
+            const names = ['Unranked', 'Village Standing', 'Regional Standing', 'National Standing'];
+            missing.push(`only ${lad.counted | 0} of 40 counted ladder points toward National Standing (highest climb: ${names[lad.peak] || 'Unranked'})${lad.line ? ' — ' + lad.line : ''}`);
+          }
+          if (!lad.capstone) missing.push('no capstone deed delivered (military tribute, trade charter, or feast embassy)');
+        }
+        // Food-thesis (LADDER leg 2): the keepsake lesson ALONE.
+        // deedGateReady() reports it combined (foodDeeds), but the surge
+        // half is gone as a seat bar — a feast surge unspent is not a
+        // shortfall anymore, and naming it would lie. Read the lesson
+        // from progState() (deedGateReady's own source); when it cannot
+        // be read, fall back to the combined wording rather than guessing.
+        let sentiment = null;
+        try {
+          const pg = (typeof this.progState === 'function') ? this.progState() : null;
+          if (pg && typeof pg === 'object') sentiment = !!pg.sentimentTaught;
         } catch (e) {}
-        if (sentiment === null || surge === null) {
-          if (!d.foodDeeds) missing.push('the food-thesis deeds are unfinished');
-        } else {
-          if (!sentiment) missing.push('the keepsake lesson has not yet been taught');
-          if (!surge) missing.push('a feast surge has not yet been spent in a real fight');
+        if (sentiment === null) {
+          if (!d.foodDeeds) missing.push('the food-thesis deed is unfinished');
+        } else if (!sentiment) {
+          missing.push('the keepsake lesson has not yet been taught');
         }
         if (!missing.length) return { ready: true, missing: [], line: '' };
         return { ready: false, missing, line: `For a full seat, the ledger still wants: ${missing.join('; ')}.` };
@@ -222,6 +382,11 @@
           missing.push(`integration too shallow (stage ${d.stage | 0})`);
         if (!d.foodDeeds)
           missing.push('the food-thesis unproven');
+        // LADDER leg 2: the lesser seat needs Village Standing (peak
+        // stage) — name it when the village has never climbed that far.
+        // A detail without ladder fields (old callers) names nothing here.
+        if (typeof d.ladderPeakStage === 'number' && (d.ladderPeakStage | 0) < 1)
+          missing.push(`ladder standing too low (Village Standing needs 12 counted points; the village holds ${d.ladderCounted | 0})`);
       } catch (e) {}
       return missing.length ? missing.join('; ') : 'the deeds are not all done';
     },
@@ -757,6 +922,17 @@
         // cleared to re-arm the dawn driver. The flag clears when the modal
         // re-opens (the sequence sits again, tableDone true).
         if (T && T.winDeferred) return true;
+        // LADDER MERCY (2026-11-08, leg 2, brief §b.9): the sanctity window
+        // starts at capstone DELIVERY, not at sitting — between the delivery
+        // and the seat, no raid or roaming monster can kill villagers. This
+        // is the one predicate every ambient router gates on (game.js
+        // monsterTurn, overtimeScaleFight, havenGrowth, npc-triggers,
+        // favor-outing, win-plan), so extending it here extends the mercy
+        // everywhere at once. It ends when the finale resolves
+        // (phase 'done'); a village that delivers and never sits stays
+        // under sanctity, as a sitting that never chooses a door does —
+        // and the overtime clock still docks the seat while it waits.
+        if (pg && pg.ladderCapstone && !(T && T.phase === 'done')) return true;
         if (!pg || !pg.tableDone) return false;
         return !!(T && T.phase && T.phase !== 'done');
       } catch (e) { return false; }
@@ -1006,7 +1182,25 @@
         // earned) so the Haven panel can show it where the seat is.
         let fullShort = null;
         try { fullShort = (typeof this.fullSeatShortfall === 'function') ? this.fullSeatShortfall(seat) : null; } catch (e) { fullShort = null; }
-        return { seat: seat.seat, doors, day, ready: !why, why, overtime: ot ? ot.tier : 0, standingCost: ot ? ot.penalty : 0, losses: ot ? ot.losses : 0, key: !!pg.networkFallen, fullReady: !!(fullShort && fullShort.ready), fullShortfall: (fullShort && fullShort.line) || '' };
+        // LADDER (leg 2, brief §b.7): the preview carries the ladder block
+        // for the Haven panel (leg 3 renders it) — stage, counted points,
+        // capped tracks, next rung, and the delivered capstone, if any.
+        let ladder = null;
+        try {
+          if (typeof this.villageLadder === 'function') {
+            const L = this.villageLadder() || {};
+            ladder = {
+              stage: (L.stage | 0) || 0, peakStage: (L.peakStage | 0) || 0,
+              stageName: L.stageName || 'Unranked', counted: (L.counted | 0) || 0,
+              nextThreshold: L.nextThreshold == null ? null : (L.nextThreshold | 0),
+              nextStageName: L.nextStageName || '', shortfall: (L.shortfall | 0) || 0,
+              capped: (L.capped || []).slice(), tracks: L.tracks || {}, countedTracks: L.countedTracks || {},
+              capstone: (typeof this.ladderCapstoneDelivered === 'function') ? (this.ladderCapstoneDelivered() || null) : null,
+              line: (typeof this.ladderLine === 'function') ? String(this.ladderLine() || '') : '',
+            };
+          }
+        } catch (e) { ladder = null; }
+        return { seat: seat.seat, doors, day, ready: !why, why, overtime: ot ? ot.tier : 0, standingCost: ot ? ot.penalty : 0, losses: ot ? ot.losses : 0, key: !!pg.networkFallen, fullReady: !!(fullShort && fullShort.ready), fullShortfall: (fullShort && fullShort.line) || '', ladder };
       } catch (e) { console.warn('tablePreview', e); return null; }
     },
     // ============ THE SEAT-TAKER CHOICE (Steve 2026-10-26, item 495) ============
