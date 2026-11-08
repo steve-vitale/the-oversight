@@ -46,3 +46,45 @@ village still runs errands.
 - Muse lanes: policies, garden/ability numbers, regions/weather/nomad,
   feast/door levers, November journey succession/conversation/scale/
   language/betrayal files.
+
+---
+
+## Baseline refresh 2026-11-08 (OVE-61)
+
+Tip: `be39a0a4e` (post OVE-57 proof refresh). Seed/horizon/policy unchanged
+(84101 / 30d / competent).
+
+OVE-57 classified the tip quick-check failure
+(`FORAGE`/`TRAPS` vs the `d229b58f5` prereg) as **pre-#41** — same class of
+drift already present on `49341fd78`. Not bond-dawn-caused. Sibling OVE-60
+owns villager-brain duty candidates; this refresh does **not** retune
+`villager-brain.js` or Game errand weights.
+
+Fresh panel on tip `be39a0a4e`:
+
+```
+kinds: { LEAVE:2, WATER:136, HAVEN_CHORE:49, EAT:34, VISIT:20, SEEK:25, TRAPS:1, FORAGE:3, EXPEDITION:1 }
+maxTrust: 75
+entries: 55
+trustedOpen: 4
+living: 8
+```
+
+Movement vs original `d229b58f5` non-aimed bar (±25%):
+
+| kind | old | new | band | |
+|---|---:|---:|---|---|
+| LEAVE | 2 | 2 | 1.5..2.5 | in |
+| WATER | 170 | 136 | 127.5..212.5 | in |
+| EAT | 32 | 34 | 24..40 | in |
+| SEEK | 21 | 25 | 15.75..26.25 | in |
+| FORAGE | 1 | 3 | 0.75..1.25 | **out** |
+| TRAPS | 4 | 1 | 3..5 | **out** |
+| HUNT / HAUL | 0 | 0 | ≤2 | in |
+
+`VISIT` / `HAVEN_CHORE` remain out of the non-aimed bar (bonds-goal).
+`EXPEDITION:1` appeared on tip; not a non-aimed kind.
+
+**Decision:** honest baseline refresh in
+`scripts/test-person-trust-20261108.js` to the tip panel above. Prefer
+rebaseline over Game retune; Muse lanes off.
