@@ -17601,7 +17601,7 @@
                 return t > c ? `${LABELS[k]} ${t} → ${c} · capped` : `${LABELS[k]} ${c}`;
               }).join(' · ');
               const target = L.nextThreshold == null
-                ? `${esc(L.stageName || 'National Standing')} reached`
+                ? 'reached'
                 : `${L.counted}/${L.nextThreshold} to ${esc(L.nextStageName || '')}`;
               let bar = `<div style="margin-top:4px"><p class="small">◈ <b>Standing ladder — ${esc(L.stageName || 'Unranked')}:</b> ${target}<br><span style="opacity:.8">${esc(bits)}</span>`;
               if (L.detail && (L.detail.bankedHeadStart | 0) > 0) bar += `<br><span style="opacity:.8">(+${L.detail.bankedHeadStart | 0} from the last village's climb — a fallen village leaves standing behind.)</span>`;

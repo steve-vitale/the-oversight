@@ -89,6 +89,11 @@ const K = require('./godpath/lib'), T = K.reporter('ladder-panel-20261108');
   T.ok('feast embassy reads ready for the rig', G.ladderCapstoneReady('feast_embassy').ready === true);
   html = render();
   T.ok('capstone button appears when ready', /data-ladder-capstone="feast_embassy"/.test(html));
+  // r111 consistency: at National the bar must not repeat the stage name
+  // ("National Standing: National Standing reached" — the same duplication
+  // journey scale r111 fixed in ladderLine).
+  T.ok('National bar reads "National Standing: reached"', /Standing ladder — National Standing:<\/b> reached/.test(html));
+  T.ok('National bar never repeats the stage name', !/National Standing: National Standing/.test(html));
 
   // ---- Buy-out hidden once this stage banked its bundle ----
   resetLadderState();
