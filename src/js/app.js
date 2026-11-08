@@ -17018,6 +17018,29 @@
     document.querySelectorAll('[data-national]').forEach(b => b.onclick = () => { Game.answerNationalChoice(b.dataset.national); refresh(); });
     document.querySelectorAll('[data-global]').forEach(b => b.onclick = () => { Game.answerGlobalChoice(b.dataset.global); refresh(); });
     document.querySelectorAll('[data-table-seat]').forEach(b => b.onclick = () => { const r = Game.tableOfferSeatTaker ? Game.tableOfferSeatTaker() : Game.tableTakeSeat(); if (r && !r.ok && r.msg) Game.say(r.msg); refresh(); });
+    // LADDER (leg 3, brief §b.7/b.10): feast-bundle buy-out, capstone
+    // delivery, and the Respected Village cash-out — all Haven actions.
+    // The engine speaks success aloud; the handlers speak refusals aloud
+    // (buy-out refusals arrive as sentences; capstone/cash-out refusals
+    // arrive as codes, mapped to sentences here).
+    document.querySelectorAll('[data-ladder-buyout]').forEach(b => b.onclick = () => { const r = Game.feastBundleBuyOut ? Game.feastBundleBuyOut() : null; if (r && !r.ok && r.why) Game.say(r.why); refresh(); });
+    document.querySelectorAll('[data-ladder-capstone]').forEach(b => b.onclick = () => {
+      const kind = b.dataset.ladderCapstone;
+      const r = Game.ladderDeliverCapstone ? Game.ladderDeliverCapstone(kind) : null;
+      if (r && !r.ok) {
+        const why = { 'delivered': 'A capstone is already delivered — the seat is open.', 'veterans-short': 'Two living wave-4 veterans must stand for the tribute.', 'no-sealed-charter': 'No sealed trade charter stands yet.', 'scale-short': 'The charter needs a national-scale polity behind it.', 'no-bundle-feast': 'No feast bundle stands yet.', 'stage-short': 'The village must hold National Standing first.', 'tribute-failed': 'The tribute did not take — the veterans still stand. Try again when two stand ready.' }[r.reason] || 'That deed is not ready yet.';
+        Game.say(why);
+      }
+      refresh();
+    });
+    document.querySelectorAll('[data-ladder-cashout]').forEach(b => b.onclick = () => {
+      const r = Game.ladderCashOut ? Game.ladderCashOut() : null;
+      if (r && !r.ok) {
+        const why = { 'stage-short': 'The village must hold Regional Standing before it can end its run with dignity.', 'already-cashed-out': 'This village already ended its run — the ending stands.', 'already-over': 'This run has already ended.' }[r.why] || 'The run cannot end that way yet.';
+        Game.say(why);
+      }
+      refresh();
+    });
     // Alliance: the understanding (regional audit 2026-10-09 — was engine-only).
     document.querySelectorAll('[data-ally-propose]').forEach(b => b.onclick = () => { Game.proposeAlliance(b.dataset.allyPropose); refresh(); });
     document.querySelectorAll('[data-demand-yes]').forEach(b => b.onclick = () => { Game.answerDemand(b.dataset.demandYes, true); refresh(); });
@@ -17562,6 +17585,70 @@
           return `<p class="small" style="margin-top:6px"><b>🏠 Membership:</b> ${gs.used}/${gs.housing} housed${away ? ' · ' + away + ' away (still ours — no check-ins)' : ''}${gs.room <= 0 ? ' · ⚠ FULL' : ''}${ben ? `<br><span style="opacity:.6">Membership means: ${esc(ben)}</span>` : ''}</p>
           ${(() => { try { return Game.havenGrowthMeter ? havenGrowthHTML(Game.havenGrowthMeter()) : ''; } catch (e) { return ''; } })()}
           <div class="btnrow"><button class="btn sm ghost" data-mship-build>🔨 Build shelter (+2, 10 wood)</button></div>
+          ${(() => {
+            // THE LADDER (leg 3, brief §b.7): the Standing ladder bar —
+            // always visible, not only when the table is set. Stage name,
+            // counted points per track with capped tracks marked, the
+            // threshold, and the next rung's missing pieces in the
+            // fullSeatShortfall voice. One compact block, no new view.
+            try {
+              if (typeof Game.villageLadder !== 'function') return '';
+              const L = Game.villageLadder();
+              const LABELS = { fight: 'Fight', forage: 'Forage', craft: 'Craft', talk: 'Talk', explore: 'Explore' };
+              const ORDER = ['fight', 'forage', 'craft', 'talk', 'explore'];
+              const bits = ORDER.map(k => {
+                const t = ((L.tracks || {})[k] | 0), c = ((L.countedTracks || {})[k] | 0);
+                return t > c ? `${LABELS[k]} ${t} → ${c} · capped` : `${LABELS[k]} ${c}`;
+              }).join(' · ');
+              const target = L.nextThreshold == null
+                ? `${esc(L.stageName || 'National Standing')} reached`
+                : `${L.counted}/${L.nextThreshold} to ${esc(L.nextStageName || '')}`;
+              let bar = `<div style="margin-top:4px"><p class="small">◈ <b>Standing ladder — ${esc(L.stageName || 'Unranked')}:</b> ${target}<br><span style="opacity:.8">${esc(bits)}</span>`;
+              if (L.detail && (L.detail.bankedHeadStart | 0) > 0) bar += `<br><span style="opacity:.8">(+${L.detail.bankedHeadStart | 0} from the last village's climb — a fallen village leaves standing behind.)</span>`;
+              if (L.detail && (L.detail.bundleBonus | 0) > 0) bar += `<br><span style="opacity:.8">(+${L.detail.bundleBonus | 0} feast-bundle bonus.)</span>`;
+              if (L.nextThreshold != null && (L.shortfall | 0) > 0) {
+                const caps = (L.capped || []).map(k => LABELS[k]).join(', ');
+                const bundleOpen = !(L.detail && (L.detail.bundleStages || []).indexOf(L.stage | 0) >= 0);
+                bar += `<br>Short ${L.shortfall}${caps ? ` — capped: ${esc(caps)}` : ''}${bundleOpen ? '; the feast bundle is open' : ''}.`;
+              }
+              bar += '</p>';
+              // FEAST-BUNDLE BUY-OUT (leg 2 engine, leg 3 button): 8,000
+              // kcal straight from the pantry, no feast held. Shown while
+              // this stage's bundle is still open; the engine refuses
+              // honestly when the pantry is short, exiled, or away.
+              try {
+                const bundleStages = (L.detail && L.detail.bundleStages) || [];
+                if (bundleStages.indexOf(L.stage | 0) < 0 && typeof Game.feastBundleBuyOut === 'function') {
+                  bar += `<button class="btn sm" data-ladder-buyout title="Pay 8,000 kcal straight from the pantry — no feast held, no guests needed. The bundle counts as complete.">🍖 Buy out the feast bundle (8,000 kcal)</button>`;
+                }
+              } catch (e) {}
+              // CAPSTONE DELIVERY (leg 2 engine, leg 3 buttons): one action
+              // per ready capstone. Shown only when readiness says ready.
+              try {
+                if (typeof Game.ladderCapstoneReady === 'function' && typeof Game.ladderCapstoneDelivered === 'function' && !Game.ladderCapstoneDelivered()) {
+                  const caps = (typeof Game.ladderCapstones === 'function' ? Game.ladderCapstones() : []) || [];
+                  for (const c of caps) {
+                    let r = null;
+                    try { r = Game.ladderCapstoneReady(c.id); } catch (e) { r = null; }
+                    if (r && r.ready) bar += ` <button class="btn sm" data-ladder-capstone="${esc(c.id)}" title="${esc(c.payment || '')}">◈ Deliver: ${esc(c.label || c.id)}</button>`;
+                  }
+                } else if (typeof Game.ladderCapstoneDelivered === 'function') {
+                  const d = Game.ladderCapstoneDelivered();
+                  if (d) bar += `<br><span style="opacity:.8">Capstone delivered: ${esc(String(d))} — the world holds its breath until you sit.</span>`;
+                }
+              } catch (e) {}
+              // CASH-OUT (brief §b.10): offered once the village holds at
+              // least Regional stage (peak — a dip from deaths must not take
+              // away the dignified exit). Ends the run as a Respected
+              // Village and banks the climb for the next village.
+              try {
+                if ((L.peakStage | 0) >= 2 && typeof Game.ladderCashOut === 'function') {
+                  bar += `<br><button class="btn sm ghost" data-ladder-cashout title="End this run with dignity as a Respected Village. The village's climb is banked for the next village (at most 6 points toward its Village stage).">🏳️ End the run as a Respected Village</button>`;
+                }
+              } catch (e) {}
+              return bar + '</div>';
+            } catch (e) { return ''; }
+          })()}
           ${apps ? `<div style="margin-top:4px"><p class="small"><b>Remote applications:</b></p>${apps}</div>` : ''}
           ${(() => {
             try {
