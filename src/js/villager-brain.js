@@ -14,6 +14,7 @@
 //   - vbrainExecuteDepart(vid, hx, hy, announce)
 //   - vbrainOwnsDawn()
 //   - dutyFeedCands(vid)
+//   - assignFeedCand(vid)
 // rules:
 //   - vbrain_one_dawn_entry: every dawn lead pick (gate or lottery) is recorded through this module so one log explains the choice (code: vbrainScorePick, vbrainLogGate)
 //   - vbrain_legacy_weights: phase 1 keeps existing additive candidate weights and the weighted lottery; it does NOT ship the product-of-curves formula from VILLAGER-BRAIN.md (code: vbrainScorePick)
@@ -22,6 +23,7 @@
 //   - vbrain_duty_candidates: unassigned villagers get DUTY ads from believed village needs (objResourceBelief → forage/cook/water); player/convo assignTask stays a binding commitment — assigned people get no competing duty ads (code: dutyFeedCands, vbrainFeedExtras, VILLAGER-BRAIN Phase 6)
 //   - vbrain_duty_pick: when a DUTY extra is top-scoring vs the core lottery pick, it becomes the dawn commitment (duty_top_score); align maps forage/water/cook to real objectives — never calls assignTask (code: vbrainScorePick, vbrainAlignObjective, VILLAGER-BRAIN Phase 6)
 //   - vbrain_duty_respects_garden_keeper: standing village.gardenKeeper gets no DUTY ads and cannot duty_top_score override — caretaker order stays at Haven (code: dutyFeedCands, vbrainScorePick)
+//   - vbrain_assign_standing: obeyed standing assignTask / conversation orders feed as ASSIGN extras and win the dawn commitment (assign_standing); scorer honors the order — not a parallel decider; obedience gate unchanged (code: assignFeedCand, vbrainScorePick, vbrainAlignObjective, VILLAGER-BRAIN Phase 6)
 //   - vbrain_commitment: the dawn pick writes a commitment record the same day so midday agency honors it instead of rolling again (code: vbrainScorePick, vbrainCommit)
 //   - vbrain_materialize_matches_commit: when an aimed override wins, objPick aligns the live objective kind to the commitment after core chore/facing draws (code: vbrainAlignObjective)
 //   - vbrain_midday_event_only: mid-day idle/done refresh runs only when commit day/part is stale or a perception flag fired; dawn still force-refreshes (code: vbrainShouldRefresh, vbrainMarkPerception)
@@ -385,6 +387,50 @@
     }
     return out;
   }
+  function standingAssignmentOf(self, vid) {
+    var asg = null;
+    try {
+      if (typeof self.assignmentFor === 'function') asg = self.assignmentFor(vid);
+      else asg = ((self.state || {}).village || {}).assignments
+        ? ((self.state.village.assignments || {})[vid] || null) : null;
+    } catch (e) { asg = null; }
+    if (!asg || !asg.task || asg.task === 'rest') return null;
+    return asg;
+  }
+  // Player/conversation assignTask as a dawn feeder — binding commitment the
+  // scorer honors (Phase 6). Does not rewrite assignments or re-check obedience;
+  // the order already cleared the gate when written.
+  function assignFeedCandFor(self, vid) {
+    if (!vid) return null;
+    try { if (self.vbrainDisableAssignCands) return null; } catch (e) {}
+    try { if (vid === self.villagerId) return null; } catch (e) {}
+    try {
+      var vp = self.vpOf ? self.vpOf(vid) : null;
+      if (vp && vp.dead) return null;
+    } catch (e) {}
+    var asg = standingAssignmentOf(self, vid);
+    if (!asg) return null;
+    var task = asg.task;
+    var catalog = null;
+    try { catalog = self.delegateTasks ? self.delegateTasks() : null; } catch (e) { catalog = null; }
+    if (catalog && !catalog[task]) return null;
+    var chore = null;
+    if (task === 'cook' || task === 'tend' || task === 'teach' || task === 'mend' || task === 'garden') {
+      chore = task === 'tend' ? 'fire' : task;
+    }
+    return {
+      kind: 'ASSIGN',
+      assignTask: task,
+      dutyTask: task,
+      chore: chore,
+      w: 99,
+      vbrainSrc: 'assign',
+      considerations: [
+        { id: 'standing_order', raw: 1, note: asg.via || 'assignTask' },
+        { id: 'obedience', raw: 1, note: 'already_obeyed' },
+      ],
+    };
+  }
   function annotateCand(c) {
     var considerations = (c.considerations || []).slice();
     considerations.unshift({
@@ -413,6 +459,7 @@
       villageId: c.villageId || null,
       chore: c.chore || null,
       dutyTask: c.dutyTask || null,
+      assignTask: c.assignTask || null,
       vgoal: c.vgoal || null,
       vbrainSrc: c.vbrainSrc || null,
       winPlanAction: c.winPlanAction || null,
@@ -433,6 +480,7 @@
       vgoalLine: chosen.vgoalLine || null,
       chore: chosen.chore || null,
       dutyTask: chosen.dutyTask || null,
+      assignTask: chosen.assignTask || null,
       vbrainSrc: chosen.vbrainSrc || null,
       winPlanAction: chosen.winPlanAction || null,
       companion: chosen.companion || null,
@@ -516,12 +564,13 @@
       writeCommit(this, vid, { kind: kind, score: 1, vbrainSrc: 'gate:' + gateId }, entry);
       return entry;
     },
-    // Append win-plan + EXPEDITION + bond/link + duty (believed-need) ads.
-    // Marked with vbrainSrc so the scorer keeps them out of the core weight
-    // pool — core errand mix stays the legacy lottery; extras override
-    // in-log. Bond ads are scored for the log; entry points still execute
-    // propose/stage after the initiator's bondScoreCands weigh. Duty ads
-    // advertise production work from belief; they do not replace assignTask.
+    // Append win-plan + EXPEDITION + bond/link + duty (believed-need) +
+    // standing assignTask ads. Marked with vbrainSrc so the scorer keeps
+    // them out of the core weight pool — core errand mix stays the legacy
+    // lottery; extras override in-log. Bond ads are scored for the log;
+    // entry points still execute propose/stage after the initiator's
+    // bondScoreCands weigh. Duty ads advertise production work from belief;
+    // ASSIGN feeds the obeyed standing order as a binding commitment.
     vbrainFeedExtras: function (vid, cands, hx, hy) {
       if (!cands) return cands;
       try { if (this.vbrainDisableExtras) return cands; } catch (e) {}
@@ -547,6 +596,13 @@
           for (var di = 0; di < dutyCands.length; di++) cands.push(dutyCands[di]);
         }
       } catch (e) {}
+      // Phase 6: standing assignTask as a binding ASSIGN feeder.
+      try {
+        if (!this.vbrainDisableAssignCands) {
+          var assignCand = assignFeedCandFor(this, vid);
+          if (assignCand) cands.push(assignCand);
+        }
+      } catch (e) {}
       return cands;
     },
     // Dawn / probe feed: DUTY candidates for one unassigned villager from
@@ -554,6 +610,11 @@
     // are not low. Does not write assignments.
     dutyFeedCands: function (vid) {
       try { return dutyFeedCandsFor(this, vid) || []; } catch (e) { return []; }
+    },
+    // Dawn / probe feed: standing assignTask order as one ASSIGN candidate.
+    // Empty when unassigned / rest / dead. Does not rewrite assignments.
+    assignFeedCand: function (vid) {
+      try { return assignFeedCandFor(this, vid); } catch (e) { return null; }
     },
     // THE dawn scoring entry. Core candidates (no vbrainSrc) use the legacy
     // additive weighted lottery — same arithmetic as pre-brain objPick, same
@@ -598,6 +659,23 @@
             exi.winPlanAction === 'party_wait' || exi.winPlanAction === 'party_launch') {
           override = exi; overrideReason = 'win_plan:' + exi.winPlanAction; break;
         }
+      }
+      // Phase 6: standing assignTask is a binding commitment the scorer
+      // honors (hard inertia) — outranks soft DUTY ads / expedition hash.
+      // Win-plan holds/launches still outrank (table path). Materialize stays
+      // core (OVE-36); align maps assignTask onto a real objective. Seam:
+      // vbrainDisableAssignPick strips the pick hook (ASSIGN still scores).
+      if (!override) {
+        try {
+          if (!this.vbrainDisableAssignPick) {
+            for (i = 0; i < extras.length; i++) {
+              if (!extras[i] || extras[i].kind !== 'ASSIGN') continue;
+              override = extras[i];
+              overrideReason = 'assign_standing';
+              break;
+            }
+          }
+        } catch (e) {}
       }
       // Phase 6: DUTY extras compete by score. When the best DUTY weight beats
       // or ties the core lottery pick, it wins the commitment (no Math.random;
@@ -711,11 +789,14 @@
         if (c.vgoal) { o.goal = c.vgoal; o.goalLine = c.vgoalLine || null; }
         return o;
       }
-      // DUTY top-score: map believed-need duty onto a real errand. No assignTask.
-      if (c.kind === 'DUTY') {
-        var dutyTask = c.dutyTask || null;
-        var faceOutdoor = function (purpose, partsDefault) {
-          o.kind = purpose === 'water' ? 'WATER' : 'FORAGE';
+      // DUTY top-score / ASSIGN standing: map task onto a real errand.
+      // DUTY never writes assignTask; ASSIGN honors the standing order.
+      if (c.kind === 'DUTY' || c.kind === 'ASSIGN') {
+        var dutyTask = (c.kind === 'ASSIGN' ? (c.assignTask || c.dutyTask) : c.dutyTask) || null;
+        var faceKey = (c.kind === 'ASSIGN' ? 'assign' : 'duty') + '-face-' + dutyTask;
+        var distKey = (c.kind === 'ASSIGN' ? 'assign' : 'duty') + '-dist-' + dutyTask;
+        var faceOutdoor = function (purpose, partsDefault, kindOverride) {
+          o.kind = kindOverride || (purpose === 'water' ? 'WATER' : (purpose === 'hunt' ? 'HUNT' : (purpose === 'explore' ? 'EXPLORE' : 'FORAGE')));
           o.purpose = purpose;
           o.indoor = false;
           o.state = 'ready';
@@ -728,8 +809,8 @@
           var atHome = (o.tx == null || o.ty == null || (o.tx === hx && o.ty === hy));
           if (atHome) {
             var dirs = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, -1], [1, -1], [-1, 1]];
-            var di = Math.floor(dawnHashRoll(this, vid, 'duty-face-' + dutyTask) * dirs.length) % dirs.length;
-            var dist = 1 + Math.floor(dawnHashRoll(this, vid, 'duty-dist-' + dutyTask) * 2);
+            var di = Math.floor(dawnHashRoll(this, vid, faceKey) * dirs.length) % dirs.length;
+            var dist = 1 + Math.floor(dawnHashRoll(this, vid, distKey) * 2);
             o.tx = Math.max(0, Math.min(8, hx + dirs[di][0] * dist));
             o.ty = Math.max(0, Math.min(8, hy + dirs[di][1] * dist));
             if (o.tx === hx && o.ty === hy) o.tx = Math.max(0, Math.min(8, hx + 1));
@@ -738,21 +819,36 @@
             o.tightness = Math.abs((o.tx || hx) - hx) + Math.abs((o.ty || hy) - hy);
           }
         }.bind(this);
-        if (dutyTask === 'forage') {
-          faceOutdoor('forage', 3);
-        } else if (dutyTask === 'water') {
-          faceOutdoor('water', 2);
-        } else if (dutyTask === 'cook') {
+        var faceHaven = function (chore) {
           o.kind = 'HAVEN_CHORE';
           o.purpose = 'chore';
-          o.chore = 'cook';
+          o.chore = chore || 'fire';
           o.indoor = true;
           o.state = 'indoor';
           o.tx = hx; o.ty = hy; o.tightness = 0;
           o.targetVid = null;
           o.companion = null;
+        };
+        if (dutyTask === 'forage') {
+          faceOutdoor('forage', 3);
+        } else if (dutyTask === 'water') {
+          faceOutdoor('water', 2);
+        } else if (dutyTask === 'cook') {
+          faceHaven('cook');
+        } else if (c.kind === 'ASSIGN' && (dutyTask === 'garden' || dutyTask === 'tend' ||
+                   dutyTask === 'teach' || dutyTask === 'mend')) {
+          // Haven work — keep caretaker/haven semantics; gardenKeeper honor
+          // stays via gardenKeeperTurn (non-garden assign already skips care).
+          faceHaven(dutyTask === 'tend' ? 'fire' : dutyTask);
+        } else if (c.kind === 'ASSIGN' && dutyTask === 'hunt') {
+          faceOutdoor('hunt', 3, 'HUNT');
+        } else if (c.kind === 'ASSIGN' && (dutyTask === 'scout' || dutyTask === 'patrol')) {
+          faceOutdoor('explore', 3, 'EXPLORE');
+        } else if (c.kind === 'ASSIGN' && (dutyTask === 'wood' || dutyTask === 'stone' ||
+                   dutyTask === 'deadfall' || dutyTask === 'fish')) {
+          faceOutdoor('forage', 3);
         } else {
-          // Unknown dutyTask: keep materialize; commitment still records DUTY.
+          // Unknown dutyTask: keep materialize; commitment still records kind.
           return o;
         }
         if (c.vgoal) { o.goal = c.vgoal; o.goalLine = c.vgoalLine || null; }
