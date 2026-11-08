@@ -529,3 +529,154 @@ the table on these seeds, with or without the fix.
   decision, which belongs to the coordinator/Steve: re-judge the
   committed corpora under a rate-based starvation bar (no new sims),
   or hold the fix parked.
+
+## RE-JUDGE (run fleshout-20261108T1017Z, Loop A — Amendment A3)
+
+Worktree ~/workspace/worktrees/sim-doublenight-rejudge-a, branch
+sim-doublenight-a. NO new sims: the corpora are complete and
+deterministic, and the runner refuses re-runs (VERDICT-RENDERED).
+The re-judge re-runs ONLY the analyzer's goBar under the amended bar
+on the committed corpora, then rebases, re-proves, and re-checks.
+
+### Verdict under Amendment A3: GO
+
+`node scripts/analyze-doublenight-fix-a.js
+evidence/2026-11-07/doublenight-fix-a-corpus-before
+evidence/2026-11-07/doublenight-fix-a-corpus-after` (exit 0;
+analysis.json rewritten in the after corpus — the ONLY corpus file
+changed; all per-seed files untouched):
+
+| Clause (amended bar) | Before | After | Bar | Result |
+|---|---|---|---|---|
+| Dedupe fires, all 16 judged seeds | 19 | **0** | 0 | PASS |
+| Trajectory identity (A1) | — | clause2Pass=true; 14 zero-fire seeds exact end-to-end; firing seeds exact before first firing day; single-pass on both firing days | exact | PASS |
+| Median daysAlive | 100.5 | 100.5 (ratio 1.0) | ≥ 0.8× | PASS |
+| Starvation RATE (A3) | 0.217604 hungry-days/lived-day (356 / 1,636 lived days) | 0.217840 (359 / 1,648) | after ≤ before + 0.01 | PASS (delta +0.000236) |
+| Neutrality (P1 trace-off vs trace-on) | exact 8/8 | exact 8/8 | exact | PASS |
+
+goBar: `{"firesAfter":0,"firesAfterZero":true,"trajectoryClause2":true,
+"medianSurvivalRatio":1,"medianSurvivalOk":true,"starvationDelta":3,
+"starvationOk":false,"starvationRateBefore":0.217604,
+"starvationRateAfter":0.21784,"starvationRateDelta":0.000236,
+"starvationRateOk":true,"neutralityBeforeExact":true,
+"neutralityAfterExact":true,"go":true}`.
+
+The old count bar (`starvationOk: false`, 359 vs ≤ 358) is kept in
+the output for the audit trail only — Amendment A3 removes it from
+the gate because it is confounded by survival (see Amendment A3).
+The original NO-GO stands as rendered under the old bar and is NOT
+rewritten; this is a NEW verdict under the amended bar, per
+MEASUREMENT.md §14 (re-evaluation between runs). The original kill
+classifies under §14a as METRIC-BROKEN, not CONCEPT-DEAD. Convergence
+state: **converged** — the bug is gone on every judged seed.
+[needs-eyes]: NO — invisible correctness fix, no UI/feel/combat change.
+
+### Rebase onto current master
+
+Master read fresh from the main tree immediately before rebasing:
+246ce6dc22f13181c0167c861b4caae403192a9f (sim-binddiag-b landings).
+`git rebase 246ce6dc2...` — 10/10 picks, clean. The rebase
+stop-at-pick quirk struck once, at the game.js fix pick (dde5c0c75,
+"local changes would be overwritten by merge: src/js/game.js"):
+verified worktree clean (`git status` empty) and the pick unapplied
+(`git diff dde5c0c75 -- src/js/game.js` non-empty — the fix's lines
+absent from the tree), then `git rebase --continue` — no todo edit,
+no abort. New tip 77a16a503; master did not move again during the run
+(re-checked: still 246ce6dc2). The fix commit is now 8ef9ebc81, diff
+BYTE-IDENTICAL to dde5c0c75 (same md5 of the +/- lines; 9 lines,
+8 insertions / 1 deletion; only line numbers shifted +4 for the r114
+insertion above). Amendment A3 work committed first as a7d828c0b
+(analyzer rate bar + D10 legs + re-run analysis.json + A3 records);
+the safe-commit index-clobber class struck (MM on all 5 files,
+worktree hash == HEAD blob) and was repaired with the documented
+`git ls-tree HEAD | git update-index --add --index-info` pipe,
+verified `git status` empty + `git diff HEAD` empty.
+
+### Proof test on the rebased tip — 70 passed, E3 FAILED (investigated)
+
+`PLENTYDEPRI=1 DEPOSITGATE=1 MEALDAY_TRACE=1 SEEDS=<P1> DAYS=150
+node scripts/test-doublenight-fix-a.js` — 70 legs pass (including the
+3 new D10 A3 legs), then E3 fails with an assert crash, so E4/E5
+never ran. The task's "must be 70/70" is NOT met on the rebased tip,
+and the reason is substrate drift, not the fix:
+
+- E1 PASS: 0 dedupe fires live on seed 98079 (10 before). E2 PASS:
+  sweep mealDupCount 0. The fix works on the new base.
+- E3 FAIL: live daysAlive 120 vs after-corpus 122. Diagnostic
+  (oneRun 98079 on the rebased tip vs the after-corpus file):
+  mealDupCount 0; first meal-row diff day 33 — AFTER the d10 firing
+  day; Harold's d10 death row identical, Willie d27 identical; first
+  new death is Henry d36 (monster raid), live has 22 death rows vs
+  corpus 13, live 925 meal rows vs corpus 1,003. The trajectory is
+  identical through the firing day and diverges later.
+- Attribution: between the corpus base (32c47d41e) and new master
+  (246ce6dc2) there is exactly ONE src/js change — f2c892be3,
+  journey-establishment r114 Q1 (preserver XP per batch preserved,
+  +n per rack resolution, ladder 10→5 XP; game.js 16 lines). No
+  change to scripts/policies/competent.js, the sweep, or the
+  analyzer. r114 is a food-system change: cooks gain preserving
+  skill faster, so pantry/meal trajectories shift from the first
+  preserving resolutions onward — which is what the d33-first-diff
+  shows. The E3–E5 determinism legs assume the corpus base; the base
+  moved under them via a sibling landing. Same class as the §15
+  compare invalidity in the earlier run (sibling-loop churn), not a
+  fix regression. No repair is possible without re-running the
+  corpora on the new base, which the prereg + VERDICT-RENDERED
+  forbid. The verdict rests on the committed corpora, recorded and
+  deterministic on their base; the live legs E1/E2 confirm the fix
+  still fires correctly on the new base.
+- The E legs were NOT loosened to go green (AGENTS.md green-list
+  rule): the failure stands in the record for the coordinator.
+
+### check.js --quick on the rebased tip
+
+`node scripts/check.js --quick` was run TWICE on the rebased tip
+(292 scripts, 4 parallel). The two runs disagree, which is itself
+the finding — the profile is load-sensitive, not a stable baseline:
+
+- Run 1: **286 passed, 6 failed in 735s.**
+- Run 2 (re-run for the full inventory, full output logged):
+  **278 passed, 14 failed in 1542s.** The box ran ~2× slower and six
+  suites were killed at the 120s timeout (exit null).
+- Standing profile per the task: 280 passed / 7 failed pre-existing.
+  Both runs sit in the same band; neither shows a branch-caused
+  regression.
+
+Run 2's 14 failing suites, all investigated: 8 were re-run directly
+on the MAIN tree (master 246ce6dc2, no fix) and fail IDENTICALLY
+there — pre-existing, main tree clean before and after each run:
+test-measurement-proof-update, test-measurement-workflow ("retained
+neutrality proof covers the current Game/controller/harness inputs"),
+test-mobile-combat-cadence ("Continue does not wrap the announced
+round a second time"), test-occupation-panels ("real CLI workflow
+completed"), test-establishment-r20-fixes ("next day voices once
+more: expected 2, got 1" — r114 area, and r114 is on master),
+test-phone-frame-proof (stale phone receipt), test-measurement-cache-
+flags (4 legs), test-trust-observer-neutrality. The retained-proof
+staleness predates this branch (the proof is stale against current
+master already, after the r114 + binddiag landings) — the fix does
+not cause it, though any landing carrying a game.js change will need
+the proof refreshed via scripts/balance-proof-update.js per AGENTS.md.
+The remaining 6 are 120s timeout kills under 4-parallel load
+(test-solo-campaign-endings, test-time-save-crashes,
+test-synergy-stall, test-throttlefeast-20261014,
+test-capable-bot-20261014, test-table-endings-20261014) — run 1's
+lighter window had only 6 failures total, so these passed when the
+box was quieter. NOTE: scripts/test-doublenight-fix-a.js is NOT in
+the check.js quick list (no "doublenight" in check.js or
+green-list.txt), so check.js neither passes nor fails this arm — the
+proof test above is the arm's own check.
+
+### What lands
+
+Branch sim-doublenight-a, 10 commits on master 246ce6dc2, tip
+77a16a503 — for the coordinator to merge via --ff-only and report
+'merged locally, pending ship'. The fix itself (game.js, 9 lines),
+the A3 analyzer rate bar + D10 proof legs, the re-run analysis.json
+(goBar GO), the A3 records, and this re-judge section. The known
+open items for the coordinator: (1) proof-test legs E3–E5 fail on the
+rebased tip on substrate drift (r114) — E1/E2 pass, verdict rests on
+the committed corpora; (2) the retained measurement neutrality proof
+is stale on master already and will need a refresh at landing per the
+usual workflow. Wall numbers (unchanged): national 0, table 0, wins
+0 on the judged seeds — the fix moves no scale metric.
