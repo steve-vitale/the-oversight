@@ -1977,7 +1977,7 @@ Foreign villages as players — inner life (famine, succession, schism), splinte
 ### villager-agency (`villager-agency.js`)
 Villager AI. Villagers act on their own with goals and routines.
 
-**Provides:** agencyState(vid), agencyTick(), agencyOf(vid), agencyScore(vid), recordDeed(vid, deed), startExpedition(vid)
+**Provides:** agencyState(vid), agencyTick(), agencyOf(vid), agencyScore(vid), recordDeed(vid, deed), startExpedition(vid), fighterState(vid, opts), contestFleeSealed(opts), fighterShouldFlee(st, sit), applyFighterState(f, foeId)
 
 **Rules:**
 - (none documented)

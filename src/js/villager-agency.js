@@ -8,6 +8,10 @@
 //   - agencyScore(vid)
 //   - recordDeed(vid, deed)
 //   - startExpedition(vid)
+//   - fighterState(vid, opts)
+//   - contestFleeSealed(opts)
+//   - fighterShouldFlee(st, sit)
+//   - applyFighterState(f, foeId)
 // rules:
 //   - (none documented)
 // consumes:
@@ -88,6 +92,174 @@
   };
 
   var methods = {
+
+    // ---------- FIGHTER STATE (VILLAGER-BRAIN Phase 5) ----------
+    // One shared read for both fight brains: HP fraction, fear/confidence
+    // from recent outcomes, learned species knowledge for *this* foe, and
+    // personality curve params (fleeLine / aiTag) — not the old 3-bucket
+    // collapse alone. Field morale and TB hopeless/reactive flee both ask
+    // the same question through fighterShouldFlee.
+    //
+    // opts: { foeId|species, hp, maxHp, noFlee }
+    fighterState(vid, opts) {
+      opts = opts || {};
+      var foeId = opts.foeId || opts.species || null;
+      var a = null;
+      try { a = this.agencyOf(vid); } catch (e) { a = null; }
+      var know = (a && a.know && a.know[vid]) || { fought: [] };
+      var foughtList = know.fought || [];
+      var fought = !!(foeId && foughtList.indexOf(foeId) !== -1);
+      var scars = (a && a.scars && a.scars[vid]) || [];
+      var bravery = ((a && a.xp && a.xp[vid]) || {}).bravery || 0;
+      var temper = 'steady';
+      try { temper = this.npcTemper(vid) || 'steady'; } catch (e) {}
+
+      var hp, maxHp;
+      if (opts.hp != null) {
+        hp = Number(opts.hp);
+        maxHp = Number(opts.maxHp != null ? opts.maxHp : Math.max(100, hp));
+      } else {
+        hp = ((this.state.village || {}).health || {})[vid];
+        if (hp === undefined || hp === null) hp = 100;
+        hp = Number(hp);
+        maxHp = Math.max(100, hp);
+      }
+      if (!Number.isFinite(hp)) hp = 100;
+      if (!Number.isFinite(maxHp) || maxHp <= 0) maxHp = 100;
+      var hpFrac = hp / Math.max(1, maxHp);
+
+      // Fear / confidence from recent outcomes + temperament + this foe.
+      var fear = 0.2;
+      fear += Math.min(0.35, scars.length * 0.08);
+      try {
+        var needs = this.npcNeeds && this.npcNeeds(vid);
+        if (needs && needs.fear != null) {
+          fear = Math.max(fear, Math.min(1, (needs.fear || 0) / 100));
+        }
+      } catch (e) {}
+      try {
+        if (this.isPostFleeResting && this.isPostFleeResting(vid)) {
+          fear = Math.min(1, fear + 0.25);
+        }
+      } catch (e) {}
+
+      var confidence = 0.35 + Math.min(0.35, bravery * 0.02);
+      if (temper === 'bold' || temper === 'intense') confidence += 0.12;
+      if (temper === 'cautious' || temper === 'withdrawn' || temper === 'guarded') confidence -= 0.12;
+      // Lived contact with this species steadies the hand.
+      if (fought) {
+        confidence = Math.min(1, confidence + 0.2);
+        fear = Math.max(0, fear - 0.15);
+      }
+      // Mauled: scarred survivor of this species — respect without panic erase.
+      var mauled = !!(fought && scars.length > 0);
+      if (mauled) {
+        fear = Math.min(1, fear + 0.1);
+        confidence = Math.max(0, confidence - 0.05);
+      }
+      fear = Math.max(0, Math.min(1, fear));
+      confidence = Math.max(0, Math.min(1, confidence));
+
+      // Curve params from the one personality read (not spawn-time 3-bucket).
+      var fleeLine = 0.52;
+      if (temper === 'bold') fleeLine = 0.38;
+      else if (temper === 'intense') fleeLine = 0.42;
+      else if (temper === 'prickly') fleeLine = 0.45;
+      else if (temper === 'cautious' || temper === 'withdrawn' || temper === 'guarded') fleeLine = 0.62;
+      else if (temper === 'suspicious' || temper === 'cynical') fleeLine = 0.55;
+      fleeLine += (fear - 0.3) * 0.25;
+      fleeLine -= (confidence - 0.4) * 0.25;
+      // Phase 5 channel: personal know.fought bends the flee line.
+      // 0.14 (not 0.12) keeps a clear band at common probe HPs (30%/45%)
+      // after fear/confidence drift — and we round to 3dp so float edges
+      // like 0.30000000000000004 cannot flip fighterShouldFlee.
+      if (fought) fleeLine -= 0.14;
+      fleeLine = Math.round(Math.max(0.15, Math.min(0.75, fleeLine)) * 1000) / 1000;
+
+      var aiTag = 'helpful';
+      if (fleeLine <= 0.42 || temper === 'bold' || temper === 'intense') aiTag = 'brave';
+      else if (fleeLine >= 0.58 || temper === 'cautious' || temper === 'withdrawn' || temper === 'guarded') aiTag = 'cautious';
+
+      // knowsTricks stays false here — villageKnowsTrick is a different
+      // (village-shared) channel; Phase 5's personal channel is know.fought.
+      return {
+        vid: vid,
+        hpFrac: hpFrac,
+        fear: fear,
+        confidence: confidence,
+        temperament: temper,
+        curve: { fleeLine: fleeLine, aiTag: aiTag },
+        species: {
+          id: foeId,
+          fought: fought,
+          mauled: mauled,
+          knowsTricks: false,
+        },
+        noFlee: this.contestFleeSealed(opts),
+      };
+    },
+
+    // Single contest/arena gate — both brains call this instead of each
+    // privately OR-ing arenaContest / noFlee flags.
+    contestFleeSealed(opts) {
+      opts = opts || {};
+      if (opts.noFlee) return true;
+      try { if ((this.state || {}).arenaContest) return true; } catch (e) {}
+      try {
+        if (opts.fight && opts.fight.noFlee) return true;
+      } catch (e) {}
+      try { if ((this.tbfight || {}).noFlee) return true; } catch (e) {}
+      return false;
+    },
+
+    // Shared "do I run?" — TB hopeless/reactive and field morale ask this.
+    // sit: { hopeless, winning, hpFrac, floorFlee }
+    fighterShouldFlee(st, sit) {
+      sit = sit || {};
+      if (!st || st.noFlee) return false;
+      var hpFrac = sit.hpFrac != null ? sit.hpFrac : st.hpFrac;
+      if (!Number.isFinite(hpFrac)) return false;
+      var fleeLine = (st.curve && st.curve.fleeLine != null) ? st.curve.fleeLine : 0.5;
+      if (sit.winning && hpFrac >= 0.05) return false;
+      if (sit.hopeless && hpFrac < fleeLine) return true;
+      if (sit.floorFlee && !sit.winning && hpFrac < fleeLine) return true;
+      return false;
+    },
+
+    // Stamp shared state onto a TB fighter so villagerDecide (pure) and
+    // hopeless/ability paths read the same curves without a Game handle.
+    applyFighterState(f, foeId) {
+      if (!f || !f.villagerId) return null;
+      var foe = foeId || null;
+      if (!foe) {
+        try {
+          var fighters = ((this.tbfight || {}).fighters) || [];
+          for (var i = 0; i < fighters.length; i++) {
+            var o = fighters[i];
+            if (!o || !o.alive || o.fled) continue;
+            if (o.kind === 'monster' || o.kind === 'hostile') {
+              foe = o.id || (o.mdef && o.mdef.id) || null;
+              if (foe) break;
+            }
+          }
+        } catch (e) {}
+      }
+      var st = this.fighterState(f.villagerId, {
+        foeId: foe,
+        hp: f.hp,
+        maxHp: f.maxHp,
+        noFlee: !!(this.tbfight && this.tbfight.noFlee),
+        fight: this.tbfight || null,
+      });
+      f._fighterState = st;
+      f.ai = st.curve.aiTag;
+      f.fleeLine = st.curve.fleeLine;
+      f.fighterFear = st.fear;
+      f.fighterConfidence = st.confidence;
+      f.speciesFought = st.species.fought;
+      f.speciesMauled = st.species.mauled;
+      return st;
+    },
 
     // ---------- STATE ----------
     agencyState() {
