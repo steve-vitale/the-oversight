@@ -31753,7 +31753,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const meatKind = (it) => String((it && (it.plantId || '')) || '').replace(/^meat_/, '');
       const isMeat = (it) => it && it.foodKind === 'meat';
       return [
-        { id: 'pemmican', label: 'crafted centrepiece', resolves: "itemId 'pemmican' (food.js, crafted from dried/smoked meat + rendered fat + berries)", test: (it) => (it && it.itemId) === 'pemmican' },
+        { id: 'crafted_centrepiece', label: 'crafted centrepiece', resolves: "itemId 'pemmican' (food.js, crafted from dried/smoked meat + rendered fat + berries)", test: (it) => (it && it.itemId) === 'pemmican' },
         { id: 'monster_meat', label: 'monster meat, tested and cooked', resolves: "plantId 'meat_<monster id>' for a real monster id (game.js monster-meat servings)", test: (it) => isMeat(it) && !!monsterIds[meatKind(it)] },
         { id: 'hunted_meat', label: 'hunted meat', resolves: "plantId 'meat_<animal id>' (foodCarcass, food.js), uncooked", test: (it) => isMeat(it) && !!animalIds[meatKind(it)] && /^(carcass|cleaned|raw)$/.test(String(it.foodState || '')) },
         { id: 'cooked_meat', label: 'cooked meat', resolves: "foodKind 'meat' + cooked/smoked/roasted/dried state (the quality formula's own centrepiece check)", test: (it) => isMeat(it) && /cook|smok|roast|dri/i.test(String(it.foodState || '')) },
