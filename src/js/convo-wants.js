@@ -733,6 +733,14 @@
         // (The old pool re-stated the ask — the verbatim-repeat vector.)
         const c = this.convoGet(vid);
         const favor = (c.want && c.want.favor) || this.convoGetFavor(vid);
+        // DEFERRED AFTER RESUME (dialog audit #1 2026-11-08): a resume opener
+        // can claim unfinished debt/favor while this sitting never pinned a
+        // favor (the ask was preempted). The ledger may still hold an old
+        // settled favor — answering "it's handled" contradicts the opener
+        // (seed 7 Nolan). Skip the settled short-circuit and state the
+        // deferred ask below.
+        const deferredAfterResume = !!(c && c._resumedOnce && !(c.want && c.want.favor) &&
+          ((c.want && c.want.stage) || 0) < 1);
         // SETTLED FAVOR (journey establishment r7 2026-10-12): the opener can
         // declare the favor settled mid-conversation — "Never mind the wound,
         // we got it handled" fires when the need died between the seed and
@@ -741,7 +749,7 @@
         // ("It's getting worse, not better" moments after "we got it
         // handled"). A settled favor engaged gets an honest it's-handled
         // acknowledgment, never the dead ask's why.
-        if (favor && (favor.state === 'moot' || favor.state === 'thanked' ||
+        if (!deferredAfterResume && favor && (favor.state === 'moot' || favor.state === 'thanked' ||
                       favor.state === 'acknowledged' || favor.state === 'fulfilled')) {
           return this.convoPickCycle(vid, 'favor:handled:' + (favor.kind || 'favor'), [
             '"It\'s handled. Really — it is. I appreciate you asking, though."',
@@ -753,9 +761,11 @@
         // whyLines pool. Per-speaker cycling (convoPickCycle is run-ledger
         // aware) so the second villager stating the same need in an outbreak
         // gets their own words — never the dry line for their own suffering.
-        if (favor && favor.whyLines && favor.whyLines.length)
+        // Deferred-after-resume skips ledger why/stakes: the pinned ask was
+        // never stated, so deepen-from-ledger would voice a closed favor.
+        if (!deferredAfterResume && favor && favor.whyLines && favor.whyLines.length)
           return this.convoPickCycle(vid, 'favor:why:' + (favor.kind || 'favor'), favor.whyLines);
-        if (favor) {
+        if (!deferredAfterResume && favor) {
           // WHY BLOCKED (journey-succession r147): the single whyLine is
           // ledger-blocked whenever the same kind was recently asked —
           // another villager, or this villager's earlier sitting — and
@@ -1069,6 +1079,51 @@
         } catch (e) { return null; }
       },
       engageBeat(vid) {
+        // HELP COHERENCE (dialog audit #1 2026-11-08): "How can I help?" on
+        // a repay want must match the opener's claim. A live unfinished
+        // outing ("We missed the promise. We still need to get home…") or
+        // open obligation must NEVER hear "we're square" — that line is
+        // only honest when nothing is still owed. Fresh phrasings (not the
+        // opener verbatim) so sayLine's per-sitting ledger can't dry the
+        // answer into "lost my train of thought."
+        const c = this.convoGet(vid);
+        const favor = (c.want && c.want.favor) || this.convoGetFavor(vid);
+        if (favor?.kind === 'water_haul' && favor.waterRun && !favor.waterRun.returned) {
+          return this.convoPickCycle(vid, 'repay:help:water', [
+            '"Get home with me. We still have to unload the water."',
+            '"The buckets aren\'t empty. That\'s the help — finish the haul."',
+            '"We still need to get this water home. Come on."',
+          ]) || '"We still need to get home and unload what we have."';
+        }
+        if (favor?.kind === 'forage_help' && favor.forageRun && !favor.forageRun.returned) {
+          return this.convoPickCycle(vid, 'repay:help:forage', [
+            '"Get home with me. We still have to unload what we hauled."',
+            '"The packs aren\'t empty. That\'s the help — finish the outing."',
+            '"We still need to get this haul home. Come on."',
+          ]) || '"We still need to get home and unload what we have."';
+        }
+        const open = this.openFavorObligation(vid);
+        if (open && open.favorTask && favor) {
+          const note = (typeof this.convoFavorDeadlineNote === 'function')
+            ? this.convoFavorDeadlineNote(favor) : '';
+          return this.convoPickCycle(vid, 'repay:help:open:' + (favor.kind || 'favor'), [
+            `"${favor.short} — that's still open.${note ? ' ' + note : ''}"`,
+            `"Help with ${favor.short}. It hasn't moved."`,
+            `"Same ask: ${favor.short}. I'm still waiting."`,
+          ]) || `"${favor.short} — that's still open."`;
+        }
+        if (favor && favor.state === 'fulfilled') {
+          return this.convoPickCycle(vid, 'repay:help:thanks:' + (favor.kind || 'favor'), [
+            `"You came through on ${favor.short}. I won't forget it."`,
+            `"${favor.short} — you kept your word. Thank you."`,
+          ]) || `"You came through on ${favor.short}. I won't forget it."`;
+        }
+        if (favor && favor.state === 'broken') {
+          return this.convoPickCycle(vid, 'repay:help:broken:' + (favor.kind || 'favor'), [
+            `"You said you'd help with ${favor.short}. ...It's done now. Forget it."`,
+            `"About ${favor.short} — it's done. I haven't forgotten, but I'm not asking again."`,
+          ]) || `"You said you'd help with ${favor.short}. ...It's done now. Forget it."`;
+        }
         return '"Good. Then we\'re square." They look lighter for it.';
       },
       deflectBeat(vid) {

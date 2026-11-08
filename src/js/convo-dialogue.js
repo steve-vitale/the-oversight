@@ -429,9 +429,24 @@
         // REBUILD 2026-10-11: the NPC states the favor from the WANT DEF —
         // the def owns the concrete ask (never "Here's the thing —" loops).
         c.transcript.push({ who: 'you', text: '"How can I help?"' });
-        const settledFavor = c.want?.id === 'ask_favor' &&
-          (c.want.favor || this.convoGetFavor(vid));
-        if (settledFavor && ['moot','fulfilled','thanked','broken','acknowledged','declined'].includes(settledFavor.state)) {
+        const pinnedFavor = c.want?.favor || null;
+        const ledgerFavor = (typeof this.convoGetFavor === 'function') ? this.convoGetFavor(vid) : null;
+        const helpFavor = pinnedFavor || ledgerFavor;
+        const unfinishedOuting = !!(helpFavor && (
+          (helpFavor.kind === 'water_haul' && helpFavor.waterRun && !helpFavor.waterRun.returned) ||
+          (helpFavor.kind === 'forage_help' && helpFavor.forageRun && !helpFavor.forageRun.returned)
+        ));
+        // RESUME / DEFERRED ASK (dialog audit #1 2026-11-08): a resume opener
+        // can claim unfinished debt/favor while the sitting's ask_favor has
+        // not yet pinned a favor (opener preempted the ask). The ledger may
+        // still hold an old settled favor — "It's already handled" then
+        // contradicts the opener (seed 7 Nolan). Fall through to engageBeat
+        // so the deferred ask or unfinished debt is named honestly.
+        const deferredAfterResume = !!(c._resumedOnce && c.want?.id === 'ask_favor' &&
+          !pinnedFavor && (c.want.stage || 0) < 1);
+        const settledFavor = c.want?.id === 'ask_favor' && helpFavor;
+        if (!unfinishedOuting && !deferredAfterResume &&
+            settledFavor && ['moot','fulfilled','thanked','broken','acknowledged','declined'].includes(settledFavor.state)) {
           const line = '"It\'s already handled. Thank you for asking."';
           this.sayLine(vid, line, { structural: true });
           // HELP SPEND-OUT (journey-social r35 2026-10-20): a settled favor's
@@ -451,7 +466,9 @@
         // already engaged, the favor is STATED -- re-stating it would hit
         // sayLine's no-repeat ledger and produce NO NPC reply (options
         // refresh, silence). Say so honestly instead of re-emitting.
-        if (c.want && (c.want.stage || 0) >= 2) {
+        // Unfinished joint outings stay concrete on every Help press — the
+        // cargo is still real — so they skip the vague restated pool.
+        if (!unfinishedOuting && c.want && (c.want.stage || 0) >= 2) {
           const restated = this.convoPickCycle(vid, 'dlg:help:restated', [
             '"Like I said -- I could really use the help."',
             '"I already told you -- just say the word."',
@@ -478,7 +495,14 @@
           '"Nothing I can name. Company\'s enough."',
         ]) || '"Honestly? I\'m alright right now."';
         const composed = this.convoComposeDlg(vid, favorLine, choiceId);
-        const said = this.sayLine(vid, composed, { tag: (c.want && c.want.id === 'ask_favor') ? 'favor' : undefined });
+        // Unfinished outing / deferred-resume Help is conversation grammar
+        // matching the opener — structural so a ledger-blocked stale
+        // "we're square" cannot dry into train-of-thought (seed 99 Nora).
+        const helpStructural = !!(unfinishedOuting || deferredAfterResume);
+        const said = this.sayLine(vid, composed, {
+          tag: (c.want && c.want.id === 'ask_favor') ? 'favor' : undefined,
+          structural: helpStructural || undefined,
+        });
         // BLOCKED REPEAT (dialog-ui-fix 2026-10-11, defect 6; cycling
         // journey-social 2026-10-12): if sayLine's ledger blocked the line,
         // do NOT return it as if spoken -- that desyncs the UI into "options
@@ -487,6 +511,17 @@
         // SAME line goes in as the fallback so re-fired cycles can't desync
         // the claimed line from the transcript.
         if (!said) {
+          // UNFINISHED HELP BLOCKED (dialog audit #1 2026-11-08): never let
+          // a blocked Help on unfinished favor/debt fall to dry train-of-
+          // thought. Name the concrete unfinished work structurally.
+          if (unfinishedOuting || deferredAfterResume || (c.want && c.want.id === 'repay')) {
+            const honest = unfinishedOuting
+              ? '"We still need to get home and unload what we have. That\'s the help."'
+              : (this.convoSelfRepeatLine(vid) || '"I just said — did you miss it?"');
+            const spoken = this.sayLine(vid, honest, { structural: true, fallback: honest }) || honest;
+            this.convoWantEngage(vid, 'engage');
+            return { line: spoken, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
+          }
           const dup = this.convoSelfRepeatLine(vid) || '"I just said — did you miss it?"';
           const spoken = this.sayLine(vid, dup, { fallback: dup }) || dup;
           this.convoWantEngage(vid, 'engage');
