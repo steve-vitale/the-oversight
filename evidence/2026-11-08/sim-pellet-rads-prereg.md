@@ -25,6 +25,23 @@ that should work a bit like fallout."
 - Exposure clears slowly when the bearer is not boosting, and
   medicine / a cure clears it faster.
 
+## Steve's cure ruling (2026-11-08 13:12 CST) — Amendment A1
+
+"There must be a cure for the radiation, not just handing the
+pellet off." This design satisfies it: the cure is REAL and
+proven, not just the pass. Healing-ability cures clear exposure
+faster (a real cure drops exposure by `radsCureDrop`; slow decay
+clears the rest) — via the medic duty's ability channel, the
+scholar's own `treatDisease`, and `treatVillager` — and RB-1 §9/§10
+prove cures clearing exposure on both bodies. The pass is NOT the
+only relief, and it is not the cure: passing leaves the old
+bearer's dose on the old bearer. Germ-medicine stays 'no' (see
+"Medicine, decided" below): the ruling names a cure, not a
+medicine, and the specificity law stands. If the P1 panel shows
+bearers sickening with no cure ever firing in the wild (no healer,
+no healing ability), that is a flagged finding for the next
+decision — it is recorded as a panel observation, not hidden.
+
 ## Base
 
 - Master at rework start: `6680d7924` (pellet boost + cost, pantry
@@ -339,7 +356,12 @@ run the same rig on the pre-rework root (the landed pantry build,
   light-use days they show neither. If the panel contains NO
   heavy-use day, that is a finding, not a pass — the cost never
   binds in the wild at these numbers, and the numbers need a
-  further amendment (NO-GO on tuning).
+  further amendment (NO-GO on tuning). (d) Cure observation
+  (recorded, not a bar — Amendment A1): on the P1 panel, for every
+  bearer who sickens, record whether a cure cleared their exposure
+  in the wild (duty ability cure, treatDisease, treatVillager) or
+  whether only decay / the pass relieved them. If no cure ever
+  fires in the wild, flag it as a finding for the next decision.
 - P3 — Q4: rigged unit + live seed. Unit: a paid boost marks
   `feastSurgeUsed` + `feastSurgeBy` ('p' for the scholar,
   'v:<id>' for a villager bearer); the free floor alone does NOT
