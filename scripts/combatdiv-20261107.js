@@ -196,6 +196,11 @@ async function oneRun(seed) {
           varmor: pre ? pre.varmor : null, wb: pre ? pre.wb : null,
           outcome: rec.outcome || rec.result || null, rounds: (rec.rounds | 0) || 0,
           vTaken: (rec.vTaken | 0) || 0, mDealt: (rec.mDealt | 0) || 0,
+          // FIGHTLOOP-B (2026-11-08): raw (unmitigated) incoming totals the
+          // morale read uses after the fix; null on unfixed code (fields
+          // absent). Pure read, no state writes, no RNG draws.
+          vTakenRaw: (rec.vTakenRaw != null) ? rec.vTakenRaw : null,
+          allyTakenRaw: (rec.allyTakenRaw != null) ? rec.allyTakenRaw : null,
           vHpLeft: (rec.vHpLeft != null) ? rec.vHpLeft : null,
           mHpLeft: (rec.mHpLeft != null) ? rec.mHpLeft : null,
           allyDealt: (rec.allyDealt | 0) || 0, allyVid: rec.allyVid || null,
