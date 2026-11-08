@@ -2001,7 +2001,7 @@ Villager AI. Villagers act on their own with goals and routines.
 ### villager-brain (`villager-brain.js`)
 One dawn scoring entry for Haven villagers — candidates feed, one pass picks, a log explains every pick. Phase-1 coherence only; IAUS product-of-curves arithmetic stays deferred pending Steve review.
 
-**Provides:** vbrainScorePick(vid, cands, opts), vbrainLogGate(vid, kind, gateId, detail), vbrainFeedExtras(vid, cands, hx, hy), vbrainAlignObjective(vid, o, hx, hy), vbrainCommit(vid), vbrainMarkPerception(vid, reason), vbrainShouldRefresh(vid, opts), vbrainLastLog(vid), vbrainLogs(), vbrainExecuteDepart(vid, hx, hy, announce), vbrainOwnsDawn(), dutyFeedCands(vid)
+**Provides:** vbrainScorePick(vid, cands, opts), vbrainLogGate(vid, kind, gateId, detail), vbrainFeedExtras(vid, cands, hx, hy), vbrainAlignObjective(vid, o, hx, hy), vbrainCommit(vid), vbrainMarkPerception(vid, reason), vbrainShouldRefresh(vid, opts), vbrainLastLog(vid), vbrainLogs(), vbrainExecuteDepart(vid, hx, hy, announce), vbrainOwnsDawn(), dutyFeedCands(vid), assignFeedCand(vid)
 
 **Rules:**
 - vbrain_one_dawn_entry: every dawn lead pick (gate or lottery) is recorded through this module so one log explains the choice (code: vbrainScorePick, vbrainLogGate)
@@ -2011,6 +2011,7 @@ One dawn scoring entry for Haven villagers — candidates feed, one pass picks, 
 - vbrain_duty_candidates: unassigned villagers get DUTY ads from believed village needs (objResourceBelief → forage/cook/water); player/convo assignTask stays a binding commitment — assigned people get no competing duty ads (code: dutyFeedCands, vbrainFeedExtras, VILLAGER-BRAIN Phase 6)
 - vbrain_duty_pick: when a DUTY extra is top-scoring vs the core lottery pick, it becomes the dawn commitment (duty_top_score); align maps forage/water/cook to real objectives — never calls assignTask (code: vbrainScorePick, vbrainAlignObjective, VILLAGER-BRAIN Phase 6)
 - vbrain_duty_respects_garden_keeper: standing village.gardenKeeper gets no DUTY ads and cannot duty_top_score override — caretaker order stays at Haven (code: dutyFeedCands, vbrainScorePick)
+- vbrain_assign_standing: obeyed standing assignTask / conversation orders feed as ASSIGN extras and win the dawn commitment (assign_standing); scorer honors the order — not a parallel decider; obedience gate unchanged (code: assignFeedCand, vbrainScorePick, vbrainAlignObjective, VILLAGER-BRAIN Phase 6)
 - vbrain_commitment: the dawn pick writes a commitment record the same day so midday agency honors it instead of rolling again (code: vbrainScorePick, vbrainCommit)
 - vbrain_materialize_matches_commit: when an aimed override wins, objPick aligns the live objective kind to the commitment after core chore/facing draws (code: vbrainAlignObjective)
 - vbrain_midday_event_only: mid-day idle/done refresh runs only when commit day/part is stale or a perception flag fired; dawn still force-refreshes (code: vbrainShouldRefresh, vbrainMarkPerception)
