@@ -1984,13 +1984,14 @@ Villager AI. Villagers act on their own with goals and routines.
 ### villager-brain (`villager-brain.js`)
 One dawn scoring entry for Haven villagers — candidates feed, one pass picks, a log explains every pick. Phase-1 coherence only; IAUS product-of-curves arithmetic stays deferred pending Steve review.
 
-**Provides:** vbrainScorePick(vid, cands, opts), vbrainLogGate(vid, kind, gateId, detail), vbrainFeedExtras(vid, cands, hx, hy), vbrainCommit(vid), vbrainLastLog(vid), vbrainLogs(), vbrainExecuteDepart(vid, hx, hy, announce), vbrainOwnsDawn()
+**Provides:** vbrainScorePick(vid, cands, opts), vbrainLogGate(vid, kind, gateId, detail), vbrainFeedExtras(vid, cands, hx, hy), vbrainAlignObjective(vid, o, hx, hy), vbrainCommit(vid), vbrainLastLog(vid), vbrainLogs(), vbrainExecuteDepart(vid, hx, hy, announce), vbrainOwnsDawn()
 
 **Rules:**
 - vbrain_one_dawn_entry: every dawn lead pick (gate or lottery) is recorded through this module so one log explains the choice (code: vbrainScorePick, vbrainLogGate)
 - vbrain_legacy_weights: phase 1 keeps existing additive candidate weights and the weighted lottery; it does NOT ship the product-of-curves formula from VILLAGER-BRAIN.md (code: vbrainScorePick)
 - vbrain_feeders_not_deciders: goals bias, win-plan stage intents, and EXPEDITION feed candidates here; agency chance-rolls and win-plan re-decides stop owning the day when this module is loaded (code: vbrainFeedExtras, vbrainExecuteDepart)
 - vbrain_commitment: the dawn pick writes a commitment record the same day so midday agency honors it instead of rolling again (code: vbrainScorePick, vbrainCommit)
+- vbrain_materialize_matches_commit: when an aimed override wins, objPick aligns the live objective kind to the commitment after core chore/facing draws (code: vbrainAlignObjective)
 - vbrain_chain_safe: missing feeders fail silent; agency falls back to the old chance roll only when vbrainOwnsDawn is absent (code: vbrainFeedExtras)
 
 **Consumes:** npcRangeProfile, npcMaxDist, agencyState (villager-agency.js), winPlanOf, winPlanHavenTick (win-plan.js) — optional feeders, vgoalBiasCands (villager-goals.js) — called by objPick before this scorer

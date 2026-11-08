@@ -5,6 +5,7 @@
 //   - vbrainScorePick(vid, cands, opts)
 //   - vbrainLogGate(vid, kind, gateId, detail)
 //   - vbrainFeedExtras(vid, cands, hx, hy)
+//   - vbrainAlignObjective(vid, o, hx, hy)
 //   - vbrainCommit(vid)
 //   - vbrainLastLog(vid)
 //   - vbrainLogs()
@@ -15,6 +16,7 @@
 //   - vbrain_legacy_weights: phase 1 keeps existing additive candidate weights and the weighted lottery; it does NOT ship the product-of-curves formula from VILLAGER-BRAIN.md (code: vbrainScorePick)
 //   - vbrain_feeders_not_deciders: goals bias, win-plan stage intents, and EXPEDITION feed candidates here; agency chance-rolls and win-plan re-decides stop owning the day when this module is loaded (code: vbrainFeedExtras, vbrainExecuteDepart)
 //   - vbrain_commitment: the dawn pick writes a commitment record the same day so midday agency honors it instead of rolling again (code: vbrainScorePick, vbrainCommit)
+//   - vbrain_materialize_matches_commit: when an aimed override wins, objPick aligns the live objective kind to the commitment after core chore/facing draws (code: vbrainAlignObjective)
 //   - vbrain_chain_safe: missing feeders fail silent; agency falls back to the old chance roll only when vbrainOwnsDawn is absent (code: vbrainFeedExtras)
 // consumes:
 //   - npcRangeProfile, npcMaxDist, agencyState (villager-agency.js)
@@ -281,6 +283,8 @@
       part: partOf(self),
       scoreAtChoice: chosen.score != null ? chosen.score : (chosen.w || 0),
       vgoal: chosen.vgoal || null,
+      vgoalLine: chosen.vgoalLine || null,
+      chore: chosen.chore || null,
       vbrainSrc: chosen.vbrainSrc || null,
       winPlanAction: chosen.winPlanAction || null,
       companion: chosen.companion || null,
@@ -413,9 +417,10 @@
           break;
         }
       }
-      // Materialize the CORE pick so the legacy RNG stream (chore pick,
-      // outdoor facing, etc.) stays byte-identical. Aimed overrides are
-      // recorded on the commitment + log; agencyTick executes EXPEDITION.
+      // Return the CORE pick so objPick still runs chore/facing draws on the
+      // legacy lottery kind (panel byte-stability). Commitment + log carry the
+      // aimed override; objPick calls vbrainAlignObjective afterward so the
+      // live objective kind matches the commit without extra Math.random.
       var materialize = chosen;
       var logged = override || chosen;
       var chosenAnn = logged ? annotateCand(logged) : null;
@@ -437,6 +442,54 @@
       pushLog(this, entry);
       if (logged) writeCommit(this, vid, Object.assign({}, logged, { score: chosenAnn ? chosenAnn.score : logged.w }), entry);
       return materialize;
+    },
+    // OVE-36 / Candidate A: after objPick materializes the core lottery kind
+    // (preserving chore/facing RNG), rewrite the live objective to the dawn
+    // commitment when an aimed override won. No Math.random here.
+    vbrainAlignObjective: function (vid, o, hx, hy) {
+      if (!o) return o;
+      var log = null;
+      try { log = this.vbrainLastLog(vid); } catch (e) { log = null; }
+      if (!log || !log.override) return o;
+      var c = null;
+      try { c = this.vbrainCommit(vid); } catch (e) { c = null; }
+      if (!c || !c.kind) return o;
+      if (c.day != null && c.day !== dayOf(this)) return o;
+      // Win-plan holds: hall chore matching the commit (repair/fire/…).
+      // Always overwrite chore — core lottery may have drawn a different tag.
+      if (c.winPlanAction === 'gear_hold' || c.winPlanAction === 'veteran_guard' ||
+          c.winPlanAction === 'party_wait') {
+        o.kind = c.kind || 'HAVEN_CHORE';
+        o.purpose = 'chore';
+        o.indoor = true;
+        o.state = 'indoor';
+        o.tx = hx; o.ty = hy; o.tightness = 0;
+        o.targetVid = null;
+        o.companion = null;
+        o.chore = c.chore || (c.winPlanAction === 'party_wait' ? 'fire' : 'repair');
+        if (c.vgoal) { o.goal = c.vgoal; o.goalLine = c.vgoalLine || null; }
+        return o;
+      }
+      // EXPEDITION (hash or party_launch): kind reads the commit; keep an
+      // indoor chore hold so agencyTick can launch without a second lottery.
+      if (c.kind === 'EXPEDITION') {
+        o.kind = 'EXPEDITION';
+        o.purpose = 'chore';
+        o.indoor = true;
+        o.state = 'indoor';
+        o.tx = hx; o.ty = hy; o.tightness = 0;
+        if (!o.chore) o.chore = c.chore || 'repair';
+        if (c.companion) o.companion = c.companion;
+        if (c.vgoal) { o.goal = c.vgoal; o.goalLine = c.vgoalLine || null; }
+        return o;
+      }
+      // Any other aimed override: kind/purpose follow commit; no new draws.
+      o.kind = c.kind;
+      if (c.chore) o.chore = c.chore;
+      if (c.targetVid) o.targetVid = c.targetVid;
+      if (c.companion) o.companion = c.companion;
+      if (c.vgoal) { o.goal = c.vgoal; o.goalLine = c.vgoalLine || null; }
+      return o;
     },
     // Agency-tick executor: honor today's dawn commitment. No new strategy.
     vbrainExecuteDepart: function (vid, hx, hy, announce) {

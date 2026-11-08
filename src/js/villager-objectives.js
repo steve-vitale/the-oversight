@@ -543,6 +543,16 @@
       // Set before the kind chain: every early return carries o forward.
       if (chosen.vgoal) { o.goal = chosen.vgoal; o.goalLine = chosen.vgoalLine || null; }
       o.companion = null; o.indoor = false; o.state = 'ready';
+      // OVE-36: core materialization draws stay on `chosen`; then align the
+      // live objective to the dawn commitment when an aimed override won.
+      var finishLottery = function (obj) {
+        try {
+          if (typeof this.vbrainAlignObjective === 'function') {
+            return this.vbrainAlignObjective(vid, obj, hx, hy) || obj;
+          }
+        } catch (e) {}
+        return obj;
+      }.bind(this);
       var dist = 1;
       if (chosen.kind === 'FORAGE') {
         o.purpose = 'forage'; dist = Math.max(1, Math.min(maxD, 1 + Math.floor(R() * 2)));
@@ -569,17 +579,17 @@
           // they're home — this is an indoor social call
           o.indoor = true; o.state = 'indoor'; o.tx = hx; o.ty = hy;
           o.partsLeft = 2; o.tightness = 0;
-          return o;
+          return finishLottery(o);
         }
       } else if (chosen.kind === 'EXPLORE') {
         o.purpose = 'explore'; dist = 1 + Math.floor(R() * Math.max(1, maxD));
         o.partsLeft = 3 + Math.floor(R() * 4); o.tightness = dist;
       } else if (chosen.kind === 'HUNT') {
         this.objHuntFromSite(vid, hx, hy, o, chosen.site);
-        return o;
+        return finishLottery(o);
       } else if (chosen.kind === 'HAUL') {
         this.objHaulFromSite(vid, hx, hy, o, chosen.site);
-        return o;
+        return finishLottery(o);
       } else if (chosen.kind === 'SEEK') {
         // DORMANT MOTIVATIONS (rogue P1): the knowledge-seeker's errand —
         // go find someone who knows things and learn. Same shape as the
@@ -590,7 +600,7 @@
         o.kind = 'SEEK'; o.purpose = 'seek'; o.state = 'indoor'; o.indoor = true;
         o.targetVid = visitT; o.companion = null;
         o.tx = hx; o.ty = hy; o.tightness = 0; o.partsLeft = 2;
-        return o;
+        return finishLottery(o);
       } else { // HAVEN_CHORE
         o.purpose = 'chore'; o.indoor = true; o.state = 'indoor';
         o.tx = hx; o.ty = hy; o.tightness = 0;
@@ -611,14 +621,14 @@
           if (_pk.length || _ks) chores.push('teach');
         } catch (e) {}
         o.chore = (chosen.chore && chores.indexOf(chosen.chore) >= 0) ? chosen.chore : pick(chores);
-        return o;
+        return finishLottery(o);
       }
       // outdoor target: a real direction, clamped to the 9x9 world
       var d = pick(DIRS8);
       o.tx = clampN(hx + d[0] * dist);
       o.ty = clampN(hy + d[1] * dist);
       if (o.tx === hx && o.ty === hy) { o.tx = clampN(hx + 1); }
-      return o;
+      return finishLottery(o);
     },
     // objFreshKillUnrevealed(ref) (r13 2026-10-17): true when the corpse was
     // killed yesterday or today AND its flesh is still unrevealed. The
@@ -1466,7 +1476,9 @@
           // (or the honest quiet when nobody sat with them) — never the
           // old private-bowl assertion.
           if (playerAtHaven && R() < 0.5) { var _el = this.eatBeatLine(rid, nm); if (_el) this.say(_el); }
-        } else if (o.kind === 'HAVEN_CHORE') {
+        } else if (o.kind === 'HAVEN_CHORE' || (o.kind === 'EXPEDITION' && o.purpose === 'chore')) {
+          // EXPEDITION dawn holds keep kind=EXPEDITION (commit honesty) with
+          // purpose=chore until agency launches — narrate the hold chore.
           if (o.chore === 'teach') {
             // LONGSIM agency r2 (2026-10-11): the teach chore is real
             // teaching now. A villager who knows the wild shows a villager
