@@ -309,6 +309,9 @@
         o.tx = clampN(hx + ld[0] * ldist); o.ty = clampN(hy + ld[1] * ldist);
         o.tightness = 8; o.partsLeft = 999;
         o.indoor = false; o.targetVid = null; o.companion = null;
+        // VILLAGER BRAIN (phase 1): gates still win, but they log through the
+        // one dawn entry so the score log explains every pick.
+        try { if (typeof this.vbrainLogGate === 'function') this.vbrainLogGate(vid, 'LEAVE', 'escape_goal', null); } catch (e) {}
         return o;
       }
       // body first: rest when spent
@@ -316,6 +319,7 @@
         o.kind = 'REST'; o.purpose = 'rest'; o.state = 'indoor';
         o.indoor = true; o.targetVid = null; o.companion = null;
         o.partsLeft = 2 + Math.floor(R() * 3);
+        try { if (typeof this.vbrainLogGate === 'function') this.vbrainLogGate(vid, 'REST', 'low_energy', { energy: n.energy }); } catch (e) {}
         return o;
       }
       var pantry = 0;
@@ -328,6 +332,7 @@
         o.kind = 'EAT'; o.purpose = 'eat'; o.state = 'indoor';
         o.indoor = true; o.targetVid = null; o.companion = null;
         o.partsLeft = 1 + Math.floor(R() * 2);
+        try { if (typeof this.vbrainLogGate === 'function') this.vbrainLogGate(vid, 'EAT', 'hunger', { hunger: n.hunger, pantry: pantry }); } catch (e) {}
         return o;
       }
       // DAWN-AFTER-KILL (r13 2026-10-17): a fresh unrevealed-flesh kill is
@@ -345,6 +350,7 @@
       if (freshHaul && this.objFreshKillUnrevealed(freshHaul.ref)) {
         o.kind = 'HAUL';
         this.objHaulFromSite(vid, hx, hy, o, freshHaul);
+        try { if (typeof this.vbrainLogGate === 'function') this.vbrainLogGate(vid, 'HAUL', 'fresh_kill', { ref: freshHaul.ref }); } catch (e) {}
         return o;
       }
       // THEY WANT TO WIN (parity 2026-10-14, Steve: "villagers need to act
@@ -363,6 +369,7 @@
           o.targetVid = (sought.teacher && sought.teacher !== 'player' && sought.teacher !== 'system') ? sought.teacher : null;
           o.companion = null; o.tx = hx; o.ty = hy; o.tightness = 0;
           o.partsLeft = 2;
+          try { if (typeof this.vbrainLogGate === 'function') this.vbrainLogGate(vid, 'SEEK', 'want_knowledge', { want: wantKnow }); } catch (e) {}
           return o;
         }
       }
@@ -513,10 +520,20 @@
       // new RNG draws, no candidate suppressed. Fails silent by design:
       // a missing module means the lottery runs exactly as before.
       try { if (typeof this.vgoalBiasCands === 'function') this.vgoalBiasCands(vid, cands); } catch (e) {}
-      var tot = 0, i;
-      for (i = 0; i < cands.length; i++) tot += cands[i].w;
-      var r = R() * tot, chosen = cands[cands.length - 1];
-      for (i = 0; i < cands.length; i++) { r -= cands[i].w; if (r <= 0) { chosen = cands[i]; break; } }
+      // VILLAGER BRAIN (phase 1): one scoring entry. Win-plan intents and
+      // EXPEDITION feed the same list; the pick is logged with every
+      // consideration. Missing module → legacy inline lottery below.
+      try { if (typeof this.vbrainFeedExtras === 'function') this.vbrainFeedExtras(vid, cands, hx, hy); } catch (e) {}
+      var chosen = null;
+      if (typeof this.vbrainScorePick === 'function') {
+        try { chosen = this.vbrainScorePick(vid, cands, { rng: R }); } catch (e) { chosen = null; }
+      }
+      if (!chosen) {
+        var tot = 0, i;
+        for (i = 0; i < cands.length; i++) tot += cands[i].w;
+        var r = R() * tot; chosen = cands[cands.length - 1];
+        for (i = 0; i < cands.length; i++) { r -= cands[i].w; if (r <= 0) { chosen = cands[i]; break; } }
+      }
 
       o.kind = chosen.kind; o.targetVid = chosen.targetVid || null;
       // VILLAGER GOALS (goals-sys 2026-11-03): carry the contributing goal

@@ -1,8 +1,13 @@
 # The Villager Brain — one brain, one scorer (design contract)
 
-*2026-11-06. Status: design contract for review. Nothing in this document is
-built yet except where a phase names an existing branch; each phase lands as
-its own reviewed branch with proof and gate, like every other build.*
+*2026-11-06. Status: design contract for review. Phase 1 coherence landed
+2026-11-08 in `src/js/villager-brain.js` (one dawn scoring entry + pick log;
+win-plan / EXPEDITION feed that pass; agency chance-roll demoted). The
+product-of-curves formula in §4, the ×1.15 commitment multiplier, and the
+top-3 weighted pick remain **for Steve review** and are not shipped — phase 1
+keeps the existing additive weights and weighted lottery underneath the one
+entry. Drive re-home, curve tuning, and later phases are still unbuilt.
+Each phase lands as its own reviewed branch with proof and gate.*
 
 Steve's order (2026-11-06): "Make sure all our intelligence systems are
 coherent and in one spot. These aren't separate systems but building one
