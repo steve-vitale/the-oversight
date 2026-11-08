@@ -189,5 +189,8 @@ refresh was discarded with the fix).
 ## Telemetry deviation check
 
 `node scripts/telemetry-check.js --baseline .../telemetry-baselines/
-establishment.json --current 'evidence/2026-11-08/journey-establishment-r115-after-seed*.json' --metrics ...`
-→ [filled in at closeout; see gate section below]
+establishment.json --current 'evidence/2026-11-08/journey-establishment-r115-after-seed*.json' --metrics systemDay,monsterKills`
+→ **quiet** (16 files, 2 metrics, no large deviations). Baseline NOT
+rolled. (Same shape as r114's check; the baseline is a 4-seed control
+panel, the current a 16-seed HUNTSTAFF=2 panel — arm-driven deltas are
+expected and adjudicated as such; none fired LOUD.)
