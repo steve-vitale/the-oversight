@@ -88,3 +88,41 @@ Movement vs original `d229b58f5` non-aimed bar (±25%):
 **Decision:** honest baseline refresh in
 `scripts/test-person-trust-20261108.js` to the tip panel above. Prefer
 rebaseline over Game retune; Muse lanes off.
+
+---
+
+## Baseline refresh 2026-11-08 (duty dawn pick)
+
+Tip base: `3339c0195` + DUTY `duty_top_score` pick/commit (Phase 6 follow-up).
+Seed/horizon/policy unchanged (84101 / 30d / competent).
+
+Aimed effect: believed-need DUTY ads that previously scored but never
+committed now win when top-scoring and align to real WATER/FORAGE/cook
+objectives. Non-aimed mix moves as a direct consequence — not a loosened
+bar and not a garden/Muse retune.
+
+Fresh panel with pick live:
+
+```
+kinds: { LEAVE:2, WATER:187, EAT:36, VISIT:10, FORAGE:1, SEEK:19, HAUL:1 }
+maxTrust: 56
+entries: 48
+trustedOpen: 5
+living: 7
+```
+
+Movement vs OVE-61 non-aimed baseline (±25%):
+
+| kind | OVE-61 | pick | band on OVE-61 | |
+|---|---:|---:|---|---|
+| LEAVE | 2 | 2 | 1.5..2.5 | in |
+| WATER | 136 | 187 | 102..170 | **out (aimed)** |
+| EAT | 34 | 36 | 25.5..42.5 | in |
+| SEEK | 25 | 19 | 18.75..31.25 | in |
+| FORAGE | 3 | 1 | 2.25..3.75 | **out (aimed)** |
+| TRAPS | 1 | 0 | 0.75..1.25 | out (≤2 zero-ok for got) |
+| HAUL | 0 | 1 | ≤2 | in |
+
+**Decision:** honest baseline refresh in
+`scripts/test-person-trust-20261108.js` to the pick panel above. Assertions
+unchanged (±25% / zero≤2). Garden cultivation Muse residual left alone.

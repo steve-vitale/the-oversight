@@ -1,6 +1,6 @@
 # Duty dawn pick/commit (Phase 6 follow-up / OVE-60 gap)
 
-Trusted tip base: `18ed96788` (origin/master after #49 Phase 6 role census).
+Trusted tip base: `3339c0195` (origin/master after #49 census + #50 verify).
 
 ## Verdict
 
@@ -74,6 +74,15 @@ Mirrored OVE-60/#48 recipe:
 - `docs/ONTOLOGY.md` — regenerated
 - `sw.js` — offline asset regen (if changed)
 
+## Person-trust baseline
+
+Aimed DUTY→WATER/FORAGE mix moved the seed-84101 non-aimed errand panel
+(WATER 136→187). Honest refresh in `test-person-trust-20261108.js` +
+`person-trust-prereg.md` note — assertions (±25%) unchanged.
+
 ## Quick check note
 
-Leave tip-preexisting Muse occupation reds alone (`rail_conductor` fixture).
+Leave Muse residuals alone: occupation panels (`rail_conductor`), and
+`test-garden-cultivation.js` prepare/caretaker fails under DUTY pick
+(garden lane — do not retune). Tip godpath flakes (alien-party-readiness,
+daily-voice, lunge-runtime) unchanged.
