@@ -255,3 +255,23 @@ the first run touches this repair.
 
 converged (tooling repair, both cases demonstrated valid). Findings #1903 and
 #1909 move to fixed by this arm (see sim-findings.md).
+
+## Coordinator addendum (run fleshout-20261108T1315Z, Loop A — adoption landing)
+
+The 1017Z coordinator died before landing; this branch was adopted with all
+four worker commits verified (d938321b8 repair + 3 evidence commits, worktree
+clean except the item below). One piece of uncommitted worker follow-up was
+recovered: a fresh observer-neutral panel
+(`evidence/2026-11-08/neutral-comparecontract-a-20261108/panel.json.gz`,
+seed 7 × 4 policies capable/risk-aware/socialite/winseeker × 150d, built
+12:15Z on this branch tip, validity sourcesStable + neutrality 4/4 match,
+0 warnings) — the worker's half-done follow-up was refreshing the stale
+measurement neutrality proof after the repair changed harness inputs. The
+panel is committed here (panel.json.gz only; `cases/` deleted per §15).
+The proof-hash refresh itself (`scripts/balance-proof-update.js`) is OWED
+POST-MERGE: it must run on the merged master with a fresh panel, not on this
+branch tip — the branch-tip hashes would go stale again under the newer
+master. The check.js --quick re-run attribution the worker started was not
+recoverable (its /tmp log was deleted); the seven panel/compare test files
+were re-run individually on the rebased tip by the coordinator (see landing
+note in the round evidence) and all pass.
