@@ -1488,11 +1488,16 @@
             } else if (playerAtHaven) {
               // no learner in earshot: they review their own finds, and the
               // line says that — never claims a lesson was given.
-              this.say(this.ambientLine('finds', rid, nm) || `📖 ${nm} is going over their finds, re-tying the bundle.`);
+              // R118 GOAL-LINE (journey-deepening r118): the indoor beat
+              // speaks the objective's goalLine when present — the departure
+              // line never fires for indoor objectives, so this is the only
+              // channel a safety goal has to be heard.
+              this.say((this.ambientLine('finds', rid, nm) || `📖 ${nm} is going over their finds, re-tying the bundle.`) + (o.goalLine ? ' ' + o.goalLine : ''));
             }
           } else if (o.chore !== 'teach' && playerAtHaven) {
             var _choreLine = this.ambientLine('chore_' + o.chore, rid, nm);
-            if (_choreLine) this.say(_choreLine);
+            // R118 GOAL-LINE: the indoor chore beat speaks the goalLine.
+            if (_choreLine) this.say(_choreLine + (o.goalLine ? ' ' + o.goalLine : ''));
           }
         } else if (o.kind === 'VISIT' && o.targetVid) {
           // indoor social call: the visit happens at home
@@ -1507,7 +1512,8 @@
                 var tname2 = 'someone';
                 try { tname2 = this.displayName(o.targetVid); } catch (e) {}
                 var _vl = this.ambientLine('visit', rid, nm, tname2);
-                if (_vl) this.say(_vl);
+                // R118 GOAL-LINE: the indoor visit beat speaks the goalLine.
+                if (_vl) this.say(_vl + (o.goalLine ? ' ' + o.goalLine : ''));
               }
             } catch (e) {}
             // BOND-INITIATION (2026-11-05, Steve 2026-11-04): a quiet talk

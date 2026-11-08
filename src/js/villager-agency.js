@@ -1507,7 +1507,13 @@
         // An ambush replaces the old exchange. A stale question's answer
         // budget must not trim RUN/TALK/FIGHT before the final focus filter.
         if (this.convoGet(vid).thread === 'ambush') return this.convoMenuPage(vid, this.betrayalChoices(vid));
-        var extra = this.agencyChoices(vid) || [];
+        // R118 NONVERBAL AGENCY (journey-deepening r118): a no-words sitting
+        // offers gestures only. The agency extras (ask about the wild,
+        // ask about the expedition) are WORDS — offering them in a sitting
+        // where the scholar shares no language with the villager breaks the
+        // fiction the nonverbal thread exists to hold. The extras still
+        // fire in every verbal sitting.
+        var extra = (this.convoGet(vid).thread === 'nonverbal') ? [] : (this.agencyChoices(vid) || []);
         // REACTIVE BUDGET (journey-establishment r16 2026-10-19): convoMenuPage
         // deliberately returns reactive (ans:/gq:) menus whole — the question's
         // answers are structural. But a hanging question plus live prepends blew

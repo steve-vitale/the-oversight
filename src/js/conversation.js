@@ -4566,7 +4566,16 @@
           { id: 'leave', label: '"I should go."' },
         ]));
       }
-      if (c.spokenBeat?.tag === 'endtopic' && !c.pendingQ && !c.reactiveQ && !c.genericQ && !c.choosingSubject) {
+      // R118 MENU-FLIP (journey-deepening r118): the endtopic early-return
+      // must not fire in a nonverbal sitting. sayLine's no-repeat fallback
+      // tags a repeated beat endtopic — and a listen line repeats by design
+      // (4 foreign phrases, 1 narration before r118) — so after a few
+      // listens the menu flipped to the verbal dlg:subject/leave menu in a
+      // no-words sitting: no gestures, no nv:listen, for the rest of the
+      // sitting. Skipping the branch here lets the nonverbal branch below
+      // build the gesture menu instead; a genuinely ended nonverbal thread
+      // still ends through the winddown / leave path.
+      if (c.spokenBeat?.tag === 'endtopic' && c.thread !== 'nonverbal' && !c.pendingQ && !c.reactiveQ && !c.genericQ && !c.choosingSubject) {
         const out = [{ id: 'dlg:subject', label: '"Can I ask you something else?"' }, { id: 'leave', label: '"I should go."' }];
         if (c.heldBeats?.length) out.unshift({ id: 'goon', label: this.convoGoonLabel(vid) });
         return finish(out);
@@ -7569,13 +7578,21 @@
       const pool = fd.agree || fd.warm || fd.openers || [];
       const ph = pool.length ? pool[Math.floor(Math.random() * pool.length)] : null;
       const attempt = ph ? ph.t : '...';
+      // R118 SPEAKBACK PUNCTUATION (journey-deepening r118): most data
+      // phrases already end in terminal punctuation ("Eso mismo. Diste en
+      // el clavo."), so appending '.' produced "clavo.." and the elder
+      // branch's ',' produced "clavo.,". attemptShown takes no added
+      // period when one is already there (questions stay questions);
+      // attemptComma strips the terminal mark before the quote's comma.
+      const attemptShown = /[.!?…。！？।።]$/.test(attempt) ? attempt : attempt + '.';
+      const attemptComma = attempt.replace(/[.!?…。！？।።]$/, '') + ',';
       const aidLine = aid ? ' The device replays the phrase in your head first \u2014 a study partner, not a replacement.' : '';
       const gain = (n) => { try { this.langExposureGain(vid, lang, n + (aid ? 1 : 0)); } catch (e) {} };
       try { this.remember(vid, 'spoke_' + lang, 'tried'); } catch (e) {}
       let line, youSaid, jtext;
       if (exp >= 25) {
         // LEVEL: it works. Simple things land. Just two people talking.
-        youSaid = `"${attempt}." It comes out right \u2014 a little stiff, a little proud.${aidLine}`;
+        youSaid = `"${attemptShown}" It comes out right \u2014 a little stiff, a little proud.${aidLine}`;
         const reacts = [
           `${fname} answers in ${def.name}, fast \u2014 then catches themselves, slows down, delighted. You catch most of it. For a minute it\u2019s just two people talking, and the System has nothing to do.`,
           `"WAIT. Say that again!" ${fname} grabs your sleeve. "You SOUND like my grandmother. Say more!" You do. Some of it even lands.`,
@@ -7587,7 +7604,7 @@
         jtext = `spoke ${def.name} with ${fname} \u2014 it worked. Just two people talking`;
       } else if (exp >= 10) {
         // MID: the shape is right, one word wrong — a funny misunderstanding.
-        youSaid = `"${attempt}." The shape is right this time \u2014 but one word veers off somewhere.${aidLine}`;
+        youSaid = `"${attemptShown}" The shape is right this time \u2014 but one word veers off somewhere.${aidLine}`;
         const reacts = [
           `${fname} blinks. Then cracks up. "You said that BEAUTIFULLY. It means nothing like what you think it means." They teach you the right word, still laughing.`,
           `"Hm. Almost." ${fname} corrects the one word, gently, like setting a bone. "Again." You say it right. They nod, satisfied with both of you.`,
@@ -7599,16 +7616,16 @@
         jtext = `tried speaking ${def.name} with ${fname} \u2014 one wrong word, we both laughed`;
       } else {
         // LOW: mostly wrong, charming failure. The correction teaches.
-        youSaid = `You try it in ${def.name}: "${attempt}." The tones go sideways halfway through.${aidLine}`;
+        youSaid = `You try it in ${def.name}: "${attemptShown}" The tones go sideways halfway through.${aidLine}`;
         let react;
         if (band === 'young' || temp === 'eager') {
-          react = `${fname} lights up. "No, no \u2014 like this." They say it slowly, twice, watching your mouth shape it. "${attempt}." You try again. Closer. They grin like you just scored the winning point.`;
+          react = `${fname} lights up. "No, no \u2014 like this." They say it slowly, twice, watching your mouth shape it. "${attemptShown}" You try again. Closer. They grin like you just scored the winning point.`;
         } else if (band === 'elder') {
-          react = `${fname} tilts their head. "...What?" You try again, slower, redder. A long beat. Then the smallest smile. "${attempt}," they say \u2014 perfectly. "You meant." They knew all along; they just wanted to watch you work for it.`;
+          react = `${fname} tilts their head. "...What?" You try again, slower, redder. A long beat. Then the smallest smile. "${attemptComma}" they say \u2014 perfectly. "You meant." They knew all along; they just wanted to watch you work for it.`;
         } else if (temp === 'prickly') {
           react = `${fname} snorts. "That was \u2014 no. Say it like you mean it." They correct you anyway, because even they can\u2019t leave it standing that wrong.`;
         } else {
-          react = `${fname} laughs \u2014 with you, mostly. "Good try! Again \u2014 ${attempt}." They walk you through it, patient as sunrise.`;
+          react = `${fname} laughs \u2014 with you, mostly. "Good try! Again \u2014 ${attemptShown}" They walk you through it, patient as sunrise.`;
         }
         line = react;
         gain(2);
@@ -7828,7 +7845,22 @@
         const ph = this.foreignLine(vid, 'questions') || this.foreignLine(vid, 'openers');
         this.langExposureGain(vid, lang, 3);
         const r = this.renderForeign(vid, ph);
-        return `You listen hard, watching their mouth shape the words. ${r ? r.text : 'Sounds, and the shape of meaning just out of reach.'}${mediatedNote}`;
+        const heard = r ? r.text : 'Sounds, and the shape of meaning just out of reach.';
+        // LISTEN NARRATION CYCLES (journey-deepening r118): the narration
+        // was a single fixed string, so the 5th listen (2nd in the harness,
+        // where the phrase never renders) repeated the whole line verbatim
+        // and sayLine's no-repeat fallback tagged the beat endtopic — the
+        // menu flip. Same convoPickCycle convention as the r72 react pools:
+        // the first entry preserves the old line, the rest are honest
+        // variants of the same gesture, the phrase varies independently.
+        // 4 foreign phrases x 3 narrations = 12 distinct listen lines.
+        // No trust/temper/exposure/routing change here.
+        const narr = this.convoPickCycle(vid, 'foreign:listen', [
+          'You listen hard, watching their mouth shape the words.',
+          'You lean in, catching the rise and fall of it.',
+          'You hold still and let the sounds settle.',
+        ]);
+        return `${narr || 'You listen hard, watching their mouth shape the words.'} ${heard}${mediatedNote}`;
       }
       if (kind === 'translate') {
         const yid = c.interpreter;
