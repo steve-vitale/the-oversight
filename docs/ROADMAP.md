@@ -978,9 +978,10 @@ The separate intake-only experiment is terminal:16 screens and64 independent
 holdouts for five profiles,80 exact complete non-receipt state controls,320
 exact holdout outcomes/other22 metric vectors. Coverage becomes known, not
 better diet. Role totals expose player usefulness around0.92–0.93 vs near1
-for NPCs. The Forager deed remains unfinished. See intake-port-audit.md in
+for NPCs. The Forager harvest deed was later authored on that intake book
+(2026-11-08); see test-forager-deed.js. See intake-port-audit.md in
 evidence/2026-10-18. None of this clears remaining natural gear, NPC/class,
-pacifist, job/region, scale, shared voice/context or fitting-deed work.
+pacifist, job/region, scale, shared voice/context or remaining fitting-deed work.
 
 Comfort/health continuation (2026-10-17): the warcourt policy uses actual
 scholar health/capacity, with11 guard checks and full911 green. The separate
@@ -1934,12 +1935,17 @@ Each item: **spec**, **done when**, and the **tool** that measures it.
   Ordinary world/tactical/field personal-passive budgets/prices are locally
   repaired (41×64, mobile and full929); famine/other bypass callers, allied
   follow-through and per-fight save limits remain under separate audit.
-- **Remaining:** two gods. Brawler and Forager still need fitting replacements;
-  their class-age/synergy proxies remain unfinished. Eight functional deeds
-  do not finish item3's balance/parity review or the god-scale item.
+- **Forager port (2026-11-08):** Living Garden requires a lived harvest deed —
+  every other living neighbor eats a real meal from your `harvestShares` for
+  7 consecutive days. Player/NPC share the gate; class-age/synergy proxies
+  cannot replace it. Seeded `test-forager-deed.js` fails if the authored deed
+  is removed. Crop/ability prices stay with Muse.
+- **Remaining:** one god. Brawler still needs a fitting lived fight deed; its
+  class-age/synergy proxies remain unfinished. Nine functional deeds do not
+  finish item3's balance/parity review or the god-scale item.
 - **Spec:** one fitting deed per god in `godpaths.json`, e.g. Apex Predator: a
   solo kill above your weight; Living Garden: feed the whole village from your
-  own harvest for7 days. The historical25–40% exploration guide is not a quota;
+  own harvest for7 days (ported). The historical25–40% exploration guide is not a quota;
   measure earned outcomes and playstyle viability (see STEVE-ANSWERS.md).
 - **Tool:** `scripts/godpath/validate.js` and `ladder.js`, plus a 64-seed sweep.
 

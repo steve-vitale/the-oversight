@@ -47,9 +47,11 @@ do not permit hiding an unrelated game or save change.
 
 Receipts measure **physical food eaten and primary nourishment**, not diet
 quality, healing, skill knowledge, or every change to the reserve bar.
-They are an instrumentation prerequisite for the unfinished Forager deed;
-they do not activate that deed or tune meals. See MEASUREMENT-PLAN.md and
-the dated intake-port evidence before interpreting a scorecard.
+They are the lived meal book the Forager's Living Garden deed reads
+(`harvest_fed`: consecutive days every neighbor eats a real meal from one
+person's `harvestShares`). Intake instrumentation does not tune meals or
+crop yields. See MEASUREMENT-PLAN.md and the dated intake-port evidence
+before interpreting a scorecard.
 
 ## Meaning and coverage
 
