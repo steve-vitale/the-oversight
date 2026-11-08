@@ -7,6 +7,10 @@
 //   - bondRoll(...parts) (deterministic hash roll, for tests)
 //   - proposeBond(initiatorVid, targetVid, opts)
 //   - bondProposalMaybe(initiatorVid, targetVid)
+//   - bondProposeCand(initiatorVid, targetVid, opts)
+//   - bondLinkRaiseCand(vid, villageId)
+//   - bondFeedCands(vid)
+//   - bondScoreCands(initiatorVid, cands, opts)
 //   - stageBondProposal(vid)
 //   - pendingBondProposal(vid)
 //   - acceptBondProposal(vid)
@@ -27,9 +31,10 @@
 //   - bondinit_player_chooses_path: hierarchy propose verbs stay player-only (Steve 2026-10-26). An NPC raises a link idea; the player proposes. acceptLinkRaise first tells the bearer the lore (tellVillageLore), then calls proposeLink. (code: acceptLinkRaise)
 //   - bondinit_scholar_decides: a proposal TO the scholar is never auto-decided — it stages as a pending conversation beat the player answers. (code: stageBondProposal)
 //   - bondinit_drive_first: wild proposals fire only from VISIT arrivals or the daily pair tick, only while the pair's bond is warming but not yet close (bondDriveLive: 15 <= warmth < 50, depth < 1), only to someone they do not dislike (pairAffinity >= 0). Scholar proposals stage only while the villager's bond with the scholar is warming the same way. (code: bondProposalMaybe, npcPairBondTick, bondDriveLive)
+//   - bondinit_candidates_scored: entry points raise PROPOSE_BOND / RAISE_LINK candidates the initiator's own scorer weighs (bondScoreCands / dawn vbrainFeedExtras); warmth stays the gate; the target still decides via npcInviteDecision — no cross-write bypass (code: bondProposeCand, bondFeedCands, bondScoreCands, bondProposalMaybe, npcPairBondTick, npcBondTick, npcLinkRaiseTick, VILLAGER-BRAIN Phase 4)
 //   - bondinit_no_spam: a refused pair cools down 14 days; an accepted bond is never re-proposed; at most one bond staging, one pair proposal, and one link-raise staging per day; a link raise decided or expired within 14 days is not re-raised. (code: proposeBond, npcBondTick, npcPairBondTick, npcLinkRaiseTick)
 //   - bondinit_lore_spread: a villager learns a village only by being told it by someone who knows it (tellVillageLore, secondhand, traced by name) — the scholar tells villagers about villages they know when a conversation ends. No bare-flag lore, ever. (code: maybeTellVillageLore)
-//   - bondinit_no_stream_drift: this module's lotteries use hash rolls (bondRoll), never Math.random — the shared seeded stream feeds the whole sim, and consuming it swings identical-seed panels with no game effect behind the swing. (code: bondRoll, bondPick)
+//   - bondinit_no_stream_drift: this module's lotteries use hash rolls (bondRoll), never Math.random — the shared seeded stream feeds the whole sim, and consuming it swings identical-seed panels with no game effect behind the swing. (code: bondRoll, bondPick, bondScoreCands)
 //   - bondinit_telemetry: every proposal, staging, acceptance and refusal emits tele('bond_proposed', {initiator, target, kind, outcome, chance}). (code: proposeBond, stageBondProposal, acceptBondProposal, declineBondProposal, stageLinkRaise, acceptLinkRaise, declineLinkRaise)
 //   - bondinit_no_gate_changes: this module never writes a win price, deed gate, readiness bar, or table rule. It changes who asks, not what winning costs. (code: bond-initiation.js — only state writes are bondAdd, bumpTrust, and the bond/link request stores)
 //   - bondinit_narration: proposals speak only when the player is at Haven (say), or inside a live conversation (sayLine). No sim spam, no silent acts. (code: proposeBond, bondTurn)
@@ -65,7 +70,8 @@
   if (!G) return;
 
   var REFUSE_COOLDOWN_DAYS = 14;
-  var BOND_PROPOSE_P = 0.25;
+  // VISIT/pair entry no longer uses a flat BOND_PROPOSE_P lottery —
+  // Phase 4 raises PROPOSE_BOND candidates the initiator's scorer weighs.
   var BOND_TICK_P = 0.18;   // npcBondTick: scholar-proposal staging lottery (tuning 3, 2026-11-05: 0.25 staged ~10/90d on long-lived villages; full panel hit 13/seed vs the prereg 12 cap — trim for margin)
   var PAIR_TICK_P = 0.08;   // npcPairBondTick: NPC->NPC proposal lottery
   var LINK_TICK_P = 0.5;    // npcLinkRaiseTick: link-raise staging lottery
@@ -247,6 +253,224 @@
     return { live: live, warmth: v, depth: d };
   }
 
+  // ---------- CANDIDATES (VILLAGER-BRAIN Phase 4) ----------
+  // Entry points raise PROPOSE_BOND / RAISE_LINK candidates; the
+  // initiator's scorer weighs them; warmth stays the gate; the target
+  // still decides through npcInviteDecision. Nobody cross-writes the
+  // target's bond state without that invite.
+  function bondPairBlocked(initiator, target) {
+    var day = dayOf();
+    var key = pairKey(initiator, target);
+    var rec = bondState()[key] || null;
+    if (rec && rec.outcome === 'accepted') return 'already-bonded';
+    if (rec && rec.outcome === 'refused' && day - (rec.day || 0) < REFUSE_COOLDOWN_DAYS) return 'cooldown';
+    try {
+      var existing = (G.bondGet && G.bondGet(initiator, target)) || null;
+      if (existing && ((existing.depth || 0) >= 1 || (existing.v || 0) >= 50)) return 'already-bonded';
+    } catch (e) {}
+    return null;
+  }
+  function bondProposeWeight(initiator, drive) {
+    var w = 1.4;
+    try {
+      var weights = (G.vgoalWeights && G.vgoalWeights(initiator)) || null;
+      if (weights && (weights.bonds || 0) > 0) w += Math.min(2.0, weights.bonds);
+    } catch (e) {}
+    var warmth = (drive && drive.warmth) || 0;
+    // Mid-window warmth scores a touch higher (warming, not barely open).
+    w += Math.max(0, Math.min(1, (warmth - BOND_WARM_MIN) / (BOND_WARM_MAX - BOND_WARM_MIN)));
+    try {
+      var temper = G.npcTemper ? G.npcTemper(initiator) : null;
+      if (temper === 'warm' || temper === 'gentle') w *= 1.15;
+      if (temper === 'withdrawn' || temper === 'prickly') w *= 0.75;
+    } catch (e) {}
+    return Math.round(w * 1000) / 1000;
+  }
+  // bondProposeCand(initiator, target, opts) -> candidate | null.
+  // opts.scholar: stage path (NPC -> scholar). Warmth gate is mandatory.
+  function bondProposeCand(initiator, target, opts) {
+    opts = opts || {};
+    if (!initiator || !target || initiator === target) return null;
+    if (!aliveOnRoster(initiator)) return null;
+    var scholar = !!opts.scholar || target === scholarId();
+    if (!scholar && !aliveOnRoster(target)) return null;
+    if (!scholar && target === scholarId()) return null; // auto-path never targets scholar
+    var drive = bondDriveLive(initiator, target);
+    if (!drive.live) return null;
+    if (!scholar) {
+      try {
+        var aff = (G.pairAffinity ? G.pairAffinity(initiator, target) : 0) || 0;
+        if (aff < 0) return null;
+      } catch (e) { bondWarn('cand:affinity', e); }
+      var gate = bondProposalPerceived(initiator, target);
+      if (!gate.perceived) return null;
+    } else {
+      try { if ((G.state.village.sick || {})[initiator]) return null; } catch (e) {}
+      var t = trustOf(initiator);
+      if (t == null || t < 12) return null;
+      if (bondRequests()[initiator]) return null;
+    }
+    var blocked = bondPairBlocked(initiator, target);
+    if (blocked) return null;
+    var w = bondProposeWeight(initiator, drive);
+    var considerations = [
+      { id: 'bond_drive_live', raw: 1, note: 'warmth window' },
+      { id: 'bond_warmth', raw: Math.round((drive.warmth || 0) * 1000) / 1000, note: 'pair warmth' },
+    ];
+    if (!scholar) {
+      try {
+        var g2 = bondProposalPerceived(initiator, target);
+        considerations.push({ id: 'perceived', raw: 1, note: (g2.channels || []).join(',') || 'yes' });
+      } catch (e) {}
+    } else {
+      considerations.push({ id: 'scholar_stage', raw: 1, note: 'player decides' });
+    }
+    return {
+      kind: 'PROPOSE_BOND',
+      w: w,
+      targetVid: target,
+      vbrainSrc: 'bond_init',
+      bondAct: scholar ? 'stage' : 'propose',
+      considerations: considerations,
+    };
+  }
+  function bondLinkRaiseCand(vid, villageId) {
+    if (!aliveOnRoster(vid) || vid === scholarId() || !villageId) return null;
+    var t = trustOf(vid);
+    if (t == null || t < 20) return null;
+    var weights = null;
+    try { weights = (G.vgoalWeights ? G.vgoalWeights(vid) : null) || null; } catch (e) { weights = null; }
+    if (!weights || (weights.build_standing || 0) < 1) return null;
+    var lore = null;
+    try { lore = (G.villageLoreOf ? G.villageLoreOf(vid) : {}) || {}; } catch (e) { lore = {}; }
+    if (!lore[villageId]) return null;
+    if (linkRaises()[vid]) return null;
+    var day = dayOf();
+    var lk = pairKey(vid, villageId);
+    var lrec = linkRaiseState()[lk] || null;
+    if (lrec && day - (lrec.day || 0) < LINK_RAISE_COOLDOWN_DAYS) return null;
+    try { if (G.linkWith && G.linkWith(villageId)) return null; } catch (e) {}
+    var found = false;
+    try {
+      var ovs = ((G.state || {}).otherVillages || []);
+      for (var i = 0; i < ovs.length; i++) if (ovs[i] && ovs[i].id === villageId) { found = true; break; }
+    } catch (e) {}
+    if (!found) return null;
+    var w = 1.2 + Math.min(1.5, weights.build_standing || 0);
+    try {
+      var temper = G.npcTemper ? G.npcTemper(vid) : null;
+      if (temper === 'restless') w *= 1.1;
+    } catch (e) {}
+    w = Math.round(w * 1000) / 1000;
+    return {
+      kind: 'RAISE_LINK',
+      w: w,
+      villageId: villageId,
+      targetVid: null,
+      vbrainSrc: 'bond_init',
+      bondAct: 'link',
+      considerations: [
+        { id: 'build_standing', raw: Math.round((weights.build_standing || 0) * 1000) / 1000, note: 'drive' },
+        { id: 'village_lore', raw: 1, note: String(villageId) },
+      ],
+    };
+  }
+  // Dawn / scorer feed: every warmth-live person target + scholar stage +
+  // known-village link raise this initiator could ask about today.
+  function bondFeedCands(vid) {
+    var out = [];
+    if (!vid || vid === scholarId() || !aliveOnRoster(vid)) return out;
+    try {
+      var roster = [];
+      try { roster = (G.npcIds ? G.npcIds() : (((G.state || {}).village || {}).roster || [])); } catch (e) {}
+      for (var i = 0; i < roster.length; i++) {
+        var other = roster[i];
+        if (!other || other === vid) continue;
+        var c = null;
+        if (other === scholarId()) c = bondProposeCand(vid, other, { scholar: true });
+        else c = bondProposeCand(vid, other, null);
+        if (c) out.push(c);
+      }
+      var lore = null;
+      try { lore = (G.villageLoreOf ? G.villageLoreOf(vid) : {}) || {}; } catch (e) { lore = {}; }
+      var known = Object.keys(lore || {});
+      for (var li = 0; li < known.length; li++) {
+        var lc = bondLinkRaiseCand(vid, known[li]);
+        if (lc) out.push(lc);
+      }
+    } catch (e) { bondWarn('bondFeedCands', e); }
+    return out;
+  }
+  // Initiator's own scorer: weighted pick among social candidates vs a
+  // HOLD rival. Hash rng — never Math.random. Does NOT write vbrain
+  // commitment (dawn owns that); stashes _lastBondCandScore for probes.
+  function bondScoreCands(initiator, cands, opts) {
+    opts = opts || {};
+    var list = (cands || []).filter(function (c) { return c && c.w > 0; });
+    var holdW = 1.0;
+    try {
+      var weights = (G.vgoalWeights && G.vgoalWeights(initiator)) || null;
+      if (weights && (weights.bonds || 0) >= 1) holdW = 0.55;
+      if (weights && (weights.bonds || 0) >= 2) holdW = 0.3;
+      if (weights && (weights.build_standing || 0) >= 1.5) {
+        // Link raises share standing; slightly less hold when standing is live.
+        for (var hi = 0; hi < list.length; hi++) {
+          if (list[hi].kind === 'RAISE_LINK') { holdW = Math.min(holdW, 0.7); break; }
+        }
+      }
+    } catch (e) {}
+    if (typeof opts.holdW === 'number') holdW = opts.holdW;
+    var hold = {
+      kind: 'HOLD',
+      w: holdW,
+      considerations: [{ id: 'hold_social', raw: 1, note: 'not yet' }],
+    };
+    var scored = [hold].concat(list);
+    var tot = 0;
+    for (var i = 0; i < scored.length; i++) tot += (scored[i].w || 0);
+    var salt = opts.salt || 'bondscore';
+    var key = '';
+    for (var k = 0; k < list.length; k++) {
+      key += '|' + (list[k].kind || '') + ':' + (list[k].targetVid || list[k].villageId || '');
+    }
+    var roll = (typeof opts.roll === 'number') ? opts.roll : bondRoll(salt, initiator, dayOf(), key);
+    var r = roll * (tot || 1);
+    var pick = hold;
+    for (var j = 0; j < scored.length; j++) {
+      r -= (scored[j].w || 0);
+      if (r <= 0) { pick = scored[j]; break; }
+    }
+    var annotated = scored.map(function (c) {
+      return {
+        kind: c.kind,
+        score: Math.round((c.w || 0) * 1000) / 1000,
+        targetVid: c.targetVid || null,
+        villageId: c.villageId || null,
+        bondAct: c.bondAct || null,
+        considerations: (c.considerations || []).slice(),
+      };
+    });
+    var result = {
+      pick: pick.kind,
+      accept: pick.kind === 'PROPOSE_BOND' || pick.kind === 'RAISE_LINK',
+      chosen: pick.kind === 'HOLD' ? null : pick,
+      candidates: annotated,
+      total: Math.round((tot || 0) * 1000) / 1000,
+      roll: roll,
+      holdW: holdW,
+    };
+    try { G._lastBondCandScore = Object.assign({ initiator: initiator }, result); } catch (e) {}
+    return result;
+  }
+  function bondScoreLogPush(entry) {
+    try {
+      var v = G.state.village || (G.state.village = {});
+      v.bondScoreLog = v.bondScoreLog || [];
+      v.bondScoreLog.push(entry);
+      if (v.bondScoreLog.length > 200) v.bondScoreLog.splice(0, v.bondScoreLog.length - 200);
+    } catch (e) {}
+  }
+
   // ---------- THE VERB ----------
   // proposeBond(initiator, target, opts) -> {ok, accepted, outcome,
   // chance, gate, perceived, channels, reasons}. opts.roll pins the
@@ -340,27 +564,28 @@
 
   // ---------- DRIVE HOOK (VISIT arrivals) ----------
   // bondProposalMaybe(initiator, target): called when a VISIT lands.
-  // Drive-first: the pair's bond must be warming but not yet close
-  // (bondDriveLive), the pair must not be disliked (pairAffinity >= 0),
-  // the perception gate must pass, and the proposal itself is a
-  // probability (0.25) — a drive, not a flat roll and not a guarantee.
+  // Phase 4: raise a PROPOSE_BOND candidate (warmth/perception/affinity
+  // gates inside bondProposeCand), let the initiator's scorer weigh it
+  // against HOLD, and only then call proposeBond — which still routes
+  // the target through npcInviteDecision. No cross-write bypass.
   function bondProposalMaybe(initiator, target) {
     if (!initiator || !target || initiator === target) return { ok: false, reason: 'invalid' };
     if (!aliveOnRoster(initiator) || !aliveOnRoster(target)) return { ok: false, reason: 'invalid' };
     if (target === scholarId()) return { ok: false, reason: 'scholar-decides' };
-    var drive = bondDriveLive(initiator, target);
-    if (!drive.live) return { ok: false, reason: 'no-drive' };
-    try {
-      var aff = (G.pairAffinity ? G.pairAffinity(initiator, target) : 0) || 0;
-      if (aff < 0) return { ok: false, reason: 'disliked' };
-    } catch (e) { bondWarn('maybe:affinity', e); }
-    var gate = bondProposalPerceived(initiator, target);
-    if (!gate.perceived) return { ok: false, reason: 'not-perceived' };
-    var key = pairKey(initiator, target);
-    var rec = bondState()[key] || null;
-    if (rec && rec.outcome === 'accepted') return { ok: false, reason: 'already-bonded' };
-    if (rec && rec.outcome === 'refused' && dayOf() - (rec.day || 0) < REFUSE_COOLDOWN_DAYS) return { ok: false, reason: 'cooldown' };
-    if (bondRoll('maybe', initiator, target, dayOf()) >= BOND_PROPOSE_P) return { ok: false, reason: 'drive-quiet' };
+    var cand = bondProposeCand(initiator, target, null);
+    if (!cand) {
+      var drive = bondDriveLive(initiator, target);
+      if (!drive.live) return { ok: false, reason: 'no-drive' };
+      return { ok: false, reason: 'gated' };
+    }
+    var scored = bondScoreCands(initiator, [cand], { salt: 'maybe|' + initiator + '|' + target });
+    bondScoreLogPush({
+      day: dayOf(), source: 'visit', initiator: initiator,
+      pick: scored.pick, candidates: scored.candidates,
+    });
+    if (!scored.accept || !scored.chosen || scored.chosen.kind !== 'PROPOSE_BOND') {
+      return { ok: false, reason: 'scored-out', score: scored };
+    }
     return (G.proposeBond || proposeBond)(initiator, target);
   }
 
@@ -462,24 +687,25 @@
       if (bondRoll('bondtick', day) >= BOND_TICK_P) return;
       var roster = [];
       try { roster = (G.npcIds ? G.npcIds() : (((G.state || {}).village || {}).roster || [])); } catch (e) {}
-      var cands = [];
+      // Raise PROPOSE_BOND (scholar-stage) candidates; each initiator's
+      // scorer weighs vs HOLD. At most one staging wins today.
+      var scoredWins = [];
       for (var i = 0; i < roster.length; i++) {
         var id = roster[i];
         if (id === scholarId()) continue;
-        if (!aliveOnRoster(id)) continue;
-        try { if ((G.state.village.sick || {})[id]) continue; } catch (e) {}
-        var t = trustOf(id);
-        if (t == null || t < 12) continue;
-        if (!bondDriveLive(id, scholarId()).live) continue;
-        if (bondRequests()[id]) continue;
-        var k = pairKey(id, scholarId());
-        var r = bondState()[k] || null;
-        if (r && r.outcome === 'accepted') continue;
-        if (r && r.outcome === 'refused' && day - (r.day || 0) < REFUSE_COOLDOWN_DAYS) continue;
-        cands.push(id);
+        var cand = bondProposeCand(id, scholarId(), { scholar: true });
+        if (!cand) continue;
+        var scored = bondScoreCands(id, [cand], { salt: 'bondtick|' + id });
+        bondScoreLogPush({
+          day: day, source: 'bondtick', initiator: id,
+          pick: scored.pick, candidates: scored.candidates,
+        });
+        if (scored.accept && scored.chosen && scored.chosen.kind === 'PROPOSE_BOND') {
+          scoredWins.push(id);
+        }
       }
-      if (!cands.length) return;
-      stageBondProposal(bondPick(cands, 'bondtick'));
+      if (!scoredWins.length) return;
+      stageBondProposal(bondPick(scoredWins, 'bondtick'));
     } catch (e) { bondWarn('npcBondTick', e); }
   }
 
@@ -497,7 +723,9 @@
       if (bondRoll('pairtick', day) >= PAIR_TICK_P) return;
       var roster = [];
       try { roster = (G.npcIds ? G.npcIds() : (((G.state || {}).village || {}).roster || [])); } catch (e) {}
-      var pairs = [];
+      // Raise PROPOSE_BOND candidates per eligible pair; initiator scorer
+      // weighs. At most one proposeBond fires (target still invites).
+      var wins = [];
       for (var i = 0; i < roster.length; i++) {
         var a = roster[i];
         if (a === scholarId()) continue;
@@ -506,20 +734,20 @@
           var b = roster[j];
           if (b === a || b === scholarId()) continue;
           if (!aliveOnRoster(b)) continue;
-          if (!bondDriveLive(a, b).live) continue;
-          if (!bondProposalPerceived(a, b).perceived) continue;
-          var aff = 0;
-          try { aff = (G.pairAffinity ? G.pairAffinity(a, b) : 0) || 0; } catch (e) { aff = 0; }
-          if (aff < 0) continue;
-          var key = pairKey(a, b);
-          var rec = bondState()[key] || null;
-          if (rec && rec.outcome === 'accepted') continue;
-          if (rec && rec.outcome === 'refused' && day - (rec.day || 0) < REFUSE_COOLDOWN_DAYS) continue;
-          pairs.push([a, b]);
+          var cand = bondProposeCand(a, b, null);
+          if (!cand) continue;
+          var scored = bondScoreCands(a, [cand], { salt: 'pairtick|' + a + '|' + b });
+          bondScoreLogPush({
+            day: day, source: 'pairtick', initiator: a, target: b,
+            pick: scored.pick, candidates: scored.candidates,
+          });
+          if (scored.accept && scored.chosen && scored.chosen.kind === 'PROPOSE_BOND') {
+            wins.push([a, b]);
+          }
         }
       }
-      if (!pairs.length) return;
-      var chosen = bondPick(pairs, 'pairtick');
+      if (!wins.length) return;
+      var chosen = bondPick(wins, 'pairtick');
       (G.proposeBond || proposeBond)(chosen[0], chosen[1]);
     } catch (e) { bondWarn('npcPairBondTick', e); }
   }
@@ -638,36 +866,33 @@
       if (bondRoll('linktick', day) >= LINK_TICK_P) return;
       var roster = [];
       try { roster = (G.npcIds ? G.npcIds() : (((G.state || {}).village || {}).roster || [])); } catch (e) {}
-      var cands = [];
+      // Raise RAISE_LINK candidates; initiator scorer weighs vs HOLD.
+      var wins = [];
       for (var i = 0; i < roster.length; i++) {
         var id = roster[i];
         if (id === scholarId()) continue;
         if (!aliveOnRoster(id)) continue;
-        var tr = trustOf(id);
-        if (tr == null || tr < 20) continue;
-        var w = null;
-        try { w = (G.vgoalWeights ? G.vgoalWeights(id) : null) || null; } catch (e) { w = null; }
-        if (!w || (w.build_standing || 0) < 1) continue;
-        if (linkRaises()[id]) continue;
         var lore = null;
         try { lore = (G.villageLoreOf ? G.villageLoreOf(id) : {}) || {}; } catch (e) { lore = {}; }
-        var known = Object.keys(lore);
-        if (!known.length) continue;
-        cands.push({ vid: id, villages: known });
+        var known = Object.keys(lore || {});
+        var linkCands = [];
+        for (var ki = 0; ki < known.length; ki++) {
+          var lc = bondLinkRaiseCand(id, known[ki]);
+          if (lc) linkCands.push(lc);
+        }
+        if (!linkCands.length) continue;
+        var scored = bondScoreCands(id, linkCands, { salt: 'linktick|' + id });
+        bondScoreLogPush({
+          day: day, source: 'linktick', initiator: id,
+          pick: scored.pick, candidates: scored.candidates,
+        });
+        if (scored.accept && scored.chosen && scored.chosen.kind === 'RAISE_LINK') {
+          wins.push({ vid: id, villageId: scored.chosen.villageId });
+        }
       }
-      if (!cands.length) return;
-      var chosen = bondPick(cands, 'linktick');
-      // Prefer a village not already linked.
-      var open = chosen.villages.filter(function (villageId) {
-        try { if (G.linkWith && G.linkWith(villageId)) return false; } catch (e) {}
-        try {
-          var lr = linkRaiseState()[pairKey(chosen.vid, villageId)] || null;
-          if (lr && day - (lr.day || 0) < LINK_RAISE_COOLDOWN_DAYS) return false;
-        } catch (e) {}
-        return true;
-      });
-      if (!open.length) return;
-      stageLinkRaise(chosen.vid, bondPick(open, 'linktick:' + chosen.vid));
+      if (!wins.length) return;
+      var chosen = bondPick(wins, 'linktick');
+      stageLinkRaise(chosen.vid, chosen.villageId);
     } catch (e) { bondWarn('npcLinkRaiseTick', e); }
   }
 
@@ -785,6 +1010,10 @@
     bondRoll: function () { return bondRoll.apply(null, arguments); },
     proposeBond: function (a, b, opts) { return proposeBond(a, b, opts); },
     bondProposalMaybe: function (a, b) { return bondProposalMaybe(a, b); },
+    bondProposeCand: function (a, b, opts) { return bondProposeCand(a, b, opts); },
+    bondLinkRaiseCand: function (vid, villageId) { return bondLinkRaiseCand(vid, villageId); },
+    bondFeedCands: function (vid) { return bondFeedCands(vid); },
+    bondScoreCands: function (vid, cands, opts) { return bondScoreCands(vid, cands, opts); },
     stageBondProposal: function (vid) { return stageBondProposal(vid); },
     pendingBondProposal: function (vid) { return pendingBondProposal(vid); },
     acceptBondProposal: function (vid) { return acceptBondProposal(vid); },
