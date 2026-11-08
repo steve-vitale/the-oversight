@@ -232,13 +232,40 @@
         return { ok: true, msg: line };
       }
       // Refusal. Contextual, not a wall.
+      // REFUSAL VARIETY (journey-endgame r156, 2026-11-07): each branch
+      // is a small pool, picked by _hashStr(vid:branch:day) — a pure
+      // function of villager, branch and day, never Math.random, so the
+      // pick consumes no seeded-stream draw and cannot swing
+      // identical-seed trajectories. The pilot proved the single-line
+      // form robotic: six low-trust villagers refused a party invite
+      // with the identical sentence on seed 89701.
+      const pickNo = (branch, pool) => {
+        const h = this._hashStr ? this._hashStr(vid + ':joinrefuse:' + branch + ':' + this.state.scholar.day) : 0;
+        return pool[h % pool.length];
+      };
       const no = goal === 'alone'
-        ? `"I work alone. Nothing personal. ...It's a little personal."`
+        ? pickNo('alone', [
+          `"I work alone. Nothing personal. ...It's a little personal."`,
+          `"Alone's how I stay alive. Don't take it personal."`,
+          `"I don't do parties. ...It's not you. It's the party."`,
+        ])
         : trust < 30
-          ? `"I don't know you well enough for that. Ask me again when we've survived something together."`
+          ? pickNo('lowtrust', [
+            `"I don't know you well enough for that. Ask me again when we've survived something together."`,
+            `"We've barely spoken. Ask me after we've bled together."`,
+            `"You want me to follow you into the dark? Earn that first."`,
+          ])
           : temp === 'cautious'
-            ? `"Out there? With YOU leading? ...Let me think about it."`
-            : `"Not right now. I've got my own things to handle."`;
+            ? pickNo('cautious', [
+              `"Out there? With YOU leading? ...Let me think about it."`,
+              `"With you leading? ...Give me a day to think."`,
+              `"Out there? I'd rather not die today, thanks."`,
+            ])
+            : pickNo('busy', [
+              `"Not right now. I've got my own things to handle."`,
+              `"Another time. The village needs me here."`,
+              `"I can't. Not today. Ask me when the work's done."`,
+            ]);
       this.say(`${dname} shakes their head. ${no}`);
       // The contextual refusal goes to the transcript — the player is looking
       // at the chat, not the main log. A bare "X declined." with no reason
