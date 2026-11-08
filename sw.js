@@ -126,6 +126,7 @@ const ASSETS = [
   "./src/js/debug-scenarios.js?v=2294ef815-20261108-112829",
   "./src/js/keepsakes.js?v=2294ef815-20261108-112829",
   "./src/js/skill-teaching.js?v=2294ef815-20261108-112829",
+  "./src/js/person-trust.js?v=2294ef815-20261108-112829",
   "./src/js/world.js?v=2294ef815-20261108-112829",
   "./src/js/nomad.js?v=2294ef815-20261108-112829",
   "./src/js/nomad-wild.js?v=2294ef815-20261108-112829",

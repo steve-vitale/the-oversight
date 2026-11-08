@@ -97,6 +97,12 @@
           "crimson_circuit",
           "cornered_fury"
         ],
+        "deed": {
+          "event": "outmatched_kill",
+          "afterDawn": false,
+          "hint": "Alone, take a real wound from a foe that opened with more health than your whole bar, then kill it.",
+          "_doc": "Person-owned real tactical/field solo kill. Opening prey HP must exceed the fighter's opening maximum HP on a fresh (unwounded) body; the fighter must take actual damage before the kill; any helper voids it. No Pack Hunt route, class-age or synergy shortcut. Distinct from apex_hunt (which allows Pack Hunt and does not require the hunter's own blood)."
+        },
         "play": {
           "_doc": "THE VERB IN PLAY (src/js/godverbs.js). Turn the Pain: a combat action for whoever ascended (player or villager, same function). The pain pool is every wound taken this fight, minus what beams did (what does not bleed does not come back). PARTY: below partyRallyAt HP the allies within 3 see you bleed and fight harder (rallied). TITAN: against a titan-class foe the blow also returns what that titan did to your allies this fight.",
           "actions": [
@@ -930,6 +936,14 @@
           "sun_garden",
           "closed_loop"
         ],
+        "deed": {
+          "event": "harvest_fed",
+          "days": 7,
+          "minKcal": 400,
+          "afterDawn": false,
+          "hint": "Feed every living neighbor from your own harvest for 7 days running.",
+          "pendingHint": "Your harvest is feeding them. Keep every neighbor on your food for 7 days running."
+        },
         "play": {
           "_doc": "Feed the Multitude: daily, out of a fight. Every living Haven villager eats their fill (hunger 0) and, for the rest of the day, every fight starts with the party fed (allies and coalition blades hit with the food overcharge: PARTY and TITAN). The harvest goes into other bellies, never yours: it cannot skip your dinner. WEAKNESS: not a fighter: your strikes x strikeMult, and monsters go for the garden first.",
           "actions": [

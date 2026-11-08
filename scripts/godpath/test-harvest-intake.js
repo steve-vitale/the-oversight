@@ -122,6 +122,10 @@ const K = require('./lib'), T = K.reporter('harvest-intake');
   T.ok('real save/load restores the canonical intake receipts', loaded && !!stamp && stamp !== '{}' && JSON.stringify(v.harvestIntake) === stamp);
   const predecessor = me; G.hurtVillager(me, 999, 'contest');
   T.ok('real succession retains the former eater identity without transferring their meals', G.villagerId !== predecessor && !!v.harvestIntake?.[94]?.[predecessor] && !v.harvestIntake?.[94]?.[G.villagerId]);
-  T.ok('the authored seven-day gate is still pending, not inferred from intake alone', globalThis.Scattering.Godhood.byId('living_garden').requires.deed === null);
+  T.ok('intake alone does not complete the authored seven-day harvest deed',
+    globalThis.Scattering.Godhood.byId('living_garden').requires.deed?.event === 'harvest_fed' &&
+    globalThis.Scattering.Godhood.byId('living_garden').requires.deed.days === 7 &&
+    !G.state.village.godpathDeeds?.[me]?.harvest_fed &&
+    !(G.godpathDeedStatus('player', 'living_garden') || {}).complete);
   T.done();
 })().catch(e => { console.error(e); process.exitCode = 1; });
