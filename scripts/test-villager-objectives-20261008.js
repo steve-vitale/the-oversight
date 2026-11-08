@@ -125,19 +125,21 @@ function check(name, cond, extra) {
     }
   };
 
-  // ensureDanger: seed monster-activity gossip until objVillageDanger() >= min,
+  // ensureDanger: seed monster-activity gossip until objVillageDanger(vid) >= min,
   // stepping a part if the living game deduped our seed (same action+part).
-  // Pins rain for a static scenario.
-  function ensureDanger(Game, v, min) {
+  // Pins rain for a static scenario. Heard list required (seam 4).
+  function ensureDanger(Game, v, min, vid) {
+    const hearers = vid ? [vid] : (v.roster || []).filter(id => id !== Game.villagerId).slice(0, 4);
+    const probe = vid || hearers[0];
     let guard = 0;
-    while (Game.objVillageDanger() < min && guard++ < 8) {
-      Game.seedGossip('attack', { brave: -5 }, []);
-      Game.seedGossip('murder', { honest: -10 }, []);
+    while (Game.objVillageDanger(probe) < min && guard++ < 8) {
+      Game.seedGossip('attack', { brave: -5 }, hearers);
+      Game.seedGossip('murder', { honest: -10 }, hearers);
       Game.state.weather = 'rain';
-      if (Game.objVillageDanger() < min) Game.advancePart();
+      if (Game.objVillageDanger(probe) < min) Game.advancePart();
     }
     Game.state.weather = 'rain';
-    return Game.objVillageDanger();
+    return Game.objVillageDanger(probe);
   }
 
   // T1: departures happen in a fed village, every one with an objective

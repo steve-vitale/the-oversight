@@ -197,7 +197,7 @@ async function main() {
         ro.tx = hx + 1; ro.ty = hy; ro.tightness = 1; ro.partsLeft = 3; ro.companion = null;
         const dg = Game.objDanger(rid, ro.tx, ro.ty, hx, hy);
         if (dg.verdict === 'ask') return true;
-        v.gossip.push({ action: 'attack', day: day, who: 'probe' });
+        v.gossip.push({ action: 'attack', day: day, who: 'probe', heard: [rid] });
       }
       return false;
     };

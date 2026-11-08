@@ -230,19 +230,12 @@
     } catch (e) {}
     return false;
   }
-  // Danger gossip THIS villager heard (heard list, 3-day window — the
-  // same window objDanger uses, plus the heard filter objDanger skips).
-  // A raid nobody heard arms nothing.
+  // Danger gossip THIS villager heard — one shared read with the door
+  // and the rally (Game.objDangerBelief). A raid nobody told them about
+  // arms nothing.
   function dangerHeard(G, vid) {
     try {
-      var day = dayOf(G);
-      var g = (G.state.village.gossip || []);
-      for (var i = 0; i < g.length; i++) {
-        var a = g[i].action;
-        if ((a === 'attack' || a === 'murder' || a === 'raid') &&
-          (g[i].heard || []).indexOf(vid) !== -1 &&
-          day - (g[i].day || 0) <= 3) return true;
-      }
+      if (G.objDangerBelief) return !!(G.objDangerBelief(vid) || {}).threat;
     } catch (e) {}
     return false;
   }

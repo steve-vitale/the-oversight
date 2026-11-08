@@ -83,9 +83,17 @@ async function runCase(name, opts) {
   setGoal(Game, volunteer, opts.goal || 'protect');
   check(name + ': volunteer goal reads back', Game.npcGoal(volunteer) === (opts.goal || 'protect'),
     'npcGoal=' + Game.npcGoal(volunteer));
+  // AskCompanion only keeps candidates with score > 0. Stage a ready
+  // outdoor errand only when we expect THIS volunteer to win the rally
+  // pick — otherwise an ask-path companion search would snag them.
+  if (opts.expectGuard) setObjective(Game, volunteer, hx, hy);
   if (opts.gossipAge != null) {
     v.gossip = v.gossip || [];
-    v.gossip.push({ action: 'raid', day: day - opts.gossipAge, village: 'other-village-x' });
+    // Heard-filtered danger (seam 4): the volunteer must personally hear
+    // the raid to arm rally-guard. Principal may or may not hear — door
+    // uses their own belief separately.
+    const hearers = opts.hearers || [volunteer, principal];
+    v.gossip.push({ action: 'raid', day: day - opts.gossipAge, village: 'other-village-x', heard: hearers });
   }
   const o = setObjective(Game, principal, hx, hy);
   const dg = Game.objDanger(principal, o.tx, o.ty, hx, hy);
