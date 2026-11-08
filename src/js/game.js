@@ -7357,12 +7357,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (n > 0) {
             preservedNote = ` ${first} worked the smoke racks too — ${n} batch${n > 1 ? 'es' : ''} preserved (~${keptKcal} kcal, keeps ${skill > 0 ? 'for weeks' : 'a couple of weeks'}).`;
             try { this.creditDeed && this.creditDeed(vid, 'preserving'); } catch (e) { console.warn('[tracks] deed', e); }
-            // PRACTICE (establishment r112 2026-11-07): working the racks
-            // teaches preserving — one foodXp['preserver'] rep per
-            // resolution that actually preserved (n>0), not per batch.
-            // The same XP askSpecialist grants; the skill it buys is
-            // specialistSkill's self-taught ladder (10 XP -> 1).
-            try { person.foodXp = person.foodXp || {}; person.foodXp.preserver = (person.foodXp.preserver || 0) + 1; } catch (e) {}
+            // PRACTICE (establishment r112 2026-11-07; r114 2026-11-08:
+            // per-batch grant): working the racks teaches preserving —
+            // one foodXp['preserver'] rep per BATCH preserved (n batches
+            // in this resolution), not one per resolution. A cook who
+            // smokes three stacks in one resolution learns three times
+            // as fast as one who smokes one — the work is daily and spread
+            // across whoever cooks, so the grant now pays the work done,
+            // not the visit. The same XP askSpecialist grants; the skill
+            // it buys is specialistSkill's self-taught ladder (5 XP -> 1).
+            try { person.foodXp = person.foodXp || {}; person.foodXp.preserver = (person.foodXp.preserver || 0) + n; } catch (e) {}
           } else if (racksFull && eligible.length) {
             // RACKSVOICE (establishment r20 2026-10-20): the cook resolves
             // ~3x/day, so the identical racks-full line fired per resolution
