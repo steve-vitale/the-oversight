@@ -169,5 +169,114 @@ check('recordPre+recordPost twice: identical points, no state writes, no RNG', (
   assert.strictEqual(JSON.stringify(G.state), before, 'recorder wrote to game state');
 });
 
+// (5) decay-census arithmetic on synthetic armed rows (no game load):
+// window = (leadQ, beat/death]; drag by source; dominant-source
+// classification; actor/opportunity accounting; sizing call.
+const { decayCensus, classifyKind } = require('./test-linkdecay-a-sweep');
+function synthRow(seed, leadQ, endDay, opts) {
+  const o = opts || {};
+  const traj = [];
+  // Daily points leadQ-2 .. endDay: link l1 decays 53 -> 18.
+  for (let d = leadQ - 2; d <= endDay; d++) {
+    const frac = Math.max(0, Math.min(1, (d - leadQ) / Math.max(1, endDay - leadQ)));
+    const trust = Math.round(53 - 35 * frac);
+    traj.push({
+      day: d, pantry: 30000, pantryDays: 5, rank: 'regional',
+      subs: 4, sSubs: d < leadQ ? 2 : (d > endDay - 5 ? 1 : 3),
+      shortfallSubs: 0, leadQ: d >= leadQ ? 1 : 0, nat: 0, glob: 0,
+      actors: o.actors != null ? o.actors : 1, actorIds: ['v1'],
+      planHolders: 1, actorsPre: o.actors != null ? o.actors : 1,
+      actorIdsPre: ['v1'],
+      links: [{ id: 'l1', other: 'village_0', trust, age: 40, seasoned: trust >= 40 ? 1 : 0, gap: Math.max(0, 40 - trust), ageGap: 0, tendedWeek: null, mourningUntil: null, lastKeptDay: null, arrears: 0, subPantry: 5000 }],
+      gateBlocked: [],
+    });
+  }
+  return {
+    policy: 'armed', seed, days: endDay, gameDays: endDay,
+    diag: {
+      first: { leadQualifyDay: leadQ, nationalDay: o.nationalDay || null },
+      beats: o.beatDay != null ? [{ stagedDay: o.beatDay, shape: 'lead', resolvedDay: o.beatDay, outcome: 'answered', nationalDay: o.beatDay }] : [],
+      tends: o.tends || [],
+      tendAttempts: o.tendAttempts || [],
+      overnight: o.overnight || [],
+      intradayOther: o.intradayOther || [],
+      traj,
+    },
+  };
+}
+check('classifyKind: succession wins over a same-night tend; tribute/titan/renegotiation named', () => {
+  assert.strictEqual(classifyKind(['tended', 'succession']), 'succession');
+  assert.strictEqual(classifyKind(['tribute']), 'tribute');
+  assert.strictEqual(classifyKind(['titan']), 'titan');
+  assert.strictEqual(classifyKind(['renegotiation']), 'renegotiation');
+  assert.strictEqual(classifyKind([]), 'unattributed');
+  assert.strictEqual(classifyKind(['tended']), 'tended');
+});
+check('decayCensus: succession-dominated decay classifies and sizes the offset', () => {
+  // leadQ 58, death 99: l1 53 -> 18 (total -35). Overnight: 4 succession
+  // shakes (-8 each = -32) + tribute drips; one engine tend (+8) lands.
+  const overnight = [];
+  for (const d of [62, 70, 78, 86]) overnight.push({ day: d, linkId: 'l1', other: 'village_0', delta: -8, trustBefore: 50, trustAfter: 42, kinds: ['succession'] });
+  for (const d of [65, 72, 79, 86, 93]) overnight.push({ day: d, linkId: 'l1', other: 'village_0', delta: -1, trustBefore: 45, trustAfter: 44, kinds: ['tribute'] });
+  const row = synthRow(76408, 58, 99, {
+    overnight,
+    tends: [{ day: 63, linkId: 'l1', other: 'village_0', trustBefore: 45, trustAfter: 53, lift: 8, noteGain: 8, source: 'engine-winplan' }],
+  });
+  const c = decayCensus([row], 8).perSeed[76408];
+  assert.strictEqual(c.shape, 'decay-no-beat');
+  assert.strictEqual(c.windowDays, 41);
+  assert.strictEqual(c.bySource.succession, -32);
+  assert.strictEqual(c.bySource['tended-engine'], 8);
+  assert.strictEqual(c.totalDelta, -35);
+  assert.strictEqual(c.dominantDrag, 'succession');
+  assert.strictEqual(c.dominantDragPoints, -32);
+  // Total drag -32 (succession) -5 (tribute) -6 (residual: the synthetic
+  // trajectory's slope exceeds the listed events, so the remainder lands
+  // in unattributed) = -43 -> ceil(43/8) = 6 tends to offset.
+  assert.strictEqual(c.bySource.unattributed, -6);
+  assert.strictEqual(c.totalDrag, -43);
+  assert.strictEqual(c.tendsNeededToOffset, 6);
+  assert.strictEqual(c.sizingCall, 'spec');
+});
+check('decayCensus: mixed tend+shake night is not double-counted', () => {
+  const row = synthRow(76408, 58, 99, {
+    overnight: [{ day: 70, linkId: 'l1', other: 'village_0', delta: 0, trustBefore: 45, trustAfter: 45, kinds: ['tended', 'succession'] }],
+    tends: [{ day: 70, linkId: 'l1', other: 'village_0', trustBefore: 45, trustAfter: 45, lift: 8, noteGain: 8, source: 'engine-winplan' }],
+  });
+  const c = decayCensus([row], 8).perSeed[76408];
+  // Tend +8 counted once (tended-engine); overnight delta 0 minus tend
+  // lift 8 = -8 attributed to succession. Total drag includes -8.
+  assert.strictEqual(c.bySource['tended-engine'], 8);
+  assert.strictEqual(c.bySource.succession, -8);
+});
+check('decayCensus: firing-throttle shape calls nogo when opportunities dwarf tends', () => {
+  // No drag events at all, but trust still falls (unattributed drift in
+  // the synthetic traj) while an actor is home every day and the drive
+  // never fires: opportunities 41, engine tends 0.
+  const row = synthRow(76408, 58, 99, { actors: 1 });
+  const c = decayCensus([row], 8).perSeed[76408];
+  assert.strictEqual(c.shape, 'decay-no-beat');
+  // Dipping days (trust < 50) in the window: days 63..99 = 37
+  // (round(53 - 35*(d-58)/41) < 50 first at d=63).
+  assert.strictEqual(c.opportunities, 37);
+  assert.strictEqual(c.engineTendsOnOpportunityDays, 0);
+  assert.strictEqual(c.sizingCall, 'nogo-firing-throttle');
+});
+check('decayCensus: never-qualified seed classifies without a window', () => {
+  const row = synthRow(76404, null, 88, {});
+  row.diag.first.leadQualifyDay = null;
+  const c = decayCensus([row], 8).perSeed[76404];
+  assert.strictEqual(c.shape, 'never-qualified');
+  assert.strictEqual(c.windowDays, 0);
+  assert.strictEqual(c.sizingCall, 'n/a (never-qualified)');
+});
+check('decayCensus: beat-staged seed is not a decay failure', () => {
+  const row = synthRow(76401, 58, 90, { beatDay: 77, nationalDay: 77 });
+  const c = decayCensus([row], 8).perSeed[76401];
+  assert.strictEqual(c.shape, 'beat-staged');
+  assert.strictEqual(c.windowDays, 19);
+  assert.strictEqual(c.sizingCall, 'n/a (beat-staged)');
+});
+
 console.log(`\ntest-linkdecay-a: ${pass} checks passed${process.exitCode ? ' (FAILURES ABOVE)' : ''}`);
 if (process.exitCode) process.exit(1);
