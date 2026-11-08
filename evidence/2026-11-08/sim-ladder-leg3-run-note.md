@@ -4,7 +4,17 @@ Leg 3 of the victory-gating redesign (Steve approved the build 2026-11-07 19:28 
 Prereg: `evidence/2026-11-08/sim-ladder-leg3-prereg.md` (bars L3-1–L3-8).
 Base: master `4fe571095` (journey-succession r157); master moved to `38e419d4b`
 (sim-comparecontract-a, evidence-only) before the merge — rebased onto it, no
-scope file touched by the move. Worktree `~/workspace/worktrees/build-ladder-leg3`,
+scope file touched by the move — and then to `a111b57f` (sim-tendtrust-b DIAG +
+journey scale r111 + loop-A proof refresh) during the final gate: rebased onto
+it too. The r111 landing touches `src/js/ladder.js` (one-line `ladderLine`
+top-rung fix) and `scripts/balance-proof.json` (their refresh); the rebase
+applied cleanly except the proof-refresh pick, which conflicted on
+`balance-proof.json` and was resolved with THEIR version (their refresh is
+current for the base tree), then refreshed again for this leg's tree (see
+Gates). The rebase also hit the stop-at-pick quirk on the 2nd pick (overtime):
+pick in both done and todo, tree clean, pick unapplied — verified with
+`git diff <pick>` and recovered with `git rebase --continue`, per AGENTS.md.
+Worktree `~/workspace/worktrees/build-ladder-leg3`,
 branch `build-ladder-leg3`.
 
 ## What was built
@@ -25,8 +35,10 @@ membership/shelter row, before the remote-applications list. It reads
 90 / no seat — the bar must always show): stage name, per-track counted with
 capped tracks marked ("Fight 9 → 7 · capped"), threshold, and the next rung's
 missing pieces in the `fullSeatShortfall` voice (shortfall + capped tracks +
-"the feast bundle is open" when the current stage has no bundle entry). A
-banked-head-start note shows when `detail.bankedHeadStart > 0`. One block, no
+"the feast bundle is open" when the current stage has no bundle entry). At
+National the target reads just "reached" (the bar's subject is already the
+stage name — the same duplication journey scale r111 fixed in `ladderLine`).
+A banked-head-start note shows when `detail.bankedHeadStart > 0`. One block, no
 new view, one-screen rule holds.
 - Buy-out button (`data-ladder-buyout`, "🍖 Buy out the feast bundle (8,000 kcal)"):
   shown while the current live stage has no bundle banked; calls
@@ -202,25 +214,41 @@ Gates:
   per §15); `scripts/balance-proof.json` refreshed with
   `scripts/balance-proof-update.js` (commit `7cb6179c4`). Measurement pair
   9/9 + 9/9 and cache-flags 4/4 standalone after the refresh.
-- `node scripts/check.js --quick`, FINAL run (tip `7cb6179c4`, after the test
-  updates + proof refresh; solo gate, load ~5, log
+- SECOND rebase + SECOND refresh: after the rebase onto `a111b57f` the pair
+  went red again (the new base moved the sources — the leg-1/2 pattern), and
+  the rebased refresh commit held THEIR `balance-proof.json` (conflict
+  resolution, see above). Re-ran the same panel shape against the rebased
+  tree (seed 7 × 4 policies × 150d, 4 cases, 0 cached, exit 0 — neutrality
+  4/4, 0 warnings), retained the same evidence file
+  (`neutral-ladder-leg3-20261108.json.gz`, overwritten), refreshed
+  `scripts/balance-proof.json` again (commit `ef0798108`). Measurement trio
+  green standalone after it (9/9, 9/9, 4/4). The panel fix (National "reached")
+  is commit `1b45d44b6` (app.js + panel test, now 19/19).
+- `node scripts/check.js --quick`, THIRD run (tip `7cb6179c4`, after the test
+  updates + first proof refresh; solo gate, load ~5, log
   `/tmp/check-quick-ladder-leg3-final.log`): **294 passed, 4 failed in 636s**
   — the 4 failures are exactly the pre-existing adjudicated set
   (mobile-combat-cadence, occupation-panels, phone-frame-proof,
   establishment-r20, same signatures as legs 1/2). No NEW attributable
-  failure. L3-7 green.
+  failure on that tree.
+- `node scripts/check.js --quick`, FINAL run (tip `ef0798108`, after the
+  second rebase + second refresh): [FILL IN — result, breakdown, log path.]
 
-## Commits (branch build-ladder-leg3, after the `38e419d4b` rebase)
-- `a8a7907e9` prereg
-- `6cf6551b3` overtime stretch
-- `25a95565d` tribute readiness fix
-- `e3222c5cf` metaProgression (bank + rewards + cash-out) [needs-eyes]
-- `d8afd3baa` Respected Village ending + validator [needs-eyes]
-- `db450d964` Haven panel bar + buy-out + capstone + cash-out [needs-eyes]
-- `60612f083` unit proofs + green list + regenerated ontology [needs-eyes]
-- `533ec277f` three tests updated for the intended behavior changes
-- `7cb6179c4` neutral-proof refresh (fresh panel seed 7 × 4 policies × 150d)
-- (run note — this file — committed last, SHA in the final report)
+## Commits (branch build-ladder-leg3, after the `a111b57f` rebase)
+- `33ff73553` prereg
+- `78e6b9df0` overtime stretch
+- `b1c8e730c` tribute readiness fix
+- `1aba12f05` metaProgression (bank + rewards + cash-out) [needs-eyes]
+- `8ee4f1ec1` Respected Village ending + validator [needs-eyes]
+- `682f850d4` Haven panel bar + buy-out + capstone + cash-out [needs-eyes]
+- `a18d7438c` unit proofs + green list + regenerated ontology [needs-eyes]
+- `21e961332` three tests updated for the intended behavior changes
+- `9d38f3629` neutral-proof refresh (first; holds THEIR balance-proof.json
+  after the rebase conflict resolution — superseded by `ef0798108`)
+- `e3122850a` run note (first version; updated below)
+- `1b45d44b6` panel National bar drops the repeated stage name + test
+- `ef0798108` second neutral-proof refresh after the `a111b57f` rebase
+- (run note — this file, final version — committed last, SHA in the final report)
 
 ## House notes
 - Base moved twice before the build (journey-deepening r119, journey-succession
