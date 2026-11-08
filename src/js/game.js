@@ -33436,8 +33436,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         } else {
           // the village is the protagonist: the mantle passes, the story continues.
           try { this.playerDeath(honestCause); } catch (e) { this.over = true; try { this.wipe(); } catch (e2) {} }
+          if (this.over) { this.returnToVillage(); return this.status(); }
           this.returnToVillage();
-          return this.status();
+          // DOUBLE-NIGHT FIX (sim-doublenight-fix-a 2026-11-07): the old code returned
+          // here before the day advanced, so the day driver re-entered endDay for the
+          // same scholar.day and the whole night (villageEats, villageMeal,
+          // healerRounds, sickness, ecology, traps) ran a second time, charging the
+          // village twice for one night. The death is already recorded on day N by
+          // playerDeath above, so fall through instead.
+          // fall through: the day advances once and dawn runs once below.
         }
       }
       // PACING TELEMETRY (measurement 2026-10-11): real minutes-per-day for
