@@ -1779,14 +1779,29 @@
       // up? 'They glance at the fire…'" (dialog-coherence-audit, seed 1
       // Dieter / seed 7 Ruth). Not spoken memory; drop the quote.
       if (this.convoSnippetIsStageDirection(sn)) return false;
+      // Party-join assent stock can land on the wrong thread ledger and then
+      // resume as the "memory" of a plant lesson (OVE-29 residual sampler
+      // seed1 Eduardo: '...Fine. This had better be worth it.').
+      if (/\bhad better be worth it\b|\bnot carrying your stuff\b|\bwatch your back\. Might as well\b/i.test(sn)) return false;
       return true;
     },
     // Mood / stage-direction narration is not a spoken beat worth quoting.
+    // Residual sampler 2026-11-08 (OVE-29): PR #10 caught "They glance…" /
+    // "A comfortable quiet…" / exact "Still on what they confided", but
+    // warm-silence "You say nothing…" and recap scaffolding "Still on X"
+    // / "Say it plain. Still on X" still quoted into resume openers
+    // (seed99 Nora plant lesson; seed1 Dale/Ella hard time).
     convoSnippetIsStageDirection(sn) {
       if (!sn) return false;
-      const s = String(sn).trim();
-      return /^(They |A comfortable |A warmth |A tired |Still on what they confided)/i.test(s)
-        || /\b(glance at the fire|comfortable quiet settles|tired smile)\b/i.test(s);
+      const s = String(sn).trim().replace(/^["'“”]+|["'“”]+$/g, '');
+      if (/^(They |A comfortable |A warmth |A tired |Your silence|You say nothing|You don'?t answer|The silence |You show them\b)/i.test(s)) return true;
+      if (/\b(glance at the fire|comfortable quiet settles|tired smile|small smile|neither do they, for a while)\b/i.test(s)) return true;
+      // Recap / re-anchor meta is grammar, not remembered speech.
+      if (/^Still on\b/i.test(s)) return true;
+      if (/^Say it plain\.\s*Still on\b/i.test(s)) return true;
+      // Wind-down filler that is only stage direction (convo-dialogue wind pools).
+      if (/^Anyway\.\s*A small smile\.?$/i.test(s)) return true;
+      return false;
     },
     // convoSnippetIsHook (journey-deepening r13 2026-10-18): a teaser /
     // invitation is a real beat (the unfinished business exists — the plant
