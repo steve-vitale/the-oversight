@@ -1531,7 +1531,13 @@
         // where the scholar shares no language with the villager breaks the
         // fiction the nonverbal thread exists to hold. The extras still
         // fire in every verbal sitting.
-        var extra = (this.convoGet(vid).thread === 'nonverbal') ? [] : (this.agencyChoices(vid) || []);
+        // RESUME OWNERSHIP (dialog audit #7 2026-11-08): while an unfinished
+        // resume/debt/confide owns the sitting, agency pivots wait — same
+        // as Teach suppression in buildMenu / beatMenuResponses.
+        var _ac = this.convoGet(vid);
+        var resumeOwns = _ac && typeof this.convoResumeOwnsSitting === 'function'
+          && this.convoResumeOwnsSitting(vid);
+        var extra = (_ac.thread === 'nonverbal' || resumeOwns) ? [] : (this.agencyChoices(vid) || []);
         // REACTIVE BUDGET (journey-establishment r16 2026-10-19): convoMenuPage
         // deliberately returns reactive (ans:/gq:) menus whole — the question's
         // answers are structural. But a hanging question plus live prepends blew

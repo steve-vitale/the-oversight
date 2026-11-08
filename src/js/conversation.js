@@ -1208,6 +1208,20 @@
       return false;
     },
 
+    // convoResumeOwnsSitting (dialog audit #7 2026-11-08): an unfinished
+    // resume/debt/confide claimed into this sitting owns the reply until the
+    // player explicitly changes the subject. Mirrors r7 question ownership:
+    // Teach / agency pivots wait — succeeding at teach must not abandon the
+    // claimed thread. Cleared when choosingSubject (subject menu) or when
+    // the live thread leaves the resumed tid.
+    convoResumeOwnsSitting(vid) {
+      const c = this.convoGet(vid);
+      if (!c || !c.active || !c._resumedOnce || !c._resumeOwnsTid) return false;
+      if (c.choosingSubject) return false;
+      if (!c.thread || c.thread === 'small' || c.thread === 'nonverbal') return false;
+      return c.thread === c._resumeOwnsTid;
+    },
+
     // convoUnfinishedEngageLine: honest follow-through when Help/engage/goon
     // would otherwise dry while unfinished work remains. Names the live
     // thread so the reply matches the opener's claim (never amnesia).
@@ -2036,6 +2050,10 @@
       // (Old saves may hold taughtref threads planted before the gate.)
       if (typeof this.convoThreadBacked === 'function' && !this.convoThreadBacked(vid, o.tid)) return null;
       c._resumedOnce = true;
+      // RESUME OWNERSHIP (dialog audit #7 2026-11-08): remember which thread
+      // the opener claimed so Teach/agency pivots stay suppressed until the
+      // player leaves it (see convoResumeOwnsSitting).
+      c._resumeOwnsTid = o.tid;
       const label = this.convoThreadAbout(vid, o.tid, o.label || o.tid);
       // COHERENCE (Steve 2026-10-07): the resume must not contradict the
       // timeline — a thread left hanging 12 days ago is not "last time".
@@ -2177,10 +2195,12 @@
       // being re-asked says "as I said", they don't parrot.
       // R31 (2026-10-20): the r27 reframe pool itself WRAPPED on the 4th
       // pick (seed 2006 Olivia — the reframe became the repeat, an L2'
-      // violation). Count-aware now: the 3 reframe templates serve once
-      // each, then the NPC escalates honestly (a real person re-asked a
-      // 4th time names the repetition), then the recap choice spends out
-      // of the menu for the sitting — never a verbatim cycle.
+      // violation). Count-aware now: one reframe, then a clearer exit that
+      // spends the choice — never a verbatim cycle.
+      // RECAP HAMMER (dialog audit #6 2026-11-08): five "Still on X" /
+      // reframe serves before spend was still a bad sitting. Cap at 3
+      // presses with an honest exit on the last — earlier removal, not
+      // more synonyms.
       c._recapSaid = c._recapSaid || {};
       const raw = line;
       if (c._recapSaid[raw]) {
@@ -2198,32 +2218,31 @@
         const stillM = /^Still on (.+)\.$/.exec(inner);
         if (stillM) { topic = stillM[1]; reInner = "we're still on " + topic + "."; }
         c._recapReframes = (c._recapReframes || 0) + 1;
-        if (c._recapReframes <= 3) {
+        if (c._recapReframes === 1) {
           line = this.convoPickCycle(vid, 'recaprepeat', [
             `"As I said — ${reInner}"`,
             `"Like I said — ${reInner}"`,
             topic ? `"${topic} — that's still where we are."` : `"${inner} That's still where we are."`,
           ]);
-        } else if (c._recapReframes === 4) {
-          line = `"I've told you three times now — ${reInner}"`;
         } else {
-          line = `"We're going in circles a bit — ${reInner}"`;
-          // CAP: the choice spends out for this sitting — a real person
-          // stops answering, they don't find a sixth synonym.
+          // Clearer exit: name the loop and spend — a real person stops
+          // answering, they don't find a fourth synonym.
+          line = topic
+            ? `"We're going in circles — still on ${topic}. Ask me something else if you want."`
+            : `"We're going in circles a bit — ${reInner} Ask me something else if you want."`;
           try { this.convoSpendChoice(vid, 'recap'); } catch (e) {}
         }
       }
       c._recapSaid[raw] = true;
-      // RECAP CAP (journey-social r154 2026-11-07): press-count cap — the
-      // reframe-keyed spend above only fires when the SAME raw line repeats,
-      // but a moving conversation re-anchors to a fresh line every press
-      // (each press appends a thread-log entry), so the cap never fired in
-      // the wild (r153: 7 conversations to 6 presses). Count presses per
-      // sitting; after serving the 5th, spend 'recap' whatever the line
-      // was. The r27/r31 reframe/escalation content above is untouched;
-      // the same-line spend stays as a redundant guard.
+      // RECAP CAP (journey-social r154 2026-11-07; tightened audit #6):
+      // press-count cap — the reframe-keyed spend above only fires when the
+      // SAME raw line repeats, but a moving conversation re-anchors to a
+      // fresh line every press (each press appends a thread-log entry), so
+      // the reframe counter never fired in the wild. Count presses per
+      // sitting; after serving the 3rd, spend 'recap' whatever the line
+      // was. Same-line clearer-exit spend above stays as a redundant guard.
       c._recapPresses = (c._recapPresses || 0) + 1;
-      if (c._recapPresses >= 5) {
+      if (c._recapPresses >= 3) {
         try { this.convoSpendChoice(vid, 'recap'); } catch (e) {}
       }
       return this.voiceLine(vid, line);
@@ -4472,6 +4491,15 @@
       } else if (c.spokenBeat?.tag !== 'invitation') {
         choices = (choices || []).filter(ch => !/^betrayal:(accept|decline)$/.test(ch.id));
       }
+      // RESUME OWNERSHIP (dialog audit #7 2026-11-08): strip Teach / skill
+      // lesson / agency pivots while an unfinished resume/debt/confide owns
+      // the sitting. Belt-and-suspenders over suppressPivot — beat-matrix and
+      // agency injectors can prepend after buildMenu. Subject-change /
+      // leave / on-thread engage stay.
+      if (!owns && typeof this.convoResumeOwnsSitting === 'function' && this.convoResumeOwnsSitting(vid)) {
+        const resumePivot = /^(teach|theorize|trade|hawker|compare_maps|observe|offer_help|invite_party|skill_learn:|skill_teach:|agency:)/;
+        choices = (choices || []).filter(ch => ch && !resumePivot.test(ch.id));
+      }
       const full=(choices || []).filter(ch=>ch && ch.id && ch.id!=='menu:more' && !seen.has(ch.id) && seen.add(ch.id));
       c.offeredReplies = Object.fromEntries(full.map(ch => [ch.id, ch.label]));
       if (full.some(ch=>/^(ans:|gq:)/.test(ch.id))) { c.menuPage=0;c.menuPages=1;return full; }
@@ -4846,7 +4874,12 @@
         rlist.push({ id: 'leave', label: '"Never mind."' });
         return finish( rlist);
       }
-      const suppressPivot = !!c.reactiveQ || !!c.genericQ || c.thread === 'grief' || c.thread === 'cheer';
+      // RESUME OWNERSHIP (dialog audit #7): unfinished resume/debt/confide
+      // owns the sitting like a hanging r7 question — Teach/agency pivots
+      // wait until subject-change leaves the claimed thread.
+      const resumeOwns = typeof this.convoResumeOwnsSitting === 'function'
+        ? !!this.convoResumeOwnsSitting(vid) : false;
+      const suppressPivot = !!c.reactiveQ || !!c.genericQ || c.thread === 'grief' || c.thread === 'cheer' || resumeOwns;
       // MAXC: the chat view has room for a real choice list. Topic asks
       // must never be starved by action buttons — Steve found deep topics
       // unreachable when discovery actions filled all 5 slots.
@@ -5377,7 +5410,7 @@
       c.active = true; c.exchanges = 0; c.budget = this.convoBudget(vid);
       c.thread = null; c.depth = 0; c.transcript = []; c.pendingQ = null;
       c.choosingSubject = false; c.lastBeat = null; c.spokenBeat = null; c.replyMenu = null; c.followUsed = {}; c.menuPage=0; c.menuPages=1;
-      c.threadLog = []; c._beatThread = null; c._resumedOnce = false;
+      c.threadLog = []; c._beatThread = null; c._resumedOnce = false; c._resumeOwnsTid = null;
       // STALE INVITE HOLD (journey-social r40 2026-10-21): c.invitePending is
       // the intra-conversation hold for "opener owns the reply, queue the
       // invite for the continuer". It leaked across sittings — a d13 hold
