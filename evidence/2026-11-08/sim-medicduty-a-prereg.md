@@ -256,6 +256,75 @@ is a pre-registration correction made before any after-leg number
 exists, not a re-score — no duty code exists yet and no after-leg
 sweep has run.
 
+## AMENDMENT A2 (written BEFORE the duty is built and BEFORE any after-leg run, 2026-11-08 ~13:45Z)
+
+STEVE RULED 2026-11-08 07:02 CST: roster medics CAN cure the sick, not
+just tend them, by either channel: a healing ability OR proper medicine
+found. This ruling supersedes the prereg's "No cure" constraint (which
+predates the ruling) and the prereg's "the village-side cure question
+remains a flagged steve-call" — the question is now ANSWERED, and the
+duty build includes BOTH cure channels in scope. Do NOT re-ask Steve;
+the ruling is given.
+
+EXACT HOOKS (read from code, not guessed):
+- Cure table: `cureEffectFor(did, treatment)` (src/js/statusEffects.js:694)
+  reads `def.cure[treatment]` in src/data/statusEffects.json — the SAME
+  table `treatVillager` (game.js:14354) and `treatDisease` read. Mundane
+  cures: wound_fever — herbal/field/triage/antibiotics all 'cure',
+  needsDiagnosis false; disease (Fever) — herbal 'cure', field/triage/
+  antibiotics 'ease', needsDiagnosis false; gutrot — herbal 'cure',
+  antiparasitic 'cure', needsDiagnosis false; lockjaw — field/triage/
+  antibiotics 'cure', needsDiagnosis true; trichinosis — antiparasitic
+  'cure' only, needsDiagnosis true; trembles — 'no' for EVERY treatment
+  (no cure exists at any tier, canon DISEASES.md). Alien-pool defs carry
+  `cure: []`, so `cureEffectFor` returns 'no' for every mundane
+  treatment — the two-pools law is enforced by the table itself, and
+  the duty additionally refuses alien-pool patients explicitly.
+- Channel 1 — healing ability: the duty holder holds triage /
+  field_medicine / herbal_remedy via `npcHasAbility(holder, abilityId)`
+  (game.js:46732 — reads `v.npcAbilities[vid]`, or skill-lane knowledge
+  via `npcKnowsSkill`). NPCs have NO ability levels — levels are
+  scholar-only (`abilityLevel`), so the gate is BINARY HOLD, not L2/L3:
+  the scholar-only L3 shortcuts (herbL3 / triageL3 / fieldL3) and the
+  Fever's End synergy (`hasSynergy`, scholar-only) do NOT transfer to
+  NPCs. Diagnosis gate mirrors `treatVillager`: when
+  `def.cure.needsDiagnosis` is true and neither `rec.diagnosed` nor
+  `villageKnowsDisease(did)` holds, a 'cure'/'support' effect downgrades
+  to 'ease' (the holder tends instead of curing — no blind cure of an
+  unnamed sickness).
+- Channel 2 — proper medicine: a dose from the Haven stash pharmacy —
+  `stashState().medicine` (storage.js:250: entries keep `medType` +
+  `doses`, deposit-gated, pharmacy identity preserved). Match rule mirrors
+  `useMedicine` (game.js:14068): antibiotics kill bacterial,
+  antiparasitic kill parasitic, `cureEffectFor(did, medType) === 'cure'`
+  AND class match required. Spending a dose decrements `doses` (entry
+  removed at 0). No new store, no scholar-inventory raid: the duty
+  holder draws only on medicine the village itself holds at Haven.
+- Cure effect (mirrors the `treatVillager` cure branch, NPC-side):
+  `delete v.sick[vid]`; `markDiseaseKnown(did)`; `remember(holder,
+  'cured', ...)` + `remember(patient, 'cured_by', ...)`; `bondAdd`
+  +3 'treated' (same as tending); `noteDeed('healing')`; one say line
+  in plain words naming holder, patient, and what cured them. No
+  `treatVillager` call (scholar-only, kcal + L2 gate), no `v.warded`
+  (scholar-evolution-gated), no new ability/skill grant.
+- When it fires: inside `villagerCareTick`, as part of the duty holder's
+  own tend pass — for each patient the holder would tend, try cure
+  FIRST (ability channel, then medicine channel); a cured patient
+  leaves `v.sick` and consumes that tend slot for the day. One cure
+  attempt per patient per day (the tick runs once a day via
+  `villageSicknessTick`). 'ease'/'support' outcomes are NOT cures —
+  they fall through to the ordinary tend (daysLeft − 1).
+- Cure metric (SECONDARY, reported, not gated): NPC cures by channel —
+  `v.medicDutyCures = { ability: n, medicine: n }` on the village
+  state, read by the recorder's duty snapshot as `dutyCures` (final-day
+  values per seed; before-leg value is 0 by construction — no duty
+  code existed). The analyzer reports per-leg cure totals. The primary
+  GO bar (A1) is UNCHANGED: share ≥ 30% AND absent-with-medic ≤ 19,
+  guardrails G1–G4 as amended. The test's L4 leg ("no-cure") is
+  rewritten as the cure-channels leg (ability cure, medicine cure,
+  alien-pool refusal, trembles no-cure, diagnosis gate, no
+  `treatVillager` call by the duty).
+
 ## Metric review (post-run)
 
 (to be filled after the sweeps)
