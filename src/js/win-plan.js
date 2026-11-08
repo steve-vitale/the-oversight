@@ -539,7 +539,13 @@
     winPlanBondsTick(hx, hy) {
     try {
       var st = this.state || {};
-      if (st.nationalLive || st.pendingNational) return null;
+      // TENDDRIVE-A (sim-tenddrive-a, 2026-11-08): the tending leg runs
+      // WHILE national — the realm is a live relationship, and the only
+      // mechanism that builds trust headroom above the 40 bar used to
+      // switch off the day the realm was won (tendtrust-b: 0 engine
+      // tends while nationalLive on 7/8 seeds; both national losses on
+      // the 764 band are that shape). The muster stand-down leg
+      // (winPlanMusterTick) keeps its own nationalLive early return.
       var prims = ownPrimaryLinks(this);
       if (prims.length < 2) return null;
       var actors = planActorsAtHaven(this, hx, hy);
@@ -552,7 +558,12 @@
       var tended = [];
       for (var i = 0; i < prims.length; i++) {
         var l = prims[i];
-        if ((l.trust || 0) >= 50) continue;
+        // TENDDRIVE-A: while national the cap is 55, not 50 — a link at
+        // 55 banks 15 points of headroom above the 40 bar, which holds
+        // the largest observed national-loss dip (12 points); at 50 it
+        // banks only 10, which does not (50-12=38 < 40). Cap stays 50
+        // when not national.
+        if ((l.trust || 0) >= (st.nationalLive ? 55 : 50)) continue;
         if (l.tendedWeek === week) continue;
         if (l.mourningUntil && day < l.mourningUntil) continue;
         if (typeof this.tendLink !== 'function') continue;
