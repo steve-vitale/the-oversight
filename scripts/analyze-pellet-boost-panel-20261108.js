@@ -1,5 +1,6 @@
-// scripts/analyze-pellet-boost-panel-20261108.js — judge the pellet-boost
-// panel bars (PB-2/PB-3/PB-4) from evidence/2026-11-08/sim-pellet-boost-panel.jsonl.
+// scripts/analyze-pellet-boost-panel-20261108.js — judge the pellet rads
+// panel bars (RB-1/P1, RB-2/P2 organic, RB-3/P3) from
+// evidence/2026-11-08/sim-pellet-rads-panel.jsonl.
 // Usage: node scripts/analyze-pellet-boost-panel-20261108.js [path]
 // Exit 0 when every bar passes, 1 otherwise. Prints the per-seed table +
 // the verdict per bar. The P4 (pass) comparison is a separate diff against
@@ -7,43 +8,43 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
-const file = process.argv[2] || path.join(__dirname, '..', 'evidence', '2026-11-08', 'sim-pellet-boost-panel.jsonl');
+const file = process.argv[2] || path.join(__dirname, '..', 'evidence', '2026-11-08', 'sim-pellet-rads-panel.jsonl');
 const rows = fs.readFileSync(file, 'utf8').trim().split('\n').filter(Boolean).map(l => JSON.parse(l));
 const bearer = rows.filter(r => r.panel === 'bearer');
-const starved = rows.filter(r => r.panel === 'starved');
 let fail = 0;
 function bar(name, cond, detail) {
   console.log((cond ? '  PASS ' : '  FAIL ') + name + (detail ? ' — ' + detail : ''));
   if (!cond) fail++;
 }
-console.log('BEARER PANEL (PB-2): ' + bearer.length + ' seeds');
+console.log('BEARER PANEL (P1/P2/P3): ' + bearer.length + ' seeds');
 for (const r of bearer) {
-  console.log(`  seed ${r.seed}: days=${r.days} end=${r.endReason} boosts=${r.ledger.boosts} floors=${r.ledger.floors} spent=${r.ledger.spent} ledgerMatchesBurns=${r.ledgerMatchesBurns} wholeUnit=${r.everySpentWholeUnit} surgeUsed=${r.feastSurgeUsed} surgeBy=${r.feastSurgeBy} pantry ${r.pantryKcalStart}->${r.pantryKcalEnd} deaths=${r.deaths}`);
+  console.log(`  seed ${r.seed}: days=${r.days} end=${r.endReason} boosts=${r.ledger.boosts} floors=${r.ledger.floors} rads=${r.ledger.rads} ledgerMatch=${r.ledgerMatchesBurns} burnRads=${r.everyBurnCostsRads} pantryUntouched=${r.everyBoostPantryUntouched} perBearer=${r.perBearerMatches} maxBoostsDay=${r.maxBoostsPerDay} heavyUse=${r.heavyUseDay} maxExposure=${r.maxHolderExposure} sickObserved=${r.sicknessObserved} cureObserved=${r.cureObserved} surgeUsed=${r.feastSurgeUsed} surgeBy=${r.feastSurgeBy} pantry ${r.pantryKcalStart}->${r.pantryKcalEnd} deaths=${r.deaths}`);
 }
 if (bearer.length) {
   const boostedSeeds = bearer.filter(r => r.ledger.boosts >= 1).length;
-  bar('PB-2a: >=1 boost on >=4/8 bearer seeds', boostedSeeds >= 4, boostedSeeds + '/' + bearer.length + ' seeds boosted');
-  bar('PB-2b: ledger.spent equals observed boost draws, every seed', bearer.every(r => r.ledgerMatchesBurns),
+  bar('P1a: >=1 boost on >=4/8 bearer seeds', boostedSeeds >= 4, boostedSeeds + '/' + bearer.length + ' seeds boosted');
+  bar('P1b: ledger.rads equals observed boost rads, every seed', bearer.every(r => r.ledgerMatchesBurns),
     bearer.filter(r => !r.ledgerMatchesBurns).map(r => r.seed).join(',') || 'all match');
-  bar('PB-2c: every boosted draw took one whole unit present at the time', bearer.every(r => r.everySpentWholeUnit),
-    bearer.filter(r => !r.everySpentWholeUnit).map(r => r.seed).join(',') || 'all whole-unit');
+  bar('P1c: every paid burn costs exactly radsPerBoost (2)', bearer.every(r => r.everyBurnCostsRads),
+    bearer.filter(r => !r.everyBurnCostsRads).map(r => r.seed).join(',') || 'all cost 2');
+  bar('P1d: no burn moves the pantry (pre == post at the burn), every seed', bearer.every(r => r.everyBoostPantryUntouched),
+    bearer.filter(r => !r.everyBoostPantryUntouched).map(r => r.seed).join(',') || 'pantry untouched');
+  bar('P1e: per-bearer burn rads match per-bearer boost counts, every seed', bearer.every(r => r.perBearerMatches),
+    bearer.filter(r => !r.perBearerMatches).map(r => r.seed).join(',') || 'all match');
   const marked = bearer.filter(r => r.feastSurgeUsed).length;
-  bar('PB-4 (P3): feastSurgeUsed marks on >=1 bearer seed via a paid boost', marked >= 1, marked + '/' + bearer.length + ' seeds marked');
-}
-console.log('STARVED PANEL (PB-3): ' + starved.length + ' seeds');
-for (const r of starved) {
-  const everAbove = r.daily.some(d => d.pantryKcal >= 50);
-  console.log(`  seed ${r.seed}: days=${r.days} end=${r.endReason} boosts=${r.ledger.boosts} floors=${r.ledger.floors} boostsWhileStarved=${r.boostsWhileStarved} bearerDailyNeed=${r.bearerDailyNeed} pantryEverAboveCOST=${everAbove} pantryEnd=${r.pantryKcalEnd}`);
-}
-if (starved.length) {
-  bar('PB-3a: 0 boosts while starved (pantry below COST at the burn)', starved.every(r => r.boostsWhileStarved === 0),
-    starved.filter(r => r.boostsWhileStarved > 0).map(r => r.seed + ':' + r.boostsWhileStarved).join(',') || 'none fired starved');
-  bar('PB-3b: bearer never hungers (dailyNeed 0 at end)', starved.every(r => r.bearerDailyNeed === 0),
-    starved.map(r => r.seed + ':' + r.bearerDailyNeed).join(','));
-  bar('PB-3c: floors > 0 on the starved seed(s)', starved.some(r => r.ledger.floors > 0),
-    'floors=' + starved.map(r => r.ledger.floors).join(','));
-  const lit = starved.filter(r => r.ledger.boosts === 0).length;
-  console.log('  NOTE PB-3 literal (0 boosts total): ' + lit + '/' + starved.length + ' seeds — a village that forages back above COST will boost; see the run note.');
+  bar('P3: feastSurgeUsed marks on >=1 bearer seed via a paid boost', marked >= 1, marked + '/' + bearer.length + ' seeds marked');
+  const heavy = bearer.filter(r => r.heavyUseDay).length;
+  bar('P2-organic: a heavy-use bearer-day (>=5 boosts in a day) exists somewhere in the panel', heavy >= 1,
+    heavy + '/' + bearer.length + ' seeds have one — none = NO-GO on tuning (cost cannot bind in the wild)');
+  const hot = bearer.filter(r => r.maxHolderExposure >= 10);
+  if (hot.length) {
+    bar('P2-organic: every bearer that reached exposure >=10 was observed sick', hot.every(r => r.sicknessObserved),
+      hot.filter(r => !r.sicknessObserved).map(r => r.seed).join(',') || 'all sick-observed');
+  } else {
+    console.log('  NOTE P2-organic: no bearer reached exposure >=10 on any seed — the sickness-in-the-wild half is unobserved; see the run note.');
+  }
+  const cures = bearer.filter(r => r.cureObserved).length;
+  console.log('  NOTE P2 cure observation (recorded, not a bar): ' + cures + '/' + bearer.length + ' seeds show an exposure drop larger than the 1/day decay.');
 }
 console.log(fail ? `\nVERDICT: ${fail} bar(s) FAIL` : '\nVERDICT: all bars PASS');
 process.exit(fail ? 1 : 0);
