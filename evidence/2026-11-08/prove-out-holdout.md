@@ -74,16 +74,26 @@ Pre-registered bars from `docs/prove-out-plan.md` / store plan:
 
 **Decision label:** `review_required` (measure-only; no Game/policy change).
 
-### Written tradeoff (required by bar 2)
+### Written tradeoff (required by bar 2) — accepted `review_required`
 
-- **Do not treat the 16-screen as confirmed.** Merchant win-rate and capable
-  surv60 moved beyond tolerance in opposite narrative directions (merchant
-  worse; capable bearer survival better). Pooled win rate slipped ~3pp.
-- **Do treat “not a zero wall” as replicated.** National ~86%, wins ~67%,
-  full seats present (24/256). That is a different claim from “screen rates
-  hold.”
-- **No lever move from this panel.** Survival-lever register unchanged.
-  Coordinate with Muse before any policy/food/Loop B interpretation.
+**Out of ±0.02 tol (pooled):** won/table **−3.1pp** (70%→67%), communityLost
+**+2.3pp** (6%→9%), surv30 **−8.6pp** (94%→85%); surv60 +3.0pp also out.
+National alone holds (−0.4pp). **Policy slides:** merchant won **81%→58%**;
+maker national 100%→86%; capable surv60 **25%→49%** (plus 21 other
+metric/scope cells → 26 total).
+
+**Decision:**
+
+1. **National confirms** — tip is not a 0-national / 0-win wall on this bank
+   (219/256 national, 172/256 won, 24 full seats).
+2. **Screen was optimistic on merchant/maker sits** and **pessimistic on
+   capable surv60** — do not treat 16-screen rates as the holdout mean.
+3. **Clearance language stays blocked** (small-effect / “screen confirmed” /
+   gap-PR clearance). No silent pass of bar 2.
+4. **No panel re-run, no policy retune, no lever move.** Survival-lever
+   register unchanged. **Not Loop B** (different seeds/instruments).
+
+Full write-up (Project store): `docs/prove-out-holdout-tradeoff.md`.
 
 ## Utilization (short)
 
