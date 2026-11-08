@@ -1,0 +1,76 @@
+=== r114-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Helga (gen_3buic1g) occ=army medic --
+OPENING: "I don't know what to do with my hands today."
+YOU: [silence] "..."
+THEM: "You're a good listener, you know that?" A tired smile.
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "I — yeah. It helps, hearing that."
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "You want to know about that? Okay." "Here's what I think — Miguel headed out for water."
+YOU: [goon] "You don't have to say it all at once."
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [goon] "You don't have to say it all at once."
+THEM: "...I need to go be quiet for a while."
+(no pick — winding down)
+(stall menu: leave|silence)
+
+-- Dylan (gen_wgr2s88) occ=dockworker --
+OPENING: "About what happened to my taken kin — I keep dreaming about rows of pods. Humming. Tell me I'm not the only one. Just... be straight with me."
+YOU: [dlg:more] "What do you remember?"
+THEM: "It's my grandfather, Ryan. Went in the Taking. He survived two wars and a famine. Not interesting enough, apparently. Some nights I swear I hear them before I sleep -- the pods, rows deep, humming. Then morning comes and I can't say whether it was real."
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "a cellar full of jars — I'll show you on the map sometime. It's real."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person."
+YOU: [goon] "Take your time."
+THEM: Their voice loosens. The guardedness thins.
+YOU: [goon] "Take your time."
+THEM: "Are you angry? At whoever did this. At the sky. At anything."
+YOU: [ans:q_angry:a_yes] "Furious. Most days."
+THEM: "Good. Anger's fuel. Just — point it somewhere useful."
+YOU: [goon] "Take your time."
+THEM: "Anger's a fire — useful if you cook with it, deadly if you sleep next to it. I cook with mine. Most days."
+closing: "Sorry. I need a minute."
+
+-- Joyce (gen_pthhc1d) occ=sign painter --
+OPENING: "Hah. Don't mind me. Today's just heavy."
+YOU: [dlg:comfort] "You alright?"
+THEM: A long exhale. "I'll get there. Just needed a minute where I didn't have to be fine."
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "You want to know about that? Okay." "Meera? A Dentist, back before. Solid person."
+YOU: [goon] "You don't have to say it all at once."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:more] "Tell me more."
+THEM: "Dylan? A dockworker, back before. Solid person. Thank you. Really."
+YOU: [dlg:react] (listen)
+THEM: "Why do you ask? People are talking about me. Take it for what it's worth."
+YOU: [dlg:theorize] "What do you think it means?"
+THEM: "What if the System is lonely? Infinite power, nobody to talk to, so it builds a terrarium and narrates. We're pets with a podcast host."
+YOU: [gq:open:take] "I need a moment to think about that."
+THEM: "Okay. We'll pick this up later."
+YOU: [agree] "You're right."
+THEM: "Yeah. That's about right."
+(ended by engine)
+
+-- Declan (gen_lqbsr9h) occ=librarian --
+OPENING: "I keep expecting to see them by the fire. Then I remember."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Water Lily. Leaf, stem, smell. You won't forget it now."
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Good question." "What's this about? Miguel headed out for water."
+YOU: [gq:reason:understand] "I want to understand you better."
+THEM: "All right. Thank you for asking."
+YOU: [goon] "I'm here. Go on."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [goon] "I'm here. Go on."
+THEM: "What's something from your old life that's actually useful here?"
+YOU: [ans:q_before_skill:a_tell] "Patience. Sounds dumb. But waiting — really waiting, without fidgeting — that's
+THEM: "Not dumb at all. The people who can't wait are the ones who make mistakes. You're an asset."
+YOU: [goon] "I'm here. Go on."
+THEM: "Being a librarian taught me to read people fast — who's lying, who's scared, who needs a job. Turns out that's a survival skill. Who knew. You'd know about that."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Okay. Yeah. I trust you."
+closing: "I'll be okay. Don't worry about me. Worry about... actually, don't worry at all."

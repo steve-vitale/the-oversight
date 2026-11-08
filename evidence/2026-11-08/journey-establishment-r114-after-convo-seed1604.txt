@@ -1,0 +1,77 @@
+=== r114-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Nora (gen_ksy9b1n) occ=sign painter --
+OPENING: "The cistern's nearly dry — 5 liters left. I can't carry enough alone. First light, the creek, you and me?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Finish the current event before hauling water.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Good question." "Giulia headed out to forage."
+YOU: [goon] "What else did you hear?"
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Not right now. I've got my own things to handle."
+YOU: [dlg:more] "I’m listening."
+THEM: "Rahul headed out to find someone."
+YOU: [dlg:react] (listen)
+THEM: "Anyway." A small smile.
+closing: "Later."
+
+-- Rahul (gen_runcpfd) occ=crossing guard --
+OPENING: Every group I've been in, someone had to be the adult. Guess it's me again.
+YOU: [goon] "Say more about that."
+THEM: "I've heard good things about Stonebridge. We should link with them — we'd be stronger together."
+YOU: [dlg:more] "Go on."
+THEM: "I watch how people look at you. Some of them are waiting for an alternative. I'm just saying."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "I can't. Not today. Ask me when the work's done."
+YOU: [goon] "Say more about that."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [dlg:react] (listen)
+THEM: "I'm not asking anyone to follow me. I'm just... not going to watch us drift, either."
+YOU: [menu:more] More things to say (1/2)
+THEM: (menu page turned)
+YOU: [dlg:doubt] "That doesn't quite add up."
+THEM: "...What's that supposed to mean?" Their voice goes careful.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway — that's my cross to carry. What's on your mind?"
+closing: "Take care of yourself."
+
+-- Juan (gen_u7iqag0) occ=exterminator --
+OPENING: Juan speaks only 🇵🇭 Tagalog. You hear them in English — your extended mind translating live, cheerful and slightly off. They hear only your English, and understand none of it. Eyes, hands, and patience — one direction only.
+They speak. You understand none of it.
+(They mime walking — pointing at themselves, then at you, then toward the cache spot. The meaning is unmistakable: come with me.)
+YOU: [nv:nod] (nod slowly)
+THEM: They answer at length. They nod, holding your gaze a beat longer. "Water?" — they grin, proud of the one English they know. Something about the way you tilt your head — hearing them twice, once in their voice and once in the System’s. It unsettles them, a little.
+YOU: [nv:smile] (smile)
+THEM: They answer at length. A grin breaks through, quick and warm.
+YOU: [nv:pointself] (point: you, them, together)
+THEM: They answer at length. You point at yourself, then at them, then at the fire. Together. They get it.
+YOU: [nv:listen] (listen hard — catch words)
+THEM: You hold still and let the sounds settle. Sounds, and the shape of meaning just out of reach.
+(no pick)
+(stall menu: nv:nod|nv:smile|nv:pointself|nv:listen|leave)
+closing: They wave you off gently, already turning away. The conversation ends where language couldn't reach.
+
+-- Emma (emma_larsen) occ=Veterinarian --
+OPENING: "Can I tell you something? At night I talk to someone who isn't there anymore."
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Serviceberry — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+YOU: [goon] "Yeah?"
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "an old trapline — I'll show you on the map sometime. It's real."
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "a ridge with a view for miles — I'll show you on the map sometime. It's real."
+YOU: [dlg:react] (listen)
+THEM: They nod slowly, not quite done, not quite continuing.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on what they confided."
+YOU: [goon] "Yeah?"
+THEM: Something eases in their shoulders. They're really talking to you now.
+YOU: [goon] "Yeah?"
+THEM: "What scares you most about what's happening? The real answer."
+closing: "This was nice. Don't be a stranger — we're ten people, it's hard."

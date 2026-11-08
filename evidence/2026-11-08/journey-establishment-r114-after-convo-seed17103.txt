@@ -1,0 +1,87 @@
+=== r114-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Fiona (gen_qo76npb) occ=Dentist --
+OPENING: "About the worst thing you've done — What's the worst thing you've done since the sky changed? Probably fine. Probably."
+YOU: [ans:q_guilty:a_tell] "There's something I regret. I'm not ready to talk about it."
+THEM: No judgment in their face. "We're all doing math that doesn't add up. You're still here. That counts."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: Their friendliness thins — still there, just held at arm's length.
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "I don't answer that one myself. Not yet. Maybe when I've decided whether surviving counts as an excuse or just a reason."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Help me haul something back? Too much for one."
+YOU: [silence] "..."
+THEM: "You're a good listener, you know that?" A tired smile.
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "I've heard good things about Emberhold. We should link with them — we'd be stronger together."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Cush-cush Yam. Leaf, stem, smell. You won't forget it now."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the worst thing you've done. It'll pass."
+closing: "See you at the fire."
+
+-- Ashley (gen_7ggxoqh) occ=arborist --
+OPENING: "I'm sorry — whatever this is, it's getting worse — I'm achy and wrung out, barely keeping food down. Will you help me?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to them, on the same side of the Haven door, to help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Thank you. Just — thank you. I'll be here, resting."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:personal] "Tell me who you are, child. The whole of it."
+THEM: "Good question." "Do you ever wonder what the aliens eat? Like, do they have potlucks?"
+YOU: [gq:yn:yes] "Yes."
+THEM: They nod. "Okay."
+YOU: [dlg:more] "Tell me more."
+THEM: "People ask what I did before. I was an arborist. Now I'm... whatever today needs."
+YOU: [dlg:react] (listen)
+THEM: "I wonder if Columbus, Ohio looks like this now. Empty. Quiet. Or if it's worse there."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Alright, duty calls. This was a good pause."
+
+-- Lucia (gen_i8y761p) occ=fishing guide --
+OPENING: "I keep dreaming about rows of pods. Humming. Tell me I'm not the only one."
+YOU: [dlg:more] "Tell me about them."
+THEM: "It's my spouse, Autumn. Was taken at the Scattering. I tell everyone they were the interesting one. I need that to be true. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [goon] "Go on. I'm listening."
+THEM: "...I should say, I trade in what I know. My knowledge for yours. Or food, if you're short on secrets."
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Good question." "People are talking about Desmond. Take it for what it's worth."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Alright. But I'm not carrying your stuff."
+YOU: [party_name] "We should name this. Us."
+THEM: "A name. Okay." You say it out loud, trying the shape of it:
+1. "APEX SNACKS" (📺 the System suggests)
+2. "The Unlost" (Ashley suggests)
+3. "The Company" (or plain)
+(Which one? It'll stick.)
+YOU: [party_namepick:0] "APEX SNACKS."
+THEM: 🤝 "APEX SNACKS." It hangs in the air a moment — then Ashley grins. It's real now. It has a name, which means it can be lost.
+📺 APEX SNACKS is official. Ashley, Lucia. (The village watches the broadcast. Nobody blinks.)
+📣 APEX SNACKS was named — Ashley, Lucia. A team, on purpose.
+📓 Codex: We named us: APEX SNACKS.
+closing: "I'm glad we talked. I think. I'm still deciding."
+
+-- Fatma (gen_ss6lmwj) occ=postal worker --
+OPENING: "About what scares you most — What scares you most about what's happening? The real answer."
+YOU: [ans:q_system_fear:a_tell] "That it's intentional. That someone's watching and this is all... on purpose."
+THEM: They go quiet. "Yeah. Me too. The randomness would almost be kinder."
+YOU: [goon] "Go on. I'm listening."
+THEM: Their tone levels out — courteous, careful, further away.
+YOU: [goon] "Go on. I'm listening."
+THEM: "That we're interesting to it. Being watched means being kept. I'd rather be boring to the sky. Boring things get left alone. — or so they tell me."
+YOU: [goon] "Go on. I'm listening."
+THEM: "Come see what I found. You won't believe it."
+YOU: [silence] "..."
+THEM: They fill the quiet. "Anyway — where was I?"
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "Saw things with too many joints. Give them room. That's the whole lesson."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on what scares you most."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Someone should watch your back. Might as well be me."
+closing: "Later."
