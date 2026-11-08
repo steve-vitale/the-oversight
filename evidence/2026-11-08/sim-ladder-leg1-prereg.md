@@ -170,6 +170,55 @@ Steve approved the build 2026-11-07 19:28 CST. Coordinator: parent
   Thresholds 12/26/40 stand as starting values; the panel may move
   them ±30% via prereg amendment (Q7), never a mid-run retune.
 
+## AMENDMENT 2 (2026-11-08, attempt #2 adoption — pre-merge, no scored run)
+
+Attempt #1 was SIGTERMed by a runtime restart drain at 2026-11-08
+07:24Z, and the coordinator's recovery check concluded it had produced
+nothing durable. That conclusion was wrong about the BRANCH: the
+worktree was mid-rebase (onto `8dc3d16d2`, 0 of 4 picks applied) with a
+clean tree at the old base, but branch `build-ladder-leg1` held all four
+attempt-#1 commits (`7150ea43e` prereg + run note + neutral panel,
+`2b6ef5d2b` ladder core, `ea219f610` unit proofs + green-list,
+`a08550122` ontology + offline assets + neutral proof). Attempt #2
+ADOPTED that branch rather than rebuilding: aborted the stale rebase,
+rebased onto current master `1cac498d5` (verified `cat
+.git/refs/heads/master` in `~/workspace/the-scattering` + `git fetch
+origin master` at 2026-11-08 ~07:30Z). Rebase conflicts were version-tag
+churn only (attempt #1's tag `09e57528e-20261107-233501` vs current ship
+tag `2ce918e0e-20261108-053200`): `index.html` (re-added the one
+`ladder.js` script line after `standing.js` with the current tag) and
+`sw.js` (re-added the two ladder asset lines with the current tag).
+Rebased SHAs: `38685ecd9`, `019aa799a`, `df31b3028`, `d4036f1b2`.
+
+- Base move `8dc3d16d2` → `1cac498d5` is evidence/scripts ONLY (4 files:
+  sim-healerbisect-b prereg + note + screen + proof test). No `src/js`,
+  no `index.html` — the observer-neutral proof inputs are unchanged, so
+  the refreshed `scripts/balance-proof.json` still covers current inputs.
+- DRIFT-1 re-checked at `1cac498d5` by attempt #2: `taskXp` /
+  `task_xp` STILL returns NOTHING over `src/js/`, in this worktree AND
+  in the main tree. The attempt-#2 handoff's claim (grep found it in
+  `betrayal.js`, `ledger.js`, `progression.js`, `villager-agency.js`)
+  does not reproduce at this base. Q3 still governs (summed track XP).
+- Q6/Q11 re-verified by attempt #2 (own greps, not assumed):
+  charter — `link.chartered = true` set in `hierarchy.js:2884,2898`
+  (sign/bargain); tribute — only `table.js:1478`
+  `demandprice:tribute` (12,000 kcal failure price), no military deed;
+  `armoryDonations` — zero hits in `src/js/`, only in
+  `scripts/probe-endgame-r*.js` (policy-side probes). Q11 verdict
+  stands: Craft is summed craft XP only.
+- Re-verification on the REBASED tree (attempt #2, own runs):
+  `test-ladder-cap.js` 25/25, `test-ladder-minting.js` 34/34,
+  `check-wired.js src/js/ladder.js` 0 unwired (20 functions),
+  `validate-ontology.js` 135/135. `node
+  scripts/build-offline-assets.js` re-run: it moved
+  `ladder-capstones.json` to its canonical alphabetical slot among
+  data files (attempt #1's hand-resolved sw.js position was wrong);
+  kept, as a rebase-resolution correction in the adoption commit.
+- Bars unchanged. L6 (`check.js --quick` green) is re-run by attempt #2
+  in a free gate slot before merging; the phone-frame proof refresh
+  remains OWED to a browser-capable agent (see run note) and the gate
+  stays red on that one test until it lands.
+
 ## Env
 
 - None. Unit proofs run under the shared harness with fixed seeds
