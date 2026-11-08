@@ -317,7 +317,14 @@ function main() {
     const s5 = firstDay(r => r.feasted);
     const s6 = firstEvDay(deeds);
     const s7 = firstDay(r => r.surgeUsed);
-    const stall = s0 == null ? 'S0-lesson' : s1 == null ? 'S1-keepsake' : s2 == null ? 'S2-arming' : feastCalls.length === 0 ? 'S3-feast' : grantsOk === 0 ? 'S4-grant' : feastedDays === 0 ? 'S5-window' : deeds.length === 0 ? 'S6-use' : s7 == null ? 'S7-seat' : 'COMPLETE';
+    // Stall order (r110 metric review): the deed/surge checks come BEFORE
+    // the feasted-days check — a seed whose feaster dies the same day they
+    // mark the deed (97004: feast+grant+fight+deed+death all on d98, the
+    // successor's snapshot reads feasted=0) completed the chain even though
+    // no daily snapshot ever caught the window live. S5-window means grants
+    // with no deed AND no feasted day observed; S6-use means a window was
+    // observed but no deed marked.
+    const stall = s0 == null ? 'S0-lesson' : s1 == null ? 'S1-keepsake' : s2 == null ? 'S2-arming' : feastCalls.length === 0 ? 'S3-feast' : grantsOk === 0 ? 'S4-grant' : deeds.length === 0 ? (feastedDays === 0 ? 'S5-window' : 'S6-use') : s7 == null ? 'S7-seat' : 'COMPLETE';
     console.log(`Q1 FEASTCHAIN: rows=${fcRows.length} errs=${fcErrs.length} stall=${stall}`);
     console.log(`  S0 lesson d${s0 == null ? '-' : s0} slot60 d${s0b == null ? '-' : s0b} | S1 keepsake d${s1 == null ? '-' : s1} keepsDays=${keepsDays} | S2 maxRes=${maxRes}/35 maxL3=${maxL3} armed d${s2 == null ? '-' : s2} channels=${channels.length}`);
     console.log(`  S3 feasts ok=${feastOk}/${feastCalls.length} first d${s3 == null ? '-' : s3} maxGives7=${maxGives7} gives7okDays=${gives7Days} planNo: ${topPlanNo}`);
