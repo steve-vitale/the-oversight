@@ -1725,7 +1725,19 @@
       if (!t || t.split(/\s+/).length < 4) return false;
       try { if (this.convoIsDeflectionLine(sn)) return false; } catch (e) {}
       if (/never (did )?finish(ed)? talking about|never did get back to|we left it|we wandered off|proper ending/i.test(sn)) return false;
+      // STAGE DIRECTION (prove-out 2026-11-08): mood/narration lines from
+      // silence pools were quoted as unfinished speech — "want to pick it
+      // up? 'They glance at the fire…'" (dialog-coherence-audit, seed 1
+      // Dieter / seed 7 Ruth). Not spoken memory; drop the quote.
+      if (this.convoSnippetIsStageDirection(sn)) return false;
       return true;
+    },
+    // Mood / stage-direction narration is not a spoken beat worth quoting.
+    convoSnippetIsStageDirection(sn) {
+      if (!sn) return false;
+      const s = String(sn).trim();
+      return /^(They |A comfortable |A warmth |A tired |Still on what they confided)/i.test(s)
+        || /\b(glance at the fire|comfortable quiet settles|tired smile)\b/i.test(s);
     },
     // convoSnippetIsHook (journey-deepening r13 2026-10-18): a teaser /
     // invitation is a real beat (the unfinished business exists — the plant
