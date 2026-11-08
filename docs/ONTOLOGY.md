@@ -1120,6 +1120,21 @@ Keepsake growth (docs/COHERENCE-SPINE.md "Keepsakes: the growth model", Steve 20
 
 **Consumes:** relicItems, offerRelicEnhancement, playFlashback, isKeepsake, itemDef (game.js / progression.js), takenKinOf, lifeseedKin, vpOf (lifeseed.js / conversation.js), worldKinEntry, worldRegionName (world.js), cureStatus, tbfight, tbFighter (statusEffects.js / game.js), useAbility, _actionAvailable (abilityActions.js; impls registered on its published impl/precheck tables)
 
+### ladder (`ladder.js`)
+The Standing ladder — the victory-gating redesign (Steve 2026-11-07: "Yes build it and test it."). One ladder, four rungs (Village 12 / Regional 26 / National 40 counted points, cumulative), filled by five kinds of village work (Fight, Forage, Craft, Talk, Explore) with a per-track cap (60% of the current cumulative threshold) so no one kind of work can carry a rung alone. A second bar beside Standing (standing.js): Standing opens waves, the ladder opens seats (leg 2's surgery). Village-level computed bar, reads existing state only, never the scholar alone.
+
+**Provides:** ladderCfg(), ladderCapstones(), villageLadder(), ladderStage(), ladderPeakStage(), ladderLine(), ladderStageBeat(stage), ladderCapBeat(track), ladderTick(), ladderCapstoneReady(kind), ladderCapstoneDelivered(), _ladderDiscoveryDeeds(), _ladderLivingVeterans(minWave), _ladderPeakStage()
+
+**Rules:**
+- ladder_village_level: true (code: ladder.js — computed from village state: the wave ledger, the link roll, the feast log, summed track XP across the living roster + the scholar, codex breadth. Never the scholar alone; a new adventurer inherits the village's ladder, like the ledger.)
+- ladder_no_new_tracking: true (code: ladder.js — reads waveLedgerPoints(), _linkSeasoned() + _linkRegionalPlus(), state.feastLog, npcXp() + playerTracks(), deedState(), codexBreadth(), hierarchyState(). No parallel counters. The only writes are the beat markers (state._ladderPeakStage, state._ladderCapBeat), mirroring standing.js's peak/hold markers. The two brief excepted records (feast-bundle flag, banked points) are NOT written here: the bundle flag is leg 2's write, the banked store is leg 3's.)
+- ladder_cap_binds: true (code: ladder.js — counted[track] = min(total[track], floor(0.6 x threshold of the next rung)); the stage is the highest rung whose capped total meets its threshold, checked rung by rung. The rungs nest: a rung cannot pass while the one below it fails, so the loop breaks on the first failure.)
+- ladder_cap_never_silent: true (code: ladder.js — ladderLine() names every capped track with its counted-vs-total ("Fight 9 -> 7 - capped"); ladderCapBeat() says it aloud the first time a track caps on a rung.)
+- ladder_fail_closed: true (code: ladder.js — any missing module/data reads as 0; a missing capstone deed reads as not-ready. The ladder never opens a stage by accident.)
+- ladder_explore_discovery_gap: true (code: ladder.js — prereg Amendment 1, 2026-11-08: discovery deeds have no lifetime per-deed store at this base (npcXp holds per-track totals only; the per-day books hold today's counts only), so Explore (i) reads 0 and the whole summed field total counts as Forage, once, never twice. The discovery deed carries the ladder:"explore" tag in tracks.json so the split is a one-line change the moment a per-deed lifetime store exists.)
+
+**Consumes:** waveLedgerPoints() (waveLedger.js), hierarchyState(), _linkSeasoned(), _linkRegionalPlus(), scaleRank() (hierarchy.js, standing.js), npcXp(), playerTracks(), trackData() (tracks.js), deedState(), codexBreadth(), progState() (progression.js), sysSay() (game.js), endDay() (wrapped: the daily ladder tick), state.feastLog, state.village.npcXp, state.village.roster, state.waveKillLog, Game.data.tracks, Game.data.ladderCapstones
+
 ### leadership (`ledger.js`)
 The Leadership Vector. No single ending — ending is sum of leadership choices.
 
