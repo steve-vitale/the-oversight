@@ -95,10 +95,17 @@ function deathSummary(deaths) {
 // tableseat-nowait precedent — a sweep killed mid-run must not lose
 // completed configs). Retries; on total failure the row JSON is printed
 // to stdout first so the data is never silently lost.
+// FLAP-HARDENED (sim-tenddrive-a, 2026-11-08): the EPERM write-denial
+// flap killed the first baseline-leg run on s76402-baseline.json after
+// 8 short retries — a flap can last tens of minutes, so the backoff
+// now grows to 60s over 12 attempts, and the sweep RESUMES (see
+// loadExistingRow in sweepMode): re-running skips row files already on
+// disk and valid, so a flap-killed sweep loses at most the config it
+// was writing, never the completed configs.
 function writeRowViaWriter(p, body) {
   console.log('ROWJSON-BEGIN ' + path.basename(p) + '\n' + body + '\nROWJSON-END');
   let lastErr = null;
-  for (let a = 1; a <= 8; a++) {
+  for (let a = 1; a <= 12; a++) {
     try {
       const out = execFileSync('node', [path.join(REPO, 'scripts', 'sim-postunlock2-b-writer.js'), p],
         { input: body, cwd: REPO, encoding: 'utf8', timeout: 600000 });
@@ -110,10 +117,27 @@ function writeRowViaWriter(p, body) {
     } catch (e) {
       lastErr = e;
       console.log(`WRITE-RETRY ${path.basename(p)} attempt=${a} err=${String((e && e.message) || e).slice(0, 160)}`);
-      if (a < 8) sleepMs(Math.min(10000, 1000 * a));
+      if (a < 12) sleepMs(Math.min(60000, 5000 * a));
     }
   }
   throw lastErr;
+}
+
+// loadExistingRow: flap-resume support. A row file already on disk from
+// an earlier (killed) run of this leg is reused WITHOUT re-running the
+// config — but only if it validates (right seed/policy, days > 0, an
+// endSnap with no error, and for armed rows a diag with a trajectory).
+// Anything else re-runs. The writer verifies SHA on write, so a file
+// that exists and parses with the right shape is a completed config.
+function loadExistingRow(evidDir, seed, pid) {
+  const fn = path.join(evidDir, `s${seed}-${pid}.json`);
+  try {
+    const row = JSON.parse(fs.readFileSync(fn, 'utf8'));
+    if (!row || row.seed !== seed || row.policy !== pid) return null;
+    if (!(row.days > 0) || !row.endSnap || row.endSnap.error) return null;
+    if (pid === 'armed' && (!row.diag || !row.diag.traj || !row.diag.traj.length)) return null;
+    return row;
+  } catch (e) { return null; }
 }
 
 async function runOne(pid, seed, days, evidDir) {
@@ -308,8 +332,8 @@ function aggregate(rows, pid) {
       meanEngineLift: engineLiftN ? +(engineLiftSum / engineLiftN).toFixed(2) : null, engineLiftN,
       engineTendsWhileNational: engNat, engineTendsWhileNationalSeeds: engNatSeeds,
       policyTendsWhileNational: polNat,
-      topped55Seeds, nationalLostSeeds, maxTrustWhileNational, engineTendsWhileNationalDays: engNatDays,
-      nationalLostDays,
+      topped55Seeds, nationalLostSeeds: natLostSeeds, maxTrustWhileNational, engineTendsWhileNationalDays: engNatDays,
+      nationalLostDays: natLostDays,
       perSeed,
     };
   }
@@ -348,6 +372,12 @@ async function sweepMode() {
   const rows = [];
   for (const pid of ['baseline', 'armed']) {
     for (const seed of seeds) {
+      const resumed = loadExistingRow(evidDir, seed, pid);
+      if (resumed) {
+        rows.push(resumed);
+        console.log(`  [${pid} seed ${seed}] RESUME-SKIP days=${resumed.days} end=${resumed.endReason} natFinal=${resumed.nationalFinal} (row on disk from an earlier run)`);
+        continue;
+      }
       const row = await runOne(pid, seed, days, evidDir);
       rows.push(row);
       const F = row.diag ? row.diag.first : {};
