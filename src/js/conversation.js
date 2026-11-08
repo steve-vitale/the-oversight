@@ -1725,7 +1725,19 @@
       if (!t || t.split(/\s+/).length < 4) return false;
       try { if (this.convoIsDeflectionLine(sn)) return false; } catch (e) {}
       if (/never (did )?finish(ed)? talking about|never did get back to|we left it|we wandered off|proper ending/i.test(sn)) return false;
+      // STAGE DIRECTION (prove-out 2026-11-08): mood/narration lines from
+      // silence pools were quoted as unfinished speech — "want to pick it
+      // up? 'They glance at the fire…'" (dialog-coherence-audit, seed 1
+      // Dieter / seed 7 Ruth). Not spoken memory; drop the quote.
+      if (this.convoSnippetIsStageDirection(sn)) return false;
       return true;
+    },
+    // Mood / stage-direction narration is not a spoken beat worth quoting.
+    convoSnippetIsStageDirection(sn) {
+      if (!sn) return false;
+      const s = String(sn).trim();
+      return /^(They |A comfortable |A warmth |A tired |Still on what they confided)/i.test(s)
+        || /\b(glance at the fire|comfortable quiet settles|tired smile)\b/i.test(s);
     },
     // convoSnippetIsHook (journey-deepening r13 2026-10-18): a teaser /
     // invitation is a real beat (the unfinished business exists — the plant
@@ -1956,6 +1968,12 @@
       // predecessor's — the NPC names them. The new Bearer can pick it
       // up, but never as if they were there.
       const pred = (typeof this.inheritedName === 'function') ? this.inheritedName(o) : null;
+      // RESUME OFFER (story-offer 2026-11-08): when the opener asks whether
+      // to hear / pick up the unfinished thread, Yes must deliver that
+      // thread — not a generic yn acknowledgment. Tagged on the return so
+      // startConvo can mark the hanging genericQ. Stage-direction quote
+      // hygiene stays in PR #10's convoSnippetIsStageDirection path.
+      let resumeOffer = false;
       if (pred) {
         if (ago > 7) {
           // STALE INHERITANCE (journey-landing r16 2026-10-15): an 8+-day-old
@@ -1966,13 +1984,17 @@
           // Name the dead, own the gap, invite — the new Bearer can pick it
           // up, never as if they were there.
           inner = `${pred} and I never did finish talking about ${label} — that was ${this.pluralize(ago, 'day')} back. You weren't there for that one — ${pred} was. Want to hear where it left off?`;
+          resumeOffer = true;
         } else if (ago > 1) {
           inner = `${pred} and I never finished talking about ${label} — ${whyLine}, ${this.pluralize(ago, 'day')} back. You're wearing ${pred}'s shoes now — want to pick it up?`;
+          resumeOffer = true;
         } else {
           inner = `${pred} and I never finished talking about ${label} — ${whyLine}. You're wearing ${pred}'s shoes now — want to pick it up?`;
+          resumeOffer = true;
         }
       } else if (ago > 7) {
         inner = `We never did finish talking about ${label} — that was ${this.pluralize(ago, 'day')} back. Still on your mind?`;
+        resumeOffer = true;
       } else if (ago > 1) {
         inner = `We never finished talking about ${label} — ${whyLine}, ${this.pluralize(ago, 'day')} back.`;
       } else {
@@ -2039,7 +2061,7 @@
       const line = this.voiceLine(vid, `"${inner}"`);
       // R17: the resume opener is structural grammar — exempt from the
       // run-ledger block (consumed at emission in startConvo).
-      return { line, thread: o.tid, structural: true };
+      return { line, thread: o.tid, structural: true, resumeOffer: !!resumeOffer };
     },
 
     // ---------- 4. COHERENCE: recap ----------
@@ -5509,6 +5531,14 @@
         // GENERIC-Q: opener asked something direct with no bespoke def —
         // hang it as an answerable question (Rule 4).
         this.convoGenericQ(vid, opLine);
+        // STORY-OFFER (2026-11-08): a resume opener that asked whether to
+        // hear / pick up the unfinished thread must deliver that thread on
+        // Yes — tag the hanging yn so the gq:yn handler can follow through
+        // instead of GQ_ACK ("I see.").
+        if (c.genericQ && c.genericQ.kind === 'yn' && op && op.resumeOffer) {
+          c.genericQ.resumeOffer = true;
+          c.genericQ.resumeTid = op.thread || opThread;
+        }
       }
       this.convoNoteFlora(vid, opLine);
       // SPOKEN LURE (journey landing 2026-10-12): a pending invite used to
@@ -6378,9 +6408,33 @@
           });
         } else if (kind === 'yn') {
           youLine = aid === 'yes' ? '"Yes."' : aid === 'no' ? '"No."' : '"I don\'t know."';
-          const acknowledgments = GQ_ACK[aid] || GQ_ACK.unsure;
-          resp = this.convoPick(vid, 'gq:yn:' + aid, acknowledgments) || acknowledgments[0];
-          if (aid !== 'unsure') gqTrust = 1;
+          // STORY-OFFER FOLLOW-THROUGH (2026-11-08 / prove-out §1.4): Yes to
+          // "Want to hear where it left off?" (and sibling resume invites)
+          // must deliver the unfinished thread — same contract as
+          // alive:thread — never a generic "I see." acknowledgment.
+          const resumeOffer = !!(wasGq && wasGq.resumeOffer);
+          if (aid === 'yes' && resumeOffer) {
+            const tid = wasGq.resumeTid || c.thread;
+            const open = (typeof this.convoOpenThreads === 'function') ? this.convoOpenThreads(vid) : [];
+            const o = (open || []).find(x => x && x.tid === tid) || null;
+            const label = (o && o.label) || (typeof this.convoThreadAbout === 'function' ? this.convoThreadAbout(vid, tid) : null) || tid || 'that';
+            try {
+              const led = this.convoTopicLedger(vid);
+              led.open = (led.open || []).filter(x => !x || x.tid !== tid);
+            } catch (e) {}
+            if (tid) { c.thread = tid; c.depth = Math.max(c.depth || 0, 1); }
+            const beat = (typeof this.convoThreadBeat === 'function') ? this.convoThreadBeat(vid) : null;
+            const predT = (o && typeof this.inheritedName === 'function') ? this.inheritedName(o) : null;
+            resp = beat || (predT
+              ? `"About ${label} — that was ${predT}'s thread. We never did get back to that."`
+              : `"About ${label} — yeah, we never did get back to that."`);
+            structuralTurn = !beat;
+            gqTrust = 1;
+          } else {
+            const acknowledgments = GQ_ACK[aid] || GQ_ACK.unsure;
+            resp = this.convoPick(vid, 'gq:yn:' + aid, acknowledgments) || acknowledgments[0];
+            if (aid !== 'unsure') gqTrust = 1;
+          }
         } else if (kind === 'howru') {
           youLine = aid === 'bad' ? '"Honestly? Not great."' : aid === 'fine' ? '"I\'m fine."' : '"Better when I\'m busy."';
           resp = this.convoPick(vid, 'gq:howru:' + aid, GQ_ACK['howru_' + aid] || GQ_ACK.howru_fine);

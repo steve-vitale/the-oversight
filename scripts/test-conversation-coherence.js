@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // Conversation coherence tests. Usage: node scripts/test-conversation-coherence.js
 // Steve's report: "Did you see that, just now? By the tree line." ->
 // "Let me show you something." -> canned BURDOCK lesson (non sequitur) ->
@@ -9,224 +10,259 @@
 //     silently dropped for a random new topic.
 //  4. Genuinely new NPC questions mid-thread carry a narrative bridge.
 //  5. Every choice outcome reads as a RESPONSE to the last beat.
+//
+// Loads via scripts/godpath/lib.js (shared sim-harness). Never copy eval
+// boilerplate — that was the Text-is-not-defined crash (dialog-coherence
+// audit item 10). One harness load per process; fresh runs via K.newRun.
+'use strict';
 const fs = require('fs');
 const path = require('path');
-const ROOT = path.join(__dirname, '..');
-global.fetch = (f) => Promise.resolve({ json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8'))) });
-['src/js/engine/state.js', 'src/js/engine/modifiers.js', 'src/js/engine/calories.js',
- 'src/js/engine/day.js', 'src/js/engine/forage.js', 'src/js/engine/combat.js',
- 'src/js/game.js', 'src/js/encounters.js', 'src/js/food.js', 'src/js/conversation.js', 'src/js/journal.js', 'src/js/party.js',
- 'src/js/truth.js', 'src/js/storage.js', 'src/js/perceive.js', 'src/js/carexplore.js',
- 'src/js/justice.js', 'src/js/debug-scenarios.js'
-].forEach(f => eval(fs.readFileSync(path.join(ROOT, f), 'utf8')));
-const Game = globalThis.Scattering.Game;
+const K = require('./godpath/lib');
 
-let pass = 0, fail = 0;
-function ok(name, cond) {
-  if (cond) { pass++; }
-  else { fail++; console.log(`FAIL ${name}`); }
-}
-const idsOf = (choices) => choices.map(c => c.id);
+const T = K.reporter('conversation-coherence');
+const idsOf = (choices) => (choices || []).map(c => c.id);
 
-function freshGame() {
-  Game.genRoster('Columbus, Ohio');
-  Game.newGame('Columbus, Ohio', null, Game.generatedRoster[0].id);
-  Game.depart();
-  return (Game.state.village.roster || []).filter(id => id !== Game.villagerId);
-}
-// Force the tree-line opener by stubbing convoOpening, then restore.
-function startWithOpener(vid, line, thread) {
-  const real = Game.convoOpening;
-  Game.convoOpening = () => ({ line, thread: thread || 'small' });
-  const st = Game.startConvo(vid);
-  Game.convoOpening = real;
-  return st;
-}
-function seedTeachable(vid) {
+function seedTeachable(Game, vid) {
   Game.state.codex = Game.state.codex || {};
   Game.state.codex.plants = { burdock: { level: 2 } };
   Game.state.village.taught = Game.state.village.taught || {};
   Game.state.village.taught[vid] = [];
 }
 
-(async () => {
-  await Game.init();
+// Force a specific opener by stubbing convoOpening, then restore.
+function startWithOpener(Game, vid, line, thread) {
+  const real = Game.convoOpening;
+  Game.convoOpening = () => ({ line, thread: thread || 'small' });
+  const st = Game.startConvo(vid);
+  Game.convoOpening = real;
+  return st;
+}
+
+function freshRoster(Game) {
+  K.newRun(Game);
+  return (Game.state.village.roster || []).filter(id => id !== Game.villagerId);
+}
+
+// One-beat turns queue follow-ups / lapses / formal asks on heldBeats;
+// the continuer reveals them. Drain until the queue is empty or a hanging
+// question owns the menu again (goon is filtered out while reactiveQ hangs).
+function drainGoon(Game, vid, max = 8) {
+  const lines = [];
+  for (let i = 0; i < max; i++) {
+    const ids = idsOf(Game.convoChoices(vid));
+    if (ids.indexOf('goon') === -1) break;
+    const r = Game.convoTurn(vid, 'goon');
+    if (r && r.line) lines.push(r.line);
+  }
+  return lines;
+}
+
+function themText(Game, vid) {
+  const c = Game.convoGet(vid);
+  return (c.transcript || []).filter(t => t.who === 'them').map(t => t.text).join(' || ');
+}
+
+function heldTexts(Game, vid) {
+  return ((Game.convoGet(vid).heldBeats) || []).map(b => b && b.text).filter(Boolean);
+}
+
+async function main() {
+  const Game = await K.load({ seed: 20261007 });
 
   // === 1. REGISTRY AUDIT: every match string exists in the shipped dialogue ===
+  T.section('1. reactive registry');
   {
-    const raw = fs.readFileSync(path.join(ROOT, 'src/data/characterGen.json'), 'utf8');
-    const defs = ['rq_treeline', 'rq_heard', 'rq_wants', 'rq_shifting', 'rq_personal',
-      'rq_holding', 'rq_alright', 'rq_busy', 'rq_others', 'rq_monsters'];
-    for (const id of defs) {
-      const m = Game.convoMatchReactive('x') // null probe; real check below via source scan
-      void m;
-    }
+    const raw = fs.readFileSync(path.join(K.ROOT, 'src/data/characterGen.json'), 'utf8');
     // pull match strings out of the source and verify each appears in data.
     // convoMatchReactive matches case-insensitively on a normalized line
     // (bespoke defs are short fragments on purpose), so audit the same way.
-    const src = fs.readFileSync(path.join(ROOT, 'src/js/conversation.js'), 'utf8');
-    const matches = [...src.matchAll(/^\s*match: '((?:[^'\\]|\\.)*)',/gm)].map(x => x[1].replace(/\\'/g, "'"));
+    // Some defs use single quotes, some double (apostrophes in the fragment).
+    const src = fs.readFileSync(path.join(K.ROOT, 'src/js/conversation.js'), 'utf8');
+    const matches = [...src.matchAll(/^\s*match:\s*(['"])((?:(?!\1)[^\\]|\\.)*)\1,/gm)]
+      .map(x => x[2].replace(/\\'/g, "'").replace(/\\"/g, '"'));
     const rawLower = raw.toLowerCase();
-    ok('registry has entries', matches.length >= 8);
+    T.ok('registry has entries', matches.length >= 8);
     for (const mt of matches) {
-      ok(`match shipped in dialogue: ${mt.slice(0, 40)}`, rawLower.indexOf(mt.toLowerCase()) !== -1);
+      T.ok(`match shipped in dialogue: ${mt.slice(0, 40)}`, rawLower.indexOf(mt.toLowerCase()) !== -1);
     }
     // every def has answers, followUp, lapse, and reactive reacts
     for (const mt of matches) {
       const def = Game.convoMatchReactive('zz' + mt + 'zz');
-      ok(`def resolves: ${mt.slice(0, 30)}`, !!def);
-      ok(`def has 2+ answers: ${mt.slice(0, 30)}`, def.answers.length >= 2);
-      ok(`def has followUp: ${mt.slice(0, 30)}`, !!def.followUp);
-      ok(`def has lapse: ${mt.slice(0, 30)}`, !!def.lapse);
-      ok(`def has reacts: ${mt.slice(0, 30)}`, !!(def.reacts && def.reacts.agree && def.reacts.joke && def.reacts.silence));
+      T.ok(`def resolves: ${mt.slice(0, 30)}`, !!def);
+      T.ok(`def has 2+ answers: ${mt.slice(0, 30)}`, !!(def && def.answers && def.answers.length >= 2));
+      T.ok(`def has followUp: ${mt.slice(0, 30)}`, !!(def && def.followUp));
+      T.ok(`def has lapse: ${mt.slice(0, 30)}`, !!(def && def.lapse));
+      T.ok(`def has reacts: ${mt.slice(0, 30)}`,
+        !!(def && def.reacts && def.reacts.agree && def.reacts.joke && def.reacts.silence));
     }
   }
 
   // === 2. THE SCREENSHOT SCENARIO: tree-line opener -> contextual answers, no burdock ===
+  T.section('2. tree-line opener');
   {
-    const roster = freshGame();
+    const roster = freshRoster(Game);
     const A = roster[0];
-    seedTeachable(A);
-    startWithOpener(A, '"Did you see that, just now? By the tree line."', 'small');
+    seedTeachable(Game, A);
+    startWithOpener(Game, A, '"Did you see that, just now? By the tree line."', 'small');
     const c = Game.convoGet(A);
-    ok('tree-line opener sets reactiveQ', c.reactiveQ && c.reactiveQ.id === 'rq_treeline');
-    ok('tree-line opener sets spooked thread', c.thread === 'spooked');
+    T.ok('tree-line opener sets reactiveQ', c.reactiveQ && c.reactiveQ.id === 'rq_treeline');
+    T.ok('tree-line opener sets spooked thread', c.thread === 'spooked');
     const choices = Game.convoChoices(A);
     const ids = idsOf(choices);
-    ok('reactive answers come first', ids[0] === 'react:rq_treeline:saw');
-    ok('all four reactive answers offered',
+    T.ok('reactive answers come first', ids[0] === 'react:rq_treeline:saw');
+    T.ok('all four reactive answers offered',
       ['react:rq_treeline:saw', 'react:rq_treeline:no', 'react:rq_treeline:look', 'react:rq_treeline:what']
         .every(id => ids.indexOf(id) !== -1));
-    ok('teach suppressed while direct question hangs', ids.indexOf('teach') === -1);
-    ok('theorize suppressed while direct question hangs', ids.indexOf('theorize') === -1);
-    ok('leave still available', ids.indexOf('leave') !== -1);
+    T.ok('teach suppressed while direct question hangs', !K.findConvoChoice(Game, A, 'teach'));
+    T.ok('theorize suppressed while direct question hangs', !K.findConvoChoice(Game, A, 'theorize'));
+    T.ok('leave still available', ids.indexOf('leave') !== -1);
     Game.endConvo(A, 'natural');
   }
 
   // === 3. ANSWERING: outcome responds to the question ===
+  T.section('3. answer engages the scare');
   {
-    const roster = freshGame();
+    const roster = freshRoster(Game);
     const A = roster[0];
-    startWithOpener(A, '"Did you see that, just now? By the tree line."', 'small');
+    startWithOpener(Game, A, '"Did you see that, just now? By the tree line."', 'small');
     const r = Game.convoTurn(A, 'react:rq_treeline:saw');
-    ok('answer engages the question (not burdock)',
+    T.ok('answer engages the question (not burdock)',
       /imagining|fire tonight/i.test(r.line) && !/Burdock|burdock/i.test(r.line));
-    ok('reactiveQ cleared after answering', !Game.convoGet(A).reactiveQ);
-    ok('thread stays on the scare', Game.convoGet(A).thread === 'spooked');
-    ok('no random new question same turn (room to breathe)', !Game.convoGet(A).pendingQ);
+    T.ok('reactiveQ cleared after answering', !Game.convoGet(A).reactiveQ);
+    T.ok('thread stays on the scare', Game.convoGet(A).thread === 'spooked');
+    T.ok('no random new question same turn (room to breathe)', !Game.convoGet(A).pendingQ);
     Game.endConvo(A, 'natural');
   }
 
   // === 4. "LOOK TOGETHER": the contextual show, not a plant lesson ===
+  T.section('4. look together');
   {
-    const roster = freshGame();
+    const roster = freshRoster(Game);
     const A = roster[0];
-    startWithOpener(A, '"Did you see that, just now? By the tree line."', 'small');
+    startWithOpener(Game, A, '"Did you see that, just now? By the tree line."', 'small');
     const before = (Game.state.village.trust || {})[A] || 10;
     const r = Game.convoTurn(A, 'react:rq_treeline:look');
-    ok('look-together goes to the tree line', /tree line/i.test(r.line));
-    ok('look-together is not a plant lesson', !/Burdock|burdock|grows/i.test(r.line));
-    ok('shared scare builds trust', ((Game.state.village.trust || {})[A] || 0) > before);
+    T.ok('look-together goes to the tree line', /tree line/i.test(r.line));
+    T.ok('look-together is not a plant lesson', !/Burdock|burdock|grows/i.test(r.line));
+    T.ok('shared scare builds trust', ((Game.state.village.trust || {})[A] || 0) > before);
     Game.endConvo(A, 'natural');
   }
 
   // === 5. DODGED QUESTIONS LINGER: follow-up, then lapse — never a silent drop ===
+  // One-beat turns queue the authored follow-up / lapse on heldBeats. Menu
+  // ownership keeps goon off the board while reactiveQ still hangs, so the
+  // first follow-up may sit queued until the second dodge lapses the question
+  // (or until an answer clears it). Assert the queue + flag, then the lapse.
+  T.section('5. dodge linger / lapse');
   {
-    const roster = freshGame();
+    const roster = freshRoster(Game);
     const A = roster[0];
-    startWithOpener(A, '"Did you see that, just now? By the tree line."', 'small');
-    // dodge: ask about the village instead of answering
-    const r1 = Game.convoTurn(A, 'ask:village');
+    startWithOpener(Game, A, '"Did you see that, just now? By the tree line."', 'small');
+    // dodge: ask about the village instead of answering (engine path)
+    Game.convoTurn(A, 'ask:village');
     const c1 = Game.convoGet(A);
-    ok('dodged question persists', !!(c1.reactiveQ && c1.reactiveQ.id === 'rq_treeline'));
-    ok('NPC follows up instead of changing topic',
-      c1.transcript.some(t => t.who === 'them' && /tree line\. Did you see it/i.test(t.text)));
-    ok('no random formal question while reactive hangs', !c1.pendingQ);
-    ok('follow-up flagged', c1.reactiveQ.followedUp === true);
-    // dodge AGAIN -> lapse with a line, then it's over
+    T.ok('dodged question persists', !!(c1.reactiveQ && c1.reactiveQ.id === 'rq_treeline'));
+    T.ok('follow-up flagged', !!(c1.reactiveQ && c1.reactiveQ.followedUp === true));
+    T.ok('NPC follow-up queued (not a silent drop)',
+      heldTexts(Game, A).some(t => /tree line\. Did you see it/i.test(t)));
+    T.ok('no random formal question while reactive hangs', !c1.pendingQ);
+    // dodge AGAIN -> lapse queued, reactive cleared
     Game.convoTurn(A, 'ask:plans');
     const c2 = Game.convoGet(A);
-    ok('second dodge lapses the question', !c2.reactiveQ);
-    ok('lapse gets a closing line, not silence',
-      c2.transcript.some(t => t.who === 'them' && /Never mind\. Probably nothing/i.test(t.text)));
+    T.ok('second dodge lapses the question', !c2.reactiveQ);
+    const lapseQueued = heldTexts(Game, A).some(t => /Never mind\. Probably nothing/i.test(t));
+    drainGoon(Game, A);
+    T.ok('lapse gets a closing line, not silence',
+      lapseQueued || /Never mind\. Probably nothing/i.test(themText(Game, A)));
     Game.endConvo(A, 'natural');
   }
 
   // === 6. GENERIC REACTS BECOME ANSWERS when a direct question hangs ===
+  T.section('6. silence answers the scare');
   {
-    const roster = freshGame();
+    const roster = freshRoster(Game);
     const A = roster[0];
-    startWithOpener(A, '"Did you see that, just now? By the tree line."', 'small');
+    startWithOpener(Game, A, '"Did you see that, just now? By the tree line."', 'small');
     const r = Game.convoTurn(A, 'silence');
-    ok('silence reads as a response to the scare', /paler|face/i.test(r.line));
-    ok('reactiveQ consumed by the reaction', !Game.convoGet(A).reactiveQ);
+    T.ok('silence reads as a response to the scare', /paler|face/i.test(r.line));
+    T.ok('reactiveQ consumed by the reaction', !Game.convoGet(A).reactiveQ);
     Game.endConvo(A, 'natural');
   }
 
   // === 7. BRIDGE: new NPC question mid-thread doesn't hard-pivot ===
+  T.section('7. topic bridge');
   {
-    const roster = freshGame();
+    const roster = freshRoster(Game);
     const A = roster[0];
-    startWithOpener(A, '"Tell me about your goal."', 'goal');
+    startWithOpener(Game, A, '"Tell me about your goal."', 'goal');
     const c = Game.convoGet(A);
     c.depth = 2;
     const realRandom = Math.random;
-    Math.random = () => 0.05; // force the 40% question roll
+    Math.random = () => 0.05; // force the question roll
     try {
       Game.convoTurn(A, 'agree');
     } finally { Math.random = realRandom; }
+    drainGoon(Game, A);
     const c2 = Game.convoGet(A);
-    const themLines = c2.transcript.filter(t => t.who === 'them').map(t => t.text).join(' || ');
+    const themLines = themText(Game, A);
     const bridged = /shaking something off|thread drop|something else entirely|Different subject/i.test(themLines);
-    ok('topic pivot carries a bridge', bridged || !c2.pendingQ);
+    T.ok('topic pivot carries a bridge', bridged || !c2.pendingQ);
     Game.endConvo(A, 'natural');
   }
 
   // === 8. TEACH STAYS for neutral contexts (no over-suppression) ===
+  T.section('8. teach gating');
   {
-    const roster = freshGame();
+    const roster = freshRoster(Game);
     const A = roster[0];
-    seedTeachable(A);
-    startWithOpener(A, '"Hey."', 'small');
-    const ids = idsOf(Game.convoChoices(A));
-    ok('teach offered in neutral small talk', ids.indexOf('teach') !== -1);
+    seedTeachable(Game, A);
+    startWithOpener(Game, A, '"Hey."', 'small');
+    T.ok('teach offered in neutral small talk', !!K.findConvoChoice(Game, A, 'teach'));
     Game.endConvo(A, 'natural');
     // ...but not on a grief opener
     const B = roster[1];
-    seedTeachable(B);
-    startWithOpener(B, '"Have you — sorry. I keep thinking about them."', 'grief');
-    const idsB = idsOf(Game.convoChoices(B));
-    ok('teach suppressed on grief opener', idsB.indexOf('teach') === -1);
+    seedTeachable(Game, B);
+    startWithOpener(Game, B, '"Have you — sorry. I keep thinking about them."', 'grief');
+    T.ok('teach suppressed on grief opener', !K.findConvoChoice(Game, B, 'teach'));
     Game.endConvo(B, 'natural');
   }
 
   // === 9. rq_personal chains into a REAL question ===
+  // "Of course. Ask." queues the formal question on heldBeats; continuer
+  // reveals it as pendingQ with ans: choices (one-beat turns).
+  T.section('9. personal -> formal question');
   {
-    const roster = freshGame();
+    const roster = freshRoster(Game);
     const A = roster[0];
-    startWithOpener(A, '"Can I ask you something — person to person, not village business?"', 'small');
+    startWithOpener(Game, A, '"Can I ask you something — person to person, not village business?"', 'small');
     Game.convoTurn(A, 'react:rq_personal:yes');
+    drainGoon(Game, A);
     const c = Game.convoGet(A);
-    ok('personal yes -> formal pendingQ', !!(c.pendingQ && c.pendingQ.q));
-    ok('formal question has answers', (c.pendingQ.answers || []).length >= 2);
+    T.ok('personal yes -> formal pendingQ', !!(c.pendingQ && c.pendingQ.q));
+    T.ok('formal question has answers', (c.pendingQ && c.pendingQ.answers || []).length >= 2);
     const ch = idsOf(Game.convoChoices(A));
-    ok('choices are the formal answers now', ch.some(id => id.indexOf('ans:') === 0));
+    T.ok('choices are the formal answers now', ch.some(id => id.indexOf('ans:') === 0));
     Game.endConvo(A, 'natural');
   }
 
   // === 10. reactiveQ never leaks across conversations ===
+  T.section('10. no reactive leak');
   {
-    const roster = freshGame();
+    const roster = freshRoster(Game);
     const A = roster[0];
-    startWithOpener(A, '"Did you see that, just now? By the tree line."', 'small');
-    ok('reactiveQ set', !!Game.convoGet(A).reactiveQ);
+    startWithOpener(Game, A, '"Did you see that, just now? By the tree line."', 'small');
+    T.ok('reactiveQ set', !!Game.convoGet(A).reactiveQ);
     Game.endConvo(A, 'left');
-    ok('reactiveQ cleared on endConvo', !Game.convoGet(A).reactiveQ);
-    startWithOpener(A, '"Hey."', 'small');
-    ok('reactiveQ cleared on startConvo (neutral opener)', !Game.convoGet(A).reactiveQ);
+    T.ok('reactiveQ cleared on endConvo', !Game.convoGet(A).reactiveQ);
+    startWithOpener(Game, A, '"Hey."', 'small');
+    T.ok('reactiveQ cleared on startConvo (neutral opener)', !Game.convoGet(A).reactiveQ);
     Game.endConvo(A, 'natural');
   }
 
-  console.log(`\n${pass} passed, ${fail} failed`);
-  process.exit(fail ? 1 : 0);
-})();
+  T.done();
+}
+
+main().catch(err => {
+  console.error(err);
+  process.exit(1);
+});

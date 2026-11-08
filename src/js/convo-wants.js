@@ -1382,6 +1382,28 @@
         }
         return null;
       },
+      // STALE-OPENER HONESTY (prove-out 2026-11-08): generic fallback spoke
+      // the want id as English — "About curious — I keep turning it over."
+      // (dialog-coherence-audit tip sampler, seed 42 Leo / seed 99 Sergio).
+      // Same class as ask_favor/repay stale openers: name the question, never
+      // the id.
+      staleOpener(vid) {
+        try {
+          const c = this.convoGet(vid);
+          const want = c && c.want;
+          const qid = (want && (want.qid || want.seedQid)) || null;
+          let about = null;
+          if (qid && typeof this.convoQuestionTopic === 'function') {
+            about = this.convoQuestionTopic(qid);
+          }
+          if (!about && want && want.seedNote) about = want.seedNote;
+          if (!about || about === 'that question') about = 'what I asked you';
+          return this.convoPickCycle(vid, 'curious:stale', [
+            `"About ${about} — I keep turning it over."`,
+            `"Still wondering about ${about}."`,
+          ]);
+        } catch (e) { console.warn('[convo] curious staleOpener', e); return null; }
+      },
     },
     just_company: {
       // A reaction ("yeah, hey") engages company — presence, not content.
@@ -2211,8 +2233,21 @@
     // through honestly. (gap-closure 2026-10-17)
     convoWantStaleOpener(vid, want) {
       try {
-        const words = String((want && want.id) || "what's on my mind").replace(/_/g, ' ');
-        return `"About ${words} — I keep turning it over."`;
+        // Never interpolate raw want.id as dialogue (prove-out 2026-11-08 /
+        // dialog-coherence-audit). Prefer a human topic map; fall back to a
+        // content-free phrase that does not name the id.
+        const human = {
+          curious: 'what I asked you',
+          ask_favor: 'that favor',
+          repay: 'what I owe you',
+          seek_comfort: 'needing company',
+          seek_taken: 'who was taken',
+          warn_you: 'that warning',
+          just_company: 'just sitting with someone',
+        };
+        const id = want && want.id;
+        const about = (id && human[id]) || "what's on my mind";
+        return `"About ${about} — I keep turning it over."`;
       } catch (e) { console.warn('[convo] staleOpener generic', e); return null; }
     },
 
