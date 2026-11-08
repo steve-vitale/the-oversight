@@ -1,0 +1,1449 @@
+{
+  "corpus": "evidence/2026-11-07/doublenight-fix-a-corpus-before",
+  "seeds": [
+    17901,
+    17902,
+    17903,
+    17904,
+    17905,
+    17906,
+    17907,
+    17908,
+    98022,
+    98028,
+    98034,
+    98052,
+    98062,
+    98067,
+    98079,
+    98095
+  ],
+  "totalCalls": 13268,
+  "missingSite": 0,
+  "reproducedFires": 19,
+  "byH": {
+    "H1": 19
+  },
+  "byEffect": {
+    "BUG": 18,
+    "BENIGN": 1
+  },
+  "bySite": {
+    "Object.villageEats (src/js/game.js:32257:24)": 19
+  },
+  "siteCounts": {
+    "Object.villageEats (src/js/game.js:32257:24)": 13268
+  },
+  "neutrality": [
+    {
+      "seed": 17901,
+      "match": false,
+      "diff": "no trace-off file for this seed"
+    },
+    {
+      "seed": 17902,
+      "match": false,
+      "diff": "no trace-off file for this seed"
+    },
+    {
+      "seed": 17903,
+      "match": false,
+      "diff": "no trace-off file for this seed"
+    },
+    {
+      "seed": 17904,
+      "match": false,
+      "diff": "no trace-off file for this seed"
+    },
+    {
+      "seed": 17905,
+      "match": false,
+      "diff": "no trace-off file for this seed"
+    },
+    {
+      "seed": 17906,
+      "match": false,
+      "diff": "no trace-off file for this seed"
+    },
+    {
+      "seed": 17907,
+      "match": false,
+      "diff": "no trace-off file for this seed"
+    },
+    {
+      "seed": 17908,
+      "match": false,
+      "diff": "no trace-off file for this seed"
+    },
+    {
+      "seed": 98022,
+      "match": true,
+      "diff": "exact"
+    },
+    {
+      "seed": 98028,
+      "match": true,
+      "diff": "exact"
+    },
+    {
+      "seed": 98034,
+      "match": true,
+      "diff": "exact"
+    },
+    {
+      "seed": 98052,
+      "match": true,
+      "diff": "exact"
+    },
+    {
+      "seed": 98062,
+      "match": true,
+      "diff": "exact"
+    },
+    {
+      "seed": 98067,
+      "match": true,
+      "diff": "exact"
+    },
+    {
+      "seed": 98079,
+      "match": true,
+      "diff": "exact"
+    },
+    {
+      "seed": 98095,
+      "match": true,
+      "diff": "exact"
+    }
+  ],
+  "detGate": {
+    "neutralityExact": true,
+    "neutralityPairedSeeds": 8,
+    "capture100": true,
+    "everyFireClassified": true,
+    "unclassified": 0
+  },
+  "fires": [
+    {
+      "seed": 98028,
+      "vid": "gen_2e2cq3h",
+      "day": 37,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "extra-hunger",
+        "meal-overwritten-inflated",
+        "health-changed"
+      ],
+      "reason": "different villageEats invocations (37 vs 38), same scholar.day 37",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 37,
+        "seq": 1,
+        "away": false,
+        "ate": 2044.0487540534232,
+        "drawn": 198,
+        "fasting": false,
+        "hungerBefore": 52,
+        "hungerAfter": 15,
+        "healthBefore": 90,
+        "healthAfter": 90
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 38,
+        "seq": 1,
+        "away": false,
+        "ate": 2059,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 15,
+        "hungerAfter": 0,
+        "healthBefore": 93,
+        "healthAfter": 93
+      }
+    },
+    {
+      "seed": 98028,
+      "vid": "gen_mrd1wxn",
+      "day": 37,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "double-draw",
+        "extra-hunger",
+        "meal-overwritten-inflated",
+        "health-changed"
+      ],
+      "reason": "different villageEats invocations (37 vs 38), same scholar.day 37",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 37,
+        "seq": 3,
+        "away": true,
+        "ate": 1704.001,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 62,
+        "hungerAfter": 22,
+        "healthBefore": 81,
+        "healthAfter": 81
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 38,
+        "seq": 2,
+        "away": true,
+        "ate": 1720.264,
+        "drawn": 525.228921788685,
+        "fasting": false,
+        "hungerBefore": 22,
+        "hungerAfter": 0,
+        "healthBefore": 84,
+        "healthAfter": 84
+      }
+    },
+    {
+      "seed": 98028,
+      "vid": "gen_g3macu7",
+      "day": 37,
+      "h": "H1",
+      "effect": "BENIGN",
+      "tags": [],
+      "reason": "different villageEats invocations (37 vs 38), same scholar.day 37",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 37,
+        "seq": 4,
+        "away": false,
+        "ate": 1653,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 38,
+        "hungerAfter": 0,
+        "healthBefore": 94,
+        "healthAfter": 94
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 38,
+        "seq": 3,
+        "away": false,
+        "ate": 1653,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 0,
+        "hungerAfter": 0,
+        "healthBefore": 94,
+        "healthAfter": 94
+      }
+    },
+    {
+      "seed": 98028,
+      "vid": "lucas_brown",
+      "day": 37,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "meal-overwritten-inflated",
+        "health-changed"
+      ],
+      "reason": "different villageEats invocations (37 vs 38), same scholar.day 37",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 37,
+        "seq": 5,
+        "away": false,
+        "ate": 1805,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 37,
+        "hungerAfter": 0,
+        "healthBefore": 85,
+        "healthAfter": 85
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 38,
+        "seq": 4,
+        "away": false,
+        "ate": 1822,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 0,
+        "hungerAfter": 0,
+        "healthBefore": 88,
+        "healthAfter": 88
+      }
+    },
+    {
+      "seed": 98028,
+      "vid": "boris_kowalski",
+      "day": 37,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "meal-overwritten-inflated",
+        "health-changed"
+      ],
+      "reason": "different villageEats invocations (37 vs 38), same scholar.day 37",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 37,
+        "seq": 6,
+        "away": false,
+        "ate": 2002,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 31.66666666666667,
+        "hungerAfter": 0,
+        "healthBefore": 89,
+        "healthAfter": 89
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 38,
+        "seq": 5,
+        "away": false,
+        "ate": 2020,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 0,
+        "hungerAfter": 0,
+        "healthBefore": 92,
+        "healthAfter": 92
+      }
+    },
+    {
+      "seed": 98028,
+      "vid": "carlos_diaz",
+      "day": 37,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "meal-overwritten-inflated",
+        "health-changed"
+      ],
+      "reason": "different villageEats invocations (37 vs 38), same scholar.day 37",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 37,
+        "seq": 7,
+        "away": true,
+        "ate": 1791.3,
+        "drawn": 87.98027366547649,
+        "fasting": false,
+        "hungerBefore": 32,
+        "hungerAfter": 0,
+        "healthBefore": 51,
+        "healthAfter": 51
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 38,
+        "seq": 6,
+        "away": true,
+        "ate": 1810.2,
+        "drawn": 0,
+        "fasting": true,
+        "hungerBefore": 0,
+        "hungerAfter": 0,
+        "healthBefore": 54,
+        "healthAfter": 54
+      }
+    },
+    {
+      "seed": 98028,
+      "vid": "rafael_torres",
+      "day": 37,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "extra-hunger",
+        "meal-overwritten-inflated",
+        "health-changed"
+      ],
+      "reason": "different villageEats invocations (37 vs 38), same scholar.day 37",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 37,
+        "seq": 8,
+        "away": true,
+        "ate": 2196.5,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 51,
+        "hungerAfter": 13,
+        "healthBefore": 85,
+        "healthAfter": 85
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 38,
+        "seq": 7,
+        "away": true,
+        "ate": 2217.2,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 13,
+        "hungerAfter": 0,
+        "healthBefore": 88,
+        "healthAfter": 88
+      }
+    },
+    {
+      "seed": 98028,
+      "vid": "fatima_hassan",
+      "day": 37,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "meal-overwritten-lost",
+        "health-changed"
+      ],
+      "reason": "different villageEats invocations (37 vs 38), same scholar.day 37",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 37,
+        "seq": 9,
+        "away": true,
+        "ate": 2000,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 39,
+        "hungerAfter": 0,
+        "healthBefore": 100,
+        "healthAfter": 100
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 38,
+        "seq": 8,
+        "away": true,
+        "ate": 1855.9999999999998,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 0,
+        "hungerAfter": 0,
+        "healthBefore": 76,
+        "healthAfter": 76
+      }
+    },
+    {
+      "seed": 98028,
+      "vid": "aki_tanaka",
+      "day": 37,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "extra-hunger",
+        "meal-overwritten-lost",
+        "health-changed"
+      ],
+      "reason": "different villageEats invocations (37 vs 38), same scholar.day 37",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 37,
+        "seq": 10,
+        "away": true,
+        "ate": 1583.4,
+        "drawn": 721.5678141821177,
+        "fasting": false,
+        "hungerBefore": 32,
+        "hungerAfter": 0,
+        "healthBefore": 18,
+        "healthAfter": 18
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 38,
+        "seq": 9,
+        "away": true,
+        "ate": 601.4588925540447,
+        "drawn": 0,
+        "fasting": true,
+        "hungerBefore": 0,
+        "hungerAfter": 8,
+        "healthBefore": 16,
+        "healthAfter": 16
+      }
+    },
+    {
+      "seed": 98079,
+      "vid": "gen_2n7fip7",
+      "day": 10,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "double-draw",
+        "extra-hunger",
+        "meal-overwritten-lost",
+        "health-changed"
+      ],
+      "reason": "different villageEats invocations (10 vs 11), same scholar.day 10",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 10,
+        "seq": 1,
+        "away": true,
+        "ate": 1595.78,
+        "drawn": 1167.8304957577213,
+        "fasting": false,
+        "hungerBefore": 65,
+        "hungerAfter": 26,
+        "healthBefore": 10,
+        "healthAfter": 10
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 11,
+        "seq": 1,
+        "away": true,
+        "ate": 648.2070147746988,
+        "drawn": 3.169504242278663,
+        "fasting": false,
+        "hungerBefore": 26,
+        "hungerAfter": 33,
+        "healthBefore": 13,
+        "healthAfter": 5
+      }
+    },
+    {
+      "seed": 98079,
+      "vid": "gen_puylbjy",
+      "day": 10,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "double-draw",
+        "extra-hunger",
+        "meal-overwritten-lost",
+        "health-changed"
+      ],
+      "reason": "different villageEats invocations (10 vs 11), same scholar.day 10",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 10,
+        "seq": 2,
+        "away": true,
+        "ate": 1933.033,
+        "drawn": 702.7189912527538,
+        "fasting": false,
+        "hungerBefore": 79,
+        "hungerAfter": 30,
+        "healthBefore": 89,
+        "healthAfter": 89
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 11,
+        "seq": 2,
+        "away": true,
+        "ate": 1122.2644541626685,
+        "drawn": 47.28100874724623,
+        "fasting": false,
+        "hungerBefore": 30,
+        "hungerAfter": 20,
+        "healthBefore": 76,
+        "healthAfter": 76
+      }
+    },
+    {
+      "seed": 98079,
+      "vid": "gen_5dc11h7",
+      "day": 10,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "double-draw",
+        "extra-hunger",
+        "meal-overwritten-inflated",
+        "health-changed"
+      ],
+      "reason": "different villageEats invocations (10 vs 11), same scholar.day 10",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 10,
+        "seq": 3,
+        "away": false,
+        "ate": 1496.3604203989728,
+        "drawn": 300,
+        "fasting": false,
+        "hungerBefore": 80,
+        "hungerAfter": 41,
+        "healthBefore": 90,
+        "healthAfter": 90
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 11,
+        "seq": 3,
+        "away": false,
+        "ate": 1976.1945431469753,
+        "drawn": 408,
+        "fasting": false,
+        "hungerBefore": 41,
+        "hungerAfter": 0,
+        "healthBefore": 93,
+        "healthAfter": 93
+      }
+    },
+    {
+      "seed": 98079,
+      "vid": "gen_nuq95l2",
+      "day": 10,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "double-draw",
+        "extra-hunger",
+        "meal-overwritten-lost",
+        "health-changed"
+      ],
+      "reason": "different villageEats invocations (10 vs 11), same scholar.day 10",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 10,
+        "seq": 4,
+        "away": false,
+        "ate": 1792.7181371691172,
+        "drawn": 300,
+        "fasting": false,
+        "hungerBefore": 75,
+        "hungerAfter": 22,
+        "healthBefore": 55,
+        "healthAfter": 55
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 11,
+        "seq": 4,
+        "away": false,
+        "ate": 1435.179545281455,
+        "drawn": 350,
+        "fasting": false,
+        "hungerBefore": 22,
+        "hungerAfter": 0,
+        "healthBefore": 54,
+        "healthAfter": 54
+      }
+    },
+    {
+      "seed": 98079,
+      "vid": "gen_r3ix6qg",
+      "day": 10,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "extra-hunger"
+      ],
+      "reason": "different villageEats invocations (10 vs 11), same scholar.day 10",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 10,
+        "seq": 5,
+        "away": false,
+        "ate": 1995,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 60,
+        "hungerAfter": 23,
+        "healthBefore": 100,
+        "healthAfter": null
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 11,
+        "seq": 5,
+        "away": false,
+        "ate": 1995,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 23,
+        "hungerAfter": 0,
+        "healthBefore": 100,
+        "healthAfter": null
+      }
+    },
+    {
+      "seed": 98079,
+      "vid": "catalina_reyes",
+      "day": 10,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "meal-overwritten-inflated",
+        "health-changed"
+      ],
+      "reason": "different villageEats invocations (10 vs 11), same scholar.day 10",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 10,
+        "seq": 6,
+        "away": true,
+        "ate": 1993.9999999999998,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 34,
+        "hungerAfter": 0,
+        "healthBefore": 99,
+        "healthAfter": 99
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 11,
+        "seq": 6,
+        "away": true,
+        "ate": 2000,
+        "drawn": 0,
+        "fasting": true,
+        "hungerBefore": 0,
+        "hungerAfter": 0,
+        "healthBefore": 100,
+        "healthAfter": 100
+      }
+    },
+    {
+      "seed": 98079,
+      "vid": "katarina_novak",
+      "day": 10,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "extra-hunger",
+        "meal-overwritten-inflated",
+        "health-changed"
+      ],
+      "reason": "different villageEats invocations (10 vs 11), same scholar.day 10",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 10,
+        "seq": 7,
+        "away": true,
+        "ate": 1888.6,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 67,
+        "hungerAfter": 29,
+        "healthBefore": 98,
+        "healthAfter": 98
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 11,
+        "seq": 7,
+        "away": true,
+        "ate": 1900,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 29,
+        "hungerAfter": 0,
+        "healthBefore": 100,
+        "healthAfter": 100
+      }
+    },
+    {
+      "seed": 98079,
+      "vid": "henry_zhang",
+      "day": 10,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "extra-hunger",
+        "meal-overwritten-inflated",
+        "health-changed"
+      ],
+      "reason": "different villageEats invocations (10 vs 11), same scholar.day 10",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 10,
+        "seq": 8,
+        "away": true,
+        "ate": 1892,
+        "drawn": 200.67403434664016,
+        "fasting": false,
+        "hungerBefore": 79,
+        "hungerAfter": 30,
+        "healthBefore": 82,
+        "healthAfter": 82
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 11,
+        "seq": 8,
+        "away": true,
+        "ate": 1910,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 30,
+        "hungerAfter": 0,
+        "healthBefore": 85,
+        "healthAfter": 85
+      }
+    },
+    {
+      "seed": 98079,
+      "vid": "tashi_sherpa",
+      "day": 10,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "extra-hunger",
+        "meal-overwritten-inflated",
+        "health-changed"
+      ],
+      "reason": "different villageEats invocations (10 vs 11), same scholar.day 10",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 10,
+        "seq": 9,
+        "away": false,
+        "ate": 2039,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 72,
+        "hungerAfter": 25,
+        "healthBefore": 95,
+        "healthAfter": 95
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 11,
+        "seq": 9,
+        "away": false,
+        "ate": 2058,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 25,
+        "hungerAfter": 0,
+        "healthBefore": 98,
+        "healthAfter": 98
+      }
+    },
+    {
+      "seed": 98079,
+      "vid": "tom_baker",
+      "day": 10,
+      "h": "H1",
+      "effect": "BUG",
+      "tags": [
+        "extra-hunger",
+        "meal-overwritten-inflated",
+        "health-changed"
+      ],
+      "reason": "different villageEats invocations (10 vs 11), same scholar.day 10",
+      "first": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 10,
+        "seq": 11,
+        "away": true,
+        "ate": 2166.9999999999995,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 81,
+        "hungerAfter": 28,
+        "healthBefore": 95,
+        "healthAfter": 95
+      },
+      "second": {
+        "site": "Object.villageEats (src/js/game.js:32257:24)",
+        "eatsInv": 11,
+        "seq": 10,
+        "away": true,
+        "ate": 2186.8,
+        "drawn": 0,
+        "fasting": false,
+        "hungerBefore": 28,
+        "hungerAfter": 0,
+        "healthBefore": 98,
+        "healthAfter": 98
+      }
+    }
+  ],
+  "after": {
+    "corpus": "evidence/2026-11-07/doublenight-fix-a-corpus-after",
+    "seeds": [
+      17901,
+      17902,
+      17903,
+      17904,
+      17905,
+      17906,
+      17907,
+      17908,
+      98022,
+      98028,
+      98034,
+      98052,
+      98062,
+      98067,
+      98079,
+      98095
+    ],
+    "totalCalls": 13459,
+    "reproducedFires": 0,
+    "byH": {},
+    "byEffect": {},
+    "neutrality": [
+      {
+        "seed": 17901,
+        "match": false,
+        "diff": "no trace-off file for this seed"
+      },
+      {
+        "seed": 17902,
+        "match": false,
+        "diff": "no trace-off file for this seed"
+      },
+      {
+        "seed": 17903,
+        "match": false,
+        "diff": "no trace-off file for this seed"
+      },
+      {
+        "seed": 17904,
+        "match": false,
+        "diff": "no trace-off file for this seed"
+      },
+      {
+        "seed": 17905,
+        "match": false,
+        "diff": "no trace-off file for this seed"
+      },
+      {
+        "seed": 17906,
+        "match": false,
+        "diff": "no trace-off file for this seed"
+      },
+      {
+        "seed": 17907,
+        "match": false,
+        "diff": "no trace-off file for this seed"
+      },
+      {
+        "seed": 17908,
+        "match": false,
+        "diff": "no trace-off file for this seed"
+      },
+      {
+        "seed": 98022,
+        "match": true,
+        "diff": "exact"
+      },
+      {
+        "seed": 98028,
+        "match": true,
+        "diff": "exact"
+      },
+      {
+        "seed": 98034,
+        "match": true,
+        "diff": "exact"
+      },
+      {
+        "seed": 98052,
+        "match": true,
+        "diff": "exact"
+      },
+      {
+        "seed": 98062,
+        "match": true,
+        "diff": "exact"
+      },
+      {
+        "seed": 98067,
+        "match": true,
+        "diff": "exact"
+      },
+      {
+        "seed": 98079,
+        "match": true,
+        "diff": "exact"
+      },
+      {
+        "seed": 98095,
+        "match": true,
+        "diff": "exact"
+      }
+    ],
+    "detGate": {
+      "neutralityExact": true,
+      "neutralityPairedSeeds": 8,
+      "capture100": true,
+      "everyFireClassified": true,
+      "unclassified": 0
+    },
+    "fires": []
+  },
+  "trajectoryDiff": {
+    "perSeed": {
+      "17901": {
+        "seed": 17901,
+        "firingDays": [],
+        "firstFireDay": null,
+        "daysAliveBefore": 150,
+        "daysAliveAfter": 150,
+        "daysAliveDelta": 0,
+        "zeroFireExact": true,
+        "preFirstFireMealDiffs": [],
+        "deathRowsDiffer": false,
+        "pass": true
+      },
+      "17902": {
+        "seed": 17902,
+        "firingDays": [],
+        "firstFireDay": null,
+        "daysAliveBefore": 61,
+        "daysAliveAfter": 61,
+        "daysAliveDelta": 0,
+        "zeroFireExact": true,
+        "preFirstFireMealDiffs": [],
+        "deathRowsDiffer": false,
+        "pass": true
+      },
+      "17903": {
+        "seed": 17903,
+        "firingDays": [],
+        "firstFireDay": null,
+        "daysAliveBefore": 150,
+        "daysAliveAfter": 150,
+        "daysAliveDelta": 0,
+        "zeroFireExact": true,
+        "preFirstFireMealDiffs": [],
+        "deathRowsDiffer": false,
+        "pass": true
+      },
+      "17904": {
+        "seed": 17904,
+        "firingDays": [],
+        "firstFireDay": null,
+        "daysAliveBefore": 89,
+        "daysAliveAfter": 89,
+        "daysAliveDelta": 0,
+        "zeroFireExact": true,
+        "preFirstFireMealDiffs": [],
+        "deathRowsDiffer": false,
+        "pass": true
+      },
+      "17905": {
+        "seed": 17905,
+        "firingDays": [],
+        "firstFireDay": null,
+        "daysAliveBefore": 150,
+        "daysAliveAfter": 150,
+        "daysAliveDelta": 0,
+        "zeroFireExact": true,
+        "preFirstFireMealDiffs": [],
+        "deathRowsDiffer": false,
+        "pass": true
+      },
+      "17906": {
+        "seed": 17906,
+        "firingDays": [],
+        "firstFireDay": null,
+        "daysAliveBefore": 85,
+        "daysAliveAfter": 85,
+        "daysAliveDelta": 0,
+        "zeroFireExact": true,
+        "preFirstFireMealDiffs": [],
+        "deathRowsDiffer": false,
+        "pass": true
+      },
+      "17907": {
+        "seed": 17907,
+        "firingDays": [],
+        "firstFireDay": null,
+        "daysAliveBefore": 107,
+        "daysAliveAfter": 107,
+        "daysAliveDelta": 0,
+        "zeroFireExact": true,
+        "preFirstFireMealDiffs": [],
+        "deathRowsDiffer": false,
+        "pass": true
+      },
+      "17908": {
+        "seed": 17908,
+        "firingDays": [],
+        "firstFireDay": null,
+        "daysAliveBefore": 43,
+        "daysAliveAfter": 43,
+        "daysAliveDelta": 0,
+        "zeroFireExact": true,
+        "preFirstFireMealDiffs": [],
+        "deathRowsDiffer": false,
+        "pass": true
+      },
+      "98022": {
+        "seed": 98022,
+        "firingDays": [],
+        "firstFireDay": null,
+        "daysAliveBefore": 94,
+        "daysAliveAfter": 94,
+        "daysAliveDelta": 0,
+        "zeroFireExact": true,
+        "preFirstFireMealDiffs": [],
+        "deathRowsDiffer": false,
+        "pass": true
+      },
+      "98028": {
+        "seed": 98028,
+        "firingDays": [
+          37
+        ],
+        "firstFireDay": 37,
+        "daysAliveBefore": 113,
+        "daysAliveAfter": 150,
+        "daysAliveDelta": 37,
+        "preFirstFireMealDiffs": [],
+        "preFirstFireDeathDiff": false,
+        "firingDaySinglePass": true,
+        "firingDayMealRows": 10,
+        "afterFiresOnSeed": 0,
+        "postFirstFireMealDiffs": 781,
+        "postFirstFireMealDiffSample": [
+          {
+            "key": "gen_2e2cq3h|37",
+            "day": 37,
+            "kind": "changed",
+            "fields": [
+              "ate",
+              "drawn",
+              "hungerBefore",
+              "hungerAfter",
+              "healthBefore",
+              "healthAfter"
+            ],
+            "before": {
+              "ate": 2059,
+              "drawn": 0
+            },
+            "after": {
+              "ate": 2044.0487540534232,
+              "drawn": 198
+            }
+          },
+          {
+            "key": "gen_mrd1wxn|37",
+            "day": 37,
+            "kind": "changed",
+            "fields": [
+              "ate",
+              "drawn",
+              "hungerBefore",
+              "hungerAfter",
+              "healthBefore",
+              "healthAfter"
+            ],
+            "before": {
+              "ate": 1720.264,
+              "drawn": 525.228921788685
+            },
+            "after": {
+              "ate": 1704.001,
+              "drawn": 0
+            }
+          },
+          {
+            "key": "gen_g3macu7|37",
+            "day": 37,
+            "kind": "changed",
+            "fields": [
+              "hungerBefore"
+            ],
+            "before": {
+              "ate": 1653,
+              "drawn": 0
+            },
+            "after": {
+              "ate": 1653,
+              "drawn": 0
+            }
+          },
+          {
+            "key": "lucas_brown|37",
+            "day": 37,
+            "kind": "changed",
+            "fields": [
+              "ate",
+              "hungerBefore",
+              "healthBefore",
+              "healthAfter"
+            ],
+            "before": {
+              "ate": 1822,
+              "drawn": 0
+            },
+            "after": {
+              "ate": 1805,
+              "drawn": 0
+            }
+          },
+          {
+            "key": "boris_kowalski|37",
+            "day": 37,
+            "kind": "changed",
+            "fields": [
+              "ate",
+              "hungerBefore",
+              "healthBefore",
+              "healthAfter"
+            ],
+            "before": {
+              "ate": 2020,
+              "drawn": 0
+            },
+            "after": {
+              "ate": 2002,
+              "drawn": 0
+            }
+          }
+        ],
+        "postFirstFireDeathsBefore": 15,
+        "postFirstFireDeathsAfter": 9,
+        "pass": true
+      },
+      "98034": {
+        "seed": 98034,
+        "firingDays": [],
+        "firstFireDay": null,
+        "daysAliveBefore": 129,
+        "daysAliveAfter": 129,
+        "daysAliveDelta": 0,
+        "zeroFireExact": true,
+        "preFirstFireMealDiffs": [],
+        "deathRowsDiffer": false,
+        "pass": true
+      },
+      "98052": {
+        "seed": 98052,
+        "firingDays": [],
+        "firstFireDay": null,
+        "daysAliveBefore": 52,
+        "daysAliveAfter": 52,
+        "daysAliveDelta": 0,
+        "zeroFireExact": true,
+        "preFirstFireMealDiffs": [],
+        "deathRowsDiffer": false,
+        "pass": true
+      },
+      "98062": {
+        "seed": 98062,
+        "firingDays": [],
+        "firstFireDay": null,
+        "daysAliveBefore": 130,
+        "daysAliveAfter": 130,
+        "daysAliveDelta": 0,
+        "zeroFireExact": true,
+        "preFirstFireMealDiffs": [],
+        "deathRowsDiffer": false,
+        "pass": true
+      },
+      "98067": {
+        "seed": 98067,
+        "firingDays": [],
+        "firstFireDay": null,
+        "daysAliveBefore": 85,
+        "daysAliveAfter": 85,
+        "daysAliveDelta": 0,
+        "zeroFireExact": true,
+        "preFirstFireMealDiffs": [],
+        "deathRowsDiffer": false,
+        "pass": true
+      },
+      "98079": {
+        "seed": 98079,
+        "firingDays": [
+          10
+        ],
+        "firstFireDay": 10,
+        "daysAliveBefore": 147,
+        "daysAliveAfter": 122,
+        "daysAliveDelta": -25,
+        "preFirstFireMealDiffs": [],
+        "preFirstFireDeathDiff": false,
+        "firingDaySinglePass": true,
+        "firingDayMealRows": 11,
+        "afterFiresOnSeed": 0,
+        "postFirstFireMealDiffs": 1280,
+        "postFirstFireMealDiffSample": [
+          {
+            "key": "gen_2n7fip7|10",
+            "day": 10,
+            "kind": "changed",
+            "fields": [
+              "ate",
+              "drawn",
+              "hungerBefore",
+              "hungerAfter",
+              "healthBefore",
+              "healthAfter"
+            ],
+            "before": {
+              "ate": 648.2070147746988,
+              "drawn": 3.169504242278663
+            },
+            "after": {
+              "ate": 1595.78,
+              "drawn": 1167.8304957577213
+            }
+          },
+          {
+            "key": "gen_puylbjy|10",
+            "day": 10,
+            "kind": "changed",
+            "fields": [
+              "ate",
+              "drawn",
+              "hungerBefore",
+              "hungerAfter",
+              "healthBefore",
+              "healthAfter"
+            ],
+            "before": {
+              "ate": 1122.2644541626685,
+              "drawn": 47.28100874724623
+            },
+            "after": {
+              "ate": 1933.033,
+              "drawn": 702.7189912527538
+            }
+          },
+          {
+            "key": "gen_5dc11h7|10",
+            "day": 10,
+            "kind": "changed",
+            "fields": [
+              "ate",
+              "drawn",
+              "hungerBefore",
+              "hungerAfter",
+              "healthBefore",
+              "healthAfter"
+            ],
+            "before": {
+              "ate": 1976.1945431469753,
+              "drawn": 408
+            },
+            "after": {
+              "ate": 1496.3604203989728,
+              "drawn": 300
+            }
+          },
+          {
+            "key": "gen_nuq95l2|10",
+            "day": 10,
+            "kind": "changed",
+            "fields": [
+              "ate",
+              "drawn",
+              "hungerBefore",
+              "hungerAfter",
+              "healthBefore",
+              "healthAfter"
+            ],
+            "before": {
+              "ate": 1435.179545281455,
+              "drawn": 350
+            },
+            "after": {
+              "ate": 1792.7181371691172,
+              "drawn": 300
+            }
+          },
+          {
+            "key": "gen_r3ix6qg|10",
+            "day": 10,
+            "kind": "changed",
+            "fields": [
+              "hungerBefore",
+              "hungerAfter"
+            ],
+            "before": {
+              "ate": 1995,
+              "drawn": 0
+            },
+            "after": {
+              "ate": 1995,
+              "drawn": 0
+            }
+          }
+        ],
+        "postFirstFireDeathsBefore": 20,
+        "postFirstFireDeathsAfter": 13,
+        "pass": true
+      },
+      "98095": {
+        "seed": 98095,
+        "firingDays": [],
+        "firstFireDay": null,
+        "daysAliveBefore": 51,
+        "daysAliveAfter": 51,
+        "daysAliveDelta": 0,
+        "zeroFireExact": true,
+        "preFirstFireMealDiffs": [],
+        "deathRowsDiffer": false,
+        "pass": true
+      }
+    },
+    "clause2Pass": true,
+    "notes": []
+  },
+  "survival": {
+    "medianBefore": 100.5,
+    "medianAfter": 100.5,
+    "medianRatio": 1,
+    "daysAliveBefore": [
+      150,
+      61,
+      150,
+      89,
+      150,
+      85,
+      107,
+      43,
+      94,
+      113,
+      129,
+      52,
+      130,
+      85,
+      147,
+      51
+    ],
+    "daysAliveAfter": [
+      150,
+      61,
+      150,
+      89,
+      150,
+      85,
+      107,
+      43,
+      94,
+      150,
+      129,
+      52,
+      130,
+      85,
+      122,
+      51
+    ]
+  },
+  "starvation": {
+    "totalBefore": 356,
+    "totalAfter": 359,
+    "delta": 3
+  },
+  "goBar": {
+    "firesAfter": 0,
+    "firesAfterZero": true,
+    "trajectoryClause2": true,
+    "medianSurvivalRatio": 1,
+    "medianSurvivalOk": true,
+    "starvationDelta": 3,
+    "starvationOk": false,
+    "neutralityBeforeExact": true,
+    "neutralityAfterExact": true,
+    "go": false
+  }
+}
