@@ -1038,6 +1038,106 @@
       } catch (e) { return null; }
     },
 
+    // ---------- PELLET PASS (Steve ruling 2026-11-07 17:55 CST) ----------
+    // The pellet PASSES to hungrier hands. The trap it fixes: a pellet-fed
+    // bearer never hungers (calories.js dailyNeed returns 0), so no feast
+    // can carry the surge (feastBuff.js grantFeastBuff refuses while the
+    // reactor is online), so feastSurgeUsed never marks, so the table never
+    // prices the run — the village sits strong at arc 3 in silence
+    // (seed 99767: 3 wave-5 kills, standing 422, 181 days, no seat).
+    // The game already promised the out in checkArc's reactor beat: "The
+    // mantle may pass to hungrier hands." This makes it true.
+    //
+    // Trigger (pinned in evidence/2026-11-07/sim-pelletpass-prereg.md,
+    // amended by sim-pelletpass-prereg-amendment-1.md): at dawn, if a
+    // bearer is actually pellet-fed while >=3 living present villagers
+    // sit above hunger 70 (the game's own "hungry" line), the pellet
+    // passes to the hungriest of them. No multi-day streak: the meter
+    // above 70 IS the sustained-deprivation fact (it takes ~2 weeks of
+    // under-eating to get there, one fed day clears it — a streak on it
+    // would make the lever nearly dead). 30-day cooldown between passes.
+    // Cooldown state lives in world state (state.pelletPass) so it survives
+    // the mantle. The holder is never left null — the singularity (one
+    // reactor per world) is preserved, the old bearer simply loses it
+    // and can never reinstall.
+    // Exile Q4 (should a villager's feast-surge spend count when the
+    // scholar can never feast?) is NOT touched here — it stays open.
+    maybePassPellet() {
+      try {
+        if (!this.state.systemArrived) return false;
+        const st = this.state || {};
+        const v = st.village || {};
+        const holder = st.fusionReactorHolder;
+        const pp = (st.pelletPass = st.pelletPass || { lastPassDay: null });
+        const day = (st.scholar || {}).day || 0;
+        if (!holder || !holder.vid) return false;
+        // Is the holder actually pellet-fed right now? A stale holder (the
+        // bearer died, the successor holds no reactor) means nobody is fed
+        // — the trap already self-resolved; nothing to pass.
+        let bearerFed = false;
+        let bearerVid = null;
+        if (holder.who === 'player') {
+          try { bearerFed = !!(typeof this.fusionReactorOnline === 'function' && this.fusionReactorOnline()); } catch (e) { bearerFed = false; }
+          if (bearerFed) bearerVid = this.villagerId;
+        } else if (holder.who === 'villager') {
+          const person = (typeof this.getPerson === 'function') ? this.getPerson(holder.vid) : null;
+          if (person && !person.dead) {
+            try { bearerFed = !!(this.npcHasAbility && this.npcHasAbility(holder.vid, 'fusion_reactor')); } catch (e) { bearerFed = false; }
+            if (bearerFed) bearerVid = holder.vid;
+          }
+        }
+        if (!bearerFed || !bearerVid) return false;
+        // The village hungers: living, present, non-bearer villagers above
+        // the game's own hungry line (hunger > 70).
+        const roster = v.roster || [];
+        let hungriest = null, hungriestHunger = -1, hungryCount = 0;
+        for (const vid of roster) {
+          if (!vid || vid === bearerVid) continue;
+          if (v.away && v.away[vid]) continue;
+          const person = (typeof this.getPerson === 'function') ? this.getPerson(vid) : null;
+          if (!person || person.dead) continue;
+          let h = 0;
+          try { h = ((this.npcNeeds && this.npcNeeds(vid)) || {}).hunger || 0; } catch (e) { h = 0; }
+          if (h > 70) {
+            hungryCount++;
+            if (h > hungriestHunger) { hungriestHunger = h; hungriest = vid; }
+          }
+        }
+        if (hungryCount < 3) return false;
+        if (pp.lastPassDay != null && (day - pp.lastPassDay) < 30) return false;
+        if (!hungriest) return false;
+        // THE PASS: strip the old bearer, then grant the hungriest hands.
+        // Order matters — npcGrantAbility refuses while a holder exists.
+        const oldBearerVid = bearerVid;
+        const oldName = (() => { try { return this.displayName(oldBearerVid).split(' ')[0]; } catch (e) { return 'Someone'; } })();
+        const newName = (() => { try { return this.displayName(hungriest).split(' ')[0]; } catch (e) { return 'Someone'; } })();
+        const wasPlayer = holder.who === 'player';
+        try {
+          if (wasPlayer) {
+            const s = st.scholar || {};
+            s.abilities = (s.abilities || []).filter(a => ((a && a.id) || a) !== 'fusion_reactor');
+            if (s.fusionReactor) delete s.fusionReactor;
+          } else {
+            v.npcAbilities = v.npcAbilities || {};
+            v.npcAbilities[oldBearerVid] = (v.npcAbilities[oldBearerVid] || []).filter(a => a !== 'fusion_reactor');
+          }
+        } catch (e) {}
+        st.fusionReactorHolder = null;
+        let granted = false;
+        try { granted = (typeof this.npcGrantAbility === 'function') ? !!this.npcGrantAbility(hungriest, 'fusion_reactor') : false; } catch (e) { granted = false; }
+        if (!granted) return false;
+        // The pellet feeds its new carrier now — their hunger is gone, not
+        // merely paused. (The feast code already treats a reactor villager
+        // as not eating; the meter now agrees.)
+        try { const n = this.npcNeeds && this.npcNeeds(hungriest); if (n) n.hunger = 0; } catch (e) {}
+        pp.lastPassDay = day;
+        try { this.tele && this.tele('pellet_pass', { from: oldBearerVid, to: hungriest, day }); } catch (e) {}
+        this.say(`The little star inside ${oldName} goes quiet — and wakes up inside ${newName}. ${oldName} never got hungry while the village did, so the pellet moved to hungrier hands: ${newName} will never be hungry again while it hums, and ${oldName} is hungry again, for the first time in a long while. The table can hear a feast again.`);
+        try { this.save(); } catch (e) {}
+        return true;
+      } catch (e) { return false; }
+    },
+
     // ---------- DAILY ----------
     progDaily() {
       const s = this.state.scholar, pg = this.progState();
@@ -1061,6 +1161,10 @@
       try { if (this.checkSystemQuest) this.checkSystemQuest(); } catch (e) {}
       try { if (this.offerSystemQuest) this.offerSystemQuest('daily'); } catch (e) {}
       // arc watch
+      // PELLET PASS (Steve ruling 2026-11-07): the pellet moves to hungrier
+      // hands at dawn — checked BEFORE checkArc so the reactor-seat beat
+      // does not fire on the same dawn the pellet passes.
+      try { if (this.maybePassPellet) this.maybePassPellet(); } catch (e) {}
       this.checkArc();
       // comfort flag: making bad days smaller, including your own
       if ((pg.flags || {}).comfort && (s.trauma || 0) > 0) s.trauma = Math.max(0, s.trauma - 1);
