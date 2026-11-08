@@ -1,0 +1,39 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Easton","t":92},{"id":"Naran","t":92},{"id":"Susan","t":91},{"id":"Greta","t":91}], roster=11
+INH readable=true scripted=true deadItems=10 distinct=9 transferred=1 vanished=1 keptPlants=25 inheritedPlants=0 keptSkills=4 inheritedSkills=7 succTrustPre=92 succTrustPost=83
+PARITY readable=true equal=true inherited=[] pre=["iron_stomach","purify","green_thumb","green_whisper"] post=["iron_stomach","purify","green_thumb","green_whisper"]
+DEATH d41 (the expedition, scripted): Paloma -> Easton | passed=true lin=true mo=true trust=83 vouchers=9
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=5 vanished=1 of 9 distinct dead-bearer items
+  CONVO d+3 with Naran (refused=false)
+  CONVO d+3 with Susan (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Susan (refused=false)
+  CONVO d+7 with Naran (refused=false)
+  CONVO d+14 with Juan (refused=false)
+  CONVO d+14 with Caleb (refused=false)
+  NEWCOMER-PROBE d+15 with Devon (arrived d+15, trust=29 refused=false)
+  CONVO d+30 with Juan (refused=false)
+  CONVO d+30 with Caleb (refused=false)
+  CONVO d+45 with Caleb (refused=false)
+  CONVO d+45 with Giulia (refused=false)
+  CONVO d+53 with Fátima (refused=false)
+
+FUNERAL: deathBeat=8 recover=1 vouch=1 (eligible=9) echo=1 organicBurial={"respects":false,"bury":false} halfRation=12
+
+MEAL-GATE: audited=56 violations=2 noMealDays=12 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+  VIOLATION d+52: Caleb trust=67 kcal=986 halfVoice=true
+  VIOLATION d+52: Caleb trust=67 kcal=986 halfVoice=true
+SUCCESSOR-LIFE: dayAdv=55 signals={"levelUp":true,"systemVoice":49,"offerLines":86,"codexPlantsDelta":28,"codexSkillsDelta":17,"codexAbilitiesDelta":10,"xpDelta":-33,"any":true} pantry 103167->0
+TRUST-DIALS: office 83->74 (-9, fall) | villageMean 87.8->61 (-26.8, fall) | ge60 9->2 | movers>=5: [{"id":"Caleb","from":74,"to":89,"delta":15}]
+DEED-LEDGER: calls=14 summary={"donateToPantry":{"calls":3,"ok":3,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"giveFood":{"calls":11,"ok":11,"deltaSum":18,"deltaN":11,"positive":11,"meanDelta":1.64}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=false(echoMentions=1 (convo=1, say=0)) m4=true m5=manual | endDay=96 alive=2 over=true
+anomalies: 0
+S-METRICS: s1=false s2=true s3=true s4=false s5=false dayAdv=55
+T-METRICS: t1=true(panels=d+0,d+7,d+15,d+30) t2=true(deedCalls=14) trustVerdict={"readable":true,"officeMantle":83,"officeLast":74,"officeDelta":-9,"officeClass":"fall","villageMantle":87.8,"villageLast":61,"villageDelta":-26.8,"villageClass":"fall","villageGe60Mantle":9,"villageGe60Last":2,"movers":[{"id":"Caleb","from":74,"to":89,"delta":15}]}
+E6/CALLCHECK: e6={"callMoves":11,"withCensus":11,"chainHandoffs":6,"trustMoves":5} callCheck={"dailyMoveDays":11,"callMoveDays":9,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=2 (v2=2, excludedLoot=0))
+E7/R47: e7={"trustMoves":5,"soloOffice":1,"soloOfficeDeltas":[1],"soloBearerDeltaExact":[1],"singleMoverBearer":0,"singleMoverOther":1,"eventClass":{"event-only":2,"deed-only":0,"both":3,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":1,"v2":2,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":7,"known":7,"unknown":0} e3={"dailyDays":57,"moves":11}

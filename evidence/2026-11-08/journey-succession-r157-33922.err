@@ -1,0 +1,42 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Esmeralda","t":90},{"id":"Irving","t":90},{"id":"Wei","t":90},{"id":"Mia","t":90}], roster=9
+INH readable=true scripted=true deadItems=13 distinct=13 transferred=2 vanished=4 keptPlants=28 inheritedPlants=0 keptSkills=3 inheritedSkills=8 succTrustPre=90 succTrustPost=62
+PARITY readable=true equal=true inherited=[] pre=["green_whisper","green_thumb"] post=["green_whisper","green_thumb"]
+DEATH d41 (the expedition, scripted): Franz -> Esmeralda | passed=true lin=true mo=true trust=62 vouchers=5
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=4 vanished=4 of 13 distinct dead-bearer items
+  CONVO d+3 with Irving (refused=false)
+  CONVO d+3 with Wei (refused=false)
+  STRANGER-PROBE d+3 with Stephan (trust=15 refused=false)
+  BOND-CONVO d+3 with Chantal (depth=2 v=54 refused=false)
+  NEWCOMER-PROBE d+6 with Hind (arrived d+6, trust=29 refused=false)
+  CONVO d+7 with Irving (refused=false)
+  CONVO d+7 with Xavier (refused=false)
+  CONVO d+14 with Irving (refused=false)
+  CONVO d+14 with Xavier (refused=false)
+  BOND-CONVO d+14 with Chantal (depth=2 v=54 refused=false)
+  CONVO d+30 with Irving (refused=false)
+  CONVO d+30 with Xavier (refused=false)
+  CONVO d+45 with Irving (refused=false)
+  CONVO d+45 with Xavier (refused=false)
+  CONVO d+53 with Xavier (refused=false)
+  CONVO d+53 with Hind (refused=false)
+  CONVO d+64 with Xavier (refused=false)
+  CONVO d+64 with Hind (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=1 (eligible=5) echo=6 organicBurial={"respects":false,"bury":false} halfRation=7
+
+MEAL-GATE: audited=70 violations=0 noMealDays=10 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=69 signals={"levelUp":true,"systemVoice":49,"offerLines":94,"codexPlantsDelta":26,"codexSkillsDelta":17,"codexAbilitiesDelta":10,"xpDelta":89,"any":true} pantry 13173->2000
+TRUST-DIALS: office 62->77 (+15, climb) | villageMean 68.9->84 (+15.1, climb) | ge60 5->6 | movers>=5: [{"id":"Chantal","from":32,"to":90,"delta":58},{"id":"Stephan","from":2,"to":37,"delta":35},{"id":"Xavier","from":82,"to":97,"delta":15}]
+DEED-LEDGER: calls=58 summary={"teachPlant":{"calls":1,"ok":1,"deltaSum":0,"deltaN":1,"positive":0,"meanDelta":0},"giveFood":{"calls":45,"ok":45,"deltaSum":51,"deltaN":45,"positive":42,"meanDelta":1.13},"donateToPantry":{"calls":12,"ok":12,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=1 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=6 (convo=6, say=0)) m4=true m5=manual | endDay=110 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=69
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+69) t2=true(deedCalls=58) trustVerdict={"readable":true,"officeMantle":62,"officeLast":77,"officeDelta":15,"officeClass":"climb","villageMantle":68.9,"villageLast":84,"villageDelta":15.1,"villageClass":"climb","villageGe60Mantle":5,"villageGe60Last":6,"movers":[{"id":"Chantal","from":32,"to":90,"delta":58},{"id":"Stephan","from":2,"to":37,"delta":35},{"id":"Xavier","from":82,"to":97,"delta":15}]}
+E6/CALLCHECK: e6={"callMoves":18,"withCensus":18,"chainHandoffs":1,"trustMoves":17} callCheck={"dailyMoveDays":18,"callMoveDays":15,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=7 (v2=7, excludedLoot=0))
+E7/R47: e7={"trustMoves":17,"soloOffice":7,"soloOfficeDeltas":[2,1,1,1,1,1,1],"soloBearerDeltaExact":[2,1,1,1,1,1,1],"singleMoverBearer":3,"singleMoverOther":4,"eventClass":{"event-only":0,"deed-only":2,"both":15,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":6,"v2":7,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":1,"known":1,"unknown":0} e3={"dailyDays":71,"moves":18}

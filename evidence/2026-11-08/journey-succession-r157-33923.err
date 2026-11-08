@@ -1,0 +1,39 @@
+
+ORGANIC DEATH d22: Giuseppe -> Zoey, topTrust=[{"id":"Yara","t":66},{"id":"Amina","t":57},{"id":"Esperanza","t":56},{"id":"Manaia","t":56}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=13 inheritedPlants=0 keptSkills=2 inheritedSkills=0 succTrustPre=82 succTrustPost=44
+PARITY readable=true equal=false inherited=[] pre=["bloodhound"] post=["bloodhound","echo_location"]
+DEATH d21 (organic (phase A)): Giuseppe -> Zoey | passed=true lin=true mo=true trust=44 vouchers=1
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Esperanza (refused=false)
+  CONVO d+3 with Yara (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Esperanza (refused=false)
+  CONVO d+7 with Jorge (refused=false)
+  NEWCOMER-PROBE d+12 with Brian (arrived d+12, trust=30 refused=false)
+  CONVO d+14 with Esperanza (refused=false)
+  CONVO d+14 with Manaia (refused=false)
+  CONVO d+30 with Manaia (refused=false)
+  CONVO d+30 with Amina (refused=false)
+  CONVO d+45 with Yara (refused=false)
+  CONVO d+45 with Manaia (refused=false)
+  CONVO d+53 with Manaia (refused=false)
+  CONVO d+53 with Amina (refused=false)
+  CONVO d+64 with Manaia (refused=false)
+  CONVO d+64 with Amina (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=1 (eligible=1) echo=3 organicBurial={"respects":false,"bury":false} halfRation=5
+
+MEAL-GATE: audited=70 violations=0 noMealDays=8 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=71 signals={"levelUp":true,"systemVoice":75,"offerLines":94,"codexPlantsDelta":27,"codexSkillsDelta":12,"codexAbilitiesDelta":9,"xpDelta":119,"any":true} pantry 18404->6560
+TRUST-DIALS: office 44->72 (+28, climb) | villageMean 56.6->83.8 (+27.2, climb) | ge60 1->6 | movers>=5: [{"id":"Amina","from":57,"to":87,"delta":30},{"id":"Manaia","from":56,"to":80,"delta":24},{"id":"Yara","from":66,"to":77,"delta":11}]
+DEED-LEDGER: calls=61 summary={"teachPlant":{"calls":20,"ok":20,"deltaSum":0,"deltaN":20,"positive":0,"meanDelta":0},"giveFood":{"calls":30,"ok":30,"deltaSum":64,"deltaN":30,"positive":26,"meanDelta":2.13},"donateToPantry":{"calls":11,"ok":11,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=3 grief-excluded=2
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=3 (convo=3, say=0)) m4=true m5=manual | endDay=92 alive=7 over=false
+anomalies: 0
+S-METRICS: s1=true s2=false s3=true s4=true s5=true dayAdv=71
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+71) t2=true(deedCalls=61) trustVerdict={"readable":true,"officeMantle":44,"officeLast":72,"officeDelta":28,"officeClass":"climb","villageMantle":56.6,"villageLast":83.8,"villageDelta":27.2,"villageClass":"climb","villageGe60Mantle":1,"villageGe60Last":6,"movers":[{"id":"Amina","from":57,"to":87,"delta":30},{"id":"Manaia","from":56,"to":80,"delta":24},{"id":"Yara","from":66,"to":77,"delta":11}]}
+E6/CALLCHECK: e6={"callMoves":14,"withCensus":14,"chainHandoffs":1,"trustMoves":13} callCheck={"dailyMoveDays":14,"callMoveDays":14,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=4 (v2=4, excludedLoot=0))
+E7/R47: e7={"trustMoves":13,"soloOffice":2,"soloOfficeDeltas":[1,1],"soloBearerDeltaExact":[1,1],"singleMoverBearer":1,"singleMoverOther":5,"eventClass":{"event-only":0,"deed-only":2,"both":11,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":3,"v2":4,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":1,"known":1,"unknown":0} e3={"dailyDays":71,"moves":14}
