@@ -31,6 +31,26 @@ function coalition(n) {
   Game.say = () => {}; Game.sysSay = () => {};
   const dawn = () => { s.day++; Game.overtimeTick(); };
 
+  // LADDER LEG 3 (brief §b.6): the tier interval stretches +1 day per 4
+  // counted ladder points. This test proves the overtime CLOCK, so it rigs
+  // a 0-counted village (the 7-day base interval); the stretch itself is
+  // proven by scripts/test-ladder-time-20261108.js.
+  (function zeroLadder() {
+    const Ts = ['combat', 'field', 'social', 'craft', 'strange'];
+    const pt = Game.playerTracks();
+    for (const t of Ts) pt[t].xp = 0;
+    for (const vid of (Game.state.village.roster || [])) {
+      if (!vid || vid === Game.villagerId) continue;
+      const vp = Game.vpOf ? Game.vpOf(vid) : null;
+      if (vp && vp.dead) continue;
+      const x = Game.npcXp(vid);
+      for (const t of Ts) x[t] = 0;
+    }
+    Game.state.waveLedger = {}; Game.state.feastLog = []; Game.state.waveKillLog = [];
+    delete Game.state._ladderPeakStage; delete Game.state._ladderCapBeat;
+  })();
+  T.ok('rig holds 0 counted ladder points (7-day base interval)', Game.villageLadder().counted === 0 && Game.overtimeInterval() === 7);
+
   T.section('1. overtime clock');
   pg.tableWaiting = true;
   s.day = 60;

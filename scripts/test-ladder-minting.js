@@ -44,10 +44,10 @@ function rigRealmLinks(Game) {
   }
 }
 
-function livingVillager(Game) {
+function livingVillager(Game, exclude) {
   const roster = ((Game.state.village || {}).roster || []);
   for (const vid of roster) {
-    if (!vid || vid === Game.villagerId) continue;
+    if (!vid || vid === Game.villagerId || vid === exclude) continue;
     const vp = Game.vpOf ? Game.vpOf(vid) : null;
     if (vp && !vp.dead) return vid;
   }
@@ -155,17 +155,25 @@ async function main() {
   T.ok('cap beat does not repeat on the same rung', says.length === nCap, 'says grew ' + nCap + ' -> ' + says.length);
 
   // --- capstones: military tribute (veterans on hand) ---
+  // LEG 3 FIX (ladder leg 3, tribute scholar-readiness): the scholar is
+  // NOT a payable veteran — readiness counts only non-scholar living
+  // wave-4 veterans, so it agrees with delivery.
   resetLadderState(Game);
   const v2 = livingVillager(Game);
+  const v3 = livingVillager(Game, v2);
+  T.ok('two living non-scholar villagers exist for the tribute rig', !!(v2 && v3));
   Game.state.waveKillLog = [
-    { by: Game.villagerId, w: 4 },
     { by: v2, w: 4 },
+    { by: v3, w: 4 },
   ];
   let cap = Game.ladderCapstoneReady('military_tribute');
-  T.ok('tribute ready with 2 living wave-4 veterans', cap.ready === true && cap.veterans === 2, JSON.stringify(cap));
+  T.ok('tribute ready with 2 living non-scholar wave-4 veterans', cap.ready === true && cap.veterans === 2, JSON.stringify(cap));
+  Game.state.waveKillLog = [{ by: v2, w: 4 }, { by: Game.villagerId, w: 4 }];
+  cap = Game.ladderCapstoneReady('military_tribute');
+  T.ok('scholar-veteran + 1 villager is NOT ready (the scholar is not payable)', cap.ready === false && cap.reason === 'veterans-short' && cap.veterans === 1, JSON.stringify(cap));
   Game.state.waveKillLog = [{ by: Game.villagerId, w: 4 }];
   cap = Game.ladderCapstoneReady('military_tribute');
-  T.ok('tribute not ready with 1 veteran', cap.ready === false && cap.reason === 'veterans-short', JSON.stringify(cap));
+  T.ok('tribute not ready with the scholar alone', cap.ready === false && cap.reason === 'veterans-short', JSON.stringify(cap));
   Game.state.waveKillLog = [{ by: Game.villagerId, w: 3 }];
   cap = Game.ladderCapstoneReady('military_tribute');
   T.ok('wave-3 kills do not count as wave-4 veterans', cap.ready === false && cap.veterans === 0, JSON.stringify(cap));
