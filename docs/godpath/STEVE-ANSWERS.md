@@ -7,6 +7,43 @@ verbatim.
 
 ---
 
+## 2026-11-07 (alien players: twelve meddlers, not contestants)
+
+On what alien players are — meddlers, not contest opponents:
+
+"more like adversarial villagers. Monsters with intelligence and personality, characters."
+
+The roster grows from eight personas to twelve. Alien players rig
+outcomes and meddle; they never fight IN a contest as opponents.
+(Wild fights follow the existing alien-player fight path; contests get
+interference only — the sadistic rig, the benevolent lifeline, and each
+new persona's own meddler moves.)
+
+On the personality spectrum for the twelve:
+
+"the 12 must range across real personalities"
+
+— meddling, benign, neutral, dutiful executioner, raging psychopath,
+spoiled child, etc. — not just the current three dispositions
+(sadistic/neutral/benevolent).
+
+The four new personas filling the gaps were presented to Steve the
+same day — Quill the meddler (fussy adjuster, never fights head-on),
+Kess the dutiful executioner (procedural, polite, cannot be reasoned
+with), Howl the raging psychopath (uncontrolled, erratic,
+unpredictable), Bibi the spoiled child (obscenely rich heir, tantrums,
+buys outcomes) — and approved 2026-11-07 16:55 CST:
+
+"Yes proceed with those aliens"
+
+See docs/ALIEN-PLAYERS.md for the twelve-persona roster and the
+meddler-moves wiring. Open questions Q1 (roster size) and Q3
+(contest opponents or meddling-only) are answered by this ruling and
+deleted from docs/OPEN-QUESTIONS.md; Q2 ("stranger" overload) stays
+open.
+
+---
+
 ## 2026-10-20 (gardens, Haven size and abilities)
 
 "It seems like garden rows/number should upgrade with haven size. Are they getting used in long playthroughs? In general, the garden path really only makes sense for the ability path. IRL things take too long to grow so we need to account for that reality. Gardens are only a little effective without a character who has invested in gardening abilities etc."

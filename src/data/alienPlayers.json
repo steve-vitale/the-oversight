@@ -598,5 +598,397 @@
     ],
     "alienTech": [],
     "combat": true
+  },
+  {
+    "backstory": "A Burlap ledger-clerk from the Tessell Exchange — small, fuzzy, and pathologically precise. Quill spent forty years balancing the books of three planetary games before the System headhunted them for Earth. They do not hunt people. They audit them. Somewhere in their satchel is a form for everything that has ever happened to you, filled out in triplicate, and one of the copies is wrong on purpose.",
+    "defeatLines": [
+      "\"Oh! Oh, well — that's not in the ledger at all. I'll need to file an amendment. You fight... adequately. It's in the record now.\"",
+      "\"Defeat, duly noted, stamped, and filed. Do try to keep the paperwork tidy next time.\""
+    ],
+    "disposition": "meddling",
+    "escalationLines": [
+      "\"I've opened a file on you. It's getting thick. That's a compliment, mostly.\"",
+      "\"Your case has been escalated. Don't worry — escalated just means more forms.\""
+    ],
+    "id": "quill",
+    "introLines": [
+      "\"Your supplies were misfiled. I fixed it. You're welcome. They're in the river now.\"",
+      "\"Oh, hello! You're the human. I've read SO much about you. Most of it was misfiled. I've corrected it. You're welcome.\""
+    ],
+    "motivation": "A balanced ledger. Every contest, every pantry, every life — filed correctly, corrected where it isn't. Quill never fights head-on because fighting is not their department. Rearranging is.",
+    "name": "Quill",
+    "rivalry": "Escalates bureaucratically: each encounter adds a form, a fee, a correction. Quill remembers every misfiling — yours and theirs — and the ledger only ever grows.",
+    "signature": "Never fights head-on — rearranges the world instead: pantries 're-filed' into the river, contests leaned by a hair, forged fan letters in your handwriting. Apologizes while doing it. Means the apology. Does it anyway.",
+    "species": "Burlap",
+    "taunts": [
+      "\"Your paperwork is a mess. I'm not even fighting you yet and your paperwork is a mess.\"",
+      "\"I've filed three corrections on your life just standing here.\"",
+      "\"You fight like an unfiled form. All over the place. No tabs.\"",
+      "\"Hold on, let me check the ledger — ah yes. You lose here. It says so. In triplicate.\""
+    ],
+    "title": "The Adjuster",
+    "victoryLines": [
+      "\"Filed under: inevitable. Better luck next audit, little survivor.\"",
+      "\"Your loss has been recorded in triplicate. One copy is for you. It's already in the river.\""
+    ],
+    "voice": "Cheerful, pedantic, infuriating — a clerk who loves you and your paperwork equally",
+    "wealth": "comfortable",
+    "combatLines": {
+      "onHit": [
+        "Oh, that's a hit. Logged. Timestamped. Filed under 'you, hurting'.",
+        "Your form is — hmm. Your form is incorrect. Let me demonstrate the correct form. On you.",
+        "That one goes in the record. The record is getting THICK."
+      ],
+      "onHurt": [
+        "OW. That was NOT in the ledger! I'm filing a complaint! With MYSELF!",
+        "You hit me. ME. Do you know how many forms that generates?",
+        "Rude! Rude, unfiled, and — ow — entirely unapproved!"
+      ],
+      "onWinning": [
+        "This is going exactly according to the paperwork. Please stop struggling. It's undignified.",
+        "The ledger says you lose here. The ledger is never wrong. Well — once. We're not talking about it.",
+        "Hold still. This will be much easier if you hold still. For the forms."
+      ],
+      "onLosing": [
+        "No no, this isn't right, the numbers don't— let me just recheck the—",
+        "You're RUINING my perfect filing system! Do you know how long this took?!",
+        "Fine! FINE! I'll just re-file this entire fight as a clerical error!"
+      ],
+      "unhinged": [
+        "Your supplies were misfiled. I fixed it. You're welcome. They're in the river now.",
+        "Did you know you have SEVEN outstanding forms? Seven. I've counted.",
+        "I once balanced a planetary budget during a siege. You're just a Tuesday."
+      ]
+    },
+    "experience": "veteran",
+    "abilityKit": [
+      "evidence_board",
+      "patient_aim",
+      "game_sense",
+      "soft_step",
+      "diplomat",
+      "steady_hands"
+    ],
+    "alienTech": [
+      {
+        "id": "ledger_stylus",
+        "name": "Ledger Stylus",
+        "desc": "A stylus that writes corrections into reality. Whatever Quill files, stays filed."
+      },
+      {
+        "id": "rubber_stamp",
+        "name": "Rubber Stamp",
+        "desc": "APPROVED. DENIED. Whatever it stamps becomes true in the paperwork — and the paperwork is the world."
+      }
+    ],
+    "combat": true,
+    "meddlerMoves": [
+      {
+        "id": "refile_scorecards",
+        "name": "Re-file the scorecards",
+        "lean": -0.06,
+        "line": "Your points were misfiled. I fixed it. They're in the river now."
+      },
+      {
+        "id": "correct_error",
+        "name": "Correct a scoring error",
+        "lean": 0.04,
+        "line": "Oh — oh dear, the ledger had you DOWN two points. My mistake. Corrected. You're welcome."
+      }
+    ]
+  },
+  {
+    "backstory": "A Meridian warden — not a hunter, not a judge, a functionary of the Ledger. Kess has served warrants on forty-one worlds and never once asked whether the sentence was just. That is not their department. The Ledger decides; Kess carries it out, cleanly, politely, and without exception. They apologize to everyone they execute. They mean it. They do it anyway.",
+    "defeatLines": [
+      "\"Sentence... suspended. Temporarily. The paperwork will be corrected. It always is.\"",
+      "\"You have won. The Ledger notes it. The Ledger does not forget it. Neither do I.\""
+    ],
+    "disposition": "dutiful",
+    "escalationLines": [
+      "\"Warrant seven-two-zero. The Ledger has reviewed your file. It has concerns.\"",
+      "\"You have been reclassified. I'm afraid the new classification is less... forgiving.\""
+    ],
+    "id": "kess",
+    "introLines": [
+      "\"Warrant seven-one-nine. I'm sorry. It's nothing personal. It never is.\"",
+      "\"Kess. Warden of the Ledger. Please remain calm. This will be orderly.\""
+    ],
+    "motivation": "The sentence, carried out. Not cruelty, not mercy — procedure. A warrant served is a debt paid, and Kess does not leave debts unpaid.",
+    "name": "Kess",
+    "rivalry": "Does not escalate emotionally — escalates procedurally: each encounter is a new warrant, a higher number, a shorter deadline. Kess remembers your file, not your face.",
+    "signature": "Serves warrants, reads you your rights (there are none), apologizes, and carries out the sentence cleanly. Cannot be reasoned with, bribed, or angered — procedure is procedure.",
+    "species": "Meridian",
+    "taunts": [
+      "\"Warrant seven-one-nine. Please remain calm.\"",
+      "\"I have read your file. All of it. There is nothing in it that changes the sentence.\"",
+      "\"You may speak. It will be recorded. It will not help.\"",
+      "\"The Ledger is patient. I am patient. The sentence is patient.\""
+    ],
+    "title": "Warden of the Ledger",
+    "victoryLines": [
+      "\"Sentence carried out. I'm sorry. It's nothing personal. It never is.\"",
+      "\"Filed. Closed. Next.\""
+    ],
+    "voice": "Quiet, polite, procedural — reads you your rights (there are none) and apologizes for the inconvenience",
+    "wealth": "comfortable",
+    "combatLines": {
+      "onHit": [
+        "Strike logged. Warrant seven-one-nine, addendum one.",
+        "That hit is now part of the record. The record is complete. The record is final.",
+        "Impact confirmed. Proceeding."
+      ],
+      "onHurt": [
+        "Noted. The Ledger does not hold grudges. The Ledger holds records.",
+        "That hurt. I apologize for noticing. Proceeding.",
+        "Damage sustained. Sentence unchanged."
+      ],
+      "onWinning": [
+        "The sentence is being carried out. Please remain calm. This will be orderly.",
+        "You are almost processed. I know this is difficult. It is not personal.",
+        "Rule forty-four. The ruling stands."
+      ],
+      "onLosing": [
+        "This outcome was not in the warrant. I will need to file an amendment.",
+        "You are... noncompliant. The Ledger does not have a form for this. It will get one.",
+        "Sentence suspended. The paperwork will catch up. It always does."
+      ],
+      "unhinged": [
+        "Warrant seven-one-nine. I'm sorry. It's nothing personal. It never is.",
+        "I have served forty-one worlds. You are number forty-two. The number is not special. None of them are.",
+        "Do you know what the Ledger says about you? Neither do I. I only carry it out."
+      ]
+    },
+    "experience": "veteran",
+    "abilityKit": [
+      "patient_aim",
+      "steady_hands",
+      "triage",
+      "adrenaline_control",
+      "game_sense",
+      "diplomat"
+    ],
+    "alienTech": [
+      {
+        "id": "warrant_scroll",
+        "name": "Warrant Scroll",
+        "desc": "The sentence, written down. Once it is read aloud, it is already carried out."
+      },
+      {
+        "id": "ledger_manacles",
+        "name": "Ledger Manacles",
+        "desc": "Once cuffed, the paperwork says you were always cuffed. The paperwork is never wrong."
+      }
+    ],
+    "combat": true,
+    "meddlerMoves": [
+      {
+        "id": "serve_warrant",
+        "name": "Serve a warrant",
+        "lean": -0.05,
+        "line": "Warrant seven-one-nine. I'm sorry. It's nothing personal. It never is."
+      },
+      {
+        "id": "read_rules",
+        "name": "Read the rules aloud",
+        "lean": 0.04,
+        "line": "Rule forty-four, subsection three. The ruling favors... you. I don't write the rules. I only read them."
+      }
+    ]
+  },
+  {
+    "backstory": "Nobody knows what Howl was before the games unmade them — not even Howl. Something that played too long, lost too much, and kept the screaming. They laugh mid-swing, weep mid-swing, and talk to things that aren't there. The System keeps inviting Howl back because the audience cannot look away. Howl keeps coming back because there is nowhere else to go.",
+    "defeatLines": [
+      "\"No no no NO— you weren't supposed to— okay. Okay. That was good. That was GOOD. Do it again? ...Don't go.\"",
+      "\"You WIN. You win you win YOU WIN. ...Why does winning feel like losing? Don't answer that.\""
+    ],
+    "disposition": "raging",
+    "escalationLines": [
+      "\"It's YOU again! You came BACK! Nobody comes back! WHY did you come back?!\"",
+      "\"I practiced! I practiced screaming AND swinging! At the SAME TIME! Watch!\""
+    ],
+    "id": "howl",
+    "introLines": [
+      "\"STOP LOOKING AT ME LIKE THAT— no wait, look, LOOK, I want you to see this part—\"",
+      "\"There you ARE. There you are there you are THERE YOU ARE— okay. Okay. Let's do this. Let's do this NOW.\""
+    ],
+    "motivation": "To be SEEN. Howl doesn't want you dead the way Vex does — Howl wants you to watch, and to keep watching, while everything comes apart. The fight is the only place the noise stops.",
+    "name": "Howl",
+    "rivalry": "Does not escalate — detonates. Each encounter is worse in a different direction: louder, faster, sadder. Howl remembers you the way a storm remembers a roof.",
+    "signature": "Screams mid-swing, laughs, weeps, talks to things that aren't there. Unpredictable by design — no pattern, no mercy, no plan. The only warning is the noise.",
+    "species": "Unmade",
+    "taunts": [
+      "\"LOOK AT ME. No— don't. LOOK. Don't. LOOK—\"",
+      "\"I can hear your heartbeat! It's SO LOUD! Is it always that loud?!\"",
+      "\"Are you scared? I'm scared! Isn't that FUNNY?\"",
+      "\"The voices say you're going to lose. The voices are USUALLY right. Usually.\""
+    ],
+    "title": "The Unmade",
+    "victoryLines": [
+      "\"SEE? Did you SEE that part? I told you to LOOK. You looked. Good. GOOD.\"",
+      "\"It's quiet now. It's quiet and I hate it. Come back. COME BACK.\""
+    ],
+    "voice": "Unstable, loud, veering mid-sentence between screaming, laughing, and weeping — genuinely unpredictable, never theatrical",
+    "wealth": "broke",
+    "combatLines": {
+      "onHit": [
+        "YES! Did you FEEL that? I felt that! I felt that in my TEETH!",
+        "HA! There it is! THERE it is! Again! AGAIN!",
+        "Your bones make a sound! Did you know that? They make a SOUND!"
+      ],
+      "onHurt": [
+        "OW— HA! Okay! That one was REAL! Do it again! DON'T do it again!",
+        "You HURT me! You actually— nobody hurts me! ...Thank you? NO. Not thank you. OW.",
+        "That one echoed! I can still hear it! Can you hear it? It's still— okay. Okay."
+      ],
+      "onWinning": [
+        "LOOK AT YOU. Look at you, still— no wait, don't look away, LOOK, this is the part—",
+        "It's working! It's WORKING! Why is it working? Don't stop! DON'T STOP!",
+        "You should have stayed home. I should have stayed home. NOBODY stayed home!"
+      ],
+      "onLosing": [
+        "NO NO NO this isn't— I was WINNING, I was— okay. Okay okay okay. Breathe. I can't breathe. WATCH ME.",
+        "You're ruining EVERYTHING. My record! My— my what? What was I saying?",
+        "Fine! FINE! You win! ...Why did you have to win LOUDLY?"
+      ],
+      "unhinged": [
+        "STOP LOOKING AT ME LIKE THAT— no wait, look, LOOK, I want you to see this part—",
+        "The walls are talking again. They say you're losing. Are you losing? Am I?",
+        "I used to have a name. I think. It might have been mine. It doesn't matter now. SWING."
+      ]
+    },
+    "experience": "veteran",
+    "abilityKit": [
+      "adrenaline_control",
+      "game_sense",
+      "eagle_eye",
+      "night_eyes",
+      "soft_step",
+      "triage"
+    ],
+    "alienTech": [
+      {
+        "id": "scream_amp",
+        "name": "Scream Amplifier",
+        "desc": "Howl's voice, turned up until the air breaks. The screaming is the weapon. The swinging is just punctuation."
+      },
+      {
+        "id": "shatter_knife",
+        "name": "Shatter Knife",
+        "desc": "A knife that screams back when it cuts. Howl listens to it. It tells them things."
+      }
+    ],
+    "combat": true,
+    "meddlerMoves": [
+      {
+        "id": "scream_judges",
+        "name": "Scream at the judges",
+        "lean": -0.08,
+        "line": "STOP LOOKING AT ME LIKE THAT— no wait, look, LOOK, I want you to see this part—"
+      },
+      {
+        "id": "scream_opponent",
+        "name": "Scream at your opponent",
+        "lean": 0.06,
+        "line": "YOU. YES, YOU. Your shoes are WRONG and everyone can SEE IT. ...What? I'm helping."
+      }
+    ]
+  },
+  {
+    "backstory": "Young, obscenely rich, and bored beyond measure. Bibi is heir to the Vexari Ninth Dynasty — the upstart house that has spent three generations trying to out-hunt, out-spend, and out-glamour Vex Marlowe's Third Dynasty, and failing loudly. Daddy bought Bibi the playing rights to Earth, a combat sleeve three sizes too expensive, and a body that screams 'new money' from orbit. Bibi has never been told no. Bibi has never lost gracefully. Bibi intends to keep both records intact.",
+    "defeatLines": [
+      "\"This is RIGGED. This whole planet is RIGGED. Daddy! DADDY! Buy me a better body!\"",
+      "\"Fine! FINE! You win! I'm telling EVERYONE you cheated! ...You didn't cheat. But I'm telling them anyway!\""
+    ],
+    "disposition": "spoiled",
+    "escalationLines": [
+      "\"It's you AGAIN. Daddy says I have to share the planet. I don't WANNA share the planet.\"",
+      "\"I've had my body UPGRADED. It cost a fortune. A FORTUNE. You're going to look at it. LOOK at it.\""
+    ],
+    "id": "bibi",
+    "introLines": [
+      "\"Daddy bought me this planet. Well, the playing rights. Same thing. You're my toy now. Don't break.\"",
+      "\"Oh, good — a NEW toy. The old ones all broke. Don't break. I mean it. Breaking is RUDE.\""
+    ],
+    "motivation": "To be entertained, and to beat Vex Marlowe of the Third Dynasty at something — anything — in front of an audience. Losing is a tantrum; winning is a yawn; being ignored is unforgivable.",
+    "name": "Bibi",
+    "rivalry": "A rivalry in two directions: with you (a toy that keeps refusing to break) and with Vex Marlowe of the Third Dynasty, whose every trophy Bibi intends to outshine. Beating Bibi earns a tantrum; beating Vex in front of Bibi earns a gift.",
+    "signature": "Sloppy fighter, terrible loser: loses, throws a tantrum, buys a bigger body, and hires someone to bother you. Bored, leaves — or throws you a gift, loudly, so everyone sees how generous Bibi is.",
+    "species": "Vexari",
+    "taunts": [
+      "\"My body cost more than your life. Just so you know.\"",
+      "\"Daddy says I'm a natural. Daddy says a LOT of things. Daddy's usually right.\"",
+      "\"You're my FAVORITE toy. Don't tell the other toys. They break so easily.\"",
+      "\"If you beat me I'll cry. If you LOSE I'll get bored. Choose wisely.\""
+    ],
+    "title": "Heir to the Ninth Dynasty",
+    "victoryLines": [
+      "\"I WON! See? SEE? Daddy, did you see? I won and I didn't even TRY that hard.\"",
+      "\"That was... adequate. For a toy. Don't get used to winning. You won't.\""
+    ],
+    "voice": "Young, bored, imperious — a rich child who bought the game and is already tired of winning it",
+    "wealth": "rich",
+    "combatLines": {
+      "onHit": [
+        "HA! Did you SEE that? Daddy, did you see that? Of course you saw that, there's a camera!",
+        "That's what you GET for being a boring toy! ...Wait, that was actually fun. Do it again! Let me hit you again!",
+        "Ooh, that one LEFT A MARK. I'm keeping the mark. It's MINE."
+      ],
+      "onHurt": [
+        "OW! Daddy! DADDY, they HURT me! Buy me a better body! A BIGGER one!",
+        "You hit ME. Do you know who my DADDY is? No? GOOD. You'll find out. Everyone finds out.",
+        "That actually hurt! That's NOT FAIR! I didn't agree to the hurting part!"
+      ],
+      "onWinning": [
+        "I'm WINNING! I'm winning and it's BORING. Be more interesting or I'll leave.",
+        "See? SEE? This is why Daddy bought me the good body. The GOOD one.",
+        "Yield already. I have a party to get to. It's MY party. Everyone's invited except you."
+      ],
+      "onLosing": [
+        "NO! No no no, this is WRONG, I'm supposed to WIN, Daddy PAID for me to win!",
+        "You're CHEATING! You have to be cheating! Nobody beats ME! I'm BIBI!",
+        "Fine! I'll just buy a BIGGER body and a SHARPER sword and we'll do this AGAIN! And again! Until I win!"
+      ],
+      "unhinged": [
+        "Daddy bought me this planet. Well, the playing rights. Same thing. You're my toy now. Don't break.",
+        "Do you know how much this sleeve cost? More than your whole VILLAGE. More than your whole PLANET, probably.",
+        "Ugh, I'm BORED. Being rich is SO boring. Fight me. No wait — lose to me. Entertain me."
+      ]
+    },
+    "experience": "rookie",
+    "abilityKit": [
+      "scrounger",
+      "squirrel_friend",
+      "rain_dancer",
+      "diplomat",
+      "soft_step",
+      "adrenaline_control"
+    ],
+    "alienTech": [
+      {
+        "id": "daddy_card",
+        "name": "Daddy's Credit Line",
+        "desc": "Buys a bigger body mid-fight. The receipt is itemized. The interest rate is a family secret."
+      },
+      {
+        "id": "toy_crown",
+        "name": "Toy Crown",
+        "desc": "A crown bought with dynasty money. Wearing it makes Bibi feel invincible — which is almost the same thing."
+      }
+    ],
+    "combat": true,
+    "meddlerMoves": [
+      {
+        "id": "buy_judges",
+        "name": "Buy the judges",
+        "lean": -0.08,
+        "line": "Daddy bought me the judges. Well, the judging rights. Same thing. They're MY judges now."
+      },
+      {
+        "id": "bored_gift",
+        "name": "Bored, throws a gift",
+        "lean": 0.06,
+        "line": "Ugh, this is BORING. Here — have a present. Don't tell Daddy. Actually, tell Daddy. Tell him I'm generous."
+      }
+    ]
   }
 ]

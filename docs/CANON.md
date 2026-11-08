@@ -73,6 +73,15 @@ twice in one day (2026-10-09).
   source. Still-open items live in the doc's Open questions (roster
   size, the overloaded word "stranger", contest opponents or
   meddling-only), mirrored in docs/OPEN-QUESTIONS.md.
+- 2026-11-07: alien expansion (build-alien-expand, Steve's ruling):
+  roster eight → twelve; alien players are meddlers, not contestants
+  ("more like adversarial villagers. Monsters with intelligence and
+  personality, characters."); seven dispositions
+  (sadistic/neutral/benevolent/meddling/dutiful/raging/spoiled); each
+  new persona carries `meddlerMoves` wired into `apContestInterference`
+  (verdict-only). Q1 and Q3 answered and deleted from
+  docs/OPEN-QUESTIONS.md; Q2 ("stranger" overload) stays open. See
+  evidence/2026-11-07/alien-expansion-build.md.
 - 2026-10-28: docs/ABILITY-REFUSALS.md — refusal + pantry-ledger canon
   (sim-refusalcanon-b), grounded only in the 2026-10-27/28 refusal and
   ledger evidence arms plus landed code; closes tracker blank 5

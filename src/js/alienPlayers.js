@@ -1,9 +1,12 @@
 // @ontology
 // system: alienPlayers
-// description: Late-game sentient aliens impersonating humans in an exclusive encounter pool. Sadistic trophy hunters, neutral participants, and benevolent sympathizers — with full ability sets, alien tech, off-screen rivals, secret allies, fan favor, and the System as referee. Steve (2026-10-07): they impersonate HUMANS, not monsters. Exclusive pool, separate from monsters.
+// description: Late-game sentient aliens impersonating humans in an exclusive encounter pool. Twelve meddlers across seven dispositions — sadistic trophy hunters, neutral participants, benevolent sympathizers, a fussy adjuster, a dutiful executioner, a raging psychopath, and a spoiled heir — with full ability sets, alien tech, off-screen rivals, secret allies, fan favor, and the System as referee. Steve (2026-11-07): they are meddlers, not contestants — "more like adversarial villagers. Monsters with intelligence and personality, characters." They rig outcomes and meddle, never fight IN a contest as opponents.
 // provides:
 //   - apState()
 //   - apPersonas()
+//   - apDispositionWeight(disp) -> encounter/activation weight for one disposition (all seven, explicit)
+//   - apActivationWeight(disp) -> playground-activation weight for one disposition (all seven, explicit)
+//   - apMeddlerMoves(pid) -> the persona's meddlerMoves from alienPlayers.json (or [])
 //   - apPersona(pid)
 //   - apEligible()
 //   - apEncounterEligible()
@@ -100,7 +103,8 @@
 //   - (progression) alien players level alongside you: kit grows 3->6 abilities, tech upgrades; rich progress faster (buy), broke slower (earn) (code: alienPlayers.js)
 //   - (groups) rare late-game 2-3 persona team encounters (day 40+, 3%, 14-day cooldown, needs 2+ established rivals) with inter-alien banter; they join the fight in turn via the tbEnd chain (wired break-it 2026-10-08 — was dead code) (code: alienPlayers.js, encounters.js)
 //   - (playground) active aliens persist for days: kill villagers/monsters/animals, burn map (Sable/Vex), raid pantry/fire/trust (veterans), fight each other; max 3 active (code: alienPlayers.js)
-//   - (factions) sadistic coordinate loosely (70%), benevolent solid (90%), neutral opportunistic; sadistic+benevolent never align (code: alienPlayers.js)
+//   - (meddling) personas with a `meddlerMoves` array in alienPlayers.json rig contests their own way via apContestInterference (verdict-only, one interference per contest, 5-day cooldown shared with the sadistic rig gate so a contest never takes two leans). They never fight IN a contest — no contest code builds an alien-player fighter (Steve 2026-11-07) (code: apContestInterference, alienPlayers.js).
+//   - (dispositions) SEVEN dispositions: sadistic, neutral, benevolent, meddling, dutiful, raging, spoiled. Every disposition-keyed site handles all seven explicitly — apDispositionWeight (encounter/activation weights), apPlaygroundAction (off-screen behavior), apPersonaPackage (care packages), apFactionAligned (alliances). Nothing falls through to a wrong family silently (2026-11-07 alien expansion) (code: apDispositionWeight, apPlaygroundAction, apPersonaPackage, apFactionAligned, alienPlayers.js).
 //   - (veterans) most aliens played before: exploit pantry/fire/trust mechanics; Pip is the rookie who makes charming mistakes (code: alienPlayers.js)
 // consumes:
 //   - state.systemArrived, unlockedWave(), endDay (wrapped)
@@ -115,10 +119,28 @@
  * pool, separate from the monster spawn table. They look human, fight like
  * players (full ability kits), and carry alien tech that breaks the rules.
  *
- * Three dispositions:
+ * Seven dispositions (Steve 2026-11-07: the twelve must range across real
+ * personalities — meddling, benign, neutral, dutiful executioner, raging
+ * psychopath, spoiled child — not just the original three):
  * - SADISTIC: pay-to-play trophy hunters. Theatrical, cruel, escalating.
  * - NEUTRAL: here for the experience. Unpredictable, not cruel.
  * - BENEVOLENT: think the games are wrong. Help secretly, deniably.
+ * - MEDDLING: fussy adjusters. Never fight head-on; rearrange the world —
+ *   re-file pantries, lean contests by a hair, forge fan letters.
+ * - DUTIFUL: procedural executioners. Serve warrants, apologize, carry out
+ *   the sentence cleanly. Cannot be reasoned with, bribed, or angered.
+ * - RAGING: genuinely unstable, not theatrical. Scream mid-swing, laugh,
+ *   weep, talk to things that aren't there. Unpredictable by design.
+ * - SPOILED: young, obscenely rich, bored. Sloppy fighters, terrible losers:
+ *   lose, tantrum, buy a bigger body, hire someone to bother you.
+ *
+ * Alien players are MEDDLERS, not contestants (Steve 2026-11-07: "more like
+ * adversarial villagers. Monsters with intelligence and personality,
+ * characters."). They rig outcomes and meddle, never fight IN a contest as
+ * opponents — no contest code builds an alien-player fighter. Wild fights
+ * follow the existing alien-player fight path; contests get interference
+ * only (apContestInterference: sadistic rigging, benevolent lifeline,
+ * meddler moves).
  *
  * Off-screen social layer: rivals remember you, allies leave dead drops,
  * the fan club's favor shapes care packages and contests, and the System
@@ -223,6 +245,50 @@
       return null;
     },
 
+    // Encounter/activation weight for one disposition — ALL SEVEN, explicit.
+    // (2026-11-07 alien expansion: the old ternary chains defaulted every
+    // new disposition to the benevolent weight silently. The numbers for the
+    // original three are unchanged: sadistic 4, neutral 4.5, benevolent 1.5.)
+    // Meddling shows up often (always fiddling); dutiful on schedule (3);
+    // raging hunts hard (4.5); spoiled when bored (3). Unknown dispositions
+    // take the benevolent weight deliberately, never by accident.
+    apDispositionWeight: function (disp) {
+      if (disp === 'sadistic') return 4;
+      if (disp === 'neutral') return 4.5;
+      if (disp === 'benevolent') return 1.5;
+      if (disp === 'meddling') return 4;
+      if (disp === 'dutiful') return 3;
+      if (disp === 'raging') return 4.5;
+      if (disp === 'spoiled') return 3;
+      return 1.5;
+    },
+
+    // Playground-activation weight — same shape, different scale from the
+    // encounter weight (sadistic 3 / neutral 2 / benevolent 1, unchanged).
+    // Meddling and raging go active eagerly (3); dutiful and spoiled on the
+    // neutral pace (2). One scale per site, never one helper quietly serving
+    // two different ratios.
+    apActivationWeight: function (disp) {
+      if (disp === 'sadistic') return 3;
+      if (disp === 'neutral') return 2;
+      if (disp === 'benevolent') return 1;
+      if (disp === 'meddling') return 3;
+      if (disp === 'dutiful') return 2;
+      if (disp === 'raging') return 3;
+      if (disp === 'spoiled') return 2;
+      return 1;
+    },
+
+    // Meddler moves: how this persona rigs/interferes WITHOUT fighting in a
+    // contest. Data lives in alienPlayers.json (`meddlerMoves`: [{id, name,
+    // lean, line}]); the interference path (apContestInterference) consumes
+    // them. Personas without the field meddle nothing — they are not forced
+    // into a move set they were never written with.
+    apMeddlerMoves: function (pid) {
+      var p = this.apPersona(pid);
+      return (p && Array.isArray(p.meddlerMoves)) ? p.meddlerMoves : [];
+    },
+
     // ---------- knowledge gating ----------
     apKnowsAlien: function (pid) {
       // KNOWLEDGE GATE (Steve 2026-10-07): delegates to the unified canShow.
@@ -289,7 +355,7 @@
       if (dueRival && Math.random() < 0.6) {
         chosen = dueRival;
       } else {
-        // Weighted by disposition: sadistic 40%, neutral 45%, benevolent (Tam) 15%
+        // Weighted by disposition — see apDispositionWeight (all seven, explicit)
         var pool = [];
         var personas = this.apPersonas();
         for (var i = 0; i < personas.length; i++) {
@@ -302,7 +368,7 @@
           // 2026-10-08: re-picked 400/400). Filter here too.
           if (day - (ap.lastHuntDay[cp.id] || -999) < 2) continue;
           if (this.apIsDead(cp.id)) continue; // corpses don't re-encounter (break-it r12)
-          var w = cp.disposition === 'sadistic' ? 4 : cp.disposition === 'neutral' ? 4.5 : 1.5;
+          var w = this.apDispositionWeight(cp.disposition);
           // Existing rivals are more likely to return
           if (ap.met[cp.id] && ap.met[cp.id].encounters > 0) w *= 2;
           // TRACKED (break-it 2026-10-08): the sadistic persona package sets
@@ -321,7 +387,7 @@
             var cp2 = personas[i2];
             if (!this.apIsCombat(cp2.id)) continue;
             if (this.apIsDead(cp2.id)) continue; // corpses don't re-encounter (break-it r12)
-            var w2 = cp2.disposition === 'sadistic' ? 4 : cp2.disposition === 'neutral' ? 4.5 : 1.5;
+            var w2 = this.apDispositionWeight(cp2.disposition);
             if (ap.met[cp2.id] && ap.met[cp2.id].encounters > 0) w2 *= 2;
             // TRACKED (break-it 2026-10-08): same tracker boost in the
             // fallback pool — they find you regardless of sporting filters.
@@ -429,6 +495,10 @@
       if (pid === 'pip_quindle') hp -= 20;
       // Old Tam holds back (deliberately)
       if (pid === 'old_tam') hp = Math.min(hp, 70);
+      // NEW (2026-11-07): Bibi is a sloppy fighter in a bought sleeve (-10);
+      // Howl fights wild and does not stop (+10). Quill and Kess fight at par.
+      if (pid === 'bibi') hp -= 10;
+      if (pid === 'howl') hp += 10;
 
       // PROGRESSION (Steve 2026-10-07): kit and tech grow with encounters.
       // Rich personas progress faster (they buy upgrades).
@@ -773,6 +843,7 @@
             'vex_marlowe': "Oh, you've made a MISTAKE. I'm buying a better body AFTER I kill you with this one.",
             'countess_sable': "You DARE? You dare HURT me? I'll preserve your SCREAMS.",
             'rax_dentist': "PAIN DATA SPIKE! This is INCREDIBLE! MORE!",
+            'bibi': "DADDY! Daddy, they HURT me! Buy me a BIGGER body! A BETTER one!",
           };
           var el = enrageLines[pid] || "You've made me angry. That was expensive.";
           this.say('🎭 ' + p.name + ': "' + el + '"');
@@ -784,6 +855,9 @@
             'sarge': "...Tactical withdrawal. Nothing personal.",
             'dr_fenwick': "The data suggests I should NOT be here anymore! Withdrawing!",
             'old_tam': "That's enough. I'm too old and too poor for this.",
+            'howl': "NO NO NO I can't— I can't afford— DON'T LOOK AT ME—",
+            'quill': "This is— this is NOT how the ledger balances! I'm filing a complaint! I'm LEAVING!",
+            'kess': "Warrant... suspended. Temporarily. I will return with the correct paperwork.",
           };
           var rl = retreatLines[pid] || "I can't afford to die here. Falling back!";
           this.say('🎭 ' + p.name + ': "' + rl + '"');
@@ -1625,6 +1699,41 @@
       }
       } // end SADISTIC RIGGING (verdict-only)
 
+      // MEDDLER MOVES (2026-11-07, alien expansion): personas with a
+      // `meddlerMoves` array in alienPlayers.json rig the contest their own
+      // way — never as fighters, only as interference. Verdict-only, like
+      // the sadistic rig: it never fires on the forPlayer killing-blow path
+      // (that path is the lifeline's alone), and it never stacks with a rig
+      // that already fired (result.note set) — one interference per contest.
+      // Max 1 meddle per 5 days (ap.lastMeddleDay), needs a real meeting
+      // (encounters >= 1); the dead meddle nothing (break-it r12). Each move
+      // carries its own lean (winMod delta, negative = against the player's
+      // side) and its own spoken line — the move IS the character. Draws use
+      // _apContestDraw (contest-seeded determinism), never Math.random.
+      if (!forPlayer && !result.note) {
+        for (var mpid in ap.met) {
+          var mper = this.apPersona(mpid);
+          var moves = this.apMeddlerMoves ? this.apMeddlerMoves(mpid) : [];
+          if (!mper || !moves.length) continue;
+          if (ap.met[mpid].encounters < 1) continue; // must have met you once
+          if (this.apIsDead(mpid)) continue; // the dead meddle nothing (break-it r12)
+          if (day - (ap.lastMeddleDay || -999) < 5) continue; // LIMIT: max 1 per 5 days
+          var mi = Math.floor(_apContestDraw(this, ac, 'meddle-pick:' + mpid) * moves.length);
+          var mv = moves[mi % moves.length];
+          if (_apContestDraw(this, ac, 'meddle:' + mpid + ':' + (mv.id || mi)) < 0.35) {
+            ap.lastMeddleDay = day;
+            result.winMod += (typeof mv.lean === 'number' ? mv.lean : -0.05);
+            // KNOWLEDGE GATE: the line itself names no one, but the speaker
+            // is the alien truth — pre-reveal it is "someone in the booth".
+            var _mknown = false;
+            try { _mknown = !!this.apKnowsAlien(mpid); } catch (e0m) {}
+            result.note = '📺 ' + (_mknown ? mper.name : 'Someone in the judging booth') + ': "' + (mv.line || 'Enjoy the show.') + '"';
+            this.say(result.note);
+            break;
+          }
+        }
+      }
+
       // BENEVOLENT LIFELINE: a bonded ally may save you from death.
       // HONEST (Steve 2026-10-08): the note promises "the killing blow
       // misses". The lifeline fires ONLY at the player's own death roll —
@@ -1738,6 +1847,51 @@
         this.state.scholar.kcal = Math.min(_cap, (this.state.scholar.kcal || 0) + kcal);
         this.recordHarvestIntake(this.captureIntakeEater(this.villagerId),[{kcal:kcal,nourishment:_nourish}],'alien-food');
       } catch (e) { console.warn('[food] alien meal failed',e); }
+        return true;
+      } else if (per.disposition === 'meddling') {
+        // MEDDLING (2026-11-07): Quill "re-files" your mail — a forged fan
+        // letter in your own handwriting, plus snacks that were re-filed
+        // from someone else's pantry. Small, real, and deeply annoying.
+        this.say('📦 A package arrives, wrapped in brown paper and string, labeled in triplicate. Inside: a fan letter. In YOUR handwriting. You did not write it.');
+        this.say('"Dear human, you are doing GREAT. Love, your biggest fan (you)." The snacks underneath are real, at least — re-filed from someone else\'s pantry, 100 kcal of them.');
+        try { var _cap2 = this.kcalCap ? this.kcalCap() : 2400;
+          var _nourish2=Math.max(0,Math.min(100,_cap2-(this.state.scholar.kcal || 0)));
+          this.state.scholar.kcal = Math.min(_cap2, (this.state.scholar.kcal || 0) + 100);
+          this.recordHarvestIntake(this.captureIntakeEater(this.villagerId),[{kcal:100,nourishment:_nourish2}],'alien-food');
+        } catch (e) { console.warn('[food] alien snack failed',e); }
+        return true;
+      } else if (per.disposition === 'dutiful') {
+        // DUTIFUL (2026-11-07): Kess sends procedure, not gifts. A warrant
+        // notice — no gift, no threat, just the sentence, in writing. The
+        // copy says so honestly: nothing was taken, nothing was given.
+        this.say('📦 A crisp envelope, delivered by hand, receipt requested. Inside: a single sheet of paper. No gift.');
+        this.say('"WARRANT SEVEN-ONE-NINE. This notice confirms that proceedings are underway. No action is required of you at this time. We apologize for the inconvenience. — K."');
+        return true;
+      } else if (per.disposition === 'raging') {
+        // RAGING (2026-11-07): Howl sends a smashed box and a scream. No
+        // gift — the gift IS the fear. Honest copy: nothing usable inside.
+        this.say('📦 A package arrives torn open, contents everywhere, the box itself screaming. Inside: nothing usable — just a note scrawled in something red:');
+        this.say('"I WAS HERE. I SAW YOU. LOOK AT ME NEXT TIME." You decide not to keep the box.');
+        return true;
+      } else if (per.disposition === 'spoiled') {
+        // SPOILED (2026-11-07): Bibi sends extravagance — rich snacks and a
+        // wacky curio, loudly, so everyone sees how generous Bibi is. The
+        // curio is real and usable (apWackyGift + apGrantItem, same rule as
+        // the care package); the snacks are 400 kcal of the expensive kind.
+        var _wg = null;
+        try { _wg = this.apWackyGift ? this.apWackyGift(1) : null; } catch (e) {}
+        this.say('📦 A package arrives wrapped in gold ribbon, far too big for what\'s inside. The card reads: "A gift! From ME! Everyone look how generous I am! — B."');
+        if (_wg) {
+          this.say('Inside: ' + (_wg.name || _wg.id) + (_wg.desc ? ' — ' + _wg.desc : '') + '. Plus 400 kcal of snacks that cost more than your house.');
+          try { this.apGrantItem(_wg.id); } catch (e) {}
+        } else {
+          this.say('Inside: 400 kcal of snacks that cost more than your house. The vault was shy about the curio.');
+        }
+        try { var _cap3 = this.kcalCap ? this.kcalCap() : 2400;
+          var _nourish3=Math.max(0,Math.min(400,_cap3-(this.state.scholar.kcal || 0)));
+          this.state.scholar.kcal = Math.min(_cap3, (this.state.scholar.kcal || 0) + 400);
+          this.recordHarvestIntake(this.captureIntakeEater(this.villagerId),[{kcal:400,nourishment:_nourish3}],'alien-food');
+        } catch (e) { console.warn('[food] alien snack failed',e); }
         return true;
       } else {
         // NEUTRAL: weird, enthusiastic, mostly harmless
@@ -2077,8 +2231,9 @@
         if (!this.apIsCombat(cp.id)) continue;
         if (active[cp.id]) continue;
         if (this.apIsDead(cp.id)) continue; // the dead don't enter (break-it r12)
-        // Weight: sadistic more likely to go active (they're here to play)
-        var w = cp.disposition === 'sadistic' ? 3 : cp.disposition === 'neutral' ? 2 : 1;
+        // Weight: sadistic more likely to go active (they're here to play) —
+        // see apActivationWeight (all seven, explicit)
+        var w = this.apActivationWeight(cp.disposition);
         candidates.push({ p: cp, w: w });
       }
       if (!candidates.length) return null;
@@ -2201,6 +2356,33 @@
         if (roll < 0.40 && isVeteran) return this.apPlaygroundRaid(pid); // opportunistic
         if (roll < 0.45 && !isVeteran) return this.apPlaygroundRookieMistake(pid); // Pip!
         return null; // neutral often just... watches
+      } else if (disp === 'meddling') {
+        // MEDDLING (2026-11-07): Quill never fights head-on — they re-file.
+        // A raid IS a pantry "re-filed" into the river (veteran: knows the
+        // mechanics). Otherwise Quill just... watches, and takes notes.
+        if (roll < 0.4 && isVeteran) return this.apPlaygroundRaid(pid);
+        return null; // taking notes
+      } else if (disp === 'dutiful') {
+        // DUTIFUL (2026-11-07): Kess serves warrants — a sentence carried
+        // out (rare villager kill), or a confiscation (raid). Mostly the
+        // Ledger is quiet, and so is Kess.
+        if (roll < 0.15) return this.apPlaygroundKill(pid, 'villager');
+        if (roll < 0.4 && isVeteran) return this.apPlaygroundRaid(pid);
+        return null; // awaiting orders
+      } else if (disp === 'raging') {
+        // RAGING (2026-11-07): Howl is erratic violence with no plan — kills
+        // whatever is nearest, villager or beast. No burning, no raiding:
+        // Howl doesn't plan far enough ahead for arson or theft.
+        if (roll < 0.3) return this.apPlaygroundKill(pid, 'villager');
+        if (roll < 0.5) return this.apPlaygroundKill(pid, 'monster');
+        if (roll < 0.65) return this.apPlaygroundKill(pid, 'animal');
+        return this.apPlaygroundKill(pid, 'monster'); // default: hunt
+      } else if (disp === 'spoiled') {
+        // SPOILED (2026-11-07): Bibi hires someone to bother you — a raid
+        // by Daddy's staff, who take the good stuff. Otherwise Bibi is
+        // bored, and bored Bibi just watches (or leaves).
+        if (roll < 0.25) return this.apPlaygroundRaid(pid);
+        return null; // bored, watching
       } else {
         // Benevolent: they don't kill. They help, they warn, they watch.
         // Old Tam might hunt monsters (he's atoning, not passive)
@@ -2637,7 +2819,46 @@
         return Math.random() < 0.3;
       }
 
+      // NEW DISPOSITIONS (2026-11-07, alien expansion): every pair involving
+      // meddling / dutiful / raging / spoiled gets an explicit rule here, so
+      // none of them silently inherits the sadistic+benevolent "never" below.
+      // Meddling works with anyone briefly (files their paperwork too);
+      // dutiful works with anyone procedural; raging aligns with almost no
+      // one; spoiled buys alignment where money works. Pairs not listed here
+      // (raging + neutral/benevolent/dutiful/spoiled, spoiled + raging) are
+      // never aligned — stated, not defaulted.
+      var _pair = function (a, b) { return (da === a && db === b) || (da === b && db === a); };
+      if (_pair('meddling', 'neutral') || _pair('meddling', 'sadistic') || _pair('meddling', 'dutiful') || _pair('meddling', 'spoiled')) {
+        return Math.random() < 0.4;
+      }
+      if (_pair('meddling', 'benevolent') || _pair('meddling', 'raging')) {
+        return Math.random() < 0.15;
+      }
+      if (_pair('dutiful', 'neutral') || _pair('dutiful', 'spoiled')) {
+        return Math.random() < 0.4;
+      }
+      if (_pair('dutiful', 'sadistic')) {
+        return Math.random() < 0.3;
+      }
+      if (_pair('dutiful', 'benevolent')) {
+        return Math.random() < 0.5;
+      }
+      if (_pair('raging', 'sadistic')) {
+        return Math.random() < 0.2;
+      }
+      if (_pair('spoiled', 'neutral')) {
+        return Math.random() < 0.5;
+      }
+      if (_pair('spoiled', 'sadistic')) {
+        return Math.random() < 0.4;
+      }
+      if (_pair('spoiled', 'benevolent')) {
+        return Math.random() < 0.1;
+      }
+
       // Sadistic + Benevolent: NEVER aligned. They're enemies.
+      // (Also: raging + neutral/benevolent/dutiful/spoiled, and spoiled +
+      // raging — never, per the explicit block above.)
       return false;
     },
 
@@ -3047,6 +3268,10 @@
           'pip_quindle': 'Pip\'s tourist zapper (it\'s set to "stun"! mostly)',
           'sarge': 'Sarge\'s service beam',
           'dr_fenwick': 'Fenwick\'s specimen beam',
+          'quill': 'Quill\'s ledger beam',
+          'kess': 'Kess\'s warrant beam',
+          'howl': 'Howl\'s raw beam',
+          'bibi': 'Bibi\'s daddy-bought beam',
         };
         // KNOWLEDGE GATE (break-it 2026-10-09): pre-reveal the fighter is a
         // "Stranger" (apBuildFighter's convention) — the old line named them
