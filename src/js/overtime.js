@@ -4,6 +4,7 @@
 // provides:
 //   - overtimeActive() -> bool: the clock is running (table set, announced, day 90+, seat not none, not seated)
 //   - overtimeTier() -> 0..maxTier
+//   - overtimeInterval() -> days per tier (7 base + the ladder stretch)
 //   - overtimeTick() -> daily: count unseated days, raise the tier aloud, check the key
 //   - overtimeStanding() -> {tier, losses, penalty} the seat-price cost
 //   - overtimeThirdTitan() -> the uncast apocalypse id once tier >= thirdTitanTier (titans.js reads it)
@@ -15,6 +16,7 @@
 //   - stops_when_seated: tableDone stops the clock; the tier never rises after the seat is taken (code: overtimeActive)
 //   - tier_is_monotonic: the tier never falls; a withdrawn seat pauses the clock, it does not reset it (code: overtimeTick)
 //   - zero_at_tier_zero: every knob is a no-op at tier 0, so runs that sit promptly play exactly as before (code: overtimeRaidKnobs)
+//   - ladder_stretches_interval: the tier interval is daysPerTier + 1 day per 4 counted ladder points (code: overtimeInterval); the stretch is named aloud on tier-up (code: overtimeTick)
 //   - reruns_not_titans: scaling skips titans, campaign nodes and anything below minWave (code: overtimeScaleFight)
 // consumes:
 //   - progState(), tableSeat(), winDayFloorOk(), titanCast(), sysSay, say, tele, recordMoment
@@ -52,6 +54,24 @@
     overtimeTier() {
       try { return Math.max(0, Math.min(num('maxTier', 6), this.progState().overtime | 0)); } catch (e) { return 0; }
     },
+    // overtimeInterval(): days per overtime tier (LADDER leg 3, brief §b.6,
+    // Q5 overtime only — no raid-cooldown stretch, no season-turn delay).
+    // The tier interval stretches with ladder points: +1 day per 4 counted
+    // ladder points, so a 12-point village waits ~10 days per tier and a
+    // 40-point village ~17. daysPerTier stays 7 in titans.json; the stretch
+    // is computed at runtime from the ladder's counted total. Fail-closed:
+    // no ladder (or a read error) means no stretch.
+    overtimeInterval() {
+      try {
+        const base = num('daysPerTier', 7);
+        let counted = 0;
+        try {
+          const L = (typeof this.villageLadder === 'function') ? this.villageLadder() : null;
+          counted = (L && (L.counted | 0)) || 0;
+        } catch (e) { counted = 0; }
+        return base + Math.floor(Math.max(0, counted) / 4);
+      } catch (e) { return num('daysPerTier', 7); }
+    },
     overtimeTick() {
       try {
         const pg = this.progState();
@@ -72,13 +92,19 @@
         const gone = prev.filter(id => now.indexOf(id) < 0).length;
         if (gone > 0) pg.overtimeLosses = (pg.overtimeLosses | 0) + gone;
         pg.overtimeRoster = now;
-        const want = Math.min(num('maxTier', 6), Math.floor(pg.overtimeDays / num('daysPerTier', 7)));
+        const interval = this.overtimeInterval();
+        const want = Math.min(num('maxTier', 6), Math.floor(pg.overtimeDays / interval));
         if (want > (pg.overtime | 0)) {
           pg.overtime = want;
           const lines = cfg().lines || [];
           try { this.sysSay(lines[want - 1] || ('OVERTIME ×' + want + '!')); } catch (e) { console.warn('overtime sysSay', e); }
           const st = this.overtimeStanding();
-          this.say(`◈ OVERTIME ×${want} — wave 4–5 monsters return as RERUNS (+${Math.round(num('hpPerTier', 0.25) * want * 100)}% HP, +${Math.round(num('dmgPerTier', 0.12) * want * 100)}% damage${Math.floor(want / num('packEveryTiers', 2)) ? `, +${Math.floor(want / num('packEveryTiers', 2))} to every pack` : ''}). Raids come sooner. The table docks your standing −${st.penalty}. Take your seat from Haven to stop the clock.`);
+          // LADDER (leg 3, brief §b.6): the stretch is named aloud — the
+          // player hears that the village's standing buys time.
+          const stretch = interval > num('daysPerTier', 7)
+            ? ` The wait stretches — the village's standing buys time: ${interval} days between tiers, not ${num('daysPerTier', 7)}.`
+            : '';
+          this.say(`◈ OVERTIME ×${want} — wave 4–5 monsters return as RERUNS (+${Math.round(num('hpPerTier', 0.25) * want * 100)}% HP, +${Math.round(num('dmgPerTier', 0.12) * want * 100)}% damage${Math.floor(want / num('packEveryTiers', 2)) ? `, +${Math.floor(want / num('packEveryTiers', 2))} to every pack` : ''}). Raids come sooner. The table docks your standing −${st.penalty}. Take your seat from Haven to stop the clock.${stretch}`);
           try { this.tele('overtime_tier', { tier: want }); } catch (e) { console.warn('overtime tele', e); }
           try { if (this.recordMoment) this.recordMoment(`Overtime ×${want}: the table waited, and the season kept going.`); } catch (e) { console.warn('overtime moment', e); }
         }
