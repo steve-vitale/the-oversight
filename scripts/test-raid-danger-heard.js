@@ -131,6 +131,52 @@ function setObjective(Game, vid, hx, hy) {
       check('unhearing: rally false', muteRally === false);
       check('unhearing: village danger ignores raid', muteVillage === (Game.state.weather === 'rain' ? 1 : 0),
         'vd=' + muteVillage);
+
+      // FAILING CONTROL: strip the heard filter. An unhearing villager must
+      // then react to the same raid — if this contrast ever stops flipping,
+      // the production filter is gone or no longer load-bearing.
+      const realBelief = Game.objDangerBelief.bind(Game);
+      Game.objDangerBelief = function (vid) {
+        var score = 0, threat = false, freshRaid = false;
+        var dayNow = 0;
+        try { dayNow = this.state.scholar.day; } catch (e) {}
+        try {
+          var g = (this.state.village.gossip || []);
+          for (var i = 0; i < g.length; i++) {
+            var entry = g[i];
+            if (dayNow - (entry.day || 0) > 3) continue;
+            var a = entry.action;
+            if (a === 'attack' || a === 'murder' || a === 'raid') {
+              score += 2; threat = true;
+              if (a === 'raid') freshRaid = true;
+            } else if (a === 'death') {
+              score += 1;
+            }
+          }
+          if (score > 4) score = 4;
+        } catch (e) {}
+        return { score: score, threat: threat, freshRaid: freshRaid };
+      };
+      try {
+        const bareBelief = Game.objDangerBelief(other);
+        const bareDoor = Game.objDanger(other, hx + 1, hy, hx, hy);
+        const bareSafe = Game.vgoalGate(other, 'safety');
+        const bareRally = Game.objRallyFreshRaid(other);
+        check('control (filter removed): unhearing belief sees raid',
+          !!(bareBelief.threat && bareBelief.freshRaid && bareBelief.score >= 2),
+          JSON.stringify(bareBelief));
+        check('control (filter removed): unhearing door heats',
+          bareDoor.score === muteBaseDoor.score + 2,
+          'bare=' + bareDoor.score + ' base=' + muteBaseDoor.score);
+        check('control (filter removed): unhearing safety 1', bareSafe === 1, 'gate=' + bareSafe);
+        check('control (filter removed): unhearing rally true', bareRally === true);
+      } finally {
+        Game.objDangerBelief = realBelief;
+      }
+      // Restored filter still protects the unhearing villager.
+      check('control restored: unhearing belief ignores raid again',
+        Game.objDangerBelief(other).score === 0 && !Game.objDangerBelief(other).threat,
+        JSON.stringify(Game.objDangerBelief(other)));
     }
   }
 

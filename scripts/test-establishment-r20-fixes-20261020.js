@@ -24,6 +24,9 @@ const cp = require('child_process');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
+// R20 proved gate B (once per cook-day). Muse later landed reminder rule R as
+// the default; RACKSVOICE_REMINDER=0 restores gate B for this regression only.
+process.env.RACKSVOICE_REMINDER = '0';
 const NEW_GAME = fs.readFileSync(path.join(ROOT, 'src/js/game.js'), 'utf8');
 // Keep the original RED assertions against the actual pre-fix source. A
 // moving merge-base includes the fix after landing and reverses the fixture.
