@@ -1243,10 +1243,13 @@
       if (skill > 0 && xp >= 5) skill = Math.min(3, skill + 1);
       // SELF-TAUGHT LADDER (establishment r112 2026-11-07, ROLE PATHS:
       // skill builds from zero): no occupation skill yet? Doing the work
-      // teaches it — 10 XP buys skill 1, +1 per further 5 XP (15 -> 2,
-      // 20 -> 3, cap 3). The old-life grounding still matters: holders
-      // reach their +1 at 5 XP; the self-taught pay double for the first rung.
-      else if (skill === 0 && xp >= 10) skill = Math.min(3, 1 + Math.floor((xp - 10) / 5));
+      // teaches it — 5 XP buys skill 1, +1 per further 5 XP (10 -> 2,
+      // 15 -> 3, cap 3). (r113 2026-11-07: the first rung was 10 XP and
+      // the pace missed the bar — 28 cells sat at 1-9 XP after 42 days.
+      // The self-taught now pay the SAME first rung as holders, not
+      // double; the panel measures whether the pace lands without every
+      // cook becoming a master preserver.)
+      else if (skill === 0 && xp >= 5) skill = Math.min(3, 1 + Math.floor((xp - 5) / 5));
       return skill;
     },
 
