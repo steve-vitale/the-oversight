@@ -291,9 +291,9 @@
         if (r.ok === false) throw new Error('Data load failed: ' + f + ' (' + r.status + ')');
         return r.json();
       });
-      const [plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godpaths, tracks, rewardEconomy, gardening, favorRules] = await Promise.all(
-        ['plants.json', 'biomes.json', 'monsters.json', 'villagers.json', 'abilities.json', 'items.json', 'background_survivors.json', 'cell_defs.json', 'animals.json', 'recipes.json', 'books.json', 'relicEnhancements.json', 'locations.json', 'characterGen.json', 'synergies.json', 'knowledge.json', 'nameCultures.json', 'originPicker.json', 'foreignSpeech.json', 'lifeseeds.json', 'arrivalText.json', 'justiceVoice.json', 'alienPlayers.json', 'regions.json', 'monsterBehaviors.json', 'contests.json', 'events.json', 'statusEffects.json', 'cooking.json', 'build-notes.json', 'wave-ledger.json', 'feast-surge.json', 'evolutions.json', 'titans.json', 'godpaths.json', 'tracks.json', 'reward-economy.json', 'gardening.json', 'favor-rules.json'].map(get));
-      this.data = { plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godpaths, tracks, rewardEconomy, gardening, favorRules };
+      const [plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godpaths, tracks, rewardEconomy, gardening, favorRules, ladderCapstones] = await Promise.all(
+        ['plants.json', 'biomes.json', 'monsters.json', 'villagers.json', 'abilities.json', 'items.json', 'background_survivors.json', 'cell_defs.json', 'animals.json', 'recipes.json', 'books.json', 'relicEnhancements.json', 'locations.json', 'characterGen.json', 'synergies.json', 'knowledge.json', 'nameCultures.json', 'originPicker.json', 'foreignSpeech.json', 'lifeseeds.json', 'arrivalText.json', 'justiceVoice.json', 'alienPlayers.json', 'regions.json', 'monsterBehaviors.json', 'contests.json', 'events.json', 'statusEffects.json', 'cooking.json', 'build-notes.json', 'wave-ledger.json', 'feast-surge.json', 'evolutions.json', 'titans.json', 'godpaths.json', 'tracks.json', 'reward-economy.json', 'gardening.json', 'favor-rules.json', 'ladder-capstones.json'].map(get));
+      this.data = { plants, biomes, monsters, villagers, abilities, items, background_survivors, cellDefs, animals, recipes, books, relicEnhancements, locations, characterGen, synergies, knowledge, nameCultures, originPicker, foreignSpeech, lifeseeds, arrivalText, justiceVoice, alienPlayers, regions, monsterBehaviors, contests, events, statusEffects, cooking, buildNotes, waveLedger, feastSurge, evolutions, titans, godpaths, tracks, rewardEconomy, gardening, favorRules, ladderCapstones };
       // GOD-PATH REDESIGN (2026-10-14): godpaths.json is THE god layer;
       // godhood.js derives its capstones from it (godhood.json retired).
       // REGIONS: climate calendars (world.js regionCalendar). Loaded on its
@@ -31713,6 +31713,130 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // Cost: 400 kcal x heads (min 1,500), drawn as REAL pantry items via
     // pantryDraw — the pantry gets lighter, honestly. 1/day, at the haven,
     // costs an evening (48 ticks). Every refusal says why (no silent actions).
+    //
+    // ============ THE FEAST BUNDLE (Standing ladder leg 2, brief §b.5) ============
+    // The feast stops being a recipe and becomes a bundle: 6 slots, 12
+    // things that could fill them, any mixture counts. Each contribution
+    // below resolves to a real item id, a real food state, or a real
+    // deed/state read (Q9 — verified by grep at build time; see the leg-2
+    // prereg for the resolutions and the two swaps: no trade provenance
+    // exists on pantry items, so 'traded delicacy' became monster meat;
+    // no song exists anywhere, so 'a talker's song' became the guest of
+    // honor). One served item fills at most ONE slot (first match wins,
+    // specific-before-general); the three state-fact contributions fill
+    // their own slots independently. Any 6 distinct contributions complete
+    // the bundle. The pantry cost stays real: the bundle is computed from
+    // what the feast actually SERVED (the pantryDraw items), never from a
+    // wish list.
+    // feastBundleDefs(): the 12 contribution definitions. Each has an id,
+    // a label, a `resolves` grounding note, and a `test(item)` — item is a
+    // served pantry item (foodKind/foodState/plantId/itemId/name/
+    // gardenShares). The three state-fact definitions carry test: null
+    // and are checked by key in feastBundleCheck.
+    feastBundleDefs() {
+      const plants = (this.data && this.data.plants) || [];
+      const plantIds = {};
+      const rareIds = {};
+      const medIds = {};
+      for (const p of plants) {
+        if (!p || !p.id) continue;
+        plantIds[p.id] = true;
+        if ((p.idDifficulty | 0) >= 4) rareIds[p.id] = true;
+        if (p.medicinal) medIds[p.id] = true;
+      }
+      const monsters = (this.data && this.data.monsters) || [];
+      const monsterIds = {};
+      for (const m of monsters) if (m && m.id) monsterIds[m.id] = true;
+      const animals = (this.data && this.data.animals) || [];
+      const animalIds = {};
+      for (const a of animals) if (a && a.id) animalIds[a.id] = true;
+      const meatKind = (it) => String((it && (it.plantId || '')) || '').replace(/^meat_/, '');
+      const isMeat = (it) => it && it.foodKind === 'meat';
+      return [
+        { id: 'pemmican', label: 'crafted centrepiece', resolves: "itemId 'pemmican' (food.js, crafted from dried/smoked meat + rendered fat + berries)", test: (it) => (it && it.itemId) === 'pemmican' },
+        { id: 'monster_meat', label: 'monster meat, tested and cooked', resolves: "plantId 'meat_<monster id>' for a real monster id (game.js monster-meat servings)", test: (it) => isMeat(it) && !!monsterIds[meatKind(it)] },
+        { id: 'hunted_meat', label: 'hunted meat', resolves: "plantId 'meat_<animal id>' (foodCarcass, food.js), uncooked", test: (it) => isMeat(it) && !!animalIds[meatKind(it)] && /^(carcass|cleaned|raw)$/.test(String(it.foodState || '')) },
+        { id: 'cooked_meat', label: 'cooked meat', resolves: "foodKind 'meat' + cooked/smoked/roasted/dried state (the quality formula's own centrepiece check)", test: (it) => isMeat(it) && /cook|smok|roast|dri/i.test(String(it.foodState || '')) },
+        { id: 'preserved_food', label: 'preserved food', resolves: "foodState 'preserved' (smoked, food.js) or 'rendered' (food.js preservation ladder)", test: (it) => /^(preserved|rendered)$/.test(String((it && it.foodState) || '')) },
+        { id: 'garden_harvest', label: 'garden harvest', resolves: "non-empty gardenShares on the pantry item (food.js blendGardenShares; gardening.json crops)", test: (it) => { try { const g = it && it.gardenShares; return !!g && Object.keys(g).some(k => (g[k] || 0) > 0); } catch (e) { return false; } } },
+        { id: 'medicine_brewed', label: 'medicine brewed', resolves: "medicinal:true plant (34 in plants.json) served cooked — brewed (game.js bitter-tea brew)", test: (it) => it && !!medIds[it.plantId] && String(it.foodState || '') === 'cooked' },
+        { id: 'explorers_rare', label: "an explorer's rare ingredient", resolves: "plant with idDifficulty 4 (8 real ids in plants.json)", test: (it) => it && !!rareIds[it.plantId] },
+        { id: 'foraged_feast', label: 'foraged feast', resolves: "plant/nut with plantId in plants.json (187 real plant ids)", test: (it) => it && (it.foodKind === 'plant' || it.foodKind === 'nut') && !!plantIds[it.plantId] },
+        { id: 'guest_of_honor', label: 'a guest of honor', resolves: "the feast's star guest (highest-trust showed villager) — hostFeast's own star computation", test: null },
+        { id: 'kept_recipe', label: 'a kept recipe', resolves: "state.codex.recipes holds a recipe at level >= 1 (36 real recipe ids in recipes.json)", test: null },
+        { id: 'keepsake_channel', label: 'a donated keepsake-channel', resolves: "a keepsake channel is armed at feast time (s.prog.feastSurge, progression.js arming)", test: null },
+      ];
+    },
+    // feastBundleCheck(servedItems, ctx): the bundle sheet for a feast.
+    // servedItems are the SERVED pantry items (the pantryDraw items — full
+    // objects, not the served summary). ctx: { star: bool (the guest of
+    // honor showed), surge: bool (a keepsake channel is armed) }.
+    // Returns { contributions: [ids...], count, complete, slots: {id: label} }.
+    // PURE except for the codex.recipes read (a state fact). One served item
+    // fills at most one slot; the state facts fill theirs independently.
+    feastBundleCheck(servedItems, ctx) {
+      try {
+        const defs = this.feastBundleDefs();
+        const byId = {};
+        for (const d of defs) byId[d.id] = d;
+        const filled = {};
+        const items = Array.isArray(servedItems) ? servedItems : [];
+        for (const it of items) {
+          if (!it) continue;
+          for (const d of defs) {
+            if (filled[d.id] || typeof d.test !== 'function') continue;
+            let hit = false;
+            try { hit = !!d.test(it); } catch (e) { hit = false; }
+            if (hit) { filled[d.id] = d.label; break; }
+          }
+        }
+        const c = ctx || {};
+        // State-fact slots (not served items — no pantry draw behind them).
+        if (c.star) filled.guest_of_honor = byId.guest_of_honor.label;
+        try {
+          const recipes = ((this.state || {}).codex || {}).recipes || {};
+          if (Object.keys(recipes).some(id => ((recipes[id] || {}).level | 0) >= 1)) filled.kept_recipe = byId.kept_recipe.label;
+        } catch (e) {}
+        if (c.surge) filled.keepsake_channel = byId.keepsake_channel.label;
+        const contributions = Object.keys(filled);
+        return { contributions, count: contributions.length, complete: contributions.length >= 6, slots: filled };
+      } catch (e) { return { contributions: [], count: 0, complete: false, slots: {} }; }
+    },
+    // feastBundleBuyOut(): the Joja path (leg 2, brief §b.5). Pay 8000 kcal
+    // straight from the pantry — no feast held, no guests needed — and the
+    // bundle counts as complete (grants the +4, once-per-stage rule
+    // applies). The payment is a REAL pantryDraw, like a feast's cost; the
+    // record is a feast-log entry with bundle:true + bundleStage (quality 0,
+    // so Standing's bread source — which counts quality >= 1 — never mints
+    // from a buy-out). Refuses honestly when the pantry is short, when
+    // this stage already banked its bundle bonus, when exiled, away from
+    // Haven, or over. Returns { ok, why?, spent?, bundleStage?, ... }.
+    // Leg 3 wires the Haven button to this (app.js panelHaven).
+    feastBundleBuyOut() { // wired-exempt: leg-3 Haven entry point (app.js panelHaven calls it; the buy-out button lives there)
+      try {
+        const s = this.state.scholar, v = this.state.village;
+        if (this.over) return { ok: false, why: 'The game is over.' };
+        if (s.exiled) return { ok: false, why: 'Exile means exile. The fire isn\'t yours to open.' };
+        if (!this.playerAtHaven || !this.playerAtHaven()) return { ok: false, why: 'You need to be at the haven to buy the bundle.' };
+        const stage = (typeof this.ladderStage === 'function') ? (this.ladderStage() | 0) : 0;
+        const log = (this.state.feastLog = this.state.feastLog || []);
+        if (log.some(f => f && f.bundle === true && ((f.bundleStage | 0) || 0) === stage)) {
+          return { ok: false, why: 'This stage already banked its feast-bundle bonus — the next stage earns a new one.' };
+        }
+        const COST = 8000;
+        let have = 0;
+        try { have = this.pantryKcalLive ? this.pantryKcalLive(v) : 0; } catch (e) {}
+        if (have < COST) return { ok: false, why: `The pantry holds about ${Math.round(have).toLocaleString()} kcal — buying the bundle costs ${COST.toLocaleString()}. Not today.` };
+        const drawn = this.pantryDraw(v, COST, {});
+        const spent = Math.round(drawn.taken || 0);
+        const day = s.day || 1;
+        log.push({ day, quality: 0, bundle: true, bundleStage: stage, buyout: true });
+        if (log.length > 60) log.splice(0, log.length - 60);
+        this.say(`🍖 THE BUNDLE — no feast tonight, no guests: ${spent.toLocaleString()} kcal of pantry stores bought the bundle outright. Six different gifts, paid for in food. The ladder counts it.`);
+        try { this.save(); } catch (e) {}
+        return { ok: true, why: 'The bundle is bought.', spent, bundleStage: stage, cost: COST, day };
+      } catch (e) { return { ok: false, why: 'The buy-out could not be completed.' }; }
+    },
     feastPlan(heads) {
       const s = this.state.scholar, v = this.state.village;
       const plan = { ok: false, why: '', cost: 0, have: 0, guests: [], away: [], menu: [], armed: false, day: s.day || 1, daypart: this.dayPart || 0 };
@@ -31768,6 +31892,26 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           itemId: fid(e.item || {}),
         }));
         plan.menuShort = !!drawn.shortOfFresh;
+        // BUNDLE PREVIEW (ladder leg 2, brief §b.5): the same sheet from
+        // the preview draw — what the table WOULD hold. The guest of honor
+        // is the highest-trust invitable guest (expected, not shown — the
+        // sick may stay in their tents); the final sheet in hostFeast uses
+        // the real showed star.
+        try {
+          let starExpected = false;
+          try {
+            let best = -Infinity;
+            for (const g of plan.guests) {
+              if (g.status === 'hostile') continue;
+              const t = tOf(g.vid);
+              if (t > best) best = t;
+            }
+            starExpected = best > -Infinity;
+          } catch (e2) { starExpected = false; }
+          plan.bundle = Object.assign(
+            this.feastBundleCheck((drawn.items || []).map(e => e.item || {}), { star: starExpected, surge: !!plan.armed }),
+            { preview: true });
+        } catch (e2) { plan.bundle = { contributions: [], count: 0, complete: false, slots: {}, preview: true }; }
       } catch (e) { plan.menu = []; }
       return plan;
     },
@@ -32048,10 +32192,33 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // source of Standing reads state.feastLog — bounded, village-level, no
       // parallel tracking. quality>=1 (fine or legendary) counts as major; a
       // thin quiet meal (0) does not.
+      // BUNDLE (ladder leg 2, brief §b.5): the sheet from what was
+      // actually SERVED. Six distinct contributions complete the bundle:
+      // the log entry gains bundle:true + bundleStage (the live ladder
+      // stage — the +4 bonus is once per stage, read by villageLadder),
+      // and the village hears it. The quality formula, the buff, and the
+      // Standing bread read are untouched (a bundle feast is still a
+      // feast; the entry's quality is what Standing counts).
+      let bundle = null;
       try {
         this.state.feastLog = this.state.feastLog || [];
-        this.state.feastLog.push({ day, quality: qualityGated | 0 });
+        const servedItems = (drawn.items || []).map(e => e.item || {});
+        bundle = this.feastBundleCheck(servedItems, { star: !!star, surge: (surgeSpent || 0) > 0 });
+        const entry = { day, quality: qualityGated | 0 };
+        if (bundle && bundle.complete) {
+          const bstage = (typeof this.ladderStage === 'function') ? (this.ladderStage() | 0) : 0;
+          entry.bundle = true;
+          entry.bundleStage = bstage;
+          entry.bundleContributions = bundle.contributions.slice();
+        }
+        this.state.feastLog.push(entry);
         if (this.state.feastLog.length > 60) this.state.feastLog.splice(0, this.state.feastLog.length - 60);
+        if (bundle && bundle.complete) {
+          const already = (this.state.feastLog || []).some(f => f !== entry && f && f.bundle === true && ((f.bundleStage | 0) || 0) === entry.bundleStage);
+          const servedWords = Object.values(bundle.slots || {}).join(', ');
+          if (already) this.say(`🍖 THE BUNDLE — six different gifts on one table (${servedWords}). The deed stands — but this stage already banked its bundle bonus, so the climb counts it once.`);
+          else this.say(`🍖 THE BUNDLE — six different gifts on one table (${servedWords}). The village did not just eat — it showed what it can do. (+4 ladder points to the climb.)`);
+        }
       } catch (e) {}
       // UNLOCK BEAT: STANDING PATH — BREAD (sim-unlockbeat 2026-10-15): the
       // feast's +20 plenty can cross the wave gates with no kill ever firing
@@ -32070,6 +32237,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return {
         ok: true, why: 'The feast is held.', quality: qualityGated, qualityName: qualityNames[qualityGated],
         spent, served, servedList, showed, skipped, invited, star, surgeSpent, // surgeSpent: armed devotion CARRIED by the feast (not spent at feast time)
+        bundle, // LADDER leg 2: the bundle sheet ({contributions, count, complete, slots}) — null only if the sheet itself errored
         televised, beats: beatLines, buffGranted, daypart: this.dayPart || 0,
         // LONGSIM WINPATH R4: the grant's draw rides along — a fresh armed
         // grant leaves a beast circling (monsterId) or null. The feast
