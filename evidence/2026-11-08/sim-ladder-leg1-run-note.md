@@ -338,6 +338,15 @@ offline asset list; no version bump, no hand edit).
   `scripts/policies/competent-trialcombat-b.js`), so the branch is
   rebased onto `7afad4702` and the neutral panel is re-run once more
   after the rebase (cheap, ~2.5 min) before the final gate + merge.
+- **Second rebase + panel (2026-11-08 ~09:15Z):** rebase onto
+  `7afad4702` clean, all 6 picks, no conflicts. Fresh neutral panel
+  on the new base (same shape, 4 cases, 0 cached): sourcesStable
+  true, neutrality match on all 4 policies, 0 warnings; both
+  measurement tests green standalone again (9/9 each); ladder proofs
+  re-run green on the final tree (cap 25/25, minting 34/34).
+  `check-wired.js` 0 unwired and `validate-ontology.js` 135/135 were
+  re-verified on the `1cac498d5` base; the `7afad4702` rebase touches
+  no ladder file, and the final quick gate below is the last word.
 
 ## Adoption by attempt #2 (2026-11-08 ~07:30Z — recovery, not a rebuild)
 
