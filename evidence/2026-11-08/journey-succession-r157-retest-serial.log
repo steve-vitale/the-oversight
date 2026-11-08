@@ -1,0 +1,267 @@
+=== scripts/godpath/test-measurement-proof-update.js ===
+/home/hatch/workspace/worktrees/journey2-succession/scripts/balance-proof-update.js:8
+ if(JSON.stringify(B.manifest(root))!==JSON.stringify(panel.sources))throw Error('Proof source inputs are not current');
+                                                                     ^
+
+Error: Proof source inputs are not current
+    at Object.validate (/home/hatch/workspace/worktrees/journey2-succession/scripts/balance-proof-update.js:8:76)
+    at Object.<anonymous> (/home/hatch/workspace/worktrees/journey2-succession/scripts/godpath/test-measurement-proof-update.js:4:40)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+
+Node.js v24.22.1
+EXIT=1 :: scripts/godpath/test-measurement-proof-update.js
+=== scripts/godpath/test-measurement-workflow.js ===
+  ok   metric IDs are unique and every contract declares units, direction and tolerance
+  ok   sampling and confirmation settings remain valid
+  ok   retained real panel matches its proof digest
+  FAIL retained neutrality proof covers the current Game/controller/harness inputs
+  ok   proof declares every collector and contract input rather than silently omitting one
+  ok   collector and contract have a current proof (see SIMULATING.md: Maintaining measurement)
+  ok   every retained real observation emits exactly the contracted metrics, with explicit unknowns
+  ok   all retained policy cohorts have passing sampled observer neutrality and stable sources
+  ok   retained NPC proof has eligible actor/day evidence and a reproducible class denominator
+
+measurement-workflow: 8 passed, 1 failed, 0 todo (phase 0)
+failing: retained neutrality proof covers the current Game/controller/harness inputs
+EXIT=1 :: scripts/godpath/test-measurement-workflow.js
+=== scripts/godpath/test-mobile-combat-cadence.js ===
+  ok   Wait accepts zero movement with unused action
+  FAIL enemy is announced before its action runs
+  ok   announcement leaves a real browser task before resolution
+  ok   exactly one enemy action resolves before hand-back
+  ok   resolved board gets its own presentation event
+  ok   player returns with usable action and fresh movement
+  ok   hand-back follows resolution
+  ok   superseded announcement cannot perform a stale enemy action
+  ok   save retains the announced but unresolved actor
+  ok   Continue resolves the pending enemy exactly once
+  FAIL Continue does not wrap the announced round a second time
+  ok   Continue hands control back with fresh player inputs
+  ok   enemy-phase endings publish the terminal state to the browser
+  ok   faster opening enemy is announced before acting
+  ok   each faster opening enemy acts once before usable player controls
+
+mobile combat cadence: 13 passed, 2 failed, 0 todo (phase 0)
+failing: enemy is announced before its action runs | Continue does not wrap the announced round a second time
+EXIT=1 :: scripts/godpath/test-mobile-combat-cadence.js
+=== scripts/godpath/test-occupation-panels.js ===
+Error: node:internal/modules/cjs/loader:1568
+  throw err;
+  ^
+
+Error: Cannot find module './lib/luck-instrument'
+Require stack:
+- /tmp/oversight-cohort-h0crNT/observer/scripts/balance-panel.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1564:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1118:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1142:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1169:12)
+    at Module._load (node:internal/modules/cjs/loader:1341:5)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.require (node:internal/modules/cjs/loader:1674:12)
+    at require (node:internal/modules/helpers:157:16)
+    at Object.<anonymous> (/tmp/oversight-cohort-h0crNT/observer/scripts/balance-panel.js:5:140)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [ '/tmp/oversight-cohort-h0crNT/observer/scripts/balance-panel.js' ]
+}
+
+Node.js v24.22.1
+
+    at run (/home/hatch/workspace/worktrees/journey2-succession/scripts/godpath/test-occupation-panels.js:15:25)
+    at Object.<anonymous> (/home/hatch/workspace/worktrees/journey2-succession/scripts/godpath/test-occupation-panels.js:17:14)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+  FAIL real CLI workflow completed
+
+occupation panels: 0 passed, 1 failed, 0 todo (phase 0)
+failing: real CLI workflow completed
+EXIT=1 :: scripts/godpath/test-occupation-panels.js
+=== scripts/godpath/test-measurement-cache-flags.js ===
+  FAIL both actual CLI configurations complete valid neutral panels
+  FAIL two flags create four independent observer-on/off cache entries
+  FAIL cache identities retain each actual SIMOPT value
+  ok   repeating the same setting reuses its two verified cases
+
+measurement cache flag isolation: 1 passed, 3 failed, 0 todo (phase 0)
+failing: both actual CLI configurations complete valid neutral panels | two flags create four independent observer-on/off cache entries | cache identities retain each actual SIMOPT value
+EXIT=1 :: scripts/godpath/test-measurement-cache-flags.js
+=== scripts/godpath/test-phone-frame-proof.js ===
+  ok   both actual target phone sizes are retained
+  FAIL every retained browser input matches current source — index.html,src/css/main.css,src/data/alienPlayers.json,src/data/arrivalText.json,src/data/characterGen.json,src/data/items.json,src/data/monsters.json,src/data/regions.json,src/data/reward-economy.json,src/data/synergies.json,src/data/tracks.json,src/js/abilityActions.js,src/js/alienPlayers.js,src/js/app.js,src/js/betrayal.js,src/js/build.js,src/js/carexplore.js,src/js/codex-people.js,src/js/comms.js,src/js/contestEngine.js,src/js/contests.js,src/js/conversation.js,src/js/convo-beats.js,src/js/convo-dialogue.js,src/js/convo-mood.js,src/js/convo-wants.js,src/js/convoTopics.js,src/js/corpses.js,src/js/corruption.js,src/js/encounters.js,src/js/engine/combat.js,src/js/engine/state.js,src/js/equipment.js,src/js/exposure.js,src/js/feastBuff.js,src/js/fieldFights.js,src/js/finale-campaign.js,src/js/food.js,src/js/game.js,src/js/godpath.js,src/js/havenGrowth.js,src/js/hierarchy.js,src/js/journal.js,src/js/justice.js,src/js/ledger.js,src/js/lifeseed.js,src/js/membership.js,src/js/metaProgression.js,src/js/nomad-drive.js,src/js/nomad-scenes.js,src/js/nomad.js,src/js/party-formal.js,src/js/party.js,src/js/perceive.js,src/js/progression.js,src/js/safetynets.js,src/js/scaleDiscovery.js,src/js/sigW4.js,src/js/sigW5.js,src/js/skill-teaching.js,src/js/spawn-knack.js,src/js/standing.js,src/js/statusEffects.js,src/js/storage.js,src/js/table-feared.js,src/js/table-witness.js,src/js/table.js,src/js/telemetry-hooks.js,src/js/titans.js,src/js/tracks.js,src/js/truth.js,src/js/villageAgency.js,src/js/villager-agency.js,src/js/villager-build.js,src/js/villager-mapmem.js,src/js/villager-objectives.js,src/js/world.js
+  FAIL all current boot inputs are covered
+  ok   receipt identity declares portable text normalization
+  ok   retained receipt hash 736
+  FAIL current phone evidence is required; follow MOBILE-PLAYTEST.md — Phone receipt source is stale or missing: index.html
+
+Phone frame proof: 3 passed, 3 failed, 0 todo (phase 0)
+failing: every retained browser input matches current source | all current boot inputs are covered | current phone evidence is required; follow MOBILE-PLAYTEST.md
+EXIT=1 :: scripts/godpath/test-phone-frame-proof.js
+=== scripts/godpath/test-solo-campaign-endings.js ===
+  ok   a recovered community retains the previously established loss
+  ok   unknown population reads cannot become measured survival
+  ok   actual engine community loss survives unknown observation coverage
+  ok   a malformed or missing current history is an observer error
+  ok   old village-dead records retain explicit historical-rule coverage
+  ok   the living solo bearer continues beyond the former ten-iteration cutoff
+  ok   the longer solo observation remains active at its explicit cap
+  ok   sustained empty-community history remains distinct from an active game
+  ok   a controlled roster-recovery fixture preserves collapse history
+  ok   a real death path without successors stops immediately at an engine ending
+  ok   real runner rows forward current stop/history and collector coverage
+  ok   passive observation preserves complete solo state, outcome and all23
+  ok   the exact solo policy/RNG/clock prefix and full cap boundary continue
+  ok   retained prefix state payloads reproduce their producer hashes
+  ok   diagnostic snapshots neither hydrate people nor initialize agency
+
+Solo campaign endings: 15 passed, 0 failed, 0 todo (phase 0)
+EXIT=0 :: scripts/godpath/test-solo-campaign-endings.js
+=== scripts/godpath/test-trust-observer-neutrality.js ===
+  ok   seed 11 actual full state and outcome stay exact
+  ok   seed 11 random continuation stays exact
+  ok   seed 11 samples retain monotonic exact write boundaries
+Error
+    at /home/hatch/workspace/worktrees/journey2-succession/scripts/godpath/test-trust-observer-neutrality.js:16:265
+    at Array.map (<anonymous>)
+    at /home/hatch/workspace/worktrees/journey2-succession/scripts/godpath/test-trust-observer-neutrality.js:16:27
+    at Object.<anonymous> (/home/hatch/workspace/worktrees/journey2-succession/scripts/godpath/test-trust-observer-neutrality.js:22:3)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+EXIT=1 :: scripts/godpath/test-trust-observer-neutrality.js
+=== scripts/test-synergy-stall.js ===
+=== abilities held ===
+  green_whisper L3
+  beard_moss L1
+  mending_hands L1
+  lucky_rock L1
+=== synergyAttempts ===
+{
+ "surgeons_calm": 1,
+ "surgeons_calm_teased_1": 1,
+ "apex_sense": 3,
+ "apex_sense_teased_1": 1,
+ "blood_tracker": 3,
+ "blood_tracker_teased_1": 1,
+ "apex_sense_teased_2": 1,
+ "blood_tracker_teased_2": 1,
+ "clean_kill": 3,
+ "clean_kill_teased_1": 1,
+ "clean_kill_teased_2": 1
+}
+=== synergies discovered === ["apex_sense","blood_tracker","clean_kill"]
+=== abilityUseLog tail (last 15) ===
+  game_sense day90 part3 
+  patient_aim day90 part3 
+  green_whisper day90 part3 
+  game_sense day91 part3 
+  patient_aim day91 part3 
+  green_whisper day91 part3 
+  game_sense day92 part3 
+  patient_aim day92 part3 
+  green_whisper day92 part3 
+  game_sense day93 part2 
+  patient_aim day93 part2 
+  green_whisper day93 part2 
+  game_sense day94 part3 
+  patient_aim day94 part3 
+  green_whisper day94 part3 
+=== held-leg synergies with zero attempts ===
+=== ability_granted telemetry ===
+  1 beast_calm villager:gen_vwpfg1e
+  1 green_whisper villager:gen_cpc7q3k
+  1 the_touch villager:gen_o65wcmx
+  1 iron_stomach villager:gen_x7gfwk8
+  1 green_whisper villager:gen_rnyjng5
+  1 green_whisper villager:rosa_mendez
+  1 green_whisper villager:emma_larsen
+  1 green_whisper villager:ursula_weber
+  1 green_whisper villager:nino_kapanadze
+  1 the_touch villager:victor_lopez
+  1 green_whisper villager:omar_farouk
+  8 green_thumb player
+  15 fusion_reactor player
+  16 fusion_reactor villager:gen_x7gfwk8
+  17 lucky_rock player
+total ability_granted events: 90
+EXIT=0 :: scripts/test-synergy-stall.js
+=== scripts/test-capable-bot-20261014.js ===
+
+1. real flee exits the fight
+  ok   flee decided
+  ok   pushed through the barrier
+  ok   fight exited (not just walked to the edge)
+  ok   left the node havenward
+  ok   no policy errors
+
+2. abilities fire in combat through useAbility
+  ok   capAbilityUses > 0
+  ok   ability_used telemetry > 0
+  ok   hunger gate respected (no use at kcal 300)
+
+3. choices are scored, not option 0
+  ok   offer scoring: synergy leg echo_location beats game_sense
+  ok   upkeep took the synergy leg (not card 0)
+  ok   Table seat taken when tablePreview().ready
+  ok   Table seat NOT taken before day 90 (ready=false)
+  ok   trial by combat scored below every other beat
+  ok   path scored by earned strength, not position
+
+4. a conversation is held (real turns), target by need
+  ok   held at least one conversation
+  ok   real exchanges taken (deepTurns > 0)
+
+5. competent.beastStrikeTarget steps within moveLeft
+  ok   moved
+  ok   destination within this turn's 3 squares (was 5 away: "Too far" no-op)
+
+6. no fight left live at bedtime (sleep would refuse: a lost game day)
+  ok   fight resolved by the end of daily
+
+7. capable food chain and the reactor tradeoff
+  ok   fixture holds a real unchanneled keepsake
+  ok   lesson and mastered gifts arm devotion without setting deed flags
+  ok   pre-reactor chain has no reactor
+  ok   real donation clears the policy contribution bar
+  ok   capable upkeep actually hosts a feast
+  ok   feast spends its reported real pantry calories
+  ok   paid feast actually grants the buff
+  ok   capable faces the actual feast draw
+  ok   real capable player combat earns the food deed at first use
+  ok   earned food deed persists through combat settlement
+  ok   combat spends devotion only on actual use
+  ok   food chain has no policy errors
+  ok   online reactor refuses the otherwise armed grant honestly
+  ok   reactor refusal invents neither feast buff nor food deed
+
+short sims: 2 seeds x 40 days
+  ok   seed 42: qualified observed feast plans receive an actual host attempt
+  ok   seed 42: host attempts return a real feast or explicit refusal
+  INFO original campaign seed=42 foodDeeds=true grants=[{"day":17,"granted":true},{"day":25,"granted":true},{"day":32,"granted":true},{"day":39,"granted":true}]
+  ok   seed 1234: qualified observed feast plans receive an actual host attempt
+  ok   seed 1234: host attempts return a real feast or explicit refusal
+  INFO original campaign seed=1234 foodDeeds=true grants=[{"day":8,"granted":false,"why":"The feast is warm and good — full bellies, loud laughter — but no keepsake was channeled. The surge must be armed before a feast can carry it: hold a keepsake and channel first. (Feast buff refused: devotion gate.)"},{"day":19,"granted":true},{"day":26,"granted":true},{"day":38,"granted":true}]
+  ok   runs completed
+  ok   game days keep pace with loop days (no fight left live at sleep)
+  INFO original two-seed food-deed count=2; capability required by controlled real-combat proof above
+  ok   contest choices taken by scoring
+  ok   conversations held in-sim
+  ok   no policy-side errors
+
+test-capable-bot-20261014: 42 passed, 0 failed, 0 todo (phase 0)
+EXIT=0 :: scripts/test-capable-bot-20261014.js
+RETEST-DONE 12:18:02

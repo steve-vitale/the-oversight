@@ -1,0 +1,20 @@
+FLIPCHECK-START 12:26:28 HEAD=b86217cf5 teach-count=3
+=== scripts/godpath/test-measurement-cache-flags.js ===
+  ok   both actual CLI configurations complete valid neutral panels
+  ok   two flags create four independent observer-on/off cache entries
+  ok   cache identities retain each actual SIMOPT value
+  ok   repeating the same setting reuses its two verified cases
+
+measurement cache flag isolation: 4 passed, 0 failed, 0 todo (phase 0)
+EXIT=0 :: scripts/godpath/test-measurement-cache-flags.js
+=== scripts/godpath/test-trust-observer-neutrality.js ===
+  ok   seed 11 actual full state and outcome stay exact
+  ok   seed 11 random continuation stays exact
+  ok   seed 11 samples retain monotonic exact write boundaries
+  ok   seed 42 actual full state and outcome stay exact
+  ok   seed 42 random continuation stays exact
+  ok   seed 42 samples retain monotonic exact write boundaries
+
+trust observer neutrality: 6 passed, 0 failed, 0 todo (phase 0)
+EXIT=0 :: scripts/godpath/test-trust-observer-neutrality.js
+FLIPCHECK-DONE 12:28:02
