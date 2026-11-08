@@ -457,3 +457,21 @@ before the ARMED leg (it needs a sat seed, which only the
 baseline leg can name — the baseline leg is the band
 re-check, not the judged comparison). check.js --quick NOT
 required: zero src/js in this arm.
+
+**CORRECTION (2026-11-08, pre-pilot, proof only — no judged
+bar changes):** the D2 smoke as first written asserted sit +
+walk on the smoke seed. It failed on 53703 for a design
+reason, not an instrument defect: the road engaged fully
+(hoard 15 takes / 21,057 kcal, recruit d15, betrayal d40)
+and the village died d82 where the baseline won d90 — the
+road perturbs pre-sit trajectories by design (see the
+replacement guard), so a single seed's sit outcome cannot
+gate the instrument. D2 now asserts road engagement +
+ledger-trace recording + completion without stalling (0
+instrument errors) and REPORTS the sit/walk outcome. The
+sit rate under the road is the pilot armed leg's
+measurement. The smoke seed's ledger also showed the road's
+two weak signals on this substrate: the betrayal victim
+survived (killed stayed 0 — no killed+3) and 15 hoard takes
+moved foodHoarded 0 (the food truth did not flip); the pilot
+armed leg measures both across 8 seeds.

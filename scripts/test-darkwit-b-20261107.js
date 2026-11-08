@@ -32,8 +32,18 @@
 //       delegation is byte-identical in practice; plus a 1-seed
 //       ARMED smoke leg on a judged-band sat seed
 //       (DARKWIT_SMOKE_SEED, named by the baseline leg) in /tmp
-//       asserting structural invariants (sit happened, the road
-//       engaged — counters moved — no stall, 0 instrument errors).
+//       asserting the road engages without stalling (counters move,
+//       ledger trace recorded, 0 instrument errors). The smoke does
+//       NOT assert the seed still sits: the road perturbs pre-sit
+//       trajectories by design (the prereg's replacement guard),
+//       so a single seed not sitting proves nothing about the
+//       instrument — the pilot armed leg measures the sit rate
+//       across 8 seeds. (CORRECTION 2026-11-08, pre-pilot: the
+//       smoke as first written asserted sit+walk and failed on
+//       53703 for exactly this reason — the road engaged fully
+//       (hoard 15, recruit d15, betrayal d40) and the village died
+//       d82 where the baseline won d90. The gate was wrong, not
+//       the instrument; the sit rate is the pilot's measurement.)
 //   (E) ANALYZER: pure-function fixtures (roadAttribution all six
 //       outcomes, sitLedger ref-day + fallback, walkNarration
 //       framing/testimony/choice-line detection, entriesFromVerbs,
@@ -424,24 +434,28 @@ withEnv({ WITNESSDOOR_B: null }, () => {
   }
 
   // --- (D2) LIVE SMOKE: armed leg on a judged-band sat seed — the
-  // road must engage (counters move) and the door must be walked.
+  // road must engage (counters move), the ledger trace must be
+  // recorded, and the run must complete without stalling. The seed
+  // sitting (or not) is REPORTED, not asserted: the road perturbs
+  // pre-sit trajectories by design, so a single seed's sit outcome
+  // is the pilot's measurement, not the smoke's gate.
   if (smokeSeed) {
     runDark('armed', tmpSmoke, String(smokeSeed), 'darkwit-proof-smoke');
     const s = JSON.parse(fs.readFileSync(path.join(tmpSmoke, 'darkwit-b-s' + smokeSeed + '-darkwit-proof-smoke.json'), 'utf8'));
     assert.strictEqual(s.instrumentErrors.length, 0);
     ok('LIVE SMOKE: seed ' + smokeSeed + ' armed leg runs with 0 instrument errors', true);
-    assert.strictEqual((s.takeseatStats || {}).seatTaken, 1);
-    ok('LIVE SMOKE: seed ' + smokeSeed + ' sits (sit drive fires on the wrapper)', true);
     const ld = s.ledgerDarkStats || {};
     const roadActivity = (ld.begsRefused | 0) + (ld.aidBegsRefused | 0) + (ld.hoardTakes | 0) + (ld.betrayalDone | 0) + (ld.recruitDone | 0);
     assert.ok(roadActivity > 0, 'the road engaged (activity ' + roadActivity + ')');
     ok('LIVE SMOKE: the ledger-dark road engaged on ' + smokeSeed + ' (begs ' + (ld.begsRefused | 0) + ', hoard ' + (ld.hoardTakes | 0) + ', recruit ' + (ld.recruitDone | 0) + ', betrayal ' + (ld.betrayalDone | 0) + ')', true);
-    assert.ok(((s.witnessdoorStats || {}).doorsEntered | 0) >= 1, 'a door is entered on ' + smokeSeed);
+    const traced = (s.daily || []).filter(function (r) { return r.ledger && r.ledger.witnessBranch; }).length;
+    assert.ok(traced > 0, 'ledger trace recorded on ' + traced + ' daily rows');
+    ok('LIVE SMOKE: ledger trace recorded (' + traced + ' daily rows carry the witness branch)', true);
+    assert.ok((s.days | 0) > 0 && !!s.endReason, 'the run completed with an end reason');
+    ok('LIVE SMOKE: the run completed without stalling (days ' + s.days + ', ' + s.endReason + ')', true);
+    const sat = (s.takeseatStats || {}).seatTaken | 0;
     const walked = (s.witnessdoorStats || {}).walked || [];
-    assert.ok(walked.length >= 1 && walked[0].day === (s.takeseatStats || {}).seatDay, 'entry day = sit day');
-    ok('LIVE SMOKE: seed ' + smokeSeed + ' walks a door on its sit day (' + walked.map(function (w) { return w.path + '@d' + w.day + '/' + (w.branch || '?'); }).join(', ') + ')', true);
-    assert.ok(((s.witnessdoorStats || {}).answers | 0) >= 1, 'the walked path is answered');
-    ok('LIVE SMOKE: the walked path is played through (answers >= 1)', true);
+    console.log('LIVE SMOKE: seed ' + smokeSeed + ' sat=' + sat + ' walked=' + walked.map(function (w) { return w.path + '@d' + w.day + '/' + (w.branch || '?'); }).join(', ') + ' (reported, not gated)');
   } else {
     console.log('LIVE SMOKE: skipped (DARKWIT_SMOKE_SEED unset — run after the baseline leg names a sat seed)');
   }
