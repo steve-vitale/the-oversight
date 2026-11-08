@@ -1,0 +1,495 @@
+// @ontology
+// system: villager-brain
+// description: One dawn scoring entry for Haven villagers — candidates feed, one pass picks, a log explains every pick. Phase-1 coherence only; IAUS product-of-curves arithmetic stays deferred pending Steve review.
+// provides:
+//   - vbrainScorePick(vid, cands, opts)
+//   - vbrainLogGate(vid, kind, gateId, detail)
+//   - vbrainFeedExtras(vid, cands, hx, hy)
+//   - vbrainCommit(vid)
+//   - vbrainLastLog(vid)
+//   - vbrainLogs()
+//   - vbrainExecuteDepart(vid, hx, hy, announce)
+//   - vbrainOwnsDawn()
+// rules:
+//   - vbrain_one_dawn_entry: every dawn lead pick (gate or lottery) is recorded through this module so one log explains the choice (code: vbrainScorePick, vbrainLogGate)
+//   - vbrain_legacy_weights: phase 1 keeps existing additive candidate weights and the weighted lottery; it does NOT ship the product-of-curves formula from VILLAGER-BRAIN.md (code: vbrainScorePick)
+//   - vbrain_feeders_not_deciders: goals bias, win-plan stage intents, and EXPEDITION feed candidates here; agency chance-rolls and win-plan re-decides stop owning the day when this module is loaded (code: vbrainFeedExtras, vbrainExecuteDepart)
+//   - vbrain_commitment: the dawn pick writes a commitment record the same day so midday agency honors it instead of rolling again (code: vbrainScorePick, vbrainCommit)
+//   - vbrain_chain_safe: missing feeders fail silent; agency falls back to the old chance roll only when vbrainOwnsDawn is absent (code: vbrainFeedExtras)
+// consumes:
+//   - npcRangeProfile, npcMaxDist, agencyState (villager-agency.js)
+//   - winPlanOf, winPlanHavenTick (win-plan.js) — optional feeders
+//   - vgoalBiasCands (villager-goals.js) — called by objPick before this scorer
+/* VILLAGER BRAIN — src/js/villager-brain.js
+ *
+ * Steve (2026-11-06): "Make sure all our intelligence systems are coherent
+ * and in one spot. These aren't separate systems but building one villager
+ * brain..." docs/VILLAGER-BRAIN.md is the contract. Its product-of-curves
+ * scoring formula is marked for review — this module implements coherence
+ * (one dawn entry + explanatory log + feeder demotion), not that arithmetic.
+ *
+ * Phase 1 closes seams 1, 2, and 10 for the dawn:
+ *   - objPick early returns and the lottery both log through here;
+ *   - win-plan stage intents and EXPEDITION enter as candidates;
+ *   - agencyTick stops chance-rolling / re-deciding when this module loads.
+ *
+ * Load after villager-goals.js (goals already bias the candidate list) and
+ * win-plan.js (optional feeder). Self-attaching.
+ */
+(function () {
+  'use strict';
+  var _g = (typeof globalThis !== 'undefined') ? globalThis : (typeof global !== 'undefined' ? global : {});
+  var G = (_g.Scattering && _g.Scattering.Game) ? _g.Scattering.Game : null;
+  if (!G) return;
+
+  var LOG_CAP = 400;
+
+  function villageOf(self) {
+    try { return self.state && self.state.village; } catch (e) { return null; }
+  }
+  function dayOf(self) {
+    try { return (self.state.scholar || {}).day || 0; } catch (e) { return 0; }
+  }
+  function partOf(self) {
+    try { return self.dayPart | 0; } catch (e) { return 0; }
+  }
+  function ensure(self) {
+    var v = villageOf(self);
+    if (!v) return null;
+    if (!v.vbrain) {
+      v.vbrain = { commit: {}, logs: [], stats: { picks: 0, gates: 0, expeditions: 0, winPlan: 0 } };
+    }
+    if (!v.vbrain.commit) v.vbrain.commit = {};
+    if (!v.vbrain.logs) v.vbrain.logs = [];
+    if (!v.vbrain.stats) v.vbrain.stats = { picks: 0, gates: 0, expeditions: 0, winPlan: 0 };
+    return v.vbrain;
+  }
+  function pushLog(self, entry) {
+    var br = ensure(self);
+    if (!br) return entry;
+    br.logs.push(entry);
+    if (br.logs.length > LOG_CAP) br.logs.splice(0, br.logs.length - LOG_CAP);
+    return entry;
+  }
+  function gearRead(self, vid) {
+    var person = null;
+    try { person = self.getPerson ? self.getPerson(vid) : (self.vpOf ? self.vpOf(vid) : null); } catch (e) {}
+    if (!person) return { armed: false, armored: false };
+    var S = (_g.Scattering) || {};
+    var eq = S.equipment || null;
+    var items = self.data ? self.data.items : [];
+    var armorP = 0, weaponB = 0, carriesWeapon = false;
+    try { armorP = (eq && eq.armorOf) ? (eq.armorOf(person, items) || 0) : 0; } catch (e) {}
+    try { weaponB = (eq && eq.weaponBonusOf) ? (eq.weaponBonusOf(person, items) || 0) : 0; } catch (e) {}
+    try {
+      for (var i = 0; i < ((person.items || []).length); i++) {
+        var iid = person.items[i] && (person.items[i].itemId || person.items[i].id || person.items[i]);
+        var def = null;
+        for (var j = 0; j < items.length; j++) if (items[j] && items[j].id === iid) { def = items[j]; break; }
+        if (def && def.weapon) { carriesWeapon = true; break; }
+      }
+    } catch (e) {}
+    return { armed: !!(weaponB > 0 || carriesWeapon), armored: armorP > 0 };
+  }
+  function findCompanion(self, vid, hx, hy) {
+    try {
+      var v = villageOf(self);
+      if (!v) return null;
+      var roster = v.roster || [];
+      var trust = v.trust || {};
+      var away = v.away || {};
+      for (var i = 0; i < roster.length; i++) {
+        var cid = roster[i];
+        if (!cid || cid === vid || cid === self.villagerId) continue;
+        try { var p = self.getPerson ? self.getPerson(cid) : null; if (p && p.dead) continue; } catch (e) {}
+        if (away[cid]) continue;
+        if (((trust[cid] === undefined) ? 10 : trust[cid]) < 15) continue;
+        try {
+          var n = self.npcNode ? self.npcNode(cid) : null;
+          if (!n || n.nx !== hx || n.ny !== hy) continue;
+        } catch (e) { continue; }
+        try { if (self.isEngaged && self.isEngaged(cid)) continue; } catch (e) {}
+        var prof = null;
+        try { prof = self.npcRangeProfile ? self.npcRangeProfile(cid) : null; } catch (e) {}
+        if (prof !== 'wanderer' && prof !== 'explorer') continue;
+        try {
+          var a = self.agencyState ? self.agencyState() : null;
+          if (a && a.exped && a.exped[cid]) continue;
+        } catch (e) {}
+        return cid;
+      }
+    } catch (e) {}
+    return null;
+  }
+  function hasKillWaveAtLeast(self, vid, w) {
+    try {
+      var ks = ((self.state && self.state.waveKillLog) || []).filter(function (e) { return e && e.by === vid; });
+      for (var i = 0; i < ks.length; i++) if ((ks[i].w | 0) >= w) return true;
+    } catch (e) {}
+    return false;
+  }
+  // Deterministic [0,1) roll from villager+day — no shared Math.random, so
+  // the core objective lottery's RNG stream stays byte-identical.
+  function dawnHashRoll(self, vid, salt) {
+    var day = dayOf(self);
+    var s = String(vid || '') + ':' + day + ':' + (salt || 'exped');
+    var h = 2166136261;
+    for (var i = 0; i < s.length; i++) {
+      h ^= s.charCodeAt(i);
+      h = Math.imul(h, 16777619);
+    }
+    // xorshift mix
+    h ^= h >>> 13; h = Math.imul(h, 1274126177); h ^= h >>> 16;
+    return ((h >>> 0) % 10000) / 10000;
+  }
+  // Win-plan stage intents as candidates. Same stage reads as winPlanDepart,
+  // but they bid in the dawn pass instead of re-deciding at agencyTick.
+  // Read-only: never seed a plan here (winPlanOf / HavenTick would engage
+  // villagers the feeder merely inspects). Stage advances stay in agencyTick.
+  function winPlanCands(self, vid, hx, hy) {
+    var out = [];
+    try {
+      var plan = null;
+      try {
+        var vv = self.state && self.state.village;
+        plan = (vv && vv.winPlan) ? vv.winPlan[vid] : null;
+      } catch (e) {}
+      if (!plan || !plan.stage) return out;
+      var stage = plan.stage;
+      var gear = gearRead(self, vid);
+      if (stage === 'gear' && !gear.armed && !gear.armored) {
+        out.push({
+          kind: 'HAVEN_CHORE', w: 6.0, chore: 'repair',
+          vbrainSrc: 'win_plan', winPlanAction: 'gear_hold',
+          considerations: [
+            { id: 'win_plan_stage', raw: 1, note: 'gear' },
+            { id: 'unarmed', raw: 1, note: 'hold for kit' },
+          ],
+        });
+        return out;
+      }
+      var companion = findCompanion(self, vid, hx, hy);
+      if (stage === 'table' && hasKillWaveAtLeast(self, vid, 4) && !companion) {
+        out.push({
+          kind: 'HAVEN_CHORE', w: 5.5, chore: 'repair',
+          vbrainSrc: 'win_plan', winPlanAction: 'veteran_guard',
+          considerations: [
+            { id: 'win_plan_stage', raw: 1, note: 'table' },
+            { id: 'veteran', raw: 1, note: 'no party yet' },
+          ],
+        });
+        return out;
+      }
+      if ((stage === 'party' || stage === 'hunt' || stage === 'standing' || stage === 'table') && companion) {
+        out.push({
+          kind: 'EXPEDITION', w: 5.0, companion: companion,
+          vbrainSrc: 'win_plan', winPlanAction: 'party_launch',
+          considerations: [
+            { id: 'win_plan_stage', raw: 1, note: stage },
+            { id: 'companion', raw: 1, note: String(companion) },
+          ],
+        });
+      } else if (stage === 'party' && !companion) {
+        out.push({
+          kind: 'HAVEN_CHORE', w: 4.0, chore: 'fire',
+          vbrainSrc: 'win_plan', winPlanAction: 'party_wait',
+          considerations: [
+            { id: 'win_plan_stage', raw: 1, note: 'party' },
+            { id: 'waiting_companion', raw: 1, note: 'none at haven' },
+          ],
+        });
+      }
+    } catch (e) {}
+    return out;
+  }
+  // Agency's old explorer/wanderer chance roll, expressed as a dawn candidate
+  // so departure is one pick — not a second brain negotiating by exclusion.
+  // Weights stay soft vs urgent forage/water so the errand mix panel holds.
+  function expeditionCand(self, vid, hx, hy) {
+    try {
+      var prof = null;
+      try { prof = self.npcRangeProfile ? self.npcRangeProfile(vid) : null; } catch (e) {}
+      if (prof !== 'wanderer' && prof !== 'explorer') return null;
+      var night = false;
+      try { night = !!self.isNight(); } catch (e) {}
+      if (night) return null;
+      try {
+        if (self.npcTrigger && self.npcTrigger(vid, 'expedition_launch')) return null;
+      } catch (e) {}
+      var maxD = 0;
+      try { maxD = self.npcMaxDist ? self.npcMaxDist(vid) : 0; } catch (e) {}
+      if (maxD < 1) return null;
+      try { if ((self.state.village.sick || {})[vid]) return null; } catch (e) {}
+      var potential = false;
+      try {
+        var a = self.agencyState ? self.agencyState() : null;
+        potential = !!(a && a.potential && a.potential[vid]);
+      } catch (e) {}
+      // ~0.09 / 0.045 per daytime agency tick × ~3 parts, diluted into the
+      // dawn lottery so explorers occasionally range without owning forage.
+      var w = (prof === 'explorer' ? 0.55 : 0.28);
+      if (potential) w *= 1.6;
+      return {
+        kind: 'EXPEDITION', w: Math.round(w * 1000) / 1000,
+        vbrainSrc: 'agency_range',
+        considerations: [
+          { id: 'range_profile', raw: 1, note: prof },
+          { id: 'potential', raw: potential ? 1 : 0, note: potential ? 'rising star' : 'ordinary' },
+        ],
+      };
+    } catch (e) { return null; }
+  }
+  function annotateCand(c) {
+    var considerations = (c.considerations || []).slice();
+    considerations.unshift({
+      id: 'base_weight',
+      raw: Math.round((c.w || 0) * 1000) / 1000,
+      note: 'legacy additive weight',
+    });
+    if (c.vgoal) {
+      considerations.push({
+        id: 'vgoal_bias',
+        raw: Math.round((c.vgoalW || 0) * 1000) / 1000,
+        note: c.vgoal,
+      });
+    }
+    if (c.vbrainSrc) {
+      considerations.push({
+        id: 'feeder',
+        raw: 1,
+        note: c.vbrainSrc,
+      });
+    }
+    return {
+      kind: c.kind,
+      score: Math.round((c.w || 0) * 1000) / 1000,
+      targetVid: c.targetVid || null,
+      chore: c.chore || null,
+      vgoal: c.vgoal || null,
+      vbrainSrc: c.vbrainSrc || null,
+      winPlanAction: c.winPlanAction || null,
+      companion: c.companion || null,
+      considerations: considerations,
+    };
+  }
+  function writeCommit(self, vid, chosen, entry) {
+    var br = ensure(self);
+    if (!br) return;
+    br.commit[vid] = {
+      kind: chosen.kind,
+      day: dayOf(self),
+      part: partOf(self),
+      scoreAtChoice: chosen.score != null ? chosen.score : (chosen.w || 0),
+      vgoal: chosen.vgoal || null,
+      vbrainSrc: chosen.vbrainSrc || null,
+      winPlanAction: chosen.winPlanAction || null,
+      companion: chosen.companion || null,
+      logIndex: br.logs.length - 1,
+    };
+    br.stats.picks = (br.stats.picks || 0) + 1;
+    if (chosen.kind === 'EXPEDITION') br.stats.expeditions = (br.stats.expeditions || 0) + 1;
+    if (chosen.winPlanAction) br.stats.winPlan = (br.stats.winPlan || 0) + 1;
+    return br.commit[vid];
+  }
+
+  var methods = {
+    vbrainOwnsDawn: function () { return true; },
+    vbrainCommit: function (vid) {
+      var br = ensure(this);
+      return (br && br.commit) ? (br.commit[vid] || null) : null;
+    },
+    vbrainLastLog: function (vid) {
+      var br = ensure(this);
+      if (!br || !br.logs || !br.logs.length) return null;
+      for (var i = br.logs.length - 1; i >= 0; i--) {
+        if (br.logs[i] && br.logs[i].vid === vid) return br.logs[i];
+      }
+      return null;
+    },
+    vbrainLogs: function () {
+      var br = ensure(this);
+      return (br && br.logs) ? br.logs.slice() : [];
+    },
+    // Hard early returns (escape/rest/eat/haul/seek) still win as gates —
+    // scored in the open so the log shows why they beat the lottery.
+    vbrainLogGate: function (vid, kind, gateId, detail) {
+      var entry = {
+        day: dayOf(this),
+        part: partOf(this),
+        vid: vid,
+        mode: 'gate',
+        pick: kind,
+        gate: gateId,
+        detail: detail || null,
+        candidates: [{
+          kind: kind,
+          score: 1,
+          considerations: [
+            { id: gateId, raw: 1, note: 'hard gate' },
+            { id: 'lottery', raw: 0, note: 'bypassed' },
+          ],
+        }],
+      };
+      var br = ensure(this);
+      if (br) br.stats.gates = (br.stats.gates || 0) + 1;
+      pushLog(this, entry);
+      writeCommit(this, vid, { kind: kind, score: 1, vbrainSrc: 'gate:' + gateId }, entry);
+      return entry;
+    },
+    // Append win-plan + EXPEDITION candidates onto the list. Marked with
+    // vbrainSrc so the scorer keeps them out of the core weight pool —
+    // core errand mix stays the legacy lottery; extras override in-log.
+    vbrainFeedExtras: function (vid, cands, hx, hy) {
+      if (!cands) return cands;
+      try { if (this.vbrainDisableExtras) return cands; } catch (e) {}
+      var wp = winPlanCands(this, vid, hx, hy);
+      for (var i = 0; i < wp.length; i++) cands.push(wp[i]);
+      var hasExped = false;
+      for (var j = 0; j < cands.length; j++) if (cands[j].kind === 'EXPEDITION') { hasExped = true; break; }
+      if (!hasExped) {
+        var ex = expeditionCand(this, vid, hx, hy);
+        if (ex) cands.push(ex);
+      }
+      return cands;
+    },
+    // THE dawn scoring entry. Core candidates (no vbrainSrc) use the legacy
+    // additive weighted lottery — same arithmetic as pre-brain objPick, same
+    // RNG draws. Extras (win-plan / EXPEDITION) are scored into the log and
+    // may override without consuming Math.random (hash roll / priority).
+    // Product-of-curves IAUS formula is intentionally NOT used (for review).
+    vbrainScorePick: function (vid, cands, opts) {
+      opts = opts || {};
+      var list = cands || [];
+      var core = [];
+      var extras = [];
+      var i;
+      for (i = 0; i < list.length; i++) {
+        if (list[i] && list[i].vbrainSrc) extras.push(list[i]);
+        else core.push(list[i]);
+      }
+      var annotated = [];
+      var coreTot = 0;
+      for (i = 0; i < core.length; i++) {
+        var ac = annotateCand(core[i]);
+        annotated.push(ac);
+        if (ac.score > 0) coreTot += ac.score;
+      }
+      for (i = 0; i < extras.length; i++) annotated.push(annotateCand(extras[i]));
+
+      var chosen = core.length ? core[core.length - 1] : null;
+      if (coreTot > 0 && core.length) {
+        var rng = typeof opts.rng === 'function' ? opts.rng : Math.random;
+        var r = rng() * coreTot;
+        for (i = 0; i < core.length; i++) {
+          r -= (core[i].w || 0);
+          if (r <= 0) { chosen = core[i]; break; }
+        }
+      }
+      var coreKind = chosen ? chosen.kind : null;
+      var override = null;
+      var overrideReason = null;
+      // Win-plan holds / party launches outrank the soft lottery when live.
+      for (i = 0; i < extras.length; i++) {
+        var exi = extras[i];
+        if (exi.winPlanAction === 'gear_hold' || exi.winPlanAction === 'veteran_guard' ||
+            exi.winPlanAction === 'party_wait' || exi.winPlanAction === 'party_launch') {
+          override = exi; overrideReason = 'win_plan:' + exi.winPlanAction; break;
+        }
+      }
+      // Soft EXPEDITION: only when the core pick would keep them home, so the
+      // ranging brain replaces hall time rather than stealing forage/water.
+      // Hash roll — no Math.random — keeps the core lottery stream intact.
+      if (!override) {
+        for (i = 0; i < extras.length; i++) {
+          if (extras[i].kind !== 'EXPEDITION') continue;
+          var indoorCore = coreKind === 'HAVEN_CHORE' || coreKind === 'REST' ||
+            coreKind === 'EAT' || coreKind === 'SEEK';
+          if (!indoorCore) break;
+          var chance = Math.min(0.95, (extras[i].w || 0) / 2); // w~0.55 → ~0.275
+          if (dawnHashRoll(this, vid, 'exped') < chance) {
+            override = extras[i];
+            overrideReason = 'expedition_hash';
+          }
+          break;
+        }
+      }
+      // Materialize the CORE pick so the legacy RNG stream (chore pick,
+      // outdoor facing, etc.) stays byte-identical. Aimed overrides are
+      // recorded on the commitment + log; agencyTick executes EXPEDITION.
+      var materialize = chosen;
+      var logged = override || chosen;
+      var chosenAnn = logged ? annotateCand(logged) : null;
+
+      var entry = {
+        day: dayOf(this),
+        part: partOf(this),
+        vid: vid,
+        mode: 'lottery',
+        pick: logged ? logged.kind : null,
+        total: Math.round(coreTot * 1000) / 1000,
+        candidates: annotated,
+        pickScore: chosenAnn ? chosenAnn.score : 0,
+        pickSrc: logged ? (logged.vbrainSrc || logged.vgoal || 'objectives') : null,
+        winPlanAction: logged ? (logged.winPlanAction || null) : null,
+        override: overrideReason,
+        corePick: coreKind,
+      };
+      pushLog(this, entry);
+      if (logged) writeCommit(this, vid, Object.assign({}, logged, { score: chosenAnn ? chosenAnn.score : logged.w }), entry);
+      return materialize;
+    },
+    // Agency-tick executor: honor today's dawn commitment. No new strategy.
+    vbrainExecuteDepart: function (vid, hx, hy, announce) {
+      var c = this.vbrainCommit(vid);
+      if (!c || c.day !== dayOf(this)) return 'normal';
+      if (c.winPlanAction === 'gear_hold' || c.winPlanAction === 'veteran_guard' || c.winPlanAction === 'party_wait') {
+        return 'hold';
+      }
+      if (c.kind !== 'EXPEDITION') return 'normal';
+      try {
+        var a = this.agencyState ? this.agencyState() : null;
+        if (a && a.exped && a.exped[vid]) return 'launch';
+      } catch (e) {}
+      var opts = null;
+      if (c.winPlanAction === 'party_launch' && c.companion && typeof this.startExpedition === 'function') {
+        // Mirror winPlanDepart's shared-target party launch, owned by the
+        // dawn commitment rather than a midday re-decide.
+        var tx = null, ty = null, dur = 0;
+        try {
+          var plan = this.winPlanOf ? this.winPlanOf(vid) : null;
+          if (plan && plan.node) { tx = plan.node.nx; ty = plan.node.ny; }
+        } catch (e) {}
+        if (tx == null) {
+          var maxD = 3;
+          try { maxD = this.npcMaxDist ? this.npcMaxDist(vid) : 3; } catch (e) {}
+          var dist = 1 + Math.floor(Math.random() * Math.max(1, maxD));
+          var dirs = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, -1], [1, -1], [-1, 1]];
+          var d = dirs[Math.floor(Math.random() * dirs.length)];
+          tx = Math.max(0, Math.min(8, hx + d[0] * dist));
+          ty = Math.max(0, Math.min(8, hy + d[1] * dist));
+        }
+        dur = 8 + Math.floor(Math.random() * 13);
+        opts = { tx: tx, ty: ty, duration: dur };
+        this.startExpedition(vid, hx, hy, announce, opts);
+        try {
+          var a2 = this.agencyState ? this.agencyState() : null;
+          if (!a2 || !a2.exped[vid]) return 'hold';
+        } catch (e) {}
+        this.startExpedition(c.companion, hx, hy, false, opts);
+        try {
+          var plan2 = this.winPlanOf ? this.winPlanOf(vid) : null;
+          if (plan2) { plan2.stage = 'hunt'; plan2.party = [c.companion]; }
+          var cplan = this.winPlanOf ? this.winPlanOf(c.companion) : null;
+          if (cplan) { cplan.stage = 'hunt'; cplan.party = [vid]; }
+        } catch (e) {}
+        return 'launch';
+      }
+      if (typeof this.startExpedition === 'function') {
+        this.startExpedition(vid, hx, hy, announce, opts);
+        return 'launch';
+      }
+      return 'normal';
+    },
+  };
+  Object.assign(G, methods);
+})();
