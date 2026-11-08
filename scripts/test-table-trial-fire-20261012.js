@@ -83,6 +83,14 @@ function setup() {
   Game.state.scholar.tableChoices = null;
   Game.over = false; Game.won = false;
   Game.tbfight = null;
+  // LEG 2 (2026-11-08): Village ladder standing (12 counted points) so
+  // the lesser seat prices DETERMINISTICALLY. Without the rig the fresh
+  // game's own starting XP lands the ladder at 11–14 counted — right on
+  // the Village threshold — so the seat flips lesser/none between
+  // setup() calls and the trial fires only when the dice favour it.
+  // Fight 6 (wave-3 ledger 12) + Forage 6 (scholar field XP 72).
+  Game.state.waveLedger = { 3: { points: 12, perType: {}, perTypeX: {} } };
+  Game.playerTracks().field.xp = 72;
 }
 
 (async () => {
