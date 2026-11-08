@@ -5,14 +5,18 @@
   rebased onto master `246ce6dc22f13181c0167c861b4caae403192a9f` (sim-binddiag-b
   landing, 10 commits past the base), then onto master
   `d229b58f595430e2a24c399820061b39c5b689ca` (batch ship version bump, 4
-  commits past that — evidence-only + the version bump) before merging.
-  Each rebase struck the documented stop-at-pick quirk once (the pick
-  appearing in both done and todo; verified unapplied with `git diff
-  <pick>` + clean tree, then `git rebase --continue` sailed through the
-  remaining picks). The branch diff is content-identical across both
-  rebases (only hunk line numbers moved). Post-rebase proof suites re-run
-  green (see below); the neutral proof was refreshed after each rebase
-  (see below).
+  commits past that — evidence-only + the version bump), then onto master
+  `6943519e78c4b57dff015409791dc3cc78dd177c` (sim-healerbisect-b midpoint
+  #15, 2 evidence-only commits) before merging. The first two rebases
+  struck the documented stop-at-pick quirk once each; the third struck it
+  THREE times in one rebase (picks fdee5c3aa, 5f1e19d5a, 102272e30 — each
+  appearing in both done and todo; each verified unapplied with `git diff
+  <pick>` + clean tree, then `git rebase --continue` sailed through).
+  The branch diff is content-identical across all three rebases (only
+  hunk line numbers moved). Post-rebase proof suites re-run green (see
+  below); the neutral proof was refreshed after the first two rebases,
+  and after the third the measurement pair stayed green with no refresh
+  needed (see below).
 - Branch: `build-ladder-leg2` (worktree `~/workspace/worktrees/build-ladder-leg2`)
 - Builder: leg-2 attempt #2 (attempt #1 died at startup 2026-11-08 09:27Z, produced nothing)
 
@@ -262,7 +266,14 @@ to 0, peak stays 3, seat stays 'full'.
   table-entry 43/43, trial-fire 18/18, measurement pair 9/9 + 9/9
   (after the post-rebase refresh above). After the d229b58f5 rebase —
   the same 16, all green again (measurement pair 9/9 + 9/9 after the
-  third refresh below).
+  third refresh below). After the 6943519e78 rebase — the same 16, all
+  green again (seat 38/38, bundle 79/79, fullseat-shortfall ALL GREEN,
+  scalegate 22/22, tableoffer GREEN, choiceprice 179/179, reactor PASS,
+  deed-gate 69/69, tableaudit 15/15, fullseat-superset 9/9,
+  boot-data-version 6/6, sheet-handoff 5/5, table-entry 43/43,
+  trial-fire 18/18, measurement pair 9/9 + 9/9) — and this time the
+  measurement pair stayed green WITHOUT a fourth refresh: the two new
+  master commits were evidence-only and did not move the build tag.
   - Third refresh (after the d229b58f5 rebase): the pair went red again
     because the batch-ship version bump moved the build tag (the leg-1
     pattern — a rebase that moves the tag invalidates the proof). Same
@@ -324,42 +335,44 @@ to 0, peak stays 3, seat stays 'full'.
 - The phone-frame-proof test stays red until a browser-capable agent refreshes
   receipts (known owed item from leg 1 — do not hand-edit proof hashes).
 
-## Commits on branch build-ladder-leg2 (final SHAs; base d229b58f5)
-- `e285c1cea` prereg
-- `2b1049e35` progression.js: foodDeeds is sentimentTaught alone
-- `f7b8bbb40` ladder.js: +4-per-stage bundle bonus read (flagged amendment)
-- `d733b9f34` table.js seat surgery [needs-eyes]
-- `c1fd6b507` game.js feast bundle + buy-out + init data list [needs-eyes]
-- `fdee5c3aa` game.js: centrepiece contribution id `crafted_centrepiece`
+## Commits on branch build-ladder-leg2 (final SHAs; base 6943519e78)
+- `515ad5adc` prereg
+- `56f215d9f` progression.js: foodDeeds is sentimentTaught alone
+- `6270bb40b` ladder.js: +4-per-stage bundle bonus read (flagged amendment)
+- `457eaeae4` table.js seat surgery [needs-eyes]
+- `cdf6b7b57` game.js feast bundle + buy-out + init data list [needs-eyes]
+- `043fa616e` game.js: centrepiece contribution id `crafted_centrepiece`
   (prereg name, not the item id `pemmican`)
-- `b87225bf0` new seat + bundle unit proofs (38 + 79 green)
-- `0d4f08f5e` fullseat-shortfall test rigs National + capstone; surge no
+- `0532a5846` new seat + bundle unit proofs (38 + 79 green)
+- `52f77700b` fullseat-shortfall test rigs National + capstone; surge no
   longer a named bar
-- `bd42134cb` scalegate test rigs National + capstone
-- `4d7cef89d` tableoffer test rigs Village standing
-- `2ebe07f7f` choiceprice static checks track the singular food-thesis deed
+- `ed01341fe` scalegate test rigs National + capstone
+- `d0c080de1` tableoffer test rigs Village standing
+- `45dc3d104` choiceprice static checks track the singular food-thesis deed
   + sentimentTaught-alone foodDeeds
-- `c3c33e393` reactor seat-honesty test premise updated
-- `a7a9dabd9` green-list entries for the two new proof tests
-- `67fc50bc5` fullseat-superset test rigs National + capstone; surge case
+- `fd2094992` reactor seat-honesty test premise updated
+- `3191966cd` green-list entries for the two new proof tests
+- `dcf62d901` fullseat-superset test rigs National + capstone; surge case
   now asserts the gate stays ok
-- `b0ea66a2e` boot-data-version expects 44 JSON requests
+- `9e8965f01` boot-data-version expects 44 JSON requests
   (ladder-capstones.json joined the boot data list)
-- `4e623e420` table-sheet-handoff fixture rigs National + capstone
-- `572cf7150` table-entry fixture rigs Village standing; lesson (not surge)
+- `d6840325f` table-sheet-handoff fixture rigs National + capstone
+- `cc298b550` table-entry fixture rigs Village standing; lesson (not surge)
   gates entry
-- `67ef7e09a` table-trial-fire setup rigs Village standing (fixture sat on
+- `c5ac301b0` table-trial-fire setup rigs Village standing (fixture sat on
   the threshold and flipped lesser/none)
-- `d4f4af645` refresh neutral proof (fresh panel seed 7 x 4 policies x 150d,
+- `c3d0f2603` refresh neutral proof (fresh panel seed 7 x 4 policies x 150d,
   neutrality 4/4, 0 warnings)
-- `e3dd68a91` run note (seat surgery + feast bundle, proofs, check.js
+- `4296eb675` run note (seat surgery + feast bundle, proofs, check.js
   attribution, neutral-proof refresh)
-- `9f062fe8f` refresh neutral proof after rebase onto 246ce6dc2 (panel
+- `7d96a7f95` refresh neutral proof after rebase onto 246ce6dc2 (panel
   seed 7 x 4 policies x 150d, neutrality 4/4)
-- `5f1e19d5a` run note update (rebase onto 246ce6dc2, post-rebase proof
+- `8da3fd492` run note update (rebase onto 246ce6dc2, post-rebase proof
   suite + proof refresh)
-- `60a0a26d5` refresh neutral proof after rebase onto d229b58f5 (panel
+- `b6f5ce4e4` refresh neutral proof after rebase onto d229b58f5 (panel
   seed 7 x 4 policies x 150d, neutrality 4/4)
+- `3807ecaa6` run note update (second rebase, degraded final gate
+  analysed, true 290/4)
 - `docs/ONTOLOGY.md` (generated update, harvested by validate-ontology
   during check.js from this leg's source comments: the new
   `ladder_bundle_bonus` rule + the `arc4_deed_gate` wording noting
