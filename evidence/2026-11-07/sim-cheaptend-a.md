@@ -221,11 +221,73 @@ sick-at-Haven days.
 
 ### Balanced panel (§15)
 
-ATTEMPTED — see panel section below (filled after the panel run;
-if the panel build fails in the registry/ingestion class, the
-analyzer replication table above stands as the comparison and the
-failure class is named here — a tooling failure never re-scores
-the verdict).
+COMPLETED 2026-11-08 (closeout, run fleshout-20261108T0615Z) — panel
+build SUCCEEDED, panel compare INVALID (tooling failure, new class —
+see below). A tooling failure never re-scores the verdict: PILOT
+NO-GO stands, judged by the analyzer replication table above, which
+stands as the comparison.
+
+- AFTER-PANEL (built in-tree as-is, no rebase, per the closeout
+  dispatch): `CHEAPTEND_A=1 PLENTYDEPRI=1 DEPOSITGATE=1 node
+  scripts/balance-panel.js --out
+  evidence/2026-11-07/cheaptend-a-panel-after --seeds
+  96301,96302,96303,96304,96305,96306,96307,96308 --policies
+  cheaptend-a --days 150` → `Saved ...; 8 cases, 6 cached jobs`,
+  exit 0. The 6 partial case JSONs from the first dispatch were
+  reused verbatim (cache identities match); the 3 missing seeds
+  (96305, 96307, 96308) were computed fresh. Verified 8/8 rows in
+  `panel.json.gz`: seeds 96301–96308, policy cheaptend-a,
+  sourceDigest 33d0930d… identical to the before-panel, sourcesStable,
+  neutrality proof (96301 observe-0 vs observe-1) match, zero
+  warnings. Per-seed days after: 82 / 84 / 149 / 61 / 134 / 77 / 94 /
+  90 (median 87) vs before-panel days 132 / 61 / 149 / 61 / 107 / 98 /
+  94 / 90 (median 96).
+- COMPARE: `node scripts/balance-panel.js compare --before
+  evidence/2026-11-07/cheaptend-a-panel-before/panel.json.gz --after
+  evidence/2026-11-07/cheaptend-a-panel-after/panel.json.gz --out
+  evidence/2026-11-07/cheaptend-a-panel-compare --intervention-flags
+  CHEAPTEND_A` → decision **`invalid`**, errors `Unmatched policies`,
+  `Unmatched cases` (exit 2). Attached:
+  `evidence/2026-11-07/cheaptend-a-panel-compare.md` (+ `.json`).
+- FAILURE CLASS — COMPARE-CONTRACT (new; NOT the prereg's
+  anticipated registry/ingestion class, which never fired — the
+  build succeeded and both panels are valid): `comparePanels`
+  (`scripts/lib/balance-scorecard.js:129`) pairs cases by
+  `caseKey = policy + ':' + seed` and requires identical
+  `options.policies` on both sides. The prereg's prescribed shape
+  (before panel `--policies competent`, after panel `--policies
+  cheaptend-a`) can therefore never match — the two panels share no
+  policy name and no case key. The CHEAPTEND_A intervention-flag
+  exemption only exempts the flag from the flags match; it does not
+  exempt policies or case keys. Any wrapper-policy arm built this
+  way hits the same wall.
+- INSTRUMENT CAVEAT (noted, not judged): panel per-seed days differ
+  from the diag corpus on seeds 96305–96308 on BOTH legs — before:
+  panel 107/98/94/90 vs diag baseline 119/109/117/73; after: panel
+  134/94/90 vs diag armed 150/117/73 — while 96301–96304 agree
+  exactly on both legs. The panel harness (sweep-compare observer
+  path) diverges from the diag sweep on those seeds' trajectories.
+  Same instrument on both legs, so a panel before/after would still
+  be internally consistent; panel days are simply not interchangeable
+  with diag survival days.
+- REPAIR ROUTE (coordinator call, NOT done in this closeout): rebuild
+  the before-panel with `--policies cheaptend-a` and CHEAPTEND_A
+  unset. The layer is inert when the flag is unset — `tendDrive`
+  returns immediately (`scripts/policies/cheaptend-a.js`: "gate off:
+  pure delegation — never drive") — so that before-panel should
+  reproduce the competent rows exactly (days 132/61/149/61/107/98/
+  94/90); if it does not, that is a finding about wrapper
+  neutrality. Not done here because it replaces a committed panel
+  (a38569057) and redesigns the prereg's §15 shape; the closeout
+  brief was to finish the prescribed after-panel + compare, not to
+  redesign §15.
+- HEARTBEAT NOTE (closeout): `worktree-heartbeat.sh sim-cheaptend-a`
+  hung twice on REGISTRY.lock flock contention (first attempt
+  ~3.5 min, killed; retry timed out at 90 s) and neither attempt
+  landed a new timestamp. The registry entry already read
+  heartbeat_at 2026-11-08T06:36:39Z (fresh, minutes before this
+  closeout started), so work proceeded per the dispatch and the
+  ~4 h reaper threshold was never approached.
 
 ### Telemetry deviation check
 
