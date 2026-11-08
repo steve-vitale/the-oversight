@@ -301,16 +301,16 @@ NPC-to-NPC currency. Diplomacy's village↔village trust stays in
 confused. Closed by phase 2.
 
 **Seam 4 — perception discipline is per-module, not architectural.**
-Today: `objDanger`, `objVillageDanger` and `objRallyFreshRaid`
-(`villager-objectives.js:824-889`) sum the whole village gossip store
-with no `heard` filter — three copies in one file — while the goals
-layer computes a fourth, heard-filtered version (`dangerHeard`,
-`villager-goals.js:236-247`); pantry and cistern are read as global
-totals by everyone, home or away. A villager's drive can be zeroed for
-not hearing a raid while their feet are held home by that same raid.
-*Replaced by:* the belief state's single danger and pantry beliefs
-(heard-filtered, staleness-weighted); all four danger computations and
-the global resource reads retire into it. Closed by phase 3.
+Was: `objDanger`, `objVillageDanger` and `objRallyFreshRaid` summed the
+whole village gossip store with no `heard` filter — three copies — while
+the goals layer had a fourth, heard-filtered version (`dangerHeard`).
+A villager's drive could be zeroed for not hearing a raid while their
+feet were held home by that same raid.
+*Danger half closed (2026-11-08):* one `objDangerBelief(vid)` feeds the
+door, the rally, village-danger expedition gate, and the safety drive
+(`dangerHeard` → `belief.threat`). Probe:
+`scripts/test-raid-danger-heard.js`. Pantry/cistern belief still open
+(phase 3 remainder).
 
 **Seam 5 — personality is read at wildly different resolutions.**
 Today: a rich multiplier table (goals), a ±1 nudge (objectives danger
@@ -436,16 +436,17 @@ trust in the scholar). *Closes seam 3 and half of seam 8. Done when:*
 the §8 trust census shows the map moving in ordinary panels.
 
 **Phase 3 — perception hardening.**
-One heard-filtered danger read in the belief state replaces
-`objDanger`, `objVillageDanger`, `objRallyFreshRaid` and the goals
-layer's `dangerHeard`; the door verdict, the rally and the safety
-drive all consume it. Believed pantry/cistern (with staleness)
-replaces the global reads in the food-security drive, in FORAGE/WATER
-urgency (`villager-objectives.js:377-387`) and in the village-resource
-favor scan (`convoFindFavorNeed`, `convo-wants.js:1559-1572`).
+One heard-filtered danger read (`objDangerBelief(vid)`) replaces the
+four gossip scans; the door verdict, the rally and the safety drive
+all consume it — **landed 2026-11-08** (probe
+`scripts/test-raid-danger-heard.js`). Remaining: believed pantry/cistern
+(with staleness) replaces the global reads in the food-security drive,
+in FORAGE/WATER urgency (`villager-objectives.js:377-387`) and in the
+village-resource favor scan (`convoFindFavorNeed`,
+`convo-wants.js:1559-1572`).
 *Closes seam 4. Done when:* the §8 perception probes pass — a villager
-who never heard of the raid does not act on it, and an away villager
-acts on the pantry as they last knew it, not as it is.
+who never heard of the raid does not act on it (**done**), and an away
+villager acts on the pantry as they last knew it, not as it is (open).
 
 **Phase 4 — conversation and social life join the list; one companion
 scoring.**

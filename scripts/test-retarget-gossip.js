@@ -103,8 +103,12 @@ async function main() {
   check('low-severity gossip: no turn-back narration', turnLines().length === 0,
     JSON.stringify(turnLines()));
 
+  // Hearers must name the in-flight villagers who should react —
+  // objDangerBelief only counts gossip this villager heard (seam 4).
+  const tripHearers = [far1, near, far2];
+
   // ---- phase 2: high-severity 'attack' ----
-  Game.seedGossip('attack', { brave: -8 }, roster.slice(0, 3));
+  Game.seedGossip('attack', { brave: -8 }, tripHearers);
   const flipWord = OLD_BEHAVIOR ? 'stays out (old behavior)' : "flips to 'returning'";
   const expectFlip1 = !OLD_BEHAVIOR; // far1: 4+2=6 defer
   check('attack gossip: far cautious villager ' + flipWord, (st(far1) === 'returning') === expectFlip1, st(far1));
@@ -121,7 +125,7 @@ async function main() {
 
   // ---- phase 3: 'death' gossip — the steady far villager's turn ----
   const deadVid = roster.find(id => id !== far1 && id !== near && id !== far2);
-  Game.seedGossip('death', { who: deadVid }, []);
+  Game.seedGossip('death', { who: deadVid }, tripHearers);
   const expectFlip3 = !OLD_BEHAVIOR; // far2: 3+2(attack)+1(death)=6 defer
   check('death gossip: steady far villager ' + flipWord, (st(far2) === 'returning') === expectFlip3, st(far2));
   check('death gossip: bold near villager still out (3=ask)', st(near) === 'out', st(near));
@@ -159,11 +163,11 @@ async function main() {
     said.length = 0;
     const origTA = Game.tableActive;
     Game.tableActive = () => true; // the table sits: the world holds its breath
-    Game.seedGossip('murder', { honest: -20 }, roster.slice(0, 3)); // +2: 4+2=6 defer — would flip
+    Game.seedGossip('murder', { honest: -20 }, [v4]); // +2: 4+2=6 defer — would flip
     check('table sits: high-severity gossip does not re-target', st(v4) === 'out', st(v4));
     check('table sits: no turn-back narration', turnLines().length === 0, JSON.stringify(turnLines()));
     Game.tableActive = origTA;
-    Game.seedGossip('raid', { raiders: 5 }, roster.slice(0, 3)); // gate lifted: 4+2(murder)+2(raid)=8 defer
+    Game.seedGossip('raid', { raiders: 5 }, [v4]); // gate lifted: 4+2(murder)+2(raid)=8 defer
     check('gate lifted: villager flips', st(v4) === 'returning', st(v4));
     const tl5 = turnLines();
     check('gate lifted: raid cause narrated', tl5.length === 1 && tl5[0].indexOf('raiders are on the move (5 of them)') !== -1,
