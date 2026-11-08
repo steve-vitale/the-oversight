@@ -1,0 +1,160 @@
+REBASE2-START 12:37:15 HEAD=34275f9f4
+=== scripts/test-journey-succession-r157-teach-dry.js ===
+PASS teach-blocked: plants data present — n=187
+PASS teach-blocked: two villagers found — found=2
+PASS teach-blocked: scholar knows dandelion — plantKnown=true
+PASS teach-blocked: A convo opened — refused=false
+PASS teach-blocked: A speaks the teach narration — "Well. Can I tell you something? I've been skimming extra food. I'm ashamed and I can't stop." | "Here — let me show you." | You show them Dandelion — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+PASS teach-blocked: A has no dry line — "Well. Can I tell you something? I've been skimming extra food. I'm ashamed and I can't stop." | "Here — let me show you." | You show them Dandelion — where it grows, how to tell it apart. Their eyes 
+PASS teach-blocked: B convo opened — refused=false
+PASS teach-blocked: B speaks the teach narration — "Funny thing — Can I tell you something? I've been skimming extra food. I'm ashamed and I can't stop." | "Let me show you something." | You show them Dandelion — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+PASS teach-blocked: B has no dry line — "Funny thing — Can I tell you something? I've been skimming extra food. I'm ashamed and I can't stop." | "Let me show you something." | You show them Dandelion — where it grows, how to tell it apart. 
+PASS teach-blocked: B still learned the plant (lesson landed) — taughtByPlayer[B]=["dandelion"]
+PASS teach-blocked: B speaks the SAME composed line as A — A=You show them Dandelion — where it grows, how to tell it apart. Their eyes widen B=You show them Dandelion — where it grows, how to tell it apart. Their eyes widen
+PASS teach-control: plants data present — n=187
+PASS teach-control: two villagers found — found=2
+PASS teach-control: A convo opened — refused=false
+PASS teach-control: A speaks a teach narration — "I think — Can I tell you something? I've been skimming extra food. I'm ashamed and I can't stop." | "Here, I know this one — let me show you." | You show them Dandelion — where it grows, how to tell it apart. Their eyes widen. "I never kne
+PASS teach-control: B convo opened — refused=false
+PASS teach-control: B speaks the Y teach narration — "Look. Can I tell you something? I've been skimming extra food. I'm ashamed and I can't stop." | "Here, I know this one — let me show you." | You show them Cattail — where it grows, how to tell it apart. "Huh." They turn it over in their mi
+PASS teach-control: B has no dry line — "Look. Can I tell you something? I've been skimming extra food. I'm ashamed and I can't stop." | "Here, I know this one — let me show you." | You show them Cattail — where it grows, how to tell it apa
+PASS teach-window: plants data present — n=187
+PASS teach-window: two villagers found — found=2
+PASS teach-window: scholar knows dandelion — plantKnown=true
+PASS teach-window: A convo opened — refused=false
+PASS teach-window: A speaks the teach narration — "Honestly, Can I tell you something? I've been skimming extra food. I'm ashamed and I can't stop." | "Let me show you — I did this for a living." | You show them Dandelion — where it grows, how to tell it apart. Their eyes widen. "I never k
+PASS teach-window: A has no dry line — "Honestly, Can I tell you something? I've been skimming extra food. I'm ashamed and I can't stop." | "Let me show you — I did this for a living." | You show them Dandelion — where it grows, how to tel
+PASS teach-window: A line slid out of the ledger — ledger=48
+PASS teach-window: B convo opened — refused=false
+PASS teach-window: B speaks the teach narration — "Mm. Can I tell you something? I've been skimming extra food. I'm ashamed and I can't stop." | "Let me show you — I did this for a living." | You show them Dandelion — where it grows, how to tell it apart. Their eyes widen. "I never knew th
+PASS teach-window: B has no dry line — "Mm. Can I tell you something? I've been skimming extra food. I'm ashamed and I can't stop." | "Let me show you — I did this for a living." | You show them Dandelion — where it grows, how to tell it a
+
+ALL GREEN
+EXIT=0 :: scripts/test-journey-succession-r157-teach-dry.js
+=== scripts/godpath/test-measurement-proof-update.js ===
+/home/hatch/workspace/worktrees/journey2-succession/scripts/balance-proof-update.js:8
+ if(JSON.stringify(B.manifest(root))!==JSON.stringify(panel.sources))throw Error('Proof source inputs are not current');
+                                                                     ^
+
+Error: Proof source inputs are not current
+    at Object.validate (/home/hatch/workspace/worktrees/journey2-succession/scripts/balance-proof-update.js:8:76)
+    at Object.<anonymous> (/home/hatch/workspace/worktrees/journey2-succession/scripts/godpath/test-measurement-proof-update.js:4:40)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+
+Node.js v24.22.1
+EXIT=1 :: scripts/godpath/test-measurement-proof-update.js
+=== scripts/godpath/test-measurement-workflow.js ===
+  ok   metric IDs are unique and every contract declares units, direction and tolerance
+  ok   sampling and confirmation settings remain valid
+  ok   retained real panel matches its proof digest
+  FAIL retained neutrality proof covers the current Game/controller/harness inputs
+  ok   proof declares every collector and contract input rather than silently omitting one
+  ok   collector and contract have a current proof (see SIMULATING.md: Maintaining measurement)
+  ok   every retained real observation emits exactly the contracted metrics, with explicit unknowns
+  ok   all retained policy cohorts have passing sampled observer neutrality and stable sources
+  ok   retained NPC proof has eligible actor/day evidence and a reproducible class denominator
+
+measurement-workflow: 8 passed, 1 failed, 0 todo (phase 0)
+failing: retained neutrality proof covers the current Game/controller/harness inputs
+EXIT=1 :: scripts/godpath/test-measurement-workflow.js
+=== scripts/godpath/test-mobile-combat-cadence.js ===
+  ok   Wait accepts zero movement with unused action
+  FAIL enemy is announced before its action runs
+  ok   announcement leaves a real browser task before resolution
+  ok   exactly one enemy action resolves before hand-back
+  ok   resolved board gets its own presentation event
+  ok   player returns with usable action and fresh movement
+  ok   hand-back follows resolution
+  ok   superseded announcement cannot perform a stale enemy action
+  ok   save retains the announced but unresolved actor
+  ok   Continue resolves the pending enemy exactly once
+  FAIL Continue does not wrap the announced round a second time
+  ok   Continue hands control back with fresh player inputs
+  ok   enemy-phase endings publish the terminal state to the browser
+  ok   faster opening enemy is announced before acting
+  ok   each faster opening enemy acts once before usable player controls
+
+mobile combat cadence: 13 passed, 2 failed, 0 todo (phase 0)
+failing: enemy is announced before its action runs | Continue does not wrap the announced round a second time
+EXIT=1 :: scripts/godpath/test-mobile-combat-cadence.js
+=== scripts/godpath/test-occupation-panels.js ===
+Error: node:internal/modules/cjs/loader:1568
+  throw err;
+  ^
+
+Error: Cannot find module './lib/luck-instrument'
+Require stack:
+- /tmp/oversight-cohort-ZhrDSx/observer/scripts/balance-panel.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1564:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1118:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1142:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1169:12)
+    at Module._load (node:internal/modules/cjs/loader:1341:5)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.require (node:internal/modules/cjs/loader:1674:12)
+    at require (node:internal/modules/helpers:157:16)
+    at Object.<anonymous> (/tmp/oversight-cohort-ZhrDSx/observer/scripts/balance-panel.js:5:140)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [ '/tmp/oversight-cohort-ZhrDSx/observer/scripts/balance-panel.js' ]
+}
+
+Node.js v24.22.1
+
+    at run (/home/hatch/workspace/worktrees/journey2-succession/scripts/godpath/test-occupation-panels.js:15:25)
+    at Object.<anonymous> (/home/hatch/workspace/worktrees/journey2-succession/scripts/godpath/test-occupation-panels.js:17:14)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+  FAIL real CLI workflow completed
+
+occupation panels: 0 passed, 1 failed, 0 todo (phase 0)
+failing: real CLI workflow completed
+EXIT=1 :: scripts/godpath/test-occupation-panels.js
+=== scripts/godpath/test-phone-frame-proof.js ===
+  ok   both actual target phone sizes are retained
+  FAIL every retained browser input matches current source — index.html,src/css/main.css,src/data/alienPlayers.json,src/data/arrivalText.json,src/data/characterGen.json,src/data/items.json,src/data/monsters.json,src/data/regions.json,src/data/reward-economy.json,src/data/synergies.json,src/data/tracks.json,src/js/abilityActions.js,src/js/alienPlayers.js,src/js/app.js,src/js/betrayal.js,src/js/build.js,src/js/carexplore.js,src/js/codex-people.js,src/js/comms.js,src/js/contestEngine.js,src/js/contests.js,src/js/conversation.js,src/js/convo-beats.js,src/js/convo-dialogue.js,src/js/convo-mood.js,src/js/convo-wants.js,src/js/convoTopics.js,src/js/corpses.js,src/js/corruption.js,src/js/encounters.js,src/js/engine/combat.js,src/js/engine/state.js,src/js/equipment.js,src/js/exposure.js,src/js/feastBuff.js,src/js/fieldFights.js,src/js/finale-campaign.js,src/js/food.js,src/js/game.js,src/js/godpath.js,src/js/havenGrowth.js,src/js/hierarchy.js,src/js/journal.js,src/js/justice.js,src/js/ledger.js,src/js/lifeseed.js,src/js/membership.js,src/js/metaProgression.js,src/js/nomad-drive.js,src/js/nomad-scenes.js,src/js/nomad.js,src/js/party-formal.js,src/js/party.js,src/js/perceive.js,src/js/progression.js,src/js/safetynets.js,src/js/scaleDiscovery.js,src/js/sigW4.js,src/js/sigW5.js,src/js/skill-teaching.js,src/js/spawn-knack.js,src/js/standing.js,src/js/statusEffects.js,src/js/storage.js,src/js/table-feared.js,src/js/table-witness.js,src/js/table.js,src/js/telemetry-hooks.js,src/js/titans.js,src/js/tracks.js,src/js/truth.js,src/js/villageAgency.js,src/js/villager-agency.js,src/js/villager-build.js,src/js/villager-mapmem.js,src/js/villager-objectives.js,src/js/world.js
+  FAIL all current boot inputs are covered
+  ok   receipt identity declares portable text normalization
+  ok   retained receipt hash 736
+  FAIL current phone evidence is required; follow MOBILE-PLAYTEST.md — Phone receipt source is stale or missing: index.html
+
+Phone frame proof: 3 passed, 3 failed, 0 todo (phase 0)
+failing: every retained browser input matches current source | all current boot inputs are covered | current phone evidence is required; follow MOBILE-PLAYTEST.md
+EXIT=1 :: scripts/godpath/test-phone-frame-proof.js
+=== scripts/test-establishment-r20-fixes-20261020.js ===
+FIX 1 — preserver recognized on cook duty (real villagerCompetence, OLD vs NEW)
+  PASS NEW fisherman (preserver 3) -> 1.3
+  PASS OLD fisherman (preserver 3) -> 1
+  PASS NEW truck driver (no skill) -> 1
+  PASS OLD truck driver (no skill) -> 1
+  PASS NEW chef (cook 3, keeps 1.4 priority) -> 1.4
+  PASS OLD chef (cook 3, keeps 1.4 priority) -> 1.4
+  PASS NEW farmer (unchanged 1.2) -> 1.2
+  PASS OLD farmer (unchanged 1.2) -> 1.2
+  PASS NEW park ranger (preserver 1 — below threshold) -> 1
+  PASS OLD park ranger (preserver 1 — below threshold) -> 1
+  PASS NEW line cook (keyword match unchanged) -> 1.4
+  PASS OLD line cook (keyword match unchanged) -> 1.4
+  PASS fisherman earns the ⭐ natural tag
+FIX 2 — racks-full voice gated per cook-day (real resolveOneAssignment, OLD vs NEW)
+  PASS NEW: 3 same-day resolutions -> 1 racks-full line
+  FAIL NEW: next day voices once more (gate resets daily): expected 2, got 1
+  PASS NEW: preserved stock still counted
+  PASS OLD: 3 same-day resolutions -> 3 identical lines (the bug)
+  PASS OLD: next day adds a 4th
+  PASS OLD: preserved stock still counted
+
+1 FAILURES
+EXIT=1 :: scripts/test-establishment-r20-fixes-20261020.js
+REBASE2-DONE 12:37:22

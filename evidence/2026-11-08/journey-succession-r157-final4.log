@@ -1,0 +1,26 @@
+FINAL4-START 12:54:06 HEAD=ebe2329ba
+=== scripts/godpath/test-mobile-combat-cadence.js ===
+  ok   each faster opening enemy acts once before usable player controls
+
+mobile combat cadence: 13 passed, 2 failed, 0 todo (phase 0)
+failing: enemy is announced before its action runs | Continue does not wrap the announced round a second time
+EXIT=1 :: scripts/godpath/test-mobile-combat-cadence.js
+=== scripts/godpath/test-occupation-panels.js ===
+  FAIL real CLI workflow completed
+
+occupation panels: 0 passed, 1 failed, 0 todo (phase 0)
+failing: real CLI workflow completed
+EXIT=1 :: scripts/godpath/test-occupation-panels.js
+=== scripts/godpath/test-phone-frame-proof.js ===
+  FAIL current phone evidence is required; follow MOBILE-PLAYTEST.md — Phone receipt source is stale or missing: index.html
+
+Phone frame proof: 3 passed, 3 failed, 0 todo (phase 0)
+failing: every retained browser input matches current source | all current boot inputs are covered | current phone evidence is required; follow MOBILE-PLAYTEST.md
+EXIT=1 :: scripts/godpath/test-phone-frame-proof.js
+=== scripts/test-establishment-r20-fixes-20261020.js ===
+  PASS OLD: next day adds a 4th
+  PASS OLD: preserved stock still counted
+
+1 FAILURES
+EXIT=1 :: scripts/test-establishment-r20-fixes-20261020.js
+FINAL4-DONE 12:54:10
