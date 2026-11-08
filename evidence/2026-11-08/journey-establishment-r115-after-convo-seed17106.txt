@@ -1,0 +1,80 @@
+=== r115-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Arnold (gen_6o3ftox) occ=Vintner --
+OPENING: "Never mind the pantry run — we got it handled. Thanks anyway. This cut — I can't clean it properly one-handed. Will you help me clean it?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to them, on the same side of the Haven door, to help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Piquiarana. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "a spring that runs clear — I'll show you on the map sometime. It's real."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [alive:event:show] "The show — did you see it?"
+THEM: "They took Amina — The Oath, on the screens. The whole fire watched. Nobody knew where to look."
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Groundnut — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Another time. The village needs me here."
+closing: "Alright. Back to work."
+
+-- Kipyegon (gen_sz20eu0) occ=barber --
+OPENING: "About the pantry run — I still haven't found anyone. Any chance?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Finish the current event before foraging together.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Then it’s set. The old burn east of camp, at sunup. Pack and knife. We travel light."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "Amina? A Midwife, back before. Solid person."
+YOU: [goon] "Whoa — go on."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:more] "Go on."
+THEM: "Amina walked out of The Oath. Alive. That's the whole story and it's enough."
+YOU: [dlg:react] (listen)
+THEM: "People are talking about Arnold. Take it for what it's worth."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the gossip."
+closing: "Take care of yourself."
+
+-- Platon (gen_sbfli3r) occ=Midwife --
+OPENING: "About what happened to my taken kin — You talk to it -- the System. Have you ever asked? About the taken -- about Ksenia?"
+YOU: [gq:yn:yes] "Yes."
+THEM: "I see." They take a moment to think about your answer.
+YOU: [goon] "Go on."
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [dlg:more] "What do you remember?"
+THEM: "It's my sister, Ksenia. Was taken at the Scattering. The boring half, they said — my sister, boring. I think about that every day. Some nights I swear I hear them before I sleep -- the pods, rows deep, humming. Then morning comes and I can't say whether it was real."
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [goon] "Go on."
+THEM: "Help me haul something back? Too much for one."
+YOU: [silence] "..."
+THEM: A comfortable quiet settles. They smile a little, and let it be.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person. Don't waste it."
+YOU: [goon] "Go on."
+THEM: "Alright — I should get back to it."
+
+-- Sigrun (sigrun_eiriksdottir) occ=night security guard --
+OPENING: "Pantry's thin and getting thinner. Will you forage with me tomorrow? Two pairs of eyes, twice the ground."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Finish the current event before foraging together.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Then it’s set. The east treeline, morning, early. Bring your pack and your knife."
+YOU: [goon] "Yeah?"
+THEM: "Come get air with me. I need to think out loud."
+YOU: [silence] "..."
+THEM: You say nothing. Neither do they, for a while — and it's fine.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Kipyegon? A barber, back before. Solid person."
+YOU: [goon] "What else did you hear?"
+THEM: "I should go. You know where to find me."
+YOU: [agree] "You're right."
+THEM: "...Yeah."
+(ended by engine)

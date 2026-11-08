@@ -1,0 +1,80 @@
+=== r115-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Raj (gen_p07x4la) occ=blacksmith --
+OPENING: "Can I tell you something? I've been skimming extra food. I'm ashamed and I can't stop."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Fonio. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "a burned farmhouse — I'll show you on the map sometime. It's real."
+YOU: [dlg:react] (listen)
+THEM: "So." They look at the fire for a moment.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on what they confided."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Don't tell anyone I told you. What's on your mind?"
+YOU: [ask:goal] "So like... what do you actually want? From all this?"
+THEM: "You want to know about that? Okay." When it's all over, I'll have the whole story. Somebody should.
+YOU: [dlg:more] "Tell me more."
+THEM: "I write down who laughed today. The arguments write themselves."
+closing: "Well. That was almost a conversation. We're improving."
+
+-- Dwayne (gen_veyvwsn) occ=bike messenger --
+OPENING: "Never mind this wound — we got it handled. Thanks anyway."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Wood Sorrel. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Soursop. Leaf, stem, smell. You won't forget it now."
+YOU: [alive:event:show] "The show — did you see it?"
+THEM: "The Pit. They just... took Meera. Came back like nothing happened. It wasn't nothing."
+YOU: [teach] "Watch. This matters."
+THEM: You show them American Persimmon — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "I can't. Not today. Ask me when the work's done."
+YOU: [menu:more] More things to say (1/2)
+THEM: (menu page turned)
+YOU: [dlg:more] "I’m listening."
+THEM: "Ask me tomorrow. Everything changes by tomorrow."
+closing: "Good talking. We'll figure it out."
+
+-- Mariana (gen_97ad474) occ=rail conductor --
+OPENING: "You talk to it -- the System. Have you ever asked? About the taken -- about Betty?"
+YOU: [gq:yn:yes] "Yes."
+THEM: They nod. "Okay."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:cant] "I don't know anything. I'm sorry."
+THEM: "Yeah. Sorry. It's -- never mind. Forget I said anything." They look away, embarrassed at having wanted something.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "What's this about? Still on that taken person."
+YOU: [gq:reason:understand] "I want to understand you better."
+THEM: "All right. Thank you for asking."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "What are you hoping for? Not the big stuff. The small thing."
+YOU: [deflect_q] (change the subject)
+THEM: "Okay." Something shutters, just slightly.
+closing: "Alright. One thing at a time. That's how we get through."
+
+-- Liliana (gen_9sxjpvw) occ=lifeguard --
+OPENING: "About the creek water run — the need hasn't gone anywhere. I'm still asking."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to your partner, on the same side of the Haven door.
+YOU: [dlg:details] "Tell me why you need this."
+THEM: "I checked the cistern three times hoping I misread it. 8 liters. We walk together and each carry two liters back. Creek water still needs boiling."
+YOU: [dlg:cant] "I can’t right now."
+THEM: "No, yeah, of course. Forget I asked." They won't forget. They'll just stop asking.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that water haul."
+YOU: [goon] "Wait, what? Go on —"
+THEM: Their tone levels out — courteous, careful, further away.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "Huh. Let me think about that." "Did you hear? You won The Pit on the cameras. People are still talking about it."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "Alright — I should get back to it."

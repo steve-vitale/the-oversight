@@ -1,0 +1,71 @@
+=== r115-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Daniela (gen_54x4b9l) occ=Veterinarian --
+OPENING: "We're down to 2 liters of clean water. Haul the creek with me at dawn? Two buckets each, there and back."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to your partner, on the same side of the Haven door.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Wait — I'm away from Haven, out on the road. I can't promise a dawn meet while I'm out — find me when I'm back, and we'll set it then."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Good King Henry. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Elderberry. Leaf, stem, smell. You won't forget it now."
+YOU: [menu:more] More things to say (1/3)
+THEM: (menu page turned)
+YOU: [goon] "Wait, what? Go on —"
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+YOU: [silence] "..."
+THEM: A comfortable quiet settles. They smile a little, and let it be.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+closing: "I'm going to go stare at something else now."
+
+-- Nicole (gen_8mcigiz) occ=Rancher --
+OPENING: Nicole: "You. Yeah, you. What do you make of this?"
+YOU: [gq:open:take] "I need a moment to think about that."
+THEM: "Take your time."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Bittersweet Nightshade. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — American Hazelnut. Leaf, stem, smell. You won't forget it now."
+YOU: [menu:more] More things to say (1/3)
+THEM: (menu page turned)
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Good King Henry — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+(no pick)
+(stall menu: agency:ask_field|betrayal:site:case_21|betrayal:witnesses:case_21|betrayal:investigate:case_21|betrayal:letlie:case_21|menu:more|leave)
+closing: "See you at the fire."
+
+-- Daiana (gen_6lpgx8f) occ=exterminator --
+OPENING: "About what happened to my taken kin — Have you heard anything? About the taken. The pods. Anything at all. ...sorry, I'm spiraling."
+YOU: [gq:yn:yes] "Yes."
+THEM: "All right. Thank you for telling me."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: Something eases in their shoulders. They're really talking to you now.
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "What's the worst thing you've done since the sky changed?"
+YOU: [ans:q_guilty:a_tell] "There's something I regret. I'm not ready to talk about it."
+THEM: No judgment in their face. "We're all doing math that doesn't add up. You're still here. That counts."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "I don't answer that one myself. Not yet. Maybe when I've decided whether surviving counts as an excuse or just a reason."
+YOU: [dlg:more] "Tell me about them."
+THEM: "It's my aunt, Alma. Went in the Taking. She laughed like a screen door in a windstorm. Boring. Right. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Sassafras. Leaf, stem, smell. You won't forget it now."
+closing: "Don't be a stranger."
+
+-- Ethel (gen_6th535t) occ=street artist --
+OPENING: "Can I tell you something? At night I cry quietly so no one hears."
+YOU: [menu:more] More things to say (1/3)
+THEM: (menu page turned)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Don't tell anyone I told you. What's on your mind?"
+YOU: [silence] "..."
+THEM: They glance at the fire, then back. The quiet doesn't seem to bother them.
+(no pick)
+(stall menu: betrayal:press:case_21:gen_6th535t|betrayal:site:case_21|betrayal:witnesses:case_21|betrayal:investigate:case_21|betrayal:letlie:case_21|menu:more|leave|silence)
+closing: "Come find me later, yeah? I like talking to you."

@@ -1,0 +1,80 @@
+=== r115-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Maricela (gen_p7jnpla) occ=taxi driver --
+OPENING: "I keep dreaming about rows of pods. Humming. Tell me I'm not the only one."
+YOU: [dlg:more] "Tell me about them."
+THEM: "It's my best friend, Piper. Was taken at the Scattering. We had plans. Stupid, small, beautiful plans. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person. Funny how that works."
+YOU: [goon] "Please, go on."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? I mean it."
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "You want to know about that? Okay." "That was me — headed out for water. Trust me. Mostly."
+YOU: [goon] "I'm listening, I promise."
+THEM: "Okay. We'll pick this up later."
+YOU: [agree] "You're right."
+THEM: "Yeah. That's about right."
+(ended by engine)
+
+-- Chris (gen_zgtibi0) occ=electrician --
+OPENING: "Can I tell you something? At night I cry quietly so no one hears."
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Pawpaw — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+YOU: [goon] "I'm listening, I promise."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:react] (listen)
+THEM: "Well." A breath. "That's where things stand."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on what they confided."
+YOU: [goon] "I'm listening, I promise."
+THEM: "What's the worst thing you've done since the sky changed?"
+YOU: [ans:q_guilty:a_tell] "There's something I regret. I'm not ready to talk about it."
+THEM: No judgment in their face. "We're all doing math that doesn't add up. You're still here. That counts."
+YOU: [goon] "I'm listening, I promise."
+THEM: "I don't answer that one myself. Not yet. Maybe when I've decided whether surviving counts as an excuse or just a reason. — or so they tell me."
+YOU: [goon] "I'm listening, I promise."
+THEM: "Alright — I should get back to it."
+
+-- Emily (gen_ai3tyra) occ=Midwife --
+OPENING: "About what happened to my taken kin — You talk to it -- the System. Have you ever asked? About the taken -- about Fiona?"
+YOU: [gq:yn:yes] "Yes."
+THEM: "All right. Thank you for telling me."
+YOU: [goon] "I'm listening, I promise."
+THEM: A neutral quiet returns, the kind where words land normally.
+YOU: [goon] "I'm listening, I promise."
+THEM: "Do you ever just need to be alone? Like, really alone?"
+YOU: [ans:q_alone_time:a_tell] "Every day. I go for walks that don't need to happen. Just to breathe my own air
+THEM: "Heh. I get it. Solitude's a resource too. Scarcer than food, some days."
+YOU: [goon] "I'm listening, I promise."
+THEM: "…I go to the treeline edge and count my breaths. Ten of them. That's my alone. Then I come back — alone is a luxury, and also a little bit a lie."
+YOU: [dlg:more] "What do you remember?"
+THEM: "It's my grandmother, Fiona. Was taken. Eighty-one years old and they called her boring. Eighty-one years. The pods get into my sleep some nights. Row on row of them, humming like a held note -- and I wake up reaching for something that isn't there."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [goon] "I'm listening, I promise."
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+closing: "Don't be a stranger."
+
+-- Sattam (gen_ypbqkt8) occ=lifeguard --
+OPENING: "Can I tell you something? Before the scattering, I froze when it mattered. I think about it every day."
+YOU: [silence] "..."
+THEM: You say nothing. Neither do they, for a while — and it's fine.
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Pawpaw — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Bamboo Shoot. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Jamun. Leaf, stem, smell. You won't forget it now."
+YOU: [dlg:react] (listen)
+THEM: They nod slowly, not quite done, not quite continuing.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on what they confided."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Another time. The village needs me here."
+YOU: [menu:more] More things to say (1/2)
+THEM: (menu page turned)
+closing: "I've got things to do. We all do."
