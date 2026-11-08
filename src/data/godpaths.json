@@ -930,6 +930,14 @@
           "sun_garden",
           "closed_loop"
         ],
+        "deed": {
+          "event": "harvest_fed",
+          "days": 7,
+          "minKcal": 400,
+          "afterDawn": false,
+          "hint": "Feed every living neighbor from your own harvest for 7 days running.",
+          "pendingHint": "Your harvest is feeding them. Keep every neighbor on your food for 7 days running."
+        },
         "play": {
           "_doc": "Feed the Multitude: daily, out of a fight. Every living Haven villager eats their fill (hunger 0) and, for the rest of the day, every fight starts with the party fed (allies and coalition blades hit with the food overcharge: PARTY and TITAN). The harvest goes into other bellies, never yours: it cannot skip your dinner. WEAKNESS: not a fighter: your strikes x strikeMult, and monsters go for the garden first.",
           "actions": [
