@@ -14343,7 +14343,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
 
     // villagerDiseaseId(rec): map the light-sim vector to a real disease id.
     villagerDiseaseId(rec) {
-      const m = { 'wound fever': 'wound_fever', 'gut rot': 'gutrot', 'tick fever': 'disease' };
+      const m = { 'wound fever': 'wound_fever', 'gut rot': 'gutrot', 'tick fever': 'disease', 'radiation sickness': 'radiation_sickness' };
       return (rec && m[rec.name]) || null;
     },
 
@@ -14387,6 +14387,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (eff === 'cure') {
           helpedIllness = true;
           delete v.sick[vid];
+          // RADIATION CURE (Steve 2026-11-08 13:12 CST): a real cure clears
+          // the bearer's exposure faster — the pass is not the only relief.
+          try { if (did === 'radiation_sickness' && this.pelletRadiationCured) this.pelletRadiationCured(vid); } catch (e) {}
           // EVOLUTION (care__warden, 2026-10-11): treatment hardens — 3 days of ward.
           if (this.hasEvoFlag('treatment_ward')) { v.warded = v.warded || {}; v.warded[vid] = (s.day || 0) + 3; }
           this.markDiseaseKnown(did);
@@ -32848,6 +32851,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       };
       const sickSymptom = (rec) => rec.name === 'gut rot' ? 'doubled up with gut cramps'
         : rec.name === 'wound fever' ? 'feverish, a cut gone hot and angry'
+        : rec.name === 'radiation sickness' ? 'nauseous and weak, hair coming away'
         : 'achy and wrung out, barely eating';
       // the sick get worse before they get better
       v._reassuredTick = false; // OUTBREAK HONESTY: one reassurance per tick
@@ -33135,6 +33139,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const hName = nm(holder), pName = nm(pid);
       const cureIt = (via, line) => {
         delete v.sick[pid];
+        // RADIATION CURE (Steve 2026-11-08 13:12 CST): a real cure clears
+        // the bearer's exposure faster — the pass is not the only relief.
+        try { if (did === 'radiation_sickness' && this.pelletRadiationCured) this.pelletRadiationCured(pid); } catch (e) {}
         try { if (this.markDiseaseKnown) this.markDiseaseKnown(did); } catch (e) {}
         try { if (this.remember) this.remember(holder, 'cured', 'cured ' + pName + ' of ' + (def.name || did), { patient: pid }); } catch (e) {}
         try { if (this.remember) this.remember(pid, 'cured_by', 'cured of ' + (def.name || did) + ' by ' + hName, { medic: holder }); } catch (e) {}
@@ -33571,6 +33578,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try { this.villageDrinks(); } catch (e) {}
       // PARITY (2026-10-08): villagers get sick like you do — same vectors.
       try { this.villageSicknessTick(); } catch (e) {}
+      // PELLET RADIATION (Steve 2026-11-08 11:54 CST): the bearer's dose
+      // is reckoned daily, right after the sickness tick — decay on quiet
+      // days, sickness when hot, through the existing sickness systems.
+      try { this.pelletRadiationTick(); } catch (e) {}
       // ECOLOGY (Steve 2026-10-07): wildlife lives whether you're watching or not
       try { this.simEcology(); } catch (e) {}
       this.checkTraps();

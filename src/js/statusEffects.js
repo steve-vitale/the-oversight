@@ -493,6 +493,10 @@
         }
       } catch (e) {}
       if (removed) {
+        // RADIATION CURE (Steve 2026-11-08 13:12 CST): curing the
+        // scholar's radiation sickness clears their exposure faster.
+        // The pass is not the only relief.
+        try { if (effectId === 'radiation_sickness' && this.pelletRadiationCured) this.pelletRadiationCured('p'); } catch (e) {}
         try {
           this.say(this.seFill((def && def.cureText) || '{name} {verb} recovering.', target, { source: source || 'treatment' }));
           this.audioEvent('statusCured', { id: effectId });

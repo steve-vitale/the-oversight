@@ -185,8 +185,11 @@ function scholarSickWith(G, id) {
     const hpAfter = (G.state.village.health || {})[bearerVid] !== undefined ? G.state.village.health[bearerVid] : 100;
     const recAfter = (G.state.village.sick || {})[bearerVid];
     check('heavy: the sickness tick damages the bearer', hpAfter < hpBefore, 'hp ' + hpBefore + ' -> ' + hpAfter);
-    check('heavy: daysLeft counts down (tending/cure/expiry work)', !!recAfter && recAfter.daysLeft === daysBefore - 1,
+    check('heavy: daysLeft counts down (tending/cure/expiry work)', !!recAfter && recAfter.daysLeft < daysBefore,
       'daysLeft=' + (recAfter ? recAfter.daysLeft : null) + ' (was ' + daysBefore + ')');
+    // NOTE: villageSicknessTick ends with a tend pass (a medic tends one
+    // sick villager a day), so the clock runs 2/day for the tended patient
+    // here — the assertion is only that it runs, not the exact step.
   }
 
   // --- 7. tier severity follows exposure ---
@@ -221,7 +224,11 @@ function scholarSickWith(G, id) {
   check('setup: medic granted field_medicine', medGranted === true, 'granted=' + medGranted);
   const expBeforeCure = exposure(G, bearerVid);
   let cured = false;
-  try { cured = G.medicDutyCureAttempt(holderVid, bearerVid); } catch (e) { cured = false; }
+  // medicDutyCureAttempt takes the villagerCareTick name function as its
+  // third argument (the real caller passes it); without it the attempt
+  // throws. Mirror the real call.
+  const nmFn = (id) => { try { const p = G.getPerson(id); return p ? String(p.name).split(' ')[0] : 'Someone'; } catch (e) { return 'Someone'; } };
+  try { cured = G.medicDutyCureAttempt(holderVid, bearerVid, nmFn); } catch (e) { cured = false; }
   check('cure: duty ability cure succeeds on radiation sickness', cured === true, 'cured=' + cured);
   check('cure: the sickness record is gone', !(G.state.village.sick || {})[bearerVid],
     JSON.stringify((G.state.village.sick || {})[bearerVid] || null));
