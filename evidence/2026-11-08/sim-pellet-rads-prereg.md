@@ -42,6 +42,37 @@ bearers sickening with no cure ever firing in the wild (no healer,
 no healing ability), that is a flagged finding for the next
 decision — it is recorded as a panel observation, not hidden.
 
+### Amendment A1a — the cure proof, completed (what the ruling actually rests on)
+
+The cure proof is the MEDIC (healing-ability) channel, proven at all
+three cure choke points in `scripts/test-pellet-rads-20261108.js`
+(63/63 green): §9 the medic duty's ability cure clears a sick
+villager bearer (exposure −10, record gone); §10 the scholar's own
+`treatDisease`/`cureStatus` clears the scholar (12 → 2); §14 the
+scholar treating a sick villager bearer through `treatVillager`'s
+cure branch clears them (37 → 27). A player with a roster medic
+holding a healing ability (`field_medicine` / `triage`) or the
+scholar's own healing ability CAN clear a bearer's poisoning — that
+is the designed, reachable cure, and it is proven, not asserted.
+
+The MEDICINE half is verified CLOSED, not assumed open — code-read,
+not a guess. Only two medicines exist in the game (`antibiotics`,
+`antiparasitic`); `medicDutyCureAttempt` Channel 2 iterates exactly
+those two kinds and requires both `cureEffectFor(...) === 'cure'`
+AND a class match (`bacterial` / `parasitic` / `fever`), and
+`useMedicine` applies the same two gates. `radiation_sickness` is
+class `'radiation'` with both germ entries `'no'` in its cure
+table, so it fails both gates on both channels; §11 proves an
+antibiotics dose is honestly wasted on it. There is no RadAway-style
+medicine item in the game. So: a player with ONLY germ medicine
+cannot clear radiation — the brief's "medic or medicine" reads, as
+built, as "medic (ability)"; a medicine path would need a new
+radiation medicine item, which is a content decision for Steve, not
+part of this cost leg. This is recorded here so the landing judgment
+is not based on an overpromise: the ruling ("there must be a cure")
+is satisfied by the proven ability channel + slow decay, and the
+missing medicine path is a flagged gap for Steve, not a hidden one.
+
 ## Base
 
 - Master at rework start: `6680d7924` (pellet boost + cost, pantry

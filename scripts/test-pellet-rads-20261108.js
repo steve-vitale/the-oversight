@@ -311,6 +311,24 @@ function scholarSickWith(G, id) {
     'exposure=' + exposure(G, freshVid));
   check('pass: old bearer exposure untouched at 37', exposure(G, bearerVid) === 37, 'exposure=' + exposure(G, bearerVid));
 
+  // --- 14. the scholar treating a sick villager bearer clears exposure ---
+  // The third cure choke point (treatVillager's cure branch): the scholar,
+  // holding field_medicine at L2, treats the old bearer — re-sickened
+  // here with the same record the tick would have written.
+  try { (G.state.village.sick || (G.state.village.sick = {}))[bearerVid] = { name: 'radiation sickness', daysLeft: 4, severity: 3 }; } catch (e) {}
+  try {
+    const fm = (s.abilities || []).find(a => ((a && a.id) || a) === 'field_medicine');
+    if (fm) fm.level = 2; else s.abilities.push({ id: 'field_medicine', name: 'Field Medicine', desc: '', level: 2, xp: 0 });
+  } catch (e) {}
+  try { s.kcal = 500; } catch (e) {}
+  check('setup: scholar holds field_medicine at L2 for treating', (() => { try { return G.hasAbility('field_medicine') && G.abilityLevel('field_medicine') >= 2; } catch (e) { return false; } })(),
+    'level=' + (() => { try { return G.abilityLevel('field_medicine'); } catch (e) { return '?'; } })());
+  try { G.treatVillager(bearerVid, 'field_medicine'); } catch (e) {}
+  check('treat: the sickness record is gone', !(G.state.village.sick || {})[bearerVid],
+    JSON.stringify((G.state.village.sick || {})[bearerVid] || null));
+  check('treat: exposure drops by the cure amount (37 -> 27)', exposure(G, bearerVid) === 27,
+    'exposure=' + exposure(G, bearerVid));
+
   says.restore();
   endFight(G);
   console.log(`\npellet-rads: ${pass} passed, ${fail} failed`);
