@@ -2,6 +2,13 @@
 // scripts/test-tenddrive-a.js — sim-tenddrive-a proof: the Binding-leg
 // tend drive while national (win-plan.js winPlanBondsTick).
 //
+// STATUS 2026-11-08: pilot judged NO-GO, the fix is REVERTED
+// (commit 9da541de6; zero src/js diff vs base 6680d7924). This test is
+// retained as the lever's specification: it FAILS (2/4) on the reverted
+// tree by design and PASSES (4/4) when the fix is re-applied. Do NOT add
+// it to the green list while the fix is reverted. See
+// evidence/2026-11-08/sim-tenddrive-a.md.
+//
 // THE BUILD (see evidence/2026-11-08/sim-tenddrive-a-prereg.md): in
 // winPlanBondsTick ONLY, delete the `if (st.nationalLive ||
 // st.pendingNational) return null` early return (the TENDING leg), and
