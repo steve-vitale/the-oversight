@@ -48,4 +48,7 @@ for measurement-proof-update and establishment-r20.
 
 Probe cases: hearer reacts (door heat, safety 1, rally true); unhearing
 villager ignores the same raid on door/safety/rally; hearing protect
-volunteer guards; unhearing protect volunteer stays home.
+volunteer guards; unhearing protect volunteer stays home. Failing control
+strips the `heard` filter from `objDangerBelief` and shows the unhearing
+villager would then heat the door, arm safety, and set rally true; after
+restore they ignore the raid again.
