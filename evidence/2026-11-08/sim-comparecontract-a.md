@@ -4,7 +4,11 @@ Run: fleshout-20261108T1017Z, Loop A, axis food-economy.
 Worker: sim-comparecontract-a. Prereg: evidence/2026-11-08/sim-comparecontract-a-prereg.md
 (all five proof bars judged below against that prereg).
 Branch: sim-comparecontract-a. Repair commit: d938321b8 (tooling only, no
-[needs-eyes]). Evidence commit: (this file's commit — see footer).
+[needs-eyes]). Evidence commits: e27fabfa7 (this file, rebuilt cheaptend pair, doublenight
+compares, augmentation script) + 6dac90653 (doublenight panel copies +
+neutrality panel). The check --quick re-run attribution was still pending at
+evidence time (log: /tmp/check-quick-rerun-sim-comparecontract-a.log — since
+deleted by /tmp cleanup; see the run's final report for its outcome).
 No game-code change. No canon doc covers the panel contract (CANON.md lists
 none; the contract lives in MEASUREMENT.md §15 + scripts/balance-metrics.json).
 
