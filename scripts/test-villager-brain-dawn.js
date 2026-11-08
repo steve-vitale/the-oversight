@@ -166,10 +166,16 @@ function pickKinds(Game, vid, hx, hy, n) {
     const L = Game.vbrainLastLog(vid);
     if (L && L.override === 'expedition_hash' && L.pick === 'EXPEDITION' && L.corePick === 'HAVEN_CHORE') {
       sawOverride = true;
-      // Materialize path returns core chore — commitment is EXPEDITION.
-      if (!picked || picked.kind !== 'HAVEN_CHORE') fail('override must materialize core pick', { picked, L });
+      // Scorer still returns the core lottery kind so chore/facing draws stay
+      // on the legacy stream; commitment is EXPEDITION. objPick then aligns.
+      if (!picked || picked.kind !== 'HAVEN_CHORE') fail('scorer must return core pick for RNG stream', { picked, L });
       const c = Game.vbrainCommit(vid);
       if (!c || c.kind !== 'EXPEDITION') fail('override commit should be EXPEDITION', { c, L });
+      const aligned = { kind: 'HAVEN_CHORE', purpose: 'chore', indoor: true, state: 'indoor', chore: 'fire' };
+      Game.vbrainAlignObjective(vid, aligned, hx, hy);
+      if (aligned.kind !== 'EXPEDITION' || !aligned.indoor || aligned.purpose !== 'chore') {
+        fail('align must rewrite objective to EXPEDITION hold', { aligned, L });
+      }
     }
   }
   if (!sawOverride) fail('expedition_hash override never fired across day salts');
