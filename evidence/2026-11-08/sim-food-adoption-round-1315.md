@@ -185,6 +185,70 @@ treated-share join is blind to cures; the medicine channel was never
 exercised live; Fever's End not read for NPC cures. Sense (worker): cure
 line repeats verbatim — needs variants.
 
+### CORRECTION (run fleshout-20261108T1515Z, Loop A — the build LANDED)
+
+The "NOT LANDED" disposition above was written by the playtest-loop
+recovery at ~15:35Z, before this run executed the main-session decision
+recorded in the tracker ("Main-session decisions 2026-11-08 ~09:25 CST",
+MEDICDUTY — DECISION: LAND). The decision rules the build lands: the A1
+share bar is confounded by the duty's own survival effect (median 73d →
+95d, +22d; the extra days are mostly no-medic days, 4/8 seeds never having
+a medic — a bar that punishes a lever for keeping villages alive cannot
+judge it), G1b passes (absent-with-medic 38 → 18, ≤19), pool capture is
+53% (20/38 addressable sick-days, beating the 50% asked), 33 ability
+cures, 165 blocked departures, guardrails all PASS, proof 13/13. The
+build implements Steve's 07:02 ruling (both cure channels). Holding a
+Steve-ordered build over a broken bar would be measure-over-deliver.
+
+Landing (this run): master read fresh (1d85f7399) immediately before
+rebasing; `git rebase 1d85f7399` — 8/8 picks, no conflicts, no
+stop-at-pick quirk. New tip d910dc6da; build diff intact (game.js +192,
+villager-agency.js +14, villager-objectives.js +21). Proof re-run on the
+rebased tip: scripts/test-medicduty-a.js 13 PASS, 0 FAIL. Merged
+--ff-only (master verified 1d85f7399 immediately before); HEAD verified
+moved in a separate command (d910dc6da). Neutral-proof refresh: the src/js
+landing invalidated the retained measurement proof
+(test-measurement-proof-update.js failed "Proof source inputs are not
+current" on the merged master); fresh panel
+evidence/2026-11-08/neutral-loopa-1515-20261108 (seed 7 x 4 policies x
+150d), balance-proof-update.js, proof test 9/9 — committed as d3a89d896.
+Branch sim-medicduty-a deleted after the merge (merged locally, pending
+ship); stray worktree sim-medicduty-basecheck released as done-abandoned
+(no commits, per the worker's request).
+
+CORRECTION to the treated-share line above: the 45.5% → 25.2% treated-share
+fall is a TAXONOMY ARTIFACT, not displacement by holder-tends-first — the
+feveranat episode join counts an episode "treated" only on a tend event,
+and a cure deletes the record instead, so the 33 cures read as −37 treated
+episodes. The join must count a cure as a treated outcome (see
+sim-findings.md, treated-share-join entry). Per §14 the NO-GO verdict
+stands as rendered under the binding bar; the corrected pool-capture bar
+is re-registered for the NEXT run's arms, never used to re-judge this
+build.
+
+Attribution closeout (this run — the 1315Z worker's Incomplete items):
+1. test-disease-r3-20261011 2-leg failure: CLOSED as pre-existing — the
+   same 2 legs (eurika-sense line; death narration naming) fail on current
+   master (no duty code), run ~15:37Z, log /tmp/disease-r3-master-1515.log.
+2. test-medicdiag-a rerun: CLOSED with a stale-leg finding — re-run on the
+   landed master: 7 PASS, 1 FAIL (L2 "care never cures" fails because the
+   duty holder's care tick cures; L4 live leg passes, recorder neutrality
+   holds on the new base). The L2 leg encodes the pre-duty world and needs
+   a duty-aware revision; not a green-list gate (the test is in neither
+   green-list.txt nor check.js). Log /tmp/medicdiag-1515.log; finding
+   appended to sim-findings.md.
+3. check.js --quick 282/10 unattributed: CLOSED — failure list extracted
+   from /tmp/check-quick-medicduty.log; all 10 attributed, zero
+   duty-caused: measurement-proof-update + measurement-workflow +
+   measurement-cache-flags pass on master (branch-base staleness);
+   mobile-combat-cadence (same 2 legs), occupation-panels (same leg),
+   establishment-r20-fixes (same leg: racks-full next-day gate),
+   phone-frame-proof (same 3 legs, stale receipt) all fail identically on
+   current master → pre-existing; trust-observer-neutrality +
+   synergy-stall + capable-bot hit the 120s load cap (exit null) — the
+   load-timeout class, capable-bot already adjudicated PASSED on this
+   ground.
+
 ## Infrastructure
 
 - Safe-commit index clobber hit THREE times this run (medicduty tree index
@@ -203,6 +267,14 @@ line repeats verbatim — needs variants.
 - Main tree clean at every check; master moved only by this run's own
   landings during the landing windows (doublenight 204bc55bb -> 6fad54d23,
   comparecontract -> 38e419d4b, proof refresh -> d80f972a2).
+- 1515Z adoption addendum: medicduty landed d910dc6da (rebase 8/8 clean,
+  proof 13/13 re-run) + neutral-proof refresh d3a89d896; the proof-refresh
+  commit hit the safe-commit index clobber once (repaired via the
+  documented ls-tree pipe, hashes verified == HEAD blobs). A playtest-loop
+  closeout agent concurrently recovered this evidence file (commit
+  ad0fc09eb, Arm 3 as "NOT LANDED") — corrected in Arm 3 above by this
+  run; the agent completed its own closeout (lock deleted, claim retired)
+  before the correction was applied.
 
 ## Metric review
 
@@ -215,7 +287,12 @@ stale-leg class is a standing measurement gap: any fix whose corpus base
 moves under it will fail E3–E5 the same way, and the next arm that lands
 on a determinism leg should pre-register how it treats that drift.
 Comparecontract: tooling arm, no game metric; all five prereg proof bars
-met. Medicduty: judged against the A1 amended header (see arm section).
+met. Medicduty: judged against the A1 amended header (see arm section);
+1515Z: the A1 share bar is recorded as confounded by the duty's own
+survival effect — the corrected bar re-registered for the NEXT run is
+absent-with-medic capture as primary (pool capture 53% on this build),
+with the episode join counting cures as treated. The landed build is NOT
+re-judged against the broken share bar.
 
 ## Sense
 
@@ -230,6 +307,16 @@ outcome: the double-night fix stops villagers eating twice on the night
 their scholar dies, and the compare repair fixes the measuring instrument,
 not the game.)
 
+1515Z completion (Haven Medic Duty landed): in plain words, a healer in
+camp now keeps people alive longer — villages lived a median 95 days
+instead of 73, and one village survived the full 150 days. The healer
+cures the sick (33 cures across the 8 villages) and stays home to tend
+them instead of wandering off (165 departures blocked). But half the
+villages (4 of 8) have no healer at all, so the duty does nothing there —
+getting a medic in the first place is now the binding problem. No village
+on these seeds reached national standing, the table, or a win; the duty
+moves no scale metric.
+
 ## Blanks filled or documented
 
 - FILLED: the double-night endDay bug (fix landed, GO under A3).
@@ -239,9 +326,15 @@ not the game.)
   master, 9/9).
 - DOCUMENTED (not fixed here): LINKSEEK registration loss; compare sources
   check ignoring index.html; cross-policy compare (steve-call).
-- Medicduty blank: NO-GO — duty built and proven (f6c0ffb14, 13/13) but
-  the share bar failed (23.5% vs 30%); binding constraint is medic
-  headcount (see arm section).
+- Medicduty blank: FILLED (1515Z) — duty landed d910dc6da per the
+  main-session decision (33 ability cures, 165 blocked departures, median
+  73d → 95d); the A1 share bar is NOT re-judged (confounded by survival —
+  see CORRECTION in Arm 3). DOCUMENTED (1515Z): medic headcount (4/8
+  seeds have no roster medic — the next arm); pool-capture bar
+  re-registered as the primary for the next run (absent-with-medic capture;
+  episode join must count cures as treated); treated-share join blind to
+  cures; Fever's End synergy not read by the NPC cure channel; medicine
+  channel unexercised live; cure line repeats verbatim (needs variants).
 
 ## Findings for the backlog
 
@@ -249,13 +342,25 @@ None appended by the coordinator this run beyond the sim-findings.md
 DOUBLE-NIGHT update above (the medicduty worker reports its own findings
 in its evidence file; the coordinator appends them at closeout).
 
+1515Z adoption: 7 entries appended to sim-findings.md (medic-headcount
+shape — 4/8 seeds with no roster medic; treated-share join blind to
+cures; Fever's End synergy not read for NPC cures; medicine channel
+unexercised live; cure line repeats verbatim; share bar confounded by
+survival — pool-capture re-registration; test-medicdiag-a L2 leg stale
+post-duty). Finding #1890 (villager cure channel never fires) marked
+[fixed 2026-11-08 by sim-medicduty-a]; #1891 (healer presence strongest
+survival signal) updated — the village-side care lever it pointed at is
+now the landed duty, headcount is the new binding constraint.
+
 ## Convergence
 
 food-economy stays converging (NOT converged): the fever/wound->production
-link is answered three ways and two of the three named blanks from the
-0915Z review are now landed (doublenight fix, compare-contract repair),
-but the third (Haven Medic Duty) is NO-GO — see arm section; the binding
-constraint is now medic headcount, not the duty.
+link is answered three ways and all three named blanks from the
+0915Z review are now landed (doublenight fix, compare-contract repair,
+Haven Medic Duty d910dc6da per the main-session decision — see CORRECTION
+in Arm 3); the binding constraint is now medic headcount, not the duty.
+Next blanks: a medic-headcount arm (get/train/find a medic) and the
+pool-capture bar re-registration for the next run's arms.
 scale-onramp stays converging (untouched; sibling Loop B live).
 
 ## Recovery addendum (playtest-loop closeout, 2026-11-08 ~15:35Z)
