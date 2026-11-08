@@ -24,11 +24,23 @@
 //   - metaNoteSystemArrival()
 //   - metaNoteDisease(effectId)
 //   - metaNoteCure(effectId)
+//   - ladderBankedHeadStart()
+//   - ladderBankPoints(kind)
+//   - ladderGrantStageReward(stage)
+//   - ladderCashOut()
+//   - _ladderBankApply(L)
+//   - _ladderCashOutEnding(L)
+//   - _ladderRewardTrader()
+//   - _ladderRewardShelter()
+//   - _ladderRewardLink()
 //   - _es()
 //   - _esRead()
 //   - _esKills()
 // rules:
 //   - read_only_power: achievements write ONLY to localStorage key oversight.meta.v1. They never touch game state, save slots, knowledge, or items. A fresh game is provably unaffected (code: every metaNote* writes store-only; test-meta-progression-20261010.js)
+//   - ladder_banked_points: the ONE approved exception to read_only_power (Steve 2026-11-07, brief §b.11, Q1 kept capped): a lost or cashed-out village's counted ladder points bank into the store (ladderBank, REPLACE), and at most 6 count toward the NEXT village's Village stage only — never Regional/National, never wave Standing. The bank is spent (cleared) once the new village reaches Village peak. (code: ladderBankPoints, _ladderBankApply, ladderBankedHeadStart)
+//   - ladder_stage_rewards: each ladder stage grants one concrete benefit from existing systems — Village a river trader, Regional a free shelter, National a link (or a shelter when no known unlinked village exists) — once per stage, recorded on progState().ladderRewards. (code: ladderGrantStageReward)
+//   - ladder_cash_out: a village holding at least Regional peak stage may end the run as a Respected Village: the ending is recorded as a table_won frame (legend + Records table frame, never the mt-table achievement), the climb is banked, and the run ends won. (code: ladderCashOut)
 //   - corrupt_safe: corrupt stored JSON resets that key; nothing ever throws out of the meta layer (code: metaGet/metaSave try/catch)
 //   - defensive_wrap: hooks wrap existing Game methods at load; an absent method is skipped silently; every hook is exception-guarded so a meta failure can never break gameplay (code: wrapHook)
 //   - no_leak_hints: unmet achievements render as ??? with a vague hint, never content — "if you don't know, it doesn't show" (code: metaList, app.js recordsScreen)
@@ -178,6 +190,11 @@
       waves: {},
       legend: { wins: 0, deaths: 0 },
       systemArrival: false,
+      // LADDER BANK (leg 3, brief §b.11): {points, at, kind} — the most
+      // recent fallen/cashed-out village's counted ladder points. REPLACE,
+      // never accumulate; null when the last village left nothing. Read via
+      // ladderBankedHeadStart() (at most 6, Village stage only).
+      ladderBank: null,
     };
   }
 
@@ -433,6 +450,274 @@
       s.systemArrival = true;
       this.metaUnlock('mx-s7');
     },
+
+    // ============ LADDER — BANKED POINTS, STAGE REWARDS, CASH-OUT (leg 3) ============
+    // Brief §b.8/§b.10/§b.11 + main-session calls Q1 (keep the capped
+    // exception) / Q4 (one concrete grant per stage, NOT memberBenefits).
+    // The Records rule itself is NOT rewritten: knowledge persists without
+    // cap as today; the banked-points exception is the approved capped one
+    // (at most 6 toward the next village's Village stage only, never
+    // Regional/National, never wave Standing). The store rides
+    // metaGet/metaSave (localStorage key oversight.meta.v1, in-memory
+    // fallback in node) as `ladderBank: {points, at, kind}` — REPLACE, never
+    // accumulate: the bank holds the most recent fallen/cashed-out
+    // village's points only.
+    //
+    // READ SIDE (designed here): the bank is applied by a villageLadder
+    // wrap installed in attach() below (ladder.js is restricted to the
+    // tribute fix this leg, so the read lives here, not in villageLadder).
+    // ladderBankedHeadStart() returns min(bank, 6); the wrapper adds it to
+    // counted/total — named in detail.bankedHeadStart, outside the
+    // per-track cap like the bundle bonus — ONLY while the current
+    // village's peak stage is 0. Once the village's peak reaches 1 the
+    // bank is SPENT (cleared from the store) and the wrapper passes the
+    // ladder through untouched. Regional/National ignore the bank by
+    // construction: it never applies past peak 0, and 6 points can never
+    // reach the 26-point Regional rung from below 12. Wave Standing is
+    // never banked (standing.js untouched, never read by the bank). If the
+    // coordinator prefers the read inside ladder.js proper, it is a ~10
+    // line change there (same flagged-amendment pattern as leg 2's bundle
+    // bonus) and this wrapper is removed then.
+    ladderBankedHeadStart() {
+      try {
+        const s = this._meta();
+        const b = (s && s.ladderBank) || null;
+        const pts = (b && (b.points | 0)) || 0;
+        return Math.max(0, Math.min(6, pts));
+      } catch (e) { return 0; }
+    },
+    // _ladderBankApply(L): the villageLadder read side (see the LADDER
+    // section header). Returns L with the banked head start applied, or L
+    // untouched. Never throws out (the wrapper falls back to L).
+    _ladderBankApply(L) {
+      try {
+        if (!L || typeof L !== 'object') return L;
+        const banked = this.ladderBankedHeadStart();
+        if (banked <= 0) return L;
+        const peak = (L.peakStage | 0) || 0;
+        if (peak >= 1) {
+          // SPENT: the village has reached Village standing; the head start
+          // served its purpose. Clear the bank so no later village inherits
+          // a stale head start, and pass the ladder through untouched.
+          try { const s = this._meta(); if (s && s.ladderBank) { s.ladderBank = null; this._metaCommit(); } } catch (e) {}
+          return L;
+        }
+        const next = (L.nextThreshold == null ? 12 : (L.nextThreshold | 0)) || 12;
+        const counted = (L.counted | 0) + banked;
+        const total = (L.total | 0) + banked;
+        const stage = counted >= 12 ? 1 : 0;
+        const detail = Object.assign({}, L.detail || {}, { bankedHeadStart: banked });
+        return Object.assign({}, L, {
+          counted, total, stage,
+          stageName: stage === 1 ? 'Village Standing' : (L.stageName || 'Unranked'),
+          nextThreshold: stage === 1 ? 26 : next,
+          nextStageName: stage === 1 ? 'Regional Standing' : 'Village Standing',
+          shortfall: stage === 1 ? Math.max(0, 26 - counted) : Math.max(0, next - counted),
+          detail,
+        });
+      } catch (e) { return L; }
+    },
+    // ladderBankPoints(kind): bank the CURRENT village's counted ladder
+    // points. kind 'lost' (game over) or 'cashout'. REPLACE: the bank holds
+    // the most recent fallen/cashed-out village's points only. A fall with
+    // 0 counted points leaves an empty bank. Idempotent per run
+    // (pg._ladderBanked): a second call in the same run returns the record
+    // without re-banking. Reads the UNWRAPPED villageLadder (kept on
+    // __ladderBankOrig by the wrap) — the village banks its OWN counted
+    // points, never the inherited head start, or the bank would ratchet up
+    // across villages. Returns {ok, banked, points, kind} or {ok:false, why}.
+    ladderBankPoints(kind) {
+      try {
+        const pg = (typeof this.progState === 'function') ? this.progState() : null;
+        if (pg && pg._ladderBanked) {
+          const s0 = this._meta();
+          const b0 = (s0 && s0.ladderBank) || null;
+          return { ok: true, banked: (b0 && (b0.points | 0)) || 0, points: (b0 && (b0.points | 0)) || 0, kind: (b0 && b0.kind) || kind, already: true };
+        }
+        let counted = 0;
+        try {
+          const vl = (typeof this.villageLadder === 'function') ? this.villageLadder : null;
+          const orig = (vl && vl.__ladderBankOrig) ? vl.__ladderBankOrig : null;
+          const L = orig ? orig.call(this) : (vl ? vl.call(this) : null);
+          counted = (L && (L.counted | 0)) || 0;
+        } catch (e) { counted = 0; }
+        counted = Math.max(0, counted);
+        const s = this._meta();
+        s.ladderBank = counted > 0 ? { points: counted, at: Date.now(), kind: kind || 'lost' } : null;
+        this._metaCommit();
+        if (pg) pg._ladderBanked = true;
+        return { ok: true, banked: counted, points: counted, kind: kind || 'lost' };
+      } catch (e) { return { ok: false, why: 'read-error' }; }
+    },
+    // ladderGrantStageReward(stage): grant the per-stage reward for every
+    // ungranted rung up to `stage` (brief §b.8 + Q4). Called from the
+    // ladderStageBeat wrap in attach() — stage completion rides the
+    // existing beat path, so a jump 0→2 grants both missed stages. Grant
+    // once per stage, recorded on progState().ladderRewards; a grant that
+    // cannot land is NOT recorded, so it can still land later. Returns
+    // {granted:[{stage, kind, detail}], skipped:[{stage, why}]}.
+    ladderGrantStageReward(stage) {
+      const out = { granted: [], skipped: [] };
+      try {
+        const pg = (typeof this.progState === 'function') ? this.progState() : null;
+        if (!pg) return out;
+        pg.ladderRewards = pg.ladderRewards || {};
+        let live = 0;
+        try { const L = (typeof this.villageLadder === 'function') ? this.villageLadder() : null; live = (L && (L.stage | 0)) || 0; } catch (e) {}
+        const upto = Math.max(0, Math.min((stage | 0) || 0, live));
+        for (let s = 1; s <= upto; s++) {
+          if (pg.ladderRewards[s]) { out.skipped.push({ stage: s, why: 'already-granted' }); continue; }
+          let g = null;
+          try {
+            if (s === 1) g = this._ladderRewardTrader();
+            else if (s === 2) g = this._ladderRewardShelter();
+            else if (s === 3) g = this._ladderRewardLink();
+          } catch (e) { g = { ok: false, why: 'read-error' }; }
+          if (g && g.ok) {
+            pg.ladderRewards[s] = { kind: g.kind, at: Date.now(), detail: g.detail || null };
+            out.granted.push({ stage: s, kind: g.kind, detail: g.detail || null });
+          } else out.skipped.push({ stage: s, why: (g && g.why) || 'grant-failed' });
+        }
+        return out;
+      } catch (e) { return out; }
+    },
+    // _ladderRewardTrader: VILLAGE (stage 1) — a river trader arrives
+    // today. The exact state evRiverTrader writes (game.js) — the Haven
+    // panel's river-trader block reads scholar.riverTrader.day === today,
+    // so the trader's feed/trade/snub verbs appear at once. Small,
+    // immediately useful: the trader is the game's existing traveling
+    // merchant system, and a Village-stage village most needs goods + news.
+    _ladderRewardTrader() {
+      try {
+        const s = this.state && this.state.scholar;
+        if (!s) return { ok: false, why: 'no-scholar' };
+        const day = (s.day || 1);
+        if (s.riverTrader && s.riverTrader.day === day) return { ok: true, kind: 'trader', detail: { alreadyHere: true }, already: true };
+        s.riverTrader = { day, greeted: false };
+        this.say('🐪 A river trader walks into Haven a day early — word of the village\'s standing travels faster than feet. "Heard Haven\'s name on the river," they say, pack heavy, smile practiced. "Thought I\'d see it for myself."');
+        try { if (typeof this.audioEvent === 'function') this.audioEvent('traderArrive'); } catch (e) {}
+        return { ok: true, kind: 'trader', detail: { day } };
+      } catch (e) { return { ok: false, why: 'read-error' }; }
+    },
+    // _ladderRewardShelter: REGIONAL (stage 2) — a free shelter rises:
+    // housing +2, no wood cost. The buildShelter() write (membership.js)
+    // with its 10-wood price waived: the reward IS the waived cost.
+    // Housing is the binding growth constraint at Regional scale, and a
+    // building is the visible "the village grows" reward.
+    _ladderRewardShelter() {
+      try {
+        const m = (typeof this.mshipState === 'function') ? this.mshipState() : null;
+        if (!m) return { ok: false, why: 'no-mship' };
+        m.housing = (m.housing || 12) + 2;
+        this.say('🔨 The System raises a shelter overnight — posts, canvas, a fire ring, no wood asked and no hands owed. Two more sleep warm. Housing is now ' + m.housing + '.');
+        try { if (typeof this.journalNote === 'function') this.journalNote('village', 'housing', 'The System raised a shelter. Housing ' + m.housing + '.'); } catch (e) {}
+        return { ok: true, kind: 'shelter', detail: { housing: m.housing } };
+      } catch (e) { return { ok: false, why: 'read-error' }; }
+    },
+    // _ladderRewardLink: NATIONAL (stage 3) — a village bows to Haven: a
+    // link forms with the best-known unlinked village, Haven primary,
+    // standard 4000 kcal/wk tribute, via the existing _formLink
+    // (hierarchy.js). Perception-gated: only villages the scholar knows
+    // (knowsVillage — rumor, visit, or generated) can be picked, never a
+    // name never heard. At National the village most needs the scale the
+    // full seat demands, and a link is the biggest grant short of the seat.
+    // Fallback when no known unlinked village exists: a free shelter (the
+    // village builds upward while it waits to be known).
+    _ladderRewardLink() {
+      try {
+        const ovs = ((this.state && this.state.otherVillages) || []);
+        let best = null;
+        for (const v of ovs) {
+          if (!v || !v.id || v.id === 'haven') continue;
+          try { if (typeof this.linkWith === 'function' && this.linkWith(v.id)) continue; } catch (e) {}
+          try { if (typeof this.knowsVillage === 'function' && !this.knowsVillage(v)) continue; } catch (e) {}
+          if (!best || ((v.opinion || 0) > (best.opinion || 0))) best = v;
+        }
+        if (best && typeof this._formLink === 'function') {
+          const link = this._formLink(best.id, { asSubordinate: false, tributeKcalPerWeek: 4000 }, null);
+          if (link) {
+            this.say('⛓️ Word of Haven\'s standing reaches ' + (best.name || 'a neighboring fire') + ' before any speaker does — they send word back: they will bow to Haven. One organization, us primary.');
+            return { ok: true, kind: 'link', detail: { village: best.id, link: link.id } };
+          }
+        }
+        const sh = this._ladderRewardShelter();
+        if (sh && sh.ok) return { ok: true, kind: 'shelter-fallback', detail: { housing: (sh.detail && sh.detail.housing) || null, reason: 'no-link-candidate' } };
+        return { ok: false, why: 'no-link-candidate' };
+      } catch (e) { return { ok: false, why: 'read-error' }; }
+    },
+    // ladderCashOut(): end the run as a Respected Village (brief §b.10).
+    // Offered once the village holds at least Regional stage (PEAK stage
+    // >= 2 — the same peak reading leg 2 chose for the seat gate: a dip
+    // from deaths must not take away the dignified exit). Records the
+    // ending as a table_won frame — recordLegend({outcome:'table',
+    // frame:'respected-village'}) + the frame written to the Records
+    // store's table.frames DIRECTLY (not via metaNoteTable, which would
+    // grant the "Reach the galactic table" achievement for a run that never
+    // reached the table) — banks the village's counted ladder points under
+    // the b.11 capped rule, says the ending lines from
+    // src/data/table-endings.json (paths.respected-village, picked by the
+    // village's top counted track), then ends the run (over + won + wipe,
+    // mirroring the table-win ending sequence in table.js). Returns
+    // {ok, kind, title, banked, peak, day} or {ok:false, why}.
+    ladderCashOut() { // wired-exempt: leg-3 Haven entry point (app.js panelHaven calls it; the cash-out button lives there)
+      try {
+        const pg = (typeof this.progState === 'function') ? this.progState() : null;
+        if (!pg) return { ok: false, why: 'no-prog' };
+        if (this.over || this.won) return { ok: false, why: 'already-over' };
+        if (pg.ladderCashedOut) return { ok: false, why: 'already-cashed-out' };
+        let peak = 0, L = null;
+        try { L = (typeof this.villageLadder === 'function') ? this.villageLadder() : null; peak = (L && (L.peakStage | 0)) || 0; } catch (e) {}
+        if (peak < 2) return { ok: false, why: 'stage-short', peak };
+        // 1. Bank the climb (capped at the read side: at most 6 toward the
+        // next village's Village stage).
+        const banked = this.ladderBankPoints('cashout');
+        // 2. The ending lines: the respected-village entry for the
+        // village's top counted track.
+        const entry = this._ladderCashOutEnding(L);
+        for (const line of (entry.lines || [])) { try { this.say(line); } catch (e) {} }
+        try { if (typeof this.recordMoment === 'function') this.recordMoment('Haven ends its run as a Respected Village — ' + (entry.title || 'the climb banked') + '.'); } catch (e) {}
+        try { if (typeof this.recordLegend === 'function') this.recordLegend({ outcome: 'table', frame: 'respected-village', choice: entry.title || 'The Respected Village' }); } catch (e) {}
+        // 3. Records frame (direct store write — see the header above).
+        try {
+          const s = this._meta();
+          s.table = s.table || { frames: {}, choices: {} };
+          s.table.frames = s.table.frames || {};
+          s.table.frames['respected-village'] = 1;
+          this._metaCommit();
+        } catch (e) {}
+        // 4. Mark + end the run like a table win.
+        const day = ((this.state && this.state.scholar && this.state.scholar.day) || 0);
+        pg.ladderCashedOut = { day, banked: (banked && banked.banked) || 0, peak };
+        try { pg.tableWaiting = false; } catch (e) {}
+        this.over = true; this.won = true;
+        try { if (typeof this.wipe === 'function') this.wipe(); } catch (e) {}
+        try { if (typeof this.save === 'function') this.save(); } catch (e) {}
+        return { ok: true, kind: 'respected-village', title: entry.title || null, banked: (banked && banked.banked) || 0, peak, day };
+      } catch (e) { return { ok: false, why: 'read-error' }; }
+    },
+    // _ladderCashOutEnding(L): the respected-village ending entry for the
+    // village's top counted track. Reads Game.data.tableEndings (loaded by
+    // game.js init); falls back to a generic two-line ending when the data
+    // is absent so cash-out never fails for missing data. Ladder tracks
+    // (fight/forage/craft/talk/explore) map to the file's track selectors
+    // (combat/field/craft/social/strange).
+    _ladderCashOutEnding(L) {
+      const FALLBACK = { title: 'THE RESPECTED VILLAGE', lines: ['You do not take the seat. You take the long way home instead — and the village walks it standing taller than it ever stood.', 'The table remembers the villages that knew when to stop climbing. Haven is one of them now. The next fire starts higher for it.'] };
+      try {
+        const paths = (this.data && this.data.tableEndings && this.data.tableEndings.paths) || null;
+        const entry = (paths && paths['respected-village']) || null;
+        if (!entry) return FALLBACK;
+        const MAP = { fight: 'combat', forage: 'field', craft: 'craft', talk: 'social', explore: 'strange' };
+        const ORDER = ['fight', 'forage', 'craft', 'talk', 'explore'];
+        const ct = (L && L.countedTracks) || {};
+        let top = 'fight';
+        for (const k of ORDER) if (((ct[k] | 0) || 0) > ((ct[top] | 0) || 0)) top = k;
+        const sel = entry['track:' + (MAP[top] || 'field')] || entry['track:field'] || null;
+        const e = (sel && sel.light) || null;
+        if (!e || !Array.isArray(e.lines) || !e.lines.length) return FALLBACK;
+        return { title: e.title || FALLBACK.title, lines: e.lines.slice() };
+      } catch (e2) { return FALLBACK; }
+    },
     metaNoteDisease(effectId) {
       if (!effectId) return;
       const s = this._meta();
@@ -558,6 +843,44 @@
     });
     wrapHook('cureStatus', function (args, r) {
       if (r && args[0] === 'scholar') this.metaNoteCure(args[1]);
+    });
+
+    // ============ LADDER — BANKED POINTS, STAGE REWARDS, CASH-OUT (leg 3) ============
+    // villageLadder wrap: the banked-points READ SIDE (see the LADDER
+    // section in methods above). ladder.js loads before this file
+    // (index.html order), so Game.villageLadder exists here; if it does
+    // not, the wrap is skipped silently (defensive_wrap rule) and the bank
+    // simply never applies. The original is kept on __ladderBankOrig so
+    // ladderBankPoints() can read the village's OWN counted total (without
+    // the inherited head start — otherwise the bank would ratchet up
+    // across villages).
+    if (typeof Game.villageLadder === 'function' && !Game.villageLadder.__ladderBankWrapped) {
+      const _origVL = Game.villageLadder;
+      const _wVL = function () {
+        const L = _origVL.apply(this, arguments);
+        try { return (typeof this._ladderBankApply === 'function') ? this._ladderBankApply(L) : L; }
+        catch (e) { return L; }
+      };
+      _wVL.__ladderBankWrapped = true;
+      _wVL.__ladderBankOrig = _origVL;
+      Game.villageLadder = _wVL;
+    }
+    // ladderStageBeat wrap: per-stage rewards ride the existing beat path
+    // (ladder.js ladderTick fires the beat on first reaching a rung). The
+    // original says the beat first; the grant follows, once per stage.
+    wrapHook('ladderStageBeat', function (args) {
+      try { if (typeof this.ladderGrantStageReward === 'function') this.ladderGrantStageReward(args[0]); } catch (e) {}
+    });
+    // wipe wrap: a LOST village banks its climb (brief §b.11). Every
+    // game-over path ends in wipe(); the wrap banks only when the run
+    // actually ended lost (over + villageLost, not won) and only once per
+    // run (ladderBankPoints is idempotent via pg._ladderBanked). Cash-out
+    // banks explicitly inside ladderCashOut() before wipe, so this wrap
+    // must not re-bank it (the idempotency marker covers that too).
+    wrapHook('wipe', function () {
+      try {
+        if (this.over && this.villageLost && !this.won && typeof this.ladderBankPoints === 'function') this.ladderBankPoints('lost');
+      } catch (e) {}
     });
 
     // ============ ESOTERIC STYLE ACHIEVEMENTS (rogue P1, V6-3) ============
