@@ -3,6 +3,7 @@
 // description: Want-driven conversation architecture. Every conversation selects one NPC want in the CORE flow (startConvo); the want shapes the opening beats, the menu answers it, and the ending resolves it. No wrapper layers — the core flow calls this module.
 // provides:
 //   - convoSelectWant(vid) -> want object
+//   - convoDawnPriorities(vid) -> {kind, drive, preferred[]} or null (dawn commitment + top drive)
 //   - convoWantOpener(vid, want) -> provisional {line, thread, question}
 //   - convoAcceptWantQuestion(vid, opener) -> accept only the spoken question
 //   - convoWantStaleOpener(vid, want) -> reframe line when all fresh variants are ledger-blocked
@@ -26,10 +27,14 @@
 //   - seeds: unresolved wants plant seeds; next conversation opens with the seed (code: convoPlantSeed/convoCheckSeeds, Steve 2026-10-06)
 //   - arc: want stages 0 (selected) -> 1 (surfaced) -> 2 (engaged) -> 3 (resolved); endings record the resolution (code: convoWantEngage/convoResolveWant, Steve 2026-10-06)
 //   - stale_opener: a long-lived want's opener variants all end up ledger-blocked eventually (convoPickCycle resets on exhaustion — never null). When they do, the want reframes via def.staleOpener(vid) (or the generic convoWantStaleOpener) instead of going mute — thread 'want'. Engagement stays thread-coherent: only the want's own thread ('want'/'small') engages it (code: convoOpening, convo-dialogue dlg:more/askwhy/comfort, gap-closure 2026-10-17)
+//   - dawn_priorities: the weighted want pick reads today's vbrain commitment + top drive so the opener tracks the same priorities dawn chose; unfinished-business pre-emptors (seeds, repay, pocketed) stay above (code: convoSelectWant, convoDawnPriorities, VILLAGER-BRAIN Phase 4 social half)
 // consumes:
 //   - village.villagers
 //   - state.convos
 //   - npcNeeds (hunger/fear/social/energy)
+//   - vbrainCommit(vid)
+//   - vgoalState(vid)
+//   - vgoalWeights(vid)
 // ============ CONVERSATION WANTS ============
 // Structural rebuild (Steve 2026-10-11): conversations were button-tapping
 // with nothing getting done — no meaning, just confusing options. The old
@@ -1620,7 +1625,94 @@
     },
   };
 
+  // Dawn commitment kind → preferred conversation wants (Phase 4 social half).
+  // Primary first; bias only applies when the want's own pick() already scores.
+  const DAWN_KIND_WANTS = {
+    FORAGE: ['ask_favor', 'share_news'],
+    WATER: ['ask_favor', 'share_news'],
+    HAUL: ['ask_favor', 'share_news'],
+    VISIT: ['just_company', 'seek_comfort', 'curious'],
+    HAVEN_CHORE: ['warn_you', 'just_company'],
+    TRAPS: ['warn_you', 'share_news'],
+    HUNT: ['warn_you', 'share_news'],
+    SEEK: ['curious', 'share_news'],
+    EXPLORE: ['share_news', 'curious'],
+    EXPEDITION: ['share_news', 'warn_you'],
+    REST: ['seek_comfort', 'just_company'],
+    EAT: ['just_company', 'ask_favor'],
+    LEAVE: ['warn_you', 'share_news'],
+  };
+  // Top drive (vgoal) → preferred wants. Commitment.vgoal from dawn wins when set.
+  const DAWN_DRIVE_WANTS = {
+    food_security: ['ask_favor', 'share_news'],
+    bonds: ['seek_comfort', 'just_company'],
+    safety: ['warn_you', 'just_company'],
+    knowledge: ['curious', 'share_news'],
+    party_up: ['curious', 'just_company'],
+    build_standing: ['curious', 'share_news'],
+    gear_up: ['ask_favor', 'share_news'],
+    bank_veterans: ['warn_you', 'share_news'],
+  };
+  const DAWN_BIAS_PRIMARY = 2.0;
+  const DAWN_BIAS_SECONDARY = 1.0;
+
+  function dawnPreferredBoosts(kind, drive) {
+    const boosts = {};
+    function addList(list) {
+      if (!list || !list.length) return;
+      for (let i = 0; i < list.length; i++) {
+        const id = list[i];
+        const amt = i === 0 ? DAWN_BIAS_PRIMARY : DAWN_BIAS_SECONDARY;
+        // Kind and drive stack: a forage day whose top drive is also
+        // food_security should outrank a high share_news base weight.
+        boosts[id] = (boosts[id] || 0) + amt;
+      }
+    }
+    if (kind) addList(DAWN_KIND_WANTS[kind]);
+    if (drive) addList(DAWN_DRIVE_WANTS[drive]);
+    return boosts;
+  }
+
   const methods = {
+    // convoDawnPriorities: read today's dawn commitment + top drive so the
+    // want picker can open from the same priorities the arbiter chose.
+    // Pure-ish: does not call vgoalTop (that mutates commitment). Reads
+    // commit.vgoal first, then vgoalState.top, then a weights argmax.
+    // Test seam: Game.convoDawnPrioritiesDisabled = true skips the read.
+    convoDawnPriorities(vid) {
+      try { if (this.convoDawnPrioritiesDisabled) return null; } catch (e) {}
+      let commit = null;
+      try {
+        if (typeof this.vbrainCommit === 'function') commit = this.vbrainCommit(vid);
+      } catch (e) { console.warn('[convo] vbrainCommit read', e); commit = null; }
+      const day = ((this.state && this.state.scholar) || {}).day || 0;
+      if (commit && commit.day != null && commit.day !== day) commit = null;
+      const kind = commit && commit.kind ? commit.kind : null;
+      let drive = (commit && commit.vgoal) || null;
+      if (!drive) {
+        try {
+          const st = (typeof this.vgoalState === 'function') ? this.vgoalState(vid) : null;
+          if (st && st.top) drive = st.top;
+        } catch (e) { console.warn('[convo] vgoalState read', e); }
+      }
+      if (!drive) {
+        try {
+          const w = (typeof this.vgoalWeights === 'function') ? this.vgoalWeights(vid) : null;
+          if (w) {
+            let top = null, topW = -1;
+            for (const id of Object.keys(w)) {
+              if (w[id] > topW) { topW = w[id]; top = id; }
+            }
+            if (top && topW > 0) drive = top;
+          }
+        } catch (e) { console.warn('[convo] vgoalWeights read', e); }
+      }
+      if (!kind && !drive) return null;
+      const boosts = dawnPreferredBoosts(kind, drive);
+      const preferred = Object.keys(boosts).sort((a, b) => (boosts[b] - boosts[a]) || (a < b ? -1 : a > b ? 1 : 0));
+      return { kind: kind || null, drive: drive || null, preferred, boosts };
+    },
+
     // convoFindFavorNeed: PURE scan for a real, current need — no phrasing,
     // no side effects. Returns {kind, urgency, ...ctx} or null. A null means
     // no favor can be honestly built: the want picker must skip ask_favor.
@@ -2229,6 +2321,14 @@
           return { id: 'pocketed', def: WANTS.pocketed, fromSeed: false };
         }
       } catch (e) {}
+      // DAWN PRIORITIES (VILLAGER-BRAIN Phase 4 social half): after unfinished-
+      // business pre-emptors, the weighted pick reads today's commitment and
+      // top drive so the conversation opens from the same priorities dawn
+      // chose. Bias only eligible wants (pick/canOpen already > 0).
+      let dawn = null;
+      try { dawn = (typeof this.convoDawnPriorities === 'function') ? this.convoDawnPriorities(vid) : null; }
+      catch (e) { console.warn('[convo] dawn priorities', e); dawn = null; }
+      const dawnBoosts = (dawn && dawn.boosts) || null;
       const c0 = this.convoGet(vid);
       const firstMeeting = (c0.count || 0) <= 1;
       let best = null, bestW = -1;
@@ -2259,11 +2359,21 @@
         // curious to 3 even when it couldn't open). canOpen is pure by
         // contract — it reads, never consumes.
         try { if (def.canOpen && !def.canOpen.call(this, vid)) w = 0; } catch (e) {}
+        if (w > 0 && dawnBoosts && dawnBoosts[id]) w += dawnBoosts[id];
         w += Math.random() * 0.5;
         if (w > bestW) { bestW = w; best = id; }
       }
       if (!best) best = 'just_company';
-      return { id: best, def: WANTS[best], fromSeed: false };
+      const out = { id: best, def: WANTS[best], fromSeed: false };
+      if (dawn) {
+        out.dawn = {
+          kind: dawn.kind,
+          drive: dawn.drive,
+          preferred: dawn.preferred,
+          aligned: !!(dawn.preferred && dawn.preferred.indexOf(best) !== -1),
+        };
+      }
+      return out;
     },
 
     // convoWantOpener: the opening line when a want drives the conversation.
