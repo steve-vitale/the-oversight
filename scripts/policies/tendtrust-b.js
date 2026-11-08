@@ -58,6 +58,11 @@
 // deficit is reported, never hidden.
 //
 // POLICY-SIDE ONLY — zero src/js changes.
+//
+// ACTOR-PRESENCE EXTENSION (sim-linkdecay-a, 2026-11-08): snapTT also
+// records planActors / planHolders — the plan-holders at Haven per day
+// (the winPlanBondsTick gate), sampled at pre and post snapshots. Field
+// only; the recorder's behavior is unchanged.
 'use strict';
 
 // TENDTRUST=1 is the only on-switch. Unset delegates to the wrapped
@@ -114,6 +119,50 @@ function noteGainFromEntries(entries) {
   return null;
 }
 
+// planActorsAtHaven(Game): PURE-READ reproduction of the win-plan tend
+// drive's actor gate (win-plan.js:646 planActorsAtHaven, as called by
+// winPlanBondsTick:545): a villager holding a win plan, alive, whose node
+// is the Haven node, not engaged, not the player. Returns
+// { actors: [vids] | null, holders: n | null } — null when the Game surface
+// needed to decide is absent (UNKNOWN, never a fabricated 0). Added for
+// sim-linkdecay-a: tendtrust-b named actor presence as the next instrument
+// gap — the drive fires ~1 week in 3 and the gate that opens and closes
+// for all links at once is a plan actor AT Haven. Field only; no behavior
+// change to the recorder or to any game state.
+function planActorsAtHaven(Game) {
+  try {
+    const v = ((Game.state || {}).village) || {};
+    const plans = v.winPlan || {};
+    const holderIds = Object.keys(plans || {});
+    const holders = holderIds.length;
+    let hx = null, hy = null;
+    try {
+      if (typeof Game.havenNodeXY === 'function') { const n = Game.havenNodeXY(); hx = n.x; hy = n.y; }
+    } catch (e) {}
+    if (hx == null) { hx = (v.px != null ? v.px : 4); hy = (v.py != null ? v.py : 4); }
+    if (typeof Game.npcNode !== 'function') return { actors: null, holders };
+    const playerId = Game.villagerId;
+    const actors = [];
+    for (const vid of holderIds) {
+      if (playerId != null && vid === playerId) continue;
+      let alive = true;
+      try {
+        let p = null;
+        if (typeof Game.getPerson === 'function') p = Game.getPerson(vid);
+        if (!p && typeof Game.vpOf === 'function') p = Game.vpOf(vid);
+        if (p) alive = !p.dead;
+      } catch (e) {}
+      if (!alive) continue;
+      let at = false;
+      try { const n = Game.npcNode(vid); at = !!(n && n.nx === hx && n.ny === hy); } catch (e) {}
+      if (!at) continue;
+      try { if (typeof Game.isEngaged === 'function' && Game.isEngaged(vid)) continue; } catch (e) {}
+      actors.push(vid);
+    }
+    return { actors, holders };
+  } catch (e) { return { actors: null, holders: null }; }
+}
+
 // snapTT(Game): the tend/trust state in one pure-read object. Plain-data
 // copies throughout — snapshots must never alias live link objects, or
 // pre/post diffs collapse.
@@ -128,6 +177,12 @@ function snapTT(Game) {
     s.pantryDays = (typeof d === 'number' && isFinite(d)) ? d : null;
   } catch (e) { s.pantryDays = null; }
   try { s.rank = (Game.scaleRank ? Game.scaleRank() : 'village') || 'village'; } catch (e) { s.rank = 'village'; }
+  // Actor presence (sim-linkdecay-a extension): plan actors at Haven per
+  // snapshot — the winPlanBondsTick gate. Null only when undeterminable.
+  try {
+    const pa = planActorsAtHaven(Game);
+    s.planActors = pa.actors; s.planHolders = pa.holders;
+  } catch (e) { s.planActors = null; s.planHolders = null; }
   const st = (Game.state || {});
   try {
     s.nationalLive = !!st.nationalLive;
@@ -183,6 +238,12 @@ function trajPoint(post) {
     day: post.day, pantry: post.pantry, pantryDays: post.pantryDays, rank: post.rank,
     subs: post.subs, sSubs: post.seasonedSubs, shortfallSubs: post.shortfallSubs,
     leadQ: post.leadQ ? 1 : 0, nat: post.nationalLive ? 1 : 0, glob: post.globalLive ? 1 : 0,
+    // Actor presence at the post snapshot (sim-linkdecay-a): plan actors
+    // AT Haven — the winPlanBondsTick gate. Null = undeterminable.
+    actors: (post.planActors == null ? null : post.planActors.length),
+    actorIds: post.planActors,
+    planHolders: post.planHolders,
+    actorsPre: null, actorIdsPre: null, // filled by recordPost from the pre snapshot
     links: post.links.filter(l => l.isSub).map(l => ({
       id: l.id, other: l.other, trust: l.trust, age: l.age,
       seasoned: l.seasoned ? 1 : 0, gap: l.trustGap, ageGap: l.daysToSeason,
@@ -396,6 +457,11 @@ function recordPost(Game, ctx) {
     D.gateBlockedDays = D.gateBlocked.length;
     // Daily trajectory point + shortfall.
     const tp = trajPoint(post);
+    // Actor presence at the PRE snapshot (sim-linkdecay-a): the drive
+    // fires inside the daily, between pre and post, so the day carries
+    // both samples; the analysis uses post and reports pre/post agreement.
+    tp.actorsPre = (pre && pre.planActors != null) ? pre.planActors.length : null;
+    tp.actorIdsPre = (pre && pre.planActors != null) ? pre.planActors : null;
     D.traj.push(tp);
     if (post.seasonedSubs > D.maxSeasonedSubs) D.maxSeasonedSubs = post.seasonedSubs;
     const F = D.first;
@@ -477,4 +543,4 @@ function withTendTrust(inner, id, desc) {
   });
 }
 
-module.exports = { layerOn, withTendTrust, snapTT, recordPre, recordPost, ensureTT, tendsNeeded, bufferTends, noteGainFromHistory, noteGainFromEntries, historyKindsAdded, historyEntriesAdded, trajPoint };
+module.exports = { layerOn, withTendTrust, snapTT, recordPre, recordPost, ensureTT, tendsNeeded, bufferTends, noteGainFromHistory, noteGainFromEntries, historyKindsAdded, historyEntriesAdded, trajPoint, planActorsAtHaven };
