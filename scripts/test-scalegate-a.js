@@ -9,10 +9,14 @@
 // Method: a REAL loaded Game (scripts/godpath/lib harness, seed 7),
 // with every full-seat bar set on real state — wavesFaced 5/5/4/3/2
 // distinct, contestsSurvived 3, crises 3, integration stage 2,
-// sentimentTaught + feastSurgeUsed — and rank driven through the REAL
+// sentimentTaught — and rank driven through the REAL
 // scaleRank() flags (state.networkLive / nationalLive / globalLive).
 // No gate function is stubbed; only state flags are set, exactly as
 // the superset proof (test-fullseat-superset-20261014.js) does.
+// LEG 2 (2026-11-08): the setup ALSO rigs National ladder standing
+// (40 counted points) and a delivered trade-charter capstone, so the
+// ladder bars never move a case that isolates the scale term; the
+// surge flag is still carried in the profile but is no longer a bar.
 //
 // Assertions (each rank, all other bars passing):
 //   village  -> ok false, breakdown scale false, seat not full
@@ -49,6 +53,11 @@ const K = require('./godpath/lib');
   Game.state.scholar.prog.feastSurgeUsed = true;
   Game.state.systemArrived = true;
   Game.state.scholar.integration = 45;
+  // LEG 2 (2026-11-08): National ladder standing + delivered capstone.
+  // Fight 24 (wave-3 ledger 48) + Forage 16 (scholar field XP 192) = 40.
+  Game.state.waveLedger = { 3: { points: 48, perType: {}, perTypeX: {} } };
+  Game.playerTracks().field.xp = 192;
+  pg.ladderCapstone = 'trade_charter';
   T.ok('setup: integration stage 2', Game.integrationStage() === 2);
 
   function setRank(rank) {
