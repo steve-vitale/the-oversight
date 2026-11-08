@@ -1,9 +1,10 @@
 'use strict';
-const K=require('./lib'),assert=require('assert/strict'),cp=require('child_process');
+const K=require('./lib'),assert=require('assert/strict'),cp=require('child_process'),fs=require('fs');
 const phases=['precore-request','postcore-request','commit-before','commit-after','index-before'];
 async function child(phase){
  const blobs=new Map();let armed=false;
- const disk=()=>console.log('@@DISK@@'+JSON.stringify(Object.fromEntries(blobs)));
+ // writeSync: process.exit after a large save must not truncate @@DISK@@ on stdout.
+ const disk=()=>{fs.writeSync(1,'@@DISK@@'+JSON.stringify(Object.fromEntries(blobs))+'\n');};
  globalThis.localStorage={get length(){return blobs.size;},key:i=>[...blobs.keys()][i]??null,getItem:k=>blobs.get(k)??null,removeItem:k=>blobs.delete(k),setItem(k,v){
   const run=k.startsWith('scattering-save-v1-');
   if(armed&&((run&&phase==='commit-before')||(k==='scattering-saves-index'&&phase==='index-before')))process.exit(77);

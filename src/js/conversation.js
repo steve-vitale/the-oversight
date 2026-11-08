@@ -1785,6 +1785,10 @@
     convoSnippetIsStageDirection(sn) {
       if (!sn) return false;
       const s = String(sn).trim();
+      // Spoken reactions often wrap a beat + dialogue
+      // (characterGen: 'They go still. "So it's not just me…"'). Those are
+      // real memory; only pure mood/silence narration is stage direction.
+      if (/"/.test(s)) return false;
       return /^(They |A comfortable |A warmth |A tired |Still on what they confided)/i.test(s)
         || /\b(glance at the fire|comfortable quiet settles|tired smile)\b/i.test(s);
     },
