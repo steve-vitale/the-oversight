@@ -22383,7 +22383,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // sleep. The take, the trust move, and the gossip seed below
       // run identically either way.
       this.sayHavenNews(`🌙 Raid — ${ov.name} came in the night from the ${dir}. They ${what}. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -10.)`, 'raid');
-      try { this.seedGossip('raid', { village: ov.id }, []); } catch (e) {}
+      // Heard list required: door/rally/safety read danger through
+      // objDangerBelief (heard-filtered). Empty heard arms nothing —
+      // match havenGrowth's raid seed (npcIds at the fire).
+      try {
+        const hearers = this.npcIds ? this.npcIds().slice(0, 4) : [];
+        this.seedGossip('raid', { village: ov.id }, hearers);
+      } catch (e) {}
     },
 
     // ============ FARMING (depletion 2026-10-10, PROGRESSION.md §9) ============

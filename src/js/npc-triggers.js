@@ -296,7 +296,9 @@
   // 'expedition_launch' gate — verbatim predicate from the agencyTick
   // expedition-launch gate (villager-agency.js).
   function gateExpeditionDanger(vid, d) {
-    return !!(this.objVillageDanger && this.objVillageDanger() >= 4);
+    // Heard-filtered: this departing villager's own danger belief, not
+    // the whole gossip store (VILLAGER-BRAIN seam 4).
+    return !!(this.objVillageDanger && this.objVillageDanger(vid) >= 4);
   }
 
   // ---------- the declarative table ----------

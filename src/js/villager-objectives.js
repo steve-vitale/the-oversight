@@ -6,16 +6,18 @@
 //   - objOf(vid)
 //   - objPick(vid, hx, hy)
 //   - objDanger(vid, tx, ty, hx, hy)
+//   - objDangerBelief(vid)
 //   - objMaybeDepart(rid, node, atHaven, hx, hy)
 //   - objAwayStep(rid, node, away, hx, hy)
 //   - objAskCompanion(vid, obj, hx, hy, opts)
-//   - objRallyFreshRaid()
+//   - objRallyFreshRaid(vid)
 //   - objTick()
 //   - objHealGate(vid, obj, hx, hy, playerAtHaven)
 // rules:
 //   - objectives_drive_departures: npcNodeTravel's old dice triggers are replaced by objMaybeDepart (code: villager-objectives.js)
 //   - night_departure_ban: nobody sets out at night, hard rule kept from base (code: villager-objectives.js)
 //   - danger_gates_departure: every departure verdicts go / ask / tighten / defer via objDanger (code: villager-objectives.js)
+//   - danger_heard_filtered: door, rally and safety all read danger through objDangerBelief — gossip counts only if this villager is in its heard list (code: villager-objectives.js, VILLAGER-BRAIN seam 4)
 //   - heal_gates_departure: objective departures get the expedition 70-HP heal check (pharmacy -> healer -> sit-out, one verdict/villager/day); LEAVE is exempt from the sit-out (code: villager-objectives.js, game.js, departure heal gate 2026-10-13)
 //   - return_names_are_honest: objective-return copy names the found one via _repName — a stranger descriptor ("A person, maybe 40s") is used whole, never its first word ("found A" read broken). (code: villager-objectives.js, travel lever r4 2026-10-12)
 //   - bark_armor_teach: a villager WEARING bark armor teaches the player its recipe L1 on return (trust 15+, player at haven, once per teacher) — the snare-lesson pattern for the occupation lottery's armor. (code: villager-objectives.js, 2026-10-13)
@@ -818,25 +820,47 @@
 
     // ---------- 2. DEPARTURE DANGER CHECK ----------
     // Before leaving: read the world. Recent monster activity comes from
-    // village gossip (attack/death/murder within 3 days). Rain makes it
-    // miserable. Distance and temperament move the needle.
-    // Verdicts: go / ask (bring someone) / tighten (short errand only) / defer (stay).
-    objDanger(vid, tx, ty, hx, hy) {
-      var score = 0;
+    // village gossip THIS villager heard (attack/death/murder/raid within
+    // 3 days). Rain makes it miserable. Distance and temperament move the
+    // needle. Verdicts: go / ask (bring someone) / tighten (short errand
+    // only) / defer (stay).
+    //
+    // objDangerBelief(vid) — ONE heard-filtered danger read (VILLAGER-BRAIN
+    // seam 4 / game-gaps item 2). Door (objDanger), village danger
+    // (objVillageDanger), rally (objRallyFreshRaid) and the safety drive
+    // (villager-goals dangerHeard → threat) all consume this. Gossip
+    // counts only if vid is in its heard list; a raid nobody told them
+    // about arms nothing for them.
+    objDangerBelief(vid) {
+      var score = 0, threat = false, freshRaid = false;
       var day = 0;
       try { day = this.state.scholar.day; } catch (e) {}
       try {
         var g = (this.state.village.gossip || []);
         for (var i = 0; i < g.length; i++) {
-          var a = g[i].action;
+          var entry = g[i];
+          if ((entry.heard || []).indexOf(vid) === -1) continue;
+          if (day - (entry.day || 0) > 3) continue;
+          var a = entry.action;
           // RAID WARNING (rogue P1 2026-10-22): a raid warning is danger —
           // it moves departures and mid-trip re-targeting alike, same
           // weight as an attack.
-          if ((a === 'attack' || a === 'murder' || a === 'raid') && day - (g[i].day || 0) <= 3) score += 2;
-          else if (a === 'death' && day - (g[i].day || 0) <= 3) score += 1;
+          if (a === 'attack' || a === 'murder' || a === 'raid') {
+            score += 2;
+            threat = true;
+            if (a === 'raid') freshRaid = true;
+          } else if (a === 'death') {
+            score += 1;
+          }
         }
         if (score > 4) score = 4;
       } catch (e) {}
+      return { score: score, threat: threat, freshRaid: freshRaid };
+    },
+    objDanger(vid, tx, ty, hx, hy) {
+      var belief = { score: 0 };
+      try { belief = this.objDangerBelief(vid) || belief; } catch (e) {}
+      var score = belief.score || 0;
       try { if (this.state.weather === 'rain') score += 1; } catch (e) {}
       var dist = this.objDist(tx, ty, hx, hy);
       var maxD = 1;
@@ -852,40 +876,20 @@
       var verdict = score <= 1 ? 'go' : score <= 3 ? 'ask' : score <= 5 ? 'tighten' : 'defer';
       return { score: score, verdict: verdict };
     },
-    // objVillageDanger: the world-level part of the danger check (gossip +
-    // weather, no distance). Used to gate expedition launches too.
-    objVillageDanger() {
+    // objVillageDanger(vid): the world-level part of the danger check
+    // (this hearer's gossip belief + weather, no distance). Used to gate
+    // expedition launches for THAT villager — same heard filter as the door.
+    objVillageDanger(vid) {
       var score = 0;
-      var day = 0;
-      try { day = this.state.scholar.day; } catch (e) {}
-      try {
-        var g = (this.state.village.gossip || []);
-        for (var i = 0; i < g.length; i++) {
-          var a = g[i].action;
-          // RAID WARNING (rogue P1 2026-10-22): same as objDanger — a raid
-          // warning is danger, and it can stand down expedition launches.
-          if ((a === 'attack' || a === 'murder' || a === 'raid') && day - (g[i].day || 0) <= 3) score += 2;
-          else if (a === 'death' && day - (g[i].day || 0) <= 3) score += 1;
-        }
-        if (score > 4) score = 4;
-      } catch (e) {}
+      try { score = (this.objDangerBelief(vid) || {}).score || 0; } catch (e) {}
       try { if (this.state.weather === 'rain') score += 1; } catch (e) {}
       return score;
     },
-    // RALLY-GUARD (win-drives 2026-11-03, Drive 1): is there a fresh raid
-    // in the village's heard record? Same 3-day window objDanger already
-    // uses for raid warnings, same gossip store — no new state, no list.
-    // A raid the village heard about is the perception precondition for
-    // the rally-guard drive; a raid nobody heard about arms nothing.
-    objRallyFreshRaid() {
-      var day = 0;
-      try { day = this.state.scholar.day; } catch (e) {}
-      try {
-        var g = (this.state.village.gossip || []);
-        for (var i = 0; i < g.length; i++) {
-          if (g[i].action === 'raid' && day - (g[i].day || 0) <= 3) return true;
-        }
-      } catch (e) {}
+    // RALLY-GUARD (win-drives 2026-11-03, Drive 1): did THIS villager hear
+    // a fresh raid? Same 3-day window and heard filter as objDangerBelief.
+    // A raid they were never told about arms nothing for them.
+    objRallyFreshRaid(vid) {
+      try { return !!(this.objDangerBelief(vid) || {}).freshRaid; } catch (e) {}
       return false;
     },
     // ASK: find someone to walk with. A companion with their own outdoor
@@ -917,11 +921,15 @@
         // DORMANT MOTIVATIONS (rogue P1): 'alone' villagers are never asked
         // to walk guard — leave them be. Reads the GENERATED npcGoal.
         try { if (this.npcGoal && this.npcGoal(id) === 'alone') continue; } catch (e) {}
-        // RALLY-GUARD (win-drives 2026-11-03): rally volunteers only.
+        // RALLY-GUARD (win-drives 2026-11-03): rally volunteers only —
+        // protect/prove/lead AND they personally heard the fresh raid
+        // (objDangerBelief / objRallyFreshRaid). An unhearing villager
+        // does not act on a raid they were never told about.
         if (rallyOnly) {
           var _rg = null;
           try { _rg = this.npcGoal ? this.npcGoal(id) : null; } catch (e) {}
           if (_rg !== 'protect' && _rg !== 'prove' && _rg !== 'lead') continue;
+          try { if (!(this.objRallyFreshRaid && this.objRallyFreshRaid(id))) continue; } catch (e) { continue; }
         }
         var node = null;
         try { node = this.npcNode(id); } catch (e) { continue; }
@@ -1124,17 +1132,17 @@
       var dg = this.objDanger(rid, o.tx, o.ty, hx, hy);
       if (dg.verdict === 'go') {
         // RALLY-GUARD (win-drives 2026-11-03, Drive 1): the danger check
-        // alone would send this villager out solo — but the village
-        // heard about a raid in the last 3 days, and a protect / prove /
-        // lead villager at haven may answer it with company. Same
-        // exclusions as the 'ask' path (solo principals walk alone;
-        // a HUNT never drags along someone who has not seen the beast),
-        // same heal gates, same trust bumps. No new RNG draws on any
-        // path: the gossip scan and goal filter are pure reads, so
-        // games without a fresh raid are bit-identical to base.
+        // alone would send this villager out solo — but a protect / prove /
+        // lead villager at haven who personally heard a fresh raid may
+        // answer it with company (objAskCompanion filters by
+        // objRallyFreshRaid). Same exclusions as the 'ask' path (solo
+        // principals walk alone; a HUNT never drags along someone who has
+        // not seen the beast), same heal gates, same trust bumps. No new
+        // RNG draws on any path: the gossip scan and goal filter are pure
+        // reads, so games without a fresh heard raid are bit-identical.
         var rgCid = null;
         if (!o.solo && o.kind !== 'HUNT') {
-          try { if (this.objRallyFreshRaid && this.objRallyFreshRaid()) rgCid = this.objAskCompanion(rid, o, hx, hy, { rallyOnly: true }); } catch (e) { rgCid = null; }
+          try { rgCid = this.objAskCompanion(rid, o, hx, hy, { rallyOnly: true }); } catch (e) { rgCid = null; }
         }
         if (rgCid) {
           var rgCo = this.objOf(rgCid);
