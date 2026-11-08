@@ -30,9 +30,13 @@
 //   (17) trust moves on a non-death day -> nonDeathMoves 1;
 //   (18) a snap with scholarHealth 0 -> deadBearerDays 1;
 //   (19) no deaths at all -> NO-GAINS.
+//   (20) successor overwrite: expected +6, net -40 — classified by the
+//       payment, the overwrite shown alongside, never confused;
+//   (21) an old-shape record without `expected` falls back to net deltas.
 // RED/FAILURE MODE: (2) fails while a ladder throw crashes the snap;
 // (9)/(10) fail while the consistency checks are absent; (13)/(15)
-// fail while the contact join misclassifies strangers.
+// fail while the contact join misclassifies strangers; (20) fails while
+// the net delta is read as the payment.
 const D = require('./journey-deepening-r119-20261108.js');
 const A = require('./analyze-journey-deepening-r119-20261108.js');
 let pass = 0, fail = 0;
@@ -50,8 +54,8 @@ function seedJSON(over) {
     ladderSnaps: [], trustSnaps: [], trustDeaths: [] };
   return Object.assign(base, over || {});
 }
-function ladderSnap(day, stage, counted, cap, countedTracks, nextThreshold) {
-  return { day, stage, peakStage: stage, counted, cap,
+function ladderSnap(day, stage, counted, cap, countedTracks, nextThreshold, peakStage) {
+  return { day, stage, peakStage: peakStage == null ? stage : peakStage, counted, cap,
     tracks: { fight: 0, forage: 0, craft: 0, talk: 0, explore: 0 },
     countedTracks: countedTracks || { fight: 0, forage: 0, craft: 0, talk: 0, explore: 0 },
     capped: [], shortfall: nextThreshold == null ? null : nextThreshold - counted, nextThreshold,
@@ -161,15 +165,16 @@ function ladderSnap(day, stage, counted, cap, countedTracks, nextThreshold) {
   ok('Q1-LADDER (10) verdict BROKEN on cap breach', r.verdict === 'BROKEN', r.verdict);
   ok('Q1-LADDER (10) the breaching track is named', r.inconsistent.length === 1 && r.inconsistent[0].track === 'fight', JSON.stringify(r.inconsistent));
 }
-// (11) Stage drop recorded, verdict stays OPENS.
+// (11) Stage drop mid-panel recorded, verdict stays OPENS.
 {
   const s = seedJSON({ ladderSnaps: [
     ladderSnap(40, 0, 5, 7, null, 12),
     ladderSnap(60, 1, 13, 15, { fight: 7, forage: 3, craft: 2, talk: 1, explore: 0 }, 26),
-    ladderSnap(100, 0, 8, 7, { fight: 7, forage: 1, craft: 0, talk: 0, explore: 0 }, 12),
+    ladderSnap(80, 0, 8, 7, { fight: 7, forage: 1, craft: 0, talk: 0, explore: 0 }, 12, 1),
+    ladderSnap(100, 1, 14, 15, { fight: 7, forage: 4, craft: 2, talk: 1, explore: 0 }, 26),
   ] });
   const r = A.summarizeLadder(s);
-  ok('Q1-LADDER (11) stage drop recorded', r.stageDrops.length === 1 && r.stageDrops[0].peak === 1 && r.stageDrops[0].live === 0, JSON.stringify(r.stageDrops));
+  ok('Q1-LADDER (11) mid-panel stage drop recorded', r.stageDrops.length === 1 && r.stageDrops[0].day === 80 && r.stageDrops[0].peak === 1 && r.stageDrops[0].live === 0, JSON.stringify(r.stageDrops));
   ok('Q1-LADDER (11) verdict still OPENS', r.verdict === 'OPENS', r.verdict);
 }
 // (12) Minted takes the max across snaps.
@@ -184,8 +189,8 @@ function ladderSnap(day, stage, counted, cap, countedTracks, nextThreshold) {
 function trustSnap(day, scholar, health, trust, fallenN) {
   return { day, scholar, scholarHealth: health, trust, fallenN: fallenN || 0, lastFallen: null };
 }
-function trustDeath(day, oldBearer, newBearer, deltas) {
-  return { day, cause: 'the wild', oldBearer, newBearer, deltas };
+function trustDeath(day, oldBearer, newBearer, deltas, expected) {
+  return { day, cause: 'the wild', oldBearer, newBearer, deltas, expected: expected === undefined ? deltas : expected };
 }
 // (13) Stranger gain: never-talked-to villager paid on a death.
 {
@@ -271,6 +276,31 @@ function trustDeath(day, oldBearer, newBearer, deltas) {
   const r = A.summarizeTrust(s);
   ok('Q2-TRUST (19) verdict NO-GAINS with no deaths', r.verdict === 'NO-GAINS', r.verdict);
   ok('Q2-TRUST (19) zero deaths, zero gainers', r.deaths === 0 && r.gainers === 0, JSON.stringify(r));
+}
+// (20) Successor overwrite: expected +6, net -40 — classified by the
+// payment, the overwrite shown alongside, never confused.
+{
+  const s = seedJSON({
+    bond: { tele: [], proposals: [], decisions: [], links: [], sayLines: [], daily: [],
+      convoEvents: [{ fn: 'talkTo', day: 45, target: 'v_new' }], errors: [] },
+    trustSnaps: [trustSnap(49, 'v_old', 90, { v_new: 46 }, 0),
+      trustSnap(50, 'v_new', 100, { v_new: 6 }, 1)],
+    trustDeaths: [trustDeath(50, 'v_old', 'v_new', { v_new: -40 }, { v_new: 6 })],
+  });
+  const r = A.summarizeTrust(s);
+  ok('Q2-TRUST (20) successor classified by expected payment', r.deathDetail[0].gains[0].amt === 6 && r.deathDetail[0].gains[0].net === -40, JSON.stringify(r.deathDetail));
+  ok('Q2-TRUST (20) the +6 is a known gain (talked day 45)', r.knownGains === 1 && r.knownGainTotal === 6 && r.strangerGains === 0, JSON.stringify(r));
+  ok('Q2-TRUST (20) verdict TRUST-EARNED-ONLY', r.verdict === 'TRUST-EARNED-ONLY', r.verdict);
+}
+// (21) Old-shape record without `expected` falls back to net deltas.
+{
+  const s = seedJSON({
+    trustSnaps: [trustSnap(49, 'v_old', 90, { v_h1: 39 }, 0),
+      trustSnap(50, 'v_new', 100, { v_h1: 45 }, 1)],
+    trustDeaths: [{ day: 50, cause: 'the wild', oldBearer: 'v_old', newBearer: 'v_new', deltas: { v_h1: 6 } }],
+  });
+  const r = A.summarizeTrust(s);
+  ok('Q2-TRUST (21) old-shape record falls back to net deltas', r.deathDetail[0].gains[0].amt === 6 && r.strangerGains === 1, JSON.stringify(r.deathDetail));
 }
 console.log(fail === 0 ? `R119 instruments: ${pass} passed` : `R119 instruments: ${pass} passed, ${fail} FAILED`);
 process.exit(fail === 0 ? 0 : 1);

@@ -221,6 +221,40 @@ contact is a stranger paid for a death they never witnessed.
 ## Metric review (filled at closeout, never mid-run)
 - (to be filled)
 
+## Amendment 1 (pre-panel, smoke-driven, 2026-11-08 ~11:15Z)
+
+The smoke seed (96700 x DAYCAP=45) ran clean — ladderSnaps,
+trustSnaps and trustDeaths all present — but it changed two instrument
+details before the panel, so they are corrected here, before any panel
+seed runs:
+
+1. **The trustDeaths delta is NOT the payment.** The smoke's one
+   death paid a NET -40 to the successor (gen_k77w75y): the agency
+   wrap pays +min(12, floor(score/4)) to every roster member, but the
+   base `playerDeath` then OVERWRITES the successor's entry with the
+   mantle inheritance formula (`ledger.js`: max(10, round(office*0.4
+   + own*0.4 + vouchBonus))). The delta around the call conflates
+   payment + inheritance. The driver now also records `expected` — the
+   agency payment recomputed before the call, mirroring the wrap's
+   formula exactly (same roster, same skip of the dying scholar, same
+   min(12, floor(score/4))). The analyzer's stranger/known
+   classification reads `expected`; the net delta is reported
+   alongside. Records without `expected` fall back to net deltas.
+2. **Stage drops are collected at every snap, not just the horizon.**
+   The smoke's day-40 snap already read peakStage 3 > stage 2 — a
+   drop before the first snapshot (the village hit National and fell
+   back to Regional as a death pulled XP out of the live sums).
+   `summarizeLadder` now records every snap with peak > stage.
+3. **Smoke findings, reported not pre-judged:** the ladder reached
+   stage 3 (National, counted 46) by day 46 on the smoke seed, with
+   Explore minting 23–25 from breadth 92–100 (1 per 4 breadth above
+   base 8) — the panel will say whether that is the smoke seed or the
+   leg. Trust drifts roster-wide (+1..+9/day/villager, to ~90 by day
+   46) from the many small deed writers (`trustGainProgressive` call
+   sites in game.js/betrayal.js/carexplore.js/contests.js), not from
+   the death payment — the payment is one writer among many, and the
+   panel's non-death-move counts will size it.
+
 ## Infrastructure notes
 - Worktree registration slow (~9 min, 10:45–10:54Z) under sibling load
   (Lane B occurrence registering in parallel); `git status` in the

@@ -1853,15 +1853,30 @@ async function runSeed(seed) {
         // R119 Q2-TRUST: the trust-before/after around the call IS the
         // payment (the agency wrap pays inside _pd, before the base
         // playerDeath sorts by trust). Record the per-member delta.
-        let trustBefore = {}, oldBearer = null;
-        try { oldBearer = Game.villagerId || null; const t = ((Game.state || {}).village || {}).trust || {}; for (const k of Object.keys(t)) trustBefore[k] = t[k]; } catch (e) {}
+        let trustBefore = {}, oldBearer = null, expected = {};
+        try {
+          oldBearer = Game.villagerId || null;
+          const t = ((Game.state || {}).village || {}).trust || {};
+          for (const k of Object.keys(t)) trustBefore[k] = t[k];
+          // The agency wrap's payment, recomputed BEFORE the call (the
+          // base playerDeath overwrites the successor's entry via the
+          // mantle inheritance formula, so the net delta around the call
+          // conflates payment + inheritance — record both).
+          const roster = ((Game.state || {}).village || {}).roster || [];
+          for (const id of roster) {
+            if (id === oldBearer) continue;
+            let bonus = 0;
+            try { bonus = Math.min(12, Math.floor((Game.agencyScore ? Game.agencyScore(id) : 0) / 4)); } catch (e2) { bonus = 0; }
+            if (bonus > 0) expected[String(id)] = bonus;
+          }
+        } catch (e) {}
         const r = _pd(cause);
         try {
           const trustAfter = ((Game.state || {}).village || {}).trust || {};
           const deltas = {};
           const ids = new Set(Object.keys(trustBefore).concat(Object.keys(trustAfter)));
           for (const id of ids) { const d = (trustAfter[id] || 0) - (trustBefore[id] || 0); if (d !== 0) deltas[id] = d; }
-          DEATHS.trustDeaths.push({ day: gday(), cause: c, oldBearer, newBearer: Game.villagerId || null, deltas });
+          DEATHS.trustDeaths.push({ day: gday(), cause: c, oldBearer, newBearer: Game.villagerId || null, deltas, expected });
         } catch (e) { DEATHS.trustDeaths.push({ day: gday(), cause: c, err: String(e && e.message) }); }
         DEATHS.playerDeaths.push({ day: gday(), cause: c });
         DEATHS.causes[c] = (DEATHS.causes[c] || 0) + 1;

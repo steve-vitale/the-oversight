@@ -944,8 +944,12 @@ function summarizeLadder(s) {
     }
   }
   const last = ok.length ? ok[ok.length - 1] : null;
-  const stageDrops = (last && last.stage != null && peakStage > last.stage)
-    ? [{ day: last.day, peak: peakStage, live: last.stage }] : [];
+  // Stage drops: EVERY snap where the peak exceeds the live stage (the
+  // ladder is LIVE, not ratcheted — deaths can pull a stage down, and a
+  // drop can happen before the first snap, as the smoke's day-40
+  // peak-3/stage-2 read showed).
+  const stageDrops = ok.filter(x => x.peakStage != null && x.stage != null && x.peakStage > x.stage)
+    .map(x => ({ day: x.day, peak: x.peakStage, live: x.stage }));
   let verdict;
   if (errs.length || inconsistent.length) verdict = 'BROKEN';
   else if (firstStageDay != null && firstStageDay <= 80) verdict = 'OPENS';
@@ -996,12 +1000,20 @@ function summarizeTrust(s) {
   const deathDetail = [];
   for (const d of deaths) {
     if (!d || d.err) { deathDetail.push({ day: d ? d.day : null, err: d ? d.err : 'null-death' }); continue; }
+    // The PAYMENT is d.expected (the agency wrap's min(12, score/4),
+    // recomputed before the call). The NET delta around the call also
+    // carries the base playerDeath's mantle inheritance overwrite of
+    // the successor's entry (smoke: expected +6, net -40) — reported
+    // alongside, never confused with the payment. Older seed JSONs
+    // without `expected` fall back to the net deltas.
+    const paid = (d.expected && Object.keys(d.expected).length) ? d.expected : (d.deltas || {});
     const gains = [];
-    for (const vid of Object.keys(d.deltas || {})) {
-      const amt = d.deltas[vid];
+    for (const vid of Object.keys(paid)) {
+      const amt = paid[vid];
+      const net = (d.deltas || {})[vid];
       const firstContact = contactDays[vid];
       const kind = firstContact == null ? 'stranger' : (firstContact < d.day ? 'known' : 'late');
-      gains.push({ vid, amt, kind, firstContact: firstContact == null ? null : firstContact });
+      gains.push({ vid, amt, net: net == null ? null : net, kind, firstContact: firstContact == null ? null : firstContact });
       gainers++;
       if (kind === 'stranger') { strangerGains++; strangerGainTotal += amt; }
       else if (kind === 'late') lateGains++;
