@@ -300,4 +300,22 @@ they never resolved on r107–r110 files.
 - `evidence/2026-11-08/neutral-ladder-r111-20261108.json.gz` (fresh
   observer-neutral panel), `scripts/balance-proof.json` (re-pointed at it)
 
+## Closeout addendum — rebase onto d80f972a26 (Loop A 1315Z landing)
+
+Master moved mid-run (sibling Loop A 1315Z landing: doublenight fix +
+comparecontract landings + their own neutrality proof refresh). The branch
+was rebased onto the new master tip d80f972a26 (explicit SHA; the only
+conflict was `scripts/balance-proof.json`, resolved with this run's panel
+pointer). The sibling's landing changed src/ (game.js, conversation.js)
+and observer files (balance-panel.js, balance-scorecard.js), so the r111
+panel's manifest went stale a second time: a fresh panel was run on the
+rebased tree (same options, 8 jobs, 4 cases, exit 0) and installed as
+`evidence/2026-11-08/neutral-ladder-r111b-20261108.json.gz`, with
+`scripts/balance-proof.json` re-pointed at it (second commit on this
+branch). Proof tests re-run on the rebased tree: ladder-cap 27/27, r111
+proof 8/8, seat 38/38, bundle 79/79, minting 34/34, measurement-workflow
+9/9, proof-update 9/9. The scored band (seeds 97801–97804) ran on base
+715c2918d; it was not re-run after the rebase (loop rule: re-run proof
+tests, then merge).
+
 Merged locally, pending ship. Rotation 3 → 0.
