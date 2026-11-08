@@ -446,10 +446,12 @@ seat, wave 5 is 2–3/8 on the frozen band. food-economy stays converging
 
 ## Footer
 
-- Branch sim-midshape-a: prereg + instruments (7e25ca671) + [fix commit /
-  revert + evidence + corpora + panels + compare — to be filled at
-  closeout]. Zero src/js diff after the revert (to be verified
-  `git diff HEAD -- src/` empty).
+- Branch sim-midshape-a commits: prereg + proof + instrument `7e25ca671`;
+  instruments update `addda1e37`; evidence + corpora + panels + compare
+  `33ada84fc` (this footer fix-up is the commit after it). The fix (6 edits
+  in `src/js/fieldFights.js`) was reverted before the evidence commit:
+  `git diff HEAD -- src/` is empty (verified 2026-11-08 ~20:40Z) — zero
+  game-code trace remains.
 - Baseline corpus: `evidence/2026-11-08/perseed-midshape-a-baseline/` (8/8,
   0 instrument errors). Candidate corpus:
   `evidence/2026-11-08/perseed-midshape-a-candidate/` (8/8, 0 instrument
