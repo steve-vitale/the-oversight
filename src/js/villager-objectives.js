@@ -29,8 +29,8 @@
 //   - return_names_are_honest: objective-return copy names the found one via _repName — a stranger descriptor ("A person, maybe 40s") is used whole, never its first word ("found A" read broken). (code: villager-objectives.js, travel lever r4 2026-10-12)
 //   - bark_armor_teach: a villager WEARING bark armor teaches the player its recipe L1 on return (trust 15+, player at haven, once per teacher) — the snare-lesson pattern for the occupation lottery's armor. (code: villager-objectives.js, 2026-10-13)
 //   - return_to_fight: a villager who fought a living world monster remembers the fight's tile, and only that villager may be offered a HUNT errand back to it (fresh memory, armed, in range, existing departure gates still apply). No villager is ever routed to a monster tile nobody fought on — knowledge gates the route, never a radar. (code: villager-objectives.js, game.js resolveWildMonsterEncounter, 2026-10-27)
-//   - rally_guard: on a 'go'-verdict departure within 3 days of raid gossip, a protect/prove/lead villager at haven may volunteer as GUARD via objAskCompanion (rallyOnly) — the danger check alone would send the principal out solo. Same solo/HUNT exclusions and heal gates as the 'ask' path; games without a fresh raid still skip the ask (no invite rolls). (code: villager-objectives.js, win-drives 2026-11-03)
-//   - companion_no_cross_write: objAskCompanion never writes another villager's objective — the GUARD offer is advertised to the companion, npcInviteDecision (kind 'lure') accepts or refuses, and only on accept does objCommitGuardOffer write the companion's OWN objective (code: objAskCompanion, objCommitGuardOffer, VILLAGER-BRAIN Phase 4)
+//   - rally_guard: on a 'go'-verdict departure within 3 days of raid gossip, a protect/prove/lead villager at haven may volunteer as GUARD via objAskCompanion (rallyOnly) — the danger check alone would send the principal out solo. Same solo/HUNT exclusions and heal gates as the 'ask' path; rallyOnly commits the top volunteer via objCommitGuardOffer with no invite lottery (no new RNG — win-drives bit-identity). Ordinary 'ask' still uses npcInviteDecision. (code: villager-objectives.js, win-drives 2026-11-03)
+//   - companion_no_cross_write: objAskCompanion never writes another villager's objective — ordinary asks advertise a GUARD offer and let npcInviteDecision (kind 'lure') accept or refuse; only on accept does objCommitGuardOffer write the companion's OWN objective. rallyOnly volunteers skip the lure lottery but still self-commit. (code: objAskCompanion, objCommitGuardOffer, VILLAGER-BRAIN Phase 4)
 //   - companion_shared_score: door companion ranking uses companionScore / companionRank — same formula as party path and favor-company (code: objAskCompanion, companion-score.js, VILLAGER-BRAIN Phase 4)
 // consumes:
 //   - village.roster, village.away, village.nodePos, village.gossip
@@ -1226,6 +1226,25 @@
         targetVid: vid,
         companion: vid,
       };
+      // RALLY-GUARD: protect/prove/lead who heard the raid are volunteering,
+      // not being lured. Skip the invite lottery so this path draws no new
+      // RNG (win-drives 2026-11-03 bit-identity). Still commit via
+      // objCommitGuardOffer so the companion writes their OWN objective
+      // (Phase 4 no-cross-write).
+      if (rallyOnly) {
+        var rgId = cands[0].id;
+        var rgOffer = Object.assign({}, offerBase);
+        try {
+          this._lastCompanionAsk = {
+            asker: vid, candidate: rgId, offer: rgOffer,
+            decision: { accept: true, chance: 100, roll: null, reasons: ['rally-volunteer'] },
+            accepted: true,
+          };
+        } catch (e) {}
+        try { this.objCommitGuardOffer(rgId, rgOffer); } catch (e) { return null; }
+        obj.companion = rgId;
+        return rgId;
+      }
       for (var ci = 0; ci < cands.length; ci++) {
         var cid = cands[ci].id;
         var decideOpts = { kind: 'lure', offer: Object.assign({}, offerBase) };

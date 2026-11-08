@@ -497,8 +497,20 @@
   // follow-on beats. Queuing it must not claim that the player has heard it.
   function queueTraderIntro(c) {
     if ((!c.traderIntroPending && !c.invitePending && !c.bondPending && !c.linkPending) || c.pendingQ || c.reactiveQ || c.genericQ || c.heldAsk || c.windingDown) return;
-    if (c.thread === 'want' && c.want && ((c.want.stage || 0) < 2 ||
-        (['ask_favor','seek_comfort','seek_taken','warn_you'].includes(c.want.id) && (c.want.stage || 0) < 3))) return;
+    if (c.thread === 'want' && c.want) {
+      const stage = c.want.stage || 0;
+      // A trade intro that survived Continue already earned its place behind
+      // the prior question. A freshly selected want (OVE-48 dawn priorities
+      // may open warn_you) may speak first, but the deferred intro must not
+      // wait for that new arc to reach stage 3 — once the opener has
+      // surfaced (stage >= 1) and no question is pending, queue it.
+      if (c.tradeIntroDeferred && c.traderIntroPending) {
+        if (stage < 1) return;
+      } else if (stage < 2 ||
+          (['ask_favor', 'seek_comfort', 'seek_taken', 'warn_you'].includes(c.want.id) && stage < 3)) {
+        return;
+      }
+    }
     c.heldBeats = c.heldBeats || [];
     if (c.heldBeats.some(h => h.ask || h.traderIntro || h.invitation || h.bondproposal || h.linkraise)) return;
     if (c.invitePending) {
@@ -520,6 +532,7 @@
     }
     c.heldBeats.push({ text: c.traderIntroPending, traderIntro: true });
     c.traderIntroPending = null;
+    c.tradeIntroDeferred = false;
   }
 
   // floraWords: the green world coming up in conversation. Teaching later
@@ -7395,6 +7408,12 @@
       // shape ("should get back to it" + "Right. Go on, then." + dry-line
       // trail-offs). A person says goodbye once.
       const goodbyeSaid = !!c.windingDown;
+      // TRADE INTRO ACROSS CONTINUE: an unspoken trader introduction that
+      // survived this sitting stays deferred. The next open may pick a new
+      // want (dawn priorities); queueTraderIntro must still surface the
+      // earned intro once that opener has spoken, not wait for a full
+      // warn_you/favor engagement arc.
+      if (c.traderIntroPending) c.tradeIntroDeferred = true;
       c.active = false; c.over = true; c.thread = null; c.pendingQ = null;
       c.reactiveQ = null;
       // UNIFIED TRACKS (2026-10-14): a held conversation (a real exchange,
