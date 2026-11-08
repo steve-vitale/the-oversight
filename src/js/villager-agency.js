@@ -221,20 +221,38 @@
         try {
           if (this.objOf) {
             var oo = this.objOf(rid);
-            if (oo && oo.indoor && oo.state === 'indoor') continue;
+            // Indoor errands normally block ranging — except a dawn-brain
+            // EXPEDITION commitment, which materializes as a short chore hold
+            // so the legacy lottery RNG stays intact until this tick launches.
+            var _brainExped = false;
+            try {
+              if (typeof this.vbrainCommit === 'function') {
+                var _bc = this.vbrainCommit(rid);
+                _brainExped = !!( _bc && _bc.kind === 'EXPEDITION' && _bc.day === ((this.state.scholar || {}).day || 0) );
+              }
+            } catch (e2) {}
+            if (oo && oo.indoor && oo.state === 'indoor' && !_brainExped) continue;
           }
           // TRIGGER REGISTRY (rogue P0-5): the village-danger expedition
           // gate lives in the npc-triggers.js registry row
           // 'expedition_launch' — same predicate, same threshold.
           if (this.npcTrigger && this.npcTrigger(rid, 'expedition_launch')) continue;
         } catch (e) {}
-        // WIN PLAN (winnability push track 2, 2026-11-03): a villager on
-        // a win plan is evaluated at Haven first (stage transitions from
-        // their own gear / a broadcast beat / a companion they can see),
-        // then gated at departure (gear hold, party launch, veteran guard).
-        // 'hold'/'launch' skip the chance roll; 'normal' falls through
-        // untouched. Chain-safe: the module may be absent.
+        // WIN PLAN stage updates still run here (gear/beat/companion state),
+        // but departure strategy no longer re-decides on this tick when the
+        // villager brain owns dawn (VILLAGER-BRAIN phase 1). Chain-safe.
         try { if (this.winPlanHavenTick) this.winPlanHavenTick(rid, hx, hy); } catch (e) {}
+        if (typeof this.vbrainOwnsDawn === 'function' && this.vbrainOwnsDawn()) {
+          // One brain: honor today's dawn commitment only. No chance roll,
+          // no winPlanDepart re-decide — those feed the dawn pass instead.
+          try {
+            if (typeof this.vbrainExecuteDepart === 'function') {
+              var _vbd = this.vbrainExecuteDepart(rid, hx, hy, playerAtHaven);
+              if (_vbd === 'hold' || _vbd === 'launch') continue;
+            }
+          } catch (e) {}
+          continue;
+        }
         try {
           if (this.winPlanDepart) {
             var _wpd = this.winPlanDepart(rid, hx, hy, playerAtHaven);

@@ -1981,6 +1981,20 @@ Villager AI. Villagers act on their own with goals and routines.
 
 **Consumes:** village.villagers
 
+### villager-brain (`villager-brain.js`)
+One dawn scoring entry for Haven villagers — candidates feed, one pass picks, a log explains every pick. Phase-1 coherence only; IAUS product-of-curves arithmetic stays deferred pending Steve review.
+
+**Provides:** vbrainScorePick(vid, cands, opts), vbrainLogGate(vid, kind, gateId, detail), vbrainFeedExtras(vid, cands, hx, hy), vbrainCommit(vid), vbrainLastLog(vid), vbrainLogs(), vbrainExecuteDepart(vid, hx, hy, announce), vbrainOwnsDawn()
+
+**Rules:**
+- vbrain_one_dawn_entry: every dawn lead pick (gate or lottery) is recorded through this module so one log explains the choice (code: vbrainScorePick, vbrainLogGate)
+- vbrain_legacy_weights: phase 1 keeps existing additive candidate weights and the weighted lottery; it does NOT ship the product-of-curves formula from VILLAGER-BRAIN.md (code: vbrainScorePick)
+- vbrain_feeders_not_deciders: goals bias, win-plan stage intents, and EXPEDITION feed candidates here; agency chance-rolls and win-plan re-decides stop owning the day when this module is loaded (code: vbrainFeedExtras, vbrainExecuteDepart)
+- vbrain_commitment: the dawn pick writes a commitment record the same day so midday agency honors it instead of rolling again (code: vbrainScorePick, vbrainCommit)
+- vbrain_chain_safe: missing feeders fail silent; agency falls back to the old chance roll only when vbrainOwnsDawn is absent (code: vbrainFeedExtras)
+
+**Consumes:** npcRangeProfile, npcMaxDist, agencyState (villager-agency.js), winPlanOf, winPlanHavenTick (win-plan.js) — optional feeders, vgoalBiasCands (villager-goals.js) — called by objPick before this scorer
+
 ### villager-build (`villager-build.js`)
 PARITY (Steve 2026-10-14: "Villagers and players should get the same XP, when in doubt we treat them the same way. You should get to swap on level up or keep existing. ... villagers need to act in smart ways, including towards getting good gear and builds. They want to win as well." / "Villagers can't just take the next ability, they need to seek knowledge about the abilities and go for a build that suits their technology."). THE build brain for the player's bots and every villager: buildScore scores an ability for whoever would hold it (what they hold, synergies, build-around paths, their technology = gear, tools, skills and job lean, their target build, what they know). Villagers keep ability KNOWLEDGE (0-3, the player's codex levels), seek it from people who hold or know abilities, keep a target build, choose on the same 1-of-3 level-up sheet the player gets (swap or keep, same rule), and gear up from their own things, gifts and the village armory with a daily greedy allocation.
 
