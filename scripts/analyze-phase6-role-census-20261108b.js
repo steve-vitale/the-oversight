@@ -1,7 +1,8 @@
 #!/usr/bin/env node
-// Analyzer for probe-phase6-role-census-20261108b.js outputs (after DUTY pick).
+// Analyzer for probe-phase6-role-census-20261108b.js outputs
+// (after combat/social DUTY offers / OVE-73).
 // Prints per-track movement + DUTY_ad vs DUTY_picked + duty_top_score picks,
-// and a before/after stub vs #49 evidence when present.
+// and a before/after stub vs OVE-72 after-duty-pick evidence when present.
 // Usage: node scripts/analyze-phase6-role-census-20261108b.js [--evid DIR]
 'use strict';
 const fs = require('fs');
@@ -9,8 +10,8 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const EVID = process.argv.includes('--evid')
   ? path.resolve(process.argv[process.argv.indexOf('--evid') + 1])
-  : path.join(ROOT, 'evidence', '2026-11-08', 'phase6-role-census-after-duty-pick');
-const BEFORE_EVID = path.join(ROOT, 'evidence', '2026-11-08', 'phase6-role-census');
+  : path.join(ROOT, 'evidence', '2026-11-08', 'phase6-role-census-after-combat-social');
+const BEFORE_EVID = path.join(ROOT, 'evidence', '2026-11-08', 'phase6-role-census-after-duty-pick');
 const TASKS = ['hunt', 'forage', 'garden', 'fish', 'wood', 'stone', 'deadfall', 'water', 'scout', 'patrol', 'cook', 'tend', 'teach', 'mend'];
 const SPECS = ['butcher', 'cook', 'preserver', 'spotter', 'builder'];
 const TRACKS = ['combat', 'field', 'social', 'craft', 'strange'];
@@ -371,7 +372,7 @@ for (const [policy, seedsRaw] of Object.entries(byPolicy)) {
   };
 }
 
-// Optional before/after vs #49 panel analysis.json
+// Optional before/after vs OVE-72 after-duty-pick panel analysis.json
 try {
   const beforePath = path.join(BEFORE_EVID, 'analysis.json');
   if (fs.existsSync(beforePath)) {
@@ -383,6 +384,7 @@ try {
       analysis.beforeCompare.policies[policy] = {
         before: {
           tip: before.tip, DUTY_ad: b.duty.adEvents, DUTY_picked: b.duty.pickEvents,
+          dutyTopScorePicks: b.duty.dutyTopScorePicks || 0,
           seedsWithPicks: b.duty.seedsWithPicks, cellsByTask: b.p60.cellsByTask,
           tracksWithSignal: b.tracksWithSignal, verdict: b.verdict,
         },
@@ -430,8 +432,8 @@ for (const [policy, a] of Object.entries(analysis.policies)) {
   console.log(`behavior: strong ${a.p60.strongN}/${a.p60.qualN} hybrid ${a.p60.hybridN} matchedTop ${a.p60.matchedTopN} meanTopShare ${a.p60.meanTopShare == null ? 'n/a' : a.p60.meanTopShare.toFixed(2)}`);
   if (analysis.beforeCompare && analysis.beforeCompare.policies[policy]) {
     const c = analysis.beforeCompare.policies[policy];
-    console.log('BEFORE(#49) DUTY_ad→picked:', c.before.DUTY_ad, '→', c.before.DUTY_picked,
-      '| AFTER DUTY_ad→picked:', c.after.DUTY_ad, '→', c.after.DUTY_picked,
+    console.log('BEFORE(OVE-72) DUTY_ad→picked:', c.before.DUTY_ad, '→', c.before.DUTY_picked,
+      '| AFTER(combat-social) DUTY_ad→picked:', c.after.DUTY_ad, '→', c.after.DUTY_picked,
       '(duty_top_score', c.after.dutyTopScorePicks + ')');
   }
 }

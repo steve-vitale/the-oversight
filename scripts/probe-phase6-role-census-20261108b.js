@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 // probe-phase6-role-census-20261108b.js — VILLAGER-BRAIN Phase 6 §8 re-census
-// Matched panel after DUTY dawn pick (#51 duty_top_score @ ddb7f90da+) /
-// preferably QC tip c47d7df53 (#52). Same 16-seed capable/competent shape as
-// #49 (20261108 probe). Measurement only — no Game/policy edits. Muse off.
+// Matched panel after combat/social DUTY brain-offers (OVE-71 / PR #55 @
+// b2da71ec9). Same 16-seed capable/competent shape as #49 / OVE-72.
+// Measurement only — no Game/policy edits. Muse off.
 //
 // Extends 20261108 sampling with pickOverride tallies (duty_top_score) so
 // the after-panel can prove ads→picks without inventing new harness shape.
+// OUT path is set per arm (duty-pick vs combat-social) via DEFAULT_OUT / OUT.
 //
 // Harness rule: one loadGame per process — driver spawns one child per
 // (policy, seed).
@@ -13,7 +14,7 @@
 // Usage:
 //   SEEDS=7,42,99,1234,555,777,2026,31337,1,2,3,4,5,6,8,9 \
 //     POLICIES=capable,competent DAYS=80 PAR=4 \
-//     OUT=evidence/2026-11-08/phase6-role-census-after-duty-pick \
+//     OUT=evidence/2026-11-08/phase6-role-census-after-combat-social \
 //     node scripts/probe-phase6-role-census-20261108b.js
 //   POLICY=capable SEED=7 DAYS=80 node scripts/probe-phase6-role-census-20261108b.js --one
 'use strict';
@@ -24,7 +25,7 @@ const REPO = path.join(__dirname, '..');
 
 const DEFAULT_SEEDS = '7,42,99,1234,555,777,2026,31337,1,2,3,4,5,6,8,9';
 const DEFAULT_POLICIES = 'capable,competent';
-const DEFAULT_OUT = path.join(REPO, 'evidence', '2026-11-08', 'phase6-role-census-after-duty-pick');
+const DEFAULT_OUT = path.join(REPO, 'evidence', '2026-11-08', 'phase6-role-census-after-combat-social');
 const TASKS = ['hunt', 'forage', 'garden', 'fish', 'wood', 'stone', 'deadfall', 'water', 'scout', 'patrol', 'cook', 'tend', 'teach', 'mend'];
 const SPECS = ['butcher', 'cook', 'preserver', 'spotter', 'builder'];
 const TRACKS = ['combat', 'field', 'social', 'craft', 'strange'];
@@ -416,9 +417,9 @@ async function runDriver() {
     for (const seed of seeds) jobs.push({ policy, seed });
   }
   console.log(JSON.stringify({
-    phase: 'phase6-role-census-after-duty-pick', tip, tip12: tip.slice(0, 12),
+    phase: 'phase6-role-census-after-combat-social', tip, tip12: tip.slice(0, 12),
     seeds, policies, days: +days, cases: jobs.length, par, outDir,
-    baselineCompare: 'evidence/2026-11-08/phase6-role-census (#49 / tip 206fe4931)',
+    baselineCompare: 'evidence/2026-11-08/phase6-role-census-after-duty-pick (OVE-72 / tip c47d7df53)',
   }));
 
   const results = [];
