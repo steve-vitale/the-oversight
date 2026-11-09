@@ -19,6 +19,7 @@
 //   - garden_feast_lean: Living Garden CONTEST scale — cookfight/guest making scores add gardenFeastLeanFor for an ascended holder (player or NPC); alien cheer still does not reach weird scores (code: _cxOther, godverbs.js gardenFeastLeanFor; OVE-99)
 //   - voice_performance_lean: Voice of the Relay CONTEST scale — impress making scores and moot case scores add voicePerformanceLeanFor for an ascended holder (player or NPC); feast contests stay Garden-only (code: _cxOther, _cxMoot, godverbs.js voicePerformanceLeanFor; OVE-104)
 //   - unkillable_endurance_lean: Unkillable CONTEST scale — endurance arms honor unkillableEnduranceLeanFor for an ascended holder (player or NPC): starve HP/days, drop/exchange survival-for-time, maw/vigil nerve; feast/performance stay Garden/Voice (code: _cxEndurance, godverbs.js unkillableEnduranceLeanFor; OVE-108)
+//   - all_seeing_strategy_lean: All-Seeing CONTEST scale — puzzle/detective scores and lies case scores add allSeeingStrategyLeanFor for an ascended holder (player or NPC); feast/performance/endurance stay Garden/Voice/Unkillable (code: _cxOther, _cxMoot, godverbs.js allSeeingStrategyLeanFor; OVE-110)
 // consumes:
 //   - fieldFight (fieldFights.js), monsterWavePool, unlockedWave
 //   - Game.agencyOf, Game.npcTemper, village health, scholar trust
@@ -26,6 +27,7 @@
 //   - Game.gardenFeastLeanFor (godverbs.js) for feast contest score lean
 //   - Game.voicePerformanceLeanFor (godverbs.js) for performance contest score lean
 //   - Game.unkillableEnduranceLeanFor (godverbs.js) for endurance contest lean
+//   - Game.allSeeingStrategyLeanFor (godverbs.js) for strategy contest score lean
 /* CONTEST ENGINE — src/js/contestEngine.js
  *
  * Steve (2026-10-08): "No, contests are to be played, not as RNG."
@@ -430,6 +432,9 @@
       const results = {};
       // Voice of the Relay CONTEST scale (OVE-104): performance contests
       // (moot oratory) lean for an ascended Voice holder — the show is theirs.
+      // All-Seeing CONTEST scale (OVE-110): strategy-bluff Lie Detector (lies)
+      // case scores lean for an ascended All-Seeing holder — nobody bluffs
+      // them. Voice's moot oratory and All-Seeing's lies are different IDs.
       const voiceLean = (pid) => {
         try {
           if (typeof this.voicePerformanceLeanFor === 'function')
@@ -437,9 +442,16 @@
         } catch (e) { console.warn('[contest] voice performance lean', e); }
         return 0;
       };
+      const strategyLean = (pid) => {
+        try {
+          if (typeof this.allSeeingStrategyLeanFor === 'function')
+            return this.allSeeingStrategyLeanFor(pid, contest) || 0;
+        } catch (e) { console.warn('[contest] all-seeing strategy lean', e); }
+        return 0;
+      };
       if (pids.length === 1) {
         const pid = pids[0];
-        const score = this._cxCaseScore(pid, opts.cheerLift || 0) + voiceLean(pid);
+        const score = this._cxCaseScore(pid, opts.cheerLift || 0) + voiceLean(pid) + strategyLean(pid);
         const st = this._cxStats(pid);
         if (score >= demand) return { [pid]: { outcome: 'won', detail: `case ${score.toFixed(1)} vs demand ${demand}`, log: [`${st.name} makes the case. The audience is the jury, and the jury can count.`] } };
         if (score >= demand * 0.6) return { [pid]: { outcome: 'lost', detail: `case ${score.toFixed(1)} vs demand ${demand}`, log: [`${st.name}'s case doesn't hold. The audience looks away.`] } };
@@ -449,7 +461,7 @@
         return { [pid]: { outcome: 'lost', detail: `case ${score.toFixed(1)} vs demand ${demand}`, log: [`${st.name}'s case doesn't hold.`] } };
       }
       // head-to-head (lies, p2)
-      const scores = pids.map(pid => ({ pid, score: this._cxCaseScore(pid, opts.cheerLift || 0) + voiceLean(pid) }));
+      const scores = pids.map(pid => ({ pid, score: this._cxCaseScore(pid, opts.cheerLift || 0) + voiceLean(pid) + strategyLean(pid) }));
       scores.sort((x, y) => y.score - x.score);
       const top = scores[0], second = scores[1];
       if (second && Math.abs(top.score - second.score) < 0.5) {
@@ -602,25 +614,46 @@
         return results;
       }
       // DETECTIVE: tracking + trust/5 (informants talk to the trusted) vs difficulty.
+      // All-Seeing CONTEST scale (OVE-110): strategy contests lean for an
+      // ascended All-Seeing holder — nobody bluffs the detective.
       if (cat === 'detective') {
+        const strategyLean = (pid) => {
+          try {
+            if (typeof this.allSeeingStrategyLeanFor === 'function')
+              return this.allSeeingStrategyLeanFor(pid, contest) || 0;
+          } catch (e) { console.warn('[contest] all-seeing strategy lean', e); }
+          return 0;
+        };
         if (pids.length === 1) {
           const pid = pids[0], st = stats[pid];
-          const solve = st.tracking + st.trust / 5;
+          const solve = st.tracking + st.trust / 5 + strategyLean(pid);
           results[pid] = solve >= diff
             ? { outcome: 'won', detail: `solved at ${solve.toFixed(1)}`, log: [`${st.name} follows it to the end.`] }
             : { outcome: 'lost', detail: `stalled at ${solve.toFixed(1)} vs ${diff}`, log: [`${st.name} loses the thread.`] };
           return results;
         }
         const sc = {};
-        for (const pid of pids) sc[pid] = stats[pid].tracking + stats[pid].trust / 5;
+        for (const pid of pids) sc[pid] = stats[pid].tracking + stats[pid].trust / 5 + strategyLean(pid);
         const best = Math.max(...pids.map(pid => sc[pid]));
         for (const pid of pids) results[pid] = { outcome: sc[pid] === best ? 'won' : 'lost', detail: `${sc[pid].toFixed(1)}`, log: [] };
         return results;
       }
       // PUZZLE: clever potential + practical survival.
+      // All-Seeing CONTEST scale (OVE-110): strategy contests lean for an
+      // ascended All-Seeing holder — they see the pattern first.
       if (cat === 'puzzle') {
+        const strategyLean = (pid) => {
+          try {
+            if (typeof this.allSeeingStrategyLeanFor === 'function')
+              return this.allSeeingStrategyLeanFor(pid, contest) || 0;
+          } catch (e) { console.warn('[contest] all-seeing strategy lean', e); }
+          return 0;
+        };
         const sc = {};
-        for (const pid of pids) { const st = stats[pid]; sc[pid] = (st.clever ? 15 : 0) + st.survival / 2 + st.tracking / 2; }
+        for (const pid of pids) {
+          const st = stats[pid];
+          sc[pid] = (st.clever ? 15 : 0) + st.survival / 2 + st.tracking / 2 + strategyLean(pid);
+        }
         if (pids.length === 1) {
           const pid = pids[0];
           results[pid] = sc[pid] >= diff
