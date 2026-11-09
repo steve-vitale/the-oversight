@@ -119,6 +119,7 @@
 //   - fight_gate_counter_sweep: the same save-scum class in the counter engine (postdates the r6 sweep; r16 added _counterLastMoveDir without touching the boundary) — _counterStrikes (union_rep strike_first first-blood gate), _counterLastMoveRound/_counterLastMoveDir (review_drone move_x2 vary chain) persist in tbSave and restore verbatim. A mid-fight reload can neither re-arm firstStrike (save-scum counter discovery) nor silently break the drone's chain (code: syncRun, load, break-it persistence r11 2026-10-11)
 //   - scout_reports_are_shared: a scout's mapped tiles set t.revealed AND markSeen 'shared' — the world-map overlay agrees with the "mapped N new areas" log; never 'visited' (code: resolveOneAssignment, explorer break-it 2026-10-08)
 //   - apex_scout_mark_army_lean: Apex Predator ARMY scale — resolveOneAssignment scout honors Game.apexScoutMarkLeanFor so shared reveal chance + follow-marks beat lean when an ascended Apex holder is active (code: resolveOneAssignment scout, godverbs.js apexScoutMarkLeanFor; OVE-132)
+//   - unkillable_last_standing_army_lean: Unkillable ARMY scale — titan fight flee paths honor Game.titanLastStandingContinuity / unkillableLastStandingLeanFor so the last living Unkillable ours blade refuses rout (code: tbVillagerTurn hopeless + tbVillagerReactiveFlee, titans.js titanLastStandingContinuity; OVE-136)
 //   - path_blockages_hold: travelTo at d>1 checks every tile on a shortest path for entry blockages from the approach side (travelBlockage fx/fy) — a fallen tree on the middle tile refuses the jump, honestly, as if walked into; force (swim/debug) still bypasses (code: travelTo, explorer break-it 2026-10-10)
 //   - echo_is_exactly_3x3: echo_location's copy promises "3x3 revealed" — it marks exactly the 3x3 world-map tiles around the player. The old code called reveal() per 3x3 center (a Manhattan<=2 diamond each): 37 tiles for a 9-tile promise (code: _activateAbilityInner, explorer break-it 2026-10-10)
 //   - dowsing_reveals_the_water: dowsing reveals exactly the nearest water tile — direction + distance is the knowledge, walking there is still yours. The old reveal() call lit a 13-tile diamond around possibly-distant ground: free fog knowledge (code: _activateAbilityInner, explorer break-it 2026-10-10)
@@ -39714,6 +39715,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           return false;
         }
       }
+      // Unkillable ARMY (OVE-136): last living Unkillable ours blade in a titan
+      // fight refuses the reactive rout — same continuity as start-of-turn.
+      try {
+        if (this.titanLastStandingContinuity) {
+          const _ls = this.titanLastStandingContinuity({ forFighter: t });
+          if (_ls && _ls.refusedRout) return false;
+        }
+      } catch (e) { console.warn('[titan] last-standing reactive', e); }
       t.fled = true;
       try { S.Godpath?.finishTacticalEscape(this, f, t); } catch (e) { console.warn('[godpath] reactive escape', e); }
       this.say(`${t.name} takes the hit and runs — while running still works.`);
@@ -40250,6 +40259,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           ? this.fighterShouldFlee(st, { hopeless: true, winning: false, hpFrac })
           : (hpFrac < fleeLine);
         if (!holdForPlayer && shouldFlee) {
+          // Unkillable ARMY (OVE-136): last living Unkillable ours blade in a
+          // titan fight refuses the rout — stripable via
+          // Game.unkillableLastStandingLeanFor / titanLastStandingContinuity.
+          try {
+            if (this.titanLastStandingContinuity) {
+              const _ls = this.titanLastStandingContinuity({ forFighter: v });
+              if (_ls && _ls.refusedRout) return;
+            }
+          } catch (e) { console.warn('[titan] last-standing continuity', e); }
           // WAR CRY (tactical parity 2026-10-13): the field engine fires this
           // INSTEAD of fleeing when the trajectory turns hopeless — once per
           // fight the cry staggers the monster (it hesitates: loses its next
