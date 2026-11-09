@@ -28,6 +28,11 @@ function ok(name, cond) {
     for (let step = 0; step < 12; step++) {
       const cc = Game.convoChoices(vid);
       if (cc.some(c => c.id === 'ask:spread_rumor')) { listener = vid; break; }
+      // r121 (secret-response fix): a high-trust villager may open with a
+      // once-per-life confession; a real player answers it first and the
+      // menu then returns to normal — so does this walker (promise first).
+      const sec = cc.find(c => c.id.indexOf('secret:') === 0);
+      if (sec) { Game.convoTurn(vid, sec.id); continue; }
       const next = cc.find(c => c.id === 'dlg:subject') ||
         cc.find(c => c.id.startsWith('gq:') || c.id.startsWith('react:')) ||
         cc.find(c => c.id === 'goon');
