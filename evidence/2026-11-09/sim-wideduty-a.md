@@ -173,3 +173,17 @@ pilot showed it can.
 - `evidence/2026-11-09/wideduty-a-gate.log` (check.js --quick)
 - `evidence/2026-11-09/wideduty-a-equivalence.log` + `wideduty-a-corpus-after-adopt/`
   (adopt-tree equivalence sweep on 96301–96308, 8/8 seeds, levered)
+
+## GATE — RE-RUN ON THE REBASED TREE (2026-11-09 16:46–16:54Z)
+
+After rebasing onto `0ba20ac1c` (sametick landing) and re-running the
+proof test 7/7 green, the full gate was re-run on the rebased tree:
+**294 passed, 6 failed in 444s, zero timeouts**
+(log `wideduty-a-gate-rebased.log`). The 6 failures are exactly the
+standing set: the measurement-proof staleness pair
+(game.js is a manifest input; the owed refresh covers it),
+mobile-combat-cadence, occupation-panels, phone-frame-proof,
+establishment-r20-fixes. All five 120s timeouts from the first gate
+passed here (slowest 53s) and standalone — confirmed load artifacts.
+**No lever-attributable failure. Gate adjudicated GO on the rebased
+tree. Wideduty is ready to land.**
