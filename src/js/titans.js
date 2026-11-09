@@ -26,6 +26,7 @@
 //   - titanStandDown(titanId) -> break an out-of-combat muster, release its workforce and stop upkeep
 //   - titanLastStandingContinuity() -> Unkillable ARMY last-standing refuse-rout when Game.unkillableLastStandingLeanFor > 0 and holder is last living ours blade
 //   - titanBreachPourThrough() -> One-Person Army ARMY breach pour-through when Game.opaBreachLeanFor > 0 and holder opens the titan front
+//   - titanWardAdvanceBehind() -> Undying Ward ARMY advance-behind when Game.wardAdvanceLeanFor > 0 and holder holds the titan line
 //   - _titanTest (test hooks: internals exposed for proof tests)
 //   - titanTemptation(villageId) -> {temptation, loyalty, verdict} (the turn's math, visible at council)
 // rules:
@@ -45,6 +46,7 @@
 //   - all_seeing_army_council_lean: All-Seeing ARMY scale — titanWarCouncil honors Game.allSeeingCouncilLeanFor so readiness honesty, scout-intel clarity, and counter-hint reveal lean when an ascended All-Seeing holder is active (code: titanWarCouncil, godverbs.js allSeeingCouncilLeanFor; OVE-128)
 //   - unkillable_last_standing_army_lean: Unkillable ARMY scale — titanLastStandingContinuity honors Game.unkillableLastStandingLeanFor so when the ascended Unkillable holder is the last living ours blade in a titan fight, refuse rout / steadiness + last-standing beat (code: titanLastStandingContinuity, godverbs.js unkillableLastStandingLeanFor; OVE-136)
 //   - opa_breach_army_lean: One-Person Army ARMY scale — titanBreachPourThrough honors Game.opaBreachLeanFor so when the ascended OPA holder opens the front in a titan fight (adjacent to a living titan, or Turn the Pain lands on one), coalition blades pour through the breach — steadiness + pour-count + breach beat; does not re-label partyRallyAt or titanPain (code: titanBreachPourThrough, godverbs.js opaBreachLeanFor; OVE-140)
+//   - ward_army_advance_lean: Undying Ward ARMY scale — titanWardAdvanceBehind honors Game.wardAdvanceLeanFor so when the ascended Ward holder holds the line in a titan fight (adjacent to a living titan, or Take the Wound redirects for the front), coalition blades advance behind the wall — steadiness + advance-count + advance beat; does not re-label Take the Wound PARTY/TITAN redirect (code: titanWardAdvanceBehind, godverbs.js wardAdvanceLeanFor; OVE-144)
 
 (function () {
   // ATTACH PATTERN (crisis 2026-10-11): game.js only sets
@@ -1726,6 +1728,112 @@
     return out;
   }
 
+  // ---------- Undying Ward ARMY: advance behind the wall (OVE-144) ----------
+  // god.scale.army: "The army advances behind you."
+  // When an ascended Ward holder holds the line in a titan/coalition fight
+  // (adjacent to a living titan, or Take the Wound redirects for the front),
+  // coalition blades advance behind the wall: steadiness + advance-count +
+  // advance beat. Called from Take the Wound (and proofs) through Game so
+  // the helper can be stripped. Distinct from PARTY/TITAN Take the Wound
+  // redirect coverage — does not invent weep contests.
+  function titanFighterIsWardHolder(x) {
+    try {
+      if (!x) return false;
+      if (x.kind === 'player' || x.key === 'p') return Game.holderGod && Game.holderGod('player') === 'undying_ward';
+      if (x.villagerId) return Game.holderGod && Game.holderGod(x.villagerId) === 'undying_ward';
+    } catch (e) {}
+    return false;
+  }
+  function titanWardAdvanceBehind(opts) {
+    var lean = 0;
+    try { lean = Game.wardAdvanceLeanFor ? Game.wardAdvanceLeanFor() : 0; } catch (e) { lean = 0; }
+    if (!(lean > 0)) lean = 0;
+    var f = Game.tbfight;
+    var empty = {
+      lean: lean,
+      titan: false,
+      advanceBehind: false,
+      advanced: 0,
+      steadiness: 0,
+      oursAlive: 0,
+      holderAlive: false,
+      adjacent: false,
+      openedBy: (opts && opts.openedBy) || null,
+    };
+    if (!f || f.over) return empty;
+    var titan = titanFightLive();
+    var ours = titanOursAlive(f);
+    var g = f._gv || {};
+    var holders = ours.filter(function (x) {
+      if (!titanFighterIsWardHolder(x)) return false;
+      // Collapsed Ward is no longer the wall for a direct hold-the-line call.
+      if (g.collapsed && g.collapsed[x.key]) return false;
+      return true;
+    });
+    var out = {
+      lean: lean,
+      titan: !!titan,
+      advanceBehind: false,
+      advanced: 0,
+      steadiness: 0,
+      oursAlive: ours.length,
+      holderAlive: holders.length > 0,
+      adjacent: false,
+      openedBy: (opts && opts.openedBy) || null,
+    };
+    if (!titan || !(lean > 0)) return out;
+    var wall = (opts && opts.wall) || null;
+    var forceOpen = !!(opts && (opts.forceOpen || opts.openedBy === 'take_the_wound'));
+    // Take the Wound just proved the wall — allow that fighter even if this
+    // hit is about to collapse them (strain stamped before the army advances).
+    if (forceOpen && wall && titanFighterIsWardHolder(wall)) {
+      holders = [wall];
+      out.holderAlive = true;
+    }
+    if (!holders.length) return out;
+    var mons = titanLiveMons(f).filter(function (m) {
+      return !!(m.titan || (m.id && titanDefs()[m.id]) || m.kind === 'monster');
+    });
+    if (!mons.length) return out;
+    var holder = null;
+    var adjacent = false;
+    for (var i = 0; i < holders.length; i++) {
+      var h = holders[i];
+      for (var j = 0; j < mons.length; j++) {
+        if (titanCheb(h, mons[j]) <= 1) { holder = h; adjacent = true; break; }
+      }
+      if (adjacent) break;
+    }
+    if (!adjacent && forceOpen && holders.length) {
+      holder = (wall && titanFighterIsWardHolder(wall)) ? wall : holders[0];
+      adjacent = true;
+    }
+    out.adjacent = adjacent;
+    if (!adjacent || !holder) return out;
+    var coalition = ours.filter(function (x) { return x !== holder; });
+    if (!coalition.length) return out;
+    out.advanceBehind = true;
+    out.steadiness = lean;
+    out.advanced = coalition.length;
+    f.advanceBehind = true;
+    f.advanceAdvanced = coalition.length;
+    f.advanceSteadiness = lean;
+    var rounds = Math.max(2, lean + 1);
+    coalition.forEach(function (a) {
+      a.advancedBehind = true;
+      a.rallied = Math.max(a.rallied || 0, rounds);
+      a.rallyBuff = Math.max(a.rallyBuff || 0, rounds);
+    });
+    holder.wallHolding = true;
+    if (!f._wardAdvanceSaid) {
+      f._wardAdvanceSaid = true;
+      Game.say('\uD83D\uDEE1\uFE0F The army advances behind you \u2014 ' +
+        coalition.length + ' blade' + (coalition.length === 1 ? '' : 's') + ' press' +
+        (coalition.length === 1 ? 'es' : '') + ' forward.');
+    }
+    return out;
+  }
+
   // ---------- attach ----------
 
   var methods = {
@@ -1742,6 +1850,7 @@
     titanStandDown: titanStandDown,
     titanLastStandingContinuity: titanLastStandingContinuity,
     titanBreachPourThrough: titanBreachPourThrough,
+    titanWardAdvanceBehind: titanWardAdvanceBehind,
     titanOutfit: titanOutfit,
     titanTemptation: titanTemptation,
     titanMusterReady: titanMusterReady,
@@ -1792,6 +1901,7 @@
     titanOutcomeLog: titanOutcomeLog,
     titanLastStandingContinuity: titanLastStandingContinuity,
     titanBreachPourThrough: titanBreachPourThrough,
+    titanWardAdvanceBehind: titanWardAdvanceBehind,
   };
 
   // wraps must apply after game.js defines the originals
