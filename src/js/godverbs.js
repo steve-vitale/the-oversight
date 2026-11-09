@@ -14,6 +14,7 @@
 //   - isStrategyContest(contest) / allSeeingStrategyLeanFor(pid, contest) -> CONTEST scale: All-Seeing strategy lean for puzzle/detective + lies
 //   - isSponsorContest(contest) / marketSponsorLeanFor(pid, contest) -> CONTEST scale: Market sponsor lean for price/auction (risky — auction still pays)
 //   - voiceReachVillageIds() / voiceDeliverAllied(day) -> ARMY scale: Voice Be Heard reaches linked/allied foreign villages same day
+//   - gardenMusterFeedFor(need) -> ARMY scale: Living Garden harvest-day cover for titan muster upkeep kcal
 // consumes:
 //   - Game.data.godpaths (god.play), state.scholar.godhood, state.village.npcGodhood
 //   - useAbility (abilityActions.js), tbDamage, tbRoundWrap, tbMonsterTurn, startCombat, tbEnd, endDay, maybeCheatDeath, addHealth, removeVillager, springAmbush, lieLive, getActiveLie
@@ -34,6 +35,7 @@
 //   - all_seeing_strategy_lean: All-Seeing scale.contest — puzzle/detective + lies scores lean for the ascended holder (player or NPC), numbers in god.play.contestLean / strategyContests (code: allSeeingStrategyLeanFor, contestEngine _cxOther/_cxMoot)
 //   - market_sponsor_lean: Market God scale.contest — price moot case scores and auction bid capacity lean for the ascended holder (player or NPC), numbers in god.play.contestLean / sponsorContests; auction still pays (risky) (code: marketSponsorLeanFor, contestEngine _cxMoot/_cxChance)
 //   - voice_army_same_day: Voice scale.army — Be Heard stamps linked/allied foreign villages the same day (opinion + link trust + voiceDay; their people fight rallied) (code: voiceDeliverAllied, dailyVoice)
+//   - garden_army_muster_feed: Living Garden scale.army — Feed the Multitude harvest day covers titan muster upkeep kcal (musterMouths × musterKcalPerMouth) for an ascended holder (player or NPC); pack debit + hunger trust bleed only on uncovered remainder (code: gardenMusterFeedFor, titans.js titanMusterUpkeep)
 //   - table_never_reads_godhood: nothing here is read by table*.js (code: scripts/godpath/ladder.js)
 //   - never_silent: every verb narrates; errors are reported via warn (code: warn)
 (function () {
@@ -224,6 +226,44 @@
       const lean = godPlay('market_god').contestLean;
       return (typeof lean === 'number' && lean > 0) ? lean : 18;
     } catch (e) { warn('marketSponsorLeanFor', e); return 0; }
+  }
+
+  // ---------------- ARMY scale: Living Garden muster-upkeep feed ----------------
+  // god.scale.army is design prose ("Feeds fifty mouths a day."). Live
+  // settlement: when an ascended Living Garden holder (player or Haven NPC)
+  // has Feed the Multitude active today (village.harvestDay), cover standing
+  // titan muster kcal need up to musterMouths × musterKcalPerMouth. Titans
+  // call this from titanMusterUpkeep before/alongside playerPackSpend so the
+  // coalition marches because you feed it — Haven hunger fill alone is not
+  // army LIVE without this hook.
+  function livingGardenHolderActive() {
+    try {
+      if (holderGod('player') === 'living_garden') return true;
+      const v = Game.state.village || {};
+      for (const vid of Object.keys(v.npcGodhood || {})) {
+        if (holderGod(vid) === 'living_garden') return true;
+      }
+      return false;
+    } catch (e) { warn('livingGardenHolderActive', e); return false; }
+  }
+  function gardenHarvestDayActive() {
+    try {
+      const day = (Game.state.scholar || {}).day || 0;
+      return ((Game.state.village || {}).harvestDay) === day;
+    } catch (e) { warn('gardenHarvestDayActive', e); return false; }
+  }
+  function gardenMusterFeedFor(need) {
+    try {
+      const n = Math.max(0, Math.floor(Number(need) || 0));
+      if (!n) return 0;
+      if (!livingGardenHolderActive()) return 0;
+      if (!gardenHarvestDayActive()) return 0;
+      const P = godPlay('living_garden');
+      const mouths = (typeof P.musterMouths === 'number' && P.musterMouths > 0) ? P.musterMouths : 50;
+      const per = (typeof P.musterKcalPerMouth === 'number' && P.musterKcalPerMouth > 0)
+        ? P.musterKcalPerMouth : 1000;
+      return Math.min(n, mouths * per);
+    } catch (e) { warn('gardenMusterFeedFor', e); return 0; }
   }
 
   // ---------------- ARMY scale: Voice Be Heard → linked/allied foreign villages ----------------
@@ -721,6 +761,7 @@
     allSeeingStrategyLeanFor(pid, contest) { return allSeeingStrategyLeanFor(pid, contest); },
     isSponsorContest(contest) { return isSponsorContest(contest); },
     marketSponsorLeanFor(pid, contest) { return marketSponsorLeanFor(pid, contest); },
+    gardenMusterFeedFor(need) { return gardenMusterFeedFor(need); },
     voiceReachVillageIds() { return voiceReachVillageIds(); },
     voiceDeliverAllied(day) { return voiceDeliverAllied(day); },
     godActionDef(actionId) {
@@ -1623,7 +1664,7 @@
 
   const _mantle = Game.mantleBecome;
   Game.mantleBecome = function () { migratePlayerDayUses(); return _mantle.apply(this, arguments); };
-  S.GodVerbs = { holderGod, fighterGod, godPlay, godDaily, godVillagerCast, phoenixVillagerWorld, isFeastContest, gardenFeastLeanFor, isPerformanceContest, voicePerformanceLeanFor, isEnduranceContest, unkillableEnduranceLeanFor, isStrategyContest, allSeeingStrategyLeanFor, isSponsorContest, marketSponsorLeanFor, VERB_IMPL, DAY_IMPL, registerGodActions, marketPick, painPool };
+  S.GodVerbs = { holderGod, fighterGod, godPlay, godDaily, godVillagerCast, phoenixVillagerWorld, isFeastContest, gardenFeastLeanFor, isPerformanceContest, voicePerformanceLeanFor, isEnduranceContest, unkillableEnduranceLeanFor, isStrategyContest, allSeeingStrategyLeanFor, isSponsorContest, marketSponsorLeanFor, gardenMusterFeedFor, VERB_IMPL, DAY_IMPL, registerGodActions, marketPick, painPool };
   // the data loads after the scripts (Game.init): register once it's there
   const _init = Game.init;
   if (typeof _init === 'function') {

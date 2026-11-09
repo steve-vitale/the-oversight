@@ -38,6 +38,7 @@
 //   - stolen_gear_is_lost: the loot law holds. No refunds except by force. (code: titans.js)
 //   - odds_are_entertainment: the System's posted odds are wrong on purpose. That's the joke. (code: titans.js)
 //   - knowledge_gates_titans: omen stages 0 (something) -> 1 (named) -> 2 (located). No name before exposure. (code: titans.js)
+//   - garden_army_muster_feed: Living Garden ARMY scale — titanMusterUpkeep honors Game.gardenMusterFeedFor before/alongside playerPackSpend when an ascended Garden holder has harvestDay active; covered kcal skip pack debit and hunger trust bleed (code: titanMusterUpkeep, godverbs.js gardenMusterFeedFor; OVE-116)
 
 (function () {
   // ATTACH PATTERN (crisis 2026-10-11): game.js only sets
@@ -1101,8 +1102,18 @@
       // An army marches on its stomach: 1000 kcal/day per blade — allies AND
       // Haven's committed (2026-10-13). Your own people eat from your stores too.
       var need = ((muster.allies || []).length + titanHavenBlades(muster).length) * 1000;
-      var got = 0;
-      try { got = Game.playerPackSpend ? Game.playerPackSpend(need) : 0; } catch (e) {}
+      // Living Garden ARMY (OVE-116): Feed the Multitude harvest day covers
+      // muster kcal before pack spend — call through Game so proofs can strip
+      // gardenMusterFeedFor without touching Haven hunger fill.
+      var covered = 0;
+      try { covered = Game.gardenMusterFeedFor ? Game.gardenMusterFeedFor(need) : 0; } catch (e) { covered = 0; }
+      if (!(covered > 0)) covered = 0;
+      if (covered > need) covered = need;
+      var remain = need - covered;
+      var got = covered;
+      if (remain > 0) {
+        try { got += Game.playerPackSpend ? Game.playerPackSpend(remain) : 0; } catch (e) {}
+      }
       if (got < need) {
         var hasAllies = (muster.allies || []).some(function(a) { return a.villageId !== 'haven'; });
         Game.say('🍽️ The muster is hungry — ' + got.toLocaleString() + ' of ' + need.toLocaleString() + ' kcal fed. Bellies remember who feeds them.' + (hasAllies ? ' (loyalty strains when the food runs thin.) (trust −2 per fire per day while the muster stands hungry.)' : ''));
@@ -1125,6 +1136,8 @@
             } catch (e) {}
           }
         });
+      } else if (covered > 0) {
+        Game.say('🌿 The Living Garden feeds the muster — ' + covered.toLocaleString() + ' of ' + need.toLocaleString() + ' kcal from the harvest. The coalition marches because you feed it.');
       }
     });
   }
