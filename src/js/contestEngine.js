@@ -21,6 +21,7 @@
 //   - unkillable_endurance_lean: Unkillable CONTEST scale — endurance arms honor unkillableEnduranceLeanFor for an ascended holder (player or NPC): starve HP/days, drop/exchange survival-for-time, maw/vigil nerve; feast/performance stay Garden/Voice (code: _cxEndurance, godverbs.js unkillableEnduranceLeanFor; OVE-108)
 //   - all_seeing_strategy_lean: All-Seeing CONTEST scale — puzzle/detective scores and lies case scores add allSeeingStrategyLeanFor for an ascended holder (player or NPC); feast/performance/endurance stay Garden/Voice/Unkillable (code: _cxOther, _cxMoot, godverbs.js allSeeingStrategyLeanFor; OVE-110)
 //   - market_sponsor_lean: Market God CONTEST scale — price moot case scores and auction bid capacity add marketSponsorLeanFor for an ascended holder (player or NPC); auction still pays (risky); feast/performance/endurance/strategy stay Garden/Voice/Unkillable/All-Seeing (code: _cxMoot, _cxChance, godverbs.js marketSponsorLeanFor; OVE-113)
+//   - opa_blood_lean: One-Person Army CONTEST scale — blood fight arms honor opaBloodLeanFor for an ascended holder (player or NPC) as extra braveryBonus / cheer steadiness on pit/gauntlet/duel/siege; tithe stays altar measures; feast/performance/endurance/strategy/sponsor stay Garden/Voice/Unkillable/All-Seeing/Market (code: _cxBlood, duelFight, godverbs.js opaBloodLeanFor; OVE-124)
 // consumes:
 //   - fieldFight (fieldFights.js), monsterWavePool, unlockedWave
 //   - Game.agencyOf, Game.npcTemper, village health, scholar trust
@@ -30,6 +31,7 @@
 //   - Game.unkillableEnduranceLeanFor (godverbs.js) for endurance contest lean
 //   - Game.allSeeingStrategyLeanFor (godverbs.js) for strategy contest score lean
 //   - Game.marketSponsorLeanFor (godverbs.js) for sponsor contest lean (price case / auction bid)
+//   - Game.opaBloodLeanFor (godverbs.js) for blood contest bravery lean (pit/gauntlet/duel/siege)
 /* CONTEST ENGINE — src/js/contestEngine.js
  *
  * Steve (2026-10-08): "No, contests are to be played, not as RNG."
@@ -221,22 +223,26 @@
     // sides, morale breaks driven by wounds. "Not to the death — to the
     // yield": hitting 0 means yield (lost), unless the blow was massive
     // (≥60% of maxHp in one strike) — "accidents happen."
-    // opts.braveryBonus (watcher's cheer / alien rigging) steadies or
-    // shakes both duelists' arms — duels are blood, and blood gets the
-    // cheer. Self-seeding: deterministic from the duelists and the day.
+    // opts.braveryBonus (watcher's cheer / alien rigging) steadies both
+    // duelists' arms — duels are blood, and blood gets the cheer.
+    // opts.braveryLeanA / braveryLeanB (OVE-124 OPA blood lean) steady only
+    // that side: the crowd counts the scarred god's scars, not the partner's.
+    // Self-seeding: deterministic from the duelists and the day.
     duelFight: function(a, b, opts) {
       opts = opts || {};
       return this._cxWithSeed([a, b], { id: 'duel' }, () => {
-      const bravBonus = opts.braveryBonus || 0;
+      const cheer = opts.braveryBonus || 0;
+      const leanA = opts.braveryLeanA || 0;
+      const leanB = opts.braveryLeanB || 0;
       const sa = this._cxStats(a), sb = this._cxStats(b);
       var ha = sa.hp, hb = sb.hp;
       const rec = { rounds: 0, aTaken: 0, bTaken: 0, log: [] };
       const finish = result => this.sealDamageResult(result, [[a, result.aTaken], [b, result.bTaken]]);
-      const vBreak = function(s) {
-        return clamp(0.5 - Math.min(0.3, (s.bravery + bravBonus) * 0.015)
+      const vBreak = function(s, lean) {
+        return clamp(0.5 - Math.min(0.3, (s.bravery + cheer + (lean || 0)) * 0.015)
           - (s.temper === 'bold' ? 0.1 : 0) + (s.temper === 'cautious' ? 0.1 : 0), 0.15, 0.6);
       };
-      const ba = vBreak(sa), bb = vBreak(sb);
+      const ba = vBreak(sa, leanA), bb = vBreak(sb, leanB);
       for (let round = 1; round <= 15; round++) {
         rec.rounds = round;
         const first = R() < 0.5 ? 'a' : 'b';
@@ -309,14 +315,20 @@
       // cheerBonus; duelFight reads braveryBonus. Map it — the old
       // pass-through silently dropped the cheer (the comment claimed the
       // wiring was fixed; it wasn't).
+      // OVE-124: OPA blood lean steadies only the contestant (braveryLeanA).
       const braveryBonus = opts.braveryBonus || opts.cheerBonus || 0;
+      let braveryLeanA = 0;
+      try {
+        if (typeof this.opaBloodLeanFor === 'function')
+          braveryLeanA = this.opaBloodLeanFor(pid, contest) || 0;
+      } catch (e) { console.warn('[contest] opa blood lean', e); }
       const partner = this._cxDuelPartner(pid);
       const pst = this._cxStats(pid);
       if (!partner) {
         const line = `${pst.name} has no one to face. The System shrugs — a duel with no partner is a forfeit.`;
         return { outcome: 'lost', detail: 'no partner — forfeit', log: [line] };
       }
-      const rec = this.duelFight(pid, partner, { braveryBonus });
+      const rec = this.duelFight(pid, partner, { braveryBonus, braveryLeanA });
       const pnm = this._cxStats(partner).name;
       // Wounds are real for both — same rule as the group path (break-it r3).
       try { if (rec.aTaken > 0) this.hurtVillager(pid, rec.aTaken, 'contest', rec); } catch (e) {}
@@ -365,6 +377,14 @@
         return { outcome: 'lost', detail: `found wanting at ${giveable}/${demand}`, log };
       }
       // pit/gauntlet/siege: real fights.
+      // OVE-124: One-Person Army CONTEST scale — blood fight arms honor
+      // opaBloodLeanFor as extra braveryBonus (crowd counts scars). Tithe
+      // above stays altar measures; feast/performance/etc. stay other gods.
+      let opaLean = 0;
+      try {
+        if (typeof this.opaBloodLeanFor === 'function')
+          opaLean = this.opaBloodLeanFor(pid, contest) || 0;
+      } catch (e) { console.warn('[contest] opa blood lean', e); }
       const waves = (id === 'gauntlet' || id === 'siege') ? 3 : 1;
       const wave = this.unlockedWave ? this.unlockedWave() : 1;
       let lastOut = null;
@@ -390,7 +410,9 @@
         // (deterministic); fieldFight bypasses combat.roll when rng is set.
         // noFlee: the arena is sealed — the System doesn't open the gate
         // mid-fight. The fight runs to its real conclusion.
-        try { rec = this.fieldFight(pid, beast, null, { braveryBonus: opts.cheerBonus || 0, rng: R, noFlee: true }); }
+        // cheerBonus / braveryBonus from watchers + OPA blood lean (scar crowd).
+        const braveryBonus = (opts.cheerBonus || opts.braveryBonus || 0) + opaLean;
+        try { rec = this.fieldFight(pid, beast, null, { braveryBonus, rng: R, noFlee: true }); }
         catch (e) { return { outcome: 'lost', detail: 'fight failed', log }; }
         log.push(`Wave ${w}: ${rec.log[rec.log.length - 1] || rec.outcome} (${rec.rounds} rounds, ${rec.vTaken} taken)`);
         if (rec.rounds > 0) { try { this.hurtVillager(pid, rec.vTaken, 'contest', rec); } catch (e) { console.warn('[contest] field health settlement', e); } }
@@ -887,7 +909,20 @@
             // cheer previously never reached duelFight; break-it 2026-10-09 r4:
             // the old pass-through STILL dropped it — duelFight reads
             // braveryBonus, watch paths send cheerBonus. Mapped now.)
-            const rec = this.duelFight(pids[0], pids[1], { braveryBonus: opts.braveryBonus || opts.cheerBonus || 0 });
+            // OVE-124: OPA blood lean is per-side (braveryLeanA/B) — only the
+            // ascended holder gets the scar-crowd steadiness.
+            let braveryLeanA = 0, braveryLeanB = 0;
+            try {
+              if (typeof this.opaBloodLeanFor === 'function') {
+                braveryLeanA = this.opaBloodLeanFor(pids[0], contest) || 0;
+                braveryLeanB = this.opaBloodLeanFor(pids[1], contest) || 0;
+              }
+            } catch (e) { console.warn('[contest] opa blood lean', e); }
+            const rec = this.duelFight(pids[0], pids[1], {
+              braveryBonus: opts.braveryBonus || opts.cheerBonus || 0,
+              braveryLeanA,
+              braveryLeanB,
+            });
             const results = {};
             const apply = (pid, took) => { if (took > 0) { try { this.hurtVillager(pid, took, 'contest', rec); } catch (e) {} } };
             // Wounds are real in EVERY duel ending (break-it 2026-10-08:

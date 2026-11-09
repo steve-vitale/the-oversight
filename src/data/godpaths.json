@@ -104,7 +104,7 @@
           "_doc": "Person-owned real tactical/field solo kill. Opening prey HP must exceed the fighter's opening maximum HP on a fresh (unwounded) body; the fighter must take actual damage before the kill; any helper voids it. No Pack Hunt route, class-age or synergy shortcut. Distinct from apex_hunt (which allows Pack Hunt and does not require the hunter's own blood)."
         },
         "play": {
-          "_doc": "THE VERB IN PLAY (src/js/godverbs.js). Turn the Pain: a combat action for whoever ascended (player or villager, same function). The pain pool is every wound taken this fight, minus what beams did (what does not bleed does not come back). PARTY: below partyRallyAt HP the allies within 3 see you bleed and fight harder (rallied). TITAN: against a titan-class foe the blow also returns what that titan did to your allies this fight.",
+          "_doc": "THE VERB IN PLAY (src/js/godverbs.js). Turn the Pain: a combat action for whoever ascended (player or villager, same function). The pain pool is every wound taken this fight, minus what beams did (what does not bleed does not come back). PARTY: below partyRallyAt HP the allies within 3 see you bleed and fight harder (rallied). TITAN: against a titan-class foe the blow also returns what that titan did to your allies this fight. CONTEST: blood contests lean for the ascended holder by contestLean as extra braveryBonus / cheer steadiness on the real _cxBlood fight arms (pit, gauntlet, duel, siege) — the crowd counts your scars; tithe stays altar HP-measures without inventing a scar ledger. Not cookfight/impress/moot/drop/whoate/price/auction — Garden/Voice/Unkillable/All-Seeing/Market keep those.",
           "actions": [
             {
               "id": "turn_the_pain",
@@ -121,7 +121,14 @@
           ],
           "partyRallyAt": 0.5,
           "partyRallyRounds": 3,
-          "villagerCastAt": 0.35
+          "villagerCastAt": 0.35,
+          "bloodContests": [
+            "pit",
+            "gauntlet",
+            "duel",
+            "siege"
+          ],
+          "contestLean": 18
         }
       }
     },
