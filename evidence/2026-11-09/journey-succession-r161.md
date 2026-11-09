@@ -235,6 +235,17 @@ exit 0). No new attributable failure.
 Proof test scripts/test-journey-succession-r161-agency-dry.js re-run
 standalone on the tip: ALL GREEN (exit 0).
 
+**Closeout (main session, 2026-11-09 ~02:40 CST):** rebased 2/2 clean
+onto master `5582c19b9` (poolcapture-bar-a landed while the first
+rebased gate ran). Rebased gate on that base:
+`node scripts/check.js --quick` → **290 passed, 10 failed**
+(log evidence/2026-11-09/journey-succession-r161-checkquick-rebased.log).
+The 10 are the same 8 as the branch gate + 2 load artifacts new to
+this run: test-measurement-cache-flags (exit 1, 92.7s) and
+test-synergy-stall (120s timeout) — both documented intermittent load
+artifacts, not regressions. No new attributable failure. Proof test
+re-run ALL GREEN on the final rebased tip. Merged ff-only to master.
+
 ## Rotation
 
 7 → 4 (endgame next). [Advance at closeout; verify the file reads 4.]
