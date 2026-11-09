@@ -290,7 +290,7 @@
           "apex_sense"
         ],
         "play": {
-          "_doc": "Choose the Terms: three combat actions, one per fight, only before the first blow lands. AMBUSH: every foe loses its first turn and your next strike hits x ambushMult (allies x2). RANGE: every foe is driven back to rangeDist tiles and your strikes from 2+ tiles hit x rangeMult. GROUND: every foe is rooted groundRoot rounds (titans too) and you dodge +groundDodge. WEAKNESS: the moment a foe is adjacent the terms are over (range and ground bonuses end). PARTY: ambush arms the allies too. TITAN: ground roots a titan.",
+          "_doc": "Choose the Terms: three combat actions, one per fight, only before the first blow lands. AMBUSH: every foe loses its first turn and your next strike hits x ambushMult (allies x2). RANGE: every foe is driven back to rangeDist tiles and your strikes from 2+ tiles hit x rangeMult. GROUND: every foe is rooted groundRoot rounds (titans too) and you dodge +groundDodge. WEAKNESS: the moment a foe is adjacent the terms are over (range and ground bonuses end). PARTY: ambush arms the allies too. TITAN: ground roots a titan. ARMY: when an ascended Apex Predator holder (player or Haven NPC) is active, apexScoutMarkLeanFor applies scoutMarkLean so resolveOneAssignment scout / markSeen settlement follows your marks — higher shared-reveal chance on the haven scout ring and a follow-marks beat; does not invent an accuracy contest cat or retune Terms kcal / ambushMult / rangeDist.",
           "actions": [
             {
               "id": "terms_ambush",
@@ -331,7 +331,8 @@
           "rangeDist": 4,
           "rangeMult": 1.5,
           "groundRoot": 2,
-          "groundDodge": 0.25
+          "groundDodge": 0.25,
+          "scoutMarkLean": 1
         }
       }
     },
