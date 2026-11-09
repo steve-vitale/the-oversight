@@ -15,6 +15,7 @@
 //   - isSponsorContest(contest) / marketSponsorLeanFor(pid, contest) -> CONTEST scale: Market sponsor lean for price/auction (risky — auction still pays)
 //   - voiceReachVillageIds() / voiceDeliverAllied(day) -> ARMY scale: Voice Be Heard reaches linked/allied foreign villages same day
 //   - gardenMusterFeedFor(need) -> ARMY scale: Living Garden harvest-day cover for titan muster upkeep kcal
+//   - marketOutfitLeanFor() -> ARMY scale: Market God quartermaster lean percent for titanOutfit effectiveness
 // consumes:
 //   - Game.data.godpaths (god.play), state.scholar.godhood, state.village.npcGodhood
 //   - useAbility (abilityActions.js), tbDamage, tbRoundWrap, tbMonsterTurn, startCombat, tbEnd, endDay, maybeCheatDeath, addHealth, removeVillager, springAmbush, lieLive, getActiveLie
@@ -36,6 +37,7 @@
 //   - market_sponsor_lean: Market God scale.contest — price moot case scores and auction bid capacity lean for the ascended holder (player or NPC), numbers in god.play.contestLean / sponsorContests; auction still pays (risky) (code: marketSponsorLeanFor, contestEngine _cxMoot/_cxChance)
 //   - voice_army_same_day: Voice scale.army — Be Heard stamps linked/allied foreign villages the same day (opinion + link trust + voiceDay; their people fight rallied) (code: voiceDeliverAllied, dailyVoice)
 //   - garden_army_muster_feed: Living Garden scale.army — Feed the Multitude harvest day covers titan muster upkeep kcal (musterMouths × musterKcalPerMouth) for an ascended holder (player or NPC); pack debit + hunger trust bleed only on uncovered remainder (code: gardenMusterFeedFor, titans.js titanMusterUpkeep)
+//   - market_army_outfit_lean: Market God scale.army — ascended Market holder (player or NPC) leans titanOutfit force wbonus/varmor/gearValue by god.play.outfitEffLean percent for the same transferred pieces (code: marketOutfitLeanFor, titans.js titanOutfit)
 //   - table_never_reads_godhood: nothing here is read by table*.js (code: scripts/godpath/ladder.js)
 //   - never_silent: every verb narrates; errors are reported via warn (code: warn)
 (function () {
@@ -264,6 +266,31 @@
         ? P.musterKcalPerMouth : 1000;
       return Math.min(n, mouths * per);
     } catch (e) { warn('gardenMusterFeedFor', e); return 0; }
+  }
+
+  // ---------------- ARMY scale: Market God quartermaster outfit lean ----------------
+  // god.scale.army is design prose ("The coalition's quartermaster."). Live
+  // settlement: when an ascended Market holder (player or Haven NPC) outfits
+  // a standing muster, titanOutfit reads marketOutfitLeanFor and scales the
+  // same transferred pieces' force wbonus / varmor / gearValue by
+  // god.play.outfitEffLean percent. Does not conjure free gear or retune
+  // Name Your Price kcal tiers — effectiveness lean only (OVE-120).
+  function marketHolderActive() {
+    try {
+      if (holderGod('player') === 'market_god') return true;
+      const v = Game.state.village || {};
+      for (const vid of Object.keys(v.npcGodhood || {})) {
+        if (holderGod(vid) === 'market_god') return true;
+      }
+      return false;
+    } catch (e) { warn('marketHolderActive', e); return false; }
+  }
+  function marketOutfitLeanFor() {
+    try {
+      if (!marketHolderActive()) return 0;
+      const lean = godPlay('market_god').outfitEffLean;
+      return (typeof lean === 'number' && lean > 0) ? lean : 25;
+    } catch (e) { warn('marketOutfitLeanFor', e); return 0; }
   }
 
   // ---------------- ARMY scale: Voice Be Heard → linked/allied foreign villages ----------------
@@ -762,6 +789,7 @@
     isSponsorContest(contest) { return isSponsorContest(contest); },
     marketSponsorLeanFor(pid, contest) { return marketSponsorLeanFor(pid, contest); },
     gardenMusterFeedFor(need) { return gardenMusterFeedFor(need); },
+    marketOutfitLeanFor() { return marketOutfitLeanFor(); },
     voiceReachVillageIds() { return voiceReachVillageIds(); },
     voiceDeliverAllied(day) { return voiceDeliverAllied(day); },
     godActionDef(actionId) {
@@ -1664,7 +1692,7 @@
 
   const _mantle = Game.mantleBecome;
   Game.mantleBecome = function () { migratePlayerDayUses(); return _mantle.apply(this, arguments); };
-  S.GodVerbs = { holderGod, fighterGod, godPlay, godDaily, godVillagerCast, phoenixVillagerWorld, isFeastContest, gardenFeastLeanFor, isPerformanceContest, voicePerformanceLeanFor, isEnduranceContest, unkillableEnduranceLeanFor, isStrategyContest, allSeeingStrategyLeanFor, isSponsorContest, marketSponsorLeanFor, gardenMusterFeedFor, VERB_IMPL, DAY_IMPL, registerGodActions, marketPick, painPool };
+  S.GodVerbs = { holderGod, fighterGod, godPlay, godDaily, godVillagerCast, phoenixVillagerWorld, isFeastContest, gardenFeastLeanFor, isPerformanceContest, voicePerformanceLeanFor, isEnduranceContest, unkillableEnduranceLeanFor, isStrategyContest, allSeeingStrategyLeanFor, isSponsorContest, marketSponsorLeanFor, gardenMusterFeedFor, marketOutfitLeanFor, VERB_IMPL, DAY_IMPL, registerGodActions, marketPick, painPool };
   // the data loads after the scripts (Game.init): register once it's there
   const _init = Game.init;
   if (typeof _init === 'function') {
