@@ -20,10 +20,10 @@
 //   - vbrain_legacy_weights: phase 1 keeps existing additive candidate weights and the weighted lottery; it does NOT ship the product-of-curves formula from VILLAGER-BRAIN.md (code: vbrainScorePick)
 //   - vbrain_feeders_not_deciders: goals bias, win-plan stage intents, EXPEDITION, bond/link social ads, and duty ads from believed needs feed candidates here; agency chance-rolls and win-plan re-decides stop owning the day when this module is loaded (code: vbrainFeedExtras, vbrainExecuteDepart)
 //   - vbrain_bond_candidates: PROPOSE_BOND / RAISE_LINK from bondFeedCands enter the dawn extras list so the initiator's scorer weighs them; warmth gate and npcInviteDecision stay in bond-initiation (code: vbrainFeedExtras, VILLAGER-BRAIN Phase 4)
-//   - vbrain_duty_candidates: unassigned villagers get DUTY ads from believed village needs (objResourceBelief → forage/cook/water) and combat/social opportunity (heard danger → patrol, known prey/pantry → hunt, teachable knowledge → teach); player/convo assignTask stays a binding commitment — assigned people get no competing duty ads (code: dutyFeedCands, vbrainFeedExtras, VILLAGER-BRAIN Phase 6)
-//   - vbrain_duty_pick: when a DUTY extra is top-scoring vs the core lottery pick, it becomes the dawn commitment (duty_top_score); align maps forage/water/cook/hunt/patrol/teach to real objectives — never calls assignTask (code: vbrainScorePick, vbrainAlignObjective, VILLAGER-BRAIN Phase 6)
+//   - vbrain_duty_candidates: unassigned villagers get DUTY ads from believed village needs (objResourceBelief → forage/cook/water) and combat/social/explore opportunity (heard danger → patrol, known prey/pantry → hunt, teachable knowledge → teach, unmapped haven ring → scout); player/convo assignTask stays a binding commitment — assigned people get no competing duty ads (code: dutyFeedCands, vbrainFeedExtras, VILLAGER-BRAIN Phase 6)
+//   - vbrain_duty_pick: when a DUTY extra is top-scoring vs the core lottery pick, it becomes the dawn commitment (duty_top_score); align maps forage/water/cook/hunt/patrol/teach/scout to real objectives — never calls assignTask (code: vbrainScorePick, vbrainAlignObjective, VILLAGER-BRAIN Phase 6)
 //   - vbrain_duty_respects_garden_keeper: standing village.gardenKeeper gets no DUTY ads and cannot duty_top_score override — caretaker order stays at Haven (code: dutyFeedCands, vbrainScorePick)
-//   - vbrain_duty_combat_social: hunt/patrol/teach DUTY ads honor vbrainDisableCombatSocialDuty failing control; same duty_top_score / gardenKeeper / assign_standing seams as survival DUTY (code: dutyFeedCands, VILLAGER-BRAIN Phase 6)
+//   - vbrain_duty_combat_social: hunt/patrol/teach/scout DUTY ads honor vbrainDisableCombatSocialDuty failing control; same duty_top_score / gardenKeeper / assign_standing seams as survival DUTY (code: dutyFeedCands, VILLAGER-BRAIN Phase 6)
 //   - vbrain_assign_standing: obeyed standing assignTask / conversation orders feed as ASSIGN extras and win the dawn commitment (assign_standing); scorer honors the order — not a parallel decider; obedience gate unchanged (code: assignFeedCand, vbrainScorePick, vbrainAlignObjective, VILLAGER-BRAIN Phase 6)
 //   - vbrain_commitment: the dawn pick writes a commitment record the same day so midday agency honors it instead of rolling again (code: vbrainScorePick, vbrainCommit)
 //   - vbrain_materialize_matches_commit: when an aimed override wins, objPick aligns the live objective kind to the commitment after core chore/facing draws (code: vbrainAlignObjective)
@@ -409,6 +409,31 @@
     }
     return false;
   }
+  // OVE-81 scout opportunity (separate from hunt/dutyKnownPrey — OVE-78 owns
+  // that surface). Unmapped tiles in the same ±2 Chebyshev ring
+  // resolveOneAssignment uses for task=scout. Map fog is live Haven-visible
+  // world state, not a Muse number. Ring corners stay fog after Manhattan≤2
+  // start reveal.
+  function dutyScoutOpportunity(self) {
+    try {
+      var v = (self.state || {}).village || {};
+      var hx = (v.px != null) ? v.px : 4;
+      var hy = (v.py != null) ? v.py : 4;
+      var unmapped = 0;
+      for (var dy = -2; dy <= 2; dy++) {
+        for (var dx = -2; dx <= 2; dx++) {
+          var nx = hx + dx, ny = hy + dy;
+          if (nx < 0 || nx > 8 || ny < 0 || ny > 8) continue;
+          var t = null;
+          try { t = self.tileAt ? self.tileAt(nx, ny) : null; } catch (e) { t = null; }
+          if (t && !t.revealed) unmapped++;
+        }
+      }
+      return unmapped > 0 ? { ok: true, unmapped: unmapped } : { ok: false, unmapped: 0 };
+    } catch (e) {
+      return { ok: false, unmapped: 0 };
+    }
+  }
   function dutyFeedCandsFor(self, vid) {
     var out = [];
     if (!vid) return out;
@@ -486,6 +511,14 @@
       if (dutyTeachOpportunity(self, vid)) {
         var tc = dutyBuildCand(self, vid, 'teach', 2.4, needs, 'teachable_knowledge');
         if (tc) out.push(tc);
+      }
+      // OVE-81: scout offer branch (OVE-71 left it out). Unmapped haven-ring
+      // fog → DUTY scout. Soft vs teach 2.4 / known-prey hunt 2.55; do not
+      // retune hunt known-prey weights here (OVE-76/78).
+      var scoutOpp = dutyScoutOpportunity(self);
+      if (scoutOpp && scoutOpp.ok) {
+        var sc = dutyBuildCand(self, vid, 'scout', 2.3, needs, 'unmapped_land');
+        if (sc) out.push(sc);
       }
     }
     return out;
