@@ -1935,17 +1935,22 @@ Each item: **spec**, **done when**, and the **tool** that measures it.
   Ordinary world/tactical/field personal-passive budgets/prices are locally
   repaired (41×64, mobile and full929); famine/other bypass callers, allied
   follow-through and per-fight save limits remain under separate audit.
+- **Brawler port (2026-11-08):** One-Person Army requires a lived fight deed —
+  alone, take a real wound from a foe that opened with more HP than your whole
+  bar, then kill it (`outmatched_kill`). Player/NPC share the gate; helpers,
+  Pack Hunt, class-age and synergy proxies cannot replace it. Seeded
+  `test-brawler-deed.js` fails if the authored deed or its fight finish hook
+  is removed. Combat/ability prices stay with Muse.
 - **Forager port (2026-11-08):** Living Garden requires a lived harvest deed —
   every other living neighbor eats a real meal from your `harvestShares` for
   7 consecutive days. Player/NPC share the gate; class-age/synergy proxies
   cannot replace it. Seeded `test-forager-deed.js` fails if the authored deed
   is removed. Crop/ability prices stay with Muse.
-- **Remaining:** one god. Brawler still needs a fitting lived fight deed; its
-  class-age/synergy proxies remain unfinished. Nine functional deeds do not
-  finish item3's balance/parity review or the god-scale item.
-- **Spec:** one fitting deed per god in `godpaths.json`, e.g. Apex Predator: a
-  solo kill above your weight; Living Garden: feed the whole village from your
-  own harvest for7 days (ported). The historical25–40% exploration guide is not a quota;
+- **Remaining:** none for authored fitting deeds (10/10). Ten functional deeds
+  do not finish item3's balance/parity review or the god-scale item.
+- **Spec:** one fitting deed per god in `godpaths.json` (all authored). Examples:
+  Apex Predator / One-Person Army solo-above-weight kills; Living Garden harvest
+  feed streak. The historical25–40% exploration guide is not a quota;
   measure earned outcomes and playstyle viability (see STEVE-ANSWERS.md).
 - **Tool:** `scripts/godpath/validate.js` and `ladder.js`, plus a 64-seed sweep.
 
