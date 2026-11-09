@@ -17,11 +17,13 @@
 //   - deterministic: same villager + same contest + same state = same fate — ENFORCED, not aspirational. Every top-level resolution reseeds a private stream from (day, contest id, participants, stat snapshot) via _cxSeed/_cxWithSeed; roll() bypasses Scattering.combat.roll while _det is set; fieldFight draws from opts.rng. No Math.random anywhere in the resolution path — no hidden rolls, no save-scum (reloading replays the identical fate). The process is real; the player can't see the stats anyway (knowledge-gating). (code: _cxSeed, _cxWithSeed, _cxSortIds, Steve 2026-10-08; break-it 2026-10-08; entropy-hunt r26 2026-10-14)
 //   - cheer: watcher's cheer is a real performance modifier (braveryBonus in blood incl. duelFight, case lift in moot); the cheer input is capped at 0.15 as before (alien winMod applies after, as its own meddling). (code: contestResolveGroup, Steve 2026-10-08; break-it 2026-10-08)
 //   - garden_feast_lean: Living Garden CONTEST scale — cookfight/guest making scores add gardenFeastLeanFor for an ascended holder (player or NPC); alien cheer still does not reach weird scores (code: _cxOther, godverbs.js gardenFeastLeanFor; OVE-99)
+//   - voice_performance_lean: Voice of the Relay CONTEST scale — impress making scores and moot case scores add voicePerformanceLeanFor for an ascended holder (player or NPC); feast contests stay Garden-only (code: _cxOther, _cxMoot, godverbs.js voicePerformanceLeanFor; OVE-104)
 // consumes:
 //   - fieldFight (fieldFights.js), monsterWavePool, unlockedWave
 //   - Game.agencyOf, Game.npcTemper, village health, scholar trust
 //   - hurtVillager, displayName
 //   - Game.gardenFeastLeanFor (godverbs.js) for feast contest score lean
+//   - Game.voicePerformanceLeanFor (godverbs.js) for performance contest score lean
 /* CONTEST ENGINE — src/js/contestEngine.js
  *
  * Steve (2026-10-08): "No, contests are to be played, not as RNG."
@@ -424,9 +426,18 @@
       opts = opts || {};
       const demand = { low: 6, medium: 9, high: 12, extreme: 15 }[contest.risk] || 9;
       const results = {};
+      // Voice of the Relay CONTEST scale (OVE-104): performance contests
+      // (moot oratory) lean for an ascended Voice holder — the show is theirs.
+      const voiceLean = (pid) => {
+        try {
+          if (typeof this.voicePerformanceLeanFor === 'function')
+            return this.voicePerformanceLeanFor(pid, contest) || 0;
+        } catch (e) { console.warn('[contest] voice performance lean', e); }
+        return 0;
+      };
       if (pids.length === 1) {
         const pid = pids[0];
-        const score = this._cxCaseScore(pid, opts.cheerLift || 0);
+        const score = this._cxCaseScore(pid, opts.cheerLift || 0) + voiceLean(pid);
         const st = this._cxStats(pid);
         if (score >= demand) return { [pid]: { outcome: 'won', detail: `case ${score.toFixed(1)} vs demand ${demand}`, log: [`${st.name} makes the case. The audience is the jury, and the jury can count.`] } };
         if (score >= demand * 0.6) return { [pid]: { outcome: 'lost', detail: `case ${score.toFixed(1)} vs demand ${demand}`, log: [`${st.name}'s case doesn't hold. The audience looks away.`] } };
@@ -436,7 +447,7 @@
         return { [pid]: { outcome: 'lost', detail: `case ${score.toFixed(1)} vs demand ${demand}`, log: [`${st.name}'s case doesn't hold.`] } };
       }
       // head-to-head (lies, p2)
-      const scores = pids.map(pid => ({ pid, score: this._cxCaseScore(pid, opts.cheerLift || 0) }));
+      const scores = pids.map(pid => ({ pid, score: this._cxCaseScore(pid, opts.cheerLift || 0) + voiceLean(pid) }));
       scores.sort((x, y) => y.score - x.score);
       const top = scores[0], second = scores[1];
       if (second && Math.abs(top.score - second.score) < 0.5) {
@@ -672,6 +683,9 @@
       // Living Garden CONTEST scale (OVE-99): feast contests (cookfight/guest)
       // lean for an ascended Garden holder — the land favors their table.
       // Impress stays creative, not a cook-off: no garden lean there.
+      // Voice of the Relay CONTEST scale (OVE-104): performance contests
+      // (impress) lean for an ascended Voice holder — they are the show.
+      // Cookfight/guest stay feast-only: no Voice lean there.
       const sc = {};
       for (const pid of pids) {
         const st = stats[pid];
@@ -681,6 +695,10 @@
           if (typeof this.gardenFeastLeanFor === 'function')
             score += this.gardenFeastLeanFor(pid, contest) || 0;
         } catch (e) { console.warn('[contest] garden feast lean', e); }
+        try {
+          if (typeof this.voicePerformanceLeanFor === 'function')
+            score += this.voicePerformanceLeanFor(pid, contest) || 0;
+        } catch (e) { console.warn('[contest] voice performance lean', e); }
         sc[pid] = score;
       }
       if (pids.length === 1) {

@@ -9,6 +9,7 @@
 //   - godVillagerCast(game, v) -> a villager god's verb on their turn (wraps tbVillagerAbility, before the subclass verbs)
 //   - godDaily(game) -> dawn: day verbs refresh, Gilded Guard regen, the Audit, No Lies' knowing and its trust price, villager gardens
 //   - isFeastContest(contest) / gardenFeastLeanFor(pid, contest) -> CONTEST scale: Living Garden feast lean for cookfight/guest
+//   - isPerformanceContest(contest) / voicePerformanceLeanFor(pid, contest) -> CONTEST scale: Voice performance lean for impress/moot
 //   - voiceReachVillageIds() / voiceDeliverAllied(day) -> ARMY scale: Voice Be Heard reaches linked/allied foreign villages same day
 // consumes:
 //   - Game.data.godpaths (god.play), state.scholar.godhood, state.village.npcGodhood
@@ -16,7 +17,7 @@
 //   - Scattering.Godpath hooks (allyWouldFall, onAllyFell, damageMult, dodgeBonus, villagerStrikeMult, absorbVillagerHit, fieldBegin/Act/Incoming/AllyShare/CheatDeath)
 //   - Scattering.Godhood market verbs (namePrice, buyPassage, guardAbsorb, guardRegen, auditCollect, resetFightVerbs, resetDayVerbs)
 //   - Scattering.combat.nearestEnemy (monster aim)
-//   - Game.contestResolveGroup / Game.contestResolveVillager (feast lean applied in contest-engine _cxOther)
+//   - Game.contestResolveGroup / Game.contestResolveVillager (feast lean in contest-engine _cxOther; Voice performance lean in _cxOther + _cxMoot)
 //   - Game.hierarchyState / linkWith / _linkOther / _trustGain / _nudgeOpinion / _otherVillage / mshipState (Voice army delivery)
 // rules:
 //   - ambush_ally_parity: a living player receives an NPC hunter's allied opening strike through scholar state; existing armed strikes are preserved, and no player input is automated (code: terms)
@@ -25,6 +26,7 @@
 //   - weakness_enforced: brawler beams feed no pain; ward is the priority target and self-heals at half; hunter terms end on contact; between phases are retreats; all-seeing's foresight never covers the holder; voice's fall stuns the field; phoenix needs fuel; market coins never stop beams and titans never haggle; garden hits soft and draws aim (code: preHit, damageMult wrap, termsContact, addHealth wrap)
 //   - never_skips_dinner: no verb feeds its own holder (Feed the Multitude feeds other bellies; the phoenix cannot rise through starvation) (code: feedMultitude, phoenixPlayer)
 //   - feast_contest_lean: Living Garden scale.contest — cookfight/guest scores lean for the ascended holder (player or NPC), numbers in god.play.contestLean / feastContests (code: gardenFeastLeanFor, contestEngine _cxOther)
+//   - voice_performance_lean: Voice scale.contest — impress/moot scores lean for the ascended holder (player or NPC), numbers in god.play.contestLean / performanceContests (code: voicePerformanceLeanFor, contestEngine _cxOther/_cxMoot)
 //   - voice_army_same_day: Voice scale.army — Be Heard stamps linked/allied foreign villages the same day (opinion + link trust + voiceDay; their people fight rallied) (code: voiceDeliverAllied, dailyVoice)
 //   - table_never_reads_godhood: nothing here is read by table*.js (code: scripts/godpath/ladder.js)
 //   - never_silent: every verb narrates; errors are reported via warn (code: warn)
@@ -90,6 +92,35 @@
       const lean = godPlay('living_garden').contestLean;
       return (typeof lean === 'number' && lean > 0) ? lean : 18;
     } catch (e) { warn('gardenFeastLeanFor', e); return 0; }
+  }
+
+  // ---------------- CONTEST scale: Voice of the Relay performance lean ----------------
+  // god.scale.contest is design prose ("You are the show: performance contests
+  // lean your way."). Live settlement reads god.play.performanceContests +
+  // contestLean and applies inside contestEngine _cxOther (impress) and
+  // _cxMoot (oratory). Feast contests stay Garden's; cookfight/guest get no
+  // Voice lean.
+  const PERFORMANCE_CONTEST_FALLBACK = ['impress', 'moot'];
+  function performanceContestSet() {
+    const listed = godPlay('voice_of_the_relay').performanceContests;
+    const ids = Array.isArray(listed) && listed.length ? listed : PERFORMANCE_CONTEST_FALLBACK;
+    const set = Object.create(null);
+    for (const id of ids) if (id) set[id] = true;
+    return set;
+  }
+  function isPerformanceContest(contest) {
+    try {
+      const id = contest && contest.id;
+      return !!(id && performanceContestSet()[id]);
+    } catch (e) { warn('isPerformanceContest', e); return false; }
+  }
+  function voicePerformanceLeanFor(pid, contest) {
+    try {
+      if (!pid || !isPerformanceContest(contest)) return 0;
+      if (holderGod(pid) !== 'voice_of_the_relay') return 0;
+      const lean = godPlay('voice_of_the_relay').contestLean;
+      return (typeof lean === 'number' && lean > 0) ? lean : 18;
+    } catch (e) { warn('voicePerformanceLeanFor', e); return 0; }
   }
 
   // ---------------- ARMY scale: Voice Be Heard → linked/allied foreign villages ----------------
@@ -579,6 +610,8 @@
     fighterGod(fi) { return fighterGod(fi); },
     isFeastContest(contest) { return isFeastContest(contest); },
     gardenFeastLeanFor(pid, contest) { return gardenFeastLeanFor(pid, contest); },
+    isPerformanceContest(contest) { return isPerformanceContest(contest); },
+    voicePerformanceLeanFor(pid, contest) { return voicePerformanceLeanFor(pid, contest); },
     voiceReachVillageIds() { return voiceReachVillageIds(); },
     voiceDeliverAllied(day) { return voiceDeliverAllied(day); },
     godActionDef(actionId) {
@@ -1481,7 +1514,7 @@
 
   const _mantle = Game.mantleBecome;
   Game.mantleBecome = function () { migratePlayerDayUses(); return _mantle.apply(this, arguments); };
-  S.GodVerbs = { holderGod, fighterGod, godPlay, godDaily, godVillagerCast, phoenixVillagerWorld, isFeastContest, gardenFeastLeanFor, VERB_IMPL, DAY_IMPL, registerGodActions, marketPick, painPool };
+  S.GodVerbs = { holderGod, fighterGod, godPlay, godDaily, godVillagerCast, phoenixVillagerWorld, isFeastContest, gardenFeastLeanFor, isPerformanceContest, voicePerformanceLeanFor, VERB_IMPL, DAY_IMPL, registerGodActions, marketPick, painPool };
   // the data loads after the scripts (Game.init): register once it's there
   const _init = Game.init;
   if (typeof _init === 'function') {
