@@ -1,0 +1,89 @@
+=== r116-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Tymofiy (gen_ukqtrl3) occ=mason --
+OPENING: "Never mind the food I needed — we got it handled. Thanks anyway."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "Huh. Let me think about that." "Andrzej? A mechanic, back before. Solid person."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: The ease drains out of it, a little.
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "Come get air with me. I need to think out loud."
+YOU: [silence] "..."
+THEM: "You're a good listener, you know that?" A tired smile.
+YOU: [dlg:more] "Go on."
+THEM: "That was me — headed out to find someone."
+YOU: [dlg:react] (listen)
+THEM: "So." They look at the fire for a moment.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the gossip."
+closing: "Think about it. Really think. Then come find me."
+
+-- Devon (devon_okafor) occ=programmer --
+OPENING: "Can I tell you something? I've been hiding an injury. I'm ashamed and I can't stop."
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Jerusalem Artichoke — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — American Persimmon. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Palmyra Palm. Leaf, stem, smell. You won't forget it now."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Not right now. I've got my own things to handle."
+YOU: [dlg:react] (listen)
+THEM: They nod slowly, not quite done, not quite continuing.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "If I may — Still on what they confided."
+YOU: [menu:more] More things to say (1/2)
+THEM: (menu page turned)
+YOU: [goon] "Wait, what? Go on —"
+THEM: "What do you make of all this? Really."
+closing: "Good talking. We'll figure it out."
+
+-- Ingrid (ingrid_vik) occ=physical therapy aide --
+OPENING: "About what you miss most — What do you miss most? From before."
+YOU: [ans:q_miss:a_food] "A real hot meal."
+THEM: "God. Yes. I dream about soup. Actual soup, with a spoon."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: That could have stung. They let it pass — you've been kind before.
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "Maybe it's only me — Hot showers. Not the big things — the small, stupid, perfect things. Trondheim, Norway in the morning, coffee going, nobody trying to kill me. I miss being bored."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on what you miss most."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Another time. The village needs me here."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "Heard anything good? About anyone?"
+THEM: "Good question." "The seedlings Oliver touched are twice the size of mine. Same soil. Same water."
+YOU: [dlg:more] "I’m listening."
+THEM: "Tymofiy headed out to find someone."
+closing: "See you at the fire."
+
+-- Oliver (oliver_moore) occ=Veterinarian --
+OPENING: Oliver: "I've heard good things about The Red Table. We should link with them — we'd be stronger together."
+YOU: [link:accept] "All right. Let's ask them."
+THEM: "All right — let's ask them." You carry the proposal to The Red Table.
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Jerusalem Artichoke — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Okra. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Staghorn Sumac. Leaf, stem, smell. You won't forget it now."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Okay. Yeah. I trust you."
+YOU: [dlg:more] "Tell me more."
+THEM: "Huh. I wouldn't have guessed that about you."
+YOU: [party_name] "We should name this. Us."
+THEM: "A name. Okay." You say it out loud, trying the shape of it:
+1. "MEAT AND FRIENDS" (📺 the System suggests)
+2. "The Firetenders" (Oliver suggests)
+3. "The Company" (or plain)
+(Which one? It'll stick.)
+YOU: [party_namepick:0] "MEAT AND FRIENDS."
+THEM: 🤝 "MEAT AND FRIENDS." It hangs in the air a moment — then Oliver grins. It's real now. It has a name, which means it can be lost.
+📺 MEAT AND FRIENDS is official. Oliver. (The village watches the broadcast. Nobody blinks.)
+📣 MEAT AND FRIENDS was named — Oliver. A team, on purpose.
+A rider says in The Red Table you're "the one who makes deals hold." Nobody remembers when that started being true.
+📓 Codex: We named us: MEAT AND FRIENDS.
+closing: "Later."

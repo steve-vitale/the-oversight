@@ -1,0 +1,77 @@
+=== r116-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Helga (gen_3buic1g) occ=army medic --
+OPENING: "We're eating through stores faster than we replace them. Forage with me tomorrow? I know the old burn east of camp."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Your partner is inside the Haven hall. Go through the door to meet them.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Good. The old burn east of camp, morning, early. Bring the big pack if you have it."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Come get air with me. I need to think out loud."
+YOU: [silence] "..."
+THEM: You say nothing. Neither do they, for a while — and it's fine.
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "...I need to go be quiet for a while."
+YOU: [joke] (crack a joke)
+THEM: "Heh." They look away, but they're smiling.
+(ended by engine)
+
+-- Joyce (gen_pthhc1d) occ=sign painter --
+OPENING: "Here's what I think — I dreamed about the pods again. Odarka's face. Tell me I'm not the only one who hears the humming."
+YOU: [dlg:more] "Tell me about them."
+THEM: "It's my niece, Odarka. Is napping in a pod somewhere, they say. Seven years old and napping. She was never boring. Some nights I swear I hear them before I sleep -- the pods, rows deep, humming. Then morning comes and I can't say whether it was real."
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? Makes sense to me."
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Good question." "Miguel headed out to forage."
+YOU: [dlg:react] (listen)
+THEM: "People are talking about me. Take it for what it's worth."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Someone should watch your back. Might as well be me."
+YOU: [goon] "Go on. I'm listening."
+THEM: "Alright. Catch you later."
+
+-- Hajime (gen_esruudc) occ=exterminator --
+OPENING: Hajime speaks only 🇯🇵 Japanese. No shared words at all — just eyes, hands, and patience.
+«こんにちは！あなた…名前は？» (you catch 'こんにちは' — hello)
+(They mime walking — pointing at themselves, then at you, then toward the cache spot. The meaning is unmistakable: come with me.)
+YOU: [nv:nod] (nod slowly)
+THEM: «そうだね。» (That's right. — you're fairly sure) They nod back, a little quicker this time.
+YOU: [nv:smile] (smile)
+THEM: «大丈夫だよ。きっと。» (It'll be okay. Surely. — you're fairly sure) A grin breaks through, quick and warm.
+YOU: [nv:pointself] (point: you, them, together)
+THEM: «いてくれてありがとう。» (Thanks for being here. — you're fairly sure) You point at yourself, then at them, then at the fire. Together. They get it.
+YOU: [nv:listen] (listen hard — catch words)
+THEM: You listen hard, watching their mouth shape the words. «わかる？» (Understand? — you're fairly sure)
+YOU: [speak_back] (try your Japanese)
+THEM: "Hm. Almost." Hajime corrects the one word, gently, like setting a bone. "Again." You say it right. They nod, satisfied with both of you.
+YOU: [goon] (watch quietly)
+THEM: "I should go. You know where to find me."
+(no pick — winding down)
+(stall menu: leave|nv:nod)
+closing: They wave you off gently, already turning away. The conversation ends where language couldn't reach.
+
+-- Meera (meera_reddy) occ=Dentist --
+OPENING: "The pantry's nearly bare. Forage with me tomorrow? I know the old burn east of camp."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Your partner is inside the Haven hall. Go through the door to meet them.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Then it’s set. The old burn east of camp, before the dew dries. Bring your pack and your knife."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Help me haul something back? Too much for one."
+YOU: [silence] "..."
+THEM: A comfortable quiet settles. They smile a little, and let it be.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Huh. Let me think about that." "Brian headed out to forage."
+YOU: [goon] "Go on. I'm listening."
+THEM: "Well. My social battery is officially dead."
+(no pick — winding down)
+(stall menu: leave|silence)

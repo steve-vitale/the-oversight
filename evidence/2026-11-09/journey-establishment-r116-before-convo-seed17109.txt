@@ -1,0 +1,94 @@
+=== r116-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Sanne (sanne_bakker) occ=Vintner --
+OPENING: "My wound needs a second pair of hands. Could you clean it out for me? Please."
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [goon] "I'm listening, I promise."
+THEM: "Help me haul something back? Too much for one."
+YOU: [silence] "..."
+THEM: You say nothing. Neither do they, for a while — and it's fine.
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to them, on the same side of the Haven door, to help.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Good question." "Mia headed out to see what's out there."
+YOU: [dlg:more] "I’m listening."
+THEM: "Mia's story has a fresh coat of paint." Sanne taps the table. "Scrape it off and you get from Stockholm, Sweden. Just don't scrape it in front of them."
+YOU: [dlg:react] (listen)
+THEM: "Priya headed out to forage."
+closing: "Later."
+
+-- Chantal (chantal_mukendi) occ=Pharmacist --
+OPENING: "About the pantry run — I hate to ask twice, but it's still open. Will you?"
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Wait — I'm away from Haven, out on the road. I can't promise a dawn meet while I'm out — find me when I'm back, and we'll set it then."
+YOU: [goon] "Please, go on."
+THEM: "Help me haul something back? Too much for one."
+YOU: [silence] "..."
+THEM: They fill the quiet. "Anyway — where was I?"
+YOU: [goon] "Hm. Let me think — go on, first."
+THEM: "Do you believe in anything? Now, I mean. After everything."
+YOU: [ans:q_believe:a_tell] "I believe we get through this. I have to. The alternative doesn't work."
+THEM: "That's not naive. That's load-bearing. Hold onto it."
+YOU: [goon] "Please, go on."
+THEM: "I believe in breakfast. In people showing up. Small, provable things. The big beliefs all broke — the small ones held."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that foraging help."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+closing: "Steady as she goes. We'll talk again."
+
+-- Mia (mia_andersson) occ=community gardener --
+OPENING: "The pantry's nearly bare. Come forage with me tomorrow — two of us can fill packs."
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Wait — I'm away from Haven, out on the road. I can't promise a dawn meet while I'm out — find me when I'm back, and we'll set it then."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that foraging help."
+YOU: [goon] "Please, go on."
+THEM: "When's the last time you really laughed?"
+YOU: [ans:q_laugh_memory:a_tell] "Recently — someone tripped over nothing and we all lost it. It felt like steali
+THEM: "Stealing joy. I like that. We should steal more of it."
+YOU: [goon] "Please, go on."
+THEM: "Three days ago. Someone dropped a whole basket of tubers and we just stood there laughing. It wasn't even funny. It was the standing there."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Huh. Let me think about that." "Latifa is back. Walked in like they'd never left."
+closing: "Take care of yourself, yeah? I mean it."
+
+-- Priya (priya_nair) occ=emergency dispatcher --
+OPENING: I record the arguments too. Especially the arguments. That's the real history.
+YOU: [dlg:more] "Go on."
+THEM: "Paper's scarce, so I write small. History doesn't need big letters."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Someone should watch your back. Might as well be me."
+YOU: [party_name] "We should name this. Us."
+THEM: "A name. Okay." You say it out loud, trying the shape of it:
+1. "THE ENSEMBLE" (📺 the System suggests)
+2. "The Hearth" (Priya suggests)
+3. "The Company" (or plain)
+(Which one? It'll stick.)
+YOU: [party_namepick:0] "THE ENSEMBLE."
+THEM: 🤝 "THE ENSEMBLE." It hangs in the air a moment — then Priya grins. It's real now. It has a name, which means it can be lost.
+📺 THE ENSEMBLE is official. Priya. (The village watches the broadcast. Nobody blinks.)
+📣 THE ENSEMBLE was named — Priya. A team, on purpose.
+📓 Codex: We named us: THE ENSEMBLE.
+YOU: [party_role] "Let's talk roles."
+THEM: "Roles. Not ranks — promises."
+🗡️ point — First in. Hits harder (+3 strike), draws the eye.
+🩹 healer — Carries the wounded, patches them up (+6 heal).
+🎒 carrier — Hauls. Carry order reaches further, steadier hands.
+🗣️ talker — The face. People join easier, leaving hurts less.
+👁️ scout — Sees trouble first. Warns the party on the road.
+(Which one is Priya?)
+YOU: [party_rolepick:point] 🗡️ Point
+THEM: 🤝 Priya is 🗡️ Point now. First in. Hits harder (+3 strike), draws the eye.
+YOU: [dlg:react] (listen)
+THEM: "If we don't write it down, it didn't happen. I'm writing it all down."
+YOU: [menu:more] More things to say (1/2)
+THEM: (menu page turned)
+closing: "We're just getting started, you and I. Remember that."

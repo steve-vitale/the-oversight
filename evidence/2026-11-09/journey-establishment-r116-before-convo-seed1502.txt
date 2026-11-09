@@ -1,0 +1,81 @@
+=== r116-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Maureen (gen_bcozu8k) occ=Veterinarian --
+OPENING: "About this wound — I still haven't found anyone. Any chance?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to them, on the same side of the Haven door, to help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — African Amaranth. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Tulsi (Holy Basil). Leaf, stem, smell. You won't forget it now."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Good question." "Did you hear? Chen won The Drop on the cameras. People are still talking about it."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [dlg:more] "I’m listening."
+THEM: "Ivy? A journalist, back before. Solid person."
+closing: "Good talking. We'll figure it out."
+
+-- George (gen_gtd0qcv) occ=roofer --
+OPENING: "About where you're from — Where are you from — originally? Before all this."
+YOU: [ans:q_origin:a_tell] "I'm from Columbus, Ohio."
+THEM: Nods slowly. "Columbus, Ohio. I'll remember that. Everybody's from somewhere that isn't here."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: The ease drains out of it, a little.
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Watch this — Me? Columbus, Ohio. I still dream in its weather — rain on a tin roof, that specific smell. I wake up here and for a second I'm furious at the sky for the swap."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Come see what I found. You won't believe it."
+YOU: [silence] "..."
+THEM: They fill the quiet. "Anyway — where was I?"
+YOU: [goon] "Good question. What do YOU think?"
+THEM: "Are you going to stay? With us. For real."
+YOU: [ans:q_stay:a_tell] "Yeah. I am. I didn't expect to say that, but yeah."
+THEM: Something eases in their shoulders. "Good. We're better with you here. I mean that."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Hah. I stay where I'm useful. Right now that's here. Columbus, Ohio is a direction, not a plan. Here is a plan, even if it's a hard one."
+closing: "I gotta go DO something. This was good though!"
+
+-- Chen (gen_6fckz2w) occ=Pharmacist --
+OPENING: "You talk to it -- the System. Have you ever asked? About the taken -- about Ruth?"
+YOU: [gq:yn:yes] "Yes."
+THEM: They nod. "Okay."
+YOU: [dlg:more] "What do you remember?"
+THEM: "It's my younger sister, Ruth. Went in the Taking. She was nineteen. Nineteen years of being interesting was not enough, apparently. The pods get into my sleep some nights. Row on row of them, humming like a held note -- and I wake up reaching for something that isn't there."
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person. Right. Right."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "What's something you're good at that nobody here knows about?"
+YOU: [ans:q_skill:a_tell] "I'm better with my hands than people expect. You'll see."
+THEM: "Noted. Filing that under 'extremely useful.' The village needs that."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Heh. I can do sewing. Not well — well enough that nobody's died from it yet. That's my whole résumé now: nobody's died from it yet."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? That means something."
+closing: "Don't be a stranger."
+
+-- Ezequiel (gen_3kuepfa) occ=postal worker --
+OPENING: "Have you heard anything? About the taken. The pods. Anything at all. It'll pass."
+YOU: [gq:yn:yes] "Yes."
+THEM: "I see." They take a moment to think about your answer.
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "What do you miss most? From before."
+YOU: [ans:q_miss:a_food] "A real hot meal."
+THEM: "God. Yes. I dream about soup. Actual soup, with a spoon. Thank you for asking."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Hot showers. Not the big things — the small, stupid, perfect things. Buenos Aires, Argentina in the morning, coffee going, nobody trying to kill me. I miss being bored."
+YOU: [dlg:more] "Tell me about them."
+THEM: "It's my older sister, Delfina. Was taken. She raised me more than our mother did. Boring. That is what they wrote down. The pods get into my sleep some nights. Row on row of them, humming like a held note -- and I wake up reaching for something that isn't there."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "I… Still on that taken person."
+closing: "I should get back. Stay sharp out there."

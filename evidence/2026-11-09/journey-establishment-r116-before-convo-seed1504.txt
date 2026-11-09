@@ -1,0 +1,76 @@
+=== r116-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- DeShawn (gen_hvz08q7) occ=paramedic --
+OPENING: "I asked Duc about the pantry run — Duc's gone. Still need hands. Are you in?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Your partner is inside the Haven hall. Go through the door to meet them.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Done. The muscadine grapes patch past the treeline, before the dew dries. Pack light — we move fast."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:gossip] "What are people saying?"
+THEM: "You want to know about that? Okay." "Nikolai? A welder, back before. Solid person."
+YOU: [goon] "And?"
+THEM: "Moving! But — good talk! More later!"
+YOU: [agree] "You're right."
+THEM: "Right? RIGHT? Finally someone says it."
+(ended by engine)
+
+-- Tama (gen_0ghs3ea) occ=crossing guard --
+OPENING: "Can I tell you something? I'm saving a candy bar for when things get better. I haven't told anyone."
+YOU: [silence] "..."
+THEM: A comfortable quiet settles. They smile a little, and let it be.
+YOU: [goon] "And?"
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [teach] "Watch. This matters."
+THEM: You show them Spicebush — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Physic Nut. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Açaí. Leaf, stem, smell. You won't forget it now."
+YOU: [dlg:react] (listen)
+THEM: "So." They look at the fire for a moment.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on what they confided."
+YOU: [goon] "And?"
+THEM: "Alright — I should get back to it."
+
+-- Sebastian (gen_n2n3zub) occ=sign painter --
+OPENING: "Have you heard anything? About the taken. The pods. Anything at all."
+YOU: [gq:yn:yes] "Yes."
+THEM: "I see." They take a moment to think about your answer.
+YOU: [dlg:more] "What do you remember?"
+THEM: "It's my older brother, Kuba. Was taken at the Scattering. He taught me to swim. The boring half. Sure. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [goon] "Keep going."
+THEM: "Walk with me? I want another pair of eyes on something."
+YOU: [silence] "..."
+THEM: You say nothing. Neither do they, for a while — and it's fine.
+YOU: [goon] "Keep going."
+THEM: "What are you hoping for? Not the big stuff. The small thing."
+YOU: [ans:q_hope:a_tell] "A full night's sleep. Just one. Where I don't wake up listening."
+THEM: "God, yes. That's the dream now. Eight hours of not being afraid."
+YOU: [goon] "Keep going."
+THEM: "A full night's sleep. Not safety, not answers — just eight hours where nothing needs me. That's my whole theology now, friend."
+closing: "See you at the fire."
+
+-- Nikolai (nikolai_volkov) occ=welder --
+OPENING: "The pantry's nearly bare. Will you forage with me tomorrow? Two pairs of eyes, twice the ground."
+YOU: [link:accept] "All right. Let's ask them."
+THEM: "All right — let's ask them." You carry the proposal to Stonebridge.
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Your partner is inside the Haven hall. Go through the door to meet them.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Good. Where the wild ramps grows thick, morning, early. Bring your pack and your knife."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Huh. Let me think about that." "People are talking about Farid. Take it for what it's worth."
+YOU: [goon] "And?"
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [goon] "And?"
+THEM: "Okay, that's my quota of socializing."
+YOU: [agree] "You're right."
+THEM: "Fine. You're right. Don't quote me."
+(ended by engine)
