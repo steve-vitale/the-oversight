@@ -143,6 +143,79 @@ function install(G) {
   G.tele = function (type, data) {
     try {
       events[type] = (events[type] || 0) + 1;
+      // Additive typed-deed bag (OVE-175): channel int stays for back-compat;
+      // future censuses attribute mint rates via events.godpath_deed_by_id.
+      // Authored relay_office does not emit this tele (switchboard / deedAlt).
+      if (type === 'godpath_deed') {
+        const id = data && typeof data.event === 'string' ? data.event : null;
+        const bag = events.godpath_deed_by_id || (events.godpath_deed_by_id = Object.create(null));
+        if (id) bag[id] = (bag[id] || 0) + 1;
+        else events.godpath_deed_missing_event = (events.godpath_deed_missing_event || 0) + 1;
+      }
+      // Additive typed-ability bags (OVE-180): channel ints stay for back-compat;
+      // future censuses attribute use/grant rates via events.ability_*_by_id.
+      // Synthetic grant id villager_use remains visible in the grant bag; filter
+      // it out of authored-id features when computing utilization.
+      if (type === 'ability_used') {
+        const id = data && typeof data.id === 'string' ? data.id : null;
+        const bag = events.ability_used_by_id || (events.ability_used_by_id = Object.create(null));
+        const okBag = events.ability_used_ok_by_id || (events.ability_used_ok_by_id = Object.create(null));
+        if (id) {
+          bag[id] = (bag[id] || 0) + 1;
+          if (data?.ok) okBag[id] = (okBag[id] || 0) + 1;
+        } else events.ability_used_missing_id = (events.ability_used_missing_id || 0) + 1;
+      }
+      if (type === 'ability_granted') {
+        const id = data && typeof data.id === 'string' ? data.id : null;
+        const bag = events.ability_granted_by_id || (events.ability_granted_by_id = Object.create(null));
+        if (id) bag[id] = (bag[id] || 0) + 1;
+        else events.ability_granted_missing_id = (events.ability_granted_missing_id || 0) + 1;
+      }
+      if (type === 'ability_replaced') {
+        const bag = events.ability_replaced_by_id || (events.ability_replaced_by_id = Object.create(null));
+        let known = 0;
+        for (const key of ['in', 'out']) {
+          const id = data && typeof data[key] === 'string' ? data[key] : null;
+          if (id) { bag[id] = (bag[id] || 0) + 1; known++; }
+        }
+        if (!known) events.ability_replaced_missing_id = (events.ability_replaced_missing_id || 0) + 1;
+      }
+      if (type === 'prize_ability_offer') {
+        const bag = events.prize_ability_offer_by_id || (events.prize_ability_offer_by_id = Object.create(null));
+        const ids = data && Array.isArray(data.ids) ? data.ids : null;
+        let known = 0;
+        if (ids) for (const id of ids) {
+          if (typeof id === 'string') { bag[id] = (bag[id] || 0) + 1; known++; }
+        }
+        if (!known) events.prize_ability_offer_missing_id = (events.prize_ability_offer_missing_id || 0) + 1;
+      }
+      // Legacy plain-id `Game.activateAbility` (blood_magic, time_skip, dowsing,
+      // echo_location, field_medicine, herbal_remedy, purify, compost_king,
+      // cannibal_frenzy) always returns `null` after `_activateAbilityInner`, so
+      // `telemetry-hooks` emits `ability_used` with `ok:false` even when the effect
+      // fired. Composite `ability.action` activates route through `useAbility` and
+      // can set `ok:true`. For those nine IDs, utilization should read
+      // `events.ability_used_by_id` (any fire), not only `ability_used_ok_by_id` /
+      // `abilityAccepted`. Fixing the Game return is a separate authorized change.
+      // Source: OVE-188 / tip `a628aeaf3`.
+      // Additive typed-skill bag (OVE-184): channel int stays for back-compat;
+      // future censuses attribute villager field-fight fires via events.skill_used_by_id.
+      // skill_used.skill is a held ability id (ffFired), not a separate skills.json space.
+      // Villager skill_used (telemetry-hooks wrap on fieldFight / ffFired) emits
+      // { vid, skill, context:'field_fight', outcome } — no ok field. outcome is the
+      // fight result (vKill / mFlee / vFlee / vDie / evade / alreadyDead), not
+      // skill-effect success. Ability-style data?.ok / abilityAccepted scoring would
+      // count zero skill fires. Do not treat non-vKill outcomes as unused skills
+      // (e.g. peacemaker peaceful mFlee, awareness evade, field_medicine heal then
+      // flee/die). Score utilization from any skill_used / skill_used_by_id. Distinct
+      // from player ability_used (which does carry ok from return; see OVE-188 legacy
+      // null → ok:false). Source: OVE-191 / tip a628aeaf3.
+      if (type === 'skill_used') {
+        const id = data && typeof data.skill === 'string' ? data.skill : null;
+        const bag = events.skill_used_by_id || (events.skill_used_by_id = Object.create(null));
+        if (id) bag[id] = (bag[id] || 0) + 1;
+        else events.skill_used_missing_id = (events.skill_used_missing_id || 0) + 1;
+      }
       if (type === 'death' && data?.player) { bearerIds.add(this.villagerId); if (this.villagerId === initial && firstDeath == null) firstDeath = this.state.scholar.day; }
       if (type === 'ability_used' && data?.ok) accepted++;
       if (type === 'class_recognized') rememberClass(data?.who === 'player' ? 'player' : 'npc', data, data?.who);
