@@ -1241,15 +1241,19 @@
       // getPerson record straight in.)
       const xp = ((person._src && person._src.foodXp && person._src.foodXp[task]) || (person.foodXp && person.foodXp[task]) || 0);
       if (skill > 0 && xp >= 5) skill = Math.min(3, skill + 1);
-      // SELF-TAUGHT LADDER (establishment r112 2026-11-07, ROLE PATHS:
-      // skill builds from zero): no occupation skill yet? Doing the work
-      // teaches it — 5 XP buys skill 1, +1 per further 5 XP (10 -> 2,
-      // 15 -> 3, cap 3). (r113 2026-11-07: the first rung was 10 XP and
-      // the pace missed the bar — 28 cells sat at 1-9 XP after 42 days.
-      // The self-taught now pay the SAME first rung as holders, not
-      // double; the panel measures whether the pace lands without every
-      // cook becoming a master preserver.)
-      else if (skill === 0 && xp >= 5) skill = Math.min(3, 1 + Math.floor((xp - 5) / 5));
+      // SELF-TAUGHT LADDER (establishment r116 2026-11-09, PACE DIAL 2:
+      // r115's +3/resolution XP cap was NO-GO — the races are banked
+      // through many small resolutions, so the cap trimmed the tail, not
+      // the races. The rung is the conversion from practice to mastery:
+      // basics stay quick (5 XP buys skill 1 — the attempt teaches the
+      // technique), journeyman takes real work (15 -> 2), mastery takes
+      // a full season of steady work (30 -> 3, cap 3). A cook still
+      // becomes good in six weeks; becoming the village's best takes
+      // longer. Holders keep their +1 at 5 XP — they were already nearly
+      // there. (r113 2026-11-07: the first rung was 10 XP and the pace
+      // missed the bar — 28 cells sat at 1-9 XP after 42 days. The
+      // self-taught now pay the SAME first rung as holders, not double.)
+      else if (skill === 0 && xp >= 5) skill = xp >= 30 ? 3 : xp >= 15 ? 2 : 1;
       return skill;
     },
 
