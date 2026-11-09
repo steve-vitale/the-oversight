@@ -278,3 +278,9 @@ corrupt the winseat baseline).
   test-occupation-panels.js, test-phone-frame-proof.js (stale phone
   receipt for index.html), test-establishment-r20-fixes-20261020.js
   (racks-full voice gate). Not fixed here — out of this arm's scope.
+  Rebased gate (adoption closeout, on master 129698ea6): 294 passed,
+  6 failed in 822s — the standing 4 plus
+  test-trust-observer-neutrality.js and test-capable-bot-20261014.js,
+  both 120s timeouts under load; both pass standalone (6/6, 42/42),
+  adjudicated load artifacts, not regressions. Log:
+  medchannel-seed-a-gate-rebased.log.
