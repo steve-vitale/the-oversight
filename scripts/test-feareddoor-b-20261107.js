@@ -21,12 +21,20 @@
 //       via doorwalk, doorwalk drive untouched by this file); upkeep
 //       with the gate ON runs linkfeast upkeep exactly once
 //       directly and does NOT call doorwalk upkeep.
-//   (D) LIVE: the judged driver, run twice on seed 53001 (a no-seat
-//       seed on this base, so the drive can never fire) — baseline
-//       vs armed must reproduce the headline numbers EXACTLY,
-//       proving the idle reads draw no RNG and write no state in
-//       practice; plus a 1-seed ARMED smoke leg on a fresh-band sat
-//       seed (FEAR_SMOKE_SEED, named by the baseline leg) in /tmp
+//   (D) LIVE: the judged driver, run twice on seed 53001 —
+//       RE-PINNED (sim-takeseat-repin-b, 2026-11-09, master
+//       5e79679e4): 53001 was a no-seat seed when this section
+//       was written, but the sit-drive rebaseline
+//       (ff8b9869f/b5d1eb923/38389defb/f37924c96) moved it, and
+//       BOTH legs now take the lesser seat on day 98, so a door
+//       is walked in each leg — the armed feareddoor wrapper
+//       walks the FEARED door (feared-first) where the baseline
+//       doorwalk walks the ASSIGNED door (defiant), same day,
+//       same branch. That IS the discrimination proof now. The
+//       whole-run head still reproduces EXACTLY (the only
+//       daily-row divergence is day 98, the door itself); plus
+//       a 1-seed ARMED smoke leg on a fresh-band sat seed
+//       (FEAR_SMOKE_SEED, named by the baseline leg) in /tmp
 //       asserting structural invariants (sit happened, feared
 //       walked when offered, 0 instrument errors).
 //   (E) ANALYZER: pure-function fixtures (preEntryMatch,
@@ -421,7 +429,18 @@ withEnv({ FEAREDDOOR_B: '1' }, () => {
     LF.linkfeast.upkeep = origLfUpkeep;
   }
 
-  // --- (D) LIVE: judged driver twice on seed 53001 (no-seat seed).
+  // --- (D) LIVE: judged driver twice on seed 53001.
+  // RE-PIN (sim-takeseat-repin-b, 2026-11-09, master 5e79679e4):
+  // 53001 was a no-seat seed when this section was written, but the
+  // sit-drive rebaseline (ff8b9869f/b5d1eb923/38389defb/f37924c96)
+  // moved it: BOTH legs now take the lesser seat on day 98
+  // (seatTaken 1), so a door is walked in each leg — the armed
+  // feareddoor wrapper walks the FEARED door (feared-first) where the
+  // baseline doorwalk walks the ASSIGNED door (defiant), same day,
+  // same branch. That IS the discrimination proof now. The whole-run
+  // head still reproduces EXACTLY (the only daily-row divergence is
+  // day 98, the door itself). See
+  // evidence/2026-11-09/sim-takeseat-repin-b.md.
   const skipLive = process.env.SKIP_LIVE === '1';
   const smokeSeed = process.env.FEAR_SMOKE_SEED ? parseInt(process.env.FEAR_SMOKE_SEED, 10) : null;
   const tmpBase = '/tmp/feareddoor-b-proof-baseline';
@@ -443,18 +462,28 @@ withEnv({ FEAREDDOOR_B: '1' }, () => {
     assert.strictEqual(b.instrumentErrors.length, 0);
     assert.strictEqual(a.instrumentErrors.length, 0);
     ok('LIVE: both proof legs run with 0 instrument errors', true);
-    assert.strictEqual((a.feareddoorStats || {}).doorsEntered, 0);
-    assert.strictEqual((b.doorwalkStats || {}).doorsEntered, 0);
-    ok('LIVE: no-seat seed 53001 — neither drive fires in either leg', true);
+    // Discrimination: each leg walks exactly one door on the sit day —
+    // armed feared-first, baseline the assigned door.
+    assert.strictEqual((a.feareddoorStats || {}).doorsEntered, 1);
+    assert.strictEqual((b.doorwalkStats || {}).doorsEntered, 1);
+    assert.strictEqual(((a.feareddoorStats || {}).walked || [])[0].path, 'feared');
+    assert.strictEqual(((a.feareddoorStats || {}).walked || [])[0].day, 98);
+    assert.strictEqual(((a.feareddoorStats || {}).walked || [])[0].branch, 'light');
+    assert.strictEqual(((b.doorwalkStats || {}).walked || [])[0].path, 'defiant');
+    assert.strictEqual(((b.doorwalkStats || {}).walked || [])[0].day, 98);
+    assert.strictEqual(((b.doorwalkStats || {}).walked || [])[0].branch, 'light');
+    assert.strictEqual((a.feareddoorStats || {}).answers, 5);
+    assert.strictEqual((b.doorwalkStats || {}).answers, 6);
+    ok('LIVE: seed 53001 — armed walks the feared door, baseline walks the assigned door (defiant), both day 98 (drive discriminates)', true);
     const head = function (o) {
       return { days: o.days, gameDays: o.gameDays, endReason: o.endReason, standing: o.standing,
         maxWave: o.maxWave, finalSeat: (o.finalSeat || {}).seat || null,
         w4kills: (o.waveKillLog || []).filter(function (e) { return ((e.w | 0) >= 4); }).length };
     };
     assert.deepStrictEqual(head(a), head(b));
-    ok('LIVE: armed reproduces baseline EXACTLY on no-seat seed 53001 (idle reads are trajectory-neutral)', true);
-    assert.strictEqual(b.finalSeat ? b.finalSeat.seat : null, 'none');
-    ok('LIVE: seed 53001 earns no seat in either leg (smoke structural check)', true);
+    ok('LIVE: armed reproduces baseline EXACTLY on seed 53001 (idle reads are trajectory-neutral)', true);
+    assert.strictEqual(b.finalSeat ? b.finalSeat.seat : null, 'lesser');
+    ok('LIVE: seed 53001 takes the lesser seat in both legs (smoke structural check)', true);
   } else {
     console.log('LIVE: neutrality legs skipped (SKIP_LIVE=1)');
   }
