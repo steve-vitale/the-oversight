@@ -26,7 +26,10 @@ const { classifyGate } = require(path.join(__dirname, 'sitstep-instrument-202611
 // sim-sitmetric-b: the row's finalSeat is the ALIGNED seat (taken, not
 // priced) — see scripts/lib/seat-taken.js. A priced-but-untaken seat
 // (seed 53004: "lesser", taken 0) reads 'none' here.
-const { alignedSeat } = require(path.join(__dirname, 'lib', 'seat-taken'));
+// sim-pricedseat-b: the substrate-sanity EARNED count must read the
+// PRICED seat instead — pricedSeatOf (finalSeatPriced on new rows, the
+// raw finalSeat on old rows) — never the taken seat.
+const { alignedSeat, pricedSeatOf } = require(path.join(__dirname, 'lib', 'seat-taken'));
 
 // classifySeatDay: the sitstep2-analyze extended rule, copied (same
 // gates) so this analyzer judges seat days identically:
@@ -137,6 +140,7 @@ function analyzeSeed(o) {
     won: !!o.won, over: !!o.over, standing: o.standing, scaleRank: o.scaleRank,
     maxWave: o.maxWave, unlockedWave: o.unlockedWave,
     finalSeat: alignedSeat(o),
+    finalSeatPriced: pricedSeatOf(o),
     firstSeatDay: seatDays.length ? seatDays[0].day : null,
     seatDays: seatDays.length, gates: gates,
     previewReadyDays: previewReadyDays,
@@ -195,7 +199,9 @@ if (require.main === module) {
   // --- primary / sanity / cost ---
   const satArmed = aRows.filter(function (r) { return r.tsTaken > 0; }).length;
   const satBase = bRows.filter(function (r) { return (r.sitAttempts || 0) > 0 && (r.tableDoneDays || 0) > 0; }).length;
-  const baseSeats = bRows.filter(function (r) { return r.finalSeat === 'lesser' || r.finalSeat === 'full'; }).length;
+  // sim-pricedseat-b: the sanity bar is about EARNED (priced) seats,
+  // not taken ones — count finalSeatPriced, never finalSeat.
+  const baseSeats = bRows.filter(function (r) { return r.finalSeatPriced === 'lesser' || r.finalSeatPriced === 'full'; }).length;
   const armedSeats = aRows.filter(function (r) { return r.finalSeat === 'lesser' || r.finalSeat === 'full'; }).length;
   const bStarv = bRows.reduce(function (t, r) { return t + r.starvation; }, 0);
   const aStarv = aRows.reduce(function (t, r) { return t + r.starvation; }, 0);

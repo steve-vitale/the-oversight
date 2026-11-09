@@ -27,14 +27,32 @@
 // say "no" is not-taken. Pure functions over JSON rows; no game code.
 'use strict';
 
-function pricedSeatOf(row) {
-  if (!row || typeof row !== 'object') return null;
-  const f = row.finalSeat;
+function seatStringOf(f) {
   if (typeof f === 'string') return f || null;
   if (f && typeof f === 'object') {
     return (typeof f.seat === 'string' && f.seat) ? f.seat : null;
   }
   return null;
+}
+
+// pricedSeatOf(row) — the seat the table PRICED for the run, whether
+// or not anyone sat in it. Two corpus generations:
+//   NEW instrument rows (sim-sitmetric-b): finalSeat is the TAKEN
+//     seat, so the priced reading lives in finalSeatPriced.
+//   OLD rows: no finalSeatPriced; finalSeat IS the priced seat (the
+//     raw Game.tableSeat() object).
+// Prefer finalSeatPriced when it yields a seat; fall back to
+// finalSeat. Returns the seat string ('full' | 'lesser' | 'none') or
+// null when the row carries no priced-seat signal at all. (Repair:
+// sim-pricedseat-b — the pre-repair version read finalSeat only, so
+// on new rows it returned the TAKEN seat as "priced".)
+function pricedSeatOf(row) {
+  if (!row || typeof row !== 'object') return null;
+  if (row.finalSeatPriced !== undefined && row.finalSeatPriced !== null) {
+    const p = seatStringOf(row.finalSeatPriced);
+    if (p !== null) return p;
+  }
+  return seatStringOf(row.finalSeat);
 }
 
 function seatTakenOf(row) {
