@@ -5843,6 +5843,11 @@
       // boundary. Selecting a topic leaves the topic selector; browsing does
       // not. Otherwise a resumed event speaks but its menu stays on topics.
       if (c && c.choosingSubject && !['subject','dlg:subject','menu:more','silence','leave'].includes(choiceId)) c.choosingSubject = false;
+      // POST-SECRET FOLLOW-UP (journey-deepening r122): a confession's
+      // follow-up lives for the next continuer only. Any other pick moves
+      // on — the moment passes, the flag dies with it. The continuers
+      // (goon, dlg:more, more) and menu browsing (menu:more) don't kill it.
+      if (c && c.secretFollowup && !['goon', 'dlg:more', 'more', 'menu:more'].includes(choiceId)) c.secretFollowup = null;
       if (!c || choiceId === 'goon' || !c.heldBeats || !c.heldBeats.length) return;
       const traderIntro = c.heldBeats.find(h => h && h.traderIntro);
       if (traderIntro && !c.traderMentioned) c.traderIntroPending = traderIntro.text;
@@ -5945,6 +5950,30 @@
       return null;
     },
 
+    // convoSecretFollowupLine(secretText): POST-SECRET FOLLOW-UP
+    // (journey-deepening r122 2026-11-09) — one line that returns to
+    // the confidence after it was answered, keyed to which of the six
+    // secrets was confessed. Each line names the secret's own content
+    // (read / swim / photo / candy / practicing / ashamed / every day),
+    // so the sitting has somewhere to go instead of drying out on the
+    // next "tell me more" (panel: 2/2 secret sittings went dry after
+    // the answer). Returns null when the text matches nothing known.
+    convoSecretFollowupLine(secretText) {
+      const t = String(secretText || '');
+      if (!t) return null;
+      if (t.indexOf("can't read") !== -1) return '"I keep thinking about the warnings I can\'t read. If you ever have time... well. You know where to find me."';
+      if (t.indexOf('swim') !== -1) return '"I still don\'t know how to swim. I don\'t go near the deep part. ...Thanks for not making it a thing."';
+      if (t.indexOf('lying about my age') !== -1) return '"I\'m younger than I look, and I hate lying about it. ...It helps, knowing someone knows."';
+      if (t.indexOf('photo') !== -1) return '"I still keep the photo. Some days it\'s the only thing that feels like before."';
+      if (t.indexOf('candy bar') !== -1) return '"The candy bar\'s still saved. For when things get better. ...It helps, knowing someone knows."';
+      if (t.indexOf('family again') !== -1) return '"I\'m still practicing what I\'d say. \'I\'m still here.\' That\'s the whole speech so far."';
+      if (t.indexOf('At night') !== -1) return '"The nights are still long. But it\'s easier, now that someone knows."';
+      if (t.indexOf('ashamed') !== -1) return '"I\'m still ashamed of it. But it doesn\'t sit quite so heavy, now that I\'ve said it out loud."';
+      if (t.indexOf('Before the scattering') !== -1) return '"I still think about it every day. But it doesn\'t sit quite so heavy, now that I\'ve said it out loud."';
+      if (t.indexOf('stole medicine') !== -1 || t.indexOf('rations') !== -1 || t.indexOf('woods') !== -1) return '"I still keep it to myself. But it doesn\'t sit quite so heavy, now that someone knows I\'m keeping it."';
+      return '"It doesn\'t sit quite so heavy, now that I\'ve said it out loud. ...Thanks."';
+    },
+
     convoTurn(vid, choiceId) {
       const c = this.convoGet(vid);
       if (!c.active) return null;
@@ -6033,6 +6062,15 @@
               : this.convoWinddownChoices(vid);
             return { line, choices: wdChoices, ended: false, windingDown: true, transcript: c.transcript.slice() };
           }
+        } else if (c.secretFollowup) {
+          // POST-SECRET FOLLOW-UP (journey-deepening r122): no beat
+          // queued, but a confidence was just answered — the continuer
+          // returns to it once instead of the "..." fizzle.
+          const gl = this.convoGoonLabel(vid);
+          c.transcript.push({ who: 'you', text: gl });
+          const fl = c.secretFollowup; c.secretFollowup = null;
+          if (this.sayLine(vid, fl)) done(fl, gl);
+          else done('"..."', null);
         } else {
           done('"..."', null);
         }
@@ -6201,6 +6239,15 @@
         const secretText = (proto && proto.prototype && proto.prototype.secret) || '';
         const isLiteracy = secretText.indexOf("can't read") !== -1;
         c.secretAnswered = true;
+        // POST-SECRET FOLLOW-UP (journey-deepening r122 2026-11-09):
+        // the confession was answered, but the sitting then dried out
+        // — the next "tell me more" drew the generic dry line and the
+        // villager never returned to what they confided (panel: 2/2
+        // sittings, dry-first). Arm one secret-specific follow-up: the
+        // next continuer in this sitting (dlg:more / goon) returns to
+        // the confidence once, then the flag clears. Deflect closes
+        // the door: no follow-up.
+        if (sKind !== 'deflect') c.secretFollowup = this.convoSecretFollowupLine(secretText);
         c.thread = null; c.depth = 0;
         answeredReactive = true;
         // TALK: FALSE (real act): answering a once-per-life confidence is

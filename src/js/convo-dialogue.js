@@ -270,6 +270,21 @@
       if (dlg === 'more') {
         // "Tell me more" — continue the thread.
         c.transcript.push({ who: 'you', text: '"Tell me more."' });
+        // POST-SECRET FOLLOW-UP (journey-deepening r122 2026-11-09): a
+        // confidence answered this sitting gets one return before the
+        // thread goes generic — the villager comes back to what they
+        // confided instead of drying out on the next "tell me more"
+        // (panel: 2/2 secret sittings went dry after the answer).
+        if (c.secretFollowup) {
+          const fl = c.secretFollowup; c.secretFollowup = null;
+          if (this.sayLine(vid, fl)) {
+            c.threadDryFor = null; // the sitting is alive — clear any stale dry marker
+            try { this.resolveConsequence(vid, { trust: 1, temper: 'neutral', name: 'dlg:more' }); } catch (e) {}
+            return { line: fl, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
+          }
+          // Ledger-blocked (same line spoken in an earlier sitting):
+          // fall through to the normal thread/dry path, honestly.
+        }
         const beat = this.convoThreadBeat(vid);
         if (beat) {
           const composed = this.convoComposeDlg(vid, beat, choiceId);
