@@ -2800,7 +2800,16 @@
       // re-serves under another whatever its quotes. Returned lines keep
       // their original wrapping; only the comparison normalizes.
       const normPick = (l) => {
-        let t = String(l == null ? '' : l).trim();
+        // R156 (journey-crisis r156): phrase objects (foreignSpeech) dedupe
+        // by their spoken text — String(obj) is "[object Object]" for every
+        // phrase, so one said phrase marked the whole pool said and
+        // foreignLine returned null forever after for that villager (the
+        // "They answer at length." fallback repeated 12x in 3 no-words
+        // sittings). Strings behave exactly as before.
+        let t = (l != null && typeof l === 'object')
+          ? (typeof l.t === 'string' ? l.t : JSON.stringify(l))
+          : String(l == null ? '' : l);
+        t = t.trim();
         if (t.length >= 2 && t.startsWith('"') && t.endsWith('"')) t = t.slice(1, -1);
         return t.trim();
       };
@@ -2924,7 +2933,16 @@
         // are unaffected — their variants live under one key, so the
         // cross-key part is a no-op for them.
         const keep = Math.max(1, Math.min(3, (pool || []).length - 1));
-        const norm = (x) => { let t = String(x == null ? '' : x).trim(); if (t.length >= 2 && t.startsWith('"') && t.endsWith('"')) t = t.slice(1, -1); return t.trim(); };
+        const norm = (x) => {
+          // R156 (journey-crisis r156): same object identity as normPick —
+          // phrase objects dedupe by their spoken text (see above). Without
+          // this the reset kept every "[object Object]" entry and could
+          // never free an exhausted foreign pool.
+          let t = (x != null && typeof x === 'object')
+            ? (typeof x.t === 'string' ? x.t : JSON.stringify(x))
+            : String(x == null ? '' : x);
+          t = t.trim(); if (t.length >= 2 && t.startsWith('"') && t.endsWith('"')) t = t.slice(1, -1); return t.trim();
+        };
         const poolNorm = new Set((pool || []).map(norm));
         const keepNorm = new Set();
         // Recency is global: saidKeyOrder lists keys by last use (most
