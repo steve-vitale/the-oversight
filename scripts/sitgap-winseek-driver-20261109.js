@@ -53,8 +53,6 @@ const DAYS = parseInt(process.env.DAYS || '150', 10) || 150;
 const RUN = process.env.RUN || 'winseek';
 const POLICY = process.env.POLICY || 'winseek';
 const RECORDER_ON = process.env.DIAG_RECORDER !== '0';
-if (!SEEDS.length) { console.error('SITGAP-WINSEEK STOP: SEEDS required.'); process.exit(2); }
-if (POLICY !== 'winseek') { console.error('SITGAP-WINSEEK STOP: POLICY must be winseek.'); process.exit(2); }
 // Winseek has no TAKESEAT_B / DOORWALK_B gates; make sure no stale gate
 // env leaks in from a sibling driver invocation in the same shell.
 delete process.env.TAKESEAT_B;
@@ -71,11 +69,6 @@ function zeroTakeseatStats() {
 }
 
 const outDir = process.env.OUTDIR || path.join(REPO, 'evidence', '2026-11-08', 'perseed-sitgap-winseek-b');
-fs.mkdirSync(outDir, { recursive: true });
-for (const seed of SEEDS) {
-  const file = path.join(outDir, 'sitgap-winseek-b-s' + seed + '-' + RUN + '.json');
-  if (fs.existsSync(file)) { console.error('SITGAP-WINSEEK STOP: refusing to overwrite ' + file); process.exit(3); }
-}
 
 function gday(Game) { try { return ((Game.state || {}).scholar || {}).day || 0; } catch (e) { return 0; } }
 function scholarAtHaven(Game) {
@@ -212,11 +205,53 @@ async function oneRun(seed) {
   return out;
 }
 
+// writeFileRetry(file, content): the host write flap (EPERM on plain
+// writes, flapping minute to minute — see AGENTS.md EPERM FLAP entries)
+// can refuse the corpus write at the very end of a finished sim. The sim
+// is deterministic, but re-running it for a write failure is waste; the
+// write itself is retried in-process instead: each attempt writes to a
+// unique temp name and renames into place, then verifies by reading the
+// file back (size + JSON parse). Up to 40 attempts, 15s apart (~10 min —
+// the 2026-11-09 flap refused a full 12-attempt / 3-min window, so the
+// budget was raised from 12). A total failure still throws loudly —
+// never a silent partial corpus.
+function writeFileRetry(file, content, opts) {
+  const o = opts || {};
+  const attempts = o.attempts || 40;
+  const sleepS = o.sleepS || 15;
+  const dir = path.dirname(file);
+  let lastErr = null;
+  for (let attempt = 1; attempt <= attempts; attempt++) {
+    const tmp = file + '.tmp-' + process.pid + '-' + attempt;
+    try {
+      fs.writeFileSync(tmp, content);
+      fs.renameSync(tmp, file);
+      const back = fs.readFileSync(file, 'utf8');
+      if (back.length !== content.length) throw new Error('read-back length mismatch (' + back.length + ' vs ' + content.length + ')');
+      JSON.parse(back);
+      return;
+    } catch (e) {
+      lastErr = e;
+      try { fs.unlinkSync(tmp); } catch (e2) {}
+      if (attempt < attempts) { try { execSync('sleep ' + sleepS, { stdio: 'ignore' }); } catch (e3) {} }
+    }
+  }
+  throw lastErr;
+}
+
+if (require.main === module) {
+if (!SEEDS.length) { console.error('SITGAP-WINSEEK STOP: SEEDS required.'); process.exit(2); }
+if (POLICY !== 'winseek') { console.error('SITGAP-WINSEEK STOP: POLICY must be winseek.'); process.exit(2); }
+fs.mkdirSync(outDir, { recursive: true });
+for (const seed of SEEDS) {
+  const file = path.join(outDir, 'sitgap-winseek-b-s' + seed + '-' + RUN + '.json');
+  if (fs.existsSync(file)) { console.error('SITGAP-WINSEEK STOP: refusing to overwrite ' + file); process.exit(3); }
+}
 (async function () {
   for (const seed of SEEDS) {
     const out = await oneRun(seed);
     const file = path.join(outDir, 'sitgap-winseek-b-s' + seed + '-' + RUN + '.json');
-    fs.writeFileSync(file, JSON.stringify(out, null, 2) + '\n');
+    writeFileRetry(file, JSON.stringify(out, null, 2) + '\n');
     const daily = out.daily || [];
     const diagDays = daily.filter(function (d) { return !!d.diag; }).length;
     const sitgapDays = daily.filter(function (d) { return !!d.sitgap; }).length;
@@ -231,3 +266,6 @@ async function oneRun(seed) {
     }));
   }
 })().catch(function (e) { console.error(e.stack); process.exitCode = 1; });
+}
+
+module.exports = { writeFileRetry: writeFileRetry, zeroTakeseatStats: zeroTakeseatStats };

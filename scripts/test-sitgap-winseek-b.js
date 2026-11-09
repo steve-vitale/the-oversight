@@ -329,5 +329,26 @@ const UNREC = path.join(REPO, 'evidence', '2026-11-08', 'perseed-sitgap-winseek-
     (unrec && rec) ? ('diffs: ' + n.diffs.join(', ')) : 'control corpus missing');
 });
 
+// --- Driver write-retry helper (flap robustness, success path) ---
+(function () {
+  const DRV = require('./sitgap-winseek-driver-20261109');
+  const tmp = '/tmp/sitgap-winseek-proof-' + process.pid + '.json';
+  const content = JSON.stringify({ seed: 53008, check: 'round-trip' }, null, 2) + '\n';
+  let ok = false, errMsg = '';
+  try {
+    // Short retry here (3 × 5s): this check proves the round-trip works
+    // when the filesystem cooperates; flap endurance is the sweep's job,
+    // not the proof's — a flap must FAIL this one check, never crash the
+    // proof with an uncaught throw.
+    DRV.writeFileRetry(tmp, content, { attempts: 3, sleepS: 5 });
+    ok = fs.readFileSync(tmp, 'utf8') === content;
+  } catch (e) { ok = false; errMsg = String(e && e.message ? e.message : e).slice(0, 80); }
+  try { fs.unlinkSync(tmp); } catch (e) {}
+  check('G3: driver writeFileRetry round-trips a corpus file (and verifies by read-back)', ok === true, 'round-trip failed' + (errMsg ? ': ' + errMsg : ''));
+  check('G3: driver zeroTakeseatStats returns fresh zero stats (no sit drive under winseek)',
+    (function () { const a = DRV.zeroTakeseatStats(); const b = DRV.zeroTakeseatStats(); return a !== b && a.seatTaken === 0 && a.seatAttempts === 0 && JSON.stringify(a.skips) === '{}' && a.seatDay === null; })(),
+    'stub is not a fresh zero object');
+})();
+
 console.log('\n' + pass + ' passed, ' + fail + ' failed, ' + skip + ' skipped');
 process.exit(fail ? 1 : 0);
