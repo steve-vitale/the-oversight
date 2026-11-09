@@ -354,7 +354,7 @@ function aggregate(rows, pid) {
       meanEngineLift: engineLiftN ? +(engineLiftSum / engineLiftN).toFixed(2) : null, engineLiftN,
       engineTendsWhileNational: engNat, engineTendsWhileNationalSeeds: engNatSeeds,
       policyTendsWhileNational: polNat,
-      topped55Seeds, tendAttributedTopped55Seeds, tendAttributedTopped55Days,
+      topped55Seeds, tendAttributedTopped55Seeds: tendAttrTopped55Seeds, tendAttributedTopped55Days: tendAttrTopped55Days,
       nationalLostSeeds: natLostSeeds, maxTrustWhileNational, engineTendsWhileNationalDays: engNatDays,
       nationalLostDays: natLostDays,
       perSeed,
