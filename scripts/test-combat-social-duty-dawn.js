@@ -1,7 +1,8 @@
 #!/usr/bin/env node
-// test-combat-social-duty-dawn.js — VILLAGER-BRAIN Phase 6 (OVE-71):
-// brain-offered combat (hunt/patrol) and social (teach) DUTY candidates
-// can win dawn commitment via duty_top_score — same honesty as survival DUTY.
+// test-combat-social-duty-dawn.js — VILLAGER-BRAIN Phase 6 (OVE-71 / OVE-81):
+// brain-offered combat (hunt/patrol), social (teach), and explore (scout) DUTY
+// candidates can win dawn commitment via duty_top_score — same honesty as
+// survival DUTY.
 //
 // Proves:
 //   1. Heard raid danger → DUTY patrol in dutyFeedCands (full pantry; no survival ads).
@@ -13,9 +14,11 @@
 //   5b. Codex-only animal depth (village.animals empty) → known_prey (OVE-78).
 //      Failing control: empty village.animals + empty codex.animals → soft
 //      pantry_protein under forage (same pantry belief).
-//   6. Failing control: vbrainDisableCombatSocialDuty strips combat/social ads;
+//   6. Unmapped haven-ring fog → DUTY scout in feed; mapped ring → no scout (OVE-81).
+//   7. Top-scoring scout → commit DUTY + align EXPLORE with practiceTask scout.
+//   8. Failing control: vbrainDisableCombatSocialDuty strips combat/social/scout ads;
 //      survival forage DUTY (when pantry low) still feeds.
-//   7. gardenKeeper / standing assign still suppress DUTY ads.
+//   9. gardenKeeper / standing assign still suppress DUTY ads.
 //
 // Usage: node scripts/test-combat-social-duty-dawn.js
 // Exit 0 = pass, 1 = fail, 2 = setup skip. No repo writes.
@@ -106,6 +109,31 @@ function plantCodexPrey(Game, aid, level, day) {
   Game.state.codex.animals[aid] = { level: level || 1, learnedDay: day || 0, via: 'test' };
 }
 
+// OVE-81: ±2 Chebyshev haven ring — same ring resolveOneAssignment scout maps.
+function forEachScoutRingTile(Game, hx, hy, fn) {
+  for (let dy = -2; dy <= 2; dy++) {
+    for (let dx = -2; dx <= 2; dx++) {
+      const nx = hx + dx, ny = hy + dy;
+      if (nx < 0 || nx > 8 || ny < 0 || ny > 8) continue;
+      const t = Game.tileAt(nx, ny);
+      if (t) fn(t, nx, ny);
+    }
+  }
+}
+function plantUnmappedScoutRing(Game, hx, hy) {
+  let planted = 0;
+  forEachScoutRingTile(Game, hx, hy, (t) => {
+    if (!t.revealed) planted++;
+  });
+  if (planted > 0) return planted;
+  const t = Game.tileAt(hx + 2, hy + 2);
+  if (t) { t.revealed = false; return 1; }
+  return 0;
+}
+function clearScoutRingFog(Game, hx, hy) {
+  forEachScoutRingTile(Game, hx, hy, (t) => { t.revealed = true; });
+}
+
 (async () => {
   const { Game } = await loadGame({ seed: SEED, mode: 'herald', fullTelemetry: false });
   await setupGame(Game);
@@ -153,8 +181,11 @@ function plantCodexPrey(Game, aid, level, day) {
     plantFullBelief(Game, vid, day);
     plantFullBelief(Game, buddy, day);
     clearPlantKnowledge(v, roster);
+    clearCodexAnimals(Game);
     v.gossip = [];
     v.animals = {};
+    // Clear haven-ring fog so baseline has no scout opportunity either (OVE-81).
+    clearScoutRingFog(Game, hx, hy);
     let feed = Game.dutyFeedCands(vid) || [];
     check('baseline full pantry: no survival/role DUTY', feed.length === 0,
       JSON.stringify(dutyKinds(feed)));
@@ -423,26 +454,94 @@ function plantCodexPrey(Game, aid, level, day) {
     clearCodexAnimals(Game);
   }
 
+  console.log('== unmapped haven ring → DUTY scout ==');
+  {
+    plantFullBelief(Game, vid, day);
+    clearPlantKnowledge(v, roster);
+    clearCodexAnimals(Game);
+    v.gossip = [];
+    v.animals = {};
+    const fogN = plantUnmappedScoutRing(Game, hx, hy);
+    check('scout setup: fog in haven ring', fogN > 0, String(fogN));
+    const feed = Game.dutyFeedCands(vid) || [];
+    check('unmapped: feed has DUTY scout', dutyKinds(feed).indexOf('scout') >= 0,
+      JSON.stringify(dutyKinds(feed)));
+    const scout = feed.find(c => c.dutyTask === 'scout');
+    check('scout: vbrainSrc duty', !!(scout && scout.vbrainSrc === 'duty'));
+    check('scout: believed_need unmapped_land',
+      !!(scout && (scout.considerations || []).some(x =>
+        x.id === 'believed_need' && x.note === 'unmapped_land')),
+      JSON.stringify(scout && scout.considerations));
+    check('scout: soft vs teach weight', !!(scout && scout.w < 2.4),
+      JSON.stringify(scout && { w: scout.w }));
+    clearScoutRingFog(Game, hx, hy);
+    const cleared = Game.dutyFeedCands(vid) || [];
+    check('mapped ring: no DUTY scout', dutyKinds(cleared).indexOf('scout') < 0,
+      JSON.stringify(dutyKinds(cleared)));
+    plantUnmappedScoutRing(Game, hx, hy);
+  }
+
+  console.log('== scout DUTY dawn-commits + aligns ==');
+  {
+    plantFullBelief(Game, vid, day);
+    delete (v.assignments || {})[vid];
+    clearPlantKnowledge(v, roster);
+    clearCodexAnimals(Game);
+    v.gossip = [];
+    v.animals = {};
+    plantUnmappedScoutRing(Game, hx, hy);
+    const duty = (Game.dutyFeedCands(vid) || []).find(c => c.dutyTask === 'scout');
+    check('scout pick setup: cand present', !!(duty && duty.w > 0), JSON.stringify(duty));
+    const cands = [{ kind: 'HAVEN_CHORE', w: 0.01, chore: 'fire' }, duty].filter(Boolean);
+    clearCommit(Game, vid);
+    const mat = Game.vbrainScorePick(vid, cands, { rng: () => 0 });
+    const log = Game.vbrainLastLog(vid);
+    const commit = Game.vbrainCommit(vid);
+    check('scout pick: materialize stays core', mat && mat.kind === 'HAVEN_CHORE',
+      JSON.stringify(mat));
+    check('scout pick: override duty_top_score', log && log.override === 'duty_top_score',
+      JSON.stringify({ override: log && log.override, pick: log && log.pick }));
+    check('scout pick: commit DUTY scout',
+      commit && commit.kind === 'DUTY' && commit.dutyTask === 'scout',
+      JSON.stringify(commit));
+    check('scout pick: no assignTask write',
+      !((v.assignments || {})[vid] && (v.assignments || {})[vid].task),
+      JSON.stringify((v.assignments || {})[vid]));
+    const o = {
+      kind: 'HAVEN_CHORE', purpose: 'chore', indoor: true, state: 'indoor',
+      chore: 'fire', tx: hx, ty: hy, tightness: 0, partsLeft: 2,
+    };
+    Game.vbrainAlignObjective(vid, o, hx, hy);
+    check('scout align: kind EXPLORE', o.kind === 'EXPLORE', JSON.stringify(o));
+    check('scout align: purpose explore', o.purpose === 'explore', JSON.stringify(o));
+    check('scout align: outdoor ready', o.indoor === false && o.state === 'ready', JSON.stringify(o));
+    check('scout align: practiceTask scout', o.practiceTask === 'scout', JSON.stringify(o));
+  }
+
   console.log('== failing control: vbrainDisableCombatSocialDuty ==');
   {
     plantFullBelief(Game, vid, day);
     clearPlantKnowledge(v, roster);
+    clearCodexAnimals(Game);
     v.gossip = [{ action: 'raid', day: day, heard: [vid], village: 'ove71-raid' }];
     v.animals = { rabbit: { level: 1, learnedDay: day, learnedBy: vid } };
     v.taught[vid] = ['yarrow'];
     v.taught[buddy] = [];
+    plantUnmappedScoutRing(Game, hx, hy);
     const withHook = Game.dutyFeedCands(vid) || [];
-    check('control setup: combat/social DUTY present',
+    check('control setup: combat/social/scout DUTY present',
       dutyKinds(withHook).indexOf('patrol') >= 0 &&
       dutyKinds(withHook).indexOf('hunt') >= 0 &&
-      dutyKinds(withHook).indexOf('teach') >= 0,
+      dutyKinds(withHook).indexOf('teach') >= 0 &&
+      dutyKinds(withHook).indexOf('scout') >= 0,
       JSON.stringify(dutyKinds(withHook)));
     Game.vbrainDisableCombatSocialDuty = true;
     const stripped = Game.dutyFeedCands(vid) || [];
-    check('control: no patrol/hunt/teach',
+    check('control: no patrol/hunt/teach/scout',
       dutyKinds(stripped).indexOf('patrol') < 0 &&
       dutyKinds(stripped).indexOf('hunt') < 0 &&
-      dutyKinds(stripped).indexOf('teach') < 0,
+      dutyKinds(stripped).indexOf('teach') < 0 &&
+      dutyKinds(stripped).indexOf('scout') < 0,
       JSON.stringify(dutyKinds(stripped)));
     // Survival DUTY still works under the role-duty seam.
     plantLowBelief(Game, vid, day);
@@ -452,10 +551,13 @@ function plantCodexPrey(Game, aid, level, day) {
     Game.vbrainDisableCombatSocialDuty = false;
     plantFullBelief(Game, vid, day);
     clearPlantKnowledge(v, roster);
+    clearCodexAnimals(Game);
     v.gossip = [{ action: 'raid', day: day, heard: [vid], village: 'ove71-raid' }];
     v.animals = {};
     const restored = Game.dutyFeedCands(vid) || [];
     check('control restored: patrol returns', dutyKinds(restored).indexOf('patrol') >= 0,
+      JSON.stringify(dutyKinds(restored)));
+    check('control restored: scout returns', dutyKinds(restored).indexOf('scout') >= 0,
       JSON.stringify(dutyKinds(restored)));
   }
 
