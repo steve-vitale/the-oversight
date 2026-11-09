@@ -17161,6 +17161,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
                 v.explorerNews = v.explorerNews || {};
                 v.explorerNews[rid] = { dir: d, day: s.day };
               }
+              // OVE-74: DUTY patrol/scout → EXPLORE out-and-back completion
+              // accrues practice without writing assignTask.
+              try { if (this.objOnExploreReturn) this.objOnExploreReturn(rid); }
+              catch (eP) { console.warn('[obj] explore duty practice', eP); }
+            } else if (away.purpose === 'hunt') {
+              // OVE-74: DUTY/HUNT return — practice only when the trip was not
+              // an empty-tile quarry drop (objAwayStep marks huntEmptyDrop).
+              try { if (this.objOnHuntReturn) this.objOnHuntReturn(rid); }
+              catch (eP) { console.warn('[obj] hunt duty practice', eP); }
             } else if (away.purpose === 'leave' && Math.random() < 0.3) {
               // The 'escape' goal: some who leave come back changed. Most don't.
               if (this.map.px === hx && this.map.py === hy) {

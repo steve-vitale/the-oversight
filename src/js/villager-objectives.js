@@ -18,7 +18,12 @@
 //   - objRallyFreshRaid(vid)
 //   - objTick()
 //   - objHealGate(vid, obj, hx, hy, playerAtHaven)
+//   - objAccrueDutyPractice(vid, task)
+//   - objOnExploreReturn(vid)
+//   - objOnHuntReturn(vid)
+//   - objOnTeachLesson(vid, lesson)
 // rules:
+//   - duty_objective_practice: DUTY-aligned teach/patrol/scout/hunt accrue one villagerPractice rep on real objective completion (lesson.taught / explore return / hunt return that was not an empty-tile drop) — never writes assignTask; honor objDisableDutyPractice failing control (code: objAccrueDutyPractice, objOnTeachLesson, objOnExploreReturn, objOnHuntReturn, VILLAGER-BRAIN OVE-74)
 //   - objectives_drive_departures: npcNodeTravel's old dice triggers are replaced by objMaybeDepart (code: villager-objectives.js)
 //   - midday_repick_event_only: idle/done mid-day objPick runs only via objRefreshPick when commit day/part is stale or a perception flag fired; dawn force-refreshes (code: objRefreshPick, VILLAGER-BRAIN seam 9)
 //   - night_departure_ban: nobody sets out at night, hard rule kept from base (code: villager-objectives.js)
@@ -275,6 +280,71 @@
       return o[vid];
     },
 
+    // OVE-74: one villagerPractice rep when DUTY-aligned objective work
+    // really completes. Never writes assignTask. ASSIGN keeps practice on
+    // resolveOneAssignment (skip when a standing assignment is present).
+    // Failing control: objDisableDutyPractice.
+    objAccrueDutyPractice(vid, task) {
+      if (this.objDisableDutyPractice) return 0;
+      if (!vid || !task) return 0;
+      try {
+        var asg = ((this.state.village || {}).assignments || {})[vid];
+        if (asg && asg.task) return 0;
+      } catch (e) {}
+      var n = 0;
+      try { n = this.villagerPractice ? this.villagerPractice(vid, task) : 0; }
+      catch (e) { console.warn('[obj] duty practice', e); return 0; }
+      try {
+        var o = this.objOf(vid);
+        if (o && o.practiceTask === task) o.practiceTask = null;
+      } catch (e) {}
+      return n;
+    },
+
+    // OVE-74: EXPLORE out-and-back completion (DUTY patrol/scout). Called
+    // from the away-return explore branch in game.js.
+    objOnExploreReturn(vid) {
+      var practiced = 0;
+      try {
+        var o = this.objOf(vid);
+        var pt = o && o.practiceTask;
+        if (pt === 'patrol' || pt === 'scout') {
+          practiced = this.objAccrueDutyPractice(vid, pt) || 0;
+        }
+        if (o) { o.state = 'done'; o.kind = 'idle'; }
+      } catch (e) { console.warn('[obj] explore duty practice', e); }
+      return practiced;
+    },
+
+    // OVE-74: HUNT return — practice only when the trip was not an
+    // empty-tile quarry drop (objAwayStep marks huntEmptyDrop).
+    objOnHuntReturn(vid) {
+      var practiced = 0;
+      try {
+        var o = this.objOf(vid);
+        if (o && o.practiceTask === 'hunt' && !o.huntEmptyDrop) {
+          practiced = this.objAccrueDutyPractice(vid, 'hunt') || 0;
+        } else if (o && o.practiceTask === 'hunt' && o.huntEmptyDrop) {
+          o.practiceTask = null;
+        }
+        if (o) { o.state = 'done'; o.kind = 'idle'; o.huntEmptyDrop = false; }
+      } catch (e) { console.warn('[obj] hunt duty practice', e); }
+      return practiced;
+    },
+
+    // OVE-74: HAVEN_CHORE teach when a real lesson landed (lesson.taught).
+    objOnTeachLesson(vid, lesson) {
+      if (!(lesson && lesson.taught)) return 0;
+      var practiced = 0;
+      try {
+        var o = this.objOf(vid);
+        if (o && o.practiceTask === 'teach') {
+          practiced = this.objAccrueDutyPractice(vid, 'teach') || 0;
+        }
+      } catch (e) { console.warn('[obj] teach duty practice', e); }
+      return practiced;
+    },
+
     // Hard body gates that must interrupt a settled mid-day lead (escape /
     // rest / eat). These are emergencies inside the one pass (VILLAGER-BRAIN
     // §5), not a lottery re-roll — but they still enter through objPick so the
@@ -331,6 +401,8 @@
       if (vp.dead) { o.kind = 'idle'; o.state = 'idle'; return o; }
       o.tightened = false; // fresh pick: not a danger-tightened trip
       o.huntMid = null; o.huntTx = null; o.huntTy = null; o.huntDay = null; // fresh pick: a stale hunt provenance must not linger on a new errand
+      o.huntEmptyDrop = false; // OVE-74: fresh pick clears empty-tile hunt mark
+      o.practiceTask = null; // OVE-74: DUTY stamp only via vbrainAlignObjective
       o.chore = null; // fresh pick: a stale chore label must not linger on
       // non-chore objectives (longsim agency 2026-10-11: census showed
       // VISIT/out(fire), GUARD/out(teach) — old chore tags on new errands)
@@ -1636,7 +1708,13 @@
       if (o && o.state === 'out' && o.kind === 'HUNT' && nx === o.tx && ny === o.ty) {
         try {
           var _qm = this.monsterAt ? this.monsterAt(nx, ny) : null;
-          if ((!_qm || _qm.id !== o.huntMid) && this.objDropMonsterSighting) this.objDropMonsterSighting(rid, o.huntMid, o.tx, o.ty);
+          if ((!_qm || _qm.id !== o.huntMid) && this.objDropMonsterSighting) {
+            this.objDropMonsterSighting(rid, o.huntMid, o.tx, o.ty);
+            // OVE-74: a remembered quarry gone from the tile is not real hunt
+            // work — mark so the return does not accrue practice. DUTY hunts
+            // without huntMid (no specific quarry) keep the return path open.
+            if (o.huntMid && o.practiceTask === 'hunt') o.huntEmptyDrop = true;
+          }
         } catch (e) {}
       }
       // MAP MEMORY (villager-mapmem 2026-10-13): they notice what's on the
@@ -1775,6 +1853,10 @@
               if (here.length) lesson = this.agencyTeachVillager(rid, pick(here));
             } catch (e) {}
             if (lesson && lesson.taught) {
+              // OVE-74: DUTY teach completion — real lesson lands a practice rep
+              // without writing assignTask. practiceTask stamped by DUTY align.
+              try { this.objOnTeachLesson(rid, lesson); }
+              catch (eP) { console.warn('[obj] teach duty practice', eP); }
               // TRUST LEDGER (journey landing r12 2026-10-13): reason attributed.
               try { this.bumpTrust(rid, 1, 'taught a villager their craft'); this.bumpTrust(lesson.learner, 1, 'learned a craft from a villager'); } catch (e) {}
               // PARITY (2026-10-14): a lesson that landed is the player's teaching deed.
