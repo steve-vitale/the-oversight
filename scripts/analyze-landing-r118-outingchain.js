@@ -50,9 +50,15 @@ const breakReasons = {};
 let contradiction = null;
 
 function classifyEveningLine(line) {
-  // nodeFails entries: "(3,3):press-fail" (r117) or "(3,3,d2):unreached" (r118).
+  // nodeFails entries: "(3,3):press-fail" (r117) or "(3,3,d2):unreached" (r118)
+  // or "(0,0,d4,s47):unreached" (r119+: tile stock sN added at press time).
+  // R121 FIX: the r119 stock suffix broke this parse — the regex required ')'
+  // right after the distance, so every r119/r120 unreached entry silently
+  // failed to match and farUnreached read 0 (r120's true counts are 11 far /
+  // 4 near, pressFail 7, not 0 — see the r120 calibration in the proof test).
+  // The optional (?:,s\d+)? restores the parse for all three formats.
   const out = [];
-  const re = /\((\d+),(\d+)(?:,d(\d+))?\):([a-z-]+)/g;
+  const re = /\((\d+),(\d+)(?:,d(\d+))?(?:,s\d+)?\):([a-z-]+)/g;
   let m;
   while ((m = re.exec(line || '')) !== null) {
     out.push({ x: +m[1], y: +m[2], d: m[3] == null ? null : +m[3], reason: m[4] });

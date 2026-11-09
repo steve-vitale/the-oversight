@@ -153,6 +153,27 @@ const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'outingchain-r118-'));
   assert.strictEqual(r.verdict, 'DELIVERY-RUNG', 'delivery-rung verdict, got ' + r.verdict);
 }
 
+// h-hop-stock (R121 FIX): same H-HOP shape, but the evening-blocked line
+// carries the r119+ nodeFails format with tile stock — "(5,4,d5,s47):
+// unreached". Before the fix the parse silently dropped these entries and
+// farUnreached read 0 on the r119/r120 panels (true r120 count: 11).
+{
+  const dir = path.join(tmp, 'h-hop-stock');
+  const fav = 'favor-elsa-5-1';
+  const c = census(99995, [
+    { day: 5, outing: [snap('elsa', 'Elsa', fav, 5, { state: 'promised', askedDay: 4, run: { startedDay: 5, forageCount: 0, playerKcal: 0, partnerKcal: 0, deliveredKcal: 0, returned: false } })] },
+    { day: 6, outing: [snap('elsa', 'Elsa', fav, 6, { state: 'promised', askedDay: 4, run: { startedDay: 5, forageCount: 0, playerKcal: 0, partnerKcal: 0, deliveredKcal: 0, returned: false } })] },
+  ], [
+    { day: 5, vid: 'elsa', name: 'Elsa', kind: 'depart', ok: true, line: 'falls in beside you' },
+    { day: 6, vid: 'elsa', name: 'Elsa', kind: 'evening-blocked', via: 'evening', ok: false, line: '(5,4,d5,s47):unreached; (4,4,d4,s42):unreached' },
+  ], []);
+  writeCorpus(dir, 99995, c);
+  const r = runAnalyzer(dir);
+  assert.strictEqual(r.summary.kept, 0, 'h-hop-stock: kept 0');
+  assert.strictEqual(r.together.farUnreached, 2, 'h-hop-stock: farUnreached 2, got ' + JSON.stringify(r.together));
+  assert.strictEqual(r.verdict, 'H-HOP', 'h-hop-stock verdict, got ' + r.verdict);
+}
+
 // (b) Calibration on the r117 corpus.
 {
   const r = runAnalyzer(path.join(GOAL, 'landing-r117'));
@@ -178,4 +199,34 @@ const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'outingchain-r118-'));
   assert.strictEqual(r.verdict, 'OPEN', 'r117 calibration verdict OPEN, got ' + r.verdict);
 }
 
-console.log('OUTINGCHAIN PROOF: fixtures (completes-far, h-know, h-hop, delivery-rung) + r117 calibration PASS');
+console.log('OUTINGCHAIN PROOF: fixtures (completes-far, h-know, h-hop, h-hop-stock, delivery-rung) + r117 calibration PASS');
+
+// (c) Calibration on the r120 corpus (R121 FIX: farUnreached is 11, not 0 —
+// the pre-fix parse dropped every r119+ "(x,y,dN,sN):unreached" entry).
+// Reported, never re-scored — the r120 panel verdicts stand.
+{
+  const GOAL120 = path.join(process.env.HOME || '/home/hatch',
+    'workspace/goals/the-scattering-roguelite-survival-game/hidden_files/evidence/2026-11-09');
+  const r = runAnalyzer(path.join(GOAL120, 'landing-r120'));
+  assert.strictEqual(r.summary.seeds, 10, 'r120 calibration: seeds 10');
+  assert.strictEqual(r.summary.favors, 32, 'r120 calibration: favors 32, got ' + JSON.stringify(r.summary));
+  assert.strictEqual(r.summary.kept, 1, 'r120 calibration: kept 1');
+  assert.strictEqual(r.summary.broken, 7, 'r120 calibration: broken 7');
+  assert.strictEqual(r.summary.open, 24, 'r120 calibration: open 24');
+  assert.strictEqual(r.summary.waits, 5, 'r120 calibration: waits 5');
+  assert.strictEqual(r.summary.departs, 6, 'r120 calibration: departs 6');
+  assert.strictEqual(r.summary.togetherOkFavors, 4, 'r120 calibration: togetherOkFavors 4');
+  assert.strictEqual(r.summary.haulFavors, 2, 'r120 calibration: haulFavors 2');
+  assert.strictEqual(r.summary.farHaul, 1, 'r120 calibration: farHaul 1');
+  assert.strictEqual(r.together.farOk, 7, 'r120 calibration: farOk 7');
+  assert.strictEqual(r.together.nearOk, 2, 'r120 calibration: nearOk 2');
+  assert.strictEqual(r.together.handsEmpty, 7, 'r120 calibration: handsEmpty 7');
+  assert.strictEqual(r.together.pressFail, 7, 'r120 calibration: pressFail 7');
+  assert.strictEqual(r.together.farUnreached, 11, 'r120 calibration: farUnreached 11, got ' + JSON.stringify(r.together));
+  assert.strictEqual(r.together.nearUnreached, 4, 'r120 calibration: nearUnreached 4');
+  assert.strictEqual(r.rungs.asked, 26, 'r120 calibration: rung asked 26');
+  assert.strictEqual(r.rungs.kept, 1, 'r120 calibration: rung kept 1');
+  assert.strictEqual(r.verdict, 'CHAIN-COMPLETES-FAR', 'r120 calibration verdict, got ' + r.verdict);
+}
+
+console.log('OUTINGCHAIN PROOF: r120 calibration PASS (farUnreached 11, nearUnreached 4, pressFail 7)');

@@ -1341,6 +1341,22 @@
         return null; // no unasked question left — the want can't open
       },
       engageBeat(vid) {
+        // FIRST-REVEAL GUARD (journey landing r121 2026-11-09): this line
+        // reacts to something the player just revealed about themself —
+        // it is only true after the player answered the want's question
+        // in THIS sitting. Un-gated it fired on cold resumes ("We never
+        // finished — who you don't trust") and on "Go on" before any
+        // question was asked: the NPC reacting to a revelation that never
+        // happened (panel r121: 6/6 misfires, seeds 1142-1151). c.answered
+        // resets per conversation, so a prior sitting's answer never
+        // re-arms it. Returning null lets each call site fall through to
+        // its honest line (the resume acknowledgment, the dry admission).
+        // Same shape as the wantQDone check in convoNoteBeat.
+        try {
+          const c = (typeof this.convoGet === 'function') ? this.convoGet(vid) : null;
+          const qid = c && c.want && c.want.qid;
+          if (!(c && c.answered && qid && (qid in c.answered) && c.answered[qid] !== 'honest_pass')) return null;
+        } catch (e) { return null; }
         return '"Huh. I wouldn\'t have guessed that about you."';
       },
       deflectBeat(vid) {
