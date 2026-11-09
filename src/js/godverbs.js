@@ -14,6 +14,7 @@
 //   - isStrategyContest(contest) / allSeeingStrategyLeanFor(pid, contest) -> CONTEST scale: All-Seeing strategy lean for puzzle/detective + lies
 //   - isSponsorContest(contest) / marketSponsorLeanFor(pid, contest) -> CONTEST scale: Market sponsor lean for price/auction (risky — auction still pays)
 //   - isBloodContest(contest) / opaBloodLeanFor(pid, contest) -> CONTEST scale: One-Person Army blood lean for pit/gauntlet/duel/siege (braveryBonus steadiness)
+//   - isChaseContest(contest) / betweenChaseLeanFor(pid, contest) -> CONTEST scale: Between chase/race lean for hide/calorie_run
 //   - voiceReachVillageIds() / voiceDeliverAllied(day) -> ARMY scale: Voice Be Heard reaches linked/allied foreign villages same day
 //   - gardenMusterFeedFor(need) -> ARMY scale: Living Garden harvest-day cover for titan muster upkeep kcal
 //   - marketOutfitLeanFor() -> ARMY scale: Market God quartermaster lean percent for titanOutfit effectiveness
@@ -28,7 +29,7 @@
 //   - Scattering.Godpath hooks (allyWouldFall, onAllyFell, damageMult, dodgeBonus, villagerStrikeMult, absorbVillagerHit, fieldBegin/Act/Incoming/AllyShare/CheatDeath)
 //   - Scattering.Godhood market verbs (namePrice, buyPassage, guardAbsorb, guardRegen, auditCollect, resetFightVerbs, resetDayVerbs)
 //   - Scattering.combat.nearestEnemy (monster aim)
-//   - Game.contestResolveGroup / Game.contestResolveVillager (feast lean in contest-engine _cxOther; Voice performance lean in _cxOther + _cxMoot; Unkillable endurance lean in _cxEndurance; All-Seeing strategy lean in _cxOther puzzle/detective + _cxMoot lies; Market sponsor lean in _cxMoot price + _cxChance auction; OPA blood lean in _cxBlood / duelFight)
+//   - Game.contestResolveGroup / Game.contestResolveVillager (feast lean in contest-engine _cxOther; Voice performance lean in _cxOther + _cxMoot; Unkillable endurance lean in _cxEndurance; All-Seeing strategy lean in _cxOther puzzle/detective + _cxMoot lies; Market sponsor lean in _cxMoot price + _cxChance auction; OPA blood lean in _cxBlood / duelFight; Between chase lean in _cxOther hide/calorie_run)
 //   - Game.hierarchyState / linkWith / _linkOther / _trustGain / _nudgeOpinion / _otherVillage / mshipState (Voice army delivery)
 // rules:
 //   - ambush_ally_parity: a living player receives an NPC hunter's allied opening strike through scholar state; existing armed strikes are preserved, and no player input is automated (code: terms)
@@ -42,6 +43,7 @@
 //   - all_seeing_strategy_lean: All-Seeing scale.contest — puzzle/detective + lies scores lean for the ascended holder (player or NPC), numbers in god.play.contestLean / strategyContests (code: allSeeingStrategyLeanFor, contestEngine _cxOther/_cxMoot)
 //   - market_sponsor_lean: Market God scale.contest — price moot case scores and auction bid capacity lean for the ascended holder (player or NPC), numbers in god.play.contestLean / sponsorContests; auction still pays (risky) (code: marketSponsorLeanFor, contestEngine _cxMoot/_cxChance)
 //   - opa_blood_lean: One-Person Army scale.contest — blood fight arms lean for the ascended holder (player or NPC), numbers in god.play.contestLean / bloodContests as extra braveryBonus / cheer steadiness (code: opaBloodLeanFor, contestEngine _cxBlood/duelFight; OVE-124)
+//   - between_chase_lean: Between scale.contest — chase/race arms lean for the ascended holder (player or NPC), numbers in god.play.contestLean / chaseContests: hide seeker spot pad (lean/25) + calorie_run forage yield; not Unkillable endurance IDs; runner army stays TEXT (code: betweenChaseLeanFor, contestEngine _cxOther; OVE-148)
 //   - voice_army_same_day: Voice scale.army — Be Heard stamps linked/allied foreign villages the same day (opinion + link trust + voiceDay; their people fight rallied) (code: voiceDeliverAllied, dailyVoice)
 //   - garden_army_muster_feed: Living Garden scale.army — Feed the Multitude harvest day covers titan muster upkeep kcal (musterMouths × musterKcalPerMouth) for an ascended holder (player or NPC); pack debit + hunger trust bleed only on uncovered remainder (code: gardenMusterFeedFor, titans.js titanMusterUpkeep)
 //   - market_army_outfit_lean: Market God scale.army — ascended Market holder (player or NPC) leans titanOutfit force wbonus/varmor/gearValue by god.play.outfitEffLean percent for the same transferred pieces (code: marketOutfitLeanFor, titans.js titanOutfit)
@@ -271,6 +273,37 @@
       const lean = godPlay('one_person_army').contestLean;
       return (typeof lean === 'number' && lean > 0) ? lean : 18;
     } catch (e) { warn('opaBloodLeanFor', e); return 0; }
+  }
+
+  // ---------------- CONTEST scale: Between chase/race lean ----------------
+  // god.scale.contest is design prose ("Chases and races lean your way.").
+  // Live settlement reads god.play.chaseContests + contestLean and applies
+  // inside contestEngine _cxOther: hide seeker spot pad (lean/25), and
+  // calorie_run forage yield. Exact IDs (OVE-148): hide, calorie_run —
+  // not drop/exchange/starve/maw/vigil (Unkillable endurance), not
+  // cookfight/impress/moot/whoate/price/auction (other gods). Runner army
+  // (coalition between camps) stays TEXT; Phase Out stays personal.
+  const CHASE_CONTEST_FALLBACK = ['hide', 'calorie_run'];
+  function chaseContestSet() {
+    const listed = godPlay('the_between').chaseContests;
+    const ids = Array.isArray(listed) && listed.length ? listed : CHASE_CONTEST_FALLBACK;
+    const set = Object.create(null);
+    for (const id of ids) if (id) set[id] = true;
+    return set;
+  }
+  function isChaseContest(contest) {
+    try {
+      const id = contest && contest.id;
+      return !!(id && chaseContestSet()[id]);
+    } catch (e) { warn('isChaseContest', e); return false; }
+  }
+  function betweenChaseLeanFor(pid, contest) {
+    try {
+      if (!pid || !isChaseContest(contest)) return 0;
+      if (holderGod(pid) !== 'the_between') return 0;
+      const lean = godPlay('the_between').contestLean;
+      return (typeof lean === 'number' && lean > 0) ? lean : 18;
+    } catch (e) { warn('betweenChaseLeanFor', e); return 0; }
   }
 
   // ---------------- ARMY scale: Living Garden muster-upkeep feed ----------------
@@ -975,6 +1008,8 @@
     marketSponsorLeanFor(pid, contest) { return marketSponsorLeanFor(pid, contest); },
     isBloodContest(contest) { return isBloodContest(contest); },
     opaBloodLeanFor(pid, contest) { return opaBloodLeanFor(pid, contest); },
+    isChaseContest(contest) { return isChaseContest(contest); },
+    betweenChaseLeanFor(pid, contest) { return betweenChaseLeanFor(pid, contest); },
     gardenMusterFeedFor(need) { return gardenMusterFeedFor(need); },
     marketOutfitLeanFor() { return marketOutfitLeanFor(); },
     allSeeingCouncilLeanFor() { return allSeeingCouncilLeanFor(); },
@@ -1892,7 +1927,7 @@
 
   const _mantle = Game.mantleBecome;
   Game.mantleBecome = function () { migratePlayerDayUses(); return _mantle.apply(this, arguments); };
-  S.GodVerbs = { holderGod, fighterGod, godPlay, godDaily, godVillagerCast, phoenixVillagerWorld, isFeastContest, gardenFeastLeanFor, isPerformanceContest, voicePerformanceLeanFor, isEnduranceContest, unkillableEnduranceLeanFor, isStrategyContest, allSeeingStrategyLeanFor, isSponsorContest, marketSponsorLeanFor, isBloodContest, opaBloodLeanFor, gardenMusterFeedFor, marketOutfitLeanFor, allSeeingCouncilLeanFor, apexScoutMarkLeanFor, unkillableLastStandingLeanFor, opaBreachLeanFor, wardAdvanceLeanFor, VERB_IMPL, DAY_IMPL, registerGodActions, marketPick, painPool };
+  S.GodVerbs = { holderGod, fighterGod, godPlay, godDaily, godVillagerCast, phoenixVillagerWorld, isFeastContest, gardenFeastLeanFor, isPerformanceContest, voicePerformanceLeanFor, isEnduranceContest, unkillableEnduranceLeanFor, isStrategyContest, allSeeingStrategyLeanFor, isSponsorContest, marketSponsorLeanFor, isBloodContest, opaBloodLeanFor, isChaseContest, betweenChaseLeanFor, gardenMusterFeedFor, marketOutfitLeanFor, allSeeingCouncilLeanFor, apexScoutMarkLeanFor, unkillableLastStandingLeanFor, opaBreachLeanFor, wardAdvanceLeanFor, VERB_IMPL, DAY_IMPL, registerGodActions, marketPick, painPool };
   // the data loads after the scripts (Game.init): register once it's there
   const _init = Game.init;
   if (typeof _init === 'function') {
