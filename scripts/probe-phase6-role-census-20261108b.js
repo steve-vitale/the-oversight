@@ -119,6 +119,33 @@ function snapVillager(Game, id) {
   return out;
 }
 
+// Attribute a DUTY dawn pick to the max-score duty cand (OVE-90).
+// Matches Game vbrainScorePick duty_top_score: max w → annotateCand.score;
+// ties keep the earlier cand (strict >, same as the Game extras loop).
+// Do NOT use dutyCands[0] (feed order) — scout is last in dutyFeedCandsFor,
+// so [0] undercounts scout when it outscores an earlier co-fired teach.
+function dutyPickAttributedTask(dutyCands) {
+  if (!dutyCands || !dutyCands.length) return null;
+  let best = null;
+  let bestScore = -Infinity;
+  for (let i = 0; i < dutyCands.length; i++) {
+    const c = dutyCands[i];
+    if (!c) continue;
+    const raw = Number(c.score);
+    const score = Number.isFinite(raw) ? raw : 0;
+    if (!best || score > bestScore) {
+      best = c;
+      bestScore = score;
+    }
+  }
+  return best ? (best.dutyTask || null) : null;
+}
+
+// Failing-control shape: credit feed-order [0] (pre-OVE-90 bug).
+function dutyPickAttributedTaskFeedOrder(dutyCands) {
+  return (dutyCands && dutyCands[0] && dutyCands[0].dutyTask) || null;
+}
+
 function sampleDutyLogs(Game, duty) {
   let logs = [];
   try { logs = Game.vbrainLogs ? (Game.vbrainLogs() || []) : []; } catch (e) { return; }
@@ -146,7 +173,7 @@ function sampleDutyLogs(Game, duty) {
     }
     if (e.pick === 'DUTY' || e.pickSrc === 'duty') {
       duty.pickEvents++;
-      const dt = (dutyCands[0] && dutyCands[0].dutyTask) || null;
+      const dt = dutyPickAttributedTask(dutyCands);
       if (dt) duty.pickByTask[dt] = (duty.pickByTask[dt] || 0) + 1;
       const ov = e.override || 'none';
       duty.pickByOverride[ov] = (duty.pickByOverride[ov] || 0) + 1;
@@ -472,8 +499,16 @@ async function runDriver() {
   if (panel.failed) process.exitCode = 1;
 }
 
-if (process.argv.includes('--one')) {
-  runOne().catch(e => { console.error(e && e.stack || e); process.exit(1); });
-} else {
-  runDriver().catch(e => { console.error(e && e.stack || e); process.exit(1); });
+module.exports = {
+  dutyPickAttributedTask,
+  dutyPickAttributedTaskFeedOrder,
+  sampleDutyLogs,
+};
+
+if (require.main === module) {
+  if (process.argv.includes('--one')) {
+    runOne().catch(e => { console.error(e && e.stack || e); process.exit(1); });
+  } else {
+    runDriver().catch(e => { console.error(e && e.stack || e); process.exit(1); });
+  }
 }
