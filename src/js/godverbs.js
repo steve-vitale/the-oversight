@@ -12,6 +12,7 @@
 //   - isPerformanceContest(contest) / voicePerformanceLeanFor(pid, contest) -> CONTEST scale: Voice performance lean for impress/moot
 //   - isEnduranceContest(contest) / unkillableEnduranceLeanFor(pid, contest) -> CONTEST scale: Unkillable endurance lean for drop/starve/maw/vigil/exchange
 //   - isStrategyContest(contest) / allSeeingStrategyLeanFor(pid, contest) -> CONTEST scale: All-Seeing strategy lean for puzzle/detective + lies
+//   - isSponsorContest(contest) / marketSponsorLeanFor(pid, contest) -> CONTEST scale: Market sponsor lean for price/auction (risky — auction still pays)
 //   - voiceReachVillageIds() / voiceDeliverAllied(day) -> ARMY scale: Voice Be Heard reaches linked/allied foreign villages same day
 // consumes:
 //   - Game.data.godpaths (god.play), state.scholar.godhood, state.village.npcGodhood
@@ -19,7 +20,7 @@
 //   - Scattering.Godpath hooks (allyWouldFall, onAllyFell, damageMult, dodgeBonus, villagerStrikeMult, absorbVillagerHit, fieldBegin/Act/Incoming/AllyShare/CheatDeath)
 //   - Scattering.Godhood market verbs (namePrice, buyPassage, guardAbsorb, guardRegen, auditCollect, resetFightVerbs, resetDayVerbs)
 //   - Scattering.combat.nearestEnemy (monster aim)
-//   - Game.contestResolveGroup / Game.contestResolveVillager (feast lean in contest-engine _cxOther; Voice performance lean in _cxOther + _cxMoot; Unkillable endurance lean in _cxEndurance; All-Seeing strategy lean in _cxOther puzzle/detective + _cxMoot lies)
+//   - Game.contestResolveGroup / Game.contestResolveVillager (feast lean in contest-engine _cxOther; Voice performance lean in _cxOther + _cxMoot; Unkillable endurance lean in _cxEndurance; All-Seeing strategy lean in _cxOther puzzle/detective + _cxMoot lies; Market sponsor lean in _cxMoot price + _cxChance auction)
 //   - Game.hierarchyState / linkWith / _linkOther / _trustGain / _nudgeOpinion / _otherVillage / mshipState (Voice army delivery)
 // rules:
 //   - ambush_ally_parity: a living player receives an NPC hunter's allied opening strike through scholar state; existing armed strikes are preserved, and no player input is automated (code: terms)
@@ -31,6 +32,7 @@
 //   - voice_performance_lean: Voice scale.contest — impress/moot scores lean for the ascended holder (player or NPC), numbers in god.play.contestLean / performanceContests (code: voicePerformanceLeanFor, contestEngine _cxOther/_cxMoot)
 //   - unkillable_endurance_lean: Unkillable scale.contest — endurance arms lean for the ascended holder (player or NPC), numbers in god.play.contestLean / enduranceContests (code: unkillableEnduranceLeanFor, contestEngine _cxEndurance)
 //   - all_seeing_strategy_lean: All-Seeing scale.contest — puzzle/detective + lies scores lean for the ascended holder (player or NPC), numbers in god.play.contestLean / strategyContests (code: allSeeingStrategyLeanFor, contestEngine _cxOther/_cxMoot)
+//   - market_sponsor_lean: Market God scale.contest — price moot case scores and auction bid capacity lean for the ascended holder (player or NPC), numbers in god.play.contestLean / sponsorContests; auction still pays (risky) (code: marketSponsorLeanFor, contestEngine _cxMoot/_cxChance)
 //   - voice_army_same_day: Voice scale.army — Be Heard stamps linked/allied foreign villages the same day (opinion + link trust + voiceDay; their people fight rallied) (code: voiceDeliverAllied, dailyVoice)
 //   - table_never_reads_godhood: nothing here is read by table*.js (code: scripts/godpath/ladder.js)
 //   - never_silent: every verb narrates; errors are reported via warn (code: warn)
@@ -191,6 +193,37 @@
       const lean = godPlay('all_seeing').contestLean;
       return (typeof lean === 'number' && lean > 0) ? lean : 18;
     } catch (e) { warn('allSeeingStrategyLeanFor', e); return 0; }
+  }
+
+  // ---------------- CONTEST scale: Market God sponsor lean ----------------
+  // god.scale.contest is design prose ("The sponsor: money talks to judges
+  // (risky)."). Live settlement reads god.play.sponsorContests + contestLean
+  // and applies inside contestEngine _cxMoot (price case scores) and
+  // _cxChance (auction bid capacity). RISK stays: auction winners and losers
+  // still pay. Exact IDs (OVE-113): price, auction only — not cookfight/
+  // impress/moot/drop/whoate/lies/wheel (Garden/Voice/Unkillable/All-Seeing
+  // or non-sponsor chance theater).
+  const SPONSOR_CONTEST_FALLBACK = ['price', 'auction'];
+  function sponsorContestSet() {
+    const listed = godPlay('market_god').sponsorContests;
+    const ids = Array.isArray(listed) && listed.length ? listed : SPONSOR_CONTEST_FALLBACK;
+    const set = Object.create(null);
+    for (const id of ids) if (id) set[id] = true;
+    return set;
+  }
+  function isSponsorContest(contest) {
+    try {
+      const id = contest && contest.id;
+      return !!(id && sponsorContestSet()[id]);
+    } catch (e) { warn('isSponsorContest', e); return false; }
+  }
+  function marketSponsorLeanFor(pid, contest) {
+    try {
+      if (!pid || !isSponsorContest(contest)) return 0;
+      if (holderGod(pid) !== 'market_god') return 0;
+      const lean = godPlay('market_god').contestLean;
+      return (typeof lean === 'number' && lean > 0) ? lean : 18;
+    } catch (e) { warn('marketSponsorLeanFor', e); return 0; }
   }
 
   // ---------------- ARMY scale: Voice Be Heard → linked/allied foreign villages ----------------
@@ -686,6 +719,8 @@
     unkillableEnduranceLeanFor(pid, contest) { return unkillableEnduranceLeanFor(pid, contest); },
     isStrategyContest(contest) { return isStrategyContest(contest); },
     allSeeingStrategyLeanFor(pid, contest) { return allSeeingStrategyLeanFor(pid, contest); },
+    isSponsorContest(contest) { return isSponsorContest(contest); },
+    marketSponsorLeanFor(pid, contest) { return marketSponsorLeanFor(pid, contest); },
     voiceReachVillageIds() { return voiceReachVillageIds(); },
     voiceDeliverAllied(day) { return voiceDeliverAllied(day); },
     godActionDef(actionId) {
@@ -1588,7 +1623,7 @@
 
   const _mantle = Game.mantleBecome;
   Game.mantleBecome = function () { migratePlayerDayUses(); return _mantle.apply(this, arguments); };
-  S.GodVerbs = { holderGod, fighterGod, godPlay, godDaily, godVillagerCast, phoenixVillagerWorld, isFeastContest, gardenFeastLeanFor, isPerformanceContest, voicePerformanceLeanFor, isEnduranceContest, unkillableEnduranceLeanFor, isStrategyContest, allSeeingStrategyLeanFor, VERB_IMPL, DAY_IMPL, registerGodActions, marketPick, painPool };
+  S.GodVerbs = { holderGod, fighterGod, godPlay, godDaily, godVillagerCast, phoenixVillagerWorld, isFeastContest, gardenFeastLeanFor, isPerformanceContest, voicePerformanceLeanFor, isEnduranceContest, unkillableEnduranceLeanFor, isStrategyContest, allSeeingStrategyLeanFor, isSponsorContest, marketSponsorLeanFor, VERB_IMPL, DAY_IMPL, registerGodActions, marketPick, painPool };
   // the data loads after the scripts (Game.init): register once it's there
   const _init = Game.init;
   if (typeof _init === 'function') {

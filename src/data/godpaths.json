@@ -871,7 +871,7 @@
           "hint": "Trade food stores for delivered tools, gear or alien goods."
         },
         "play": {
-          "_doc": "Name Your Price + Buy Passage + Gilded Guard (godhood.js prices). Buy Passage is a combat action (once per fight, not on titans: the big ones do not haggle); Name Your Price is a daily action (no target: the market brings the best weapon you lack). The Guard coins never stop a beam. The Audit collects at dawn when 3 markers are due. Villager Market Gods carry the coins and buy passage from their belly.",
+          "_doc": "Name Your Price + Buy Passage + Gilded Guard (godhood.js prices). Buy Passage is a combat action (once per fight, not on titans: the big ones do not haggle); Name Your Price is a daily action (no target: the market brings the best weapon you lack). The Guard coins never stop a beam. The Audit collects at dawn when 3 markers are due. Villager Market Gods carry the coins and buy passage from their belly. CONTEST: sponsor contests lean for the ascended holder by contestLean — The Price (price) moot case scores in _cxMoot and The Auction (auction) bid capacity in _cxChance; money talks to judges but stays RISKY: auction winners (and losers) still pay their bid. Not cookfight/impress/moot/drop/whoate/lies/wheel — Garden/Voice/Unkillable/All-Seeing keep those, and other chance theater is not sponsor bidding.",
           "actions": [
             {
               "id": "buy_passage",
@@ -894,7 +894,12 @@
               "perDay": 1,
               "effect": "A trader brings exactly what you name (default: the best weapon you lack). 800/2000/5000 kcal by tier; relics are lent for 2 markers."
             }
-          ]
+          ],
+          "sponsorContests": [
+            "price",
+            "auction"
+          ],
+          "contestLean": 18
         }
       }
     },

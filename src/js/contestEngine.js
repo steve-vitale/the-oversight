@@ -20,6 +20,7 @@
 //   - voice_performance_lean: Voice of the Relay CONTEST scale — impress making scores and moot case scores add voicePerformanceLeanFor for an ascended holder (player or NPC); feast contests stay Garden-only (code: _cxOther, _cxMoot, godverbs.js voicePerformanceLeanFor; OVE-104)
 //   - unkillable_endurance_lean: Unkillable CONTEST scale — endurance arms honor unkillableEnduranceLeanFor for an ascended holder (player or NPC): starve HP/days, drop/exchange survival-for-time, maw/vigil nerve; feast/performance stay Garden/Voice (code: _cxEndurance, godverbs.js unkillableEnduranceLeanFor; OVE-108)
 //   - all_seeing_strategy_lean: All-Seeing CONTEST scale — puzzle/detective scores and lies case scores add allSeeingStrategyLeanFor for an ascended holder (player or NPC); feast/performance/endurance stay Garden/Voice/Unkillable (code: _cxOther, _cxMoot, godverbs.js allSeeingStrategyLeanFor; OVE-110)
+//   - market_sponsor_lean: Market God CONTEST scale — price moot case scores and auction bid capacity add marketSponsorLeanFor for an ascended holder (player or NPC); auction still pays (risky); feast/performance/endurance/strategy stay Garden/Voice/Unkillable/All-Seeing (code: _cxMoot, _cxChance, godverbs.js marketSponsorLeanFor; OVE-113)
 // consumes:
 //   - fieldFight (fieldFights.js), monsterWavePool, unlockedWave
 //   - Game.agencyOf, Game.npcTemper, village health, scholar trust
@@ -28,6 +29,7 @@
 //   - Game.voicePerformanceLeanFor (godverbs.js) for performance contest score lean
 //   - Game.unkillableEnduranceLeanFor (godverbs.js) for endurance contest lean
 //   - Game.allSeeingStrategyLeanFor (godverbs.js) for strategy contest score lean
+//   - Game.marketSponsorLeanFor (godverbs.js) for sponsor contest lean (price case / auction bid)
 /* CONTEST ENGINE — src/js/contestEngine.js
  *
  * Steve (2026-10-08): "No, contests are to be played, not as RNG."
@@ -434,7 +436,9 @@
       // (moot oratory) lean for an ascended Voice holder — the show is theirs.
       // All-Seeing CONTEST scale (OVE-110): strategy-bluff Lie Detector (lies)
       // case scores lean for an ascended All-Seeing holder — nobody bluffs
-      // them. Voice's moot oratory and All-Seeing's lies are different IDs.
+      // them. Market God CONTEST scale (OVE-113): sponsor The Price (price)
+      // case scores lean for an ascended Market holder — money talks to
+      // judges. Voice moot / All-Seeing lies / Market price are different IDs.
       const voiceLean = (pid) => {
         try {
           if (typeof this.voicePerformanceLeanFor === 'function')
@@ -449,9 +453,16 @@
         } catch (e) { console.warn('[contest] all-seeing strategy lean', e); }
         return 0;
       };
+      const sponsorLean = (pid) => {
+        try {
+          if (typeof this.marketSponsorLeanFor === 'function')
+            return this.marketSponsorLeanFor(pid, contest) || 0;
+        } catch (e) { console.warn('[contest] market sponsor lean', e); }
+        return 0;
+      };
       if (pids.length === 1) {
         const pid = pids[0];
-        const score = this._cxCaseScore(pid, opts.cheerLift || 0) + voiceLean(pid) + strategyLean(pid);
+        const score = this._cxCaseScore(pid, opts.cheerLift || 0) + voiceLean(pid) + strategyLean(pid) + sponsorLean(pid);
         const st = this._cxStats(pid);
         if (score >= demand) return { [pid]: { outcome: 'won', detail: `case ${score.toFixed(1)} vs demand ${demand}`, log: [`${st.name} makes the case. The audience is the jury, and the jury can count.`] } };
         if (score >= demand * 0.6) return { [pid]: { outcome: 'lost', detail: `case ${score.toFixed(1)} vs demand ${demand}`, log: [`${st.name}'s case doesn't hold. The audience looks away.`] } };
@@ -461,7 +472,7 @@
         return { [pid]: { outcome: 'lost', detail: `case ${score.toFixed(1)} vs demand ${demand}`, log: [`${st.name}'s case doesn't hold.`] } };
       }
       // head-to-head (lies, p2)
-      const scores = pids.map(pid => ({ pid, score: this._cxCaseScore(pid, opts.cheerLift || 0) + voiceLean(pid) + strategyLean(pid) }));
+      const scores = pids.map(pid => ({ pid, score: this._cxCaseScore(pid, opts.cheerLift || 0) + voiceLean(pid) + strategyLean(pid) + sponsorLean(pid) }));
       scores.sort((x, y) => y.score - x.score);
       const top = scores[0], second = scores[1];
       if (second && Math.abs(top.score - second.score) < 0.5) {
@@ -770,11 +781,22 @@
     _cxChance: function(pids, contest) {
       const results = {};
       if (contest.id === 'auction') {
-        // Everyone bids; everyone pays. Bid = min(hp-20, 10 + bravery/2 + nota*3).
+        // Everyone bids; everyone pays. Bid = min(hp-20, 10 + bravery/2 + nota*3)
+        // + Market sponsor lean (OVE-113). Money talks — but the winner still
+        // pays the full bid and losers still pay half. Lean is bid capacity,
+        // never a free win or waived payment.
+        const sponsorLean = (pid) => {
+          try {
+            if (typeof this.marketSponsorLeanFor === 'function')
+              return this.marketSponsorLeanFor(pid, contest) || 0;
+          } catch (e) { console.warn('[contest] market sponsor auction lean', e); }
+          return 0;
+        };
         const bids = {};
         for (const pid of pids) {
           const st = this._cxStats(pid);
-          bids[pid] = Math.min(st.hp - 20, 10 + st.bravery / 2 + st.nota * 3);
+          const lean = sponsorLean(pid);
+          bids[pid] = Math.min(st.hp - 20, 10 + st.bravery / 2 + st.nota * 3 + lean);
         }
         const winBid = Math.max(...pids.map(pid => bids[pid]));
         const winnerPid = pids.find(q => bids[q] === winBid);
