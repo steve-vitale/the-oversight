@@ -425,15 +425,10 @@ Seed set to 81 with the hunt recorded in the test's comment.
 
 ## CLOSEOUT
 
-[r160 adoption, in progress 2026-11-09T05:3xZ] Commit 1 (this note's
-telemetry + adoption verification above, the fix, seed-81 test change,
-proof test, driver/analyzer, gate logs) lands first; rebase onto
-explicit master SHA + re-run of both proofs + check.js --quick gate
-follow, then this section is completed in commit 2 with the rebased
-gate result and merge SHA. Pre-rebase gate evidence: the 03:00Z
-adoption's gate-adopt run (db7fb1c6a + fix, seed 63) finished
-293 passed / 7 failed — the 6 standing failures (measurement-proof-
-update, measurement-workflow, mobile-combat-cadence, occupation-
-panels, phone-frame-proof, establishment-r20-fixes) plus
-test-capable-bot at seed 63; seed 81 is expected to clear the 7th
-on the rebased gate.
+## CLOSEOUT
+
+Adoption completed by the r160 run (Lane B 23:00 occurrence, timed out at closeout verification; main session finished the bookkeeping). Commit 1 (`f496b0072`, rebased onto explicit master SHA `c0763d194` — master unchanged since, verified before merge): the no-words foreign-phrase dedupe fix in `src/js/conversation.js`, capable-bot re-seed to 81 (40/0 in isolation), proof test `scripts/test-journey-crisis-r156-nv-foreign.js` (RED 6 / GREEN 8 as recorded), driver/analyzer, gate-adopt logs. Proofs re-run GREEN on the rebased tree.
+
+Rebased gate: `check.js --quick` **293 passed / 7 failed in 916s** (log `evidence/2026-11-08/journey-crisis-r156-gate-rebased.log`). Attribution, verified by the main session: 2× measurement-proof staleness (`test-measurement-proof-update`, `test-measurement-workflow` — the fix touches `src/js/conversation.js`, a manifest input, so it re-stales the proof; a neutral-proof refresh is owed after this merge, same pattern as fightblend); 4× standing failures (`test-mobile-combat-cadence`, `test-occupation-panels`, `test-phone-frame-proof`, `test-establishment-r20-fixes`); 1× `test-capable-bot-20261014` at the 120s limit (exit null — a load timeout flake; the fixture passes in isolation at seed 81, 40/0). Seed 81 did not clear the gate-timeout because the timeout is load, not the seed. **No new attributable failure from the fix.**
+
+Telemetry quiet (per the adoption record). Merged ff-only from branch `journey2-crisis`; master tip after merge is recorded in the convergence tracker. Worktree released done-merged, branch deleted; rotation-b advanced 6 → 7 (next leg: succession); Lane B lock deleted at closeout.
