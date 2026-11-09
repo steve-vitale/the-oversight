@@ -39,6 +39,7 @@
 //   - odds_are_entertainment: the System's posted odds are wrong on purpose. That's the joke. (code: titans.js)
 //   - knowledge_gates_titans: omen stages 0 (something) -> 1 (named) -> 2 (located). No name before exposure. (code: titans.js)
 //   - garden_army_muster_feed: Living Garden ARMY scale — titanMusterUpkeep honors Game.gardenMusterFeedFor before/alongside playerPackSpend when an ascended Garden holder has harvestDay active; covered kcal skip pack debit and hunger trust bleed (code: titanMusterUpkeep, godverbs.js gardenMusterFeedFor; OVE-116)
+//   - market_army_outfit_lean: Market God ARMY scale — titanOutfit honors Game.marketOutfitLeanFor so the same transferred pieces yield higher force wbonus/varmor/gearValue when an ascended Market holder is active (code: titanOutfit, godverbs.js marketOutfitLeanFor; OVE-120)
 
 (function () {
   // ATTACH PATTERN (crisis 2026-10-11): game.js only sets
@@ -944,6 +945,8 @@
 
   // titanOutfit(villageId, itemIndexes[]): transfer REAL items from the player's
   // inventory to an allied force. Items leave. Effectiveness is real.
+  // Market ARMY (OVE-120): call marketOutfitLeanFor through Game so proofs can
+  // strip the helper — same pieces, higher force wbonus/varmor/gearValue.
   function titanOutfit(titanId, villageId, itemIndexes) {
     var st = titanState();
     var muster = st.musters[titanId];
@@ -962,6 +965,13 @@
       given.push(it);
     });
     if (!given.length) { Game.say('Nothing to give — or nothing you can part with.'); return null; }
+    var leanPct = 0;
+    try { leanPct = Game.marketOutfitLeanFor ? Game.marketOutfitLeanFor() : 0; } catch (e) { leanPct = 0; }
+    if (!(leanPct > 0)) leanPct = 0;
+    function leanScale(n) {
+      if (!leanPct) return n;
+      return Math.round(n * (100 + leanPct) / 100);
+    }
     // distribute across the force's fighters; compute effectiveness
     var givenCount = given.length;
     var per = Math.floor(given.length / force.length), rem = given.length % force.length;
@@ -971,26 +981,32 @@
         var g = given.pop();
         if (!g) break;
         f.outfitted.push(g);
-        f.gearValue += titanGearValue(g);
       }
-      // effectiveness: recompute from outfitted gear
-      var wb = 0, ar = 0;
+      // effectiveness: recompute from all outfitted gear, then Market lean
+      var wb = 0, ar = 0, gv = 0;
       f.outfitted.forEach(function (g) {
         var def = null;
         try { def = Game.data.items.find(function (x) { return x.id === (g.itemId || g.id); }); } catch (e) {}
         if (def && def.weapon && def.weapon.bonus) wb += def.weapon.bonus;
         if (def && def.armor) ar += (typeof def.armor === 'number' ? def.armor : 10);
+        gv += titanGearValue(g);
       });
-      f.wbonus = wb; f.varmor = Math.min(ar, 40);
+      f.wbonus = leanScale(wb);
+      f.varmor = Math.min(leanScale(ar), 40);
+      f.gearValue = leanScale(gv);
     });
     var totalV = force.reduce(function (s, f) { return s + f.gearValue; }, 0);
     var ov = null;
     try { ov = Game._otherVillage(villageId); } catch (e) {}
-    Game.say('🎒 Outfitted ' + ((ov && ov.name) || 'them') + ': ' + givenCount + ' piece' + (givenCount === 1 ? '' : 's') + ' left your pack — for good. Their blades are heavier now (+' + force.reduce(function (s, f) { return s + (f.wbonus || 0); }, 0) + ' strike, +' + force.reduce(function (s, f) { return s + (f.varmor || 0); }, 0) + ' guard across the force). What you gave is gone. What it bought is real.');
+    var line = '🎒 Outfitted ' + ((ov && ov.name) || 'them') + ': ' + givenCount + ' piece' + (givenCount === 1 ? '' : 's') + ' left your pack — for good. Their blades are heavier now (+' + force.reduce(function (s, f) { return s + (f.wbonus || 0); }, 0) + ' strike, +' + force.reduce(function (s, f) { return s + (f.varmor || 0); }, 0) + ' guard across the force). What you gave is gone. What it bought is real.';
+    if (leanPct > 0) {
+      line += ' The Market quarters them — same gear, heavier blades (quartermaster lean +' + leanPct + '%).';
+    }
+    Game.say(line);
     try { if (Game.recordMoment) Game.recordMoment('Outfitted the ' + ((ov && ov.name) || 'allied') + ' force (' + totalV + ' value).'); } catch (e) {}
     // telegraph: arming someone is SEEN. Gossip notices.
     titanTelegraphArming(titanId, villageId);
-    return { given: givenCount, value: totalV };
+    return { given: givenCount, value: totalV, lean: leanPct };
   }
 
   function titanTelegraphArming(titanId, villageId) {
