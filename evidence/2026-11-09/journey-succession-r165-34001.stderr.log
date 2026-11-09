@@ -1,0 +1,33 @@
+
+PRE-DEATH d42: bearer <redacted>, topTrust=[{"id":"Wanda","t":90},{"id":"Dakota","t":90},{"id":"Chaymae","t":90},{"id":"Katarina","t":90}], roster=10
+INH readable=true scripted=true deadItems=13 distinct=13 transferred=1 vanished=4 keptPlants=21 inheritedPlants=4 keptSkills=5 inheritedSkills=17 succTrustPre=90 succTrustPost=59
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","echo_location"] post=["beast_calm","echo_location"]
+DEATH d42 (the expedition, scripted): Marcus -> Wanda | passed=true lin=true mo=true trust=59 vouchers=5
+  BURIAL d+4: corpse found=true respects=true bury=true
+  INH d+4: transferred=1 vanished=4 of 13 distinct dead-bearer items
+  CONVO d+3 with Dakota (refused=false)
+  CONVO d+3 with Chaymae (refused=false)
+  STRANGER-PROBE d+3 with Raj (trust=14 refused=false)
+  BOND-CONVO d+3 with Chantal (depth=1 v=48 refused=false)
+  CONVO d+7 with Dakota (refused=false)
+  CONVO d+7 with Chaymae (refused=false)
+  CONVO d+14 with Dakota (refused=false)
+  CONVO d+14 with Chaymae (refused=false)
+  BOND-CONVO d+14 with Chantal (depth=1 v=48 refused=false)
+
+FUNERAL: deathBeat=3 recover=1 vouch=1 (eligible=5) echo=7 organicBurial={"respects":false,"bury":false} halfRation=0
+
+MEAL-GATE: audited=30 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=29 signals={"levelUp":true,"systemVoice":38,"offerLines":16,"codexPlantsDelta":1,"codexSkillsDelta":10,"codexAbilitiesDelta":5,"xpDelta":60,"any":true} pantry 12597->34120
+TRUST-DIALS: office 59->65 (+6, climb) | villageMean 68.3->85.9 (+17.6, climb) | ge60 5->7 | movers>=5: [{"id":"James","from":52,"to":78,"delta":26},{"id":"Petra","from":51,"to":71,"delta":20},{"id":"Chantal","from":76,"to":91,"delta":15},{"id":"Katarina","from":91,"to":86,"delta":-5}]
+DEED-LEDGER: calls=24 summary={"teachPlant":{"calls":18,"ok":18,"deltaSum":0,"deltaN":18,"positive":0,"meanDelta":0},"giveFood":{"calls":6,"ok":6,"deltaSum":5,"deltaN":6,"positive":5,"meanDelta":0.83}}
+
+IDENTITY TRIPS: raw=3 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=7 (convo=7, say=0)) m4=true m5=manual | endDay=71 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=29
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+29) t2=true(deedCalls=24) trustVerdict={"readable":true,"officeMantle":59,"officeLast":65,"officeDelta":6,"officeClass":"climb","villageMantle":68.3,"villageLast":85.9,"villageDelta":17.6,"villageClass":"climb","villageGe60Mantle":5,"villageGe60Last":7,"movers":[{"id":"James","from":52,"to":78,"delta":26},{"id":"Petra","from":51,"to":71,"delta":20},{"id":"Chantal","from":76,"to":91,"delta":15},{"id":"Katarina","from":91,"to":86,"delta":-5}]}
+E6/CALLCHECK: e6={"callMoves":4,"withCensus":4,"chainHandoffs":0,"trustMoves":4} callCheck={"dailyMoveDays":4,"callMoveDays":4,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=8 (v2=8, excludedLoot=0))
+E7/R47: e7={"trustMoves":4,"soloOffice":3,"soloOfficeDeltas":[1,1,2],"soloBearerDeltaExact":[1,1,2],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":1,"both":3,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":7,"v2":8,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":0,"known":0,"unknown":0} e3={"dailyDays":31,"moves":4}

@@ -1,0 +1,34 @@
+
+PRE-DEATH d40: bearer <redacted>, topTrust=[{"id":"Emma","t":97},{"id":"Pablo","t":90},{"id":"Dilnaz","t":90},{"id":"Sari","t":90}], roster=12
+INH readable=true scripted=true deadItems=8 distinct=8 transferred=0 vanished=3 keptPlants=17 inheritedPlants=2 keptSkills=6 inheritedSkills=9 succTrustPre=97 succTrustPost=62
+PARITY readable=true equal=true inherited=[] pre=["the_touch","purify","rage","battlefield_grace","dowsing","translator"] post=["the_touch","purify","rage","battlefield_grace","dowsing","translator"]
+DEATH d40 (the expedition, scripted): Felicia -> Emma | passed=true lin=true mo=true trust=62 vouchers=10
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=0 vanished=3 of 8 distinct dead-bearer items
+  CONVO d+3 with Pablo (refused=false)
+  CONVO d+3 with Dilnaz (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Pablo (refused=false)
+  CONVO d+7 with Dilnaz (refused=false)
+  CONVO d+14 with Dilnaz (refused=false)
+  CONVO d+14 with Pablo (refused=false)
+  NEWCOMER-PROBE: Priya already bonded on arrival day — no convo driven
+  CONVO d+30 with Hassan (refused=false)
+  CONVO d+30 with Dale (refused=false)
+
+FUNERAL: deathBeat=11 recover=1 vouch=1 (eligible=10) echo=2 organicBurial={"respects":false,"bury":false} halfRation=6
+
+MEAL-GATE: audited=30 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=31 signals={"levelUp":true,"systemVoice":28,"offerLines":21,"codexPlantsDelta":17,"codexSkillsDelta":12,"codexAbilitiesDelta":4,"xpDelta":-104,"any":true} pantry 90755->37219
+TRUST-DIALS: office 62->73 (+11, climb) | villageMean 87.8->55.3 (-32.5, fall) | ge60 10->2 | movers>=5: [{"id":"Hassan","from":90,"to":84,"delta":-6}]
+DEED-LEDGER: calls=12 summary={"giveFood":{"calls":8,"ok":8,"deltaSum":30,"deltaN":8,"positive":8,"meanDelta":3.75},"donateToPantry":{"calls":4,"ok":4,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=2 (convo=2, say=0)) m4=true m5=manual | endDay=71 alive=5 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=31
+T-METRICS: t1=true(panels=d+0,d+8,d+15,d+30,d+31) t2=true(deedCalls=12) trustVerdict={"readable":true,"officeMantle":62,"officeLast":73,"officeDelta":11,"officeClass":"climb","villageMantle":87.8,"villageLast":55.3,"villageDelta":-32.5,"villageClass":"fall","villageGe60Mantle":10,"villageGe60Last":2,"movers":[{"id":"Hassan","from":90,"to":84,"delta":-6}]}
+E6/CALLCHECK: e6={"callMoves":9,"withCensus":9,"chainHandoffs":6,"trustMoves":3} callCheck={"dailyMoveDays":9,"callMoveDays":9,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=4 (v2=4, excludedLoot=0))
+E7/R47: e7={"trustMoves":3,"soloOffice":2,"soloOfficeDeltas":[1,1],"soloBearerDeltaExact":[1,1],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":0,"both":3,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":2,"v2":4,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":8,"known":8,"unknown":0} e3={"dailyDays":31,"moves":9}
