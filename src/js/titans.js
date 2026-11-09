@@ -25,6 +25,7 @@
 //   - titanReleaseCommitted(titanId) -> Haven's committed come home (shared with network-campaign.js)
 //   - titanStandDown(titanId) -> break an out-of-combat muster, release its workforce and stop upkeep
 //   - titanLastStandingContinuity() -> Unkillable ARMY last-standing refuse-rout when Game.unkillableLastStandingLeanFor > 0 and holder is last living ours blade
+//   - titanBreachPourThrough() -> One-Person Army ARMY breach pour-through when Game.opaBreachLeanFor > 0 and holder opens the titan front
 //   - _titanTest (test hooks: internals exposed for proof tests)
 //   - titanTemptation(villageId) -> {temptation, loyalty, verdict} (the turn's math, visible at council)
 // rules:
@@ -43,6 +44,7 @@
 //   - market_army_outfit_lean: Market God ARMY scale — titanOutfit honors Game.marketOutfitLeanFor so the same transferred pieces yield higher force wbonus/varmor/gearValue when an ascended Market holder is active (code: titanOutfit, godverbs.js marketOutfitLeanFor; OVE-120)
 //   - all_seeing_army_council_lean: All-Seeing ARMY scale — titanWarCouncil honors Game.allSeeingCouncilLeanFor so readiness honesty, scout-intel clarity, and counter-hint reveal lean when an ascended All-Seeing holder is active (code: titanWarCouncil, godverbs.js allSeeingCouncilLeanFor; OVE-128)
 //   - unkillable_last_standing_army_lean: Unkillable ARMY scale — titanLastStandingContinuity honors Game.unkillableLastStandingLeanFor so when the ascended Unkillable holder is the last living ours blade in a titan fight, refuse rout / steadiness + last-standing beat (code: titanLastStandingContinuity, godverbs.js unkillableLastStandingLeanFor; OVE-136)
+//   - opa_breach_army_lean: One-Person Army ARMY scale — titanBreachPourThrough honors Game.opaBreachLeanFor so when the ascended OPA holder opens the front in a titan fight (adjacent to a living titan, or Turn the Pain lands on one), coalition blades pour through the breach — steadiness + pour-count + breach beat; does not re-label partyRallyAt or titanPain (code: titanBreachPourThrough, godverbs.js opaBreachLeanFor; OVE-140)
 
 (function () {
   // ATTACH PATTERN (crisis 2026-10-11): game.js only sets
@@ -1613,6 +1615,117 @@
     return out;
   }
 
+  // ---------- One-Person Army ARMY: breach pour-through (OVE-140) ----------
+  // god.scale.army: "You are the breach the coalition pours through."
+  // When an ascended OPA holder opens the front in a titan/coalition fight
+  // (adjacent to a living titan, or Turn the Pain lands on one), coalition
+  // blades pour through: steadiness + pour-count + breach beat. Called from
+  // Turn the Pain (and proofs) through Game so the helper can be stripped.
+  // Distinct from PARTY partyRallyAt and TITAN titanPain.
+  function titanCheb(a, b) {
+    return Math.max(Math.abs(((a && a.mx) || 0) - ((b && b.mx) || 0)),
+      Math.abs(((a && a.my) || 0) - ((b && b.my) || 0)));
+  }
+  function titanFighterIsOpaHolder(x) {
+    try {
+      if (!x) return false;
+      if (x.kind === 'player' || x.key === 'p') return Game.holderGod && Game.holderGod('player') === 'one_person_army';
+      if (x.villagerId) return Game.holderGod && Game.holderGod(x.villagerId) === 'one_person_army';
+    } catch (e) {}
+    return false;
+  }
+  function titanLiveMons(f) {
+    var out = [];
+    ((f && f.fighters) || []).forEach(function (x) {
+      if (!x || x.alive === false || x.fled || (x.hp || 0) <= 0) return;
+      if (x.kind === 'monster' || x.kind === 'hostile' || x.titan) out.push(x);
+    });
+    return out;
+  }
+  function titanBreachPourThrough(opts) {
+    var lean = 0;
+    try { lean = Game.opaBreachLeanFor ? Game.opaBreachLeanFor() : 0; } catch (e) { lean = 0; }
+    if (!(lean > 0)) lean = 0;
+    var f = Game.tbfight;
+    var empty = {
+      lean: lean,
+      titan: false,
+      breachOpen: false,
+      poured: 0,
+      steadiness: 0,
+      oursAlive: 0,
+      holderAlive: false,
+      adjacent: false,
+      openedBy: (opts && opts.openedBy) || null,
+    };
+    if (!f || f.over) return empty;
+    var titan = titanFightLive();
+    var ours = titanOursAlive(f);
+    var holders = ours.filter(titanFighterIsOpaHolder);
+    var out = {
+      lean: lean,
+      titan: !!titan,
+      breachOpen: false,
+      poured: 0,
+      steadiness: 0,
+      oursAlive: ours.length,
+      holderAlive: holders.length > 0,
+      adjacent: false,
+      openedBy: (opts && opts.openedBy) || null,
+    };
+    if (!titan || !(lean > 0) || !holders.length) return out;
+    var opener = (opts && opts.opener) || null;
+    if (opener && holders.indexOf(opener) < 0) {
+      // Only an OPA holder can open the breach for this army lean.
+      if (!titanFighterIsOpaHolder(opener)) return out;
+      holders = [opener];
+    }
+    var mons = titanLiveMons(f).filter(function (m) {
+      return !!(m.titan || (m.id && titanDefs()[m.id]) || m.kind === 'monster');
+    });
+    if (!mons.length) return out;
+    var holder = null;
+    var adjacent = false;
+    var forceOpen = !!(opts && (opts.forceOpen || opts.openedBy === 'turn_the_pain'));
+    for (var i = 0; i < holders.length; i++) {
+      var h = holders[i];
+      for (var j = 0; j < mons.length; j++) {
+        if (titanCheb(h, mons[j]) <= 1) { holder = h; adjacent = true; break; }
+      }
+      if (adjacent) break;
+    }
+    if (!adjacent && forceOpen && holders.length) {
+      // Turn the Pain already required reach-1 contact; proofs may stamp
+      // forceOpen when the opener is known to have opened the front.
+      holder = (opener && titanFighterIsOpaHolder(opener)) ? opener : holders[0];
+      adjacent = true;
+    }
+    out.adjacent = adjacent;
+    if (!adjacent || !holder) return out;
+    var coalition = ours.filter(function (x) { return x !== holder; });
+    if (!coalition.length) return out;
+    out.breachOpen = true;
+    out.steadiness = lean;
+    out.poured = coalition.length;
+    f.breachOpen = true;
+    f.breachPoured = coalition.length;
+    f.breachSteadiness = lean;
+    var rounds = Math.max(2, lean + 1);
+    coalition.forEach(function (a) {
+      a.pouredThrough = true;
+      a.rallied = Math.max(a.rallied || 0, rounds);
+      a.rallyBuff = Math.max(a.rallyBuff || 0, rounds);
+    });
+    holder.breachOpen = true;
+    if (!f._breachPourSaid) {
+      f._breachPourSaid = true;
+      Game.say('\u2694\uFE0F You are the breach the coalition pours through \u2014 ' +
+        coalition.length + ' blade' + (coalition.length === 1 ? '' : 's') + ' surge' +
+        (coalition.length === 1 ? 's' : '') + ' in.');
+    }
+    return out;
+  }
+
   // ---------- attach ----------
 
   var methods = {
@@ -1628,6 +1741,7 @@
     titanSelfDo: titanSelfDo,
     titanStandDown: titanStandDown,
     titanLastStandingContinuity: titanLastStandingContinuity,
+    titanBreachPourThrough: titanBreachPourThrough,
     titanOutfit: titanOutfit,
     titanTemptation: titanTemptation,
     titanMusterReady: titanMusterReady,
@@ -1677,6 +1791,7 @@
     titanResolveOutcome: titanResolveOutcome,
     titanOutcomeLog: titanOutcomeLog,
     titanLastStandingContinuity: titanLastStandingContinuity,
+    titanBreachPourThrough: titanBreachPourThrough,
   };
 
   // wraps must apply after game.js defines the originals
