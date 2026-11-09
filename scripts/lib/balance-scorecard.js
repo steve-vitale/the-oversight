@@ -94,6 +94,67 @@ function sweepMetric(row, id) {
 }
 const policyOfSweepRow = r => (r.policy != null ? String(r.policy) : String(r.arm));
 const sweepKey = r => policyOfSweepRow(r) + ':' + r.seed;
+// ---- Table-reach derivation for sweep rows (sim-sitmetric-sweep-b,
+// 2026-11-08) ----
+// The judged `table` metric on the sweep path IS the raw invitation
+// flag (sweepMetric above), so the compare cannot tell "invited and
+// never sat" from "never invited". These helpers read the row's own
+// signals only, never invented:
+//   invited: the flat row.table flag (true sweep rows), else the
+//     row.tableInvited alias, else the row's own daily snapshots
+//     (tableWaiting ever set — sitstep instrument rows carry no flat
+//     flag). Null when the row carries no invitation signal at all.
+//   sat: the flat row.entered flag, else the taken-signal set — the
+//     seatTakenOf signal order in scripts/lib/seat-taken.js, mirrored
+//     here rather than required: that file is outside the
+//     balance-panel.js observer list, so a runtime require would let
+//     the compare change without invalidating the maintenance proof.
+//     A cross-check test (test-sitmetric-sweep-b.js) asserts this
+//     mirror agrees with seatTakenOf on every re-run corpus row.
+//     Null when the row carries no taken/not-taken signal at all.
+// A sit recorded by ANY signal counts. A row whose present signals
+// all say "no" is not-taken. Both signals travel together on every
+// real corpus shape (sweep rows carry both flags; instrument rows
+// carry both daily fields); the tableReach null-gate below is on the
+// invitation side, as in the §15 compare.
+function sweepInvitedOf(row) {
+  if (!row || typeof row !== 'object') return null;
+  if (row.table != null) return asBinary(row.table);
+  if (row.tableInvited != null) return asBinary(row.tableInvited);
+  if (Array.isArray(row.daily)) {
+    if (!row.daily.some(function (d) { return d && Object.hasOwn(d, 'tableWaiting'); })) return null;
+    return row.daily.some(function (d) { return d && d.tableWaiting; }) ? 1 : 0;
+  }
+  return null;
+}
+function sweepSatOf(row) {
+  if (!row || typeof row !== 'object') return null;
+  if (row.entered != null) return asBinary(row.entered);
+  if (typeof row.seatTaken === 'boolean') return row.seatTaken ? 1 : 0;
+  let signal = false;
+  const ts = row.takeseatStats;
+  if (ts && typeof ts === 'object') {
+    signal = true;
+    if ((ts.seatTaken | 0) > 0) return 1;
+  }
+  if (Array.isArray(row.sitAttempts)) {
+    signal = true;
+    if (row.sitAttempts.some(function (a) { return a && a.ok; })) return 1;
+  }
+  if (Array.isArray(row.daily)) {
+    signal = true;
+    if (row.daily.some(function (d) { return d && d.tableDone; })) return 1;
+  }
+  return signal ? 0 : null;
+}
+function sweepTableReach(beforeRows, afterRows) {
+  const invitedObserved = beforeRows.concat(afterRows).some(function (r) { return sweepInvitedOf(r) !== null; });
+  if (!invitedObserved) return null;
+  const count = function (rows, fn) { return rows.filter(function (r) { return fn(r) === 1; }).length; };
+  return { invitedBefore: count(beforeRows, sweepInvitedOf), invitedAfter: count(afterRows, sweepInvitedOf),
+    sittingsBefore: count(beforeRows, sweepSatOf), sittingsAfter: count(afterRows, sweepSatOf), cases: afterRows.length,
+    note: 'Raw row.table (table invitation ever observed) alongside sittings (row.entered, or the taken-signal on instrument rows). Display only; never a judged metric and never part of the decision.' };
+}
 function isSweepRow(row) {
   return !!row && typeof row === 'object' && !row.row && !row.metrics
     && (row.policy != null || row.arm != null) && row.seed != null;
@@ -116,7 +177,18 @@ function compareSweepCorpora(beforeDoc, afterDoc) {
     const all = aRows.filter(r => policyOfSweepRow(r) === policy), rs = all.filter(r => bm.has(sweepKey(r)));
     const metrics = contract.metrics.map(m => compareMetric(rs.map(r => sweepMetric(bm.get(sweepKey(r)), m.id)), rs.map(r => sweepMetric(r, m.id)), m, policy + '/' + m.id));
     const review = metrics.filter(m => !['descriptive', 'no_material_signal'].includes(m.status));
-    return { policy, cases: rs.length, confirmationSized: rs.length >= contract.confirmationSeeds, decision: review.length ? 'review_required' : 'no_material_signal', metrics };
+    // TABLE REACH, RAW (sim-sitmetric-sweep-b, 2026-11-08): the same
+    // side-by-side treatment the §15 compare got. The judged `table`
+    // metric on this path is the raw invitation flag, so a corpus
+    // where villages are invited and never sit reads exactly like
+    // one where they are never invited. DISPLAY ONLY: computed from
+    // the rows, never a contract metric, never part of the decision
+    // (review is computed above, from metrics only), and the
+    // contract file is untouched (digest unchanged). Null when
+    // neither leg carries the invitation signal, so a missing flag
+    // is never printed as a false 0.
+    const tableReach = sweepTableReach(rs.map(r => bm.get(sweepKey(r))), rs);
+    return { policy, cases: rs.length, confirmationSized: rs.length >= contract.confirmationSeeds, decision: review.length ? 'review_required' : 'no_material_signal', metrics, tableReach };
   });
   return { schemaVersion: 1, source: 'sweep-corpus', decision: out.some(p => p.decision === 'review_required') ? 'review_required' : 'no_material_signal', errors: [], policies: out,
     note: 'Sweep-corpus comparison, NOT a balanced-panel verdict: rows paired by policy+seed; only won/entered/table/national/playerDeaths are carried by per-seed sweep rows, and every other contract metric is not_observed, never imputed. For a §15 panel verdict, build real panels with scripts/balance-panel.js.' };
@@ -243,4 +315,4 @@ function markdown(report) {
   lines.push('', report.note || 'Invalid comparisons must be repaired before interpretation.', '');
   return lines.join('\n');
 }
-module.exports = { mean, quantile, interval, compareMetric, comparePanels, compareSweepCorpora, isSweepCorpus, sweepMetric, markdown, contract, contractDigest };
+module.exports = { mean, quantile, interval, compareMetric, comparePanels, compareSweepCorpora, isSweepCorpus, sweepMetric, sweepInvitedOf, sweepSatOf, sweepTableReach, markdown, contract, contractDigest };
