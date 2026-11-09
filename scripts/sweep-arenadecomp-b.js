@@ -16,13 +16,27 @@
 //   2. Sickness wrappers DROPPED (fever anatomy out of scope here). Kept
 //      verbatim in pattern: the registerDeath capture (EXTENDED with the
 //      arena snapshot — see below; still the documented exception: no
-//      Game-state writes, no RNG), the say-wrap death sample (+ the
-//      choice-offer line capture), the door-verb wrappers (any sit-verb call
-//      is a loud contradiction: winseek never sits), the lean daily snapshot
-//      (day, pop, healthMap, healerPresent — the entry-HP series the arena
-//      join reads), the fallen list read at run end (full entries incl.
-//      monsterName) for the reused prefloor classifier, and the fresh-child
-//      writeRobust.
+//      Game-state writes, no RNG), the say-wrap death sample, the SYS-SAY
+//      wrap (see instrument note below — the harness silences sysSay, so the
+//      say-wrap alone is DEAF to System lines), the door-verb wrappers (any
+//      sit-verb call is a loud contradiction: winseek never sits), the lean
+//      daily snapshot (day, pop, healthMap, healerPresent — the entry-HP
+//      series the arena join reads), the fallen list read at run end (full
+//      entries incl. monsterName) for the reused prefloor classifier, and the
+//      fresh-child writeRobust.
+//   INSTRUMENT NOTE (sysSay wrap, 2026-11-09): the first instrument build
+//   captured the choice-offer line via the say-wrap only — and measured 0
+//   offers on 55 takes. That zero was an INSTRUMENT ARTIFACT, not a game
+//   finding: scripts/sim-harness.js silences BOTH G.say and G.sysSay with
+//   no-ops (unless opts.narration), and sysSay is a SEPARATE function that
+//   does NOT route through say — so the choice-offer line (said via
+//   this.sysSay, contests.js:2268) and every contest death line never
+//   reached the say-wrap. The fix wraps G.sysSay call-through (to the
+//   harness no-op): it pushes System lines into the say window + death
+//   sample and counts the choice-offer line. Pure observation — no RNG, no
+//   Game-state writes — so neutrality is unaffected. The 6 seeds run under
+//   the first build were discarded and the full band re-run; no judged
+//   number survives from the broken instrument (see the evidence file).
 //   3. NEW: hurtVillager wrapper (call-through; logs every damage event per
 //      villager per day — vid, dmg, cause, HP before/after, settlement flag,
 //      monsterId/monsterName. This is the sicknessdiag gap (c) fix: the
@@ -124,7 +138,7 @@ async function oneRun(seed, days, opts) {
     deaths: [], deathSeen: new Set(),
     daySeries: [], sayWin: [],
     hurtEvents: [], contestTakes: [], arenaEvents: [], arenaAfterEvents: [],
-    choiceOfferLines: [], choiceOfferCount: 0,
+    choiceOfferLines: [], choiceOfferCount: 0, sysSayLines: [],
     deathSays: [], sitVerbMsgs: [], doorVerbMsgs: [],
     instrumentErrors: [],
   };
@@ -256,23 +270,45 @@ async function oneRun(seed, days, opts) {
   };
 
   if (!bare) {
-    // --- say-wrap death sample (prefloor pattern, tightened word-boundary regex)
-    // + the choice-offer line capture (the engine's only exposed choice signal).
+    // --- say-wrap death sample (prefloor pattern, tightened word-boundary regex).
+    // NOTE: this sees only say() lines. System lines go through sysSay(),
+    // which the harness no-ops — see the sysSay wrap below.
     const oSay = Game.say;
     if (typeof oSay === 'function') Game.say = function (txt) {
       try {
         W.sayWin.push('d' + dayOf() + ' ' + trunc(txt));
         if (W.sayWin.length > 20) W.sayWin.shift();
         if (typeof txt === 'string') {
-          if (/offers you a choice/.test(txt)) {
-            W.choiceOfferCount++;
-            if (W.choiceOfferLines.length < 200) W.choiceOfferLines.push({ day: dayOf(), line: String(txt).slice(0, 300) });
-          }
           if (/\bdead\b|\bdied\b|didn't come back|\bgrave\b|\bburied\b|\bscreams\b|starts digging|\bslain\b|\bis dead\b|\bveteran\b/i.test(txt) && W.deathSays.length < 400) W.deathSays.push({ day: dayOf(), line: String(txt).slice(0, 600) });
         }
       } catch (e) { W.instrumentErrors.push('say-wrap: ' + String(e.message).slice(0, 80)); }
       return oSay.apply(this, arguments);
     };
+
+    // --- sysSay wrap (the choice-offer signal + System death lines). ---
+    // The harness replaces G.sysSay with a no-op (sim-harness.js: "Silence
+    // narration/audio/drama for sims"), and sysSay does NOT route through
+    // say — so without this wrap the instrument is deaf to every System
+    // line, including the choice-offer line (contests.js:2268) and the
+    // contest death lines. Call-through to the harness no-op: pure
+    // observation, no RNG, no Game-state writes. The choice-offer line is
+    // counted HERE only (single source of truth).
+    const oSysSay = Game.sysSay;
+    if (typeof oSysSay === 'function') Game.sysSay = function (txt) {
+      try {
+        const line = String(txt == null ? '' : txt);
+        W.sayWin.push('d' + dayOf() + ' ' + trunc(line));
+        if (W.sayWin.length > 20) W.sayWin.shift();
+        if (W.sysSayLines.length < 400) W.sysSayLines.push({ day: dayOf(), line: line.slice(0, 600) });
+        if (/offers you a choice/.test(line)) {
+          W.choiceOfferCount++;
+          if (W.choiceOfferLines.length < 200) W.choiceOfferLines.push({ day: dayOf(), line: line.slice(0, 300) });
+        }
+        if (/\bdead\b|\bdied\b|didn't come back|\bgrave\b|\bburied\b|\bscreams\b|starts digging|\bslain\b|\bis dead\b|\bveteran\b/i.test(line) && W.deathSays.length < 400) W.deathSays.push({ day: dayOf(), line: line.slice(0, 600) });
+      } catch (e) { W.instrumentErrors.push('sysSay-wrap: ' + String(e.message).slice(0, 80)); }
+      return oSysSay.apply(this, arguments);
+    };
+    else W.instrumentErrors.push('sysSay-missing');
 
     // --- door-verb wrappers: ANY sit-verb call contradicts the no-seat
     // configuration and is a loud contradiction, never smoothed. ---
@@ -466,7 +502,7 @@ async function oneRun(seed, days, opts) {
     hurtEvents: W.hurtEvents,
     contestTakes: W.contestTakes, arenaEvents: W.arenaEvents,
     arenaAfterEvents: W.arenaAfterEvents,
-    choiceOfferLines: W.choiceOfferLines,
+    choiceOfferLines: W.choiceOfferLines, sysSayLines: W.sysSayLines,
     waveKillLog: waveKillLog, contestDeathsById: contestDeathsById,
     contestsHeld: contestsHeld,
     deathSays: W.deathSays, sitVerbMsgs: W.sitVerbMsgs, doorVerbMsgs: W.doorVerbMsgs,
@@ -480,6 +516,7 @@ async function oneRun(seed, days, opts) {
     arenaEventCount: W.arenaEvents.length,
     arenaAfterCount: W.arenaAfterEvents.length,
     choiceOfferCount: W.choiceOfferCount,
+    sysSayLineCount: W.sysSayLines.length,
     sitVerbCount: W.sitVerbMsgs.length, doorVerbCount: W.doorVerbMsgs.length,
     instrumentErrorCount: W.instrumentErrors.length,
   };

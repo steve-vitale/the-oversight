@@ -81,6 +81,7 @@ function checkCorpusArena(corpus) {
   if (corpus.arenaAfterEvents == null) problems.push('arenaAfterEvents missing');
   if (corpus.waveKillLog == null) problems.push('waveKillLog missing');
   if (corpus.contestDeathsById == null) problems.push('contestDeathsById missing');
+  if (corpus.sysSayLines == null) problems.push('sysSayLines missing (sysSay channel not recorded)');
   // Fallen vs deathRows consistency: every fallen entry must have a matching
   // deathRow (same day + same villager id + canonCause-matched cause).
   const fallen = corpus.fallen || [];
@@ -351,6 +352,9 @@ if (require.main === module) {
   let contestsHeldTotal = 0;
   seeds.forEach(function (s) { contestsHeldTotal += (corpora[s].contestsHeld | 0); });
   console.log('contestsHeld total (final, all seeds): ' + contestsHeldTotal);
+  let sysSayTotal = 0;
+  seeds.forEach(function (s) { sysSayTotal += (corpora[s].sysSayLines || []).length; });
+  console.log('sysSay lines captured (channel-live proof): ' + sysSayTotal + ' (expected >0 — the System speaks through sysSay)');
 
   // ---- hurtVillager coverage (the gap (c) instrument) ----
   console.log('\n=== HURT-COVERAGE (death-day attribution) ===');

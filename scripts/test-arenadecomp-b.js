@@ -104,7 +104,7 @@ function synthCorpus(over) {
     waveReach: [1, 2, 3], finalPop: 6,
     deathCauses: {}, deathRows: [], fallen: [], daySeries: synthDaySeries(50, {}),
     hurtEvents: [], contestTakes: [], arenaEvents: [], arenaAfterEvents: [],
-    choiceOfferLines: [], waveKillLog: [], contestDeathsById: {}, contestsHeld: 0,
+    choiceOfferLines: [], sysSayLines: [], waveKillLog: [], contestDeathsById: {}, contestsHeld: 0,
     deathSays: [], sitVerbMsgs: [], doorVerbMsgs: [], instrumentErrors: [],
   };
   return Object.assign(base, over || {});
@@ -201,6 +201,8 @@ const badFallen = synthCorpus({
 check('G1 corpus-check: fallen without deathRow fails', !AD.checkCorpusArena(badFallen).ok);
 const badHurt = synthCorpus({ hurtEvents: null });
 check('G1 corpus-check: missing hurtEvents fails', !AD.checkCorpusArena(badHurt).ok);
+const badSysSay = synthCorpus({ sysSayLines: null });
+check('G1 corpus-check: missing sysSayLines fails (sysSay channel not recorded)', !AD.checkCorpusArena(badSysSay).ok);
 
 // ---- G2/G3 real legs (async) ----
 async function main() {
@@ -214,6 +216,8 @@ async function main() {
     check('G2 real leg seed ' + seed + ': zero sit-verb calls (no-seat config live)', (rec.perSeed.sitVerbMsgs || []).length === 0 && (rec.perSeed.doorVerbMsgs || []).length === 0, 'sit=' + (rec.perSeed.sitVerbMsgs || []).length + ' door=' + (rec.perSeed.doorVerbMsgs || []).length);
     check('G2 real leg seed ' + seed + ': fallen present with day + cause', (rec.perSeed.fallen || []).length > 0 && (rec.perSeed.fallen || []).every(function (f) { return f.day != null && f.cause != null; }), 'fallen=' + (rec.perSeed.fallen || []).length);
     check('G2 real leg seed ' + seed + ': hurt events + contest takes present', (rec.perSeed.hurtEvents || []).length > 0 && (rec.perSeed.contestTakes || []).length > 0, 'hurt=' + (rec.perSeed.hurtEvents || []).length + ' takes=' + (rec.perSeed.contestTakes || []).length);
+    check('G2 real leg seed ' + seed + ': sysSay channel live (System lines captured, not swallowed by the harness no-op)', (rec.perSeed.sysSayLines || []).length > 0, 'sysSayLines=' + (rec.perSeed.sysSayLines || []).length);
+    check('G2 real leg seed ' + seed + ': choice-offer lines array present', Array.isArray(rec.perSeed.choiceOfferLines), 'choiceOfferLines=' + typeof rec.perSeed.choiceOfferLines);
     check('G2 real leg seed ' + seed + ': zero instrument errors', (rec.perSeed.instrumentErrors || []).length === 0, JSON.stringify(rec.perSeed.instrumentErrors || []));
   }
   // Determinism smoke: same seed twice -> identical per-seed JSON.
