@@ -495,7 +495,7 @@
           "efficient_machine"
         ],
         "play": {
-          "_doc": "Phase Out: automatic, once per fight. A hit that would take minFrac of max HP or kill passes through empty air; the holder reappears up to retreat tiles away (phasing is a retreat: any hold or link breaks). TITAN: against a titan-class attacker the phase covers every hit from it that round. PARTY: the Between draws fire (monsters aim at them first). CONTEST: chase/race contests lean for the ascended holder by contestLean — Hide and Seek (hide) seeker spot chance minus contestLean/25 in _cxOther and Calorie Run (calorie_run) forage yield add in _cxOther; drop/exchange/starve/maw/vigil stay Unkillable endurance. ARMY: coalition runner between camps stays TEXT — Phase Out remains personal; Voice already owns allied same-day delivery.",
+          "_doc": "Phase Out: automatic, once per fight. A hit that would take minFrac of max HP or kill passes through empty air; the holder reappears up to retreat tiles away (phasing is a retreat: any hold or link breaks). TITAN: against a titan-class attacker the phase covers every hit from it that round. PARTY: the Between draws fire (monsters aim at them first). CONTEST: chase/race contests lean for the ascended holder by contestLean — Hide and Seek (hide) seeker spot chance minus contestLean/25 in _cxOther and Calorie Run (calorie_run) forage yield add in _cxOther; drop/exchange/starve/maw/vigil stay Unkillable endurance. ARMY: coalition runner between camps — ascended Between holder (player or Haven NPC) leans aid-runner travel via god.play.runnerLean (day-parts off aidPartsFor / aidSendRunner); Phase Out remains personal; Voice still owns allied same-day broadcast delivery.",
           "passive": {
             "id": "phase_out",
             "name": "Phase Out",
@@ -508,7 +508,8 @@
             "hide",
             "calorie_run"
           ],
-          "contestLean": 18
+          "contestLean": 18,
+          "runnerLean": 1
         }
       }
     },
