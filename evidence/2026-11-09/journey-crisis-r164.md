@@ -396,6 +396,26 @@ any one landing.
   change — only new scripts/ + evidence/). **No new attributable
   failure. Gate adjudicated GO.**
 
+## GATE — RE-RUN ON THE REBASED TREE (adoption closeout, main session)
+
+The coordinator timed out before confirming the rebased gate; the main
+session adopted the run (heartbeat frozen at 18:51:02Z, execution timed
+out, zero processes in the tree — the r117 closeout precedent) and read
+the completed log: **296 passed, 4 failed in 760s, zero timeouts**
+(log `journey-crisis-r164-gate-rebased.log`). The 4 failures are
+exactly the standing set (mobile-combat-cadence, occupation-panels,
+phone-frame-proof, establishment-r20-fixes); the measurement-proof
+staleness pair PASSES (no src/js change). **No lever-attributable
+failure. Gate adjudicated GO on the rebased tree.**
+
 ## CLOSEOUT
 
-[filled at closeout: commit, rebase, merge, release, rotation, lock]
+[Adoption closeout by the main session: run timed out at its 2h budget
+after committing fc39172f9 (run note + driver + analyzer) on the
+rebased branch; master had not moved since the rebase (tip 91869f106),
+so no second rebase was needed. The evidence corpus (prereg,
+analysis, both gate logs, 5 seed JSONs, 39 transcripts) was committed
+with this closeout commit — the medheadcount lesson: an uncommitted
+corpus leaves the numbers unverifiable. Merge, release, rotation-b
+6→7, and lock deletion are recorded in the goal timeline + daily
+notes, not here, because they happen after this commit.]
