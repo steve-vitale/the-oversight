@@ -137,3 +137,49 @@ change lands.
 - Worktree state at this writing: HEAD `0751ff81c` (prereg) + this
   evidence file + trial log to be committed; `balance-proof.json`
   at its stale HEAD state until the final panel commit.
+
+## Final panel (coordinator closeout, run fleshout-loop-b-20261109T1530Z)
+
+The coordinator's message is: **party-up KILLED — no game-code landing.**
+The 1330Z arm sim-partyup-fieldfights-b was killed at pilot (armed pre-90
+wild 77 vs control 86, bar 51.6; floor 3/8 vs 4; branch deleted, no trace
+in master), so the "final merged master" is the master tip after the
+sickness arm landed — `89e9b9bf1` — and the final panel was regenerated on
+the rebased branch (`5c4b3e738` prereg + `7940d73f2` evidence, clean rebase
+onto `89e9b9bf1`, no stop-at-pick quirk).
+
+- Regeneration: `node scripts/balance-panel.js --out
+  /tmp/neutral-measureproof-refresh-b-final --seeds 7 --policies
+  capable,risk-aware,socialite,winseek --days 150` — exit 0, 4 cases,
+  0 cached jobs, ~90s. Panel: 4 rows (seed 7 × 4 policies × 150d),
+  `sourcesStable: true`, neutrality all four cohorts `match: true`,
+  0 warnings; `sourceHeadStart == sourceHeadEnd == 7940d73f2` (the
+  rebased branch HEAD at generation time).
+- The /tmp trial panel from the 1330Z run is GONE (wiped by a sibling
+  /tmp cleanup); its digest `6f15c045…` is a cross-check only. The final
+  panel was regenerated from scratch — nothing was recovered from /tmp.
+- Installed at `evidence/2026-11-09/neutral-measureproof-refresh-b.json.gz`
+  (sha256 `ddac3956cfb293018d52545cd671488bb0ecdefd21e601b1006447f01a318a17`).
+  `node scripts/balance-proof-update.js <panel>` accepted it; new
+  `balance-proof.json` panelDigest `ddac3956…`, all eight normalized
+  sources recorded (only `scalecourt-traderoad-r113.js` differs from the
+  r162 panel's pointer set — the moved input is now current).
+- Final verification on the rebased branch (before merge):
+  - `node scripts/godpath/test-measurement-proof-update.js` — **9/9 PASS**.
+  - `node scripts/godpath/test-measurement-workflow.js` — **9/9 PASS**.
+- Master tip was re-checked immediately before the merge
+  (`89e9b9bf1`, unchanged since regeneration) — no manifest input moved
+  between generation and merge.
+
+## Prereg bars — final verdict
+
+- (a) `test-measurement-proof-update.js` green — PASS (9/9).
+- (b) `test-measurement-workflow.js` 9/9 — PASS (9/9).
+- (c) Regenerated panel's sources match current master inputs — PASS
+  (manifest equality at generation time; neutrality 4/4 match,
+  sourcesStable true; sourceHeadEnd is the rebased branch HEAD, which
+  becomes the merged master tip on ff-only merge).
+- (d) Zero gameplay change — HOLDS: `git diff --stat` against the rebase
+  base shows only `scripts/balance-proof.json`, the new panel file, and
+  evidence (prereg + evidence + trial log). No src/js, no policies, no
+  test files.
