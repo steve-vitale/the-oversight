@@ -16,12 +16,14 @@ const fs = require('fs');
 const path = require('path');
 const A53007 = require('./analyze-53007-20261108');
 
-// skipActivity(rows): per-day takeseat skip increments. The snapshot for
-// day d is taken at the FIRST daily() call of day d — before that day's
-// upkeep calls — so the diff between consecutive rows covers the upkeep
-// calls of the EARLIER row's day. The closing duplicate row (same final
-// day twice) carries the final day's activity. Returns [{day, skips{}}]
-// keyed by the day the activity happened on.
+// skipActivity(rows): per-day takeseat skip increments. The harness runs
+// policy.upkeep 3x per loop-day and policy.daily ONCE at the END of the
+// loop-day (sim-harness.js runDays: parts, then daily, then sleep), and
+// the driver snapshots in daily() — so the snapshot for scholar-day d is
+// taken AFTER all of day d's upkeep calls. The diff between consecutive
+// rows therefore covers the upkeep calls of the LATER row's day, and is
+// attributed to that day. Returns [{day, skips{}}] keyed by the day the
+// activity happened on.
 function skipActivity(rows) {
   const out = [];
   for (let i = 1; i < rows.length; i++) {
@@ -36,7 +38,7 @@ function skipActivity(rows) {
       const d = ((cur[k] | 0) - (prev[k] | 0));
       if (d > 0) { inc[k] = d; total += d; }
     });
-    if (total > 0) out.push({ day: rows[i - 1].day, skips: inc, total: total });
+    if (total > 0) out.push({ day: rows[i].day, skips: inc, total: total });
   }
   return out;
 }
@@ -166,8 +168,16 @@ function classifySit(corpus) {
     for (let i = rows.length - 1; i >= 0; i--) { if (rows[i].tableWaiting) { lw = rows[i]; break; } }
     const gate = lw ? lw.gate : null;
     const miss = (lw && lw.seatDetail) ? missingBars(lw.seatDetail) : [];
+    // Why the preview never became ready: the day-90 floor is the common
+    // cause (tablePreview is null before day 90 even with a priced seat);
+    // otherwise the entry block / seat state on the last waiting day.
+    const floorDays = rows.filter(function (x) { return x.tableWaiting && x.winDayFloorOk === false; }).length;
+    const waitingDays = rows.filter(function (x) { return x.tableWaiting; }).length;
+    const floorNote = (floorDays === waitingDays && waitingDays > 0)
+      ? 'preview null on every waiting day because day < 90 (winDayFloorOk false) — the village ended before the floor'
+      : 'preview null on ' + floorDays + '/' + waitingDays + ' waiting days for the day-90 floor';
     return Object.assign({ cls: 'reached-never-sat',
-      mechanism: 'tableWaiting from d' + ev.firstWaitingDay + ' but preview never ready; last waiting day d' + (lw ? lw.day : '?') +
+      mechanism: 'tableWaiting from d' + ev.firstWaitingDay + ' but preview never ready; ' + floorNote + '; last waiting day d' + (lw ? lw.day : '?') +
         ' gate=' + gate + '; seat ' + (lw ? lw.seat : '?') + (miss.length ? '; missing bars: ' + miss.join('; ') : '') +
         '; announced: ' + (ev.firstAnnouncedDay != null ? 'd' + ev.firstAnnouncedDay : 'never') +
         '; preview why on last waiting day: ' + JSON.stringify(lw && lw.preview ? lw.preview.why : null) +
@@ -208,17 +218,24 @@ function stripSitgap(corpus) {
   return c;
 }
 
-// neutralityCompareSit(unrec, rec): G2 — same as the 53007 leg, plus the
-// sitgap-shaped fields (takeseatStats, sitAttempts) which the instrument
-// records identically on both sides.
+// neutralityCompareSit(unrec, rec): G2 — the recorded corpus stripped of
+// BOTH recorder fields (diag + sitgap) must equal the unrecorded corpus on
+// headlines, fallen, daily rows, waveKillLog, takeseatStats, sitAttempts
+// and doorVerbMsgs (the instrument records the last two identically on
+// both sides — INST is always installed; only the recorders are gated).
 function neutralityCompareSit(unrec, rec) {
-  const base = A53007.neutralityCompare(unrec, rec);
-  const diffs = base.diffs.slice();
+  const diffs = [];
+  const a = stripSitgap(A53007.stripDiag(rec));
   function cmp(label, x, y) {
     if (JSON.stringify(x) !== JSON.stringify(y)) diffs.push(label);
   }
-  cmp('sitAttempts', unrec.sitAttempts, stripSitgap(rec).sitAttempts);
-  cmp('doorVerbMsgs', unrec.doorVerbMsgs, stripSitgap(rec).doorVerbMsgs);
+  ['days', 'gameDays', 'endReason', 'won', 'over', 'villageLost', 'scaleRank', 'maxWave', 'unlockedWave', 'standing'].forEach(function (k) { cmp('headline.' + k, unrec[k], a[k]); });
+  cmp('fallen', unrec.fallen, a.fallen);
+  cmp('daily', unrec.daily, a.daily);
+  cmp('waveKillLog', unrec.waveKillLog, a.waveKillLog);
+  cmp('takeseatStats', unrec.takeseatStats, a.takeseatStats);
+  cmp('sitAttempts', unrec.sitAttempts, a.sitAttempts);
+  cmp('doorVerbMsgs', unrec.doorVerbMsgs, a.doorVerbMsgs);
   return { ok: diffs.length === 0, diffs: diffs };
 }
 

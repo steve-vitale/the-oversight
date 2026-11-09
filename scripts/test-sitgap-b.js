@@ -177,8 +177,8 @@ function brokenClassifySit(corpus) {
     row(93, { sitgap: { tsSkips: { away: 7, fight: 1 }, tsAttempts: 0, tsTaken: 0, tsFailed: 0, tsSeatDay: null, tsSeatKind: null } }),
   ];
   const act = A.skipActivity(rows);
-  check('G1: skipActivity diffs cumulative counters to per-day increments',
-    act.length === 2 && act[0].day === 90 && act[0].skips.away === 3 && act[1].day === 92 && act[1].skips.away === 4 && act[1].skips.fight === 1,
+  check('G1: skipActivity diffs cumulative counters to per-day increments (attributed to the later row\'s day — the snapshot follows the day\'s upkeeps)',
+    act.length === 2 && act[0].day === 91 && act[0].skips.away === 3 && act[1].day === 93 && act[1].skips.away === 4 && act[1].skips.fight === 1,
     JSON.stringify(act));
 })();
 
