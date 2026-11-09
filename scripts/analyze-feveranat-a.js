@@ -61,6 +61,19 @@
 //   day with no later snapshot (snapshots are taken at dawn, onsets happen
 //   during/after the day's parts, so a same-day onset first appears the
 //   NEXT day — which does not exist when the run ends that day).
+//   DISEASE-ID VECTOR RE-DERIVATION (sim-radsource-a, 2026-11-09):
+//   radiation_sickness has exactly one vector — the pellet's invisible
+//   fire (docs/DISEASES.md; Steve-ruled pellet cost 2026-11-08) — and
+//   the engine contracts it with NO source string, so a RECORDED
+//   'unattributed' vector for this id is a recorder gap, not a real
+//   unknown. finish() re-derives it from the disease id (vectorSource
+//   'disease-id (analyzer)'), ONLY when the recorded vector is missing
+//   or 'unattributed' — a recorded vector is never overridden. F3
+//   counts + names the re-derived episodes, so a future recorder
+//   regression stays visible instead of being silently papered over.
+//   The same rule lives in the recorder (sweep-feveranat-a.js
+//   vectorForDiseaseId), so fresh sweeps record it at the source and
+//   the analyzer layer never fires on them.
 'use strict';
 const fs = require('fs');
 const path = require('path');
@@ -130,9 +143,20 @@ function buildEpisodes(s) {
   for (const e of (s.sickEnds || [])) events.push({ t: 'end', day: e.day, e });
   events.sort((a, b) => a.day - b.day || (a.t === 'on' ? -1 : 1));
   const finish = (o, endEv, outcome) => {
+    // DISEASE-ID RE-DERIVATION (sim-radsource-a): radiation_sickness is
+    // contracted only by the pellet's invisible fire (docs/DISEASES.md);
+    // a recorded 'unattributed' vector for this id is a recorder gap.
+    // Re-derive from the id, and say so in vectorSource — never silent,
+    // never overriding a recorded vector.
+    let vector = o.vector, vectorSource = o.vectorSource, vectorEvidence = o.vectorEvidence;
+    if (o.diseaseId === 'radiation_sickness' && (!vector || vector === 'unattributed')) {
+      vector = "the pellet's invisible fire";
+      vectorSource = 'disease-id (analyzer)';
+      vectorEvidence = 'radiation_sickness is contracted only by the pellet boost (docs/DISEASES.md); recorded vector was unattributed';
+    }
     return { seed: s.seed, who: o.who, whoName: o.whoName, kind: o.kind,
-      name: o.name, diseaseId: o.diseaseId, vector: o.vector,
-      vectorSource: o.vectorSource, vectorEvidence: o.vectorEvidence,
+      name: o.name, diseaseId: o.diseaseId, vector,
+      vectorSource, vectorEvidence,
       onsetDay: o.day, endDay: endEv ? endEv.day : null,
       duration: endEv ? (endEv.day - o.day) : null,
       outcome, by: endEv ? (endEv.by || null) : null,
@@ -420,6 +444,13 @@ function main() {
   console.log('F3 VECTOR ATTRIBUTION: by vector=' + JSON.stringify(byVector));
   console.log('  attributed=' + (allEps.length - unattributed.length) + '/' + allEps.length +
     ' unattributed=' + unattributed.length);
+  // Disease-id re-derivations (sim-radsource-a): named, never silent —
+  // a future recorder regression shows up here as a nonzero count.
+  const rederived = allEps.filter(e => e.vectorSource === 'disease-id (analyzer)');
+  if (rederived.length) {
+    console.log('  disease-id re-derived=' + rederived.length +
+      ' episode(s) recorded unattributed, attributed from the disease id (radiation_sickness → the pellet\'s invisible fire)');
+  }
   for (const e of unattributed) {
     console.log('    UNATTRIBUTED seed=' + e.seed + ' ' + e.whoName + ' (' + e.who + ') ' + e.name +
       ' onset d' + e.onsetDay + ' via ' + e.vectorSource + ' — ' + (e.vectorEvidence || 'no evidence recorded'));
@@ -440,7 +471,7 @@ function main() {
   console.log('  corroboration (NPC): wound onsets with hp<40 at onset=' + woundOk + '/' + woundEps.length +
     '; tick onsets with forager/explorer profile=' + tickOk + '/' + tickEps.length +
     '; gut-rot onsets with drinksDirty at onset=' + gutOk + '/' + gutEps.length +
-    '; scholar onsets by vector (source-string evidence)=' + JSON.stringify(schByVector));
+    '; scholar onsets by vector (source-string / disease-id evidence)=' + JSON.stringify(schByVector));
   console.log('');
 
   // ---- F4 TREATMENT IN THE WILD ----

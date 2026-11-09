@@ -109,7 +109,27 @@ function vectorForFoodName(name) {
   if (/^poisoned/.test(n)) return { vector: 'poison', evidence: 'meal-time sicken: ' + n };
   return { vector: 'unattributed', evidence: 'villagerFoodPoisoning created an unknown name: ' + n };
 }
-function vectorForScholarSource(src) {
+// Disease-id-derived vector (sim-radsource-a): radiation_sickness is
+// contracted only by the pellet's invisible fire (docs/DISEASES.md) and
+// arrives with no source string, so the id itself is the evidence.
+// Returns the vector object for radiation_sickness, null otherwise —
+// the shared rule for both onset wrappers below (contractDisease and
+// the direct-applyStatus path), so the two can never disagree.
+const RADIATION_VECTOR = "the pellet's invisible fire";
+function vectorForDiseaseId(effectId) {
+  if (effectId === 'radiation_sickness') return { vector: RADIATION_VECTOR,
+    evidence: 'radiation_sickness is contracted only by the pellet boost (docs/DISEASES.md); contractDisease source empty' };
+  return null;
+}
+function vectorForScholarSource(src, effectId) {
+  // Disease-id-derived attribution (sim-radsource-a, 2026-11-09):
+  // radiation_sickness has exactly one vector — the pellet's invisible
+  // fire (docs/DISEASES.md; Steve-ruled pellet cost 2026-11-08). The
+  // engine contracts it with NO source string (src/js/feastBuff.js:389),
+  // so the id itself IS the source evidence; this rule runs before the
+  // source map and never fires for any other id.
+  const byId = vectorForDiseaseId(effectId);
+  if (byId) return byId;
   const s = String(src || '');
   if (s === 'a mosquito bite') return { vector: 'mosquito (ambient)', evidence: s };
   if (s === 'a heatwave mosquito bite') return { vector: 'mosquito (heatwave)', evidence: s };
@@ -609,7 +629,7 @@ async function oneRun(seed, days, opts) {
         if (r && !hadIt) {
           const entry = (Game.seList ? Game.seList('scholar') : []).find(e => e.id === effectId);
           const src = (opts && opts.source) || null;
-          const vec = vectorForScholarSource(src);
+          const vec = vectorForScholarSource(src, effectId);
           W.sickOnsets.push({ day: dayOf(), who: 'scholar', whoName: 'scholar', kind: 'scholar',
             name: effectId, diseaseId: effectId, vector: vec.vector,
             vectorSource: 'contractDisease', vectorEvidence: vec.evidence, source: src,
@@ -652,10 +672,14 @@ async function oneRun(seed, days, opts) {
             W.statusEvents.push({ day: dayOf(), kind: 'alien-quirk', who, whoName, diseaseId: effectId, source: src, sayWin: W.sayWin.slice(-3) });
           } else {
             // Mundane disease via direct applyStatus, bypassing contractDisease.
+            // Radiation arriving this way is attributed from the disease id
+            // (sim-radsource-a: same shared rule as the contractDisease path);
+            // any other id stays unattributed, as before.
+            const vecD = vectorForDiseaseId(effectId);
             W.statusEvents.push({ day: dayOf(), kind: 'disease-direct', who, whoName, diseaseId: effectId, source: src, sayWin: W.sayWin.slice(-3) });
             W.sickOnsets.push({ day: dayOf(), who, whoName, kind: kind === 'scholar' ? 'scholar' : 'npc',
-              name: effectId, diseaseId: effectId, vector: 'unattributed',
-              vectorSource: 'applyStatus-direct', vectorEvidence: 'mundane disease applied without contractDisease; source: ' + String(src),
+              name: effectId, diseaseId: effectId, vector: vecD ? vecD.vector : 'unattributed',
+              vectorSource: 'applyStatus-direct', vectorEvidence: vecD ? vecD.evidence : 'mundane disease applied without contractDisease; source: ' + String(src),
               daysLeft0: null, severity: 1, hpAtOnset: null, rangeProfile: null,
               drinksDirty: null, hygiene: null, healerPresent: healerPresentNow(), medicCount: medicIds().length,
               sayWin: W.sayWin.slice(-3) });
