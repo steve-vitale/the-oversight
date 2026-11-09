@@ -246,8 +246,9 @@ underneath and no one tending them.
   f9f866022 (instruments), bab81c8f2 (prereg + retest instruments),
   875e1b578 (baseline corpus), 30ec22e37 (aggregation fix + baseline
   summary), 83ad197a9 (re-apply fix), 10723047e (REVERT, NO-GO).
-  Adoption commit (this evidence + judge fix + corpora/panels): [TO
-  BE FILLED at commit time].
+  Adoption commit (this evidence + judge fix + corpora/panels):
+  `68e26a2ee` (main-session closeout), plus the follow-up commit
+  filling this hash in the evidence file.
 - The tendretest-a-panel-before build died at 17/48 cases with the
   worker; the adoption run re-runs it on the reverted tree (resume
   from the cases/ cache) before committing this evidence.
