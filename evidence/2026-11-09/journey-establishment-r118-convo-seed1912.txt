@@ -1,0 +1,80 @@
+=== r118 PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Tom (gen_a9seh7c) occ=dockworker --
+OPENING: "The cistern's nearly dry — 3 liters left. Haul the creek with me at dawn? Two buckets each, there and back."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Your partner is inside the Haven hall. Go through the door to meet them.
+YOU: [dlg:details] "Tell me why you need this."
+THEM: "3 liters. That's today's drinking water, and then we're boiling creek water and hoping. We walk together and each carry two liters back. Creek water still needs boiling."
+YOU: [dlg:cant] "I can’t right now."
+THEM: "Right. I get it." A beat — and then the subject is closed. They won't raise it again.
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Curry Leaf. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Rosary Pea. Leaf, stem, smell. You won't forget it now."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that water haul."
+YOU: [goon] "Keep going."
+THEM: The warmth pulls back a notch. They're weighing something.
+YOU: [goon] "Keep going."
+THEM: "...Hi. Sorry. I'm not good at the talking-to-strangers part."
+closing: "Alright. One thing at a time. That's how we get through."
+
+-- Sandra (gen_001q1wx) occ=arborist --
+OPENING: "Can I tell you something? I don't actually know how to swim and I'm terrified someone will find out."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Prickly Pear. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Neem. Leaf, stem, smell. You won't forget it now."
+YOU: [secret:silence] (say nothing — just sit with them)
+THEM: "...Thanks. ...That's enough, for now."
+YOU: [teach] "Watch. This matters."
+THEM: You show them Burdock — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Someone should watch your back. Might as well be me."
+YOU: [dlg:more] "I’m listening."
+THEM: "That's... pretty much all of it, honestly."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Yeah? What's up?"
+YOU: [ask:goal] "What do you actually want?"
+THEM: "You want to know about that? Okay." Give me something to do. Anything. I can't stand sitting here wondering if I'm dead weight.
+closing: "That helped. Thank you for sitting with me."
+
+-- Linh (gen_dwnc1xa) occ=Dentist --
+OPENING: "The cistern's nearly dry — 3 liters left. I need someone to haul water with me at first light. Two of us, half the trips. Will you come?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to your partner, on the same side of the Haven door.
+YOU: [dlg:details] "Tell me why you need this."
+THEM: "I still need help with the creek water run."
+YOU: [dlg:cant] "I can’t right now."
+THEM: "No, yeah, of course. Forget I asked." They won't forget. They'll just stop asking.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that water haul."
+YOU: [goon] "Keep going."
+THEM: Their friendliness thins — still there, just held at arm's length.
+YOU: [goon] "Keep going."
+THEM: "What's your first memory? Like, ever. The earliest thing."
+YOU: [deflect_q] (change the subject)
+THEM: "Okay." Something shutters, just slightly.
+YOU: [goon] "Keep going."
+THEM: Their tone levels out — courteous, careful, further away.
+closing: "Good talk."
+
+-- Diana (diana_osei) occ=paramedic --
+OPENING: "We're down to 3 liters of clean water. Haul the creek with me at dawn? Two buckets each, there and back."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Your partner is inside the Haven hall. Go through the door to meet them.
+YOU: [dlg:details] "Tell me why you need this."
+THEM: "I checked the cistern three times hoping I misread it. 3 liters. We walk together and each carry two liters back. Creek water still needs boiling."
+YOU: [dlg:cant] "I can’t right now."
+THEM: "...Okay. I'll figure it out." They won't ask twice. That much is clear.
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Patauá. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "an old trapline — I'll show you on the map sometime. It's real."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that water haul."
+YOU: [goon] "And?"
+THEM: The ease drains out of it, a little.
+YOU: [goon] "And?"
+THEM: "I've got fires to light — metaphorical ones. Mostly."

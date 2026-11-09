@@ -1,0 +1,86 @@
+=== r118 PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Luz (gen_mexvdic) occ=tattoo artist --
+OPENING: "About the worst thing you've done — What's the worst thing you've done since the sky changed?"
+YOU: [ans:q_guilty:a_tell] "There's something I regret. I'm not ready to talk about it."
+THEM: No judgment in their face. "We're all doing math that doesn't add up. You're still here. That counts."
+YOU: [goon] "Please, go on."
+THEM: Their friendliness thins — still there, just held at arm's length.
+YOU: [goon] "Please, go on."
+THEM: "I don't answer that one myself. Not yet. Maybe when I've decided whether surviving counts as an excuse or just a reason. No time to waste."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the worst thing you've done."
+YOU: [goon] "Please, go on."
+THEM: "Teach me something. Anything you know that I don't."
+YOU: [ans:q_teach_me:a_tell] "I'd rather show you while we're working. It's easier that way."
+THEM: "All right. Show me when we work together."
+YOU: [goon] "Please, go on."
+THEM: "I'd like to learn something I can use today. Show me while you work, when you have a moment."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Another time. The village needs me here."
+closing: "Alright. Back to work."
+
+-- Thao (gen_lqt4ljk) occ=barber --
+OPENING: "About what happened to my taken kin — Have you heard anything? About the taken. The pods. Anything at all. Ha."
+YOU: [gq:yn:yes] "Yes."
+THEM: "All right. Thank you for telling me."
+YOU: [goon] "Please, go on."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:more] "Tell me about them."
+THEM: "It's my sister, Zhazira. Was taken at the Scattering. The boring half, they said — my sister, boring. I think about that every day. Some nights I swear I hear them before I sleep -- the pods, rows deep, humming. Then morning comes and I can't say whether it was real."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [goon] "Please, go on."
+THEM: "Come see what I found. You won't believe it."
+INVITE-ANSWER trust=91
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: It's quiet at the hollow. Thao doesn't say much. Sometimes that's the whole point.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person."
+YOU: [goon] "Please, go on."
+THEM: A warmth settles over the conversation — they lean in a little.
+closing: "Well. That was almost a conversation. We're improving."
+
+-- Marco (gen_n0gpqm9) occ=army medic --
+OPENING: "Can I tell you something? I've been sneaking out at night. I'm ashamed and I can't stop."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "a cellar full of jars — I'll show you on the map sometime. It's real."
+YOU: [secret:promise] "That stays between us."
+THEM: "Thank you. ...I needed someone to know, and I needed it to stop there."
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Mayapple — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "...Fine. This had better be worth it."
+YOU: [dlg:more] "I’m listening."
+THEM: "That's... pretty much all of it, honestly."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? I really think so."
+YOU: [ask:personal] "I'd like to know you better, if that's alright."
+THEM: "Huh. Let me think about that." "Don't mind me. I'm having a whole argument in my head and losing. Just saying!"
+YOU: [party_name] "We should name this. Us."
+THEM: "A name. Okay." You say it out loud, trying the shape of it:
+1. "THE ENSEMBLE" (📺 the System suggests)
+2. "The Firetenders" (Thao suggests)
+3. "The Company" (or plain)
+(Which one? It'll stick.)
+closing: "Good talk. Don't let it go to your head."
+
+-- Violeta (gen_w5roy9a) occ=Mushroom grower --
+OPENING: "You talk to it -- the System. Have you ever asked? About the taken -- about Regina?"
+YOU: [gq:yn:yes] "Yes."
+THEM: They nod. "Okay."
+YOU: [dlg:more] "What do you remember?"
+THEM: "It's my younger sister, Regina. Went in the Taking. She was nineteen. Nineteen years of being interesting was not enough, apparently. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person. Makes sense to me."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Huh. Let me think about that." "Marco told you that?" Violeta gives you a long look. "Then Marco told you wrong. An army medic — that's the one I know."
+YOU: [goon] "I'm listening, I promise."
+THEM: "Okay. We'll pick this up later."
+YOU: [silence] (say nothing)
+THEM: You say nothing. Neither do they, for a while — and it's fine.
+(ended by engine)

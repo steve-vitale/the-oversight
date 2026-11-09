@@ -1,0 +1,83 @@
+=== r118 PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Rachid (gen_ti2twm8) occ=pottery instructor --
+OPENING: "Are you going to stay? With us. For real. Give it time."
+YOU: [ans:q_stay:a_tell] "Yeah. I am. I didn't expect to say that, but yeah."
+THEM: Something eases in their shoulders. "Good. We're better with you here. I mean that."
+YOU: [goon] "Go on."
+THEM: "I stay where I'm useful. Right now that's here. Casablanca, Morocco is a direction, not a plan. Here is a plan, even if it's a hard one. Allegedly."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on whether you're staying. Not that it matters."
+YOU: [goon] "Go on."
+THEM: "Do you dream about before? Or is it all — this — now?"
+YOU: [ans:q_dream:a_before] "Before. Every night. It's the only place it still exists."
+THEM: "Then it's not gone. Not really. Keep going back. Just... be straight with me."
+YOU: [goon] "Go on."
+THEM: "Casablanca, Morocco, always. Same dream: I'm walking home and the street keeps getting longer. I wake up tired, like I actually walked it. Seen worse."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Someone should watch your back. Might as well be me."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? Ha."
+closing: "Well. That was conversation."
+
+-- Victor (victor_lopez) occ=mason --
+OPENING: "...Hi. Sorry. I'm not good at the talking-to-strangers part."
+YOU: [ans:q_quiet:a_help] "What do you need?"
+THEM: "Nothing. Just — being around people helps, even if I'm bad at it. Thanks."
+YOU: [goon] "I'm listening."
+THEM: "Strangers are just people you haven't disappointed yet. That's what my mother said. Terrible advice, but it got me through parties."
+YOU: [goon] "I'm listening."
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+INVITE-ANSWER trust=8
+YOU: [betrayal:decline] "Not this time."
+THEM: "Another time, then." A small thing, pocketed.
+YOU: [dlg:doubt] "That doesn't quite add up."
+THEM: "...What's that supposed to mean?" Their voice goes careful.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the talking-to-strangers part. That's where we are."
+YOU: [goon] "I'm listening."
+THEM: A small chill settles between you. They're choosing words more carefully.
+YOU: [goon] "I'm listening."
+THEM: "You look handy. What did you do with your hands, before?"
+closing: "Alright. Back to work."
+
+-- Liam (liam_davis) occ=farmer --
+OPENING: "What's the most useful thing you've learned since we got here?"
+YOU: [ans:q_useful:a_hunger] "How to be hungry and keep going anyway."
+THEM: "The fundamental skill. Everything else is decoration. That's the whole of it."
+YOU: [goon] "I'm listening."
+THEM: "making do. Sounds small. But small useful things stack — and one day you look up and you're the person everyone asks. That's how it happens."
+YOU: [goon] "I'm listening."
+THEM: "Come get air with me. I need to think out loud."
+INVITE-ANSWER trust=91
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: You walk to the ridge with Liam. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Camu-camu. Leaf, stem, smell. You won't forget it now."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the most useful thing you've learned."
+YOU: [goon] "I'm listening."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Another time. The village needs me here."
+closing: "Don't be a stranger."
+
+-- Theo (theo_lindqvist) occ=trail crew lead --
+OPENING: "About how this changed you — Has this changed you? Like, fundamentally? You'd know about that."
+YOU: [ans:q_change:a_tell] "I don't recognize the person in my head anymore. I think that's good? I don't k
+THEM: "The old you got you here. The new you keeps you here. Both count."
+YOU: [goon] "Go on."
+THEM: Whatever warmth was building cools to politeness.
+YOU: [goon] "Go on."
+THEM: "I used to be a trail crew lead who worried about being on time. Now I worry about being alive. Same worry, bigger font. So yes — and also no."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Datura. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Lemongrass. Leaf, stem, smell. You won't forget it now."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on how this changed you."
+YOU: [goon] "Go on."
+THEM: "Got a read on anyone here yet? Who should I be watching?"
+YOU: [ans:q_read:a_honest] "Still figuring everyone out."
+THEM: "Same. But keep your eyes open — some people here are performing, not surviving."
+closing: "I gotta go DO something. This was good though!"

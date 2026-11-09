@@ -1,0 +1,82 @@
+=== r118 PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Elena (gen_b8ktb67) occ=hunting guide --
+OPENING: "About whether they can trust you — Can I trust you? I mean really. …sorry."
+YOU: [ans:q_trust:a_earn] "I hope to earn it."
+THEM: "That's the right answer. The wrong one would've been 'yes' too fast."
+YOU: [goon] "Wait, what? Go on —"
+THEM: The warmth pulls back a notch. They're weighing something.
+YOU: [goon] "Wait, what? Go on —"
+THEM: "I'll tell you what I tell everyone: watch what I do when nobody's watching. That's the whole of me. The rest is just talking."
+YOU: [goon] "Wait, what? Go on —"
+THEM: "...I should say, I trade in what I know. My knowledge for yours. Or food, if you're short on secrets."
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "Good question." "People are talking about Ethan. Take it for what it's worth."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Taro. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Turmeric. Leaf, stem, smell. You won't forget it now."
+YOU: [dlg:more] "Go on."
+THEM: "People are talking about me. Take it for what it's worth."
+closing: "Steady as she goes. See you at dinner."
+
+-- Alejandra (gen_1mh90mj) occ=Pharmacist --
+OPENING: "I hate to ask this, but I'm achy and wrung out, barely keeping food down. I need help. Please."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to them, on the same side of the Haven door, to help.
+YOU: [dlg:details] "Tell me why you need this."
+THEM: "I'm burning up and there's nothing left in me. Someone who knows sickness — please."
+YOU: [dlg:cant] "I can’t right now."
+THEM: "No, yeah, of course. Forget I asked." They won't forget. They'll just stop asking.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that sickness help."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "Good question." "Elena? A hunting guide, back before. Solid person."
+YOU: [dlg:more] "I’m listening."
+THEM: "Sigrun talks to the garden. The garden listens. I've seen it."
+YOU: [dlg:react] (listen)
+THEM: "Thabo is back. Walked in like they'd never left."
+closing: "Take care of yourself."
+
+-- Thoa (gen_fs6lf3h) occ=Butcher --
+OPENING: "I dreamed about the pods again. Elif's face. Tell me I'm not the only one who hears the humming. Makes sense to me."
+YOU: [dlg:cant] "I don't know anything. I'm sorry."
+THEM: "Yeah. Sorry. It's -- never mind. Forget I said anything." They look away, embarrassed at having wanted something.
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Bitter Leaf. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Thorn Apple. Leaf, stem, smell. You won't forget it now."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person."
+YOU: [goon] "Wait, what? Go on —"
+THEM: Their friendliness thins — still there, just held at arm's length.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [alive:event:naming] "Have you heard about the naming debate?"
+THEM: "The whole fire was arguing about Nostalgia last night — what to even CALL it. 'Big Ugly' got shouted down. What's your vote?"
+YOU: [gq:open:take] "I need a moment to think about that."
+THEM: "Take your time."
+closing: "Good talk. Onward, then."
+
+-- Sigrun (sigrun_eiriksdottir) occ=night security guard --
+OPENING: "Did you see that, just now? By the tree line."
+YOU: [react:rq_treeline:saw] "I saw it too."
+THEM: "You did?" Their voice drops. "Then I'm not imagining things. Stay close to the fire tonight — both of us."
+YOU: [goon] "Wait, what? Go on —"
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [goon] "Wait, what? Go on —"
+THEM: "Come get air with me. I need to think out loud."
+INVITE-ANSWER trust=42
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: You walk to the ridge with Sigrun. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+YOU: [teach] "Watch — this is useful."
+THEM: You show them American Ginseng — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+YOU: [goon] "Wait, what? Go on —"
+THEM: Something eases in their shoulders. They're really talking to you now.
+YOU: [dlg:react] (listen)
+THEM: "So." They look at the fire for a moment.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on what spooked them."
+closing: "Later."

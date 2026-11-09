@@ -1,0 +1,83 @@
+=== r118 PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Karen (gen_2lkmfnf) occ=aquarium keeper --
+OPENING: "Never mind the food I needed — we got it handled. Thanks anyway."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Wild Ramps. Leaf, stem, smell. You won't forget it now."
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "No, really — it's handled. Thanks for asking, though."
+YOU: [goon] "You don't have to say it all at once."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [silence] "..."
+THEM: They fill the quiet. "Anyway — where was I?"
+(no pick)
+(stall menu: dlg:subject|leave|silence)
+closing: "...Thanks for being here. That's all."
+
+-- Tanisha (gen_iqbk9cx) occ=Rancher --
+OPENING: "Every laugh out there feels wrong today. Then I feel wrong for thinking it."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Physic Nut. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "an old trapline — I'll show you on the map sometime. It's real."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "I'd love to. Lead the way." (They're already checking your pack.)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "Most days I don't think about it. Today I am. Appreciate you noticing. ...sorry."
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Huh. Let me think about that." "People are saying things. About you. ...I'd watch how you act around the fire."
+YOU: [dlg:more] "I’m listening."
+THEM: "Funny you should ask." Tanisha glances over their shoulder. "Valeria's been polishing that story. The unpolished version: a pottery instructor. Keep my name out of it."
+YOU: [party_name] "We should name this. Us."
+THEM: "A name. Okay." You say it out loud, trying the shape of it:
+1. "THE PROTAGONISTS" (📺 the System suggests)
+2. "The Unlost" (Karen suggests)
+3. "The Company" (or plain)
+(Which one? It'll stick.)
+YOU: [party_namepick:0] "THE PROTAGONISTS."
+THEM: 🤝 "THE PROTAGONISTS." It hangs in the air a moment — then Karen grins. It's real now. It has a name, which means it can be lost.
+📺 THE PROTAGONISTS is official. Karen, Tanisha. (The village watches the broadcast. Nobody blinks.)
+📓 Codex: We named us: THE PROTAGONISTS.
+closing: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+
+-- Nikolai (gen_6ih7ret) occ=chimney sweep --
+OPENING: "About what happened to my taken kin — You talk to it -- the System. Have you ever asked? About the taken -- about Emil?"
+YOU: [gq:yn:yes] "Yes."
+THEM: They nod. "Okay."
+YOU: [goon] "Take your time."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [goon] "Take your time."
+THEM: "What's something from your old life that's actually useful here?"
+YOU: [ans:q_before_skill:a_tell] "Patience. Sounds dumb. But waiting — really waiting, without fidgeting — that's
+THEM: "Not dumb at all. The people who can't wait are the ones who make mistakes. You're an asset."
+YOU: [goon] "Take your time."
+THEM: "Listen to me — Being a chimney sweep taught me to read people fast — who's lying, who's scared, who needs a job. Turns out that's a survival skill. Who knew."
+YOU: [dlg:more] "Tell me about them."
+THEM: "It's my son, Emil. Asked if the taken ones were bad. I said no. He asked if they were boring. I did not answer. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [goon] "Take your time."
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+closing: "Talking helps. A little. Thank you."
+
+-- Silvanus (gen_5s5zpgs) occ=barber --
+OPENING: "Have you — sorry. I keep thinking about them."
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "You're kind. Don't let this place change that."
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "You want to know about that? Okay." "Did you hear? Karen won Sweet Tooth on the cameras. People are still talking about it."
+YOU: [goon] "I'm here. Go on."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [dlg:more] "I’m listening."
+THEM: "Ruth's story has a fresh coat of paint." Silvanus taps the table. "Scrape it off and you get a librarian. Just don't scrape it in front of them."
+YOU: [dlg:react] (listen)
+THEM: "Giulia? A crossing guard, back before. Solid person."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Right, so — Still on the gossip."
+YOU: [goon] "I'm here. Go on."
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Not right now. I've got my own things to handle."
+closing: "Thanks. I just... need some air."

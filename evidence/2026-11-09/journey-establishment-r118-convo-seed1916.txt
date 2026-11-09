@@ -1,0 +1,80 @@
+=== r118 PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Francesca (gen_4y1mym7) occ=pottery instructor --
+OPENING: "Never mind the food I needed — we got it handled. Thanks anyway."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:personal] "Tell me who you are, child. The whole of it."
+THEM: "Huh. Let me think about that." "I've started noticing who eats first and who waits. Tells you everything about a person."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: Their friendliness thins — still there, just held at arm's length.
+YOU: [dlg:more] "Go on."
+THEM: "Back home I was a pottery instructor. The skills don't transfer, but the stubbornness does."
+YOU: [dlg:react] (listen)
+THEM: "I keep a mental list of everyone who's still kind. It's longer than you'd think."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on your story."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [silence] "..."
+THEM: A comfortable quiet settles. They smile a little, and let it be.
+closing: "I'm glad we talked. I think. I'm still deciding."
+
+-- Kate (gen_n6kwxor) occ=dockworker --
+OPENING: "About what happened to my taken kin — You talk to it -- the System. Have you ever asked? About the taken -- about Jessica? I won't forget that."
+YOU: [gq:yn:yes] "Yes."
+THEM: They nod. "Okay."
+YOU: [goon] "Go on. I'm listening."
+THEM: That could have stung. They let it pass — you've been kind before.
+YOU: [dlg:more] "Tell me about them."
+THEM: "It's my older sister, Jessica. Was taken. She raised me more than our mother did. Boring. That is what they wrote down. The pods get into my sleep some nights. Row on row of them, humming like a held note -- and I wake up reaching for something that isn't there."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Heh. Still on that taken person."
+YOU: [goon] "Go on. I'm listening."
+THEM: "Can I trust you? I mean really."
+YOU: [ans:q_trust:a_earn] "I hope to earn it."
+THEM: "That's the right answer. The wrong one would've been 'yes' too fast."
+YOU: [goon] "Go on. I'm listening."
+THEM: "I'll tell you what I tell everyone: watch what I do when nobody's watching. That's the whole of me. The rest is just talking."
+closing: "Take care of yourself."
+
+-- Nurlan (gen_egn94rl) occ=lifeguard --
+OPENING: Nurlan speaks only 🇸🇦 Arabic. No shared words at all — just eyes, hands, and patience.
+«هيه... تتكلم عربي؟ لا؟ ...تباً.»
+YOU: [nv:nod] (nod slowly)
+THEM: «مضبوط، كلامك صحيح.» They nod, holding your gaze a beat longer. "You good?" — they grin, proud of the one English they know.
+YOU: [nv:smile] (smile)
+THEM: «أنت إنسان طيب.» (you catch 'طيب' — kind) A smile, tired but real.
+YOU: [nv:pointself] (point: you, them, together)
+THEM: «لن أنسى هذا.» You point at yourself, then at them, then at the fire. Together. They get it.
+YOU: [nv:listen] (listen hard — catch words)
+THEM: You lean in, catching the rise and fall of it. «وين ننام هنا؟» (you catch 'ننام' — we sleep, 'وين' — where)
+YOU: [speak_back] (try your Arabic)
+THEM: Nurlan lights up. "No, no — like this." They say it slowly, twice, watching your mouth shape it. "نعم، نعم، بالضبط." You try again. Closer. They grin like you just scored the winning point.
+YOU: [goon] (watch quietly)
+THEM: Something in them almost softens — then doesn't. Not yet.
+(no pick)
+(stall menu: nv:nod|nv:smile|nv:pointself|nv:listen|leave)
+closing: A final nod. They touch their chest, then point at you — a promise without words.
+
+-- Emma (emma_larsen) occ=Veterinarian --
+OPENING: "Any regrets? The real kind, not the small stuff."
+YOU: [ans:q_regret:a_tell] "I didn't say what I needed to say. To someone. Now I can't."
+THEM: Quiet. "Yeah. I think everyone's carrying one of those."
+YOU: [goon] "Go on. I'm listening."
+THEM: "I regret the ordinary days I rushed through. All those Oslo, Norway mornings I spent annoyed at small things. I'd pay anything for one annoyed morning now."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Cow Parsley. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Desert Date. Leaf, stem, smell. You won't forget it now."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on your regrets."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Alright. But I'm not carrying your stuff."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:goal] "What are you hoping for? At my age, hope is a plan."
+THEM: "Huh. Let me think about that." Somebody has to be the calm one. I've taken the job.
+closing: "Get some rest tonight, yeah? You look like you need it. We all do."

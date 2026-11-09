@@ -1,0 +1,91 @@
+=== r118 PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Scarlett (gen_yrdqlbg) occ=journalist --
+OPENING: Scarlett: "I've heard good things about Stonebridge. We should link with them — we'd be stronger together."
+YOU: [link:accept] "All right. Let's ask them."
+THEM: "All right — let's ask them." You carry the proposal to Stonebridge.
+YOU: [goon] "Go on."
+THEM: "..."
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Chickweed — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+YOU: [goon] "Go on."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [dlg:more] "Tell me more."
+THEM: "That's... pretty much all of it, honestly."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind? Just thinking out loud."
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "Hanadi? A line cook, back before. Solid person."
+YOU: [dlg:react] (listen)
+THEM: They nod slowly, not quite done, not quite continuing.
+closing: "Good talk. Onward, then."
+
+-- Greta (gen_9gneoc2) occ=Social worker --
+OPENING: "About this wound — I still haven't found anyone. Any chance?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to them, on the same side of the Haven door, to help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [goon] "Go on."
+THEM: "Come see what I found. You won't believe it."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: You walk to the hollow with Greta. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "That was me — headed out to forage."
+YOU: [goon] "Whoa — go on."
+THEM: Something eases in their shoulders. They're really talking to you now.
+YOU: [dlg:more] "Go on."
+THEM: "Word is you stood your ground out there."
+closing: "Alright. One thing at a time. That's how we get through."
+
+-- Ingy (gen_9moyoag) occ=electrician --
+OPENING: Ingy speaks only 🇸🇦 Arabic. No shared words at all — just eyes, hands, and patience.
+«ما هذا المكان؟ أين نحن؟»
+YOU: [nv:nod] (nod slowly)
+THEM: «نعم، نعم، بالضبط.» — Hanadi translates: "Yes, yes, exactly." They nod back, slowly.
+YOU: [nv:smile] (smile)
+THEM: «ما قصرت، الله يخليك.» — Hanadi translates: "You've done plenty — God keep you." A grin breaks through, quick and warm.
+YOU: [nv:pointself] (point: you, them, together)
+THEM: «أنت إنسان طيب.» — Hanadi translates: "You are a kind person." You press a hand to your own chest, then point at them. Together — they get it.
+YOU: [goon] (watch quietly)
+THEM: They glance toward their own thoughts; the exchange is winding down.
+(no pick — winding down)
+(stall menu: leave|nv:nod)
+closing: A final nod. They touch their chest, then point at you — a promise without words.
+
+-- Hanadi (gen_71e8t0c) occ=line cook --
+OPENING: I'm an archive of a world that doesn't exist. Someone should keep the records.
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: "All right —" Hanadi starts to stand, then sinks back down. "Maybe not today. The fire's got me."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Gum Acacia. Leaf, stem, smell. You won't forget it now."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Alright. But I'm not carrying your stuff."
+YOU: [dlg:more] "Tell me more."
+THEM: "If I forget, it's like it never happened. I refuse to let that be true."
+YOU: [party_name] "We should name this. Us."
+THEM: "A name. Okay." You say it out loud, trying the shape of it:
+1. "THE NIGHT SHIFT" (📺 the System suggests)
+2. "The Firetenders" (Hanadi suggests)
+3. "The Company" (or plain)
+(Which one? It'll stick.)
+YOU: [party_namepick:0] "THE NIGHT SHIFT."
+THEM: 🤝 "THE NIGHT SHIFT." It hangs in the air a moment — then Hanadi grins. It's real now. It has a name, which means it can be lost.
+📺 THE NIGHT SHIFT is official. Hanadi. (The village watches the broadcast. Nobody blinks.)
+📣 THE NIGHT SHIFT was named — Hanadi. A team, on purpose.
+📓 Codex: We named us: THE NIGHT SHIFT.
+YOU: [party_role] "Let's talk roles."
+THEM: "Roles. Not ranks — promises."
+🗡️ point — First in. Hits harder (+3 strike), draws the eye.
+🩹 healer — Carries the wounded, patches them up (+6 heal).
+🎒 carrier — Hauls. Carry order reaches further, steadier hands.
+🗣️ talker — The face. People join easier, leaving hurts less.
+👁️ scout — Sees trouble first. Warns the party on the road.
+(Which one is Hanadi?)
+YOU: [party_rolepick:point] 🗡️ Point
+THEM: 🤝 Hanadi is 🗡️ Point now. First in. Hits harder (+3 strike), draws the eye.
+closing: "This was good. We should do this more. Not the apocalypse part — the talking part."

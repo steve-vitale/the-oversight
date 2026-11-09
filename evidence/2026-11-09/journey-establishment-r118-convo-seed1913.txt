@@ -1,0 +1,95 @@
+=== r118 PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Ivan (gen_quyb3uq) occ=bush pilot --
+OPENING: "What do you miss most? From before."
+YOU: [ans:q_miss:a_food] "A real hot meal."
+THEM: "God. Yes. I dream about soup. Actual soup, with a spoon."
+YOU: [goon] "Please, go on."
+THEM: "Hot showers. Not the big things — the small, stupid, perfect things. Columbus, Ohio in the morning, coffee going, nobody trying to kill me. I miss being bored."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — European Hazelnut. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Sodom Apple. Leaf, stem, smell. You won't forget it now."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on what you miss most."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Okay. Yeah. I trust you."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:goal] "What are you hoping for? If you don't mind me asking."
+THEM: "You want to know about that? Okay." Give me something to do. Anything. I can't stand sitting here wondering if I'm dead weight.
+closing: "Alright. Think about what I said. I'll be thinking about what you said."
+
+-- Brunhilde (gen_5qdi864) occ=lifeguard --
+OPENING: "About what happened to my taken kin — You talk to it -- the System. Have you ever asked? About the taken -- about Elena? Anyway, that's me."
+YOU: [gq:yn:yes] "Yes."
+THEM: "All right. Thank you for telling me."
+YOU: [goon] "I'm listening, I promise."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:more] "Tell me about them."
+THEM: "It's my mother, Elena. Was taken at the Scattering. The boring half. She made soup from nothing and they called that boring. The pods get into my sleep some nights. Row on row of them, humming like a held note -- and I wake up reaching for something that isn't there."
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [goon] "I'm listening, I promise."
+THEM: "Come get air with me. I need to think out loud."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: "All right —" Brunhilde starts to stand, then sinks back down. "Maybe not today. The fire's got me."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Castor Bean. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "a burned farmhouse — I'll show you on the map sometime. It's real."
+closing: "Good talk."
+
+-- Ekow (gen_efcowo2) occ=chimney sweep --
+OPENING: "Tell you what — Did you leave someone behind? ...Sorry. You don't have to answer that."
+YOU: [ans:q_left_behind:a_yes] "Yes."
+THEM: Just: "Yeah." A long quiet. "Me too."
+YOU: [goon] "I'm listening, I promise."
+THEM: "I don't talk about that. Not because it's secret — because saying it out loud makes it real in a way I can't afford yet. Someday. Not today."
+YOU: [goon] "I'm listening, I promise."
+THEM: "Walk with me? I want another pair of eyes on something."
+INVITE-ANSWER trust=51
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: It's quiet at the tree line. Ekow doesn't say much. Sometimes that's the whole point.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on who you left behind. Hm."
+YOU: [goon] "I'm listening, I promise."
+THEM: Something eases in their shoulders. They're really talking to you now.
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Okay. Yeah. I trust you."
+YOU: [goon] "I'm listening, I promise."
+THEM: "Alright — I should get back to it."
+
+-- Silvina (gen_si72tze) occ=exterminator --
+OPENING: Nobody goes hungry on my watch. That's the whole plan. Everything else is details.
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Camu-camu. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Curry Leaf. Leaf, stem, smell. You won't forget it now."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Alright. But I'm not carrying your stuff."
+YOU: [dlg:more] "Go on."
+THEM: "A hungry village makes bad decisions. I've seen it. Keep bellies full, keep heads clear."
+YOU: [party_name] "We should name this. Us."
+THEM: "A name. Okay." You say it out loud, trying the shape of it:
+1. "THE ENSEMBLE" (📺 the System suggests)
+2. "The Kept Promise" (Ivan suggests)
+3. "The Company" (or plain)
+(Which one? It'll stick.)
+YOU: [party_namepick:0] "THE ENSEMBLE."
+THEM: 🤝 "THE ENSEMBLE." It hangs in the air a moment — then Brunhilde grins. It's real now. It has a name, which means it can be lost.
+📺 THE ENSEMBLE is official. Brunhilde, Ivan, Ekow, Silvina. (The village watches the broadcast. Nobody blinks.)
+📣 THE ENSEMBLE was named — Brunhilde, Ivan, Ekow, Silvina. A team, on purpose.
+📓 Codex: We named us: THE ENSEMBLE.
+YOU: [party_role] "Let's talk roles."
+THEM: "Roles. Not ranks — promises."
+🗡️ point — First in. Hits harder (+3 strike), draws the eye.
+🩹 healer — Carries the wounded, patches them up (+6 heal).
+🎒 carrier — Hauls. Carry order reaches further, steadier hands.
+🗣️ talker — The face. People join easier, leaving hurts less.
+👁️ scout — Sees trouble first. Warns the party on the road.
+(Which one is Silvina?)
+YOU: [party_rolepick:point] 🗡️ Point
+THEM: 🤝 Silvina is 🗡️ Point now. First in. Hits harder (+3 strike), draws the eye.
+closing: "Later."
