@@ -16,10 +16,12 @@
 //   - other: stat-driven structured resolution, documented per category; chance is rigged theater (ratings-driven, deterministic). (code: otherResolve)
 //   - deterministic: same villager + same contest + same state = same fate — ENFORCED, not aspirational. Every top-level resolution reseeds a private stream from (day, contest id, participants, stat snapshot) via _cxSeed/_cxWithSeed; roll() bypasses Scattering.combat.roll while _det is set; fieldFight draws from opts.rng. No Math.random anywhere in the resolution path — no hidden rolls, no save-scum (reloading replays the identical fate). The process is real; the player can't see the stats anyway (knowledge-gating). (code: _cxSeed, _cxWithSeed, _cxSortIds, Steve 2026-10-08; break-it 2026-10-08; entropy-hunt r26 2026-10-14)
 //   - cheer: watcher's cheer is a real performance modifier (braveryBonus in blood incl. duelFight, case lift in moot); the cheer input is capped at 0.15 as before (alien winMod applies after, as its own meddling). (code: contestResolveGroup, Steve 2026-10-08; break-it 2026-10-08)
+//   - garden_feast_lean: Living Garden CONTEST scale — cookfight/guest making scores add gardenFeastLeanFor for an ascended holder (player or NPC); alien cheer still does not reach weird scores (code: _cxOther, godverbs.js gardenFeastLeanFor; OVE-99)
 // consumes:
 //   - fieldFight (fieldFights.js), monsterWavePool, unlockedWave
 //   - Game.agencyOf, Game.npcTemper, village health, scholar trust
 //   - hurtVillager, displayName
+//   - Game.gardenFeastLeanFor (godverbs.js) for feast contest score lean
 /* CONTEST ENGINE — src/js/contestEngine.js
  *
  * Steve (2026-10-08): "No, contests are to be played, not as RNG."
@@ -667,11 +669,19 @@
       }
       // cookfight/impress/guest: making something — survival craft + showmanship.
       // (guest is a dinner: trust + temperament.)
+      // Living Garden CONTEST scale (OVE-99): feast contests (cookfight/guest)
+      // lean for an ascended Garden holder — the land favors their table.
+      // Impress stays creative, not a cook-off: no garden lean there.
       const sc = {};
       for (const pid of pids) {
         const st = stats[pid];
-        sc[pid] = id === 'guest' ? st.trust / 5 + (st.temper === 'earnest' || st.temper === 'bold' ? 4 : 0)
+        let score = id === 'guest' ? st.trust / 5 + (st.temper === 'earnest' || st.temper === 'bold' ? 4 : 0)
           : st.survival / 2 + st.nota * 2 + (st.clever ? 5 : 0);
+        try {
+          if (typeof this.gardenFeastLeanFor === 'function')
+            score += this.gardenFeastLeanFor(pid, contest) || 0;
+        } catch (e) { console.warn('[contest] garden feast lean', e); }
+        sc[pid] = score;
       }
       if (pids.length === 1) {
         const pid = pids[0];
