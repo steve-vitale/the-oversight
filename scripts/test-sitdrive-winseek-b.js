@@ -2,11 +2,13 @@
 // (arm sim-sitdrive-winseek-b). G1 det-gate (drive fires exactly once on
 // fixtures + gate-OFF RED + broken-drive sensitivity + classifier
 // fixtures for the armed leg), G2 recorder neutrality, G3 corpus
-// integrity, plus the real-sim legs: seed 53003 armed sits (d90,
+// integrity, plus the real-sim legs: seed 53005 armed sits (d90,
 // lesser) vs gate-off 0 sits, and gate-off reproduces plain winseek
 // byte-identically (same driver, same master, same seed).
-// (Prereg Correction 1: 53001 was the DIAG's purest seed, but on this
-// master it dies d67 — the re-derived reachable seed is 53003.)
+// (Re-baseline 2026-11-09, master 8cee6a8d2: 53003 dies d30 and never
+// reaches a seat on the new master — the re-derived reachable seed is
+// 53005, ready d90–d124 on the before leg. The 514e4fa6e legs on 53003
+// are kept in git history; this file now demonstrates on 53005.)
 // Real-sim legs write to /tmp (never evidence/) and take minutes; the
 // pilot sweep writes its own corpora separately.
 // Run: node scripts/test-sitdrive-winseek-b.js
@@ -299,7 +301,7 @@ function brokenClassifySit(corpus) {
   check('G3: broken recorder (sitgap dropped) FAILS integrity', !AD.checkCorpusSit(bad).ok);
 })();
 
-// --- Real-sim legs (seed 53003, /tmp only): armed sits, gate-off == plain winseek ---
+// --- Real-sim legs (seed 53005, /tmp only): armed sits, gate-off == plain winseek ---
 // Runs the driver as a child process (env selects the leg) so each leg
 // gets a fresh process + fresh module STATS. Slow (minutes) — these are
 // the measurement legs, not unit checks.
@@ -310,33 +312,33 @@ function runDriverLeg(outSub, envExtra) {
   if (!('SITDRIVE_B' in envExtra)) delete env.SITDRIVE_B; // gate-off legs must not inherit a stale gate from this process
   if (!('POLICY' in envExtra)) delete env.POLICY;
   const r = cp.spawnSync(process.execPath, [path.join(REPO, 'scripts', 'sitdrive-winseek-driver-20261109.js')],
-    { cwd: REPO, env: Object.assign(env, { SEEDS: '53003', DAYS: '150', RUN: 'proof' }), encoding: 'utf8', timeout: 1500000 });
-  const file = path.join(outDir, 'sitdrive-winseek-b-s53003-proof.json');
+    { cwd: REPO, env: Object.assign(env, { SEEDS: '53005', DAYS: '150', RUN: 'proof' }), encoding: 'utf8', timeout: 1500000 });
+  const file = path.join(outDir, 'sitdrive-winseek-b-s53005-proof.json');
   return { status: r.status, stdout: (r.stdout || '').slice(-2000), stderr: (r.stderr || '').slice(-2000), corpus: readJson(file), file: file, outDir: outDir };
 }
 (function () {
   // ARMED: gate on, composite policy. Expect seatTaken 1, seatDay 90, kind lesser.
   const armed = runDriverLeg('sitdrive-proof-armed', { POLICY: 'winseek-sitdrive-b', SITDRIVE_B: '1' });
-  checkSkip('REAL: armed 53003 runs clean (exit 0, corpus present)',
+  checkSkip('REAL: armed 53005 runs clean (exit 0, corpus present)',
     armed.corpus ? (armed.status === 0) : null,
     armed.corpus ? ('exit=' + armed.status) : ('no corpus; exit=' + armed.status + ' stderr=' + armed.stderr));
   if (armed.corpus) {
     const ts = armed.corpus.takeseatStats || {};
-    check('REAL: armed 53003 sits (seatTaken 1)', ts.seatTaken === 1, 'seatTaken=' + ts.seatTaken + ' seatDay=' + ts.seatDay);
-    check('REAL: armed 53003 sits on d90 (the announcement day)', ts.seatDay === 90, 'seatDay=' + ts.seatDay);
-    check('REAL: armed 53003 sits the lesser seat', ts.seatKind === 'lesser', 'seatKind=' + ts.seatKind);
-    check('REAL: armed 53003 classifies sat', AD.classifySitDrive(armed.corpus).cls === 'sat', 'got ' + AD.classifySitDrive(armed.corpus).cls);
-    check('REAL: armed 53003 has zero instrument errors', (armed.corpus.instrumentErrors || []).length === 0, JSON.stringify(armed.corpus.instrumentErrors || []));
+    check('REAL: armed 53005 sits (seatTaken 1)', ts.seatTaken === 1, 'seatTaken=' + ts.seatTaken + ' seatDay=' + ts.seatDay);
+    check('REAL: armed 53005 sits on d90 (the announcement day)', ts.seatDay === 90, 'seatDay=' + ts.seatDay);
+    check('REAL: armed 53005 sits the lesser seat', ts.seatKind === 'lesser', 'seatKind=' + ts.seatKind);
+    check('REAL: armed 53005 classifies sat', AD.classifySitDrive(armed.corpus).cls === 'sat', 'got ' + AD.classifySitDrive(armed.corpus).cls);
+    check('REAL: armed 53005 has zero instrument errors', (armed.corpus.instrumentErrors || []).length === 0, JSON.stringify(armed.corpus.instrumentErrors || []));
   }
   // GATE-OFF: same driver, same policy file, gate unset. Expect 0 sits.
   const off = runDriverLeg('sitdrive-proof-gateoff', { POLICY: 'winseek-sitdrive-b' });
   if (off.corpus) {
     const ts = off.corpus.takeseatStats || {};
-    checkSkip('REAL: gate-off 53003 runs clean (exit 0, corpus present)', off.status === 0, 'exit=' + off.status + ' stderr=' + off.stderr);
-    check('REAL: gate-off 53003 never sits (seatTaken 0)', ts.seatTaken === 0 && ts.seatAttempts === 0, JSON.stringify(ts));
-    check('REAL: gate-off 53003 classifies offered-not-taken (the DIAG shape)', AD.classifySitDrive(off.corpus).cls === 'offered-not-taken', 'got ' + AD.classifySitDrive(off.corpus).cls);
+    checkSkip('REAL: gate-off 53005 runs clean (exit 0, corpus present)', off.status === 0, 'exit=' + off.status + ' stderr=' + off.stderr);
+    check('REAL: gate-off 53005 never sits (seatTaken 0)', ts.seatTaken === 0 && ts.seatAttempts === 0, JSON.stringify(ts));
+    check('REAL: gate-off 53005 classifies offered-not-taken (the DIAG shape)', AD.classifySitDrive(off.corpus).cls === 'offered-not-taken', 'got ' + AD.classifySitDrive(off.corpus).cls);
   } else {
-    checkSkip('REAL: gate-off 53003 runs clean (exit 0, corpus present)', null, 'no corpus; exit=' + off.status + ' stderr=' + off.stderr);
+    checkSkip('REAL: gate-off 53005 runs clean (exit 0, corpus present)', null, 'no corpus; exit=' + off.status + ' stderr=' + off.stderr);
   }
   // PLAIN: plain winseek through the same driver. Gate-off must equal it byte-identically.
   const plain = runDriverLeg('sitdrive-proof-plain', { POLICY: 'winseek' });
@@ -355,13 +357,13 @@ function runDriverLeg(outSub, envExtra) {
       return d;
     };
     const same = canon(strip(off.corpus)) === canon(strip(plain.corpus));
-    check('REAL: gate-off == plain winseek byte-identical on 53003 (headline + daily + fallen + takeseatStats)', same,
+    check('REAL: gate-off == plain winseek byte-identical on 53005 (headline + daily + fallen + takeseatStats)', same,
       same ? '' : 'corpora differ (gate-off vs plain)');
     // The takeseatStats sub-object alone, for the report.
     check('REAL: gate-off takeseatStats == plain takeseatStats (both zero)', canon(off.corpus.takeseatStats) === canon(plain.corpus.takeseatStats),
       canon(off.corpus.takeseatStats) + ' vs ' + canon(plain.corpus.takeseatStats));
   } else {
-    checkSkip('REAL: gate-off == plain winseek byte-identical on 53003', null, 'a corpus is missing');
+    checkSkip('REAL: gate-off == plain winseek byte-identical on 53005', null, 'a corpus is missing');
   }
   [armed, off, plain].forEach(function (leg) {
     try { fs.rmSync(leg.outDir, { recursive: true, force: true }); } catch (e) {}
@@ -369,8 +371,8 @@ function runDriverLeg(outSub, envExtra) {
 })();
 
 // --- G2/G3: real pilot corpora (present after the sweep) ---
-const DIR = path.join(REPO, 'evidence', '2026-11-09', 'perseed-sitdrive-winseek-b');
-const BASE = path.join(REPO, 'evidence', '2026-11-09', 'perseed-sitdrive-winseek-b-baseline');
+const DIR = path.join(REPO, 'evidence', '2026-11-09', 'perseed-sitdrive-winseek-b-rebase');
+const BASE = path.join(REPO, 'evidence', '2026-11-09', 'perseed-sitdrive-winseek-b-rebase-baseline');
 const seeds = [53001, 53002, 53003, 53004, 53005, 53006, 53007, 53008];
 seeds.forEach(function (seed) {
   const c = readJson(path.join(DIR, 'sitdrive-winseek-b-s' + seed + '-sitdrive.json'));
@@ -399,8 +401,8 @@ seeds.forEach(function (seed) {
       return AD.classifySitDrive(c).mechanism.indexOf(AD.NO_SIT_DRIVE_SENTENCE) === -1;
     }) : null,
     present.length === 8 ? 'a mechanism still carries the DIAG sentence' : 'only ' + present.length + '/8 corpora present');
-  checkSkip('G1: armed 53003/53006 sit (the reachable set, prereg Correction 1)',
-    present.length === 8 ? [53003, 53006].every(function (s) {
+  checkSkip('G1: armed 53005 sits (the reachable set, re-baseline re-derivation)',
+    present.length === 8 ? [53005].every(function (s) {
       const c = readJson(path.join(DIR, 'sitdrive-winseek-b-s' + s + '-sitdrive.json'));
       return AD.classifySitDrive(c).cls === 'sat';
     }) : null,
@@ -414,7 +416,7 @@ seeds.forEach(function (seed) {
 })();
 
 // --- G2: recorder neutrality on the armed leg (present after the control run) ---
-const UNREC = path.join(REPO, 'evidence', '2026-11-09', 'perseed-sitdrive-winseek-b-unrec');
+const UNREC = path.join(REPO, 'evidence', '2026-11-09', 'perseed-sitdrive-winseek-b-rebase-unrec');
 [53008, 53004].forEach(function (seed) {
   const unrec = readJson(path.join(UNREC, 'sitdrive-winseek-b-s' + seed + '-sitdrive.json'));
   const rec = readJson(path.join(DIR, 'sitdrive-winseek-b-s' + seed + '-sitdrive.json'));
