@@ -1,0 +1,17 @@
+(pre-talk seed: curious planted d88; takenWantDay=0; convoCount=1)
+=== seed 97903 day 90 — conversation with Nina (nina_petrova) ===
+occupation=mechanic temperament=dry trust=27 dead=false
+want: curious (stage 1)
+open thread: want fromSeed=true
+picker: control
+
+THEM: "About the last time you laughed — When's the last time you really laughed?"
+(turn0 choices: ans:q_laugh_memory:a_deflect, ans:q_laugh_memory:a_tell, ans:q_laugh_memory:a_vague, ans:q_laugh_memory:honest_pass, leave, silence)
+YOU: [ans:q_laugh_memory:a_deflect] "Laughing feels wrong now."
+THEM: "Well. It feels wrong because it matters. The wrong-feeling things are usually the important ones."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: That could have stung. They let it pass — you've been kind before.
+YOU: (leave)
+pre-close: want curious stage 2 thread want
+closing line: "Well. That was almost a conversation. We're improving."
+(gossip picks this sitting: 0)
