@@ -15,6 +15,7 @@
 //   - isSponsorContest(contest) / marketSponsorLeanFor(pid, contest) -> CONTEST scale: Market sponsor lean for price/auction (risky — auction still pays)
 //   - isBloodContest(contest) / opaBloodLeanFor(pid, contest) -> CONTEST scale: One-Person Army blood lean for pit/gauntlet/duel/siege (braveryBonus steadiness)
 //   - isChaseContest(contest) / betweenChaseLeanFor(pid, contest) -> CONTEST scale: Between chase/race lean for hide/calorie_run
+//   - betweenRunnerLeanFor() -> ARMY scale: Between runner lean (day-parts) for aidPartsFor / aidSendRunner travel
 //   - voiceReachVillageIds() / voiceDeliverAllied(day) -> ARMY scale: Voice Be Heard reaches linked/allied foreign villages same day
 //   - gardenMusterFeedFor(need) -> ARMY scale: Living Garden harvest-day cover for titan muster upkeep kcal
 //   - marketOutfitLeanFor() -> ARMY scale: Market God quartermaster lean percent for titanOutfit effectiveness
@@ -43,7 +44,8 @@
 //   - all_seeing_strategy_lean: All-Seeing scale.contest — puzzle/detective + lies scores lean for the ascended holder (player or NPC), numbers in god.play.contestLean / strategyContests (code: allSeeingStrategyLeanFor, contestEngine _cxOther/_cxMoot)
 //   - market_sponsor_lean: Market God scale.contest — price moot case scores and auction bid capacity lean for the ascended holder (player or NPC), numbers in god.play.contestLean / sponsorContests; auction still pays (risky) (code: marketSponsorLeanFor, contestEngine _cxMoot/_cxChance)
 //   - opa_blood_lean: One-Person Army scale.contest — blood fight arms lean for the ascended holder (player or NPC), numbers in god.play.contestLean / bloodContests as extra braveryBonus / cheer steadiness (code: opaBloodLeanFor, contestEngine _cxBlood/duelFight; OVE-124)
-//   - between_chase_lean: Between scale.contest — chase/race arms lean for the ascended holder (player or NPC), numbers in god.play.contestLean / chaseContests: hide seeker spot pad (lean/25) + calorie_run forage yield; not Unkillable endurance IDs; runner army stays TEXT (code: betweenChaseLeanFor, contestEngine _cxOther; OVE-148)
+//   - between_chase_lean: Between scale.contest — chase/race arms lean for the ascended holder (player or NPC), numbers in god.play.contestLean / chaseContests: hide seeker spot pad (lean/25) + calorie_run forage yield; not Unkillable endurance IDs (code: betweenChaseLeanFor, contestEngine _cxOther; OVE-148)
+//   - between_runner_army_lean: Between scale.army — ascended Between holder (player or Haven NPC) leans aid-runner travel via god.play.runnerLean: fewer day-parts on aidPartsFor / aidSendRunner; does not re-label Voice Be Heard broadcast or retune Phase Out kcal / minFrac / retreat (code: betweenRunnerLeanFor, comms.js aidPartsFor/aidSendRunner; OVE-152)
 //   - voice_army_same_day: Voice scale.army — Be Heard stamps linked/allied foreign villages the same day (opinion + link trust + voiceDay; their people fight rallied) (code: voiceDeliverAllied, dailyVoice)
 //   - garden_army_muster_feed: Living Garden scale.army — Feed the Multitude harvest day covers titan muster upkeep kcal (musterMouths × musterKcalPerMouth) for an ascended holder (player or NPC); pack debit + hunger trust bleed only on uncovered remainder (code: gardenMusterFeedFor, titans.js titanMusterUpkeep)
 //   - market_army_outfit_lean: Market God scale.army — ascended Market holder (player or NPC) leans titanOutfit force wbonus/varmor/gearValue by god.play.outfitEffLean percent for the same transferred pieces (code: marketOutfitLeanFor, titans.js titanOutfit)
@@ -281,8 +283,8 @@
   // inside contestEngine _cxOther: hide seeker spot pad (lean/25), and
   // calorie_run forage yield. Exact IDs (OVE-148): hide, calorie_run —
   // not drop/exchange/starve/maw/vigil (Unkillable endurance), not
-  // cookfight/impress/moot/whoate/price/auction (other gods). Runner army
-  // (coalition between camps) stays TEXT; Phase Out stays personal.
+  // cookfight/impress/moot/whoate/price/auction (other gods). Phase Out
+  // stays personal; army runner lean is a separate hook (OVE-152).
   const CHASE_CONTEST_FALLBACK = ['hide', 'calorie_run'];
   function chaseContestSet() {
     const listed = godPlay('the_between').chaseContests;
@@ -304,6 +306,31 @@
       const lean = godPlay('the_between').contestLean;
       return (typeof lean === 'number' && lean > 0) ? lean : 18;
     } catch (e) { warn('betweenChaseLeanFor', e); return 0; }
+  }
+
+  // ---------------- ARMY scale: Between runner / inter-camp travel lean ----------------
+  // god.scale.army is design prose ("The coalition's runner between camps.").
+  // Live settlement: when an ascended Between holder (player or Haven NPC) is
+  // active, aidPartsFor / aidSendRunner read betweenRunnerLeanFor and subtract
+  // god.play.runnerLean day-parts from travel (floor 1). Does not re-label
+  // Voice Be Heard same-day broadcast, invent free Phase Out on the road, or
+  // retune Phase Out kcal / minFrac / retreat (OVE-152).
+  function betweenHolderActive() {
+    try {
+      if (holderGod('player') === 'the_between') return true;
+      const v = Game.state.village || {};
+      for (const vid of Object.keys(v.npcGodhood || {})) {
+        if (holderGod(vid) === 'the_between') return true;
+      }
+      return false;
+    } catch (e) { warn('betweenHolderActive', e); return false; }
+  }
+  function betweenRunnerLeanFor() {
+    try {
+      if (!betweenHolderActive()) return 0;
+      const lean = godPlay('the_between').runnerLean;
+      return (typeof lean === 'number' && lean > 0) ? lean : 1;
+    } catch (e) { warn('betweenRunnerLeanFor', e); return 0; }
   }
 
   // ---------------- ARMY scale: Living Garden muster-upkeep feed ----------------
@@ -1010,6 +1037,7 @@
     opaBloodLeanFor(pid, contest) { return opaBloodLeanFor(pid, contest); },
     isChaseContest(contest) { return isChaseContest(contest); },
     betweenChaseLeanFor(pid, contest) { return betweenChaseLeanFor(pid, contest); },
+    betweenRunnerLeanFor() { return betweenRunnerLeanFor(); },
     gardenMusterFeedFor(need) { return gardenMusterFeedFor(need); },
     marketOutfitLeanFor() { return marketOutfitLeanFor(); },
     allSeeingCouncilLeanFor() { return allSeeingCouncilLeanFor(); },
@@ -1927,7 +1955,7 @@
 
   const _mantle = Game.mantleBecome;
   Game.mantleBecome = function () { migratePlayerDayUses(); return _mantle.apply(this, arguments); };
-  S.GodVerbs = { holderGod, fighterGod, godPlay, godDaily, godVillagerCast, phoenixVillagerWorld, isFeastContest, gardenFeastLeanFor, isPerformanceContest, voicePerformanceLeanFor, isEnduranceContest, unkillableEnduranceLeanFor, isStrategyContest, allSeeingStrategyLeanFor, isSponsorContest, marketSponsorLeanFor, isBloodContest, opaBloodLeanFor, isChaseContest, betweenChaseLeanFor, gardenMusterFeedFor, marketOutfitLeanFor, allSeeingCouncilLeanFor, apexScoutMarkLeanFor, unkillableLastStandingLeanFor, opaBreachLeanFor, wardAdvanceLeanFor, VERB_IMPL, DAY_IMPL, registerGodActions, marketPick, painPool };
+  S.GodVerbs = { holderGod, fighterGod, godPlay, godDaily, godVillagerCast, phoenixVillagerWorld, isFeastContest, gardenFeastLeanFor, isPerformanceContest, voicePerformanceLeanFor, isEnduranceContest, unkillableEnduranceLeanFor, isStrategyContest, allSeeingStrategyLeanFor, isSponsorContest, marketSponsorLeanFor, isBloodContest, opaBloodLeanFor, isChaseContest, betweenChaseLeanFor, betweenRunnerLeanFor, gardenMusterFeedFor, marketOutfitLeanFor, allSeeingCouncilLeanFor, apexScoutMarkLeanFor, unkillableLastStandingLeanFor, opaBreachLeanFor, wardAdvanceLeanFor, VERB_IMPL, DAY_IMPL, registerGodActions, marketPick, painPool };
   // the data loads after the scripts (Game.init): register once it's there
   const _init = Game.init;
   if (typeof _init === 'function') {
