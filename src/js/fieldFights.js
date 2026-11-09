@@ -493,6 +493,13 @@
         vHpLeft: 0, mHpLeft: 0, packCount: 1, log: [],
         allyDealt: 0, calledHelp: false, allyVid: null, fleeHopeless: null, fleeHpFrac: null,
         everWinning: false, everHopeless: false, minHpFrac: 1,
+        // FIGHTBLEND-B (sim-fightblend-b, 2026-11-08): parallel
+        // protection-4 incoming totals (see the monster-phase P4 block
+        // and the morale read below). The morale read judges the HP
+        // trajectory as if protection were 4; vTakenP4/allyTakenP4 are
+        // its accumulators. vHpHypoLeft/allyHpHypoLeft are set at the
+        // close (record-only).
+        vTakenP4: 0, allyTakenP4: 0, vHpHypoLeft: null, allyHpHypoLeft: null,
         // TWOBLOW (sim-twoblow-a, 2026-10-31): the committed-finish
         // window's audit fields. committedFinish/ committedRounds are
         // set at the in-round break check; twoblowLastTwo/twoblowSum
@@ -1291,6 +1298,7 @@
         helpCalled = true; allyIn = true;
         allyVid = allyVids.shift(); allies--;
         var _ab0 = allyBody(allyVid); allyHp = _ab0.entry; allyMax = _ab0.max; allyEntryHp = _ab0.entry;
+        rec.allyTakenP4 = 0; // FIGHTBLEND-B: a new ally starts a new P4 total.
         allyGear(allyVid);
         try {
           var _fa0 = (opts.foreignAllies || {})[allyVid];
@@ -1604,6 +1612,21 @@
                 try { total = GPf.fieldIncoming(gpF, total, gpC({ round: round, attack: rAttack, beamDamage: beamDamage })); } catch (e) { console.warn('[godpath] incoming', e); }
                 gpTag(_gpLogN1);
               }
+              // FIGHTBLEND-B (sim-fightblend-b, 2026-11-08): the parallel
+              // protection-4 incoming total — the morale read's denominator
+              // (and, via vHpStart, its numerator). The monster-phase total
+              // as it stands after board/ability modifiers but before armor
+              // absorption, mitigated AS IF protection were 4. wornDamage,
+              // unbreakable brace, and shield wall are NOT applied (the
+              // (b) raw read's and midshape's exclusions), and no RNG draw
+              // is made — re-running wornDamage would split the streams.
+              var _p4Total = 0;
+              if (total > 0) {
+                var _p4Pierce = 0;
+                try { _p4Pierce = (mdef && mdef.pierce) || 0; } catch (e) {}
+                var _p4r = this.armorReduction(4, _p4Pierce);
+                _p4Total = total - Math.min(total - 1, Math.round(total * _p4r));
+              }
               if (!hittingAlly && varmor > 0 && total > 0) {
                 // ARMOR (Steve 2026-10-09; retuned sim-survivaltime-b
                 // 2026-11-06): diminishing-returns curve, mirroring the
@@ -1651,6 +1674,12 @@
                 } else {
                   rec.log.push('R' + round + ': ' + rAtkName + ' hits ' + allyName + ' for ' + total + ' (' + Math.max(0, allyHp) + ' left)');
                 }
+                // FIGHTBLEND-B: the P4 parallel total splits with the hit —
+                // leech moves half the blow onto the leader, at the P4 rate,
+                // firing exactly when the mitigated leech split fires.
+                var _p4Leech = (vHasAb('leech') && total > 0) ? Math.floor(_p4Total / 2) : 0;
+                rec.vTakenP4 += _p4Leech;
+                rec.allyTakenP4 += (_p4Total - _p4Leech);
                 if (allyHp <= 0 && gpF) {
                   var _gpLogN2 = rec.log.length;
                   try { var _gpHold = GPf.fieldAllyDown(gpF, gpC({ round: round })); if (_gpHold) allyHp = _gpHold; } catch (e) { console.warn('[godpath] ally down', e); }
@@ -1696,6 +1725,8 @@
                   if (total < _pre2) { ffFired('shield_wall'); rec.log.push(vName + ' holds the line with ' + allyName + ' — ' + _pre2 + ' → ' + total + '. (Shield Wall)'); }
                 }
                 vHp -= total; rec.vTaken += total; abRoundTaken += total;
+                // FIGHTBLEND-B: the P4 parallel total lands on the leader.
+                rec.vTakenP4 += _p4Total;
                 vBeamTaken += Math.max(0, Math.min(total, Math.round(total * beamShare)));
                 if (_wardVia && allyVid && total > 0 && mdef.id && !wardCarries.some(x => x.ally === allyVid))
                   wardCarries.push({ ally: allyVid, via: _wardVia, wound: total, day: day });
@@ -2237,17 +2268,25 @@
           var mlead = null;
           for (var lj = 0; lj < members.length; lj++) { if (members[lj].hp > 0) { mlead = members[lj]; break; } }
           if (mlead) {
-            var vDpr = rec.mDealt / round, mDpr = rec.vTaken / round;
+            var vDpr = rec.mDealt / round, mDpr = rec.vTakenP4 / round;
             var rtk = mlead.hp / Math.max(1, vDpr);  // rounds to drop the lead
-            var rtd = vHp / Math.max(1, mDpr);       // rounds until the villager drops
+            // FIGHTBLEND-B (sim-fightblend-b, 2026-11-08): the morale read
+            // runs on the HYPOTHETICAL trajectory — the HP the fighter
+            // would have if every blow had landed through protection 4
+            // (vHpStart minus the P4 total), against the P4 incoming rate.
+            // The live HP still carries the worn protection; only the
+            // judgment imagines protection 4. The party variant uses the
+            // hypothetical ally HP the same way.
+            var vHpHypo = vHpStart - rec.vTakenP4;
+            var rtd = vHpHypo / Math.max(1, mDpr);   // rounds until the villager drops (as if prot 4)
             // WINFIELD-DMG (2026-11-03): with a live ally standing, the
             // honest comparison is the PARTY's survival against the
             // beast's TTK — two bodies, total incoming — not the
             // leader's alone. mDealt already counts party damage, so
             // only the survival side changes. Solo fights are identical.
             if (allyIn && allyHp > 0 && allyEntryHp > 0) {
-              var _allyTakenLive = Math.max(0, allyEntryHp - Math.max(0, allyHp));
-              rtd = (vHp + allyHp) / Math.max(1, (rec.vTaken + _allyTakenLive) / round);
+              var _allyHpHypo = allyEntryHp - rec.allyTakenP4;
+              rtd = (vHpHypo + _allyHpHypo) / Math.max(1, (rec.vTakenP4 + rec.allyTakenP4) / round);
             }
             hopeless = rtd < rtk * 0.85;              // losing before the lead falls — slow bleeds count (loosened 2026-10-13, was 0.6)
             // COUNTERWIRE (2026-10-16): trick-aware morale. A villager
@@ -2318,6 +2357,7 @@
           helpCalled = true; allyIn = true;
           allyVid = allyVids.shift(); allies--;
           var _ab1 = allyBody(allyVid); allyHp = _ab1.entry; allyMax = _ab1.max; allyEntryHp = _ab1.entry;
+          rec.allyTakenP4 = 0; // FIGHTBLEND-B: a new ally starts a new P4 total.
           allyGear(allyVid);
           // AID (comms 2026-10-10): foreign allies carry their own names.
           try {
@@ -2672,6 +2712,9 @@
       rec.allyTaken = helpCalled ? Math.max(0, allyEntryHp - Math.max(0, allyHp)) : 0;
       rec.allyHpLeft = helpCalled ? Math.max(0, allyHp) : null;
       rec.allyEntryHp = helpCalled ? allyEntryHp : null;
+      // FIGHTBLEND-B: record-only — the hypothetical trajectory at the close.
+      rec.vHpHypoLeft = Math.max(0, vHpStart - rec.vTakenP4);
+      rec.allyHpHypoLeft = helpCalled ? Math.max(0, allyEntryHp - rec.allyTakenP4) : null;
       rec.allyWoundsSettled = allySettles;
       // REAR GUARD (sim-gaps-ghost, 2026-10-29): the mustered fighters
       // who never joined the blows are not ghosts — they marched, and
