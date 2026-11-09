@@ -1,0 +1,66 @@
+tip: a6f4a21c3396e4aa0e310551b6fc5505f5e92b69
+evid: /agent/repos/the-oversight/evidence/2026-11-08/phase6-role-census-after-codex-prey
+
+==== POLICY capable seeds 16 ====
+verdict: GO 
+tracks with signal: ["combat","field","social","craft"] (4/5)
+DUTY_ad events: 2935 | DUTY_picked: 1066 | duty_top_score picks: 1066 | seeds ads 16/16 | seeds picks 16/16 | daysWithOpp 1264/1285
+DUTY_ad by task: {"forage":213,"cook":213,"water":2155,"hunt":803,"teach":2887,"patrol":651}
+DUTY_picked by task: {"forage":81,"water":650,"patrol":123,"teach":131,"hunt":81}
+DUTY_picked by override: {"duty_top_score":1066}
+when ads present, logged pick kinds (samples): {"FORAGE":4,"WATER":129,"DUTY":228,"HAVEN_CHORE":137,"VISIT":119,"EXPEDITION":23}
+when ads present, overrides (samples): {"none":383,"duty_top_score":228,"win_plan:party_launch":22,"expedition_hash":1,"win_plan:party_wait":6}
+resolved by task: {"garden":141,"wood":1957,"water":1050,"deadfall":981,"stone":1962,"cook":897,"fish":346,"forage":11}
+rung lines: 363 {"deadfall":28,"stone":101,"wood":95,"water":55,"cook":59,"fish":19,"garden":2,"teach":1,"patrol":1}
+
+per-track table (qual60, n=116):
+| track | comp rung steps | villagers moved | track lvl≥1 | specialist 0→+ | dominant | signal |
+| combat | 1 | 1 | 75 | 0 | 4 | true |
+| field | 77 | 27 | 46 | 16 | 4 | true |
+| social | 1 | 1 | 88 | 0 | 12 | true |
+| craft | 180 | 47 | 36 | 0 | 1 | true |
+| strange | 0 | 0 | 0 | 0 | 0 | false |
+competence cells moved total: 132 | by task: {"hunt":2,"forage":0,"garden":2,"fish":14,"wood":69,"stone":64,"deadfall":19,"water":40,"scout":0,"patrol":1,"cook":47,"tend":0,"teach":1,"mend":0}
+focus practice (reps/villagers/maxEnd/ge8/compRungs): {"hunt":{"reps":83,"villagers":28,"maxEnd":9,"ge8FirstRung":2,"competenceRungSteps":2},"patrol":{"reps":86,"villagers":39,"maxEnd":8,"ge8FirstRung":1,"competenceRungSteps":1},"teach":{"reps":63,"villagers":26,"maxEnd":9,"ge8FirstRung":1,"competenceRungSteps":1},"scout":{"reps":0,"villagers":0,"maxEnd":0,"ge8FirstRung":0,"competenceRungSteps":0}}
+practice reps by task: {"hunt":83,"forage":4,"garden":79,"fish":245,"wood":1315,"stone":1285,"deadfall":709,"water":745,"scout":0,"patrol":86,"cook":640,"tend":0,"teach":63,"mend":0}
+specialist 0→+: 16 | skills+: 793 | ab+: 284
+dominant tracks: {"social":12,"field":4,"combat":4,"craft":1} | distinct: 4
+behavior: strong 96/116 hybrid 60 matchedTop 22 meanTopShare 0.45
+BEFORE(OVE-77) DUTY_ad→picked: 2935 → 1043 | AFTER(codex-prey) DUTY_ad→picked: 2935 → 1066 (duty_top_score 1066)
+BEFORE focusPractice: {"hunt":{"reps":0,"villagers":0,"maxEnd":0,"ge8FirstRung":0,"competenceRungSteps":0},"patrol":{"reps":81,"villagers":38,"maxEnd":8,"ge8FirstRung":1,"competenceRungSteps":1},"teach":{"reps":97,"villagers":44,"maxEnd":9,"ge8FirstRung":1,"competenceRungSteps":1},"scout":{"reps":0,"villagers":0,"maxEnd":0,"ge8FirstRung":0,"competenceRungSteps":0}}
+AFTER focusPractice: {"hunt":{"reps":83,"villagers":28,"maxEnd":9,"ge8FirstRung":2,"competenceRungSteps":2},"patrol":{"reps":86,"villagers":39,"maxEnd":8,"ge8FirstRung":1,"competenceRungSteps":1},"teach":{"reps":63,"villagers":26,"maxEnd":9,"ge8FirstRung":1,"competenceRungSteps":1},"scout":{"reps":0,"villagers":0,"maxEnd":0,"ge8FirstRung":0,"competenceRungSteps":0}}
+focus DUTY ad/pick before→after: {"hunt":{"beforeAd":202,"afterAd":803,"beforePick":0,"afterPick":81},"patrol":{"beforeAd":633,"afterAd":651,"beforePick":106,"afterPick":123},"teach":{"beforeAd":2892,"afterAd":2887,"beforePick":203,"afterPick":131},"scout":{"beforeAd":0,"afterAd":0,"beforePick":0,"afterPick":0}}
+focus competence cells before→after: {"hunt":{"beforeComp":0,"afterComp":2},"patrol":{"beforeComp":1,"afterComp":1},"teach":{"beforeComp":1,"afterComp":1},"scout":{"beforeComp":0,"afterComp":0}}
+
+==== POLICY competent seeds 16 ====
+verdict: GO 
+tracks with signal: ["combat","field","social","craft"] (4/5)
+DUTY_ad events: 3043 | DUTY_picked: 1086 | duty_top_score picks: 1086 | seeds ads 16/16 | seeds picks 16/16 | daysWithOpp 1239/1261
+DUTY_ad by task: {"forage":175,"cook":175,"water":2286,"hunt":956,"teach":3000,"patrol":557}
+DUTY_picked by task: {"forage":69,"water":697,"teach":90,"patrol":67,"hunt":163}
+DUTY_picked by override: {"duty_top_score":1086}
+when ads present, logged pick kinds (samples): {"DUTY":214,"WATER":116,"FORAGE":8,"VISIT":153,"HAVEN_CHORE":119,"EXPEDITION":30}
+when ads present, overrides (samples): {"duty_top_score":214,"none":395,"win_plan:party_launch":27,"expedition_hash":3,"win_plan:party_wait":1}
+resolved by task: {"garden":202,"wood":2174,"water":1175,"deadfall":1019,"stone":2169,"cook":1181,"fish":384,"forage":10}
+rung lines: 407 {"wood":101,"stone":101,"water":65,"cook":69,"deadfall":32,"garden":5,"fish":18,"forage":1}
+
+per-track table (qual60, n=88):
+| track | comp rung steps | villagers moved | track lvl≥1 | specialist 0→+ | dominant | signal |
+| combat | 0 | 0 | 17 | 0 | 2 | true |
+| field | 58 | 29 | 39 | 8 | 11 | true |
+| social | 0 | 0 | 16 | 0 | 5 | true |
+| craft | 139 | 37 | 21 | 0 | 3 | true |
+| strange | 0 | 0 | 0 | 0 | 0 | false |
+competence cells moved total: 108 | by task: {"hunt":9,"forage":0,"garden":2,"fish":6,"wood":53,"stone":49,"deadfall":12,"water":29,"scout":0,"patrol":0,"cook":37,"tend":0,"teach":0,"mend":0}
+focus practice (reps/villagers/maxEnd/ge8/compRungs): {"hunt":{"reps":168,"villagers":26,"maxEnd":25,"ge8FirstRung":8,"competenceRungSteps":9},"patrol":{"reps":73,"villagers":34,"maxEnd":7,"ge8FirstRung":0,"competenceRungSteps":0},"teach":{"reps":45,"villagers":27,"maxEnd":5,"ge8FirstRung":0,"competenceRungSteps":0},"scout":{"reps":0,"villagers":0,"maxEnd":0,"ge8FirstRung":0,"competenceRungSteps":0}}
+practice reps by task: {"hunt":168,"forage":0,"garden":72,"fish":111,"wood":1154,"stone":1114,"deadfall":381,"water":553,"scout":0,"patrol":73,"cook":629,"tend":0,"teach":45,"mend":0}
+specialist 0→+: 8 | skills+: 558 | ab+: 107
+dominant tracks: {"field":11,"social":5,"craft":3,"combat":2} | distinct: 4
+behavior: strong 80/88 hybrid 46 matchedTop 17 meanTopShare 0.53
+BEFORE(OVE-77) DUTY_ad→picked: 3050 → 1050 | AFTER(codex-prey) DUTY_ad→picked: 3043 → 1086 (duty_top_score 1086)
+BEFORE focusPractice: {"hunt":{"reps":0,"villagers":0,"maxEnd":0,"ge8FirstRung":0,"competenceRungSteps":0},"patrol":{"reps":82,"villagers":38,"maxEnd":6,"ge8FirstRung":0,"competenceRungSteps":0},"teach":{"reps":82,"villagers":45,"maxEnd":5,"ge8FirstRung":0,"competenceRungSteps":0},"scout":{"reps":0,"villagers":0,"maxEnd":0,"ge8FirstRung":0,"competenceRungSteps":0}}
+AFTER focusPractice: {"hunt":{"reps":168,"villagers":26,"maxEnd":25,"ge8FirstRung":8,"competenceRungSteps":9},"patrol":{"reps":73,"villagers":34,"maxEnd":7,"ge8FirstRung":0,"competenceRungSteps":0},"teach":{"reps":45,"villagers":27,"maxEnd":5,"ge8FirstRung":0,"competenceRungSteps":0},"scout":{"reps":0,"villagers":0,"maxEnd":0,"ge8FirstRung":0,"competenceRungSteps":0}}
+focus DUTY ad/pick before→after: {"hunt":{"beforeAd":206,"afterAd":956,"beforePick":0,"afterPick":163},"patrol":{"beforeAd":575,"afterAd":557,"beforePick":71,"afterPick":67},"teach":{"beforeAd":3005,"afterAd":3000,"beforePick":156,"afterPick":90},"scout":{"beforeAd":0,"afterAd":0,"beforePick":0,"afterPick":0}}
+focus competence cells before→after: {"hunt":{"beforeComp":0,"afterComp":9},"patrol":{"beforeComp":0,"afterComp":0},"teach":{"beforeComp":0,"afterComp":0},"scout":{"beforeComp":0,"afterComp":0}}
+
+wrote /agent/repos/the-oversight/evidence/2026-11-08/phase6-role-census-after-codex-prey/analysis.json
