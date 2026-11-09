@@ -1,0 +1,33 @@
+=== sim-wideduty-a BEFORE ===
+WALL: national=0/8 table=0 wins=0 waveReach={"1":8,"2":8,"3":8,"4":7,"5":2} medianSurvival=97d max=143d
+PRIMARY: dutyHeld=342/786 share=43.5% dutyTrained=0/786 (0.0%) zeroDutySeeds=3/8
+COVERAGE: eligibleDays=544/786 (69.2%) eligibleMax=6 medicPresent=363/786 (46.2%) zeroMedicSeeds=3/8 spawnMedics=5 spawnSeedsWithMedic=4/8
+PATHS: medLessons=33 triageNonMedicDays=457 triageNonMedicMax=5 wcHolderDays=512 hmHolderDays=377 dutyCures ability=43 medicine=0
+RECRUIT: joins=138 medicJoins=6 medicDeaths=6
+GUARDRAILS: starvationDeaths=5 deathModes={"fight":94,"wound/sickness":18,"label:gavel":1,"starvation":5,"dehydration":1,"label:big big":1,"label:the focus group":1} deathCauses={"the wild":63,"contest":7,"monster":10,"the arena":6,"sickness":13,"combat":1,"a wound that wouldn't close":5,"ambush":5,"gavel":1,"starvation":5,"a stranger":2,"dehydration":1,"big big":1,"the focus group":1}
+  seed 96301: days=143 dutyHeld=128/142 dutyTrained=0 eligibleMax=6 medicPresent=129 spawnMedics=1 lessons=13 joins=19 medicJoins=1 medicDeaths=1
+  seed 96302: days=97 dutyHeld=0/97 dutyTrained=0 eligibleMax=5 medicPresent=0 spawnMedics=0 lessons=11 joins=16 medicJoins=0 medicDeaths=0
+  seed 96303: days=81 dutyHeld=34/81 dutyTrained=0 eligibleMax=2 medicPresent=51 spawnMedics=1 lessons=0 joins=14 medicJoins=1 medicDeaths=1
+  seed 96304: days=75 dutyHeld=66/75 dutyTrained=0 eligibleMax=4 medicPresent=67 spawnMedics=1 lessons=3 joins=21 medicJoins=1 medicDeaths=1
+  seed 96305: days=81 dutyHeld=1/80 dutyTrained=0 eligibleMax=1 medicPresent=2 spawnMedics=0 lessons=0 joins=17 medicJoins=1 medicDeaths=1
+  seed 96306: days=97 dutyHeld=0/97 dutyTrained=0 eligibleMax=0 medicPresent=0 spawnMedics=0 lessons=0 joins=17 medicJoins=0 medicDeaths=0
+  seed 96307: days=134 dutyHeld=113/134 dutyTrained=0 eligibleMax=4 medicPresent=114 spawnMedics=2 lessons=6 joins=19 medicJoins=2 medicDeaths=2
+  seed 96308: days=80 dutyHeld=0/80 dutyTrained=0 eligibleMax=0 medicPresent=0 spawnMedics=0 lessons=0 joins=15 medicJoins=0 medicDeaths=0
+=== sim-wideduty-a AFTER ===
+WALL: national=0/8 table=0 wins=0 waveReach={"1":8,"2":8,"3":8,"4":7,"5":2} medianSurvival=131d max=150d
+PRIMARY: dutyHeld=656/926 share=70.8% dutyTrained=349/926 (37.7%) zeroDutySeeds=2/8
+COVERAGE: eligibleDays=668/926 (72.1%) eligibleMax=6 medicPresent=350/926 (37.8%) zeroMedicSeeds=3/8 spawnMedics=5 spawnSeedsWithMedic=4/8
+PATHS: medLessons=33 triageNonMedicDays=566 triageNonMedicMax=5 wcHolderDays=619 hmHolderDays=422 dutyCures ability=64 medicine=0
+RECRUIT: joins=150 medicJoins=6 medicDeaths=6
+GUARDRAILS: starvationDeaths=1 deathModes={"fight":120,"wound/sickness":11,"label:gavel":1,"starvation":1,"label:big big":1,"label:the focus group":1} deathCauses={"the wild":84,"contest":5,"monster":13,"the arena":8,"sickness":6,"ambush":4,"gavel":1,"a stranger":5,"the expedition":1,"a wound that wouldn't close":5,"starvation":1,"big big":1,"the focus group":1}
+  seed 96301: days=150 dutyHeld=142/150 dutyTrained=14 eligibleMax=6 medicPresent=129 spawnMedics=1 lessons=13 joins=22 medicJoins=1 medicDeaths=1
+  seed 96302: days=74 dutyHeld=72/73 dutyTrained=72 eligibleMax=5 medicPresent=0 spawnMedics=0 lessons=4 joins=12 medicJoins=0 medicDeaths=0
+  seed 96303: days=131 dutyHeld=66/131 dutyTrained=66 eligibleMax=2 medicPresent=37 spawnMedics=1 lessons=0 joins=23 medicJoins=1 medicDeaths=1
+  seed 96304: days=109 dutyHeld=105/109 dutyTrained=39 eligibleMax=4 medicPresent=67 spawnMedics=1 lessons=5 joins=23 medicJoins=1 medicDeaths=1
+  seed 96305: days=138 dutyHeld=135/137 dutyTrained=135 eligibleMax=3 medicPresent=3 spawnMedics=0 lessons=6 joins=18 medicJoins=1 medicDeaths=1
+  seed 96306: days=97 dutyHeld=0/97 dutyTrained=0 eligibleMax=0 medicPresent=0 spawnMedics=0 lessons=0 joins=17 medicJoins=0 medicDeaths=0
+  seed 96307: days=149 dutyHeld=136/149 dutyTrained=23 eligibleMax=4 medicPresent=114 spawnMedics=2 lessons=5 joins=20 medicJoins=2 medicDeaths=2
+  seed 96308: days=80 dutyHeld=0/80 dutyTrained=0 eligibleMax=0 medicPresent=0 spawnMedics=0 lessons=0 joins=15 medicJoins=0 medicDeaths=0
+G1 PRIMARY: dutyHeldShare=70.8% (need >=60%, before 43.5%) -> PASS; zeroDutySeeds=2 (need <=2, before 3) -> PASS; G1 PASS
+G2 GUARDRAILS: medianSurvival 131 vs 0.8x before 78 -> PASS; starvation 1 vs before+2 7 -> PASS; newDeathModes>=2 none -> PASS; G2 PASS
+VERDICT: GO (G1+G2 pass; G3 panel + G4 proof judged separately)

@@ -14289,6 +14289,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     campHealerId(place = 'here') {
       const people = this.campPeopleIds(place);
       if (people.includes(this.villagerId) && (this.hasAbility('triage') || this.hasAbility('field_medicine') || this.hasAbility('herbal_remedy'))) return this.villagerId;
+      // (sim-wideduty-a): the duty holder IS the camp healer — a trained
+      // holder must be visible to healerRounds / healerFor, or the duty's
+      // presence mechanism would not see them. Only the holder, not every
+      // trained villager: the duty remains the single channel. The holder
+      // is at Haven by validation, so a travelling 'here' camp is
+      // unaffected (the holder is not among its people).
+      let duty = null;
+      try { duty = this.medicDutyHolder ? this.medicDutyHolder() : null; } catch (e) {}
+      if (duty && people.includes(duty)) return duty;
       return people.find(id => id !== this.villagerId && /nurse|medic|doctor|paramedic|midwife|veterinarian|pharmacist|herbalist|dentist/i.test(String(this.getPerson(id).formerOccupation || ''))) || null;
     },
     campHealerName(place = 'here') {
@@ -33033,7 +33042,33 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // reads) and the village's own pharmacy stores. Presence is the
     // mechanism: a holder at Haven is the camp healer, so healerRounds,
     // villageSicknessTick's healerFor and villagerTreatTick all see them.
-    // Deterministic: roster order, triage preference, no RNG.
+    // (sim-wideduty-a, 2026-11-09): "medic" is now the trained
+    // villager, not just the job title — isMedicDutyEligible below.
+    // Deterministic: roster order, tiered preference, no RNG.
+    // isMedicDutyEligible(id): who counts as a duty medic.
+    // (sim-wideduty-a, 2026-11-09.) A villager counts when they can do
+    // the job the duty exists to do — tend the sick and cure them — not
+    // only when they hold the job title: a medical occupation, OR a
+    // medical skill (wound_care / herbal_medicine), OR a healing ability
+    // (triage / herbal_remedy / field_medicine). The skill and ability
+    // legs overlap by design: triage and field_medicine are skill-lane
+    // abilities carried by wound_care, herbal_remedy by herbal_medicine
+    // (abilities.json), so a taught villager already holds the ability —
+    // both legs are checked anyway, explicitly, so the predicate survives
+    // a data change either way. Pure reads only (npcKnowsSkill /
+    // npcHasAbility read the npcSkills / npcAbilities stores; neither
+    // seeds), so calling this from recorders or the duty tick cannot
+    // diverge a trajectory.
+    isMedicDutyEligible(id) {
+      if (!id || id === this.villagerId) return false;
+      let p = null;
+      try { p = this.getPerson(id); } catch (e) {}
+      if (!p || p.dead) return false;
+      if (/nurse|medic|doctor|paramedic|midwife|veterinarian|pharmacist|herbalist|dentist/i.test(String(p.formerOccupation || ''))) return true;
+      try { if (this.npcKnowsSkill && (this.npcKnowsSkill(id, 'wound_care') || this.npcKnowsSkill(id, 'herbal_medicine'))) return true; } catch (e) {}
+      try { if (this.npcHasAbility && (this.npcHasAbility(id, 'triage') || this.npcHasAbility(id, 'herbal_remedy') || this.npcHasAbility(id, 'field_medicine'))) return true; } catch (e) {}
+      return false;
+    },
     medicDutyHolder() {
       const v = this.state.village || {};
       const id = v.medicDuty;
@@ -33047,8 +33082,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if ((v.away || {})[id]) return null;
       const msick = (v.sick || {})[id];
       if (msick && (msick.severity || 1) >= 2) return null; // a patient, not the holder
-      const occ = String(p.formerOccupation || '').toLowerCase();
-      if (!/nurse|medic|doctor|paramedic|midwife|veterinarian|pharmacist|herbalist|dentist/i.test(occ)) return null;
+      // (sim-wideduty-a): eligibility is the trained villager, not the
+      // job title alone — see isMedicDutyEligible.
+      if (!this.isMedicDutyEligible(id)) return null;
       let atHaven = false;
       try { atHaven = (this.campPeopleIds('haven') || []).includes(id); } catch (e) {}
       if (!atHaven) return null;
@@ -33066,17 +33102,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         catch (e) { return 'Someone'; }
       };
       const isMedic = (id) => {
-        if (id === this.villagerId) return false;
-        let p = null;
-        try { p = this.getPerson(id); } catch (e) {}
-        if (!p || p.dead) return false;
-        return /nurse|medic|doctor|paramedic|midwife|veterinarian|pharmacist|herbalist|dentist/i.test(String(p.formerOccupation || ''));
+        try { return !!this.isMedicDutyEligible(id); } catch (e) { return false; }
       };
       const anyMedic = (v.roster || []).some(isMedic);
       const prev = v.medicDuty || null;
       // Pick one living roster medic physically at Haven (not away, not
-      // sev-2 sick, not the scholar), preferring triage holders, then
-      // first in roster order — deterministic, no RNG.
+      // sev-2 sick, not the scholar), preferring a holder who can actually
+      // cure (a healing ability), then an occupation medic, then a
+      // skill-only trained villager — deterministic, no RNG.
       let haven = [];
       try { haven = this.campPeopleIds('haven') || []; } catch (e) {}
       const cands = (v.roster || []).filter(id => {
@@ -33086,20 +33119,27 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (ms && (ms.severity || 1) >= 2) return false;
         return haven.includes(id);
       });
-      cands.sort((a, b) => {
-        const ta = (this.npcHasAbility && this.npcHasAbility(a, 'triage')) ? 0 : 1;
-        const tb = (this.npcHasAbility && this.npcHasAbility(b, 'triage')) ? 0 : 1;
-        return ta - tb; // stable: roster order within each group
-      });
+      const tier = (id) => {
+        try {
+          if (this.npcHasAbility && (this.npcHasAbility(id, 'triage') || this.npcHasAbility(id, 'herbal_remedy') || this.npcHasAbility(id, 'field_medicine'))) return 0;
+        } catch (e) {}
+        let pp = null;
+        try { pp = this.getPerson(id); } catch (e) {}
+        if (pp && /nurse|medic|doctor|paramedic|midwife|veterinarian|pharmacist|herbalist|dentist/i.test(String(pp.formerOccupation || ''))) return 1;
+        return 2;
+      };
+      cands.sort((a, b) => tier(a) - tier(b)); // stable: roster order within each tier
       const next = cands.length ? cands[0] : null;
       v.medicDuty = next;
       if (next && next !== prev) {
         this.say(`${nm(next)} is staying at Haven as the camp healer now — tending the sick instead of ranging out.`);
       }
       if (!next && !anyMedic) {
-        // No medic at all: one throttled line (once per 7 days, only
-        // while someone is sick) — medicdiag found zero say-lines
-        // anywhere mentioning a missing healer.
+        // No eligible villager at all (sim-wideduty-a: trained counts —
+        // a trained villager away from Haven means the village DOES know
+        // doctoring, so this line must not fire). One throttled line
+        // (once per 7 days, only while someone is sick) — medicdiag
+        // found zero say-lines anywhere mentioning a missing healer.
         const sickIds = Object.keys(v.sick || {});
         if (sickIds.length) {
           const day = (this.state.scholar || {}).day || 0;
@@ -33198,6 +33238,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const v = this.state.village || {};
       const sickIds = Object.keys(v.sick || {});
       if (!sickIds.length) return;
+      // HAVEN MEDIC DUTY (sim-medicduty-a): the duty holder tends FIRST.
+      // (sim-wideduty-a): a trained holder is not an occupation medic, so
+      // they would never enter the tenders list below — include the
+      // holder explicitly, so the duty's tend-first + cure attempt fire
+      // for whoever holds the duty. Computed first: the holder is
+      // validated alive / not-sev-2-sick by medicDutyHolder itself.
+      const duty = (() => { try { return this.medicDutyHolder(); } catch (e) { return null; } })();
       const medics = (v.roster || []).filter(id => {
         if (id === this.villagerId) return false;
         let p = null;
@@ -33211,10 +33258,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const occ = String(p.formerOccupation || '').toLowerCase();
         return /nurse|medic|doctor|paramedic|midwife|veterinarian|pharmacist|herbalist|dentist/i.test(occ);
       });
+      if (duty && !medics.includes(duty)) medics.push(duty);
       if (!medics.length) return;
       const tendedThisTick = new Set();
-      // HAVEN MEDIC DUTY (sim-medicduty-a): the duty holder tends FIRST.
-      const duty = (() => { try { return this.medicDutyHolder(); } catch (e) { return null; } })();
       const ordered = medics.slice().sort((a, b) => ((a === duty) ? 0 : 1) - ((b === duty) ? 0 : 1));
       for (const mid of ordered) {
         let reach = 1;
