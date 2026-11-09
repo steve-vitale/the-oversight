@@ -139,24 +139,82 @@ function tradeBeatPick(shape, windowOpen) {
   return 'feast';
 }
 
-// hop-by-hop honest walk toward (hx,hy): one travelTo per hop, no force,
-// bounded. travelTargets only reaches d<=3, so a single travelTo can't
-// cross the map — walk it like a player would. (pattern from competent.js)
-function walkTo(Game, hx, hy) {
+// Resilient walk toward (hx,hy): orthogonal one-tile steps through
+// travelTo — the same pipeline walkHome uses (game.js, fixall-map
+// slice 1a). Each step tries the longer axis first, then the other
+// axis, then a perpendicular sidestep (toward-target side first, never
+// onto a tile already on this walk's path). A single blocked hop no
+// longer ends the walk: the walker goes around it, like a player would.
+// Stops when within closeEnough tiles (the pilgrimage passes 2 — study
+// range — so it stops at the village's edge instead of demanding the
+// village tile itself; the return home passes 0, exact arrival) and
+// stops honestly when every escape refuses — the engine names the block
+// on each refusal, so no new instrumentation is needed.
+// r122 fix for the 97904 pilgrimage stall: the old walkTo tried exactly
+// ONE d<=3 jump per day (first minimum-distance target, row-major) and
+// abandoned the walk on the first refusal. The jump (4,4)->(2,5) is
+// refused by travelTo's intermediate-blockage scan — intermediate (2,4)
+// is a creek needing a bridge — while the tied alternative (3,6) is
+// itself a bridgeless creek and only (4,7) was open, never tried. And
+// the destination (2,8) is itself a bridgeless creek, so exact arrival
+// was impossible on this seed at all: the walk must stop at study
+// range, not at the village tile. One-tile steps also retire the old
+// jumps' intermediate-fan refusal surface. No resource spend: no
+// bridge-building, no clearing — going around is the fix; a genuinely
+// ringed target stalls honestly with the block named.
+// Returns {reached, steps, blocked} for the proof test; callers ignore it.
+function walkTo(Game, hx, hy, closeEnough) {
   try {
-    let guard = 0;
-    while ((Game.map.px !== hx || Game.map.py !== hy) && guard++ < 10 && !Game.over && !Game.tbfight) {
-      let best = null, bd = 1e9;
-      for (const tt of (Game.travelTargets() || [])) {
-        const d = Math.abs(tt.x - hx) + Math.abs(tt.y - hy);
-        if (d < bd) { bd = d; best = tt; }
+    const close = (closeEnough === undefined ? 0 : closeEnough) | 0;
+    const distTo = () => Math.abs(hx - Game.map.px) + Math.abs(hy - Game.map.py);
+    const MAX_STEPS = 16; // 8 to cross the 9x9 + 8 for detours
+    const path = [{ x: Game.map.px, y: Game.map.py }];
+    let steps = 0, blocked = null;
+    while (distTo() > close && steps < MAX_STEPS && !Game.over && !Game.tbfight) {
+      const px = Game.map.px, py = Game.map.py;
+      const dx = hx - px, dy = hy - py;
+      // Try the longer axis first, then the other; a refused step costs
+      // nothing and moves nothing (travelTo reports the block). Never
+      // step onto a tile already on this walk's path (no oscillation).
+      const axes = Math.abs(dx) >= Math.abs(dy)
+        ? [[Math.sign(dx), 0], [0, Math.sign(dy)]]
+        : [[0, Math.sign(dy)], [Math.sign(dx), 0]];
+      const tryStep = (sx, sy) => {
+        if (sx === 0 && sy === 0) return false;
+        const nx = px + sx, ny = py + sy;
+        if (path.some(p => p.x === nx && p.y === ny)) return false;
+        const before = { x: Game.map.px, y: Game.map.py };
+        let res = null;
+        try { res = Game.travelTo(nx, ny); } catch (e) { return false; }
+        if (Game.map.px !== before.x || Game.map.py !== before.y) return true;
+        // Refused: remember the block if travelTo named one.
+        if (res && res.kind === 'blockage') blocked = res;
+        else if (res && res.blockType) blocked = res;
+        return false;
+      };
+      let moved = false;
+      for (const [sx, sy] of axes) { if (tryStep(sx, sy)) { moved = true; break; } }
+      if (!moved) {
+        // SIDESTEP (walkHome pattern): an axis-aligned walk has no second
+        // homeward axis, so one creek on the straight line used to end the
+        // walk. Step perpendicular instead — still one real tile at a time,
+        // still through travelTo — then re-aim from the new row/column.
+        // Toward-target perpendicular first, so a sidestep never raises the
+        // compass distance. Never onto a tile already on this walk's path.
+        const perp = Math.abs(dx) >= Math.abs(dy)
+          ? [[0, Math.sign(dy) || 1], [0, -(Math.sign(dy) || 1)]]
+          : [[Math.sign(dx) || 1, 0], [-(Math.sign(dx) || 1), 0]];
+        for (const [sx, sy] of perp) {
+          if (tryStep(sx, sy)) { moved = true; break; }
+        }
       }
-      if (!best) break;
-      const px0 = Game.map.px, py0 = Game.map.py;
-      try { Game.travelTo(best.x, best.y); } catch (e) { break; }
-      if (Game.map.px === px0 && Game.map.py === py0) break; // refused: stay put, safely
+      if (!moved) break; // every escape refused — stop honestly, block named by the engine
+      steps++;
+      path.push({ x: Game.map.px, y: Game.map.py });
+      if (Game.inCombat && Game.inCombat()) break;
     }
-  } catch (e) {}
+    return { reached: distTo() <= close, steps, blocked };
+  } catch (e) { return { reached: false, steps: 0, blocked: null }; }
 }
 
 function pantryKcal(Game) {
@@ -287,7 +345,10 @@ function courtship(Game, ctx) {
               ctx._returning = true;
               return;
             }
-            walkTo(Game, tv.x || 4, tv.y || 4);
+            // r122: stop at study range (dist 2) — the village tile itself
+            // can be a bridgeless creek (97904 village_0 sits on one), so
+            // exact arrival is impossible there; the study fires at dist<=2.
+            walkTo(Game, tv.x || 4, tv.y || 4, 2);
             try { const qx = (Game.map || {}).px, qy = (Game.map || {}).py; (ctx.posTrace = ctx.posTrace || []).push({ day, vid: pg.vid, px, py, tx: (tv.x || 4), ty: (tv.y || 4), dist, stage: 'walk', px2: qx, py2: qy, dist2: (Math.abs((tv.x || 4) - qx) + Math.abs((tv.y || 4) - qy)) }); } catch (e) {}
             return;
           }
@@ -428,4 +489,4 @@ const scalecourt = Object.assign({}, competent, {
   },
 });
 
-module.exports = { scalecourt, tradeViable, tradeSealed, subCount, tradeBeatPick, tradePool, tradeWindowOpen, TRADE_WINDOW_END };
+module.exports = { scalecourt, tradeViable, tradeSealed, subCount, tradeBeatPick, tradePool, tradeWindowOpen, TRADE_WINDOW_END, walkTo };
