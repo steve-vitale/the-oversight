@@ -2064,9 +2064,10 @@ Villager map memory + cross-node objectives. Villagers remember resource sites o
 ### villager-objectives (`villager-objectives.js`)
 Villager objective AI. Villagers pursue objectives instead of drifting randomly.
 
-**Provides:** objState(), objOf(vid), objPick(vid, hx, hy), objRefreshPick(vid, hx, hy, opts), objNeedsEmergencyPick(vid), objDanger(vid, tx, ty, hx, hy), objDangerBelief(vid), objResourceBelief(vid), objResourceSee(vid), objMaybeDepart(rid, node, atHaven, hx, hy), objAwayStep(rid, node, away, hx, hy), objAskCompanion(vid, obj, hx, hy, opts), objCommitGuardOffer(cid, offer), objRallyFreshRaid(vid), objTick(), objHealGate(vid, obj, hx, hy, playerAtHaven)
+**Provides:** objState(), objOf(vid), objPick(vid, hx, hy), objRefreshPick(vid, hx, hy, opts), objNeedsEmergencyPick(vid), objDanger(vid, tx, ty, hx, hy), objDangerBelief(vid), objResourceBelief(vid), objResourceSee(vid), objMaybeDepart(rid, node, atHaven, hx, hy), objAwayStep(rid, node, away, hx, hy), objAskCompanion(vid, obj, hx, hy, opts), objCommitGuardOffer(cid, offer), objRallyFreshRaid(vid), objTick(), objHealGate(vid, obj, hx, hy, playerAtHaven), objAccrueDutyPractice(vid, task), objOnExploreReturn(vid), objOnHuntReturn(vid), objOnTeachLesson(vid, lesson)
 
 **Rules:**
+- duty_objective_practice: DUTY-aligned teach/patrol/scout/hunt accrue one villagerPractice rep on real objective completion (lesson.taught / explore return / hunt return that was not an empty-tile drop) — never writes assignTask; honor objDisableDutyPractice failing control (code: objAccrueDutyPractice, objOnTeachLesson, objOnExploreReturn, objOnHuntReturn, VILLAGER-BRAIN OVE-74)
 - objectives_drive_departures: npcNodeTravel's old dice triggers are replaced by objMaybeDepart (code: villager-objectives.js)
 - midday_repick_event_only: idle/done mid-day objPick runs only via objRefreshPick when commit day/part is stale or a perception flag fired; dawn force-refreshes (code: objRefreshPick, VILLAGER-BRAIN seam 9)
 - night_departure_ban: nobody sets out at night, hard rule kept from base (code: villager-objectives.js)

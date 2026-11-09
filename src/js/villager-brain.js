@@ -929,6 +929,11 @@
           // Unknown dutyTask: keep materialize; commitment still records kind.
           return o;
         }
+        // OVE-74: DUTY stamps practiceTask so objective completion can accrue
+        // villagerPractice without writing assignTask. ASSIGN keeps practice on
+        // resolveOneAssignment — do not stamp, or the same work would double.
+        if (c.kind === 'DUTY' && dutyTask) o.practiceTask = dutyTask;
+        else if (c.kind === 'ASSIGN') o.practiceTask = null;
         if (c.vgoal) { o.goal = c.vgoal; o.goalLine = c.vgoalLine || null; }
         return o;
       }
