@@ -118,6 +118,7 @@
 //   - fight_gate_sibling_sweep: the same save-scum class in related systems — hummice sound pressure (humStacks/humMice/humRiseRound/humDecayRound), the player shout cap (shouts) + its chorus-break duration (chorusBrokenUntil), the scorch narration flag (terraformScorched), the pending order re-sort (orderDirty) — all persist in tbSave and restore verbatim (code: syncRun, load, break-it persistence r6 2026-10-09)
 //   - fight_gate_counter_sweep: the same save-scum class in the counter engine (postdates the r6 sweep; r16 added _counterLastMoveDir without touching the boundary) — _counterStrikes (union_rep strike_first first-blood gate), _counterLastMoveRound/_counterLastMoveDir (review_drone move_x2 vary chain) persist in tbSave and restore verbatim. A mid-fight reload can neither re-arm firstStrike (save-scum counter discovery) nor silently break the drone's chain (code: syncRun, load, break-it persistence r11 2026-10-11)
 //   - scout_reports_are_shared: a scout's mapped tiles set t.revealed AND markSeen 'shared' — the world-map overlay agrees with the "mapped N new areas" log; never 'visited' (code: resolveOneAssignment, explorer break-it 2026-10-08)
+//   - apex_scout_mark_army_lean: Apex Predator ARMY scale — resolveOneAssignment scout honors Game.apexScoutMarkLeanFor so shared reveal chance + follow-marks beat lean when an ascended Apex holder is active (code: resolveOneAssignment scout, godverbs.js apexScoutMarkLeanFor; OVE-132)
 //   - path_blockages_hold: travelTo at d>1 checks every tile on a shortest path for entry blockages from the approach side (travelBlockage fx/fy) — a fallen tree on the middle tile refuses the jump, honestly, as if walked into; force (swim/debug) still bypasses (code: travelTo, explorer break-it 2026-10-10)
 //   - echo_is_exactly_3x3: echo_location's copy promises "3x3 revealed" — it marks exactly the 3x3 world-map tiles around the player. The old code called reveal() per 3x3 center (a Manhattan<=2 diamond each): 37 tiles for a 9-tile promise (code: _activateAbilityInner, explorer break-it 2026-10-10)
 //   - dowsing_reveals_the_water: dowsing reveals exactly the nearest water tile — direction + distance is the knowledge, walking there is still yours. The old reveal() call lit a 13-tile diamond around possibly-distant ground: free fog knowledge (code: _activateAbilityInner, explorer break-it 2026-10-10)
@@ -7488,9 +7489,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.bumpTrust(vid, 2, 'kept the haven work going');
       } else if (a.task === 'scout') {
         // reveal tiles around haven + small chance of a find
+        // Apex ARMY (OVE-132): call apexScoutMarkLeanFor through Game so
+        // proofs can strip the helper — scouts follow your marks via a
+        // higher shared-reveal chance on the haven ring + follow-marks beat.
+        let lean = 0;
+        try { lean = this.apexScoutMarkLeanFor ? this.apexScoutMarkLeanFor() : 0; } catch (e) { lean = 0; }
+        if (!(lean > 0)) lean = 0;
         let revealed = 0;
         try {
           const hx = this.state.village.px ?? 4, hy = this.state.village.py ?? 4;
+          // scoutMarkLean adds lean*0.5 to base 0.5*eff chance (capped at 1).
+          const revealChance = Math.min(1, 0.5 * eff + (lean > 0 ? lean * 0.5 : 0));
           for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++) {
             const nx = hx + dx, ny = hy + dy;
             if (nx < 0 || nx > 8 || ny < 0 || ny > 8) continue; // 9x9 world (2026-10-07)
@@ -7506,7 +7515,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             // "Unexplored — you haven't been here." while you could already
             // walk there. Mark it 'shared' so the map agrees with the log;
             // 'shared' never becomes 'visited' until you walk the ground.
-            if (t && !t.revealed && Math.random() < 0.5 * eff) { t.revealed = true; this.markSeen(nx, ny, 'shared', vid); revealed++; }
+            if (t && !t.revealed && Math.random() < revealChance) { t.revealed = true; this.markSeen(nx, ny, 'shared', vid); revealed++; }
           }
         } catch (e) {}
         let find = '';
@@ -7516,6 +7525,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           find = ` Found a forgotten cache: +${kcal} kcal.`;
         }
         this.say(`🔭 ${first} scouts the land: mapped ${revealed} new area${revealed === 1 ? '' : 's'}.${find}`);
+        // Apex follow-marks beat: only when lean actually produced shared marks.
+        if (lean > 0 && revealed > 0) {
+          this.say(`🗺️ Scouts follow your marks — ${revealed} shared on the map.`);
+        }
         // PARITY (2026-10-14): new ground mapped is the player's discovery deed.
         if (revealed > 0) { try { this.creditDeed && this.creditDeed(vid, 'discovery'); } catch (eT) { console.warn('[tracks] scout deed', eT); } }
         this.bumpTrust(vid, 2, 'scouted and mapped new land');

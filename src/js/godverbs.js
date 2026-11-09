@@ -18,6 +18,7 @@
 //   - gardenMusterFeedFor(need) -> ARMY scale: Living Garden harvest-day cover for titan muster upkeep kcal
 //   - marketOutfitLeanFor() -> ARMY scale: Market God quartermaster lean percent for titanOutfit effectiveness
 //   - allSeeingCouncilLeanFor() -> ARMY scale: All-Seeing war-council map lean for titanWarCouncil readiness/intel/counter
+//   - apexScoutMarkLeanFor() -> ARMY scale: Apex Predator scout-mark lean for resolveOneAssignment scout / markSeen follow
 // consumes:
 //   - Game.data.godpaths (god.play), state.scholar.godhood, state.village.npcGodhood
 //   - useAbility (abilityActions.js), tbDamage, tbRoundWrap, tbMonsterTurn, startCombat, tbEnd, endDay, maybeCheatDeath, addHealth, removeVillager, springAmbush, lieLive, getActiveLie
@@ -42,6 +43,7 @@
 //   - garden_army_muster_feed: Living Garden scale.army — Feed the Multitude harvest day covers titan muster upkeep kcal (musterMouths × musterKcalPerMouth) for an ascended holder (player or NPC); pack debit + hunger trust bleed only on uncovered remainder (code: gardenMusterFeedFor, titans.js titanMusterUpkeep)
 //   - market_army_outfit_lean: Market God scale.army — ascended Market holder (player or NPC) leans titanOutfit force wbonus/varmor/gearValue by god.play.outfitEffLean percent for the same transferred pieces (code: marketOutfitLeanFor, titans.js titanOutfit)
 //   - all_seeing_army_council_lean: All-Seeing scale.army — ascended All-Seeing holder (player or NPC) leans titanWarCouncil via god.play.councilMapLean: readiness honesty, scout-intel clarity, counter-hint reveal while unknown (code: allSeeingCouncilLeanFor, titans.js titanWarCouncil; OVE-128)
+//   - apex_scout_mark_army_lean: Apex Predator scale.army — ascended Apex holder (player or NPC) leans scout assignment markSeen via god.play.scoutMarkLean: higher shared-reveal chance + follow-marks beat (code: apexScoutMarkLeanFor, game.js resolveOneAssignment scout; OVE-132)
 //   - table_never_reads_godhood: nothing here is read by table*.js (code: scripts/godpath/ladder.js)
 //   - never_silent: every verb narrates; errors are reported via warn (code: warn)
 (function () {
@@ -352,6 +354,32 @@
       const lean = godPlay('all_seeing').councilMapLean;
       return (typeof lean === 'number' && lean > 0) ? lean : 1;
     } catch (e) { warn('allSeeingCouncilLeanFor', e); return 0; }
+  }
+
+  // ---------------- ARMY scale: Apex Predator scout-mark follow lean ----------------
+  // god.scale.army is design prose ("Scouts follow your marks."). Live
+  // settlement: when an ascended Apex Predator holder (player or Haven NPC)
+  // is active, resolveOneAssignment's scout arm reads apexScoutMarkLeanFor
+  // and applies god.play.scoutMarkLean — higher shared-reveal chance on the
+  // haven scout ring plus a follow-marks beat when markSeen fires. Does not
+  // invent an accuracy contest cat or retune Terms kcal / ambushMult /
+  // rangeDist (OVE-132).
+  function apexHolderActive() {
+    try {
+      if (holderGod('player') === 'apex_predator') return true;
+      const v = Game.state.village || {};
+      for (const vid of Object.keys(v.npcGodhood || {})) {
+        if (holderGod(vid) === 'apex_predator') return true;
+      }
+      return false;
+    } catch (e) { warn('apexHolderActive', e); return false; }
+  }
+  function apexScoutMarkLeanFor() {
+    try {
+      if (!apexHolderActive()) return 0;
+      const lean = godPlay('apex_predator').scoutMarkLean;
+      return (typeof lean === 'number' && lean > 0) ? lean : 1;
+    } catch (e) { warn('apexScoutMarkLeanFor', e); return 0; }
   }
 
   // ---------------- ARMY scale: Voice Be Heard → linked/allied foreign villages ----------------
@@ -854,6 +882,7 @@
     gardenMusterFeedFor(need) { return gardenMusterFeedFor(need); },
     marketOutfitLeanFor() { return marketOutfitLeanFor(); },
     allSeeingCouncilLeanFor() { return allSeeingCouncilLeanFor(); },
+    apexScoutMarkLeanFor() { return apexScoutMarkLeanFor(); },
     voiceReachVillageIds() { return voiceReachVillageIds(); },
     voiceDeliverAllied(day) { return voiceDeliverAllied(day); },
     godActionDef(actionId) {
@@ -1756,7 +1785,7 @@
 
   const _mantle = Game.mantleBecome;
   Game.mantleBecome = function () { migratePlayerDayUses(); return _mantle.apply(this, arguments); };
-  S.GodVerbs = { holderGod, fighterGod, godPlay, godDaily, godVillagerCast, phoenixVillagerWorld, isFeastContest, gardenFeastLeanFor, isPerformanceContest, voicePerformanceLeanFor, isEnduranceContest, unkillableEnduranceLeanFor, isStrategyContest, allSeeingStrategyLeanFor, isSponsorContest, marketSponsorLeanFor, isBloodContest, opaBloodLeanFor, gardenMusterFeedFor, marketOutfitLeanFor, allSeeingCouncilLeanFor, VERB_IMPL, DAY_IMPL, registerGodActions, marketPick, painPool };
+  S.GodVerbs = { holderGod, fighterGod, godPlay, godDaily, godVillagerCast, phoenixVillagerWorld, isFeastContest, gardenFeastLeanFor, isPerformanceContest, voicePerformanceLeanFor, isEnduranceContest, unkillableEnduranceLeanFor, isStrategyContest, allSeeingStrategyLeanFor, isSponsorContest, marketSponsorLeanFor, isBloodContest, opaBloodLeanFor, gardenMusterFeedFor, marketOutfitLeanFor, allSeeingCouncilLeanFor, apexScoutMarkLeanFor, VERB_IMPL, DAY_IMPL, registerGodActions, marketPick, painPool };
   // the data loads after the scripts (Game.init): register once it's there
   const _init = Game.init;
   if (typeof _init === 'function') {
