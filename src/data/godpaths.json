@@ -206,7 +206,7 @@
           "clean_plate"
         ],
         "play": {
-          "_doc": "Take the Wound: automatic. A big hit on an ally (>= minFrac of their max HP, or lethal) lands on the Ward instead, and a redirected wound cannot drop the Ward below 1 HP. Each redirect burns kcal (villager: belly). strains per fight, then the Ward collapses (player: loses a whole turn; villager: out of the fight). WEAKNESS: the priority target (monsters aim at the light) and self-healing mid-fight is halved. PARTY/TITAN: every ally on the field counts, coalition blades included, any hit size.",
+          "_doc": "Take the Wound: automatic. A big hit on an ally (>= minFrac of their max HP, or lethal) lands on the Ward instead, and a redirected wound cannot drop the Ward below 1 HP. Each redirect burns kcal (villager: belly). strains per fight, then the Ward collapses (player: loses a whole turn; villager: out of the fight). WEAKNESS: the priority target (monsters aim at the light) and self-healing mid-fight is halved. PARTY/TITAN: every ally on the field counts, coalition blades included, any hit size. ARMY: when an ascended Undying Ward holder (player or Haven NPC) holds the line in a titan/coalition fight (adjacent to a living titan, or Take the Wound redirects for the front), wardAdvanceLeanFor applies advanceLean so titanWardAdvanceBehind lets the army advance behind the wall — steadiness + advance-count + advance beat; does not re-label Take the Wound PARTY/TITAN redirect as army LIVE, invent weep contests, or retune Take the Wound kcal / strains / minFrac.",
           "passive": {
             "id": "take_the_wound",
             "name": "Take the Wound",
@@ -215,7 +215,8 @@
             "minFrac": 0.25
           },
           "selfHealMult": 0.5,
-          "aggro": true
+          "aggro": true,
+          "advanceLean": 1
         }
       }
     },

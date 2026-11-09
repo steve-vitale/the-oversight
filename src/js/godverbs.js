@@ -21,6 +21,7 @@
 //   - apexScoutMarkLeanFor() -> ARMY scale: Apex Predator scout-mark lean for resolveOneAssignment scout / markSeen follow
 //   - unkillableLastStandingLeanFor() -> ARMY scale: Unkillable last-standing lean for titanLastStandingContinuity refuse-rout
 //   - opaBreachLeanFor() -> ARMY scale: One-Person Army breach lean for titanBreachPourThrough coalition pour-through
+//   - wardAdvanceLeanFor() -> ARMY scale: Undying Ward advance lean for titanWardAdvanceBehind coalition advance-behind
 // consumes:
 //   - Game.data.godpaths (god.play), state.scholar.godhood, state.village.npcGodhood
 //   - useAbility (abilityActions.js), tbDamage, tbRoundWrap, tbMonsterTurn, startCombat, tbEnd, endDay, maybeCheatDeath, addHealth, removeVillager, springAmbush, lieLive, getActiveLie
@@ -48,6 +49,7 @@
 //   - apex_scout_mark_army_lean: Apex Predator scale.army — ascended Apex holder (player or NPC) leans scout assignment markSeen via god.play.scoutMarkLean: higher shared-reveal chance + follow-marks beat (code: apexScoutMarkLeanFor, game.js resolveOneAssignment scout; OVE-132)
 //   - unkillable_last_standing_army_lean: Unkillable scale.army — ascended Unkillable holder (player or Haven NPC) leans titan last-blade continuity via god.play.lastStandingLean: when the holder is the last living ours blade in a titan fight, refuse rout / steadiness + last-standing beat (code: unkillableLastStandingLeanFor, titans.js titanLastStandingContinuity; OVE-136)
 //   - opa_breach_army_lean: One-Person Army scale.army — ascended OPA holder (player or Haven NPC) leans titan breach pour-through via god.play.breachLean: when the holder opens the front in a titan fight (adjacent / Turn the Pain on titan), coalition blades pour through — steadiness + pour-count + breach beat; does not re-label partyRallyAt or titanPain (code: opaBreachLeanFor, titans.js titanBreachPourThrough; OVE-140)
+//   - ward_army_advance_lean: Undying Ward scale.army — ascended Ward holder (player or Haven NPC) leans titan advance-behind via god.play.advanceLean: when the holder holds the line in a titan fight (adjacent / Take the Wound redirects for the front), coalition blades advance behind the wall — steadiness + advance-count + advance beat; does not re-label Take the Wound PARTY/TITAN redirect or invent weep contests (code: wardAdvanceLeanFor, titans.js titanWardAdvanceBehind; OVE-144)
 //   - table_never_reads_godhood: nothing here is read by table*.js (code: scripts/godpath/ladder.js)
 //   - never_silent: every verb narrates; errors are reported via warn (code: warn)
 (function () {
@@ -438,6 +440,34 @@
       const lean = godPlay('one_person_army').breachLean;
       return (typeof lean === 'number' && lean > 0) ? lean : 1;
     } catch (e) { warn('opaBreachLeanFor', e); return 0; }
+  }
+
+  // ---------------- ARMY scale: Undying Ward advance / march-behind lean ----------------
+  // god.scale.army is design prose ("The army advances behind you."). Live
+  // settlement: when an ascended Ward holder (player or Haven NPC) is active,
+  // titanWardAdvanceBehind reads wardAdvanceLeanFor and applies
+  // god.play.advanceLean — when the holder holds the line in a titan/
+  // coalition fight (adjacent to a living titan, or Take the Wound redirects
+  // for the front), coalition blades advance behind the wall with steadiness
+  // + an advance beat. Does not re-label Take the Wound (PARTY/TITAN
+  // redirect), invent weep contests, or retune Take the Wound kcal / strains
+  // / minFrac (OVE-144).
+  function wardHolderActive() {
+    try {
+      if (holderGod('player') === 'undying_ward') return true;
+      const v = Game.state.village || {};
+      for (const vid of Object.keys(v.npcGodhood || {})) {
+        if (holderGod(vid) === 'undying_ward') return true;
+      }
+      return false;
+    } catch (e) { warn('wardHolderActive', e); return false; }
+  }
+  function wardAdvanceLeanFor() {
+    try {
+      if (!wardHolderActive()) return 0;
+      const lean = godPlay('undying_ward').advanceLean;
+      return (typeof lean === 'number' && lean > 0) ? lean : 1;
+    } catch (e) { warn('wardAdvanceLeanFor', e); return 0; }
   }
 
   // ---------------- ARMY scale: Voice Be Heard → linked/allied foreign villages ----------------
@@ -951,6 +981,7 @@
     apexScoutMarkLeanFor() { return apexScoutMarkLeanFor(); },
     unkillableLastStandingLeanFor() { return unkillableLastStandingLeanFor(); },
     opaBreachLeanFor() { return opaBreachLeanFor(); },
+    wardAdvanceLeanFor() { return wardAdvanceLeanFor(); },
     voiceReachVillageIds() { return voiceReachVillageIds(); },
     voiceDeliverAllied(day) { return voiceDeliverAllied(day); },
     godActionDef(actionId) {
@@ -1160,6 +1191,14 @@
         line(C, `${t.name}'s wound is yours now: ${took} into you, and you keep standing (${w.hp} HP). (Take the Wound ${n}/${max})`,
           `${C.name} takes ${t.name}'s wound: ${took} lands on ${C.name}, who keeps standing. (Take the Wound ${n}/${max})`);
         tele('god_verb', { god: 'undying_ward', verb: 'take_the_wound', who: C.isP ? 'player' : C.vid, saved: t.villagerId || t.key, took });
+        // ARMY (OVE-144): Take the Wound holding the titan front lets the army
+        // advance behind the wall — stripable via Game.wardAdvanceLeanFor /
+        // titanWardAdvanceBehind. Distinct from PARTY/TITAN redirect coverage.
+        try {
+          if (Game.titanWardAdvanceBehind) {
+            Game.titanWardAdvanceBehind({ wall: w, openedBy: 'take_the_wound', saved: t });
+          }
+        } catch (e) { warn('wardAdvance take_the_wound', e); }
         if (n >= max) {
           g.collapsed[w.key] = true;
           if (C.isP) { w.stunned = Math.max(w.stunned || 0, 1); w.stunFull = 1; }
@@ -1853,7 +1892,7 @@
 
   const _mantle = Game.mantleBecome;
   Game.mantleBecome = function () { migratePlayerDayUses(); return _mantle.apply(this, arguments); };
-  S.GodVerbs = { holderGod, fighterGod, godPlay, godDaily, godVillagerCast, phoenixVillagerWorld, isFeastContest, gardenFeastLeanFor, isPerformanceContest, voicePerformanceLeanFor, isEnduranceContest, unkillableEnduranceLeanFor, isStrategyContest, allSeeingStrategyLeanFor, isSponsorContest, marketSponsorLeanFor, isBloodContest, opaBloodLeanFor, gardenMusterFeedFor, marketOutfitLeanFor, allSeeingCouncilLeanFor, apexScoutMarkLeanFor, unkillableLastStandingLeanFor, opaBreachLeanFor, VERB_IMPL, DAY_IMPL, registerGodActions, marketPick, painPool };
+  S.GodVerbs = { holderGod, fighterGod, godPlay, godDaily, godVillagerCast, phoenixVillagerWorld, isFeastContest, gardenFeastLeanFor, isPerformanceContest, voicePerformanceLeanFor, isEnduranceContest, unkillableEnduranceLeanFor, isStrategyContest, allSeeingStrategyLeanFor, isSponsorContest, marketSponsorLeanFor, isBloodContest, opaBloodLeanFor, gardenMusterFeedFor, marketOutfitLeanFor, allSeeingCouncilLeanFor, apexScoutMarkLeanFor, unkillableLastStandingLeanFor, opaBreachLeanFor, wardAdvanceLeanFor, VERB_IMPL, DAY_IMPL, registerGodActions, marketPick, painPool };
   // the data loads after the scripts (Game.init): register once it's there
   const _init = Game.init;
   if (typeof _init === 'function') {
