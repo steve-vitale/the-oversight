@@ -1,5 +1,65 @@
 # Journey leg ESTABLISHMENT — r115 RUN NOTE (2026-11-08, Lane A)
 
+## Adoption (this run, 16:45 CST occurrence)
+
+Stale-lock recovery: lock run_id 2026-11-08T19:54:07Z (~2h50m old, no
+registry entry) + prior tree heartbeat 65 min stale + no live process +
+no writes since 20:11Z — dead run, lock deleted, own lock
+2026-11-08T22:44:21Z created. Adopted the r115 closeout per the 13:44
+memory entry: rebased the branch onto explicit master tip 93e7bea26
+(sim-flipsocial-b evidence landing; read from the main tree immediately
+before rebasing), re-ran the proof test (54 passed, 1 failed — the
+by-design cap leg on the reverted tree), re-ran the gates, merged.
+Post-rebase tip 85fd43ad9 (same 6 commits, new SHAs; the SHAs in the
+"Commits" section below are the pre-rebase ones).
+
+## Gate attribution (owed item 1 — full FAIL list, captured this time)
+
+Full gate on the rebased branch: **761 passed, 312 failed in 3137s**
+(log `evidence/2026-11-08/journey-establishment-r115-gate-full-adopt.log`).
+Quick-gate reconstruction from that list (301 quick jobs): **7 failures**
+vs the 13:44 run's 11 — same set within run-to-run flake; the 13:44
+FAIL list itself was never saved, so this reconstruction is the record.
+
+- Load-timeouts (exit null, 120.1s = the check.js cap, 3): 
+  `test-capable-bot-20261014.js`, `test-synergy-stall.js`,
+  `test-table-endings-20261014.js`. Long sim-heavy scripts under
+  4-parallel load on a box running several sibling loops; the full
+  gate's slowest list shows three more scripts at exactly 120s. Timeout
+  class is systemic under load, not specific to these tests.
+- Pre-existing assertion failures (4): `godpath/test-mobile-combat-
+  cadence.js` (Continue double-wraps the announced round);
+  `godpath/test-occupation-panels.js` (CLI workflow throws);
+  `godpath/test-phone-frame-proof.js` (phone receipt stale — index.html
+  moved since the receipt; needs a receipt refresh, not a game fix);
+  `test-establishment-r20-fixes-20261020.js` (racks-full voice gate:
+  expected 2 lines next day, got 1 — reproduces standalone).
+- Full-gate remainder (305): dominated by one signature — **182
+  failures are `ReferenceError: Text is not defined`** in genCharacter.
+  Cause: `src/js/text.js` landed 2026-10-23 (c01f2e5ab), AFTER the
+  2026-10-14 green-list freeze; genCharacter uses `Text.proBundle`,
+  and old scripts with copied eval-boilerplate file lists never include
+  text.js. The rest are old Oct 6–14 content-assertion failures
+  (ontology factions rule, H1 formula mismatches=171, fleeAt `tactic`
+  null-read, `village` null-reads, blitz-crisis 120s timeout).
+- **Zero branch-caused failures.** The branch touches no src and none
+  of its 3 scripts appear in the gate at all (0 `r115` mentions in the
+  log); every failing file is byte-identical between branch and master.
+  The green list has not been re-baselined since the text.js landing —
+  that re-baseline (or adding text.js to the stale loaders) is owed to
+  a future maintenance pass, not this adoption.
+- The quick-gate re-run itself died at ~00:00Z mid-run (pid 46075
+  gone, no summary, ~280/300 done, 4 F's) — killed externally under
+  heavy sibling load (fightblend balance-panel children at ~1.5 GB
+  each); the reconstruction above stands in its place.
+
+## Telemetry deviation check (this run)
+
+Re-run post-rebase: `telemetry-check.js --baseline .../telemetry-
+baselines/establishment.json --current 'evidence/2026-11-08/journey-
+establishment-r115-after-seed*.json' --metrics systemDay,monsterKills`
+→ **quiet** (16 files, 2 metrics). Baseline NOT rolled.
+
 ## Adoption (this run, 12:45 CST occurrence)
 
 This run did NOT play a fresh leg. The memory log (2026-11-08 10:03 CST)
