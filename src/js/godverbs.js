@@ -8,18 +8,21 @@
 //   - godActionDef(actionId) / godActionReady(actionId) / godActivatables() -> the 'god' pseudo-ability for useAbility and the action bar
 //   - godVillagerCast(game, v) -> a villager god's verb on their turn (wraps tbVillagerAbility, before the subclass verbs)
 //   - godDaily(game) -> dawn: day verbs refresh, Gilded Guard regen, the Audit, No Lies' knowing and its trust price, villager gardens
+//   - isFeastContest(contest) / gardenFeastLeanFor(pid, contest) -> CONTEST scale: Living Garden feast lean for cookfight/guest
 // consumes:
 //   - Game.data.godpaths (god.play), state.scholar.godhood, state.village.npcGodhood
 //   - useAbility (abilityActions.js), tbDamage, tbRoundWrap, tbMonsterTurn, startCombat, tbEnd, endDay, maybeCheatDeath, addHealth, removeVillager, springAmbush, lieLive, getActiveLie
 //   - Scattering.Godpath hooks (allyWouldFall, onAllyFell, damageMult, dodgeBonus, villagerStrikeMult, absorbVillagerHit, fieldBegin/Act/Incoming/AllyShare/CheatDeath)
 //   - Scattering.Godhood market verbs (namePrice, buyPassage, guardAbsorb, guardRegen, auditCollect, resetFightVerbs, resetDayVerbs)
 //   - Scattering.combat.nearestEnemy (monster aim)
+//   - Game.contestResolveGroup / Game.contestResolveVillager (feast lean applied in contest-engine _cxOther)
 // rules:
 //   - ambush_ally_parity: a living player receives an NPC hunter's allied opening strike through scholar state; existing armed strikes are preserved, and no player input is automated (code: terms)
 //   - same_function: every verb runs for the player or a villager fighter through one implementation (code: actor, VERB_IMPL)
 //   - food_powered: every verb pays kcal (player) or belly (villager, kcal/25 hunger, refused at hunger >= 80); the player's hunger gate (500 kcal) applies to passives too (code: canPay, pay)
 //   - weakness_enforced: brawler beams feed no pain; ward is the priority target and self-heals at half; hunter terms end on contact; between phases are retreats; all-seeing's foresight never covers the holder; voice's fall stuns the field; phoenix needs fuel; market coins never stop beams and titans never haggle; garden hits soft and draws aim (code: preHit, damageMult wrap, termsContact, addHealth wrap)
 //   - never_skips_dinner: no verb feeds its own holder (Feed the Multitude feeds other bellies; the phoenix cannot rise through starvation) (code: feedMultitude, phoenixPlayer)
+//   - feast_contest_lean: Living Garden scale.contest — cookfight/guest scores lean for the ascended holder (player or NPC), numbers in god.play.contestLean / feastContests (code: gardenFeastLeanFor, contestEngine _cxOther)
 //   - table_never_reads_godhood: nothing here is read by table*.js (code: scripts/godpath/ladder.js)
 //   - never_silent: every verb narrates; errors are reported via warn (code: warn)
 (function () {
@@ -58,6 +61,33 @@
   }
   function godPlay(godId) { const g = index().gods[godId]; return (g && g.play) || {}; }
   function godName(godId) { const g = index().gods[godId]; return (g && g.name) || godId; }
+
+  // ---------------- CONTEST scale: Living Garden feast lean ----------------
+  // god.scale.contest is design prose ("Feast contests lean your way."). The
+  // live settlement reads god.play.feastContests + contestLean and applies
+  // inside contestEngine _cxOther for cookfight/guest scores.
+  const FEAST_CONTEST_FALLBACK = ['cookfight', 'guest'];
+  function feastContestSet() {
+    const listed = godPlay('living_garden').feastContests;
+    const ids = Array.isArray(listed) && listed.length ? listed : FEAST_CONTEST_FALLBACK;
+    const set = Object.create(null);
+    for (const id of ids) if (id) set[id] = true;
+    return set;
+  }
+  function isFeastContest(contest) {
+    try {
+      const id = contest && contest.id;
+      return !!(id && feastContestSet()[id]);
+    } catch (e) { warn('isFeastContest', e); return false; }
+  }
+  function gardenFeastLeanFor(pid, contest) {
+    try {
+      if (!pid || !isFeastContest(contest)) return 0;
+      if (holderGod(pid) !== 'living_garden') return 0;
+      const lean = godPlay('living_garden').contestLean;
+      return (typeof lean === 'number' && lean > 0) ? lean : 18;
+    } catch (e) { warn('gardenFeastLeanFor', e); return 0; }
+  }
 
   // ---------------- who holds a god ----------------
   function holderGod(who) {
@@ -488,6 +518,8 @@
     godPlay(godId) { return godPlay(godId); },
     holderGod(who) { return holderGod(who); },
     fighterGod(fi) { return fighterGod(fi); },
+    isFeastContest(contest) { return isFeastContest(contest); },
+    gardenFeastLeanFor(pid, contest) { return gardenFeastLeanFor(pid, contest); },
     godActionDef(actionId) {
       const a = index().actions[actionId];
       if (!a) return null;
@@ -1376,7 +1408,7 @@
 
   const _mantle = Game.mantleBecome;
   Game.mantleBecome = function () { migratePlayerDayUses(); return _mantle.apply(this, arguments); };
-  S.GodVerbs = { holderGod, fighterGod, godPlay, godDaily, godVillagerCast, phoenixVillagerWorld, VERB_IMPL, DAY_IMPL, registerGodActions, marketPick, painPool };
+  S.GodVerbs = { holderGod, fighterGod, godPlay, godDaily, godVillagerCast, phoenixVillagerWorld, isFeastContest, gardenFeastLeanFor, VERB_IMPL, DAY_IMPL, registerGodActions, marketPick, painPool };
   // the data loads after the scripts (Game.init): register once it's there
   const _init = Game.init;
   if (typeof _init === 'function') {
