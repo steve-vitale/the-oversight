@@ -266,7 +266,7 @@ corrupt the winseat baseline).
   medchannel-seed-a-bare-{before,seeded}-s<seed>.json × 8,
   sweep-medchannel-seed-a-{before,seeded}.json)
 - Panel: evidence/2026-11-09/medchannel-seed-a-panel-before/,
-  medchannel-seed-a-panel-after/ (panel.json.gz, 8 cases each),
+  medchannel-seed-a-panel-after/ (panel.json.gz only; cases/ dropped per AGENTS.md §15 — per-case data lives in panel.json.gz and the corpus),
   medchannel-seed-a-panel-compare.md + .json (review_required)
 - Sweep: scripts/sweep-medchannel-seed-a.js
 - Analyzer: scripts/analyze-medchannel-seed-a.js
