@@ -453,8 +453,22 @@
       var preyKnown = dutyKnownPrey(self);
       var huntFromNeed = !needs.unknown && needs.pantryLow;
       if (preyKnown || huntFromNeed) {
-        var huntW = huntFromNeed ? (needs.pantryVeryLow ? 2.0 : 1.8) : 2.0;
-        var hc = dutyBuildCand(self, vid, 'hunt', huntW, needs, preyKnown ? 'known_prey' : 'pantry_protein');
+        // OVE-76: warranted known-prey hunt must be able to win duty_top_score.
+        // Prior 1.8–2.0 lost to forage (2.2–3.2) whenever pantryLow co-fired, and
+        // known-prey-only (2.0) lost to teach (2.4). Protein path with known prey
+        // beats forage; soft pantry_protein without prey stays under forage.
+        var huntW;
+        var huntNote;
+        if (preyKnown) {
+          huntNote = 'known_prey';
+          if (!needs.unknown && needs.pantryVeryLow) huntW = 3.4; // > forage 3.2
+          else if (!needs.unknown && needs.pantryLow) huntW = 2.5; // > forage 2.2, > teach 2.4
+          else huntW = 2.55; // > teach 2.4; soft vs fresh-raid patrol 3.0
+        } else {
+          huntNote = 'pantry_protein';
+          huntW = needs.pantryVeryLow ? 2.0 : 1.8;
+        }
+        var hc = dutyBuildCand(self, vid, 'hunt', huntW, needs, huntNote);
         if (hc) out.push(hc);
       }
       if (dutyTeachOpportunity(self, vid)) {
