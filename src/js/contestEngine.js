@@ -22,6 +22,7 @@
 //   - all_seeing_strategy_lean: All-Seeing CONTEST scale — puzzle/detective scores and lies case scores add allSeeingStrategyLeanFor for an ascended holder (player or NPC); feast/performance/endurance stay Garden/Voice/Unkillable (code: _cxOther, _cxMoot, godverbs.js allSeeingStrategyLeanFor; OVE-110)
 //   - market_sponsor_lean: Market God CONTEST scale — price moot case scores and auction bid capacity add marketSponsorLeanFor for an ascended holder (player or NPC); auction still pays (risky); feast/performance/endurance/strategy stay Garden/Voice/Unkillable/All-Seeing (code: _cxMoot, _cxChance, godverbs.js marketSponsorLeanFor; OVE-113)
 //   - opa_blood_lean: One-Person Army CONTEST scale — blood fight arms honor opaBloodLeanFor for an ascended holder (player or NPC) as extra braveryBonus / cheer steadiness on pit/gauntlet/duel/siege; tithe stays altar measures; feast/performance/endurance/strategy/sponsor stay Garden/Voice/Unkillable/All-Seeing/Market (code: _cxBlood, duelFight, godverbs.js opaBloodLeanFor; OVE-124)
+//   - between_chase_lean: Between CONTEST scale — chase/race arms honor betweenChaseLeanFor for an ascended holder (player or NPC): hide seeker spot pad (lean/25) + calorie_run forage yield; Unkillable endurance IDs stay Unkillable (code: _cxOther, godverbs.js betweenChaseLeanFor; OVE-148)
 // consumes:
 //   - fieldFight (fieldFights.js), monsterWavePool, unlockedWave
 //   - Game.agencyOf, Game.npcTemper, village health, scholar trust
@@ -32,6 +33,7 @@
 //   - Game.allSeeingStrategyLeanFor (godverbs.js) for strategy contest score lean
 //   - Game.marketSponsorLeanFor (godverbs.js) for sponsor contest lean (price case / auction bid)
 //   - Game.opaBloodLeanFor (godverbs.js) for blood contest bravery lean (pit/gauntlet/duel/siege)
+//   - Game.betweenChaseLeanFor (godverbs.js) for chase/race contest lean (hide spot lean/25 / calorie_run yield)
 /* CONTEST ENGINE — src/js/contestEngine.js
  *
  * Steve (2026-10-08): "No, contests are to be played, not as RNG."
@@ -638,9 +640,23 @@
       const diff = { low: 10, medium: 20, high: 30, extreme: 40 }[contest.risk] || 20;
 
       // FORAGE: real foraging — tracking + survival (+clever).
+      // Between CONTEST scale (OVE-148): chase/race contests (calorie_run)
+      // lean for an ascended Between holder — the timed collection race.
+      // Other forage rows (pantry_raid, …) get no Between lean; endurance
+      // race-legs (drop/exchange) stay Unkillable.
       if (cat === 'forage') {
+        const chaseLean = (pid) => {
+          try {
+            if (typeof this.betweenChaseLeanFor === 'function')
+              return this.betweenChaseLeanFor(pid, contest) || 0;
+          } catch (e) { console.warn('[contest] between chase lean', e); }
+          return 0;
+        };
         const y = {};
-        for (const pid of pids) { const st = stats[pid]; y[pid] = st.tracking + st.survival + (st.clever ? 10 : 0); }
+        for (const pid of pids) {
+          const st = stats[pid];
+          y[pid] = st.tracking + st.survival + (st.clever ? 10 : 0) + chaseLean(pid);
+        }
         const best = Math.max(...pids.map(pid => y[pid]));
         for (const pid of pids)
           results[pid] = { outcome: y[pid] === best ? 'won' : 'lost', detail: `yield ${y[pid]}`, log: [`${stats[pid].name} brings in ${y[pid]}.`] };
@@ -702,17 +718,34 @@
       if (id === 'hide') {
         // The seeker is a wave-2 predator. 3 evasion rounds with fieldFight's
         // real awareness formula; caught → a real fight.
+        // Between CONTEST scale (OVE-148): chase contests lean for an ascended
+        // Between holder — contestLean pads seeker spot chance (chases lean
+        // your way). Not an Unkillable endurance arm.
+        const chaseLean = (pid) => {
+          try {
+            if (typeof this.betweenChaseLeanFor === 'function')
+              return this.betweenChaseLeanFor(pid, contest) || 0;
+          } catch (e) { console.warn('[contest] between chase lean', e); }
+          return 0;
+        };
         const seeker = (this.data.monsters || []).find(m => m.behavior === 'pack' && (m.wave || 1) === 2)
           || this.contestBeastFor(2, 450);
         for (const pid of pids) {
           const st = stats[pid];
           const log = [];
           let caught = false;
+          const lean = chaseLean(pid);
           for (let r = 0; r < 3 && !caught; r++) {
             // awareness, inverted: the contestant must NOT be noticed.
+            // Between chase lean subtracts contestLean/25 from spot (18 → 0.72)
+            // so an ascended holder can floor the seeker's notice; floor is 0
+            // with lean (not the usual 0.05) so the chase can honestly lean
+            // all the way. Strip betweenChaseLeanFor and the pale spot returns.
             const mNotice = (seeker.encounter && seeker.encounter.noticeRange) || 5;
-            const spot = 0.35 + Math.min(0.30, (seeker.speed || 4) * 0.03) + 0.03 * mNotice - 0.015 * st.tracking;
-            if (R() < clamp(spot, 0.05, 0.95)) {
+            const spot = 0.35 + Math.min(0.30, (seeker.speed || 4) * 0.03) + 0.03 * mNotice
+              - 0.015 * st.tracking - (lean > 0 ? lean / 25 : 0);
+            const lo = lean > 0 ? 0 : 0.05;
+            if (R() < clamp(spot, lo, 0.95)) {
               caught = true;
               log.push(`${st.name} is found on round ${r + 1}.`);
               let rec = null;
