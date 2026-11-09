@@ -979,7 +979,7 @@
           "pendingHint": "Your harvest is feeding them. Keep every neighbor on your food for 7 days running."
         },
         "play": {
-          "_doc": "Feed the Multitude: daily, out of a fight. Every living Haven villager eats their fill (hunger 0) and, for the rest of the day, every fight starts with the party fed (allies and coalition blades hit with the food overcharge: PARTY and TITAN). The harvest goes into other bellies, never yours: it cannot skip your dinner. WEAKNESS: not a fighter: your strikes x strikeMult, and monsters go for the garden first. CONTEST: feast contests (cookfight, guest) lean for the ascended holder by contestLean on the making score in contestEngine _cxOther — impress is not a feast.",
+          "_doc": "Feed the Multitude: daily, out of a fight. Every living Haven villager eats their fill (hunger 0) and, for the rest of the day, every fight starts with the party fed (allies and coalition blades hit with the food overcharge: PARTY and TITAN). The harvest goes into other bellies, never yours: it cannot skip your dinner. WEAKNESS: not a fighter: your strikes x strikeMult, and monsters go for the garden first. CONTEST: feast contests (cookfight, guest) lean for the ascended holder by contestLean on the making score in contestEngine _cxOther — impress is not a feast. ARMY: when an ascended Living Garden holder has Feed the Multitude active that day (harvestDay), gardenMusterFeedFor covers standing titan muster upkeep kcal (musterMouths × musterKcalPerMouth) so the coalition marches because you feed it — pack debit and hunger trust bleed stay only for any uncovered remainder.",
           "actions": [
             {
               "id": "feed_multitude",
@@ -998,7 +998,9 @@
             "cookfight",
             "guest"
           ],
-          "contestLean": 18
+          "contestLean": 18,
+          "musterMouths": 50,
+          "musterKcalPerMouth": 1000
         }
       }
     }
