@@ -5,12 +5,14 @@
 //
 // Proves:
 //   1. Heard raid danger → DUTY patrol in dutyFeedCands (full pantry; no survival ads).
-//   2. Known prey → DUTY hunt in feed.
+//   2. Known prey → DUTY hunt in feed (weight beats teach soft ad).
 //   3. Teachable knowledge + learner → DUTY teach in feed.
-//   4. Top-scoring patrol / teach → commit DUTY + align (OVE-36 materialize≠commit).
-//   5. Failing control: vbrainDisableCombatSocialDuty strips combat/social ads;
+//   4. Top-scoring patrol / teach / hunt → commit DUTY + align (OVE-36 materialize≠commit).
+//   5. Pantry+prey: hunt weight beats co-fired forage; dawn-commits hunt (OVE-76).
+//      Soft pantry_protein without prey stays under forage (failing control shape).
+//   6. Failing control: vbrainDisableCombatSocialDuty strips combat/social ads;
 //      survival forage DUTY (when pantry low) still feeds.
-//   6. gardenKeeper / standing assign still suppress DUTY ads.
+//   7. gardenKeeper / standing assign still suppress DUTY ads.
 //
 // Usage: node scripts/test-combat-social-duty-dawn.js
 // Exit 0 = pass, 1 = fail, 2 = setup skip. No repo writes.
@@ -177,7 +179,35 @@ function clearPlantKnowledge(v, ids) {
     check('hunt: believed_need known_prey',
       !!(hunt && (hunt.considerations || []).some(x => x.id === 'believed_need' && x.note === 'known_prey')),
       JSON.stringify(hunt && hunt.considerations));
+    check('known-prey-only: hunt weight beats teach soft ad',
+      !!(hunt && hunt.w > 2.4), JSON.stringify(hunt && { w: hunt.w }));
     v.animals = {};
+  }
+
+  console.log('== pantry+prey: hunt beats forage for protein ==');
+  {
+    plantLowBelief(Game, vid, day);
+    clearPlantKnowledge(v, roster);
+    v.gossip = [];
+    v.animals = { rabbit: { level: 1, learnedDay: day, learnedBy: vid } };
+    const feed = Game.dutyFeedCands(vid) || [];
+    const forage = feed.find(c => c.dutyTask === 'forage');
+    const hunt = feed.find(c => c.dutyTask === 'hunt');
+    check('pantry+prey: feed has forage + hunt',
+      !!(forage && hunt), JSON.stringify(dutyKinds(feed)));
+    check('pantry+prey: hunt weight beats forage',
+      !!(forage && hunt && hunt.w > forage.w),
+      JSON.stringify({ huntW: hunt && hunt.w, forageW: forage && forage.w }));
+    // Failing control shape: without known prey, speculative pantry_protein
+    // stays soft under forage (same pantry belief).
+    v.animals = {};
+    const soft = Game.dutyFeedCands(vid) || [];
+    const softHunt = soft.find(c => c.dutyTask === 'hunt');
+    const softForage = soft.find(c => c.dutyTask === 'forage');
+    check('no-prey pantry_protein: hunt under forage',
+      !!(softHunt && softForage && softHunt.w < softForage.w),
+      JSON.stringify({ huntW: softHunt && softHunt.w, forageW: softForage && softForage.w }));
+    v.animals = { rabbit: { level: 1, learnedDay: day, learnedBy: vid } };
   }
 
   console.log('== teachable knowledge → DUTY teach ==');
@@ -273,6 +303,61 @@ function clearPlantKnowledge(v, ids) {
     check('teach align: no assignTask write',
       !((v.assignments || {})[vid] && (v.assignments || {})[vid].task),
       JSON.stringify((v.assignments || {})[vid]));
+  }
+
+  console.log('== hunt DUTY dawn-commits + aligns (pantry+prey) ==');
+  {
+    // Authored protein need: low pantry + known prey. Hunt must top-score over
+    // co-fired forage (OVE-76) and dawn-commit without assignTask.
+    plantLowBelief(Game, vid, day);
+    delete (v.assignments || {})[vid];
+    clearPlantKnowledge(v, roster);
+    v.gossip = [];
+    v.animals = { rabbit: { level: 1, learnedDay: day, learnedBy: vid } };
+    const feed = Game.dutyFeedCands(vid) || [];
+    const hunt = feed.find(c => c.dutyTask === 'hunt');
+    const forage = feed.find(c => c.dutyTask === 'forage');
+    check('hunt pick setup: cand present', !!(hunt && hunt.w > 0), JSON.stringify(hunt));
+    check('hunt pick setup: beats co-fired forage',
+      !!(hunt && forage && hunt.w > forage.w),
+      JSON.stringify({ huntW: hunt && hunt.w, forageW: forage && forage.w }));
+    // Full extras list as dawn would see them (forage+cook+hunt) + soft core.
+    const cands = [{ kind: 'HAVEN_CHORE', w: 0.01, chore: 'fire' }].concat(feed);
+    clearCommit(Game, vid);
+    const mat = Game.vbrainScorePick(vid, cands, { rng: () => 0 });
+    const log = Game.vbrainLastLog(vid);
+    const commit = Game.vbrainCommit(vid);
+    check('hunt pick: materialize stays core', mat && mat.kind === 'HAVEN_CHORE',
+      JSON.stringify(mat));
+    check('hunt pick: override duty_top_score', log && log.override === 'duty_top_score',
+      JSON.stringify({ override: log && log.override, pick: log && log.pick }));
+    check('hunt pick: commit DUTY hunt',
+      commit && commit.kind === 'DUTY' && commit.dutyTask === 'hunt',
+      JSON.stringify(commit));
+    check('hunt pick: no assignTask write',
+      !((v.assignments || {})[vid] && (v.assignments || {})[vid].task),
+      JSON.stringify((v.assignments || {})[vid]));
+    const o = {
+      kind: 'HAVEN_CHORE', purpose: 'chore', indoor: true, state: 'indoor',
+      chore: 'fire', tx: hx, ty: hy, tightness: 0, partsLeft: 2,
+    };
+    Game.vbrainAlignObjective(vid, o, hx, hy);
+    check('hunt align: kind HUNT', o.kind === 'HUNT', JSON.stringify(o));
+    check('hunt align: purpose hunt', o.purpose === 'hunt', JSON.stringify(o));
+    check('hunt align: outdoor ready', o.indoor === false && o.state === 'ready', JSON.stringify(o));
+
+    // Soft pantry_protein without prey still loses duty_top_score to forage.
+    v.animals = {};
+    const softFeed = Game.dutyFeedCands(vid) || [];
+    const softCands = [{ kind: 'HAVEN_CHORE', w: 0.01, chore: 'fire' }].concat(softFeed);
+    clearCommit(Game, vid);
+    Game.vbrainScorePick(vid, softCands, { rng: () => 0 });
+    const softCommit = Game.vbrainCommit(vid);
+    check('no-prey control: commit forage not hunt',
+      softCommit && softCommit.kind === 'DUTY' && softCommit.dutyTask === 'forage',
+      JSON.stringify(softCommit));
+    plantFullBelief(Game, vid, day);
+    v.animals = {};
   }
 
   console.log('== failing control: vbrainDisableCombatSocialDuty ==');
