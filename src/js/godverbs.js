@@ -17,6 +17,7 @@
 //   - voiceReachVillageIds() / voiceDeliverAllied(day) -> ARMY scale: Voice Be Heard reaches linked/allied foreign villages same day
 //   - gardenMusterFeedFor(need) -> ARMY scale: Living Garden harvest-day cover for titan muster upkeep kcal
 //   - marketOutfitLeanFor() -> ARMY scale: Market God quartermaster lean percent for titanOutfit effectiveness
+//   - allSeeingCouncilLeanFor() -> ARMY scale: All-Seeing war-council map lean for titanWarCouncil readiness/intel/counter
 // consumes:
 //   - Game.data.godpaths (god.play), state.scholar.godhood, state.village.npcGodhood
 //   - useAbility (abilityActions.js), tbDamage, tbRoundWrap, tbMonsterTurn, startCombat, tbEnd, endDay, maybeCheatDeath, addHealth, removeVillager, springAmbush, lieLive, getActiveLie
@@ -40,6 +41,7 @@
 //   - voice_army_same_day: Voice scale.army — Be Heard stamps linked/allied foreign villages the same day (opinion + link trust + voiceDay; their people fight rallied) (code: voiceDeliverAllied, dailyVoice)
 //   - garden_army_muster_feed: Living Garden scale.army — Feed the Multitude harvest day covers titan muster upkeep kcal (musterMouths × musterKcalPerMouth) for an ascended holder (player or NPC); pack debit + hunger trust bleed only on uncovered remainder (code: gardenMusterFeedFor, titans.js titanMusterUpkeep)
 //   - market_army_outfit_lean: Market God scale.army — ascended Market holder (player or NPC) leans titanOutfit force wbonus/varmor/gearValue by god.play.outfitEffLean percent for the same transferred pieces (code: marketOutfitLeanFor, titans.js titanOutfit)
+//   - all_seeing_army_council_lean: All-Seeing scale.army — ascended All-Seeing holder (player or NPC) leans titanWarCouncil via god.play.councilMapLean: readiness honesty, scout-intel clarity, counter-hint reveal while unknown (code: allSeeingCouncilLeanFor, titans.js titanWarCouncil; OVE-128)
 //   - table_never_reads_godhood: nothing here is read by table*.js (code: scripts/godpath/ladder.js)
 //   - never_silent: every verb narrates; errors are reported via warn (code: warn)
 (function () {
@@ -324,6 +326,32 @@
       const lean = godPlay('market_god').outfitEffLean;
       return (typeof lean === 'number' && lean > 0) ? lean : 25;
     } catch (e) { warn('marketOutfitLeanFor', e); return 0; }
+  }
+
+  // ---------------- ARMY scale: All-Seeing war-council map lean ----------------
+  // god.scale.army is design prose ("The coalition plans with your map."). Live
+  // settlement: when an ascended All-Seeing holder (player or Haven NPC) sits
+  // titanWarCouncil, titans.js reads allSeeingCouncilLeanFor and applies
+  // god.play.councilMapLean — readiness honesty (naive vs true blades), scout
+  // intel clarity (loyalty/temptation on the map), and counter-hint reveal even
+  // when monsterCounterKnown is still false. Does not retune No Lies kcal /
+  // trust or invent fog-of-war rewrites (OVE-128).
+  function allSeeingHolderActive() {
+    try {
+      if (holderGod('player') === 'all_seeing') return true;
+      const v = Game.state.village || {};
+      for (const vid of Object.keys(v.npcGodhood || {})) {
+        if (holderGod(vid) === 'all_seeing') return true;
+      }
+      return false;
+    } catch (e) { warn('allSeeingHolderActive', e); return false; }
+  }
+  function allSeeingCouncilLeanFor() {
+    try {
+      if (!allSeeingHolderActive()) return 0;
+      const lean = godPlay('all_seeing').councilMapLean;
+      return (typeof lean === 'number' && lean > 0) ? lean : 1;
+    } catch (e) { warn('allSeeingCouncilLeanFor', e); return 0; }
   }
 
   // ---------------- ARMY scale: Voice Be Heard → linked/allied foreign villages ----------------
@@ -825,6 +853,7 @@
     opaBloodLeanFor(pid, contest) { return opaBloodLeanFor(pid, contest); },
     gardenMusterFeedFor(need) { return gardenMusterFeedFor(need); },
     marketOutfitLeanFor() { return marketOutfitLeanFor(); },
+    allSeeingCouncilLeanFor() { return allSeeingCouncilLeanFor(); },
     voiceReachVillageIds() { return voiceReachVillageIds(); },
     voiceDeliverAllied(day) { return voiceDeliverAllied(day); },
     godActionDef(actionId) {
@@ -1727,7 +1756,7 @@
 
   const _mantle = Game.mantleBecome;
   Game.mantleBecome = function () { migratePlayerDayUses(); return _mantle.apply(this, arguments); };
-  S.GodVerbs = { holderGod, fighterGod, godPlay, godDaily, godVillagerCast, phoenixVillagerWorld, isFeastContest, gardenFeastLeanFor, isPerformanceContest, voicePerformanceLeanFor, isEnduranceContest, unkillableEnduranceLeanFor, isStrategyContest, allSeeingStrategyLeanFor, isSponsorContest, marketSponsorLeanFor, isBloodContest, opaBloodLeanFor, gardenMusterFeedFor, marketOutfitLeanFor, VERB_IMPL, DAY_IMPL, registerGodActions, marketPick, painPool };
+  S.GodVerbs = { holderGod, fighterGod, godPlay, godDaily, godVillagerCast, phoenixVillagerWorld, isFeastContest, gardenFeastLeanFor, isPerformanceContest, voicePerformanceLeanFor, isEnduranceContest, unkillableEnduranceLeanFor, isStrategyContest, allSeeingStrategyLeanFor, isSponsorContest, marketSponsorLeanFor, isBloodContest, opaBloodLeanFor, gardenMusterFeedFor, marketOutfitLeanFor, allSeeingCouncilLeanFor, VERB_IMPL, DAY_IMPL, registerGodActions, marketPick, painPool };
   // the data loads after the scripts (Game.init): register once it's there
   const _init = Game.init;
   if (typeof _init === 'function') {
