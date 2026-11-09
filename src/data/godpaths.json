@@ -571,7 +571,7 @@
           "pendingHint": "Discovery made. Share its true identity with someone who did not know it."
         },
         "play": {
-          "_doc": "No Lies. Combat action Read Them Aloud: for the rest of the fight every foe's next move is said aloud each round, allies (not the holder: you are still fragile) slip telegraphed blows with allyDodge, and the holder's strikes on a foe that is winding up hit x strikeMult. Passive out of fights: a villager cannot tell the All-Seeing a lie (the cover never lands), every live lie in the village is known at dawn, and an ambush that relies on deception never springs. COST: -trustCostPerDay trust a day with anyone hiding a lie.",
+          "_doc": "No Lies. Combat action Read Them Aloud: for the rest of the fight every foe's next move is said aloud each round, allies (not the holder: you are still fragile) slip telegraphed blows with allyDodge, and the holder's strikes on a foe that is winding up hit x strikeMult. Passive out of fights: a villager cannot tell the All-Seeing a lie (the cover never lands), every live lie in the village is known at dawn, and an ambush that relies on deception never springs. COST: -trustCostPerDay trust a day with anyone hiding a lie. CONTEST: strategy contests lean for the ascended holder by contestLean — puzzle (box, pattern, riddle, sorting, lockpick, wrongmap) and detective (whoate, informant, confession, witness, alibi, echo) scores in _cxOther, plus moot-cat Lie Detector (lies) case scores in _cxMoot because 'nobody bluffs you' / No Lies; cookfight/impress/moot/oath/quiet/price and endurance stay Garden/Voice/Unkillable.",
           "actions": [
             {
               "id": "no_lies",
@@ -587,7 +587,23 @@
           "allyDodge": 0.5,
           "strikeMult": 1.5,
           "trustCostPerDay": 1,
-          "dailyKcal": 60
+          "dailyKcal": 60,
+          "strategyContests": [
+            "box",
+            "pattern",
+            "riddle",
+            "sorting",
+            "lockpick",
+            "wrongmap",
+            "whoate",
+            "informant",
+            "confession",
+            "witness",
+            "alibi",
+            "echo",
+            "lies"
+          ],
+          "contestLean": 18
         }
       }
     },
