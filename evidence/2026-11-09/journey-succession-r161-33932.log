@@ -1,0 +1,38 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Caitlin","t":91},{"id":"Paolo","t":90},{"id":"Ethan","t":89},{"id":"Thabo","t":86}], roster=11
+INH readable=true scripted=true deadItems=12 distinct=11 transferred=2 vanished=3 keptPlants=22 inheritedPlants=1 keptSkills=3 inheritedSkills=9 succTrustPre=91 succTrustPost=62
+PARITY readable=true equal=true inherited=[] pre=["green_whisper","echo_location","rage"] post=["green_whisper","echo_location","rage"]
+DEATH d41 (the expedition, scripted): Cameron -> Caitlin | passed=true lin=true mo=true trust=62 vouchers=8
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=2 vanished=3 of 11 distinct dead-bearer items
+  CONVO d+3 with Paolo (refused=false)
+  CONVO d+3 with Ethan (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Paolo (refused=false)
+  CONVO d+7 with Kelechi (refused=false)
+  CONVO d+14 with Paolo (refused=false)
+  CONVO d+14 with Kelechi (refused=false)
+  NEWCOMER-PROBE d+25 with Catalina (arrived d+25, trust=30 refused=false)
+  CONVO d+30 with Nadia (refused=false)
+  CONVO d+30 with Raj (refused=false)
+  CONVO d+45 with Nadia (refused=false)
+  CONVO d+45 with Raj (refused=false)
+  CONVO d+53 with Nadia (refused=false)
+  CONVO d+53 with Raj (refused=false)
+
+FUNERAL: deathBeat=6 recover=1 vouch=1 (eligible=8) echo=0 organicBurial={"respects":false,"bury":false} halfRation=9
+
+MEAL-GATE: audited=61 violations=0 noMealDays=2 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=62 signals={"levelUp":true,"systemVoice":37,"offerLines":65,"codexPlantsDelta":30,"codexSkillsDelta":31,"codexAbilitiesDelta":15,"xpDelta":-28,"any":true} pantry 44644->0
+TRUST-DIALS: office 62->79 (+17, climb) | villageMean 81.3->55.4 (-25.9, fall) | ge60 8->3 | movers>=5: [{"id":"Raj","from":54,"to":73,"delta":19},{"id":"Nadia","from":77,"to":90,"delta":13}]
+DEED-LEDGER: calls=69 summary={"teachPlant":{"calls":47,"ok":47,"deltaSum":0,"deltaN":47,"positive":0,"meanDelta":0},"giveFood":{"calls":17,"ok":17,"deltaSum":40,"deltaN":17,"positive":17,"meanDelta":2.35},"donateToPantry":{"calls":5,"ok":5,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=false(echoMentions=0 (convo=0, say=0)) m4=true m5=manual | endDay=103 alive=0 over=true
+anomalies: 0
+S-METRICS: s1=false s2=true s3=true s4=false s5=true dayAdv=62
+T-METRICS: t1=true(panels=d+0,d+8,d+14,d+30) t2=true(deedCalls=69) trustVerdict={"readable":true,"officeMantle":62,"officeLast":79,"officeDelta":17,"officeClass":"climb","villageMantle":81.3,"villageLast":55.4,"villageDelta":-25.9,"villageClass":"fall","villageGe60Mantle":8,"villageGe60Last":3,"movers":[{"id":"Raj","from":54,"to":73,"delta":19},{"id":"Nadia","from":77,"to":90,"delta":13}]}
+E6/CALLCHECK: e6={"callMoves":13,"withCensus":13,"chainHandoffs":9,"trustMoves":4} callCheck={"dailyMoveDays":9,"callMoveDays":12,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=false(echoV2b=1 (v2=1, excludedLoot=0))
+E7/R47: e7={"trustMoves":4,"soloOffice":1,"soloOfficeDeltas":[2],"soloBearerDeltaExact":[2],"singleMoverBearer":0,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":0,"both":4,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":0,"v2":1,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":13,"known":13,"unknown":0} e3={"dailyDays":62,"moves":9}

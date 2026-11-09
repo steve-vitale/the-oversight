@@ -1016,7 +1016,20 @@
         if (c) c.transcript.push(youEntry);
         var spokenText = null;
         if (lineText) {
-          try { if (this.sayLine(vid, lineText)) spokenText = lineText; } catch (e) { spokenText = null; }
+          // AGENCY PLACE (journey-succession r161): the place line is a
+          // diegetic act — the place was already spent (popped) and the
+          // 'taught' deed fires on it — so it rides the r86/r157
+          // exemption from the run-ledger block. The place pool is five
+          // shared strings, so two villagers sharing the same real
+          // place compose the identical line; without the exemption the
+          // second one dry-replaces ("...Sorry, lost my train of
+          // thought.") while the place is already lost and the deed
+          // recorded. A repeated place from another villager reads as
+          // the same lesson from another person, not a parrot bug (the
+          // r86 justification, verbatim). Monster/plant lines cannot
+          // collide (codex-deduped), so only the place branch is exempt.
+          var placeAct = !!taughtPlace;
+          try { if (this.sayLine(vid, lineText, placeAct ? { diegeticAct: true } : undefined)) spokenText = lineText; } catch (e) { spokenText = null; }
         }
         var closedOut = false;
         if (!spokenText) {

@@ -1,0 +1,41 @@
+
+PRE-DEATH d40: bearer <redacted>, topTrust=[{"id":"Niamh","t":91},{"id":"Aisling","t":90},{"id":"Sam","t":90},{"id":"Raquel","t":90}], roster=10
+INH readable=true scripted=true deadItems=13 distinct=13 transferred=1 vanished=0 keptPlants=21 inheritedPlants=5 keptSkills=6 inheritedSkills=12 succTrustPre=90 succTrustPost=62
+PARITY readable=true equal=true inherited=[] pre=["the_touch","green_thumb","green_whisper"] post=["the_touch","green_thumb","green_whisper"]
+DEATH d40 (the expedition, scripted): Helga -> Aisling | passed=true lin=true mo=true trust=62 vouchers=7
+  BURIAL d+4: corpse found=true respects=true bury=true
+  INH d+4: transferred=8 vanished=0 of 13 distinct dead-bearer items
+  CONVO d+3 with Niamh (refused=false)
+  CONVO d+3 with Raquel (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  BOND-CONVO d+3 with Sam (depth=1 v=46 refused=false)
+  CONVO d+7 with Niamh (refused=false)
+  CONVO d+7 with Sam (refused=false)
+  NEWCOMER-PROBE d+11 with Rosa (arrived d+11, trust=24 refused=false)
+  CONVO d+14 with Niamh (refused=false)
+  CONVO d+14 with Sam (refused=false)
+  CONVO d+30 with Sam (refused=false)
+  CONVO d+30 with Quinn (refused=false)
+  CONVO d+45 with Sam (refused=false)
+  CONVO d+45 with Luis (refused=false)
+  CONVO d+53 with Sam (refused=false)
+  CONVO d+53 with Luis (refused=false)
+  CONVO d+64 with Tariq (refused=false)
+  CONVO d+64 with Victor (refused=false)
+
+FUNERAL: deathBeat=6 recover=1 vouch=1 (eligible=7) echo=0 organicBurial={"respects":false,"bury":false} halfRation=7
+
+MEAL-GATE: audited=70 violations=0 noMealDays=6 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=71 signals={"levelUp":true,"systemVoice":46,"offerLines":88,"codexPlantsDelta":27,"codexSkillsDelta":21,"codexAbilitiesDelta":16,"xpDelta":-12,"any":true} pantry 114303->18058
+TRUST-DIALS: office 62->82 (+20, climb) | villageMean 80.1->72.7 (-7.4, fall) | ge60 7->2 | movers>=5: [{"id":"Lena","from":45,"to":73,"delta":28},{"id":"Tariq","from":68,"to":90,"delta":22}]
+DEED-LEDGER: calls=63 summary={"teachPlant":{"calls":6,"ok":6,"deltaSum":0,"deltaN":6,"positive":0,"meanDelta":0},"donateToPantry":{"calls":36,"ok":36,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"giveFood":{"calls":21,"ok":21,"deltaSum":77,"deltaN":21,"positive":21,"meanDelta":3.67}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=false(echoMentions=0 (convo=0, say=0)) m4=true m5=manual | endDay=111 alive=4 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=71
+T-METRICS: t1=true(panels=d+0,d+7,d+15,d+30,d+71) t2=true(deedCalls=63) trustVerdict={"readable":true,"officeMantle":62,"officeLast":82,"officeDelta":20,"officeClass":"climb","villageMantle":80.1,"villageLast":72.7,"villageDelta":-7.4,"villageClass":"fall","villageGe60Mantle":7,"villageGe60Last":2,"movers":[{"id":"Lena","from":45,"to":73,"delta":28},{"id":"Tariq","from":68,"to":90,"delta":22}]}
+E6/CALLCHECK: e6={"callMoves":24,"withCensus":24,"chainHandoffs":6,"trustMoves":18} callCheck={"dailyMoveDays":24,"callMoveDays":22,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=2 (v2=3, excludedLoot=1))
+E7/R47: e7={"trustMoves":18,"soloOffice":2,"soloOfficeDeltas":[1,1],"soloBearerDeltaExact":[1,1],"singleMoverBearer":3,"singleMoverOther":7,"eventClass":{"event-only":0,"deed-only":3,"both":15,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":0,"v2":3,"v2Say":3,"v2Delta":3,"arcExcluded":3,"teleWeek2":6,"collision":[]} e2={"chainN":6,"known":6,"unknown":0} e3={"dailyDays":71,"moves":24}

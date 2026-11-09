@@ -1,0 +1,36 @@
+
+PRE-DEATH d40: bearer <redacted>, topTrust=[{"id":"Sari","t":90},{"id":"Catalina","t":90},{"id":"Miguel","t":89},{"id":"Tashi","t":64}], roster=8
+INH readable=true scripted=true deadItems=11 distinct=11 transferred=1 vanished=3 keptPlants=17 inheritedPlants=3 keptSkills=6 inheritedSkills=7 succTrustPre=89 succTrustPost=81
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","lucky_rock","green_whisper","bloodhound","trophy_room"] post=["beast_calm","lucky_rock","green_whisper","bloodhound","trophy_room"]
+DEATH d40 (the expedition, scripted): Mariana -> Miguel | passed=true lin=true mo=true trust=81 vouchers=6
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=1 vanished=3 of 11 distinct dead-bearer items
+  CONVO d+3 with Catalina (refused=false)
+  CONVO d+3 with Sari (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  BOND-CONVO d+3 with Chantal (depth=0 v=13 refused=false)
+  NEWCOMER-PROBE d+5 with Zlata (arrived d+5, trust=30 refused=false)
+  CONVO d+7 with Catalina (refused=false)
+  CONVO d+7 with Sari (refused=false)
+  CONVO d+14 with Catalina (refused=false)
+  CONVO d+14 with Sari (refused=false)
+  BOND-CONVO d+14 with Chantal (depth=0 v=13 refused=false)
+  CONVO d+30 with Somchai (refused=false)
+  CONVO d+30 with Tashi (refused=false)
+
+FUNERAL: deathBeat=6 recover=1 vouch=1 (eligible=6) echo=7 organicBurial={"respects":false,"bury":false} halfRation=3
+
+MEAL-GATE: audited=35 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=36 signals={"levelUp":true,"systemVoice":37,"offerLines":42,"codexPlantsDelta":30,"codexSkillsDelta":23,"codexAbilitiesDelta":10,"xpDelta":-111,"any":true} pantry 85801->11600
+TRUST-DIALS: office 81->94 (+13, climb) | villageMean 72.5->67.3 (-5.2, fall) | ge60 6->4 | movers>=5: [{"id":"Somchai","from":61,"to":100,"delta":39},{"id":"Tashi","from":64,"to":90,"delta":26},{"id":"Chantal","from":60,"to":80,"delta":20},{"id":"Sari","from":90,"to":83,"delta":-7}]
+DEED-LEDGER: calls=42 summary={"teachPlant":{"calls":10,"ok":10,"deltaSum":0,"deltaN":10,"positive":0,"meanDelta":0},"donateToPantry":{"calls":19,"ok":19,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"giveFood":{"calls":13,"ok":13,"deltaSum":18,"deltaN":13,"positive":12,"meanDelta":1.38}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=7 (convo=7, say=0)) m4=true m5=manual | endDay=76 alive=0 over=true
+anomalies: 0
+S-METRICS: s1=false s2=true s3=true s4=false s5=true dayAdv=36
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30) t2=true(deedCalls=42) trustVerdict={"readable":true,"officeMantle":81,"officeLast":94,"officeDelta":13,"officeClass":"climb","villageMantle":72.5,"villageLast":67.3,"villageDelta":-5.2,"villageClass":"fall","villageGe60Mantle":6,"villageGe60Last":4,"movers":[{"id":"Somchai","from":61,"to":100,"delta":39},{"id":"Tashi","from":64,"to":90,"delta":26},{"id":"Chantal","from":60,"to":80,"delta":20},{"id":"Sari","from":90,"to":83,"delta":-7}]}
+E6/CALLCHECK: e6={"callMoves":8,"withCensus":8,"chainHandoffs":3,"trustMoves":5} callCheck={"dailyMoveDays":8,"callMoveDays":8,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=8 (v2=8, excludedLoot=0))
+E7/R47: e7={"trustMoves":5,"soloOffice":3,"soloOfficeDeltas":[2,1,1],"soloBearerDeltaExact":[2,1,1],"singleMoverBearer":2,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":2,"both":3,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":7,"v2":8,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":6,"known":6,"unknown":0} e3={"dailyDays":36,"moves":8}
