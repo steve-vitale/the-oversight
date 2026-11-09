@@ -341,4 +341,6 @@ he was fine.
   worktree until the confirm verdict decides the landing commit (GO →
   fix + proof + evidence + corpora; NO-GO → revert, evidence +
   corpora only).
-- [Commit hashes TO BE FILLED at landing time.]
+- Landing commit (fix + proof + evidence + corpora + panels + gates):
+  `3f405ff78` (main-session closeout), plus the follow-up commit
+  filling this hash in the evidence file.
