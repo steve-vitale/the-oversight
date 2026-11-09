@@ -180,7 +180,34 @@ function install(Game) {
     const out = origFinalize();
     try {
       const seat = (typeof Game.tableSeat === 'function') ? Game.tableSeat() : null;
-      out.finalSeat = seat;
+      // SEAT-TAKEN ALIGNMENT (sim-sitmetric-b, 2026-11-08): finalSeat
+      // used to carry the PRICED seat whether or not it was taken —
+      // seed 53004 priced "lesser" with takeseatStats.seatTaken 0, and
+      // every analyzer counting `finalSeat !== 'none'` as a sit re-read
+      // it as taken. The reported finalSeat is now the seat TAKEN: the
+      // priced seat only when a sit actually happened in this run
+      // (tableDone ever set on a daily snapshot, a successful recorded
+      // tableTakeSeat call, or tableDone at finalize — the three
+      // instrument-owned signals, so no policy-module dependency and
+      // no src/js change). Otherwise 'none'. The priced seat stays
+      // visible as finalSeatPriced and the verdict as seatTaken, so
+      // the priced-vs-taken divergence stays auditable, not hidden.
+      // finalFullShortfall still prices the PRICED seat: it describes
+      // the bar, not the sitting.
+      out.finalSeatPriced = seat;
+      let taken = false;
+      try {
+        const pg = (typeof Game.progState === 'function') ? Game.progState() : {};
+        if (pg && pg.tableDone) taken = true;
+      } catch (e) {}
+      if (!taken) {
+        try { if ((t.daily || []).some(function (d) { return d && d.tableDone; })) taken = true; } catch (e) {}
+      }
+      if (!taken) {
+        try { if ((t.sitAttempts || []).some(function (a) { return a && a.ok; })) taken = true; } catch (e) {}
+      }
+      out.seatTaken = taken;
+      out.finalSeat = taken ? seat : { seat: 'none', detail: (seat && seat.detail) || null };
       try { out.finalFullShortfall = (typeof Game.fullSeatShortfall === 'function') ? Game.fullSeatShortfall(seat) : null; } catch (e) { out.finalFullShortfall = null; }
     } catch (e) { out.finalSeat = null; }
     try { out.sitAttempts = t.sitAttempts.slice(); } catch (e) { out.sitAttempts = null; }

@@ -198,7 +198,23 @@ function comparePanels(before, after, options) {
     const all = after.rows.filter(r => r.row.policy === policy), rs = all.filter(r => bm.has(caseKey(r)));
     const metrics = contract.metrics.map(m => compareMetric(rs.map(r => bm.get(caseKey(r)).metrics[m.id]), rs.map(r => r.metrics[m.id]), m, policy + '/' + m.id));
     const review = metrics.filter(m => !['descriptive', 'no_material_signal'].includes(m.status));
-    const result = { policy, cases: rs.length, confirmationSized: rs.length >= contract.confirmationSeeds, decision: review.length ? 'review_required' : 'no_material_signal', metrics };
+    // TABLE REACH, RAW (sim-sitmetric-b, 2026-11-08): the judged `table`
+    // metric is sittings by ruling 665 (row.entered), so a panel where
+    // villages reach the table and never sit reads 0/8 on both legs and
+    // the divergence is invisible. Surface the raw invitation flag
+    // (row.table = table invitation ever observed, sweep-compare.js)
+    // alongside the sittings, per policy. DISPLAY ONLY: computed from
+    // the panel rows, never a contract metric, never part of the
+    // decision, and the contract file is untouched (digest unchanged).
+    // Null when neither leg carries the raw flag (older panels), so a
+    // missing flag is never printed as a false 0.
+    const beforeRows = rs.map(r => bm.get(caseKey(r)));
+    const countFlag = (rows, key) => rows.filter(r => r.row && r.row[key]).length;
+    const reachObserved = beforeRows.concat(rs).some(r => r.row && r.row.table != null);
+    const tableReach = reachObserved ? { invitedBefore: countFlag(beforeRows, 'table'), invitedAfter: countFlag(rs, 'table'),
+      sittingsBefore: countFlag(beforeRows, 'entered'), sittingsAfter: countFlag(rs, 'entered'), cases: rs.length,
+      note: 'Raw row.table (table invitation ever observed) alongside ruling-665 sittings (row.entered). Display only; never a judged metric and never part of the decision.' } : null;
+    const result = { policy, cases: rs.length, confirmationSized: rs.length >= contract.confirmationSeeds, decision: review.length ? 'review_required' : 'no_material_signal', metrics, tableReach };
     if (after.options.occupation) {
       const beforeRows = before.rows.filter(r => r.row.policy === policy), am = new Set(all.map(caseKey));
       const unavailableBefore = all.filter(r => !bm.has(caseKey(r))).map(r => r.row.seed);
@@ -222,6 +238,7 @@ function markdown(report) {
     lines.push('', '## ' + p.policy, '', `${p.cases} paired cases; ${p.confirmationSized ? 'confirmation-sized' : 'screen only'}; ${p.decision}.`, '', '| Metric | Before | After | Paired delta | 95% exploratory interval | Pairs | Status |', '| --- | ---: | ---: | ---: | --- | ---: | --- |');
     const fmt = n => n == null ? 'unknown' : Number(n.toFixed(4)).toString();
     for (const m of p.metrics) lines.push(`| ${m.label} | ${fmt(m.before)} | ${fmt(m.after)} | ${fmt(m.delta)} | ${m.interval95.map(fmt).join(' to ')} | ${m.pairs}/${m.totalPairs} | ${m.status} |`);
+    if (p.tableReach) lines.push('', `Table reach (raw, display only — not the judged metric): invitations observed ${p.tableReach.invitedBefore}/${p.tableReach.cases} before → ${p.tableReach.invitedAfter}/${p.tableReach.cases} after; sittings (ruling 665) ${p.tableReach.sittingsBefore}/${p.tableReach.cases} → ${p.tableReach.sittingsAfter}/${p.tableReach.cases}. The raw row.table flag is the invitation, not the sitting — a village can reach the table and never sit.`);
   }
   lines.push('', report.note || 'Invalid comparisons must be repaired before interpretation.', '');
   return lines.join('\n');

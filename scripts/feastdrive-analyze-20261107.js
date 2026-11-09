@@ -10,6 +10,10 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
+// sim-sitmetric-b: the row's finalSeat is the ALIGNED seat (taken, not
+// priced) — see scripts/lib/seat-taken.js. A priced-but-untaken seat
+// (seed 53004: "lesser", taken 0) reads 'none' here.
+const { alignedSeat } = require(path.join(__dirname, 'lib', 'seat-taken'));
 
 const dir = process.argv[2];
 if (!dir) { console.error('FEASTDRIVE-ANALYZE STOP: corpus dir required.'); process.exit(2); }
@@ -41,7 +45,7 @@ for (const f of files) {
   seeds.push({
     seed: o.seed, policy: o.policy, days: o.days, endReason: o.endReason, won: !!o.won,
     maxWave: o.maxWave, standing: o.standing, scaleRank: o.scaleRank,
-    finalSeat: o.finalSeat ? o.finalSeat.seat : null,
+    finalSeat: alignedSeat(o),
     w4kills: w4kills, w5kills: w5kills, pairDays: daily.filter(function (d) { return d.pairDay; }).length,
     channels: last.channels | 0, arms: last.arms | 0, feasts: last.feasts | 0,
     armedFeasts: last.armedFeasts | 0, grants: last.grants | 0,

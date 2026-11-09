@@ -11,6 +11,10 @@
 const fs = require('fs');
 const path = require('path');
 const { classifyGate } = require(path.join(__dirname, 'regionalstep-instrument-20261107'));
+// sim-sitmetric-b: the row's finalSeat is the ALIGNED seat (taken, not
+// priced) — see scripts/lib/seat-taken.js. A priced-but-untaken seat
+// (seed 53004: "lesser", taken 0) reads 'none' here.
+const { alignedSeat } = require(path.join(__dirname, 'lib', 'seat-taken'));
 
 const dir = process.argv[2] || path.join(__dirname, '..', 'evidence', '2026-11-07', 'perseed-regionalstep-b');
 const files = fs.readdirSync(dir).filter(function (f) { return /\.json$/.test(f); }).sort();
@@ -66,7 +70,7 @@ files.forEach(function (f) {
     seed: o.seed, days: o.days, endReason: o.endReason, won: !!o.won,
     maxWave: o.maxWave, unlockedWave: o.unlockedWave, standing: o.standing,
     standingBreakdown: lastRow.standingBreakdown || null,
-    scaleRank: o.scaleRank, finalSeat: o.finalSeat ? o.finalSeat.seat : null,
+    scaleRank: o.scaleRank, finalSeat: alignedSeat(o),
     noRegionalDays: noRegRows.length,
     regionalDays: daily.length - noRegRows.length,
     gateTally: gateTally, gateMissing: gateMissing,
@@ -94,7 +98,7 @@ files.forEach(function (f) {
   seeds[o.seed] = s;
   if (o.scaleRank === 'national' || o.scaleRank === 'global') wall.national++;
   if (o.won) wall.wins++;
-  if (o.finalSeat && o.finalSeat.seat !== 'none') wall.table++;
+  if (s.finalSeat && s.finalSeat !== 'none') wall.table++;
   if ((o.unlockedWave | 0) >= 4) wall.wave4unlock++;
   if ((o.unlockedWave | 0) >= 5) wall.wave5unlock++;
   if ((o.maxWave | 0) >= 5) wall.wave5faced++;

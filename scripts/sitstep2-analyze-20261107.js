@@ -15,6 +15,10 @@
 const fs = require('fs');
 const path = require('path');
 const { classifyGate } = require(path.join(__dirname, 'sitstep-instrument-20261107'));
+// sim-sitmetric-b: the row's finalSeat is the ALIGNED seat (taken, not
+// priced) — see scripts/lib/seat-taken.js. A priced-but-untaken seat
+// (seed 53004: "lesser", taken 0) reads 'none' here.
+const { alignedSeat } = require(path.join(__dirname, 'lib', 'seat-taken'));
 
 // classifySeatDay(row, callsToday): first failing link in the sit
 // chain, extended past sitstep's classifyGate. Gates:
@@ -143,7 +147,7 @@ files.forEach(function (f) {
   const s = {
     seed: o.seed, days: o.days, endReason: o.endReason, won: !!o.won,
     maxWave: o.maxWave, unlockedWave: o.unlockedWave, standing: o.standing,
-    scaleRank: o.scaleRank, finalSeat: o.finalSeat ? o.finalSeat.seat : null,
+    scaleRank: o.scaleRank, finalSeat: alignedSeat(o),
     finalFullShortfall: o.finalFullShortfall ? o.finalFullShortfall.missing : null,
     seatDays: seatRows.length,
     firstSeatDay: seatRows.length ? seatRows[0].day : null,
@@ -176,7 +180,7 @@ files.forEach(function (f) {
   if (o.scaleRank === 'regional' || o.scaleRank === 'national' || o.scaleRank === 'global') wall.regional++;
   if (o.scaleRank === 'national' || o.scaleRank === 'global') wall.national++;
   if (o.won) wall.wins++;
-  if (o.finalSeat && o.finalSeat.seat !== 'none') { wall.table++; if (o.finalSeat.seat === 'lesser') wall.lesserSeats++; }
+  if (s.finalSeat && s.finalSeat !== 'none') { wall.table++; if (s.finalSeat === 'lesser') wall.lesserSeats++; }
   if ((o.unlockedWave | 0) >= 4) wall.wave4unlock++;
   if ((o.unlockedWave | 0) >= 5) wall.wave5unlock++;
   if ((o.maxWave | 0) >= 5) wall.wave5faced++;

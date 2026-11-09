@@ -23,6 +23,10 @@
 const fs = require('fs');
 const path = require('path');
 const { classifyGate } = require(path.join(__dirname, 'sitstep-instrument-20261107'));
+// sim-sitmetric-b: the row's finalSeat is the ALIGNED seat (taken, not
+// priced) — see scripts/lib/seat-taken.js. A priced-but-untaken seat
+// (seed 53004: "lesser", taken 0) reads 'none' here.
+const { alignedSeat } = require(path.join(__dirname, 'lib', 'seat-taken'));
 
 // classifySeatDay: the sitstep2-analyze extended rule, copied (same
 // gates) so this analyzer judges seat days identically:
@@ -132,7 +136,7 @@ function analyzeSeed(o) {
     seed: o.seed, days: o.days, gameDays: o.gameDays, endReason: o.endReason,
     won: !!o.won, over: !!o.over, standing: o.standing, scaleRank: o.scaleRank,
     maxWave: o.maxWave, unlockedWave: o.unlockedWave,
-    finalSeat: o.finalSeat ? o.finalSeat.seat : null,
+    finalSeat: alignedSeat(o),
     firstSeatDay: seatDays.length ? seatDays[0].day : null,
     seatDays: seatDays.length, gates: gates,
     previewReadyDays: previewReadyDays,
