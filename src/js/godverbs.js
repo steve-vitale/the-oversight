@@ -20,6 +20,7 @@
 //   - allSeeingCouncilLeanFor() -> ARMY scale: All-Seeing war-council map lean for titanWarCouncil readiness/intel/counter
 //   - apexScoutMarkLeanFor() -> ARMY scale: Apex Predator scout-mark lean for resolveOneAssignment scout / markSeen follow
 //   - unkillableLastStandingLeanFor() -> ARMY scale: Unkillable last-standing lean for titanLastStandingContinuity refuse-rout
+//   - opaBreachLeanFor() -> ARMY scale: One-Person Army breach lean for titanBreachPourThrough coalition pour-through
 // consumes:
 //   - Game.data.godpaths (god.play), state.scholar.godhood, state.village.npcGodhood
 //   - useAbility (abilityActions.js), tbDamage, tbRoundWrap, tbMonsterTurn, startCombat, tbEnd, endDay, maybeCheatDeath, addHealth, removeVillager, springAmbush, lieLive, getActiveLie
@@ -46,6 +47,7 @@
 //   - all_seeing_army_council_lean: All-Seeing scale.army — ascended All-Seeing holder (player or NPC) leans titanWarCouncil via god.play.councilMapLean: readiness honesty, scout-intel clarity, counter-hint reveal while unknown (code: allSeeingCouncilLeanFor, titans.js titanWarCouncil; OVE-128)
 //   - apex_scout_mark_army_lean: Apex Predator scale.army — ascended Apex holder (player or NPC) leans scout assignment markSeen via god.play.scoutMarkLean: higher shared-reveal chance + follow-marks beat (code: apexScoutMarkLeanFor, game.js resolveOneAssignment scout; OVE-132)
 //   - unkillable_last_standing_army_lean: Unkillable scale.army — ascended Unkillable holder (player or Haven NPC) leans titan last-blade continuity via god.play.lastStandingLean: when the holder is the last living ours blade in a titan fight, refuse rout / steadiness + last-standing beat (code: unkillableLastStandingLeanFor, titans.js titanLastStandingContinuity; OVE-136)
+//   - opa_breach_army_lean: One-Person Army scale.army — ascended OPA holder (player or Haven NPC) leans titan breach pour-through via god.play.breachLean: when the holder opens the front in a titan fight (adjacent / Turn the Pain on titan), coalition blades pour through — steadiness + pour-count + breach beat; does not re-label partyRallyAt or titanPain (code: opaBreachLeanFor, titans.js titanBreachPourThrough; OVE-140)
 //   - table_never_reads_godhood: nothing here is read by table*.js (code: scripts/godpath/ladder.js)
 //   - never_silent: every verb narrates; errors are reported via warn (code: warn)
 (function () {
@@ -410,6 +412,34 @@
     } catch (e) { warn('unkillableLastStandingLeanFor', e); return 0; }
   }
 
+  // ---------------- ARMY scale: One-Person Army breach / pour-through lean ----------------
+  // god.scale.army is design prose ("You are the breach the coalition pours
+  // through."). Live settlement: when an ascended OPA holder (player or Haven
+  // NPC) is active, titanBreachPourThrough reads opaBreachLeanFor and applies
+  // god.play.breachLean — when the holder opens the front in a titan/
+  // coalition fight (adjacent to a living titan, or Turn the Pain lands on
+  // one), coalition blades pour through the breach with steadiness + a
+  // pour-through beat. Does not re-label partyRallyAt (PARTY) or titanPain
+  // (TITAN), invent free second Turn the Pain for every blade, or retune
+  // Turn the Pain kcal / blood contestLean (OVE-140).
+  function opaHolderActive() {
+    try {
+      if (holderGod('player') === 'one_person_army') return true;
+      const v = Game.state.village || {};
+      for (const vid of Object.keys(v.npcGodhood || {})) {
+        if (holderGod(vid) === 'one_person_army') return true;
+      }
+      return false;
+    } catch (e) { warn('opaHolderActive', e); return false; }
+  }
+  function opaBreachLeanFor() {
+    try {
+      if (!opaHolderActive()) return 0;
+      const lean = godPlay('one_person_army').breachLean;
+      return (typeof lean === 'number' && lean > 0) ? lean : 1;
+    } catch (e) { warn('opaBreachLeanFor', e); return 0; }
+  }
+
   // ---------------- ARMY scale: Voice Be Heard → linked/allied foreign villages ----------------
   // god.scale.army is design prose ("Every allied village hears your word the
   // same day."). Live settlement stamps each linked OR allied foreign village
@@ -602,6 +632,14 @@
       line(C, `Every wound you took this fight comes back at once: ${landed} into ${nm(m)}. No cap.${titanBonus ? ` (${titanBonus} of it is what it did to your people.)` : ''} (Turn the Pain)`,
         `${C.name} gives back every wound at once: ${landed} into ${nm(m)}. No cap. (Turn the Pain)`);
       tele('god_verb', { god: 'one_person_army', verb: 'turn_the_pain', who: C.isP ? 'player' : C.vid, dealt: landed, pool: total });
+      // ARMY (OVE-140): Turn the Pain on a titan opens the breach — coalition
+      // pour-through is stripable via Game.opaBreachLeanFor / titanBreachPourThrough.
+      // Distinct from PARTY partyRallyAt and TITAN titanPain ally-wound return.
+      if (landed > 0 && isTitanish(m)) {
+        try {
+          if (Game.titanBreachPourThrough) Game.titanBreachPourThrough({ opener: p, openedBy: 'turn_the_pain' });
+        } catch (e) { warn('breachPour turn_the_pain', e); }
+      }
       try { Game.tbEndCheck && Game.tbEndCheck(); } catch (e) { warn('endcheck pain', e); }
       return true;
     },
@@ -912,6 +950,7 @@
     allSeeingCouncilLeanFor() { return allSeeingCouncilLeanFor(); },
     apexScoutMarkLeanFor() { return apexScoutMarkLeanFor(); },
     unkillableLastStandingLeanFor() { return unkillableLastStandingLeanFor(); },
+    opaBreachLeanFor() { return opaBreachLeanFor(); },
     voiceReachVillageIds() { return voiceReachVillageIds(); },
     voiceDeliverAllied(day) { return voiceDeliverAllied(day); },
     godActionDef(actionId) {
@@ -1814,7 +1853,7 @@
 
   const _mantle = Game.mantleBecome;
   Game.mantleBecome = function () { migratePlayerDayUses(); return _mantle.apply(this, arguments); };
-  S.GodVerbs = { holderGod, fighterGod, godPlay, godDaily, godVillagerCast, phoenixVillagerWorld, isFeastContest, gardenFeastLeanFor, isPerformanceContest, voicePerformanceLeanFor, isEnduranceContest, unkillableEnduranceLeanFor, isStrategyContest, allSeeingStrategyLeanFor, isSponsorContest, marketSponsorLeanFor, isBloodContest, opaBloodLeanFor, gardenMusterFeedFor, marketOutfitLeanFor, allSeeingCouncilLeanFor, apexScoutMarkLeanFor, unkillableLastStandingLeanFor, VERB_IMPL, DAY_IMPL, registerGodActions, marketPick, painPool };
+  S.GodVerbs = { holderGod, fighterGod, godPlay, godDaily, godVillagerCast, phoenixVillagerWorld, isFeastContest, gardenFeastLeanFor, isPerformanceContest, voicePerformanceLeanFor, isEnduranceContest, unkillableEnduranceLeanFor, isStrategyContest, allSeeingStrategyLeanFor, isSponsorContest, marketSponsorLeanFor, isBloodContest, opaBloodLeanFor, gardenMusterFeedFor, marketOutfitLeanFor, allSeeingCouncilLeanFor, apexScoutMarkLeanFor, unkillableLastStandingLeanFor, opaBreachLeanFor, VERB_IMPL, DAY_IMPL, registerGodActions, marketPick, painPool };
   // the data loads after the scripts (Game.init): register once it's there
   const _init = Game.init;
   if (typeof _init === 'function') {
