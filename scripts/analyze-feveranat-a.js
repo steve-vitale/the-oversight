@@ -36,12 +36,23 @@
 //   corpus: before leg 132/132 'recovered' ends show 1 (zero false
 //   positives). The duty cure is the only in-tick deletion during care in
 //   code (medicDutyCureAttempt deletes v.sick directly; it never calls
-//   cureStatus, so no cureEvent exists for it). BLIND SPOT, stated plainly:
-//   a patient infected and cured within ONE tick never appears as an onset
-//   or an end (the tick wrapper diffs before/after maps and the record is
-//   in neither), so no episode join can count those cures — 30 of the 33
-//   duty cures on the medicduty corpus are of that kind. They are reported
-//   by the medicduty analyzer's care-coverage line, not here.
+//   cureStatus, so no cureEvent exists for it).
+//   SAME-TICK FIX (sim-sametick-a, 2026-11-09): the blind spot below is
+//   closed PROSPECTIVELY by the care wrapper in sweep-feveranat-a.js, which
+//   logs a 'dutyCure' treatEvent for every record present at care entry and
+//   gone at care exit — including a record the infection loop created
+//   earlier in the SAME tick. The join below attributes each such event to
+//   its open episode (curedBy 'duty-cure-event'), or synthesizes a 0-day
+//   cured episode when no onset exists (curedBy 'duty-same-tick'; sound
+//   only for the three names the infection loop creates — 'wound fever',
+//   'gut rot', 'tick fever' — whose only creation site is that loop).
+//   RESIDUAL LIMIT, stated plainly: corpora recorded BEFORE the fix contain
+//   no trace of same-tick cures at all — no onset, no end, no treatEvent, no
+//   snapshot, no say-line (0 occurrences of any cure line survive in the
+//   medicduty after-leg feveranat files). The analyzer cannot recover them
+//   from such a corpus, and does not try: on a pre-fix corpus it still
+//   reports the 3 snapshot-attributed cures and nothing more. The 30 are
+//   recoverable only from a fresh run under the fixed recorder.
 'use strict';
 const fs = require('fs');
 const path = require('path');
@@ -98,6 +109,8 @@ function dayAggs(s) {
 function buildEpisodes(s) {
   const eps = [];
   const orphanEnds = [];
+  const dutyCureEnds = []; // 'recovered' ends explained by a dutyCure event (see below)
+  const dutyCureUnrecorded = []; // dutyCure events with no onset anywhere (filled below)
   const queues = new Map();
   const keyOf = (ev) => {
     const who = ev.who;
@@ -130,7 +143,22 @@ function buildEpisodes(s) {
       const e = ev.e;
       const k = keyOf(e);
       const q = queues.get(k) || [];
-      if (!q.length) { orphanEnds.push(e); continue; }
+      // An end with no onset is an orphan — UNLESS a dutyCure event names
+      // the same patient + disease on the same day (sim-sametick-a): the
+      // record was created by an UNWRAPPED call (e.g. 'radiation sickness'
+      // from the feast-buff path), so no onset was ever logged, but the
+      // duty cure itself was observed by the care wrapper and the tick
+      // wrapper's 'recovered' end is the same deletion seen a second time.
+      // That end is explained, not orphaned; the cure is counted in
+      // dutyCureUnrecorded below, not as an episode.
+      if (!q.length) {
+        const dc = (s.treatEvents || []).find(t => t.kind === 'dutyCure' &&
+          t.who === e.who && t.day === e.day &&
+          (t.diseaseName === e.name ||
+            (t.diseaseId && e.diseaseId && t.diseaseId === e.diseaseId)));
+        if (dc) { dutyCureEnds.push(e); continue; }
+        orphanEnds.push(e); continue;
+      }
       const o = q.shift();
       eps.push(finish(o, e, e.outcome));
     }
@@ -185,6 +213,7 @@ function buildEpisodes(s) {
   // in the window, a 'cured' end, or — NPC only — a 'recovered' end whose
   // end-day snapshot still showed daysLeft >= 3 (duty cure, see header).
   const snapByDay = new Map((s.daySeries || []).map(d => [d.day, d]));
+  const joinedDutyCures = new Set(); // dutyCure events consumed by an episode join
   const cureMatches = (ep, c) => {
     if (c.target !== ep.who) return false;
     const endD = ep.endDay == null ? s.daysAlive : ep.endDay;
@@ -212,16 +241,76 @@ function buildEpisodes(s) {
       ep.treated = true; ep.cured = true; ep.curedBy = ep.curedBy || 'cured-end';
       if (!ep.treatKinds.includes('cure')) ep.treatKinds.push('cure');
     }
+    // DUTY-CURE EVENT JOIN (sim-sametick-a): a 'dutyCure' treatEvent is the
+    // care wrapper's direct observation of a duty cure (record present at
+    // care entry, gone at care exit). Join it to the open episode for the
+    // same patient whose window contains the cure day. Direct evidence
+    // outranks the snapshot inference below, so the snapshot rule only
+    // fires when the episode is not already cured.
+    for (const dc of (s.treatEvents || []).filter(t => t.kind === 'dutyCure')) {
+      if (dc.who !== ep.who) continue;
+      if (dc.day < ep.onsetDay || dc.day > endD) continue;
+      if (dc.diseaseId && ep.diseaseId && dc.diseaseId !== ep.diseaseId) continue;
+      if (dc.diseaseName && ep.name && dc.diseaseName !== ep.name) continue;
+      if (ep.cured) continue;
+      ep.treated = true; ep.cured = true; ep.curedBy = 'duty-cure-event';
+      if (!ep.treatKinds.includes('cure')) ep.treatKinds.push('cure');
+      joinedDutyCures.add(dc);
+    }
     if (ep.kind === 'npc' && ep.outcome === 'recovered' && ep.endDay != null) {
       const snap = snapByDay.get(ep.endDay);
       const rec = snap && (snap.sickMap || {})[ep.who];
-      if (rec && (rec.daysLeft || 0) >= 3) {
+      if (rec && (rec.daysLeft || 0) >= 3 && !ep.cured) {
         ep.treated = true; ep.cured = true; ep.curedBy = 'duty-snapshot';
         if (!ep.treatKinds.includes('cure')) ep.treatKinds.push('cure');
       }
     }
   }
-  return { eps, orphanEnds };
+  // SAME-TICK SYNTHESIS (sim-sametick-a): a 'dutyCure' event that joined no
+  // episode is a record the tick's infection loop created and the care pass
+  // cured inside ONE tick — it never became an onset or an end. The event
+  // itself is the observation (patient, disease name, day, holder), so the
+  // episode is synthesized as a 0-day cured episode. This inference is sound
+  // ONLY for the three names the infection loop creates ('wound fever',
+  // 'gut rot', 'tick fever' — their only creation site is that loop, which
+  // runs inside this same tick before care). Any other name (e.g.
+  // 'radiation sickness', created by the unwrapped feast-buff path) is
+  // counted as a captured cure with an unrecorded onset — no episode is
+  // synthesized, because its onset day is genuinely unknown.
+  const TICK_NAMES = { 'wound fever': 'wound', 'gut rot': 'dirty water', 'tick fever': 'tick' };
+  for (const dc of (s.treatEvents || []).filter(t => t.kind === 'dutyCure')) {
+    if (joinedDutyCures.has(dc)) continue;
+    // Defensive: an in-window episode for the same patient + disease
+    // explains the event even when the join skipped it because the episode
+    // was already cured by another channel (a duty cure and a cureStatus /
+    // treatVillager cure cannot target the same record in live play, but a
+    // hand-built corpus could) — never synthesize a second episode for one
+    // observed cure.
+    const explained = eps.some(ep => ep.who === dc.who &&
+      (ep.name === dc.diseaseName ||
+        (dc.diseaseId && ep.diseaseId && dc.diseaseId === ep.diseaseId)) &&
+      dc.day >= ep.onsetDay && (ep.endDay == null || dc.day <= ep.endDay));
+    if (explained) continue;
+    const vec = TICK_NAMES[dc.diseaseName];
+    if (vec) {
+      eps.push({ seed: s.seed, who: dc.who, whoName: dc.whoName, kind: 'npc',
+        name: dc.diseaseName, diseaseId: dc.diseaseId || null, vector: vec,
+        vectorSource: 'villageSicknessTick (same-tick, via duty-cure event)',
+        vectorEvidence: 'record observed at care entry with name ' + dc.diseaseName +
+          '; created by this tick\'s infection loop and cured by the duty holder in the same tick (no onset or end exists)',
+        onsetDay: dc.day, endDay: dc.day, duration: 0, outcome: 'cured', by: 'dutyCure',
+        daysLeft0: dc.daysLeftBefore == null ? null : dc.daysLeftBefore,
+        dayPartsLeft0: null, severity: null, hpAtOnset: null, rangeProfile: null,
+        drinksDirty: null, hygiene: null,
+        // The cure itself proves a healer was present at the (same) tick.
+        healerPresent: true, medicCount: null,
+        sayWin: [], treated: true, treatKinds: ['cure'],
+        cured: true, curedBy: 'duty-same-tick', synthesized: 'duty-same-tick' });
+    } else {
+      dutyCureUnrecorded.push(dc);
+    }
+  }
+  return { eps, orphanEnds, dutyCureEnds, dutyCureUnrecorded };
 }
 
 function main() {
@@ -365,8 +454,28 @@ function main() {
     ' cured-episodes=' + allEps.filter(e => e.cured).length +
     ' (cureEvent ' + allEps.filter(e => e.curedBy === 'cureEvent').length +
     ', cured-end ' + allEps.filter(e => e.curedBy === 'cured-end').length +
-    ', duty-snapshot ' + allEps.filter(e => e.curedBy === 'duty-snapshot').length + ')');
-  console.log('  NOTE (poolcapture-bar-a #1921): a duty cure that infects and cures a patient inside ONE tick leaves no onset and no end in this corpus, so no episode join can count it — the medicduty analyzer reports those as same-tick cures on its care-coverage line.');
+    ', duty-snapshot ' + allEps.filter(e => e.curedBy === 'duty-snapshot').length +
+    ', duty-cure-event ' + allEps.filter(e => e.curedBy === 'duty-cure-event').length +
+    ', duty-same-tick ' + allEps.filter(e => e.curedBy === 'duty-same-tick').length + ')');
+  const dutyCureEvents = seeds.flatMap(s => (s.treatEvents || []).filter(t => t.kind === 'dutyCure'));
+  const dutyCureUnrecorded = perSeed.flatMap(ps => ps.built.dutyCureUnrecorded || []);
+  const dutyCureEnds = perSeed.flatMap(ps => ps.built.dutyCureEnds || []);
+  // Ground truth: the game's own cumulative dutyCures counter, read at run
+  // end by the recorder (per-seed dutyCuresTotal; absent on pre-fix
+  // corpora, where the medicduty analyzer's totalDutyCures is the source).
+  const dutyCuresGroundTruth = seeds.reduce((t, s) => t + (((s.dutyCuresTotal || {}).total) || 0), 0);
+  const dutyCuresHaveGroundTruth = seeds.some(s => s.dutyCuresTotal != null);
+  console.log('  DUTY CURES (sim-sametick-a): dutyCure events observed by the care wrapper=' + dutyCureEvents.length +
+    ' (joined to episodes ' + allEps.filter(e => e.curedBy === 'duty-cure-event').length +
+    ', synthesized same-tick episodes ' + allEps.filter(e => e.curedBy === 'duty-same-tick').length +
+    ', unrecorded-onset cures ' + dutyCureUnrecorded.length +
+    ', ends explained by a dutyCure event ' + dutyCureEnds.length + ')' +
+    (dutyCuresHaveGroundTruth
+      ? ' — game-counter totalDutyCures=' + dutyCuresGroundTruth +
+        '; capture ' + dutyCureEvents.length + '/' + dutyCuresGroundTruth +
+        ' (missed ' + Math.max(0, dutyCuresGroundTruth - dutyCureEvents.length) + ')'
+      : ' — no game-counter total in this corpus (pre-fix); compare against the medicduty analyzer totalDutyCures for the same legs.'));
+  console.log('  NOTE (poolcapture-bar-a #1921, sim-sametick-a): a duty cure that infects and cures a patient inside ONE tick is captured by the care wrapper\'s dutyCure event and synthesized as a 0-day cured episode — on corpora recorded by the FIXED recorder. On a PRE-FIX corpus the same cures leave no trace at all (no onset, no end, no event, no snapshot, no say-line) and are NOT recoverable; the medicduty analyzer\'s sameTickCures line is the only count of them there.');
   console.log('  treated: median duration=' + med(treatedClosed.map(e => e.duration)) +
     ' mean=' + r1(mean(treatedClosed.map(e => e.duration))) + ' died=' + treatedDied + '/' + treated.length);
   console.log('  untreated: median duration=' + med(untreatedClosed.map(e => e.duration)) +
@@ -526,9 +635,16 @@ function main() {
   console.log('');
 
   // ---- G2 NEUTRALITY ----
+  // The summary lives at sweep-competent.json in a single-recorder corpus;
+  // in a multi-recorder corpus each sweep writes its own <name>-summary.json
+  // (sim-sametick-a: the feveranat summary is feveranat-a-summary.json).
+  // The content is identical in shape ({ rows: [{ fingerprint }], bare }),
+  // so fall back to the per-recorder name when the single name is absent.
   let g2 = 'NOT CHECKED (no sweep-competent.json summary found)';
   try {
-    const summPath = path.join(DIR, 'sweep-competent.json');
+    const summPath = fs.existsSync(path.join(DIR, 'sweep-competent.json'))
+      ? path.join(DIR, 'sweep-competent.json')
+      : path.join(DIR, 'feveranat-a-summary.json');
     if (fs.existsSync(summPath)) {
       const summ = JSON.parse(fs.readFileSync(summPath, 'utf8'));
       const mism = [];

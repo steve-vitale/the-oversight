@@ -46,20 +46,32 @@ function med(a) {
 // never become episodes at all; they are counted separately as
 // same-tick cures (total duty cures minus attributed cured episodes)
 // and reported on the care-coverage line, not in treatedShare.
+// SAME-TICK FIX (sim-sametick-a, 2026-11-09): the care wrapper in
+// sweep-feveranat-a.js now logs a 'dutyCure' treatEvent for every record
+// present at care entry and gone at care exit, so the join below
+// attributes each event to its open episode (curedBy 'duty-cure-event')
+// or synthesizes a 0-day cured episode when no onset exists (curedBy
+// 'duty-same-tick'; sound only for the three names the infection loop
+// creates). sameTickCures now counts ONLY cures whose onset was never
+// recorded at all (e.g. 'radiation sickness' from the unwrapped
+// feast-buff path) — on a pre-fix corpus it still reports the old 30,
+// because the old recorder logged no dutyCure events.
 function episodesOf(f) {
   const onsets = (f.sickOnsets || []).filter(o => o.kind === 'npc');
   const ends = (f.sickEnds || []).filter(e => e.kind === 'npc');
   const treats = (f.treatEvents || []).filter(t => t.kind === 'villagerCare');
   const cures = (f.cureEvents || []);
+  const dutyCures = (f.treatEvents || []).filter(t => t.kind === 'dutyCure');
   const snapByDay = new Map((f.daySeries || []).map(d => [d.day, d]));
   const eps = [];
+  const joinedDutyCures = new Set();
   for (const o of onsets) {
     const end = ends.filter(e => e.who === o.who && e.day >= o.day)
       .sort((a, b) => a.day - b.day)[0] || null;
     const endDay = end ? end.day : f.daysAlive;
     const treated = treats.some(t => t.who === o.who && t.day >= o.day && t.day <= endDay);
     const ep = { seed: f.seed, who: o.who, diseaseId: o.diseaseId, healerPresent: !!o.healerPresent,
-      duration: endDay - o.day, treated, cured: false, curedBy: null,
+      onsetDay: o.day, endDay, duration: endDay - o.day, treated, cured: false, curedBy: null,
       outcome: end ? end.outcome : 'open' };
     for (const c of cures) {
       if (c.target !== o.who) continue;
@@ -68,12 +80,47 @@ function episodesOf(f) {
       ep.treated = true; ep.cured = true; ep.curedBy = 'cureEvent';
     }
     if (ep.outcome === 'cured') { ep.treated = true; ep.cured = true; ep.curedBy = ep.curedBy || 'cured-end'; }
+    // DUTY-CURE EVENT JOIN (sim-sametick-a): direct observation of a duty
+    // cure; outranks the snapshot inference below.
+    for (const dc of dutyCures) {
+      if (dc.who !== o.who) continue;
+      if (dc.day < o.day || dc.day > endDay) continue;
+      if (dc.diseaseId && o.diseaseId && dc.diseaseId !== o.diseaseId) continue;
+      if (ep.cured) continue;
+      ep.treated = true; ep.cured = true; ep.curedBy = 'duty-cure-event';
+      joinedDutyCures.add(dc);
+    }
     if (ep.outcome === 'recovered' && end) {
       const snap = snapByDay.get(end.day);
       const rec = snap && (snap.sickMap || {})[o.who];
-      if (rec && (rec.daysLeft || 0) >= 3) { ep.treated = true; ep.cured = true; ep.curedBy = 'duty-snapshot'; }
+      if (rec && (rec.daysLeft || 0) >= 3 && !ep.cured) { ep.treated = true; ep.cured = true; ep.curedBy = 'duty-snapshot'; }
     }
     eps.push(ep);
+  }
+  // SAME-TICK SYNTHESIS (sim-sametick-a): a 'dutyCure' event with no open
+  // episode is a record the tick's infection loop created and the care pass
+  // cured inside ONE tick — a 0-day cured episode. Sound only for the three
+  // names that loop creates; any other name is an unrecorded-onset cure and
+  // is NOT synthesized (its onset day is genuinely unknown), so it stays in
+  // sameTickCures via the total-minus-attributed decomposition in censusLeg.
+  const TICK_NAMES = { 'wound fever': 'wound_fever', 'gut rot': 'gutrot', 'tick fever': 'disease' };
+  for (const dc of dutyCures) {
+    if (joinedDutyCures.has(dc)) continue;
+    // Defensive (as in analyze-feveranat-a.js): an in-window episode for
+    // the same patient + disease explains the event even when the join
+    // skipped it because the episode was already cured by another channel
+    // — never synthesize a second episode for one observed cure.
+    const explained = eps.some(ep => ep.who === dc.who &&
+      (dc.diseaseId && ep.diseaseId && dc.diseaseId === ep.diseaseId) &&
+      dc.day >= (ep.onsetDay == null ? -1 : ep.onsetDay) &&
+      (ep.endDay == null || dc.day <= ep.endDay));
+    if (explained) continue;
+    const did = TICK_NAMES[dc.diseaseName];
+    if (!did) continue;
+    eps.push({ seed: f.seed, who: dc.who, diseaseId: did, healerPresent: true,
+      onsetDay: dc.day, endDay: dc.day,
+      duration: 0, treated: true, cured: true, curedBy: 'duty-same-tick',
+      outcome: 'cured' });
   }
   return eps;
 }
@@ -219,4 +266,5 @@ function main() {
   return go ? 0 : 1;
 }
 
-process.exit(main());
+if (require.main === module) process.exit(main());
+module.exports = { episodesOf, censusLeg };

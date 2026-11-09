@@ -20,7 +20,13 @@
 //      food-vector onsets), contractDisease (scholar onsets with the engine's own source
 //      string), applyStatus (disease-roster ids only: alien quirks + tick_attached;
 //      mundane excluded — they go through contractDisease; a reentrancy flag prevents
-//      double-logging), villagerCareTick (diff daysLeft: tended patients),
+//      double-logging), villagerCareTick (diff daysLeft: tended patients;
+ //      PLUS dutyCure events — a record present at care entry and gone at
+ //      care exit was cured by the duty holder in this tick, including a
+ //      record the infection loop created earlier in the SAME tick, which
+ //      the outer tick wrapper's before/after diff can never see;
+ //      sim-sametick-a 2026-11-09, 30 of 33 duty cures on the medicduty
+ //      corpus),
 //      villagerTreatTick (diff scholar easedUntil), diagnoseDisease (diagnosis events),
 //      treatVillager / tendVillager (diff v.sick: cured/eased/wound-care), folkRemedy /
 //      treatDisease / useMedicine (diff scholar seList — expected zero calls under
@@ -475,6 +481,13 @@ async function oneRun(seed, days, opts) {
     // conditions; ends with outcome). The tick also calls villagerCareTick at its
     // end; the care wrapper below fires nested and logs its own diffs — this
     // wrapper uses presence/absence only, so no double counting.
+    // SAME-TICK LIMIT (sim-sametick-a): a record created by this tick's
+    // infection loop and deleted by the nested care pass (duty cure) is in
+    // NEITHER the before nor the after map, so this wrapper cannot see it.
+    // That case is captured by the villagerCareTick wrapper below, which
+    // observes the record at care entry and logs its deletion as a
+    // 'dutyCure' treatEvent; the analyzer joins it to the episode (or
+    // synthesizes the 0-day episode). See the care wrapper comment.
     const oVST = Game.villageSicknessTick;
     if (typeof oVST === 'function') Game.villageSicknessTick = function () {
       let before = null, beforeMeta = {}, condBefore = null;
@@ -652,25 +665,54 @@ async function oneRun(seed, days, opts) {
     // villagerCareTick: diff daysLeft (tended patients only). Called inside
     // villageSicknessTick, after the tick's own daysLeft-=1 loop, so this diff
     // isolates the care effect.
+    // SAME-TICK CURE CAPTURE (sim-sametick-a, 2026-11-09): the care pass is
+    // also the ONLY deleter of v.sick inside the tick (medicDutyCureAttempt
+    // deletes the record directly — game.js cureIt; the tend path only
+    // decrements daysLeft). A record present at care entry and GONE at care
+    // exit was cured by the duty holder in this tick — including a record
+    // the infection loop created EARLIER IN THE SAME tick, which the outer
+    // tick wrapper's before/after diff can never see (it is in neither map:
+    // 30 of 33 duty cures on the medicduty corpus). The deletion is logged
+    // as a 'dutyCure' treatEvent, never a sickEnd (the tick wrapper already
+    // logs the 'recovered' end for multi-day cures, and a second end would
+    // orphan-pair). The analyzer joins the event to the open episode, or
+    // synthesizes a 0-day episode when no onset exists.
     const oVCT = Game.villagerCareTick;
     if (typeof oVCT === 'function') Game.villagerCareTick = function (nm) {
-      let before = null, medics = [];
+      let before = null, medics = [], holder = null;
       try {
         const v = (Game.state || {}).village || {};
         before = {};
-        for (const [vid, rec] of Object.entries(v.sick || {})) before[vid] = rec.daysLeft;
+        for (const [vid, rec] of Object.entries(v.sick || {})) {
+          before[vid] = { name: rec.name, daysLeft: rec.daysLeft,
+            severity: rec.severity == null ? null : rec.severity };
+        }
         medics = medicIds();
+        try { holder = Game.medicDutyHolder ? Game.medicDutyHolder() : null; } catch (e2) {}
       } catch (e) {}
       const r = oVCT.apply(this, arguments);
       try {
         const v = (Game.state || {}).village || {};
         for (const vid of Object.keys(before || {})) {
+          const b = before[vid];
           const after = (v.sick || {})[vid];
-          if (after && after.daysLeft < before[vid]) {
+          if (!after) {
+            // Record deleted inside care: the duty holder cured this
+            // patient (the only deletion in villagerCareTick). The record
+            // may have existed for days (onset logged earlier — the
+            // analyzer joins to that episode) or have been created by
+            // this same tick's infection loop (no onset exists — the
+            // analyzer synthesizes the 0-day episode).
+            W.treatEvents.push({ day: dayOf(), kind: 'dutyCure', who: String(vid).slice(0, 24),
+              whoName: npcName(vid), diseaseName: b.name,
+              diseaseId: diseaseIdForNpcName(b.name),
+              daysLeftBefore: b.daysLeft, holder: holder ? String(holder).slice(0, 24) : null,
+              medics: medics.slice(0, 8) });
+          } else if (after.daysLeft < b.daysLeft) {
             W.treatEvents.push({ day: dayOf(), kind: 'villagerCare', who: String(vid).slice(0, 24),
               whoName: npcName(vid), diseaseName: after.name,
               diseaseId: diseaseIdForNpcName(after.name),
-              daysLeftBefore: before[vid], daysLeftAfter: after.daysLeft, medics: medics.slice(0, 8) });
+              daysLeftBefore: b.daysLeft, daysLeftAfter: after.daysLeft, medics: medics.slice(0, 8) });
           }
         }
       } catch (e) {}
@@ -1007,6 +1049,20 @@ async function oneRun(seed, days, opts) {
   const t0 = Date.now();
   const result = await runDays(Game, policy, { days, manifest: null });
   const ms = Date.now() - t0;
+  // GROUND-TRUTH DUTY CURES (sim-sametick-a): the game's own cumulative
+  // counter (v.medicDutyCures), read once at run end — a pure read, after
+  // the sim, so it cannot affect the trajectory. The medicduty recorder
+  // reads this same field; the counter and the dutyCure EVENT capture are
+  // mechanism-independent (cumulative bookkeeping vs per-tick diffing), so
+  // the counter is the denominator the capture is judged against. Bare
+  // runs do not record it (they return a fingerprint only).
+  const dutyCuresTotal = (() => {
+    try {
+      const c = ((Game.state || {}).village || {}).medicDutyCures || {};
+      return { ability: c.ability || 0, medicine: c.medicine || 0,
+        total: (c.ability || 0) + (c.medicine || 0) };
+    } catch (e) { return { ability: 0, medicine: 0, total: 0 }; }
+  })();
 
   const deathCauses = {};
   for (const d of W.deaths) deathCauses[d.cause] = (deathCauses[d.cause] || 0) + 1;
@@ -1037,6 +1093,7 @@ async function oneRun(seed, days, opts) {
     freshDaysMedian: (m => (m == null ? null : Math.round(m * 10) / 10))(med(freshSeries)),
     sickOnsets: W.sickOnsets, sickEnds: W.sickEnds, treatEvents: W.treatEvents,
     statusEvents: W.statusEvents, diagnoses: W.diagnoses, cureEvents: W.cureEvents,
+    dutyCuresTotal,
   };
   const diag = {
     endReason: result.endReason, rank, maxWave, arc: (() => { try { return (Game.progState() || {}).arc || 1; } catch (e) { return 1; } })(),

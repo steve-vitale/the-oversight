@@ -412,6 +412,39 @@ async function aleg(name, fn) {
     console.log('    analyzer --leg before: ' + r.stdout.split('\n').find(l => l.startsWith('PRIMARY:')));
   });
 
+  // L7 (sim-sametick-a adoption, 2026-11-09): repeat same-tick cures of one
+  // patient + disease on DIFFERENT days must each synthesize an episode.
+  // The synthesized episode used to carry no onsetDay/endDay, so the
+  // defensive 'explained' check (onsetDay==null -> -1, endDay==null -> any
+  // day) matched every later cure of the same patient+disease and skipped
+  // it: on the sametick corpus s96301 counted 9 cured instead of 17
+  // (yara 4->1, thabo 4->1, gen_lj1h2ty 3->1). The fix stamps onsetDay /
+  // endDay = cure day on synthesized episodes, so only a genuinely
+  // same-day duplicate is explained.
+  leg('L7 repeat same-tick cures on different days each synthesize an episode', () => {
+    const { episodesOf } = require('./analyze-medicduty-a.js');
+    const s = { seed: 96301, daysAlive: 150, deathRows: [], daySeries: [],
+      mealRows: [], sickOnsets: [], sickEnds: [],
+      treatEvents: [
+        { day: 13, kind: 'dutyCure', who: 'v1', whoName: 'Yara', diseaseName: 'tick fever', diseaseId: 'disease', daysLeftBefore: 4, holder: 'v9' },
+        { day: 26, kind: 'dutyCure', who: 'v1', whoName: 'Yara', diseaseName: 'tick fever', diseaseId: 'disease', daysLeftBefore: 5, holder: 'v9' },
+        { day: 68, kind: 'dutyCure', who: 'v1', whoName: 'Yara', diseaseName: 'tick fever', diseaseId: 'disease', daysLeftBefore: 3, holder: 'v9' },
+        { day: 41, kind: 'dutyCure', who: 'v2', whoName: 'Bo', diseaseName: 'wound fever', diseaseId: 'wound_fever', daysLeftBefore: 6, holder: 'v9' },
+      ],
+      cureEvents: [] };
+    const eps = episodesOf(s);
+    assert.strictEqual(eps.length, 4, 'four synthesized episodes, got ' + eps.length);
+    assert.strictEqual(eps.filter(e => e.cured).length, 4, 'all four cured');
+    assert.ok(eps.every(e => e.curedBy === 'duty-same-tick'), 'all duty-same-tick: ' + JSON.stringify(eps.map(e => e.curedBy)));
+    assert.deepStrictEqual(eps.map(e => e.onsetDay).sort((a, b) => a - b), [13, 26, 41, 68], 'onset days stamped per cure');
+    assert.ok(eps.every(e => e.endDay === e.onsetDay), '0-day episodes');
+    // A genuinely same-day duplicate of one observed cure is still explained
+    // once, not double-counted.
+    const s2 = JSON.parse(JSON.stringify(s));
+    s2.treatEvents.push({ day: 13, kind: 'dutyCure', who: 'v1', whoName: 'Yara', diseaseName: 'tick fever', diseaseId: 'disease', daysLeftBefore: 4, holder: 'v9' });
+    assert.strictEqual(episodesOf(s2).length, 4, 'same-day duplicate adds no episode, got ' + episodesOf(s2).length);
+  });
+
   console.log('\n' + pass + ' PASS, ' + fail + ' FAIL');
   process.exit(fail ? 1 : 0);
 })().catch(e => { console.error('TEST CRASH', e); process.exit(2); });
