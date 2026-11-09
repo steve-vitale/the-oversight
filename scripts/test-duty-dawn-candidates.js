@@ -1,6 +1,7 @@
 #!/usr/bin/env node
-// test-duty-dawn-candidates.js — VILLAGER-BRAIN Phase 6 (OVE-60):
-// duty candidates from believed village needs join the dawn scorer.
+// test-duty-dawn-candidates.js — VILLAGER-BRAIN Phase 6 (OVE-60 + pick):
+// duty candidates from believed village needs join the dawn scorer, and a
+// top-scoring DUTY can win the dawn commitment (align → real errand).
 //
 // Proves:
 //   1. Believed-low pantry → DUTY forage/cook appear in dutyFeedCands and
@@ -9,6 +10,10 @@
 //   3. Assigned villager (standing assignTask) → no competing DUTY ads.
 //   4. Failing control: vbrainDutyIgnoreBelief strips the belief hook →
 //      no DUTY ads even when believed pantry is low.
+//   5. Top-scoring DUTY forage → commit DUTY + align FORAGE (materialize
+//      stays core; OVE-36 honesty). No assignTask write.
+//   6. Failing control: vbrainDisableDutyPick → DUTY scores but never commits.
+//   7. Standing gardenKeeper: no DUTY ads; duty_top_score cannot override.
 //
 // Usage: node scripts/test-duty-dawn-candidates.js
 // Exit 0 = pass, 1 = fail, 2 = setup skip. No repo writes.
@@ -150,14 +155,17 @@ function dutyKinds(cands) {
       !!(dutyScored.find(c => (c.considerations || []).some(x => x.id === 'feeder' && x.note === 'duty'))));
   }
 
-  console.log('== believed-full pantry: no DUTY ads ==');
+  console.log('== believed-full pantry: no survival DUTY ads ==');
   {
     plantFullBelief(Game, vid, day);
     const bel = Game.objResourceBelief(vid) || {};
     check('full belief: pantry not low', bel.pantryKcal >= 4000 && bel.pantryDays >= 3,
       JSON.stringify({ kcal: bel.pantryKcal, days: bel.pantryDays }));
     const feed = Game.dutyFeedCands(vid) || [];
-    check('full: feed has no DUTY', feed.length === 0, JSON.stringify(dutyKinds(feed)));
+    const survival = dutyKinds(feed).filter(t => t === 'forage' || t === 'cook' || t === 'water');
+    // OVE-71 may still advertise combat/social DUTY when opportunity exists;
+    // survival forage/cook/water must stay off when the pantry/cistern belief is fine.
+    check('full: feed has no survival DUTY', survival.length === 0, JSON.stringify(dutyKinds(feed)));
   }
 
   console.log('== assigned villager: standing order honored ==');
@@ -180,6 +188,9 @@ function dutyKinds(cands) {
   console.log('== failing control: belief hook removed ==');
   {
     plantLowBelief(Game, vid, day);
+    // Isolate the resource-belief seam from OVE-71 combat/social DUTY ads.
+    const prevRole = Game.vbrainDisableCombatSocialDuty;
+    Game.vbrainDisableCombatSocialDuty = true;
     const withHook = Game.dutyFeedCands(vid) || [];
     check('control setup: hook produces DUTY', dutyKinds(withHook).indexOf('forage') >= 0,
       JSON.stringify(dutyKinds(withHook)));
@@ -196,6 +207,128 @@ function dutyKinds(cands) {
     const restored = Game.dutyFeedCands(vid) || [];
     check('control restored: DUTY returns', dutyKinds(restored).indexOf('forage') >= 0,
       JSON.stringify(dutyKinds(restored)));
+    Game.vbrainDisableCombatSocialDuty = prevRole;
+  }
+
+  console.log('== top-scoring DUTY wins dawn commit + align ==');
+  {
+    plantLowBelief(Game, vid, day);
+    delete (v.assignments || {})[vid];
+    const duty = (Game.dutyFeedCands(vid) || []).find(c => c.dutyTask === 'forage');
+    check('pick setup: forage DUTY present', !!(duty && duty.w > 0), JSON.stringify(duty));
+    const cands = [{ kind: 'HAVEN_CHORE', w: 0.01, chore: 'fire' }, duty].filter(Boolean);
+    try {
+      const br = v.vbrain;
+      if (br && br.commit) delete br.commit[vid];
+    } catch (e) {}
+    const mat = Game.vbrainScorePick(vid, cands, { rng: () => 0 });
+    const log = Game.vbrainLastLog(vid);
+    const commit = Game.vbrainCommit(vid);
+    check('pick: materialize stays core HAVEN_CHORE', mat && mat.kind === 'HAVEN_CHORE',
+      JSON.stringify(mat));
+    check('pick: log override duty_top_score', log && log.override === 'duty_top_score',
+      JSON.stringify({ override: log && log.override, pick: log && log.pick }));
+    check('pick: log pick DUTY', log && log.pick === 'DUTY',
+      JSON.stringify({ pick: log && log.pick }));
+    check('pick: commit kind DUTY', commit && commit.kind === 'DUTY',
+      JSON.stringify(commit));
+    check('pick: commit dutyTask forage', commit && commit.dutyTask === 'forage',
+      JSON.stringify(commit));
+    check('pick: commit vbrainSrc duty', commit && commit.vbrainSrc === 'duty',
+      JSON.stringify(commit));
+    // Align maps commitment → real FORAGE objective (no assignTask).
+    const o = {
+      kind: 'HAVEN_CHORE', purpose: 'chore', indoor: true, state: 'indoor',
+      chore: 'fire', tx: hx, ty: hy, tightness: 0, partsLeft: 2,
+    };
+    Game.vbrainAlignObjective(vid, o, hx, hy);
+    check('align: kind FORAGE', o.kind === 'FORAGE', JSON.stringify(o));
+    check('align: purpose forage', o.purpose === 'forage', JSON.stringify(o));
+    check('align: outdoor ready', o.indoor === false && o.state === 'ready', JSON.stringify(o));
+    check('align: left home tile', !(o.tx === hx && o.ty === hy), JSON.stringify({ tx: o.tx, ty: o.ty, hx, hy }));
+    check('align: no assignment written',
+      !((v.assignments || {})[vid] && (v.assignments || {})[vid].task),
+      JSON.stringify((v.assignments || {})[vid]));
+  }
+
+  console.log('== failing control: pick hook removed ==');
+  {
+    plantLowBelief(Game, vid, day);
+    delete (v.assignments || {})[vid];
+    const duty = (Game.dutyFeedCands(vid) || []).find(c => c.dutyTask === 'forage');
+    const cands = [{ kind: 'HAVEN_CHORE', w: 0.01, chore: 'fire' }, duty].filter(Boolean);
+    Game.vbrainDisableDutyPick = true;
+    try {
+      const br = v.vbrain;
+      if (br && br.commit) delete br.commit[vid];
+    } catch (e) {}
+    Game.vbrainScorePick(vid, cands, { rng: () => 0 });
+    const log = Game.vbrainLastLog(vid);
+    const commit = Game.vbrainCommit(vid);
+    const scoredDuty = ((log && log.candidates) || []).some(c => c.kind === 'DUTY');
+    check('pick-control: DUTY still scored in log', scoredDuty,
+      JSON.stringify((log && log.candidates || []).map(c => c.kind)));
+    check('pick-control: no duty_top_score override', !(log && log.override === 'duty_top_score'),
+      JSON.stringify({ override: log && log.override, pick: log && log.pick }));
+    check('pick-control: commit is not DUTY', !(commit && commit.kind === 'DUTY'),
+      JSON.stringify(commit));
+    Game.vbrainDisableDutyPick = false;
+    // Restore: same cand list wins DUTY again.
+    try {
+      const br = v.vbrain;
+      if (br && br.commit) delete br.commit[vid];
+    } catch (e) {}
+    const duty2 = (Game.dutyFeedCands(vid) || []).find(c => c.dutyTask === 'forage');
+    const cands2 = [{ kind: 'HAVEN_CHORE', w: 0.01, chore: 'fire' }, duty2].filter(Boolean);
+    Game.vbrainScorePick(vid, cands2, { rng: () => 0 });
+    const commit2 = Game.vbrainCommit(vid);
+    check('pick-control restored: DUTY commits', commit2 && commit2.kind === 'DUTY' && commit2.dutyTask === 'forage',
+      JSON.stringify(commit2));
+  }
+
+  console.log('== standing gardenKeeper: no DUTY ads or pick ==');
+  {
+    plantLowBelief(Game, vid, day);
+    delete (v.assignments || {})[vid];
+    const prevKeeper = v.gardenKeeper;
+    v.gardenKeeper = vid;
+    const feed = Game.dutyFeedCands(vid) || [];
+    check('gardenKeeper: no DUTY ads', feed.length === 0, JSON.stringify(dutyKinds(feed)));
+    const dutyLoose = {
+      kind: 'DUTY', dutyTask: 'forage', w: 9.0, vbrainSrc: 'duty',
+      considerations: [{ id: 'believed_need', raw: 1, note: 'forced' }],
+    };
+    const cands = [{ kind: 'HAVEN_CHORE', w: 0.01, chore: 'fire' }, dutyLoose];
+    try {
+      const br = v.vbrain;
+      if (br && br.commit) delete br.commit[vid];
+    } catch (e) {}
+    Game.vbrainScorePick(vid, cands, { rng: () => 0 });
+    const log = Game.vbrainLastLog(vid);
+    const commit = Game.vbrainCommit(vid);
+    check('gardenKeeper: no duty_top_score override',
+      !(log && log.override === 'duty_top_score'),
+      JSON.stringify({ override: log && log.override, pick: log && log.pick }));
+    check('gardenKeeper: commit is not DUTY',
+      !(commit && commit.kind === 'DUTY'),
+      JSON.stringify(commit));
+    // Failing control: clear keeper → ads and pick return.
+    v.gardenKeeper = null;
+    const feedFree = Game.dutyFeedCands(vid) || [];
+    check('gardenKeeper cleared: DUTY ads return',
+      dutyKinds(feedFree).indexOf('forage') >= 0, JSON.stringify(dutyKinds(feedFree)));
+    try {
+      const br = v.vbrain;
+      if (br && br.commit) delete br.commit[vid];
+    } catch (e) {}
+    const duty2 = (Game.dutyFeedCands(vid) || []).find(c => c.dutyTask === 'forage');
+    const cands2 = [{ kind: 'HAVEN_CHORE', w: 0.01, chore: 'fire' }, duty2].filter(Boolean);
+    Game.vbrainScorePick(vid, cands2, { rng: () => 0 });
+    const commit2 = Game.vbrainCommit(vid);
+    check('gardenKeeper cleared: DUTY can commit',
+      commit2 && commit2.kind === 'DUTY' && commit2.dutyTask === 'forage',
+      JSON.stringify(commit2));
+    v.gardenKeeper = prevKeeper || null;
   }
 
   console.log('== summary ==');

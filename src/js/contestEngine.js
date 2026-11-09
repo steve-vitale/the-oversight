@@ -16,10 +16,24 @@
 //   - other: stat-driven structured resolution, documented per category; chance is rigged theater (ratings-driven, deterministic). (code: otherResolve)
 //   - deterministic: same villager + same contest + same state = same fate — ENFORCED, not aspirational. Every top-level resolution reseeds a private stream from (day, contest id, participants, stat snapshot) via _cxSeed/_cxWithSeed; roll() bypasses Scattering.combat.roll while _det is set; fieldFight draws from opts.rng. No Math.random anywhere in the resolution path — no hidden rolls, no save-scum (reloading replays the identical fate). The process is real; the player can't see the stats anyway (knowledge-gating). (code: _cxSeed, _cxWithSeed, _cxSortIds, Steve 2026-10-08; break-it 2026-10-08; entropy-hunt r26 2026-10-14)
 //   - cheer: watcher's cheer is a real performance modifier (braveryBonus in blood incl. duelFight, case lift in moot); the cheer input is capped at 0.15 as before (alien winMod applies after, as its own meddling). (code: contestResolveGroup, Steve 2026-10-08; break-it 2026-10-08)
+//   - garden_feast_lean: Living Garden CONTEST scale — cookfight/guest making scores add gardenFeastLeanFor for an ascended holder (player or NPC); alien cheer still does not reach weird scores (code: _cxOther, godverbs.js gardenFeastLeanFor; OVE-99)
+//   - voice_performance_lean: Voice of the Relay CONTEST scale — impress making scores and moot case scores add voicePerformanceLeanFor for an ascended holder (player or NPC); feast contests stay Garden-only (code: _cxOther, _cxMoot, godverbs.js voicePerformanceLeanFor; OVE-104)
+//   - unkillable_endurance_lean: Unkillable CONTEST scale — endurance arms honor unkillableEnduranceLeanFor for an ascended holder (player or NPC): starve HP/days, drop/exchange survival-for-time, maw/vigil nerve; feast/performance stay Garden/Voice (code: _cxEndurance, godverbs.js unkillableEnduranceLeanFor; OVE-108)
+//   - all_seeing_strategy_lean: All-Seeing CONTEST scale — puzzle/detective scores and lies case scores add allSeeingStrategyLeanFor for an ascended holder (player or NPC); feast/performance/endurance stay Garden/Voice/Unkillable (code: _cxOther, _cxMoot, godverbs.js allSeeingStrategyLeanFor; OVE-110)
+//   - market_sponsor_lean: Market God CONTEST scale — price moot case scores and auction bid capacity add marketSponsorLeanFor for an ascended holder (player or NPC); auction still pays (risky); feast/performance/endurance/strategy stay Garden/Voice/Unkillable/All-Seeing (code: _cxMoot, _cxChance, godverbs.js marketSponsorLeanFor; OVE-113)
+//   - opa_blood_lean: One-Person Army CONTEST scale — blood fight arms honor opaBloodLeanFor for an ascended holder (player or NPC) as extra braveryBonus / cheer steadiness on pit/gauntlet/duel/siege; tithe stays altar measures; feast/performance/endurance/strategy/sponsor stay Garden/Voice/Unkillable/All-Seeing/Market (code: _cxBlood, duelFight, godverbs.js opaBloodLeanFor; OVE-124)
+//   - between_chase_lean: Between CONTEST scale — chase/race arms honor betweenChaseLeanFor for an ascended holder (player or NPC): hide seeker spot pad (lean/25) + calorie_run forage yield; Unkillable endurance IDs stay Unkillable (code: _cxOther, godverbs.js betweenChaseLeanFor; OVE-148)
 // consumes:
 //   - fieldFight (fieldFights.js), monsterWavePool, unlockedWave
 //   - Game.agencyOf, Game.npcTemper, village health, scholar trust
 //   - hurtVillager, displayName
+//   - Game.gardenFeastLeanFor (godverbs.js) for feast contest score lean
+//   - Game.voicePerformanceLeanFor (godverbs.js) for performance contest score lean
+//   - Game.unkillableEnduranceLeanFor (godverbs.js) for endurance contest lean
+//   - Game.allSeeingStrategyLeanFor (godverbs.js) for strategy contest score lean
+//   - Game.marketSponsorLeanFor (godverbs.js) for sponsor contest lean (price case / auction bid)
+//   - Game.opaBloodLeanFor (godverbs.js) for blood contest bravery lean (pit/gauntlet/duel/siege)
+//   - Game.betweenChaseLeanFor (godverbs.js) for chase/race contest lean (hide spot lean/25 / calorie_run yield)
 /* CONTEST ENGINE — src/js/contestEngine.js
  *
  * Steve (2026-10-08): "No, contests are to be played, not as RNG."
@@ -211,22 +225,26 @@
     // sides, morale breaks driven by wounds. "Not to the death — to the
     // yield": hitting 0 means yield (lost), unless the blow was massive
     // (≥60% of maxHp in one strike) — "accidents happen."
-    // opts.braveryBonus (watcher's cheer / alien rigging) steadies or
-    // shakes both duelists' arms — duels are blood, and blood gets the
-    // cheer. Self-seeding: deterministic from the duelists and the day.
+    // opts.braveryBonus (watcher's cheer / alien rigging) steadies both
+    // duelists' arms — duels are blood, and blood gets the cheer.
+    // opts.braveryLeanA / braveryLeanB (OVE-124 OPA blood lean) steady only
+    // that side: the crowd counts the scarred god's scars, not the partner's.
+    // Self-seeding: deterministic from the duelists and the day.
     duelFight: function(a, b, opts) {
       opts = opts || {};
       return this._cxWithSeed([a, b], { id: 'duel' }, () => {
-      const bravBonus = opts.braveryBonus || 0;
+      const cheer = opts.braveryBonus || 0;
+      const leanA = opts.braveryLeanA || 0;
+      const leanB = opts.braveryLeanB || 0;
       const sa = this._cxStats(a), sb = this._cxStats(b);
       var ha = sa.hp, hb = sb.hp;
       const rec = { rounds: 0, aTaken: 0, bTaken: 0, log: [] };
       const finish = result => this.sealDamageResult(result, [[a, result.aTaken], [b, result.bTaken]]);
-      const vBreak = function(s) {
-        return clamp(0.5 - Math.min(0.3, (s.bravery + bravBonus) * 0.015)
+      const vBreak = function(s, lean) {
+        return clamp(0.5 - Math.min(0.3, (s.bravery + cheer + (lean || 0)) * 0.015)
           - (s.temper === 'bold' ? 0.1 : 0) + (s.temper === 'cautious' ? 0.1 : 0), 0.15, 0.6);
       };
-      const ba = vBreak(sa), bb = vBreak(sb);
+      const ba = vBreak(sa, leanA), bb = vBreak(sb, leanB);
       for (let round = 1; round <= 15; round++) {
         rec.rounds = round;
         const first = R() < 0.5 ? 'a' : 'b';
@@ -299,14 +317,20 @@
       // cheerBonus; duelFight reads braveryBonus. Map it — the old
       // pass-through silently dropped the cheer (the comment claimed the
       // wiring was fixed; it wasn't).
+      // OVE-124: OPA blood lean steadies only the contestant (braveryLeanA).
       const braveryBonus = opts.braveryBonus || opts.cheerBonus || 0;
+      let braveryLeanA = 0;
+      try {
+        if (typeof this.opaBloodLeanFor === 'function')
+          braveryLeanA = this.opaBloodLeanFor(pid, contest) || 0;
+      } catch (e) { console.warn('[contest] opa blood lean', e); }
       const partner = this._cxDuelPartner(pid);
       const pst = this._cxStats(pid);
       if (!partner) {
         const line = `${pst.name} has no one to face. The System shrugs — a duel with no partner is a forfeit.`;
         return { outcome: 'lost', detail: 'no partner — forfeit', log: [line] };
       }
-      const rec = this.duelFight(pid, partner, { braveryBonus });
+      const rec = this.duelFight(pid, partner, { braveryBonus, braveryLeanA });
       const pnm = this._cxStats(partner).name;
       // Wounds are real for both — same rule as the group path (break-it r3).
       try { if (rec.aTaken > 0) this.hurtVillager(pid, rec.aTaken, 'contest', rec); } catch (e) {}
@@ -355,6 +379,14 @@
         return { outcome: 'lost', detail: `found wanting at ${giveable}/${demand}`, log };
       }
       // pit/gauntlet/siege: real fights.
+      // OVE-124: One-Person Army CONTEST scale — blood fight arms honor
+      // opaBloodLeanFor as extra braveryBonus (crowd counts scars). Tithe
+      // above stays altar measures; feast/performance/etc. stay other gods.
+      let opaLean = 0;
+      try {
+        if (typeof this.opaBloodLeanFor === 'function')
+          opaLean = this.opaBloodLeanFor(pid, contest) || 0;
+      } catch (e) { console.warn('[contest] opa blood lean', e); }
       const waves = (id === 'gauntlet' || id === 'siege') ? 3 : 1;
       const wave = this.unlockedWave ? this.unlockedWave() : 1;
       let lastOut = null;
@@ -380,7 +412,9 @@
         // (deterministic); fieldFight bypasses combat.roll when rng is set.
         // noFlee: the arena is sealed — the System doesn't open the gate
         // mid-fight. The fight runs to its real conclusion.
-        try { rec = this.fieldFight(pid, beast, null, { braveryBonus: opts.cheerBonus || 0, rng: R, noFlee: true }); }
+        // cheerBonus / braveryBonus from watchers + OPA blood lean (scar crowd).
+        const braveryBonus = (opts.cheerBonus || opts.braveryBonus || 0) + opaLean;
+        try { rec = this.fieldFight(pid, beast, null, { braveryBonus, rng: R, noFlee: true }); }
         catch (e) { return { outcome: 'lost', detail: 'fight failed', log }; }
         log.push(`Wave ${w}: ${rec.log[rec.log.length - 1] || rec.outcome} (${rec.rounds} rounds, ${rec.vTaken} taken)`);
         if (rec.rounds > 0) { try { this.hurtVillager(pid, rec.vTaken, 'contest', rec); } catch (e) { console.warn('[contest] field health settlement', e); } }
@@ -422,9 +456,37 @@
       opts = opts || {};
       const demand = { low: 6, medium: 9, high: 12, extreme: 15 }[contest.risk] || 9;
       const results = {};
+      // Voice of the Relay CONTEST scale (OVE-104): performance contests
+      // (moot oratory) lean for an ascended Voice holder — the show is theirs.
+      // All-Seeing CONTEST scale (OVE-110): strategy-bluff Lie Detector (lies)
+      // case scores lean for an ascended All-Seeing holder — nobody bluffs
+      // them. Market God CONTEST scale (OVE-113): sponsor The Price (price)
+      // case scores lean for an ascended Market holder — money talks to
+      // judges. Voice moot / All-Seeing lies / Market price are different IDs.
+      const voiceLean = (pid) => {
+        try {
+          if (typeof this.voicePerformanceLeanFor === 'function')
+            return this.voicePerformanceLeanFor(pid, contest) || 0;
+        } catch (e) { console.warn('[contest] voice performance lean', e); }
+        return 0;
+      };
+      const strategyLean = (pid) => {
+        try {
+          if (typeof this.allSeeingStrategyLeanFor === 'function')
+            return this.allSeeingStrategyLeanFor(pid, contest) || 0;
+        } catch (e) { console.warn('[contest] all-seeing strategy lean', e); }
+        return 0;
+      };
+      const sponsorLean = (pid) => {
+        try {
+          if (typeof this.marketSponsorLeanFor === 'function')
+            return this.marketSponsorLeanFor(pid, contest) || 0;
+        } catch (e) { console.warn('[contest] market sponsor lean', e); }
+        return 0;
+      };
       if (pids.length === 1) {
         const pid = pids[0];
-        const score = this._cxCaseScore(pid, opts.cheerLift || 0);
+        const score = this._cxCaseScore(pid, opts.cheerLift || 0) + voiceLean(pid) + strategyLean(pid) + sponsorLean(pid);
         const st = this._cxStats(pid);
         if (score >= demand) return { [pid]: { outcome: 'won', detail: `case ${score.toFixed(1)} vs demand ${demand}`, log: [`${st.name} makes the case. The audience is the jury, and the jury can count.`] } };
         if (score >= demand * 0.6) return { [pid]: { outcome: 'lost', detail: `case ${score.toFixed(1)} vs demand ${demand}`, log: [`${st.name}'s case doesn't hold. The audience looks away.`] } };
@@ -434,7 +496,7 @@
         return { [pid]: { outcome: 'lost', detail: `case ${score.toFixed(1)} vs demand ${demand}`, log: [`${st.name}'s case doesn't hold.`] } };
       }
       // head-to-head (lies, p2)
-      const scores = pids.map(pid => ({ pid, score: this._cxCaseScore(pid, opts.cheerLift || 0) }));
+      const scores = pids.map(pid => ({ pid, score: this._cxCaseScore(pid, opts.cheerLift || 0) + voiceLean(pid) + strategyLean(pid) + sponsorLean(pid) }));
       scores.sort((x, y) => y.score - x.score);
       const top = scores[0], second = scores[1];
       if (second && Math.abs(top.score - second.score) < 0.5) {
@@ -456,10 +518,21 @@
       const results = {};
       const stats = {};
       for (const pid of pids) stats[pid] = this._cxStats(pid);
+      // Unkillable CONTEST scale (OVE-108): endurance contests lean for an
+      // ascended Unkillable holder — applied to the real ordeal arms, not a
+      // blind score add. Feast/performance contests stay Garden/Voice.
+      const enduranceLean = (pid) => {
+        try {
+          if (typeof this.unkillableEnduranceLeanFor === 'function')
+            return this.unkillableEnduranceLeanFor(pid, contest) || 0;
+        } catch (e) { console.warn('[contest] unkillable endurance lean', e); }
+        return 0;
+      };
       if (id === 'starve') {
         // 3 days × 15 health. Most days survived wins; ties → bravery.
+        // Lean is an HP buffer for the day count (not a free heal).
         const days = {};
-        for (const pid of pids) days[pid] = Math.max(0, Math.floor((stats[pid].hp - 20) / 15));
+        for (const pid of pids) days[pid] = Math.max(0, Math.floor((stats[pid].hp + enduranceLean(pid) - 20) / 15));
         const best = Math.max(...pids.map(pid => days[pid]));
         let winners = pids.filter(pid => days[pid] === best);
         if (winners.length > 1) {
@@ -480,13 +553,14 @@
       if (id === 'drop') {
         // 3 legs. speed = 1 + survival/25. 10 hp/leg.
         // Collapse below 20 → lost. Fastest finisher wins.
+        // Lean adds to survival for the time calc (not to HP / collapse).
         const legs = 3;
         const time = {};
         for (const pid of pids) {
           const st = stats[pid];
           const cost = legs * 10;
           if (st.hp - cost < 20) { time[pid] = Infinity; continue; }
-          time[pid] = legs / (1 + st.survival / 25);
+          time[pid] = legs / (1 + (st.survival + enduranceLean(pid)) / 25);
           try { this.hurtVillager(pid, cost, 'contest'); } catch (e) {}
         }
         const fin = pids.filter(pid => time[pid] !== Infinity);
@@ -497,10 +571,10 @@
       }
       if (id === 'maw') {
         // 5 stages. nerve (bravery) vs demand 8+i*4. Holding costs half.
-        // 3 pauses → it takes them.
+        // 3 pauses → it takes them. Lean pads starting nerve.
         for (const pid of pids) {
           const st = stats[pid];
-          let nerve = st.bravery, pauses = 0;
+          let nerve = st.bravery + enduranceLean(pid), pauses = 0;
           const log = [];
           for (let i = 0; i < 5; i++) {
             const demand = 8 + i * 4;
@@ -514,9 +588,10 @@
       }
       if (id === 'vigil') {
         // 4 watches. fear 10+i*8 vs bravery (wears 5/watch).
+        // Lean pads starting nerve.
         for (const pid of pids) {
           const st = stats[pid];
-          let nerve = st.bravery;
+          let nerve = st.bravery + enduranceLean(pid);
           const log = [];
           let out = null;
           for (let i = 0; i < 4; i++) {
@@ -532,13 +607,14 @@
       if (id === 'exchange') {
         // Team relay vs a rival village: 3 legs, most leg-wins takes it.
         // Rivals are generated with wave-scaled stats.
+        // Lean adds to survival for leg time (same fiction as The Drop).
         const wave = this.unlockedWave ? this.unlockedWave() : 1;
         const rivals = [0, 1, 2].map(i => ({ hp: 90 + wave * 5, bravery: 15 + wave * 5, survival: 15 + wave * 5, nota: 1, name: 'rival ' + (i + 1) }));
         let ours = 0, theirs = 0;
         const log = [];
         pids.slice(0, 3).forEach((pid, i) => {
           const st = stats[pid], rv = rivals[i] || rivals[0];
-          const ourT = 1 / (1 + st.survival / 25), theirT = 1 / (1 + rv.survival / 25);
+          const ourT = 1 / (1 + (st.survival + enduranceLean(pid)) / 25), theirT = 1 / (1 + rv.survival / 25);
           if (ourT <= theirT) { ours++; log.push(`${st.name} takes leg ${i + 1}.`); }
           else { theirs++; log.push(`${st.name} loses leg ${i + 1} to ${rv.name}.`); }
           try { this.hurtVillager(pid, 10, 'contest'); } catch (e) {}
@@ -564,34 +640,69 @@
       const diff = { low: 10, medium: 20, high: 30, extreme: 40 }[contest.risk] || 20;
 
       // FORAGE: real foraging — tracking + survival (+clever).
+      // Between CONTEST scale (OVE-148): chase/race contests (calorie_run)
+      // lean for an ascended Between holder — the timed collection race.
+      // Other forage rows (pantry_raid, …) get no Between lean; endurance
+      // race-legs (drop/exchange) stay Unkillable.
       if (cat === 'forage') {
+        const chaseLean = (pid) => {
+          try {
+            if (typeof this.betweenChaseLeanFor === 'function')
+              return this.betweenChaseLeanFor(pid, contest) || 0;
+          } catch (e) { console.warn('[contest] between chase lean', e); }
+          return 0;
+        };
         const y = {};
-        for (const pid of pids) { const st = stats[pid]; y[pid] = st.tracking + st.survival + (st.clever ? 10 : 0); }
+        for (const pid of pids) {
+          const st = stats[pid];
+          y[pid] = st.tracking + st.survival + (st.clever ? 10 : 0) + chaseLean(pid);
+        }
         const best = Math.max(...pids.map(pid => y[pid]));
         for (const pid of pids)
           results[pid] = { outcome: y[pid] === best ? 'won' : 'lost', detail: `yield ${y[pid]}`, log: [`${stats[pid].name} brings in ${y[pid]}.`] };
         return results;
       }
       // DETECTIVE: tracking + trust/5 (informants talk to the trusted) vs difficulty.
+      // All-Seeing CONTEST scale (OVE-110): strategy contests lean for an
+      // ascended All-Seeing holder — nobody bluffs the detective.
       if (cat === 'detective') {
+        const strategyLean = (pid) => {
+          try {
+            if (typeof this.allSeeingStrategyLeanFor === 'function')
+              return this.allSeeingStrategyLeanFor(pid, contest) || 0;
+          } catch (e) { console.warn('[contest] all-seeing strategy lean', e); }
+          return 0;
+        };
         if (pids.length === 1) {
           const pid = pids[0], st = stats[pid];
-          const solve = st.tracking + st.trust / 5;
+          const solve = st.tracking + st.trust / 5 + strategyLean(pid);
           results[pid] = solve >= diff
             ? { outcome: 'won', detail: `solved at ${solve.toFixed(1)}`, log: [`${st.name} follows it to the end.`] }
             : { outcome: 'lost', detail: `stalled at ${solve.toFixed(1)} vs ${diff}`, log: [`${st.name} loses the thread.`] };
           return results;
         }
         const sc = {};
-        for (const pid of pids) sc[pid] = stats[pid].tracking + stats[pid].trust / 5;
+        for (const pid of pids) sc[pid] = stats[pid].tracking + stats[pid].trust / 5 + strategyLean(pid);
         const best = Math.max(...pids.map(pid => sc[pid]));
         for (const pid of pids) results[pid] = { outcome: sc[pid] === best ? 'won' : 'lost', detail: `${sc[pid].toFixed(1)}`, log: [] };
         return results;
       }
       // PUZZLE: clever potential + practical survival.
+      // All-Seeing CONTEST scale (OVE-110): strategy contests lean for an
+      // ascended All-Seeing holder — they see the pattern first.
       if (cat === 'puzzle') {
+        const strategyLean = (pid) => {
+          try {
+            if (typeof this.allSeeingStrategyLeanFor === 'function')
+              return this.allSeeingStrategyLeanFor(pid, contest) || 0;
+          } catch (e) { console.warn('[contest] all-seeing strategy lean', e); }
+          return 0;
+        };
         const sc = {};
-        for (const pid of pids) { const st = stats[pid]; sc[pid] = (st.clever ? 15 : 0) + st.survival / 2 + st.tracking / 2; }
+        for (const pid of pids) {
+          const st = stats[pid];
+          sc[pid] = (st.clever ? 15 : 0) + st.survival / 2 + st.tracking / 2 + strategyLean(pid);
+        }
         if (pids.length === 1) {
           const pid = pids[0];
           results[pid] = sc[pid] >= diff
@@ -607,17 +718,34 @@
       if (id === 'hide') {
         // The seeker is a wave-2 predator. 3 evasion rounds with fieldFight's
         // real awareness formula; caught → a real fight.
+        // Between CONTEST scale (OVE-148): chase contests lean for an ascended
+        // Between holder — contestLean pads seeker spot chance (chases lean
+        // your way). Not an Unkillable endurance arm.
+        const chaseLean = (pid) => {
+          try {
+            if (typeof this.betweenChaseLeanFor === 'function')
+              return this.betweenChaseLeanFor(pid, contest) || 0;
+          } catch (e) { console.warn('[contest] between chase lean', e); }
+          return 0;
+        };
         const seeker = (this.data.monsters || []).find(m => m.behavior === 'pack' && (m.wave || 1) === 2)
           || this.contestBeastFor(2, 450);
         for (const pid of pids) {
           const st = stats[pid];
           const log = [];
           let caught = false;
+          const lean = chaseLean(pid);
           for (let r = 0; r < 3 && !caught; r++) {
             // awareness, inverted: the contestant must NOT be noticed.
+            // Between chase lean subtracts contestLean/25 from spot (18 → 0.72)
+            // so an ascended holder can floor the seeker's notice; floor is 0
+            // with lean (not the usual 0.05) so the chase can honestly lean
+            // all the way. Strip betweenChaseLeanFor and the pale spot returns.
             const mNotice = (seeker.encounter && seeker.encounter.noticeRange) || 5;
-            const spot = 0.35 + Math.min(0.30, (seeker.speed || 4) * 0.03) + 0.03 * mNotice - 0.015 * st.tracking;
-            if (R() < clamp(spot, 0.05, 0.95)) {
+            const spot = 0.35 + Math.min(0.30, (seeker.speed || 4) * 0.03) + 0.03 * mNotice
+              - 0.015 * st.tracking - (lean > 0 ? lean / 25 : 0);
+            const lo = lean > 0 ? 0 : 0.05;
+            if (R() < clamp(spot, lo, 0.95)) {
               caught = true;
               log.push(`${st.name} is found on round ${r + 1}.`);
               let rec = null;
@@ -667,11 +795,26 @@
       }
       // cookfight/impress/guest: making something — survival craft + showmanship.
       // (guest is a dinner: trust + temperament.)
+      // Living Garden CONTEST scale (OVE-99): feast contests (cookfight/guest)
+      // lean for an ascended Garden holder — the land favors their table.
+      // Impress stays creative, not a cook-off: no garden lean there.
+      // Voice of the Relay CONTEST scale (OVE-104): performance contests
+      // (impress) lean for an ascended Voice holder — they are the show.
+      // Cookfight/guest stay feast-only: no Voice lean there.
       const sc = {};
       for (const pid of pids) {
         const st = stats[pid];
-        sc[pid] = id === 'guest' ? st.trust / 5 + (st.temper === 'earnest' || st.temper === 'bold' ? 4 : 0)
+        let score = id === 'guest' ? st.trust / 5 + (st.temper === 'earnest' || st.temper === 'bold' ? 4 : 0)
           : st.survival / 2 + st.nota * 2 + (st.clever ? 5 : 0);
+        try {
+          if (typeof this.gardenFeastLeanFor === 'function')
+            score += this.gardenFeastLeanFor(pid, contest) || 0;
+        } catch (e) { console.warn('[contest] garden feast lean', e); }
+        try {
+          if (typeof this.voicePerformanceLeanFor === 'function')
+            score += this.voicePerformanceLeanFor(pid, contest) || 0;
+        } catch (e) { console.warn('[contest] voice performance lean', e); }
+        sc[pid] = score;
       }
       if (pids.length === 1) {
         const pid = pids[0];
@@ -693,11 +836,22 @@
     _cxChance: function(pids, contest) {
       const results = {};
       if (contest.id === 'auction') {
-        // Everyone bids; everyone pays. Bid = min(hp-20, 10 + bravery/2 + nota*3).
+        // Everyone bids; everyone pays. Bid = min(hp-20, 10 + bravery/2 + nota*3)
+        // + Market sponsor lean (OVE-113). Money talks — but the winner still
+        // pays the full bid and losers still pay half. Lean is bid capacity,
+        // never a free win or waived payment.
+        const sponsorLean = (pid) => {
+          try {
+            if (typeof this.marketSponsorLeanFor === 'function')
+              return this.marketSponsorLeanFor(pid, contest) || 0;
+          } catch (e) { console.warn('[contest] market sponsor auction lean', e); }
+          return 0;
+        };
         const bids = {};
         for (const pid of pids) {
           const st = this._cxStats(pid);
-          bids[pid] = Math.min(st.hp - 20, 10 + st.bravery / 2 + st.nota * 3);
+          const lean = sponsorLean(pid);
+          bids[pid] = Math.min(st.hp - 20, 10 + st.bravery / 2 + st.nota * 3 + lean);
         }
         const winBid = Math.max(...pids.map(pid => bids[pid]));
         const winnerPid = pids.find(q => bids[q] === winBid);
@@ -788,7 +942,20 @@
             // cheer previously never reached duelFight; break-it 2026-10-09 r4:
             // the old pass-through STILL dropped it — duelFight reads
             // braveryBonus, watch paths send cheerBonus. Mapped now.)
-            const rec = this.duelFight(pids[0], pids[1], { braveryBonus: opts.braveryBonus || opts.cheerBonus || 0 });
+            // OVE-124: OPA blood lean is per-side (braveryLeanA/B) — only the
+            // ascended holder gets the scar-crowd steadiness.
+            let braveryLeanA = 0, braveryLeanB = 0;
+            try {
+              if (typeof this.opaBloodLeanFor === 'function') {
+                braveryLeanA = this.opaBloodLeanFor(pids[0], contest) || 0;
+                braveryLeanB = this.opaBloodLeanFor(pids[1], contest) || 0;
+              }
+            } catch (e) { console.warn('[contest] opa blood lean', e); }
+            const rec = this.duelFight(pids[0], pids[1], {
+              braveryBonus: opts.braveryBonus || opts.cheerBonus || 0,
+              braveryLeanA,
+              braveryLeanB,
+            });
             const results = {};
             const apply = (pid, took) => { if (took > 0) { try { this.hurtVillager(pid, took, 'contest', rec); } catch (e) {} } };
             // Wounds are real in EVERY duel ending (break-it 2026-10-08:

@@ -118,6 +118,8 @@
 //   - fight_gate_sibling_sweep: the same save-scum class in related systems — hummice sound pressure (humStacks/humMice/humRiseRound/humDecayRound), the player shout cap (shouts) + its chorus-break duration (chorusBrokenUntil), the scorch narration flag (terraformScorched), the pending order re-sort (orderDirty) — all persist in tbSave and restore verbatim (code: syncRun, load, break-it persistence r6 2026-10-09)
 //   - fight_gate_counter_sweep: the same save-scum class in the counter engine (postdates the r6 sweep; r16 added _counterLastMoveDir without touching the boundary) — _counterStrikes (union_rep strike_first first-blood gate), _counterLastMoveRound/_counterLastMoveDir (review_drone move_x2 vary chain) persist in tbSave and restore verbatim. A mid-fight reload can neither re-arm firstStrike (save-scum counter discovery) nor silently break the drone's chain (code: syncRun, load, break-it persistence r11 2026-10-11)
 //   - scout_reports_are_shared: a scout's mapped tiles set t.revealed AND markSeen 'shared' — the world-map overlay agrees with the "mapped N new areas" log; never 'visited' (code: resolveOneAssignment, explorer break-it 2026-10-08)
+//   - apex_scout_mark_army_lean: Apex Predator ARMY scale — resolveOneAssignment scout honors Game.apexScoutMarkLeanFor so shared reveal chance + follow-marks beat lean when an ascended Apex holder is active (code: resolveOneAssignment scout, godverbs.js apexScoutMarkLeanFor; OVE-132)
+//   - unkillable_last_standing_army_lean: Unkillable ARMY scale — titan fight flee paths honor Game.titanLastStandingContinuity / unkillableLastStandingLeanFor so the last living Unkillable ours blade refuses rout (code: tbVillagerTurn hopeless + tbVillagerReactiveFlee, titans.js titanLastStandingContinuity; OVE-136)
 //   - path_blockages_hold: travelTo at d>1 checks every tile on a shortest path for entry blockages from the approach side (travelBlockage fx/fy) — a fallen tree on the middle tile refuses the jump, honestly, as if walked into; force (swim/debug) still bypasses (code: travelTo, explorer break-it 2026-10-10)
 //   - echo_is_exactly_3x3: echo_location's copy promises "3x3 revealed" — it marks exactly the 3x3 world-map tiles around the player. The old code called reveal() per 3x3 center (a Manhattan<=2 diamond each): 37 tiles for a 9-tile promise (code: _activateAbilityInner, explorer break-it 2026-10-10)
 //   - dowsing_reveals_the_water: dowsing reveals exactly the nearest water tile — direction + distance is the knowledge, walking there is still yours. The old reveal() call lit a 13-tile diamond around possibly-distant ground: free fog knowledge (code: _activateAbilityInner, explorer break-it 2026-10-10)
@@ -7488,9 +7490,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.bumpTrust(vid, 2, 'kept the haven work going');
       } else if (a.task === 'scout') {
         // reveal tiles around haven + small chance of a find
+        // Apex ARMY (OVE-132): call apexScoutMarkLeanFor through Game so
+        // proofs can strip the helper — scouts follow your marks via a
+        // higher shared-reveal chance on the haven ring + follow-marks beat.
+        let lean = 0;
+        try { lean = this.apexScoutMarkLeanFor ? this.apexScoutMarkLeanFor() : 0; } catch (e) { lean = 0; }
+        if (!(lean > 0)) lean = 0;
         let revealed = 0;
         try {
           const hx = this.state.village.px ?? 4, hy = this.state.village.py ?? 4;
+          // scoutMarkLean adds lean*0.5 to base 0.5*eff chance (capped at 1).
+          const revealChance = Math.min(1, 0.5 * eff + (lean > 0 ? lean * 0.5 : 0));
           for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++) {
             const nx = hx + dx, ny = hy + dy;
             if (nx < 0 || nx > 8 || ny < 0 || ny > 8) continue; // 9x9 world (2026-10-07)
@@ -7506,7 +7516,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             // "Unexplored — you haven't been here." while you could already
             // walk there. Mark it 'shared' so the map agrees with the log;
             // 'shared' never becomes 'visited' until you walk the ground.
-            if (t && !t.revealed && Math.random() < 0.5 * eff) { t.revealed = true; this.markSeen(nx, ny, 'shared', vid); revealed++; }
+            if (t && !t.revealed && Math.random() < revealChance) { t.revealed = true; this.markSeen(nx, ny, 'shared', vid); revealed++; }
           }
         } catch (e) {}
         let find = '';
@@ -7516,6 +7526,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           find = ` Found a forgotten cache: +${kcal} kcal.`;
         }
         this.say(`🔭 ${first} scouts the land: mapped ${revealed} new area${revealed === 1 ? '' : 's'}.${find}`);
+        // Apex follow-marks beat: only when lean actually produced shared marks.
+        if (lean > 0 && revealed > 0) {
+          this.say(`🗺️ Scouts follow your marks — ${revealed} shared on the map.`);
+        }
         // PARITY (2026-10-14): new ground mapped is the player's discovery deed.
         if (revealed > 0) { try { this.creditDeed && this.creditDeed(vid, 'discovery'); } catch (eT) { console.warn('[tracks] scout deed', eT); } }
         this.bumpTrust(vid, 2, 'scouted and mapped new land');
@@ -17161,6 +17175,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
                 v.explorerNews = v.explorerNews || {};
                 v.explorerNews[rid] = { dir: d, day: s.day };
               }
+              // OVE-74: DUTY patrol/scout → EXPLORE out-and-back completion
+              // accrues practice without writing assignTask.
+              try { if (this.objOnExploreReturn) this.objOnExploreReturn(rid); }
+              catch (eP) { console.warn('[obj] explore duty practice', eP); }
+            } else if (away.purpose === 'hunt') {
+              // OVE-74: DUTY/HUNT return — practice only when the trip was not
+              // an empty-tile quarry drop (objAwayStep marks huntEmptyDrop).
+              try { if (this.objOnHuntReturn) this.objOnHuntReturn(rid); }
+              catch (eP) { console.warn('[obj] hunt duty practice', eP); }
             } else if (away.purpose === 'leave' && Math.random() < 0.3) {
               // The 'escape' goal: some who leave come back changed. Most don't.
               if (this.map.px === hx && this.map.py === hy) {
@@ -39692,6 +39715,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           return false;
         }
       }
+      // Unkillable ARMY (OVE-136): last living Unkillable ours blade in a titan
+      // fight refuses the reactive rout — same continuity as start-of-turn.
+      try {
+        if (this.titanLastStandingContinuity) {
+          const _ls = this.titanLastStandingContinuity({ forFighter: t });
+          if (_ls && _ls.refusedRout) return false;
+        }
+      } catch (e) { console.warn('[titan] last-standing reactive', e); }
       t.fled = true;
       try { S.Godpath?.finishTacticalEscape(this, f, t); } catch (e) { console.warn('[godpath] reactive escape', e); }
       this.say(`${t.name} takes the hit and runs — while running still works.`);
@@ -40228,6 +40259,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           ? this.fighterShouldFlee(st, { hopeless: true, winning: false, hpFrac })
           : (hpFrac < fleeLine);
         if (!holdForPlayer && shouldFlee) {
+          // Unkillable ARMY (OVE-136): last living Unkillable ours blade in a
+          // titan fight refuses the rout — stripable via
+          // Game.unkillableLastStandingLeanFor / titanLastStandingContinuity.
+          try {
+            if (this.titanLastStandingContinuity) {
+              const _ls = this.titanLastStandingContinuity({ forFighter: v });
+              if (_ls && _ls.refusedRout) return;
+            }
+          } catch (e) { console.warn('[titan] last-standing continuity', e); }
           // WAR CRY (tactical parity 2026-10-13): the field engine fires this
           // INSTEAD of fleeing when the trajectory turns hopeless — once per
           // fight the cry staggers the monster (it hesitates: loses its next
@@ -40380,9 +40420,19 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.say(`${v.name} patches you up (+${healed} HP). "Hold still!"`);
         }
       } else if (a.type === 'flee') {
-        v.fled = true;
-        try { S.Godpath?.finishTacticalEscape(this, f, v); } catch (e) { console.warn('[godpath] flight', e); }
-        this.say(`${v.name} runs for it!`);
+        // RALLIED (2026-10-13 / OVE-68): the speech holds — no fleeing while
+        // it lasts. Hopeless-flee already gates on rallied above; villagerDecide
+        // can still return type 'flee' (cautious AI). Honor the same hold so a
+        // daily Voice / War Cry recipient cannot discard the finite rally by
+        // walking off before the next ageing tick (and so save/load still sees
+        // a living recipient).
+        if ((v.rallied || 0) > 0) {
+          this.say(this.tbVillagerWaitLine(v));
+        } else {
+          v.fled = true;
+          try { S.Godpath?.finishTacticalEscape(this, f, v); } catch (e) { console.warn('[godpath] flight', e); }
+          this.say(`${v.name} runs for it!`);
+        }
       } else {
         // WAIT, NARRATED + VARIED (journey-endgame r143 Fix B, planned
         // r140; r147 volume fix): no silent turns, and no stuck record.

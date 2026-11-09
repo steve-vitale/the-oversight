@@ -4,7 +4,7 @@
 // provides:
 //   - isTitan(mid) / titanDef(mid) / titanCast()
 //   - titanDawnTick() -> omen staging, escalation, muster upkeep, turn tick (called guarded from game.js dawn)
-//   - titanWarCouncil(titanId) -> played beat: faces, intel, System ODDS (entertainment, not truth)
+//   - titanWarCouncil(titanId) -> played beat: faces, intel, System ODDS (entertainment, not truth); All-Seeing ARMY map lean when Game.allSeeingCouncilLeanFor > 0
 //   - soundTitanCall(titanId) -> the call to arms; allies answer aloud
 //   - titanCommitOwn(titanId) -> the player commits HAVEN ITSELF: up to 3 named
 //     villagers march with the muster (two-tap confirm). They leave the
@@ -24,6 +24,9 @@
 //   - titanLeaveArena() -> map a large battlefield back to its world node
 //   - titanReleaseCommitted(titanId) -> Haven's committed come home (shared with network-campaign.js)
 //   - titanStandDown(titanId) -> break an out-of-combat muster, release its workforce and stop upkeep
+//   - titanLastStandingContinuity() -> Unkillable ARMY last-standing refuse-rout when Game.unkillableLastStandingLeanFor > 0 and holder is last living ours blade
+//   - titanBreachPourThrough() -> One-Person Army ARMY breach pour-through when Game.opaBreachLeanFor > 0 and holder opens the titan front
+//   - titanWardAdvanceBehind() -> Undying Ward ARMY advance-behind when Game.wardAdvanceLeanFor > 0 and holder holds the titan line
 //   - _titanTest (test hooks: internals exposed for proof tests)
 //   - titanTemptation(villageId) -> {temptation, loyalty, verdict} (the turn's math, visible at council)
 // rules:
@@ -38,6 +41,12 @@
 //   - stolen_gear_is_lost: the loot law holds. No refunds except by force. (code: titans.js)
 //   - odds_are_entertainment: the System's posted odds are wrong on purpose. That's the joke. (code: titans.js)
 //   - knowledge_gates_titans: omen stages 0 (something) -> 1 (named) -> 2 (located). No name before exposure. (code: titans.js)
+//   - garden_army_muster_feed: Living Garden ARMY scale — titanMusterUpkeep honors Game.gardenMusterFeedFor before/alongside playerPackSpend when an ascended Garden holder has harvestDay active; covered kcal skip pack debit and hunger trust bleed (code: titanMusterUpkeep, godverbs.js gardenMusterFeedFor; OVE-116)
+//   - market_army_outfit_lean: Market God ARMY scale — titanOutfit honors Game.marketOutfitLeanFor so the same transferred pieces yield higher force wbonus/varmor/gearValue when an ascended Market holder is active (code: titanOutfit, godverbs.js marketOutfitLeanFor; OVE-120)
+//   - all_seeing_army_council_lean: All-Seeing ARMY scale — titanWarCouncil honors Game.allSeeingCouncilLeanFor so readiness honesty, scout-intel clarity, and counter-hint reveal lean when an ascended All-Seeing holder is active (code: titanWarCouncil, godverbs.js allSeeingCouncilLeanFor; OVE-128)
+//   - unkillable_last_standing_army_lean: Unkillable ARMY scale — titanLastStandingContinuity honors Game.unkillableLastStandingLeanFor so when the ascended Unkillable holder is the last living ours blade in a titan fight, refuse rout / steadiness + last-standing beat (code: titanLastStandingContinuity, godverbs.js unkillableLastStandingLeanFor; OVE-136)
+//   - opa_breach_army_lean: One-Person Army ARMY scale — titanBreachPourThrough honors Game.opaBreachLeanFor so when the ascended OPA holder opens the front in a titan fight (adjacent to a living titan, or Turn the Pain lands on one), coalition blades pour through the breach — steadiness + pour-count + breach beat; does not re-label partyRallyAt or titanPain (code: titanBreachPourThrough, godverbs.js opaBreachLeanFor; OVE-140)
+//   - ward_army_advance_lean: Undying Ward ARMY scale — titanWardAdvanceBehind honors Game.wardAdvanceLeanFor so when the ascended Ward holder holds the line in a titan fight (adjacent to a living titan, or Take the Wound redirects for the front), coalition blades advance behind the wall — steadiness + advance-count + advance beat; does not re-label Take the Wound PARTY/TITAN redirect (code: titanWardAdvanceBehind, godverbs.js wardAdvanceLeanFor; OVE-144)
 
 (function () {
   // ATTACH PATTERN (crisis 2026-10-11): game.js only sets
@@ -553,13 +562,20 @@
     var def = titanDefs()[titanId];
     if (!def) return null;
     var o = titanOmen(titanId);
+    // All-Seeing ARMY (OVE-128): call allSeeingCouncilLeanFor through Game so
+    // proofs can strip the helper — readiness honesty, scout-intel clarity,
+    // and counter-hint reveal while the counter is still unknown.
+    var lean = 0;
+    try { lean = Game.allSeeingCouncilLeanFor ? Game.allSeeingCouncilLeanFor() : 0; } catch (e) { lean = 0; }
+    if (!(lean > 0)) lean = 0;
     Game.say('⚔️ WAR COUNCIL — ' + def.title + '. The leaders sit as faces, not pieces.');
     // SUM-READINESS LINE (2026-11-02, sim-sumdeploy-a): the council
     // is the decision point — the one explicit moment the projection
     // is computed (lazy rule above). A failed projection says
     // nothing rather than breaking the council.
+    var readiness = null;
     try {
-      var readiness = titanCallReadiness(titanId);
+      readiness = titanCallReadiness(titanId);
       if (readiness && readiness.total != null) {
         var rLine = '📯 The call, sounded now, would bring ' + readiness.total + ' blades — ' +
           readiness.alliesProj + ' from allied fires and ' + readiness.havenProj +
@@ -581,12 +597,29 @@
           }
         }
         Game.say(rLine);
+        // Map lean: readiness numbers stay faithful; the map names the gap
+        // between naive answers and true blades (refusal honesty).
+        if (lean > 0) {
+          var gap = Math.max(0, (readiness.naiveTotal || 0) - (readiness.alliesProj || 0));
+          Game.say('🗺️ Your map names who answers and who will not — ' +
+            readiness.alliesProj + ' blades true' +
+            (gap > 0 ? ', ' + gap + ' lost to refusals on the plan' : ', every counted fire true') +
+            ' (naive ' + readiness.naiveTotal + ').');
+        }
       }
     } catch (e) {}
     var links = titanAlliedLinks();
     if (!links.length) {
       Game.say('No one sits with you. You have no coalition. The council is one chair.');
-      return { allies: 0 };
+      return {
+        allies: 0,
+        lean: lean,
+        counterKnown: false,
+        counterRevealed: false,
+        intelClarity: lean > 0,
+        readinessGap: readiness ? Math.max(0, (readiness.naiveTotal || 0) - (readiness.alliesProj || 0)) : 0,
+        readiness: readiness,
+      };
     }
     links.forEach(function (link) {
       var vid = titanLinkOther(link);
@@ -596,20 +629,47 @@
       var speaker = (link.theirSpeaker && link.theirSpeaker.name) || 'their speaker';
       var t = titanTemptation(vid);
       var loyalty = t.loyalty >= 70 ? 'steadfast' : t.loyalty >= 40 ? 'watchful' : 'hungry';
-      Game.say('— ' + speaker + ' of ' + nm + ' (trust ' + (link.trust || 0) + ', ' + loyalty + '). Scouts: ' + (t.intel || 'they will fight.'));
+      var scoutLine = (t.intel || 'they will fight.');
+      // Map lean: scout intel clarity — loyalty/temptation sit on the plan.
+      if (lean > 0) {
+        scoutLine = 'map loyalty ' + t.loyalty + ' / temptation ' + t.temptation + ' — ' + scoutLine;
+      }
+      Game.say('— ' + speaker + ' of ' + nm + ' (trust ' + (link.trust || 0) + ', ' + loyalty + '). Scouts: ' + scoutLine);
     });
-    // scout intel: honest, knowledge-gated (counter hint only if known)
+    // scout intel: honest, knowledge-gated (counter hint only if known) —
+    // All-Seeing map lean reveals the authored counter_hint even while unknown.
     var hint = '';
+    var known = false;
+    var counterRevealed = false;
     try {
-      var known = Game.monsterCounterKnown ? Game.monsterCounterKnown(def.monster) : false;
-      hint = known && def.counter_hint ? ' The scouts know its weakness: ' + def.counter_hint : ' Its weakness is unknown — the scouts came back pale.';
+      known = !!(Game.monsterCounterKnown && Game.monsterCounterKnown(def.monster));
+      var reveal = known || lean > 0;
+      if (reveal && def.counter_hint) {
+        hint = known
+          ? ' The scouts know its weakness: ' + def.counter_hint
+          : ' Your map marks its weakness before the scouts learn it: ' + def.counter_hint;
+        counterRevealed = true;
+      } else {
+        hint = ' Its weakness is unknown — the scouts came back pale.';
+      }
     } catch (e) {}
     Game.say('Scouts report: ' + def.threat + hint);
+    if (lean > 0 && counterRevealed && !known) {
+      Game.say('🗺️ The coalition plans with your map — the weakness is on the table.');
+    }
     // System ODDS: entertainment, not truth. Deliberately miscalibrated.
     var oddsN = 8 + Math.floor(R() * 20);
     Game.sysSay('"ODDS ARE UP! ' + def.title + ' vs the Haven coalition — ' + oddsN + ' to 1! The gamblers are THRILLED! (Our models have never seen a titan. Neither have you. This is fine.)"');
     try { if (Game.recordMoment) Game.recordMoment('War council sat for ' + def.title + '.'); } catch (e) {}
-    return { allies: links.length };
+    return {
+      allies: links.length,
+      lean: lean,
+      counterKnown: !!known,
+      counterRevealed: !!counterRevealed,
+      intelClarity: lean > 0,
+      readinessGap: readiness ? Math.max(0, (readiness.naiveTotal || 0) - (readiness.alliesProj || 0)) : 0,
+      readiness: readiness,
+    };
   }
 
   // ---------- the call to arms ----------
@@ -943,6 +1003,8 @@
 
   // titanOutfit(villageId, itemIndexes[]): transfer REAL items from the player's
   // inventory to an allied force. Items leave. Effectiveness is real.
+  // Market ARMY (OVE-120): call marketOutfitLeanFor through Game so proofs can
+  // strip the helper — same pieces, higher force wbonus/varmor/gearValue.
   function titanOutfit(titanId, villageId, itemIndexes) {
     var st = titanState();
     var muster = st.musters[titanId];
@@ -961,6 +1023,13 @@
       given.push(it);
     });
     if (!given.length) { Game.say('Nothing to give — or nothing you can part with.'); return null; }
+    var leanPct = 0;
+    try { leanPct = Game.marketOutfitLeanFor ? Game.marketOutfitLeanFor() : 0; } catch (e) { leanPct = 0; }
+    if (!(leanPct > 0)) leanPct = 0;
+    function leanScale(n) {
+      if (!leanPct) return n;
+      return Math.round(n * (100 + leanPct) / 100);
+    }
     // distribute across the force's fighters; compute effectiveness
     var givenCount = given.length;
     var per = Math.floor(given.length / force.length), rem = given.length % force.length;
@@ -970,26 +1039,32 @@
         var g = given.pop();
         if (!g) break;
         f.outfitted.push(g);
-        f.gearValue += titanGearValue(g);
       }
-      // effectiveness: recompute from outfitted gear
-      var wb = 0, ar = 0;
+      // effectiveness: recompute from all outfitted gear, then Market lean
+      var wb = 0, ar = 0, gv = 0;
       f.outfitted.forEach(function (g) {
         var def = null;
         try { def = Game.data.items.find(function (x) { return x.id === (g.itemId || g.id); }); } catch (e) {}
         if (def && def.weapon && def.weapon.bonus) wb += def.weapon.bonus;
         if (def && def.armor) ar += (typeof def.armor === 'number' ? def.armor : 10);
+        gv += titanGearValue(g);
       });
-      f.wbonus = wb; f.varmor = Math.min(ar, 40);
+      f.wbonus = leanScale(wb);
+      f.varmor = Math.min(leanScale(ar), 40);
+      f.gearValue = leanScale(gv);
     });
     var totalV = force.reduce(function (s, f) { return s + f.gearValue; }, 0);
     var ov = null;
     try { ov = Game._otherVillage(villageId); } catch (e) {}
-    Game.say('🎒 Outfitted ' + ((ov && ov.name) || 'them') + ': ' + givenCount + ' piece' + (givenCount === 1 ? '' : 's') + ' left your pack — for good. Their blades are heavier now (+' + force.reduce(function (s, f) { return s + (f.wbonus || 0); }, 0) + ' strike, +' + force.reduce(function (s, f) { return s + (f.varmor || 0); }, 0) + ' guard across the force). What you gave is gone. What it bought is real.');
+    var line = '🎒 Outfitted ' + ((ov && ov.name) || 'them') + ': ' + givenCount + ' piece' + (givenCount === 1 ? '' : 's') + ' left your pack — for good. Their blades are heavier now (+' + force.reduce(function (s, f) { return s + (f.wbonus || 0); }, 0) + ' strike, +' + force.reduce(function (s, f) { return s + (f.varmor || 0); }, 0) + ' guard across the force). What you gave is gone. What it bought is real.';
+    if (leanPct > 0) {
+      line += ' The Market quarters them — same gear, heavier blades (quartermaster lean +' + leanPct + '%).';
+    }
+    Game.say(line);
     try { if (Game.recordMoment) Game.recordMoment('Outfitted the ' + ((ov && ov.name) || 'allied') + ' force (' + totalV + ' value).'); } catch (e) {}
     // telegraph: arming someone is SEEN. Gossip notices.
     titanTelegraphArming(titanId, villageId);
-    return { given: givenCount, value: totalV };
+    return { given: givenCount, value: totalV, lean: leanPct };
   }
 
   function titanTelegraphArming(titanId, villageId) {
@@ -1101,8 +1176,18 @@
       // An army marches on its stomach: 1000 kcal/day per blade — allies AND
       // Haven's committed (2026-10-13). Your own people eat from your stores too.
       var need = ((muster.allies || []).length + titanHavenBlades(muster).length) * 1000;
-      var got = 0;
-      try { got = Game.playerPackSpend ? Game.playerPackSpend(need) : 0; } catch (e) {}
+      // Living Garden ARMY (OVE-116): Feed the Multitude harvest day covers
+      // muster kcal before pack spend — call through Game so proofs can strip
+      // gardenMusterFeedFor without touching Haven hunger fill.
+      var covered = 0;
+      try { covered = Game.gardenMusterFeedFor ? Game.gardenMusterFeedFor(need) : 0; } catch (e) { covered = 0; }
+      if (!(covered > 0)) covered = 0;
+      if (covered > need) covered = need;
+      var remain = need - covered;
+      var got = covered;
+      if (remain > 0) {
+        try { got += Game.playerPackSpend ? Game.playerPackSpend(remain) : 0; } catch (e) {}
+      }
       if (got < need) {
         var hasAllies = (muster.allies || []).some(function(a) { return a.villageId !== 'haven'; });
         Game.say('🍽️ The muster is hungry — ' + got.toLocaleString() + ' of ' + need.toLocaleString() + ' kcal fed. Bellies remember who feeds them.' + (hasAllies ? ' (loyalty strains when the food runs thin.) (trust −2 per fire per day while the muster stands hungry.)' : ''));
@@ -1125,6 +1210,8 @@
             } catch (e) {}
           }
         });
+      } else if (covered > 0) {
+        Game.say('🌿 The Living Garden feeds the muster — ' + covered.toLocaleString() + ' of ' + need.toLocaleString() + ' kcal from the harvest. The coalition marches because you feed it.');
       }
     });
   }
@@ -1445,6 +1532,308 @@
     } catch (e) {}
   }
 
+  // ---------- Unkillable ARMY: last-standing continuity (OVE-136) ----------
+  // god.scale.army: "The coalition's last one standing."
+  // When an ascended Unkillable holder is the sole living ours blade in a
+  // titan/coalition fight, refuse rout: steadiness flag + last-standing beat.
+  // Called from tactical flee paths (and proofs) through Game so the helper
+  // can be stripped. Does not invent free Phoenix for every blade.
+  function titanOursAlive(f) {
+    var out = [];
+    ((f && f.fighters) || []).forEach(function (x) {
+      if (!x || x.alive === false || x.fled || (x.hp || 0) <= 0) return;
+      if (x.kind === 'player' || x.key === 'p' || x.kind === 'villager' || x.kind === 'ally') out.push(x);
+    });
+    return out;
+  }
+  function titanFighterIsUnkillableHolder(x) {
+    try {
+      if (!x) return false;
+      if (x.kind === 'player' || x.key === 'p') return Game.holderGod && Game.holderGod('player') === 'unkillable';
+      if (x.villagerId) return Game.holderGod && Game.holderGod(x.villagerId) === 'unkillable';
+    } catch (e) {}
+    return false;
+  }
+  function titanFightLive() {
+    try {
+      var tf = (Game.state && Game.state.titans && Game.state.titans._fight) || null;
+      if (tf && tf.titan) return true;
+    } catch (e) {}
+    try {
+      var f = Game.tbfight;
+      if (!f || f.over) return false;
+      if (f.titan) return true;
+      return (f.fighters || []).some(function (x) {
+        return x && (x.titan || (x.kind === 'monster' && titanDefs()[x.id]));
+      });
+    } catch (e2) { return false; }
+  }
+  function titanLastStandingContinuity(opts) {
+    var lean = 0;
+    try { lean = Game.unkillableLastStandingLeanFor ? Game.unkillableLastStandingLeanFor() : 0; } catch (e) { lean = 0; }
+    if (!(lean > 0)) lean = 0;
+    var f = Game.tbfight;
+    var empty = {
+      lean: lean,
+      titan: false,
+      lastStanding: false,
+      refusedRout: false,
+      steadiness: 0,
+      oursAlive: 0,
+      holderAlive: false,
+    };
+    if (!f || f.over) return empty;
+    var titan = titanFightLive();
+    var ours = titanOursAlive(f);
+    var holders = ours.filter(titanFighterIsUnkillableHolder);
+    var out = {
+      lean: lean,
+      titan: !!titan,
+      lastStanding: false,
+      refusedRout: false,
+      steadiness: 0,
+      oursAlive: ours.length,
+      holderAlive: holders.length > 0,
+    };
+    if (!titan || !(lean > 0) || ours.length !== 1 || holders.length !== 1) return out;
+    out.lastStanding = true;
+    out.refusedRout = true;
+    out.steadiness = lean;
+    var holder = holders[0];
+    holder.fled = false;
+    holder.alive = true;
+    holder.rallied = Math.max(holder.rallied || 0, 2);
+    holder.lastStanding = true;
+    f.lastStandingHold = true;
+    f.lastStandingSteadiness = lean;
+    if (opts && opts.forFighter) {
+      opts.forFighter.fled = false;
+      opts.forFighter.rallied = Math.max(opts.forFighter.rallied || 0, 2);
+    }
+    if (!f._lastStandingSaid) {
+      f._lastStandingSaid = true;
+      Game.say('\uD83D\uDD25 The coalition\'s last one standing holds — blades refuse to rout.');
+    }
+    return out;
+  }
+
+  // ---------- One-Person Army ARMY: breach pour-through (OVE-140) ----------
+  // god.scale.army: "You are the breach the coalition pours through."
+  // When an ascended OPA holder opens the front in a titan/coalition fight
+  // (adjacent to a living titan, or Turn the Pain lands on one), coalition
+  // blades pour through: steadiness + pour-count + breach beat. Called from
+  // Turn the Pain (and proofs) through Game so the helper can be stripped.
+  // Distinct from PARTY partyRallyAt and TITAN titanPain.
+  function titanCheb(a, b) {
+    return Math.max(Math.abs(((a && a.mx) || 0) - ((b && b.mx) || 0)),
+      Math.abs(((a && a.my) || 0) - ((b && b.my) || 0)));
+  }
+  function titanFighterIsOpaHolder(x) {
+    try {
+      if (!x) return false;
+      if (x.kind === 'player' || x.key === 'p') return Game.holderGod && Game.holderGod('player') === 'one_person_army';
+      if (x.villagerId) return Game.holderGod && Game.holderGod(x.villagerId) === 'one_person_army';
+    } catch (e) {}
+    return false;
+  }
+  function titanLiveMons(f) {
+    var out = [];
+    ((f && f.fighters) || []).forEach(function (x) {
+      if (!x || x.alive === false || x.fled || (x.hp || 0) <= 0) return;
+      if (x.kind === 'monster' || x.kind === 'hostile' || x.titan) out.push(x);
+    });
+    return out;
+  }
+  function titanBreachPourThrough(opts) {
+    var lean = 0;
+    try { lean = Game.opaBreachLeanFor ? Game.opaBreachLeanFor() : 0; } catch (e) { lean = 0; }
+    if (!(lean > 0)) lean = 0;
+    var f = Game.tbfight;
+    var empty = {
+      lean: lean,
+      titan: false,
+      breachOpen: false,
+      poured: 0,
+      steadiness: 0,
+      oursAlive: 0,
+      holderAlive: false,
+      adjacent: false,
+      openedBy: (opts && opts.openedBy) || null,
+    };
+    if (!f || f.over) return empty;
+    var titan = titanFightLive();
+    var ours = titanOursAlive(f);
+    var holders = ours.filter(titanFighterIsOpaHolder);
+    var out = {
+      lean: lean,
+      titan: !!titan,
+      breachOpen: false,
+      poured: 0,
+      steadiness: 0,
+      oursAlive: ours.length,
+      holderAlive: holders.length > 0,
+      adjacent: false,
+      openedBy: (opts && opts.openedBy) || null,
+    };
+    if (!titan || !(lean > 0) || !holders.length) return out;
+    var opener = (opts && opts.opener) || null;
+    if (opener && holders.indexOf(opener) < 0) {
+      // Only an OPA holder can open the breach for this army lean.
+      if (!titanFighterIsOpaHolder(opener)) return out;
+      holders = [opener];
+    }
+    var mons = titanLiveMons(f).filter(function (m) {
+      return !!(m.titan || (m.id && titanDefs()[m.id]) || m.kind === 'monster');
+    });
+    if (!mons.length) return out;
+    var holder = null;
+    var adjacent = false;
+    var forceOpen = !!(opts && (opts.forceOpen || opts.openedBy === 'turn_the_pain'));
+    for (var i = 0; i < holders.length; i++) {
+      var h = holders[i];
+      for (var j = 0; j < mons.length; j++) {
+        if (titanCheb(h, mons[j]) <= 1) { holder = h; adjacent = true; break; }
+      }
+      if (adjacent) break;
+    }
+    if (!adjacent && forceOpen && holders.length) {
+      // Turn the Pain already required reach-1 contact; proofs may stamp
+      // forceOpen when the opener is known to have opened the front.
+      holder = (opener && titanFighterIsOpaHolder(opener)) ? opener : holders[0];
+      adjacent = true;
+    }
+    out.adjacent = adjacent;
+    if (!adjacent || !holder) return out;
+    var coalition = ours.filter(function (x) { return x !== holder; });
+    if (!coalition.length) return out;
+    out.breachOpen = true;
+    out.steadiness = lean;
+    out.poured = coalition.length;
+    f.breachOpen = true;
+    f.breachPoured = coalition.length;
+    f.breachSteadiness = lean;
+    var rounds = Math.max(2, lean + 1);
+    coalition.forEach(function (a) {
+      a.pouredThrough = true;
+      a.rallied = Math.max(a.rallied || 0, rounds);
+      a.rallyBuff = Math.max(a.rallyBuff || 0, rounds);
+    });
+    holder.breachOpen = true;
+    if (!f._breachPourSaid) {
+      f._breachPourSaid = true;
+      Game.say('\u2694\uFE0F You are the breach the coalition pours through \u2014 ' +
+        coalition.length + ' blade' + (coalition.length === 1 ? '' : 's') + ' surge' +
+        (coalition.length === 1 ? 's' : '') + ' in.');
+    }
+    return out;
+  }
+
+  // ---------- Undying Ward ARMY: advance behind the wall (OVE-144) ----------
+  // god.scale.army: "The army advances behind you."
+  // When an ascended Ward holder holds the line in a titan/coalition fight
+  // (adjacent to a living titan, or Take the Wound redirects for the front),
+  // coalition blades advance behind the wall: steadiness + advance-count +
+  // advance beat. Called from Take the Wound (and proofs) through Game so
+  // the helper can be stripped. Distinct from PARTY/TITAN Take the Wound
+  // redirect coverage — does not invent weep contests.
+  function titanFighterIsWardHolder(x) {
+    try {
+      if (!x) return false;
+      if (x.kind === 'player' || x.key === 'p') return Game.holderGod && Game.holderGod('player') === 'undying_ward';
+      if (x.villagerId) return Game.holderGod && Game.holderGod(x.villagerId) === 'undying_ward';
+    } catch (e) {}
+    return false;
+  }
+  function titanWardAdvanceBehind(opts) {
+    var lean = 0;
+    try { lean = Game.wardAdvanceLeanFor ? Game.wardAdvanceLeanFor() : 0; } catch (e) { lean = 0; }
+    if (!(lean > 0)) lean = 0;
+    var f = Game.tbfight;
+    var empty = {
+      lean: lean,
+      titan: false,
+      advanceBehind: false,
+      advanced: 0,
+      steadiness: 0,
+      oursAlive: 0,
+      holderAlive: false,
+      adjacent: false,
+      openedBy: (opts && opts.openedBy) || null,
+    };
+    if (!f || f.over) return empty;
+    var titan = titanFightLive();
+    var ours = titanOursAlive(f);
+    var g = f._gv || {};
+    var holders = ours.filter(function (x) {
+      if (!titanFighterIsWardHolder(x)) return false;
+      // Collapsed Ward is no longer the wall for a direct hold-the-line call.
+      if (g.collapsed && g.collapsed[x.key]) return false;
+      return true;
+    });
+    var out = {
+      lean: lean,
+      titan: !!titan,
+      advanceBehind: false,
+      advanced: 0,
+      steadiness: 0,
+      oursAlive: ours.length,
+      holderAlive: holders.length > 0,
+      adjacent: false,
+      openedBy: (opts && opts.openedBy) || null,
+    };
+    if (!titan || !(lean > 0)) return out;
+    var wall = (opts && opts.wall) || null;
+    var forceOpen = !!(opts && (opts.forceOpen || opts.openedBy === 'take_the_wound'));
+    // Take the Wound just proved the wall — allow that fighter even if this
+    // hit is about to collapse them (strain stamped before the army advances).
+    if (forceOpen && wall && titanFighterIsWardHolder(wall)) {
+      holders = [wall];
+      out.holderAlive = true;
+    }
+    if (!holders.length) return out;
+    var mons = titanLiveMons(f).filter(function (m) {
+      return !!(m.titan || (m.id && titanDefs()[m.id]) || m.kind === 'monster');
+    });
+    if (!mons.length) return out;
+    var holder = null;
+    var adjacent = false;
+    for (var i = 0; i < holders.length; i++) {
+      var h = holders[i];
+      for (var j = 0; j < mons.length; j++) {
+        if (titanCheb(h, mons[j]) <= 1) { holder = h; adjacent = true; break; }
+      }
+      if (adjacent) break;
+    }
+    if (!adjacent && forceOpen && holders.length) {
+      holder = (wall && titanFighterIsWardHolder(wall)) ? wall : holders[0];
+      adjacent = true;
+    }
+    out.adjacent = adjacent;
+    if (!adjacent || !holder) return out;
+    var coalition = ours.filter(function (x) { return x !== holder; });
+    if (!coalition.length) return out;
+    out.advanceBehind = true;
+    out.steadiness = lean;
+    out.advanced = coalition.length;
+    f.advanceBehind = true;
+    f.advanceAdvanced = coalition.length;
+    f.advanceSteadiness = lean;
+    var rounds = Math.max(2, lean + 1);
+    coalition.forEach(function (a) {
+      a.advancedBehind = true;
+      a.rallied = Math.max(a.rallied || 0, rounds);
+      a.rallyBuff = Math.max(a.rallyBuff || 0, rounds);
+    });
+    holder.wallHolding = true;
+    if (!f._wardAdvanceSaid) {
+      f._wardAdvanceSaid = true;
+      Game.say('\uD83D\uDEE1\uFE0F The army advances behind you \u2014 ' +
+        coalition.length + ' blade' + (coalition.length === 1 ? '' : 's') + ' press' +
+        (coalition.length === 1 ? 'es' : '') + ' forward.');
+    }
+    return out;
+  }
+
   // ---------- attach ----------
 
   var methods = {
@@ -1459,6 +1848,9 @@
     titanSelfActions: titanSelfActions,
     titanSelfDo: titanSelfDo,
     titanStandDown: titanStandDown,
+    titanLastStandingContinuity: titanLastStandingContinuity,
+    titanBreachPourThrough: titanBreachPourThrough,
+    titanWardAdvanceBehind: titanWardAdvanceBehind,
     titanOutfit: titanOutfit,
     titanTemptation: titanTemptation,
     titanMusterReady: titanMusterReady,
@@ -1507,6 +1899,9 @@
     titanRecordOutcome: titanRecordOutcome,
     titanResolveOutcome: titanResolveOutcome,
     titanOutcomeLog: titanOutcomeLog,
+    titanLastStandingContinuity: titanLastStandingContinuity,
+    titanBreachPourThrough: titanBreachPourThrough,
+    titanWardAdvanceBehind: titanWardAdvanceBehind,
   };
 
   // wraps must apply after game.js defines the originals

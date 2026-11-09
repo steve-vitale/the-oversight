@@ -39,6 +39,7 @@
 //   - holder_lifetime: committed death or permanent departure reopens the relay at actual death/removal/load/tick boundaries; temporary travel does not evict a living holder, and the successor must explicitly claim or accept the office (code: retireVacatedSwitchboard)
 //   - four_tiers_honest_costs: runner (time in day-parts + real road danger), signal (loud/indiscriminate), system relay (garbled + favor owed), cry (build-gated, fast, honest). Help is never free and never guaranteed. (code: callForHelp)
 //   - runner_road_danger: the runner can be hurt or die on the road (registerDeath); when the beacon's attention has made the road hot (attracted >= 2) nobody volunteers — said aloud. (code: aidSendRunner)
+//   - between_runner_army_lean: Between ARMY scale — aidPartsFor / aidSendRunner honor Game.betweenRunnerLeanFor so an ascended Between holder leans travel day-parts between camps (floor 1); does not re-label Voice Be Heard broadcast or retune Phase Out (code: aidPartsFor, aidSendRunner, godverbs.js betweenRunnerLeanFor; OVE-152)
 //   - signal_is_indiscriminate: the beacon asks every linked village, but hostile known villages see it too (opinion -5, remembered), and the smoke draws company — crisis.attracted grows, arrives as real pack members in the fight (packBonus), and fleeing is blocked while it holds. (code: aidSignalFire)
 //   - system_relay_garbled: needs integration stage 2+; the call is enthusiastic and mistranslated (party size drifts, wrong-threat comedy said aloud, occasional wrong address); the System takes a cut — a favor owed, narrated aloud and collected later as a played demand. (code: aidSystemRelay)
 //   - cry_is_build_gated: war_cry's bellow (and kin) punch through — targeted, same-part muster, honest message; gated on actually having the ability. (code: aidCry)
@@ -239,9 +240,17 @@
       } catch (e) { return 3; }
     },
 
-    // Day-parts one way. Never instant.
+    // Day-parts one way. Never instant. Between ARMY lean (OVE-152) subtracts
+    // god.play.runnerLean day-parts when an ascended Between holder is active —
+    // still never instant (floor 1). Stripable via Game.betweenRunnerLeanFor.
     aidPartsFor(villageId) {
-      return Math.max(1, Math.ceil(this.aidDistance(villageId) / 3));
+      var base = Math.max(1, Math.ceil(this.aidDistance(villageId) / 3));
+      var lean = 0;
+      try {
+        if (typeof this.betweenRunnerLeanFor === 'function') lean = this.betweenRunnerLeanFor() || 0;
+      } catch (e) { lean = 0; }
+      if (!(lean > 0)) return base;
+      return Math.max(1, base - lean);
     },
 
     aidRunnerAway(vid) {
@@ -314,6 +323,10 @@
         return null;
       }
       var parts = this.aidPartsFor(targetId);
+      var runnerLean = 0;
+      try {
+        if (typeof this.betweenRunnerLeanFor === 'function') runnerLean = this.betweenRunnerLeanFor() || 0;
+      } catch (e) { runnerLean = 0; }
       // The plea passes through the officeholder's hands.
       var route = { decision: 'routed', delay: 0 };
       try { route = this.switchboardRoute({ kind: 'aid-call', text: 'plea', targetId: targetId }) || route; } catch (e) {}
@@ -340,10 +353,14 @@
       this.state.aidRunners.push({
         vid: vid, targetId: targetId, phase: 'out', parts: parts, partsLeft: partsLeft,
         mishap: mishap, msg: { softened: route.decision === 'edited' }, route: route,
+        lean: runnerLean > 0 ? runnerLean : 0,
       });
-      crisis.calls.push({ tier: 'runner', day: _day(this), part: _part(this), targetId: targetId, runner: vid, result: 'sent' });
+      crisis.calls.push({ tier: 'runner', day: _day(this), part: _part(this), targetId: targetId, runner: vid, result: 'sent', lean: runnerLean > 0 ? runnerLean : 0 });
       try { this.tickAction(8); } catch (e) {}
       this.say(rn + ' sprints for ' + vn + ' — ' + parts + ' day-part' + (parts > 1 ? 's' : '') + ' each way, and the road isn\'t safe. That\'s the price. They\'re gone from Haven\'s hands until they\'re back.');
+      if (runnerLean > 0) {
+        this.say('The Between holds the road between camps — runners take fewer day-parts (Between runner lean −' + runnerLean + ').');
+      }
       if (mishap === 'hurt') this.say('Word comes back fast: ' + rn + ' was hurt on the road — limping, late, but moving.');
       return 'sent';
     },

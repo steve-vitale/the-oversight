@@ -104,7 +104,7 @@
           "_doc": "Person-owned real tactical/field solo kill. Opening prey HP must exceed the fighter's opening maximum HP on a fresh (unwounded) body; the fighter must take actual damage before the kill; any helper voids it. No Pack Hunt route, class-age or synergy shortcut. Distinct from apex_hunt (which allows Pack Hunt and does not require the hunter's own blood)."
         },
         "play": {
-          "_doc": "THE VERB IN PLAY (src/js/godverbs.js). Turn the Pain: a combat action for whoever ascended (player or villager, same function). The pain pool is every wound taken this fight, minus what beams did (what does not bleed does not come back). PARTY: below partyRallyAt HP the allies within 3 see you bleed and fight harder (rallied). TITAN: against a titan-class foe the blow also returns what that titan did to your allies this fight.",
+          "_doc": "THE VERB IN PLAY (src/js/godverbs.js). Turn the Pain: a combat action for whoever ascended (player or villager, same function). The pain pool is every wound taken this fight, minus what beams did (what does not bleed does not come back). PARTY: below partyRallyAt HP the allies within 3 see you bleed and fight harder (rallied). TITAN: against a titan-class foe the blow also returns what that titan did to your allies this fight. CONTEST: blood contests lean for the ascended holder by contestLean as extra braveryBonus / cheer steadiness on the real _cxBlood fight arms (pit, gauntlet, duel, siege) — the crowd counts your scars; tithe stays altar HP-measures without inventing a scar ledger. Not cookfight/impress/moot/drop/whoate/price/auction — Garden/Voice/Unkillable/All-Seeing/Market keep those. ARMY: when an ascended One-Person Army holder (player or Haven NPC) opens the front in a titan/coalition fight (adjacent to a living titan, or Turn the Pain lands on one), opaBreachLeanFor applies breachLean so titanBreachPourThrough lets coalition blades pour through the breach — steadiness + pour-count + breach beat; does not re-label partyRallyAt (PARTY) or titanPain (TITAN), and does not invent free second Turn the Pain for every blade or retune Turn the Pain kcal / blood contestLean.",
           "actions": [
             {
               "id": "turn_the_pain",
@@ -121,7 +121,15 @@
           ],
           "partyRallyAt": 0.5,
           "partyRallyRounds": 3,
-          "villagerCastAt": 0.35
+          "villagerCastAt": 0.35,
+          "bloodContests": [
+            "pit",
+            "gauntlet",
+            "duel",
+            "siege"
+          ],
+          "contestLean": 18,
+          "breachLean": 1
         }
       }
     },
@@ -198,7 +206,7 @@
           "clean_plate"
         ],
         "play": {
-          "_doc": "Take the Wound: automatic. A big hit on an ally (>= minFrac of their max HP, or lethal) lands on the Ward instead, and a redirected wound cannot drop the Ward below 1 HP. Each redirect burns kcal (villager: belly). strains per fight, then the Ward collapses (player: loses a whole turn; villager: out of the fight). WEAKNESS: the priority target (monsters aim at the light) and self-healing mid-fight is halved. PARTY/TITAN: every ally on the field counts, coalition blades included, any hit size.",
+          "_doc": "Take the Wound: automatic. A big hit on an ally (>= minFrac of their max HP, or lethal) lands on the Ward instead, and a redirected wound cannot drop the Ward below 1 HP. Each redirect burns kcal (villager: belly). strains per fight, then the Ward collapses (player: loses a whole turn; villager: out of the fight). WEAKNESS: the priority target (monsters aim at the light) and self-healing mid-fight is halved. PARTY/TITAN: every ally on the field counts, coalition blades included, any hit size. ARMY: when an ascended Undying Ward holder (player or Haven NPC) holds the line in a titan/coalition fight (adjacent to a living titan, or Take the Wound redirects for the front), wardAdvanceLeanFor applies advanceLean so titanWardAdvanceBehind lets the army advance behind the wall — steadiness + advance-count + advance beat; does not re-label Take the Wound PARTY/TITAN redirect as army LIVE, invent weep contests, or retune Take the Wound kcal / strains / minFrac.",
           "passive": {
             "id": "take_the_wound",
             "name": "Take the Wound",
@@ -207,7 +215,8 @@
             "minFrac": 0.25
           },
           "selfHealMult": 0.5,
-          "aggro": true
+          "aggro": true,
+          "advanceLean": 1
         }
       }
     },
@@ -283,7 +292,7 @@
           "apex_sense"
         ],
         "play": {
-          "_doc": "Choose the Terms: three combat actions, one per fight, only before the first blow lands. AMBUSH: every foe loses its first turn and your next strike hits x ambushMult (allies x2). RANGE: every foe is driven back to rangeDist tiles and your strikes from 2+ tiles hit x rangeMult. GROUND: every foe is rooted groundRoot rounds (titans too) and you dodge +groundDodge. WEAKNESS: the moment a foe is adjacent the terms are over (range and ground bonuses end). PARTY: ambush arms the allies too. TITAN: ground roots a titan.",
+          "_doc": "Choose the Terms: three combat actions, one per fight, only before the first blow lands. AMBUSH: every foe loses its first turn and your next strike hits x ambushMult (allies x2). RANGE: every foe is driven back to rangeDist tiles and your strikes from 2+ tiles hit x rangeMult. GROUND: every foe is rooted groundRoot rounds (titans too) and you dodge +groundDodge. WEAKNESS: the moment a foe is adjacent the terms are over (range and ground bonuses end). PARTY: ambush arms the allies too. TITAN: ground roots a titan. ARMY: when an ascended Apex Predator holder (player or Haven NPC) is active, apexScoutMarkLeanFor applies scoutMarkLean so resolveOneAssignment scout / markSeen settlement follows your marks — higher shared-reveal chance on the haven scout ring and a follow-marks beat; does not invent an accuracy contest cat or retune Terms kcal / ambushMult / rangeDist.",
           "actions": [
             {
               "id": "terms_ambush",
@@ -324,7 +333,8 @@
           "rangeDist": 4,
           "rangeMult": 1.5,
           "groundRoot": 2,
-          "groundDodge": 0.25
+          "groundDodge": 0.25,
+          "scoutMarkLean": 1
         }
       }
     },
@@ -485,7 +495,7 @@
           "efficient_machine"
         ],
         "play": {
-          "_doc": "Phase Out: automatic, once per fight. A hit that would take minFrac of max HP or kill passes through empty air; the holder reappears up to retreat tiles away (phasing is a retreat: any hold or link breaks). TITAN: against a titan-class attacker the phase covers every hit from it that round. PARTY: the Between draws fire (monsters aim at them first).",
+          "_doc": "Phase Out: automatic, once per fight. A hit that would take minFrac of max HP or kill passes through empty air; the holder reappears up to retreat tiles away (phasing is a retreat: any hold or link breaks). TITAN: against a titan-class attacker the phase covers every hit from it that round. PARTY: the Between draws fire (monsters aim at them first). CONTEST: chase/race contests lean for the ascended holder by contestLean — Hide and Seek (hide) seeker spot chance minus contestLean/25 in _cxOther and Calorie Run (calorie_run) forage yield add in _cxOther; drop/exchange/starve/maw/vigil stay Unkillable endurance. ARMY: coalition runner between camps — ascended Between holder (player or Haven NPC) leans aid-runner travel via god.play.runnerLean (day-parts off aidPartsFor / aidSendRunner); Phase Out remains personal; Voice still owns allied same-day broadcast delivery.",
           "passive": {
             "id": "phase_out",
             "name": "Phase Out",
@@ -493,7 +503,13 @@
             "minFrac": 0.25,
             "retreat": 3
           },
-          "aggro": true
+          "aggro": true,
+          "chaseContests": [
+            "hide",
+            "calorie_run"
+          ],
+          "contestLean": 18,
+          "runnerLean": 1
         }
       }
     },
@@ -571,7 +587,7 @@
           "pendingHint": "Discovery made. Share its true identity with someone who did not know it."
         },
         "play": {
-          "_doc": "No Lies. Combat action Read Them Aloud: for the rest of the fight every foe's next move is said aloud each round, allies (not the holder: you are still fragile) slip telegraphed blows with allyDodge, and the holder's strikes on a foe that is winding up hit x strikeMult. Passive out of fights: a villager cannot tell the All-Seeing a lie (the cover never lands), every live lie in the village is known at dawn, and an ambush that relies on deception never springs. COST: -trustCostPerDay trust a day with anyone hiding a lie.",
+          "_doc": "No Lies. Combat action Read Them Aloud: for the rest of the fight every foe's next move is said aloud each round, allies (not the holder: you are still fragile) slip telegraphed blows with allyDodge, and the holder's strikes on a foe that is winding up hit x strikeMult. Passive out of fights: a villager cannot tell the All-Seeing a lie (the cover never lands), every live lie in the village is known at dawn, and an ambush that relies on deception never springs. COST: -trustCostPerDay trust a day with anyone hiding a lie. CONTEST: strategy contests lean for the ascended holder by contestLean — puzzle (box, pattern, riddle, sorting, lockpick, wrongmap) and detective (whoate, informant, confession, witness, alibi, echo) scores in _cxOther, plus moot-cat Lie Detector (lies) case scores in _cxMoot because 'nobody bluffs you' / No Lies; cookfight/impress/moot/oath/quiet/price and endurance stay Garden/Voice/Unkillable. ARMY: when an ascended All-Seeing holder (player or Haven NPC) sits titanWarCouncil, allSeeingCouncilLeanFor applies councilMapLean so the coalition plans with your map — readiness honesty (naive vs true blades), scout-intel clarity (loyalty/temptation on the map), and counter-hint reveal even when monsterCounterKnown is still false. Does not retune No Lies kcal/trust or claim strategy contest lean as army LIVE.",
           "actions": [
             {
               "id": "no_lies",
@@ -587,7 +603,24 @@
           "allyDodge": 0.5,
           "strikeMult": 1.5,
           "trustCostPerDay": 1,
-          "dailyKcal": 60
+          "dailyKcal": 60,
+          "strategyContests": [
+            "box",
+            "pattern",
+            "riddle",
+            "sorting",
+            "lockpick",
+            "wrongmap",
+            "whoate",
+            "informant",
+            "confession",
+            "witness",
+            "alibi",
+            "echo",
+            "lies"
+          ],
+          "contestLean": 18,
+          "councilMapLean": 1
         }
       }
     },
@@ -657,7 +690,7 @@
           "hint": "Hold the Relay office yourself. Claim its wires or accept the village appointment; the work and its costs must be yours."
         },
         "play": {
-          "_doc": "Speak and Be Heard. Combat Rally Cry: every ally on the field takes an extra turn now, emboldened rallyRounds rounds with the next 2 strikes x strikeMult; every foe hesitates a round. Daily Be Heard (out of a fight): every Haven villager +trust, and every fight today starts rallied. Each use costs grounding. WEAKNESS: the single point of failure: if the Voice falls in a fight, every ally on the field is stunned a round (the network goes dark).",
+          "_doc": "Speak and Be Heard. Combat Rally Cry: every ally on the field takes an extra turn now, emboldened rallyRounds rounds with the next 2 strikes x strikeMult; every foe hesitates a round. Daily Be Heard (out of a fight): every Haven villager +trust, every fight today starts rallied, and ARMY scale — every linked/allied foreign village hears the word the same day (opinion +trust, link trust when linked, voiceDay stamp so their people fight rallied). Each use costs grounding. WEAKNESS: the single point of failure: if the Voice falls in a fight, every ally on the field is stunned a round (the network goes dark). CONTEST: performance contests (impress, moot) lean for the ascended holder by contestLean on impress making scores in contestEngine _cxOther and moot case scores in _cxMoot — cookfight/guest stay Garden feast contests.",
           "actions": [
             {
               "id": "rally_cry",
@@ -678,13 +711,18 @@
                 "kcal": 150
               },
               "perDay": 1,
-              "effect": "Every Haven villager hears you: +2 trust, and every fight today starts rallied."
+              "effect": "Every Haven villager hears you: +2 trust; linked/allied foreign villages hear the same day (+opinion / link trust); every fight today starts rallied."
             }
           ],
           "grounding": 5,
           "rallyRounds": 3,
           "strikeMult": 1.5,
-          "trust": 2
+          "trust": 2,
+          "performanceContests": [
+            "impress",
+            "moot"
+          ],
+          "contestLean": 18
         }
       }
     },
@@ -762,12 +800,21 @@
           "perfect_chrysalis"
         ],
         "play": {
-          "_doc": "Phoenix: automatic. On a death the holder would die, the phoenix clause fires without the ability and is never spent: a living villager burns (the existing register: volunteers, protest struggles, the broadcast, exile after the second burn), the holder rises at 1 HP. The fire needs fuel: kcal (villager: belly) or the death sticks, so it never saves you from starving.",
+          "_doc": "Phoenix: automatic. On a death the holder would die, the phoenix clause fires without the ability and is never spent: a living villager burns (the existing register: volunteers, protest struggles, the broadcast, exile after the second burn), the holder rises at 1 HP. The fire needs fuel: kcal (villager: belly) or the death sticks, so it never saves you from starving. CONTEST: endurance contests (drop, starve, maw, vigil, exchange) lean for the ascended holder by contestLean on the real _cxEndurance arms — starve days via HP buffer, drop/exchange survival for time, maw/vigil nerve — cookfight/impress/moot stay Garden/Voice contests. ARMY: when an ascended Unkillable holder (player or Haven NPC) is the last living ours blade in a titan/coalition fight, unkillableLastStandingLeanFor applies lastStandingLean so titanLastStandingContinuity refuses the rout — steadiness flag + last-standing beat; does not invent free Phoenix for every blade or retune Phoenix kcal / endurance contestLean.",
           "passive": {
             "id": "phoenix",
             "name": "Phoenix",
             "kcal": 500
-          }
+          },
+          "enduranceContests": [
+            "drop",
+            "starve",
+            "maw",
+            "vigil",
+            "exchange"
+          ],
+          "contestLean": 18,
+          "lastStandingLean": 1
         }
       }
     },
@@ -842,7 +889,7 @@
           "hint": "Trade food stores for delivered tools, gear or alien goods."
         },
         "play": {
-          "_doc": "Name Your Price + Buy Passage + Gilded Guard (godhood.js prices). Buy Passage is a combat action (once per fight, not on titans: the big ones do not haggle); Name Your Price is a daily action (no target: the market brings the best weapon you lack). The Guard coins never stop a beam. The Audit collects at dawn when 3 markers are due. Villager Market Gods carry the coins and buy passage from their belly.",
+          "_doc": "Name Your Price + Buy Passage + Gilded Guard (godhood.js prices). Buy Passage is a combat action (once per fight, not on titans: the big ones do not haggle); Name Your Price is a daily action (no target: the market brings the best weapon you lack). The Guard coins never stop a beam. The Audit collects at dawn when 3 markers are due. Villager Market Gods carry the coins and buy passage from their belly. CONTEST: sponsor contests lean for the ascended holder by contestLean — The Price (price) moot case scores in _cxMoot and The Auction (auction) bid capacity in _cxChance; money talks to judges but stays RISKY: auction winners (and losers) still pay their bid. Not cookfight/impress/moot/drop/whoate/lies/wheel — Garden/Voice/Unkillable/All-Seeing keep those, and other chance theater is not sponsor bidding. ARMY: when an ascended Market holder (player or Haven NPC) outfits a standing muster via titanOutfit, marketOutfitLeanFor applies outfitEffLean percent to force wbonus / varmor / gearValue so the same transferred pieces hit harder — the coalition’s quartermaster; does not retune Name Your Price kcal tiers or invent free gear.",
           "actions": [
             {
               "id": "buy_passage",
@@ -865,7 +912,13 @@
               "perDay": 1,
               "effect": "A trader brings exactly what you name (default: the best weapon you lack). 800/2000/5000 kcal by tier; relics are lent for 2 markers."
             }
-          ]
+          ],
+          "sponsorContests": [
+            "price",
+            "auction"
+          ],
+          "contestLean": 18,
+          "outfitEffLean": 25
         }
       }
     },
@@ -945,7 +998,7 @@
           "pendingHint": "Your harvest is feeding them. Keep every neighbor on your food for 7 days running."
         },
         "play": {
-          "_doc": "Feed the Multitude: daily, out of a fight. Every living Haven villager eats their fill (hunger 0) and, for the rest of the day, every fight starts with the party fed (allies and coalition blades hit with the food overcharge: PARTY and TITAN). The harvest goes into other bellies, never yours: it cannot skip your dinner. WEAKNESS: not a fighter: your strikes x strikeMult, and monsters go for the garden first.",
+          "_doc": "Feed the Multitude: daily, out of a fight. Every living Haven villager eats their fill (hunger 0) and, for the rest of the day, every fight starts with the party fed (allies and coalition blades hit with the food overcharge: PARTY and TITAN). The harvest goes into other bellies, never yours: it cannot skip your dinner. WEAKNESS: not a fighter: your strikes x strikeMult, and monsters go for the garden first. CONTEST: feast contests (cookfight, guest) lean for the ascended holder by contestLean on the making score in contestEngine _cxOther — impress is not a feast. ARMY: when an ascended Living Garden holder has Feed the Multitude active that day (harvestDay), gardenMusterFeedFor covers standing titan muster upkeep kcal (musterMouths × musterKcalPerMouth) so the coalition marches because you feed it — pack debit and hunger trust bleed stay only for any uncovered remainder.",
           "actions": [
             {
               "id": "feed_multitude",
@@ -959,7 +1012,14 @@
             }
           ],
           "strikeMult": 0.8,
-          "aggro": true
+          "aggro": true,
+          "feastContests": [
+            "cookfight",
+            "guest"
+          ],
+          "contestLean": 18,
+          "musterMouths": 50,
+          "musterKcalPerMouth": 1000
         }
       }
     }

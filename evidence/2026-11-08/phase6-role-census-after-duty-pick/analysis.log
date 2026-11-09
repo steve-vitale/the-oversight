@@ -1,0 +1,54 @@
+tip: c47d7df534fec498cb668a74df0ed223a6a4147b
+evid: /agent/repos/the-oversight/evidence/2026-11-08/phase6-role-census-after-duty-pick
+
+==== POLICY capable seeds 16 ====
+verdict: GO 
+tracks with signal: ["combat","field","social","craft","strange"] (5/5)
+DUTY_ad events: 2172 | DUTY_picked: 737 | duty_top_score picks: 737 | seeds ads 16/16 | seeds picks 16/16 | daysWithOpp 1130/1277
+DUTY_ad by task: {"forage":217,"cook":217,"water":2136}
+DUTY_picked by task: {"forage":78,"water":659}
+DUTY_picked by override: {"duty_top_score":737}
+when ads present, logged pick kinds (samples): {"WATER":248,"DUTY":193,"VISIT":84,"HAVEN_CHORE":92,"EXPEDITION":19,"FORAGE":2,"SEEK":2}
+when ads present, overrides (samples): {"none":422,"duty_top_score":193,"win_plan:party_launch":19,"win_plan:party_wait":6}
+resolved by task: {"garden":126,"wood":1845,"water":946,"deadfall":949,"stone":1842,"cook":667,"fish":342,"forage":5}
+rung lines: 322 {"deadfall":26,"stone":88,"wood":91,"water":56,"cook":43,"fish":16,"garden":2}
+
+per-track table (qual60, n=97):
+| track | comp rung steps | villagers moved | track lvl≥1 | specialist 0→+ | dominant | signal |
+| combat | 0 | 0 | 60 | 0 | 6 | true |
+| field | 60 | 20 | 33 | 7 | 3 | true |
+| social | 0 | 0 | 62 | 0 | 13 | true |
+| craft | 129 | 40 | 21 | 0 | 1 | true |
+| strange | 0 | 0 | 1 | 0 | 0 | true |
+competence cells moved total: 101 | by task: {"hunt":0,"forage":0,"garden":0,"fish":11,"wood":51,"stone":48,"deadfall":17,"water":32,"scout":0,"patrol":0,"cook":30,"tend":0,"teach":0,"mend":0}
+specialist 0→+: 7 | skills+: 618 | ab+: 208
+dominant tracks: {"combat":6,"social":13,"field":3,"craft":1} | distinct: 4
+behavior: strong 78/97 hybrid 48 matchedTop 15 meanTopShare 0.47
+BEFORE(#49) DUTY_ad→picked: 2484 → 0 | AFTER DUTY_ad→picked: 2172 → 737 (duty_top_score 737)
+
+==== POLICY competent seeds 16 ====
+verdict: GO 
+tracks with signal: ["combat","field","social","craft","strange"] (5/5)
+DUTY_ad events: 2158 | DUTY_picked: 693 | duty_top_score picks: 693 | seeds ads 16/16 | seeds picks 16/16 | daysWithOpp 1122/1263
+DUTY_ad by task: {"forage":176,"cook":176,"water":2156}
+DUTY_picked by task: {"forage":67,"water":626}
+DUTY_picked by override: {"duty_top_score":693}
+when ads present, logged pick kinds (samples): {"WATER":231,"VISIT":104,"DUTY":173,"EXPEDITION":50,"HAVEN_CHORE":78,"FORAGE":2,"HAUL":2}
+when ads present, overrides (samples): {"none":415,"duty_top_score":173,"win_plan:party_launch":50,"win_plan:party_wait":2}
+resolved by task: {"garden":206,"wood":2090,"water":1154,"deadfall":1073,"stone":2086,"cook":1259,"fish":531,"forage":33}
+rung lines: 412 {"wood":102,"stone":104,"water":70,"cook":64,"deadfall":30,"fish":32,"garden":8,"forage":2}
+
+per-track table (qual60, n=79):
+| track | comp rung steps | villagers moved | track lvl≥1 | specialist 0→+ | dominant | signal |
+| combat | 0 | 0 | 24 | 0 | 4 | true |
+| field | 39 | 20 | 29 | 9 | 8 | true |
+| social | 0 | 0 | 7 | 0 | 3 | true |
+| craft | 103 | 30 | 24 | 0 | 2 | true |
+| strange | 0 | 0 | 2 | 0 | 0 | true |
+competence cells moved total: 82 | by task: {"hunt":0,"forage":0,"garden":2,"fish":7,"wood":38,"stone":40,"deadfall":4,"water":26,"scout":0,"patrol":0,"cook":25,"tend":0,"teach":0,"mend":0}
+specialist 0→+: 9 | skills+: 476 | ab+: 102
+dominant tracks: {"field":8,"social":3,"craft":2,"combat":4} | distinct: 4
+behavior: strong 71/79 hybrid 42 matchedTop 11 meanTopShare 0.50
+BEFORE(#49) DUTY_ad→picked: 2987 → 0 | AFTER DUTY_ad→picked: 2158 → 693 (duty_top_score 693)
+
+wrote /agent/repos/the-oversight/evidence/2026-11-08/phase6-role-census-after-duty-pick/analysis.json
