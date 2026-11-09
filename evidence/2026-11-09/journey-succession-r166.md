@@ -172,6 +172,37 @@ gate). No load timeouts this run (gate 648s vs r161's 996s). No new
 attributable failure. Proof tests r146/r147/r151/r155/r157/r161/r166
 re-run ALL GREEN on the final rebased tip (below).
 
+## Rebased gate (adoption, 17:00 occurrence)
+
+`node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-playtest2`
+on the rebased tip ad3f0fffd (master 7cd52fbb0) →
+**292 passed, 8 failed in 1219s** (gate log
+evidence/2026-11-09/journey-succession-r166-adopt-gate.log).
+Adjudication — GO:
+
+- The 4 STANDING failures are unchanged from the pre-rebase gate:
+  mobile-combat-cadence, occupation-panels, phone-frame-proof,
+  establishment-r20 voices gate.
+- The proof refresh FIXED 2: measurement-proof-update and
+  measurement-workflow now pass (they failed pre-rebase on the stale
+  retained neutrality proof).
+- The other 4 are ENVIRONMENTAL, all green standalone on the same
+  tip: trust-observer-neutrality 6/6, synergy-stall rc=0,
+  capable-bot 42/0, measurement-cache-flags 4/4. The three gate
+  timeouts hit the 120s per-script ceiling while the whole gate ran
+  2x slower (1219s vs 648s) under the write-flap aftermath and
+  sibling-loop contention — not regressions from the r166 src/js
+  change (convo-wants/convo-dialogue/conversation.js touch none of
+  those paths).
+- Family proof tests re-run explicitly on the rebased tip: r146,
+  r147, r151, r155, r157, r161, r166 — ALL GREEN, 7/7.
+- Flap note: a write-flap (EPERM on creation/writes) ran
+  ~22:14–23:18Z, killed the adoption's first three gate attempts
+  (0-byte logs), truncated docs/ONTOLOGY.md to 0 bytes in the
+  worktree (restored from HEAD, hash verified e16e3ed5c), and blocked
+  heartbeats. Stale-lock recovery of r166 at 23:18Z; this
+  occurrence's lock oversight-playtest-loop-2-2026-11-09T23:18:56Z.
+
 ## Rotation
 
 7 → 4 (endgame next). [Advance at closeout; verify the file reads 4.]
@@ -200,3 +231,11 @@ re-run ALL GREEN on the final rebased tip (below).
 - CAP-NC denominator: 1 eligible again (second handoffs dominate). A
   decisive CAP-NC verdict needs a longer panel or a band with earlier
   arrivals — a prereg question for the NEXT run, not a re-score.
+
+## Adoption adjudication (main session, 2026-11-09 ~23:52Z)
+- Rebased branch tip ad3f0fffd onto master 7cd52fbb0 (recovery f763765b5 + fix 33c5df9bf [needs-eyes] + note ef93bfc7a + proof refresh ad3f0fffd; proof trio 9/9+9/9+4/4, r166 proof ALL GREEN).
+- Rebased gate 23:21–23:41Z: 292 passed, 8 failed in 1245s. Failures = standing 4 (mobile-combat-cadence, occupation-panels, phone-frame-proof, establishment-r20-fixes) + trust-observer-neutrality / synergy-stall / capable-bot (all 120s timeouts) + measurement-cache-flags (exit 1, 71.8s). The gate ran CONCURRENTLY with another check.js (pid 41547, already running at gate start — likely the Lane A journey-landing gate) under heavy load (two Loop B sim workers + my gate), which explains the timeouts.
+- Standalone re-runs 23:42–23:51Z, all PASS: trust-observer-neutrality 6/6, synergy-stall EXIT 0, capable-bot 42/42, measurement-cache-flags 4/4. **Gate adjudicated GO — 296/4 standing only.**
+- TWO ATTEMPTS polluted by the EPERM write flap (~22:16–23:20Z, ~64 min): first gate died at startup, second gate run 22:40–22:48Z showed ~10 F's incl. human-combat-parity writeFileSync EPERM. Both discarded; the 23:21Z gate above is the adjudicating one.
+- Master has since moved to 65fef6d7e (Loop B 2130Z evidence commit, evidence-only — proof stays current). Adopter must rebase onto 65fef6d7e (explicit SHA) before the ff-only merge.
+- HANDOFF: the 17:00 Lane B occurrence (lock oversight-playtest-loop-2-2026-11-09T23:18:56Z) is live in this tree re-running the proof tests (pid 57983, from 23:52Z). It owns the closeout from here: rebase, merge --ff-only, release, rotation-b 7→4, delete ITS lock (not the 21:24:51Z one — that lock is already gone), timeline + memory. Main session stands down; do not merge under its running tests.
