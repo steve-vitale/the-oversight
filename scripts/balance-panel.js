@@ -201,6 +201,15 @@ function install(G) {
       // Additive typed-skill bag (OVE-184): channel int stays for back-compat;
       // future censuses attribute villager field-fight fires via events.skill_used_by_id.
       // skill_used.skill is a held ability id (ffFired), not a separate skills.json space.
+      // Villager skill_used (telemetry-hooks wrap on fieldFight / ffFired) emits
+      // { vid, skill, context:'field_fight', outcome } — no ok field. outcome is the
+      // fight result (vKill / mFlee / vFlee / vDie / evade / alreadyDead), not
+      // skill-effect success. Ability-style data?.ok / abilityAccepted scoring would
+      // count zero skill fires. Do not treat non-vKill outcomes as unused skills
+      // (e.g. peacemaker peaceful mFlee, awareness evade, field_medicine heal then
+      // flee/die). Score utilization from any skill_used / skill_used_by_id. Distinct
+      // from player ability_used (which does carry ok from return; see OVE-188 legacy
+      // null → ok:false). Source: OVE-191 / tip a628aeaf3.
       if (type === 'skill_used') {
         const id = data && typeof data.skill === 'string' ? data.skill : null;
         const bag = events.skill_used_by_id || (events.skill_used_by_id = Object.create(null));

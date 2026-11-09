@@ -75,7 +75,10 @@ from `tele('skill_used', { skill })` (villager field-fight `ffFired` ability
 ids). Missing/non-string `skill` increments `events.skill_used_missing_id`.
 Metric IDs/directions/tolerances unchanged; this is an observer bag for typed
 villager skill fires, not a utilization prove-out. Distinct from player
-`ability_used` / `abilityAccepted`.
+`ability_used` / `abilityAccepted`. Scoring note (OVE-191): `skill_used` has
+**no `ok` field**; `outcome` is the fight result, not skill-effect success.
+Score utilization from any fire / `skill_used_by_id` — do not apply
+`abilityAccepted` / `data?.ok` or win-only (`vKill`) filters.
 
 Capstone acquisition repair (local2026-10-18): the collector now observes
 `maybeGrantCapstoneItem` as the capstone source, including direct dawn gifts
