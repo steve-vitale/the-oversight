@@ -49,6 +49,26 @@ not a win quota or automatic verdict. Core runtime is not full scene/scale/budge
 or natural all-playstyle viability clearance. See evidence/2026-10-18/
 muse-87-reconciliation-audit.md and godverbs-continuation.json. No remote push.
 
+Godpath deed typed bag (OVE-175, scripts-only): the collector still increments
+`events.godpath_deed` and now also fills additive `events.godpath_deed_by_id`
+from `tele('godpath_deed', { event })`. Missing/non-string `event` increments
+`events.godpath_deed_missing_event`. Authored `relay_office` does not emit this
+tele (switchboard / deedAlt) and stays out of the bag until a separate Game
+instrument exists. Metric IDs/directions/tolerances unchanged; this is an
+observer bag for tele-emitting deeds, not a utilization prove-out.
+
+Ability typed bags (OVE-180, scripts-only): the collector still increments
+`events.ability_used` / `ability_granted` / `ability_replaced` /
+`prize_ability_offer` and `abilityAccepted`, and now also fills additive
+`events.ability_used_by_id` / `ability_used_ok_by_id` / `ability_granted_by_id`
+from `tele` `data.id`, plus `ability_replaced_by_id` (`in`/`out`) and
+`prize_ability_offer_by_id` (each `ids[]` entry). Missing/non-string ids
+increment the matching `*_missing_id` counters. Synthetic grant id
+`villager_use` stays visible in the grant bag — filter it when scoring
+authored ability utilization. Metric IDs/directions/tolerances unchanged;
+this is an observer bag for typed ability channels, not a utilization
+prove-out.
+
 Capstone acquisition repair (local2026-10-18): the collector now observes
 `maybeGrantCapstoneItem` as the capstone source, including direct dawn gifts
 and nested actions. Actual player/NPC gifts, repeat ceremonies, source
