@@ -84,12 +84,15 @@ function canonCause(c) {
 }
 
 // ---- fever-anatomy helpers (pure reads only; no RNG, no Game-state writes) ----
-// Disease roster from docs/DISEASES.md (mundane 6 + alien 9) + tick_attached.
+// Disease roster from docs/DISEASES.md (mundane 7 + alien 9) + tick_attached.
+// radiation_sickness is mundane (pool mundane, class radiation, per
+// src/data/statusEffects.json; Steve-ruled pellet cost 2026-11-08): no pill
+// touches it — skilled hands (field_medicine/triage) clear it, rest sheds it.
 const DISEASE_IDS = new Set(['disease', 'wound_fever', 'gutrot', 'lockjaw',
-  'trichinosis', 'trembles', 'howlbelly', 'gristlefit', 'croakbelly', 'shellgut',
+  'trichinosis', 'trembles', 'radiation_sickness', 'howlbelly', 'gristlefit', 'croakbelly', 'shellgut',
   'witness_maw', 'flockmind', 'eurika', 'east_nile', 'lemons', 'tick_attached']);
 const MUNDANE_IDS = new Set(['disease', 'wound_fever', 'gutrot', 'lockjaw',
-  'trichinosis', 'trembles']);
+  'trichinosis', 'trembles', 'radiation_sickness']);
 const MED_OCC = /nurse|medic|doctor|paramedic|midwife|veterinarian|pharmacist|herbalist|dentist/i;
 // villageSicknessTick names map 1:1 to vectors (the engine enforces it).
 function vectorForNpcTick(name, cond) {

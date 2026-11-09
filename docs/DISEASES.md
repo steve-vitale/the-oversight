@@ -18,7 +18,7 @@ or diagnosis code. (Established 2026-10-06, reworked 2026-10-09, corrected 2026-
   `contractDisease()` refuses alien; the alien pool contracts through its own
   vectors only. See the `two_pools` ontology rule in `src/js/statusEffects.js`.
 
-## Mundane pool (6) — real diseases
+## Mundane pool (7) — real diseases
 
 | id | Name | Real analogue | Vector |
 |----|------|---------------|--------|
@@ -28,6 +28,7 @@ or diagnosis code. (Established 2026-10-06, reworked 2026-10-09, corrected 2026-
 | lockjaw | Lockjaw | tetanus | dirty wounds, rust (spasms; lethal untreated) |
 | wound_fever | Wound Fever | infected wound | open cuts left dirty; botched tick removal |
 | trembles | Trembles | kuru (prion) | human meat — 15% per meal; cooking does NOT kill it |
+| radiation_sickness | Radiation Sickness | radiation poisoning | the pellet's invisible fire, taken in a boost at a time — NOT a germ: no pill touches it (antibiotics/antiparasitic `no`); skilled hands (field_medicine/triage) clear it, rest sheds it slowly |
 
 Diseases never announce their names — only symptoms. Diagnosis (triage /
 field_medicine / herbal_remedy, herb lore, stethoscope, or a medical villager)
@@ -82,6 +83,14 @@ Min-maxing is welcome: some players will avoid these at all costs, others
 will seek infection to boost their build.
 
 ## Change log
+
+- 2026-11-09: Radiation Sickness added to the mundane pool (7th mundane;
+  sim-radsnap-a). Steve-ruled pellet cost 2026-11-08: the pellet's invisible
+  fire, taken in a boost at a time. It is not a germ — no pill touches it;
+  skilled hands (field_medicine, triage) clear it; rest sheds it slowly.
+  Def in `src/data/statusEffects.json` (pool mundane, class radiation).
+  The feveranat/sicknessdiag instrument rosters predated it and missed it,
+  which is why scholar radiation onsets never appeared in snapshots.
 
 - 2026-10-09: Trembles added to the mundane pool (kuru/prion analogue, Steve's corruption system). Vector: human meat, 15% per meal. Cooking does not kill prions — nothing does. No cure exists at any tier; slow (40 day-parts) and certain. The terrible bargain made biological.
 

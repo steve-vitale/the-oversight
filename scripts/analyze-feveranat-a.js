@@ -53,6 +53,14 @@
 //   from such a corpus, and does not try: on a pre-fix corpus it still
 //   reports the 3 snapshot-attributed cures and nothing more. The 30 are
 //   recoverable only from a fresh run under the fixed recorder.
+//   UN-SNAPSHOT-ABLE ONSETS (sim-radsnap-a, 2026-11-09): two onset shapes
+//   no snapshot could ever show, exempted in G3 (named in the PASS line,
+//   never silently): (1) a scholar onset whose bearer died the same day
+//   (isPlayer deathRow that day — the status entry dies with its bearer;
+//   the successor never carries it); (2) an onset on the last snapshot
+//   day with no later snapshot (snapshots are taken at dawn, onsets happen
+//   during/after the day's parts, so a same-day onset first appears the
+//   NEXT day — which does not exist when the run ends that day).
 'use strict';
 const fs = require('fs');
 const path = require('path');
@@ -586,6 +594,7 @@ function main() {
   // ---- G3 CORPUS (corrected) ----
   let g3ok = true;
   const g3notes = [];
+  const g3exempted = [];
   for (const s of seeds) {
     const days = s.daySeries || [], flows = s.flowSeries || [], meals = s.mealRows || [];
     const keys = meals.map(r => r.vid + '|' + r.day);
@@ -596,6 +605,8 @@ function main() {
     const snapByDay = new Map();
     for (const d of days) snapByDay.set(d.day, d);
     const unaccounted = [];
+    const exempted = [];
+    const lastDay = days.length ? Math.max.apply(null, days.map(function (d) { return d.day; })) : 0;
     for (const o of (s.sickOnsets || [])) {
       // "Later snapshot" means a snapshot taken AFTER the creation call: a
       // villageSicknessTick onset (endDay of day D) can first appear in the
@@ -615,11 +626,37 @@ function main() {
       const endSoon = (s.sickEnds || []).some(e => e.who === o.who &&
         (e.kind === 'scholar' ? e.diseaseId === o.diseaseId : e.name === o.name) &&
         e.day >= o.day && e.day <= o.day + 1);
-      if (!seen && !endSoon && checkable) unaccounted.push(o.who + ' d' + o.day + ' ' + o.name);
+      if (!seen && !endSoon && checkable) {
+        // Un-snapshot-able onsets (sim-radsnap-a): the onset is real and
+        // recorded, but no snapshot could ever show it — NOT a recorder gap.
+        // (1) Scholar bearer died the same day as the onset (isPlayer
+        // deathRow that day): the status entry dies with its bearer; the
+        // successor scholar never carries it, so no later snapshot shows it.
+        // Approximation, stated plainly: the corpus records scholar onsets
+        // as who 'scholar' with no bearer id, so on a day with MULTIPLE
+        // successions the check cannot tell which scholar held the onset —
+        // it exempts when ANY player death lands that day. The direction is
+        // conservative and the footprint is tiny (it can only excuse an
+        // onset on a same-day-death day; a broken recorder still fails on
+        // every ordinary onset day), and every exemption is named in the
+        // PASS line. (2) Onset on the last snapshot day with no later
+        // snapshot is taken at dawn and onsets happen during/after the
+        // day's parts, so a same-day onset first appears the NEXT day —
+        // which does not exist when the run ends that day.
+        let exemptReason = null;
+        if (o.kind === 'scholar' && (s.deathRows || []).some(function (d) { return d.isPlayer && d.day === o.day; })) {
+          exemptReason = 'bearer died onset day';
+        } else if (o.day === lastDay && !snapByDay.has(appearDay + 1)) {
+          exemptReason = 'onset on last snapshot day, no later snapshot';
+        }
+        if (exemptReason) { exempted.push(o.who + ' d' + o.day + ' ' + o.name + ' (' + exemptReason + ')'); continue; }
+        unaccounted.push(o.who + ' d' + o.day + ' ' + o.name);
+      }
     }
     const ok = lenOk && flows.length > 0 &&
       new Set(keys).size === keys.length && Array.isArray(s.deathRows) &&
       unaccounted.length === 0;
+    for (const x of exempted) g3exempted.push('s' + s.seed + ': ' + x);
     if (!ok) {
       g3ok = false;
       g3notes.push('s' + s.seed + ': daySeries=' + days.length + ' daysAlive=' + s.daysAlive +
@@ -631,7 +668,7 @@ function main() {
   const bareFiles = fs.readdirSync(DIR).filter(f => /^feveranat-a-bare-s\d+\.json$/.test(f)).sort();
   if (bareFiles.length !== 8) { g3ok = false; g3notes.push('bare fingerprints: ' + bareFiles.length + '/8 present'); }
   if (orphanEnds.length) { g3ok = false; g3notes.push('orphan sickEnds (no matching onset): ' + orphanEnds.length); }
-  console.log('G3 CORPUS: ' + (g3ok ? 'PASS — all legs valid (8 recorded + 8 bare; every onset accounted for)' : 'FAIL — ' + g3notes.join('; ')));
+  console.log('G3 CORPUS: ' + (g3ok ? 'PASS — all legs valid (8 recorded + 8 bare; every onset accounted for' + (g3exempted.length ? '; exempted un-snapshot-able: ' + g3exempted.join('; ') : '') + ')' : 'FAIL — ' + g3notes.join('; ')));
   console.log('');
 
   // ---- G2 NEUTRALITY ----
