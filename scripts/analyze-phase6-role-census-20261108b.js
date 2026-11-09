@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 // Analyzer for probe-phase6-role-census-20261108b.js outputs
-// (after OVE-78 dutyKnownPrey←codex / OVE-82 on tip a6f4a21c3).
+// (after OVE-81 scout DUTY dawn offers / OVE-83 on tip 84b54f4be).
 // Prints per-track movement + DUTY_ad vs DUTY_picked + duty_top_score picks,
 // practice deltas (endSnap.practice − firstSnap.practice) for focus cells,
-// and a before/after stub vs OVE-77 after-hunt-pick evidence when present.
+// and a before/after stub vs OVE-82 after-codex-prey evidence when present.
 // Usage: node scripts/analyze-phase6-role-census-20261108b.js [--evid DIR] [--before DIR]
 'use strict';
 const fs = require('fs');
@@ -11,10 +11,10 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const EVID = process.argv.includes('--evid')
   ? path.resolve(process.argv[process.argv.indexOf('--evid') + 1])
-  : path.join(ROOT, 'evidence', '2026-11-08', 'phase6-role-census-after-codex-prey');
+  : path.join(ROOT, 'evidence', '2026-11-08', 'phase6-role-census-after-scout');
 const BEFORE_EVID = process.argv.includes('--before')
   ? path.resolve(process.argv[process.argv.indexOf('--before') + 1])
-  : path.join(ROOT, 'evidence', '2026-11-08', 'phase6-role-census-after-hunt-pick');
+  : path.join(ROOT, 'evidence', '2026-11-08', 'phase6-role-census-after-codex-prey');
 const FOCUS_PRACTICE = ['hunt', 'patrol', 'teach', 'scout'];
 const TASKS = ['hunt', 'forage', 'garden', 'fish', 'wood', 'stone', 'deadfall', 'water', 'scout', 'patrol', 'cook', 'tend', 'teach', 'mend'];
 const SPECS = ['butcher', 'cook', 'preserver', 'spotter', 'builder'];
@@ -406,7 +406,7 @@ for (const [policy, seedsRaw] of Object.entries(byPolicy)) {
   };
 }
 
-// Optional before/after vs OVE-77 after-hunt-pick panel analysis.json
+// Optional before/after vs OVE-82 after-codex-prey panel analysis.json
 try {
   const beforePath = path.join(BEFORE_EVID, 'analysis.json');
   if (fs.existsSync(beforePath)) {
@@ -475,8 +475,8 @@ for (const [policy, a] of Object.entries(analysis.policies)) {
   console.log(`behavior: strong ${a.p60.strongN}/${a.p60.qualN} hybrid ${a.p60.hybridN} matchedTop ${a.p60.matchedTopN} meanTopShare ${a.p60.meanTopShare == null ? 'n/a' : a.p60.meanTopShare.toFixed(2)}`);
   if (analysis.beforeCompare && analysis.beforeCompare.policies[policy]) {
     const c = analysis.beforeCompare.policies[policy];
-    console.log('BEFORE(OVE-77) DUTY_ad→picked:', c.before.DUTY_ad, '→', c.before.DUTY_picked,
-      '| AFTER(codex-prey) DUTY_ad→picked:', c.after.DUTY_ad, '→', c.after.DUTY_picked,
+    console.log('BEFORE(OVE-82) DUTY_ad→picked:', c.before.DUTY_ad, '→', c.before.DUTY_picked,
+      '| AFTER(scout) DUTY_ad→picked:', c.after.DUTY_ad, '→', c.after.DUTY_picked,
       '(duty_top_score', c.after.dutyTopScorePicks + ')');
     console.log('BEFORE focusPractice:', JSON.stringify(c.before.focusPractice));
     console.log('AFTER focusPractice:', JSON.stringify(c.after.focusPractice));
