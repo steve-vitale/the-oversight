@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 // Analyzer for probe-phase6-role-census-20261108b.js outputs
-// (after combat/social DUTY offers / OVE-73).
+// (after DUTY objective practice / OVE-75 on tip OVE-74).
 // Prints per-track movement + DUTY_ad vs DUTY_picked + duty_top_score picks,
-// and a before/after stub vs OVE-72 after-duty-pick evidence when present.
+// practice deltas (endSnap.practice − firstSnap.practice) for focus cells,
+// and a before/after stub vs OVE-73 after-combat-social evidence when present.
 // Usage: node scripts/analyze-phase6-role-census-20261108b.js [--evid DIR]
 'use strict';
 const fs = require('fs');
@@ -10,8 +11,11 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const EVID = process.argv.includes('--evid')
   ? path.resolve(process.argv[process.argv.indexOf('--evid') + 1])
+  : path.join(ROOT, 'evidence', '2026-11-08', 'phase6-role-census-after-duty-practice');
+const BEFORE_EVID = process.argv.includes('--before')
+  ? path.resolve(process.argv[process.argv.indexOf('--before') + 1])
   : path.join(ROOT, 'evidence', '2026-11-08', 'phase6-role-census-after-combat-social');
-const BEFORE_EVID = path.join(ROOT, 'evidence', '2026-11-08', 'phase6-role-census-after-duty-pick');
+const FOCUS_PRACTICE = ['hunt', 'patrol', 'teach', 'scout'];
 const TASKS = ['hunt', 'forage', 'garden', 'fish', 'wood', 'stone', 'deadfall', 'water', 'scout', 'patrol', 'cook', 'tend', 'teach', 'mend'];
 const SPECS = ['butcher', 'cook', 'preserver', 'spotter', 'builder'];
 const TRACKS = ['combat', 'field', 'social', 'craft', 'strange'];
@@ -154,6 +158,8 @@ function analyzeSeed(d) {
     const compCellsByTask = {};
     const compCellsByTrack = {};
     for (const t of TRACKS) compCellsByTrack[t] = 0;
+    const practiceDeltaByTask = {};
+    const practiceEndByTask = {};
     if (f && l) {
       for (const t of TASKS) {
         const sBase = (f.competence || {})[t] == null ? null : (f.competence[t] / tempMult(f, t));
@@ -164,6 +170,12 @@ function analyzeSeed(d) {
         if (dd < 0) compDecreases++;
         compCellsByTask[t] = Math.max(0, dd);
         compCellsByTrack[TASK_TRACK[t]] += Math.max(0, dd);
+      }
+      for (const t of TASKS) {
+        const sPr = ((f.practice || {})[t]) || 0;
+        const ePr = ((l.practice || {})[t]) || 0;
+        practiceDeltaByTask[t] = Math.max(0, ePr - sPr);
+        practiceEndByTask[t] = ePr;
       }
     }
     let specUp = 0, specZeroToPos = 0;
@@ -200,6 +212,7 @@ function analyzeSeed(d) {
       stickiness: stickN ? stick / stickN : null, stickN,
       topFirstHalf: top1, topSecondHalf: top2, switchedHalf: top1 && top2 && top1 !== top2,
       compChanged, compDecreases, compCellsByTask, compCellsByTrack,
+      practiceDeltaByTask, practiceEndByTask,
       specUp, specZeroToPos, specZeroToPosByTrack,
       trackXp, trackLevels, totalXp, topTrack, dominantTrack, dominantTask,
       gainedSkills, gainedAbilities: gainedAb,
@@ -271,6 +284,26 @@ function pooled(rows) {
   for (const t of TASKS) cellsByTask[t] = sum(r => (r.compCellsByTask || {})[t]);
   const practiceMovedByTrack = {};
   for (const t of TRACKS) practiceMovedByTrack[t] = movedByTrack[t];
+  const practiceRepsByTask = {};
+  const practiceVillagersByTask = {};
+  const practiceMaxByTask = {};
+  const practiceGe8ByTask = {};
+  for (const t of TASKS) {
+    practiceRepsByTask[t] = sum(r => (r.practiceDeltaByTask || {})[t] || 0);
+    practiceVillagersByTask[t] = cnt(r => ((r.practiceDeltaByTask || {})[t] || 0) > 0);
+    practiceMaxByTask[t] = rows.reduce((m, r) => Math.max(m, (r.practiceEndByTask || {})[t] || 0), 0);
+    practiceGe8ByTask[t] = cnt(r => ((r.practiceEndByTask || {})[t] || 0) >= 8);
+  }
+  const focusPractice = {};
+  for (const t of FOCUS_PRACTICE) {
+    focusPractice[t] = {
+      reps: practiceRepsByTask[t] || 0,
+      villagers: practiceVillagersByTask[t] || 0,
+      maxEnd: practiceMaxByTask[t] || 0,
+      ge8FirstRung: practiceGe8ByTask[t] || 0,
+      competenceRungSteps: cellsByTask[t] || 0,
+    };
+  }
   const domTracks = {};
   for (const r of rows) if (r.dominantTrack) domTracks[r.dominantTrack] = (domTracks[r.dominantTrack] || 0) + 1;
   const trackTable = {};
@@ -289,6 +322,7 @@ function pooled(rows) {
     compChangedCells: sum(r => r.compChanged),
     compDecreases: sum(r => r.compDecreases),
     cellsByTrack, cellsByTask, movedByTrack, practiceMovedByTrack,
+    practiceRepsByTask, practiceVillagersByTask, practiceMaxByTask, practiceGe8ByTask, focusPractice,
     specUp: sum(r => r.specUp),
     specZeroToPos: sum(r => r.specZeroToPos),
     specZ2PByTrack, levelsByTrack,
@@ -372,7 +406,7 @@ for (const [policy, seedsRaw] of Object.entries(byPolicy)) {
   };
 }
 
-// Optional before/after vs OVE-72 after-duty-pick panel analysis.json
+// Optional before/after vs OVE-73 after-combat-social panel analysis.json
 try {
   const beforePath = path.join(BEFORE_EVID, 'analysis.json');
   if (fs.existsSync(beforePath)) {
@@ -386,12 +420,14 @@ try {
           tip: before.tip, DUTY_ad: b.duty.adEvents, DUTY_picked: b.duty.pickEvents,
           dutyTopScorePicks: b.duty.dutyTopScorePicks || 0,
           seedsWithPicks: b.duty.seedsWithPicks, cellsByTask: b.p60.cellsByTask,
+          focusPractice: (b.p60 && b.p60.focusPractice) || null,
           tracksWithSignal: b.tracksWithSignal, verdict: b.verdict,
         },
         after: {
           tip: analysis.tip, DUTY_ad: a.duty.adEvents, DUTY_picked: a.duty.pickEvents,
           dutyTopScorePicks: a.duty.dutyTopScorePicks, seedsWithPicks: a.duty.seedsWithPicks,
-          cellsByTask: a.p60.cellsByTask, tracksWithSignal: a.tracksWithSignal, verdict: a.verdict,
+          cellsByTask: a.p60.cellsByTask, focusPractice: a.p60.focusPractice,
+          tracksWithSignal: a.tracksWithSignal, verdict: a.verdict,
         },
       };
     }
@@ -427,14 +463,26 @@ for (const [policy, a] of Object.entries(analysis.policies)) {
     console.log(`| ${t} | ${r.competenceRungSteps} | ${r.villagersMovedComp} | ${r.trackLevelGe1} | ${r.specialist0toPos} | ${r.dominantTrack} | ${r.signal} |`);
   }
   console.log('competence cells moved total:', a.p60.compChangedCells, '| by task:', JSON.stringify(a.p60.cellsByTask));
+  console.log('focus practice (reps/villagers/maxEnd/ge8/compRungs):', JSON.stringify(a.p60.focusPractice));
+  console.log('practice reps by task:', JSON.stringify(a.p60.practiceRepsByTask));
   console.log('specialist 0→+:', a.p60.specZeroToPos, '| skills+:', a.p60.gainedSkillsTotal, '| ab+:', a.p60.gainedAbilitiesTotal);
   console.log('dominant tracks:', JSON.stringify(a.p60.domTracks), '| distinct:', a.p60.distinctDomTracks);
   console.log(`behavior: strong ${a.p60.strongN}/${a.p60.qualN} hybrid ${a.p60.hybridN} matchedTop ${a.p60.matchedTopN} meanTopShare ${a.p60.meanTopShare == null ? 'n/a' : a.p60.meanTopShare.toFixed(2)}`);
   if (analysis.beforeCompare && analysis.beforeCompare.policies[policy]) {
     const c = analysis.beforeCompare.policies[policy];
-    console.log('BEFORE(OVE-72) DUTY_ad→picked:', c.before.DUTY_ad, '→', c.before.DUTY_picked,
-      '| AFTER(combat-social) DUTY_ad→picked:', c.after.DUTY_ad, '→', c.after.DUTY_picked,
+    console.log('BEFORE(OVE-73) DUTY_ad→picked:', c.before.DUTY_ad, '→', c.before.DUTY_picked,
+      '| AFTER(duty-practice) DUTY_ad→picked:', c.after.DUTY_ad, '→', c.after.DUTY_picked,
       '(duty_top_score', c.after.dutyTopScorePicks + ')');
+    console.log('BEFORE focusPractice:', JSON.stringify(c.before.focusPractice));
+    console.log('AFTER focusPractice:', JSON.stringify(c.after.focusPractice));
+    const focusComp = {};
+    for (const t of FOCUS_PRACTICE) {
+      focusComp[t] = {
+        beforeComp: (c.before.cellsByTask || {})[t] || 0,
+        afterComp: (c.after.cellsByTask || {})[t] || 0,
+      };
+    }
+    console.log('focus competence cells before→after:', JSON.stringify(focusComp));
   }
 }
 console.log('\nwrote', path.join(EVID, 'analysis.json'));
