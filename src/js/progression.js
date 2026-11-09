@@ -390,12 +390,31 @@
           // spent only by real combat use of the buff — a feast that warms no
           // blades costs no devotion.
           s.prog.feastSurge = 1.5 * mult;
+          // FEAST-TOOLTIP-ONCE (journey-endgame r162): the arming beat
+          // explains the FEASTED buff in a parenthetical — the same
+          // ~200-char tooltip on every arming reads as a filler loop
+          // (237 repeats on one pilot seed). Mark it said PER ITEM here:
+          // armSurge is called only by the two arming branches, so the
+          // practice branch never consumes the one explanation — and a
+          // NEW keepsake's first arming still states the honest buff
+          // terms (test-main67-beat-identity A-1 requires FEASTED on
+          // every item's devotion line). Only repeat armings of the
+          // SAME item drop the tooltip.
+          pg.feastTooltipSaidByItem = pg.feastTooltipSaidByItem || {};
+          pg.feastTooltipSaidByItem[itemKey] = true;
           return why;
         };
         // WINDOW WORD (journey-endgame r6 2026-10-12): the arm message must
         // promise the true buff window (2 dawns since 2026-10-12), read from
         // the same data lever as the grant — never a stale "until dawn".
         const dawnWord = (typeof this.feastDawnWord === 'function') ? this.feastDawnWord() : 'dawn';
+        // FEAST-TOOLTIP-ONCE (journey-endgame r162, continued): the full
+        // explanation fires once per keepsake; repeat armings of the same
+        // item keep the short form. The multiplier is identical either
+        // way — only the repeated paragraph is trimmed. itemKey is the
+        // same per-item key chanDay uses above.
+        const itemKey = item.itemId || item.id;
+        const tip = (pg.feastTooltipSaidByItem && pg.feastTooltipSaidByItem[itemKey]) ? '' : ` (The next feast grants FEASTED until ${dawnWord}: strikes & abilities uplifted, devotion ×${(1.5 * mult).toFixed(1)} — richer feasts hit harder.)`;
         // ITEM IDENTITY (beat-identity 2026-10-19, finding 2026-10-13): the
         // surge-arming beat used to slot only the item NAME into a fixed line
         // — Contract Quill, Mixtape, Hard Candy, Grandma's Tin Cup all read
@@ -422,9 +441,9 @@
           : rawMem;
         const knowsClause = mem ? ` ${mem}` : '';
         if (maxed >= 3) {
-          msg = armSurge(`You hold ${name}.${knowsClause} The feast was the weapon — and they are with you. (The next feast grants FEASTED until ${dawnWord}: strikes & abilities uplifted, devotion ×${(1.5 * mult).toFixed(1)} — richer feasts hit harder.)`);
+          msg = armSurge(`You hold ${name}.${knowsClause} The feast was the weapon — and they are with you.${tip}`);
         } else if (resonance >= RESONANCE_NEED) {
-          msg = armSurge(`You hold ${name}.${knowsClause} Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon. (The next feast grants FEASTED until ${dawnWord}: strikes & abilities uplifted, devotion ×${(1.5 * mult).toFixed(1)} — richer feasts hit harder.)`);
+          msg = armSurge(`You hold ${name}.${knowsClause} Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon.${tip}`);
         } else if (unmaxed.length) {
           // FOCUSED PRACTICE: the closest-to-complete gift gets the session.
           const needFor = (a) => ((a.level || 1) === 1 ? 10 : 25) - (a.xp || 0);
