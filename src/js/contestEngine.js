@@ -18,12 +18,14 @@
 //   - cheer: watcher's cheer is a real performance modifier (braveryBonus in blood incl. duelFight, case lift in moot); the cheer input is capped at 0.15 as before (alien winMod applies after, as its own meddling). (code: contestResolveGroup, Steve 2026-10-08; break-it 2026-10-08)
 //   - garden_feast_lean: Living Garden CONTEST scale — cookfight/guest making scores add gardenFeastLeanFor for an ascended holder (player or NPC); alien cheer still does not reach weird scores (code: _cxOther, godverbs.js gardenFeastLeanFor; OVE-99)
 //   - voice_performance_lean: Voice of the Relay CONTEST scale — impress making scores and moot case scores add voicePerformanceLeanFor for an ascended holder (player or NPC); feast contests stay Garden-only (code: _cxOther, _cxMoot, godverbs.js voicePerformanceLeanFor; OVE-104)
+//   - unkillable_endurance_lean: Unkillable CONTEST scale — endurance arms honor unkillableEnduranceLeanFor for an ascended holder (player or NPC): starve HP/days, drop/exchange survival-for-time, maw/vigil nerve; feast/performance stay Garden/Voice (code: _cxEndurance, godverbs.js unkillableEnduranceLeanFor; OVE-108)
 // consumes:
 //   - fieldFight (fieldFights.js), monsterWavePool, unlockedWave
 //   - Game.agencyOf, Game.npcTemper, village health, scholar trust
 //   - hurtVillager, displayName
 //   - Game.gardenFeastLeanFor (godverbs.js) for feast contest score lean
 //   - Game.voicePerformanceLeanFor (godverbs.js) for performance contest score lean
+//   - Game.unkillableEnduranceLeanFor (godverbs.js) for endurance contest lean
 /* CONTEST ENGINE — src/js/contestEngine.js
  *
  * Steve (2026-10-08): "No, contests are to be played, not as RNG."
@@ -469,10 +471,21 @@
       const results = {};
       const stats = {};
       for (const pid of pids) stats[pid] = this._cxStats(pid);
+      // Unkillable CONTEST scale (OVE-108): endurance contests lean for an
+      // ascended Unkillable holder — applied to the real ordeal arms, not a
+      // blind score add. Feast/performance contests stay Garden/Voice.
+      const enduranceLean = (pid) => {
+        try {
+          if (typeof this.unkillableEnduranceLeanFor === 'function')
+            return this.unkillableEnduranceLeanFor(pid, contest) || 0;
+        } catch (e) { console.warn('[contest] unkillable endurance lean', e); }
+        return 0;
+      };
       if (id === 'starve') {
         // 3 days × 15 health. Most days survived wins; ties → bravery.
+        // Lean is an HP buffer for the day count (not a free heal).
         const days = {};
-        for (const pid of pids) days[pid] = Math.max(0, Math.floor((stats[pid].hp - 20) / 15));
+        for (const pid of pids) days[pid] = Math.max(0, Math.floor((stats[pid].hp + enduranceLean(pid) - 20) / 15));
         const best = Math.max(...pids.map(pid => days[pid]));
         let winners = pids.filter(pid => days[pid] === best);
         if (winners.length > 1) {
@@ -493,13 +506,14 @@
       if (id === 'drop') {
         // 3 legs. speed = 1 + survival/25. 10 hp/leg.
         // Collapse below 20 → lost. Fastest finisher wins.
+        // Lean adds to survival for the time calc (not to HP / collapse).
         const legs = 3;
         const time = {};
         for (const pid of pids) {
           const st = stats[pid];
           const cost = legs * 10;
           if (st.hp - cost < 20) { time[pid] = Infinity; continue; }
-          time[pid] = legs / (1 + st.survival / 25);
+          time[pid] = legs / (1 + (st.survival + enduranceLean(pid)) / 25);
           try { this.hurtVillager(pid, cost, 'contest'); } catch (e) {}
         }
         const fin = pids.filter(pid => time[pid] !== Infinity);
@@ -510,10 +524,10 @@
       }
       if (id === 'maw') {
         // 5 stages. nerve (bravery) vs demand 8+i*4. Holding costs half.
-        // 3 pauses → it takes them.
+        // 3 pauses → it takes them. Lean pads starting nerve.
         for (const pid of pids) {
           const st = stats[pid];
-          let nerve = st.bravery, pauses = 0;
+          let nerve = st.bravery + enduranceLean(pid), pauses = 0;
           const log = [];
           for (let i = 0; i < 5; i++) {
             const demand = 8 + i * 4;
@@ -527,9 +541,10 @@
       }
       if (id === 'vigil') {
         // 4 watches. fear 10+i*8 vs bravery (wears 5/watch).
+        // Lean pads starting nerve.
         for (const pid of pids) {
           const st = stats[pid];
-          let nerve = st.bravery;
+          let nerve = st.bravery + enduranceLean(pid);
           const log = [];
           let out = null;
           for (let i = 0; i < 4; i++) {
@@ -545,13 +560,14 @@
       if (id === 'exchange') {
         // Team relay vs a rival village: 3 legs, most leg-wins takes it.
         // Rivals are generated with wave-scaled stats.
+        // Lean adds to survival for leg time (same fiction as The Drop).
         const wave = this.unlockedWave ? this.unlockedWave() : 1;
         const rivals = [0, 1, 2].map(i => ({ hp: 90 + wave * 5, bravery: 15 + wave * 5, survival: 15 + wave * 5, nota: 1, name: 'rival ' + (i + 1) }));
         let ours = 0, theirs = 0;
         const log = [];
         pids.slice(0, 3).forEach((pid, i) => {
           const st = stats[pid], rv = rivals[i] || rivals[0];
-          const ourT = 1 / (1 + st.survival / 25), theirT = 1 / (1 + rv.survival / 25);
+          const ourT = 1 / (1 + (st.survival + enduranceLean(pid)) / 25), theirT = 1 / (1 + rv.survival / 25);
           if (ourT <= theirT) { ours++; log.push(`${st.name} takes leg ${i + 1}.`); }
           else { theirs++; log.push(`${st.name} loses leg ${i + 1} to ${rv.name}.`); }
           try { this.hurtVillager(pid, 10, 'contest'); } catch (e) {}
