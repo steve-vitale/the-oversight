@@ -143,6 +143,15 @@ function install(G) {
   G.tele = function (type, data) {
     try {
       events[type] = (events[type] || 0) + 1;
+      // Additive typed-deed bag (OVE-175): channel int stays for back-compat;
+      // future censuses attribute mint rates via events.godpath_deed_by_id.
+      // Authored relay_office does not emit this tele (switchboard / deedAlt).
+      if (type === 'godpath_deed') {
+        const id = data && typeof data.event === 'string' ? data.event : null;
+        const bag = events.godpath_deed_by_id || (events.godpath_deed_by_id = Object.create(null));
+        if (id) bag[id] = (bag[id] || 0) + 1;
+        else events.godpath_deed_missing_event = (events.godpath_deed_missing_event || 0) + 1;
+      }
       if (type === 'death' && data?.player) { bearerIds.add(this.villagerId); if (this.villagerId === initial && firstDeath == null) firstDeath = this.state.scholar.day; }
       if (type === 'ability_used' && data?.ok) accepted++;
       if (type === 'class_recognized') rememberClass(data?.who === 'player' ? 'player' : 'npc', data, data?.who);
