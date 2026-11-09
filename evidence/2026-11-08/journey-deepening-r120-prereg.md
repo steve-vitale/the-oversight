@@ -223,5 +223,32 @@ runs).
   to normal after answering; teach suppressed only while the confession
   hangs).
 
+## Amendment 1 (pre-extension, 2026-11-08 ~01:25Z — before any extension seed runs)
+
+The 4-seed before-panel (96801–96804, all survived, ladder firstStageDay
+14 on every seed) produced ZERO secret openers: 55 transcripts, 54 with
+trust >= 40, 0 lines starting `"Can I tell you something?`. The
+instrument is verified working (secretSittings [] recorded on every
+seed; the detector is proven on synthetic + Exaucee-shaped inputs; a
+grep of the raw transcripts confirms the line never appears — this is
+not a detector miss). The r119 conditional rate was 3 openers / 41
+trust>=40 sittings (~7%); 0/54 at that rate is a ~1.7% event. The
+opener distribution suggests a mechanism, not just luck: ~26/55 r120
+openers are pending bond/link requests (the #1 hook, which pre-empts
+the secret hook), against ~15/45 in r119 — the merged
+villager-initiated-bonds traffic may be starving the hook further.
+The panel therefore EXPANDS to 8 seeds (96805–96808, fresh by the same
+full check) BEFORE any verdict is drawn: the extension distinguishes
+bad luck from a rate collapse. New verdict, binding for the extended
+panel: **SECRET-SILENT** if 0 openers across all 8 seeds (~110
+sittings) = the beat is effectively dead in the wild on this base; the
+fix is still justified (source-proven missing branch + r119's wild
+Exaucee transcript) but its after-panel proof becomes deterministic
+(a forced-secret harness check) plus a wild re-run for regressions.
+If the extension yields >= 1 opener, the prereg's original verdicts
+apply unchanged on the 8-seed panel, and the after-panel re-runs the
+same 8 seeds. No other change: same policy, same DAYCAP, same
+instruments; the extension seeds are fresh, never run before.
+
 ## Metric review (filled at closeout, never mid-run)
 - (to be filled)
