@@ -8,11 +8,32 @@ HEAD` in the worktree; tree clean). Policy: competent ONLY
 (scripts/policies/competent.js, UNMODIFIED). Env (explicit, = shipped
 defaults): PLENTYDEPRI=1, DEPOSITGATE=1. Horizon: 150d death-aware cap
 (dead villages stop; runDays endReason recorded per seed; no fixed-200d
-run). Seeds: 95205–95208 (8 seeds — see Seed-band note: NOT the
-coordinator-assigned band). Zero src/js changes in this arm — DIAG /
-measurement only. The seeder and recorder live in scripts/
-(sweep-medchannel-seed-a.js, analyze-medchannel-seed-a.js) and are
-driver-side instrumentation, removable without affecting the game.
+run). Seeds: 95205–95212 (8 seeds — see Seed-band note and the
+CORRECTION below: the prereg as first committed listed 95205–95208,
+which is FOUR seeds, while saying "8 seeds" throughout). Zero src/js
+changes in this arm — DIAG / measurement only. The seeder and recorder
+live in scripts/ (sweep-medchannel-seed-a.js,
+analyze-medchannel-seed-a.js) and are driver-side instrumentation,
+removable without affecting the game.
+
+## CORRECTION 2026-11-09 (seed-count miscount — recorded BEFORE the judged 8-seed run)
+
+The prereg as first committed (785bda555) said "8 seeds" everywhere but
+listed the band 95205–95208 — FOUR seeds. The sweep, analyzer, and proof
+test were built on that 4-seed list, and the 4-seed before + seeded legs
+were RUN before the miscount was caught (at the panel step: the panel
+reported 4 cases). Those 4-seed numbers are DEMOTED to pilot
+(unregistered — the prereg named 8 seeds): before leg medicine 0,
+ability 57, median survival 85d; seeded leg medicine 0, ability 57,
+identical trajectories, doses 20/20 untouched. The pilot numbers are
+recorded in the evidence file; the corpus files are OVERWRITTEN by the
+judged 8-seed sweep (which re-runs all 8 seeds fresh — deterministic,
+so the 4 pilot seeds reproduce identically). The BINDING verdict comes
+from the 8-seed run only. G1's threshold is UNCHANGED (≥5 medicine
+cures across the 8-seed seeded leg). Extension seeds 95209–95212 were
+freshness-checked 2026-11-09 (zero corpus filenames, zero evidence-.md
+mentions, zero scripts mentions — same scope as the original check).
+Band for the judged run: 95205–95212.
 
 ## Canon
 
@@ -230,15 +251,17 @@ what does it add beyond the ability channel?
   bands re-checked: 97501–97508, 97701/97704/97707/97708,
   98101–98108, 98501–98508, 99001–99008, 99201–99208 — all avoided
   (not re-verified file-by-file here; they were never candidates).
-- CHOSEN 95205–95208: zero corpus filenames
-  (`find evidence -name '*9520[5-8]*'` → none), zero evidence-.md
-  mentions (full-tree `grep --include='*.md' -E '9520[5-8]'` →
+- CHOSEN 95205–95212 (as corrected — originally 95205–95208, four seeds;
+  extended per the CORRECTION above): zero corpus filenames
+  (`find evidence -name '*9520[5-9]*'`, `'*9521[0-2]*'` → none), zero
+  evidence-.md mentions (full-tree `grep --include='*.md' -E '9520[5-9]|9521[0-2]'` →
   none), zero scripts mentions, zero dated-prereg mentions. Scope:
   all of evidence/ (10G tree, .md content + filenames), scripts/,
   goal hidden_files/ (transcript-JSON seq-number substring hits only
   — no band naming; a band is named by a prereg/script/corpus
   assignment, not by a transcript line number). Checked 2026-11-09
-  12:41–13:00 CST, before any judged computation.
+  12:41–13:00 CST (95205–95208) and 2026-11-09 ~13:20 CST (95209–95212),
+  before any judged computation on the extended band.
 - If a later search finds 95205–95208 named earlier, this run gets a
   correction commit naming the missed source (per
   local_seed_band_freshness).
