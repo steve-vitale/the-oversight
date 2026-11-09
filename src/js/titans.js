@@ -4,7 +4,7 @@
 // provides:
 //   - isTitan(mid) / titanDef(mid) / titanCast()
 //   - titanDawnTick() -> omen staging, escalation, muster upkeep, turn tick (called guarded from game.js dawn)
-//   - titanWarCouncil(titanId) -> played beat: faces, intel, System ODDS (entertainment, not truth)
+//   - titanWarCouncil(titanId) -> played beat: faces, intel, System ODDS (entertainment, not truth); All-Seeing ARMY map lean when Game.allSeeingCouncilLeanFor > 0
 //   - soundTitanCall(titanId) -> the call to arms; allies answer aloud
 //   - titanCommitOwn(titanId) -> the player commits HAVEN ITSELF: up to 3 named
 //     villagers march with the muster (two-tap confirm). They leave the
@@ -40,6 +40,7 @@
 //   - knowledge_gates_titans: omen stages 0 (something) -> 1 (named) -> 2 (located). No name before exposure. (code: titans.js)
 //   - garden_army_muster_feed: Living Garden ARMY scale — titanMusterUpkeep honors Game.gardenMusterFeedFor before/alongside playerPackSpend when an ascended Garden holder has harvestDay active; covered kcal skip pack debit and hunger trust bleed (code: titanMusterUpkeep, godverbs.js gardenMusterFeedFor; OVE-116)
 //   - market_army_outfit_lean: Market God ARMY scale — titanOutfit honors Game.marketOutfitLeanFor so the same transferred pieces yield higher force wbonus/varmor/gearValue when an ascended Market holder is active (code: titanOutfit, godverbs.js marketOutfitLeanFor; OVE-120)
+//   - all_seeing_army_council_lean: All-Seeing ARMY scale — titanWarCouncil honors Game.allSeeingCouncilLeanFor so readiness honesty, scout-intel clarity, and counter-hint reveal lean when an ascended All-Seeing holder is active (code: titanWarCouncil, godverbs.js allSeeingCouncilLeanFor; OVE-128)
 
 (function () {
   // ATTACH PATTERN (crisis 2026-10-11): game.js only sets
@@ -555,13 +556,20 @@
     var def = titanDefs()[titanId];
     if (!def) return null;
     var o = titanOmen(titanId);
+    // All-Seeing ARMY (OVE-128): call allSeeingCouncilLeanFor through Game so
+    // proofs can strip the helper — readiness honesty, scout-intel clarity,
+    // and counter-hint reveal while the counter is still unknown.
+    var lean = 0;
+    try { lean = Game.allSeeingCouncilLeanFor ? Game.allSeeingCouncilLeanFor() : 0; } catch (e) { lean = 0; }
+    if (!(lean > 0)) lean = 0;
     Game.say('⚔️ WAR COUNCIL — ' + def.title + '. The leaders sit as faces, not pieces.');
     // SUM-READINESS LINE (2026-11-02, sim-sumdeploy-a): the council
     // is the decision point — the one explicit moment the projection
     // is computed (lazy rule above). A failed projection says
     // nothing rather than breaking the council.
+    var readiness = null;
     try {
-      var readiness = titanCallReadiness(titanId);
+      readiness = titanCallReadiness(titanId);
       if (readiness && readiness.total != null) {
         var rLine = '📯 The call, sounded now, would bring ' + readiness.total + ' blades — ' +
           readiness.alliesProj + ' from allied fires and ' + readiness.havenProj +
@@ -583,12 +591,29 @@
           }
         }
         Game.say(rLine);
+        // Map lean: readiness numbers stay faithful; the map names the gap
+        // between naive answers and true blades (refusal honesty).
+        if (lean > 0) {
+          var gap = Math.max(0, (readiness.naiveTotal || 0) - (readiness.alliesProj || 0));
+          Game.say('🗺️ Your map names who answers and who will not — ' +
+            readiness.alliesProj + ' blades true' +
+            (gap > 0 ? ', ' + gap + ' lost to refusals on the plan' : ', every counted fire true') +
+            ' (naive ' + readiness.naiveTotal + ').');
+        }
       }
     } catch (e) {}
     var links = titanAlliedLinks();
     if (!links.length) {
       Game.say('No one sits with you. You have no coalition. The council is one chair.');
-      return { allies: 0 };
+      return {
+        allies: 0,
+        lean: lean,
+        counterKnown: false,
+        counterRevealed: false,
+        intelClarity: lean > 0,
+        readinessGap: readiness ? Math.max(0, (readiness.naiveTotal || 0) - (readiness.alliesProj || 0)) : 0,
+        readiness: readiness,
+      };
     }
     links.forEach(function (link) {
       var vid = titanLinkOther(link);
@@ -598,20 +623,47 @@
       var speaker = (link.theirSpeaker && link.theirSpeaker.name) || 'their speaker';
       var t = titanTemptation(vid);
       var loyalty = t.loyalty >= 70 ? 'steadfast' : t.loyalty >= 40 ? 'watchful' : 'hungry';
-      Game.say('— ' + speaker + ' of ' + nm + ' (trust ' + (link.trust || 0) + ', ' + loyalty + '). Scouts: ' + (t.intel || 'they will fight.'));
+      var scoutLine = (t.intel || 'they will fight.');
+      // Map lean: scout intel clarity — loyalty/temptation sit on the plan.
+      if (lean > 0) {
+        scoutLine = 'map loyalty ' + t.loyalty + ' / temptation ' + t.temptation + ' — ' + scoutLine;
+      }
+      Game.say('— ' + speaker + ' of ' + nm + ' (trust ' + (link.trust || 0) + ', ' + loyalty + '). Scouts: ' + scoutLine);
     });
-    // scout intel: honest, knowledge-gated (counter hint only if known)
+    // scout intel: honest, knowledge-gated (counter hint only if known) —
+    // All-Seeing map lean reveals the authored counter_hint even while unknown.
     var hint = '';
+    var known = false;
+    var counterRevealed = false;
     try {
-      var known = Game.monsterCounterKnown ? Game.monsterCounterKnown(def.monster) : false;
-      hint = known && def.counter_hint ? ' The scouts know its weakness: ' + def.counter_hint : ' Its weakness is unknown — the scouts came back pale.';
+      known = !!(Game.monsterCounterKnown && Game.monsterCounterKnown(def.monster));
+      var reveal = known || lean > 0;
+      if (reveal && def.counter_hint) {
+        hint = known
+          ? ' The scouts know its weakness: ' + def.counter_hint
+          : ' Your map marks its weakness before the scouts learn it: ' + def.counter_hint;
+        counterRevealed = true;
+      } else {
+        hint = ' Its weakness is unknown — the scouts came back pale.';
+      }
     } catch (e) {}
     Game.say('Scouts report: ' + def.threat + hint);
+    if (lean > 0 && counterRevealed && !known) {
+      Game.say('🗺️ The coalition plans with your map — the weakness is on the table.');
+    }
     // System ODDS: entertainment, not truth. Deliberately miscalibrated.
     var oddsN = 8 + Math.floor(R() * 20);
     Game.sysSay('"ODDS ARE UP! ' + def.title + ' vs the Haven coalition — ' + oddsN + ' to 1! The gamblers are THRILLED! (Our models have never seen a titan. Neither have you. This is fine.)"');
     try { if (Game.recordMoment) Game.recordMoment('War council sat for ' + def.title + '.'); } catch (e) {}
-    return { allies: links.length };
+    return {
+      allies: links.length,
+      lean: lean,
+      counterKnown: !!known,
+      counterRevealed: !!counterRevealed,
+      intelClarity: lean > 0,
+      readinessGap: readiness ? Math.max(0, (readiness.naiveTotal || 0) - (readiness.alliesProj || 0)) : 0,
+      readiness: readiness,
+    };
   }
 
   // ---------- the call to arms ----------

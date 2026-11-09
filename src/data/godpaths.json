@@ -578,7 +578,7 @@
           "pendingHint": "Discovery made. Share its true identity with someone who did not know it."
         },
         "play": {
-          "_doc": "No Lies. Combat action Read Them Aloud: for the rest of the fight every foe's next move is said aloud each round, allies (not the holder: you are still fragile) slip telegraphed blows with allyDodge, and the holder's strikes on a foe that is winding up hit x strikeMult. Passive out of fights: a villager cannot tell the All-Seeing a lie (the cover never lands), every live lie in the village is known at dawn, and an ambush that relies on deception never springs. COST: -trustCostPerDay trust a day with anyone hiding a lie. CONTEST: strategy contests lean for the ascended holder by contestLean — puzzle (box, pattern, riddle, sorting, lockpick, wrongmap) and detective (whoate, informant, confession, witness, alibi, echo) scores in _cxOther, plus moot-cat Lie Detector (lies) case scores in _cxMoot because 'nobody bluffs you' / No Lies; cookfight/impress/moot/oath/quiet/price and endurance stay Garden/Voice/Unkillable.",
+          "_doc": "No Lies. Combat action Read Them Aloud: for the rest of the fight every foe's next move is said aloud each round, allies (not the holder: you are still fragile) slip telegraphed blows with allyDodge, and the holder's strikes on a foe that is winding up hit x strikeMult. Passive out of fights: a villager cannot tell the All-Seeing a lie (the cover never lands), every live lie in the village is known at dawn, and an ambush that relies on deception never springs. COST: -trustCostPerDay trust a day with anyone hiding a lie. CONTEST: strategy contests lean for the ascended holder by contestLean — puzzle (box, pattern, riddle, sorting, lockpick, wrongmap) and detective (whoate, informant, confession, witness, alibi, echo) scores in _cxOther, plus moot-cat Lie Detector (lies) case scores in _cxMoot because 'nobody bluffs you' / No Lies; cookfight/impress/moot/oath/quiet/price and endurance stay Garden/Voice/Unkillable. ARMY: when an ascended All-Seeing holder (player or Haven NPC) sits titanWarCouncil, allSeeingCouncilLeanFor applies councilMapLean so the coalition plans with your map — readiness honesty (naive vs true blades), scout-intel clarity (loyalty/temptation on the map), and counter-hint reveal even when monsterCounterKnown is still false. Does not retune No Lies kcal/trust or claim strategy contest lean as army LIVE.",
           "actions": [
             {
               "id": "no_lies",
@@ -610,7 +610,8 @@
             "echo",
             "lies"
           ],
-          "contestLean": 18
+          "contestLean": 18,
+          "councilMapLean": 1
         }
       }
     },
