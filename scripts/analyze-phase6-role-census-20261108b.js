@@ -1,20 +1,20 @@
 #!/usr/bin/env node
 // Analyzer for probe-phase6-role-census-20261108b.js outputs
-// (after DUTY objective practice / OVE-75 on tip OVE-74).
+// (after hunt DUTY dawn picks / OVE-77 on tip OVE-76).
 // Prints per-track movement + DUTY_ad vs DUTY_picked + duty_top_score picks,
 // practice deltas (endSnap.practice − firstSnap.practice) for focus cells,
-// and a before/after stub vs OVE-73 after-combat-social evidence when present.
-// Usage: node scripts/analyze-phase6-role-census-20261108b.js [--evid DIR]
+// and a before/after stub vs OVE-75 after-duty-practice evidence when present.
+// Usage: node scripts/analyze-phase6-role-census-20261108b.js [--evid DIR] [--before DIR]
 'use strict';
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const EVID = process.argv.includes('--evid')
   ? path.resolve(process.argv[process.argv.indexOf('--evid') + 1])
-  : path.join(ROOT, 'evidence', '2026-11-08', 'phase6-role-census-after-duty-practice');
+  : path.join(ROOT, 'evidence', '2026-11-08', 'phase6-role-census-after-hunt-pick');
 const BEFORE_EVID = process.argv.includes('--before')
   ? path.resolve(process.argv[process.argv.indexOf('--before') + 1])
-  : path.join(ROOT, 'evidence', '2026-11-08', 'phase6-role-census-after-combat-social');
+  : path.join(ROOT, 'evidence', '2026-11-08', 'phase6-role-census-after-duty-practice');
 const FOCUS_PRACTICE = ['hunt', 'patrol', 'teach', 'scout'];
 const TASKS = ['hunt', 'forage', 'garden', 'fish', 'wood', 'stone', 'deadfall', 'water', 'scout', 'patrol', 'cook', 'tend', 'teach', 'mend'];
 const SPECS = ['butcher', 'cook', 'preserver', 'spotter', 'builder'];
@@ -406,7 +406,7 @@ for (const [policy, seedsRaw] of Object.entries(byPolicy)) {
   };
 }
 
-// Optional before/after vs OVE-73 after-combat-social panel analysis.json
+// Optional before/after vs OVE-75 after-duty-practice panel analysis.json
 try {
   const beforePath = path.join(BEFORE_EVID, 'analysis.json');
   if (fs.existsSync(beforePath)) {
@@ -420,13 +420,18 @@ try {
           tip: before.tip, DUTY_ad: b.duty.adEvents, DUTY_picked: b.duty.pickEvents,
           dutyTopScorePicks: b.duty.dutyTopScorePicks || 0,
           seedsWithPicks: b.duty.seedsWithPicks, cellsByTask: b.p60.cellsByTask,
+          pickByTask: (b.duty && b.duty.pickByTask) || {},
+          adByTask: (b.duty && b.duty.adByTask) || {},
           focusPractice: (b.p60 && b.p60.focusPractice) || null,
           tracksWithSignal: b.tracksWithSignal, verdict: b.verdict,
         },
         after: {
           tip: analysis.tip, DUTY_ad: a.duty.adEvents, DUTY_picked: a.duty.pickEvents,
           dutyTopScorePicks: a.duty.dutyTopScorePicks, seedsWithPicks: a.duty.seedsWithPicks,
-          cellsByTask: a.p60.cellsByTask, focusPractice: a.p60.focusPractice,
+          cellsByTask: a.p60.cellsByTask,
+          pickByTask: a.duty.pickByTask || {},
+          adByTask: a.duty.adByTask || {},
+          focusPractice: a.p60.focusPractice,
           tracksWithSignal: a.tracksWithSignal, verdict: a.verdict,
         },
       };
@@ -470,18 +475,26 @@ for (const [policy, a] of Object.entries(analysis.policies)) {
   console.log(`behavior: strong ${a.p60.strongN}/${a.p60.qualN} hybrid ${a.p60.hybridN} matchedTop ${a.p60.matchedTopN} meanTopShare ${a.p60.meanTopShare == null ? 'n/a' : a.p60.meanTopShare.toFixed(2)}`);
   if (analysis.beforeCompare && analysis.beforeCompare.policies[policy]) {
     const c = analysis.beforeCompare.policies[policy];
-    console.log('BEFORE(OVE-73) DUTY_ad→picked:', c.before.DUTY_ad, '→', c.before.DUTY_picked,
-      '| AFTER(duty-practice) DUTY_ad→picked:', c.after.DUTY_ad, '→', c.after.DUTY_picked,
+    console.log('BEFORE(OVE-75) DUTY_ad→picked:', c.before.DUTY_ad, '→', c.before.DUTY_picked,
+      '| AFTER(hunt-pick) DUTY_ad→picked:', c.after.DUTY_ad, '→', c.after.DUTY_picked,
       '(duty_top_score', c.after.dutyTopScorePicks + ')');
     console.log('BEFORE focusPractice:', JSON.stringify(c.before.focusPractice));
     console.log('AFTER focusPractice:', JSON.stringify(c.after.focusPractice));
+    const focusPick = {};
     const focusComp = {};
     for (const t of FOCUS_PRACTICE) {
+      focusPick[t] = {
+        beforeAd: (c.before.adByTask || {})[t] || 0,
+        afterAd: (c.after.adByTask || {})[t] || 0,
+        beforePick: (c.before.pickByTask || {})[t] || 0,
+        afterPick: (c.after.pickByTask || {})[t] || 0,
+      };
       focusComp[t] = {
         beforeComp: (c.before.cellsByTask || {})[t] || 0,
         afterComp: (c.after.cellsByTask || {})[t] || 0,
       };
     }
+    console.log('focus DUTY ad/pick before→after:', JSON.stringify(focusPick));
     console.log('focus competence cells before→after:', JSON.stringify(focusComp));
   }
 }
