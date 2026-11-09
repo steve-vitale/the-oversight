@@ -2,8 +2,9 @@
 // test-journey-deepening-r120-instruments-20261108.js -- R120 instrument proof
 // (runs the REAL driver helpers + analyzer on synthetic inputs).
 // Driver helper isSecretOpener (pure, r120):
-//   (1) the confession line (every secret variant starts the same way)
-//       -> true;
+//   (1) the confession line (every secret variant carries the phrase;
+//       a voiceLine lead-in may precede it) -> true; (1b) lead-in
+//       confessions -> true;
 //   (2) any other opener line -> false;
 //   (3) null / non-string -> false (never a crash).
 // Analyzer summarizeSecret (synthetic seed JSONs):
@@ -64,8 +65,10 @@ function ladderSnap(day, stage, counted, cap, countedTracks, nextThreshold, peak
 }
 
 // (1) The confession line is a secret opener (all six secret variants
-// share the prefix — the line is built as '"Can I tell you something? '
-// + secret in conversation.js).
+// share the phrase — the line is built as '"Can I tell you something? '
+// + secret in conversation.js). CONTAINS, not starts-with: voiceLine
+// prepends a discourse lead-in before the confession (r120 proof-test
+// debug), so the phrase sits mid-line.
 {
   ok('SECRET-OPENER (1) literacy confession detected',
     D.isSecretOpener('"Can I tell you something? I can\'t read, and I\'m scared it matters now."') === true);
@@ -73,6 +76,10 @@ function ladderSnap(day, stage, counted, cap, countedTracks, nextThreshold, peak
     D.isSecretOpener('"Can I tell you something? I don\'t actually know how to swim and I\'m terrified someone will find out."') === true);
   ok('SECRET-OPENER (1) medicine confession detected',
     D.isSecretOpener('"Can I tell you something? I stole medicine from the stash once and never confessed."') === true);
+  ok('SECRET-OPENER (1b) lead-in confession detected ("I feel like — ")',
+    D.isSecretOpener('"I feel like — Can I tell you something? I can\'t read, and I\'m scared it matters now."') === true);
+  ok('SECRET-OPENER (1b) lead-in confession detected ("Mm. ")',
+    D.isSecretOpener('"Mm. Can I tell you something? I stole medicine from the stash once and never confessed."') === true);
 }
 // (2) Other opener lines are not secret openers.
 {

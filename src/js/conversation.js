@@ -4655,6 +4655,25 @@
         choices.push({ id: 'leave', label: '"I should go."', temper: 'neutral' });
         return finish( choices);
       }
+      // SECRET (journey-deepening r120 2026-11-08): a villager just told you
+      // a secret — a once-per-life high-trust confidence. The first thing you
+      // say should answer it: answers come first, pivots (teach/theorize)
+      // wait, like the reactiveQ narrowing above ("you don't teach burdock
+      // when someone asks if you saw something move"). Before this branch the
+      // confession fell through to the generic menu and the teach verb won
+      // the sitting (r119 Exaucee: five plant teachings, favor unestablished,
+      // confession never answered). The branch fires once per confession
+      // (c.secretAnswered); after answering, the menu returns to normal.
+      if (c.thread === 'secret' && !c.secretAnswered && !c.pendingQ && !c.reactiveQ && !c.genericQ && !c.choosingSubject) {
+        return finish([
+          { id: 'secret:promise', label: '"That stays between us."', temper: 'kind' },
+          { id: 'secret:comfort', label: '"Thank you for trusting me with that."', temper: 'kind' },
+          { id: 'secret:offer', label: '"Is there anything I can do?"', temper: 'kind' },
+          { id: 'secret:silence', label: '(say nothing — just sit with them)', temper: 'neutral' },
+          { id: 'secret:deflect', label: '(change the subject)', temper: 'cruel' },
+          { id: 'leave', label: '"I should go."', temper: 'neutral' },
+        ]);
+      }
       if (c.thread === 'nonverbal') {
         // (moved from the old :4384 IIFE replacement — now part of the
         // single pipeline)
@@ -5519,7 +5538,16 @@
       // TALK REQUESTS are exempt: "Can we talk? ..." is the reason they came
       // to you, not a question — matching it produced the garbled
       // "Sorry — I asked you something there. Can we talk?" follow-up.
-      const rq = (opThread === 'request' || wantOwnsQ) ? null : this.convoMatchReactive(opLine);
+      // SECRETS are exempt the same way (journey-deepening r120
+      // 2026-11-08): "Can I tell you something? ..." is the confession
+      // itself, not a question to match. No current secret text matches
+      // a reactive fragment (all six templates checked against all eight
+      // defs), but the classifier runs on the voiced line including
+      // voiceLine's lead-in, so the thread must not be overwritable by a
+      // substring match — a hijacked thread burns the once-per-life
+      // confession with the generic menu (r120 debug: trader seed did
+      // exactly this to the thread; the reactive path is the same class).
+      const rq = (opThread === 'request' || opThread === 'secret' || wantOwnsQ) ? null : this.convoMatchReactive(opLine);
       if (rq) {
         c.reactiveQ = { id: rq.id, followedUp: false };
         if (rq.thread) { c.thread = rq.thread; }
@@ -5695,9 +5723,17 @@
         // slides. Queuing it as a held intro would only defer the same
         // blocked sayLine to the goon turn, so a blocked seed is skipped
         // outright, not deferred.
+        // SECRET OWNS THE OPENING (journey-deepening r120 2026-11-08):
+        // a confession in the air is not a trade pitch — the seed used
+        // to overwrite c.thread = 'trade' after the secret opener had
+        // set it, burning the once-per-life confession with the generic
+        // menu (r120 debug: Aaron Gordon, trade undiscovered). The seed
+        // defers to traderIntroPending instead (the else below), like a
+        // talk request or a live want — it surfaces in a later sitting,
+        // not over a confidence.
         if (this.convoWouldBlock(vid, seed)) {
           /* skip: not mentioned, not queued */
-        } else if (!c.pendingQ && !c.reactiveQ && !c.genericQ && opThread !== 'request' && !inviteBeat &&
+        } else if (!c.pendingQ && !c.reactiveQ && !c.genericQ && opThread !== 'request' && opThread !== 'secret' && !inviteBeat &&
             !(opThread === 'want' && c.want && (c.want.stage || 0) < 3)) {
           c.thread = 'trade'; c.depth = 0;
           this.sayLine(vid, seed, { tag: 'offer', topic: 'trade' });
@@ -6147,6 +6183,57 @@
           rcons(ad.trust || 0, 'react:' + rid + ':' + aid);
           if (rdef.thread) { c.thread = rdef.thread; c.depth = 1; }
           done(ad.line, ad.label);
+        } else {
+          done('"..."', null);
+        }
+      } else if (choiceId.indexOf('secret:') === 0) {
+        // SECRET ANSWER (journey-deepening r120 2026-11-08): the player
+        // answered a villager's high-trust confession. The reply resolves
+        // or plants — never a canned pivot. The confession is answered
+        // once; after this the thread clears and the menu returns to
+        // normal (teach is available again — the confession doesn't
+        // permanently block it). answeredReactive is set so the tail
+        // doesn't hang a generic question on the reply ("Would you...
+        // teach me?" is a question, but it's THEIR question, already
+        // answered by the offer — not a new one to answer).
+        const sKind = choiceId.split(':')[1];
+        const proto = (this.data.villagers || []).find(x => x.id === vid);
+        const secretText = (proto && proto.prototype && proto.prototype.secret) || '';
+        const isLiteracy = secretText.indexOf("can't read") !== -1;
+        c.secretAnswered = true;
+        c.thread = null; c.depth = 0;
+        answeredReactive = true;
+        // TALK: FALSE (real act): answering a once-per-life confidence is
+        // not small talk — it's the moment the trust was FOR. The talk
+        // cap (gains stop at trust 40) would zero the gain in EVERY
+        // possible firing, since the hook itself requires trust >= 40.
+        const scons = (tdelta, tname, ttemper) => this.resolveConsequence(vid, {
+          trust: tdelta, temper: ttemper || 'neutral', talk: false, name: tname,
+        });
+        if (sKind === 'promise') {
+          scons(2, 'secret:promise', 'kind');
+          done(this.voiceLine(vid, '"Thank you. ...I needed someone to know, and I needed it to stop there."'), '"That stays between us."');
+        } else if (sKind === 'comfort') {
+          scons(1, 'secret:comfort', 'kind');
+          done(this.voiceLine(vid, '"It helps, just saying it out loud. ...Thanks for not looking away."'), '"Thank you for trusting me with that."');
+        } else if (sKind === 'offer') {
+          scons(1, 'secret:offer', 'kind');
+          if (isLiteracy) {
+            done(this.voiceLine(vid, '"Would you... teach me? Sometime. When there\'s time. I don\'t want to be the one who can\'t read the warnings anymore."'), '"Is there anything I can do?"');
+          } else {
+            done(this.voiceLine(vid, '"Just knowing someone knows helps. ...If it ever matters, you\'ll know first."'), '"Is there anything I can do?"');
+          }
+        } else if (sKind === 'silence') {
+          scons(1, 'secret:silence', 'neutral');
+          done(this.voiceLine(vid, '"...Thanks. ...That\'s enough, for now."'), '(say nothing — just sit with them)');
+        } else if (sKind === 'deflect') {
+          // Dodging a confidence is a cruel-temper move, like deflect_q:
+          // trust cost, mood cool, and the villager closes the door on it.
+          this.resolveConsequence(vid, {
+            trust: -1, mood: -1, temper: 'cruel', disposition: -0.5,
+            escalate: true, talk: false, name: 'secret:deflect',
+          });
+          done(this.voiceLine(vid, '"...Right. Forget I said anything."'), '(change the subject)');
         } else {
           done('"..."', null);
         }
@@ -6990,7 +7077,14 @@
       // line is the same lesson from another person, not a parrot bug.
       const inviteOutcome = choiceId === 'invite_party';
       const lessonOutcome = choiceId.indexOf('skill_learn:') === 0 || choiceId.indexOf('skill_teach:') === 0 || choiceId === 'teach';
-      line = this.sayLine(vid, line, { fallback: () => this.convoSelfRepeatLine(vid), structural: structuralTurn || answeredGeneric, diegeticAct: inviteOutcome || lessonOutcome }) || line;
+      // SECRET REPLIES ARE DIEGETIC ACTS TOO (journey-deepening r120
+      // 2026-11-08): a promise/comfort is a speech act, not flavor — its
+      // trust consequence already fired in the secret: handler, so
+      // blocking its outcome line would misreport a landed answer as a
+      // fizzle. A repeated decision line reads as the same answer from
+      // another person, not a parrot bug.
+      const secretOutcome = choiceId.indexOf('secret:') === 0;
+      line = this.sayLine(vid, line, { fallback: () => this.convoSelfRepeatLine(vid), structural: structuralTurn || answeredGeneric, diegeticAct: inviteOutcome || lessonOutcome || secretOutcome }) || line;
       // WANT ARC (convo rebuild 2026-10-11): answering their question engages
       // the want; rudely changing the subject deflects it. The core flow
       // advances the want — no wrapper needed.

@@ -169,12 +169,16 @@ function trustSnapOf(G) {
   } catch (e) { return { day, err: String(e && e.message) }; }
 }
 // R120 Q1-SECRET helper (pure): a secret opener is the once-per-life
-// high-trust confession line — the only line that starts with
-// "Can I tell you something? (conversation.js secret hook). The
-// voiceLine wraps it in straight double quotes.
+// high-trust confession line — the only line containing
+// "Can I tell you something? (conversation.js secret hook). CONTAINS,
+// not starts-with: voiceLine prepends a discourse lead-in ("I feel
+// like — ", "Mm. ", "I think — ") before the confession, so the phrase
+// sits mid-line (r120 proof-test debug: a starts-with check missed
+// every forced confession). The voiceLine wraps it in straight double
+// quotes.
 function isSecretOpener(line) {
   if (!line || typeof line !== 'string') return false;
-  return line.indexOf('"Can I tell you something?') === 0;
+  return line.indexOf('Can I tell you something?') !== -1;
 }
 // R116 Q2-GOALJOIN helper: scan capture lines added since the last
 // snapshot for GOAL_LINES strings; returns per-track counts for that day.
