@@ -4793,6 +4793,29 @@
       this.sysSay(`📺 ${contest.name} — the beast.`);
       try { this.sysSay('📺 ' + this._contestDeathLine(contest, 'the arena', 'You')); } catch (e) {}
       this.sysSay('📺 The Death Reel will be tasteful. It won\'t be.');
+      // DEATH LEDGER (sim-honeststakes-b 2026-11-09): this arena-lost path
+      // never wrote the ledger — _contestDie (player, non-arena) and
+      // _cxKillContestant (villager) are the only writes — so the choice
+      // screen told the next scholar "No one has died in this one yet" a
+      // week after the same contest killed the last one (seed 43008: Howard
+      // d21 in The Pit, Sal offered The Pit d28). Same keying and counting
+      // as _contestDie: contest.id from the scaled contest, +1 per death.
+      // Once per contest object (mirrors _contestDie's _dieLanded);
+      // skipped while a player-bearing phoenix link holds the death (tbEnd
+      // routes a held loss through here without calling playerDeath — the
+      // fire holds it, so it is not a death yet). The benevolent-lifeline
+      // save never reaches this branch (it clears the arena routing and
+      // calls _contestEnd). This changes the CHOICE, not the death rate.
+      try {
+        if (!ac._arenaDeathLedgered) {
+          const _held = this.state.phoenixLink && this.state.phoenixLink.bearerIsPlayer !== false;
+          if (!_held) {
+            ac._arenaDeathLedgered = true;
+            const dl = (this.state.contestDeathsById = this.state.contestDeathsById || {});
+            dl[contest.id] = (dl[contest.id] || 0) + 1;
+          }
+        }
+      } catch (e) {}
       // RESOLVE HYGIENE (break-it contests r11 2026-10-10): this death path
       // skipped what every other contest-death path does — the Resolve beat
       // (audio pass 5 wired _contestEnd/_contestDie/_contestRefuse), the
