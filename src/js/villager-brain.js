@@ -357,6 +357,10 @@
   // Independent of pantry/cistern unknown: a hearer can patrol even with no
   // resource belief yet. Seam: vbrainDisableCombatSocialDuty.
   function dutyKnownPrey(self) {
+    // Village carcass ledger (hunt-duty resolve) OR player/shared animal depth
+    // in codex.animals (_noteAnimalDepth / encounters / tasting). OVE-78: the
+    // village-only read chicken-egged known_prey — codex often had L≥1 while
+    // village.animals stayed empty, so hunt ads stayed soft pantry_protein.
     try {
       var animals = (((self.state || {}).village || {}).animals) || {};
       for (var aid in animals) {
@@ -365,6 +369,14 @@
         if (row && (row.level || 0) >= 1) return true;
       }
     } catch (e) {}
+    try {
+      var codex = (((self.state || {}).codex || {}).animals) || {};
+      for (var cid in codex) {
+        if (!Object.prototype.hasOwnProperty.call(codex, cid)) continue;
+        var crow = codex[cid];
+        if (crow && (crow.level || 0) >= 1) return true;
+      }
+    } catch (e2) {}
     return false;
   }
   function dutyTeachOpportunity(self, vid) {

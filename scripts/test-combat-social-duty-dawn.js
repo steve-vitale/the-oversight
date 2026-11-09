@@ -10,6 +10,9 @@
 //   4. Top-scoring patrol / teach / hunt → commit DUTY + align (OVE-36 materialize≠commit).
 //   5. Pantry+prey: hunt weight beats co-fired forage; dawn-commits hunt (OVE-76).
 //      Soft pantry_protein without prey stays under forage (failing control shape).
+//   5b. Codex-only animal depth (village.animals empty) → known_prey (OVE-78).
+//      Failing control: empty village.animals + empty codex.animals → soft
+//      pantry_protein under forage (same pantry belief).
 //   6. Failing control: vbrainDisableCombatSocialDuty strips combat/social ads;
 //      survival forage DUTY (when pantry low) still feeds.
 //   7. gardenKeeper / standing assign still suppress DUTY ads.
@@ -92,6 +95,17 @@ function clearPlantKnowledge(v, ids) {
   }
 }
 
+function clearCodexAnimals(Game) {
+  Game.state.codex = Game.state.codex || {};
+  Game.state.codex.animals = {};
+}
+
+function plantCodexPrey(Game, aid, level, day) {
+  Game.state.codex = Game.state.codex || {};
+  Game.state.codex.animals = Game.state.codex.animals || {};
+  Game.state.codex.animals[aid] = { level: level || 1, learnedDay: day || 0, via: 'test' };
+}
+
 (async () => {
   const { Game } = await loadGame({ seed: SEED, mode: 'herald', fullTelemetry: false });
   await setupGame(Game);
@@ -170,6 +184,7 @@ function clearPlantKnowledge(v, ids) {
   {
     plantFullBelief(Game, vid, day);
     clearPlantKnowledge(v, roster);
+    clearCodexAnimals(Game);
     v.gossip = [];
     v.animals = { rabbit: { level: 1, learnedDay: day, learnedBy: vid } };
     const feed = Game.dutyFeedCands(vid) || [];
@@ -188,6 +203,7 @@ function clearPlantKnowledge(v, ids) {
   {
     plantLowBelief(Game, vid, day);
     clearPlantKnowledge(v, roster);
+    clearCodexAnimals(Game);
     v.gossip = [];
     v.animals = { rabbit: { level: 1, learnedDay: day, learnedBy: vid } };
     const feed = Game.dutyFeedCands(vid) || [];
@@ -201,6 +217,7 @@ function clearPlantKnowledge(v, ids) {
     // Failing control shape: without known prey, speculative pantry_protein
     // stays soft under forage (same pantry belief).
     v.animals = {};
+    clearCodexAnimals(Game);
     const soft = Game.dutyFeedCands(vid) || [];
     const softHunt = soft.find(c => c.dutyTask === 'hunt');
     const softForage = soft.find(c => c.dutyTask === 'forage');
@@ -208,6 +225,50 @@ function clearPlantKnowledge(v, ids) {
       !!(softHunt && softForage && softHunt.w < softForage.w),
       JSON.stringify({ huntW: softHunt && softHunt.w, forageW: softForage && softForage.w }));
     v.animals = { rabbit: { level: 1, learnedDay: day, learnedBy: vid } };
+  }
+
+  console.log('== OVE-78: codex-only prey → known_prey (village.animals empty) ==');
+  {
+    plantLowBelief(Game, vid, day);
+    clearPlantKnowledge(v, roster);
+    v.gossip = [];
+    v.animals = {};
+    clearCodexAnimals(Game);
+    // Failing control: neither store has prey → soft pantry_protein under forage.
+    const soft = Game.dutyFeedCands(vid) || [];
+    const softHunt = soft.find(c => c.dutyTask === 'hunt');
+    const softForage = soft.find(c => c.dutyTask === 'forage');
+    check('OVE-78 control: empty stores → pantry_protein',
+      !!(softHunt && (softHunt.considerations || []).some(x =>
+        x.id === 'believed_need' && x.note === 'pantry_protein')),
+      JSON.stringify(softHunt && softHunt.considerations));
+    check('OVE-78 control: soft hunt under forage',
+      !!(softHunt && softForage && softHunt.w < softForage.w),
+      JSON.stringify({ huntW: softHunt && softHunt.w, forageW: softForage && softForage.w }));
+    // Treatment: codex animal depth only (same path encounters/_noteAnimalDepth use).
+    plantCodexPrey(Game, 'rabbit', 1, day);
+    const feed = Game.dutyFeedCands(vid) || [];
+    const forage = feed.find(c => c.dutyTask === 'forage');
+    const hunt = feed.find(c => c.dutyTask === 'hunt');
+    check('OVE-78: codex-only → known_prey note',
+      !!(hunt && (hunt.considerations || []).some(x =>
+        x.id === 'believed_need' && x.note === 'known_prey')),
+      JSON.stringify(hunt && hunt.considerations));
+    check('OVE-78: codex-only hunt beats forage',
+      !!(forage && hunt && hunt.w > forage.w),
+      JSON.stringify({ huntW: hunt && hunt.w, forageW: forage && forage.w }));
+    // Dawn-commit hunt via duty_top_score with village.animals still empty.
+    const cands = [{ kind: 'HAVEN_CHORE', w: 0.01, chore: 'fire' }].concat(feed);
+    clearCommit(Game, vid);
+    Game.vbrainScorePick(vid, cands, { rng: () => 0 });
+    const commit = Game.vbrainCommit(vid);
+    check('OVE-78: codex-only dawn-commits hunt',
+      commit && commit.kind === 'DUTY' && commit.dutyTask === 'hunt',
+      JSON.stringify(commit));
+    check('OVE-78: village.animals still empty',
+      !Object.keys(v.animals || {}).length, JSON.stringify(v.animals));
+    clearCodexAnimals(Game);
+    v.animals = {};
   }
 
   console.log('== teachable knowledge → DUTY teach ==');
@@ -348,6 +409,7 @@ function clearPlantKnowledge(v, ids) {
 
     // Soft pantry_protein without prey still loses duty_top_score to forage.
     v.animals = {};
+    clearCodexAnimals(Game);
     const softFeed = Game.dutyFeedCands(vid) || [];
     const softCands = [{ kind: 'HAVEN_CHORE', w: 0.01, chore: 'fire' }].concat(softFeed);
     clearCommit(Game, vid);
@@ -358,6 +420,7 @@ function clearPlantKnowledge(v, ids) {
       JSON.stringify(softCommit));
     plantFullBelief(Game, vid, day);
     v.animals = {};
+    clearCodexAnimals(Game);
   }
 
   console.log('== failing control: vbrainDisableCombatSocialDuty ==');
