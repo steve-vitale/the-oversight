@@ -1,0 +1,80 @@
+=== r116-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Wolfgang (gen_mr2n6dc) occ=Wild food forager --
+OPENING: "Water's almost gone — 5 liters. I can't carry enough alone. First light, the creek, you and me?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Finish the current event before hauling water.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+YOU: [goon] "Yeah?"
+THEM: "Help me haul something back? Too much for one."
+YOU: [silence] "..."
+THEM: A comfortable quiet settles. They smile a little, and let it be.
+YOU: [goon] "Yeah?"
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [goon] "Yeah?"
+THEM: "Do you dream about before? Or is it all — this — now?"
+YOU: [ans:q_dream:a_before] "Before. Every night. It's the only place it still exists."
+THEM: "Then it's not gone. Not really. Keep going back."
+YOU: [goon] "Yeah?"
+THEM: "Columbus, Ohio, always. Same dream: I'm walking home and the street keeps getting longer. I wake up tired, like I actually walked it."
+closing: "Well. That happened."
+
+-- Arnold (gen_6o3ftox) occ=Vintner --
+OPENING: "Never mind the pantry run — we got it handled. Thanks anyway. The cistern's nearly dry — 5 liters left. Haul the creek with me at dawn? Two buckets each, there and back."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Finish the current event before hauling water.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Porcini. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Bamboo Shoot. Leaf, stem, smell. You won't forget it now."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [alive:event:show] "The show — did you see it?"
+THEM: "They took Benoit — The Blood Tithe, on the screens. The whole fire watched. Nobody knew where to look."
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Groundnut — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Someone should watch your back. Might as well be me."
+closing: "Good. We've got a plan forming. I can feel it."
+
+-- Kipyegon (gen_sz20eu0) occ=barber --
+OPENING: "Never mind the pantry run — we got it handled. Thanks anyway. Water's almost gone — 5 liters. I can't carry enough alone. First light, the creek, you and me?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Finish the current event before hauling water.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+YOU: [goon] "Yeah?"
+THEM: "Can I ask you something? ... I want us to stick together. Properly. Watch each other's backs."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "Wolfgang headed out for water."
+YOU: [goon] "Whoa — go on."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [dlg:more] "I’m listening."
+THEM: "Wolfgang? A Wild food forager, back before. Solid person."
+YOU: [dlg:react] (listen)
+THEM: "Well." A breath. "That's where things stand."
+closing: "Don't be a stranger."
+
+-- Sigrun (sigrun_eiriksdottir) occ=night security guard --
+OPENING: "About needing to be alone — Do you ever just need to be alone? Like, really alone? You'd know about that."
+YOU: [ans:q_alone_time:a_tell] "Every day. I go for walks that don't need to happen. Just to breathe my own air
+THEM: "I get it. Solitude's a resource too. Scarcer than food, some days."
+YOU: [goon] "Yeah?"
+THEM: Their friendliness thins — still there, just held at arm's length.
+YOU: [goon] "Yeah?"
+THEM: "I go to the treeline edge and count my breaths. Ten of them. That's my alone. Then I come back — alone is a luxury, and also a little bit a lie."
+YOU: [goon] "Yeah?"
+THEM: "Come get air with me. I need to think out loud."
+YOU: [silence] "..."
+THEM: They fill the quiet. "Anyway — where was I?"
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on needing to be alone."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Alright. But I'm not carrying your stuff."
+YOU: [goon] "Yeah?"
+THEM: "Okay. We'll pick this up later."

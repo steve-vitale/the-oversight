@@ -1,0 +1,79 @@
+=== r116-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Raj (gen_p07x4la) occ=blacksmith --
+OPENING: "The cistern's nearly dry — 1 liters left. I need someone to haul water with me at first light. Two of us, half the trips. Will you come?"
+YOU: [goon] "Good question. What do YOU think?"
+THEM: Raj has an edge today — something curdled.
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Finish the current event before hauling water.
+YOU: [dlg:details] "Tell me why you need this."
+THEM: "Do the math with me: 1 liters, 12 people. That's not tomorrow's water. We walk together and each carry two liters back. Creek water still needs boiling."
+YOU: [dlg:cant] "I can’t right now."
+THEM: "...Okay. I'll figure it out." They won't ask twice. That much is clear.
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "Help me haul something back? Too much for one."
+YOU: [silence] "..."
+THEM: They glance at the fire, then back. The quiet doesn't seem to bother them.
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: The ease drains out of it, a little.
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "Alright — I should get back to it."
+
+-- Dwayne (gen_veyvwsn) occ=bike messenger --
+OPENING: "Can I tell you something? I'm saving a candy bar for when things get better. I haven't told anyone."
+YOU: [silence] "..."
+THEM: You say nothing. Neither do they, for a while — and it's fine.
+YOU: [teach] "Watch. This matters."
+THEM: You show them American Persimmon — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Saw things with too many joints. Give them room. That's the whole lesson."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "I can't. Not today. Ask me when the work's done."
+YOU: [dlg:react] (listen)
+THEM: "Well." A breath. "That's where things stand."
+YOU: [menu:more] More things to say (1/2)
+THEM: (menu page turned)
+YOU: [dlg:doubt] "That doesn't quite add up."
+THEM: "...What's that supposed to mean?" Their voice goes careful.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. What did you want to ask? That's the whole of it."
+closing: "Good talk. Onward, then."
+
+-- Mariana (gen_97ad474) occ=rail conductor --
+OPENING: "About what happened to my taken kin — Have you heard anything? About the taken. The pods. Anything at all."
+YOU: [gq:yn:yes] "Yes."
+THEM: "I see." They take a moment to think about your answer.
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "Any regrets? The real kind, not the small stuff."
+YOU: [deflect_q] (change the subject)
+THEM: "Okay." Something shutters, just slightly.
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: Whatever warmth was building cools to politeness.
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "Got a read on anyone here yet? Who should I be watching?"
+YOU: [ans:q_read:a_honest] "Still figuring everyone out."
+THEM: "Same. But keep your eyes open — some people here are performing, not surviving."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "Why do you ask? Watch the quiet ones. Not the loud — the loud tell you everything. The quiet are either thinking or planning, and you can't tell which until it matters."
+closing: "Don't be a stranger."
+
+-- Liliana (gen_9sxjpvw) occ=lifeguard --
+OPENING: "We're down to 1 liters of clean water. I need someone to haul water with me at first light. Two of us, half the trips. Will you come?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Finish the current event before hauling water.
+YOU: [dlg:details] "Tell me why you need this."
+THEM: "1 liters. That's today's drinking water, and then we're boiling creek water and hoping. We walk together and each carry two liters back. Creek water still needs boiling."
+YOU: [dlg:cant] "I can’t right now."
+THEM: "Right. I get it." A beat — and then the subject is closed. They won't raise it again.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that water haul."
+YOU: [goon] "Wait, what? Go on —"
+THEM: Their friendliness thins — still there, just held at arm's length.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "Huh. Let me think about that." "Marcus headed out to see what's out there."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "Anyway — I should get going."

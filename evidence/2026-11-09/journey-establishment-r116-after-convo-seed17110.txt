@@ -1,0 +1,81 @@
+=== r116-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Daniela (gen_54x4b9l) occ=Veterinarian --
+OPENING: "Do you ever just need to be alone? Like, really alone?"
+YOU: [ans:q_alone_time:a_tell] "Every day. I go for walks that don't need to happen. Just to breathe my own air
+THEM: "I get it. Solitude's a resource too. Scarcer than food, some days."
+YOU: [goon] "Wait, what? Go on —"
+THEM: "I go to the treeline edge and count my breaths. Ten of them. That's my alone. Then I come back — alone is a luxury, and also a little bit a lie."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Jamun. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Fish Mint. Leaf, stem, smell. You won't forget it now."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Funny thing — Still on needing to be alone."
+YOU: [goon] "Wait, what? Go on —"
+THEM: "Teach me something. Anything you know that I don't."
+YOU: [ans:q_teach_me:a_tell] "I'd rather show you while we're working. It's easier that way."
+THEM: "All right. Show me when we work together. That's my read."
+YOU: [goon] "Wait, what? Go on —"
+THEM: "Practical view: I'd like to learn something I can use today. Show me while you work, when you have a moment."
+closing: "Don't be a stranger."
+
+-- Aaron (gen_r4xwe57) occ=crossing guard --
+OPENING: "I can't reach this properly. Could you clean it out for me? Please."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to them, on the same side of the Haven door, to help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [goon] "Wait, what? Go on —"
+THEM: "Come get air with me. I need to think out loud."
+YOU: [silence] "..."
+THEM: A comfortable quiet settles. They smile a little, and let it be.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "Huh. Let me think about that." "People are saying things. About you. ...I'd watch how you act around the fire."
+YOU: [dlg:more] "Tell me more."
+THEM: "Carlos? A Fisherman, back before. Solid person."
+YOU: [dlg:react] (listen)
+THEM: "Ethel? A street artist, back before. Solid person."
+closing: "Anyway. I'm glad we talked. Really."
+
+-- Nicole (gen_8mcigiz) occ=Rancher --
+OPENING: "Can I trust you? I mean really."
+YOU: [ans:q_trust:a_earn] "I hope to earn it."
+THEM: "That's the right answer. The wrong one would've been 'yes' too fast. Right. Right."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "I'll tell you what I tell everyone: watch what I do when nobody's watching. That's the whole of me. The rest is just talking."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — White Mulberry. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Wild Soybean. Leaf, stem, smell. You won't forget it now."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "What's this about? Still on whether they can trust you."
+YOU: [gq:reason:understand] "I want to understand you better."
+THEM: "All right. Thank you for asking."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+closing: "Alright. Back to work."
+
+-- Daiana (gen_6lpgx8f) occ=exterminator --
+OPENING: Daiana: "You. Yeah, you. What do you make of this?"
+YOU: [gq:open:take] "I need a moment to think about that."
+THEM: "Take your time."
+YOU: [goon] "Wait, what? Go on —"
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [goon] "Wait, what? Go on —"
+THEM: A pause. When they speak again, it's about something else entirely.
+YOU: [goon] "Wait, what? Go on —"
+THEM: "What are you hoping for? Not the big stuff. The small thing."
+YOU: [ans:q_hope:a_tell] "A full night's sleep. Just one. Where I don't wake up listening."
+THEM: "God, yes. That's the dream now. Eight hours of not being afraid."
+YOU: [goon] "Wait, what? Go on —"
+THEM: "A full night's sleep. Not safety, not answers — just eight hours where nothing needs me. That's my whole theology now."
+YOU: [goon] "Wait, what? Go on —"
+THEM: "Come see what I found. You won't believe it."
+(no pick)
+(stall menu: betrayal:accept|betrayal:decline|leave)
+closing: "Later."
