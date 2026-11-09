@@ -657,7 +657,7 @@
           "hint": "Hold the Relay office yourself. Claim its wires or accept the village appointment; the work and its costs must be yours."
         },
         "play": {
-          "_doc": "Speak and Be Heard. Combat Rally Cry: every ally on the field takes an extra turn now, emboldened rallyRounds rounds with the next 2 strikes x strikeMult; every foe hesitates a round. Daily Be Heard (out of a fight): every Haven villager +trust, and every fight today starts rallied. Each use costs grounding. WEAKNESS: the single point of failure: if the Voice falls in a fight, every ally on the field is stunned a round (the network goes dark).",
+          "_doc": "Speak and Be Heard. Combat Rally Cry: every ally on the field takes an extra turn now, emboldened rallyRounds rounds with the next 2 strikes x strikeMult; every foe hesitates a round. Daily Be Heard (out of a fight): every Haven villager +trust, every fight today starts rallied, and ARMY scale — every linked/allied foreign village hears the word the same day (opinion +trust, link trust when linked, voiceDay stamp so their people fight rallied). Each use costs grounding. WEAKNESS: the single point of failure: if the Voice falls in a fight, every ally on the field is stunned a round (the network goes dark).",
           "actions": [
             {
               "id": "rally_cry",
@@ -678,7 +678,7 @@
                 "kcal": 150
               },
               "perDay": 1,
-              "effect": "Every Haven villager hears you: +2 trust, and every fight today starts rallied."
+              "effect": "Every Haven villager hears you: +2 trust; linked/allied foreign villages hear the same day (+opinion / link trust); every fight today starts rallied."
             }
           ],
           "grounding": 5,

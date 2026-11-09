@@ -9,6 +9,7 @@
 //   - godVillagerCast(game, v) -> a villager god's verb on their turn (wraps tbVillagerAbility, before the subclass verbs)
 //   - godDaily(game) -> dawn: day verbs refresh, Gilded Guard regen, the Audit, No Lies' knowing and its trust price, villager gardens
 //   - isFeastContest(contest) / gardenFeastLeanFor(pid, contest) -> CONTEST scale: Living Garden feast lean for cookfight/guest
+//   - voiceReachVillageIds() / voiceDeliverAllied(day) -> ARMY scale: Voice Be Heard reaches linked/allied foreign villages same day
 // consumes:
 //   - Game.data.godpaths (god.play), state.scholar.godhood, state.village.npcGodhood
 //   - useAbility (abilityActions.js), tbDamage, tbRoundWrap, tbMonsterTurn, startCombat, tbEnd, endDay, maybeCheatDeath, addHealth, removeVillager, springAmbush, lieLive, getActiveLie
@@ -16,6 +17,7 @@
 //   - Scattering.Godhood market verbs (namePrice, buyPassage, guardAbsorb, guardRegen, auditCollect, resetFightVerbs, resetDayVerbs)
 //   - Scattering.combat.nearestEnemy (monster aim)
 //   - Game.contestResolveGroup / Game.contestResolveVillager (feast lean applied in contest-engine _cxOther)
+//   - Game.hierarchyState / linkWith / _linkOther / _trustGain / _nudgeOpinion / _otherVillage / mshipState (Voice army delivery)
 // rules:
 //   - ambush_ally_parity: a living player receives an NPC hunter's allied opening strike through scholar state; existing armed strikes are preserved, and no player input is automated (code: terms)
 //   - same_function: every verb runs for the player or a villager fighter through one implementation (code: actor, VERB_IMPL)
@@ -23,6 +25,7 @@
 //   - weakness_enforced: brawler beams feed no pain; ward is the priority target and self-heals at half; hunter terms end on contact; between phases are retreats; all-seeing's foresight never covers the holder; voice's fall stuns the field; phoenix needs fuel; market coins never stop beams and titans never haggle; garden hits soft and draws aim (code: preHit, damageMult wrap, termsContact, addHealth wrap)
 //   - never_skips_dinner: no verb feeds its own holder (Feed the Multitude feeds other bellies; the phoenix cannot rise through starvation) (code: feedMultitude, phoenixPlayer)
 //   - feast_contest_lean: Living Garden scale.contest — cookfight/guest scores lean for the ascended holder (player or NPC), numbers in god.play.contestLean / feastContests (code: gardenFeastLeanFor, contestEngine _cxOther)
+//   - voice_army_same_day: Voice scale.army — Be Heard stamps linked/allied foreign villages the same day (opinion + link trust + voiceDay; their people fight rallied) (code: voiceDeliverAllied, dailyVoice)
 //   - table_never_reads_godhood: nothing here is read by table*.js (code: scripts/godpath/ladder.js)
 //   - never_silent: every verb narrates; errors are reported via warn (code: warn)
 (function () {
@@ -87,6 +90,55 @@
       const lean = godPlay('living_garden').contestLean;
       return (typeof lean === 'number' && lean > 0) ? lean : 18;
     } catch (e) { warn('gardenFeastLeanFor', e); return 0; }
+  }
+
+  // ---------------- ARMY scale: Voice Be Heard → linked/allied foreign villages ----------------
+  // god.scale.army is design prose ("Every allied village hears your word the
+  // same day."). Live settlement stamps each linked OR allied foreign village
+  // with voiceDay, nudges their opinion of Haven, and tends any active link.
+  function voiceReachVillageIds() {
+    const seen = Object.create(null);
+    const ids = [];
+    const add = (id) => {
+      if (!id || id === 'haven' || seen[id]) return;
+      seen[id] = true;
+      ids.push(id);
+    };
+    try {
+      const links = Game.hierarchyState ? Game.hierarchyState() : [];
+      for (const l of links) {
+        if (!l || l.status !== 'active') continue;
+        const other = Game._linkOther ? Game._linkOther(l, 'haven') : null;
+        add(other);
+      }
+    } catch (e) { warn('voiceReach links', e); }
+    try {
+      const allies = (Game.mshipState && Game.mshipState().allies) || [];
+      for (const id of allies) add(id);
+    } catch (e) { warn('voiceReach allies', e); }
+    return ids;
+  }
+  function voiceDeliverAllied(day) {
+    try {
+      const P = godPlay('voice_of_the_relay');
+      const delta = (typeof P.trust === 'number' && P.trust > 0) ? P.trust : 2;
+      const d = day != null ? day : ((Game.state.scholar || {}).day || 0);
+      let reached = 0;
+      for (const id of voiceReachVillageIds()) {
+        let ov = null;
+        try { ov = Game._otherVillage ? Game._otherVillage(id) : null; } catch (e) { warn('voiceDeliver ov', e); }
+        if (!ov) continue;
+        ov.voiceDay = d;
+        try { if (Game._nudgeOpinion) Game._nudgeOpinion(id, delta, 'voice'); }
+        catch (e) { warn('voiceDeliver opinion', e); }
+        try {
+          const link = Game.linkWith && Game.linkWith(id);
+          if (link && Game._trustGain) Game._trustGain(link, delta);
+        } catch (e) { warn('voiceDeliver link trust', e); }
+        reached++;
+      }
+      return reached;
+    } catch (e) { warn('voiceDeliverAllied', e); return 0; }
   }
 
   // ---------------- who holds a god ----------------
@@ -401,9 +453,16 @@
       const ids = (v.roster || []).filter(id => id !== Game.villagerId);
       for (const id of ids) { try { Game.bumpTrust && Game.bumpTrust(id, P.trust || 2, 'the voice'); } catch (e) { warn('voice trust', e); } }
       v.voiceDay = s.day || 0;
+      // Call through Game so proofs can strip the army hook without touching Haven delivery.
+      let allied = 0;
+      try { allied = Game.voiceDeliverAllied ? Game.voiceDeliverAllied(s.day || 0) : voiceDeliverAllied(s.day || 0); }
+      catch (e) { warn('voiceDeliverAllied call', e); allied = 0; }
       if (P.grounding) { try { Game.addGrounding && Game.addGrounding(-P.grounding, 'the voice'); } catch (e) { warn('grounding', e); } }
-      Game.say(`You speak once and every ally hears it at once, no runner, no garble. ${ids.length} in Haven stand straighter; every fight today starts rallied. A little less of you is left. (Speak and Be Heard)`);
-      tele('god_verb', { god: 'voice_of_the_relay', verb: 'be_heard', who: 'player', heard: ids.length });
+      const alliedBit = allied
+        ? ` ${allied} allied ${allied === 1 ? 'village hears' : 'villages hear'} your word the same day;`
+        : '';
+      Game.say(`You speak once and every ally hears it at once, no runner, no garble. ${ids.length} in Haven stand straighter;${alliedBit} every fight today starts rallied. A little less of you is left. (Speak and Be Heard)`);
+      tele('god_verb', { god: 'voice_of_the_relay', verb: 'be_heard', who: 'player', heard: ids.length, allied });
       return true;
     },
     name_price(target) {
@@ -520,6 +579,8 @@
     fighterGod(fi) { return fighterGod(fi); },
     isFeastContest(contest) { return isFeastContest(contest); },
     gardenFeastLeanFor(pid, contest) { return gardenFeastLeanFor(pid, contest); },
+    voiceReachVillageIds() { return voiceReachVillageIds(); },
+    voiceDeliverAllied(day) { return voiceDeliverAllied(day); },
     godActionDef(actionId) {
       const a = index().actions[actionId];
       if (!a) return null;
@@ -1055,10 +1116,22 @@
   // including coalition blades injected after the fight began
   function today() { return (Game.state.scholar || {}).day || 0; }
   function fedToday() { return ((Game.state.village || {}).harvestDay) === today(); }
+  function voiceHeardToday(v) {
+    const day = today();
+    if (((Game.state.village || {}).voiceDay) === day) return true;
+    // Army scale: a linked/allied foreign village that heard the word today
+    // rallies its own people even when Haven's stamp is absent.
+    const home = v && v.villageId;
+    if (!home || home === 'haven') return false;
+    try {
+      const ov = Game._otherVillage && Game._otherVillage(home);
+      return !!(ov && ov.voiceDay === day);
+    } catch (e) { warn('voiceHeardToday', e); return false; }
+  }
   function dailyVoice(f, v) {
     if (!f || f.over || !v || !v.alive || v.fled || !isOurs(v) || !(f.fighters || []).includes(v) || v._gvVoiced) return;
     if (v.kind !== 'player' && v.villagerId === Game.villagerId) return;
-    if (((Game.state.village || {}).voiceDay) !== today()) return;
+    if (!voiceHeardToday(v)) return;
     // Both real turn-entry paths decrement their own counters next: four
     // preserves the existing three active turns, once per fighter/fight.
     v._gvVoiced = true;
