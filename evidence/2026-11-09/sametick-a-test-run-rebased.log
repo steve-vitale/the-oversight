@@ -1,0 +1,11 @@
+PASS L1 synthetic: dutyCure with no onset synthesizes one 0-day cured episode
+PASS L2 synthetic: dutyCure joins an open episode; snapshot does not overwrite
+PASS L3 synthetic: non-tick name synthesizes nothing; end explained, not orphaned
+    96301/150d live: dutyCure events=17 total=17 joined=0 synthesized=17 unrecorded=0 daysAlive=143
+PASS L4 live: fixed recorder captures every duty cure on 96301/150d, deterministic, neutral
+    new corpus: totalDutyCures=43 events=43 cured-episodes=43 (duty-cure-event 0, duty-same-tick 43, duty-snapshot 0)
+PASS L5 corpus: fixed recorder captures >= totalDutyCures-1 on the new corpus; old corpus still 3
+    agreement: curedEpisodes=43 both analyzers; sameTick/unrecorded=0; totalDutyCures=43
+PASS L6 agreement: medicduty join agrees with feveranat join on the new corpus
+
+6 PASS, 0 FAIL
