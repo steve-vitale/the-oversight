@@ -1055,9 +1055,10 @@ function workGarden(Game,ctx) {
     if(inside&&Game.exitBuilding()!==true)return;
     if(!active())return;
     harvest();if(!active())return;
-    const target=Math.min(4,Game.gardenCapacity?Game.gardenCapacity():6);
-    while(active()&&Game.gardenPlots().length<target){const n=Game.gardenPlots().length;Game.makePlot();if(Game.gardenPlots().length<=n)break;}
-    if(!active())return;
+    // Appoint while residents are still at Haven. makePlot ticks move the
+    // rest of the roster off-tile; gardenKeeperReady then empties and the
+    // standing caretaker is never reserved. DUTY already honors an appointed
+    // gardenKeeper, so appointing first keeps them present through bed prep.
     const v=Game.state.village;
     if(Game.setGardenKeeper && !Game.gardenKeeperReady(v.gardenKeeper)){
       const candidates=(v.roster||[]).filter(id=>Game.gardenKeeperReady(id)&&!v.assignments?.[id]);
@@ -1065,6 +1066,10 @@ function workGarden(Game,ctx) {
       candidates.sort((a,b)=>score(b)-score(a));
       if(candidates.length)Game.setGardenKeeper(candidates[0]);
     }
+    if(!active())return;
+    const target=Math.min(4,Game.gardenCapacity?Game.gardenCapacity():6);
+    while(active()&&Game.gardenPlots().length<target){const n=Game.gardenPlots().length;Game.makePlot();if(Game.gardenPlots().length<=n)break;}
+    if(!active())return;
     if(Game.reclaimGarden&&Game.gardenPlots().some(p=>p.dead)&&Game.state.scholar.kcal>=800)Game.reclaimGarden();
     if(!active())return;
     trySow(Game,ctx);
