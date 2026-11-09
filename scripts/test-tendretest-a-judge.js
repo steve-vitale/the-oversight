@@ -92,7 +92,7 @@ const tendAttrTopped55Seeds = aTend ? (aTend.tendAttributedTopped55Seeds || []) 
 bars.mechanism = {
   engineTendsWhileNational: engNat, engineTendsWhileNationalSeeds: engNatSeeds,
   topped55Seeds,
-  tendAttributedTopped55Seeds,
+  tendAttributedTopped55Seeds: tendAttrTopped55Seeds,
   pass: engNat >= 1 && tendAttrTopped55Seeds.length >= 1,
 };
 // SECONDARY: starvation totals AND arm-only <= control + 2; median >= 0.8x control.
