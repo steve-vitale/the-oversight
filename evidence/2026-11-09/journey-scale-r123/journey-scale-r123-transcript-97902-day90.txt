@@ -1,0 +1,15 @@
+(pre-talk seed: ask_favor planted d86; takenWantDay=0; convoCount=14)
+=== seed 97902 day 90 — conversation with Amina (amina_diallo) ===
+occupation=Midwife temperament=warm trust=89 dead=false
+want: ask_favor (stage 2)
+open thread: want fromSeed=true
+picker: control
+
+THEM: "About the creek water run — the need hasn't gone anywhere. I'm still asking."
+(turn0 choices: goon, dlg:favor_requirements, dlg:commit, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+YOU: (leave)
+pre-close: want ask_favor stage 3 thread want
+closing line: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+(gossip picks this sitting: 0)
