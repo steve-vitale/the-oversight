@@ -320,6 +320,26 @@ r161 + r121 staleness, so the measurement proof is current on this
 branch. Log:
 `evidence/2026-11-09/journey-endgame-r162-neutral-panel-rebased.log`.
 
+Gate 4 (closeout, re-rebased tree `ff8b9869f` — master moved
+twice during closeout: the sitdrive landing `b5d1eb923` added a
+new policy file + `sweep-compare.js`, which re-staled the proof,
+then the 0930Z round evidence `ff8b9869f`, evidence-only):
+`check.js --quick` **293 passed / 7 failed in 1340s** — the
+standing 4 (mobile-combat-cadence, occupation-panels,
+phone-frame-proof, establishment-r20) + 3 load artifacts under
+heavy load: `test-measurement-cache-flags` (84.5s),
+`test-trust-observer-neutrality` (120s timeout),
+`test-capable-bot-20261014` (120s timeout). No new attributable
+failure. Log:
+`evidence/2026-11-09/journey-endgame-r162-gate4.log`.
+
+Second proof refresh on the final tree: neutral panel seed 7 × 4
+policies × 150d (`evidence/2026-11-09/neutral-r162-rebased2.json.gz`),
+proof pair 9/9 + 9/9 and r162 proof test 19/19 verified on the
+final tree before gate 4. The measurement proof is current on
+this branch. Log:
+`evidence/2026-11-09/journey-endgame-r162-neutral-panel-rebased2.log`.
+
 ## Verdicts
 
 - REACHABLE: yes. The lesser seat opened on 4/5 seeds through the
