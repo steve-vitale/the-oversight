@@ -25,7 +25,23 @@
 //   kills the bearer, so the raw removal event reads as a recovery).
 // - Treatment join: a treatEvent counts for an episode when its who matches
 //   and its day falls in [onsetDay, endDay] (endDay = daysAlive for open
-//   episodes).
+//   episodes). A CURE counts as a treated outcome (poolcapture-bar-a,
+//   backlog #1921): a cureEvent for the same patient in the window, an end
+//   with outcome 'cured' (treatVillager), or — NPC only — a 'recovered' end
+//   whose end-day daySeries snapshot shows sickMap[who].daysLeft >= 3.
+//   The snapshot rule works because the snapshot is taken before the day's
+//   tick: natural expiry shows daysLeft == 1 (the decrement deletes it),
+//   while a duty cure deletes a record that still had daysLeft > 1 after
+//   the decrement, i.e. >= 3 at snapshot time. Validated on the medicduty
+//   corpus: before leg 132/132 'recovered' ends show 1 (zero false
+//   positives). The duty cure is the only in-tick deletion during care in
+//   code (medicDutyCureAttempt deletes v.sick directly; it never calls
+//   cureStatus, so no cureEvent exists for it). BLIND SPOT, stated plainly:
+//   a patient infected and cured within ONE tick never appears as an onset
+//   or an end (the tick wrapper diffs before/after maps and the record is
+//   in neither), so no episode join can count those cures — 30 of the 33
+//   duty cures on the medicduty corpus are of that kind. They are reported
+//   by the medicduty analyzer's care-coverage line, not here.
 'use strict';
 const fs = require('fs');
 const path = require('path');
@@ -165,7 +181,17 @@ function buildEpisodes(s) {
       ep.reconciled = true;
     }
   }
-  // Treatment join.
+  // Treatment join (poolcapture-bar-a #1921): a tend in the window, a cure
+  // in the window, a 'cured' end, or — NPC only — a 'recovered' end whose
+  // end-day snapshot still showed daysLeft >= 3 (duty cure, see header).
+  const snapByDay = new Map((s.daySeries || []).map(d => [d.day, d]));
+  const cureMatches = (ep, c) => {
+    if (c.target !== ep.who) return false;
+    const endD = ep.endDay == null ? s.daysAlive : ep.endDay;
+    if (c.day < ep.onsetDay || c.day > endD) return false;
+    if (c.diseaseId && ep.diseaseId && c.diseaseId !== ep.diseaseId) return false;
+    return true;
+  };
   for (const ep of eps) {
     const endD = ep.endDay == null ? s.daysAlive : ep.endDay;
     for (const t of (s.treatEvents || [])) {
@@ -176,6 +202,23 @@ function buildEpisodes(s) {
       if (ep.kind === 'scholar' && t.diseaseId === 'tick_attached') continue;
       ep.treated = true;
       if (!ep.treatKinds.includes(t.kind)) ep.treatKinds.push(t.kind);
+    }
+    for (const c of (s.cureEvents || [])) {
+      if (!cureMatches(ep, c)) continue;
+      ep.treated = true; ep.cured = true; ep.curedBy = 'cureEvent';
+      if (!ep.treatKinds.includes('cure')) ep.treatKinds.push('cure');
+    }
+    if (ep.outcome === 'cured') {
+      ep.treated = true; ep.cured = true; ep.curedBy = ep.curedBy || 'cured-end';
+      if (!ep.treatKinds.includes('cure')) ep.treatKinds.push('cure');
+    }
+    if (ep.kind === 'npc' && ep.outcome === 'recovered' && ep.endDay != null) {
+      const snap = snapByDay.get(ep.endDay);
+      const rec = snap && (snap.sickMap || {})[ep.who];
+      if (rec && (rec.daysLeft || 0) >= 3) {
+        ep.treated = true; ep.cured = true; ep.curedBy = 'duty-snapshot';
+        if (!ep.treatKinds.includes('cure')) ep.treatKinds.push('cure');
+      }
     }
   }
   return { eps, orphanEnds };
@@ -318,7 +361,12 @@ function main() {
     ' cures=' + sum(seeds.map(s => (s.cureEvents || []).length)) +
     ' statusEvents (alien/tick)=' + sum(seeds.map(s => (s.statusEvents || []).length)));
   console.log('  episodes treated=' + treated.length + '/' + allEps.length +
-    ' (treated kinds: ' + JSON.stringify(treated.flatMap(e => e.treatKinds).reduce((m, k) => { m[k] = (m[k] || 0) + 1; return m; }, {})) + ')');
+    ' (treated kinds: ' + JSON.stringify(treated.flatMap(e => e.treatKinds).reduce((m, k) => { m[k] = (m[k] || 0) + 1; return m; }, {})) + ')' +
+    ' cured-episodes=' + allEps.filter(e => e.cured).length +
+    ' (cureEvent ' + allEps.filter(e => e.curedBy === 'cureEvent').length +
+    ', cured-end ' + allEps.filter(e => e.curedBy === 'cured-end').length +
+    ', duty-snapshot ' + allEps.filter(e => e.curedBy === 'duty-snapshot').length + ')');
+  console.log('  NOTE (poolcapture-bar-a #1921): a duty cure that infects and cures a patient inside ONE tick leaves no onset and no end in this corpus, so no episode join can count it — the medicduty analyzer reports those as same-tick cures on its care-coverage line.');
   console.log('  treated: median duration=' + med(treatedClosed.map(e => e.duration)) +
     ' mean=' + r1(mean(treatedClosed.map(e => e.duration))) + ' died=' + treatedDied + '/' + treated.length);
   console.log('  untreated: median duration=' + med(untreatedClosed.map(e => e.duration)) +

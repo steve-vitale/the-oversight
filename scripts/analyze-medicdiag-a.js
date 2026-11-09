@@ -204,7 +204,7 @@ function main() {
     ' tendVillager calls=' + tend);
   console.log('  episodes ending cured: ' + curedEnds.length +
     (curedEnds.length ? ' — ' + curedEnds.map(e => 's' + e.seed + ' ' + e.whoName + ' ' + e.name + ' by ' + e.by).join('; ') : ' (none)'));
-  console.log('  CURE-CHANNEL VERDICT: ABSENT (village-side) — no villager-side code path deletes a v.sick record except recovery/death; villagerCareTick only tends (daysLeft -= 1). Code: Game.villagerCareTick, Game.treatVillager (scholar-only, L2+, 150 kcal), Game.cureStatus (scholar status list only). Sole non-scholar cure in code is the foreign-aid medicine delivery (safetynets.js resolveAidInbound), which never fired on this band (cureEvents=0). Full citations in the evidence file.');
+  console.log('  CURE-CHANNEL VERDICT (poolcapture-bar-a #1921, duty-aware): the HAVEN MEDIC DUTY is a villager-side cure path — Game.medicDutyCureAttempt deletes v.sick[pid] directly (ability or pharmacy medicine), called from villagerCareTick for the duty holder only; it never calls cureStatus, so a duty cure leaves NO cureEvent in this corpus. cureEvents=0 therefore proves no SCHOLAR-side cure happened here, not that no villager was cured: duty cures are counted in the duty corpus (v.medicDutyCures) and attributed to episodes by the snapshot rule in analyze-feveranat-a.js (duty-snapshot) — see sim-poolcapture-bar-a. Pre-duty code-read: villagerCareTick only tends (daysLeft -= 1); treatVillager is scholar-only (L2+, 150 kcal); cureStatus is scholar status-list only; the foreign-aid medicine delivery (safetynets.js resolveAidInbound) is the other non-scholar cure.');
   console.log('');
 
   // ---- C3 MODELED VALUE ----

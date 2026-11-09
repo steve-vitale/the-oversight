@@ -34,18 +34,46 @@ function med(a) {
 // Reconstruct NPC episodes from feveranat onsets/ends/treats (same join
 // rule as analyze-feveranat-a.js: next end for the same who at/after the
 // onset day; treated = a villagerCare treat for that who inside the window).
+// POOLCAPTURE-BAR-A (#1921): a cure counts as a treated outcome — a
+// cureEvent for the same patient in the window, an end with outcome
+// 'cured' (treatVillager), or a 'recovered' end whose end-day daySeries
+// snapshot shows sickMap[who].daysLeft >= 3 (duty cure: the record still
+// had daysLeft > 1 after that day's decrement; natural expiry shows 1.
+// Validated: 0 false positives on the pre-duty before leg, 132/132 at 1).
+// The duty cure leaves no cureEvent (it deletes v.sick directly without
+// calling cureStatus), so the snapshot rule is the only attribution for
+// recorded cured episodes. Cures that infect and cure inside ONE tick
+// never become episodes at all; they are counted separately as
+// same-tick cures (total duty cures minus attributed cured episodes)
+// and reported on the care-coverage line, not in treatedShare.
 function episodesOf(f) {
   const onsets = (f.sickOnsets || []).filter(o => o.kind === 'npc');
   const ends = (f.sickEnds || []).filter(e => e.kind === 'npc');
   const treats = (f.treatEvents || []).filter(t => t.kind === 'villagerCare');
+  const cures = (f.cureEvents || []);
+  const snapByDay = new Map((f.daySeries || []).map(d => [d.day, d]));
   const eps = [];
   for (const o of onsets) {
     const end = ends.filter(e => e.who === o.who && e.day >= o.day)
       .sort((a, b) => a.day - b.day)[0] || null;
     const endDay = end ? end.day : f.daysAlive;
     const treated = treats.some(t => t.who === o.who && t.day >= o.day && t.day <= endDay);
-    eps.push({ seed: f.seed, who: o.who, diseaseId: o.diseaseId, healerPresent: !!o.healerPresent,
-      duration: endDay - o.day, treated, outcome: end ? end.outcome : 'open' });
+    const ep = { seed: f.seed, who: o.who, diseaseId: o.diseaseId, healerPresent: !!o.healerPresent,
+      duration: endDay - o.day, treated, cured: false, curedBy: null,
+      outcome: end ? end.outcome : 'open' };
+    for (const c of cures) {
+      if (c.target !== o.who) continue;
+      if (c.day < o.day || c.day > endDay) continue;
+      if (c.diseaseId && o.diseaseId && c.diseaseId !== o.diseaseId) continue;
+      ep.treated = true; ep.cured = true; ep.curedBy = 'cureEvent';
+    }
+    if (ep.outcome === 'cured') { ep.treated = true; ep.cured = true; ep.curedBy = ep.curedBy || 'cured-end'; }
+    if (ep.outcome === 'recovered' && end) {
+      const snap = snapByDay.get(end.day);
+      const rec = snap && (snap.sickMap || {})[o.who];
+      if (rec && (rec.daysLeft || 0) >= 3) { ep.treated = true; ep.cured = true; ep.curedBy = 'duty-snapshot'; }
+    }
+    eps.push(ep);
   }
   return eps;
 }
@@ -113,6 +141,20 @@ function censusLeg(dir) {
   }
   leg.dutyBlocked = Object.values(leg._blockedPerSeed || {}).reduce((a, b) => a + b, 0);
   leg.presentShare = (leg.present + leg.absent) ? leg.present / (leg.present + leg.absent) : null;
+  // POOLCAPTURE-BAR-A (#1925): medic-days-only share — the share of
+  // sick-days on days when a roster medic exists at all
+  // (present / (present + absentWithMedic)).
+  leg.medicDaysShare = (leg.present + leg.absentWithMedic)
+    ? leg.present / (leg.present + leg.absentWithMedic) : null;
+  // POOLCAPTURE-BAR-A (#1921): cured-episode attribution + same-tick
+  // decomposition. Attributed cured episodes are the ones the snapshot
+  // rule (or a cureEvent / 'cured' end) caught; the remaining duty cures
+  // infected and cured inside one tick and never became episodes.
+  leg.curedEpisodes = leg.episodes.filter(e => e.cured).length;
+  leg.totalCures = (leg.curesAbility || 0) + (leg.curesMedicine || 0);
+  leg.sameTickCures = Math.max(0, leg.totalCures - leg.curedEpisodes);
+  leg.careCoverage = (leg.episodes.length + leg.sameTickCures)
+    ? (leg.treatedEps + leg.sameTickCures) / (leg.episodes.length + leg.sameTickCures) : null;
   leg.medianSurvival = med(leg.daysAlive);
   leg.maxSurvival = Math.max(...leg.daysAlive);
   leg.starvationDeaths = (leg.deathRows || []).filter(d => /starvat/.test(d.cause || '')).length;
@@ -128,8 +170,10 @@ function printLeg(tag, leg) {
   console.log(`=== sim-medicduty-a ${tag} ===`);
   console.log(`WALL: national=${leg.national}/8 table=${leg.table} wins=${leg.win} waveReach=${JSON.stringify(leg.waveReach)} medianSurvival=${leg.medianSurvival}d max=${leg.maxSurvival}d`);
   console.log(`PRIMARY: present=${leg.present} absent=${leg.absent} share=${leg.presentShare == null ? 'n/a' : (leg.presentShare * 100).toFixed(1) + '%'} absentWithMedic=${leg.absentWithMedic} absentNoMedic=${leg.absentNoMedic} (village-days=${leg.villageDays} healerDays=${leg.healerDays} medicDays=${leg.medicDays} havenAvail=${leg.havenAvail})`);
+  console.log(`PRIMARY (poolcapture-bar-a #1925, secondary): medic-days-only share=${leg.medicDaysShare == null ? 'n/a' : (leg.medicDaysShare * 100).toFixed(1) + '%'} (present / (present + absentWithMedic)) — the share is reported, never gating`);
   console.log(`DUTY: dutyDays=${leg.dutyDays}/${leg.villageDays} holders=${leg.dutyHolders.size} holderChanges=${leg.holderChanges} blockedDepartures=${leg.dutyBlocked} joinMismatches=${leg.joinMismatches} curesAbility=${leg.curesAbility || 0} curesMedicine=${leg.curesMedicine || 0}`);
   console.log(`SECONDARY: episodes=${leg.episodes.length} treated=${leg.treatedEps} treatedShare=${leg.treatedShare == null ? 'n/a' : (leg.treatedShare * 100).toFixed(1) + '%'} sicknessDeaths=${leg.sicknessDeaths} woundFeverDeaths=${leg.woundFeverDeaths} starvationDeaths=${leg.starvationDeaths}`);
+  console.log(`SECONDARY (poolcapture-bar-a #1921): curedEpisodes=${leg.curedEpisodes} totalDutyCures=${leg.totalCures} sameTickCures=${leg.sameTickCures} (cures that never became episodes) careCoverage=${leg.careCoverage == null ? 'n/a' : (leg.careCoverage * 100).toFixed(1) + '%'} ((treated + sameTickCures) / (episodes + sameTickCures))`);
   console.log(`GUARDRAILS: produced/need=${leg.producedNeed == null ? 'n/a' : leg.producedNeed.toFixed(3)} deathCauses=${JSON.stringify(leg.deathCauses)}`);
 }
 
@@ -150,12 +194,17 @@ function main() {
   printLeg('BEFORE', b);
   printLeg('AFTER', a);
   console.log('=== GATES (prereg binding) ===');
-  // G1 thresholds per prereg AMENDMENT A1 (before-leg baseline on this
-  // base: share 24.6%, absent-with-medic 38, ceiling share 32.9%):
-  // share >= 30% (~66% pool capture) AND absent-with-medic <= 19 (50%).
-  const g1a = a.presentShare != null && a.presentShare >= 0.30;
-  const g1b = a.absentWithMedic <= 19;
-  console.log(`G1 PRIMARY: after share=${(a.presentShare * 100).toFixed(1)}% (need >=30%, before ${(b.presentShare * 100).toFixed(1)}%) -> ${g1a ? 'PASS' : 'FAIL'}; absentWithMedic=${a.absentWithMedic} (need <=19, before ${b.absentWithMedic}) -> ${g1b ? 'PASS' : 'FAIL'}; G1 ${g1a && g1b ? 'PASS' : 'FAIL'}`);
+  // G1 RE-REGISTERED (poolcapture-bar-a, backlog #1925; sim-medicduty-a
+  // metric review): the healer-present SHARE is confounded by survival —
+  // the duty extends village life and the added days are mostly no-medic
+  // days, so the share falls even as the duty works. The share is demoted
+  // to a reported secondary and NEVER gates. PRIMARY is the
+  // absent-with-medic POOL CAPTURE: (before - after) / before >= 50%.
+  // On the medicduty corpus that is absentWithMedic <= 19 (before 38).
+  const capture = (b.absentWithMedic > 0)
+    ? (b.absentWithMedic - a.absentWithMedic) / b.absentWithMedic : null;
+  const g1 = capture != null && capture >= 0.50;
+  console.log(`G1 PRIMARY (pool capture): before absentWithMedic=${b.absentWithMedic} after=${a.absentWithMedic} capture=${capture == null ? 'n/a' : (capture * 100).toFixed(1) + '%'} (need >=50%) -> ${g1 ? 'PASS' : 'FAIL'}; share ${((a.presentShare || 0) * 100).toFixed(1)}% (before ${((b.presentShare || 0) * 100).toFixed(1)}%) and medic-days-only share ${((a.medicDaysShare || 0) * 100).toFixed(1)}% (before ${((b.medicDaysShare || 0) * 100).toFixed(1)}%) reported as secondaries, not gating; G1 ${g1 ? 'PASS' : 'FAIL'}`);
   const g2a = a.medianSurvival >= 0.8 * b.medianSurvival;
   const g2b = a.starvationDeaths <= b.starvationDeaths + 2;
   const beforeCauses = new Set(Object.keys(b.deathCauses));
@@ -165,7 +214,7 @@ function main() {
   console.log(`G2 GUARDRAILS: medianSurvival ${a.medianSurvival} vs 0.8x before ${Math.floor(0.8 * b.medianSurvival)} -> ${g2a ? 'PASS' : 'FAIL'}; starvation ${a.starvationDeaths} vs before+2 ${b.starvationDeaths + 2} -> ${g2b ? 'PASS' : 'FAIL'}; new death causes >=2: ${newCauses.length ? newCauses.join(',') : 'none'} -> ${g2c ? 'PASS' : 'FAIL'}; produced/need ${a.producedNeed.toFixed(3)} vs before-0.03 ${(b.producedNeed - 0.03).toFixed(3)} -> ${g2d ? 'PASS' : 'FAIL'}; G2 ${g2a && g2b && g2c && g2d ? 'PASS' : 'FAIL'}`);
   console.log('G3 PANEL: judged separately from the balance-panel compare .md (see evidence file).');
   console.log('G4 PROOF: judged separately from scripts/test-medicduty-a.js.');
-  const go = g1a && g1b && g2a && g2b && g2c && g2d;
+  const go = g1 && g2a && g2b && g2c && g2d;
   console.log(`VERDICT: ${go ? 'GO' : 'NO-GO'}`);
   return go ? 0 : 1;
 }

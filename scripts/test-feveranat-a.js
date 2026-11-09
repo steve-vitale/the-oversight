@@ -149,7 +149,14 @@ function runSweep(env, expectCode) {
     assert.strictEqual(b1.eps[0].duration, 2, 'first duration 12-10=2, got ' + b1.eps[0].duration);
     assert.strictEqual(b1.eps[0].outcome, 'cured', 'first outcome cured');
     assert.strictEqual(b1.eps[0].treated, true, 'first treated (care d11 in [10,12])');
-    assert.deepStrictEqual(b1.eps[0].treatKinds, ['villagerCare'], 'first treatKinds');
+    // poolcapture-bar-a #1921: an end with outcome 'cured' counts as a
+    // treated outcome too, so this episode carries both kinds — tended by
+    // villagerCare on d11 AND cured by treatVillager on d12. (Adoption fix
+    // 2026-11-09: the worker's evidence ran test-poolcapture/medicdiag/
+    // medicduty but never test-feveranat-a.js; L8 encoded the old join.)
+    assert.deepStrictEqual(b1.eps[0].treatKinds, ['villagerCare', 'cure'], 'first treatKinds');
+    assert.strictEqual(b1.eps[0].cured, true, 'first cured (cured-end rule)');
+    assert.strictEqual(b1.eps[0].curedBy, 'cured-end', 'first curedBy');
     assert.strictEqual(b1.eps[1].duration, 4, 'second duration 24-20=4');
     assert.strictEqual(b1.eps[1].treated, false, 'second untreated');
     assert.strictEqual(b1.orphanEnds.length, 0, 'no orphan ends');
