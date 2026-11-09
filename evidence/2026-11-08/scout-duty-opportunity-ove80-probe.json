@@ -1,0 +1,35 @@
+{
+  "tip": "ae3fb87c3daf81a3cbef380af9d39ca472e64243",
+  "tipShort": "ae3fb87c3",
+  "branch": "cursor/scout-duty-opportunity-9002",
+  "probe": "ove-80-scout-duty-absence",
+  "staticDutyFeedTokenCounts": {
+    "scout": 0,
+    "patrol": 4,
+    "hunt": 14,
+    "teach": 6,
+    "forage": 8,
+    "cook": 3,
+    "water": 6
+  },
+  "alignHasScoutBranch": true,
+  "scenarios": [
+    {
+      "name": "low_pantry_plus_animals_plus_teach_gap",
+      "duties": ["forage", "cook", "hunt", "teach"],
+      "scout": false
+    },
+    {
+      "name": "forced_fresh_raid_plus_prey_teach_pantry",
+      "duties": ["forage", "cook", "patrol", "hunt", "teach"],
+      "scout": false
+    },
+    {
+      "name": "full_pantry_heard_threat",
+      "duties": ["patrol", "hunt", "teach"],
+      "scout": false
+    }
+  ],
+  "anyScoutAd": false,
+  "verdict": "SCOUT_DUTY_OFFER_BRANCH_ABSENT"
+}
