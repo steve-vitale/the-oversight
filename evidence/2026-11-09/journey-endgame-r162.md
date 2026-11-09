@@ -333,12 +333,40 @@ heavy load: `test-measurement-cache-flags` (84.5s),
 failure. Log:
 `evidence/2026-11-09/journey-endgame-r162-gate4.log`.
 
-Second proof refresh on the final tree: neutral panel seed 7 × 4
+Second proof refresh on the tree at the time: neutral panel seed 7 × 4
 policies × 150d (`evidence/2026-11-09/neutral-r162-rebased2.json.gz`),
-proof pair 9/9 + 9/9 and r162 proof test 19/19 verified on the
-final tree before gate 4. The measurement proof is current on
-this branch. Log:
+proof pair 9/9 + 9/9 and r162 proof test 19/19 verified on that
+tree before gate 4. (That tree was called "final" above; master
+moved twice more during closeout, so it was not final — see gates 5
+and the third refresh below.) Log:
 `evidence/2026-11-09/journey-endgame-r162-neutral-panel-rebased2.log`.
+
+Gate 5 (closeout, re-rebased tree `8419eefa4` — master moved again:
+scale r113 `5b8ff908e` + medheadcount-suite evidence `8419eefa4`,
+manifest move, so a third proof refresh was run first):
+`check.js --quick` **293 passed / 7 failed in 1413s** — the
+standing 4 (mobile-combat-cadence, occupation-panels,
+phone-frame-proof, establishment-r20) + 3 load artifacts:
+`test-measurement-cache-flags` (80.5s),
+`test-solo-campaign-endings` (120s timeout — 15/15 standalone),
+`test-trust-observer-neutrality` (120s timeout — 6/6 standalone).
+Capable-bot passed this run. No new attributable failure. Log:
+`evidence/2026-11-09/journey-endgame-r162-gate5.log`.
+
+Third proof refresh on the `8419eefa4` tree: neutral panel seed 7 × 4
+policies × 150d (`evidence/2026-11-09/neutral-r162-rebased3.json.gz`),
+proof pair 9/9 + 9/9 and r162 proof test 19/19 verified on the
+rebased tree before gate 5. This refresh closes the standalone
+measurement-proof-refresh todo (r156 + r161 + r121 staleness) once
+merged. Log:
+`evidence/2026-11-09/journey-endgame-r162-neutral-panel-rebased3.log`.
+
+Closeout note: after gate 5, master moved once more to `d781f354d`
+(Loop B 1030Z round evidence — 12 evidence files + 2 new test
+scripts, no manifest inputs), so the branch was rebased a fourth
+time onto that SHA; proof pair + r162 proof re-verified and the two
+new test scripts run standalone on the rebased tree before the
+merge. No further panel refresh was owed (evidence-only move).
 
 ## Verdicts
 
