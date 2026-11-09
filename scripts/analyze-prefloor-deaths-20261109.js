@@ -53,12 +53,18 @@ function classifySeed(corpus) {
   const dayMissing = fallen.filter(function (f) { return !f || f.day == null; }).length;
   const split = emptySplit();
   const raw = {};
+  const rawClasses = {};
   const otherBreakdown = {};
   pre90.forEach(function (f) {
     const cl = classifyCause(f);
     split[cl] += 1;
     const c = f.cause != null ? String(f.cause) : '<missing>';
     raw[c] = (raw[c] || 0) + 1;
+    // Record the class of the REAL entry (with its monsterName), not of a
+    // bare-cause synthetic: a 'Gavel' entry WITH monsterName set is wild,
+    // and the census must print that, not the other a bare lookup gives.
+    rawClasses[c] = rawClasses[c] || {};
+    rawClasses[c][cl] = (rawClasses[c][cl] || 0) + 1;
     if (cl === 'other') otherBreakdown[c] = (otherBreakdown[c] || 0) + 1;
   });
   const total90 = pre90.length;
@@ -83,7 +89,7 @@ function classifySeed(corpus) {
     seed: corpus.seed, gameDays: corpus.gameDays, endReason: corpus.endReason,
     floorReach: floorReach, floorReachRows: floorReachRows, floorDisagree: floorReach !== floorReachRows,
     fallenTotal: fallen.length, pre90Total: total90, dayMissing: dayMissing,
-    split: split, shares: shares, raw: raw, otherBreakdown: otherBreakdown,
+    split: split, shares: shares, raw: raw, rawClasses: rawClasses, otherBreakdown: otherBreakdown,
     sitCalls: sitCalls, seatTaken: seatTaken, doorsEntered: doorsEntered,
     contradiction: sitCalls > 0 || seatTaken > 0 || doorsEntered > 0,
     caveatFlag: caveatFlag,
@@ -98,6 +104,7 @@ function aggregateSeedClassifications(list) {
   const primary = emptySplit();
   const subset = emptySplit();
   const raw = {};
+  const rawClasses = {};
   const otherBreakdown = {};
   let primaryN = 0, subsetN = 0, dayMissing = 0;
   list.forEach(function (cl) {
@@ -106,6 +113,12 @@ function aggregateSeedClassifications(list) {
     dayMissing += cl.dayMissing;
     Object.keys(cl.raw).forEach(function (c) {
       raw[c] = (raw[c] || 0) + cl.raw[c];
+    });
+    Object.keys(cl.rawClasses || {}).forEach(function (c) {
+      rawClasses[c] = rawClasses[c] || {};
+      Object.keys(cl.rawClasses[c]).forEach(function (k) {
+        rawClasses[c][k] = (rawClasses[c][k] || 0) + cl.rawClasses[c][k];
+      });
     });
     Object.keys(cl.otherBreakdown).forEach(function (c) {
       otherBreakdown[c] = (otherBreakdown[c] || 0) + cl.otherBreakdown[c];
@@ -133,7 +146,7 @@ function aggregateSeedClassifications(list) {
     primaryDominant: dominant(primary, primaryN),
     subset: subset, subsetN: subsetN, subsetShares: shares(subset, subsetN),
     subsetDominant: dominant(subset, subsetN),
-    raw: raw, otherBreakdown: otherBreakdown, dayMissing: dayMissing,
+    raw: raw, rawClasses: rawClasses, otherBreakdown: otherBreakdown, dayMissing: dayMissing,
   };
 }
 
@@ -180,7 +193,8 @@ if (require.main === module) {
   console.log('dominant: ' + agg.subsetDominant.cls + ' ' + (100 * agg.subsetDominant.share).toFixed(1) + '% — ' + (agg.subsetDominant.meets50 ? 'MEETS the 50% bar' : 'below the 50% bar'));
   console.log('\nRAW CAUSE CENSUS (pre-90 deaths, all causes, nothing hidden):');
   Object.keys(agg.raw).sort(function (a, b) { return agg.raw[b] - agg.raw[a]; }).forEach(function (c) {
-    console.log('  ' + agg.raw[c] + '  ' + JSON.stringify(c) + '  -> ' + classifyCause({ cause: c }));
+    const classes = Object.keys(agg.rawClasses[c] || {}).map(function (k) { return k + ' ' + agg.rawClasses[c][k]; }).join(', ');
+    console.log('  ' + agg.raw[c] + '  ' + JSON.stringify(c) + '  -> ' + classes);
   });
   console.log('\nOTHER-CLASS BREAKDOWN (named):');
   const ob = agg.otherBreakdown;
@@ -217,7 +231,8 @@ if (require.main === module) {
     console.log('dominant: ' + dwAgg.primaryDominant.cls + ' ' + (100 * dwAgg.primaryDominant.share).toFixed(1) + '% — ' + (dwAgg.primaryDominant.meets50 ? 'MEETS the 50% bar' : 'below the 50% bar'));
     console.log('\nDOORWALK RAW CAUSE CENSUS (pre-90):');
     Object.keys(dwAgg.raw).sort(function (a, b) { return dwAgg.raw[b] - dwAgg.raw[a]; }).forEach(function (c) {
-      console.log('  ' + dwAgg.raw[c] + '  ' + JSON.stringify(c) + '  -> ' + classifyCause({ cause: c }));
+      const classes = Object.keys(dwAgg.rawClasses[c] || {}).map(function (k) { return k + ' ' + dwAgg.rawClasses[c][k]; }).join(', ');
+      console.log('  ' + dwAgg.raw[c] + '  ' + JSON.stringify(c) + '  -> ' + classes);
     });
     const dwFloorN = dwClassified.filter(function (c) { return c.floorReach; }).length;
     const dwNational = dwClassified.filter(function (c) { return c.scaleRank === 'national' || c.scaleRank === 'global'; }).length;

@@ -110,6 +110,16 @@ check('G1 seed: dehydration lands in other, named', cl.split.other === 1 && cl.o
 check('G1 seed: floorReach false at 70d', cl.floorReach === false);
 check('G1 seed: no contradiction on a clean corpus', cl.contradiction === false);
 check('G1 seed: day-95 and day-120 deaths excluded from pre-90', cl.raw['the wild'] === 1 && (cl.raw['the arena'] || 0) === 1, JSON.stringify(cl.raw));
+check('G1 seed: raw census records the REAL entry class (Ad Break with monsterName is wild, not other)',
+  cl.rawClasses['Ad Break'] && cl.rawClasses['Ad Break'].wild === 1 && !cl.rawClasses['Ad Break'].other, JSON.stringify(cl.rawClasses['Ad Break']));
+const clGavel = AN.classifySeed(Object.assign({}, synthWinseek, { seed: 99907,
+  fallen: [{ villagerId: 'a', day: 40, cause: 'Gavel', monsterName: 'Gavel', name: 'A' }] }));
+check('G1 seed: Gavel-with-monsterName counts wild in split AND census (not other)',
+  clGavel.split.wild === 1 && clGavel.split.other === 0 && clGavel.rawClasses.Gavel.wild === 1, JSON.stringify(clGavel.split) + ' ' + JSON.stringify(clGavel.rawClasses));
+const clGavelBare = AN.classifySeed(Object.assign({}, synthWinseek, { seed: 99908,
+  fallen: [{ villagerId: 'a', day: 40, cause: 'Gavel', name: 'A' }] }));
+check('G1 seed: Gavel WITHOUT monsterName lands in other-NAMED (no silent wild)',
+  clGavelBare.split.other === 1 && clGavelBare.otherBreakdown.Gavel === 1, JSON.stringify(clGavelBare.split));
 const clFloor = AN.classifySeed(Object.assign({}, synthWinseek, { seed: 99902, gameDays: 120, daily: [{ day: 2 }, { day: 120 }] }));
 check('G1 seed: floorReach true at 120d', clFloor.floorReach === true);
 const clSit = AN.classifySeed(Object.assign({}, synthWinseek, { seed: 99903, sitVerbMsgs: [{ call: 'tableTakeSeat', day: 90 }] }));
