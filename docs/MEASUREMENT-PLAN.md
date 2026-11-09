@@ -69,6 +69,14 @@ authored ability utilization. Metric IDs/directions/tolerances unchanged;
 this is an observer bag for typed ability channels, not a utilization
 prove-out.
 
+Skill typed bag (OVE-184, scripts-only): the collector still increments
+`events.skill_used` and now also fills additive `events.skill_used_by_id`
+from `tele('skill_used', { skill })` (villager field-fight `ffFired` ability
+ids). Missing/non-string `skill` increments `events.skill_used_missing_id`.
+Metric IDs/directions/tolerances unchanged; this is an observer bag for typed
+villager skill fires, not a utilization prove-out. Distinct from player
+`ability_used` / `abilityAccepted`.
+
 Capstone acquisition repair (local2026-10-18): the collector now observes
 `maybeGrantCapstoneItem` as the capstone source, including direct dawn gifts
 and nested actions. Actual player/NPC gifts, repeat ceremonies, source

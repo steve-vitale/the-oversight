@@ -198,6 +198,15 @@ function install(G) {
       // `events.ability_used_by_id` (any fire), not only `ability_used_ok_by_id` /
       // `abilityAccepted`. Fixing the Game return is a separate authorized change.
       // Source: OVE-188 / tip `a628aeaf3`.
+      // Additive typed-skill bag (OVE-184): channel int stays for back-compat;
+      // future censuses attribute villager field-fight fires via events.skill_used_by_id.
+      // skill_used.skill is a held ability id (ffFired), not a separate skills.json space.
+      if (type === 'skill_used') {
+        const id = data && typeof data.skill === 'string' ? data.skill : null;
+        const bag = events.skill_used_by_id || (events.skill_used_by_id = Object.create(null));
+        if (id) bag[id] = (bag[id] || 0) + 1;
+        else events.skill_used_missing_id = (events.skill_used_missing_id || 0) + 1;
+      }
       if (type === 'death' && data?.player) { bearerIds.add(this.villagerId); if (this.villagerId === initial && firstDeath == null) firstDeath = this.state.scholar.day; }
       if (type === 'ability_used' && data?.ok) accepted++;
       if (type === 'class_recognized') rememberClass(data?.who === 'player' ? 'player' : 'npc', data, data?.who);
