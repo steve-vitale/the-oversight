@@ -24,6 +24,7 @@
 //   - titanLeaveArena() -> map a large battlefield back to its world node
 //   - titanReleaseCommitted(titanId) -> Haven's committed come home (shared with network-campaign.js)
 //   - titanStandDown(titanId) -> break an out-of-combat muster, release its workforce and stop upkeep
+//   - titanLastStandingContinuity() -> Unkillable ARMY last-standing refuse-rout when Game.unkillableLastStandingLeanFor > 0 and holder is last living ours blade
 //   - _titanTest (test hooks: internals exposed for proof tests)
 //   - titanTemptation(villageId) -> {temptation, loyalty, verdict} (the turn's math, visible at council)
 // rules:
@@ -41,6 +42,7 @@
 //   - garden_army_muster_feed: Living Garden ARMY scale — titanMusterUpkeep honors Game.gardenMusterFeedFor before/alongside playerPackSpend when an ascended Garden holder has harvestDay active; covered kcal skip pack debit and hunger trust bleed (code: titanMusterUpkeep, godverbs.js gardenMusterFeedFor; OVE-116)
 //   - market_army_outfit_lean: Market God ARMY scale — titanOutfit honors Game.marketOutfitLeanFor so the same transferred pieces yield higher force wbonus/varmor/gearValue when an ascended Market holder is active (code: titanOutfit, godverbs.js marketOutfitLeanFor; OVE-120)
 //   - all_seeing_army_council_lean: All-Seeing ARMY scale — titanWarCouncil honors Game.allSeeingCouncilLeanFor so readiness honesty, scout-intel clarity, and counter-hint reveal lean when an ascended All-Seeing holder is active (code: titanWarCouncil, godverbs.js allSeeingCouncilLeanFor; OVE-128)
+//   - unkillable_last_standing_army_lean: Unkillable ARMY scale — titanLastStandingContinuity honors Game.unkillableLastStandingLeanFor so when the ascended Unkillable holder is the last living ours blade in a titan fight, refuse rout / steadiness + last-standing beat (code: titanLastStandingContinuity, godverbs.js unkillableLastStandingLeanFor; OVE-136)
 
 (function () {
   // ATTACH PATTERN (crisis 2026-10-11): game.js only sets
@@ -1526,6 +1528,91 @@
     } catch (e) {}
   }
 
+  // ---------- Unkillable ARMY: last-standing continuity (OVE-136) ----------
+  // god.scale.army: "The coalition's last one standing."
+  // When an ascended Unkillable holder is the sole living ours blade in a
+  // titan/coalition fight, refuse rout: steadiness flag + last-standing beat.
+  // Called from tactical flee paths (and proofs) through Game so the helper
+  // can be stripped. Does not invent free Phoenix for every blade.
+  function titanOursAlive(f) {
+    var out = [];
+    ((f && f.fighters) || []).forEach(function (x) {
+      if (!x || x.alive === false || x.fled || (x.hp || 0) <= 0) return;
+      if (x.kind === 'player' || x.key === 'p' || x.kind === 'villager' || x.kind === 'ally') out.push(x);
+    });
+    return out;
+  }
+  function titanFighterIsUnkillableHolder(x) {
+    try {
+      if (!x) return false;
+      if (x.kind === 'player' || x.key === 'p') return Game.holderGod && Game.holderGod('player') === 'unkillable';
+      if (x.villagerId) return Game.holderGod && Game.holderGod(x.villagerId) === 'unkillable';
+    } catch (e) {}
+    return false;
+  }
+  function titanFightLive() {
+    try {
+      var tf = (Game.state && Game.state.titans && Game.state.titans._fight) || null;
+      if (tf && tf.titan) return true;
+    } catch (e) {}
+    try {
+      var f = Game.tbfight;
+      if (!f || f.over) return false;
+      if (f.titan) return true;
+      return (f.fighters || []).some(function (x) {
+        return x && (x.titan || (x.kind === 'monster' && titanDefs()[x.id]));
+      });
+    } catch (e2) { return false; }
+  }
+  function titanLastStandingContinuity(opts) {
+    var lean = 0;
+    try { lean = Game.unkillableLastStandingLeanFor ? Game.unkillableLastStandingLeanFor() : 0; } catch (e) { lean = 0; }
+    if (!(lean > 0)) lean = 0;
+    var f = Game.tbfight;
+    var empty = {
+      lean: lean,
+      titan: false,
+      lastStanding: false,
+      refusedRout: false,
+      steadiness: 0,
+      oursAlive: 0,
+      holderAlive: false,
+    };
+    if (!f || f.over) return empty;
+    var titan = titanFightLive();
+    var ours = titanOursAlive(f);
+    var holders = ours.filter(titanFighterIsUnkillableHolder);
+    var out = {
+      lean: lean,
+      titan: !!titan,
+      lastStanding: false,
+      refusedRout: false,
+      steadiness: 0,
+      oursAlive: ours.length,
+      holderAlive: holders.length > 0,
+    };
+    if (!titan || !(lean > 0) || ours.length !== 1 || holders.length !== 1) return out;
+    out.lastStanding = true;
+    out.refusedRout = true;
+    out.steadiness = lean;
+    var holder = holders[0];
+    holder.fled = false;
+    holder.alive = true;
+    holder.rallied = Math.max(holder.rallied || 0, 2);
+    holder.lastStanding = true;
+    f.lastStandingHold = true;
+    f.lastStandingSteadiness = lean;
+    if (opts && opts.forFighter) {
+      opts.forFighter.fled = false;
+      opts.forFighter.rallied = Math.max(opts.forFighter.rallied || 0, 2);
+    }
+    if (!f._lastStandingSaid) {
+      f._lastStandingSaid = true;
+      Game.say('\uD83D\uDD25 The coalition\'s last one standing holds — blades refuse to rout.');
+    }
+    return out;
+  }
+
   // ---------- attach ----------
 
   var methods = {
@@ -1540,6 +1627,7 @@
     titanSelfActions: titanSelfActions,
     titanSelfDo: titanSelfDo,
     titanStandDown: titanStandDown,
+    titanLastStandingContinuity: titanLastStandingContinuity,
     titanOutfit: titanOutfit,
     titanTemptation: titanTemptation,
     titanMusterReady: titanMusterReady,
@@ -1588,6 +1676,7 @@
     titanRecordOutcome: titanRecordOutcome,
     titanResolveOutcome: titanResolveOutcome,
     titanOutcomeLog: titanOutcomeLog,
+    titanLastStandingContinuity: titanLastStandingContinuity,
   };
 
   // wraps must apply after game.js defines the originals
