@@ -67,6 +67,49 @@ const H = require('./sim-harness');
     assert.strictEqual(G.convoSnippetIsStageDirection('Anyway. A small smile.'), true);
     assert.strictEqual(G.convoSnippetIsRealBeat('Anyway. A small smile.'), false);
 
+    // OVE-100 / OVE-97 tip hybrids: dialogue quotes + stage/diegesis/recap.
+    // Natural day~30 resume openers (Nino / Jesse / Luke / Toan shapes).
+    const nino = '"You\'re a good listener, you know that?" A tired smile.';
+    assert.strictEqual(G.convoSnippetIsStageDirection(nino), true, 'Nino mood+quote hybrid');
+    assert.strictEqual(G.convoSnippetIsRealBeat(nino), false, 'Nino must not quote into resume');
+
+    const jesse = 'You show them Pawpaw — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."';
+    assert.strictEqual(G.convoSnippetIsStageDirection(jesse), true, 'Jesse teach-diegesis+quote hybrid');
+    assert.strictEqual(G.convoSnippetIsRealBeat(jesse), false, 'Jesse must not quote into resume');
+
+    const luke = '"Like I said — we\'re still on that personal stuff."';
+    assert.strictEqual(G.convoSnippetIsStageDirection(luke), true, 'Luke Like-I-said still-on recap');
+    assert.strictEqual(G.convoSnippetIsRealBeat(luke), false, 'Luke must not quote into resume');
+    assert.strictEqual(
+      G.convoSnippetIsStageDirection('"As I said — we\'re still on what you\'re hoping for."'),
+      true,
+      'As I said still-on recap'
+    );
+
+    const toan = '"Well." A breath. "That\'s where things stand."';
+    assert.strictEqual(G.convoSnippetIsStageDirection(toan), true, 'Toan breath+quote hybrid');
+    assert.strictEqual(G.convoSnippetIsRealBeat(toan), false, 'Toan must not quote into resume');
+
+    // Resume must keep unfinished label and drop hybrid quote (Nino shape).
+    L.open = (L.open || []).filter(o => o.tid !== 'secrets');
+    L.open.push({
+      tid: 'secrets',
+      label: 'what they confided',
+      day: (G.state.scholar || {}).day || 1,
+      why: 'got cut off',
+      snippet: nino,
+    });
+    opener = null;
+    for (let i = 0; i < 40 && !opener; i++) {
+      const c = G.convoGet(vid);
+      if (c) c._resumedOnce = false;
+      opener = G.convoResumeOpener(vid);
+    }
+    assert.ok(opener && opener.line, 'hybrid resume opener fires');
+    assert.ok(/confided/i.test(opener.line), 'confide label kept: ' + opener.line);
+    assert.ok(!/tired smile/i.test(opener.line), 'mood hybrid not quoted: ' + opener.line);
+    assert.ok(!/good listener/i.test(opener.line), 'mood speech half not quoted: ' + opener.line);
+
     // Real spoken content still counts.
     assert.strictEqual(G.convoSnippetIsRealBeat('The water haul went wrong after the storm.'), true);
     // characterGen reaction wrapper + dialogue is spoken memory, not mood pool.

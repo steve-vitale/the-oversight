@@ -1838,9 +1838,18 @@
     // warm-silence "You say nothing…" and recap scaffolding "Still on X"
     // / "Say it plain. Still on X" still quoted into resume openers
     // (seed99 Nora plant lesson; seed1 Dale/Ella hard time).
+    // OVE-100 / OVE-97 tip residual: dialogue+stage hybrids (mood pools,
+    // teach diegesis + reaction quotes, recap "Like I said — still on")
+    // used to early-out on any embedded `"`, then resume quote-hygiene
+    // stripped the marks and left pure diegesis/mood in the opener.
     convoSnippetIsStageDirection(sn) {
       if (!sn) return false;
       const s = String(sn).trim().replace(/^["'“”]+|["'“”]+$/g, '');
+      // Hybrids win even when dialogue quotes are present — resume hygiene
+      // strips `"` and would otherwise surface the stage half as "memory".
+      if (/\bYou show them\b/i.test(s)) return true;
+      if (/\b(tired smile|small smile|A breath)\b/i.test(s)) return true;
+      if (/\b(Like I said|As I said|Short version)\b/i.test(s) && /\bstill on\b/i.test(s)) return true;
       // Spoken reactions often wrap a beat + dialogue
       // (characterGen: 'They go still. "So it's not just me…"'). Those are
       // real memory; only pure mood/silence narration is stage direction.
