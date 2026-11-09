@@ -337,3 +337,19 @@ base, standalone:
 **No lever-attributable failure. Gate adjudicated GO.** (A full
 check.js --quick is still owed on the rebased tree before landing,
 per the rebase discipline for src/js changes.)
+
+## GATE — RE-RUN ON THE REBASED TREE (2026-11-09 16:57–17:03Z)
+
+After rebasing onto `4c44e35de` (wideduty landing) and re-running all
+three proof tests green (coach ALL PASS, main RESULT: PASS, narr ALL
+NARR CHECKS PASSED), the full gate was re-run on the rebased tree:
+**294 passed, 6 failed in 394s, zero timeouts**
+(log `journey-social-life-r163-gate-rebased.log`). The 6 failures are
+exactly the standing set: the measurement-proof staleness pair
+(truth.js is a manifest input; the 1530Z measureproof-refresh arm
+re-derives its final panel on the final merged master at its closeout),
+mobile-combat-cadence, occupation-panels, phone-frame-proof,
+establishment-r20-fixes. trust-observer-neutrality passed in 54s —
+the worker's gate exit-1 on it was a load artifact, as adjudicated.
+**No lever-attributable failure. Gate adjudicated GO on the rebased
+tree. r163 is ready to land.**
