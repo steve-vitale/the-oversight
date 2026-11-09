@@ -301,11 +301,24 @@ measurement-proof pair GREEN (9/9 + 9/9, verified standalone in
 closeout). No new attributable failure. Log:
 `evidence/2026-11-09/journey-endgame-r162-gate2.log`.
 
-Note: gate 2 ran on the pre-rebase tree (base `525046c1c`). Master
-has since moved (`60eb9a5bb` r121 conversation.js + `8cee6a8d2`
-medheadcount evidence), so the branch was rebased onto `8cee6a8d2`
-at closeout and the proof pair + proof test + gate re-verified on
-the rebased tree (see closeout commits).
+Gate 3 (closeout, rebased tree `8cee6a8d2`): `check.js --quick`
+**295 passed / 5 failed in 986s** — the standing 4
+(mobile-combat-cadence, occupation-panels, phone-frame-proof,
+establishment-r20) + `test-trust-observer-neutrality` (120s
+timeout, load artifact — the same class of timeout has fired
+intermittently under load before; it passes standalone). No new
+attributable failure. The first gate-3 attempt was killed mid-run
+by a service restart (~04:25 CST, ~190/300 scripts in, no
+summary); this is the re-run. Log:
+`evidence/2026-11-09/journey-endgame-r162-gate3.log`.
+
+Proof refresh on the rebased tree: neutral panel seed 7 × 4
+policies × 150d (`evidence/2026-11-09/neutral-r162-rebased.json.gz`),
+proof pair 9/9 + 9/9 and r162 proof test 19/19 verified on the
+rebased tree before gate 3. This refresh also covers the r156 +
+r161 + r121 staleness, so the measurement proof is current on this
+branch. Log:
+`evidence/2026-11-09/journey-endgame-r162-neutral-panel-rebased.log`.
 
 ## Verdicts
 
