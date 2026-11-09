@@ -308,6 +308,19 @@
         `You've seen the smooth deflect before — it buys them time, not truth. Thin evidence gets deflected. Bring one more thread before you go again.`,
         `The deflect is a move you know now. It works when what you have is thin. Make it thick.`,
       ],
+      // COACH-PRIOR-DEFLECT (journey social r163, 2026-11-09): the
+      // priorDeflect branch used to serve ONE hardcoded string, so it
+      // repeated verbatim every time the doubt probe was re-pressed in
+      // one sitting (r159: 7x panel-wide, 3x in Leo's sitting). Every
+      // other coach line draws from a pool with per-game no-repeat —
+      // this one does now too. Same meaning in all three variants:
+      // they've deflected you before, the evidence needs to be
+      // heavier, one more thread before you speak.
+      coachPriorDeflect: [
+        `They've deflected you before. The evidence needs to be heavier this time — one more thread before you speak.`,
+        `You've watched them deflect before — the same smooth sidestep. Thin evidence won't hold them. Gather one more thread first.`,
+        `They deflected you last time, and what you have hasn't grown since. One more thread before you speak, or they'll slip away again.`,
+      ],
       coachAttack: [
         `You know the counter-attack now — the anger IS the tell. It means the accusation landed. Don't flinch.`,
         `Last time, they came at you for asking. That's not innocence talking. Hold your ground.`,
@@ -1213,7 +1226,10 @@
       const priorDeflect = (doubt.evidence || []).some(e => /deflected/.test(String(e)));
       let coach = null;
       if (priorDeflect) {
-        coach = `They've deflected you before. The evidence needs to be heavier this time — one more thread before you speak.`;
+        // r163: drawn from the coachPriorDeflect pool (per-game
+        // no-repeat via drawTruthLine) — the old hardcoded string
+        // repeated verbatim on every re-press in one sitting.
+        coach = this.drawTruthLine('coachPriorDeflect', vid);
       } else if ((L.deflected || 0) >= 2) {
         coach = this.drawTruthLine('coachDeflect', vid);
       } else if ((L.attacked || 0) >= 1) {
