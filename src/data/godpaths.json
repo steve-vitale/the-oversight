@@ -657,7 +657,7 @@
           "hint": "Hold the Relay office yourself. Claim its wires or accept the village appointment; the work and its costs must be yours."
         },
         "play": {
-          "_doc": "Speak and Be Heard. Combat Rally Cry: every ally on the field takes an extra turn now, emboldened rallyRounds rounds with the next 2 strikes x strikeMult; every foe hesitates a round. Daily Be Heard (out of a fight): every Haven villager +trust, every fight today starts rallied, and ARMY scale — every linked/allied foreign village hears the word the same day (opinion +trust, link trust when linked, voiceDay stamp so their people fight rallied). Each use costs grounding. WEAKNESS: the single point of failure: if the Voice falls in a fight, every ally on the field is stunned a round (the network goes dark).",
+          "_doc": "Speak and Be Heard. Combat Rally Cry: every ally on the field takes an extra turn now, emboldened rallyRounds rounds with the next 2 strikes x strikeMult; every foe hesitates a round. Daily Be Heard (out of a fight): every Haven villager +trust, every fight today starts rallied, and ARMY scale — every linked/allied foreign village hears the word the same day (opinion +trust, link trust when linked, voiceDay stamp so their people fight rallied). Each use costs grounding. WEAKNESS: the single point of failure: if the Voice falls in a fight, every ally on the field is stunned a round (the network goes dark). CONTEST: performance contests (impress, moot) lean for the ascended holder by contestLean on impress making scores in contestEngine _cxOther and moot case scores in _cxMoot — cookfight/guest stay Garden feast contests.",
           "actions": [
             {
               "id": "rally_cry",
@@ -684,7 +684,12 @@
           "grounding": 5,
           "rallyRounds": 3,
           "strikeMult": 1.5,
-          "trust": 2
+          "trust": 2,
+          "performanceContests": [
+            "impress",
+            "moot"
+          ],
+          "contestLean": 18
         }
       }
     },
