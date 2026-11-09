@@ -189,6 +189,15 @@ function install(G) {
         }
         if (!known) events.prize_ability_offer_missing_id = (events.prize_ability_offer_missing_id || 0) + 1;
       }
+      // Legacy plain-id `Game.activateAbility` (blood_magic, time_skip, dowsing,
+      // echo_location, field_medicine, herbal_remedy, purify, compost_king,
+      // cannibal_frenzy) always returns `null` after `_activateAbilityInner`, so
+      // `telemetry-hooks` emits `ability_used` with `ok:false` even when the effect
+      // fired. Composite `ability.action` activates route through `useAbility` and
+      // can set `ok:true`. For those nine IDs, utilization should read
+      // `events.ability_used_by_id` (any fire), not only `ability_used_ok_by_id` /
+      // `abilityAccepted`. Fixing the Game return is a separate authorized change.
+      // Source: OVE-188 / tip `a628aeaf3`.
       if (type === 'death' && data?.player) { bearerIds.add(this.villagerId); if (this.villagerId === initial && firstDeath == null) firstDeath = this.state.scholar.day; }
       if (type === 'ability_used' && data?.ok) accepted++;
       if (type === 'class_recognized') rememberClass(data?.who === 'player' ? 'player' : 'npc', data, data?.who);
