@@ -1,0 +1,21 @@
+(pre-talk seed: ask_favor planted d118; takenWantDay=0; convoCount=8)
+=== seed 97903 day 120 — conversation with Carlos (carlos_diaz) ===
+occupation=Fisherman temperament=prickly trust=44 dead=false
+want: ask_favor (stage 0)
+open thread: request fromSeed=true
+picker: control
+
+THEM: Carlos: "I've been thinking. You and me — we should be bonded. Not just neighbors. Will you stick with me?"
+(turn0 choices: bond:accept, bond:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, leave)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "It's all right if you don't know."
+YOU: [dlg:more] "Go on."
+THEM: "About the pantry run — I hate to ask twice, but it's still open. Will you?"
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Good. The ridge above the creek, dawn. Pack light — we move fast."
+YOU: [goon] "I'm listening."
+THEM: "I've been thinking. You and me — we should be bonded. Not just neighbors. Will you stick with me?"
+YOU: (leave)
+pre-close: want ask_favor stage 3 thread want
+closing line: "We're done here. Don't make it weird."
+(gossip picks this sitting: 0)

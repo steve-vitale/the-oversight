@@ -1,0 +1,25 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=10)
+=== seed 97903 day 90 — conversation with Ruth (ruth_goldstein) ===
+occupation=librarian temperament=dry trust=91 dead=false
+want: ask_favor (stage 1)
+open thread: want fromSeed=false
+picker: control
+
+THEM: "Water's almost gone — 3 liters. I can't carry enough alone. First light, the creek, you and me?"
+(turn0 choices: dlg:favor_requirements, dlg:details, dlg:cant, dlg:commit, goon, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+YOU: [goon] "Go on."
+THEM: "...I should say, I trade in what I know. My knowledge for yours. Or food, if you're short on secrets."
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Aroha headed out for water."
+YOU: [dlg:more] "Go on."
+THEM: "Tashi is back. Walked in like they'd never left."
+YOU: [dlg:react] (listen)
+THEM: "I left. Walked back in like I'd never left, apparently."
+YOU: [dlg:more] "I’m listening."
+THEM: "Nathan headed out for water."
+YOU: (leave)
+pre-close: want ask_favor stage 3 thread gossip
+closing line: "Later."
+(gossip picks this sitting: 1)

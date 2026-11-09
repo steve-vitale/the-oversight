@@ -1,0 +1,21 @@
+(pre-talk seed: curious planted d78; takenWantDay=0; convoCount=1)
+=== seed 97904 day 90 — conversation with Min-seok (visjoin_73) ===
+occupation=ESL teacher temperament=withdrawn trust=26 dead=false
+want: seek_taken (stage 1)
+open thread: want fromSeed=false
+picker: control
+
+THEM: "You talk to it -- the System. Have you ever asked? About the taken -- about Karen? You'd know about that."
+(turn0 choices: gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, leave)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: They nod, giving you room to think.
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [goon] "Go on. I'm listening."
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: You walk to the trap line with Min-seok. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+YOU: (leave)
+pre-close: want seek_taken stage 3 thread want
+closing line: "Okay. Bye. This was — fine. It was fine."
+(gossip picks this sitting: 0)
