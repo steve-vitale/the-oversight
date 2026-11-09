@@ -16,7 +16,10 @@
 // all built from favor.short only, all distinct in first chunk); the
 // engageBeat guard AND the dlg:details handler guard try v0, v1, v2 in
 // order and return the first unblocked one. Only when ALL THREE are blocked
-// does the whyLine go back to the caller (the honest exhaustion case).
+// does engageBeat return null (r166 — the whyLine NO LONGER goes back to
+// the caller: sayLine dry-replaces a blocked whyLine and returns the dry
+// line truthy, so no caller fallback ever answered; r165 wild case seed
+// 34007 d22 Sofia). Callers fall back to their graceful lines.
 // No RNG anywhere in the guard; ledgers untouched.
 //
 // Cases (each in its own process — never two harnesses in one process):
@@ -24,8 +27,12 @@
 //     return v1 ("I still need a hand with ..."), never the blocked
 //     whyLine, never a dry line. RED on r147 code (v1 does not exist).
 //   engage-allblocked  : whyLine + v0 + v1 + v2 all poisoned. engageBeat
-//     returns the whyLine itself — the documented last resort. (Passes on
-//     r147 code too: this pins unchanged exhaustion behavior.)
+//     returns null (r166: the whyLine no longer goes back — sayLine would
+//     dry-replace it and the caller's `!said` fallback never fires, so
+//     "the honest exhaustion case" was a dry line in the wild, seed 34007
+//     d22 Sofia; callers fall back to their graceful lines instead).
+//     (Passed on r147 code too when it asserted the whyLine; updated in
+//     r166 as a deliberate design change.)
 //   details-bothblocked: talk-request open, dlg:more, dlg:details with
 //     whyLine + v0 poisoned. The reply must name the need (v1), never a
 //     dry line. RED on r147 code.
@@ -155,8 +162,8 @@ async function runCase(mode) {
     const variants = [0, 1, 2].map(vi => Game.convoFavorNeedLine(vid, favor, true, vi));
     poisonRunLedger(Game, variants.map(nl => firstChunk(Game, nl)));
     const def = c.want.def;
-    const beat = def && typeof def.engageBeat === 'function' ? def.engageBeat.call(Game, vid) : null;
-    check('engage-allblocked: beat falls back to the whyLine (exhaustion)', !!beat && beat === favor.whyLine, String(beat || '').slice(0, 120));
+    const beat = def && typeof def.engageBeat === 'function' ? def.engageBeat.call(Game, vid) : 'UNCALLED';
+    check('engage-allblocked: beat is null (exhaustion — callers fall back gracefully, r166)', beat === null, String(beat || '').slice(0, 120));
     try { Game.endConvo(vid, 'left'); } catch (e) {}
     return;
   }

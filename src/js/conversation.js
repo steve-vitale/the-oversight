@@ -3624,10 +3624,12 @@
       // WANT THREAD (dialog-ui-fix 2026-10-11, defect 8): "tell me more" on a
       // want-driven conversation must deliver the want's content — not fizzle
       // to "that's all of it." The want def owns the concrete beat (the news,
-      // the favor, the warning); the thread draws from it. If the beat was
-      // already spoken, sayLine's ledger blocks the repeat and the caller
-      // falls through to the honest dry admission — which is correct, the
-      // content WAS delivered.
+      // the favor, the warning); the thread draws from it. If the favor's
+      // beat is fully ledger-blocked, engageBeat returns null
+      // (journey-succession r166) and the caller falls through to its own
+      // graceful line — the content was spoken by someone else in the run,
+      // not delivered to this player in this sitting, so a dry line here
+      // would lie about the thread.
       else if (t === 'want') {
         try {
           const w = c.want;

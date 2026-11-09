@@ -20,8 +20,11 @@
 // The fix (src/js, convo-wants.js ask_favor.engageBeat — ONE guard at the
 // source): when returning favor.whyLine, if convoWouldBlock(vid, wl)
 // then return convoFavorNeedLine(vid, favor, true) when that itself is
-// not blocked; otherwise return wl and let the caller's existing fallback
-// handle it. Ledgers untouched; no trust/consequence flow changes.
+// not blocked; otherwise (r166) return null — the blocked whyLine no
+// longer goes back, because sayLine dry-replaces it and returns the dry
+// line truthy, so no caller fallback ever answered (r165 wild case seed
+// 34007 d22 Sofia). Callers fall back to their graceful lines.
+// Ledgers untouched; no trust/consequence flow changes.
 //
 // Cases (each in its own process — never two harnesses in one process):
 //   engage  : wounded villager, whyLine pre-poisoned in the run ledger.

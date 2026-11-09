@@ -766,10 +766,21 @@
           // dries (Omar/Ivy/David) and the r147 before-leg reproduction
           // (Katarina d+30, water_haul, dlg:details at stage 0) all came
           // through this unguarded return. Name the live need fresh
-          // instead; the want stays live. Only when that too is blocked
-          // does the whyLine go back to the caller, whose existing
-          // fallback answers. Same shape as r146's dlg:details guard,
-          // at the source so no caller can miss it.
+          // instead; the want stays live. Same shape as r146's
+          // dlg:details guard, at the source so no caller can miss it.
+          // ALL-BLOCKED (journey-succession r166): when the whyLine AND
+          // all three need phrasings are blocked there is no speakable
+          // why left — the need phrasings ARE the ask's own words, and a
+          // villager who stated the ask three ways in this sitting has
+          // spent them all (seed 34007 d22 Sofia: pantry-run whyLine +
+          // v0/v1/v2 all blocked, the turn dried on the whyLine).
+          // Returning the blocked whyLine does NOT let the caller's
+          // fallback answer: sayLine dry-replaces it and returns the dry
+          // line truthy, so the caller's `!said` check never fires.
+          // Return null instead — every engageBeat caller falls back to
+          // its own graceful line (dlg:details' "It's... complicated",
+          // dlg:help's nowant pool, dlg:more's dry pool, the alive:want
+          // resume's "Here's the thing"). No RNG.
           const wl = favor.whyLine;
           if (wl && typeof this.convoWouldBlock === 'function' && this.convoWouldBlock(vid, wl)) {
             // BOTH-BLOCKED (journey-succession r151): the need-line itself
@@ -777,14 +788,15 @@
             // the 48-entry window — seed 33806 d+45 Katarina dried on the
             // r147 one-phrasing guard for exactly this). Try all three
             // fresh phrasings in order; only when every one is blocked
-            // does the whyLine go back to the caller, whose existing
-            // fallback answers. No RNG: the order is fixed.
+            // does the beat return null (r166, above). No RNG: the order
+            // is fixed.
             if (typeof this.convoFavorNeedLine === 'function') {
               for (let vi = 0; vi < 3; vi++) {
                 const need = this.convoFavorNeedLine(vid, favor, true, vi);
                 if (need && !this.convoWouldBlock(vid, need)) return need;
               }
             }
+            return null;
           }
           return wl;
         }

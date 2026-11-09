@@ -1,0 +1,44 @@
+
+== seed 34007: handoff d8 Andre -> Willow (organic)
+   CAP-NC: village-ended-before-deadline (newcomer-probe: Tomiris arrived d+69 probe d+69 deadline d+83 trust=40 want=ask_favor refused=false) bondedEver=true
+   CAP-D14 (descriptive): bonded-d14 (probe: Mai trust=37 want=ask_favor refused=false) bondedEver=true
+   OPP talk-requests (distinct, d+0..d+30, self excluded): total=7 unbonded=1 selfReqDayEntries=0
+       unbonded requesters: Mai(d9)
+   OPP bonds d+0..d+30: NPC-NPC new=6 over 29 bond-days (median/day=0); FIRST-bearer new=3 (driven-days=0, undriven-days=3); LATER-bearer new=0
+   OPP newcomers: arrivals=3 first-arrival d+69; FIRST-bearer new bonds with newcomers=0 vs pre-existing=3
+   MANTLE-FINE #0: entry d8 return d8 cause=the wild flippedImmediate=true fineLatency=1 coarseLatency=0 rollCover=true heldBriefly=false firstNewTag=sleep class=SAMPLING-or-CLEAN
+   MANTLE-FINE #1: entry d39 return d39 cause=contest flippedImmediate=true fineLatency=0 coarseLatency=null rollCover=true heldBriefly=false firstNewTag=post class=SAMPLING-or-CLEAN
+   MANTLE-FINE #2: entry d68 return d68 cause=starvation flippedImmediate=true fineLatency=1 coarseLatency=null rollCover=true heldBriefly=false firstNewTag=sleep class=SAMPLING-or-CLEAN
+   MANTLE-FINE #3: entry d70 return d70 cause=the wild flippedImmediate=true fineLatency=0 coarseLatency=null rollCover=false heldBriefly=false firstNewTag=post class=SAMPLING-or-CLEAN
+   MANTLE-FINE #4: entry d78 return d78 cause=the wild flippedImmediate=true fineLatency=1 coarseLatency=null rollCover=true heldBriefly=false firstNewTag=sleep class=SAMPLING-or-CLEAN
+   MANTLE-COARSE chain: Willow -> Bautista detected d39 entry d39 coarseLatency=0
+   MANTLE-COARSE chain: Bautista -> Ruth detected d68 entry d68 coarseLatency=0
+   MANTLE-COARSE chain: Ruth -> Sofia detected d70 entry d70 coarseLatency=0
+   MANTLE-COARSE chain: Sofia -> Frieda detected d78 entry d78 coarseLatency=0
+   MANTLE day-skips: none (sleep rolls: 78; 0-day no-advance sleeps: 13 — sleep called without rolling the day, not a skip)
+   CARRIED pick-time rank: 1 | funeral INCALL beat: true
+   relPost bonds=34 relD14=43 relD30=46 relEnd=57 relD14.selfId=gen_a0sosk5
+
+== seed 33998: handoff d6 Heinrich -> Ruby (scripted)
+   CAP-NC: no-newcomer-arrival (newcomer-probe: no newcomer arrived) bondedEver=false
+   CAP-D14 (descriptive): not-bonded-by-d14 (probe: Ruth trust=23 want=ask_favor refused=false) bondedEver=false
+   OPP talk-requests (distinct, d+0..d+30, self excluded): total=16 unbonded=0 selfReqDayEntries=0
+   OPP bonds d+0..d+30: NPC-NPC new=15 over 25 bond-days (median/day=0); FIRST-bearer new=0 (driven-days=0, undriven-days=0); LATER-bearer new=0
+   OPP newcomers: arrivals=0 first-arrival d+null; FIRST-bearer new bonds with newcomers=0 vs pre-existing=0
+   MANTLE-FINE #0: entry d6 return d6 cause=the expedition flippedImmediate=true fineLatency=0 coarseLatency=0 rollCover=false heldBriefly=false firstNewTag=scripted-kill class=SAMPLING-or-CLEAN
+   MANTLE day-skips: none (sleep rolls: 30; 0-day no-advance sleeps: 7 — sleep called without rolling the day, not a skip)
+   CARRIED pick-time rank: 1 | funeral INCALL beat: true
+   relPost bonds=31 relD14=46 relD30=0 relEnd=46 relD14.selfId=gen_hygtqan
+
+=== PANEL ===
+{"seed":"34007","cap":"village-ended-before-deadline","capEligible":false,"bondedEver":true,"probeVid":"Tomiris","deadlineDplus":83,"arrivals":3,"firstArrivalDplus":69,"firstBearerNewcomer":0,"firstBearerPreexisting":3,"capD14":"bonded-d14","reqTotal":7,"reqUnbonded":1,"selfReqDayEntries":0,"npcNew":6,"firstBearerNew":3,"firstBearerNewUndriven":3,"laterBearerNew":0,"pickRank":1,"incall":true,"mantleRows":[{"i":0,"entryDay":8,"returnDay":8,"cause":"the wild","flippedImmediate":true,"fineLatency":1,"coarseLatency":0,"rollCover":true,"heldBriefly":false,"firstNewTag":"sleep","cls":"SAMPLING-or-CLEAN"},{"i":1,"entryDay":39,"returnDay":39,"cause":"contest","flippedImmediate":true,"fineLatency":0,"coarseLatency":null,"rollCover":true,"heldBriefly":false,"firstNewTag":"post","cls":"SAMPLING-or-CLEAN"},{"i":2,"entryDay":68,"returnDay":68,"cause":"starvation","flippedImmediate":true,"fineLatency":1,"coarseLatency":null,"rollCover":true,"heldBriefly":false,"firstNewTag":"sleep","cls":"SAMPLING-or-CLEAN"},{"i":3,"entryDay":70,"returnDay":70,"cause":"the wild","flippedImmediate":true,"fineLatency":0,"coarseLatency":null,"rollCover":false,"heldBriefly":false,"firstNewTag":"post","cls":"SAMPLING-or-CLEAN"},{"i":4,"entryDay":78,"returnDay":78,"cause":"the wild","flippedImmediate":true,"fineLatency":1,"coarseLatency":null,"rollCover":true,"heldBriefly":false,"firstNewTag":"sleep","cls":"SAMPLING-or-CLEAN"}],"chainRows":[{"deadFirst":"Willow","newFirst":"Bautista","detectedDay":39,"entryDay":39,"coarseLatency":0},{"deadFirst":"Bautista","newFirst":"Ruth","detectedDay":68,"entryDay":68,"coarseLatency":0},{"deadFirst":"Ruth","newFirst":"Sofia","detectedDay":70,"entryDay":70,"coarseLatency":0},{"deadFirst":"Sofia","newFirst":"Frieda","detectedDay":78,"entryDay":78,"coarseLatency":0}],"skips":0}
+{"seed":"33998","cap":"no-newcomer-arrival","capEligible":false,"bondedEver":false,"deadlineDplus":null,"arrivals":0,"firstArrivalDplus":null,"firstBearerNewcomer":0,"firstBearerPreexisting":0,"capD14":"not-bonded-by-d14","reqTotal":16,"reqUnbonded":0,"selfReqDayEntries":0,"npcNew":15,"firstBearerNew":0,"firstBearerNewUndriven":0,"laterBearerNew":0,"pickRank":1,"incall":true,"mantleRows":[{"i":0,"entryDay":6,"returnDay":6,"cause":"the expedition","flippedImmediate":true,"fineLatency":0,"coarseLatency":0,"rollCover":false,"heldBriefly":false,"firstNewTag":"scripted-kill","cls":"SAMPLING-or-CLEAN"}],"chainRows":[],"skips":0}
+CAP-NC verdict: bonded-by-deadline 0/0 eligible seeds.
+CAP-NC binding verdict (r166 newcomer-channel bar): INSUFFICIENT-DATA (<3 eligible, or bonded fraction below the pass line)
+CAP-NC non-denominator: ["village-ended-before-deadline","no-newcomer-arrival"]
+Descriptive bondedEver (probe pair bonded in ANY snapshot or bondDaily): 1/1 probe-opened seeds.
+Descriptive CAP-D14 (r142 stranger probe): ["bonded-d14","not-bonded-by-d14"]
+OPP totals: unbonded talk-requests 1; FIRST-bearer new bonds on undriven days 3; NPC-NPC new bonds 21; newcomer arrivals 3; FIRST-bearer newcomer bonds 0 vs pre-existing 3; selfReqDayEntries total 0 (r133 purge regression check, expect 0).
+MANTLE-FINE verdict: deaths observed 6 (flippedImmediate=false: 0; fineLatency>=2: 0; fineLatency==1 unexplained: 0; held-briefly same-day cascade bearers: 0; coarse>fine sampling gaps: 0; day-skips total: 0).
+MANTLE-FINE binding verdict: PASS (mantle flips synchronously at every observed death; any coarse latency is sampling)
+MANTLE-COARSE (reported): [{"d":8,"coarse":0,"fine":1,"cls":"SAMPLING-or-CLEAN"},{"d":39,"coarse":null,"fine":0,"cls":"SAMPLING-or-CLEAN"},{"d":68,"coarse":null,"fine":1,"cls":"SAMPLING-or-CLEAN"},{"d":70,"coarse":null,"fine":0,"cls":"SAMPLING-or-CLEAN"},{"d":78,"coarse":null,"fine":1,"cls":"SAMPLING-or-CLEAN"},{"d":6,"coarse":0,"fine":0,"cls":"SAMPLING-or-CLEAN"}]

@@ -385,9 +385,13 @@
         // verbatim (r3: Ruby d85 ≡ Wolfgang d105; r4: Kai d105 too). Seven
         // variants now, in the gritty-warm villager voice — no filler, no
         // fabricated shared history. The originals stay first (tone kept).
-        const raw = completing && typeof c.want.def?.engageBeat === 'function'
-          ? c.want.def.engageBeat.call(this, vid)
-          : this.convoPickCycle(vid, 'dlg:comfort:lines', [
+        // ALL-BLOCKED (journey-succession r166): engageBeat returns null
+        // when the favor's why + all need phrasings are ledger-blocked —
+        // fall back to the comfort pool so the turn still speaks instead
+        // of voicing a null beat into silence.
+        const eb = (completing && typeof c.want.def?.engageBeat === 'function')
+          ? c.want.def.engageBeat.call(this, vid) : null;
+        const raw = eb || this.convoPickCycle(vid, 'dlg:comfort:lines', [
           '"Thanks. ...Thanks for saying that."',
           '"I — yeah. It helps, hearing that."',
           '"You\'re kind. Don\'t let this place change that."',
