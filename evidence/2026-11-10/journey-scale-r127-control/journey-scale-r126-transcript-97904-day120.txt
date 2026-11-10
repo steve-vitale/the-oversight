@@ -1,0 +1,25 @@
+(pre-talk seed: curious planted d98; takenWantDay=0; convoCount=1)
+=== seed 97904 day 120 — conversation with Morgan (visjoin_95) ===
+occupation=Baker temperament=gentle trust=41 dead=false
+want: ask_favor (stage 0)
+open thread: request fromSeed=false
+picker: control
+
+THEM: Morgan: "Can I ask you something? ... I want us to stick together. Properly. Watch each other's backs."
+(turn0 choices: bond:accept, bond:decline, gq:yn:yes, gq:yn:no, gq:yn:unsure, gq:yn:honest_pass, silence, leave)
+YOU: [gq:yn:unsure] "I don't know."
+THEM: They nod, giving you room to think.
+YOU: [dlg:more] "Go on."
+THEM: "The cistern's nearly dry — 7 liters left. I can't carry enough alone. First light, the creek, you and me?"
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Wait — I'm away from Haven, out on the road. I can't promise a dawn meet while I'm out — find me when I'm back, and we'll set it then."
+YOU: [goon] "I'm listening."
+THEM: "Come get air with me. I need to think out loud."
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Morgan shows you where they go to think. "Don't tell the others. Everyone needs one place."
+YOU: [goon] "I'm listening."
+THEM: "Can I ask you something? ... I want us to stick together. Properly. Watch each other's backs."
+YOU: (leave)
+pre-close: want ask_favor stage 3 thread want
+closing line: "See you at the fire."
+(gossip picks this sitting: 0)

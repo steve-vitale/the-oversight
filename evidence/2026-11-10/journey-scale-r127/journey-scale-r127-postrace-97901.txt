@@ -1,0 +1,14 @@
+d27 eval village_1 at=(4,4) target=(5,6) dist=3
+d27 walk village_1 at=(4,4) target=(5,6) dist=3 after=(4,5) dist2=2
+d28 eval village_1 at=(5,4) target=(5,6) dist=2
+d28 study village_1 at=(5,4) target=(5,6) dist=2
+d30 eval village_2 at=(4,4) target=(7,5) dist=4
+d30 walk village_2 at=(4,4) target=(7,5) dist=4 after=(6,4) dist2=2
+d31 eval village_2 at=(6,4) target=(7,5) dist=2
+d31 study village_2 at=(6,4) target=(7,5) dist=2
+d107 eval village_0 at=(4,4) target=(5,8) dist=5
+d107 walk village_0 at=(4,4) target=(5,8) dist=5 after=(4,7) dist2=2
+d108 eval village_0 at=(4,4) target=(5,8) dist=5
+d108 walk village_0 at=(4,4) target=(5,8) dist=5 after=(4,7) dist2=2
+d109 eval village_0 at=(5,1) target=(5,8) dist=7
+d109 drop village_0 at=(5,1) target=(undefined,undefined) dist=undefined reason=fight

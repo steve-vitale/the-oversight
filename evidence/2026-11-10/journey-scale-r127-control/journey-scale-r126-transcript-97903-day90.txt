@@ -1,0 +1,19 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=9)
+=== seed 97903 day 90 — conversation with Emma (emma_larsen) ===
+occupation=Veterinarian temperament=warm trust=91 dead=false
+want: ask_favor (stage 0)
+open thread: grief fromSeed=false
+picker: control
+
+THEM: "Don't mind me. Today's just heavy."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, recap, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: A long exhale. "I'll get there. Just needed a minute where I didn't have to be fine."
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "Do the math with me: 6 liters, 8 people. That's not tomorrow's water. We walk together and each carry two liters back. Creek water still needs boiling."
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+YOU: (leave)
+pre-close: want ask_favor stage 3 thread want
+closing line: "...Thanks for being here. That's all."
+(gossip picks this sitting: 0)
