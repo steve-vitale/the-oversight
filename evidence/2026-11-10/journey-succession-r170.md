@@ -142,16 +142,42 @@ the committed r169 panel JSONs (PREFIX=r169):
 
 ## Gate
 
-[GATE — line appended at closeout.]
+check.js --quick on the final tip (301bc771d, before rebase):
+**294 passed, 6 failed in 807s — GO.** The 6 failures are the
+standing pre-existing set, verified byte-identical on pristine
+current master (203a32775) via a temporary baseline worktree
+(gate-baseline-r170, released after): godpath/test-measurement-
+proof-update.js, godpath/test-measurement-workflow.js (retained
+neutrality proof), godpath/test-mobile-combat-cadence.js,
+godpath/test-occupation-panels.js, godpath/test-phone-frame-
+proof.js, test-establishment-r20-fixes-20261020.js (racks-full
+voice gate). Zero attributable to this branch. The full gate was
+NOT re-run after the rebase (docs-only closeout commit + rebase
+onto 203a32775, no src change); proof tests r169 + r170 + family
+were re-run GREEN on the rebased tip (see below). Log:
+evidence/2026-11-10/journey-succession-r170-checkquick.log.
+Family proofs on the rebased tip: r146/r147/r151/r155/r157/r161/
+r166/r169/r170 9/9 ALL GREEN.
 
 ## Rotation
 
-7 → 4 (endgame next). [Advance at closeout; verify the file reads 4.]
+7 → 4 (endgame next). Advanced at closeout; verified the file reads 4.
 
 ## Telemetry
 
-[Line appended at closeout — run on the r169 panel tele files +
-the 34016 re-run tele file.]
+Ran on the r169 panel tele files (9 files) + the 34016 re-run
+tele file (byte-identical to r169's 34016 tele). Two LOUD lines,
+both the KNOWN summation artifact (r151/r155/r157/r161/r166
+precedent — the checker sums across files while the baseline
+holds per-seed means): deaths.bearer 795% (baseline 7.6 ->
+current 68, n=9) and census.fallen 585% (baseline 14.3 ->
+current 98, n=9). Per-seed means on the r169 panel (from the
+r169 note): deaths.bearer 8.0, census.alive 3.1,
+census.fallen 11.6, census.integrationStage 3.0,
+week2.deadBearerMentions 4.1 — against baseline 7.6 / 3.8 /
+14.3 / 3.0 / 4.2. No real deviation; the fix touches only
+dialogue and the re-run's tele is byte-identical. Baseline NOT
+rolled forward.
 
 ## Village assessment (plain words)
 
