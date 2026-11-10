@@ -1,0 +1,105 @@
+=== choketrace-b: kill choke-point trace ===
+seeds: 140201, 140202, 140203, 140204, 140205, 140206, 140207, 140208 | policy competent | 150d death-aware | recorded=true,true,true,true,true,true,true,true
+recordWaveKill+Pyrrhic calls total: 584 | dup calls: 32 | UNATTRIBUTED calls: 0 | pyrrhic calls: 1
+per-path call counts (all calls / dup calls):
+  agency              168   0
+  aid-crisis          7     0
+  contest-blood       25    9
+  tb-end              105   21
+  wild                279   2
+recorder errors total: 0
+reconciliation (log == counter, fixed engine): 8/8 agree
+
+=== re-fire bursts (dedupe-key groups, size >= 2) ===
+seed 140201 d64 paparazzo x2 by gen_sm0tpyn (gen_sm0tpyn) via player trick="move_windup,move_windup,move_windup,move_windup,move_windup,move_windup" path=tb-end inv=tb-end#12 fightIds=[12] objIds=[] ords=[1,2] deadByInv={"tb-end#12":2}
+    -> one TB fight, 2 dead paparazzo (GENUINE multi-body — belltoad-chorus/pack style, dedupe-key collapse)
+    re-fire #1 seq=51 ledger add=0 (perType 2->2 cap 2, roomBefore 0, counterKnown=true, points 14->14, bar 4)
+seed 140201 d116 nightlight_catfish x3 by Ingrid Vik (ingrid_vik) via contest trick=null path=contest-blood inv=contest-blood#23 fightIds=[23] objIds=[] ords=[1,2,3] deadByInv={"contest-blood#23":0}
+    -> one contest, kills on invocation ordinals 1,2,3 (GENUINE repeats across gauntlet waves)
+    re-fire #1 seq=64 ledger add=0 (perType 2->2 cap 2, roomBefore 0, counterKnown=true, points 23->23, bar 5)
+    re-fire #2 seq=65 ledger add=0 (perType 2->2 cap 2, roomBefore 0, counterKnown=true, points 23->23, bar 5)
+seed 140202 d54 belltoad x4 by gen_gognxmz (gen_gognxmz) via player trick="shout,shout,shout" path=tb-end inv=tb-end#4 fightIds=[4] objIds=[] ords=[1,2,3,4] deadByInv={"tb-end#4":4}
+    -> one TB fight, 4 dead belltoad (GENUINE multi-body — belltoad-chorus/pack style, dedupe-key collapse)
+    re-fire #1 seq=51 ledger add=0 (perType 2->2 cap 2, roomBefore 0, counterKnown=true, points 24->24, bar 5)
+    re-fire #2 seq=52 ledger add=0 (perType 2->2 cap 2, roomBefore 0, counterKnown=true, points 24->24, bar 5)
+    re-fire #3 seq=53 ledger add=0 (perType 2->2 cap 2, roomBefore 0, counterKnown=true, points 24->24, bar 5)
+seed 140202 d54 hummice x3 by gen_h3r9ke8 (gen_h3r9ke8) via companion trick="shout" path=tb-end inv=tb-end#5 fightIds=[5] objIds=[] ords=[1,2,3] deadByInv={"tb-end#5":4}
+    -> one TB fight, 4 dead hummice (GENUINE multi-body — belltoad-chorus/pack style, dedupe-key collapse)
+    re-fire #1 seq=55 ledger add=0 (perType 2->2 cap 2, roomBefore 0, counterKnown=true, points 25->25, bar 5)
+    re-fire #2 seq=56 ledger add=0 (perType 2->2 cap 2, roomBefore 0, counterKnown=true, points 25->25, bar 5)
+seed 140202 d54 giant_mosquito x3 by jesse_cortez (jesse_cortez) via contest trick=null path=contest-blood inv=contest-blood#6 fightIds=[6] objIds=[] ords=[1,2,3] deadByInv={"contest-blood#6":0}
+    -> one contest, kills on invocation ordinals 1,2,3 (GENUINE repeats across gauntlet waves)
+    re-fire #1 seq=60 ledger add=0 (perType 2->2 cap 2, roomBefore 0, counterKnown=true, points 13->13, bar 4)
+    re-fire #2 seq=61 ledger add=0 (perType 2->2 cap 2, roomBefore 0, counterKnown=true, points 13->13, bar 4)
+seed 140203 d40 giant_mosquito x3 by ivy_wang (ivy_wang) via contest trick=null path=contest-blood inv=contest-blood#2 fightIds=[2] objIds=[] ords=[1,2,3] deadByInv={"contest-blood#2":0}
+    -> one contest, kills on invocation ordinals 1,2,3 (GENUINE repeats across gauntlet waves)
+    re-fire #1 seq=33 ledger add=0 (perType 2->2 cap 2, roomBefore 0, counterKnown=true, points 7->7, bar 4)
+    re-fire #2 seq=34 ledger add=0 (perType 2->2 cap 2, roomBefore 0, counterKnown=true, points 7->7, bar 4)
+seed 140204 d75 belltoad x8 by Ella Johnson (ella_johnson) via player trick="shout,shout,shout,shout" path=tb-end inv=tb-end#22,tb-end#23 fightIds=[22,23] objIds=[] ords=[1,2,3,4] deadByInv={"tb-end#22":4,"tb-end#23":4}
+    -> 2 TB fights, 4 dead + 4 dead belltoad (GENUINE multi-body — chorus/pack, dedupe-key collapse: 8 bodies, 1 log entry)
+    re-fire #1 seq=63 ledger add=0 (perType 2->2 cap 2, roomBefore 0, counterKnown=true, points 29->29, bar 5)
+    re-fire #2 seq=64 ledger add=0 (perType 2->2 cap 2, roomBefore 0, counterKnown=true, points 29->29, bar 5)
+    re-fire #3 seq=65 ledger add=0 (perType 2->2 cap 2, roomBefore 0, counterKnown=true, points 29->29, bar 5)
+    re-fire #4 seq=66 ledger add=0 (perType 2->2 cap 2, roomBefore 0, counterKnown=true, points 29->29, bar 5)
+    re-fire #5 seq=67 ledger add=0 (perType 2->2 cap 2, roomBefore 0, counterKnown=true, points 29->29, bar 5)
+    re-fire #6 seq=68 ledger add=0 (perType 2->2 cap 2, roomBefore 0, counterKnown=true, points 29->29, bar 5)
+    re-fire #7 seq=69 ledger add=0 (perType 2->2 cap 2, roomBefore 0, counterKnown=true, points 29->29, bar 5)
+seed 140204 d75 giant_mosquito x2 by sofia_chen (sofia_chen) via contest trick=null path=contest-blood inv=contest-blood#23 fightIds=[23] objIds=[] ords=[1,2] deadByInv={"contest-blood#23":0}
+    -> one contest, kills on invocation ordinals 1,2 (GENUINE repeats across gauntlet waves)
+    re-fire #1 seq=71 ledger add=1 (perType 1->2 cap 2, roomBefore 1, counterKnown=false, points 16->17, bar 4)
+seed 140205 d17 hushwolf x2 by gen_zw4nq99 (gen_zw4nq99) via wild trick=null path=wild inv=wild#8,wild#9 fightIds=[] objIds=[7,8] ords=[1] deadByInv={"wild#8":0,"wild#9":0}
+    -> 2 wild settlements, 2 distinct monster objects (GENUINE repeats — different beasts)
+    re-fire #1 seq=7 ledger add=1 (perType 1->2 cap 2, roomBefore 1, counterKnown=false, points 6->7, bar 5)
+seed 140205 d17 anaconda_empress x2 by gen_sbkg87l (gen_sbkg87l) via wild trick=null path=wild inv=wild#11,wild#13 fightIds=[] objIds=[10,11] ords=[1] deadByInv={"wild#11":0,"wild#13":0}
+    -> 2 wild settlements, 2 distinct monster objects (GENUINE repeats — different beasts)
+    re-fire #1 seq=10 ledger add=0 (perType 2->2 cap 2, roomBefore 0, counterKnown=false, points 8->8, bar 5)
+seed 140205 d85 belltoad x4 by gen_lxst8oj (gen_lxst8oj) via player trick=null path=tb-end inv=tb-end#9 fightIds=[9] objIds=[] ords=[1,2,3,4] deadByInv={"tb-end#9":4}
+    -> one TB fight, 4 dead belltoad (GENUINE multi-body — belltoad-chorus/pack style, dedupe-key collapse)
+    re-fire #1 seq=68 ledger add=1 (perType 1->2 cap 2, roomBefore 1, counterKnown=false, points 33->34, bar 5)
+    re-fire #2 seq=69 ledger add=0 (perType 2->2 cap 2, roomBefore 0, counterKnown=false, points 34->34, bar 5)
+    re-fire #3 seq=70 ledger add=0 (perType 2->2 cap 2, roomBefore 0, counterKnown=false, points 34->34, bar 5)
+seed 140206 d26 bulldozer x2 by gen_9dl273w (gen_9dl273w) via player trick="sidestep,sidestep" path=tb-end inv=tb-end#2 fightIds=[2] objIds=[] ords=[1,2] deadByInv={"tb-end#2":2}
+    -> one TB fight, 2 dead bulldozer (GENUINE multi-body — belltoad-chorus/pack style, dedupe-key collapse)
+    re-fire #1 seq=38 ledger add=0 (perType 2->2 cap 2, roomBefore 0, counterKnown=true, points 23->23, bar 5)
+seed 140206 d33 giant_mosquito x2 by gen_cyv606n (gen_cyv606n) via contest trick=null path=contest-blood inv=contest-blood#3 fightIds=[3] objIds=[] ords=[1,2] deadByInv={"contest-blood#3":0}
+    -> one contest, kills on invocation ordinals 1,2 (GENUINE repeats across gauntlet waves)
+    re-fire #1 seq=47 ledger add=0 (perType 2->2 cap 2, roomBefore 0, counterKnown=true, points 12->12, bar 4)
+seed 140206 d39 mirrormoth x2 by hannah_kim (hannah_kim) via contest trick=null path=contest-blood inv=contest-blood#9 fightIds=[9] objIds=[] ords=[2,3] deadByInv={"contest-blood#9":0}
+    -> one contest, kills on invocation ordinals 2,3 (GENUINE repeats across gauntlet waves)
+    re-fire #1 seq=62 ledger add=0 (perType 2->2 cap 2, roomBefore 0, counterKnown=true, points 30->30, bar 5)
+seed 140208 d90 belltoad x4 by gen_g5s5zoe (gen_g5s5zoe) via player trick="shout,shout,shout" path=tb-end inv=tb-end#11 fightIds=[11] objIds=[] ords=[1,2,3,4] deadByInv={"tb-end#11":4}
+    -> one TB fight, 4 dead belltoad (GENUINE multi-body — belltoad-chorus/pack style, dedupe-key collapse)
+    re-fire #1 seq=54 ledger add=0 (perType 2->2 cap 2, roomBefore 0, counterKnown=true, points 24->24, bar 5)
+    re-fire #2 seq=55 ledger add=0 (perType 2->2 cap 2, roomBefore 0, counterKnown=true, points 24->24, bar 5)
+    re-fire #3 seq=56 ledger add=0 (perType 2->2 cap 2, roomBefore 0, counterKnown=true, points 24->24, bar 5)
+seed 140208 d135 congregation x2 by Sam Wilson (sam_wilson) via companion trick=null path=tb-end inv=tb-end#15 fightIds=[15] objIds=[] ords=[1,2] deadByInv={"tb-end#15":2}
+    -> one TB fight, 2 dead congregation (GENUINE multi-body — belltoad-chorus/pack style, dedupe-key collapse)
+    re-fire #1 seq=63 ledger add=1 (perType 1->2 cap 2, roomBefore 1, counterKnown=false, points 5->6, bar 3)
+bursts: 16 | re-fire calls: 32 | UNATTRIBUTED bursts: 0 | UNRESOLVED-instance bursts: 0
+shape tally: {"one TB fight, 2 dead paparazzo (GENUINE multi-body":1,"one contest, kills on invocation ordinals 1,2,3 (GENUINE repeats across gauntlet waves)":3,"one TB fight, 4 dead belltoad (GENUINE multi-body":3,"one TB fight, 4 dead hummice (GENUINE multi-body":1,"2 TB fights, 4 dead + 4 dead belltoad (GENUINE multi-body":1,"one contest, kills on invocation ordinals 1,2 (GENUINE repeats across gauntlet waves)":2,"2 wild settlements, 2 distinct monster objects (GENUINE repeats":2,"one TB fight, 2 dead bulldozer (GENUINE multi-body":1,"one contest, kills on invocation ordinals 2,3 (GENUINE repeats across gauntlet waves)":1,"one TB fight, 2 dead congregation (GENUINE multi-body":1}
+
+=== ledger double-score verdict ===
+re-fire calls that scored twice (add > 0): 4 | already capped (add = 0, no effect): 28
+re-fires that crossed a wave bar: 0
+
+=== scale wall ===
+national: 0/8 | table (won): 0/8 | wins: 0/8
+wave 4 unlocked: 8/8 | wave 5 unlocked: 1/8
+median survival (result days): 125.5 (days: [75,78,109,117,134,138,150,150])
+military_tribute ever-ready: 2/8
+peak living veterans: [0,0,0,0,1,1,2,2]
+
+=== DIAG verdict (prereg: DIAG-GO iff every re-fire burst attributed, none UNATTRIBUTED) ===
+bursts attributed: 16/16 | UNATTRIBUTED bursts: 0
+DIAG-GO — every re-fire burst on the band is attributed to a named caller path.
+
+=== neutrality cross-check vs vetcount after-leg ===
+seed 140201: MATCH (days 138, village-lost, maxWave 4, calls 70, dup 3)
+seed 140202: MATCH (days 78, village-lost, maxWave 4, calls 66, dup 7)
+seed 140203: MATCH (days 117, village-lost, maxWave 4, calls 58, dup 2)
+seed 140204: MATCH (days 109, village-lost, maxWave 4, calls 77, dup 8)
+seed 140205: MATCH (days 150, survived, maxWave 4, calls 87, dup 5)
+seed 140206: MATCH (days 134, village-lost, maxWave 4, calls 80, dup 3)
+seed 140207: MATCH (days 75, village-lost, maxWave 4, calls 83, dup 0)
+seed 140208: MATCH (days 150, survived, maxWave 5, calls 63, dup 4)
+trajectory match vs vetcount after-leg: 8/8 — recorder is neutral on this band.
