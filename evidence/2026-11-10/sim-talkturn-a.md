@@ -420,6 +420,10 @@ finish the game.
   committed: the 150206 mechanism, the death-cause
   histograms, and the sense-test scenes are quoted in this
   evidence, and the judged corpus carries the numbers.
-- Zero src/js changed. Commits to be merged locally by the
+- Zero src/js changed. Base at spawn 57547c8dd; master moved
+  during the run — branch rebased onto explicit current master
+  7c2591d1f (read in the main tree immediately before
+  rebasing), proof re-run green 11/11 after the rebase, final
+  tip 1234056be. Commits to be merged locally by the
   coordinator; report 'committed in worktree, pending
   coordinator merge'.
