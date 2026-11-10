@@ -58,7 +58,12 @@ function creatureIds() {
 }
 
 const CREATURE_KILL_CAUSES = new Set(['villager combat', 'combat', 'expedition']);
-const FIELD_FIGHT_CAUSES = new Set(['the wild', 'monster', 'ambush', 'the night']);
+const FIELD_FIGHT_CAUSES = new Set(['the wild', 'monster', 'ambush', 'the night', 'combat']);
+// 'combat' is the fight-death default (game.js:39658 registerDeath +
+// corpses.js:238 `opts.cause || 'combat'`): a person row with cause
+// 'combat' died in a fight. bucketCause runs for person rows only,
+// so this cannot mislabel a creature-kill (those go through
+// CREATURE_KILL_CAUSES in classifyRow).
 const CONTEST_CAUSES = new Set(['contest', 'the arena', 'betrayal', 'the table trial', 'the coalition arena']);
 const ALIEN_CAUSES = new Set(['alien', 'alien_beam', 'a stranger']);
 
@@ -134,6 +139,7 @@ function analyzeArmA(dir) {
     const cureCounts = countCures(path.join(dir, `journey-scale-r123-capture-${seed}.txt`));
     perSeed[seed] = {
       seed, livedDays: c.day, popAlive: c.popAlive, popTotal: c.popTotal,
+      horizonAlive: (c.day || 0) > 140, // still simulating at the leg horizon (day 140)
       personDeaths: person.length, creatureDeaths: creature.length,
       ambiguous: ambiguous.map(a => a.row),
       bearerDeaths: person.filter(p => p.row.player).length,
@@ -153,7 +159,10 @@ function analyzeArmB(dir) {
     const s = dc.summary || {};
     const person = (dc.deaths || []).map(d => ({
       who: d.vid, cause: d.cause, day: d.day, player: false,
-      bucket: bucketCause(d.cause, creatureSet),
+      // A named monster on the row (monsterId/monsterName) means a
+      // monster killed them even when the cause string is the
+      // monster's per-fight display name ('Old Loud' for the Gavel).
+      bucket: (d.monsterId || d.monsterName) ? 'field-fight' : bucketCause(d.cause, creatureSet),
     }));
     const byBucket = {};
     for (const p of person) byBucket[p.bucket] = (byBucket[p.bucket] || 0) + 1;
@@ -162,9 +171,16 @@ function analyzeArmB(dir) {
     const healerDays = daily.filter(d => d.healerId != null).length;
     const sickDays = daily.reduce((t, d) => t + (d.sickCount || 0), 0);
     const cureCountsB = countCures(path.join(dir, `journey-scale-r125-capture-${seed}.txt`));
+    // livedDays: the trust census end day, the SAME definition Arm A
+    // uses (r123's published 488) — the last daily row can sit a day
+    // early when the final deaths land in the post-run drain.
+    let trustDay = null;
+    try { const t = JSON.parse(fs.readFileSync(path.join(dir, `journey-scale-r125-trust-${seed}.json`), 'utf8')); trustDay = (t.census || {}).day; } catch (e) { trustDay = null; }
+    const livedDays = (trustDay != null) ? trustDay : (daily.length ? daily[daily.length - 1].day : null);
     perSeed[seed] = {
       seed,
-      livedDays: daily.length ? daily[daily.length - 1].day : null,
+      livedDays,
+      horizonAlive: (livedDays || 0) > 140, // still simulating at the leg horizon (day 140)
       popAlive: daily.length ? daily[daily.length - 1].alive : null,
       personDeaths: person.length,
       creatureDeaths: s.teleMonster != null ? s.teleMonster : null,
@@ -190,7 +206,10 @@ function bandTotals(perSeed) {
   for (const seed of SEEDS) {
     const s = perSeed[seed];
     t.livedDays += (s.livedDays || 0);
-    t.alive += (s.popAlive || 0) > 0 ? 1 : 0;
+    // Q1's "alive" is alive AT THE HORIZON (day 140), not alive at
+    // the last snapshot — a village that ends at d114 with 4 people
+    // standing at its last snapshot was not alive at d140.
+    t.alive += s.horizonAlive ? 1 : 0;
     t.personDeaths += (s.personDeaths || 0);
     for (const k of Object.keys(s.byBucket || {})) t.byBucket[k] = (t.byBucket[k] || 0) + (s.byBucket[k] || 0);
     t.cures += (s.cures || 0);
@@ -201,7 +220,7 @@ function bandTotals(perSeed) {
 
 function printArm(a) {
   console.log(`\n===== ${a.arm} =====`);
-  console.log('seed  lived  alive  personDeaths  bearerDeaths  cures  buckets');
+  console.log('seed  lived  aliveEnd  personDeaths  bearerDeaths  cures  buckets');
   for (const seed of SEEDS) {
     const s = a.perSeed[seed];
     console.log(`${seed}  ${String(s.livedDays).padStart(5)}  ${String(s.popAlive).padStart(5)}  ${String(s.personDeaths).padStart(12)}  ${String(s.bearerDeaths == null ? '-' : s.bearerDeaths).padStart(12)}  ${String(s.cures == null ? '-' : s.cures).padStart(5)}  ${JSON.stringify(s.byBucket)}`);    if (s.multiDeathDays && s.multiDeathDays.length) console.log(`      multi-death days: ${s.multiDeathDays.map(m => 'd' + m.day + 'x' + m.deaths).join(', ')}`);
@@ -210,7 +229,7 @@ function printArm(a) {
     if (s.dutyDays != null) console.log(`      duty-held days=${s.dutyDays} healer-present days=${s.healerDays} sick-days=${s.sickDays} joins=${s.joins} leavers=${s.leavers} telePerson=${s.telePerson}`);
   }
   const t = bandTotals(a.perSeed);
-  console.log(`BAND  lived=${t.livedDays} aliveSeeds=${t.alive}/4 personDeaths=${t.personDeaths} cures=${t.cures} buckets=${JSON.stringify(t.byBucket)}`);
+  console.log(`BAND  lived=${t.livedDays} aliveAtHorizon=${t.alive}/4 personDeaths=${t.personDeaths} cures=${t.cures} buckets=${JSON.stringify(t.byBucket)}`);
   return t;
 }
 
@@ -228,7 +247,7 @@ function main() {
   if (ta && tb) {
     console.log('\n===== Q1 ATTRIBUTION (binding bars) =====');
     console.log(`lived days: A=${ta.livedDays} B=${tb.livedDays} delta=${tb.livedDays - ta.livedDays} (bar: B>=548 AND >=1 alive => IMPLICATED; B<=488 AND 0 alive => EXONERATED; else INCONCLUSIVE)`);
-    console.log(`alive seeds: A=${ta.alive}/4 B=${tb.alive}/4`);
+    console.log(`alive at horizon (d140): A=${ta.alive}/4 B=${tb.alive}/4`);
     console.log(`person deaths: A=${ta.personDeaths} B=${tb.personDeaths}`);
     console.log(`fever+wound deaths: A=${(ta.byBucket.fever || 0) + (ta.byBucket.wound || 0)} B=${(tb.byBucket.fever || 0) + (tb.byBucket.wound || 0)}`);
     console.log(`field-fight deaths: A=${ta.byBucket['field-fight'] || 0} B=${tb.byBucket['field-fight'] || 0}`);

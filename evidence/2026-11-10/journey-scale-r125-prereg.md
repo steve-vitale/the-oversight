@@ -263,3 +263,36 @@ what the scholar learned on the road, what changed vs Arm A).
 2. **Survival collapse (r123)** — the question this run answers.
 3. **No lock staleness this run:** no lock file existed at run
    start; fresh lock created `2026-11-10T04:43:32Z`.
+
+## Amendment A1 — census union + drain (pilot-gate failure, fixed)
+
+Pilot 1 (Arm B 97904, pre-fix instrument) FAILED the Q2 gate on
+its own terms: fallen deaths 25 vs telemetry person deaths 26,
+and the seed-end telemetry held 27 person deaths. Two gaps,
+both real, both fixed before any band spend:
+- **Alien-kill gap (engine):** the alien kill path
+  (alienPlayers.js ~2435) calls registerDeath + removeVillager
+  but never pushes `v.fallen` — an alien-killed villager is in
+  telemetry and NOT in the memorial roll. Pilot's +1 was
+  `gen_we2r3r4`, d48, cause 'alien', a Haven roster member.
+  FINDING to report, not to fix here (a src change needs its
+  own prereg/proof).
+- **Final-endDay gap (instrument):** deaths in the last endDay
+  (after the last policy.daily snapshot) are invisible to every
+  snapshot instrument — the pilot's last survivor (visjoin_127)
+  died in endDay d129 and no snapshot saw it.
+- **Fix (instrument only, proof 4/4 re-run):** the census is
+  now the UNION `fallen ∪ telemetry-person` keyed by vid, each
+  row carrying its source ('fallen' | 'telemetry-only');
+  telemetry person-deaths for vids never in Haven's roster are
+  listed out-of-scope, never counted; the driver calls
+  `drain()` after runDays (idempotent, no daily row) so final
+  endDay deaths land. Q2's reconciliation identity is now:
+  deaths(union) == telePersonHaven + fallenOnly; books close on
+  the union count. Pilot 1's evidence is superseded by the
+  pilot-2 re-run (same seed, same base, fixed instrument).
+- **Duplicate-day note (observed, not a defect):** days 2, 4, 30
+  carry two daily rows each — the ladder instrument's rows show
+  the identical duplicates, so policy.daily is invoked twice on
+  those days by the driver/harness. Deaths are index-diffed, so
+  no double-count; the analyzer uses the last row per day.
