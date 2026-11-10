@@ -101,11 +101,18 @@ function classifyRow(row, creatureSet) {
 }
 
 function countCures(capturePath) {
+  // DUTY CURES — the medic-duty holder curing a sick villager aloud:
+  // "Herbal remedy on X: … (Duc cured them…)" / "Field medicine on X: …".
+  // (r123's note counted these — 97902: 22, 97903: 24 by this rule.)
+  // NOT the hide-curing lines ("Scrape it, cure it…") and NOT the
+  // natural-recovery "is on the mend" lines (counted separately as
+  // mends — the sickness tick's own recovery narration).
   try {
     const txt = fs.readFileSync(capturePath, 'utf8');
+    const c = txt.match(/Herbal remedy on|Field medicine on/g);
     const m = txt.match(/is on the mend/g);
-    return m ? m.length : 0;
-  } catch (e) { return null; }
+    return { cures: c ? c.length : 0, mends: m ? m.length : 0 };
+  } catch (e) { return { cures: null, mends: null }; }
 }
 
 function analyzeArmA(dir) {
@@ -124,13 +131,14 @@ function analyzeArmA(dir) {
     const byDay = {};
     for (const p of person) byDay[p.row.day] = (byDay[p.row.day] || 0) + 1;
     const multi = Object.keys(byDay).map(k => ({ day: +k, deaths: byDay[k] })).filter(x => x.deaths >= 3).sort((a, b) => a.day - b.day);
+    const cureCounts = countCures(path.join(dir, `journey-scale-r123-capture-${seed}.txt`));
     perSeed[seed] = {
       seed, livedDays: c.day, popAlive: c.popAlive, popTotal: c.popTotal,
       personDeaths: person.length, creatureDeaths: creature.length,
       ambiguous: ambiguous.map(a => a.row),
       bearerDeaths: person.filter(p => p.row.player).length,
       byBucket, multiDeathDays: multi,
-      cures: countCures(path.join(dir, `journey-scale-r123-capture-${seed}.txt`)),
+      cures: cureCounts.cures, mends: cureCounts.mends,
       deathRows: rows.length,
     };
   }
@@ -153,6 +161,7 @@ function analyzeArmB(dir) {
     const dutyDays = daily.filter(d => d.dutyHolder != null).length;
     const healerDays = daily.filter(d => d.healerId != null).length;
     const sickDays = daily.reduce((t, d) => t + (d.sickCount || 0), 0);
+    const cureCountsB = countCures(path.join(dir, `journey-scale-r125-capture-${seed}.txt`));
     perSeed[seed] = {
       seed,
       livedDays: daily.length ? daily[daily.length - 1].day : null,
@@ -162,7 +171,7 @@ function analyzeArmB(dir) {
       ambiguous: [],
       bearerDeaths: null, // bearer deaths need the scholar-vid join; reported separately below if present
       byBucket, multiDeathDays: s.multiDeathDays || [],
-      cures: countCures(path.join(dir, `journey-scale-r125-capture-${seed}.txt`)),
+      cures: cureCountsB.cures, mends: cureCountsB.mends,
       deathRows: (dc.deaths || []).length,
       dutyDays, healerDays, sickDays,
       booksClose: s.booksClose, unattributed: s.unattributed,
@@ -174,7 +183,7 @@ function analyzeArmB(dir) {
 }
 
 function bandTotals(perSeed) {
-  const t = { livedDays: 0, alive: 0, personDeaths: 0, byBucket: {}, cures: 0 };
+  const t = { livedDays: 0, alive: 0, personDeaths: 0, byBucket: {}, cures: 0, mends: 0 };
   for (const seed of SEEDS) {
     const s = perSeed[seed];
     t.livedDays += (s.livedDays || 0);
@@ -182,6 +191,7 @@ function bandTotals(perSeed) {
     t.personDeaths += (s.personDeaths || 0);
     for (const k of Object.keys(s.byBucket || {})) t.byBucket[k] = (t.byBucket[k] || 0) + (s.byBucket[k] || 0);
     t.cures += (s.cures || 0);
+    t.mends += (s.mends || 0);
   }
   return t;
 }
@@ -191,8 +201,7 @@ function printArm(a) {
   console.log('seed  lived  alive  personDeaths  bearerDeaths  cures  buckets');
   for (const seed of SEEDS) {
     const s = a.perSeed[seed];
-    console.log(`${seed}  ${String(s.livedDays).padStart(5)}  ${String(s.popAlive).padStart(5)}  ${String(s.personDeaths).padStart(12)}  ${String(s.bearerDeaths == null ? '-' : s.bearerDeaths).padStart(12)}  ${String(s.cures == null ? '-' : s.cures).padStart(5)}  ${JSON.stringify(s.byBucket)}`);
-    if (s.multiDeathDays && s.multiDeathDays.length) console.log(`      multi-death days: ${s.multiDeathDays.map(m => 'd' + m.day + 'x' + m.deaths).join(', ')}`);
+    console.log(`${seed}  ${String(s.livedDays).padStart(5)}  ${String(s.popAlive).padStart(5)}  ${String(s.personDeaths).padStart(12)}  ${String(s.bearerDeaths == null ? '-' : s.bearerDeaths).padStart(12)}  ${String(s.cures == null ? '-' : s.cures).padStart(5)}  ${JSON.stringify(s.byBucket)}`);    if (s.multiDeathDays && s.multiDeathDays.length) console.log(`      multi-death days: ${s.multiDeathDays.map(m => 'd' + m.day + 'x' + m.deaths).join(', ')}`);
     if (s.ambiguous && s.ambiguous.length) console.log(`      AMBIGUOUS rows: ${JSON.stringify(s.ambiguous)}`);
     if (s.booksClose === false) console.log(`      RECONCILIATION FAILED (booksClose=false, unattributed=${s.unattributed}, errors=${s.errors})`);
     if (s.dutyDays != null) console.log(`      duty-held days=${s.dutyDays} healer-present days=${s.healerDays} sick-days=${s.sickDays} joins=${s.joins} leavers=${s.leavers} telePerson=${s.telePerson}`);
