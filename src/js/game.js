@@ -34456,8 +34456,26 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const mdef = this.data.monsters.find(m => m.id === monsterId);
       if (!mdef) return;
       const wave = mdef.wave || 1;
-      this.state.waveKills = this.state.waveKills || {};
-      this.state.waveKills[wave] = (this.state.waveKills[wave] || 0) + 1;
+      // VETCOUNT RECONCILE (sim-vetcount-reconcile-b, 2026-11-10, backlog
+      // #2077): one body = one count. The same kill can reach this choke
+      // point twice (gap-phase2 W1), and the log dedupes it — but the
+      // counters below used to count the CALL, so the counter ran ahead of
+      // the log (140208: counter 6, log 5). The dedupe verdict is computed
+      // ONCE, up front, from the log, and the counters follow it: a repeat
+      // call counts nothing. When _attrKills is off the log is not
+      // maintained, so there is nothing to dedupe against and every call
+      // counts, exactly as before (the honesty control is preserved).
+      // The ledger (scoreLedgerKill below) still scores the call, bounded
+      // by its per-type cap — that behavior is unchanged by this fix.
+      const _day = ((this.state.scholar || {}).day || 0);
+      const _dup = (this._attrKills === false) ? false : (((this.state.waveKillLog || []).some(e => e && e.d === _day
+        && e.mid === monsterId && (e.by || null) === (killerVid || null)
+        && (e.via || 'unknown') === (via || 'unknown')
+        && (e.trick || null) === (detail || null))));
+      if (!_dup) {
+        this.state.waveKills = this.state.waveKills || {};
+        this.state.waveKills[wave] = (this.state.waveKills[wave] || 0) + 1;
+      }
       // MONSTER COUNTERS (2026-10-10): the village learns together. Every
       // kill — player TB kill or villager field-fight kill — feeds the
       // village's per-type slain count; 1+ slain unlocks the askAbout
@@ -34523,7 +34541,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // the kill path (the deed feed and beats must survive a ledger bug).
       try { if (typeof this.scoreLedgerKill === 'function') this.scoreLedgerKill(monsterId); } catch (e) {}
       // Wave 4 slain feeds readiness
-      if (wave === 4) this.state.wave4Slain = (this.state.wave4Slain || 0) + 1;
+      if (wave === 4 && !_dup) this.state.wave4Slain = (this.state.wave4Slain || 0) + 1;
       // KILL ATTRIBUTION (2026-10-13): channel tag for telemetry — which
       // system scored this kill ('patrol' | 'wild' | 'aid-crisis' |
       // 'contest' | 'agency' | 'player' | 'companion' | 'unknown').
@@ -34549,12 +34567,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // reached this choke point twice in the vetformation run
           // (byte-identical entries). One body = one log entry: an exact
           // (day, monster, killer, via, trick) repeat is a double-write,
-          // not a second kill. Log-only: counters/ledger above still count
-          // the call, so no unlock bar moves on this change.
-          const _dup = _log.some(e => e && e.d === ((this.state.scholar || {}).day || 0)
-            && e.mid === monsterId && (e.by || null) === (killerVid || null)
-            && (e.via || 'unknown') === (via || 'unknown')
-            && (e.trick || null) === (detail || null));
+          // not a second kill. The verdict (_dup) was computed up front
+          // and the counters above already follow it, so the log and the
+          // counter move together (vetcount-reconcile-b, backlog #2077).
+          // The 1000-entry cap is a telemetry bound: a real kill past the
+          // cap still counts (the counter is honest about the kill) even
+          // though no entry is kept — the cap is never reached in a
+          // 150d census (~60 entries).
           if (!_dup && _log.length < 1000) {
             _log.push({
               d: (this.state.scholar || {}).day || 0,
@@ -34563,9 +34582,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               trick: detail || null,
             });
           }
-          const _byCh = this.state.waveKillByChannel || (this.state.waveKillByChannel = {});
-          const _k = (via || 'unknown') + '.w' + wave;
-          _byCh[_k] = (_byCh[_k] || 0) + 1;
+          if (!_dup) {
+            const _byCh = this.state.waveKillByChannel || (this.state.waveKillByChannel = {});
+            const _k = (via || 'unknown') + '.w' + wave;
+            _byCh[_k] = (_byCh[_k] || 0) + 1;
+          }
         }
       } catch (e) {}
       // Kills feed the unlock gates from every path (player combat AND
@@ -34705,6 +34726,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // per-channel counters) so pyrrhic kills join the same census.
       // Same (d, mid, by, via, trick) dedupe as recordWaveKill (gap-phase2
       // W1, line 844) — a pyrrhic kill double-written by two paths logs once.
+      // PYRRHIC STAMP (sim-vetcount-reconcile-b, 2026-11-10, backlog #2077):
+      // the entry carries pyrrhic:true so the census can tell a pyrrhic log
+      // entry from a counted one — the LOG is the source of truth, and the
+      // reconciliation rule is counter[w] == non-pyrrhic log entries with
+      // wave w (140203: log 2, counter 1 — the second entry is this stamp).
+      // The stamp changes NO game read: the counter still never moves here
+      // (the steve-call boundary stands) and _ladderLivingVeterans still
+      // counts the killer — a villager who killed a wave-4 beast in a lost
+      // fight still killed a wave-4 beast.
       try {
         if (this._attrKills !== false) {
           const _log = this.state.waveKillLog || (this.state.waveKillLog = []);
@@ -34717,12 +34747,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               d: (this.state.scholar || {}).day || 0,
               mid: monsterId, w: wave,
               by: killerVid || null, via: via || 'unknown',
-              trick: detail || null,
+              trick: detail || null, pyrrhic: true,
             });
           }
-          const _byCh = this.state.waveKillByChannel || (this.state.waveKillByChannel = {});
-          const _k = (via || 'unknown') + '.w' + wave;
-          _byCh[_k] = (_byCh[_k] || 0) + 1;
+          if (!_dup) {
+            const _byCh = this.state.waveKillByChannel || (this.state.waveKillByChannel = {});
+            const _k = (via || 'unknown') + '.w' + wave;
+            _byCh[_k] = (_byCh[_k] || 0) + 1;
+          }
         }
       } catch (e) {}
     },

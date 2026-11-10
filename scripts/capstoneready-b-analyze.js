@@ -116,20 +116,31 @@ console.log(JSON.stringify(tot));
 // whether alive at end, and (from tele deaths) death day + cause when dead.
 // When rows carry scholarId, also note whether the killer was ever observed
 // as the scholar (the baseline's veteran-to-scholar promotion drain).
+// FATES SOURCE (vetcount fix 4): `o.killers` (recorded by the driver from
+// the final waveKillLog, INCLUDING the current scholar) is authoritative
+// when present. The old fallback — the last row's `veterans` list — drops
+// killers who are the current scholar at the end (3 of 17 in the
+// re-measure), because that list deliberately excludes the scholar for the
+// daily readiness read. Old corpora have no `killers` field and keep the
+// fallback, with the gap flagged in the header line.
 console.log('--- veteran fates ---');
 for (const o of seeds) {
   const last = o.daily[o.daily.length - 1];
-  const vets = (last && last.veterans) || [];
+  const fromKillers = Array.isArray(o.killers) && o.killers.length > 0;
+  const vets = fromKillers ? o.killers : ((last && last.veterans) || []);
   const deaths = {};
   for (const d of (o.teleDeaths || [])) { if (d && d.who) deaths[d.who] = d; }
   const scholarDays = {};
   for (const r of (o.daily || [])) { if (r.scholarId) scholarDays[r.scholarId] = (scholarDays[r.scholarId] | 0) + 1; }
   const hasScholarIds = Object.keys(scholarDays).length > 0;
   console.log('seed ' + o.seed + ': ' + vets.length + ' wave-4+ killers ever; ' + vets.filter(function (v) { return v.alive; }).length + ' alive at end'
-    + (hasScholarIds ? '; ever-scholar: ' + vets.filter(function (v) { return scholarDays[v.vid]; }).length : ''));
+    + (hasScholarIds ? '; ever-scholar: ' + vets.filter(function (v) { return scholarDays[v.vid] || v.everScholar; }).length : '')
+    + (fromKillers ? ' (killers table)' : ' (LAST-ROW FALLBACK — current-scholar killers dropped)'));
   for (const v of vets) {
     const dd = deaths[v.vid];
     console.log('  ' + (v.name || v.vid) + ' waves[' + v.waves.join(',') + '] kills=' + v.kills + ' firstKill d' + v.firstKillDay + ' lastKill d' + v.lastKillDay + ' alive=' + v.alive + (dd ? ' died d' + dd.day + ' (' + dd.cause + ')' : '')
-      + (hasScholarIds && scholarDays[v.vid] ? ' ever-scholar (' + scholarDays[v.vid] + 'd)' : ''));
+      + (hasScholarIds && (scholarDays[v.vid] || v.everScholar) ? ' ever-scholar (' + (v.scholarDays != null ? v.scholarDays : scholarDays[v.vid]) + 'd)' : '')
+      + (v.pyrrhicKills ? ' pyrrhicKills=' + v.pyrrhicKills : '')
+      + (v.scholarAtEnd ? ' SCHOLAR-AT-END' : ''));
   }
 }

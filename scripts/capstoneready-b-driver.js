@@ -247,6 +247,46 @@ function summarize(rows) {
   return s;
 }
 
+// buildKillers(Game, rows): the fates-table source (vetcount fix 4).
+// Every distinct wave-4+ killer in the FINAL waveKillLog, INCLUDING the
+// current scholar — the daily rows' `veterans` list deliberately excludes
+// the current scholar (correct for the daily readiness read), so it cannot
+// serve the fates table. Only the recorder, with Game access at end of
+// run, can build this authoritatively. Additive: old corpora have no
+// `killers` field and the analyzer falls back to last-row `veterans`.
+function buildKillers(Game, rows) {
+  const out = [];
+  try {
+    const scholarDays = {};
+    for (const r of (rows || [])) { if (r.scholarId) scholarDays[r.scholarId] = (scholarDays[r.scholarId] | 0) + 1; }
+    const log = ((Game.state || {}).waveKillLog) || [];
+    const seen = {};
+    for (const e of log) {
+      if (!e || !e.by || ((e.w | 0) < 4)) continue;
+      const v = seen[e.by] || (seen[e.by] = { vid: e.by, waves: [], firstKillDay: null, lastKillDay: null, kills: 0, pyrrhicKills: 0 });
+      v.kills++;
+      if (e.pyrrhic === true) v.pyrrhicKills++;
+      if (!v.waves.includes(e.w)) v.waves.push(e.w);
+      if (e.d != null) {
+        if (v.firstKillDay == null || e.d < v.firstKillDay) v.firstKillDay = e.d;
+        if (v.lastKillDay == null || e.d > v.lastKillDay) v.lastKillDay = e.d;
+      }
+    }
+    const scholarAtEnd = (function () { try { return Game.villagerId || null; } catch (e) { return null; } })();
+    for (const vid of Object.keys(seen)) {
+      const v = seen[vid];
+      out.push({
+        vid: vid, name: personName(Game, vid), alive: personAlive(Game, vid),
+        waves: v.waves.sort(), kills: v.kills, pyrrhicKills: v.pyrrhicKills,
+        firstKillDay: v.firstKillDay, lastKillDay: v.lastKillDay,
+        everScholar: (scholarDays[vid] | 0) > 0, scholarDays: (scholarDays[vid] | 0),
+        scholarAtEnd: vid === scholarAtEnd,
+      });
+    }
+  } catch (e) { /* killers is diagnostic; a failure must never break the run */ }
+  return out;
+}
+
 async function oneRun(seed) {
   const { Game } = await loadGame({ seed: seed, mode: 'capstoneready-b', fullTelemetry: false });
   const rows = [];
@@ -285,7 +325,7 @@ async function oneRun(seed) {
     waveKills: result.waveKills || {},
     scaleTrajectory: (result.samples && result.samples.scale) || [],
     teleDeaths: (result.samples && result.samples.deaths) || [],
-    summary: summary, killTimeSamples: killTimeSamples, daily: rows, recorderErrors: errors,
+    summary: summary, killTimeSamples: killTimeSamples, killers: buildKillers(Game, rows), daily: rows, recorderErrors: errors,
   };
   return out;
 }
@@ -314,4 +354,4 @@ if (require.main === module) {
   main().catch(function (e) { console.error(e.stack); process.exitCode = 1; });
 }
 
-module.exports = { snapshotLadder: snapshotLadder, summarize: summarize, wrapKillRecorder: wrapKillRecorder, DEEDS: DEEDS };
+module.exports = { snapshotLadder: snapshotLadder, summarize: summarize, wrapKillRecorder: wrapKillRecorder, buildKillers: buildKillers, personAlive: personAlive, personName: personName, DEEDS: DEEDS };
