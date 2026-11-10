@@ -82,8 +82,8 @@ After-panel people check (3 sittings read in full): Courtney's arc holds on the 
 
 ## Gate + telemetry
 
-- Gate: `node scripts/check.js --quick` in the worktree — see §7 for result.
-- Telemetry: `node scripts/telemetry-check.js --baseline .../telemetry-baselines/deepening.json --current '<before-fix snapshot seeds 45001–45004>' --metrics w3fights engaged.w3 fightsTotal fightsByWave.3` — see §7 for result.
+- Gate: `node scripts/check.js --quick` in the worktree — 294 passed, 6 failed in 739s (standing gate is 296/4). The 4 standing fails (mobile-combat-cadence, occupation-panels, phone-frame-proof, establishment-r20) are present; 2 extra failing files are under investigation — full list captured to /tmp/r125-gate-full.txt, attribution vs new master e2983bb90 pending before merge. See §7.
+- Telemetry: `node scripts/telemetry-check.js --baseline .../telemetry-baselines/deepening.json --current '<before-fix snapshot seeds 45001–45004>' --metrics w3fights,engaged.w3,fightsTotal,fightsByWave.3` — **quiet** (4 files, 4 metrics, no large deviations). Baseline NOT rolled forward.
 
 ## §7 — Landing
 
