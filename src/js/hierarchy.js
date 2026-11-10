@@ -3835,7 +3835,111 @@
       return false;
     },
 
+    // _answermailDriveDaily: THE GAME ANSWERING ITS OWN MAIL (arm
+    // sim-answermail-drive-a, run fleshout-20261110T1215Z). ADDITIVE-ONLY,
+    // DEFAULT-OFF engine hook: fires ONLY when ANSWERMAIL_DRIVE=1 in the
+    // node environment (typeof process guard — in the browser `process`
+    // is undefined, so shipped play never runs this; the player still
+    // answers the mail herself). The village leader/leadcourt answers
+    // pending accords and tend offers on the village's behalf: the
+    // answerer is _availableRepresentative() — a living villager who can
+    // actually walk out, never the player. If no villager can carry the
+    // answer, nothing is answered that day and the day counts as blocked
+    // (leaders can die; a dead bench means unanswered mail — measured,
+    // not assumed away). Same four verbs, same pantry gates as the
+    // answermail-a policy (accord gift, weekly tend on LEAD links with
+    // pantry > 20,000, renegotiation gift, demand honor) — different
+    // actor (the engine's daily tick), different gate (a living
+    // answerer), different timing (the next daily tick after staging).
+    // Stats live on state.answermailDrive, created only when the flag is
+    // on. No win price, deed gate, readiness bar, or seasoning rule
+    // moves here; no existing verb is changed — the hook only calls
+    // them. Never proposes a link, never answers counters or
+    // national/global beats.
+    _answermailDriveDaily() {
+      var on = false;
+      try { on = (typeof process !== 'undefined' && process.env && process.env.ANSWERMAIL_DRIVE === '1'); } catch (e) { on = false; }
+      if (!on) return;
+      var st = this.state || {};
+      var day = ((st.scholar || {}).day || 0);
+      var ds = st.answermailDrive;
+      if (!ds) {
+        ds = st.answermailDrive = {
+          accordAnswers: 0, tends: 0, tendsBlockedPantry: 0,
+          renegotiationAnswers: 0, demandAnswers: 0, demandKinds: {},
+          blockedDays: { noAnswerer: 0 }, answerers: {}, answererNames: {},
+          errors: 0, firstAnswerDay: {},
+        };
+      }
+      var rep = null;
+      try { rep = (typeof this._availableRepresentative === 'function') ? this._availableRepresentative() : null; } catch (e) { ds.errors += 1; }
+      if (!rep || !rep.id) { ds.blockedDays.noAnswerer += 1; return; }
+      var answerer = rep.id;
+      var aname = answerer;
+      try { aname = String(this.displayName ? this.displayName(answerer) : answerer).split(' ')[0]; } catch (e) { aname = answerer; }
+      function note(linkId) {
+        try {
+          ds.answerers[answerer] = (ds.answerers[answerer] || 0) + 1;
+          ds.answererNames[answerer] = aname;
+          if (linkId && ds.firstAnswerDay[linkId] == null) ds.firstAnswerDay[linkId] = day;
+        } catch (e) {}
+      }
+      // 1. The first gesture — only when its link is still alive; a dead
+      // link's accord clears itself in the link-break path, never here.
+      try {
+        var pa = st.pendingAccord;
+        if (pa && typeof this.answerAccord === 'function') {
+          var plink = null;
+          try {
+            var _ls = (typeof this.hierarchyState === 'function') ? (this.hierarchyState() || []) : [];
+            for (var _pi = 0; _pi < _ls.length; _pi++) if (_ls[_pi].id === pa.linkId) { plink = _ls[_pi]; break; }
+          } catch (e) { plink = null; }
+          if (plink && plink.status === 'active') {
+            this.answerAccord('gift');
+            ds.accordAnswers += 1;
+            note(pa.linkId || null);
+          }
+        }
+      } catch (e) { ds.errors += 1; }
+      // 2-4. Per-link beats: tend, renegotiation, demand.
+      var links = [];
+      try { links = (typeof this.hierarchyState === 'function') ? (this.hierarchyState() || []) : []; } catch (e) { ds.errors += 1; }
+      var week = 0;
+      try { week = (typeof this._week === 'function') ? this._week() : 0; } catch (e) {}
+      var pantry = 0;
+      try { pantry = ((st.village || {}).pantry || []).reduce(function (t, i) { return t + (i.kcalEach || 0) * (i.units || 1); }, 0); } catch (e) {}
+      for (var i = 0; i < links.length; i++) {
+        var link = links[i];
+        if (!link || link.status !== 'active') continue;
+        // 2. Tend our subordinates weekly, when the pantry can carry it.
+        if (link.primary === 'haven' && typeof this.tendLink === 'function') {
+          if (link.tendedWeek !== week) {
+            if (pantry > 20000) {
+              var paid = 0;
+              try { paid = this.tendLink(link.id) || 0; } catch (e) { ds.errors += 1; }
+              if (paid > 0) { ds.tends += 1; note(link.id); }
+            } else { ds.tendsBlockedPantry += 1; }
+          }
+        }
+        // 3. Answer a staged renegotiation beat with grain, never silence.
+        if (link.pendingRenegotiation && typeof this.answerRenegotiation === 'function') {
+          try { this.answerRenegotiation(link.id, 'gift'); } catch (e) { ds.errors += 1; }
+          ds.renegotiationAnswers += 1;
+          note(link.id);
+        }
+        // 4. Honor a pending demand.
+        if (link.pendingDemand && typeof this.answerDemand === 'function') {
+          var kind = (link.pendingDemand && link.pendingDemand.kind) || '?';
+          try { this.answerDemand(link.id, true); } catch (e) { ds.errors += 1; }
+          ds.demandAnswers += 1;
+          ds.demandKinds[kind] = (ds.demandKinds[kind] || 0) + 1;
+          note(link.id);
+        }
+      }
+    },
+
     hierarchyDaily() {
+      try { this._answermailDriveDaily(); } catch (e) {}
       try { this.linkTick(); } catch (e) {}
       try { this._foreignPolitySim(); } catch (e) {}
       try { this._renegotiationTick(); } catch (e) {}
