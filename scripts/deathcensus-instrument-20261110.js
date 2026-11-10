@@ -217,7 +217,7 @@ function install(Game) {
       const v = (Game.state && Game.state.village) || {};
       // Ever-roster first (a join who dies the same day they join
       // must already be in scope when the tele drain runs).
-      try { for (const id of (v.roster || [])) t._everRoster.add(id); } catch (e) {}
+      try { for (const id of (v.roster || [])) t._everRoster.add(id); } catch (e) { t.errors.push({ day, where: 'snapshot:everRoster', err: String(e && e.message) }); }
       const deathsToday = diffDeaths(day);
       const { joinsToday, leaversToday } = diffRoster(day);
       // DAILY CONTEXT — the conditions the day's deaths happened in.
@@ -261,7 +261,7 @@ function install(Game) {
     try {
       const day = gday();
       const v = (Game.state && Game.state.village) || {};
-      try { for (const id of (v.roster || [])) t._everRoster.add(id); } catch (e) {}
+      try { for (const id of (v.roster || [])) t._everRoster.add(id); } catch (e) { t.errors.push({ day, where: 'drain:everRoster', err: String(e && e.message) }); }
       diffDeaths(day);
       diffRoster(day);
     } catch (e) { t.errors.push({ day: gday(), where: 'drain', err: String(e && e.message) }); }

@@ -690,7 +690,7 @@ async function playSeed(seed) {
   // R125 Q2: drain the death census AFTER runDays — the final endDay's
   // deaths happen after the last snapshot; drain() catches them
   // (idempotent; writes no daily row).
-  try { if (dcInst) dcInst.drain(); } catch (e) {}
+  try { if (dcInst) dcInst.drain(); } catch (e) { console.error('deathcensus drain failed:', e && e.message); }
   // R107 Q1: finalize the regional-gate recorder (read-only) and emit the corpus.
   let regFin = null;
   try { regInst.snapshot(); } catch (e) {}
