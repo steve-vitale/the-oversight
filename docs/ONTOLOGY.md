@@ -606,7 +606,10 @@ Explicit gear slot system. Weapons: melee (1), ranged (1). Body: head, torso, le
 **Rules:**
 - namespace_bridge: published to window.S AND global.Scattering (code: bridge below, 2026-10-09 — game.js consumes Scattering; window.S-only publish silently disabled autoEquip everywhere).
 - explicit_slots: melee, ranged, head, torso, legs, hands, shoes (1 each) + acc1-4 (non-exclusive). Every equipable item has exactly one assigned slot (code: slotForItem, Steve 2026-10-07)
-- weapon_split: range > 1 or bow/sling -> ranged slot; everything else -> melee (code: isRangedWeapon, slotForItem, Steve 2026-10-07)
+- weapon_split: range > 1 or bow/sling -> ranged slot; everything else -> melee (code: isRangedWeapon, slotForItem, Steve 2026-10-07). MELEE-FIRST FALLBACK (sim-meleefirst-b, 2026-11-10): a spear (melee type, range > 1) takes the MELEE slot when its carrier also holds a real ranged weapon (weapon.type 'ranged'), so the bow's opening volley fires; otherwise it keeps the ranged slot and the old fold-in (code: isFallbackSpear, carriesRealRanged, autoEquip + equipScore opts.meleeFirstSpears). isRangedWeapon/slotForItem stay context-free.
+- isFallbackSpear(def) -> boolean (melee-type weapon with range > 1: the spear shape) (code: isFallbackSpear, sim-meleefirst-b 2026-11-10)
+- isRealRangedWeapon(def) -> boolean (weapon.type 'ranged': bow/crossbow/sling...) (code: isRealRangedWeapon, sim-meleefirst-b 2026-11-10)
+- carriesRealRanged(ids, itemDefs) -> boolean (inventory holds a real ranged weapon) (code: carriesRealRanged, sim-meleefirst-b 2026-11-10)
 - full_body_blocks: full-body sets (def.fullBody or FULL_SETS) equip to torso and block head/legs/shoes only — hands and accessories stay usable. Blocked slots grey out in UI (code: blockedSlots, Steve 2026-10-07)
 - keepsakes_in_accessory_slots: keepsakes (class sentimental, no weapon/armor stats) fit no main slot — they wear in acc1-acc4 and compete with accessory gear for the same four (code: slotForItem, keepsakes.js equipAccessory; Steve 2026-10-14 STEVE-ANSWERS "Sentimental items need to compete with accessory gear for the extra slots available"). Bond grows ONLY while worn; in the pack a keepsake is dormant — memory intact, no growth (code: keepsakes.js keepsakeGrow, game.js accrueRelicBond)
 - one_per_slot: each main slot holds exactly one item (code: autoEquip, Steve 2026-10-06)
