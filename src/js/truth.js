@@ -146,6 +146,30 @@
         `A whole afternoon with {first} in your eyeline. They complain about the same things everyone complains about. Nothing hidden, or hidden well.`,
         `{first} catches you looking and just nods, easy. No flinch, no performance. Whatever they're holding, it isn't guilt.`,
       ],
+      // observedReact (journey-landing r123 2026-11-10): the villager's
+      // SPOKEN reply when the player watches them (conversation.js observe
+      // branch draws this pool). The call site existed with NO pool here,
+      // so drawTruthLine returned '' and the handler always served the one
+      // hardcoded default "Something on your mind?" — the second observe
+      // in a sitting self-blocked on the per-sitting ledger and the
+      // convoTurn tail served "I just said — did you miss it?" (panel
+      // r122: 3 sittings; r123: 1142 d6 Jenny, turns 5/9). The accusation
+      // fired about a QUESTION she asked, not anything she told the
+      // player. A real pool (drawn without replacement per game, like
+      // observeCalm) gives every observe a fresh reaction, so the repeat
+      // can never self-block into the accusation. First entry keeps the
+      // old default in circulation. Plain quoted speech, no content
+      // claims — a reaction, never "I already told you".
+      observedReact: [
+        `"Something on your mind?"`,
+        `"You're staring. Say it or stop it."`,
+        `"I can feel you watching. It's fine — just ask."`,
+        `"What? Do I have something on my face?"`,
+        `"You're quiet. That's either thinking or plotting."`,
+        `"Go on, then. I'm listening."`,
+        `"You keep looking at me like I've got answers."`,
+        `"Alright, alright — I'm here. What is it?"`,
+      ],
       observeTellOcc: [
         // KNOWLEDGE GATING (Steve 2026-10-06): these lines used to name the
         // TRUE trade in the narrator's voice ("{truthCap} have stories in
