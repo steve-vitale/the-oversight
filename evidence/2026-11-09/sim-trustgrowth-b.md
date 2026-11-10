@@ -9,9 +9,9 @@ here, not built here.
 ## Pre-registration (committed before any judged computation)
 
 Full text: `evidence/2026-11-09/sim-trustgrowth-b-prereg.md`
-(commit 67eb9ed46) + amendment 1
+(commit 401bb7b05) + amendment 1
 (`evidence/2026-11-09/sim-trustgrowth-b-prereg-amendment.md`,
-commit 6cbcc9243). In short: competent policy verbatim, default
+commit e8adc55fe). In short: competent policy verbatim, default
 env, seeds 99101–99108 (the gearbar/vetbar/standaccum band re-run
 on current master — re-use recorded, NOT claimed as freshness),
 150d death-aware horizon, daily link-trust recorder with EVERY
@@ -21,7 +21,7 @@ event attributed (gains reconcile with deltas, every gain event
 carrying a cause label or `unattributed`, with counts); (3) the
 polity question answered with counts; (4) instrument errors 0.
 
-The v1 pilot (RUN `trustgrowth-pilot`, anchor ff3288aaa) is a
+The v1 pilot (RUN `trustgrowth-pilot`, anchor d41ec0256) is a
 SHAKEDOWN, not the judged run: it exposed that the hierarchy.js
 header claim "every trust gain routes through _trustGain" is false
 on current master (comms.js / safetynets.js / titans.js write
@@ -29,7 +29,7 @@ on current master (comms.js / safetynets.js / titans.js write
 unattributed-up 241 / unattributed-down 141. Amendment 1 rebuilt
 the instrument (v2: property-setter event log + sequence
 intervals + extended cause map); the judged run is
-`trustgrowth-pilot-v2` (anchor 6cbcc9243). No v1 number is cited
+`trustgrowth-pilot-v2` (anchor e8adc55fe). No v1 number is cited
 as a finding below.
 
 ## Grounding verified in code before the judged pilot (not assumed)
@@ -406,10 +406,10 @@ answer the mail.
 - Commits (this worktree branch sim-trustgrowth-b; coordinator
   merges via --ff-only; merged locally, pending ship — no push,
   no bump, no live verification by this worker):
-  - 67eb9ed46 sim-trustgrowth-b prereg (before any judged sim)
-  - ff3288aaa sim-trustgrowth-b instruments + proof 9/9 (v1,
+  - 401bb7b05 sim-trustgrowth-b prereg (before any judged sim)
+  - d41ec0256 sim-trustgrowth-b instruments + proof 9/9 (v1,
     zero src/js)
-  - 6cbcc9243 sim-trustgrowth-b prereg amendment 1 + instrument
+  - e8adc55fe sim-trustgrowth-b prereg amendment 1 + instrument
     v2 (setter event log, seq intervals) + proof 10/10
   - (pilot v2 + evidence commit below)
 - Files: prereg + amendment + evidence in
