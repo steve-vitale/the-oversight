@@ -63,11 +63,18 @@ async function classificationLeg() {
     assert.strictEqual(r.reason, 'veterans-short');
     assert.strictEqual(r.veterans, 1);
   });
-  check('classify: scholar kills never count as veterans', function () {
+  // UPDATED sim-scholarcount-a (Steve RULED 2026-11-10): the scholar
+  // COUNTS toward the veteran bar — the old leg asserted the opposite
+  // ("scholar kills never count"). The scholar is one veteran (distinct
+  // killers, not kills: w4 + w5 kills by the same scholar = 1 veteran),
+  // payable 0 (delivery still pays non-scholar only), and 1 veteran is
+  // not ready for a 2-veteran tribute.
+  check('classify: scholar kills count as one veteran (payable 0)', function () {
     Game.state.waveKillLog = [{ by: Game.villagerId, w: 4, d: 10 }, { by: Game.villagerId, w: 5, d: 11 }];
     const r = Game.ladderCapstoneReady('military_tribute');
     assert.strictEqual(r.ready, false);
-    assert.strictEqual(r.veterans, 0, JSON.stringify(r));
+    assert.strictEqual(r.veterans, 1, JSON.stringify(r));
+    assert.strictEqual(r.payable, 0, JSON.stringify(r));
   });
   check('classify: wave-3 kills do not make wave-4 veterans', function () {
     Game.state.waveKillLog = [{ by: v1, w: 3, d: 10 }, { by: v2, w: 3, d: 12 }];

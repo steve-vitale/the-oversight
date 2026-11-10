@@ -156,10 +156,17 @@
     //   feast_embassy — no price to pay: the bundle is already done.
     // A readiness read (ladderCapstoneReady) that says ready is re-checked
     // here at delivery time; a delivery that cannot pay refuses honestly
-    // and records nothing. KNOWN GAP (prereg): readiness counts the
-    // scholar as a payable veteran, delivery does not — a scholar-veteran
-    // + 1 villager reads ready but refuses here with 'veterans-short'
-    // (leg-1 follow-up owed). Returns { ok, kind, reason?, ... }.
+    // and records nothing. READINESS/DELIVERY SPLIT (sim-scholarcount-a,
+    // Steve RULED 2026-11-10): readiness counts the scholar toward the
+    // veteran BAR, delivery still pays 2 NON-scholar veterans — the
+    // scholar, the player character, cannot leave Haven in the table's
+    // service. So a scholar-veteran + 1 villager reads ready but refuses
+    // here with 'veterans-short' (voiced in app.js). The bar measures
+    // the village's strength; the payment measures who can leave. The
+    // readiness return carries `payable` so the distinction is
+    // observable. What the scholar pays, if anything, when the pair is
+    // scholar+1 is a steve-call open item (sim-findings.md) — this arm
+    // does not invent a scholar payment. Returns { ok, kind, reason?, ... }.
     // The delivery also OPENS the mercy window: tableActive() holds from
     // delivery (see the sanctity clause there), so no raid or roaming
     // monster can kill villagers between the delivery and the seat.
