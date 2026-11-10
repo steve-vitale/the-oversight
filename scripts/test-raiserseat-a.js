@@ -1,26 +1,26 @@
 // test-raiserseat-a.js — proof test for the raiser-seat arm
-// (arm sim-raiserseat-a, run fleshout-20261110T1415Z). Proves the
-// mechanism (RAISER_SEAT=1 pending-raise signal in talkScore) and the
-// measurement (raiserseat analyzer: 150206-class detection, revised
-// per-day cost bar).
+// (arm sim-raiserseat-a, run fleshout-20261110T1415Z; NO-GO closeout
+// run fleshout-20261110T1915Z: the +35 pending-raise signal FAILED its
+// GO bar — second links 6/8 armed vs 7/8 control — so the signal was
+// REVERTED out of scripts/policies/competent.js and must not land.
+// This proof now pins the REVERTED state plus the measurement
+// (raiserseat analyzer: 150206-class detection, revised per-day cost
+// bar). The driver (raiserseat-driver-20261110.js) is kept as the
+// historical record of how the committed corpus was produced; it still
+// sets RAISER_SEAT=1 on the armed leg, but the flag is now a no-op in
+// the policy, so re-running it will NOT reproduce the armed leg.
 //
-// Legs: (a) raiserSeatOn() env gate on/off; (b) talkScore unit legs on
-// a fake Game: an answerable raiser with a pending ask outranks a
-// stranger (+35 beats the stranger max 30 from a zero base; the
-// 150206-shaped case: base 8 vs stranger 29 -> 43 > 29); no pending
-// raise = picker unchanged; unanswerable raiser (commLevel 'none') =
-// no bonus; fail-open when commLevel is missing; a want-bearer and a
-// grieving stranger still outrank a low-base raiser (priority
-// preserved); pickTalkTargets orders the raiser first with the flag
-// on and is unchanged with it off; (c) analyzer 150206-class
+// Legs: (a) revert pins: RAISER_SEAT is a no-op on talkScore even with
+// a pending raise (flag on == flag off; base scores unchanged) and the
+// raiserSeatOn / RAISER_SEAT_BONUS exports are gone; pickTalkTargets
+// order is unchanged by the flag; (b) analyzer 150206-class
 // detection + revised cost bar (per-day, arm-only starvation,
-// starvation, median) on synthetic per-seed JSON; (d) live harness
-// miniature (12d, seed 150201): flag-ON run takes real held turns
-// with zero instrument errors and is deterministic across identical
-// runs; the RAISER_SEAT-off + COMPETENT_TALK-on leg also takes held
-// turns (the talkturn-a substrate is on); both flags OFF is
-// byte-identical to plain competent on days + standing (the gates add
-// nothing when off).
+// starvation, median) on synthetic per-seed JSON; (c) live harness
+// miniature (12d, seed 150201): the (now no-op) flag-ON run takes real
+// held turns with zero instrument errors and is deterministic across
+// identical runs; the COMPETENT_TALK-on leg also takes held turns (the
+// talkturn-a substrate is on); both flags OFF is byte-identical to
+// plain competent on days + standing (the gates add nothing when off).
 // Usage: node scripts/test-raiserseat-a.js
 'use strict';
 const path = require('path');
@@ -29,7 +29,7 @@ const AN = require(path.join(__dirname, 'raiserseat-analyze-20261110'));
 const DRV = require(path.join(__dirname, 'raiserseat-driver-20261110'));
 const TDRV = require(path.join(__dirname, 'talkturn-driver-20261110'));
 const { loadGame, setupGame, runDays, quietLog } = require(path.join(__dirname, 'sim-harness'));
-const { competent, talkOn, raiserSeatOn, RAISER_SEAT_BONUS, talkScore, pickTalkTargets } = require(path.join(__dirname, 'policies', 'competent'));
+const { competent, talkOn, talkScore, pickTalkTargets } = require(path.join(__dirname, 'policies', 'competent'));
 
 let pass = 0;
 function ok(name, fn) { fn(); pass++; console.log('ok ' + pass + ' - ' + name); }
@@ -61,14 +61,9 @@ function fakeGame(opts) {
 }
 const RAISE = { villageId: 'emberhold', day: 6, kind: 'link' };
 
-ok('raiserSeatOn: RAISER_SEAT=1 on, unset/0 off; bonus is 35', function () {
-  assert.strictEqual(withEnv({ seat: '1' }, function () { return raiserSeatOn(); }), true);
-  assert.strictEqual(withEnv({ seat: undefined }, function () { return raiserSeatOn(); }), false);
-  assert.strictEqual(withEnv({ seat: '0' }, function () { return raiserSeatOn(); }), false);
-  assert.strictEqual(RAISER_SEAT_BONUS, 35);
-});
-
-ok('talkScore: answerable raiser outranks a stranger (zero-base raiser 35 > stranger max 30)', function () {
+ok('revert: RAISER_SEAT is a no-op on talkScore even with a pending raise (flag on == flag off, base scores unchanged)', function () {
+  // The killed +35 signal is gone: a raiser with a pending ask scores
+  // exactly what the base policy gives, flag on or off.
   const g = fakeGame({
     convo: { devon: { count: 12 }, ella: { count: 0 } },
     bond: { devon: 25, ella: 0 },
@@ -77,23 +72,18 @@ ok('talkScore: answerable raiser outranks a stranger (zero-base raiser 35 > stra
   });
   const base = withEnv({ seat: undefined }, function () { return talkScore(g, {}, 'devon'); });
   assert.strictEqual(base, 0, 'devon base is 0 (trusted, talked-to)');
-  const armed = withEnv({ seat: '1' }, function () { return talkScore(g, {}, 'devon'); });
-  assert.strictEqual(armed, 35, 'devon armed is 35');
-  const stranger = withEnv({ seat: '1' }, function () { return talkScore(g, {}, 'ella'); });
-  assert.strictEqual(stranger, 30, 'stranger max is 30');
-  assert.ok(armed > stranger, 'raiser outranks the stranger');
-});
-
-ok('talkScore: 150206-shaped case — raiser base 8 vs stranger 29 -> 43 > 29', function () {
-  const g = fakeGame({
+  assert.strictEqual(withEnv({ seat: '1' }, function () { return talkScore(g, {}, 'devon'); }), 0, 'flag on changes nothing');
+  assert.strictEqual(withEnv({ seat: '1' }, function () { return talkScore(g, {}, 'ella'); }), 30, 'stranger max is still 30');
+  // 150206-shaped base scores are unchanged by the flag too.
+  const g2 = fakeGame({
     convo: { devon: { count: 4 }, ella: { count: 1 } },
     bond: { devon: 18, ella: 0 },
     pending: { devon: RAISE },
     comm: { devon: 'full' },
   });
-  assert.strictEqual(withEnv({ seat: undefined }, function () { return talkScore(g, {}, 'devon'); }), 8);
-  assert.strictEqual(withEnv({ seat: '1' }, function () { return talkScore(g, {}, 'devon'); }), 43);
-  assert.strictEqual(withEnv({ seat: '1' }, function () { return talkScore(g, {}, 'ella'); }), 29);
+  assert.strictEqual(withEnv({ seat: undefined }, function () { return talkScore(g2, {}, 'devon'); }), 8);
+  assert.strictEqual(withEnv({ seat: '1' }, function () { return talkScore(g2, {}, 'devon'); }), 8, 'flag on: still 8, no +35');
+  assert.strictEqual(withEnv({ seat: '1' }, function () { return talkScore(g2, {}, 'ella'); }), 29);
 });
 
 ok('talkScore: no pending raise = picker unchanged (flag on scores equal flag off)', function () {
@@ -109,51 +99,13 @@ ok('talkScore: no pending raise = picker unchanged (flag on scores equal flag of
   });
 });
 
-ok('talkScore: unanswerable raiser (commLevel none) gets no bonus', function () {
-  const g = fakeGame({
-    convo: { gen: { count: 5 } },
-    bond: { gen: 0 },
-    pending: { gen: RAISE },
-    comm: { gen: 'none' },
-  });
-  const base = withEnv({ seat: undefined }, function () { return talkScore(g, {}, 'gen'); });
-  const armed = withEnv({ seat: '1' }, function () { return talkScore(g, {}, 'gen'); });
-  assert.strictEqual(armed, base, 'no bonus when the ask cannot appear in the menu');
-  assert.strictEqual(base, 25, 'base is stranger 20 + count 5');
+ok('revert: raiserSeatOn / RAISER_SEAT_BONUS are not exported by competent', function () {
+  const mod = require(path.join(__dirname, 'policies', 'competent'));
+  assert.strictEqual(mod.raiserSeatOn, undefined, 'raiserSeatOn export is gone');
+  assert.strictEqual(mod.RAISER_SEAT_BONUS, undefined, 'RAISER_SEAT_BONUS export is gone');
 });
 
-ok('talkScore: fail-open when commLevel is missing (bonus applies)', function () {
-  const g = fakeGame({
-    convo: { devon: { count: 12 } },
-    bond: { devon: 25 },
-    pending: { devon: RAISE },
-    noComm: true,
-  });
-  assert.strictEqual(withEnv({ seat: '1' }, function () { return talkScore(g, {}, 'devon'); }), 35);
-});
-
-ok('talkScore: want-bearer and grieving stranger still outrank a low-base raiser (priority preserved)', function () {
-  const g = fakeGame({
-    convo: {
-      devon: { count: 12 },
-      wanter: { count: 0, want: { id: 'w1' } },
-      griever: { count: 0 },
-    },
-    mood: { griever: 'grieving' },
-    bond: { devon: 25, wanter: 0, griever: 0 },
-    pending: { devon: RAISE },
-    comm: { devon: 'full' },
-  });
-  const raiser = withEnv({ seat: '1' }, function () { return talkScore(g, {}, 'devon'); });
-  const wanter = withEnv({ seat: '1' }, function () { return talkScore(g, {}, 'wanter'); });
-  const griever = withEnv({ seat: '1' }, function () { return talkScore(g, {}, 'griever'); });
-  assert.strictEqual(raiser, 35);
-  assert.strictEqual(wanter, 130, 'want 100 + stranger 20 + count 10');
-  assert.strictEqual(griever, 80, 'grief 50 + stranger 20 + count 10');
-  assert.ok(wanter > raiser && griever > raiser, 'grief and wants keep priority over the raise signal');
-});
-
-ok('pickTalkTargets: raiser first with the flag on, order unchanged with it off', function () {
+ok('revert: pickTalkTargets order is unchanged by RAISER_SEAT (flag on == flag off)', function () {
   const g = fakeGame({
     convo: { devon: { count: 12 }, ella: { count: 0 }, raj: { count: 0 } },
     bond: { devon: 25, ella: 0, raj: 0 },
@@ -164,7 +116,7 @@ ok('pickTalkTargets: raiser first with the flag on, order unchanged with it off'
   const off = withEnv({ seat: undefined }, function () { return pickTalkTargets(g, {}, alive); });
   assert.deepStrictEqual(off, ['ella', 'raj', 'devon'], 'flag off: strangers first, raiser last');
   const on = withEnv({ seat: '1' }, function () { return pickTalkTargets(g, {}, alive); });
-  assert.strictEqual(on[0], 'devon', 'flag on: raiser takes the first seat');
+  assert.deepStrictEqual(on, off, 'flag on: same order — the signal is gone');
 });
 
 // --- Analyzer fixtures (same synthetic corpus shape as test-talkturn-a) ---
@@ -253,7 +205,7 @@ ok('driver: setRaiserFlags sets COMPETENT_TALK=1 on both legs and RAISER_SEAT pe
 });
 
 (async function () {
-  await aok('live: flag-ON 12d takes real held turns, zero errors, deterministic', async function () {
+  await aok('live: (reverted flag) RAISER_SEAT=1 12d takes real held turns, zero errors, deterministic', async function () {
     async function shortRun() {
       DRV.setRaiserFlags('armed');
       const { Game } = await loadGame({ seed: 150201, mode: 'competent-raiserseat-test', fullTelemetry: false });
@@ -279,7 +231,7 @@ ok('driver: setRaiserFlags sets COMPETENT_TALK=1 on both legs and RAISER_SEAT pe
     assert.strictEqual(a.errors, 0, 'recorder errors: ' + a.errors);
     assert.ok(a.deepTurns > 0, 'held turns taken, deepTurns=' + a.deepTurns);
     assert.deepStrictEqual(a, b, 'flag-on 12d deterministic: ' + JSON.stringify(a) + ' vs ' + JSON.stringify(b));
-    console.log('    (12d armed x2: ' + JSON.stringify(a) + ')');
+    console.log('    (12d reverted-flag x2: ' + JSON.stringify(a) + ')');
   });
 
   await aok('live: RAISER_SEAT-off + COMPETENT_TALK-on takes held turns (substrate on); both flags off is byte-identical to plain competent', async function () {

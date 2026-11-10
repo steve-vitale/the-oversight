@@ -242,3 +242,29 @@ staged day, a sitting, and a formation line with real terms.
   Filed in sim-findings.md (open, 2026-11-10, scale-onramp/counters).
 - The scale wall is unchanged by this arm: national 0/8, table 0/8,
   wins 0/8 on both legs.
+
+## Coordinator closeout addendum (run fleshout-20261110T1915Z, Loop A)
+
+STALE-LOCK RECOVERY: the 1815Z run died before merging (registry
+heartbeat 40 min stale, no live processes). This closeout lands the
+NO-GO record on master with the lever reverted — per loop precedent,
+killed-arm evidence lands as record (cf. sim-answermail-drive-a.md,
+sim-bindingtrace-b.md) while the lever itself leaves no trace:
+
+- The +35 raiser-seat signal was reverse-applied out of
+  scripts/policies/competent.js (41 deletions; no RAISER/raiserSeat
+  references remain). RAISER_SEAT is now a no-op env var.
+- scripts/test-raiserseat-a.js was rewritten to pin the REVERTED state
+  (flag on == flag off on talkScore even with a pending raise; the
+  raiserSeatOn / RAISER_SEAT_BONUS exports are gone; pickTalkTargets
+  order unchanged by the flag) plus the unchanged analyzer / cost-bar /
+  driver / live legs. Proof 11/11 green post-revert (was 15/15 with
+  the signal live).
+- The driver (raiserseat-driver-20261110.js) is kept as the historical
+  record of how the committed corpus was produced; it still sets
+  RAISER_SEAT=1 on the armed leg, but the flag no longer does anything,
+  so re-running it will NOT reproduce the armed leg. The committed
+  corpus is the record of the armed leg.
+- The counter-wall follow-up is arm sim-counterclose-a in this same
+  run (diagnose the counter-every-propose seeds, teach the policy to
+  answer pending counters).
