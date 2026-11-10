@@ -70,6 +70,31 @@ check('W5 kills are separated from W4 kills', function () {
   assert.strictEqual(s.kinds.editor.spawns, 1);
 });
 
+// 4b. Faced-instances: re-fights of one spawned instance count once;
+// conjured fights (no spawned instance) are counted separately.
+check('facedInstances counts distinct spawned instances; conjured counted apart', function () {
+  const roster = A.loadRoster();
+  const row = {
+    seed: 1, days: 150, endReason: 'done', won: false, unlockedWave: 4, maxWave: 4,
+    spawns: [{ id: 'herald', wave: 4, day: 64, source: 'background', veteran: false }],
+    casts: [], fights: [
+      { mid: 'herald', wave: 4, day: 70, channel: 'player-tb', seq: 1 },
+      { mid: 'herald', wave: 4, day: 70, channel: 'player-tb', seq: 1 },
+      { mid: 'herald', wave: 4, day: 71, channel: 'player-tb', seq: 1 },
+      { mid: 'bulldozer', wave: 1, day: 44, channel: 'field', seq: null },
+    ],
+    waveKillLog: [], instrumentErrors: [],
+  };
+  const s = A.analyzeSeed(row, roster);
+  assert.strictEqual(s.kinds.herald.faced, 3);
+  assert.strictEqual(s.kinds.herald.facedInstances, 1);
+  assert.strictEqual(s.kinds.herald.conjuredFaced, 0);
+  assert.strictEqual(s.kinds.bulldozer.faced, 1);
+  assert.strictEqual(s.kinds.bulldozer.facedInstances, 0);
+  assert.strictEqual(s.kinds.bulldozer.conjuredFaced, 1);
+  assert.strictEqual(s.conjuredFights, 1);
+});
+
 // 5. Completeness: census rows cover all 72 roster kinds; campaignOnly
 // kinds are explicitly marked (not silently absent); 0-spawn kinds stay
 // in the table.

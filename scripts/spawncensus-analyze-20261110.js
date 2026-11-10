@@ -7,6 +7,11 @@
 //   spawns (spawnWorldMonster calls), casts (castMonster selections),
 //   faced (startCombat/fieldFight rows naming the kind), kills
 //   (waveKillLog rows, split by wave — W5 kills are NEVER folded into W4).
+//   facedInstances counts DISTINCT spawned instances faced (fights rows
+//   carry the spawn seq; re-fights of one instance count once here).
+//   conjuredFaced counts fights with no spawned instance (seq null) —
+//   villager-agency expedition fights and arena fights conjure the
+//   monster from its def without placing it in the world.
 // Every roster kind gets a row (count possibly 0) or an explicit
 // poolNote explaining why 0 is expected (campaignOnly / titan-omen).
 // Wild-pool note: castMonster excludes titan ids and monsterWavePool is
@@ -58,11 +63,11 @@ function medianOf(arr) {
 function analyzeSeed(row, roster) {
   const byId = {};
   roster.forEach(function (r) {
-    byId[r.id] = { id: r.id, wave: r.wave, poolNote: r.poolNote, spawns: 0, spawnSources: {}, veteranSpawns: 0, firstSpawnDay: null, casts: 0, faced: 0, firstFacedDay: null, kills: 0, killsByWave: {}, firstKillDay: null };
+    byId[r.id] = { id: r.id, wave: r.wave, poolNote: r.poolNote, spawns: 0, spawnSources: {}, veteranSpawns: 0, firstSpawnDay: null, casts: 0, faced: 0, facedInstances: 0, conjuredFaced: 0, firstFacedDay: null, kills: 0, killsByWave: {}, firstKillDay: null };
   });
   function ensure(id, wave) {
     if (!id) return null;
-    if (!byId[id]) byId[id] = { id: id, wave: (wave | 0) || null, poolNote: 'UNKNOWN-ID', spawns: 0, spawnSources: {}, veteranSpawns: 0, firstSpawnDay: null, casts: 0, faced: 0, firstFacedDay: null, kills: 0, killsByWave: {}, firstKillDay: null };
+    if (!byId[id]) byId[id] = { id: id, wave: (wave | 0) || null, poolNote: 'UNKNOWN-ID', spawns: 0, spawnSources: {}, veteranSpawns: 0, firstSpawnDay: null, casts: 0, faced: 0, facedInstances: 0, conjuredFaced: 0, firstFacedDay: null, kills: 0, killsByWave: {}, firstKillDay: null };
     return byId[id];
   }
   (row.spawns || []).forEach(function (s) {
@@ -77,12 +82,24 @@ function analyzeSeed(row, roster) {
     c.casts++;
   });
   let unattributedFights = 0;
+  let conjuredFights = 0;
+  const conjuredByChannelCls = {};
+  const facedSeqs = {}; // id -> Set of spawn seqs (distinct spawned instances faced)
   (row.fights || []).forEach(function (f) {
     if (!f.mid) { unattributedFights++; return; }
     const c = ensure(f.mid, f.wave); if (!c) return;
     c.faced++;
+    if (f.seq == null) {
+      c.conjuredFaced++;
+      conjuredFights++;
+      const k = (f.channel || '?') + '/' + (f.cls || '?');
+      conjuredByChannelCls[k] = (conjuredByChannelCls[k] || 0) + 1;
+    } else {
+      (facedSeqs[f.mid] = facedSeqs[f.mid] || new Set()).add(f.seq);
+    }
     if (c.firstFacedDay == null || (f.day | 0) < c.firstFacedDay) c.firstFacedDay = (f.day | 0);
   });
+  Object.keys(facedSeqs).forEach(function (id) { if (byId[id]) byId[id].facedInstances = facedSeqs[id].size; });
   (row.waveKillLog || []).forEach(function (e) {
     const c = ensure(e.mid, e.w); if (!c) return;
     c.kills++;
@@ -101,6 +118,7 @@ function analyzeSeed(row, roster) {
     errorList: (row.instrumentErrors || []).slice(),
     spawnsTotal: (row.spawns || []).length, castsTotal: (row.casts || []).length,
     fightsTotal: (row.fights || []).length, unattributedFights: unattributedFights,
+    conjuredFights: conjuredFights, conjuredByChannelCls: conjuredByChannelCls,
     killsTotal: (row.waveKillLog || []).length,
     spawnWaveTotals: spawnWaveTotals, killWaveTotals: killWaveTotals,
     kinds: byId,
@@ -119,16 +137,16 @@ function analyzeDir(dir, runFilter) {
   // Aggregate across seeds.
   const agg = {};
   roster.forEach(function (r) {
-    agg[r.id] = { id: r.id, wave: r.wave, poolNote: r.poolNote, spawns: 0, seedsSpawned: 0, casts: 0, seedsCast: 0, faced: 0, seedsFaced: 0, kills: 0, killsByWave: {}, seedsKilled: 0, firstSpawnDay: null, firstFacedDay: null, firstKillDay: null };
+    agg[r.id] = { id: r.id, wave: r.wave, poolNote: r.poolNote, spawns: 0, seedsSpawned: 0, casts: 0, seedsCast: 0, faced: 0, facedInstances: 0, conjuredFaced: 0, seedsFaced: 0, kills: 0, killsByWave: {}, seedsKilled: 0, firstSpawnDay: null, firstFacedDay: null, firstKillDay: null };
   });
   seeds.forEach(function (s) {
     Object.keys(s.kinds).forEach(function (id) {
       const k = s.kinds[id];
-      if (!agg[id]) agg[id] = { id: id, wave: k.wave, poolNote: 'UNKNOWN-ID', spawns: 0, seedsSpawned: 0, casts: 0, seedsCast: 0, faced: 0, seedsFaced: 0, kills: 0, killsByWave: {}, seedsKilled: 0, firstSpawnDay: null, firstFacedDay: null, firstKillDay: null };
+      if (!agg[id]) agg[id] = { id: id, wave: k.wave, poolNote: 'UNKNOWN-ID', spawns: 0, seedsSpawned: 0, casts: 0, seedsCast: 0, faced: 0, facedInstances: 0, conjuredFaced: 0, seedsFaced: 0, kills: 0, killsByWave: {}, seedsKilled: 0, firstSpawnDay: null, firstFacedDay: null, firstKillDay: null };
       const a = agg[id];
       a.spawns += k.spawns; if (k.spawns > 0) a.seedsSpawned++;
       a.casts += k.casts; if (k.casts > 0) a.seedsCast++;
-      a.faced += k.faced; if (k.faced > 0) a.seedsFaced++;
+      a.faced += k.faced; a.facedInstances += (k.facedInstances || 0); a.conjuredFaced += (k.conjuredFaced || 0); if (k.faced > 0) a.seedsFaced++;
       a.kills += k.kills; if (k.kills > 0) a.seedsKilled++;
       Object.keys(k.killsByWave).forEach(function (w) { a.killsByWave[w] = (a.killsByWave[w] || 0) + k.killsByWave[w]; });
       if (k.firstSpawnDay != null && (a.firstSpawnDay == null || k.firstSpawnDay < a.firstSpawnDay)) a.firstSpawnDay = k.firstSpawnDay;
@@ -155,6 +173,7 @@ function analyzeDir(dir, runFilter) {
     castsTotal: seeds.reduce(function (n, s) { return n + s.castsTotal; }, 0),
     fightsTotal: seeds.reduce(function (n, s) { return n + s.fightsTotal; }, 0),
     unattributedFights: seeds.reduce(function (n, s) { return n + s.unattributedFights; }, 0),
+    conjuredFights: seeds.reduce(function (n, s) { return n + (s.conjuredFights || 0); }, 0),
     killsTotal: seeds.reduce(function (n, s) { return n + s.killsTotal; }, 0),
     spawnWaveTotals: spawnWaveTotals, killWaveTotals: killWaveTotals,
     maxUnlockedWave: seeds.reduce(function (m, s) { return Math.max(m, (s.unlockedWave | 0) || 0); }, 0),
@@ -172,11 +191,11 @@ function analyzeDir(dir, runFilter) {
 
 function mdTable(summary) {
   const lines = [];
-  lines.push('| wave | kind | pool | spawns (seeds) | casts | faced (seeds) | kills (seeds) | kills by wave | first spawn |');
-  lines.push('|---:|---|---|---:|---:|---:|---:|---|---|---:|');
+  lines.push('| wave | kind | pool | spawns (seeds) | casts | faced (seeds) | inst. faced | conjured | kills (seeds) | kills by wave | first spawn |');
+  lines.push('|---:|---|---|---:|---:|---:|---:|---:|---:|---|---|---:|');
   summary.census.forEach(function (r) {
     const kbw = Object.keys(r.killsByWave).sort().map(function (w) { return 'w' + w + ':' + r.killsByWave[w]; }).join(' ') || '—';
-    lines.push('| ' + r.wave + ' | ' + r.id + ' | ' + r.poolNote + ' | ' + r.spawns + ' (' + r.seedsSpawned + ') | ' + r.casts + ' | ' + r.faced + ' (' + r.seedsFaced + ') | ' + r.kills + ' (' + r.seedsKilled + ') | ' + kbw + ' | ' + (r.firstSpawnDay == null ? '—' : 'd' + r.firstSpawnDay) + ' |');
+    lines.push('| ' + r.wave + ' | ' + r.id + ' | ' + r.poolNote + ' | ' + r.spawns + ' (' + r.seedsSpawned + ') | ' + r.casts + ' | ' + r.faced + ' (' + r.seedsFaced + ') | ' + r.facedInstances + ' | ' + r.conjuredFaced + ' | ' + r.kills + ' (' + r.seedsKilled + ') | ' + kbw + ' | ' + (r.firstSpawnDay == null ? '—' : 'd' + r.firstSpawnDay) + ' |');
   });
   return lines.join('\n');
 }
