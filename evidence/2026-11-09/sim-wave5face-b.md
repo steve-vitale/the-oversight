@@ -160,6 +160,6 @@ Eight villages, same seeds as the last three measurements, and the story is now 
 
 ## Landing section (adopter — for the coordinator)
 
-- Rebase base: master `465802a90258c94a4471fcb12c54df69ca5edef6` (read in the main tree at adoption time; unchanged from the 03:35Z value in the brief — master had not moved).
-- Proof after rebase: `node scripts/test-wave5face-b.js` — (to fill after the rebase below).
-- Ready to merge: (to fill after the rebase + proof re-run).
+- Rebase base: master `1f1d3dabbc6444ec2192a8f86d8d1cf3d9cab134` (read in the main tree immediately before rebasing; master HAD moved from the brief's 03:35Z value `465802a90258c94a4471fcb12c54df69ca5edef6` — a sibling arm, sim-approachretest-b, landed in between — so the new SHA was used). Rebase replayed all 3 branch commits cleanly, no conflicts, no rebase-quirk stop. New tip `f2ed0740b`.
+- Proof after rebase: `node scripts/test-wave5face-b.js` — **69 passed, 0 failed** (exact count verified, not assumed). Analyzer re-run on the rebased tip reproduces the verdict exactly (diagGo all true; wall national 0 / table 0 / wins 0 / w4 unlocks 8 / w5 unlocks 4 / w5 kills 0 / w4 kills 27; spawns never-met 10 / die 12 / flee 3).
+- Ready to merge: **yes — ready to merge** (`--ff-only` onto master by the coordinator; no push, no bump, no live verification by this worker).
