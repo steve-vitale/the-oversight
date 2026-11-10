@@ -19,6 +19,13 @@
 - Corpus: `evidence/2026-11-10/perseed-knowledge-b/` —
   `knowledge-b-s<seed>-knowledge-b-pilot-on.json` (8 pilot files) plus
   `knowledge-b-proof-*` files (determinism/neutrality legs).
+- Rebase note: the branch was rebased onto master `5dea46a45` (killchoke-a
+  landing) after the pilot; the proof test was re-run on the rebased tip
+  `d7ad00107` and passed 41/41 again. The regenerated proof files differ
+  from the pre-rebase ones ONLY in `anchorCommit` — every event table,
+  digest, and wall number is byte-identical across the rebase, so the
+  killchoke-a landing changed nothing on these seeds for this instrument.
+  The pilot numbers below were run on `70e3af870` and stand as-run.
 
 ## Verdict: GO (on instrument validity + complete first-numbers capture)
 
