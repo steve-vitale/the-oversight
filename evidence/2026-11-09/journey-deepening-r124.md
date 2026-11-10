@@ -107,7 +107,10 @@ Sixteen villages played to day ~100. Thirteen survived; three were lost. The vil
 
 ## Gate
 
-- (to fill: `node scripts/check.js --quick` in the worktree)
+- **Gate 1 (pre-rebase, old base 74debf969):** `node scripts/check.js --quick` — 294 passed, 6 failed in 799s. The 2 extra vs standing 296/4 were the measurement pair (stale proof inputs from the src/js changes) — the other 4 are the standing failures (mobile-combat-cadence, occupation-panels, phone-frame-proof, establishment-r20).
+- **Rebase:** master moved twice during the run (74debf969 → 344d7b8d7 doorwalk → 465802a90 sim-pair). Rebasing onto each explicit SHA in turn, 4/4 clean both times, proofs re-run green after each (22/22, 31/31, 35/35, 28/28, 14/14).
+- **Gate 2 (rebased on 465802a90):** `node scripts/check.js --quick` — 294 passed, 6 failed in 528s. Failures: test-measurement-proof-update.js + test-measurement-workflow.js (staleness: "Proof source inputs are not current" / "retained neutrality proof covers the current Game/controller/harness inputs") + the standing 4.
+- **Proof refresh (per SIMULATING.md):** fresh neutral panel via `scripts/balance-panel.js` (7 seeds × 4 policies, 150d), then `scripts/balance-proof-update.js`, pair re-run 9/9 each, then re-gate. (to fill: refresh result + gate 3)
 
 ## Landing
 
