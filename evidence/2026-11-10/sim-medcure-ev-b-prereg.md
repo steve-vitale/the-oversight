@@ -325,6 +325,26 @@ died of wound fever and why, what the pharmacy held.
   --index-info`, then verify status empty + `git diff HEAD` empty +
   hash-object matches HEAD blob.
 
+## Amendment (pre-sweep, before any judged computation)
+
+- **G1 tick-phase rule corrected.** The prereg as committed required
+  "every tick carries all four phase snapshots (preTick/preCare/postCare/
+  postTick counts equal within each seed)". The proof test's live L4a leg
+  showed that rule is wrong about the game: on seed 160501 the recorded
+  run has preTick 128, preCare 127, postCare 127, postTick 128. The
+  mechanism is in the code, not the instrument —
+  `villageSicknessTick()` early-returns (`if (!candidates.length)
+  return;`, game.js ~33023) when no onset candidate exists, skipping
+  the vectors step AND `villagerCareTick()` for that tick, so that tick
+  legitimately carries preTick/postTick but no care phases. (On such a
+  tick no duty cure can happen — the care tick is what cures — and no
+  new onset either.) The corrected G1 rule, which the analyzer
+  implements: entry/exit pairs must balance (preTick == postTick,
+  preCare == postCare) and care ticks never exceed sickness ticks
+  (preCare <= preTick). The proof test L4a asserts the corrected rule
+  and L1k covers a care-less tick in the builder. No judged computation
+  has run; the pilot sweep has not started.
+
 ## Metric review (pre-registered note)
 
 - The primary metric is instrument validity + complete capture, judged
