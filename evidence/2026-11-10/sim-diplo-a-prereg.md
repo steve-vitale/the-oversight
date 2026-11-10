@@ -23,7 +23,14 @@ Zero src/js. Gates, prices, deeds, and readyDemand untouched.
   - `_formLink` has exactly four callers (grep, all of src/js): `proposeLink`
     (score ≥ 55 forms, 35–54 counters, < 35 declines), `answerCounter`
     (accept / sweeten), `answerRaid` (terms / strike), `_ladderRewardLink`
-    (meta-progression stage-3 reward). No other path forms a link.
+    (meta-progression stage-3 reward). No other path forms a primary/
+    subordinate link. Peer links (covenant/trade, no primary) are born
+    separately in `_formPeerLink`, called by `_proposePeer` (via
+    proposeCovenant / proposeTrade, score ≥ 55) and by `answerCounter`
+    (peer-counter accept / sweeten). AMENDMENT (same day, before any
+    judged sim): formation paths are therefore propose / counter / raid /
+    ladder / peer-propose / peer-counter — six paths, two birthplaces.
+    The instrument wraps both `_formLink` and `_formPeerLink`.
   - Link raises: `stageLinkRaise` gates (raiser alive, person-trust ≥ 20,
     `build_standing` ≥ 1, raiser personally knows the village, village
     unlinked, no pending raise, 14-day re-raise cooldown, no undelivered
@@ -52,8 +59,9 @@ Zero src/js. Gates, prices, deeds, and readyDemand untouched.
 
 ## Definitions (binding for this arm)
 - **Ally-join (LINK-JOIN):** a village becomes linked to Haven — any
-  `_formLink` event, classified by formation path from the call stack:
-  propose / counter / raid / ladder. Counted per seed: links formed,
+  `_formLink` or `_formPeerLink` event, classified by formation path from
+  the call stack: propose / counter / raid / ladder / peer-propose /
+  peer-counter. Counted per seed: links formed,
   first-link day + path, links ever formed, links active at end, links
   seasoned at end (snapshotLink.seasoned), polities formed
   (polityOf('haven') non-null on any day, with shape/size).
@@ -103,7 +111,7 @@ Zero src/js. Gates, prices, deeds, and readyDemand untouched.
 This is a measurement arm: GO means the instrument works and the first
 numbers are captured cleanly. GO iff ALL of:
 1. Every link on the band classified by formation path (propose / counter /
-   raid / ladder), none unclassified, none forced.
+   raid / ladder / peer-propose / peer-counter), none unclassified, none forced.
 2. Every bond_proposed tele event (kind 'bond' AND 'link') reconciled
    against snapshot/wrap transitions — 0 irreconcilable.
 3. Neutrality — the instrument does not perturb the game: the
@@ -158,12 +166,14 @@ No other policy change. No src/js change.
   pending) — copy the recorder into the diplo driver as talkturn-a did,
   or require it if it is importable; do not fork its counting logic.
 - NEW scripts/diplo-instrument-20261110.js (thin extension, wraps only):
-  wrap `_formLink` (record target + caller path from the stack:
-  proposeLink / answerCounter / answerRaid / _ladderRewardLink / other),
-  wrap `proposeCovenant`, `proposeTrade`, `raidVillage`, `answerCounter`,
-  `answerAccord`, `answerNationalChoice`, `answerGlobalChoice`,
-  `bidForPrimacy`, `tendLink` (call counts + outcome class where the
-  return carries one), and add a daily diplo snapshot:
+  wrap `_formLink` AND `_formPeerLink` (record target + kind + caller
+  path from the stack: proposeLink / answerCounter / answerRaid /
+  _ladderRewardLink / _proposePeer / other — "other" is a failure, not
+  a class), wrap `proposeCovenant`, `proposeTrade`, `raidVillage`,
+  `answerCounter`, `answerAccord`, `answerNationalChoice`,
+  `answerGlobalChoice`, `bidForPrimacy`, `tendLink` (call counts +
+  outcome class where the return carries one), and add a daily diplo
+  snapshot:
   foreignPolities() (count, max size, any ≥4), nationalLive/globalLive
   flags, pendingNational/pendingGlobal shape, link-kind roll from the
   secondlink snapshot (reused, not re-read). All wraps record-only:
