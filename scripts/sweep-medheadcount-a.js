@@ -36,7 +36,11 @@ const BARE = process.env.MEDHEADCOUNT_BARE === '1';
 const SEEDS = (process.env.SEEDS || '')
   .split(',').map(s => parseInt(s.trim(), 10)).filter(Boolean);
 const BATCH = [96301, 96302, 96303, 96304, 96305, 96306, 96307, 96308];
-const isList = (list) => SEEDS.length === list.length && SEEDS.every((s, i) => s === list[i]);
+// (sim-medheadcount-confirm-a 2026-11-09: generalized from the pilot-only
+// gate to any 8–16 seed list. SEEDS unset means the pilot default BATCH;
+// the confirm band 96009–96024 is passed explicitly. 8-seed behavior is
+// unchanged: same seeds, same DAYS=150, same outputs.)
+const SEED_LIST = SEEDS.length ? SEEDS : BATCH;
 const DAYS = parseInt(process.env.DAYS || '', 10);
 const OUT = process.env.OUT || path.join(
   __dirname, '..', 'evidence', '2026-11-08', 'medheadcount-a-corpus', 'sweep-competent.json');
@@ -74,12 +78,18 @@ process.stdin.on('end', () => {
 });
 `;
 function writeRobust(filePath, data) {
-  const tmp = filePath + '.tmp-' + process.pid;
+  // Unique tmp per attempt + unlink on failure (flap discipline,
+  // sim-medheadcount-confirm-a 2026-11-09): the host EPERM flap denies
+  // writes to a 0-byte tmp left behind by a failed attempt, so reusing
+  // one tmp name makes all 300 retries fail blindly. A fresh tmp per
+  // attempt lets a later retry hit a clear window.
   for (let i = 0; i < 300; i++) {
+    const tmp = filePath + '.tmp-' + process.pid + '-' + i;
     const r = child_process.spawnSync(process.execPath,
       ['-e', CHILD_WRITER, tmp, filePath],
       { input: data, encoding: 'utf8', timeout: 30000, maxBuffer: 64 * 1024 * 1024 });
     if (r.status === 0) return;
+    try { fs.unlinkSync(tmp); } catch (e) {}
     if (i === 299) { console.error('WRITE FAIL LOUDLY', filePath, 'child status=' + r.status); process.exit(2); }
     Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 500 + Math.floor(Math.random() * 2500));
   }
@@ -243,8 +253,8 @@ if (require.main === module) (async () => {
     console.error('FATAL: PLENTYDEPRI=1 and DEPOSITGATE=1 must both be set explicitly (shipped defaults, explicit)');
     process.exit(2);
   }
-  if (!isList(BATCH)) {
-    console.error('FATAL: seeds must be exactly 96301-96308, got: ' + (process.env.SEEDS || '(unset)'));
+  if (SEED_LIST.length < 8 || SEED_LIST.length > 16) {
+    console.error('FATAL: seeds must be a list of 8-16 seeds, got: ' + (process.env.SEEDS || '(unset = pilot default 96301-96308)'));
     process.exit(2);
   }
   if (DAYS !== 150) {
@@ -252,7 +262,7 @@ if (require.main === module) (async () => {
     process.exit(2);
   }
   const rows = [];
-  for (const seed of SEEDS) {
+  for (const seed of SEED_LIST) {
     const { seed: s, perSeed, diag, fingerprint } = await oneRun(seed, DAYS, { bare: false });
     rows.push({ seed: s, perSeed, diag, fingerprint });
     try { fs.mkdirSync(PERSEED_DIR, { recursive: true }); }
@@ -262,7 +272,7 @@ if (require.main === module) (async () => {
     console.log(`done seed=${s} days=${perSeed.daysAlive} end=${diag.endReason} rank=${diag.rank} wave=${diag.maxWave} deaths=${diag.deathRowCount} days=${diag.dayCount} lessons=${diag.lessonCount} joins=${diag.joinCount} won=${perSeed.win} (${diag.ms}ms)`);
   }
   const bareRows = [];
-  for (const seed of SEEDS) {
+  for (const seed of SEED_LIST) {
     const { fingerprint } = await oneRun(seed, DAYS, { bare: true });
     bareRows.push(fingerprint);
     writeRobust(path.join(PERSEED_DIR, `medheadcount-a-bare-s${seed}.json`),
