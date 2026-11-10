@@ -1239,12 +1239,23 @@
       }
       const beats = [{ who: 'you', text: spoken }];
       if (face) beats.push({ who: 'narr', text: face });
+      // r167: a coach line must not repeat verbatim within one sitting.
+      // drawTruthLine's per-game no-repeat recycles a 2-variant pool
+      // after 2 draws (A,B,A), so a sitting that presses doubt 3+ times
+      // re-serves the same hint (r167 panel: coachDeflect x2 in Jesse's
+      // sitting, coachAttack x2 in Xavier's). If this sitting already
+      // heard this exact coach line, say nothing instead of repeating
+      // the hint — the System already told you.
+      let c = null;
+      try { c = this.convoGet(vid); } catch (e) {}
+      if (coach && c && c.active && Array.isArray(c.transcript) &&
+          c.transcript.some(b => b && b.who === 'narr' && b.text === `*${coach}*`)) {
+        coach = null;
+      }
       if (coach) beats.push({ who: 'narr', text: `*${coach}*` });
       try { this.audioEvent('liarConfront', { phase: 'tension' }); } catch (e) {}
       // say them in player-voice / narrator-voice, and land them in the
       // active convo transcript so the scene reads whole on replay.
-      let c = null;
-      try { c = this.convoGet(vid); } catch (e) {}
       for (const b of beats) {
         this.say(b.text);
         if (c && c.active) {
