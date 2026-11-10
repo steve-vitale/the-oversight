@@ -1,0 +1,38 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Elena","t":90},{"id":"Alfredo","t":90},{"id":"Ernst","t":86},{"id":"Valentina","t":85}], roster=10
+INH readable=true scripted=true deadItems=16 distinct=15 transferred=0 vanished=2 keptPlants=24 inheritedPlants=0 keptSkills=3 inheritedSkills=4 succTrustPre=90 succTrustPost=60
+PARITY readable=true equal=true inherited=[] pre=["night_eyes"] post=["night_eyes"]
+DEATH d41 (the expedition, scripted): Regina -> Elena | passed=true lin=true mo=true trust=60 vouchers=6
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=0 vanished=2 of 15 distinct dead-bearer items
+  CONVO d+3 with Alfredo (refused=false)
+  CONVO d+3 with Ernst (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Ernst (refused=false)
+  CONVO d+7 with Sanne (refused=false)
+  CONVO d+14 with Ernst (refused=false)
+  CONVO d+14 with Sanne (refused=false)
+  BOND-CONVO d+14 with Sam (depth=2 v=58 refused=false)
+  NEWCOMER-PROBE d+27 with Marcus (arrived d+27, trust=35 refused=false)
+  CONVO d+30 with Sam (refused=false)
+  CONVO d+30 with Sanne (refused=false)
+  CONVO d+45 with Mia (refused=false)
+  CONVO d+53 with Dan (refused=false)
+  CONVO d+53 with Mariano (refused=false)
+
+FUNERAL: deathBeat=3 recover=1 vouch=1 (eligible=6) echo=3 organicBurial={"respects":false,"bury":false} halfRation=10
+
+MEAL-GATE: audited=55 violations=0 noMealDays=8 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=55 signals={"levelUp":true,"systemVoice":44,"offerLines":19,"codexPlantsDelta":33,"codexSkillsDelta":18,"codexAbilitiesDelta":12,"xpDelta":58,"any":true} pantry 7129->0
+TRUST-DIALS: office 60->90 (+30, climb) | villageMean 71.8->75.1 (+3.3, climb) | ge60 6->6 | movers>=5: [{"id":"Valeria","from":49,"to":87,"delta":38},{"id":"Sam","from":60,"to":92,"delta":32},{"id":"Chloe","from":66,"to":90,"delta":24},{"id":"Mia","from":55,"to":71,"delta":16},{"id":"Sanne","from":83,"to":90,"delta":7},{"id":"Valentina","from":85,"to":74,"delta":-11}]
+DEED-LEDGER: calls=0 summary={}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=3 (convo=3, say=0)) m4=true m5=manual | endDay=96 alive=1 over=true
+anomalies: 0
+S-METRICS: s1=false s2=true s3=true s4=false s5=true dayAdv=55
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30) t2=false(deedCalls=0) trustVerdict={"readable":true,"officeMantle":60,"officeLast":90,"officeDelta":30,"officeClass":"climb","villageMantle":71.8,"villageLast":75.1,"villageDelta":3.3,"villageClass":"climb","villageGe60Mantle":6,"villageGe60Last":6,"movers":[{"id":"Valeria","from":49,"to":87,"delta":38},{"id":"Sam","from":60,"to":92,"delta":32},{"id":"Chloe","from":66,"to":90,"delta":24},{"id":"Mia","from":55,"to":71,"delta":16},{"id":"Sanne","from":83,"to":90,"delta":7},{"id":"Valentina","from":85,"to":74,"delta":-11}]}
+E6/CALLCHECK: e6={"callMoves":12,"withCensus":12,"chainHandoffs":6,"trustMoves":6} callCheck={"dailyMoveDays":12,"callMoveDays":12,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=4 (v2=4, excludedLoot=0))
+E7/R47: e7={"trustMoves":6,"soloOffice":2,"soloOfficeDeltas":[1,1],"soloBearerDeltaExact":[1,1],"singleMoverBearer":0,"singleMoverOther":3,"eventClass":{"event-only":1,"deed-only":2,"both":3,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":3,"v2":4,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":8,"known":8,"unknown":0} e3={"dailyDays":56,"moves":12}

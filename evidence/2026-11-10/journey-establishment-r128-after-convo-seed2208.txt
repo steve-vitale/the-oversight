@@ -1,0 +1,77 @@
+=== r128-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Asher (gen_fmgkqf6) occ=paramedic --
+OPENING: "Well — Are you angry? At whoever did this. At the sky. At anything."
+YOU: [ans:q_angry:a_yes] "Furious. Most days."
+THEM: "Good. Anger's fuel. Just — point it somewhere useful."
+YOU: [goon] "Yeah?"
+THEM: "Can I be honest? Anger's a fire — useful if you cook with it, deadly if you sleep next to it. I cook with mine. Most days."
+YOU: [goon] "Yeah?"
+THEM: "I've heard good things about Emberhold. We should link with them — we'd be stronger together."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on whether you're angry."
+YOU: [goon] "Yeah?"
+THEM: "Did you sleep? I kept hearing things out past the treeline."
+YOU: [ans:q_night:a_yes] "I heard them too."
+THEM: They go still. "So it's not just me. Good. That's... good to know. Bad, but good."
+YOU: [goon] "Yeah?"
+THEM: "Well. I sleep in shifts now — two hours, up, listen, two more. My body learned it before my head agreed. Columbus, Ohio never taught me that. The treeline did."
+YOU: [dlg:doubt] "That doesn't quite add up."
+THEM: "...What's that supposed to mean?" Their voice goes careful.
+closing: "Later."
+
+-- Alemayehu (gen_ibkp3tj) occ=appliance repair tech --
+OPENING: "I can't reach this properly. Could you take a look?"
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to them, on the same side of the Haven door, to help.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Good question." "Asher? A paramedic, back before. Solid person."
+YOU: [dlg:more] "Go on."
+THEM: "that stray dog — the one that bit two people — lets Ethan touch it."
+YOU: [dlg:react] (listen)
+THEM: "Well." A breath. "That's where things stand."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the gossip."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "I can't. Not today. Ask me when the work's done."
+closing: "See you at the fire."
+
+-- Gearoid (gen_dj4njq5) occ=line cook --
+OPENING: "Never mind the creek water run — we got it handled. Thanks anyway."
+YOU: [goon] "Yeah?"
+THEM: Their whole posture softens around you.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway — that's my problem, not yours. What did you want?"
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "Loquat — crush the leaf, smell it, taste the stem. That's how you know it."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Colocasia (Arbi). Leaf, stem, smell. You won't forget it now."
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "No, really — it's handled. Thanks for asking, though."
+YOU: [goon] "Yeah?"
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [silence] "..."
+THEM: They glance at the fire, then back. The quiet doesn't seem to bother them.
+(no pick)
+(stall menu: dlg:subject|leave|silence)
+closing: "Take care of yourself."
+
+-- Tariq (tariq_mahmood) occ=electrician --
+OPENING: Tariq speaks only 🇮🇳 Hindi. No shared words at all — just eyes, hands, and patience.
+«मुझे कुछ समझ नहीं आ रहा। कुछ भी नहीं!»
+YOU: [nv:nod] (nod slowly)
+THEM: «मैं तुमसे सहमत हूँ।» — Tashi translates: "I agree with you." They nod back, a little quicker this time. "Water?" — they grin, proud of the one English they know.
+YOU: [nv:smile] (smile)
+THEM: «धन्यवाद। सच में, धन्यवाद।» — Tashi translates: "Thank you. Truly, thank you." A grin breaks through, quick and warm.
+YOU: [nv:pointself] (point: you, them, together)
+THEM: «तुम्हारा बहुत-बहुत शुक्रिया।» — Tashi translates: "Many, many thanks to you." You point at yourself, then at them, then at the fire. Together. They get it.
+YOU: [nv:translate] (ask Tashi to translate)
+THEM: They glance toward their own thoughts; the exchange is winding down.
+YOU: [silence] "..."
+THEM: A comfortable quiet settles. They smile a little, and let it be.
+(ended by engine)
+closing: They wave you off gently, already turning away. The conversation ends where language couldn't reach.

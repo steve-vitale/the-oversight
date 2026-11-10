@@ -277,7 +277,21 @@
         // (panel: 2/2 secret sittings went dry after the answer).
         if (c.secretFollowup) {
           const fl = c.secretFollowup; c.secretFollowup = null;
-          if (this.sayLine(vid, fl)) {
+          // PRE-CHECK (journey-succession r169): sayLine EMITS the dry
+          // line into the transcript when it blocks — a fall-through
+          // AFTER the call leaves the dry line visible ahead of the
+          // closer ("...lost my train of thought." then "That's the
+          // whole of it." — caught on the 34015 re-run). Never hand a
+          // blocked line to sayLine: convoWouldBlock is the pure
+          // predicate (r19 opener pattern). A blocked follow-up falls
+          // through to the normal thread/dry path, honestly.
+          // FELL-BACK HONESTY (r169): sayLine returns the dry line
+          // TRUTHY on a run-ledger block, so a bare truthy check
+          // mistakes the dry line for the follow-up spoken (the r166
+          // lesson, same shape as the beat path below). Only a
+          // non-fell-back emission counts as the follow-up delivered.
+          const flBlocked = (typeof this.convoWouldBlock === 'function') ? this.convoWouldBlock(vid, fl) : false;
+          if (!flBlocked && this.sayLine(vid, fl) && !c._sayFellBack) {
             c.threadDryFor = null; // the sitting is alive — clear any stale dry marker
             try { this.resolveConsequence(vid, { trust: 1, temper: 'neutral', name: 'dlg:more' }); } catch (e) {}
             return { line: fl, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
@@ -288,29 +302,29 @@
         const beat = this.convoThreadBeat(vid);
         if (beat) {
           const composed = this.convoComposeDlg(vid, beat, choiceId);
-          // LIVE UNFINISHED (dialog audit #4 2026-11-08): check before
-          // sayLine — a run-block returns a dry string (truthy), so the
-          // old null-check treated train-of-thought as success while
-          // unfinished work remained. Prefer an honest unfinished name.
-          if (typeof this.convoWouldBlock === 'function' && this.convoWouldBlock(vid, composed) &&
-              typeof this.convoHasLiveUnfinished === 'function' && this.convoHasLiveUnfinished(vid)) {
-            const honest = (typeof this.convoUnfinishedEngageLine === 'function')
-              ? this.convoUnfinishedEngageLine(vid)
-              : '"Still on that. Right — where was I."';
-            const spoken = this.sayLine(vid, honest, { structural: true, fallback: honest }) || honest;
-            c.threadDryFor = null;
-            if (!c.thread || c.thread === 'want' || c.thread === 'small') this.convoWantEngage(vid, 'engage');
-            try { this.resolveConsequence(vid, { trust: 1, temper: 'neutral', name: 'dlg:more' }); } catch (e) {}
-            return { line: spoken, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
-          }
           // BLOCKED-REPEAT (journey sociallife 2026-10-11): sayLine is the
           // no-repeat choke point — when it returns null the beat was
           // already spoken. The old code returned the composed line anyway,
           // so the player SAW the repeat the ledger had blocked (mourning
           // thread: "My part? I remember them." x3, ledger clean). Treat a
           // blocked beat as dry: honest admission, menu retires "tell me
-          // more". Also treat _sayFellBack (dry string return) as blocked.
-          const said = this.sayLine(vid, composed);
+          // more".
+          // FELL-BACK HONESTY (journey-succession r169): sayLine returns
+          // the dry line TRUTHY on a run-ledger block, so the bare `if
+          // (said)` above ALSO fired on a blocked beat — the handler
+          // returned the unspoken composed line while the transcript held
+          // the dry line (r169 seed 34015 d55 Ernst: "Tell me about
+          // them." → "...Sorry, lost my train of thought." for the
+          // Najla-pods beat another villager had said). Only a
+          // non-fell-back emission counts as the beat delivered; a
+          // blocked beat falls through to the closer pool below.
+          // PRE-CHECK (r169): the fall-through alone is not enough —
+          // sayLine EMITS the dry line before the handler can fall
+          // through, so the transcript held the dry line AHEAD of the
+          // closer (34015 re-run). Never hand a blocked beat to sayLine:
+          // convoWouldBlock is the pure predicate (r19 opener pattern).
+          const beatBlocked = (typeof this.convoWouldBlock === 'function') ? this.convoWouldBlock(vid, composed) : false;
+          const said = !beatBlocked ? this.sayLine(vid, composed) : null;
           if (said && !c._sayFellBack) {
             c.threadDryFor = null; // thread is alive — clear any stale dry marker
             // Beat composition: the beat acknowledges what was just said.
@@ -323,34 +337,28 @@
             if (!c.thread || c.thread === 'want' || c.thread === 'small') this.convoWantEngage(vid, 'engage');
             // Trust: engaging builds it. SCENE (Phase 2): through the resolver.
             try { this.resolveConsequence(vid, { trust: 1, temper: 'neutral', name: 'dlg:more' }); } catch (e) {}
-            return { line: said, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
-          }
-          // sayLine already spoke a dry fallback into the transcript —
-          // retire "tell me more" without emitting a second line.
-          if (c._sayFellBack) {
-            c.threadDryFor = c.thread;
-            return { line: said, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
+            return { line: composed, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
           }
         }
         // Thread's dry — honest admission, once. Mark the thread dry so the
         // menu stops offering "tell me more" and winds down instead.
-        // If unfinished work still exists, name it instead of "that's all."
-        if (typeof this.convoHasLiveUnfinished === 'function' && this.convoHasLiveUnfinished(vid)) {
-          const honest = (typeof this.convoUnfinishedEngageLine === 'function')
-            ? this.convoUnfinishedEngageLine(vid)
-            : '"Still on that. Right — where was I."';
-          const spoken = this.sayLine(vid, honest, { structural: true, fallback: honest }) || honest;
-          if (!c.thread || c.thread === 'want' || c.thread === 'small') this.convoWantEngage(vid, 'engage');
-          try { this.resolveConsequence(vid, { trust: 1, temper: 'neutral', name: 'dlg:more' }); } catch (e) {}
-          return { line: spoken, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
-        }
         c.threadDryFor = c.thread;
         const line = this.convoPickCycle(vid, 'dlg:more:dry', [
           '"That\'s... pretty much all of it, honestly."',
           '"I wish there was more to tell. That\'s it."',
           '"That\'s the whole of it. Sorry."',
         ]) || '"That\'s... pretty much all of it, honestly."';
-        this.sayLine(vid, line, { tag: 'endtopic' });
+        // WIND-DOWN GRAMMAR (journey-succession r169): this closer is
+        // conversation grammar, not content — the same class as the r17
+        // structural beats (resume openers, recap lines). The Javier
+        // case (r165 seed 34003 d71) dried here: all 3 closers had been
+        // spoken across sittings, the reset freed one, but it sat in the
+        // run ledger, so sayLine dry-replaced it with "...Sorry, lost my
+        // train of thought." — a villager who finished does not forget.
+        // Structural skips the run-ledger block; the pool still cycles
+        // per villager (pickCycle keep=2) and the line still lands in
+        // the per-villager ledgers.
+        this.sayLine(vid, line, { tag: 'endtopic', structural: true });
         return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
 
@@ -479,28 +487,9 @@
         // REBUILD 2026-10-11: the NPC states the favor from the WANT DEF —
         // the def owns the concrete ask (never "Here's the thing —" loops).
         c.transcript.push({ who: 'you', text: '"How can I help?"' });
-        const pinnedFavor = c.want?.favor || null;
-        const ledgerFavor = (typeof this.convoGetFavor === 'function') ? this.convoGetFavor(vid) : null;
-        const helpFavor = pinnedFavor || ledgerFavor;
-        const unfinishedOuting = !!(helpFavor && (
-          (helpFavor.kind === 'water_haul' && helpFavor.waterRun && !helpFavor.waterRun.returned) ||
-          (helpFavor.kind === 'forage_help' && helpFavor.forageRun && !helpFavor.forageRun.returned)
-        ));
-        // RESUME / DEFERRED ASK (dialog audit #1 2026-11-08): a resume opener
-        // can claim unfinished debt/favor while the sitting's ask_favor has
-        // not yet pinned a favor (opener preempted the ask). The ledger may
-        // still hold an old settled favor — "It's already handled" then
-        // contradicts the opener (seed 7 Nolan). Fall through to engageBeat
-        // so the deferred ask or unfinished debt is named honestly.
-        const deferredAfterResume = !!(c._resumedOnce && c.want?.id === 'ask_favor' &&
-          !pinnedFavor && (c.want.stage || 0) < 1);
-        // LIVE UNFINISHED (dialog audit #4 2026-11-08): Help on any live
-        // unfinished thread (open ledger / resumed sitting) must not dry.
-        const liveUnfinished = !!(unfinishedOuting || deferredAfterResume ||
-          (typeof this.convoHasLiveUnfinished === 'function' && this.convoHasLiveUnfinished(vid)));
-        const settledFavor = c.want?.id === 'ask_favor' && helpFavor;
-        if (!unfinishedOuting && !deferredAfterResume &&
-            settledFavor && ['moot','fulfilled','thanked','broken','acknowledged','declined'].includes(settledFavor.state)) {
+        const settledFavor = c.want?.id === 'ask_favor' &&
+          (c.want.favor || this.convoGetFavor(vid));
+        if (settledFavor && ['moot','fulfilled','thanked','broken','acknowledged','declined'].includes(settledFavor.state)) {
           const line = '"It\'s already handled. Thank you for asking."';
           this.sayLine(vid, line, { structural: true });
           // HELP SPEND-OUT (journey-social r35 2026-10-20): a settled favor's
@@ -520,9 +509,7 @@
         // already engaged, the favor is STATED -- re-stating it would hit
         // sayLine's no-repeat ledger and produce NO NPC reply (options
         // refresh, silence). Say so honestly instead of re-emitting.
-        // Unfinished joint outings stay concrete on every Help press — the
-        // cargo is still real — so they skip the vague restated pool.
-        if (!unfinishedOuting && c.want && (c.want.stage || 0) >= 2) {
+        if (c.want && (c.want.stage || 0) >= 2) {
           const restated = this.convoPickCycle(vid, 'dlg:help:restated', [
             '"Like I said -- I could really use the help."',
             '"I already told you -- just say the word."',
@@ -549,29 +536,7 @@
           '"Nothing I can name. Company\'s enough."',
         ]) || '"Honestly? I\'m alright right now."';
         const composed = this.convoComposeDlg(vid, favorLine, choiceId);
-        // Unfinished outing / deferred-resume / live unfinished Help is
-        // conversation grammar matching the opener — structural so a
-        // ledger-blocked stale line cannot dry into train-of-thought
-        // (seed 99 Nora; audit #4 live-thread engage).
-        const helpStructural = !!liveUnfinished;
-        // Pre-check: if the composed line would dry while unfinished work
-        // remains, speak an honest unfinished name instead (don't let
-        // sayLine push train-of-thought into the transcript first).
-        if (helpStructural && typeof this.convoWouldBlock === 'function' &&
-            this.convoWouldBlock(vid, composed)) {
-          const honest = unfinishedOuting
-            ? '"We still need to get home and unload what we have. That\'s the help."'
-            : ((typeof this.convoUnfinishedEngageLine === 'function')
-              ? this.convoUnfinishedEngageLine(vid)
-              : (this.convoSelfRepeatLine(vid) || '"I just said — did you miss it?"'));
-          const spoken = this.sayLine(vid, honest, { structural: true, fallback: honest }) || honest;
-          this.convoWantEngage(vid, 'engage');
-          return { line: spoken, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
-        }
-        const said = this.sayLine(vid, composed, {
-          tag: (c.want && c.want.id === 'ask_favor') ? 'favor' : undefined,
-          structural: helpStructural || undefined,
-        });
+        const said = this.sayLine(vid, composed, { tag: (c.want && c.want.id === 'ask_favor') ? 'favor' : undefined });
         // BLOCKED REPEAT (dialog-ui-fix 2026-10-11, defect 6; cycling
         // journey-social 2026-10-12): if sayLine's ledger blocked the line,
         // do NOT return it as if spoken -- that desyncs the UI into "options
@@ -579,30 +544,7 @@
         // cycle per-conversation (never the old verbatim x3 parrot), and the
         // SAME line goes in as the fallback so re-fired cycles can't desync
         // the claimed line from the transcript.
-        // Also treat dry fallBack (truthy dry string) as blocked — sayLine
-        // returns the dry line, not null, on run-ledger hits.
-        if (!said || c._sayFellBack) {
-          // UNFINISHED HELP BLOCKED (dialog audit #1/#4 2026-11-08): never
-          // let a blocked Help on unfinished work fall to dry train-of-
-          // thought. Name the concrete unfinished work structurally.
-          if (liveUnfinished || (c.want && c.want.id === 'repay')) {
-            // If dry already landed in the transcript, still speak the
-            // honest structural line so the sitting recovers — structural
-            // bypasses the ledger.
-            const honest = unfinishedOuting
-              ? '"We still need to get home and unload what we have. That\'s the help."'
-              : ((typeof this.convoUnfinishedEngageLine === 'function')
-                ? this.convoUnfinishedEngageLine(vid)
-                : (this.convoSelfRepeatLine(vid) || '"I just said — did you miss it?"'));
-            const spoken = this.sayLine(vid, honest, { structural: true, fallback: honest }) || honest;
-            this.convoWantEngage(vid, 'engage');
-            return { line: spoken, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
-          }
-          if (c._sayFellBack) {
-            // Dry already spoken — don't emit a second deflection.
-            this.convoWantEngage(vid, 'engage');
-            return { line: said, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
-          }
+        if (!said) {
           const dup = this.convoSelfRepeatLine(vid) || '"I just said — did you miss it?"';
           const spoken = this.sayLine(vid, dup, { fallback: dup }) || dup;
           this.convoWantEngage(vid, 'engage');

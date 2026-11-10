@@ -155,9 +155,10 @@ async function main() {
   T.ok('cap beat does not repeat on the same rung', says.length === nCap, 'says grew ' + nCap + ' -> ' + says.length);
 
   // --- capstones: military tribute (veterans on hand) ---
-  // LEG 3 FIX (ladder leg 3, tribute scholar-readiness): the scholar is
-  // NOT a payable veteran — readiness counts only non-scholar living
-  // wave-4 veterans, so it agrees with delivery.
+  // SCHOLAR-COUNTS (sim-scholarcount-a, Steve RULED 2026-11-10): the
+  // scholar COUNTS toward the veteran bar — readiness counts the living
+  // scholar like standing.js. Delivery still pays non-scholar veterans
+  // only; the return carries `payable` so the split is observable.
   resetLadderState(Game);
   const v2 = livingVillager(Game);
   const v3 = livingVillager(Game, v2);
@@ -170,7 +171,7 @@ async function main() {
   T.ok('tribute ready with 2 living non-scholar wave-4 veterans', cap.ready === true && cap.veterans === 2, JSON.stringify(cap));
   Game.state.waveKillLog = [{ by: v2, w: 4 }, { by: Game.villagerId, w: 4 }];
   cap = Game.ladderCapstoneReady('military_tribute');
-  T.ok('scholar-veteran + 1 villager is NOT ready (the scholar is not payable)', cap.ready === false && cap.reason === 'veterans-short' && cap.veterans === 1, JSON.stringify(cap));
+  T.ok('scholar-veteran + 1 villager reads ready (ruling: scholar counts; payable 1)', cap.ready === true && cap.veterans === 2 && cap.payable === 1, JSON.stringify(cap));
   Game.state.waveKillLog = [{ by: Game.villagerId, w: 4 }];
   cap = Game.ladderCapstoneReady('military_tribute');
   T.ok('tribute not ready with the scholar alone', cap.ready === false && cap.reason === 'veterans-short', JSON.stringify(cap));

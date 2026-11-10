@@ -1,0 +1,24 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=1)
+=== seed 97904 day 90 — conversation with Rowan (visjoin_67) ===
+occupation=ER nurse temperament=prickly trust=23 dead=false
+want: seek_comfort (stage 1)
+open thread: want fromSeed=false
+picker: control
+
+THEM: "It's stupid. I'm alive, everyone's alive, and I can't stop shaking."
+(turn0 choices: dlg:cant, dlg:comfort, dlg:empathize, dlg:subject, leave, silence)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "Most days I don't think about it. Today I am. Appreciate you noticing."
+YOU: [dlg:stay] "I'm not going anywhere."
+THEM: They shift over, making room. "Stay as long as you like."
+YOU: [dlg:stay] "I'll stay a while."
+THEM: They lean back on their hands. "Wind's up tonight. Good night to not be walking."
+YOU: [dlg:stay] "I'm not going anywhere."
+THEM: "Mm." They don't look up from the fire, but they nod you down. "Sit."
+YOU: [dlg:stay] "I'm not going anywhere."
+THEM: "Don't tell the others —" a glance sideways. "I don't know if I'm doing any of this right."
+YOU: [goon] "Take your time."
+THEM: "Okay, that's my quota of socializing."
+YOU: (leave)
+pre-close: want seek_comfort stage 3 thread want
+(gossip picks this sitting: 0)

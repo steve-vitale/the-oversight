@@ -1,0 +1,80 @@
+=== r128-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Eli (gen_a9hahlj) occ=Vintner --
+OPENING: "About the taken — about Lucia. I can't stop turning it over. Have you heard anything new? Forget it."
+YOU: [gq:yn:yes] "Yes."
+THEM: "All right. Thank you for telling me."
+YOU: [dlg:more] "Tell me about them."
+THEM: "It's my spouse, Lucia. Was taken at the Scattering. I tell everyone they were the interesting one. I need that to be true. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Okay. We'll pick this up later."
+YOU: [silence] (say nothing)
+THEM: A comfortable quiet settles. They smile a little, and let it be.
+(ended by engine)
+
+-- Giuseppe (gen_41sawgo) occ=welder --
+OPENING: "About the funniest thing you've seen — Okay, real question: what's the funniest thing you've seen since we got here? I desperately need it. That's the priority."
+YOU: [ans:q_laugh:a_story] (tell them something funny)
+THEM: They laugh — really laugh, the first real one you've heard in days. "Okay. Okay, that's good. I needed that."
+YOU: [goon] "Go on. I'm listening."
+THEM: Their friendliness thins — still there, just held at arm's length.
+YOU: [goon] "Go on. I'm listening."
+THEM: "This matters — There's a laugh I keep hearing in my head — not anyone here, just from before. Sometimes I borrow it. I'll be hauling water and laugh at nothing, and for a second it's like the old world left the door open a crack."
+YOU: [goon] "Go on. I'm listening."
+THEM: "Walk with me? I want another pair of eyes on something."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Giuseppe shows you where they go to think. "Don't tell the others. Everyone needs one place."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Peanut. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Fish Mint. Remember the leaf, the stem, the smell — that's the whole of it."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the funniest thing you've seen."
+closing: "Don't be a stranger."
+
+-- Erich (gen_pluwp9z) occ=mechanic --
+OPENING: "Have you ever hurt someone? Since all this started."
+YOU: [ans:q_fight:a_tell] "Yes. I don't want to talk about the details. But yes."
+THEM: They nod, slow. "Okay. Thank you for telling me. That couldn't have been easy to say."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "I don't keep score on that. Score-keeping is how you stop sleeping. I do what the day needs and I don't rehearse it after. That is all."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Help me haul something back? Too much for one."
+INVITE-ANSWER trust=75
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Erich has been stockpiling where nobody looks. "Take half. You've got the hands for it." (+4 wood, +4 fiber to the village stash.)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "I've been thinking. You and me — we should be bonded. Not just neighbors. Will you stick with me?"
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on whether you've hurt someone."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "What got you through the first week? The very first days."
+YOU: [ans:q_first_week:a_shock] "Honestly? Shock. Just kept moving."
+THEM: "Shock's underrated. It's the body's way of buying you time."
+closing: "See you at the fire."
+
+-- Amina (amina_diallo) occ=Midwife --
+OPENING: Amina: "I've heard good things about Emberhold. We should link with them — we'd be stronger together."
+INVITE-ANSWER trust=49
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Amina shows you where they go to think. "Don't tell the others. Everyone needs one place."
+YOU: [goon] "Go on. I'm listening."
+THEM: "I've heard good things about Emberhold. We should link with them — we'd be stronger together."
+YOU: [link:accept] "All right. Let's ask them."
+THEM: "All right — let's ask them." You carry the proposal to Emberhold.
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Wild Black Cherry — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+YOU: [goon] "Go on. I'm listening."
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [dlg:more] "Tell me more."
+THEM: "What's your first memory? Like, ever. The earliest thing."
+YOU: [ans:q_first_memory:a_tell] "A kitchen. Morning light. I must've been three."
+THEM: "Three. That's young. The brain keeps what it needs, I guess. How are you holding up, though?"
+YOU: [goon] "Good question. What do YOU think?"
+THEM: "Mine's Dakar, Senegal, I think — heat on pavement, someone's hand huge around mine. Or I invented it. First memories are half real and half the story you needed."
+closing: "I'm rooting for you. Whatever you're working on. Just so you know."

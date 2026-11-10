@@ -1,0 +1,1132 @@
+{
+  "baseRun": "answermail-drive-base",
+  "armedRun": "answermail-drive-armed",
+  "seeds": [
+    150201,
+    150202,
+    150203,
+    150204,
+    150205,
+    150206,
+    150207,
+    150208
+  ],
+  "primary": {
+    "seasonedBase": 0,
+    "seasonedArmed": 7,
+    "goCandidate": true,
+    "noGo": true,
+    "costPass": false,
+    "pass": false
+  },
+  "costBar": {
+    "starvationBase": 0,
+    "starvationArmed": 2,
+    "starvationCap": 2,
+    "starvationArmOnly": 2,
+    "starvationArmOnlyCap": 0,
+    "medianBase": 101.5,
+    "medianArmed": 113.5,
+    "medianBar": 81.2,
+    "medianTGBase": 107,
+    "medianTGArmed": 116,
+    "pass": false
+  },
+  "fidelity": {
+    "accordAnswersEqLinks": true,
+    "tendsGt0": true,
+    "renegSilenceZero": true,
+    "instrumentErrorsZero": true,
+    "unattributedZero": true,
+    "driveOffOnControl": true,
+    "driveErrorsZero": true
+  },
+  "fidelityPass": true,
+  "drive": {
+    "blockedNoAnswerer": 17,
+    "answerers": [
+      {
+        "seed": 150201,
+        "answerers": {
+          "gen_kjo0ruy": 4,
+          "gen_md56osh": 3,
+          "yara_haddad": 2
+        },
+        "names": {
+          "gen_kjo0ruy": "Smita",
+          "gen_md56osh": "Phudit",
+          "yara_haddad": "Yara"
+        }
+      },
+      {
+        "seed": 150202,
+        "answerers": {
+          "gen_ifs3vkj": 1,
+          "gen_dzp6zdb": 1,
+          "priya_nair": 1
+        },
+        "names": {
+          "gen_ifs3vkj": "Fernanda",
+          "gen_dzp6zdb": "Nia",
+          "priya_nair": "Priya"
+        }
+      },
+      {
+        "seed": 150203,
+        "answerers": {
+          "gen_ns3aswf": 7,
+          "omar_farouk": 1,
+          "gen_pxzo5eb": 1,
+          "devon_okafor": 1
+        },
+        "names": {
+          "gen_ns3aswf": "Chidi",
+          "omar_farouk": "Omar",
+          "gen_pxzo5eb": "Lamar",
+          "devon_okafor": "Devon"
+        }
+      },
+      {
+        "seed": 150204,
+        "answerers": {
+          "gen_g8se7kb": 2,
+          "gen_ttaktf3": 2,
+          "gen_ritta4p": 3
+        },
+        "names": {
+          "gen_g8se7kb": "Beletu",
+          "gen_ttaktf3": "Andres",
+          "gen_ritta4p": "Hans"
+        }
+      },
+      {
+        "seed": 150205,
+        "answerers": {
+          "catalina_reyes": 5,
+          "gen_fnobeh6": 2,
+          "gen_uls6u21": 2
+        },
+        "names": {
+          "catalina_reyes": "Catalina",
+          "gen_fnobeh6": "Jian",
+          "gen_uls6u21": "Alfredo"
+        }
+      },
+      {
+        "seed": 150206,
+        "answerers": {
+          "chloe_dubois": 8,
+          "devon_okafor": 2,
+          "gen_ttjszz2": 1,
+          "ursula_weber": 2
+        },
+        "names": {
+          "chloe_dubois": "Chloe",
+          "devon_okafor": "Devon",
+          "gen_ttjszz2": "Wilhelm",
+          "ursula_weber": "Ursula"
+        }
+      },
+      {
+        "seed": 150207,
+        "answerers": {
+          "gen_0c1l8q5": 3,
+          "gen_a7x9hxt": 4,
+          "emma_larsen": 3
+        },
+        "names": {
+          "gen_0c1l8q5": "Eamon",
+          "gen_a7x9hxt": "Gabriela",
+          "emma_larsen": "Emma"
+        }
+      },
+      {
+        "seed": 150208,
+        "answerers": {
+          "raj_patel": 5,
+          "gen_er6m5ht": 1,
+          "chantal_mukendi": 1
+        },
+        "names": {
+          "raj_patel": "Raj",
+          "gen_er6m5ht": "Morten",
+          "chantal_mukendi": "Chantal"
+        }
+      }
+    ],
+    "accordPendingDays": [
+      {
+        "seed": 150201,
+        "links": [
+          {
+            "other": "village_3",
+            "formedDay": 38,
+            "pendingDays": 0,
+            "unansweredDays": 0
+          }
+        ]
+      },
+      {
+        "seed": 150202,
+        "links": [
+          {
+            "other": "village_1",
+            "formedDay": 73,
+            "pendingDays": 0,
+            "unansweredDays": 0
+          }
+        ]
+      },
+      {
+        "seed": 150203,
+        "links": [
+          {
+            "other": "village_0",
+            "formedDay": 30,
+            "pendingDays": 0,
+            "unansweredDays": 0
+          }
+        ]
+      },
+      {
+        "seed": 150204,
+        "links": [
+          {
+            "other": "village_2",
+            "formedDay": 37,
+            "pendingDays": 0,
+            "unansweredDays": 0
+          }
+        ]
+      },
+      {
+        "seed": 150205,
+        "links": [
+          {
+            "other": "village_0",
+            "formedDay": 36,
+            "pendingDays": 0,
+            "unansweredDays": 0
+          }
+        ]
+      },
+      {
+        "seed": 150206,
+        "links": [
+          {
+            "other": "village_1",
+            "formedDay": 32,
+            "pendingDays": 0,
+            "unansweredDays": 0
+          }
+        ]
+      },
+      {
+        "seed": 150207,
+        "links": [
+          {
+            "other": "village_2",
+            "formedDay": 35,
+            "pendingDays": 0,
+            "unansweredDays": 0
+          }
+        ]
+      },
+      {
+        "seed": 150208,
+        "links": [
+          {
+            "other": "village_1",
+            "formedDay": 32,
+            "pendingDays": 0,
+            "unansweredDays": 0
+          }
+        ]
+      }
+    ],
+    "accordPendingDaysBase": [
+      {
+        "seed": 150201,
+        "links": [
+          {
+            "other": "village_3",
+            "formedDay": 38,
+            "pendingDays": null,
+            "unansweredDays": 40
+          }
+        ]
+      },
+      {
+        "seed": 150202,
+        "links": [
+          {
+            "other": "village_1",
+            "formedDay": 73,
+            "pendingDays": null,
+            "unansweredDays": 35
+          }
+        ]
+      },
+      {
+        "seed": 150203,
+        "links": [
+          {
+            "other": "village_0",
+            "formedDay": 30,
+            "pendingDays": null,
+            "unansweredDays": 44
+          }
+        ]
+      },
+      {
+        "seed": 150204,
+        "links": [
+          {
+            "other": "village_2",
+            "formedDay": 37,
+            "pendingDays": null,
+            "unansweredDays": 60
+          }
+        ]
+      },
+      {
+        "seed": 150205,
+        "links": [
+          {
+            "other": "village_0",
+            "formedDay": 36,
+            "pendingDays": null,
+            "unansweredDays": 40
+          }
+        ]
+      },
+      {
+        "seed": 150206,
+        "links": [
+          {
+            "other": "village_1",
+            "formedDay": 32,
+            "pendingDays": null,
+            "unansweredDays": 97
+          }
+        ]
+      },
+      {
+        "seed": 150207,
+        "links": [
+          {
+            "other": "village_2",
+            "formedDay": 35,
+            "pendingDays": null,
+            "unansweredDays": 116
+          }
+        ]
+      },
+      {
+        "seed": 150208,
+        "links": [
+          {
+            "other": "village_1",
+            "formedDay": 32,
+            "pendingDays": null,
+            "unansweredDays": 108
+          }
+        ]
+      }
+    ]
+  },
+  "wall": {
+    "base": {
+      "wins": 0,
+      "national": 0,
+      "table": 0,
+      "w4": 7,
+      "w5": 2,
+      "median": 101.5,
+      "medianTG": 107,
+      "polities": 0
+    },
+    "armed": {
+      "wins": 0,
+      "national": 0,
+      "table": 0,
+      "w4": 8,
+      "w5": 3,
+      "median": 113.5,
+      "medianTG": 116,
+      "polities": 0
+    }
+  },
+  "gainsByCause": {
+    "base": {
+      "tribute-weekly": 36,
+      "aid-beg-give": 24,
+      "aid-offer-accept": 72
+    },
+    "armed": {
+      "accord-gift": 80,
+      "tend": 357,
+      "aid-beg-give": 60,
+      "tribute-weekly": 42,
+      "aid-offer-accept": 132,
+      "renegotiation-answer": 64
+    }
+  },
+  "downsByCause": {
+    "base": {
+      "succession-haircut": 149,
+      "aid-beg-refuse": 23,
+      "renegotiation-silence": 30,
+      "tribute-nothing": 12,
+      "titan-event": 20
+    },
+    "armed": {
+      "succession-haircut": 288,
+      "titan-event": 125,
+      "tribute-thin": 5,
+      "tribute-nothing": 8,
+      "aid-beg-refuse": 5
+    }
+  },
+  "classes": {
+    "base": {
+      "holds": 3,
+      "decays": 5
+    },
+    "armed": {
+      "seasoned": 7,
+      "rises": 1
+    }
+  },
+  "perSeed": {
+    "base": [
+      {
+        "seed": 150201,
+        "days": 78,
+        "gameDays": 78,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "unlockedWave": 5,
+        "standing": 250,
+        "starvation": 0,
+        "deaths": 83,
+        "links": [
+          {
+            "id": null,
+            "other": "village_3",
+            "class": "holds",
+            "born": 30,
+            "peak": 37,
+            "end": 23,
+            "seasonedEver": false,
+            "formedDay": 38,
+            "accordPendingDays": null,
+            "accordUnansweredDays": 40,
+            "accordAnswered": false
+          }
+        ],
+        "seasoned": 0,
+        "polity": "never-seasoned",
+        "driveStatsPresent": false,
+        "accordAnswers": 0,
+        "tends": 0,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "blockedNoAnswerer": 0,
+        "tendsBlockedPantry": 0,
+        "driveErrors": 0,
+        "answerers": {},
+        "answererNames": {},
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 150202,
+        "days": 107,
+        "gameDays": 108,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "standing": 199,
+        "starvation": 0,
+        "deaths": 73,
+        "links": [
+          {
+            "id": null,
+            "other": "village_1",
+            "class": "holds",
+            "born": 30,
+            "peak": 37,
+            "end": 33,
+            "seasonedEver": false,
+            "formedDay": 73,
+            "accordPendingDays": null,
+            "accordUnansweredDays": 35,
+            "accordAnswered": false
+          }
+        ],
+        "seasoned": 0,
+        "polity": "never-seasoned",
+        "driveStatsPresent": false,
+        "accordAnswers": 0,
+        "tends": 0,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "blockedNoAnswerer": 0,
+        "tendsBlockedPantry": 0,
+        "driveErrors": 0,
+        "answerers": {},
+        "answererNames": {},
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 150203,
+        "days": 75,
+        "gameDays": 74,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "standing": 150,
+        "starvation": 0,
+        "deaths": 80,
+        "links": [
+          {
+            "id": null,
+            "other": "village_0",
+            "class": "holds",
+            "born": 30,
+            "peak": 39,
+            "end": 35,
+            "seasonedEver": false,
+            "formedDay": 30,
+            "accordPendingDays": null,
+            "accordUnansweredDays": 44,
+            "accordAnswered": false
+          }
+        ],
+        "seasoned": 0,
+        "polity": "never-seasoned",
+        "driveStatsPresent": false,
+        "accordAnswers": 0,
+        "tends": 0,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "blockedNoAnswerer": 0,
+        "tendsBlockedPantry": 0,
+        "driveErrors": 0,
+        "answerers": {},
+        "answererNames": {},
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 150204,
+        "days": 96,
+        "gameDays": 97,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 3,
+        "unlockedWave": 3,
+        "standing": 99,
+        "starvation": 0,
+        "deaths": 47,
+        "links": [
+          {
+            "id": null,
+            "other": "village_2",
+            "class": "decays",
+            "born": 22,
+            "peak": 22,
+            "end": 8,
+            "seasonedEver": false,
+            "formedDay": 37,
+            "accordPendingDays": null,
+            "accordUnansweredDays": 60,
+            "accordAnswered": false
+          }
+        ],
+        "seasoned": 0,
+        "polity": "never-seasoned",
+        "driveStatsPresent": false,
+        "accordAnswers": 0,
+        "tends": 0,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "blockedNoAnswerer": 0,
+        "tendsBlockedPantry": 0,
+        "driveErrors": 0,
+        "answerers": {},
+        "answererNames": {},
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 150205,
+        "days": 76,
+        "gameDays": 76,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "standing": 199,
+        "starvation": 0,
+        "deaths": 72,
+        "links": [
+          {
+            "id": null,
+            "other": "village_0",
+            "class": "decays",
+            "born": 30,
+            "peak": 31,
+            "end": 15,
+            "seasonedEver": false,
+            "formedDay": 36,
+            "accordPendingDays": null,
+            "accordUnansweredDays": 40,
+            "accordAnswered": false
+          }
+        ],
+        "seasoned": 0,
+        "polity": "never-seasoned",
+        "driveStatsPresent": false,
+        "accordAnswers": 0,
+        "tends": 0,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "blockedNoAnswerer": 0,
+        "tendsBlockedPantry": 0,
+        "driveErrors": 0,
+        "answerers": {},
+        "answererNames": {},
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 150206,
+        "days": 129,
+        "gameDays": 129,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "standing": 199,
+        "starvation": 0,
+        "deaths": 60,
+        "links": [
+          {
+            "id": null,
+            "other": "village_1",
+            "class": "decays",
+            "born": 30,
+            "peak": 34,
+            "end": 0,
+            "seasonedEver": false,
+            "formedDay": 32,
+            "accordPendingDays": null,
+            "accordUnansweredDays": 97,
+            "accordAnswered": false
+          }
+        ],
+        "seasoned": 0,
+        "polity": "never-seasoned",
+        "driveStatsPresent": false,
+        "accordAnswers": 0,
+        "tends": 0,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "blockedNoAnswerer": 0,
+        "tendsBlockedPantry": 0,
+        "driveErrors": 0,
+        "answerers": {},
+        "answererNames": {},
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 150207,
+        "days": 150,
+        "gameDays": 151,
+        "endReason": "survived",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "standing": 199,
+        "starvation": 0,
+        "deaths": 81,
+        "links": [
+          {
+            "id": null,
+            "other": "village_2",
+            "class": "decays",
+            "born": 30,
+            "peak": 35,
+            "end": 4,
+            "seasonedEver": false,
+            "formedDay": 35,
+            "accordPendingDays": null,
+            "accordUnansweredDays": 116,
+            "accordAnswered": false
+          }
+        ],
+        "seasoned": 0,
+        "polity": "never-seasoned",
+        "driveStatsPresent": false,
+        "accordAnswers": 0,
+        "tends": 0,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "blockedNoAnswerer": 0,
+        "tendsBlockedPantry": 0,
+        "driveErrors": 0,
+        "answerers": {},
+        "answererNames": {},
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 150208,
+        "days": 140,
+        "gameDays": 140,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "unlockedWave": 5,
+        "standing": 300,
+        "starvation": 0,
+        "deaths": 107,
+        "links": [
+          {
+            "id": null,
+            "other": "village_1",
+            "class": "decays",
+            "born": 30,
+            "peak": 32,
+            "end": 20,
+            "seasonedEver": false,
+            "formedDay": 32,
+            "accordPendingDays": null,
+            "accordUnansweredDays": 108,
+            "accordAnswered": false
+          }
+        ],
+        "seasoned": 0,
+        "polity": "never-seasoned",
+        "driveStatsPresent": false,
+        "accordAnswers": 0,
+        "tends": 0,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "blockedNoAnswerer": 0,
+        "tendsBlockedPantry": 0,
+        "driveErrors": 0,
+        "answerers": {},
+        "answererNames": {},
+        "instrumentErrors": 0
+      }
+    ],
+    "armed": [
+      {
+        "seed": 150201,
+        "days": 146,
+        "gameDays": 146,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "unlockedWave": 5,
+        "standing": 435,
+        "starvation": 0,
+        "deaths": 105,
+        "links": [
+          {
+            "id": null,
+            "other": "village_3",
+            "class": "seasoned",
+            "born": 30,
+            "peak": 100,
+            "end": 66,
+            "seasonedEver": true,
+            "formedDay": 38,
+            "accordPendingDays": 0,
+            "accordUnansweredDays": 0,
+            "accordAnswered": true
+          }
+        ],
+        "seasoned": 1,
+        "polity": "seasoned-but-no-polity",
+        "driveStatsPresent": true,
+        "accordAnswers": 1,
+        "tends": 8,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "blockedNoAnswerer": 7,
+        "tendsBlockedPantry": 46,
+        "driveErrors": 0,
+        "answerers": {
+          "gen_kjo0ruy": 4,
+          "gen_md56osh": 3,
+          "yara_haddad": 2
+        },
+        "answererNames": {
+          "gen_kjo0ruy": "Smita",
+          "gen_md56osh": "Phudit",
+          "yara_haddad": "Yara"
+        },
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 150202,
+        "days": 86,
+        "gameDays": 86,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "village",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "standing": 199,
+        "starvation": 0,
+        "deaths": 57,
+        "links": [
+          {
+            "id": null,
+            "other": "village_1",
+            "class": "rises",
+            "born": 30,
+            "peak": 41,
+            "end": 38,
+            "seasonedEver": false,
+            "formedDay": 73,
+            "accordPendingDays": 0,
+            "accordUnansweredDays": 0,
+            "accordAnswered": true
+          }
+        ],
+        "seasoned": 0,
+        "polity": "never-seasoned",
+        "driveStatsPresent": true,
+        "accordAnswers": 1,
+        "tends": 0,
+        "renegAnswers": 2,
+        "demandAnswers": 0,
+        "blockedNoAnswerer": 0,
+        "tendsBlockedPantry": 13,
+        "driveErrors": 0,
+        "answerers": {
+          "gen_ifs3vkj": 1,
+          "gen_dzp6zdb": 1,
+          "priya_nair": 1
+        },
+        "answererNames": {
+          "gen_ifs3vkj": "Fernanda",
+          "gen_dzp6zdb": "Nia",
+          "priya_nair": "Priya"
+        },
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 150203,
+        "days": 102,
+        "gameDays": 102,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "standing": 199,
+        "starvation": 0,
+        "deaths": 97,
+        "links": [
+          {
+            "id": null,
+            "other": "village_0",
+            "class": "seasoned",
+            "born": 30,
+            "peak": 100,
+            "end": 81,
+            "seasonedEver": true,
+            "formedDay": 30,
+            "accordPendingDays": 0,
+            "accordUnansweredDays": 0,
+            "accordAnswered": true
+          }
+        ],
+        "seasoned": 1,
+        "polity": "seasoned-but-no-polity",
+        "driveStatsPresent": true,
+        "accordAnswers": 1,
+        "tends": 7,
+        "renegAnswers": 2,
+        "demandAnswers": 0,
+        "blockedNoAnswerer": 3,
+        "tendsBlockedPantry": 23,
+        "driveErrors": 0,
+        "answerers": {
+          "gen_ns3aswf": 7,
+          "omar_farouk": 1,
+          "gen_pxzo5eb": 1,
+          "devon_okafor": 1
+        },
+        "answererNames": {
+          "gen_ns3aswf": "Chidi",
+          "omar_farouk": "Omar",
+          "gen_pxzo5eb": "Lamar",
+          "devon_okafor": "Devon"
+        },
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 150204,
+        "days": 116,
+        "gameDays": 117,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "standing": 199,
+        "starvation": 0,
+        "deaths": 60,
+        "links": [
+          {
+            "id": null,
+            "other": "village_2",
+            "class": "seasoned",
+            "born": 22,
+            "peak": 90,
+            "end": 68,
+            "seasonedEver": true,
+            "formedDay": 37,
+            "accordPendingDays": 0,
+            "accordUnansweredDays": 0,
+            "accordAnswered": true
+          }
+        ],
+        "seasoned": 1,
+        "polity": "seasoned-but-no-polity",
+        "driveStatsPresent": true,
+        "accordAnswers": 1,
+        "tends": 5,
+        "renegAnswers": 1,
+        "demandAnswers": 0,
+        "blockedNoAnswerer": 0,
+        "tendsBlockedPantry": 51,
+        "driveErrors": 0,
+        "answerers": {
+          "gen_g8se7kb": 2,
+          "gen_ttaktf3": 2,
+          "gen_ritta4p": 3
+        },
+        "answererNames": {
+          "gen_g8se7kb": "Beletu",
+          "gen_ttaktf3": "Andres",
+          "gen_ritta4p": "Hans"
+        },
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 150205,
+        "days": 105,
+        "gameDays": 105,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "unlockedWave": 5,
+        "standing": 200,
+        "starvation": 0,
+        "deaths": 67,
+        "links": [
+          {
+            "id": null,
+            "other": "village_0",
+            "class": "seasoned",
+            "born": 30,
+            "peak": 100,
+            "end": 93,
+            "seasonedEver": true,
+            "formedDay": 36,
+            "accordPendingDays": 0,
+            "accordUnansweredDays": 0,
+            "accordAnswered": true
+          }
+        ],
+        "seasoned": 1,
+        "polity": "seasoned-but-no-polity",
+        "driveStatsPresent": true,
+        "accordAnswers": 1,
+        "tends": 7,
+        "renegAnswers": 1,
+        "demandAnswers": 0,
+        "blockedNoAnswerer": 5,
+        "tendsBlockedPantry": 17,
+        "driveErrors": 0,
+        "answerers": {
+          "catalina_reyes": 5,
+          "gen_fnobeh6": 2,
+          "gen_uls6u21": 2
+        },
+        "answererNames": {
+          "catalina_reyes": "Catalina",
+          "gen_fnobeh6": "Jian",
+          "gen_uls6u21": "Alfredo"
+        },
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 150206,
+        "days": 150,
+        "gameDays": 150,
+        "endReason": "survived",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "unlockedWave": 5,
+        "standing": 310,
+        "starvation": 2,
+        "deaths": 75,
+        "links": [
+          {
+            "id": null,
+            "other": "village_1",
+            "class": "seasoned",
+            "born": 30,
+            "peak": 100,
+            "end": 48,
+            "seasonedEver": true,
+            "formedDay": 32,
+            "accordPendingDays": 0,
+            "accordUnansweredDays": 0,
+            "accordAnswered": true
+          }
+        ],
+        "seasoned": 1,
+        "polity": "seasoned-but-no-polity",
+        "driveStatsPresent": true,
+        "accordAnswers": 1,
+        "tends": 10,
+        "renegAnswers": 2,
+        "demandAnswers": 0,
+        "blockedNoAnswerer": 1,
+        "tendsBlockedPantry": 53,
+        "driveErrors": 0,
+        "answerers": {
+          "chloe_dubois": 8,
+          "devon_okafor": 2,
+          "gen_ttjszz2": 1,
+          "ursula_weber": 2
+        },
+        "answererNames": {
+          "chloe_dubois": "Chloe",
+          "devon_okafor": "Devon",
+          "gen_ttjszz2": "Wilhelm",
+          "ursula_weber": "Ursula"
+        },
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 150207,
+        "days": 111,
+        "gameDays": 111,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "standing": 199,
+        "starvation": 0,
+        "deaths": 74,
+        "links": [
+          {
+            "id": null,
+            "other": "village_2",
+            "class": "seasoned",
+            "born": 30,
+            "peak": 100,
+            "end": 84,
+            "seasonedEver": true,
+            "formedDay": 35,
+            "accordPendingDays": 0,
+            "accordUnansweredDays": 0,
+            "accordAnswered": true
+          }
+        ],
+        "seasoned": 1,
+        "polity": "seasoned-but-no-polity",
+        "driveStatsPresent": true,
+        "accordAnswers": 1,
+        "tends": 9,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "blockedNoAnswerer": 1,
+        "tendsBlockedPantry": 17,
+        "driveErrors": 0,
+        "answerers": {
+          "gen_0c1l8q5": 3,
+          "gen_a7x9hxt": 4,
+          "emma_larsen": 3
+        },
+        "answererNames": {
+          "gen_0c1l8q5": "Eamon",
+          "gen_a7x9hxt": "Gabriela",
+          "emma_larsen": "Emma"
+        },
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 150208,
+        "days": 129,
+        "gameDays": 129,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "standing": 199,
+        "starvation": 0,
+        "deaths": 101,
+        "links": [
+          {
+            "id": null,
+            "other": "village_1",
+            "class": "seasoned",
+            "born": 30,
+            "peak": 84,
+            "end": 58,
+            "seasonedEver": true,
+            "formedDay": 32,
+            "accordPendingDays": 0,
+            "accordUnansweredDays": 0,
+            "accordAnswered": true
+          }
+        ],
+        "seasoned": 1,
+        "polity": "seasoned-but-no-polity",
+        "driveStatsPresent": true,
+        "accordAnswers": 1,
+        "tends": 6,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "blockedNoAnswerer": 0,
+        "tendsBlockedPantry": 33,
+        "driveErrors": 0,
+        "answerers": {
+          "raj_patel": 5,
+          "gen_er6m5ht": 1,
+          "chantal_mukendi": 1
+        },
+        "answererNames": {
+          "raj_patel": "Raj",
+          "gen_er6m5ht": "Morten",
+          "chantal_mukendi": "Chantal"
+        },
+        "instrumentErrors": 0
+      }
+    ]
+  },
+  "verdict": "NO-GO"
+}

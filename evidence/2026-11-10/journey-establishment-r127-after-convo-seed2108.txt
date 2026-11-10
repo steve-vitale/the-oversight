@@ -1,0 +1,78 @@
+=== r127-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Natalia (gen_cxg22x3) occ=Police officer --
+OPENING: "About this wound — I hate to ask twice, but it's still open. Will you?"
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "I've heard good things about Emberhold. We should link with them — we'd be stronger together."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Camu-camu. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Autumn Crocus. Leaf, stem, smell. You won't forget it now."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to them, on the same side of the Haven door, to help.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Huh. Let me think about that." "Did you hear? Nathan won Who Ate It? on the cameras. People are still talking about it."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Someone should watch your back. Might as well be me."
+closing: "Steady as she goes. We'll talk again."
+
+-- Wyatt (gen_ouu1126) occ=barber --
+OPENING: "Can I tell you something? I'm keeping a photo of someone I left behind. I haven't told anyone."
+YOU: [secret:promise] "That stays between us."
+THEM: "Wait, also — Thank you. ...I needed someone to know, and I needed it to stop there."
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Stinging Nettle — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+YOU: [alive:want:seek_taken] "About your taken kin — what do you need?"
+THEM: "You talk to it -- the System. Have you ever asked? About the taken -- about Sandra?"
+YOU: [gq:yn:yes] "Yes."
+THEM: "All right. Thank you for telling me."
+YOU: [dlg:more] "What do you remember?"
+THEM: "It's my sister, Sandra. Was taken at the Scattering. The boring half, they said — my sister, boring. I think about that every day. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person. Give it time."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Alright. Catch you later."
+
+-- Melissa (gen_3fgs8s9) occ=welder --
+OPENING: Melissa speaks only 🇧🇷 Portuguese. You hear them in English — your extended mind translating live, cheerful and slightly off. They hear only your English, and understand none of it. Eyes, hands, and patience — one direction only.
+«Oi! Como você se chama?» → "Hi! What's your name?"
+(They mime walking — pointing at themselves, then at you, then toward the tree line. The meaning is unmistakable: come with me.)
+YOU: [nv:nod] (nod slowly)
+THEM: «Bem dito. Exatamente.» → "Well said. Exactly right." They nod, holding your gaze a beat longer. Something about the way you tilt your head — hearing them twice, once in their voice and once in the System’s. It unsettles them, a little.
+YOU: [nv:smile] (smile)
+THEM: «Você é uma pessoa boa.» → "You're a good person." They smile back, slower this time, like it just landed. "Food?" — they grin, proud of the one English they know.
+YOU: [nv:pointself] (point: you, them, together)
+THEM: «Você é um anjo, obrigado de coração.» → "You're an angel, thanks from the heart." You press a hand to your own chest, then point at them. Together — they get it.
+YOU: [nv:listen] (listen hard — catch words)
+THEM: You listen hard, watching their mouth shape the words. «Você é... o chefe?» → "Are you... the boss?"
+YOU: [goon] (watch quietly)
+THEM: A final shared look — you both feel the talk running its course.
+(no pick — winding down)
+(stall menu: leave|nv:nod)
+closing: They wave you off gently, already turning away. The conversation ends where language couldn't reach.
+
+-- Benoit (benoit_lambert) occ=Baker --
+OPENING: "I can't reach this properly. Could you clean it out for me? Please."
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "a cellar full of jars — I'll show you on the map sometime. It's real."
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "a spring that runs clear — I'll show you on the map sometime. It's real."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to them, on the same side of the Haven door, to help.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Huh. Let me think about that." "Sanne asked me about you. A lot of questions. Friendly ones. Too friendly."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Okay, that's my quota of socializing."
+YOU: [agree] "You're right."
+THEM: "Well. At least someone's paying attention."
+(ended by engine)

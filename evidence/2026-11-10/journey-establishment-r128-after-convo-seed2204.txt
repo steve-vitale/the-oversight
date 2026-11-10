@@ -1,0 +1,82 @@
+=== r128-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Marisol (gen_fd3gesi) occ=blacksmith --
+OPENING: "Did you sleep? I kept hearing things out past the treeline."
+YOU: [ans:q_night:a_yes] "I heard them too."
+THEM: They go still. "So it's not just me. Good. That's... good to know. Bad, but good."
+YOU: [goon] "And?"
+THEM: "I sleep in shifts now — two hours, up, listen, two more. My body learned it before my head agreed. Columbus, Ohio never taught me that. The treeline did."
+YOU: [goon] "And?"
+THEM: "Come see what I found. You won't believe it."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: It's quiet at the hollow. Marisol doesn't say much. Sometimes that's the whole point.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on how you slept."
+YOU: [goon] "And?"
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Never mind me. What were you going to say?"
+YOU: [ask:personal] "Your story. Go."
+THEM: "Huh. Let me think about that." "I've started noticing who eats first and who waits. Tells you everything about a person."
+closing: "See you at the fire."
+
+-- Aaliyah (gen_azgp890) occ=Mortician --
+OPENING: "About whether they can trust you — Can I trust you? I mean really. Good talking."
+YOU: [ans:q_trust:a_earn] "I hope to earn it."
+THEM: "Oh! That's the right answer. The wrong one would've been 'yes' too fast."
+YOU: [goon] "And?"
+THEM: Their friendliness thins — still there, just held at arm's length.
+YOU: [goon] "And?"
+THEM: "I'll tell you what I tell everyone: watch what I do when nobody's watching. That's the whole of me. The rest is just talking."
+YOU: [goon] "And?"
+THEM: "I've heard good things about Stonebridge. We should link with them — we'd be stronger together."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "Curry Leaf. Remember the leaf, the stem, the smell — that's the whole of it."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Goldenrod. Leaf, stem, smell. You won't forget it now."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on whether they can trust you."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Alright. But I'm not carrying your stuff."
+closing: "Take care of yourself."
+
+-- Marthe (gen_ijp298x) occ=roofer --
+OPENING: "Can we talk?" Marthe sits down near you. "Just... talk. Like people used to."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Marthe shows you where they go to think. "Don't tell the others. Everyone needs one place."
+YOU: [teach] "Watch. This matters."
+THEM: You show them Jewelweed — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Physic Nut. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Bitter Leaf — crush the leaf, smell it, taste the stem. That's how you know it."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Okay. Yeah. I trust you."
+YOU: [dlg:more] "I’m listening."
+THEM: "What do you make of all this? Really."
+YOU: [ans:q_think:a_end] "The world's ended. We're what's left."
+THEM: "Bleak. Probably true. I keep looking for the part where it's not. Allegedly."
+YOU: [dlg:doubt] "That doesn't quite add up."
+THEM: "...What's that supposed to mean?" Their voice goes careful.
+closing: "Good talk."
+
+-- David (david_kim) occ=plumber --
+OPENING: "Can I tell you something? Before the scattering, I said something cruel. I think about it every day."
+INVITE-ANSWER trust=82
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: At the trap line the ground is torn up. Something was here, recently, and it wasn't careful. David's hand finds your sleeve. You leave together, faster than you came.
+YOU: [secret:silence] (say nothing — just sit with them)
+THEM: "...Yeah. ...That's enough, for now. Thank you for sitting with it."
+YOU: [teach] "Watch. This matters."
+THEM: You show them Jewelweed — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+YOU: [alive:event:show] "The show — did you see it?"
+THEM: "They took me. Gauntlet — up there, on the screens, in front of everyone. I'm still turning it over."
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "Has this changed you? Like, fundamentally?"
+YOU: [gq:yn:yes] "Yes."
+THEM: "Alright — carefully, now. Both of us."
+YOU: [agree] "You're right."
+THEM: "I keep coming back to the same conclusion. So: yes."
+(ended by engine)

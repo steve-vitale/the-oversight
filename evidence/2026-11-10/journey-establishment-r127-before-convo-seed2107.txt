@@ -1,0 +1,85 @@
+=== r127-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Amanda (gen_ekngub4) occ=bush pilot --
+OPENING: "About the food I needed — the need hasn't gone anywhere. I'm still asking."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to them, on the same side of the Haven door, to help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Thank you. I won't forget who fed me when it mattered."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Huh. Let me think about that." "People are talking about Anh. Take it for what it's worth."
+YOU: [goon] "Go on. I'm listening."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Someone should watch your back. Might as well be me."
+YOU: [dlg:more] "Tell me more."
+THEM: "Nathan headed out for water."
+YOU: [party_name] "We should name this. Us."
+THEM: "A name. Okay." You say it out loud, trying the shape of it:
+1. "APEX SNACKS" (📺 the System suggests)
+2. "The Firetenders" (Amanda suggests)
+3. "The Company" (or plain)
+(Which one? It'll stick.)
+closing: "Steady as she goes. We'll talk again."
+
+-- Anh (gen_qkije7m) occ=Baker --
+OPENING: Anh: "I've heard good things about Ashford. We should link with them — we'd be stronger together."
+YOU: [link:accept] "All right. Let's ask them."
+THEM: "All right — let's ask them." You carry the proposal to Ashford.
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Wood Sorrel — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+YOU: [goon] "Go on. I'm listening."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Loquat. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Lantana. Leaf, stem, smell. You won't forget it now."
+YOU: [dlg:more] "Go on."
+THEM: "Have you ever hurt someone? Since all this started."
+YOU: [ans:q_fight:a_tell] "Yes. I don't want to talk about the details. But yes."
+THEM: They nod, slow. "Okay. Thank you for telling me. That couldn't have been easy to say."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "I don't keep score on that. Score-keeping is how you stop sleeping. I do what the day needs and I don't rehearse it after. That's the priority."
+closing: "Steady as she goes. See you at dinner."
+
+-- Nathan (gen_ltud245) occ=emergency dispatcher --
+OPENING: "About your first memory — What's your first memory? Like, ever. The earliest thing."
+YOU: [ans:q_first_memory:a_tell] "A kitchen. Morning light. I must've been three."
+THEM: "Three. That's young. The brain keeps what it needs, I guess."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: The warmth pulls back a notch. They're weighing something.
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Mine's Kisangani, DR Congo, I think — heat on pavement, someone's hand huge around mine. Or I invented it. First memories are half real and half the story you needed."
+YOU: [dlg:doubt] "That doesn't quite add up."
+THEM: "...What's that supposed to mean?" Their voice goes careful.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on your first memory. Anyway — how are YOU doing?"
+YOU: [gq:howru:bad] "Honestly? Not great."
+THEM: "Okay. That's allowed, you know. Sit a minute?"
+YOU: [goon] "Good question. What do YOU think?"
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "What do you miss most? From before."
+closing: "Take care of yourself."
+
+-- Ruby (ruby_callaghan) occ=lifeguard --
+OPENING: "I asked Howard about the creek water run — Howard's gone. Still need hands. Are you in?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to your partner, on the same side of the Haven door.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Wait — I'm away from Haven, out on the road. I can't promise a dawn meet while I'm out — find me when I'm back, and we'll set it then."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Field Mustard. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Water Lily. Leaf, stem, smell. You won't forget it now."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that water haul."
+YOU: [goon] "Go on. I'm listening."
+THEM: Whatever warmth was building cools to politeness.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Good question." "Amanda? A bush pilot, back before. Solid person."
+closing: "Remember what we said. Hold me to it."

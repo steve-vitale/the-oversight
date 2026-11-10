@@ -1,0 +1,284 @@
+{
+  "seed": 170299,
+  "diag": "w6-network-march",
+  "instrumentErrors": [],
+  "overtimeTierBefore": 0,
+  "networkKeyReadyBefore": false,
+  "titansSlainBefore": {},
+  "scenarioOk": true,
+  "scenarioErr": null,
+  "campaign": {
+    "summoned": true,
+    "started": true,
+    "idx": 0,
+    "cleared": [],
+    "lost": false,
+    "done": false,
+    "tiles": {
+      "mast_nw": {
+        "x": 1,
+        "y": 1
+      },
+      "mast_ne": {
+        "x": 7,
+        "y": 1
+      },
+      "mast_sw": {
+        "x": 1,
+        "y": 7
+      },
+      "mast_se": {
+        "x": 7,
+        "y": 7
+      },
+      "limb_n": {
+        "x": 4,
+        "y": 1
+      },
+      "limb_w": {
+        "x": 1,
+        "y": 4
+      },
+      "limb_e": {
+        "x": 7,
+        "y": 4
+      },
+      "limb_s": {
+        "x": 4,
+        "y": 6
+      },
+      "heart": {
+        "x": 4,
+        "y": 3
+      }
+    }
+  },
+  "networkPiecesOnMap": [
+    {
+      "id": "network_tower",
+      "node": "mast_nw",
+      "tx": 1,
+      "ty": 1
+    },
+    {
+      "id": "network_tower",
+      "node": "mast_ne",
+      "tx": 7,
+      "ty": 1
+    },
+    {
+      "id": "network_tower",
+      "node": "mast_sw",
+      "tx": 1,
+      "ty": 7
+    },
+    {
+      "id": "network_tower",
+      "node": "mast_se",
+      "tx": 7,
+      "ty": 7
+    },
+    {
+      "id": "network_limb",
+      "node": "limb_n",
+      "tx": 4,
+      "ty": 1
+    },
+    {
+      "id": "network_limb",
+      "node": "limb_w",
+      "tx": 1,
+      "ty": 4
+    },
+    {
+      "id": "network_limb",
+      "node": "limb_e",
+      "tx": 7,
+      "ty": 4
+    },
+    {
+      "id": "network_limb",
+      "node": "limb_s",
+      "tx": 4,
+      "ty": 6
+    },
+    {
+      "id": "network_heart",
+      "node": "heart",
+      "tx": 4,
+      "ty": 3
+    }
+  ],
+  "spawnById": {
+    "network_tower": 4,
+    "network_limb": 4,
+    "network_heart": 1
+  },
+  "musterReady": true,
+  "firstNode": {
+    "id": "mast_nw",
+    "monster": "network_tower",
+    "title": "THE NORTHWEST MAST"
+  },
+  "startCombatReturn": "object",
+  "fightAttempt": {
+    "startErr": null,
+    "fightEntered": true,
+    "sayLinesDuringFight": [
+      {
+        "day": 100,
+        "line": "You don't know what that was. A mast taller than the trees, and it is humming. Someone at the haven should hear about this."
+      },
+      {
+        "day": 100,
+        "line": "⚔ NETWORK MAST! You're on your own."
+      },
+      {
+        "day": 100,
+        "line": "Turn-based now. Tap a tile to move — speed is squares. Then act."
+      },
+      {
+        "day": 100,
+        "line": "🛡️ 20 allies join you on the field."
+      },
+      {
+        "day": 100,
+        "line": "📡 THE NORTHWEST MAST — node 1 of 9. It brought one of the season's own monsters. Their counters still work."
+      },
+      {
+        "day": 100,
+        "line": "You escape. The thicket keeps its secrets."
+      },
+      {
+        "day": 100,
+        "line": "You lived to tell it — The Cancellation's moves are burned into your memory. (1/2 — one more survived encounter and you'll have its trick.)"
+      },
+      {
+        "day": 100,
+        "line": "📓 Codex: Sighting 1/2: survived an encounter."
+      },
+      {
+        "day": 100,
+        "line": "💀 THE NORTHWEST MAST holds. The coalition falls back in good order — the dead stay dead. (20 blades. Re-face it when ready. No new fires will answer.)"
+      }
+    ]
+  },
+  "fights": [
+    {
+      "day": 100,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "network_tower",
+      "wave": 6,
+      "cls": "other",
+      "seq": null,
+      "outcome": null
+    }
+  ],
+  "sayLines": [
+    {
+      "day": 1,
+      "line": "📖 LEARNED: Animal Behavior (Level 2). Predators test: they approach, watch, decide. Prey freezes or bolts. Learn which you're looking at."
+    },
+    {
+      "day": 1,
+      "line": "📖 LEARNED: Wire Snares (Level 2). Set the loop at head height for the target species. Anchor it solid. Camouflage the wire."
+    },
+    {
+      "day": 1,
+      "line": "📖 LEARNED: Shoulder Check (Level 2). The shoulder knows."
+    },
+    {
+      "day": 1,
+      "line": "📖 LEARNED: Hogtie (Level 2). Your knots have knots."
+    },
+    {
+      "day": 1,
+      "line": "📖 LEARNED: Reading Tracks (Level 1). Fresh tracks have sharp edges. Old tracks crumble. You can tell how recently something passed."
+    },
+    {
+      "day": 1,
+      "line": "📖 Your old life taught you things. 5 skills from your past — check your Journal."
+    },
+    {
+      "day": 1,
+      "line": "Nothing here looks like home. You know none of these plants. Learn fast."
+    },
+    {
+      "day": 1,
+      "line": "🪤 Your old life comes back to your hands: the pit you dug before the Scattering — deep enough for a boar, staked at the bottom, brushed over with leaves and marked well. You never forgot the shape of it."
+    },
+    {
+      "day": 1,
+      "line": "📖 Your hands remember: knap a Stone knife (stone + vine) — the oldest tool there is. Find the stone."
+    },
+    {
+      "day": 1,
+      "line": "📖 Your hands remember: weave cloth (3 plant fiber — strip it from cleared brush), and build a Water Filter (cloth + charcoal from fire ashes). Dirty water doesn't have to stay dirty."
+    },
+    {
+      "day": 1,
+      "line": "You wake up with dirt in your mouth and blood on your hands that isn't yours. The sky is the wrong color — not sunset-wrong, wound-wrong. Andre Weiss. Rancher. From Minneapolis, USA. That was yesterday. This is now. You have: Tote Bag, Photo album, Dog tags, Coat button, Knife roll. That's everything you own in this world. Haven. Twelve people. The fire is lit. The stars are wrong. They move when you aren't looking. Yesterday there were seven. Tonight there are nine. They're getting closer."
+    },
+    {
+      "day": 1,
+      "line": "A man, maybe 50s, with a crooked nose: \"Don't bother picking around the tents. Walk out. The land feeds people who go looking.\""
+    },
+    {
+      "day": 1,
+      "line": "📓 Journal: Food won't come to Haven. Walk past the treeline — learn what grows out there, bring it back, and get it named at camp."
+    },
+    {
+      "day": 1,
+      "line": "You tell the others you're heading out. Someone nods. \"Come back before dark.\""
+    },
+    {
+      "day": 1,
+      "line": "— DAY 1 DAWN — The world wakes. Animals are active."
+    },
+    {
+      "day": 100,
+      "line": "📡 THE NETWORK — It is not on the map. It IS the map: masts at the corners, limbs along the edges, a heart in the middle. Nine fights, in order, with one coalition. The dead stay dead. No one new answers once the march begins. First: THE NORTHWEST MAST (tile 1,1). The march needs 20 blades. Sound the call. Sit at the Table and the march is over."
+    },
+    {
+      "day": 100,
+      "line": "🐞 SCENARIO: THE NETWORK — you stand at THE NORTHWEST MAST with 20 debug blades. Fight it: 9 nodes, in order, the dead stay dead. (Debug: Game.networkStatus() shows the march.)"
+    },
+    {
+      "day": 100,
+      "line": "You don't know what that was. A mast taller than the trees, and it is humming. Someone at the haven should hear about this."
+    },
+    {
+      "day": 100,
+      "line": "⚔ NETWORK MAST! You're on your own."
+    },
+    {
+      "day": 100,
+      "line": "Turn-based now. Tap a tile to move — speed is squares. Then act."
+    },
+    {
+      "day": 100,
+      "line": "🛡️ 20 allies join you on the field."
+    },
+    {
+      "day": 100,
+      "line": "📡 THE NORTHWEST MAST — node 1 of 9. It brought one of the season's own monsters. Their counters still work."
+    },
+    {
+      "day": 100,
+      "line": "You escape. The thicket keeps its secrets."
+    },
+    {
+      "day": 100,
+      "line": "You lived to tell it — The Cancellation's moves are burned into your memory. (1/2 — one more survived encounter and you'll have its trick.)"
+    },
+    {
+      "day": 100,
+      "line": "📓 Codex: Sighting 1/2: survived an encounter."
+    },
+    {
+      "day": 100,
+      "line": "💀 THE NORTHWEST MAST holds. The coalition falls back in good order — the dead stay dead. (20 blades. Re-face it when ready. No new fires will answer.)"
+    }
+  ]
+}

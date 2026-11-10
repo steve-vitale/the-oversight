@@ -179,7 +179,19 @@
     plans: ['"That\'s the plan, anyway. What\'s on your mind?"', '"We\'ll see how it goes. What did you want?"'],
     gossip: ['"That\'s what I heard, anyway. What\'s up?"', '"Take it with salt. What did you want to ask?"'],
     personal: ['"That\'s me, I guess. What\'s on your mind?"', '"Anyway. What did you want?"'],
-    want: ['"Sorry — I shouldn\'t load that on you. What\'s up?"', '"Forget I said anything. What did you want?"'],
+    want: ['"Sorry — I shouldn\'t load that on you. What\'s up?"', '"Forget I said anything. What did you want?"',
+      // r124 (journey-landing 2026-11-10): the pool held only the two lines
+      // above, so convoPickCycle's without-replacement cycle was strict
+      // alternation — a third want-bridge in one sitting repeated a line
+      // heard two turns earlier (1142 d6, 1148 d6: each line x2 verbatim).
+      // Six lines means a sitting would need seven want-bridges before any
+      // repeat, and the keep-3 memory window keeps near repeats out.
+      // Same voice throughout: the villager backs off their own want and
+      // hands the floor to the player.
+      '"...Never mind me. What were you going to say?"',
+      '"That can wait — it isn\'t going anywhere. What\'s on your mind?"',
+      '"Look, forget it. You wanted something?"',
+      '"Anyway — that\'s my problem, not yours. What did you want?"'],
     secret: ['"Don\'t tell anyone I told you. What\'s on your mind?"', '"...Anyway. What did you want to ask?"'],
     small: ['"Sure — what\'s on your mind?"', '"Yeah? What\'s up?"'],
   };

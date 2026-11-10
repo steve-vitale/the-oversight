@@ -1170,7 +1170,7 @@
           // teacher's real tell, not the old generic template.
           lineText = this.agencyMonsterLessonLine(taughtMid);
         } else if (taughtPlant) {
-          lineText = `"This one — ${taughtPlant}. Leaf, stem, smell. You won't forget it now."`;
+          lineText = this.convoTeachPlantLine(vid, taughtPlant);
         } else if (taughtPlace) {
           lineText = `"${taughtPlace} — I'll show you on the map sometime. It's real."`;
         } else if ((k.monsters || 0) >= 2) {
@@ -1283,6 +1283,41 @@
       if (need === 'hunger') return `📖 ${nm} shows you ${shown} — where it grows, what's safe to eat. You won't forget it now. ${codexBit}`;
       if (need === 'novice') return `📖 ${nm} walks you through ${shown} — leaf, stem, smell, the beginner's tour. You won't forget it now. ${codexBit}`;
       return `📖 ${nm} shows you ${shown} — leaf, stem, smell. You won't forget it now. ${codexBit}`;
+    },
+    // convoTeachPlantLine — VARIETY (journey-deepening r125 2026-11-10):
+    // the transcript line for a plant lesson was ONE fixed frame ("This
+    // one — X. Leaf, stem, smell..."), so a teach-heavy sitting repeated
+    // it verbatim with only the plant swapped (panel: 7x in one sitting).
+    // Four frames now, picked by FRAME-INDEX rotation on the villager's
+    // convo state: convoPick dedupes by TEXT, which can never see a frame
+    // repeat (the plant differs each time), so the used frame indices are
+    // tracked instead — an unused frame is picked at random, and the pool
+    // resets only once all four have been used. One sitting never repeats
+    // a frame until the pool cycles. The plant name stays in every frame
+    // — the lesson stays specific. Falls back to the original frame when
+    // the convo state is unavailable. (The narration line, teachPlantLine
+    // above, already varies by need — this is the conversation transcript
+    // line, which is what the player actually reads.)
+    convoTeachPlantLine(vid, plantName) {
+      const plant = plantName || 'a plant';
+      const frames = [
+        `"This one — ${plant}. Leaf, stem, smell. You won't forget it now."`,
+        `"${plant} — crush the leaf, smell it, taste the stem. That's how you know it."`,
+        `"This one is ${plant}. Look at the leaf, feel the stem, breathe it in. It'll stick."`,
+        `"${plant}. Remember the leaf, the stem, the smell — that's the whole of it."`,
+      ];
+      let used = null;
+      try {
+        const c = this.convoGet ? this.convoGet(vid) : null;
+        if (c) { c.teachFramesUsed = c.teachFramesUsed || []; used = c.teachFramesUsed; }
+      } catch (e) { used = null; }
+      if (!used) return frames[Math.floor(Math.random() * frames.length)];
+      const fresh = frames.map((_, i) => i).filter(i => used.indexOf(i) === -1);
+      if (!fresh.length) used.length = 0;
+      const pool = fresh.length ? fresh : frames.map((_, i) => i);
+      const idx = pool[Math.floor(Math.random() * pool.length)];
+      used.push(idx);
+      return frames[idx];
     },
     agencyTeachPlant(vid) {
       // an explorer teaches you one plant they actually learned. Concrete,

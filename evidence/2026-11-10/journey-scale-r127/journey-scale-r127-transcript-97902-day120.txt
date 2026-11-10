@@ -1,0 +1,25 @@
+(pre-talk seed: ask_favor planted d120; takenWantDay=0; convoCount=8)
+=== seed 97902 day 120 — conversation with Raj (raj_patel) ===
+occupation=Pharmacist temperament=cautious trust=88 dead=false
+want: ask_favor (stage 2)
+open thread: goal fromSeed=true
+picker: control
+
+THEM: Somebody has to be the calm one. I've taken the job.
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Raj shows you where they go to think. "Don't tell the others. Everyone needs one place."
+YOU: [dlg:more] "Tell me more."
+THEM: "Calm is a choice I make every morning. Some mornings it takes all day."
+YOU: [dlg:react] (listen)
+THEM: "You two sort it out, or I will, and nobody likes my version."
+YOU: [dlg:more] "Go on."
+THEM: "Peace isn't the absence of fighting. It's the presence of dinner."
+YOU: [dlg:react] (listen)
+THEM: "Everyone's allowed a bad day. Nobody's allowed two in a row. My rule."
+YOU: [dlg:more] "I’m listening."
+THEM: "Most fights start because nobody asked what the other person actually wanted. I ask."
+YOU: (leave)
+pre-close: want ask_favor stage 2 thread goal
+closing line: "See you at the fire."
+(gossip picks this sitting: 0)

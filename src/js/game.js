@@ -6688,6 +6688,37 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (ids.length) try { this.checkPromises('task'); } catch (e) {}
     },
 
+    // GRANT-RATE DIAL (establishment r128 2026-11-10): the first rung at
+    // full rate — the first 5 XP of a task credit 1:1; above 5 XP, 1 XP
+    // per 2 units, the odd unit carried on the person record
+    // (foodXpRemainder) so no work is ever lost to rounding. The rung
+    // (5/15/30, r116) and askSpecialist (+1 per direct teaching use) are
+    // unchanged; only the two routine-work sites call this (rack batches,
+    // hunt kills). r127's flat halving was judged NO-GO — it braked the
+    // marginal movers as hard as the racers; this dial bites only above
+    // the first rung.
+    grantFoodXpCredit(person, task, units) {
+      if (!person || !units || units <= 0) return 0;
+      person.foodXp = person.foodXp || {};
+      person.foodXpRemainder = person.foodXpRemainder || {};
+      let xp = person.foodXp[task] || 0;
+      let carry = person.foodXpRemainder[task] || 0;
+      let left = units;
+      if (xp < 5) {
+        const head = Math.min(left, 5 - xp);
+        xp += head;
+        left -= head;
+      }
+      if (left > 0) {
+        const total = carry + left;
+        xp += Math.floor(total / 2);
+        carry = total % 2;
+      }
+      person.foodXp[task] = xp;
+      person.foodXpRemainder[task] = carry;
+      return xp;
+    },
+
     // villagerHuntResolve(vid, eff): the hunt duty through the SAME chance
     // machinery the player hunts with (huntAnimal) — parity 2026-10-10,
     // Worker A. Picks a REAL animal from a REAL nearby tile's wildlife (the
@@ -6807,11 +6838,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const kcal = Math.max(50, Math.round((animal.calories || 400) * frac * eff));
       try { best.wl[aid] = Math.max(0, (best.wl[aid] || 1) - 1); } catch (e) {}
       try { this.creditDeed && this.creditDeed(vid, 'hunting'); } catch (e) { console.warn('[tracks] deed', e); }
-      // PRACTICE (establishment r112 2026-11-07): cleaning the kill teaches
-      // butchering — one foodXp['butcher'] rep per kill. The same XP
+      // PRACTICE (establishment r112 2026-11-07; r128 2026-11-10 dial (a)):
+      // cleaning the kill teaches butchering — one foodXp['butcher'] rep
+      // per kill while under the first rung (5 XP), 1 XP per 2 kills
+      // above it (grantFoodXpCredit, odd kill carried). The same XP
       // askSpecialist grants; the skill it buys is specialistSkill's
       // self-taught ladder (10 XP -> 1). A failed stalk cleans nothing.
-      try { const _hp = this.getPerson ? this.getPerson(vid) : null; if (_hp) { _hp.foodXp = _hp.foodXp || {}; _hp.foodXp.butcher = (_hp.foodXp.butcher || 0) + 1; } } catch (e) {}
+      try { const _hp = this.getPerson ? this.getPerson(vid) : null; if (_hp) this.grantFoodXpCredit(_hp, 'butcher', 1); } catch (e) {}
       try {
         this.state.codex.animalEncounters = this.state.codex.animalEncounters || {};
         this.state.codex.animalEncounters[aid] = (this.state.codex.animalEncounters[aid] || 0) + 1;
@@ -7360,15 +7393,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             preservedNote = ` ${first} worked the smoke racks too — ${n} batch${n > 1 ? 'es' : ''} preserved (~${keptKcal} kcal, keeps ${skill > 0 ? 'for weeks' : 'a couple of weeks'}).`;
             try { this.creditDeed && this.creditDeed(vid, 'preserving'); } catch (e) { console.warn('[tracks] deed', e); }
             // PRACTICE (establishment r112 2026-11-07; r114 2026-11-08:
-            // per-batch grant): working the racks teaches preserving —
-            // one foodXp['preserver'] rep per BATCH preserved (n batches
-            // in this resolution), not one per resolution. A cook who
-            // smokes three stacks in one resolution learns three times
-            // as fast as one who smokes one — the work is daily and spread
+            // per-batch grant; r128 2026-11-10 dial (a)): working the
+            // racks teaches preserving — one foodXp['preserver'] rep per
+            // BATCH preserved (n batches in this resolution) while under
+            // the first rung (5 XP), 1 XP per 2 batches above it
+            // (grantFoodXpCredit, odd batch carried). A cook who smokes
+            // three stacks in one resolution learns three times as fast
+            // as one who smokes one — the work is daily and spread
             // across whoever cooks, so the grant now pays the work done,
             // not the visit. The same XP askSpecialist grants; the skill
             // it buys is specialistSkill's self-taught ladder (5 XP -> 1).
-            try { person.foodXp = person.foodXp || {}; person.foodXp.preserver = (person.foodXp.preserver || 0) + n; } catch (e) {}
+            try { this.grantFoodXpCredit(person, 'preserver', n); } catch (e) {}
           } else if (racksFull && eligible.length) {
             // RACKSVOICE (establishment r20 2026-10-20): the cook resolves
             // ~3x/day, so the identical racks-full line fired per resolution
@@ -34485,8 +34520,26 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const mdef = this.data.monsters.find(m => m.id === monsterId);
       if (!mdef) return;
       const wave = mdef.wave || 1;
-      this.state.waveKills = this.state.waveKills || {};
-      this.state.waveKills[wave] = (this.state.waveKills[wave] || 0) + 1;
+      // VETCOUNT RECONCILE (sim-vetcount-reconcile-b, 2026-11-10, backlog
+      // #2077): one body = one count. The same kill can reach this choke
+      // point twice (gap-phase2 W1), and the log dedupes it — but the
+      // counters below used to count the CALL, so the counter ran ahead of
+      // the log (140208: counter 6, log 5). The dedupe verdict is computed
+      // ONCE, up front, from the log, and the counters follow it: a repeat
+      // call counts nothing. When _attrKills is off the log is not
+      // maintained, so there is nothing to dedupe against and every call
+      // counts, exactly as before (the honesty control is preserved).
+      // The ledger (scoreLedgerKill below) still scores the call, bounded
+      // by its per-type cap — that behavior is unchanged by this fix.
+      const _day = ((this.state.scholar || {}).day || 0);
+      const _dup = (this._attrKills === false) ? false : (((this.state.waveKillLog || []).some(e => e && e.d === _day
+        && e.mid === monsterId && (e.by || null) === (killerVid || null)
+        && (e.via || 'unknown') === (via || 'unknown')
+        && (e.trick || null) === (detail || null))));
+      if (!_dup) {
+        this.state.waveKills = this.state.waveKills || {};
+        this.state.waveKills[wave] = (this.state.waveKills[wave] || 0) + 1;
+      }
       // MONSTER COUNTERS (2026-10-10): the village learns together. Every
       // kill — player TB kill or villager field-fight kill — feeds the
       // village's per-type slain count; 1+ slain unlocks the askAbout
@@ -34552,7 +34605,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // the kill path (the deed feed and beats must survive a ledger bug).
       try { if (typeof this.scoreLedgerKill === 'function') this.scoreLedgerKill(monsterId); } catch (e) {}
       // Wave 4 slain feeds readiness
-      if (wave === 4) this.state.wave4Slain = (this.state.wave4Slain || 0) + 1;
+      if (wave === 4 && !_dup) this.state.wave4Slain = (this.state.wave4Slain || 0) + 1;
       // KILL ATTRIBUTION (2026-10-13): channel tag for telemetry — which
       // system scored this kill ('patrol' | 'wild' | 'aid-crisis' |
       // 'contest' | 'agency' | 'player' | 'companion' | 'unknown').
@@ -34578,12 +34631,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // reached this choke point twice in the vetformation run
           // (byte-identical entries). One body = one log entry: an exact
           // (day, monster, killer, via, trick) repeat is a double-write,
-          // not a second kill. Log-only: counters/ledger above still count
-          // the call, so no unlock bar moves on this change.
-          const _dup = _log.some(e => e && e.d === ((this.state.scholar || {}).day || 0)
-            && e.mid === monsterId && (e.by || null) === (killerVid || null)
-            && (e.via || 'unknown') === (via || 'unknown')
-            && (e.trick || null) === (detail || null));
+          // not a second kill. The verdict (_dup) was computed up front
+          // and the counters above already follow it, so the log and the
+          // counter move together (vetcount-reconcile-b, backlog #2077).
+          // The 1000-entry cap is a telemetry bound: a real kill past the
+          // cap still counts (the counter is honest about the kill) even
+          // though no entry is kept — the cap is never reached in a
+          // 150d census (~60 entries).
           if (!_dup && _log.length < 1000) {
             _log.push({
               d: (this.state.scholar || {}).day || 0,
@@ -34592,9 +34646,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               trick: detail || null,
             });
           }
-          const _byCh = this.state.waveKillByChannel || (this.state.waveKillByChannel = {});
-          const _k = (via || 'unknown') + '.w' + wave;
-          _byCh[_k] = (_byCh[_k] || 0) + 1;
+          if (!_dup) {
+            const _byCh = this.state.waveKillByChannel || (this.state.waveKillByChannel = {});
+            const _k = (via || 'unknown') + '.w' + wave;
+            _byCh[_k] = (_byCh[_k] || 0) + 1;
+          }
         }
       } catch (e) {}
       // Kills feed the unlock gates from every path (player combat AND
@@ -34734,6 +34790,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // per-channel counters) so pyrrhic kills join the same census.
       // Same (d, mid, by, via, trick) dedupe as recordWaveKill (gap-phase2
       // W1, line 844) — a pyrrhic kill double-written by two paths logs once.
+      // PYRRHIC STAMP (sim-vetcount-reconcile-b, 2026-11-10, backlog #2077):
+      // the entry carries pyrrhic:true so the census can tell a pyrrhic log
+      // entry from a counted one — the LOG is the source of truth, and the
+      // reconciliation rule is counter[w] == non-pyrrhic log entries with
+      // wave w (140203: log 2, counter 1 — the second entry is this stamp).
+      // The stamp changes NO game read: the counter still never moves here
+      // (the steve-call boundary stands) and _ladderLivingVeterans still
+      // counts the killer — a villager who killed a wave-4 beast in a lost
+      // fight still killed a wave-4 beast.
       try {
         if (this._attrKills !== false) {
           const _log = this.state.waveKillLog || (this.state.waveKillLog = []);
@@ -34746,12 +34811,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               d: (this.state.scholar || {}).day || 0,
               mid: monsterId, w: wave,
               by: killerVid || null, via: via || 'unknown',
-              trick: detail || null,
+              trick: detail || null, pyrrhic: true,
             });
           }
-          const _byCh = this.state.waveKillByChannel || (this.state.waveKillByChannel = {});
-          const _k = (via || 'unknown') + '.w' + wave;
-          _byCh[_k] = (_byCh[_k] || 0) + 1;
+          if (!_dup) {
+            const _byCh = this.state.waveKillByChannel || (this.state.waveKillByChannel = {});
+            const _k = (via || 'unknown') + '.w' + wave;
+            _byCh[_k] = (_byCh[_k] || 0) + 1;
+          }
         }
       } catch (e) {}
     },

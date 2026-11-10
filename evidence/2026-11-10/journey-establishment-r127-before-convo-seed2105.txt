@@ -1,0 +1,64 @@
+=== r127-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Emily (gen_tywvuac) occ=pottery instructor --
+OPENING: "About who you left behind — Did you leave someone behind? ...Sorry. You don't have to answer that. Not that it matters."
+YOU: [ans:q_left_behind:a_yes] "Yes."
+THEM: Just: "Yeah." A long quiet. "Me too."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — White Crossberry. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Wild Carrot. Leaf, stem, smell. You won't forget it now."
+YOU: [menu:more] More things to say (1/4)
+THEM: (menu page turned)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? I mean it."
+YOU: [silence] "..."
+THEM: The silence stretches a beat too long. They study their hands.
+(no pick)
+(stall menu: agency:ask_field|betrayal:press:case_18:gen_tywvuac|betrayal:press:case_20:gen_tywvuac|betrayal:site:case_18|betrayal:witnesses:case_18|menu:more|leave|silence)
+closing: "I should — yeah. Later."
+
+-- Priya (gen_dfqgmnb) occ=arborist --
+OPENING: "We gave them a good burial. Doesn't feel like enough, does it?"
+INVITE-ANSWER trust=93
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: At the ridge the ground is torn up. Something was here, recently, and it wasn't careful. Priya's hand finds your sleeve. You leave together, faster than you came.
+YOU: [menu:more] More things to say (1/5)
+THEM: (menu page turned)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I got lost in it for a second. What did you want to ask?"
+YOU: [silence] "..."
+THEM: They fill the quiet. "Anyway — where was I?"
+(no pick)
+(stall menu: betrayal:site:case_18|betrayal:witnesses:case_18|betrayal:investigate:case_18|betrayal:moot:case_18|betrayal:letlie:case_18|menu:more|leave|silence)
+closing: "...Thanks for being here. That's all."
+
+-- Amelia (gen_t9m3uxp) occ=Dentist --
+OPENING: "Don't mind me. Today's just heavy."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: You walk to the cache spot with Amelia. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Wild Strawberry. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Mahua. Leaf, stem, smell. You won't forget it now."
+YOU: [menu:more] More things to say (1/5)
+THEM: (menu page turned)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Anyway. Sorry. What's on your mind?"
+YOU: [silence] "..."
+THEM: They glance at the fire, then back. The quiet doesn't seem to bother them.
+(no pick)
+(stall menu: agency:ask_field|betrayal:site:case_18|betrayal:witnesses:case_18|betrayal:investigate:case_18|betrayal:moot:case_18|menu:more|leave|silence)
+closing: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+
+-- Eduardo (gen_qydefsh) occ=blacksmith --
+OPENING: Eduardo speaks only 🇧🇷 Portuguese. No shared words at all — just eyes, hands, and patience.
+«Não entendo nada. Nada!» (you catch 'nada' — nothing)
+YOU: [menu:more] More things to say (1/4)
+THEM: (menu page turned)
+YOU: [nv:listen] (listen hard — catch words)
+THEM: You listen hard, watching their mouth shape the words. «Você é... o chefe?» — Laura translates: "Are you... the boss?"
+(no pick)
+(stall menu: betrayal:site:case_18|betrayal:witnesses:case_18|betrayal:investigate:case_18|betrayal:moot:case_18|betrayal:letlie:case_18|menu:more|leave|nv:listen)
+closing: A final nod. They touch their chest, then point at you — a promise without words.

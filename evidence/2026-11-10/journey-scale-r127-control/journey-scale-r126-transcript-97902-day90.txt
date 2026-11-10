@@ -1,0 +1,15 @@
+(pre-talk seed: none; takenWantDay=79; convoCount=8)
+=== seed 97902 day 90 — conversation with Duc (gen_t1a1431) ===
+occupation=Veterinarian temperament=gentle trust=86 dead=false
+want: seek_taken (stage 0)
+open thread: secret fromSeed=false
+picker: control
+
+THEM: "Can I tell you something? Before the scattering, I stole from someone who trusted me. I think about it every day, as it were."
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Duc shows you where they go to think. "Don't tell the others. Everyone needs one place."
+YOU: (leave)
+pre-close: want seek_taken stage 0 thread secret
+closing line: "Thank you for listening. Really listening. That's rare."
+(gossip picks this sitting: 0)

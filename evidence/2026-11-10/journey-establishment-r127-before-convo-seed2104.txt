@@ -1,0 +1,84 @@
+=== r127-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Avery (gen_3loxkw7) occ=Midwife --
+OPENING: "About the pantry run — I hate to ask twice, but it's still open. Will you?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to your partner, on the same side of the Haven door.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Wait — I'm away from Haven, out on the road. I can't promise a dawn meet while I'm out — find me when I'm back, and we'll set it then."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that foraging help."
+YOU: [goon] "Do go on."
+THEM: The ease drains out of it, a little.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "Any good gossip? I'm bored."
+THEM: "Good question." "Olívia? A Mortician, back before. Solid person."
+YOU: [goon] "Do go on."
+THEM: "Okay, that's my quota of socializing."
+YOU: [joke] (crack a joke)
+THEM: Almost smiles. Catches themself. "...That was almost funny."
+(ended by engine)
+
+-- Willow (gen_ceoanjo) occ=musician --
+OPENING: "About the pantry run — still need hands. Are you in?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to your partner, on the same side of the Haven door.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Wait — I'm away from Haven, out on the road. I can't promise a dawn meet while I'm out — find me when I'm back, and we'll set it then."
+YOU: [goon] "Do go on."
+THEM: "Come see what I found. You won't believe it."
+INVITE-ANSWER trust=95
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: You walk to the hollow with Willow. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Knotweed Shoot. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Papaya. Leaf, stem, smell. You won't forget it now."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that foraging help."
+YOU: [goon] "Do go on."
+THEM: Something in them almost softens — then doesn't. Not yet.
+closing: "Take care of yourself."
+
+-- Jinhai (gen_ejsryri) occ=HVAC tech --
+OPENING: "Have you heard anything? About the taken. The pods. Anything at all. I mean it."
+YOU: [gq:yn:yes] "Yes."
+THEM: "I see." They take a moment to think about your answer.
+YOU: [goon] "Do go on."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [goon] "Do go on."
+THEM: "Where are you from — originally? Before all this."
+YOU: [ans:q_origin:a_tell] "I'm from Columbus, Ohio."
+THEM: Nods slowly. "Columbus, Ohio. I'll remember that. Everybody's from somewhere that isn't here."
+YOU: [goon] "Do go on."
+THEM: "Between us — Me? Chengdu, China. I still dream in its weather — rain on a tin roof, that specific smell. I wake up here and for a second I'm furious at the sky for the swap."
+YOU: [dlg:more] "What do you remember?"
+THEM: "It's my younger brother, Wenhao. Went up in the Taking. He cried when the dog died. Boring, they said. I keep his jacket. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [goon] "Do go on."
+THEM: "I've heard good things about Stonebridge. We should link with them — we'd be stronger together."
+closing: "Good talk."
+
+-- Olívia (gen_pe5y7og) occ=Mortician --
+OPENING: Olívia speaks only 🇧🇷 Portuguese. No shared words at all — just eyes, hands, and patience.
+«Oi! Como você se chama?»
+(They mime walking — pointing at themselves, then at you, then toward the ridge. The meaning is unmistakable: come with me.)
+YOU: [nv:nod] (nod slowly)
+THEM: «Isso mesmo, você acertou em cheio.» They nod back, slowly. "Fuck you." — they grin, proud of the one English they know.
+YOU: [nv:smile] (smile)
+THEM: «Você é um anjo, obrigado de coração.» (you catch 'anjo' — angel, 'coração' — heart) A smile, tired but real.
+YOU: [nv:pointself] (point: you, them, together)
+THEM: «Não vou esquecer.» You press a hand to your own chest, then point at them. Together — they get it.
+YOU: [nv:listen] (listen hard — catch words)
+THEM: You hold still and let the sounds settle. «Onde a gente dorme aqui?» (you catch 'Onde' — where, 'dorme' — sleeps)
+YOU: [speak_back] (try your Portuguese)
+THEM: Olívia lights up. "No, no — like this." They say it slowly, twice, watching your mouth shape it. "É verdade." You try again. Closer. They grin like you just scored the winning point.
+YOU: [goon] (watch quietly)
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [goon] (watch quietly)
+THEM: "I should get back to it."
+(no pick — winding down)
+(stall menu: leave|nv:nod)
+closing: They press their palms together — thanks, or goodbye, or both. Then turn back to their own thoughts.

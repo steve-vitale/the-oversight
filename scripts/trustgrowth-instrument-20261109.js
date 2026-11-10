@@ -1,8 +1,20 @@
 // trustgrowth-instrument-20261109.js — trust-growth + polity probe
-// instrument, v2 (arm sim-trustgrowth-b, run fleshout-loop-b-20261110T0122Z).
+// instrument, v3 (arm sim-answermail-a, run fleshout-20261110T0615Z).
 // Scripts only, zero src/js. A daily link-trust recorder: per seed, per
 // link, the trust trajectory by day, age, seasoned?, polity membership,
 // plus EVERY trust-change event attributed by cause.
+//
+// v3 (this arm, prereg amendment 4): the _trustGain wrap used to log
+// the RETURN value of Game._trustGain as `applied` — but _trustGain
+// returns the REQUESTED amount even when the 100-cap absorbs it
+// (hierarchy.js: `link.trust = Math.min(100, link.trust + n); return n;`),
+// so a +1 landing on a capped link logged a phantom +1 with no setter
+// twin (the setter skips no-op writes). The confirm band hit this 6
+// times and the analyzer correctly flagged 6 unattributed downs. The
+// wrap now records the ACTUAL move (trust after − trust before) as
+// `applied` and keeps the return value as `returned` for audit; a
+// cap-absorbed gain logs applied 0 and the analyzer already drops
+// applied-0 wraps (blockedGains) instead of counting a phantom event.
 //
 // v1 wrapped Game._trustGain only; the v1 pilot proved that premise
 // false — comms.js (aid), safetynets.js (aid offers/begs) and
@@ -99,19 +111,26 @@ function install(Game) {
       const selfGame = Game;
       Game._trustGain = function trustGrowthTrustGain(link, n) {
         const stack = stackFrames(2);
-        let applied = 0;
-        try { applied = origTrustGain.call(selfGame, link, n); } catch (e) { t.instrumentErrors.push('_trustGain-call: ' + String(e.message).slice(0, 80)); }
+        let returned = 0, before = null, after = null;
+        try { before = link ? link.trust : null; } catch (e) { before = null; }
+        try { returned = origTrustGain.call(selfGame, link, n); } catch (e) { t.instrumentErrors.push('_trustGain-call: ' + String(e.message).slice(0, 80)); }
+        try { after = link ? link.trust : null; } catch (e) { after = null; }
+        // v3: applied is the ACTUAL trust move, not the return value
+        // (the return lies at the 100 cap). Fall back to the return
+        // only if the link's trust could not be read.
+        const actual = (typeof before === 'number' && typeof after === 'number') ? (after - before) : (returned | 0);
         try {
           t.gains.push({
             seq: ++seq, day: dayOf(selfGame),
             linkId: (link && link.id) || null,
             other: otherOf(selfGame, link || {}),
             requested: (n | 0),
-            applied: (applied | 0),
+            applied: actual,
+            returned: (returned | 0),
             stack: stack, via: 'trustgain-wrap',
           });
         } catch (e) { t.instrumentErrors.push('_trustGain-log: ' + String(e.message).slice(0, 80)); }
-        return applied;
+        return returned;
       };
       gainWrapped = true;
     } else {

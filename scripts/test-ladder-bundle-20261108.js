@@ -245,15 +245,18 @@ async function main() {
   T.ok('a second delivery of any kind is refused (irreversible)', dl.ok === false && dl.reason === 'delivered', JSON.stringify(dl));
   T.ok('the recorded capstone is unchanged by the refused delivery', Game.progState().ladderCapstone === 'military_tribute', 'capstone ' + Game.progState().ladderCapstone);
 
-  // --- scholar-veteran edge (LEG 3 FIX: the gap is closed — readiness now
-  // agrees with delivery, the scholar is not a payable veteran) ---
+  // --- scholar-veteran edge (UPDATED sim-scholarcount-a, Steve RULED
+  // 2026-11-10: the ruling reopens the readiness/delivery split
+  // deliberately — readiness counts the scholar, delivery pays
+  // non-scholar veterans only; the bar measures the village's strength,
+  // the payment measures who can leave) ---
   K.newRun(Game);
   resetLadderState(Game);
   const vC = livingVillager(Game);
   T.ok('one living villager exists for the scholar edge', !!vC);
   Game.state.waveKillLog = [{ by: Game.villagerId, w: 4, day: 1 }, { by: vC, w: 4, day: 1 }];
   ready = Game.ladderCapstoneReady('military_tribute');
-  T.ok('readiness agrees with delivery: scholar + 1 villager is NOT ready (leg-3 fix)', ready.ready === false && ready.reason === 'veterans-short' && ready.veterans === 1, JSON.stringify(ready));
+  T.ok('readiness counts the scholar: scholar + 1 villager reads ready (ruling; payable 1)', ready.ready === true && ready.veterans === 2 && ready.payable === 1, JSON.stringify(ready));
   const rosterEdge = rosterLen(Game);
   dl = Game.ladderDeliverCapstone('military_tribute');
   T.ok('delivery refuses honestly: the scholar is not a payable veteran', dl.ok === false && dl.reason === 'veterans-short', JSON.stringify(dl));

@@ -1,0 +1,6667 @@
+{
+  "seed": 170203,
+  "arm": "encounterprod",
+  "run": "spawncensus-a",
+  "policy": "baseline",
+  "anchorCommit": "e298d29d9033",
+  "instrumentOff": false,
+  "days": 104,
+  "gameDays": 104,
+  "endReason": "village-lost",
+  "won": false,
+  "over": true,
+  "villageLost": true,
+  "scaleRank": "regional",
+  "maxWave": 4,
+  "unlockedWave": 4,
+  "standing": 190,
+  "readiness5": {
+    "wave": 5,
+    "ready": false,
+    "armored": 2,
+    "armed": 3,
+    "tricks": 20,
+    "veterans": 0,
+    "demand": {
+      "armored": 4,
+      "armorP": 15,
+      "armed": 6,
+      "tricks": 3,
+      "veterans": 2
+    },
+    "short": [
+      "armor",
+      "weapons",
+      "veterans"
+    ]
+  },
+  "spawns": [
+    {
+      "seq": 1,
+      "day": 3,
+      "id": "hummice",
+      "wave": 1,
+      "tx": 0,
+      "ty": 5,
+      "px": 4,
+      "py": 3,
+      "onPlayerTile": false,
+      "source": "background",
+      "veteran": false
+    },
+    {
+      "seq": 2,
+      "day": 3,
+      "id": "hummice",
+      "wave": 1,
+      "tx": 4,
+      "ty": 2,
+      "px": 4,
+      "py": 4,
+      "onPlayerTile": false,
+      "source": "background",
+      "veteran": false
+    },
+    {
+      "seq": 3,
+      "day": 4,
+      "id": "dustboar",
+      "wave": 1,
+      "tx": 1,
+      "ty": 1,
+      "px": 4,
+      "py": 3,
+      "onPlayerTile": false,
+      "source": "background",
+      "veteran": false
+    },
+    {
+      "seq": 4,
+      "day": 4,
+      "id": "hushwolf",
+      "wave": 1,
+      "tx": 4,
+      "ty": 3,
+      "px": 4,
+      "py": 3,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "veteran": false
+    },
+    {
+      "seq": 5,
+      "day": 4,
+      "id": "drumbelly_tanuki",
+      "wave": 1,
+      "tx": 7,
+      "ty": 1,
+      "px": 4,
+      "py": 4,
+      "onPlayerTile": false,
+      "source": "background",
+      "veteran": false
+    },
+    {
+      "seq": 6,
+      "day": 8,
+      "id": "hushwolf",
+      "wave": 1,
+      "tx": 8,
+      "ty": 2,
+      "px": 4,
+      "py": 3,
+      "onPlayerTile": false,
+      "source": "background",
+      "veteran": false
+    },
+    {
+      "seq": 7,
+      "day": 8,
+      "id": "nightlight_catfish",
+      "wave": 1,
+      "tx": 6,
+      "ty": 0,
+      "px": 4,
+      "py": 5,
+      "onPlayerTile": false,
+      "source": "background",
+      "veteran": false
+    },
+    {
+      "seq": 8,
+      "day": 8,
+      "id": "gallowdeer",
+      "wave": 1,
+      "tx": 4,
+      "ty": 5,
+      "px": 4,
+      "py": 5,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "veteran": false
+    },
+    {
+      "seq": 9,
+      "day": 10,
+      "id": "gallowdeer",
+      "wave": 1,
+      "tx": 6,
+      "ty": 3,
+      "px": 4,
+      "py": 3,
+      "onPlayerTile": false,
+      "source": "background",
+      "veteran": false
+    },
+    {
+      "seq": 10,
+      "day": 10,
+      "id": "voice_mimic_radio",
+      "wave": 2,
+      "tx": 4,
+      "ty": 3,
+      "px": 4,
+      "py": 3,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "veteran": false
+    },
+    {
+      "seq": 11,
+      "day": 10,
+      "id": "statickite",
+      "wave": 2,
+      "tx": 3,
+      "ty": 6,
+      "px": 4,
+      "py": 4,
+      "onPlayerTile": false,
+      "source": "background",
+      "veteran": false
+    },
+    {
+      "seq": 12,
+      "day": 11,
+      "id": "lockpick_raccoon",
+      "wave": 1,
+      "tx": 1,
+      "ty": 8,
+      "px": 4,
+      "py": 3,
+      "onPlayerTile": false,
+      "source": "background",
+      "veteran": false
+    },
+    {
+      "seq": 13,
+      "day": 11,
+      "id": "hushwolf",
+      "wave": 1,
+      "tx": 5,
+      "ty": 1,
+      "px": 4,
+      "py": 5,
+      "onPlayerTile": false,
+      "source": "background",
+      "veteran": false
+    },
+    {
+      "seq": 14,
+      "day": 13,
+      "id": "understudy",
+      "wave": 2,
+      "tx": 0,
+      "ty": 4,
+      "px": 4,
+      "py": 3,
+      "onPlayerTile": false,
+      "source": "background",
+      "veteran": false
+    },
+    {
+      "seq": 15,
+      "day": 13,
+      "id": "murkcap",
+      "wave": 1,
+      "tx": 4,
+      "ty": 3,
+      "px": 4,
+      "py": 3,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "veteran": false
+    },
+    {
+      "seq": 16,
+      "day": 13,
+      "id": "drumbelly_tanuki",
+      "wave": 1,
+      "tx": 6,
+      "ty": 6,
+      "px": 4,
+      "py": 4,
+      "onPlayerTile": false,
+      "source": "background",
+      "veteran": false
+    },
+    {
+      "seq": 17,
+      "day": 14,
+      "id": "understudy",
+      "wave": 2,
+      "tx": 3,
+      "ty": 1,
+      "px": 4,
+      "py": 3,
+      "onPlayerTile": false,
+      "source": "background",
+      "veteran": false
+    },
+    {
+      "seq": 18,
+      "day": 14,
+      "id": "hushwolf",
+      "wave": 1,
+      "tx": 0,
+      "ty": 4,
+      "px": 4,
+      "py": 4,
+      "onPlayerTile": false,
+      "source": "background",
+      "veteran": false
+    },
+    {
+      "seq": 19,
+      "day": 15,
+      "id": "moderator",
+      "wave": 2,
+      "tx": 4,
+      "ty": 3,
+      "px": 4,
+      "py": 3,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "veteran": false
+    },
+    {
+      "seq": 20,
+      "day": 16,
+      "id": "hushwolf",
+      "wave": 1,
+      "tx": 5,
+      "ty": 4,
+      "px": 4,
+      "py": 4,
+      "onPlayerTile": false,
+      "source": "other",
+      "veteran": false
+    },
+    {
+      "seq": 21,
+      "day": 16,
+      "id": "hushwolf",
+      "wave": 1,
+      "tx": 5,
+      "ty": 4,
+      "px": 4,
+      "py": 4,
+      "onPlayerTile": false,
+      "source": "other",
+      "veteran": false
+    },
+    {
+      "seq": 22,
+      "day": 16,
+      "id": "hushwolf",
+      "wave": 1,
+      "tx": 5,
+      "ty": 4,
+      "px": 4,
+      "py": 4,
+      "onPlayerTile": false,
+      "source": "other",
+      "veteran": false
+    },
+    {
+      "seq": 23,
+      "day": 20,
+      "id": "cliffhanger",
+      "wave": 1,
+      "tx": 0,
+      "ty": 0,
+      "px": 4,
+      "py": 3,
+      "onPlayerTile": false,
+      "source": "background",
+      "veteran": false
+    },
+    {
+      "seq": 24,
+      "day": 20,
+      "id": "anaconda_empress",
+      "wave": 1,
+      "tx": 4,
+      "ty": 3,
+      "px": 4,
+      "py": 3,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "veteran": false
+    },
+    {
+      "seq": 25,
+      "day": 24,
+      "id": "hushwolf",
+      "wave": 1,
+      "tx": 4,
+      "ty": 5,
+      "px": 4,
+      "py": 5,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "veteran": false
+    },
+    {
+      "seq": 26,
+      "day": 27,
+      "id": "hushwolf",
+      "wave": 1,
+      "tx": 4,
+      "ty": 3,
+      "px": 4,
+      "py": 3,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "veteran": false
+    },
+    {
+      "seq": 27,
+      "day": 29,
+      "id": "bright_idea",
+      "wave": 2,
+      "tx": 4,
+      "ty": 3,
+      "px": 4,
+      "py": 3,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "veteran": false
+    },
+    {
+      "seq": 28,
+      "day": 33,
+      "id": "giant_mosquito",
+      "wave": 2,
+      "tx": 7,
+      "ty": 6,
+      "px": 4,
+      "py": 3,
+      "onPlayerTile": false,
+      "source": "background",
+      "veteran": false
+    },
+    {
+      "seq": 29,
+      "day": 33,
+      "id": "callback",
+      "wave": 3,
+      "tx": 3,
+      "ty": 0,
+      "px": 4,
+      "py": 5,
+      "onPlayerTile": false,
+      "source": "background",
+      "veteran": false
+    },
+    {
+      "seq": 30,
+      "day": 33,
+      "id": "redactor",
+      "wave": 3,
+      "tx": 4,
+      "ty": 5,
+      "px": 4,
+      "py": 5,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "veteran": false
+    },
+    {
+      "seq": 31,
+      "day": 33,
+      "id": "focus_group",
+      "wave": 3,
+      "tx": 6,
+      "ty": 3,
+      "px": 3,
+      "py": 3,
+      "onPlayerTile": false,
+      "source": "background",
+      "veteran": false
+    },
+    {
+      "seq": 32,
+      "day": 34,
+      "id": "gavel",
+      "wave": 3,
+      "tx": 4,
+      "ty": 3,
+      "px": 4,
+      "py": 3,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "veteran": false
+    },
+    {
+      "seq": 33,
+      "day": 39,
+      "id": "focus_group",
+      "wave": 3,
+      "tx": 4,
+      "ty": 5,
+      "px": 4,
+      "py": 5,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "veteran": false
+    },
+    {
+      "seq": 34,
+      "day": 45,
+      "id": "focus_group",
+      "wave": 3,
+      "tx": 4,
+      "ty": 5,
+      "px": 4,
+      "py": 5,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "veteran": false
+    },
+    {
+      "seq": 35,
+      "day": 46,
+      "id": "suburb",
+      "wave": 4,
+      "tx": 0,
+      "ty": 4,
+      "px": 4,
+      "py": 3,
+      "onPlayerTile": false,
+      "source": "background",
+      "veteran": false
+    },
+    {
+      "seq": 36,
+      "day": 51,
+      "id": "redactor",
+      "wave": 3,
+      "tx": 2,
+      "ty": 4,
+      "px": 4,
+      "py": 3,
+      "onPlayerTile": false,
+      "source": "background",
+      "veteran": false
+    },
+    {
+      "seq": 37,
+      "day": 51,
+      "id": "understudy",
+      "wave": 2,
+      "tx": 0,
+      "ty": 1,
+      "px": 4,
+      "py": 4,
+      "onPlayerTile": false,
+      "source": "background",
+      "veteran": false
+    },
+    {
+      "seq": 38,
+      "day": 57,
+      "id": "reunion",
+      "wave": 4,
+      "tx": 4,
+      "ty": 3,
+      "px": 4,
+      "py": 3,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "veteran": false
+    },
+    {
+      "seq": 39,
+      "day": 62,
+      "id": "ad_break",
+      "wave": 3,
+      "tx": 4,
+      "ty": 3,
+      "px": 4,
+      "py": 3,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "veteran": false
+    },
+    {
+      "seq": 40,
+      "day": 68,
+      "id": "redactor",
+      "wave": 3,
+      "tx": 2,
+      "ty": 5,
+      "px": 4,
+      "py": 3,
+      "onPlayerTile": false,
+      "source": "background",
+      "veteran": false
+    },
+    {
+      "seq": 41,
+      "day": 68,
+      "id": "algorithm",
+      "wave": 4,
+      "tx": 4,
+      "ty": 3,
+      "px": 4,
+      "py": 3,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "veteran": false
+    },
+    {
+      "seq": 42,
+      "day": 69,
+      "id": "herald",
+      "wave": 4,
+      "tx": 7,
+      "ty": 3,
+      "px": 4,
+      "py": 4,
+      "onPlayerTile": false,
+      "source": "other",
+      "veteran": false
+    },
+    {
+      "seq": 43,
+      "day": 71,
+      "id": "chorus_line",
+      "wave": 3,
+      "tx": 4,
+      "ty": 3,
+      "px": 4,
+      "py": 3,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "veteran": false
+    },
+    {
+      "seq": 44,
+      "day": 79,
+      "id": "algorithm",
+      "wave": 4,
+      "tx": 6,
+      "ty": 6,
+      "px": 4,
+      "py": 3,
+      "onPlayerTile": false,
+      "source": "background",
+      "veteran": false
+    },
+    {
+      "seq": 45,
+      "day": 80,
+      "id": "eater",
+      "wave": 4,
+      "tx": 0,
+      "ty": 0,
+      "px": 4,
+      "py": 3,
+      "onPlayerTile": false,
+      "source": "background",
+      "veteran": false
+    },
+    {
+      "seq": 46,
+      "day": 82,
+      "id": "paparazzo",
+      "wave": 2,
+      "tx": 5,
+      "ty": 4,
+      "px": 5,
+      "py": 4,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "veteran": false
+    },
+    {
+      "seq": 47,
+      "day": 95,
+      "id": "eulogy",
+      "wave": 4,
+      "tx": 5,
+      "ty": 4,
+      "px": 5,
+      "py": 4,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "veteran": false
+    },
+    {
+      "seq": 48,
+      "day": 100,
+      "id": "focus_group",
+      "wave": 3,
+      "tx": 6,
+      "ty": 0,
+      "px": 6,
+      "py": 0,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "veteran": false
+    },
+    {
+      "seq": 49,
+      "day": 102,
+      "id": "reunion",
+      "wave": 4,
+      "tx": 2,
+      "ty": 0,
+      "px": 2,
+      "py": 0,
+      "onPlayerTile": true,
+      "source": "checkEncounter",
+      "veteran": false
+    }
+  ],
+  "casts": [
+    {
+      "day": 3,
+      "id": "ducks_in_a_row",
+      "wave": 1,
+      "source": "wanderer-cast",
+      "veteran": false
+    },
+    {
+      "day": 10,
+      "id": "voice_mimic_radio",
+      "wave": 2,
+      "source": "wanderer-cast",
+      "veteran": false
+    },
+    {
+      "day": 17,
+      "id": "union_rep",
+      "wave": 2,
+      "source": "wanderer-cast",
+      "veteran": false
+    },
+    {
+      "day": 24,
+      "id": "mirrormoth",
+      "wave": 1,
+      "source": "wanderer-cast",
+      "veteran": true
+    },
+    {
+      "day": 31,
+      "id": "callback",
+      "wave": 3,
+      "source": "wanderer-cast",
+      "veteran": false
+    },
+    {
+      "day": 38,
+      "id": "callback",
+      "wave": 3,
+      "source": "wanderer-cast",
+      "veteran": false
+    },
+    {
+      "day": 41,
+      "id": "spool",
+      "wave": 3,
+      "source": "other",
+      "veteran": false
+    },
+    {
+      "day": 45,
+      "id": "terms_of_service",
+      "wave": 3,
+      "source": "wanderer-cast",
+      "veteran": false
+    },
+    {
+      "day": 48,
+      "id": "eater",
+      "wave": 4,
+      "source": "other",
+      "veteran": false
+    },
+    {
+      "day": 52,
+      "id": "ducks_in_a_row",
+      "wave": 1,
+      "source": "wanderer-cast",
+      "veteran": true
+    },
+    {
+      "day": 59,
+      "id": "algorithm",
+      "wave": 4,
+      "source": "wanderer-cast",
+      "veteran": false
+    },
+    {
+      "day": 66,
+      "id": "eater",
+      "wave": 4,
+      "source": "wanderer-cast",
+      "veteran": false
+    },
+    {
+      "day": 73,
+      "id": "reunion",
+      "wave": 4,
+      "source": "wanderer-cast",
+      "veteran": false
+    },
+    {
+      "day": 80,
+      "id": "eulogy",
+      "wave": 4,
+      "source": "wanderer-cast",
+      "veteran": false
+    },
+    {
+      "day": 87,
+      "id": "callback",
+      "wave": 3,
+      "source": "wanderer-cast",
+      "veteran": true
+    },
+    {
+      "day": 94,
+      "id": "congregation",
+      "wave": 4,
+      "source": "wanderer-cast",
+      "veteran": false
+    },
+    {
+      "day": 101,
+      "id": "influencer",
+      "wave": 4,
+      "source": "wanderer-cast",
+      "veteran": false
+    }
+  ],
+  "fights": [
+    {
+      "day": 4,
+      "channel": "field",
+      "fighter": "nathan_lee",
+      "mid": "hushwolf",
+      "wave": 1,
+      "cls": "world",
+      "seq": 4,
+      "outcome": "vKill"
+    },
+    {
+      "day": 6,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "belltoad",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "vKill"
+    },
+    {
+      "day": 7,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "cliffhanger",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 8,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "nevermore",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 8,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "living_wire",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 9,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "gallowdeer",
+      "wave": 1,
+      "cls": "world",
+      "seq": 8,
+      "outcome": "vKill"
+    },
+    {
+      "day": 9,
+      "channel": "field",
+      "fighter": "gen_8n7lte7",
+      "mid": "hummice",
+      "wave": 1,
+      "cls": "world",
+      "seq": 2,
+      "outcome": "vKill"
+    },
+    {
+      "day": 9,
+      "channel": "field",
+      "fighter": "lena_ruiz",
+      "mid": "hummice",
+      "wave": 1,
+      "cls": "world",
+      "seq": 1,
+      "outcome": "vKill"
+    },
+    {
+      "day": 9,
+      "channel": "field",
+      "fighter": "tashi_sherpa",
+      "mid": "hushwolf",
+      "wave": 1,
+      "cls": "world",
+      "seq": 6,
+      "outcome": "vKill"
+    },
+    {
+      "day": 9,
+      "channel": "field",
+      "fighter": "lucas_brown",
+      "mid": "drumbelly_tanuki",
+      "wave": 1,
+      "cls": "world",
+      "seq": 5,
+      "outcome": "vKill"
+    },
+    {
+      "day": 11,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "voice_mimic_radio",
+      "wave": 2,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 11,
+      "channel": "field",
+      "fighter": "gen_8n7lte7",
+      "mid": "voice_mimic_radio",
+      "wave": 2,
+      "cls": "world",
+      "seq": 10,
+      "outcome": "vKill"
+    },
+    {
+      "day": 11,
+      "channel": "field",
+      "fighter": "gen_j2uf0vq",
+      "mid": "cliffhanger",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 12,
+      "channel": "field",
+      "fighter": "gen_j2uf0vq",
+      "mid": "lockpick_raccoon",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "mFlee"
+    },
+    {
+      "day": 12,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "belltoad",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 13,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "alien_tick",
+      "wave": 2,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 13,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "understudy",
+      "wave": 2,
+      "cls": "world",
+      "seq": 14,
+      "outcome": "vKill"
+    },
+    {
+      "day": 14,
+      "channel": "field",
+      "fighter": "gen_j2uf0vq",
+      "mid": "statickite",
+      "wave": 2,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 14,
+      "channel": "field",
+      "fighter": "nathan_lee",
+      "mid": "murkcap",
+      "wave": 1,
+      "cls": "world",
+      "seq": 15,
+      "outcome": "vKill"
+    },
+    {
+      "day": 16,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "hushwolf",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 16,
+      "channel": "field",
+      "fighter": "marcus_webb",
+      "mid": "gallowdeer",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "vFlee"
+    },
+    {
+      "day": 16,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "paparazzo",
+      "wave": 2,
+      "cls": "other",
+      "seq": null,
+      "outcome": "vKill"
+    },
+    {
+      "day": 17,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "alien_tick",
+      "wave": 2,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 17,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "cliffhanger",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "vKill"
+    },
+    {
+      "day": 17,
+      "channel": "field",
+      "fighter": "nathan_lee",
+      "mid": "gallowdeer",
+      "wave": 1,
+      "cls": "world",
+      "seq": 9,
+      "outcome": "vFlee"
+    },
+    {
+      "day": 18,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "ducks_in_a_row",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 18,
+      "channel": "field",
+      "fighter": "gen_j2uf0vq",
+      "mid": "hushwolf",
+      "wave": 1,
+      "cls": "world",
+      "seq": 20,
+      "outcome": "vKill"
+    },
+    {
+      "day": 19,
+      "channel": "field",
+      "fighter": "gen_j2uf0vq",
+      "mid": "hushwolf",
+      "wave": 1,
+      "cls": "world",
+      "seq": 18,
+      "outcome": "vKill"
+    },
+    {
+      "day": 19,
+      "channel": "field",
+      "fighter": "gen_8n7lte7",
+      "mid": "hushwolf",
+      "wave": 1,
+      "cls": "world",
+      "seq": 21,
+      "outcome": "vKill"
+    },
+    {
+      "day": 19,
+      "channel": "field",
+      "fighter": "gen_yamyqgj",
+      "mid": "hushwolf",
+      "wave": 1,
+      "cls": "world",
+      "seq": 22,
+      "outcome": "vKill"
+    },
+    {
+      "day": 19,
+      "channel": "field",
+      "fighter": "daniyar_askarov",
+      "mid": "gallowdeer",
+      "wave": 1,
+      "cls": "world",
+      "seq": 9,
+      "outcome": "vKill"
+    },
+    {
+      "day": 21,
+      "channel": "field",
+      "fighter": "tashi_sherpa",
+      "mid": "anaconda_empress",
+      "wave": 1,
+      "cls": "world",
+      "seq": 24,
+      "outcome": "vKill"
+    },
+    {
+      "day": 22,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "hummice",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 23,
+      "channel": "field",
+      "fighter": "gen_j2uf0vq",
+      "mid": "nightcourt",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 23,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "dustboar",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "vKill"
+    },
+    {
+      "day": 23,
+      "channel": "field",
+      "fighter": "gen_j2uf0vq",
+      "mid": "mirror_stag",
+      "wave": 2,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 23,
+      "channel": "field",
+      "fighter": "gen_j2uf0vq",
+      "mid": "paparazzo",
+      "wave": 2,
+      "cls": "other",
+      "seq": null,
+      "outcome": "vKill"
+    },
+    {
+      "day": 24,
+      "channel": "field",
+      "fighter": "gen_j2uf0vq",
+      "mid": "mirror_stag",
+      "wave": 2,
+      "cls": "other",
+      "seq": null,
+      "outcome": "vKill"
+    },
+    {
+      "day": 24,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "drumbelly_tanuki",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 24,
+      "channel": "field",
+      "fighter": "gen_j2uf0vq",
+      "mid": "speedbump_turtle",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 24,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "cliffhanger",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 24,
+      "channel": "field",
+      "fighter": "gen_j2uf0vq",
+      "mid": "living_wire",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 24,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "understudy",
+      "wave": 2,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 25,
+      "channel": "field",
+      "fighter": "gen_j2uf0vq",
+      "mid": "dustboar",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "vKill"
+    },
+    {
+      "day": 25,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "hushwolf",
+      "wave": 1,
+      "cls": "world",
+      "seq": 25,
+      "outcome": "vKill"
+    },
+    {
+      "day": 30,
+      "channel": "field",
+      "fighter": "gen_j2uf0vq",
+      "mid": "bright_idea",
+      "wave": 2,
+      "cls": "world",
+      "seq": 27,
+      "outcome": "vKill"
+    },
+    {
+      "day": 30,
+      "channel": "field",
+      "fighter": "gen_8n7lte7",
+      "mid": "lockpick_raccoon",
+      "wave": 1,
+      "cls": "world",
+      "seq": 12,
+      "outcome": "mFlee"
+    },
+    {
+      "day": 32,
+      "channel": "field",
+      "fighter": "gen_8n7lte7",
+      "mid": "statickite",
+      "wave": 2,
+      "cls": "world",
+      "seq": 11,
+      "outcome": "vKill"
+    },
+    {
+      "day": 32,
+      "channel": "field",
+      "fighter": "gen_yamyqgj",
+      "mid": "hushwolf",
+      "wave": 1,
+      "cls": "world",
+      "seq": 26,
+      "outcome": "vKill"
+    },
+    {
+      "day": 32,
+      "channel": "field",
+      "fighter": "daniyar_askarov",
+      "mid": "lockpick_raccoon",
+      "wave": 1,
+      "cls": "world",
+      "seq": 12,
+      "outcome": "vKill"
+    },
+    {
+      "day": 32,
+      "channel": "field",
+      "fighter": "lena_ruiz",
+      "mid": "nightlight_catfish",
+      "wave": 1,
+      "cls": "world",
+      "seq": 7,
+      "outcome": "vKill"
+    },
+    {
+      "day": 32,
+      "channel": "field",
+      "fighter": "tashi_sherpa",
+      "mid": "drumbelly_tanuki",
+      "wave": 1,
+      "cls": "world",
+      "seq": 16,
+      "outcome": "vKill"
+    },
+    {
+      "day": 33,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "spool",
+      "wave": 3,
+      "cls": "other",
+      "seq": null,
+      "outcome": "vFlee"
+    },
+    {
+      "day": 33,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "anaconda_empress",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 34,
+      "channel": "field",
+      "fighter": "tashi_sherpa",
+      "mid": "redactor",
+      "wave": 3,
+      "cls": "world",
+      "seq": 30,
+      "outcome": "vFlee"
+    },
+    {
+      "day": 37,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "sweeps_week",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 39,
+      "channel": "field",
+      "fighter": "gen_yamyqgj",
+      "mid": "gavel",
+      "wave": 3,
+      "cls": "world",
+      "seq": 32,
+      "outcome": "vDie"
+    },
+    {
+      "day": 39,
+      "channel": "field",
+      "fighter": "tashi_sherpa",
+      "mid": "callback",
+      "wave": 3,
+      "cls": "world",
+      "seq": 29,
+      "outcome": "vFlee"
+    },
+    {
+      "day": 39,
+      "channel": "field",
+      "fighter": "gen_8n7lte7",
+      "mid": "focus_group",
+      "wave": 3,
+      "cls": "world",
+      "seq": 33,
+      "outcome": "vFlee"
+    },
+    {
+      "day": 40,
+      "channel": "field",
+      "fighter": "daniyar_askarov",
+      "mid": "focus_group",
+      "wave": 3,
+      "cls": "world",
+      "seq": 33,
+      "outcome": "vKill"
+    },
+    {
+      "day": 40,
+      "channel": "field",
+      "fighter": "gen_j2uf0vq",
+      "mid": "gallowdeer",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "vKill"
+    },
+    {
+      "day": 41,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "spool",
+      "wave": 3,
+      "cls": "feast",
+      "seq": null,
+      "outcome": null
+    },
+    {
+      "day": 45,
+      "channel": "field",
+      "fighter": "gen_j2uf0vq",
+      "mid": "hushwolf",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "vKill"
+    },
+    {
+      "day": 45,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "voice_mimic_radio",
+      "wave": 2,
+      "cls": "other",
+      "seq": null,
+      "outcome": "vKill"
+    },
+    {
+      "day": 45,
+      "channel": "field",
+      "fighter": "gen_ch6w6cn",
+      "mid": "focus_group",
+      "wave": 3,
+      "cls": "world",
+      "seq": 34,
+      "outcome": "vKill"
+    },
+    {
+      "day": 45,
+      "channel": "field",
+      "fighter": "gen_8n7lte7",
+      "mid": "understudy",
+      "wave": 2,
+      "cls": "world",
+      "seq": 17,
+      "outcome": "vKill"
+    },
+    {
+      "day": 45,
+      "channel": "field",
+      "fighter": "lena_ruiz",
+      "mid": "callback",
+      "wave": 3,
+      "cls": "world",
+      "seq": 29,
+      "outcome": "vKill"
+    },
+    {
+      "day": 45,
+      "channel": "field",
+      "fighter": "marcus_webb",
+      "mid": "dustboar",
+      "wave": 1,
+      "cls": "world",
+      "seq": 3,
+      "outcome": "vKill"
+    },
+    {
+      "day": 45,
+      "channel": "field",
+      "fighter": "nathan_lee",
+      "mid": "gavel",
+      "wave": 3,
+      "cls": "world",
+      "seq": 32,
+      "outcome": "vFlee"
+    },
+    {
+      "day": 46,
+      "channel": "field",
+      "fighter": "gen_j2uf0vq",
+      "mid": "callback",
+      "wave": 3,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 46,
+      "channel": "field",
+      "fighter": "gen_j2uf0vq",
+      "mid": "glasswing",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 46,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "nightlight_catfish",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 48,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "eater",
+      "wave": 4,
+      "cls": "feast",
+      "seq": 32,
+      "outcome": null
+    },
+    {
+      "day": 49,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "gavel",
+      "wave": 3,
+      "cls": "world",
+      "seq": null,
+      "outcome": null
+    },
+    {
+      "day": 51,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "paparazzo",
+      "wave": 2,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 51,
+      "channel": "field",
+      "fighter": "tashi_sherpa",
+      "mid": "redactor",
+      "wave": 3,
+      "cls": "world",
+      "seq": 36,
+      "outcome": "vFlee"
+    },
+    {
+      "day": 51,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "callback",
+      "wave": 3,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 51,
+      "channel": "field",
+      "fighter": "marcus_webb",
+      "mid": "heckler",
+      "wave": 2,
+      "cls": "other",
+      "seq": null,
+      "outcome": "vKill"
+    },
+    {
+      "day": 52,
+      "channel": "field",
+      "fighter": "marcus_webb",
+      "mid": "nightcourt",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 53,
+      "channel": "field",
+      "fighter": "marcus_webb",
+      "mid": "nightcourt",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 53,
+      "channel": "field",
+      "fighter": "marcus_webb",
+      "mid": "bulldozer",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 53,
+      "channel": "field",
+      "fighter": "daniyar_askarov",
+      "mid": "redactor",
+      "wave": 3,
+      "cls": "world",
+      "seq": 36,
+      "outcome": "mFlee"
+    },
+    {
+      "day": 53,
+      "channel": "field",
+      "fighter": "lucas_brown",
+      "mid": "redactor",
+      "wave": 3,
+      "cls": "world",
+      "seq": 36,
+      "outcome": "mFlee"
+    },
+    {
+      "day": 58,
+      "channel": "field",
+      "fighter": "marcus_webb",
+      "mid": "hushwolf",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "vKill"
+    },
+    {
+      "day": 58,
+      "channel": "field",
+      "fighter": "marcus_webb",
+      "mid": "redactor",
+      "wave": 3,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 59,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "lockpick_raccoon",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "mFlee"
+    },
+    {
+      "day": 59,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "landlord",
+      "wave": 2,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 60,
+      "channel": "field",
+      "fighter": "marcus_webb",
+      "mid": "nevermore",
+      "wave": 1,
+      "cls": "other",
+      "seq": null,
+      "outcome": "vKill"
+    },
+    {
+      "day": 60,
+      "channel": "field",
+      "fighter": "marcus_webb",
+      "mid": "understudy",
+      "wave": 2,
+      "cls": "other",
+      "seq": null,
+      "outcome": "vKill"
+    },
+    {
+      "day": 60,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "chorus_line",
+      "wave": 3,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 61,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "memory_projector",
+      "wave": 2,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 62,
+      "channel": "field",
+      "fighter": "gen_36jy72w",
+      "mid": "buffering",
+      "wave": 3,
+      "cls": "other",
+      "seq": null,
+      "outcome": "evade"
+    },
+    {
+      "day": 67,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "hushwolf",
+      "wave": 1,
+      "cls": "world",
+      "seq": 23,
+      "outcome": null
+    },
+    {
+      "day": 67,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "cliffhanger",
+      "wave": 1,
+      "cls": "world",
+      "seq": 36,
+      "outcome": null
+    },
+    {
+      "day": 68,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "redactor",
+      "wave": 3,
+      "cls": "world",
+      "seq": 38,
+      "outcome": null
+    },
+    {
+      "day": 68,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "reunion",
+      "wave": 4,
+      "cls": "world",
+      "seq": 39,
+      "outcome": null
+    },
+    {
+      "day": 69,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "ad_break",
+      "wave": 3,
+      "cls": "world",
+      "seq": null,
+      "outcome": null
+    },
+    {
+      "day": 70,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "algorithm",
+      "wave": 4,
+      "cls": "world",
+      "seq": null,
+      "outcome": null
+    },
+    {
+      "day": 73,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "herald",
+      "wave": 4,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 79,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "giant_mosquito",
+      "wave": 2,
+      "cls": "world",
+      "seq": 31,
+      "outcome": null
+    },
+    {
+      "day": 79,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "focus_group",
+      "wave": 3,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 80,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "herald",
+      "wave": 4,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 80,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "herald",
+      "wave": 4,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 80,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "herald",
+      "wave": 4,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 80,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "herald",
+      "wave": 4,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 80,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "herald",
+      "wave": 4,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 80,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "herald",
+      "wave": 4,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 80,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "herald",
+      "wave": 4,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 81,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "herald",
+      "wave": 4,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 81,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "herald",
+      "wave": 4,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 81,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "herald",
+      "wave": 4,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 81,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "herald",
+      "wave": 4,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 81,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "herald",
+      "wave": 4,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 81,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "herald",
+      "wave": 4,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 81,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "herald",
+      "wave": 4,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 82,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "herald",
+      "wave": 4,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 82,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "herald",
+      "wave": 4,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 82,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "herald",
+      "wave": 4,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 82,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "herald",
+      "wave": 4,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 82,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "herald",
+      "wave": 4,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 82,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "herald",
+      "wave": 4,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 82,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "herald",
+      "wave": 4,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 84,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "herald",
+      "wave": 4,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 84,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "herald",
+      "wave": 4,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 84,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "herald",
+      "wave": 4,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 84,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "herald",
+      "wave": 4,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 84,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "herald",
+      "wave": 4,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 84,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "herald",
+      "wave": 4,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 84,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "herald",
+      "wave": 4,
+      "cls": "world",
+      "seq": 42,
+      "outcome": null
+    },
+    {
+      "day": 95,
+      "channel": "field",
+      "fighter": "app_mgpspj6p504",
+      "mid": "eulogy",
+      "wave": 4,
+      "cls": "world",
+      "seq": 47,
+      "outcome": "vFlee"
+    },
+    {
+      "day": 96,
+      "channel": "field",
+      "fighter": "app_mgpsphlu552",
+      "mid": "redactor",
+      "wave": 3,
+      "cls": "world",
+      "seq": 30,
+      "outcome": "mFlee"
+    },
+    {
+      "day": 97,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "suburb",
+      "wave": 4,
+      "cls": "world",
+      "seq": 47,
+      "outcome": null
+    },
+    {
+      "day": 98,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "eulogy",
+      "wave": 4,
+      "cls": "world",
+      "seq": null,
+      "outcome": null
+    },
+    {
+      "day": 98,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "eulogy",
+      "wave": 4,
+      "cls": "world",
+      "seq": null,
+      "outcome": null
+    },
+    {
+      "day": 99,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "eulogy",
+      "wave": 4,
+      "cls": "world",
+      "seq": null,
+      "outcome": null
+    },
+    {
+      "day": 99,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "eulogy",
+      "wave": 4,
+      "cls": "world",
+      "seq": null,
+      "outcome": null
+    },
+    {
+      "day": 99,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "eulogy",
+      "wave": 4,
+      "cls": "world",
+      "seq": null,
+      "outcome": null
+    },
+    {
+      "day": 99,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "eulogy",
+      "wave": 4,
+      "cls": "world",
+      "seq": null,
+      "outcome": null
+    },
+    {
+      "day": 99,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "eulogy",
+      "wave": 4,
+      "cls": "trap",
+      "seq": null,
+      "outcome": null
+    },
+    {
+      "day": 102,
+      "channel": "player-tb",
+      "fighter": null,
+      "mid": "reunion",
+      "wave": 4,
+      "cls": "world",
+      "seq": null,
+      "outcome": null
+    }
+  ],
+  "daily": [
+    {
+      "day": 2,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 0,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 0,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "tricks",
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 4,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 0,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 0,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "tricks",
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 5,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 0,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 1,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "tricks",
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 6,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 0,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 1,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "tricks",
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 7,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 0,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 2,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "tricks",
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 8,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 0,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 2,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "tricks",
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 9,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 0,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 2,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "tricks",
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 10,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 0,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 3,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 11,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 1,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 4,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 12,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 1,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 5,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 13,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 2,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 6,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 14,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 2,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 7,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 15,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 2,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 8,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 16,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 2,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 8,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 17,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 3,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 9,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 18,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 3,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 10,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 19,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 3,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 10,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 20,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 3,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 10,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 21,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 3,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 11,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 22,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 3,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 11,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 23,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 3,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 12,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 24,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 5,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 13,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 25,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 5,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 13,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 26,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 5,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 13,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 27,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 5,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 13,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 28,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 5,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 13,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 29,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 5,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 13,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 30,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 6,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 15,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 31,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 6,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 15,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 32,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 6,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 15,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 33,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 7,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 16,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 34,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 7,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 17,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 35,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 7,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 17,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 36,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 7,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 17,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 37,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 7,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 17,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 38,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 12,
+      "living": 12,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 7,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 12,
+        "tricks": 17,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 39,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 11,
+      "living": 11,
+      "raw": 0,
+      "gated": 0,
+      "w2pts": 7,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 11,
+        "tricks": 17,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 40,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 11,
+      "living": 11,
+      "raw": 25,
+      "gated": 25,
+      "w2pts": 7,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 11,
+        "tricks": 17,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 41,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 11,
+      "living": 11,
+      "raw": 70,
+      "gated": 70,
+      "w2pts": 7,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 11,
+        "tricks": 17,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 42,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 11,
+      "living": 11,
+      "raw": 70,
+      "gated": 70,
+      "w2pts": 7,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 11,
+        "tricks": 17,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 43,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 11,
+      "living": 11,
+      "raw": 70,
+      "gated": 70,
+      "w2pts": 7,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 8,
+        "armed": 11,
+        "tricks": 17,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 44,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 11,
+      "living": 11,
+      "raw": 70,
+      "gated": 70,
+      "w2pts": 7,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "village",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 8,
+        "armed": 11,
+        "tricks": 17,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 45,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 11,
+      "living": 11,
+      "raw": 70,
+      "gated": 70,
+      "w2pts": 8,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 8,
+        "armed": 11,
+        "tricks": 17,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 46,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 11,
+      "living": 11,
+      "raw": 120,
+      "gated": 120,
+      "w2pts": 9,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 8,
+        "armed": 11,
+        "tricks": 17,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 47,
+      "scholarId": "gen_oq8l0ox",
+      "rosterSize": 11,
+      "living": 11,
+      "raw": 120,
+      "gated": 120,
+      "w2pts": 9,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 8,
+        "armed": 11,
+        "tricks": 17,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 0
+    },
+    {
+      "day": 48,
+      "scholarId": "gen_j2uf0vq",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 140,
+      "gated": 140,
+      "w2pts": 9,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 17,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 1
+    },
+    {
+      "day": 49,
+      "scholarId": "gen_j2uf0vq",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 140,
+      "gated": 140,
+      "w2pts": 9,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 17,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 1
+    },
+    {
+      "day": 50,
+      "scholarId": "gen_j2uf0vq",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 140,
+      "gated": 140,
+      "w2pts": 9,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 17,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 1
+    },
+    {
+      "day": 51,
+      "scholarId": "gen_j2uf0vq",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 140,
+      "gated": 140,
+      "w2pts": 9,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 17,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 1
+    },
+    {
+      "day": 52,
+      "scholarId": "gen_j2uf0vq",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 140,
+      "gated": 140,
+      "w2pts": 10,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 18,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 1
+    },
+    {
+      "day": 53,
+      "scholarId": "gen_j2uf0vq",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 140,
+      "gated": 140,
+      "w2pts": 10,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 18,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 1
+    },
+    {
+      "day": 54,
+      "scholarId": "gen_j2uf0vq",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 140,
+      "gated": 140,
+      "w2pts": 10,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 18,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 1
+    },
+    {
+      "day": 55,
+      "scholarId": "gen_j2uf0vq",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 140,
+      "gated": 140,
+      "w2pts": 10,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 18,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 1
+    },
+    {
+      "day": 56,
+      "scholarId": "gen_j2uf0vq",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 140,
+      "gated": 140,
+      "w2pts": 10,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 18,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 1
+    },
+    {
+      "day": 57,
+      "scholarId": "gen_j2uf0vq",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 140,
+      "gated": 140,
+      "w2pts": 10,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 18,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 1
+    },
+    {
+      "day": 58,
+      "scholarId": "gen_j2uf0vq",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 140,
+      "gated": 140,
+      "w2pts": 10,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 18,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 1
+    },
+    {
+      "day": 59,
+      "scholarId": "gen_j2uf0vq",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 140,
+      "gated": 140,
+      "w2pts": 10,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 18,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 1
+    },
+    {
+      "day": 60,
+      "scholarId": "gen_j2uf0vq",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 140,
+      "gated": 140,
+      "w2pts": 10,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 19,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 1
+    },
+    {
+      "day": 61,
+      "scholarId": "gen_j2uf0vq",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 140,
+      "gated": 140,
+      "w2pts": 10,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 19,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 1
+    },
+    {
+      "day": 62,
+      "scholarId": "gen_j2uf0vq",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 140,
+      "gated": 140,
+      "w2pts": 10,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 19,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 1
+    },
+    {
+      "day": 63,
+      "scholarId": "gen_j2uf0vq",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 140,
+      "gated": 140,
+      "w2pts": 10,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 19,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 1
+    },
+    {
+      "day": 64,
+      "scholarId": "gen_j2uf0vq",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 140,
+      "gated": 140,
+      "w2pts": 10,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 19,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 1
+    },
+    {
+      "day": 65,
+      "scholarId": "gen_j2uf0vq",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 140,
+      "gated": 140,
+      "w2pts": 10,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 19,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 1
+    },
+    {
+      "day": 66,
+      "scholarId": "gen_j2uf0vq",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 140,
+      "gated": 140,
+      "w2pts": 10,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 19,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 1
+    },
+    {
+      "day": 67,
+      "scholarId": "gen_j2uf0vq",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 140,
+      "gated": 140,
+      "w2pts": 10,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 10,
+        "tricks": 19,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 1
+    },
+    {
+      "day": 68,
+      "scholarId": "gen_36jy72w",
+      "rosterSize": 9,
+      "living": 9,
+      "raw": 140,
+      "gated": 140,
+      "w2pts": 10,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 9,
+        "tricks": 19,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 2
+    },
+    {
+      "day": 69,
+      "scholarId": "gen_36jy72w",
+      "rosterSize": 9,
+      "living": 9,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 10,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 9,
+        "tricks": 19,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 2
+    },
+    {
+      "day": 70,
+      "scholarId": "gen_36jy72w",
+      "rosterSize": 9,
+      "living": 9,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 10,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 9,
+        "tricks": 19,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3
+    },
+    {
+      "day": 71,
+      "scholarId": "marcus_webb",
+      "rosterSize": 8,
+      "living": 8,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 10,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 8,
+        "tricks": 19,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3
+    },
+    {
+      "day": 72,
+      "scholarId": "marcus_webb",
+      "rosterSize": 8,
+      "living": 8,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 10,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 8,
+        "tricks": 19,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3
+    },
+    {
+      "day": 73,
+      "scholarId": "marcus_webb",
+      "rosterSize": 8,
+      "living": 8,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 10,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 8,
+        "tricks": 19,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3
+    },
+    {
+      "day": 74,
+      "scholarId": "marcus_webb",
+      "rosterSize": 8,
+      "living": 8,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 10,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 5,
+        "armed": 8,
+        "tricks": 19,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3
+    },
+    {
+      "day": 75,
+      "scholarId": "marcus_webb",
+      "rosterSize": 8,
+      "living": 8,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 10,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 8,
+        "tricks": 19,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3
+    },
+    {
+      "day": 76,
+      "scholarId": "marcus_webb",
+      "rosterSize": 8,
+      "living": 8,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 10,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 8,
+        "tricks": 19,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3
+    },
+    {
+      "day": 77,
+      "scholarId": "marcus_webb",
+      "rosterSize": 8,
+      "living": 8,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 10,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 8,
+        "tricks": 19,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3
+    },
+    {
+      "day": 78,
+      "scholarId": "marcus_webb",
+      "rosterSize": 8,
+      "living": 8,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 10,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 8,
+        "tricks": 19,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3
+    },
+    {
+      "day": 79,
+      "scholarId": "marcus_webb",
+      "rosterSize": 8,
+      "living": 8,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 12,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 8,
+        "tricks": 20,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3
+    },
+    {
+      "day": 80,
+      "scholarId": "marcus_webb",
+      "rosterSize": 8,
+      "living": 8,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 12,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 8,
+        "tricks": 20,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3
+    },
+    {
+      "day": 81,
+      "scholarId": "marcus_webb",
+      "rosterSize": 8,
+      "living": 8,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 12,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 8,
+        "tricks": 20,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3
+    },
+    {
+      "day": 82,
+      "scholarId": "marcus_webb",
+      "rosterSize": 8,
+      "living": 8,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 12,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 8,
+        "tricks": 20,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3
+    },
+    {
+      "day": 83,
+      "scholarId": "marcus_webb",
+      "rosterSize": 8,
+      "living": 8,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 12,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 8,
+        "tricks": 20,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3
+    },
+    {
+      "day": 84,
+      "scholarId": "marcus_webb",
+      "rosterSize": 8,
+      "living": 8,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 12,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 8,
+        "tricks": 20,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3
+    },
+    {
+      "day": 85,
+      "scholarId": "marcus_webb",
+      "rosterSize": 8,
+      "living": 8,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 12,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 8,
+        "tricks": 20,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3
+    },
+    {
+      "day": 86,
+      "scholarId": "marcus_webb",
+      "rosterSize": 8,
+      "living": 8,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 12,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 8,
+        "tricks": 20,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3
+    },
+    {
+      "day": 87,
+      "scholarId": "gen_8n7lte7",
+      "rosterSize": 7,
+      "living": 7,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 12,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 7,
+        "tricks": 20,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3
+    },
+    {
+      "day": 88,
+      "scholarId": "gen_8n7lte7",
+      "rosterSize": 7,
+      "living": 7,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 12,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 7,
+        "tricks": 20,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3
+    },
+    {
+      "day": 89,
+      "scholarId": "gen_8n7lte7",
+      "rosterSize": 7,
+      "living": 7,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 12,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 7,
+        "tricks": 20,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3
+    },
+    {
+      "day": 90,
+      "scholarId": "gen_8n7lte7",
+      "rosterSize": 7,
+      "living": 7,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 12,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 7,
+        "tricks": 20,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3
+    },
+    {
+      "day": 91,
+      "scholarId": "gen_8n7lte7",
+      "rosterSize": 7,
+      "living": 7,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 12,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 7,
+        "tricks": 20,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3
+    },
+    {
+      "day": 92,
+      "scholarId": "gen_8n7lte7",
+      "rosterSize": 7,
+      "living": 7,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 12,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 7,
+        "armed": 7,
+        "tricks": 20,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3
+    },
+    {
+      "day": 93,
+      "scholarId": "gen_8n7lte7",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 12,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 9,
+        "armed": 10,
+        "tricks": 20,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3
+    },
+    {
+      "day": 94,
+      "scholarId": "gen_8n7lte7",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 12,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 9,
+        "armed": 10,
+        "tricks": 20,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 3
+    },
+    {
+      "day": 95,
+      "scholarId": "gen_8n7lte7",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 12,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 9,
+        "armed": 10,
+        "tricks": 20,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 4
+    },
+    {
+      "day": 96,
+      "scholarId": "gen_8n7lte7",
+      "rosterSize": 10,
+      "living": 10,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 12,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 9,
+        "armed": 10,
+        "tricks": 20,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 4
+    },
+    {
+      "day": 97,
+      "scholarId": "gen_ch6w6cn",
+      "rosterSize": 9,
+      "living": 9,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 12,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 8,
+        "armed": 9,
+        "tricks": 20,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 5
+    },
+    {
+      "day": 98,
+      "scholarId": "lena_ruiz",
+      "rosterSize": 7,
+      "living": 7,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 12,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 6,
+        "armed": 7,
+        "tricks": 20,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 5
+    },
+    {
+      "day": 99,
+      "scholarId": "app_mgpspj6p504",
+      "rosterSize": 3,
+      "living": 3,
+      "raw": 165,
+      "gated": 165,
+      "w2pts": 12,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 2,
+        "armed": 3,
+        "tricks": 20,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "armor",
+          "weapons",
+          "veterans"
+        ]
+      },
+      "w4kills": 0,
+      "w4killers": 0,
+      "w4facedTypes": 5
+    },
+    {
+      "day": 100,
+      "scholarId": "app_mgpspj6p504",
+      "rosterSize": 3,
+      "living": 3,
+      "raw": 190,
+      "gated": 190,
+      "w2pts": 12,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 2,
+        "armed": 3,
+        "tricks": 20,
+        "veterans": 1,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "armor",
+          "weapons",
+          "veterans"
+        ]
+      },
+      "w4kills": 1,
+      "w4killers": 1,
+      "w4facedTypes": 5
+    },
+    {
+      "day": 101,
+      "scholarId": "app_mgpsphlu552",
+      "rosterSize": 3,
+      "living": 3,
+      "raw": 190,
+      "gated": 190,
+      "w2pts": 12,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 2,
+        "armed": 3,
+        "tricks": 20,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "armor",
+          "weapons",
+          "veterans"
+        ]
+      },
+      "w4kills": 1,
+      "w4killers": 1,
+      "w4facedTypes": 5
+    },
+    {
+      "day": 102,
+      "scholarId": "app_mgpsphlu552",
+      "rosterSize": 3,
+      "living": 3,
+      "raw": 190,
+      "gated": 190,
+      "w2pts": 12,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 2,
+        "armed": 3,
+        "tricks": 20,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "armor",
+          "weapons",
+          "veterans"
+        ]
+      },
+      "w4kills": 1,
+      "w4killers": 1,
+      "w4facedTypes": 5
+    },
+    {
+      "day": 103,
+      "scholarId": "david_kim",
+      "rosterSize": 2,
+      "living": 2,
+      "raw": 190,
+      "gated": 190,
+      "w2pts": 12,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 2,
+        "armed": 2,
+        "tricks": 20,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "armor",
+          "weapons",
+          "veterans"
+        ]
+      },
+      "w4kills": 1,
+      "w4killers": 1,
+      "w4facedTypes": 5
+    },
+    {
+      "day": 104,
+      "scholarId": "david_kim",
+      "rosterSize": 2,
+      "living": 2,
+      "raw": 190,
+      "gated": 190,
+      "w2pts": 12,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 2,
+        "armed": 2,
+        "tricks": 20,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "armor",
+          "weapons",
+          "veterans"
+        ]
+      },
+      "w4kills": 1,
+      "w4killers": 1,
+      "w4facedTypes": 5
+    },
+    {
+      "day": 104,
+      "scholarId": "david_kim",
+      "rosterSize": 3,
+      "living": 3,
+      "raw": 190,
+      "gated": 190,
+      "w2pts": 12,
+      "bar2": 4,
+      "dayFloor": 25,
+      "t4": 100,
+      "scaleRank": "regional",
+      "readiness5": {
+        "wave": 5,
+        "ready": false,
+        "armored": 2,
+        "armed": 3,
+        "tricks": 20,
+        "veterans": 0,
+        "demand": {
+          "armored": 4,
+          "armorP": 15,
+          "armed": 6,
+          "tricks": 3,
+          "veterans": 2
+        },
+        "short": [
+          "armor",
+          "weapons",
+          "veterans"
+        ]
+      },
+      "w4kills": 1,
+      "w4killers": 1,
+      "w4facedTypes": 5
+    }
+  ],
+  "fightSays": [
+    {
+      "day": 4,
+      "line": "⚔️ Nathan killed the dog-shaped silence at the treeline with their party — 4 rounds, 45 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 6,
+      "line": "📺 Dieter killed a toad like a war drum, throat swelling out past the ridge — alone — and walked home. 3 rounds, 26 taken. (The village watches the broadcast. Nobody blinks.)"
+    },
+    {
+      "day": 6,
+      "line": "📣 Dieter killed a toad like a war drum, throat swelling out past the ridge — alone — and walked home. 3 rounds, 26 taken."
+    },
+    {
+      "day": 10,
+      "line": "⚔️ Dieter killed the Highbeam Deer with their party — 6 rounds, 43 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 10,
+      "line": "⚔️ Tiaki killed the Hummice with their party — 1 round, 6 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 10,
+      "line": "⚔️ Lena killed the Hummice with their party — 0 rounds, 0 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 10,
+      "line": "⚔️ Tashi killed the Big Big with their party — 3 rounds, 45 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 10,
+      "line": "⚔️ Lucas killed the Drum-Belly with their party — 4 rounds, 5 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 10,
+      "line": "◈ FLASHBACK — Trail compass\nLost above the fog line, visibility down to your boots. You didn't panic — just held the compass flat, found north, and walked out like it was nothing. It was not nothing."
+    },
+    {
+      "day": 11,
+      "line": "⚔️ Tiaki killed the Static with their party — 5 rounds, 28 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 13,
+      "line": "⚔️ Dieter killed the Understudy alone — 7 rounds, 38 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 14,
+      "line": "⚔️ Nathan killed the Murkcap with their party — 5 rounds, 23 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 16,
+      "line": "📺 Dieter killed The Paparazzo out past the ridge — alone — and walked home. 5 rounds, 28 taken. (The village watches the broadcast. Nobody blinks.)"
+    },
+    {
+      "day": 16,
+      "line": "📣 Dieter killed The Paparazzo out past the ridge — alone — and walked home. 5 rounds, 28 taken."
+    },
+    {
+      "day": 17,
+      "line": "📺 Dieter killed Cliffhanger out past the ridge — alone — and walked home. 6 rounds, 20 taken. (The village watches the broadcast. Nobody blinks.)"
+    },
+    {
+      "day": 17,
+      "line": "📣 Dieter killed Cliffhanger out past the ridge — alone — and walked home. 6 rounds, 20 taken."
+    },
+    {
+      "day": 19,
+      "line": "⚔️ Mai killed the Big Big with their party — 1 round, 6 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 20,
+      "line": "⚔️ Mai killed the Big Big with their party — 2 rounds, 16 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 20,
+      "line": "⚔️ Tiaki killed the Big Big with their party — 5 rounds, 55 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 20,
+      "line": "⚔️ Whetū killed the Big Big with their party — 4 rounds, 51 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 20,
+      "line": "⚔️ Daniyar killed the Headlight Harry with their party — 3 rounds, 31 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 21,
+      "line": "⚔️ Tashi killed the Anaconda Empress with their party — 2 rounds, 6 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 23,
+      "line": "📺 Dieter killed Dustboar out past the ridge — alone — and walked home. 4 rounds, 13 taken. (The village watches the broadcast. Nobody blinks.)"
+    },
+    {
+      "day": 23,
+      "line": "📣 Dieter killed Dustboar out past the ridge — alone — and walked home. 4 rounds, 13 taken."
+    },
+    {
+      "day": 23,
+      "line": "📺 Mai killed Big-Eyes out past the ridge — alone — and walked home. 4 rounds, 17 taken. (The village watches the broadcast. Nobody blinks.)"
+    },
+    {
+      "day": 24,
+      "line": "📺 Mai killed Grief Counselor out past the ridge — with Dieter charging in when it turned — and walked home. 6 rounds, 29 taken. (The village watches the broadcast. Nobody blinks.)"
+    },
+    {
+      "day": 24,
+      "line": "📣 Mai killed Grief Counselor out past the ridge — with Dieter charging in when it turned — and walked home. 6 rounds, 29 taken."
+    },
+    {
+      "day": 25,
+      "line": "📺 Mai killed Dustboar out past the ridge — alone — and walked home. 6 rounds, 19 taken. (The village watches the broadcast. Nobody blinks.)"
+    },
+    {
+      "day": 25,
+      "line": "📣 Mai killed Dustboar out past the ridge — alone — and walked home. 6 rounds, 19 taken."
+    },
+    {
+      "day": 26,
+      "line": "⚔️ Dieter killed the Big Big with their party — 4 rounds, 37 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 28,
+      "line": "🌧️ The storm rolls over Haven like a held breath let go — rain hammering the tarps, the wind testing every knot Nathan tied. Inside, it's almost cozy. Almost."
+    },
+    {
+      "day": 30,
+      "line": "⚔️ Mai killed the Inspiration with their party — 1 round, 0 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 33,
+      "line": "⚔️ Tiaki killed the Static Kite with their party — 5 rounds, 22 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 33,
+      "line": "⚔️ Whetū killed the Big Big with their party — 2 rounds, 29 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 33,
+      "line": "⚔️ Daniyar killed the Lockpick with their party — 0 rounds, 0 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 33,
+      "line": "⚔️ Lena killed the Nightlight with their party — 0 rounds, 0 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 33,
+      "line": "⚔️ Tashi killed the Ugly-Eyes with their party — 1 round, 0 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 39,
+      "line": "💀 The Gavel killed Whetū in 7 rounds. The village mourns."
+    },
+    {
+      "day": 40,
+      "line": "📺 SYSTEM: \"Oh — OH. Everybody saw that, right? Daniyar just put down The Focus Group... on CAMERA. That's a veteran kill, folks. REMEMBER the name.\""
+    },
+    {
+      "day": 40,
+      "line": "📺 Mai killed Headlight Harry out past the ridge — alone — and walked home. 7 rounds, 34 taken. (The village watches the broadcast. Nobody blinks.)"
+    },
+    {
+      "day": 40,
+      "line": "📣 Mai killed Headlight Harry out past the ridge — alone — and walked home. 7 rounds, 34 taken."
+    },
+    {
+      "day": 43,
+      "line": "⚔️ Daniyar killed the Focus Group with their party — 6 rounds, 87 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 45,
+      "line": "📺 Mai killed Big Big out past the ridge — alone — and walked home. 2 rounds, 11 taken. (The village watches the broadcast. Nobody blinks.)"
+    },
+    {
+      "day": 45,
+      "line": "📣 Mai killed Big Big out past the ridge — alone — and walked home. 2 rounds, 11 taken."
+    },
+    {
+      "day": 45,
+      "line": "📺 Dieter killed The Ugly Bastard out past the ridge — alone — and walked home. 4 rounds, 23 taken. (The village watches the broadcast. Nobody blinks.)"
+    },
+    {
+      "day": 45,
+      "line": "📣 Dieter killed The Ugly Bastard out past the ridge — alone — and walked home. 4 rounds, 23 taken."
+    },
+    {
+      "day": 45,
+      "line": "📺 SYSTEM: \"Oh — OH. Everybody saw that, right? Scarlett just put down Loud-Eyes... on CAMERA. That's a veteran kill, folks. REMEMBER the name.\""
+    },
+    {
+      "day": 45,
+      "line": "📺 SYSTEM: \"Oh — OH. Everybody saw that, right? Lena just put down The Callback... on CAMERA. That's a veteran kill, folks. REMEMBER the name.\""
+    },
+    {
+      "day": 46,
+      "line": "⚔️ Scarlett killed the Loud-Eyes with their party — 8 rounds, 60 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 46,
+      "line": "⚔️ Tiaki killed the Loud-Eyes with their party — 8 rounds, 40 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 46,
+      "line": "⚔️ Lena killed the Callback with their party — 6 rounds, 55 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 46,
+      "line": "⚔️ Marcus killed the Big Loud with their party — 5 rounds, 11 taken. Word travels fast. The village cheers."
+    },
+    {
+      "day": 49,
+      "line": "🧳 Word from Emberhold: Rosa was killed — Sam did it, they say. (The truth: dead is dead; the killing part is gossip.)"
+    },
+    {
+      "day": 51,
+      "line": "📺 Marcus killed The Heckler out past the ridge — with Dieter charging in when it turned — and walked home. 6 rounds, 14 taken. (The village watches the broadcast. Nobody blinks.)"
+    },
+    {
+      "day": 51,
+      "line": "📣 Marcus killed The Heckler out past the ridge — with Dieter charging in when it turned — and walked home. 6 rounds, 14 taken."
+    },
+    {
+      "day": 56,
+      "line": "🧳 Word from Thornfield: Kira was killed — Fatima did it, they say. (The truth: dead is dead; the killing part is gossip.)"
+    },
+    {
+      "day": 58,
+      "line": "📺 Marcus killed Big Big out past the ridge — alone — and walked home. 7 rounds, 42 taken. (The village watches the broadcast. Nobody blinks.)"
+    },
+    {
+      "day": 60,
+      "line": "📺 Marcus killed Nevermore out past the ridge — alone — and walked home. 4 rounds, 8 taken. (The village watches the broadcast. Nobody blinks.)"
+    },
+    {
+      "day": 60,
+      "line": "📣 Marcus killed Nevermore out past the ridge — alone — and walked home. 4 rounds, 8 taken."
+    },
+    {
+      "day": 60,
+      "line": "📺 Marcus killed Loud-Eyes out past the ridge — alone — and walked home. 14 rounds, 47 taken. (The village watches the broadcast. Nobody blinks.)"
+    },
+    {
+      "day": 60,
+      "line": "📣 Marcus killed Loud-Eyes out past the ridge — alone — and walked home. 14 rounds, 47 taken."
+    },
+    {
+      "day": 79,
+      "line": "focus group is hurt bad — and it knows it. Wild swings, everything committed, nothing held back. Dangerous and sloppy."
+    },
+    {
+      "day": 79,
+      "line": "📺 SYSTEM: \"Oh — OH. Everybody saw that, right? Tiaki just put down Loud-Eyes... on CAMERA. That's a veteran kill, folks. REMEMBER the name.\""
+    },
+    {
+      "day": 98,
+      "line": "Lena doesn't look away. \"About time someone fought back.\""
+    }
+  ],
+  "spawnSays": [
+    {
+      "day": 3,
+      "tile": "4,3",
+      "line": "Something big is moving in the woods. The birds went quiet."
+    },
+    {
+      "day": 4,
+      "tile": "4,3",
+      "line": "Something moves out there — a dog-shaped silence at the treeline."
+    },
+    {
+      "day": 8,
+      "tile": "4,5",
+      "line": "Something moves out there — Highbeam Deer."
+    },
+    {
+      "day": 10,
+      "tile": "4,3",
+      "line": "Something moves out there — Static."
+    },
+    {
+      "day": 10,
+      "tile": "4,3",
+      "line": "Something big is moving in the woods. The birds went quiet."
+    },
+    {
+      "day": 13,
+      "tile": "4,3",
+      "line": "Something moves out there — Murkcap."
+    },
+    {
+      "day": 15,
+      "tile": "4,3",
+      "line": "Something moves out there — The Moderator."
+    },
+    {
+      "day": 17,
+      "tile": "4,3",
+      "line": "Something big is moving in the woods. The birds went quiet."
+    },
+    {
+      "day": 20,
+      "tile": "4,3",
+      "line": "Something moves out there — The Anaconda Empress."
+    },
+    {
+      "day": 24,
+      "tile": "4,3",
+      "line": "Something big is moving in the woods. The birds went quiet."
+    },
+    {
+      "day": 24,
+      "tile": "4,5",
+      "line": "Something moves out there — Big Big."
+    },
+    {
+      "day": 27,
+      "tile": "4,3",
+      "line": "Something moves out there — Big Big."
+    },
+    {
+      "day": 29,
+      "tile": "4,3",
+      "line": "Something moves out there — Inspiration."
+    },
+    {
+      "day": 31,
+      "tile": "4,3",
+      "line": "Something big is moving in the woods. The birds went quiet."
+    },
+    {
+      "day": 33,
+      "tile": "4,5",
+      "line": "Something moves out there — The Redactor."
+    },
+    {
+      "day": 34,
+      "tile": "4,3",
+      "line": "Something moves out there — Gavel."
+    },
+    {
+      "day": 38,
+      "tile": "4,3",
+      "line": "Something big is moving in the woods. The birds went quiet."
+    },
+    {
+      "day": 39,
+      "tile": "4,5",
+      "line": "Something moves out there — The Focus Group."
+    },
+    {
+      "day": 45,
+      "tile": "4,3",
+      "line": "Something big is moving in the woods. The birds went quiet."
+    },
+    {
+      "day": 45,
+      "tile": "4,5",
+      "line": "Something moves out there — Loud-Eyes."
+    },
+    {
+      "day": 52,
+      "tile": "4,5",
+      "line": "Something big is moving in the woods. The birds went quiet."
+    },
+    {
+      "day": 57,
+      "tile": "4,3",
+      "line": "Something moves out there — The Reunion."
+    },
+    {
+      "day": 59,
+      "tile": "4,3",
+      "line": "Something big is moving in the woods. The birds went quiet."
+    },
+    {
+      "day": 62,
+      "tile": "4,3",
+      "line": "Something moves out there — Ad Break."
+    },
+    {
+      "day": 66,
+      "tile": "4,5",
+      "line": "Something big is moving in the woods. The birds went quiet."
+    },
+    {
+      "day": 68,
+      "tile": "4,3",
+      "line": "Something moves out there — The Algorithm."
+    },
+    {
+      "day": 71,
+      "tile": "4,3",
+      "line": "Something moves out there — Chorus Line."
+    },
+    {
+      "day": 73,
+      "tile": "5,4",
+      "line": "Something big is moving in the woods. The birds went quiet."
+    },
+    {
+      "day": 80,
+      "tile": "4,3",
+      "line": "Something big is moving in the woods. The birds went quiet."
+    },
+    {
+      "day": 82,
+      "tile": "5,4",
+      "line": "Something moves out there — Big-Eyes."
+    },
+    {
+      "day": 87,
+      "tile": "4,3",
+      "line": "Something big is moving in the woods. The birds went quiet."
+    },
+    {
+      "day": 94,
+      "tile": "5,4",
+      "line": "Something big is moving in the woods. The birds went quiet."
+    },
+    {
+      "day": 95,
+      "tile": "5,4",
+      "line": "Something moves out there — The Eulogy."
+    },
+    {
+      "day": 100,
+      "tile": "6,0",
+      "line": "Something moves out there — Loud-Eyes."
+    },
+    {
+      "day": 101,
+      "tile": "5,6",
+      "line": "Something big is moving in the woods. The birds went quiet."
+    },
+    {
+      "day": 102,
+      "tile": "2,0",
+      "line": "Something moves out there — Loud-Eyes."
+    }
+  ],
+  "sayCount": 11574,
+  "encseek": null,
+  "waveKillLog": [
+    {
+      "d": 4,
+      "mid": "hushwolf",
+      "w": 1,
+      "by": "nathan_lee",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 6,
+      "mid": "belltoad",
+      "w": 1,
+      "by": "gen_36jy72w",
+      "via": "agency",
+      "trick": null
+    },
+    {
+      "d": 9,
+      "mid": "gallowdeer",
+      "w": 1,
+      "by": "gen_36jy72w",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 9,
+      "mid": "hummice",
+      "w": 1,
+      "by": "gen_8n7lte7",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 9,
+      "mid": "hummice",
+      "w": 1,
+      "by": "lena_ruiz",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 9,
+      "mid": "hushwolf",
+      "w": 1,
+      "by": "tashi_sherpa",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 9,
+      "mid": "drumbelly_tanuki",
+      "w": 1,
+      "by": "lucas_brown",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 11,
+      "mid": "voice_mimic_radio",
+      "w": 2,
+      "by": "gen_8n7lte7",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 13,
+      "mid": "understudy",
+      "w": 2,
+      "by": "gen_36jy72w",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 14,
+      "mid": "murkcap",
+      "w": 1,
+      "by": "nathan_lee",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 16,
+      "mid": "paparazzo",
+      "w": 2,
+      "by": "gen_36jy72w",
+      "via": "agency",
+      "trick": null
+    },
+    {
+      "d": 17,
+      "mid": "cliffhanger",
+      "w": 1,
+      "by": "gen_36jy72w",
+      "via": "agency",
+      "trick": null
+    },
+    {
+      "d": 18,
+      "mid": "hushwolf",
+      "w": 1,
+      "by": "gen_j2uf0vq",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 19,
+      "mid": "hushwolf",
+      "w": 1,
+      "by": "gen_j2uf0vq",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 19,
+      "mid": "hushwolf",
+      "w": 1,
+      "by": "gen_8n7lte7",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 19,
+      "mid": "hushwolf",
+      "w": 1,
+      "by": "gen_yamyqgj",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 19,
+      "mid": "gallowdeer",
+      "w": 1,
+      "by": "daniyar_askarov",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 21,
+      "mid": "anaconda_empress",
+      "w": 1,
+      "by": "tashi_sherpa",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 23,
+      "mid": "dustboar",
+      "w": 1,
+      "by": "gen_36jy72w",
+      "via": "agency",
+      "trick": null
+    },
+    {
+      "d": 23,
+      "mid": "paparazzo",
+      "w": 2,
+      "by": "gen_j2uf0vq",
+      "via": "agency",
+      "trick": null
+    },
+    {
+      "d": 24,
+      "mid": "mirror_stag",
+      "w": 2,
+      "by": "gen_j2uf0vq",
+      "via": "agency",
+      "trick": null
+    },
+    {
+      "d": 25,
+      "mid": "dustboar",
+      "w": 1,
+      "by": "gen_j2uf0vq",
+      "via": "agency",
+      "trick": null
+    },
+    {
+      "d": 25,
+      "mid": "hushwolf",
+      "w": 1,
+      "by": "gen_36jy72w",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 30,
+      "mid": "bright_idea",
+      "w": 2,
+      "by": "gen_j2uf0vq",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 32,
+      "mid": "statickite",
+      "w": 2,
+      "by": "gen_8n7lte7",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 32,
+      "mid": "hushwolf",
+      "w": 1,
+      "by": "gen_yamyqgj",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 32,
+      "mid": "lockpick_raccoon",
+      "w": 1,
+      "by": "daniyar_askarov",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 32,
+      "mid": "nightlight_catfish",
+      "w": 1,
+      "by": "lena_ruiz",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 32,
+      "mid": "drumbelly_tanuki",
+      "w": 1,
+      "by": "tashi_sherpa",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 40,
+      "mid": "focus_group",
+      "w": 3,
+      "by": "daniyar_askarov",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 40,
+      "mid": "gallowdeer",
+      "w": 1,
+      "by": "gen_j2uf0vq",
+      "via": "agency",
+      "trick": null
+    },
+    {
+      "d": 41,
+      "mid": "spool",
+      "w": 3,
+      "by": "gen_oq8l0ox",
+      "via": "player",
+      "trick": null
+    },
+    {
+      "d": 45,
+      "mid": "hushwolf",
+      "w": 1,
+      "by": "gen_j2uf0vq",
+      "via": "agency",
+      "trick": null
+    },
+    {
+      "d": 45,
+      "mid": "voice_mimic_radio",
+      "w": 2,
+      "by": "gen_36jy72w",
+      "via": "agency",
+      "trick": null
+    },
+    {
+      "d": 45,
+      "mid": "focus_group",
+      "w": 3,
+      "by": "gen_ch6w6cn",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 45,
+      "mid": "understudy",
+      "w": 2,
+      "by": "gen_8n7lte7",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 45,
+      "mid": "callback",
+      "w": 3,
+      "by": "lena_ruiz",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 45,
+      "mid": "dustboar",
+      "w": 1,
+      "by": "marcus_webb",
+      "via": "wild",
+      "trick": null
+    },
+    {
+      "d": 51,
+      "mid": "heckler",
+      "w": 2,
+      "by": "marcus_webb",
+      "via": "agency",
+      "trick": null
+    },
+    {
+      "d": 58,
+      "mid": "hushwolf",
+      "w": 1,
+      "by": "marcus_webb",
+      "via": "agency",
+      "trick": null
+    },
+    {
+      "d": 60,
+      "mid": "nevermore",
+      "w": 1,
+      "by": "marcus_webb",
+      "via": "agency",
+      "trick": null
+    },
+    {
+      "d": 60,
+      "mid": "understudy",
+      "w": 2,
+      "by": "marcus_webb",
+      "via": "agency",
+      "trick": null
+    },
+    {
+      "d": 67,
+      "mid": "hushwolf",
+      "w": 1,
+      "by": "gen_j2uf0vq",
+      "via": "player",
+      "trick": null
+    },
+    {
+      "d": 69,
+      "mid": "ad_break",
+      "w": 3,
+      "by": "gen_36jy72w",
+      "via": "player",
+      "trick": null
+    },
+    {
+      "d": 79,
+      "mid": "giant_mosquito",
+      "w": 2,
+      "by": "marcus_webb",
+      "via": "player",
+      "trick": "strike_recovery,strike_recovery"
+    },
+    {
+      "d": 79,
+      "mid": "focus_group",
+      "w": 3,
+      "by": "gen_8n7lte7",
+      "via": "companion",
+      "trick": null
+    },
+    {
+      "d": 99,
+      "mid": "eulogy",
+      "w": 4,
+      "by": "app_mgpspj6p504",
+      "via": "player",
+      "trick": null
+    }
+  ],
+  "fallen": [
+    {
+      "villagerId": "gen_yamyqgj",
+      "day": 39,
+      "cause": "monster",
+      "name": "Whetū",
+      "monsterId": "gavel",
+      "monsterName": "Gavel"
+    },
+    {
+      "villagerId": "gen_oq8l0ox",
+      "day": 48,
+      "cause": "the wild",
+      "name": "Blanca"
+    },
+    {
+      "villagerId": "gen_j2uf0vq",
+      "day": 68,
+      "cause": "the wild",
+      "name": "Mai"
+    },
+    {
+      "villagerId": "gen_36jy72w",
+      "day": 70,
+      "cause": "the wild",
+      "name": "Dieter"
+    },
+    {
+      "villagerId": "marcus_webb",
+      "day": 87,
+      "cause": "the expedition",
+      "name": "Marcus"
+    },
+    {
+      "villagerId": "gen_8n7lte7",
+      "day": 97,
+      "cause": "the wild",
+      "name": "Tiaki"
+    },
+    {
+      "villagerId": "gen_ch6w6cn",
+      "day": 98,
+      "cause": "the wild",
+      "name": "Scarlett"
+    },
+    {
+      "villagerId": "daniyar_askarov",
+      "day": 98,
+      "cause": "the wild",
+      "name": "Daniyar"
+    },
+    {
+      "villagerId": "lena_ruiz",
+      "day": 99,
+      "cause": "the wild",
+      "name": "Lena"
+    },
+    {
+      "villagerId": "lucas_brown",
+      "day": 99,
+      "cause": "the wild",
+      "name": "Lucas"
+    },
+    {
+      "villagerId": "tashi_sherpa",
+      "day": 99,
+      "cause": "the wild",
+      "name": "Tashi"
+    },
+    {
+      "villagerId": "nathan_lee",
+      "day": 99,
+      "cause": "the wild",
+      "name": "Nathan"
+    },
+    {
+      "villagerId": "app_mgpspj6p504",
+      "day": 100,
+      "cause": "a stranger",
+      "name": "Maria"
+    },
+    {
+      "villagerId": "app_mgpsphlu552",
+      "day": 102,
+      "cause": "the wild",
+      "name": "Aksel"
+    }
+  ],
+  "wavesFaced": {
+    "hushwolf": 1,
+    "belltoad": 1,
+    "gallowdeer": 1,
+    "hummice": 1,
+    "drumbelly_tanuki": 1,
+    "voice_mimic_radio": 2,
+    "lockpick_raccoon": 1,
+    "understudy": 2,
+    "murkcap": 1,
+    "paparazzo": 2,
+    "cliffhanger": 1,
+    "anaconda_empress": 1,
+    "dustboar": 1,
+    "mirror_stag": 2,
+    "bright_idea": 2,
+    "statickite": 2,
+    "nightlight_catfish": 1,
+    "spool": 3,
+    "redactor": 3,
+    "callback": 3,
+    "focus_group": 3,
+    "gavel": 3,
+    "eater": 4,
+    "heckler": 2,
+    "nevermore": 1,
+    "reunion": 4,
+    "ad_break": 3,
+    "algorithm": 4,
+    "giant_mosquito": 2,
+    "eulogy": 4,
+    "suburb": 4
+  },
+  "instrumentErrors": []
+}

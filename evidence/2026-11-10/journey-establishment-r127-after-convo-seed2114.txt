@@ -1,0 +1,86 @@
+=== r127-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Stella (gen_52p9cjm) occ=Vintner --
+OPENING: "About what happened to my taken kin — I keep dreaming about rows of pods. Humming. Tell me I'm not the only one, as it were."
+YOU: [goon] "I'm listening."
+THEM: There's an ease between you now — the kind that takes weeks to build.
+YOU: [dlg:more] "What do you remember?"
+THEM: "It's my younger brother, Ivan. Went up in the Taking. He cried when the dog died. Boring, they said. I keep his jacket. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person."
+YOU: [goon] "I'm listening."
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want, friend?"
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Good question." "Between us — People are talking about Howard. Take it for what it's worth."
+YOU: [dlg:react] (listen)
+THEM: "People are talking about Daniyar. Take it for what it's worth."
+closing: "Go easy today, okay? The world's hard enough."
+
+-- Dorothy (gen_qaeqhga) occ=Wild food forager --
+OPENING: "Can I tell you something? I stole medicine from the stash once and never confessed."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Dorothy shows you where they go to think. "Don't tell the others. Everyone needs one place."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Feral Rice. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Bacaba. Leaf, stem, smell. You won't forget it now."
+YOU: [secret:promise] "That stays between us."
+THEM: "Thank you. ...I needed someone to know, and I needed it to stop there, anyway."
+YOU: [alive:want:seek_taken] "About your taken kin — what do you need?"
+THEM: "...Sorry, lost my train of thought."
+YOU: [goon] "Go on."
+THEM: "Can I trust you? I mean really."
+YOU: [ans:q_trust:a_earn] "I hope to earn it."
+THEM: "That's the right answer. The wrong one would've been 'yes' too fast."
+YOU: [goon] "Go on."
+THEM: "Sure — I'll tell you what I tell everyone: watch what I do when nobody's watching. That's the whole of me. The rest is just talking."
+closing: "See you at the fire."
+
+-- Sandra (gen_ikk7qel) occ=exterminator --
+OPENING: "What's the worst thing you've done since the sky changed?"
+YOU: [ans:q_guilty:a_tell] "There's something I regret. I'm not ready to talk about it."
+THEM: No judgment in their face. "We're all doing math that doesn't add up. You're still here. That counts."
+YOU: [goon] "I'm listening."
+THEM: "I don't answer that one myself. Not yet. Maybe when I've decided whether surviving counts as an excuse or just a reason."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Huckleberry. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Cow Parsley. Leaf, stem, smell. You won't forget it now."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the worst thing you've done. You'd know about that."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Someone should watch your back. Might as well be me."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:personal] "You never really told me your story."
+THEM: "You want to know about that? Okay." "Every morning I wake up surprised. Like part of me still expects the old world."
+closing: "Alright. Back to work."
+
+-- Howard (gen_49gvh60) occ=carpenter --
+OPENING: "Teach me something. Anything you know that I don't. I won't forget that."
+YOU: [ans:q_teach_me:a_tell] "I'd rather show you while we're working. It's easier that way."
+THEM: "All right. Show me when we work together. How are you holding up, though?"
+YOU: [goon] "Hm. Let me think — go on, first."
+THEM: "I'd like to learn something I can use today. Show me while you work, when you have a moment."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Honestly? Still on teaching them something."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Alright. But I'm not carrying your stuff."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? Thank you for asking."
+YOU: [ask:personal] "You never really told me your story."
+THEM: "Huh. Let me think about that." "Sleep's the real currency now. I'm rich in dreams and broke in rest."
+YOU: [dlg:more] "Go on."
+THEM: "You know what's weird? I'm a carpenter — was a carpenter — and none of that prepared me for any of this."
+YOU: [party_name] "We should name this. Us."
+THEM: "A name. Okay." You say it out loud, trying the shape of it:
+1. "FINAL GIRLS CLUB" (📺 the System suggests)
+2. "The Firetenders" (Sandra suggests)
+3. "The Company" (or plain)
+(Which one? It'll stick.)
+closing: "This was nice. Don't be a stranger — we're ten people, it's hard."

@@ -1,0 +1,95 @@
+=== r128-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Lisa (gen_4hx36m4) occ=Fisherman --
+OPENING: You feel it too, right? That we're just... waiting here? I can't wait.
+YOU: [react:rq_shifting:yes] "I feel it."
+THEM: "Good. Not good, but — good that it's not just me. Keep an eye on people, yeah?"
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them American Persimmon — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Not right now. I've got my own things to handle."
+YOU: [dlg:react] (listen)
+THEM: "So." They look at the fire for a moment.
+YOU: [menu:more] More things to say (1/2)
+THEM: (menu page turned)
+YOU: [dlg:doubt] "That doesn't quite add up."
+THEM: "...What's that supposed to mean?" Their voice goes careful.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Pamela walked out of Duel. Alive. That's the whole story and it's enough."
+closing: "I... should go."
+
+-- Pamela (gen_r89rg13) occ=programmer --
+OPENING: "I asked Dorothy about this wound — Dorothy's gone. Still need hands. Are you in?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to them, on the same side of the Haven door, to help.
+YOU: [dlg:details] "Tell me why you need this."
+THEM: "Every day it's angrier. I need it cleaned before it turns — I can't work a wound like this. Wrap it tight when you're done."
+YOU: [dlg:cant] "I can’t right now."
+THEM: "Right. I get it." A beat — and then the subject is closed. They won't raise it again.
+YOU: [goon] "Yeah?"
+THEM: "Walk with me? I want another pair of eyes on something."
+INVITE-ANSWER trust=76
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: You walk to the tree line with Pamela. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that wound care."
+YOU: [goon] "Yeah?"
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [goon] "Yeah?"
+THEM: "What do you make of all this? Really."
+closing: "See you at the fire."
+
+-- James (james_okonkwo) occ=carpenter --
+OPENING: The not-knowing is a splinter. I need to get it out or it'll fester.
+INVITE-ANSWER trust=76
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: On the way, James stops and actually teaches you something — how they read a slope for water, how their grandmother did it. (Knowledge, freely given. The Codex notes it.)
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Okay. Yeah. I trust you."
+YOU: [dlg:more] "Go on."
+THEM: "I'm not curious. I'm thorough. There's a difference and it matters."
+YOU: [party_name] "We should name this. Us."
+THEM: "A name. Okay." You say it out loud, trying the shape of it:
+1. "APEX SNACKS" (📺 the System suggests)
+2. "The Kept Promise" (James suggests)
+3. "The Company" (or plain)
+(Which one? It'll stick.)
+YOU: [party_namepick:0] "APEX SNACKS."
+THEM: 🤝 "APEX SNACKS." It hangs in the air a moment — then James grins. It's real now. It has a name, which means it can be lost.
+📺 APEX SNACKS is official. James. (The village watches the broadcast. Nobody blinks.)
+📓 Codex: We named us: APEX SNACKS.
+YOU: [party_role] "Let's talk roles."
+THEM: "Roles. Not ranks — promises."
+🗡️ point — First in. Hits harder (+3 strike), draws the eye.
+🩹 healer — Carries the wounded, patches them up (+6 heal).
+🎒 carrier — Hauls. Carry order reaches further, steadier hands.
+🗣️ talker — The face. People join easier, leaving hurts less.
+👁️ scout — Sees trouble first. Warns the party on the road.
+(Which one is James?)
+YOU: [party_rolepick:point] 🗡️ Point
+THEM: 🤝 James is 🗡️ Point now. First in. Hits harder (+3 strike), draws the eye.
+YOU: [dlg:react] (listen)
+THEM: "Understanding is control, even if it's just the illusion of control. I'll take the illusion."
+closing: "Later."
+
+-- Ethan (ethan_hunt) occ=trail crew lead --
+OPENING: "About this wound — I hate to ask twice, but it's still open. Will you?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to them, on the same side of the Haven door, to help.
+YOU: [dlg:details] "Tell me why you need this."
+THEM: "It keeps getting worse. I can't haul or hunt with it like this — and if it festers, I'm done for. Please, clean it out and bind it tight."
+YOU: [dlg:cant] "I can’t right now."
+THEM: "No, yeah, of course. Forget I asked." They won't forget. They'll just stop asking.
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "Saw things with too many joints. Give them room. That's the whole lesson."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that wound care."
+YOU: [goon] "Go on."
+THEM: That could have stung. They let it pass — you've been kind before.
+YOU: [goon] "Go on."
+THEM: "I've been turning something over. What do YOU think actually happened to us?"
+YOU: [deflect_q] (change the subject)
+THEM: "Okay." Something shutters, just slightly.
+closing: "Alright. Back to it. Things don't do themselves."

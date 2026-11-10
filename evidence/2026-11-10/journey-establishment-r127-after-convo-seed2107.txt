@@ -1,0 +1,90 @@
+=== r127-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Amanda (gen_ekngub4) occ=bush pilot --
+OPENING: "This wound — I haven't stopped thinking about it."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to them, on the same side of the Haven door, to help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Funny you should ask." Amanda glances over their shoulder. "Anh's been polishing that story. The unpolished version: a Baker. Keep my name out of it."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Someone should watch your back. Might as well be me."
+YOU: [dlg:more] "I’m listening."
+THEM: "Sofia walked right up to that snarling stray. It went quiet. QUIET."
+YOU: [party_name] "We should name this. Us."
+THEM: "A name. Okay." You say it out loud, trying the shape of it:
+1. "PLOT ARMOR" (📺 the System suggests)
+2. "The Hearth" (Amanda suggests)
+3. "The Company" (or plain)
+(Which one? It'll stick.)
+YOU: [party_namepick:0] "PLOT ARMOR."
+THEM: 🤝 "PLOT ARMOR." It hangs in the air a moment — then Anh grins. It's real now. It has a name, which means it can be lost.
+📺 PLOT ARMOR is official. Anh, Amanda. (The village watches the broadcast. Nobody blinks.)
+📣 PLOT ARMOR was named — Anh, Amanda. A team, on purpose.
+📓 Codex: We named us: PLOT ARMOR.
+closing: "Good. We've got a plan forming. I can feel it."
+
+-- Rosa (gen_gklb2v1) occ=community gardener --
+OPENING: "About this wound — I still haven't found anyone. Any chance?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to them, on the same side of the Haven door, to help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [goon] "I'm listening."
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+INVITE-ANSWER trust=88
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: On the way, Rosa stops and actually teaches you something — how they read a slope for water, how their grandmother did it. (Knowledge, freely given. The Codex notes it.)
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Feral Paddy Rice. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Wild Amaranth. Leaf, stem, smell. You won't forget it now."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Someone should talk to Amanda. Not me, though."
+closing: "Okay. We're done. That wasn't terrible."
+
+-- Anh (gen_qkije7m) occ=Baker --
+OPENING: Anh: "I've heard good things about Ashford. We should link with them — we'd be stronger together."
+INVITE-ANSWER trust=91
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: It's quiet at the cache spot. Anh doesn't say much. Sometimes that's the whole point.
+YOU: [goon] "I'm listening."
+THEM: "I've heard good things about Ashford. We should link with them — we'd be stronger together."
+YOU: [link:accept] "All right. Let's ask them."
+THEM: "All right — let's ask them." You carry the proposal to Ashford.
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Feral Paddy Rice — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+YOU: [goon] "I'm listening."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Lamb's Quarters. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Bacaba. Leaf, stem, smell. You won't forget it now."
+YOU: [dlg:more] "Go on."
+THEM: "Every day it's angrier. I need it cleaned before it turns — I can't work a wound like this. Wrap it tight when you're done."
+closing: "Later."
+
+-- Nathan (gen_ltud245) occ=emergency dispatcher --
+OPENING: "About your read on people here — Got a read on anyone here yet? Who should I be watching?"
+YOU: [ans:q_read:a_honest] "Still figuring everyone out."
+THEM: "Same. But keep your eyes open — some people here are performing, not surviving."
+YOU: [goon] "Go on."
+THEM: The conversation cools to something businesslike.
+YOU: [goon] "Go on."
+THEM: "Here's the thing: Watch the quiet ones. Not the loud — the loud tell you everything. The quiet are either thinking or planning, and you can't tell which until it matters."
+YOU: [dlg:doubt] "That doesn't quite add up."
+THEM: "...What's that supposed to mean?" Their voice goes careful.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on your read on people here."
+YOU: [goon] "Go on."
+THEM: They pull back half a step — not leaving, just... further.
+YOU: [goon] "Go on."
+THEM: "What do you miss most? From before."
+YOU: [ans:q_miss:a_food] "A real hot meal."
+THEM: "God. Yes. I dream about soup. Actual soup, with a spoon. You'd know about that."
+closing: "Good talk."

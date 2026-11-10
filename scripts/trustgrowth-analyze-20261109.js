@@ -130,8 +130,14 @@ function downMagnitude(kind, note) {
 // --- unified event log ----------------------------------------------------
 // Setter events are authoritative. A _trustGain-wrap event is kept only
 // when no setter event exists for the same link + day with a _trustGain
-// frame in its stack (the formation-day gap); pairing is in seq order
-// within each (link, day) group so two same-day gains stay distinct.
+// frame in its stack (the formation-day gap). Twins are consumed in
+// DESCENDING seq order within each (link, day) group (amendment 5):
+// the setter is installed once per link and stays installed, so within
+// one day all twinless wraps precede all twinned calls — the latest
+// wraps are the twinned ones. Ascending consumption misattributes on
+// a formation day that mixes pre-setter calls with a post-setter call
+// (120104 d28: the single twin was eaten by the accord wrap, leaving
+// the tribute wrap double-counted against its setter twin).
 function unifyEvents(out) {
   const setters = (out.events || []).slice();
   const wraps = (out.gains || []).slice();
@@ -145,12 +151,13 @@ function unifyEvents(out) {
     }
   });
   const wrapKept = [];
-  wraps.forEach(function (g) {
+  const wrapsDesc = wraps.slice().sort(function (a, b) { return ((b.seq == null ? -1 : b.seq) - (a.seq == null ? -1 : a.seq)); });
+  wrapsDesc.forEach(function (g) {
     // Blocked gains (applied 0) moved no trust: they are counted via
     // blockedGains, not kept as trust events.
     if (!(g.applied > 0)) return;
     const k = twinKey(g);
-    if ((setterTwins[k] || 0) > 0) { setterTwins[k]--; return; } // setter twin exists: drop the wrap duplicate
+    if ((setterTwins[k] || 0) > 0) { setterTwins[k]--; return; } // setter twin exists: drop the wrap duplicate (latest wrap first: amendment 5)
     wrapKept.push({ seq: g.seq != null ? g.seq : -1, day: g.day, linkId: g.linkId, other: g.other, old: null, new: null, delta: g.applied | 0, stack: g.stack, via: 'trustgain-wrap', requested: g.requested });
   });
   setters.forEach(function (e) {

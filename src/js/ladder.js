@@ -40,6 +40,52 @@
   const Game = (globalThis.Scattering || {}).Game;
   if (!Game) return;
 
+  // countLivingVeterans(G, minWave): the shared veteran count, as
+  // { veterans, payable }. veterans = living villagers with a
+  // wave-minWave+ kill in state.waveKillLog — INCLUDING the current
+  // scholar (Steve RULED 2026-11-10 07:39 CST: the scholar is part of
+  // the village; their wave kills count toward the living-veteran bar,
+  // same as any villager's). payable = the non-scholar subset — the
+  // veterans the tribute delivery can actually take (table.js
+  // ladderDeliverCapstone pays 2 non-scholar veterans; the scholar,
+  // the player character, cannot leave Haven in the table's service).
+  // A killer must be ALIVE and a VILLAGER: dead killers never count;
+  // a log entry whose `by` is not on the village roster never counts.
+  // Pyrrhic kills count toward veteran identity (a villager who killed
+  // a wave-4 beast in a lost fight still killed one) — they score
+  // nothing toward wave bars, which is a separate counter rule
+  // (vetcount-b). History: leg 3 excluded the scholar from this read
+  // so readiness agreed with delivery; the ruling overrules that
+  // agreement for the BAR — readiness counts the scholar, delivery
+  // still pays non-scholar only and refuses honestly when fewer than
+  // 2 payable veterans stand (see the table.js delivery comment).
+  // Module-level (not a Game method) so the ontology `provides:` list
+  // is unchanged; _ladderLivingVeterans and ladderCapstoneReady both
+  // read through it and can never drift apart.
+  function countLivingVeterans(G, minWave) {
+    try {
+      const log = (G.state && G.state.waveKillLog) || [];
+      const roster = ((G.state && G.state.village && G.state.village.roster) || []);
+      const scholarId = G.villagerId;
+      const seen = {};
+      const seenPayable = {};
+      const isLiving = (vid) => {
+        if (!vid) return false;
+        if (vid === scholarId) return true; // the scholar is the current adventurer — a villager; their kills count
+        if (roster.indexOf(vid) < 0) return false; // not a villager of this village
+        try { const vp = (typeof G.vpOf === 'function') ? G.vpOf(vid) : null; return !!(vp && !vp.dead); }
+        catch (e) { return true; }
+      };
+      for (const e of log) {
+        if (!e || !e.by || ((e.w | 0) < (minWave | 0))) continue;
+        if (!isLiving(e.by)) continue;
+        seen[e.by] = true;
+        if (e.by !== scholarId) seenPayable[e.by] = true;
+      }
+      return { veterans: Object.keys(seen).length, payable: Object.keys(seenPayable).length };
+    } catch (e) { warn('countLivingVeterans', e); return { veterans: 0, payable: 0 }; }
+  }
+
   function warn(msg, e) {
     try { console.warn('[ladder] ' + msg + (e ? ': ' + (e && e.message || e) : '')); } catch (e2) {}
   }
@@ -122,28 +168,15 @@
     // _ladderLivingVeterans(minWave): living roster members with a
     // wave-minWave+ kill in state.waveKillLog — the same read standing.js
     // uses for its readiness veterans bar (living only). Distinct killers,
-    // not kills. LEG 3 (tribute scholar-readiness fix): the scholar is
-    // NEVER counted — the tribute delivery (table.js
-    // ladderDeliverCapstone) pays 2 NON-scholar veterans and honestly
-    // refuses when fewer than 2 stand, so a scholar-veteran + 1 villager
-    // used to read ready while delivery refused. Readiness and delivery
-    // agree now: only villagers the table can actually take count.
+    // not kills. The scholar COUNTS (Steve RULED 2026-11-10): a
+    // scholar-veteran is a living veteran of the village. See
+    // countLivingVeterans above for the full rule (alive + villager;
+    // pyrrhic kills count toward identity) and for why `payable` —
+    // the non-scholar subset the tribute can actually take — is
+    // reported separately by ladderCapstoneReady.
     _ladderLivingVeterans(minWave) {
-      try {
-        const log = (this.state && this.state.waveKillLog) || [];
-        const seen = {};
-        const isLiving = (vid) => {
-          if (!vid || vid === this.villagerId) return false;
-          try { const vp = (typeof this.vpOf === 'function') ? this.vpOf(vid) : null; return !!(vp && !vp.dead); }
-          catch (e) { return true; }
-        };
-        for (const e of log) {
-          if (!e || !e.by || ((e.w | 0) < (minWave | 0))) continue;
-          if (!isLiving(e.by)) continue;
-          seen[e.by] = true;
-        }
-        return Object.keys(seen).length;
-      } catch (e) { warn('_ladderLivingVeterans', e); return 0; }
+      try { return countLivingVeterans(this, minWave).veterans; }
+      catch (e) { warn('_ladderLivingVeterans', e); return 0; }
     },
 
     // _ladderPeakStage: the highest ladder stage the village has ever
@@ -446,10 +479,17 @@
     // ladderCapstoneReady(kind): is this capstone deed ready to be
     // delivered? A READ, not the delivery: the delivery itself (recording
     // on progState, paying the price) is leg 2's surgery.
-    //   military_tribute — living NON-SCHOLAR wave-4 veterans on hand >=
-    //     the data form's count (2). The veterans are the price; leg 2
-    //     records the payment. (Leg 3: the scholar never counts — delivery
-    //     excludes the scholar, so readiness does too.)
+    //   military_tribute — living wave-4 veterans on hand >= the data
+    //     form's count (2), the scholar included (Steve RULED 2026-11-10).
+    //     The veterans are the price; leg 2 records the payment. The
+    //     return also carries `payable` — the non-scholar veterans the
+    //     delivery can actually take. Readiness and delivery agree on
+    //     the BAR but not on the payment: a scholar-veteran + 1 villager
+    //     reads ready here, and delivery (table.js) honestly refuses
+    //     with 'veterans-short' until a second payable veteran stands.
+    //     That split is the ruling's consequence, not a bug: the bar
+    //     measures the village's strength, the payment measures who
+    //     can leave.
     //   trade_charter — a sealed charter exists (an active trade link
     //     with chartered=true) and the scale is national+ (when
     //     scaleRank() is available; the chartered flag alone counts if
@@ -480,8 +520,9 @@
         }
         if (kind === 'military_tribute') {
           const need = (def.requires && def.requires.livingVeteransWave4) || 2;
-          const veterans = this._ladderLivingVeterans(4);
-          return { kind, ready: veterans >= need, veterans, need, reason: veterans < need ? 'veterans-short' : 'ready' };
+          const counts = countLivingVeterans(this, 4);
+          const veterans = counts.veterans;
+          return { kind, ready: veterans >= need, veterans, payable: counts.payable, need, reason: veterans < need ? 'veterans-short' : 'ready' };
         }
         return { kind, ready: false, reason: 'unknown-kind' };
       } catch (e) {

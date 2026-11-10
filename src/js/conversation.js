@@ -6168,6 +6168,55 @@
       return '"It doesn\'t sit quite so heavy, now that I\'ve said it out loud. ...Thanks."';
     },
 
+    // convoSecretAnswerPool / convoSecretAnswerLine: VARIETY
+    // (journey-deepening r125 2026-11-10) — the confession's reply was ONE
+    // fixed sentence per answer kind, so a player promising twice heard the
+    // same sentence twice (panel: the promise core repeats 3/3; only
+    // voiceLine decoration differed). Each kind now has four variants,
+    // picked through convoPick (per-villager dedupe + run-ledger freshness),
+    // so different villagers answer in different words. Every variant keeps
+    // the phrase the r120 secret-response proof asserts (promise: 'needed
+    // someone to know'; comfort: 'Thanks for not looking away'; offer:
+    // 'Just knowing someone knows helps'; silence: "That's enough, for
+    // now") — the variants vary the sentence around it.
+    // Deflect stays single: the door-closing line is a signal, not a
+    // pleasantry. The literacy offer line stays single: it is already
+    // specific to the secret.
+    convoSecretAnswerPool(kind) {
+      if (kind === 'promise') return [
+        '"Thank you. ...I needed someone to know, and I needed it to stop there."',
+        '"I needed someone to know — just one person. Thank you for being that person."',
+        '"Thank you. I needed someone to know, and now someone does. Please keep it there."',
+        '"Thank you for hearing it. I needed someone to know — and I needed it to stop with you."',
+      ];
+      if (kind === 'comfort') return [
+        '"It helps, just saying it out loud. ...Thanks for not looking away."',
+        '"Saying it out loud — I didn\'t think it would help. It does. ...Thanks for not looking away."',
+        '"You\'re the first person I\'ve told. ...Thanks for not looking away."',
+        '"I carried that a long time. ...Thanks for not looking away."',
+      ];
+      if (kind === 'offer') return [
+        '"Just knowing someone knows helps. ...If it ever matters, you\'ll know first."',
+        '"It helps. Just knowing someone knows helps, and that\'s enough for now. If it ever matters, I\'ll come to you first."',
+        '"Having someone else hold a corner of it — Just knowing someone knows helps. ...You\'ll hear it from me first."',
+        '"Thank you for offering. Just knowing someone knows helps — and you\'ll know first if it matters."',
+      ];
+      if (kind === 'silence') return [
+        '"...Thanks. ...That\'s enough, for now."',
+        '"...Yeah. ...That\'s enough, for now. Thank you for sitting with it."',
+        '"...I don\'t need words for it. That\'s enough, for now."',
+        '"...Just sit with me a minute. ...That\'s enough, for now."',
+      ];
+      return null;
+    },
+    convoSecretAnswerLine(vid, kind) {
+      const pool = this.convoSecretAnswerPool(kind);
+      if (!pool) return null;
+      let line = null;
+      try { line = this.convoPick(vid, 'secret:' + kind, pool); } catch (e) { line = null; }
+      return line || pool[0];
+    },
+
     convoTurn(vid, choiceId) {
       const c = this.convoGet(vid);
       if (!c.active) return null;
@@ -6493,20 +6542,20 @@
         });
         if (sKind === 'promise') {
           scons(2, 'secret:promise', 'kind');
-          done(this.voiceLine(vid, '"Thank you. ...I needed someone to know, and I needed it to stop there."'), '"That stays between us."');
+          done(this.voiceLine(vid, this.convoSecretAnswerLine(vid, 'promise')), '"That stays between us."');
         } else if (sKind === 'comfort') {
           scons(1, 'secret:comfort', 'kind');
-          done(this.voiceLine(vid, '"It helps, just saying it out loud. ...Thanks for not looking away."'), '"Thank you for trusting me with that."');
+          done(this.voiceLine(vid, this.convoSecretAnswerLine(vid, 'comfort')), '"Thank you for trusting me with that."');
         } else if (sKind === 'offer') {
           scons(1, 'secret:offer', 'kind');
           if (isLiteracy) {
             done(this.voiceLine(vid, '"Would you... teach me? Sometime. When there\'s time. I don\'t want to be the one who can\'t read the warnings anymore."'), '"Is there anything I can do?"');
           } else {
-            done(this.voiceLine(vid, '"Just knowing someone knows helps. ...If it ever matters, you\'ll know first."'), '"Is there anything I can do?"');
+            done(this.voiceLine(vid, this.convoSecretAnswerLine(vid, 'offer')), '"Is there anything I can do?"');
           }
         } else if (sKind === 'silence') {
           scons(1, 'secret:silence', 'neutral');
-          done(this.voiceLine(vid, '"...Thanks. ...That\'s enough, for now."'), '(say nothing — just sit with them)');
+          done(this.voiceLine(vid, this.convoSecretAnswerLine(vid, 'silence')), '(say nothing — just sit with them)');
         } else if (sKind === 'deflect') {
           // Dodging a confidence is a cruel-temper move, like deflect_q:
           // trust cost, mood cool, and the villager closes the door on it.
@@ -6837,6 +6886,20 @@
         done(this.convoRecapLine(vid), '"Wait — what were we talking about?"');
       } else if (choiceId.indexOf('ask:') === 0) {
         const topic = choiceId.slice(4);
+        // LATELY IS SHARED NEWS (journey-succession r170 2026-11-10):
+        // the lately answer reports a village-wide event (the table
+        // waiting, an outbreak, a mourning) in the village's shared
+        // words — two villagers answering "how are you holding up"
+        // the same way on one day is not parroting, it is how people
+        // talk about the same storm coming (transcript-caught on the
+        // r169 panel, seed 34016 d62 Catalina: the composed ack +
+        // change + event line run-blocked and dried). Same class as
+        // the r17 structural beats and the r25 mood-silence line: the
+        // generic emission below skips the run-ledger block for this
+        // turn. The per-sitting ledger still applies, so a true
+        // same-conversation repeat keeps the honest "I just said"
+        // path; the event/ack/change pools still cycle per villager.
+        if (topic === 'lately') structuralTurn = true;
         // DEEP BEATS build trust faster: asking about someone's past or what
         // they want is an act of care. Words only go so far — talk caps at 40.
         // TOPIC PACK (Steve 2026-10-06): you/fears/loved are acts of care too.

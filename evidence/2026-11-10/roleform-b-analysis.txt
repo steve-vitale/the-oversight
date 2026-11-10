@@ -1,0 +1,125 @@
+seeds: 160201: endDay=127 over=true start=12 endAlive=1 ever=23 qual60=7 qual30=12 qual90=0 resolved=733 rungLines=29 complete=true | 160202: endDay=151 over=false start=12 endAlive=3 ever=16 qual60=7 qual30=10 qual90=6 resolved=548 rungLines=34 complete=true | 160203: endDay=121 over=true start=12 endAlive=5 ever=23 qual60=6 qual30=17 qual90=0 resolved=962 rungLines=32 complete=true | 160204: endDay=151 over=false start=12 endAlive=8 ever=23 qual60=10 qual30=16 qual90=4 resolved=771 rungLines=35 complete=true | 160205: endDay=147 over=true start=12 endAlive=1 ever=14 qual60=9 qual30=9 qual90=9 resolved=497 rungLines=26 complete=true | 160206: endDay=131 over=true start=12 endAlive=2 ever=18 qual60=8 qual30=10 qual90=5 resolved=637 rungLines=31 complete=true | 160207: endDay=148 over=true start=12 endAlive=1 ever=17 qual60=8 qual30=12 qual90=6 resolved=818 rungLines=31 complete=true | 160208: endDay=117 over=true start=12 endAlive=2 ever=14 qual60=10 qual30=12 qual90=6 resolved=871 rungLines=31 complete=true
+WALL: national 0/8 | table 8/8 | wins 0/8 | wave-4 kills 39 | wave-5 kills 7 | median survival 147d
+resolved by task (all seeds, NPC window): {"wood":1407,"water":865,"stone":1403,"deadfall":781,"cook":841,"fish":284,"garden":232,"forage":24}
+rung-gain lines total: 249 by task: {"stone":59,"water":45,"wood":58,"fish":17,"garden":16,"cook":32,"deadfall":20,"forage":2}
+
+== QUAL >=60 NPC DAYS (judged set) (qual villagers: 65) ==
+competence cells moved: {"combat":0,"field":46,"social":0,"craft":89,"strange":0} | total 68 | decreases 0
+cells by task: {"hunt":0,"forage":0,"garden":3,"fish":3,"wood":32,"stone":34,"deadfall":15,"water":25,"scout":0,"patrol":0,"cook":23,"tend":0,"teach":0,"mend":0}
+villagers moved >=1 cell, by track: {"combat":0,"field":17,"social":0,"craft":21,"strange":0}
+specialist 0->positive: 6 by track: {"combat":0,"field":6,"social":0,"craft":0,"strange":0} | any spec up: 9
+track level >=1, villagers by track: {"combat":26,"field":23,"social":17,"craft":21,"strange":1} | any track level: 45
+practice reps by track (last NPC-window snapshot minus first): {"combat":0,"field":1169,"social":0,"craft":2319,"strange":0} | total 3488 | mean/villager 53.7
+practice reps by task: {"hunt":0,"forage":0,"garden":23,"fish":47,"wood":796,"stone":813,"deadfall":601,"water":498,"scout":0,"patrol":0,"cook":710,"tend":0,"teach":0,"mend":0}
+skills gained: 361 | abilities gained: 103
+dominant tracks: {"social":5,"craft":2,"field":7,"combat":2} | distinct: 4
+dominant tasks: {"cook":7,"water":1,"deadfall":2,"garden":1,"stone":2,"wood":1}
+temperament -> dominant (track/task): {"intense->none":6,"gentle->none":7,"steady->cook":2,"prickly->none":2,"dry->social":3,"intense->craft":1,"stoic->field":1,"cautious->none":4,"restless->field":3,"withdrawn->water":1,"warm->none":3,"withdrawn->combat":1,"prickly->craft":1,"anxious->none":2,"bold->none":3,"cautious->social":2,"dry->none":6,"gentle->cook":2,"anxious->deadfall":1,"steady->deadfall":1,"gentle->garden":1,"withdrawn->cook":1,"warm->combat":1,"mischievous->none":1,"fidgety->stone":1,"bold->field":1,"steady->none":2,"gentle->stone":1,"steady->field":1,"prickly->field":1,"withdrawn->none":2}
+behavior: strong>=1 53 | hybrid 30 | no-strong 12 | top-matched-occ 13 | top-unmatched 41 | no-task 11 | mean top share 0.49 | switched-half 25 | mean stickiness 0.49
+teaching: lessons taught 207 / learned 188 | teachers 54 | seekers 52 | killers 53 (158 tales) | leads 5 | multi-lead 5
+
+== QUAL >=30 NPC DAYS (sensitivity set) (qual villagers: 98) ==
+competence cells moved: {"combat":0,"field":61,"social":0,"craft":121,"strange":0} | total 97 | decreases 0
+cells by task: {"hunt":0,"forage":0,"garden":5,"fish":4,"wood":44,"stone":47,"deadfall":20,"water":32,"scout":0,"patrol":0,"cook":30,"tend":0,"teach":0,"mend":0}
+villagers moved >=1 cell, by track: {"combat":0,"field":25,"social":0,"craft":29,"strange":0}
+specialist 0->positive: 8 by track: {"combat":0,"field":8,"social":0,"craft":0,"strange":0} | any spec up: 11
+track level >=1, villagers by track: {"combat":28,"field":42,"social":18,"craft":24,"strange":1} | any track level: 64
+practice reps by track (last NPC-window snapshot minus first): {"combat":0,"field":1452,"social":0,"craft":2864,"strange":0} | total 4316 | mean/villager 44.0
+practice reps by task: {"hunt":0,"forage":0,"garden":61,"fish":64,"wood":1029,"stone":1066,"deadfall":718,"water":609,"scout":0,"patrol":0,"cook":769,"tend":0,"teach":0,"mend":0}
+skills gained: 431 | abilities gained: 123
+dominant tracks: {"field":19,"social":5,"craft":3,"combat":2} | distinct: 4
+dominant tasks: {"cook":7,"water":1,"stone":3,"deadfall":2,"garden":2,"fish":1,"wood":1}
+temperament -> dominant (track/task): {"intense->none":7,"steady->field":4,"prickly->none":4,"gentle->none":7,"steady->cook":2,"dry->social":3,"prickly->field":3,"warm->none":5,"intense->craft":1,"?->none":3,"dry->field":2,"stoic->field":1,"warm->field":2,"cautious->none":5,"restless->field":4,"withdrawn->water":1,"cautious->field":1,"stoic->craft":1,"restless->none":2,"steady->none":4,"withdrawn->combat":1,"prickly->craft":1,"anxious->none":3,"bold->none":4,"bold->field":2,"dry->none":8,"cautious->social":2,"gentle->cook":2,"anxious->deadfall":1,"steady->deadfall":1,"gentle->garden":1,"withdrawn->cook":1,"withdrawn->garden":1,"warm->combat":1,"mischievous->none":1,"fidgety->stone":1,"fidgety->none":1,"gentle->stone":1,"sardonic->none":1,"withdrawn->none":2}
+behavior: strong>=1 81 | hybrid 49 | no-strong 17 | top-matched-occ 16 | top-unmatched 66 | no-task 16 | mean top share 0.47 | switched-half 26 | mean stickiness 0.49
+teaching: lessons taught 256 / learned 253 | teachers 73 | seekers 80 | killers 78 (224 tales) | leads 8 | multi-lead 7
+
+== QUAL >=90 NPC DAYS (sensitivity set, 150d horizon) (qual villagers: 36) ==
+competence cells moved: {"combat":0,"field":21,"social":0,"craft":48,"strange":0} | total 38 | decreases 0
+cells by task: {"hunt":0,"forage":0,"garden":0,"fish":0,"wood":18,"stone":20,"deadfall":8,"water":13,"scout":0,"patrol":0,"cook":10,"tend":0,"teach":0,"mend":0}
+villagers moved >=1 cell, by track: {"combat":0,"field":9,"social":0,"craft":12,"strange":0}
+specialist 0->positive: 2 by track: {"combat":0,"field":2,"social":0,"craft":0,"strange":0} | any spec up: 4
+track level >=1, villagers by track: {"combat":10,"field":10,"social":13,"craft":10,"strange":1} | any track level: 23
+practice reps by track (last NPC-window snapshot minus first): {"combat":0,"field":537,"social":0,"craft":1068,"strange":0} | total 1605 | mean/villager 44.6
+practice reps by task: {"hunt":0,"forage":0,"garden":0,"fish":0,"wood":377,"stone":387,"deadfall":275,"water":262,"scout":0,"patrol":0,"cook":304,"tend":0,"teach":0,"mend":0}
+skills gained: 233 | abilities gained: 52
+dominant tracks: {"field":2,"combat":1,"social":3} | distinct: 3
+dominant tasks: {"water":1,"cook":3,"deadfall":1,"stone":2}
+temperament -> dominant (track/task): {"stoic->field":1,"gentle->none":4,"cautious->none":4,"withdrawn->water":1,"warm->none":3,"gentle->cook":1,"dry->none":3,"steady->deadfall":1,"intense->none":4,"warm->combat":1,"mischievous->none":1,"cautious->social":1,"dry->social":2,"fidgety->stone":1,"steady->cook":1,"restless->field":1,"steady->none":2,"prickly->none":1,"gentle->stone":1,"bold->none":1,"withdrawn->none":1}
+behavior: strong>=1 26 | hybrid 17 | no-strong 10 | top-matched-occ 6 | top-unmatched 21 | no-task 9 | mean top share 0.42 | switched-half 12 | mean stickiness 0.48
+teaching: lessons taught 129 / learned 124 | teachers 29 | seekers 27 | killers 34 (82 tales) | leads 2 | multi-lead 2
+
+roleform-a recorded context (80d, band 99891-99898, NOT re-measured here): qual60=45 villagers, competence 33 changed cells / 50 rung steps (field 14, craft 36), specialist 0->positive 0 villagers, 28/45 at track level >=1, 195 rung-gain lines, 0 resolutions in hunt/scout/patrol/teach/tend/mend.
+
+per-villager rows, qual60 (seed occ temp npcDays tot top share strong matched stick domTrack domTask levels skills+ ab+ teach/learn seek kills):
+ 160201 bus driver intense npcDays=68 tot=384 top=stone share=0.29 strong=[stone,wood] matched=true stick=0.24 domTrack=null domTask=null levels={"combat":1,"field":1,"social":1,"craft":1,"strange":0} skills+6 ab+4 teach=7/4 seek=1 kills=7
+ 160201 aquarium keeper gentle npcDays=67 tot=22 top=stone share=0.32 strong=[stone,cook] matched=false stick=0.41 domTrack=null domTask=null levels={"combat":0,"field":0,"social":0,"craft":0,"strange":0} skills+1 ab+0 teach=0/0 seek=1 kills=1
+ 160201 mason steady npcDays=71 tot=23 top=cook share=0.61 strong=[cook] matched=false stick=0.47 domTrack=null domTask=cook levels={"combat":0,"field":0,"social":0,"craft":1,"strange":0} skills+4 ab+1 teach=2/3 seek=2 kills=0
+ 160201 welder prickly npcDays=83 tot=1 top=water share=1.00 strong=[water] matched=false stick=? domTrack=null domTask=null levels={"combat":1,"field":0,"social":0,"craft":0,"strange":0} skills+5 ab+1 teach=2/4 seek=2 kills=1
+ 160201 librarian dry npcDays=82 tot=3 top=garden share=0.67 strong=[garden,fish] matched=false stick=0.50 domTrack=social domTask=null levels={"combat":0,"field":0,"social":1,"craft":0,"strange":0} skills+6 ab+1 teach=2/4 seek=2 kills=0
+ 160201 dockworker intense npcDays=66 tot=1 top=fish share=1.00 strong=[fish] matched=false stick=? domTrack=null domTask=null levels={"combat":0,"field":0,"social":0,"craft":0,"strange":0} skills+0 ab+0 teach=1/4 seek=2 kills=0
+ 160201 army medic intense npcDays=69 tot=5 top=stone share=0.60 strong=[stone] matched=false stick=0.25 domTrack=craft domTask=null levels={"combat":0,"field":0,"social":0,"craft":1,"strange":0} skills+0 ab+0 teach=4/1 seek=1 kills=0
+ 160202 hunting guide stoic npcDays=95 tot=96 top=water share=0.35 strong=[water] matched=false stick=0.77 domTrack=field domTask=null levels={"combat":1,"field":3,"social":0,"craft":1,"strange":0} skills+10 ab+5 teach=3/4 seek=1 kills=8
+ 160202 Mortician gentle npcDays=98 tot=74 top=stone share=0.27 strong=[stone,wood] matched=false stick=0.52 domTrack=null domTask=null levels={"combat":0,"field":1,"social":0,"craft":2,"strange":0} skills+6 ab+3 teach=5/1 seek=1 kills=1
+ 160202 HVAC tech cautious npcDays=105 tot=11 top=water share=0.45 strong=[water,wood,stone] matched=false stick=0.40 domTrack=null domTask=null levels={"combat":0,"field":0,"social":1,"craft":0,"strange":0} skills+14 ab+1 teach=13/11 seek=3 kills=2
+ 160202 bike messenger restless npcDays=84 tot=7 top=deadfall share=0.86 strong=[deadfall] matched=false stick=0.83 domTrack=field domTask=null levels={"combat":1,"field":2,"social":0,"craft":0,"strange":0} skills+4 ab+3 teach=3/4 seek=1 kills=8
+ 160202 truck driver withdrawn npcDays=139 tot=28 top=water share=0.50 strong=[water] matched=false stick=0.37 domTrack=null domTask=water levels={"combat":0,"field":1,"social":1,"craft":0,"strange":0} skills+8 ab+2 teach=10/6 seek=2 kills=3
+ 160202 crossing guard warm npcDays=139 tot=3 top=deadfall share=0.67 strong=[deadfall,fish] matched=false stick=0.50 domTrack=null domTask=null levels={"combat":0,"field":0,"social":1,"craft":0,"strange":0} skills+8 ab+1 teach=6/6 seek=1 kills=2
+ 160202 Social worker warm npcDays=150 tot=0 top=null share=0.00 strong=[] matched=null stick=? domTrack=null domTask=null levels={"combat":0,"field":0,"social":1,"craft":0,"strange":0} skills+7 ab+1 teach=3/4 seek=2 kills=3
+ 160203 infantry soldier withdrawn npcDays=62 tot=14 top=stone share=0.43 strong=[stone,wood] matched=false stick=0.45 domTrack=combat domTask=null levels={"combat":1,"field":0,"social":0,"craft":0,"strange":0} skills+16 ab+1 teach=4/2 seek=0 kills=0
+ 160203 electrician prickly npcDays=60 tot=615 top=deadfall share=0.25 strong=[deadfall] matched=true stick=0.57 domTrack=craft domTask=null levels={"combat":0,"field":0,"social":0,"craft":2,"strange":0} skills+6 ab+2 teach=3/2 seek=1 kills=4
+ 160203 ESL teacher anxious npcDays=62 tot=3 top=wood share=0.33 strong=[wood,water,fish] matched=false stick=0.00 domTrack=null domTask=null levels={"combat":1,"field":0,"social":0,"craft":0,"strange":0} skills+10 ab+1 teach=1/5 seek=1 kills=3
+ 160203 cook bold npcDays=60 tot=4 top=wood share=0.50 strong=[wood,stone] matched=false stick=0.00 domTrack=null domTask=null levels={"combat":0,"field":0,"social":0,"craft":0,"strange":0} skills+0 ab+0 teach=4/3 seek=1 kills=0
+ 160203 journalist cautious npcDays=69 tot=0 top=null share=0.00 strong=[] matched=null stick=? domTrack=social domTask=null levels={"combat":0,"field":0,"social":1,"craft":0,"strange":0} skills+3 ab+1 teach=3/5 seek=2 kills=0
+ 160203 interpreter dry npcDays=64 tot=1 top=fish share=1.00 strong=[fish] matched=false stick=? domTrack=null domTask=null levels={"combat":0,"field":0,"social":0,"craft":0,"strange":0} skills+0 ab+0 teach=1/1 seek=2 kills=0
+ 160204 Mortician dry npcDays=65 tot=83 top=wood share=0.43 strong=[wood,stone] matched=true stick=0.34 domTrack=null domTask=null levels={"combat":1,"field":1,"social":0,"craft":1,"strange":0} skills+5 ab+3 teach=5/1 seek=2 kills=5
+ 160204 electrician gentle npcDays=150 tot=9 top=cook share=0.89 strong=[cook] matched=false stick=0.88 domTrack=null domTask=cook levels={"combat":1,"field":0,"social":1,"craft":1,"strange":1} skills+7 ab+4 teach=10/4 seek=2 kills=1
+ 160204 piano tuner anxious npcDays=67 tot=14 top=deadfall share=0.93 strong=[deadfall] matched=false stick=0.91 domTrack=null domTask=deadfall levels={"combat":0,"field":0,"social":0,"craft":0,"strange":0} skills+2 ab+0 teach=1/1 seek=1 kills=2
+ 160204 locksmith cautious npcDays=103 tot=3 top=stone share=0.33 strong=[stone,wood,cook] matched=false stick=0.00 domTrack=null domTask=null levels={"combat":0,"field":0,"social":0,"craft":0,"strange":0} skills+4 ab+0 teach=0/0 seek=2 kills=3
+ 160204 piano tuner dry npcDays=121 tot=8 top=stone share=0.50 strong=[stone,wood] matched=false stick=0.29 domTrack=null domTask=null levels={"combat":0,"field":0,"social":0,"craft":0,"strange":0} skills+5 ab+0 teach=2/4 seek=1 kills=1
+ 160204 Veterinarian dry npcDays=62 tot=6 top=deadfall share=1.00 strong=[deadfall] matched=false stick=1.00 domTrack=null domTask=null levels={"combat":0,"field":0,"social":0,"craft":0,"strange":0} skills+4 ab+0 teach=0/1 seek=1 kills=1
+ 160204 carpenter steady npcDays=129 tot=3 top=deadfall share=0.67 strong=[deadfall,fish] matched=true stick=0.50 domTrack=null domTask=deadfall levels={"combat":0,"field":0,"social":0,"craft":0,"strange":0} skills+6 ab+0 teach=1/3 seek=2 kills=2
+ 160204 carpenter gentle npcDays=85 tot=83 top=water share=0.42 strong=[water] matched=false stick=0.53 domTrack=null domTask=null levels={"combat":1,"field":1,"social":1,"craft":1,"strange":0} skills+3 ab+4 teach=5/3 seek=2 kills=2
+ 160204 aquarium keeper gentle npcDays=73 tot=27 top=garden share=0.63 strong=[garden] matched=false stick=0.50 domTrack=null domTask=garden levels={"combat":1,"field":1,"social":0,"craft":0,"strange":0} skills+0 ab+1 teach=5/2 seek=1 kills=1
+ 160204 hunting guide withdrawn npcDays=62 tot=37 top=cook share=0.65 strong=[cook] matched=true stick=0.62 domTrack=null domTask=cook levels={"combat":1,"field":1,"social":0,"craft":0,"strange":0} skills+0 ab+1 teach=2/1 seek=2 kills=0
+ 160205 locksmith dry npcDays=120 tot=114 top=wood share=0.45 strong=[wood,stone] matched=true stick=0.38 domTrack=null domTask=null levels={"combat":2,"field":2,"social":1,"craft":1,"strange":0} skills+13 ab+5 teach=19/7 seek=0 kills=1
+ 160205 comic shop owner intense npcDays=144 tot=315 top=deadfall share=0.25 strong=[] matched=true stick=0.37 domTrack=null domTask=null levels={"combat":0,"field":0,"social":1,"craft":1,"strange":0} skills+7 ab+2 teach=4/6 seek=2 kills=1
+ 160205 paramedic warm npcDays=122 tot=30 top=cook share=0.53 strong=[cook] matched=false stick=0.79 domTrack=combat domTask=cook levels={"combat":2,"field":0,"social":0,"craft":1,"strange":0} skills+7 ab+3 teach=4/2 seek=0 kills=2
+ 160205 blacksmith mischievous npcDays=122 tot=0 top=null share=0.00 strong=[] matched=null stick=? domTrack=null domTask=null levels={"combat":0,"field":0,"social":0,"craft":0,"strange":0} skills+5 ab+0 teach=1/2 seek=2 kills=0
+ 160205 Mortician gentle npcDays=140 tot=0 top=null share=0.00 strong=[] matched=null stick=? domTrack=null domTask=null levels={"combat":0,"field":0,"social":0,"craft":0,"strange":0} skills+6 ab+0 teach=1/2 seek=2 kills=4
+ 160205 journalist cautious npcDays=133 tot=0 top=null share=0.00 strong=[] matched=null stick=? domTrack=social domTask=null levels={"combat":0,"field":0,"social":1,"craft":0,"strange":0} skills+0 ab+1 teach=0/0 seek=0 kills=1
+ 160205 aquarium keeper gentle npcDays=143 tot=1 top=fish share=1.00 strong=[fish] matched=false stick=? domTrack=null domTask=null levels={"combat":0,"field":1,"social":1,"craft":0,"strange":0} skills+3 ab+2 teach=2/3 seek=1 kills=0
+ 160205 interpreter dry npcDays=125 tot=3 top=deadfall share=0.67 strong=[deadfall,cook] matched=false stick=0.50 domTrack=social domTask=null levels={"combat":0,"field":0,"social":1,"craft":0,"strange":0} skills+8 ab+1 teach=3/5 seek=2 kills=1
+ 160205 emergency dispatcher intense npcDays=135 tot=0 top=null share=0.00 strong=[] matched=null stick=? domTrack=null domTask=null levels={"combat":0,"field":0,"social":0,"craft":0,"strange":0} skills+8 ab+0 teach=0/7 seek=1 kills=2
+ 160206 librarian gentle npcDays=92 tot=41 top=water share=0.46 strong=[water,stone,wood] matched=false stick=0.57 domTrack=null domTask=null levels={"combat":0,"field":0,"social":0,"craft":0,"strange":0} skills+4 ab+0 teach=0/4 seek=2 kills=2
+ 160206 Midwife anxious npcDays=78 tot=2 top=deadfall share=0.50 strong=[deadfall,fish] matched=false stick=0.00 domTrack=null domTask=null levels={"combat":1,"field":2,"social":0,"craft":1,"strange":0} skills+5 ab+4 teach=1/2 seek=0 kills=11
+ 160206 Sailor fidgety npcDays=110 tot=52 top=stone share=0.52 strong=[stone,wood] matched=false stick=0.32 domTrack=null domTask=stone levels={"combat":0,"field":0,"social":0,"craft":0,"strange":0} skills+7 ab+0 teach=4/2 seek=0 kills=1
+ 160206 trail crew lead restless npcDays=79 tot=2 top=deadfall share=0.50 strong=[deadfall,fish] matched=false stick=0.00 domTrack=field domTask=null levels={"combat":1,"field":3,"social":0,"craft":0,"strange":0} skills+6 ab+4 teach=3/0 seek=0 kills=7
+ 160206 piano tuner dry npcDays=131 tot=0 top=null share=0.00 strong=[] matched=null stick=? domTrack=null domTask=null levels={"combat":0,"field":0,"social":0,"craft":0,"strange":0} skills+0 ab+0 teach=0/0 seek=0 kills=1
+ 160206 ER nurse bold npcDays=80 tot=3 top=water share=0.67 strong=[water,wood] matched=false stick=0.50 domTrack=field domTask=null levels={"combat":1,"field":2,"social":0,"craft":1,"strange":0} skills+9 ab+4 teach=2/2 seek=0 kills=3
+ 160206 Butcher steady npcDays=94 tot=17 top=cook share=1.00 strong=[cook] matched=true stick=1.00 domTrack=null domTask=cook levels={"combat":1,"field":0,"social":0,"craft":1,"strange":0} skills+4 ab+2 teach=1/0 seek=1 kills=4
+ 160206 florist warm npcDays=109 tot=49 top=wood share=0.37 strong=[wood,water,stone] matched=false stick=0.15 domTrack=null domTask=null levels={"combat":1,"field":1,"social":0,"craft":2,"strange":0} skills+6 ab+4 teach=2/3 seek=0 kills=2
+ 160207 physical therapy aide bold npcDays=72 tot=514 top=cook share=0.27 strong=[cook,deadfall] matched=true stick=0.67 domTrack=null domTask=null levels={"combat":1,"field":1,"social":0,"craft":2,"strange":0} skills+5 ab+4 teach=8/2 seek=1 kills=4
+ 160207 Butcher gentle npcDays=86 tot=15 top=cook share=0.67 strong=[cook] matched=true stick=0.57 domTrack=null domTask=cook levels={"combat":1,"field":1,"social":0,"craft":1,"strange":0} skills+7 ab+3 teach=4/3 seek=2 kills=2
+ 160207 interpreter dry npcDays=125 tot=9 top=deadfall share=0.56 strong=[deadfall] matched=false stick=0.43 domTrack=social domTask=null levels={"combat":0,"field":0,"social":1,"craft":0,"strange":0} skills+8 ab+1 teach=12/5 seek=1 kills=1
+ 160207 trail crew lead restless npcDays=107 tot=0 top=null share=0.00 strong=[] matched=null stick=? domTrack=field domTask=null levels={"combat":2,"field":2,"social":0,"craft":0,"strange":0} skills+8 ab+4 teach=2/2 seek=2 kills=13
+ 160207 ER nurse steady npcDays=144 tot=0 top=null share=0.00 strong=[] matched=null stick=? domTrack=null domTask=null levels={"combat":0,"field":0,"social":0,"craft":0,"strange":0} skills+0 ab+0 teach=0/0 seek=0 kills=1
+ 160207 blacksmith steady npcDays=109 tot=1 top=water share=1.00 strong=[water] matched=false stick=? domTrack=null domTask=null levels={"combat":1,"field":0,"social":0,"craft":0,"strange":0} skills+7 ab+1 teach=2/4 seek=2 kills=1
+ 160207 hotel housekeeper prickly npcDays=115 tot=3 top=deadfall share=0.67 strong=[deadfall,water] matched=false stick=0.50 domTrack=null domTask=null levels={"combat":0,"field":0,"social":0,"craft":0,"strange":0} skills+5 ab+0 teach=1/5 seek=1 kills=2
+ 160207 emergency dispatcher cautious npcDays=142 tot=2 top=deadfall share=0.50 strong=[deadfall,water] matched=false stick=0.00 domTrack=null domTask=null levels={"combat":0,"field":0,"social":1,"craft":0,"strange":0} skills+8 ab+1 teach=2/6 seek=2 kills=1
+ 160208 dry cleaner gentle npcDays=116 tot=133 top=stone share=0.53 strong=[stone,wood] matched=true stick=0.42 domTrack=null domTask=stone levels={"combat":0,"field":0,"social":0,"craft":0,"strange":0} skills+2 ab+0 teach=4/0 seek=2 kills=4
+ 160208 radio DJ intense npcDays=116 tot=570 top=cook share=0.29 strong=[cook,deadfall] matched=true stick=0.75 domTrack=null domTask=null levels={"combat":0,"field":1,"social":1,"craft":1,"strange":0} skills+7 ab+3 teach=6/5 seek=1 kills=3
+ 160208 hunting guide steady npcDays=61 tot=9 top=cook share=1.00 strong=[cook] matched=true stick=1.00 domTrack=field domTask=cook levels={"combat":2,"field":2,"social":0,"craft":0,"strange":0} skills+9 ab+4 teach=3/1 seek=1 kills=8
+ 160208 fishing guide prickly npcDays=67 tot=57 top=wood share=0.51 strong=[wood,stone] matched=false stick=0.44 domTrack=field domTask=wood levels={"combat":1,"field":2,"social":0,"craft":0,"strange":0} skills+7 ab+3 teach=2/0 seek=1 kills=5
+ 160208 line cook withdrawn npcDays=69 tot=15 top=wood share=0.33 strong=[wood,water] matched=false stick=0.15 domTrack=null domTask=null levels={"combat":0,"field":0,"social":0,"craft":1,"strange":0} skills+3 ab+1 teach=0/1 seek=1 kills=0
+ 160208 dockworker intense npcDays=114 tot=3 top=deadfall share=1.00 strong=[deadfall] matched=false stick=1.00 domTrack=null domTask=null levels={"combat":1,"field":0,"social":0,"craft":0,"strange":0} skills+3 ab+1 teach=1/1 seek=0 kills=3
+ 160208 interpreter cautious npcDays=116 tot=0 top=null share=0.00 strong=[] matched=null stick=? domTrack=null domTask=null levels={"combat":0,"field":0,"social":0,"craft":0,"strange":0} skills+9 ab+0 teach=2/6 seek=2 kills=2
+ 160208 Sailor bold npcDays=116 tot=25 top=wood share=0.44 strong=[wood,stone] matched=false stick=0.38 domTrack=null domTask=null levels={"combat":0,"field":1,"social":0,"craft":0,"strange":0} skills+9 ab+1 teach=3/4 seek=0 kills=2
+ 160208 infantry soldier withdrawn npcDays=117 tot=23 top=stone share=0.30 strong=[stone,water,wood] matched=false stick=0.00 domTrack=null domTask=null levels={"combat":1,"field":1,"social":0,"craft":1,"strange":0} skills+14 ab+3 teach=0/0 seek=2 kills=1
+ 160208 zookeeper gentle npcDays=79 tot=0 top=null share=0.00 strong=[] matched=null stick=? domTrack=null domTask=null levels={"combat":0,"field":0,"social":0,"craft":0,"strange":0} skills+2 ab+0 teach=0/2 seek=1 kills=1
+
+== VERDICT (prereg rule: instrument validity + complete capture) ==
+complete corpora: 8/8 
+competence decreases (judged set): 0 | practice-rep decreases across snapshots: 0 | unparsed rung lines: 0
+tracks with >=1 villager at level>=1 or moved >=1 cell (context only, not judged): ["combat","field","social","craft","strange"] (5/5)
+distinct dominant tracks (context only): 4 {"social":5,"craft":2,"field":7,"combat":2}
+GO — instrument valid, first numbers captured on every pilot seed
