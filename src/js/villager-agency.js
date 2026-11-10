@@ -8,6 +8,10 @@
 //   - agencyScore(vid)
 //   - recordDeed(vid, deed)
 //   - startExpedition(vid)
+//   - fighterState(vid, opts)
+//   - contestFleeSealed(opts)
+//   - fighterShouldFlee(st, sit)
+//   - applyFighterState(f, foeId)
 // rules:
 //   - (none documented)
 // consumes:
@@ -88,6 +92,174 @@
   };
 
   var methods = {
+
+    // ---------- FIGHTER STATE (VILLAGER-BRAIN Phase 5) ----------
+    // One shared read for both fight brains: HP fraction, fear/confidence
+    // from recent outcomes, learned species knowledge for *this* foe, and
+    // personality curve params (fleeLine / aiTag) — not the old 3-bucket
+    // collapse alone. Field morale and TB hopeless/reactive flee both ask
+    // the same question through fighterShouldFlee.
+    //
+    // opts: { foeId|species, hp, maxHp, noFlee }
+    fighterState(vid, opts) {
+      opts = opts || {};
+      var foeId = opts.foeId || opts.species || null;
+      var a = null;
+      try { a = this.agencyOf(vid); } catch (e) { a = null; }
+      var know = (a && a.know && a.know[vid]) || { fought: [] };
+      var foughtList = know.fought || [];
+      var fought = !!(foeId && foughtList.indexOf(foeId) !== -1);
+      var scars = (a && a.scars && a.scars[vid]) || [];
+      var bravery = ((a && a.xp && a.xp[vid]) || {}).bravery || 0;
+      var temper = 'steady';
+      try { temper = this.npcTemper(vid) || 'steady'; } catch (e) {}
+
+      var hp, maxHp;
+      if (opts.hp != null) {
+        hp = Number(opts.hp);
+        maxHp = Number(opts.maxHp != null ? opts.maxHp : Math.max(100, hp));
+      } else {
+        hp = ((this.state.village || {}).health || {})[vid];
+        if (hp === undefined || hp === null) hp = 100;
+        hp = Number(hp);
+        maxHp = Math.max(100, hp);
+      }
+      if (!Number.isFinite(hp)) hp = 100;
+      if (!Number.isFinite(maxHp) || maxHp <= 0) maxHp = 100;
+      var hpFrac = hp / Math.max(1, maxHp);
+
+      // Fear / confidence from recent outcomes + temperament + this foe.
+      var fear = 0.2;
+      fear += Math.min(0.35, scars.length * 0.08);
+      try {
+        var needs = this.npcNeeds && this.npcNeeds(vid);
+        if (needs && needs.fear != null) {
+          fear = Math.max(fear, Math.min(1, (needs.fear || 0) / 100));
+        }
+      } catch (e) {}
+      try {
+        if (this.isPostFleeResting && this.isPostFleeResting(vid)) {
+          fear = Math.min(1, fear + 0.25);
+        }
+      } catch (e) {}
+
+      var confidence = 0.35 + Math.min(0.35, bravery * 0.02);
+      if (temper === 'bold' || temper === 'intense') confidence += 0.12;
+      if (temper === 'cautious' || temper === 'withdrawn' || temper === 'guarded') confidence -= 0.12;
+      // Lived contact with this species steadies the hand.
+      if (fought) {
+        confidence = Math.min(1, confidence + 0.2);
+        fear = Math.max(0, fear - 0.15);
+      }
+      // Mauled: scarred survivor of this species — respect without panic erase.
+      var mauled = !!(fought && scars.length > 0);
+      if (mauled) {
+        fear = Math.min(1, fear + 0.1);
+        confidence = Math.max(0, confidence - 0.05);
+      }
+      fear = Math.max(0, Math.min(1, fear));
+      confidence = Math.max(0, Math.min(1, confidence));
+
+      // Curve params from the one personality read (not spawn-time 3-bucket).
+      var fleeLine = 0.52;
+      if (temper === 'bold') fleeLine = 0.38;
+      else if (temper === 'intense') fleeLine = 0.42;
+      else if (temper === 'prickly') fleeLine = 0.45;
+      else if (temper === 'cautious' || temper === 'withdrawn' || temper === 'guarded') fleeLine = 0.62;
+      else if (temper === 'suspicious' || temper === 'cynical') fleeLine = 0.55;
+      fleeLine += (fear - 0.3) * 0.25;
+      fleeLine -= (confidence - 0.4) * 0.25;
+      // Phase 5 channel: personal know.fought bends the flee line.
+      // 0.14 (not 0.12) keeps a clear band at common probe HPs (30%/45%)
+      // after fear/confidence drift — and we round to 3dp so float edges
+      // like 0.30000000000000004 cannot flip fighterShouldFlee.
+      if (fought) fleeLine -= 0.14;
+      fleeLine = Math.round(Math.max(0.15, Math.min(0.75, fleeLine)) * 1000) / 1000;
+
+      var aiTag = 'helpful';
+      if (fleeLine <= 0.42 || temper === 'bold' || temper === 'intense') aiTag = 'brave';
+      else if (fleeLine >= 0.58 || temper === 'cautious' || temper === 'withdrawn' || temper === 'guarded') aiTag = 'cautious';
+
+      // knowsTricks stays false here — villageKnowsTrick is a different
+      // (village-shared) channel; Phase 5's personal channel is know.fought.
+      return {
+        vid: vid,
+        hpFrac: hpFrac,
+        fear: fear,
+        confidence: confidence,
+        temperament: temper,
+        curve: { fleeLine: fleeLine, aiTag: aiTag },
+        species: {
+          id: foeId,
+          fought: fought,
+          mauled: mauled,
+          knowsTricks: false,
+        },
+        noFlee: this.contestFleeSealed(opts),
+      };
+    },
+
+    // Single contest/arena gate — both brains call this instead of each
+    // privately OR-ing arenaContest / noFlee flags.
+    contestFleeSealed(opts) {
+      opts = opts || {};
+      if (opts.noFlee) return true;
+      try { if ((this.state || {}).arenaContest) return true; } catch (e) {}
+      try {
+        if (opts.fight && opts.fight.noFlee) return true;
+      } catch (e) {}
+      try { if ((this.tbfight || {}).noFlee) return true; } catch (e) {}
+      return false;
+    },
+
+    // Shared "do I run?" — TB hopeless/reactive and field morale ask this.
+    // sit: { hopeless, winning, hpFrac, floorFlee }
+    fighterShouldFlee(st, sit) {
+      sit = sit || {};
+      if (!st || st.noFlee) return false;
+      var hpFrac = sit.hpFrac != null ? sit.hpFrac : st.hpFrac;
+      if (!Number.isFinite(hpFrac)) return false;
+      var fleeLine = (st.curve && st.curve.fleeLine != null) ? st.curve.fleeLine : 0.5;
+      if (sit.winning && hpFrac >= 0.05) return false;
+      if (sit.hopeless && hpFrac < fleeLine) return true;
+      if (sit.floorFlee && !sit.winning && hpFrac < fleeLine) return true;
+      return false;
+    },
+
+    // Stamp shared state onto a TB fighter so villagerDecide (pure) and
+    // hopeless/ability paths read the same curves without a Game handle.
+    applyFighterState(f, foeId) {
+      if (!f || !f.villagerId) return null;
+      var foe = foeId || null;
+      if (!foe) {
+        try {
+          var fighters = ((this.tbfight || {}).fighters) || [];
+          for (var i = 0; i < fighters.length; i++) {
+            var o = fighters[i];
+            if (!o || !o.alive || o.fled) continue;
+            if (o.kind === 'monster' || o.kind === 'hostile') {
+              foe = o.id || (o.mdef && o.mdef.id) || null;
+              if (foe) break;
+            }
+          }
+        } catch (e) {}
+      }
+      var st = this.fighterState(f.villagerId, {
+        foeId: foe,
+        hp: f.hp,
+        maxHp: f.maxHp,
+        noFlee: !!(this.tbfight && this.tbfight.noFlee),
+        fight: this.tbfight || null,
+      });
+      f._fighterState = st;
+      f.ai = st.curve.aiTag;
+      f.fleeLine = st.curve.fleeLine;
+      f.fighterFear = st.fear;
+      f.fighterConfidence = st.confidence;
+      f.speciesFought = st.species.fought;
+      f.speciesMauled = st.species.mauled;
+      return st;
+    },
 
     // ---------- STATE ----------
     agencyState() {
@@ -221,20 +393,38 @@
         try {
           if (this.objOf) {
             var oo = this.objOf(rid);
-            if (oo && oo.indoor && oo.state === 'indoor') continue;
+            // Indoor errands normally block ranging — except a dawn-brain
+            // EXPEDITION commitment, which materializes as a short chore hold
+            // so the legacy lottery RNG stays intact until this tick launches.
+            var _brainExped = false;
+            try {
+              if (typeof this.vbrainCommit === 'function') {
+                var _bc = this.vbrainCommit(rid);
+                _brainExped = !!( _bc && _bc.kind === 'EXPEDITION' && _bc.day === ((this.state.scholar || {}).day || 0) );
+              }
+            } catch (e2) {}
+            if (oo && oo.indoor && oo.state === 'indoor' && !_brainExped) continue;
           }
           // TRIGGER REGISTRY (rogue P0-5): the village-danger expedition
           // gate lives in the npc-triggers.js registry row
           // 'expedition_launch' — same predicate, same threshold.
           if (this.npcTrigger && this.npcTrigger(rid, 'expedition_launch')) continue;
         } catch (e) {}
-        // WIN PLAN (winnability push track 2, 2026-11-03): a villager on
-        // a win plan is evaluated at Haven first (stage transitions from
-        // their own gear / a broadcast beat / a companion they can see),
-        // then gated at departure (gear hold, party launch, veteran guard).
-        // 'hold'/'launch' skip the chance roll; 'normal' falls through
-        // untouched. Chain-safe: the module may be absent.
+        // WIN PLAN stage updates still run here (gear/beat/companion state),
+        // but departure strategy no longer re-decides on this tick when the
+        // villager brain owns dawn (VILLAGER-BRAIN phase 1). Chain-safe.
         try { if (this.winPlanHavenTick) this.winPlanHavenTick(rid, hx, hy); } catch (e) {}
+        if (typeof this.vbrainOwnsDawn === 'function' && this.vbrainOwnsDawn()) {
+          // One brain: honor today's dawn commitment only. No chance roll,
+          // no winPlanDepart re-decide — those feed the dawn pass instead.
+          try {
+            if (typeof this.vbrainExecuteDepart === 'function') {
+              var _vbd = this.vbrainExecuteDepart(rid, hx, hy, playerAtHaven);
+              if (_vbd === 'hold' || _vbd === 'launch') continue;
+            }
+          } catch (e) {}
+          continue;
+        }
         try {
           if (this.winPlanDepart) {
             var _wpd = this.winPlanDepart(rid, hx, hy, playerAtHaven);
@@ -1540,7 +1730,13 @@
         // where the scholar shares no language with the villager breaks the
         // fiction the nonverbal thread exists to hold. The extras still
         // fire in every verbal sitting.
-        var extra = (this.convoGet(vid).thread === 'nonverbal') ? [] : (this.agencyChoices(vid) || []);
+        // RESUME OWNERSHIP (dialog audit #7 2026-11-08): while an unfinished
+        // resume/debt/confide owns the sitting, agency pivots wait — same
+        // as Teach suppression in buildMenu / beatMenuResponses.
+        var _ac = this.convoGet(vid);
+        var resumeOwns = _ac && typeof this.convoResumeOwnsSitting === 'function'
+          && this.convoResumeOwnsSitting(vid);
+        var extra = (_ac.thread === 'nonverbal' || resumeOwns) ? [] : (this.agencyChoices(vid) || []);
         // REACTIVE BUDGET (journey-establishment r16 2026-10-19): convoMenuPage
         // deliberately returns reactive (ans:/gq:) menus whole — the question's
         // answers are structural. But a hanging question plus live prepends blew

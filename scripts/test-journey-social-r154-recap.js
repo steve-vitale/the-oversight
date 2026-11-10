@@ -13,12 +13,12 @@
 // as the r27/r31 design says — off by one on both paths.)
 //
 // FIX (src/js/conversation.js): per-sitting press counter c._recapPresses
-// (reset in startConvo); after serving the 5th press, spend 'recap' via
-// convoSpendChoice whatever the line was. The r27/r31 reframe/escalation
-// line-content machinery is untouched.
+// (reset in startConvo); after serving the 3rd press (dialog audit #6
+// tighten; was 5), spend 'recap' via convoSpendChoice whatever the line
+// was. Same-line path also clearer-exits on the 3rd.
 //
 // Run: node scripts/test-journey-social-r154-recap.js  (exit 0 = PASS)
-// RED on unfixed code (6th press served, spent.recap unset); GREEN after.
+// RED on unfixed code (4th+ press served, spent.recap unset); GREEN after.
 'use strict';
 const { loadGame, setupGame } = require('./sim-harness');
 
@@ -61,12 +61,12 @@ const ROTATE = ['goal', 'past', 'plans', 'village', 'gossip', 'personal'];
     return false;
   }
 
-  // Press 'recap' whenever offered, up to 6 attempts. advance=true appends
+  // Press 'recap' whenever offered, up to 5 attempts. advance=true appends
   // a fresh thread-log entry after each press, forcing a new raw line.
   function pressRecapLoop(vid, advance) {
     const served = [];
     let presses = 0;
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 5; i++) {
       const cc = Game.convoGet(vid);
       if (!cc || !cc.active) break;
       const menu = (Game.convoChoices(vid) || []).map(x => x && x.id);
@@ -102,11 +102,11 @@ const ROTATE = ['goal', 'past', 'plans', 'village', 'gossip', 'personal'];
   if (reachedA) {
     a = pressRecapLoop(vidA, true);
     console.log('sittingA(fresh-line): presses=' + a.presses + ' spent=' + a.spentAfter + ' counted=' + a.pressesCounted + ' served=' + JSON.stringify(a.served));
-    check('fresh-line: exactly 5 recap presses served (6th never offered)', a.presses === 5, 'presses=' + a.presses);
-    check('fresh-line: recap spent after the 5th press', a.spentAfter === true, 'spent.recap=' + a.spentAfter);
-    check('fresh-line: press counter reads 5', a.pressesCounted === 5, '_recapPresses=' + a.pressesCounted);
+    check('fresh-line: exactly 3 recap presses served (4th never offered)', a.presses === 3, 'presses=' + a.presses);
+    check('fresh-line: recap spent after the 3rd press', a.spentAfter === true, 'spent.recap=' + a.spentAfter);
+    check('fresh-line: press counter reads 3', a.pressesCounted === 3, '_recapPresses=' + a.pressesCounted);
     const distinctA = new Set(a.served).size;
-    check('fresh-line: the 5 served lines are all distinct (fresh re-anchors)', distinctA === 5, 'distinct=' + distinctA + ' served=' + JSON.stringify(a.served));
+    check('fresh-line: the 3 served lines are all distinct (fresh re-anchors)', distinctA === 3, 'distinct=' + distinctA + ' served=' + JSON.stringify(a.served));
     check('fresh-line: recap absent from the live menu after the cap', a.liveMenu.indexOf('recap') === -1, 'menu=' + JSON.stringify(a.liveMenu));
     check('fresh-line: menu still live (not a winddown/empty menu hiding recap)', a.liveMenu.length >= 2, 'menu=' + JSON.stringify(a.liveMenu));
   }
@@ -125,19 +125,19 @@ const ROTATE = ['goal', 'past', 'plans', 'village', 'gossip', 'personal'];
     { thread: 'past', snippet: 'old life', ex: 0 },
   ];
   const servedB = [];
-  for (let i = 0; i < 6; i++) {
-    if (cB.spent && cB.spent.recap) break; // the fix spends after the 5th
+  for (let i = 0; i < 4; i++) {
+    if (cB.spent && cB.spent.recap) break; // the fix spends after the 3rd
     servedB.push(String(Game.convoRecapLine(vidB) || ''));
-    if (i === 4) break; // never attempt a 6th serve once 5 are served
+    if (i === 2) break; // never attempt a 4th serve once 3 are served
   }
   console.log('sittingB(same-line, direct): served=' + JSON.stringify(servedB) + ' spent=' + !!(cB.spent && cB.spent.recap) + ' counted=' + (cB._recapPresses || 0));
-  check('same-line: exactly 5 recap lines served', servedB.length === 5, 'served=' + servedB.length);
-  check('same-line: recap spent after the 5th press', !!(cB.spent && cB.spent.recap), 'spent.recap=' + !!(cB.spent && cB.spent.recap));
-  check('same-line: press counter reads 5', (cB._recapPresses || 0) === 5, '_recapPresses=' + cB._recapPresses);
+  check('same-line: exactly 3 recap lines served', servedB.length === 3, 'served=' + servedB.length);
+  check('same-line: recap spent after the 3rd press', !!(cB.spent && cB.spent.recap), 'spent.recap=' + !!(cB.spent && cB.spent.recap));
+  check('same-line: press counter reads 3', (cB._recapPresses || 0) === 3, '_recapPresses=' + cB._recapPresses);
   const reframeHit = servedB.some(s => /as i said|like i said|still where we are/i.test(s));
   check('same-line: a reframe line served ("as I said" family)', reframeHit, 'served=' + JSON.stringify(servedB));
-  const escHit = servedB.some(s => /three times/i.test(s));
-  check('same-line: the 5th press escalates honestly ("three times")', escHit, 'served=' + JSON.stringify(servedB));
+  const escHit = servedB.some(s => /going in circles/i.test(s));
+  check('same-line: the 3rd press clearer-exits ("going in circles")', escHit, 'served=' + JSON.stringify(servedB));
   try { Game.endConvo(vidB, 'left'); } catch (e) {}
 
   // ---------- SITTING C: a fresh sitting gets fresh patience ----------

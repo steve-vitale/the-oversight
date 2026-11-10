@@ -129,6 +129,8 @@ const K = require('./lib'), T = K.reporter('harvest-source');
   const predecessor = G.villagerId;
   G.hurtVillager(predecessor, 999, 'contest');
   T.ok('real mantle succession keeps the original harvest source on stored food', G.villagerId !== predecessor && close(frac(G.state.village.pantry[0], npc), 0.25) && !frac(G.state.village.pantry[0], predecessor));
-  T.ok('no source prerequisite silently replaces the unfinished god deed', globalThis.Scattering.Godhood.byId('living_garden').requires.deed === null && !G.state.village.godpathDeeds);
+  T.ok('source ledgers alone do not complete the authored harvest deed',
+    globalThis.Scattering.Godhood.byId('living_garden').requires.deed?.event === 'harvest_fed' &&
+    !G.state.village.godpathDeeds?.[G.villagerId]?.harvest_fed);
   T.done();
 })().catch(e => { console.error(e); process.exitCode = 1; });

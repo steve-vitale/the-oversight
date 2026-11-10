@@ -1,0 +1,4045 @@
+{
+  "note": "metrics.* is authoritative for all23; row.national can disagree (maxRank snapshot vs metric). Seat kind from endings.table_won.seat. Holdout seeds = seedList(80).slice(16) — independent of STD16 screen bank.",
+  "git": "816404356eb69894b3d28ad3cb8c9492e0f90131",
+  "nodeVersion": "v22.23.4",
+  "contractRevision": "panel-contract-rulings-2026-10-24",
+  "sourceDigest": "d69fd97a8e3ab28858c68798c2f80f54ca55fa4fedd0c1bf1995b36d4a60cda5",
+  "observerDigest": "c5f9dc9f0cc283ae41b5dab954d01229d4c0745e6f4fd67c2825954efd0b00bb",
+  "contractDigest": "37bbb0fad9471559345d72b35625c95a4aeb531872d29ee2c9fd887a0c7b55f4",
+  "sourcesStable": true,
+  "neutrality": [
+    {
+      "policy": "capable",
+      "seed": 10,
+      "match": true,
+      "warnings": 0
+    },
+    {
+      "policy": "maker",
+      "seed": 10,
+      "match": true,
+      "warnings": 0
+    },
+    {
+      "policy": "merchant",
+      "seed": 10,
+      "match": true,
+      "warnings": 0
+    },
+    {
+      "policy": "caregiver",
+      "seed": 10,
+      "match": true,
+      "warnings": 0
+    }
+  ],
+  "seeds": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74
+  ],
+  "screenSeeds": [
+    7,
+    42,
+    99,
+    1234,
+    555,
+    777,
+    2026,
+    31337,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9
+  ],
+  "seedOverlap": [],
+  "cases": 256,
+  "starvRuns": 40,
+  "pooledMetrics": {
+    "won": {
+      "n": 256,
+      "mean": 0.6719,
+      "sum": 172
+    },
+    "entered": {
+      "n": 256,
+      "mean": 0.6719,
+      "sum": 172
+    },
+    "table": {
+      "n": 256,
+      "mean": 0.6719,
+      "sum": 172
+    },
+    "national": {
+      "n": 256,
+      "mean": 0.8555,
+      "sum": 219
+    },
+    "survival30": {
+      "n": 256,
+      "mean": 0.8516,
+      "sum": 218
+    },
+    "survival60": {
+      "n": 253,
+      "mean": 0.5455,
+      "sum": 138
+    },
+    "playerDeaths": {
+      "n": 256,
+      "mean": 1.4844,
+      "sum": 380
+    },
+    "villageDeaths": {
+      "n": 256,
+      "mean": 65.6289,
+      "sum": 16801
+    },
+    "communityLost": {
+      "n": 256,
+      "mean": 0.0859,
+      "sum": 22
+    },
+    "livingNpcs": {
+      "n": 256,
+      "mean": 8.4639,
+      "sum": 2166.7549
+    },
+    "lowFood": {
+      "n": 256,
+      "mean": 0.0136,
+      "sum": 3.4751
+    },
+    "npcHungry": {
+      "n": 256,
+      "mean": 0.0954,
+      "sum": 24.4327
+    },
+    "classAccess": {
+      "n": 256,
+      "mean": 0.8789,
+      "sum": 225
+    },
+    "npcClassAccess": {
+      "n": 256,
+      "mean": 0.2114,
+      "sum": 54.1137
+    },
+    "goodGear": {
+      "n": 256,
+      "mean": 0.9922,
+      "sum": 254
+    },
+    "abilityAccepted": {
+      "n": 256,
+      "mean": 82.3516,
+      "sum": 21082
+    }
+  },
+  "pooledSeats": {
+    "full": 24,
+    "lesser": 148,
+    "none": 84
+  },
+  "byPolicy": {
+    "capable": {
+      "metrics": {
+        "won": {
+          "n": 64,
+          "mean": 0.8906,
+          "sum": 57
+        },
+        "entered": {
+          "n": 64,
+          "mean": 0.8906,
+          "sum": 57
+        },
+        "table": {
+          "n": 64,
+          "mean": 0.8906,
+          "sum": 57
+        },
+        "national": {
+          "n": 64,
+          "mean": 0.8281,
+          "sum": 53
+        },
+        "survival30": {
+          "n": 64,
+          "mean": 0.7656,
+          "sum": 49
+        },
+        "survival60": {
+          "n": 63,
+          "mean": 0.4921,
+          "sum": 31
+        },
+        "playerDeaths": {
+          "n": 64,
+          "mean": 1.375,
+          "sum": 88
+        },
+        "villageDeaths": {
+          "n": 64,
+          "mean": 63.8125,
+          "sum": 4084
+        },
+        "communityLost": {
+          "n": 64,
+          "mean": 0.0938,
+          "sum": 6
+        },
+        "livingNpcs": {
+          "n": 64,
+          "mean": 8.7116,
+          "sum": 557.5449
+        },
+        "lowFood": {
+          "n": 64,
+          "mean": 0.0264,
+          "sum": 1.6865
+        },
+        "npcHungry": {
+          "n": 64,
+          "mean": 0.0812,
+          "sum": 5.1996
+        },
+        "classAccess": {
+          "n": 64,
+          "mean": 0.8438,
+          "sum": 54
+        },
+        "npcClassAccess": {
+          "n": 64,
+          "mean": 0.1773,
+          "sum": 11.3495
+        },
+        "goodGear": {
+          "n": 64,
+          "mean": 0.9844,
+          "sum": 63
+        },
+        "abilityAccepted": {
+          "n": 64,
+          "mean": 78.4688,
+          "sum": 5022
+        }
+      },
+      "mismatches": [],
+      "starvLabels": {
+        "villager:starvation": 17,
+        "player:starvation": 2
+      },
+      "seats": [
+        {
+          "seed": 10,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 0,
+          "days": 100,
+          "end": "over-other"
+        },
+        {
+          "seed": 11,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 12,
+          "seat": "full",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 13,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 14,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 0,
+          "days": 91,
+          "end": "over-other"
+        },
+        {
+          "seed": 15,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 16,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 17,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 18,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 92,
+          "end": "over-other"
+        },
+        {
+          "seed": 19,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 20,
+          "seat": "lesser",
+          "path": "witness",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 21,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 76,
+          "end": "village-lost"
+        },
+        {
+          "seed": 22,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 23,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 24,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 25,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 26,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 94,
+          "end": "over-other"
+        },
+        {
+          "seed": 27,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 28,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 0,
+          "days": 93,
+          "end": "over-other"
+        },
+        {
+          "seed": 29,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 30,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 31,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 32,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 152,
+          "end": "survived"
+        },
+        {
+          "seed": 33,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 91,
+          "end": "over-other"
+        },
+        {
+          "seed": 34,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 35,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 36,
+          "seat": "full",
+          "path": "indispensable",
+          "won": 1,
+          "national": 1,
+          "days": 93,
+          "end": "over-other"
+        },
+        {
+          "seed": 37,
+          "seat": "full",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 96,
+          "end": "over-other"
+        },
+        {
+          "seed": 38,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 0,
+          "days": 62,
+          "end": "village-lost"
+        },
+        {
+          "seed": 39,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 40,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 41,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 91,
+          "end": "over-other"
+        },
+        {
+          "seed": 43,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 0,
+          "days": 72,
+          "end": "village-lost"
+        },
+        {
+          "seed": 44,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 45,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 46,
+          "seat": "lesser",
+          "path": "relay",
+          "won": 1,
+          "national": 1,
+          "days": 115,
+          "end": "over-other"
+        },
+        {
+          "seed": 47,
+          "seat": "lesser",
+          "path": "relay",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 48,
+          "seat": "full",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 49,
+          "seat": "lesser",
+          "path": "witness",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 50,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 51,
+          "seat": "full",
+          "path": "indispensable",
+          "won": 1,
+          "national": 1,
+          "days": 91,
+          "end": "over-other"
+        },
+        {
+          "seed": 52,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 0,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 53,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 54,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 55,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 0,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 56,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 57,
+          "seat": "full",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 58,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 74,
+          "end": "village-lost"
+        },
+        {
+          "seed": 59,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 92,
+          "end": "over-other"
+        },
+        {
+          "seed": 60,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 0,
+          "days": 91,
+          "end": "over-other"
+        },
+        {
+          "seed": 61,
+          "seat": "full",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 62,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 91,
+          "end": "over-other"
+        },
+        {
+          "seed": 63,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 64,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 65,
+          "seat": "lesser",
+          "path": "witness",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 66,
+          "seat": "full",
+          "path": "indispensable",
+          "won": 1,
+          "national": 1,
+          "days": 91,
+          "end": "over-other"
+        },
+        {
+          "seed": 67,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 0,
+          "days": 83,
+          "end": "village-lost"
+        },
+        {
+          "seed": 68,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 0,
+          "days": 55,
+          "end": "village-lost"
+        },
+        {
+          "seed": 69,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 0,
+          "days": 115,
+          "end": "over-other"
+        },
+        {
+          "seed": 70,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 71,
+          "seat": "full",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 92,
+          "end": "over-other"
+        },
+        {
+          "seed": 72,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 94,
+          "end": "over-other"
+        },
+        {
+          "seed": 73,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 74,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        }
+      ],
+      "seatCounts": {
+        "full": 9,
+        "lesser": 48,
+        "none": 7
+      },
+      "eventTotals": {
+        "ability_granted": 24258,
+        "ability_used": 5053,
+        "godpath_deed": 860,
+        "table_path": 57,
+        "table_won": 57,
+        "ascension": 18,
+        "scale_rank": 169
+      },
+      "playerClasses": {
+        "forager/gardener": 10,
+        "socialite/showrunner": 12,
+        "forager/feaster": 7,
+        "caregiver/healer": 4,
+        "hunter/stalker": 16,
+        "drifter/trickster": 2,
+        "socialite/demagogue": 7,
+        "caregiver/keeper": 1,
+        "explorer/cartographer": 8,
+        "hunter/beastmaster": 5,
+        "shieldbearer/bulwark": 1
+      },
+      "playerGods": {
+        "voice_of_the_relay": 6,
+        "shepherd_of_the_dead": 2,
+        "the_between": 1,
+        "apex_predator": 2
+      }
+    },
+    "maker": {
+      "metrics": {
+        "won": {
+          "n": 64,
+          "mean": 0.5,
+          "sum": 32
+        },
+        "entered": {
+          "n": 64,
+          "mean": 0.5,
+          "sum": 32
+        },
+        "table": {
+          "n": 64,
+          "mean": 0.5,
+          "sum": 32
+        },
+        "national": {
+          "n": 64,
+          "mean": 0.8594,
+          "sum": 55
+        },
+        "survival30": {
+          "n": 64,
+          "mean": 0.8125,
+          "sum": 52
+        },
+        "survival60": {
+          "n": 64,
+          "mean": 0.4375,
+          "sum": 28
+        },
+        "playerDeaths": {
+          "n": 64,
+          "mean": 1.6563,
+          "sum": 106
+        },
+        "villageDeaths": {
+          "n": 64,
+          "mean": 66.7813,
+          "sum": 4274
+        },
+        "communityLost": {
+          "n": 64,
+          "mean": 0.125,
+          "sum": 8
+        },
+        "livingNpcs": {
+          "n": 64,
+          "mean": 8.2157,
+          "sum": 525.8031
+        },
+        "lowFood": {
+          "n": 64,
+          "mean": 0.0061,
+          "sum": 0.3909
+        },
+        "npcHungry": {
+          "n": 64,
+          "mean": 0.1555,
+          "sum": 9.9545
+        },
+        "classAccess": {
+          "n": 64,
+          "mean": 0.9219,
+          "sum": 59
+        },
+        "npcClassAccess": {
+          "n": 64,
+          "mean": 0.2199,
+          "sum": 14.076
+        },
+        "goodGear": {
+          "n": 64,
+          "mean": 0.9844,
+          "sum": 63
+        },
+        "abilityAccepted": {
+          "n": 64,
+          "mean": 90.0781,
+          "sum": 5765
+        }
+      },
+      "mismatches": [],
+      "starvLabels": {
+        "villager:starvation": 17,
+        "player:starvation": 2
+      },
+      "seats": [
+        {
+          "seed": 10,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 0,
+          "days": 151,
+          "end": "survived"
+        },
+        {
+          "seed": 11,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 12,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 153,
+          "end": "survived"
+        },
+        {
+          "seed": 13,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 0,
+          "days": 73,
+          "end": "village-lost"
+        },
+        {
+          "seed": 14,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 137,
+          "end": "over-other"
+        },
+        {
+          "seed": 15,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 0,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 16,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 151,
+          "end": "survived"
+        },
+        {
+          "seed": 17,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 128,
+          "end": "over-other"
+        },
+        {
+          "seed": 18,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 0,
+          "days": 74,
+          "end": "village-lost"
+        },
+        {
+          "seed": 19,
+          "seat": "lesser",
+          "path": "defiant",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 20,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 91,
+          "end": "over-other"
+        },
+        {
+          "seed": 21,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 151,
+          "end": "survived"
+        },
+        {
+          "seed": 22,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 91,
+          "end": "over-other"
+        },
+        {
+          "seed": 23,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 152,
+          "end": "survived"
+        },
+        {
+          "seed": 24,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 0,
+          "days": 62,
+          "end": "village-lost"
+        },
+        {
+          "seed": 25,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 152,
+          "end": "survived"
+        },
+        {
+          "seed": 26,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 151,
+          "end": "survived"
+        },
+        {
+          "seed": 27,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 28,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 96,
+          "end": "over-other"
+        },
+        {
+          "seed": 29,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 30,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 82,
+          "end": "village-lost"
+        },
+        {
+          "seed": 31,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 151,
+          "end": "survived"
+        },
+        {
+          "seed": 32,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 152,
+          "end": "survived"
+        },
+        {
+          "seed": 33,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 150,
+          "end": "survived"
+        },
+        {
+          "seed": 34,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 150,
+          "end": "survived"
+        },
+        {
+          "seed": 35,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 151,
+          "end": "survived"
+        },
+        {
+          "seed": 36,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 37,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 38,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 152,
+          "end": "survived"
+        },
+        {
+          "seed": 39,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 40,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 123,
+          "end": "over-other"
+        },
+        {
+          "seed": 41,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 43,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 0,
+          "days": 75,
+          "end": "village-lost"
+        },
+        {
+          "seed": 44,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 45,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 151,
+          "end": "survived"
+        },
+        {
+          "seed": 46,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 151,
+          "end": "survived"
+        },
+        {
+          "seed": 47,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 151,
+          "end": "survived"
+        },
+        {
+          "seed": 48,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 0,
+          "days": 152,
+          "end": "survived"
+        },
+        {
+          "seed": 49,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 91,
+          "end": "over-other"
+        },
+        {
+          "seed": 50,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 120,
+          "end": "over-other"
+        },
+        {
+          "seed": 51,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 100,
+          "end": "over-other"
+        },
+        {
+          "seed": 52,
+          "seat": "lesser",
+          "path": "relay",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 53,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 54,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 152,
+          "end": "survived"
+        },
+        {
+          "seed": 55,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 88,
+          "end": "village-lost"
+        },
+        {
+          "seed": 56,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 152,
+          "end": "survived"
+        },
+        {
+          "seed": 57,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 152,
+          "end": "survived"
+        },
+        {
+          "seed": 58,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 0,
+          "days": 26,
+          "end": "village-lost"
+        },
+        {
+          "seed": 59,
+          "seat": "full",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 60,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 152,
+          "end": "survived"
+        },
+        {
+          "seed": 61,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 152,
+          "end": "survived"
+        },
+        {
+          "seed": 62,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 63,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 64,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 65,
+          "seat": "full",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 66,
+          "seat": "full",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 67,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 98,
+          "end": "over-other"
+        },
+        {
+          "seed": 68,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 151,
+          "end": "survived"
+        },
+        {
+          "seed": 69,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 0,
+          "days": 119,
+          "end": "over-other"
+        },
+        {
+          "seed": 70,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 144,
+          "end": "over-other"
+        },
+        {
+          "seed": 71,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 106,
+          "end": "village-lost"
+        },
+        {
+          "seed": 72,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 113,
+          "end": "over-other"
+        },
+        {
+          "seed": 73,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 74,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 151,
+          "end": "survived"
+        }
+      ],
+      "seatCounts": {
+        "full": 3,
+        "lesser": 29,
+        "none": 32
+      },
+      "eventTotals": {
+        "ability_granted": 22956,
+        "ability_used": 5807,
+        "godpath_deed": 949,
+        "table_path": 35,
+        "table_won": 32,
+        "ascension": 17,
+        "scale_rank": 172
+      },
+      "playerClasses": {
+        "explorer/cartographer": 9,
+        "forager/feaster": 13,
+        "forager/gardener": 23,
+        "socialite/showrunner": 15,
+        "hunter/beastmaster": 1,
+        "hunter/stalker": 24,
+        "caregiver/healer": 4,
+        "explorer/seer": 1,
+        "socialite/demagogue": 3,
+        "survivalist/furnace": 1,
+        "drifter/trickster": 2
+      },
+      "playerGods": {
+        "all_seeing": 2,
+        "apex_predator": 2,
+        "shepherd_of_the_dead": 2,
+        "voice_of_the_relay": 4,
+        "the_between": 1
+      }
+    },
+    "merchant": {
+      "metrics": {
+        "won": {
+          "n": 64,
+          "mean": 0.5781,
+          "sum": 37
+        },
+        "entered": {
+          "n": 64,
+          "mean": 0.5781,
+          "sum": 37
+        },
+        "table": {
+          "n": 64,
+          "mean": 0.5781,
+          "sum": 37
+        },
+        "national": {
+          "n": 64,
+          "mean": 0.8438,
+          "sum": 54
+        },
+        "survival30": {
+          "n": 64,
+          "mean": 0.9375,
+          "sum": 60
+        },
+        "survival60": {
+          "n": 62,
+          "mean": 0.6613,
+          "sum": 41
+        },
+        "playerDeaths": {
+          "n": 64,
+          "mean": 1.4531,
+          "sum": 93
+        },
+        "villageDeaths": {
+          "n": 64,
+          "mean": 65.75,
+          "sum": 4208
+        },
+        "communityLost": {
+          "n": 64,
+          "mean": 0.1094,
+          "sum": 7
+        },
+        "livingNpcs": {
+          "n": 64,
+          "mean": 8.2903,
+          "sum": 530.582
+        },
+        "lowFood": {
+          "n": 64,
+          "mean": 0.0138,
+          "sum": 0.8825
+        },
+        "npcHungry": {
+          "n": 64,
+          "mean": 0.0984,
+          "sum": 6.2976
+        },
+        "classAccess": {
+          "n": 64,
+          "mean": 0.8594,
+          "sum": 55
+        },
+        "npcClassAccess": {
+          "n": 64,
+          "mean": 0.2336,
+          "sum": 14.9534
+        },
+        "goodGear": {
+          "n": 64,
+          "mean": 1,
+          "sum": 64
+        },
+        "abilityAccepted": {
+          "n": 64,
+          "mean": 78.875,
+          "sum": 5048
+        }
+      },
+      "mismatches": [],
+      "starvLabels": {
+        "player:starvation": 8,
+        "villager:starvation": 24
+      },
+      "seats": [
+        {
+          "seed": 10,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 0,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 11,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 149,
+          "end": "survived"
+        },
+        {
+          "seed": 12,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 13,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 152,
+          "end": "survived"
+        },
+        {
+          "seed": 14,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 15,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 116,
+          "end": "over-other"
+        },
+        {
+          "seed": 16,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 17,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 111,
+          "end": "village-lost"
+        },
+        {
+          "seed": 18,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 0,
+          "days": 152,
+          "end": "survived"
+        },
+        {
+          "seed": 19,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 152,
+          "end": "survived"
+        },
+        {
+          "seed": 20,
+          "seat": "lesser",
+          "path": "assimilated",
+          "won": 1,
+          "national": 1,
+          "days": 92,
+          "end": "over-other"
+        },
+        {
+          "seed": 21,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 91,
+          "end": "over-other"
+        },
+        {
+          "seed": 22,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 23,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 24,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 0,
+          "days": 68,
+          "end": "village-lost"
+        },
+        {
+          "seed": 25,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 117,
+          "end": "over-other"
+        },
+        {
+          "seed": 26,
+          "seat": "lesser",
+          "path": "witness",
+          "won": 1,
+          "national": 1,
+          "days": 95,
+          "end": "over-other"
+        },
+        {
+          "seed": 27,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 0,
+          "days": 152,
+          "end": "survived"
+        },
+        {
+          "seed": 28,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 0,
+          "days": 151,
+          "end": "survived"
+        },
+        {
+          "seed": 29,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 30,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 0,
+          "days": 55,
+          "end": "village-lost"
+        },
+        {
+          "seed": 31,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 151,
+          "end": "survived"
+        },
+        {
+          "seed": 32,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 152,
+          "end": "survived"
+        },
+        {
+          "seed": 33,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 92,
+          "end": "over-other"
+        },
+        {
+          "seed": 34,
+          "seat": "lesser",
+          "path": "witness",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 35,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 152,
+          "end": "survived"
+        },
+        {
+          "seed": 36,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 37,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 151,
+          "end": "survived"
+        },
+        {
+          "seed": 38,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 0,
+          "days": 52,
+          "end": "village-lost"
+        },
+        {
+          "seed": 39,
+          "seat": "lesser",
+          "path": "relay",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 40,
+          "seat": "full",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 41,
+          "seat": "lesser",
+          "path": "assimilated",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 43,
+          "seat": "lesser",
+          "path": "relay",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 44,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 45,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 115,
+          "end": "over-other"
+        },
+        {
+          "seed": 46,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 152,
+          "end": "survived"
+        },
+        {
+          "seed": 47,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 151,
+          "end": "survived"
+        },
+        {
+          "seed": 48,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 152,
+          "end": "survived"
+        },
+        {
+          "seed": 49,
+          "seat": "full",
+          "path": "witness",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 50,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 129,
+          "end": "over-other"
+        },
+        {
+          "seed": 51,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 111,
+          "end": "over-other"
+        },
+        {
+          "seed": 52,
+          "seat": "lesser",
+          "path": "relay",
+          "won": 1,
+          "national": 1,
+          "days": 92,
+          "end": "over-other"
+        },
+        {
+          "seed": 53,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 54,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 151,
+          "end": "survived"
+        },
+        {
+          "seed": 55,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 0,
+          "days": 92,
+          "end": "over-other"
+        },
+        {
+          "seed": 56,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 151,
+          "end": "survived"
+        },
+        {
+          "seed": 57,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 58,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 0,
+          "days": 62,
+          "end": "village-lost"
+        },
+        {
+          "seed": 59,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 151,
+          "end": "survived"
+        },
+        {
+          "seed": 60,
+          "seat": "full",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 132,
+          "end": "over-other"
+        },
+        {
+          "seed": 61,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 152,
+          "end": "survived"
+        },
+        {
+          "seed": 62,
+          "seat": "lesser",
+          "path": "relay",
+          "won": 1,
+          "national": 1,
+          "days": 93,
+          "end": "over-other"
+        },
+        {
+          "seed": 63,
+          "seat": "lesser",
+          "path": "relay",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 64,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 142,
+          "end": "village-lost"
+        },
+        {
+          "seed": 65,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 66,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 150,
+          "end": "survived"
+        },
+        {
+          "seed": 67,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 0,
+          "days": 108,
+          "end": "village-lost"
+        },
+        {
+          "seed": 68,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 93,
+          "end": "over-other"
+        },
+        {
+          "seed": 69,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 152,
+          "end": "survived"
+        },
+        {
+          "seed": 70,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 151,
+          "end": "survived"
+        },
+        {
+          "seed": 71,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 72,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 73,
+          "seat": "full",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 145,
+          "end": "over-other"
+        },
+        {
+          "seed": 74,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        }
+      ],
+      "seatCounts": {
+        "full": 4,
+        "lesser": 33,
+        "none": 27
+      },
+      "eventTotals": {
+        "ability_granted": 21209,
+        "ability_used": 5085,
+        "godpath_deed": 942,
+        "table_path": 39,
+        "table_won": 37,
+        "ascension": 19,
+        "scale_rank": 181
+      },
+      "playerClasses": {
+        "forager/feaster": 12,
+        "socialite/showrunner": 14,
+        "hunter/stalker": 22,
+        "forager/gardener": 17,
+        "caregiver/keeper": 1,
+        "socialite/demagogue": 4,
+        "drifter/trickster": 8,
+        "drifter/phantom": 1,
+        "hunter/beastmaster": 3,
+        "survivalist/furnace": 2,
+        "explorer/cartographer": 4,
+        "caregiver/healer": 4
+      },
+      "playerGods": {
+        "shepherd_of_the_dead": 3,
+        "the_between": 3,
+        "apex_predator": 4,
+        "voice_of_the_relay": 1
+      }
+    },
+    "caregiver": {
+      "metrics": {
+        "won": {
+          "n": 64,
+          "mean": 0.7188,
+          "sum": 46
+        },
+        "entered": {
+          "n": 64,
+          "mean": 0.7188,
+          "sum": 46
+        },
+        "table": {
+          "n": 64,
+          "mean": 0.7188,
+          "sum": 46
+        },
+        "national": {
+          "n": 64,
+          "mean": 0.8906,
+          "sum": 57
+        },
+        "survival30": {
+          "n": 64,
+          "mean": 0.8906,
+          "sum": 57
+        },
+        "survival60": {
+          "n": 64,
+          "mean": 0.5938,
+          "sum": 38
+        },
+        "playerDeaths": {
+          "n": 64,
+          "mean": 1.4531,
+          "sum": 93
+        },
+        "villageDeaths": {
+          "n": 64,
+          "mean": 66.1719,
+          "sum": 4235
+        },
+        "communityLost": {
+          "n": 64,
+          "mean": 0.0156,
+          "sum": 1
+        },
+        "livingNpcs": {
+          "n": 64,
+          "mean": 8.6379,
+          "sum": 552.8249
+        },
+        "lowFood": {
+          "n": 64,
+          "mean": 0.008,
+          "sum": 0.5152
+        },
+        "npcHungry": {
+          "n": 64,
+          "mean": 0.0466,
+          "sum": 2.9809
+        },
+        "classAccess": {
+          "n": 64,
+          "mean": 0.8906,
+          "sum": 57
+        },
+        "npcClassAccess": {
+          "n": 64,
+          "mean": 0.2146,
+          "sum": 13.7347
+        },
+        "goodGear": {
+          "n": 64,
+          "mean": 1,
+          "sum": 64
+        },
+        "abilityAccepted": {
+          "n": 64,
+          "mean": 81.9844,
+          "sum": 5247
+        }
+      },
+      "mismatches": [],
+      "starvLabels": {
+        "player:starvation": 6,
+        "villager:starvation": 7
+      },
+      "seats": [
+        {
+          "seed": 10,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 114,
+          "end": "over-other"
+        },
+        {
+          "seed": 11,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 151,
+          "end": "survived"
+        },
+        {
+          "seed": 12,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 96,
+          "end": "over-other"
+        },
+        {
+          "seed": 13,
+          "seat": "full",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 14,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 91,
+          "end": "over-other"
+        },
+        {
+          "seed": 15,
+          "seat": "full",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 16,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 151,
+          "end": "over-other"
+        },
+        {
+          "seed": 17,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 0,
+          "days": 91,
+          "end": "over-other"
+        },
+        {
+          "seed": 18,
+          "seat": "lesser",
+          "path": "witness",
+          "won": 1,
+          "national": 0,
+          "days": 92,
+          "end": "over-other"
+        },
+        {
+          "seed": 19,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 20,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 21,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 22,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 152,
+          "end": "survived"
+        },
+        {
+          "seed": 23,
+          "seat": "full",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 24,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 151,
+          "end": "survived"
+        },
+        {
+          "seed": 25,
+          "seat": "full",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 91,
+          "end": "over-other"
+        },
+        {
+          "seed": 26,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 27,
+          "seat": "full",
+          "path": "indispensable",
+          "won": 1,
+          "national": 1,
+          "days": 136,
+          "end": "over-other"
+        },
+        {
+          "seed": 28,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 151,
+          "end": "survived"
+        },
+        {
+          "seed": 29,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 30,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 0,
+          "days": 75,
+          "end": "village-lost"
+        },
+        {
+          "seed": 31,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 0,
+          "days": 91,
+          "end": "over-other"
+        },
+        {
+          "seed": 32,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 152,
+          "end": "survived"
+        },
+        {
+          "seed": 33,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 34,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 35,
+          "seat": "full",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 115,
+          "end": "over-other"
+        },
+        {
+          "seed": 36,
+          "seat": "lesser",
+          "path": "relay",
+          "won": 1,
+          "national": 1,
+          "days": 95,
+          "end": "over-other"
+        },
+        {
+          "seed": 37,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 151,
+          "end": "survived"
+        },
+        {
+          "seed": 38,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 142,
+          "end": "over-other"
+        },
+        {
+          "seed": 39,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 151,
+          "end": "survived"
+        },
+        {
+          "seed": 40,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 41,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 152,
+          "end": "survived"
+        },
+        {
+          "seed": 43,
+          "seat": "full",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 144,
+          "end": "over-other"
+        },
+        {
+          "seed": 44,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 45,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 121,
+          "end": "over-other"
+        },
+        {
+          "seed": 46,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 152,
+          "end": "survived"
+        },
+        {
+          "seed": 47,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 48,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 152,
+          "end": "survived"
+        },
+        {
+          "seed": 49,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 92,
+          "end": "over-other"
+        },
+        {
+          "seed": 50,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 93,
+          "end": "over-other"
+        },
+        {
+          "seed": 51,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 52,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 106,
+          "end": "over-other"
+        },
+        {
+          "seed": 53,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 93,
+          "end": "over-other"
+        },
+        {
+          "seed": 54,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 151,
+          "end": "survived"
+        },
+        {
+          "seed": 55,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 0,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 56,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 97,
+          "end": "over-other"
+        },
+        {
+          "seed": 57,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 152,
+          "end": "survived"
+        },
+        {
+          "seed": 58,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 153,
+          "end": "survived"
+        },
+        {
+          "seed": 59,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 151,
+          "end": "survived"
+        },
+        {
+          "seed": 60,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 125,
+          "end": "over-other"
+        },
+        {
+          "seed": 61,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 62,
+          "seat": "full",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 126,
+          "end": "over-other"
+        },
+        {
+          "seed": 63,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 91,
+          "end": "over-other"
+        },
+        {
+          "seed": 64,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 65,
+          "seat": "lesser",
+          "path": "relay",
+          "won": 1,
+          "national": 1,
+          "days": 104,
+          "end": "over-other"
+        },
+        {
+          "seed": 66,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 67,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 152,
+          "end": "survived"
+        },
+        {
+          "seed": 68,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 69,
+          "seat": "lesser",
+          "path": "witness",
+          "won": 1,
+          "national": 0,
+          "days": 98,
+          "end": "over-other"
+        },
+        {
+          "seed": 70,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 150,
+          "end": "survived"
+        },
+        {
+          "seed": 71,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        },
+        {
+          "seed": 72,
+          "seat": "none",
+          "path": null,
+          "won": 0,
+          "national": 1,
+          "days": 151,
+          "end": "survived"
+        },
+        {
+          "seed": 73,
+          "seat": "lesser",
+          "path": "beloved",
+          "won": 1,
+          "national": 0,
+          "days": 91,
+          "end": "over-other"
+        },
+        {
+          "seed": 74,
+          "seat": "lesser",
+          "path": "feared",
+          "won": 1,
+          "national": 1,
+          "days": 90,
+          "end": "over-other"
+        }
+      ],
+      "seatCounts": {
+        "full": 8,
+        "lesser": 38,
+        "none": 18
+      },
+      "eventTotals": {
+        "ability_granted": 23043,
+        "ability_used": 5541,
+        "godpath_deed": 885,
+        "table_path": 46,
+        "table_won": 46,
+        "ascension": 15,
+        "scale_rank": 179
+      },
+      "playerClasses": {
+        "hunter/stalker": 25,
+        "explorer/cartographer": 7,
+        "forager/gardener": 13,
+        "forager/feaster": 11,
+        "socialite/showrunner": 15,
+        "socialite/demagogue": 5,
+        "drifter/trickster": 4,
+        "caregiver/healer": 2,
+        "survivalist/furnace": 2,
+        "hunter/beastmaster": 1
+      },
+      "playerGods": {
+        "voice_of_the_relay": 2,
+        "apex_predator": 2
+      }
+    }
+  },
+  "utilization": {
+    "capable": {
+      "playerClasses": {
+        "forager/gardener": 10,
+        "socialite/showrunner": 12,
+        "forager/feaster": 7,
+        "caregiver/healer": 4,
+        "hunter/stalker": 16,
+        "drifter/trickster": 2,
+        "socialite/demagogue": 7,
+        "caregiver/keeper": 1,
+        "explorer/cartographer": 8,
+        "hunter/beastmaster": 5,
+        "shieldbearer/bulwark": 1
+      },
+      "playerGods": {
+        "voice_of_the_relay": 6,
+        "shepherd_of_the_dead": 2,
+        "the_between": 1,
+        "apex_predator": 2
+      },
+      "events": {
+        "ability_granted": 24258,
+        "ability_used": 5053,
+        "godpath_deed": 860,
+        "table_path": 57,
+        "table_won": 57,
+        "ascension": 18,
+        "scale_rank": 169
+      },
+      "controllerCounters": {
+        "convoPageReads": {
+          "sum": 57299,
+          "reportedRuns": 64
+        },
+        "convoPageNavigation": {
+          "sum": 4056,
+          "reportedRuns": 64
+        },
+        "convoPageHiddenSelections": {
+          "sum": 49,
+          "reportedRuns": 28
+        }
+      }
+    },
+    "maker": {
+      "playerClasses": {
+        "explorer/cartographer": 9,
+        "forager/feaster": 13,
+        "forager/gardener": 23,
+        "socialite/showrunner": 15,
+        "hunter/beastmaster": 1,
+        "hunter/stalker": 24,
+        "caregiver/healer": 4,
+        "explorer/seer": 1,
+        "socialite/demagogue": 3,
+        "survivalist/furnace": 1,
+        "drifter/trickster": 2
+      },
+      "playerGods": {
+        "all_seeing": 2,
+        "apex_predator": 2,
+        "shepherd_of_the_dead": 2,
+        "voice_of_the_relay": 4,
+        "the_between": 1
+      },
+      "events": {
+        "ability_granted": 22956,
+        "ability_used": 5807,
+        "godpath_deed": 949,
+        "table_path": 35,
+        "table_won": 32,
+        "ascension": 17,
+        "scale_rank": 172
+      },
+      "controllerCounters": {
+        "convoPageReads": {
+          "sum": 72338,
+          "reportedRuns": 64
+        },
+        "convoPageNavigation": {
+          "sum": 4139,
+          "reportedRuns": 64
+        },
+        "convoPageHiddenSelections": {
+          "sum": 63,
+          "reportedRuns": 33
+        },
+        "livelihoodKnowledgeTrips": {
+          "sum": 895,
+          "reportedRuns": 63
+        },
+        "livelihoodRuinSearches": {
+          "sum": 53,
+          "reportedRuns": 53
+        },
+        "livelihoodHarvestTrips": {
+          "sum": 630,
+          "reportedRuns": 64
+        },
+        "livelihoodBuys": {
+          "sum": 72,
+          "reportedRuns": 30
+        },
+        "livelihoodSales": {
+          "sum": 123,
+          "reportedRuns": 31
+        },
+        "livelihoodBooksRead": {
+          "sum": 35,
+          "reportedRuns": 33
+        },
+        "livelihoodDrawsDrivenOff": {
+          "sum": 330,
+          "reportedRuns": 60
+        },
+        "livelihoodCounterCooks": {
+          "sum": 13,
+          "reportedRuns": 8
+        },
+        "livelihoodCounterPreserves": {
+          "sum": 9,
+          "reportedRuns": 6
+        },
+        "livelihoodCounterStored": {
+          "sum": 9,
+          "reportedRuns": 6
+        },
+        "livelihoodCrafts": {
+          "sum": 5,
+          "reportedRuns": 5
+        },
+        "livelihoodHideHandledUnits": {
+          "sum": 86,
+          "reportedRuns": 27
+        },
+        "livelihoodHideTrials": {
+          "sum": 31,
+          "reportedRuns": 15
+        },
+        "livelihoodHideTrialSuccesses": {
+          "sum": 7,
+          "reportedRuns": 7
+        },
+        "livelihoodMaterialUnits": {
+          "sum": 2,
+          "reportedRuns": 1
+        },
+        "livelihoodMaterialTakes": {
+          "sum": 2,
+          "reportedRuns": 1
+        }
+      }
+    },
+    "merchant": {
+      "playerClasses": {
+        "forager/feaster": 12,
+        "socialite/showrunner": 14,
+        "hunter/stalker": 22,
+        "forager/gardener": 17,
+        "caregiver/keeper": 1,
+        "socialite/demagogue": 4,
+        "drifter/trickster": 8,
+        "drifter/phantom": 1,
+        "hunter/beastmaster": 3,
+        "survivalist/furnace": 2,
+        "explorer/cartographer": 4,
+        "caregiver/healer": 4
+      },
+      "playerGods": {
+        "shepherd_of_the_dead": 3,
+        "the_between": 3,
+        "apex_predator": 4,
+        "voice_of_the_relay": 1
+      },
+      "events": {
+        "ability_granted": 21209,
+        "ability_used": 5085,
+        "godpath_deed": 942,
+        "table_path": 39,
+        "table_won": 37,
+        "ascension": 19,
+        "scale_rank": 181
+      },
+      "controllerCounters": {
+        "convoPageReads": {
+          "sum": 69814,
+          "reportedRuns": 64
+        },
+        "convoPageNavigation": {
+          "sum": 3912,
+          "reportedRuns": 64
+        },
+        "livelihoodHarvestTrips": {
+          "sum": 575,
+          "reportedRuns": 64
+        },
+        "livelihoodDrawsDrivenOff": {
+          "sum": 288,
+          "reportedRuns": 58
+        },
+        "livelihoodBuys": {
+          "sum": 74,
+          "reportedRuns": 28
+        },
+        "livelihoodSales": {
+          "sum": 172,
+          "reportedRuns": 25
+        },
+        "convoPageHiddenSelections": {
+          "sum": 34,
+          "reportedRuns": 23
+        }
+      }
+    },
+    "caregiver": {
+      "playerClasses": {
+        "hunter/stalker": 25,
+        "explorer/cartographer": 7,
+        "forager/gardener": 13,
+        "forager/feaster": 11,
+        "socialite/showrunner": 15,
+        "socialite/demagogue": 5,
+        "drifter/trickster": 4,
+        "caregiver/healer": 2,
+        "survivalist/furnace": 2,
+        "hunter/beastmaster": 1
+      },
+      "playerGods": {
+        "voice_of_the_relay": 2,
+        "apex_predator": 2
+      },
+      "events": {
+        "ability_granted": 23043,
+        "ability_used": 5541,
+        "godpath_deed": 885,
+        "table_path": 46,
+        "table_won": 46,
+        "ascension": 15,
+        "scale_rank": 179
+      },
+      "controllerCounters": {
+        "convoPageReads": {
+          "sum": 70750,
+          "reportedRuns": 64
+        },
+        "convoPageNavigation": {
+          "sum": 4192,
+          "reportedRuns": 64
+        },
+        "livelihoodPatients": {
+          "sum": 3045,
+          "reportedRuns": 64
+        },
+        "livelihoodComforts": {
+          "sum": 603,
+          "reportedRuns": 64
+        },
+        "livelihoodDrawsDrivenOff": {
+          "sum": 386,
+          "reportedRuns": 63
+        },
+        "livelihoodTreatments": {
+          "sum": 252,
+          "reportedRuns": 36
+        },
+        "convoPageHiddenSelections": {
+          "sum": 55,
+          "reportedRuns": 31
+        }
+      }
+    }
+  },
+  "vsScreen": {
+    "pooled": [
+      {
+        "id": "won",
+        "screen": 0.7031,
+        "holdout": 0.6719,
+        "delta": -0.0312,
+        "tolerance": 0.02,
+        "within": false
+      },
+      {
+        "id": "table",
+        "screen": 0.7031,
+        "holdout": 0.6719,
+        "delta": -0.0312,
+        "tolerance": 0.02,
+        "within": false
+      },
+      {
+        "id": "national",
+        "screen": 0.8594,
+        "holdout": 0.8555,
+        "delta": -0.0039,
+        "tolerance": 0.02,
+        "within": true
+      },
+      {
+        "id": "survival30",
+        "screen": 0.9375,
+        "holdout": 0.8516,
+        "delta": -0.0859,
+        "tolerance": 0.02,
+        "within": false
+      },
+      {
+        "id": "survival60",
+        "screen": 0.5156,
+        "holdout": 0.5455,
+        "delta": 0.0299,
+        "tolerance": 0.02,
+        "within": false
+      },
+      {
+        "id": "communityLost",
+        "screen": 0.0625,
+        "holdout": 0.0859,
+        "delta": 0.0234,
+        "tolerance": 0.02,
+        "within": false
+      }
+    ],
+    "byPolicy": {
+      "capable": [
+        {
+          "id": "won",
+          "screen": 0.9375,
+          "holdout": 0.8906,
+          "delta": -0.0469,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "id": "table",
+          "screen": 0.9375,
+          "holdout": 0.8906,
+          "delta": -0.0469,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "id": "national",
+          "screen": 0.6875,
+          "holdout": 0.8281,
+          "delta": 0.1406,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "id": "survival30",
+          "screen": 0.875,
+          "holdout": 0.7656,
+          "delta": -0.1094,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "id": "survival60",
+          "screen": 0.25,
+          "holdout": 0.4921,
+          "delta": 0.2421,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "id": "communityLost",
+          "screen": 0.0625,
+          "holdout": 0.0938,
+          "delta": 0.0313,
+          "tolerance": 0.02,
+          "within": false
+        }
+      ],
+      "maker": [
+        {
+          "id": "won",
+          "screen": 0.4375,
+          "holdout": 0.5,
+          "delta": 0.0625,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "id": "table",
+          "screen": 0.4375,
+          "holdout": 0.5,
+          "delta": 0.0625,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "id": "national",
+          "screen": 1,
+          "holdout": 0.8594,
+          "delta": -0.1406,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "id": "survival30",
+          "screen": 0.9375,
+          "holdout": 0.8125,
+          "delta": -0.125,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "id": "survival60",
+          "screen": 0.625,
+          "holdout": 0.4375,
+          "delta": -0.1875,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "id": "communityLost",
+          "screen": 0.125,
+          "holdout": 0.125,
+          "delta": 0,
+          "tolerance": 0.02,
+          "within": true
+        }
+      ],
+      "merchant": [
+        {
+          "id": "won",
+          "screen": 0.8125,
+          "holdout": 0.5781,
+          "delta": -0.2344,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "id": "table",
+          "screen": 0.8125,
+          "holdout": 0.5781,
+          "delta": -0.2344,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "id": "national",
+          "screen": 0.875,
+          "holdout": 0.8438,
+          "delta": -0.0312,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "id": "survival30",
+          "screen": 1,
+          "holdout": 0.9375,
+          "delta": -0.0625,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "id": "survival60",
+          "screen": 0.625,
+          "holdout": 0.6613,
+          "delta": 0.0363,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "id": "communityLost",
+          "screen": 0.0625,
+          "holdout": 0.1094,
+          "delta": 0.0469,
+          "tolerance": 0.02,
+          "within": false
+        }
+      ],
+      "caregiver": [
+        {
+          "id": "won",
+          "screen": 0.625,
+          "holdout": 0.7188,
+          "delta": 0.0938,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "id": "table",
+          "screen": 0.625,
+          "holdout": 0.7188,
+          "delta": 0.0938,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "id": "national",
+          "screen": 0.875,
+          "holdout": 0.8906,
+          "delta": 0.0156,
+          "tolerance": 0.02,
+          "within": true
+        },
+        {
+          "id": "survival30",
+          "screen": 0.9375,
+          "holdout": 0.8906,
+          "delta": -0.0469,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "id": "survival60",
+          "screen": 0.5625,
+          "holdout": 0.5938,
+          "delta": 0.0313,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "id": "communityLost",
+          "screen": 0,
+          "holdout": 0.0156,
+          "delta": 0.0156,
+          "tolerance": 0.02,
+          "within": true
+        }
+      ]
+    },
+    "outOfTolerance": [
+      {
+        "scope": "pooled",
+        "id": "won",
+        "screen": 0.7031,
+        "holdout": 0.6719,
+        "delta": -0.0312,
+        "tolerance": 0.02,
+        "within": false
+      },
+      {
+        "scope": "pooled",
+        "id": "table",
+        "screen": 0.7031,
+        "holdout": 0.6719,
+        "delta": -0.0312,
+        "tolerance": 0.02,
+        "within": false
+      },
+      {
+        "scope": "pooled",
+        "id": "survival30",
+        "screen": 0.9375,
+        "holdout": 0.8516,
+        "delta": -0.0859,
+        "tolerance": 0.02,
+        "within": false
+      },
+      {
+        "scope": "pooled",
+        "id": "survival60",
+        "screen": 0.5156,
+        "holdout": 0.5455,
+        "delta": 0.0299,
+        "tolerance": 0.02,
+        "within": false
+      },
+      {
+        "scope": "pooled",
+        "id": "communityLost",
+        "screen": 0.0625,
+        "holdout": 0.0859,
+        "delta": 0.0234,
+        "tolerance": 0.02,
+        "within": false
+      },
+      {
+        "scope": "capable",
+        "id": "won",
+        "screen": 0.9375,
+        "holdout": 0.8906,
+        "delta": -0.0469,
+        "tolerance": 0.02,
+        "within": false
+      },
+      {
+        "scope": "capable",
+        "id": "table",
+        "screen": 0.9375,
+        "holdout": 0.8906,
+        "delta": -0.0469,
+        "tolerance": 0.02,
+        "within": false
+      },
+      {
+        "scope": "capable",
+        "id": "national",
+        "screen": 0.6875,
+        "holdout": 0.8281,
+        "delta": 0.1406,
+        "tolerance": 0.02,
+        "within": false
+      },
+      {
+        "scope": "capable",
+        "id": "survival30",
+        "screen": 0.875,
+        "holdout": 0.7656,
+        "delta": -0.1094,
+        "tolerance": 0.02,
+        "within": false
+      },
+      {
+        "scope": "capable",
+        "id": "survival60",
+        "screen": 0.25,
+        "holdout": 0.4921,
+        "delta": 0.2421,
+        "tolerance": 0.02,
+        "within": false
+      },
+      {
+        "scope": "capable",
+        "id": "communityLost",
+        "screen": 0.0625,
+        "holdout": 0.0938,
+        "delta": 0.0313,
+        "tolerance": 0.02,
+        "within": false
+      },
+      {
+        "scope": "maker",
+        "id": "won",
+        "screen": 0.4375,
+        "holdout": 0.5,
+        "delta": 0.0625,
+        "tolerance": 0.02,
+        "within": false
+      },
+      {
+        "scope": "maker",
+        "id": "table",
+        "screen": 0.4375,
+        "holdout": 0.5,
+        "delta": 0.0625,
+        "tolerance": 0.02,
+        "within": false
+      },
+      {
+        "scope": "maker",
+        "id": "national",
+        "screen": 1,
+        "holdout": 0.8594,
+        "delta": -0.1406,
+        "tolerance": 0.02,
+        "within": false
+      },
+      {
+        "scope": "maker",
+        "id": "survival30",
+        "screen": 0.9375,
+        "holdout": 0.8125,
+        "delta": -0.125,
+        "tolerance": 0.02,
+        "within": false
+      },
+      {
+        "scope": "maker",
+        "id": "survival60",
+        "screen": 0.625,
+        "holdout": 0.4375,
+        "delta": -0.1875,
+        "tolerance": 0.02,
+        "within": false
+      },
+      {
+        "scope": "merchant",
+        "id": "won",
+        "screen": 0.8125,
+        "holdout": 0.5781,
+        "delta": -0.2344,
+        "tolerance": 0.02,
+        "within": false
+      },
+      {
+        "scope": "merchant",
+        "id": "table",
+        "screen": 0.8125,
+        "holdout": 0.5781,
+        "delta": -0.2344,
+        "tolerance": 0.02,
+        "within": false
+      },
+      {
+        "scope": "merchant",
+        "id": "national",
+        "screen": 0.875,
+        "holdout": 0.8438,
+        "delta": -0.0312,
+        "tolerance": 0.02,
+        "within": false
+      },
+      {
+        "scope": "merchant",
+        "id": "survival30",
+        "screen": 1,
+        "holdout": 0.9375,
+        "delta": -0.0625,
+        "tolerance": 0.02,
+        "within": false
+      },
+      {
+        "scope": "merchant",
+        "id": "survival60",
+        "screen": 0.625,
+        "holdout": 0.6613,
+        "delta": 0.0363,
+        "tolerance": 0.02,
+        "within": false
+      },
+      {
+        "scope": "merchant",
+        "id": "communityLost",
+        "screen": 0.0625,
+        "holdout": 0.1094,
+        "delta": 0.0469,
+        "tolerance": 0.02,
+        "within": false
+      },
+      {
+        "scope": "caregiver",
+        "id": "won",
+        "screen": 0.625,
+        "holdout": 0.7188,
+        "delta": 0.0938,
+        "tolerance": 0.02,
+        "within": false
+      },
+      {
+        "scope": "caregiver",
+        "id": "table",
+        "screen": 0.625,
+        "holdout": 0.7188,
+        "delta": 0.0938,
+        "tolerance": 0.02,
+        "within": false
+      },
+      {
+        "scope": "caregiver",
+        "id": "survival30",
+        "screen": 0.9375,
+        "holdout": 0.8906,
+        "delta": -0.0469,
+        "tolerance": 0.02,
+        "within": false
+      },
+      {
+        "scope": "caregiver",
+        "id": "survival60",
+        "screen": 0.5625,
+        "holdout": 0.5938,
+        "delta": 0.0313,
+        "tolerance": 0.02,
+        "within": false
+      }
+    ]
+  },
+  "proveOutBars": {
+    "screen_1_1": {
+      "status": "PASS",
+      "detail": {
+        "capable": {
+          "table": 15,
+          "won": 15
+        },
+        "maker": {
+          "table": 7,
+          "won": 7
+        },
+        "merchant": {
+          "table": 13,
+          "won": 13
+        },
+        "caregiver": {
+          "table": 10,
+          "won": 10
+        },
+        "pass": true
+      },
+      "note": "Filed 16-screen already; not re-run this turn."
+    },
+    "holdout_1_2": {
+      "criteria": "same directions within scorecard tolerances for won,table,national,survival30/60,communityLost vs 16-screen",
+      "pooledWithin": false,
+      "perPolicyAllWithin": false,
+      "outOfTolerance": [
+        {
+          "scope": "pooled",
+          "id": "won",
+          "screen": 0.7031,
+          "holdout": 0.6719,
+          "delta": -0.0312,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "scope": "pooled",
+          "id": "table",
+          "screen": 0.7031,
+          "holdout": 0.6719,
+          "delta": -0.0312,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "scope": "pooled",
+          "id": "survival30",
+          "screen": 0.9375,
+          "holdout": 0.8516,
+          "delta": -0.0859,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "scope": "pooled",
+          "id": "survival60",
+          "screen": 0.5156,
+          "holdout": 0.5455,
+          "delta": 0.0299,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "scope": "pooled",
+          "id": "communityLost",
+          "screen": 0.0625,
+          "holdout": 0.0859,
+          "delta": 0.0234,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "scope": "capable",
+          "id": "won",
+          "screen": 0.9375,
+          "holdout": 0.8906,
+          "delta": -0.0469,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "scope": "capable",
+          "id": "table",
+          "screen": 0.9375,
+          "holdout": 0.8906,
+          "delta": -0.0469,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "scope": "capable",
+          "id": "national",
+          "screen": 0.6875,
+          "holdout": 0.8281,
+          "delta": 0.1406,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "scope": "capable",
+          "id": "survival30",
+          "screen": 0.875,
+          "holdout": 0.7656,
+          "delta": -0.1094,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "scope": "capable",
+          "id": "survival60",
+          "screen": 0.25,
+          "holdout": 0.4921,
+          "delta": 0.2421,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "scope": "capable",
+          "id": "communityLost",
+          "screen": 0.0625,
+          "holdout": 0.0938,
+          "delta": 0.0313,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "scope": "maker",
+          "id": "won",
+          "screen": 0.4375,
+          "holdout": 0.5,
+          "delta": 0.0625,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "scope": "maker",
+          "id": "table",
+          "screen": 0.4375,
+          "holdout": 0.5,
+          "delta": 0.0625,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "scope": "maker",
+          "id": "national",
+          "screen": 1,
+          "holdout": 0.8594,
+          "delta": -0.1406,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "scope": "maker",
+          "id": "survival30",
+          "screen": 0.9375,
+          "holdout": 0.8125,
+          "delta": -0.125,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "scope": "maker",
+          "id": "survival60",
+          "screen": 0.625,
+          "holdout": 0.4375,
+          "delta": -0.1875,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "scope": "merchant",
+          "id": "won",
+          "screen": 0.8125,
+          "holdout": 0.5781,
+          "delta": -0.2344,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "scope": "merchant",
+          "id": "table",
+          "screen": 0.8125,
+          "holdout": 0.5781,
+          "delta": -0.2344,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "scope": "merchant",
+          "id": "national",
+          "screen": 0.875,
+          "holdout": 0.8438,
+          "delta": -0.0312,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "scope": "merchant",
+          "id": "survival30",
+          "screen": 1,
+          "holdout": 0.9375,
+          "delta": -0.0625,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "scope": "merchant",
+          "id": "survival60",
+          "screen": 0.625,
+          "holdout": 0.6613,
+          "delta": 0.0363,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "scope": "merchant",
+          "id": "communityLost",
+          "screen": 0.0625,
+          "holdout": 0.1094,
+          "delta": 0.0469,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "scope": "caregiver",
+          "id": "won",
+          "screen": 0.625,
+          "holdout": 0.7188,
+          "delta": 0.0938,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "scope": "caregiver",
+          "id": "table",
+          "screen": 0.625,
+          "holdout": 0.7188,
+          "delta": 0.0938,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "scope": "caregiver",
+          "id": "survival30",
+          "screen": 0.9375,
+          "holdout": 0.8906,
+          "delta": -0.0469,
+          "tolerance": 0.02,
+          "within": false
+        },
+        {
+          "scope": "caregiver",
+          "id": "survival60",
+          "screen": 0.5625,
+          "holdout": 0.5938,
+          "delta": 0.0313,
+          "tolerance": 0.02,
+          "within": false
+        }
+      ],
+      "verdict": "review_required"
+    },
+    "scale_loopB_1_3": {
+      "status": "NOT_CLAIMED",
+      "note": "Muse Loop B axis; this panel does not own or retire it."
+    }
+  }
+}

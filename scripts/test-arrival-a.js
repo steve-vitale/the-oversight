@@ -189,7 +189,7 @@ async function main() {
     const memDay = day;
     // 4a TIGHTEN: gossip attacks (cap 4) + rain (+1) = 5 -> 'tighten'.
     v.gossip = v.gossip || [];
-    for (let i = 0; i < 3; i++) v.gossip.push({ action: 'attack', day });
+    for (let i = 0; i < 3; i++) v.gossip.push({ action: 'attack', day, heard: [h.vid] });
     G.state.weather = 'rain';
     const dg = G.objDanger(h.vid, h.tx, h.ty, hx, hy);
     let o = huntObjective(G, h.vid, hx, hy, { mid: 'influencer', tx: h.tx, ty: h.ty, day: memDay });

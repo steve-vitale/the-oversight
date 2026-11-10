@@ -5,26 +5,44 @@
 //   - objState()
 //   - objOf(vid)
 //   - objPick(vid, hx, hy)
+//   - objRefreshPick(vid, hx, hy, opts)
+//   - objNeedsEmergencyPick(vid)
 //   - objDanger(vid, tx, ty, hx, hy)
+//   - objDangerBelief(vid)
+//   - objResourceBelief(vid)
+//   - objResourceSee(vid)
 //   - objMaybeDepart(rid, node, atHaven, hx, hy)
 //   - objAwayStep(rid, node, away, hx, hy)
 //   - objAskCompanion(vid, obj, hx, hy, opts)
-//   - objRallyFreshRaid()
+//   - objCommitGuardOffer(cid, offer)
+//   - objRallyFreshRaid(vid)
 //   - objTick()
 //   - objHealGate(vid, obj, hx, hy, playerAtHaven)
+//   - objAccrueDutyPractice(vid, task)
+//   - objOnExploreReturn(vid)
+//   - objOnHuntReturn(vid)
+//   - objOnTeachLesson(vid, lesson)
 // rules:
+//   - duty_objective_practice: DUTY-aligned teach/patrol/scout/hunt accrue one villagerPractice rep on real objective completion (lesson.taught / explore return / hunt return that was not an empty-tile drop) — never writes assignTask; honor objDisableDutyPractice failing control (code: objAccrueDutyPractice, objOnTeachLesson, objOnExploreReturn, objOnHuntReturn, VILLAGER-BRAIN OVE-74)
 //   - objectives_drive_departures: npcNodeTravel's old dice triggers are replaced by objMaybeDepart (code: villager-objectives.js)
+//   - midday_repick_event_only: idle/done mid-day objPick runs only via objRefreshPick when commit day/part is stale or a perception flag fired; dawn force-refreshes (code: objRefreshPick, VILLAGER-BRAIN seam 9)
 //   - night_departure_ban: nobody sets out at night, hard rule kept from base (code: villager-objectives.js)
 //   - danger_gates_departure: every departure verdicts go / ask / tighten / defer via objDanger (code: villager-objectives.js)
+//   - danger_heard_filtered: door, rally and safety all read danger through objDangerBelief — gossip counts only if this villager is in its heard list (code: villager-objectives.js, VILLAGER-BRAIN seam 4)
+//   - resource_belief_filtered: food-security / FORAGE / WATER / village-resource favors read pantry+cistern through objResourceBelief — away/stale belief never uses live totals (code: villager-objectives.js, VILLAGER-BRAIN seam 4)
 //   - heal_gates_departure: objective departures get the expedition 70-HP heal check (pharmacy -> healer -> sit-out, one verdict/villager/day); LEAVE is exempt from the sit-out (code: villager-objectives.js, game.js, departure heal gate 2026-10-13)
 //   - return_names_are_honest: objective-return copy names the found one via _repName — a stranger descriptor ("A person, maybe 40s") is used whole, never its first word ("found A" read broken). (code: villager-objectives.js, travel lever r4 2026-10-12)
 //   - bark_armor_teach: a villager WEARING bark armor teaches the player its recipe L1 on return (trust 15+, player at haven, once per teacher) — the snare-lesson pattern for the occupation lottery's armor. (code: villager-objectives.js, 2026-10-13)
 //   - return_to_fight: a villager who fought a living world monster remembers the fight's tile, and only that villager may be offered a HUNT errand back to it (fresh memory, armed, in range, existing departure gates still apply). No villager is ever routed to a monster tile nobody fought on — knowledge gates the route, never a radar. (code: villager-objectives.js, game.js resolveWildMonsterEncounter, 2026-10-27)
-//   - rally_guard: on a 'go'-verdict departure within 3 days of raid gossip, a protect/prove/lead villager at haven may volunteer as GUARD via objAskCompanion (rallyOnly) — the danger check alone would send the principal out solo. Same solo/HUNT exclusions and heal gates as the 'ask' path; no new RNG draws, so games without a fresh raid are bit-identical to base. (code: villager-objectives.js, win-drives 2026-11-03)
+//   - rally_guard: on a 'go'-verdict departure within 3 days of raid gossip, a protect/prove/lead villager at haven may volunteer as GUARD via objAskCompanion (rallyOnly) — the danger check alone would send the principal out solo. Same solo/HUNT exclusions and heal gates as the 'ask' path; rallyOnly commits the top volunteer via objCommitGuardOffer with no invite lottery (no new RNG — win-drives bit-identity). Ordinary 'ask' still uses npcInviteDecision. (code: villager-objectives.js, win-drives 2026-11-03)
+//   - companion_no_cross_write: objAskCompanion never writes another villager's objective — ordinary asks advertise a GUARD offer and let npcInviteDecision (kind 'lure') accept or refuse; only on accept does objCommitGuardOffer write the companion's OWN objective. rallyOnly volunteers skip the lure lottery but still self-commit. (code: objAskCompanion, objCommitGuardOffer, VILLAGER-BRAIN Phase 4)
+//   - companion_shared_score: door companion ranking uses companionScore / companionRank — same formula as party path and favor-company (code: objAskCompanion, companion-score.js, VILLAGER-BRAIN Phase 4)
 // consumes:
 //   - village.roster, village.away, village.nodePos, village.gossip
 //   - npcNode, npcSetNode, npcInside, npcSetInside, npcTemper, npcGoal, npcNeeds
 //   - npcRangeProfile, npcMaxDist (villager-agency.js), agencyState
+//   - npcInviteDecision (betrayal.js) — companion accept/refuse arbiter
+//   - companionScore, companionRank (companion-score.js) — shared door ranking
 /* VILLAGER OBJECTIVES — src/js/villager-objectives.js
  *
  * Steve (2026-10-08): "people don't ever seem to leave haven. They shouldn't
@@ -262,6 +280,109 @@
       return o[vid];
     },
 
+    // OVE-74: one villagerPractice rep when DUTY-aligned objective work
+    // really completes. Never writes assignTask. ASSIGN keeps practice on
+    // resolveOneAssignment (skip when a standing assignment is present).
+    // Failing control: objDisableDutyPractice.
+    objAccrueDutyPractice(vid, task) {
+      if (this.objDisableDutyPractice) return 0;
+      if (!vid || !task) return 0;
+      try {
+        var asg = ((this.state.village || {}).assignments || {})[vid];
+        if (asg && asg.task) return 0;
+      } catch (e) {}
+      var n = 0;
+      try { n = this.villagerPractice ? this.villagerPractice(vid, task) : 0; }
+      catch (e) { console.warn('[obj] duty practice', e); return 0; }
+      try {
+        var o = this.objOf(vid);
+        if (o && o.practiceTask === task) o.practiceTask = null;
+      } catch (e) {}
+      return n;
+    },
+
+    // OVE-74: EXPLORE out-and-back completion (DUTY patrol/scout). Called
+    // from the away-return explore branch in game.js.
+    objOnExploreReturn(vid) {
+      var practiced = 0;
+      try {
+        var o = this.objOf(vid);
+        var pt = o && o.practiceTask;
+        if (pt === 'patrol' || pt === 'scout') {
+          practiced = this.objAccrueDutyPractice(vid, pt) || 0;
+        }
+        if (o) { o.state = 'done'; o.kind = 'idle'; }
+      } catch (e) { console.warn('[obj] explore duty practice', e); }
+      return practiced;
+    },
+
+    // OVE-74: HUNT return — practice only when the trip was not an
+    // empty-tile quarry drop (objAwayStep marks huntEmptyDrop).
+    objOnHuntReturn(vid) {
+      var practiced = 0;
+      try {
+        var o = this.objOf(vid);
+        if (o && o.practiceTask === 'hunt' && !o.huntEmptyDrop) {
+          practiced = this.objAccrueDutyPractice(vid, 'hunt') || 0;
+        } else if (o && o.practiceTask === 'hunt' && o.huntEmptyDrop) {
+          o.practiceTask = null;
+        }
+        if (o) { o.state = 'done'; o.kind = 'idle'; o.huntEmptyDrop = false; }
+      } catch (e) { console.warn('[obj] hunt duty practice', e); }
+      return practiced;
+    },
+
+    // OVE-74: HAVEN_CHORE teach when a real lesson landed (lesson.taught).
+    objOnTeachLesson(vid, lesson) {
+      if (!(lesson && lesson.taught)) return 0;
+      var practiced = 0;
+      try {
+        var o = this.objOf(vid);
+        if (o && o.practiceTask === 'teach') {
+          practiced = this.objAccrueDutyPractice(vid, 'teach') || 0;
+        }
+      } catch (e) { console.warn('[obj] teach duty practice', e); }
+      return practiced;
+    },
+
+    // Hard body gates that must interrupt a settled mid-day lead (escape /
+    // rest / eat). These are emergencies inside the one pass (VILLAGER-BRAIN
+    // §5), not a lottery re-roll — but they still enter through objPick so the
+    // gate log + commit stay coherent.
+    objNeedsEmergencyPick(vid) {
+      try {
+        var goal = null;
+        try { goal = this.npcGoal(vid); } catch (e) {}
+        if (goal === 'escape') return true;
+        var n = {};
+        try { n = this.npcNeeds(vid) || {}; } catch (e) {}
+        if ((n.energy || 70) < 35) return true;
+        if ((n.hunger || 0) > 55) {
+          var pantry = 0;
+          try { pantry = this.pantryKcalLive(this.state.village); } catch (e) {}
+          if (pantry > 500) return true;
+        }
+      } catch (e) {}
+      return false;
+    },
+
+    // OVE-38 / Candidate B (seam 9): mid-day idle/done may call objPick only
+    // when the dawn commitment's day/part is stale, a perception flag fired,
+    // or an emergency body gate must interrupt. Dawn callers pass { dawn: true }.
+    // Direct objPick stays available for tests/panels.
+    objRefreshPick(vid, hx, hy, opts) {
+      opts = opts || {};
+      try {
+        if (typeof this.vbrainOwnsDawn === 'function' && this.vbrainOwnsDawn() &&
+            typeof this.vbrainShouldRefresh === 'function' &&
+            !this.vbrainShouldRefresh(vid, opts) &&
+            !this.objNeedsEmergencyPick(vid)) {
+          return this.objOf(vid);
+        }
+      } catch (e) {}
+      return this.objPick(vid, hx, hy);
+    },
+
     // ---------- 1. OBJECTIVE PICKING ----------
     // Called at dawn (dayPart 0) and whenever a villager is idle at haven.
     objPick(vid, hx, hy) {
@@ -280,6 +401,8 @@
       if (vp.dead) { o.kind = 'idle'; o.state = 'idle'; return o; }
       o.tightened = false; // fresh pick: not a danger-tightened trip
       o.huntMid = null; o.huntTx = null; o.huntTy = null; o.huntDay = null; // fresh pick: a stale hunt provenance must not linger on a new errand
+      o.huntEmptyDrop = false; // OVE-74: fresh pick clears empty-tile hunt mark
+      o.practiceTask = null; // OVE-74: DUTY stamp only via vbrainAlignObjective
       o.chore = null; // fresh pick: a stale chore label must not linger on
       // non-chore objectives (longsim agency 2026-10-11: census showed
       // VISIT/out(fire), GUARD/out(teach) — old chore tags on new errands)
@@ -309,6 +432,9 @@
         o.tx = clampN(hx + ld[0] * ldist); o.ty = clampN(hy + ld[1] * ldist);
         o.tightness = 8; o.partsLeft = 999;
         o.indoor = false; o.targetVid = null; o.companion = null;
+        // VILLAGER BRAIN (phase 1): gates still win, but they log through the
+        // one dawn entry so the score log explains every pick.
+        try { if (typeof this.vbrainLogGate === 'function') this.vbrainLogGate(vid, 'LEAVE', 'escape_goal', null); } catch (e) {}
         return o;
       }
       // body first: rest when spent
@@ -316,10 +442,17 @@
         o.kind = 'REST'; o.purpose = 'rest'; o.state = 'indoor';
         o.indoor = true; o.targetVid = null; o.companion = null;
         o.partsLeft = 2 + Math.floor(R() * 3);
+        try { if (typeof this.vbrainLogGate === 'function') this.vbrainLogGate(vid, 'REST', 'low_energy', { energy: n.energy }); } catch (e) {}
         return o;
       }
+      // Believed pantry/cistern (VILLAGER-BRAIN seam 4): at haven this
+      // refreshes from what they see; while away it freezes at last-seen.
+      // Never a live global read for an away/stale villager.
+      var resBelief = null;
+      try { resBelief = this.objResourceBelief ? this.objResourceBelief(vid) : null; } catch (e) {}
       var pantry = 0;
-      try { pantry = this.pantryKcalLive(v); } catch (e) {}
+      if (resBelief && typeof resBelief.pantryKcal === 'number') pantry = resBelief.pantryKcal;
+      else { try { pantry = this.pantryKcalLive(v); } catch (e) {} }
       // EAT — hungry and the pantry has food: go eat. Indoor, at the fire.
       // (meals-like-people 2026-10-08: hunger is a real need now, driven by
       // real individual meals in villageEats — the EAT objective is the
@@ -328,6 +461,7 @@
         o.kind = 'EAT'; o.purpose = 'eat'; o.state = 'indoor';
         o.indoor = true; o.targetVid = null; o.companion = null;
         o.partsLeft = 1 + Math.floor(R() * 2);
+        try { if (typeof this.vbrainLogGate === 'function') this.vbrainLogGate(vid, 'EAT', 'hunger', { hunger: n.hunger, pantry: pantry }); } catch (e) {}
         return o;
       }
       // DAWN-AFTER-KILL (r13 2026-10-17): a fresh unrevealed-flesh kill is
@@ -345,6 +479,7 @@
       if (freshHaul && this.objFreshKillUnrevealed(freshHaul.ref)) {
         o.kind = 'HAUL';
         this.objHaulFromSite(vid, hx, hy, o, freshHaul);
+        try { if (typeof this.vbrainLogGate === 'function') this.vbrainLogGate(vid, 'HAUL', 'fresh_kill', { ref: freshHaul.ref }); } catch (e) {}
         return o;
       }
       // THEY WANT TO WIN (parity 2026-10-14, Steve: "villagers need to act
@@ -363,6 +498,7 @@
           o.targetVid = (sought.teacher && sought.teacher !== 'player' && sought.teacher !== 'system') ? sought.teacher : null;
           o.companion = null; o.tx = hx; o.ty = hy; o.tightness = 0;
           o.partsLeft = 2;
+          try { if (typeof this.vbrainLogGate === 'function') this.vbrainLogGate(vid, 'SEEK', 'want_knowledge', { want: wantKnow }); } catch (e) {}
           return o;
         }
       }
@@ -372,18 +508,23 @@
       try { needTrack = this.villagerNeedTrack ? this.villagerNeedTrack(vid) : null; } catch (e) { console.warn('[objectives] needTrack', e); }
       // DESIGNCALL 7 (2026-10-16): thirst measured in days of village supply.
       // The village shares one cistern (villageDrinks: 2L/head/day) — this is
-      // the honest signal, not a per-villager thirst stat.
+      // the honest signal, not a per-villager thirst stat. Believed via
+      // objResourceBelief so an away villager does not spy the live cistern.
       var waterDays = 99;
-      try {
-        var _wliv = 0;
-        for (var _wli = 0; _wli < (v.roster || []).length; _wli++) {
-          var _wvp = this.vpOf((v.roster || [])[_wli]);
-          if (_wvp && !_wvp.dead) _wliv++;
-        }
-        var _wdem = 2 * Math.max(1, _wliv);
-        var _wsup = ((v.water || {}).clean || 0) + ((v.water || {}).dirty || 0);
-        waterDays = _wsup / _wdem;
-      } catch (e) {}
+      if (resBelief && typeof resBelief.waterDays === 'number' && isFinite(resBelief.waterDays)) {
+        waterDays = resBelief.waterDays;
+      } else {
+        try {
+          var _wliv = 0;
+          for (var _wli = 0; _wli < (v.roster || []).length; _wli++) {
+            var _wvp = this.vpOf((v.roster || [])[_wli]);
+            if (_wvp && !_wvp.dead) _wliv++;
+          }
+          var _wdem = 2 * Math.max(1, _wliv);
+          var _wsup = ((v.water || {}).clean || 0) + ((v.water || {}).dirty || 0);
+          waterDays = _wsup / _wdem;
+        } catch (e) {}
+      }
       var cands = [];
       // DORMANT MOTIVATIONS (rogue P1, audit Talk 2 P2-2): the 11 generated
       // goals with no objPick voice now bias the lottery as visible weights
@@ -513,10 +654,20 @@
       // new RNG draws, no candidate suppressed. Fails silent by design:
       // a missing module means the lottery runs exactly as before.
       try { if (typeof this.vgoalBiasCands === 'function') this.vgoalBiasCands(vid, cands); } catch (e) {}
-      var tot = 0, i;
-      for (i = 0; i < cands.length; i++) tot += cands[i].w;
-      var r = R() * tot, chosen = cands[cands.length - 1];
-      for (i = 0; i < cands.length; i++) { r -= cands[i].w; if (r <= 0) { chosen = cands[i]; break; } }
+      // VILLAGER BRAIN (phase 1): one scoring entry. Win-plan intents and
+      // EXPEDITION feed the same list; the pick is logged with every
+      // consideration. Missing module → legacy inline lottery below.
+      try { if (typeof this.vbrainFeedExtras === 'function') this.vbrainFeedExtras(vid, cands, hx, hy); } catch (e) {}
+      var chosen = null;
+      if (typeof this.vbrainScorePick === 'function') {
+        try { chosen = this.vbrainScorePick(vid, cands, { rng: R }); } catch (e) { chosen = null; }
+      }
+      if (!chosen) {
+        var tot = 0, i;
+        for (i = 0; i < cands.length; i++) tot += cands[i].w;
+        var r = R() * tot; chosen = cands[cands.length - 1];
+        for (i = 0; i < cands.length; i++) { r -= cands[i].w; if (r <= 0) { chosen = cands[i]; break; } }
+      }
 
       o.kind = chosen.kind; o.targetVid = chosen.targetVid || null;
       // VILLAGER GOALS (goals-sys 2026-11-03): carry the contributing goal
@@ -524,6 +675,16 @@
       // Set before the kind chain: every early return carries o forward.
       if (chosen.vgoal) { o.goal = chosen.vgoal; o.goalLine = chosen.vgoalLine || null; }
       o.companion = null; o.indoor = false; o.state = 'ready';
+      // OVE-36: core materialization draws stay on `chosen`; then align the
+      // live objective to the dawn commitment when an aimed override won.
+      var finishLottery = function (obj) {
+        try {
+          if (typeof this.vbrainAlignObjective === 'function') {
+            return this.vbrainAlignObjective(vid, obj, hx, hy) || obj;
+          }
+        } catch (e) {}
+        return obj;
+      }.bind(this);
       var dist = 1;
       if (chosen.kind === 'FORAGE') {
         o.purpose = 'forage'; dist = Math.max(1, Math.min(maxD, 1 + Math.floor(R() * 2)));
@@ -550,17 +711,17 @@
           // they're home — this is an indoor social call
           o.indoor = true; o.state = 'indoor'; o.tx = hx; o.ty = hy;
           o.partsLeft = 2; o.tightness = 0;
-          return o;
+          return finishLottery(o);
         }
       } else if (chosen.kind === 'EXPLORE') {
         o.purpose = 'explore'; dist = 1 + Math.floor(R() * Math.max(1, maxD));
         o.partsLeft = 3 + Math.floor(R() * 4); o.tightness = dist;
       } else if (chosen.kind === 'HUNT') {
         this.objHuntFromSite(vid, hx, hy, o, chosen.site);
-        return o;
+        return finishLottery(o);
       } else if (chosen.kind === 'HAUL') {
         this.objHaulFromSite(vid, hx, hy, o, chosen.site);
-        return o;
+        return finishLottery(o);
       } else if (chosen.kind === 'SEEK') {
         // DORMANT MOTIVATIONS (rogue P1): the knowledge-seeker's errand —
         // go find someone who knows things and learn. Same shape as the
@@ -571,7 +732,7 @@
         o.kind = 'SEEK'; o.purpose = 'seek'; o.state = 'indoor'; o.indoor = true;
         o.targetVid = visitT; o.companion = null;
         o.tx = hx; o.ty = hy; o.tightness = 0; o.partsLeft = 2;
-        return o;
+        return finishLottery(o);
       } else { // HAVEN_CHORE
         o.purpose = 'chore'; o.indoor = true; o.state = 'indoor';
         o.tx = hx; o.ty = hy; o.tightness = 0;
@@ -592,14 +753,14 @@
           if (_pk.length || _ks) chores.push('teach');
         } catch (e) {}
         o.chore = (chosen.chore && chores.indexOf(chosen.chore) >= 0) ? chosen.chore : pick(chores);
-        return o;
+        return finishLottery(o);
       }
       // outdoor target: a real direction, clamped to the 9x9 world
       var d = pick(DIRS8);
       o.tx = clampN(hx + d[0] * dist);
       o.ty = clampN(hy + d[1] * dist);
       if (o.tx === hx && o.ty === hy) { o.tx = clampN(hx + 1); }
-      return o;
+      return finishLottery(o);
     },
     // objFreshKillUnrevealed(ref) (r13 2026-10-17): true when the corpse was
     // killed yesterday or today AND its flesh is still unrevealed. The
@@ -679,12 +840,24 @@
         for (var i = 0; i < list.length; i++) {
           if (list[i] && list[i].mid === mid && list[i].tx === tx && list[i].ty === ty) {
             list[i].day = day; list[i].part = part;
+            try {
+              if (typeof this.vbrainMarkPerception === 'function') {
+                this.vbrainMarkPerception(vid, 'monster_sighting');
+              }
+            } catch (e) {}
             return list[i];
           }
         }
         var entry = { mid: mid, tx: tx, ty: ty, day: day, part: part };
         list.push(entry);
         while (list.length > 4) list.shift();
+        // Seam 9: a fought-monster memory is a perception-changing event —
+        // authorize one mid-day re-score of this villager's lead.
+        try {
+          if (typeof this.vbrainMarkPerception === 'function') {
+            this.vbrainMarkPerception(vid, 'monster_sighting');
+          }
+        } catch (e) {}
         return entry;
       } catch (e) { return null; }
     },
@@ -818,25 +991,173 @@
 
     // ---------- 2. DEPARTURE DANGER CHECK ----------
     // Before leaving: read the world. Recent monster activity comes from
-    // village gossip (attack/death/murder within 3 days). Rain makes it
-    // miserable. Distance and temperament move the needle.
-    // Verdicts: go / ask (bring someone) / tighten (short errand only) / defer (stay).
-    objDanger(vid, tx, ty, hx, hy) {
-      var score = 0;
+    // village gossip THIS villager heard (attack/death/murder/raid within
+    // 3 days). Rain makes it miserable. Distance and temperament move the
+    // needle. Verdicts: go / ask (bring someone) / tighten (short errand
+    // only) / defer (stay).
+    //
+    // objResourceLiveSnap — live pantry kcal + cistern days, no write.
+    // Perception writers (objResourceSee / at-haven belief refresh) copy
+    // this into the per-villager belief store; away readers never call it.
+    objResourceLiveSnap() {
+      var v = this.state.village || {};
+      var pantryKcal = 0;
+      try { pantryKcal = this.pantryKcalLive ? this.pantryKcalLive(v) : 0; } catch (e) { pantryKcal = 0; }
+      var pantryDays = null;
+      try {
+        if (this.pantryDaysEstimate) {
+          var pd = this.pantryDaysEstimate();
+          if (typeof pd === 'number' && isFinite(pd)) pantryDays = pd;
+        }
+      } catch (e) {}
+      var waterClean = 0, waterDirty = 0;
+      try {
+        waterClean = ((v.water || {}).clean || 0);
+        waterDirty = ((v.water || {}).dirty || 0);
+      } catch (e) {}
+      var waterSupply = waterClean + waterDirty;
+      var liv = 0;
+      try {
+        for (var i = 0; i < (v.roster || []).length; i++) {
+          var vp = this.vpOf((v.roster || [])[i]);
+          if (vp && !vp.dead) liv++;
+        }
+      } catch (e) {}
+      var rosterN = Math.max(1, liv || ((v.roster || []).length) || 1);
+      var waterDays = waterSupply / (2 * rosterN);
+      return {
+        pantryKcal: pantryKcal,
+        pantryDays: pantryDays,
+        waterClean: waterClean,
+        waterDirty: waterDirty,
+        waterSupply: waterSupply,
+        waterDays: waterDays,
+        rosterN: rosterN,
+      };
+    },
+    // objResourceSee(vid) — perception write: this villager saw the bins
+    // and cistern (at haven, or freezing the view on departure). Writer
+    // rule: only perception / lived-event code may write belief.
+    objResourceSee(vid) {
+      if (!vid) return null;
+      var day = 0;
+      try { day = this.state.scholar.day; } catch (e) {}
+      var snap = this.objResourceLiveSnap();
+      var v = this.state.village;
+      v.resourceBelief = v.resourceBelief || {};
+      var bel = {
+        pantryKcal: snap.pantryKcal,
+        pantryDays: snap.pantryDays,
+        waterClean: snap.waterClean,
+        waterDirty: snap.waterDirty,
+        waterSupply: snap.waterSupply,
+        waterDays: snap.waterDays,
+        rosterN: snap.rosterN,
+        seenDay: day,
+      };
+      v.resourceBelief[vid] = bel;
+      return bel;
+    },
+    // objResourceBelief(vid) — ONE believed pantry/cistern read
+    // (VILLAGER-BRAIN seam 4 remainder). Food-security gate, FORAGE/WATER
+    // urgency, and village-resource favors consume this. At haven: see
+    // live and refresh the store. Away / forced-stale: last-seen only —
+    // never live globals. Unknown (never seen) fails closed: no village
+    // resource urgency invented from omniscience.
+    objResourceBelief(vid) {
+      var day = 0;
+      try { day = this.state.scholar.day; } catch (e) {}
+      var away = false;
+      try { away = !!((this.state.village.away || {})[vid]); } catch (e) {}
+      // Test / call-site seam: force a stale read without inventing away.
+      var forceStale = false;
+      try { forceStale = !!(this._resourceBeliefForceStale && this._resourceBeliefForceStale[vid]); } catch (e) {}
+      if (!away && !forceStale) {
+        var seen = null;
+        try { seen = this.objResourceSee(vid); } catch (e) {}
+        if (!seen) {
+          return {
+            pantryKcal: null, pantryDays: null, waterClean: null, waterDirty: null,
+            waterSupply: null, waterDays: null, rosterN: null,
+            seenDay: null, staleDays: null, fromLive: false, unknown: true,
+          };
+        }
+        return {
+          pantryKcal: seen.pantryKcal,
+          pantryDays: seen.pantryDays,
+          waterClean: seen.waterClean,
+          waterDirty: seen.waterDirty,
+          waterSupply: seen.waterSupply,
+          waterDays: seen.waterDays,
+          rosterN: seen.rosterN,
+          seenDay: seen.seenDay,
+          staleDays: 0,
+          fromLive: true,
+          unknown: false,
+        };
+      }
+      var stored = null;
+      try { stored = ((this.state.village.resourceBelief || {})[vid]) || null; } catch (e) {}
+      if (!stored) {
+        return {
+          pantryKcal: null, pantryDays: null, waterClean: null, waterDirty: null,
+          waterSupply: null, waterDays: null, rosterN: null,
+          seenDay: null, staleDays: null, fromLive: false, unknown: true,
+        };
+      }
+      var staleDays = day - (stored.seenDay || day);
+      if (staleDays < 0) staleDays = 0;
+      return {
+        pantryKcal: stored.pantryKcal,
+        pantryDays: stored.pantryDays,
+        waterClean: stored.waterClean,
+        waterDirty: stored.waterDirty,
+        waterSupply: stored.waterSupply,
+        waterDays: stored.waterDays,
+        rosterN: stored.rosterN,
+        seenDay: stored.seenDay,
+        staleDays: staleDays,
+        fromLive: false,
+        unknown: false,
+      };
+    },
+
+    // objDangerBelief(vid) — ONE heard-filtered danger read (VILLAGER-BRAIN
+    // seam 4 / game-gaps item 2). Door (objDanger), village danger
+    // (objVillageDanger), rally (objRallyFreshRaid) and the safety drive
+    // (villager-goals dangerHeard → threat) all consume this. Gossip
+    // counts only if vid is in its heard list; a raid nobody told them
+    // about arms nothing for them.
+    objDangerBelief(vid) {
+      var score = 0, threat = false, freshRaid = false;
       var day = 0;
       try { day = this.state.scholar.day; } catch (e) {}
       try {
         var g = (this.state.village.gossip || []);
         for (var i = 0; i < g.length; i++) {
-          var a = g[i].action;
+          var entry = g[i];
+          if ((entry.heard || []).indexOf(vid) === -1) continue;
+          if (day - (entry.day || 0) > 3) continue;
+          var a = entry.action;
           // RAID WARNING (rogue P1 2026-10-22): a raid warning is danger —
           // it moves departures and mid-trip re-targeting alike, same
           // weight as an attack.
-          if ((a === 'attack' || a === 'murder' || a === 'raid') && day - (g[i].day || 0) <= 3) score += 2;
-          else if (a === 'death' && day - (g[i].day || 0) <= 3) score += 1;
+          if (a === 'attack' || a === 'murder' || a === 'raid') {
+            score += 2;
+            threat = true;
+            if (a === 'raid') freshRaid = true;
+          } else if (a === 'death') {
+            score += 1;
+          }
         }
         if (score > 4) score = 4;
       } catch (e) {}
+      return { score: score, threat: threat, freshRaid: freshRaid };
+    },
+    objDanger(vid, tx, ty, hx, hy) {
+      var belief = { score: 0 };
+      try { belief = this.objDangerBelief(vid) || belief; } catch (e) {}
+      var score = belief.score || 0;
       try { if (this.state.weather === 'rain') score += 1; } catch (e) {}
       var dist = this.objDist(tx, ty, hx, hy);
       var maxD = 1;
@@ -852,41 +1173,44 @@
       var verdict = score <= 1 ? 'go' : score <= 3 ? 'ask' : score <= 5 ? 'tighten' : 'defer';
       return { score: score, verdict: verdict };
     },
-    // objVillageDanger: the world-level part of the danger check (gossip +
-    // weather, no distance). Used to gate expedition launches too.
-    objVillageDanger() {
+    // objVillageDanger(vid): the world-level part of the danger check
+    // (this hearer's gossip belief + weather, no distance). Used to gate
+    // expedition launches for THAT villager — same heard filter as the door.
+    objVillageDanger(vid) {
       var score = 0;
-      var day = 0;
-      try { day = this.state.scholar.day; } catch (e) {}
-      try {
-        var g = (this.state.village.gossip || []);
-        for (var i = 0; i < g.length; i++) {
-          var a = g[i].action;
-          // RAID WARNING (rogue P1 2026-10-22): same as objDanger — a raid
-          // warning is danger, and it can stand down expedition launches.
-          if ((a === 'attack' || a === 'murder' || a === 'raid') && day - (g[i].day || 0) <= 3) score += 2;
-          else if (a === 'death' && day - (g[i].day || 0) <= 3) score += 1;
-        }
-        if (score > 4) score = 4;
-      } catch (e) {}
+      try { score = (this.objDangerBelief(vid) || {}).score || 0; } catch (e) {}
       try { if (this.state.weather === 'rain') score += 1; } catch (e) {}
       return score;
     },
-    // RALLY-GUARD (win-drives 2026-11-03, Drive 1): is there a fresh raid
-    // in the village's heard record? Same 3-day window objDanger already
-    // uses for raid warnings, same gossip store — no new state, no list.
-    // A raid the village heard about is the perception precondition for
-    // the rally-guard drive; a raid nobody heard about arms nothing.
-    objRallyFreshRaid() {
-      var day = 0;
-      try { day = this.state.scholar.day; } catch (e) {}
-      try {
-        var g = (this.state.village.gossip || []);
-        for (var i = 0; i < g.length; i++) {
-          if (g[i].action === 'raid' && day - (g[i].day || 0) <= 3) return true;
-        }
-      } catch (e) {}
+    // RALLY-GUARD (win-drives 2026-11-03, Drive 1): did THIS villager hear
+    // a fresh raid? Same 3-day window and heard filter as objDangerBelief.
+    // A raid they were never told about arms nothing for them.
+    objRallyFreshRaid(vid) {
+      try { return !!(this.objDangerBelief(vid) || {}).freshRaid; } catch (e) {}
       return false;
+    },
+    // Companion self-commit for an accepted GUARD offer (VILLAGER-BRAIN
+    // Phase 4). Only the companion's own objective is written — never from
+    // the asker's draft. Clears goal annotation and hunt provenance the
+    // same way a fresh objPick does, so a drafted GUARD never carries a
+    // prior HUNT mid.
+    objCommitGuardOffer(cid, offer) {
+      if (!cid || !offer) return null;
+      var co2 = this.objOf(cid);
+      if (!co2) return null;
+      co2.kind = 'GUARD';
+      co2.purpose = offer.purpose || 'guard';
+      co2.state = 'ready';
+      co2.goal = null; co2.goalLine = null;
+      co2.huntMid = null; co2.huntTx = null; co2.huntTy = null; co2.huntDay = null;
+      try { co2.followsUsed = 0; } catch (e) {}
+      co2.tx = offer.tx; co2.ty = offer.ty;
+      co2.targetVid = offer.targetVid != null ? offer.targetVid : null;
+      co2.tightness = offer.tightness;
+      co2.partsLeft = offer.partsLeft;
+      co2.indoor = false;
+      co2.companion = offer.companion != null ? offer.companion : null;
+      return co2;
     },
     // ASK: find someone to walk with. A companion with their own outdoor
     // errand is ideal; otherwise the willing (bold, warm, trusting, sociable).
@@ -895,6 +1219,12 @@
     // protection or ambition ('protect' / 'prove' / 'lead') volunteer —
     // the drive's reason IS the goal, so anyone else is not a volunteer
     // for this drive, and no fallback to other companions happens.
+    // Phase 4: the asker does NOT overwrite the companion's objective.
+    // Eligible companions receive a GUARD candidate with terms advertised;
+    // npcInviteDecision (kind 'lure') is the arbiter. On accept, the
+    // companion self-commits via objCommitGuardOffer. On refuse, try the
+    // next candidate — nobody's objective is touched. opts.roll pins the
+    // invite roll for tests (same seam as bond / party invites).
     objAskCompanion(vid, obj, hx, hy, opts) {
       var rallyOnly = !!(opts && opts.rallyOnly);
       var v = this.state.village;
@@ -920,11 +1250,15 @@
         // DORMANT MOTIVATIONS (rogue P1): 'alone' villagers are never asked
         // to walk guard — leave them be. Reads the GENERATED npcGoal.
         try { if (this.npcGoal && this.npcGoal(id) === 'alone') continue; } catch (e) {}
-        // RALLY-GUARD (win-drives 2026-11-03): rally volunteers only.
+        // RALLY-GUARD (win-drives 2026-11-03): rally volunteers only —
+        // protect/prove/lead AND they personally heard the fresh raid
+        // (objDangerBelief / objRallyFreshRaid). An unhearing villager
+        // does not act on a raid they were never told about.
         if (rallyOnly) {
           var _rg = null;
           try { _rg = this.npcGoal ? this.npcGoal(id) : null; } catch (e) {}
           if (_rg !== 'protect' && _rg !== 'prove' && _rg !== 'lead') continue;
+          try { if (!(this.objRallyFreshRaid && this.objRallyFreshRaid(id))) continue; } catch (e) { continue; }
         }
         var node = null;
         try { node = this.npcNode(id); } catch (e) { continue; }
@@ -933,35 +1267,83 @@
         var cmax = 1;
         try { cmax = Math.max(1, this.npcMaxDist(id)); } catch (e) {}
         if (tripDist > cmax) continue;
-        var co = this.objOf(id);
+        // Ranking is one shared companionScore (OVE-54) — eligibility
+        // filters above stay local; no private door formula.
         var s = 0;
-        if (co && !co.indoor && co.state === 'ready' && co.kind !== 'LEAVE') s += 4; // their own errand — natural pair
-        var t = 'steady';
-        try { t = this.npcTemper(id); } catch (e) {}
-        if (t === 'bold' || t === 'warm') s += 2;
-        var tr = 0;
-        try { tr = (v.trust || {})[id] || 0; } catch (e) {}
-        if (tr > 40) s += 1;
-        var nn = null;
-        try { nn = this.npcNeeds(id); } catch (e) {}
-        if (nn && (nn.social || 0) > 65) s += 1;
+        try {
+          s = this.companionScore
+            ? this.companionScore(vid, id, { context: 'door' })
+            : 0;
+        } catch (e) { s = 0; }
         if (s > 0) cands.push({ id: id, s: s });
       }
       if (!cands.length) return null;
-      cands.sort(function (a, b) { return b.s - a.s; });
-      var cid = cands[0].id;
-      // the companion walks with them: same target, same clock, purpose 'guard'
-      var co2 = this.objOf(cid);
-      co2.kind = 'GUARD'; co2.purpose = 'guard'; co2.state = 'ready';
-      // FRESH ERRAND (journey deepening r102): the guard errand replaces
-      // the companion's own errand, so its goal annotation must not carry
-      // over — same stale-goal class as the objPick reset.
-      co2.goal = null; co2.goalLine = null;
-      co2.tx = obj.tx; co2.ty = obj.ty; co2.targetVid = vid;
-      co2.tightness = obj.tightness; co2.partsLeft = obj.partsLeft;
-      co2.indoor = false; co2.companion = vid;
-      obj.companion = cid;
-      return cid;
+      // companionRank tie-breaks by id so door/party/company agree.
+      try {
+        if (this.companionRank) {
+          cands = this.companionRank(vid, cands.map(function (c) { return c.id; }), { context: 'door' });
+        } else {
+          cands.sort(function (a, b) { return b.s - a.s; });
+        }
+      } catch (e) {
+        cands.sort(function (a, b) { return b.s - a.s; });
+      }
+      // Advertise the GUARD offer (terms the companion's arbiter weighs).
+      // Walk ranked candidates: each decides via npcInviteDecision; a
+      // refuse leaves that villager's objective untouched.
+      var offerBase = {
+        kind: 'GUARD',
+        purpose: 'guard',
+        tx: obj.tx,
+        ty: obj.ty,
+        tightness: obj.tightness,
+        partsLeft: obj.partsLeft,
+        targetVid: vid,
+        companion: vid,
+      };
+      // RALLY-GUARD: protect/prove/lead who heard the raid are volunteering,
+      // not being lured. Skip the invite lottery so this path draws no new
+      // RNG (win-drives 2026-11-03 bit-identity). Still commit via
+      // objCommitGuardOffer so the companion writes their OWN objective
+      // (Phase 4 no-cross-write).
+      if (rallyOnly) {
+        var rgId = cands[0].id;
+        var rgOffer = Object.assign({}, offerBase);
+        try {
+          this._lastCompanionAsk = {
+            asker: vid, candidate: rgId, offer: rgOffer,
+            decision: { accept: true, chance: 100, roll: null, reasons: ['rally-volunteer'] },
+            accepted: true,
+          };
+        } catch (e) {}
+        try { this.objCommitGuardOffer(rgId, rgOffer); } catch (e) { return null; }
+        obj.companion = rgId;
+        return rgId;
+      }
+      for (var ci = 0; ci < cands.length; ci++) {
+        var cid = cands[ci].id;
+        var decideOpts = { kind: 'lure', offer: Object.assign({}, offerBase) };
+        if (opts && typeof opts.roll === 'number') decideOpts.roll = opts.roll;
+        var decision = null;
+        try {
+          decision = this.npcInviteDecision
+            ? this.npcInviteDecision(cid, vid, decideOpts)
+            : { accept: true, chance: 100, reasons: ['no-invite-decider'] };
+        } catch (e) { decision = null; }
+        // Stash last decision for probes (off-state; never saved).
+        try {
+          this._lastCompanionAsk = {
+            asker: vid, candidate: cid, offer: decideOpts.offer,
+            decision: decision, accepted: !!(decision && decision.accept),
+          };
+        } catch (e) {}
+        if (!(decision && decision.accept)) continue; // refuse — objective untouched
+        // Accept: companion commits the advertised GUARD terms themselves.
+        try { this.objCommitGuardOffer(cid, decideOpts.offer); } catch (e) { continue; }
+        obj.companion = cid;
+        return cid;
+      }
+      return null;
     },
     // HEAL GATE (departure heal gate, lever 2026-10-13): objective
     // departures get the expedition 70-HP heal check (villagerHealCheck in
@@ -1001,6 +1383,9 @@
       this.npcSetNode(vid, obj.tx, obj.ty);
       try { this.npcSetInside(vid, false); } catch (e) {}
       v.away = v.away || {};
+      // Freeze pantry/cistern belief at departure — last seen before they
+      // walk out. Writer is perception (they just saw the bins at haven).
+      try { if (this.objResourceSee) this.objResourceSee(vid); } catch (e) {}
       v.away[vid] = {
         nx: obj.tx, ny: obj.ty, purpose: obj.purpose,
         sinceDay: s.day, sincePart: this.dayPart, duration: obj.partsLeft,
@@ -1109,12 +1494,13 @@
         if (_hg && _hg.day === ((this.state.scholar || {}).day || 0) && _hg.satOut) return;
       } catch (e) {}
       var o = this.objOf(rid);
-      // idle or done → pick fresh (dawn re-pick happens in objTick, but a
-      // villager can finish mid-day and should decide again, not sit)
+      // idle or done → refresh only when commit day/part is stale or a
+      // perception flag fired (OVE-38 / seam 9). Dawn force-refresh is in
+      // objTick; finishing mid-day without a new perception keeps the lead.
       if (!o.kind || o.kind === 'idle' || o.state === 'done' || o.state === 'indoor') {
         // indoor objectives are handled by objTick; nothing to depart for
         if (o.state === 'indoor') return;
-        this.objPick(rid, hx, hy);
+        this.objRefreshPick(rid, hx, hy);
         o = this.objOf(rid);
         if (!o.kind || o.kind === 'idle' || o.indoor || o.state === 'indoor') return;
       }
@@ -1141,17 +1527,17 @@
       var dg = this.objDanger(rid, o.tx, o.ty, hx, hy);
       if (dg.verdict === 'go') {
         // RALLY-GUARD (win-drives 2026-11-03, Drive 1): the danger check
-        // alone would send this villager out solo — but the village
-        // heard about a raid in the last 3 days, and a protect / prove /
-        // lead villager at haven may answer it with company. Same
-        // exclusions as the 'ask' path (solo principals walk alone;
-        // a HUNT never drags along someone who has not seen the beast),
-        // same heal gates, same trust bumps. No new RNG draws on any
-        // path: the gossip scan and goal filter are pure reads, so
-        // games without a fresh raid are bit-identical to base.
+        // alone would send this villager out solo — but a protect / prove /
+        // lead villager at haven who personally heard a fresh raid may
+        // answer it with company (objAskCompanion filters by
+        // objRallyFreshRaid). Same exclusions as the 'ask' path (solo
+        // principals walk alone; a HUNT never drags along someone who has
+        // not seen the beast), same heal gates, same trust bumps. No new
+        // RNG draws on any path: the gossip scan and goal filter are pure
+        // reads, so games without a fresh heard raid are bit-identical.
         var rgCid = null;
         if (!o.solo && o.kind !== 'HUNT') {
-          try { if (this.objRallyFreshRaid && this.objRallyFreshRaid()) rgCid = this.objAskCompanion(rid, o, hx, hy, { rallyOnly: true }); } catch (e) { rgCid = null; }
+          try { rgCid = this.objAskCompanion(rid, o, hx, hy, { rallyOnly: true }); } catch (e) { rgCid = null; }
         }
         if (rgCid) {
           var rgCo = this.objOf(rgCid);
@@ -1339,7 +1725,13 @@
       if (o && o.state === 'out' && o.kind === 'HUNT' && nx === o.tx && ny === o.ty) {
         try {
           var _qm = this.monsterAt ? this.monsterAt(nx, ny) : null;
-          if ((!_qm || _qm.id !== o.huntMid) && this.objDropMonsterSighting) this.objDropMonsterSighting(rid, o.huntMid, o.tx, o.ty);
+          if ((!_qm || _qm.id !== o.huntMid) && this.objDropMonsterSighting) {
+            this.objDropMonsterSighting(rid, o.huntMid, o.tx, o.ty);
+            // OVE-74: a remembered quarry gone from the tile is not real hunt
+            // work — mark so the return does not accrue practice. DUTY hunts
+            // without huntMid (no specific quarry) keep the return path open.
+            if (o.huntMid && o.practiceTask === 'hunt') o.huntEmptyDrop = true;
+          }
         } catch (e) {}
       }
       // MAP MEMORY (villager-mapmem 2026-10-13): they notice what's on the
@@ -1421,7 +1813,9 @@
                 try { this.objReturnEffect(rid, 'haul'); } catch (e) {}
                 o = this.objOf(rid);
               }
-              if (!o.kind || o.kind === 'idle' || o.state === 'done' || o.state === 'returning') this.objPick(rid, hx, hy);
+              if (!o.kind || o.kind === 'idle' || o.state === 'done' || o.state === 'returning') {
+                this.objRefreshPick(rid, hx, hy, { dawn: true });
+              }
             }
           } catch (e) {}
           o = this.objOf(rid);
@@ -1435,10 +1829,9 @@
         try { node = this.npcNode(rid); } catch (e) { continue; }
         if (!node || node.nx !== hx || node.ny !== hy) continue;
         if (!o.indoor || o.state !== 'indoor') {
-          // no indoor objective: make sure they have one rather than sitting
-          // in the decision gap (objMaybeDepart already ran this part; the
-          // indoor set is the fallback life, not a second departure roll)
-          if (!o.kind || o.kind === 'idle' || o.state === 'done') this.objPick(rid, hx, hy);
+          // no indoor objective: mid-day refresh only when commit is stale or
+          // a perception flag fired (OVE-38). Dawn already force-refreshed above.
+          if (!o.kind || o.kind === 'idle' || o.state === 'done') this.objRefreshPick(rid, hx, hy);
           o = this.objOf(rid);
           // a fresh indoor pick starts living it THIS part, not next
           if (!o.indoor || o.state !== 'indoor') continue;
@@ -1462,7 +1855,9 @@
           // (or the honest quiet when nobody sat with them) — never the
           // old private-bowl assertion.
           if (playerAtHaven && R() < 0.5) { var _el = this.eatBeatLine(rid, nm); if (_el) this.say(_el); }
-        } else if (o.kind === 'HAVEN_CHORE') {
+        } else if (o.kind === 'HAVEN_CHORE' || (o.kind === 'EXPEDITION' && o.purpose === 'chore')) {
+          // EXPEDITION dawn holds keep kind=EXPEDITION (commit honesty) with
+          // purpose=chore until agency launches — narrate the hold chore.
           if (o.chore === 'teach') {
             // LONGSIM agency r2 (2026-10-11): the teach chore is real
             // teaching now. A villager who knows the wild shows a villager
@@ -1479,6 +1874,10 @@
               if (here.length) lesson = this.agencyTeachVillager(rid, pick(here));
             } catch (e) {}
             if (lesson && lesson.taught) {
+              // OVE-74: DUTY teach completion — real lesson lands a practice rep
+              // without writing assignTask. practiceTask stamped by DUTY align.
+              try { this.objOnTeachLesson(rid, lesson); }
+              catch (eP) { console.warn('[obj] teach duty practice', eP); }
               // TRUST LEDGER (journey landing r12 2026-10-13): reason attributed.
               try { this.bumpTrust(rid, 1, 'taught a villager their craft'); this.bumpTrust(lesson.learner, 1, 'learned a craft from a villager'); } catch (e) {}
               // PARITY (2026-10-14): a lesson that landed is the player's teaching deed.

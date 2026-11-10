@@ -497,8 +497,20 @@
   // follow-on beats. Queuing it must not claim that the player has heard it.
   function queueTraderIntro(c) {
     if ((!c.traderIntroPending && !c.invitePending && !c.bondPending && !c.linkPending) || c.pendingQ || c.reactiveQ || c.genericQ || c.heldAsk || c.windingDown) return;
-    if (c.thread === 'want' && c.want && ((c.want.stage || 0) < 2 ||
-        (['ask_favor','seek_comfort','seek_taken','warn_you'].includes(c.want.id) && (c.want.stage || 0) < 3))) return;
+    if (c.thread === 'want' && c.want) {
+      const stage = c.want.stage || 0;
+      // A trade intro that survived Continue already earned its place behind
+      // the prior question. A freshly selected want (OVE-48 dawn priorities
+      // may open warn_you) may speak first, but the deferred intro must not
+      // wait for that new arc to reach stage 3 — once the opener has
+      // surfaced (stage >= 1) and no question is pending, queue it.
+      if (c.tradeIntroDeferred && c.traderIntroPending) {
+        if (stage < 1) return;
+      } else if (stage < 2 ||
+          (['ask_favor', 'seek_comfort', 'seek_taken', 'warn_you'].includes(c.want.id) && stage < 3)) {
+        return;
+      }
+    }
     c.heldBeats = c.heldBeats || [];
     if (c.heldBeats.some(h => h.ask || h.traderIntro || h.invitation || h.bondproposal || h.linkraise)) return;
     if (c.invitePending) {
@@ -520,6 +532,7 @@
     }
     c.heldBeats.push({ text: c.traderIntroPending, traderIntro: true });
     c.traderIntroPending = null;
+    c.tradeIntroDeferred = false;
   }
 
   // floraWords: the green world coming up in conversation. Teaching later
@@ -718,7 +731,11 @@
       } catch (e) {}
       if ((!opens.length && !closes.length) || Math.random() >= p) return line;
       const inner = t.slice(1, -1);
+      // isQ stays terminal-mark only so opener/closer RNG and mannerism
+      // cycles match prior sittings. asksQ (any "?") is the honesty gate
+      // after the pick — dialog audit #5 2026-11-08.
       const isQ = /\?\s*$/.test(inner);
+      const asksQ = /\?/.test(inner);
       // FAVOR HEADS (journey establishment r5 2026-10-12): a self-naming head
       // already opens its own discourse — a voice opener doubles it ("The way
       // I read it — Never mind the food I needed — ...", caught live). Openers
@@ -750,6 +767,22 @@
       // convoPickCycle reshuffles when the pool runs dry.
       let bit = this.convoPickCycle(vid, 'voice:' + temp + ':' + ageBand + ':' + (ageSetId || 'none') + ':' + mods.join('+') + ':' + (useOpen ? 'o' : 'c'), pool);
       if (!bit) return line;
+      // FORMAL QUESTION GUARD (dialog audit #5 2026-11-08): authored questions
+      // often trail the mark ("Okay, real question: …? I desperately need
+      // it."), so terminal-only isQ missed them and voice openers stacked
+      // ("Practical view: Okay, real question: …"). Temperament closers also
+      // answered the ask ("…laughed? Extremely normal, all of it."). Consume
+      // the mannerism cycle above for lockstep, then discard decoration that
+      // fights the question: any opener on a line that asks, any closer on a
+      // multi-clause ask, and non-soft closers on plain terminal questions.
+      // Soft address/punct closers (", friend.", "…") still fold on plain "?".
+      if (asksQ) {
+        if (useOpen || !isQ) return line;
+        const s = String(bit);
+        const tbit = s.trim();
+        const softQ = /^[.!?…]+$/.test(tbit) || /^\s*,\s+\S/.test(s);
+        if (!softQ) return line;
+      }
       // COMMA-OPENER CASE (journey deepening 2026-10-11): an opener that ends
       // in ", " ("Honestly, ", "Well, ") continues the clause — the composed
       // line must continue lowercase ("Honestly, we never finished…"), not
@@ -1161,6 +1194,69 @@
         if (rl && rl.indexOf(key) !== -1) return true;
       } catch (e) {}
       return false;
+    },
+
+    // convoHasLiveUnfinished (dialog audit #4 2026-11-08): true when a real
+    // unfinished beat still exists — open topic-ledger threads, a resume
+    // that claimed unfinished business into this sitting, a live unfinished
+    // outing, or queued held beats. Used to refuse dry train-of-thought on
+    // Help/engage/goon when the unfinished work is still live.
+    convoHasLiveUnfinished(vid) {
+      const c = this.convoGet(vid);
+      if (!c || !c.active) return false;
+      try {
+        const open = (typeof this.convoOpenThreads === 'function') ? this.convoOpenThreads(vid) : [];
+        if (open && open.length) return true;
+      } catch (e) {}
+      if ((c.heldBeats || []).length) return true;
+      if (c._resumedOnce && c.thread && c.thread !== 'small' && c.thread !== 'nonverbal') return true;
+      try {
+        const favor = (c.want && c.want.favor) ||
+          (typeof this.convoGetFavor === 'function' ? this.convoGetFavor(vid) : null);
+        if (favor && (
+          (favor.kind === 'water_haul' && favor.waterRun && !favor.waterRun.returned) ||
+          (favor.kind === 'forage_help' && favor.forageRun && !favor.forageRun.returned)
+        )) return true;
+      } catch (e) {}
+      return false;
+    },
+
+    // convoResumeOwnsSitting (dialog audit #7 2026-11-08): an unfinished
+    // resume/debt/confide claimed into this sitting owns the reply until the
+    // player explicitly changes the subject. Mirrors r7 question ownership:
+    // Teach / agency pivots wait — succeeding at teach must not abandon the
+    // claimed thread. Cleared when choosingSubject (subject menu) or when
+    // the live thread leaves the resumed tid.
+    convoResumeOwnsSitting(vid) {
+      const c = this.convoGet(vid);
+      if (!c || !c.active || !c._resumedOnce || !c._resumeOwnsTid) return false;
+      if (c.choosingSubject) return false;
+      if (!c.thread || c.thread === 'small' || c.thread === 'nonverbal') return false;
+      return c.thread === c._resumeOwnsTid;
+    },
+
+    // convoUnfinishedEngageLine: honest follow-through when Help/engage/goon
+    // would otherwise dry while unfinished work remains. Names the live
+    // thread so the reply matches the opener's claim (never amnesia).
+    convoUnfinishedEngageLine(vid) {
+      const c = this.convoGet(vid);
+      let about = null;
+      try {
+        about = (typeof this.convoThreadAbout === 'function')
+          ? this.convoThreadAbout(vid, c && c.thread) : null;
+      } catch (e) { about = null; }
+      if (!about) {
+        try {
+          const open = (typeof this.convoOpenThreads === 'function') ? this.convoOpenThreads(vid) : [];
+          if (open && open[0] && open[0].label) about = open[0].label;
+        } catch (e) {}
+      }
+      const label = about || 'what we were saying';
+      return this.convoPickCycle(vid, 'engage:unfinished', [
+        `"Still on ${label}. Right — where was I."`,
+        `"${label} — we hadn't finished. Give me a second."`,
+        `"Yeah — ${label}. Let me pick that up."`,
+      ]) || `"Still on ${label}."`;
     },
 
     // convoDryLine: honest dry lines for run-ledger blocks. The line was
@@ -1725,7 +1821,47 @@
       if (!t || t.split(/\s+/).length < 4) return false;
       try { if (this.convoIsDeflectionLine(sn)) return false; } catch (e) {}
       if (/never (did )?finish(ed)? talking about|never did get back to|we left it|we wandered off|proper ending/i.test(sn)) return false;
+      // STAGE DIRECTION (prove-out 2026-11-08): mood/narration lines from
+      // silence pools were quoted as unfinished speech — "want to pick it
+      // up? 'They glance at the fire…'" (dialog-coherence-audit, seed 1
+      // Dieter / seed 7 Ruth). Not spoken memory; drop the quote.
+      if (this.convoSnippetIsStageDirection(sn)) return false;
+      // Party-join assent stock can land on the wrong thread ledger and then
+      // resume as the "memory" of a plant lesson (OVE-29 residual sampler
+      // seed1 Eduardo: '...Fine. This had better be worth it.').
+      if (/\bhad better be worth it\b|\bnot carrying your stuff\b|\bwatch your back\. Might as well\b/i.test(sn)) return false;
       return true;
+    },
+    // Mood / stage-direction narration is not a spoken beat worth quoting.
+    // Residual sampler 2026-11-08 (OVE-29): PR #10 caught "They glance…" /
+    // "A comfortable quiet…" / exact "Still on what they confided", but
+    // warm-silence "You say nothing…" and recap scaffolding "Still on X"
+    // / "Say it plain. Still on X" still quoted into resume openers
+    // (seed99 Nora plant lesson; seed1 Dale/Ella hard time).
+    // OVE-100 / OVE-97 tip residual: dialogue+stage hybrids (mood pools,
+    // teach diegesis + reaction quotes, recap "Like I said — still on")
+    // used to early-out on any embedded `"`, then resume quote-hygiene
+    // stripped the marks and left pure diegesis/mood in the opener.
+    convoSnippetIsStageDirection(sn) {
+      if (!sn) return false;
+      const s = String(sn).trim().replace(/^["'“”]+|["'“”]+$/g, '');
+      // Hybrids win even when dialogue quotes are present — resume hygiene
+      // strips `"` and would otherwise surface the stage half as "memory".
+      if (/\bYou show them\b/i.test(s)) return true;
+      if (/\b(tired smile|small smile|A breath)\b/i.test(s)) return true;
+      if (/\b(Like I said|As I said|Short version)\b/i.test(s) && /\bstill on\b/i.test(s)) return true;
+      // Spoken reactions often wrap a beat + dialogue
+      // (characterGen: 'They go still. "So it's not just me…"'). Those are
+      // real memory; only pure mood/silence narration is stage direction.
+      if (/"/.test(s)) return false;
+      if (/^(They |A comfortable |A warmth |A tired |Your silence|You say nothing|You don'?t answer|The silence |You show them\b)/i.test(s)) return true;
+      if (/\b(glance at the fire|comfortable quiet settles|tired smile|small smile|neither do they, for a while)\b/i.test(s)) return true;
+      // Recap / re-anchor meta is grammar, not remembered speech.
+      if (/^Still on\b/i.test(s)) return true;
+      if (/^Say it plain\.\s*Still on\b/i.test(s)) return true;
+      // Wind-down filler that is only stage direction (convo-dialogue wind pools).
+      if (/^Anyway\.\s*A small smile\.?$/i.test(s)) return true;
+      return false;
     },
     // convoSnippetIsHook (journey-deepening r13 2026-10-18): a teaser /
     // invitation is a real beat (the unfinished business exists — the plant
@@ -1940,6 +2076,10 @@
       // (Old saves may hold taughtref threads planted before the gate.)
       if (typeof this.convoThreadBacked === 'function' && !this.convoThreadBacked(vid, o.tid)) return null;
       c._resumedOnce = true;
+      // RESUME OWNERSHIP (dialog audit #7 2026-11-08): remember which thread
+      // the opener claimed so Teach/agency pivots stay suppressed until the
+      // player leaves it (see convoResumeOwnsSitting).
+      c._resumeOwnsTid = o.tid;
       const label = this.convoThreadAbout(vid, o.tid, o.label || o.tid);
       // COHERENCE (Steve 2026-10-07): the resume must not contradict the
       // timeline — a thread left hanging 12 days ago is not "last time".
@@ -1956,6 +2096,12 @@
       // predecessor's — the NPC names them. The new Bearer can pick it
       // up, but never as if they were there.
       const pred = (typeof this.inheritedName === 'function') ? this.inheritedName(o) : null;
+      // RESUME OFFER (story-offer 2026-11-08): when the opener asks whether
+      // to hear / pick up the unfinished thread, Yes must deliver that
+      // thread — not a generic yn acknowledgment. Tagged on the return so
+      // startConvo can mark the hanging genericQ. Stage-direction quote
+      // hygiene stays in PR #10's convoSnippetIsStageDirection path.
+      let resumeOffer = false;
       if (pred) {
         if (ago > 7) {
           // STALE INHERITANCE (journey-landing r16 2026-10-15): an 8+-day-old
@@ -1966,13 +2112,17 @@
           // Name the dead, own the gap, invite — the new Bearer can pick it
           // up, never as if they were there.
           inner = `${pred} and I never did finish talking about ${label} — that was ${this.pluralize(ago, 'day')} back. You weren't there for that one — ${pred} was. Want to hear where it left off?`;
+          resumeOffer = true;
         } else if (ago > 1) {
           inner = `${pred} and I never finished talking about ${label} — ${whyLine}, ${this.pluralize(ago, 'day')} back. You're wearing ${pred}'s shoes now — want to pick it up?`;
+          resumeOffer = true;
         } else {
           inner = `${pred} and I never finished talking about ${label} — ${whyLine}. You're wearing ${pred}'s shoes now — want to pick it up?`;
+          resumeOffer = true;
         }
       } else if (ago > 7) {
         inner = `We never did finish talking about ${label} — that was ${this.pluralize(ago, 'day')} back. Still on your mind?`;
+        resumeOffer = true;
       } else if (ago > 1) {
         inner = `We never finished talking about ${label} — ${whyLine}, ${this.pluralize(ago, 'day')} back.`;
       } else {
@@ -2039,7 +2189,7 @@
       const line = this.voiceLine(vid, `"${inner}"`);
       // R17: the resume opener is structural grammar — exempt from the
       // run-ledger block (consumed at emission in startConvo).
-      return { line, thread: o.tid, structural: true };
+      return { line, thread: o.tid, structural: true, resumeOffer: !!resumeOffer };
     },
 
     // ---------- 4. COHERENCE: recap ----------
@@ -2071,10 +2221,12 @@
       // being re-asked says "as I said", they don't parrot.
       // R31 (2026-10-20): the r27 reframe pool itself WRAPPED on the 4th
       // pick (seed 2006 Olivia — the reframe became the repeat, an L2'
-      // violation). Count-aware now: the 3 reframe templates serve once
-      // each, then the NPC escalates honestly (a real person re-asked a
-      // 4th time names the repetition), then the recap choice spends out
-      // of the menu for the sitting — never a verbatim cycle.
+      // violation). Count-aware now: one reframe, then a clearer exit that
+      // spends the choice — never a verbatim cycle.
+      // RECAP HAMMER (dialog audit #6 2026-11-08): five "Still on X" /
+      // reframe serves before spend was still a bad sitting. Cap at 3
+      // presses with an honest exit on the last — earlier removal, not
+      // more synonyms.
       c._recapSaid = c._recapSaid || {};
       const raw = line;
       if (c._recapSaid[raw]) {
@@ -2092,32 +2244,31 @@
         const stillM = /^Still on (.+)\.$/.exec(inner);
         if (stillM) { topic = stillM[1]; reInner = "we're still on " + topic + "."; }
         c._recapReframes = (c._recapReframes || 0) + 1;
-        if (c._recapReframes <= 3) {
+        if (c._recapReframes === 1) {
           line = this.convoPickCycle(vid, 'recaprepeat', [
             `"As I said — ${reInner}"`,
             `"Like I said — ${reInner}"`,
             topic ? `"${topic} — that's still where we are."` : `"${inner} That's still where we are."`,
           ]);
-        } else if (c._recapReframes === 4) {
-          line = `"I've told you three times now — ${reInner}"`;
         } else {
-          line = `"We're going in circles a bit — ${reInner}"`;
-          // CAP: the choice spends out for this sitting — a real person
-          // stops answering, they don't find a sixth synonym.
+          // Clearer exit: name the loop and spend — a real person stops
+          // answering, they don't find a fourth synonym.
+          line = topic
+            ? `"We're going in circles — still on ${topic}. Ask me something else if you want."`
+            : `"We're going in circles a bit — ${reInner} Ask me something else if you want."`;
           try { this.convoSpendChoice(vid, 'recap'); } catch (e) {}
         }
       }
       c._recapSaid[raw] = true;
-      // RECAP CAP (journey-social r154 2026-11-07): press-count cap — the
-      // reframe-keyed spend above only fires when the SAME raw line repeats,
-      // but a moving conversation re-anchors to a fresh line every press
-      // (each press appends a thread-log entry), so the cap never fired in
-      // the wild (r153: 7 conversations to 6 presses). Count presses per
-      // sitting; after serving the 5th, spend 'recap' whatever the line
-      // was. The r27/r31 reframe/escalation content above is untouched;
-      // the same-line spend stays as a redundant guard.
+      // RECAP CAP (journey-social r154 2026-11-07; tightened audit #6):
+      // press-count cap — the reframe-keyed spend above only fires when the
+      // SAME raw line repeats, but a moving conversation re-anchors to a
+      // fresh line every press (each press appends a thread-log entry), so
+      // the reframe counter never fired in the wild. Count presses per
+      // sitting; after serving the 3rd, spend 'recap' whatever the line
+      // was. Same-line clearer-exit spend above stays as a redundant guard.
       c._recapPresses = (c._recapPresses || 0) + 1;
-      if (c._recapPresses >= 5) {
+      if (c._recapPresses >= 3) {
         try { this.convoSpendChoice(vid, 'recap'); } catch (e) {}
       }
       return this.voiceLine(vid, line);
@@ -4386,6 +4537,15 @@
       } else if (c.spokenBeat?.tag !== 'invitation') {
         choices = (choices || []).filter(ch => !/^betrayal:(accept|decline)$/.test(ch.id));
       }
+      // RESUME OWNERSHIP (dialog audit #7 2026-11-08): strip Teach / skill
+      // lesson / agency pivots while an unfinished resume/debt/confide owns
+      // the sitting. Belt-and-suspenders over suppressPivot — beat-matrix and
+      // agency injectors can prepend after buildMenu. Subject-change /
+      // leave / on-thread engage stay.
+      if (!owns && typeof this.convoResumeOwnsSitting === 'function' && this.convoResumeOwnsSitting(vid)) {
+        const resumePivot = /^(teach|theorize|trade|hawker|compare_maps|observe|offer_help|invite_party|skill_learn:|skill_teach:|agency:)/;
+        choices = (choices || []).filter(ch => ch && !resumePivot.test(ch.id));
+      }
       const full=(choices || []).filter(ch=>ch && ch.id && ch.id!=='menu:more' && !seen.has(ch.id) && seen.add(ch.id));
       c.offeredReplies = Object.fromEntries(full.map(ch => [ch.id, ch.label]));
       if (full.some(ch=>/^(ans:|gq:)/.test(ch.id))) { c.menuPage=0;c.menuPages=1;return full; }
@@ -4779,7 +4939,12 @@
         rlist.push({ id: 'leave', label: '"Never mind."' });
         return finish( rlist);
       }
-      const suppressPivot = !!c.reactiveQ || !!c.genericQ || c.thread === 'grief' || c.thread === 'cheer';
+      // RESUME OWNERSHIP (dialog audit #7): unfinished resume/debt/confide
+      // owns the sitting like a hanging r7 question — Teach/agency pivots
+      // wait until subject-change leaves the claimed thread.
+      const resumeOwns = typeof this.convoResumeOwnsSitting === 'function'
+        ? !!this.convoResumeOwnsSitting(vid) : false;
+      const suppressPivot = !!c.reactiveQ || !!c.genericQ || c.thread === 'grief' || c.thread === 'cheer' || resumeOwns;
       // MAXC: the chat view has room for a real choice list. Topic asks
       // must never be starved by action buttons — Steve found deep topics
       // unreachable when discovery actions filled all 5 slots.
@@ -5329,7 +5494,7 @@
       c.active = true; c.exchanges = 0; c.budget = this.convoBudget(vid);
       c.thread = null; c.depth = 0; c.transcript = []; c.pendingQ = null;
       c.choosingSubject = false; c.lastBeat = null; c.spokenBeat = null; c.replyMenu = null; c.followUsed = {}; c.menuPage=0; c.menuPages=1;
-      c.threadLog = []; c._beatThread = null; c._resumedOnce = false;
+      c.threadLog = []; c._beatThread = null; c._resumedOnce = false; c._resumeOwnsTid = null;
       // STALE INVITE HOLD (journey-social r40 2026-10-21): c.invitePending is
       // the intra-conversation hold for "opener owns the reply, queue the
       // invite for the continuer". It leaked across sittings — a d13 hold
@@ -5576,6 +5741,14 @@
         // GENERIC-Q: opener asked something direct with no bespoke def —
         // hang it as an answerable question (Rule 4).
         this.convoGenericQ(vid, opLine);
+        // STORY-OFFER (2026-11-08): a resume opener that asked whether to
+        // hear / pick up the unfinished thread must deliver that thread on
+        // Yes — tag the hanging yn so the gq:yn handler can follow through
+        // instead of GQ_ACK ("I see.").
+        if (c.genericQ && c.genericQ.kind === 'yn' && op && op.resumeOffer) {
+          c.genericQ.resumeOffer = true;
+          c.genericQ.resumeTid = op.thread || opThread;
+        }
       }
       this.convoNoteFlora(vid, opLine);
       // SPOKEN LURE (journey landing 2026-10-12): a pending invite used to
@@ -6069,9 +6242,38 @@
             c.traderMentioned = true;
             c.thread = 'trade'; c.depth = 0;
           }
-          this.sayLine(vid, hb.text, hb.winddown ? { tag: 'closing', structural: true } : hb.invitation ? { tag: 'invitation', inviteBeat: true } : hb.bondproposal ? { tag: 'bondproposal', bondBeat: true } : hb.linkraise ? { tag: 'linkraise', linkBeat: true } : hb.traderIntro ? { tag: 'offer', topic: 'trade' } : hb.moodBeat ? { structural: true, foreign: hb.foreign } : { foreign: hb.foreign });
+          // LIVE UNFINISHED (dialog audit #4 2026-11-08): goon delivers a
+          // queued unfinished beat. A run-ledger block must NOT dry to
+          // "lost my train of thought" while that beat (or an open
+          // unfinished thread) still exists — seed 1 Dale. Check before
+          // sayLine so dry never hits the transcript. Prefer an alternate
+          // live thread beat; else name the unfinished work structurally.
+          let goonText = hb.text;
+          let goonOpts = hb.winddown ? { tag: 'closing', structural: true }
+            : hb.invitation ? { tag: 'invitation', inviteBeat: true }
+            : hb.bondproposal ? { tag: 'bondproposal', bondBeat: true }
+            : hb.linkraise ? { tag: 'linkraise', linkBeat: true }
+            : hb.traderIntro ? { tag: 'offer', topic: 'trade' }
+            : hb.moodBeat ? { structural: true, foreign: hb.foreign }
+            : { foreign: hb.foreign };
+          const goonExempt = !!(goonOpts.structural || goonOpts.inviteBeat);
+          if (!goonExempt && typeof this.convoWouldBlock === 'function' &&
+              this.convoWouldBlock(vid, goonText)) {
+            let alt = null;
+            try { alt = (typeof this.convoThreadBeat === 'function') ? this.convoThreadBeat(vid) : null; }
+            catch (e) { alt = null; }
+            if (alt && !this.convoWouldBlock(vid, alt)) {
+              goonText = alt;
+            } else {
+              goonText = (typeof this.convoUnfinishedEngageLine === 'function')
+                ? this.convoUnfinishedEngageLine(vid)
+                : '"Still on that. Right — where was I."';
+              goonOpts = { structural: true, fallback: goonText };
+            }
+          }
+          const goonSaid = this.sayLine(vid, goonText, goonOpts);
           queueTraderIntro(c);
-          done(hb.text, gl);
+          done(goonSaid || goonText, gl);
           if (hb.winddown) {
             // The goodbye lands: one last turn of choices, then it's over.
             // Only the player's "I should go." (or the turn after) ends it —
@@ -6565,9 +6767,33 @@
           });
         } else if (kind === 'yn') {
           youLine = aid === 'yes' ? '"Yes."' : aid === 'no' ? '"No."' : '"I don\'t know."';
-          const acknowledgments = GQ_ACK[aid] || GQ_ACK.unsure;
-          resp = this.convoPick(vid, 'gq:yn:' + aid, acknowledgments) || acknowledgments[0];
-          if (aid !== 'unsure') gqTrust = 1;
+          // STORY-OFFER FOLLOW-THROUGH (2026-11-08 / prove-out §1.4): Yes to
+          // "Want to hear where it left off?" (and sibling resume invites)
+          // must deliver the unfinished thread — same contract as
+          // alive:thread — never a generic "I see." acknowledgment.
+          const resumeOffer = !!(wasGq && wasGq.resumeOffer);
+          if (aid === 'yes' && resumeOffer) {
+            const tid = wasGq.resumeTid || c.thread;
+            const open = (typeof this.convoOpenThreads === 'function') ? this.convoOpenThreads(vid) : [];
+            const o = (open || []).find(x => x && x.tid === tid) || null;
+            const label = (o && o.label) || (typeof this.convoThreadAbout === 'function' ? this.convoThreadAbout(vid, tid) : null) || tid || 'that';
+            try {
+              const led = this.convoTopicLedger(vid);
+              led.open = (led.open || []).filter(x => !x || x.tid !== tid);
+            } catch (e) {}
+            if (tid) { c.thread = tid; c.depth = Math.max(c.depth || 0, 1); }
+            const beat = (typeof this.convoThreadBeat === 'function') ? this.convoThreadBeat(vid) : null;
+            const predT = (o && typeof this.inheritedName === 'function') ? this.inheritedName(o) : null;
+            resp = beat || (predT
+              ? `"About ${label} — that was ${predT}'s thread. We never did get back to that."`
+              : `"About ${label} — yeah, we never did get back to that."`);
+            structuralTurn = !beat;
+            gqTrust = 1;
+          } else {
+            const acknowledgments = GQ_ACK[aid] || GQ_ACK.unsure;
+            resp = this.convoPick(vid, 'gq:yn:' + aid, acknowledgments) || acknowledgments[0];
+            if (aid !== 'unsure') gqTrust = 1;
+          }
         } else if (kind === 'howru') {
           youLine = aid === 'bad' ? '"Honestly? Not great."' : aid === 'fine' ? '"I\'m fine."' : '"Better when I\'m busy."';
           resp = this.convoPick(vid, 'gq:howru:' + aid, GQ_ACK['howru_' + aid] || GQ_ACK.howru_fine);
@@ -7166,7 +7392,16 @@
       // fizzle. A repeated decision line reads as the same answer from
       // another person, not a parrot bug.
       const secretOutcome = choiceId.indexOf('secret:') === 0;
-      line = this.sayLine(vid, line, { fallback: () => this.convoSelfRepeatLine(vid), structural: structuralTurn || answeredGeneric, diegeticAct: inviteOutcome || lessonOutcome || secretOutcome }) || line;
+      // PLANT TEACH IS A DIEGETIC ACT (dialog audit #4 2026-11-08): the
+      // teach branch already wrote taught/taughtByPlayer and paid trust
+      // before emission — same class as skill lessons (r86). A ledger-
+      // blocked react must not dry to train-of-thought after the lesson
+      // landed (seed 7 Ruth plant-lesson resume → teach → dry).
+      // (Merged 2026-11-10: local lessonOutcome already covers 'teach';
+      // the origin side's plantTeachOutcome is kept as the same value so
+      // both sides' exemption reads survive — behavior is the union.)
+      const plantTeachOutcome = choiceId === 'teach';
+      line = this.sayLine(vid, line, { fallback: () => this.convoSelfRepeatLine(vid), structural: structuralTurn || answeredGeneric, diegeticAct: inviteOutcome || lessonOutcome || secretOutcome || plantTeachOutcome }) || line;
       // WANT ARC (convo rebuild 2026-10-11): answering their question engages
       // the want; rudely changing the subject deflects it. The core flow
       // advances the want — no wrapper needed.
@@ -7388,6 +7623,12 @@
       // shape ("should get back to it" + "Right. Go on, then." + dry-line
       // trail-offs). A person says goodbye once.
       const goodbyeSaid = !!c.windingDown;
+      // TRADE INTRO ACROSS CONTINUE: an unspoken trader introduction that
+      // survived this sitting stays deferred. The next open may pick a new
+      // want (dawn priorities); queueTraderIntro must still surface the
+      // earned intro once that opener has spoken, not wait for a full
+      // warn_you/favor engagement arc.
+      if (c.traderIntroPending) c.tradeIntroDeferred = true;
       c.active = false; c.over = true; c.thread = null; c.pendingQ = null;
       c.reactiveQ = null; c.wantAfterSecret = null;
       // UNIFIED TRACKS (2026-10-14): a held conversation (a real exchange,

@@ -560,8 +560,26 @@
       try {
         var _trickKnown = this.villageKnowsTrick ? this.villageKnowsTrick(mdef.id) : false;
         var _partySize = opts.allies || 0;
-        rec.intent = (_trickKnown || _partySize > 0) ? 'engage' : 'learn';
-        rec.intentWhy = _trickKnown ? 'trick-known' : (_partySize > 0 ? 'party' : 'learn-first');
+        // Phase 5: personal know.fought (via fighterState) is its own engage
+        // reason — distinct from village-shared villageKnowsTrick.
+        var _foughtSpecies = false;
+        var _fs0 = null;
+        try {
+          if (this.fighterState) {
+            _fs0 = this.fighterState(vid, { foeId: mdef.id, noFlee: !!opts.noFlee });
+            _foughtSpecies = !!(_fs0.species && _fs0.species.fought);
+          }
+        } catch (e2) { _foughtSpecies = false; _fs0 = null; }
+        rec._fighterState = _fs0;
+        if (_trickKnown) {
+          rec.intent = 'engage'; rec.intentWhy = 'trick-known';
+        } else if (_foughtSpecies) {
+          rec.intent = 'engage'; rec.intentWhy = 'species-fought';
+        } else if (_partySize > 0) {
+          rec.intent = 'engage'; rec.intentWhy = 'party';
+        } else {
+          rec.intent = 'learn'; rec.intentWhy = 'learn-first';
+        }
       } catch (e) { rec.intent = 'engage'; rec.intentWhy = 'fallback'; }
       // GEAR-UP (Steve 2026-10-09): re-equip only, never acquisition — a
       // fighter doesn't whittle a spear mid-fight. Deterministic (autoEquip
@@ -1191,6 +1209,21 @@
       // Nobody's damage or stats change — hand to hand is supposed to be hard.
       // Death packs are just where gear logically ends up, never a goal.
       var vBreak = clamp(0.5 - Math.min(0.3, bravery * 0.015) - (temper === 'bold' ? 0.1 : 0) + (temper === 'cautious' ? 0.1 : 0), 0.15, 0.6);
+      // Phase 5: shared fighterState bends the morale floor the same way TB
+      // bends fleeLine — personal know.fought / fear / confidence, not a
+      // second private formula. Curve.fleeLine is the shared "do I run?"
+      // depth; vBreak still absorbs gear/ally/day hold bonuses below.
+      var _fsMorale = rec._fighterState || null;
+      try {
+        if (!_fsMorale && this.fighterState) {
+          _fsMorale = this.fighterState(vid, { foeId: mdef.id, noFlee: !!opts.noFlee });
+          rec._fighterState = _fsMorale;
+        }
+      } catch (e) { _fsMorale = null; }
+      if (_fsMorale && _fsMorale.curve && _fsMorale.curve.fleeLine != null) {
+        // Blend: keep situational hold math, anchor the floor on the shared curve.
+        vBreak = clamp((vBreak + _fsMorale.curve.fleeLine) / 2, 0.15, 0.6);
+      }
       var holdBonus = 0;
       if (wb > 0) holdBonus += 0.08;                        // armed: trust the gear
       var allies = Math.max(0, opts.allies || 0);
@@ -2467,13 +2500,29 @@
             ffFired('war_cry');
             fleeAt = Math.max(0.05, fleeAt - 0.15);
             rec.log.push(vName + ' BELLOWS — not volume, a promise. ' + mPhraseCap + ' falters. They hold the line a little longer. (War Cry)');
-          } else if (opts.noFlee) {
+          } else if (this.contestFleeSealed ? this.contestFleeSealed({ noFlee: !!opts.noFlee }) : opts.noFlee) {
             if (!rec.gateShut) { rec.gateShut = true; rec.log.push(vName + ' sees how this ends — but the gate is shut. No running.'); }
           } else {
-            rec.outcome = 'vFlee'; rec.fleeHopeless = true; rec.fleeHpFrac = vHp / vHpMax;
-            if (rec.intent === 'learn') rec.fleeLearn = true;
-            rec.log.push(vName + ' sees how this ends — and runs while running still works.');
-            break;
+            // Phase 5: same fighterShouldFlee answer TB uses for hopeless.
+            var _hpFracH = vHp / vHpMax;
+            var _fsH = rec._fighterState;
+            try {
+              if (this.fighterState) {
+                _fsH = this.fighterState(vid, {
+                  foeId: mdef.id, hp: vHp, maxHp: vHpMax, noFlee: !!opts.noFlee,
+                });
+                rec._fighterState = _fsH;
+              }
+            } catch (e) {}
+            var _runH = _fsH && this.fighterShouldFlee
+              ? this.fighterShouldFlee(_fsH, { hopeless: true, winning: false, hpFrac: _hpFracH })
+              : true;
+            if (_runH) {
+              rec.outcome = 'vFlee'; rec.fleeHopeless = true; rec.fleeHpFrac = _hpFracH;
+              if (rec.intent === 'learn') rec.fleeLearn = true;
+              rec.log.push(vName + ' sees how this ends — and runs while running still works.');
+              break;
+            }
           }
         }
         if ((vHp / vHpMax) < fleeAt) {
@@ -2488,24 +2537,42 @@
           }
           // ARENA PROTOCOL: sealed — past the sane line, still in. The
           // crowd leans in. (Logged once; the log feeds gossip.)
-          if (opts.noFlee) {
+          // Phase 5: single contestFleeSealed gate (shared with TB).
+          if (this.contestFleeSealed ? this.contestFleeSealed({ noFlee: !!opts.noFlee }) : opts.noFlee) {
             if (!rec.pastSense) { rec.pastSense = true; rec.log.push(vName + ' is past the point of sense and still standing.'); }
           } else {
-            rec.outcome = 'vFlee'; rec.fleeHopeless = hopeless; rec.fleeHpFrac = vHp / vHpMax;
-            if (rec.intent === 'learn') rec.fleeLearn = true;
-            // JOINENDLINES (sim-joinendlines-a, 2026-10-29): narration
-            // only — the floor flee after a shout previously ended with
-            // no line at all (the ally's "charges in!" was the last
-            // line). Names the answer as a past act, so the line stays
-            // honest even if the ally has since gone down.
-            if (shoutJoined) rec.log.push(allyName + ' answered ' + vName + '\'s shout, but ' + vName + ' is past holding — they run while running still works.');
-            // SOLOENDLINES (sim-soloendlines-a, 2026-10-29): narration
-            // only — the same floor flee in a SOLO fight previously ended
-            // with no line at all. Same line minus the ally clause; never
-            // fires on shout-joined fights (they have their line above)
-            // nor on allyFromStart fights (out of scope, unchanged).
-            else if (!opts.allyFromStart) rec.log.push(vName + ' is past holding — they run while running still works.');
-            break;
+            var _hpFracF = vHp / vHpMax;
+            var _fsF = rec._fighterState;
+            try {
+              if (this.fighterState) {
+                _fsF = this.fighterState(vid, {
+                  foeId: mdef.id, hp: vHp, maxHp: vHpMax, noFlee: !!opts.noFlee,
+                });
+                rec._fighterState = _fsF;
+              }
+            } catch (e) {}
+            var _runF = _fsF && this.fighterShouldFlee
+              ? this.fighterShouldFlee(_fsF, {
+                  hopeless: !!hopeless, winning: !!winning, hpFrac: _hpFracF, floorFlee: true,
+                })
+              : true;
+            if (_runF) {
+              rec.outcome = 'vFlee'; rec.fleeHopeless = hopeless; rec.fleeHpFrac = _hpFracF;
+              if (rec.intent === 'learn') rec.fleeLearn = true;
+              // JOINENDLINES (sim-joinendlines-a, 2026-10-29): narration
+              // only — the floor flee after a shout previously ended with
+              // no line at all (the ally's "charges in!" was the last
+              // line). Names the answer as a past act, so the line stays
+              // honest even if the ally has since gone down.
+              if (shoutJoined) rec.log.push(allyName + ' answered ' + vName + '\'s shout, but ' + vName + ' is past holding — they run while running still works.');
+              // SOLOENDLINES (sim-soloendlines-a, 2026-10-29): narration
+              // only — the same floor flee in a SOLO fight previously ended
+              // with no line at all. Same line minus the ally clause; never
+              // fires on shout-joined fights (they have their line above)
+              // nor on allyFromStart fights (out of scope, unchanged).
+              else if (!opts.allyFromStart) rec.log.push(vName + ' is past holding — they run while running still works.');
+              break;
+            }
           }
         }
         // THE LEAD FALLS: the pack coordinates through the lead animal —

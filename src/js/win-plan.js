@@ -172,6 +172,8 @@
   // A trusted villager this villager can SEE at Haven, willing and able
   // to walk: same node, trust floor shared with party-wiring (15),
   // alive, not engaged, not already out, a ranger by profile.
+  // Ranking among eligibles is shared companionScore (OVE-54) — not
+  // roster-first match.
   function findCompanion(self, vid, hx, hy) {
     try {
       var v = self.state && self.state.village;
@@ -179,6 +181,7 @@
       var roster = v.roster || [];
       var trust = v.trust || {};
       var away = v.away || {};
+      var elig = [];
       for (var i = 0; i < roster.length; i++) {
         var cid = roster[i];
         if (!cid || cid === vid || cid === self.villagerId) continue;
@@ -194,8 +197,16 @@
           var a = self.agencyState ? self.agencyState() : null;
           if (a && a.exped && a.exped[cid]) continue;
         } catch (e) {}
-        return cid;
+        elig.push(cid);
       }
+      if (!elig.length) return null;
+      try {
+        if (self.companionRank) {
+          var ranked = self.companionRank(vid, elig, { context: 'party' });
+          return (ranked[0] && ranked[0].id) || null;
+        }
+      } catch (e) {}
+      return elig[0];
     } catch (e) {}
     return null;
   }

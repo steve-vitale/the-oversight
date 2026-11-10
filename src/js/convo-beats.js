@@ -459,11 +459,14 @@
     // common case after an opener) could never be taught by the player, even
     // though the teach handler and its topical-coherence rule exist. Same
     // gate as the base menu: not mid-topic-thread, not mid-grief/cheer,
-    // and actually something teachable.
+    // not mid-resume ownership (dialog audit #7), and actually something
+    // teachable.
     try {
       const TOPIC_THREADS = ['village', 'past', 'goal', 'plans', 'gossip', 'personal'];
       const onThread = TOPIC_THREADS.indexOf(c.thread) !== -1;
-      if (!wantOwnsMenu && !onThread && c.thread !== 'grief' && c.thread !== 'cheer') {
+      const resumeOwns = typeof this.convoResumeOwnsSitting === 'function'
+        && this.convoResumeOwnsSitting(vid);
+      if (!wantOwnsMenu && !onThread && !resumeOwns && c.thread !== 'grief' && c.thread !== 'cheer') {
         const youKnow = Object.keys(this.state.codex.plants || {})
             .filter(k => this.plantKnown(k)); // L1+ only: a blind taste isn't teachable knowledge
         // REBUILD 2026-10-11: the union — background familiarity counts as

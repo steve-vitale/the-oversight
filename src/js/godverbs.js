@@ -8,18 +8,52 @@
 //   - godActionDef(actionId) / godActionReady(actionId) / godActivatables() -> the 'god' pseudo-ability for useAbility and the action bar
 //   - godVillagerCast(game, v) -> a villager god's verb on their turn (wraps tbVillagerAbility, before the subclass verbs)
 //   - godDaily(game) -> dawn: day verbs refresh, Gilded Guard regen, the Audit, No Lies' knowing and its trust price, villager gardens
+//   - isFeastContest(contest) / gardenFeastLeanFor(pid, contest) -> CONTEST scale: Living Garden feast lean for cookfight/guest
+//   - isPerformanceContest(contest) / voicePerformanceLeanFor(pid, contest) -> CONTEST scale: Voice performance lean for impress/moot
+//   - isEnduranceContest(contest) / unkillableEnduranceLeanFor(pid, contest) -> CONTEST scale: Unkillable endurance lean for drop/starve/maw/vigil/exchange
+//   - isStrategyContest(contest) / allSeeingStrategyLeanFor(pid, contest) -> CONTEST scale: All-Seeing strategy lean for puzzle/detective + lies
+//   - isSponsorContest(contest) / marketSponsorLeanFor(pid, contest) -> CONTEST scale: Market sponsor lean for price/auction (risky — auction still pays)
+//   - isBloodContest(contest) / opaBloodLeanFor(pid, contest) -> CONTEST scale: One-Person Army blood lean for pit/gauntlet/duel/siege (braveryBonus steadiness)
+//   - isChaseContest(contest) / betweenChaseLeanFor(pid, contest) -> CONTEST scale: Between chase/race lean for hide/calorie_run
+//   - betweenRunnerLeanFor() -> ARMY scale: Between runner lean (day-parts) for aidPartsFor / aidSendRunner travel
+//   - voiceReachVillageIds() / voiceDeliverAllied(day) -> ARMY scale: Voice Be Heard reaches linked/allied foreign villages same day
+//   - gardenMusterFeedFor(need) -> ARMY scale: Living Garden harvest-day cover for titan muster upkeep kcal
+//   - marketOutfitLeanFor() -> ARMY scale: Market God quartermaster lean percent for titanOutfit effectiveness
+//   - allSeeingCouncilLeanFor() -> ARMY scale: All-Seeing war-council map lean for titanWarCouncil readiness/intel/counter
+//   - apexScoutMarkLeanFor() -> ARMY scale: Apex Predator scout-mark lean for resolveOneAssignment scout / markSeen follow
+//   - unkillableLastStandingLeanFor() -> ARMY scale: Unkillable last-standing lean for titanLastStandingContinuity refuse-rout
+//   - opaBreachLeanFor() -> ARMY scale: One-Person Army breach lean for titanBreachPourThrough coalition pour-through
+//   - wardAdvanceLeanFor() -> ARMY scale: Undying Ward advance lean for titanWardAdvanceBehind coalition advance-behind
 // consumes:
 //   - Game.data.godpaths (god.play), state.scholar.godhood, state.village.npcGodhood
 //   - useAbility (abilityActions.js), tbDamage, tbRoundWrap, tbMonsterTurn, startCombat, tbEnd, endDay, maybeCheatDeath, addHealth, removeVillager, springAmbush, lieLive, getActiveLie
 //   - Scattering.Godpath hooks (allyWouldFall, onAllyFell, damageMult, dodgeBonus, villagerStrikeMult, absorbVillagerHit, fieldBegin/Act/Incoming/AllyShare/CheatDeath)
 //   - Scattering.Godhood market verbs (namePrice, buyPassage, guardAbsorb, guardRegen, auditCollect, resetFightVerbs, resetDayVerbs)
 //   - Scattering.combat.nearestEnemy (monster aim)
+//   - Game.contestResolveGroup / Game.contestResolveVillager (feast lean in contest-engine _cxOther; Voice performance lean in _cxOther + _cxMoot; Unkillable endurance lean in _cxEndurance; All-Seeing strategy lean in _cxOther puzzle/detective + _cxMoot lies; Market sponsor lean in _cxMoot price + _cxChance auction; OPA blood lean in _cxBlood / duelFight; Between chase lean in _cxOther hide/calorie_run)
+//   - Game.hierarchyState / linkWith / _linkOther / _trustGain / _nudgeOpinion / _otherVillage / mshipState (Voice army delivery)
 // rules:
 //   - ambush_ally_parity: a living player receives an NPC hunter's allied opening strike through scholar state; existing armed strikes are preserved, and no player input is automated (code: terms)
 //   - same_function: every verb runs for the player or a villager fighter through one implementation (code: actor, VERB_IMPL)
 //   - food_powered: every verb pays kcal (player) or belly (villager, kcal/25 hunger, refused at hunger >= 80); the player's hunger gate (500 kcal) applies to passives too (code: canPay, pay)
 //   - weakness_enforced: brawler beams feed no pain; ward is the priority target and self-heals at half; hunter terms end on contact; between phases are retreats; all-seeing's foresight never covers the holder; voice's fall stuns the field; phoenix needs fuel; market coins never stop beams and titans never haggle; garden hits soft and draws aim (code: preHit, damageMult wrap, termsContact, addHealth wrap)
 //   - never_skips_dinner: no verb feeds its own holder (Feed the Multitude feeds other bellies; the phoenix cannot rise through starvation) (code: feedMultitude, phoenixPlayer)
+//   - feast_contest_lean: Living Garden scale.contest — cookfight/guest scores lean for the ascended holder (player or NPC), numbers in god.play.contestLean / feastContests (code: gardenFeastLeanFor, contestEngine _cxOther)
+//   - voice_performance_lean: Voice scale.contest — impress/moot scores lean for the ascended holder (player or NPC), numbers in god.play.contestLean / performanceContests (code: voicePerformanceLeanFor, contestEngine _cxOther/_cxMoot)
+//   - unkillable_endurance_lean: Unkillable scale.contest — endurance arms lean for the ascended holder (player or NPC), numbers in god.play.contestLean / enduranceContests (code: unkillableEnduranceLeanFor, contestEngine _cxEndurance)
+//   - all_seeing_strategy_lean: All-Seeing scale.contest — puzzle/detective + lies scores lean for the ascended holder (player or NPC), numbers in god.play.contestLean / strategyContests (code: allSeeingStrategyLeanFor, contestEngine _cxOther/_cxMoot)
+//   - market_sponsor_lean: Market God scale.contest — price moot case scores and auction bid capacity lean for the ascended holder (player or NPC), numbers in god.play.contestLean / sponsorContests; auction still pays (risky) (code: marketSponsorLeanFor, contestEngine _cxMoot/_cxChance)
+//   - opa_blood_lean: One-Person Army scale.contest — blood fight arms lean for the ascended holder (player or NPC), numbers in god.play.contestLean / bloodContests as extra braveryBonus / cheer steadiness (code: opaBloodLeanFor, contestEngine _cxBlood/duelFight; OVE-124)
+//   - between_chase_lean: Between scale.contest — chase/race arms lean for the ascended holder (player or NPC), numbers in god.play.contestLean / chaseContests: hide seeker spot pad (lean/25) + calorie_run forage yield; not Unkillable endurance IDs (code: betweenChaseLeanFor, contestEngine _cxOther; OVE-148)
+//   - between_runner_army_lean: Between scale.army — ascended Between holder (player or Haven NPC) leans aid-runner travel via god.play.runnerLean: fewer day-parts on aidPartsFor / aidSendRunner; does not re-label Voice Be Heard broadcast or retune Phase Out kcal / minFrac / retreat (code: betweenRunnerLeanFor, comms.js aidPartsFor/aidSendRunner; OVE-152)
+//   - voice_army_same_day: Voice scale.army — Be Heard stamps linked/allied foreign villages the same day (opinion + link trust + voiceDay; their people fight rallied) (code: voiceDeliverAllied, dailyVoice)
+//   - garden_army_muster_feed: Living Garden scale.army — Feed the Multitude harvest day covers titan muster upkeep kcal (musterMouths × musterKcalPerMouth) for an ascended holder (player or NPC); pack debit + hunger trust bleed only on uncovered remainder (code: gardenMusterFeedFor, titans.js titanMusterUpkeep)
+//   - market_army_outfit_lean: Market God scale.army — ascended Market holder (player or NPC) leans titanOutfit force wbonus/varmor/gearValue by god.play.outfitEffLean percent for the same transferred pieces (code: marketOutfitLeanFor, titans.js titanOutfit)
+//   - all_seeing_army_council_lean: All-Seeing scale.army — ascended All-Seeing holder (player or NPC) leans titanWarCouncil via god.play.councilMapLean: readiness honesty, scout-intel clarity, counter-hint reveal while unknown (code: allSeeingCouncilLeanFor, titans.js titanWarCouncil; OVE-128)
+//   - apex_scout_mark_army_lean: Apex Predator scale.army — ascended Apex holder (player or NPC) leans scout assignment markSeen via god.play.scoutMarkLean: higher shared-reveal chance + follow-marks beat (code: apexScoutMarkLeanFor, game.js resolveOneAssignment scout; OVE-132)
+//   - unkillable_last_standing_army_lean: Unkillable scale.army — ascended Unkillable holder (player or Haven NPC) leans titan last-blade continuity via god.play.lastStandingLean: when the holder is the last living ours blade in a titan fight, refuse rout / steadiness + last-standing beat (code: unkillableLastStandingLeanFor, titans.js titanLastStandingContinuity; OVE-136)
+//   - opa_breach_army_lean: One-Person Army scale.army — ascended OPA holder (player or Haven NPC) leans titan breach pour-through via god.play.breachLean: when the holder opens the front in a titan fight (adjacent / Turn the Pain on titan), coalition blades pour through — steadiness + pour-count + breach beat; does not re-label partyRallyAt or titanPain (code: opaBreachLeanFor, titans.js titanBreachPourThrough; OVE-140)
+//   - ward_army_advance_lean: Undying Ward scale.army — ascended Ward holder (player or Haven NPC) leans titan advance-behind via god.play.advanceLean: when the holder holds the line in a titan fight (adjacent / Take the Wound redirects for the front), coalition blades advance behind the wall — steadiness + advance-count + advance beat; does not re-label Take the Wound PARTY/TITAN redirect or invent weep contests (code: wardAdvanceLeanFor, titans.js titanWardAdvanceBehind; OVE-144)
 //   - table_never_reads_godhood: nothing here is read by table*.js (code: scripts/godpath/ladder.js)
 //   - never_silent: every verb narrates; errors are reported via warn (code: warn)
 (function () {
@@ -58,6 +92,492 @@
   }
   function godPlay(godId) { const g = index().gods[godId]; return (g && g.play) || {}; }
   function godName(godId) { const g = index().gods[godId]; return (g && g.name) || godId; }
+
+  // ---------------- CONTEST scale: Living Garden feast lean ----------------
+  // god.scale.contest is design prose ("Feast contests lean your way."). The
+  // live settlement reads god.play.feastContests + contestLean and applies
+  // inside contestEngine _cxOther for cookfight/guest scores.
+  const FEAST_CONTEST_FALLBACK = ['cookfight', 'guest'];
+  function feastContestSet() {
+    const listed = godPlay('living_garden').feastContests;
+    const ids = Array.isArray(listed) && listed.length ? listed : FEAST_CONTEST_FALLBACK;
+    const set = Object.create(null);
+    for (const id of ids) if (id) set[id] = true;
+    return set;
+  }
+  function isFeastContest(contest) {
+    try {
+      const id = contest && contest.id;
+      return !!(id && feastContestSet()[id]);
+    } catch (e) { warn('isFeastContest', e); return false; }
+  }
+  function gardenFeastLeanFor(pid, contest) {
+    try {
+      if (!pid || !isFeastContest(contest)) return 0;
+      if (holderGod(pid) !== 'living_garden') return 0;
+      const lean = godPlay('living_garden').contestLean;
+      return (typeof lean === 'number' && lean > 0) ? lean : 18;
+    } catch (e) { warn('gardenFeastLeanFor', e); return 0; }
+  }
+
+  // ---------------- CONTEST scale: Voice of the Relay performance lean ----------------
+  // god.scale.contest is design prose ("You are the show: performance contests
+  // lean your way."). Live settlement reads god.play.performanceContests +
+  // contestLean and applies inside contestEngine _cxOther (impress) and
+  // _cxMoot (oratory). Feast contests stay Garden's; cookfight/guest get no
+  // Voice lean.
+  const PERFORMANCE_CONTEST_FALLBACK = ['impress', 'moot'];
+  function performanceContestSet() {
+    const listed = godPlay('voice_of_the_relay').performanceContests;
+    const ids = Array.isArray(listed) && listed.length ? listed : PERFORMANCE_CONTEST_FALLBACK;
+    const set = Object.create(null);
+    for (const id of ids) if (id) set[id] = true;
+    return set;
+  }
+  function isPerformanceContest(contest) {
+    try {
+      const id = contest && contest.id;
+      return !!(id && performanceContestSet()[id]);
+    } catch (e) { warn('isPerformanceContest', e); return false; }
+  }
+  function voicePerformanceLeanFor(pid, contest) {
+    try {
+      if (!pid || !isPerformanceContest(contest)) return 0;
+      if (holderGod(pid) !== 'voice_of_the_relay') return 0;
+      const lean = godPlay('voice_of_the_relay').contestLean;
+      return (typeof lean === 'number' && lean > 0) ? lean : 18;
+    } catch (e) { warn('voicePerformanceLeanFor', e); return 0; }
+  }
+
+  // ---------------- CONTEST scale: Unkillable endurance lean ----------------
+  // god.scale.contest is design prose ("Endurance contests lean your way.").
+  // Live settlement reads god.play.enduranceContests + contestLean and applies
+  // inside contestEngine _cxEndurance on the real arms (starve HP/days,
+  // drop/exchange survival-for-time, maw/vigil nerve). Feast/performance
+  // contests stay Garden/Voice; cookfight/impress/moot get no Unkillable lean.
+  const ENDURANCE_CONTEST_FALLBACK = ['drop', 'starve', 'maw', 'vigil', 'exchange'];
+  function enduranceContestSet() {
+    const listed = godPlay('unkillable').enduranceContests;
+    const ids = Array.isArray(listed) && listed.length ? listed : ENDURANCE_CONTEST_FALLBACK;
+    const set = Object.create(null);
+    for (const id of ids) if (id) set[id] = true;
+    return set;
+  }
+  function isEnduranceContest(contest) {
+    try {
+      const id = contest && contest.id;
+      return !!(id && enduranceContestSet()[id]);
+    } catch (e) { warn('isEnduranceContest', e); return false; }
+  }
+  function unkillableEnduranceLeanFor(pid, contest) {
+    try {
+      if (!pid || !isEnduranceContest(contest)) return 0;
+      if (holderGod(pid) !== 'unkillable') return 0;
+      const lean = godPlay('unkillable').contestLean;
+      return (typeof lean === 'number' && lean > 0) ? lean : 18;
+    } catch (e) { warn('unkillableEnduranceLeanFor', e); return 0; }
+  }
+
+  // ---------------- CONTEST scale: All-Seeing strategy lean ----------------
+  // god.scale.contest is design prose ("Strategy contests: nobody bluffs you.").
+  // Live settlement reads god.play.strategyContests + contestLean and applies
+  // inside contestEngine _cxOther (puzzle/detective scores) and _cxMoot (lies
+  // case scores — the bluff contest). Feast/performance/endurance stay
+  // Garden/Voice/Unkillable; cookfight/impress/moot/drop get no All-Seeing lean.
+  // Exact ID list (OVE-110): puzzle box/pattern/riddle/sorting/lockpick/wrongmap,
+  // detective whoate/informant/confession/witness/alibi/echo, plus moot-cat
+  // lies (Lie Detector) because No Lies / "nobody bluffs you" maps to that
+  // bluff contest — not oath/quiet/price, not Voice's moot oratory.
+  const STRATEGY_CONTEST_FALLBACK = [
+    'box', 'pattern', 'riddle', 'sorting', 'lockpick', 'wrongmap',
+    'whoate', 'informant', 'confession', 'witness', 'alibi', 'echo',
+    'lies'
+  ];
+  function strategyContestSet() {
+    const listed = godPlay('all_seeing').strategyContests;
+    const ids = Array.isArray(listed) && listed.length ? listed : STRATEGY_CONTEST_FALLBACK;
+    const set = Object.create(null);
+    for (const id of ids) if (id) set[id] = true;
+    return set;
+  }
+  function isStrategyContest(contest) {
+    try {
+      const id = contest && contest.id;
+      return !!(id && strategyContestSet()[id]);
+    } catch (e) { warn('isStrategyContest', e); return false; }
+  }
+  function allSeeingStrategyLeanFor(pid, contest) {
+    try {
+      if (!pid || !isStrategyContest(contest)) return 0;
+      if (holderGod(pid) !== 'all_seeing') return 0;
+      const lean = godPlay('all_seeing').contestLean;
+      return (typeof lean === 'number' && lean > 0) ? lean : 18;
+    } catch (e) { warn('allSeeingStrategyLeanFor', e); return 0; }
+  }
+
+  // ---------------- CONTEST scale: Market God sponsor lean ----------------
+  // god.scale.contest is design prose ("The sponsor: money talks to judges
+  // (risky)."). Live settlement reads god.play.sponsorContests + contestLean
+  // and applies inside contestEngine _cxMoot (price case scores) and
+  // _cxChance (auction bid capacity). RISK stays: auction winners and losers
+  // still pay. Exact IDs (OVE-113): price, auction only — not cookfight/
+  // impress/moot/drop/whoate/lies/wheel (Garden/Voice/Unkillable/All-Seeing
+  // or non-sponsor chance theater).
+  const SPONSOR_CONTEST_FALLBACK = ['price', 'auction'];
+  function sponsorContestSet() {
+    const listed = godPlay('market_god').sponsorContests;
+    const ids = Array.isArray(listed) && listed.length ? listed : SPONSOR_CONTEST_FALLBACK;
+    const set = Object.create(null);
+    for (const id of ids) if (id) set[id] = true;
+    return set;
+  }
+  function isSponsorContest(contest) {
+    try {
+      const id = contest && contest.id;
+      return !!(id && sponsorContestSet()[id]);
+    } catch (e) { warn('isSponsorContest', e); return false; }
+  }
+  function marketSponsorLeanFor(pid, contest) {
+    try {
+      if (!pid || !isSponsorContest(contest)) return 0;
+      if (holderGod(pid) !== 'market_god') return 0;
+      const lean = godPlay('market_god').contestLean;
+      return (typeof lean === 'number' && lean > 0) ? lean : 18;
+    } catch (e) { warn('marketSponsorLeanFor', e); return 0; }
+  }
+
+  // ---------------- CONTEST scale: One-Person Army blood lean ----------------
+  // god.scale.contest is design prose ("Blood contests: the crowd counts your
+  // scars."). Live settlement reads god.play.bloodContests + contestLean and
+  // applies as extra braveryBonus / cheer steadiness inside contestEngine
+  // _cxBlood fight arms (pit/gauntlet/siege fieldFight) and duelFight. Exact
+  // IDs (OVE-124): pit, gauntlet, duel, siege — not tithe (altar HP-measures,
+  // no scar ledger invent), not cookfight/impress/moot/drop/whoate/price/
+  // auction (Garden/Voice/Unkillable/All-Seeing/Market).
+  const BLOOD_CONTEST_FALLBACK = ['pit', 'gauntlet', 'duel', 'siege'];
+  function bloodContestSet() {
+    const listed = godPlay('one_person_army').bloodContests;
+    const ids = Array.isArray(listed) && listed.length ? listed : BLOOD_CONTEST_FALLBACK;
+    const set = Object.create(null);
+    for (const id of ids) if (id) set[id] = true;
+    return set;
+  }
+  function isBloodContest(contest) {
+    try {
+      const id = contest && contest.id;
+      return !!(id && bloodContestSet()[id]);
+    } catch (e) { warn('isBloodContest', e); return false; }
+  }
+  function opaBloodLeanFor(pid, contest) {
+    try {
+      if (!pid || !isBloodContest(contest)) return 0;
+      if (holderGod(pid) !== 'one_person_army') return 0;
+      const lean = godPlay('one_person_army').contestLean;
+      return (typeof lean === 'number' && lean > 0) ? lean : 18;
+    } catch (e) { warn('opaBloodLeanFor', e); return 0; }
+  }
+
+  // ---------------- CONTEST scale: Between chase/race lean ----------------
+  // god.scale.contest is design prose ("Chases and races lean your way.").
+  // Live settlement reads god.play.chaseContests + contestLean and applies
+  // inside contestEngine _cxOther: hide seeker spot pad (lean/25), and
+  // calorie_run forage yield. Exact IDs (OVE-148): hide, calorie_run —
+  // not drop/exchange/starve/maw/vigil (Unkillable endurance), not
+  // cookfight/impress/moot/whoate/price/auction (other gods). Phase Out
+  // stays personal; army runner lean is a separate hook (OVE-152).
+  const CHASE_CONTEST_FALLBACK = ['hide', 'calorie_run'];
+  function chaseContestSet() {
+    const listed = godPlay('the_between').chaseContests;
+    const ids = Array.isArray(listed) && listed.length ? listed : CHASE_CONTEST_FALLBACK;
+    const set = Object.create(null);
+    for (const id of ids) if (id) set[id] = true;
+    return set;
+  }
+  function isChaseContest(contest) {
+    try {
+      const id = contest && contest.id;
+      return !!(id && chaseContestSet()[id]);
+    } catch (e) { warn('isChaseContest', e); return false; }
+  }
+  function betweenChaseLeanFor(pid, contest) {
+    try {
+      if (!pid || !isChaseContest(contest)) return 0;
+      if (holderGod(pid) !== 'the_between') return 0;
+      const lean = godPlay('the_between').contestLean;
+      return (typeof lean === 'number' && lean > 0) ? lean : 18;
+    } catch (e) { warn('betweenChaseLeanFor', e); return 0; }
+  }
+
+  // ---------------- ARMY scale: Between runner / inter-camp travel lean ----------------
+  // god.scale.army is design prose ("The coalition's runner between camps.").
+  // Live settlement: when an ascended Between holder (player or Haven NPC) is
+  // active, aidPartsFor / aidSendRunner read betweenRunnerLeanFor and subtract
+  // god.play.runnerLean day-parts from travel (floor 1). Does not re-label
+  // Voice Be Heard same-day broadcast, invent free Phase Out on the road, or
+  // retune Phase Out kcal / minFrac / retreat (OVE-152).
+  function betweenHolderActive() {
+    try {
+      if (holderGod('player') === 'the_between') return true;
+      const v = Game.state.village || {};
+      for (const vid of Object.keys(v.npcGodhood || {})) {
+        if (holderGod(vid) === 'the_between') return true;
+      }
+      return false;
+    } catch (e) { warn('betweenHolderActive', e); return false; }
+  }
+  function betweenRunnerLeanFor() {
+    try {
+      if (!betweenHolderActive()) return 0;
+      const lean = godPlay('the_between').runnerLean;
+      return (typeof lean === 'number' && lean > 0) ? lean : 1;
+    } catch (e) { warn('betweenRunnerLeanFor', e); return 0; }
+  }
+
+  // ---------------- ARMY scale: Living Garden muster-upkeep feed ----------------
+  // god.scale.army is design prose ("Feeds fifty mouths a day."). Live
+  // settlement: when an ascended Living Garden holder (player or Haven NPC)
+  // has Feed the Multitude active today (village.harvestDay), cover standing
+  // titan muster kcal need up to musterMouths × musterKcalPerMouth. Titans
+  // call this from titanMusterUpkeep before/alongside playerPackSpend so the
+  // coalition marches because you feed it — Haven hunger fill alone is not
+  // army LIVE without this hook.
+  function livingGardenHolderActive() {
+    try {
+      if (holderGod('player') === 'living_garden') return true;
+      const v = Game.state.village || {};
+      for (const vid of Object.keys(v.npcGodhood || {})) {
+        if (holderGod(vid) === 'living_garden') return true;
+      }
+      return false;
+    } catch (e) { warn('livingGardenHolderActive', e); return false; }
+  }
+  function gardenHarvestDayActive() {
+    try {
+      const day = (Game.state.scholar || {}).day || 0;
+      return ((Game.state.village || {}).harvestDay) === day;
+    } catch (e) { warn('gardenHarvestDayActive', e); return false; }
+  }
+  function gardenMusterFeedFor(need) {
+    try {
+      const n = Math.max(0, Math.floor(Number(need) || 0));
+      if (!n) return 0;
+      if (!livingGardenHolderActive()) return 0;
+      if (!gardenHarvestDayActive()) return 0;
+      const P = godPlay('living_garden');
+      const mouths = (typeof P.musterMouths === 'number' && P.musterMouths > 0) ? P.musterMouths : 50;
+      const per = (typeof P.musterKcalPerMouth === 'number' && P.musterKcalPerMouth > 0)
+        ? P.musterKcalPerMouth : 1000;
+      return Math.min(n, mouths * per);
+    } catch (e) { warn('gardenMusterFeedFor', e); return 0; }
+  }
+
+  // ---------------- ARMY scale: Market God quartermaster outfit lean ----------------
+  // god.scale.army is design prose ("The coalition's quartermaster."). Live
+  // settlement: when an ascended Market holder (player or Haven NPC) outfits
+  // a standing muster, titanOutfit reads marketOutfitLeanFor and scales the
+  // same transferred pieces' force wbonus / varmor / gearValue by
+  // god.play.outfitEffLean percent. Does not conjure free gear or retune
+  // Name Your Price kcal tiers — effectiveness lean only (OVE-120).
+  function marketHolderActive() {
+    try {
+      if (holderGod('player') === 'market_god') return true;
+      const v = Game.state.village || {};
+      for (const vid of Object.keys(v.npcGodhood || {})) {
+        if (holderGod(vid) === 'market_god') return true;
+      }
+      return false;
+    } catch (e) { warn('marketHolderActive', e); return false; }
+  }
+  function marketOutfitLeanFor() {
+    try {
+      if (!marketHolderActive()) return 0;
+      const lean = godPlay('market_god').outfitEffLean;
+      return (typeof lean === 'number' && lean > 0) ? lean : 25;
+    } catch (e) { warn('marketOutfitLeanFor', e); return 0; }
+  }
+
+  // ---------------- ARMY scale: All-Seeing war-council map lean ----------------
+  // god.scale.army is design prose ("The coalition plans with your map."). Live
+  // settlement: when an ascended All-Seeing holder (player or Haven NPC) sits
+  // titanWarCouncil, titans.js reads allSeeingCouncilLeanFor and applies
+  // god.play.councilMapLean — readiness honesty (naive vs true blades), scout
+  // intel clarity (loyalty/temptation on the map), and counter-hint reveal even
+  // when monsterCounterKnown is still false. Does not retune No Lies kcal /
+  // trust or invent fog-of-war rewrites (OVE-128).
+  function allSeeingHolderActive() {
+    try {
+      if (holderGod('player') === 'all_seeing') return true;
+      const v = Game.state.village || {};
+      for (const vid of Object.keys(v.npcGodhood || {})) {
+        if (holderGod(vid) === 'all_seeing') return true;
+      }
+      return false;
+    } catch (e) { warn('allSeeingHolderActive', e); return false; }
+  }
+  function allSeeingCouncilLeanFor() {
+    try {
+      if (!allSeeingHolderActive()) return 0;
+      const lean = godPlay('all_seeing').councilMapLean;
+      return (typeof lean === 'number' && lean > 0) ? lean : 1;
+    } catch (e) { warn('allSeeingCouncilLeanFor', e); return 0; }
+  }
+
+  // ---------------- ARMY scale: Apex Predator scout-mark follow lean ----------------
+  // god.scale.army is design prose ("Scouts follow your marks."). Live
+  // settlement: when an ascended Apex Predator holder (player or Haven NPC)
+  // is active, resolveOneAssignment's scout arm reads apexScoutMarkLeanFor
+  // and applies god.play.scoutMarkLean — higher shared-reveal chance on the
+  // haven scout ring plus a follow-marks beat when markSeen fires. Does not
+  // invent an accuracy contest cat or retune Terms kcal / ambushMult /
+  // rangeDist (OVE-132).
+  function apexHolderActive() {
+    try {
+      if (holderGod('player') === 'apex_predator') return true;
+      const v = Game.state.village || {};
+      for (const vid of Object.keys(v.npcGodhood || {})) {
+        if (holderGod(vid) === 'apex_predator') return true;
+      }
+      return false;
+    } catch (e) { warn('apexHolderActive', e); return false; }
+  }
+  function apexScoutMarkLeanFor() {
+    try {
+      if (!apexHolderActive()) return 0;
+      const lean = godPlay('apex_predator').scoutMarkLean;
+      return (typeof lean === 'number' && lean > 0) ? lean : 1;
+    } catch (e) { warn('apexScoutMarkLeanFor', e); return 0; }
+  }
+
+  // ---------------- ARMY scale: Unkillable last-standing continuity lean ----------------
+  // god.scale.army is design prose ("The coalition's last one standing."). Live
+  // settlement: when an ascended Unkillable holder (player or Haven NPC) is
+  // active, titanLastStandingContinuity reads unkillableLastStandingLeanFor
+  // and applies god.play.lastStandingLean — when the holder is the last living
+  // ours blade in a titan/coalition fight, refuse rout with steadiness + a
+  // last-standing beat. Does not invent free Phoenix for every blade or retune
+  // Phoenix kcal / endurance contestLean (OVE-136).
+  function unkillableHolderActive() {
+    try {
+      if (holderGod('player') === 'unkillable') return true;
+      const v = Game.state.village || {};
+      for (const vid of Object.keys(v.npcGodhood || {})) {
+        if (holderGod(vid) === 'unkillable') return true;
+      }
+      return false;
+    } catch (e) { warn('unkillableHolderActive', e); return false; }
+  }
+  function unkillableLastStandingLeanFor() {
+    try {
+      if (!unkillableHolderActive()) return 0;
+      const lean = godPlay('unkillable').lastStandingLean;
+      return (typeof lean === 'number' && lean > 0) ? lean : 1;
+    } catch (e) { warn('unkillableLastStandingLeanFor', e); return 0; }
+  }
+
+  // ---------------- ARMY scale: One-Person Army breach / pour-through lean ----------------
+  // god.scale.army is design prose ("You are the breach the coalition pours
+  // through."). Live settlement: when an ascended OPA holder (player or Haven
+  // NPC) is active, titanBreachPourThrough reads opaBreachLeanFor and applies
+  // god.play.breachLean — when the holder opens the front in a titan/
+  // coalition fight (adjacent to a living titan, or Turn the Pain lands on
+  // one), coalition blades pour through the breach with steadiness + a
+  // pour-through beat. Does not re-label partyRallyAt (PARTY) or titanPain
+  // (TITAN), invent free second Turn the Pain for every blade, or retune
+  // Turn the Pain kcal / blood contestLean (OVE-140).
+  function opaHolderActive() {
+    try {
+      if (holderGod('player') === 'one_person_army') return true;
+      const v = Game.state.village || {};
+      for (const vid of Object.keys(v.npcGodhood || {})) {
+        if (holderGod(vid) === 'one_person_army') return true;
+      }
+      return false;
+    } catch (e) { warn('opaHolderActive', e); return false; }
+  }
+  function opaBreachLeanFor() {
+    try {
+      if (!opaHolderActive()) return 0;
+      const lean = godPlay('one_person_army').breachLean;
+      return (typeof lean === 'number' && lean > 0) ? lean : 1;
+    } catch (e) { warn('opaBreachLeanFor', e); return 0; }
+  }
+
+  // ---------------- ARMY scale: Undying Ward advance / march-behind lean ----------------
+  // god.scale.army is design prose ("The army advances behind you."). Live
+  // settlement: when an ascended Ward holder (player or Haven NPC) is active,
+  // titanWardAdvanceBehind reads wardAdvanceLeanFor and applies
+  // god.play.advanceLean — when the holder holds the line in a titan/
+  // coalition fight (adjacent to a living titan, or Take the Wound redirects
+  // for the front), coalition blades advance behind the wall with steadiness
+  // + an advance beat. Does not re-label Take the Wound (PARTY/TITAN
+  // redirect), invent weep contests, or retune Take the Wound kcal / strains
+  // / minFrac (OVE-144).
+  function wardHolderActive() {
+    try {
+      if (holderGod('player') === 'undying_ward') return true;
+      const v = Game.state.village || {};
+      for (const vid of Object.keys(v.npcGodhood || {})) {
+        if (holderGod(vid) === 'undying_ward') return true;
+      }
+      return false;
+    } catch (e) { warn('wardHolderActive', e); return false; }
+  }
+  function wardAdvanceLeanFor() {
+    try {
+      if (!wardHolderActive()) return 0;
+      const lean = godPlay('undying_ward').advanceLean;
+      return (typeof lean === 'number' && lean > 0) ? lean : 1;
+    } catch (e) { warn('wardAdvanceLeanFor', e); return 0; }
+  }
+
+  // ---------------- ARMY scale: Voice Be Heard → linked/allied foreign villages ----------------
+  // god.scale.army is design prose ("Every allied village hears your word the
+  // same day."). Live settlement stamps each linked OR allied foreign village
+  // with voiceDay, nudges their opinion of Haven, and tends any active link.
+  function voiceReachVillageIds() {
+    const seen = Object.create(null);
+    const ids = [];
+    const add = (id) => {
+      if (!id || id === 'haven' || seen[id]) return;
+      seen[id] = true;
+      ids.push(id);
+    };
+    try {
+      const links = Game.hierarchyState ? Game.hierarchyState() : [];
+      for (const l of links) {
+        if (!l || l.status !== 'active') continue;
+        const other = Game._linkOther ? Game._linkOther(l, 'haven') : null;
+        add(other);
+      }
+    } catch (e) { warn('voiceReach links', e); }
+    try {
+      const allies = (Game.mshipState && Game.mshipState().allies) || [];
+      for (const id of allies) add(id);
+    } catch (e) { warn('voiceReach allies', e); }
+    return ids;
+  }
+  function voiceDeliverAllied(day) {
+    try {
+      const P = godPlay('voice_of_the_relay');
+      const delta = (typeof P.trust === 'number' && P.trust > 0) ? P.trust : 2;
+      const d = day != null ? day : ((Game.state.scholar || {}).day || 0);
+      let reached = 0;
+      for (const id of voiceReachVillageIds()) {
+        let ov = null;
+        try { ov = Game._otherVillage ? Game._otherVillage(id) : null; } catch (e) { warn('voiceDeliver ov', e); }
+        if (!ov) continue;
+        ov.voiceDay = d;
+        try { if (Game._nudgeOpinion) Game._nudgeOpinion(id, delta, 'voice'); }
+        catch (e) { warn('voiceDeliver opinion', e); }
+        try {
+          const link = Game.linkWith && Game.linkWith(id);
+          if (link && Game._trustGain) Game._trustGain(link, delta);
+        } catch (e) { warn('voiceDeliver link trust', e); }
+        reached++;
+      }
+      return reached;
+    } catch (e) { warn('voiceDeliverAllied', e); return 0; }
+  }
 
   // ---------------- who holds a god ----------------
   function holderGod(who) {
@@ -202,6 +722,14 @@
       line(C, `Every wound you took this fight comes back at once: ${landed} into ${nm(m)}. No cap.${titanBonus ? ` (${titanBonus} of it is what it did to your people.)` : ''} (Turn the Pain)`,
         `${C.name} gives back every wound at once: ${landed} into ${nm(m)}. No cap. (Turn the Pain)`);
       tele('god_verb', { god: 'one_person_army', verb: 'turn_the_pain', who: C.isP ? 'player' : C.vid, dealt: landed, pool: total });
+      // ARMY (OVE-140): Turn the Pain on a titan opens the breach — coalition
+      // pour-through is stripable via Game.opaBreachLeanFor / titanBreachPourThrough.
+      // Distinct from PARTY partyRallyAt and TITAN titanPain ally-wound return.
+      if (landed > 0 && isTitanish(m)) {
+        try {
+          if (Game.titanBreachPourThrough) Game.titanBreachPourThrough({ opener: p, openedBy: 'turn_the_pain' });
+        } catch (e) { warn('breachPour turn_the_pain', e); }
+      }
       try { Game.tbEndCheck && Game.tbEndCheck(); } catch (e) { warn('endcheck pain', e); }
       return true;
     },
@@ -371,9 +899,16 @@
       const ids = (v.roster || []).filter(id => id !== Game.villagerId);
       for (const id of ids) { try { Game.bumpTrust && Game.bumpTrust(id, P.trust || 2, 'the voice'); } catch (e) { warn('voice trust', e); } }
       v.voiceDay = s.day || 0;
+      // Call through Game so proofs can strip the army hook without touching Haven delivery.
+      let allied = 0;
+      try { allied = Game.voiceDeliverAllied ? Game.voiceDeliverAllied(s.day || 0) : voiceDeliverAllied(s.day || 0); }
+      catch (e) { warn('voiceDeliverAllied call', e); allied = 0; }
       if (P.grounding) { try { Game.addGrounding && Game.addGrounding(-P.grounding, 'the voice'); } catch (e) { warn('grounding', e); } }
-      Game.say(`You speak once and every ally hears it at once, no runner, no garble. ${ids.length} in Haven stand straighter; every fight today starts rallied. A little less of you is left. (Speak and Be Heard)`);
-      tele('god_verb', { god: 'voice_of_the_relay', verb: 'be_heard', who: 'player', heard: ids.length });
+      const alliedBit = allied
+        ? ` ${allied} allied ${allied === 1 ? 'village hears' : 'villages hear'} your word the same day;`
+        : '';
+      Game.say(`You speak once and every ally hears it at once, no runner, no garble. ${ids.length} in Haven stand straighter;${alliedBit} every fight today starts rallied. A little less of you is left. (Speak and Be Heard)`);
+      tele('god_verb', { god: 'voice_of_the_relay', verb: 'be_heard', who: 'player', heard: ids.length, allied });
       return true;
     },
     name_price(target) {
@@ -488,6 +1023,30 @@
     godPlay(godId) { return godPlay(godId); },
     holderGod(who) { return holderGod(who); },
     fighterGod(fi) { return fighterGod(fi); },
+    isFeastContest(contest) { return isFeastContest(contest); },
+    gardenFeastLeanFor(pid, contest) { return gardenFeastLeanFor(pid, contest); },
+    isPerformanceContest(contest) { return isPerformanceContest(contest); },
+    voicePerformanceLeanFor(pid, contest) { return voicePerformanceLeanFor(pid, contest); },
+    isEnduranceContest(contest) { return isEnduranceContest(contest); },
+    unkillableEnduranceLeanFor(pid, contest) { return unkillableEnduranceLeanFor(pid, contest); },
+    isStrategyContest(contest) { return isStrategyContest(contest); },
+    allSeeingStrategyLeanFor(pid, contest) { return allSeeingStrategyLeanFor(pid, contest); },
+    isSponsorContest(contest) { return isSponsorContest(contest); },
+    marketSponsorLeanFor(pid, contest) { return marketSponsorLeanFor(pid, contest); },
+    isBloodContest(contest) { return isBloodContest(contest); },
+    opaBloodLeanFor(pid, contest) { return opaBloodLeanFor(pid, contest); },
+    isChaseContest(contest) { return isChaseContest(contest); },
+    betweenChaseLeanFor(pid, contest) { return betweenChaseLeanFor(pid, contest); },
+    betweenRunnerLeanFor() { return betweenRunnerLeanFor(); },
+    gardenMusterFeedFor(need) { return gardenMusterFeedFor(need); },
+    marketOutfitLeanFor() { return marketOutfitLeanFor(); },
+    allSeeingCouncilLeanFor() { return allSeeingCouncilLeanFor(); },
+    apexScoutMarkLeanFor() { return apexScoutMarkLeanFor(); },
+    unkillableLastStandingLeanFor() { return unkillableLastStandingLeanFor(); },
+    opaBreachLeanFor() { return opaBreachLeanFor(); },
+    wardAdvanceLeanFor() { return wardAdvanceLeanFor(); },
+    voiceReachVillageIds() { return voiceReachVillageIds(); },
+    voiceDeliverAllied(day) { return voiceDeliverAllied(day); },
     godActionDef(actionId) {
       const a = index().actions[actionId];
       if (!a) return null;
@@ -695,6 +1254,14 @@
         line(C, `${t.name}'s wound is yours now: ${took} into you, and you keep standing (${w.hp} HP). (Take the Wound ${n}/${max})`,
           `${C.name} takes ${t.name}'s wound: ${took} lands on ${C.name}, who keeps standing. (Take the Wound ${n}/${max})`);
         tele('god_verb', { god: 'undying_ward', verb: 'take_the_wound', who: C.isP ? 'player' : C.vid, saved: t.villagerId || t.key, took });
+        // ARMY (OVE-144): Take the Wound holding the titan front lets the army
+        // advance behind the wall — stripable via Game.wardAdvanceLeanFor /
+        // titanWardAdvanceBehind. Distinct from PARTY/TITAN redirect coverage.
+        try {
+          if (Game.titanWardAdvanceBehind) {
+            Game.titanWardAdvanceBehind({ wall: w, openedBy: 'take_the_wound', saved: t });
+          }
+        } catch (e) { warn('wardAdvance take_the_wound', e); }
         if (n >= max) {
           g.collapsed[w.key] = true;
           if (C.isP) { w.stunned = Math.max(w.stunned || 0, 1); w.stunFull = 1; }
@@ -1023,10 +1590,22 @@
   // including coalition blades injected after the fight began
   function today() { return (Game.state.scholar || {}).day || 0; }
   function fedToday() { return ((Game.state.village || {}).harvestDay) === today(); }
+  function voiceHeardToday(v) {
+    const day = today();
+    if (((Game.state.village || {}).voiceDay) === day) return true;
+    // Army scale: a linked/allied foreign village that heard the word today
+    // rallies its own people even when Haven's stamp is absent.
+    const home = v && v.villageId;
+    if (!home || home === 'haven') return false;
+    try {
+      const ov = Game._otherVillage && Game._otherVillage(home);
+      return !!(ov && ov.voiceDay === day);
+    } catch (e) { warn('voiceHeardToday', e); return false; }
+  }
   function dailyVoice(f, v) {
     if (!f || f.over || !v || !v.alive || v.fled || !isOurs(v) || !(f.fighters || []).includes(v) || v._gvVoiced) return;
     if (v.kind !== 'player' && v.villagerId === Game.villagerId) return;
-    if (((Game.state.village || {}).voiceDay) !== today()) return;
+    if (!voiceHeardToday(v)) return;
     // Both real turn-entry paths decrement their own counters next: four
     // preserves the existing three active turns, once per fighter/fight.
     v._gvVoiced = true;
@@ -1376,7 +1955,7 @@
 
   const _mantle = Game.mantleBecome;
   Game.mantleBecome = function () { migratePlayerDayUses(); return _mantle.apply(this, arguments); };
-  S.GodVerbs = { holderGod, fighterGod, godPlay, godDaily, godVillagerCast, phoenixVillagerWorld, VERB_IMPL, DAY_IMPL, registerGodActions, marketPick, painPool };
+  S.GodVerbs = { holderGod, fighterGod, godPlay, godDaily, godVillagerCast, phoenixVillagerWorld, isFeastContest, gardenFeastLeanFor, isPerformanceContest, voicePerformanceLeanFor, isEnduranceContest, unkillableEnduranceLeanFor, isStrategyContest, allSeeingStrategyLeanFor, isSponsorContest, marketSponsorLeanFor, isBloodContest, opaBloodLeanFor, isChaseContest, betweenChaseLeanFor, betweenRunnerLeanFor, gardenMusterFeedFor, marketOutfitLeanFor, allSeeingCouncilLeanFor, apexScoutMarkLeanFor, unkillableLastStandingLeanFor, opaBreachLeanFor, wardAdvanceLeanFor, VERB_IMPL, DAY_IMPL, registerGodActions, marketPick, painPool };
   // the data loads after the scripts (Game.init): register once it's there
   const _init = Game.init;
   if (typeof _init === 'function') {

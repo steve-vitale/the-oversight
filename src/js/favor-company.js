@@ -10,6 +10,7 @@
 //   - companyFavorReceipt(vid, favor, opts)
 //   - companyFavorDeadline(favor)
 //   - companyFavorOpening(vid, favor)
+//   - companyPartnerScore(vid, partnerVid?) -> number
 //   - companyMeetingStep()
 //   - migrateCompanyFavors()
 // rules:
@@ -17,12 +18,14 @@
 //   - tonight: new promises expire at the agreed dawn; previously unavailable saved commitments receive one explicit fair meeting night (code: companyFavorCommitGate, migrateCompanyFavors)
 //   - no_teleport: the requester walks a legal grid step toward the fire and stays on their actual side of the door; work orders take priority (code: companyMeetingStep, companyFavorHolding)
 //   - canonical_time: normal world clock and Sleep costs remain; company adds no food or healing, and both awake presence and nearby sleep count (code: performCompanyFavor, install)
+//   - company_partner_shared_score: partner preference ranks through companionScore — same formula as door ask and party launch (code: companyPartnerScore, companion-score.js, VILLAGER-BRAIN Phase 4)
 // consumes:
 //   - state.village
 //   - state.scholar
 //   - tickAction(n)
 //   - checkPromises(kind, vid, opts)
 //   - journalFavorPromise(vid, promise, opts)
+//   - companionScore (companion-score.js)
 (function(){
  'use strict';
  const G=globalThis.Scattering.Game;
@@ -155,10 +158,31 @@
    if(f.state!=='promised')return null;
    return f.company?.active?'"Stay near until morning. Just knowing you’re here helps."':'"We still need to meet by the fire. '+this.companyFavorDeadline(f)+'"';
   },
+  // Shared companionScore for overnight-company partner preference
+  // (OVE-54). Default partner is the scholar; pass partnerVid to rank
+  // an arbitrary candidate the same way door/party do.
+  companyPartnerScore(vid,partnerVid){
+   const partner=partnerVid!=null?partnerVid:this.villagerId;
+   if(!vid||!partner||vid===partner)return 0;
+   try{
+    if(this.companionScore)return this.companionScore(vid,partner,{context:'company'})||0;
+   }catch(e){}
+   return 0;
+  },
   companyMeetingStep(){
    const cells=grid(this);if(!cells||!rules())return;
-   for(const vid of this.state.village.roster||[]){
-    if(!this.companyFavorWaiting(vid)||personHere(this,vid))continue;
+   // Prefer stronger companyPartnerScore first (shared companionScore).
+   const waiting=(this.state.village.roster||[]).filter(vid=>this.companyFavorWaiting(vid)&&!personHere(this,vid));
+   try{
+    if(waiting.length>1){
+     waiting.sort((a,b)=>{
+      const sb=this.companyPartnerScore(b)-this.companyPartnerScore(a);
+      if(sb)return sb;
+      return String(a).localeCompare(String(b));
+     });
+    }
+   }catch(e){}
+   for(const vid of waiting){
     const pos=this.state.village.positions[vid],fire=fires(this,abs(this)).sort((a,b)=>distance(pos,a)-distance(pos,b))[0];if(!fire||distance(pos,fire)<=rules().fireRadius)continue;
     const occupied=new Set(Object.entries(this.state.village.positions||{}).filter(([id])=>id!==vid&&!personHere(this,id)).map(([,p])=>p.mx+','+p.my));occupied.add(this.state.scholar.mx+','+this.state.scholar.my);
     const queue=[{mx:pos.mx,my:pos.my,first:null}],seen=new Set([pos.mx+','+pos.my]);let step=null;

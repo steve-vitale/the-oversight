@@ -13,8 +13,9 @@
 // FIX (src/js/conversation.js, convoRecapLine): when the raw line has
 // the "Still on X." form, reframe around the topic label instead —
 // "As I said — we're still on X." / "X — that's still where we are."
-// / "I've told you three times now — we're still on X." Other bodies
-// ("We started on...", "We were talking about...") reframe unchanged.
+// Dialog audit #6 then caps at 3 presses with a clearer circles exit.
+// Other bodies ("We started on...", "We were talking about...") reframe
+// unchanged.
 //
 // Run: node scripts/test-journey-crisis-r155-recap-prefix.js  (exit 0 = PASS)
 // RED on unfixed code (a reframe serve contains "I said — Still on");
@@ -53,20 +54,20 @@ function check(name, cond, detail) {
     { thread: 'goal', snippet: 'wants more', ex: 0 },
   ];
   const servedA = [];
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 4; i++) {
     if (cA.spent && cA.spent.recap) break;
     servedA.push(String(Game.convoRecapLine(vidA) || ''));
   }
   console.log('sittingA(Still-on, direct): served=' + JSON.stringify(servedA));
-  check('still-on: exactly 5 recap lines served', servedA.length === 5, 'served=' + servedA.length);
+  check('still-on: exactly 3 recap lines served', servedA.length === 3, 'served=' + servedA.length);
   check('still-on: 1st serve is the raw "Still on..." line', /Still on/.test(servedA[0] || '') && !/I said/.test(servedA[0] || ''), 'served[0]=' + servedA[0]);
   const stacked = servedA.filter(s => /(As|Like) I said — Still on/.test(s));
   check('still-on: NO served line stacks "I said —" onto "Still on"', stacked.length === 0, 'stacked=' + JSON.stringify(stacked));
-  const reframesA = servedA.slice(1, 4);
-  const reframeOk = reframesA.every(s => /we're still on/.test(s) || /— that's still where we are\./.test(s));
-  check('still-on: every reframe names the topic ("we\'re still on X" / "X — that\'s still where we are")', reframeOk, 'reframes=' + JSON.stringify(reframesA));
-  check('still-on: the 5th press escalates honestly ("three times now — we\'re still on")', /three times now — we're still on/.test(servedA[4] || ''), 'served[4]=' + servedA[4]);
-  check('still-on: recap spent after the 5th press (cap intact)', !!(cA.spent && cA.spent.recap), 'spent.recap=' + !!(cA.spent && cA.spent.recap));
+  const reframeA = servedA[1] || '';
+  const reframeOk = /we're still on/.test(reframeA) || /— that's still where we are\./.test(reframeA);
+  check('still-on: reframe names the topic ("we\'re still on X" / "X — that\'s still where we are")', reframeOk, 'reframe=' + reframeA);
+  check('still-on: the 3rd press clearer-exits ("going in circles")', /going in circles/i.test(servedA[2] || ''), 'served[2]=' + servedA[2]);
+  check('still-on: recap spent after the 3rd press (cap intact)', !!(cA.spent && cA.spent.recap), 'spent.recap=' + !!(cA.spent && cA.spent.recap));
   try { Game.endConvo(vidA, 'left'); } catch (e) {}
 
   // ---------- SITTING B: two-thread form (must NOT change) ----------

@@ -3,6 +3,9 @@
 // description: Want-driven conversation architecture. Every conversation selects one NPC want in the CORE flow (startConvo); the want shapes the opening beats, the menu answers it, and the ending resolves it. No wrapper layers — the core flow calls this module.
 // provides:
 //   - convoSelectWant(vid) -> want object
+//   - convoDawnPriorities(vid) -> {kind, drive, preferred[]} or null (dawn commitment + top drive)
+//   - convoFavorNeedGate(kind, vid, opts) -> {metric, op, gate, temper, baseGate, delta} or null
+//   - convoFavorNeedPresent(kind, vid, opts) -> bool (shared gate; selection and liveness agree)
 //   - convoWantOpener(vid, want) -> provisional {line, thread, question}
 //   - convoAcceptWantQuestion(vid, opener) -> accept only the spoken question
 //   - convoWantStaleOpener(vid, want) -> reframe line when all fresh variants are ledger-blocked
@@ -26,10 +29,16 @@
 //   - seeds: unresolved wants plant seeds; next conversation opens with the seed (code: convoPlantSeed/convoCheckSeeds, Steve 2026-10-06)
 //   - arc: want stages 0 (selected) -> 1 (surfaced) -> 2 (engaged) -> 3 (resolved); endings record the resolution (code: convoWantEngage/convoResolveWant, Steve 2026-10-06)
 //   - stale_opener: a long-lived want's opener variants all end up ledger-blocked eventually (convoPickCycle resets on exhaustion — never null). When they do, the want reframes via def.staleOpener(vid) (or the generic convoWantStaleOpener) instead of going mute — thread 'want'. Engagement stays thread-coherent: only the want's own thread ('want'/'small') engages it (code: convoOpening, convo-dialogue dlg:more/askwhy/comfort, gap-closure 2026-10-17)
+//   - dawn_priorities: the weighted want pick reads today's vbrain commitment + top drive so the opener tracks the same priorities dawn chose; unfinished-business pre-emptors (seeds, repay, pocketed) stay above (code: convoSelectWant, convoDawnPriorities, VILLAGER-BRAIN Phase 4 social half)
+//   - favor_need_shared_gate: convoFindFavorNeed and convoFavorNeedLive judge presence through one threshold vocabulary; personality (npcTemper) is a consideration that shifts the shared gate (code: convoFavorNeedGate, convoFavorNeedPresent, VILLAGER-BRAIN Phase 4)
 // consumes:
 //   - village.villagers
 //   - state.convos
 //   - npcNeeds (hunger/fear/social/energy)
+//   - npcTemper(vid)
+//   - vbrainCommit(vid)
+//   - vgoalState(vid)
+//   - vgoalWeights(vid)
 // ============ CONVERSATION WANTS ============
 // Structural rebuild (Steve 2026-10-11): conversations were button-tapping
 // with nothing getting done — no meaning, just confusing options. The old
@@ -733,6 +742,14 @@
         // (The old pool re-stated the ask — the verbatim-repeat vector.)
         const c = this.convoGet(vid);
         const favor = (c.want && c.want.favor) || this.convoGetFavor(vid);
+        // DEFERRED AFTER RESUME (dialog audit #1 2026-11-08): a resume opener
+        // can claim unfinished debt/favor while this sitting never pinned a
+        // favor (the ask was preempted). The ledger may still hold an old
+        // settled favor — answering "it's handled" contradicts the opener
+        // (seed 7 Nolan). Skip the settled short-circuit and state the
+        // deferred ask below.
+        const deferredAfterResume = !!(c && c._resumedOnce && !(c.want && c.want.favor) &&
+          ((c.want && c.want.stage) || 0) < 1);
         // SETTLED FAVOR (journey establishment r7 2026-10-12): the opener can
         // declare the favor settled mid-conversation — "Never mind the wound,
         // we got it handled" fires when the need died between the seed and
@@ -741,7 +758,7 @@
         // ("It's getting worse, not better" moments after "we got it
         // handled"). A settled favor engaged gets an honest it's-handled
         // acknowledgment, never the dead ask's why.
-        if (favor && (favor.state === 'moot' || favor.state === 'thanked' ||
+        if (!deferredAfterResume && favor && (favor.state === 'moot' || favor.state === 'thanked' ||
                       favor.state === 'acknowledged' || favor.state === 'fulfilled')) {
           return this.convoPickCycle(vid, 'favor:handled:' + (favor.kind || 'favor'), [
             '"It\'s handled. Really — it is. I appreciate you asking, though."',
@@ -753,9 +770,11 @@
         // whyLines pool. Per-speaker cycling (convoPickCycle is run-ledger
         // aware) so the second villager stating the same need in an outbreak
         // gets their own words — never the dry line for their own suffering.
-        if (favor && favor.whyLines && favor.whyLines.length)
+        // Deferred-after-resume skips ledger why/stakes: the pinned ask was
+        // never stated, so deepen-from-ledger would voice a closed favor.
+        if (!deferredAfterResume && favor && favor.whyLines && favor.whyLines.length)
           return this.convoPickCycle(vid, 'favor:why:' + (favor.kind || 'favor'), favor.whyLines);
-        if (favor) {
+        if (!deferredAfterResume && favor) {
           // WHY BLOCKED (journey-succession r147): the single whyLine is
           // ledger-blocked whenever the same kind was recently asked —
           // another villager, or this villager's earlier sitting — and
@@ -1081,6 +1100,51 @@
         } catch (e) { return null; }
       },
       engageBeat(vid) {
+        // HELP COHERENCE (dialog audit #1 2026-11-08): "How can I help?" on
+        // a repay want must match the opener's claim. A live unfinished
+        // outing ("We missed the promise. We still need to get home…") or
+        // open obligation must NEVER hear "we're square" — that line is
+        // only honest when nothing is still owed. Fresh phrasings (not the
+        // opener verbatim) so sayLine's per-sitting ledger can't dry the
+        // answer into "lost my train of thought."
+        const c = this.convoGet(vid);
+        const favor = (c.want && c.want.favor) || this.convoGetFavor(vid);
+        if (favor?.kind === 'water_haul' && favor.waterRun && !favor.waterRun.returned) {
+          return this.convoPickCycle(vid, 'repay:help:water', [
+            '"Get home with me. We still have to unload the water."',
+            '"The buckets aren\'t empty. That\'s the help — finish the haul."',
+            '"We still need to get this water home. Come on."',
+          ]) || '"We still need to get home and unload what we have."';
+        }
+        if (favor?.kind === 'forage_help' && favor.forageRun && !favor.forageRun.returned) {
+          return this.convoPickCycle(vid, 'repay:help:forage', [
+            '"Get home with me. We still have to unload what we hauled."',
+            '"The packs aren\'t empty. That\'s the help — finish the outing."',
+            '"We still need to get this haul home. Come on."',
+          ]) || '"We still need to get home and unload what we have."';
+        }
+        const open = this.openFavorObligation(vid);
+        if (open && open.favorTask && favor) {
+          const note = (typeof this.convoFavorDeadlineNote === 'function')
+            ? this.convoFavorDeadlineNote(favor) : '';
+          return this.convoPickCycle(vid, 'repay:help:open:' + (favor.kind || 'favor'), [
+            `"${favor.short} — that's still open.${note ? ' ' + note : ''}"`,
+            `"Help with ${favor.short}. It hasn't moved."`,
+            `"Same ask: ${favor.short}. I'm still waiting."`,
+          ]) || `"${favor.short} — that's still open."`;
+        }
+        if (favor && favor.state === 'fulfilled') {
+          return this.convoPickCycle(vid, 'repay:help:thanks:' + (favor.kind || 'favor'), [
+            `"You came through on ${favor.short}. I won't forget it."`,
+            `"${favor.short} — you kept your word. Thank you."`,
+          ]) || `"You came through on ${favor.short}. I won't forget it."`;
+        }
+        if (favor && favor.state === 'broken') {
+          return this.convoPickCycle(vid, 'repay:help:broken:' + (favor.kind || 'favor'), [
+            `"You said you'd help with ${favor.short}. ...It's done now. Forget it."`,
+            `"About ${favor.short} — it's done. I haven't forgotten, but I'm not asking again."`,
+          ]) || `"You said you'd help with ${favor.short}. ...It's done now. Forget it."`;
+        }
         return '"Good. Then we\'re square." They look lighter for it.';
       },
       deflectBeat(vid) {
@@ -1410,6 +1474,28 @@
         }
         return null;
       },
+      // STALE-OPENER HONESTY (prove-out 2026-11-08): generic fallback spoke
+      // the want id as English — "About curious — I keep turning it over."
+      // (dialog-coherence-audit tip sampler, seed 42 Leo / seed 99 Sergio).
+      // Same class as ask_favor/repay stale openers: name the question, never
+      // the id.
+      staleOpener(vid) {
+        try {
+          const c = this.convoGet(vid);
+          const want = c && c.want;
+          const qid = (want && (want.qid || want.seedQid)) || null;
+          let about = null;
+          if (qid && typeof this.convoQuestionTopic === 'function') {
+            about = this.convoQuestionTopic(qid);
+          }
+          if (!about && want && want.seedNote) about = want.seedNote;
+          if (!about || about === 'that question') about = 'what I asked you';
+          return this.convoPickCycle(vid, 'curious:stale', [
+            `"About ${about} — I keep turning it over."`,
+            `"Still wondering about ${about}."`,
+          ]);
+        } catch (e) { console.warn('[convo] curious staleOpener', e); return null; }
+      },
     },
     just_company: {
       // A reaction ("yeah, hey") engages company — presence, not content.
@@ -1571,10 +1657,235 @@
     },
   };
 
+  // Dawn commitment kind → preferred conversation wants (Phase 4 social half).
+  // Primary first; bias only applies when the want's own pick() already scores.
+  const DAWN_KIND_WANTS = {
+    FORAGE: ['ask_favor', 'share_news'],
+    WATER: ['ask_favor', 'share_news'],
+    HAUL: ['ask_favor', 'share_news'],
+    VISIT: ['just_company', 'seek_comfort', 'curious'],
+    HAVEN_CHORE: ['warn_you', 'just_company'],
+    TRAPS: ['warn_you', 'share_news'],
+    HUNT: ['warn_you', 'share_news'],
+    SEEK: ['curious', 'share_news'],
+    EXPLORE: ['share_news', 'curious'],
+    EXPEDITION: ['share_news', 'warn_you'],
+    REST: ['seek_comfort', 'just_company'],
+    EAT: ['just_company', 'ask_favor'],
+    LEAVE: ['warn_you', 'share_news'],
+  };
+  // Top drive (vgoal) → preferred wants. Commitment.vgoal from dawn wins when set.
+  const DAWN_DRIVE_WANTS = {
+    food_security: ['ask_favor', 'share_news'],
+    bonds: ['seek_comfort', 'just_company'],
+    safety: ['warn_you', 'just_company'],
+    knowledge: ['curious', 'share_news'],
+    party_up: ['curious', 'just_company'],
+    build_standing: ['curious', 'share_news'],
+    gear_up: ['ask_favor', 'share_news'],
+    bank_veterans: ['warn_you', 'share_news'],
+  };
+  const DAWN_BIAS_PRIMARY = 2.0;
+  const DAWN_BIAS_SECONDARY = 1.0;
+
+  function dawnPreferredBoosts(kind, drive) {
+    const boosts = {};
+    function addList(list) {
+      if (!list || !list.length) return;
+      for (let i = 0; i < list.length; i++) {
+        const id = list[i];
+        const amt = i === 0 ? DAWN_BIAS_PRIMARY : DAWN_BIAS_SECONDARY;
+        // Kind and drive stack: a forage day whose top drive is also
+        // food_security should outrank a high share_news base weight.
+        boosts[id] = (boosts[id] || 0) + amt;
+      }
+    }
+    if (kind) addList(DAWN_KIND_WANTS[kind]);
+    if (drive) addList(DAWN_DRIVE_WANTS[drive]);
+    return boosts;
+  }
+
+  // Shared favor-need threshold vocabulary (VILLAGER-BRAIN Phase 4).
+  // Selection (convoFindFavorNeed) and liveness (convoFavorNeedLive) both
+  // ask "is this need present?" through these named gates — ending the old
+  // selection-vs-liveness double standard where the same hunger was ">70"
+  // to open and ">50" to stay live. Personality is a consideration: temper
+  // shifts the effective gate (ask-sooner positive) without inventing a
+  // second private cutoff table.
+  const FAVOR_NEED_GATE = Object.freeze({
+    food_share: { metric: 'hunger', op: 'gt', gate: 70 },
+    heal_help: { metric: 'health', op: 'lt', gate: 60 },
+    watch_shift: { metric: 'energy', op: 'lt', gate: 30 },
+    stay_close: { metric: 'fear', op: 'gt', gate: 70 },
+    water_haul: { metric: 'water', op: 'lt', gate: 10 },
+    forage_help: { metric: 'pantryPer', op: 'lt', gate: 4000 },
+  });
+  // Ask-sooner deltas by temperament (positive = milder need still counts).
+  // For gt metrics: effectiveGate = base - delta. For lt: base + delta.
+  const FAVOR_NEED_TEMPER = Object.freeze({
+    anxious: { stay_close: 20, watch_shift: 10 },
+    cautious: { stay_close: 15, watch_shift: 5 },
+    bold: { stay_close: -15, food_share: -5 },
+    warm: { stay_close: 10 },
+    withdrawn: { stay_close: -15 },
+    gentle: { stay_close: 10 },
+    restless: { watch_shift: -5 },
+    stoic: { food_share: -10, stay_close: -10 },
+    prickly: { stay_close: -10 },
+    intense: { food_share: -5 },
+  });
+  // Pre-Phase-4 liveness cutoffs — failing-control seam only
+  // (Game.convoFavorNeedLegacySplit = true). Not used in live play.
+  const FAVOR_NEED_LIVE_LEGACY = Object.freeze({
+    food_share: { metric: 'hunger', op: 'gt', gate: 50 },
+    heal_help: { metric: 'health', op: 'lt', gate: 80 },
+    watch_shift: { metric: 'energy', op: 'lt', gate: 50 },
+    stay_close: { metric: 'fear', op: 'gt', gate: 50 },
+    water_haul: { metric: 'water', op: 'lt', gate: 15 },
+    forage_help: { metric: 'pantryPer', op: 'lt', gate: 6000 },
+  });
+
   const methods = {
+    // convoDawnPriorities: read today's dawn commitment + top drive so the
+    // want picker can open from the same priorities the arbiter chose.
+    // Pure-ish: does not call vgoalTop (that mutates commitment). Reads
+    // commit.vgoal first, then vgoalState.top, then a weights argmax.
+    // Test seam: Game.convoDawnPrioritiesDisabled = true skips the read.
+    convoDawnPriorities(vid) {
+      try { if (this.convoDawnPrioritiesDisabled) return null; } catch (e) {}
+      let commit = null;
+      try {
+        if (typeof this.vbrainCommit === 'function') commit = this.vbrainCommit(vid);
+      } catch (e) { console.warn('[convo] vbrainCommit read', e); commit = null; }
+      const day = ((this.state && this.state.scholar) || {}).day || 0;
+      if (commit && commit.day != null && commit.day !== day) commit = null;
+      const kind = commit && commit.kind ? commit.kind : null;
+      let drive = (commit && commit.vgoal) || null;
+      if (!drive) {
+        try {
+          const st = (typeof this.vgoalState === 'function') ? this.vgoalState(vid) : null;
+          if (st && st.top) drive = st.top;
+        } catch (e) { console.warn('[convo] vgoalState read', e); }
+      }
+      if (!drive) {
+        try {
+          const w = (typeof this.vgoalWeights === 'function') ? this.vgoalWeights(vid) : null;
+          if (w) {
+            let top = null, topW = -1;
+            for (const id of Object.keys(w)) {
+              if (w[id] > topW) { topW = w[id]; top = id; }
+            }
+            if (top && topW > 0) drive = top;
+          }
+        } catch (e) { console.warn('[convo] vgoalWeights read', e); }
+      }
+      if (!kind && !drive) return null;
+      const boosts = dawnPreferredBoosts(kind, drive);
+      const preferred = Object.keys(boosts).sort((a, b) => (boosts[b] - boosts[a]) || (a < b ? -1 : a > b ? 1 : 0));
+      return { kind: kind || null, drive: drive || null, preferred, boosts };
+    },
+
+    // convoFavorNeedGate: the shared threshold vocabulary for one favor
+    // kind. Personality (npcTemper) is a consideration that shifts the
+    // base gate; selection and liveness both read this. opts.legacyLive
+    // forces the pre-Phase-4 liveness cutoffs (failing-control seam).
+    convoFavorNeedGate(kind, vid, opts) {
+      opts = opts || {};
+      const table = opts.legacyLive ? FAVOR_NEED_LIVE_LEGACY : FAVOR_NEED_GATE;
+      const base = table[kind];
+      if (!base) return null;
+      let temper = 'steady';
+      try {
+        if (typeof this.npcTemper === 'function') temper = this.npcTemper(vid) || 'steady';
+      } catch (e) { temper = 'steady'; }
+      let delta = 0;
+      // Legacy liveness cutoffs ignore personality — that was the old
+      // double standard's private table. Shared path applies temper.
+      if (!opts.legacyLive && !opts.ignoreTemper) {
+        try { delta = ((FAVOR_NEED_TEMPER[temper] || {})[kind]) || 0; } catch (e) { delta = 0; }
+      }
+      let gate = base.gate;
+      if (base.op === 'gt') gate = base.gate - delta;
+      else if (base.op === 'lt') gate = base.gate + delta;
+      return {
+        metric: base.metric, op: base.op, gate, temper,
+        baseGate: base.gate, delta,
+      };
+    },
+
+    // Readings for the shared gate: body needs + believed village resources.
+    // Same perception discipline as selection (Phase 3 pantry belief).
+    convoFavorNeedReadings(vid) {
+      const v = this.state.village || {};
+      const n = (typeof this.npcNeeds === 'function' ? this.npcNeeds(vid) : null) || {};
+      const healthRaw = (v.health || {})[vid];
+      const out = {
+        hunger: n.hunger || 0,
+        fear: n.fear || 0,
+        energy: (n.energy == null ? 100 : n.energy),
+        health: (healthRaw == null ? 100 : healthRaw),
+        water: null,
+        pantryPer: null,
+        rosterN: (v.roster || []).length || 1,
+        kcal: null,
+      };
+      try {
+        let water = null, kcal = null, rosterN = out.rosterN;
+        let fromBelief = false;
+        if (typeof this.objResourceBelief === 'function') {
+          const bel = this.objResourceBelief(vid) || {};
+          fromBelief = true;
+          if (bel.unknown) {
+            water = null; kcal = null;
+          } else {
+            water = (typeof bel.waterClean === 'number') ? bel.waterClean : null;
+            kcal = (typeof bel.pantryKcal === 'number') ? bel.pantryKcal : null;
+            if (typeof bel.rosterN === 'number' && bel.rosterN > 0) rosterN = bel.rosterN;
+          }
+        }
+        if (!fromBelief) {
+          water = (v.water || {}).clean || 0;
+          kcal = typeof this.pantryKcalLive === 'function' ? this.pantryKcalLive(v) : (v.pantryKcal || 0);
+        }
+        out.water = water;
+        out.kcal = kcal;
+        out.rosterN = rosterN;
+        out.pantryPer = (kcal != null && rosterN > 0) ? (kcal / rosterN) : null;
+      } catch (e) {}
+      return out;
+    },
+
+    // convoFavorNeedPresent: one presence judgment for selection + liveness.
+    // Test seam: Game.convoFavorNeedLegacySplit = true makes liveness callers
+    // (opts.forLive) use the old looser private cutoffs.
+    convoFavorNeedPresent(kind, vid, opts) {
+      opts = opts || {};
+      if (kind === 'sick_help') {
+        try {
+          const sick = ((((this.state.village || {}).sick || {})[vid]) || {});
+          return (sick.daysLeft || 0) > 0;
+        } catch (e) { return false; }
+      }
+      if (kind === 'snare_mend') return true;
+      let useLegacy = false;
+      try {
+        if (opts.forLive && this.convoFavorNeedLegacySplit) useLegacy = true;
+      } catch (e) {}
+      if (opts.legacyLive) useLegacy = true;
+      const spec = this.convoFavorNeedGate(kind, vid, { legacyLive: useLegacy, ignoreTemper: !!opts.ignoreTemper });
+      if (!spec) return false;
+      const r = opts.readings || this.convoFavorNeedReadings(vid);
+      const val = r[spec.metric];
+      if (val == null || typeof val !== 'number' || !Number.isFinite(val)) return false;
+      if (spec.op === 'gt') return val > spec.gate;
+      if (spec.op === 'lt') return val < spec.gate;
+      return false;
+    },
+
     // convoFindFavorNeed: PURE scan for a real, current need — no phrasing,
     // no side effects. Returns {kind, urgency, ...ctx} or null. A null means
     // no favor can be honestly built: the want picker must skip ask_favor.
+    // Presence uses the shared threshold vocabulary (+ personality).
     convoFindFavorNeed(vid) {
       const v = this.state.village || {};
       const day = (this.state.scholar || {}).day || 0;
@@ -1590,9 +1901,21 @@
         if (lastDeclined != null && day - lastDeclined < 3) return null;
       } catch (e) {}
       let need = null;
+      const readings = this.convoFavorNeedReadings(vid);
+      const present = (kind) => this.convoFavorNeedPresent(kind, vid, { readings });
+      const annotate = (base, kind) => {
+        const spec = this.convoFavorNeedGate(kind, vid) || {};
+        const out = Object.assign({}, base, {
+          personality: { temper: spec.temper || 'steady', delta: spec.delta || 0, gate: spec.gate },
+        });
+        // Temper that asks sooner on this kind bumps urgency one step
+        // (still capped); stoic/bold that tough it out stay as-is.
+        if ((spec.delta || 0) > 0 && out.urgency != null) {
+          out.urgency = Math.min(4, (out.urgency | 0) + 1);
+        }
+        return out;
+      };
       try {
-        const n = this.npcNeeds(vid) || {};
-        const health = (v.health || {})[vid];
         const sickRec = ((v.sick || {})[vid] || {});
         const sickActive = (sickRec.daysLeft || 0) > 0;
         const sickSev = sickRec.severity || 0;
@@ -1607,25 +1930,26 @@
         // earthly help, so no promise the engine can't keep (canon:
         // docs/DISEASES.md, two pools never mix).
         if (sickActive && sickSev >= 2) need = { kind: 'sick_help', urgency: 4, sickName: sickRec.name || 'sick' };
-        else if ((n.hunger || 0) > 70) need = { kind: 'food_share', urgency: 4, hunger: n.hunger };
-        else if (health != null && health < 60) need = { kind: 'heal_help', urgency: 4, health };
+        else if (present('food_share')) need = annotate({ kind: 'food_share', urgency: 4, hunger: readings.hunger }, 'food_share');
+        else if (present('heal_help')) need = annotate({ kind: 'heal_help', urgency: 4, health: readings.health }, 'heal_help');
         // SICKNESS (crisis leg 2026-10-11): a sick villager's body is the
         // emergency — the want system had no disease need, so the sick
         // talked about anything BUT being sick (sense-tested: a gutrot
         // sufferer opened with small talk and never mentioned it).
         else if (sickActive) need = { kind: 'sick_help', urgency: 4, sickName: sickRec.name || 'sick' };
-        else if ((n.energy || 0) < 30) need = { kind: 'watch_shift', urgency: 3, energy: n.energy };
-        else if ((n.fear || 0) > 70) need = { kind: 'stay_close', urgency: 3, fear: n.fear };
+        else if (present('watch_shift')) need = annotate({ kind: 'watch_shift', urgency: 3, energy: readings.energy }, 'watch_shift');
+        else if (present('stay_close')) need = annotate({ kind: 'stay_close', urgency: 3, fear: readings.fear }, 'stay_close');
       } catch (e) {}
       if (!need) {
         try {
-          const water = (v.water || {}).clean || 0;
-          if (water < 10) {
-            need = { kind: 'water_haul', urgency: 3, water };
-          } else {
-            const kcal = typeof this.pantryKcalLive === 'function' ? this.pantryKcalLive(v) : (v.pantryKcal || 0);
-            const rosterN = (v.roster || []).length || 1;
-            if (kcal < rosterN * 4000) need = { kind: 'forage_help', urgency: 2, kcal };
+          // Village-resource favor scan — believed pantry/cistern for THIS
+          // speaker (VILLAGER-BRAIN seam 4). Away/stale belief never spies
+          // live totals; unknown belief skips the village-need favor.
+          // Presence uses the same shared gates as liveness.
+          if (present('water_haul')) {
+            need = annotate({ kind: 'water_haul', urgency: 3, water: readings.water }, 'water_haul');
+          } else if (present('forage_help')) {
+            need = annotate({ kind: 'forage_help', urgency: 2, kcal: readings.kcal }, 'forage_help');
           }
         } catch (e) {}
       }
@@ -1977,23 +2301,15 @@
 
     // convoFavorNeedLive: is this favor's underlying need still real?
     // A follow-up must not re-ask for water after the cistern got filled.
+    // Same shared threshold vocabulary as convoFindFavorNeed (Phase 4) —
+    // no private looser cutoffs. An in-progress water/forage run stays
+    // live until returned even if the cistern/pantry belief recovered.
     convoFavorNeedLive(favor) {
       if (!favor) return false;
       try {
-        const v = this.state.village || {};
-        switch (favor.kind) {
-          case 'food_share': return (this.npcNeeds(favor.vid).hunger || 0) > 50;
-          case 'heal_help': return ((v.health || {})[favor.vid] ?? 100) < 80;
-          case 'sick_help': return ((((v.sick || {})[favor.vid] || {}).daysLeft || 0) > 0);
-          case 'watch_shift': return (this.npcNeeds(favor.vid).energy || 100) < 50;
-          case 'stay_close': return (this.npcNeeds(favor.vid).fear || 0) > 50;
-          case 'water_haul': return (favor.waterRun && !favor.waterRun.returned) || ((v.water || {}).clean || 0) < 15;
-          case 'forage_help': {
-            const kcal = typeof this.pantryKcalLive === 'function' ? this.pantryKcalLive(v) : 0;
-            return kcal < (((v.roster || []).length || 1) * 6000);
-          }
-          default: return true;
-        }
+        if (favor.kind === 'water_haul' && favor.waterRun && !favor.waterRun.returned) return true;
+        if (favor.kind === 'forage_help' && favor.forageRun && !favor.forageRun.returned) return true;
+        return this.convoFavorNeedPresent(favor.kind, favor.vid, { forLive: true });
       } catch (e) { return true; }
     },
 
@@ -2161,6 +2477,14 @@
           return { id: 'pocketed', def: WANTS.pocketed, fromSeed: false };
         }
       } catch (e) {}
+      // DAWN PRIORITIES (VILLAGER-BRAIN Phase 4 social half): after unfinished-
+      // business pre-emptors, the weighted pick reads today's commitment and
+      // top drive so the conversation opens from the same priorities dawn
+      // chose. Bias only eligible wants (pick/canOpen already > 0).
+      let dawn = null;
+      try { dawn = (typeof this.convoDawnPriorities === 'function') ? this.convoDawnPriorities(vid) : null; }
+      catch (e) { console.warn('[convo] dawn priorities', e); dawn = null; }
+      const dawnBoosts = (dawn && dawn.boosts) || null;
       const c0 = this.convoGet(vid);
       const firstMeeting = (c0.count || 0) <= 1;
       let best = null, bestW = -1;
@@ -2191,11 +2515,21 @@
         // curious to 3 even when it couldn't open). canOpen is pure by
         // contract — it reads, never consumes.
         try { if (def.canOpen && !def.canOpen.call(this, vid)) w = 0; } catch (e) {}
+        if (w > 0 && dawnBoosts && dawnBoosts[id]) w += dawnBoosts[id];
         w += Math.random() * 0.5;
         if (w > bestW) { bestW = w; best = id; }
       }
       if (!best) best = 'just_company';
-      return { id: best, def: WANTS[best], fromSeed: false };
+      const out = { id: best, def: WANTS[best], fromSeed: false };
+      if (dawn) {
+        out.dawn = {
+          kind: dawn.kind,
+          drive: dawn.drive,
+          preferred: dawn.preferred,
+          aligned: !!(dawn.preferred && dawn.preferred.indexOf(best) !== -1),
+        };
+      }
+      return out;
     },
 
     // convoWantOpener: the opening line when a want drives the conversation.
@@ -2239,8 +2573,21 @@
     // through honestly. (gap-closure 2026-10-17)
     convoWantStaleOpener(vid, want) {
       try {
-        const words = String((want && want.id) || "what's on my mind").replace(/_/g, ' ');
-        return `"About ${words} — I keep turning it over."`;
+        // Never interpolate raw want.id as dialogue (prove-out 2026-11-08 /
+        // dialog-coherence-audit). Prefer a human topic map; fall back to a
+        // content-free phrase that does not name the id.
+        const human = {
+          curious: 'what I asked you',
+          ask_favor: 'that favor',
+          repay: 'what I owe you',
+          seek_comfort: 'needing company',
+          seek_taken: 'who was taken',
+          warn_you: 'that warning',
+          just_company: 'just sitting with someone',
+        };
+        const id = want && want.id;
+        const about = (id && human[id]) || "what's on my mind";
+        return `"About ${about} — I keep turning it over."`;
       } catch (e) { console.warn('[convo] staleOpener generic', e); return null; }
     },
 

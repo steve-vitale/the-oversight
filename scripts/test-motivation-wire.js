@@ -165,10 +165,11 @@ async function main() {
     Game.npcSetNode(vidA, hx, hy); Game.npcSetNode(leader, hx, hy);
     setGoal(Game, vidA, 'alone');
     const ao = Game.objOf(vidA); ao.kind = 'FORAGE'; ao.state = 'ready'; ao.indoor = false;
-    m.cidAlone = Game.objAskCompanion(leader, { tx: hx + 1, ty: hy, tightness: 1, partsLeft: 2 }, hx, hy);
+    m.cidAlone = Game.objAskCompanion(leader, { tx: hx + 1, ty: hy, tightness: 1, partsLeft: 2 }, hx, hy, { roll: 0 });
     setGoal(Game, vidA, 'protect');
     const ao2 = Game.objOf(vidA); ao2.kind = 'FORAGE'; ao2.state = 'ready'; ao2.indoor = false;
-    m.cidCtl = Game.objAskCompanion(leader, { tx: hx + 1, ty: hy, tightness: 1, partsLeft: 2 }, hx, hy);
+    // roll:0 pins accept — Phase 4 routes companion through npcInviteDecision.
+    m.cidCtl = Game.objAskCompanion(leader, { tx: hx + 1, ty: hy, tightness: 1, partsLeft: 2 }, hx, hy, { roll: 0 });
     // objMaybeDepart on a forced 'ask' verdict
     v.away = v.away || {};
     for (const id of ids) { Game.npcSetNode(id, hx, hy); delete v.away[id]; }
@@ -197,7 +198,7 @@ async function main() {
         ro.tx = hx + 1; ro.ty = hy; ro.tightness = 1; ro.partsLeft = 3; ro.companion = null;
         const dg = Game.objDanger(rid, ro.tx, ro.ty, hx, hy);
         if (dg.verdict === 'ask') return true;
-        v.gossip.push({ action: 'attack', day: day, who: 'probe' });
+        v.gossip.push({ action: 'attack', day: day, who: 'probe', heard: [rid] });
       }
       return false;
     };
@@ -208,6 +209,12 @@ async function main() {
     Game.objPick(vidC, hx, hy); // sets o.solo
     m.askSoloForced = forceAsk(vidC);
     const roS = Game.objOf(vidC);
+    // Phase 4: pin invite accept so this prepared scene proves solo/companion
+    // departure wiring, not npcInviteDecision RNG.
+    const _ask = Game.objAskCompanion.bind(Game);
+    Game.objAskCompanion = function (vid, obj, hx2, hy2, opts) {
+      return _ask(vid, obj, hx2, hy2, Object.assign({}, opts || {}, { roll: 0 }));
+    };
     Game.objMaybeDepart(vidC, Game.npcNode(vidC), true, hx, hy);
     m.soloAway = Object.keys(v.away || {});
     m.soloCompanion = roS.companion;
@@ -220,6 +227,7 @@ async function main() {
     m.askCtlForced = forceAsk(vidC);
     const roC = Game.objOf(vidC);
     Game.objMaybeDepart(vidC, Game.npcNode(vidC), true, hx, hy);
+    Game.objAskCompanion = _ask;
     m.ctlAway = Object.keys(v.away || {});
     m.ctlCompanion = roC.companion;
     return m;
