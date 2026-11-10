@@ -16,11 +16,19 @@
 //   kind 'link' — via analyzeSeed (staged event matches a snapshot
 //     transition or a decision within 3 days).
 //   kind 'person', staged — a decision event (accepted/refused/expired)
-//     for the same (initiator, target) within 3 days, or pending-at-end
-//     (staged within 2 days of the last snapshot day).
+//     for the same INITIATOR within 3 days whose target is the scholar
+//     ON THE DECISION DAY, or pending-at-end (staged within 2 days of
+//     the last snapshot day). TARGET-EQUALITY IS WRONG for person bonds:
+//     the staged event names whoever was scholar at staging time, and
+//     the decision/expiry names whoever is scholar at decision time —
+//     succession between staging and decision changes the id (proven
+//     on the diplo pilot: 4 control cases, all expired to a successor
+//     scholar 3 days later). NPC↔NPC decisions never target the scholar,
+//     so scholar-targeted-ness (from the daily scholarId) separates the
+//     two flavors exactly.
 //   kind 'person', immediate decision (accepted/refused/gate outcome with
-//     no preceding staged event for the pair) — self-reconciling: the
-//     event IS the decision record.
+//     no preceding staged event for the initiator, target not the scholar)
+//     — self-reconciling: the event IS the decision record.
 // Usage:
 //   RUN=diplo-pilot node scripts/diplo-analyze-20261110.js
 // Writes evidence/2026-11-10/diplo-summary-<RUN>.json and prints the band report.
@@ -88,15 +96,29 @@ function analyzeSeed(j) {
     r.verbs[kv + ':total'] = (r.verbs[kv + ':total'] || 0) + 1;
   });
 
-  // Person-bond tele events (kind 'person').
+  // Person-bond tele events (kind 'person'). Scholar identity comes from
+  // the daily snapshots: the staged event names the scholar at staging
+  // time, the decision names the scholar at decision time.
+  // Scholar identity is piecewise-constant between daily snapshots:
+  // scholarOn(day) is the latest snapshot at or before that day.
+  const scholarDays = days.filter(function (sn) { return sn.scholarId; })
+    .map(function (sn) { return { day: sn.day, id: sn.scholarId }; })
+    .sort(function (a, b) { return a.day - b.day; });
+  const scholarOn = function (day) {
+    let id = scholarDays.length ? scholarDays[0].id : null;
+    scholarDays.forEach(function (e) { if (e.day <= day) id = e.id; });
+    return id;
+  };
+  const isScholarTarget = function (d) { return d.target != null && d.target === scholarOn(d.day); };
   const personEvs = (j.bondEvents || []).filter(function (e) { return e.kind === 'person'; });
   const staged = personEvs.filter(function (e) { return e.outcome === 'staged'; });
   const decisions = personEvs.filter(function (e) { return e.outcome !== 'staged'; });
   r.person.staged = staged.length;
   staged.forEach(function (st) {
     r.person.scholarTargeted++;
-    const dec = decisions.filter(function (d) { return d.initiator === st.initiator && d.target === st.target && d.day >= st.day && d.day <= st.day + 3; })
-      .sort(function (a, b) { return a.day - b.day; })[0];
+    const dec = decisions.filter(function (d) {
+      return d.initiator === st.initiator && d.day >= st.day && d.day <= st.day + 3 && isScholarTarget(d);
+    }).sort(function (a, b) { return a.day - b.day; })[0];
     let fate = 'pending-at-end';
     if (dec) { fate = dec.outcome; r.person.reconcile.ok++; }
     else if (st.day > lastDay - 3) { r.person.reconcile.ok++; }
@@ -104,8 +126,17 @@ function analyzeSeed(j) {
     r.person.stagedFates[fate] = (r.person.stagedFates[fate] || 0) + 1;
   });
   decisions.forEach(function (d) {
-    const preceded = staged.some(function (st) { return st.initiator === d.initiator && st.target === d.target && d.day >= st.day && d.day <= st.day + 3; });
-    if (preceded) { r.person.reconcile.ok++; return; } // answered a staged ask — already counted above; the decision itself is the record
+    if (isScholarTarget(d)) {
+      // Scholar-answered decision. If it answers a staged ask it was
+      // already counted as that staging's fate; an unpreceded one would
+      // mean a missed staging (instrument gap) — counted separately so
+      // it shows up instead of being folded into the NPC↔NPC bucket.
+      const preceded = staged.some(function (st) { return st.initiator === d.initiator && d.day >= st.day && d.day <= st.day + 3; });
+      if (preceded) return;
+      r.person.orphanScholarDecisions = (r.person.orphanScholarDecisions || 0) + 1;
+      r.person.reconcile.ok++;
+      return;
+    }
     // Immediate NPC↔NPC character decision — self-reconciling.
     r.person.npcNpc++;
     r.person.decisions[d.outcome] = (r.person.decisions[d.outcome] || 0) + 1;

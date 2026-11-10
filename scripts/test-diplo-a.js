@@ -170,6 +170,24 @@ ok('analyzer: person-bond accept/decline by chance band, staged fate reconciled'
   assert.strictEqual(r.person.chanceBands['5-24'], 1);
   assert.strictEqual(r.person.reconcile.bad.length, 0);
 });
+ok('analyzer: person-bond staged to one scholar, expired to the successor, reconciles', function () {
+  // Regression for the diplo pilot: scholar succession between staging and
+  // expiry changes the target id (diana_osei -> gen_pk2a6y3 on 170202).
+  // The staged event names the scholar at staging time; the expiry names
+  // the scholar at expiry time. Both are the same ask.
+  const j = fakeSeed({
+    bondEvents: [
+      { day: 51, initiator: 'daniyar', target: 'hassan', kind: 'person', outcome: 'staged', chance: null, reason: null },
+      { day: 54, initiator: 'daniyar', target: 'gen_2u', kind: 'person', outcome: 'expired', chance: null, reason: null },
+    ],
+    daily: [fakeDay(1, { scholarId: 'hassan' }), fakeDay(51, { scholarId: 'hassan' }), fakeDay(53, { scholarId: 'gen_2u' }), fakeDay(60, { scholarId: 'gen_2u' })],
+  });
+  const r = AN.analyzeSeed(j);
+  assert.strictEqual(r.person.staged, 1);
+  assert.strictEqual(r.person.stagedFates.expired, 1);
+  assert.strictEqual(r.person.reconcile.bad.length, 0);
+  assert.strictEqual(r.person.orphanScholarDecisions || 0, 0);
+});
 ok('analyzer: staged person-bond with no decision and not at end is irreconcilable', function () {
   const j = fakeSeed({
     bondEvents: [
