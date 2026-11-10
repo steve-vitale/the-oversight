@@ -256,6 +256,19 @@ and Catalina (carried) cases above.
 [GATE PENDING — check.js --quick running in the worktree at note
 time; line appended at closeout.]
 
+## Adoption closeout (r170, written by the adopting run)
+
+r169 died at its gate (coordinator timeout ~09:56Z; check.js
+processes exited; heartbeat 63 min stale; no live processes).
+Adopted by Lane B r170 (2026-11-10T10:57:19Z): Amendment A1
+verified (r169 proof + family proofs GREEN) and committed
+c27c3dad1; the gate was re-run on the r170 final tip (see the
+r170 run note); the branch was rebased onto master 53185abea
+and merged locally, pending ship. Rotation advanced 7 → 4 by
+r170. The r169 letter-FAIL on MANTLE-FINE stands, un-rescored;
+the r170 analyzer revision validates the adjudicated substance
+(PASS on the r169 panel under the revised rules).
+
 ## Rotation
 
 7 → 4 (endgame next). [Advance at closeout; verify the file reads 4.]

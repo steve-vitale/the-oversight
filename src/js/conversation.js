@@ -6611,6 +6611,20 @@
         done(this.convoRecapLine(vid), '"Wait — what were we talking about?"');
       } else if (choiceId.indexOf('ask:') === 0) {
         const topic = choiceId.slice(4);
+        // LATELY IS SHARED NEWS (journey-succession r170 2026-11-10):
+        // the lately answer reports a village-wide event (the table
+        // waiting, an outbreak, a mourning) in the village's shared
+        // words — two villagers answering "how are you holding up"
+        // the same way on one day is not parroting, it is how people
+        // talk about the same storm coming (transcript-caught on the
+        // r169 panel, seed 34016 d62 Catalina: the composed ack +
+        // change + event line run-blocked and dried). Same class as
+        // the r17 structural beats and the r25 mood-silence line: the
+        // generic emission below skips the run-ledger block for this
+        // turn. The per-sitting ledger still applies, so a true
+        // same-conversation repeat keeps the honest "I just said"
+        // path; the event/ack/change pools still cycle per villager.
+        if (topic === 'lately') structuralTurn = true;
         // DEEP BEATS build trust faster: asking about someone's past or what
         // they want is an act of care. Words only go so far — talk caps at 40.
         // TOPIC PACK (Steve 2026-10-06): you/fears/loved are acts of care too.
