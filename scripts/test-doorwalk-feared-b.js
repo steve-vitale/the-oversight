@@ -21,7 +21,7 @@
 //       seed, so the drive can never fire) — baseline vs armed must
 //       reproduce the headline numbers EXACTLY, proving the idle
 //       reads draw no RNG and write no state in practice; plus a
-//       1-seed ARMED smoke leg on 53005 in /tmp asserting structural
+//       1-seed ARMED smoke leg on 53003 in /tmp asserting structural
 //       invariants (sit happened, a door was entered, 0 instrument
 //       errors). (Prereg Correction-1 mechanism: if 53005 does not sit
 //       under this substrate on this master, the smoke leg is
@@ -527,18 +527,19 @@ withEnv({ DOORWALK_B: '1' }, () => {
   assert.strictEqual(b.finalSeat ? b.finalSeat.seat : null, 'none');
   ok('LIVE: seed 53001 earns no seat in either leg (smoke structural check)', true);
 
-  // --- (D2) LIVE SMOKE: armed leg on 53005 (a sat seed) — the drain
-  // must walk a door end to end on the real engine.
-  run('armed', tmpSmoke, '53005', 'doorwalk-feared-proof-smoke');
-  const s = JSON.parse(fs.readFileSync(path.join(tmpSmoke, 'doorwalk-feared-b-s53005-doorwalk-feared-proof-smoke.json'), 'utf8'));
+  // --- (D2) LIVE SMOKE: armed leg on 53003 (a sat seed — Correction 1:
+  // 53005 died d83 on this master; 53003 sits d90 lesser, assigned
+  // feared) — the drain must walk a door end to end on the real engine.
+  run('armed', tmpSmoke, '53003', 'doorwalk-feared-proof-smoke');
+  const s = JSON.parse(fs.readFileSync(path.join(tmpSmoke, 'doorwalk-feared-b-s53003-doorwalk-feared-proof-smoke.json'), 'utf8'));
   assert.strictEqual(s.instrumentErrors.length, 0);
-  ok('LIVE SMOKE: seed 53005 armed leg runs with 0 instrument errors', true);
+  ok('LIVE SMOKE: seed 53003 armed leg runs with 0 instrument errors', true);
   assert.strictEqual((s.takeseatStats || {}).seatTaken, 1);
-  ok('LIVE SMOKE: seed 53005 sits (sit drive fires on the wrapper)', true);
-  assert.ok(((s.doorwalkStats || {}).doorsEntered | 0) >= 1, 'a door is entered on 53005');
+  ok('LIVE SMOKE: seed 53003 sits (sit drive fires on the wrapper)', true);
+  assert.ok(((s.doorwalkStats || {}).doorsEntered | 0) >= 1, 'a door is entered on 53003');
   const walked = (s.doorwalkStats || {}).walked || [];
   assert.ok(walked.length >= 1 && walked[0].day === (s.takeseatStats || {}).seatDay, 'entry day = sit day');
-  ok('LIVE SMOKE: seed 53005 walks a door on its sit day (' + walked.map(function (w) { return w.path + '@d' + w.day + '/' + (w.branch || '?'); }).join(', ') + ')', true);
+  ok('LIVE SMOKE: seed 53003 walks a door on its sit day (' + walked.map(function (w) { return w.path + '@d' + w.day + '/' + (w.branch || '?'); }).join(', ') + ')', true);
   assert.ok(((s.doorwalkStats || {}).answers | 0) >= 1, 'the walked path is answered (door + beats/final as offered)');
   ok('LIVE SMOKE: the walked path is played through (answers >= 1)', true);
 
