@@ -3195,6 +3195,11 @@
           // actually speak it.
           if (!this.convoWouldBlock(vid, sline)) {
             c.secretShared = true;
+            // ONE CONFESSION PER SITTING (journey-social r172 2026-11-10):
+            // the volunteered secret IS a confession — a confrontation
+            // confession later in this sitting deflects instead of
+            // dispensing a second secret.
+            c.confessedThisSitting = true;
             return { line: sline, thread: 'secret' };
           }
         }
@@ -5398,6 +5403,10 @@
       // r81: nonverbal-fallback counter resets per sitting with the
       // dry counter above — a new sitting gets fresh gestures.
       c.nvFallbackLines = 0;
+      // ONE CONFESSION PER SITTING (journey-social r172 2026-11-10):
+      // the sitting flag the confrontation paths and the volunteered
+      // secret set — a new sitting, a fresh secret to tell.
+      c.confessedThisSitting = false;
       // COHERENCE (Steve 2026-10-07): per-conversation teaching state resets
       // here — the teach skill is sticky WITHIN a conversation, not forever,
       // and "one lesson per conversation" means per conversation.
