@@ -680,6 +680,8 @@ function talkRound(Game, ctx) {
 //   2. the grieving or the scared (comfort is a competent kindness),
 //   3. the stranger (lowest bond with the player),
 //   4. the least-talked-to.
+//   + a pending link raise (sim-raiserseat-a 2026-11-10): a villager
+//     carrying an undelivered ask outranks a stranger — see raiserSeatOn.
 // Choice picking mirrors the engine's own courtesy: answer their question
 // first (ans:* — the menu builder's rule: "it's rude to ignore it"), then
 // teach (knowledge is the food economy), then the canon questions (gq:*),
@@ -692,6 +694,77 @@ function talkRound(Game, ctx) {
 // (a separate probe driver, endConvo 'done'); the pilot watches run timing
 // for any recurrence.
 function talkOn() { return process.env.COMPETENT_TALK === '1'; }
+
+// ---------- RAISER SEAT (sim-raiserseat-a 2026-11-10) ----------
+// Env gate RAISER_SEAT=1 enables; default OFF — the control leg is the
+// talkturn-a policy verbatim. A villager with a pending link raise is
+// carrying an undelivered ask the village knows about (it appears in the
+// talk menu when the scholar sits with them) with a 3-day life; on seed
+// 150206 twenty-eight such asks expired unanswered while the scholar
+// held 1,251 conversation turns, because talkScore's stranger and
+// least-talked-to rewards rank the most trusted, most-talked-to villager
+// out of the two daily seats. The signal only prioritizes TALKING to the
+// raiser; it never decides the link (the accept/decline picker is
+// untouched). +35: above the whole stranger/count spread (max 30), so a
+// raiser outranks any stranger even from a zero base; below grief (+50)
+// and an unresolved want (+100), so comfort and direct wants keep their
+// priority. Sized from a scratch probe of the failing seed 150206: the
+// best raiser needed at most +21 to make the top-2 on any pending-raise
+// day (median +6); +35 covers the whole field with margin. Gated on
+// answerability: with no shared language (commLevel 'none') the ask
+// never appears in the menu, so no seat is spent on it (fail-open if
+// commLevel is missing, matching bondChoices).
+// HARNESS ONLY in sim-counterclose-a: the signal is KILLED (NO-GO,
+// raiserseat-a) and is re-applied here ONLY to reproduce the counter
+// load on both legs; it is REVERTED before the final commit. The
+// landed artifact of this arm is COUNTER_ANSWER, below.
+function raiserSeatOn() { return process.env.RAISER_SEAT === '1'; }
+const RAISER_SEAT_BONUS = 35;
+
+// ---------- COUNTER ANSWER (sim-counterclose-a 2026-11-10) ----------
+// Env gate COUNTER_ANSWER=1 enables; default OFF. A staged counter is
+// the table waiting for an answer: pendingCounter never expires and
+// proposeLink refuses every new propose while one sits, so one early
+// counter (raiserseat-a: day 6 / day 10, the seed's first propose)
+// stalls the whole raise pipeline — 28 blocked re-knocks on 150204,
+// 26 on 150206, zero links. The only answer UI is DOM buttons on the
+// village card (app.js data-counter-*), which the node policy never
+// touches. A competent player answers the table: sweeten it (1,500
+// kcal, keep Haven's terms) when the pantry can carry it, walk away
+// when it can't — never 'accept' on the raise path, where the counter
+// asks Haven to bow at 5,000 kcal/week (a subordinate link does not
+// build Haven's polity, and a competent player who asked them to bow
+// does not bow for the asking). Called once daily at the top of
+// daily(), before any conversation can re-knock: a counter staged
+// during day N's talks is answered at the start of day N+1.
+function counterAnswerOn() { return process.env.COUNTER_ANSWER === '1'; }
+const COUNTER_SWEETEN_PANTRY_MIN = 12000; // same bar as courting a subordinate link
+const COUNTER_SWEETEN_KCAL = 1500; // the engine's sweetener price (hierarchy.js answerCounter)
+
+function pantryKcalTotal(Game) {
+  try { return ((Game.state.village || {}).pantry || []).reduce((t, i) => t + (i.kcalEach || 0) * (i.units || 1), 0); } catch (e) { return 0; }
+}
+
+function answerPendingCounter(Game, ctx) {
+  if (!counterAnswerOn()) return;
+  ctx = ctx || {};
+  try {
+    const c = (Game.state || {}).pendingCounter;
+    if (!c || !Game.answerCounter) return;
+    const pk = pantryKcalTotal(Game);
+    if (pk >= COUNTER_SWEETEN_PANTRY_MIN) {
+      const r = Game.answerCounter('sweeten');
+      ctx.counterSweetened = (ctx.counterSweetened || 0) + 1;
+      ctx.counterSweetenKcal = (ctx.counterSweetenKcal || 0) + COUNTER_SWEETEN_KCAL;
+      if (r && typeof r === 'object') ctx.counterSweetenFormed = (ctx.counterSweetenFormed || 0) + 1;
+      else if (r === 'counter') ctx.counterSweetenHeld = (ctx.counterSweetenHeld || 0) + 1; // pantry fell short at the verb — table still waits
+      else ctx.counterSweetenFailed = (ctx.counterSweetenFailed || 0) + 1;
+    } else {
+      Game.answerCounter('walk');
+      ctx.counterWalked = (ctx.counterWalked || 0) + 1;
+    }
+  } catch (e) { ctx.counterAnswerErr = String(e && e.message).slice(0, 80); }
+}
 
 // Structural menu ids: never picked mid-conversation. 'goon' ("go on") is
 // structural here too — the 5-turn cap owns continuation, not the menu.
@@ -740,6 +813,23 @@ function talkScore(Game, ctx, vid) {
       const b = Game.bondGet(Game.villagerId, vid);
       const v = b ? (b.v || 0) : 0;
       score += Math.max(0, Math.min(30, 20 - v)); // the stranger first
+    }
+  } catch (e) {}
+  try {
+    // Pending-raise signal (sim-raiserseat-a): a raiser with an
+    // undelivered, answerable link ask outranks a stranger. Gate is
+    // env-off by default; see raiserSeatOn above. HARNESS ONLY in
+    // sim-counterclose-a — reverted before the final commit.
+    if (raiserSeatOn() && Game.pendingLinkRaise) {
+      const pending = Game.pendingLinkRaise(vid);
+      if (pending) {
+        let answerable = true;
+        try {
+          const comm = Game.commLevel ? Game.commLevel(vid) : null;
+          if (comm && comm.level === 'none') answerable = false;
+        } catch (e) { answerable = true; }
+        if (answerable) score += RAISER_SEAT_BONUS;
+      }
     }
   } catch (e) {}
   return score;
@@ -3241,6 +3331,10 @@ const competent = {
     surplusFeast(Game, ctx); // feast on surplus when nobody starves (blitz simpolicy 2026-10-13, COMPETENT_SURPLUS_FEAST=1)
   },
   daily(Game, ctx) {
+    // ANSWER THE TABLE (sim-counterclose-a 2026-11-10): a pending
+    // counter blocks every new propose until answered — first, before
+    // keepPromises' sittings or deepTalk can re-knock on it.
+    answerPendingCounter(Game, ctx);
     // steady yourself at dawn: channel a keepsake when the trauma is up
     // (longsim combat r7 2026-10-12)
     sootheTrauma(Game, ctx);
@@ -3914,7 +4008,7 @@ const competent = {
   },
 };
 
-module.exports = { competent, competentEat, packEatOnce, beastStrikeTarget, walkTo, walkHome, thirstWalkHome, goHomeStanding, standingHomeOn, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, keepPromises, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, fleeRepairOn, recoverOn, approachFallbackOn, approachMonsterSig, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE, armorWantsVine };
+module.exports = { competent, competentEat, packEatOnce, beastStrikeTarget, walkTo, walkHome, thirstWalkHome, goHomeStanding, standingHomeOn, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, raiserSeatOn, RAISER_SEAT_BONUS, counterAnswerOn, answerPendingCounter, pantryKcalTotal, COUNTER_SWEETEN_PANTRY_MIN, COUNTER_SWEETEN_KCAL, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, keepPromises, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, fleeRepairOn, recoverOn, approachFallbackOn, approachMonsterSig, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE, armorWantsVine };
 
 
 // The public shared gearing routine, also used by prepared policy proofs.
