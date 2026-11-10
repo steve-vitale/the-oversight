@@ -35,6 +35,12 @@
 //     said to this villager (the Javier state). The reply must be an
 //     honest closer, never a dry line. RED on unfixed code (reply is
 //     the dry line).
+//   beat-blocked    : the thread HAS a beat (goal thread), but every
+//     goalFollow line is poisoned in the run ledger (another villager
+//     said it — the Ernst state: seed 34015 d55, Najla-pods beat).
+//     The reply must be an honest closer, never a dry line, and the
+//     thread must be marked dry. RED on unfixed code (reply is the
+//     dry line while the handler returns the unspoken beat).
 //   control        : no poisoning. The reply is a closer from the
 //     pool and the thread is marked dry (dlg:more retires).
 // Usage: node scripts/test-journey-succession-r169-dlgmore-dry.js [case]
@@ -90,6 +96,18 @@ function lastNpcLine(Game, vid) {
   return '';
 }
 
+// TRANSCRIPT-SCAN (r169): the last-line check alone is NOT enough —
+// the first version of the beat-path fix fell through to the closer
+// AFTER sayLine had already emitted the dry line, so the transcript
+// held the dry line ahead of the closer ("...lost my train of
+// thought." then "That's the whole of it." — caught on the 34015
+// re-run). Assert no dry line anywhere in the transcript.
+function transcriptHasDry(Game, vid) {
+  const c = Game.convoGet(vid);
+  const tr = (c && c.transcript) || [];
+  return tr.some(e => e.who === 'them' && isDry(e.text));
+}
+
 // Stage the Javier state: a conversation on a thread with no
 // follow-ups ('secret' has no convoThreadBeat branch), no pending
 // secret follow-up, all 3 dry closers already said to this villager
@@ -107,7 +125,7 @@ function stageDryThread(Game, vid, poison) {
 }
 
 async function runCase(mode) {
-  const seed = { 'dry-allblocked': 5528, control: 5529 }[mode] || 5528;
+  const seed = { 'dry-allblocked': 5528, 'beat-blocked': 5530, control: 5529 }[mode] || 5528;
   const { Game } = await loadGame({ seed, mode: 'succession-r169-dlgmore-dry-proof', fullTelemetry: true });
   await setupGame(Game);
   const v = Game.state.village || {};
@@ -120,6 +138,37 @@ async function runCase(mode) {
   const r = Game.startConvo(vid);
   check(`${mode}: convo opened`, !!(r && !r.refused), `refused=${r && r.refused}`);
   if (!r || r.refused) return;
+  if (mode === 'beat-blocked') {
+    // Stage the Ernst state: a goal thread whose beat exists but is
+    // run-ledger-blocked. Poison the composed + raw first-chunk of
+    // every goalFollow line for this villager's goal, so whichever
+    // beat the handler draws is blocked.
+    const c = Game.convoGet(vid);
+    c.thread = 'goal';
+    c.secretFollowup = null;
+    c.threadDryFor = null;
+    const goal = Game.npcGoal(vid);
+    const pool = (((Game.data.characterGen || {}).convo || {}).goalFollow || {})[goal] || [];
+    check('beat-blocked: goal pool has 2+ lines (handler draws after the pre-check)', pool.length >= 2, `goal=${goal} pool=${pool.length}`);
+    if (pool.length < 2) return;
+    for (const l of pool) {
+      try { const comp = Game.convoComposeDlg(vid, l, 'dlg:more'); if (comp) poisonRunLedger(Game, [firstChunk(Game, comp)]); } catch (e) {}
+      poisonRunLedger(Game, [firstChunk(Game, l)]);
+    }
+    const beatPre = Game.convoThreadBeat(vid);
+    check('beat-blocked: threadBeat returns a beat pre-pick', !!beatPre, String(beatPre || '').slice(0, 80));
+    // The pre-check consumed one pick from c.said['goaldeep'] — the
+    // handler draws the next line, which is poisoned the same way.
+    Game.convoTurn(vid, 'dlg:more');
+    const reply = lastNpcLine(Game, vid);
+    check('beat-blocked: reply is NOT a dry line', !isDry(reply), reply.slice(0, 120));
+    check('beat-blocked: reply IS an honest closer', isCloser(reply), reply.slice(0, 120));
+    check('beat-blocked: NO dry line anywhere in the transcript', !transcriptHasDry(Game, vid), 'dry line present ahead of the closer');
+    const after = Game.convoGet(vid);
+    check('beat-blocked: thread marked dry (dlg:more retires)', !!(after && after.threadDryFor === 'goal'), `threadDryFor=${after && after.threadDryFor}`);
+    try { Game.endConvo(vid, 'left'); } catch (e) {}
+    return;
+  }
   stageDryThread(Game, vid, mode === 'dry-allblocked');
   const before = Game.convoGet(vid);
   check(`${mode}: threadBeat is null on the staged thread`, Game.convoThreadBeat(vid) === null, `beat=${String(Game.convoThreadBeat(vid)).slice(0, 60)}`);
@@ -127,6 +176,7 @@ async function runCase(mode) {
   const reply = lastNpcLine(Game, vid);
   check(`${mode}: reply is NOT a dry line`, !isDry(reply), reply.slice(0, 120));
   check(`${mode}: reply IS an honest closer`, isCloser(reply), reply.slice(0, 120));
+  check(`${mode}: NO dry line anywhere in the transcript`, !transcriptHasDry(Game, vid), 'dry line present ahead of the closer');
   const after = Game.convoGet(vid);
   check(`${mode}: thread marked dry (dlg:more retires)`, !!(after && after.threadDryFor === 'secret'), `threadDryFor=${after && after.threadDryFor}`);
   try { Game.endConvo(vid, 'left'); } catch (e) {}
@@ -135,11 +185,11 @@ async function runCase(mode) {
 
 async function main() {
   const mode = process.argv[2];
-  if (mode && ['dry-allblocked', 'control'].includes(mode)) {
+  if (mode && ['dry-allblocked', 'beat-blocked', 'control'].includes(mode)) {
     await runCase(mode);
   } else {
     await runCase('dry-allblocked');
-    for (const m of ['control']) {
+    for (const m of ['beat-blocked', 'control']) {
       try {
         const out = execFileSync('node', [path.join(__dirname, 'test-journey-succession-r169-dlgmore-dry.js'), m],
           { timeout: 300000, maxBuffer: 64 * 1024 * 1024 }).toString();

@@ -277,7 +277,21 @@
         // (panel: 2/2 secret sittings went dry after the answer).
         if (c.secretFollowup) {
           const fl = c.secretFollowup; c.secretFollowup = null;
-          if (this.sayLine(vid, fl)) {
+          // PRE-CHECK (journey-succession r169): sayLine EMITS the dry
+          // line into the transcript when it blocks — a fall-through
+          // AFTER the call leaves the dry line visible ahead of the
+          // closer ("...lost my train of thought." then "That's the
+          // whole of it." — caught on the 34015 re-run). Never hand a
+          // blocked line to sayLine: convoWouldBlock is the pure
+          // predicate (r19 opener pattern). A blocked follow-up falls
+          // through to the normal thread/dry path, honestly.
+          // FELL-BACK HONESTY (r169): sayLine returns the dry line
+          // TRUTHY on a run-ledger block, so a bare truthy check
+          // mistakes the dry line for the follow-up spoken (the r166
+          // lesson, same shape as the beat path below). Only a
+          // non-fell-back emission counts as the follow-up delivered.
+          const flBlocked = (typeof this.convoWouldBlock === 'function') ? this.convoWouldBlock(vid, fl) : false;
+          if (!flBlocked && this.sayLine(vid, fl) && !c._sayFellBack) {
             c.threadDryFor = null; // the sitting is alive — clear any stale dry marker
             try { this.resolveConsequence(vid, { trust: 1, temper: 'neutral', name: 'dlg:more' }); } catch (e) {}
             return { line: fl, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
@@ -295,8 +309,23 @@
           // thread: "My part? I remember them." x3, ledger clean). Treat a
           // blocked beat as dry: honest admission, menu retires "tell me
           // more".
-          const said = this.sayLine(vid, composed);
-          if (said) {
+          // FELL-BACK HONESTY (journey-succession r169): sayLine returns
+          // the dry line TRUTHY on a run-ledger block, so the bare `if
+          // (said)` above ALSO fired on a blocked beat — the handler
+          // returned the unspoken composed line while the transcript held
+          // the dry line (r169 seed 34015 d55 Ernst: "Tell me about
+          // them." → "...Sorry, lost my train of thought." for the
+          // Najla-pods beat another villager had said). Only a
+          // non-fell-back emission counts as the beat delivered; a
+          // blocked beat falls through to the closer pool below.
+          // PRE-CHECK (r169): the fall-through alone is not enough —
+          // sayLine EMITS the dry line before the handler can fall
+          // through, so the transcript held the dry line AHEAD of the
+          // closer (34015 re-run). Never hand a blocked beat to sayLine:
+          // convoWouldBlock is the pure predicate (r19 opener pattern).
+          const beatBlocked = (typeof this.convoWouldBlock === 'function') ? this.convoWouldBlock(vid, composed) : false;
+          const said = !beatBlocked ? this.sayLine(vid, composed) : null;
+          if (said && !c._sayFellBack) {
             c.threadDryFor = null; // thread is alive — clear any stale dry marker
             // Beat composition: the beat acknowledges what was just said.
             // THREAD-COHERENT ENGAGEMENT (gap-closure 2026-10-17): engaging

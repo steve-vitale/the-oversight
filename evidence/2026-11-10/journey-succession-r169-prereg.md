@@ -91,6 +91,30 @@ still hold on a fresh panel?
   retires dlg:more). Verified RED on unfixed code and GREEN after.
 - r146/r147/r151/r155/r157/r161/r166 proof tests re-run GREEN.
 
+## AMENDMENT A1 (written after the panel ran, before closeout)
+
+The panel found a SECOND dry on the same turn type — seed 34015
+d55 Ernst, dlg:more, the Najla-pods goal beat run-blocked: the
+handler returned the unspoken composed beat while the transcript
+held the dry line. Same defect class (sayLine's dry line comes
+back truthy), adjacent path (beat-blocked, not pool-blocked).
+The fix was extended in the same run, on the same design call
+(no new call needed — the handler's own comment already states
+the intent: "Treat a blocked beat as dry"):
+- dlg:more handler: a blocked beat (or blocked secret follow-up)
+  falls through to the closer pool when `c._sayFellBack` is set,
+  AND a `convoWouldBlock` pre-check keeps blocked beats out of
+  sayLine entirely — the fell-back guard alone left the dry line
+  visible ahead of the closer (caught on the 34015 re-run).
+- Proof test gained a third case (beat-blocked, seed 5530) plus a
+  transcript-scan assertion in all cases: NO dry line anywhere in
+  the transcript, not just the last line. Verified RED on the
+  fell-back-only (v1) code and GREEN after.
+- The 34015 seed was re-run on the fixed code: Ernst now speaks
+  the closer ("That's the whole of it. Sorry."), 0 dry lines in
+  the transcript. The DRY CENSUS bar below is judged on the
+  re-run, with the panel miss recorded, not hidden.
+
 ## After-leg (this run)
 
 - Driver: scripts/journey-succession-r169-20261110.js = r166 driver

@@ -1,0 +1,36 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Juan","t":91},{"id":"Ruben","t":90},{"id":"Maya","t":90},{"id":"Mia","t":90}], roster=12
+INH readable=true scripted=true deadItems=12 distinct=11 transferred=0 vanished=2 keptPlants=14 inheritedPlants=3 keptSkills=8 inheritedSkills=4 succTrustPre=90 succTrustPost=59
+PARITY readable=true equal=true inherited=[] pre=["green_whisper","green_thumb","beard_moss","cornucopia","rage"] post=["green_whisper","green_thumb","beard_moss","cornucopia","rage"]
+DEATH d41 (the expedition, scripted): Grayson -> Maya | passed=true lin=true mo=true trust=59 vouchers=8
+  BURIAL d+4: corpse found=true respects=true bury=true
+  INH d+4: transferred=0 vanished=2 of 11 distinct dead-bearer items
+  CONVO d+3 with Mia (refused=false)
+  CONVO d+3 with Juan (refused=false)
+  STRANGER-PROBE d+3 with Ruben (trust=90 refused=false)
+  CONVO d+7 with Mia (refused=false)
+  CONVO d+7 with Juan (refused=false)
+  CONVO d+14 with Mia (refused=false)
+  CONVO d+14 with Juan (refused=false)
+  CONVO d+30 with Cormac (refused=false)
+  CONVO d+30 with Rosa (refused=false)
+  NEWCOMER-PROBE d+41 with Giulia (arrived d+41, trust=40 refused=false)
+  CONVO d+45 with Siobhan (refused=false)
+  CONVO d+45 with Lucas (refused=false)
+
+FUNERAL: deathBeat=8 recover=1 vouch=1 (eligible=8) echo=4 organicBurial={"respects":false,"bury":false} halfRation=6
+
+MEAL-GATE: audited=49 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=49 signals={"levelUp":true,"systemVoice":44,"offerLines":23,"codexPlantsDelta":31,"codexSkillsDelta":23,"codexAbilitiesDelta":12,"xpDelta":-118,"any":true} pantry 100186->9750
+TRUST-DIALS: office 59->93 (+34, climb) | villageMean 77.2->89.9 (+12.7, climb) | ge60 8->7 | movers>=5: [{"id":"Cormac","from":63,"to":100,"delta":37},{"id":"Priya","from":59,"to":91,"delta":32},{"id":"Raj","from":70,"to":90,"delta":20},{"id":"Siobhan","from":72,"to":80,"delta":8},{"id":"Lucas","from":83,"to":91,"delta":8}]
+DEED-LEDGER: calls=34 summary={"donateToPantry":{"calls":24,"ok":24,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"giveFood":{"calls":10,"ok":10,"deltaSum":11,"deltaN":10,"positive":9,"meanDelta":1.1}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=4 (convo=4, say=0)) m4=true m5=manual | endDay=90 alive=0 over=true
+anomalies: 0
+S-METRICS: s1=false s2=true s3=true s4=false s5=true dayAdv=49
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30) t2=true(deedCalls=34) trustVerdict={"readable":true,"officeMantle":59,"officeLast":93,"officeDelta":34,"officeClass":"climb","villageMantle":77.2,"villageLast":89.9,"villageDelta":12.7,"villageClass":"climb","villageGe60Mantle":8,"villageGe60Last":7,"movers":[{"id":"Cormac","from":63,"to":100,"delta":37},{"id":"Priya","from":59,"to":91,"delta":32},{"id":"Raj","from":70,"to":90,"delta":20},{"id":"Siobhan","from":72,"to":80,"delta":8},{"id":"Lucas","from":83,"to":91,"delta":8}]}
+E6/CALLCHECK: e6={"callMoves":20,"withCensus":20,"chainHandoffs":7,"trustMoves":13} callCheck={"dailyMoveDays":19,"callMoveDays":17,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=5 (v2=5, excludedLoot=0))
+E7/R47: e7={"trustMoves":13,"soloOffice":7,"soloOfficeDeltas":[1,1,2,2,1,1,2],"soloBearerDeltaExact":[1,1,2,2,1,1,2],"singleMoverBearer":1,"singleMoverOther":2,"eventClass":{"event-only":0,"deed-only":1,"both":12,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":4,"v2":5,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":14,"known":14,"unknown":0} e3={"dailyDays":50,"moves":19}
