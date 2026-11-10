@@ -70,12 +70,19 @@ function analyzeSeed(j) {
       break;
     }
   }
-  // Candidate villages: union of village rolls + scholar lore + raiser lore.
+  // Candidate villages: union of lore (scholar + raisers) and staging
+  // targets. The otherVillages ROLL is the region registry — the game
+  // knows those villages, the PEOPLE may not — so the roll alone does
+  // not make a village "known" (prereg: unknown = never known to the
+  // scholar or any villager).
   const known = {}; // villageId -> {firstKnownDay, name}
   days.forEach(function (s) {
-    (s.villages || []).forEach(function (v) { if (!known[v.id]) known[v.id] = { firstKnownDay: s.day, name: v.name || null }; });
-    (s.scholarLore || []).forEach(function (id) { if (!known[id]) known[id] = { firstKnownDay: s.day, name: null }; });
-    (s.raisers || []).forEach(function (rv) { (rv.lore || []).forEach(function (id) { if (!known[id]) known[id] = { firstKnownDay: s.day, name: null }; }); });
+    const nameOf = function (id) {
+      const v = (s.villages || []).filter(function (vv) { return vv.id === id; })[0];
+      return v ? (v.name || null) : null;
+    };
+    (s.scholarLore || []).forEach(function (id) { if (!known[id]) known[id] = { firstKnownDay: s.day, name: nameOf(id) }; });
+    (s.raisers || []).forEach(function (rv) { (rv.lore || []).forEach(function (id) { if (!known[id]) known[id] = { firstKnownDay: s.day, name: nameOf(id) }; }); });
   });
   Object.keys(known).forEach(function (id) {
     r.villages[id] = { id: id, name: known[id].name, firstKnownDay: known[id].firstKnownDay, class: 'unknown', stagings: 0, fates: [], dominantGate: null, gateCounts: {} };
@@ -146,15 +153,22 @@ function analyzeSeed(j) {
     const v = r.villages[id];
     const formed = (r.firstLink && r.firstLink.other === id) || days.some(function (s) { return (s.links || []).some(function (l) { return l.other === id; }); });
     const raised = r.stagings.some(function (f) { return f.villageId === id && f.fate === 'accepted->formed'; });
+    // linkFormed is a LINK fact, the class is a RAISE fact: the band's
+    // first link forms via the meta-progression ladder reward
+    // (_ladderRewardLink), not via any raise — so a first-link village
+    // can hold a link AND have every raise lost. Both are reported.
+    v.linkFormed = formed;
+    v.formedViaRaise = raised;
     if (raised) v.class = 'raised';
     else if (v.stagings > 0) v.class = 'staged-and-lost';
     else {
-      // Known while unlinked? (appears in a village roll / lore while not linked)
+      // Known while unlinked? (in scholar/raiser LORE while not linked —
+      // the roll alone does not count as known; see the known map above)
       const knownWhileUnlinked = days.some(function (s) {
-        const inRoll = (s.villages || []).some(function (vv) { return vv.id === id && !vv.linked; });
-        const inLore = (s.scholarLore || []).indexOf(id) !== -1 ||
+        const unlinkedNow = !(s.links || []).some(function (l) { return l.other === id; });
+        if (!unlinkedNow) return false;
+        return (s.scholarLore || []).indexOf(id) !== -1 ||
           (s.raisers || []).some(function (rv) { return (rv.lore || []).indexOf(id) !== -1; });
-        return inRoll || inLore;
       });
       if (!knownWhileUnlinked) v.class = 'unknown';
       else {
@@ -170,6 +184,11 @@ function analyzeSeed(j) {
           const knownNow = (s.scholarLore || []).indexOf(id) !== -1 ||
             (s.raisers || []).some(function (rv) { return (rv.lore || []).indexOf(id) !== -1; });
           if (!knownNow) return;
+          // Gate days count only while the village is still UNLINKED:
+          // after a link forms, 'all-known-linked' is trivially true and
+          // would swamp the real pre-link blockers.
+          const unlinkedNow = !(s.links || []).some(function (l) { return l.other === id; });
+          if (!unlinkedNow) return;
           (s.raisers || []).forEach(function (rv) {
             if (rv.isScholar || !rv.alive) return;
             (rv.gates || []).forEach(function (g) { countsAll[g] = (countsAll[g] || 0) + 1; });
@@ -253,7 +272,7 @@ function main() {
 
   console.log('SECONDLINK BAND run=' + RUN + ' seeds=' + seeds.join(','));
   perSeed.forEach(function (s) {
-    const vcls = Object.keys(s.villages).map(function (id) { return id + ':' + s.villages[id].class + (s.villages[id].stagings ? '(' + s.villages[id].stagings + ' staged:' + s.villages[id].fates.join(',') + ')' : '') + (s.villages[id].dominantGate ? '[gate:' + s.villages[id].dominantGate + ']' : ''); }).join(' ');
+    const vcls = Object.keys(s.villages).map(function (id) { return id + ':' + s.villages[id].class + (s.villages[id].linkFormed ? '[LINK]' : '') + (s.villages[id].stagings ? '(' + s.villages[id].stagings + ' staged:' + s.villages[id].fates.join(',') + ')' : '') + (s.villages[id].dominantGate ? '[gate:' + s.villages[id].dominantGate + ']' : ''); }).join(' ');
     console.log(' seed ' + s.seed + ' days=' + s.days + ' end=' + s.endReason + ' scale=' + s.scaleRank + ' wave=' + s.maxWave + ' standing=' + s.standing +
       ' firstLink=' + (s.firstLink ? s.firstLink.other + '@d' + s.firstLink.day : 'none') +
       ' stagings=' + s.stagings.length + ' second=' + s.secondStagings.length +

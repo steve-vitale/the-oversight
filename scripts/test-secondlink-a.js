@@ -118,6 +118,33 @@ ok('classify: unknown — village never in any roll or lore', function () {
   assert.deepStrictEqual(Object.keys(r.villages), []);
 });
 
+ok('classify: unknown — in the region roll but in nobody\'s lore', function () {
+  // The roll alone is not knowledge: no scholar lore, no raiser lore.
+  const j = fakeSeed({
+    daily: [fakeDay(10, { scholarLore: [], raisers: [{ vid: 'nathan', alive: true, isScholar: false, trust: 25, buildStanding: 1,
+      lore: [], unlinkedKnown: [], cooldown: [], hasPending: false, talkBlocked: false,
+      gates: ['no-lore'], eligible: false }], eligibleRaisers: 0 })],
+  });
+  const r = AN.analyzeSeed(j);
+  assert.deepStrictEqual(Object.keys(r.villages), []);
+});
+
+ok('classify: first-link village holds a link but its raises were lost', function () {
+  const j = fakeSeed({
+    bondEvents: [
+      { day: 10, initiator: 'nathan', target: 'emberhold', kind: 'link', outcome: 'staged', chance: null, reason: null },
+      { day: 13, initiator: 'nathan', target: 'emberhold', kind: 'link', outcome: 'expired', chance: null, reason: null },
+    ],
+    daily: [fakeDay(10, { pendingRaises: [{ vid: 'nathan', villageId: 'emberhold', day: 10, line: 'x' }] }),
+      fakeDay(13, { raiseState: [{ key: 'emberhold|nathan', day: 13, outcome: 'expired' }] }),
+      fakeDay(20, { links: [fakeLink('emberhold', 20)], linkTotal: 1 })],
+  });
+  const r = AN.analyzeSeed(j);
+  assert.strictEqual(r.villages.emberhold.class, 'staged-and-lost');
+  assert.strictEqual(r.villages.emberhold.linkFormed, true);
+  assert.strictEqual(r.villages.emberhold.formedViaRaise, false);
+});
+
 ok('classify: second raise = different target after first link', function () {
   const j = fakeSeed({
     bondEvents: [

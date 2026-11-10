@@ -1,0 +1,3474 @@
+{
+  "band": {
+    "run": "secondlink-pilot",
+    "seeds": [
+      99101,
+      99102,
+      99103,
+      99104,
+      99105,
+      99106,
+      99107,
+      99108
+    ],
+    "linksFormed": 8,
+    "villagesClassified": {
+      "staged-and-lost": 24,
+      "never-staged": 13
+    },
+    "stagingsTotal": 104,
+    "secondStagingsTotal": 91,
+    "fateCounts": {
+      "expired": 102,
+      "pending-at-end": 2
+    },
+    "secondFateCounts": {
+      "expired": 89,
+      "pending-at-end": 2
+    },
+    "reconcileOk": 104,
+    "reconcileBad": [],
+    "instrumentErrors": 0,
+    "wall": {
+      "wins": 0,
+      "national": 0,
+      "table": 0,
+      "wave4unlocks": 7,
+      "wave5unlocks": 1,
+      "medianSurvival": 120.5,
+      "survivors": 0,
+      "seasonedLinksMax": 1,
+      "polityEver": 0
+    },
+    "neutrality": {
+      "offDaysMatch": [
+        {
+          "seed": 99101,
+          "offDays": 132,
+          "trustgrowthDays": 132,
+          "match": true
+        },
+        {
+          "seed": 99102,
+          "offDays": 58,
+          "trustgrowthDays": 58,
+          "match": true
+        },
+        {
+          "seed": 99103,
+          "offDays": 132,
+          "trustgrowthDays": 132,
+          "match": true
+        },
+        {
+          "seed": 99104,
+          "offDays": 150,
+          "trustgrowthDays": 150,
+          "match": true
+        },
+        {
+          "seed": 99105,
+          "offDays": 109,
+          "trustgrowthDays": 109,
+          "match": true
+        },
+        {
+          "seed": 99106,
+          "offDays": 87,
+          "trustgrowthDays": 87,
+          "match": true
+        },
+        {
+          "seed": 99107,
+          "offDays": 150,
+          "trustgrowthDays": 150,
+          "match": true
+        },
+        {
+          "seed": 99108,
+          "offDays": 62,
+          "trustgrowthDays": 62,
+          "match": true
+        }
+      ],
+      "offStandingMatch": [
+        {
+          "seed": 99101,
+          "offStanding": 270,
+          "trustgrowthStanding": 270,
+          "match": true
+        },
+        {
+          "seed": 99102,
+          "offStanding": 199,
+          "trustgrowthStanding": 199,
+          "match": true
+        },
+        {
+          "seed": 99103,
+          "offStanding": 199,
+          "trustgrowthStanding": 199,
+          "match": true
+        },
+        {
+          "seed": 99104,
+          "offStanding": 199,
+          "trustgrowthStanding": 199,
+          "match": true
+        },
+        {
+          "seed": 99105,
+          "offStanding": 150,
+          "trustgrowthStanding": 150,
+          "match": true
+        },
+        {
+          "seed": 99106,
+          "offStanding": 199,
+          "trustgrowthStanding": 199,
+          "match": true
+        },
+        {
+          "seed": 99107,
+          "offStanding": 199,
+          "trustgrowthStanding": 199,
+          "match": true
+        },
+        {
+          "seed": 99108,
+          "offStanding": 25,
+          "trustgrowthStanding": 25,
+          "match": true
+        }
+      ],
+      "onVsOffDaysExact": 8,
+      "onVsOffStandingExact": 8,
+      "offWins": 0,
+      "offNational": 0
+    }
+  },
+  "perSeed": [
+    {
+      "seed": 99101,
+      "days": 132,
+      "gameDays": 132,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 5,
+      "standing": 270,
+      "instrumentErrors": 0,
+      "firstLink": {
+        "day": 37,
+        "other": "village_1",
+        "kind": null,
+        "primary": "haven",
+        "subordinate": "village_1"
+      },
+      "linkEvents": 58,
+      "stageCalls": 0,
+      "stageCallsStaged": 0,
+      "stagedTele": 29,
+      "acceptedTele": 0,
+      "refusedTele": 0,
+      "expiredTele": 29,
+      "linkTickCalls": 131,
+      "villages": {
+        "village_0": {
+          "id": "village_0",
+          "name": "Emberhold",
+          "firstKnownDay": 4,
+          "class": "staged-and-lost",
+          "stagings": 8,
+          "fates": [
+            "expired",
+            "expired",
+            "expired",
+            "expired",
+            "expired",
+            "expired",
+            "expired",
+            "expired"
+          ],
+          "dominantGate": null,
+          "gateCounts": {},
+          "linkFormed": false,
+          "formedViaRaise": false
+        },
+        "village_1": {
+          "id": "village_1",
+          "name": "Stonebridge",
+          "firstKnownDay": 4,
+          "class": "staged-and-lost",
+          "stagings": 5,
+          "fates": [
+            "expired",
+            "expired",
+            "expired",
+            "expired",
+            "expired"
+          ],
+          "dominantGate": null,
+          "gateCounts": {},
+          "linkFormed": true,
+          "formedViaRaise": false
+        },
+        "village_spl_28_76708": {
+          "id": "village_spl_28_76708",
+          "name": "The Bloodied",
+          "firstKnownDay": 29,
+          "class": "staged-and-lost",
+          "stagings": 4,
+          "fates": [
+            "expired",
+            "expired",
+            "expired",
+            "expired"
+          ],
+          "dominantGate": null,
+          "gateCounts": {},
+          "linkFormed": false,
+          "formedViaRaise": false
+        },
+        "village_spl_28_58329": {
+          "id": "village_spl_28_58329",
+          "name": "The Red Table",
+          "firstKnownDay": 29,
+          "class": "staged-and-lost",
+          "stagings": 5,
+          "fates": [
+            "expired",
+            "expired",
+            "expired",
+            "expired",
+            "expired"
+          ],
+          "dominantGate": null,
+          "gateCounts": {},
+          "linkFormed": false,
+          "formedViaRaise": false
+        },
+        "village_2": {
+          "id": "village_2",
+          "name": "Thornfield",
+          "firstKnownDay": 43,
+          "class": "staged-and-lost",
+          "stagings": 4,
+          "fates": [
+            "expired",
+            "expired",
+            "expired",
+            "expired"
+          ],
+          "dominantGate": null,
+          "gateCounts": {},
+          "linkFormed": false,
+          "formedViaRaise": false
+        },
+        "village_spl_37_26287": {
+          "id": "village_spl_37_26287",
+          "name": "The Bloodied II",
+          "firstKnownDay": 57,
+          "class": "staged-and-lost",
+          "stagings": 3,
+          "fates": [
+            "expired",
+            "expired",
+            "expired"
+          ],
+          "dominantGate": null,
+          "gateCounts": {},
+          "linkFormed": false,
+          "formedViaRaise": false
+        }
+      },
+      "stagings": [
+        {
+          "vid": "gen_cqgh878",
+          "villageId": "village_1",
+          "day": 9,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": true,
+          "decisionDay": 12,
+          "isSecond": false
+        },
+        {
+          "vid": "aria_thompson",
+          "villageId": "village_1",
+          "day": 18,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": true,
+          "decisionDay": 21,
+          "isSecond": false
+        },
+        {
+          "vid": "sanne_bakker",
+          "villageId": "village_1",
+          "day": 25,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": true,
+          "decisionDay": 28,
+          "isSecond": false
+        },
+        {
+          "vid": "gen_ceypn1u",
+          "villageId": "village_0",
+          "day": 26,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 29,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_cqgh878",
+          "villageId": "village_0",
+          "day": 27,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 30,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ca2ijvi",
+          "villageId": "village_1",
+          "day": 28,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": true,
+          "decisionDay": 31,
+          "isSecond": false
+        },
+        {
+          "vid": "gen_cqgh878",
+          "villageId": "village_1",
+          "day": 32,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": true,
+          "decisionDay": 35,
+          "isSecond": false
+        },
+        {
+          "vid": "sanne_bakker",
+          "villageId": "village_spl_28_76708",
+          "day": 39,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 42,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ceypn1u",
+          "villageId": "village_2",
+          "day": 47,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 50,
+          "isSecond": true
+        },
+        {
+          "vid": "aria_thompson",
+          "villageId": "village_spl_37_26287",
+          "day": 61,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 64,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_cqgh878",
+          "villageId": "village_spl_28_58329",
+          "day": 63,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 66,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ca2ijvi",
+          "villageId": "village_0",
+          "day": 64,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 67,
+          "isSecond": true
+        },
+        {
+          "vid": "sanne_bakker",
+          "villageId": "village_spl_28_76708",
+          "day": 66,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 69,
+          "isSecond": true
+        },
+        {
+          "vid": "aria_thompson",
+          "villageId": "village_spl_28_58329",
+          "day": 68,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 71,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_cqgh878",
+          "villageId": "village_2",
+          "day": 70,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 73,
+          "isSecond": true
+        },
+        {
+          "vid": "sanne_bakker",
+          "villageId": "village_0",
+          "day": 73,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 76,
+          "isSecond": true
+        },
+        {
+          "vid": "sanne_bakker",
+          "villageId": "village_2",
+          "day": 83,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 86,
+          "isSecond": true
+        },
+        {
+          "vid": "aria_thompson",
+          "villageId": "village_spl_37_26287",
+          "day": 84,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 87,
+          "isSecond": true
+        },
+        {
+          "vid": "aria_thompson",
+          "villageId": "village_spl_28_58329",
+          "day": 87,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 90,
+          "isSecond": true
+        },
+        {
+          "vid": "sanne_bakker",
+          "villageId": "village_spl_28_76708",
+          "day": 89,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 92,
+          "isSecond": true
+        },
+        {
+          "vid": "aria_thompson",
+          "villageId": "village_0",
+          "day": 91,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 94,
+          "isSecond": true
+        },
+        {
+          "vid": "sanne_bakker",
+          "villageId": "village_spl_28_58329",
+          "day": 92,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 95,
+          "isSecond": true
+        },
+        {
+          "vid": "sanne_bakker",
+          "villageId": "village_0",
+          "day": 97,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 100,
+          "isSecond": true
+        },
+        {
+          "vid": "aria_thompson",
+          "villageId": "village_spl_37_26287",
+          "day": 101,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 104,
+          "isSecond": true
+        },
+        {
+          "vid": "aria_thompson",
+          "villageId": "village_0",
+          "day": 110,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 113,
+          "isSecond": true
+        },
+        {
+          "vid": "sanne_bakker",
+          "villageId": "village_spl_28_76708",
+          "day": 111,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 114,
+          "isSecond": true
+        },
+        {
+          "vid": "aria_thompson",
+          "villageId": "village_spl_28_58329",
+          "day": 117,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 120,
+          "isSecond": true
+        },
+        {
+          "vid": "sanne_bakker",
+          "villageId": "village_2",
+          "day": 123,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 126,
+          "isSecond": true
+        },
+        {
+          "vid": "sanne_bakker",
+          "villageId": "village_0",
+          "day": 126,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 129,
+          "isSecond": true
+        }
+      ],
+      "reconcile": {
+        "ok": 29,
+        "bad": []
+      },
+      "census": {
+        "snapDays": 128,
+        "eligibleRaiserDays": 88,
+        "gateDays": {
+          "trust<20": 31,
+          "no-build-standing": 682,
+          "no-lore": 222,
+          "talk-blocked": 108,
+          "has-pending": 84,
+          "all-open-cooldown": 82,
+          "all-known-linked": 118
+        },
+        "lotteryPassEligible": 37,
+        "lotteryFailEligible": 51,
+        "eligibleRaiserDayList": [
+          7,
+          8,
+          9,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          31,
+          32,
+          35,
+          36,
+          37,
+          38,
+          39,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          87,
+          88,
+          89,
+          91,
+          96,
+          97,
+          101,
+          102,
+          103,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111,
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120,
+          122,
+          125
+        ]
+      },
+      "secondStagings": [
+        {
+          "vid": "gen_ceypn1u",
+          "villageId": "village_0",
+          "day": 26,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 29,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_cqgh878",
+          "villageId": "village_0",
+          "day": 27,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 30,
+          "isSecond": true
+        },
+        {
+          "vid": "sanne_bakker",
+          "villageId": "village_spl_28_76708",
+          "day": 39,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 42,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ceypn1u",
+          "villageId": "village_2",
+          "day": 47,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 50,
+          "isSecond": true
+        },
+        {
+          "vid": "aria_thompson",
+          "villageId": "village_spl_37_26287",
+          "day": 61,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 64,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_cqgh878",
+          "villageId": "village_spl_28_58329",
+          "day": 63,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 66,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ca2ijvi",
+          "villageId": "village_0",
+          "day": 64,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 67,
+          "isSecond": true
+        },
+        {
+          "vid": "sanne_bakker",
+          "villageId": "village_spl_28_76708",
+          "day": 66,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 69,
+          "isSecond": true
+        },
+        {
+          "vid": "aria_thompson",
+          "villageId": "village_spl_28_58329",
+          "day": 68,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 71,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_cqgh878",
+          "villageId": "village_2",
+          "day": 70,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 73,
+          "isSecond": true
+        },
+        {
+          "vid": "sanne_bakker",
+          "villageId": "village_0",
+          "day": 73,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 76,
+          "isSecond": true
+        },
+        {
+          "vid": "sanne_bakker",
+          "villageId": "village_2",
+          "day": 83,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 86,
+          "isSecond": true
+        },
+        {
+          "vid": "aria_thompson",
+          "villageId": "village_spl_37_26287",
+          "day": 84,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 87,
+          "isSecond": true
+        },
+        {
+          "vid": "aria_thompson",
+          "villageId": "village_spl_28_58329",
+          "day": 87,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 90,
+          "isSecond": true
+        },
+        {
+          "vid": "sanne_bakker",
+          "villageId": "village_spl_28_76708",
+          "day": 89,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 92,
+          "isSecond": true
+        },
+        {
+          "vid": "aria_thompson",
+          "villageId": "village_0",
+          "day": 91,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 94,
+          "isSecond": true
+        },
+        {
+          "vid": "sanne_bakker",
+          "villageId": "village_spl_28_58329",
+          "day": 92,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 95,
+          "isSecond": true
+        },
+        {
+          "vid": "sanne_bakker",
+          "villageId": "village_0",
+          "day": 97,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 100,
+          "isSecond": true
+        },
+        {
+          "vid": "aria_thompson",
+          "villageId": "village_spl_37_26287",
+          "day": 101,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 104,
+          "isSecond": true
+        },
+        {
+          "vid": "aria_thompson",
+          "villageId": "village_0",
+          "day": 110,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 113,
+          "isSecond": true
+        },
+        {
+          "vid": "sanne_bakker",
+          "villageId": "village_spl_28_76708",
+          "day": 111,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 114,
+          "isSecond": true
+        },
+        {
+          "vid": "aria_thompson",
+          "villageId": "village_spl_28_58329",
+          "day": 117,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 120,
+          "isSecond": true
+        },
+        {
+          "vid": "sanne_bakker",
+          "villageId": "village_2",
+          "day": 123,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 126,
+          "isSecond": true
+        },
+        {
+          "vid": "sanne_bakker",
+          "villageId": "village_0",
+          "day": 126,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 129,
+          "isSecond": true
+        }
+      ],
+      "seasonedLinks": 0,
+      "polityEver": false
+    },
+    {
+      "seed": 99102,
+      "days": 58,
+      "gameDays": 58,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "instrumentErrors": 0,
+      "firstLink": {
+        "day": 17,
+        "other": "village_0",
+        "kind": null,
+        "primary": "haven",
+        "subordinate": "village_0"
+      },
+      "linkEvents": 8,
+      "stageCalls": 0,
+      "stageCallsStaged": 0,
+      "stagedTele": 4,
+      "acceptedTele": 0,
+      "refusedTele": 0,
+      "expiredTele": 4,
+      "linkTickCalls": 57,
+      "villages": {
+        "village_0": {
+          "id": "village_0",
+          "name": "Emberhold",
+          "firstKnownDay": 4,
+          "class": "staged-and-lost",
+          "stagings": 1,
+          "fates": [
+            "expired"
+          ],
+          "dominantGate": null,
+          "gateCounts": {},
+          "linkFormed": true,
+          "formedViaRaise": false
+        },
+        "village_1": {
+          "id": "village_1",
+          "name": "Stonebridge",
+          "firstKnownDay": 6,
+          "class": "never-staged",
+          "stagings": 0,
+          "fates": [],
+          "dominantGate": "no-build-standing",
+          "gateCounts": {
+            "no-build-standing": 95,
+            "talk-blocked": 6
+          },
+          "linkFormed": false,
+          "formedViaRaise": false
+        },
+        "village_spl_23_15921": {
+          "id": "village_spl_23_15921",
+          "name": "The Hungry Road",
+          "firstKnownDay": 25,
+          "class": "staged-and-lost",
+          "stagings": 3,
+          "fates": [
+            "expired",
+            "expired",
+            "expired"
+          ],
+          "dominantGate": null,
+          "gateCounts": {},
+          "linkFormed": false,
+          "formedViaRaise": false
+        }
+      },
+      "stagings": [
+        {
+          "vid": "gen_olvod9n",
+          "villageId": "village_0",
+          "day": 5,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": true,
+          "decisionDay": 8,
+          "isSecond": false
+        },
+        {
+          "vid": "boris_kowalski",
+          "villageId": "village_spl_23_15921",
+          "day": 31,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 34,
+          "isSecond": true
+        },
+        {
+          "vid": "brian_otieno",
+          "villageId": "village_spl_23_15921",
+          "day": 38,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 41,
+          "isSecond": true
+        },
+        {
+          "vid": "boris_kowalski",
+          "villageId": "village_spl_23_15921",
+          "day": 53,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 56,
+          "isSecond": true
+        }
+      ],
+      "reconcile": {
+        "ok": 4,
+        "bad": []
+      },
+      "census": {
+        "snapDays": 56,
+        "eligibleRaiserDays": 13,
+        "gateDays": {
+          "trust<20": 21,
+          "no-build-standing": 422,
+          "no-lore": 290,
+          "talk-blocked": 39,
+          "has-pending": 10,
+          "all-known-linked": 49,
+          "all-open-cooldown": 27
+        },
+        "lotteryPassEligible": 4,
+        "lotteryFailEligible": 9,
+        "eligibleRaiserDayList": [
+          4,
+          5,
+          31,
+          38,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          55,
+          56,
+          57
+        ]
+      },
+      "secondStagings": [
+        {
+          "vid": "boris_kowalski",
+          "villageId": "village_spl_23_15921",
+          "day": 31,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 34,
+          "isSecond": true
+        },
+        {
+          "vid": "brian_otieno",
+          "villageId": "village_spl_23_15921",
+          "day": 38,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 41,
+          "isSecond": true
+        },
+        {
+          "vid": "boris_kowalski",
+          "villageId": "village_spl_23_15921",
+          "day": 53,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 56,
+          "isSecond": true
+        }
+      ],
+      "seasonedLinks": 0,
+      "polityEver": false
+    },
+    {
+      "seed": 99103,
+      "days": 132,
+      "gameDays": 132,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "instrumentErrors": 0,
+      "firstLink": {
+        "day": 27,
+        "other": "village_1",
+        "kind": null,
+        "primary": "haven",
+        "subordinate": "village_1"
+      },
+      "linkEvents": 24,
+      "stageCalls": 0,
+      "stageCallsStaged": 0,
+      "stagedTele": 12,
+      "acceptedTele": 0,
+      "refusedTele": 0,
+      "expiredTele": 12,
+      "linkTickCalls": 132,
+      "villages": {
+        "village_1": {
+          "id": "village_1",
+          "name": "Stonebridge",
+          "firstKnownDay": 4,
+          "class": "staged-and-lost",
+          "stagings": 2,
+          "fates": [
+            "expired",
+            "expired"
+          ],
+          "dominantGate": null,
+          "gateCounts": {},
+          "linkFormed": true,
+          "formedViaRaise": false
+        },
+        "village_2": {
+          "id": "village_2",
+          "name": "Thornfield",
+          "firstKnownDay": 5,
+          "class": "staged-and-lost",
+          "stagings": 9,
+          "fates": [
+            "expired",
+            "expired",
+            "expired",
+            "expired",
+            "expired",
+            "expired",
+            "expired",
+            "expired",
+            "expired"
+          ],
+          "dominantGate": null,
+          "gateCounts": {},
+          "linkFormed": false,
+          "formedViaRaise": false
+        },
+        "village_0": {
+          "id": "village_0",
+          "name": "Emberhold",
+          "firstKnownDay": 25,
+          "class": "never-staged",
+          "stagings": 0,
+          "fates": [],
+          "dominantGate": "no-build-standing",
+          "gateCounts": {
+            "no-build-standing": 27,
+            "no-lore": 21,
+            "all-open-cooldown": 2,
+            "trust<20": 3,
+            "has-pending": 1,
+            "talk-blocked": 1
+          },
+          "linkFormed": false,
+          "formedViaRaise": false
+        },
+        "village_spl_30_9024": {
+          "id": "village_spl_30_9024",
+          "name": "The Red Table",
+          "firstKnownDay": 118,
+          "class": "staged-and-lost",
+          "stagings": 1,
+          "fates": [
+            "expired"
+          ],
+          "dominantGate": null,
+          "gateCounts": {},
+          "linkFormed": false,
+          "formedViaRaise": false
+        }
+      },
+      "stagings": [
+        {
+          "vid": "liam_davis",
+          "villageId": "village_1",
+          "day": 9,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": true,
+          "decisionDay": 12,
+          "isSecond": false
+        },
+        {
+          "vid": "liam_davis",
+          "villageId": "village_2",
+          "day": 12,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 15,
+          "isSecond": true
+        },
+        {
+          "vid": "liam_davis",
+          "villageId": "village_1",
+          "day": 26,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": true,
+          "decisionDay": 29,
+          "isSecond": false
+        },
+        {
+          "vid": "liam_davis",
+          "villageId": "village_2",
+          "day": 29,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 32,
+          "isSecond": true
+        },
+        {
+          "vid": "nathan_lee",
+          "villageId": "village_2",
+          "day": 33,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 36,
+          "isSecond": true
+        },
+        {
+          "vid": "liam_davis",
+          "villageId": "village_2",
+          "day": 53,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 56,
+          "isSecond": true
+        },
+        {
+          "vid": "nathan_lee",
+          "villageId": "village_2",
+          "day": 64,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 67,
+          "isSecond": true
+        },
+        {
+          "vid": "nathan_lee",
+          "villageId": "village_2",
+          "day": 83,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 86,
+          "isSecond": true
+        },
+        {
+          "vid": "nathan_lee",
+          "villageId": "village_2",
+          "day": 101,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 104,
+          "isSecond": true
+        },
+        {
+          "vid": "victor_lopez",
+          "villageId": "village_2",
+          "day": 111,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 114,
+          "isSecond": true
+        },
+        {
+          "vid": "rafael_torres",
+          "villageId": "village_2",
+          "day": 117,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 120,
+          "isSecond": true
+        },
+        {
+          "vid": "rafael_torres",
+          "villageId": "village_spl_30_9024",
+          "day": 123,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 126,
+          "isSecond": true
+        }
+      ],
+      "reconcile": {
+        "ok": 12,
+        "bad": []
+      },
+      "census": {
+        "snapDays": 131,
+        "eligibleRaiserDays": 42,
+        "gateDays": {
+          "trust<20": 147,
+          "no-build-standing": 700,
+          "no-lore": 414,
+          "talk-blocked": 41,
+          "has-pending": 35,
+          "all-open-cooldown": 89,
+          "all-known-linked": 20
+        },
+        "lotteryPassEligible": 16,
+        "lotteryFailEligible": 26,
+        "eligibleRaiserDayList": [
+          8,
+          9,
+          26,
+          33,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          70,
+          71,
+          81,
+          82,
+          83,
+          101,
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111,
+          117,
+          121,
+          122,
+          123
+        ]
+      },
+      "secondStagings": [
+        {
+          "vid": "liam_davis",
+          "villageId": "village_2",
+          "day": 12,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 15,
+          "isSecond": true
+        },
+        {
+          "vid": "liam_davis",
+          "villageId": "village_2",
+          "day": 29,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 32,
+          "isSecond": true
+        },
+        {
+          "vid": "nathan_lee",
+          "villageId": "village_2",
+          "day": 33,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 36,
+          "isSecond": true
+        },
+        {
+          "vid": "liam_davis",
+          "villageId": "village_2",
+          "day": 53,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 56,
+          "isSecond": true
+        },
+        {
+          "vid": "nathan_lee",
+          "villageId": "village_2",
+          "day": 64,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 67,
+          "isSecond": true
+        },
+        {
+          "vid": "nathan_lee",
+          "villageId": "village_2",
+          "day": 83,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 86,
+          "isSecond": true
+        },
+        {
+          "vid": "nathan_lee",
+          "villageId": "village_2",
+          "day": 101,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 104,
+          "isSecond": true
+        },
+        {
+          "vid": "victor_lopez",
+          "villageId": "village_2",
+          "day": 111,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 114,
+          "isSecond": true
+        },
+        {
+          "vid": "rafael_torres",
+          "villageId": "village_2",
+          "day": 117,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 120,
+          "isSecond": true
+        },
+        {
+          "vid": "rafael_torres",
+          "villageId": "village_spl_30_9024",
+          "day": 123,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 126,
+          "isSecond": true
+        }
+      ],
+      "seasonedLinks": 0,
+      "polityEver": false
+    },
+    {
+      "seed": 99104,
+      "days": 150,
+      "gameDays": 151,
+      "endReason": "survived",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "instrumentErrors": 0,
+      "firstLink": {
+        "day": 43,
+        "other": "village_0",
+        "kind": null,
+        "primary": "haven",
+        "subordinate": "village_0"
+      },
+      "linkEvents": 55,
+      "stageCalls": 0,
+      "stageCallsStaged": 0,
+      "stagedTele": 28,
+      "acceptedTele": 0,
+      "refusedTele": 0,
+      "expiredTele": 27,
+      "linkTickCalls": 150,
+      "villages": {
+        "village_2": {
+          "id": "village_2",
+          "name": "Thornfield",
+          "firstKnownDay": 4,
+          "class": "staged-and-lost",
+          "stagings": 8,
+          "fates": [
+            "expired",
+            "expired",
+            "expired",
+            "expired",
+            "expired",
+            "expired",
+            "expired",
+            "expired"
+          ],
+          "dominantGate": null,
+          "gateCounts": {},
+          "linkFormed": false,
+          "formedViaRaise": false
+        },
+        "village_1": {
+          "id": "village_1",
+          "name": "Stonebridge",
+          "firstKnownDay": 4,
+          "class": "staged-and-lost",
+          "stagings": 8,
+          "fates": [
+            "expired",
+            "expired",
+            "expired",
+            "expired",
+            "expired",
+            "expired",
+            "expired",
+            "expired"
+          ],
+          "dominantGate": null,
+          "gateCounts": {},
+          "linkFormed": false,
+          "formedViaRaise": false
+        },
+        "village_0": {
+          "id": "village_0",
+          "name": "Emberhold",
+          "firstKnownDay": 8,
+          "class": "staged-and-lost",
+          "stagings": 3,
+          "fates": [
+            "expired",
+            "expired",
+            "expired"
+          ],
+          "dominantGate": null,
+          "gateCounts": {},
+          "linkFormed": true,
+          "formedViaRaise": false
+        },
+        "village_spl_28_18471": {
+          "id": "village_spl_28_18471",
+          "name": "The Hungry Road",
+          "firstKnownDay": 36,
+          "class": "staged-and-lost",
+          "stagings": 4,
+          "fates": [
+            "expired",
+            "expired",
+            "expired",
+            "expired"
+          ],
+          "dominantGate": null,
+          "gateCounts": {},
+          "linkFormed": false,
+          "formedViaRaise": false
+        },
+        "village_spl_27_379": {
+          "id": "village_spl_27_379",
+          "name": "The Red Table",
+          "firstKnownDay": 58,
+          "class": "staged-and-lost",
+          "stagings": 5,
+          "fates": [
+            "expired",
+            "expired",
+            "expired",
+            "expired",
+            "pending-at-end"
+          ],
+          "dominantGate": null,
+          "gateCounts": {},
+          "linkFormed": false,
+          "formedViaRaise": false
+        }
+      },
+      "stagings": [
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_0",
+          "day": 11,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": true,
+          "decisionDay": 14,
+          "isSecond": false
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_1",
+          "day": 15,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 18,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_2",
+          "day": 18,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 21,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_0",
+          "day": 28,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": true,
+          "decisionDay": 31,
+          "isSecond": false
+        },
+        {
+          "vid": "gen_ts0a2qh",
+          "villageId": "village_0",
+          "day": 29,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": true,
+          "decisionDay": 32,
+          "isSecond": false
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_1",
+          "day": 33,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 36,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_2",
+          "day": 36,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 39,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_1",
+          "day": 53,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 56,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_2",
+          "day": 61,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 64,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_spl_28_18471",
+          "day": 64,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 67,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_vqdft5i",
+          "villageId": "village_spl_27_379",
+          "day": 68,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 71,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_1",
+          "day": 70,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 73,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_vqdft5i",
+          "villageId": "village_spl_27_379",
+          "day": 85,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 88,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_1",
+          "day": 87,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 90,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_2",
+          "day": 92,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 95,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_spl_28_18471",
+          "day": 96,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 99,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_1",
+          "day": 110,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 113,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_vqdft5i",
+          "villageId": "village_spl_27_379",
+          "day": 111,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 114,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_spl_28_18471",
+          "day": 117,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 120,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_2",
+          "day": 124,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 127,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_vqdft5i",
+          "villageId": "village_2",
+          "day": 126,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 129,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_1",
+          "day": 127,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 130,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_vqdft5i",
+          "villageId": "village_spl_27_379",
+          "day": 133,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 136,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_spl_28_18471",
+          "day": 137,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 140,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_vqdft5i",
+          "villageId": "village_1",
+          "day": 141,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 144,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_2",
+          "day": 144,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 147,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_vqdft5i",
+          "villageId": "village_2",
+          "day": 145,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 148,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_vqdft5i",
+          "villageId": "village_spl_27_379",
+          "day": 150,
+          "fate": "pending-at-end",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "isSecond": true
+        }
+      ],
+      "reconcile": {
+        "ok": 28,
+        "bad": []
+      },
+      "census": {
+        "snapDays": 149,
+        "eligibleRaiserDays": 69,
+        "gateDays": {
+          "no-build-standing": 1094,
+          "no-lore": 381,
+          "trust<20": 36,
+          "talk-blocked": 139,
+          "has-pending": 82,
+          "all-open-cooldown": 77,
+          "all-known-linked": 3
+        },
+        "lotteryPassEligible": 30,
+        "lotteryFailEligible": 39,
+        "eligibleRaiserDayList": [
+          11,
+          15,
+          28,
+          29,
+          32,
+          33,
+          50,
+          51,
+          52,
+          53,
+          57,
+          58,
+          59,
+          60,
+          61,
+          67,
+          68,
+          70,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          91,
+          92,
+          96,
+          102,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111,
+          114,
+          115,
+          116,
+          117,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          130,
+          131,
+          132,
+          133,
+          134,
+          135,
+          136,
+          137,
+          139,
+          140,
+          141,
+          142,
+          143,
+          144,
+          145,
+          148,
+          149,
+          150,
+          151
+        ]
+      },
+      "secondStagings": [
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_1",
+          "day": 15,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 18,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_2",
+          "day": 18,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 21,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_1",
+          "day": 33,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 36,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_2",
+          "day": 36,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 39,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_1",
+          "day": 53,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 56,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_2",
+          "day": 61,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 64,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_spl_28_18471",
+          "day": 64,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 67,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_vqdft5i",
+          "villageId": "village_spl_27_379",
+          "day": 68,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 71,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_1",
+          "day": 70,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 73,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_vqdft5i",
+          "villageId": "village_spl_27_379",
+          "day": 85,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 88,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_1",
+          "day": 87,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 90,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_2",
+          "day": 92,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 95,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_spl_28_18471",
+          "day": 96,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 99,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_1",
+          "day": 110,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 113,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_vqdft5i",
+          "villageId": "village_spl_27_379",
+          "day": 111,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 114,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_spl_28_18471",
+          "day": 117,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 120,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_2",
+          "day": 124,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 127,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_vqdft5i",
+          "villageId": "village_2",
+          "day": 126,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 129,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_1",
+          "day": 127,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 130,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_vqdft5i",
+          "villageId": "village_spl_27_379",
+          "day": 133,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 136,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_spl_28_18471",
+          "day": 137,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 140,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_vqdft5i",
+          "villageId": "village_1",
+          "day": 141,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 144,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_ciish5s",
+          "villageId": "village_2",
+          "day": 144,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 147,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_vqdft5i",
+          "villageId": "village_2",
+          "day": 145,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 148,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_vqdft5i",
+          "villageId": "village_spl_27_379",
+          "day": 150,
+          "fate": "pending-at-end",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "isSecond": true
+        }
+      ],
+      "seasonedLinks": 1,
+      "polityEver": false
+    },
+    {
+      "seed": 99105,
+      "days": 109,
+      "gameDays": 109,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 150,
+      "instrumentErrors": 0,
+      "firstLink": {
+        "day": 32,
+        "other": "village_0",
+        "kind": null,
+        "primary": "haven",
+        "subordinate": "village_0"
+      },
+      "linkEvents": 4,
+      "stageCalls": 0,
+      "stageCallsStaged": 0,
+      "stagedTele": 2,
+      "acceptedTele": 0,
+      "refusedTele": 0,
+      "expiredTele": 2,
+      "linkTickCalls": 109,
+      "villages": {
+        "village_2": {
+          "id": "village_2",
+          "name": "Thornfield",
+          "firstKnownDay": 4,
+          "class": "never-staged",
+          "stagings": 0,
+          "fates": [],
+          "dominantGate": "no-build-standing",
+          "gateCounts": {
+            "trust<20": 102,
+            "no-build-standing": 388,
+            "talk-blocked": 14
+          },
+          "linkFormed": false,
+          "formedViaRaise": false
+        },
+        "village_3": {
+          "id": "village_3",
+          "name": "Ashford",
+          "firstKnownDay": 8,
+          "class": "never-staged",
+          "stagings": 0,
+          "fates": [],
+          "dominantGate": "no-build-standing",
+          "gateCounts": {
+            "trust<20": 78,
+            "no-build-standing": 255,
+            "talk-blocked": 16
+          },
+          "linkFormed": false,
+          "formedViaRaise": false
+        },
+        "village_0": {
+          "id": "village_0",
+          "name": "Emberhold",
+          "firstKnownDay": 10,
+          "class": "never-staged",
+          "stagings": 0,
+          "fates": [],
+          "dominantGate": "no-build-standing",
+          "gateCounts": {
+            "no-build-standing": 242,
+            "no-lore": 174,
+            "trust<20": 47,
+            "talk-blocked": 27
+          },
+          "linkFormed": true,
+          "formedViaRaise": false
+        },
+        "village_1": {
+          "id": "village_1",
+          "name": "Stonebridge",
+          "firstKnownDay": 20,
+          "class": "never-staged",
+          "stagings": 0,
+          "fates": [],
+          "dominantGate": "no-build-standing",
+          "gateCounts": {
+            "no-build-standing": 129,
+            "talk-blocked": 4
+          },
+          "linkFormed": false,
+          "formedViaRaise": false
+        },
+        "village_spl_27_6058": {
+          "id": "village_spl_27_6058",
+          "name": "The Red Table",
+          "firstKnownDay": 28,
+          "class": "staged-and-lost",
+          "stagings": 2,
+          "fates": [
+            "expired",
+            "expired"
+          ],
+          "dominantGate": null,
+          "gateCounts": {},
+          "linkFormed": false,
+          "formedViaRaise": false
+        },
+        "village_spl_32_76428": {
+          "id": "village_spl_32_76428",
+          "name": "The Bloodied",
+          "firstKnownDay": 49,
+          "class": "never-staged",
+          "stagings": 0,
+          "fates": [],
+          "dominantGate": "no-build-standing",
+          "gateCounts": {
+            "trust<20": 51,
+            "no-build-standing": 102,
+            "talk-blocked": 6
+          },
+          "linkFormed": false,
+          "formedViaRaise": false
+        },
+        "village_spl_37_43660": {
+          "id": "village_spl_37_43660",
+          "name": "The Hungry Road",
+          "firstKnownDay": 53,
+          "class": "never-staged",
+          "stagings": 0,
+          "fates": [],
+          "dominantGate": "no-build-standing",
+          "gateCounts": {
+            "no-build-standing": 10,
+            "no-lore": 3,
+            "trust<20": 1
+          },
+          "linkFormed": false,
+          "formedViaRaise": false
+        }
+      },
+      "stagings": [
+        {
+          "vid": "gen_433xz3d",
+          "villageId": "village_spl_27_6058",
+          "day": 32,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 35,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_433xz3d",
+          "villageId": "village_spl_27_6058",
+          "day": 53,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 56,
+          "isSecond": true
+        }
+      ],
+      "reconcile": {
+        "ok": 2,
+        "bad": []
+      },
+      "census": {
+        "snapDays": 108,
+        "eligibleRaiserDays": 9,
+        "gateDays": {
+          "no-build-standing": 837,
+          "no-lore": 398,
+          "trust<20": 162,
+          "talk-blocked": 71,
+          "has-pending": 3,
+          "all-open-cooldown": 13
+        },
+        "lotteryPassEligible": 2,
+        "lotteryFailEligible": 7,
+        "eligibleRaiserDayList": [
+          32,
+          49,
+          50,
+          51,
+          52,
+          53,
+          108,
+          109,
+          109
+        ]
+      },
+      "secondStagings": [
+        {
+          "vid": "gen_433xz3d",
+          "villageId": "village_spl_27_6058",
+          "day": 32,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 35,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_433xz3d",
+          "villageId": "village_spl_27_6058",
+          "day": 53,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 56,
+          "isSecond": true
+        }
+      ],
+      "seasonedLinks": 0,
+      "polityEver": false
+    },
+    {
+      "seed": 99106,
+      "days": 87,
+      "gameDays": 88,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "instrumentErrors": 0,
+      "firstLink": {
+        "day": 27,
+        "other": "village_0",
+        "kind": null,
+        "primary": "haven",
+        "subordinate": "village_0"
+      },
+      "linkEvents": 10,
+      "stageCalls": 0,
+      "stageCallsStaged": 0,
+      "stagedTele": 5,
+      "acceptedTele": 0,
+      "refusedTele": 0,
+      "expiredTele": 5,
+      "linkTickCalls": 87,
+      "villages": {
+        "village_0": {
+          "id": "village_0",
+          "name": "Emberhold",
+          "firstKnownDay": 4,
+          "class": "never-staged",
+          "stagings": 0,
+          "fates": [],
+          "dominantGate": "no-build-standing",
+          "gateCounts": {
+            "no-build-standing": 30,
+            "talk-blocked": 3
+          },
+          "linkFormed": true,
+          "formedViaRaise": false
+        },
+        "village_2": {
+          "id": "village_2",
+          "name": "Thornfield",
+          "firstKnownDay": 4,
+          "class": "staged-and-lost",
+          "stagings": 4,
+          "fates": [
+            "expired",
+            "expired",
+            "expired",
+            "expired"
+          ],
+          "dominantGate": null,
+          "gateCounts": {},
+          "linkFormed": false,
+          "formedViaRaise": false
+        },
+        "village_1": {
+          "id": "village_1",
+          "name": "Stonebridge",
+          "firstKnownDay": 5,
+          "class": "staged-and-lost",
+          "stagings": 1,
+          "fates": [
+            "expired"
+          ],
+          "dominantGate": null,
+          "gateCounts": {},
+          "linkFormed": false,
+          "formedViaRaise": false
+        }
+      },
+      "stagings": [
+        {
+          "vid": "gen_k7i6yqz",
+          "villageId": "village_2",
+          "day": 9,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 12,
+          "isSecond": true
+        },
+        {
+          "vid": "amina_diallo",
+          "villageId": "village_2",
+          "day": 18,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 21,
+          "isSecond": true
+        },
+        {
+          "vid": "leo_martin",
+          "villageId": "village_2",
+          "day": 26,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 29,
+          "isSecond": true
+        },
+        {
+          "vid": "amina_diallo",
+          "villageId": "village_2",
+          "day": 39,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 42,
+          "isSecond": true
+        },
+        {
+          "vid": "amina_diallo",
+          "villageId": "village_1",
+          "day": 47,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 50,
+          "isSecond": true
+        }
+      ],
+      "reconcile": {
+        "ok": 5,
+        "bad": []
+      },
+      "census": {
+        "snapDays": 86,
+        "eligibleRaiserDays": 16,
+        "gateDays": {
+          "trust<20": 37,
+          "no-build-standing": 415,
+          "no-lore": 211,
+          "talk-blocked": 31,
+          "has-pending": 13,
+          "all-open-cooldown": 30,
+          "all-known-linked": 21
+        },
+        "lotteryPassEligible": 11,
+        "lotteryFailEligible": 5,
+        "eligibleRaiserDayList": [
+          9,
+          16,
+          17,
+          18,
+          25,
+          26,
+          35,
+          36,
+          37,
+          38,
+          39,
+          43,
+          44,
+          45,
+          46,
+          47
+        ]
+      },
+      "secondStagings": [
+        {
+          "vid": "gen_k7i6yqz",
+          "villageId": "village_2",
+          "day": 9,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 12,
+          "isSecond": true
+        },
+        {
+          "vid": "amina_diallo",
+          "villageId": "village_2",
+          "day": 18,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 21,
+          "isSecond": true
+        },
+        {
+          "vid": "leo_martin",
+          "villageId": "village_2",
+          "day": 26,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 29,
+          "isSecond": true
+        },
+        {
+          "vid": "amina_diallo",
+          "villageId": "village_2",
+          "day": 39,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 42,
+          "isSecond": true
+        },
+        {
+          "vid": "amina_diallo",
+          "villageId": "village_1",
+          "day": 47,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 50,
+          "isSecond": true
+        }
+      ],
+      "seasonedLinks": 0,
+      "polityEver": false
+    },
+    {
+      "seed": 99107,
+      "days": 150,
+      "gameDays": 151,
+      "endReason": "survived",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "instrumentErrors": 0,
+      "firstLink": {
+        "day": 47,
+        "other": "village_0",
+        "kind": null,
+        "primary": "haven",
+        "subordinate": "village_0"
+      },
+      "linkEvents": 47,
+      "stageCalls": 0,
+      "stageCallsStaged": 0,
+      "stagedTele": 24,
+      "acceptedTele": 0,
+      "refusedTele": 0,
+      "expiredTele": 23,
+      "linkTickCalls": 150,
+      "villages": {
+        "village_3": {
+          "id": "village_3",
+          "name": "Ashford",
+          "firstKnownDay": 4,
+          "class": "staged-and-lost",
+          "stagings": 10,
+          "fates": [
+            "expired",
+            "expired",
+            "expired",
+            "expired",
+            "expired",
+            "expired",
+            "expired",
+            "expired",
+            "expired",
+            "expired"
+          ],
+          "dominantGate": null,
+          "gateCounts": {},
+          "linkFormed": false,
+          "formedViaRaise": false
+        },
+        "village_0": {
+          "id": "village_0",
+          "name": "Emberhold",
+          "firstKnownDay": 4,
+          "class": "staged-and-lost",
+          "stagings": 2,
+          "fates": [
+            "expired",
+            "expired"
+          ],
+          "dominantGate": null,
+          "gateCounts": {},
+          "linkFormed": true,
+          "formedViaRaise": false
+        },
+        "village_spl_23_26013": {
+          "id": "village_spl_23_26013",
+          "name": "The Hungry Road",
+          "firstKnownDay": 32,
+          "class": "staged-and-lost",
+          "stagings": 6,
+          "fates": [
+            "expired",
+            "expired",
+            "expired",
+            "expired",
+            "expired",
+            "expired"
+          ],
+          "dominantGate": null,
+          "gateCounts": {},
+          "linkFormed": false,
+          "formedViaRaise": false
+        },
+        "village_1": {
+          "id": "village_1",
+          "name": "Stonebridge",
+          "firstKnownDay": 78,
+          "class": "staged-and-lost",
+          "stagings": 3,
+          "fates": [
+            "expired",
+            "expired",
+            "pending-at-end"
+          ],
+          "dominantGate": null,
+          "gateCounts": {},
+          "linkFormed": false,
+          "formedViaRaise": false
+        },
+        "village_spl_34_33813": {
+          "id": "village_spl_34_33813",
+          "name": "The Red Table II",
+          "firstKnownDay": 82,
+          "class": "staged-and-lost",
+          "stagings": 3,
+          "fates": [
+            "expired",
+            "expired",
+            "expired"
+          ],
+          "dominantGate": null,
+          "gateCounts": {},
+          "linkFormed": false,
+          "formedViaRaise": false
+        },
+        "village_2": {
+          "id": "village_2",
+          "name": "Thornfield",
+          "firstKnownDay": 127,
+          "class": "never-staged",
+          "stagings": 0,
+          "fates": [],
+          "dominantGate": "no-build-standing",
+          "gateCounts": {
+            "no-build-standing": 22
+          },
+          "linkFormed": false,
+          "formedViaRaise": false
+        }
+      },
+      "stagings": [
+        {
+          "vid": "gen_owyg07b",
+          "villageId": "village_0",
+          "day": 15,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": true,
+          "decisionDay": 18,
+          "isSecond": false
+        },
+        {
+          "vid": "benoit_lambert",
+          "villageId": "village_3",
+          "day": 25,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 28,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_o1rzo6o",
+          "villageId": "village_3",
+          "day": 27,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 30,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_owyg07b",
+          "villageId": "village_3",
+          "day": 33,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 36,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_owyg07b",
+          "villageId": "village_0",
+          "day": 36,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": true,
+          "decisionDay": 39,
+          "isSecond": false
+        },
+        {
+          "vid": "gen_o1rzo6o",
+          "villageId": "village_spl_23_26013",
+          "day": 43,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 46,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_o1rzo6o",
+          "villageId": "village_3",
+          "day": 47,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 50,
+          "isSecond": true
+        },
+        {
+          "vid": "benoit_lambert",
+          "villageId": "village_3",
+          "day": 53,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 56,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_owyg07b",
+          "villageId": "village_3",
+          "day": 64,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 67,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_o1rzo6o",
+          "villageId": "village_spl_23_26013",
+          "day": 71,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 74,
+          "isSecond": true
+        },
+        {
+          "vid": "nikolai_volkov",
+          "villageId": "village_spl_34_33813",
+          "day": 83,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 86,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_o1rzo6o",
+          "villageId": "village_3",
+          "day": 84,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 87,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_o1rzo6o",
+          "villageId": "village_1",
+          "day": 92,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 95,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_o1rzo6o",
+          "villageId": "village_spl_23_26013",
+          "day": 96,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 99,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_o1rzo6o",
+          "villageId": "village_3",
+          "day": 101,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 104,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_o1rzo6o",
+          "villageId": "village_1",
+          "day": 110,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 113,
+          "isSecond": true
+        },
+        {
+          "vid": "nikolai_volkov",
+          "villageId": "village_spl_34_33813",
+          "day": 111,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 114,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_o1rzo6o",
+          "villageId": "village_spl_23_26013",
+          "day": 117,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 120,
+          "isSecond": true
+        },
+        {
+          "vid": "nikolai_volkov",
+          "villageId": "village_3",
+          "day": 123,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 126,
+          "isSecond": true
+        },
+        {
+          "vid": "nikolai_volkov",
+          "villageId": "village_spl_23_26013",
+          "day": 126,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 129,
+          "isSecond": true
+        },
+        {
+          "vid": "nikolai_volkov",
+          "villageId": "village_spl_34_33813",
+          "day": 133,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 136,
+          "isSecond": true
+        },
+        {
+          "vid": "nikolai_volkov",
+          "villageId": "village_3",
+          "day": 141,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 144,
+          "isSecond": true
+        },
+        {
+          "vid": "nikolai_volkov",
+          "villageId": "village_spl_23_26013",
+          "day": 144,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 147,
+          "isSecond": true
+        },
+        {
+          "vid": "nikolai_volkov",
+          "villageId": "village_1",
+          "day": 148,
+          "fate": "pending-at-end",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "isSecond": true
+        }
+      ],
+      "reconcile": {
+        "ok": 24,
+        "bad": []
+      },
+      "census": {
+        "snapDays": 149,
+        "eligibleRaiserDays": 80,
+        "gateDays": {
+          "trust<20": 49,
+          "no-build-standing": 949,
+          "no-lore": 290,
+          "talk-blocked": 88,
+          "has-pending": 69,
+          "all-open-cooldown": 97,
+          "all-known-linked": 43
+        },
+        "lotteryPassEligible": 31,
+        "lotteryFailEligible": 49,
+        "eligibleRaiserDayList": [
+          14,
+          15,
+          25,
+          26,
+          27,
+          31,
+          32,
+          33,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          70,
+          71,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          88,
+          89,
+          90,
+          91,
+          92,
+          96,
+          100,
+          101,
+          102,
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111,
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          131,
+          132,
+          133,
+          140,
+          141,
+          148
+        ]
+      },
+      "secondStagings": [
+        {
+          "vid": "benoit_lambert",
+          "villageId": "village_3",
+          "day": 25,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 28,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_o1rzo6o",
+          "villageId": "village_3",
+          "day": 27,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 30,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_owyg07b",
+          "villageId": "village_3",
+          "day": 33,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 36,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_o1rzo6o",
+          "villageId": "village_spl_23_26013",
+          "day": 43,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 46,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_o1rzo6o",
+          "villageId": "village_3",
+          "day": 47,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 50,
+          "isSecond": true
+        },
+        {
+          "vid": "benoit_lambert",
+          "villageId": "village_3",
+          "day": 53,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 56,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_owyg07b",
+          "villageId": "village_3",
+          "day": 64,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 67,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_o1rzo6o",
+          "villageId": "village_spl_23_26013",
+          "day": 71,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 74,
+          "isSecond": true
+        },
+        {
+          "vid": "nikolai_volkov",
+          "villageId": "village_spl_34_33813",
+          "day": 83,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 86,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_o1rzo6o",
+          "villageId": "village_3",
+          "day": 84,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 87,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_o1rzo6o",
+          "villageId": "village_1",
+          "day": 92,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 95,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_o1rzo6o",
+          "villageId": "village_spl_23_26013",
+          "day": 96,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 99,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_o1rzo6o",
+          "villageId": "village_3",
+          "day": 101,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 104,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_o1rzo6o",
+          "villageId": "village_1",
+          "day": 110,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 113,
+          "isSecond": true
+        },
+        {
+          "vid": "nikolai_volkov",
+          "villageId": "village_spl_34_33813",
+          "day": 111,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 114,
+          "isSecond": true
+        },
+        {
+          "vid": "gen_o1rzo6o",
+          "villageId": "village_spl_23_26013",
+          "day": 117,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 120,
+          "isSecond": true
+        },
+        {
+          "vid": "nikolai_volkov",
+          "villageId": "village_3",
+          "day": 123,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 126,
+          "isSecond": true
+        },
+        {
+          "vid": "nikolai_volkov",
+          "villageId": "village_spl_23_26013",
+          "day": 126,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 129,
+          "isSecond": true
+        },
+        {
+          "vid": "nikolai_volkov",
+          "villageId": "village_spl_34_33813",
+          "day": 133,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 136,
+          "isSecond": true
+        },
+        {
+          "vid": "nikolai_volkov",
+          "villageId": "village_3",
+          "day": 141,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 144,
+          "isSecond": true
+        },
+        {
+          "vid": "nikolai_volkov",
+          "villageId": "village_spl_23_26013",
+          "day": 144,
+          "fate": "expired",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "decisionDay": 147,
+          "isSecond": true
+        },
+        {
+          "vid": "nikolai_volkov",
+          "villageId": "village_1",
+          "day": 148,
+          "fate": "pending-at-end",
+          "proposeOutcome": null,
+          "linkFormedAfter": false,
+          "isSecond": true
+        }
+      ],
+      "seasonedLinks": 0,
+      "polityEver": false
+    },
+    {
+      "seed": 99108,
+      "days": 62,
+      "gameDays": 62,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 3,
+      "standing": 25,
+      "instrumentErrors": 0,
+      "firstLink": {
+        "day": 41,
+        "other": "village_0",
+        "kind": null,
+        "primary": "haven",
+        "subordinate": "village_0"
+      },
+      "linkEvents": 0,
+      "stageCalls": 0,
+      "stageCallsStaged": 0,
+      "stagedTele": 0,
+      "acceptedTele": 0,
+      "refusedTele": 0,
+      "expiredTele": 0,
+      "linkTickCalls": 62,
+      "villages": {
+        "village_1": {
+          "id": "village_1",
+          "name": "Stonebridge",
+          "firstKnownDay": 4,
+          "class": "never-staged",
+          "stagings": 0,
+          "fates": [],
+          "dominantGate": "no-build-standing",
+          "gateCounts": {
+            "no-build-standing": 76,
+            "trust<20": 2,
+            "talk-blocked": 9
+          },
+          "linkFormed": false,
+          "formedViaRaise": false
+        },
+        "village_0": {
+          "id": "village_0",
+          "name": "Emberhold",
+          "firstKnownDay": 15,
+          "class": "never-staged",
+          "stagings": 0,
+          "fates": [],
+          "dominantGate": "no-build-standing",
+          "gateCounts": {
+            "no-build-standing": 20,
+            "no-lore": 16,
+            "talk-blocked": 2,
+            "trust<20": 2
+          },
+          "linkFormed": true,
+          "formedViaRaise": false
+        },
+        "village_2": {
+          "id": "village_2",
+          "name": "Thornfield",
+          "firstKnownDay": 15,
+          "class": "never-staged",
+          "stagings": 0,
+          "fates": [],
+          "dominantGate": "no-build-standing",
+          "gateCounts": {
+            "no-build-standing": 20,
+            "no-lore": 16,
+            "talk-blocked": 2,
+            "trust<20": 2
+          },
+          "linkFormed": false,
+          "formedViaRaise": false
+        }
+      },
+      "stagings": [],
+      "reconcile": {
+        "ok": 0,
+        "bad": []
+      },
+      "census": {
+        "snapDays": 61,
+        "eligibleRaiserDays": 0,
+        "gateDays": {
+          "trust<20": 77,
+          "no-build-standing": 458,
+          "no-lore": 359,
+          "talk-blocked": 30,
+          "all-known-linked": 31
+        },
+        "lotteryPassEligible": 0,
+        "lotteryFailEligible": 0,
+        "eligibleRaiserDayList": []
+      },
+      "secondStagings": [],
+      "seasonedLinks": 0,
+      "polityEver": false
+    }
+  ]
+}
