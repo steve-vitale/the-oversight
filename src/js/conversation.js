@@ -4578,7 +4578,7 @@
       queueTraderIntro(c);
       const menuKey = JSON.stringify([c.spokenBeat, c.thread, c.depth, c.choosingSubject, c.windingDown,
         c.pendingQ, c.reactiveQ, c.genericQ, c.pendingTrade, c.pendingHawk, c.heldBeats, c.spent,
-        c.want?.id, c.want?.stage, c.want?.resolution, c.want?.favorExplained, this.state.scholar.day,
+        c.want?.id, c.want?.stage, c.want?.resolution, c.want?.favorExplained, c.wantAfterSecret, this.state.scholar.day,
         this.state.village.trust?.[vid], c.escalated,
         this.convoFavorAction?.(vid, c.want?.favor || this.convoGetFavor?.(vid))]);
       if (c.replyMenu?.key === menuKey) {
@@ -5010,6 +5010,17 @@
           }
         } catch (e) {}
       }
+      // WANT-AFTER-SECRET (journey-deepening r124): the want rides the
+      // post-answer menu too — not only the subject menu — so a confession
+      // doesn't bury the want it displaced. Only the want item rides here;
+      // threads/memories/events keep their own surfacing rules.
+      if (c.wantAfterSecret && !onThread && !suppressPivot && !reactiveDef && !gqActive) {
+        try {
+          const alive = (typeof this.convoWhatsAlive === 'function') ? this.convoWhatsAlive(vid) : [];
+          const w = alive.find(a => a && a.kind === 'want');
+          if (w && choices.length < MAXC && !choices.some(ch => ch && ch.id === w.id)) choices.push(w);
+        } catch (e) { /* menu stays as built */ }
+      }
       // BEAT MATRIX (dialog rethink Phase 1, Steve 2026-10-08): the live
       // beat+topic menu from convo-beats.js. Tried before the topic-assembly
       // fallback below; returns null when the fallback should run. This
@@ -5028,11 +5039,19 @@
           // Alive items ride along: prepend them to the beat menu so the
           // conversation leads with what's alive, not just what's next.
           try {
-            const alive = (typeof this.convoWhatsAlive === 'function') && c.choosingSubject && !onThread && !suppressPivot
+            const alive = (typeof this.convoWhatsAlive === 'function') && (c.choosingSubject || c.wantAfterSecret) && !onThread && !suppressPivot
               ? this.convoWhatsAlive(vid) : [];
             const pre = [];
+            // WANT-AFTER-SECRET (journey-deepening r124): the want leads
+            // the prelude — it is the thing the confession displaced, so
+            // it must not wait behind threads and memories for a slot.
+            if (c.wantAfterSecret) {
+              const w = (alive || []).find(a => a && a.kind === 'want');
+              if (w && !beatMenu.some(ch => ch && ch.id === w.id)) pre.push(w);
+            }
             for (const a of (alive || [])) {
               if (pre.length >= 2) break;
+              if (pre.some(ch => ch.id === a.id)) continue;
               if (!beatMenu.some(ch => ch && ch.id === a.id)) pre.push(a);
             }
             // Preserve every offered choice for the final pager. The normal
@@ -6250,6 +6269,17 @@
         // the confidence once, then the flag clears. Deflect closes
         // the door: no follow-up.
         if (sKind !== 'deflect') c.secretFollowup = this.convoSecretFollowupLine(secretText);
+        // WANT-AFTER-SECRET (journey-deepening r124 2026-11-09): the
+        // confession took the opening the want would have owned — panel
+        // 6/6 answered secrets, 0/6 surfaced the open want. Arm the want
+        // on the post-answer menu so the player can engage it; the sitting
+        // must not bury it. The flag clears when the want is picked or the
+        // sitting ends — never on an unrelated pick, so the want stays
+        // live for the rest of the sitting (unlike secretFollowup, which
+        // is a single line tied to the immediate moment).
+        if (sKind !== 'deflect' && c.want && c.want.id && c.want.id !== 'none' && (c.want.stage || 0) < 2) {
+          c.wantAfterSecret = true;
+        }
         c.thread = null; c.depth = 0;
         answeredReactive = true;
         // TALK: FALSE (real act): answering a once-per-life confidence is
@@ -6489,6 +6519,9 @@
             }
             if (c.want) c.want.stage = Math.max(c.want.stage || 0, 1);
           } catch (e) {}
+          // WANT-AFTER-SECRET (journey-deepening r124): the want surfaced —
+          // its job on this sitting's menu is done.
+          c.wantAfterSecret = null;
           this.resolveConsequence(vid, { trust: 1, temper: 'kind', name: 'alive:want' });
           done(wline || '"Okay. Here\u2019s the thing \u2014"', '"Is there something you need? Really."');
         } else if (akind === 'event') {
@@ -7356,7 +7389,7 @@
       // trail-offs). A person says goodbye once.
       const goodbyeSaid = !!c.windingDown;
       c.active = false; c.over = true; c.thread = null; c.pendingQ = null;
-      c.reactiveQ = null;
+      c.reactiveQ = null; c.wantAfterSecret = null;
       // UNIFIED TRACKS (2026-10-14): a held conversation (a real exchange,
       // not a hello) is social work — the deed that feeds a villager's social
       // track feeds yours. Per-day capped in the deed table.

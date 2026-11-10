@@ -1295,7 +1295,14 @@ function makePolicy() {
 
 // ---- conversation driver (r2, engage-first, 8 turns) ----
 const ENGAGE = ['dlg:help', 'dlg:commit', 'dlg:heed', 'dlg:stay', 'dlg:comfort', 'dlg:empathize', 'dlg:more', 'dlg:details', 'dlg:askwhy',
-  'gq:open:take', 'gq:open:unsure', 'agency:ask_field', 'alive:want:share_news', 'alive:want:ask_favor', 'alive:want:warn_you', 'alive:want:seek_comfort', 'alive:want:curious'];
+  'gq:open:take', 'gq:open:unsure', 'agency:ask_field', 'alive:want:share_news', 'alive:want:ask_favor', 'alive:want:warn_you', 'alive:want:seek_comfort', 'alive:want:curious',
+  // R124 WANT-AFTER-SECRET (driver-only): the same engage-first shape for
+  // the wants the post-secret menu now offers — seek_taken / repay /
+  // pocketed were missing here, so a competent player would never have
+  // engaged them even when offered (Heidi 44007 d45: alive:want:repay
+  // offered, bot picked gossip). The fix surfaces the want; the driver
+  // must engage it, or the after-panel can't show establishment.
+  'alive:want:seek_taken', 'alive:want:repay', 'alive:want:pocketed'];
 const ENGAGE2 = ['goon', 'ask:gossip', 'ask:lately', 'ask:personal', 'alive:event:mourning', 'ask:fears', 'ask:you', 'teach'];
 const DEFLECT = ['dlg:cant', 'gq:open:honest_pass'];
 // R92 CHOICE ROTATION (r90 blank 1): the r90 capture pressed "Tell me

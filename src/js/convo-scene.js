@@ -439,6 +439,15 @@
             curious: '"What do you want to know? Ask me anything."',
             repay: '"I owe you. Let me make it right — what do you need?"',
             just_company: '"Want some company? No agenda."',
+            // WANT-AFTER-SECRET (journey-deepening r124 2026-11-09): these
+            // four wants had no menu question, so they could never surface
+            // as a menu item — only by owning the opening. A secret sitting
+            // with a seek_taken or pocketed want could never offer it at
+            // all (panel: 2 of 6 secret wants were seek_taken / pocketed).
+            seek_taken: '"About your taken kin — what do you need?"',
+            seek_comfort: '"You look like you need someone. I\'m here."',
+            pocketed: '"That thing you set aside — want to pick it back up?"',
+            warn_you: '"You look like you\'ve got something to warn me about."',
           };
           const wq = WANT_Q[scene.want.id];
           if (wq) {
