@@ -28,7 +28,10 @@
 // rules:
 //   - namespace_bridge: published to window.S AND global.Scattering (code: bridge below, 2026-10-09 — game.js consumes Scattering; window.S-only publish silently disabled autoEquip everywhere).
 //   - explicit_slots: melee, ranged, head, torso, legs, hands, shoes (1 each) + acc1-4 (non-exclusive). Every equipable item has exactly one assigned slot (code: slotForItem, Steve 2026-10-07)
-//   - weapon_split: range > 1 or bow/sling -> ranged slot; everything else -> melee (code: isRangedWeapon, slotForItem, Steve 2026-10-07)
+//   - weapon_split: range > 1 or bow/sling -> ranged slot; everything else -> melee (code: isRangedWeapon, slotForItem, Steve 2026-10-07). MELEE-FIRST FALLBACK (sim-meleefirst-b, 2026-11-10): a spear (melee type, range > 1) takes the MELEE slot when its carrier also holds a real ranged weapon (weapon.type 'ranged'), so the bow's opening volley fires; otherwise it keeps the ranged slot and the old fold-in (code: isFallbackSpear, carriesRealRanged, autoEquip + equipScore opts.meleeFirstSpears). isRangedWeapon/slotForItem stay context-free.
+//   - isFallbackSpear(def) -> boolean (melee-type weapon with range > 1: the spear shape)
+//   - isRealRangedWeapon(def) -> boolean (weapon.type 'ranged': bow/crossbow/sling...)
+//   - carriesRealRanged(ids, itemDefs) -> boolean (inventory holds a real ranged weapon)
 //   - full_body_blocks: full-body sets (def.fullBody or FULL_SETS) equip to torso and block head/legs/shoes only — hands and accessories stay usable. Blocked slots grey out in UI (code: blockedSlots, Steve 2026-10-07)
 //   - keepsakes_in_accessory_slots: keepsakes (class sentimental, no weapon/armor stats) fit no main slot — they wear in acc1-acc4 and compete with accessory gear for the same four (code: slotForItem, keepsakes.js equipAccessory; Steve 2026-10-14 STEVE-ANSWERS "Sentimental items need to compete with accessory gear for the extra slots available"). Bond grows ONLY while worn; in the pack a keepsake is dormant — memory intact, no growth (code: keepsakes.js keepsakeGrow, game.js accrueRelicBond)
 //   - one_per_slot: each main slot holds exactly one item (code: autoEquip, Steve 2026-10-06)
@@ -136,12 +139,41 @@
     return 'other';
   }
   // isRangedWeapon: range > 1 or bow/sling in the name. Everything else is melee.
+  // CONTEXT-FREE by design — UI, villager-build, contests and the policy
+  // read it without knowing what else the carrier holds. The melee-first
+  // fallback (below) lives in autoEquip/equipScore, not here.
   function isRangedWeapon(def) {
     if (!def || !def.weapon) return false;
     if (def.class !== 'weapon' && def.class !== 'sentimental') return false;
     if ((def.weapon.range || 1) > 1) return true;
     const s = String(def.name || '').toLowerCase() + ' ' + String(def.id || '').toLowerCase();
     return /bow|sling|rifle|pistol|crossbow/.test(s);
+  }
+  // isFallbackSpear: the spear shape — a melee-type weapon with reach
+  // (range > 1). On current data exactly the 5 spears/lance (hunting,
+  // fire-hardened, shard, starfall, godslayer). A spear is a melee weapon
+  // that happens to reach; the old slot rule filed it as ranged.
+  function isFallbackSpear(def) {
+    if (!def || !def.weapon) return false;
+    if (def.class !== 'weapon' && def.class !== 'sentimental') return false;
+    return def.weapon.type === 'melee' && (def.weapon.range || 1) > 1;
+  }
+  // isRealRangedWeapon: a weapon whose DATA type is 'ranged' — a bow,
+  // crossbow, sling, searcaster. (A spear is type 'melee' even at range 2.)
+  function isRealRangedWeapon(def) {
+    if (!def || !def.weapon) return false;
+    if (def.class !== 'weapon' && def.class !== 'sentimental') return false;
+    return def.weapon.type === 'ranged';
+  }
+  // carriesRealRanged: does this inventory hold a real ranged weapon?
+  // `ids` are item ids (plain strings); itemDefs is the data table.
+  function carriesRealRanged(ids, itemDefs) {
+    if (!ids || !itemDefs) return false;
+    for (let i = 0; i < ids.length; i++) {
+      const def = defOf(itemDefs, ids[i]);
+      if (def && isRealRangedWeapon(def)) return true;
+    }
+    return false;
   }
   function armorTier(protection) {
     if (protection >= 25) return 'heavy';
@@ -237,7 +269,14 @@
   }
 
   // Score an item for a slot. Higher = better pick.
-  function equipScore(itemId, slot, personality, itemDefs) {
+  // opts.meleeFirstSpears (sim-meleefirst-b, 2026-11-10): when true, a
+  // fallback spear scores as MELEE instead of ranged — the carrier also
+  // holds a real ranged weapon, so the spear takes the melee slot and
+  // the bow takes the ranged slot (volley restored). When false/absent,
+  // classification is exactly as before (spear scores ranged, old
+  // fold-in preserved). All existing callers pass 4 args; the 5th is
+  // optional and backward compatible.
+  function equipScore(itemId, slot, personality, itemDefs, opts) {
     const def = defOf(itemDefs, itemId);
     if (!def) return -1;
     if (BODY_SLOTS.includes(slot) && (def.slot === 'acc' || ACC_SLOTS.includes(def.slot))) return -1;
@@ -255,7 +294,9 @@
       // bare hands, and it still loses to every real weapon.)
       if (!def.weapon) return -1;
       const wantRanged = slot === 'ranged';
-      if (isRangedWeapon(def) !== wantRanged) return -1;
+      let ranged = isRangedWeapon(def);
+      if (opts && opts.meleeFirstSpears && isFallbackSpear(def)) ranged = false;
+      if (ranged !== wantRanged) return -1;
       score = (def.weapon.bonus || 0) * 10;
       if (temp === 'bold' || temp === 'fierce') score += (def.weapon.bonus || 0) * 3;
       if (sharing === 'showoff') score += (def.bondThresholds ? 15 : 0);
@@ -372,10 +413,17 @@
     const ids = (v.items || []).map(itemIdOf).filter(Boolean);
 
     // Weapons: best melee and best ranged independently.
+    // MELEE-FIRST FALLBACK (sim-meleefirst-b, 2026-11-10): a spear takes
+    // the melee slot when the fighter also carries a real ranged weapon
+    // (the bow then takes the ranged slot and its volley fires); without
+    // one the spear keeps the ranged slot and the old fold-in. The
+    // decision reads the fighter's OWN inventory only, never a roster.
+    const hasRealRanged = carriesRealRanged(ids, itemDefs);
+    const weaponOpts = hasRealRanged ? { meleeFirstSpears: true } : null;
     for (const wslot of ['melee', 'ranged']) {
       let bestW = null, bestWS = -1;
       for (const id of ids) {
-        const s = equipScore(id, wslot, personality, itemDefs);
+        const s = equipScore(id, wslot, personality, itemDefs, weaponOpts);
         if (s > bestWS) { bestWS = s; bestW = id; }
       }
       if (bestW && bestWS > 0) {
@@ -501,12 +549,19 @@
     move('misc1', 'acc1'); move('misc2', 'acc2'); move('misc3', 'acc3');
     if (eq.weapon && !eq.melee && !eq.ranged) {
       // Ranged weapons migrate to ranged; everything else to melee.
+      // MELEE-FIRST FALLBACK (sim-meleefirst-b, 2026-11-10): a migrating
+      // spear goes to MELEE when the person carries a real ranged weapon
+      // (in their own items), else to ranged as before — the old fold-in
+      // is preserved for spear-only saves.
       let ranged = false;
       try {
         const G = (globalThis.Scattering || {}).Game; // no global Game: it lives on Scattering
         const items = (G && G.data && G.data.items) || [];
         const def = items.find(i => i.id === eq.weapon.itemId);
-        if (def && ((def.weapon && def.weapon.range > 1) || /bow|sling/i.test(def.name || ''))) ranged = true;
+        if (def && isFallbackSpear(def)) {
+          const ids = (person.items || []).map(itemIdOf).filter(Boolean);
+          ranged = !carriesRealRanged(ids, items);
+        } else if (def && ((def.weapon && def.weapon.range > 1) || /bow|sling/i.test(def.name || ''))) ranged = true;
       } catch (e) {}
       eq[ranged ? 'ranged' : 'melee'] = eq.weapon;
       delete eq.weapon;
@@ -517,7 +572,7 @@
     MELEE_SLOT, RANGED_SLOT, BODY_SLOTS, ACC_SLOTS, MAIN_SLOTS, ALL_SLOTS,
     FULL_BODY_BLOCKED, SLOT_ALIASES,
     slotLabel, isFullSet, fullSetSlots, blockedSlots, isSlotBlocked,
-    slotForItem, isAccessory, isRangedWeapon, wornAvoidance, sealDamageSettlement, consumeDamageSettlement, damageSettlementHealth,
+    slotForItem, isAccessory, isRangedWeapon, isFallbackSpear, isRealRangedWeapon, carriesRealRanged, wornAvoidance, sealDamageSettlement, consumeDamageSettlement, damageSettlementHealth,
     weaponKind, armorTier, headKind,
     equipScore, coordinationBonus, armorOf, weaponBonusOf,
     meleeWeaponOf, rangedWeaponOf,
