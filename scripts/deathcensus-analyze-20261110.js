@@ -177,6 +177,7 @@ function analyzeArmB(dir) {
       booksClose: s.booksClose, unattributed: s.unattributed,
       telePerson: s.telePerson, telePersonHaven: s.telePersonHaven,
       teleOnly: s.teleOnly, fallenOnly: s.fallenOnly,
+      rosteredDeaths: s.rosteredDeaths, guestDeaths: s.guestDeaths,
       joins: s.joins, leavers: s.leavers,
       errors: (dc.errors || []).length,
     };

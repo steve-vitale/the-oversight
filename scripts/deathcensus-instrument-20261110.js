@@ -31,6 +31,16 @@
 //  snapshot saw it. The driver calls drain() after runDays returns,
 //  before finalize, so the final fallen/telemetry additions land.
 //  drain() is idempotent (index-based diffs) and writes no daily row.
+//  (c) GUEST DEATHS (pilot 2 finding): a death path can push a
+//  NON-rostered villager into the current village's fallen roll —
+//  pilot seed 97904: Bing (visjoin_105) died d106 in a wave-4
+//  fight ('The Big Beast') and sits in Haven's fallen although he
+//  never joined Haven. A guest death is a real witnessed death and
+//  belongs in the census, but it is NOT a roster death and must
+//  NOT enter the roster books. The census therefore reports
+//  rosteredDeaths (vid ever in Haven's roster) and guestDeaths
+//  separately; the books close on rostered deaths only:
+//  initial + joins == final + rosteredDeaths + leavers.
 // Deaths are therefore `fallen ∪ telemetry-person`, keyed by vid,
 // each row carrying its source. Telemetry person-deaths for vids
 // that were NEVER in Haven's roster (other-village people, if any
@@ -284,9 +294,16 @@ function install(Game) {
     const teleMonster = t.teleDeaths.length - telePerson;
     const teleOnly = t.deaths.filter(d => d.source === 'telemetry-only').length;
     const fallenOnly = t.deaths.filter(d => d.source === 'fallen' && !t._telePersonVids[d.vid]).length;
+    // GUEST DEATHS: union rows for vids that were never in Haven's
+    // roster (a fight death pushed to the current village's fallen
+    // although the victim belonged elsewhere). Real deaths, in the
+    // census — but NOT roster deaths, so the books close on
+    // rosteredDeaths only.
+    const rosteredDeaths = t.deaths.filter(d => d.vid != null && t._everRoster.has(d.vid)).length;
+    const guestDeaths = t.deaths.length - rosteredDeaths;
     const finalRosterLen = (t._rosterSet ? t._rosterSet.size : null);
     const booksClose = (finalRosterLen != null)
-      && ((t._initialRosterLen + t.joins.length) === (finalRosterLen + t.deaths.length + t.leavers.length));
+      && ((t._initialRosterLen + t.joins.length) === (finalRosterLen + rosteredDeaths + t.leavers.length));
     const unattributed = t.deaths.filter(d => d.cause == null || d.cause === '').length;
     return {
       daily: t.daily, deaths: t.deaths, teleDeaths: t.teleDeaths,
@@ -297,6 +314,7 @@ function install(Game) {
         fallenDeaths: t.deaths.filter(d => d.source === 'fallen').length,
         teleDeaths: t.teleDeaths.length, telePerson, telePersonHaven, teleMonster,
         teleOnly, fallenOnly, teleOutOfScope: t.teleOutOfScope.length,
+        rosteredDeaths, guestDeaths,
         joins: t.joins.length, leavers: t.leavers.length,
         deathDepartures: t._deathDepartures,
         initialRosterLen: t._initialRosterLen, finalRosterLen,

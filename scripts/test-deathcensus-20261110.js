@@ -117,8 +117,15 @@ async function main() {
     // UNION IDENTITY (pilot fix): deaths == telePersonHaven + fallenOnly.
     // A telemetry-only row (alien kill, no fallen push) or a fallen-only
     // row (a death path with no tele row) is reported, never hidden.
-    assert.strictEqual(fin.summary.deaths, fin.summary.telePersonHaven + fin.summary.fallenOnly,
-      `union identity: deaths (${fin.summary.deaths}) == telePersonHaven (${fin.summary.telePersonHaven}) + fallenOnly (${fin.summary.fallenOnly})`);
+    // NOTE: that identity is WRONG once guest deaths exist — a guest
+    // sits in fallen with a tele row but was never rostered, so it is
+    // in neither telePersonHaven nor fallenOnly. The true identities:
+    //   deaths == fallenDeaths + teleOnly
+    //   deaths == rosteredDeaths + guestDeaths
+    assert.strictEqual(fin.summary.deaths, fin.summary.fallenDeaths + fin.summary.teleOnly,
+      `union identity: deaths (${fin.summary.deaths}) == fallenDeaths (${fin.summary.fallenDeaths}) + teleOnly (${fin.summary.teleOnly})`);
+    assert.strictEqual(fin.summary.deaths, fin.summary.rosteredDeaths + fin.summary.guestDeaths,
+      `roster split: deaths (${fin.summary.deaths}) == rostered (${fin.summary.rosteredDeaths}) + guest (${fin.summary.guestDeaths})`);
     assert.strictEqual(fin.summary.teleOutOfScope, 0, 'out-of-scope tele person deaths: ' + JSON.stringify(fin.teleOutOfScope.slice(0, 3)));
     assert.strictEqual(fin.summary.booksClose, true,
       `books close: initial=${fin.summary.initialRosterLen} joins=${fin.summary.joins} final=${fin.summary.finalRosterLen} deaths=${fin.summary.deaths} leavers=${fin.summary.leavers}`);
@@ -127,7 +134,7 @@ async function main() {
       assert.ok(d.day != null && d.cause, 'death row has day + cause: ' + JSON.stringify(d));
       assert.ok(d.source === 'fallen' || d.source === 'telemetry-only', 'death row carries its source: ' + JSON.stringify(d));
     }
-    console.log(`    deaths=${fin.summary.deaths} byCause=${JSON.stringify(fin.summary.byCause)} teleOnly=${fin.summary.teleOnly} fallenOnly=${fin.summary.fallenOnly} joins=${fin.summary.joins} leavers=${fin.summary.leavers} multiDeathDays=${JSON.stringify(fin.summary.multiDeathDays)}`);
+    console.log(`    deaths=${fin.summary.deaths} byCause=${JSON.stringify(fin.summary.byCause)} teleOnly=${fin.summary.teleOnly} fallenOnly=${fin.summary.fallenOnly} rostered=${fin.summary.rosteredDeaths} guest=${fin.summary.guestDeaths} joins=${fin.summary.joins} leavers=${fin.summary.leavers} multiDeathDays=${JSON.stringify(fin.summary.multiDeathDays)}`);
   });
 
   console.log(`\n${passed} passed, ${failed} failed`);
