@@ -9,9 +9,11 @@
 // residue. This file adds only the JUDGEMENT: the preregged primary
 // (seasoned links >= 5/8 on the armed leg), the fidelity gates, and
 // the scalemetric cost bar (starvation + median survival), plus the
-// wall numbers. Median convention follows the trustgrowth analyzer
-// (upper median: sorted days[floor(n/2)]), so the control median reads
-// 132 exactly as trustgrowth-b reported it.
+// wall numbers. Median is the STANDARD median (average of the two
+// middle values for even n) — prereg amendment 1, correcting the
+// trustgrowth text's 132 (the analyzer's upper median) to 120.5 on
+// the control day list. The TG upper-median figure is reported
+// alongside for comparability only.
 // Usage:
 //   node scripts/answermail-analyze-20261110.js [perseed-dir]
 //     [base-run] [armed-run]
@@ -41,6 +43,19 @@ function loadLeg(run) {
 }
 function starvation(r) { return ((r.teleDeaths || []).filter(function (e) { return e && e.cause === 'starvation'; })).length; }
 
+// Standard median (average of the two middle values for even n).
+// The trustgrowth analyzer's medianSurvival is the UPPER median
+// (sorted[floor(n/2)]), which misreports this band as 132 where the
+// per-seed list sorts to 120.5 (secondlink-a metric review). The cost
+// bar uses the standard median; the TG figure is reported alongside
+// for comparability only.
+function medianStd(days) {
+  const s = days.slice().sort(function (a, b) { return a - b; });
+  if (!s.length) return null;
+  const mid = Math.floor(s.length / 2);
+  return (s.length % 2) ? s[mid] : (s[mid - 1] + s[mid]) / 2;
+}
+
 function legSummary(rows, run) {
   const files = rows.map(function (r) { return path.join(DIR, 'answermail-s' + r.seed + '-' + run + '.json'); });
   const band = TG.summarizeBand(files.map(function (f) { return f; }));
@@ -63,6 +78,8 @@ function legSummary(rows, run) {
   });
   return {
     run: run, band: band, perSeed: perSeed,
+    median: medianStd(rows.map(function (r) { return r.days; })),
+    medianTG: band.medianSurvival,
     seasoned: perSeed.reduce(function (t, s) { return t + s.seasoned; }, 0),
     linksFormed: perSeed.reduce(function (t, s) { return t + s.links.length; }, 0),
     polities: perSeed.filter(function (s) { return s.polity !== 'never-seasoned' && s.polity !== 'seasoned-but-no-polity'; }).length,
@@ -79,7 +96,7 @@ function main() {
   const base = legSummary(loadLeg(BASE_RUN), BASE_RUN);
   const armed = legSummary(loadLeg(ARMED_RUN), ARMED_RUN);
   const armOnlyStarv = armed.perSeed.reduce(function (t, s, i) { return t + (base.perSeed[i].starvation === 0 ? s.starvation : 0); }, 0);
-  const medianBar = 0.8 * (base.band.medianSurvival || 0);
+  const medianBar = 0.8 * (base.median || 0);
   const fidelity = {
     accordAnswersGe8: armed.accordAnswers >= 8,
     tendsGt0: armed.tends > 0,
@@ -91,7 +108,7 @@ function main() {
   const primaryPass = armed.seasoned >= 5;
   const costPass = armed.starvationTotal <= base.starvationTotal + 2
     && armOnlyStarv <= 2
-    && (armed.band.medianSurvival || 0) >= medianBar;
+    && (armed.median || 0) >= medianBar;
   const verdict = !fidelityPass ? 'INVALID (fidelity gate failed)'
     : (primaryPass && costPass ? 'GO' : 'NO-GO');
 
@@ -101,13 +118,14 @@ function main() {
     costBar: {
       starvationBase: base.starvationTotal, starvationArmed: armed.starvationTotal,
       starvationCap: base.starvationTotal + 2, starvationArmOnly: armOnlyStarv, starvationArmOnlyCap: 2,
-      medianBase: base.band.medianSurvival, medianArmed: armed.band.medianSurvival, medianBar: medianBar,
+      medianBase: base.median, medianArmed: armed.median, medianBar: medianBar,
+      medianTGBase: base.medianTG, medianTGArmed: armed.medianTG,
       pass: costPass,
     },
     fidelity: fidelity, fidelityPass: fidelityPass,
     wall: {
-      base: { wins: base.band.wins, national: base.band.national, table: base.band.table, w4: base.band.wave4unlocks, w5: base.band.wave5unlocks, median: base.band.medianSurvival, polities: base.polities },
-      armed: { wins: armed.band.wins, national: armed.band.national, table: armed.band.table, w4: armed.band.wave4unlocks, w5: armed.band.wave5unlocks, median: armed.band.medianSurvival, polities: armed.polities },
+      base: { wins: base.band.wins, national: base.band.national, table: base.band.table, w4: base.band.wave4unlocks, w5: base.band.wave5unlocks, median: base.median, medianTG: base.medianTG, polities: base.polities },
+      armed: { wins: armed.band.wins, national: armed.band.national, table: armed.band.table, w4: armed.band.wave4unlocks, w5: armed.band.wave5unlocks, median: armed.median, medianTG: armed.medianTG, polities: armed.polities },
     },
     gainsByCause: { base: base.band.gainByCause, armed: armed.band.gainByCause },
     downsByCause: { base: base.band.downByCause, armed: armed.band.downByCause },
@@ -117,10 +135,10 @@ function main() {
   };
 
   console.log('BASE  ' + BASE_RUN + ': seasoned=' + base.seasoned + '/' + base.linksFormed + ' links, polities=' + base.polities
-    + ', starvation=' + base.starvationTotal + ', median=' + base.band.medianSurvival
+    + ', starvation=' + base.starvationTotal + ', median=' + base.median + ' (TG upper ' + base.medianTG + ')'
     + ', wins=' + base.band.wins + ' national=' + base.band.national + ' w4=' + base.band.wave4unlocks + ' w5=' + base.band.wave5unlocks);
   console.log('ARMED ' + ARMED_RUN + ': seasoned=' + armed.seasoned + '/' + armed.linksFormed + ' links, polities=' + armed.polities
-    + ', starvation=' + armed.starvationTotal + ' (arm-only ' + armOnlyStarv + '), median=' + armed.band.medianSurvival
+    + ', starvation=' + armed.starvationTotal + ' (arm-only ' + armOnlyStarv + '), median=' + armed.median + ' (TG upper ' + armed.medianTG + ')'
     + ', wins=' + armed.band.wins + ' national=' + armed.band.national + ' w4=' + armed.band.wave4unlocks + ' w5=' + armed.band.wave5unlocks);
   console.log('FIDELITY accordAnswers=' + armed.accordAnswers + ' (>=8: ' + fidelity.accordAnswersGe8 + ')'
     + ' tends=' + armed.tends + ' (>0: ' + fidelity.tendsGt0 + ')'
