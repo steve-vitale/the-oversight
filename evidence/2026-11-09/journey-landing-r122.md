@@ -81,8 +81,11 @@ Read in full: 1153-day7 (Daniela); spot-checked 1154-day7, 1157-day10, 1159-day6
 4. Presshop Q2 far-unreached stuck at 3 (same cases, H-OTHER blocks) — open question for a deepening/scale run.
 
 ## Telemetry
-- Check run against the AFTER corpus vs `telemetry-baselines/landing.json` at closeout; LOUD lines (if any) recorded below.
-- (to be filled at closeout)
+- Check run against the AFTER corpus vs `telemetry-baselines/landing-split.json` (r66 roll; `landing.json` is superseded — do not compare against it). **3 LOUD lines, all EXPLAINED, baseline NOT rolled:**
+  1. `systemDay 33 → 82 (+148%)` — seed-count artifact: 82 is the sum over 10 seeds (per-seed mean 8.2, baseline 8.25 over 4 seeds). First contact is d8–d9 on every seed, unchanged.
+  2. `monsterKills 24 → 265 (+1004%)` — seed-count artifact (10 vs 4 seeds) on a baseline that predates the current driver's fight count. Per-seed mean 26.5, in line with r120 (31.1) and r121 (26.1) — stable, not a surge.
+  3. `folTelemetry.fires 0 → 13` — the follow-volunteer signal postdates the r66 baseline. The fires are sensible: trusted villagers volunteering to accompany the scholar ("You shouldn't go out there alone. I'm coming." — Riley, trust 53, d7). A new signal, not a regression.
+- Baseline NOT rolled: the checker's values are panel-size-dependent sums (10-seed vs the baseline's 4-seed roll), so rolling from this panel would bake in a size mismatch for the next run. The next landing run should roll the baseline from a same-size panel, or normalize per-seed first. villagerDeaths and starvAutopsies were quiet.
 
 ## Metric review
 - Q1's metric as written cannot distinguish "the gates fixed it" from "the defect didn't occur". Add the before-validity condition (≥1 flee-loop death on the BEFORE side) for the next landing run, and re-test on a band where the defect reproduces. The metric itself was not re-scored mid-run — Q1 is GO by the letter with the mechanism caveat recorded here.
