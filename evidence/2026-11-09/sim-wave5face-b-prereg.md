@@ -44,6 +44,22 @@
   zero RNG draws and zero game-state writes (pure-read wrappers only);
   a recording failure is counted in instrumentErrors and the original
   result is returned untouched.
+  - CORRECTION (2026-11-10, before any judged sim — driver-shape
+    finding from the proof test): the off leg records NO field rows,
+    traces, or scholar-death rows (those arrays are instrument-recorded
+    and the fallback `t` is empty by design), and the off branch
+    previously hardcoded standing/scaleRank/unlockedWave/readiness5 to
+    null — so "standing identical" and "fieldFights byte-identical"
+    between on/off were unmeasurable as written. Corrected bar: the
+    driver's off branch now reads the end state directly from Game
+    (pure reads, no wraps); on/off must match on days, endReason,
+    maxWave, standing, waveKillLog CONTENT (JSON-equal), and fallen
+    length. Field-row determinism is shown instead by an on/on re-run
+    (proof test: same seed, 30d, two on-legs, fieldFights + w5spawns +
+    w5casts JSON-equal). Scholar deaths are compared via fallen length
+    + teleDeaths, not via the instrument's scholarDeaths rows (empty
+    off-leg by design). The full-band neutrality leg below uses the
+    corrected bar.
 
 ## Instrument (scripts/wave5face-instrument-20261109.js, layers on finishersize-instrument)
 
