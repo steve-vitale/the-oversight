@@ -82,11 +82,13 @@ After-panel people check (3 sittings read in full): Courtney's arc holds on the 
 
 ## Gate + telemetry
 
-- Gate: `node scripts/check.js --quick` in the worktree — 294 passed, 6 failed in 739s (standing gate is 296/4). The 4 standing fails (mobile-combat-cadence, occupation-panels, phone-frame-proof, establishment-r20) are present; 2 extra failing files are under investigation — full list captured to /tmp/r125-gate-full.txt, attribution vs new master e2983bb90 pending before merge. See §7.
+- Gate: `node scripts/check.js --quick` in the worktree — first run 294 passed, 6 failed (739s): the 4 standing fails plus the measurement pair (test-measurement-proof-update.js + test-measurement-workflow.js), which fail whenever src/js changes invalidate the retained neutrality proof inputs ("Proof source inputs are not current"). Refreshed per SIMULATING.md: fresh neutral panel (balance-panel.js, 7 seeds × 4 policies, 150d) → `evidence/2026-11-10/neutral-r125.json.gz` → balance-proof-update.js (pair 9/9 + 9/9). Final gate re-run: **296 passed, 4 failed in 428s** — exactly the standing gate (mobile-combat-cadence, occupation-panels, phone-frame-proof, establishment-r20).
 - Telemetry: `node scripts/telemetry-check.js --baseline .../telemetry-baselines/deepening.json --current '<before-fix snapshot seeds 45001–45004>' --metrics w3fights,engaged.w3,fightsTotal,fightsByWave.3` — **quiet** (4 files, 4 metrics, no large deviations). Baseline NOT rolled forward.
 
 ## §7 — Landing
 
-- Master moved during the run (sim-answermail-drive-a, tip `e2983bb90` 13:43 UTC). Branch rebased onto the explicit SHA `e2983bb90` before merging; proof tests re-run after the rebase (see gate line above).
-- Safe-commit index clobber struck after the fix commit (6 files staged-as-deleted / MM); repaired via `git ls-tree HEAD -- <paths> | git update-index --add --index-info`; verified status empty, diff HEAD empty, all 6 blobs match HEAD. Commit `dc74a94c` is correct.
+- Master moved during the run (sim-answermail-drive-a, tip `e2983bb90` 13:43 UTC). Branch rebased onto the explicit SHA `e2983bb90` before merging (3 commits replayed clean, no rebase quirk); proof tests re-run after the rebase (secret-variety 10/10, analyzer 45/45, r120 35/35, r124 confront 14/14).
+- Gate: first run 294/6, measurement pair refreshed (neutral-r125), final run **296/4 — the standing gate exactly**.
+- Telemetry quiet; baseline not rolled forward.
+- Safe-commit index clobber struck after FOUR commits this run (fix, run note, refresh, and the first prereg commit) — repaired each time via `git ls-tree HEAD -- <paths> | git update-index --add --index-info`; every commit verified correct (blobs match HEAD, status/diff empty after repair). The clobber is now a 4×-in-one-run pattern, not a one-off.
 - Merged locally, pending ship (ship loop owns bump/push/live verification). Worktree released, rotation-a 2 → 3, lock deleted, heartbeat loop stopped.
