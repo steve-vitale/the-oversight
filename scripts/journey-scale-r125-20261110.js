@@ -687,6 +687,10 @@ async function playSeed(seed) {
     days: DAYCAP,
     manifest: { seed, mode: 'journey-scale-r125-want', date: new Date().toISOString().slice(0, 10), node: process.version },
   });
+  // R125 Q2: drain the death census AFTER runDays — the final endDay's
+  // deaths happen after the last snapshot; drain() catches them
+  // (idempotent; writes no daily row).
+  try { if (dcInst) dcInst.drain(); } catch (e) {}
   // R107 Q1: finalize the regional-gate recorder (read-only) and emit the corpus.
   let regFin = null;
   try { regInst.snapshot(); } catch (e) {}
@@ -770,7 +774,10 @@ async function playSeed(seed) {
     byCause: ((dcFin.summary || {}).byCause || {}),
     multiDeathDays: ((dcFin.summary || {}).multiDeathDays || []),
     telePerson: ((dcFin.summary || {}).telePerson | 0),
+    telePersonHaven: ((dcFin.summary || {}).telePersonHaven | 0),
     teleMonster: ((dcFin.summary || {}).teleMonster | 0),
+    teleOnly: ((dcFin.summary || {}).teleOnly | 0),
+    fallenOnly: ((dcFin.summary || {}).fallenOnly | 0),
     joins: ((dcFin.summary || {}).joins | 0),
     leavers: ((dcFin.summary || {}).leavers | 0),
     booksClose: !!((dcFin.summary || {}).booksClose),
@@ -907,7 +914,7 @@ async function playSeed(seed) {
   // deaths with causes, the telemetry death rows, joins/leavers, and
   // the reconciliation summary — the analyzer scores the attribution
   // from this.
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r125-deathcensus-${seed}.json`), JSON.stringify({ seed, arm: 'journey-scale-r125', daily: (dcFin.daily || []), deaths: (dcFin.deaths || []), teleDeaths: (dcFin.teleDeaths || []), joins: (dcFin.joins || []), leavers: (dcFin.leavers || []), summary: (dcFin.summary || {}), instrumentErrors: (dcFin.errors || []).slice() }, null, 1));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r125-deathcensus-${seed}.json`), JSON.stringify({ seed, arm: 'journey-scale-r125', daily: (dcFin.daily || []), deaths: (dcFin.deaths || []), teleDeaths: (dcFin.teleDeaths || []), joins: (dcFin.joins || []), leavers: (dcFin.leavers || []), teleOutOfScope: (dcFin.teleOutOfScope || []), summary: (dcFin.summary || {}), instrumentErrors: (dcFin.errors || []).slice() }, null, 1));
   fs.writeFileSync(path.join(EVIDIR, `journey-scale-r125-deathcensus-${seed}.txt`), (dcFin.deaths || []).map(d => `d${d.day} ${d.name || d.vid} (${d.vid}) cause=${d.cause || '?'}${d.monsterName ? ' monster=' + d.monsterName : ''}`).join('\n'));
   // R113 Q1+Q2 trade-road corpus: the daily trade snapshots, the beat
   // answers, the wild-fight log, and the scholar-vid map — the analyzer
@@ -927,7 +934,7 @@ async function playSeed(seed) {
   try { const _l = c.ladderChain || {}; console.log(`  ladder: rows=${_l.rows} err=${_l.errors} peak=${_l.peakStage} s1=${_l.stage1Day == null ? '-' : 'd' + _l.stage1Day} s2=${_l.stage2Day == null ? '-' : 'd' + _l.stage2Day} s3=${_l.stage3Day == null ? '-' : 'd' + _l.stage3Day} countedEnd=${_l.countedEnd} shortEnd=${_l.shortfallEnd} capped=[${(_l.cappedEnd || []).join(',')}] tracks=${JSON.stringify(_l.tracksEnd)} bundleStages=[${(_l.bundleStages || []).join(',')}] bb=${_l.bundleBonusEnd} banked=${_l.bankedHeadStartEnd} sent=${_l.sentimentTaughtDay == null ? '-' : 'd' + _l.sentimentTaughtDay} kAttr=${JSON.stringify(_l.killAttrEnd)} vetkillRows=${_l.vetkillRows} ready=${JSON.stringify(_l.capstoneReady)} delivered=${_l.capstoneDelivered ? (_l.capstoneDelivered.kind + '@d' + _l.capstoneDelivered.day) : '-'} deliv=${_l.deliveriesOk}/${_l.deliveries} attempts=${_l.deliveryAttempts} lesser=${_l.seatLesserDay == null ? '-' : 'd' + _l.seatLesserDay} full=${_l.seatFullDay == null ? '-' : 'd' + _l.seatFullDay} fights=${_l.fights} byWave=${JSON.stringify(_l.fightsByWave)}`); } catch (e) {}
   // R113 Q1+Q2: one-line trade-road + wild-w4 rollup per seed.
   // R125 Q2: one-line death-census rollup per seed.
-  try { const _d = c.deathCensus || {}; console.log(`  deathCensus: rows=${_d.rows} err=${_d.errors} deaths=${_d.deaths} byCause=${JSON.stringify(_d.byCause)} multi=${JSON.stringify(_d.multiDeathDays)} teleP=${_d.telePerson} teleM=${_d.teleMonster} joins=${_d.joins} leavers=${_d.leavers} booksClose=${_d.booksClose} unattributed=${_d.unattributed} dutyDays=${_d.dutyDays} healerDays=${_d.healerDays}`); } catch (e) {}
+  try { const _d = c.deathCensus || {}; console.log(`  deathCensus: rows=${_d.rows} err=${_d.errors} deaths=${_d.deaths} byCause=${JSON.stringify(_d.byCause)} multi=${JSON.stringify(_d.multiDeathDays)} teleP=${_d.telePerson} telePHaven=${_d.telePersonHaven} teleM=${_d.teleMonster} teleOnly=${_d.teleOnly} fallenOnly=${_d.fallenOnly} joins=${_d.joins} leavers=${_d.leavers} booksClose=${_d.booksClose} unattributed=${_d.unattributed} dutyDays=${_d.dutyDays} healerDays=${_d.healerDays}`); } catch (e) {}
   try { const _t = c.tradeRoad || {}; const _w = c.wildW4 || {}; console.log(`  trade: rows=${_t.rows} err=${_t.errors} firstTrade=${_t.firstTradeProposalDay == null ? '-' : 'd' + _t.firstTradeProposalDay} maxTrade=${_t.maxTradeLinks} maxSeasoned=${_t.maxTradeSeasoned} seasoned3=${_t.firstSeasonedTradeDay == null ? '-' : 'd' + _t.firstSeasonedTradeDay} maxSubs=${_t.maxSubs} subCapSkips=${_t.subCapSkips} covWalks=${_t.covenantWalks} charterStaged=${_t.charterStagedDay == null ? '-' : 'd' + _t.charterStagedDay} sealed=${_t.sealedDay == null ? '-' : 'd' + _t.sealedDay} beats=[${_t.beatAnswers || '-'}]`); console.log(`  wildW4: fights=${_w.rows} err=${_w.errors} villW4=${_w.villagerW4Calls} byOutcome=${JSON.stringify(_w.villagerW4ByOutcome)} villW4Deaths=${_w.villagerW4Deaths} scholW4=${_w.scholarW4Calls} villW1-3=${JSON.stringify(_w.villagerW1_3)}`); } catch (e) {}
   try { const _ng = natGateWatch[natGateWatch.length - 1] || {}; console.log(`  natGate final: d${_ng.day} rank=${_ng.rank} rung=${_ng.rungReady} lead=${_ng.leadSeasoned}/${_ng.leadActive} cov=${_ng.covSeasoned}/${_ng.covActive} trade=${_ng.tradeSeasoned}/${_ng.tradeActive} belong=${_ng.belong ? (_ng.belong.other + ':t' + _ng.belong.trust + '/realm' + _ng.belong.realm + '/good' + (_ng.belong.good ? 1 : 0)) : '-'} pend=${_ng.pendingShape || '-'} foreignMax=${_ng.foreignMax} rows=${natGateWatch.length}`); } catch (e) {}
   return c;

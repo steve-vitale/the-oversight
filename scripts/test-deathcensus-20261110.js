@@ -91,6 +91,12 @@ async function main() {
     policy.setup = function (G, ctx) { if (baseSetup) baseSetup(G, ctx); policy._ctx = ctx; };
     policy.daily = function (G, ctx) { baseDaily(G, ctx); try { dc.snapshot(ctx); } catch (e) { dc.t.errors.push({ day: 0, where: 'proof:snapshot', err: String(e && e.message) }); } };
     const result = await runDays(Game, policy, { days: 40, manifest: { seed: 97904, mode: 'journey-scale-r125-proof', date: new Date().toISOString().slice(0, 10), node: process.version } });
+    // Mirror the driver: drain after runDays (final endDay deaths),
+    // then prove drain is idempotent — a second drain adds nothing.
+    try { dc.drain(); } catch (e) { dc.t.errors.push({ day: 0, where: 'proof:drain', err: String(e && e.message) }); }
+    const deathsAfterDrain = dc.t.deaths.length;
+    try { dc.drain(); } catch (e) { dc.t.errors.push({ day: 0, where: 'proof:drain2', err: String(e && e.message) }); }
+    assert.strictEqual(dc.t.deaths.length, deathsAfterDrain, 'drain() is idempotent: second drain added rows');
     const fin = dc.finalize();
     dc.uninstall();
     assert.strictEqual(fin.errors.length, 0, 'instrument errors: ' + JSON.stringify(fin.errors.slice(0, 3)));
@@ -108,15 +114,20 @@ async function main() {
     const fin = global.__proofFin;
     assert.ok(fin, 'live run above must have produced a finalize');
     assert.strictEqual(fin.summary.unattributed, 0, 'deaths with no cause: ' + JSON.stringify(fin.deaths.filter(d => !d.cause).slice(0, 3)));
-    assert.strictEqual(fin.summary.deaths, fin.summary.telePerson,
-      `fallen deaths (${fin.summary.deaths}) == telemetry person deaths (${fin.summary.telePerson})`);
+    // UNION IDENTITY (pilot fix): deaths == telePersonHaven + fallenOnly.
+    // A telemetry-only row (alien kill, no fallen push) or a fallen-only
+    // row (a death path with no tele row) is reported, never hidden.
+    assert.strictEqual(fin.summary.deaths, fin.summary.telePersonHaven + fin.summary.fallenOnly,
+      `union identity: deaths (${fin.summary.deaths}) == telePersonHaven (${fin.summary.telePersonHaven}) + fallenOnly (${fin.summary.fallenOnly})`);
+    assert.strictEqual(fin.summary.teleOutOfScope, 0, 'out-of-scope tele person deaths: ' + JSON.stringify(fin.teleOutOfScope.slice(0, 3)));
     assert.strictEqual(fin.summary.booksClose, true,
       `books close: initial=${fin.summary.initialRosterLen} joins=${fin.summary.joins} final=${fin.summary.finalRosterLen} deaths=${fin.summary.deaths} leavers=${fin.summary.leavers}`);
     assert.strictEqual(fin.summary.leavers, fin.leavers.length, 'leavers counted');
     for (const d of fin.deaths) {
       assert.ok(d.day != null && d.cause, 'death row has day + cause: ' + JSON.stringify(d));
+      assert.ok(d.source === 'fallen' || d.source === 'telemetry-only', 'death row carries its source: ' + JSON.stringify(d));
     }
-    console.log(`    deaths=${fin.summary.deaths} byCause=${JSON.stringify(fin.summary.byCause)} joins=${fin.summary.joins} leavers=${fin.summary.leavers} multiDeathDays=${JSON.stringify(fin.summary.multiDeathDays)}`);
+    console.log(`    deaths=${fin.summary.deaths} byCause=${JSON.stringify(fin.summary.byCause)} teleOnly=${fin.summary.teleOnly} fallenOnly=${fin.summary.fallenOnly} joins=${fin.summary.joins} leavers=${fin.summary.leavers} multiDeathDays=${JSON.stringify(fin.summary.multiDeathDays)}`);
   });
 
   console.log(`\n${passed} passed, ${failed} failed`);
