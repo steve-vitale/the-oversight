@@ -319,7 +319,17 @@
           '"I wish there was more to tell. That\'s it."',
           '"That\'s the whole of it. Sorry."',
         ]) || '"That\'s... pretty much all of it, honestly."';
-        this.sayLine(vid, line, { tag: 'endtopic' });
+        // WIND-DOWN GRAMMAR (journey-succession r169): this closer is
+        // conversation grammar, not content — the same class as the r17
+        // structural beats (resume openers, recap lines). The Javier
+        // case (r165 seed 34003 d71) dried here: all 3 closers had been
+        // spoken across sittings, the reset freed one, but it sat in the
+        // run ledger, so sayLine dry-replaced it with "...Sorry, lost my
+        // train of thought." — a villager who finished does not forget.
+        // Structural skips the run-ledger block; the pool still cycles
+        // per villager (pickCycle keep=2) and the line still lands in
+        // the per-villager ledgers.
+        this.sayLine(vid, line, { tag: 'endtopic', structural: true });
         return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
 
