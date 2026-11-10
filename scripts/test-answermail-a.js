@@ -181,6 +181,46 @@ check('instrument v3: cap-phantom proof (wrap applied 0/3/8, unified [3,8])', fu
   assert.ok(/cap-phantom proof passed/.test(out), 'cap-phantom proof output; got ' + out);
 });
 
+// --- Analyzer v3.1: formation-day twin pairing (amendment 5) --------
+// unifyEvents pairs wraps to setter twins in DESCENDING seq order:
+// on a formation day the pre-setter wraps (accord/tend, no twin)
+// precede the post-setter call (tribute, has a twin), so ascending
+// consumption eats the twin on the wrong wrap and double-counts the
+// tribute. Synthetic 120104-d28 shape: wraps seq 1 (+10), 2 (+8),
+// 4 (+1) with one setter twin (seq 3, +1) -> unified log must hold
+// the setter + wraps 1, 2, and drop wrap 4.
+check('analyzer: formation-day twin pairing drops the twinned wrap, keeps gap wraps', function () {
+  const TG = require(path.join(REPO, 'scripts', 'trustgrowth-analyze-20261109'));
+  const stack = '    at Object._trustGain (src/js/hierarchy.js:1781:20) |     at Object.trustGrowthTrustGain [as _trustGain] (scripts/trustgrowth-instrument-20261109.js:116:40) |     at Object.linkTick (src/js/hierarchy.js:1465:13)';
+  const out = {
+    events: [
+      { seq: 3, day: 28, linkId: 'link_x', other: 'village_2', old: 48, new: 49, delta: 1, stack: stack, via: 'setter' },
+    ],
+    gains: [
+      { seq: 1, day: 28, linkId: 'link_x', other: 'village_2', requested: 10, applied: 10, returned: 10, stack: stack, via: 'trustgain-wrap' },
+      { seq: 2, day: 28, linkId: 'link_x', other: 'village_2', requested: 8, applied: 8, returned: 8, stack: stack, via: 'trustgain-wrap' },
+      { seq: 4, day: 28, linkId: 'link_x', other: 'village_2', requested: 1, applied: 1, returned: 1, stack: stack, via: 'trustgain-wrap' },
+    ],
+  };
+  const unified = TG.unifyEvents(out);
+  assert.deepStrictEqual(unified.map(function (e) { return e.seq; }), [1, 2, 3],
+    'unified seqs must be [1,2,3] (tribute wrap 4 dropped); got ' + JSON.stringify(unified.map(function (e) { return e.seq; })));
+  // Control: a normal day with one setter+wrap pair per call drops both wraps.
+  const normal = {
+    events: [
+      { seq: 5, day: 35, linkId: 'link_x', other: 'village_2', old: 49, new: 57, delta: 8, stack: stack, via: 'setter' },
+      { seq: 7, day: 35, linkId: 'link_x', other: 'village_2', old: 57, new: 58, delta: 1, stack: stack, via: 'setter' },
+    ],
+    gains: [
+      { seq: 6, day: 35, linkId: 'link_x', other: 'village_2', requested: 8, applied: 8, returned: 8, stack: stack, via: 'trustgain-wrap' },
+      { seq: 8, day: 35, linkId: 'link_x', other: 'village_2', requested: 1, applied: 1, returned: 1, stack: stack, via: 'trustgain-wrap' },
+    ],
+  };
+  const unifiedNormal = TG.unifyEvents(normal);
+  assert.deepStrictEqual(unifiedNormal.map(function (e) { return e.seq; }), [5, 7],
+    'normal day keeps setters only; got ' + JSON.stringify(unifiedNormal.map(function (e) { return e.seq; })));
+});
+
 // --- Live harness smoke leg ----------------------------------------------
 check('live smoke: 99104 answermail 60d runs, instrument errors 0, accord answered', function () {
   const outDir = fs.mkdtempSync(path.join('/tmp', 'answermail-proof-'));
