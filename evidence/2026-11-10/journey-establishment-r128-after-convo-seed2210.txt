@@ -1,0 +1,83 @@
+=== r128-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Scott (gen_gjox3v7) occ=barber --
+OPENING: "About what happened to my taken kin — You talk to it -- the System. Have you ever asked? About the taken -- about Anel?"
+YOU: [gq:yn:yes] "Yes."
+THEM: "I see." They take a moment to think about your answer.
+YOU: [goon] "Please, go on."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [dlg:more] "What do you remember?"
+THEM: "It's my older sister, Anel. Was taken. She raised me more than our mother did. Boring. That is what they wrote down. Some nights I swear I hear them before I sleep -- the pods, rows deep, humming. Then morning comes and I can't say whether it was real."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [goon] "Please, go on."
+THEM: "Come see what I found. You won't believe it."
+INVITE-ANSWER trust=91
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Scott shows you where they go to think. "Don't tell the others. Everyone needs one place."
+YOU: [goon] "Please, go on."
+THEM: "I've heard good things about Thornfield. We should link with them — we'd be stronger together."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person."
+closing: "Good talk."
+
+-- Linda (gen_ppdlu70) occ=bush pilot --
+OPENING: Every group I've been in, someone had to be the adult. Guess it's me again.
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "Tea Bush — crush the leaf, smell it, taste the stem. That's how you know it."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Goldenrod. Remember the leaf, the stem, the smell — that's the whole of it."
+YOU: [dlg:more] "Go on."
+THEM: "Power's a trap. Responsibility's a duty. I know the difference."
+YOU: [dlg:react] (listen)
+THEM: "Well." A breath. "That's where things stand."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on wanting to be in charge."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Yes. Absolutely. I've been hoping you'd ask." (A little too quickly.)
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Right. Sorry, I go on about it. What did you want? It'll keep."
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "...Sorry, lost my train of thought."
+closing: "Good talk. Now let's go be useful."
+
+-- Felipe (gen_0o2o3az) occ=pottery instructor --
+OPENING: "Jack — I keep coming back to it. The pods, humming. Do you think they're still in there?"
+YOU: [gq:yn:yes] "Yes."
+THEM: "All right. Thank you for telling me."
+YOU: [goon] "Please, go on."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:more] "Tell me about them."
+THEM: "It's my uncle, Jack. Was taken. He could fix anything. Anything. I wonder what they even measure. Some nights I swear I hear them before I sleep -- the pods, rows deep, humming. Then morning comes and I can't say whether it was real."
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [goon] "Please, go on."
+THEM: "Help me haul something back? Too much for one."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: "Here. I made an extra." Felipe presses something into your hand — a decent tool, oiled and kept. (Useful. Keep it.)
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person."
+YOU: [goon] "Please, go on."
+THEM: "What do you make of all this? Really."
+closing: "Don't be a stranger."
+
+-- Berhane (gen_64072pm) occ=arborist --
+OPENING: Berhane speaks only 🇪🇹 Amharic. No shared words at all — just eyes, hands, and patience.
+«ሄይ... አማርኛ ትችላለህ? አይ? ...ውይ።»
+(They mime walking — pointing at themselves, then at you, then toward the trap line. The meaning is unmistakable: come with me.)
+YOU: [nv:nod] (nod slowly)
+THEM: «አዎ፣ ልክ እንደዛ ነው።» (you catch 'እንደዛ' — like that) They nod back, slowly.
+YOU: [nv:smile] (smile)
+THEM: «በጣም ጥሩ ሰው ነዎት።» (you catch 'ጥሩ' — good) A smile, tired but real.
+YOU: [nv:pointself] (point: you, them, together)
+THEM: «ሁሉም ነገር ደህና ይሆናል።» (you catch 'ደህና' — well) You point at yourself, then at them, then at the fire. Together. They get it.
+YOU: [nv:listen] (listen hard — catch words)
+THEM: You listen hard, watching their mouth shape the words. «እዚህ ሰዎች የት ይተኛሉ? ደህንነቱ የተጠበቀ ነው?» (you catch 'ደህንነቱ' — its safety)
+YOU: [speak_back] (try your Amharic)
+THEM: Berhane laughs — with you, mostly. "Good try! Again — ጥሩ ንግግር ነው። ልክ ነው።" They walk you through it, patient as sunrise.
+YOU: [goon] (watch quietly)
+THEM: "I should go. You know where to find me."
+(no pick — winding down)
+(stall menu: leave|nv:nod)
+closing: A final nod. They touch their chest, then point at you — a promise without words.

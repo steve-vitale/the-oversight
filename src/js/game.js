@@ -6686,6 +6686,37 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (ids.length) try { this.checkPromises('task'); } catch (e) {}
     },
 
+    // GRANT-RATE DIAL (establishment r128 2026-11-10): the first rung at
+    // full rate — the first 5 XP of a task credit 1:1; above 5 XP, 1 XP
+    // per 2 units, the odd unit carried on the person record
+    // (foodXpRemainder) so no work is ever lost to rounding. The rung
+    // (5/15/30, r116) and askSpecialist (+1 per direct teaching use) are
+    // unchanged; only the two routine-work sites call this (rack batches,
+    // hunt kills). r127's flat halving was judged NO-GO — it braked the
+    // marginal movers as hard as the racers; this dial bites only above
+    // the first rung.
+    grantFoodXpCredit(person, task, units) {
+      if (!person || !units || units <= 0) return 0;
+      person.foodXp = person.foodXp || {};
+      person.foodXpRemainder = person.foodXpRemainder || {};
+      let xp = person.foodXp[task] || 0;
+      let carry = person.foodXpRemainder[task] || 0;
+      let left = units;
+      if (xp < 5) {
+        const head = Math.min(left, 5 - xp);
+        xp += head;
+        left -= head;
+      }
+      if (left > 0) {
+        const total = carry + left;
+        xp += Math.floor(total / 2);
+        carry = total % 2;
+      }
+      person.foodXp[task] = xp;
+      person.foodXpRemainder[task] = carry;
+      return xp;
+    },
+
     // villagerHuntResolve(vid, eff): the hunt duty through the SAME chance
     // machinery the player hunts with (huntAnimal) — parity 2026-10-10,
     // Worker A. Picks a REAL animal from a REAL nearby tile's wildlife (the
@@ -6805,11 +6836,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const kcal = Math.max(50, Math.round((animal.calories || 400) * frac * eff));
       try { best.wl[aid] = Math.max(0, (best.wl[aid] || 1) - 1); } catch (e) {}
       try { this.creditDeed && this.creditDeed(vid, 'hunting'); } catch (e) { console.warn('[tracks] deed', e); }
-      // PRACTICE (establishment r112 2026-11-07): cleaning the kill teaches
-      // butchering — one foodXp['butcher'] rep per kill. The same XP
+      // PRACTICE (establishment r112 2026-11-07; r128 2026-11-10 dial (a)):
+      // cleaning the kill teaches butchering — one foodXp['butcher'] rep
+      // per kill while under the first rung (5 XP), 1 XP per 2 kills
+      // above it (grantFoodXpCredit, odd kill carried). The same XP
       // askSpecialist grants; the skill it buys is specialistSkill's
       // self-taught ladder (10 XP -> 1). A failed stalk cleans nothing.
-      try { const _hp = this.getPerson ? this.getPerson(vid) : null; if (_hp) { _hp.foodXp = _hp.foodXp || {}; _hp.foodXp.butcher = (_hp.foodXp.butcher || 0) + 1; } } catch (e) {}
+      try { const _hp = this.getPerson ? this.getPerson(vid) : null; if (_hp) this.grantFoodXpCredit(_hp, 'butcher', 1); } catch (e) {}
       try {
         this.state.codex.animalEncounters = this.state.codex.animalEncounters || {};
         this.state.codex.animalEncounters[aid] = (this.state.codex.animalEncounters[aid] || 0) + 1;
@@ -7358,15 +7391,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             preservedNote = ` ${first} worked the smoke racks too — ${n} batch${n > 1 ? 'es' : ''} preserved (~${keptKcal} kcal, keeps ${skill > 0 ? 'for weeks' : 'a couple of weeks'}).`;
             try { this.creditDeed && this.creditDeed(vid, 'preserving'); } catch (e) { console.warn('[tracks] deed', e); }
             // PRACTICE (establishment r112 2026-11-07; r114 2026-11-08:
-            // per-batch grant): working the racks teaches preserving —
-            // one foodXp['preserver'] rep per BATCH preserved (n batches
-            // in this resolution), not one per resolution. A cook who
-            // smokes three stacks in one resolution learns three times
-            // as fast as one who smokes one — the work is daily and spread
+            // per-batch grant; r128 2026-11-10 dial (a)): working the
+            // racks teaches preserving — one foodXp['preserver'] rep per
+            // BATCH preserved (n batches in this resolution) while under
+            // the first rung (5 XP), 1 XP per 2 batches above it
+            // (grantFoodXpCredit, odd batch carried). A cook who smokes
+            // three stacks in one resolution learns three times as fast
+            // as one who smokes one — the work is daily and spread
             // across whoever cooks, so the grant now pays the work done,
             // not the visit. The same XP askSpecialist grants; the skill
             // it buys is specialistSkill's self-taught ladder (5 XP -> 1).
-            try { person.foodXp = person.foodXp || {}; person.foodXp.preserver = (person.foodXp.preserver || 0) + n; } catch (e) {}
+            try { this.grantFoodXpCredit(person, 'preserver', n); } catch (e) {}
           } else if (racksFull && eligible.length) {
             // RACKSVOICE (establishment r20 2026-10-20): the cook resolves
             // ~3x/day, so the identical racks-full line fired per resolution
