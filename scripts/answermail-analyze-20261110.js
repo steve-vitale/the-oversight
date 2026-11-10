@@ -98,14 +98,18 @@ function main() {
   const armOnlyStarv = armed.perSeed.reduce(function (t, s, i) { return t + (base.perSeed[i].starvation === 0 ? s.starvation : 0); }, 0);
   const medianBar = 0.8 * (base.median || 0);
   const fidelity = {
-    accordAnswersGe8: armed.accordAnswers >= 8,
+    // Amendment 3: the gate is "every staged accord answered", i.e.
+    // accord answers == links formed on the armed leg (a seed that
+    // dies before any link forms stages no accord; 120116 forms 0).
+    accordAnswersGeLinks: armed.accordAnswers >= armed.linksFormed && armed.accordAnswers > 0,
     tendsGt0: armed.tends > 0,
     renegSilenceZero: ((armed.band.downByCause || {})['renegotiation-silence'] || 0) === 0,
     instrumentErrorsZero: base.instrumentErrors === 0 && armed.instrumentErrors === 0,
     unattributedZero: (base.band.unattributedUp + base.band.unattributedDown + armed.band.unattributedUp + armed.band.unattributedDown) === 0,
   };
   const fidelityPass = Object.keys(fidelity).every(function (k) { return fidelity[k]; });
-  const primaryPass = armed.seasoned >= 5;
+  const primaryThreshold = parseInt(process.env.PRIMARY_THRESHOLD || '5', 10) || 5;
+  const primaryPass = armed.seasoned >= primaryThreshold;
   const costPass = armed.starvationTotal <= base.starvationTotal + 2
     && armOnlyStarv <= 2
     && (armed.median || 0) >= medianBar;
@@ -114,7 +118,7 @@ function main() {
 
   const out = {
     baseRun: BASE_RUN, armedRun: ARMED_RUN, seeds: SEEDS,
-    primary: { seasonedBase: base.seasoned, seasonedArmed: armed.seasoned, threshold: 5, pass: primaryPass },
+    primary: { seasonedBase: base.seasoned, seasonedArmed: armed.seasoned, threshold: primaryThreshold, pass: primaryPass },
     costBar: {
       starvationBase: base.starvationTotal, starvationArmed: armed.starvationTotal,
       starvationCap: base.starvationTotal + 2, starvationArmOnly: armOnlyStarv, starvationArmOnlyCap: 2,
@@ -140,7 +144,7 @@ function main() {
   console.log('ARMED ' + ARMED_RUN + ': seasoned=' + armed.seasoned + '/' + armed.linksFormed + ' links, polities=' + armed.polities
     + ', starvation=' + armed.starvationTotal + ' (arm-only ' + armOnlyStarv + '), median=' + armed.median + ' (TG upper ' + armed.medianTG + ')'
     + ', wins=' + armed.band.wins + ' national=' + armed.band.national + ' w4=' + armed.band.wave4unlocks + ' w5=' + armed.band.wave5unlocks);
-  console.log('FIDELITY accordAnswers=' + armed.accordAnswers + ' (>=8: ' + fidelity.accordAnswersGe8 + ')'
+  console.log('FIDELITY accordAnswers=' + armed.accordAnswers + ' linksFormed=' + armed.linksFormed + ' (all staged answered: ' + fidelity.accordAnswersGeLinks + ')'
     + ' tends=' + armed.tends + ' (>0: ' + fidelity.tendsGt0 + ')'
     + ' renegSilence=' + ((armed.band.downByCause || {})['renegotiation-silence'] || 0) + ' (=0: ' + fidelity.renegSilenceZero + ')'
     + ' instrErrors=' + (base.instrumentErrors + armed.instrumentErrors) + ' unattributed=' + (base.band.unattributedUp + base.band.unattributedDown + armed.band.unattributedUp + armed.band.unattributedDown));
@@ -153,7 +157,7 @@ function main() {
       + ' accord=' + s.accordAnswers + ' tend=' + s.tends + ' reneg=' + s.renegAnswers + ' demand=' + s.demandAnswers
       + ' links=' + JSON.stringify(s.links.map(function (l) { return l.other + ':' + l.class + '(' + l.born + '->' + l.peak + '->' + l.end + ')'; })));
   });
-  console.log('VERDICT: ' + verdict + ' (primary ' + (primaryPass ? 'PASS' : 'FAIL') + ' ' + armed.seasoned + '>=5; cost ' + (costPass ? 'PASS' : 'FAIL') + ')');
+  console.log('VERDICT: ' + verdict + ' (primary ' + (primaryPass ? 'PASS' : 'FAIL') + ' ' + armed.seasoned + '>=' + primaryThreshold + '; cost ' + (costPass ? 'PASS' : 'FAIL') + ')');
   const outFile = path.join(DIR, 'answermail-verdict.json');
   fs.writeFileSync(outFile, JSON.stringify(out, null, 2) + '\n');
   console.log('wrote ' + outFile);
