@@ -41,8 +41,16 @@ Zero src/js. Gates, prices, deeds, and readyDemand untouched.
     'bond' — temperament, goal, mood, fear, pair relationship, social need;
     chance clamped 5–95, never always/never. Every proposal, staging,
     acceptance and refusal emits tele('bond_proposed', {initiator, target,
-    kind, outcome, chance}) — kind 'bond' for person bonds, 'link' for
-    link raises (bond-initiation.js header).
+    kind, outcome, chance}) — kind 'person' for person bonds, 'link' for
+    link raises (bond-initiation.js header). AMENDMENT (same day, before
+    any judged sim): the tele kind for person bonds is 'person', NOT
+    'bond' — verified in code (stageBondProposal / proposeBond emit kind
+    'person'; 'bond' is only the npcInviteDecision DECISION kind passed
+    at proposeBond). Person-bond tele comes in two flavors: NPC→scholar
+    staged proposals (outcomes staged/accepted/refused/expired, target =
+    the scholar, chance null — answered in conversation like link
+    raises) and NPC↔NPC immediate character decisions (outcome
+    accepted/refused or a gate outcome, chance = the decision chance).
   - Peer proposals: `proposeCovenant` / `proposeTrade` (played courtship
     bands, counter-offers via pendingCounter; require opinion ≥ 10).
     `raidVillage` / `answerRaid` is the conquest path. `tendLink` is the
@@ -66,9 +74,14 @@ Zero src/js. Gates, prices, deeds, and readyDemand untouched.
   seasoned at end (snapshotLink.seasoned), polities formed
   (polityOf('haven') non-null on any day, with shape/size).
 - **Ally-join (PERSON-BOND):** a villager↔villager bond proposed by an NPC
-  (tele kind 'bond'), decided by the target's character via
-  npcInviteDecision — counted accept / counter / decline, with the offered
-  chance band (5–24 / 25–49 / 50–74 / 75–95) and who decided (target id).
+  (tele kind 'person'), decided by the target's character via
+  npcInviteDecision — counted accepted / refused / staged / expired /
+  gate outcomes (invalid / already-bonded / cooldown / not-perceived /
+  no-decision), with the offered chance band (5–24 / 25–49 / 50–74 /
+  75–95) where a chance is offered (NPC↔NPC immediate decisions; the
+  NPC→scholar staged flavor carries chance null) and who decided
+  (target id). AMENDMENT: there is NO 'counter' outcome for person
+  bonds in code — counted outcomes are as listed here.
   Person bonds are the engine's only character-decided acceptance path;
   they are reported alongside link joins, never merged into them.
 - **Wild ally-join: RULED OUT as a distinct engine path.** Grep of src/js
@@ -101,8 +114,9 @@ Zero src/js. Gates, prices, deeds, and readyDemand untouched.
 3. Ally-join: links formed by path (propose/counter/raid/ladder),
    first-link day + path, links ever formed, links seasoned at end,
    polities formed (shape, size, first day).
-4. Person-bond proposals: staged / accepted / counter / declined, by
-   chance band, with decider (target) recorded.
+4. Person-bond proposals: staged / accepted / refused / expired /
+   gate outcomes, by chance band where offered, with decider (target)
+   recorded. (No counter outcome exists for person bonds.)
 5. Foreign polities: count, max size, first day any reaches 4+ villages.
 6. Wall numbers: wins / national / table / wave-4 / wave-5 unlocks,
    median survival, standing totals, scaleRank at end.
@@ -112,7 +126,7 @@ This is a measurement arm: GO means the instrument works and the first
 numbers are captured cleanly. GO iff ALL of:
 1. Every link on the band classified by formation path (propose / counter /
    raid / ladder / peer-propose / peer-counter), none unclassified, none forced.
-2. Every bond_proposed tele event (kind 'bond' AND 'link') reconciled
+2. Every bond_proposed tele event (kind 'person' AND 'link') reconciled
    against snapshot/wrap transitions — 0 irreconcilable.
 3. Neutrality — the instrument does not perturb the game: the
    no-instrument control leg matches the instrumented control leg exactly
@@ -204,7 +218,7 @@ No other policy change. No src/js change.
   identical diplo counters), and a neutrality miniature (ON vs OFF on a
   short horizon, days + standing identical).
 - Live install/shape/tele/wrap legs: every wrapped method exists on the
-  loaded Game, tele capture sees kind 'bond' and kind 'link' events.
+  loaded Game, tele capture sees kind 'person' and kind 'link' events.
 - KNOWN WRAP RISK (from secondlink-a): a wrap records nothing if the
   engine calls the closure instead of the Game method (stageLinkRaise
   was dead that way). The proof must verify EACH wrapped method's call
