@@ -1,0 +1,40 @@
+
+===== A (r123, WITH wideduty) =====
+seed  lived  aliveEnd  personDeaths  bearerDeaths  cures  buckets
+97901    103      1            13            12      7  {"field-fight":12,"contest":1}
+      multi-death days: d64x3
+97902    121      0            17            12     22  {"field-fight":16,"contest":1}
+      multi-death days: d121x4
+97903    131      0            19            16     24  {"field-fight":19}
+      multi-death days: d130x4, d131x4
+97904    133      0            24            20      3  {"field-fight":21,"fever":1,"wound":1,"contest":1}
+      multi-death days: d131x4, d133x3
+BAND  lived=488 aliveAtHorizon=0/4 personDeaths=73 cures=56 buckets={"field-fight":68,"contest":3,"fever":1,"wound":1}
+
+===== B (r126, WITH wideduty + alien-fallen fix) =====
+seed  lived  aliveEnd  personDeaths  bearerDeaths  cures  buckets
+97901    103      1            13             -      7  {"field-fight":12,"contest":1}
+      multi-death days: d64x3
+      duty-held days=86 healer-present days=102 sick-days=8 joins=2 leavers=0 telePerson=13
+97902    121      4            17             -     22  {"field-fight":16,"contest":1}
+      multi-death days: d121x4
+      duty-held days=118 healer-present days=120 sick-days=3 joins=5 leavers=0 telePerson=17
+97903    131      5            19             -     24  {"field-fight":19}
+      multi-death days: d130x4, d131x4
+      duty-held days=130 healer-present days=129 sick-days=18 joins=6 leavers=0 telePerson=19
+97904    133      2            24             -      3  {"field-fight":21,"fever":1,"wound":1,"contest":1}
+      multi-death days: d131x4, d133x3
+      duty-held days=131 healer-present days=131 sick-days=74 joins=11 leavers=0 telePerson=24
+BAND  lived=488 aliveAtHorizon=0/4 personDeaths=73 cures=56 buckets={"field-fight":68,"contest":3,"fever":1,"wound":1}
+
+===== Q1 FIX PROOF + Q2 GUARDRAIL (binding bars) =====
+teleOnly (telemetry-only deaths): B=0 (GO: 0)
+fallenOnly: B=0 unattributed: B=0
+alien-bucket deaths: A=0 B=0 (fallen 'a stranger' and tele 'alien' both bucket alien)
+lived days: A=488 B=488 delta=0 (guardrail: B>=440, within 10% of A=488)
+alive at horizon (d140): A=0/4 B=0/4
+person deaths: A=73 B=73
+fever+wound deaths: A=2 B=2
+field-fight deaths: A=68 B=68
+cures: A=56 B=56
+VERDICT: Q1-GO Q2-GO

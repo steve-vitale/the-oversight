@@ -1,0 +1,27 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=0)
+=== seed 97903 day 90 — conversation with Ursula (ursula_weber) ===
+occupation=Mortician temperament=gentle trust=22 dead=false
+want: seek_comfort (stage 0)
+open thread: grief fromSeed=false
+picker: control
+
+THEM: "They'd tell me to keep working. So I'm working. That's the whole plan. Anyway."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "Say it plain. Thanks. ...Thanks for saying that."
+YOU: [ask:gossip] "Heard anything about anyone?"
+THEM: "Huh. Let me think about that." "People are talking about Aroha. Take it for what it's worth, friend."
+YOU: [dlg:more] "Go on."
+THEM: "That was me — headed out for water. Think, then act."
+YOU: [dlg:react] (listen)
+THEM: "Maybe it's only me — Devon? A programmer, back before. Solid person."
+YOU: [dlg:more] "I’m listening."
+THEM: "Nathan is back. Walked in like they'd never left."
+YOU: [dlg:react] (listen)
+THEM: "Anyway." A small smile.
+YOU: [dlg:more] "I’m listening."
+THEM: "Ruth headed out for water."
+YOU: (leave)
+pre-close: want seek_comfort stage 2 thread gossip
+closing line: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+(gossip picks this sitting: 1)

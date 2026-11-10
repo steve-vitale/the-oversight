@@ -1,7 +1,9 @@
-// scripts/deathcensus-analyze-20261110.js — journey-scale r125 Q1–Q3.
-// The survival-attribution comparison: Arm A (r123's published band,
-// WITH wideduty) vs Arm B (this run's band on the reverted base,
-// WITHOUT wideduty), plus the death-cause census tables for both.
+// scripts/deathcensus-analyze-r126-20261110.js — journey-scale r126 Q1–Q3.
+// The alien-fallen fix proof: Arm A (r123's published band, WITH
+// wideduty) vs Arm B (this run's band on current master WITH the fix),
+// plus the death-cause census tables for both. Cloned from the r125
+// analyzer; the wideduty-attribution verdict block is replaced by the
+// r126 Q1/Q2 verdict (teleOnly + survival guardrail).
 //
 // Arm A is read from r123's evidence — NO live sim:
 //   journey-scale-r123-trust-<seed>.json  (census.deathLog: the full
@@ -170,12 +172,12 @@ function analyzeArmB(dir) {
     const dutyDays = daily.filter(d => d.dutyHolder != null).length;
     const healerDays = daily.filter(d => d.healerId != null).length;
     const sickDays = daily.reduce((t, d) => t + (d.sickCount || 0), 0);
-    const cureCountsB = countCures(path.join(dir, `journey-scale-r125-capture-${seed}.txt`));
+    const cureCountsB = countCures(path.join(dir, `journey-scale-r126-capture-${seed}.txt`));
     // livedDays: the trust census end day, the SAME definition Arm A
     // uses (r123's published 488) — the last daily row can sit a day
     // early when the final deaths land in the post-run drain.
     let trustDay = null;
-    try { const t = JSON.parse(fs.readFileSync(path.join(dir, `journey-scale-r125-trust-${seed}.json`), 'utf8')); trustDay = (t.census || {}).day; } catch (e) { trustDay = null; }
+    try { const t = JSON.parse(fs.readFileSync(path.join(dir, `journey-scale-r126-trust-${seed}.json`), 'utf8')); trustDay = (t.census || {}).day; } catch (e) { trustDay = null; }
     const livedDays = (trustDay != null) ? trustDay : (daily.length ? daily[daily.length - 1].day : null);
     perSeed[seed] = {
       seed,
@@ -198,7 +200,7 @@ function analyzeArmB(dir) {
       errors: (dc.errors || []).length,
     };
   }
-  return { arm: 'B (r125, WITHOUT wideduty)', perSeed };
+  return { arm: 'B (r126, WITH wideduty + alien-fallen fix)', perSeed };
 }
 
 function bandTotals(perSeed) {
@@ -245,16 +247,29 @@ function main() {
   if (a) ta = printArm(a);
   if (b) tb = printArm(b);
   if (ta && tb) {
-    console.log('\n===== Q1 ATTRIBUTION (binding bars) =====');
-    console.log(`lived days: A=${ta.livedDays} B=${tb.livedDays} delta=${tb.livedDays - ta.livedDays} (bar: B>=548 AND >=1 alive => IMPLICATED; B<=488 AND 0 alive => EXONERATED; else INCONCLUSIVE)`);
+    // r126 Q1 (fix proof) + Q2 (survival guardrail). NOT r125's wideduty
+    // attribution: Arm B here is WITH wideduty + the fix, so the old
+    // IMPLICATED/EXONERATED bars do not apply.
+    let teleOnlyB = 0, fallenOnlyB = 0, unattributedB = 0;
+    for (const seed of SEEDS) {
+      const s = b.perSeed[seed];
+      teleOnlyB += (s.teleOnly || 0);
+      fallenOnlyB += (s.fallenOnly || 0);
+      unattributedB += (s.unattributed || 0);
+    }
+    console.log('\n===== Q1 FIX PROOF + Q2 GUARDRAIL (binding bars) =====');
+    console.log(`teleOnly (telemetry-only deaths): B=${teleOnlyB} (GO: 0)`);
+    console.log(`fallenOnly: B=${fallenOnlyB} unattributed: B=${unattributedB}`);
+    console.log(`alien-bucket deaths: A=${ta.byBucket.alien || 0} B=${tb.byBucket.alien || 0} (fallen 'a stranger' and tele 'alien' both bucket alien)`);
+    console.log(`lived days: A=${ta.livedDays} B=${tb.livedDays} delta=${tb.livedDays - ta.livedDays} (guardrail: B>=440, within 10% of A=488)`);
     console.log(`alive at horizon (d140): A=${ta.alive}/4 B=${tb.alive}/4`);
     console.log(`person deaths: A=${ta.personDeaths} B=${tb.personDeaths}`);
     console.log(`fever+wound deaths: A=${(ta.byBucket.fever || 0) + (ta.byBucket.wound || 0)} B=${(tb.byBucket.fever || 0) + (tb.byBucket.wound || 0)}`);
     console.log(`field-fight deaths: A=${ta.byBucket['field-fight'] || 0} B=${tb.byBucket['field-fight'] || 0}`);
     console.log(`cures: A=${ta.cures} B=${tb.cures}`);
-    const verdict = (tb.livedDays >= 548 && tb.alive >= 1) ? 'WIDEDUTY-IMPLICATED'
-      : (tb.livedDays <= 488 && tb.alive === 0) ? 'WIDEDUTY-EXONERATED' : 'INCONCLUSIVE';
-    console.log(`VERDICT-INPUT: ${verdict}`);
+    const q1 = (teleOnlyB === 0) ? 'Q1-GO' : 'Q1-NO-GO';
+    const q2 = (tb.livedDays >= 440) ? 'Q2-GO' : 'Q2-NO-GO';
+    console.log(`VERDICT: ${q1} ${q2}`);
   }
 }
 
