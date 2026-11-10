@@ -1,0 +1,734 @@
+{
+ "arm": "sim-wallbase-a",
+ "seed": 110008,
+ "policyId": "competent",
+ "days": 125,
+ "gameDays": 125,
+ "endReason": "village-lost",
+ "stop": {
+  "version": 1,
+  "kind": "engine-ending",
+  "engineOver": true,
+  "won": false,
+  "villageLost": true,
+  "iterations": 125,
+  "gameDay": 125
+ },
+ "communityExposure": {
+  "version": 1,
+  "thresholdIterations": 10,
+  "observations": 124,
+  "zeroObservations": 0,
+  "unknownObservations": 0,
+  "maxConsecutiveZero": 0,
+  "sustainedEmpty": false,
+  "sustainedEpisodes": 0,
+  "firstEmpty": null,
+  "firstSustainedEmpty": null,
+  "recoveredAfterSustained": false,
+  "firstRecovery": null
+ },
+ "national": 0,
+ "maxRank": 1,
+ "table": 1,
+ "entered": 0,
+ "wins": 0,
+ "maxWave": 4,
+ "wave4": 1,
+ "wave5": 0,
+ "waveKills": {
+  "1": 36,
+  "2": 19,
+  "3": 12,
+  "4": 3
+ },
+ "maxArc": 4,
+ "arc2": 1,
+ "arc3": 1,
+ "arc4": 1,
+ "maxFires": 0,
+ "fourRealm": 0,
+ "maxStanding": 365,
+ "endStanding": 365,
+ "vests": 0,
+ "vestsVillager": 0,
+ "causeCounts": {
+  "monster:villager combat": 32,
+  "monster:expedition": 22,
+  "person:ambush": 1,
+  "monster:combat": 28,
+  "villager:The Redactor": 1,
+  "villager:Gavel": 1,
+  "player:contest": 1,
+  "player:the wild": 8
+ },
+ "deaths": [
+  {
+   "day": 4,
+   "kind": "monster",
+   "who": "gallowdeer",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 7,
+   "kind": "monster",
+   "who": "nightcourt",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 9,
+   "kind": "monster",
+   "who": "sweeps_week",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 10,
+   "kind": "monster",
+   "who": "sanjun",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 12,
+   "kind": "monster",
+   "who": "nightlight_catfish",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 12,
+   "kind": "monster",
+   "who": "anaconda_empress",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 12,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 12,
+   "kind": "monster",
+   "who": "anaconda_empress",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 12,
+   "kind": "monster",
+   "who": "review_drone",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 13,
+   "kind": "monster",
+   "who": "rut_king",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 13,
+   "kind": "monster",
+   "who": "anaconda_empress",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 13,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 13,
+   "kind": "monster",
+   "who": "sanjun",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 13,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 14,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 15,
+   "kind": "monster",
+   "who": "sunback",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 15,
+   "kind": "monster",
+   "who": "murkcap",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 15,
+   "kind": "person",
+   "who": "raj_patel",
+   "cause": "ambush",
+   "player": false
+  },
+  {
+   "day": 17,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 17,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 17,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 18,
+   "kind": "monster",
+   "who": "giant_mosquito",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 18,
+   "kind": "monster",
+   "who": "sanjun",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 18,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 18,
+   "kind": "monster",
+   "who": "statickite",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 19,
+   "kind": "monster",
+   "who": "sanjun",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 22,
+   "kind": "monster",
+   "who": "rut_king",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 22,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 22,
+   "kind": "monster",
+   "who": "moderator",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 23,
+   "kind": "monster",
+   "who": "bright_idea",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 23,
+   "kind": "monster",
+   "who": "hummice",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 24,
+   "kind": "monster",
+   "who": "sunback",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 25,
+   "kind": "monster",
+   "who": "understudy",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 25,
+   "kind": "monster",
+   "who": "voice_mimic_radio",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 25,
+   "kind": "monster",
+   "who": "anaconda_empress",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 25,
+   "kind": "monster",
+   "who": "landlord",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 25,
+   "kind": "monster",
+   "who": "alien_tick",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 26,
+   "kind": "monster",
+   "who": "giant_mosquito",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 26,
+   "kind": "monster",
+   "who": "sunback",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 27,
+   "kind": "monster",
+   "who": "ad_sponsor",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 27,
+   "kind": "monster",
+   "who": "ad_break",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 29,
+   "kind": "villager",
+   "who": "liam_davis",
+   "cause": "The Redactor",
+   "player": false
+  },
+  {
+   "day": 30,
+   "kind": "monster",
+   "who": "sunback",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 30,
+   "kind": "villager",
+   "who": "gen_lwwh7up",
+   "cause": "Gavel",
+   "player": false
+  },
+  {
+   "day": 30,
+   "kind": "monster",
+   "who": "bulldozer",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 32,
+   "kind": "monster",
+   "who": "giant_mosquito",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 32,
+   "kind": "monster",
+   "who": "heckler",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 32,
+   "kind": "monster",
+   "who": "spool",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 33,
+   "kind": "monster",
+   "who": "voice_mimic_radio",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 33,
+   "kind": "monster",
+   "who": "spool",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 35,
+   "kind": "villager",
+   "who": "gen_d31mxuy",
+   "cause": "contest",
+   "player": true
+  },
+  {
+   "day": 35,
+   "kind": "monster",
+   "who": "alien_tick",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 49,
+   "kind": "monster",
+   "who": "chorus_line",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 49,
+   "kind": "monster",
+   "who": "spool",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 49,
+   "kind": "monster",
+   "who": "giant_mosquito",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 56,
+   "kind": "monster",
+   "who": "voice_mimic_radio",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 60,
+   "kind": "monster",
+   "who": "bright_idea",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 60,
+   "kind": "monster",
+   "who": "living_wire",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 60,
+   "kind": "monster",
+   "who": "moderator",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 61,
+   "kind": "monster",
+   "who": "buffering",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 68,
+   "kind": "monster",
+   "who": "congregation",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 71,
+   "kind": "monster",
+   "who": "redactor",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 71,
+   "kind": "monster",
+   "who": "hushwolf",
+   "cause": "villager combat",
+   "player": false
+  },
+  {
+   "day": 79,
+   "kind": "monster",
+   "who": "algorithm",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 80,
+   "kind": "monster",
+   "who": "influencer",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 82,
+   "kind": "monster",
+   "who": "lockpick_raccoon",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 84,
+   "kind": "monster",
+   "who": "belltoad",
+   "cause": "expedition",
+   "player": false
+  },
+  {
+   "day": 89,
+   "kind": "monster",
+   "who": "gavel",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 90,
+   "kind": "monster",
+   "who": "terms_of_service",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 106,
+   "kind": "monster",
+   "who": "spool",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 109,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 109,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 109,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 109,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 109,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 109,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 109,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 109,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 109,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 109,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 109,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 109,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 109,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 109,
+   "kind": "monster",
+   "who": "ducks_in_a_row",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 122,
+   "kind": "monster",
+   "who": "terms_of_service",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 122,
+   "kind": "monster",
+   "who": "buffering",
+   "cause": "combat",
+   "player": false
+  },
+  {
+   "day": 123,
+   "kind": "villager",
+   "who": "gen_vff524a",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 123,
+   "kind": "villager",
+   "who": "gen_uskwtk5",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 124,
+   "kind": "villager",
+   "who": "gen_ruw86j7",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 124,
+   "kind": "villager",
+   "who": "nina_petrova",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 124,
+   "kind": "villager",
+   "who": "ella_johnson",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 124,
+   "kind": "villager",
+   "who": "olivia_bennett",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 124,
+   "kind": "villager",
+   "who": "gen_8odts6i",
+   "cause": "the wild",
+   "player": true
+  },
+  {
+   "day": 125,
+   "kind": "villager",
+   "who": "meera_reddy",
+   "cause": "the wild",
+   "player": true
+  }
+ ],
+ "livingAtEnd": [],
+ "nAmbient": 138,
+ "nSay": 3253,
+ "instrumentErrors": 0,
+ "pacing": {
+  "meanDeliberatePerDay": 20.7,
+  "meanPolicyCallsPerDay": 6.7,
+  "meanTicksPerDay": 391.4
+ }
+}
