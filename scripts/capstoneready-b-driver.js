@@ -1,13 +1,22 @@
 // capstoneready-b-driver.js — ladder capstone-deed readiness census
-// (arm sim-capstoneready-b, Loop B run fleshout-loop-b-20261110T1030Z).
+// (arm sim-capstoneready-b, Loop B run fleshout-loop-b-20261110T1030Z;
+//  re-measure arm sim-capstoneready-remeasure-b, run
+//  fleshout-loop-b-20261110T1142Z, base 57547c8dd — post answermail-a +
+//  post wave5kill-a).
 // DIAG ONLY, zero src/js: a daily recorder (pure reads) wrapped around the
 // plain competent policy's daily() hook. Records, per seed-day,
 // ladderCapstoneReady(kind) for all three deeds plus the underlying counts
 // (living non-scholar wave-4 veterans, chartered trade links, scaleRank,
 // ladderStage, feast-bundle flag, delivered state).
+// Revision (re-measure): (a) each daily row records scholarId so
+// veteran-to-scholar promotion is observed directly; (b) the driver wraps
+// Game.recordWaveKill / Game.recordPyrrhicKill (the kill-log choke points)
+// and samples _ladderLivingVeterans(4) immediately after each new
+// waveKillLog entry lands, so a sub-day overlap of 2 living veterans is
+// not missed by the daily snapshot. Both additions are pure reads.
 // Usage:
-//   SEEDS=140101..140108 DAYS=150 node scripts/capstoneready-b-driver.js
-// Writes evidence/2026-11-10/perseed-capstoneready-b/capstoneready-b-s<seed>.json
+//   SEEDS=140201..140208 DAYS=150 OUTDIR=evidence/2026-11-10/perseed-capstoneready-remeasure-b node scripts/capstoneready-b-driver.js
+// Writes evidence/2026-11-10/perseed-capstoneready-remeasure-b/capstoneready-b-s<seed>.json
 // (refuses to overwrite an existing per-seed file).
 'use strict';
 const path = require('path');
@@ -77,6 +86,8 @@ function personName(Game, vid) {
 // proven empirically in scripts/test-capstoneready-b.js.)
 function snapshotLadder(Game) {
   const row = { day: gday(Game), errors: [] };
+  // (a) scholarId: observe veteran-to-scholar promotion directly.
+  try { row.scholarId = Game.villagerId || null; } catch (e) { row.scholarId = null; }
   try {
     const L = Game.villageLadder();
     row.ladder = {
@@ -129,8 +140,54 @@ function snapshotLadder(Game) {
   return row;
 }
 
+// wrapKillRecorder(Game, samples, errors): (b) kill-time veteran sampling.
+// Wraps the two kill-log choke points (recordWaveKill, recordPyrrhicKill —
+// every real kill flows through one of them; zero src/js) so that right
+// after each NEW waveKillLog entry lands, the living-veteran count is
+// sampled at that moment. Pure reads only: the sample is the same read
+// ladderCapstoneReady uses (_ladderLivingVeterans). Sampling failures are
+// caught and recorded — they must never change game behavior. A call that
+// adds no log entry (recordWaveKill's same-day dedupe) records no sample.
+// Returns the installed wrappers, or null when neither method exists.
+function wrapKillRecorder(Game, samples, errors) {
+  const methods = ['recordWaveKill', 'recordPyrrhicKill'];
+  const installed = {};
+  for (const name of methods) {
+    const orig = Game[name];
+    if (typeof orig !== 'function') continue;
+    installed[name] = (function (origFn, methodName) {
+      return function (monsterId, killerVid, via, detail) {
+        let beforeLen = -1;
+        try { beforeLen = (((Game.state || {}).waveKillLog) || []).length; } catch (e) {}
+        const ret = origFn.apply(Game, arguments);
+        try {
+          const log = ((Game.state || {}).waveKillLog) || [];
+          if (beforeLen >= 0 && log.length > beforeLen) {
+            const entry = log[log.length - 1];
+            if (entry && entry.mid === monsterId && (entry.by || null) === (killerVid || null)) {
+              let living = null;
+              try { living = Game._ladderLivingVeterans(4); } catch (e) { errors.push(methodName + ' sample: ' + String(e.message).slice(0, 120)); }
+              samples.push({
+                day: gday(Game), mid: entry.mid, by: entry.by, w: entry.w | 0,
+                via: entry.via || via || 'unknown',
+                livingVeteransAtKill: living,
+                scholarIdAtKill: (function () { try { return Game.villagerId || null; } catch (e) { return null; } })(),
+              });
+            }
+          }
+        } catch (e) { errors.push(methodName + ' sample: ' + String(e.message).slice(0, 120)); }
+        return ret;
+      };
+    })(orig, name);
+    Game[name] = installed[name];
+  }
+  return Object.keys(installed).length ? installed : null;
+}
+
 // summarize(rows): per-seed census summary — ever-ready rates, first-ready
 // days, blocked deed-day counts per reason, peaks. Pure function of rows.
+// Rows in the old corpus format (no scholarId / kill-time fields) still
+// summarize: those fields are never read here.
 function summarize(rows) {
   const s = { days: rows.length, everReady: {}, firstReadyDay: {}, blockedDeedDays: {}, reasonDays: {}, peakLivingVeterans: 0, peakLadderStage: 0, peakScaleRank: 'village', everCharteredLinks: 0, everFeastBundle: false, everDelivered: null };
   const scaleOrd = { village: 0, regional: 1, national: 2, global: 3 };
@@ -154,14 +211,39 @@ function summarize(rows) {
       if (kind === 'feast_embassy' && d.bundle === true) s.everFeastBundle = true;
     }
   }
-  // Binding blocker (prereg): the reason code with the largest share of
-  // this seed's blocked deed-days; named when share >= 50%.
+  // Binding blocker (prereg, baseline): the reason code with the largest share of
+  // this seed's blocked deed-days; named when share >= 50%. Kept for
+  // comparison only — the baseline proved it structurally unsatisfiable.
   let totalBlocked = 0, topReason = null, topN = 0;
   for (const k of Object.keys(s.reasonDays)) { totalBlocked += s.reasonDays[k]; if (s.reasonDays[k] > topN) { topN = s.reasonDays[k]; topReason = k; } }
   s.totalBlockedDeedDays = totalBlocked;
   s.bindingBlocker = topReason;
   s.bindingBlockerShare = totalBlocked ? +(topN / totalBlocked).toFixed(3) : null;
   s.bindingBlockerNamed = totalBlocked > 0 && s.bindingBlockerShare >= 0.5;
+  // Per-deed binding blocker (prereg, re-measure): the modal reason over
+  // THAT deed's own blocked days. Named when the modal share of that
+  // deed's blocked days is >= 50%; a deed with zero blocked days counts
+  // as named-vacuous (blocker null, it has nothing blocking it).
+  s.perDeedBlocker = {};
+  for (const kind of DEEDS) {
+    const counts = {};
+    let blocked = 0;
+    for (const r of rows) {
+      const d = (r.deeds || {})[kind];
+      if (!d || d.ready) continue;
+      blocked++;
+      const reason = d.reason || 'unknown';
+      counts[reason] = (counts[reason] | 0) + 1;
+    }
+    let modal = null, modalN = 0;
+    for (const k of Object.keys(counts)) { if (counts[k] > modalN) { modalN = counts[k]; modal = k; } }
+    s.perDeedBlocker[kind] = {
+      blockedDays: blocked,
+      blocker: blocked === 0 ? null : modal,
+      share: blocked ? +(modalN / blocked).toFixed(3) : null,
+      named: blocked === 0 || (modalN / blocked) >= 0.5,
+    };
+  }
   return s;
 }
 
@@ -169,8 +251,10 @@ async function oneRun(seed) {
   const { Game } = await loadGame({ seed: seed, mode: 'capstoneready-b', fullTelemetry: false });
   const rows = [];
   const errors = [];
+  const killTimeSamples = [];
   let lastSnapDay = -1;
   await setupGame(Game);
+  wrapKillRecorder(Game, killTimeSamples, errors);
   const wrapped = Object.assign({}, COMPETENT.competent, {
     daily: function (Gm, ctx) {
       try { return COMPETENT.competent.daily(Gm, ctx); } finally {
@@ -188,8 +272,11 @@ async function oneRun(seed) {
   try { const d = gday(Game); if (d !== lastSnapDay) rows.push(snapshotLadder(Game)); } catch (e) { errors.push('final-snapshot: ' + String(e.message).slice(0, 120)); }
   const st = Game.state || {};
   const summary = summarize(rows);
+  summary.killTimeSamples = killTimeSamples.length;
+  summary.killTimePeakVeterans = killTimeSamples.reduce(function (m, s) { return (typeof s.livingVeteransAtKill === 'number' && s.livingVeteransAtKill > m) ? s.livingVeteransAtKill : m; }, 0);
+  summary.killTimeEverTwoVeterans = killTimeSamples.some(function (s) { return (s.livingVeteransAtKill | 0) >= 2; });
   const out = {
-    seed: seed, arm: 'capstoneready-b', run: 'fleshout-loop-b-20261110T1030Z',
+    seed: seed, arm: 'capstoneready-remeasure-b', run: 'fleshout-loop-b-20261110T1142Z',
     policy: 'competent', anchorCommit: ANCHOR, days: DAYS,
     resultDays: result.days, gameDays: (st.scholar && st.scholar.day) || 0,
     endReason: result.endReason, won: !!Game.won, over: !!Game.over,
@@ -198,7 +285,7 @@ async function oneRun(seed) {
     waveKills: result.waveKills || {},
     scaleTrajectory: (result.samples && result.samples.scale) || [],
     teleDeaths: (result.samples && result.samples.deaths) || [],
-    summary: summary, daily: rows, recorderErrors: errors,
+    summary: summary, killTimeSamples: killTimeSamples, daily: rows, recorderErrors: errors,
   };
   return out;
 }
@@ -213,8 +300,10 @@ async function main() {
     console.log(JSON.stringify({
       seed: out.seed, days: out.resultDays, endReason: out.endReason, won: out.won,
       maxWave: out.maxWaveUnlocked, peakStage: s.peakLadderStage, peakScale: s.peakScaleRank,
-      peakVets: s.peakLivingVeterans, everReady: s.everReady, firstReadyDay: s.firstReadyDay,
+      peakVets: s.peakLivingVeterans, killTimePeakVets: s.killTimePeakVeterans, killTimeEverTwo: s.killTimeEverTwoVeterans,
+      everReady: s.everReady, firstReadyDay: s.firstReadyDay,
       bindingBlocker: s.bindingBlocker, blockerShare: s.bindingBlockerShare, named: s.bindingBlockerNamed,
+      perDeedBlocker: s.perDeedBlocker,
       everChartered: s.everCharteredLinks, everBundle: s.everFeastBundle,
       rows: s.days, recorderErrors: out.recorderErrors.length, file: path.relative(REPO, file),
     }));
@@ -225,4 +314,4 @@ if (require.main === module) {
   main().catch(function (e) { console.error(e.stack); process.exitCode = 1; });
 }
 
-module.exports = { snapshotLadder: snapshotLadder, summarize: summarize, DEEDS: DEEDS };
+module.exports = { snapshotLadder: snapshotLadder, summarize: summarize, wrapKillRecorder: wrapKillRecorder, DEEDS: DEEDS };
