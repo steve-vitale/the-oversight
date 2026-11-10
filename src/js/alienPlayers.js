@@ -2435,6 +2435,23 @@
           if (this.registerDeath) {
             this.registerDeath({ kind: 'person', villagerId: victim, name: vname, cause: 'alien', killerId: 'ap_' + pid });
           }
+          // FALLEN RECORD (journey-scale r126): registerDeath makes the
+          // corpse + grief + case, but village.fallen is pushed by each
+          // death path separately — and this path never pushed it, so an
+          // alien-murdered villager vanished from the village's own death
+          // record while every other death is recorded there (r125 census:
+          // tele-only 'alien' rows). Cause is 'a stranger', never 'alien':
+          // the memorial roll renders the cause verbatim in the Codex
+          // (fallen-memorial.js), and the canon says the death record
+          // says 'a stranger', never 'an alien' (docs/ALIEN-PLAYERS.md).
+          // The census already buckets 'a stranger' as alien
+          // (deathcensus-analyze-20261110.js ALIEN_CAUSES). Mirrors the
+          // betrayal.js ambush-murder push (journey-social r125).
+          try {
+            const v = this.state.village; v.fallen = v.fallen || [];
+            v.fallen.push({ villagerId: victim, day: this.state.scholar.day,
+              cause: 'a stranger', name: this.fallenName ? this.fallenName(victim) : vname });
+          } catch (e2) { console.warn('[alienPlayers] fallen push failed', e2 && e2.message); }
           // PHANTOM EATER (break-it food 2026-10-09): the old code marked
           // dead but left them in the roster — villageEats kept feeding the
           // corpse (they ate AND produced). Every other death path pairs
