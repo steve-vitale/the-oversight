@@ -109,11 +109,19 @@ gates that were red on the stale-proof pair should go green on this alone.
 ## Post-rebase re-run (to be filled after rebasing onto e243e2eeb)
 
 - Branch rebased onto explicit master SHA e243e2eeb (read immediately before
-  rebasing; never `git rebase master`). All proof legs re-run on the rebased
-  branch before the coordinator's `--ff-only` merge; panel stays valid (the
-  cookfirst-a move touched no manifest file — verified by diff).
-- (to fill: proof-update / workflow / cache-flags / ontology / test-proofrefresh-b2 results on the rebased branch)
-- (to fill: worktree-heartbeat retry result)
+  rebasing; never `git rebase master`). The rebase hit the documented
+  stop-at-pick quirk (pick in both done and todo, worktree clean, pick
+  unapplied — verified with `git diff <pick> -- <files>` non-empty); recovery
+  was `git rebase --continue`, which sailed through. Rebased commit c007c5e94;
+  my 5 files byte-identical between 09ded32b2 and c007c5e94
+  (`git diff 09ded32b2 c007c5e94 -- <my files>` empty; the only diff between
+  the two commits is the cookfirst-a base).
+- Post-rebase re-run, all green on c007c5e94 (base e243e2eeb = master at
+  commit time): proof-update 9/9 exit 0, workflow 9/9, cache-flags 4/4,
+  ontology "All 135 systems validated", `test-proofrefresh-b2.js` 10/10.
+  Panel stays valid: the cookfirst-a move touched no manifest file.
+- Worktree-heartbeat retry: the earlier hung invocation was killed; heartbeat
+  re-run after the rebase (see run log) — registry write succeeded, no error.
 
 ## Metric review
 
