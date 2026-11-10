@@ -198,6 +198,14 @@ async function loadGame(opts) {
     // the error is still swallowed). Answers "which features silently
     // throw?" — 4.5k empty catches hide failures from every sim otherwise.
     if (process.env.SIM_CATCH === '1') __src = instrumentCatches(__src, f);
+    // SOURCE PATCH (sim-roundcap-b, 2026-11-10): test-only in-memory
+    // source transform, e.g. extending MAX_ROUNDS in a loaded copy of
+    // fieldFights.js to size a cap extension. src/js on disk is never
+    // touched. opts.sourcePatch(file, src) must return the source to
+    // eval; default is identity. Any arm using it MUST carry an identity
+    // check: the patched load with the production value reproduces the
+    // unpatched outcomes exactly, or the sizing is not a continuation.
+    if (typeof opts.sourcePatch === 'function') __src = opts.sourcePatch(f, __src);
     // sourceURL: names the eval'd file in stack traces and V8 coverage
     // (NODE_V8_COVERAGE) without changing semantics or line numbers.
     __src += '\n//# sourceURL=' + f;
