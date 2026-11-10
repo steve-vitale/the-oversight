@@ -111,6 +111,17 @@ mid-run. Metric problems go under "metric review" for the NEXT run.
 4. `standing-short` — peak gated < 200, no gear-ready day.
 5. `never-unlocked` — peak gated < 100 (wave 4 never unlocked).
 
+Precedence correction (committed before any judged computation):
+`never-unlocked` is the more specific condition and is checked
+BEFORE `standing-short`, even though it is listed fifth — a seed
+with peak gated < 100 classifies as `never-unlocked`, not
+`standing-short`. Classes are otherwise unchanged; the precedence
+is released > bars-met-standing-short >
+standing-clears-veterans-hold > never-unlocked > standing-short.
+(A ready day implies wave-4 faced — a veteran holds a wave-4+
+kill, which requires the wave-4 deed — so classes 1 and 2 are
+jointly exhaustive over seeds with ready days.)
+
 ## Binding-constraint rule (mechanical, on reference days)
 
 - Reference days: ALL gear-ready days if >= 1 exists, else the
