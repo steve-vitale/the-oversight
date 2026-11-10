@@ -336,7 +336,14 @@ Proof refresh (r167-caused failures): `node scripts/balance-panel.js
 `evidence/2026-11-10/neutral-r167-adopt.json.gz`, then
 `node scripts/balance-proof-update.js` rewrites
 `scripts/balance-proof.json`. Panel log:
-`evidence/2026-11-10/neutral-r167-adopt-panel.log`.
+`evidence/2026-11-10/neutral-r167-adopt-panel.log`. The refresh was
+run TWICE: once on the pre-rebase tree (proved the procedure), then
+again after the rebase onto 91650a90f — the retained panel + proof are
+the rebased-tree ones. Post-rebase re-run: all 3 measurement tests
+PASS (proof-update, workflow, cache-flags) and all 5 r167 proof tests
+PASS. Final gate state: 4 pre-existing base failures remain
+(mobile-combat-cadence, occupation-panels, phone-frame-proof,
+establishment-r20); 0 failures caused by this run.
 
 ## ADOPTION RECORD (this run, oversight-playtest-loop-2, 2026-11-10 ~05:00Z)
 
@@ -348,8 +355,12 @@ Proof refresh (r167-caused failures): `node scripts/balance-panel.js
   adopter re-run; panel claims spot-checked against the raw JSONs —
   end bonds 67/68/72/78, end days 70/67/82/75, successions 9/12).
 - Base moved during r167: master is now 91650a90f (r167 branched from
-  632ed6e23). Branch rebased onto the explicit master SHA before
-  landing; proof tests re-run post-rebase.
+  632ed6e23). Branch rebased onto the explicit master SHA 91650a90f
+  before landing — clean, no conflicts (master touched none of r167's
+  files; 3 commits between bases). Rebased commits: fe8639bfb (r167
+  work) + 2748c2134 (confirmation JSONs). Proof tests + measurement
+  tests re-run post-rebase: 8/8 pass. Proof refresh regenerated on the
+  rebased tree (commit 3).
 - Rotation 5→6 written at closeout (crisis next).
 
 ## TELEMETRY
