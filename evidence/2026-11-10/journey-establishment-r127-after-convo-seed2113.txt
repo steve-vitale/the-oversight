@@ -1,0 +1,82 @@
+=== r127-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Shanice (gen_4vsgxpt) occ=bartender --
+OPENING: Shanice: "I've heard good things about Stonebridge. We should link with them — we'd be stronger together."
+YOU: [link:accept] "All right. Let's ask them."
+THEM: "All right — let's ask them." You carry the proposal to Stonebridge.
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Goldenrod — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Strychnine Tree. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — White Yam. Leaf, stem, smell. You won't forget it now."
+YOU: [goon] "Yeah?"
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "...Fine. This had better be worth it."
+YOU: [dlg:more] "Go on."
+THEM: "Do you still sing? ...Sorry — weird question. I just realized I haven't heard anyone sing."
+YOU: [ans:q_song:a_yes] "In the shower. Which is now the creek. So yes, badly."
+THEM: "Ha! The creek concerts. I've heard those. Keep going."
+closing: "Good talk."
+
+-- Eric (gen_0i1lekk) occ=farmer --
+OPENING: "About whether you're angry — Are you angry? At whoever did this. At the sky. At anything."
+YOU: [ans:q_angry:a_yes] "Furious. Most days."
+THEM: "Good. Anger's fuel. Just — point it somewhere useful."
+YOU: [goon] "I'm listening."
+THEM: The ease drains out of it, a little.
+YOU: [goon] "I'm listening."
+THEM: "Anger's a fire — useful if you cook with it, deadly if you sleep next to it. I cook with mine. Most days. Sorry, what was the question."
+YOU: [goon] "I'm listening."
+THEM: "Help me haul something back? Too much for one."
+INVITE-ANSWER trust=91
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: "Here. I made an extra." Eric presses something into your hand — a decent tool, oiled and kept. (Useful. Keep it.)
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "an old trapline — I'll show you on the map sometime. It's real."
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "a cellar full of jars — I'll show you on the map sometime. It's real."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on whether you're angry."
+closing: "See you at the fire."
+
+-- Sarah (gen_t5ls9cb) occ=bush pilot --
+OPENING: "You talk to it -- the System. Have you ever asked? About the taken -- about Emily?"
+YOU: [gq:yn:yes] "Yes."
+THEM: "All right. Thank you for telling me."
+YOU: [goon] "Yeah?"
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [dlg:more] "What do you remember?"
+THEM: "It's my sister, Emily. Was taken at the Scattering. The boring half, they said — my sister, boring. I think about that every day. The pods get into my sleep some nights. Row on row of them, humming like a held note -- and I wake up reaching for something that isn't there."
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Shepherd's Purse. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Dandelion. Leaf, stem, smell. You won't forget it now."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+closing: "Right then. Back to the business of surviving."
+
+-- Elias (gen_p31mkju) occ=interpreter --
+OPENING: "Funny thing — I keep dreaming about rows of pods. Humming. Tell me I'm not the only one."
+YOU: [dlg:more] "Tell me about them."
+THEM: "It's my son, Emad. Asked if the taken ones were bad. I said no. He asked if they were boring. I did not answer. Some nights I swear I hear them before I sleep -- the pods, rows deep, humming. Then morning comes and I can't say whether it was real."
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "Tick — It waits. Give it room. That's the whole lesson."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Tamarind. Leaf, stem, smell. You won't forget it now."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Can I be honest? Still on that taken person."
+YOU: [goon] "I'm listening."
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [goon] "I'm listening."
+THEM: "What's the kindest thing someone's done for you out here?"
+YOU: [ans:q_kindness:a_tell] "I've watched people share food they couldn't spare. Quiet. No performance. Just
+THEM: "That's the good stuff. Quiet generosity. It's holding this whole thing together."
+closing: "Well. That was almost a conversation. We're improving."

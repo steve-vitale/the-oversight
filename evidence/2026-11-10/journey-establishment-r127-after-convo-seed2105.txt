@@ -1,0 +1,91 @@
+=== r127-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Emily (gen_tywvuac) occ=pottery instructor --
+OPENING: "Pantry's thin and getting thinner. Forage with me tomorrow? I know the far treeline, past the rocks."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to your partner, on the same side of the Haven door.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Wait — I'm away from Haven, out on the road. I can't promise a dawn meet while I'm out — find me when I'm back, and we'll set it then."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Curry Leaf. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Soursop. Leaf, stem, smell. You won't forget it now."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that foraging help."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "Laura walked out of Hide and Seek. Alive. That's the whole story and it's enough."
+YOU: [dlg:more] "Go on."
+THEM: "Amelia? A Dentist, back before. Solid person."
+closing: "Go. Think about what I said. Really think."
+
+-- Priya (gen_dfqgmnb) occ=arborist --
+OPENING: I'd walk through anything to get to them. That's not courage. That's just... math.
+YOU: [dlg:more] "Tell me more."
+THEM: "Blood first. Then the family you choose. I'm building the second kind here, too."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Okay. Yeah. I trust you."
+YOU: [goon] "How would that even work?"
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [party_name] "We should name this. Us."
+THEM: "A name. Okay." You say it out loud, trying the shape of it:
+1. "FINAL GIRLS CLUB" (📺 the System suggests)
+2. "The Kept Promise" (Priya suggests)
+3. "The Company" (or plain)
+(Which one? It'll stick.)
+YOU: [party_namepick:0] "FINAL GIRLS CLUB."
+THEM: 🤝 "FINAL GIRLS CLUB." It hangs in the air a moment — then Priya grins. It's real now. It has a name, which means it can be lost.
+📺 FINAL GIRLS CLUB is official. Priya. (The village watches the broadcast. Nobody blinks.)
+📣 FINAL GIRLS CLUB was named — Priya. A team, on purpose.
+📓 Codex: We named us: FINAL GIRLS CLUB.
+YOU: [party_role] "Let's talk roles."
+THEM: "Roles. Not ranks — promises."
+🗡️ point — First in. Hits harder (+3 strike), draws the eye.
+🩹 healer — Carries the wounded, patches them up (+6 heal).
+🎒 carrier — Hauls. Carry order reaches further, steadier hands.
+🗣️ talker — The face. People join easier, leaving hurts less.
+👁️ scout — Sees trouble first. Warns the party on the road.
+(Which one is Priya?)
+YOU: [party_rolepick:point] 🗡️ Point
+THEM: 🤝 Priya is 🗡️ Point now. First in. Hits harder (+3 strike), draws the eye.
+YOU: [dlg:react] (listen)
+THEM: "If they're out there, they're looking for me too. I have to be findable. Alive, and findable."
+closing: "This was nice. Don't be a stranger — we're twelve people, it's hard."
+
+-- Amelia (gen_t9m3uxp) occ=Dentist --
+OPENING: Hold it together. That's my whole philosophy. Hold it together.
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: It's quiet at the ridge. Amelia doesn't say much. Sometimes that's the whole point.
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Daylily Bud. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Papaya. Leaf, stem, smell. You won't forget it now."
+YOU: [dlg:more] "Tell me more."
+THEM: "You two sort it out, or I will, and nobody likes my version."
+YOU: [dlg:react] (listen)
+THEM: "So." They look at the fire for a moment.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on wanting to keep the peace."
+YOU: [goon] "What would that look like?"
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [goon] "What would that look like?"
+THEM: "That's enough for now. It'll percolate."
+
+-- Eduardo (gen_qydefsh) occ=blacksmith --
+OPENING: Eduardo speaks only 🇧🇷 Portuguese. No shared words at all — just eyes, hands, and patience.
+«Ei... você fala português? Não? ...merda.» (you catch 'Não' — no, 'fala' — speak)
+YOU: [nv:nod] (nod slowly)
+THEM: «É verdade. Absolutamente verdade.» — Laura translates: "That's true. Absolutely true." They nod back, a little quicker this time.
+YOU: [nv:smile] (smile)
+THEM: «Não vou esquecer.» — Laura translates: "I won't forget." A smile, tired but real.
+YOU: [nv:pointself] (point: you, them, together)
+THEM: «Você é um anjo, obrigado de coração.» — Laura translates: "You're an angel, thanks from the heart." You tap your chest, then theirs. Us. They nod, emphatic.
+YOU: [nv:listen] (listen hard — catch words)
+THEM: You lean in, catching the rise and fall of it. «Você é... o chefe?» — Laura translates: "Are you... the boss?"
+YOU: [goon] (watch quietly)
+THEM: They glance toward their own thoughts; the exchange is winding down.
+(no pick — winding down)
+(stall menu: leave|nv:nod)
+closing: They press their palms together — thanks, or goodbye, or both. Then turn back to their own thoughts.

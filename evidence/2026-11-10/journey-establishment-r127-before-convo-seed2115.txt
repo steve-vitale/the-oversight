@@ -1,0 +1,82 @@
+=== r127-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Caleb (gen_dvaag23) occ=fishing guide --
+OPENING: "I can't reach this properly. Will you help me clean it?"
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [goon] "Go on. I'm listening."
+THEM: "...I should say, I trade in what I know. My knowledge for yours. Or food, if you're short on secrets."
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Groundnut — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+YOU: [ask:goal] "What are you hoping for? At my age, hope is a plan."
+THEM: "You want to know about that? Okay." I've never really had people. Maybe this is — maybe this is my chance to have people.
+YOU: [dlg:more] "Tell me more."
+THEM: "Home is where they save you a seat. I'm looking for my seat."
+YOU: [dlg:react] (listen)
+THEM: "Well." A breath. "That's where things stand."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on wanting to belong somewhere."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: They glance away, then back. Different subject, same worry:
+closing: "Later."
+
+-- Lisa (gen_eojmlem) occ=army medic --
+OPENING: "About what happened to my taken kin — Have you heard anything? About the taken. The pods. Anything at all."
+YOU: [gq:yn:yes] "Yes."
+THEM: They nod. "Okay."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: Something eases in their shoulders. They're really talking to you now.
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Can I trust you? I mean really."
+YOU: [ans:q_trust:a_earn] "I hope to earn it."
+THEM: "That's the right answer. The wrong one would've been 'yes' too fast. Just my read."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "I'll tell you what I tell everyone: watch what I do when nobody's watching. That's the whole of me. The rest is just talking."
+YOU: [dlg:more] "What do you remember?"
+THEM: "It's my son, Sergio. Asked if the taken ones were bad. I said no. He asked if they were boring. I did not answer. Some nights I swear I hear them before I sleep -- the pods, rows deep, humming. Then morning comes and I can't say whether it was real."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person."
+closing: "This stays between us, right? Right."
+
+-- Zoey (gen_9hxgwa1) occ=Sailor --
+OPENING: "Have you ever hurt someone? Since all this started."
+YOU: [ans:q_fight:a_tell] "Yes. I don't want to talk about the details. But yes."
+THEM: They nod, slow. "Okay. Thank you for telling me. That couldn't have been easy to say."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Rubber Seeds. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Porcini. Leaf, stem, smell. You won't forget it now."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Finally. I was wondering when you'd see my value."
+YOU: [dlg:doubt] "That doesn't quite add up."
+THEM: "...What's that supposed to mean?" Their voice goes careful.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on whether you've hurt someone. Hm."
+YOU: [menu:more] More things to say (1/2)
+THEM: (menu page turned)
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: The warmth pulls back a notch. They're weighing something.
+closing: "See you at the fire."
+
+-- Sari (sari_wulandari) occ=postal worker --
+OPENING: "Do you dream about before? Or is it all — this — now? Makes sense to me."
+YOU: [ans:q_dream:a_before] "Before. Every night. It's the only place it still exists."
+THEM: "Sure — Then it's not gone. Not really. Keep going back."
+YOU: [goon] "Go on. I'm listening."
+THEM: "Jakarta, Indonesia, always. Same dream: I'm walking home and the street keeps getting longer. I wake up tired, like I actually walked it."
+YOU: [goon] "Go on. I'm listening."
+THEM: "Come get air with me. I need to think out loud."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Sari shows you where they go to think. "Don't tell the others. Everyone needs one place."
+YOU: [dlg:doubt] "That doesn't quite add up."
+THEM: "...Sorry, lost my train of thought."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Good question." "You ever notice Zoey? ...I don't know what to make of that. Nobody does."
+YOU: [gq:yn:yes] "Yes."
+THEM: "All right. Thank you for telling me."
+closing: "Good talk."

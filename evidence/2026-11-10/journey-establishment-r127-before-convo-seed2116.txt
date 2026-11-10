@@ -1,0 +1,95 @@
+=== r127-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Cameron (gen_ij49k8f) occ=Social worker --
+OPENING: "What's the worst thing you've done since the sky changed? You'd know about that."
+YOU: [ans:q_guilty:a_tell] "There's something I regret. I'm not ready to talk about it."
+THEM: No judgment in their face. "We're all doing math that doesn't add up. You're still here. That counts."
+YOU: [goon] "I'm listening."
+THEM: "I don't answer that one myself. Not yet. Maybe when I've decided whether surviving counts as an excuse or just a reason."
+YOU: [goon] "I'm listening."
+THEM: "Come see what I found. You won't believe it."
+INVITE-ANSWER trust=83
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: You walk to the hollow with Cameron. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the worst thing you've done. But what do I know."
+YOU: [goon] "I'm listening."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want? I mean it."
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "You want to know about that? Okay." "I've gotten good at reading faces. Out here, faces say what words won't."
+closing: "File that under 'productive.' Loosely defined."
+
+-- Aisling (gen_lfbpfpf) occ=glazier --
+OPENING: "Have you heard anything? About the taken. The pods. Anything at all."
+YOU: [gq:yn:yes] "Yes."
+THEM: "All right. Thank you for telling me."
+YOU: [goon] "I'm listening."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [goon] "I'm listening."
+THEM: "Are you going to stay? With us. For real."
+YOU: [ans:q_stay:a_tell] "Yeah. I am. I didn't expect to say that, but yeah."
+THEM: Something eases in their shoulders. "Good. We're better with you here. I mean that."
+YOU: [goon] "I'm listening."
+THEM: "I stay where I'm useful. Right now that's here. Columbus, Ohio is a direction, not a plan. Here is a plan, even if it's a hard one."
+YOU: [dlg:more] "Tell me about them."
+THEM: "It's my spouse, Scarlett. Was taken at the Scattering. I tell everyone they were the interesting one. I need that to be true. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [goon] "I'm listening."
+THEM: "Help me haul something back? Too much for one."
+closing: "Alright. Back to work."
+
+-- Wilma (gen_tuwxrgt) occ=blacksmith --
+OPENING: "Um — Is there someone here you don't trust? Be honest."
+YOU: [ans:q_someone:a_tell] "Yeah. I'm not saying who. But yeah."
+THEM: Their eyes flick, just for a second, toward the fire. "Noted. I'll watch too."
+YOU: [goon] "Go on."
+THEM: "I don't distrust anyone exactly — I just haven't finished trusting most of them yet. There's a difference. A slow one."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Maracujá (Passion Fruit). Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Giant Water Lily. Leaf, stem, smell. You won't forget it now."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on who you don't trust."
+YOU: [goon] "Go on."
+THEM: "Teach me something. Anything you know that I don't."
+YOU: [ans:q_teach_me:a_tell] "I'd rather show you while we're working. It's easier that way."
+THEM: "All right. Show me when we work together."
+YOU: [goon] "Go on."
+THEM: "I'd like to learn something I can use today. Show me while you work, when you have a moment. Gotta keep moving."
+closing: "Good talk."
+
+-- Ursula (ursula_weber) occ=Mortician --
+OPENING: Sleep. I'll take the watch. I don't mind the dark as much as I mind what could come out of it.
+YOU: [dlg:more] "Tell me more."
+THEM: "I sleep light. That's not insomnia, that's a security policy."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Alright. But I'm not carrying your stuff."
+YOU: [goon] "Say more about that."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [party_name] "We should name this. Us."
+THEM: "A name. Okay." You say it out loud, trying the shape of it:
+1. "APEX SNACKS" (📺 the System suggests)
+2. "The Second Try" (Ursula suggests)
+3. "The Company" (or plain)
+(Which one? It'll stick.)
+YOU: [party_namepick:0] "APEX SNACKS."
+THEM: 🤝 "APEX SNACKS." It hangs in the air a moment — then Cameron grins. It's real now. It has a name, which means it can be lost.
+📺 APEX SNACKS is official. Cameron, Ursula. (The village watches the broadcast. Nobody blinks.)
+📣 APEX SNACKS was named — Cameron, Ursula. A team, on purpose.
+📓 Codex: We named us: APEX SNACKS.
+YOU: [party_role] "Let's talk roles."
+THEM: "Roles. Not ranks — promises."
+🗡️ point — First in. Hits harder (+3 strike), draws the eye.
+🩹 healer — Carries the wounded, patches them up (+6 heal).
+🎒 carrier — Hauls. Carry order reaches further, steadier hands.
+🗣️ talker — The face. People join easier, leaving hurts less.
+👁️ scout — Sees trouble first. Warns the party on the road.
+(Which one is Ursula?)
+YOU: [party_rolepick:point] 🗡️ Point
+THEM: 🤝 Ursula is 🗡️ Point now. First in. Hits harder (+3 strike), draws the eye.
+YOU: [dlg:react] (listen)
+THEM: "Protection looks boring when it works. I aim for boring."
+closing: "Thank you for listening. Really listening. That's rare."

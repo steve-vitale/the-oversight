@@ -1,0 +1,80 @@
+=== r127-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Natalia (gen_cxg22x3) occ=Police officer --
+OPENING: Natalia: "I've heard good things about Ashford. We should link with them — we'd be stronger together."
+INVITE-ANSWER trust=91
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: You walk to the trap line with Natalia. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Stinging Nettle — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+YOU: [link:accept] "All right. Let's ask them."
+THEM: "All right — let's ask them." You carry the proposal to Ashford.
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Daylily Bud. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — American Persimmon. Leaf, stem, smell. You won't forget it now."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Another time. The village needs me here."
+YOU: [dlg:more] "Tell me more."
+THEM: "My wound needs a second pair of hands. Will you help me clean it?"
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+closing: "Good. We've got a plan forming. I can feel it."
+
+-- Wyatt (gen_ouu1126) occ=barber --
+OPENING: "I'm sorry — I can't shake it. I'm achy and wrung out, barely keeping food down. I need help. Please."
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "You don't know what that means to me. Thank you."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to them, on the same side of the Haven door, to help.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Huh. Let me think about that." "Xavier? A lawyer, back before. Solid person."
+YOU: [goon] "Go on. I'm listening."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [dlg:more] "Go on."
+THEM: "Sanne asked me about you. A lot of questions. Friendly ones. Too friendly."
+YOU: [dlg:react] (listen)
+THEM: "So." They look at the fire for a moment.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the gossip."
+closing: "Later."
+
+-- Melissa (gen_3fgs8s9) occ=welder --
+OPENING: Melissa speaks only 🇧🇷 Portuguese. You hear them in English — your extended mind translating live, cheerful and slightly off. They hear only your English, and understand none of it. Eyes, hands, and patience — one direction only.
+«Que lugar é este? Onde estamos?» → "What place is this? Where are we? (Family units: IMPORTANT! The audience loves family!)" "Shit." — they grin, proud of the one English they know.
+YOU: [nv:nod] (nod slowly)
+THEM: «Isso mesmo, você acertou em cheio.» → "That's it, you hit it right on. (Emotional content: HIGH! Great for ratings!)" They nod back, slowly. Something about the way you tilt your head — hearing them twice, once in their voice and once in the System’s. It unsettles them, a little.
+YOU: [nv:smile] (smile)
+THEM: «Obrigado. De verdade, obrigado.» → "Thanks. Truly, thanks." A grin breaks through, quick and warm.
+YOU: [nv:pointself] (point: you, them, together)
+THEM: «Você é uma pessoa boa.» → "You're a good person." You press a hand to your own chest, then point at them. Together — they get it.
+YOU: [nv:listen] (listen hard — catch words)
+THEM: You listen hard, watching their mouth shape the words. «Você tem comida? Alguma coisa?» → "Do you have food? Anything?"
+YOU: [goon] (watch quietly)
+THEM: They glance toward their own thoughts; the exchange is winding down.
+(no pick — winding down)
+(stall menu: leave|nv:nod)
+closing: They press their palms together — thanks, or goodbye, or both. Then turn back to their own thoughts.
+
+-- Benoit (benoit_lambert) occ=Baker --
+OPENING: "About this wound — still need hands. Are you in?"
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [goon] "Go on. I'm listening."
+THEM: "Walk with me? I want another pair of eyes on something."
+INVITE-ANSWER trust=89
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: "I buried this before the Scattering. Seemed stupid to keep it secret." Benoit digs up a wrapped bundle — food, still good. (+981 kcal to the pantry.)
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "a cellar full of jars — I'll show you on the map sometime. It's real."
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "a spring that runs clear — I'll show you on the map sometime. It's real."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to them, on the same side of the Haven door, to help.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Good question." "People are paranoid. Sanne hasn't done a thing."
+closing: "We're done here. Don't make it weird."
