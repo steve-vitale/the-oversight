@@ -1,0 +1,25 @@
+
+=== BEFORE (/home/hatch/workspace/goals/the-scattering-roguelite-survival-game/hidden_files/evidence/2026-11-09/landing-r122-before) ===
+seeds=10 attempts=61
+Q1: pressFailEvening=0 pressFailTotal=0 strippedSecondFails=0 togetherStopped=8 speciesLessCorner=0
+Q1: zeroYieldOk=8 (green3x3After 0:8 >0:0 null:0)
+  together-stopped: seed 1152 d10 Mateo (6,7) g3After=0 | seed 1153 d8 Daniela (8,3) g3After=0 | seed 1153 d8 Daniela (8,1) g3After=0 | seed 1153 d8 Daniela (0,3) g3After=0 | seed 1153 d8 Daniela (3,2) g3After=0 | seed 1154 d12 Grace (8,3) g3After=0 | seed 1154 d12 Grace (4,0) g3After=0 | seed 1154 d12 Grace (1,0) g3After=0
+Q2: farUnreached=3 nearUnreached=0 hopUnreached=3 (H-ROUTE:0 H-HOP:0 H-GUARD:0 H-OTHER:3) hopReached=9 detourReached=2
+  detour reaches: seed 1153 d8 (8,6) steps=13 manhattan=11 | seed 1154 d12 (1,0) steps=5 manhattan=3
+
+=== AFTER (/home/hatch/workspace/goals/the-scattering-roguelite-survival-game/hidden_files/evidence/2026-11-09/landing-r122-after) ===
+seeds=10 attempts=61
+Q1: pressFailEvening=0 pressFailTotal=0 strippedSecondFails=0 togetherStopped=8 speciesLessCorner=0
+Q1: zeroYieldOk=8 (green3x3After 0:8 >0:0 null:0)
+  together-stopped: seed 1152 d10 Mateo (6,7) g3After=0 | seed 1153 d8 Daniela (8,3) g3After=0 | seed 1153 d8 Daniela (8,1) g3After=0 | seed 1153 d8 Daniela (0,3) g3After=0 | seed 1153 d8 Daniela (3,2) g3After=0 | seed 1154 d12 Grace (8,3) g3After=0 | seed 1154 d12 Grace (4,0) g3After=0 | seed 1154 d12 Grace (1,0) g3After=0
+Q2: farUnreached=3 nearUnreached=0 hopUnreached=3 (H-ROUTE:0 H-HOP:0 H-GUARD:0 H-OTHER:3) hopReached=9 detourReached=2
+  detour reaches: seed 1153 d8 (8,6) steps=13 manhattan=11 | seed 1154 d12 (1,0) steps=5 manhattan=3
+
+=== BEFORE/AFTER (matched seeds) ===
+Q1 pressFailEvening: 0 -> 0 (bar AFTER <= 2)
+Q1 strippedSecondFails: 0 -> 0 (bar AFTER 0)
+Q1 togetherStopped: 8 -> 8 (bar AFTER >= 1 with g3After 0)
+Q2 farUnreached: 3 -> 3 (bar AFTER < BEFORE, or both 0 = UNTESTED)
+Q2 hop classes AFTER: H-ROUTE:0 H-HOP:0 H-GUARD:0 H-OTHER:3 (every AFTER unreached must carry an engine-named block)
+Q1: DOUBLE-PRESS-STOP-WORKS (keptTotal >= 1 still owed from the outingchain analyzer)
+Q2: NOT-MET (unreached far did not fall — adjudicate by case in the run note)
