@@ -1,0 +1,1524 @@
+{
+  "arm": "cookfirst",
+  "run": "cookfirst-pilot",
+  "band": "180201-180208",
+  "seeds": [
+    180201,
+    180202,
+    180203,
+    180204,
+    180205,
+    180206,
+    180207,
+    180208
+  ],
+  "neutralSeeds": [
+    180201,
+    180202,
+    180203,
+    180204,
+    180205,
+    180206,
+    180207,
+    180208
+  ],
+  "perSeed": [
+    {
+      "seed": 180201,
+      "days": 138,
+      "gameDays": 138,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 5,
+      "standing": 365,
+      "endPantryKcal": 2637,
+      "deaths": 96,
+      "instrumentErrors": 0,
+      "wrapLive": {
+        "tele": true,
+        "creditDeed": true,
+        "pantryDraw": true,
+        "cookTransform": true,
+        "eat": true,
+        "noteDeed": true,
+        "cleanCarcass": true,
+        "learnTechnique": true
+      },
+      "transformsByPath": {
+        "village-meal": 14
+      },
+      "transformsByPathOutcome": {
+        "village-meal:perfect": 14
+      },
+      "transformKcalByPath": {
+        "village-meal": 249100
+      },
+      "transformRawKcalByPath": {
+        "village-meal": 125650
+      },
+      "transformKcalByKind": {
+        "?": 249100
+      },
+      "transformOther": 0,
+      "transformKnows": {
+        "knows": 14,
+        "blind": 0
+      },
+      "methodCallsByMethod": {
+        "cleanCarcass": 2
+      },
+      "methodCallsByPath": {
+        "cleanCarcass:policy": 2
+      },
+      "spoiledRefused": 0,
+      "rescuedKcal": 0,
+      "rescuedKcalByMethod": {
+        "cleanCarcass": 0
+      },
+      "pemmicanBars": 0,
+      "pemmicanBarKcal": 0,
+      "specialistCalls": [],
+      "learns": [
+        {
+          "day": 119,
+          "tech": "clean",
+          "source": "trial",
+          "learned": true
+        }
+      ],
+      "learnsByTechSource": {
+        "clean:trial": 1
+      },
+      "eatenKcalByState": {
+        "unknown": 19308,
+        "ready": 11305,
+        "cooked": 1220,
+        "preserved": 24002
+      },
+      "eatenKcalByVia": {
+        "eat": 55835
+      },
+      "eatenKcalTotal": 55835,
+      "teleEatTotal": 56735,
+      "purgedKcal": 960,
+      "eatenCookedKcal": 25222,
+      "eatenRawKcal": 30613,
+      "drawTakenByCook": {
+        "cook:true": 241197,
+        "cook:false": 194336
+      },
+      "drawTakenByState": {
+        "none": 388774,
+        "cleaned": 6139,
+        "cooked": 1600,
+        "preserved": 19245,
+        "ready": 19775
+      },
+      "drawCookedKcal": 13259,
+      "drawCount": 427,
+      "deedsByDeedWho": {
+        "cooking:chen_wei": 31,
+        "preserving:chen_wei": 15,
+        "preserving:gen_a2lgniw": 2,
+        "cooking:gen_a2lgniw": 5,
+        "preserving:onni_korhonen": 6,
+        "cooking:onni_korhonen": 7,
+        "preserving:app_mgpsphkl72": 9,
+        "cooking:app_mgpsphkl72": 12
+      },
+      "dutyBatches": 74,
+      "dutyKcal": 50242,
+      "cookDutyDays": 115,
+      "cookDutyHolders": {
+        "chen_wei|Beekeeper": {
+          "days": 96,
+          "preserver": 1
+        },
+        "onni_korhonen|chimney sweep": {
+          "days": 7,
+          "preserver": 0
+        },
+        "app_mgpsphkl72|farmer": {
+          "days": 12,
+          "preserver": 2
+        }
+      },
+      "foodXpEnd": {},
+      "foodXpDelta": {},
+      "foodXpMax": {
+        "chen_wei:preserver": 44,
+        "gen_a2lgniw:preserver": 5,
+        "onni_korhonen:preserver": 7,
+        "app_mgpsphkl72:preserver": 14
+      },
+      "spoiledPresentKcalDays": 0,
+      "snapshots": 136,
+      "cookSays": 200
+    },
+    {
+      "seed": 180202,
+      "days": 137,
+      "gameDays": 137,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 5,
+      "standing": 415,
+      "endPantryKcal": 12823,
+      "deaths": 73,
+      "instrumentErrors": 0,
+      "wrapLive": {
+        "tele": true,
+        "pantryDraw": true,
+        "creditDeed": true,
+        "cookTransform": true,
+        "eat": true,
+        "noteDeed": true,
+        "cleanCarcass": true,
+        "learnTechnique": true
+      },
+      "transformsByPath": {
+        "village-meal": 23
+      },
+      "transformsByPathOutcome": {
+        "village-meal:perfect": 23
+      },
+      "transformKcalByPath": {
+        "village-meal": 350000
+      },
+      "transformRawKcalByPath": {
+        "village-meal": 178550
+      },
+      "transformKcalByKind": {
+        "?": 350000
+      },
+      "transformOther": 0,
+      "transformKnows": {
+        "knows": 23,
+        "blind": 0
+      },
+      "methodCallsByMethod": {
+        "cleanCarcass": 2
+      },
+      "methodCallsByPath": {
+        "cleanCarcass:policy": 2
+      },
+      "spoiledRefused": 0,
+      "rescuedKcal": 0,
+      "rescuedKcalByMethod": {
+        "cleanCarcass": 0
+      },
+      "pemmicanBars": 0,
+      "pemmicanBarKcal": 0,
+      "specialistCalls": [],
+      "learns": [
+        {
+          "day": 30,
+          "tech": "clean",
+          "source": "trial",
+          "learned": true
+        }
+      ],
+      "learnsByTechSource": {
+        "clean:trial": 1
+      },
+      "eatenKcalByState": {
+        "unknown": 17270,
+        "ready": 15870,
+        "preserved": 54543
+      },
+      "eatenKcalByVia": {
+        "eat": 87683
+      },
+      "eatenKcalTotal": 87683,
+      "teleEatTotal": 89871,
+      "purgedKcal": 5189,
+      "eatenCookedKcal": 54543,
+      "eatenRawKcal": 33140,
+      "drawTakenByCook": {
+        "cook:true": 273437,
+        "cook:false": 181936
+      },
+      "drawTakenByState": {
+        "none": 408009,
+        "ready": 31935,
+        "cleaned": 2359,
+        "cooked": 1492,
+        "preserved": 11578
+      },
+      "drawCookedKcal": 8799,
+      "drawCount": 443,
+      "deedsByDeedWho": {
+        "cooking:gen_aiadb0h": 32,
+        "preserving:gen_aiadb0h": 15,
+        "preserving:liam_davis": 6,
+        "cooking:liam_davis": 18,
+        "preserving:onni_korhonen": 1,
+        "cooking:onni_korhonen": 1,
+        "preserving:chen_wei": 8,
+        "cooking:chen_wei": 11,
+        "preserving:quinn_murphy": 4,
+        "cooking:quinn_murphy": 4
+      },
+      "dutyBatches": 72,
+      "dutyKcal": 74487,
+      "cookDutyDays": 122,
+      "cookDutyHolders": {
+        "gen_aiadb0h|Rancher": {
+          "days": 32,
+          "preserver": 2
+        },
+        "liam_davis|farmer": {
+          "days": 34,
+          "preserver": 2
+        },
+        "onni_korhonen|chimney sweep": {
+          "days": 41,
+          "preserver": 0
+        },
+        "chen_wei|Beekeeper": {
+          "days": 11,
+          "preserver": 1
+        },
+        "quinn_murphy|bartender": {
+          "days": 4,
+          "preserver": 0
+        }
+      },
+      "foodXpEnd": {},
+      "foodXpDelta": {},
+      "foodXpMax": {
+        "gen_aiadb0h:preserver": 37,
+        "liam_davis:preserver": 15,
+        "onni_korhonen:preserver": 2,
+        "chen_wei:preserver": 12,
+        "quinn_murphy:preserver": 5
+      },
+      "spoiledPresentKcalDays": 0,
+      "snapshots": 135,
+      "cookSays": 200
+    },
+    {
+      "seed": 180203,
+      "days": 50,
+      "gameDays": 50,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "village",
+      "maxWave": 3,
+      "standing": 50,
+      "endPantryKcal": 0,
+      "deaths": 39,
+      "instrumentErrors": 0,
+      "wrapLive": {
+        "tele": true,
+        "pantryDraw": true,
+        "creditDeed": true,
+        "cookTransform": true,
+        "eat": true,
+        "noteDeed": true,
+        "learnTechnique": true,
+        "cleanCarcass": true
+      },
+      "transformsByPath": {
+        "village-meal": 30
+      },
+      "transformsByPathOutcome": {
+        "village-meal:perfect": 30
+      },
+      "transformKcalByPath": {
+        "village-meal": 383750
+      },
+      "transformRawKcalByPath": {
+        "village-meal": 203900
+      },
+      "transformKcalByKind": {
+        "?": 383750
+      },
+      "transformOther": 0,
+      "transformKnows": {
+        "knows": 30,
+        "blind": 0
+      },
+      "methodCallsByMethod": {
+        "cleanCarcass": 6
+      },
+      "methodCallsByPath": {
+        "cleanCarcass:policy": 6
+      },
+      "spoiledRefused": 0,
+      "rescuedKcal": 0,
+      "rescuedKcalByMethod": {
+        "cleanCarcass": 0
+      },
+      "pemmicanBars": 0,
+      "pemmicanBarKcal": 0,
+      "specialistCalls": [],
+      "learns": [
+        {
+          "day": 18,
+          "tech": "cook",
+          "source": "watched",
+          "learned": true
+        },
+        {
+          "day": 21,
+          "tech": "clean",
+          "source": "trial",
+          "learned": true
+        }
+      ],
+      "learnsByTechSource": {
+        "cook:watched": 1,
+        "clean:trial": 1
+      },
+      "eatenKcalByState": {
+        "unknown": 22114,
+        "cooked": 946,
+        "carcass": 110,
+        "ready": 450,
+        "preserved": 15393
+      },
+      "eatenKcalByVia": {
+        "eat": 39013
+      },
+      "eatenKcalTotal": 39013,
+      "teleEatTotal": 39013,
+      "purgedKcal": 0,
+      "eatenCookedKcal": 16339,
+      "eatenRawKcal": 22674,
+      "drawTakenByCook": {
+        "cook:true": 157537,
+        "cook:false": 27997
+      },
+      "drawTakenByState": {
+        "none": 183761,
+        "cleaned": 673,
+        "preserved": 1100
+      },
+      "drawCookedKcal": 10313,
+      "drawCount": 269,
+      "deedsByDeedWho": {
+        "cooking:gen_to1p4vm": 21,
+        "cooking:gen_8ino2bf": 89,
+        "preserving:gen_8ino2bf": 14,
+        "cooking:yuki_mori": 7
+      },
+      "dutyBatches": 23,
+      "dutyKcal": 21393,
+      "cookDutyDays": 28,
+      "cookDutyHolders": {
+        "gen_to1p4vm|Rancher": {
+          "days": 21,
+          "preserver": 2
+        },
+        "yuki_mori|librarian": {
+          "days": 7,
+          "preserver": 0
+        }
+      },
+      "foodXpEnd": {},
+      "foodXpDelta": {},
+      "foodXpMax": {
+        "gen_8ino2bf:preserver": 23
+      },
+      "spoiledPresentKcalDays": 0,
+      "snapshots": 49,
+      "cookSays": 200
+    },
+    {
+      "seed": 180204,
+      "days": 150,
+      "gameDays": 150,
+      "endReason": "survived",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 5,
+      "standing": 405,
+      "endPantryKcal": 7958,
+      "deaths": 94,
+      "instrumentErrors": 0,
+      "wrapLive": {
+        "tele": true,
+        "pantryDraw": true,
+        "cookTransform": true,
+        "creditDeed": true,
+        "eat": true,
+        "noteDeed": true,
+        "cleanCarcass": true,
+        "learnTechnique": true
+      },
+      "transformsByPath": {
+        "village-meal": 23
+      },
+      "transformsByPathOutcome": {
+        "village-meal:perfect": 23
+      },
+      "transformKcalByPath": {
+        "village-meal": 332250
+      },
+      "transformRawKcalByPath": {
+        "village-meal": 168900
+      },
+      "transformKcalByKind": {
+        "?": 332250
+      },
+      "transformOther": 0,
+      "transformKnows": {
+        "knows": 23,
+        "blind": 0
+      },
+      "methodCallsByMethod": {
+        "cleanCarcass": 8
+      },
+      "methodCallsByPath": {
+        "cleanCarcass:policy": 8
+      },
+      "spoiledRefused": 0,
+      "rescuedKcal": 0,
+      "rescuedKcalByMethod": {
+        "cleanCarcass": 0
+      },
+      "pemmicanBars": 0,
+      "pemmicanBarKcal": 0,
+      "specialistCalls": [],
+      "learns": [
+        {
+          "day": 59,
+          "tech": "clean",
+          "source": "trial",
+          "learned": true
+        }
+      ],
+      "learnsByTechSource": {
+        "clean:trial": 1
+      },
+      "eatenKcalByState": {
+        "unknown": 33108,
+        "ready": 8280,
+        "preserved": 19381,
+        "cooked": 360,
+        "carcass": 800
+      },
+      "eatenKcalByVia": {
+        "eat": 61929
+      },
+      "eatenKcalTotal": 61929,
+      "teleEatTotal": 66969,
+      "purgedKcal": 0,
+      "eatenCookedKcal": 19741,
+      "eatenRawKcal": 42188,
+      "drawTakenByCook": {
+        "cook:true": 314160,
+        "cook:false": 154611
+      },
+      "drawTakenByState": {
+        "none": 331987,
+        "cleaned": 4601,
+        "cooked": 1946,
+        "preserved": 22687,
+        "ready": 107550
+      },
+      "drawCookedKcal": 10583,
+      "drawCount": 391,
+      "deedsByDeedWho": {
+        "cooking:gen_ddw434u": 65,
+        "preserving:gen_ddw434u": 32,
+        "cooking:gen_w5srpar": 14,
+        "cooking:gen_nh9d70u": 6,
+        "cooking:gen_h6850qz": 3,
+        "preserving:sari_wulandari": 1,
+        "cooking:sari_wulandari": 1
+      },
+      "dutyBatches": 61,
+      "dutyKcal": 44058,
+      "cookDutyDays": 116,
+      "cookDutyHolders": {
+        "gen_ddw434u|Mortician": {
+          "days": 65,
+          "preserver": 0
+        },
+        "gen_nh9d70u|ESL teacher": {
+          "days": 45,
+          "preserver": 0
+        },
+        "gen_h6850qz|welder": {
+          "days": 3,
+          "preserver": 0
+        },
+        "sari_wulandari|postal worker": {
+          "days": 3,
+          "preserver": 0
+        }
+      },
+      "foodXpEnd": {
+        "sari_wulandari": {
+          "preserver": 1
+        }
+      },
+      "foodXpDelta": {
+        "sari_wulandari:preserver": 1
+      },
+      "foodXpMax": {
+        "gen_ddw434u:preserver": 60,
+        "sari_wulandari:preserver": 1
+      },
+      "spoiledPresentKcalDays": 0,
+      "snapshots": 149,
+      "cookSays": 200
+    },
+    {
+      "seed": 180205,
+      "days": 75,
+      "gameDays": 76,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "endPantryKcal": 0,
+      "deaths": 63,
+      "instrumentErrors": 0,
+      "wrapLive": {
+        "tele": true,
+        "pantryDraw": true,
+        "cookTransform": true,
+        "eat": true,
+        "creditDeed": true,
+        "noteDeed": true,
+        "cleanCarcass": true,
+        "learnTechnique": true
+      },
+      "transformsByPath": {
+        "village-meal": 40
+      },
+      "transformsByPathOutcome": {
+        "village-meal:perfect": 40
+      },
+      "transformKcalByPath": {
+        "village-meal": 499450
+      },
+      "transformRawKcalByPath": {
+        "village-meal": 262300
+      },
+      "transformKcalByKind": {
+        "?": 499450
+      },
+      "transformOther": 0,
+      "transformKnows": {
+        "knows": 40,
+        "blind": 0
+      },
+      "methodCallsByMethod": {
+        "cleanCarcass": 4
+      },
+      "methodCallsByPath": {
+        "cleanCarcass:policy": 4
+      },
+      "spoiledRefused": 0,
+      "rescuedKcal": 0,
+      "rescuedKcalByMethod": {
+        "cleanCarcass": 0
+      },
+      "pemmicanBars": 0,
+      "pemmicanBarKcal": 0,
+      "specialistCalls": [],
+      "learns": [
+        {
+          "day": 33,
+          "tech": "clean",
+          "source": "trial",
+          "learned": true
+        }
+      ],
+      "learnsByTechSource": {
+        "clean:trial": 1
+      },
+      "eatenKcalByState": {
+        "unknown": 9300,
+        "ready": 10140,
+        "preserved": 27761,
+        "cooked": 3120
+      },
+      "eatenKcalByVia": {
+        "eat": 50321
+      },
+      "eatenKcalTotal": 50321,
+      "teleEatTotal": 50321,
+      "purgedKcal": 0,
+      "eatenCookedKcal": 30881,
+      "eatenRawKcal": 19440,
+      "drawTakenByCook": {
+        "cook:true": 132706,
+        "cook:false": 50469
+      },
+      "drawTakenByState": {
+        "none": 142322,
+        "cleaned": 10584,
+        "preserved": 14359,
+        "cooked": 1600,
+        "ready": 14310
+      },
+      "drawCookedKcal": 27102,
+      "drawCount": 217,
+      "deedsByDeedWho": {
+        "cooking:gen_glm7rsc": 17,
+        "preserving:gen_glm7rsc": 4,
+        "preserving:gen_q0281zi": 1,
+        "cooking:gen_q0281zi": 1,
+        "preserving:diana_osei": 12,
+        "cooking:diana_osei": 54
+      },
+      "dutyBatches": 68,
+      "dutyKcal": 45176,
+      "cookDutyDays": 44,
+      "cookDutyHolders": {
+        "gen_glm7rsc|Beekeeper": {
+          "days": 17,
+          "preserver": 1
+        },
+        "gen_q0281zi|interpreter": {
+          "days": 17,
+          "preserver": 0
+        },
+        "diana_osei|paramedic": {
+          "days": 10,
+          "preserver": 3
+        }
+      },
+      "foodXpEnd": {},
+      "foodXpDelta": {},
+      "foodXpMax": {
+        "gen_glm7rsc:preserver": 12,
+        "gen_q0281zi:preserver": 7,
+        "diana_osei:preserver": 49
+      },
+      "spoiledPresentKcalDays": 0,
+      "snapshots": 75,
+      "cookSays": 200
+    },
+    {
+      "seed": 180206,
+      "days": 53,
+      "gameDays": 53,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "village",
+      "maxWave": 4,
+      "standing": 125,
+      "endPantryKcal": 0,
+      "deaths": 49,
+      "instrumentErrors": 0,
+      "wrapLive": {
+        "tele": true,
+        "pantryDraw": true,
+        "cookTransform": true,
+        "creditDeed": true,
+        "eat": true,
+        "noteDeed": true,
+        "cleanCarcass": true,
+        "learnTechnique": true
+      },
+      "transformsByPath": {
+        "village-meal": 36
+      },
+      "transformsByPathOutcome": {
+        "village-meal:perfect": 36
+      },
+      "transformKcalByPath": {
+        "village-meal": 446450
+      },
+      "transformRawKcalByPath": {
+        "village-meal": 244400
+      },
+      "transformKcalByKind": {
+        "?": 446450
+      },
+      "transformOther": 0,
+      "transformKnows": {
+        "knows": 36,
+        "blind": 0
+      },
+      "methodCallsByMethod": {
+        "cleanCarcass": 2
+      },
+      "methodCallsByPath": {
+        "cleanCarcass:policy": 2
+      },
+      "spoiledRefused": 0,
+      "rescuedKcal": 0,
+      "rescuedKcalByMethod": {
+        "cleanCarcass": 0
+      },
+      "pemmicanBars": 0,
+      "pemmicanBarKcal": 0,
+      "specialistCalls": [],
+      "learns": [
+        {
+          "day": 38,
+          "tech": "clean",
+          "source": "trial",
+          "learned": true
+        }
+      ],
+      "learnsByTechSource": {
+        "clean:trial": 1
+      },
+      "eatenKcalByState": {
+        "unknown": 12800,
+        "preserved": 818,
+        "cooked": 1180
+      },
+      "eatenKcalByVia": {
+        "eat": 14798
+      },
+      "eatenKcalTotal": 14798,
+      "teleEatTotal": 14798,
+      "purgedKcal": 0,
+      "eatenCookedKcal": 1998,
+      "eatenRawKcal": 12800,
+      "drawTakenByCook": {
+        "cook:true": 113467,
+        "cook:false": 44862
+      },
+      "drawTakenByState": {
+        "none": 148103,
+        "cleaned": 4568,
+        "preserved": 4578,
+        "cooked": 1080
+      },
+      "drawCookedKcal": 21800,
+      "drawCount": 138,
+      "deedsByDeedWho": {
+        "cooking:sofia_chen": 10,
+        "cooking:gen_xhva7il": 15,
+        "preserving:gen_xhva7il": 7,
+        "preserving:sofia_chen": 1,
+        "cooking:quinn_murphy": 1
+      },
+      "dutyBatches": 15,
+      "dutyKcal": 5397,
+      "cookDutyDays": 31,
+      "cookDutyHolders": {
+        "sofia_chen|community gardener": {
+          "days": 12,
+          "preserver": 0
+        },
+        "gen_xhva7il|Vintner": {
+          "days": 15,
+          "preserver": 0
+        },
+        "quinn_murphy|bartender": {
+          "days": 4,
+          "preserver": 0
+        }
+      },
+      "foodXpEnd": {},
+      "foodXpDelta": {},
+      "foodXpMax": {
+        "gen_xhva7il:preserver": 13,
+        "sofia_chen:preserver": 2
+      },
+      "spoiledPresentKcalDays": 0,
+      "snapshots": 51,
+      "cookSays": 200
+    },
+    {
+      "seed": 180207,
+      "days": 104,
+      "gameDays": 104,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "endPantryKcal": 0,
+      "deaths": 71,
+      "instrumentErrors": 0,
+      "wrapLive": {
+        "tele": true,
+        "pantryDraw": true,
+        "creditDeed": true,
+        "cookTransform": true,
+        "eat": true,
+        "noteDeed": true,
+        "learnTechnique": true,
+        "cleanCarcass": true
+      },
+      "transformsByPath": {
+        "village-meal": 29
+      },
+      "transformsByPathOutcome": {
+        "village-meal:perfect": 29
+      },
+      "transformKcalByPath": {
+        "village-meal": 355050
+      },
+      "transformRawKcalByPath": {
+        "village-meal": 188100
+      },
+      "transformKcalByKind": {
+        "?": 355050
+      },
+      "transformOther": 0,
+      "transformKnows": {
+        "knows": 29,
+        "blind": 0
+      },
+      "methodCallsByMethod": {
+        "cleanCarcass": 39
+      },
+      "methodCallsByPath": {
+        "cleanCarcass:policy": 39
+      },
+      "spoiledRefused": 0,
+      "rescuedKcal": 0,
+      "rescuedKcalByMethod": {
+        "cleanCarcass": 0
+      },
+      "pemmicanBars": 0,
+      "pemmicanBarKcal": 0,
+      "specialistCalls": [],
+      "learns": [
+        {
+          "day": 18,
+          "tech": "cook",
+          "source": "watched",
+          "learned": true
+        },
+        {
+          "day": 29,
+          "tech": "clean",
+          "source": "trial",
+          "learned": true
+        }
+      ],
+      "learnsByTechSource": {
+        "cook:watched": 1,
+        "clean:trial": 1
+      },
+      "eatenKcalByState": {
+        "unknown": 11350,
+        "preserved": 14262,
+        "ready": 10845,
+        "cleaned": 1248
+      },
+      "eatenKcalByVia": {
+        "eat": 37705
+      },
+      "eatenKcalTotal": 37705,
+      "teleEatTotal": 38875,
+      "purgedKcal": 0,
+      "eatenCookedKcal": 14262,
+      "eatenRawKcal": 23443,
+      "drawTakenByCook": {
+        "cook:true": 209156,
+        "cook:false": 159165
+      },
+      "drawTakenByState": {
+        "none": 318191,
+        "cleaned": 4544,
+        "cooked": 1740,
+        "preserved": 42651,
+        "ready": 1195
+      },
+      "drawCookedKcal": 12444,
+      "drawCount": 396,
+      "deedsByDeedWho": {
+        "preserving:gen_vhd0crb": 5,
+        "cooking:gen_vhd0crb": 13,
+        "preserving:gen_r3ee0o6": 1,
+        "cooking:gen_r3ee0o6": 1,
+        "preserving:gen_3lkpqef": 6,
+        "cooking:gen_3lkpqef": 6,
+        "preserving:jesse_cortez": 12,
+        "cooking:jesse_cortez": 19,
+        "cooking:visjoin_82": 1,
+        "preserving:visjoin_95": 1,
+        "cooking:visjoin_95": 1,
+        "cooking:visjoin_98": 1
+      },
+      "dutyBatches": 60,
+      "dutyKcal": 56913,
+      "cookDutyDays": 70,
+      "cookDutyHolders": {
+        "gen_vhd0crb|farmer": {
+          "days": 13,
+          "preserver": 2
+        },
+        "gen_r3ee0o6|arborist": {
+          "days": 1,
+          "preserver": 0
+        },
+        "gen_3lkpqef|Midwife": {
+          "days": 6,
+          "preserver": 0
+        },
+        "jesse_cortez|line cook": {
+          "days": 47,
+          "preserver": 2
+        },
+        "visjoin_82|postal worker": {
+          "days": 1,
+          "preserver": 0
+        },
+        "visjoin_95|Police officer": {
+          "days": 1,
+          "preserver": 0
+        },
+        "visjoin_98|HVAC tech": {
+          "days": 1,
+          "preserver": 0
+        }
+      },
+      "foodXpEnd": {
+        "gen_3lkpqef": {
+          "preserver": 10
+        }
+      },
+      "foodXpDelta": {
+        "gen_3lkpqef:preserver": 10
+      },
+      "foodXpMax": {
+        "gen_vhd0crb:preserver": 5,
+        "gen_r3ee0o6:preserver": 3,
+        "gen_3lkpqef:preserver": 10,
+        "jesse_cortez:preserver": 40,
+        "visjoin_95:preserver": 1
+      },
+      "spoiledPresentKcalDays": 0,
+      "snapshots": 103,
+      "cookSays": 200
+    },
+    {
+      "seed": 180208,
+      "days": 150,
+      "gameDays": 151,
+      "endReason": "survived",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 5,
+      "standing": 450,
+      "endPantryKcal": 24400,
+      "deaths": 98,
+      "instrumentErrors": 0,
+      "wrapLive": {
+        "tele": true,
+        "pantryDraw": true,
+        "cookTransform": true,
+        "creditDeed": true,
+        "eat": true,
+        "noteDeed": true,
+        "cleanCarcass": true,
+        "learnTechnique": true
+      },
+      "transformsByPath": {
+        "village-meal": 20
+      },
+      "transformsByPathOutcome": {
+        "village-meal:perfect": 20
+      },
+      "transformKcalByPath": {
+        "village-meal": 313100
+      },
+      "transformRawKcalByPath": {
+        "village-meal": 159650
+      },
+      "transformKcalByKind": {
+        "?": 313100
+      },
+      "transformOther": 0,
+      "transformKnows": {
+        "knows": 20,
+        "blind": 0
+      },
+      "methodCallsByMethod": {
+        "cleanCarcass": 2
+      },
+      "methodCallsByPath": {
+        "cleanCarcass:policy": 2
+      },
+      "spoiledRefused": 0,
+      "rescuedKcal": 0,
+      "rescuedKcalByMethod": {
+        "cleanCarcass": 0
+      },
+      "pemmicanBars": 0,
+      "pemmicanBarKcal": 0,
+      "specialistCalls": [],
+      "learns": [
+        {
+          "day": 54,
+          "tech": "clean",
+          "source": "trial",
+          "learned": true
+        }
+      ],
+      "learnsByTechSource": {
+        "clean:trial": 1
+      },
+      "eatenKcalByState": {
+        "unknown": 10000,
+        "ready": 13290,
+        "preserved": 38471,
+        "carcass": 800,
+        "cooked": 280
+      },
+      "eatenKcalByVia": {
+        "eat": 62841
+      },
+      "eatenKcalTotal": 62841,
+      "teleEatTotal": 63381,
+      "purgedKcal": 0,
+      "eatenCookedKcal": 38751,
+      "eatenRawKcal": 24090,
+      "drawTakenByCook": {
+        "cook:true": 321666,
+        "cook:false": 212964
+      },
+      "drawTakenByState": {
+        "none": 482902,
+        "cleaned": 8066,
+        "preserved": 41647,
+        "cooked": 800,
+        "ready": 1215
+      },
+      "drawCookedKcal": 16829,
+      "drawCount": 433,
+      "deedsByDeedWho": {
+        "cooking:amina_diallo": 1,
+        "preserving:naran_tumen": 1,
+        "cooking:naran_tumen": 1,
+        "cooking:gen_dw1sshd": 5,
+        "preserving:gen_5039o3b": 1,
+        "cooking:gen_5039o3b": 1,
+        "preserving:gen_dw1sshd": 4,
+        "cooking:owen_smith": 27,
+        "preserving:owen_smith": 6,
+        "preserving:visjoin_93": 3,
+        "cooking:visjoin_93": 4,
+        "preserving:visjoin_97": 1,
+        "cooking:visjoin_97": 1,
+        "preserving:visjoin_89": 11,
+        "cooking:visjoin_89": 11,
+        "cooking:visjoin_111": 24,
+        "preserving:visjoin_111": 23,
+        "cooking:visjoin_125": 1
+      },
+      "dutyBatches": 87,
+      "dutyKcal": 92419,
+      "cookDutyDays": 110,
+      "cookDutyHolders": {
+        "naran_tumen|bus driver": {
+          "days": 1,
+          "preserver": 0
+        },
+        "gen_dw1sshd|ER nurse": {
+          "days": 5,
+          "preserver": 0
+        },
+        "gen_5039o3b|aquarium keeper": {
+          "days": 1,
+          "preserver": 0
+        },
+        "owen_smith|hunting guide": {
+          "days": 62,
+          "preserver": 2
+        },
+        "visjoin_93|army medic": {
+          "days": 4,
+          "preserver": 0
+        },
+        "visjoin_97|bike messenger": {
+          "days": 1,
+          "preserver": 0
+        },
+        "visjoin_89|Baker": {
+          "days": 11,
+          "preserver": 0
+        },
+        "visjoin_111|farmer": {
+          "days": 24,
+          "preserver": 2
+        },
+        "visjoin_125|comic shop owner": {
+          "days": 1,
+          "preserver": 0
+        }
+      },
+      "foodXpEnd": {},
+      "foodXpDelta": {},
+      "foodXpMax": {
+        "naran_tumen:preserver": 1,
+        "gen_5039o3b:preserver": 4,
+        "gen_dw1sshd:preserver": 10,
+        "owen_smith:preserver": 21,
+        "visjoin_93:preserver": 4,
+        "visjoin_97:preserver": 2,
+        "visjoin_89:preserver": 14,
+        "visjoin_111:preserver": 29
+      },
+      "spoiledPresentKcalDays": 0,
+      "snapshots": 149,
+      "cookSays": 200
+    }
+  ],
+  "pooled": {
+    "daysTotal": 857,
+    "gameDaysTotal": 859,
+    "deathsTotal": 583,
+    "instrumentErrorsTotal": 0,
+    "transformOtherTotal": 0,
+    "spoiledRefusedTotal": 0,
+    "rescuedKcalTotal": 0,
+    "pemmicanBarsTotal": 0,
+    "pemmicanBarKcalTotal": 0,
+    "eatenKcalTotalTotal": 410125,
+    "teleEatTotalTotal": 419963,
+    "purgedKcalTotal": 6149,
+    "eatenCookedKcalTotal": 201737,
+    "eatenRawKcalTotal": 208388,
+    "drawCookedKcalTotal": 121129,
+    "drawCountTotal": 2714,
+    "dutyBatchesTotal": 460,
+    "dutyKcalTotal": 390085,
+    "cookDutyDaysTotal": 636,
+    "spoiledPresentKcalDaysTotal": 0,
+    "snapshotsTotal": 847,
+    "cookSaysTotal": 1600,
+    "daysMedian": 137,
+    "wins": 0,
+    "scaleRanks": {
+      "regional": 6,
+      "village": 2
+    },
+    "maxWaveMax": 5,
+    "standingMedian": 365,
+    "transformsByPath": {
+      "village-meal": 215
+    },
+    "transformsByPathOutcome": {
+      "village-meal:perfect": 215
+    },
+    "transformKcalByPath": {
+      "village-meal": 2929150
+    },
+    "transformRawKcalByPath": {
+      "village-meal": 1531450
+    },
+    "transformKcalByKind": {
+      "?": 2929150
+    },
+    "transformKnows": {
+      "knows": 215,
+      "blind": 0
+    },
+    "methodCallsByMethod": {
+      "cleanCarcass": 65
+    },
+    "methodCallsByPath": {
+      "cleanCarcass:policy": 65
+    },
+    "rescuedKcalByMethod": {
+      "cleanCarcass": 0
+    },
+    "learnsByTechSource": {
+      "clean:trial": 8,
+      "cook:watched": 2
+    },
+    "eatenKcalByState": {
+      "unknown": 135250,
+      "ready": 70180,
+      "cooked": 7106,
+      "preserved": 194631,
+      "carcass": 1710,
+      "cleaned": 1248
+    },
+    "eatenKcalByVia": {
+      "eat": 410125
+    },
+    "drawTakenByCook": {
+      "cook:true": 1763326,
+      "cook:false": 1026340
+    },
+    "drawTakenByState": {
+      "none": 2404049,
+      "cleaned": 41534,
+      "cooked": 10258,
+      "preserved": 157845,
+      "ready": 175980
+    },
+    "deedsByDeedWho": {
+      "cooking:chen_wei": 42,
+      "preserving:chen_wei": 23,
+      "preserving:gen_a2lgniw": 2,
+      "cooking:gen_a2lgniw": 5,
+      "preserving:onni_korhonen": 7,
+      "cooking:onni_korhonen": 8,
+      "preserving:app_mgpsphkl72": 9,
+      "cooking:app_mgpsphkl72": 12,
+      "cooking:gen_aiadb0h": 32,
+      "preserving:gen_aiadb0h": 15,
+      "preserving:liam_davis": 6,
+      "cooking:liam_davis": 18,
+      "preserving:quinn_murphy": 4,
+      "cooking:quinn_murphy": 5,
+      "cooking:gen_to1p4vm": 21,
+      "cooking:gen_8ino2bf": 89,
+      "preserving:gen_8ino2bf": 14,
+      "cooking:yuki_mori": 7,
+      "cooking:gen_ddw434u": 65,
+      "preserving:gen_ddw434u": 32,
+      "cooking:gen_w5srpar": 14,
+      "cooking:gen_nh9d70u": 6,
+      "cooking:gen_h6850qz": 3,
+      "preserving:sari_wulandari": 1,
+      "cooking:sari_wulandari": 1,
+      "cooking:gen_glm7rsc": 17,
+      "preserving:gen_glm7rsc": 4,
+      "preserving:gen_q0281zi": 1,
+      "cooking:gen_q0281zi": 1,
+      "preserving:diana_osei": 12,
+      "cooking:diana_osei": 54,
+      "cooking:sofia_chen": 10,
+      "cooking:gen_xhva7il": 15,
+      "preserving:gen_xhva7il": 7,
+      "preserving:sofia_chen": 1,
+      "preserving:gen_vhd0crb": 5,
+      "cooking:gen_vhd0crb": 13,
+      "preserving:gen_r3ee0o6": 1,
+      "cooking:gen_r3ee0o6": 1,
+      "preserving:gen_3lkpqef": 6,
+      "cooking:gen_3lkpqef": 6,
+      "preserving:jesse_cortez": 12,
+      "cooking:jesse_cortez": 19,
+      "cooking:visjoin_82": 1,
+      "preserving:visjoin_95": 1,
+      "cooking:visjoin_95": 1,
+      "cooking:visjoin_98": 1,
+      "cooking:amina_diallo": 1,
+      "preserving:naran_tumen": 1,
+      "cooking:naran_tumen": 1,
+      "cooking:gen_dw1sshd": 5,
+      "preserving:gen_5039o3b": 1,
+      "cooking:gen_5039o3b": 1,
+      "preserving:gen_dw1sshd": 4,
+      "cooking:owen_smith": 27,
+      "preserving:owen_smith": 6,
+      "preserving:visjoin_93": 3,
+      "cooking:visjoin_93": 4,
+      "preserving:visjoin_97": 1,
+      "cooking:visjoin_97": 1,
+      "preserving:visjoin_89": 11,
+      "cooking:visjoin_89": 11,
+      "cooking:visjoin_111": 24,
+      "preserving:visjoin_111": 23,
+      "cooking:visjoin_125": 1
+    },
+    "cookDutyHolders": {
+      "chen_wei|Beekeeper": {
+        "days": 107,
+        "preserver": 1
+      },
+      "onni_korhonen|chimney sweep": {
+        "days": 48,
+        "preserver": 0
+      },
+      "app_mgpsphkl72|farmer": {
+        "days": 12,
+        "preserver": 2
+      },
+      "gen_aiadb0h|Rancher": {
+        "days": 32,
+        "preserver": 2
+      },
+      "liam_davis|farmer": {
+        "days": 34,
+        "preserver": 2
+      },
+      "quinn_murphy|bartender": {
+        "days": 8,
+        "preserver": 0
+      },
+      "gen_to1p4vm|Rancher": {
+        "days": 21,
+        "preserver": 2
+      },
+      "yuki_mori|librarian": {
+        "days": 7,
+        "preserver": 0
+      },
+      "gen_ddw434u|Mortician": {
+        "days": 65,
+        "preserver": 0
+      },
+      "gen_nh9d70u|ESL teacher": {
+        "days": 45,
+        "preserver": 0
+      },
+      "gen_h6850qz|welder": {
+        "days": 3,
+        "preserver": 0
+      },
+      "sari_wulandari|postal worker": {
+        "days": 3,
+        "preserver": 0
+      },
+      "gen_glm7rsc|Beekeeper": {
+        "days": 17,
+        "preserver": 1
+      },
+      "gen_q0281zi|interpreter": {
+        "days": 17,
+        "preserver": 0
+      },
+      "diana_osei|paramedic": {
+        "days": 10,
+        "preserver": 3
+      },
+      "sofia_chen|community gardener": {
+        "days": 12,
+        "preserver": 0
+      },
+      "gen_xhva7il|Vintner": {
+        "days": 15,
+        "preserver": 0
+      },
+      "gen_vhd0crb|farmer": {
+        "days": 13,
+        "preserver": 2
+      },
+      "gen_r3ee0o6|arborist": {
+        "days": 1,
+        "preserver": 0
+      },
+      "gen_3lkpqef|Midwife": {
+        "days": 6,
+        "preserver": 0
+      },
+      "jesse_cortez|line cook": {
+        "days": 47,
+        "preserver": 2
+      },
+      "visjoin_82|postal worker": {
+        "days": 1,
+        "preserver": 0
+      },
+      "visjoin_95|Police officer": {
+        "days": 1,
+        "preserver": 0
+      },
+      "visjoin_98|HVAC tech": {
+        "days": 1,
+        "preserver": 0
+      },
+      "naran_tumen|bus driver": {
+        "days": 1,
+        "preserver": 0
+      },
+      "gen_dw1sshd|ER nurse": {
+        "days": 5,
+        "preserver": 0
+      },
+      "gen_5039o3b|aquarium keeper": {
+        "days": 1,
+        "preserver": 0
+      },
+      "owen_smith|hunting guide": {
+        "days": 62,
+        "preserver": 2
+      },
+      "visjoin_93|army medic": {
+        "days": 4,
+        "preserver": 0
+      },
+      "visjoin_97|bike messenger": {
+        "days": 1,
+        "preserver": 0
+      },
+      "visjoin_89|Baker": {
+        "days": 11,
+        "preserver": 0
+      },
+      "visjoin_111|farmer": {
+        "days": 24,
+        "preserver": 2
+      },
+      "visjoin_125|comic shop owner": {
+        "days": 1,
+        "preserver": 0
+      }
+    },
+    "foodXpDelta": {
+      "sari_wulandari:preserver": 1,
+      "gen_3lkpqef:preserver": 10
+    },
+    "foodXpMax": {
+      "chen_wei:preserver": 56,
+      "gen_a2lgniw:preserver": 5,
+      "onni_korhonen:preserver": 9,
+      "app_mgpsphkl72:preserver": 14,
+      "gen_aiadb0h:preserver": 37,
+      "liam_davis:preserver": 15,
+      "quinn_murphy:preserver": 5,
+      "gen_8ino2bf:preserver": 23,
+      "gen_ddw434u:preserver": 60,
+      "sari_wulandari:preserver": 1,
+      "gen_glm7rsc:preserver": 12,
+      "gen_q0281zi:preserver": 7,
+      "diana_osei:preserver": 49,
+      "gen_xhva7il:preserver": 13,
+      "sofia_chen:preserver": 2,
+      "gen_vhd0crb:preserver": 5,
+      "gen_r3ee0o6:preserver": 3,
+      "gen_3lkpqef:preserver": 10,
+      "jesse_cortez:preserver": 40,
+      "visjoin_95:preserver": 1,
+      "naran_tumen:preserver": 1,
+      "gen_5039o3b:preserver": 4,
+      "gen_dw1sshd:preserver": 10,
+      "owen_smith:preserver": 21,
+      "visjoin_93:preserver": 4,
+      "visjoin_97:preserver": 2,
+      "visjoin_89:preserver": 14,
+      "visjoin_111:preserver": 29
+    },
+    "eatRecon": {
+      "teleTotal": 419963,
+      "wrapTotal": 410125
+    }
+  },
+  "neutrality": {
+    "compared": 8,
+    "matched": 8,
+    "mismatches": []
+  },
+  "wrapLive": {
+    "tele": true,
+    "creditDeed": true,
+    "pantryDraw": true,
+    "cookTransform": true,
+    "eat": true,
+    "noteDeed": true,
+    "cleanCarcass": true,
+    "learnTechnique": true
+  },
+  "wrapDead": [
+    "cookFood",
+    "cookAll",
+    "preserveFood",
+    "renderFat",
+    "makePemmican",
+    "askSpecialist",
+    "eatOne",
+    "eatStashOne"
+  ],
+  "go": {
+    "noOtherTransforms": true,
+    "zeroInstrumentErrors": true,
+    "neutrality": true,
+    "completeCapture": true,
+    "all": true
+  }
+}

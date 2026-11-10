@@ -115,6 +115,7 @@ function perSeed(out) {
     for (const vid of Object.keys(last.foodXp || {})) s.foodXpEnd[vid] = last.foodXp[vid];
   }
   s.foodXpDelta = {};
+  s.foodXpMax = {};
   if (dy.length) {
     const first = dy[0], last = dy[dy.length - 1];
     const vids = new Set(Object.keys(first.foodXp || {}).concat(Object.keys(last.foodXp || {})));
@@ -123,6 +124,18 @@ function perSeed(out) {
         const a = ((first.foodXp || {})[vid] || {})[task] || 0;
         const b = ((last.foodXp || {})[vid] || {})[task] || 0;
         if (b - a !== 0) s.foodXpDelta[vid + ':' + task] = b - a;
+      }
+    }
+    // MAX-REACHED (roster churn hides gains: a holder who earns XP and
+    // then dies/leaves vanishes from the last snapshot, so first-vs-last
+    // delta reads 0. Max across all snapshots is the honest measure.)
+    for (const snap of dy) {
+      for (const vid of Object.keys(snap.foodXp || {})) {
+        for (const task of ['cook', 'preserver', 'butcher']) {
+          const v = (snap.foodXp[vid] || {})[task] || 0;
+          const k = vid + ':' + task;
+          if (v > 0 && v > (s.foodXpMax[k] || 0)) s.foodXpMax[k] = v;
+        }
       }
     }
   }
@@ -173,6 +186,7 @@ function pool(per) {
     e.days += s.cookDutyHolders[k].days;
   }
   p.foodXpDelta = merge('foodXpDelta');
+  p.foodXpMax = merge('foodXpMax');
   // eat reconciliation: tele total vs wrap-attributed total.
   p.eatRecon = { teleTotal: p.teleEatTotalTotal, wrapTotal: p.eatenKcalTotalTotal };
   return p;
