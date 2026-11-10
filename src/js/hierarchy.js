@@ -988,29 +988,59 @@
 
     // ---------- TRIBUTE (food is real) ----------
 
+    // EXACT SPLIT (tendexact-a 2026-11-10, finding #2072): the take pays
+    // exactly what was asked — no more, no less. The old whole-unit
+    // take (Math.ceil) over-paid on every tend whose sticker did not
+    // divide the pantry's piece sizes (measured 1500-1901 for a 1500
+    // sticker on band 150201-150208; 99101's 1600 was the mild case),
+    // so the fiction ("Haven sends 1,500 kcal") lied about the grain.
+    // The split does NOT mint fractional units — the break-it food r3
+    // (2026-10-10) doctrine still stands: a 0.6u crumb of 500-kcal
+    // food ate at full per-unit value downstream (eatOne grants
+    // kcalEach per bite; takeFromPantry's coercion inflated sub-1
+    // crumbs back to whole units — measured +50% phantom kcal).
+    // Instead the final unit is SPLIT the way depositPantryPieces
+    // already splits food on the way in (game.js: "PANTRY
+    // GRANULARITY"): the unit leaves the stack and a remainder piece
+    // stays behind — a whole unit (units=1) with reduced kcalEach and
+    // proportional kg. stacksMatch (food.js) requires kcalEach AND kg
+    // to match before stacks merge, so the remainder can never merge
+    // into a full stack and launder its value upward, and a bite of
+    // it grants exactly its kcalEach. Callers report actuals, as
+    // before — now the actuals equal the stickers.
     _removePantryKcal(kcal) {
       var v = this.state.village || {};
       var pantry = v.pantry || [];
-      var need = kcal, removed = 0;
+      var need = Math.max(0, Math.round(kcal || 0)), removed = 0;
       pantry.sort(function (a, b) { return (a.spoilDay || 99999) - (b.spoilDay || 99999); });
       for (var i = pantry.length - 1; i >= 0 && need > 0; i--) {
         var it = pantry[i];
         var per = it.kcalEach || 0, units = it.units || 0;
         if (per <= 0 || units <= 0) continue;
-        // WHOLE UNITS (break-it food r3 2026-10-10): the old fractional take
-        // (take/per) minted sub-unit crumbs in the pantry. A crumb eats at
-        // full per-unit value downstream — eatOne grants kcalEach per bite
-        // regardless of fraction, and takeFromPantry's coercion inflated
-        // sub-1 crumbs back to whole units (0.4u x 500 -> 1u x 500): phantom
-        // kcal, measured +50% on a tribute shave. Indivisible pieces go
-        // whole — over-removal is honest, callers report actuals. Same
-        // doctrine as pantryDraw's player ceil ("no fractionating").
-        var takeUnits = Math.min(units, Math.ceil(need / per));
-        if (takeUnits <= 0) continue;
-        it.units = units - takeUnits;
-        var take = takeUnits * per;
-        removed += take; need -= take;
-        if (it.units <= 0) pantry.splice(i, 1);
+        // Whole units first: every full unit taken is exact by itself.
+        var whole = Math.min(units, Math.floor(need / per));
+        if (whole > 0) {
+          it.units = units - whole;
+          removed += whole * per; need -= whole * per;
+          if (it.units <= 0) pantry.splice(i, 1);
+          if (need <= 0) break;
+          units = it.units;
+        }
+        // Less than one unit left to take: split one unit — take `need`
+        // kcal out of it, leave the rest behind as its own whole piece.
+        if (need > 0 && units > 0) {
+          var remKcal = per - need;
+          var srcKg = Number(it.kg) || 0;
+          var piece = Object.assign({}, it, {
+            units: 1,
+            kcalEach: remKcal,
+            kg: Math.max(0.01, srcKg * (remKcal / per)),
+          });
+          it.units = units - 1;
+          if (it.units <= 0) pantry.splice(i, 1);
+          pantry.push(piece);
+          removed += need; need = 0;
+        }
       }
       return Math.round(removed);
     },
