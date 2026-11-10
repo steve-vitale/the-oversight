@@ -46,6 +46,10 @@ Bar 5 is the revision the doorwalk metric review proposed (per-seed non-inferior
 - The panel contract carries no door mapping (doorwalk precedent) — entry is judged from the analyzer, as here. The panel covers national/table/wins/cost series.
 - Day-field note: the driver's stdout `days` and the corpora's `gameDays` can differ by one day (daily-row count vs game clock); the analyzer judges both legs on the same field.
 
+## Correction 2 (2026-11-10, before the pilot is judged)
+
+The analyzer as first written counted ANY non-feared/witness walk as a primary failure — but the prereg's primary bar carries the parenthetical "(assigned rotation; fallback only if assigned not offered/earned)", and the armed leg produced exactly that case: seed 53004 was assigned witness, witness was never offered (5 doors, same as the Nov-7 doorwalk corpus), and the drive fell back to beloved with the rule recorded. The analyzer now implements the prereg text: a walk is non-compliant only if it is neither the assigned door nor a documented fallback (fellBack true with the assigned door absent from that walk's offered list). Proof fixtures F5 (legitimate fallback → compliant) and F6 (non-assigned walk without fallback → non-compliant) pin the distinction; the proof is 41/41. No bar changes; the corpora are untouched; the analysis had not been run yet when the fix landed.
+
 ## Convergence state
 
 **scale-onramp / winnability chain: converging, NOT converged.** The chain runs end to end through a won lesser seat (doorwalk-b 5/5). What remains: national 0/8, full seat 0/8, un-walked doors (feared, witness, dark, trial). This run closes the feared/witness coverage; dark and trial stay open by design (ledger-earned branch; opt-in trial).

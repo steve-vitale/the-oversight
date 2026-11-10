@@ -91,6 +91,23 @@ function judgeVerdict(bRows, aRows, seeds, base, armed) {
   const enteredNonAssigned = aRows.filter(function (r) {
     return (r.walked || []).some(function (w) { return w.path !== 'feared' && w.path !== 'witness'; });
   }).length;
+  // Assignment compliance (prereg primary clause): a walk is compliant
+  // if it is the assigned door, OR a documented fallback (fellBack true
+  // with the assigned door absent from that walk's offered list — the
+  // door rule's own record). Anything else is a non-compliant walk.
+  const ROT = ['feared', 'witness', 'feared', 'witness'];
+  function assignedFor(seed) { return ROT[(((seed - 53001) % 4) + 4) % 4]; }
+  const nonCompliant = [];
+  aRows.forEach(function (r) {
+    (r.walked || []).forEach(function (w) {
+      const assigned = assignedFor(r.seed);
+      if (w.path === assigned) return;
+      const off = (r.offers || []).filter(function (o) { return o.day === w.day; })[0];
+      const offered = off ? (off.offered || []) : [];
+      if (w.fellBack && offered.indexOf(assigned) < 0) return; // legitimate fallback
+      nonCompliant.push({ seed: r.seed, path: w.path, assigned: assigned, fellBack: !!w.fellBack });
+    });
+  });
   // Resolution: a walked door reaches a finals answer (win or downgrade
   // played through). A walk with no finals answer and no win is
   // unresolved — a stall or an unanswered modal at run end.
@@ -125,8 +142,9 @@ function judgeVerdict(bRows, aRows, seeds, base, armed) {
   const verdict = {
     primary: { enteredArmed: enteredArmed, enteredBaseline: enteredBase, bar: '>=3/8 armed vs 0/8 baseline',
       walkedPaths: walkedPaths, enteredNonAssigned: enteredNonAssigned,
+      nonCompliantWalks: nonCompliant,
       unresolvedSeeds: unresolved,
-      pass: enteredArmed >= 3 && enteredBase === 0 && enteredNonAssigned === 0 && unresolved.length === 0 },
+      pass: enteredArmed >= 3 && enteredBase === 0 && nonCompliant.length === 0 && unresolved.length === 0 },
     substrateSanity: { baseSeatsEarned: baseSeats, baseSat: baseSat, armedSat: armedSat, bar: 'baseline lesser >=3/8 AND sat >=3/8', pass: baseSeats >= 3 && baseSat >= 3 },
     substrateGuard: { exactSeeds: guardPass, of: seeds.length, bar: '>=6/8 per-seed exact', pass: guardPass >= 6, detail: guard },
     reachable: { reachable: reachable, missed: reachableMissed, offerNotTakenArmedDays: offerNotTakenArmed,

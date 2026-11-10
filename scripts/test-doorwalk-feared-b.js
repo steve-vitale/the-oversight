@@ -31,7 +31,8 @@
 //       entriesFromVerbs, starvation, medianOf, classifySeatDay) on
 //       the reused doorwalk-b helpers.
 //   (F) NEW ANALYZER: judgeVerdict fixtures — GO shape, survival
-//       non-inferiority violation, primary miss, unresolved walk.
+//       non-inferiority violation, primary miss, unresolved walk,
+//       legitimate fallback (compliant), non-compliant walk.
 //
 // Usage: node scripts/test-doorwalk-feared-b.js
 //   (D) runs three 150d sims in /tmp; allow ~4-6 min.
@@ -385,9 +386,11 @@ withEnv({ DOORWALK_B: '1' }, () => {
     const rowsOver = { base: {}, armed: {} };
     [0, 1, 2, 3, 4].forEach(function (i) {
       rowsOver.base[i] = { days: 150, gameDays: 150, finalSeat: 'lesser', tsTaken: 1, tsDay: 90, tsKind: 'lesser', seatDays: 60 };
+      // Rotation: 53001 feared, 53002 witness, 53003 feared, 53004 witness, 53005 feared.
+      const p = (i % 2 === 0) ? 'feared' : 'witness';
       rowsOver.armed[i] = { days: 90, gameDays: 90, won: true, over: true, endReason: 'won', finalSeat: 'lesser',
         tsTaken: 1, tsDay: 90, tsKind: 'lesser', doorsEntered: 1,
-        walked: [{ day: 90, path: i < 3 ? 'feared' : 'witness', branch: 'light', door: 'path:' + (i < 3 ? 'feared' : 'witness'), fellBack: false }],
+        walked: [{ day: 90, path: p, branch: 'light', door: 'path:' + p, fellBack: false }],
         finalsAnswers: 1, dwAnswers: 5, entryDay: 90 };
     });
     const corpusOver = { base: {}, armed: {} };
@@ -417,7 +420,8 @@ withEnv({ DOORWALK_B: '1' }, () => {
       f.bRows[i].finalSeat = 'lesser'; f.bRows[i].tsTaken = 1;
       f.aRows[i].finalSeat = 'lesser'; f.aRows[i].tsTaken = 1;
       f.aRows[i].doorsEntered = 1;
-      f.aRows[i].walked = [{ day: 90, path: 'feared', branch: 'light', door: 'path:feared', fellBack: false }];
+      const p = (i % 2 === 0) ? 'feared' : 'witness'; // rotation: 53001 feared, 53002 witness, 53003 feared
+      f.aRows[i].walked = [{ day: 90, path: p, branch: 'light', door: 'path:' + p, fellBack: false }];
       f.aRows[i].finalsAnswers = 1; f.aRows[i].won = true; f.aRows[i].entryDay = 90;
       f.base[SEEDS[i]].finalSeat = { seat: 'lesser' };
       f.armed[SEEDS[i]].finalSeat = { seat: 'lesser' };
@@ -462,6 +466,45 @@ withEnv({ DOORWALK_B: '1' }, () => {
     assert.strictEqual(j.verdict.primary.pass, false);
     assert.strictEqual(j.verdict.overall, 'NO-GO');
     ok('NEW ANALYZER: entered door with no finals answer and no win -> unresolved, NO-GO', true);
+  })();
+  // F5: legitimate fallback — seed 53002 is assigned witness, witness
+  // not offered, fellBack true, offers list lacks witness -> primary
+  // still passes.
+  (function () {
+    const f = build({ base: { 0: { finalSeat: 'lesser', tsTaken: 1 }, 1: { finalSeat: 'lesser', tsTaken: 1 }, 2: { finalSeat: 'lesser', tsTaken: 1 } },
+      armed: { 0: { finalSeat: 'lesser', tsTaken: 1, doorsEntered: 1, walked: [{ day: 90, path: 'feared', branch: 'light', door: 'path:feared', fellBack: false }], finalsAnswers: 1, won: true, entryDay: 90, offers: [{ day: 90, offered: ['feared', 'beloved', 'witness', 'assimilated', 'defiant', 'relay'], assigned: 'feared', picked: 'feared', rule: 'assigned+feared' }] },
+        1: { finalSeat: 'lesser', tsTaken: 1, doorsEntered: 1, walked: [{ day: 90, path: 'beloved', branch: 'light', door: 'path:beloved', fellBack: true }], finalsAnswers: 1, won: true, entryDay: 90, offers: [{ day: 90, offered: ['feared', 'beloved', 'assimilated', 'defiant', 'relay'], assigned: 'witness', picked: 'beloved', rule: 'fallback-non-feared' }] },
+        2: { finalSeat: 'lesser', tsTaken: 1, doorsEntered: 1, walked: [{ day: 90, path: 'feared', branch: 'light', door: 'path:feared', fellBack: false }], finalsAnswers: 1, won: true, entryDay: 90, offers: [{ day: 90, offered: ['feared', 'beloved', 'witness', 'assimilated', 'defiant', 'relay'], assigned: 'feared', picked: 'feared', rule: 'assigned+feared' }] } } }, {});
+    [0, 1, 2].forEach(function (i) {
+      f.base[SEEDS[i]].finalSeat = { seat: 'lesser' };
+      f.armed[SEEDS[i]].finalSeat = { seat: 'lesser' };
+      f.armed[SEEDS[i]].endReason = 'won';
+    });
+    const j = NEW_ANALYZE.judgeVerdict(f.bRows, f.aRows, SEEDS, f.base, f.armed);
+    assert.strictEqual(j.verdict.primary.enteredNonAssigned, 1);
+    assert.deepStrictEqual(j.verdict.primary.nonCompliantWalks, []);
+    assert.strictEqual(j.verdict.primary.pass, true);
+    assert.strictEqual(j.verdict.overall, 'GO');
+    ok('NEW ANALYZER: legitimate fallback (witness not offered, fellBack) -> compliant, GO', true);
+  })();
+  // F6: non-compliant walk — beloved walked with fellBack false while
+  // feared was assigned and offered -> primary fails.
+  (function () {
+    const f = build({ base: { 0: { finalSeat: 'lesser', tsTaken: 1 }, 1: { finalSeat: 'lesser', tsTaken: 1 }, 2: { finalSeat: 'lesser', tsTaken: 1 } },
+      armed: { 0: { finalSeat: 'lesser', tsTaken: 1, doorsEntered: 1, walked: [{ day: 90, path: 'feared', branch: 'light', door: 'path:feared', fellBack: false }], finalsAnswers: 1, won: true, entryDay: 90, offers: [{ day: 90, offered: ['feared', 'beloved', 'witness', 'assimilated', 'defiant', 'relay'], assigned: 'feared', picked: 'feared', rule: 'assigned+feared' }] },
+        1: { finalSeat: 'lesser', tsTaken: 1, doorsEntered: 1, walked: [{ day: 90, path: 'witness', branch: 'light', door: 'path:witness', fellBack: false }], finalsAnswers: 1, won: true, entryDay: 90, offers: [{ day: 90, offered: ['feared', 'beloved', 'witness', 'assimilated', 'defiant', 'relay'], assigned: 'witness', picked: 'witness', rule: 'assigned+witness' }] },
+        2: { finalSeat: 'lesser', tsTaken: 1, doorsEntered: 1, walked: [{ day: 90, path: 'beloved', branch: 'light', door: 'path:beloved', fellBack: false }], finalsAnswers: 1, won: true, entryDay: 90, offers: [{ day: 90, offered: ['feared', 'beloved', 'witness', 'assimilated', 'defiant', 'relay'], assigned: 'feared', picked: 'beloved', rule: 'assigned+feared' }] } } }, {});
+    [0, 1, 2].forEach(function (i) {
+      f.base[SEEDS[i]].finalSeat = { seat: 'lesser' };
+      f.armed[SEEDS[i]].finalSeat = { seat: 'lesser' };
+      f.armed[SEEDS[i]].endReason = 'won';
+    });
+    const j = NEW_ANALYZE.judgeVerdict(f.bRows, f.aRows, SEEDS, f.base, f.armed);
+    assert.strictEqual(j.verdict.primary.nonCompliantWalks.length, 1);
+    assert.strictEqual(j.verdict.primary.nonCompliantWalks[0].seed, 53003);
+    assert.strictEqual(j.verdict.primary.pass, false);
+    assert.strictEqual(j.verdict.overall, 'NO-GO');
+    ok('NEW ANALYZER: non-assigned walk without fallback -> non-compliant, NO-GO', true);
   })();
 })();
 
