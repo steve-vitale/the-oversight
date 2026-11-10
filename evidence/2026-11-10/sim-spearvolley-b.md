@@ -305,7 +305,10 @@ investigated above (E4 + two-band consistency).
   safe-commit index clobber hit, repaired from HEAD with
   `git ls-tree HEAD -r | git update-index --add --index-info`,
   status + diff clean)
-- (measurement commit next: this file + analyzer + 32 per-seed files)
+- `7baa4c9d7` — measurement (this file + analyzer + 32 per-seed files;
+  safe-commit index clobber hit again, repaired from HEAD with
+  `git ls-tree HEAD -r | git update-index --add --index-info`,
+  status + diff clean)
 
 ## Corpus
 
