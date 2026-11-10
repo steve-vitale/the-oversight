@@ -58,13 +58,18 @@ function medianStd(days) {
 // event whose caller stack runs through the accord verb — the stack test
 // dodges the cause map's gift/visit ambiguity at delta 8). Unanswered
 // links report pendingDays null and unansweredDays = last day - formed.
-function accordPendingDays(row, tgLink) {
+// NOTE: TG classifyLink objects carry NO id field, so the caller must
+// pass the link's id separately (matched by `other` from the snapshots);
+// passing the TG link object as if it had .id silently matches nothing
+// and reports every link unanswered (found on the first analyzer run:
+// all 16 links read pendNAd until the id was threaded through).
+function accordPendingDays(row, tgLink, linkId) {
   try {
     const unified = TG.unifyEvents(row);
     const formed = tgLink.formedDay;
     let answerDay = null;
     for (const ev of unified) {
-      if (!ev || ev.linkId !== tgLink.id) continue;
+      if (!ev || ev.linkId !== linkId) continue;
       if (typeof ev.stack === 'string' && /answerAccord/.test(ev.stack)) {
         if (answerDay == null || ev.day < answerDay) answerDay = ev.day;
       }
@@ -77,14 +82,30 @@ function accordPendingDays(row, tgLink) {
   } catch (e) { return { pendingDays: null, unansweredDays: null, answered: false, error: String(e.message).slice(0, 80) }; }
 }
 
+// Link ids by `other` from a seed's own snapshots (TG link objects carry
+// no id; each seed here holds at most one link per `other`).
+function linkIdsByOther(row) {
+  const map = {};
+  try {
+    (row.daily || []).forEach(function (snap) {
+      (snap.links || []).forEach(function (l) {
+        const id = l.id || l.key;
+        if (id && l.other && map[l.other] == null) map[l.other] = id;
+      });
+    });
+  } catch (e) {}
+  return map;
+}
+
 function legSummary(rows, run) {
   const files = rows.map(function (r) { return path.join(DIR, 'answermail-drive-s' + r.seed + '-' + run + '.json'); });
   const band = TG.summarizeBand(files);
   const perSeed = rows.map(function (r, i) {
     const s = band.seeds[i];
     const ds = r.driveStats || null;
+    const idsByOther = linkIdsByOther(r);
     const links = s.links.map(function (l) {
-      const ap = accordPendingDays(r, l);
+      const ap = accordPendingDays(r, l, idsByOther[l.other] || null);
       return { id: l.id || null, other: l.other, class: l.class, born: l.born, peak: l.peak, end: l.end, seasonedEver: l.seasonedEver, formedDay: l.formedDay, accordPendingDays: ap.pendingDays, accordUnansweredDays: ap.unansweredDays, accordAnswered: ap.answered };
     });
     return {
@@ -145,13 +166,15 @@ function main() {
     driveErrorsZero: armed.driveErrors === 0,
   };
   const fidelityPass = Object.keys(fidelity).every(function (k) { return fidelity[k]; });
-  // Prereg primary: GO candidate iff armed >= 3/8 AND control <= 1/8;
-  // NO-GO iff armed <= control; anything else INCONCLUSIVE.
-  const goCandidate = armed.seasoned >= 3 && base.seasoned <= 1;
-  const noGo = armed.seasoned <= base.seasoned;
   const costPass = armed.starvationTotal <= base.starvationTotal + 2
     && armOnlyStarv <= base.starvationTotal
     && (armed.median || 0) >= medianBar;
+  // Prereg primary: GO candidate iff armed >= 3/8 AND control <= 1/8;
+  // NO-GO iff armed <= control; a primary pass with a FAILED cost bar is
+  // ALSO NO-GO (prereg: "A primary pass with a failed cost bar is NO-GO").
+  // Anything else is INCONCLUSIVE.
+  const goCandidate = armed.seasoned >= 3 && base.seasoned <= 1;
+  const noGo = armed.seasoned <= base.seasoned || (goCandidate && !costPass);
   const primaryPass = goCandidate && costPass;
   const verdict = !fidelityPass ? 'INVALID (fidelity gate failed)'
     : (primaryPass ? 'GO candidate'
