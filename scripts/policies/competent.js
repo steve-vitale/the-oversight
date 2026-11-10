@@ -680,6 +680,8 @@ function talkRound(Game, ctx) {
 //   2. the grieving or the scared (comfort is a competent kindness),
 //   3. the stranger (lowest bond with the player),
 //   4. the least-talked-to.
+//   + a pending link raise (sim-raiserseat-a 2026-11-10): a villager
+//     carrying an undelivered ask outranks a stranger — see raiserSeatOn.
 // Choice picking mirrors the engine's own courtesy: answer their question
 // first (ans:* — the menu builder's rule: "it's rude to ignore it"), then
 // teach (knowledge is the food economy), then the canon questions (gq:*),
@@ -692,6 +694,28 @@ function talkRound(Game, ctx) {
 // (a separate probe driver, endConvo 'done'); the pilot watches run timing
 // for any recurrence.
 function talkOn() { return process.env.COMPETENT_TALK === '1'; }
+
+// ---------- RAISER SEAT (sim-raiserseat-a 2026-11-10) ----------
+// Env gate RAISER_SEAT=1 enables; default OFF — the control leg is the
+// talkturn-a policy verbatim. A villager with a pending link raise is
+// carrying an undelivered ask the village knows about (it appears in the
+// talk menu when the scholar sits with them) with a 3-day life; on seed
+// 150206 twenty-eight such asks expired unanswered while the scholar
+// held 1,251 conversation turns, because talkScore's stranger and
+// least-talked-to rewards rank the most trusted, most-talked-to villager
+// out of the two daily seats. The signal only prioritizes TALKING to the
+// raiser; it never decides the link (the accept/decline picker is
+// untouched). +35: above the whole stranger/count spread (max 30), so a
+// raiser outranks any stranger even from a zero base; below grief (+50)
+// and an unresolved want (+100), so comfort and direct wants keep their
+// priority. Sized from a scratch probe of the failing seed 150206: the
+// best raiser needed at most +21 to make the top-2 on any pending-raise
+// day (median +6); +35 covers the whole field with margin. Gated on
+// answerability: with no shared language (commLevel 'none') the ask
+// never appears in the menu, so no seat is spent on it (fail-open if
+// commLevel is missing, matching bondChoices).
+function raiserSeatOn() { return process.env.RAISER_SEAT === '1'; }
+const RAISER_SEAT_BONUS = 35;
 
 // Structural menu ids: never picked mid-conversation. 'goon' ("go on") is
 // structural here too — the 5-turn cap owns continuation, not the menu.
@@ -740,6 +764,22 @@ function talkScore(Game, ctx, vid) {
       const b = Game.bondGet(Game.villagerId, vid);
       const v = b ? (b.v || 0) : 0;
       score += Math.max(0, Math.min(30, 20 - v)); // the stranger first
+    }
+  } catch (e) {}
+  try {
+    // Pending-raise signal (sim-raiserseat-a): a raiser with an
+    // undelivered, answerable link ask outranks a stranger. Gate is
+    // env-off by default; see raiserSeatOn above.
+    if (raiserSeatOn() && Game.pendingLinkRaise) {
+      const pending = Game.pendingLinkRaise(vid);
+      if (pending) {
+        let answerable = true;
+        try {
+          const comm = Game.commLevel ? Game.commLevel(vid) : null;
+          if (comm && comm.level === 'none') answerable = false;
+        } catch (e) { answerable = true; }
+        if (answerable) score += RAISER_SEAT_BONUS;
+      }
     }
   } catch (e) {}
   return score;
@@ -3914,7 +3954,7 @@ const competent = {
   },
 };
 
-module.exports = { competent, competentEat, packEatOnce, beastStrikeTarget, walkTo, walkHome, thirstWalkHome, goHomeStanding, standingHomeOn, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, keepPromises, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, fleeRepairOn, recoverOn, approachFallbackOn, approachMonsterSig, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE, armorWantsVine };
+module.exports = { competent, competentEat, packEatOnce, beastStrikeTarget, walkTo, walkHome, thirstWalkHome, goHomeStanding, standingHomeOn, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, raiserSeatOn, RAISER_SEAT_BONUS, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, keepPromises, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, fleeRepairOn, recoverOn, approachFallbackOn, approachMonsterSig, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE, armorWantsVine };
 
 
 // The public shared gearing routine, also used by prepared policy proofs.
