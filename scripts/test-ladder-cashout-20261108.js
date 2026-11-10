@@ -142,7 +142,11 @@ const K = require('./godpath/lib'), T = K.reporter('ladder-cashout-20261108');
   G.wipe();
   T.ok('a live run\'s wipe does not bank', meta().ladderBank && meta().ladderBank.points === 26);
 
-  // ---- L3-6: tribute readiness counts only non-scholar veterans ----
+  // ---- L3-6 (UPDATED sim-scholarcount-a, Steve RULED 2026-11-10): tribute
+  // readiness counts the scholar (the bar measures the village's
+  // strength); delivery still pays non-scholar veterans only (the
+  // payment measures who can leave), so scholar + 1 villager reads
+  // ready here and delivery honestly refuses. ----
   fresh(); resetLadderState();
   const me = G.villagerId;
   const others = v.roster.filter(id => id && id !== me);
@@ -150,9 +154,9 @@ const K = require('./godpath/lib'), T = K.reporter('ladder-cashout-20261108');
   T.ok('rig has two living non-scholar villagers', !!(A && B) && !(G.vpOf(A) || {}).dead && !(G.vpOf(B) || {}).dead);
   G.state.waveKillLog = [{ by: me, w: 4 }, { by: A, w: 4 }];
   let ready = G.ladderCapstoneReady('military_tribute');
-  T.ok('scholar-veteran + 1 villager reads NOT-ready', ready && !ready.ready && ready.reason === 'veterans-short' && ready.veterans === 1);
+  T.ok('scholar-veteran + 1 villager reads ready (ruling: scholar counts; payable 1)', ready && ready.ready && ready.veterans === 2 && ready.payable === 1);
   r = G.ladderDeliverCapstone('military_tribute');
-  T.ok('delivery agrees: refuses with veterans-short, records nothing', r && !r.ok && r.reason === 'veterans-short' && !pg.ladderCapstone);
+  T.ok('delivery still refuses with veterans-short (payable 1), records nothing', r && !r.ok && r.reason === 'veterans-short' && !pg.ladderCapstone);
   G.state.waveKillLog = [{ by: A, w: 4 }, { by: B, w: 4 }];
   ready = G.ladderCapstoneReady('military_tribute');
   T.ok('2 non-scholar veterans reads ready', ready && ready.ready && ready.veterans === 2);
