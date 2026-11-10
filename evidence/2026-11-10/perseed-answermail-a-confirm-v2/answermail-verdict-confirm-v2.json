@@ -1,0 +1,1094 @@
+{
+  "baseRun": "answermail-confirm-base",
+  "armedRun": "answermail-confirm-armed",
+  "seeds": [
+    120101,
+    120102,
+    120103,
+    120104,
+    120105,
+    120106,
+    120107,
+    120108,
+    120109,
+    120110,
+    120111,
+    120112,
+    120113,
+    120114,
+    120115,
+    120116
+  ],
+  "primary": {
+    "seasonedBase": 2,
+    "seasonedArmed": 13,
+    "threshold": 10,
+    "pass": true
+  },
+  "costBar": {
+    "starvationBase": 5,
+    "starvationArmed": 4,
+    "starvationCap": 7,
+    "starvationArmOnly": 1,
+    "starvationArmOnlyCap": 2,
+    "medianBase": 108,
+    "medianArmed": 136.5,
+    "medianBar": 86.4,
+    "medianTGBase": 114,
+    "medianTGArmed": 137,
+    "pass": true
+  },
+  "fidelity": {
+    "accordAnswersGeLinks": true,
+    "tendsGt0": true,
+    "renegSilenceZero": true,
+    "instrumentErrorsZero": true,
+    "unattributedZero": false
+  },
+  "fidelityPass": false,
+  "wall": {
+    "base": {
+      "wins": 0,
+      "national": 0,
+      "table": 0,
+      "w4": 15,
+      "w5": 4,
+      "median": 108,
+      "medianTG": 114,
+      "polities": 1
+    },
+    "armed": {
+      "wins": 0,
+      "national": 0,
+      "table": 0,
+      "w4": 15,
+      "w5": 7,
+      "median": 136.5,
+      "medianTG": 137,
+      "polities": 1
+    }
+  },
+  "gainsByCause": {
+    "base": {
+      "aid-beg-give": 84,
+      "tribute-weekly": 101,
+      "aid-offer-accept": 208
+    },
+    "armed": {
+      "accord-gift": 140,
+      "tend": 845,
+      "tribute-weekly": 120,
+      "aid-beg-give": 68,
+      "renegotiation-answer": 91,
+      "aid-offer-accept": 280
+    }
+  },
+  "downsByCause": {
+    "base": {
+      "succession-haircut": 409,
+      "renegotiation-silence": 90,
+      "tribute-nothing": 12,
+      "titan-event": 157,
+      "tribute-thin": 1,
+      "aid-beg-refuse": 10
+    },
+    "armed": {
+      "succession-haircut": 568,
+      "tribute-thin": 2,
+      "titan-event": 400,
+      "tribute-nothing": 6,
+      "aid-beg-refuse": 20
+    }
+  },
+  "classes": {
+    "base": {
+      "rises": 1,
+      "seasoned": 2,
+      "decays": 10,
+      "holds": 2
+    },
+    "armed": {
+      "seasoned": 13,
+      "rises": 2
+    }
+  },
+  "perSeed": {
+    "base": [
+      {
+        "seed": 120101,
+        "days": 72,
+        "gameDays": 72,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "standing": 199,
+        "starvation": 0,
+        "deaths": 91,
+        "links": [
+          {
+            "other": "village_1",
+            "class": "rises",
+            "born": 30,
+            "peak": 40,
+            "end": 21,
+            "seasonedEver": false,
+            "formedDay": 30
+          }
+        ],
+        "seasoned": 0,
+        "polity": "never-seasoned",
+        "accordAnswers": 0,
+        "tends": 0,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120102,
+        "days": 114,
+        "gameDays": 114,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "unlockedWave": 5,
+        "standing": 275,
+        "starvation": 0,
+        "deaths": 92,
+        "links": [
+          {
+            "other": "village_3",
+            "class": "seasoned",
+            "born": 34,
+            "peak": 56,
+            "end": 47,
+            "seasonedEver": true,
+            "formedDay": 36
+          }
+        ],
+        "seasoned": 1,
+        "polity": "seasoned-but-no-polity",
+        "accordAnswers": 0,
+        "tends": 0,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120103,
+        "days": 62,
+        "gameDays": 62,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "standing": 199,
+        "starvation": 0,
+        "deaths": 80,
+        "links": [
+          {
+            "other": "village_1",
+            "class": "decays",
+            "born": 30,
+            "peak": 34,
+            "end": 0,
+            "seasonedEver": false,
+            "formedDay": 33
+          }
+        ],
+        "seasoned": 0,
+        "polity": "never-seasoned",
+        "accordAnswers": 0,
+        "tends": 0,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120104,
+        "days": 97,
+        "gameDays": 97,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "standing": 175,
+        "starvation": 1,
+        "deaths": 81,
+        "links": [
+          {
+            "other": "village_2",
+            "class": "decays",
+            "born": 30,
+            "peak": 32,
+            "end": 18,
+            "seasonedEver": false,
+            "formedDay": 28
+          }
+        ],
+        "seasoned": 0,
+        "polity": "never-seasoned",
+        "accordAnswers": 0,
+        "tends": 0,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120105,
+        "days": 57,
+        "gameDays": 57,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "standing": 145,
+        "starvation": 0,
+        "deaths": 83,
+        "links": [
+          {
+            "other": "village_2",
+            "class": "decays",
+            "born": 30,
+            "peak": 35,
+            "end": 9,
+            "seasonedEver": false,
+            "formedDay": 31
+          }
+        ],
+        "seasoned": 0,
+        "polity": "never-seasoned",
+        "accordAnswers": 0,
+        "tends": 0,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120106,
+        "days": 102,
+        "gameDays": 102,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "standing": 199,
+        "starvation": 0,
+        "deaths": 64,
+        "links": [
+          {
+            "other": "village_0",
+            "class": "holds",
+            "born": 30,
+            "peak": 34,
+            "end": 22,
+            "seasonedEver": false,
+            "formedDay": 45
+          }
+        ],
+        "seasoned": 0,
+        "polity": "never-seasoned",
+        "accordAnswers": 0,
+        "tends": 0,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120107,
+        "days": 150,
+        "gameDays": 152,
+        "endReason": "survived",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "unlockedWave": 5,
+        "standing": 355,
+        "starvation": 0,
+        "deaths": 138,
+        "links": [
+          {
+            "other": "village_0",
+            "class": "decays",
+            "born": 30,
+            "peak": 34,
+            "end": 7,
+            "seasonedEver": false,
+            "formedDay": 18
+          }
+        ],
+        "seasoned": 0,
+        "polity": "never-seasoned",
+        "accordAnswers": 0,
+        "tends": 0,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120108,
+        "days": 124,
+        "gameDays": 124,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "standing": 199,
+        "starvation": 0,
+        "deaths": 80,
+        "links": [
+          {
+            "other": "village_0",
+            "class": "decays",
+            "born": 30,
+            "peak": 30,
+            "end": 4,
+            "seasonedEver": false,
+            "formedDay": 59
+          }
+        ],
+        "seasoned": 0,
+        "polity": "never-seasoned",
+        "accordAnswers": 0,
+        "tends": 0,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120109,
+        "days": 150,
+        "gameDays": 151,
+        "endReason": "survived",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "unlockedWave": 5,
+        "standing": 300,
+        "starvation": 0,
+        "deaths": 98,
+        "links": [
+          {
+            "other": "village_0",
+            "class": "decays",
+            "born": 30,
+            "peak": 39,
+            "end": 0,
+            "seasonedEver": false,
+            "formedDay": 44
+          }
+        ],
+        "seasoned": 0,
+        "polity": "never-seasoned",
+        "accordAnswers": 0,
+        "tends": 0,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120110,
+        "days": 141,
+        "gameDays": 141,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "standing": 199,
+        "starvation": 0,
+        "deaths": 97,
+        "links": [
+          {
+            "other": "village_0",
+            "class": "decays",
+            "born": 34,
+            "peak": 36,
+            "end": 0,
+            "seasonedEver": false,
+            "formedDay": 24
+          }
+        ],
+        "seasoned": 0,
+        "polity": "never-seasoned",
+        "accordAnswers": 0,
+        "tends": 0,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120111,
+        "days": 85,
+        "gameDays": 85,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "standing": 170,
+        "starvation": 0,
+        "deaths": 74,
+        "links": [
+          {
+            "other": "village_1",
+            "class": "holds",
+            "born": 30,
+            "peak": 35,
+            "end": 27,
+            "seasonedEver": false,
+            "formedDay": 22
+          }
+        ],
+        "seasoned": 0,
+        "polity": "never-seasoned",
+        "accordAnswers": 0,
+        "tends": 0,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120112,
+        "days": 142,
+        "gameDays": 142,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "standing": 199,
+        "starvation": 0,
+        "deaths": 83,
+        "links": [
+          {
+            "other": "village_1",
+            "class": "decays",
+            "born": 30,
+            "peak": 31,
+            "end": 2,
+            "seasonedEver": false,
+            "formedDay": 24
+          }
+        ],
+        "seasoned": 0,
+        "polity": "never-seasoned",
+        "accordAnswers": 0,
+        "tends": 0,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120113,
+        "days": 85,
+        "gameDays": 86,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "standing": 199,
+        "starvation": 0,
+        "deaths": 98,
+        "links": [
+          {
+            "other": "village_0",
+            "class": "seasoned",
+            "born": 30,
+            "peak": 40,
+            "end": 21,
+            "seasonedEver": true,
+            "formedDay": 20
+          }
+        ],
+        "seasoned": 1,
+        "polity": "seasoned-but-no-polity",
+        "accordAnswers": 0,
+        "tends": 0,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120114,
+        "days": 125,
+        "gameDays": 126,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "standing": 199,
+        "starvation": 0,
+        "deaths": 75,
+        "links": [
+          {
+            "other": "village_2",
+            "class": "decays",
+            "born": 30,
+            "peak": 35,
+            "end": 8,
+            "seasonedEver": false,
+            "formedDay": 31
+          }
+        ],
+        "seasoned": 0,
+        "polity": "never-seasoned",
+        "accordAnswers": 0,
+        "tends": 0,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120115,
+        "days": 143,
+        "gameDays": 143,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "unlockedWave": 5,
+        "standing": 325,
+        "starvation": 1,
+        "deaths": 80,
+        "links": [
+          {
+            "other": "village_1",
+            "class": "decays",
+            "born": 30,
+            "peak": 31,
+            "end": 6,
+            "seasonedEver": false,
+            "formedDay": 46
+          }
+        ],
+        "seasoned": 0,
+        "polity": "never-seasoned",
+        "accordAnswers": 0,
+        "tends": 0,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120116,
+        "days": 31,
+        "gameDays": 31,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "village",
+        "maxWave": 3,
+        "unlockedWave": 3,
+        "standing": 0,
+        "starvation": 3,
+        "deaths": 32,
+        "links": [],
+        "seasoned": 0,
+        "polity": "no-links",
+        "accordAnswers": 0,
+        "tends": 0,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      }
+    ],
+    "armed": [
+      {
+        "seed": 120101,
+        "days": 145,
+        "gameDays": 145,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "standing": 199,
+        "starvation": 1,
+        "deaths": 111,
+        "links": [
+          {
+            "other": "village_1",
+            "class": "seasoned",
+            "born": 48,
+            "peak": 75,
+            "end": 50,
+            "seasonedEver": true,
+            "formedDay": 30
+          }
+        ],
+        "seasoned": 1,
+        "polity": "seasoned-but-no-polity",
+        "accordAnswers": 1,
+        "tends": 9,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120102,
+        "days": 144,
+        "gameDays": 144,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "unlockedWave": 5,
+        "standing": 370,
+        "starvation": 0,
+        "deaths": 86,
+        "links": [
+          {
+            "other": "village_3",
+            "class": "seasoned",
+            "born": 44,
+            "peak": 100,
+            "end": 72,
+            "seasonedEver": true,
+            "formedDay": 36
+          }
+        ],
+        "seasoned": 1,
+        "polity": "seasoned-but-no-polity",
+        "accordAnswers": 1,
+        "tends": 6,
+        "renegAnswers": 1,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120103,
+        "days": 150,
+        "gameDays": 150,
+        "endReason": "survived",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "unlockedWave": 5,
+        "standing": 340,
+        "starvation": 0,
+        "deaths": 109,
+        "links": [
+          {
+            "other": "village_1",
+            "class": "seasoned",
+            "born": 48,
+            "peak": 100,
+            "end": 29,
+            "seasonedEver": true,
+            "formedDay": 33
+          }
+        ],
+        "seasoned": 1,
+        "polity": "seasoned-but-no-polity",
+        "accordAnswers": 1,
+        "tends": 7,
+        "renegAnswers": 1,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120104,
+        "days": 115,
+        "gameDays": 115,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "unlockedWave": 5,
+        "standing": 300,
+        "starvation": 0,
+        "deaths": 102,
+        "links": [
+          {
+            "other": "village_2",
+            "class": "seasoned",
+            "born": 48,
+            "peak": 100,
+            "end": 68,
+            "seasonedEver": true,
+            "formedDay": 28
+          }
+        ],
+        "seasoned": 1,
+        "polity": "seasoned-but-no-polity",
+        "accordAnswers": 1,
+        "tends": 8,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120105,
+        "days": 137,
+        "gameDays": 137,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "standing": 199,
+        "starvation": 0,
+        "deaths": 120,
+        "links": [
+          {
+            "other": "village_2",
+            "class": "seasoned",
+            "born": 48,
+            "peak": 100,
+            "end": 87,
+            "seasonedEver": true,
+            "formedDay": 31
+          }
+        ],
+        "seasoned": 1,
+        "polity": "seasoned-but-no-polity",
+        "accordAnswers": 1,
+        "tends": 7,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120106,
+        "days": 68,
+        "gameDays": 68,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "standing": 125,
+        "starvation": 0,
+        "deaths": 51,
+        "links": [
+          {
+            "other": "village_0",
+            "class": "rises",
+            "born": 48,
+            "peak": 74,
+            "end": 63,
+            "seasonedEver": false,
+            "formedDay": 45
+          }
+        ],
+        "seasoned": 0,
+        "polity": "never-seasoned",
+        "accordAnswers": 1,
+        "tends": 3,
+        "renegAnswers": 5,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120107,
+        "days": 150,
+        "gameDays": 152,
+        "endReason": "survived",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "unlockedWave": 5,
+        "standing": 390,
+        "starvation": 0,
+        "deaths": 127,
+        "links": [
+          {
+            "other": "village_0",
+            "class": "seasoned",
+            "born": 48,
+            "peak": 100,
+            "end": 100,
+            "seasonedEver": true,
+            "formedDay": 18
+          }
+        ],
+        "seasoned": 1,
+        "polity": "seasoned-but-no-polity",
+        "accordAnswers": 1,
+        "tends": 15,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120108,
+        "days": 73,
+        "gameDays": 74,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "village",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "standing": 199,
+        "starvation": 0,
+        "deaths": 65,
+        "links": [
+          {
+            "other": "village_0",
+            "class": "rises",
+            "born": 48,
+            "peak": 62,
+            "end": 49,
+            "seasonedEver": false,
+            "formedDay": 59
+          }
+        ],
+        "seasoned": 0,
+        "polity": "never-seasoned",
+        "accordAnswers": 1,
+        "tends": 2,
+        "renegAnswers": 2,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120109,
+        "days": 150,
+        "gameDays": 151,
+        "endReason": "survived",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "unlockedWave": 5,
+        "standing": 400,
+        "starvation": 0,
+        "deaths": 90,
+        "links": [
+          {
+            "other": "village_0",
+            "class": "seasoned",
+            "born": 40,
+            "peak": 100,
+            "end": 64,
+            "seasonedEver": true,
+            "formedDay": 44
+          }
+        ],
+        "seasoned": 1,
+        "polity": "seasoned-but-no-polity",
+        "accordAnswers": 1,
+        "tends": 8,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120110,
+        "days": 122,
+        "gameDays": 122,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "unlockedWave": 5,
+        "standing": 335,
+        "starvation": 0,
+        "deaths": 73,
+        "links": [
+          {
+            "other": "village_0",
+            "class": "seasoned",
+            "born": 44,
+            "peak": 100,
+            "end": 83,
+            "seasonedEver": true,
+            "formedDay": 24
+          }
+        ],
+        "seasoned": 1,
+        "polity": "seasoned-but-no-polity",
+        "accordAnswers": 1,
+        "tends": 11,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120111,
+        "days": 136,
+        "gameDays": 136,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "standing": 199,
+        "starvation": 0,
+        "deaths": 93,
+        "links": [
+          {
+            "other": "village_1",
+            "class": "seasoned",
+            "born": 48,
+            "peak": 100,
+            "end": 68,
+            "seasonedEver": true,
+            "formedDay": 22
+          }
+        ],
+        "seasoned": 1,
+        "polity": "seasoned-but-no-polity",
+        "accordAnswers": 1,
+        "tends": 11,
+        "renegAnswers": 2,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120112,
+        "days": 150,
+        "gameDays": 150,
+        "endReason": "survived",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "unlockedWave": 5,
+        "standing": 515,
+        "starvation": 0,
+        "deaths": 95,
+        "links": [
+          {
+            "other": "village_1",
+            "class": "seasoned",
+            "born": 48,
+            "peak": 100,
+            "end": 47,
+            "seasonedEver": true,
+            "formedDay": 24
+          }
+        ],
+        "seasoned": 1,
+        "polity": "seasoned-but-no-polity",
+        "accordAnswers": 1,
+        "tends": 12,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120113,
+        "days": 140,
+        "gameDays": 141,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "standing": 199,
+        "starvation": 0,
+        "deaths": 131,
+        "links": [
+          {
+            "other": "village_0",
+            "class": "seasoned",
+            "born": 48,
+            "peak": 100,
+            "end": 68,
+            "seasonedEver": true,
+            "formedDay": 20
+          }
+        ],
+        "seasoned": 1,
+        "polity": "seasoned-but-no-polity",
+        "accordAnswers": 1,
+        "tends": 8,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120114,
+        "days": 61,
+        "gameDays": 62,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "standing": 150,
+        "starvation": 0,
+        "deaths": 53,
+        "links": [
+          {
+            "other": "village_2",
+            "class": "seasoned",
+            "born": 40,
+            "peak": 51,
+            "end": 44,
+            "seasonedEver": true,
+            "formedDay": 31
+          }
+        ],
+        "seasoned": 1,
+        "polity": "seasoned-but-no-polity",
+        "accordAnswers": 1,
+        "tends": 0,
+        "renegAnswers": 1,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120115,
+        "days": 96,
+        "gameDays": 96,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "standing": 199,
+        "starvation": 0,
+        "deaths": 66,
+        "links": [
+          {
+            "other": "village_1",
+            "class": "seasoned",
+            "born": 48,
+            "peak": 91,
+            "end": 87,
+            "seasonedEver": true,
+            "formedDay": 46
+          }
+        ],
+        "seasoned": 1,
+        "polity": "seasoned-but-no-polity",
+        "accordAnswers": 1,
+        "tends": 5,
+        "renegAnswers": 2,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      },
+      {
+        "seed": 120116,
+        "days": 31,
+        "gameDays": 31,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "village",
+        "maxWave": 3,
+        "unlockedWave": 3,
+        "standing": 0,
+        "starvation": 3,
+        "deaths": 32,
+        "links": [],
+        "seasoned": 0,
+        "polity": "no-links",
+        "accordAnswers": 0,
+        "tends": 0,
+        "renegAnswers": 0,
+        "demandAnswers": 0,
+        "instrumentErrors": 0
+      }
+    ]
+  },
+  "verdict": "INVALID (fidelity gate failed)"
+}
