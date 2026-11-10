@@ -4,7 +4,7 @@
 - **Leg:** 2 — deepening (DAYCAP 100, death-aware stop). Rotation read `2` at run start; advance 2→3 owed after landing.
 - **Base:** local master `74debf969` (Loop B 2330Z round: foodrung, standaccum, midfifth, vetfinish + gate 296/4 standing). Branch `journey-deepening`, worktree `~/workspace/worktrees/journey-deepening`.
 - **Policy:** competent (LISTEN). CONVO_DAYS [45, 60, 80].
-- **Seeds:** fresh 44001–44008; smoke 44000. Freshness verified by the full check: 0 word-boundary .md mentions in evidence/ + docs/, 0 scripts, 0 filenames, 0 prereg hits, 0 seed-context patterns (`s4400x`, `seed 4400x`), 0 live processes. The two apparent hits are false positives: a case-cache hash filename containing `44004` (`68b33d2344004f36f...json`, not a seed file) and a pantry quantity `44000` in scripts/test-inflow-b.js (a value, not a seed). Rejected bands in the search, all used: 92101–92108 (r104), 92401 (r106), 92601 (r107), 92501/92701 (r110), 95001–95008 (ragerepress), 95101–95116 (cookbulk), 97101/97201 (heraldcontact), 97405 (heralddepart), 98601–98616 (hurthome-fix-c), 98000–98099 (mealday/doublenight).
+- **Seeds:** fresh 44001–44008; smoke 44000. Freshness verified by the full check: 0 word-boundary .md mentions in evidence/ + docs/, 0 scripts, 0 filenames, 0 prereg hits, 0 seed-context patterns (`s4400x`, `seed 4400x`), 0 live processes. The two apparent hits are false positives: a case-cache hash filename containing `44004` (`68b33d2344004f36f...json`, not a seed file) and a pantry quantity `44000` in scripts/test-inflow-b.js (a value, not a seed). Rejected bands in the search, all used: 92101–92108 (r104), 92401 (r106), 92601 (r107), 92501/92701 (r110), 95001–95008 (ragerepress), 95101–95116 (cookbulk), 97101/97201 (heraldcontact), 97405 (heralddepart), 98601–98616 (hurthome-fix-c), 98000–98099 (mealday/doublenight). **Amendment A1 expands the panel to 16 seeds: +44009–44016, verified fresh by the same full check (0 prereg hits, 0 .md mentions).**
 - **Horizon:** DAYCAP=100 (mid-game, waves 2–3; MEASUREMENT §10).
 
 ## Pre-flight notes (this run)
@@ -40,6 +40,10 @@ The night and kept-secret families share no referencing stem with their own foll
 ## Shape
 
 prereg → analyzer proof test → smoke 44000 × DAYCAP=45 → 2-seed pilot → 8-seed panel (one seed per process) → analyzer verdicts → if WANT STAYS-BURIED with a mechanism, or CONFRONT eats the secret: fix + proof test + after-panel on same seeds → run note → gate → merge.
+
+## Amendment A1 — panel expansion 8 → 16 seeds (recorded before judging, 2026-11-10 ~02:40Z)
+
+The 8-seed panel drew SECRET-SILENT (0 openers in 52 convo-day openings; r122 drew 2/49 on the same denominator). The phenomenon is rare (~4% per opening: the secret hook's 20% roll only fires when no want/grief/question claims the opening first) and this panel drew the ~11% blank. The primary question (Q1) cannot be judged on 0 sittings, so the panel expands to 16 seeds with fresh band 44009–44016 (verified fresh by the same full check). This is a panel-size change recorded before any verdict is drawn, not a re-score: the 8-seed blank stays reported as-is, and Q1/Q2 verdicts will be judged on the full 16-seed panel. If the expansion still yields <2 answered secrets, Q1 stays THIN-PROBE/NO-ANSWERS.
 
 ## Metric review (to fill at closeout)
 
