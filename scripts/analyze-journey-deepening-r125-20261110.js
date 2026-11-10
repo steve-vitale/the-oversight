@@ -1120,6 +1120,12 @@ function summarizePostSecret(s) {
 const TEACH_FRAME_PATTERNS = [
   // The pre-fix frame (villager-agency.js): "This one — <plant>. Leaf, stem, smell. You won't forget it now."
   { id: 'teachplant-leafstem', re: /^"This one — .*\. Leaf, stem, smell\. You won't forget it now\."$/ },
+  // R125 fix variants (villager-agency.js convoTeachPlantLine) — added
+  // with the fix so the after-panel normalizes them instead of reading
+  // every new frame as unknown.
+  { id: 'teachplant-crushtaste', re: /^".* — crush the leaf, smell it, taste the stem\. That's how you know it\."$/ },
+  { id: 'teachplant-lookfeel', re: /^"This one is .*\. Look at the leaf, feel the stem, breathe it in\. It'll stick\."$/ },
+  { id: 'teachplant-remember', re: /^".*\. Remember the leaf, the stem, the smell — that's the whole of it\."$/ },
 ];
 function teachFrameId(line) {
   const t = String(line || '');
@@ -1153,6 +1159,47 @@ function summarizeSecretVariety(s) {
   else if (maxRepeat >= 3 || maxSameFrame >= 3) verdict = 'REPETITIVE';
   else verdict = 'VARIED';
   return { openers: recs.length, answered: answered.length, distinctAnswers, maxRepeat, missingAnswer, teachPicks, teachFramesDistinct, maxSameFrame, detail, verdict };
+}
+
+// R125 A1 TEACHFRAME (panel-wide transcript scan): the teach-plant frame
+// repeats in ORDINARY sittings, not secret sittings — the secret-sitting
+// instrument (teachLines) saw 0 teach picks in this panel while the wild
+// transcripts carry the frame 8 times, 7 in one sitting. Scans the panel
+// transcripts (ptrans: {seed, day, vid, text}) for THEM lines matching a
+// known teach-frame pattern; the plant name is blanked by the pattern, so
+// only the FRAME counts. A line matching no known pattern is skipped (it
+// is ordinary dialogue, not a teach line) — never silently counted as a
+// frame. Verdicts: REPETITIVE (any sitting repeats one frame >= 3 times)
+// / VARIED (frames >= 1, max same-frame <= 2) / NO-FRAMES (0 frames).
+function summarizeTeachFrames(transcripts) {
+  let frames = 0, maxSameFrame = 0, sittingsWithFrames = 0;
+  const frameCounts = {};
+  const detail = [];
+  for (const t of transcripts || []) {
+    const lines = String(t.text || '').split('\n');
+    const fc = {};
+    for (const ln of lines) {
+      const m = /^THEM: (.*)$/.exec(ln);
+      if (!m) continue;
+      const fid = teachFrameId(m[1]);
+      if (fid.indexOf('unknown:') === 0) continue;
+      frames++;
+      fc[fid] = (fc[fid] || 0) + 1;
+    }
+    const keys = Object.keys(fc);
+    if (!keys.length) continue;
+    sittingsWithFrames++;
+    for (const k of keys) frameCounts[k] = (frameCounts[k] || 0) + fc[k];
+    const sittingMax = keys.reduce((a, k) => Math.max(a, fc[k]), 0);
+    if (sittingMax > maxSameFrame) maxSameFrame = sittingMax;
+    detail.push({ seed: t.seed, day: t.day, vid: t.vid, frames: keys.reduce((a, k) => a + fc[k], 0), frameCounts: fc, maxSameFrame: sittingMax });
+  }
+  const distinctFrames = Object.keys(frameCounts).length;
+  let verdict;
+  if (frames === 0) verdict = 'NO-FRAMES';
+  else if (maxSameFrame >= 3) verdict = 'REPETITIVE';
+  else verdict = 'VARIED';
+  return { frames, sittingsWithFrames, distinctFrames, maxSameFrame, frameCounts, detail, verdict };
 }
 
 // R119 Q2-TRUST: the playerDeath trust payment, instrumented.
@@ -1563,6 +1610,12 @@ function main() {
   else if (varMaxRepeat >= 3 || varMaxSameFrame >= 3) varVerdict = 'REPETITIVE';
   else varVerdict = 'VARIED';
   console.log(`Q1-VARIETY PANEL: answered=${varAnswered} distinctAnswers=${varDistinct} maxRepeat=${varMaxRepeat} missingAnswer=${varMissing} teachPicks=${varTeachPicks} maxSameFrame=${varMaxSameFrame} -> ${varVerdict}`);
+  // R125 A1 TEACHFRAME PANEL (binding verdict per prereg amendment A1):
+  // the teach frame is judged on ALL panel transcripts, not secret
+  // sittings (the repetition lives in ordinary teach-heavy sittings).
+  const tf = summarizeTeachFrames(ptrans);
+  console.log(`Q1-TEACHFRAME PANEL: frames=${tf.frames} sittingsWithFrames=${tf.sittingsWithFrames} distinctFrames=${tf.distinctFrames} maxSameFrame=${tf.maxSameFrame} frameCounts=${JSON.stringify(tf.frameCounts)} -> ${tf.verdict}`);
+  for (const d of tf.detail) console.log(`   Q1-TEACHFRAME-SIT seed=${d.seed} day=${d.day} vid=${d.vid} frames=${d.frames} frameCounts=${JSON.stringify(d.frameCounts)} maxSameFrame=${d.maxSameFrame}`);
   // R124 Q2-CONFRONT-ON-SECRET panel (wild count only; the forced probe
   // in the proof test judges what picking confront does to the secret).
   let confRides = 0, confOpeners = 0;
@@ -1677,4 +1730,4 @@ function main() {
 }
 
 if (require.main === module) main();
-module.exports = { summarizeStanding, distStats, median, summarizeLadder, summarizeTrust, summarizeSecret, summarizePostSecret, summarizeWantAfterSecret, summarizeSecretVariety, teachFrameId, TEACH_FRAME_PATTERNS, POSTSECRET_DRY, POSTSECRET_STEMS, scanBetrayalTranscript, scanPromiseTranscript, classifyPromiseThreads, classifyPocketedThreads, classifyCuriousPlants, scanReaskOrphans, classifyDryLines, summarizeBond, summarizeDebrief, PROMISE_MENTION, PROMISE_MENTION_OLD, REPAY_OPENER, REASK_OPENER, DRY_LINE, summarizeGoals, GOAL_KINDS_G, summarizeRequests, scanBondChoices, scanAwayLines, summarizeLangGate, scanDecidedAskReplay, BOND_ASK_POOL, summarizeLangArc, summarizeGoalJoin, scanMenuFlip };
+module.exports = { summarizeStanding, distStats, median, summarizeLadder, summarizeTrust, summarizeSecret, summarizePostSecret, summarizeWantAfterSecret, summarizeSecretVariety, summarizeTeachFrames, teachFrameId, TEACH_FRAME_PATTERNS, POSTSECRET_DRY, POSTSECRET_STEMS, scanBetrayalTranscript, scanPromiseTranscript, classifyPromiseThreads, classifyPocketedThreads, classifyCuriousPlants, scanReaskOrphans, classifyDryLines, summarizeBond, summarizeDebrief, PROMISE_MENTION, PROMISE_MENTION_OLD, REPAY_OPENER, REASK_OPENER, DRY_LINE, summarizeGoals, GOAL_KINDS_G, summarizeRequests, scanBondChoices, scanAwayLines, summarizeLangGate, scanDecidedAskReplay, BOND_ASK_POOL, summarizeLangArc, summarizeGoalJoin, scanMenuFlip };

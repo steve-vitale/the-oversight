@@ -356,6 +356,73 @@ function runPanel(name, seeds) {
   const out = runPanel('want', [seedJSON({ secretSittings: [w1] }), seedJSON({ seed: 44002, secretSittings: [w2] })]);
   ok('(25) WANT + CONFRONT panel lines', /Q1-WANT PANEL:.*SURFACES/.test(out) && /Q2-CONFRONT PANEL:.*confrontRides=1/.test(out), out.split('\n').filter(l => /Q1-WANT PANEL|Q2-CONFRONT PANEL/.test(l)).join(' | '));
 }
+// R125 A1 TEACHFRAME cases (37)-(40): panel-wide transcript scan.
+//   (37) one sitting, 3x the old frame (different plants) -> REPETITIVE;
+//   (38) one sitting, 2x the old frame -> VARIED (max same-frame 2);
+//   (39) no teach-frame lines at all -> NO-FRAMES;
+//   (40) real main() panel line: a temp dir with a transcript carrying
+//       3x the old frame -> Q1-TEACHFRAME PANEL says REPETITIVE.
+// RED/FAILURE MODE: (37)-(40) fail on the r124 analyzer
+// (summarizeTeachFrames is not a function; no TEACHFRAME panel line).
+{
+  const t = { seed: '45011', day: 80, vid: 'desmond_clarke', text: [
+    '=== seed 45011 day 80 — conversation with Desmond (desmond_clarke) ===',
+    'THEM: "This one — Tucumã. Leaf, stem, smell. You won\'t forget it now."',
+    'THEM: "This one — American Persimmon. Leaf, stem, smell. You won\'t forget it now."',
+    'THEM: "This one — Inajá. Leaf, stem, smell. You won\'t forget it now."',
+  ].join('\n') };
+  const r = A.summarizeTeachFrames([t]);
+  ok('(37) same teach frame 3x in one sitting is repetitive', r.verdict === 'REPETITIVE' && r.frames === 3 && r.maxSameFrame === 3 && r.distinctFrames === 1, JSON.stringify(r));
+}
+{
+  const t = { seed: '45011', day: 80, vid: 'desmond_clarke', text: [
+    'THEM: "This one — Tucumã. Leaf, stem, smell. You won\'t forget it now."',
+    'THEM: "This one — American Persimmon. Leaf, stem, smell. You won\'t forget it now."',
+    'THEM: "Something else entirely."',
+  ].join('\n') };
+  const r = A.summarizeTeachFrames([t]);
+  ok('(38) same teach frame 2x is varied', r.verdict === 'VARIED' && r.frames === 2 && r.maxSameFrame === 2, JSON.stringify(r));
+}
+{
+  const t = { seed: '45011', day: 80, vid: 'desmond_clarke', text: 'THEM: "Something else entirely."\nTHEM: "And another line."\n' };
+  const r = A.summarizeTeachFrames([t]);
+  ok('(39) no teach frames is no-frames', r.verdict === 'NO-FRAMES' && r.frames === 0, JSON.stringify(r));
+}
+{
+  const dir = fs.mkdtempSync(path.join('/tmp', 'r125-teachframe-'));
+  fs.writeFileSync(path.join(dir, 'journey-deepening-r125-seed45011.json'), JSON.stringify(seedJSON({ seed: 45011 })));
+  fs.writeFileSync(path.join(dir, 'journey-deepening-r125-transcript-45011-day80-desmond_clarke.txt'), [
+    '=== seed 45011 day 80 — conversation with Desmond (desmond_clarke) ===',
+    'THEM: "This one — Tucumã. Leaf, stem, smell. You won\'t forget it now."',
+    'THEM: "This one — American Persimmon. Leaf, stem, smell. You won\'t forget it now."',
+    'THEM: "This one — Inajá. Leaf, stem, smell. You won\'t forget it now."',
+  ].join('\n'));
+  const out = execFileSync('node', [path.join(__dirname, 'analyze-journey-deepening-r125-20261110.js'), dir], { encoding: 'utf8' });
+  fs.rmSync(dir, { recursive: true, force: true });
+  ok('(40) TEACHFRAME panel line says repetitive', /Q1-TEACHFRAME PANEL:.*frames=3.*maxSameFrame=3.*REPETITIVE/.test(out), out.split('\n').filter(l => /TEACHFRAME PANEL/.test(l)).join(' | '));
+}
+// R125 fix-variant frame cases (41)-(42): the analyzer must normalize the
+// three NEW teach frames the fix adds, not read them as unknown.
+//   (41) teachFrameId maps each new frame shape to its id;
+//   (42) a sitting with one of each new frame -> distinct 3, VARIED.
+{
+  ok('(41) new teach frames normalize to their ids',
+    A.teachFrameId('"Mugwort — crush the leaf, smell it, taste the stem. That\'s how you know it."') === 'teachplant-crushtaste' &&
+    A.teachFrameId('"This one is Yarrow. Look at the leaf, feel the stem, breathe it in. It\'ll stick."') === 'teachplant-lookfeel' &&
+    A.teachFrameId('"Chicory. Remember the leaf, the stem, the smell — that\'s the whole of it."') === 'teachplant-remember',
+    JSON.stringify([A.teachFrameId('"Mugwort — crush the leaf, smell it, taste the stem. That\'s how you know it."')]));
+}
+{
+  const t = { seed: '45011', day: 80, vid: 'desmond_clarke', text: [
+    'THEM: "This one — Tucumã. Leaf, stem, smell. You won\'t forget it now."',
+    'THEM: "Mugwort — crush the leaf, smell it, taste the stem. That\'s how you know it."',
+    'THEM: "This one is Yarrow. Look at the leaf, feel the stem, breathe it in. It\'ll stick."',
+    'THEM: "Chicory. Remember the leaf, the stem, the smell — that\'s the whole of it."',
+  ].join('\n') };
+  const r = A.summarizeTeachFrames([t]);
+  ok('(42) one of each frame is varied, not unknown', r.verdict === 'VARIED' && r.frames === 4 && r.distinctFrames === 4 && r.maxSameFrame === 1, JSON.stringify(r));
+}
+console.log(`r125 analyzer proof: ${pass} passed, ${fail} failed`);
 // R125 Q1-VARIETY cases (26)-(31). The promise answer line below is the
 // engine's current fixed sentence (conversation.js); the teach lines use
 // the current fixed frame with different plants swapped in.
