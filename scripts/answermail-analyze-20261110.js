@@ -30,7 +30,7 @@ const TG = require('./trustgrowth-analyze-20261109');
 const DIR = process.argv[2] || path.join(__dirname, '..', 'evidence', '2026-11-10', 'perseed-answermail-a');
 const BASE_RUN = process.argv[3] || 'answermail-base';
 const ARMED_RUN = process.argv[4] || 'answermail-armed';
-const SEEDS = [99101, 99102, 99103, 99104, 99105, 99106, 99107, 99108];
+const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(function (s) { return parseInt(s.trim(), 10); }).filter(Number.isFinite) : [99101, 99102, 99103, 99104, 99105, 99106, 99107, 99108]);
 
 function loadLeg(run) {
   const rows = [];

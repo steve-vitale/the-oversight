@@ -32,7 +32,7 @@ const contractDigest = crypto.createHash('sha256')
   .update(fs.readFileSync(path.join(REPO, 'scripts', 'balance-metrics.json'))).digest('hex');
 const contract = require('./balance-metrics.json');
 
-const SEEDS = [99101, 99102, 99103, 99104, 99105, 99106, 99107, 99108];
+const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(function (s) { return parseInt(s.trim(), 10); }).filter(Number.isFinite) : [99101, 99102, 99103, 99104, 99105, 99106, 99107, 99108]);
 const POLICIES = ['answermail']; // pseudo-policy: case identity is the seed (paired design)
 const DAYS = 150;
 const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
@@ -87,8 +87,10 @@ function buildPanel(rows) {
 }
 
 function main() {
-  const beforeRows = load('answermail-base');
-  const afterRows = load('answermail-armed');
+  const baseRun = process.env.BASE_RUN || 'answermail-base';
+  const armedRun = process.env.ARMED_RUN || 'answermail-armed';
+  const beforeRows = load(baseRun);
+  const afterRows = load(armedRun);
   const beforePath = OUT_PREFIX + '-before.json.gz';
   const afterPath = OUT_PREFIX + '-after.json.gz';
   fs.writeFileSync(beforePath, zlib.gzipSync(JSON.stringify(buildPanel(beforeRows)) + '\n'));
