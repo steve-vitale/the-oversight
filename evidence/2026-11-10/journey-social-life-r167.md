@@ -360,7 +360,14 @@ establishment-r20); 0 failures caused by this run.
   files; 3 commits between bases). Rebased commits: fe8639bfb (r167
   work) + 2748c2134 (confirmation JSONs). Proof tests + measurement
   tests re-run post-rebase: 8/8 pass. Proof refresh regenerated on the
-  rebased tree (commit 3).
+  rebased tree (commit 3, 2d209aadb).
+- Master moved AGAIN before the merge (secondlink landing 874c89f89,
+  3 commits, zero src/ changes, no manifest overlap — the proof stayed
+  valid). Second rebase onto explicit 874c89f89, clean, no conflicts.
+  FINAL commits: 79274c749 (r167 work) + c4acbd393 (confirmation
+  JSONs) + 21fc590d0 (proof refresh). 8/8 tests re-run post-rebase:
+  all pass. Landing: ff-only merge onto 874c89f89 at closeout,
+  pending ship.
 - Rotation 5→6 written at closeout (crisis next).
 
 ## TELEMETRY
