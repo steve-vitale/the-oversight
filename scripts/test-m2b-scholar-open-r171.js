@@ -1,29 +1,40 @@
 #!/usr/bin/env node
 // test-m2b-scholar-open-r171.js — proof test for the r171 M2b fix.
 //
-// DEFECT (r171 pilot, seed 89702 day 56): three reunion fights in which
-// the SCHOLAR died read outcome=otherEnd, diedParty=[] (diedInFight=[]),
+// DEFECT (r171 pilot, seed 89702): reunion fights in which the SCHOLAR
+// died read outcome=otherEnd (or vFlee), diedParty=[] (diedInFight=[]),
 // scholarDiedInFight=false — even though each fight's causal record names
-// the dead scholar (Ivy Wang, Ines Duarte, Wanjiru Kamau). Cause: the
-// probe's closeFightRec maps the 'p' party fighter through G.villagerId
-// read at CLOSE time; when the scholar dies the mantle passes immediately,
-// so G.villagerId is the SUCCESSOR, not the dead scholar. The dead scholar
-// is in `died` but not in `partyVids`, so diedParty excludes them and the
-// fight reads as no party death. A fourth d56 fight (Meera Reddy) WAS
-// captured — her fight was the last of the day and the village then died
-// out, so no successor existed and G.villagerId still named her — which
-// is why the M2b-attribution read GO on 1/1 while masking the 3 misses.
+// the dead scholar. Cause: the probe's closeFightRec mapped the 'p' party
+// fighter through G.villagerId read at CLOSE time; when the scholar dies
+// the mantle passes immediately, so G.villagerId is the SUCCESSOR, not the
+// dead scholar. The dead scholar is in `died` but not in `partyVids`, so
+// diedParty excludes them and the fight reads as no party death. On the
+// pilot substrate (master 7c2591d1f) SIX scholar deaths were missed on
+// 89702 (Peyton Michalski, Chris Thompson, Agnese Barbagallo d54; Ivy
+// Wang, Ines Duarte, Wanjiru Kamau d56); only Meera Reddy was captured,
+// because her fight was the last of the day and the village then died out,
+// so no successor existed and G.villagerId still named her — which is why
+// the pilot's M2b-attribution read GO on 1/1 while masking the 6 misses.
 //
 // FIX: the probe records scholarIdAtOpen (the scholar's villagerId at
 // fight open) on every census record and maps deaths through it.
 //
-// This test runs the REAL probe on the single pre-registered seed 89702
-// for 60 days (the village is lost on day 56 in the pilot, so all four
-// d56 fights are in range) into a temp dir, and asserts the three missed
-// scholar deaths now read vDie / dieFlag / diedInFight=[scholar] /
-// scholarDiedInFight=true, with the Meera Reddy fight as the control.
-// RED on the unfixed probe (diedParty=[], outcome otherEnd); GREEN after
-// the fix. Exit 0 = PASS, 1 = FAIL, 2 = instrument failure.
+// WHAT THIS TEST ASSERTS (property, not fixture): it runs the REAL probe
+// on the single pre-registered seed 89702 for 60 days into a temp dir,
+// then checks EVERY fight whose causal deaths include the fight's own
+// scholar-at-open: each such fight must read outcome vDie, dieFlag true,
+// diedInFight containing the scholar, scholarDiedInFight true. The test
+// is NON-VACUOUS: it fails loudly if no scholar-death fight occurs at
+// all. It is deliberately NOT pinned to named scholars/days: the fixture
+// moved once already (on master e5c19e54e the village survives past d56
+// and the scholar deaths fall on d47/d48/d60 instead — Saiful Dutta,
+// Peyton Michalski, Chris Thompson — all three mapped correctly), and a
+// named-days test would go stale on the next sibling landing that moves
+// the trajectory. The property is what the fix guarantees; the names are
+// reported, not asserted.
+// RED on the unfixed probe (the pilot corpus violates the property on 6
+// fights); GREEN after the fix. Exit 0 = PASS, 1 = FAIL, 2 = instrument
+// failure.
 'use strict';
 const { spawnSync } = require('child_process');
 const fs = require('fs');
@@ -54,27 +65,38 @@ const rec = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
 const fights = (rec.fightCensus && rec.fightCensus.fights) || [];
 console.log(`M2B-SCHOLAR-OPEN: probe wrote ${fights.length} census fights (seed ${rec.seed}, end=${rec.endReason || rec.inviteClass || '?'})`);
 
-// The three d56 scholar deaths the pre-fix probe missed.
-const EXPECT = [
-  { name: 'Ivy Wang', vid: 'ivy_wang' },
-  { name: 'Ines Duarte', vid: 'ines_duarte' },
-  { name: 'Wanjiru Kamau', vid: 'wanjiru_kamau' },
-];
+// The property: every fight whose causal deaths include the fight's own
+// scholar-at-open must read as a scholar death in the fight. A fight with
+// causal deaths but NO scholarIdAtOpen predates the fix (or took the fast
+// branch, which never records the field) — that is itself a violation,
+// reported distinctly so a RED names the defect instead of passing
+// vacuously.
+let scholarDeathFights = 0;
 let fails = 0;
-for (const e of EXPECT) {
-  const f = fights.find(x => x.startDay === 56 && (x.causalDeaths || []).some(d => d.name === e.name));
-  if (!f) { console.log(`FAIL ${e.name}: no d56 fight with that causal death found`); fails++; continue; }
+for (const f of fights) {
+  const openScholar = f.scholarIdAtOpen || null;
+  const causal = f.causalDeaths || [];
+  if (!openScholar) {
+    if (causal.length) {
+      console.log(`FAIL d${f.startDay} ${Array.isArray(f.monsters) ? f.monsters.join('+') : '?'}: causal death(s) ${causal.map(d => d.name || d.vid).join(', ')} but no scholarIdAtOpen recorded — probe predates the fix`);
+      fails++;
+    }
+    continue;
+  }
+  const scholarCausal = causal.filter(d => d.vid === openScholar);
+  if (!scholarCausal.length) continue;
+  scholarDeathFights++;
+  const names = scholarCausal.map(d => d.name || d.vid).join(', ');
   const ok = f.outcome === 'vDie' && f.dieFlag === true
-    && (f.diedInFight || []).indexOf(e.vid) >= 0 && f.scholarDiedInFight === true;
-  console.log(`${ok ? 'PASS' : 'FAIL'} ${e.name}: outcome=${f.outcome} dieFlag=${f.dieFlag} diedInFight=${JSON.stringify(f.diedInFight)} scholarDiedInFight=${f.scholarDiedInFight} causal=${(f.causalDeaths || []).map(d => d.name).join(',')}`);
+    && (f.diedInFight || []).indexOf(openScholar) >= 0 && f.scholarDiedInFight === true;
+  console.log(`${ok ? 'PASS' : 'FAIL'} d${f.startDay} ${Array.isArray(f.monsters) ? f.monsters.join('+') : '?'} scholar-death (${names}): outcome=${f.outcome} dieFlag=${f.dieFlag} diedInFight=${JSON.stringify(f.diedInFight)} scholarDiedInFight=${f.scholarDiedInFight}`);
   if (!ok) fails++;
 }
-// Control: the Meera Reddy fight was captured pre-fix and must stay captured.
-const m = fights.find(x => x.startDay === 56 && (x.causalDeaths || []).some(d => d.name === 'Meera Reddy'));
-const mok = !!m && m.outcome === 'vDie' && m.dieFlag === true
-  && (m.diedInFight || []).indexOf('meera_reddy') >= 0 && m.scholarDiedInFight === true;
-console.log(`${mok ? 'PASS' : 'FAIL'} control Meera Reddy: ${m ? `outcome=${m.outcome} diedInFight=${JSON.stringify(m.diedInFight)} scholarDiedInFight=${m.scholarDiedInFight}` : 'fight not found'}`);
-if (!mok) fails++;
-
-console.log(fails === 0 ? 'M2B-SCHOLAR-OPEN: PASS (4/4)' : `M2B-SCHOLAR-OPEN: FAIL (${fails} check(s) failed)`);
+if (scholarDeathFights === 0) {
+  console.log('FAIL: no scholar-death fight occurred in the run — the test is vacuous, not green');
+  fails++;
+} else {
+  console.log(`M2B-SCHOLAR-OPEN: ${scholarDeathFights} scholar-death fight(s) found`);
+}
+console.log(fails === 0 ? `M2B-SCHOLAR-OPEN: PASS (${scholarDeathFights}/${scholarDeathFights} scholar deaths mapped)` : `M2B-SCHOLAR-OPEN: FAIL (${fails} check(s) failed)`);
 process.exit(fails === 0 ? 0 : 1);
