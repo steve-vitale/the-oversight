@@ -8,12 +8,18 @@
 // veterans-simultaneity datum (max simultaneous living veterans,
 // day-count of 2+ living veterans).
 //
-// Join rules (preregged):
+// Join rules (preregged, with one CORRECTED rule — see below):
 //  - field fight -> spawn: EXACT, by row.w5spawnSeq (same world entity).
-//  - TB trace -> spawn: earliest unmatched wave-5 spawn of the same
-//    mid with spawnDay <= traceDay and (no removal, or traceDay <=
-//    removalDay). Flagged 'mid-day'. Two+ live candidates on the trace
-//    day -> 'ambiguous', counted separately, never silently assigned.
+//  - TB trace -> spawn: earliest single candidate of the same mid with
+//    spawnDay <= traceDay and (no removal, or traceDay - removedDay
+//    <= 3). CORRECTED from the prereg (traceDay <= removedDay + no
+//    same-day repeat): the engine removes the world monster when the
+//    FIRST TB fight starts (startCombat: "it's in the fight now, not
+//    wandering"), and later fights vs the same species are
+//    re-engagements with no new spawn — observed to +3 days on this
+//    band, with four scholars fighting one Cancellation on a single
+//    day (99641 d100). Re-engagement joins are flagged 're-engage'.
+//    Two+ live candidates -> 'ambiguous', never silently assigned.
 //  - cast -> wanderer birth: same day + same mid (one event).
 //  - wanderer birth -> spawn: same mid, spawnDay in [bornDay, bornDay+7]
 //    (the 7-day give-up window). Unmatched births gave up or the
@@ -112,9 +118,19 @@ function analyzeSeed(o) {
     if (rec) rec.meetings.push({ kind: 'field', day: row.day, mid: row.mid, vid: row.vid, outcome: fieldOutcome(row.outcome), veteranAtMeeting: !!row.w5veteranAtMeeting });
     else unmatchedField.push({ day: row.day, mid: row.mid, vid: row.vid, outcome: fieldOutcome(row.outcome), spawnSeq: row.w5spawnSeq || null });
   });
-  // TB join (preregged mid-day rule). A trace whose scholar-monster seq
-  // matches a spawn exactly takes that spawn; otherwise earliest
-  // unmatched same-mid spawn alive on the trace day.
+  // TB join (preregged mid-day rule, CORRECTED — see analyzer note):
+  // the engine removes the world monster when the first TB fight
+  // starts (startCombat: "it's in the fight now, not wandering"), and
+  // later fights vs the same species are re-engagements with no new
+  // spawn — so a trace may legitimately post-date its spawn's removal
+  // (observed to +3 days on this band) and several scholars may fight
+  // the same beast the same day. Candidates: same mid, spawnDay <=
+  // traceDay, and (no removal, or traceDay - removedDay <= 3). The
+  // same-day exclusion from the prereg is REMOVED (it was wrong: four
+  // scholars fought one Cancellation on 99641 d100). A trace whose
+  // scholar-monster seq matches a spawn exactly takes that spawn;
+  // otherwise the earliest single candidate. Two+ live candidates ->
+  // 'ambiguous', counted separately, never silently assigned.
   const unmatchedTb = [];
   const ambiguousTb = [];
   traces5.forEach(function (tr) {
@@ -122,11 +138,14 @@ function analyzeSeed(o) {
     if (tr.w5scholarMonsterSeq && bySeq[tr.w5scholarMonsterSeq]) { rec = bySeq[tr.w5scholarMonsterSeq]; join = 'instance'; }
     if (!rec) {
       const cands = spawns.filter(function (s) {
-        return s.mid === tr.mid && (s.day | 0) <= (tr.day | 0) && (s.removedDay == null || (tr.day | 0) <= (s.removedDay | 0))
-          && !bySeq[s.seq].meetings.some(function (m) { return m.kind === 'tb' && m.day === tr.day; });
+        return s.mid === tr.mid && (s.day | 0) <= (tr.day | 0)
+          && (s.removedDay == null || (tr.day | 0) - (s.removedDay | 0) <= 3);
       });
-      if (cands.length === 1) { rec = bySeq[cands[0].seq]; join = 'mid-day'; }
-      else if (cands.length > 1) { ambiguousTb.push({ day: tr.day, mid: tr.mid, ending: tr.ending, candidates: cands.map(function (s) { return s.seq; }) }); }
+      if (cands.length === 1) {
+        rec = bySeq[cands[0].seq];
+        join = ((tr.day | 0) <= (cands[0].removedDay == null ? (tr.day | 0) : (cands[0].removedDay | 0))) ? 'mid-day' : 're-engage';
+        if (cands[0].removedDay != null && (tr.day | 0) > (cands[0].removedDay | 0)) join = 're-engage';
+      } else if (cands.length > 1) { ambiguousTb.push({ day: tr.day, mid: tr.mid, ending: tr.ending, candidates: cands.map(function (s) { return s.seq; }) }); }
     }
     if (rec) {
       rec.tbJoin = rec.tbJoin || join;
@@ -156,8 +175,11 @@ function analyzeSeed(o) {
   });
 
   // ---- cast reconciliation ----
+  // Births are ALL waves (the snapshot records every wanderer); the
+  // reconciliation counts wave-5 births only — casts are wave-5 only.
+  const births5 = births.filter(function (b) { return (b.wave | 0) === 5; });
   const birthKeys = {};
-  births.forEach(function (b) { birthKeys[b.bornDay + '|' + b.mid] = b; });
+  births5.forEach(function (b) { birthKeys[b.bornDay + '|' + b.mid] = b; });
   let castsMatchedBirth = 0;
   const unmatchedCasts = [];
   casts.forEach(function (c) {
@@ -166,7 +188,7 @@ function analyzeSeed(o) {
   });
   let birthsMatchedSpawn = 0;
   const unmatchedBirths = [];
-  births.forEach(function (b) {
+  births5.forEach(function (b) {
     const hit = spawns.some(function (s) {
       return s.mid === b.mid && (s.day | 0) >= (b.bornDay | 0) && (s.day | 0) <= ((b.bornDay | 0) + 7);
     });
@@ -174,7 +196,7 @@ function analyzeSeed(o) {
     else unmatchedBirths.push(b);
   });
   const spawnsFromBirths = spawnRows.filter(function (r) {
-    return births.some(function (b) { return b.mid === r.mid && (r.day | 0) >= (b.bornDay | 0) && (r.day | 0) <= ((b.bornDay | 0) + 7); });
+    return births5.some(function (b) { return b.mid === r.mid && (r.day | 0) >= (b.bornDay | 0) && (r.day | 0) <= ((b.bornDay | 0) + 7); });
   }).length;
 
   // ---- release classification ----
@@ -206,7 +228,7 @@ function analyzeSeed(o) {
     scholarDeaths: (o.scholarDeaths || []).length,
     simultaneity: { maxVets: maxVets, maxVetsDay: maxVetsDay, days2plus: days2plus, days1plus: days1plus, relDays2plus: relDays2plus, relDays1plus: relDays1plus },
     casts: { total: casts.length, matchedBirth: castsMatchedBirth, unmatched: unmatchedCasts },
-    births: { total: births.length, matchedSpawn: birthsMatchedSpawn, unmatched: unmatchedBirths },
+    births: { total: births5.length, matchedSpawn: birthsMatchedSpawn, unmatched: unmatchedBirths },
     spawns: { total: spawns.length, fromWandererBirth: spawnsFromBirths, rows: spawnRows },
     meetings: meetings,
     unmatchedField: unmatchedField, unmatchedTb: unmatchedTb, ambiguousTb: ambiguousTb,
@@ -268,7 +290,13 @@ function readCorpus(dir) {
   const out = [];
   if (!fs.existsSync(dir)) return out;
   for (const f of fs.readdirSync(dir).filter(function (x) { return x.indexOf('w5-') === 0 && x.endsWith('.json'); })) {
-    try { out.push(JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'))); } catch (e) { /* skip unreadable */ }
+    try {
+      const o = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
+      // The off (neutrality) legs carry instrumentOff: true and empty
+      // facing arrays — they are NOT judged evidence. Exclude them.
+      if (o && o.instrumentOff) continue;
+      out.push(o);
+    } catch (e) { /* skip unreadable */ }
   }
   return out.sort(function (a, b) { return (a.seed | 0) - (b.seed | 0); });
 }

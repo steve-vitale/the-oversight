@@ -173,6 +173,24 @@ numbers above for the same-band comparison.
 - Whether "release days" needs the contiguity question answered (does
   the peak ratchet hold the release once earned?).
 
+## Correction 2 — TB join rule (2026-11-10, after the judged leg, before the evidence is written)
+
+The preregged TB join (traceDay ≤ removedDay + no same-day repeat)
+was too strict for the engine: startCombat removes the world monster
+when the FIRST TB fight starts ("it's in the fight now, not
+wandering"), and later fights vs the same species are re-engagements
+with no new spawn — observed to +3 days on this band, with four
+scholars fighting one Cancellation on a single day (99641 d100).
+Corrected rule (analyzer, scripts/wave5face-analyze-20261109.js):
+candidates are same-mid spawns with spawnDay ≤ traceDay and
+traceDay − removedDay ≤ 3; the same-day exclusion is removed;
+re-engagement joins are flagged 're-engage'; two+ candidates stay
+'ambiguous', never silently assigned. The meetings and their outcomes
+are unchanged by this correction — only the spawn attribution of 15
+TB traces moves (from 'unmatched' to matched/ambiguous). The
+correction is recorded here and in the evidence file's metric review,
+not silently applied.
+
 ## What is NOT in scope
 
 - Zero src/js changes. No gate / price / deed / readyDemand / win-price

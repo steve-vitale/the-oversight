@@ -127,6 +127,29 @@ function baseSeed(over) {
   eq('E meeting outcome', r.meetings[0].outcome, 'kill');
 })();
 
+// Fixture E3: TB re-engage join — trace 2 days after removal, single
+// candidate; and same-day repeats (two scholars, one beast, one day).
+(function () {
+  const daily = [];
+  for (let d = 1; d <= 120; d++) daily.push(dailyRow(d, d >= 100 ? 5 : 4, 260, []));
+  const o = baseSeed({
+    daily: daily,
+    w5spawns: [{ seq: 's1', day: 100, mid: 'the_finale', veteran: false, hp: 1500, maxHp: 1500, removedDay: 102 }],
+    traces: [
+      { seq: 1, day: 102, mid: 'the_finale', mids: ['the_finale'], wave: 5, ending: 'scholar-death', fighters: ['scholar1'], w5scholarMonsterSeq: null, rounds: 9, mHpLeft: 900, scholarHpEnd: 0 },
+      { seq: 2, day: 102, mid: 'the_finale', mids: ['the_finale'], wave: 5, ending: 'scholar-death', fighters: ['scholar2'], w5scholarMonsterSeq: null, rounds: 7, mHpLeft: 700, scholarHpEnd: 0 },
+      { seq: 3, day: 104, mid: 'the_finale', mids: ['the_finale'], wave: 5, ending: 'scholar-death', fighters: ['scholar3'], w5scholarMonsterSeq: null, rounds: 6, mHpLeft: 500, scholarHpEnd: 0 },
+    ],
+  });
+  const r = AN.analyzeSeed(o);
+  eq('E3 unmatched', r.unmatchedTb.length, 0);
+  eq('E3 ambiguous', r.ambiguousTb.length, 0);
+  eq('E3 spawn outcome', r.spawns.rows[0].outcome, 'die');
+  eq('E3 spawn meetings', r.spawns.rows[0].meetings.length, 3);
+  eq('E3 first join mid-day', r.spawns.rows[0].meetings[0].join, 'mid-day');
+  eq('E3 third join re-engage', r.spawns.rows[0].meetings[2].join, 're-engage');
+})();
+
 // Fixture E2: TB mid-day join, single candidate.
 (function () {
   const daily = [];
