@@ -1,14 +1,29 @@
 // trustgrowth-instrument-20261109.js — trust-growth + polity probe
-// instrument (arm sim-trustgrowth-b, run fleshout-loop-b-20261110T0122Z).
+// instrument, v2 (arm sim-trustgrowth-b, run fleshout-loop-b-20261110T0122Z).
 // Scripts only, zero src/js. A daily link-trust recorder: per seed, per
 // link, the trust trajectory by day, age, seasoned?, polity membership,
-// plus trust-change events attributed by cause. Gains are captured live
-// by wrapping Game._trustGain (the single choke point for gains —
-// hierarchy.js header); losses are attributed by the analyzer from the
-// link's own history notes (link.history, capped at 40 and shifting,
-// so the instrument snapshots NEW entries each day and nothing is lost).
-// The wrap records, never alters: it calls the original and returns its
-// value. Uninstall restores the original.
+// plus EVERY trust-change event attributed by cause.
+//
+// v1 wrapped Game._trustGain only; the v1 pilot proved that premise
+// false — comms.js (aid), safetynets.js (aid offers/begs) and
+// titans.js write link.trust DIRECTLY, bypassing the choke. v2
+// therefore intercepts the property itself: at every daily snapshot
+// each link object gets a trust getter/setter (Object.defineProperty,
+// configurable, enumerable, value in a closure; a WeakSet keeps
+// installation idempotent). Every write is logged as one event:
+// {seq, day, linkId, other, old, new, delta, stack, via:'setter'}.
+// The setter never alters a value. Known gap, stated in the prereg
+// amendment: a write landing between a link's formation and its first
+// snapshot is not setter-logged; the _trustGain wrap below still
+// catches choke gains in that window.
+//
+// The _trustGain wrap is kept (cross-check + gap cover), now also
+// stamping seq. The analyzer dedupes wrap vs setter events. A global
+// sequence counter increments on every logged event; each snapshot
+// records seq, so the analyzer attributes events to the exact
+// snapshot interval (prevSnap.seq, curSnap.seq] — no day arithmetic,
+// no phase assumptions (settlement gains log under day d but first
+// appear in the snapshot of day d+1).
 // Usage: const INST = require('./trustgrowth-instrument-20261109');
 //   const inst = INST.install(Game); inst.snapshot(); ... inst.uninstall();
 'use strict';
@@ -41,27 +56,59 @@ function politySummary(Game, fn) {
 }
 
 function install(Game) {
-  const t = { daily: [], gains: [], instrumentErrors: [] };
+  const t = { daily: [], gains: [], events: [], instrumentErrors: [] };
   const seenHistory = {}; // linkId -> Set of 'day|kind|note' tuples already reported
+  const instrumentedLinks = new WeakSet();
+  let seq = 0;
   let origTrustGain = null;
   let gainWrapped = false;
+
+  function stackFrames(skip) {
+    try { return (new Error().stack || '').split('\n').slice(skip, skip + 6).join(' | '); } catch (e) { return ''; }
+  }
+
+  function instrumentLink(l) {
+    try {
+      if (!l || typeof l !== 'object' || instrumentedLinks.has(l)) return;
+      if (!('trust' in l)) return;
+      let cur = l.trust;
+      instrumentedLinks.add(l);
+      Object.defineProperty(l, 'trust', {
+        configurable: true, enumerable: true,
+        get: function () { return cur; },
+        set: function (v) {
+          try {
+            if (v !== cur) {
+              const ev = {
+                seq: ++seq, day: dayOf(Game), linkId: l.id || null, other: otherOf(Game, l),
+                old: cur, new: v, delta: v - cur,
+                stack: stackFrames(2), via: 'setter',
+              };
+              cur = v;
+              t.events.push(ev);
+            } else { cur = v; }
+          } catch (e) { try { cur = v; } catch (e2) {} t.instrumentErrors.push('setter-log: ' + String(e.message).slice(0, 80)); }
+        },
+      });
+    } catch (e) { t.instrumentErrors.push('instrumentLink: ' + String(e.message).slice(0, 80)); }
+  }
+
   try {
     if (typeof Game._trustGain === 'function') {
       origTrustGain = Game._trustGain;
       const selfGame = Game;
       Game._trustGain = function trustGrowthTrustGain(link, n) {
-        let stack = '';
-        try { stack = (new Error().stack || '').split('\n').slice(2, 8).join(' | '); } catch (e) { stack = ''; }
+        const stack = stackFrames(2);
         let applied = 0;
         try { applied = origTrustGain.call(selfGame, link, n); } catch (e) { t.instrumentErrors.push('_trustGain-call: ' + String(e.message).slice(0, 80)); }
         try {
           t.gains.push({
-            day: dayOf(selfGame),
+            seq: ++seq, day: dayOf(selfGame),
             linkId: (link && link.id) || null,
             other: otherOf(selfGame, link || {}),
             requested: (n | 0),
             applied: (applied | 0),
-            stack: stack,
+            stack: stack, via: 'trustgain-wrap',
           });
         } catch (e) { t.instrumentErrors.push('_trustGain-log: ' + String(e.message).slice(0, 80)); }
         return applied;
@@ -73,7 +120,7 @@ function install(Game) {
   } catch (e) { t.instrumentErrors.push('_trustGain-wrap: ' + String(e.message).slice(0, 80)); }
 
   function snapshot() {
-    const snap = { day: dayOf(Game) };
+    const snap = { day: dayOf(Game), seq: seq };
     try { snap.pantryKcal = pantryKcal(Game); } catch (e) { snap.pantryKcal = null; }
     try {
       snap.standing = Game.villageStanding ? Game.villageStanding() : null;
@@ -99,6 +146,7 @@ function install(Game) {
     } catch (e) { snap.pending = null; }
     try {
       const ls = (typeof Game.hierarchyState === 'function') ? Game.hierarchyState() : [];
+      ls.forEach(instrumentLink);
       snap.links = ls.map(function (l) {
         const base = SA.snapshotLink(Game, l);
         let seasonedPolity = false;
@@ -138,9 +186,12 @@ function install(Game) {
 
   function uninstall() {
     try { if (gainWrapped && origTrustGain) Game._trustGain = origTrustGain; } catch (e) { t.instrumentErrors.push('uninstall: ' + String(e.message).slice(0, 80)); }
+    // The trust setters stay installed: restoring the plain value would
+    // lose the link's live trust. They are inert post-run (no more
+    // writes), and the links are never serialized by the harness.
   }
 
-  return { t: t, snapshot: snapshot, uninstall: uninstall, gainWrapped: gainWrapped };
+  return { t: t, snapshot: snapshot, uninstall: uninstall, gainWrapped: gainWrapped, instrumentLink: instrumentLink };
 }
 
 module.exports = { install: install, otherOf: otherOf };

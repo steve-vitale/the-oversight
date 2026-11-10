@@ -85,7 +85,7 @@ async function oneRun(seed) {
     endReason: result.endReason, won: !!Game.won, over: !!Game.over,
     villageLost: !!Game.villageLost, scaleRank: scaleRank,
     maxWave: result.maxWaveUnlocked || 1, unlockedWave: unlocked, standing: standing,
-    daily: t.daily, gains: t.gains, trustSays: trustSays, sayCount: sayCount,
+    daily: t.daily, gains: t.gains, events: t.events, trustSays: trustSays, sayCount: sayCount,
     instrumentErrors: t.instrumentErrors.concat(errors),
   };
   return out;
