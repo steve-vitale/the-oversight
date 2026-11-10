@@ -1655,6 +1655,26 @@
                 rec.log.push(allyName + "'s gear absorbs " + absorbedA + '.');
               }
               total = this.wornDamage(hittingAlly ? allyVid : vid, total, { rng: RR, log: rec.log, scene: 'field' });
+              // BLOODED (sim-wave5kill-a): the incoming half in the
+              // field — a Producer's blow lands half as hard on a
+              // blooded village's fighters, after armor. Village
+              // fighters only (leader + village ally; a foreign ally
+              // was never taught — opts.foreignAllies marks them).
+              // Placed after wornDamage — like brace / shield wall, and
+              // after the FIGHTBLEND P4 parallel total, which keeps its
+              // own pre-armor read — so every downstream split and
+              // accounting sees the reduced number, once.
+              if (total > 0 && (mdef && (mdef.wave | 0)) === 5 && !(hittingAlly && (opts.foreignAllies || {})[allyVid]) && this.villageBlooded && this.villageBlooded()) {
+                try {
+                  var _bim = (typeof this.bloodedCfg === 'function' ? this.bloodedCfg().inMult : 0.75) || 0.75;
+                  var _bpre = total;
+                  total = Math.max(1, Math.round(total * _bim));
+                  if (total < _bpre && !rec.bloodedTold) {
+                    rec.bloodedTold = true;
+                    rec.log.push('R' + round + ': ' + this.bloodedLine());
+                  }
+                } catch (e) { console.warn('[blooded] field incoming', e); }
+              }
               if (hittingAlly) {
                 // ABILITY — LEECH (lootabilities Arm 4): the stance the
                 // card promises — when an ally near the holder takes
@@ -2156,6 +2176,21 @@
               try { (rec.actionKinds || (rec.actionKinds = [])).push('strike'); } catch (e) {}
               rec.strikesThrown = (rec.strikesThrown | 0) + 1;
               if (gpF) { var _gpLogN4 = rec.log.length; try { var _vd0 = vd; vd = GPf.fieldStrike(gpF, vd, gpC({ round: round, lead: lead, mStunned: mStunnedThisRound })); if (vd !== _vd0) abNote += ' (x' + (vd / Math.max(1, _vd0)).toFixed(1) + ')'; } catch (e) { console.warn('[godpath] fieldStrike', e); } gpTag(_gpLogN4); }
+              // BLOODED (sim-wave5kill-a): the outgoing half in the
+              // field — a blooded village's strikes land harder on
+              // Producers (wave 5). Applied here, after every other
+              // strike modifier, so the twoblow window and the damage
+              // log both see the blooded number. The volley is untouched.
+              if ((mdef && (mdef.wave | 0)) === 5 && vd > 0 && this.villageBlooded && this.villageBlooded()) {
+                try {
+                  var _bdm = (typeof this.bloodedCfg === 'function' ? this.bloodedCfg().dmgMult : 1.5) || 1.5;
+                  vd = Math.round(vd * _bdm);
+                  if (!rec.bloodedTold) {
+                    rec.bloodedTold = true;
+                    rec.log.push('R' + round + ': ' + this.bloodedLine());
+                  }
+                } catch (e) { console.warn('[blooded] field strike', e); }
+              }
               // TWOBLOW (sim-twoblow-a, 2026-10-31): a proven blow is
               // vd > 0 after every multiplier, as actually landed.
               // A 0-damage swing (mirage miss, editor cut) proves
@@ -2183,6 +2218,21 @@
             if (allyIn && allyHp > 0 && lead.hp > 0) {
               var ad = (allyWb != null) ? lroll([4 + allyWb, 8 + allyWb]) : lroll([3, 6]);
               if (allyWb != null && allyStrikeMult !== 1) ad = Math.round(ad * allyStrikeMult);
+              // BLOODED (sim-wave5kill-a): the ally's strike, same rule.
+              // Village allies only — a foreign ally was never taught by
+              // the village's veterans (opts.foreignAllies marks them).
+              // The Live Broadcast echo below is the ability's own damage
+              // and stays unmodified.
+              if ((mdef && (mdef.wave | 0)) === 5 && ad > 0 && allyWb != null && !(opts.foreignAllies || {})[allyVid] && this.villageBlooded && this.villageBlooded()) {
+                try {
+                  var _bdm2 = (typeof this.bloodedCfg === 'function' ? this.bloodedCfg().dmgMult : 1.5) || 1.5;
+                  ad = Math.round(ad * _bdm2);
+                  if (!rec.bloodedTold) {
+                    rec.bloodedTold = true;
+                    rec.log.push('R' + round + ': ' + this.bloodedLine());
+                  }
+                } catch (e) { console.warn('[blooded] field ally strike', e); }
+              }
               lead.hp -= ad; rec.mDealt += ad; rec.allyDealt += ad;
               if (lead.hp <= 0) lead.alive = false;
               rec.log.push('R' + round + ': ' + allyName + ' strikes for ' + ad + (allyStrikeMult !== 1 ? ' (x' + allyStrikeMult.toFixed(1) + ')' : '') + ' (' + Math.max(0, lead.hp) + ' left)');

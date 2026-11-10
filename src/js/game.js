@@ -38943,6 +38943,31 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         dmg = this.wornDamage(t.kind === 'player' ? this.villagerId : t.villagerId, dmg, { scene: 'tactical', body: t });
         if (!(dmg > 0)) return 0;
       }
+      // BLOODED (sim-wave5kill-a): the incoming half — a blooded
+      // village's fighters stand longer against Producers (wave 5):
+      // their blows land half as hard, after armor. Village fighters
+      // only (player + villager — foreign 'ally' fighters were never
+      // taught by the village's veterans, same boundary as the feasted
+      // hook below). The once-per-fight line is shared with the
+      // outgoing hook: whichever half lands first names it.
+      if (['player', 'villager'].includes(t.kind) && dmg > 0) {
+        try {
+          let _sw = 0;
+          if (sourceKey) { const _src = this.tbFighter(sourceKey); _sw = (_src && _src.mdef && _src.mdef.wave) ? ((_src.mdef.wave | 0) || 0) : 0; }
+          if (_sw === 5 && typeof this.villageBlooded === 'function' && this.villageBlooded()) {
+            const _im = (typeof this.bloodedCfg === 'function' ? this.bloodedCfg().inMult : 0.75) || 0.75;
+            const _pre = dmg;
+            dmg = Math.max(1, Math.round(dmg * _im));
+            if (dmg < _pre) {
+              const _f = this.tbfight;
+              if (_f && !_f.bloodedTold) {
+                _f.bloodedTold = true;
+                this.say(this.bloodedLine());
+              }
+            }
+          }
+        } catch (e) { console.warn('[blooded] TB incoming', e); }
+      }
       const quiet = !!(opts && opts.quiet);
       // WALKOUT (union_rep): untargetable while walked out. Break the strike
       // by outlasting it — or don't let it organize in the first place.
@@ -39131,6 +39156,34 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
         }
       } catch (e) {}
+      // BLOODED (sim-wave5kill-a): the outgoing half — a blooded
+      // village's strikes land harder on Producers (wave 5). Player +
+      // villager sources only (same boundary as the feasted hook above).
+      // Composes multiplicatively with feasted / overcharge / openings,
+      // like every other strike multiplier; the target's wave is read
+      // off its fighter mdef, the pierce hook's own convention.
+      try {
+        const _fk = t && t.kind;
+        const _ps = sourceKey === 'p' || (sourceLabel === 'you' && (sourceKey == null));
+        let _vs = null;
+        if (!_ps && sourceKey) {
+          try {
+            const _src = this.tbFighter(sourceKey);
+            if (_src && _src.kind === 'villager' && _src.villagerId) _vs = _src;
+          } catch (e) { console.warn('[blooded] TB source lookup', e); }
+        }
+        const _tw = (t && t.mdef && t.mdef.wave) ? ((t.mdef.wave | 0) || 0) : 0;
+        if ((_ps || _vs) && (_fk === 'monster' || _fk === 'hostile') && final > 0 && _tw === 5 &&
+            typeof this.villageBlooded === 'function' && this.villageBlooded()) {
+          const _dm = (typeof this.bloodedCfg === 'function' ? this.bloodedCfg().dmgMult : 1.5) || 1.5;
+          final = Math.round(final * _dm);
+          const _f = this.tbfight;
+          if (_f && !_f.bloodedTold) {
+            _f.bloodedTold = true;
+            this.say(this.bloodedLine());
+          }
+        }
+      } catch (e) { console.warn('[blooded] TB outgoing', e); }
       // UNION REP SOLIDARITY (Steve 2026-10-06): while a rep organizes, the
       // picket line hits harder. Applies to monster damage vs the player.
       // PACK-LEADER (Steve 2026-10-06): the leader's packmates hit +2 while

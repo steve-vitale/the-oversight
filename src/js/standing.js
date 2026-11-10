@@ -306,6 +306,53 @@
         return unready(['read-error']);
       }
     },
+    // BLOODED (sim-wave5kill-a, 2026-11-10): the wave-5 kill lever —
+    // damage/survivability only, NOT a gate. Once the village has a
+    // living veteran (a wave-4+ killer), its fighters hit wave-5
+    // monsters harder and stand longer against them: the proven killers
+    // teach the village where the Producers bleed. The condition is the
+    // readiness gate's own veteran count, read through
+    // waveCombatReadiness(5) so the two can never drift apart; no gate,
+    // price, deed, or readyDemand changes here. Numbers are sim starting
+    // points (standingCfg's own convention), not canon; Steve can
+    // overrule. The env overrides exist ONLY as the sizing instrument
+    // for the arm's constructed ladder (read per fight); the committed
+    // default is the landed number. SIZED 2026-11-10 (sim-wave5kill-a):
+    // the constructed ladder picked dmgMult 1.5 / inMult 0.75 — the
+    // smallest rung whose projected multi-meeting grind (6 field
+    // meetings + 3 TB fights) closes a 1600-HP Cancellation; the
+    // control grind (1518) falls just short, which is the baseline's
+    // 0-kill story in one number.
+    bloodedCfg() {
+      let dmgMult = 1.5, inMult = 0.75;
+      try {
+        if (typeof process !== 'undefined' && process.env) {
+          const d = parseFloat(process.env.W5BLOODED_DMG);
+          if (Number.isFinite(d) && d > 0) dmgMult = d;
+          const i = parseFloat(process.env.W5BLOODED_IN);
+          if (Number.isFinite(i) && i > 0) inMult = i;
+        }
+      } catch (e) { console.warn('[blooded] bloodedCfg env read', e); }
+      return { dmgMult: dmgMult, inMult: inMult };
+    },
+    // bloodedLine(): the once-per-fight narration, phrased from the live
+    // cfg so the words never lie about the multipliers (the line used to
+    // say "twice as hard / half as hard" at every rung).
+    bloodedLine() {
+      let cfg = { dmgMult: 1.5, inMult: 0.75 };
+      try { if (typeof this.bloodedCfg === 'function') cfg = this.bloodedCfg(); } catch (e) { console.warn('[blooded] bloodedLine cfg read', e); }
+      return 'Blooded — the village knows where the Producers bleed. (Strikes hit ' + cfg.dmgMult +
+        '× as hard; their blows land at ' + cfg.inMult + '× strength.)';
+    },
+    villageBlooded() {
+      // The gate's own veteran count: living roster with a wave-4+ kill.
+      // A thin wrapper on purpose — the lever's condition IS the gate's
+      // count, so a village the gate calls veteran-ready is exactly a
+      // village whose fighters hit Producers blooded.
+      try {
+        return ((this.waveCombatReadiness(5) || {}).veterans | 0) > 0;
+      } catch (e) { console.warn('[blooded] villageBlooded readiness read', e); return false; }
+    },
     // _readinessBarLine(rd): the honest bar readout for hold beats and the
     // standing line — names exactly what the village lacks, in the village's
     // own terms. Knowledge-gated: the wave's TITLE is never named here
