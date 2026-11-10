@@ -1,0 +1,22 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=0)
+=== seed 97904 day 90 — conversation with Yaroslav (visjoin_82) ===
+occupation=HVAC tech temperament=prickly trust=22 dead=false
+want: seek_comfort (stage 0)
+open thread: grief fromSeed=false
+picker: control
+
+THEM: "Don't mind me. Today's just heavy. Just... be straight with me."
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: You walk to the ridge with Yaroslav. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+YOU: [dlg:comfort] "You alright?"
+THEM: "Thanks. ...Thanks for saying that."
+YOU: [ask:gossip] "What's the word around the fire?"
+THEM: "Huh. Let me think about that." "Giulia tracked a snare thief by scent alone. Came back with the trap and the thief's boot."
+YOU: [dlg:more] "Tell me more."
+THEM: "Brandon is back. Walked in like they'd never left."
+YOU: [dlg:react] (listen)
+THEM: "Right. Done. Don't look so relieved."
+YOU: (leave)
+pre-close: want seek_comfort stage 2 thread gossip
+(gossip picks this sitting: 1)

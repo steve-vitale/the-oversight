@@ -1,0 +1,12 @@
+d26 eval village_1 at=(4,4) target=(2,3) dist=3
+d26 walk village_1 at=(4,4) target=(2,3) dist=3 after=(3,4) dist2=2
+d27 eval village_1 at=(3,4) target=(2,3) dist=2
+d27 drop village_1 at=(3,4) target=(undefined,undefined) dist=undefined reason=linked
+d28 eval village_2 at=(3,4) target=(3,7) dist=3
+d28 walk village_2 at=(3,4) target=(3,7) dist=3 after=(3,5) dist2=2
+d29 eval village_2 at=(3,5) target=(3,7) dist=2
+d29 study village_2 at=(3,5) target=(3,7) dist=2
+d97 eval village_spl_29_63839 at=(4,4) target=(8,5) dist=5
+d97 walk village_spl_29_63839 at=(4,4) target=(8,5) dist=5 after=(7,4) dist2=2
+d98 eval village_spl_29_63839 at=(7,4) target=(8,5) dist=2
+d98 study village_spl_29_63839 at=(7,4) target=(8,5) dist=2
