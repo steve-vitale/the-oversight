@@ -173,6 +173,14 @@ check('robustness: missing verbs do not throw', function () {
   assert.strictEqual(AM.answermailStats().errors, 0);
 });
 
+// --- Instrument v3: cap-phantom proof -----------------------------------
+// _trustGain returns the requested amount even when the 100-cap absorbs
+// it; the wrap must log the ACTUAL move (see prereg amendment 4).
+check('instrument v3: cap-phantom proof (wrap applied 0/3/8, unified [3,8])', function () {
+  const out = execFileSync('node', [path.join(REPO, 'scripts', 'test-trustgain-cap-phantom.js')], { timeout: 600000 }).toString();
+  assert.ok(/cap-phantom proof passed/.test(out), 'cap-phantom proof output; got ' + out);
+});
+
 // --- Live harness smoke leg ----------------------------------------------
 check('live smoke: 99104 answermail 60d runs, instrument errors 0, accord answered', function () {
   const outDir = fs.mkdtempSync(path.join('/tmp', 'answermail-proof-'));

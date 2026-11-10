@@ -82,7 +82,7 @@ function legSummary(rows, run) {
     medianTG: band.medianSurvival,
     seasoned: perSeed.reduce(function (t, s) { return t + s.seasoned; }, 0),
     linksFormed: perSeed.reduce(function (t, s) { return t + s.links.length; }, 0),
-    polities: perSeed.filter(function (s) { return s.polity !== 'never-seasoned' && s.polity !== 'seasoned-but-no-polity'; }).length,
+    polities: perSeed.filter(function (s) { return / d\d+$/.test(s.polity); }).length, // only a real polity string (shape + ' d' + day) counts; reasons like 'no-links' do not
     starvationTotal: perSeed.reduce(function (t, s) { return t + s.starvation; }, 0),
     accordAnswers: perSeed.reduce(function (t, s) { return t + s.accordAnswers; }, 0),
     tends: perSeed.reduce(function (t, s) { return t + s.tends; }, 0),
