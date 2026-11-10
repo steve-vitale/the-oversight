@@ -86,6 +86,21 @@ const LF = require('./competent-linkfeast-b');
 const linkfeast = LF.linkfeast;
 
 const ROTATION = ['defiant', 'assimilated', 'beloved', 'relay'];
+// Rotation variants (sim-doorwalk-feared-b, 2026-11-10): DOORWALK_ROTATION
+// selects the assignment rotation; default is the frozen doorwalk-b
+// rotation above. Unknown names fall back to the default — the gate
+// never changes which doors are offered or earned, only which earned
+// door the drive is assigned to walk.
+const ROTATIONS = {
+  default: ROTATION,
+  'feared-witness': ['feared', 'witness', 'feared', 'witness'],
+};
+function rotation() {
+  try {
+    const name = (typeof process !== 'undefined' && process.env && process.env.DOORWALK_ROTATION) || 'default';
+    return ROTATIONS[name] || ROTATIONS.default;
+  } catch (e) { return ROTATIONS.default; }
+}
 const BASE_SEED = 53001;
 
 // Default-OFF: DOORWALK_B=1 is the only on-switch. Unset (or any
@@ -95,11 +110,15 @@ function layerOn() { return process.env.DOORWALK_B === '1'; }
 // assignedDoorFor(seed): the pre-registered rotation. Pure; the proof
 // pins the mapping (53001 defiant, 53002 assimilated, 53003 beloved,
 // 53004 relay, 53005 defiant, 53006 assimilated, 53007 beloved,
-// 53008 relay).
+// 53008 relay) for the default rotation, and the feared/witness
+// mapping (53001 feared, 53002 witness, 53003 feared, 53004 witness,
+// 53005 feared, 53006 witness, 53007 feared, 53008 witness) for
+// DOORWALK_ROTATION=feared-witness.
 function assignedDoorFor(seed) {
+  const rot = rotation();
   const s = parseInt(seed, 10);
-  if (!Number.isFinite(s)) return ROTATION[0];
-  return ROTATION[((s - BASE_SEED) % ROTATION.length + ROTATION.length) % ROTATION.length];
+  if (!Number.isFinite(s)) return rot[0];
+  return rot[((s - BASE_SEED) % rot.length + rot.length) % rot.length];
 }
 function assignedDoor() {
   try {
@@ -380,7 +399,7 @@ module.exports = { doorwalk: doorwalk,
   layerOn: layerOn, doorWalkDrive: doorWalkDrive, drainTable: drainTable,
   pickOption: pickOption, pickDoor: pickDoor, pickBeat: pickBeat,
   modalState: modalState, earnedDoorIds: earnedDoorIds, TABLE_PHASES: TABLE_PHASES,
-  ROTATION: ROTATION, BASE_SEED: BASE_SEED,
+  ROTATION: ROTATION, ROTATIONS: ROTATIONS, rotation: rotation, BASE_SEED: BASE_SEED,
   assignedDoor: assignedDoor, assignedDoorFor: assignedDoorFor,
   resetDoorwalkStats: resetDoorwalkStats, doorwalkStats: doorwalkStats,
   resetTakeseatStats: LF.resetTakeseatStats, takeseatStats: LF.takeseatStats,
