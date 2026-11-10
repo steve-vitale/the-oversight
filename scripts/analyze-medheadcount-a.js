@@ -30,9 +30,37 @@ const PILOT_SEEDS = [96301, 96302, 96303, 96304, 96305, 96306, 96307, 96308];
 // fight labels are one mode, not many. A mode is "new" when it is
 // absent in before and present with count >= 2 in after.
 const FIGHT_CAUSE = /monster|arena|combat|wild|expedition|duel|raid|ambush|stranger|contest/i;
+// (sim-medheadcount-metricfix-a 2026-11-09: THE REDACTOR revision — the
+// game emits a monster's proper name as the death-cause label for fight
+// deaths, and the regex above cannot see that. Collapse any cause label
+// matching the game's own monster roster (src/data/monsters.json
+// name/shortName/id, case-insensitive) into 'fight' alongside the regex.
+// The metric itself — no new death-cause MODE — does not change, only the
+// label-to-mode classification. Labels that are NOT roster names (e.g.
+// 'ugly-eyes', 'the ugly beast') are deliberately NOT collapsed: if one
+// trips the clause, it fails honestly. A missing/malformed roster is a
+// loud failure, never a silent regex-only fallback.)
+let MONSTER_NAMES = null;
+try {
+  const rosterRaw = JSON.parse(fs.readFileSync(
+    path.join(__dirname, '..', 'src', 'data', 'monsters.json'), 'utf8'));
+  const roster = Array.isArray(rosterRaw) ? rosterRaw : (rosterRaw.monsters || []);
+  if (!Array.isArray(roster) || !roster.length) throw new Error('empty roster');
+  MONSTER_NAMES = new Set();
+  for (const m of roster) {
+    for (const k of ['name', 'shortName', 'id']) {
+      if (m && m[k]) MONSTER_NAMES.add(String(m[k]).toLowerCase().trim());
+    }
+  }
+  if (!MONSTER_NAMES.size) throw new Error('no roster names');
+} catch (e) {
+  console.error('FATAL: cannot load monster roster for the G2 new-modes wiring: ' + (e && e.message));
+  process.exit(2);
+}
 function causeMode(c) {
-  c = String(c || '?').toLowerCase();
+  c = String(c || '?').toLowerCase().trim();
   if (FIGHT_CAUSE.test(c)) return 'fight';
+  if (MONSTER_NAMES.has(c)) return 'fight';
   return c.slice(0, 32);
 }
 function newDeathModes(beforeCauses, afterCauses) {

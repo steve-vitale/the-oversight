@@ -31,11 +31,20 @@
 // contamination correction);
 // L6 analyzer --before/--after verdict (runs only when the after corpus
 // exists; skipped otherwise — the pilot judge lives in the evidence file).
+// L7 (sim-medheadcount-metricfix-a 2026-11-09: THE REDACTOR revision) —
+// the revised new-modes wiring: (a) replay on the COMMITTED confirm
+// corpora, where "the redactor":2 failed the old wiring — must now read
+// "none" and VERDICT GO; (b) synthetic pair where after adds
+// "the redactor":2 (absent in before) — must read "none"; (c) synthetic
+// control where after adds a genuinely new non-fight cause >=2 — must
+// still FLAG it (the clause still bites). L7 tests the analyzer, not the
+// lever: it passes on a reverted tree too.
 // Uses the shared harness (seeded RNG before eval).
 'use strict';
 process.env.PLENTYDEPRI = '1';
 process.env.DEPOSITGATE = '1';
 const fs = require('fs');
+const os = require('os');
 const path = require('path');
 const cp = require('child_process');
 const assert = require('assert');
@@ -161,6 +170,50 @@ async function aleg(name, fn) {
       assert.ok(/VERDICT: GO/.test(r.stdout), 'analyzer verdict is GO');
     });
   }
+
+  await aleg('L7 revised new-modes wiring: monster-name collapse (THE REDACTOR)', async () => {
+    // (a) Replay on the COMMITTED confirm corpora — the exact case that
+    // failed the old wiring ("the redactor":2 in after, absent in before).
+    const confirmBefore = path.join(__dirname, '..', 'evidence', '2026-11-09', 'medheadcount-confirm-before');
+    const confirmAfter = path.join(__dirname, '..', 'evidence', '2026-11-09', 'medheadcount-confirm-after');
+    const seeds16 = '96009,96010,96011,96012,96013,96014,96015,96016,96017,96018,96019,96020,96021,96022,96023,96024';
+    const rr = cp.spawnSync(process.execPath,
+      [ANALYZE, '--before', confirmBefore, '--after', confirmAfter, '--seeds', seeds16],
+      { encoding: 'utf8' });
+    assert.ok(/G2 NEW-MODES \(mode reading, fight labels collapsed\): none -> PASS/.test(rr.stdout),
+      'confirm replay reads NEW-MODES none: ' + (rr.stdout || '').split('\n').filter(l => /NEW-MODES|VERDICT/.test(l)).join(' | '));
+    assert.ok(/VERDICT: GO/.test(rr.stdout), 'confirm replay verdict is GO under the revised wiring');
+    // (b)+(c) Synthetic pairs: minimal per-seed corpora, 2 seeds each.
+    function synthPair(beforeCauses, afterCauses) {
+      const base = fs.mkdtempSync(path.join(os.tmpdir(), 'medheadcount-l7-'));
+      const bd = path.join(base, 'before'), ad = path.join(base, 'after');
+      fs.mkdirSync(bd); fs.mkdirSync(ad);
+      for (const s of [1, 2]) {
+        const days = [];
+        for (let d = 1; d <= 100; d++) days.push({ day: d, pop: 6, medicCount: 1, wcHolders: 1, hmHolders: 0, triageHolders: 0, triageNonMedic: 0, herbalRemedyHolders: 0, fieldMedHolders: 0 });
+        const mk = (causes) => ({ seed: s, policy: 'competent', plentydepri: 1, depositgate: 1,
+          daysAlive: 100, villageDays: 100, deathCauses: causes, deathRows: [],
+          spawn: { day: 1, pop: 6, medics: 1 }, days, lessons: [], joins: [], medicDeaths: [],
+          national: false, table: false, win: false, waveReach: [1, 2, 3, 4] });
+        fs.writeFileSync(path.join(bd, `medheadcount-a-competent-s${s}.json`), JSON.stringify(mk(beforeCauses)));
+        fs.writeFileSync(path.join(ad, `medheadcount-a-competent-s${s}.json`), JSON.stringify(mk(afterCauses)));
+      }
+      return { bd, ad };
+    }
+    const p1 = synthPair({ monster: 5, 'the wild': 10 }, { monster: 5, 'the wild': 10, 'the redactor': 2 });
+    const r1 = cp.spawnSync(process.execPath,
+      [ANALYZE, '--before', p1.bd, '--after', p1.ad, '--seeds', '1,2'], { encoding: 'utf8' });
+    assert.ok(/G2 NEW-MODES \(mode reading, fight labels collapsed\): none -> PASS/.test(r1.stdout),
+      'synthetic redactor pair reads NEW-MODES none: ' + (r1.stdout || '').split('\n').filter(l => /NEW-MODES/.test(l)).join(' | '));
+    assert.ok(/VERDICT: GO/.test(r1.stdout), 'synthetic redactor pair verdict is GO');
+    const p2 = synthPair({ monster: 5, 'the wild': 10 }, { monster: 5, 'the wild': 10, drowning: 2 });
+    const r2 = cp.spawnSync(process.execPath,
+      [ANALYZE, '--before', p2.bd, '--after', p2.ad, '--seeds', '1,2'], { encoding: 'utf8' });
+    assert.ok(/G2 NEW-MODES \(mode reading, fight labels collapsed\): drowning:4 -> FAIL/.test(r2.stdout),
+      'synthetic control still flags a genuinely new non-fight cause: ' + (r2.stdout || '').split('\n').filter(l => /NEW-MODES/.test(l)).join(' | '));
+    assert.strictEqual(r2.status, 1, 'synthetic control exits NO-GO (1)');
+    console.log('    confirm replay: NEW-MODES none, VERDICT GO; synthetic redactor: none/GO; synthetic control: drowning:2 flagged');
+  });
 
   console.log(`\ntest-medheadcount-a: ${pass} PASS, ${fail} FAIL, ${skip} SKIP`);
   process.exit(fail ? 1 : 0);

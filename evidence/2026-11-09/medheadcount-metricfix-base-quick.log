@@ -1,0 +1,101 @@
+check.js: 300 scripts, 4 parallel (quick)
+.......................................................................................................................F.F.........FF..F............................................................................................................................................F..............F........
+
+  FAIL scripts/godpath/test-mobile-combat-cadence.js (exit 1, 6.5s)
+        ok   hand-back follows resolution
+        ok   superseded announcement cannot perform a stale enemy action
+        ok   save retains the announced but unresolved actor
+        ok   Continue resolves the pending enemy exactly once
+        FAIL Continue does not wrap the announced round a second time
+        ok   Continue hands control back with fresh player inputs
+        ok   enemy-phase endings publish the terminal state to the browser
+        ok   faster opening enemy is announced before acting
+        ok   each faster opening enemy acts once before usable player controls
+      
+      mobile combat cadence: 13 passed, 2 failed, 0 todo (phase 0)
+      failing: enemy is announced before its action runs | Continue does not wrap the announced round a second time
+
+  FAIL scripts/godpath/test-occupation-panels.js (exit 1, 1.9s)
+          at Object.<anonymous> (/home/hatch/workspace/worktrees/sim-fightblend-reask-a/scripts/godpath/test-occupation-panels.js:17:14)
+          at Module._compile (node:internal/modules/cjs/loader:1929:14)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47
+        FAIL real CLI workflow completed
+      
+      occupation panels: 0 passed, 1 failed, 0 todo (phase 0)
+      failing: real CLI workflow completed
+
+  FAIL scripts/godpath/test-occupation-cohorts.js (exit 1, 28.8s)
+      
+      occupation cohorts: 3 passed, 1 failed, 0 todo (phase 0)
+      failing: an actually generated NPC nurse is not a playable offer
+       
+        FAIL real shared-harness process: npc-only
+        ok   real shared-harness process: absent
+        ok   real shared-harness process: default
+        ok   real shared-harness process: invalid
+        ok   real shared-harness process: excluded-driver
+      
+      occupation cohorts: 5 passed, 1 failed, 0 todo (phase 0)
+      failing: real shared-harness process: npc-only
+
+  FAIL scripts/godpath/test-party-opening-turn.js (exit 1, 4.9s)
+      ok   fixture uses two real distant party members
+        ok   real entry added each companion exactly once
+        ok   opening initiative still selects the player after allies join
+        ok   initiative contains every real fighter exactly once
+        FAIL joined humans occupy distinct squares
+        ok   native save and Continue keep the real opening actor and fighters
+        ok   Continue exposes a usable player turn
+        ok   actual Wait advances the round and returns to a usable turn
+        ok   companion state still comes from a real person
+      
+      party-opening-turn: 8 passed, 1 failed, 0 todo (phase 0)
+      failing: joined humans occupy distinct squares
+
+  FAIL scripts/godpath/test-phone-frame-proof.js (exit 1, 4.6s)
+      ok   both actual target phone sizes are retained
+        FAIL every retained browser input matches current source — index.html,src/css/main.css,src/data/alienPlayers.json,src/data/arrivalText.json,src/data/characterGen.json,src/data/items.json,src/data/mo
+        FAIL all current boot inputs are covered
+        ok   receipt identity declares portable text normalization
+        ok   retained receipt hash 736
+        FAIL current phone evidence is required; follow MOBILE-PLAYTEST.md — Phone receipt source is stale or missing: index.html
+      
+      Phone frame proof: 3 passed, 3 failed, 0 todo (phase 0)
+      failing: every retained browser input matches current source | all current boot inputs are covered | current phone evidence is required; follow MOBILE-PLAYTEST.md
+
+  FAIL scripts/test-capable-bot-20261014.js (exit 1, 89.8s)
+        ok   seed 1234: qualified observed feast plans receive an actual host attempt
+        ok   seed 1234: host attempts return a real feast or explicit refusal
+        INFO original campaign seed=1234 foodDeeds=true grants=[{"day":8,"granted":false,"why":"The feast is warm and good — full bellies, loud laughter — but no keepsake was channeled. The surge must be ar
+        ok   runs completed
+        ok   game days keep pace with loop days (no fight left live at sleep)
+        INFO original two-seed food-deed count=2; capability required by controlled real-combat proof above
+        ok   contest choices taken by scoring
+        ok   conversations held in-sim
+        ok   no policy-side errors
+      
+      test-capable-bot-20261014: 41 passed, 1 failed, 0 todo (phase 0)
+      failing: real capable player combat earns the food deed at first use
+
+  FAIL scripts/test-establishment-r20-fixes-20261020.js (exit 1, 0.9s)
+        PASS NEW line cook (keyword match unchanged) -> 1.4
+        PASS OLD line cook (keyword match unchanged) -> 1.4
+        PASS fisherman earns the ⭐ natural tag
+      FIX 2 — racks-full voice gated per cook-day (real resolveOneAssignment, OLD vs NEW)
+        PASS NEW: 3 same-day resolutions -> 1 racks-full line
+        FAIL NEW: next day voices once more (gate resets daily): expected 2, got 1
+        PASS NEW: preserved stock still counted
+        PASS OLD: 3 same-day resolutions -> 3 identical lines (the bug)
+        PASS OLD: next day adds a 4th
+        PASS OLD: preserved stock still counted
+      
+      1 FAILURES
+
+  slowest: scripts/godpath/test-trust-observer-neutrality.js 118s, scripts/test-capable-bot-20261014.js 90s, scripts/test-synergy-stall.js 89s
+
+check.js: 293 passed, 7 failed in 781s
