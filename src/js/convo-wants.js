@@ -144,11 +144,13 @@
       keepKind: 'task', goal: 'prove', deadlineDays: 2,
       build(vid, need, ctx) {
         const liters = Math.max(0, Math.round(need.water || 0));
+        // R129: "1 liters" — pluralize the unit (liters === 1 -> "liter").
+        const literWord = liters === 1 ? 'liter' : 'liters';
         const hh = this.convoFavorHash(vid, ctx);
         const openers = [
-          `The cistern's nearly dry \u2014 ${liters} liters left.`,
-          `We're down to ${liters} liters of clean water.`,
-          `Water's almost gone \u2014 ${liters} liters.`,
+          `The cistern's nearly dry \u2014 ${liters} ${literWord} left.`,
+          `We're down to ${liters} ${literWord} of clean water.`,
+          `Water's almost gone \u2014 ${liters} ${literWord}.`,
         ];
         const asks = [
           `I need someone to haul water with me at first light. Two of us, half the trips. Will you come?`,
@@ -162,9 +164,9 @@
         // like every sibling favor's line.
         const line = '"' + openers[hh % 3] + ' ' + asks[(hh >>> 2) % 3] + '"';
         const whyBits = [
-          `${liters} liters. That's today's drinking water, and then we're boiling creek water and hoping.`,
-          `Do the math with me: ${liters} liters, ${ctx.rosterN} people. That's not tomorrow's water.`,
-          `I checked the cistern three times hoping I misread it. ${liters} liters.`,
+          `${liters} ${literWord}. That's today's drinking water, and then we're boiling creek water and hoping.`,
+          `Do the math with me: ${liters} ${literWord}, ${ctx.rosterN} people. That's not tomorrow's water.`,
+          `I checked the cistern three times hoping I misread it. ${liters} ${literWord}.`,
         ];
         const whyLine = '"' + whyBits[(hh >>> 1) % 3] + ` We walk together and each carry two liters back. Creek water still needs boiling.` + '"';
         return {
@@ -1657,6 +1659,55 @@
       return h >>> 0;
     },
 
+    // convoFavorBlockLine / convoFavorPartnerBlockLine / convoFavorAwayLine:
+    // R129 (journey-deepening r129): the Haven-door adjacency block and
+    // the favour-commit away line were ONE fixed sentence each
+    // (before-panel, 8 seeds: 1890 line 10x, partner line 18x, away line
+    // 18x) — the worst repeaters on the panel, reading like system
+    // instructions, not a person talking. Four variants each, picked by
+    // convoFavorHash (stable person key + day + a per-pool seq) — a
+    // STATELESS pick, because the block lines are returned by
+    // action-check functions (convoFavorAction is documented read-only:
+    // it reads the conv map without creating one, and the journal path
+    // calls it outside any sitting), so the convoPickCycle ledger
+    // (which writes c.said) is not available here. The same villager
+    // on the same day gets the same variant — which is what makes the
+    // r21 re-ask reframe ("As I said — ...") still fire on a repeat
+    // ask — while different villagers and days spread across the four
+    // wordings (~25% share each). Every variant keeps the truth: the
+    // block variants all say "move adjacent, same side of the Haven
+    // door"; the away variants all say "away from Haven, no dawn meet
+    // while out, find me when back". The partner pool is SHARED by the
+    // water and forage delegated actions so a villager's two favour
+    // kinds draw from the same four wordings.
+    convoFavorBlockLine(vid) {
+      const pool = [
+        'Move next to them, on the same side of the Haven door, to help.',
+        'Stand beside them first — same side of the Haven door — then help.',
+        'You need to be right next to them, same side of the Haven door, to help.',
+        'Get to their side of the Haven door and stand next to them — then you can help.',
+      ];
+      return pool[this.convoFavorHash(vid, { day: (this.state.scholar || {}).day || 0, seq: 11 }) % pool.length];
+    },
+    convoFavorPartnerBlockLine(vid) {
+      const pool = [
+        'Move next to your partner, on the same side of the Haven door.',
+        'Stand beside your partner first — same side of the Haven door — then help.',
+        'You need to be right next to your partner, same side of the Haven door, to help.',
+        "Get to your partner's side of the Haven door and stand next to them — then you can help.",
+      ];
+      return pool[this.convoFavorHash(vid, { day: (this.state.scholar || {}).day || 0, seq: 22 }) % pool.length];
+    },
+    convoFavorAwayLine(vid) {
+      const pool = [
+        `"Wait — I'm away from Haven, out on the road. I can't promise a dawn meet while I'm out — find me when I'm back, and we'll set it then."`,
+        `"I'm out on the road, away from Haven — no dawn meet while I'm out, I'm afraid. Catch me when I'm back and we'll set it then."`,
+        `"Wait — I'm away from Haven right now, out on the road. I can't promise a dawn meet from out here — find me when I'm back and we'll set it then."`,
+        `"Out on the road, away from Haven. A dawn meet's not something I can promise while I'm out — when I'm back, find me, and we'll set it then."`,
+      ];
+      return pool[this.convoFavorHash(vid, { day: (this.state.scholar || {}).day || 0, seq: 33 }) % pool.length];
+    },
+
     // convoForageSpot: the meeting place for a pantry-run favor, grounded in
     // the ASKING villager's own foraging knowledge (journey deepening r6,
     // 2026-10-12: the commit line was verbatim "East treeline, first light.
@@ -1784,7 +1835,7 @@
       if ((favor.kind === 'forage_help' || favor.kind === 'water_haul' || favor.kind === 'stay_close') &&
           (this.state.village || {}).away?.[vid]) {
         return { ok: false, away: true,
-          line: `"Wait — I'm away from Haven, out on the road. I can't promise a dawn meet while I'm out — find me when I'm back, and we'll set it then."` };
+          line: this.convoFavorAwayLine(vid) };
       }
       if (favor.kind === 'stay_close' && this.companyFavorCommitGate) {
         const gate=this.companyFavorCommitGate(vid,favor);if(!gate.ok)return{ok:false,line:gate.reason};
@@ -1887,7 +1938,7 @@
       if ((v.away?.[vid] && !_inConvo) || node.nx !== this.map.px || node.ny !== this.map.py ||
           (haven && !!v.npcInside?.[vid] !== (s.insideHaven !== false)) || !pos ||
           ![pos.mx, pos.my, s.mx, s.my].every(Number.isFinite) ||
-          Math.max(Math.abs(pos.mx - s.mx), Math.abs(pos.my - s.my)) > 1) return blocked('Move next to them, on the same side of the Haven door, to help.');
+          Math.max(Math.abs(pos.mx - s.mx), Math.abs(pos.my - s.my)) > 1) return blocked(this.convoFavorBlockLine(vid));
       if (favor.kind === 'food_share') {
         const meal = this.giveFoodOptions().find(o => o.id === 'meal' || o.amount === 'meal');
         if (!meal) return blocked('You need edible, unspoiled food in your pack. Food in the pantry must be collected first.');

@@ -31,6 +31,22 @@ const T = K.reporter('R113 away-line (R72 guard wording + action-site presence)'
   const store = new Map();
   globalThis.localStorage = { getItem: k => store.get(k) ?? null, setItem: (k, v) => store.set(k, String(v)), removeItem: k => store.delete(k), key: i => [...store.keys()][i] ?? null, get length() { return store.size; } };
   const NEW_LINE = '"Wait — I\'m away from Haven, out on the road. I can\'t promise a dawn meet while I\'m out — find me when I\'m back, and we\'ll set it then."';
+  // R129 (journey-deepening r129): the away line and the Haven-door block
+  // line now vary (4 variants each, picked by convoFavorHash). The
+  // contract is the TRUTH the line carries, not the exact wording — so
+  // these assertions check pool membership, not equality with NEW_LINE.
+  const AWAY_POOL = [
+    '"Wait — I\'m away from Haven, out on the road. I can\'t promise a dawn meet while I\'m out — find me when I\'m back, and we\'ll set it then."',
+    '"I\'m out on the road, away from Haven — no dawn meet while I\'m out, I\'m afraid. Catch me when I\'m back and we\'ll set it then."',
+    '"Wait — I\'m away from Haven right now, out on the road. I can\'t promise a dawn meet from out here — find me when I\'m back and we\'ll set it then."',
+    '"Out on the road, away from Haven. A dawn meet\'s not something I can promise while I\'m out — when I\'m back, find me, and we\'ll set it then."',
+  ];
+  const BLOCK_POOL = [
+    'Move next to them, on the same side of the Haven door, to help.',
+    'Stand beside them first — same side of the Haven door — then help.',
+    'You need to be right next to them, same side of the Haven door, to help.',
+    'Get to their side of the Haven door and stand next to them — then you can help.',
+  ];
   function scene() {
     K.newRun(G);
     const v = G.state.village, s = G.state.scholar;
@@ -55,7 +71,7 @@ const T = K.reporter('R113 away-line (R72 guard wording + action-site presence)'
     T.ok('sitting with an away villager opens (presence, not roster-absence)', !!G.convoGet(sc.vid).active);
     const r = G.convoFavorCommit(sc.vid, favor);
     T.ok('away + in-convo commit is still refused (R72 guard stays)', r && r.ok === false && r.away === true, JSON.stringify(r));
-    T.ok('away + in-convo refusal speaks the new true line', r && r.line === NEW_LINE, String(r && r.line));
+    T.ok('away + in-convo refusal speaks the new true line', r && AWAY_POOL.indexOf(r.line) >= 0, String(r && r.line));
     T.ok('new line claims no present absence', r && !/miles away/.test(r.line || ''));
     G.endConvo(sc.vid, 'left');
   }
@@ -64,7 +80,7 @@ const T = K.reporter('R113 away-line (R72 guard wording + action-site presence)'
     const sc = scene(); setAway(sc, sc.vid);
     const favor = G.convoBuildFavor(sc.vid, { kind: 'forage_help' }); G.convoStoreFavor(favor);
     const r = G.convoFavorCommit(sc.vid, favor);
-    T.ok('away + no-convo commit is refused the same way', r && r.ok === false && r.away === true && r.line === NEW_LINE, JSON.stringify(r));
+    T.ok('away + no-convo commit is refused the same way', r && r.ok === false && r.away === true && AWAY_POOL.indexOf(r.line) >= 0, JSON.stringify(r));
   }
   // (3) NOT away + in-convo: the away guard does not fire at all.
   {
@@ -100,7 +116,7 @@ const T = K.reporter('R113 away-line (R72 guard wording + action-site presence)'
     G.convoGet(sc.vid).active = true;
     const a = G.convoFavorAction(sc.vid, favor);
     T.ok('away + in-convo but far food_share is blocked by adjacency, not by away',
-      a && a.ready === false && /Move next to them/.test(a.reason || '') && !/out on the road/.test(a.reason || ''), JSON.stringify(a));
+      a && a.ready === false && BLOCK_POOL.indexOf(a.reason) >= 0 && !/out on the road/.test(a.reason || ''), JSON.stringify(a));
     G.convoGet(sc.vid).active = false;
   }
   T.done();

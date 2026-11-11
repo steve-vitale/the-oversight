@@ -50,7 +50,7 @@
   if(v.away?.[vid]||node.nx!==g.map.px||node.ny!==g.map.py||!pos||
      (home&&(v.npcInside?.[vid]!==false)!==(s.insideHaven!==false))||
      ![pos.mx,pos.my,s.mx,s.my].every(Number.isFinite)||Math.max(Math.abs(pos.mx-s.mx),Math.abs(pos.my-s.my))>1)
-   return{ok:false,reason:'Move next to your partner, on the same side of the Haven door.'};
+   return{ok:false,reason:g.convoFavorPartnerBlockLine(vid)};
   return{ok:true};
  }
  function talkLine(g,vid,r){
