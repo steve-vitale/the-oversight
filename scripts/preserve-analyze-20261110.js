@@ -91,6 +91,8 @@ function perSeed(out) {
   s.dutySmokedNames = byKey(dr.reduce(function (a, r) { return a.concat(r.converted || []); }, []),
     function (c) { return (c.name || '').indexOf('(smoked)') !== -1 ? 'smoked' : (c.name || '').indexOf('(dried)') !== -1 ? 'dried' : 'other-name'; });
   s.dutySplitConversions = dr.reduce(function (a, r) { return a + (r.converted || []).filter(function (c) { return c.split; }).length; }, 0);
+  s.dutySplitFallbacks = dr.reduce(function (a, r) { return a + (r.converted || []).filter(function (c) { return c.split && c.splitMatch === 'name-fallback'; }).length; }, 0);
+  s.dutyMaxTapKcalDiff = Math.max.apply(null, dr.map(function (r) { return Math.abs(r.tapKcalDiff || 0); }).concat([0]));
   // Snapshot tap totals (independent of the wrap): must equal the diff sums.
   s.snapDutyBatches = sum(dy, function (r) { return r.dutyBatches; });
   s.snapDutyKcal = sum(dy, function (r) { return r.dutyKcal; });
@@ -202,6 +204,7 @@ function pool(per) {
     'dutyRescuedKcal', 'dutyTapBatches', 'dutyTapKcal', 'dutyTapMismatches',
     'dutyRacksFullResolutions', 'dutyRacksFullBlockedKcal', 'dutyLeftToRotKcal', 'dutyAboutToRotBefore',
     'dutySplitConversions', 'snapDutyBatches', 'snapDutyKcal',
+    'dutySplitFallbacks',
     'eatenKcalTotal', 'eatenPreservedKcal', 'eatenRenderedKcal', 'eatenPemmicanKcal',
     'teleEatTotal', 'purgedKcal',
     'drawPreservedKcal', 'drawRenderedKcal', 'drawPemmicanKcal', 'drawCookedKcal', 'drawCount',

@@ -167,11 +167,15 @@ function install(Game) {
   function spoiledOf(Game, it) {
     try { return !!(it && Game.isSpoiled && Game.isSpoiled(it)); } catch (e) { return false; }
   }
-  function rescuedKcalOf(day, it) {
+  // About-to-rot kcal for the CONVERTED PORTION only: the dinner reserve
+  // can keep part of a stack fresh (same object, fewer units), so the
+  // rescued kcal is the pre per-unit value times the units actually
+  // converted — never the whole pre stack.
+  function rescuedKcalOf(day, snap, units) {
     try {
-      if (!it || typeof it.spoilDay !== 'number') return 0;
-      const left = it.spoilDay - day;
-      if (left <= 2 && left > 0) return (it.kcalEach || 0) * (it.units || 0);
+      if (!snap || typeof snap.spoilDay !== 'number') return 0;
+      const left = snap.spoilDay - day;
+      if (left <= 2 && left > 0) return (snap.kcalEach || 0) * (units === undefined ? (snap.units || 0) : units);
       return 0;
     } catch (e) { return 0; }
   }
@@ -439,13 +443,17 @@ function install(Game) {
       } catch (e) { err('duty-postcalc', e); }
       try {
         const seen = new Set(pantry);
-        // In-place conversions: same object, new foodState.
+        // In-place conversions: same object, new foodState. The dinner
+        // reserve can keep part of a stack fresh (same object, fewer
+        // units), so kcalIn / rescuedKcal use the POST units — the units
+        // actually converted — never the whole pre stack.
         for (const it of pantry) {
           if (!it || !pre.map.has(it)) continue;
           const snap = pre.map.get(it);
           if (it.foodState === 'preserved' && snap.foodState !== 'preserved') {
-            const kcalIn = (snap.kcalEach || 0) * (snap.units || 0);
-            const kcalOut = (it.kcalEach || 0) * (it.units || 0);
+            const postUnits = it.units || 0;
+            const kcalIn = (snap.kcalEach || 0) * postUnits;
+            const kcalOut = (it.kcalEach || 0) * postUnits;
             converted.push({
               name: snap.name, foodKind: snap.foodKind, split: false,
               fromState: snap.foodState,
@@ -453,8 +461,8 @@ function install(Game) {
               spoilDayBefore: snap.spoilDay, spoilDayAfter: it.spoilDay,
               shelfGained: (typeof it.spoilDay === 'number' && typeof snap.spoilDay === 'number')
                 ? (it.spoilDay - snap.spoilDay) : null,
-              rescuedKcal: rescuedKcalOf(day, snap),
-              units: it.units || 0,
+              rescuedKcal: rescuedKcalOf(day, snap, postUnits),
+              units: postUnits,
             });
           }
         }
@@ -462,27 +470,39 @@ function install(Game) {
         // name + ' (smoked)' / ' (dried)'. kcalIn is estimated from the
         // matched pre item's per-unit kcal (the engine copies the stack,
         // then converts the copy — same per-unit value pre-conversion).
+        // Name alone is ambiguous: several "Foraged food" lumps can share
+        // a name with different per-unit kcal. Match by name-root AND
+        // kcal consistency: round(prePer * mult) must equal the converted
+        // per-unit kcal within rounding (mult from this resolution's
+        // skill). Fall back to the first name match and flag it.
+        const mult = (pre.skill > 0) ? Math.min(1.0, 0.95 + 0.02 * pre.skill) : 0.80;
         for (const it of pantry) {
           if (!it || pre.map.has(it)) continue;
           if (it.foodState !== 'preserved') continue;
           const nm = String(it.name || '');
-          let match = null;
+          let match = null, matchKind = null;
+          let bestErr = Infinity, firstName = null;
           for (const entry of pre.map) {
             const snap = entry[1];
             if (!snap || !snap.name) continue;
-            if (nm === snap.name + ' (smoked)' || nm === snap.name + ' (dried)') { match = snap; break; }
+            if (nm !== snap.name + ' (smoked)' && nm !== snap.name + ' (dried)') continue;
+            if (!firstName) firstName = snap;
+            const err = Math.abs(Math.round((snap.kcalEach || 0) * mult) - (it.kcalEach || 0));
+            if (err < bestErr) { bestErr = err; match = snap; }
           }
+          if (match && bestErr <= 1) { matchKind = 'kcal'; }
+          else if (firstName) { match = firstName; matchKind = 'name-fallback'; }
           if (!match) continue;
           const kcalIn = (match.kcalEach || 0) * (it.units || 0);
           const kcalOut = (it.kcalEach || 0) * (it.units || 0);
           converted.push({
             name: match.name, foodKind: match.foodKind, split: true,
-            fromState: match.foodState,
+            fromState: match.foodState, splitMatch: matchKind,
             kcalIn: kcalIn, kcalOut: kcalOut,
             spoilDayBefore: match.spoilDay, spoilDayAfter: it.spoilDay,
             shelfGained: (typeof it.spoilDay === 'number' && typeof match.spoilDay === 'number')
               ? (it.spoilDay - match.spoilDay) : null,
-            rescuedKcal: rescuedKcalOf(day, match),
+            rescuedKcal: rescuedKcalOf(day, match, it.units || 0),
             units: it.units || 0,
           });
         }
@@ -502,6 +522,17 @@ function install(Game) {
         tapBatches = (hc.villagerPreserveBatches || 0) - (pre.hcBefore.batches || 0);
         tapKcal = (hc.villagerPreserveKcal || 0) - (pre.hcBefore.kcal || 0);
       } catch (e) { err('duty-tap', e); }
+      // TOLERANCE (not exact equality): the tap rounds the WHOLE stack
+      // (round(per*units*mult)) while the engine rounds PER UNIT
+      // (round(per*mult)*units) — the two differ by up to units/2 per
+      // stack on the same conversion. Agreement is batches exactly equal
+      // and |tapKcal - kcalOut| within the summed per-stack rounding
+      // tolerance. A larger gap is a real disagreement, not rounding.
+      let tapTolerance = 0;
+      try {
+        for (const c of converted) tapTolerance += ((c.units || 0) / 2 + 1);
+      } catch (e) {}
+      const tapKcalDiff = tapKcal - kcalOut;
       t.dutyResolutions.push({
         day: day, vid: pre.vid, occ: pre.occ, skill: pre.skill,
         converted: converted, batches: converted.length,
@@ -512,7 +543,8 @@ function install(Game) {
         racksFull: pre.racksFull, rackCap: pre.rackCap,
         preservedKcalPre: pre.preservedKcalPre,
         tapBatches: tapBatches, tapKcal: tapKcal,
-        tapAgrees: (tapBatches === converted.length && tapKcal === kcalOut),
+        tapKcalDiff: tapKcalDiff, tapTolerance: tapTolerance,
+        tapAgrees: (tapBatches === converted.length && Math.abs(tapKcalDiff) <= tapTolerance),
         threw: !!threw,
       });
     },

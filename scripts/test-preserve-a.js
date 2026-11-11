@@ -254,7 +254,10 @@ async function liveFixtures() {
     ok(drec && drec.cook === false && drec.taken === (dr && dr.taken), 'C9 pantryDraw wrap', drec);
     ok(drec && (drec.byState.preserved || 0) + (drec.byState.none || 0) > 0, 'C9a pantryDraw byState recorded', drec && drec.byState);
     // C10: duty racks — direct cook resolution converts about-to-rot
-    // surplus; the diff agrees with the _haulcount tap.
+    // surplus; the diff agrees with the _haulcount tap. Expectations are
+    // computed from the live roster/skill (reserve 250/roster, 4000 kcal
+    // budget), not hardcoded: the 20x500 stack keeps ceil(reserve/500)
+    // units fresh, converts min(remaining, 8) units.
     const roster = (v.roster || []);
     const cookVid = roster[0];
     if (cookVid) {
@@ -262,6 +265,11 @@ async function liveFixtures() {
         { foodKind: 'meat', foodState: 'cleaned', kcalEach: 500, units: 20, name: 'Venison (cleaned)', spoilDay: day + 1, safe: false, edible: true },
         { foodKind: 'plant', foodState: 'none', kcalEach: 100, units: 10, name: 'Grain', spoilDay: 9999 },
       ];
+      const reserve = 250 * (roster.length || 10);
+      const keepUnits = Math.min(20, Math.ceil(reserve / 500));
+      const convertUnits = Math.min(20 - keepUnits, Math.floor(4000 / 500));
+      const cookSkill = (typeof Game.specialistSkill === 'function') ? Game.specialistSkill(Game.getPerson(cookVid) || {}, 'preserver') : 0;
+      const cookMult = cookSkill > 0 ? Math.min(1.0, 0.95 + 0.02 * cookSkill) : 0.80;
       const resBefore = t.dutyResolutions.length;
       Game.resolveOneAssignment(cookVid, { task: 'cook' });
       const dres = t.dutyResolutions[t.dutyResolutions.length - 1];
@@ -271,15 +279,65 @@ async function liveFixtures() {
       ok(dres && dres.tapAgrees === true, 'C10c duty diff agrees with _haulcount tap', dres);
       ok(dres && dres.shelfGained > 0, 'C10d duty shelf gained recorded', dres);
       ok(dres && dres.aboutToRotBefore > dres.aboutToRotAfter, 'C10e duty reduces about-to-rot kcal', dres);
+      if (convertUnits > 0) {
+        const expKcalIn = 500 * convertUnits;
+        const expKcalOut = convertUnits * Math.round(500 * cookMult);
+        ok(dres && dres.batches === 1, 'C10f one stack converted', dres);
+        ok(dres && dres.kcalIn === expKcalIn, 'C10g kcalIn uses converted units only (not the reserve-kept part)', { got: dres && dres.kcalIn, want: expKcalIn, keepUnits: keepUnits, convertUnits: convertUnits });
+        ok(dres && dres.kcalOut === expKcalOut, 'C10h kcalOut matches per-unit rounding', { got: dres && dres.kcalOut, want: expKcalOut });
+        ok(dres && dres.rescuedKcal === expKcalIn, 'C10i rescued kcal is the converted portion only', { got: dres && dres.rescuedKcal, want: expKcalIn });
+        ok(dres && dres.aboutToRotBefore === 10000, 'C10j about-to-rot before', dres);
+        ok(dres && dres.aboutToRotAfter === 10000 - expKcalIn, 'C10k about-to-rot after', dres);
+        const conv0 = dres && dres.converted && dres.converted[0];
+        if (conv0 && conv0.split) ok(conv0.splitMatch === 'kcal', 'C10l split matched by kcal consistency', conv0);
+        else ok(true, 'C10l split-match n/a (in-place conversion)');
+      } else {
+        ok(true, 'C10f-k skipped (reserve covers the whole stack on this roster)');
+      }
+      // C10m: rounding tolerance — the tap rounds the whole stack while
+      // the engine rounds per unit. A 9x120 stack at skill 1 (mult 0.97)
+      // reads 1044 by the diff and 1048 by the tap: the diff is real
+      // (4 kcal) and must still agree within tolerance. A filler stack
+      // absorbs the dinner reserve first (same spoilDay, bigger total).
+      const cook2 = roster[1];
+      if (cook2) {
+        try {
+          const p2 = Game.getPerson(cook2) || {};
+          p2.formerOccupation = 'beekeeper';
+          if (p2._src) p2._src.formerOccupation = 'beekeeper';
+        } catch (e) {}
+        const reserve2 = 250 * (roster.length || 10);
+        const fillerUnits = Math.ceil(reserve2 / 500);
+        v.pantry = [
+          { foodKind: 'meat', foodState: 'cleaned', kcalEach: 500, units: fillerUnits, name: 'Venison (cleaned)', spoilDay: day + 1, safe: false, edible: true },
+          { foodKind: 'plant', foodState: 'none', kcalEach: 120, units: 9, name: 'Cattail', spoilDay: day + 1, safe: true, edible: true },
+          { foodKind: 'plant', foodState: 'none', kcalEach: 100, units: 10, name: 'Grain', spoilDay: 9999 },
+        ];
+        const skill2 = (typeof Game.specialistSkill === 'function') ? Game.specialistSkill(Game.getPerson(cook2) || {}, 'preserver') : 0;
+        Game.resolveOneAssignment(cook2, { task: 'cook' });
+        const dres2 = t.dutyResolutions[t.dutyResolutions.length - 1];
+        const cat = dres2 && dres2.converted && dres2.converted.find(function (c) { return c.name === 'Cattail'; });
+        if (skill2 === 1 && cat) {
+          ok(cat.kcalIn === 1080 && cat.kcalOut === 1044, 'C10m rounding case: diff reads 1044 for 1080 in', cat);
+          ok(dres2.tapKcal !== dres2.kcalOut, 'C10n tap and diff genuinely differ (rounding)', { tapKcal: dres2.tapKcal, kcalOut: dres2.kcalOut });
+          ok(dres2.tapAgrees === true, 'C10o tap agrees WITHIN rounding tolerance', dres2);
+          ok(Math.abs(dres2.tapKcalDiff) <= dres2.tapTolerance, 'C10p tap diff within recorded tolerance', dres2);
+        } else {
+          ok(true, 'C10m-p skipped (skill ' + skill2 + ', cattail converted: ' + !!cat + ')');
+        }
+      } else {
+        ok(true, 'C10m-p skipped (no second roster villager)');
+      }
       // C11: racks-full — preserved stock above rackCap blocks all smoking.
       const skill = (typeof Game.specialistSkill === 'function') ? Game.specialistSkill(Game.getPerson(cookVid) || {}, 'preserver') : 0;
       const ownShelf = (skill > 0) ? (30 + 5 * skill) : 15;
       const rackCap = 125 * (roster.length || 10) * Math.max(1, ownShelf - 2);
+      const presUnits = Math.ceil((rackCap + 5000) / 500);
       v.pantry = [
-        { foodKind: 'meat', foodState: 'preserved', kcalEach: 500, units: 100, name: 'Venison (smoked)', spoilDay: day + 30 },
+        { foodKind: 'meat', foodState: 'preserved', kcalEach: 500, units: presUnits, name: 'Venison (smoked)', spoilDay: day + 30 },
         { foodKind: 'meat', foodState: 'cleaned', kcalEach: 500, units: 20, name: 'Venison (cleaned)', spoilDay: day + 1, safe: false, edible: true },
       ];
-      const presKcal = 500 * 100;
+      const presKcal = 500 * presUnits;
       ok(presKcal >= rackCap, 'C11 racks-full fixture stock above cap', { presKcal: presKcal, rackCap: rackCap });
       Game.resolveOneAssignment(cookVid, { task: 'cook' });
       const dres2 = t.dutyResolutions[t.dutyResolutions.length - 1];
