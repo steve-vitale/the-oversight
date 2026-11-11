@@ -5,9 +5,11 @@ Leg 1, days 14–40, 42-day horizon. Original run
 `2026-11-11T1945Z` occurrence (same schedule, same leg — see Adoption
 below). Branch `journey-establishment`, base local master `3b4aa8123`
 (Loop B vetphantom evidence landing) at registration; rebased onto
-`3eec28a81` before landing (see Closeout). Policy: competent +
-withDelegate + HUNTSTAFF=2. Seeds 2401–2416 (fresh band), BEFORE/AFTER
-pair on the same band. Prereg:
+`3c6fb7069` (Loop B 1830Z coordinator evidence) before landing — master
+had moved to `3eec28a81` and then `3c6fb7069` during the run; the rebase
+used the explicit SHA read from the main tree immediately beforehand.
+Policy: competent + withDelegate + HUNTSTAFF=2. Seeds 2401–2416 (fresh
+band), BEFORE/AFTER pair on the same band. Prereg:
 `journey-establishment-r132-prereg.md` (this directory).
 
 ## Adoption (stale-lock recovery, 13:45 CST run)
@@ -345,7 +347,31 @@ sim-proofrefresh-b4 retains its panel.
 
 ## Closeout
 
-(TBD — filled at closeout.)
+- Commit 1 `eb1865b27` (measurement set, 69 files), rebased to
+  `b1e3f4f34` onto explicit master SHA `3c6fb7069`; analyzer re-run
+  post-rebase with identical verdicts; fix verified absent from the
+  rebased tree. Commit 2 (this note's closeout + header correction).
+- Index-clobber repair: after commit 1 the main index showed all 69
+  committed files staged-as-deleted (safe-commit private-index class);
+  repaired with `git ls-tree -r HEAD -- <dirs> | git update-index
+  --add --index-info`, verified status empty + diff HEAD empty.
+  Lesson: `git ls-tree` does NOT expand glob pathspecs (returns 0
+  lines silently) — the first repair attempt with quoted globs fixed
+  only the 5 explicitly-named files; directory pathspecs with `-r`
+  are the repair shape.
+- Merge: `git merge --ff-only journey-establishment` from the main
+  tree; verify ancestor; release worktree; rotation 1→2; delete the
+  lock. Report: "merged locally, pending ship" — no version tag; the
+  ship job reports the tag when it goes live. The fix does NOT land
+  (NO-GO); nothing in this merge touches `src/js`.
+- Standing pre-flight deviations (LOUD): write-flap episode 18:46–
+  19:01Z at the 12:45 run's pre-flight (registry write EPERM; 8×
+  registration failures on `.git/refs/heads/journey-establishment.lock`;
+  probe-gated, FLAP_CLEAR 19:01:52Z); the 12:45 run died in the runtime
+  restart ~19:37Z (adopted by this run, see Adoption). Gate-run EPERM
+  flakes + the 0-byte `docs/ONTOLOGY.md` truncation (restored from HEAD).
+- Heartbeat: 10-minute loop for the whole run; tree heartbeated
+  immediately on adoption and at every phase boundary.
 
 ## Appendix — the rejected fix (for the next run's unit-cap dial)
 
