@@ -1,0 +1,4216 @@
+{
+  "run": "trustfirst-pilot",
+  "mode": "control",
+  "seeds": [
+    190211,
+    190212,
+    190213,
+    190214,
+    190215,
+    190216,
+    190217,
+    190218
+  ],
+  "perSeed": [
+    {
+      "seed": 190211,
+      "file": "trustfirst-s190211-trustfirst-pilot-control.json",
+      "days": 150,
+      "endReason": "survived",
+      "won": false,
+      "villageLost": false,
+      "scaleRank": "regional",
+      "maxWave": 5,
+      "standing": 460,
+      "endPantryKcal": 27370,
+      "deaths": 74,
+      "instrumentErrors": 0,
+      "trustWrites": 1550,
+      "trustByCause": {
+        "applyRep-drift": 262,
+        "bumpTrust": 1221,
+        "other-named:setTrust": 18,
+        "other-named:tickNeeds": 2,
+        "other-named:resolveCase": 3,
+        "other-named:_creditPantryGift": 17,
+        "other-named:takeFromPantry": 7,
+        "other-named:arenaAct": 2,
+        "other-named:G": 7,
+        "other-named:playerDeath": 10,
+        "other-named:exposureFireTick": 1
+      },
+      "trustUpByCause": {
+        "applyRep-drift": 292,
+        "bumpTrust": 1120,
+        "other-named:setTrust": 60,
+        "other-named:_creditPantryGift": 21,
+        "other-named:arenaAct": 40,
+        "other-named:G": 46
+      },
+      "trustDownByCause": {
+        "bumpTrust": 253,
+        "other-named:tickNeeds": 4,
+        "applyRep-drift": 26,
+        "other-named:resolveCase": 51,
+        "other-named:takeFromPantry": 30,
+        "other-named:playerDeath": 109,
+        "other-named:exposureFireTick": 8
+      },
+      "trustUnclassified": 0,
+      "trustOtherNamed": [
+        "other-named:setTrust=18",
+        "other-named:tickNeeds=2",
+        "other-named:resolveCase=3",
+        "other-named:_creditPantryGift=17",
+        "other-named:takeFromPantry=7",
+        "other-named:arenaAct=2",
+        "other-named:G=7",
+        "other-named:playerDeath=10",
+        "other-named:exposureFireTick=1"
+      ],
+      "bumpTrustWrap": 2883,
+      "evTrustAllWrap": 0,
+      "teleTrust": 1226,
+      "bumpTrustNoSetterTwin": 5,
+      "reconIntervals": 2003,
+      "reconOk": 1996,
+      "reconResidue": [
+        {
+          "day": 109,
+          "vid": "app_mgpsphnk248",
+          "snapDelta": 13,
+          "evSum": 0,
+          "gap": 13
+        },
+        {
+          "day": 112,
+          "vid": "wanjiru_kamau",
+          "snapDelta": 24,
+          "evSum": 0,
+          "gap": 24
+        },
+        {
+          "day": 114,
+          "vid": "hannah_kim",
+          "snapDelta": 11,
+          "evSum": 0,
+          "gap": 11
+        },
+        {
+          "day": 120,
+          "vid": "ava_garcia",
+          "snapDelta": 11,
+          "evSum": 0,
+          "gap": 11
+        },
+        {
+          "day": 120,
+          "vid": "farid_ahmed",
+          "snapDelta": 11,
+          "evSum": 0,
+          "gap": 11
+        },
+        {
+          "day": 126,
+          "vid": "grace_obi",
+          "snapDelta": 10,
+          "evSum": 0,
+          "gap": 10
+        },
+        {
+          "day": 136,
+          "vid": "visjoin_134",
+          "snapDelta": 11,
+          "evSum": 0,
+          "gap": 11
+        }
+      ],
+      "reconResidueCount": 7,
+      "trustTraj": {
+        "gen_abkdma3": {
+          "start": 15,
+          "end": 40,
+          "min": 0,
+          "max": 40
+        },
+        "gen_k6rz6mg": {
+          "start": 29,
+          "end": 69,
+          "min": 29,
+          "max": 95
+        },
+        "gen_mk45w5p": {
+          "start": 20,
+          "end": 85,
+          "min": 20,
+          "max": 94
+        },
+        "gen_thkzzvg": {
+          "start": 15,
+          "end": 90,
+          "min": 15,
+          "max": 92
+        },
+        "gen_kxtt27x": {
+          "start": 13,
+          "end": 86,
+          "min": 13,
+          "max": 91
+        },
+        "gen_6cz2ulk": {
+          "start": 23,
+          "end": 89,
+          "min": 23,
+          "max": 92
+        },
+        "elif_demir": {
+          "start": 6,
+          "end": 90,
+          "min": 0,
+          "max": 90
+        },
+        "dale_hoffman": {
+          "start": 8,
+          "end": 86,
+          "min": 0,
+          "max": 90
+        },
+        "mara_vasquez": {
+          "start": 14,
+          "end": 91,
+          "min": 14,
+          "max": 92
+        },
+        "omar_farouk": {
+          "start": 10,
+          "end": 90,
+          "min": 0,
+          "max": 93
+        },
+        "valeria_quispe": {
+          "start": 16,
+          "end": 46,
+          "min": 16,
+          "max": 46
+        },
+        "amina_diallo": {
+          "start": 19,
+          "end": 89,
+          "min": 19,
+          "max": 92
+        },
+        "app_mgpsphnk248": {
+          "start": 23,
+          "end": 88,
+          "min": 23,
+          "max": 90
+        },
+        "wanjiru_kamau": {
+          "start": 34,
+          "end": 87,
+          "min": 34,
+          "max": 87
+        },
+        "hannah_kim": {
+          "start": 21,
+          "end": 59,
+          "min": 21,
+          "max": 59
+        },
+        "ava_garcia": {
+          "start": 21,
+          "end": 90,
+          "min": 21,
+          "max": 90
+        },
+        "farid_ahmed": {
+          "start": 21,
+          "end": 90,
+          "min": 21,
+          "max": 90
+        },
+        "grace_obi": {
+          "start": 20,
+          "end": 31,
+          "min": 19,
+          "max": 31
+        },
+        "visjoin_134": {
+          "start": 21,
+          "end": 27,
+          "min": 14,
+          "max": 27
+        }
+      },
+      "trustEndMean": 74.9,
+      "scholarTrustProxy": null,
+      "opinionTraj": {
+        "village_0": {
+          "name": "Emberhold",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_1": {
+          "name": "Stonebridge",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_2": {
+          "name": "Thornfield",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_spl_24_57521": {
+          "name": "The Bloodied",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_spl_29_87113": {
+          "name": "The Hungry Road",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "opinionVerbs": {
+        "probationTick": 149
+      },
+      "opinionMoved": 0,
+      "linkTraj": {
+        "link_mgpspil7258": {
+          "other": "village_0",
+          "start": 30,
+          "end": 0,
+          "min": 0,
+          "max": 31,
+          "seasoned": false
+        }
+      },
+      "linkCount": 1,
+      "linkSeasoned": 0,
+      "linkEventsByCause": {
+        "tribute-weekly": 9,
+        "succession-haircut": 4,
+        "aid-offer-accept": 3,
+        "renegotiation-silence": 1,
+        "titan-event": 4
+      },
+      "linkUnattributed": 0,
+      "linkGains": 12,
+      "gossipSeeds": 1617,
+      "gossipSeedsByAction": {
+        "order": 412,
+        "departure": 617,
+        "return": 281,
+        "talk": 93,
+        "give_food": 11,
+        "haven_built": 3,
+        "deed": 74,
+        "raid": 63,
+        "ambush_cover_case_2": 1,
+        "loot_corpse": 3,
+        "haven_need": 3,
+        "donate": 14,
+        "feast": 3,
+        "feast-draw": 3,
+        "fight": 11,
+        "corpse-word": 8,
+        "firstaccord": 1,
+        "changed": 7,
+        "death": 3,
+        "rescue": 5,
+        "broke_link_mgpspil7258": 1
+      },
+      "gossipDeduped": 604,
+      "gossipUnclassified": 0,
+      "gossipHops": 6692,
+      "gossipHopsMutated": 1248,
+      "gossipMaxHearers": 11,
+      "gossipSecondReach": 575,
+      "gossipItemsAliveMax": 35,
+      "spreadRumor": 0,
+      "applyRep": 5255,
+      "applyRepWithMove": 0,
+      "repEndDiffs": {
+        "gen_k6rz6mg": {
+          "generous": 100,
+          "brave": 16,
+          "honest": -97,
+          "competent": 84
+        },
+        "valeria_quispe": {
+          "generous": 22,
+          "brave": 17,
+          "honest": -12,
+          "competent": 92,
+          "trustworthy": -38
+        },
+        "gen_6cz2ulk": {
+          "generous": 81,
+          "brave": 39,
+          "honest": -18,
+          "competent": 88
+        },
+        "gen_kxtt27x": {
+          "generous": 94,
+          "brave": 78,
+          "honest": -85,
+          "competent": 94,
+          "kind": -1
+        },
+        "amina_diallo": {
+          "generous": 72,
+          "brave": 81,
+          "honest": -39,
+          "competent": 97,
+          "kind": -1
+        },
+        "elif_demir": {
+          "generous": 100,
+          "brave": 97,
+          "honest": -22,
+          "competent": 95,
+          "kind": -3
+        },
+        "mara_vasquez": {
+          "generous": 100,
+          "brave": 96,
+          "honest": -36,
+          "competent": 93,
+          "kind": -4
+        },
+        "gen_mk45w5p": {
+          "generous": 100,
+          "brave": 24,
+          "honest": -74,
+          "competent": 94
+        },
+        "gen_thkzzvg": {
+          "generous": 100,
+          "brave": 46,
+          "honest": -38,
+          "competent": 96,
+          "kind": -4
+        },
+        "dale_hoffman": {
+          "generous": 70,
+          "brave": 63,
+          "competent": 100
+        },
+        "omar_farouk": {
+          "generous": 65,
+          "brave": 79,
+          "honest": -23,
+          "competent": 100
+        },
+        "app_mgpsphnk248": {
+          "generous": 38,
+          "brave": 49,
+          "honest": -49,
+          "competent": 100
+        },
+        "wanjiru_kamau": {
+          "generous": 22,
+          "brave": 64,
+          "honest": -17,
+          "competent": 79
+        },
+        "hannah_kim": {
+          "generous": 18,
+          "brave": 20,
+          "honest": -4,
+          "competent": 38
+        },
+        "ava_garcia": {
+          "brave": 10,
+          "honest": -37,
+          "competent": 100
+        },
+        "farid_ahmed": {
+          "generous": 9,
+          "brave": 10,
+          "honest": -21,
+          "competent": 100,
+          "kind": -3
+        },
+        "grace_obi": {
+          "honest": -9,
+          "competent": 59
+        },
+        "visjoin_134": {
+          "generous": 3,
+          "honest": -12,
+          "competent": 31,
+          "kind": -3
+        }
+      },
+      "repBySource": {
+        "observe": 750,
+        "gossip": 1666,
+        "other": 6
+      },
+      "repCrossings": 94,
+      "observe": 631,
+      "observeByAction": {
+        "order": 412,
+        "talk": 156,
+        "give_food": 11,
+        "loot_corpse": 3,
+        "donate": 21,
+        "fight": 27,
+        "accusation": 1
+      },
+      "moot": {
+        "mootQuorum": 2,
+        "mootFriendVoice": 1
+      },
+      "bondEvents": {
+        "npcBondTick": 149,
+        "npcLinkRaiseTick": 149,
+        "proposeBond": 7
+      },
+      "teleBond": 55,
+      "tendLink": 0,
+      "talkOpens": 156,
+      "endConvo": 156,
+      "endConvoStipends": 0,
+      "endConvoStipendTotal": 0,
+      "endConvoZeroExchange": 0,
+      "river": {
+        "evRiverTrader": 1
+      },
+      "trustSays": 200,
+      "villageTrustLines": 0,
+      "trustWordLines": 74,
+      "villageTrustLineTexts": [],
+      "villageTrustLineChecks": [],
+      "wrapLive": {
+        "observe": true,
+        "seedGossip": true,
+        "applyRep": true,
+        "trustGainProgressive": true,
+        "bumpTrust": true,
+        "tele": true,
+        "spreadGossip": true,
+        "gossipActionDims": true,
+        "npcBondTick": true,
+        "npcLinkRaiseTick": true,
+        "probationTick": true,
+        "talkTo": true,
+        "endConvo": true,
+        "mootQuorum": true,
+        "mootFriendVoice": true,
+        "proposeBond": true,
+        "evRiverTrader": true
+      },
+      "wrapCounts": {
+        "observe": 631,
+        "seedGossip": 1617,
+        "applyRep": 5255,
+        "trustGainProgressive": 3529,
+        "bumpTrust": 2883,
+        "tele": 3372,
+        "spreadGossip": 716,
+        "gossipActionDims": 6799,
+        "npcBondTick": 149,
+        "npcLinkRaiseTick": 149,
+        "probationTick": 149,
+        "talkTo": 156,
+        "endConvo": 156,
+        "mootQuorum": 2,
+        "mootFriendVoice": 1,
+        "proposeBond": 7,
+        "evRiverTrader": 1
+      }
+    },
+    {
+      "seed": 190212,
+      "file": "trustfirst-s190212-trustfirst-pilot-control.json",
+      "days": 134,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "endPantryKcal": 0,
+      "deaths": 85,
+      "instrumentErrors": 0,
+      "trustWrites": 1379,
+      "trustByCause": {
+        "bumpTrust": 1039,
+        "applyRep-drift": 251,
+        "other-named:exposureFireTick": 7,
+        "other-named:G": 31,
+        "other-named:playerDeath": 15,
+        "other-named:convoConflictFallout": 6,
+        "other-named:_creditPantryGift": 16,
+        "other-named:setTrust": 13,
+        "other-named:tickNeeds": 1
+      },
+      "trustUpByCause": {
+        "bumpTrust": 1030,
+        "applyRep-drift": 216,
+        "other-named:G": 198,
+        "other-named:_creditPantryGift": 46,
+        "other-named:setTrust": 70
+      },
+      "trustDownByCause": {
+        "bumpTrust": 154,
+        "other-named:exposureFireTick": 56,
+        "applyRep-drift": 48,
+        "other-named:playerDeath": 220,
+        "other-named:convoConflictFallout": 12,
+        "other-named:tickNeeds": 2
+      },
+      "trustUnclassified": 0,
+      "trustOtherNamed": [
+        "other-named:exposureFireTick=7",
+        "other-named:G=31",
+        "other-named:playerDeath=15",
+        "other-named:convoConflictFallout=6",
+        "other-named:_creditPantryGift=16",
+        "other-named:setTrust=13",
+        "other-named:tickNeeds=1"
+      ],
+      "bumpTrustWrap": 1938,
+      "evTrustAllWrap": 0,
+      "teleTrust": 1043,
+      "bumpTrustNoSetterTwin": 4,
+      "reconIntervals": 1965,
+      "reconOk": 1957,
+      "reconResidue": [
+        {
+          "day": 68,
+          "vid": "zoe_adams",
+          "snapDelta": 11,
+          "evSum": 0,
+          "gap": 11
+        },
+        {
+          "day": 69,
+          "vid": "priya_nair",
+          "snapDelta": 11,
+          "evSum": 0,
+          "gap": 11
+        },
+        {
+          "day": 78,
+          "vid": "catalina_reyes",
+          "snapDelta": 11,
+          "evSum": 0,
+          "gap": 11
+        },
+        {
+          "day": 79,
+          "vid": "desmond_clarke",
+          "snapDelta": 10,
+          "evSum": 0,
+          "gap": 10
+        },
+        {
+          "day": 81,
+          "vid": "app_mgpspisw460",
+          "snapDelta": 2,
+          "evSum": 0,
+          "gap": 2
+        },
+        {
+          "day": 95,
+          "vid": "sari_wulandari",
+          "snapDelta": 11,
+          "evSum": 0,
+          "gap": 11
+        },
+        {
+          "day": 104,
+          "vid": "visjoin_102",
+          "snapDelta": 11,
+          "evSum": 0,
+          "gap": 11
+        },
+        {
+          "day": 133,
+          "vid": "visjoin_131",
+          "snapDelta": 14,
+          "evSum": 0,
+          "gap": 14
+        }
+      ],
+      "reconResidueCount": 8,
+      "trustTraj": {
+        "gen_3qbfloi": {
+          "start": 15,
+          "end": 15,
+          "min": 15,
+          "max": 15
+        },
+        "gen_7uwdk3l": {
+          "start": 7,
+          "end": 35,
+          "min": 7,
+          "max": 36
+        },
+        "gen_nndxj94": {
+          "start": 7,
+          "end": 86,
+          "min": 7,
+          "max": 91
+        },
+        "gen_rg540bh": {
+          "start": 8,
+          "end": 86,
+          "min": 8,
+          "max": 91
+        },
+        "gen_ozacxje": {
+          "start": 18,
+          "end": 73,
+          "min": 18,
+          "max": 73
+        },
+        "gen_2kpf56m": {
+          "start": 16,
+          "end": 6,
+          "min": 6,
+          "max": 16
+        },
+        "boris_kowalski": {
+          "start": 14,
+          "end": 89,
+          "min": 14,
+          "max": 90
+        },
+        "ethan_hunt": {
+          "start": 15,
+          "end": 88,
+          "min": 12,
+          "max": 90
+        },
+        "emma_larsen": {
+          "start": 13,
+          "end": 82,
+          "min": 13,
+          "max": 92
+        },
+        "rosa_mendez": {
+          "start": 19,
+          "end": 90,
+          "min": 19,
+          "max": 90
+        },
+        "mia_andersson": {
+          "start": 21,
+          "end": 82,
+          "min": 21,
+          "max": 91
+        },
+        "petra_novak": {
+          "start": 11,
+          "end": 83,
+          "min": 4,
+          "max": 86
+        },
+        "zoe_adams": {
+          "start": 21,
+          "end": 86,
+          "min": 18,
+          "max": 87
+        },
+        "priya_nair": {
+          "start": 21,
+          "end": 74,
+          "min": 21,
+          "max": 90
+        },
+        "catalina_reyes": {
+          "start": 21,
+          "end": 82,
+          "min": 21,
+          "max": 98
+        },
+        "desmond_clarke": {
+          "start": 20,
+          "end": 77,
+          "min": 20,
+          "max": 91
+        },
+        "app_mgpspisw460": {
+          "start": 12,
+          "end": 77,
+          "min": 12,
+          "max": 93
+        },
+        "sari_wulandari": {
+          "start": 21,
+          "end": 71,
+          "min": 21,
+          "max": 90
+        },
+        "visjoin_102": {
+          "start": 21,
+          "end": 65,
+          "min": 21,
+          "max": 90
+        },
+        "visjoin_131": {
+          "start": 24,
+          "end": 29,
+          "min": 24,
+          "max": 29
+        }
+      },
+      "trustEndMean": 68.8,
+      "scholarTrustProxy": null,
+      "opinionTraj": {
+        "village_0": {
+          "name": "Emberhold",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_1": {
+          "name": "Stonebridge",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_2": {
+          "name": "Thornfield",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_3": {
+          "name": "Ashford",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_spl_23_9623": {
+          "name": "The Red Table",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_spl_28_87621": {
+          "name": "The Red Table II",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_spl_30_93990": {
+          "name": "The Hungry Road",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_spl_32_27880": {
+          "name": "The Red Table III",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "opinionVerbs": {
+        "probationTick": 134
+      },
+      "opinionMoved": 0,
+      "linkTraj": {
+        "link_mgpspi4a530": {
+          "other": "village_2",
+          "start": 30,
+          "end": 17,
+          "min": 17,
+          "max": 42,
+          "seasoned": false
+        }
+      },
+      "linkCount": 1,
+      "linkSeasoned": 0,
+      "linkEventsByCause": {
+        "aid-beg-give": 1,
+        "tribute-weekly": 4,
+        "aid-offer-accept": 2,
+        "succession-haircut": 3,
+        "titan-event": 1
+      },
+      "linkUnattributed": 0,
+      "linkGains": 6,
+      "gossipSeeds": 970,
+      "gossipSeedsByAction": {
+        "departure": 337,
+        "deed": 89,
+        "order": 326,
+        "talk": 12,
+        "return": 93,
+        "haven_built": 3,
+        "changed": 12,
+        "corpse-word": 2,
+        "haven_need": 3,
+        "raid": 63,
+        "ambush_cover_case_2": 1,
+        "fight": 3,
+        "rescue": 4,
+        "death": 3,
+        "loot_corpse": 6,
+        "feast": 4,
+        "feast-draw": 3,
+        "firstaccord": 1,
+        "donate": 1,
+        "broke_link_mgpspi4a530": 1,
+        "give_food": 3
+      },
+      "gossipDeduped": 369,
+      "gossipUnclassified": 0,
+      "gossipHops": 3493,
+      "gossipHopsMutated": 857,
+      "gossipMaxHearers": 11,
+      "gossipSecondReach": 357,
+      "gossipItemsAliveMax": 28,
+      "spreadRumor": 0,
+      "applyRep": 2427,
+      "applyRepWithMove": 0,
+      "repEndDiffs": {
+        "gen_ozacxje": {
+          "honest": -5,
+          "competent": 24
+        },
+        "boris_kowalski": {
+          "generous": 4,
+          "brave": 24,
+          "honest": -20,
+          "competent": 93,
+          "trustworthy": -10,
+          "kind": -1
+        },
+        "rosa_mendez": {
+          "generous": 4,
+          "brave": 10,
+          "honest": -57,
+          "competent": 94,
+          "trustworthy": -21,
+          "kind": -3
+        },
+        "gen_2kpf56m": {
+          "generous": 11,
+          "brave": 24,
+          "honest": -14,
+          "competent": 96,
+          "trustworthy": -10,
+          "kind": -1
+        },
+        "mia_andersson": {
+          "generous": 70,
+          "brave": 100,
+          "honest": -100,
+          "competent": 93
+        },
+        "ethan_hunt": {
+          "generous": 100,
+          "brave": 100,
+          "honest": -100,
+          "competent": 97
+        },
+        "gen_7uwdk3l": {
+          "generous": 26,
+          "brave": 100,
+          "honest": -27,
+          "competent": 45
+        },
+        "gen_nndxj94": {
+          "generous": 100,
+          "brave": 87,
+          "honest": -71,
+          "competent": 100
+        },
+        "emma_larsen": {
+          "generous": 100,
+          "brave": 100,
+          "honest": -8,
+          "competent": 100
+        },
+        "gen_rg540bh": {
+          "generous": 14,
+          "brave": 28,
+          "honest": -35,
+          "competent": 100
+        },
+        "petra_novak": {
+          "generous": 7,
+          "brave": 26,
+          "honest": -30,
+          "competent": 100
+        },
+        "zoe_adams": {
+          "brave": 62,
+          "honest": -15,
+          "competent": 39
+        },
+        "priya_nair": {
+          "generous": 6,
+          "brave": 8,
+          "honest": -7,
+          "competent": 41,
+          "kind": -3
+        },
+        "catalina_reyes": {
+          "generous": 19,
+          "brave": 45,
+          "honest": -16,
+          "competent": 52
+        },
+        "desmond_clarke": {
+          "generous": 56,
+          "honest": -20,
+          "competent": 78
+        },
+        "app_mgpspisw460": {
+          "generous": 24,
+          "honest": -44,
+          "competent": 100
+        },
+        "sari_wulandari": {
+          "generous": 16,
+          "honest": -33,
+          "competent": 100
+        },
+        "visjoin_102": {
+          "generous": 14,
+          "honest": -28,
+          "competent": 100
+        },
+        "visjoin_131": {
+          "honest": -2,
+          "competent": 9
+        }
+      },
+      "repBySource": {
+        "observe": 388,
+        "gossip": 896,
+        "other": 3
+      },
+      "repCrossings": 81,
+      "observe": 542,
+      "observeByAction": {
+        "order": 339,
+        "talk": 137,
+        "accusation": 8,
+        "fight": 32,
+        "loot_corpse": 7,
+        "donate": 16,
+        "give_food": 3
+      },
+      "moot": {
+        "mootQuorum": 2,
+        "mootFriendVoice": 1
+      },
+      "bondEvents": {
+        "npcBondTick": 134,
+        "npcLinkRaiseTick": 134,
+        "proposeBond": 3
+      },
+      "teleBond": 33,
+      "tendLink": 0,
+      "talkOpens": 137,
+      "endConvo": 137,
+      "endConvoStipends": 0,
+      "endConvoStipendTotal": 0,
+      "endConvoZeroExchange": 0,
+      "river": {
+        "evRiverTrader": 1
+      },
+      "trustSays": 200,
+      "villageTrustLines": 0,
+      "trustWordLines": 122,
+      "villageTrustLineTexts": [],
+      "villageTrustLineChecks": [],
+      "wrapLive": {
+        "spreadGossip": true,
+        "seedGossip": true,
+        "gossipActionDims": true,
+        "bumpTrust": true,
+        "trustGainProgressive": true,
+        "tele": true,
+        "npcBondTick": true,
+        "npcLinkRaiseTick": true,
+        "probationTick": true,
+        "observe": true,
+        "applyRep": true,
+        "talkTo": true,
+        "endConvo": true,
+        "mootQuorum": true,
+        "mootFriendVoice": true,
+        "proposeBond": true,
+        "evRiverTrader": true
+      },
+      "wrapCounts": {
+        "spreadGossip": 614,
+        "seedGossip": 970,
+        "gossipActionDims": 3315,
+        "bumpTrust": 1938,
+        "trustGainProgressive": 2224,
+        "tele": 2627,
+        "npcBondTick": 134,
+        "npcLinkRaiseTick": 134,
+        "probationTick": 134,
+        "observe": 542,
+        "applyRep": 2427,
+        "talkTo": 137,
+        "endConvo": 137,
+        "mootQuorum": 2,
+        "mootFriendVoice": 1,
+        "proposeBond": 3,
+        "evRiverTrader": 1
+      }
+    },
+    {
+      "seed": 190213,
+      "file": "trustfirst-s190213-trustfirst-pilot-control.json",
+      "days": 125,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "endPantryKcal": 0,
+      "deaths": 87,
+      "instrumentErrors": 0,
+      "trustWrites": 1367,
+      "trustByCause": {
+        "bumpTrust": 1000,
+        "applyRep-drift": 335,
+        "other-named:setTrust": 2,
+        "other-named:exposureFireTick": 2,
+        "other-named:G": 9,
+        "other-named:playerDeath": 17,
+        "other-named:villagerInitiative": 1,
+        "other-named:arenaAct": 1
+      },
+      "trustUpByCause": {
+        "bumpTrust": 1000,
+        "applyRep-drift": 288,
+        "other-named:setTrust": 25,
+        "other-named:G": 84,
+        "other-named:villagerInitiative": 2,
+        "other-named:arenaAct": 11,
+        "other-named:playerDeath": 2
+      },
+      "trustDownByCause": {
+        "applyRep-drift": 99,
+        "other-named:exposureFireTick": 16,
+        "bumpTrust": 27,
+        "other-named:playerDeath": 135
+      },
+      "trustUnclassified": 0,
+      "trustOtherNamed": [
+        "other-named:setTrust=2",
+        "other-named:exposureFireTick=2",
+        "other-named:G=9",
+        "other-named:playerDeath=17",
+        "other-named:villagerInitiative=1",
+        "other-named:arenaAct=1"
+      ],
+      "bumpTrustWrap": 1692,
+      "evTrustAllWrap": 0,
+      "teleTrust": 1001,
+      "bumpTrustNoSetterTwin": 1,
+      "reconIntervals": 1696,
+      "reconOk": 1689,
+      "reconResidue": [
+        {
+          "day": 75,
+          "vid": "amina_diallo",
+          "snapDelta": 11,
+          "evSum": 0,
+          "gap": 11
+        },
+        {
+          "day": 76,
+          "vid": "app_mgpsphj5708",
+          "snapDelta": 11,
+          "evSum": 0,
+          "gap": 11
+        },
+        {
+          "day": 77,
+          "vid": "app_mgpsphk5428",
+          "snapDelta": 10,
+          "evSum": 0,
+          "gap": 10
+        },
+        {
+          "day": 98,
+          "vid": "app_mgpspiq1177",
+          "snapDelta": 11,
+          "evSum": 0,
+          "gap": 11
+        },
+        {
+          "day": 100,
+          "vid": "fatima_hassan",
+          "snapDelta": 10,
+          "evSum": 0,
+          "gap": 10
+        },
+        {
+          "day": 100,
+          "vid": "giulia_bianchi",
+          "snapDelta": 10,
+          "evSum": 0,
+          "gap": 10
+        },
+        {
+          "day": 124,
+          "vid": "app_mgpspj6u592",
+          "snapDelta": 18,
+          "evSum": 0,
+          "gap": 18
+        }
+      ],
+      "reconResidueCount": 7,
+      "trustTraj": {
+        "gen_urxhuxs": {
+          "start": 15,
+          "end": 15,
+          "min": 15,
+          "max": 15
+        },
+        "gen_95id7av": {
+          "start": 15,
+          "end": 100,
+          "min": 9,
+          "max": 100
+        },
+        "gen_q8bbq4e": {
+          "start": 8,
+          "end": 63,
+          "min": 8,
+          "max": 90
+        },
+        "gen_s5kbnqc": {
+          "start": 18,
+          "end": 82,
+          "min": 18,
+          "max": 100
+        },
+        "gen_r5kqwsf": {
+          "start": 15,
+          "end": 90,
+          "min": 15,
+          "max": 100
+        },
+        "gen_u7uodyi": {
+          "start": 18,
+          "end": 92,
+          "min": 18,
+          "max": 92
+        },
+        "sari_wulandari": {
+          "start": 23,
+          "end": 89,
+          "min": 23,
+          "max": 92
+        },
+        "pavel_dubinin": {
+          "start": 17,
+          "end": 92,
+          "min": 17,
+          "max": 100
+        },
+        "chantal_mukendi": {
+          "start": 13,
+          "end": 76,
+          "min": 13,
+          "max": 79
+        },
+        "yuki_mori": {
+          "start": 26,
+          "end": 90,
+          "min": 26,
+          "max": 90
+        },
+        "petra_novak": {
+          "start": 25,
+          "end": 90,
+          "min": 25,
+          "max": 93
+        },
+        "ella_johnson": {
+          "start": 21,
+          "end": 90,
+          "min": 21,
+          "max": 93
+        },
+        "amina_diallo": {
+          "start": 21,
+          "end": 88,
+          "min": 21,
+          "max": 90
+        },
+        "app_mgpsphj5708": {
+          "start": 21,
+          "end": 88,
+          "min": 21,
+          "max": 89
+        },
+        "app_mgpsphk5428": {
+          "start": 20,
+          "end": 87,
+          "min": 20,
+          "max": 90
+        },
+        "app_mgpspiq1177": {
+          "start": 21,
+          "end": 86,
+          "min": 21,
+          "max": 86
+        },
+        "fatima_hassan": {
+          "start": 20,
+          "end": 60,
+          "min": 20,
+          "max": 61
+        },
+        "giulia_bianchi": {
+          "start": 20,
+          "end": 50,
+          "min": 20,
+          "max": 63
+        },
+        "app_mgpspj6u592": {
+          "start": 28,
+          "end": 28,
+          "min": 28,
+          "max": 28
+        }
+      },
+      "trustEndMean": 76.6,
+      "scholarTrustProxy": null,
+      "opinionTraj": {
+        "village_0": {
+          "name": "Emberhold",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_1": {
+          "name": "Stonebridge",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_2": {
+          "name": "Thornfield",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_3": {
+          "name": "Ashford",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_spl_26_93336": {
+          "name": "The Hungry Road",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_spl_31_87014": {
+          "name": "The Hungry Road II",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "opinionVerbs": {
+        "probationTick": 124
+      },
+      "opinionMoved": 0,
+      "linkTraj": {
+        "link_mgpspi4f651": {
+          "other": "village_0",
+          "start": 22,
+          "end": 0,
+          "min": 0,
+          "max": 27,
+          "seasoned": false
+        }
+      },
+      "linkCount": 1,
+      "linkSeasoned": 0,
+      "linkEventsByCause": {
+        "tribute-weekly": 6,
+        "aid-offer-accept": 4,
+        "renegotiation-silence": 1,
+        "succession-haircut": 4,
+        "titan-event": 2
+      },
+      "linkUnattributed": 0,
+      "linkGains": 10,
+      "gossipSeeds": 1456,
+      "gossipSeedsByAction": {
+        "departure": 648,
+        "deed": 72,
+        "order": 361,
+        "talk": 22,
+        "return": 209,
+        "give_food": 1,
+        "haven_built": 2,
+        "stash_skim": 1,
+        "changed": 13,
+        "ambush_cover_case_2": 1,
+        "ambush_target_case_2": 1,
+        "haven_need": 19,
+        "corpse-word": 11,
+        "rescue": 4,
+        "raid": 69,
+        "firstaccord": 1,
+        "fight": 16,
+        "loot_corpse": 4,
+        "broke_link_mgpspi4f651": 1
+      },
+      "gossipDeduped": 672,
+      "gossipUnclassified": 0,
+      "gossipHops": 5250,
+      "gossipHopsMutated": 1008,
+      "gossipMaxHearers": 12,
+      "gossipSecondReach": 430,
+      "gossipItemsAliveMax": 37,
+      "spreadRumor": 0,
+      "applyRep": 3564,
+      "applyRepWithMove": 0,
+      "repEndDiffs": {
+        "gen_r5kqwsf": {
+          "generous": 60,
+          "brave": 100,
+          "honest": -91,
+          "competent": 85
+        },
+        "petra_novak": {
+          "generous": 39,
+          "brave": 100,
+          "honest": -91,
+          "competent": 82
+        },
+        "chantal_mukendi": {
+          "generous": 33,
+          "brave": 100,
+          "honest": -91,
+          "competent": 83
+        },
+        "gen_95id7av": {
+          "generous": 41,
+          "brave": 100,
+          "honest": -86,
+          "competent": 83
+        },
+        "gen_s5kbnqc": {
+          "generous": 100,
+          "brave": 100,
+          "honest": -46,
+          "competent": 87
+        },
+        "ella_johnson": {
+          "generous": 100,
+          "brave": 100,
+          "honest": -11,
+          "competent": 88
+        },
+        "pavel_dubinin": {
+          "generous": 100,
+          "brave": 100,
+          "honest": -41,
+          "competent": 88,
+          "trustworthy": -12
+        },
+        "gen_u7uodyi": {
+          "generous": 100,
+          "brave": 100,
+          "honest": -68,
+          "competent": 92,
+          "trustworthy": -12
+        },
+        "gen_q8bbq4e": {
+          "generous": 59,
+          "brave": 100,
+          "honest": -86,
+          "competent": 92,
+          "trustworthy": -12
+        },
+        "yuki_mori": {
+          "generous": 100,
+          "brave": 99,
+          "honest": -28,
+          "competent": 88,
+          "trustworthy": -26
+        },
+        "sari_wulandari": {
+          "generous": 2,
+          "brave": 39,
+          "honest": -40,
+          "competent": 97
+        },
+        "amina_diallo": {
+          "generous": 2,
+          "brave": 32,
+          "honest": -62,
+          "competent": 100
+        },
+        "app_mgpsphj5708": {
+          "brave": 21,
+          "honest": -15,
+          "competent": 71
+        },
+        "app_mgpsphk5428": {
+          "brave": 28,
+          "honest": -100,
+          "competent": 100
+        },
+        "app_mgpspiq1177": {
+          "generous": 13,
+          "brave": 54,
+          "honest": -8,
+          "competent": 81
+        },
+        "fatima_hassan": {
+          "generous": 1,
+          "brave": 24,
+          "honest": -4,
+          "competent": 69
+        },
+        "giulia_bianchi": {
+          "generous": 9,
+          "brave": 14,
+          "honest": -4,
+          "competent": 57
+        },
+        "app_mgpspj6u592": {
+          "brave": 6,
+          "competent": 1
+        }
+      },
+      "repBySource": {
+        "observe": 445,
+        "gossip": 1048,
+        "other": 1
+      },
+      "repCrossings": 104,
+      "observe": 535,
+      "observeByAction": {
+        "order": 362,
+        "talk": 125,
+        "give_food": 1,
+        "accusation": 2,
+        "fight": 41,
+        "loot_corpse": 4
+      },
+      "moot": {
+        "mootQuorum": 2,
+        "mootFriendVoice": 1
+      },
+      "bondEvents": {
+        "npcBondTick": 124,
+        "npcLinkRaiseTick": 124,
+        "proposeBond": 4
+      },
+      "teleBond": 70,
+      "tendLink": 0,
+      "talkOpens": 125,
+      "endConvo": 125,
+      "endConvoStipends": 0,
+      "endConvoStipendTotal": 0,
+      "endConvoZeroExchange": 0,
+      "river": {
+        "evRiverTrader": 1
+      },
+      "trustSays": 200,
+      "villageTrustLines": 0,
+      "trustWordLines": 106,
+      "villageTrustLineTexts": [],
+      "villageTrustLineChecks": [],
+      "wrapLive": {
+        "spreadGossip": true,
+        "seedGossip": true,
+        "bumpTrust": true,
+        "trustGainProgressive": true,
+        "tele": true,
+        "gossipActionDims": true,
+        "applyRep": true,
+        "npcBondTick": true,
+        "npcLinkRaiseTick": true,
+        "probationTick": true,
+        "observe": true,
+        "talkTo": true,
+        "endConvo": true,
+        "mootQuorum": true,
+        "mootFriendVoice": true,
+        "proposeBond": true,
+        "evRiverTrader": true
+      },
+      "wrapCounts": {
+        "spreadGossip": 560,
+        "seedGossip": 1456,
+        "bumpTrust": 1692,
+        "trustGainProgressive": 2033,
+        "tele": 2720,
+        "gossipActionDims": 5457,
+        "applyRep": 3564,
+        "npcBondTick": 124,
+        "npcLinkRaiseTick": 124,
+        "probationTick": 124,
+        "observe": 535,
+        "talkTo": 125,
+        "endConvo": 125,
+        "mootQuorum": 2,
+        "mootFriendVoice": 1,
+        "proposeBond": 4,
+        "evRiverTrader": 1
+      }
+    },
+    {
+      "seed": 190214,
+      "file": "trustfirst-s190214-trustfirst-pilot-control.json",
+      "days": 150,
+      "endReason": "survived",
+      "won": false,
+      "villageLost": false,
+      "scaleRank": "regional",
+      "maxWave": 5,
+      "standing": 325,
+      "endPantryKcal": 4200,
+      "deaths": 66,
+      "instrumentErrors": 0,
+      "trustWrites": 1073,
+      "trustByCause": {
+        "bumpTrust": 911,
+        "applyRep-drift": 140,
+        "other-named:setTrust": 1,
+        "other-named:exposureFireTick": 2,
+        "other-named:tickNeeds": 1,
+        "other-named:convoConflictFallout": 5,
+        "other-named:eval": 1,
+        "other-named:G": 6,
+        "other-named:playerDeath": 6
+      },
+      "trustUpByCause": {
+        "bumpTrust": 897,
+        "applyRep-drift": 144,
+        "other-named:setTrust": 10,
+        "other-named:eval": 1,
+        "other-named:G": 15
+      },
+      "trustDownByCause": {
+        "bumpTrust": 199,
+        "other-named:exposureFireTick": 16,
+        "other-named:tickNeeds": 2,
+        "applyRep-drift": 9,
+        "other-named:convoConflictFallout": 10,
+        "other-named:playerDeath": 72
+      },
+      "trustUnclassified": 0,
+      "trustOtherNamed": [
+        "other-named:setTrust=1",
+        "other-named:exposureFireTick=2",
+        "other-named:tickNeeds=1",
+        "other-named:convoConflictFallout=5",
+        "other-named:eval=1",
+        "other-named:G=6",
+        "other-named:playerDeath=6"
+      ],
+      "bumpTrustWrap": 2526,
+      "evTrustAllWrap": 0,
+      "teleTrust": 913,
+      "bumpTrustNoSetterTwin": 2,
+      "reconIntervals": 1782,
+      "reconOk": 1781,
+      "reconResidue": [
+        {
+          "day": 146,
+          "vid": "desmond_clarke",
+          "snapDelta": 28,
+          "evSum": 0,
+          "gap": 28
+        }
+      ],
+      "reconResidueCount": 1,
+      "trustTraj": {
+        "gen_lld9yum": {
+          "start": 15,
+          "end": 15,
+          "min": 15,
+          "max": 15
+        },
+        "gen_i8l3xk4": {
+          "start": 17,
+          "end": 89,
+          "min": 17,
+          "max": 92
+        },
+        "gen_sezvdni": {
+          "start": 19,
+          "end": 64,
+          "min": 19,
+          "max": 90
+        },
+        "gen_vxcedwt": {
+          "start": 19,
+          "end": 90,
+          "min": 19,
+          "max": 90
+        },
+        "gen_djchea5": {
+          "start": 10,
+          "end": 90,
+          "min": 10,
+          "max": 90
+        },
+        "gen_lo6wukh": {
+          "start": 11,
+          "end": 90,
+          "min": 11,
+          "max": 91
+        },
+        "benoit_lambert": {
+          "start": 10,
+          "end": 90,
+          "min": 10,
+          "max": 90
+        },
+        "mara_vasquez": {
+          "start": 10,
+          "end": 79,
+          "min": 10,
+          "max": 93
+        },
+        "petra_novak": {
+          "start": 9,
+          "end": 91,
+          "min": 9,
+          "max": 91
+        },
+        "elijah_scott": {
+          "start": 14,
+          "end": 22,
+          "min": 6,
+          "max": 22
+        },
+        "grace_obi": {
+          "start": 11,
+          "end": 87,
+          "min": 11,
+          "max": 91
+        },
+        "nina_petrova": {
+          "start": 17,
+          "end": 91,
+          "min": 17,
+          "max": 91
+        },
+        "desmond_clarke": {
+          "start": 38,
+          "end": 50,
+          "min": 38,
+          "max": 50
+        }
+      },
+      "trustEndMean": 72.9,
+      "scholarTrustProxy": null,
+      "opinionTraj": {
+        "village_0": {
+          "name": "Emberhold",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_1": {
+          "name": "Stonebridge",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_2": {
+          "name": "Thornfield",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_3": {
+          "name": "Ashford",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_spl_26_36445": {
+          "name": "The Bloodied",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_spl_27_99884": {
+          "name": "The Hungry Road",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_spl_35_31366": {
+          "name": "The Hungry Road II",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "opinionVerbs": {
+        "probationTick": 150
+      },
+      "opinionMoved": 0,
+      "linkTraj": {
+        "link_mgpspikn700": {
+          "other": "village_1",
+          "start": 30,
+          "end": 4,
+          "min": 0,
+          "max": 52,
+          "seasoned": true
+        }
+      },
+      "linkCount": 1,
+      "linkSeasoned": 1,
+      "linkEventsByCause": {
+        "aid-beg-give": 1,
+        "tribute-weekly": 10,
+        "aid-offer-accept": 10,
+        "titan-event": 13,
+        "succession-haircut": 2
+      },
+      "linkUnattributed": 0,
+      "linkGains": 14,
+      "gossipSeeds": 1679,
+      "gossipSeedsByAction": {
+        "departure": 830,
+        "order": 268,
+        "talk": 109,
+        "return": 310,
+        "give_food": 1,
+        "haven_built": 3,
+        "haven_need": 4,
+        "deed": 65,
+        "corpse-word": 12,
+        "raid": 63,
+        "ambush_cover_case_2": 1,
+        "ambush_cover_case_4": 1,
+        "ambush_cover_case_6": 1,
+        "ambush_cover_case_8": 1,
+        "firstaccord": 1,
+        "fight": 6,
+        "loot_corpse": 2,
+        "death:benoit_lambert": 1
+      },
+      "gossipDeduped": 706,
+      "gossipUnclassified": 0,
+      "gossipHops": 7542,
+      "gossipHopsMutated": 1064,
+      "gossipMaxHearers": 11,
+      "gossipSecondReach": 535,
+      "gossipItemsAliveMax": 38,
+      "spreadRumor": 0,
+      "applyRep": 4888,
+      "applyRepWithMove": 0,
+      "repEndDiffs": {
+        "gen_i8l3xk4": {
+          "generous": 6,
+          "brave": 34,
+          "honest": -33,
+          "competent": 97
+        },
+        "nina_petrova": {
+          "generous": 10,
+          "brave": 40,
+          "honest": 7,
+          "competent": 99
+        },
+        "gen_vxcedwt": {
+          "generous": 37,
+          "brave": 45,
+          "honest": -17,
+          "competent": 96
+        },
+        "mara_vasquez": {
+          "generous": 10,
+          "brave": 55,
+          "competent": 98
+        },
+        "elijah_scott": {
+          "generous": 5,
+          "brave": 46,
+          "honest": 1,
+          "competent": 98
+        },
+        "gen_djchea5": {
+          "generous": 19,
+          "brave": 64,
+          "honest": -47,
+          "competent": 96,
+          "kind": -1
+        },
+        "petra_novak": {
+          "generous": 28,
+          "brave": 64,
+          "honest": -50,
+          "competent": 97,
+          "kind": -1
+        },
+        "grace_obi": {
+          "generous": 36,
+          "brave": 68,
+          "honest": -44,
+          "competent": 98,
+          "kind": -1
+        },
+        "benoit_lambert": {
+          "generous": 48,
+          "brave": 68,
+          "honest": -88,
+          "competent": 96,
+          "kind": -3
+        },
+        "gen_lo6wukh": {
+          "generous": 11,
+          "brave": 46,
+          "honest": -58,
+          "competent": 95,
+          "trustworthy": -100
+        },
+        "gen_sezvdni": {
+          "generous": 29,
+          "brave": 53,
+          "honest": -41,
+          "competent": 95,
+          "trustworthy": -93
+        },
+        "desmond_clarke": {
+          "honest": -1,
+          "competent": 3
+        }
+      },
+      "repBySource": {
+        "observe": 425,
+        "gossip": 1492,
+        "other": 5
+      },
+      "repCrossings": 66,
+      "observe": 452,
+      "observeByAction": {
+        "order": 268,
+        "talk": 154,
+        "give_food": 1,
+        "accusation": 2,
+        "fight": 25,
+        "loot_corpse": 2
+      },
+      "moot": {
+        "mootQuorum": 8,
+        "mootFriendVoice": 4
+      },
+      "bondEvents": {
+        "npcBondTick": 150,
+        "npcLinkRaiseTick": 150,
+        "proposeBond": 5
+      },
+      "teleBond": 67,
+      "tendLink": 0,
+      "talkOpens": 154,
+      "endConvo": 154,
+      "endConvoStipends": 0,
+      "endConvoStipendTotal": 0,
+      "endConvoZeroExchange": 0,
+      "river": {
+        "evRiverTrader": 1
+      },
+      "trustSays": 200,
+      "villageTrustLines": 0,
+      "trustWordLines": 70,
+      "villageTrustLineTexts": [],
+      "villageTrustLineChecks": [],
+      "wrapLive": {
+        "spreadGossip": true,
+        "seedGossip": true,
+        "gossipActionDims": true,
+        "bumpTrust": true,
+        "trustGainProgressive": true,
+        "tele": true,
+        "npcBondTick": true,
+        "npcLinkRaiseTick": true,
+        "probationTick": true,
+        "observe": true,
+        "applyRep": true,
+        "talkTo": true,
+        "endConvo": true,
+        "mootQuorum": true,
+        "mootFriendVoice": true,
+        "proposeBond": true,
+        "evRiverTrader": true
+      },
+      "wrapCounts": {
+        "spreadGossip": 673,
+        "seedGossip": 1679,
+        "gossipActionDims": 8263,
+        "bumpTrust": 2526,
+        "trustGainProgressive": 2810,
+        "tele": 2296,
+        "npcBondTick": 150,
+        "npcLinkRaiseTick": 150,
+        "probationTick": 150,
+        "observe": 452,
+        "applyRep": 4888,
+        "talkTo": 154,
+        "endConvo": 154,
+        "mootQuorum": 8,
+        "mootFriendVoice": 4,
+        "proposeBond": 5,
+        "evRiverTrader": 1
+      }
+    },
+    {
+      "seed": 190215,
+      "file": "trustfirst-s190215-trustfirst-pilot-control.json",
+      "days": 140,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 5,
+      "standing": 650,
+      "endPantryKcal": 431,
+      "deaths": 81,
+      "instrumentErrors": 0,
+      "trustWrites": 1312,
+      "trustByCause": {
+        "bumpTrust": 963,
+        "applyRep-drift": 264,
+        "other-named:setTrust": 43,
+        "other-named:convoConflictFallout": 2,
+        "other-named:exposureFireTick": 6,
+        "other-named:resolveCase": 3,
+        "other-named:_creditPantryGift": 10,
+        "other-named:takeFromPantry": 2,
+        "other-named:G": 8,
+        "other-named:playerDeath": 9,
+        "other-named:eval": 2
+      },
+      "trustUpByCause": {
+        "bumpTrust": 904,
+        "applyRep-drift": 252,
+        "other-named:setTrust": 157,
+        "other-named:_creditPantryGift": 20,
+        "other-named:G": 34,
+        "other-named:eval": 2
+      },
+      "trustDownByCause": {
+        "applyRep-drift": 101,
+        "bumpTrust": 165,
+        "other-named:convoConflictFallout": 4,
+        "other-named:exposureFireTick": 48,
+        "other-named:resolveCase": 60,
+        "other-named:takeFromPantry": 15,
+        "other-named:playerDeath": 148
+      },
+      "trustUnclassified": 0,
+      "trustOtherNamed": [
+        "other-named:setTrust=43",
+        "other-named:convoConflictFallout=2",
+        "other-named:exposureFireTick=6",
+        "other-named:resolveCase=3",
+        "other-named:_creditPantryGift=10",
+        "other-named:takeFromPantry=2",
+        "other-named:G=8",
+        "other-named:playerDeath=9",
+        "other-named:eval=2"
+      ],
+      "bumpTrustWrap": 1751,
+      "evTrustAllWrap": 0,
+      "teleTrust": 965,
+      "bumpTrustNoSetterTwin": 2,
+      "reconIntervals": 1811,
+      "reconOk": 1807,
+      "reconResidue": [
+        {
+          "day": 93,
+          "vid": "liam_davis",
+          "snapDelta": 17,
+          "evSum": 0,
+          "gap": 17
+        },
+        {
+          "day": 96,
+          "vid": "visjoin_94",
+          "snapDelta": 10,
+          "evSum": 0,
+          "gap": 10
+        },
+        {
+          "day": 103,
+          "vid": "visjoin_101",
+          "snapDelta": 10,
+          "evSum": 0,
+          "gap": 10
+        },
+        {
+          "day": 133,
+          "vid": "visjoin_131",
+          "snapDelta": 12,
+          "evSum": 0,
+          "gap": 12
+        }
+      ],
+      "reconResidueCount": 4,
+      "trustTraj": {
+        "gen_dah7cdj": {
+          "start": 15,
+          "end": 10,
+          "min": 10,
+          "max": 25
+        },
+        "gen_i9dphmw": {
+          "start": 27,
+          "end": 84,
+          "min": 27,
+          "max": 98
+        },
+        "gen_264q9v6": {
+          "start": 14,
+          "end": 91,
+          "min": 14,
+          "max": 100
+        },
+        "gen_9hvk1r2": {
+          "start": 10,
+          "end": 64,
+          "min": 10,
+          "max": 64
+        },
+        "gen_3bllm5y": {
+          "start": 10,
+          "end": 86,
+          "min": 10,
+          "max": 91
+        },
+        "gen_grrl2xf": {
+          "start": 7,
+          "end": 42,
+          "min": 7,
+          "max": 42
+        },
+        "pavel_dubinin": {
+          "start": 15,
+          "end": 66,
+          "min": 15,
+          "max": 92
+        },
+        "jovan_milic": {
+          "start": 20,
+          "end": 92,
+          "min": 15,
+          "max": 100
+        },
+        "tariq_mahmood": {
+          "start": 19,
+          "end": 75,
+          "min": 19,
+          "max": 92
+        },
+        "giulia_bianchi": {
+          "start": 12,
+          "end": 90,
+          "min": 12,
+          "max": 91
+        },
+        "owen_smith": {
+          "start": 18,
+          "end": 66,
+          "min": 18,
+          "max": 90
+        },
+        "aroha_ngata": {
+          "start": 13,
+          "end": 64,
+          "min": 13,
+          "max": 64
+        },
+        "liam_davis": {
+          "start": 27,
+          "end": 27,
+          "min": 27,
+          "max": 27
+        },
+        "visjoin_94": {
+          "start": 20,
+          "end": 80,
+          "min": 15,
+          "max": 94
+        },
+        "visjoin_101": {
+          "start": 20,
+          "end": 80,
+          "min": 20,
+          "max": 80
+        },
+        "visjoin_131": {
+          "start": 22,
+          "end": 49,
+          "min": 22,
+          "max": 49
+        }
+      },
+      "trustEndMean": 66.6,
+      "scholarTrustProxy": null,
+      "opinionTraj": {
+        "village_0": {
+          "name": "Emberhold",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_1": {
+          "name": "Stonebridge",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_2": {
+          "name": "Thornfield",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_spl_29_64967": {
+          "name": "The Hungry Road",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_spl_30_34905": {
+          "name": "The Hungry Road II",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "opinionVerbs": {
+        "probationTick": 139
+      },
+      "opinionMoved": 0,
+      "linkTraj": {
+        "link_mgpspikp418": {
+          "other": "village_2",
+          "start": 30,
+          "end": 15,
+          "min": 15,
+          "max": 36,
+          "seasoned": false
+        }
+      },
+      "linkCount": 1,
+      "linkSeasoned": 0,
+      "linkEventsByCause": {
+        "tribute-weekly": 6,
+        "titan-event": 5,
+        "succession-haircut": 1,
+        "aid-offer-accept": 3
+      },
+      "linkUnattributed": 0,
+      "linkGains": 8,
+      "gossipSeeds": 1304,
+      "gossipSeedsByAction": {
+        "departure": 521,
+        "deed": 62,
+        "order": 281,
+        "talk": 86,
+        "return": 199,
+        "give_food": 27,
+        "haven_need": 3,
+        "haven_built": 3,
+        "corpse-word": 17,
+        "raid": 45,
+        "ambush_cover_case_2": 1,
+        "ambush_target_case_2": 1,
+        "ambush_cover_case_4": 1,
+        "ambush_target_case_4": 1,
+        "death:gen_grrl2xf": 1,
+        "ambush_cover_case_6": 1,
+        "fight": 16,
+        "ambush_cover_case_8": 1,
+        "ambush_target_case_8": 1,
+        "donate": 6,
+        "feast": 5,
+        "feast-draw": 5,
+        "changed": 7,
+        "death": 4,
+        "loot_corpse": 3,
+        "rescue": 3,
+        "firstaccord": 1,
+        "death:liam_davis": 1,
+        "broke_link_mgpspikp418": 1
+      },
+      "gossipDeduped": 475,
+      "gossipUnclassified": 0,
+      "gossipHops": 4690,
+      "gossipHopsMutated": 851,
+      "gossipMaxHearers": 11,
+      "gossipSecondReach": 542,
+      "gossipItemsAliveMax": 37,
+      "spreadRumor": 0,
+      "applyRep": 3601,
+      "applyRepWithMove": 0,
+      "repEndDiffs": {
+        "gen_i9dphmw": {
+          "generous": 100,
+          "brave": 100,
+          "honest": -64,
+          "competent": 82
+        },
+        "gen_9hvk1r2": {
+          "generous": 100,
+          "brave": 49,
+          "honest": -98,
+          "competent": 86
+        },
+        "gen_264q9v6": {
+          "generous": 100,
+          "brave": 100,
+          "honest": -62,
+          "competent": 87
+        },
+        "jovan_milic": {
+          "generous": 100,
+          "brave": 100,
+          "honest": -92,
+          "competent": 87
+        },
+        "gen_3bllm5y": {
+          "generous": 100,
+          "brave": 79,
+          "honest": -25,
+          "competent": 90,
+          "kind": -3
+        },
+        "tariq_mahmood": {
+          "generous": 100,
+          "brave": 82,
+          "honest": -24,
+          "competent": 91,
+          "kind": -4
+        },
+        "pavel_dubinin": {
+          "generous": 100,
+          "brave": 81,
+          "honest": -17,
+          "competent": 94,
+          "trustworthy": -22,
+          "kind": -6
+        },
+        "gen_grrl2xf": {
+          "generous": 49,
+          "brave": 19,
+          "honest": 17,
+          "competent": 81,
+          "trustworthy": -72
+        },
+        "aroha_ngata": {
+          "generous": 100,
+          "brave": 27,
+          "honest": -6,
+          "competent": 97,
+          "trustworthy": -22
+        },
+        "giulia_bianchi": {
+          "generous": 100,
+          "brave": 88,
+          "honest": 4,
+          "competent": 97,
+          "trustworthy": -22,
+          "kind": -1
+        },
+        "owen_smith": {
+          "generous": 32,
+          "brave": 58,
+          "honest": -4,
+          "competent": 94,
+          "trustworthy": -18
+        },
+        "liam_davis": {
+          "brave": 12,
+          "honest": -1,
+          "competent": 4
+        },
+        "visjoin_94": {
+          "brave": 4,
+          "honest": -49,
+          "competent": 100
+        },
+        "visjoin_101": {
+          "honest": -61,
+          "competent": 84
+        },
+        "visjoin_131": {
+          "generous": 2,
+          "honest": -6,
+          "competent": 20
+        }
+      },
+      "repBySource": {
+        "observe": 602,
+        "gossip": 1130,
+        "other": 8
+      },
+      "repCrossings": 80,
+      "observe": 514,
+      "observeByAction": {
+        "order": 281,
+        "talk": 147,
+        "give_food": 27,
+        "accusation": 6,
+        "fight": 40,
+        "donate": 10,
+        "loot_corpse": 3
+      },
+      "moot": {
+        "mootQuorum": 8,
+        "mootFriendVoice": 4
+      },
+      "bondEvents": {
+        "npcBondTick": 139,
+        "npcLinkRaiseTick": 139,
+        "proposeBond": 3
+      },
+      "teleBond": 36,
+      "tendLink": 0,
+      "talkOpens": 147,
+      "endConvo": 147,
+      "endConvoStipends": 0,
+      "endConvoStipendTotal": 0,
+      "endConvoZeroExchange": 0,
+      "river": {
+        "evRiverTrader": 1
+      },
+      "trustSays": 200,
+      "villageTrustLines": 0,
+      "trustWordLines": 86,
+      "villageTrustLineTexts": [],
+      "villageTrustLineChecks": [],
+      "wrapLive": {
+        "spreadGossip": true,
+        "seedGossip": true,
+        "bumpTrust": true,
+        "trustGainProgressive": true,
+        "tele": true,
+        "observe": true,
+        "applyRep": true,
+        "gossipActionDims": true,
+        "npcBondTick": true,
+        "npcLinkRaiseTick": true,
+        "probationTick": true,
+        "talkTo": true,
+        "endConvo": true,
+        "mootQuorum": true,
+        "mootFriendVoice": true,
+        "proposeBond": true,
+        "evRiverTrader": true
+      },
+      "wrapCounts": {
+        "spreadGossip": 664,
+        "seedGossip": 1304,
+        "bumpTrust": 1751,
+        "trustGainProgressive": 2244,
+        "tele": 2687,
+        "observe": 514,
+        "applyRep": 3601,
+        "gossipActionDims": 4810,
+        "npcBondTick": 139,
+        "npcLinkRaiseTick": 139,
+        "probationTick": 139,
+        "talkTo": 147,
+        "endConvo": 147,
+        "mootQuorum": 8,
+        "mootFriendVoice": 4,
+        "proposeBond": 3,
+        "evRiverTrader": 1
+      }
+    },
+    {
+      "seed": 190216,
+      "file": "trustfirst-s190216-trustfirst-pilot-control.json",
+      "days": 90,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "endPantryKcal": 4002,
+      "deaths": 65,
+      "instrumentErrors": 0,
+      "trustWrites": 1269,
+      "trustByCause": {
+        "bumpTrust": 934,
+        "applyRep-drift": 296,
+        "other-named:setTrust": 6,
+        "other-named:exposureFireTick": 4,
+        "other-named:eval": 2,
+        "other-named:_creditPantryGift": 6,
+        "other-named:takeFromPantry": 2,
+        "other-named:G": 5,
+        "other-named:playerDeath": 14
+      },
+      "trustUpByCause": {
+        "bumpTrust": 963,
+        "applyRep-drift": 222,
+        "other-named:setTrust": 51,
+        "other-named:eval": 4,
+        "other-named:_creditPantryGift": 21,
+        "other-named:G": 14,
+        "other-named:playerDeath": 13
+      },
+      "trustDownByCause": {
+        "applyRep-drift": 98,
+        "other-named:exposureFireTick": 32,
+        "bumpTrust": 21,
+        "other-named:takeFromPantry": 22,
+        "other-named:playerDeath": 173
+      },
+      "trustUnclassified": 0,
+      "trustOtherNamed": [
+        "other-named:setTrust=6",
+        "other-named:exposureFireTick=4",
+        "other-named:eval=2",
+        "other-named:_creditPantryGift=6",
+        "other-named:takeFromPantry=2",
+        "other-named:G=5",
+        "other-named:playerDeath=14"
+      ],
+      "bumpTrustWrap": 1201,
+      "evTrustAllWrap": 0,
+      "teleTrust": 937,
+      "bumpTrustNoSetterTwin": 2,
+      "reconIntervals": 1224,
+      "reconOk": 1218,
+      "reconResidue": [
+        {
+          "day": 57,
+          "vid": "app_mgpsphi9592",
+          "snapDelta": 10,
+          "evSum": 0,
+          "gap": 10
+        },
+        {
+          "day": 60,
+          "vid": "visjoin_58",
+          "snapDelta": 12,
+          "evSum": 0,
+          "gap": 12
+        },
+        {
+          "day": 60,
+          "vid": "rosa_mendez",
+          "snapDelta": 11,
+          "evSum": 0,
+          "gap": 11
+        },
+        {
+          "day": 61,
+          "vid": "dale_hoffman",
+          "snapDelta": 11,
+          "evSum": 0,
+          "gap": 11
+        },
+        {
+          "day": 64,
+          "vid": "nikos_papadopoulos",
+          "snapDelta": 10,
+          "evSum": 0,
+          "gap": 10
+        },
+        {
+          "day": 64,
+          "vid": "daniyar_askarov",
+          "snapDelta": 10,
+          "evSum": 0,
+          "gap": 10
+        }
+      ],
+      "reconResidueCount": 6,
+      "trustTraj": {
+        "gen_vzn4l95": {
+          "start": 15,
+          "end": 10,
+          "min": 10,
+          "max": 32
+        },
+        "gen_uhvtq89": {
+          "start": 12,
+          "end": 87,
+          "min": 12,
+          "max": 90
+        },
+        "gen_hg1v0ob": {
+          "start": 8,
+          "end": 79,
+          "min": 8,
+          "max": 90
+        },
+        "gen_xwifrll": {
+          "start": 11,
+          "end": 90,
+          "min": 11,
+          "max": 90
+        },
+        "gen_b68j1w3": {
+          "start": 10,
+          "end": 90,
+          "min": 10,
+          "max": 90
+        },
+        "gen_b7c9zc9": {
+          "start": 19,
+          "end": 63,
+          "min": 19,
+          "max": 90
+        },
+        "fatima_hassan": {
+          "start": 6,
+          "end": 26,
+          "min": 6,
+          "max": 26
+        },
+        "nadia_khoury": {
+          "start": 18,
+          "end": 84,
+          "min": 18,
+          "max": 91
+        },
+        "stan_kowalski": {
+          "start": 15,
+          "end": 80,
+          "min": 15,
+          "max": 91
+        },
+        "lucas_brown": {
+          "start": 8,
+          "end": 84,
+          "min": 8,
+          "max": 90
+        },
+        "nathan_lee": {
+          "start": 17,
+          "end": 86,
+          "min": 17,
+          "max": 90
+        },
+        "elijah_scott": {
+          "start": 13,
+          "end": 83,
+          "min": 13,
+          "max": 90
+        },
+        "app_mgpsphi9592": {
+          "start": 20,
+          "end": 20,
+          "min": 20,
+          "max": 20
+        },
+        "visjoin_58": {
+          "start": 22,
+          "end": 72,
+          "min": 22,
+          "max": 90
+        },
+        "rosa_mendez": {
+          "start": 21,
+          "end": 78,
+          "min": 14,
+          "max": 90
+        },
+        "dale_hoffman": {
+          "start": 21,
+          "end": 65,
+          "min": 20,
+          "max": 77
+        },
+        "nikos_papadopoulos": {
+          "start": 20,
+          "end": 50,
+          "min": 14,
+          "max": 57
+        },
+        "daniyar_askarov": {
+          "start": 20,
+          "end": 60,
+          "min": 20,
+          "max": 73
+        }
+      },
+      "trustEndMean": 67.1,
+      "scholarTrustProxy": null,
+      "opinionTraj": {
+        "village_0": {
+          "name": "Emberhold",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_1": {
+          "name": "Stonebridge",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_2": {
+          "name": "Thornfield",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_3": {
+          "name": "Ashford",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_spl_26_5810": {
+          "name": "The Red Table",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_spl_30_34009": {
+          "name": "The Red Table II",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_spl_32_48609": {
+          "name": "The Bloodied",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "opinionVerbs": {
+        "probationTick": 89
+      },
+      "opinionMoved": 0,
+      "linkTraj": {
+        "link_mgpspi06223": {
+          "other": "village_0",
+          "start": 30,
+          "end": 30,
+          "min": 20,
+          "max": 36,
+          "seasoned": false
+        }
+      },
+      "linkCount": 1,
+      "linkSeasoned": 0,
+      "linkEventsByCause": {
+        "aid-offer-accept": 6,
+        "tribute-weekly": 6,
+        "succession-haircut": 3,
+        "renegotiation-silence": 1
+      },
+      "linkUnattributed": 0,
+      "linkGains": 9,
+      "gossipSeeds": 1003,
+      "gossipSeedsByAction": {
+        "departure": 393,
+        "order": 277,
+        "talk": 16,
+        "deed": 49,
+        "return": 157,
+        "give_food": 2,
+        "haven_built": 1,
+        "changed": 5,
+        "corpse-word": 18,
+        "stash_skim": 3,
+        "raid": 35,
+        "haven_need": 13,
+        "fight": 11,
+        "ambush_cover_case_3": 1,
+        "ambush_target_case_3": 1,
+        "firstaccord": 1,
+        "feast": 3,
+        "feast-draw": 3,
+        "death": 3,
+        "ambush_cover_case_5": 1,
+        "ambush_target_case_5": 1,
+        "loot_corpse": 4,
+        "donate": 1,
+        "ambush_cover_case_8": 1,
+        "ambush_cover_case_10": 1,
+        "ambush_cover_case_12": 1,
+        "ambush_target_case_12": 1
+      },
+      "gossipDeduped": 420,
+      "gossipUnclassified": 0,
+      "gossipHops": 4144,
+      "gossipHopsMutated": 822,
+      "gossipMaxHearers": 11,
+      "gossipSecondReach": 319,
+      "gossipItemsAliveMax": 45,
+      "spreadRumor": 0,
+      "applyRep": 2852,
+      "applyRepWithMove": 0,
+      "repEndDiffs": {
+        "gen_uhvtq89": {
+          "generous": 26,
+          "brave": 77,
+          "honest": -93,
+          "competent": 96,
+          "trustworthy": -39
+        },
+        "nadia_khoury": {
+          "generous": 19,
+          "brave": 92,
+          "honest": -98,
+          "competent": 97,
+          "trustworthy": -39
+        },
+        "gen_xwifrll": {
+          "generous": 51,
+          "brave": 100,
+          "honest": -97,
+          "competent": 96
+        },
+        "stan_kowalski": {
+          "generous": 26,
+          "brave": 100,
+          "honest": -98,
+          "competent": 98,
+          "trustworthy": -91
+        },
+        "gen_hg1v0ob": {
+          "generous": 25,
+          "brave": 60,
+          "honest": -30,
+          "competent": 94,
+          "trustworthy": -20
+        },
+        "nathan_lee": {
+          "generous": 11,
+          "brave": 83,
+          "honest": 30,
+          "competent": 96,
+          "trustworthy": -55
+        },
+        "elijah_scott": {
+          "generous": 26,
+          "brave": 83,
+          "honest": 9,
+          "competent": 96,
+          "trustworthy": -20
+        },
+        "gen_b68j1w3": {
+          "generous": 10,
+          "brave": 85,
+          "honest": -2,
+          "competent": 94,
+          "trustworthy": -20
+        },
+        "gen_b7c9zc9": {
+          "generous": 100,
+          "brave": 100,
+          "honest": -40,
+          "competent": 100,
+          "kind": -1
+        },
+        "lucas_brown": {
+          "generous": 27,
+          "brave": 100,
+          "honest": -68,
+          "competent": 100,
+          "kind": -3
+        },
+        "fatima_hassan": {
+          "generous": 50,
+          "brave": 100,
+          "honest": -40,
+          "competent": 100,
+          "kind": -1
+        },
+        "visjoin_58": {
+          "generous": 7,
+          "brave": 4,
+          "honest": -43,
+          "competent": 100,
+          "kind": -3
+        },
+        "rosa_mendez": {
+          "generous": 14,
+          "brave": 15,
+          "honest": -38,
+          "competent": 100
+        },
+        "dale_hoffman": {
+          "brave": 8,
+          "honest": -15,
+          "competent": 94
+        },
+        "nikos_papadopoulos": {
+          "generous": 7,
+          "brave": 20,
+          "honest": -29,
+          "competent": 87
+        },
+        "daniyar_askarov": {
+          "generous": 10,
+          "brave": 14,
+          "honest": -12,
+          "competent": 74
+        }
+      },
+      "repBySource": {
+        "observe": 284,
+        "gossip": 1067,
+        "other": 7
+      },
+      "repCrossings": 87,
+      "observe": 418,
+      "observeByAction": {
+        "order": 277,
+        "talk": 93,
+        "give_food": 2,
+        "accusation": 4,
+        "fight": 31,
+        "donate": 7,
+        "loot_corpse": 4
+      },
+      "moot": {
+        "mootQuorum": 10,
+        "mootFriendVoice": 5
+      },
+      "bondEvents": {
+        "npcBondTick": 89,
+        "npcLinkRaiseTick": 89,
+        "proposeBond": 2
+      },
+      "teleBond": 38,
+      "tendLink": 0,
+      "talkOpens": 93,
+      "endConvo": 93,
+      "endConvoStipends": 0,
+      "endConvoStipendTotal": 0,
+      "endConvoZeroExchange": 0,
+      "river": {
+        "evRiverTrader": 1
+      },
+      "trustSays": 200,
+      "villageTrustLines": 0,
+      "trustWordLines": 102,
+      "villageTrustLineTexts": [],
+      "villageTrustLineChecks": [],
+      "wrapLive": {
+        "spreadGossip": true,
+        "seedGossip": true,
+        "bumpTrust": true,
+        "trustGainProgressive": true,
+        "tele": true,
+        "gossipActionDims": true,
+        "npcBondTick": true,
+        "npcLinkRaiseTick": true,
+        "probationTick": true,
+        "observe": true,
+        "applyRep": true,
+        "talkTo": true,
+        "endConvo": true,
+        "proposeBond": true,
+        "evRiverTrader": true,
+        "mootQuorum": true,
+        "mootFriendVoice": true
+      },
+      "wrapCounts": {
+        "spreadGossip": 418,
+        "seedGossip": 1003,
+        "bumpTrust": 1201,
+        "trustGainProgressive": 1436,
+        "tele": 2448,
+        "gossipActionDims": 4155,
+        "npcBondTick": 89,
+        "npcLinkRaiseTick": 89,
+        "probationTick": 89,
+        "observe": 418,
+        "applyRep": 2852,
+        "talkTo": 93,
+        "endConvo": 93,
+        "proposeBond": 2,
+        "evRiverTrader": 1,
+        "mootQuorum": 10,
+        "mootFriendVoice": 5
+      }
+    },
+    {
+      "seed": 190217,
+      "file": "trustfirst-s190217-trustfirst-pilot-control.json",
+      "days": 132,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "endPantryKcal": 0,
+      "deaths": 95,
+      "instrumentErrors": 0,
+      "trustWrites": 1158,
+      "trustByCause": {
+        "bumpTrust": 830,
+        "applyRep-drift": 284,
+        "other-named:setTrust": 15,
+        "other-named:exposureFireTick": 1,
+        "other-named:convoConflictFallout": 4,
+        "other-named:eval": 1,
+        "other-named:takeFromPantry": 1,
+        "other-named:G": 5,
+        "other-named:playerDeath": 12,
+        "other-named:_creditPantryGift": 5
+      },
+      "trustUpByCause": {
+        "bumpTrust": 766,
+        "applyRep-drift": 326,
+        "other-named:setTrust": 38,
+        "other-named:eval": 3,
+        "other-named:G": 21,
+        "other-named:_creditPantryGift": 5,
+        "other-named:playerDeath": 16
+      },
+      "trustDownByCause": {
+        "applyRep-drift": 40,
+        "bumpTrust": 154,
+        "other-named:exposureFireTick": 8,
+        "other-named:convoConflictFallout": 8,
+        "other-named:takeFromPantry": 5,
+        "other-named:playerDeath": 96
+      },
+      "trustUnclassified": 0,
+      "trustOtherNamed": [
+        "other-named:setTrust=15",
+        "other-named:exposureFireTick=1",
+        "other-named:convoConflictFallout=4",
+        "other-named:eval=1",
+        "other-named:takeFromPantry=1",
+        "other-named:G=5",
+        "other-named:playerDeath=12",
+        "other-named:_creditPantryGift=5"
+      ],
+      "bumpTrustWrap": 2157,
+      "evTrustAllWrap": 0,
+      "teleTrust": 832,
+      "bumpTrustNoSetterTwin": 2,
+      "reconIntervals": 1746,
+      "reconOk": 1739,
+      "reconResidue": [
+        {
+          "day": 81,
+          "vid": "app_mgpsphlp697",
+          "snapDelta": 11,
+          "evSum": 0,
+          "gap": 11
+        },
+        {
+          "day": 83,
+          "vid": "thabo_maseko",
+          "snapDelta": 10,
+          "evSum": 0,
+          "gap": 10
+        },
+        {
+          "day": 83,
+          "vid": "app_mgpsphms601",
+          "snapDelta": 10,
+          "evSum": 0,
+          "gap": 10
+        },
+        {
+          "day": 125,
+          "vid": "app_mgpspjem169",
+          "snapDelta": 14,
+          "evSum": 0,
+          "gap": 14
+        },
+        {
+          "day": 125,
+          "vid": "nathan_lee",
+          "snapDelta": 3,
+          "evSum": 0,
+          "gap": 3
+        },
+        {
+          "day": 126,
+          "vid": "oliver_moore",
+          "snapDelta": 11,
+          "evSum": 0,
+          "gap": 11
+        },
+        {
+          "day": 129,
+          "vid": "miguel_santos",
+          "snapDelta": 11,
+          "evSum": 0,
+          "gap": 11
+        }
+      ],
+      "reconResidueCount": 7,
+      "trustTraj": {
+        "gen_9x4hjuy": {
+          "start": 15,
+          "end": 10,
+          "min": 10,
+          "max": 15
+        },
+        "gen_bv2huu7": {
+          "start": 14,
+          "end": 71,
+          "min": 14,
+          "max": 71
+        },
+        "gen_ue17l3a": {
+          "start": 17,
+          "end": 91,
+          "min": 17,
+          "max": 91
+        },
+        "gen_zep35jk": {
+          "start": 25,
+          "end": 82,
+          "min": 25,
+          "max": 91
+        },
+        "gen_xgqbi7c": {
+          "start": 21,
+          "end": 87,
+          "min": 21,
+          "max": 91
+        },
+        "gen_6vcdf6c": {
+          "start": 18,
+          "end": 90,
+          "min": 18,
+          "max": 93
+        },
+        "ivy_wang": {
+          "start": 25,
+          "end": 90,
+          "min": 25,
+          "max": 92
+        },
+        "boris_kowalski": {
+          "start": 20,
+          "end": 90,
+          "min": 20,
+          "max": 92
+        },
+        "giulia_bianchi": {
+          "start": 6,
+          "end": 7,
+          "min": 6,
+          "max": 7
+        },
+        "hassan_ali": {
+          "start": 18,
+          "end": 83,
+          "min": 18,
+          "max": 90
+        },
+        "daniyar_askarov": {
+          "start": 21,
+          "end": 86,
+          "min": 21,
+          "max": 92
+        },
+        "zoe_adams": {
+          "start": 17,
+          "end": 60,
+          "min": 0,
+          "max": 90
+        },
+        "app_mgpsphlp697": {
+          "start": 21,
+          "end": 71,
+          "min": 21,
+          "max": 71
+        },
+        "thabo_maseko": {
+          "start": 20,
+          "end": 72,
+          "min": 20,
+          "max": 72
+        },
+        "app_mgpsphms601": {
+          "start": 20,
+          "end": 69,
+          "min": 20,
+          "max": 69
+        },
+        "app_mgpspjem169": {
+          "start": 24,
+          "end": 39,
+          "min": 24,
+          "max": 39
+        },
+        "nathan_lee": {
+          "start": 13,
+          "end": 37,
+          "min": 13,
+          "max": 37
+        },
+        "oliver_moore": {
+          "start": 21,
+          "end": 25,
+          "min": 21,
+          "max": 25
+        },
+        "miguel_santos": {
+          "start": 21,
+          "end": 33,
+          "min": 21,
+          "max": 33
+        }
+      },
+      "trustEndMean": 62.8,
+      "scholarTrustProxy": null,
+      "opinionTraj": {
+        "village_0": {
+          "name": "Emberhold",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_1": {
+          "name": "Stonebridge",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_2": {
+          "name": "Thornfield",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_3": {
+          "name": "Ashford",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_spl_24_50479": {
+          "name": "The Bloodied",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_spl_26_65641": {
+          "name": "The Hungry Road",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_spl_28_88666": {
+          "name": "The Red Table",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "opinionVerbs": {
+        "probationTick": 132
+      },
+      "opinionMoved": 0,
+      "linkTraj": {
+        "link_mgpspi8i167": {
+          "other": "village_spl_26_65641",
+          "start": 34,
+          "end": 21,
+          "min": 17,
+          "max": 49,
+          "seasoned": true
+        }
+      },
+      "linkCount": 1,
+      "linkSeasoned": 1,
+      "linkEventsByCause": {
+        "aid-beg-give": 9,
+        "tribute-weekly": 8,
+        "succession-haircut": 4,
+        "titan-event": 5
+      },
+      "linkUnattributed": 0,
+      "linkGains": 13,
+      "gossipSeeds": 1284,
+      "gossipSeedsByAction": {
+        "departure": 477,
+        "order": 342,
+        "talk": 69,
+        "stash_skim": 1,
+        "give_food": 6,
+        "haven_built": 3,
+        "return": 204,
+        "haven_need": 2,
+        "deed": 65,
+        "changed": 6,
+        "ambush_cover_case_2": 1,
+        "ambush_cover_case_4": 1,
+        "ambush_target_case_4": 1,
+        "raid": 71,
+        "death": 4,
+        "death:giulia_bianchi": 1,
+        "ambush_cover_case_6": 1,
+        "loot_corpse": 3,
+        "fight": 10,
+        "firstaccord": 1,
+        "corpse-word": 10,
+        "donate": 1,
+        "feast": 2,
+        "feast-draw": 2
+      },
+      "gossipDeduped": 507,
+      "gossipUnclassified": 0,
+      "gossipHops": 4874,
+      "gossipHopsMutated": 959,
+      "gossipMaxHearers": 11,
+      "gossipSecondReach": 460,
+      "gossipItemsAliveMax": 35,
+      "spreadRumor": 0,
+      "applyRep": 3601,
+      "applyRepWithMove": 0,
+      "repEndDiffs": {
+        "gen_bv2huu7": {
+          "generous": 55,
+          "brave": 70,
+          "honest": -25,
+          "competent": 93
+        },
+        "hassan_ali": {
+          "generous": 42,
+          "brave": 69,
+          "honest": -87,
+          "competent": 91
+        },
+        "gen_6vcdf6c": {
+          "generous": 56,
+          "brave": 59,
+          "honest": -69,
+          "competent": 95
+        },
+        "gen_ue17l3a": {
+          "generous": 61,
+          "brave": 100,
+          "honest": -91,
+          "competent": 83,
+          "trustworthy": -21
+        },
+        "giulia_bianchi": {
+          "generous": -15,
+          "brave": 69,
+          "honest": -39,
+          "competent": 63,
+          "trustworthy": -81
+        },
+        "ivy_wang": {
+          "generous": 62,
+          "brave": 100,
+          "honest": -42,
+          "competent": 84,
+          "trustworthy": -21
+        },
+        "zoe_adams": {
+          "generous": 68,
+          "brave": 100,
+          "honest": -36,
+          "competent": 84,
+          "trustworthy": -21
+        },
+        "gen_zep35jk": {
+          "generous": 29,
+          "brave": 4,
+          "honest": -90,
+          "competent": 87,
+          "kind": -1
+        },
+        "gen_xgqbi7c": {
+          "generous": 41,
+          "brave": -5,
+          "honest": -28,
+          "competent": 88,
+          "kind": -3
+        },
+        "daniyar_askarov": {
+          "generous": 38,
+          "brave": 57,
+          "honest": -4,
+          "competent": 97
+        },
+        "boris_kowalski": {
+          "generous": 28,
+          "brave": 53,
+          "honest": -42,
+          "competent": 99
+        },
+        "app_mgpsphlp697": {
+          "generous": 6,
+          "brave": 40,
+          "honest": -8,
+          "competent": 73
+        },
+        "thabo_maseko": {
+          "brave": 40,
+          "honest": -5,
+          "competent": 67
+        },
+        "app_mgpsphms601": {
+          "generous": 1,
+          "brave": 32,
+          "honest": -11,
+          "competent": 69
+        },
+        "nathan_lee": {
+          "honest": -21,
+          "competent": 39
+        },
+        "app_mgpspjem169": {
+          "honest": -1,
+          "competent": 3
+        },
+        "oliver_moore": {
+          "honest": -1,
+          "competent": 4
+        },
+        "miguel_santos": {
+          "honest": -4,
+          "competent": 18
+        }
+      },
+      "repBySource": {
+        "observe": 607,
+        "gossip": 1145,
+        "other": 4
+      },
+      "repCrossings": 90,
+      "observe": 526,
+      "observeByAction": {
+        "order": 345,
+        "talk": 135,
+        "give_food": 6,
+        "accusation": 2,
+        "loot_corpse": 4,
+        "fight": 27,
+        "donate": 7
+      },
+      "moot": {
+        "mootQuorum": 6,
+        "mootFriendVoice": 3
+      },
+      "bondEvents": {
+        "npcBondTick": 132,
+        "npcLinkRaiseTick": 132,
+        "proposeBond": 6
+      },
+      "teleBond": 52,
+      "tendLink": 0,
+      "talkOpens": 135,
+      "endConvo": 135,
+      "endConvoStipends": 0,
+      "endConvoStipendTotal": 0,
+      "endConvoZeroExchange": 0,
+      "river": {
+        "evRiverTrader": 1
+      },
+      "trustSays": 200,
+      "villageTrustLines": 0,
+      "trustWordLines": 55,
+      "villageTrustLineTexts": [],
+      "villageTrustLineChecks": [],
+      "wrapLive": {
+        "spreadGossip": true,
+        "seedGossip": true,
+        "gossipActionDims": true,
+        "bumpTrust": true,
+        "trustGainProgressive": true,
+        "tele": true,
+        "npcBondTick": true,
+        "npcLinkRaiseTick": true,
+        "probationTick": true,
+        "observe": true,
+        "applyRep": true,
+        "talkTo": true,
+        "endConvo": true,
+        "mootQuorum": true,
+        "mootFriendVoice": true,
+        "proposeBond": true,
+        "evRiverTrader": true
+      },
+      "wrapCounts": {
+        "spreadGossip": 612,
+        "seedGossip": 1284,
+        "gossipActionDims": 4923,
+        "bumpTrust": 2157,
+        "trustGainProgressive": 2680,
+        "tele": 2730,
+        "npcBondTick": 132,
+        "npcLinkRaiseTick": 132,
+        "probationTick": 132,
+        "observe": 526,
+        "applyRep": 3601,
+        "talkTo": 135,
+        "endConvo": 135,
+        "mootQuorum": 6,
+        "mootFriendVoice": 3,
+        "proposeBond": 6,
+        "evRiverTrader": 1
+      }
+    },
+    {
+      "seed": 190218,
+      "file": "trustfirst-s190218-trustfirst-pilot-control.json",
+      "days": 129,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "endPantryKcal": 0,
+      "deaths": 98,
+      "instrumentErrors": 0,
+      "trustWrites": 1138,
+      "trustByCause": {
+        "bumpTrust": 828,
+        "applyRep-drift": 261,
+        "other-named:setTrust": 19,
+        "other-named:exposureFireTick": 3,
+        "other-named:takeFromPantry": 1,
+        "other-named:arenaAct": 2,
+        "other-named:G": 11,
+        "other-named:playerDeath": 10,
+        "other-named:convoConflictFallout": 2,
+        "other-named:tickNeeds": 1
+      },
+      "trustUpByCause": {
+        "bumpTrust": 794,
+        "applyRep-drift": 191,
+        "other-named:setTrust": 68,
+        "other-named:arenaAct": 30,
+        "other-named:G": 98
+      },
+      "trustDownByCause": {
+        "applyRep-drift": 103,
+        "bumpTrust": 108,
+        "other-named:exposureFireTick": 24,
+        "other-named:takeFromPantry": 5,
+        "other-named:playerDeath": 150,
+        "other-named:convoConflictFallout": 4,
+        "other-named:tickNeeds": 2
+      },
+      "trustUnclassified": 0,
+      "trustOtherNamed": [
+        "other-named:setTrust=19",
+        "other-named:exposureFireTick=3",
+        "other-named:takeFromPantry=1",
+        "other-named:arenaAct=2",
+        "other-named:G=11",
+        "other-named:playerDeath=10",
+        "other-named:convoConflictFallout=2",
+        "other-named:tickNeeds=1"
+      ],
+      "bumpTrustWrap": 1886,
+      "evTrustAllWrap": 0,
+      "teleTrust": 831,
+      "bumpTrustNoSetterTwin": 3,
+      "reconIntervals": 1518,
+      "reconOk": 1516,
+      "reconResidue": [
+        {
+          "day": 114,
+          "vid": "visjoin_112",
+          "snapDelta": 12,
+          "evSum": 0,
+          "gap": 12
+        },
+        {
+          "day": 128,
+          "vid": "visjoin_126",
+          "snapDelta": 30,
+          "evSum": 0,
+          "gap": 30
+        }
+      ],
+      "reconResidueCount": 2,
+      "trustTraj": {
+        "gen_hng82mq": {
+          "start": 15,
+          "end": 40,
+          "min": 10,
+          "max": 40
+        },
+        "gen_1mwe970": {
+          "start": 0,
+          "end": 83,
+          "min": 0,
+          "max": 90
+        },
+        "gen_cksannp": {
+          "start": 19,
+          "end": 65,
+          "min": 19,
+          "max": 91
+        },
+        "gen_2u7y2rz": {
+          "start": 9,
+          "end": 90,
+          "min": 9,
+          "max": 100
+        },
+        "gen_r3sejbc": {
+          "start": 18,
+          "end": 92,
+          "min": 12,
+          "max": 100
+        },
+        "gen_aash9y5": {
+          "start": 19,
+          "end": 80,
+          "min": 19,
+          "max": 93
+        },
+        "lena_ruiz": {
+          "start": 21,
+          "end": 89,
+          "min": 21,
+          "max": 94
+        },
+        "sigrun_eiriksdottir": {
+          "start": 19,
+          "end": 86,
+          "min": 19,
+          "max": 93
+        },
+        "rafael_torres": {
+          "start": 18,
+          "end": 93,
+          "min": 18,
+          "max": 100
+        },
+        "ava_garcia": {
+          "start": 6,
+          "end": 73,
+          "min": 6,
+          "max": 93
+        },
+        "ella_johnson": {
+          "start": 13,
+          "end": 67,
+          "min": 13,
+          "max": 92
+        },
+        "catalina_reyes": {
+          "start": 21,
+          "end": 44,
+          "min": 21,
+          "max": 44
+        },
+        "visjoin_112": {
+          "start": 22,
+          "end": 62,
+          "min": 22,
+          "max": 62
+        },
+        "visjoin_126": {
+          "start": 40,
+          "end": 40,
+          "min": 40,
+          "max": 40
+        }
+      },
+      "trustEndMean": 71.7,
+      "scholarTrustProxy": null,
+      "opinionTraj": {
+        "village_0": {
+          "name": "Emberhold",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_1": {
+          "name": "Stonebridge",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_2": {
+          "name": "Thornfield",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_3": {
+          "name": "Ashford",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        },
+        "village_spl_28_126": {
+          "name": "The Bloodied",
+          "start": 0,
+          "end": 0,
+          "min": 0,
+          "max": 0
+        }
+      },
+      "opinionVerbs": {
+        "probationTick": 127
+      },
+      "opinionMoved": 0,
+      "linkTraj": {
+        "link_mgpspi9w596": {
+          "other": "village_1",
+          "start": 34,
+          "end": 28,
+          "min": 22,
+          "max": 41,
+          "seasoned": true
+        }
+      },
+      "linkCount": 1,
+      "linkSeasoned": 1,
+      "linkEventsByCause": {
+        "tribute-weekly": 10,
+        "succession-haircut": 4,
+        "aid-offer-accept": 4
+      },
+      "linkUnattributed": 0,
+      "linkGains": 14,
+      "gossipSeeds": 1168,
+      "gossipSeedsByAction": {
+        "departure": 455,
+        "order": 265,
+        "talk": 22,
+        "give_food": 5,
+        "haven_built": 3,
+        "deed": 179,
+        "return": 150,
+        "ambush_cover_case_2": 1,
+        "ambush_target_case_2": 1,
+        "haven_need": 4,
+        "ambush_cover_case_4": 1,
+        "ambush_cover_case_6": 1,
+        "ambush_target_case_6": 1,
+        "raid": 45,
+        "fight": 7,
+        "changed": 13,
+        "corpse-word": 4,
+        "ambush_cover_case_8": 1,
+        "rescue": 5,
+        "donate": 1,
+        "firstaccord": 1,
+        "death": 1,
+        "loot_corpse": 1,
+        "hoard": 1
+      },
+      "gossipDeduped": 401,
+      "gossipUnclassified": 0,
+      "gossipHops": 4954,
+      "gossipHopsMutated": 917,
+      "gossipMaxHearers": 11,
+      "gossipSecondReach": 432,
+      "gossipItemsAliveMax": 43,
+      "spreadRumor": 0,
+      "applyRep": 3581,
+      "applyRepWithMove": 0,
+      "repEndDiffs": {
+        "gen_1mwe970": {
+          "generous": 100,
+          "brave": 100,
+          "honest": -90,
+          "competent": 93,
+          "trustworthy": -62,
+          "kind": -1
+        },
+        "lena_ruiz": {
+          "generous": 100,
+          "brave": 100,
+          "honest": -92,
+          "competent": 94,
+          "trustworthy": -29,
+          "kind": -3
+        },
+        "sigrun_eiriksdottir": {
+          "generous": 100,
+          "brave": 100,
+          "honest": -94,
+          "competent": 96,
+          "trustworthy": -29,
+          "kind": -1
+        },
+        "gen_cksannp": {
+          "generous": 45,
+          "brave": 87,
+          "honest": -45,
+          "competent": 90
+        },
+        "gen_r3sejbc": {
+          "generous": 100,
+          "brave": 100,
+          "honest": -90,
+          "competent": 94
+        },
+        "gen_aash9y5": {
+          "generous": 100,
+          "brave": 100,
+          "honest": -32,
+          "competent": 91,
+          "kind": -3
+        },
+        "rafael_torres": {
+          "generous": 100,
+          "brave": 100,
+          "honest": -17,
+          "competent": 94
+        },
+        "ava_garcia": {
+          "generous": 100,
+          "brave": 100,
+          "honest": -25,
+          "competent": 97,
+          "kind": -3
+        },
+        "ella_johnson": {
+          "generous": 100,
+          "brave": 100,
+          "honest": -7,
+          "competent": 93
+        },
+        "gen_2u7y2rz": {
+          "generous": 100,
+          "brave": 100,
+          "honest": -63,
+          "competent": 96
+        },
+        "catalina_reyes": {
+          "generous": 10,
+          "brave": 28,
+          "honest": 7,
+          "competent": 72,
+          "trustworthy": -26
+        },
+        "visjoin_112": {
+          "honest": -4,
+          "competent": 12
+        },
+        "visjoin_126": {
+          "generous": -5,
+          "brave": 24,
+          "honest": -3,
+          "competent": 9
+        }
+      },
+      "repBySource": {
+        "observe": 355,
+        "gossip": 975,
+        "other": 7
+      },
+      "repCrossings": 78,
+      "observe": 427,
+      "observeByAction": {
+        "order": 265,
+        "talk": 132,
+        "give_food": 5,
+        "accusation": 3,
+        "fight": 19,
+        "donate": 1,
+        "loot_corpse": 1,
+        "hoard": 1
+      },
+      "moot": {
+        "mootQuorum": 5,
+        "mootFriendVoice": 2
+      },
+      "bondEvents": {
+        "npcBondTick": 127,
+        "npcLinkRaiseTick": 127,
+        "proposeBond": 3
+      },
+      "teleBond": 24,
+      "tendLink": 0,
+      "talkOpens": 132,
+      "endConvo": 132,
+      "endConvoStipends": 0,
+      "endConvoStipendTotal": 0,
+      "endConvoZeroExchange": 0,
+      "river": {
+        "evRiverTrader": 1
+      },
+      "trustSays": 200,
+      "villageTrustLines": 0,
+      "trustWordLines": 55,
+      "villageTrustLineTexts": [],
+      "villageTrustLineChecks": [],
+      "wrapLive": {
+        "spreadGossip": true,
+        "seedGossip": true,
+        "bumpTrust": true,
+        "trustGainProgressive": true,
+        "tele": true,
+        "gossipActionDims": true,
+        "npcBondTick": true,
+        "npcLinkRaiseTick": true,
+        "probationTick": true,
+        "observe": true,
+        "applyRep": true,
+        "talkTo": true,
+        "endConvo": true,
+        "mootQuorum": true,
+        "mootFriendVoice": true,
+        "proposeBond": true,
+        "evRiverTrader": true
+      },
+      "wrapCounts": {
+        "spreadGossip": 622,
+        "seedGossip": 1168,
+        "bumpTrust": 1886,
+        "trustGainProgressive": 2128,
+        "tele": 3003,
+        "gossipActionDims": 5005,
+        "npcBondTick": 127,
+        "npcLinkRaiseTick": 127,
+        "probationTick": 127,
+        "observe": 427,
+        "applyRep": 3581,
+        "talkTo": 132,
+        "endConvo": 132,
+        "mootQuorum": 5,
+        "mootFriendVoice": 2,
+        "proposeBond": 3,
+        "evRiverTrader": 1
+      }
+    }
+  ],
+  "neutrality": [
+    {
+      "seed": 190211,
+      "daysMatch": true,
+      "pantryMatch": true,
+      "deathsMatch": true,
+      "days": [
+        150,
+        150
+      ],
+      "pantry": [
+        27370,
+        27370
+      ],
+      "deaths": [
+        74,
+        74
+      ],
+      "match": true
+    },
+    {
+      "seed": 190212,
+      "daysMatch": true,
+      "pantryMatch": true,
+      "deathsMatch": true,
+      "days": [
+        134,
+        134
+      ],
+      "pantry": [
+        0,
+        0
+      ],
+      "deaths": [
+        85,
+        85
+      ],
+      "match": true
+    },
+    {
+      "seed": 190213,
+      "daysMatch": true,
+      "pantryMatch": true,
+      "deathsMatch": true,
+      "days": [
+        125,
+        125
+      ],
+      "pantry": [
+        0,
+        0
+      ],
+      "deaths": [
+        87,
+        87
+      ],
+      "match": true
+    },
+    {
+      "seed": 190214,
+      "daysMatch": true,
+      "pantryMatch": true,
+      "deathsMatch": true,
+      "days": [
+        150,
+        150
+      ],
+      "pantry": [
+        4200,
+        4200
+      ],
+      "deaths": [
+        66,
+        66
+      ],
+      "match": true
+    },
+    {
+      "seed": 190215,
+      "daysMatch": true,
+      "pantryMatch": true,
+      "deathsMatch": true,
+      "days": [
+        140,
+        140
+      ],
+      "pantry": [
+        431,
+        431
+      ],
+      "deaths": [
+        81,
+        81
+      ],
+      "match": true
+    },
+    {
+      "seed": 190216,
+      "daysMatch": true,
+      "pantryMatch": true,
+      "deathsMatch": true,
+      "days": [
+        90,
+        90
+      ],
+      "pantry": [
+        4002,
+        4002
+      ],
+      "deaths": [
+        65,
+        65
+      ],
+      "match": true
+    },
+    {
+      "seed": 190217,
+      "daysMatch": true,
+      "pantryMatch": true,
+      "deathsMatch": true,
+      "days": [
+        132,
+        132
+      ],
+      "pantry": [
+        0,
+        0
+      ],
+      "deaths": [
+        95,
+        95
+      ],
+      "match": true
+    },
+    {
+      "seed": 190218,
+      "daysMatch": true,
+      "pantryMatch": true,
+      "deathsMatch": true,
+      "days": [
+        129,
+        129
+      ],
+      "pantry": [
+        0,
+        0
+      ],
+      "deaths": [
+        98,
+        98
+      ],
+      "match": true
+    }
+  ],
+  "neutralityMatch": "8/8",
+  "pooled": {
+    "trustWrites": 10246,
+    "trustUnclassified": 0,
+    "trustOtherNamed": {
+      "setTrust": 117,
+      "tickNeeds": 5,
+      "resolveCase": 6,
+      "_creditPantryGift": 54,
+      "takeFromPantry": 13,
+      "arenaAct": 5,
+      "G": 82,
+      "playerDeath": 93,
+      "exposureFireTick": 26,
+      "convoConflictFallout": 19,
+      "villagerInitiative": 1,
+      "eval": 6
+    },
+    "wrapLive": [
+      "applyRep",
+      "bumpTrust",
+      "endConvo",
+      "evRiverTrader",
+      "gossipActionDims",
+      "mootFriendVoice",
+      "mootQuorum",
+      "npcBondTick",
+      "npcLinkRaiseTick",
+      "observe",
+      "probationTick",
+      "proposeBond",
+      "seedGossip",
+      "spreadGossip",
+      "talkTo",
+      "tele",
+      "trustGainProgressive"
+    ],
+    "wrapDead": [
+      "_evTrustAll",
+      "spreadRumor",
+      "mootAccuserAftermath",
+      "stageBondProposal",
+      "acceptBondProposal",
+      "declineBondProposal",
+      "stageLinkRaise",
+      "acceptLinkRaise",
+      "declineLinkRaise",
+      "tendLink",
+      "villageTalk",
+      "villageDeal",
+      "villageShareFood",
+      "joinVillageReal",
+      "feedRiverTrader",
+      "tradeRiverTrader",
+      "snubRiverTrader"
+    ],
+    "bumpTrustNoSetterTwin": 21,
+    "reconIntervals": 13745,
+    "reconOk": 13703,
+    "reconResidue": 42,
+    "gossipSeeds": 10481,
+    "gossipUnclassified": 0,
+    "gossipHops": 41639,
+    "gossipHopsMutated": 7726,
+    "gossipSecondReach": 3650,
+    "gossipMaxHearers": 12,
+    "spreadRumor": 0,
+    "applyRep": 29769,
+    "observe": 4045,
+    "repCrossings": 680,
+    "tendLink": 0,
+    "opinionVerbs": {
+      "probationTick": 1044
+    },
+    "moot": {
+      "mootQuorum": 43,
+      "mootFriendVoice": 21
+    },
+    "bondEvents": {
+      "npcBondTick": 1044,
+      "npcLinkRaiseTick": 1044,
+      "proposeBond": 33
+    },
+    "teleBond": 375,
+    "talkOpens": 1079,
+    "endConvo": 1079,
+    "endConvoStipends": 0,
+    "endConvoStipendTotal": 0,
+    "instrumentErrors": 0,
+    "trustEvents": 10246,
+    "wins": 0,
+    "national": 0,
+    "table": 0,
+    "w4unlocks": 8,
+    "w5unlocks": 3,
+    "medianSurvival": 133,
+    "survivors": 2,
+    "deaths": 651,
+    "standingMedian": 199
+  },
+  "go": {
+    "unclassifiedTrustWrites": true,
+    "unclassifiedGossipSeeds": true,
+    "hopsClassified": true,
+    "wrapLiveOrDead": true,
+    "neutrality": true,
+    "instrumentErrors": true,
+    "perSeedTables": true,
+    "engagementFloor": true,
+    "GO": true
+  }
+}

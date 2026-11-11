@@ -356,8 +356,23 @@ function sum(f) { return seeds.reduce(function (a, s) { return a + (f(s) || 0); 
 const pooled = {};
 pooled.trustWrites = sum(function (s) { return s.trustWrites; });
 pooled.trustUnclassified = sum(function (s) { return s.trustUnclassified; });
-pooled.trustOtherNamed = [];
-seeds.forEach(function (s) { (s.trustOtherNamed || []).forEach(function (x) { if (pooled.trustOtherNamed.indexOf(x) === -1) pooled.trustOtherNamed.push(x); }); });
+pooled.trustOtherNamed = {}; // summed by cause name (was: string-deduped "name=n" list, which split one cause across seeds)
+seeds.forEach(function (s) { (s.trustOtherNamed || []).forEach(function (x) {
+  const m = /^other-named:(.+)=(\d+)$/.exec(x);
+  if (m) pooled.trustOtherNamed[m[1]] = (pooled.trustOtherNamed[m[1]] || 0) + parseInt(m[2], 10);
+}); });
+// Wrap inventory (must match scripts/trustfirst-instrument-20261111.js wrap() calls).
+const WRAPPED_INVENTORY = ['bumpTrust', '_evTrustAll', 'trustGainProgressive', 'applyRep', 'observe',
+  'seedGossip', 'spreadGossip', 'spreadRumor', 'gossipActionDims', 'talkTo', 'endConvo', 'tele',
+  'mootQuorum', 'mootFriendVoice', 'mootAccuserAftermath',
+  'proposeBond', 'stageBondProposal', 'acceptBondProposal', 'declineBondProposal',
+  'stageLinkRaise', 'acceptLinkRaise', 'declineLinkRaise', 'npcBondTick', 'npcLinkRaiseTick',
+  'tendLink', 'villageTalk', 'villageDeal', 'villageShareFood', 'joinVillageReal', 'probationTick',
+  'evRiverTrader', 'feedRiverTrader', 'tradeRiverTrader', 'snubRiverTrader'];
+pooled.wrapLive = [];
+seeds.forEach(function (s) { Object.keys(s.wrapLive || {}).forEach(function (k) { if (pooled.wrapLive.indexOf(k) === -1) pooled.wrapLive.push(k); }); });
+pooled.wrapLive.sort();
+pooled.wrapDead = WRAPPED_INVENTORY.filter(function (n) { return pooled.wrapLive.indexOf(n) === -1; });
 pooled.bumpTrustNoSetterTwin = sum(function (s) { return s.bumpTrustNoSetterTwin; });
 pooled.reconIntervals = sum(function (s) { return s.reconIntervals; });
 pooled.reconOk = sum(function (s) { return s.reconOk; });
@@ -402,12 +417,12 @@ const go = {};
 go.unclassifiedTrustWrites = pooled.trustUnclassified === 0;
 go.unclassifiedGossipSeeds = pooled.gossipUnclassified === 0;
 go.hopsClassified = true; // hops are recorded as (gossip, listener, distortion, rep) by construction; teller is engine-unrecorded (see prereg amendment)
-go.wrapLiveOrDead = true; // judged in the evidence from wrapLive vs fixture proof
+go.wrapLiveOrDead = (pooled.wrapLive.length + pooled.wrapDead.length) === WRAPPED_INVENTORY.length && pooled.wrapLive.length > 0; // every wrap marked live (fired in pilot) or dead (never fired), judged from wrapLive vs fixture proof
 go.neutrality = (band.neutralityMatch === (seeds.length + '/' + seeds.length));
 go.instrumentErrors = pooled.instrumentErrors === 0;
 go.perSeedTables = seeds.length === 8;
 go.engagementFloor = pooled.trustEvents >= 5;
-go.GO = go.unclassifiedTrustWrites && go.unclassifiedGossipSeeds && go.hopsClassified && go.neutrality && go.instrumentErrors && go.perSeedTables && go.engagementFloor;
+go.GO = go.unclassifiedTrustWrites && go.unclassifiedGossipSeeds && go.hopsClassified && go.wrapLiveOrDead && go.neutrality && go.instrumentErrors && go.perSeedTables && go.engagementFloor;
 band.go = go;
 
 seeds.forEach(function (s) {
@@ -430,6 +445,7 @@ console.log('BAND applyRep=' + pooled.applyRep + ' observe=' + pooled.observe +
   ' repCrossings=' + pooled.repCrossings + ' tendLink=' + pooled.tendLink +
   ' opinionVerbs=' + JSON.stringify(pooled.opinionVerbs) + ' moot=' + JSON.stringify(pooled.moot) +
   ' bond=' + JSON.stringify(pooled.bondEvents) + ' teleBond=' + pooled.teleBond);
+console.log('BAND wrapLive=' + JSON.stringify(pooled.wrapLive) + ' wrapDead=' + JSON.stringify(pooled.wrapDead));
 console.log('BAND talkOpens=' + pooled.talkOpens + ' endConvo=' + pooled.endConvo +
   ' stipends=' + pooled.endConvoStipends + ' stipendTotal=' + pooled.endConvoStipendTotal);
 console.log('BAND neutrality=' + band.neutralityMatch + ' errors=' + pooled.instrumentErrors);
