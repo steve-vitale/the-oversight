@@ -247,3 +247,29 @@ proof refresh owed (balance-panel on the rebased tree +
 balance-proof-update.js) — the guard changes the src manifest, so
 the retained panel cannot cover it; the proofrefresh-b panel
 (f21b474e4) predates the guard.
+
+### Closeout (r175 adoption, 2026-11-11 ~01:00Z)
+
+r174 died after the flap window opened: heartbeat stuck 23:15:50Z,
+lock run_id 2026-11-10T22:00:55Z ~2h55m old (>90 min fallback), no
+live processes in the tree, no registry entry for the lock run_id.
+This run (r175) did stale-lock recovery, replaced the lock with
+run_id 2026-11-11T00:56:43Z, and adopted the tree. Flap clear at
+adoption: O_EXCL probe OK, registry heartbeat writes succeeding.
+
+Adoption verified, not re-scored: all 8 r172 proof tests re-run
+green in-tree (r172, narr, coach, coachrepeat, agree, confess,
+confessguard 17/17, confesswrap 4/4). The neutral panel r174 left
+uncommitted was FOUND COMPLETE: evidence/2026-11-10/
+neutral-r172social-panel (64 cases, sourcesStable true,
+neutrality 4/4 match on seed 7, sourceHead 44becf9c8 = the guard
+commit). Measurement-proof refresh CLOSED: `node
+scripts/balance-proof-update.js` on the panel succeeded
+(panelDigest 3469ff35…), measurement pair re-run 9/9 +
+9/9. The panel covers the guard commit, so no fresh panel was
+needed after the rebase check: master moved 10 commits since the
+r172 base (3daa1a9b6) with ZERO diff in src/js + balance observer
+inputs, so the rebased tree's manifest is identical to the
+panel's. Rebase onto explicit master SHA 599308024, proofs
+re-run, merge ff-only, tree released, rotation 5->6 (crisis
+next). Telemetry check in the closeout step of this run.
