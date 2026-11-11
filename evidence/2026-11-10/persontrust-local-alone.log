@@ -1,0 +1,21 @@
+PASS API: bumpPersonTrust
+PASS API: personTrustOf
+PASS API: personTrustCensus
+PASS bondAdd wrapped
+PASS roster has 2+ NPCs
+PASS unset personTrustOf is 0
+PASS bondAdd accepts visit
+PASS A trusts B after visit
+PASS B trusts A after visit
+PASS bondAdd does not write village.trust[a/b]
+PASS bonds gate closed at empty map
+PASS bonds gate opens at 40
+PASS bondDriveLive present
+PASS warmth window live at v=20 regardless of empty person map
+PASS bonds gate still closed with empty person map
+PASS panel maxTrust > 0
+PASS panel has map entries
+PASS panel bonds gate opens for someone
+FAIL non-aimed errands within ±25% of prereg baseline — FORAGE:3 vs 1, EAT:23 vs 36, HAUL:3 vs 1
+PANEL {"maxTrust":48,"entries":56,"trustedOpen":3,"kinds":{"LEAVE":2,"WATER":175,"HAVEN_CHORE":34,"EAT":23,"TRAPS":2,"VISIT":35,"FORAGE":3,"SEEK":22,"HAUL":3,"EXPLORE":1}}
+FAIL 1 / pass 18

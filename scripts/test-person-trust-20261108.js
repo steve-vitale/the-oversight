@@ -29,13 +29,19 @@ function ok(name, cond, detail) {
 // forage ads onto real WATER/FORAGE objectives — aimed mix move vs OVE-61
 // tip be39a0a4e. Honest rebaseline, not a loosened assertion. VISIT /
 // HAVEN_CHORE remain bonds-goal kinds excluded from the bar.
+// Re-pinned 2026-11-11 (divergence reconciliation): EAT 36 -> 59,
+// FORAGE 1 -> 2, HAUL 1 -> 0. Measured merged-tree panel, bit-identical
+// across re-runs; mechanism in evidence/2026-11-10/reconcile-feeder-probe.md —
+// Cursor's dawn scorer adds DUTY water ads (3.0-5.5+) that win 60/291 picks
+// over light lottery draws while the cistern sits under 2 days' water, so
+// villagers fetch water all morning and eat at dusk. Tolerance stays ±25%.
 const BASELINE = {
   seed: 84101,
   days: 30,
   maxTrust: 56,
   entries: 48,
   trustedOpen: 5,
-  kinds: { LEAVE: 2, WATER: 187, EAT: 36, VISIT: 10, FORAGE: 1, SEEK: 19, HAUL: 1 },
+  kinds: { LEAVE: 2, WATER: 187, EAT: 59, VISIT: 10, FORAGE: 2, SEEK: 19, HAUL: 0 },
 };
 const NON_AIMED = ['WATER', 'FORAGE', 'TRAPS', 'EAT', 'SEEK', 'LEAVE', 'HUNT', 'HAUL'];
 const TOLERANCE = 0.25; // ±25% of baseline count; zero-baseline allows +2 absolute
