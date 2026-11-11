@@ -233,7 +233,26 @@ census pass, and the smoke-control investigation above.
 
 ## Gate
 
-PENDING — check.js --quick running at note write; filled at closeout.
+DONE at closeout (2026-11-11 ~08:35Z). Two gates run, both 294 passed / 6 failed,
+identical failure sets:
+- Gate 1, pre-rebase tip (base fc0ffb37c): 294/6 in 583s, log
+  journey-succession-r177-checkquick.log as committed at c618bcba3 (that log
+  holds gate 1; gate 2 overwrote the file in the worktree — see below).
+- Gate 2, rebased tip (base 7638d4bbf, the tip being pushed): 294/6 in 777s.
+  The 6 failures are exactly the documented standing set — measurement-proof
+  staleness pair (test-measurement-proof-update + test-measurement-workflow,
+  stale since r129/r176/r130/r125 src/js changes; proofrefresh-b4 regenerating),
+  mobile-combat-cadence, occupation-panels, phone-frame-proof (stale receipt),
+  establishment-r20-fixes (next-day voice 2 vs 1). Zero timeouts, zero new
+  failures. Adjudicated GO on pre-existing failures, same family as the r176
+  adoption gate (290/10, all pre-existing) and talkturn-confirm-b (293/7).
+- Family proofs: 9/9 ALL GREEN on the pre-rebase tip (logs
+  journey-succession-r177-family-*.log). The two conversation families in the
+  rebase's blast radius (r125 convo-beats.js) were re-run on the rebased tip:
+  r169 + r170 both exit 0 ALL GREEN, 0 FAIL (logs
+  journey-succession-r177-family-r169-closeout.log and
+  -r170-closeout.log). The other seven families' code paths are untouched by
+  the rebase's single src/js change.
 
 ## Family proofs
 
