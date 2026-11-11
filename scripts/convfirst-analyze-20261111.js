@@ -560,7 +560,10 @@ function wallOf(perSeed) {
     wave4unlocks: perSeed.filter(function (s) { return (s.maxWave || 1) >= 4; }).length,
     wave5unlocks: perSeed.filter(function (s) { return (s.maxWave || 1) >= 5; }).length,
     medianSurvival: median(perSeed.map(function (s) { return s.days; })),
-    survivors: perSeed.filter(function (s) { return s.endReason === 'horizon'; }).length,
+    // runDays reports a horizon-reached run as endReason
+    // 'survived' (sim-harness.js), not 'horizon' — count both
+    // spellings, else a survived village reads as 0 survivors.
+    survivors: perSeed.filter(function (s) { return s.endReason === 'horizon' || s.endReason === 'survived'; }).length,
   };
 }
 
