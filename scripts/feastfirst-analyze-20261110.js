@@ -243,8 +243,11 @@ for (const f of files) {
   if (s.ladderStage !== null && s.ladderStage !== undefined) pooled.ladderStages.push(s.ladderStage);
   if (s.bundleBonus !== null && s.bundleBonus !== undefined) pooled.bundleBonusFinal.push(s.bundleBonus);
   const st = o.standing;
-  s.standingPlenty = (st && typeof st.plenty === 'number') ? st.plenty : null;
-  s.standingTotal = (st && typeof st.total === 'number') ? st.total : null;
+  // villageStandingTotal() returns a plain number, not a breakdown, so
+  // plenty is derived from the feast log: +20 per major feast
+  // (standing.js:138-146 — quality >= 1 counts as major).
+  s.standingPlenty = 20 * s.feastLogMajor;
+  s.standingTotal = (typeof st === 'number') ? st : ((st && typeof st.total === 'number') ? st.total : null);
   if (s.standingPlenty !== null) pooled.standingPlentyFinal.push(s.standingPlenty);
   s.snapDays = daily.length;
   s.feastSayLines = (o.feastSays || []).length;
