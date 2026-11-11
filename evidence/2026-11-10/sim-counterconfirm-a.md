@@ -358,7 +358,17 @@ with no win / national / table movement either way. Table reach
   RAISER_SEAT=1, but after the revert re-running it will NOT
   reproduce the confirm's armed leg — the committed corpus is
   the record of what ran.
-- [REBASE NOTE — fill in: explicit master SHA, proof re-run.]
+- Rebase: the first `git rebase <explicit-SHA>` attempt failed to
+  start ("could not detach HEAD", editor/lock-flavored error) with
+  no lock file present and a clean tree — transient, same signature
+  as a stale lock from a concurrent sibling git operation. Retried
+  immediately: all 3 commits replayed cleanly, no stops, no
+  conflicts, onto explicit master SHA
+  ed33b42b8c8d2f160635b07ed5c990e11d9019de (read in the main tree
+  immediately before rebasing; master had not moved again after
+  the rebase — re-verified ed33b42b8). New tip a581b3778. Proof
+  re-run green after the rebase: test-counterconfirm-a.js 17/17
+  and test-counterclose-a.js 17/17.
 
 ## What remains
 
