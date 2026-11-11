@@ -3,10 +3,10 @@
 //
 // Legs: (a) policy units on a fake Game — COUNTER_ANSWER gate, the
 // sweeten-if-pantry->=12000 / walk-if-thin decision, ctx counts for
-// formed/failed/held/walked, and the RAISER_SEAT HARNESS-ACTIVE pins
-// (the +35 signal is live in this tree ONLY as the confirm harness on
-// both legs; the revert commit flips these three tests to the revert
-// pins — flag a no-op on talkScore, exports gone — exactly as
+// formed/failed/held/walked, and the RAISER_SEAT REVERT pins (the +35
+// signal was reverted out of competent.js after the confirm; the flag
+// is now a no-op and these tests pin the reverted state, so the
+// killed +35 signal can never silently land — exactly as
 // test-counterclose-a.js does for the pilot); (b) analyzer fixtures —
 // the fresh vs blocked counter split, stalled-at-end from the last
 // counterDays snapshot, first-fresh score/opinion/rep pairing, revised
@@ -26,7 +26,7 @@ const TDRV = require(path.join(__dirname, 'talkturn-driver-20261110'));
 const CINST = require(path.join(__dirname, 'counterclose-instrument-20261110'));
 const { loadGame, setupGame, runDays, quietLog } = require(path.join(__dirname, 'sim-harness'));
 const COMP = require(path.join(__dirname, 'policies', 'competent'));
-const { competent, talkOn, talkScore, pickTalkTargets, counterAnswerOn, answerPendingCounter, COUNTER_SWEETEN_PANTRY_MIN, COUNTER_SWEETEN_KCAL, raiserSeatOn, RAISER_SEAT_BONUS } = COMP;
+const { competent, talkOn, talkScore, pickTalkTargets, counterAnswerOn, answerPendingCounter, COUNTER_SWEETEN_PANTRY_MIN, COUNTER_SWEETEN_KCAL } = COMP;
 
 let pass = 0;
 function ok(name, fn) { fn(); pass++; console.log('ok ' + pass + ' - ' + name); }
@@ -136,9 +136,12 @@ ok('decision: pantry exactly at the 12000 bar sweetens; 11999 walks', function (
   assert.deepStrictEqual(g2.answerCounterCalls, ['walk']);
 });
 
-// --- Fake Game for talkScore units (HARNESS-ACTIVE pins — the
-// RAISER_SEAT +35 signal is live in this tree ONLY as the confirm
-// harness; the revert commit flips these to the revert pins.) ---
+// --- Fake Game for talkScore units (REVERT PIN — the RAISER_SEAT
+// harness was reverted out of competent.js after the confirm; the flag
+// is now a no-op and these tests pin the reverted state, so the
+// killed +35 signal can never silently land. The driver still sets
+// RAISER_SEAT=1, but re-running it will NOT reproduce the confirm's
+// armed leg — the committed corpus is the record of what ran.) ---
 function fakeGame(opts) {
   const g = {
     villagerId: 'scholar1',
@@ -152,39 +155,37 @@ function fakeGame(opts) {
 }
 const RAISE = { villageId: 'emberhold', day: 6, kind: 'link' };
 
-ok('harness: RAISER_SEAT=1 adds +35 to an answerable raiser (flag off = base)', function () {
-  assert.strictEqual(RAISER_SEAT_BONUS, 35);
-  assert.strictEqual(withEnv({ seat: '1' }, function () { return raiserSeatOn(); }), true);
-  assert.strictEqual(withEnv({ seat: undefined }, function () { return raiserSeatOn(); }), false);
+ok('revert: RAISER_SEAT is a no-op on talkScore even with a pending raise (flag on == flag off, base scores unchanged)', function () {
+  // The killed +35 signal is gone: a raiser with a pending ask scores
+  // exactly what the base policy gives, flag on or off.
   const g = fakeGame({
     convo: { devon: { count: 12 }, ella: { count: 0 } },
     bond: { devon: 25, ella: 0 },
     pending: { devon: RAISE },
     comm: { devon: 'full' },
   });
-  assert.strictEqual(withEnv({ seat: undefined }, function () { return talkScore(g, {}, 'devon'); }), 0, 'devon base is 0 (trusted, talked-to)');
-  assert.strictEqual(withEnv({ seat: '1' }, function () { return talkScore(g, {}, 'devon'); }), 35, 'flag on: base 0 + 35');
+  const base = withEnv({ seat: undefined }, function () { return talkScore(g, {}, 'devon'); });
+  assert.strictEqual(base, 0, 'devon base is 0 (trusted, talked-to)');
+  assert.strictEqual(withEnv({ seat: '1' }, function () { return talkScore(g, {}, 'devon'); }), 0, 'flag on changes nothing');
   assert.strictEqual(withEnv({ seat: '1' }, function () { return talkScore(g, {}, 'ella'); }), 30, 'stranger max is still 30');
+  // 150206-shaped base scores are unchanged by the flag too.
+  const g2 = fakeGame({
+    convo: { devon: { count: 4 }, ella: { count: 1 } },
+    bond: { devon: 18, ella: 0 },
+    pending: { devon: RAISE },
+    comm: { devon: 'full' },
+  });
+  assert.strictEqual(withEnv({ seat: undefined }, function () { return talkScore(g2, {}, 'devon'); }), 8);
+  assert.strictEqual(withEnv({ seat: '1' }, function () { return talkScore(g2, {}, 'devon'); }), 8, 'flag on: still 8, no +35');
+  assert.strictEqual(withEnv({ seat: '1' }, function () { return talkScore(g2, {}, 'ella'); }), 29);
 });
 
-ok('harness: unanswerable raiser (comm none) gets no bonus; no commLevel fails open', function () {
-  const gNone = fakeGame({
-    convo: { devon: { count: 12 } },
-    bond: { devon: 25 },
-    pending: { devon: RAISE },
-    comm: { devon: 'none' },
-  });
-  assert.strictEqual(withEnv({ seat: '1' }, function () { return talkScore(gNone, {}, 'devon'); }), 0, 'comm none: no seat spent');
-  const gNoComm = fakeGame({
-    convo: { devon: { count: 12 } },
-    bond: { devon: 25 },
-    pending: { devon: RAISE },
-    noComm: true,
-  });
-  assert.strictEqual(withEnv({ seat: '1' }, function () { return talkScore(gNoComm, {}, 'devon'); }), 35, 'missing commLevel fails open');
+ok('revert: raiserSeatOn / RAISER_SEAT_BONUS are not exported by competent', function () {
+  assert.strictEqual(COMP.raiserSeatOn, undefined, 'raiserSeatOn export is gone');
+  assert.strictEqual(COMP.RAISER_SEAT_BONUS, undefined, 'RAISER_SEAT_BONUS export is gone');
 });
 
-ok('harness: pickTalkTargets seats the raiser first with the flag on', function () {
+ok('revert: pickTalkTargets order is unchanged by RAISER_SEAT (flag on == flag off)', function () {
   const g = fakeGame({
     convo: { devon: { count: 12 }, ella: { count: 0 }, raj: { count: 0 } },
     bond: { devon: 25, ella: 0, raj: 0 },
@@ -195,7 +196,7 @@ ok('harness: pickTalkTargets seats the raiser first with the flag on', function 
   const off = withEnv({ seat: undefined }, function () { return pickTalkTargets(g, {}, alive); });
   assert.deepStrictEqual(off, ['ella', 'raj', 'devon'], 'flag off: strangers first, raiser last');
   const on = withEnv({ seat: '1' }, function () { return pickTalkTargets(g, {}, alive); });
-  assert.deepStrictEqual(on, ['devon', 'ella', 'raj'], 'flag on: raiser first');
+  assert.deepStrictEqual(on, off, 'flag on: same order — the signal is gone');
 });
 
 // --- Analyzer fixtures (same synthetic corpus shape as test-counterclose-a). ---
