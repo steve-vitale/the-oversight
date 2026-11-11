@@ -44,3 +44,31 @@ requires a fresh proof.
 
 ## Verdict
 Proof is fresh, current, and neutral on the reconcile tip. Ready for the gate.
+
+## Round 2 — master moved again (r180 src/js touch)
+After round 1, master moved b09cf584e → dd28faecc (14 commits: dutyfirst-b,
+journey-crisis r180, titanfirst-a, relayfirst-a, kinfirst-b, standfirst-b,
+Loop B 1131Z). Merged into the branch as `793f097f3`; the only merge
+conflict was `scripts/test-social-r27-recap-repeat-20261019.js` (resolved:
+2nd-press check takes r180's case-insensitive reframe pattern, 3rd-press
+check keeps HEAD's clearer-exit check — the merged code serves the clearer
+exit on press 3; test green on the merged tip). r180 touched
+src/js/conversation.js + convo-wants.js (manifest inputs), so the round-1
+proof went stale (`validate()` → "Proof source inputs are not current") and
+a second regeneration was required.
+- Command: `node scripts/balance-panel.js --out .proofrefresh-reconcile-panel-r2 --n 16 --days 150`
+- Ran 14:26–15:29Z (~63 min) under heavy load (load avg peaked 21.3); no
+  flap crash, no retry needed.
+- Result: `Saved .proofrefresh-reconcile-panel-r2; 64 cases, 0 cached jobs.`
+  64 rows, 64 distinct combos, `validity.sourcesStable: true`, neutrality
+  4/4 match, `sourceHeadStart == sourceHeadEnd == 793f097f3`.
+- Retained panel re-pointed (byte copy): `evidence/2026-11-11/neutral-reconcile.json.gz`,
+  sha256 `c30bd049b48f9563f17828081a3139e130bd3922f7e557c3a4de6fb81b5a820f`.
+- `balance-proof-update.js` exit 0; `scripts/balance-proof.json` re-pointed
+  with the matching digest.
+- Test `scripts/test-proofrefresh-reconcile.js`: **12 passed, 0 failed** —
+  this time including `test-measurement-cache-flags.js` 4/4 (the load had
+  cleared enough for its 30s spawns). All other legs green as in round 1;
+  stale-input negative checks still fail the b4/b2 panels as required.
+- Verdict: proof fresh, current, and neutral on the merge tip 793f097f3.
+  Ready for gate #2.
