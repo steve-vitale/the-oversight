@@ -97,3 +97,27 @@ cached cases were reused (b4 precedent).
   Master moved again during round 3 (488506a47, godpathfirst-a arm —
   scripts/ + evidence/ only, no manifest inputs), so one more
   merge-forward is owed; the proof survives it (validate re-checked after).
+
+## Merge-forward to 965e8d04e (fansfirst-a) + stale MERGE_HEAD
+- Master moved twice during round 3 / gate prep: 488506a47 (godpathfirst-a)
+  then 965e8d04e (fansfirst-a) — both scripts/ + evidence/ only, no
+  manifest inputs, so the r3 proof stays valid (validate PASS re-checked
+  after the merge).
+- The merge of 965e8d04e first FAILED with "You have not concluded your
+  merge (MERGE_HEAD exists)": the 94f76882b merge commit was properly
+  created (2 parents, tree correct, 8445ab97f an ancestor of HEAD) but
+  its merge-state files (MERGE_HEAD, MERGE_MSG, MERGE_MODE, AUTO_MERGE)
+  were left in the worktree gitdir. Verified the merge complete
+  (ancestor check + standing.js identical to master's), then removed
+  the four stale state files by hand — status returned to clean, no
+  reset, no tree/index change. The 965e8d04e merge then auto-committed
+  cleanly as `ec5ee00a8` and left NO stale state files behind.
+  Lesson: after any merge commit in this worktree, check the gitdir for
+  leftover MERGE_* files before the next merge; a leftover MERGE_HEAD
+  with a fully-committed merge is safe to remove by hand.
+- Gate #2 ran on tip ec5ee00a8: see `sim-reconcile-gate2.md`
+  (332 passed, 8 failed in 1240s — GO).
+- Master moved AGAIN during gate #2 (7f1c61a6e, journey-succession r181:
+  scripts/ + evidence/ only, no manifest inputs) — one final
+  merge-forward is owed before the ff-only merge; the proof survives
+  it (validate re-checked after).
