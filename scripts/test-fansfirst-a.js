@@ -50,6 +50,10 @@ function pantryKcal(Game) {
 (async function () {
   // ---- analyzer leg (pure, no sim) ----
   check('classifyFavorWhy: contest-win', AN.classifyFavorWhy('Hazel won Beastmaster on camera') === 'contest-win');
+  check('classifyFavorWhy: show-win', AN.classifyFavorWhy('won the Mouth Race') === 'show-win');
+  check('classifyFavorWhy: show-colon', AN.classifyFavorWhy('show: Mouth Race') === 'show');
+  check('classifyFavorWhy: show-cheer', AN.classifyFavorWhy('cheering for Marta') === 'show-cheer');
+  check('classifyFavorWhy: ratings-stunt', AN.classifyFavorWhy('ratings stunt') === 'ratings-stunt');
   check('classifyFavorWhy: show', AN.classifyFavorWhy("Mara shone on Ask a Human") === 'show');
   check('classifyFavorWhy: show-loss', AN.classifyFavorWhy("Mara's beautiful disaster on Mouth Race") === 'show');
   check('classifyFavorWhy: highlight', AN.classifyFavorWhy('the highlight package') === 'highlight');
@@ -88,6 +92,9 @@ function pantryKcal(Game) {
   check('classifySayLine: favor-announce', AN.classifySayLine('📺 SYSTEM: "📈 your fight fans +5 — defeated the Reunion (favor: 5)"') === 'favor-announce');
   check('classifySayLine: trial-offer', AN.classifySayLine('◈ AUDIENCE TRIAL — SYSTEM: "The audience wants an encore. A trial, then — smaller this time, but televised." Fully identify 3 plants within 3 days. Reward: integration, and a lesson.') === 'trial-offer');
   check('classifySayLine: trial-expired', AN.classifySayLine('The trial window closed. The audience makes a disappointed sound, like wind.') === 'trial-expired');
+  check('classifySayLine: trial-complete', AN.classifySayLine('◈ TRIAL COMPLETE — the audience applauds, which sounds like static. (+15 integration, gift: a lesson: Wound Care)') === 'trial-complete');
+  check('classifySayLine: follower', AN.classifySayLine('📱 2 followers turn the audience — care packages thin, the System\'s favor trickles away. (-2 favor.)') === 'follower');
+  check('classifySayLine: standings', AN.classifySayLine('📊 THE STANDINGS — Haven sits 1st of 8. Haven leads. The audience has a favorite, and it\'s you.') === 'standings');
   check('classifySayLine: interference', AN.classifySayLine('📺 Kess is in the judging booth. They\'re smiling. That\'s never good.') === 'interference');
   check('classifySayLine: persona-package', AN.classifySayLine('📦 A package arrives, wrapped in brown paper and string, labeled in triplicate. Inside: a fan letter. In YOUR handwriting. You did not write it.') === 'persona-package');
   check('classifySayLine: other-fan', AN.classifySayLine('"Someone in the audience keeps voting for you. The System can\'t trace the votes. Curious."') === 'other-fan');
@@ -98,6 +105,7 @@ function pantryKcal(Game) {
   check('findNamedFanLines: generic club is not a name', AN.findNamedFanLines([{ day: 3, line: 'Your fight fans voted: a training stimulant.' }]).length === 0);
   check('findNamedFanLines: fan club growing is not a name', AN.findNamedFanLines([{ day: 3, line: '"Your fan club is GROWING. There\'s fan art."' }]).length === 0);
   check('findNamedFanLines: empty corpus is a measured zero', AN.findNamedFanLines([]).length === 0);
+  check('findNamedFanLines: fan-leafed tree is botany, not a fan', AN.findNamedFanLines([{ day: 77, line: 'Wei showed Fatima the fan-leafed tree dropping foul-smelling yellow fruit — "remember it." The haven hears about it by supper.' }]).length === 0);
 
   const recSeed = {
     daily: [

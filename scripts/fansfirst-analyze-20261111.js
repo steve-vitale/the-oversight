@@ -45,6 +45,10 @@ function classifyFavorWhy(why) {
   if (why == null || String(why).trim() === '') return 'unclassified';
   const w = String(why);
   if (/won .* on camera/.test(w)) return 'contest-win';
+  if (/^won /.test(w)) return 'show-win';
+  if (/^show: /.test(w)) return 'show';
+  if (/^cheering for /.test(w)) return 'show-cheer';
+  if (/^ratings stunt$/.test(w)) return 'ratings-stunt';
   if (/shone on |beautiful disaster on /.test(w)) return 'show';
   if (/highlight package/.test(w)) return 'highlight';
   if (/Death Reel/.test(w)) return 'death-reel';
@@ -52,6 +56,10 @@ function classifyFavorWhy(why) {
   if (/defeated |lost to |fled from /.test(w)) return 'fight-outcome';
   if (/overrules your cancellation/.test(w)) return 'sigW5';
   if (/the audience can vote|voted/.test(w)) return 'boon-vote';
+  // Residue: free-text fanLane whys from played show/contest choices
+  // (contests.js do.fanLane blocks — 'the pudding truce', 'the
+  // gracious swap', 'the ninety-second nap', ...). Classified by
+  // first token, never unclassified; the evidence names them.
   const first = w.trim().split(/\s+/)[0].replace(/[^A-Za-z]/g, '') || 'other';
   return 'other:' + first.toLowerCase();
 }
@@ -88,6 +96,9 @@ function classifySayLine(line) {
   const s = String(line);
   if (/AUDIENCE TRIAL/.test(s)) return 'trial-offer';
   if (/The trial window closed/.test(s)) return 'trial-expired';
+  if (/◈ TRIAL COMPLETE/.test(s)) return 'trial-complete';
+  if (/^📱/.test(s)) return 'follower';
+  if (/^📊 THE STANDINGS/.test(s)) return 'standings';
   if (/care package drops/.test(s)) return 'package';
   if (/WE LOVE YOU/.test(s)) return 'package-club-credit';
   if (/voted: a training stimulant|voted: trail rations|voted: a spotlight segment|voted: a wacky curio/.test(s)) return 'boon';
@@ -117,9 +128,11 @@ function findNamedFanLines(lines) {
   // NO /i flag: with /i, [A-Z] matches lowercase words too, so 'fan
   // sends' and 'fan club' would "name" sends/club. Fan/viewer are
   // matched case-insensitively by hand; the NAME must be truly
-  // capitalized.
-  const AFTER = /\b(?:[Ff]an|[Vv]iewer)\s*,?\s+(?:named\s+)?([A-Z][a-z]{2,})\b|\b[Ff]an\s+([A-Z][a-z]{2,})\s+says\b/;
-  const BEFORE = /\b([A-Z][a-z]{2,})\s+(?:the\s+)?(?:[Ff]an|[Vv]iewer)\b/;
+  // capitalized. (?!-) after fan/viewer: 'fan-leafed' is a tree, not
+  // a person — 'Wei showed Fatima the fan-leafed tree' is a botany
+  // lesson, and the BEFORE branch would otherwise "name" Fatima.
+  const AFTER = /\b(?:[Ff]an|[Vv]iewer)(?!-)\s*,?\s+(?:named\s+)?([A-Z][a-z]{2,})\b|\b[Ff]an(?!-)\s+([A-Z][a-z]{2,})\s+says\b/;
+  const BEFORE = /\b([A-Z][a-z]{2,})\s+(?:the\s+)?(?:[Ff]an|[Vv]iewer)(?!-)\b/;
   (lines || []).forEach(function (l) {
     const line = (l && l.line != null) ? String(l.line) : String(l || '');
     if (!line) return;
