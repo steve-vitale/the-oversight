@@ -405,9 +405,15 @@ village 2/8.
 
 ## Rebase
 
-Rebased onto explicit master SHA (read in the main tree immediately
-before rebasing; see coordinator merge note for the SHA). Proof test
-re-run green after the rebase (32/32).
+Rebased onto explicit master SHA `cb7cd6695a623eaf94385f393cb8649d01802856`
+(read in the main tree immediately before rebasing; master had moved
+since the prereg base `6d7212cda` — Loop A 0115Z coordinator evidence
+landed first). The rebase stopped once at the ammo-fix pick (the known
+stop-at-pick quirk: pick in both done and todo, tree clean, changes
+unapplied — verified with `git diff <pick>`, then `git rebase
+--continue` sailed through). All 5 branch commits landed exactly once
+on the new base. Proof test re-run green after the rebase (32/32).
+Master re-checked after the rebase: still `cb7cd6695`.
 
 ## Files
 
