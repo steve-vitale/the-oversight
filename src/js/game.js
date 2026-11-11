@@ -14151,8 +14151,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       return `this doesn't yield to ${abilityId === 'herbal_remedy' ? 'herbs' : 'field care'} \u2014 wrong tool for this sickness.`;
     },
 
-    // useMedicine(kind): 'antibiotics' | 'antiparasitic'. Ruin-found, rare,
-    // specific: antibiotics kill bacterial, antiparasitics kill parasitic.
+    // useMedicine(kind): ruin-found, rare, specific. Antibiotics kill
+    // bacterial, antiparasitics kill parasitic; the regional ruin
+    // medicines (crisis r181) map to the class their label promises \u2014
+    // antimalarial cures fevers, cold_remedy eases fevers, bandage
+    // covers bacterial wounds, ORS rehydrates parasitic gut cases.
     // Undiagnosed use is a gamble \u2014 the UI warns, the pills don't care.
     useMedicine(kind) {
       if (this.over) return null;
@@ -14166,7 +14169,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       item.doses -= 1;
       if (item.doses <= 0) inv.splice(idx, 1);
       this.tickAction(8);
-      const cls = kind === 'antibiotics' ? 'bacterial' : 'parasitic';
+      const KIND_CLASS = { antibiotics: 'bacterial', antiparasitic: 'parasitic', antimalarial: 'fever', cold_remedy: 'fever', bandage: 'bacterial', ors: 'parasitic' };
+      const cls = KIND_CLASS[kind] || 'parasitic';
       const kindName = kind === 'antibiotics' ? 'antibiotics' : 'antiparasitic';
       sick.sort((a, b) => {
         const da = this.isDiagnosed('scholar', a.id) ? 1 : 0, db = this.isDiagnosed('scholar', b.id) ? 1 : 0;
@@ -33310,7 +33314,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
       }
       // Channel 2: proper medicine from the Haven pharmacy.
-      const kinds = [{ kind: 'antibiotics', cls: 'bacterial', label: 'antibiotics' }, { kind: 'antiparasitic', cls: 'parasitic', label: 'antiparasitic' }];
+      // (crisis r181: antimalarial joins the kinds — it is the only
+      // regional kind with a 'cure' mapping, so it is the only one
+      // this channel can fire; the ease-only kinds are correctly
+      // skipped by the eff !== 'cure' guard below and stay usable
+      // through useMedicine instead.)
+      const kinds = [{ kind: 'antibiotics', cls: 'bacterial', label: 'antibiotics' }, { kind: 'antiparasitic', cls: 'parasitic', label: 'antiparasitic' }, { kind: 'antimalarial', cls: 'fever', label: 'antimalarials' }];
       for (const k of kinds) {
         let eff = 'no';
         try { eff = this.cureEffectFor(did, k.kind); } catch (e) {}

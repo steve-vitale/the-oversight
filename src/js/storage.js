@@ -639,6 +639,10 @@
     },
     isMedicine(item) {
       if (!item || (item.units ?? 1) <= 0 || (item.doses != null && item.doses <= 0)) return false;
+      // (crisis r181): any dosed medicine is pharmacy material, whatever
+      // the region calls it — the name regex below misses antimalarials,
+      // kakkonto and ORS packets, which are real medicine with medType.
+      if (item.medType) return true;
       const id = item.itemId || item.id || '';
       const def = (this.data.items || []).find(i => i.id === id) || {};
       return !!(def.healAmount || /bandage|poultice|medfoam|salve|antibiotic|remedy|tonic/i.test(id + ' ' + (def.name || '')));

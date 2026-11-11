@@ -84,6 +84,16 @@ will seek infection to boost their build.
 
 ## Change log
 
+- 2026-11-11: Regional ruin medicines (crisis r181): the rare ruin
+  roll's regional variants now ease/cure as their labels promise —
+  antimalarial cures Fever, kakkonto (cold remedy) eases Fever,
+  bandages ease Wound Fever, ORS eases Gut Rot and Fever. ORS packets
+  carry medType 'ors'. Previously the four were dead stock: findable,
+  labeled, but no cure path accepted them and a use burned the dose.
+  Medic-duty channel 2 takes antimalarial (the only regional kind
+  with a 'cure' mapping); the ease-only kinds stay usable through
+  useMedicine.
+
 - 2026-11-09: Radiation Sickness added to the mundane pool (7th mundane;
   sim-radsnap-a). Steve-ruled pellet cost 2026-11-08: the pellet's invisible
   fire, taken in a boost at a time. It is not a germ — no pill touches it;
