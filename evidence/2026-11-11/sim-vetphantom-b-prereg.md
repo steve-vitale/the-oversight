@@ -69,6 +69,25 @@ scholar counts).
   restored byte-identical afterwards (sha checked; tree clean apart
   from this arm's new files).
 
+## Amendment 1 (before any analysis, after the control leg ran)
+
+The GO row "Fix-leg bar agreement 8/8 (w4 + w5, end of run)" as
+first worded — "readiness == ladder == instrument" — is imprecise
+for the w4 bar: `waveCombatReadiness(4).veterans` counts wave-3+
+killers while `_ladderLivingVeterans(4)` counts wave-4+ killers, so
+comparing them directly is comparing two different bars (a living
+wave-3-only veteran correctly reads ready4=1, ladder4=0 — exactly
+what fix-leg seed 190391 shows). The corrected rule is the vetfirst
+rule (`scripts/vetfirst-analyze-20261111.js` line 222, which judged
+vetfirst-b 7/8): w4 bar = readiness(4) == instrument vetsW3;
+w5 bar = readiness(5) == _ladderLivingVeterans(4) == instrument
+vetsW4. The w4-bar ladder read, `_ladderLivingVeterans(3)`, is proven
+live by the fixture (test-vetphantom-b.js reads it in every section,
+43/43 on fixed code); the instrument's vetsW3 recomputes it by the
+same rule. This corrects the comparison definition before analysis —
+it is not a re-scoring of a judged miss. The analyzer was corrected
+to match in the same change.
+
 ## Primary metric + GO threshold
 
 Primary metric: **bar agreement** — readiness == ladder == instrument

@@ -51,7 +51,20 @@ function analyzeSeed(seed, leg) {
     endPantryKcal: d.endPantryKcal, blooded: !!d.blooded,
     errors: (d.instrumentErrors || []).length,
   };
-  // (1) End-of-run triple agreement.
+  // (1) End-of-run triple agreement — the vetfirst rule
+  // (scripts/vetfirst-analyze-20261111.js line 222):
+  //   w4 bar: ready4.veterans == instrument vetsW3.count
+  //     (readiness(4) counts wave-3+ killers; the w4-bar ladder read
+  //     is _ladderLivingVeterans(3), proven live by the fixture —
+  //     the driver records only _ladderLivingVeterans(4), the w5-bar
+  //     ladder read, so the instrument's vetsW3 stands in for it,
+  //     exactly as vetfirst-b did);
+  //   w5 bar: ready5.veterans == ladderVets4 == instrument vetsW4.
+  //   NOTE: readiness(4) vs _ladderLivingVeterans(4) compares two
+  //   DIFFERENT bars (wave-3+ vs wave-4+ killers) — a living wave-3-
+  //   only veteran correctly reads ready4=1, ladder4=0. An earlier
+  //   draft of this analyzer made that comparison; corrected before
+  //   any analysis (see prereg Amendment 1).
   const finW3 = snap && snap.vetsW3 ? snap.vetsW3.count : null;
   const finW4 = snap && snap.vetsW4 ? snap.vetsW4.count : null;
   r.endReady4 = d.ready4 ? d.ready4.veterans : null;
@@ -59,8 +72,8 @@ function analyzeSeed(seed, leg) {
   r.endInstW3 = finW3;
   r.endReady5 = d.ready5 ? d.ready5.veterans : null;
   r.endInstW4 = finW4;
-  r.agreeW4 = (r.endReady4 !== null && r.endLadder4 !== null && finW3 !== null)
-    ? (r.endReady4 === r.endLadder4 && r.endLadder4 === finW3) : null;
+  r.agreeW4 = (r.endReady4 !== null && finW3 !== null)
+    ? (r.endReady4 === finW3) : null;
   r.agreeW5 = (r.endReady5 !== null && r.endLadder4 !== null && finW4 !== null)
     ? (r.endReady5 === r.endLadder4 && r.endLadder4 === finW4) : null;
   // (2) Phantom days: engine ready vs instrument on the same daily snapshot.
