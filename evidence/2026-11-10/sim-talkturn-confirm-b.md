@@ -543,3 +543,57 @@ confirm conjunction fails on the counter half, which is a
 different lever's wall. No further talk-only confirm is owed;
 the next step is the pairing decision (blank 1), a
 coordinator/Steve call.
+
+## Adoption landing note (2026-11-11, Loop B adoption — landing prep only, verdict NOT re-judged)
+
+- Branch state verified at adoption start: `git status --short`
+  empty; `git log master..sim-talkturn-confirm-b` exactly the 4
+  commits (0ab86d446 prereg, 836c4d01c driver/analyzer/proof,
+  135ebe21d corpus + evidence, 8595451c5 proof-plant-seed fix).
+- Corpus verified intact: 32 files in
+  `evidence/2026-11-10/perseed-talkturn-confirm-b/` (16 armed +
+  16 control); every cell parses, seed/mode match filename,
+  days > 0, 0 instrument errors, anchor cc61e53b1e8e throughout.
+  The 150233-armed cell re-verified individually: seed 150233,
+  armed, 140 days, linkTotal 2, 0 instrument errors, anchor
+  cc61e53b1e8e — byte-identical to the restored cell.
+- Rebase 1: onto explicit master SHA 6769471caada1e76a25b8ea2ada20683885a8d72
+  (read in the main tree immediately before rebasing; "journey-landing
+  r125"). Clean, no stop-at-pick, no conflicts. New tip 39b2bd6de.
+  Proofs re-run on that base: test-talkturn-confirm-b 11/11 PASS,
+  test-talkturn-a 11/11 PASS.
+- `node scripts/check.js --quick` on the 6769471c-based tree:
+  **293 passed, 7 failed in 825s** (exit 1; full log
+  /tmp/ttc-checkquick.log, worktree-external scratch). Failing:
+  godpath/test-measurement-proof-update.js ("Proof source inputs
+  are not current"), godpath/test-measurement-workflow.js
+  (retained neutrality proof vs current inputs),
+  godpath/test-mobile-combat-cadence.js (Continue wraps announced
+  round a second time), godpath/test-occupation-panels.js (real CLI
+  workflow), godpath/test-measurement-cache-flags.js (neutral panels),
+  godpath/test-phone-frame-proof.js (retained phone receipt stale
+  vs index.html et al.), test-establishment-r20-fixes-20261020.js
+  (racks-full voice gate: next-day expected 2, got 1). None touches
+  this arm's files (scripts/talkturn-*, evidence only, zero src/js);
+  all 7 are pre-existing proof-freshness/maintenance failures. The
+  standing profile was 294 passed / 6 failed, so this run is one
+  failure heavier — the extra failure arrived with master movement,
+  not with this arm (no arm file is in any failing test's path).
+  No failure waived; no test edited.
+- Infrastructure note: the first check.js run was killed by SIGTERM
+  during a service restart ~36 min in (output lost — it was piped
+  through `tail`); the re-run wrote to /tmp/ttc-checkquick.log and
+  completed. Nothing else was affected; branch and corpus were
+  re-verified clean after the restart.
+- Rebase 2: master moved during the check run, so re-rebased onto
+  explicit master SHA ec7335bd714185608ebf03f5332643e32482ac42
+  (read in the main tree immediately before rebasing). Clean, no
+  stop-at-pick, no conflicts. New tip 3e8fef157. Proofs re-run on
+  the final base: test-talkturn-confirm-b 11/11 PASS,
+  test-talkturn-a 11/11 PASS. Master re-checked stable at ec7335bd
+  after the proof re-run. The check.js count above stands for the
+  arm's unchanged content (the re-rebase replayed the same 4
+  commits; no arm file differs between the two bases).
+- This note committed as its own small commit via the worktree's
+  scripts/safe-commit.sh. No merge, no push, no bump, no live
+  verification — coordinator merges.
