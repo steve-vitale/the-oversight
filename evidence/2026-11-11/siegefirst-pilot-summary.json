@@ -1,0 +1,545 @@
+{
+  "run": "siegefirst-pilot",
+  "mode": "control",
+  "seeds": 8,
+  "GO": {
+    "unclassified": 0,
+    "residue": 1,
+    "verdict": "NO-GO"
+  },
+  "unclassifiedRows": [],
+  "residueRows": [
+    {
+      "kind": "linger-unexplained-end",
+      "row": {
+        "seed": 210405,
+        "key": "m271",
+        "id": "redactor",
+        "firstDay": 94,
+        "lastDay": 95
+      }
+    }
+  ],
+  "raids": {
+    "calls": 962,
+    "fired": 80,
+    "nonfire": {
+      "too-few-monsters": 20,
+      "roll": 351,
+      "cooldown": 465,
+      "pantry-too-low": 46
+    },
+    "raiders": 366,
+    "raiderWaves": {
+      "1": 109,
+      "2": 59,
+      "3": 100,
+      "4": 98
+    },
+    "wallDamageKcal": 31067,
+    "wallDamageRows": 264,
+    "palisadeRaids": 65,
+    "bigRaider": 80,
+    "redrafted": 42,
+    "diedInDraft": 0
+  },
+  "pillages": {
+    "calls": 355,
+    "byCaller": {
+      "gorge": 355
+    },
+    "kcal": 394788,
+    "gorgeKcal": 394788,
+    "gorgeNights": 0
+  },
+  "lingerers": {
+    "episodes": 89,
+    "byEnd": {
+      "met-in-fight": 52,
+      "drifted": 28,
+      "killed": 2,
+      "driven-off": 3,
+      "unexplained-end": 1,
+      "still-lingering": 3
+    },
+    "totalNights": 355,
+    "totalGorgeKcal": 394788,
+    "maxNights": 19,
+    "stillLingering": 3
+  },
+  "aidCrises": {
+    "raised": 80,
+    "raisedRaiders": 80,
+    "echoes": 0,
+    "resolved": 77,
+    "byHow": {
+      "fought": 58,
+      "moved-on": 19
+    },
+    "foughtRaiders": 58
+  },
+  "crisisFires": {
+    "total": 304,
+    "byKind": {
+      "the-siege": 58,
+      "first-grave": 29,
+      "breach": 212,
+      "hunger-winter": 4,
+      "blood-on-air": 1
+    },
+    "theSiege": 58,
+    "theSiegeSeeds": 8
+  },
+  "contests": {
+    "fired": 279,
+    "byId": {
+      "pattern": 6,
+      "calorie_run": 8,
+      "echo": 6,
+      "auction": 6,
+      "witness": 6,
+      "oath": 2,
+      "beastmaster": 2,
+      "starve": 6,
+      "hide": 10,
+      "sorting": 6,
+      "duel": 18,
+      "siege": 12,
+      "cookfight": 8,
+      "whoate": 12,
+      "gauntlet": 14,
+      "box": 6,
+      "tithe": 10,
+      "drop": 6,
+      "secrets": 2,
+      "vigil": 2,
+      "guest": 2,
+      "longodds": 10,
+      "cache": 2,
+      "lockpick": 2,
+      "fetch": 4,
+      "riddle": 2,
+      "pit": 10,
+      "moot": 2,
+      "wrongmap": 2,
+      "lies": 2,
+      "alibi": 4,
+      "honey": 2,
+      "impress": 4,
+      "quiet": 2,
+      "informant": 2,
+      "exchange": 4,
+      "price": 2
+    },
+    "siegeFired": 12,
+    "siegeSeeds": 5,
+    "siegeSeen": 6,
+    "shows": 63,
+    "showsById": {
+      "the_leak": 3,
+      "shelter_swap": 2,
+      "complaint_box": 2,
+      "crib_mine": 3,
+      "rose_ceremony": 4,
+      "makeover": 2,
+      "death_reel": 2,
+      "stare_down": 2,
+      "dance_off": 3,
+      "grudge_pudding": 4,
+      "why_eat": 3,
+      "swear_jar": 3,
+      "tiny_door": 2,
+      "infomercial": 1,
+      "nap_wars": 1,
+      "who_moved_it": 2,
+      "who_farted": 3,
+      "how_to_human": 4,
+      "moot_show": 3,
+      "lost_found": 2,
+      "break_room": 2,
+      "hot_take": 1,
+      "mystery_smell": 1,
+      "ask_human": 1,
+      "small_claims": 3,
+      "karaoke": 1,
+      "talent_pit": 1,
+      "museum_of_you": 1,
+      "apology_tour": 1
+    },
+    "summons": 10
+  },
+  "shelter": {
+    "calls": 40,
+    "byVerb": {
+      "shelterVillagers": 14,
+      "shelterEveryoneBut": 14,
+      "releaseShelter": 6,
+      "shelterAllClear": 6
+    },
+    "withThreat": 28,
+    "noThreat": 12
+  },
+  "spawns": {
+    "total": 494,
+    "byWave": {
+      "1": 169,
+      "2": 103,
+      "3": 98,
+      "4": 123,
+      "5": 1
+    },
+    "wave6": 0,
+    "wave6Ids": {}
+  },
+  "fights": {
+    "total": 221,
+    "byWave": {
+      "1": 36,
+      "2": 26,
+      "3": 54,
+      "4": 104
+    },
+    "lingerFights": 128,
+    "nonMonster": 1,
+    "ends": {
+      "won": 93,
+      "lost": 99,
+      "routed": 29
+    }
+  },
+  "deaths": {
+    "total": 579,
+    "home": 415,
+    "away": 164,
+    "byKind": {
+      "monster": 447,
+      "villager": 128,
+      "person": 4
+    },
+    "playerHome": 82,
+    "playerAway": 21,
+    "villagerHome": 333,
+    "villagerAway": 143
+  },
+  "says": {
+    "total": 1600,
+    "byBucket": {
+      "treeline": 1069,
+      "palisade": 110,
+      "raid": 360,
+      "siege-word": 8,
+      "hold-line": 50,
+      "gorge": 3
+    },
+    "capped": 8
+  },
+  "snapshots": 952,
+  "malformedSnapshots": 0,
+  "instrumentErrors": 0,
+  "wall": {
+    "wins": 0,
+    "national": 0,
+    "table": 0,
+    "wave4": 8,
+    "wave5": 0,
+    "regional": 8,
+    "medianSurvival": 124,
+    "survivals": [
+      78,
+      88,
+      118,
+      124,
+      124,
+      135,
+      150,
+      150
+    ],
+    "deaths": 579
+  },
+  "wrapLive": {
+    "tele": 8,
+    "havenGrowthDaily": 8,
+    "havenRaidTick": 8,
+    "contestTick": 8,
+    "spawnWorldMonster": 8,
+    "raiseAidCrisis": 8,
+    "fireCrisis": 8,
+    "resolveAidCrisis": 8,
+    "fireContest": 8,
+    "shelterVillagers": 8,
+    "shelterEveryoneBut": 8,
+    "raidPillage": 8,
+    "releaseShelter": 5,
+    "shelterAllClear": 5
+  },
+  "perSeed": [
+    {
+      "seed": 210401,
+      "days": 118,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "deaths": 96,
+      "endPantryKcal": 0,
+      "errors": 0,
+      "raidsFired": 10,
+      "raiders": 45,
+      "palisadeWallDmg": 3871,
+      "pillageKcal": 36286,
+      "gorgeKcal": 36286,
+      "lingerEpisodes": 9,
+      "lingerEnds": {
+        "met-in-fight": 6,
+        "drifted": 2,
+        "killed": 1
+      },
+      "siegeContestFired": true,
+      "sayBuckets": {
+        "treeline": 135,
+        "palisade": 19,
+        "raid": 38,
+        "siege-word": 1,
+        "hold-line": 7
+      },
+      "theSiege": true
+    },
+    {
+      "seed": 210402,
+      "days": 150,
+      "endReason": "survived",
+      "won": false,
+      "villageLost": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "deaths": 82,
+      "endPantryKcal": 0,
+      "errors": 0,
+      "raidsFired": 11,
+      "raiders": 53,
+      "palisadeWallDmg": 4771,
+      "pillageKcal": 47011,
+      "gorgeKcal": 47011,
+      "lingerEpisodes": 8,
+      "lingerEnds": {
+        "drifted": 5,
+        "met-in-fight": 3
+      },
+      "siegeContestFired": true,
+      "sayBuckets": {
+        "treeline": 124,
+        "palisade": 10,
+        "raid": 58,
+        "siege-word": 1,
+        "hold-line": 7
+      },
+      "theSiege": true
+    },
+    {
+      "seed": 210403,
+      "days": 78,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "deaths": 47,
+      "endPantryKcal": 0,
+      "errors": 0,
+      "raidsFired": 8,
+      "raiders": 36,
+      "palisadeWallDmg": 2421,
+      "pillageKcal": 64163,
+      "gorgeKcal": 64163,
+      "lingerEpisodes": 9,
+      "lingerEnds": {
+        "drifted": 7,
+        "met-in-fight": 2
+      },
+      "siegeContestFired": false,
+      "sayBuckets": {
+        "treeline": 131,
+        "palisade": 12,
+        "siege-word": 1,
+        "raid": 49,
+        "hold-line": 7
+      },
+      "theSiege": true
+    },
+    {
+      "seed": 210404,
+      "days": 150,
+      "endReason": "survived",
+      "won": false,
+      "villageLost": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "deaths": 68,
+      "endPantryKcal": 12210,
+      "errors": 0,
+      "raidsFired": 12,
+      "raiders": 60,
+      "palisadeWallDmg": 4516,
+      "pillageKcal": 47415,
+      "gorgeKcal": 47415,
+      "lingerEpisodes": 11,
+      "lingerEnds": {
+        "met-in-fight": 8,
+        "drifted": 3
+      },
+      "siegeContestFired": true,
+      "sayBuckets": {
+        "treeline": 134,
+        "palisade": 12,
+        "siege-word": 1,
+        "raid": 47,
+        "hold-line": 6
+      },
+      "theSiege": true
+    },
+    {
+      "seed": 210405,
+      "days": 124,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 100,
+      "deaths": 75,
+      "endPantryKcal": 957,
+      "errors": 0,
+      "raidsFired": 10,
+      "raiders": 49,
+      "palisadeWallDmg": 3675,
+      "pillageKcal": 89027,
+      "gorgeKcal": 89027,
+      "lingerEpisodes": 18,
+      "lingerEnds": {
+        "killed": 1,
+        "met-in-fight": 9,
+        "driven-off": 1,
+        "drifted": 5,
+        "unexplained-end": 1,
+        "still-lingering": 1
+      },
+      "siegeContestFired": false,
+      "sayBuckets": {
+        "treeline": 144,
+        "palisade": 15,
+        "raid": 32,
+        "siege-word": 1,
+        "hold-line": 7,
+        "gorge": 1
+      },
+      "theSiege": true
+    },
+    {
+      "seed": 210406,
+      "days": 135,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "deaths": 71,
+      "endPantryKcal": 25664,
+      "errors": 0,
+      "raidsFired": 11,
+      "raiders": 49,
+      "palisadeWallDmg": 6138,
+      "pillageKcal": 36100,
+      "gorgeKcal": 36100,
+      "lingerEpisodes": 9,
+      "lingerEnds": {
+        "met-in-fight": 5,
+        "drifted": 2,
+        "driven-off": 1,
+        "still-lingering": 1
+      },
+      "siegeContestFired": true,
+      "sayBuckets": {
+        "treeline": 121,
+        "palisade": 21,
+        "raid": 51,
+        "siege-word": 1,
+        "hold-line": 5,
+        "gorge": 1
+      },
+      "theSiege": true
+    },
+    {
+      "seed": 210407,
+      "days": 88,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "deaths": 55,
+      "endPantryKcal": 0,
+      "errors": 0,
+      "raidsFired": 6,
+      "raiders": 31,
+      "palisadeWallDmg": 1769,
+      "pillageKcal": 47386,
+      "gorgeKcal": 47386,
+      "lingerEpisodes": 11,
+      "lingerEnds": {
+        "met-in-fight": 8,
+        "drifted": 3
+      },
+      "siegeContestFired": true,
+      "sayBuckets": {
+        "treeline": 149,
+        "palisade": 9,
+        "raid": 37,
+        "siege-word": 1,
+        "gorge": 1,
+        "hold-line": 3
+      },
+      "theSiege": true
+    },
+    {
+      "seed": 210408,
+      "days": 124,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "deaths": 85,
+      "endPantryKcal": 0,
+      "errors": 0,
+      "raidsFired": 12,
+      "raiders": 43,
+      "palisadeWallDmg": 3906,
+      "pillageKcal": 27400,
+      "gorgeKcal": 27400,
+      "lingerEpisodes": 14,
+      "lingerEnds": {
+        "met-in-fight": 11,
+        "drifted": 1,
+        "driven-off": 1,
+        "still-lingering": 1
+      },
+      "siegeContestFired": false,
+      "sayBuckets": {
+        "treeline": 131,
+        "palisade": 12,
+        "raid": 48,
+        "siege-word": 1,
+        "hold-line": 8
+      },
+      "theSiege": true
+    }
+  ]
+}
