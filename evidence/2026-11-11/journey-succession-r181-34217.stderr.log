@@ -1,0 +1,40 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Luigi","t":92},{"id":"Sari","t":92},{"id":"Hannah","t":91},{"id":"Felipe","t":90}], roster=12
+INH readable=true scripted=true deadItems=12 distinct=11 transferred=4 vanished=2 keptPlants=21 inheritedPlants=1 keptSkills=7 inheritedSkills=13 succTrustPre=91 succTrustPost=73
+PARITY readable=true equal=true inherited=[] pre=["iron_stomach","echo_location","rage","dowsing","pyrokinesis","adrenaline_control"] post=["iron_stomach","echo_location","rage","dowsing","pyrokinesis","adrenaline_control"]
+DEATH d41 (the expedition, scripted): Isabella -> Hannah | passed=true lin=true mo=true trust=73 vouchers=9
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=4 vanished=2 of 11 distinct dead-bearer items
+  CONVO d+3 with Luigi (refused=false)
+  CONVO d+3 with Sari (refused=false)
+  STRANGER-PROBE d+3 with Yuki (trust=22 refused=false)
+  CONVO d+7 with Sari (refused=false)
+  CONVO d+7 with Luigi (refused=false)
+  CONVO d+14 with Ishrat (refused=false)
+  CONVO d+14 with Sari (refused=false)
+  BOND-CONVO d+14 with Luigi (depth=1 v=40 refused=false)
+  CONVO d+30 with Luigi (refused=false)
+  CONVO d+30 with Devon (refused=false)
+  CONVO d+45 with Luigi (refused=false)
+  CONVO d+45 with Devon (refused=false)
+  CONVO d+53 with Devon (refused=false)
+  CONVO d+53 with Sari (refused=false)
+  CONVO d+64 with Devon (refused=false)
+  CONVO d+64 with Sari (refused=false)
+
+FUNERAL: deathBeat=7 recover=1 vouch=1 (eligible=9) echo=6 organicBurial={"respects":false,"bury":false} halfRation=2
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":52,"offerLines":27,"codexPlantsDelta":28,"codexSkillsDelta":16,"codexAbilitiesDelta":6,"xpDelta":-33,"any":true} pantry 102913->3000
+TRUST-DIALS: office 73->93 (+20, climb) | villageMean 78.3->83.6 (+5.3, climb) | ge60 9->6 | movers>=5: [{"id":"Devon","from":66,"to":98,"delta":32},{"id":"Boris","from":63,"to":92,"delta":29},{"id":"Fatima","from":88,"to":97,"delta":9},{"id":"Yuki","from":14,"to":22,"delta":8}]
+DEED-LEDGER: calls=131 summary={"teachPlant":{"calls":69,"ok":69,"deltaSum":0,"deltaN":69,"positive":0,"meanDelta":0},"giveFood":{"calls":27,"ok":27,"deltaSum":23,"deltaN":27,"positive":20,"meanDelta":0.85},"donateToPantry":{"calls":35,"ok":35,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=3 grief-excluded=3
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=6 (convo=6, say=0)) m4=true m5=manual | endDay=111 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=131) trustVerdict={"readable":true,"officeMantle":73,"officeLast":93,"officeDelta":20,"officeClass":"climb","villageMantle":78.3,"villageLast":83.6,"villageDelta":5.3,"villageClass":"climb","villageGe60Mantle":9,"villageGe60Last":6,"movers":[{"id":"Devon","from":66,"to":98,"delta":32},{"id":"Boris","from":63,"to":92,"delta":29},{"id":"Fatima","from":88,"to":97,"delta":9},{"id":"Yuki","from":14,"to":22,"delta":8}]}
+E6/CALLCHECK: e6={"callMoves":17,"withCensus":17,"chainHandoffs":3,"trustMoves":14} callCheck={"dailyMoveDays":17,"callMoveDays":16,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=7 (v2=7, excludedLoot=0))
+E7/R47: e7={"trustMoves":14,"soloOffice":10,"soloOfficeDeltas":[2,1,2,1,1,1,2,2,2,1],"soloBearerDeltaExact":[2,1,2,1,1,1,2,2,2,1],"singleMoverBearer":1,"singleMoverOther":3,"eventClass":{"event-only":0,"deed-only":2,"both":12,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":6,"v2":7,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":3,"known":3,"unknown":0} e3={"dailyDays":71,"moves":17}

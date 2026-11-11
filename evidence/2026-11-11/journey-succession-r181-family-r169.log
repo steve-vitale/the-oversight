@@ -1,0 +1,24 @@
+PASS dry-allblocked: villager available — roster=11
+PASS dry-allblocked: convo opened — refused=false
+PASS dry-allblocked: threadBeat is null on the staged thread — beat=null
+PASS dry-allblocked: reply is NOT a dry line — "That's... pretty much all of it, honestly."
+PASS dry-allblocked: reply IS an honest closer — "That's... pretty much all of it, honestly."
+PASS dry-allblocked: NO dry line anywhere in the transcript — dry line present ahead of the closer
+PASS dry-allblocked: thread marked dry (dlg:more retires) — threadDryFor=secret
+PASS beat-blocked: villager available — roster=11
+PASS beat-blocked: convo opened — refused=false
+PASS beat-blocked: goal pool has 2+ lines (handler draws after the pre-check) — goal=joy pool=8
+PASS beat-blocked: threadBeat returns a beat pre-pick — "Watch — I'll get a real laugh out of this camp before the week is out."
+PASS beat-blocked: reply is NOT a dry line — "That's the whole of it. Sorry."
+PASS beat-blocked: reply IS an honest closer — "That's the whole of it. Sorry."
+PASS beat-blocked: NO dry line anywhere in the transcript — dry line present ahead of the closer
+PASS beat-blocked: thread marked dry (dlg:more retires) — threadDryFor=goal
+PASS control: villager available — roster=11
+PASS control: convo opened — refused=false
+PASS control: threadBeat is null on the staged thread — beat=null
+PASS control: reply is NOT a dry line — "That's... pretty much all of it, honestly."
+PASS control: reply IS an honest closer — "That's... pretty much all of it, honestly."
+PASS control: NO dry line anywhere in the transcript — dry line present ahead of the closer
+PASS control: thread marked dry (dlg:more retires) — threadDryFor=secret
+
+ALL GREEN

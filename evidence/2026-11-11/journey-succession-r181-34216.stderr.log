@@ -1,0 +1,39 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Dzifa","t":92},{"id":"Penelope","t":90},{"id":"Naomie","t":90},{"id":"Oliver","t":75}], roster=10
+INH readable=true scripted=true deadItems=12 distinct=10 transferred=1 vanished=1 keptPlants=28 inheritedPlants=3 keptSkills=9 inheritedSkills=7 succTrustPre=90 succTrustPost=59
+PARITY readable=true equal=true inherited=[] pre=["night_eyes","bird_whisperer"] post=["night_eyes","bird_whisperer"]
+DEATH d41 (the expedition, scripted): Denise -> Naomie | passed=true lin=true mo=true trust=59 vouchers=6
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=6 vanished=1 of 10 distinct dead-bearer items
+  CONVO d+3 with Dzifa (refused=false)
+  CONVO d+3 with Penelope (refused=false)
+  STRANGER-PROBE d+3 with Chantal (trust=2 refused=false)
+  CONVO d+7 with Dzifa (refused=false)
+  CONVO d+7 with Penelope (refused=false)
+  CONVO d+14 with Dzifa (refused=false)
+  CONVO d+14 with Oliver (refused=false)
+  CONVO d+30 with Dzifa (refused=false)
+  CONVO d+30 with Penelope (refused=false)
+  CONVO d+45 with Dzifa (refused=false)
+  CONVO d+45 with Penelope (refused=false)
+  CONVO d+53 with Dzifa (refused=false)
+  CONVO d+53 with Penelope (refused=false)
+  CONVO d+64 with Dzifa (refused=false)
+  CONVO d+64 with Penelope (refused=false)
+
+FUNERAL: deathBeat=5 recover=1 vouch=1 (eligible=6) echo=3 organicBurial={"respects":false,"bury":false} halfRation=4
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":54,"offerLines":39,"codexPlantsDelta":3,"codexSkillsDelta":12,"codexAbilitiesDelta":8,"xpDelta":167,"any":true} pantry 51628->10371
+TRUST-DIALS: office 59->62 (+3, climb) | villageMean 63.6->78.6 (+15, climb) | ge60 6->6 | movers>=5: [{"id":"Zoe","from":52,"to":90,"delta":38},{"id":"Henry","from":62,"to":90,"delta":28},{"id":"Dmitri","from":72,"to":91,"delta":19},{"id":"Oliver","from":76,"to":91,"delta":15}]
+DEED-LEDGER: calls=13 summary={"teachPlant":{"calls":6,"ok":6,"deltaSum":0,"deltaN":6,"positive":0,"meanDelta":0},"giveFood":{"calls":7,"ok":7,"deltaSum":10,"deltaN":7,"positive":7,"meanDelta":1.43}}
+
+IDENTITY TRIPS: raw=1 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=3 (convo=3, say=0)) m4=true m5=manual | endDay=111 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=13) trustVerdict={"readable":true,"officeMantle":59,"officeLast":62,"officeDelta":3,"officeClass":"climb","villageMantle":63.6,"villageLast":78.6,"villageDelta":15,"villageClass":"climb","villageGe60Mantle":6,"villageGe60Last":6,"movers":[{"id":"Zoe","from":52,"to":90,"delta":38},{"id":"Henry","from":62,"to":90,"delta":28},{"id":"Dmitri","from":72,"to":91,"delta":19},{"id":"Oliver","from":76,"to":91,"delta":15}]}
+E6/CALLCHECK: e6={"callMoves":3,"withCensus":3,"chainHandoffs":0,"trustMoves":3} callCheck={"dailyMoveDays":3,"callMoveDays":3,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=4 (v2=5, excludedLoot=1))
+E7/R47: e7={"trustMoves":3,"soloOffice":2,"soloOfficeDeltas":[1,1],"soloBearerDeltaExact":[1,1],"singleMoverBearer":0,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":1,"both":2,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":3,"v2":5,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":0,"known":0,"unknown":0} e3={"dailyDays":71,"moves":3}

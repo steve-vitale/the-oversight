@@ -1,0 +1,33 @@
+PASS details: wounded villager set up — vid=gen_etvg917
+PASS details: need is heal_help — need=heal_help
+PASS details: convo opened — refused=false
+PASS details: want is ask_favor — want=ask_favor
+PASS details: opener states the ask (not dry) — "I can't reach this properly. Will you help me clean it?"
+PASS details: dlg:details offered — choices=dlg:favor_requirements,dlg:commit,dlg:details,dlg:cant,dlg:subject,leave,silence
+PASS details: reply is NOT a dry line — "Every day it's angrier. I need it cleaned before it turns — I can't work a wound like this. Wrap it tight when you're d
+PASS details: reply names the need (wound/cut) — "Every day it's angrier. I need it cleaned before it turns — I can't work a wound like this. Wrap it tight when you're d
+PASS details: want still live (not evaporated) — stage=2
+PASS ask: wounded villager set up — vid=gen_165iqvd
+PASS ask: need is heal_help — need=heal_help
+PASS ask: convo opened — refused=false
+PASS ask: want still stage 0 at open — stage=0 want=ask_favor
+PASS ask: alive:want:ask_favor offered — found=true choices=alive:want:ask_favor,ask:goal,ask:others,ask:gossip,ask:spread_rumor,menu:more,leave,silence
+PASS ask: reply is NOT a dry line — "Every day it's angrier. I need it cleaned before it turns — I can't work a wound like this. Wrap it tight when you're d
+PASS ask: reply states a need (wound/cut/food/water/help) — "Every day it's angrier. I need it cleaned before it turns — I can't work a wound like this. Wrap it tight when you're d
+PASS ask: want surfaced (stage >= 1) — stage=1
+PASS control: wounded villager set up — vid=gen_b0wgemp
+PASS control: need is heal_help — need=heal_help
+PASS control: convo opened — refused=false
+PASS control: alive:want:ask_favor offered — found=true choices=alive:want:ask_favor,ask:goal,ask:others,ask:gossip,ask:spread_rumor,menu:more,leave,silence
+PASS control: ask reply is NOT a dry line — "I can't reach this properly. Will you help me clean it?"
+PASS control: ask reply states the ask — "I can't reach this properly. Will you help me clean it?"
+PASS control: dlg:details offered after the ask — choices=dlg:commit,dlg:favor_requirements,dlg:details,dlg:cant,dlg:subject,leave,silence
+PASS control: details reply is NOT a dry line — "Every day it's angrier. I need it cleaned before it turns — I can't work a wound like this. Wrap it tight when you're d
+PASS control: details reply gives the why — "Every day it's angrier. I need it cleaned before it turns — I can't work a wound like this. Wrap it tight when you're d
+PASS ledger: wounded villager set up — vid=gen_4zzjmk3
+PASS ledger: need is heal_help — need=heal_help
+PASS ledger: convo opened — refused=false
+PASS ledger: first speak lands (no fellBack)
+PASS ledger: second speak dry-replaces (fellBack)
+
+ALL GREEN
