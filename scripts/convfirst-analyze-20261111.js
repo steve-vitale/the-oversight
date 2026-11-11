@@ -76,11 +76,37 @@ const INVITE_LINES = [
 
 // Reconstruct talk-request instances for one seed and classify each
 // by source + fate. Key: vid + stage day.
+//
+// v2 (pilot round 1 root cause): stagings are fingerprint-valued —
+// a stager OVERWRITES a live request for the same vid (no delete),
+// so instances are built from snapshot fingerprints, initiative
+// events (fingerprint diff), talk opens (request line), and expiry
+// events together. Fates, in precedence order:
+//   delivered (a snapshot or open saw delivered=true — the opener
+//     fired; under default play this is a walk-out open, not a held
+//     conversation) > purged (deleted by playerDeath's
+//     self-talk-request purge, ledger.js r133 — the successor's
+//     own request dies with the old office) > decided (a tele
+//     bond_proposed accepted/refused for this vid+kind — the
+//     proposal was settled by character) >
+//     expired (an expireTalkRequests prune, or a tele expired) >
+//     superseded (overwritten by a newer request for the same vid
+//     while undelivered) > pending-at-end (in the final snapshot,
+//     undelivered) > unknown (none of the above — a GO failure).
+// Decided/superseded are classified fates, not 'other': they are
+// real engine paths (consumeBondRequest/consumeLinkRaise on
+// character decisions; overwrite staging), discovered by the pilot
+// and named here; the metric-review section of the evidence
+// records the taxonomy extension.
 function analyzeRequests(j) {
   const tk = j.talk || {};
   const daily = j.daily || [];
+  const bondEvents = j.bondEvents || [];
   const instances = {}; // key -> {vid, day, line, bondProposal, linkRaise, source, fate}
   function key(vid, day) { return vid + '|' + day; }
+  function fp(q) {
+    return String(q.day == null ? '?' : q.day) + '|' + String(q.line || '') + '|' + (q.bondProposal ? 'B' : '') + (q.linkRaise ? 'L' : '');
+  }
   function ensure(vid, day, extra) {
     const k = key(vid, day);
     if (!instances[k]) instances[k] = { vid: vid, day: day, line: null, bondProposal: false, linkRaise: false, source: null, fate: null };
@@ -97,21 +123,100 @@ function analyzeRequests(j) {
       ensure(q.vid, q.day, { line: q.line, bondProposal: q.bondProposal, linkRaise: q.linkRaise });
     });
   });
-  // Initiative stagings (source = villagerInitiative).
+  // Initiative stagings (source = villagerInitiative), including
+  // overwrites (fingerprint diff): the superseded old request is
+  // recorded as its own instance with fate superseded.
   (tk.initiativeEvents || []).forEach(function (e) {
     const inst = ensure(e.vid, e.day, { line: e.line, bondProposal: e.bondProposal, linkRaise: e.linkRaise });
     inst.source = 'villagerInitiative';
     inst.reasonKind = reasonKind(e.line);
+    if (e.superseded && e.superseded.day != null) {
+      const old = ensure(e.vid, e.superseded.day, { line: e.superseded.line });
+      if (!old.fate) old.fate = 'superseded';
+    }
   });
-  // Expiries (fate = expired unless already delivered).
-  const expiredKeys = {};
+  // Supersession events (instrument fingerprint diffs, both the
+  // villagerInitiative wrap and the snapshot watch).
+  (tk.supersedeEvents || []).forEach(function (e) {
+    if (e.oldDay == null) return;
+    const old = ensure(e.vid, e.oldDay, { line: e.oldLine });
+    if (!old.fate) old.fate = 'superseded';
+    // The new request is its own instance (usually already known
+    // from a snapshot); make sure it exists.
+    if (e.newDay != null) ensure(e.vid, e.newDay, { line: e.newLine });
+  });
+  // Snapshot fingerprint changes: an independent supersession
+  // cross-check (a vid's fingerprint changing between consecutive
+  // snapshots while the old one was undelivered).
+  for (let i = 1; i < daily.length; i++) {
+    const prev = {};
+    (daily[i - 1].talkRequests || []).forEach(function (q) { prev[q.vid] = q; });
+    (daily[i].talkRequests || []).forEach(function (q) {
+      const p = prev[q.vid];
+      if (p && !p.delivered && fp(p) !== fp(q)) {
+        const old = ensure(q.vid, p.day, { line: p.line });
+        if (!old.fate) old.fate = 'superseded';
+      }
+    });
+  }
+  // Expiries (fate = expired unless already delivered/decided).
   (tk.expireEvents || []).forEach(function (e) {
     const stageDay = e.day - (e.age || 0);
     const inst = ensure(e.vid, stageDay, { bondProposal: e.bondProposal, linkRaise: e.linkRaise });
-    expiredKeys[key(e.vid, stageDay)] = true;
-    if (inst.fate !== 'delivered') inst.fate = 'expired';
+    if (inst.fate !== 'delivered' && inst.fate !== 'decided') inst.fate = 'expired';
     inst.expiredDelivered = !!e.delivered;
   });
+  // Bond/link decisions via tele bond_proposed events: accepted /
+  // refused / expired for this vid+kind, on/after the stage day.
+  // TARGET-CHECKED: person-kind tele events are mostly
+  // villager-villager bonds (proposeBond via npcBondTick), which
+  // stage no talk request — only an event whose target is the
+  // scholar on that day (scholarId from the daily snapshots)
+  // decides a scholar-directed bond proposal. Link events must
+  // target the village the vid raised (pendingRaises roll).
+  // One pending proposal per vid at a time, so first match by day.
+  function scholarIdOn(day) {
+    for (let i = daily.length - 1; i >= 0; i--) {
+      if (daily[i].day <= day && daily[i].scholarId) return daily[i].scholarId;
+    }
+    return (daily.length && daily[0].scholarId) || null;
+  }
+  function raisedVillageOn(vid, day) {
+    for (let i = daily.length - 1; i >= 0; i--) {
+      if (daily[i].day <= day) {
+        const pr = (daily[i].pendingRaises || []).filter(function (p) { return p.vid === vid; })[0];
+        if (pr) return pr.villageId;
+      }
+    }
+    return null;
+  }
+  function decideFromBondEvents(inst) {
+    if (inst.fate === 'delivered' || inst.fate === 'purged') return;
+    const kind = inst.linkRaise ? 'link' : (inst.bondProposal ? 'person' : null);
+    if (!kind) return;
+    const cands = bondEvents.filter(function (e) {
+      if (e.initiator !== inst.vid || e.kind !== kind || e.day < inst.day) return false;
+      if (!(e.outcome === 'accepted' || e.outcome === 'refused' || e.outcome === 'expired')) return false;
+      if (kind === 'person') {
+        const sch = scholarIdOn(e.day);
+        if (sch && e.target !== sch) return false;
+        if (!sch && e.target === inst.vid) return false;
+      } else {
+        const rv = raisedVillageOn(inst.vid, e.day);
+        if (rv && e.target !== rv) return false;
+      }
+      return true;
+    }).sort(function (a, b) { return a.day - b.day; });
+    if (!cands.length) return;
+    const first = cands[0];
+    if (first.outcome === 'expired') {
+      if (!inst.fate) inst.fate = 'expired';
+    } else {
+      inst.fate = 'decided';
+      inst.decidedOutcome = first.outcome;
+      inst.decidedDay = first.day;
+    }
+  }
   // Deliveries: any snapshot or open that saw delivered=true.
   daily.forEach(function (s) {
     (s.talkRequests || []).forEach(function (q) {
@@ -123,10 +228,33 @@ function analyzeRequests(j) {
   });
   (tk.talkOpens || []).forEach(function (ev) {
     if (ev.talkReq && ev.talkReq.delivered && ev.talkReq.day != null) {
-      const inst = ensure(ev.vid, ev.talkReq.day, {});
+      const inst = ensure(ev.vid, ev.talkReq.day, { line: ev.talkReqLine || null });
       inst.fate = 'delivered';
+    } else if (ev.talkReq && ev.talkReq.day != null) {
+      // An open that SAW the request (even undelivered) proves the
+      // instance exists with its line — for snapshot-missed
+      // same-day stagings (invitations have no event record).
+      ensure(ev.vid, ev.talkReq.day, { line: ev.talkReqLine || null, bondProposal: ev.talkReq.bondProposal, linkRaise: ev.talkReq.linkRaise });
     }
   });
+  // Decisions + expiries from bond events (after deliveries, so a
+  // delivered request keeps its delivered fate).
+  // Purges (playerDeath self-talk-request purge, ledger.js r133):
+  // applied after deliveries (a delivered record purged later
+  // keeps 'delivered') and before decisions — a purged request
+  // is gone from the roll, so no later tele decision can settle
+  // it; decideFromBondEvents skips purged instances below.
+  (tk.purgeEvents || []).forEach(function (e) {
+    if (e.oldDay == null) return;
+    const inst = ensure(e.vid, e.oldDay, { line: e.oldLine, bondProposal: e.bondProposal, linkRaise: e.linkRaise });
+    if (!inst.fate) {
+      inst.fate = 'purged';
+      inst.purgedDay = e.day;
+      inst.purgedKind = e.kind || null;
+      inst.purgedSuccessor = e.successor || null;
+    }
+  });
+  Object.keys(instances).forEach(function (k) { decideFromBondEvents(instances[k]); });
   // Final snapshot: still present + undelivered = pending-at-end.
   const last = daily.length ? daily[daily.length - 1] : null;
   if (last) {
@@ -137,6 +265,26 @@ function analyzeRequests(j) {
       }
     });
   }
+  // Shadow supersession: an instance known ONLY from a staging
+  // event (never in any snapshot) that is followed by a later
+  // instance for the same vid was overwritten between snapshots
+  // (staged and superseded within one day, invisible to the daily
+  // roll). The only way a request leaves the roll is prune, decide
+  // or overwrite — with no prune/decide event on record, it was an
+  // overwrite.
+  const snapshottedKeys = {};
+  daily.forEach(function (s) {
+    (s.talkRequests || []).forEach(function (q) { snapshottedKeys[key(q.vid, q.day)] = true; });
+  });
+  Object.keys(instances).forEach(function (k) {
+    const inst = instances[k];
+    if (inst.fate || snapshottedKeys[k]) return;
+    const later = Object.keys(instances).some(function (k2) {
+      const o = instances[k2];
+      return o.vid === inst.vid && o.day > inst.day;
+    });
+    if (later) inst.fate = 'superseded';
+  });
   // Source classification for anything the initiative events did
   // not already claim.
   Object.keys(instances).forEach(function (k) {
@@ -146,7 +294,15 @@ function analyzeRequests(j) {
       else if (inst.linkRaise) inst.source = 'linkRaise';
       else if (inst.day === 1 && inst.line && /Day one/.test(inst.line)) inst.source = 'betrayal-day1';
       else if (inst.line && INVITE_LINES.some(function (l) { return inst.line.indexOf(l) !== -1; })) inst.source = 'invitation';
-      else inst.source = 'other';
+      else if (inst.line && reasonKind(inst.line) != null) {
+        // LINE BACKSTOP: talkReason lines are staged ONLY by
+        // villagerInitiative (no other stager uses them — bond,
+        // link, invitation and day-1 lines are all distinct). Used
+        // when the staging event itself was missed (v1 key-set
+        // diff); counted separately as inferred, not direct.
+        inst.source = 'villagerInitiative';
+        inst.sourceInferred = 'line';
+      } else inst.source = 'other';
     }
     if (!inst.fate) inst.fate = 'unknown';
   });
@@ -287,6 +443,8 @@ function analyzeSeed(j) {
     initiativeStaged: (tk.initiativeEvents || []).length,
     expireCalls: tk.expireCalls || 0,
     expired: (tk.expireEvents || []).length,
+    playerDeathCalls: tk.playerDeathCalls || 0,
+    purgeEvents: (tk.purgeEvents || []).length,
     detail: reqs,
   };
 
@@ -351,6 +509,29 @@ function analyzeSeed(j) {
     proposeCalls: (j.proposeCalls || []).length,
     proposeFormed: (j.proposeCalls || []).filter(function (p) { return p.outcome === 'formed'; }).length,
     bondEvents: (j.bondEvents || []).length,
+    bondTickCalls: j.bondTickCalls || 0,
+    linkTickCalls: j.linkTickCalls || 0,
+    stageBondCalls: (j.stageBondCalls || []).length,
+    acceptBondCalls: (j.acceptBondCalls || []).length,
+    declineBondCalls: (j.declineBondCalls || []).length,
+    supersedeEvents: (tk.supersedeEvents || []).length,
+  };
+  // Bond/link reconcile: tele bond_proposed events vs request
+  // instances. Staged tele events should match bond/link-flagged
+  // request instances (modulo the pre-first-daily tele gap — the
+  // lazy tele wrap installs at the first daily, so stagings fired
+  // during setupGame are missed; the gap is reported, not hidden).
+  const be = j.bondEvents || [];
+  const beCount = {};
+  be.forEach(function (e) { const k = e.kind + '/' + e.outcome; beCount[k] = (beCount[k] || 0) + 1; });
+  const reqsForReconcile = r.requests.detail;
+  r.bondReconcile = {
+    teleByKindOutcome: beCount,
+    bondInstances: reqsForReconcile.filter(function (q) { return q.bondProposal; }).length,
+    linkInstances: reqsForReconcile.filter(function (q) { return q.linkRaise; }).length,
+    decidedInstances: reqsForReconcile.filter(function (q) { return q.fate === 'decided'; }).length,
+    teleDecisions: (beCount['person/accepted'] || 0) + (beCount['person/refused'] || 0) + (beCount['link/accepted'] || 0) + (beCount['link/refused'] || 0),
+    teleStaged: (beCount['person/staged'] || 0) + (beCount['link/staged'] || 0),
   };
 
   // --- Deaths ---
@@ -391,6 +572,29 @@ function mergeCounts(perSeed, fn) {
     Object.keys(c).forEach(function (k) { out[k] = (out[k] || 0) + c[k]; });
   });
   return out;
+}
+
+// writeJsonRetry: same flap hardening as the driver (EPERM flap
+// 2026-11-11): temp file + size check + rename, retries on EPERM.
+function writeJsonRetry(file, text) {
+  const tmp = file + '.tmp-' + process.pid + '-' + Date.now();
+  let lastErr = null;
+  for (let attempt = 1; attempt <= 40; attempt++) {
+    try {
+      fs.writeFileSync(tmp, text);
+      const got = fs.statSync(tmp).size;
+      if (got !== Buffer.byteLength(text)) throw new Error('short write: ' + got + ' of ' + Buffer.byteLength(text) + ' bytes');
+      fs.renameSync(tmp, file);
+      return;
+    } catch (e) {
+      lastErr = e;
+      try { fs.unlinkSync(tmp); } catch (e2) {}
+      if (attempt < 40) {
+        try { Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 5000); } catch (e3) {}
+      }
+    }
+  }
+  throw lastErr;
 }
 
 function main() {
@@ -452,6 +656,8 @@ function main() {
       unknownFate: sum(perSeed, function (s) { return s.requests.unknownFate; }),
       initiativeCalls: sum(perSeed, function (s) { return s.requests.initiativeCalls; }),
       initiativeStaged: sum(perSeed, function (s) { return s.requests.initiativeStaged; }),
+      playerDeathCalls: sum(perSeed, function (s) { return s.requests.playerDeathCalls; }),
+      purgeEvents: sum(perSeed, function (s) { return s.requests.purgeEvents; }),
     },
     questions: {
       pendingQOpens: sum(perSeed, function (s) { return s.questions.pendingQOpens; }),
@@ -484,6 +690,21 @@ function main() {
       declineCalls: sum(perSeed, function (s) { return s.extras.declineCalls; }),
       proposeCalls: sum(perSeed, function (s) { return s.extras.proposeCalls; }),
       proposeFormed: sum(perSeed, function (s) { return s.extras.proposeFormed; }),
+      bondEvents: sum(perSeed, function (s) { return s.extras.bondEvents; }),
+      bondTickCalls: sum(perSeed, function (s) { return s.extras.bondTickCalls; }),
+      linkTickCalls: sum(perSeed, function (s) { return s.extras.linkTickCalls; }),
+      stageBondCalls: sum(perSeed, function (s) { return s.extras.stageBondCalls; }),
+      acceptBondCalls: sum(perSeed, function (s) { return s.extras.acceptBondCalls; }),
+      declineBondCalls: sum(perSeed, function (s) { return s.extras.declineBondCalls; }),
+      supersedeEvents: sum(perSeed, function (s) { return s.extras.supersedeEvents; }),
+    },
+    bondReconcile: {
+      teleByKindOutcome: mergeCounts(perSeed, function (s) { return s.bondReconcile.teleByKindOutcome; }),
+      bondInstances: sum(perSeed, function (s) { return s.bondReconcile.bondInstances; }),
+      linkInstances: sum(perSeed, function (s) { return s.bondReconcile.linkInstances; }),
+      decidedInstances: sum(perSeed, function (s) { return s.bondReconcile.decidedInstances; }),
+      teleDecisions: sum(perSeed, function (s) { return s.bondReconcile.teleDecisions; }),
+      teleStaged: sum(perSeed, function (s) { return s.bondReconcile.teleStaged; }),
     },
     deaths: {
       total: sum(perSeed, function (s) { return s.deaths.total; }),
@@ -510,7 +731,7 @@ function main() {
   band.go = { pass: go.every(function (g) { return g.pass; }), checks: go };
 
   const outFile = path.join(REPO, 'evidence', '2026-11-11', 'convfirst-summary-' + RUN + '.json');
-  fs.writeFileSync(outFile, JSON.stringify({ band: band, perSeed: perSeed }, null, 2) + '\n');
+  writeJsonRetry(outFile, JSON.stringify({ band: band, perSeed: perSeed }, null, 2) + '\n');
 
   console.log('CONVFIRST BAND run=' + RUN + ' seeds=' + seeds.join(','));
   seeds.forEach(function (s) {
@@ -527,11 +748,12 @@ function main() {
   console.log('OPENS total=' + band.opens.total + ' byClass=' + JSON.stringify(band.opens.byClass) + ' byCaller=' + JSON.stringify(band.opens.byCaller));
   console.log('ENDINGS byHow=' + JSON.stringify(band.endings.byHow) + ' exchanges 0/1-2/3+=' + band.endings.exchangesZero + '/' + band.endings.exchanges1to2 + '/' + band.endings.exchanges3plus + ' max=' + band.endings.maxExchanges);
   console.log('TURNS total=' + band.turns.total + ' byKind=' + JSON.stringify(band.turns.byKind) + ' byCaller=' + JSON.stringify(band.turns.byCaller));
-  console.log('REQUESTS total=' + band.requests.total + ' bySource=' + JSON.stringify(band.requests.bySource) + ' byFate=' + JSON.stringify(band.requests.byFate));
+  console.log('REQUESTS total=' + band.requests.total + ' bySource=' + JSON.stringify(band.requests.bySource) + ' byFate=' + JSON.stringify(band.requests.byFate) + ' playerDeaths=' + band.requests.playerDeathCalls + ' purgeEvents=' + band.requests.purgeEvents);
   console.log('QUESTIONS pendingQ=' + band.questions.pendingQOpens + ' genericQ=' + band.questions.genericQOpens);
   console.log('GOSSIP ask=' + band.gossip.askGossip + ' spread=' + band.gossip.askSpreadRumor + ' subjects=' + JSON.stringify(band.gossip.rumorSubjects));
   console.log('TEACHING teach=' + band.teaching.teachPicks + ' learn=' + band.teaching.skillLearnPicks + ' teachSkill=' + band.teaching.skillTeachPicks + ' names=' + JSON.stringify(band.teaching.skillNames));
-  console.log('EXTRAS secretOpens=' + band.extras.secretOpens + ' confessed=' + band.extras.confessedSittings + ' hawker=' + band.extras.hawkerOffers + '/' + band.extras.hawkerBuysOk + ' compareMaps=' + band.extras.compareMapsCalls + '(new ' + band.extras.compareMapsNew + ') bond=' + band.extras.bondPicks + ' link=' + band.extras.linkPicks + ' raiserPending=' + band.extras.talksWithRaiserPending + ' stage/acc/dec/propose=' + band.extras.stageCalls + '/' + band.extras.acceptCalls + '/' + band.extras.declineCalls + '/' + band.extras.proposeCalls);
+  console.log('EXTRAS secretOpens=' + band.extras.secretOpens + ' confessed=' + band.extras.confessedSittings + ' hawker=' + band.extras.hawkerOffers + '/' + band.extras.hawkerBuysOk + ' compareMaps=' + band.extras.compareMapsCalls + '(new ' + band.extras.compareMapsNew + ') bond=' + band.extras.bondPicks + ' link=' + band.extras.linkPicks + ' raiserPending=' + band.extras.talksWithRaiserPending + ' stage/acc/dec/propose=' + band.extras.stageCalls + '/' + band.extras.acceptCalls + '/' + band.extras.declineCalls + '/' + band.extras.proposeCalls + ' stageBond/accBond/decBond=' + band.extras.stageBondCalls + '/' + band.extras.acceptBondCalls + '/' + band.extras.declineBondCalls + ' bondTick=' + band.extras.bondTickCalls + ' linkTick=' + band.extras.linkTickCalls + ' supersede=' + band.extras.supersedeEvents);
+  console.log('BOND-RECONCILE tele=' + JSON.stringify(band.bondReconcile.teleByKindOutcome) + ' bondInstances=' + band.bondReconcile.bondInstances + ' linkInstances=' + band.bondReconcile.linkInstances + ' decidedInstances=' + band.bondReconcile.decidedInstances + ' teleDecisions=' + band.bondReconcile.teleDecisions + ' teleStaged=' + band.bondReconcile.teleStaged);
   console.log('DEATHS total=' + band.deaths.total + ' starvation=' + band.deaths.starvation + ' causes=' + JSON.stringify(band.deaths.causes));
   console.log('WALL wins=' + band.wall.wins + '/8 national=' + band.wall.national + ' table=' + band.wall.table + ' w4=' + band.wall.wave4unlocks + ' w5=' + band.wall.wave5unlocks + ' median=' + band.wall.medianSurvival + ' survivors=' + band.wall.survivors);
   console.log('NEUTRALITY ' + band.neutrality.ok + '/' + band.neutrality.of + ' errors=' + band.instrumentErrors + ' convSayLines=' + band.convSayLines + '/' + band.sayCount);

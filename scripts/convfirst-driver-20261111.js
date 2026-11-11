@@ -33,6 +33,35 @@ let outDir = null;
 // ambient env cannot leak held conversations into either leg.
 function setFlagOff() { delete process.env.COMPETENT_TALK; }
 
+// writeJsonRetry: flap-hardened per-seed write (EPERM flap 2026-11-11:
+// a direct writeFileSync created a 0-byte corpus file and threw,
+// losing seed 190201's control result in memory). Write to a
+// unique sibling temp file, verify its byte size, then rename into
+// place; retry the whole attempt on EPERM (up to 40 x 5s — the flap
+// clears in windows). A failed attempt unlinks its temp file so no
+// 0-byte leftover can poison the next run. Never overwrites an
+// existing target (the driver's startup check still refuses).
+function writeJsonRetry(file, text) {
+  const tmp = file + '.tmp-' + process.pid + '-' + Date.now();
+  let lastErr = null;
+  for (let attempt = 1; attempt <= 40; attempt++) {
+    try {
+      fs.writeFileSync(tmp, text);
+      const got = fs.statSync(tmp).size;
+      if (got !== Buffer.byteLength(text)) throw new Error('short write: ' + got + ' of ' + Buffer.byteLength(text) + ' bytes');
+      fs.renameSync(tmp, file);
+      return;
+    } catch (e) {
+      lastErr = e;
+      try { fs.unlinkSync(tmp); } catch (e2) {}
+      if (attempt < 40) {
+        try { Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 5000); } catch (e3) {}
+      }
+    }
+  }
+  throw lastErr;
+}
+
 if (require.main === module) {
   SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(function (s) { return parseInt(s.trim(), 10); }) : []).filter(Number.isFinite);
   DAYS = parseInt(process.env.DAYS || '150', 10) || 150;
@@ -146,6 +175,10 @@ async function oneRun(seed, mode, days) {
     out.declineCalls = inst.t.declineCalls;
     out.proposeCalls = inst.t.proposeCalls;
     out.linkTickCalls = inst.t.linkTickCalls;
+    out.bondTickCalls = inst.t.bondTickCalls;
+    out.stageBondCalls = inst.t.stageBondCalls;
+    out.acceptBondCalls = inst.t.acceptBondCalls;
+    out.declineBondCalls = inst.t.declineBondCalls;
     out.talk = {
       talkToCalls: inst.t.talkToCalls,
       convoTurnCalls: inst.t.convoTurnCalls,
@@ -157,6 +190,9 @@ async function oneRun(seed, mode, days) {
       endEvents: inst.t.endEvents,
       expireEvents: inst.t.expireEvents,
       initiativeEvents: inst.t.initiativeEvents,
+      supersedeEvents: inst.t.supersedeEvents,
+      purgeEvents: inst.t.purgeEvents,
+      playerDeathCalls: inst.t.playerDeathCalls,
       hawkerOffers: inst.t.hawkerOffers,
       hawkerBuys: inst.t.hawkerBuys,
       compareMapsCalls: inst.t.compareMapsCalls,
@@ -171,7 +207,7 @@ if (require.main === module) {
       const t0 = Date.now();
       const out = await oneRun(seed, MODE, DAYS);
       const file = path.join(outDir, 'convfirst-s' + seed + '-' + RUN + '-' + MODE + '.json');
-      fs.writeFileSync(file, JSON.stringify(out, null, 2) + '\n');
+      writeJsonRetry(file, JSON.stringify(out, null, 2) + '\n');
       const last = (out.daily && out.daily[out.daily.length - 1]) || {};
       console.log(JSON.stringify({
         seed: out.seed, mode: out.mode, days: out.days, endReason: out.endReason, won: out.won,
