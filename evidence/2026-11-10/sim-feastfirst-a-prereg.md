@@ -188,6 +188,24 @@ records why; never re-scored mid-run, §14).
   - Search scope recorded so a later reader can retrace it: all
     `evidence/*/sim-*-prereg.md` + all dated evidence `.md` +
     perseed directory names + goal hidden_files listing.
+- **BAND SHARING (recorded 2026-11-11, after the judged sims were run
+  and committed — coordinator note, run fleshout-20261111T0646Z):**
+  the sibling trade arm (sim-tradefirst-a) independently shifted its
+  band to **180265–180272** — the same 8 seeds (its prereg, lines
+  213–227: it found seed 180259 named in the travelfirst prereg and
+  took a strict freshness reading, moving off its assigned
+  180257–180264). This arm's judged sims on 180265–180272 were
+  already run and committed (16 runs, corpus d25637f4e) BEFORE the
+  collision was noticed, so per the coordinator's instruction the band
+  is KEPT and NOT re-run. This is a **shared band, not contamination**:
+  same seeds, different instrument (feast/tribute wraps vs trade
+  wraps), different system measured, independent measurement — each
+  arm's numbers stand on its own instrument, and neither arm's
+  recording can move the other's (both instruments are record-only;
+  neutrality 8/8 exact on this arm). Any later reader comparing the
+  two arms' per-seed files should expect identical days / end pantry
+  kcal / deaths per seed (same seeds, same policy, same base) and
+  different system counts.
 - **Policies (TWO legs on identical seeds):**
   - **control:** competent verbatim, default env, instrument ON (the
     judged leg).

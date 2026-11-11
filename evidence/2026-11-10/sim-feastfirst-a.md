@@ -333,6 +333,20 @@ Instrument errors 0 on all 16 runs.
 
 ## Notes for the coordinator
 
+- **BAND SHARING (recorded 2026-11-11, after the pilot):** the sibling
+  trade arm (sim-tradefirst-a) independently shifted its band to
+  180265–180272 — the same 8 seeds (its prereg lines 213–227: it found
+  seed 180259 named in the travelfirst prereg and took a strict
+  freshness reading, moving off its assigned 180257–180264). This arm's
+  judged sims were already run and committed (16 runs, d25637f4e)
+  before the collision was noticed, so per the coordinator's
+  instruction the band is KEPT and NOT re-run. Shared band, not
+  contamination: same seeds, different instrument (feast/tribute wraps
+  vs trade wraps), different system measured, independent measurement;
+  both instruments are record-only, and neutrality is 8/8 exact on
+  this arm. A later reader comparing the two arms' per-seed files
+  should expect identical days / end pantry kcal / deaths per seed
+  and different system counts. Also recorded in the prereg.
 - One runtime restart interrupted the control leg after seed 180267;
   the driver was resumed for seeds 180268–180272 only (the driver
   refuses to overwrite per-seed files, so the first three files are
