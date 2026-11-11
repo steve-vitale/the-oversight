@@ -16,7 +16,34 @@
 //
 // Say-line classes (source for each — the line's home file):
 //   omen0 'Scouts come back pale' (titans.js titanMaybeOmen)
-//   omen1 'They name it' / 'The System whispers it' (titans.js titanAdvanceOmen)
+//   omen1 '📻 ' + data omen1 (titans.json herald/nielsen/finale
+//     omen1; the code fallback 'They name it: <title>' fires only
+//     when the data text is absent) — matched on the 📻 prefix plus
+//     a titan title, never on the fallback wording alone.
+//   scout-map '🔭 <name> scouts the land: mapped N new areas'
+//     (game.js:7593 — scouting, not a titan; caught by the 🔭
+//     prefix, Amendment 1)
+//   pellet-radio '📻 "Why do the small humans keep putting organic
+//     matter in their FACE-HOLES? ... fusion pellet! ..."' (game.js
+//     :25117 — alien pellet line; caught by the 📻 prefix, Am. 1)
+//   herald-stirs 'You turn to leave — behind you, The Herald stirs.'
+//     (game.js:12818 — the placed titan follows the scholar)
+//   herald-here 'It followed you. The Herald is here.'
+//     (game.js:12975 — the placed titan follows the scholar)
+//   herald-treeline 'The Herald stops at the treeline/boundary —
+//     pacing, unwilling.' (game.js:12939-12954 — the placed titan
+//     pacing at Haven's edge; the vague form names the Herald at
+//     the end of the line)
+//   herald-pack 'One of them is bigger than the usual teeth at the
+//     door — The Herald came with this raid' (havenGrowth.js:610 —
+//     the placed titan joins a pantry raid)
+//   raid-herald '🐗 RAID — N raiders (..., The Herald, ...) hit
+//     Haven in the night' (raid roster line naming the titan)
+//   raid-herald-unmet "Nobody met The Herald — it's still out there
+//     at the treeline." (raid aftermath: the titan went unmet)
+//   muster-scout '📯 MUSTER — scouts report <monster> hunting near
+//     Haven, and it is beyond us.' (shelter.js:159 — the SHELTER
+//     muster, a different muster from the titan coalition)
 //   located 'Scouts found its lair' (titans.js titanPlace)
 //   repair 'Scouts correct their map' (titans.js titanRepairPlacements)
 //   strike-pantry 'fed in the night' (titans.js titanEscalate)
@@ -65,9 +92,22 @@ const path = require('path');
 function classifySayLine(line) {
   if (typeof line !== 'string') return 'unclassified';
   if (/Scouts come back pale/.test(line)) return 'omen0';
-  if (/They name it|The System whispers it/.test(line)) return 'omen1';
+  // omen1: 📻 prefix + a titan title (the data texts; the code
+  // fallback 'They name it: <title>' also carries the title).
+  if (/📻/.test(line) && /(Herald|Nielsen|Finale|Network)/.test(line)) return 'omen1';
+  if (/They name it: THE (HERALD|NIELSEN|FINALE)/.test(line)) return 'omen1';
   if (/Scouts found its lair/.test(line)) return 'located';
   if (/Scouts correct their map/.test(line)) return 'repair';
+  if (/🔭 .* scouts the land: mapped/.test(line)) return 'scout-map';
+  if (/putting organic matter in their FACE-HOLES/.test(line)) return 'pellet-radio';
+  if (/You turn to leave — behind you, The Herald stirs/.test(line)) return 'herald-stirs';
+  if (/It followed you\. The Herald is here/.test(line)) return 'herald-here';
+  if (/The Herald stops at the (treeline|boundary) — pacing, unwilling/.test(line)) return 'herald-treeline';
+  if (/stops at the (treeline|boundary) — pacing, unwilling.*The Herald is still out there/.test(line)) return 'herald-treeline';
+  if (/One of them is bigger than the usual teeth at the door — The Herald came with this raid/.test(line)) return 'herald-pack';
+  if (/RAID — .*The Herald/.test(line)) return 'raid-herald';
+  if (/Nobody met The Herald/.test(line)) return 'raid-herald-unmet';
+  if (/📯 MUSTER — scouts report .* hunting near Haven/.test(line)) return 'muster-scout';
   if (/fed in the night/.test(line)) return 'strike-pantry';
   if (/struck .* in the night/.test(line)) return 'strike-trust';
   if (/muster is hungry/.test(line)) return 'muster-hunger';
@@ -230,11 +270,15 @@ function classifyDawn(ev, seed) {
     if (added.length) {
       added.forEach(function (h) {
         if (h.kind === 'titan') {
-          if (tr.delta === -5) kinds.push('strike-trust:' + tr.village);
-          else reasons.push('strike-trust:' + tr.village + ':delta-' + tr.delta + '-not--5');
+          // Strike is -5, clamped at trust 0: a link at trust 3
+          // loses 3 (Amendment 1: the smoke showed -3 on a
+          // trust-3 link with a titan history entry).
+          if (tr.delta < 0 && tr.delta >= -5) kinds.push('strike-trust:' + tr.village);
+          else reasons.push('strike-trust:' + tr.village + ':delta-' + tr.delta + '-not-in-[-5,-1]');
         } else if (h.kind === 'muster-hunger') {
-          if (tr.delta === -2) kinds.push('muster-hunger:' + tr.village);
-          else reasons.push('muster-hunger:' + tr.village + ':delta-' + tr.delta + '-not--2');
+          // Hunger is -2, likewise clamped at 0.
+          if (tr.delta < 0 && tr.delta >= -2) kinds.push('muster-hunger:' + tr.village);
+          else reasons.push('muster-hunger:' + tr.village + ':delta-' + tr.delta + '-not-in-[-2,-1]');
         } else if (h.kind === 'betrayal') {
           kinds.push('turn:' + tr.village);
         } else {
@@ -324,6 +368,24 @@ function analyzeSeed(o) {
     if (refusalPerDay[d] > maxRefusalDayN) { maxRefusalDayN = refusalPerDay[d]; maxRefusalDay = parseInt(d, 10); }
   });
 
+  // Strikes from the say corpus (authoritative for OCCURRENCE: a
+  // 0-kcal raid takes nothing, so it leaves no dawn-diff at all —
+  // the smoke showed 9 of 10 pantry lines reading '0 kcal gone').
+  // Dawn kinds are authoritative for EFFECT (kcal taken, trust
+  // moved). The two counts cross-check each other.
+  const sayStrikes = { pantry: 0, trust: 0 };
+  says.forEach(function (s) {
+    if (s.cls === 'strike-pantry') sayStrikes.pantry++;
+    if (s.cls === 'strike-trust') sayStrikes.trust++;
+  });
+  const dawnStrikePantry = dawn.reduce(function (n, r) {
+    return n + r.kinds.filter(function (k) { return k.indexOf('strike-pantry') === 0; }).length;
+  }, 0);
+  const dawnStrikeTrust = dawn.reduce(function (n, r) {
+    return n + r.kinds.filter(function (k) { return k.indexOf('strike-trust') === 0; }).length;
+  }, 0);
+  const raidHerald = says.filter(function (s) { return s.cls === 'raid-herald' || s.cls === 'herald-pack' || s.cls === 'raid-herald-unmet'; }).length;
+
   // Trust ledger: titan-attributed deltas from dawn kinds.
   let trustTax = 0;
   const trustByKind = {};
@@ -377,6 +439,8 @@ function analyzeSeed(o) {
     actions: { total: (o.actionEvents || []).length,
       byAction: (function () { const m = {}; (o.actionEvents || []).forEach(function (a) { m[a.action] = (m[a.action] || 0) + 1; }); return m; })() },
     refusalPerDay: refusalPerDay, maxRefusalDay: maxRefusalDay, maxRefusalDayN: maxRefusalDayN,
+    sayStrikes: sayStrikes, dawnStrikePantry: dawnStrikePantry, dawnStrikeTrust: dawnStrikeTrust,
+    raidHerald: raidHerald,
     trustTax: trustTax, trustByKind: trustByKind,
     streaks: Object.keys(streaks).map(function (k) { return streaks[k]; }),
     wrapLive: o.wrapLive || {}, wrapCounts: o.wrapCounts || {},

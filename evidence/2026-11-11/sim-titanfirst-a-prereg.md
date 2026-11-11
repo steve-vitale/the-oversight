@@ -153,6 +153,55 @@ titan first-numbers arm.) Any new titan/herald gap this arm surfaces
 is APPENDED as [open] in the evidence file's findings section and in
 sim-findings.md, not claimed mid-run.
 
+## Amendment 1 (smoke-driven, BEFORE any judged sim)
+
+One single-seed smoke run (190321, control, RUN=smoke, output to
+evidence/2026-11-11/perseed-titanfirst-a/titanfirst-s190321-smoke-
+control.json, never judged) confirmed the instrument end to end and
+surfaced four refinements, fixed here before any judged data exists
+(the titangate-a Amendment 1 pattern). The smoke file will be
+DELETED before the judged pilot; the judged pilot re-runs all 8
+seeds fresh, including 190321.
+
+- Say-regex leaks: bare 'omen' matched 'moment' in a dozen
+  unrelated lines (relief moments, ah-ha moments, plant-study
+  'a moment'); bare 'finale' matched 'SEASON FINALE' announcements
+  and 'FINALES need a LEGEND' table lines. Fixed: 'omen' →
+  \bomen\b, 'finale' → \bthe finale\b. The smoke's 116
+  unclassified say lines were ALL such leaks, 0 of them titan
+  lines.
+- Omen lines carry no keyword: the data-driven omen0 texts ('The
+  sky looks wrong...', 'The System's ratings spike...') contain no
+  titan/herald/nielsen/finale/omen/muster word, so the smoke's
+  omen-created/named dawn events had no say line in range (4 of
+  the smoke's 5 unclassified dawn events). Fixed: the regex also
+  matches the 🔭/📻 prefixes. That pulls in exactly two other-system
+  say lines (the 🔭 scouting line, game.js:7593; the 📻 pellet
+  line, game.js:25117), both classified with cited classes
+  (scout-map, pellet-radio). The omen1 classifier now matches on
+  the 📻 prefix plus a titan title (the data texts), not on the
+  code-fallback wording.
+- New say classes from the smoke (all cited in the analyzer):
+  herald-stirs / herald-here / herald-treeline (the placed titan
+  follows and paces the scholar), herald-pack / raid-herald /
+  raid-herald-unmet (the placed titan JOINS pantry raids as a
+  raider — the smoke's herald rode 3 raids and took 175 HP per
+  raid night off the raid defense), muster-scout (the SHELTER
+  muster, a different muster from the titan coalition).
+- Strike-trust clamp: a link at trust 3 loses 3, not 5 (trust
+  clamps at 0). The dawn classifier now accepts strike-trust
+  deltas in [-5,-1] and muster-hunger deltas in [-2,-1] when a
+  titan link-history entry is present.
+- fieldFight instance captured pre-call (was post-call): the smoke
+  read the herald at 14 hp for a fight that began at 104, which
+  made the wound arithmetic unreadable.
+- Smoke finding (not a fix): 9 of the smoke's 10 pantry-raid lines
+  read '0 kcal gone from your stores' — the scholar's pack held no
+  finished food, so the raid took nothing. A 0-kcal raid leaves no
+  dawn-diff; strikes are therefore counted from say lines for
+  occurrence and from dawn diffs for effect (analyzer records
+  both, cross-checked).
+
 ## Pre-pilot substrate checklist (§14b)
 
 1. **Contact**: the titan verbs exist and are wired — titanDawnTick

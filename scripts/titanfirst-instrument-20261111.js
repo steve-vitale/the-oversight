@@ -88,10 +88,16 @@ function packKcalOf(Game) {
 // (omens, strikes, muster, gate refusals, calls, councils, victories)
 // plus the two known other-system matches (finale-campaign muster
 // line, godverbs 'not titans'), which the analyzer classifies with
-// their own cited classes. 'finale' is included because the Finale
-// is a titan; finale-campaign node lines are titan-adjacent and are
-// classified, never silently dropped.
-const TITAN_SAY_RE = /titan|herald|nielsen|finale|omen|muster|allied blades|sound the call|war council|the call to arms/i;
+// their own cited classes. Word boundaries on 'omen' and 'the
+// finale' (Amendment 1, smoke-driven): bare 'omen' matched 'moment'
+// in a dozen unrelated lines, and bare 'finale' matched the
+// 'SEASON FINALE' announcements. The 🔭/📻 prefixes are needed
+// because the data-driven omen lines carry no keyword at all (the
+// herald's omen0 is 'The sky looks wrong...', the nielsen's 'The
+// System's ratings spike...'); they pull in exactly two other-system
+// say lines (the 🔭 scouting line, game.js:7593; the 📻 pellet
+// line, game.js:25117), both classified with cited classes.
+const TITAN_SAY_RE = /titan|herald|nielsen|\bthe finale\b|\bomen\b|muster|allied blades|sound the call|war council|the call to arms|🔭|📻/i;
 const SAY_CAP = 5000;
 
 function isTitanId(Game, mid) {
@@ -284,12 +290,18 @@ function install(Game) {
     const mid = (mdef && (mdef.id || mdef)) || null;
     const titan = isTitanId(Game, mid);
     if (!titan) { t.nonTitanFieldFight++; }
+    // Capture the instance BEFORE the call: m is mutated by the
+    // fight, so a post-call read reports post-fight hp (Amendment 1:
+    // the smoke read the herald at 14 hp for a fight that began at
+    // 104, which made the wound arithmetic unreadable).
+    let instBefore = null;
+    try { if (titan && m) instBefore = { tx: m.tx, ty: m.ty, hp: m.hp, maxHp: m.maxHp }; } catch (e) {}
     let ret = null;
     try { ret = origs.fieldFight.call(Game, vid, mdef, m, opts); } catch (e) { err('fieldFight-call', e.message); }
     try {
       if (titan) {
         t.fieldFightEvents.push({ seq: ++seq, day: dayOf(Game), vid: vid || null, mid: mid,
-          instance: (m ? { tx: m.tx, ty: m.ty, hp: m.hp, maxHp: m.maxHp } : null),
+          instance: instBefore,
           outcome: (ret && ret.outcome) || null, rounds: (ret && ret.rounds) || 0,
           vTaken: (ret && ret.vTaken) || 0, mDealt: (ret && ret.mDealt) || 0,
           mHpLeft: (ret && ret.mHpLeft) || null, vHpLeft: (ret && ret.vHpLeft) || null,

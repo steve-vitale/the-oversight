@@ -56,7 +56,22 @@ function roster(Game) {
 (async function () {
   // ---- analyzer leg (pure, no sim) ----
   check('classifySayLine: omen0', AN.classifySayLine('🔭 Scouts come back pale. Something big is moving.') === 'omen0');
-  check('classifySayLine: omen1', AN.classifySayLine('📻 They name it: THE HERALD.') === 'omen1');
+  check('classifySayLine: omen1 data text (herald)', AN.classifySayLine('📻 The old ones point at the horizon and don\'t speak. The System, for once, is quiet too. Then: the Herald. It heralds the apocalypse the way dawn heralds the day.') === 'omen1');
+  check('classifySayLine: omen1 data text (nielsen)', AN.classifySayLine('📻 The producers name it: the Nielsen. Ratings embodied. It fights boring — and the crowd adores it for that.') === 'omen1');
+  check('classifySayLine: omen1 code fallback', AN.classifySayLine('📻 They name it: THE HERALD.') === 'omen1');
+  check('classifySayLine: scout-map', AN.classifySayLine('🔭 Ethan scouts the land: mapped 3 new areas.') === 'scout-map');
+  check('classifySayLine: pellet-radio', AN.classifySayLine('📻 "Why do the small humans keep putting organic matter in their FACE-HOLES? We built you a fusion pellet! ...You BURIED it. WHY did you bury the pellet?!"') === 'pellet-radio');
+  check('classifySayLine: herald-stirs', AN.classifySayLine('You turn to leave — behind you, The Herald stirs.') === 'herald-stirs');
+  check('classifySayLine: herald-here', AN.classifySayLine('It followed you. The Herald is here.') === 'herald-here');
+  check('classifySayLine: herald-treeline', AN.classifySayLine('The Herald stops at the treeline — pacing, unwilling. The walls end the argument. It\'s still out there.') === 'herald-treeline');
+  check('classifySayLine: herald-treeline vague form', AN.classifySayLine('It stops at the boundary — pacing, unwilling. Something else is already here. The Herald is still out there.') === 'herald-treeline');
+  check('classifySayLine: herald-pack', AN.classifySayLine('🐗⚠️ One of them is bigger than the usual teeth at the door — The Herald came with this raid, and the wall was not built for its kind.') === 'herald-pack');
+  check('classifySayLine: raid-herald', AN.classifySayLine('🐗 RAID — 5 raiders (Big Loud, The Herald, The Reunion, The Reunion, The Eater) hit Haven in the night, drawn by the smell of the pantry!') === 'raid-herald');
+  check('classifySayLine: raid-herald-unmet', AN.classifySayLine('Nobody met The Herald — it\'s still out there at the treeline. It\'ll gorge every night until it\'s driven off.') === 'raid-herald-unmet');
+  check('classifySayLine: muster-scout', AN.classifySayLine('📯 MUSTER — scouts report The Algorithm hunting near Haven, and it is beyond us. Everyone inside. No one walks the treeline alone.') === 'muster-scout');
+  check('classifySayLine: SEASON FINALE line unclassified (not a titan)', AN.classifySayLine('📺 SYSTEM: "SEASON FINALE APPROACHES! Party cap raised to FIVE! Go out with a BANG! (Figuratively. Mostly.)"') === 'unclassified');
+  check('classifySayLine: moment line unclassified (omen-in-moment leak closed)', AN.classifySayLine('You wait. The light changes. Nothing asks anything of you.') === 'unclassified');
+  check('classifySayLine: ah-ha moments line unclassified', AN.classifySayLine('"Oh! OH! You\'re starting to GET it! The audience loves the little ah-ha moments! The odds just shifted!"') === 'unclassified');
   check('classifySayLine: located', AN.classifySayLine('🗺️ Scouts found its lair — tile 5,3. THE HERALD — it waits.') === 'located');
   check('classifySayLine: repair', AN.classifySayLine('🗺️ Scouts correct their map — herald is at tile 2,2.') === 'repair');
   check('classifySayLine: strike-pantry', AN.classifySayLine('🌪️ THE HERALD fed in the night — 2,500 kcal gone from your stores.') === 'strike-pantry');
@@ -136,6 +151,8 @@ function roster(Game) {
     { saySeqBefore: 1, saySeqAfter: 2, diffs: { omen: [], trust: [], pack: { before: 50000, after: 47500, delta: -2500 }, outcomesAdded: [] } }, dawnSeed).cls === 'ok');
   check('classifyDawn: strike-trust ok', AN.classifyDawn(
     { saySeqBefore: 2, saySeqAfter: 3, diffs: { omen: [], trust: [{ village: 'alder', trustBefore: 50, trustAfter: 45, delta: -5, titanHistAdded: [{ day: 10, kind: 'titan', note: 'x' }] }], outcomesAdded: [] } }, dawnSeed).cls === 'ok');
+  check('classifyDawn: strike-trust clamped at 0 ok (delta -3 on a trust-3 link)', AN.classifyDawn(
+    { saySeqBefore: 2, saySeqAfter: 3, diffs: { omen: [], trust: [{ village: 'alder', trustBefore: 3, trustAfter: 0, delta: -3, titanHistAdded: [{ day: 10, kind: 'titan', note: 'x' }] }], outcomesAdded: [] } }, dawnSeed).cls === 'ok');
   check('classifyDawn: trust move with no titan entry is other-cause ok', AN.classifyDawn(
     { saySeqBefore: 0, saySeqAfter: 0, diffs: { omen: [], trust: [{ village: 'alder', trustBefore: 50, trustAfter: 48, delta: -2, titanHistAdded: [] }], outcomesAdded: [] } }, dawnSeed).cls === 'ok');
   check('classifyDawn: pantry move with no raid line is other-cause ok', AN.classifyDawn(
@@ -196,6 +213,9 @@ function roster(Game) {
   check('fieldFight herald: event recorded with an outcome', T.fieldFightEvents.length === ff0 + 1 &&
     ['evade', 'vKill', 'mFlee', 'vFlee', 'vDie'].indexOf(rec.outcome) >= 0,
     'outcome=' + (rec && rec.outcome));
+  check('fieldFight herald: instance hp is PRE-fight (700, not post-fight)', T.fieldFightEvents[T.fieldFightEvents.length - 1].instance &&
+    T.fieldFightEvents[T.fieldFightEvents.length - 1].instance.hp === 700,
+    'instance=' + JSON.stringify(T.fieldFightEvents[T.fieldFightEvents.length - 1].instance));
   check('fieldFight herald: event classified ok', T.fieldFightEvents.every(function (e) { return AN.classifyFieldFight(e) === 'ok'; }));
 
   // Titan actions: council, call, commit (two-tap), standdown, readiness.
