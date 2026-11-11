@@ -243,6 +243,37 @@ veterans.unlockedWave, won, peakLivingVeterans).
   file-count mismatch plus normal variation, not a deviation. Baseline
   NOT rolled (same as r178).
 
+## SUBSTRATE CAVEAT (adoption closeout, added post-rebase)
+
+The pilot (passes A/B/C/C-wide, dark probe) ran on substrate 3abe9ef14 —
+the PRE-reconciliation master. Cursor's villager-brain.js (dawn scorer,
+1061 lines) and the rest of the reconciled origin side are ABSENT from
+that substrate (verified: the file does not exist at 3abe9ef14; it exists
+at the rebase base 3b4aa8123). The phantom-veteran fix (5d16916f4) IS in
+the substrate, so the Q2/Q4 findings about the honest veteran count
+stand as measured. But the feeder probe showed Cursor's dawn scorer
+changes villager mornings substantially (EAT 59 vs 36 on the same panel),
+so the pass A/B/C numbers — sat days, wave-5 kill counts, deed-gate
+timing — may NOT reproduce on the current post-reconcile master. The
+M2B property was re-proven on the rebased tip (3b4aa8123): PASS, but on
+a DIFFERENT scholar-death fight (d110 reunion, Mia Andersson) than the
+driver run found on the old substrate (d51/d62) — the property holds,
+the trajectories differ. A re-run of the matched pilot on the current
+master is owed before the Q2/Q4 numbers are treated as current.
+
+## CLOSEOUT INCIDENT — write flap (adoption)
+
+The first safe-commit attempt hit an EPERM write flap (host-level write
+denials, ~18:35–19:00Z): `git hash-object -w` and /tmp writes both
+denied; the registry heartbeat write was denied too (heartbeat stuck at
+18:25:08Z, still inside the 4h reaper window). safe-commit's stale-tree
+guard correctly REFUSED the corrupted private index (it would have
+deleted 283,097 lines in src/) — nothing was committed, nothing damaged.
+Waited for the flap to clear (probe loop: /tmp write + hash-object every
+60s), re-heartbeated, re-probed (`git update-ref refs/heads/probe HEAD`),
+then committed cleanly at 19:00Z+. Recovery: no manual ref edits, no
+--force-delete; if a flap strikes again, probe first and wait it out.
+
 ## Gate
 
 `node scripts/check.js --quick` in the worktree: 294 passed, 6 failed in
