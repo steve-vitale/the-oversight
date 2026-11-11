@@ -161,7 +161,44 @@ Baseline NOT rolled on a quiet check, per r162 precedent.
 
 ## Gate
 
-PENDING — check.js --quick on the rebased tip; filled at closeout.
+Gate 1 — `node scripts/check.js --quick` in the worktree on the
+pre-rebase tip (`5bb3c595a` + r178 commit): **288 passed, 12 failed in
+1271s** (`journey-endgame-r178-checkquick.log`). Adjudication, every
+failure:
+- 6 standing pre-existing: measurement-proof staleness pair
+  (test-measurement-proof-update + test-measurement-workflow — the
+  proof is stale since r129/r176/r130/r125; b4 regenerating),
+  mobile-combat-cadence (Continue wrap), occupation-panels (real CLI
+  workflow), phone-frame-proof (stale receipt), establishment-r20-fixes
+  (racks-full next-day voice, expected 2 got 1).
+- 3 × 120s gate-budget timeouts (exit null): capable-bot,
+  trust-observer-neutrality, synergy-stall — documented load artifacts;
+  synergy-stall re-run standalone: exit 0.
+- measurement-cache-flags (73.5s): the known 30s-spawn-timeout load
+  artifact; re-run standalone: 4 passed, 0 failed, exit 0.
+- test-telemetry-check-recorder (1.5s): crashed `EPERM syscall write`
+  — the EPERM write flap, not a code failure; re-run standalone:
+  8 passed, 0 failed, exit 0.
+- test-foodpower (13.2s): 29 passed, 1 failed on the (g) ontology
+  validator sub-check — a flap-affected file read during the gate;
+  re-run standalone: 30 passed, 0 failed, exit 0.
+Gate 1 verdict: **GO**.
+
+Master moved during the closeout (Lane A r131 landed `a16ce1cc8`:
+cook/mend routine-work grants fill ladder rungs). Branch rebased onto
+`a16ce1cc8` (clean, no stop-at-pick quirk; new tip `e84e2c3f3`).
+Rebase note: the gate had truncated `docs/ONTOLOGY.md` to 0 bytes
+(the flap's open-truncate + refused write); restored byte-identical
+from HEAD (md5 `8bcfa965…`) before rebasing — a test side effect,
+not r178 work.
+
+Gate 2 — `node scripts/check.js --quick` on the rebased tip:
+**292 passed, 8 failed in 1128s**
+(`journey-endgame-r178-checkquick2.log`). Failures: the same standing
+6 + cache-flags (85.3s, same load artifact, verified green standalone
+in gate 1) + trust-observer-neutrality (120.1s, same gate-budget
+timeout signature). Capable-bot, synergy-stall, recorder, and
+foodpower all passed on this run. Gate 2 verdict: **GO**.
 
 ## Metric review (§14 — revisions for the NEXT run, never re-scored here)
 
