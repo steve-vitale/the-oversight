@@ -230,6 +230,13 @@
         };
         const isLiving = (vid) => {
           if (vid === scholarId) return true; // the scholar is the current adventurer
+          // ROSTER CHECK (journey-scale r131, vetfirst-b 190305): a killer
+          // must be a villager of THIS village — the same rule ladder.js
+          // countLivingVeterans uses. Without it, a veteran who fell in a
+          // TB fight (game.js tbVillagerFalls removes them from the roster
+          // but never sets vp.dead) keeps counting here while the ladder
+          // correctly counts 0, and the two reads drift apart.
+          if (roster.indexOf(vid) < 0) return false;
           const vp = vpOfId(vid);
           return !!(vp && !vp.dead);
         };
