@@ -39,9 +39,17 @@ async function main() {
   const fail = (m) => { console.log('FAIL: ' + m); fails++; };
   // 1st firing: the canonical line, no reframe.
   if (/As I said|Like I said|still where we are|circles/i.test(lines[0])) fail('first recap should be the canonical line, not a reframe');
-  // 2nd: honest reframe framing present.
-  if (!/As I said —|Like I said —|That's still where we are\./.test(lines[1])) fail(`recap 2 has no reframe framing: ${lines[1]}`);
+  // 2nd: honest reframe framing present. The topic form ("<topic> —
+  // that's still where we are.", r31's third template) is honest reframe
+  // framing too — lowercase "that's", mid-sentence after the topic label —
+  // so the match is case-insensitive (r180).
+  if (!/As I said —|Like I said —|that's still where we are\./i.test(lines[1])) fail(`recap 2 has no reframe framing: ${lines[1]}`);
   // 3rd: clearer exit (audit #6) — names the loop and invites subject-change.
+  // (Merged 2026-11-11: r180's 2nd/3rd loop expected reframe framing on the
+  // 3rd press, but on the merged code the 3rd press is the clearer exit
+  // ("We're going in circles — ... Ask me something else"), per HEAD's
+  // tighten (2c01bb277) — so the 3rd check is HEAD's clearer-exit check,
+  // and only the 2nd check takes r180's case-insensitive pattern.)
   if (!/going in circles/i.test(lines[2]) || !/Ask me something else/i.test(lines[2])) {
     fail(`recap 3 should be clearer exit: ${lines[2]}`);
   }

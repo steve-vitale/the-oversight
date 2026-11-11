@@ -2270,7 +2270,18 @@
       // more synonyms.
       c._recapSaid = c._recapSaid || {};
       const raw = line;
+      // Q3 STACKING (journey-crisis r180): a reframed line already
+      // carries its own discourse prefix ("As I said —" / "Like I
+      // said —" / "I've told you three times now —" / "We're going
+      // in circles a bit —" / "<topic> — that's still where we
+      // are.") — voiceLine on top of it stacks a second opener
+      // ("You know — Like I said — ...", "Oh! Oh — As I said — ...",
+      // 3 recap sightings on the r180 panel). A reframe is a complete
+      // discourse unit: return it unvoiced. A first recap (no reframe)
+      // still gets its voiceLine opener as before.
+      let reframed = false;
       if (c._recapSaid[raw]) {
+        reframed = true;
         const inner = String(raw).replace(/^"|"$/g, '');
         // RECAP-PREFIX STACKING (journey-crisis r155 2026-11-08): the
         // "Still on X." body is itself a re-anchor — prefixing "As/Like I
@@ -2312,7 +2323,7 @@
       if (c._recapPresses >= 3) {
         try { this.convoSpendChoice(vid, 'recap'); } catch (e) {}
       }
-      return this.voiceLine(vid, line);
+      return reframed ? line : this.voiceLine(vid, line);
     },
 
     // convoRecapChoice: the menu object. Sibling menu code (convoChoices /
