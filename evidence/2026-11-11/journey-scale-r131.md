@@ -208,3 +208,35 @@ survival-collapse cause (combat side); scholar-payment open item
 (steve-call); scale.json baseline regime re-label; origin/master
 divergence (ship loop owns); unfixed-engine control panel (not run — the
 daily shadow counts are the before/after evidence instead).
+
+## Adoption closeout (main session, run timed out at the gate)
+
+- Proof re-run independently pre-rebase and post-rebase: **23 passed, 0 failed**
+  both times (`scripts/test-journey-scale-r131-phantom-veteran-20261111.js`).
+- Telemetry re-run independently: same 2 LOUD lines (fightsTotal −71%,
+  fightsByWave.4 −83%); explanation verified from the panel files —
+  131102 fought wave-4 at 32/141d = 0.23/day (r130's rate exactly),
+  131104's 19 fights moved to wave 5, two early deaths cut the band's
+  exposure (lived days 409). Baseline NOT rolled (re-label still owed).
+- Gate (fresh full `node scripts/check.js --quick`, log
+  `journey-scale-r131-check-quick-adoption.log`): **291 passed, 9 failed
+  in 1191s. Verdict GO.** The 9 = the standing 6 (measurement-proof
+  staleness pair, mobile-combat-cadence, occupation-panels,
+  phone-frame-proof, establishment-r20-fixes) + 3 load artifacts
+  (trust-observer-neutrality 120.0s, capable-bot 120.1s — both green
+  standalone: 6/6 and 42/42; measurement-cache-flags — proven
+  environmental, not the fix: its 30s spawn timeout is exceeded by a
+  7-seed 1-day panel under current load, 50.5s wall / 5.1s user on this
+  tip and 30.6s wall / 5.0s user on the bare base ae53134ae — identical
+  user CPU, wall time is load. The staleness pair is the expected
+  src-touch consequence; the proof refresh is owed as a follow-up, not
+  a merge blocker.)
+- Rebased onto explicit master ae53134ae (kinfirst-b landed while this
+  run was in flight); proof re-run green after the rebase; no conflicts.
+- /tmp filled 100% (512M tmpfs) during the cache-flags base diagnostic
+  (a full repo extraction) — cleaned by hand; the repo extraction alone
+  is ~512M, so /tmp cannot hold a second copy of the tree. Noted for
+  the next diagnostic that needs a base copy: extract under
+  ~/workspace/scratch-* and delete immediately after.
+- Carried: measurement-proof refresh (b5); the tribute-strips-blooded
+  design note stays flagged [needs-eyes] (commit carries the tag).
