@@ -63,12 +63,18 @@ function stackText(skip) {
 }
 
 // First engine frame in the stack (after the wrap + this helper).
-// Skips any frame from this instrument file itself.
+// Skips any frame from this instrument file itself AND any frame from
+// the harness's telemetry verb wrapper (sim-harness.js wraps every
+// telemetry verb — eat, cookFood, makePlot, sowPlot, teachPlant,
+// assignTask, ... — in a function literally named `w`, so the raw
+// first frame for those verbs reads "Object.w [as teachPlant]";
+// the real caller is the NEXT frame down).
 function firstFrame(stack) {
   try {
     const lines = String(stack || '').split(' | ');
     for (const ln of lines) {
       if (ln.indexOf('gardenb-instrument') !== -1) continue;
+      if (ln.indexOf('sim-harness') !== -1) continue;
       const m = ln.match(/at (\S+)/);
       if (m && m[1] !== 'Object.<anonymous>') return m[1];
     }
@@ -101,6 +107,8 @@ function classifyMethodPath(stack) {
 function classifyTeachPath(stack) {
   if (!stack) return 'unknown';
   if (stack.indexOf('sowPlot') !== -1) return 'guided-sow';
+  if (stack.indexOf('haulTeachingMoment') !== -1) return 'haul-lesson';
+  if (stack.indexOf('learnFromShowing') !== -1) return 'haul-lesson';
   if (stack.indexOf('fireside') !== -1) return 'fireside';
   if (stack.indexOf('word of mouth') !== -1 || stack.indexOf('wordOfMouth') !== -1) return 'word-of-mouth';
   return firstFrame(stack) || 'unknown';
@@ -273,7 +281,10 @@ function install(Game) {
   });
   wrapMethod('cultivateGarden', {
     pre: function (args) {
-      const vid = args[0] || null;
+      // No-arg call means the scholar (the method defaults vid to
+      // villagerId only for undefined, not null — pass the scholar id
+      // explicitly or the plan lookup returns null for a real cast).
+      const vid = (args.length && args[0] != null) ? args[0] : Game.villagerId;
       let plan = null, magicBefore = 0;
       try { plan = (typeof Game.gardenMagicPlan === 'function') ? Game.gardenMagicPlan(vid) : null; } catch (e) {}
       try {

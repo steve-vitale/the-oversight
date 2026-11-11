@@ -28,6 +28,7 @@ function eq(a, b, name) { ok(a === b, name, { got: a, want: b }); }
   eq(GI.classifyMethodPath('at foo (scripts/policies/competent.js:1:1)'), 'policy', 'A6 method policy origin');
   eq(GI.classifyMethodPath('at Game.tendGarden (src/js/game.js:1:1)'), 'internal', 'A7 method internal origin');
   eq(GI.classifyTeachPath('at Object.sowPlot (x) | at foo'), 'guided-sow', 'A8 teach guided-sow');
+  eq(GI.classifyTeachPath('at Object.learnFromShowing (x) | at Object.haulTeachingMoment (x)'), 'haul-lesson', 'A8b teach haul-lesson');
   eq(GI.classifyTeachPath('at firesideTeaching (x)'), 'fireside', 'A9 teach fireside');
   eq(GI.classifyTeachPath('at somethingElse (x)'), 'somethingElse', 'A10 teach first frame');
 })();
@@ -50,6 +51,8 @@ function eq(a, b, name) { ok(a === b, name, { got: a, want: b }); }
       { action: 'gardenMaintain', vid: 'v1', plotsChanged: 2, throttle: false },
       { action: 'gardenMaintain', vid: 'v1', plotsChanged: 1, throttle: true },
       { action: 'cultivateGarden', vid: 'v1', source: 'green_thumb', bedsAffected: 2, ok: true },
+      { action: 'cultivateGarden', vid: 'v1', source: 'green_thumb', bedsAffected: 2, ok: true },
+      { action: 'cultivateGarden', vid: null, source: 'green_whisper', bedsAffected: 1, ok: true },
       { action: 'reclaimGarden', vid: null, ok: true },
       { action: 'harvestGarden', ripeBefore: 1, plotsTaken: 1 },
     ],
@@ -83,7 +86,8 @@ function eq(a, b, name) { ok(a === b, name, { got: a, want: b }); }
       assigns: [{ day: 1, vid: 'v1', ok: true }],
       keeperTurns: [{ day: 1, keeper: 'v1' }],
       keeperSets: [{ day: 1, vid: 'v1', ok: true }],
-      npcSows: [{ day: 1, vid: 'v1', msg: 'V1 sowed Wild strawberry in the empty plot — seed gathered during garden duty.' }],
+      npcSows: [{ day: 1, vid: 'v1', msg: 'V1 sowed Wild strawberry in the empty plot — seed gathered during garden duty.' },
+        { day: 2, vid: 'v2', msg: null }],
       gardenInflows: [
         { day: 1, door: 'stock', name: 'Garden harvest', kcal: 800, gardenShares: true },
         { day: 2, door: 'deposit', name: 'Wild strawberry', kcal: 1200, gardenShares: true },
@@ -110,10 +114,13 @@ function eq(a, b, name) { ok(a === b, name, { got: a, want: b }); }
   eq(s.makesOk, 1, 'B9 makes ok');
   eq(s.sowsPlayerGuided, 1, 'B10 guided sow');
   eq(s.tendsNpcPlots, 3, 'B11 npc tend plots');
-  eq(s.cultivateBeds, 2, 'B12 cultivate beds');
+  eq(s.cultivateBeds, 5, 'B12 cultivate beds');
+  eq(s.cultivateRawCalls, 3, 'B12b cultivate raw calls');
+  eq(s.cultivateCasts, 2, 'B12c cultivate casts deduped (same day+vid+beds)');
   eq(s.resolutions, 2, 'B13 resolutions');
   eq(s.resolutionsThrottled, 1, 'B14 throttled resolution');
-  eq(s.npcSows, 1, 'B15 npc sows');
+  eq(s.npcSows, 2, 'B15 npc sow calls');
+  eq(s.npcSowsOk, 1, 'B15b npc sow successes (msg non-null only)');
   eq(s.gardenInflowKcal, 2000, 'B16 garden inflow kcal');
   eq(s.inflowGarden, 800, 'B17 inflow Garden harvest');
   eq(s.inflowForage, 2000, 'B18 inflow forage');
@@ -122,6 +129,8 @@ function eq(a, b, name) { ok(a === b, name, { got: a, want: b }); }
   eq(s.teleEatTotal, 600, 'B21 tele eat total');
   eq(s.drawGardenKcal, 300, 'B22 meal garden kcal drawn');
   eq(s.teachesByPath['guided-sow'], 1, 'B23 teaches by path');
+  eq(s.teachesCertainHaul, 1, 'B23b teaches certain-haul (plant never sown)');
+  eq(s.teachesAmbiguous, 1, 'B23c teaches ambiguous (plant sown that seed)');
   eq(s.practiceMax.v1, 9, 'B24 practice max reps');
   eq(s.practiceStepsEnd.v1, 1, 'B25 practice steps end');
   eq(s.deedsByDeedWho['gardening:v1'], 1, 'B26 deeds by who');
@@ -200,12 +209,36 @@ async function liveFixtures() {
     const trec = t.teaches[t.teaches.length - 1];
     ok(trec && trec.teacher === anyVid && trec.plant === shoot.id && typeof trec.outcome === 'string',
       'C7 teachPlant wrap', trec);
+    // C7b: a haul lesson (learnFromShowing) records path 'haul-lesson' —
+    // the harness's telemetry `w` frame must be skipped, not reported.
+    let knownPid = null;
+    try { knownPid = ((typeof Game.villagerKnowsPlants === 'function') ? Game.villagerKnowsPlants(anyVid) : [])[0] || null; } catch (e) {}
+    if (knownPid) {
+      Game.learnFromShowing(knownPid, anyVid, { via: 'shown' });
+      const hrec = t.teaches[t.teaches.length - 1];
+      ok(hrec && hrec.path === 'haul-lesson' && hrec.plant === knownPid,
+        'C7b learnFromShowing wrap path haul-lesson', hrec);
+    } else {
+      ok(false, 'C7b learnFromShowing wrap path haul-lesson (teacher knows no plant)');
+    }
     // C8: cultivateGarden wrap records the attempt (no ability -> false).
     const beforeCult = t.actions.filter(function (r) { return r.action === 'cultivateGarden'; }).length;
     Game.cultivateGarden();
     const afterCult = t.actions.filter(function (r) { return r.action === 'cultivateGarden'; }).length;
     const crec = t.actions.filter(function (r) { return r.action === 'cultivateGarden'; }).pop();
     ok(afterCult === beforeCult + 1 && crec && crec.ok === false, 'C8 cultivateGarden wrap records refused attempt', crec);
+    // C8b: with Green Thumb held, a no-arg cast records the plan source —
+    // the wrap must resolve the scholar id, not pass null (the method
+    // defaults vid only for undefined).
+    const schAbsBefore = (Game.state.scholar || {}).abilities;
+    try {
+      Game.state.scholar.abilities = [{ id: 'green_thumb', level: 1 }];
+      Game.cultivateGarden();
+      const crec2 = t.actions.filter(function (r) { return r.action === 'cultivateGarden'; }).pop();
+      ok(crec2 && crec2.source === 'green_thumb', 'C8b cultivateGarden no-arg records plan source', crec2);
+    } finally {
+      try { Game.state.scholar.abilities = schAbsBefore; } catch (e) {}
+    }
     // C9: gardenMaintain wrap records vid + plots changed.
     Game.gardenMaintain(anyVid);
     const mrec = t.actions.filter(function (r) { return r.action === 'gardenMaintain'; }).pop();

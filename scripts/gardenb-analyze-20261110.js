@@ -86,6 +86,15 @@ function perSeed(out) {
   s.cultivates = ac.filter(function (r) { return r.action === 'cultivateGarden'; });
   s.cultivatesBySource = byKey(s.cultivates, function (r) { return (r.source || '?') + ':' + (r.vid === null ? 'player' : 'npc'); });
   s.cultivateBeds = sum(s.cultivates, function (r) { return r.bedsAffected; });
+  // CAST DEDUPE: a player cast records TWICE — the policy's direct
+  // cultivateGarden call (path 'policy') and the useAbility dispatch
+  // that re-enters it (path 'internal'). Both share day+vid+
+  // bedsAffected; the deduped count is the real number of casts.
+  // NPC casts record once (path 'duty').
+  const castKeys = {};
+  for (const r of s.cultivates) castKeys[r.day + '|' + (r.vid || 'player') + '|' + (r.bedsAffected || 0)] = true;
+  s.cultivateCasts = Object.keys(castKeys).length;
+  s.cultivateRawCalls = s.cultivates.length;
   s.harvestGardenCalls = ac.filter(function (r) { return r.action === 'harvestGarden'; }).length;
   // Garden-capture events (duty/keeper/assigns/npc sows).
   s.resolutions = (ge.resolutions || []).length;
@@ -94,7 +103,11 @@ function perSeed(out) {
   s.keeperTurns = (ge.keeperTurns || []).length;
   s.keeperSets = (ge.keeperSets || []).length;
   s.npcSows = (ge.npcSows || []).length;
-  s.npcSowsByCrop = byKey((ge.npcSows || []), function (r) {
+  // SUCCESS = a message was returned (the duty actually sowed). The
+  // garden-capture records every villagerSowPlot CALL; most return
+  // null (no empty plot / holder not green-hands / no known plant).
+  s.npcSowsOk = (ge.npcSows || []).filter(function (r) { return !!r.msg; }).length;
+  s.npcSowsByCrop = byKey((ge.npcSows || []).filter(function (r) { return !!r.msg; }), function (r) {
     const m = (r.msg || '').match(/sowed (.+?) in the empty plot/);
     return m ? m[1] : '?';
   });
@@ -120,6 +133,17 @@ function perSeed(out) {
   s.teachesByPath = byKey(tc, function (r) { return r.path; });
   s.teachesByOutcome = byKey(tc, function (r) { return r.outcome; });
   s.teaches = tc.map(function (r) { return { day: r.day, teacher: r.teacher, plant: r.plant, outcome: r.outcome, path: r.path }; });
+  // TEACH-PATH CORRECTION (instrument defect, see evidence): the pilot
+  // corpus records path 'Object.w' for every teach — the harness's
+  // telemetry wrapper frame, which firstFrame failed to skip. The true
+  // caller cannot be recovered from the corpus, but it CAN be bounded:
+  // a guided sow teaches ONLY the sown plant, so a teach on a plant
+  // the scholar never sowed that seed is certainly a haul lesson
+  // (learnFromShowing). The remainder are ambiguous.
+  const sowedPids = {};
+  for (const r of ac) if (r.action === 'sowPlot' && r.pid) sowedPids[r.pid] = true;
+  s.teachesCertainHaul = tc.filter(function (r) { return !sowedPids[r.plant]; }).length;
+  s.teachesAmbiguous = tc.length - s.teachesCertainHaul;
   s.prepsByMethod = byKey(pr, function (r) { return r.method; });
   // Practice reps/steps: max-reached per gardener (roster churn hides
   // gains in first-vs-last, same lesson as cookfirst foodXp).
@@ -215,9 +239,11 @@ function pool(per) {
   const numKeys = ['days', 'gameDays', 'deaths', 'instrumentErrors', 'harvestOther',
     'harvestKcalTotal', 'harvestLegacyKcal', 'harvestWeedyKcal', 'harvestWeedyCount',
     'makesOk', 'sowsPlayerGuided', 'sowsPlayerOk', 'tendsPlayer', 'tendsNpc',
-    'tendsNpcPlots', 'reclaimsOk', 'cultivateBeds', 'harvestGardenCalls',
+    'tendsNpcPlots', 'reclaimsOk', 'cultivateBeds', 'cultivateCasts', 'cultivateRawCalls',
+    'harvestGardenCalls',
     'resolutions', 'resolutionsThrottled', 'assigns', 'keeperTurns', 'keeperSets',
-    'npcSows', 'gardenInflowKcal', 'inflowGardenDeposit', 'gardenDutyDays',
+    'npcSows', 'npcSowsOk', 'gardenInflowKcal', 'inflowGardenDeposit', 'gardenDutyDays',
+    'teachesCertainHaul', 'teachesAmbiguous',
     'foodXpGardenerKeys', 'pantryGardenEnd', 'pantryGardenPeak', 'packGardenPeak',
     'bedsPeak', 'plantedPeak', 'ripePeak', 'deadPeak', 'pantryGardenDays',
     'packGardenDays', 'inflowTotal', 'inflowGarden', 'inflowForage',
