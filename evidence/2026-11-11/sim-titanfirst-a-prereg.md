@@ -192,11 +192,11 @@ sim-findings.md, not claimed mid-run.
    **titanEscalate is closure-internal** — it is NOT a Game method
    and cannot be wrapped (the secondlink-a / diplo-a lesson: a wrap
    records nothing if the engine calls the closure). Strikes are
-   therefore detected by dawn-diff (link-trust map + pantry kcal +
-   link-history titan entries, before/after each titanDawnTick)
-   joined to the strike say lines — never by wrapping the closure.
-   The proof forces a strike in a fixture and verifies the
-   dawn-diff + say capture sees it.
+   therefore detected by dawn-diff (link-trust map + scholar pack
+   kcal + village pantry kcal + link-history titan entries,
+   before/after each titanDawnTick) joined to the strike say lines
+   — never by wrapping the closure. The proof forces a strike in a
+   fixture and verifies the dawn-diff + say capture sees it.
 4. **Horizon fit**: 150d covers the full village life (sibling
    pilots' median survival 122.5–140d); titans are late-game (wave 4
    + regional is itself the reach question), so 150d is the floor
@@ -225,7 +225,7 @@ claim and spends NO confirm band; there is no lever here to land):
 | Every startCombat call on a titan id classified, none 'unclassified' | 0 unclassified titan startCombat events across the pilot (refused / fought / dissolved-self; a refused call carries its gate say line) |
 | Every tbEnd of a titan fight classified, none 'unclassified' | 0 unclassified titan tbEnd events (rounds observed, result, titan id) |
 | Every fieldFight on a titan classified, none 'unclassified' | 0 unclassified titan fieldFight events (outcome in evade/vKill/mFlee/vFlee/vDie, rounds) |
-| Every titan dawn-diff explained, none 'unclassified' | 0 unclassified titan dawn events (strike-pantry / strike-trust / muster-hunger / turn / none / other-cause — a trust or pantry move with no titan say line AND no titan link-history entry is 'other-cause', never silently titan) |
+| Every titan dawn-diff explained, none 'unclassified' | 0 unclassified titan dawn events (strike-pantry / strike-trust / muster-hunger / turn / none / other-cause — a trust, pack, or pantry move with no titan say line AND no titan link-history entry is 'other-cause', never silently titan) |
 | Every titan say line classified, none 'unclassified' | 0 unclassified titan say lines across the pilot (classes in the analyzer; known other-system matches — finale-campaign muster line, godverbs 'not titans' — carry their own cited classes) |
 | Every outcome-log record classified, none 'unclassified' | 0 unclassified outcome records (refused / fought→slain|fled / stood-down / orphan terminal) |
 | Every wrapped method's call path verified live or marked dead | each wrap live in the pilot, or proven live in a fixture and marked dead under competent / dead-under-harness |
@@ -248,11 +248,11 @@ review records why; never re-scored mid-run, §14).
    campaign / network campaign); presence days per instance;
    instances removed without a fight (removal day + cause where
    the engine records it).
-3. Escalation / strikes: strike events per titan (kind: pantry
-   raid kcal taken / trust strike village + amount), strike
-   cadence vs the every-5-days rule, days-unanswered per stage-2
-   titan (placed day → slain / removed / run end), strikes per
-   unanswered-day.
+3. Escalation / strikes: strike events per titan (kind: pack raid
+   kcal taken from the scholar's stores / trust strike village +
+   amount), strike cadence vs the every-5-days rule,
+   days-unanswered per stage-2 titan (placed day → slain / removed /
+   run end), strikes per unanswered-day.
 4. Muster / call / commit / standdown: soundTitanCall calls
    (answers + refusals per fire, trust cost where charged);
    titanCommitOwn calls (Haven blades committed); standdown
@@ -354,10 +354,12 @@ instrumentErrors, never thrown into the game).
 - titanDawnTick: every call — before/after diff of titan state
   (cast, omens {stage, day}, musters {allies, haven blades,
   lastUpkeep}, slain, outcome-log length), link-trust map
-  (villageId → trust + titan-kind history entries added), pantry
-  kcal. One dawnEvent per dawn with any diff, classified by the
-  analyzer (strike-pantry / strike-trust / muster-hunger / turn /
-  none / other-cause).
+  (villageId → trust + titan-kind history entries added), SCHOLAR
+  PACK kcal (the raid/upkeep target — playerPackSpend draws from
+  the scholar's finished-food inventory, never the village pantry)
+  and village pantry kcal. One dawnEvent per dawn with any diff,
+  classified by the analyzer (strike-pantry / strike-trust /
+  muster-hunger / turn / none / other-cause).
 - titanSelfDo / soundTitanCall / titanWarCouncil / titanCommitOwn /
   titanStandDown / titanCallReadiness: every call — args, return,
   muster size before/after. (Expected zero under competent;
