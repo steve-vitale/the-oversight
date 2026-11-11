@@ -36,9 +36,14 @@ async function main() {
   const fail = (m) => { console.log('FAIL: ' + m); fails++; };
   // 1st firing: the canonical line, no reframe.
   if (/As I said|Like I said|still where we are/i.test(lines[0])) fail('first recap should be the canonical line, not a reframe');
-  // 2nd/3rd: honest reframe framing present.
+  // 2nd/3rd: honest reframe framing present. The topic form ("<topic> —
+  // that's still where we are.", r31's third template) is honest
+  // reframe framing too — lowercase "that's", mid-sentence after the
+  // topic label — so the match is case-insensitive (r180: the old
+  // capital-T pattern never matched it, and the seeded stream serves
+  // it on the 3rd press).
   for (const i of [1, 2]) {
-    if (!/As I said —|Like I said —|That's still where we are\./.test(lines[i])) fail(`recap ${i + 1} has no reframe framing: ${lines[i]}`);
+    if (!/As I said —|Like I said —|that's still where we are\./i.test(lines[i])) fail(`recap ${i + 1} has no reframe framing: ${lines[i]}`);
   }
   // No two consecutive firings verbatim identical (the L2' bar).
   for (let i = 1; i < 3; i++) {

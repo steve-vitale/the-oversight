@@ -2716,6 +2716,21 @@
         ack = '"Me? Okay." ';
       }
       if (!ack) return rawBeat;
+      // Q3 STACKING (journey-crisis r180): the beat may already open
+      // with an ack/change line — topic2Ask prepends a t2changeLine
+      // ("You asked me that before..." / "Last time things were
+      // different...") when the topic clock moved, and the held-beat
+      // re-ask does the same. That line already acknowledges the
+      // player; a topic ack in front of it stacks a second discourse
+      // chunk before the body ("Good question." "You asked me that
+      // before..." "...", 4 ask:lately sightings on the r180 panel).
+      // Skip the ack when the beat leads with one — the change line
+      // stands in for it. convoAckLines lists every change line and
+      // every topic ack, so the first-chunk check covers both.
+      if (typeof this.convoAckLines === 'function') {
+        const m = /^"((?:[^"\\]|\\.)*)"/.exec(String(rawBeat).trim());
+        if (m && this.convoAckLines().indexOf(m[1]) !== -1) return rawBeat;
+      }
       try {
         return String(this.voiceLine ? this.voiceLine(vid, ack) : ack).replace(/\s+$/, '') + ' ' + rawBeat;
       } catch (e) {
