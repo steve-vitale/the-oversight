@@ -291,8 +291,10 @@ No gate 2 after the rebase: this run is measurement-only
 commits on top of uniquely-named r181 evidence files, and the
 9 family proofs (the run's proof tests) were re-run on the
 rebased tip — all GREEN (logs
-journey-succession-r181-family-r*-closeout.log). A second
-30-minute full gate would re-verify other people's work.
+journey-succession-r181-family-r*-closeout.log, 9/9 exit 0, 0
+FAIL). Rebased tip 16db98cfa onto master 965e8d04e (fansfirst
+landings). A second 30-minute full gate would re-verify other
+people's work.
 
 ## Rotation
 
