@@ -33,8 +33,8 @@ anyone's trust.
 - Village opinion (other villages' trust of you): **0 on every village, every
   day, every seed** — it never moves.
 - Link trust: only **8 links** exist across the whole band; **3** seasoned.
-  Link-raise ideas staged **172**, expired **170**, accepted **0**.
-- Bonds between villagers: **33** proposed, **17 accepted, 16 refused**.
+  Link-raise ideas staged **140**, expired **139**, accepted **0**, 1 pending.
+- Bonds between villagers: **33** resolved immediately (**17 accepted, 16 refused**) plus **32** staged (**31 expired, 1 pending**) — 65 distinct bond proposals total.
 - Talk: **1,079** sittings, all zero-exchange, stipend **+0** every time.
 - Moots: **43** reached quorum (43/43); a friend spoke for the accused **12 of 21**
   times; the scholar's vote never landed, so **0** moot trust moves.
@@ -212,14 +212,16 @@ in say lines are the villager map (real, saturating) and village opinion
   any trust. `mootAccuserAftermath` never fired. Counter-accusations
   happen: on s190218 Elijah accuses Catalina and Catalina accuses Elijah,
   and the same accusation is re-announced days apart.
-- **Bonds:** villagers propose bonds on their own — 33 proposals, 17
-  accepted, 16 refused, chances 0–95, decided by character ("relationship
+- **Bonds:** villagers propose bonds on their own — 33 resolved immediately
+  (17 accepted, 16 refused), chances 0–95, decided by character ("relationship
   with inviter (+8); withdrawn temperament (−20); joy goal (+10)").
   Resolution runs through the tele path, not through
-  acceptBondProposal/declineBondProposal (both dead — 0 calls).
+  acceptBondProposal/declineBondProposal (both dead — 0 calls). Another 32
+  bond proposals were staged (31 expired, 1 pending) — 65 distinct bond
+  proposals in all.
 - **Link raises:** villagers keep raising the idea of linking villages
-  (npcLinkRaiseTick fires ~daily, 1,044 times; 172 raises staged) and
-  **every one expires unanswered** (170 expired, 2 still pending at run
+  (npcLinkRaiseTick fires ~daily, 1,044 times; 140 link raises staged) and
+  **every one expires unanswered** (139 expired, 1 still pending at run
   end). acceptLinkRaise/declineLinkRaise: 0 calls. The raise is staged but
   never decided — the system clears its throat and never speaks.
 - **Talk:** 1,079 sittings, all zero-exchange (talkRound opens and walks
@@ -294,7 +296,7 @@ Early distrust, half rations, fires full of drifting stories, moots that
 proceed without you, gifts counted to the point. The incoherences are
 specific and few: the phantom −3/−10 village-opinion lines, the moot's
 "your vote matters" promise the scholar never keeps, and link raises that
-are staged 172 times and answered never.
+are staged 140 times and answered never.
 
 ## Instrument validity
 
@@ -387,7 +389,7 @@ setter events; the difference is those new-key writes.
 
 - [open] 2026-11-11 — trust/opinion — the runner "(Trust -3)" and raid "(Trust -10)" say lines name village opinion, but ov.trust is floored at 0 and never raised by any live verb, so both numbers are phantoms; the real moving state is ov.commons.tension (sim-trustfirst-a).
 - [open] 2026-11-11 — trust/gossip canon — no dedicated trust/gossip canon doc exists in the CANON.md manifest; the canon law ("gossip moves REP only, never trust") is verified by this census but lives only as a break-it note (sim-trustfirst-a).
-- [open] 2026-11-11 — bonds/links — villager-initiated link raises stage 172 times and expire 170 times with 0 acceptances; acceptLinkRaise/declineLinkRaise never fire under competent play (sim-trustfirst-a).
+- [open] 2026-11-11 — bonds/links — villager-initiated link raises stage 140 times and expire 139 times with 0 acceptances (1 pending); acceptLinkRaise/declineLinkRaise never fire under competent play (sim-trustfirst-a).
 - [open] 2026-11-11 — moot — moot vote trust moves (±6) are player-gated; the scholar never votes under competent, so 43 quorate moots move 0 trust (sim-trustfirst-a).
 - [open] 2026-11-11 — trust lines — the six "Village trust +N" say lines and _evTrustAll never fire in 1,150 village-days under default competent play; finding #2068 (if it exists) is unobservable in lived play (sim-trustfirst-a).
 - [open] 2026-11-11 — river trader — evRiverTrader fires once per seed via checkTimedEvents, not drama; the drama-stubbed assumption that river verbs are 0 is wrong for evRiverTrader (sim-trustfirst-a).
