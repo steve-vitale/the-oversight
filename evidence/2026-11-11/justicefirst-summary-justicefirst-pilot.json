@@ -1,0 +1,3032 @@
+{
+  "band": {
+    "seeds": 8,
+    "villageDays": 1110,
+    "crimes": 4,
+    "crimesUnclassified": 0,
+    "cases": 11,
+    "casesUnclassified": 0,
+    "moots": 10,
+    "mootsUnclassified": 1,
+    "quorate": 9,
+    "advisory": 0,
+    "convicted": 0,
+    "acquitted": 9,
+    "playerVotes": 0,
+    "backstopFinishes": 8,
+    "conveneHeld": 0,
+    "mootTrustMoves": 0,
+    "mootTrustNet": 0,
+    "exilesPlayer": 0,
+    "exilesNpc": 0,
+    "uprisings": 0,
+    "instrumentErrors": 0,
+    "wrapMissingBand": {
+      "recordCrime": 6,
+      "justiceConfront": 8,
+      "justiceRespond": 8,
+      "justiceDemandMoot": 8,
+      "syncJusticeAfterMoot": 8,
+      "mootAccuserAftermath": 8,
+      "startVillageUprising": 8,
+      "uprisingAftermath": 8,
+      "exilePlayer": 8,
+      "justiceExileColdResolve": 8,
+      "stealFrom": 8,
+      "openPlayerCase": 8,
+      "forcePlayerAccusation": 8,
+      "castPlayerVote": 8,
+      "sentenceCase": 8,
+      "resolveCase": 8,
+      "bribeVoter": 8,
+      "exposeBribery": 8,
+      "investigateBribery": 8,
+      "recordGrievance": 7,
+      "openCase": 2,
+      "mootConveneHeld": 2,
+      "callMoot": 2,
+      "conductTrial": 2,
+      "tallyVotes": 2,
+      "mootQuorum": 2,
+      "finishTrial": 2
+    },
+    "neutrality": [
+      {
+        "seed": 190311,
+        "match": true,
+        "control": {
+          "days": 132,
+          "pantry": 21,
+          "deaths": 85
+        },
+        "neutral": {
+          "days": 132,
+          "pantry": 21,
+          "deaths": 85
+        }
+      },
+      {
+        "seed": 190312,
+        "match": true,
+        "control": {
+          "days": 135,
+          "pantry": 20,
+          "deaths": 77
+        },
+        "neutral": {
+          "days": 135,
+          "pantry": 20,
+          "deaths": 77
+        }
+      },
+      {
+        "seed": 190313,
+        "match": true,
+        "control": {
+          "days": 150,
+          "pantry": 20444,
+          "deaths": 118
+        },
+        "neutral": {
+          "days": 150,
+          "pantry": 20444,
+          "deaths": 118
+        }
+      },
+      {
+        "seed": 190314,
+        "match": true,
+        "control": {
+          "days": 150,
+          "pantry": 3200,
+          "deaths": 102
+        },
+        "neutral": {
+          "days": 150,
+          "pantry": 3200,
+          "deaths": 102
+        }
+      },
+      {
+        "seed": 190315,
+        "match": true,
+        "control": {
+          "days": 140,
+          "pantry": 0,
+          "deaths": 73
+        },
+        "neutral": {
+          "days": 140,
+          "pantry": 0,
+          "deaths": 73
+        }
+      },
+      {
+        "seed": 190316,
+        "match": true,
+        "control": {
+          "days": 150,
+          "pantry": 578,
+          "deaths": 82
+        },
+        "neutral": {
+          "days": 150,
+          "pantry": 578,
+          "deaths": 82
+        }
+      },
+      {
+        "seed": 190317,
+        "match": true,
+        "control": {
+          "days": 142,
+          "pantry": 0,
+          "deaths": 109
+        },
+        "neutral": {
+          "days": 142,
+          "pantry": 0,
+          "deaths": 109
+        }
+      },
+      {
+        "seed": 190318,
+        "match": true,
+        "control": {
+          "days": 123,
+          "pantry": 1108,
+          "deaths": 60
+        },
+        "neutral": {
+          "days": 123,
+          "pantry": 1108,
+          "deaths": 60
+        }
+      }
+    ],
+    "engagement": {
+      "casesOrMoots": 21
+    },
+    "neutralityExact": "8/8"
+  },
+  "control": [
+    {
+      "seed": 190311,
+      "mode": "control",
+      "days": 132,
+      "gameDays": 132,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 5,
+      "unlockedWave": 5,
+      "standing": 410,
+      "endPantryKcal": 21,
+      "deaths": 85,
+      "instrumentErrors": 0,
+      "wrapLive": {
+        "justiceTick": true,
+        "justiceHeat": true,
+        "bumpTrust": true,
+        "considerPlayerAccusation": true,
+        "justiceExileCutsTalk": true,
+        "theftConfrontation": true,
+        "removeVillager": true,
+        "openCase": true,
+        "mootConveneHeld": true,
+        "callMoot": true,
+        "conductTrial": true,
+        "tallyVotes": true,
+        "mootQuorum": true,
+        "finishTrial": true
+      },
+      "wrapCounts": {
+        "justiceTick": 526,
+        "justiceHeat": 1949,
+        "bumpTrust": 1681,
+        "considerPlayerAccusation": 131,
+        "justiceExileCutsTalk": 39,
+        "theftConfrontation": 350,
+        "removeVillager": 18,
+        "openCase": 2,
+        "mootConveneHeld": 2,
+        "callMoot": 2,
+        "conductTrial": 2,
+        "tallyVotes": 2,
+        "mootQuorum": 4,
+        "finishTrial": 2
+      },
+      "wrapMissing": [
+        "recordCrime",
+        "justiceConfront",
+        "justiceRespond",
+        "justiceDemandMoot",
+        "syncJusticeAfterMoot",
+        "mootAccuserAftermath",
+        "startVillageUprising",
+        "uprisingAftermath",
+        "exilePlayer",
+        "justiceExileColdResolve",
+        "stealFrom",
+        "openPlayerCase",
+        "forcePlayerAccusation",
+        "castPlayerVote",
+        "sentenceCase",
+        "resolveCase",
+        "bribeVoter",
+        "exposeBribery",
+        "investigateBribery",
+        "recordGrievance"
+      ],
+      "crimes": {
+        "total": 0,
+        "byType": {},
+        "byWitnessed": {},
+        "booked": 0,
+        "droppedNotPlayer": 0,
+        "unclassified": 0,
+        "charged": 0
+      },
+      "ladder": {
+        "ticks": 526,
+        "stageTransitions": {
+          "0->1": 5
+        },
+        "confronts": 0,
+        "responds": 0,
+        "payEnough": 0,
+        "payShort": 0,
+        "refuses": 0,
+        "demands": 0,
+        "demandReasons": {},
+        "uprisings": 0,
+        "uprisingAfter": 0,
+        "syncs": {},
+        "maxHeat": 25,
+        "heatAtEnd": 0
+      },
+      "cases": {
+        "total": 2,
+        "byPath": {
+          "openCase-plot": 2
+        },
+        "byCharge": {
+          "murder": 1,
+          "ambush": 1
+        },
+        "fabricated": 0,
+        "unclassified": 0,
+        "openAtEnd": 0,
+        "resolvedAtEnd": 0,
+        "advisoryAtEnd": 0,
+        "dormantAtEnd": 0,
+        "reconcile": {
+          "residue": 0,
+          "residueIds": [],
+          "opened": 2,
+          "genesis": 0
+        }
+      },
+      "moots": {
+        "trials": 2,
+        "callMoots": 2,
+        "conveneHeld": 0,
+        "conveneReads": 2,
+        "wildDays": 0,
+        "playerVoterTrials": 2,
+        "awaitingTrials": 2,
+        "quorate": 2,
+        "advisory": 0,
+        "convicted": 0,
+        "acquitted": 2,
+        "unclassified": 0,
+        "byOutcome": {
+          "unknown": 2
+        },
+        "byCaller": {
+          "npc:gen_eox4by6": 1,
+          "npc:aroha_ngata": 1
+        },
+        "playerVotes": 0,
+        "backstopFinishes": 2
+      },
+      "verdicts": {
+        "finishTrials": 2,
+        "sentences": 0,
+        "resolves": 0,
+        "byPath": {},
+        "byCharge": {},
+        "avgBeliefAtSentence": []
+      },
+      "mootTrust": {
+        "bumpEvents": 1681,
+        "mootAttributed": 0,
+        "bySite": {},
+        "netDelta": 0,
+        "grievances": 0,
+        "voteGrievances": 0,
+        "aftermath": {
+          "calls": 0,
+          "netDelta": 0
+        },
+        "exileColdBreaks": 0,
+        "exileColdRefusals": 0
+      },
+      "trustReconcile": {
+        "unexplained": 288,
+        "total": 402
+      },
+      "bribery": {
+        "bribeVoter": 0,
+        "expose": 0,
+        "investigate": 0,
+        "boughtVotesInTallies": 0
+      },
+      "theft": {
+        "stealCalls": 0,
+        "stealOk": 0,
+        "theftConfrontations": 350
+      },
+      "exile": {
+        "exilePlayer": 0,
+        "exileHow": {},
+        "npcExiled": 0,
+        "exileCuts": 0,
+        "exileCutsTotal": 39
+      },
+      "removals": {
+        "total": 18,
+        "byReason": {
+          "ambushed": 1,
+          "killed": 17
+        }
+      },
+      "villageDays": 131,
+      "justiceSays": 22,
+      "sayCount": 14145
+    },
+    {
+      "seed": 190312,
+      "mode": "control",
+      "days": 135,
+      "gameDays": 135,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "unlockedWave": 4,
+      "standing": 199,
+      "endPantryKcal": 20,
+      "deaths": 77,
+      "instrumentErrors": 0,
+      "wrapLive": {
+        "justiceTick": true,
+        "justiceHeat": true,
+        "bumpTrust": true,
+        "considerPlayerAccusation": true,
+        "justiceExileCutsTalk": true,
+        "theftConfrontation": true,
+        "removeVillager": true,
+        "openCase": true,
+        "mootConveneHeld": true,
+        "callMoot": true,
+        "conductTrial": true,
+        "tallyVotes": true,
+        "mootQuorum": true,
+        "finishTrial": true
+      },
+      "wrapCounts": {
+        "justiceTick": 538,
+        "justiceHeat": 2008,
+        "bumpTrust": 2553,
+        "considerPlayerAccusation": 134,
+        "justiceExileCutsTalk": 46,
+        "theftConfrontation": 265,
+        "removeVillager": 19,
+        "openCase": 1,
+        "mootConveneHeld": 1,
+        "callMoot": 1,
+        "conductTrial": 1,
+        "tallyVotes": 1,
+        "mootQuorum": 2,
+        "finishTrial": 1
+      },
+      "wrapMissing": [
+        "recordCrime",
+        "justiceConfront",
+        "justiceRespond",
+        "justiceDemandMoot",
+        "syncJusticeAfterMoot",
+        "mootAccuserAftermath",
+        "startVillageUprising",
+        "uprisingAftermath",
+        "exilePlayer",
+        "justiceExileColdResolve",
+        "stealFrom",
+        "openPlayerCase",
+        "forcePlayerAccusation",
+        "castPlayerVote",
+        "sentenceCase",
+        "resolveCase",
+        "bribeVoter",
+        "exposeBribery",
+        "investigateBribery",
+        "recordGrievance"
+      ],
+      "crimes": {
+        "total": 0,
+        "byType": {},
+        "byWitnessed": {},
+        "booked": 0,
+        "droppedNotPlayer": 0,
+        "unclassified": 0,
+        "charged": 0
+      },
+      "ladder": {
+        "ticks": 538,
+        "stageTransitions": {
+          "0->1": 5
+        },
+        "confronts": 0,
+        "responds": 0,
+        "payEnough": 0,
+        "payShort": 0,
+        "refuses": 0,
+        "demands": 0,
+        "demandReasons": {},
+        "uprisings": 0,
+        "uprisingAfter": 0,
+        "syncs": {},
+        "maxHeat": 25,
+        "heatAtEnd": 0
+      },
+      "cases": {
+        "total": 1,
+        "byPath": {
+          "openCase-plot": 1
+        },
+        "byCharge": {
+          "murder": 1
+        },
+        "fabricated": 0,
+        "unclassified": 0,
+        "openAtEnd": 0,
+        "resolvedAtEnd": 0,
+        "advisoryAtEnd": 0,
+        "dormantAtEnd": 0,
+        "reconcile": {
+          "residue": 0,
+          "residueIds": [],
+          "opened": 1,
+          "genesis": 0
+        }
+      },
+      "moots": {
+        "trials": 1,
+        "callMoots": 1,
+        "conveneHeld": 0,
+        "conveneReads": 1,
+        "wildDays": 0,
+        "playerVoterTrials": 1,
+        "awaitingTrials": 1,
+        "quorate": 1,
+        "advisory": 0,
+        "convicted": 0,
+        "acquitted": 1,
+        "unclassified": 0,
+        "byOutcome": {
+          "unknown": 1
+        },
+        "byCaller": {
+          "npc:gen_td1rcon": 1
+        },
+        "playerVotes": 0,
+        "backstopFinishes": 1
+      },
+      "verdicts": {
+        "finishTrials": 1,
+        "sentences": 0,
+        "resolves": 0,
+        "byPath": {},
+        "byCharge": {},
+        "avgBeliefAtSentence": []
+      },
+      "mootTrust": {
+        "bumpEvents": 2553,
+        "mootAttributed": 0,
+        "bySite": {},
+        "netDelta": 0,
+        "grievances": 0,
+        "voteGrievances": 0,
+        "aftermath": {
+          "calls": 0,
+          "netDelta": 0
+        },
+        "exileColdBreaks": 0,
+        "exileColdRefusals": 0
+      },
+      "trustReconcile": {
+        "unexplained": 320,
+        "total": 494
+      },
+      "bribery": {
+        "bribeVoter": 0,
+        "expose": 0,
+        "investigate": 0,
+        "boughtVotesInTallies": 0
+      },
+      "theft": {
+        "stealCalls": 0,
+        "stealOk": 0,
+        "theftConfrontations": 265
+      },
+      "exile": {
+        "exilePlayer": 0,
+        "exileHow": {},
+        "npcExiled": 0,
+        "exileCuts": 0,
+        "exileCutsTotal": 46
+      },
+      "removals": {
+        "total": 19,
+        "byReason": {
+          "ambushed": 1,
+          "killed": 18
+        }
+      },
+      "villageDays": 133,
+      "justiceSays": 15,
+      "sayCount": 12858
+    },
+    {
+      "seed": 190313,
+      "mode": "control",
+      "days": 150,
+      "gameDays": 151,
+      "endReason": "survived",
+      "won": false,
+      "villageLost": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "unlockedWave": 4,
+      "standing": 199,
+      "endPantryKcal": 20444,
+      "deaths": 118,
+      "instrumentErrors": 0,
+      "wrapLive": {
+        "bumpTrust": true,
+        "justiceTick": true,
+        "justiceHeat": true,
+        "considerPlayerAccusation": true,
+        "justiceExileCutsTalk": true,
+        "theftConfrontation": true,
+        "removeVillager": true
+      },
+      "wrapCounts": {
+        "bumpTrust": 2024,
+        "justiceTick": 600,
+        "justiceHeat": 2231,
+        "considerPlayerAccusation": 150,
+        "justiceExileCutsTalk": 36,
+        "theftConfrontation": 141,
+        "removeVillager": 9
+      },
+      "wrapMissing": [
+        "recordCrime",
+        "justiceConfront",
+        "justiceRespond",
+        "justiceDemandMoot",
+        "syncJusticeAfterMoot",
+        "mootAccuserAftermath",
+        "startVillageUprising",
+        "uprisingAftermath",
+        "exilePlayer",
+        "justiceExileColdResolve",
+        "stealFrom",
+        "openCase",
+        "openPlayerCase",
+        "forcePlayerAccusation",
+        "mootConveneHeld",
+        "callMoot",
+        "conductTrial",
+        "tallyVotes",
+        "mootQuorum",
+        "castPlayerVote",
+        "finishTrial",
+        "sentenceCase",
+        "resolveCase",
+        "bribeVoter",
+        "exposeBribery",
+        "investigateBribery",
+        "recordGrievance"
+      ],
+      "crimes": {
+        "total": 0,
+        "byType": {},
+        "byWitnessed": {},
+        "booked": 0,
+        "droppedNotPlayer": 0,
+        "unclassified": 0,
+        "charged": 0
+      },
+      "ladder": {
+        "ticks": 600,
+        "stageTransitions": {
+          "0->1": 4
+        },
+        "confronts": 0,
+        "responds": 0,
+        "payEnough": 0,
+        "payShort": 0,
+        "refuses": 0,
+        "demands": 0,
+        "demandReasons": {},
+        "uprisings": 0,
+        "uprisingAfter": 0,
+        "syncs": {},
+        "maxHeat": 25,
+        "heatAtEnd": 10
+      },
+      "cases": {
+        "total": 0,
+        "byPath": {},
+        "byCharge": {},
+        "fabricated": 0,
+        "unclassified": 0,
+        "openAtEnd": 0,
+        "resolvedAtEnd": 0,
+        "advisoryAtEnd": 0,
+        "dormantAtEnd": 0,
+        "reconcile": {
+          "residue": 0,
+          "residueIds": [],
+          "opened": 0,
+          "genesis": 0
+        }
+      },
+      "moots": {
+        "trials": 0,
+        "callMoots": 0,
+        "conveneHeld": 0,
+        "conveneReads": 0,
+        "wildDays": 0,
+        "playerVoterTrials": 0,
+        "awaitingTrials": 0,
+        "quorate": 0,
+        "advisory": 0,
+        "convicted": 0,
+        "acquitted": 0,
+        "unclassified": 0,
+        "byOutcome": {},
+        "byCaller": {},
+        "playerVotes": 0,
+        "backstopFinishes": 0
+      },
+      "verdicts": {
+        "finishTrials": 0,
+        "sentences": 0,
+        "resolves": 0,
+        "byPath": {},
+        "byCharge": {},
+        "avgBeliefAtSentence": []
+      },
+      "mootTrust": {
+        "bumpEvents": 2024,
+        "mootAttributed": 0,
+        "bySite": {},
+        "netDelta": 0,
+        "grievances": 0,
+        "voteGrievances": 0,
+        "aftermath": {
+          "calls": 0,
+          "netDelta": 0
+        },
+        "exileColdBreaks": 0,
+        "exileColdRefusals": 0
+      },
+      "trustReconcile": {
+        "unexplained": 243,
+        "total": 341
+      },
+      "bribery": {
+        "bribeVoter": 0,
+        "expose": 0,
+        "investigate": 0,
+        "boughtVotesInTallies": 0
+      },
+      "theft": {
+        "stealCalls": 0,
+        "stealOk": 0,
+        "theftConfrontations": 141
+      },
+      "exile": {
+        "exilePlayer": 0,
+        "exileHow": {},
+        "npcExiled": 0,
+        "exileCuts": 0,
+        "exileCutsTotal": 36
+      },
+      "removals": {
+        "total": 9,
+        "byReason": {
+          "killed": 9
+        }
+      },
+      "villageDays": 148,
+      "justiceSays": 13,
+      "sayCount": 14531
+    },
+    {
+      "seed": 190314,
+      "mode": "control",
+      "days": 150,
+      "gameDays": 151,
+      "endReason": "survived",
+      "won": false,
+      "villageLost": false,
+      "scaleRank": "regional",
+      "maxWave": 5,
+      "unlockedWave": 5,
+      "standing": 350,
+      "endPantryKcal": 3200,
+      "deaths": 102,
+      "instrumentErrors": 0,
+      "wrapLive": {
+        "justiceTick": true,
+        "justiceHeat": true,
+        "bumpTrust": true,
+        "considerPlayerAccusation": true,
+        "justiceExileCutsTalk": true,
+        "theftConfrontation": true,
+        "recordCrime": true,
+        "removeVillager": true
+      },
+      "wrapCounts": {
+        "justiceTick": 600,
+        "justiceHeat": 2235,
+        "bumpTrust": 2532,
+        "considerPlayerAccusation": 150,
+        "justiceExileCutsTalk": 68,
+        "theftConfrontation": 439,
+        "recordCrime": 1,
+        "removeVillager": 7
+      },
+      "wrapMissing": [
+        "justiceConfront",
+        "justiceRespond",
+        "justiceDemandMoot",
+        "syncJusticeAfterMoot",
+        "mootAccuserAftermath",
+        "startVillageUprising",
+        "uprisingAftermath",
+        "exilePlayer",
+        "justiceExileColdResolve",
+        "stealFrom",
+        "openCase",
+        "openPlayerCase",
+        "forcePlayerAccusation",
+        "mootConveneHeld",
+        "callMoot",
+        "conductTrial",
+        "tallyVotes",
+        "mootQuorum",
+        "castPlayerVote",
+        "finishTrial",
+        "sentenceCase",
+        "resolveCase",
+        "bribeVoter",
+        "exposeBribery",
+        "investigateBribery",
+        "recordGrievance"
+      ],
+      "crimes": {
+        "total": 1,
+        "byType": {
+          "threat": 1
+        },
+        "byWitnessed": {
+          "unwitnessed": 1
+        },
+        "booked": 0,
+        "droppedNotPlayer": 1,
+        "unclassified": 0,
+        "charged": 0
+      },
+      "ladder": {
+        "ticks": 600,
+        "stageTransitions": {
+          "0->1": 3
+        },
+        "confronts": 0,
+        "responds": 0,
+        "payEnough": 0,
+        "payShort": 0,
+        "refuses": 0,
+        "demands": 0,
+        "demandReasons": {},
+        "uprisings": 0,
+        "uprisingAfter": 0,
+        "syncs": {},
+        "maxHeat": 25,
+        "heatAtEnd": 10
+      },
+      "cases": {
+        "total": 0,
+        "byPath": {},
+        "byCharge": {},
+        "fabricated": 0,
+        "unclassified": 0,
+        "openAtEnd": 0,
+        "resolvedAtEnd": 0,
+        "advisoryAtEnd": 0,
+        "dormantAtEnd": 0,
+        "reconcile": {
+          "residue": 0,
+          "residueIds": [],
+          "opened": 0,
+          "genesis": 0
+        }
+      },
+      "moots": {
+        "trials": 0,
+        "callMoots": 0,
+        "conveneHeld": 0,
+        "conveneReads": 0,
+        "wildDays": 0,
+        "playerVoterTrials": 0,
+        "awaitingTrials": 0,
+        "quorate": 0,
+        "advisory": 0,
+        "convicted": 0,
+        "acquitted": 0,
+        "unclassified": 0,
+        "byOutcome": {},
+        "byCaller": {},
+        "playerVotes": 0,
+        "backstopFinishes": 0
+      },
+      "verdicts": {
+        "finishTrials": 0,
+        "sentences": 0,
+        "resolves": 0,
+        "byPath": {},
+        "byCharge": {},
+        "avgBeliefAtSentence": []
+      },
+      "mootTrust": {
+        "bumpEvents": 2532,
+        "mootAttributed": 0,
+        "bySite": {},
+        "netDelta": 0,
+        "grievances": 0,
+        "voteGrievances": 0,
+        "aftermath": {
+          "calls": 0,
+          "netDelta": 0
+        },
+        "exileColdBreaks": 0,
+        "exileColdRefusals": 0
+      },
+      "trustReconcile": {
+        "unexplained": 257,
+        "total": 408
+      },
+      "bribery": {
+        "bribeVoter": 0,
+        "expose": 0,
+        "investigate": 0,
+        "boughtVotesInTallies": 0
+      },
+      "theft": {
+        "stealCalls": 0,
+        "stealOk": 0,
+        "theftConfrontations": 439
+      },
+      "exile": {
+        "exilePlayer": 0,
+        "exileHow": {},
+        "npcExiled": 0,
+        "exileCuts": 0,
+        "exileCutsTotal": 68
+      },
+      "removals": {
+        "total": 7,
+        "byReason": {
+          "killed": 7
+        }
+      },
+      "villageDays": 149,
+      "justiceSays": 12,
+      "sayCount": 16682
+    },
+    {
+      "seed": 190315,
+      "mode": "control",
+      "days": 140,
+      "gameDays": 140,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "unlockedWave": 4,
+      "standing": 199,
+      "endPantryKcal": 0,
+      "deaths": 73,
+      "instrumentErrors": 0,
+      "wrapLive": {
+        "justiceTick": true,
+        "justiceHeat": true,
+        "bumpTrust": true,
+        "considerPlayerAccusation": true,
+        "justiceExileCutsTalk": true,
+        "theftConfrontation": true,
+        "openCase": true,
+        "mootConveneHeld": true,
+        "callMoot": true,
+        "conductTrial": true,
+        "tallyVotes": true,
+        "mootQuorum": true,
+        "finishTrial": true,
+        "removeVillager": true
+      },
+      "wrapCounts": {
+        "justiceTick": 560,
+        "justiceHeat": 2086,
+        "bumpTrust": 2425,
+        "considerPlayerAccusation": 140,
+        "justiceExileCutsTalk": 75,
+        "theftConfrontation": 110,
+        "openCase": 2,
+        "mootConveneHeld": 2,
+        "callMoot": 2,
+        "conductTrial": 2,
+        "tallyVotes": 2,
+        "mootQuorum": 4,
+        "finishTrial": 2,
+        "removeVillager": 14
+      },
+      "wrapMissing": [
+        "recordCrime",
+        "justiceConfront",
+        "justiceRespond",
+        "justiceDemandMoot",
+        "syncJusticeAfterMoot",
+        "mootAccuserAftermath",
+        "startVillageUprising",
+        "uprisingAftermath",
+        "exilePlayer",
+        "justiceExileColdResolve",
+        "stealFrom",
+        "openPlayerCase",
+        "forcePlayerAccusation",
+        "castPlayerVote",
+        "sentenceCase",
+        "resolveCase",
+        "bribeVoter",
+        "exposeBribery",
+        "investigateBribery",
+        "recordGrievance"
+      ],
+      "crimes": {
+        "total": 0,
+        "byType": {},
+        "byWitnessed": {},
+        "booked": 0,
+        "droppedNotPlayer": 0,
+        "unclassified": 0,
+        "charged": 0
+      },
+      "ladder": {
+        "ticks": 560,
+        "stageTransitions": {
+          "0->1": 4
+        },
+        "confronts": 0,
+        "responds": 0,
+        "payEnough": 0,
+        "payShort": 0,
+        "refuses": 0,
+        "demands": 0,
+        "demandReasons": {},
+        "uprisings": 0,
+        "uprisingAfter": 0,
+        "syncs": {},
+        "maxHeat": 25,
+        "heatAtEnd": 0
+      },
+      "cases": {
+        "total": 2,
+        "byPath": {
+          "openCase-plot": 2
+        },
+        "byCharge": {
+          "ambush": 2
+        },
+        "fabricated": 0,
+        "unclassified": 0,
+        "openAtEnd": 0,
+        "resolvedAtEnd": 0,
+        "advisoryAtEnd": 0,
+        "dormantAtEnd": 0,
+        "reconcile": {
+          "residue": 0,
+          "residueIds": [],
+          "opened": 2,
+          "genesis": 0
+        }
+      },
+      "moots": {
+        "trials": 2,
+        "callMoots": 2,
+        "conveneHeld": 0,
+        "conveneReads": 2,
+        "wildDays": 0,
+        "playerVoterTrials": 2,
+        "awaitingTrials": 2,
+        "quorate": 2,
+        "advisory": 0,
+        "convicted": 0,
+        "acquitted": 2,
+        "unclassified": 0,
+        "byOutcome": {
+          "unknown": 2
+        },
+        "byCaller": {
+          "npc:petra_novak": 2
+        },
+        "playerVotes": 0,
+        "backstopFinishes": 2
+      },
+      "verdicts": {
+        "finishTrials": 2,
+        "sentences": 0,
+        "resolves": 0,
+        "byPath": {},
+        "byCharge": {},
+        "avgBeliefAtSentence": []
+      },
+      "mootTrust": {
+        "bumpEvents": 2425,
+        "mootAttributed": 0,
+        "bySite": {},
+        "netDelta": 0,
+        "grievances": 0,
+        "voteGrievances": 0,
+        "aftermath": {
+          "calls": 0,
+          "netDelta": 0
+        },
+        "exileColdBreaks": 0,
+        "exileColdRefusals": 0
+      },
+      "trustReconcile": {
+        "unexplained": 357,
+        "total": 544
+      },
+      "bribery": {
+        "bribeVoter": 0,
+        "expose": 0,
+        "investigate": 0,
+        "boughtVotesInTallies": 0
+      },
+      "theft": {
+        "stealCalls": 0,
+        "stealOk": 0,
+        "theftConfrontations": 110
+      },
+      "exile": {
+        "exilePlayer": 0,
+        "exileHow": {},
+        "npcExiled": 0,
+        "exileCuts": 0,
+        "exileCutsTotal": 75
+      },
+      "removals": {
+        "total": 14,
+        "byReason": {
+          "killed": 14
+        }
+      },
+      "villageDays": 139,
+      "justiceSays": 28,
+      "sayCount": 13437
+    },
+    {
+      "seed": 190316,
+      "mode": "control",
+      "days": 150,
+      "gameDays": 151,
+      "endReason": "survived",
+      "won": false,
+      "villageLost": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "unlockedWave": 4,
+      "standing": 199,
+      "endPantryKcal": 578,
+      "deaths": 82,
+      "instrumentErrors": 0,
+      "wrapLive": {
+        "justiceTick": true,
+        "justiceHeat": true,
+        "bumpTrust": true,
+        "considerPlayerAccusation": true,
+        "justiceExileCutsTalk": true,
+        "theftConfrontation": true,
+        "openCase": true,
+        "mootConveneHeld": true,
+        "callMoot": true,
+        "conductTrial": true,
+        "tallyVotes": true,
+        "mootQuorum": true,
+        "finishTrial": true,
+        "removeVillager": true
+      },
+      "wrapCounts": {
+        "justiceTick": 600,
+        "justiceHeat": 2230,
+        "bumpTrust": 1740,
+        "considerPlayerAccusation": 150,
+        "justiceExileCutsTalk": 58,
+        "theftConfrontation": 346,
+        "openCase": 1,
+        "mootConveneHeld": 1,
+        "callMoot": 1,
+        "conductTrial": 1,
+        "tallyVotes": 1,
+        "mootQuorum": 2,
+        "finishTrial": 1,
+        "removeVillager": 18
+      },
+      "wrapMissing": [
+        "recordCrime",
+        "justiceConfront",
+        "justiceRespond",
+        "justiceDemandMoot",
+        "syncJusticeAfterMoot",
+        "mootAccuserAftermath",
+        "startVillageUprising",
+        "uprisingAftermath",
+        "exilePlayer",
+        "justiceExileColdResolve",
+        "stealFrom",
+        "openPlayerCase",
+        "forcePlayerAccusation",
+        "castPlayerVote",
+        "sentenceCase",
+        "resolveCase",
+        "bribeVoter",
+        "exposeBribery",
+        "investigateBribery",
+        "recordGrievance"
+      ],
+      "crimes": {
+        "total": 0,
+        "byType": {},
+        "byWitnessed": {},
+        "booked": 0,
+        "droppedNotPlayer": 0,
+        "unclassified": 0,
+        "charged": 0
+      },
+      "ladder": {
+        "ticks": 600,
+        "stageTransitions": {
+          "0->1": 4
+        },
+        "confronts": 0,
+        "responds": 0,
+        "payEnough": 0,
+        "payShort": 0,
+        "refuses": 0,
+        "demands": 0,
+        "demandReasons": {},
+        "uprisings": 0,
+        "uprisingAfter": 0,
+        "syncs": {},
+        "maxHeat": 25,
+        "heatAtEnd": 10
+      },
+      "cases": {
+        "total": 1,
+        "byPath": {
+          "openCase-plot": 1
+        },
+        "byCharge": {
+          "ambush": 1
+        },
+        "fabricated": 0,
+        "unclassified": 0,
+        "openAtEnd": 0,
+        "resolvedAtEnd": 0,
+        "advisoryAtEnd": 0,
+        "dormantAtEnd": 0,
+        "reconcile": {
+          "residue": 0,
+          "residueIds": [],
+          "opened": 1,
+          "genesis": 0
+        }
+      },
+      "moots": {
+        "trials": 1,
+        "callMoots": 1,
+        "conveneHeld": 0,
+        "conveneReads": 1,
+        "wildDays": 0,
+        "playerVoterTrials": 1,
+        "awaitingTrials": 1,
+        "quorate": 1,
+        "advisory": 0,
+        "convicted": 0,
+        "acquitted": 1,
+        "unclassified": 0,
+        "byOutcome": {
+          "unknown": 1
+        },
+        "byCaller": {
+          "npc:lena_ruiz": 1
+        },
+        "playerVotes": 0,
+        "backstopFinishes": 1
+      },
+      "verdicts": {
+        "finishTrials": 1,
+        "sentences": 0,
+        "resolves": 0,
+        "byPath": {},
+        "byCharge": {},
+        "avgBeliefAtSentence": []
+      },
+      "mootTrust": {
+        "bumpEvents": 1740,
+        "mootAttributed": 0,
+        "bySite": {},
+        "netDelta": 0,
+        "grievances": 0,
+        "voteGrievances": 0,
+        "aftermath": {
+          "calls": 0,
+          "netDelta": 0
+        },
+        "exileColdBreaks": 0,
+        "exileColdRefusals": 0
+      },
+      "trustReconcile": {
+        "unexplained": 345,
+        "total": 466
+      },
+      "bribery": {
+        "bribeVoter": 0,
+        "expose": 0,
+        "investigate": 0,
+        "boughtVotesInTallies": 0
+      },
+      "theft": {
+        "stealCalls": 0,
+        "stealOk": 0,
+        "theftConfrontations": 346
+      },
+      "exile": {
+        "exilePlayer": 0,
+        "exileHow": {},
+        "npcExiled": 0,
+        "exileCuts": 0,
+        "exileCutsTotal": 58
+      },
+      "removals": {
+        "total": 18,
+        "byReason": {
+          "killed": 18
+        }
+      },
+      "villageDays": 149,
+      "justiceSays": 29,
+      "sayCount": 16591
+    },
+    {
+      "seed": 190317,
+      "mode": "control",
+      "days": 142,
+      "gameDays": 142,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 5,
+      "unlockedWave": 5,
+      "standing": 300,
+      "endPantryKcal": 0,
+      "deaths": 109,
+      "instrumentErrors": 0,
+      "wrapLive": {
+        "justiceTick": true,
+        "justiceHeat": true,
+        "bumpTrust": true,
+        "considerPlayerAccusation": true,
+        "justiceExileCutsTalk": true,
+        "theftConfrontation": true,
+        "openCase": true,
+        "removeVillager": true,
+        "mootConveneHeld": true,
+        "callMoot": true,
+        "conductTrial": true,
+        "tallyVotes": true,
+        "mootQuorum": true,
+        "finishTrial": true
+      },
+      "wrapCounts": {
+        "justiceTick": 564,
+        "justiceHeat": 2095,
+        "bumpTrust": 1430,
+        "considerPlayerAccusation": 141,
+        "justiceExileCutsTalk": 50,
+        "theftConfrontation": 138,
+        "openCase": 2,
+        "removeVillager": 15,
+        "mootConveneHeld": 2,
+        "callMoot": 2,
+        "conductTrial": 2,
+        "tallyVotes": 2,
+        "mootQuorum": 4,
+        "finishTrial": 2
+      },
+      "wrapMissing": [
+        "recordCrime",
+        "justiceConfront",
+        "justiceRespond",
+        "justiceDemandMoot",
+        "syncJusticeAfterMoot",
+        "mootAccuserAftermath",
+        "startVillageUprising",
+        "uprisingAftermath",
+        "exilePlayer",
+        "justiceExileColdResolve",
+        "stealFrom",
+        "openPlayerCase",
+        "forcePlayerAccusation",
+        "castPlayerVote",
+        "sentenceCase",
+        "resolveCase",
+        "bribeVoter",
+        "exposeBribery",
+        "investigateBribery",
+        "recordGrievance"
+      ],
+      "crimes": {
+        "total": 0,
+        "byType": {},
+        "byWitnessed": {},
+        "booked": 0,
+        "droppedNotPlayer": 0,
+        "unclassified": 0,
+        "charged": 0
+      },
+      "ladder": {
+        "ticks": 564,
+        "stageTransitions": {
+          "0->1": 3
+        },
+        "confronts": 0,
+        "responds": 0,
+        "payEnough": 0,
+        "payShort": 0,
+        "refuses": 0,
+        "demands": 0,
+        "demandReasons": {},
+        "uprisings": 0,
+        "uprisingAfter": 0,
+        "syncs": {},
+        "maxHeat": 25,
+        "heatAtEnd": 0
+      },
+      "cases": {
+        "total": 2,
+        "byPath": {
+          "openCase-plot": 2
+        },
+        "byCharge": {
+          "ambush": 1,
+          "murder": 1
+        },
+        "fabricated": 0,
+        "unclassified": 0,
+        "openAtEnd": 0,
+        "resolvedAtEnd": 0,
+        "advisoryAtEnd": 0,
+        "dormantAtEnd": 0,
+        "reconcile": {
+          "residue": 0,
+          "residueIds": [],
+          "opened": 2,
+          "genesis": 0
+        }
+      },
+      "moots": {
+        "trials": 2,
+        "callMoots": 2,
+        "conveneHeld": 0,
+        "conveneReads": 2,
+        "wildDays": 0,
+        "playerVoterTrials": 1,
+        "awaitingTrials": 1,
+        "quorate": 2,
+        "advisory": 0,
+        "convicted": 0,
+        "acquitted": 2,
+        "unclassified": 0,
+        "byOutcome": {
+          "unknown": 2
+        },
+        "byCaller": {
+          "npc:theo_lindqvist": 2
+        },
+        "playerVotes": 0,
+        "backstopFinishes": 1
+      },
+      "verdicts": {
+        "finishTrials": 2,
+        "sentences": 0,
+        "resolves": 0,
+        "byPath": {},
+        "byCharge": {},
+        "avgBeliefAtSentence": []
+      },
+      "mootTrust": {
+        "bumpEvents": 1430,
+        "mootAttributed": 0,
+        "bySite": {},
+        "netDelta": 0,
+        "grievances": 0,
+        "voteGrievances": 0,
+        "aftermath": {
+          "calls": 0,
+          "netDelta": 0
+        },
+        "exileColdBreaks": 0,
+        "exileColdRefusals": 0
+      },
+      "trustReconcile": {
+        "unexplained": 279,
+        "total": 448
+      },
+      "bribery": {
+        "bribeVoter": 0,
+        "expose": 0,
+        "investigate": 0,
+        "boughtVotesInTallies": 0
+      },
+      "theft": {
+        "stealCalls": 0,
+        "stealOk": 0,
+        "theftConfrontations": 138
+      },
+      "exile": {
+        "exilePlayer": 0,
+        "exileHow": {},
+        "npcExiled": 0,
+        "exileCuts": 0,
+        "exileCutsTotal": 50
+      },
+      "removals": {
+        "total": 15,
+        "byReason": {
+          "ambushed": 1,
+          "killed": 14
+        }
+      },
+      "villageDays": 140,
+      "justiceSays": 46,
+      "sayCount": 14447
+    },
+    {
+      "seed": 190318,
+      "mode": "control",
+      "days": 123,
+      "gameDays": 123,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "unlockedWave": 4,
+      "standing": 199,
+      "endPantryKcal": 1108,
+      "deaths": 60,
+      "instrumentErrors": 0,
+      "wrapLive": {
+        "justiceTick": true,
+        "justiceHeat": true,
+        "bumpTrust": true,
+        "considerPlayerAccusation": true,
+        "justiceExileCutsTalk": true,
+        "theftConfrontation": true,
+        "openCase": true,
+        "recordGrievance": true,
+        "mootConveneHeld": true,
+        "callMoot": true,
+        "conductTrial": true,
+        "tallyVotes": true,
+        "mootQuorum": true,
+        "removeVillager": true,
+        "recordCrime": true,
+        "finishTrial": true
+      },
+      "wrapCounts": {
+        "justiceTick": 490,
+        "justiceHeat": 1823,
+        "bumpTrust": 1457,
+        "considerPlayerAccusation": 122,
+        "justiceExileCutsTalk": 36,
+        "theftConfrontation": 155,
+        "openCase": 3,
+        "recordGrievance": 1,
+        "mootConveneHeld": 2,
+        "callMoot": 2,
+        "conductTrial": 2,
+        "tallyVotes": 2,
+        "mootQuorum": 3,
+        "removeVillager": 16,
+        "recordCrime": 3,
+        "finishTrial": 1
+      },
+      "wrapMissing": [
+        "justiceConfront",
+        "justiceRespond",
+        "justiceDemandMoot",
+        "syncJusticeAfterMoot",
+        "mootAccuserAftermath",
+        "startVillageUprising",
+        "uprisingAftermath",
+        "exilePlayer",
+        "justiceExileColdResolve",
+        "stealFrom",
+        "openPlayerCase",
+        "forcePlayerAccusation",
+        "castPlayerVote",
+        "sentenceCase",
+        "resolveCase",
+        "bribeVoter",
+        "exposeBribery",
+        "investigateBribery"
+      ],
+      "crimes": {
+        "total": 3,
+        "byType": {
+          "theft": 1,
+          "threat": 1,
+          "assault": 1
+        },
+        "byWitnessed": {
+          "unwitnessed": 1,
+          "witnessed": 2
+        },
+        "booked": 0,
+        "droppedNotPlayer": 3,
+        "unclassified": 0,
+        "charged": 0
+      },
+      "ladder": {
+        "ticks": 490,
+        "stageTransitions": {
+          "0->1": 4
+        },
+        "confronts": 0,
+        "responds": 0,
+        "payEnough": 0,
+        "payShort": 0,
+        "refuses": 0,
+        "demands": 0,
+        "demandReasons": {},
+        "uprisings": 0,
+        "uprisingAfter": 0,
+        "syncs": {},
+        "maxHeat": 25,
+        "heatAtEnd": 0
+      },
+      "cases": {
+        "total": 3,
+        "byPath": {
+          "openCase-plot": 3
+        },
+        "byCharge": {
+          "ambush": 2,
+          "murder": 1
+        },
+        "fabricated": 0,
+        "unclassified": 0,
+        "openAtEnd": 0,
+        "resolvedAtEnd": 2,
+        "advisoryAtEnd": 0,
+        "dormantAtEnd": 0,
+        "reconcile": {
+          "residue": 0,
+          "residueIds": [],
+          "opened": 3,
+          "genesis": 0
+        }
+      },
+      "moots": {
+        "trials": 2,
+        "callMoots": 2,
+        "conveneHeld": 0,
+        "conveneReads": 2,
+        "wildDays": 0,
+        "playerVoterTrials": 1,
+        "awaitingTrials": 1,
+        "quorate": 1,
+        "advisory": 0,
+        "convicted": 0,
+        "acquitted": 1,
+        "unclassified": 1,
+        "byOutcome": {
+          "unknown": 1
+        },
+        "byCaller": {
+          "npc:gen_vcdfzu3": 1
+        },
+        "playerVotes": 0,
+        "backstopFinishes": 1
+      },
+      "verdicts": {
+        "finishTrials": 1,
+        "sentences": 0,
+        "resolves": 0,
+        "byPath": {},
+        "byCharge": {},
+        "avgBeliefAtSentence": []
+      },
+      "mootTrust": {
+        "bumpEvents": 1457,
+        "mootAttributed": 0,
+        "bySite": {},
+        "netDelta": 0,
+        "grievances": 1,
+        "voteGrievances": 0,
+        "aftermath": {
+          "calls": 0,
+          "netDelta": 0
+        },
+        "exileColdBreaks": 0,
+        "exileColdRefusals": 0
+      },
+      "trustReconcile": {
+        "unexplained": 274,
+        "total": 413
+      },
+      "bribery": {
+        "bribeVoter": 0,
+        "expose": 0,
+        "investigate": 0,
+        "boughtVotesInTallies": 0
+      },
+      "theft": {
+        "stealCalls": 0,
+        "stealOk": 0,
+        "theftConfrontations": 155
+      },
+      "exile": {
+        "exilePlayer": 0,
+        "exileHow": {},
+        "npcExiled": 0,
+        "exileCuts": 0,
+        "exileCutsTotal": 36
+      },
+      "removals": {
+        "total": 16,
+        "byReason": {
+          "ambushed": 1,
+          "killed": 15
+        }
+      },
+      "villageDays": 121,
+      "justiceSays": 32,
+      "sayCount": 11153
+    }
+  ],
+  "neutral": [
+    {
+      "seed": 190311,
+      "mode": "neutral",
+      "days": 132,
+      "gameDays": 132,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 5,
+      "unlockedWave": 5,
+      "standing": 410,
+      "endPantryKcal": 21,
+      "deaths": 85,
+      "instrumentErrors": 0,
+      "wrapLive": {},
+      "wrapCounts": {},
+      "wrapMissing": [
+        "recordCrime",
+        "justiceHeat",
+        "justiceTick",
+        "justiceConfront",
+        "justiceRespond",
+        "justiceDemandMoot",
+        "syncJusticeAfterMoot",
+        "mootAccuserAftermath",
+        "startVillageUprising",
+        "uprisingAftermath",
+        "exilePlayer",
+        "justiceExileColdResolve",
+        "justiceExileCutsTalk",
+        "theftConfrontation",
+        "stealFrom",
+        "openCase",
+        "openPlayerCase",
+        "considerPlayerAccusation",
+        "forcePlayerAccusation",
+        "mootConveneHeld",
+        "callMoot",
+        "conductTrial",
+        "tallyVotes",
+        "mootQuorum",
+        "castPlayerVote",
+        "finishTrial",
+        "sentenceCase",
+        "resolveCase",
+        "bribeVoter",
+        "exposeBribery",
+        "investigateBribery",
+        "removeVillager",
+        "bumpTrust",
+        "recordGrievance"
+      ],
+      "crimes": {
+        "total": 0,
+        "byType": {},
+        "byWitnessed": {},
+        "booked": 0,
+        "droppedNotPlayer": 0,
+        "unclassified": 0,
+        "charged": 0
+      },
+      "ladder": {
+        "ticks": 0,
+        "stageTransitions": {},
+        "confronts": 0,
+        "responds": 0,
+        "payEnough": 0,
+        "payShort": 0,
+        "refuses": 0,
+        "demands": 0,
+        "demandReasons": {},
+        "uprisings": 0,
+        "uprisingAfter": 0,
+        "syncs": {},
+        "maxHeat": 0,
+        "heatAtEnd": null
+      },
+      "cases": {
+        "total": 0,
+        "byPath": {},
+        "byCharge": {},
+        "fabricated": 0,
+        "unclassified": 0,
+        "openAtEnd": 0,
+        "resolvedAtEnd": 0,
+        "advisoryAtEnd": 0,
+        "dormantAtEnd": 0,
+        "reconcile": {
+          "residue": 0,
+          "residueIds": [],
+          "opened": 0,
+          "genesis": 0
+        }
+      },
+      "moots": {
+        "trials": 0,
+        "callMoots": 0,
+        "conveneHeld": 0,
+        "conveneReads": 0,
+        "wildDays": 0,
+        "playerVoterTrials": 0,
+        "awaitingTrials": 0,
+        "quorate": 0,
+        "advisory": 0,
+        "convicted": 0,
+        "acquitted": 0,
+        "unclassified": 0,
+        "byOutcome": {},
+        "byCaller": {},
+        "playerVotes": 0,
+        "backstopFinishes": 0
+      },
+      "verdicts": {
+        "finishTrials": 0,
+        "sentences": 0,
+        "resolves": 0,
+        "byPath": {},
+        "byCharge": {},
+        "avgBeliefAtSentence": []
+      },
+      "mootTrust": {
+        "bumpEvents": 0,
+        "mootAttributed": 0,
+        "bySite": {},
+        "netDelta": 0,
+        "grievances": 0,
+        "voteGrievances": 0,
+        "aftermath": {
+          "calls": 0,
+          "netDelta": 0
+        },
+        "exileColdBreaks": 0,
+        "exileColdRefusals": 0
+      },
+      "trustReconcile": {
+        "unexplained": 0,
+        "total": 0
+      },
+      "bribery": {
+        "bribeVoter": 0,
+        "expose": 0,
+        "investigate": 0,
+        "boughtVotesInTallies": 0
+      },
+      "theft": {
+        "stealCalls": 0,
+        "stealOk": 0,
+        "theftConfrontations": 0
+      },
+      "exile": {
+        "exilePlayer": 0,
+        "exileHow": {},
+        "npcExiled": 0,
+        "exileCuts": 0,
+        "exileCutsTotal": 0
+      },
+      "removals": {
+        "total": 0,
+        "byReason": {}
+      },
+      "villageDays": 0,
+      "justiceSays": 22,
+      "sayCount": 14145
+    },
+    {
+      "seed": 190312,
+      "mode": "neutral",
+      "days": 135,
+      "gameDays": 135,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "unlockedWave": 4,
+      "standing": 199,
+      "endPantryKcal": 20,
+      "deaths": 77,
+      "instrumentErrors": 0,
+      "wrapLive": {},
+      "wrapCounts": {},
+      "wrapMissing": [
+        "recordCrime",
+        "justiceHeat",
+        "justiceTick",
+        "justiceConfront",
+        "justiceRespond",
+        "justiceDemandMoot",
+        "syncJusticeAfterMoot",
+        "mootAccuserAftermath",
+        "startVillageUprising",
+        "uprisingAftermath",
+        "exilePlayer",
+        "justiceExileColdResolve",
+        "justiceExileCutsTalk",
+        "theftConfrontation",
+        "stealFrom",
+        "openCase",
+        "openPlayerCase",
+        "considerPlayerAccusation",
+        "forcePlayerAccusation",
+        "mootConveneHeld",
+        "callMoot",
+        "conductTrial",
+        "tallyVotes",
+        "mootQuorum",
+        "castPlayerVote",
+        "finishTrial",
+        "sentenceCase",
+        "resolveCase",
+        "bribeVoter",
+        "exposeBribery",
+        "investigateBribery",
+        "removeVillager",
+        "bumpTrust",
+        "recordGrievance"
+      ],
+      "crimes": {
+        "total": 0,
+        "byType": {},
+        "byWitnessed": {},
+        "booked": 0,
+        "droppedNotPlayer": 0,
+        "unclassified": 0,
+        "charged": 0
+      },
+      "ladder": {
+        "ticks": 0,
+        "stageTransitions": {},
+        "confronts": 0,
+        "responds": 0,
+        "payEnough": 0,
+        "payShort": 0,
+        "refuses": 0,
+        "demands": 0,
+        "demandReasons": {},
+        "uprisings": 0,
+        "uprisingAfter": 0,
+        "syncs": {},
+        "maxHeat": 0,
+        "heatAtEnd": null
+      },
+      "cases": {
+        "total": 0,
+        "byPath": {},
+        "byCharge": {},
+        "fabricated": 0,
+        "unclassified": 0,
+        "openAtEnd": 0,
+        "resolvedAtEnd": 0,
+        "advisoryAtEnd": 0,
+        "dormantAtEnd": 0,
+        "reconcile": {
+          "residue": 0,
+          "residueIds": [],
+          "opened": 0,
+          "genesis": 0
+        }
+      },
+      "moots": {
+        "trials": 0,
+        "callMoots": 0,
+        "conveneHeld": 0,
+        "conveneReads": 0,
+        "wildDays": 0,
+        "playerVoterTrials": 0,
+        "awaitingTrials": 0,
+        "quorate": 0,
+        "advisory": 0,
+        "convicted": 0,
+        "acquitted": 0,
+        "unclassified": 0,
+        "byOutcome": {},
+        "byCaller": {},
+        "playerVotes": 0,
+        "backstopFinishes": 0
+      },
+      "verdicts": {
+        "finishTrials": 0,
+        "sentences": 0,
+        "resolves": 0,
+        "byPath": {},
+        "byCharge": {},
+        "avgBeliefAtSentence": []
+      },
+      "mootTrust": {
+        "bumpEvents": 0,
+        "mootAttributed": 0,
+        "bySite": {},
+        "netDelta": 0,
+        "grievances": 0,
+        "voteGrievances": 0,
+        "aftermath": {
+          "calls": 0,
+          "netDelta": 0
+        },
+        "exileColdBreaks": 0,
+        "exileColdRefusals": 0
+      },
+      "trustReconcile": {
+        "unexplained": 0,
+        "total": 0
+      },
+      "bribery": {
+        "bribeVoter": 0,
+        "expose": 0,
+        "investigate": 0,
+        "boughtVotesInTallies": 0
+      },
+      "theft": {
+        "stealCalls": 0,
+        "stealOk": 0,
+        "theftConfrontations": 0
+      },
+      "exile": {
+        "exilePlayer": 0,
+        "exileHow": {},
+        "npcExiled": 0,
+        "exileCuts": 0,
+        "exileCutsTotal": 0
+      },
+      "removals": {
+        "total": 0,
+        "byReason": {}
+      },
+      "villageDays": 0,
+      "justiceSays": 15,
+      "sayCount": 12858
+    },
+    {
+      "seed": 190313,
+      "mode": "neutral",
+      "days": 150,
+      "gameDays": 151,
+      "endReason": "survived",
+      "won": false,
+      "villageLost": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "unlockedWave": 4,
+      "standing": 199,
+      "endPantryKcal": 20444,
+      "deaths": 118,
+      "instrumentErrors": 0,
+      "wrapLive": {},
+      "wrapCounts": {},
+      "wrapMissing": [
+        "recordCrime",
+        "justiceHeat",
+        "justiceTick",
+        "justiceConfront",
+        "justiceRespond",
+        "justiceDemandMoot",
+        "syncJusticeAfterMoot",
+        "mootAccuserAftermath",
+        "startVillageUprising",
+        "uprisingAftermath",
+        "exilePlayer",
+        "justiceExileColdResolve",
+        "justiceExileCutsTalk",
+        "theftConfrontation",
+        "stealFrom",
+        "openCase",
+        "openPlayerCase",
+        "considerPlayerAccusation",
+        "forcePlayerAccusation",
+        "mootConveneHeld",
+        "callMoot",
+        "conductTrial",
+        "tallyVotes",
+        "mootQuorum",
+        "castPlayerVote",
+        "finishTrial",
+        "sentenceCase",
+        "resolveCase",
+        "bribeVoter",
+        "exposeBribery",
+        "investigateBribery",
+        "removeVillager",
+        "bumpTrust",
+        "recordGrievance"
+      ],
+      "crimes": {
+        "total": 0,
+        "byType": {},
+        "byWitnessed": {},
+        "booked": 0,
+        "droppedNotPlayer": 0,
+        "unclassified": 0,
+        "charged": 0
+      },
+      "ladder": {
+        "ticks": 0,
+        "stageTransitions": {},
+        "confronts": 0,
+        "responds": 0,
+        "payEnough": 0,
+        "payShort": 0,
+        "refuses": 0,
+        "demands": 0,
+        "demandReasons": {},
+        "uprisings": 0,
+        "uprisingAfter": 0,
+        "syncs": {},
+        "maxHeat": 0,
+        "heatAtEnd": null
+      },
+      "cases": {
+        "total": 0,
+        "byPath": {},
+        "byCharge": {},
+        "fabricated": 0,
+        "unclassified": 0,
+        "openAtEnd": 0,
+        "resolvedAtEnd": 0,
+        "advisoryAtEnd": 0,
+        "dormantAtEnd": 0,
+        "reconcile": {
+          "residue": 0,
+          "residueIds": [],
+          "opened": 0,
+          "genesis": 0
+        }
+      },
+      "moots": {
+        "trials": 0,
+        "callMoots": 0,
+        "conveneHeld": 0,
+        "conveneReads": 0,
+        "wildDays": 0,
+        "playerVoterTrials": 0,
+        "awaitingTrials": 0,
+        "quorate": 0,
+        "advisory": 0,
+        "convicted": 0,
+        "acquitted": 0,
+        "unclassified": 0,
+        "byOutcome": {},
+        "byCaller": {},
+        "playerVotes": 0,
+        "backstopFinishes": 0
+      },
+      "verdicts": {
+        "finishTrials": 0,
+        "sentences": 0,
+        "resolves": 0,
+        "byPath": {},
+        "byCharge": {},
+        "avgBeliefAtSentence": []
+      },
+      "mootTrust": {
+        "bumpEvents": 0,
+        "mootAttributed": 0,
+        "bySite": {},
+        "netDelta": 0,
+        "grievances": 0,
+        "voteGrievances": 0,
+        "aftermath": {
+          "calls": 0,
+          "netDelta": 0
+        },
+        "exileColdBreaks": 0,
+        "exileColdRefusals": 0
+      },
+      "trustReconcile": {
+        "unexplained": 0,
+        "total": 0
+      },
+      "bribery": {
+        "bribeVoter": 0,
+        "expose": 0,
+        "investigate": 0,
+        "boughtVotesInTallies": 0
+      },
+      "theft": {
+        "stealCalls": 0,
+        "stealOk": 0,
+        "theftConfrontations": 0
+      },
+      "exile": {
+        "exilePlayer": 0,
+        "exileHow": {},
+        "npcExiled": 0,
+        "exileCuts": 0,
+        "exileCutsTotal": 0
+      },
+      "removals": {
+        "total": 0,
+        "byReason": {}
+      },
+      "villageDays": 0,
+      "justiceSays": 13,
+      "sayCount": 14531
+    },
+    {
+      "seed": 190314,
+      "mode": "neutral",
+      "days": 150,
+      "gameDays": 151,
+      "endReason": "survived",
+      "won": false,
+      "villageLost": false,
+      "scaleRank": "regional",
+      "maxWave": 5,
+      "unlockedWave": 5,
+      "standing": 350,
+      "endPantryKcal": 3200,
+      "deaths": 102,
+      "instrumentErrors": 0,
+      "wrapLive": {},
+      "wrapCounts": {},
+      "wrapMissing": [
+        "recordCrime",
+        "justiceHeat",
+        "justiceTick",
+        "justiceConfront",
+        "justiceRespond",
+        "justiceDemandMoot",
+        "syncJusticeAfterMoot",
+        "mootAccuserAftermath",
+        "startVillageUprising",
+        "uprisingAftermath",
+        "exilePlayer",
+        "justiceExileColdResolve",
+        "justiceExileCutsTalk",
+        "theftConfrontation",
+        "stealFrom",
+        "openCase",
+        "openPlayerCase",
+        "considerPlayerAccusation",
+        "forcePlayerAccusation",
+        "mootConveneHeld",
+        "callMoot",
+        "conductTrial",
+        "tallyVotes",
+        "mootQuorum",
+        "castPlayerVote",
+        "finishTrial",
+        "sentenceCase",
+        "resolveCase",
+        "bribeVoter",
+        "exposeBribery",
+        "investigateBribery",
+        "removeVillager",
+        "bumpTrust",
+        "recordGrievance"
+      ],
+      "crimes": {
+        "total": 0,
+        "byType": {},
+        "byWitnessed": {},
+        "booked": 0,
+        "droppedNotPlayer": 0,
+        "unclassified": 0,
+        "charged": 0
+      },
+      "ladder": {
+        "ticks": 0,
+        "stageTransitions": {},
+        "confronts": 0,
+        "responds": 0,
+        "payEnough": 0,
+        "payShort": 0,
+        "refuses": 0,
+        "demands": 0,
+        "demandReasons": {},
+        "uprisings": 0,
+        "uprisingAfter": 0,
+        "syncs": {},
+        "maxHeat": 0,
+        "heatAtEnd": null
+      },
+      "cases": {
+        "total": 0,
+        "byPath": {},
+        "byCharge": {},
+        "fabricated": 0,
+        "unclassified": 0,
+        "openAtEnd": 0,
+        "resolvedAtEnd": 0,
+        "advisoryAtEnd": 0,
+        "dormantAtEnd": 0,
+        "reconcile": {
+          "residue": 0,
+          "residueIds": [],
+          "opened": 0,
+          "genesis": 0
+        }
+      },
+      "moots": {
+        "trials": 0,
+        "callMoots": 0,
+        "conveneHeld": 0,
+        "conveneReads": 0,
+        "wildDays": 0,
+        "playerVoterTrials": 0,
+        "awaitingTrials": 0,
+        "quorate": 0,
+        "advisory": 0,
+        "convicted": 0,
+        "acquitted": 0,
+        "unclassified": 0,
+        "byOutcome": {},
+        "byCaller": {},
+        "playerVotes": 0,
+        "backstopFinishes": 0
+      },
+      "verdicts": {
+        "finishTrials": 0,
+        "sentences": 0,
+        "resolves": 0,
+        "byPath": {},
+        "byCharge": {},
+        "avgBeliefAtSentence": []
+      },
+      "mootTrust": {
+        "bumpEvents": 0,
+        "mootAttributed": 0,
+        "bySite": {},
+        "netDelta": 0,
+        "grievances": 0,
+        "voteGrievances": 0,
+        "aftermath": {
+          "calls": 0,
+          "netDelta": 0
+        },
+        "exileColdBreaks": 0,
+        "exileColdRefusals": 0
+      },
+      "trustReconcile": {
+        "unexplained": 0,
+        "total": 0
+      },
+      "bribery": {
+        "bribeVoter": 0,
+        "expose": 0,
+        "investigate": 0,
+        "boughtVotesInTallies": 0
+      },
+      "theft": {
+        "stealCalls": 0,
+        "stealOk": 0,
+        "theftConfrontations": 0
+      },
+      "exile": {
+        "exilePlayer": 0,
+        "exileHow": {},
+        "npcExiled": 0,
+        "exileCuts": 0,
+        "exileCutsTotal": 0
+      },
+      "removals": {
+        "total": 0,
+        "byReason": {}
+      },
+      "villageDays": 0,
+      "justiceSays": 12,
+      "sayCount": 16682
+    },
+    {
+      "seed": 190315,
+      "mode": "neutral",
+      "days": 140,
+      "gameDays": 140,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "unlockedWave": 4,
+      "standing": 199,
+      "endPantryKcal": 0,
+      "deaths": 73,
+      "instrumentErrors": 0,
+      "wrapLive": {},
+      "wrapCounts": {},
+      "wrapMissing": [
+        "recordCrime",
+        "justiceHeat",
+        "justiceTick",
+        "justiceConfront",
+        "justiceRespond",
+        "justiceDemandMoot",
+        "syncJusticeAfterMoot",
+        "mootAccuserAftermath",
+        "startVillageUprising",
+        "uprisingAftermath",
+        "exilePlayer",
+        "justiceExileColdResolve",
+        "justiceExileCutsTalk",
+        "theftConfrontation",
+        "stealFrom",
+        "openCase",
+        "openPlayerCase",
+        "considerPlayerAccusation",
+        "forcePlayerAccusation",
+        "mootConveneHeld",
+        "callMoot",
+        "conductTrial",
+        "tallyVotes",
+        "mootQuorum",
+        "castPlayerVote",
+        "finishTrial",
+        "sentenceCase",
+        "resolveCase",
+        "bribeVoter",
+        "exposeBribery",
+        "investigateBribery",
+        "removeVillager",
+        "bumpTrust",
+        "recordGrievance"
+      ],
+      "crimes": {
+        "total": 0,
+        "byType": {},
+        "byWitnessed": {},
+        "booked": 0,
+        "droppedNotPlayer": 0,
+        "unclassified": 0,
+        "charged": 0
+      },
+      "ladder": {
+        "ticks": 0,
+        "stageTransitions": {},
+        "confronts": 0,
+        "responds": 0,
+        "payEnough": 0,
+        "payShort": 0,
+        "refuses": 0,
+        "demands": 0,
+        "demandReasons": {},
+        "uprisings": 0,
+        "uprisingAfter": 0,
+        "syncs": {},
+        "maxHeat": 0,
+        "heatAtEnd": null
+      },
+      "cases": {
+        "total": 0,
+        "byPath": {},
+        "byCharge": {},
+        "fabricated": 0,
+        "unclassified": 0,
+        "openAtEnd": 0,
+        "resolvedAtEnd": 0,
+        "advisoryAtEnd": 0,
+        "dormantAtEnd": 0,
+        "reconcile": {
+          "residue": 0,
+          "residueIds": [],
+          "opened": 0,
+          "genesis": 0
+        }
+      },
+      "moots": {
+        "trials": 0,
+        "callMoots": 0,
+        "conveneHeld": 0,
+        "conveneReads": 0,
+        "wildDays": 0,
+        "playerVoterTrials": 0,
+        "awaitingTrials": 0,
+        "quorate": 0,
+        "advisory": 0,
+        "convicted": 0,
+        "acquitted": 0,
+        "unclassified": 0,
+        "byOutcome": {},
+        "byCaller": {},
+        "playerVotes": 0,
+        "backstopFinishes": 0
+      },
+      "verdicts": {
+        "finishTrials": 0,
+        "sentences": 0,
+        "resolves": 0,
+        "byPath": {},
+        "byCharge": {},
+        "avgBeliefAtSentence": []
+      },
+      "mootTrust": {
+        "bumpEvents": 0,
+        "mootAttributed": 0,
+        "bySite": {},
+        "netDelta": 0,
+        "grievances": 0,
+        "voteGrievances": 0,
+        "aftermath": {
+          "calls": 0,
+          "netDelta": 0
+        },
+        "exileColdBreaks": 0,
+        "exileColdRefusals": 0
+      },
+      "trustReconcile": {
+        "unexplained": 0,
+        "total": 0
+      },
+      "bribery": {
+        "bribeVoter": 0,
+        "expose": 0,
+        "investigate": 0,
+        "boughtVotesInTallies": 0
+      },
+      "theft": {
+        "stealCalls": 0,
+        "stealOk": 0,
+        "theftConfrontations": 0
+      },
+      "exile": {
+        "exilePlayer": 0,
+        "exileHow": {},
+        "npcExiled": 0,
+        "exileCuts": 0,
+        "exileCutsTotal": 0
+      },
+      "removals": {
+        "total": 0,
+        "byReason": {}
+      },
+      "villageDays": 0,
+      "justiceSays": 28,
+      "sayCount": 13437
+    },
+    {
+      "seed": 190316,
+      "mode": "neutral",
+      "days": 150,
+      "gameDays": 151,
+      "endReason": "survived",
+      "won": false,
+      "villageLost": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "unlockedWave": 4,
+      "standing": 199,
+      "endPantryKcal": 578,
+      "deaths": 82,
+      "instrumentErrors": 0,
+      "wrapLive": {},
+      "wrapCounts": {},
+      "wrapMissing": [
+        "recordCrime",
+        "justiceHeat",
+        "justiceTick",
+        "justiceConfront",
+        "justiceRespond",
+        "justiceDemandMoot",
+        "syncJusticeAfterMoot",
+        "mootAccuserAftermath",
+        "startVillageUprising",
+        "uprisingAftermath",
+        "exilePlayer",
+        "justiceExileColdResolve",
+        "justiceExileCutsTalk",
+        "theftConfrontation",
+        "stealFrom",
+        "openCase",
+        "openPlayerCase",
+        "considerPlayerAccusation",
+        "forcePlayerAccusation",
+        "mootConveneHeld",
+        "callMoot",
+        "conductTrial",
+        "tallyVotes",
+        "mootQuorum",
+        "castPlayerVote",
+        "finishTrial",
+        "sentenceCase",
+        "resolveCase",
+        "bribeVoter",
+        "exposeBribery",
+        "investigateBribery",
+        "removeVillager",
+        "bumpTrust",
+        "recordGrievance"
+      ],
+      "crimes": {
+        "total": 0,
+        "byType": {},
+        "byWitnessed": {},
+        "booked": 0,
+        "droppedNotPlayer": 0,
+        "unclassified": 0,
+        "charged": 0
+      },
+      "ladder": {
+        "ticks": 0,
+        "stageTransitions": {},
+        "confronts": 0,
+        "responds": 0,
+        "payEnough": 0,
+        "payShort": 0,
+        "refuses": 0,
+        "demands": 0,
+        "demandReasons": {},
+        "uprisings": 0,
+        "uprisingAfter": 0,
+        "syncs": {},
+        "maxHeat": 0,
+        "heatAtEnd": null
+      },
+      "cases": {
+        "total": 0,
+        "byPath": {},
+        "byCharge": {},
+        "fabricated": 0,
+        "unclassified": 0,
+        "openAtEnd": 0,
+        "resolvedAtEnd": 0,
+        "advisoryAtEnd": 0,
+        "dormantAtEnd": 0,
+        "reconcile": {
+          "residue": 0,
+          "residueIds": [],
+          "opened": 0,
+          "genesis": 0
+        }
+      },
+      "moots": {
+        "trials": 0,
+        "callMoots": 0,
+        "conveneHeld": 0,
+        "conveneReads": 0,
+        "wildDays": 0,
+        "playerVoterTrials": 0,
+        "awaitingTrials": 0,
+        "quorate": 0,
+        "advisory": 0,
+        "convicted": 0,
+        "acquitted": 0,
+        "unclassified": 0,
+        "byOutcome": {},
+        "byCaller": {},
+        "playerVotes": 0,
+        "backstopFinishes": 0
+      },
+      "verdicts": {
+        "finishTrials": 0,
+        "sentences": 0,
+        "resolves": 0,
+        "byPath": {},
+        "byCharge": {},
+        "avgBeliefAtSentence": []
+      },
+      "mootTrust": {
+        "bumpEvents": 0,
+        "mootAttributed": 0,
+        "bySite": {},
+        "netDelta": 0,
+        "grievances": 0,
+        "voteGrievances": 0,
+        "aftermath": {
+          "calls": 0,
+          "netDelta": 0
+        },
+        "exileColdBreaks": 0,
+        "exileColdRefusals": 0
+      },
+      "trustReconcile": {
+        "unexplained": 0,
+        "total": 0
+      },
+      "bribery": {
+        "bribeVoter": 0,
+        "expose": 0,
+        "investigate": 0,
+        "boughtVotesInTallies": 0
+      },
+      "theft": {
+        "stealCalls": 0,
+        "stealOk": 0,
+        "theftConfrontations": 0
+      },
+      "exile": {
+        "exilePlayer": 0,
+        "exileHow": {},
+        "npcExiled": 0,
+        "exileCuts": 0,
+        "exileCutsTotal": 0
+      },
+      "removals": {
+        "total": 0,
+        "byReason": {}
+      },
+      "villageDays": 0,
+      "justiceSays": 29,
+      "sayCount": 16591
+    },
+    {
+      "seed": 190317,
+      "mode": "neutral",
+      "days": 142,
+      "gameDays": 142,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 5,
+      "unlockedWave": 5,
+      "standing": 300,
+      "endPantryKcal": 0,
+      "deaths": 109,
+      "instrumentErrors": 0,
+      "wrapLive": {},
+      "wrapCounts": {},
+      "wrapMissing": [
+        "recordCrime",
+        "justiceHeat",
+        "justiceTick",
+        "justiceConfront",
+        "justiceRespond",
+        "justiceDemandMoot",
+        "syncJusticeAfterMoot",
+        "mootAccuserAftermath",
+        "startVillageUprising",
+        "uprisingAftermath",
+        "exilePlayer",
+        "justiceExileColdResolve",
+        "justiceExileCutsTalk",
+        "theftConfrontation",
+        "stealFrom",
+        "openCase",
+        "openPlayerCase",
+        "considerPlayerAccusation",
+        "forcePlayerAccusation",
+        "mootConveneHeld",
+        "callMoot",
+        "conductTrial",
+        "tallyVotes",
+        "mootQuorum",
+        "castPlayerVote",
+        "finishTrial",
+        "sentenceCase",
+        "resolveCase",
+        "bribeVoter",
+        "exposeBribery",
+        "investigateBribery",
+        "removeVillager",
+        "bumpTrust",
+        "recordGrievance"
+      ],
+      "crimes": {
+        "total": 0,
+        "byType": {},
+        "byWitnessed": {},
+        "booked": 0,
+        "droppedNotPlayer": 0,
+        "unclassified": 0,
+        "charged": 0
+      },
+      "ladder": {
+        "ticks": 0,
+        "stageTransitions": {},
+        "confronts": 0,
+        "responds": 0,
+        "payEnough": 0,
+        "payShort": 0,
+        "refuses": 0,
+        "demands": 0,
+        "demandReasons": {},
+        "uprisings": 0,
+        "uprisingAfter": 0,
+        "syncs": {},
+        "maxHeat": 0,
+        "heatAtEnd": null
+      },
+      "cases": {
+        "total": 0,
+        "byPath": {},
+        "byCharge": {},
+        "fabricated": 0,
+        "unclassified": 0,
+        "openAtEnd": 0,
+        "resolvedAtEnd": 0,
+        "advisoryAtEnd": 0,
+        "dormantAtEnd": 0,
+        "reconcile": {
+          "residue": 0,
+          "residueIds": [],
+          "opened": 0,
+          "genesis": 0
+        }
+      },
+      "moots": {
+        "trials": 0,
+        "callMoots": 0,
+        "conveneHeld": 0,
+        "conveneReads": 0,
+        "wildDays": 0,
+        "playerVoterTrials": 0,
+        "awaitingTrials": 0,
+        "quorate": 0,
+        "advisory": 0,
+        "convicted": 0,
+        "acquitted": 0,
+        "unclassified": 0,
+        "byOutcome": {},
+        "byCaller": {},
+        "playerVotes": 0,
+        "backstopFinishes": 0
+      },
+      "verdicts": {
+        "finishTrials": 0,
+        "sentences": 0,
+        "resolves": 0,
+        "byPath": {},
+        "byCharge": {},
+        "avgBeliefAtSentence": []
+      },
+      "mootTrust": {
+        "bumpEvents": 0,
+        "mootAttributed": 0,
+        "bySite": {},
+        "netDelta": 0,
+        "grievances": 0,
+        "voteGrievances": 0,
+        "aftermath": {
+          "calls": 0,
+          "netDelta": 0
+        },
+        "exileColdBreaks": 0,
+        "exileColdRefusals": 0
+      },
+      "trustReconcile": {
+        "unexplained": 0,
+        "total": 0
+      },
+      "bribery": {
+        "bribeVoter": 0,
+        "expose": 0,
+        "investigate": 0,
+        "boughtVotesInTallies": 0
+      },
+      "theft": {
+        "stealCalls": 0,
+        "stealOk": 0,
+        "theftConfrontations": 0
+      },
+      "exile": {
+        "exilePlayer": 0,
+        "exileHow": {},
+        "npcExiled": 0,
+        "exileCuts": 0,
+        "exileCutsTotal": 0
+      },
+      "removals": {
+        "total": 0,
+        "byReason": {}
+      },
+      "villageDays": 0,
+      "justiceSays": 46,
+      "sayCount": 14447
+    },
+    {
+      "seed": 190318,
+      "mode": "neutral",
+      "days": 123,
+      "gameDays": 123,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "unlockedWave": 4,
+      "standing": 199,
+      "endPantryKcal": 1108,
+      "deaths": 60,
+      "instrumentErrors": 0,
+      "wrapLive": {},
+      "wrapCounts": {},
+      "wrapMissing": [
+        "recordCrime",
+        "justiceHeat",
+        "justiceTick",
+        "justiceConfront",
+        "justiceRespond",
+        "justiceDemandMoot",
+        "syncJusticeAfterMoot",
+        "mootAccuserAftermath",
+        "startVillageUprising",
+        "uprisingAftermath",
+        "exilePlayer",
+        "justiceExileColdResolve",
+        "justiceExileCutsTalk",
+        "theftConfrontation",
+        "stealFrom",
+        "openCase",
+        "openPlayerCase",
+        "considerPlayerAccusation",
+        "forcePlayerAccusation",
+        "mootConveneHeld",
+        "callMoot",
+        "conductTrial",
+        "tallyVotes",
+        "mootQuorum",
+        "castPlayerVote",
+        "finishTrial",
+        "sentenceCase",
+        "resolveCase",
+        "bribeVoter",
+        "exposeBribery",
+        "investigateBribery",
+        "removeVillager",
+        "bumpTrust",
+        "recordGrievance"
+      ],
+      "crimes": {
+        "total": 0,
+        "byType": {},
+        "byWitnessed": {},
+        "booked": 0,
+        "droppedNotPlayer": 0,
+        "unclassified": 0,
+        "charged": 0
+      },
+      "ladder": {
+        "ticks": 0,
+        "stageTransitions": {},
+        "confronts": 0,
+        "responds": 0,
+        "payEnough": 0,
+        "payShort": 0,
+        "refuses": 0,
+        "demands": 0,
+        "demandReasons": {},
+        "uprisings": 0,
+        "uprisingAfter": 0,
+        "syncs": {},
+        "maxHeat": 0,
+        "heatAtEnd": null
+      },
+      "cases": {
+        "total": 0,
+        "byPath": {},
+        "byCharge": {},
+        "fabricated": 0,
+        "unclassified": 0,
+        "openAtEnd": 0,
+        "resolvedAtEnd": 0,
+        "advisoryAtEnd": 0,
+        "dormantAtEnd": 0,
+        "reconcile": {
+          "residue": 0,
+          "residueIds": [],
+          "opened": 0,
+          "genesis": 0
+        }
+      },
+      "moots": {
+        "trials": 0,
+        "callMoots": 0,
+        "conveneHeld": 0,
+        "conveneReads": 0,
+        "wildDays": 0,
+        "playerVoterTrials": 0,
+        "awaitingTrials": 0,
+        "quorate": 0,
+        "advisory": 0,
+        "convicted": 0,
+        "acquitted": 0,
+        "unclassified": 0,
+        "byOutcome": {},
+        "byCaller": {},
+        "playerVotes": 0,
+        "backstopFinishes": 0
+      },
+      "verdicts": {
+        "finishTrials": 0,
+        "sentences": 0,
+        "resolves": 0,
+        "byPath": {},
+        "byCharge": {},
+        "avgBeliefAtSentence": []
+      },
+      "mootTrust": {
+        "bumpEvents": 0,
+        "mootAttributed": 0,
+        "bySite": {},
+        "netDelta": 0,
+        "grievances": 0,
+        "voteGrievances": 0,
+        "aftermath": {
+          "calls": 0,
+          "netDelta": 0
+        },
+        "exileColdBreaks": 0,
+        "exileColdRefusals": 0
+      },
+      "trustReconcile": {
+        "unexplained": 0,
+        "total": 0
+      },
+      "bribery": {
+        "bribeVoter": 0,
+        "expose": 0,
+        "investigate": 0,
+        "boughtVotesInTallies": 0
+      },
+      "theft": {
+        "stealCalls": 0,
+        "stealOk": 0,
+        "theftConfrontations": 0
+      },
+      "exile": {
+        "exilePlayer": 0,
+        "exileHow": {},
+        "npcExiled": 0,
+        "exileCuts": 0,
+        "exileCutsTotal": 0
+      },
+      "removals": {
+        "total": 0,
+        "byReason": {}
+      },
+      "villageDays": 0,
+      "justiceSays": 32,
+      "sayCount": 11153
+    }
+  ]
+}
