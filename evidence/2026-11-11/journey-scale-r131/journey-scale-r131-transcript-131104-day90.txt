@@ -1,0 +1,15 @@
+(pre-talk seed: seek_taken planted d82; takenWantDay=82; convoCount=9)
+=== seed 131104 day 90 — conversation with Susan (gen_1qa5zxm) ===
+occupation=electrician temperament=gentle trust=90 dead=false
+want: seek_taken (stage 0)
+open thread: secret fromSeed=false
+picker: control
+
+THEM: "Can I tell you something? I've been writing letters I'll never send. I'm ashamed and I can't stop."
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Susan shows you where they go to think. "Don't tell the others. Everyone needs one place."
+YOU: (leave)
+pre-close: want seek_taken stage 0 thread secret
+closing line: "Go gently, okay?"
+(gossip picks this sitting: 0)
