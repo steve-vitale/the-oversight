@@ -1,0 +1,3239 @@
+{
+  "perSeed": [
+    {
+      "seed": 190311,
+      "days": 132,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 5,
+      "standing": 410,
+      "deaths": 85,
+      "endPantryKcal": 21,
+      "errors": 0,
+      "assignByTask": {
+        "water": {
+          "asked": 136,
+          "ok": 105,
+          "refused": 31,
+          "null": 0,
+          "reasons": {
+            "trust-gate": 23,
+            "reluctant": 8
+          }
+        },
+        "fish": {
+          "asked": 83,
+          "ok": 83,
+          "refused": 0,
+          "null": 0,
+          "reasons": {}
+        },
+        "deadfall": {
+          "asked": 90,
+          "ok": 29,
+          "refused": 61,
+          "null": 0,
+          "reasons": {
+            "trust-gate": 47,
+            "reluctant": 14
+          }
+        },
+        "cook": {
+          "asked": 29,
+          "ok": 28,
+          "refused": 1,
+          "null": 0,
+          "reasons": {
+            "reluctant": 1
+          }
+        }
+      },
+      "walkdownSeqs": 0,
+      "walkdownFallbackAccepts": 0,
+      "walkdownTopAccepts": 0,
+      "offerDealCalls": 0,
+      "appealToGoalCalls": 0,
+      "neverAsked": [
+        "gen_o0ro3yz"
+      ],
+      "taskLeadDays": 184,
+      "taskLeadsHeld": {
+        "fish": 58,
+        "water": 54,
+        "cook": 42,
+        "deadfall": 23,
+        "forage": 7
+      },
+      "resolutionsByTask": {
+        "wood": {
+          "completed": 185,
+          "redirected": 209,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 394
+        },
+        "water": {
+          "completed": 101,
+          "redirected": 34,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 135
+        },
+        "stone": {
+          "completed": 185,
+          "redirected": 215,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 400
+        },
+        "deadfall": {
+          "completed": 29,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 29
+        },
+        "cook": {
+          "completed": 80,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 80
+        },
+        "fish": {
+          "completed": 2,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 2
+        }
+      },
+      "resolutionsByPath": {
+        "redirect-recursion": 458,
+        "taskLead": 338,
+        "assignment": 244
+      },
+      "resolutionsByOutcome": {
+        "completed": 582,
+        "redirected": 458
+      },
+      "resolutionsPerVillager": {
+        "sofia_chen": 86,
+        "gen_eox4by6": 214,
+        "gen_zl6yrq6": 60,
+        "emma_larsen": 4,
+        "marcus_webb": 505,
+        "gen_b9v5e99": 5,
+        "aroha_ngata": 10,
+        "gen_yk9v83a": 11,
+        "zoltan_nagy": 5,
+        "zoe_adams": 39,
+        "pavel_dubinin": 11,
+        "app_mgpspirg599": 10,
+        "app_mgpspiox869": 67,
+        "gen_cdmdewv": 9,
+        "benoit_lambert": 3,
+        "aria_thompson": 1
+      },
+      "resolveCallOutcomes": {
+        "redirected": 148,
+        "completed": 96,
+        "sheltered-kept": 1605,
+        "dead-or-left": 1
+      },
+      "practiceRepsByTask": {
+        "wood": 185,
+        "water": 101,
+        "stone": 185,
+        "deadfall": 29,
+        "cook": 80,
+        "fish": 2
+      },
+      "competenceMovedCells": 0,
+      "competenceMovedByTask": {},
+      "villagerDays": 1110,
+      "resolutionsTotal": 1040,
+      "dutyTimeShare": 0.937,
+      "deposits": {
+        "Foraged food": 22120,
+        "System-replicated stew": 400,
+        "Aid from Emberhold": 14864,
+        "Expedition haul": 9912
+      },
+      "dutyDepositKcal": 22120,
+      "totalDepositKcal": 47296,
+      "huntsTotal": 0,
+      "huntKills": 0,
+      "huntKcal": 0,
+      "huntsBySpecies": {},
+      "sayWood": 266,
+      "sayStone": 63,
+      "saySticks": 18,
+      "sayFiber": 6,
+      "sayWaterLiters": 135,
+      "sayScoutTiles": 0,
+      "deadfallHauls": 29,
+      "deadfallSticks": 36,
+      "deadfallFiber": 13,
+      "waterHauls": 101,
+      "cisternRedirects": 195,
+      "cisternOverflowL": 0,
+      "throttleRedirects": 263,
+      "throttleExemptDepth": 0,
+      "preserveBatches": 50,
+      "preserveKcal": 69103,
+      "hurtsTotal": 114,
+      "hurtsOnDuty": 36,
+      "hurtsByCause": {
+        "monster": 86,
+        "disease": 21,
+        "contest": 4,
+        "experiment": 1,
+        "starvation": 2
+      },
+      "hurtsOnDutyByCause": {
+        "monster": 14,
+        "disease": 18,
+        "contest": 2,
+        "starvation": 2
+      },
+      "hurtsDied": 3,
+      "hurtsDiedOnDuty": 0,
+      "fitnessRefusals": 0,
+      "fitnessRests": 0,
+      "shelteredKept": 1605,
+      "sickAssignedOutdoorDays": 0,
+      "hpUnder40AssignedDays": 4,
+      "medicHolderDays": 125,
+      "medicHolders": {
+        "sofia_chen": 125
+      },
+      "medicTurnovers": 2,
+      "medicVacantDays": 1,
+      "noMedicSickDays": 0,
+      "medicEligibleAvg": 4.17,
+      "medicCuresAbility": 16,
+      "medicCuresMedicine": 0,
+      "cureAttempts": 16,
+      "cureAttemptsCured": 16,
+      "curePatients": {
+        "gen_b9v5e99": 2,
+        "gen_zl6yrq6": 2,
+        "yara_haddad": 1,
+        "benoit_lambert": 5,
+        "gen_yk9v83a": 1,
+        "gen_eox4by6": 1,
+        "pavel_dubinin": 1,
+        "app_mgpspirg599": 1,
+        "zoe_adams": 1,
+        "aroha_ngata": 1
+      },
+      "careTicks": 130,
+      "medicTicks": 132,
+      "objectivesByKind": {
+        "none": 46,
+        "WATER": 223,
+        "idle": 121,
+        "LEAVE": 161,
+        "VISIT": 194,
+        "HAVEN_CHORE": 153,
+        "EAT": 22,
+        "EXPLORE": 38,
+        "GUARD": 114,
+        "SEEK": 8,
+        "FORAGE": 16,
+        "HAUL": 11,
+        "HUNT": 3
+      },
+      "waterDutyResolutions": 101,
+      "teleTrapByType": {},
+      "patrolsTotal": 0,
+      "patrolKills": 0,
+      "patrolHurts": 0,
+      "patrolDeaths": 0,
+      "deedsByDeed": {
+        "teaching": 92,
+        "foraging": 122,
+        "discovery": 86,
+        "crafting": 17,
+        "gardening": 57,
+        "cooking": 80,
+        "preserving": 28
+      },
+      "deedsTotal": 482,
+      "top3Resolutions": [
+        {
+          "vid": "marcus_webb",
+          "n": 505
+        },
+        {
+          "vid": "gen_eox4by6",
+          "n": 214
+        },
+        {
+          "vid": "sofia_chen",
+          "n": 86
+        }
+      ],
+      "top3Share": 0.774,
+      "neverResolved": 2,
+      "snapshots": 131,
+      "sayCapped": true,
+      "dutySays": 400,
+      "wall": {
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 410
+      }
+    },
+    {
+      "seed": 190312,
+      "days": 135,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "deaths": 77,
+      "endPantryKcal": 20,
+      "errors": 0,
+      "assignByTask": {
+        "water": {
+          "asked": 166,
+          "ok": 143,
+          "refused": 23,
+          "null": 0,
+          "reasons": {
+            "trust-gate": 17,
+            "reluctant": 6
+          }
+        },
+        "fish": {
+          "asked": 173,
+          "ok": 173,
+          "refused": 0,
+          "null": 0,
+          "reasons": {}
+        },
+        "deadfall": {
+          "asked": 44,
+          "ok": 9,
+          "refused": 35,
+          "null": 0,
+          "reasons": {
+            "trust-gate": 29,
+            "reluctant": 6
+          }
+        },
+        "cook": {
+          "asked": 35,
+          "ok": 34,
+          "refused": 1,
+          "null": 0,
+          "reasons": {
+            "reluctant": 1
+          }
+        }
+      },
+      "walkdownSeqs": 0,
+      "walkdownFallbackAccepts": 0,
+      "walkdownTopAccepts": 0,
+      "offerDealCalls": 0,
+      "appealToGoalCalls": 0,
+      "neverAsked": [
+        "gen_vqizjf1",
+        "app_mgpspirx400",
+        "app_mgpspisd617",
+        "visjoin_109"
+      ],
+      "taskLeadDays": 289,
+      "taskLeadsHeld": {
+        "deadfall": 65,
+        "water": 63,
+        "fish": 61,
+        "forage": 54,
+        "cook": 46
+      },
+      "resolutionsByTask": {
+        "wood": {
+          "completed": 348,
+          "redirected": 422,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 770
+        },
+        "water": {
+          "completed": 127,
+          "redirected": 29,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 156
+        },
+        "stone": {
+          "completed": 348,
+          "redirected": 413,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 761
+        },
+        "deadfall": {
+          "completed": 195,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 195
+        },
+        "cook": {
+          "completed": 141,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 141
+        },
+        "garden": {
+          "completed": 41,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 41
+        },
+        "fish": {
+          "completed": 38,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 38
+        },
+        "forage": {
+          "completed": 1,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 1
+        }
+      },
+      "resolutionsByPath": {
+        "redirect-recursion": 864,
+        "taskLead": 880,
+        "assignment": 359
+      },
+      "resolutionsByOutcome": {
+        "completed": 1239,
+        "redirected": 864
+      },
+      "resolutionsPerVillager": {
+        "gen_4hfo1oj": 128,
+        "carlos_diaz": 108,
+        "greta_hansen": 150,
+        "gen_dcq452y": 10,
+        "victor_lopez": 4,
+        "gen_au5rq09": 2,
+        "gen_td1rcon": 173,
+        "gen_d0pko4n": 1392,
+        "hassan_ali": 30,
+        "chloe_dubois": 6,
+        "omar_farouk": 6,
+        "app_mgpspirx400": 6,
+        "visjoin_87": 1,
+        "visjoin_92": 49,
+        "visjoin_105": 21,
+        "visjoin_124": 16,
+        "priya_nair": 1
+      },
+      "resolveCallOutcomes": {
+        "redirected": 214,
+        "completed": 145,
+        "sheltered-kept": 838
+      },
+      "practiceRepsByTask": {
+        "wood": 348,
+        "water": 127,
+        "stone": 348,
+        "deadfall": 195,
+        "cook": 141,
+        "garden": 41,
+        "fish": 38,
+        "forage": 1
+      },
+      "competenceMovedCells": 0,
+      "competenceMovedByTask": {},
+      "villagerDays": 1069,
+      "resolutionsTotal": 2103,
+      "dutyTimeShare": 1.967,
+      "deposits": {
+        "Foraged food": 61238,
+        "Expedition haul": 12902,
+        "System-replicated (enthusiastic) meal": 300,
+        "Snared meat": 692,
+        "Fish catch": 23915,
+        "Aid from Stonebridge": 22171
+      },
+      "dutyDepositKcal": 85153,
+      "totalDepositKcal": 121218,
+      "huntsTotal": 0,
+      "huntKills": 0,
+      "huntKcal": 0,
+      "huntsBySpecies": {},
+      "sayWood": 276,
+      "sayStone": 52,
+      "saySticks": 67,
+      "sayFiber": 26,
+      "sayWaterLiters": 157,
+      "sayScoutTiles": 0,
+      "deadfallHauls": 195,
+      "deadfallSticks": 437,
+      "deadfallFiber": 99,
+      "waterHauls": 127,
+      "cisternRedirects": 361,
+      "cisternOverflowL": 0,
+      "throttleRedirects": 503,
+      "throttleExemptDepth": 0,
+      "preserveBatches": 53,
+      "preserveKcal": 33843,
+      "hurtsTotal": 185,
+      "hurtsOnDuty": 38,
+      "hurtsByCause": {
+        "monster": 106,
+        "sickness": 32,
+        "bad belly": 4,
+        "food poisoning (raw)": 2,
+        "contest": 11,
+        "starvation": 30
+      },
+      "hurtsOnDutyByCause": {
+        "monster": 17,
+        "bad belly": 2,
+        "sickness": 6,
+        "contest": 2,
+        "starvation": 11
+      },
+      "hurtsDied": 5,
+      "hurtsDiedOnDuty": 0,
+      "fitnessRefusals": 0,
+      "fitnessRests": 0,
+      "shelteredKept": 838,
+      "sickAssignedOutdoorDays": 0,
+      "hpUnder40AssignedDays": 9,
+      "medicHolderDays": 115,
+      "medicHolders": {
+        "gen_4hfo1oj": 83,
+        "chloe_dubois": 32
+      },
+      "medicTurnovers": 4,
+      "medicVacantDays": 1,
+      "noMedicSickDays": 1,
+      "medicEligibleAvg": 3.5,
+      "medicCuresAbility": 1,
+      "medicCuresMedicine": 0,
+      "cureAttempts": 29,
+      "cureAttemptsCured": 1,
+      "curePatients": {
+        "gen_td1rcon": 2,
+        "gen_dcq452y": 8,
+        "victor_lopez": 10,
+        "chloe_dubois": 4,
+        "greta_hansen": 2,
+        "hassan_ali": 3
+      },
+      "careTicks": 134,
+      "medicTicks": 135,
+      "objectivesByKind": {
+        "none": 36,
+        "EAT": 15,
+        "EXPLORE": 33,
+        "idle": 179,
+        "VISIT": 192,
+        "WATER": 170,
+        "HAVEN_CHORE": 157,
+        "FORAGE": 98,
+        "HAUL": 17,
+        "GUARD": 135,
+        "SEEK": 8,
+        "HUNT": 15,
+        "TRAPS": 2,
+        "LEAVE": 12
+      },
+      "waterDutyResolutions": 127,
+      "teleTrapByType": {
+        "npc_trap": {
+          "n": 6,
+          "caught": 2,
+          "kcal": 692
+        }
+      },
+      "patrolsTotal": 0,
+      "patrolKills": 0,
+      "patrolHurts": 0,
+      "patrolDeaths": 0,
+      "deedsByDeed": {
+        "foraging": 68,
+        "teaching": 79,
+        "discovery": 88,
+        "crafting": 11,
+        "cooking": 141,
+        "preserving": 22,
+        "gardening": 21,
+        "fishing": 38
+      },
+      "deedsTotal": 468,
+      "top3Resolutions": [
+        {
+          "vid": "gen_d0pko4n",
+          "n": 1392
+        },
+        {
+          "vid": "gen_td1rcon",
+          "n": 173
+        },
+        {
+          "vid": "greta_hansen",
+          "n": 150
+        }
+      ],
+      "top3Share": 0.816,
+      "neverResolved": 3,
+      "snapshots": 133,
+      "sayCapped": true,
+      "dutySays": 400,
+      "wall": {
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199
+      }
+    },
+    {
+      "seed": 190313,
+      "days": 150,
+      "endReason": "survived",
+      "won": false,
+      "villageLost": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "deaths": 118,
+      "endPantryKcal": 20444,
+      "errors": 0,
+      "assignByTask": {
+        "water": {
+          "asked": 109,
+          "ok": 99,
+          "refused": 10,
+          "null": 0,
+          "reasons": {
+            "trust-gate": 7,
+            "reluctant": 3
+          }
+        },
+        "fish": {
+          "asked": 80,
+          "ok": 69,
+          "refused": 11,
+          "null": 0,
+          "reasons": {
+            "trust-gate": 11
+          }
+        },
+        "deadfall": {
+          "asked": 25,
+          "ok": 12,
+          "refused": 13,
+          "null": 0,
+          "reasons": {
+            "trust-gate": 8,
+            "reluctant": 5
+          }
+        },
+        "cook": {
+          "asked": 51,
+          "ok": 37,
+          "refused": 14,
+          "null": 0,
+          "reasons": {
+            "reluctant": 7,
+            "trust-gate": 7
+          }
+        }
+      },
+      "walkdownSeqs": 0,
+      "walkdownFallbackAccepts": 0,
+      "walkdownTopAccepts": 0,
+      "offerDealCalls": 0,
+      "appealToGoalCalls": 0,
+      "neverAsked": [
+        "gen_t9qek17",
+        "ruby_callaghan"
+      ],
+      "taskLeadDays": 470,
+      "taskLeadsHeld": {
+        "water": 123,
+        "deadfall": 122,
+        "fish": 120,
+        "forage": 105
+      },
+      "resolutionsByTask": {
+        "wood": {
+          "completed": 223,
+          "redirected": 261,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 484
+        },
+        "water": {
+          "completed": 72,
+          "redirected": 24,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 96
+        },
+        "stone": {
+          "completed": 222,
+          "redirected": 254,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 476
+        },
+        "deadfall": {
+          "completed": 137,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 137
+        },
+        "cook": {
+          "completed": 37,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 37
+        },
+        "fish": {
+          "completed": 7,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 7
+        },
+        "garden": {
+          "completed": 4,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 4
+        }
+      },
+      "resolutionsByPath": {
+        "redirect-recursion": 539,
+        "taskLead": 487,
+        "assignment": 215
+      },
+      "resolutionsByOutcome": {
+        "completed": 702,
+        "redirected": 539
+      },
+      "resolutionsPerVillager": {
+        "gen_a5kjm01": 6,
+        "jesse_cortez": 81,
+        "gen_mwpuvmm": 227,
+        "thabo_maseko": 4,
+        "gen_ej41kyy": 7,
+        "gen_rbcluu2": 76,
+        "ruby_callaghan": 767,
+        "jorge_silva": 28,
+        "maya_singh": 1,
+        "visjoin_131": 38,
+        "visjoin_143": 6
+      },
+      "resolveCallOutcomes": {
+        "redirected": 147,
+        "completed": 68,
+        "sheltered-kept": 1748
+      },
+      "practiceRepsByTask": {
+        "wood": 223,
+        "water": 72,
+        "stone": 222,
+        "deadfall": 137,
+        "cook": 37,
+        "fish": 7,
+        "garden": 4
+      },
+      "competenceMovedCells": 2,
+      "competenceMovedByTask": {
+        "wood": 1,
+        "stone": 1
+      },
+      "villagerDays": 1414,
+      "resolutionsTotal": 1241,
+      "dutyTimeShare": 0.878,
+      "deposits": {
+        "Foraged food": 37612,
+        "Snared meat": 1049,
+        "System-replicated stew": 400,
+        "Expedition haul": 156865,
+        "Trial feast": 600,
+        "Expedition meat": 24955,
+        "Aid from Emberhold": 10748,
+        "Pit meat (Raccoon)": 545,
+        "Fish catch": 3170
+      },
+      "dutyDepositKcal": 40782,
+      "totalDepositKcal": 235944,
+      "huntsTotal": 0,
+      "huntKills": 0,
+      "huntKcal": 0,
+      "huntsBySpecies": {},
+      "sayWood": 349,
+      "sayStone": 73,
+      "saySticks": 50,
+      "sayFiber": 20,
+      "sayWaterLiters": 171,
+      "sayScoutTiles": 0,
+      "deadfallHauls": 137,
+      "deadfallSticks": 291,
+      "deadfallFiber": 58,
+      "waterHauls": 72,
+      "cisternRedirects": 256,
+      "cisternOverflowL": 0,
+      "throttleRedirects": 283,
+      "throttleExemptDepth": 0,
+      "preserveBatches": 72,
+      "preserveKcal": 80911,
+      "hurtsTotal": 145,
+      "hurtsOnDuty": 45,
+      "hurtsByCause": {
+        "monster": 116,
+        "sickness": 1,
+        "contest": 18,
+        "experiment": 1,
+        "disease": 9
+      },
+      "hurtsOnDutyByCause": {
+        "monster": 38,
+        "contest": 2,
+        "disease": 5
+      },
+      "hurtsDied": 2,
+      "hurtsDiedOnDuty": 0,
+      "fitnessRefusals": 0,
+      "fitnessRests": 0,
+      "shelteredKept": 1748,
+      "sickAssignedOutdoorDays": 0,
+      "hpUnder40AssignedDays": 8,
+      "medicHolderDays": 145,
+      "medicHolders": {
+        "gen_rbcluu2": 123,
+        "gen_a5kjm01": 20,
+        "victor_lopez": 2
+      },
+      "medicTurnovers": 5,
+      "medicVacantDays": 2,
+      "noMedicSickDays": 0,
+      "medicEligibleAvg": 5.58,
+      "medicCuresAbility": 7,
+      "medicCuresMedicine": 0,
+      "cureAttempts": 9,
+      "cureAttemptsCured": 7,
+      "curePatients": {
+        "thabo_maseko": 2,
+        "gen_ej41kyy": 1,
+        "gen_a5kjm01": 3,
+        "ruby_callaghan": 2,
+        "victor_lopez": 1
+      },
+      "careTicks": 150,
+      "medicTicks": 150,
+      "objectivesByKind": {
+        "none": 43,
+        "WATER": 361,
+        "idle": 150,
+        "LEAVE": 152,
+        "EAT": 35,
+        "HAVEN_CHORE": 125,
+        "TRAPS": 8,
+        "EXPLORE": 302,
+        "VISIT": 96,
+        "GUARD": 107,
+        "FORAGE": 29,
+        "SEEK": 3,
+        "HAUL": 2,
+        "HUNT": 1
+      },
+      "waterDutyResolutions": 72,
+      "teleTrapByType": {
+        "npc_trap": {
+          "n": 9,
+          "caught": 4,
+          "kcal": 1049
+        },
+        "npc_pit": {
+          "n": 1,
+          "caught": 0,
+          "kcal": 0
+        }
+      },
+      "patrolsTotal": 0,
+      "patrolKills": 0,
+      "patrolHurts": 0,
+      "patrolDeaths": 0,
+      "deedsByDeed": {
+        "teaching": 62,
+        "foraging": 174,
+        "discovery": 913,
+        "crafting": 26,
+        "gardening": 45,
+        "cooking": 37,
+        "preserving": 28,
+        "fishing": 7
+      },
+      "deedsTotal": 1292,
+      "top3Resolutions": [
+        {
+          "vid": "ruby_callaghan",
+          "n": 767
+        },
+        {
+          "vid": "gen_mwpuvmm",
+          "n": 227
+        },
+        {
+          "vid": "jesse_cortez",
+          "n": 81
+        }
+      ],
+      "top3Share": 0.866,
+      "neverResolved": 4,
+      "snapshots": 148,
+      "sayCapped": true,
+      "dutySays": 400,
+      "wall": {
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199
+      }
+    },
+    {
+      "seed": 190314,
+      "days": 150,
+      "endReason": "survived",
+      "won": false,
+      "villageLost": false,
+      "scaleRank": "regional",
+      "maxWave": 5,
+      "standing": 350,
+      "deaths": 102,
+      "endPantryKcal": 3200,
+      "errors": 0,
+      "assignByTask": {
+        "water": {
+          "asked": 139,
+          "ok": 131,
+          "refused": 8,
+          "null": 0,
+          "reasons": {
+            "trust-gate": 5,
+            "reluctant": 3
+          }
+        },
+        "fish": {
+          "asked": 80,
+          "ok": 80,
+          "refused": 0,
+          "null": 0,
+          "reasons": {}
+        },
+        "deadfall": {
+          "asked": 54,
+          "ok": 20,
+          "refused": 34,
+          "null": 0,
+          "reasons": {
+            "trust-gate": 28,
+            "reluctant": 6
+          }
+        },
+        "cook": {
+          "asked": 55,
+          "ok": 49,
+          "refused": 6,
+          "null": 0,
+          "reasons": {
+            "trust-gate": 4,
+            "reluctant": 2
+          }
+        }
+      },
+      "walkdownSeqs": 0,
+      "walkdownFallbackAccepts": 0,
+      "walkdownTopAccepts": 0,
+      "offerDealCalls": 0,
+      "appealToGoalCalls": 0,
+      "neverAsked": [
+        "gen_ifx2ga1"
+      ],
+      "taskLeadDays": 445,
+      "taskLeadsHeld": {
+        "fish": 120,
+        "water": 118,
+        "cook": 114,
+        "forage": 93
+      },
+      "resolutionsByTask": {
+        "wood": {
+          "completed": 290,
+          "redirected": 331,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 621
+        },
+        "water": {
+          "completed": 92,
+          "redirected": 38,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 130
+        },
+        "deadfall": {
+          "completed": 18,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 18
+        },
+        "stone": {
+          "completed": 291,
+          "redirected": 339,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 630
+        },
+        "cook": {
+          "completed": 190,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 190
+        }
+      },
+      "resolutionsByPath": {
+        "redirect-recursion": 708,
+        "assignment": 274,
+        "taskLead": 607
+      },
+      "resolutionsByOutcome": {
+        "completed": 881,
+        "redirected": 708
+      },
+      "resolutionsPerVillager": {
+        "gen_a5auhqm": 229,
+        "gen_arlw6n4": 196,
+        "katarina_novak": 4,
+        "onni_korhonen": 1,
+        "gen_1mva4gy": 91,
+        "gen_cdd4zsr": 1028,
+        "gen_7xtpwro": 9,
+        "elena_petrova": 2,
+        "hannah_kim": 1,
+        "chloe_dubois": 8,
+        "caleb_jones": 20
+      },
+      "resolveCallOutcomes": {
+        "redirected": 196,
+        "completed": 78,
+        "sheltered-kept": 2144,
+        "dead-or-left": 1
+      },
+      "practiceRepsByTask": {
+        "wood": 290,
+        "water": 92,
+        "deadfall": 18,
+        "stone": 291,
+        "cook": 190
+      },
+      "competenceMovedCells": 5,
+      "competenceMovedByTask": {
+        "wood": 2,
+        "stone": 2,
+        "water": 1
+      },
+      "villagerDays": 1471,
+      "resolutionsTotal": 1589,
+      "dutyTimeShare": 1.08,
+      "deposits": {
+        "Foraged food": 33157,
+        "Expedition haul": 87987,
+        "Expedition meat": 11265,
+        "Snared meat": 625,
+        "System-replicated (enthusiastic) meal": 300,
+        "Hummice": 75,
+        "Aid from Stonebridge": 8146
+      },
+      "dutyDepositKcal": 33157,
+      "totalDepositKcal": 141555,
+      "huntsTotal": 0,
+      "huntKills": 0,
+      "huntKcal": 0,
+      "huntsBySpecies": {},
+      "sayWood": 359,
+      "sayStone": 72,
+      "saySticks": 13,
+      "sayFiber": 2,
+      "sayWaterLiters": 161,
+      "sayScoutTiles": 0,
+      "deadfallHauls": 18,
+      "deadfallSticks": 24,
+      "deadfallFiber": 7,
+      "waterHauls": 92,
+      "cisternRedirects": 327,
+      "cisternOverflowL": 0,
+      "throttleRedirects": 381,
+      "throttleExemptDepth": 0,
+      "preserveBatches": 92,
+      "preserveKcal": 70200,
+      "hurtsTotal": 139,
+      "hurtsOnDuty": 41,
+      "hurtsByCause": {
+        "monster": 117,
+        "contest": 9,
+        "sickness": 1,
+        "radiation_sickness": 10,
+        "experiment": 2
+      },
+      "hurtsOnDutyByCause": {
+        "monster": 29,
+        "contest": 5,
+        "experiment": 2,
+        "radiation_sickness": 5
+      },
+      "hurtsDied": 2,
+      "hurtsDiedOnDuty": 0,
+      "fitnessRefusals": 0,
+      "fitnessRests": 0,
+      "shelteredKept": 2144,
+      "sickAssignedOutdoorDays": 0,
+      "hpUnder40AssignedDays": 16,
+      "medicHolderDays": 148,
+      "medicHolders": {
+        "gen_1mva4gy": 148
+      },
+      "medicTurnovers": 1,
+      "medicVacantDays": 0,
+      "noMedicSickDays": 0,
+      "medicEligibleAvg": 3.12,
+      "medicCuresAbility": 35,
+      "medicCuresMedicine": 0,
+      "cureAttempts": 35,
+      "cureAttemptsCured": 35,
+      "curePatients": {
+        "elena_petrova": 5,
+        "gen_cdd4zsr": 5,
+        "caleb_jones": 8,
+        "gen_7xtpwro": 2,
+        "katarina_novak": 11,
+        "chloe_dubois": 4
+      },
+      "careTicks": 150,
+      "medicTicks": 150,
+      "objectivesByKind": {
+        "none": 98,
+        "EAT": 44,
+        "HAVEN_CHORE": 248,
+        "TRAPS": 8,
+        "WATER": 342,
+        "idle": 231,
+        "EXPLORE": 222,
+        "VISIT": 90,
+        "FORAGE": 29,
+        "GUARD": 133,
+        "HUNT": 11,
+        "SEEK": 9,
+        "HAUL": 6
+      },
+      "waterDutyResolutions": 92,
+      "teleTrapByType": {
+        "npc_trap": {
+          "n": 7,
+          "caught": 2,
+          "kcal": 625
+        }
+      },
+      "patrolsTotal": 0,
+      "patrolKills": 0,
+      "patrolHurts": 0,
+      "patrolDeaths": 0,
+      "deedsByDeed": {
+        "foraging": 109,
+        "teaching": 98,
+        "discovery": 683,
+        "crafting": 21,
+        "gardening": 51,
+        "cooking": 190,
+        "preserving": 33
+      },
+      "deedsTotal": 1185,
+      "top3Resolutions": [
+        {
+          "vid": "gen_cdd4zsr",
+          "n": 1028
+        },
+        {
+          "vid": "gen_a5auhqm",
+          "n": 229
+        },
+        {
+          "vid": "gen_arlw6n4",
+          "n": 196
+        }
+      ],
+      "top3Share": 0.914,
+      "neverResolved": 1,
+      "snapshots": 149,
+      "sayCapped": true,
+      "dutySays": 400,
+      "wall": {
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 350
+      }
+    },
+    {
+      "seed": 190315,
+      "days": 140,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "deaths": 73,
+      "endPantryKcal": 0,
+      "errors": 0,
+      "assignByTask": {
+        "water": {
+          "asked": 349,
+          "ok": 107,
+          "refused": 242,
+          "null": 0,
+          "reasons": {
+            "trust-gate": 237,
+            "reluctant": 5
+          }
+        },
+        "fish": {
+          "asked": 183,
+          "ok": 149,
+          "refused": 34,
+          "null": 0,
+          "reasons": {
+            "trust-gate": 34
+          }
+        },
+        "deadfall": {
+          "asked": 57,
+          "ok": 11,
+          "refused": 46,
+          "null": 0,
+          "reasons": {
+            "trust-gate": 41,
+            "reluctant": 5
+          }
+        },
+        "cook": {
+          "asked": 80,
+          "ok": 49,
+          "refused": 31,
+          "null": 0,
+          "reasons": {
+            "trust-gate": 26,
+            "reluctant": 5
+          }
+        }
+      },
+      "walkdownSeqs": 0,
+      "walkdownFallbackAccepts": 0,
+      "walkdownTopAccepts": 0,
+      "offerDealCalls": 0,
+      "appealToGoalCalls": 0,
+      "neverAsked": [
+        "gen_05bbxdt",
+        "visjoin_69",
+        "visjoin_85"
+      ],
+      "taskLeadDays": 492,
+      "taskLeadsHeld": {
+        "water": 129,
+        "deadfall": 127,
+        "fish": 124,
+        "cook": 112
+      },
+      "resolutionsByTask": {
+        "wood": {
+          "completed": 282,
+          "redirected": 330,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 612
+        },
+        "water": {
+          "completed": 122,
+          "redirected": 34,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 156
+        },
+        "deadfall": {
+          "completed": 202,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 202
+        },
+        "stone": {
+          "completed": 282,
+          "redirected": 327,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 609
+        },
+        "fish": {
+          "completed": 34,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 34
+        },
+        "cook": {
+          "completed": 195,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 195
+        },
+        "garden": {
+          "completed": 28,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 28
+        }
+      },
+      "resolutionsByPath": {
+        "redirect-recursion": 691,
+        "assignment": 316,
+        "taskLead": 829
+      },
+      "resolutionsByOutcome": {
+        "completed": 1145,
+        "redirected": 691
+      },
+      "resolutionsPerVillager": {
+        "rosa_mendez": 1246,
+        "gen_jnr6a0i": 191,
+        "raj_patel": 9,
+        "petra_novak": 2,
+        "sanne_bakker": 2,
+        "gen_gx4dylf": 26,
+        "gen_0mqpuxn": 60,
+        "gen_wjlqg8s": 132,
+        "vasyl_shevchenko": 54,
+        "visjoin_64": 4,
+        "visjoin_85": 12,
+        "visjoin_94": 50,
+        "visjoin_102": 23,
+        "visjoin_121": 14,
+        "visjoin_133": 11
+      },
+      "resolveCallOutcomes": {
+        "redirected": 214,
+        "completed": 102,
+        "sheltered-kept": 622
+      },
+      "practiceRepsByTask": {
+        "wood": 282,
+        "water": 122,
+        "deadfall": 202,
+        "stone": 282,
+        "fish": 34,
+        "cook": 195,
+        "garden": 28
+      },
+      "competenceMovedCells": 0,
+      "competenceMovedByTask": {},
+      "villagerDays": 1144,
+      "resolutionsTotal": 1836,
+      "dutyTimeShare": 1.605,
+      "deposits": {
+        "Foraged food": 42378,
+        "Fish catch": 16975,
+        "Snared meat": 820,
+        "Expedition haul": 20948,
+        "System-replicated (enthusiastic) meal": 300,
+        "Aid from Emberhold": 15568
+      },
+      "dutyDepositKcal": 59353,
+      "totalDepositKcal": 96989,
+      "huntsTotal": 0,
+      "huntKills": 0,
+      "huntKcal": 0,
+      "huntsBySpecies": {},
+      "sayWood": 257,
+      "sayStone": 51,
+      "saySticks": 40,
+      "sayFiber": 19,
+      "sayWaterLiters": 241,
+      "sayScoutTiles": 0,
+      "deadfallHauls": 202,
+      "deadfallSticks": 458,
+      "deadfallFiber": 100,
+      "waterHauls": 122,
+      "cisternRedirects": 311,
+      "cisternOverflowL": 0,
+      "throttleRedirects": 380,
+      "throttleExemptDepth": 0,
+      "preserveBatches": 56,
+      "preserveKcal": 64215,
+      "hurtsTotal": 153,
+      "hurtsOnDuty": 24,
+      "hurtsByCause": {
+        "sickness": 9,
+        "monster": 97,
+        "bad belly": 2,
+        "experiment": 1,
+        "contest": 20,
+        "disease": 9,
+        "starvation": 15
+      },
+      "hurtsOnDutyByCause": {
+        "monster": 11,
+        "sickness": 1,
+        "contest": 4,
+        "disease": 7,
+        "starvation": 1
+      },
+      "hurtsDied": 0,
+      "hurtsDiedOnDuty": 0,
+      "fitnessRefusals": 0,
+      "fitnessRests": 0,
+      "shelteredKept": 622,
+      "sickAssignedOutdoorDays": 0,
+      "hpUnder40AssignedDays": 8,
+      "medicHolderDays": 135,
+      "medicHolders": {
+        "gen_0mqpuxn": 41,
+        "vasyl_shevchenko": 87,
+        "visjoin_133": 7
+      },
+      "medicTurnovers": 4,
+      "medicVacantDays": 2,
+      "noMedicSickDays": 0,
+      "medicEligibleAvg": 3.16,
+      "medicCuresAbility": 11,
+      "medicCuresMedicine": 0,
+      "cureAttempts": 26,
+      "cureAttemptsCured": 11,
+      "curePatients": {
+        "petra_novak": 5,
+        "gen_gx4dylf": 8,
+        "rosa_mendez": 4,
+        "sanne_bakker": 2,
+        "visjoin_64": 3,
+        "visjoin_102": 2,
+        "visjoin_121": 2
+      },
+      "careTicks": 140,
+      "medicTicks": 140,
+      "objectivesByKind": {
+        "none": 27,
+        "idle": 176,
+        "LEAVE": 139,
+        "HAVEN_CHORE": 179,
+        "EAT": 22,
+        "EXPLORE": 33,
+        "FORAGE": 56,
+        "VISIT": 116,
+        "WATER": 223,
+        "GUARD": 132,
+        "HUNT": 10,
+        "HAUL": 7,
+        "SEEK": 10,
+        "TRAPS": 14
+      },
+      "waterDutyResolutions": 122,
+      "teleTrapByType": {
+        "npc_trap": {
+          "n": 9,
+          "caught": 4,
+          "kcal": 820
+        }
+      },
+      "patrolsTotal": 0,
+      "patrolKills": 0,
+      "patrolHurts": 0,
+      "patrolDeaths": 0,
+      "deedsByDeed": {
+        "teaching": 77,
+        "discovery": 128,
+        "foraging": 154,
+        "crafting": 9,
+        "fishing": 34,
+        "cooking": 195,
+        "gardening": 104,
+        "preserving": 29
+      },
+      "deedsTotal": 730,
+      "top3Resolutions": [
+        {
+          "vid": "rosa_mendez",
+          "n": 1246
+        },
+        {
+          "vid": "gen_jnr6a0i",
+          "n": 191
+        },
+        {
+          "vid": "gen_wjlqg8s",
+          "n": 132
+        }
+      ],
+      "top3Share": 0.855,
+      "neverResolved": 4,
+      "snapshots": 139,
+      "sayCapped": true,
+      "dutySays": 400,
+      "wall": {
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199
+      }
+    },
+    {
+      "seed": 190316,
+      "days": 150,
+      "endReason": "survived",
+      "won": false,
+      "villageLost": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "deaths": 82,
+      "endPantryKcal": 578,
+      "errors": 0,
+      "assignByTask": {
+        "water": {
+          "asked": 193,
+          "ok": 142,
+          "refused": 51,
+          "null": 0,
+          "reasons": {
+            "trust-gate": 19,
+            "reluctant": 32
+          }
+        },
+        "fish": {
+          "asked": 320,
+          "ok": 320,
+          "refused": 0,
+          "null": 0,
+          "reasons": {}
+        },
+        "deadfall": {
+          "asked": 94,
+          "ok": 59,
+          "refused": 35,
+          "null": 0,
+          "reasons": {
+            "reluctant": 11,
+            "trust-gate": 24
+          }
+        },
+        "cook": {
+          "asked": 64,
+          "ok": 64,
+          "refused": 0,
+          "null": 0,
+          "reasons": {}
+        }
+      },
+      "walkdownSeqs": 0,
+      "walkdownFallbackAccepts": 0,
+      "walkdownTopAccepts": 0,
+      "offerDealCalls": 0,
+      "appealToGoalCalls": 0,
+      "neverAsked": [
+        "gen_syyh1h6"
+      ],
+      "taskLeadDays": 0,
+      "taskLeadsHeld": {},
+      "resolutionsByTask": {
+        "wood": {
+          "completed": 109,
+          "redirected": 129,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 238
+        },
+        "water": {
+          "completed": 158,
+          "redirected": 38,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 196
+        },
+        "stone": {
+          "completed": 109,
+          "redirected": 129,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 238
+        },
+        "deadfall": {
+          "completed": 59,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 59
+        },
+        "cook": {
+          "completed": 64,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 64
+        },
+        "garden": {
+          "completed": 66,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 66
+        },
+        "fish": {
+          "completed": 152,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 152
+        }
+      },
+      "resolutionsByPath": {
+        "redirect-recursion": 296,
+        "taskLead": 132,
+        "assignment": 585
+      },
+      "resolutionsByOutcome": {
+        "completed": 717,
+        "redirected": 296
+      },
+      "resolutionsPerVillager": {
+        "sofia_chen": 34,
+        "gen_kmylxmc": 259,
+        "gen_jcpbh74": 123,
+        "lena_ruiz": 2,
+        "gen_sa2zv8o": 214,
+        "dmitri_sokolov": 4,
+        "gen_ba8hbvl": 1,
+        "gen_y0ckmll": 57,
+        "david_kim": 14,
+        "boris_kowalski": 7,
+        "app_mgpsphkk953": 5,
+        "app_mgpspiov347": 93,
+        "visjoin_88": 3,
+        "visjoin_96": 98,
+        "visjoin_101": 40,
+        "visjoin_111": 20,
+        "visjoin_113": 22,
+        "visjoin_123": 9,
+        "visjoin_124": 7,
+        "visjoin_139": 1
+      },
+      "resolveCallOutcomes": {
+        "redirected": 190,
+        "completed": 395,
+        "sheltered-kept": 233
+      },
+      "practiceRepsByTask": {
+        "wood": 109,
+        "water": 158,
+        "stone": 109,
+        "deadfall": 59,
+        "cook": 64,
+        "garden": 66,
+        "fish": 152
+      },
+      "competenceMovedCells": 0,
+      "competenceMovedByTask": {},
+      "villagerDays": 1137,
+      "resolutionsTotal": 1013,
+      "dutyTimeShare": 0.891,
+      "deposits": {
+        "Foraged food": 47076,
+        "Snared meat": 5436,
+        "Fish catch": 132671,
+        "Pit meat (White-tailed Deer)": 805,
+        "Aid from Emberhold": 7460
+      },
+      "dutyDepositKcal": 179747,
+      "totalDepositKcal": 193448,
+      "huntsTotal": 0,
+      "huntKills": 0,
+      "huntKcal": 0,
+      "huntsBySpecies": {},
+      "sayWood": 125,
+      "sayStone": 32,
+      "saySticks": 32,
+      "sayFiber": 16,
+      "sayWaterLiters": 221,
+      "sayScoutTiles": 0,
+      "deadfallHauls": 59,
+      "deadfallSticks": 87,
+      "deadfallFiber": 29,
+      "waterHauls": 158,
+      "cisternRedirects": 62,
+      "cisternOverflowL": 0,
+      "throttleRedirects": 234,
+      "throttleExemptDepth": 0,
+      "preserveBatches": 88,
+      "preserveKcal": 69061,
+      "hurtsTotal": 171,
+      "hurtsOnDuty": 7,
+      "hurtsByCause": {
+        "sickness": 8,
+        "monster": 107,
+        "contest": 17,
+        "disease": 7,
+        "starvation": 32
+      },
+      "hurtsOnDutyByCause": {
+        "disease": 5,
+        "contest": 2
+      },
+      "hurtsDied": 2,
+      "hurtsDiedOnDuty": 0,
+      "fitnessRefusals": 0,
+      "fitnessRests": 0,
+      "shelteredKept": 233,
+      "sickAssignedOutdoorDays": 0,
+      "hpUnder40AssignedDays": 20,
+      "medicHolderDays": 141,
+      "medicHolders": {
+        "gen_sa2zv8o": 68,
+        "sofia_chen": 20,
+        "visjoin_96": 48,
+        "visjoin_113": 5
+      },
+      "medicTurnovers": 6,
+      "medicVacantDays": 2,
+      "noMedicSickDays": 0,
+      "medicEligibleAvg": 3.51,
+      "medicCuresAbility": 12,
+      "medicCuresMedicine": 0,
+      "cureAttempts": 22,
+      "cureAttemptsCured": 12,
+      "curePatients": {
+        "boris_kowalski": 5,
+        "lena_ruiz": 5,
+        "gen_y0ckmll": 2,
+        "gen_kmylxmc": 1,
+        "sofia_chen": 1,
+        "visjoin_101": 4,
+        "visjoin_123": 1,
+        "visjoin_111": 1,
+        "visjoin_113": 1,
+        "visjoin_139": 1
+      },
+      "careTicks": 150,
+      "medicTicks": 150,
+      "objectivesByKind": {
+        "none": 46,
+        "EAT": 53,
+        "WATER": 102,
+        "idle": 255,
+        "HAVEN_CHORE": 192,
+        "LEAVE": 34,
+        "VISIT": 223,
+        "FORAGE": 46,
+        "GUARD": 93,
+        "SEEK": 9,
+        "HUNT": 32,
+        "EXPLORE": 4,
+        "HAUL": 12,
+        "TRAPS": 36
+      },
+      "waterDutyResolutions": 158,
+      "teleTrapByType": {
+        "npc_trap": {
+          "n": 46,
+          "caught": 21,
+          "kcal": 5436
+        },
+        "npc_pit": {
+          "n": 1,
+          "caught": 0,
+          "kcal": 0
+        }
+      },
+      "patrolsTotal": 0,
+      "patrolKills": 0,
+      "patrolHurts": 0,
+      "patrolDeaths": 0,
+      "deedsByDeed": {
+        "foraging": 146,
+        "teaching": 100,
+        "discovery": 46,
+        "crafting": 13,
+        "gardening": 87,
+        "cooking": 64,
+        "preserving": 45,
+        "fishing": 152
+      },
+      "deedsTotal": 653,
+      "top3Resolutions": [
+        {
+          "vid": "gen_kmylxmc",
+          "n": 259
+        },
+        {
+          "vid": "gen_sa2zv8o",
+          "n": 214
+        },
+        {
+          "vid": "gen_jcpbh74",
+          "n": 123
+        }
+      ],
+      "top3Share": 0.588,
+      "neverResolved": 2,
+      "snapshots": 149,
+      "sayCapped": true,
+      "dutySays": 400,
+      "wall": {
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199
+      }
+    },
+    {
+      "seed": 190317,
+      "days": 142,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 5,
+      "standing": 300,
+      "deaths": 109,
+      "endPantryKcal": 0,
+      "errors": 0,
+      "assignByTask": {
+        "water": {
+          "asked": 316,
+          "ok": 100,
+          "refused": 216,
+          "null": 0,
+          "reasons": {
+            "trust-gate": 216
+          }
+        },
+        "fish": {
+          "asked": 127,
+          "ok": 120,
+          "refused": 7,
+          "null": 0,
+          "reasons": {
+            "trust-gate": 7
+          }
+        },
+        "deadfall": {
+          "asked": 95,
+          "ok": 11,
+          "refused": 84,
+          "null": 0,
+          "reasons": {
+            "trust-gate": 76,
+            "reluctant": 8
+          }
+        },
+        "cook": {
+          "asked": 79,
+          "ok": 58,
+          "refused": 21,
+          "null": 0,
+          "reasons": {
+            "trust-gate": 16,
+            "reluctant": 5
+          }
+        }
+      },
+      "walkdownSeqs": 0,
+      "walkdownFallbackAccepts": 0,
+      "walkdownTopAccepts": 0,
+      "offerDealCalls": 0,
+      "appealToGoalCalls": 0,
+      "neverAsked": [
+        "gen_9c14xai"
+      ],
+      "taskLeadDays": 86,
+      "taskLeadsHeld": {
+        "fish": 53,
+        "forage": 33
+      },
+      "resolutionsByTask": {
+        "wood": {
+          "completed": 127,
+          "redirected": 142,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 269
+        },
+        "water": {
+          "completed": 107,
+          "redirected": 61,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 168
+        },
+        "stone": {
+          "completed": 126,
+          "redirected": 137,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 263
+        },
+        "deadfall": {
+          "completed": 11,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 11
+        },
+        "cook": {
+          "completed": 58,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 58
+        },
+        "garden": {
+          "completed": 9,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 9
+        },
+        "fish": {
+          "completed": 12,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 12
+        }
+      },
+      "resolutionsByPath": {
+        "redirect-recursion": 340,
+        "taskLead": 162,
+        "assignment": 288
+      },
+      "resolutionsByOutcome": {
+        "completed": 450,
+        "redirected": 340
+      },
+      "resolutionsPerVillager": {
+        "gen_za9x71h": 6,
+        "carlos_diaz": 148,
+        "gen_s4xcwub": 364,
+        "theo_lindqvist": 6,
+        "lucas_brown": 15,
+        "luis_fernandez": 2,
+        "wanjiru_kamau": 37,
+        "gen_axqlmmf": 10,
+        "boris_kowalski": 83,
+        "priya_nair": 23,
+        "app_mgpsphk7659": 95,
+        "gen_2wht3xl": 1
+      },
+      "resolveCallOutcomes": {
+        "redirected": 161,
+        "completed": 127,
+        "sheltered-kept": 893,
+        "dead-or-left": 1
+      },
+      "practiceRepsByTask": {
+        "wood": 127,
+        "water": 107,
+        "stone": 126,
+        "deadfall": 11,
+        "cook": 58,
+        "garden": 9,
+        "fish": 12
+      },
+      "competenceMovedCells": 0,
+      "competenceMovedByTask": {},
+      "villagerDays": 1298,
+      "resolutionsTotal": 790,
+      "dutyTimeShare": 0.609,
+      "deposits": {
+        "Expedition haul": 148048,
+        "Foraged food": 44452,
+        "Trial feast": 600,
+        "Snared meat": 1054,
+        "Expedition meat": 16240,
+        "Aid from Stonebridge": 2889,
+        "Fish catch": 13264
+      },
+      "dutyDepositKcal": 57716,
+      "totalDepositKcal": 226547,
+      "huntsTotal": 0,
+      "huntKills": 0,
+      "huntKcal": 0,
+      "huntsBySpecies": {},
+      "sayWood": 98,
+      "sayStone": 22,
+      "saySticks": 12,
+      "sayFiber": 5,
+      "sayWaterLiters": 141,
+      "sayScoutTiles": 0,
+      "deadfallHauls": 11,
+      "deadfallSticks": 12,
+      "deadfallFiber": 5,
+      "waterHauls": 107,
+      "cisternRedirects": 80,
+      "cisternOverflowL": 0,
+      "throttleRedirects": 260,
+      "throttleExemptDepth": 0,
+      "preserveBatches": 53,
+      "preserveKcal": 64939,
+      "hurtsTotal": 149,
+      "hurtsOnDuty": 35,
+      "hurtsByCause": {
+        "monster": 126,
+        "disease": 9,
+        "sickness": 2,
+        "contest": 12
+      },
+      "hurtsOnDutyByCause": {
+        "disease": 7,
+        "monster": 27,
+        "contest": 1
+      },
+      "hurtsDied": 0,
+      "hurtsDiedOnDuty": 0,
+      "fitnessRefusals": 0,
+      "fitnessRests": 0,
+      "shelteredKept": 893,
+      "sickAssignedOutdoorDays": 0,
+      "hpUnder40AssignedDays": 5,
+      "medicHolderDays": 136,
+      "medicHolders": {
+        "gen_s4xcwub": 17,
+        "boris_kowalski": 119
+      },
+      "medicTurnovers": 3,
+      "medicVacantDays": 3,
+      "noMedicSickDays": 0,
+      "medicEligibleAvg": 3.66,
+      "medicCuresAbility": 22,
+      "medicCuresMedicine": 0,
+      "cureAttempts": 22,
+      "cureAttemptsCured": 22,
+      "curePatients": {
+        "gen_izh87mp": 1,
+        "gen_2wht3xl": 5,
+        "theo_lindqvist": 2,
+        "lucas_brown": 3,
+        "gen_s4xcwub": 3,
+        "luis_fernandez": 3,
+        "priya_nair": 2,
+        "app_mgpsphk7659": 3
+      },
+      "careTicks": 140,
+      "medicTicks": 141,
+      "objectivesByKind": {
+        "none": 58,
+        "idle": 122,
+        "LEAVE": 162,
+        "EXPLORE": 307,
+        "WATER": 263,
+        "EAT": 12,
+        "FORAGE": 56,
+        "VISIT": 92,
+        "HAVEN_CHORE": 154,
+        "HAUL": 8,
+        "HUNT": 14,
+        "TRAPS": 5,
+        "SEEK": 7,
+        "GUARD": 38
+      },
+      "waterDutyResolutions": 107,
+      "teleTrapByType": {
+        "npc_trap": {
+          "n": 10,
+          "caught": 4,
+          "kcal": 1054
+        }
+      },
+      "patrolsTotal": 0,
+      "patrolKills": 0,
+      "patrolHurts": 0,
+      "patrolDeaths": 0,
+      "deedsByDeed": {
+        "discovery": 891,
+        "teaching": 69,
+        "foraging": 162,
+        "crafting": 33,
+        "gardening": 88,
+        "cooking": 58,
+        "preserving": 23,
+        "fishing": 12
+      },
+      "deedsTotal": 1336,
+      "top3Resolutions": [
+        {
+          "vid": "gen_s4xcwub",
+          "n": 364
+        },
+        {
+          "vid": "carlos_diaz",
+          "n": 148
+        },
+        {
+          "vid": "app_mgpsphk7659",
+          "n": 95
+        }
+      ],
+      "top3Share": 0.768,
+      "neverResolved": 3,
+      "snapshots": 140,
+      "sayCapped": true,
+      "dutySays": 400,
+      "wall": {
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 300
+      }
+    },
+    {
+      "seed": 190318,
+      "days": 123,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "deaths": 60,
+      "endPantryKcal": 1108,
+      "errors": 0,
+      "assignByTask": {
+        "water": {
+          "asked": 115,
+          "ok": 84,
+          "refused": 31,
+          "null": 0,
+          "reasons": {
+            "trust-gate": 26,
+            "reluctant": 5
+          }
+        },
+        "fish": {
+          "asked": 121,
+          "ok": 116,
+          "refused": 5,
+          "null": 0,
+          "reasons": {
+            "trust-gate": 5
+          }
+        },
+        "deadfall": {
+          "asked": 48,
+          "ok": 8,
+          "refused": 40,
+          "null": 0,
+          "reasons": {
+            "trust-gate": 36,
+            "reluctant": 4
+          }
+        },
+        "cook": {
+          "asked": 44,
+          "ok": 44,
+          "refused": 0,
+          "null": 0,
+          "reasons": {}
+        }
+      },
+      "walkdownSeqs": 0,
+      "walkdownFallbackAccepts": 0,
+      "walkdownTopAccepts": 0,
+      "offerDealCalls": 0,
+      "appealToGoalCalls": 0,
+      "neverAsked": [
+        "gen_lmlbua2",
+        "aria_thompson"
+      ],
+      "taskLeadDays": 238,
+      "taskLeadsHeld": {
+        "deadfall": 59,
+        "fish": 57,
+        "cook": 52,
+        "water": 47,
+        "forage": 23
+      },
+      "resolutionsByTask": {
+        "wood": {
+          "completed": 127,
+          "redirected": 138,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 265
+        },
+        "water": {
+          "completed": 99,
+          "redirected": 44,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 143
+        },
+        "stone": {
+          "completed": 127,
+          "redirected": 149,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 276
+        },
+        "deadfall": {
+          "completed": 67,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 67
+        },
+        "cook": {
+          "completed": 89,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 89
+        },
+        "garden": {
+          "completed": 5,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 5
+        },
+        "fish": {
+          "completed": 11,
+          "redirected": 0,
+          "skipped-early": 0,
+          "exception-thrown": 0,
+          "total": 11
+        }
+      },
+      "resolutionsByPath": {
+        "redirect-recursion": 331,
+        "taskLead": 274,
+        "assignment": 251
+      },
+      "resolutionsByOutcome": {
+        "completed": 525,
+        "redirected": 331
+      },
+      "resolutionsPerVillager": {
+        "nino_kapanadze": 71,
+        "gen_ii0oiaq": 74,
+        "fatima_hassan": 9,
+        "gen_5jd2gs4": 465,
+        "elena_petrova": 6,
+        "boris_kowalski": 3,
+        "gen_vcdfzu3": 93,
+        "valeria_quispe": 2,
+        "gen_t9u5l76": 16,
+        "gen_8f6htw3": 24,
+        "jesse_cortez": 67,
+        "ursula_weber": 24,
+        "thabo_maseko": 1,
+        "visjoin_121": 1
+      },
+      "resolveCallOutcomes": {
+        "redirected": 136,
+        "completed": 115,
+        "sheltered-kept": 663,
+        "dead-or-left": 1
+      },
+      "practiceRepsByTask": {
+        "wood": 127,
+        "water": 99,
+        "stone": 127,
+        "deadfall": 67,
+        "cook": 89,
+        "garden": 5,
+        "fish": 11
+      },
+      "competenceMovedCells": 0,
+      "competenceMovedByTask": {},
+      "villagerDays": 961,
+      "resolutionsTotal": 856,
+      "dutyTimeShare": 0.891,
+      "deposits": {
+        "Foraged food": 36408,
+        "System-replicated stew": 400,
+        "Expedition haul": 1684,
+        "Aid from Emberhold": 4419,
+        "Fish catch": 8700
+      },
+      "dutyDepositKcal": 45108,
+      "totalDepositKcal": 51611,
+      "huntsTotal": 0,
+      "huntKills": 0,
+      "huntKcal": 0,
+      "huntsBySpecies": {},
+      "sayWood": 129,
+      "sayStone": 25,
+      "saySticks": 33,
+      "sayFiber": 14,
+      "sayWaterLiters": 195,
+      "sayScoutTiles": 0,
+      "deadfallHauls": 67,
+      "deadfallSticks": 131,
+      "deadfallFiber": 30,
+      "waterHauls": 99,
+      "cisternRedirects": 101,
+      "cisternOverflowL": 0,
+      "throttleRedirects": 230,
+      "throttleExemptDepth": 0,
+      "preserveBatches": 46,
+      "preserveKcal": 37538,
+      "hurtsTotal": 105,
+      "hurtsOnDuty": 28,
+      "hurtsByCause": {
+        "monster": 61,
+        "disease": 37,
+        "contest": 7
+      },
+      "hurtsOnDutyByCause": {
+        "monster": 6,
+        "disease": 18,
+        "contest": 4
+      },
+      "hurtsDied": 2,
+      "hurtsDiedOnDuty": 0,
+      "fitnessRefusals": 0,
+      "fitnessRests": 0,
+      "shelteredKept": 663,
+      "sickAssignedOutdoorDays": 0,
+      "hpUnder40AssignedDays": 3,
+      "medicHolderDays": 119,
+      "medicHolders": {
+        "gen_t9u5l76": 11,
+        "fatima_hassan": 108
+      },
+      "medicTurnovers": 3,
+      "medicVacantDays": 1,
+      "noMedicSickDays": 0,
+      "medicEligibleAvg": 2.03,
+      "medicCuresAbility": 4,
+      "medicCuresMedicine": 0,
+      "cureAttempts": 37,
+      "cureAttemptsCured": 4,
+      "curePatients": {
+        "gen_8f6htw3": 10,
+        "thabo_maseko": 4,
+        "fatima_hassan": 1,
+        "elena_petrova": 7,
+        "valeria_quispe": 6,
+        "gen_vcdfzu3": 2,
+        "ursula_weber": 3,
+        "boris_kowalski": 4
+      },
+      "careTicks": 122,
+      "medicTicks": 123,
+      "objectivesByKind": {
+        "none": 24,
+        "idle": 202,
+        "VISIT": 152,
+        "WATER": 175,
+        "EAT": 12,
+        "HAVEN_CHORE": 196,
+        "HAUL": 7,
+        "FORAGE": 82,
+        "GUARD": 51,
+        "SEEK": 21,
+        "EXPLORE": 32,
+        "HUNT": 7
+      },
+      "waterDutyResolutions": 99,
+      "teleTrapByType": {},
+      "patrolsTotal": 0,
+      "patrolKills": 0,
+      "patrolHurts": 0,
+      "patrolDeaths": 0,
+      "deedsByDeed": {
+        "teaching": 50,
+        "discovery": 32,
+        "foraging": 145,
+        "crafting": 7,
+        "gardening": 69,
+        "cooking": 89,
+        "preserving": 22,
+        "fishing": 11
+      },
+      "deedsTotal": 425,
+      "top3Resolutions": [
+        {
+          "vid": "gen_5jd2gs4",
+          "n": 465
+        },
+        {
+          "vid": "gen_vcdfzu3",
+          "n": 93
+        },
+        {
+          "vid": "gen_ii0oiaq",
+          "n": 74
+        }
+      ],
+      "top3Share": 0.738,
+      "neverResolved": 2,
+      "snapshots": 121,
+      "sayCapped": true,
+      "dutySays": 400,
+      "wall": {
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199
+      }
+    }
+  ],
+  "pooled": {
+    "seeds": 8,
+    "assignByTask": {
+      "water": {
+        "asked": 1523,
+        "ok": 911,
+        "refused": 612,
+        "null": 0,
+        "reasons": {
+          "trust-gate": 550,
+          "reluctant": 62
+        }
+      },
+      "fish": {
+        "asked": 1167,
+        "ok": 1110,
+        "refused": 57,
+        "null": 0,
+        "reasons": {
+          "trust-gate": 57
+        }
+      },
+      "deadfall": {
+        "asked": 507,
+        "ok": 159,
+        "refused": 348,
+        "null": 0,
+        "reasons": {
+          "trust-gate": 289,
+          "reluctant": 59
+        }
+      },
+      "cook": {
+        "asked": 437,
+        "ok": 363,
+        "refused": 74,
+        "null": 0,
+        "reasons": {
+          "reluctant": 21,
+          "trust-gate": 53
+        }
+      }
+    },
+    "assignTotal": 3634,
+    "assignOk": 2543,
+    "assignRefused": 1091,
+    "assignNull": 0,
+    "refusedReasons": {
+      "trust-gate": 949,
+      "reluctant": 142
+    },
+    "refusedByVid": {
+      "gen_eox4by6": 16,
+      "sofia_chen": 10,
+      "gen_yk9v83a": 14,
+      "gen_cdmdewv": 19,
+      "gen_b9v5e99": 10,
+      "aroha_ngata": 5,
+      "marcus_webb": 6,
+      "benoit_lambert": 3,
+      "yara_haddad": 3,
+      "emma_larsen": 1,
+      "zoltan_nagy": 1,
+      "pavel_dubinin": 7,
+      "gen_4hfo1oj": 5,
+      "gen_td1rcon": 21,
+      "gen_d0pko4n": 9,
+      "gen_dcq452y": 3,
+      "gen_au5rq09": 3,
+      "chloe_dubois": 5,
+      "hassan_ali": 4,
+      "omar_farouk": 3,
+      "victor_lopez": 2,
+      "visjoin_92": 4,
+      "visjoin_105": 2,
+      "gen_mwpuvmm": 6,
+      "gen_rbcluu2": 7,
+      "gen_ej41kyy": 3,
+      "gen_gzuu6xw": 25,
+      "jorge_silva": 1,
+      "gen_a5kjm01": 1,
+      "visjoin_136": 1,
+      "visjoin_143": 4,
+      "gen_a5auhqm": 4,
+      "gen_1mva4gy": 7,
+      "gen_cdd4zsr": 14,
+      "gen_7xtpwro": 7,
+      "elena_petrova": 8,
+      "caleb_jones": 2,
+      "hannah_kim": 2,
+      "onni_korhonen": 1,
+      "gen_arlw6n4": 2,
+      "katarina_novak": 1,
+      "gen_jnr6a0i": 7,
+      "gen_wjlqg8s": 29,
+      "gen_a48t86l": 290,
+      "gen_gx4dylf": 5,
+      "gen_0mqpuxn": 4,
+      "sanne_bakker": 4,
+      "vasyl_shevchenko": 4,
+      "adaeze_nwosu": 4,
+      "petra_novak": 2,
+      "visjoin_64": 4,
+      "gen_kmylxmc": 44,
+      "gen_sa2zv8o": 6,
+      "gen_ba8hbvl": 5,
+      "gen_y0ckmll": 4,
+      "boris_kowalski": 14,
+      "dmitri_sokolov": 3,
+      "rafael_torres": 3,
+      "david_kim": 1,
+      "app_mgpsphkk953": 1,
+      "app_mgpspiov347": 2,
+      "visjoin_96": 2,
+      "visjoin_113": 8,
+      "gen_s4xcwub": 9,
+      "wanjiru_kamau": 19,
+      "gen_za9x71h": 15,
+      "gen_2wht3xl": 239,
+      "gen_axqlmmf": 14,
+      "gen_izh87mp": 13,
+      "theo_lindqvist": 5,
+      "lucas_brown": 3,
+      "luis_fernandez": 3,
+      "gen_5jd2gs4": 32,
+      "gen_vcdfzu3": 5,
+      "gen_8f6htw3": 9,
+      "gen_t9u5l76": 10,
+      "valeria_quispe": 5,
+      "nino_kapanadze": 4,
+      "thabo_maseko": 3,
+      "fatima_hassan": 5
+    },
+    "offerDealCalls": 0,
+    "appealToGoalCalls": 0,
+    "neverAsked": {
+      "gen_o0ro3yz": 1,
+      "gen_vqizjf1": 1,
+      "app_mgpspirx400": 1,
+      "app_mgpspisd617": 1,
+      "visjoin_109": 1,
+      "gen_t9qek17": 1,
+      "ruby_callaghan": 1,
+      "gen_ifx2ga1": 1,
+      "gen_05bbxdt": 1,
+      "visjoin_69": 1,
+      "visjoin_85": 1,
+      "gen_syyh1h6": 1,
+      "gen_9c14xai": 1,
+      "gen_lmlbua2": 1,
+      "aria_thompson": 1
+    },
+    "taskLeadsHeld": {
+      "fish": 593,
+      "water": 534,
+      "cook": 366,
+      "deadfall": 396,
+      "forage": 315
+    },
+    "taskLeadDays": 2204,
+    "walkdownSeqs": 0,
+    "walkdownFallbackAccepts": 0,
+    "walkdownTopAccepts": 0,
+    "resolutionsByTask": {
+      "wood": {
+        "completed": 1691,
+        "redirected": 1962,
+        "skipped-early": 0,
+        "exception-thrown": 0,
+        "total": 3653
+      },
+      "water": {
+        "completed": 878,
+        "redirected": 302,
+        "skipped-early": 0,
+        "exception-thrown": 0,
+        "total": 1180
+      },
+      "stone": {
+        "completed": 1690,
+        "redirected": 1963,
+        "skipped-early": 0,
+        "exception-thrown": 0,
+        "total": 3653
+      },
+      "deadfall": {
+        "completed": 718,
+        "redirected": 0,
+        "skipped-early": 0,
+        "exception-thrown": 0,
+        "total": 718
+      },
+      "cook": {
+        "completed": 854,
+        "redirected": 0,
+        "skipped-early": 0,
+        "exception-thrown": 0,
+        "total": 854
+      },
+      "fish": {
+        "completed": 256,
+        "redirected": 0,
+        "skipped-early": 0,
+        "exception-thrown": 0,
+        "total": 256
+      },
+      "garden": {
+        "completed": 153,
+        "redirected": 0,
+        "skipped-early": 0,
+        "exception-thrown": 0,
+        "total": 153
+      },
+      "forage": {
+        "completed": 1,
+        "redirected": 0,
+        "skipped-early": 0,
+        "exception-thrown": 0,
+        "total": 1
+      }
+    },
+    "resolutionsByPath": {
+      "redirect-recursion": 4227,
+      "taskLead": 3709,
+      "assignment": 2532
+    },
+    "resolutionsByOutcome": {
+      "completed": 6241,
+      "redirected": 4227
+    },
+    "resolveCallOutcomes": {
+      "redirected": 1406,
+      "completed": 1126,
+      "sheltered-kept": 8746,
+      "dead-or-left": 4
+    },
+    "resolutionsPerVillager": {
+      "sofia_chen": 120,
+      "gen_eox4by6": 214,
+      "gen_zl6yrq6": 60,
+      "emma_larsen": 4,
+      "marcus_webb": 505,
+      "gen_b9v5e99": 5,
+      "aroha_ngata": 10,
+      "gen_yk9v83a": 11,
+      "zoltan_nagy": 5,
+      "zoe_adams": 39,
+      "pavel_dubinin": 11,
+      "app_mgpspirg599": 10,
+      "app_mgpspiox869": 67,
+      "gen_cdmdewv": 9,
+      "benoit_lambert": 3,
+      "aria_thompson": 1,
+      "gen_4hfo1oj": 128,
+      "carlos_diaz": 256,
+      "greta_hansen": 150,
+      "gen_dcq452y": 10,
+      "victor_lopez": 4,
+      "gen_au5rq09": 2,
+      "gen_td1rcon": 173,
+      "gen_d0pko4n": 1392,
+      "hassan_ali": 30,
+      "chloe_dubois": 14,
+      "omar_farouk": 6,
+      "app_mgpspirx400": 6,
+      "visjoin_87": 1,
+      "visjoin_92": 49,
+      "visjoin_105": 21,
+      "visjoin_124": 23,
+      "priya_nair": 24,
+      "gen_a5kjm01": 6,
+      "jesse_cortez": 148,
+      "gen_mwpuvmm": 227,
+      "thabo_maseko": 5,
+      "gen_ej41kyy": 7,
+      "gen_rbcluu2": 76,
+      "ruby_callaghan": 767,
+      "jorge_silva": 28,
+      "maya_singh": 1,
+      "visjoin_131": 38,
+      "visjoin_143": 6,
+      "gen_a5auhqm": 229,
+      "gen_arlw6n4": 196,
+      "katarina_novak": 4,
+      "onni_korhonen": 1,
+      "gen_1mva4gy": 91,
+      "gen_cdd4zsr": 1028,
+      "gen_7xtpwro": 9,
+      "elena_petrova": 8,
+      "hannah_kim": 1,
+      "caleb_jones": 20,
+      "rosa_mendez": 1246,
+      "gen_jnr6a0i": 191,
+      "raj_patel": 9,
+      "petra_novak": 2,
+      "sanne_bakker": 2,
+      "gen_gx4dylf": 26,
+      "gen_0mqpuxn": 60,
+      "gen_wjlqg8s": 132,
+      "vasyl_shevchenko": 54,
+      "visjoin_64": 4,
+      "visjoin_85": 12,
+      "visjoin_94": 50,
+      "visjoin_102": 23,
+      "visjoin_121": 15,
+      "visjoin_133": 11,
+      "gen_kmylxmc": 259,
+      "gen_jcpbh74": 123,
+      "lena_ruiz": 2,
+      "gen_sa2zv8o": 214,
+      "dmitri_sokolov": 4,
+      "gen_ba8hbvl": 1,
+      "gen_y0ckmll": 57,
+      "david_kim": 14,
+      "boris_kowalski": 93,
+      "app_mgpsphkk953": 5,
+      "app_mgpspiov347": 93,
+      "visjoin_88": 3,
+      "visjoin_96": 98,
+      "visjoin_101": 40,
+      "visjoin_111": 20,
+      "visjoin_113": 22,
+      "visjoin_123": 9,
+      "visjoin_139": 1,
+      "gen_za9x71h": 6,
+      "gen_s4xcwub": 364,
+      "theo_lindqvist": 6,
+      "lucas_brown": 15,
+      "luis_fernandez": 2,
+      "wanjiru_kamau": 37,
+      "gen_axqlmmf": 10,
+      "app_mgpsphk7659": 95,
+      "gen_2wht3xl": 1,
+      "nino_kapanadze": 71,
+      "gen_ii0oiaq": 74,
+      "fatima_hassan": 9,
+      "gen_5jd2gs4": 465,
+      "gen_vcdfzu3": 93,
+      "valeria_quispe": 2,
+      "gen_t9u5l76": 16,
+      "gen_8f6htw3": 24,
+      "ursula_weber": 24
+    },
+    "practiceRepsByTask": {
+      "wood": 1691,
+      "water": 878,
+      "stone": 1690,
+      "deadfall": 718,
+      "cook": 854,
+      "fish": 256,
+      "garden": 153,
+      "forage": 1
+    },
+    "practiceStepsMoved": {
+      "wood": 3,
+      "stone": 3,
+      "water": 1
+    },
+    "depositsByName": {
+      "Foraged food": 324441,
+      "System-replicated stew": 1200,
+      "Aid from Emberhold": 53059,
+      "Expedition haul": 438346,
+      "System-replicated (enthusiastic) meal": 900,
+      "Snared meat": 9676,
+      "Fish catch": 198695,
+      "Aid from Stonebridge": 33206,
+      "Trial feast": 1200,
+      "Expedition meat": 52460,
+      "Pit meat (Raccoon)": 545,
+      "Hummice": 75,
+      "Pit meat (White-tailed Deer)": 805
+    },
+    "dutyDepositKcal": 523136,
+    "totalDepositKcal": 1114608,
+    "unclassifiedDeposits": 0,
+    "unclassifiedAssign": 0,
+    "unclassifiedResolves": 0,
+    "huntsTotal": 0,
+    "huntsKills": 0,
+    "huntsKcal": 0,
+    "huntsBySpecies": {},
+    "hurtsTotal": 1161,
+    "hurtsOnDuty": 254,
+    "hurtsByCause": {
+      "monster": 816,
+      "disease": 92,
+      "contest": 98,
+      "experiment": 5,
+      "starvation": 79,
+      "sickness": 53,
+      "bad belly": 6,
+      "food poisoning (raw)": 2,
+      "radiation_sickness": 10
+    },
+    "hurtsOnDutyByCause": {
+      "monster": 142,
+      "disease": 60,
+      "contest": 22,
+      "starvation": 14,
+      "bad belly": 2,
+      "sickness": 7,
+      "experiment": 2,
+      "radiation_sickness": 5
+    },
+    "hurtsDied": 16,
+    "hurtsDiedOnDuty": 0,
+    "patrolsTotal": 0,
+    "patrolKills": 0,
+    "patrolHurts": 0,
+    "patrolDeaths": 0,
+    "medicHolderDays": 1064,
+    "medicHolders": {
+      "sofia_chen": 145,
+      "gen_4hfo1oj": 83,
+      "chloe_dubois": 32,
+      "gen_rbcluu2": 123,
+      "gen_a5kjm01": 20,
+      "victor_lopez": 2,
+      "gen_1mva4gy": 148,
+      "gen_0mqpuxn": 41,
+      "vasyl_shevchenko": 87,
+      "visjoin_133": 7,
+      "gen_sa2zv8o": 68,
+      "visjoin_96": 48,
+      "visjoin_113": 5,
+      "gen_s4xcwub": 17,
+      "boris_kowalski": 119,
+      "gen_t9u5l76": 11,
+      "fatima_hassan": 108
+    },
+    "medicTurnovers": 28,
+    "medicEligibleAvg": [
+      4.17,
+      3.5,
+      5.58,
+      3.12,
+      3.16,
+      3.51,
+      3.66,
+      2.03
+    ],
+    "medicCuresAbility": 108,
+    "medicCuresMedicine": 0,
+    "cureAttempts": 196,
+    "cureAttemptsCured": 108,
+    "curePatients": {
+      "gen_b9v5e99": 2,
+      "gen_zl6yrq6": 2,
+      "yara_haddad": 1,
+      "benoit_lambert": 5,
+      "gen_yk9v83a": 1,
+      "gen_eox4by6": 1,
+      "pavel_dubinin": 1,
+      "app_mgpspirg599": 1,
+      "zoe_adams": 1,
+      "aroha_ngata": 1,
+      "gen_td1rcon": 2,
+      "gen_dcq452y": 8,
+      "victor_lopez": 11,
+      "chloe_dubois": 8,
+      "greta_hansen": 2,
+      "hassan_ali": 3,
+      "thabo_maseko": 6,
+      "gen_ej41kyy": 1,
+      "gen_a5kjm01": 3,
+      "ruby_callaghan": 2,
+      "elena_petrova": 12,
+      "gen_cdd4zsr": 5,
+      "caleb_jones": 8,
+      "gen_7xtpwro": 2,
+      "katarina_novak": 11,
+      "petra_novak": 5,
+      "gen_gx4dylf": 8,
+      "rosa_mendez": 4,
+      "sanne_bakker": 2,
+      "visjoin_64": 3,
+      "visjoin_102": 2,
+      "visjoin_121": 2,
+      "boris_kowalski": 9,
+      "lena_ruiz": 5,
+      "gen_y0ckmll": 2,
+      "gen_kmylxmc": 1,
+      "sofia_chen": 1,
+      "visjoin_101": 4,
+      "visjoin_123": 1,
+      "visjoin_111": 1,
+      "visjoin_113": 1,
+      "visjoin_139": 1,
+      "gen_izh87mp": 1,
+      "gen_2wht3xl": 5,
+      "theo_lindqvist": 2,
+      "lucas_brown": 3,
+      "gen_s4xcwub": 3,
+      "luis_fernandez": 3,
+      "priya_nair": 2,
+      "app_mgpsphk7659": 3,
+      "gen_8f6htw3": 10,
+      "fatima_hassan": 1,
+      "valeria_quispe": 6,
+      "gen_vcdfzu3": 2,
+      "ursula_weber": 3
+    },
+    "medicVacantDays": 12,
+    "noMedicSickDays": 1,
+    "careTicks": 1116,
+    "teleTrapByType": {
+      "npc_trap": {
+        "n": 87,
+        "caught": 37,
+        "kcal": 9676
+      },
+      "npc_pit": {
+        "n": 2,
+        "caught": 0,
+        "kcal": 0
+      }
+    },
+    "deedsByDeed": {
+      "teaching": 627,
+      "foraging": 1080,
+      "discovery": 2867,
+      "crafting": 137,
+      "gardening": 522,
+      "cooking": 854,
+      "preserving": 230,
+      "fishing": 254
+    },
+    "deedsByWho": {
+      "gen_b9v5e99": 15,
+      "sofia_chen": 81,
+      "gen_zl6yrq6": 19,
+      "player": 686,
+      "yara_haddad": 1,
+      "benoit_lambert": 24,
+      "gen_eox4by6": 2,
+      "emma_larsen": 24,
+      "gen_cdmdewv": 3,
+      "aroha_ngata": 18,
+      "marcus_webb": 102,
+      "gen_yk9v83a": 12,
+      "zoe_adams": 53,
+      "zoltan_nagy": 4,
+      "pavel_dubinin": 12,
+      "app_mgpspirg599": 15,
+      "app_mgpspiox869": 24,
+      "aria_thompson": 6,
+      "gen_d0pko4n": 186,
+      "carlos_diaz": 187,
+      "hassan_ali": 45,
+      "gen_4hfo1oj": 44,
+      "chloe_dubois": 40,
+      "gen_dcq452y": 6,
+      "omar_farouk": 9,
+      "gen_td1rcon": 34,
+      "greta_hansen": 10,
+      "victor_lopez": 25,
+      "priya_nair": 33,
+      "app_mgpspirx400": 11,
+      "app_mgpspisd617": 2,
+      "visjoin_92": 37,
+      "visjoin_105": 7,
+      "visjoin_124": 24,
+      "jorge_silva": 251,
+      "gen_ej41kyy": 217,
+      "ruby_callaghan": 180,
+      "gen_rbcluu2": 57,
+      "jesse_cortez": 47,
+      "maya_singh": 266,
+      "gen_mwpuvmm": 98,
+      "thabo_maseko": 14,
+      "gen_a5kjm01": 10,
+      "gen_gzuu6xw": 23,
+      "visjoin_131": 32,
+      "visjoin_143": 7,
+      "hannah_kim": 75,
+      "elena_petrova": 27,
+      "gen_cdd4zsr": 463,
+      "katarina_novak": 177,
+      "gen_1mva4gy": 60,
+      "caleb_jones": 31,
+      "gen_a5auhqm": 6,
+      "onni_korhonen": 28,
+      "gen_7xtpwro": 222,
+      "gen_arlw6n4": 23,
+      "gen_jnr6a0i": 18,
+      "gen_wjlqg8s": 91,
+      "gen_0mqpuxn": 54,
+      "rosa_mendez": 196,
+      "raj_patel": 15,
+      "vasyl_shevchenko": 46,
+      "petra_novak": 13,
+      "adaeze_nwosu": 10,
+      "gen_gx4dylf": 28,
+      "gen_a48t86l": 18,
+      "sanne_bakker": 6,
+      "visjoin_64": 20,
+      "visjoin_85": 14,
+      "visjoin_94": 53,
+      "visjoin_102": 26,
+      "visjoin_121": 13,
+      "visjoin_133": 11,
+      "boris_kowalski": 89,
+      "gen_sa2zv8o": 38,
+      "gen_ba8hbvl": 15,
+      "gen_jcpbh74": 6,
+      "lena_ruiz": 21,
+      "rafael_torres": 4,
+      "david_kim": 20,
+      "gen_y0ckmll": 86,
+      "gen_kmylxmc": 13,
+      "dmitri_sokolov": 7,
+      "app_mgpsphkk953": 8,
+      "app_mgpspiov347": 90,
+      "visjoin_88": 1,
+      "visjoin_96": 100,
+      "visjoin_101": 34,
+      "visjoin_111": 24,
+      "visjoin_113": 27,
+      "visjoin_123": 11,
+      "visjoin_139": 5,
+      "gen_axqlmmf": 212,
+      "gen_s4xcwub": 204,
+      "gen_za9x71h": 112,
+      "wanjiru_kamau": 247,
+      "theo_lindqvist": 83,
+      "gen_izh87mp": 1,
+      "lucas_brown": 21,
+      "luis_fernandez": 17,
+      "gen_2wht3xl": 6,
+      "app_mgpsphk7659": 45,
+      "visjoin_117": 13,
+      "gen_5jd2gs4": 64,
+      "gen_vcdfzu3": 32,
+      "valeria_quispe": 18,
+      "gen_ii0oiaq": 24,
+      "gen_t9u5l76": 15,
+      "nino_kapanadze": 39,
+      "gen_8f6htw3": 36,
+      "fatima_hassan": 17,
+      "ursula_weber": 19
+    },
+    "objectivesByKind": {
+      "none": 378,
+      "WATER": 1859,
+      "idle": 1436,
+      "LEAVE": 660,
+      "VISIT": 1155,
+      "HAVEN_CHORE": 1404,
+      "EAT": 215,
+      "EXPLORE": 971,
+      "GUARD": 803,
+      "SEEK": 75,
+      "FORAGE": 412,
+      "HAUL": 70,
+      "HUNT": 93,
+      "TRAPS": 73
+    },
+    "dutyVsObjectiveWater": {
+      "duty": 878,
+      "objective": 1859
+    },
+    "woodSayTotal": 1859,
+    "stoneSayTotal": 390,
+    "sticksSayTotal": 265,
+    "fiberSayTotal": 108,
+    "waterSayLiters": 1422,
+    "scoutTilesSay": 0,
+    "deadfallHauls": 718,
+    "deadfallSticks": 1476,
+    "deadfallFiber": 341,
+    "waterHauls": 878,
+    "cisternRedirects": 1693,
+    "cisternOverflowL": 0,
+    "throttleRedirects": 2534,
+    "throttleExemptDepth": 0,
+    "preserveBatches": 510,
+    "preserveKcal": 489810,
+    "sickAssignedOutdoorDays": 0,
+    "hpUnder40AssignedDays": 73,
+    "instrumentErrors": 0,
+    "wall": {
+      "wins": 0,
+      "national": 0,
+      "table": 0,
+      "wave4": 8,
+      "wave5": 3,
+      "regional": 8,
+      "survivals": [
+        123,
+        132,
+        135,
+        140,
+        142,
+        150,
+        150,
+        150
+      ],
+      "deaths": 706,
+      "medianSurvival": 141,
+      "villageLost": 5
+    },
+    "dutyDepositShare": 0.469
+  },
+  "neutrality": {
+    "seeds": [
+      {
+        "seed": 190311,
+        "match": true,
+        "control": {
+          "days": 132,
+          "endPantryKcal": 21,
+          "deaths": 85
+        },
+        "neutral": {
+          "days": 132,
+          "endPantryKcal": 21,
+          "deaths": 85
+        }
+      },
+      {
+        "seed": 190312,
+        "match": true,
+        "control": {
+          "days": 135,
+          "endPantryKcal": 20,
+          "deaths": 77
+        },
+        "neutral": {
+          "days": 135,
+          "endPantryKcal": 20,
+          "deaths": 77
+        }
+      },
+      {
+        "seed": 190313,
+        "match": true,
+        "control": {
+          "days": 150,
+          "endPantryKcal": 20444,
+          "deaths": 118
+        },
+        "neutral": {
+          "days": 150,
+          "endPantryKcal": 20444,
+          "deaths": 118
+        }
+      },
+      {
+        "seed": 190314,
+        "match": true,
+        "control": {
+          "days": 150,
+          "endPantryKcal": 3200,
+          "deaths": 102
+        },
+        "neutral": {
+          "days": 150,
+          "endPantryKcal": 3200,
+          "deaths": 102
+        }
+      },
+      {
+        "seed": 190315,
+        "match": true,
+        "control": {
+          "days": 140,
+          "endPantryKcal": 0,
+          "deaths": 73
+        },
+        "neutral": {
+          "days": 140,
+          "endPantryKcal": 0,
+          "deaths": 73
+        }
+      },
+      {
+        "seed": 190316,
+        "match": true,
+        "control": {
+          "days": 150,
+          "endPantryKcal": 578,
+          "deaths": 82
+        },
+        "neutral": {
+          "days": 150,
+          "endPantryKcal": 578,
+          "deaths": 82
+        }
+      },
+      {
+        "seed": 190317,
+        "match": true,
+        "control": {
+          "days": 142,
+          "endPantryKcal": 0,
+          "deaths": 109
+        },
+        "neutral": {
+          "days": 142,
+          "endPantryKcal": 0,
+          "deaths": 109
+        }
+      },
+      {
+        "seed": 190318,
+        "match": true,
+        "control": {
+          "days": 123,
+          "endPantryKcal": 1108,
+          "deaths": 60
+        },
+        "neutral": {
+          "days": 123,
+          "endPantryKcal": 1108,
+          "deaths": 60
+        }
+      }
+    ],
+    "match": 8,
+    "total": 8
+  }
+}
