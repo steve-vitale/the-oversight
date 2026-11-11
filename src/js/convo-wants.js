@@ -13,6 +13,12 @@
 //   - convoPerformFavor(vid, favor) -> execute a checked canonical care or food deed
 //   - convoWantCloseLine(vid) -> goodbye beat for the resolution
 //   - convoFavorHash(vid, ctx) -> uint (per-instance variation key: stable person key + day + seq — never the ID string, which embeds Date.now())
+//   - convoFavorBlockPool() -> the 4-variant Haven-door block pool (shared by the hash and cycle picks)
+//   - convoFavorPartnerBlockPool() -> the 4-variant partner block pool (shared by the hash and cycle picks)
+//   - convoFavorAwayPool() -> the 4-variant away-line pool (shared by the hash and cycle picks)
+//   - convoFavorBlockLineCycle(vid) -> stateful rotation pick for display sites only (live sitting; never from a read-only path)
+//   - convoFavorPartnerBlockLineCycle(vid) -> stateful rotation pick for display sites only (live sitting; never from a read-only path)
+//   - convoFavorAwayLineCycle(vid) -> stateful rotation pick for display sites only (live sitting; never from a read-only path)
 //   - convoResolveWant(vid, how) -> plants seeds for unfinished business
 //   - convoPlantSeed(vid, seed) / convoCheckSeeds(vid)
 //   - convoQuestionTopic(qid) -> noun phrase for a bespoke question ("About <phrase> — <question>")
@@ -1701,32 +1707,72 @@
     // while out, find me when back". The partner pool is SHARED by the
     // water and forage delegated actions so a villager's two favour
     // kinds draw from the same four wordings.
-    convoFavorBlockLine(vid) {
-      const pool = [
+    // R130 (journey-deepening r130): the hash is verdict-unstable at
+    // panel size — r129's panel clustered 6/10 on one variant (60%,
+    // REPETITIVE) while r130's fresh panel spread 4/13 (31%, VARIED)
+    // on the same mechanism. Only a STATEFUL rotation guarantees
+    // spread, and the read-only contract blocks it INSIDE the action
+    // function — but the line is only ever SPOKEN at display sites
+    // inside a live sitting, where the convo ledger IS available. So
+    // the pools live here once (shared by the hash and cycle helpers),
+    // the hash helpers keep serving the read-only paths (journal,
+    // menuKey, perform-failure line), and the display sites rotate
+    // via the *Cycle helpers below, keyed off the stable reasonKey
+    // the action functions now return. Same four wordings, same truth.
+    convoFavorBlockPool() {
+      return [
         'Move next to them, on the same side of the Haven door, to help.',
         'Stand beside them first — same side of the Haven door — then help.',
         'You need to be right next to them, same side of the Haven door, to help.',
         'Get to their side of the Haven door and stand next to them — then you can help.',
       ];
-      return pool[this.convoFavorHash(vid, { day: (this.state.scholar || {}).day || 0, seq: 11 }) % pool.length];
     },
-    convoFavorPartnerBlockLine(vid) {
-      const pool = [
+    convoFavorPartnerBlockPool() {
+      return [
         'Move next to your partner, on the same side of the Haven door.',
         'Stand beside your partner first — same side of the Haven door — then help.',
         'You need to be right next to your partner, same side of the Haven door, to help.',
         "Get to your partner's side of the Haven door and stand next to them — then you can help.",
       ];
-      return pool[this.convoFavorHash(vid, { day: (this.state.scholar || {}).day || 0, seq: 22 }) % pool.length];
     },
-    convoFavorAwayLine(vid) {
-      const pool = [
+    convoFavorAwayPool() {
+      return [
         `"Wait — I'm away from Haven, out on the road. I can't promise a dawn meet while I'm out — find me when I'm back, and we'll set it then."`,
         `"I'm out on the road, away from Haven — no dawn meet while I'm out, I'm afraid. Catch me when I'm back and we'll set it then."`,
         `"Wait — I'm away from Haven right now, out on the road. I can't promise a dawn meet from out here — find me when I'm back and we'll set it then."`,
         `"Out on the road, away from Haven. A dawn meet's not something I can promise while I'm out — when I'm back, find me, and we'll set it then."`,
       ];
+    },
+    convoFavorBlockLine(vid) {
+      const pool = this.convoFavorBlockPool();
+      return pool[this.convoFavorHash(vid, { day: (this.state.scholar || {}).day || 0, seq: 11 }) % pool.length];
+    },
+    convoFavorPartnerBlockLine(vid) {
+      const pool = this.convoFavorPartnerBlockPool();
+      return pool[this.convoFavorHash(vid, { day: (this.state.scholar || {}).day || 0, seq: 22 }) % pool.length];
+    },
+    convoFavorAwayLine(vid) {
+      const pool = this.convoFavorAwayPool();
       return pool[this.convoFavorHash(vid, { day: (this.state.scholar || {}).day || 0, seq: 33 }) % pool.length];
+    },
+    // convoFavor*LineCycle: the STATEFUL pick, for display sites only
+    // (convo-dialogue favour/commit handlers — inside a live sitting).
+    // convoPickCycle cycles the pool without repeating until exhaustion
+    // (c.said persists across sittings), so four consecutive displays
+    // are four distinct wordings and a fifth re-serves the first — which
+    // is what lets the r21 reframe ("As I said — ...") fire on the
+    // repeat ask instead of the second. NEVER call from
+    // convoFavorAction or any read-only path: convoPickCycle writes the
+    // conv ledger, and the journal path calls the action function
+    // outside any sitting.
+    convoFavorBlockLineCycle(vid) {
+      return this.convoPickCycle(vid, 'favor:block', this.convoFavorBlockPool());
+    },
+    convoFavorPartnerBlockLineCycle(vid) {
+      return this.convoPickCycle(vid, 'favor:partnerblock', this.convoFavorPartnerBlockPool());
+    },
+    convoFavorAwayLineCycle(vid) {
+      return this.convoPickCycle(vid, 'favor:away', this.convoFavorAwayPool());
     },
 
     // convoForageSpot: the meeting place for a pantry-run favor, grounded in
@@ -1855,7 +1901,7 @@
       // away from Haven, no dawn meet promised while out.
       if ((favor.kind === 'forage_help' || favor.kind === 'water_haul' || favor.kind === 'stay_close') &&
           (this.state.village || {}).away?.[vid]) {
-        return { ok: false, away: true,
+        return { ok: false, away: true, reasonKey: 'favoraway',
           line: this.convoFavorAwayLine(vid) };
       }
       if (favor.kind === 'stay_close' && this.companyFavorCommitGate) {
@@ -1956,10 +2002,16 @@
       if (v.away?.[vid] && !_inConvo) return blocked('They are out on the road, miles from here. Find them when they are back.');
       const node = v.nodePos?.[vid] || { nx: v.px ?? 4, ny: v.py ?? 4 }, pos = v.positions?.[vid];
       const haven = this.map.px === (v.px ?? 4) && this.map.py === (v.py ?? 4);
+      // R130: reasonKey is a STABLE string naming which variant pool this
+      // block belongs to. It lets the display site (a live sitting, where
+      // the convo ledger is available) rotate the line via
+      // convoFavorBlockLineCycle without the read-only action function
+      // ever touching convo state. The journal path and the menuKey keep
+      // the canonical hash line; only the spoken line rotates.
       if ((v.away?.[vid] && !_inConvo) || node.nx !== this.map.px || node.ny !== this.map.py ||
           (haven && !!v.npcInside?.[vid] !== (s.insideHaven !== false)) || !pos ||
           ![pos.mx, pos.my, s.mx, s.my].every(Number.isFinite) ||
-          Math.max(Math.abs(pos.mx - s.mx), Math.abs(pos.my - s.my)) > 1) return blocked(this.convoFavorBlockLine(vid));
+          Math.max(Math.abs(pos.mx - s.mx), Math.abs(pos.my - s.my)) > 1) return { ...blocked(this.convoFavorBlockLine(vid)), reasonKey: 'favorblock' };
       if (favor.kind === 'food_share') {
         const meal = this.giveFoodOptions().find(o => o.id === 'meal' || o.amount === 'meal');
         if (!meal) return blocked('You need edible, unspoiled food in your pack. Food in the pantry must be collected first.');

@@ -92,7 +92,7 @@
    if(home&&node.nx===origin.x&&node.ny===origin.y&&(v.npcInside?.[vid]!==false)!==(s.insideHaven!==false))return block(v.npcInside?.[vid]!==false?'Your partner is inside the Haven hall. Go through the door to meet them.':'Your partner is on the Haven grounds. Step outside to meet them.');
    if(v.away?.[vid]||node.nx!==this.map.px||node.ny!==this.map.py||!pos||
     (home&&(v.npcInside?.[vid]!==false)!==(s.insideHaven!==false))||
-    ![pos.mx,pos.my,s.mx,s.my].every(Number.isFinite)||Math.max(Math.abs(pos.mx-s.mx),Math.abs(pos.my-s.my))>1)return block(this.convoFavorPartnerBlockLine(vid));
+    ![pos.mx,pos.my,s.mx,s.my].every(Number.isFinite)||Math.max(Math.abs(pos.mx-s.mx),Math.abs(pos.my-s.my))>1)return{...block(this.convoFavorPartnerBlockLine(vid)),reasonKey:'favorpartner'};
    if(!r){
     const p=v.promises?.[vid];
     if(!p||p.favorId!==f.id||p.kept)return block('Accept the creek request first. Meet at Haven at dawn on the following day.');
