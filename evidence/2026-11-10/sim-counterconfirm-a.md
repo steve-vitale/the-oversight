@@ -350,6 +350,15 @@ with no win / national / table movement either way. Table reach
   the after-panel saved 16 cases clean the same way. Panel
   compare decision review_required (see §15 section above);
   validity errors none.
+- Telemetry deviation check (body step 10): `telemetry-check.js`
+  REFUSED the corpus — all 32 per-seed rows carry top-level
+  anchorCommit, so they are sweep recorder rows, not runs, and
+  the tool compares recorder corpora with sweep-compare tables,
+  never against a run baseline. Not forced with
+  --allow-recorder-corpus and the scale-wall baseline was NOT
+  re-seeded from this corpus (that would corrupt a run baseline
+  with recorder rows). The balanced-panel compare above is the
+  §15 instrument for this arm; no LOUD lines exist to report.
 - The RAISER_SEAT +35 signal stays DEAD (NO-GO, reverted,
   revert-pinned in the proof). The counter-close does not
   rescue it and does not re-test it: the seat signal answers
