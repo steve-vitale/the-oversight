@@ -11,12 +11,22 @@
 // event is labeled by the doubt's real path (a theft doubt resolves via
 // confrontTheft even when the outer call is confrontDoubt).
 // This test runs the driver itself (SEED=43402, DAYCAP=13) into a temp
-// dir: seed 43402's first confrontation is the day-12 theft press in
-// sitting 14, and no other confrontation fires before day 13, so the
-// output must hold exactly one confrontEvent — the theft confession,
+// dir: seed 43402's first confrontation is the day-9 doubt press in
+// sitting 10, and no other confrontation fires before day 13, so the
+// output must hold exactly one confrontEvent — the doubt confession,
 // once. (The guard proof itself lives in
 // test-journey-social-r172-confessguard.js; this test proves the
 // instrument that counts doubles does not invent them.)
+// RE-PIN (journey-social r180, 2026-11-11): the r172 pin was the
+// day-12 theft press in sitting 14. On the reconciled base (Cursor
+// dawn scorer landed) the scenario moved: seed 43402's first
+// confrontation is now a day-9 doubt confession (sitting 10), and NO
+// theft confrontation fires on seeds 43401–43404 within 30 days
+// (probed 2026-11-11: 0 confrontTheft events in 4×30d). The theft
+// press no longer exists to pin on this base — the theft-label path
+// (a theft doubt resolving via confrontTheft) is panel-watched by
+// the r180 panel instead. The one-event-per-press property this test
+// proves is unchanged; only the pinned scenario moved.
 // RED/FAILURE MODE: the unfixed wrap records two events for the one
 // press (confrontTheft + confrontDoubt, both 'confessed'), so the
 // length assertion fails. If the driver ever stops reaching the day-12
@@ -42,11 +52,11 @@ const T = K.reporter('R172 confront-wrap records one event per press (driver)');
     const ev = JSON.parse(fs.readFileSync(outFile, 'utf8'));
     const confronts = ev.confrontEvents || [];
     console.log('  confrontEvents: ' + JSON.stringify(confronts));
-    T.ok('wrap (1) exactly one event is recorded for the day-12 theft press',
+    T.ok('wrap (1) exactly one event is recorded for the day-9 doubt press',
       confronts.length === 1, 'count=' + confronts.length);
     const e0 = confronts[0] || {};
-    T.ok('wrap (2) the single event is the theft confession, labeled by its real path',
-      e0.method === 'confrontTheft' && e0.outcome === 'confessed',
+    T.ok('wrap (2) the single event is the doubt confession, labeled by its real path',
+      e0.method === 'confrontDoubt' && e0.outcome === 'confessed',
       'event=' + JSON.stringify(e0));
     const bySitting = {};
     for (const e of confronts) {

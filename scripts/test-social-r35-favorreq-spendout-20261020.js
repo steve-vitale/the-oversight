@@ -33,12 +33,33 @@ async function main() {
   let fails = 0;
   const fail = (m) => { console.log('FAIL: ' + m); fails++; };
 
+  // ADJACENCY (journey-social r180, 2026-11-11): the r130 favour-block
+  // rotation (landed via the Nov 11 reconcile) rotates the partner-block
+  // line through four wordings, so a non-adjacent scholar never sees a
+  // stable raw line and the escalation never accumulates — the test's
+  // premise broke (press 5 served "As I said" on the rotated first
+  // wording, press 6 a wind-down line, spent never written). Place the
+  // scholar adjacent to the villager (same tile, node, door side) so the
+  // food requirement is the blocker and the raw line is stable across
+  // presses, as the test intends. Test-only fixture change; the engine
+  // behavior under test is unchanged.
+  const s0 = Game.state.scholar, v0 = Game.state.village;
+  s0.mx = 4; s0.my = 4; s0.insideHaven = false;
+  v0.px = 4; v0.py = 4; Game.map.px = 4; Game.map.py = 4;
+  v0.nodePos = v0.nodePos || {}; v0.nodePos[vid] = { nx: 4, ny: 4 };
+  v0.positions = v0.positions || {}; v0.positions[vid] = { mx: 4, my: 4 };
+  v0.npcInside = v0.npcInside || {}; v0.npcInside[vid] = false;
+  v0.away = v0.away || {}; delete v0.away[vid];
   Game.startConvo(vid);
   const c = Game.convoGet(vid);
   // Staged blocked favor: food_share, asked, empty player pack -> the
   // deterministic "You need edible, unspoiled food in your pack..." blocker.
+  // (r180: giveFoodOptions reads scholar.inventory, not pack — clear both,
+  // or the action reads ready and the raw line is the ready-reason instead
+  // of the blocker. Either line is stable and the reframe logic is the
+  // same, but the blocker is the wild case this test pins.)
   c.want = { id: 'ask_favor', stage: 2, favor: { id: 'f-req', vid, kind: 'food_share', state: 'asked' } };
-  try { Game.state.scholar.pack = []; } catch (e) {}
+  try { Game.state.scholar.pack = []; Game.state.scholar.inventory = []; } catch (e) {}
 
   const lines = [];
   for (let i = 0; i < 6; i++) {
@@ -59,7 +80,10 @@ async function main() {
 
   // Spend-out: the turn that re-serves the escalation writes the ledger — the
   // menu (pre-existing spent filter, r31-proven) drops the choice next turn.
-  // The 6th firing still voices the escalation; the 7th can never be offered.
+  // (r180: the 6th firing now voices the honest exit instead of the
+  // escalation repeat — see test-journey-social-r180-favorreq-exit.js;
+  // the spend still fires on the same press, so the 7th can never be
+  // offered. This test does not pin the 6th line's wording.)
   const spent = (Game.convoGet(vid).spent || {})['dlg:favor_requirements'];
   console.log('spent[dlg:favor_requirements] after escalation re-serve:', !!spent);
   if (!spent) fail('escalation re-serve did not spend dlg:favor_requirements (menu will keep parroting)');

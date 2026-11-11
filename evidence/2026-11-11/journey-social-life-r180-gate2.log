@@ -1,0 +1,164 @@
+check.js: 340 scripts, 4 parallel (quick)
+.......................................................................................................................F......F...F......F..........F..F..F..F..F..............F......................................F............F...............................................................................F................................
+
+  FAIL scripts/godpath/test-living-garden-deed-attainment.js (exit null, 120.1s)
+      seed 7...
+      seed 42...
+      seed 99...
+      seed 1234...
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-measurement-proof-update.js (exit 1, 7.8s)
+      Error: Proof source inputs are not current
+          at Object.validate (/home/hatch/workspace/worktrees/journey2-social/scripts/balance-proof-update.js:8:76)
+          at Object.<anonymous> (/home/hatch/workspace/worktrees/journey2-social/scripts/godpath/test-measurement-proof-update.js:4:40)
+          at Module._compile (node:internal/modules/cjs/loader:1929:14)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47
+      
+      Node.js v24.22.1
+
+  FAIL scripts/godpath/test-measurement-workflow.js (exit 1, 7.4s)
+      ok   metric IDs are unique and every contract declares units, direction and tolerance
+        ok   sampling and confirmation settings remain valid
+        ok   retained real panel matches its proof digest
+        FAIL retained neutrality proof covers the current Game/controller/harness inputs
+        ok   proof declares every collector and contract input rather than silently omitting one
+        ok   collector and contract have a current proof (see SIMULATING.md: Maintaining measurement)
+        ok   every retained real observation emits exactly the contracted metrics, with explicit unknowns
+        ok   all retained policy cohorts have passing sampled observer neutrality and stable sources
+        ok   retained NPC proof has eligible actor/day evidence and a reproducible class denominator
+      
+      measurement-workflow: 8 passed, 1 failed, 0 todo (phase 0)
+      failing: retained neutrality proof covers the current Game/controller/harness inputs
+
+  FAIL scripts/godpath/test-measurement-cache-flags.js (exit 1, 70.9s)
+      FAIL both actual CLI configurations complete valid neutral panels
+        ok   two flags create four independent observer-on/off cache entries
+        ok   cache identities retain each actual SIMOPT value
+        ok   repeating the same setting reuses its two verified cases
+      
+      measurement cache flag isolation: 3 passed, 1 failed, 0 todo (phase 0)
+      failing: both actual CLI configurations complete valid neutral panels
+
+  FAIL scripts/godpath/test-phone-frame-proof.js (exit 1, 5.2s)
+      ok   both actual target phone sizes are retained
+        FAIL every retained browser input matches current source — index.html,src/data/foreignSpeech.json,src/data/statusEffects.json,src/data/table-endings.json,src/js/alienPlayers.js,src/js/app.js,src/js/
+        FAIL all current boot inputs are covered
+        ok   receipt identity declares portable text normalization
+        ok   retained receipt hash 736
+        FAIL current phone evidence is required; follow MOBILE-PLAYTEST.md — Phone receipt source is stale or missing: index.html
+      
+      Phone frame proof: 3 passed, 3 failed, 0 todo (phase 0)
+      failing: every retained browser input matches current source | all current boot inputs are covered | current phone evidence is required; follow MOBILE-PLAYTEST.md
+
+  FAIL scripts/godpath/test-occupation-panels.js (exit null, 120.1s)
+      ok   real CLI retains one actual campaign and both absent offers
+        ok   played bearer retains the actual non-first occupation card
+        ok   campaign neutrality and deterministic exclusions are separate
+        ok   excluded jobs contain no synthetic loss, usage or exposure
+        ok   unchanged settings reuse only their six exact on/off cases
+        ok   changed shared cohort observer invalidates every cached case
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-prepared-runner-custody.js (exit 1, 0.8s)
+      Error: EPERM: operation not permitted, write
+          at Object.writeFileSync (node:fs:2482:20)
+          at write (/home/hatch/workspace/worktrees/journey2-social/scripts/godpath/test-prepared-runner-custody.js:8:89)
+          at exercise (/home/hatch/workspace/worktrees/journey2-social/scripts/godpath/test-prepared-runner-custody.js:9:346)
+          at /home/hatch/workspace/worktrees/journey2-social/scripts/godpath/test-prepared-runner-custody.js:21:21
+          at Object.<anonymous> (/home/hatch/workspace/worktrees/journey2-social/scripts/godpath/test-prepared-runner-custody.js:27:3)
+          at Module._compile (node:internal/modules/cjs/loader:1929:14)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+
+  FAIL scripts/godpath/test-proof-text-identity.js (exit 1, 1.1s)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47 {
+        errno: -1,
+        code: 'EPERM',
+        syscall: 'write'
+      }
+      
+      Node.js v24.22.1
+
+  FAIL scripts/godpath/test-one-person-army-deed-attainment.js (exit null, 120.1s)
+      seed 7...
+      seed 42...
+      seed 99...
+      seed 1234...
+      seed 555...
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-telemetry-check-recorder.js (exit 1, 0.6s)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47 {
+        errno: -1,
+        code: 'EPERM',
+        syscall: 'write'
+      }
+      
+      Node.js v24.22.1
+
+  FAIL scripts/test-foodpower-20261014.js (exit 1, 6.3s)
+      (a) ability kcal costs
+      (b) useAbility burns kcal, narrates
+      (c) hunger gate
+      (d) overcharge
+      (e) village food tiers gate villager casts
+      (f) ability buttons show costs + overcharge
+      (g) ontology validator
+        FAIL: ontology green Validating 138 system files (src/js + src/js/engine)...
+      
+      
+      
+      29 passed, 1 failed
+
+  FAIL scripts/test-sw-audio-cache-20261012.js (exit 1, 2.4s)
+          'PASS offline script ./src/js/presentation.js?v=7094baefb-20261111-174345\n' +
+          'PASS offline script ./src/js/sprites.js?v=7094baefb-20261111-174345\n' +
+          'PASS offline script ./src/js/tile-scenes.js?v=7094baefb-20261111-174345\n' +
+          'PASS offline script ./src/js/regional-audio.js?v=7094baefb-20261111-174345\n' +
+          'PASS offline script ./src/'... 3947 more characters,
+        stderr: "Error: EPERM: operation not permitted, copyfile '/home/hatch/workspace/worktrees/journey2-social/sw.js' -> '/tmp/oversight-offline-0eSLwD/sw.js'\n" +
+          '    at Object.copyFileSync (node:fs:3210:11)\n' +
+          '    at /home/hatch/workspace/worktrees/journey2-social/scripts/test-offline-assets.js:40:81\n' +
+          '    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n'
+      }
+      
+      Node.js v24.22.1
+
+  FAIL scripts/test-capable-bot-20261014.js (exit null, 120.2s)
+        ok   earned food deed persists through combat settlement
+        ok   combat spends devotion only on actual use
+        ok   food chain has no policy errors
+        ok   online reactor refuses the otherwise armed grant honestly
+        ok   reactor refusal invents neither feast buff nor food deed
+      
+      short sims: 2 seeds x 40 days
+        ok   seed 42: qualified observed feast plans receive an actual host attempt
+        ok   seed 42: host attempts return a real feast or explicit refusal
+        INFO original campaign seed=42 foodDeeds=true grants=[{"day":13,"granted":true},{"day":20,"granted":true},{"day":30,"granted":true}]
+      
+      [check.js] TIMEOUT after 120s
+
+  slowest: scripts/test-capable-bot-20261014.js 120s, scripts/godpath/test-living-garden-deed-attainment.js 120s, scripts/godpath/test-one-person-army-deed-attainment.js 120s
+
+check.js: 327 passed, 13 failed in 1108s

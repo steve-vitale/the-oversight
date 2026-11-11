@@ -225,22 +225,33 @@
             // the escalation is itself re-served, the choice leaves the menu
             // for this sitting. Keyed on the raw line so a state change (new
             // rawReq — e.g. they moved next to you) re-arms honestly.
+            // r180: the spend-out fired one press late — the press that
+            // re-served the escalation still voiced the byte-identical
+            // "three times" line (Devon 43601 d40/d45: presses 5-6
+            // identical). Same shape as the recap spend-out: a real person
+            // stops answering, they don't find a fourth synonym — the
+            // re-serve press voices the honest exit instead of the repeat.
+            let favorReqSpentOut = false;
             if (c._favorReqReframes > 3) {
               if (c._favorReqLastRaw === rawReq) c._favorReqEscalations = (c._favorReqEscalations || 0) + 1;
               else { c._favorReqLastRaw = rawReq; c._favorReqEscalations = 1; }
               if (c._favorReqEscalations >= 2) {
                 try { this.convoSpendChoice(vid, 'dlg:favor_requirements'); } catch (e) {}
                 c._favorReqEscalations = 0;
+                line = `We're going in circles — ${rawReq} Ask me something else if you want.`;
+                favorReqSpentOut = true;
               }
             }
-            const reframes = [
-              `As I said — ${rawReq}`,
-              `Like I said — ${rawReq}`,
-              `Still the same thing — ${rawReq}`,
-            ];
-            line = c._favorReqReframes <= 3
-              ? reframes[(c._favorReqReframes - 1) % reframes.length]
-              : `I've told you three times now — ${rawReq}`;
+            if (!favorReqSpentOut) {
+              const reframes = [
+                `As I said — ${rawReq}`,
+                `Like I said — ${rawReq}`,
+                `Still the same thing — ${rawReq}`,
+              ];
+              line = c._favorReqReframes <= 3
+                ? reframes[(c._favorReqReframes - 1) % reframes.length]
+                : `I've told you three times now — ${rawReq}`;
+            }
           }
           c._favorReqSaid[rawReq] = true;
         }
