@@ -1,0 +1,34 @@
+PASS engage: wounded villager set up — vid=gen_kjgo7gy
+PASS engage: need is heal_help — need=heal_help
+PASS convo opened — refused=false
+PASS want is ask_favor — want=ask_favor
+PASS opener states the ask (not dry) — "I can't reach this properly. Will you help me clean it?"
+PASS engage: want def has engageBeat
+PASS engage: beat is NOT a dry line — "I still need help with this wound."
+PASS engage: beat is NOT any blocked whyLine — "I still need help with this wound."
+PASS engage: beat names the need (wound/cut) — "I still need help with this wound."
+PASS details1: wounded villager set up — vid=gen_vl85ywg
+PASS details1: need is heal_help — need=heal_help
+PASS details1: convo opened — refused=false
+PASS details1: want still stage 0 at open — stage=0 want=ask_favor
+PASS details1: dlg:more offered — choices=dlg:more,dlg:react,teach,dlg:subject,leave,silence
+PASS details1: stage is 2 after more, thread want (thread-beat path) — stage=2 thread=want
+PASS details1: more surfaces the ask (not dry) — "I can't reach this properly. Will you help me clean it?"
+PASS details1: dlg:details offered — choices=dlg:commit,dlg:favor_requirements,dlg:details,dlg:cant,dlg:subject,leave,silence
+PASS details1: reply is NOT a dry line — "I still need help with this wound."
+PASS details1: reply names the need (wound/cut) — "I still need help with this wound."
+PASS details1: want still live (not evaporated) — stage=2
+PASS control: wounded villager set up — vid=gen_hqs9lfh
+PASS control: need is heal_help — need=heal_help
+PASS convo opened — refused=false
+PASS want is ask_favor — want=ask_favor
+PASS opener states the ask (not dry) — "I can't reach this properly. Will you help me clean it?"
+PASS control: engageBeat returns the whyLine itself — "Every day it's angrier. I need it cleaned before it turns — I can't work a wound like this. Wrap it tight when you're d
+PASS control: details reply is the why (not dry) — "Every day it's angrier. I need it cleaned before it turns — I can't work a wound like this. Wrap it tight when you're d
+PASS ledger: wounded villager set up — vid=gen_h784tce
+PASS ledger: need is heal_help — need=heal_help
+PASS ledger: convo opened — refused=false
+PASS ledger: first speak lands (no fellBack)
+PASS ledger: second speak dry-replaces (fellBack)
+
+ALL GREEN

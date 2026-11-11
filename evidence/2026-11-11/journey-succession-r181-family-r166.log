@@ -1,0 +1,25 @@
+PASS engage-allblocked: wounded villager set up — vid=gen_8qfhkzo
+PASS engage-allblocked: need is heal_help — need=heal_help
+PASS convo opened — refused=false
+PASS want is ask_favor — want=ask_favor
+PASS opener states the ask (not dry) — "I can't reach this properly. Will you help me clean it?"
+PASS engage-allblocked: beat is null (exhaustion — callers fall back gracefully)
+PASS engage-allblocked: beat is NOT the blocked whyLine
+PASS details-allblocked: wounded villager set up — vid=gen_9alijdf
+PASS details-allblocked: need is heal_help — need=heal_help
+PASS details-allblocked: convo opened — refused=false
+PASS details-allblocked: dlg:more offered — choices=dlg:more,dlg:react,teach,dlg:subject,leave,silence
+PASS details-allblocked: favor built after more — favor=true
+PASS details-allblocked: need variants computed — "I still need help with this wound." | "I still need a hand with this wound." | "This wound isn't going away — I need he
+PASS details-allblocked: dlg:details offered — choices=dlg:favor_requirements,dlg:commit,dlg:details,dlg:cant,dlg:subject,leave,silence
+PASS details-allblocked: reply is NOT a dry line — "I don't have the words for all of it. But thank you for asking."
+PASS details-allblocked: reply is the graceful line — "I don't have the words for all of it. But thank you for asking."
+PASS details-allblocked: want still live (not evaporated) — stage=2
+PASS control: wounded villager set up — vid=gen_2ir3rk1
+PASS control: need is heal_help — need=heal_help
+PASS convo opened — refused=false
+PASS want is ask_favor — want=ask_favor
+PASS opener states the ask (not dry) — "I can't reach this properly. Will you help me clean it?"
+PASS control: engageBeat returns the whyLine itself — "Every day it's angrier. I need it cleaned before it turns — I can't work a wound like this. Wrap it tight when you're d
+
+ALL GREEN

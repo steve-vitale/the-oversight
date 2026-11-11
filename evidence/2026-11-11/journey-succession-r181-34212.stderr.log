@@ -1,0 +1,39 @@
+
+ORGANIC DEATH d14: Jamal -> Theo, topTrust=[{"id":"Carolina","t":70},{"id":"Abdulaziz","t":50},{"id":"Tyrone","t":47},{"id":"Theo","t":46}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=12 inheritedPlants=0 keptSkills=5 inheritedSkills=0 succTrustPre=90 succTrustPost=46
+PARITY readable=true equal=true inherited=[] pre=["beast_calm"] post=["beast_calm"]
+DEATH d14 (organic (phase A)): Jamal -> Theo | passed=true lin=true mo=true trust=46 vouchers=1
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Carolina (refused=false)
+  CONVO d+3 with Abdulaziz (refused=false)
+  STRANGER-PROBE d+3 with Owen (trust=31 refused=false)
+  BOND-CONVO d+3 with Tyrone (depth=2 v=66 refused=false)
+  CONVO d+7 with Tyrone (refused=false)
+  CONVO d+7 with Carolina (refused=false)
+  CONVO d+14 with Tyrone (refused=false)
+  CONVO d+14 with Abdulaziz (refused=false)
+  CONVO d+30 with Tyrone (refused=false)
+  CONVO d+30 with Abdulaziz (refused=false)
+  CONVO d+45 with Abdulaziz (refused=false)
+  CONVO d+45 with Tyrone (refused=false)
+  CONVO d+53 with Abdulaziz (refused=false)
+  CONVO d+53 with Tyrone (refused=false)
+  CONVO d+64 with Abdulaziz (refused=false)
+  CONVO d+64 with Tyrone (refused=false)
+
+FUNERAL: deathBeat=3 recover=1 vouch=1 (eligible=1) echo=4 organicBurial={"respects":false,"bury":false} halfRation=2
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":86,"offerLines":47,"codexPlantsDelta":36,"codexSkillsDelta":21,"codexAbilitiesDelta":13,"xpDelta":156,"any":true} pantry 23769->48141
+TRUST-DIALS: office 46->35 (-11, fall) | villageMean 35.7->88.8 (+53.1, climb) | ge60 1->9 | movers>=5: [{"id":"Sigrun","from":18,"to":90,"delta":72},{"id":"Victor","from":24,"to":90,"delta":66},{"id":"Nikos","from":29,"to":90,"delta":61},{"id":"Owen","from":31,"to":90,"delta":59},{"id":"Sanne","from":22,"to":78,"delta":56},{"id":"Sam","from":42,"to":90,"delta":48},{"id":"Tyrone","from":47,"to":90,"delta":43},{"id":"Abdulaziz","from":50,"to":91,"delta":41},{"id":"Carolina","from":70,"to":90,"delta":20}]
+DEED-LEDGER: calls=27 summary={"teachPlant":{"calls":19,"ok":19,"deltaSum":0,"deltaN":19,"positive":0,"meanDelta":0},"giveFood":{"calls":8,"ok":8,"deltaSum":6,"deltaN":8,"positive":5,"meanDelta":0.75}}
+
+IDENTITY TRIPS: raw=1 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=4 (convo=4, say=0)) m4=true m5=manual | endDay=84 alive=10 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=27) trustVerdict={"readable":true,"officeMantle":46,"officeLast":35,"officeDelta":-11,"officeClass":"fall","villageMantle":35.7,"villageLast":88.8,"villageDelta":53.1,"villageClass":"climb","villageGe60Mantle":1,"villageGe60Last":9,"movers":[{"id":"Sigrun","from":18,"to":90,"delta":72},{"id":"Victor","from":24,"to":90,"delta":66},{"id":"Nikos","from":29,"to":90,"delta":61},{"id":"Owen","from":31,"to":90,"delta":59},{"id":"Sanne","from":22,"to":78,"delta":56},{"id":"Sam","from":42,"to":90,"delta":48},{"id":"Tyrone","from":47,"to":90,"delta":43},{"id":"Abdulaziz","from":50,"to":91,"delta":41},{"id":"Carolina","from":70,"to":90,"delta":20}]}
+E6/CALLCHECK: e6={"callMoves":2,"withCensus":2,"chainHandoffs":0,"trustMoves":2} callCheck={"dailyMoveDays":2,"callMoveDays":2,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=5 (v2=5, excludedLoot=0))
+E7/R47: e7={"trustMoves":2,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":1,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":0,"both":2,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":4,"v2":5,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":0,"known":0,"unknown":0} e3={"dailyDays":71,"moves":2}

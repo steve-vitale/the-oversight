@@ -1,0 +1,39 @@
+PASS trade-blocked: knowledge trader found — vid=gen_2ir3rk1
+PASS trade-blocked: convo opened — refused=false
+PASS trade-blocked: no dry line at open — "Okay, hear me out — Hey — I found some Dandelion today. You were right, it was right where you said."
+PASS trade-blocked: seed NOT spoken — "Okay, hear me out — Hey — I found some Dandelion today. You were right, it was right where you said."
+PASS trade-blocked: traderMentioned stays false — traderMentioned=false
+PASS trade-control: knowledge trader found — vid=owen_smith
+PASS trade-control: convo opened — refused=false
+PASS trade-control: seed spoken — "...Sorry — Hey — I found some Dandelion today. You were right, it was right where you said." | "...I should say, I trade in what I know. My knowledge for yours. Or food, if you're short on secrets."
+PASS trade-control: traderMentioned true — traderMentioned=true
+PASS trade-control: no dry line at open — "...Sorry — Hey — I found some Dandelion today. You were right, it was right where you said." | "...I should say, I trade in what I know. My knowledge for yours. Or food, if you're short on secrets."
+PASS bond-blocked: villager found — vid=gen_90ya5j6
+PASS bond-blocked: staged line built — "Can I ask you something? ... I want us to stick together. Properly. Watch each 
+PASS bond-blocked: sitting 1 opened — refused=false
+PASS bond-blocked: sitting 1 speaks the staged line — Grace: "Can I ask you something? ... I want us to stick together. Properly. Watch each other's backs."
+PASS bond-blocked: sitting 2 opened — refused=false
+PASS bond-blocked: no dry line at open — "Hey — I found some Dandelion today. You were right, it was right where you said."
+PASS bond-blocked: staged line NOT spoken — "Hey — I found some Dandelion today. You were right, it was right where you said."
+PASS bond-blocked: pending stays staged — pending=true
+PASS bond-blocked: request was delivered in sitting 1 — delivered=true
+PASS link-blocked: villager found — vid=gen_8xjgbe2
+PASS link-blocked: staged line built — "We should link with Stonebridge. I know them. We'd be stronger together."
+PASS link-blocked: sitting 1 opened — refused=false
+PASS link-blocked: sitting 1 speaks the staged line — Sarah: "We should link with Stonebridge. I know them. We'd be stronger together."
+PASS link-blocked: sitting 2 opened — refused=false
+PASS link-blocked: no dry line at open — "Mm. Hey — I found some Dandelion today. You were right, it was right where you said."
+PASS link-blocked: staged line NOT spoken — "Mm. Hey — I found some Dandelion today. You were right, it was right where you said."
+PASS link-blocked: pending stays staged — pending=true
+PASS link-blocked: request was delivered in sitting 1 — delivered=true
+PASS beats-control: two villagers found — found=2
+PASS beats-control: bond line built — "Hey. I want to ask it plain: will you be my bonded friend? I'll watch your back
+PASS beats-control: link line built — "We should link with Stonebridge. I know them. We'd be stronger together."
+PASS beats-control: bond convo opened — refused=false
+PASS beats-control: bond line spoken (as opener) — Michael: "Hey. I want to ask it plain: will you be my bonded friend? I'll watch your back if you watch mine."
+PASS beats-control: bond open has no dry line — Michael: "Hey. I want to ask it plain: will you be my bonded friend? I'll watch your back if you watch mine."
+PASS beats-control: link convo opened — refused=false
+PASS beats-control: link line spoken (opener or beat) — Enrique: "We should link with Stonebridge. I know them. We'd be stronger together."
+PASS beats-control: link open has no dry line — Enrique: "We should link with Stonebridge. I know them. We'd be stronger together."
+
+ALL GREEN

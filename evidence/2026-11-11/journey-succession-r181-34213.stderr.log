@@ -1,0 +1,41 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Rosa","t":92},{"id":"June","t":91},{"id":"Eric","t":90},{"id":"Maeve","t":90}], roster=11
+INH readable=true scripted=true deadItems=16 distinct=15 transferred=4 vanished=1 keptPlants=15 inheritedPlants=7 keptSkills=5 inheritedSkills=16 succTrustPre=88 succTrustPost=83
+PARITY readable=true equal=true inherited=[] pre=["green_whisper","echo_location"] post=["green_whisper","echo_location"]
+DEATH d41 (the expedition, scripted): Jae -> Sam | passed=true lin=true mo=true trust=83 vouchers=9
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=4 vanished=1 of 15 distinct dead-bearer items
+  CONVO d+3 with Aurora (refused=false)
+  CONVO d+3 with Ethan (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  BOND-CONVO d+3 with Eric (depth=2 v=62 refused=false)
+  CONVO d+7 with Aurora (refused=false)
+  CONVO d+7 with June (refused=false)
+  CONVO d+14 with Aurora (refused=false)
+  CONVO d+14 with Rosa (refused=false)
+  BOND-CONVO d+14 with Eric (depth=2 v=62 refused=false)
+  CONVO d+30 with Aurora (refused=false)
+  CONVO d+30 with Eric (refused=false)
+  CONVO d+45 with Ethan (refused=false)
+  CONVO d+45 with Desmond (refused=false)
+  CONVO d+53 with Eric (refused=false)
+  CONVO d+53 with Desmond (refused=false)
+  CONVO d+64 with Ethan (refused=false)
+  CONVO d+64 with Desmond (refused=false)
+
+FUNERAL: deathBeat=5 recover=1 vouch=1 (eligible=9) echo=2 organicBurial={"respects":false,"bury":false} halfRation=7
+
+MEAL-GATE: audited=70 violations=0 noMealDays=2 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=69 signals={"levelUp":true,"systemVoice":62,"offerLines":69,"codexPlantsDelta":47,"codexSkillsDelta":18,"codexAbilitiesDelta":13,"xpDelta":59,"any":true} pantry 113559->57889
+TRUST-DIALS: office 83->96 (+13, climb) | villageMean 87.2->94.3 (+7.1, climb) | ge60 9->7 | movers>=5: [{"id":"Desmond","from":69,"to":100,"delta":31},{"id":"Ivy","from":64,"to":92,"delta":28},{"id":"Rosa","from":92,"to":100,"delta":8},{"id":"Ethan","from":100,"to":94,"delta":-6}]
+DEED-LEDGER: calls=177 summary={"giveFood":{"calls":33,"ok":33,"deltaSum":34,"deltaN":33,"positive":22,"meanDelta":1.03},"teachPlant":{"calls":17,"ok":17,"deltaSum":0,"deltaN":17,"positive":0,"meanDelta":0},"donateToPantry":{"calls":127,"ok":127,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=2 (convo=2, say=0)) m4=true m5=manual | endDay=110 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=69
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+69) t2=true(deedCalls=177) trustVerdict={"readable":true,"officeMantle":83,"officeLast":96,"officeDelta":13,"officeClass":"climb","villageMantle":87.2,"villageLast":94.3,"villageDelta":7.1,"villageClass":"climb","villageGe60Mantle":9,"villageGe60Last":7,"movers":[{"id":"Desmond","from":69,"to":100,"delta":31},{"id":"Ivy","from":64,"to":92,"delta":28},{"id":"Rosa","from":92,"to":100,"delta":8},{"id":"Ethan","from":100,"to":94,"delta":-6}]}
+E6/CALLCHECK: e6={"callMoves":18,"withCensus":18,"chainHandoffs":2,"trustMoves":16} callCheck={"dailyMoveDays":18,"callMoveDays":15,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=3 (v2=3, excludedLoot=0))
+E7/R47: e7={"trustMoves":16,"soloOffice":10,"soloOfficeDeltas":[1,1,1,1,1,1,2,2,2,2],"soloBearerDeltaExact":[1,1,1,1,1,1,2,2,2,2],"singleMoverBearer":1,"singleMoverOther":3,"eventClass":{"event-only":0,"deed-only":6,"both":10,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":2,"v2":3,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":2,"known":2,"unknown":0} e3={"dailyDays":71,"moves":18}
