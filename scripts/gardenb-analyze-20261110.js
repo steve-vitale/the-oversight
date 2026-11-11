@@ -286,16 +286,30 @@ function main() {
     if (ok) neut.matched++;
     else neut.mismatches.push({ seed: c.seed, control: { days: c.days, endPantryKcal: c.endPantryKcal, deaths: (c.deaths || []).length }, neutral: { days: n.days, endPantryKcal: n.endPantryKcal, deaths: (n.deaths || []).length } });
   }
-  // Wrap-liveness across the pilot.
+  // Wrap-liveness across the pilot. MY wraps come from wrapLive; the
+  // reused captures' wraps are NOT in wrapLive (they keep their own
+  // counters), so their liveness is judged from the event evidence:
+  // gardenEvents (assignTask/resolveOneAssignment/villagerSowPlot/
+  // setGardenKeeper/gardenKeeperTurn/say) and inflows (the three doors).
   const wrapLive = {};
   for (const c of control) for (const k of Object.keys(c.wrapLive || {})) wrapLive[k] = true;
-  const ALL_WRAPS = ['gardenHarvestTaken', 'harvestGarden', 'tendGarden', 'makePlot', 'sowPlot',
+  const MY_WRAPS = ['gardenHarvestTaken', 'harvestGarden', 'tendGarden', 'makePlot', 'sowPlot',
     'cultivateGarden', 'reclaimGarden', 'gardenMaintain', 'teachPlant', 'cookFood', 'shellNuts',
-    'eatOne', 'eat', 'tele', 'pantryDraw', 'noteDeed', 'creditDeed',
-    // reused captures' wraps (garden-capture + inflow-capture):
-    'assignTask', 'gardenKeeperTurn', 'resolveOneAssignment', 'villagerSowPlot',
-    'setGardenKeeper', 'stockPantry', 'depositPantryPieces', 'pantryAdd', 'say'];
-  const wrapDead = ALL_WRAPS.filter(function (w) { return !wrapLive[w]; });
+    'eatOne', 'eat', 'tele', 'pantryDraw', 'noteDeed', 'creditDeed'];
+  const wrapDeadMine = MY_WRAPS.filter(function (w) { return !wrapLive[w]; });
+  const captureLive = {
+    assignTask: control.some(function (c) { return ((c.gardenEvents || {}).assigns || []).length > 0; }),
+    gardenKeeperTurn: control.some(function (c) { return ((c.gardenEvents || {}).keeperTurns || []).length > 0; }),
+    resolveOneAssignment: control.some(function (c) { return ((c.gardenEvents || {}).resolutions || []).length > 0; }),
+    villagerSowPlot: control.some(function (c) { return ((c.gardenEvents || {}).npcSows || []).length > 0; }),
+    setGardenKeeper: control.some(function (c) { return ((c.gardenEvents || {}).keeperSets || []).length > 0; }),
+    stockPantry: control.some(function (c) { return (c.inflows || []).some(function (r) { return r.door === 'stock'; }); }),
+    depositPantryPieces: control.some(function (c) { return (c.inflows || []).some(function (r) { return r.door === 'deposit'; }); }),
+    pantryAdd: control.some(function (c) { return (c.inflows || []).some(function (r) { return r.door === 'pantryAdd'; }); }),
+    say: control.some(function (c) { return (((c.gardenEvents || {}).sayLines || []).length > 0) || (c.gardenSays || []).length > 0; }),
+  };
+  const wrapDeadCapture = Object.keys(captureLive).filter(function (w) { return !captureLive[w]; });
+  const wrapDead = wrapDeadMine.concat(wrapDeadCapture);
   const go = {
     noOtherHarvests: pooled.harvestOtherTotal === 0,
     zeroInstrumentErrors: pooled.instrumentErrorsTotal === 0,
@@ -308,7 +322,8 @@ function main() {
     seeds: control.map(function (c) { return c.seed; }),
     neutralSeeds: neutral.map(function (n) { return n.seed; }),
     perSeed: per, pooled: pooled,
-    neutrality: neut, wrapLive: wrapLive, wrapDead: wrapDead,
+    neutrality: neut, wrapLive: wrapLive, captureLive: captureLive,
+    wrapDead: wrapDead, wrapDeadMine: wrapDeadMine, wrapDeadCapture: wrapDeadCapture,
     go: go,
   };
   fs.writeFileSync(OUT, JSON.stringify(summary, null, 2) + '\n');

@@ -247,6 +247,19 @@ async function liveFixtures() {
     const drec = t.draws[t.draws.length - 1];
     ok(drec && drec.cook === false && drec.taken === (dr && dr.taken) && drec.taken === 500 && drec.gardenKcal === 200,
       'C14 pantryDraw wrap garden kcal', drec);
+    // C14b: cookFood + shellNuts wraps record garden-prep calls (engine
+    // may refuse without a fire / shellable nut — the wrap records the
+    // attempt, like cookfirst C10).
+    sch.inventory.push({ foodKind: 'plant', foodState: 'ready', kcalEach: 100, units: 1,
+      name: 'Garden greens', plantId: shoot.id, gardenShares: { ordinary: 1 }, needsCooking: true });
+    Game.cookFood(sch.inventory.length - 1);
+    const prec = t.preps.filter(function (r) { return r.method === 'cookFood'; }).pop();
+    ok(prec && prec.pid === shoot.id, 'C14b cookFood wrap records garden prep', prec);
+    sch.inventory.push({ foodKind: 'nut', foodState: 'in_shell', kcalEach: 100, units: 1,
+      name: 'Garden nuts', plantId: shoot.id, gardenShares: { ordinary: 1 } });
+    Game.shellNuts(sch.inventory.length - 1);
+    const srec = t.preps.filter(function (r) { return r.method === 'shellNuts'; }).pop();
+    ok(srec && srec.pid === shoot.id, 'C14c shellNuts wrap records garden prep', srec);
     // C15: snapshot runs and reads plot/stock shapes.
     const snap = gi.snapshot();
     ok(snap && snap.plots && typeof snap.pantryGarden === 'object' && typeof snap.packGarden === 'object'
@@ -254,7 +267,7 @@ async function liveFixtures() {
       'C15 daily snapshot shape', Object.keys(snap || {}));
     ok(t.instrumentErrors.length === 0, 'C16 zero instrument errors in fixtures', t.instrumentErrors);
     ok(t.wrapLive.gardenHarvestTaken && t.wrapLive.sowPlot && t.wrapLive.teachPlant
-      && t.wrapLive.eatOne && t.wrapLive.pantryDraw,
+      && t.wrapLive.eatOne && t.wrapLive.pantryDraw && t.wrapLive.cookFood && t.wrapLive.shellNuts,
       'C17 wraps live', t.wrapLive);
   } finally {
     gi.uninstall();
