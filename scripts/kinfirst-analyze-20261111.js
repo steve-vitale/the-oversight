@@ -69,6 +69,11 @@ function outcomePlayerDeath(ev) {
 }
 
 // ---- births: snapshot diffs over otherVillages + home roster ----
+// A birth is ONLY a baby matching the birth-code signature
+// (game.js simVillageDay): born unnamed (unnamed true) with a birthDay.
+// Distant-village rosters ALSO contain pre-existing worldgen children
+// (age 1–4, named, no birthDay, parents []) — those are NOT births and
+// must not be counted (false-positive class caught in analysis).
 function detectBirths(seedObj) {
   const daily = seedObj.daily || [];
   const seen = {}; // key villageId + baby id -> {village, birthDay, parents}
@@ -87,18 +92,18 @@ function detectBirths(seedObj) {
     villages.forEach(function (vg) {
       vg.babies.forEach(function (b) {
         const key = vg.id + '|' + b.id;
-        if (!seen[key]) {
+        // Birth signature only: unnamed at first sight AND a birthDay.
+        if (!seen[key] && b.unnamed && b.birthDay != null) {
           seen[key] = true;
           births.push({ villageId: vg.id, villageName: vg.name, babyId: b.id,
             birthDay: b.birthDay, parents: (b.parents || []).slice(),
             firstSeenDay: snap.day, unnamedAtBirth: !!b.unnamed });
         }
-        seenAlive[key] = !!b.alive;
+        if (seen[key]) seenAlive[key] = !!b.alive;
       });
     });
   });
-  // baby deaths: a birth seen alive earlier, later absent-or-dead in a snapshot
-  // (approximate: a baby id that stops appearing alive in later snapshots)
+  // baby deaths: a TRUE birth seen alive earlier, dead at the end.
   const lastSnap = daily[daily.length - 1];
   if (lastSnap) {
     const aliveNow = {};
@@ -256,10 +261,16 @@ function analyzeSeed(s) {
   r.mantleRecon = { deaths: (s.playerDeathEvents || []).length,
     mantles: (s.mantleEvents || []).length, tele: (s.teleEvents || []).length,
     mismatch: Math.abs((s.playerDeathEvents || []).length - (s.mantleEvents || []).length) };
-  // keepsakes buried: sum sentBefore - sentAfter over playerDeaths
+  // keepsakes buried: the dead bearer's sentimental count at death
+  // (sentBefore — the predecessor's keepsakes leave the scholar inventory
+  // at death; the successor arrives with their own). The NET change
+  // (sentBefore - sentAfter) understates burials when the successor
+  // brings keepsakes, so it is reported separately.
   r.keepsakesBuried = 0;
+  r.keepsakesBuriedNet = 0;
   (s.playerDeathEvents || []).forEach(function (e) {
-    if (e.sentBefore != null && e.sentAfter != null && e.sentBefore > e.sentAfter) r.keepsakesBuried += (e.sentBefore - e.sentAfter);
+    if (e.sentBefore != null) r.keepsakesBuried += e.sentBefore;
+    if (e.sentBefore != null && e.sentAfter != null && e.sentBefore > e.sentAfter) r.keepsakesBuriedNet += (e.sentBefore - e.sentAfter);
   });
   // end-state keepsakes + thread clues + taken kin
   const lastSnap = (s.daily || [])[(s.daily || []).length - 1] || null;
