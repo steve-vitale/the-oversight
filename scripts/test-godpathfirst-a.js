@@ -177,6 +177,54 @@ function abilityDef(Game, id) {
     };
     return AN.reconcilePicks(o).residue === 0;
   })());
+  check('reconcilePicks: villager decision.pick shape resolves', (function () {
+    const o = {
+      pickEvents: [],
+      villagerPickEvents: [{ vid: 'v1', day: 12, decision: { pick: 'blood_magic', score: 7 } }],
+      daily: [
+        { day: 11, player: { abilities: [] }, villagers: { v1: { abilities: [] } } },
+        { day: 12, player: { abilities: [] }, villagers: { v1: { abilities: ['blood_magic'] } } },
+      ],
+    };
+    return AN.reconcilePicks(o).residue === 0;
+  })());
+  check('reconcilePicks: object-form scholar abilities resolve', (function () {
+    const o = {
+      pickEvents: [{ who: 'player', id: 'rage', day: 10 }],
+      villagerPickEvents: [],
+      daily: [
+        { day: 9, bearer: 'b1', player: { abilities: [] }, villagers: {} },
+        { day: 10, bearer: 'b1', player: { abilities: [{ id: 'rage', name: 'Rage' }] }, villagers: {} },
+      ],
+    };
+    return AN.reconcilePicks(o).residue === 0;
+  })());
+  check('reconcileRecognitions: mantle copy is one appearance (Amendment 1)', (function () {
+    const o = {
+      teleEvents: [{ type: 'class_recognized', day: 23, data: { who: 'v1', path: 'forager', subclass: 'gardener', day: 23 } }],
+      daily: [
+        { day: 23, bearer: 'b0', player: { class: null }, villagers: { v1: { class: { path: 'forager', subclass: 'gardener', since: 23, god: 'living_garden' } } } },
+        { day: 48, bearer: 'v1', player: { class: { path: 'forager', subclass: 'gardener', since: 23, god: 'living_garden' } }, villagers: { v1: { class: { path: 'forager', subclass: 'gardener', since: 23, god: 'living_garden' } } } },
+      ],
+    };
+    const r = AN.reconcileRecognitions(o);
+    return r.residue === 0 && r.snapCount === 1 && r.teleCount === 1;
+  })());
+  check('reconcileAscensions: mantle copy is one ascension (Amendment 1)', (function () {
+    const o = {
+      ascensionEvents: [{ kind: 'checkVillagerGodhood', who: 'v1', fresh: ['living_garden'], day: 80 }],
+      ceremonyEvents: [{ who: 'v1', god: 'living_garden', day: 80 }],
+      daily: [
+        { day: 79, bearer: 'b0', player: { godhood: {} }, villagers: { v1: { godhood: {} } } },
+        { day: 80, bearer: 'b0', player: { godhood: {} }, villagers: { v1: { godhood: { recognized: { living_garden: 80 }, active: ['living_garden'], capstoneGifted: { living_garden: true } } } } },
+        { day: 85, bearer: 'v1', player: { godhood: { recognized: { living_garden: 80 }, active: ['living_garden'], capstoneGifted: { living_garden: true } } }, villagers: { v1: { godhood: { recognized: { living_garden: 80 }, active: ['living_garden'], capstoneGifted: { living_garden: true } } } } },
+      ],
+      capstoneGiftEvents: [{ who: 'v1', newlyGifted: ['living_garden'], day: 80 }],
+    };
+    const ra = AN.reconcileAscensions(o);
+    const rg = AN.reconcileGifts(o);
+    return ra.residue === 0 && ra.activeCount === 1 && rg.residue === 0 && rg.snapCount === 1;
+  })());
   check('analyzeSeed: band-shape summary present', (function () {
     const o = {
       seed: 1, mode: 'control', days: 150, gameDays: 150, endReason: 'days', won: false,

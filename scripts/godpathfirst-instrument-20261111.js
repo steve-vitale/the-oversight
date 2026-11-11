@@ -75,6 +75,17 @@ function stackText(skip) {
   try { return (new Error().stack || '').split('\n').slice(skip || 0).join(' | '); } catch (e) { return ''; }
 }
 function clone(o) { try { return JSON.parse(JSON.stringify(o || {})); } catch (e) { return {}; } }
+function idOf(x) {
+  if (typeof x === 'string') return x;
+  if (x && typeof x === 'object' && typeof x.id === 'string') return x.id;
+  return null;
+}
+function idList(xs) {
+  return (xs || []).map(idOf).filter(function (id) { return !!id; });
+}
+function classOrNull(rec) {
+  return (rec && rec.path) ? clone(rec) : null;
+}
 function pantryKcal(Game) {
   try {
     return ((Game.state.village || {}).pantry || [])
@@ -453,7 +464,7 @@ function install(Game) {
     // Scholar (player).
     try {
       const s = Game.state.scholar || {};
-      const abilities = (s.abilities || []).slice();
+      const abilities = idList(s.abilities);
       snap.player = {
         abilities: abilities,
         paths: abilities.map(function (id) { const p = abilityPath(Game, id); return p.path; }),
@@ -461,14 +472,14 @@ function install(Game) {
         levelUpQueue: ((s.levelUpQueue || []).length),
         abilityChoices: ((s.abilityChoices || []).map(function (c) { return (c && c.id) || c || null; })),
         trackStats: clone(s.trackStats || {}),
-        synergies: (s.activeSynergies || []).slice(),
+        synergies: idList(s.activeSynergies),
         godhood: clone(s.godhood || {}),
         class: null, mythic: null, bargaining: null,
         deedStatus: {}, closeness: {},
         capstoneItems: ((s.inventory || []).filter(function (it) { return it && capItems[it.itemId]; })
           .map(function (it) { return it.itemId; })),
       };
-      try { snap.player.class = (typeof Game.godpathClass === 'function') ? clone(Game.godpathClass('player') || null) : null; } catch (e) {}
+      try { snap.player.class = (typeof Game.godpathClass === 'function') ? classOrNull(Game.godpathClass('player')) : null; } catch (e) {}
       try { snap.player.mythic = (S.Godhood && typeof S.Godhood.playerMythicId === 'function') ? (S.Godhood.playerMythicId(s) || null) : null; } catch (e) {}
       try { snap.player.bargaining = (S.Godhood && typeof S.Godhood.godhoodBargaining === 'function') ? (S.Godhood.godhoodBargaining(s) || 0) : null; } catch (e) {}
       const day = snap.day;
@@ -498,16 +509,16 @@ function install(Game) {
       snap.villagers = {};
       roster.forEach(function (vid) {
         try {
-          const abs = ((v.npcAbilities || {})[vid] || []).slice();
+          const abs = idList((v.npcAbilities || {})[vid]);
           const rec = {
             abilities: abs,
             paths: abs.map(function (id) { const p = abilityPath(Game, id); return p.path; }),
-            synergies: ((v.npcSynergies || {})[vid] || []).slice(),
+            synergies: idList((v.npcSynergies || {})[vid]),
             godhood: clone(((v.npcGodhood || {})[vid]) || {}),
             class: null, mythic: null, deedStatus: {}, closeness: {},
             capstoneItems: [],
           };
-          try { rec.class = (typeof Game.godpathClass === 'function') ? clone(Game.godpathClass(vid) || null) : null; } catch (e) {}
+          try { rec.class = (typeof Game.godpathClass === 'function') ? classOrNull(Game.godpathClass(vid)) : null; } catch (e) {}
           try {
             if (S.Godhood && typeof S.Godhood.villagerMythicId === 'function') {
               rec.mythic = S.Godhood.villagerMythicId(Game, vid) || null;

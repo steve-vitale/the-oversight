@@ -2,6 +2,17 @@
 // (arm sim-godpathfirst-a, run fleshout-20261111T1115Z). Pure: reads
 // per-seed JSON only, never loads the game.
 //
+// PERSON-KEYING (Amendment 1, pre-evidence): the scholar is an OFFICE —
+// snap.bearer is the living villager holding it and changes on every
+// mantle. All reconcilers key appearances by PERSON (an event's
+// 'player' maps to the bearer on that day), so a mantle copy of the
+// same person's class/godhood/gift is one appearance, not two. Without
+// this the pilot's first pass showed 14 recognition residue and 4
+// ascension residue that were all mantle double-counts (same person,
+// same class/god, counted once as a villager and once as the scholar).
+// The correction changes attribution, not the metric: every recognition
+// / ascension must still be attributed exactly once.
+//
 // Classifiers (each returns 'ok' or 'unclassified'):
 //   classifySheetEvent / classifyRecognitionEvent / classifyDeedEvent /
 //   classifyAscensionEvent / classifyVerbUseEvent / classifyPickEvent
@@ -54,6 +65,43 @@ const BOOK_DEED_EVENTS = {
 };
 
 function inc(map, k, n) { map[k] = (map[k] || 0) + (n == null ? 1 : n); }
+
+// Ability ids arrive as strings (npcAbilities) or full ability objects
+// (scholar.abilities) — normalize everywhere a holder's abilities are read.
+function idOf(x) {
+  if (typeof x === 'string') return x;
+  if (x && typeof x === 'object' && typeof x.id === 'string') return x.id;
+  return null;
+}
+
+// The scholar is an OFFICE, not a person: snap.bearer is the living
+// villager holding it, and it changes whenever the bearer dies (mantle).
+// A class / godhood / gift that appears for the 'player' IS the current
+// bearer's — keying appearances by 'player' double-counts the same
+// person (once as a villager, once as the scholar). personOf maps an
+// event's 'player' to the bearer on that day (nearest snapshot at or
+// before the day); snapshot rows use their own snap.bearer.
+function bearerByDay(o) {
+  const map = {};
+  (o.daily || []).forEach(function (snap) {
+    if (snap && snap.bearer) map[snap.day] = snap.bearer;
+  });
+  return map;
+}
+function personOf(o, who, day) {
+  if (who !== 'player') return String(who);
+  const map = bearerByDay(o);
+  if (map[day]) return map[day];
+  let best = null, bestDay = -1;
+  Object.keys(map).forEach(function (d) {
+    const dd = +d;
+    if (dd <= day && dd > bestDay) { bestDay = dd; best = map[d]; }
+  });
+  return best || 'player';
+}
+function classOfSnap(cl) {
+  return (cl && cl.path) ? cl : null;
+}
 
 function classifySheetEvent(ev) {
   if (!ev || ev.who == null || !ev.track || ev.level == null) return 'unclassified';
@@ -112,37 +160,39 @@ function classifyPickEvent(ev) {
 // ---- snapshot trajectory helpers ----
 
 function holderKey(who) { return who === 'player' ? 'player' : String(who); }
-
-// Class appearances: [{who, path, subclass, day}] — first day the snapshot
-// shows a class for a holder, plus re-appearances after a lapse/change.
+// Class appearances: [{person, path, subclass, day}] — first day the
+// snapshot shows a class for a PERSON (bearer-keyed: a mantle copy of
+// the same person's class is not a new appearance), plus re-appearances
+// after a lapse/change. Records without a path (the engine stores {}
+// for a bearer with no class) are not classes.
 function classAppearances(o) {
   const out = [];
-  const seen = {}; // holder -> last class key
+  const seen = {}; // person -> last class key
   (o.daily || []).forEach(function (snap) {
     if (!snap) return;
     const holders = [];
-    if (snap.player) holders.push(['player', snap.player.class]);
+    if (snap.player) holders.push([snap.bearer || 'player', classOfSnap(snap.player.class)]);
     Object.keys(snap.villagers || {}).forEach(function (vid) {
-      holders.push([vid, snap.villagers[vid].class]);
+      holders.push([vid, classOfSnap(snap.villagers[vid].class)]);
     });
     holders.forEach(function (pair) {
       const who = pair[0], cl = pair[1];
       const key = cl && !cl.lapsed && cl.path ? (cl.path + '/' + cl.subclass) : null;
-      const prev = seen[holderKey(who)];
+      const prev = seen[who];
       if (key && key !== prev) {
         out.push({ who: who, path: cl.path, subclass: cl.subclass, god: cl.god || null, day: snap.day });
       }
-      seen[holderKey(who)] = key;
+      seen[who] = key;
     });
   });
   return out;
 }
 
-// Godhood active appearances: [{who, god, day}] — first day a god appears
-// in the holder's godhood.active list (or recognized map).
+// Godhood active appearances: [{person, god, day}] — first day a god
+// appears in the PERSON's godhood.active list (or recognized map).
 function activeAppearances(o) {
   const out = [];
-  const seen = {}; // holder -> set of gods already active
+  const seen = {}; // person -> set of gods already active
   function activeSet(store) {
     const s = {};
     (store && store.active || []).forEach(function (g) { s[g] = 1; });
@@ -152,42 +202,42 @@ function activeAppearances(o) {
   (o.daily || []).forEach(function (snap) {
     if (!snap) return;
     const holders = [];
-    if (snap.player) holders.push(['player', snap.player.godhood]);
+    if (snap.player) holders.push([snap.bearer || 'player', snap.player.godhood]);
     Object.keys(snap.villagers || {}).forEach(function (vid) {
       holders.push([vid, snap.villagers[vid].godhood]);
     });
     holders.forEach(function (pair) {
       const who = pair[0];
       const set = activeSet(pair[1]);
-      const prev = seen[holderKey(who)] || {};
+      const prev = seen[who] || {};
       Object.keys(set).forEach(function (g) {
         if (!prev[g]) out.push({ who: who, god: g, day: snap.day });
       });
-      seen[holderKey(who)] = set;
+      seen[who] = set;
     });
   });
   return out;
 }
 
-// Capstone-gift appearances from the capstoneGifted store.
+// Capstone-gift appearances from the capstoneGifted store (person-keyed).
 function giftAppearances(o) {
   const out = [];
   const seen = {};
   (o.daily || []).forEach(function (snap) {
     if (!snap) return;
     const holders = [];
-    if (snap.player) holders.push(['player', snap.player.godhood]);
+    if (snap.player) holders.push([snap.bearer || 'player', snap.player.godhood]);
     Object.keys(snap.villagers || {}).forEach(function (vid) {
       holders.push([vid, snap.villagers[vid].godhood]);
     });
     holders.forEach(function (pair) {
       const who = pair[0];
       const gifted = (pair[1] && pair[1].capstoneGifted) || {};
-      const prev = seen[holderKey(who)] || {};
+      const prev = seen[who] || {};
       Object.keys(gifted).forEach(function (g) {
         if (gifted[g] && !prev[g]) out.push({ who: who, god: g, day: snap.day });
       });
-      seen[holderKey(who)] = gifted;
+      seen[who] = gifted;
     });
   });
   return out;
@@ -234,10 +284,10 @@ function matchWithin(a, b, dayTol, keyFn) {
 
 function reconcileRecognitions(o) {
   const teleRecs = (o.teleEvents || []).filter(function (e) { return e.type === 'class_recognized'; })
-    .map(function (e) { return { who: (e.data || {}).who, path: (e.data || {}).path, subclass: (e.data || {}).subclass, day: e.day }; });
+    .map(function (e) { return { who: personOf(o, (e.data || {}).who, e.day), path: (e.data || {}).path, subclass: (e.data || {}).subclass, day: e.day }; });
   const snaps = classAppearances(o);
   const keyFn = function (a, b) {
-    return holderKey(a.who) === holderKey(b.who) && a.path === b.path && a.subclass === b.subclass;
+    return a.who === b.who && a.path === b.path && a.subclass === b.subclass;
   };
   const m = matchWithin(teleRecs, snaps, 1, keyFn);
   return { teleCount: teleRecs.length, snapCount: snaps.length,
@@ -249,12 +299,12 @@ function reconcileAscensions(o) {
   const fresh = [];
   (o.ascensionEvents || []).forEach(function (ev) {
     if ((ev.kind === 'checkGodhood' || ev.kind === 'checkVillagerGodhood') && Array.isArray(ev.fresh)) {
-      ev.fresh.forEach(function (g) { fresh.push({ who: ev.who, god: g, day: ev.day }); });
+      ev.fresh.forEach(function (g) { fresh.push({ who: personOf(o, ev.who, ev.day), god: g, day: ev.day }); });
     }
   });
-  const ceremonies = (o.ceremonyEvents || []).map(function (e) { return { who: e.who, god: e.god, day: e.day }; });
+  const ceremonies = (o.ceremonyEvents || []).map(function (e) { return { who: personOf(o, e.who, e.day), god: e.god, day: e.day }; });
   const actives = activeAppearances(o);
-  const keyFn = function (a, b) { return holderKey(a.who) === holderKey(b.who) && a.god === b.god; };
+  const keyFn = function (a, b) { return a.who === b.who && a.god === b.god; };
   const m1 = matchWithin(fresh, ceremonies, 1, keyFn);
   const m2 = matchWithin(fresh, actives, 1, keyFn);
   return { freshCount: fresh.length, ceremonyCount: ceremonies.length, activeCount: actives.length,
@@ -266,10 +316,10 @@ function reconcileAscensions(o) {
 function reconcileGifts(o) {
   const gifted = [];
   (o.capstoneGiftEvents || []).forEach(function (ev) {
-    (ev.newlyGifted || []).forEach(function (g) { gifted.push({ who: ev.who, god: g, day: ev.day }); });
+    (ev.newlyGifted || []).forEach(function (g) { gifted.push({ who: personOf(o, ev.who, ev.day), god: g, day: ev.day }); });
   });
   const snaps = giftAppearances(o);
-  const keyFn = function (a, b) { return holderKey(a.who) === holderKey(b.who) && a.god === b.god; };
+  const keyFn = function (a, b) { return a.who === b.who && a.god === b.god; };
   // Gift precedes the ceremony/check in code and the snapshot is daily:
   // allow the snapshot appearance up to 1 day AFTER the gift event.
   const usedB = {};
@@ -318,11 +368,11 @@ function reconcileVerbs(o) {
 
 function reconcileDeeds(o) {
   const teleDeeds = (o.teleEvents || []).filter(function (e) { return e.type === 'godpath_deed'; })
-    .map(function (e) { return { who: (e.data || {}).who, event: (e.data || {}).event, day: e.day }; });
+    .map(function (e) { return { who: personOf(o, (e.data || {}).who, e.day), event: (e.data || {}).event, day: e.day }; });
   const book = deedBookEntries(o);
   const bookOnly = book.filter(function (b) { return BOOK_DEED_EVENTS[b.event]; });
   const teleBook = teleDeeds.filter(function (d) { return BOOK_DEED_EVENTS[d.event]; });
-  const keyFn = function (a, b) { return holderKey(a.who) === holderKey(b.who) && a.event === b.event; };
+  const keyFn = function (a, b) { return a.who === b.who && a.event === b.event; };
   const m = matchWithin(teleBook, bookOnly, 1, keyFn);
   // relay_office: holder-based — reconcile tele relay_office events
   // against snapshot switchboard holder days (holderId == who, day >= appointedDay).
@@ -340,22 +390,25 @@ function reconcileDeeds(o) {
     residue: m.aResidue + m.bResidue + relayUnmatched };
 }
 
-// Ability diffs per holder: [{who, id, day}] — first day an ability appears.
+// Ability diffs per PERSON: [{person, id, day}] — first day an ability
+// appears in the person's snapshot abilities (scholar abilities arrive
+// as full objects; npcAbilities as id strings — both normalized).
 function abilityAppearances(o) {
   const out = [];
   const seen = {};
   function scan(who, ids, day) {
-    const prev = seen[holderKey(who)] || {};
-    (ids || []).forEach(function (id) {
-      if (!prev[id]) out.push({ who: who, id: id, day: day });
+    const prev = seen[who] || {};
+    (ids || []).forEach(function (x) {
+      const id = idOf(x);
+      if (id && !prev[id]) out.push({ who: who, id: id, day: day });
     });
     const next = {};
-    (ids || []).forEach(function (id) { next[id] = 1; });
-    seen[holderKey(who)] = next;
+    (ids || []).forEach(function (x) { const id = idOf(x); if (id) next[id] = 1; });
+    seen[who] = next;
   }
   (o.daily || []).forEach(function (snap) {
     if (!snap) return;
-    if (snap.player) scan('player', snap.player.abilities, snap.day);
+    if (snap.player) scan(snap.bearer || 'player', snap.player.abilities, snap.day);
     Object.keys(snap.villagers || {}).forEach(function (vid) {
       scan(vid, snap.villagers[vid].abilities, snap.day);
     });
@@ -367,20 +420,20 @@ function reconcilePicks(o) {
   const apps = abilityAppearances(o);
   function findApp(who, id, day) {
     return apps.some(function (a) {
-      return holderKey(a.who) === holderKey(who) && a.id === id &&
+      return a.who === who && a.id === id &&
         a.day - day >= 0 && a.day - day <= 1;
     });
   }
   let playerPicks = 0, playerResidue = 0;
   (o.pickEvents || []).forEach(function (p) {
     playerPicks++;
-    if (!findApp('player', p.id, p.day)) playerResidue++;
+    if (!findApp(personOf(o, 'player', p.day), p.id, p.day)) playerResidue++;
   });
   let villagerPicks = 0, villagerResidue = 0, villagerKeeps = 0;
   (o.villagerPickEvents || []).forEach(function (p) {
     const d = p.decision || {};
     if (d.keep) { villagerKeeps++; return; }
-    const id = d.id || d.ability || null;
+    const id = d.pick || d.id || d.ability || null;
     if (!id) { villagerPicks++; villagerResidue++; return; }
     villagerPicks++;
     if (!findApp(p.vid, id, p.day)) villagerResidue++;
@@ -428,7 +481,8 @@ function analyzeSeed(o) {
   (o.villagerPickEvents || []).forEach(function (e) {
     const d = e.decision || {};
     if (d.keep) return;
-    const off = (e.offers || []).find(function (of) { return of.id === (d.id || d.ability); });
+    const picked = d.pick || d.id || d.ability;
+    const off = (e.offers || []).find(function (of) { return of.id === picked; });
     inc(s.villagerPicksByPath, (off && off.path) || '?');
   });
   s.learns = (o.learnEvents || []).length;
@@ -492,7 +546,7 @@ function analyzeSeed(o) {
   (o.daily || []).forEach(function (snap) {
     if (!snap) return;
     const holders = [];
-    if (snap.player) holders.push(['player', snap.player.closeness]);
+    if (snap.player) holders.push([snap.bearer || 'player', snap.player.closeness]);
     Object.keys(snap.villagers || {}).forEach(function (vid) {
       const v = snap.villagers[vid];
       if (v.closeness && Object.keys(v.closeness).length) holders.push([vid, v.closeness]);
@@ -504,9 +558,9 @@ function analyzeSeed(o) {
         if (!c) return;
         const L = s.ladder[g.id];
         if (c.kit > L.maxKit) { L.maxKit = c.kit; L.maxDay = snap.day; }
-        if (c.close) holdersClose[g.id + '|' + holderKey(who)] = 1;
-        if (c.complete) holdersComplete[g.id + '|' + holderKey(who)] = 1;
-        if (c.readyForCapstone) holdersReady[g.id + '|' + holderKey(who)] = 1;
+        if (c.close) holdersClose[g.id + '|' + who] = 1;
+        if (c.complete) holdersComplete[g.id + '|' + who] = 1;
+        if (c.readyForCapstone) holdersReady[g.id + '|' + who] = 1;
       });
     });
   });
@@ -519,7 +573,7 @@ function analyzeSeed(o) {
   const last = (o.daily || [])[(o.daily || []).length - 1] || null;
   s.endPlayer = last && last.player ? {
     abilities: (last.player.abilities || []).length,
-    class: last.player.class ? (last.player.class.path + '/' + last.player.class.subclass) : null,
+    class: (last.player.class && last.player.class.path) ? (last.player.class.path + '/' + last.player.class.subclass) : null,
     godhood: last.player.godhood || {},
     tracks: last.player.tracks || {},
     trackStats: last.player.trackStats || {},
@@ -531,7 +585,7 @@ function analyzeSeed(o) {
       const n = (v.abilities || []).length;
       if (!s.endVillagerBest.maxAbilities || n > s.endVillagerBest.maxAbilities) {
         s.endVillagerBest = { vid: vid, maxAbilities: n,
-          class: v.class ? (v.class.path + '/' + v.class.subclass) : null,
+          class: (v.class && v.class.path) ? (v.class.path + '/' + v.class.subclass) : null,
           godhood: v.godhood || {} };
       }
     });
@@ -602,6 +656,8 @@ module.exports = {
   giftAppearances: giftAppearances,
   deedBookEntries: deedBookEntries,
   abilityAppearances: abilityAppearances,
+  personOf: personOf,
+  idOf: idOf,
   reconcileRecognitions: reconcileRecognitions,
   reconcileAscensions: reconcileAscensions,
   reconcileGifts: reconcileGifts,
