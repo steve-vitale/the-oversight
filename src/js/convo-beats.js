@@ -179,7 +179,20 @@
     village: ['"That\'s the state of things. What\'s up?"', '"Anyway — people stuff. What did you want?"'],
     plans: ['"That\'s the plan, anyway. What\'s on your mind?"', '"We\'ll see how it goes. What did you want?"'],
     gossip: ['"That\'s what I heard, anyway. What\'s up?"', '"Take it with salt. What did you want to ask?"'],
-    personal: ['"That\'s me, I guess. What\'s on your mind?"', '"Anyway. What did you want?"'],
+    personal: ['"That\'s me, I guess. What\'s on your mind?"', '"Anyway. What did you want?"',
+      // r125 (journey-landing 2026-11-10): the pool held only the two lines
+      // above, so convoPickCycle's without-replacement cycle was strict
+      // alternation — a third personal-bridge in one sitting repeated a line
+      // heard two turns earlier (1150 d6: "Anyway. What did you want?" x3,
+      // "That's me, I guess. What's on your mind?" x2). Six lines means a
+      // sitting would need seven personal-bridges before any repeat, and
+      // the keep-3 memory window keeps near repeats out. Same voice
+      // throughout: the villager steps back from talking about themselves
+      // and hands the floor to the player.
+      '"Enough about me — you\'ve got something on your mind, I can tell."',
+      '"That\'s my story, anyway. What\'s yours today?"',
+      '"I could go on about myself all day. Better if I don\'t — what do you need?"',
+      '"Right. Me, me, me. Your turn — what\'s up?"'],
     want: ['"Sorry — I shouldn\'t load that on you. What\'s up?"', '"Forget I said anything. What did you want?"',
       // r124 (journey-landing 2026-11-10): the pool held only the two lines
       // above, so convoPickCycle's without-replacement cycle was strict
