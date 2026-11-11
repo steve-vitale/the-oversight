@@ -492,4 +492,4 @@ before the village dies of that same hunger.
 
 - Pilot anchor: ae53134ae. Rebase target: 488506a47aa5fc930444cfd504bd2e7c7f6fc6d7 (master SHA read immediately before rebasing).
 - `src/js/corruption.js` moved in ae53134ae..master: NO — zero commits in the range touched it (8 commits in range, none in corruption.js). No post-rebase pilot re-run required; the corpus is judged on anchor base ae53134ae.
-- Post-rebase proof: <result — filled after the rebase + proof re-run>.
+- Post-rebase proof: `node scripts/test-corruptfirst-a.js` → **63/63 green** on the rebased tip (b86ae71f2). No post-rebase pilot re-run (corruption.js unmoved in range); corpus judged on anchor base ae53134ae.
