@@ -456,6 +456,11 @@ function install(Game) {
             const kcalOut = (it.kcalEach || 0) * postUnits;
             converted.push({
               name: snap.name, foodKind: snap.foodKind, split: false,
+              // postName: the engine renames every converted item in place
+              // (game.js duty convert: ' (smoked)' if /fish/i, ' (dried)'
+              // otherwise) — record it, or the smoked/dried split is
+              // unrecoverable from the pre name alone in the analyzer.
+              postName: it.name,
               fromState: snap.foodState,
               kcalIn: kcalIn, kcalOut: kcalOut,
               spoilDayBefore: snap.spoilDay, spoilDayAfter: it.spoilDay,
@@ -481,14 +486,27 @@ function install(Game) {
           if (it.foodState !== 'preserved') continue;
           const nm = String(it.name || '');
           let match = null, matchKind = null;
-          let bestErr = Infinity, firstName = null;
+          let bestErr = Infinity, bestElig = 1, firstName = null;
           for (const entry of pre.map) {
             const snap = entry[1];
             if (!snap || !snap.name) continue;
             if (nm !== snap.name + ' (smoked)' && nm !== snap.name + ' (dried)') continue;
             if (!firstName) firstName = snap;
             const err = Math.abs(Math.round((snap.kcalEach || 0) * mult) - (it.kcalEach || 0));
-            if (err < bestErr) { bestErr = err; match = snap; }
+            // Tie-break: same-name stacks can share per-unit kcal, so kcal
+            // alone cannot tell them apart. The true source MUST have been
+            // duty-eligible (spoilDay 1..2 days out — spoilDay <= day is
+            // spoiled and the engine excludes it), so among equal kcal
+            // errors prefer an eligible spoilDay, then the soonest-spoiling.
+            // Without this the match can land on a same-name stack with the
+            // wrong spoilDay (pilot corpus: 3/61 split conversions matched a
+            // stack outside the eligible window, spoilDayBefore off and
+            // rescuedKcal 0 — 11,320 kcal undercounted as rescued).
+            const elig = (typeof snap.spoilDay === 'number' && snap.spoilDay - day >= 1 && snap.spoilDay - day <= 2) ? 0 : 1;
+            const bestSpoil = match ? (match.spoilDay || 9999) : 9999;
+            if (err < bestErr || (err === bestErr && (elig < bestElig || (elig === bestElig && (snap.spoilDay || 9999) < bestSpoil)))) {
+              bestErr = err; match = snap; bestElig = elig;
+            }
           }
           if (match && bestErr <= 1) { matchKind = 'kcal'; }
           else if (firstName) { match = firstName; matchKind = 'name-fallback'; }
@@ -497,6 +515,7 @@ function install(Game) {
           const kcalOut = (it.kcalEach || 0) * (it.units || 0);
           converted.push({
             name: match.name, foodKind: match.foodKind, split: true,
+            postName: nm, // the matched post-conversion name (' (smoked)'/' (dried)')
             fromState: match.foodState, splitMatch: matchKind,
             kcalIn: kcalIn, kcalOut: kcalOut,
             spoilDayBefore: match.spoilDay, spoilDayAfter: it.spoilDay,

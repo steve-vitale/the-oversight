@@ -40,7 +40,11 @@ function eq(a, b, name) { ok(a === b, name, { got: a, want: b }); }
     ],
     dutyResolutions: [
       { day: 5, vid: 'v1', occ: 'fisherman', skill: 3, batches: 2, kcalIn: 1000, kcalOut: 990, shelfGained: 56, rescuedKcal: 1000, aboutToRotBefore: 1200, aboutToRotAfter: 200, leftToRot: 200, racksFull: false, tapBatches: 2, tapKcal: 990, tapAgrees: true,
-        converted: [{ name: 'Fish (smoked)', foodKind: 'meat', split: false, kcalIn: 500, kcalOut: 495, shelfGained: 28 }, { name: 'Venison (dried)', foodKind: 'meat', split: true, kcalIn: 500, kcalOut: 495, shelfGained: 28 }] },
+        converted: [{ name: 'Fish (smoked)', foodKind: 'meat', split: false, kcalIn: 500, kcalOut: 495, shelfGained: 28 }, { name: 'Venison (dried)', foodKind: 'meat', split: true, kcalIn: 500, kcalOut: 495, shelfGained: 28 },
+          // Pre-conversion names, the shape the instrument records (no
+          // postName): classified by the engine's naming rule (/fish/i ->
+          // smoked, else dried). 'Fish catch' smokes, 'Foraged food' dries.
+          { name: 'Fish catch', foodKind: 'meat', split: false, kcalIn: 500, kcalOut: 400, shelfGained: 13 }, { name: 'Foraged food', foodKind: null, split: false, kcalIn: 1000, kcalOut: 800, shelfGained: 13 }] },
       { day: 6, vid: 'v1', occ: 'fisherman', skill: 3, batches: 1, kcalIn: 500, kcalOut: 400, shelfGained: 13, rescuedKcal: 500, aboutToRotBefore: 500, aboutToRotAfter: 500, leftToRot: 500, racksFull: true, tapBatches: 2, tapKcal: 999, tapAgrees: false,
         converted: [{ name: 'Fish (smoked)', foodKind: 'meat', split: false, kcalIn: 500, kcalOut: 400, shelfGained: 13 }] },
     ],
@@ -79,8 +83,8 @@ function eq(a, b, name) { ok(a === b, name, { got: a, want: b }); }
   eq(s.dutyRacksFullResolutions, 1, 'B13 racks-full resolutions');
   eq(s.dutyRacksFullBlockedKcal, 500, 'B14 racks-full blocked kcal');
   eq(s.dutyLeftToRotKcal, 700, 'B15 left-to-rot kcal');
-  eq(s.dutySmokedNames.smoked, 2, 'B16 duty smoked-name count');
-  eq(s.dutySmokedNames.dried, 1, 'B17 duty dried-name count');
+  eq(s.dutySmokedNames.smoked, 3, 'B16 duty smoked-name count (suffixed + pre-name fish)');
+  eq(s.dutySmokedNames.dried, 2, 'B17 duty dried-name count (suffixed + pre-name meat/plant)');
   eq(s.dutySplitConversions, 1, 'B18 duty split conversions');
   eq(s.eatenPreservedKcal, 400, 'B19 eaten preserved');
   eq(s.eatenPemmicanKcal, 600, 'B20 eaten pemmican');
@@ -291,6 +295,10 @@ async function liveFixtures() {
         const conv0 = dres && dres.converted && dres.converted[0];
         if (conv0 && conv0.split) ok(conv0.splitMatch === 'kcal', 'C10l split matched by kcal consistency', conv0);
         else ok(true, 'C10l split-match n/a (in-place conversion)');
+        // C10q: the duty records the post-conversion name the engine gives
+        // the item ('Venison (cleaned)' -> '... (dried)'), so the analyzer's
+        // smoked/dried split reads the label, not a derivation.
+        ok(conv0 && typeof conv0.postName === 'string' && / \(smoked\)$| \(dried\)$/.test(conv0.postName), 'C10q duty records the post-conversion name', conv0);
       } else {
         ok(true, 'C10f-k skipped (reserve covers the whole stack on this roster)');
       }
@@ -327,6 +335,42 @@ async function liveFixtures() {
         }
       } else {
         ok(true, 'C10m-p skipped (no second roster villager)');
+      }
+      // C10r: split-match tie-break — two same-name 'Cattail' stacks share
+      // per-unit kcal (120) but only the day+1 stack is duty-eligible; the
+      // day+5 stack is a decoy pushed FIRST so a first-match tie-break
+      // would pick it. The eligible stack is big enough (100 units) that
+      // the 4000-kcal budget splits it, producing a new 'Cattail (dried)'
+      // object the matcher must attribute to the day+1 stack, not the
+      // decoy. (Pilot corpus: 3/61 split conversions matched an
+      // out-of-window stack, rescuedKcal 0.)
+      const cook3 = roster[0];
+      if (cook3) {
+        const reserve3 = 250 * (roster.length || 10);
+        const fillerUnits3 = Math.ceil(reserve3 / 500);
+        v.pantry = [
+          { foodKind: 'meat', foodState: 'cleaned', kcalEach: 500, units: fillerUnits3, name: 'Venison (cleaned)', spoilDay: day + 1, safe: false, edible: true },
+          { foodKind: 'plant', foodState: 'none', kcalEach: 120, units: 9, name: 'Cattail', spoilDay: day + 5, safe: true, edible: true },
+          { foodKind: 'plant', foodState: 'none', kcalEach: 120, units: 100, name: 'Cattail', spoilDay: day + 1, safe: true, edible: true },
+          { foodKind: 'plant', foodState: 'none', kcalEach: 100, units: 10, name: 'Grain', spoilDay: 9999 },
+        ];
+        const skill3 = (typeof Game.specialistSkill === 'function') ? Game.specialistSkill(Game.getPerson(cook3) || {}, 'preserver') : 0;
+        const mult3 = skill3 > 0 ? Math.min(1.0, 0.95 + 0.02 * skill3) : 0.80;
+        const take3 = Math.min(100 - Math.min(100, Math.ceil(reserve3 / 120)), Math.floor(4000 / 120));
+        Game.resolveOneAssignment(cook3, { task: 'cook' });
+        const dres3 = t.dutyResolutions[t.dutyResolutions.length - 1];
+        const cat3 = dres3 && dres3.converted && dres3.converted.find(function (c) { return c.name === 'Cattail' && c.split; });
+        if (take3 > 0 && take3 < 100 - Math.min(100, Math.ceil(reserve3 / 120)) && cat3) {
+          ok(cat3.splitMatch === 'kcal', 'C10r split tie-break matched by kcal', cat3);
+          ok(cat3.spoilDayBefore === day + 1, 'C10s split tie-break picks the ELIGIBLE stack (day+1), not the day+5 decoy', cat3);
+          ok(cat3.units === take3 && cat3.kcalIn === 120 * take3, 'C10t split tie-break units/kcalIn from the eligible stack', { got: cat3, wantUnits: take3 });
+          ok(cat3.rescuedKcal === 120 * take3, 'C10u split tie-break rescued kcal counted (not 0)', cat3);
+          ok(cat3.kcalOut === take3 * Math.round(120 * mult3), 'C10v split tie-break kcalOut matches the skill rate', cat3);
+        } else {
+          ok(true, 'C10r-v skipped (take ' + take3 + ', split cattail converted: ' + !!cat3 + ')');
+        }
+      } else {
+        ok(true, 'C10r-v skipped (empty roster)');
       }
       // C11: racks-full — preserved stock above rackCap blocks all smoking.
       const skill = (typeof Game.specialistSkill === 'function') ? Game.specialistSkill(Game.getPerson(cookVid) || {}, 'preserver') : 0;

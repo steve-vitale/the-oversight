@@ -88,8 +88,24 @@ function perSeed(out) {
   s.dutyRacksFullBlockedKcal = sum(dr.filter(function (r) { return r.racksFull; }), function (r) { return r.aboutToRotBefore; });
   s.dutyLeftToRotKcal = sum(dr, function (r) { return r.leftToRot; });
   s.dutyAboutToRotBefore = sum(dr, function (r) { return r.aboutToRotBefore; });
+  // Smoked-vs-dried label. The engine renames every converted item
+  // (game.js duty convert: name + ' (smoked)' if /fish/i, else ' (dried)').
+  // The instrument records that post name as postName (new corpora); older
+  // corpora carry only the pre-conversion name, so derive the label from
+  // the engine's own rule on the pre name — the same rule the split-matcher
+  // already verified live on every split conversion (suffix match + kcal
+  // consistency). A recorded suffix always wins over the derivation.
   s.dutySmokedNames = byKey(dr.reduce(function (a, r) { return a.concat(r.converted || []); }, []),
-    function (c) { return (c.name || '').indexOf('(smoked)') !== -1 ? 'smoked' : (c.name || '').indexOf('(dried)') !== -1 ? 'dried' : 'other-name'; });
+    function (c) {
+      const post = c.postName || '';
+      if (post.indexOf('(smoked)') !== -1) return 'smoked';
+      if (post.indexOf('(dried)') !== -1) return 'dried';
+      const pre = c.name || '';
+      if (pre.indexOf('(smoked)') !== -1) return 'smoked';
+      if (pre.indexOf('(dried)') !== -1) return 'dried';
+      if (!pre) return 'other-name';
+      return /fish/i.test(pre) ? 'smoked' : 'dried';
+    });
   s.dutySplitConversions = dr.reduce(function (a, r) { return a + (r.converted || []).filter(function (c) { return c.split; }).length; }, 0);
   s.dutySplitFallbacks = dr.reduce(function (a, r) { return a + (r.converted || []).filter(function (c) { return c.split && c.splitMatch === 'name-fallback'; }).length; }, 0);
   s.dutyMaxTapKcalDiff = Math.max.apply(null, dr.map(function (r) { return Math.abs(r.tapKcalDiff || 0); }).concat([0]));
