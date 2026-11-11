@@ -2,7 +2,7 @@
 
 - **Run:** fleshout-loop-b-20261111T1630Z, arm sim-vetphantom-b
 - **Prereg:** `evidence/2026-11-11/sim-vetphantom-b-prereg.md` (committed `7d93e418a` before any judged band sim; Amendment 1 committed `0b838af96` before any analysis — see §9)
-- **Base:** local master `5157782a4` (rebased from `965e8d04e` at run start, no conflicts)
+- **Base:** local master `5157782a4` (rebased from `965e8d04e` at run start, no conflicts); rebased again onto current local master `3f136f07e` (journey-landing r126 + ship-loop version bump) before finishing — clean rebase, proof re-run green (test-vetphantom-b.js 43/43, r131 proof 23/23, analyzer GO)
 - **Fix under verification:** journey-scale r131, commit `5d16916f4` (local master) — one line in `src/js/standing.js` `waveCombatReadiness.isLiving`: `if (roster.indexOf(vid) < 0) return false;`, mirroring `ladder.js countLivingVeterans`. This arm wrote NO src/js change.
 - **Instrument / driver / analyzer / proof:** `scripts/vetfirst-instrument-20261111.js` (reused, unmodified), `scripts/vetphantom-driver-20261111.js`, `scripts/vetphantom-analyze-20261111.js`, `scripts/test-vetphantom-b.js` (committed `7d93e418a`, 43/43 green on fixed code, 34/43 + exit 1 on pre-fix code)
 - **Horizon / seeds / policy:** 150d death-aware (+10d tail max), seeds 190391–190398, competent verbatim, TWO legs on identical seeds (control: pre-fix standing.js; fix: fixed standing.js)
