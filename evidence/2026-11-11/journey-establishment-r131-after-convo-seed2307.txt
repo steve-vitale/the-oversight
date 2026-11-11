@@ -1,0 +1,82 @@
+=== r131-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Taiga (gen_pfqzbmq) occ=sign painter --
+OPENING: "About what happened to my taken kin — Have you heard anything? About the taken. The pods. Anything at all."
+YOU: [gq:yn:yes] "Yes."
+THEM: They nod. "Okay."
+YOU: [goon] "You don't have to say it all at once."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [goon] "You don't have to say it all at once."
+THEM: "Got a read on anyone here yet? Who should I be watching?"
+YOU: [ans:q_read:a_honest] "Still figuring everyone out."
+THEM: "Same. But keep your eyes open — some people here are performing, not surviving."
+YOU: [goon] "You don't have to say it all at once."
+THEM: "Watch the quiet ones. Not the loud — the loud tell you everything. The quiet are either thinking or planning, and you can't tell which until it matters."
+YOU: [dlg:more] "What do you remember?"
+THEM: "It's my grandfather, Michiko. Went in the Taking. He survived two wars and a famine. Not interesting enough, apparently. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person."
+closing: "Sorry. I need a minute."
+
+-- Sari (sari_wulandari) occ=postal worker --
+OPENING: "Here's the thing: They'd tell me to keep working. So I'm working. That's the whole plan."
+YOU: [dlg:comfort] "You alright?"
+THEM: "I — yeah. It helps, hearing that."
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Good question." "People are talking about me. Take it for what it's worth."
+YOU: [goon] "You don't have to say it all at once."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:more] "I’m listening."
+THEM: "Katarina? A journalist, back before. Solid person."
+YOU: [dlg:react] (listen)
+THEM: "Well." A breath. "That's where things stand."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Between us — Still on the gossip."
+YOU: [goon] "You don't have to say it all at once."
+THEM: Something eases in their shoulders. They're really talking to you now.
+YOU: [goon] "You don't have to say it all at once."
+THEM: "Alright — I should get back to it."
+
+-- Daniyar (daniyar_askarov) occ=paramedic --
+OPENING: Daniyar speaks only 🇷🇺 Russian. No shared words at all — just eyes, hands, and patience.
+«Эй... говоришь по-русски? Нет? ...чёрт.» (you catch 'Нет' — no)
+(They mime walking — pointing at themselves, then at you, then toward the tree line. The meaning is unmistakable: come with me.)
+YOU: [nv:nod] (nod slowly)
+THEM: «Именно так. Ты прав.» (you catch 'Именно' — exactly, 'прав' — right) They nod back, slowly.
+YOU: [nv:smile] (smile)
+THEM: «Ты золото. Спасибо от души.» (you catch 'золото' — gold, 'души' — soul) They smile back, slower this time, like it just landed.
+YOU: [nv:pointself] (point: you, them, together)
+THEM: «Ты хороший человек.» (You're a good person. — you're fairly sure) You point at yourself, then at them, then at the fire. Together. They get it. "Fuck you." — they grin, proud of the one English they know.
+YOU: [nv:listen] (listen hard — catch words)
+THEM: You lean in, catching the rise and fall of it. «Где здесь спят?» (Where do people sleep here? — you're fairly sure)
+YOU: [speak_back] (try your Russian)
+THEM: "Hm. Almost." Daniyar corrects the one word, gently, like setting a bone. "Again." You say it right. They nod, satisfied with both of you.
+YOU: [goon] (watch quietly)
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [goon] (watch quietly)
+THEM: "Okay. We'll pick this up later."
+(no pick — winding down)
+(stall menu: leave|nv:nod)
+closing: A final nod. They touch their chest, then point at you — a promise without words.
+
+-- Desmond (desmond_clarke) occ=sign painter --
+OPENING: "Never mind this wound — we got it handled. Thanks anyway."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway — that's my problem, not yours. What did you want?"
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "People are talking about Marcus. Take it for what it's worth."
+YOU: [goon] "You don't have to say it all at once."
+THEM: The conversation cools to something businesslike.
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Birch Sap. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "a spring that runs clear — I'll show you on the map sometime. It's real."
+YOU: [dlg:more] "Tell me more."
+THEM: "People are talking about me. Take it for what it's worth."
+YOU: [dlg:react] (listen)
+THEM: "People are talking about Sari. Take it for what it's worth."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the gossip."
+closing: "Talking helps. A little. Thank you."

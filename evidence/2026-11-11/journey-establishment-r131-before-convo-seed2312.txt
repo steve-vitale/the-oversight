@@ -1,0 +1,84 @@
+=== r131-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Salvador (gen_vja91vn) occ=Mushroom grower --
+OPENING: "I asked Ashley about what happened to my taken kin — Ashley's gone. You talk to it -- the System. Have you ever asked? About the taken -- about Fiona?"
+YOU: [gq:yn:yes] "Yes."
+THEM: "I see." They take a moment to think about your answer.
+YOU: [goon] "Take your time."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:more] "Tell me about them."
+THEM: "It's my aunt, Fiona. Went in the Taking. She laughed like a screen door in a windstorm. Boring. Right. Some nights I swear I hear them before I sleep -- the pods, rows deep, humming. Then morning comes and I can't say whether it was real."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [goon] "Take your time."
+THEM: "Walk with me? I want another pair of eyes on something."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Halfway to the tree line, Salvador freezes. Fresh tracks — big. "We go back now. Quietly." You do. The wild, reminding you.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person."
+YOU: [goon] "Take your time."
+THEM: Something eases in their shoulders. They're really talking to you now.
+closing: "I'll be okay. Don't worry about me. Worry about... actually, don't worry at all."
+
+-- Ayan (gen_b9bcvod) occ=Baker --
+OPENING: Ayan speaks only 🇷🇺 Russian. No shared words at all — just eyes, hands, and patience.
+«Ничего не понимаю. Совсем ничего!»
+YOU: [nv:nod] (nod slowly)
+THEM: «Именно так. Ты прав.» They nod back, slowly. "Hello?" — they grin, proud of the one English they know.
+YOU: [nv:smile] (smile)
+THEM: «Ты хороший человек.» (you catch 'хороший' — good) A smile, tired but real.
+YOU: [nv:pointself] (point: you, them, together)
+THEM: «Я не забуду.» You tap your chest, then theirs. Us. They nod, emphatic.
+YOU: [nv:listen] (listen hard — catch words)
+THEM: You listen hard, watching their mouth shape the words. «У тебя есть еда?» (you catch 'еда' — food)
+YOU: [speak_back] (try your Russian)
+THEM: Ayan laughs — with you, mostly. "Good try! Again — Именно так. Ты прав." They walk you through it, patient as sunrise.
+YOU: [goon] (watch quietly)
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [goon] (watch quietly)
+THEM: "Alright — I should get back to it."
+(no pick — winding down)
+(stall menu: leave|nv:nod)
+closing: They wave you off gently, already turning away. The conversation ends where language couldn't reach.
+
+-- Ella (ella_johnson) occ=ESL teacher --
+OPENING: "I don't know what to do with my hands today."
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Good question." "So. You ever notice Ruth? ...I don't know what to make of that. Nobody does."
+YOU: [gq:yn:yes] "Yes."
+THEM: They nod. "Okay."
+YOU: [goon] "I'm here. Go on."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [goon] "I'm here. Go on."
+THEM: "What's the kindest thing someone's done for you out here?"
+YOU: [ans:q_kindness:a_tell] "I've watched people share food they couldn't spare. Quiet. No performance. Just
+THEM: "That's the good stuff. Quiet generosity. It's holding this whole thing together."
+YOU: [goon] "I'm here. Go on."
+THEM: "Someone saved me the last of the stew once. Didn't say anything, just put the bowl down and walked off. I think about that bowl more than I think about the monsters."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Okay. Yeah. I trust you."
+YOU: [dlg:more] "Go on."
+THEM: "That was me — headed out for water."
+closing: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+
+-- Meera (meera_reddy) occ=Dentist --
+OPENING: "I keep expecting to see them by the fire. Then I remember. Funny how that works."
+INVITE-ANSWER trust=91
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Meera shows you where they go to think. "Don't tell the others. Everyone needs one place."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Someone should watch your back. Might as well be me."
+YOU: [goon] "You don't have to say it all at once."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:comfort] "You alright?"
+THEM: "Thanks. ...Thanks for saying that."
+YOU: [ask:personal] "I'd like to know you better, if that's alright."
+THEM: "Huh. Let me think about that." "Do you ever wonder what the aliens eat? Like, do they have potlucks?"
+YOU: [gq:yn:yes] "Yes."
+THEM: "All right. Thank you for telling me."
+YOU: [goon] "I'm here. Go on."
+THEM: "Okay. We'll pick this up later."
+YOU: [silence] (say nothing)
+THEM: A comfortable quiet settles. They smile a little, and let it be.
+(ended by engine)

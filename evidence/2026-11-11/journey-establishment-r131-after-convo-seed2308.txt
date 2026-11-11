@@ -1,0 +1,84 @@
+=== r131-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Gloria (gen_ezk8ig3) occ=lifeguard --
+OPENING: "Have you ever hurt someone? Since all this started. Seen worse."
+YOU: [ans:q_fight:a_tell] "Yes. I don't want to talk about the details. But yes."
+THEM: They nod, slow. "Okay. Thank you for telling me. That couldn't have been easy to say."
+YOU: [goon] "I'm listening."
+THEM: "I don't keep score on that. Score-keeping is how you stop sleeping. I do what the day needs and I don't rehearse it after."
+YOU: [goon] "I'm listening."
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: It's quiet at the trap line. Gloria doesn't say much. Sometimes that's the whole point.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on whether you've hurt someone."
+YOU: [goon] "I'm listening."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "...Fine. This had better be worth it."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway — that's my problem, not yours. What did you want? I mean it."
+closing: "Good talk."
+
+-- James (gen_gfpuak1) occ=community gardener --
+OPENING: "Can I tell you something? Before the scattering, I stole from someone who trusted me. I think about it every day."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: James shows you where they go to think. "Don't tell the others. Everyone needs one place."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "Purslane. Remember the leaf, the stem, the smell — that's the whole of it."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one is Sodom Apple. Look at the leaf, feel the stem, breathe it in. It'll stick."
+YOU: [secret:promise] "That stays between us."
+THEM: "Thank you. ...I needed someone to know, and I needed it to stop there."
+YOU: [alive:want:seek_taken] "About your taken kin — what do you need?"
+THEM: "Have you heard anything? About the taken. The pods. Anything at all."
+YOU: [gq:yn:yes] "Yes."
+THEM: They nod. "Okay."
+YOU: [goon] "Go on."
+THEM: "Moving! But — good talk! More later!"
+YOU: [joke] (crack a joke)
+THEM: "Laughs while bouncing on their toes. "Okay okay okay — more."
+(ended by engine)
+
+-- Eli (gen_cfq4yg9) occ=bus driver --
+OPENING: "Real talk — Hey. Got a minute? No reason. Just — hey."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Cattail. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Jujube — crush the leaf, smell it, taste the stem. That's how you know it."
+YOU: [dlg:react] "Sure. Sit."
+THEM: "This is nice. Just — being around people. I forget how much I need it."
+YOU: [dlg:more] "What's on your mind?"
+THEM: "That's... pretty much all of it, honestly."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "People are talking about Sofia. Take it for what it's worth. There. Said it."
+YOU: [goon] "Whoa — go on."
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [goon] "Whoa — go on."
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+closing: "That's enough talking for me."
+
+-- Guiying (gen_odc1ibb) occ=Wild food forager --
+OPENING: "About who you don't trust — Is there someone here you don't trust? Be honest."
+YOU: [ans:q_someone:a_tell] "Yeah. I'm not saying who. But yeah."
+THEM: Their eyes flick, just for a second, toward the fire. "Noted. I'll watch too."
+YOU: [goon] "I'm listening."
+THEM: The ease drains out of it, a little.
+YOU: [goon] "I'm listening."
+THEM: "I don't distrust anyone exactly — I just haven't finished trusting most of them yet. There's a difference. A slow one."
+YOU: [goon] "I'm listening."
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Guiying shows you where they go to think. "Don't tell the others. Everyone needs one place."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Pupunha (Peach Palm). Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "a burned farmhouse — I'll show you on the map sometime. It's real."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on who you don't trust."
+closing: "Well. That happened."

@@ -7477,6 +7477,33 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.say(`🍲 ${first} cooked for the haven — meals stretched.${preservedNote}`);
         // PARITY (2026-10-14): cooking is the player's craft deed too.
         try { this.creditDeed && this.creditDeed(vid, 'cooking'); } catch (eT) { console.warn('[tracks] cook duty deed', eT); }
+        // PRACTICE (establishment r131 2026-11-11: the ladder's missing
+        // rungs): the cook's own work — keeping the haven fed — never
+        // taught cooking. The rack work above credits preserver XP per
+        // batch, but a cook who only ever cooks the meals stays a
+        // non-cook forever: foodXp['cook'] sat at 0 on every panel
+        // (r116–r128) while cooks resolved ~2x/day. One foodXp['cook']
+        // rep per cook resolution, through the same dial as preserver/
+        // butcher (grantFoodXpCredit: first 5 XP 1:1, then 1 XP per 2,
+        // odd unit carried) — the work is the meal, not the racks, so
+        // the grant fires whether or not any batch preserved. The skill
+        // it buys is specialistSkill's self-taught ladder (5 XP -> 1).
+        // PER-DAY CAP (r131 pilot: the uncapped grant raced — five
+        // cooks hit skill 3 in 42 days, pace03 5 on 4 seeds, because a
+        // cook resolves ~3x/day): only the FIRST cook resolution each
+        // day grants (foodXpDay.cook); the rest is routine. A daily
+        // cook still reaches skill 1 in 5 days and skill 2 in ~25, but
+        // skill 3 needs ~55 days, so it cannot race inside the leg.
+        // The 2nd/3rd resolutions still count for practice/competence
+        // (villagerPractice records every rep); only specialist XP caps.
+        try {
+          const _cp = (this.getPerson ? this.getPerson(vid) : null) || vp;
+          const _cday = (this.state.scholar || {}).day || 1;
+          if (_cp) {
+            _cp.foodXpDay = _cp.foodXpDay || {};
+            if (_cp.foodXpDay.cook !== _cday) { _cp.foodXpDay.cook = _cday; this.grantFoodXpCredit(_cp, 'cook', 1); }
+          }
+        } catch (e) {}
         this.bumpTrust(vid, 2, 'kept the haven work going');
       } else if (a.task === 'tend' || a.task === 'teach' || a.task === 'mend') {
         // HAVEN ROLES (Steve 2026-10-09): haven work is contribution. The
@@ -7520,6 +7547,19 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // the player's deeds, same n and caps. Tending the fire has no deed
         // for anyone.
         try { if (a.task === 'mend') this.creditDeed && this.creditDeed(vid, 'crafting'); else if (a.task === 'teach') this.creditDeed && this.creditDeed(vid, 'teaching'); } catch (eT) { console.warn('[tracks] haven role deed', eT); }
+        // PRACTICE (establishment r131 2026-11-11: the ladder's missing
+        // rungs): mending gear is the villager-side build-adjacent work —
+        // the only one. Builder skill had no grant site at all (its only
+        // effect is halving the player's storage-expansion cost, and no
+        // villager ever built: mend resolved 0 times on the r128 panel
+        // because the competent policy never assigns it). One
+        // foodXp['builder'] rep per mend resolution, through
+        // grantFoodXpCredit like the other routine-work grants.
+        // Tend/teach grant nothing (they are not SPECIALTIES tasks).
+        // PER-DAY CAP (same as the cook grant: mend resolves ~3x/day for
+        // a crafter, so the uncapped grant would race the same way):
+        // only the first mend each day grants (foodXpDay.builder).
+        try { if (a.task === 'mend') { const _mp = (this.getPerson ? this.getPerson(vid) : null) || vp; const _mday = (this.state.scholar || {}).day || 1; if (_mp) { _mp.foodXpDay = _mp.foodXpDay || {}; if (_mp.foodXpDay.builder !== _mday) { _mp.foodXpDay.builder = _mday; this.grantFoodXpCredit(_mp, 'builder', 1); } } } } catch (e) {}
         this.bumpTrust(vid, 2, 'kept the haven work going');
       } else if (a.task === 'scout') {
         // reveal tiles around haven + small chance of a find

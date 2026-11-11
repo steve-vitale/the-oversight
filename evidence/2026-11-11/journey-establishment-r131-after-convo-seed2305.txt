@@ -1,0 +1,81 @@
+=== r131-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Jalen (gen_abiiu8q) occ=journalist --
+OPENING: "About the creek water run — the need hasn't gone anywhere. I'm still asking."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Your partner is inside the Haven hall. Go through the door to meet them.
+YOU: [dlg:details] "Tell me why you need this."
+THEM: "9 liters. That's today's drinking water, and then we're boiling creek water and hoping. We walk together and each carry two liters back. Creek water still needs boiling."
+YOU: [dlg:cant] "I can’t right now."
+THEM: "Right. I get it." A beat — and then the subject is closed. They won't raise it again.
+YOU: [goon] "And?"
+THEM: "...I should say, I trade in what I know. My knowledge for yours. Or food, if you're short on secrets."
+YOU: [ask:gossip] "What are people saying?"
+THEM: "You want to know about that? Okay." "Hilda? A Butcher, back before. Solid person."
+YOU: [dlg:more] "Tell me more."
+THEM: "The seedlings Thuli touched are twice the size of mine. Same soil. Same water."
+YOU: [dlg:react] (listen)
+THEM: "Valeria headed out to find someone."
+YOU: [dlg:doubt] "That doesn't quite add up."
+THEM: "...What's that supposed to mean?" Their voice goes careful.
+closing: "See you at the fire."
+
+-- Sierra (gen_2yndgul) occ=Vintner --
+OPENING: "Can I tell you something? I stole medicine from the stash once and never confessed."
+YOU: [secret:silence] (say nothing — just sit with them)
+THEM: "What's this about? ...Yeah. ...That's enough, for now. Thank you for sitting with it."
+YOU: [alive:event:tension] "It's tense around the fire lately."
+THEM: "Everyone's choosing sides and pretending they aren't. I hate it."
+YOU: [teach] "Watch. This matters."
+THEM: You show them Staghorn Sumac — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+YOU: [alive:want:seek_taken] "About your taken kin — what do you need?"
+THEM: "I keep dreaming about rows of pods. Humming. Tell me I'm not the only one."
+YOU: [dlg:cant] "I don't know anything. I'm sorry."
+THEM: "Yeah. Sorry. It's -- never mind. Forget I said anything." They look away, embarrassed at having wanted something.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That can wait — it isn't going anywhere. What's on your mind?"
+YOU: [alive:thread:secret] "We never finished — what they confided."
+THEM: "About what they confided — yeah, we never did get back to that."
+closing: "Take care of yourself."
+
+-- Hilda (gen_h9ruoa0) occ=Butcher --
+OPENING: "We're down to 2 liters of clean water. I need someone to haul water with me at first light. Two of us, half the trips. Will you come?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: You need to be right next to your partner, same side of the Haven door, to help.
+YOU: [dlg:details] "Tell me why you need this."
+THEM: "2 liters. That's today's drinking water, and then we're boiling creek water and hoping. We walk together and each carry two liters back. Creek water still needs boiling."
+YOU: [dlg:cant] "I can’t right now."
+THEM: "No, yeah, of course. Forget I asked." They won't forget. They'll just stop asking.
+YOU: [goon] "Keep going."
+THEM: "Help me haul something back? Too much for one."
+INVITE-ANSWER trust=89
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: You walk to the cache spot with Hilda. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that water haul."
+YOU: [goon] "Keep going."
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [goon] "Keep going."
+THEM: "Okay. We'll pick this up later."
+
+-- Thuli (gen_tk9dkah) occ=tailor --
+OPENING: "Can I tell you something? I'm saving a candy bar for when things get better. I haven't told anyone. No time to waste."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "Saw things with too many joints. Give them room. That's the whole lesson."
+YOU: [secret:silence] (say nothing — just sit with them)
+THEM: "Love that for us — ...I don't need words for it. That's enough, for now."
+YOU: [alive:event:tension] "It's tense around the fire lately."
+THEM: "You feel that? The air before a storm. That's the village right now."
+YOU: [teach] "Watch. This matters."
+THEM: You show them Staghorn Sumac — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+YOU: [alive:want:seek_taken] "About your taken kin — what do you need?"
+THEM: "You talk to it -- the System. Have you ever asked? About the taken -- about Nomsa?"
+YOU: [gq:yn:yes] "Yes."
+THEM: "All right. Thank you for telling me."
+YOU: [goon] "Keep going."
+THEM: "I should get back to it."
+YOU: [agree] "You're right."
+THEM: "Can't argue with that."
+(ended by engine)

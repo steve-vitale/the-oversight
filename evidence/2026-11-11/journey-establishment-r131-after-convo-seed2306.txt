@@ -1,0 +1,83 @@
+=== r131-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Wei (gen_2hbdebi) occ=trail crew lead --
+OPENING: "This wound — I can't clean it properly one-handed. Could you clean it out for me? Please."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Stand beside them first — same side of the Haven door — then help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [goon] "Yeah?"
+THEM: "Help me haul something back? Too much for one."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Wei shows you where they go to think. "Don't tell the others. Everyone needs one place."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "Lotus. Remember the leaf, the stem, the smell — that's the whole of it."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one is European Hazelnut. Look at the leaf, feel the stem, breathe it in. It'll stick."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:goal] "If you could do anything tomorrow, what would it be?"
+THEM: "You want to know about that? Okay." Food is love out here. Not metaphorically. Literally. Calories are care.
+closing: "See you at the fire."
+
+-- Kai (gen_ldyw1ey) occ=tattoo artist --
+OPENING: "Okay, but what about Can I tell you something? Before the scattering, I said something cruel. I think about it every day."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: It's quiet at the trap line. Kai doesn't say much. Sometimes that's the whole point.
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Daylily Bud. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "a ridge with a view for miles — I'll show you on the map sometime. It's real."
+YOU: [secret:promise] "That stays between us."
+THEM: "What if — Thank you. I needed someone to know, and now someone does. Please keep it there."
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "You look handy. What did you do with your hands, before?"
+YOU: [gq:open:take] "I need a moment to think about that."
+THEM: "Take your time."
+YOU: [goon] "Yeah?"
+THEM: "Teach me something. Anything you know that I don't."
+YOU: [ans:q_teach_me:a_tell] "I'd rather show you while we're working. It's easier that way."
+THEM: "Why do you ask? All right. Show me when we work together."
+closing: "Take care of yourself."
+
+-- Hazel (gen_ngzehbk) occ=bus driver --
+OPENING: "Any regrets? The real kind, not the small stuff."
+YOU: [ans:q_regret:a_tell] "I didn't say what I needed to say. To someone. Now I can't."
+THEM: Quiet. "Yeah. I think everyone's carrying one of those."
+YOU: [goon] "Go on."
+THEM: "Real talk — I regret the ordinary days I rushed through. All those rural Vermont mornings I spent annoyed at small things. I'd pay anything for one annoyed morning now."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on your regrets."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "Good question." "Well — I've decided the monsters are just wildlife with better PR. Don't quote me."
+YOU: [dlg:more] "Tell me more."
+THEM: "The others look to me for making do. Fine. Someone has to know something."
+YOU: [dlg:react] (listen)
+THEM: They nod slowly, not quite done, not quite continuing.
+YOU: [silence] "..."
+THEM: You say nothing. Neither do they, for a while — and it's fine.
+closing: "Don't be a stranger."
+
+-- Yara (yara_haddad) occ=interpreter --
+OPENING: "Can I tell you something? Before the scattering, I stole from someone who trusted me. I think about it every day. Just my read."
+YOU: [secret:promise] "That stays between us."
+THEM: "Thank you for hearing it. I needed someone to know — and I needed it to stop with you. Simple as that."
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Jerusalem Artichoke — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "Do you believe in anything? Now, I mean. After everything."
+YOU: [gq:yn:yes] "Yes."
+THEM: They nod. "Okay."
+YOU: [goon] "Go on."
+THEM: "What do you miss most? From before."
+YOU: [ans:q_miss:a_food] "A real hot meal."
+THEM: "God. Yes. I dream about soup. Actual soup, with a spoon."
+YOU: [goon] "Go on."
+THEM: "Hot showers. Not the big things — the small, stupid, perfect things. Beirut, Lebanon in the morning, coffee going, nobody trying to kill me. I miss being bored."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that question."
+closing: "Later."
