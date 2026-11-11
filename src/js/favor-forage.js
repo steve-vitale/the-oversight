@@ -50,7 +50,7 @@
   if(v.away?.[vid]||node.nx!==g.map.px||node.ny!==g.map.py||!pos||
      (home&&(v.npcInside?.[vid]!==false)!==(s.insideHaven!==false))||
      ![pos.mx,pos.my,s.mx,s.my].every(Number.isFinite)||Math.max(Math.abs(pos.mx-s.mx),Math.abs(pos.my-s.my))>1)
-   return{ok:false,reason:'Move next to your partner, on the same side of the Haven door.'};
+   return{ok:false,reason:g.convoFavorPartnerBlockLine(vid),reasonKey:'favorpartner'};
   return{ok:true};
  }
  function talkLine(g,vid,r){
@@ -135,7 +135,7 @@
    }
    if(!(v.roster||[]).includes(vid)||vid===this.villagerId||!this.getPerson(vid)||this.getPerson(vid).dead)return block('Your partner is no longer available for this outing.');
    if(r&&r.bearer!==this.villagerId)return block('That outing belonged to the previous bearer. It is not your promise.');
-   const adj=adjacent(this,vid);if(!adj.ok)return block(adj.reason);
+   const adj=adjacent(this,vid);if(!adj.ok)return adj.reasonKey?{...block(adj.reason),reasonKey:adj.reasonKey}:block(adj.reason);
    if(!r){
     const p=v.promises?.[vid];
     if(!p||p.favorId!==f.id||p.kept)return block('Accept the forage request first. Meet at Haven at dawn on the following day.');

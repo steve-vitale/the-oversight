@@ -16,6 +16,12 @@
 //   - convoPerformFavor(vid, favor) -> execute a checked canonical care or food deed
 //   - convoWantCloseLine(vid) -> goodbye beat for the resolution
 //   - convoFavorHash(vid, ctx) -> uint (per-instance variation key: stable person key + day + seq — never the ID string, which embeds Date.now())
+//   - convoFavorBlockPool() -> the 4-variant Haven-door block pool (shared by the hash and cycle picks)
+//   - convoFavorPartnerBlockPool() -> the 4-variant partner block pool (shared by the hash and cycle picks)
+//   - convoFavorAwayPool() -> the 4-variant away-line pool (shared by the hash and cycle picks)
+//   - convoFavorBlockLineCycle(vid) -> stateful rotation pick for display sites only (live sitting; never from a read-only path)
+//   - convoFavorPartnerBlockLineCycle(vid) -> stateful rotation pick for display sites only (live sitting; never from a read-only path)
+//   - convoFavorAwayLineCycle(vid) -> stateful rotation pick for display sites only (live sitting; never from a read-only path)
 //   - convoResolveWant(vid, how) -> plants seeds for unfinished business
 //   - convoPlantSeed(vid, seed) / convoCheckSeeds(vid)
 //   - convoQuestionTopic(qid) -> noun phrase for a bespoke question ("About <phrase> — <question>")
@@ -153,11 +159,13 @@
       keepKind: 'task', goal: 'prove', deadlineDays: 2,
       build(vid, need, ctx) {
         const liters = Math.max(0, Math.round(need.water || 0));
+        // R129: "1 liters" — pluralize the unit (liters === 1 -> "liter").
+        const literWord = liters === 1 ? 'liter' : 'liters';
         const hh = this.convoFavorHash(vid, ctx);
         const openers = [
-          `The cistern's nearly dry \u2014 ${liters} liters left.`,
-          `We're down to ${liters} liters of clean water.`,
-          `Water's almost gone \u2014 ${liters} liters.`,
+          `The cistern's nearly dry \u2014 ${liters} ${literWord} left.`,
+          `We're down to ${liters} ${literWord} of clean water.`,
+          `Water's almost gone \u2014 ${liters} ${literWord}.`,
         ];
         const asks = [
           `I need someone to haul water with me at first light. Two of us, half the trips. Will you come?`,
@@ -171,9 +179,9 @@
         // like every sibling favor's line.
         const line = '"' + openers[hh % 3] + ' ' + asks[(hh >>> 2) % 3] + '"';
         const whyBits = [
-          `${liters} liters. That's today's drinking water, and then we're boiling creek water and hoping.`,
-          `Do the math with me: ${liters} liters, ${ctx.rosterN} people. That's not tomorrow's water.`,
-          `I checked the cistern three times hoping I misread it. ${liters} liters.`,
+          `${liters} ${literWord}. That's today's drinking water, and then we're boiling creek water and hoping.`,
+          `Do the math with me: ${liters} ${literWord}, ${ctx.rosterN} people. That's not tomorrow's water.`,
+          `I checked the cistern three times hoping I misread it. ${liters} ${literWord}.`,
         ];
         const whyLine = '"' + whyBits[(hh >>> 1) % 3] + ` We walk together and each carry two liters back. Creek water still needs boiling.` + '"';
         return {
@@ -1151,6 +1159,27 @@
         // DEFLECT POOL (journey landing 2026-10-12): same single-line class
         // as the other want deflectBeats — pooled like the favor commit/
         // close lines so the reaction isn't verbatim-identical every time.
+        // SETTLED-STATE BRANCH (journey crisis r176 2026-11-10): the pool
+        // below speaks of an UNPAID debt, but the want can still be live
+        // (stage < 3) after the favor itself is settled — r168 d50 Amara:
+        // "You came through on the sickness I'm fighting" and the closer
+        // "that sickness help, settled", yet dlg:cant served "Debts unpaid
+        // just sit there." A settled debt is not unpaid. When the favor's
+        // state is settled, serve the settled pool instead. Same state
+        // list the opener/staleOpener branch on (fulfilled/thanked kept,
+        // acknowledged/moot done-and-gone); the lines say "settled/done"
+        // without claiming gratitude, so they fit either shape.
+        try {
+          const c = this.convoGet(vid);
+          const favor = (c && c.want && c.want.favor) || (typeof this.convoGetFavor === 'function' && this.convoGetFavor(vid)) || null;
+          if (favor && ['fulfilled', 'thanked', 'acknowledged', 'moot', 'broken'].includes(favor.state)) {
+            return this.convoPickCycle(vid, 'deflect:repay:settled', [
+              '"Right. Forget it." A pause. "No — that one\'s settled. I just like saying it out loud."',
+              '"...Fine." They shake their head. "It\'s done now. I keep turning it over anyway."',
+              '"Okay. Your call." They file it away — settled, and counted.',
+            ]) || '"Right. Forget it." A pause. "No — that one\'s settled. I just like saying it out loud."';
+          }
+        } catch (e) { /* fall through to the unpaid pool */ }
         return this.convoPickCycle(vid, 'deflect:repay', [
           '"Right. Forget it." They won\'t forget. Debts unpaid just sit there.',
           '"...Fine. But I don\'t like owing." The debt stays on their face.',
@@ -1981,6 +2010,95 @@
       return h >>> 0;
     },
 
+    // convoFavorBlockLine / convoFavorPartnerBlockLine / convoFavorAwayLine:
+    // R129 (journey-deepening r129): the Haven-door adjacency block and
+    // the favour-commit away line were ONE fixed sentence each
+    // (before-panel, 8 seeds: 1890 line 10x, partner line 18x, away line
+    // 18x) — the worst repeaters on the panel, reading like system
+    // instructions, not a person talking. Four variants each, picked by
+    // convoFavorHash (stable person key + day + a per-pool seq) — a
+    // STATELESS pick, because the block lines are returned by
+    // action-check functions (convoFavorAction is documented read-only:
+    // it reads the conv map without creating one, and the journal path
+    // calls it outside any sitting), so the convoPickCycle ledger
+    // (which writes c.said) is not available here. The same villager
+    // on the same day gets the same variant — which is what makes the
+    // r21 re-ask reframe ("As I said — ...") still fire on a repeat
+    // ask — while different villagers and days spread across the four
+    // wordings (~25% share each). Every variant keeps the truth: the
+    // block variants all say "move adjacent, same side of the Haven
+    // door"; the away variants all say "away from Haven, no dawn meet
+    // while out, find me when back". The partner pool is SHARED by the
+    // water and forage delegated actions so a villager's two favour
+    // kinds draw from the same four wordings.
+    // R130 (journey-deepening r130): the hash is verdict-unstable at
+    // panel size — r129's panel clustered 6/10 on one variant (60%,
+    // REPETITIVE) while r130's fresh panel spread 4/13 (31%, VARIED)
+    // on the same mechanism. Only a STATEFUL rotation guarantees
+    // spread, and the read-only contract blocks it INSIDE the action
+    // function — but the line is only ever SPOKEN at display sites
+    // inside a live sitting, where the convo ledger IS available. So
+    // the pools live here once (shared by the hash and cycle helpers),
+    // the hash helpers keep serving the read-only paths (journal,
+    // menuKey, perform-failure line), and the display sites rotate
+    // via the *Cycle helpers below, keyed off the stable reasonKey
+    // the action functions now return. Same four wordings, same truth.
+    convoFavorBlockPool() {
+      return [
+        'Move next to them, on the same side of the Haven door, to help.',
+        'Stand beside them first — same side of the Haven door — then help.',
+        'You need to be right next to them, same side of the Haven door, to help.',
+        'Get to their side of the Haven door and stand next to them — then you can help.',
+      ];
+    },
+    convoFavorPartnerBlockPool() {
+      return [
+        'Move next to your partner, on the same side of the Haven door.',
+        'Stand beside your partner first — same side of the Haven door — then help.',
+        'You need to be right next to your partner, same side of the Haven door, to help.',
+        "Get to your partner's side of the Haven door and stand next to them — then you can help.",
+      ];
+    },
+    convoFavorAwayPool() {
+      return [
+        `"Wait — I'm away from Haven, out on the road. I can't promise a dawn meet while I'm out — find me when I'm back, and we'll set it then."`,
+        `"I'm out on the road, away from Haven — no dawn meet while I'm out, I'm afraid. Catch me when I'm back and we'll set it then."`,
+        `"Wait — I'm away from Haven right now, out on the road. I can't promise a dawn meet from out here — find me when I'm back and we'll set it then."`,
+        `"Out on the road, away from Haven. A dawn meet's not something I can promise while I'm out — when I'm back, find me, and we'll set it then."`,
+      ];
+    },
+    convoFavorBlockLine(vid) {
+      const pool = this.convoFavorBlockPool();
+      return pool[this.convoFavorHash(vid, { day: (this.state.scholar || {}).day || 0, seq: 11 }) % pool.length];
+    },
+    convoFavorPartnerBlockLine(vid) {
+      const pool = this.convoFavorPartnerBlockPool();
+      return pool[this.convoFavorHash(vid, { day: (this.state.scholar || {}).day || 0, seq: 22 }) % pool.length];
+    },
+    convoFavorAwayLine(vid) {
+      const pool = this.convoFavorAwayPool();
+      return pool[this.convoFavorHash(vid, { day: (this.state.scholar || {}).day || 0, seq: 33 }) % pool.length];
+    },
+    // convoFavor*LineCycle: the STATEFUL pick, for display sites only
+    // (convo-dialogue favour/commit handlers — inside a live sitting).
+    // convoPickCycle cycles the pool without repeating until exhaustion
+    // (c.said persists across sittings), so four consecutive displays
+    // are four distinct wordings and a fifth re-serves the first — which
+    // is what lets the r21 reframe ("As I said — ...") fire on the
+    // repeat ask instead of the second. NEVER call from
+    // convoFavorAction or any read-only path: convoPickCycle writes the
+    // conv ledger, and the journal path calls the action function
+    // outside any sitting.
+    convoFavorBlockLineCycle(vid) {
+      return this.convoPickCycle(vid, 'favor:block', this.convoFavorBlockPool());
+    },
+    convoFavorPartnerBlockLineCycle(vid) {
+      return this.convoPickCycle(vid, 'favor:partnerblock', this.convoFavorPartnerBlockPool());
+    },
+    convoFavorAwayLineCycle(vid) {
+      return this.convoPickCycle(vid, 'favor:away', this.convoFavorAwayPool());
+    },
+
     // convoForageSpot: the meeting place for a pantry-run favor, grounded in
     // the ASKING villager's own foraging knowledge (journey deepening r6,
     // 2026-10-12: the commit line was verbatim "East treeline, first light.
@@ -2107,8 +2225,8 @@
       // away from Haven, no dawn meet promised while out.
       if ((favor.kind === 'forage_help' || favor.kind === 'water_haul' || favor.kind === 'stay_close') &&
           (this.state.village || {}).away?.[vid]) {
-        return { ok: false, away: true,
-          line: `"Wait — I'm away from Haven, out on the road. I can't promise a dawn meet while I'm out — find me when I'm back, and we'll set it then."` };
+        return { ok: false, away: true, reasonKey: 'favoraway',
+          line: this.convoFavorAwayLine(vid) };
       }
       if (favor.kind === 'stay_close' && this.companyFavorCommitGate) {
         const gate=this.companyFavorCommitGate(vid,favor);if(!gate.ok)return{ok:false,line:gate.reason};
@@ -2208,10 +2326,16 @@
       if (v.away?.[vid] && !_inConvo) return blocked('They are out on the road, miles from here. Find them when they are back.');
       const node = v.nodePos?.[vid] || { nx: v.px ?? 4, ny: v.py ?? 4 }, pos = v.positions?.[vid];
       const haven = this.map.px === (v.px ?? 4) && this.map.py === (v.py ?? 4);
+      // R130: reasonKey is a STABLE string naming which variant pool this
+      // block belongs to. It lets the display site (a live sitting, where
+      // the convo ledger is available) rotate the line via
+      // convoFavorBlockLineCycle without the read-only action function
+      // ever touching convo state. The journal path and the menuKey keep
+      // the canonical hash line; only the spoken line rotates.
       if ((v.away?.[vid] && !_inConvo) || node.nx !== this.map.px || node.ny !== this.map.py ||
           (haven && !!v.npcInside?.[vid] !== (s.insideHaven !== false)) || !pos ||
           ![pos.mx, pos.my, s.mx, s.my].every(Number.isFinite) ||
-          Math.max(Math.abs(pos.mx - s.mx), Math.abs(pos.my - s.my)) > 1) return blocked('Move next to them, on the same side of the Haven door, to help.');
+          Math.max(Math.abs(pos.mx - s.mx), Math.abs(pos.my - s.my)) > 1) return { ...blocked(this.convoFavorBlockLine(vid)), reasonKey: 'favorblock' };
       if (favor.kind === 'food_share') {
         const meal = this.giveFoodOptions().find(o => o.id === 'meal' || o.amount === 'meal');
         if (!meal) return blocked('You need edible, unspoiled food in your pack. Food in the pantry must be collected first.');

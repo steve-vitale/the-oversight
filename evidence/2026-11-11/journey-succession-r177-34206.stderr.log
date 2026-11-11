@@ -1,0 +1,39 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"August","t":90},{"id":"Oscar","t":90},{"id":"Hannah","t":90},{"id":"Emilio","t":89}], roster=11
+INH readable=true scripted=true deadItems=8 distinct=8 transferred=1 vanished=2 keptPlants=20 inheritedPlants=4 keptSkills=5 inheritedSkills=14 succTrustPre=89 succTrustPost=60
+PARITY readable=true equal=true inherited=[] pre=["iron_stomach","war_cry"] post=["iron_stomach","war_cry"]
+DEATH d41 (the expedition, scripted): Terrence -> Emilio | passed=true lin=true mo=true trust=60 vouchers=8
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=4 vanished=2 of 8 distinct dead-bearer items
+  CONVO d+3 with August (refused=false)
+  CONVO d+3 with Oscar (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with August (refused=false)
+  CONVO d+7 with Hannah (refused=false)
+  CONVO d+14 with August (refused=false)
+  CONVO d+14 with Sofia (refused=false)
+  CONVO d+30 with Sofia (refused=false)
+  CONVO d+30 with Aroha (refused=false)
+  CONVO d+45 with August (refused=false)
+  CONVO d+45 with Sofia (refused=false)
+  CONVO d+53 with August (refused=false)
+  CONVO d+53 with Sofia (refused=false)
+  CONVO d+64 with August (refused=false)
+  CONVO d+64 with Sofia (refused=false)
+
+FUNERAL: deathBeat=7 recover=1 vouch=1 (eligible=8) echo=1 organicBurial={"respects":false,"bury":false} halfRation=4
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":45,"offerLines":16,"codexPlantsDelta":22,"codexSkillsDelta":32,"codexAbilitiesDelta":13,"xpDelta":152,"any":true} pantry 38882->11749
+TRUST-DIALS: office 60->91 (+31, climb) | villageMean 78.3->91.2 (+12.9, climb) | ge60 8->6 | movers>=5: [{"id":"Hassan","from":53,"to":90,"delta":37},{"id":"Aroha","from":63,"to":90,"delta":27},{"id":"Sofia","from":73,"to":92,"delta":19},{"id":"Oliver","from":73,"to":91,"delta":18},{"id":"Elif","from":85,"to":92,"delta":7}]
+DEED-LEDGER: calls=18 summary={"giveFood":{"calls":15,"ok":15,"deltaSum":4,"deltaN":15,"positive":4,"meanDelta":0.27},"donateToPantry":{"calls":3,"ok":3,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=false(echoMentions=1 (convo=1, say=0)) m4=true m5=manual | endDay=111 alive=7 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=18) trustVerdict={"readable":true,"officeMantle":60,"officeLast":91,"officeDelta":31,"officeClass":"climb","villageMantle":78.3,"villageLast":91.2,"villageDelta":12.9,"villageClass":"climb","villageGe60Mantle":8,"villageGe60Last":6,"movers":[{"id":"Hassan","from":53,"to":90,"delta":37},{"id":"Aroha","from":63,"to":90,"delta":27},{"id":"Sofia","from":73,"to":92,"delta":19},{"id":"Oliver","from":73,"to":91,"delta":18},{"id":"Elif","from":85,"to":92,"delta":7}]}
+E6/CALLCHECK: e6={"callMoves":10,"withCensus":10,"chainHandoffs":2,"trustMoves":8} callCheck={"dailyMoveDays":10,"callMoveDays":10,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=2 (v2=3, excludedLoot=1))
+E7/R47: e7={"trustMoves":8,"soloOffice":2,"soloOfficeDeltas":[1,1],"soloBearerDeltaExact":[1,1],"singleMoverBearer":1,"singleMoverOther":5,"eventClass":{"event-only":0,"deed-only":1,"both":7,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":1,"v2":3,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":3,"known":3,"unknown":0} e3={"dailyDays":71,"moves":10}

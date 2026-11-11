@@ -1,0 +1,510 @@
+SEEDS: 43501 d116, 43502 d54, 43503 d111, 43504 d68
+
+seed 43501: days=116 endReason=village-lost fullConvs=93 naturalEnds=81 feasts=16 moots=0
+  scattering: {"scattered":false,"hungryDays":0,"aliveEnd":0,"endReason":"village-lost"}
+  decisions: {"lure:decline":3,"lure:accept":2,"bond:decline":4,"party:accept":7,"party:decline":7}
+  BOND lure-by-inviter (scholar=Irene initialBearer=Frank): {"NPC:lure:decline":3,"NPC:lure:accept":2,"NPC:bond:decline":4,"player:party:accept":7,"player:party:decline":7}
+  BOND successions: [{"day":29,"from":"Frank","to":"Giovanni"},{"day":51,"from":"Giovanni","to":"Lucas"},{"day":52,"from":"Lucas","to":"Theo"},{"day":65,"from":"Theo","to":"Meshari"},{"day":74,"from":"Meshari","to":"Otis"},{"day":80,"from":"Otis","to":"Daniyar"},{"day":85,"from":"Daniyar","to":"Grace"},{"day":92,"from":"Grace","to":"Ruth"},{"day":93,"from":"Ruth","to":"Emma"},{"day":101,"from":"Emma","to":"Nusta"},{"day":115,"from":"Nusta","to":"Irene"}]
+  BOND proposeWrapped={"proposeLink":true,"proposeCovenant":true,"proposeTrade":true} proposeCalls=3 {"proposeLink:scholar":3}
+  COUNTER proposeLink=3 counter=1 fresh=3 freshCounter=1 blocked=0 blockedCounter=0 unknownPending=0 answerWrapped=true
+  COUNTER settles=1 linkFormed=1 failed=0 unknown=0 answers=1 byHow={"accept":1} answersLinkFormed=1 minPantryAtSettle=25600 tributes=[5000] pendingCounterEnd=null
+    SETTLE d10 target=village_1 tribute=5000 pantry=25600 linkFormed=true result={"id":"link_mgpspibq303","primary":"village_1","subordinate":"haven","trust":30,"tributeKcalPerWeek":5000,"tributePaidWe
+    PROPOSE d10 proposeLink targetId=village_1 pendingBefore=false result="counter"
+    PROPOSE d12 proposeLink targetId=village_2 pendingBefore=false result={"id":"link_mgpspio2780","primary":"haven","subordinate":"village_2","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":12,"kind":"
+    PROPOSE d111 proposeLink targetId=village_2 pendingBefore=false result={"id":"link_mgpspxrp95","primary":"haven","subordinate":"village_2","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":111,"kind":"
+  CONFESS confrontWrapped={"confrontDoubt":true,"confrontTheft":true} total=7 confessed=2 byOutcome={"already-confessed":5,"confessed":2} sittingsWithConfession=2 singleSittings=2 doubleSittings=0 outsideSittingConfessed=0
+  RECAP maxPresses=5 totalPresses=83 offeredAfterCap=0 capFailures=0
+  BOND proposed=24 byInitiatorKind={"villager":24} byKind={"link":8,"person":16} byOutcome={"staged":10,"accepted":9,"refused":4,"expired":1} villagerPerson=16 villagerPersonAccepted=6 linkRaises=8 linkAccepted=3 maxPerInitiator=6
+    PROPOSED d9 Esperanza(villager)->village_1 kind=link outcome=staged chance=null
+    PROPOSED d10 Esperanza(villager)->village_1 kind=link outcome=accepted chance=null
+    PROPOSED d11 Giovanni(villager)->village_2 kind=link outcome=staged chance=null
+    PROPOSED d12 Giovanni(villager)->village_2 kind=link outcome=accepted chance=null
+    PROPOSED d18 Otis(villager)->Frank kind=person outcome=staged chance=null
+    PROPOSED d19 Otis(villager)->Frank kind=person outcome=accepted chance=null
+    PROPOSED d19 Giovanni(villager)->Otis kind=person outcome=refused chance=53
+    PROPOSED d27 Meshari(villager)->Lucas kind=person outcome=refused chance=63
+    PROPOSED d29 Grace(villager)->Meshari kind=person outcome=refused chance=54
+    PROPOSED d33 Emma(villager)->Giovanni kind=person outcome=staged chance=null
+    PROPOSED d34 Emma(villager)->Giovanni kind=person outcome=accepted chance=null
+    PROPOSED d43 Theo(villager)->Giovanni kind=person outcome=staged chance=null
+    PROPOSED d44 Theo(villager)->Giovanni kind=person outcome=accepted chance=null
+    PROPOSED d45 Grace(villager)->Otis kind=person outcome=refused chance=48
+    PROPOSED d51 Emma(villager)->Lucas kind=person outcome=staged chance=null
+    PROPOSED d54 Emma(villager)->Theo kind=person outcome=accepted chance=null
+    PROPOSED d74 Ruth(villager)->Otis kind=person outcome=staged chance=null
+    PROPOSED d75 Ruth(villager)->Otis kind=person outcome=accepted chance=null
+    PROPOSED d92 Irene(villager)->village_2 kind=link outcome=staged chance=null
+    PROPOSED d95 Irene(villager)->village_2 kind=link outcome=expired chance=null
+    PROPOSED d107 Irene(villager)->Nusta kind=person outcome=staged chance=null
+    PROPOSED d108 Irene(villager)->Nusta kind=person outcome=accepted chance=null
+    PROPOSED d110 Irene(villager)->village_2 kind=link outcome=staged chance=null
+    PROPOSED d111 Irene(villager)->village_2 kind=link outcome=accepted chance=null
+  BOND end bonds=107 sample={"key":"gen_0pfmifl|gen_siugbnl","val":"{\"v\":42,\"depth\":1,\"day\":19,\"dayGain\":6,\"combat\":0}"}
+  plot plot_1 d7 leader=Lucas inviter=Meshari target=Ursula sprung=true gT->L=0 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_3 d10 leader=Lucas inviter=Meshari target=Ursula sprung=true gT->L=0 gT->I=0 gA->Tmax=0 gI->T=0
+  armWrapped=true springWrapped=true
+  ARM d7 plot_1 Lucas->Ursula inviter=Meshari motive={"score":37.760000000000005,"reasons":["grievance"]} gT->L=47.2 gL->T=47.2 accMotives=[{"who":"Meshari","score":0,"reasons":[],"grievance":0},{"who":"Grace","score":0,"reasons":[],"grievance":0}] trust={"leader":44,"Meshari":27,"Grace":32} goal=family
+  ARM d10 plot_3 Lucas->Ursula inviter=Meshari motive={"score":35.84,"reasons":["grievance"]} gT->L=44.800000000000004 gL->T=44.800000000000004 accMotives=[{"who":"Meshari","score":0,"reasons":[],"grievance":0},{"who":"Grace","score":0,"reasons":[],"grievance":0}] trust={"leader":47,"Meshari":29,"Grace":37} goal=family
+  SPRING d8 plot_1 Lucas->Ursula outcome=escaped case=case_2 endCase=case_2 charge=ambush status=acquitted heardDay=9 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=2
+  SPRING d12 plot_3 Lucas->Ursula outcome=killed case=case_4 endCase=case_4 charge=murder status=acquitted heardDay=13 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=2
+  expireWrapped=true expiredEvents=0
+  village fallen: 21 by cause: {"ambush":1,"monster":4,"the wild":13,"a stranger":1,"contest":1,"the arena":1}
+  death clusters (>=3/day): d114x3 d115x3
+  ambush-caused fallen: [{"who":"Ursula","day":12,"cause":"ambush"}]
+  (samples.deaths, all recorded incl. outsiders: 75 — NOT village deaths)
+  census: seed 43501, day 116, alive 0 | fallen: 21
+  M6 nightlyNews: strandedDays=5 burst=80 settle=40 witness=12 tale=24 | emitted-AWAY(strict on-tile) burst=12 settle=1 witness=0 tale=0 | emitted-AWAY-GATE(radius-1) burst=0 settle=0 witness=0 tale=0 debatesKicked=41 settled=41 queuedAtEnd=0
+  M4 transcripts=92 naturalEnds=81 nearDupFlags=10
+  M4 FLAG jaccard>=0.5 [C-friendship gen_ek7c9al] :: Permit me: Still on teaching them something. || we're still on teaching them something, friend.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_ek7c9al] :: Practical view: Like I said — we're still on your read on people here. || we're still on your read on people here. Anyway.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_ek7c9al] :: we're still on what scares you most. || If I may — Like I said — we're still on what scares you most.
+  M4 FLAG same-opening [D-talk-request emma_larsen] :: Something eases in their shoulders. They're really talking to you now. || Something eases in their shoulders. "Good. We're better with you here. I mean that.
+  M4 FLAG jaccard>=0.5 [D-talk-request emma_larsen] :: Hah. Still on what you think happened to us. || we're still on what you think happened to us.
+  M4 FLAG jaccard>=0.5 [D-talk-request emma_larsen] :: Hah. Still on what you think happened to us. || Here's the thing: As I said — we're still on what you think happened to us.
+  M4 FLAG jaccard>=0.5 [D-talk-request emma_larsen] :: Hah. Still on what you think happened to us. || what you think happened to us — that's still where we are.
+  M4 FLAG jaccard>=0.5 [D-talk-request emma_larsen] :: we're still on what you think happened to us. || Here's the thing: As I said — we're still on what you think happened to us.
+  M4 FLAG jaccard>=0.5 [D-talk-request emma_larsen] :: we're still on what you think happened to us. || what you think happened to us — that's still where we are.
+  M4 FLAG jaccard>=0.5 [D-talk-request emma_larsen] :: Come here — Like I said — we're still on where you're from. || we're still on where you're from, anyway.
+  M4 CANDIDATE [C-friendship emma_larsen turns=11 naturalEnd=true]:
+    NPC: "The pantry's nearly bare. Forage with me tomorrow? I know where the feral paddy rice grows thick."
+    YOU: "Tell me why you need this."
+    NPC: "Another day like today and we're choosing who eats. Nobody's worked where the feral paddy rice grows thick in days. We'll fill packs before dark."
+    YOU: Why can’t I do this now?
+    NPC: As I said — Your partner is inside the Haven hall. Go through the door to meet them.
+    YOU: Why can’t I do this now?
+    NPC: Like I said — Your partner is inside the Haven hall. Go through the door to meet them.
+    YOU: Why can’t I do this now?
+    NPC: Still the same thing — Your partner is inside the Haven hall. Go through the door to meet them.
+    YOU: Why can’t I do this now?
+    NPC: I've told you three times now — Your partner is inside the Haven hall. Go through the door to meet them.
+    YOU: Why can’t I do this now?
+    NPC: I've told you three times now — Your partner is inside the Haven hall. Go through the door to meet them.
+    YOU: "I’ll come back to help."
+    NPC: "Then it’s set. Where the feral paddy rice grows thick, before the heat sets in. Bring the big pack if you have it."
+    YOU: "Hold on, back up. Then what?"
+    NPC: "Help me haul something back? Too much for one."
+    YOU: "All right. Let's go."
+    NPC: "Here. I made an extra." Emma presses something into your hand — a decent tool, oiled and kept. (Useful. Keep it.)
+    YOU: "Hold on, back up. Then what?"
+    NPC: "I could talk all day, but — go on. We'll talk more."
+    YOU: "..."
+    NPC: A comfortable quiet settles. They smile a little, and let it be.
+    NPC: "First light. The pantry's counting on us."
+    NPC: They're smiling as you go. "Come back anytime."
+
+seed 43502: days=54 endReason=village-lost fullConvs=41 naturalEnds=41 feasts=7 moots=0
+  scattering: {"scattered":false,"hungryDays":0,"aliveEnd":0,"endReason":"village-lost"}
+  decisions: {"lure:accept":2,"party:decline":2,"lure:decline":1,"party:accept":4,"bond:decline":1,"bond:accept":1}
+  BOND lure-by-inviter (scholar=Zoe initialBearer=Esperanza): {"NPC:lure:accept":2,"player:party:decline":2,"NPC:lure:decline":1,"player:party:accept":4,"NPC:bond:decline":1,"NPC:bond:accept":1}
+  BOND successions: [{"day":31,"from":"Esperanza","to":"Giuseppe"},{"day":43,"from":"Giuseppe","to":"Amina"},{"day":50,"from":"Amina","to":"Ada"},{"day":53,"from":"Ada","to":"Sofia"}]
+  BOND proposeWrapped={"proposeLink":true,"proposeCovenant":true,"proposeTrade":true} proposeCalls=3 {"proposeLink:scholar":3}
+  COUNTER proposeLink=3 counter=1 fresh=3 freshCounter=1 blocked=0 blockedCounter=0 unknownPending=0 answerWrapped=true
+  COUNTER settles=1 linkFormed=1 failed=0 unknown=0 answers=1 byHow={"accept":1} answersLinkFormed=1 minPantryAtSettle=6079 tributes=[5000] pendingCounterEnd=null
+    SETTLE d24 target=village_2 tribute=5000 pantry=6079 linkFormed=true result={"id":"link_mgpspkba951","primary":"village_2","subordinate":"haven","trust":30,"tributeKcalPerWeek":5000,"tributePaidWe
+    PROPOSE d24 proposeLink targetId=village_2 pendingBefore=false result="counter"
+    PROPOSE d26 proposeLink targetId=village_0 pendingBefore=false result={"id":"link_mgpspkks175","primary":"haven","subordinate":"village_0","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":26,"kind":"
+    PROPOSE d27 proposeLink targetId=village_1 pendingBefore=false result={"id":"link_mgpspknd650","primary":"haven","subordinate":"village_1","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":27,"kind":"
+  CONFESS confrontWrapped={"confrontDoubt":true,"confrontTheft":true} total=2 confessed=2 byOutcome={"confessed":2} sittingsWithConfession=2 singleSittings=2 doubleSittings=0 outsideSittingConfessed=0
+  RECAP maxPresses=5 totalPresses=39 offeredAfterCap=0 capFailures=0
+  BOND proposed=16 byInitiatorKind={"villager":16} byKind={"person":10,"link":6} byOutcome={"staged":7,"expired":1,"refused":1,"accepted":7} villagerPerson=10 villagerPersonAccepted=4 linkRaises=6 linkAccepted=3 maxPerInitiator=6
+    PROPOSED d15 Sofia(villager)->Esperanza kind=person outcome=staged chance=null
+    PROPOSED d18 Sofia(villager)->Esperanza kind=person outcome=expired chance=null
+    PROPOSED d18 Giulia(villager)->Esperanza kind=person outcome=staged chance=null
+    PROPOSED d19 Ada(villager)->Ines kind=person outcome=refused chance=63
+    PROPOSED d20 Giulia(villager)->Esperanza kind=person outcome=accepted chance=null
+    PROPOSED d23 Sofia(villager)->village_2 kind=link outcome=staged chance=null
+    PROPOSED d24 Sofia(villager)->village_2 kind=link outcome=accepted chance=null
+    PROPOSED d25 Giulia(villager)->village_0 kind=link outcome=staged chance=null
+    PROPOSED d26 Giulia(villager)->village_0 kind=link outcome=accepted chance=null
+    PROPOSED d26 Sofia(villager)->village_1 kind=link outcome=staged chance=null
+    PROPOSED d27 Sofia(villager)->village_1 kind=link outcome=accepted chance=null
+    PROPOSED d33 Amina(villager)->Giuseppe kind=person outcome=staged chance=null
+    PROPOSED d36 Amina(villager)->Giuseppe kind=person outcome=accepted chance=null
+    PROPOSED d43 Ines(villager)->Amina kind=person outcome=staged chance=null
+    PROPOSED d44 Ines(villager)->Amina kind=person outcome=accepted chance=null
+    PROPOSED d45 Ines(villager)->Quinn kind=person outcome=accepted chance=83
+  BOND end bonds=49 sample={"key":"ines_duarte|sofia_chen","val":"{\"v\":50,\"depth\":2,\"day\":51,\"dayGain\":4}"}
+  plot plot_1 d7 leader=Gunther inviter=Giulia target=Doly sprung=true gT->L=60 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_3 d10 leader=Doly inviter=Quinn target=Gunther sprung=true gT->L=0 gT->I=0 gA->Tmax=0 gI->T=0
+  armWrapped=true springWrapped=true
+  ARM d7 plot_1 Gunther->Doly inviter=Giulia motive={"score":58.28,"reasons":["grievance","ambition"]} gT->L=41.6 gL->T=41.6 accMotives=[{"who":"Giulia","score":12,"reasons":["prove"],"grievance":0},{"who":"Amina","score":12,"reasons":["prove"],"grievance":0}] trust={"leader":7,"Giulia":45,"Amina":2} goal=lead
+  ARM d10 plot_3 Doly->Gunther inviter=Quinn motive={"score":80,"reasons":["grievance"]} gT->L=44.800000000000004 gL->T=100 accMotives=[{"who":"Marcus","score":0,"reasons":[],"grievance":0},{"who":"Quinn","score":12,"reasons":["prove"],"grievance":0}] trust={"leader":61,"Marcus":19,"Quinn":15} goal=record
+  SPRING d7 plot_1 Gunther->Doly outcome=hurt case=case_2 endCase=case_2 charge=ambush status=resolved heardDay=9 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=2
+  SPRING d11 plot_3 Doly->Gunther outcome=killed case=case_4 endCase=case_4 charge=murder status=acquitted heardDay=13 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=2
+  expireWrapped=true expiredEvents=0
+  village fallen: 13 by cause: {"ambush":1,"sickness":1,"the wild":9,"a stranger":2}
+  death clusters (>=3/day): d54x4
+  ambush-caused fallen: [{"who":"Gunther","day":11,"cause":"ambush"}]
+  (samples.deaths, all recorded incl. outsiders: 54 — NOT village deaths)
+  census: seed 43502, day 54, alive 0 | fallen: 13
+  M6 nightlyNews: strandedDays=9 burst=30 settle=13 witness=2 tale=16 | emitted-AWAY(strict on-tile) burst=2 settle=0 witness=0 tale=0 | emitted-AWAY-GATE(radius-1) burst=0 settle=0 witness=0 tale=0 debatesKicked=24 settled=23 queuedAtEnd=0
+  M4 transcripts=40 naturalEnds=41 nearDupFlags=11
+  M4 FLAG same-opening [D-talk-request giulia_bianchi] :: You say nothing. The silence sits at the fire with everyone else. || You say nothing. Neither do they, for a while — and it's fine.
+  M4 FLAG same-opening [D-talk-request gen_4h01yo8] :: we're still on whether you still sing. || we're still on whether you still sing. ...at least, that's how it looks to me.
+  M4 FLAG same-opening [D-talk-request giulia_bianchi] :: I still need help with the pantry run. || I still need a hand with the pantry run.
+  M4 FLAG same-opening [C-friendship giulia_bianchi] :: Back home I was a crossing guard. Let me show you what that means out here. || Back home I was invisible. Here, someone might actually see me. I need that to be true.
+  M4 FLAG jaccard>=0.5 [C-friendship giulia_bianchi] :: Back home I was invisible. Here, someone might actually see me. I need that to be true. || Back home nobody noticed me. Here — here I could be someone. I need that to be true.
+  M4 FLAG jaccard>=0.5 [C-friendship amina_diallo] :: What do you make of all this? Really. || we're still on what you make of all this.
+  M4 FLAG jaccard>=0.5 [C-friendship amina_diallo] :: Hah. Like I said — we're still on what you make of all this. || we're still on what you make of all this.
+  M4 FLAG jaccard>=0.5 [C-friendship amina_diallo] :: Hah. Like I said — we're still on what you make of all this. || we're still on what you make of all this. Give it time.
+  M4 FLAG same-opening [C-friendship amina_diallo] :: we're still on what you make of all this. || we're still on what you make of all this. Give it time.
+  M4 FLAG same-opening [C-friendship ines_duarte] :: We were just talking. Nothing important. || We were just talking. Nothing important. That's still where we are.
+  M4 FLAG jaccard>=0.5 [C-friendship amina_diallo] :: the worst thing you've done — that's still where we are. || we're still on the worst thing you've done.
+  M4 CANDIDATE [C-friendship amina_diallo turns=10 naturalEnd=true]:
+    NPC: "It's quiet today. Wrong kind of quiet. You'd know about that."
+    NPC: "Walk my trap line with me? Extra hands, extra eyes."
+    YOU: "All right. Let's go."
+    NPC: Amina shows you where they go to think. "Don't tell the others. Everyone needs one place."
+    YOU: "You said something odd the other day. Let's talk about it."
+    NARR: They go very still. Not relaxed-still. Held-still.
+    YOU: "I need to ask you something."
+    NPC: "Okay." Amina looks down. "Okay, you got me. I wasn't an EMT. I was a Midwife. Everyone out here is selling something. I was selling a better version of me." Their voice is small.
+    YOU: "You alright?"
+    NPC: "Most days I don't think about it. Today I am. Appreciate you noticing."
+    YOU: "Have you heard about the naming debate?"
+    NPC: "The whole fire was arguing about Gavel last night — what to even CALL it. 'The Ugly Beast' got shouted down. What's your vote?"
+    YOU: "I need a moment to think about that."
+    NPC: "Take your time."
+    YOU: "Go on."
+    NPC: "I have opinions about the name. I am saving them for when they count."
+    YOU: "I’m listening."
+    NPC: "We'll land on something. We always do — usually the loudest person's idea."
+    YOU: "Tell me more."
+    NPC: "My vote? I'm keeping it to myself until the shouting stops."
+    YOU: "Want to come with us?"
+    NPC: "Another time. The village needs me here."
+    NPC: "Okay. We'll pick this up later."
+    YOU: "..."
+    NPC: You say nothing. Neither do they, for a while — and it's fine.
+    NPC: "Thanks for... you know. Just listening."
+    NPC: "This was good." They mean it.
+
+seed 43503: days=111 endReason=village-lost fullConvs=98 naturalEnds=84 feasts=15 moots=1
+  scattering: {"scattered":false,"hungryDays":0,"aliveEnd":0,"endReason":"village-lost"}
+  decisions: {"lure:accept":3,"lure:decline":5,"party:accept":6,"bond:accept":3,"party:decline":5,"bond:decline":1}
+  BOND lure-by-inviter (scholar=Anuthida initialBearer=Axel): {"NPC:lure:accept":3,"NPC:lure:decline":5,"player:party:accept":6,"NPC:bond:accept":3,"player:party:decline":5,"NPC:bond:decline":1}
+  BOND successions: [{"day":15,"from":"Axel","to":"David"},{"day":30,"from":"David","to":"Rachel"},{"day":36,"from":"Rachel","to":"Benoit"},{"day":53,"from":"Benoit","to":"Aroha"},{"day":57,"from":"Aroha","to":"Nikolai"},{"day":64,"from":"Nikolai","to":"Shannon"},{"day":71,"from":"Shannon","to":"Ursula"},{"day":75,"from":"Ursula","to":"Brian"},{"day":98,"from":"Brian","to":"Fatima"},{"day":110,"from":"Fatima","to":"Valeria"},{"day":111,"from":"Valeria","to":"Anuthida"}]
+  BOND proposeWrapped={"proposeLink":true,"proposeCovenant":true,"proposeTrade":true} proposeCalls=6 {"proposeLink:scholar":6}
+  COUNTER proposeLink=6 counter=0 fresh=6 freshCounter=0 blocked=0 blockedCounter=0 unknownPending=0 answerWrapped=true
+  COUNTER settles=0 linkFormed=0 failed=0 unknown=0 answers=0 byHow={} answersLinkFormed=0 minPantryAtSettle=null tributes=[] pendingCounterEnd=null
+    PROPOSE d18 proposeLink targetId=village_0 pendingBefore=false result=null
+    PROPOSE d21 proposeLink targetId=village_2 pendingBefore=false result={"id":"link_mgpspklf272","primary":"haven","subordinate":"village_2","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":21,"kind":"
+    PROPOSE d24 proposeLink targetId=village_1 pendingBefore=false result={"id":"link_mgpspkz0886","primary":"haven","subordinate":"village_1","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":24,"kind":"
+    PROPOSE d35 proposeLink targetId=village_spl_31_79049 pendingBefore=false result={"id":"link_mgpspm8b748","primary":"haven","subordinate":"village_spl_31_79049","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":
+    PROPOSE d48 proposeLink targetId=village_spl_35_10377 pendingBefore=false result={"id":"link_mgpspngq576","primary":"haven","subordinate":"village_spl_35_10377","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":
+    PROPOSE d62 proposeLink targetId=village_spl_33_42667 pendingBefore=false result={"id":"link_mgpspq4f18","primary":"haven","subordinate":"village_spl_33_42667","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":6
+  CONFESS confrontWrapped={"confrontDoubt":true,"confrontTheft":true} total=48 confessed=5 byOutcome={"confessed":5,"deflected":36,"attacked":3,"cleared":2,"already-confessed":2} sittingsWithConfession=5 singleSittings=5 doubleSittings=0 outsideSittingConfessed=0
+  RECAP maxPresses=4 totalPresses=48 offeredAfterCap=0 capFailures=0
+  BOND proposed=42 byInitiatorKind={"villager":41,"scholar":1} byKind={"link":18,"person":24} byOutcome={"staged":19,"expired":6,"accepted":16,"refused":1} villagerPerson=24 villagerPersonAccepted=10 linkRaises=18 linkAccepted=6 maxPerInitiator=9
+    PROPOSED d13 Nikolai(villager)->village_0 kind=link outcome=staged chance=null
+    PROPOSED d15 Nikolai(villager)->David kind=person outcome=staged chance=null
+    PROPOSED d15 Rachel(villager)->village_0 kind=link outcome=staged chance=null
+    PROPOSED d16 Shannon(villager)->David kind=person outcome=staged chance=null
+    PROPOSED d16 Nikolai(villager)->village_0 kind=link outcome=expired chance=null
+    PROPOSED d16 Nikolai(villager)->village_1 kind=link outcome=staged chance=null
+    PROPOSED d18 Rachel(villager)->village_0 kind=link outcome=accepted chance=null
+    PROPOSED d18 Nikolai(villager)->David kind=person outcome=expired chance=null
+    PROPOSED d18 Nikolai(villager)->David kind=person outcome=staged chance=null
+    PROPOSED d18 Benoit(villager)->village_2 kind=link outcome=staged chance=null
+    PROPOSED d19 Shannon(villager)->David kind=person outcome=expired chance=null
+    PROPOSED d19 Rachel(villager)->Shannon kind=person outcome=accepted chance=64
+    PROPOSED d19 Nikolai(villager)->village_1 kind=link outcome=expired chance=null
+    PROPOSED d20 Nikolai(villager)->David kind=person outcome=accepted chance=null
+    PROPOSED d21 Benoit(villager)->village_2 kind=link outcome=accepted chance=null
+    PROPOSED d23 Ursula(villager)->village_1 kind=link outcome=staged chance=null
+    PROPOSED d24 Ursula(villager)->village_1 kind=link outcome=accepted chance=null
+    PROPOSED d26 Ursula(villager)->David kind=person outcome=staged chance=null
+    PROPOSED d27 Ursula(villager)->David kind=person outcome=accepted chance=null
+    PROPOSED d33 Brian(villager)->Rachel kind=person outcome=staged chance=null
+    PROPOSED d34 Brian(villager)->Rachel kind=person outcome=accepted chance=null
+    PROPOSED d34 Benoit(villager)->village_spl_31_79049 kind=link outcome=staged chance=null
+    PROPOSED d35 Benoit(villager)->village_spl_31_79049 kind=link outcome=accepted chance=null
+    PROPOSED d43 Aroha(villager)->Benoit kind=person outcome=staged chance=null
+    PROPOSED d44 Aroha(villager)->Benoit kind=person outcome=accepted chance=null
+    PROPOSED d45 Ingrid(villager)->Aroha kind=person outcome=accepted chance=73
+    PROPOSED d47 Ursula(villager)->village_spl_35_10377 kind=link outcome=staged chance=null
+    PROPOSED d48 Ursula(villager)->village_spl_35_10377 kind=link outcome=accepted chance=null
+    PROPOSED d51 Shannon(villager)->Benoit kind=person outcome=staged chance=null
+    PROPOSED d53 Nikolai(villager)->village_spl_33_42667 kind=link outcome=staged chance=null
+    PROPOSED d54 Shannon(villager)->Aroha kind=person outcome=expired chance=null
+    PROPOSED d56 Nikolai(scholar)->village_spl_33_42667 kind=link outcome=expired chance=null
+    PROPOSED d61 Ursula(villager)->village_spl_33_42667 kind=link outcome=staged chance=null
+    PROPOSED d62 Ursula(villager)->village_spl_33_42667 kind=link outcome=accepted chance=null
+    PROPOSED d74 Iti(villager)->Brian kind=person outcome=staged chance=null
+    PROPOSED d75 Iti(villager)->Brian kind=person outcome=accepted chance=null
+    PROPOSED d79 Fatima(villager)->Brian kind=person outcome=staged chance=null
+    PROPOSED d81 Fatima(villager)->Brian kind=person outcome=accepted chance=null
+    PROPOSED d86 Wanjiru(villager)->Fatima kind=person outcome=refused chance=22
+    PROPOSED d98 Valeria(villager)->Fatima kind=person outcome=staged chance=null
+    PROPOSED d99 Valeria(villager)->Fatima kind=person outcome=accepted chance=null
+    PROPOSED d107 Ingrid(villager)->Waithera kind=person outcome=accepted chance=53
+  BOND end bonds=90 sample={"key":"gen_3p87k28|gen_kpb1o2i","val":"{\"v\":29,\"depth\":1,\"day\":30,\"dayGain\":2}"}
+  plot plot_1 d9 leader=Rachel inviter=Benoit target=Brian sprung=true gT->L=47.2 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_3 d11 leader=Nikolai inviter=Benoit target=Aki sprung=true gT->L=0 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_5 d16 leader=Nikolai inviter=Benoit target=Aki sprung=true gT->L=0 gT->I=0 gA->Tmax=0 gI->T=0
+  armWrapped=true springWrapped=true
+  ARM d9 plot_1 Rachel->Brian inviter=Benoit motive={"score":40.96000000000001,"reasons":["grievance"]} gT->L=51.2 gL->T=51.2 accMotives=[{"who":"Benoit","score":25,"reasons":["ambition"],"grievance":0},{"who":"Ingrid","score":0,"reasons":[],"grievance":0}] trust={"leader":44,"Benoit":3,"Ingrid":29} goal=understand
+  ARM d11 plot_3 Nikolai->Aki inviter=Benoit motive={"score":40.32000000000001,"reasons":["grievance"]} gT->L=50.400000000000006 gL->T=50.400000000000006 accMotives=[{"who":"Benoit","score":25,"reasons":["ambition"],"grievance":0},{"who":"Ursula","score":0,"reasons":[],"grievance":0}] trust={"leader":26,"Benoit":9,"Ursula":1} goal=record
+  ARM d16 plot_5 Nikolai->Aki inviter=Benoit motive={"score":41.6,"reasons":["grievance"]} gT->L=52 gL->T=52 accMotives=[{"who":"Benoit","score":25,"reasons":["ambition"],"grievance":0},{"who":"Ursula","score":0,"reasons":[],"grievance":0}] trust={"leader":41,"Benoit":26,"Ursula":17} goal=record
+  SPRING d9 plot_1 Rachel->Brian outcome=escaped case=case_2 endCase=case_2 charge=ambush status=resolved heardDay=11 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=2
+  SPRING d14 plot_3 Nikolai->Aki outcome=escaped case=case_4 endCase=case_4 charge=ambush status=acquitted heardDay=15 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=2
+  SPRING d18 plot_5 Nikolai->Aki outcome=killed case=case_6 endCase=case_6 charge=murder status=acquitted heardDay=19 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=2
+  expireWrapped=true expiredEvents=0
+  village fallen: 19 by cause: {"the wild":12,"ambush":1,"monster":2,"the arena":2,"a stranger":1,"combat":1}
+  death clusters (>=3/day): d111x4
+  ambush-caused fallen: [{"who":"Aki","day":18,"cause":"ambush"}]
+  (samples.deaths, all recorded incl. outsiders: 83 — NOT village deaths)
+  census: seed 43503, day 111, alive 0 | fallen: 19
+  M6 nightlyNews: strandedDays=5 burst=84 settle=42 witness=12 tale=27 | emitted-AWAY(strict on-tile) burst=14 settle=0 witness=0 tale=0 | emitted-AWAY-GATE(radius-1) burst=0 settle=0 witness=0 tale=0 debatesKicked=42 settled=42 queuedAtEnd=0
+  M4 transcripts=96 naturalEnds=84 nearDupFlags=16
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_ffww7mv] :: a ridge with a view for miles — I'll show you on the map sometime. It's real. || a burned farmhouse — I'll show you on the map sometime. It's real.
+  M4 FLAG jaccard>=0.5 [C-friendship benoit_lambert] :: a spring that runs clear — I'll show you on the map sometime. It's real. || an old trapline — I'll show you on the map sometime. It's real.
+  M4 FLAG same-opening [D-talk-request benoit_lambert] :: I still need help with the pantry run. || I still need a hand with the pantry run.
+  M4 FLAG same-opening [C-friendship nikolai_volkov] :: «Это правда. Совершенно верно.» (you catch 'правда' — truth) They nod back, slowly. || «Это правда.» (you catch 'правда' — truth) They nod back, a little quicker this time. "Hello?" — they grin, proud of the one English they know.
+  M4 FLAG jaccard>=0.5 [B-first-meeting fatima_hassan] :: Bottom line: What got you through the first week? The very first days. || we're still on what got you through the first week.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_ffww7mv] :: a ridge with a view for miles — I'll show you on the map sometime. It's real. || an old trapline — I'll show you on the map sometime. It's real.
+  M4 FLAG same-opening [D-talk-request aroha_ngata] :: I still need help with the pantry run. || I still need a hand with the pantry run.
+  M4 FLAG jaccard>=0.5 [D-talk-request wanjiru_kamau] :: «Sahihi.» (you catch 'Sahihi' — correct) They nod, holding your gaze a beat longer. || «Ndiyo, uko sahihi.» (Yes, you're correct. — you're fairly sure) They nod, holding your gaze a beat longer.
+  M4 FLAG jaccard>=0.5 [D-talk-request wanjiru_kamau] :: «Ndiyo, ndiyo, hasa.» (Yes, yes, exactly. — you're fairly sure) They nod back, slowly. || «Umesema vizuri. Hasa.» (Well said. Exactly right. — you're fairly sure) They nod back, slowly.
+  M4 FLAG jaccard>=0.5 [C-friendship wanjiru_kamau] :: «Ndiyo, ninahisi vivyo hivyo.» — Brian translates: "Yes, I feel the same way." They nod, holding your gaze a beat longer. || «Ndiyo, ndiyo, hasa.» — Brian translates: "Yes, yes, exactly." They nod, holding your gaze a beat longer.
+  M4 FLAG same-opening [D-talk-request app_mgpspk2r260] :: I still need help with the pantry run. || I still need a hand with the pantry run.
+  M4 FLAG jaccard>=0.5 [B-first-meeting visjoin_73] :: «ฉันเห็นด้วยกับคุณ» They nod back, a little quicker this time. || «จริงด้วย.» (you catch 'จริง' — true) They nod back, a little quicker this time.
+  M4 FLAG same-opening [C-friendship fatima_hassan] :: Solitude isn't loneliness. I keep telling people that. They don't believe me. || Solitude isn't loneliness. Loneliness is being surrounded and still alone.
+  M4 FLAG jaccard>=0.5 [D-talk-request wanjiru_kamau] :: Come here — Like I said — we're still on what scares you most. || Can I be honest? As I said — we're still on what scares you most.
+  M4 FLAG same-opening [D-talk-request valeria_quispe] :: we're still on that personal stuff. || we're still on that personal stuff. Just... be straight with me.
+  M4 FLAG same-opening [C-friendship fatima_hassan] :: What scares you most about what's happening? The real answer. || what scares you most — that's still where we are.
+  M4 CANDIDATE [C-friendship wanjiru_kamau turns=11 naturalEnd=true]:
+    NPC: "Have you — sorry. I keep thinking about them."
+    NPC: Wanjiru has an edge today — something curdled.
+    YOU: "Hey — you alright?"
+    NPC: "What's this about? Most days I don't think about it. Today I am. Appreciate you noticing."
+    YOU: "How are you holding up? About... them."
+    NPC: "I dreamed Ursula was still here. Woke up angry at the dream. Stupid."
+    YOU: "Want to come with us?"
+    NPC: "Alright. But I'm not carrying your stuff."
+    YOU: "Go on."
+    NPC: "I keep turning over the last thing Ursula said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+    YOU: "I’m listening."
+    NPC: "The fire feels smaller without Ursula. The rest of us will have to be bigger."
+    YOU: "Tell me more."
+    NPC: "I retie every loose knot in passing for Ursula, now. Feels right. Feels like the least I can do."
+    YOU: "Go on."
+    NPC: "That's the whole of it. Sorry."
+    YOU: "Can I ask you something else?"
+    NPC: "Sure — what's on your mind?"
+    YOU: "What do you want me to know about you?"
+    NPC: "You want to know about that? Okay." "I'd follow you out past the treeline. Don't tell the others — they'd want to come too."
+    YOU: "Say more."
+    NPC: "Okay. We'll pick this up later."
+    YOU: "..."
+    NPC: A comfortable quiet settles. They smile a little, and let it be.
+    NPC: "Thanks for... you know. Just listening."
+    NPC: They're smiling as you go. "Come back anytime."
+
+seed 43504: days=68 endReason=village-lost fullConvs=81 naturalEnds=75 feasts=8 moots=1
+  scattering: {"scattered":true,"hungryDays":3,"aliveEnd":3,"endReason":"village-lost"}
+  decisions: {"bond:decline":1,"party:decline":4,"party:accept":2,"bond:accept":1}
+  BOND lure-by-inviter (scholar=Chloe initialBearer=Alejandra): {"NPC:bond:decline":1,"player:party:decline":4,"player:party:accept":2,"NPC:bond:accept":1}
+  BOND successions: [{"day":64,"from":"Alejandra","to":"Nadia"},{"day":65,"from":"Nadia","to":"Chloe"}]
+  BOND proposeWrapped={"proposeLink":true,"proposeCovenant":true,"proposeTrade":true} proposeCalls=4 {"proposeLink:scholar":4}
+  COUNTER proposeLink=4 counter=0 fresh=4 freshCounter=0 blocked=0 blockedCounter=0 unknownPending=0 answerWrapped=true
+  COUNTER settles=0 linkFormed=0 failed=0 unknown=0 answers=0 byHow={} answersLinkFormed=0 minPantryAtSettle=null tributes=[] pendingCounterEnd=null
+    PROPOSE d15 proposeLink targetId=village_3 pendingBefore=false result={"id":"link_mgpspj53834","primary":"haven","subordinate":"village_3","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":15,"kind":"
+    PROPOSE d33 proposeLink targetId=village_spl_29_25040 pendingBefore=false result={"id":"link_mgpspli4159","primary":"haven","subordinate":"village_spl_29_25040","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":
+    PROPOSE d48 proposeLink targetId=village_2 pendingBefore=false result={"id":"link_mgpspn63453","primary":"haven","subordinate":"village_2","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":48,"kind":"
+    PROPOSE d54 proposeLink targetId=village_0 pendingBefore=false result={"id":"link_mgpspo0m37","primary":"haven","subordinate":"village_0","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":54,"kind":"f
+  CONFESS confrontWrapped={"confrontDoubt":true,"confrontTheft":true} total=6 confessed=2 byOutcome={"confessed":2,"already-confessed":4} sittingsWithConfession=2 singleSittings=2 doubleSittings=0 outsideSittingConfessed=0
+  RECAP maxPresses=5 totalPresses=38 offeredAfterCap=0 capFailures=0
+  BOND proposed=26 byInitiatorKind={"villager":26} byKind={"link":20,"person":6} byOutcome={"staged":12,"expired":6,"accepted":7,"refused":1} villagerPerson=6 villagerPersonAccepted=3 linkRaises=20 linkAccepted=4 maxPerInitiator=8
+    PROPOSED d9 Aria(villager)->village_1 kind=link outcome=staged chance=null
+    PROPOSED d11 Jessica(villager)->village_1 kind=link outcome=staged chance=null
+    PROPOSED d12 Aria(villager)->village_1 kind=link outcome=expired chance=null
+    PROPOSED d12 Aria(villager)->village_3 kind=link outcome=staged chance=null
+    PROPOSED d13 Gloria(villager)->village_3 kind=link outcome=staged chance=null
+    PROPOSED d14 Jessica(villager)->village_1 kind=link outcome=expired chance=null
+    PROPOSED d15 Gloria(villager)->village_3 kind=link outcome=accepted chance=null
+    PROPOSED d15 Aria(villager)->village_3 kind=link outcome=expired chance=null
+    PROPOSED d15 Gloria(villager)->village_1 kind=link outcome=staged chance=null
+    PROPOSED d18 Gloria(villager)->village_1 kind=link outcome=expired chance=null
+    PROPOSED d19 Sidney(villager)->Jessica kind=person outcome=refused chance=68
+    PROPOSED d28 Jessica(villager)->village_1 kind=link outcome=staged chance=null
+    PROPOSED d29 Aria(villager)->village_1 kind=link outcome=staged chance=null
+    PROPOSED d31 Jessica(villager)->village_1 kind=link outcome=expired chance=null
+    PROPOSED d32 Aria(villager)->village_1 kind=link outcome=expired chance=null
+    PROPOSED d32 Aria(villager)->village_spl_29_25040 kind=link outcome=staged chance=null
+    PROPOSED d33 Aria(villager)->village_spl_29_25040 kind=link outcome=accepted chance=null
+    PROPOSED d43 Nadia(villager)->Alejandra kind=person outcome=staged chance=null
+    PROPOSED d44 Nadia(villager)->Alejandra kind=person outcome=accepted chance=null
+    PROPOSED d45 Xavier(villager)->Chloe kind=person outcome=accepted chance=37
+    PROPOSED d47 Jessica(villager)->village_2 kind=link outcome=staged chance=null
+    PROPOSED d48 Jessica(villager)->village_2 kind=link outcome=accepted chance=null
+    PROPOSED d51 Chloe(villager)->Alejandra kind=person outcome=staged chance=null
+    PROPOSED d53 Chloe(villager)->Alejandra kind=person outcome=accepted chance=null
+    PROPOSED d53 Jessica(villager)->village_0 kind=link outcome=staged chance=null
+    PROPOSED d54 Jessica(villager)->village_0 kind=link outcome=accepted chance=null
+  BOND end bonds=83 sample={"key":"chloe_dubois|nadia_khoury","val":"{\"v\":54,\"depth\":2,\"day\":61,\"dayGain\":2}"}
+  armWrapped=true springWrapped=true
+  expireWrapped=true expiredEvents=0
+  village fallen: 12 by cause: {"sickness":4,"a wound that wouldn't close":3,"combat":1,"starvation":2,"the wild":2}
+  death clusters (>=3/day): none
+  ambush-caused fallen: []
+  (samples.deaths, all recorded incl. outsiders: 55 — NOT village deaths)
+  census: seed 43504, day 68, alive 3 | - Sidney (comic_shop_owner, ?) trust=76 mood=friendly npcAbilities=3
+  M6 nightlyNews: strandedDays=1 burst=54 settle=26 witness=3 tale=13 | emitted-AWAY(strict on-tile) burst=10 settle=0 witness=0 tale=0 | emitted-AWAY-GATE(radius-1) burst=0 settle=0 witness=0 tale=0 debatesKicked=27 settled=26 queuedAtEnd=0
+  M4 transcripts=80 naturalEnds=75 nearDupFlags=10
+  M4 FLAG jaccard>=0.5 [A-day1-nudge gen_tvd2i32] :: «Да, я тоже так думаю.» (you catch 'думаю' — think) They nod back, a little quicker this time. || «Да, да, точно.» (you catch 'Да' — yes) They nod back, a little quicker this time.
+  M4 FLAG same-opening [B-first-meeting nadia_khoury] :: we're still on what you dream about. You know? || we're still on what you dream about.
+  M4 FLAG same-opening [B-first-meeting chloe_dubois] :: we're still on what you're good at. Allegedly. || we're still on what you're good at.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_tvd2i32] :: «Хорошо сказано. Точно.» (Well said. Exactly right. — you're fairly sure) They nod, holding your gaze a beat longer. || «Соглашаюсь с тобой.» (I agree with you. — you're fairly sure) They nod, holding your gaze a beat longer.
+  M4 FLAG same-opening [D-talk-request devon_okafor] :: Solitude isn't loneliness. I keep telling people that. They don't believe me. || Solitude isn't loneliness. Loneliness is being surrounded and still alone.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_tvd2i32] :: a ridge with a view for miles — I'll show you on the map sometime. It's real. || a burned farmhouse — I'll show you on the map sometime. It's real.
+  M4 FLAG same-opening [D-talk-request gen_tvd2i32] :: If I ever get home, I'm never complaining about the noise again. Never. || If I ever get a real lead I'm gone that same day. I need you to know that about me.
+  M4 FLAG jaccard>=0.5 [C-friendship devon_okafor] :: a cellar full of jars — I'll show you on the map sometime. It's real. || a spring that runs clear — I'll show you on the map sometime. It's real.
+  M4 FLAG same-opening [C-friendship chloe_dubois] :: we're still on your first memory. || we're still on your first memory. Give it time.
+  M4 FLAG jaccard>=0.5 [C-friendship chloe_dubois] :: Well. As I said — we're still on the worst thing you've done. || we're still on the worst thing you've done. Seen worse.
+  M4 CANDIDATE [D-talk-request nadia_khoury turns=10 naturalEnd=true]:
+    NPC: "It's quiet today. Wrong kind of quiet. Just... be straight with me."
+    NPC: "I've been thinking. You and me — we should be bonded. Not just neighbors. Will you stick with me?"
+    YOU: "Yes. Stick together."
+    NPC: "Stick together, then." They look steadier already.
+    YOU: "Hey — you alright?"
+    NPC: "Come here — Thanks. ...Thanks for saying that."
+    YOU: "How are you holding up? About... them."
+    NPC: "Onni always took the burnt piece. Said someone had to. I take it now."
+    YOU: "Want to come with us?"
+    NPC: "Someone should watch your back. Might as well be me."
+    YOU: "I’m listening."
+    NPC: "I keep turning over the last thing Onni said to me. I can't tell if I'm remembering it right, and that's somehow the worst part."
+    YOU: "Go on."
+    NPC: "The fire feels smaller without Onni. The rest of us will have to be bigger."
+    YOU: "Tell me more."
+    NPC: "I'm picking up Onni's share of the work. Someone should, and it might as well be me."
+    YOU: "I’m listening."
+    NPC: "I wish there was more to tell. That's it."
+    YOU: "And then?"
+    NPC: "Okay. We'll pick this up later."
+    YOU: "..."
+    NPC: A comfortable quiet settles. They smile a little, and let it be.
+    NPC: "Thanks for... you know. Just listening."
+    NPC: "This was good." They mean it.
+
+PANEL lure/party decisions: {"lure:decline":9,"lure:accept":7,"bond:decline":7,"party:accept":19,"party:decline":18,"bond:accept":5}
+PANEL lure-by-inviter: {"NPC:lure:decline":9,"NPC:lure:accept":7,"NPC:bond:decline":7,"player:party:accept":19,"player:party:decline":18,"NPC:bond:accept":5}
+PANEL successions: [{"day":29,"from":"Frank","to":"Giovanni","seed":43501},{"day":51,"from":"Giovanni","to":"Lucas","seed":43501},{"day":52,"from":"Lucas","to":"Theo","seed":43501},{"day":65,"from":"Theo","to":"Meshari","seed":43501},{"day":74,"from":"Meshari","to":"Otis","seed":43501},{"day":80,"from":"Otis","to":"Daniyar","seed":43501},{"day":85,"from":"Daniyar","to":"Grace","seed":43501},{"day":92,"from":"Grace","to":"Ruth","seed":43501},{"day":93,"from":"Ruth","to":"Emma","seed":43501},{"day":101,"from":"Emma","to":"Nusta","seed":43501},{"day":115,"from":"Nusta","to":"Irene","seed":43501},{"day":31,"from":"Esperanza","to":"Giuseppe","seed":43502},{"day":43,"from":"Giuseppe","to":"Amina","seed":43502},{"day":50,"from":"Amina","to":"Ada","seed":43502},{"day":53,"from":"Ada","to":"Sofia","seed":43502},{"day":15,"from":"Axel","to":"David","seed":43503},{"day":30,"from":"David","to":"Rachel","seed":43503},{"day":36,"from":"Rachel","to":"Benoit","seed":43503},{"day":53,"from":"Benoit","to":"Aroha","seed":43503},{"day":57,"from":"Aroha","to":"Nikolai","seed":43503},{"day":64,"from":"Nikolai","to":"Shannon","seed":43503},{"day":71,"from":"Shannon","to":"Ursula","seed":43503},{"day":75,"from":"Ursula","to":"Brian","seed":43503},{"day":98,"from":"Brian","to":"Fatima","seed":43503},{"day":110,"from":"Fatima","to":"Valeria","seed":43503},{"day":111,"from":"Valeria","to":"Anuthida","seed":43503},{"day":64,"from":"Alejandra","to":"Nadia","seed":43504},{"day":65,"from":"Nadia","to":"Chloe","seed":43504}]
+PANEL propose* calls: 16 {"proposeLink:scholar":16}
+PANEL bond_proposed: total=108 byInitiatorKind={"villager":107,"scholar":1} byKind={"link":52,"person":56} byOutcome={"staged":48,"accepted":39,"refused":7,"expired":14} byKindOutcome={"link:staged":26,"link:accepted":16,"person:staged":22,"person:accepted":23,"person:refused":7,"link:expired":10,"person:expired":4}
+PANEL bond_proposed: villagerPerson=56 villagerPersonAccepted=23 scholarPerson=0 linkRaises=52 linkAccepted=16 maxPerInitiator=9 maxPerInitiatorPerson=4 personPerInitiator={"villager:Otis":2,"villager:Giovanni":1,"villager:Meshari":1,"villager:Grace":2,"villager:Emma":4,"villager:Theo":2,"villager:Ruth":2,"villager:Irene":2,"villager:Sofia":2,"villager:Giulia":2,"villager:Ada":1,"villager:Amina":2,"villager:Ines":3,"villager:Nikolai":4,"villager:Shannon":4,"villager:Rachel":1,"villager:Ursula":2,"villager:Brian":2,"villager:Aroha":2,"villager:Ingrid":2,"villager:Iti":2,"villager:Fatima":2,"villager:Wanjiru":1,"villager:Valeria":2,"villager:Sidney":1,"villager:Nadia":2,"villager:Xavier":1,"villager:Chloe":2} perInitiator={"villager:Esperanza":2,"villager:Giovanni":3,"villager:Otis":2,"villager:Meshari":1,"villager:Grace":2,"villager:Emma":4,"villager:Theo":2,"villager:Ruth":2,"villager:Irene":6,"villager:Sofia":6,"villager:Giulia":4,"villager:Ada":1,"villager:Amina":2,"villager:Ines":3,"villager:Nikolai":9,"villager:Rachel":3,"villager:Shannon":4,"villager:Benoit":4,"villager:Ursula":8,"villager:Brian":2,"villager:Aroha":2,"villager:Ingrid":2,"scholar:Nikolai":1,"villager:Iti":2,"villager:Fatima":2,"villager:Wanjiru":1,"villager:Valeria":2,"villager:Aria":8,"villager:Jessica":8,"villager:Gloria":4,"villager:Sidney":1,"villager:Nadia":2,"villager:Xavier":1,"villager:Chloe":2}
+PANEL bond_proposed verdict: ANSWERED — ≥1 villager-initiated bond proposal in the wild
+PANEL end bonds per seed: [107,49,90,83]
+PANEL bond initiator recorded by engine: NO — bond records carry no initiator field; NPC-initiated formation cannot be inferred from end bonds
+PANEL plots: 7 (late d30+: 0)
+PANEL plots with grievanceTargetToLeader > 0: 2
+PANEL grievance-holder -> later leader cases: 1
+  {"seed":43502,"plot":"plot_3","leader":"Doly","plotDay":10,"grievances":["ambushed->Gunther d7 sev60"]}
+PANEL arms: 7 (late d30+: 0) grievance-linked at arming: 7
+PANEL springs: 7 outcomes: {"escaped":3,"killed":3,"hurt":1}
+PANEL escaped springs: 3
+PANEL expired plots: 0
+PANEL villages past d100: 2/4
+PANEL M6 haven-news: strandedDays=20 deliveredAtHaven burst=248 settle=121 witness=29 tale=80 | emittedAway(strict on-tile) burst=38 settle=1 witness=0 tale=0 | emittedAwayGate(radius-1) burst=0 settle=0 witness=0 tale=0 debatesKicked=134 namesSettled=132
+PANEL M6 verdict (RE-ALIGNED, gate definition): GO — no naming-beat line was emitted beyond radius-1 of Haven, debates alive
+PANEL M6 strict-definition note: strict on-tile away total=39 — reported as the known metric/gate definition discrepancy, does NOT fail M6 this run (prereg).
+PANEL M4: transcripts=308 nearDupFlags=47 candidatesPrinted=4/4 — verdict in run note from the printed candidates above
+PANEL goal-thread offers: moreOffered=0 reactOffered=2173 (agree=0 joke=0 silence=2173) followGoalOffered=0 longestContinuerRun=4
+PANEL COUNTER: proposeLink=16 counter=2 fresh=16 freshCounter=2 blocked=0 blockedCounter=0 settles=2 linkFormed=2 failed=0 pendingCounterEnd=[null,null,null,null]
+PANEL COUNTER re-raises after a link-forming settle (BLOCKED): 0 []
+PANEL COUNTER fresh re-links after a link-forming settle: 0 []
+PANEL M8 verdict: SETTLED — ≥1 link formed via a driver settle, no BLOCKED re-raise after it
+PANEL CONFESS: total=63 confessed=11 byOutcome={"already-confessed":11,"confessed":11,"deflected":36,"attacked":3,"cleared":2} sittingsWithConfession=11 singleSittings=11 doubleSittings=0 outsideSittingConfessed=0
+PANEL RE-OFFER: conversations=313 withReoffer=298 panelMax=12 panelMaxFurnitureFree=12
+  RE-OFFER [A-day1-nudge lucas_brown] max=11 id=leave maxFF=8 idFF=dlg:subject perId={"dlg:more":1,"dlg:react":1,"teach":1,"dlg:subject":8,"leave":11,"silence":11,"ans:q_hope:a_tell":1,"ans:q_hope:a_vague":1,"ans:q_hope:a_deflect":1,"ans:q_hope:honest_pass":1,"deflect_q":2,"goon":5,"recap":7,"ans:q_fun:a_people":1,"ans:q_fun:a_hobby":1,"ans:q_fun:a_deflect":1,"ans:q_fun:honest_pass":1}
+  RE-OFFER [D-talk-request lucas_brown] max=10 id=leave maxFF=7 idFF=recap perId={"ans:q_before_skill:a_tell":1,"ans:q_before_skill:a_vague":1,"ans:q_before_skill:a_deflect":1,"deflect_q":2,"leave":10,"silence":10,"goon":5,"recap":7,"dlg:subject":7,"ans:q_laugh_memory:a_tell":1,"ans:q_laugh_memory:a_vague":1,"ans:q_laugh_memory:a_deflect":1,"ans:q_laugh_memory:honest_pass":1}
+  RE-OFFER [B-first-meeting emma_larsen] max=9 id=leave maxFF=6 idFF=recap perId={"ans:q_laugh:a_story":1,"ans:q_laugh:a_nothing":1,"ans:q_laugh:a_dark":1,"deflect_q":1,"leave":9,"silence":9,"goon":3,"recap":6,"dlg:subject":6,"gq:howru:bad":1,"gq:howru:fine":1,"gq:howru:busy":1,"gq:howru:honest_pass":1}
+  RE-OFFER [D-talk-request lucas_brown] max=7 id=leave maxFF=6 idFF=teach perId={"dlg:react":2,"teach":6,"dlg:subject":6,"leave":7,"silence":7,"recap":5,"goon":2}
+  RE-OFFER [B-first-meeting ursula_weber] max=11 id=leave maxFF=7 idFF=recap perId={"ans:q_useful:a_hunger":1,"ans:q_useful:a_self":1,"ans:q_useful:a_learning":1,"leave":11,"silence":11,"goon":5,"recap":7,"dlg:subject":7,"betrayal:accept":1,"betrayal:decline":1,"gq:reason:understand":1,"gq:reason:curious":1,"gq:reason:honest_pass":1}
+  RE-OFFER [D-talk-request grace_obi] max=2 id=teach maxFF=2 idFF=teach perId={"goon":1,"dlg:more":1,"dlg:react":1,"teach":2,"dlg:subject":1,"leave":2,"silence":2,"ask:others":1,"ask:gossip":1,"ask:spread_rumor":1,"skill_learn:read_people":1,"menu:more":1}
+  RE-OFFER [D-talk-request grace_obi] max=9 id=leave maxFF=8 idFF=dlg:commit perId={"goon":2,"dlg:favor_requirements":7,"dlg:commit":8,"dlg:details":1,"dlg:cant":8,"dlg:subject":8,"leave":9,"silence":9}
+  RE-OFFER [D-talk-request gen_tfmg3d7] max=7 id=leave maxFF=6 idFF=dlg:favor_requirements perId={"dlg:favor_requirements":6,"dlg:commit":6,"dlg:details":1,"dlg:cant":6,"dlg:subject":6,"leave":7,"silence":7,"goon":1}
+  RE-OFFER [D-talk-request gen_tfmg3d7] max=7 id=leave maxFF=6 idFF=dlg:favor_requirements perId={"dlg:favor_requirements":6,"dlg:commit":6,"dlg:details":1,"dlg:cant":6,"dlg:subject":6,"leave":7,"silence":7,"recap":5,"goon":1}
+  RE-OFFER [D-talk-request gen_tfmg3d7] max=7 id=silence maxFF=5 idFF=dlg:invite perId={"gq:yn:yes":1,"gq:yn:no":1,"gq:yn:unsure":1,"gq:yn:honest_pass":1,"silence":7,"leave":7,"dlg:commit":1,"dlg:cant":1,"dlg:invite":5,"goon":3,"menu:more":1,"dlg:subject":5,"recap":4}
+  RE-OFFER [D-talk-request gen_siugbnl] max=8 id=leave maxFF=6 idFF=betrayal:investigate:case_2 perId={"link:accept":1,"link:decline":1,"leave":8,"silence":8,"betrayal:site:case_2":1,"betrayal:witnesses:case_2":2,"betrayal:investigate:case_2":6,"betrayal:moot:case_2":6,"menu:more":6,"dlg:subject":6,"betrayal:letlie:case_2":5,"confront:d_hpnukex":4}
+  RE-OFFER [D-talk-request gen_0pfmifl] max=8 id=leave maxFF=7 idFF=dlg:favor_requirements perId={"link:accept":2,"link:decline":2,"dlg:favor_requirements":7,"dlg:commit":7,"dlg:details":1,"dlg:cant":7,"dlg:subject":7,"leave":8,"silence":8,"goon":1}
+PANEL DROPPED-THREAD: conversations=313 drops=8
+  DROP [D-talk-request gen_jx8khmj] :: "...Sorry, lost my train of thought."
+    ctx NPC: "Yeah? What's up?"
+    ctx YOU: "I owe you. Let me make it right — what do you need?"
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [D-talk-request turns=3]:
+      NPC: "You said you'd help with the creek water run. ...It's done now. Forget it."
+      YOU: "We're square."
+      NPC: "...Sorry, lost my train of thought."
+  DROP [D-talk-request gen_jx8khmj] :: "...Sorry, lost my train of thought."
+    ctx NPC: "You said you'd help with the creek water run. ...It's done now. Forget it."
+    ctx YOU: "We're square."
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [D-talk-request turns=8]:
+      NPC: "We never finished talking about that debt — we got cut off. 'You said you'd help with the creek water run. ...It's done now. Forget it.'"
+      YOU: "What do you need?"
+      NPC: "It's already handled. Thank you for asking."
+  DROP [D-talk-request giulia_bianchi] :: "...Sorry, lost my train of thought."
+    ctx NPC: "Well." A breath. "That's where things stand."
+    ctx YOU: "Don't mention it."
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [D-talk-request turns=9]:
+      NPC: "The pantry's nearly bare. Will you forage with me tomorrow? Two pairs of eyes, twice the ground."
+      YOU: "Tell me why you need this."
+      NPC: "Another day like today and we're choosing who eats. Meet me at the creek bend, past the treeline and we'll fill packs before dark."
+  DROP [D-talk-request sofia_chen] :: "...Sorry, lost my train of thought."
+    ctx NPC: "We missed the promise. We still need to get home and unload what we have."
+    ctx YOU: "What do you need?"
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [C-friendship turns=9]:
+      NPC: "About the pantry run — I keep turning it over. It's done now, but I haven't forgotten it."
+      YOU: "Don't mention it."
+      NPC: "Well." A breath. "That's where things stand."
+  DROP [C-friendship sofia_chen] :: "...Sorry, lost my train of thought."
+    ctx NPC: "Well." A breath. "That's where things stand."
+    ctx YOU: "We're square."
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting: NONE (no later conversation with this villager in the seed)
+  DROP [C-friendship benoit_lambert] :: "...Sorry, lost my train of thought."
+    ctx NPC: "Here's what I think — I needed someone to know — just one person. Thank you for being that person."
+    ctx YOU: "What do you want to know? Ask me anything."
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [C-friendship turns=9]:
+      NPC: I've watched groups fall apart without someone steering. I won't watch it happen here.
+      NPC: "Help me haul something back? Too much for one."
+      YOU: "All right. Let's go."
+  DROP [D-talk-request gen_tvd2i32] :: "...Sorry, lost my train of thought."
+    ctx NPC: They nod slowly, not quite done, not quite continuing.
+    ctx YOU: "Don't mention it."
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [D-talk-request turns=10]:
+      NPC: "Can we talk? Have you seen anyone on the roads? Anyone at all? I'm asking everyone."
+      YOU: "Yes."
+      NPC: "I see." They take a moment to think about your answer.
+  DROP [D-talk-request gen_tvd2i32] :: "...Sorry, lost my train of thought."
+    ctx NPC: "Anyway." A small smile.
+    ctx YOU: "We're square."
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [D-talk-request turns=9]:
+      NPC: "Can we talk?" Bolat sits down near you. "Just... talk. Like people used to."
+      YOU: "I’m listening."
+      NPC: "That's the whole of it. Sorry."
+PANEL RECAP: maxPresses=5 totalPresses=208 offeredAfterCap=0 capFailures=0
+PANEL M9 verdict: HOLDS — recap cap fires in the wild
+PANEL NARR-DUP: conversations=313 verbatimRepeats=15 panelMaxSameNarr=3 nearDupFlags=0
+  NARR-DUP [D-talk-request gen_ffww7mv] verbatim-repeat x2 :: Something crosses their face — quick, then gone. The practiced expression clicks back into place.
+  NARR-DUP [D-talk-request gen_ffww7mv] verbatim-repeat x2 :: They go very still. Not relaxed-still. Held-still.
+  NARR-DUP [D-talk-request gen_ffww7mv] verbatim-repeat x2 :: The easy manner evaporates. What's left is watching you back.
+  NARR-DUP [C-friendship gen_ffww7mv] verbatim-repeat x2 :: Their eyes do the math before their mouth does. You can see the calculation happening.
+  NARR-DUP [C-friendship gen_ffww7mv] verbatim-repeat x2 :: They glance toward the fire, toward the others — checking who's listening.
+  NARR-DUP [C-friendship gen_ffww7mv] verbatim-repeat x2 :: A flicker at the corner of their mouth. Not quite a smile. Not quite anything.
+  NARR-DUP [C-friendship gen_ffww7mv] verbatim-repeat x2 :: They go very still. Not relaxed-still. Held-still.
+  NARR-DUP [D-talk-request gen_ffww7mv] verbatim-repeat x3 :: The easy manner evaporates. What's left is watching you back.
+  NARR-DUP [D-talk-request gen_ffww7mv] verbatim-repeat x2 :: A flicker at the corner of their mouth. Not quite a smile. Not quite anything.
+  NARR-DUP [D-talk-request gen_ffww7mv] verbatim-repeat x2 :: Their eyes do the math before their mouth does. You can see the calculation happening.
+  NARR-DUP [D-talk-request gen_ffww7mv] verbatim-repeat x2 :: They go very still. Not relaxed-still. Held-still.
+  NARR-DUP [C-friendship ingrid_vik] verbatim-repeat x2 :: Something crosses their face — quick, then gone. The practiced expression clicks back into place.
+PANEL M10 verdict: FAILS — see verbatim repeats above (pool fix did not hold in the wild)
+PANEL SCATTERING: villages ended scattered=1/4 [{"seed":43504,"day":68,"hungryDays":3,"aliveEnd":3,"endReason":"village-lost"}]

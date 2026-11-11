@@ -1,0 +1,66 @@
+=== sim-medcure-ev-b RE-MEASURE WITH EVENT CAPTURE (seeds=8) ===
+WALL: national=0/8 table=0 wins=0 waveReach={"1":8,"2":8,"3":8,"4":7,"5":1} medianSurvival=104.5d max=148d
+VILLAGE-DAYS: 819 healerDays=761 (92.9%) NPC sick-days=246
+EVENT CAPTURE: tickEvents=3238 phase-mismatch seeds=0 pretickSightings=16 tickDayMismatches=0
+M1 WOUND-FEVER MORTALITY (NPC episodes, healer at onset; census shape died/episodes):
+  present 3/21 = 14.3% (fever-cause only 0/21 = 0.0%)
+  absent  4/8 = 50.0% (fever-cause only 4/8 = 50.0%)
+  unclassified healer status: 0 | left-excluded episodes: 0 | duty-cured wound-fever episodes: present 16, absent 0 | treated (cured or tended): present 16, absent 0
+  onset sources (wound-fever episodes): {"preCare":29}
+  ALL-DISEASE NPC mortality: present 7/149 (4.7%) absent 6/22 (27.3%)
+M2 CURE CHANNEL SPLIT: total=76 ability=76 medicine=0 counter-mismatch seeds=0 episode-join rate=100.0%
+  by disease: {"disease":{"ability":59,"medicine":0},"wound_fever":{"ability":17,"medicine":0}}
+    cure s160501 d5 ability Luigi -> Ethan (disease)
+    cure s160501 d16 ability Luigi -> Elias (disease)
+    cure s160501 d17 ability Luigi -> Elias (disease)
+    cure s160501 d18 ability Luigi -> Ines (disease)
+    cure s160501 d23 ability Luigi -> Ethan (disease)
+    cure s160501 d27 ability Luigi -> Ines (disease)
+    cure s160501 d31 ability Luigi -> Elias (disease)
+    cure s160501 d33 ability Luigi -> Elias (disease)
+    cure s160501 d38 ability Luigi -> Omar (disease)
+    cure s160501 d43 ability Luigi -> Omar (disease)
+    cure s160501 d54 ability Luigi -> Ines (disease)
+    cure s160501 d75 ability Ines -> Ella (disease)
+    cure s160502 d65 ability Ursula -> Christian (wound_fever)
+    cure s160503 d16 ability Gladys -> Hilda (disease)
+    cure s160503 d18 ability Gladys -> Hilda (disease)
+    cure s160503 d20 ability Gladys -> Lisa (disease)
+    cure s160503 d24 ability Gladys -> Hilda (disease)
+    cure s160503 d25 ability Gladys -> Katarina (wound_fever)
+    cure s160503 d28 ability Gladys -> Hilda (disease)
+    cure s160503 d30 ability Gladys -> Katarina (wound_fever)
+    cure s160503 d34 ability Gladys -> Victor (disease)
+    cure s160503 d36 ability Gladys -> Wei (disease)
+    cure s160503 d40 ability Gladys -> Liam (wound_fever)
+    cure s160503 d74 ability Gladys -> Wael (wound_fever)
+    cure s160503 d75 ability Gladys -> Wael (wound_fever)
+    cure s160504 d119 ability Honora -> Salihu (wound_fever)
+    cure s160504 d120 ability Honora -> Salihu (wound_fever)
+    cure s160504 d121 ability Honora -> Salihu (wound_fever)
+    cure s160504 d123 ability Honora -> Petra (wound_fever)
+    cure s160504 d123 ability Honora -> Billie (wound_fever)
+    cure s160505 d7 ability Joseph -> Benjamin (disease)
+    cure s160505 d18 ability Joseph -> Benjamin (disease)
+    cure s160505 d26 ability Joseph -> Tom (disease)
+    cure s160505 d32 ability Joseph -> Kavya (disease)
+    cure s160505 d39 ability Joseph -> Emilio (disease)
+    cure s160505 d40 ability Joseph -> Benjamin (disease)
+    cure s160505 d60 ability Benjamin -> Enrique (disease)
+    cure s160505 d61 ability Benjamin -> Oliver (disease)
+    cure s160505 d67 ability Oliver -> Enrique (wound_fever)
+    cure s160505 d93 ability Bithi -> Fadi (wound_fever)
+    ... +36 more
+M3 PHARMACY: village-days=819 mean doses/day=0 (abx 0 / antip 0) max=0 stocked days=0 zero days=819 seeds ever stocked=0/8 stock changes=0
+DEATH CAUSES: {"ambush":4,"monster":27,"the wild":78,"gavel":4,"the night":1,"alien":1,"contest":2,"starvation":5,"grief counselor":1,"the arena":2,"sickness":4,"a wound that wouldn't close":1}
+JOIN: unlinked wound-fever deaths=0 unlinked sickness deaths=0 unrecorded cures=0 reconciled (death after last snapshot)=7 instrument errors=0
+  s160501: 129d healerDays=129/129 wfEps=0 wfDied=0 wfFeverDied=0 wfCured=0 wfTended=0 wfPreCareOnly=0 cures ab/med=12/0 sayLines=55 tickEvents=510 pharmMax=0 stockedDays=0
+  s160502: 73d healerDays=72/73 wfEps=1 wfDied=0 wfFeverDied=0 wfCured=1 wfTended=0 wfPreCareOnly=1 cures ab/med=1/0 sayLines=30 tickEvents=292 pharmMax=0 stockedDays=0
+  s160503: 83d healerDays=82/82 wfEps=6 wfDied=1 wfFeverDied=0 wfCured=5 wfTended=0 wfPreCareOnly=6 cures ab/med=12/0 sayLines=39 tickEvents=318 pharmMax=0 stockedDays=0
+  s160504: 140d healerDays=139/139 wfEps=5 wfDied=1 wfFeverDied=0 wfCured=4 wfTended=0 wfPreCareOnly=5 cures ab/med=5/0 sayLines=52 tickEvents=554 pharmMax=0 stockedDays=0
+  s160505: 126d healerDays=126/126 wfEps=5 wfDied=1 wfFeverDied=0 wfCured=3 wfTended=0 wfPreCareOnly=5 cures ab/med=11/0 sayLines=56 tickEvents=494 pharmMax=0 stockedDays=0
+  s160506: 148d healerDays=146/147 wfEps=4 wfDied=0 wfFeverDied=0 wfCured=3 wfTended=0 wfPreCareOnly=4 cures ab/med=24/0 sayLines=51 tickEvents=586 pharmMax=0 stockedDays=0
+  s160507: 54d healerDays=0/54 wfEps=8 wfDied=4 wfFeverDied=4 wfCured=0 wfTended=0 wfPreCareOnly=8 cures ab/med=0/0 sayLines=121 tickEvents=216 pharmMax=0 stockedDays=0
+  s160508: 69d healerDays=67/69 wfEps=0 wfDied=0 wfFeverDied=0 wfCured=0 wfTended=0 wfPreCareOnly=0 cures ab/med=11/0 sayLines=20 tickEvents=268 pharmMax=0 stockedDays=0
+GATES: G1=PASS G2=PASS G3=PASS (bare 8/8 match (full fingerprints))
+VERDICT: GO (re-measure valid, instrument joins episodes)

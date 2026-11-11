@@ -186,6 +186,19 @@
           result = { ok: false, line: 'The unavailable job is closed. No completion reward or broken-promise penalty was applied.' };
         }
         let line = result.line;
+        // FAVOUR-BLOCK ROTATION (journey-deepening r130): the block reason
+        // is rendered by convoFavorAction's stateless hash pick — but THIS
+        // is a live sitting, where the convo ledger IS available, so the
+        // spoken line rotates through the same pool via convoPickCycle:
+        // four consecutive displays are four distinct wordings, and the
+        // fifth re-serves the first (which is what lets the r21 reframe
+        // below fire on the repeat ask instead of the second). The action
+        // function stays read-only (journal path, menuKey); only the
+        // spoken line rotates. reasonKey is a stable string, so the menu
+        // cache key does not churn. Blocked lines only — a successful
+        // favour_action performance is untouched.
+        if (!result.ok && status.reasonKey === 'favorblock') line = this.convoFavorBlockLineCycle(vid);
+        else if (!result.ok && status.reasonKey === 'favorpartner') line = this.convoFavorPartnerBlockLineCycle(vid);
         // Requirements are interface information, never fabricated NPC speech
         // (and therefore never spoken by the voice package).
         // FAVOR-REQUIREMENTS REPEAT (journey-establishment r21 2026-10-20):
@@ -628,6 +641,14 @@
                 : openTask
                 ? `"Wait — you already gave me your word on ${openTask}. Keep that first."`
                 : '"Wait — you already gave your word somewhere. Keep that first."';
+              // FAVOUR-AWAY ROTATION (journey-deepening r130): same
+              // display-site rotation as the block lines — the refused
+              // commit is spoken inside a live sitting, so the away line
+              // rotates through its pool via convoPickCycle instead of
+              // the hash pick. The want resolves as 'stated' below, so
+              // this fires at most once per want per sitting; the spread
+              // shows across sittings and villagers.
+              if (fc && fc.reasonKey === 'favoraway') beat = this.convoFavorAwayLineCycle(vid);
               committed = false;
             }
           } else if (w && w.def && typeof w.def.commitBeat === 'function') {

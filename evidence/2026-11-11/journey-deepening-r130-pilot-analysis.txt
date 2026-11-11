@@ -1,0 +1,518 @@
+seed 100009: end=village-lost day=78 verdict=EXPLAINED
+   S-TRACE: traceDays=77 firstRegional=47 standing@firstRegional={"total":50,"war":50,"diplomacy":0,"plenty":0,"warPts":2,"links":0,"feasts":0} firstPos=40 regionalDays=30 regionalZero=0 max=327
+   LAST-LIVING DEED: {"day":70,"standingTotal":199,"scale":"regional","pop":6,"links":[{"other":"village_0","age":45,"trust":53,"seasoned":true,"status":"active"},{"other":"village_2","age":44,"trust":55,"seasoned":true,"status":"active"},{"other":"village_3","age":39,"trust":49,"seasoned":true,"status":"active"},{"other":"village_spl_30_41716","age":8,"trust":39,"seasoned":false,"status":"active"}]}
+   P-DIST-LL: {"day":77,"pop":1,"plants":{"n":1,"list":[0],"median":0,"min":0,"max":0}}
+   K-CONTEXT: lessonsOk=12/39 knowExp=3 knowTraderDeep=0 knowMoot=14 markerMoot=12 propose=1 {"linked":1} mislabels=0
+   G-DAY45: n=9 assigned=9 nonzeroW=9 active=8 annotated=4 mismatched=0 stale=1 returning=0 tops={"build_standing":3,"food_security":4,"party_up":2}
+   G-DAY60: n=8 assigned=8 nonzeroW=8 active=6 annotated=4 mismatched=0 stale=1 returning=0 tops={"build_standing":3,"food_security":4,"party_up":1}
+   G-STALE day=45: [{"name":"James","objKind":"idle","objState":"done","objGoal":"safety"}]
+   G-STALE day=60: [{"name":"James","objKind":"idle","objState":"done","objGoal":"food_security"}]
+   G-STICK: n/a (snaps=2)
+   G-LINES: {"counts":{"party_up":36,"gear_up":0,"bank_veterans":2,"build_standing":19,"food_security":165,"bonds":0,"knowledge":0,"safety":39},"total":261}
+   BOND-TELEMETRY: installed=true tele=20 proposals=5 decisions=2 accepts=1 acceptRate=0.5 links=3 initiated=1/64 scholarTargeted=4 sayLines=1 errors=[]
+   BOND-TELE DETAIL: [{"day":5,"initiator":"sari_wulandari","target":"village_0","kind":"link","outcome":"staged","chance":null},{"day":8,"initiator":"sari_wulandari","target":"village_0","kind":"link","outcome":"expired","chance":null},{"day":15,"initiator":"somchai_prasert","target":"village_0","kind":"link","outcome":"staged","chance":null},{"day":16,"initiator":"gen_le2ucku","target":"village_0","kind":"link","outcome":"staged","chance":null},{"day":18,"initiator":"somchai_prasert","target":"village_0","kind":"link","outcome":"expired","chance":null},{"day":18,"initiator":"somchai_prasert","target":"village_3","kind":"link","outcome":"staged","chance":null},{"day":19,"initiator":"gen_le2ucku","target":"sari_wulandari","kind":"person","outcome":"accepted","chance":48},{"day":19,"initiator":"gen_le2ucku","target":"village_0","kind":"link","outcome":"expired","chance":null},{"day":21,"initiator":"somchai_prasert","target":"village_3","kind":"link","outcome":"expired","chance":null},{"day":25,"initiator":"tariq_mahmood","target":"village_2","kind":"link","outcome":"staged","chance":null},{"day":26,"initiator":"tariq_mahmood","target":"village_2","kind":"link","outcome":"accepted","chance":null},{"day":43,"initiator":"gen_7w6p4pp","target":"gen_3rw5iy6","kind":"person","outcome":"staged","chance":null},{"day":45,"initiator":"zoltan_nagy","target":"tariq_mahmood","kind":"person","outcome":"refused","chance":41},{"day":46,"initiator":"gen_7w6p4pp","target":"gen_3rw5iy6","kind":"person","outcome":"expired","chance":null},{"day":51,"initiator":"gen_7w6p4pp","target":"gen_3rw5iy6","kind":"person","outcome":"staged","chance":null},{"day":52,"initiator":"gen_7w6p4pp","target":"gen_3rw5iy6","kind":"person","outcome":"refused","chance":null},{"day":53,"initiator":"tariq_mahmood","target":"village_spl_30_41716","kind":"link","outcome":"staged","chance":null},{"day":56,"initiator":"tariq_mahmood","target":"village_spl_30_41716","kind":"link","outcome":"expired","chance":null},{"day":61,"initiator":"sari_wulandari","target":"village_spl_30_41716","kind":"link","outcome":"staged","chance":null},{"day":62,"initiator":"sari_wulandari","target":"village_spl_30_41716","kind":"link","outcome":"accepted","chance":null}]
+   Q1-REQUESTS: staged=9 decided=3 expired=6 expiredTalkableUntalked=0 expiredUntalkable=0 verdict=REACHED
+   Q1-REQ seed=100009 kind=link holder=sari_wulandari village=village_0 stagedDay=5 outcome=expired decidedDay=null expiredDay=8 lastSeenStaged=7 talkedWhileLive=[5,7] talkable=true onRoster=true deathDay=71
+   Q1-REQ seed=100009 kind=link holder=somchai_prasert village=village_0 stagedDay=15 outcome=expired decidedDay=null expiredDay=18 lastSeenStaged=17 talkedWhileLive=[16] talkable=true onRoster=true deathDay=70
+   Q1-REQ seed=100009 kind=link holder=gen_le2ucku village=village_0 stagedDay=16 outcome=expired decidedDay=null expiredDay=19 lastSeenStaged=18 talkedWhileLive=[16] talkable=true onRoster=true deathDay=71
+   Q1-REQ seed=100009 kind=link holder=somchai_prasert village=village_3 stagedDay=18 outcome=expired decidedDay=null expiredDay=21 lastSeenStaged=20 talkedWhileLive=[18,19] talkable=true onRoster=true deathDay=70
+   Q1-REQ seed=100009 kind=link holder=tariq_mahmood village=village_2 stagedDay=25 outcome=accepted decidedDay=26 expiredDay=null lastSeenStaged=null talkedWhileLive=[26] talkable=true onRoster=true deathDay=71
+   Q1-REQ seed=100009 kind=person holder=gen_7w6p4pp stagedDay=43 outcome=expired decidedDay=null expiredDay=46 lastSeenStaged=45 talkedWhileLive=[44,45] talkable=true onRoster=true deathDay=67
+   Q1-REQ seed=100009 kind=person holder=gen_7w6p4pp stagedDay=51 outcome=refused decidedDay=52 expiredDay=null lastSeenStaged=null talkedWhileLive=[52] talkable=true onRoster=true deathDay=67
+   Q1-REQ seed=100009 kind=link holder=tariq_mahmood village=village_spl_30_41716 stagedDay=53 outcome=expired decidedDay=null expiredDay=56 lastSeenStaged=55 talkedWhileLive=[53] talkable=true onRoster=true deathDay=71
+   Q1-REQ seed=100009 kind=link holder=sari_wulandari village=village_spl_30_41716 stagedDay=61 outcome=accepted decidedDay=62 expiredDay=null lastSeenStaged=null talkedWhileLive=[62] talkable=true onRoster=true deathDay=71
+   Q1-LANGGATE: offers=5 offersNone=0 decisions=3 decisionsNone=0 decisionsNonNone=3 decisionsUnknown=0 verdict=NOT-REPRODUCED
+   Q1-LANGDEC seed=100009 day=26 fn=acceptLinkRaise vid=tariq_mahmood comm=full
+   Q1-LANGDEC seed=100009 day=52 fn=declineBondProposal vid=gen_7w6p4pp comm=partial
+   Q1-LANGDEC seed=100009 day=62 fn=acceptLinkRaise vid=sari_wulandari comm=partial
+   Q1-LANGARC: sittings=5 grants=1 flips=1 postFlipDecisions=1 unmatchedFlips=0 verdict=ARC-FIRES langs={"thai":{"lang":"thai","sits":2,"maxExp":23,"gain":20,"listens":6,"speakBacks":0,"holders":["somchai_prasert"],"flips":[]},"french":{"lang":"french","sits":3,"maxExp":33,"gain":32,"listens":9,"speakBacks":1,"holders":["gen_7w6p4pp"],"flips":[{"day":52,"vid":"gen_7w6p4pp","expAfter":27,"commAfter":"partial","via":"grant"}]}} endLearned={"japanese":2,"english":2} endLearnedLangs=[]
+   Q1-SECRET: openers=1 addressingPicked=1 teachPicks=0 wantEstablished=0 teachCrowded=0 wantOpen=1 confrontRides=0 verdict=ANSWERED
+   Q1-SECRET-SIT seed=100009 day=45 vid=gen_2ev8f8n addressing=true teachPicks=0 teachBefore=0 wantEstablished=false teachCrowded=false wantOpen=true answerTurn=0 answerKind=secret:promise confrontOnSecretMenu=false
+   Q1-WANT: answered=1 established=0 newlyEstablished=0 verdict=THIN-PROBE
+   Q1-WANT-SIT seed=100009 day=45 vid=gen_2ev8f8n wantId=curious wantStart={"id":"curious","stage":0,"resolution":"none"} wantFinal={"id":"curious","stage":3,"resolution":"unestablished"} established=false newlyEstablished=false outcome=n/a
+   Q1-WANT-OUTCOME: established=0 landed=0 surfacedOnly=0 other=0 outcome=THIN-PROBE
+   Q1-VARIETY: answered=1 distinctAnswers=1 maxRepeat=1 missingAnswer=0 teachPicks=0 teachFramesDistinct=0 maxSameFrame=0 verdict=THIN-PROBE
+   Q1-VARIETY-SIT seed=100009 day=45 vid=gen_2ev8f8n answerKind=secret:promise answerLine="\"Thank you for hearing it. I needed someone to know — and I needed it to stop with you.\"" teachPicks=0 teachFrames=[] maxSameFrame=0
+   Q2-POSTSECRET: answered=1 medianPostAnswerTurns=2 dryFirst=0 referencing=0
+   Q2-POSTSECRET-SIT seed=100009 day=45 vid=gen_2ev8f8n answerKind=secret:promise postAnswerTurns=2 dryFirst=false references=false firstPostAnswer="\"I still think about it every day. But it doesn't sit quite so heavy, now that I've said it out loud.\""
+   Q1-LADDER: snaps=8 firstStageDay=14 peakStage=3 lastStage=3 holds=true minted={"fight":4,"forage":22,"craft":10,"talk":14,"explore":24} verdict=OPENS errors=[] inconsistent=[] stageDrops=[]
+   Q1-LADDER-TRAJ seed=100009 day=14 stage=1 counted=25 cap=15 shortfall=1
+   Q1-LADDER-TRAJ seed=100009 day=20 stage=2 counted=29 cap=24 shortfall=11
+   Q1-LADDER-TRAJ seed=100009 day=30 stage=3 counted=41 cap=24 shortfall=0
+   Q1-LADDER-TRAJ seed=100009 day=40 stage=3 counted=54 cap=24 shortfall=0
+   Q1-LADDER-TRAJ seed=100009 day=50 stage=3 counted=52 cap=24 shortfall=0
+   Q1-LADDER-TRAJ seed=100009 day=60 stage=3 counted=64 cap=24 shortfall=0
+   Q1-LADDER-TRAJ seed=100009 day=70 stage=3 counted=58 cap=24 shortfall=0
+   Q1-LADDER-TRAJ seed=100009 day=78 stage=3 counted=42 cap=24 shortfall=0
+   Q2-TRUST: deaths=12 gainers=15 strangerGains=0 strangerTotal=0 lateGains=0 knownGains=15 nonDeathMoves=61 deadBearerDays=1 verdict=TRUST-EARNED-ONLY
+   Q2-TRUST-DEATH seed=100009 day=35 cause=a stranger old=gen_00bf46v new=gen_3rw5iy6 latency=1 mantleDay=36 gains=[{"vid":"gen_3rw5iy6","amt":12,"net":-28,"kind":"known","firstContact":2},{"vid":"gen_7w6p4pp","amt":12,"net":10,"kind":"known","firstContact":6},{"vid":"gen_zgox0df","amt":12,"net":12,"kind":"known","firstContact":2},{"vid":"somchai_prasert","amt":12,"net":12,"kind":"known","firstContact":10}]
+   Q2-TRUST-DEATH seed=100009 day=66 cause=the wild old=gen_3rw5iy6 new=gen_7w6p4pp latency=0 mantleDay=66 gains=[{"vid":"gen_7w6p4pp","amt":12,"net":-11,"kind":"known","firstContact":6},{"vid":"somchai_prasert","amt":12,"net":10,"kind":"known","firstContact":10}]
+   Q2-TRUST-DEATH seed=100009 day=67 cause=the wild old=gen_7w6p4pp new=somchai_prasert latency=0 mantleDay=67 gains=[{"vid":"somchai_prasert","amt":12,"net":-12,"kind":"known","firstContact":10}]
+   Q2-TRUST-DEATH seed=100009 day=70 cause=the wild old=somchai_prasert new=james_okonkwo latency=0 mantleDay=70 gains=[{"vid":"james_okonkwo","amt":-5,"net":-5,"kind":"known","firstContact":2}]
+   Q2-TRUST-DEATH seed=100009 day=71 cause=the wild old=james_okonkwo new=gen_le2ucku latency=null mantleDay=null gains=[{"vid":"gen_le2ucku","amt":-5,"net":-5,"kind":"known","firstContact":16}]
+   Q2-TRUST-DEATH seed=100009 day=71 cause=the wild old=gen_le2ucku new=zoltan_nagy latency=null mantleDay=null gains=[{"vid":"zoltan_nagy","amt":-8,"net":-8,"kind":"known","firstContact":8}]
+   Q2-TRUST-DEATH seed=100009 day=71 cause=the wild old=zoltan_nagy new=sari_wulandari latency=null mantleDay=null gains=[{"vid":"sari_wulandari","amt":-12,"net":-12,"kind":"known","firstContact":5}]
+   Q2-TRUST-DEATH seed=100009 day=71 cause=the wild old=sari_wulandari new=tariq_mahmood latency=null mantleDay=null gains=[{"vid":"tariq_mahmood","amt":-18,"net":-18,"kind":"known","firstContact":4}]
+   Q2-TRUST-DEATH seed=100009 day=71 cause=the wild old=tariq_mahmood new=gen_2ev8f8n latency=0 mantleDay=71 gains=[{"vid":"gen_2ev8f8n","amt":-22,"net":-22,"kind":"known","firstContact":2}]
+   Q2-TRUST-DEATH seed=100009 day=72 cause=the wild old=gen_2ev8f8n new=luis_fernandez latency=0 mantleDay=72 gains=[{"vid":"luis_fernandez","amt":-4,"net":-4,"kind":"known","firstContact":71}]
+   Q2-TRUST-DEATH seed=100009 day=77 cause=the wild old=luis_fernandez new=visjoin_74 latency=0 mantleDay=77 gains=[{"vid":"visjoin_74","amt":-11,"net":-11,"kind":"known","firstContact":76}]
+   Q2-TRUST-DEATH seed=100009 day=78 cause=the wild old=visjoin_74 new=visjoin_74 latency=0 mantleDay=78 gains=[]
+   Q2-TRUST-MOVE seed=100009 day=4 moved=[{"vid":"gen_2ev8f8n","delta":27},{"vid":"gen_le2ucku","delta":6},{"vid":"gen_3rw5iy6","delta":31},{"vid":"gen_7w6p4pp","delta":32},{"vid":"gen_zgox0df","delta":3},{"vid":"sari_wulandari","delta":4},{"vid":"james_okonkwo","delta":17},{"vid":"somchai_prasert","delta":1},{"vid":"aki_tanaka","delta":3},{"vid":"tariq_mahmood","delta":10}]
+   Q2-TRUST-MOVE seed=100009 day=5 moved=[{"vid":"gen_2ev8f8n","delta":11},{"vid":"gen_le2ucku","delta":6},{"vid":"gen_3rw5iy6","delta":7},{"vid":"gen_7w6p4pp","delta":14},{"vid":"gen_zgox0df","delta":-10},{"vid":"sari_wulandari","delta":2},{"vid":"zoltan_nagy","delta":3},{"vid":"james_okonkwo","delta":7},{"vid":"somchai_prasert","delta":2},{"vid":"aki_tanaka","delta":10},{"vid":"tariq_mahmood","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=6 moved=[{"vid":"gen_2ev8f8n","delta":11},{"vid":"gen_le2ucku","delta":4},{"vid":"gen_3rw5iy6","delta":4},{"vid":"gen_7w6p4pp","delta":5},{"vid":"gen_zgox0df","delta":-9},{"vid":"sari_wulandari","delta":1},{"vid":"james_okonkwo","delta":2},{"vid":"aki_tanaka","delta":3},{"vid":"tariq_mahmood","delta":2}]
+   Q2-TRUST-MOVE seed=100009 day=7 moved=[{"vid":"gen_2ev8f8n","delta":10},{"vid":"gen_le2ucku","delta":5},{"vid":"gen_3rw5iy6","delta":3},{"vid":"gen_7w6p4pp","delta":6},{"vid":"gen_zgox0df","delta":-2},{"vid":"sari_wulandari","delta":1},{"vid":"zoltan_nagy","delta":2},{"vid":"james_okonkwo","delta":5},{"vid":"somchai_prasert","delta":3},{"vid":"aki_tanaka","delta":2},{"vid":"tariq_mahmood","delta":3}]
+   Q2-TRUST-MOVE seed=100009 day=8 moved=[{"vid":"gen_2ev8f8n","delta":11},{"vid":"gen_le2ucku","delta":6},{"vid":"gen_3rw5iy6","delta":2},{"vid":"gen_7w6p4pp","delta":6},{"vid":"sari_wulandari","delta":6},{"vid":"zoltan_nagy","delta":7},{"vid":"james_okonkwo","delta":-1},{"vid":"somchai_prasert","delta":4},{"vid":"aki_tanaka","delta":6},{"vid":"tariq_mahmood","delta":3}]
+   Q2-TRUST-MOVE seed=100009 day=9 moved=[{"vid":"gen_le2ucku","delta":8},{"vid":"gen_3rw5iy6","delta":5},{"vid":"gen_7w6p4pp","delta":7},{"vid":"sari_wulandari","delta":2},{"vid":"zoltan_nagy","delta":5},{"vid":"james_okonkwo","delta":4},{"vid":"somchai_prasert","delta":1},{"vid":"aki_tanaka","delta":1},{"vid":"tariq_mahmood","delta":2}]
+   Q2-TRUST-MOVE seed=100009 day=10 moved=[{"vid":"gen_le2ucku","delta":3},{"vid":"gen_3rw5iy6","delta":3},{"vid":"gen_zgox0df","delta":1},{"vid":"sari_wulandari","delta":6},{"vid":"zoltan_nagy","delta":5},{"vid":"james_okonkwo","delta":2},{"vid":"somchai_prasert","delta":1},{"vid":"aki_tanaka","delta":2},{"vid":"tariq_mahmood","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=11 moved=[{"vid":"gen_le2ucku","delta":2},{"vid":"gen_3rw5iy6","delta":1},{"vid":"gen_zgox0df","delta":-1},{"vid":"sari_wulandari","delta":1},{"vid":"zoltan_nagy","delta":5},{"vid":"james_okonkwo","delta":5},{"vid":"somchai_prasert","delta":1},{"vid":"aki_tanaka","delta":3},{"vid":"tariq_mahmood","delta":3}]
+   Q2-TRUST-MOVE seed=100009 day=12 moved=[{"vid":"gen_le2ucku","delta":3},{"vid":"gen_3rw5iy6","delta":2},{"vid":"gen_zgox0df","delta":1},{"vid":"zoltan_nagy","delta":4},{"vid":"james_okonkwo","delta":2},{"vid":"aki_tanaka","delta":2},{"vid":"tariq_mahmood","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=13 moved=[{"vid":"gen_le2ucku","delta":3},{"vid":"gen_zgox0df","delta":10},{"vid":"sari_wulandari","delta":1},{"vid":"zoltan_nagy","delta":5},{"vid":"james_okonkwo","delta":1},{"vid":"somchai_prasert","delta":-1},{"vid":"aki_tanaka","delta":4},{"vid":"tariq_mahmood","delta":2}]
+   Q2-TRUST-MOVE seed=100009 day=14 moved=[{"vid":"gen_zgox0df","delta":10},{"vid":"sari_wulandari","delta":2},{"vid":"zoltan_nagy","delta":3},{"vid":"james_okonkwo","delta":2},{"vid":"somchai_prasert","delta":2},{"vid":"aki_tanaka","delta":3},{"vid":"tariq_mahmood","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=15 moved=[{"vid":"gen_le2ucku","delta":3},{"vid":"gen_zgox0df","delta":5},{"vid":"sari_wulandari","delta":3},{"vid":"zoltan_nagy","delta":2},{"vid":"james_okonkwo","delta":3},{"vid":"aki_tanaka","delta":1},{"vid":"tariq_mahmood","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=16 moved=[{"vid":"gen_le2ucku","delta":3},{"vid":"gen_3rw5iy6","delta":2},{"vid":"gen_zgox0df","delta":14},{"vid":"sari_wulandari","delta":1},{"vid":"james_okonkwo","delta":2},{"vid":"somchai_prasert","delta":2},{"vid":"tariq_mahmood","delta":2}]
+   Q2-TRUST-MOVE seed=100009 day=17 moved=[{"vid":"gen_le2ucku","delta":6},{"vid":"gen_3rw5iy6","delta":2},{"vid":"gen_zgox0df","delta":13},{"vid":"sari_wulandari","delta":1},{"vid":"james_okonkwo","delta":3},{"vid":"somchai_prasert","delta":-1},{"vid":"tariq_mahmood","delta":2}]
+   Q2-TRUST-MOVE seed=100009 day=18 moved=[{"vid":"gen_le2ucku","delta":3},{"vid":"gen_3rw5iy6","delta":1},{"vid":"gen_zgox0df","delta":11},{"vid":"sari_wulandari","delta":2},{"vid":"zoltan_nagy","delta":2},{"vid":"james_okonkwo","delta":2},{"vid":"somchai_prasert","delta":1},{"vid":"tariq_mahmood","delta":2}]
+   Q2-TRUST-MOVE seed=100009 day=19 moved=[{"vid":"gen_le2ucku","delta":3},{"vid":"gen_3rw5iy6","delta":1},{"vid":"gen_zgox0df","delta":13},{"vid":"sari_wulandari","delta":3},{"vid":"zoltan_nagy","delta":4},{"vid":"james_okonkwo","delta":2},{"vid":"somchai_prasert","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=20 moved=[{"vid":"gen_3rw5iy6","delta":2},{"vid":"gen_zgox0df","delta":4},{"vid":"zoltan_nagy","delta":2},{"vid":"james_okonkwo","delta":3}]
+   Q2-TRUST-MOVE seed=100009 day=21 moved=[{"vid":"gen_le2ucku","delta":2},{"vid":"gen_3rw5iy6","delta":3},{"vid":"gen_zgox0df","delta":6},{"vid":"sari_wulandari","delta":1},{"vid":"zoltan_nagy","delta":1},{"vid":"james_okonkwo","delta":3}]
+   Q2-TRUST-MOVE seed=100009 day=22 moved=[{"vid":"gen_le2ucku","delta":5},{"vid":"gen_3rw5iy6","delta":3},{"vid":"sari_wulandari","delta":2},{"vid":"zoltan_nagy","delta":5},{"vid":"james_okonkwo","delta":2},{"vid":"somchai_prasert","delta":1},{"vid":"tariq_mahmood","delta":2}]
+   Q2-TRUST-MOVE seed=100009 day=23 moved=[{"vid":"gen_le2ucku","delta":4},{"vid":"gen_3rw5iy6","delta":1},{"vid":"sari_wulandari","delta":3},{"vid":"zoltan_nagy","delta":4},{"vid":"james_okonkwo","delta":2},{"vid":"somchai_prasert","delta":2},{"vid":"tariq_mahmood","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=24 moved=[{"vid":"gen_le2ucku","delta":3},{"vid":"gen_3rw5iy6","delta":1},{"vid":"gen_zgox0df","delta":2},{"vid":"zoltan_nagy","delta":3},{"vid":"james_okonkwo","delta":1},{"vid":"tariq_mahmood","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=25 moved=[{"vid":"gen_le2ucku","delta":2},{"vid":"gen_3rw5iy6","delta":1},{"vid":"sari_wulandari","delta":2},{"vid":"zoltan_nagy","delta":2},{"vid":"james_okonkwo","delta":3},{"vid":"tariq_mahmood","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=26 moved=[{"vid":"gen_zgox0df","delta":-2},{"vid":"sari_wulandari","delta":1},{"vid":"zoltan_nagy","delta":1},{"vid":"somchai_prasert","delta":1},{"vid":"tariq_mahmood","delta":2}]
+   Q2-TRUST-MOVE seed=100009 day=27 moved=[{"vid":"gen_3rw5iy6","delta":1},{"vid":"sari_wulandari","delta":1},{"vid":"zoltan_nagy","delta":3},{"vid":"tariq_mahmood","delta":2}]
+   Q2-TRUST-MOVE seed=100009 day=28 moved=[{"vid":"gen_3rw5iy6","delta":4},{"vid":"sari_wulandari","delta":2},{"vid":"zoltan_nagy","delta":2},{"vid":"somchai_prasert","delta":2},{"vid":"tariq_mahmood","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=29 moved=[{"vid":"gen_3rw5iy6","delta":2},{"vid":"zoltan_nagy","delta":1},{"vid":"tariq_mahmood","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=30 moved=[{"vid":"gen_zgox0df","delta":2},{"vid":"sari_wulandari","delta":4},{"vid":"somchai_prasert","delta":-2},{"vid":"tariq_mahmood","delta":2}]
+   Q2-TRUST-MOVE seed=100009 day=31 moved=[{"vid":"gen_zgox0df","delta":-2},{"vid":"sari_wulandari","delta":3},{"vid":"somchai_prasert","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=32 moved=[{"vid":"sari_wulandari","delta":1},{"vid":"somchai_prasert","delta":1},{"vid":"tariq_mahmood","delta":3}]
+   Q2-TRUST-MOVE seed=100009 day=33 moved=[{"vid":"gen_zgox0df","delta":-6},{"vid":"sari_wulandari","delta":2},{"vid":"tariq_mahmood","delta":2}]
+   Q2-TRUST-MOVE seed=100009 day=34 moved=[{"vid":"gen_zgox0df","delta":6},{"vid":"sari_wulandari","delta":2},{"vid":"somchai_prasert","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=36 moved=[{"vid":"gen_3rw5iy6","delta":-27},{"vid":"gen_7w6p4pp","delta":10},{"vid":"gen_zgox0df","delta":9},{"vid":"sari_wulandari","delta":1},{"vid":"somchai_prasert","delta":13},{"vid":"tariq_mahmood","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=37 moved=[{"vid":"gen_zgox0df","delta":-3},{"vid":"sari_wulandari","delta":1},{"vid":"tariq_mahmood","delta":3}]
+   Q2-TRUST-MOVE seed=100009 day=38 moved=[{"vid":"gen_zgox0df","delta":-9},{"vid":"sari_wulandari","delta":2},{"vid":"somchai_prasert","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=39 moved=[{"vid":"gen_zgox0df","delta":5},{"vid":"sari_wulandari","delta":3},{"vid":"tariq_mahmood","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=40 moved=[{"vid":"gen_zgox0df","delta":-2},{"vid":"sari_wulandari","delta":2},{"vid":"james_okonkwo","delta":1},{"vid":"somchai_prasert","delta":1},{"vid":"tariq_mahmood","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=41 moved=[{"vid":"gen_zgox0df","delta":-5},{"vid":"sari_wulandari","delta":2},{"vid":"somchai_prasert","delta":1},{"vid":"tariq_mahmood","delta":3}]
+   Q2-TRUST-MOVE seed=100009 day=42 moved=[{"vid":"gen_2ev8f8n","delta":1},{"vid":"gen_zgox0df","delta":7},{"vid":"somchai_prasert","delta":7},{"vid":"tariq_mahmood","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=43 moved=[{"vid":"gen_zgox0df","delta":-2},{"vid":"tariq_mahmood","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=45 moved=[{"vid":"tariq_mahmood","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=46 moved=[{"vid":"gen_le2ucku","delta":2},{"vid":"somchai_prasert","delta":1},{"vid":"tariq_mahmood","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=47 moved=[{"vid":"gen_zgox0df","delta":2},{"vid":"somchai_prasert","delta":1},{"vid":"tariq_mahmood","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=48 moved=[{"vid":"gen_2ev8f8n","delta":-10},{"vid":"gen_7w6p4pp","delta":-10},{"vid":"gen_zgox0df","delta":1},{"vid":"somchai_prasert","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=49 moved=[{"vid":"gen_2ev8f8n","delta":4},{"vid":"somchai_prasert","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=50 moved=[{"vid":"gen_2ev8f8n","delta":4},{"vid":"somchai_prasert","delta":1},{"vid":"tariq_mahmood","delta":2}]
+   Q2-TRUST-MOVE seed=100009 day=51 moved=[{"vid":"gen_2ev8f8n","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=52 moved=[{"vid":"tariq_mahmood","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=53 moved=[{"vid":"somchai_prasert","delta":2}]
+   Q2-TRUST-MOVE seed=100009 day=54 moved=[{"vid":"somchai_prasert","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=55 moved=[{"vid":"somchai_prasert","delta":2}]
+   Q2-TRUST-MOVE seed=100009 day=56 moved=[{"vid":"tariq_mahmood","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=57 moved=[{"vid":"somchai_prasert","delta":1},{"vid":"tariq_mahmood","delta":2}]
+   Q2-TRUST-MOVE seed=100009 day=59 moved=[{"vid":"somchai_prasert","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=60 moved=[{"vid":"somchai_prasert","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=61 moved=[{"vid":"gen_le2ucku","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=62 moved=[{"vid":"somchai_prasert","delta":1}]
+   Q2-TRUST-MOVE seed=100009 day=63 moved=[{"vid":"somchai_prasert","delta":2}]
+   Q2-TRUST-MOVE seed=100009 day=64 moved=[{"vid":"somchai_prasert","delta":2}]
+   Q2-TRUST-MOVE seed=100009 day=65 moved=[{"vid":"somchai_prasert","delta":2}]
+   Q2-TRUST-MOVE seed=100009 day=73 moved=[{"vid":"app_mgpspimk849","delta":13}]
+   Q2-TRUST-MOVE seed=100009 day=76 moved=[{"vid":"visjoin_74","delta":35}]
+   Q2-DEAD-BEARER seed=100009 day=78 scholar=visjoin_74 health=0
+   Q1-LANGFLIP seed=100009 lang=french flipDay=52 flipVid=gen_7w6p4pp expAfter=27 postDecisions=[{"day":52,"fn":"declineBondProposal","vid":"gen_7w6p4pp","comm":"partial"}]
+   Q2-GOALJOIN seed=100009 track=party_up tops=3 lined=1 indoorLined=0 departedLined=0 capture=33 -> HEALTHY
+   Q2-GOALJOIN seed=100009 track=gear_up tops=0 lined=0 indoorLined=0 departedLined=0 capture=0 -> NO-DATA
+   Q2-GOALJOIN seed=100009 track=bank_veterans tops=0 lined=0 indoorLined=0 departedLined=0 capture=2 -> HEALTHY
+   Q2-GOALJOIN seed=100009 track=build_standing tops=6 lined=1 indoorLined=0 departedLined=0 capture=18 -> HEALTHY
+   Q2-GOALJOIN seed=100009 track=food_security tops=8 lined=4 indoorLined=0 departedLined=0 capture=131 -> HEALTHY
+   Q2-GOALJOIN seed=100009 track=bonds tops=0 lined=0 indoorLined=0 departedLined=0 capture=0 -> NO-DATA
+   Q2-GOALJOIN seed=100009 track=knowledge tops=0 lined=0 indoorLined=0 departedLined=0 capture=0 -> NO-DATA
+   Q2-GOALJOIN seed=100009 track=safety tops=0 lined=0 indoorLined=0 departedLined=0 capture=36 -> HEALTHY
+   DEBRIEF: trigger=scholar-death-no-successor flags={"scattered":false,"extinct":false,"scholarDead":true,"livingN":0,"pantryKcal":18471,"endReason":"village-lost"} lines=["📖 The Codex grew by 76 (39 plants, 33 skills, 4 recipes) — among them Bark armor, Blackberry, Gossip Network (+73 more).","🧑‍🏫 A man, maybe 50s, with a missing fingertip taught Bark armor; A man, maybe 50s, with a scarred cheek taught Pit Trap.","⚔️ First blood, day 3: Big-Eyes. 71 beasts slain. First wave-2 kill: The Ugly Beast, day 11.","💀 15 fell — the wild (×11); Highbeam Deer."]
+seed 100010: end=survived day=100 verdict=EXPLAINED
+   S-TRACE: traceDays=100 firstRegional=36 standing@firstRegional={"total":50,"war":50,"diplomacy":0,"plenty":0,"warPts":2,"links":0,"feasts":0} firstPos=34 regionalDays=39 regionalZero=0 max=442
+   LAST-LIVING DEED: {"day":100,"standingTotal":442,"scale":"global","pop":10,"links":[{"other":"village_3","age":86,"trust":78,"seasoned":true,"status":"active"},{"other":"village_2","age":69,"trust":57,"seasoned":true,"status":"active"},{"other":"village_spl_30_34011","age":65,"trust":77,"seasoned":true,"status":"active"},{"other":"village_spl_27_50911","age":59,"trust":54,"seasoned":true,"status":"active"}]}
+   P-DIST-LL: {"day":100,"pop":10,"plants":{"n":10,"list":[14,15,15,17,18,18,18,42,42,44],"median":18,"min":14,"max":44}}
+   K-CONTEXT: lessonsOk=31/45 knowExp=5 knowTraderDeep=2 knowMoot=18 markerMoot=15 propose=0 {} mislabels=0
+   G-DAY45: n=8 assigned=8 nonzeroW=8 active=5 annotated=3 mismatched=0 stale=0 returning=1 tops={"food_security":4,"party_up":4}
+   G-DAY60: n=8 assigned=8 nonzeroW=8 active=7 annotated=4 mismatched=1 stale=1 returning=0 tops={"food_security":4,"party_up":4}
+   G-DAY80: n=8 assigned=7 nonzeroW=6 active=7 annotated=4 mismatched=1 stale=0 returning=0 tops={"food_security":3,"party_up":3,"knowledge":1}
+   G-MISMATCH day=60: [{"name":"James","top":"food_security","objKind":"HAVEN_CHORE","objGoal":"party_up"}]
+   G-STALE day=60: [{"name":"Fatima","objKind":"idle","objState":"done","objGoal":"party_up"}]
+   G-MISMATCH day=80: [{"name":"James","top":"food_security","objKind":"HAVEN_CHORE","objGoal":"food_security"}]
+   G-STICK: nAllDays=2 stuck=2 distinctTopsDist={"1":2} stuckDetail=[{"name":"Ivy","top":"food_security"},{"name":"James","top":"food_security"}] churnDetail=[]
+   G-LINES: {"counts":{"party_up":83,"gear_up":0,"bank_veterans":0,"build_standing":6,"food_security":192,"bonds":0,"knowledge":0,"safety":46},"total":327}
+   BOND-TELEMETRY: installed=true tele=21 proposals=10 decisions=4 accepts=2 acceptRate=0.5 links=3 initiated=2/108 scholarTargeted=6 sayLines=2 errors=[]
+   BOND-TELE DETAIL: [{"day":11,"initiator":"luis_fernandez","target":"village_2","kind":"link","outcome":"staged","chance":null},{"day":12,"initiator":"luis_fernandez","target":"village_2","kind":"link","outcome":"refused","chance":null},{"day":13,"initiator":"gen_qa08t4u","target":"village_3","kind":"link","outcome":"staged","chance":null},{"day":14,"initiator":"gen_qa08t4u","target":"village_3","kind":"link","outcome":"accepted","chance":null},{"day":19,"initiator":"gen_sxz6e6x","target":"daniyar_askarov","kind":"person","outcome":"accepted","chance":57},{"day":23,"initiator":"gen_xj87k62","target":"village_2","kind":"link","outcome":"staged","chance":null},{"day":26,"initiator":"luis_fernandez","target":"gen_145q8ae","kind":"person","outcome":"staged","chance":null},{"day":26,"initiator":"gen_xj87k62","target":"village_2","kind":"link","outcome":"expired","chance":null},{"day":27,"initiator":"luis_fernandez","target":"gen_145q8ae","kind":"person","outcome":"refused","chance":null},{"day":30,"initiator":"gen_qa08t4u","target":"village_2","kind":"link","outcome":"staged","chance":null},{"day":31,"initiator":"gen_qa08t4u","target":"village_2","kind":"link","outcome":"accepted","chance":null},{"day":32,"initiator":"james_okonkwo","target":"gen_xj87k62","kind":"person","outcome":"accepted","chance":78},{"day":33,"initiator":"gen_qa08t4u","target":"gen_145q8ae","kind":"person","outcome":"staged","chance":null},{"day":34,"initiator":"gen_qa08t4u","target":"gen_145q8ae","kind":"person","outcome":"refused","chance":null},{"day":34,"initiator":"gen_xj87k62","target":"village_spl_30_34011","kind":"link","outcome":"staged","chance":null},{"day":35,"initiator":"gen_xj87k62","target":"village_spl_30_34011","kind":"link","outcome":"accepted","chance":null},{"day":45,"initiator":"fatima_hassan","target":"james_okonkwo","kind":"person","outcome":"refused","chance":58},{"day":51,"initiator":"fatima_hassan","target":"gen_145q8ae","kind":"person","outcome":"staged","chance":null},{"day":54,"initiator":"fatima_hassan","target":"gen_145q8ae","kind":"person","outcome":"expired","chance":null},{"day":86,"initiator":"ivy_wang","target":"petra_novak","kind":"person","outcome":"refused","chance":58},{"day":97,"initiator":"tashi_sherpa","target":"village_1","kind":"link","outcome":"staged","chance":null}]
+   Q1-REQUESTS: staged=9 decided=6 expired=2 expiredTalkableUntalked=1 expiredUntalkable=0 verdict=REACHED
+   Q1-REQ seed=100010 kind=link holder=luis_fernandez village=village_2 stagedDay=11 outcome=refused decidedDay=12 expiredDay=null lastSeenStaged=null talkedWhileLive=[11,12] talkable=true onRoster=true deathDay=31
+   Q1-REQ seed=100010 kind=link holder=gen_qa08t4u village=village_3 stagedDay=13 outcome=accepted decidedDay=14 expiredDay=null lastSeenStaged=null talkedWhileLive=[14] talkable=true onRoster=true deathDay=67
+   Q1-REQ seed=100010 kind=link holder=gen_xj87k62 village=village_2 stagedDay=23 outcome=expired decidedDay=null expiredDay=26 lastSeenStaged=25 talkedWhileLive=[23,24] talkable=true onRoster=true deathDay=66
+   Q1-REQ seed=100010 kind=person holder=luis_fernandez stagedDay=26 outcome=refused decidedDay=27 expiredDay=null lastSeenStaged=null talkedWhileLive=[27] talkable=true onRoster=true deathDay=31
+   Q1-REQ seed=100010 kind=link holder=gen_qa08t4u village=village_2 stagedDay=30 outcome=accepted decidedDay=31 expiredDay=null lastSeenStaged=null talkedWhileLive=[31] talkable=true onRoster=true deathDay=67
+   Q1-REQ seed=100010 kind=person holder=gen_qa08t4u stagedDay=33 outcome=refused decidedDay=34 expiredDay=null lastSeenStaged=null talkedWhileLive=[34] talkable=true onRoster=true deathDay=67
+   Q1-REQ seed=100010 kind=link holder=gen_xj87k62 village=village_spl_30_34011 stagedDay=34 outcome=accepted decidedDay=35 expiredDay=null lastSeenStaged=null talkedWhileLive=[34,35,36] talkable=true onRoster=true deathDay=66
+   Q1-REQ seed=100010 kind=person holder=fatima_hassan stagedDay=51 outcome=expired decidedDay=null expiredDay=54 lastSeenStaged=53 talkedWhileLive=[] talkable=true onRoster=true deathDay=67
+   Q1-REQ seed=100010 kind=link holder=tashi_sherpa village=village_1 stagedDay=97 outcome=open-at-end decidedDay=null expiredDay=null lastSeenStaged=99 talkedWhileLive=[97,98] talkable=true onRoster=true deathDay=null
+   Q1-LANGGATE: offers=6 offersNone=0 decisions=6 decisionsNone=0 decisionsNonNone=6 decisionsUnknown=0 verdict=NOT-REPRODUCED
+   Q1-LANGDEC seed=100010 day=12 fn=declineLinkRaise vid=luis_fernandez comm=partial
+   Q1-LANGDEC seed=100010 day=14 fn=acceptLinkRaise vid=gen_qa08t4u comm=partial
+   Q1-LANGDEC seed=100010 day=27 fn=declineBondProposal vid=luis_fernandez comm=partial
+   Q1-LANGDEC seed=100010 day=31 fn=acceptLinkRaise vid=gen_qa08t4u comm=partial
+   Q1-LANGDEC seed=100010 day=34 fn=declineBondProposal vid=gen_qa08t4u comm=partial
+   Q1-LANGDEC seed=100010 day=35 fn=acceptLinkRaise vid=gen_xj87k62 comm=partial
+   Q1-LANGARC: sittings=3 grants=1 flips=1 postFlipDecisions=1 unmatchedFlips=0 verdict=ARC-FIRES langs={"italian":{"lang":"italian","sits":2,"maxExp":37,"gain":34,"listens":10,"speakBacks":1,"holders":["gen_xj87k62"],"flips":[{"day":35,"vid":"gen_xj87k62","expAfter":25,"commAfter":"partial","via":"grant"}]},"hindi":{"lang":"hindi","sits":1,"maxExp":19,"gain":15,"listens":4,"speakBacks":1,"holders":["tashi_sherpa"],"flips":[]}} endLearned={"russian":2} endLearnedLangs=[]
+   Q1-SECRET: openers=0 addressingPicked=0 teachPicks=0 wantEstablished=0 teachCrowded=0 wantOpen=0 confrontRides=0 verdict=NO-SECRET
+   Q1-WANT: answered=0 established=0 newlyEstablished=0 verdict=NO-ANSWERS
+   Q1-WANT-OUTCOME: established=0 landed=0 surfacedOnly=0 other=0 outcome=NO-ANSWERS
+   Q1-VARIETY: answered=0 distinctAnswers=0 maxRepeat=0 missingAnswer=0 teachPicks=0 teachFramesDistinct=0 maxSameFrame=0 verdict=THIN-PROBE
+   Q2-POSTSECRET: answered=0 medianPostAnswerTurns=null dryFirst=0 referencing=0
+   Q1-LADDER: snaps=11 firstStageDay=14 peakStage=3 lastStage=3 holds=true minted={"fight":6,"forage":15,"craft":13,"talk":13,"explore":24} verdict=OPENS errors=[] inconsistent=[] stageDrops=[{"day":70,"peak":3,"live":2}]
+   Q1-LADDER-TRAJ seed=100010 day=14 stage=1 counted=21 cap=15 shortfall=5
+   Q1-LADDER-TRAJ seed=100010 day=20 stage=1 counted=25 cap=15 shortfall=1
+   Q1-LADDER-TRAJ seed=100010 day=30 stage=2 counted=30 cap=24 shortfall=10
+   Q1-LADDER-TRAJ seed=100010 day=40 stage=3 counted=40 cap=24 shortfall=0
+   Q1-LADDER-TRAJ seed=100010 day=50 stage=3 counted=46 cap=24 shortfall=0
+   Q1-LADDER-TRAJ seed=100010 day=60 stage=3 counted=53 cap=24 shortfall=0
+   Q1-LADDER-TRAJ seed=100010 day=70 stage=2 counted=34 cap=24 shortfall=6
+   Q1-LADDER-TRAJ seed=100010 day=80 stage=3 counted=52 cap=24 shortfall=0
+   Q1-LADDER-TRAJ seed=100010 day=90 stage=3 counted=61 cap=24 shortfall=0
+   Q1-LADDER-TRAJ seed=100010 day=100 stage=3 counted=66 cap=24 shortfall=0
+   Q1-LADDER-TRAJ seed=100010 day=100 stage=3 counted=66 cap=24 shortfall=0
+   Q2-TRUST: deaths=6 gainers=7 strangerGains=0 strangerTotal=0 lateGains=0 knownGains=7 nonDeathMoves=93 deadBearerDays=0 verdict=TRUST-EARNED-ONLY
+   Q2-TRUST-DEATH seed=100010 day=61 cause=the wild old=gen_145q8ae new=gen_xj87k62 latency=0 mantleDay=61 gains=[{"vid":"gen_xj87k62","amt":12,"net":-31,"kind":"known","firstContact":22},{"vid":"dale_hoffman","amt":4,"net":1,"kind":"known","firstContact":21}]
+   Q2-TRUST-DEATH seed=100010 day=66 cause=the wild old=gen_xj87k62 new=dale_hoffman latency=null mantleDay=null gains=[{"vid":"dale_hoffman","amt":10,"net":-20,"kind":"known","firstContact":21}]
+   Q2-TRUST-DEATH seed=100010 day=66 cause=the wild old=dale_hoffman new=gen_qa08t4u latency=0 mantleDay=66 gains=[{"vid":"gen_qa08t4u","amt":-11,"net":-11,"kind":"known","firstContact":2}]
+   Q2-TRUST-DEATH seed=100010 day=67 cause=the wild old=gen_qa08t4u new=gen_7drggm6 latency=null mantleDay=null gains=[{"vid":"gen_7drggm6","amt":-7,"net":-7,"kind":"known","firstContact":2}]
+   Q2-TRUST-DEATH seed=100010 day=67 cause=the wild old=gen_7drggm6 new=fatima_hassan latency=null mantleDay=null gains=[{"vid":"fatima_hassan","amt":-11,"net":-11,"kind":"known","firstContact":40}]
+   Q2-TRUST-DEATH seed=100010 day=67 cause=the wild old=fatima_hassan new=daniyar_askarov latency=0 mantleDay=67 gains=[{"vid":"daniyar_askarov","amt":-14,"net":-14,"kind":"known","firstContact":8}]
+   Q2-TRUST-MOVE seed=100010 day=4 moved=[{"vid":"gen_sxz6e6x","delta":27},{"vid":"gen_7drggm6","delta":4},{"vid":"gen_cw7jvd5","delta":7},{"vid":"gen_qa08t4u","delta":19},{"vid":"gen_xj87k62","delta":17},{"vid":"fatima_hassan","delta":10},{"vid":"ivy_wang","delta":4},{"vid":"james_okonkwo","delta":6},{"vid":"daniyar_askarov","delta":12},{"vid":"dale_hoffman","delta":27},{"vid":"luis_fernandez","delta":3}]
+   Q2-TRUST-MOVE seed=100010 day=5 moved=[{"vid":"gen_sxz6e6x","delta":7},{"vid":"gen_7drggm6","delta":7},{"vid":"gen_cw7jvd5","delta":3},{"vid":"gen_qa08t4u","delta":2},{"vid":"gen_xj87k62","delta":7},{"vid":"ivy_wang","delta":6},{"vid":"james_okonkwo","delta":3},{"vid":"daniyar_askarov","delta":3},{"vid":"dale_hoffman","delta":5}]
+   Q2-TRUST-MOVE seed=100010 day=6 moved=[{"vid":"gen_sxz6e6x","delta":3},{"vid":"gen_7drggm6","delta":6},{"vid":"gen_cw7jvd5","delta":1},{"vid":"gen_qa08t4u","delta":1},{"vid":"gen_xj87k62","delta":9},{"vid":"fatima_hassan","delta":8},{"vid":"dale_hoffman","delta":4},{"vid":"luis_fernandez","delta":4}]
+   Q2-TRUST-MOVE seed=100010 day=7 moved=[{"vid":"gen_sxz6e6x","delta":4},{"vid":"gen_7drggm6","delta":6},{"vid":"gen_qa08t4u","delta":1},{"vid":"gen_xj87k62","delta":7},{"vid":"fatima_hassan","delta":2},{"vid":"ivy_wang","delta":1},{"vid":"dale_hoffman","delta":4},{"vid":"luis_fernandez","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=8 moved=[{"vid":"gen_sxz6e6x","delta":10},{"vid":"gen_7drggm6","delta":2},{"vid":"gen_cw7jvd5","delta":1},{"vid":"gen_qa08t4u","delta":1},{"vid":"gen_xj87k62","delta":4},{"vid":"fatima_hassan","delta":1},{"vid":"ivy_wang","delta":1},{"vid":"james_okonkwo","delta":3},{"vid":"daniyar_askarov","delta":1},{"vid":"dale_hoffman","delta":4},{"vid":"luis_fernandez","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=9 moved=[{"vid":"gen_sxz6e6x","delta":7},{"vid":"gen_7drggm6","delta":2},{"vid":"gen_cw7jvd5","delta":2},{"vid":"gen_qa08t4u","delta":1},{"vid":"gen_xj87k62","delta":5},{"vid":"fatima_hassan","delta":1},{"vid":"ivy_wang","delta":1},{"vid":"james_okonkwo","delta":4},{"vid":"dale_hoffman","delta":4},{"vid":"luis_fernandez","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=10 moved=[{"vid":"gen_145q8ae","delta":9},{"vid":"gen_sxz6e6x","delta":10},{"vid":"gen_7drggm6","delta":19},{"vid":"gen_cw7jvd5","delta":11},{"vid":"gen_qa08t4u","delta":11},{"vid":"gen_xj87k62","delta":13},{"vid":"fatima_hassan","delta":11},{"vid":"ivy_wang","delta":6},{"vid":"james_okonkwo","delta":14},{"vid":"daniyar_askarov","delta":10},{"vid":"dale_hoffman","delta":11},{"vid":"luis_fernandez","delta":9}]
+   Q2-TRUST-MOVE seed=100010 day=11 moved=[{"vid":"gen_sxz6e6x","delta":8},{"vid":"gen_7drggm6","delta":3},{"vid":"gen_cw7jvd5","delta":5},{"vid":"gen_qa08t4u","delta":3},{"vid":"gen_xj87k62","delta":5},{"vid":"fatima_hassan","delta":2},{"vid":"ivy_wang","delta":5},{"vid":"james_okonkwo","delta":5},{"vid":"daniyar_askarov","delta":2},{"vid":"dale_hoffman","delta":8},{"vid":"luis_fernandez","delta":2}]
+   Q2-TRUST-MOVE seed=100010 day=12 moved=[{"vid":"gen_sxz6e6x","delta":1},{"vid":"gen_7drggm6","delta":8},{"vid":"gen_cw7jvd5","delta":5},{"vid":"gen_qa08t4u","delta":6},{"vid":"gen_xj87k62","delta":9},{"vid":"fatima_hassan","delta":5},{"vid":"james_okonkwo","delta":5},{"vid":"daniyar_askarov","delta":9},{"vid":"dale_hoffman","delta":1},{"vid":"luis_fernandez","delta":13}]
+   Q2-TRUST-MOVE seed=100010 day=13 moved=[{"vid":"gen_7drggm6","delta":3},{"vid":"gen_cw7jvd5","delta":4},{"vid":"gen_qa08t4u","delta":3},{"vid":"gen_xj87k62","delta":6},{"vid":"fatima_hassan","delta":1},{"vid":"ivy_wang","delta":1},{"vid":"james_okonkwo","delta":2},{"vid":"daniyar_askarov","delta":1},{"vid":"luis_fernandez","delta":11}]
+   Q2-TRUST-MOVE seed=100010 day=14 moved=[{"vid":"gen_sxz6e6x","delta":1},{"vid":"gen_7drggm6","delta":10},{"vid":"gen_cw7jvd5","delta":8},{"vid":"gen_qa08t4u","delta":16},{"vid":"gen_xj87k62","delta":4},{"vid":"ivy_wang","delta":3},{"vid":"james_okonkwo","delta":3},{"vid":"daniyar_askarov","delta":19},{"vid":"luis_fernandez","delta":19}]
+   Q2-TRUST-MOVE seed=100010 day=15 moved=[{"vid":"gen_7drggm6","delta":6},{"vid":"gen_cw7jvd5","delta":1},{"vid":"gen_qa08t4u","delta":7},{"vid":"gen_xj87k62","delta":1},{"vid":"ivy_wang","delta":2},{"vid":"james_okonkwo","delta":2},{"vid":"daniyar_askarov","delta":1},{"vid":"dale_hoffman","delta":1},{"vid":"luis_fernandez","delta":-1}]
+   Q2-TRUST-MOVE seed=100010 day=16 moved=[{"vid":"gen_sxz6e6x","delta":1},{"vid":"gen_7drggm6","delta":3},{"vid":"gen_qa08t4u","delta":4},{"vid":"fatima_hassan","delta":3},{"vid":"ivy_wang","delta":2},{"vid":"james_okonkwo","delta":1},{"vid":"luis_fernandez","delta":8}]
+   Q2-TRUST-MOVE seed=100010 day=17 moved=[{"vid":"gen_7drggm6","delta":4},{"vid":"gen_qa08t4u","delta":5},{"vid":"gen_xj87k62","delta":-2},{"vid":"fatima_hassan","delta":-7},{"vid":"ivy_wang","delta":2},{"vid":"james_okonkwo","delta":3},{"vid":"luis_fernandez","delta":7}]
+   Q2-TRUST-MOVE seed=100010 day=18 moved=[{"vid":"gen_qa08t4u","delta":2},{"vid":"gen_xj87k62","delta":3},{"vid":"fatima_hassan","delta":1},{"vid":"ivy_wang","delta":1},{"vid":"daniyar_askarov","delta":3},{"vid":"luis_fernandez","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=19 moved=[{"vid":"gen_xj87k62","delta":-2},{"vid":"ivy_wang","delta":1},{"vid":"james_okonkwo","delta":3},{"vid":"daniyar_askarov","delta":2}]
+   Q2-TRUST-MOVE seed=100010 day=20 moved=[{"vid":"gen_xj87k62","delta":-1},{"vid":"fatima_hassan","delta":7},{"vid":"ivy_wang","delta":2},{"vid":"james_okonkwo","delta":4},{"vid":"daniyar_askarov","delta":4},{"vid":"dale_hoffman","delta":1},{"vid":"luis_fernandez","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=21 moved=[{"vid":"gen_xj87k62","delta":4},{"vid":"fatima_hassan","delta":1},{"vid":"ivy_wang","delta":1},{"vid":"james_okonkwo","delta":3},{"vid":"daniyar_askarov","delta":2},{"vid":"luis_fernandez","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=22 moved=[{"vid":"gen_sxz6e6x","delta":1},{"vid":"gen_qa08t4u","delta":1},{"vid":"gen_xj87k62","delta":-4},{"vid":"fatima_hassan","delta":1},{"vid":"james_okonkwo","delta":4},{"vid":"daniyar_askarov","delta":1},{"vid":"luis_fernandez","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=23 moved=[{"vid":"gen_sxz6e6x","delta":1},{"vid":"gen_qa08t4u","delta":1},{"vid":"gen_xj87k62","delta":2},{"vid":"fatima_hassan","delta":7},{"vid":"ivy_wang","delta":1},{"vid":"james_okonkwo","delta":1},{"vid":"luis_fernandez","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=24 moved=[{"vid":"gen_sxz6e6x","delta":1},{"vid":"gen_qa08t4u","delta":1},{"vid":"gen_xj87k62","delta":-2},{"vid":"fatima_hassan","delta":3},{"vid":"daniyar_askarov","delta":3},{"vid":"luis_fernandez","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=25 moved=[{"vid":"gen_xj87k62","delta":-1},{"vid":"fatima_hassan","delta":1},{"vid":"ivy_wang","delta":1},{"vid":"james_okonkwo","delta":1},{"vid":"dale_hoffman","delta":1},{"vid":"luis_fernandez","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=26 moved=[{"vid":"gen_xj87k62","delta":1},{"vid":"fatima_hassan","delta":2},{"vid":"ivy_wang","delta":3}]
+   Q2-TRUST-MOVE seed=100010 day=27 moved=[{"vid":"gen_145q8ae","delta":-5},{"vid":"gen_qa08t4u","delta":1},{"vid":"gen_xj87k62","delta":4},{"vid":"fatima_hassan","delta":3},{"vid":"ivy_wang","delta":1},{"vid":"james_okonkwo","delta":1},{"vid":"luis_fernandez","delta":-1}]
+   Q2-TRUST-MOVE seed=100010 day=28 moved=[{"vid":"gen_7drggm6","delta":1},{"vid":"fatima_hassan","delta":3},{"vid":"ivy_wang","delta":4}]
+   Q2-TRUST-MOVE seed=100010 day=29 moved=[{"vid":"ivy_wang","delta":2}]
+   Q2-TRUST-MOVE seed=100010 day=30 moved=[{"vid":"gen_145q8ae","delta":-8},{"vid":"gen_7drggm6","delta":-7},{"vid":"gen_qa08t4u","delta":-7},{"vid":"gen_xj87k62","delta":-10},{"vid":"fatima_hassan","delta":-4},{"vid":"ivy_wang","delta":-5},{"vid":"james_okonkwo","delta":-8},{"vid":"daniyar_askarov","delta":-8},{"vid":"dale_hoffman","delta":-4},{"vid":"luis_fernandez","delta":-7}]
+   Q2-TRUST-MOVE seed=100010 day=31 moved=[{"vid":"gen_7drggm6","delta":5},{"vid":"gen_qa08t4u","delta":3},{"vid":"gen_xj87k62","delta":8},{"vid":"fatima_hassan","delta":1},{"vid":"james_okonkwo","delta":2},{"vid":"daniyar_askarov","delta":4}]
+   Q2-TRUST-MOVE seed=100010 day=32 moved=[{"vid":"gen_7drggm6","delta":1},{"vid":"gen_xj87k62","delta":2},{"vid":"fatima_hassan","delta":1},{"vid":"ivy_wang","delta":6},{"vid":"james_okonkwo","delta":5},{"vid":"daniyar_askarov","delta":4}]
+   Q2-TRUST-MOVE seed=100010 day=33 moved=[{"vid":"gen_145q8ae","delta":-5},{"vid":"ivy_wang","delta":1},{"vid":"james_okonkwo","delta":1},{"vid":"dale_hoffman","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=34 moved=[{"vid":"gen_7drggm6","delta":1},{"vid":"gen_qa08t4u","delta":-2},{"vid":"gen_xj87k62","delta":1},{"vid":"fatima_hassan","delta":2},{"vid":"ivy_wang","delta":4},{"vid":"dale_hoffman","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=35 moved=[{"vid":"gen_qa08t4u","delta":1},{"vid":"gen_xj87k62","delta":-1},{"vid":"fatima_hassan","delta":2},{"vid":"ivy_wang","delta":1},{"vid":"james_okonkwo","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=36 moved=[{"vid":"gen_qa08t4u","delta":1},{"vid":"gen_xj87k62","delta":-2},{"vid":"fatima_hassan","delta":1},{"vid":"ivy_wang","delta":1},{"vid":"dale_hoffman","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=37 moved=[{"vid":"fatima_hassan","delta":1},{"vid":"ivy_wang","delta":3}]
+   Q2-TRUST-MOVE seed=100010 day=38 moved=[{"vid":"gen_xj87k62","delta":2},{"vid":"fatima_hassan","delta":1},{"vid":"ivy_wang","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=39 moved=[{"vid":"gen_7drggm6","delta":1},{"vid":"gen_qa08t4u","delta":1},{"vid":"gen_xj87k62","delta":3},{"vid":"fatima_hassan","delta":2},{"vid":"ivy_wang","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=40 moved=[{"vid":"gen_xj87k62","delta":-2},{"vid":"ivy_wang","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=41 moved=[{"vid":"gen_qa08t4u","delta":1},{"vid":"fatima_hassan","delta":1},{"vid":"ivy_wang","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=42 moved=[{"vid":"gen_qa08t4u","delta":1},{"vid":"gen_xj87k62","delta":-2},{"vid":"fatima_hassan","delta":1},{"vid":"ivy_wang","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=43 moved=[{"vid":"gen_xj87k62","delta":1},{"vid":"fatima_hassan","delta":2},{"vid":"ivy_wang","delta":2}]
+   Q2-TRUST-MOVE seed=100010 day=44 moved=[{"vid":"gen_qa08t4u","delta":1},{"vid":"gen_xj87k62","delta":-2},{"vid":"fatima_hassan","delta":1},{"vid":"ivy_wang","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=45 moved=[{"vid":"gen_7drggm6","delta":1},{"vid":"gen_qa08t4u","delta":1},{"vid":"ivy_wang","delta":3},{"vid":"james_okonkwo","delta":1},{"vid":"dale_hoffman","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=46 moved=[{"vid":"gen_qa08t4u","delta":2},{"vid":"ivy_wang","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=47 moved=[{"vid":"gen_7drggm6","delta":1},{"vid":"fatima_hassan","delta":1},{"vid":"dale_hoffman","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=48 moved=[{"vid":"gen_7drggm6","delta":1},{"vid":"fatima_hassan","delta":-13},{"vid":"daniyar_askarov","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=49 moved=[{"vid":"gen_xj87k62","delta":2},{"vid":"fatima_hassan","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=50 moved=[{"vid":"gen_7drggm6","delta":1},{"vid":"gen_qa08t4u","delta":1},{"vid":"fatima_hassan","delta":2},{"vid":"james_okonkwo","delta":1},{"vid":"dale_hoffman","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=51 moved=[{"vid":"gen_xj87k62","delta":-2},{"vid":"fatima_hassan","delta":2},{"vid":"dale_hoffman","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=52 moved=[{"vid":"gen_xj87k62","delta":2},{"vid":"fatima_hassan","delta":2}]
+   Q2-TRUST-MOVE seed=100010 day=53 moved=[{"vid":"gen_qa08t4u","delta":1},{"vid":"gen_xj87k62","delta":1},{"vid":"daniyar_askarov","delta":1},{"vid":"dale_hoffman","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=54 moved=[{"vid":"gen_xj87k62","delta":-3}]
+   Q2-TRUST-MOVE seed=100010 day=55 moved=[{"vid":"fatima_hassan","delta":2}]
+   Q2-TRUST-MOVE seed=100010 day=56 moved=[{"vid":"gen_xj87k62","delta":1},{"vid":"fatima_hassan","delta":1},{"vid":"ivy_wang","delta":1},{"vid":"daniyar_askarov","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=57 moved=[{"vid":"gen_xj87k62","delta":1},{"vid":"fatima_hassan","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=58 moved=[{"vid":"gen_7drggm6","delta":1},{"vid":"gen_xj87k62","delta":1},{"vid":"fatima_hassan","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=59 moved=[{"vid":"gen_145q8ae","delta":-5},{"vid":"fatima_hassan","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=60 moved=[{"vid":"gen_145q8ae","delta":6},{"vid":"fatima_hassan","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=62 moved=[{"vid":"fatima_hassan","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=63 moved=[{"vid":"fatima_hassan","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=65 moved=[{"vid":"gen_7drggm6","delta":1},{"vid":"fatima_hassan","delta":1},{"vid":"ivy_wang","delta":-1},{"vid":"james_okonkwo","delta":1},{"vid":"daniyar_askarov","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=68 moved=[{"vid":"daniyar_askarov","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=69 moved=[{"vid":"ivy_wang","delta":1},{"vid":"james_okonkwo","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=70 moved=[{"vid":"ivy_wang","delta":1},{"vid":"valeria_quispe","delta":25}]
+   Q2-TRUST-MOVE seed=100010 day=71 moved=[{"vid":"ivy_wang","delta":1},{"vid":"valeria_quispe","delta":6},{"vid":"sanne_bakker","delta":34}]
+   Q2-TRUST-MOVE seed=100010 day=72 moved=[{"vid":"ivy_wang","delta":1},{"vid":"james_okonkwo","delta":1},{"vid":"valeria_quispe","delta":6},{"vid":"sanne_bakker","delta":8},{"vid":"brian_otieno","delta":21}]
+   Q2-TRUST-MOVE seed=100010 day=73 moved=[{"vid":"james_okonkwo","delta":1},{"vid":"valeria_quispe","delta":4},{"vid":"sanne_bakker","delta":2},{"vid":"brian_otieno","delta":2}]
+   Q2-TRUST-MOVE seed=100010 day=74 moved=[{"vid":"ivy_wang","delta":1},{"vid":"james_okonkwo","delta":1},{"vid":"valeria_quispe","delta":3},{"vid":"sanne_bakker","delta":15},{"vid":"brian_otieno","delta":1},{"vid":"tashi_sherpa","delta":34}]
+   Q2-TRUST-MOVE seed=100010 day=75 moved=[{"vid":"sanne_bakker","delta":2},{"vid":"brian_otieno","delta":7}]
+   Q2-TRUST-MOVE seed=100010 day=76 moved=[{"vid":"sanne_bakker","delta":5},{"vid":"brian_otieno","delta":13},{"vid":"tashi_sherpa","delta":2}]
+   Q2-TRUST-MOVE seed=100010 day=77 moved=[{"vid":"ivy_wang","delta":1},{"vid":"james_okonkwo","delta":1},{"vid":"sanne_bakker","delta":5},{"vid":"brian_otieno","delta":2},{"vid":"tashi_sherpa","delta":2}]
+   Q2-TRUST-MOVE seed=100010 day=78 moved=[{"vid":"james_okonkwo","delta":-1},{"vid":"sanne_bakker","delta":3},{"vid":"brian_otieno","delta":15},{"vid":"petra_novak","delta":23}]
+   Q2-TRUST-MOVE seed=100010 day=79 moved=[{"vid":"ivy_wang","delta":1},{"vid":"sanne_bakker","delta":7},{"vid":"brian_otieno","delta":9},{"vid":"tashi_sherpa","delta":16},{"vid":"petra_novak","delta":9},{"vid":"jovan_milic","delta":22}]
+   Q2-TRUST-MOVE seed=100010 day=80 moved=[{"vid":"james_okonkwo","delta":1},{"vid":"sanne_bakker","delta":6},{"vid":"brian_otieno","delta":7},{"vid":"tashi_sherpa","delta":6},{"vid":"petra_novak","delta":4},{"vid":"jovan_milic","delta":3},{"vid":"oliver_moore","delta":27}]
+   Q2-TRUST-MOVE seed=100010 day=81 moved=[{"vid":"ivy_wang","delta":1},{"vid":"sanne_bakker","delta":4},{"vid":"brian_otieno","delta":2},{"vid":"petra_novak","delta":1},{"vid":"jovan_milic","delta":22},{"vid":"oliver_moore","delta":3}]
+   Q2-TRUST-MOVE seed=100010 day=82 moved=[{"vid":"ivy_wang","delta":1},{"vid":"brian_otieno","delta":2},{"vid":"tashi_sherpa","delta":3},{"vid":"petra_novak","delta":2},{"vid":"jovan_milic","delta":1},{"vid":"oliver_moore","delta":1},{"vid":"nathan_lee","delta":20}]
+   Q2-TRUST-MOVE seed=100010 day=83 moved=[{"vid":"ivy_wang","delta":1},{"vid":"brian_otieno","delta":2},{"vid":"tashi_sherpa","delta":3},{"vid":"petra_novak","delta":8},{"vid":"jovan_milic","delta":8},{"vid":"oliver_moore","delta":2},{"vid":"nathan_lee","delta":7}]
+   Q2-TRUST-MOVE seed=100010 day=84 moved=[{"vid":"brian_otieno","delta":3},{"vid":"tashi_sherpa","delta":3},{"vid":"petra_novak","delta":13},{"vid":"oliver_moore","delta":3},{"vid":"nathan_lee","delta":11}]
+   Q2-TRUST-MOVE seed=100010 day=85 moved=[{"vid":"daniyar_askarov","delta":4},{"vid":"brian_otieno","delta":4},{"vid":"tashi_sherpa","delta":1},{"vid":"petra_novak","delta":1},{"vid":"jovan_milic","delta":2},{"vid":"oliver_moore","delta":15},{"vid":"nathan_lee","delta":3}]
+   Q2-TRUST-MOVE seed=100010 day=86 moved=[{"vid":"sanne_bakker","delta":2},{"vid":"tashi_sherpa","delta":3},{"vid":"petra_novak","delta":5},{"vid":"jovan_milic","delta":2},{"vid":"oliver_moore","delta":6},{"vid":"nathan_lee","delta":2}]
+   Q2-TRUST-MOVE seed=100010 day=87 moved=[{"vid":"tashi_sherpa","delta":7},{"vid":"petra_novak","delta":8},{"vid":"jovan_milic","delta":1},{"vid":"oliver_moore","delta":6}]
+   Q2-TRUST-MOVE seed=100010 day=88 moved=[{"vid":"brian_otieno","delta":1},{"vid":"petra_novak","delta":2},{"vid":"jovan_milic","delta":5},{"vid":"oliver_moore","delta":2},{"vid":"nathan_lee","delta":7}]
+   Q2-TRUST-MOVE seed=100010 day=89 moved=[{"vid":"tashi_sherpa","delta":3},{"vid":"jovan_milic","delta":1},{"vid":"nathan_lee","delta":2}]
+   Q2-TRUST-MOVE seed=100010 day=90 moved=[{"vid":"sanne_bakker","delta":1},{"vid":"tashi_sherpa","delta":3},{"vid":"petra_novak","delta":1},{"vid":"jovan_milic","delta":2},{"vid":"oliver_moore","delta":8},{"vid":"nathan_lee","delta":2}]
+   Q2-TRUST-MOVE seed=100010 day=91 moved=[{"vid":"tashi_sherpa","delta":1},{"vid":"jovan_milic","delta":9},{"vid":"oliver_moore","delta":1},{"vid":"nathan_lee","delta":2}]
+   Q2-TRUST-MOVE seed=100010 day=92 moved=[{"vid":"tashi_sherpa","delta":1},{"vid":"petra_novak","delta":2},{"vid":"oliver_moore","delta":3},{"vid":"nathan_lee","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=93 moved=[{"vid":"tashi_sherpa","delta":2},{"vid":"petra_novak","delta":2},{"vid":"jovan_milic","delta":3},{"vid":"oliver_moore","delta":2},{"vid":"nathan_lee","delta":3}]
+   Q2-TRUST-MOVE seed=100010 day=94 moved=[{"vid":"daniyar_askarov","delta":2},{"vid":"petra_novak","delta":1},{"vid":"jovan_milic","delta":1},{"vid":"oliver_moore","delta":2},{"vid":"nathan_lee","delta":2}]
+   Q2-TRUST-MOVE seed=100010 day=95 moved=[{"vid":"petra_novak","delta":1},{"vid":"jovan_milic","delta":1},{"vid":"nathan_lee","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=96 moved=[{"vid":"petra_novak","delta":1},{"vid":"jovan_milic","delta":1},{"vid":"oliver_moore","delta":3},{"vid":"nathan_lee","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=97 moved=[{"vid":"daniyar_askarov","delta":-11},{"vid":"jovan_milic","delta":2},{"vid":"nathan_lee","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=98 moved=[{"vid":"petra_novak","delta":1},{"vid":"jovan_milic","delta":1},{"vid":"oliver_moore","delta":1}]
+   Q2-TRUST-MOVE seed=100010 day=99 moved=[{"vid":"daniyar_askarov","delta":1},{"vid":"oliver_moore","delta":2}]
+   Q2-TRUST-MOVE seed=100010 day=100 moved=[{"vid":"jovan_milic","delta":2},{"vid":"oliver_moore","delta":1},{"vid":"nathan_lee","delta":3}]
+   Q1-LANGFLIP seed=100010 lang=italian flipDay=35 flipVid=gen_xj87k62 expAfter=25 postDecisions=[{"day":35,"fn":"acceptLinkRaise","vid":"gen_xj87k62","comm":"partial"}]
+   Q2-GOALJOIN seed=100010 track=party_up tops=11 lined=3 indoorLined=0 departedLined=1 capture=57 -> HEALTHY
+   Q2-GOALJOIN seed=100010 track=gear_up tops=0 lined=0 indoorLined=0 departedLined=0 capture=0 -> NO-DATA
+   Q2-GOALJOIN seed=100010 track=bank_veterans tops=0 lined=0 indoorLined=0 departedLined=0 capture=0 -> NO-DATA
+   Q2-GOALJOIN seed=100010 track=build_standing tops=0 lined=0 indoorLined=0 departedLined=0 capture=5 -> HEALTHY
+   Q2-GOALJOIN seed=100010 track=food_security tops=11 lined=5 indoorLined=1 departedLined=0 capture=161 -> HEALTHY
+   Q2-GOALJOIN seed=100010 track=bonds tops=0 lined=0 indoorLined=0 departedLined=0 capture=0 -> NO-DATA
+   Q2-GOALJOIN seed=100010 track=knowledge tops=1 lined=0 indoorLined=0 departedLined=0 capture=0 -> GOALS-FAULT
+   Q2-GOALJOIN seed=100010 track=safety tops=0 lined=0 indoorLined=0 departedLined=0 capture=40 -> HEALTHY
+   DEBRIEF: trigger=n/a flags={"scattered":false,"extinct":false,"scholarDead":false,"livingN":10,"pantryKcal":28874,"endReason":"survived"} lines=["📖 The Codex grew by 74 (46 plants, 26 skills, 2 recipes) — among them Bark armor, Autumn Crocus, Pawpaw (+71 more).","🧑‍🏫 Dale taught Pearl Millet; Daniyar taught Goji Berry.","⚔️ First blood, day 4: The Ugly Beast. 53 beasts slain. First wave-2 kill: Big-Eyes, day 14.","💀 10 fell — the wild (×6); monster (×3).","🔍 Never learned: a vine with thick-skinned round fruit."]
+seed 100017: end=survived day=46 verdict=NO-REGIONAL-DAYS
+   S-TRACE: traceDays=45 firstRegional=null standing@firstRegional=null firstPos=30 regionalDays=0 regionalZero=0 max=40
+   LAST-LIVING DEED: null
+   P-DIST-LL: {"day":45,"pop":8,"plants":{"n":8,"list":[21,22,22,23,23,23,23,25],"median":23,"min":21,"max":25}}
+   K-CONTEXT: lessonsOk=18/31 knowExp=3 knowTraderDeep=2 knowMoot=12 markerMoot=10 propose=1 {"linked":1} mislabels=0
+   G-DAY45: n=7 assigned=7 nonzeroW=7 active=5 annotated=5 mismatched=0 stale=0 returning=0 tops={"safety":1,"food_security":3,"party_up":2,"build_standing":1}
+   G-STICK: n/a (snaps=1)
+   G-LINES: {"counts":{"party_up":34,"gear_up":0,"bank_veterans":2,"build_standing":9,"food_security":67,"bonds":0,"knowledge":0,"safety":27},"total":139}
+   BOND-TELEMETRY: installed=true tele=7 proposals=4 decisions=3 accepts=2 acceptRate=0.67 links=1 initiated=2/53 scholarTargeted=2 sayLines=2 errors=[]
+   BOND-TELE DETAIL: [{"day":12,"initiator":"tariq_mahmood","target":"village_0","kind":"link","outcome":"staged","chance":null},{"day":15,"initiator":"tariq_mahmood","target":"village_0","kind":"link","outcome":"expired","chance":null},{"day":19,"initiator":"gen_g09zq3j","target":"gen_07m9y0g","kind":"person","outcome":"refused","chance":57},{"day":26,"initiator":"gen_oi1vu16","target":"gen_3z880py","kind":"person","outcome":"staged","chance":null},{"day":27,"initiator":"gen_oi1vu16","target":"gen_3z880py","kind":"person","outcome":"accepted","chance":null},{"day":30,"initiator":"adaeze_nwosu","target":"gen_oi1vu16","kind":"person","outcome":"accepted","chance":68},{"day":45,"initiator":"tariq_mahmood","target":"gen_07m9y0g","kind":"person","outcome":"accepted","chance":47}]
+   Q1-REQUESTS: staged=2 decided=1 expired=1 expiredTalkableUntalked=0 expiredUntalkable=0 verdict=REACHED
+   Q1-REQ seed=100017 kind=link holder=tariq_mahmood village=village_0 stagedDay=12 outcome=expired decidedDay=null expiredDay=15 lastSeenStaged=14 talkedWhileLive=[12,13] talkable=true onRoster=true deathDay=null
+   Q1-REQ seed=100017 kind=person holder=gen_oi1vu16 stagedDay=26 outcome=accepted decidedDay=27 expiredDay=null lastSeenStaged=null talkedWhileLive=[26,27] talkable=true onRoster=true deathDay=33
+   Q1-LANGGATE: offers=1 offersNone=0 decisions=1 decisionsNone=0 decisionsNonNone=1 decisionsUnknown=0 verdict=NOT-REPRODUCED
+   Q1-LANGDEC seed=100017 day=27 fn=acceptBondProposal vid=gen_oi1vu16 comm=full
+   Q1-LANGARC: sittings=1 grants=0 flips=0 postFlipDecisions=0 unmatchedFlips=0 verdict=ARC-UNEXERCISED langs={"hindi":{"lang":"hindi","sits":1,"maxExp":11,"gain":9,"listens":2,"speakBacks":1,"holders":["tariq_mahmood"],"flips":[]}} endLearned={"english":2,"mandarin":1} endLearnedLangs=[]
+   Q1-SECRET: openers=0 addressingPicked=0 teachPicks=0 wantEstablished=0 teachCrowded=0 wantOpen=0 confrontRides=0 verdict=NO-SECRET
+   Q1-WANT: answered=0 established=0 newlyEstablished=0 verdict=NO-ANSWERS
+   Q1-WANT-OUTCOME: established=0 landed=0 surfacedOnly=0 other=0 outcome=NO-ANSWERS
+   Q1-VARIETY: answered=0 distinctAnswers=0 maxRepeat=0 missingAnswer=0 teachPicks=0 teachFramesDistinct=0 maxSameFrame=0 verdict=THIN-PROBE
+   Q2-POSTSECRET: answered=0 medianPostAnswerTurns=null dryFirst=0 referencing=0
+   Q1-LADDER: snaps=5 firstStageDay=14 peakStage=2 lastStage=2 holds=true minted={"fight":0,"forage":11,"craft":7,"talk":3,"explore":17} verdict=OPENS errors=[] inconsistent=[] stageDrops=[]
+   Q1-LADDER-TRAJ seed=100017 day=14 stage=1 counted=22 cap=15 shortfall=4
+   Q1-LADDER-TRAJ seed=100017 day=20 stage=2 counted=27 cap=24 shortfall=13
+   Q1-LADDER-TRAJ seed=100017 day=30 stage=2 counted=32 cap=24 shortfall=8
+   Q1-LADDER-TRAJ seed=100017 day=40 stage=2 counted=35 cap=24 shortfall=5
+   Q1-LADDER-TRAJ seed=100017 day=46 stage=2 counted=38 cap=24 shortfall=2
+   Q2-TRUST: deaths=3 gainers=5 strangerGains=0 strangerTotal=0 lateGains=0 knownGains=5 nonDeathMoves=38 deadBearerDays=0 verdict=TRUST-EARNED-ONLY
+   Q2-TRUST-DEATH seed=100017 day=20 cause=the wild old=gen_ednes2k new=gen_3z880py latency=0 mantleDay=20 gains=[{"vid":"gen_oi1vu16","amt":12,"net":12,"kind":"known","firstContact":2},{"vid":"rafael_torres","amt":9,"net":9,"kind":"known","firstContact":18}]
+   Q2-TRUST-DEATH seed=100017 day=30 cause=the wild old=gen_3z880py new=gen_oi1vu16 latency=0 mantleDay=30 gains=[{"vid":"gen_oi1vu16","amt":12,"net":-12,"kind":"known","firstContact":2},{"vid":"rafael_torres","amt":12,"net":12,"kind":"known","firstContact":18}]
+   Q2-TRUST-DEATH seed=100017 day=33 cause=a stranger old=gen_oi1vu16 new=gen_g09zq3j latency=1 mantleDay=34 gains=[{"vid":"rafael_torres","amt":12,"net":12,"kind":"known","firstContact":18}]
+   Q2-TRUST-MOVE seed=100017 day=4 moved=[{"vid":"gen_3z880py","delta":2},{"vid":"gen_g09zq3j","delta":4},{"vid":"gen_07m9y0g","delta":1},{"vid":"sigrun_eiriksdottir","delta":2},{"vid":"adaeze_nwosu","delta":1},{"vid":"tariq_mahmood","delta":2}]
+   Q2-TRUST-MOVE seed=100017 day=5 moved=[{"vid":"gen_3z880py","delta":2},{"vid":"gen_g09zq3j","delta":9},{"vid":"gen_oi1vu16","delta":3},{"vid":"sigrun_eiriksdottir","delta":2},{"vid":"adaeze_nwosu","delta":5},{"vid":"tariq_mahmood","delta":5}]
+   Q2-TRUST-MOVE seed=100017 day=6 moved=[{"vid":"gen_3z880py","delta":2},{"vid":"gen_g09zq3j","delta":5},{"vid":"gen_oi1vu16","delta":2},{"vid":"gen_07m9y0g","delta":1},{"vid":"adaeze_nwosu","delta":6},{"vid":"rafael_torres","delta":1}]
+   Q2-TRUST-MOVE seed=100017 day=7 moved=[{"vid":"gen_3z880py","delta":4},{"vid":"gen_g09zq3j","delta":5},{"vid":"gen_oi1vu16","delta":1},{"vid":"gen_07m9y0g","delta":3},{"vid":"sigrun_eiriksdottir","delta":9},{"vid":"adaeze_nwosu","delta":2},{"vid":"tariq_mahmood","delta":1},{"vid":"ella_johnson","delta":7},{"vid":"jorge_silva","delta":4},{"vid":"rafael_torres","delta":1}]
+   Q2-TRUST-MOVE seed=100017 day=8 moved=[{"vid":"gen_3z880py","delta":22},{"vid":"gen_g09zq3j","delta":22},{"vid":"gen_oi1vu16","delta":1},{"vid":"gen_07m9y0g","delta":3},{"vid":"sigrun_eiriksdottir","delta":6},{"vid":"adaeze_nwosu","delta":5},{"vid":"tariq_mahmood","delta":2},{"vid":"jorge_silva","delta":4},{"vid":"rafael_torres","delta":2}]
+   Q2-TRUST-MOVE seed=100017 day=9 moved=[{"vid":"gen_3z880py","delta":8},{"vid":"gen_g09zq3j","delta":11},{"vid":"gen_07m9y0g","delta":2},{"vid":"sigrun_eiriksdottir","delta":2},{"vid":"adaeze_nwosu","delta":4},{"vid":"tariq_mahmood","delta":1},{"vid":"ella_johnson","delta":1},{"vid":"jorge_silva","delta":1},{"vid":"rafael_torres","delta":3}]
+   Q2-TRUST-MOVE seed=100017 day=10 moved=[{"vid":"gen_3z880py","delta":7},{"vid":"gen_g09zq3j","delta":8},{"vid":"gen_oi1vu16","delta":-1},{"vid":"gen_07m9y0g","delta":14},{"vid":"sigrun_eiriksdottir","delta":15},{"vid":"adaeze_nwosu","delta":11},{"vid":"tariq_mahmood","delta":1},{"vid":"ella_johnson","delta":1},{"vid":"jorge_silva","delta":3}]
+   Q2-TRUST-MOVE seed=100017 day=11 moved=[{"vid":"gen_3z880py","delta":11},{"vid":"gen_g09zq3j","delta":7},{"vid":"gen_07m9y0g","delta":2},{"vid":"sigrun_eiriksdottir","delta":3},{"vid":"adaeze_nwosu","delta":2},{"vid":"ella_johnson","delta":1},{"vid":"jorge_silva","delta":2},{"vid":"rafael_torres","delta":-2}]
+   Q2-TRUST-MOVE seed=100017 day=12 moved=[{"vid":"gen_3z880py","delta":4},{"vid":"gen_g09zq3j","delta":11},{"vid":"gen_oi1vu16","delta":2},{"vid":"gen_07m9y0g","delta":2},{"vid":"sigrun_eiriksdottir","delta":6},{"vid":"adaeze_nwosu","delta":8},{"vid":"tariq_mahmood","delta":5},{"vid":"ella_johnson","delta":2},{"vid":"jorge_silva","delta":2}]
+   Q2-TRUST-MOVE seed=100017 day=13 moved=[{"vid":"gen_3z880py","delta":10},{"vid":"gen_oi1vu16","delta":4},{"vid":"gen_07m9y0g","delta":5},{"vid":"sigrun_eiriksdottir","delta":5},{"vid":"adaeze_nwosu","delta":3},{"vid":"tariq_mahmood","delta":4},{"vid":"ella_johnson","delta":1},{"vid":"jorge_silva","delta":4}]
+   Q2-TRUST-MOVE seed=100017 day=14 moved=[{"vid":"gen_3z880py","delta":6},{"vid":"gen_oi1vu16","delta":5},{"vid":"gen_07m9y0g","delta":4},{"vid":"sigrun_eiriksdottir","delta":5},{"vid":"adaeze_nwosu","delta":3},{"vid":"tariq_mahmood","delta":3},{"vid":"ella_johnson","delta":16},{"vid":"jorge_silva","delta":4},{"vid":"rafael_torres","delta":1}]
+   Q2-TRUST-MOVE seed=100017 day=15 moved=[{"vid":"gen_3z880py","delta":6},{"vid":"gen_oi1vu16","delta":13},{"vid":"gen_07m9y0g","delta":3},{"vid":"sigrun_eiriksdottir","delta":2},{"vid":"adaeze_nwosu","delta":7},{"vid":"tariq_mahmood","delta":2},{"vid":"jorge_silva","delta":2},{"vid":"rafael_torres","delta":5}]
+   Q2-TRUST-MOVE seed=100017 day=16 moved=[{"vid":"gen_3z880py","delta":1},{"vid":"gen_oi1vu16","delta":5},{"vid":"gen_07m9y0g","delta":3},{"vid":"sigrun_eiriksdottir","delta":2},{"vid":"adaeze_nwosu","delta":2},{"vid":"ella_johnson","delta":2},{"vid":"jorge_silva","delta":2},{"vid":"rafael_torres","delta":1}]
+   Q2-TRUST-MOVE seed=100017 day=17 moved=[{"vid":"gen_3z880py","delta":1},{"vid":"gen_oi1vu16","delta":4},{"vid":"gen_07m9y0g","delta":1},{"vid":"adaeze_nwosu","delta":5},{"vid":"tariq_mahmood","delta":1},{"vid":"ella_johnson","delta":1},{"vid":"jorge_silva","delta":2},{"vid":"rafael_torres","delta":1}]
+   Q2-TRUST-MOVE seed=100017 day=18 moved=[{"vid":"gen_3z880py","delta":1},{"vid":"gen_oi1vu16","delta":5},{"vid":"gen_07m9y0g","delta":2},{"vid":"adaeze_nwosu","delta":3},{"vid":"ella_johnson","delta":10},{"vid":"jorge_silva","delta":4},{"vid":"rafael_torres","delta":1}]
+   Q2-TRUST-MOVE seed=100017 day=19 moved=[{"vid":"gen_oi1vu16","delta":3},{"vid":"gen_07m9y0g","delta":2},{"vid":"sigrun_eiriksdottir","delta":1},{"vid":"adaeze_nwosu","delta":1},{"vid":"tariq_mahmood","delta":1},{"vid":"ella_johnson","delta":1},{"vid":"jorge_silva","delta":4}]
+   Q2-TRUST-MOVE seed=100017 day=21 moved=[{"vid":"gen_g09zq3j","delta":1},{"vid":"gen_oi1vu16","delta":1},{"vid":"gen_07m9y0g","delta":13},{"vid":"sigrun_eiriksdottir","delta":4},{"vid":"adaeze_nwosu","delta":3},{"vid":"tariq_mahmood","delta":3},{"vid":"ella_johnson","delta":5},{"vid":"jorge_silva","delta":5},{"vid":"rafael_torres","delta":10}]
+   Q2-TRUST-MOVE seed=100017 day=22 moved=[{"vid":"gen_oi1vu16","delta":3},{"vid":"gen_07m9y0g","delta":4},{"vid":"sigrun_eiriksdottir","delta":3},{"vid":"adaeze_nwosu","delta":-1},{"vid":"tariq_mahmood","delta":2},{"vid":"jorge_silva","delta":4}]
+   Q2-TRUST-MOVE seed=100017 day=23 moved=[{"vid":"gen_oi1vu16","delta":1},{"vid":"gen_07m9y0g","delta":3},{"vid":"sigrun_eiriksdottir","delta":1},{"vid":"adaeze_nwosu","delta":1},{"vid":"ella_johnson","delta":2},{"vid":"jorge_silva","delta":5}]
+   Q2-TRUST-MOVE seed=100017 day=24 moved=[{"vid":"gen_g09zq3j","delta":1},{"vid":"gen_oi1vu16","delta":5},{"vid":"gen_07m9y0g","delta":5},{"vid":"sigrun_eiriksdottir","delta":4},{"vid":"adaeze_nwosu","delta":2},{"vid":"jorge_silva","delta":7}]
+   Q2-TRUST-MOVE seed=100017 day=25 moved=[{"vid":"gen_g09zq3j","delta":1},{"vid":"gen_oi1vu16","delta":3},{"vid":"gen_07m9y0g","delta":2},{"vid":"sigrun_eiriksdottir","delta":1},{"vid":"adaeze_nwosu","delta":1},{"vid":"tariq_mahmood","delta":3},{"vid":"ella_johnson","delta":1},{"vid":"jorge_silva","delta":5},{"vid":"rafael_torres","delta":2}]
+   Q2-TRUST-MOVE seed=100017 day=26 moved=[{"vid":"gen_g09zq3j","delta":1},{"vid":"gen_oi1vu16","delta":1},{"vid":"gen_07m9y0g","delta":1},{"vid":"sigrun_eiriksdottir","delta":2},{"vid":"tariq_mahmood","delta":8},{"vid":"jorge_silva","delta":6}]
+   Q2-TRUST-MOVE seed=100017 day=28 moved=[{"vid":"gen_oi1vu16","delta":3},{"vid":"sigrun_eiriksdottir","delta":3},{"vid":"tariq_mahmood","delta":2},{"vid":"ella_johnson","delta":2},{"vid":"jorge_silva","delta":1},{"vid":"rafael_torres","delta":1}]
+   Q2-TRUST-MOVE seed=100017 day=29 moved=[{"vid":"gen_3z880py","delta":-5},{"vid":"gen_g09zq3j","delta":1},{"vid":"gen_oi1vu16","delta":-3},{"vid":"sigrun_eiriksdottir","delta":1},{"vid":"adaeze_nwosu","delta":1},{"vid":"tariq_mahmood","delta":1},{"vid":"ella_johnson","delta":9},{"vid":"rafael_torres","delta":-3}]
+   Q2-TRUST-MOVE seed=100017 day=31 moved=[{"vid":"tariq_mahmood","delta":3},{"vid":"rafael_torres","delta":2}]
+   Q2-TRUST-MOVE seed=100017 day=32 moved=[{"vid":"tariq_mahmood","delta":2}]
+   Q2-TRUST-MOVE seed=100017 day=34 moved=[{"vid":"gen_g09zq3j","delta":-10},{"vid":"tariq_mahmood","delta":2},{"vid":"rafael_torres","delta":12}]
+   Q2-TRUST-MOVE seed=100017 day=35 moved=[{"vid":"gen_07m9y0g","delta":1},{"vid":"sigrun_eiriksdottir","delta":1}]
+   Q2-TRUST-MOVE seed=100017 day=36 moved=[{"vid":"gen_07m9y0g","delta":1},{"vid":"sigrun_eiriksdottir","delta":1},{"vid":"adaeze_nwosu","delta":1},{"vid":"tariq_mahmood","delta":4},{"vid":"rafael_torres","delta":1}]
+   Q2-TRUST-MOVE seed=100017 day=37 moved=[{"vid":"gen_07m9y0g","delta":1},{"vid":"tariq_mahmood","delta":2}]
+   Q2-TRUST-MOVE seed=100017 day=38 moved=[{"vid":"gen_g09zq3j","delta":3},{"vid":"gen_07m9y0g","delta":1},{"vid":"tariq_mahmood","delta":1},{"vid":"ella_johnson","delta":2},{"vid":"rafael_torres","delta":1}]
+   Q2-TRUST-MOVE seed=100017 day=39 moved=[{"vid":"gen_g09zq3j","delta":-8},{"vid":"gen_07m9y0g","delta":1},{"vid":"tariq_mahmood","delta":4},{"vid":"ella_johnson","delta":1},{"vid":"rafael_torres","delta":2}]
+   Q2-TRUST-MOVE seed=100017 day=40 moved=[{"vid":"ella_johnson","delta":1},{"vid":"rafael_torres","delta":6}]
+   Q2-TRUST-MOVE seed=100017 day=41 moved=[{"vid":"gen_07m9y0g","delta":1},{"vid":"rafael_torres","delta":1}]
+   Q2-TRUST-MOVE seed=100017 day=42 moved=[{"vid":"gen_07m9y0g","delta":1},{"vid":"rafael_torres","delta":3}]
+   Q2-TRUST-MOVE seed=100017 day=43 moved=[{"vid":"gen_g09zq3j","delta":4},{"vid":"gen_07m9y0g","delta":1},{"vid":"ella_johnson","delta":2}]
+   Q2-TRUST-MOVE seed=100017 day=44 moved=[{"vid":"gen_g09zq3j","delta":-9},{"vid":"gen_07m9y0g","delta":1},{"vid":"tariq_mahmood","delta":1},{"vid":"ella_johnson","delta":2}]
+   Q2-TRUST-MOVE seed=100017 day=46 moved=[{"vid":"gen_07m9y0g","delta":-1}]
+   Q2-GOALJOIN seed=100017 track=party_up tops=2 lined=0 indoorLined=0 departedLined=0 capture=34 -> HEALTHY
+   Q2-GOALJOIN seed=100017 track=gear_up tops=0 lined=0 indoorLined=0 departedLined=0 capture=0 -> NO-DATA
+   Q2-GOALJOIN seed=100017 track=bank_veterans tops=0 lined=0 indoorLined=0 departedLined=0 capture=2 -> HEALTHY
+   Q2-GOALJOIN seed=100017 track=build_standing tops=1 lined=0 indoorLined=0 departedLined=0 capture=9 -> HEALTHY
+   Q2-GOALJOIN seed=100017 track=food_security tops=3 lined=2 indoorLined=0 departedLined=0 capture=67 -> HEALTHY
+   Q2-GOALJOIN seed=100017 track=bonds tops=0 lined=0 indoorLined=0 departedLined=0 capture=0 -> NO-DATA
+   Q2-GOALJOIN seed=100017 track=knowledge tops=0 lined=0 indoorLined=0 departedLined=0 capture=0 -> NO-DATA
+   Q2-GOALJOIN seed=100017 track=safety tops=1 lined=1 indoorLined=1 departedLined=0 capture=27 -> HEALTHY
+   DEBRIEF: trigger=n/a flags={"scattered":false,"extinct":false,"scholarDead":false,"livingN":8,"pantryKcal":53607,"endReason":"survived"} lines=["📖 The Codex grew by 53 (27 plants, 20 skills, 6 recipes) — among them Bark armor, Hunting spear, Staghorn Sumac (+50 more).","🧑‍🏫 Jorge taught Snare; Jorge taught Pit Trap.","⚔️ First blood, day 4: Big Loud. 29 beasts slain. First wave-2 kill: Big Big, day 12.","💀 4 fell — the wild (×2); ambush."]
+
+PANEL VERDICTS: {"EXPLAINED":2,"NO-REGIONAL-DAYS":1}
+   B-SIT journey-deepening-r130-transcript-100009-day16-somchai_prasert.txt: branch=none youTurns=5 wantFinal={"id":"none","stage":0,"resolution":"none"} repeats=false followup=false
+   B-SIT journey-deepening-r130-transcript-100009-day19-somchai_prasert.txt: branch=none youTurns=5 wantFinal={"id":"none","stage":0,"resolution":"none"} repeats=false followup=false
+   B-SIT journey-deepening-r130-transcript-100009-day26-tariq_mahmood.txt: branch=accept youTurns=8 wantFinal={"id":"curious","stage":3,"resolution":"engaged"} repeats=false followup=false
+   B-SIT journey-deepening-r130-transcript-100009-day44-gen_7w6p4pp.txt: branch=none youTurns=7 wantFinal={"id":"none","stage":0,"resolution":"none"} repeats=false followup=false
+   B-SIT journey-deepening-r130-transcript-100009-day45-gen_2ev8f8n.txt: branch=none youTurns=4 wantFinal={"id":"curious","stage":3,"resolution":"unestablished"} repeats=false followup=false
+   B-SIT journey-deepening-r130-transcript-100009-day45-gen_7w6p4pp.txt: branch=none youTurns=5 wantFinal={"id":"none","stage":0,"resolution":"none"} repeats=false followup=false
+   B-SIT journey-deepening-r130-transcript-100009-day45-gen_le2ucku.txt: branch=none youTurns=3 wantFinal={"id":"ask_favor","stage":3,"resolution":"promised"} repeats=false followup=false
+   B-SIT journey-deepening-r130-transcript-100009-day52-gen_7w6p4pp.txt: branch=none youTurns=6 wantFinal={"id":"none","stage":0,"resolution":"none"} repeats=false followup=false
+   B-SIT journey-deepening-r130-transcript-100009-day60-gen_2ev8f8n.txt: branch=none youTurns=7 wantFinal={"id":"curious","stage":3,"resolution":"unestablished"} repeats=false followup=false
+   B-SIT journey-deepening-r130-transcript-100009-day60-gen_le2ucku.txt: branch=decline youTurns=5 wantFinal={"id":"ask_favor","stage":3,"resolution":"promised"} repeats=false followup=false
+   B-SIT journey-deepening-r130-transcript-100009-day62-sari_wulandari.txt: branch=accept youTurns=4 wantFinal={"id":"ask_favor","stage":3,"resolution":"stated"} repeats=false followup=false
+   B-SIT journey-deepening-r130-transcript-100010-day12-luis_fernandez.txt: branch=none youTurns=6 wantFinal={"id":"ask_favor","stage":3,"resolution":"promised"} repeats=false followup=false
+   B-SIT journey-deepening-r130-transcript-100010-day14-gen_qa08t4u.txt: branch=none youTurns=5 wantFinal={"id":"ask_favor","stage":3,"resolution":"promised"} repeats=false followup=false
+   B-SIT journey-deepening-r130-transcript-100010-day24-gen_xj87k62.txt: branch=none youTurns=8 wantFinal={"id":"none","stage":0,"resolution":"none"} repeats=false followup=false
+   B-SIT journey-deepening-r130-transcript-100010-day27-luis_fernandez.txt: branch=none youTurns=4 wantFinal={"id":"repay","stage":3,"resolution":"deflected"} repeats=false followup=false
+   B-SIT journey-deepening-r130-transcript-100010-day31-gen_qa08t4u.txt: branch=none youTurns=8 wantFinal={"id":"seek_comfort","stage":3,"resolution":"comforted"} repeats=false followup=false
+   B-SIT journey-deepening-r130-transcript-100010-day34-gen_qa08t4u.txt: branch=decline youTurns=8 wantFinal={"id":"curious","stage":3,"resolution":"engaged"} repeats=false followup=false
+   B-SIT journey-deepening-r130-transcript-100010-day35-gen_xj87k62.txt: branch=none youTurns=8 wantFinal={"id":"none","stage":0,"resolution":"none"} repeats=false followup=false
+   B-SIT journey-deepening-r130-transcript-100010-day45-fatima_hassan.txt: branch=none youTurns=8 wantFinal={"id":"ask_favor","stage":3,"resolution":"promised"} repeats=false followup=false
+   B-SIT journey-deepening-r130-transcript-100010-day45-gen_7drggm6.txt: branch=none youTurns=4 wantFinal={"id":"curious","stage":3,"resolution":"engaged"} repeats=false followup=false
+   B-SIT journey-deepening-r130-transcript-100010-day45-gen_qa08t4u.txt: branch=accept youTurns=5 wantFinal={"id":"ask_favor","stage":3,"resolution":"promised"} repeats=false followup=true
+   B-SIT journey-deepening-r130-transcript-100010-day60-gen_7drggm6.txt: branch=none youTurns=4 wantFinal={"id":"ask_favor","stage":3,"resolution":"stated"} repeats=false followup=false
+   B-SIT journey-deepening-r130-transcript-100010-day60-gen_qa08t4u.txt: branch=none youTurns=3 wantFinal={"id":"ask_favor","stage":3,"resolution":"stated"} repeats=false followup=true
+   B-SIT journey-deepening-r130-transcript-100010-day60-gen_xj87k62.txt: branch=decline youTurns=7 wantFinal={"id":"curious","stage":3,"resolution":"unestablished"} repeats=false followup=false
+   B-SIT journey-deepening-r130-transcript-100010-day80-sanne_bakker.txt: branch=accept youTurns=5 wantFinal={"id":"ask_favor","stage":3,"resolution":"promised"} repeats=false followup=false
+   B-SIT journey-deepening-r130-transcript-100010-day98-tashi_sherpa.txt: branch=none youTurns=8 wantFinal={"id":"none","stage":0,"resolution":"none"} repeats=false followup=false
+   B-SIT journey-deepening-r130-transcript-100017-day13-tariq_mahmood.txt: branch=none youTurns=6 wantFinal={"id":"none","stage":0,"resolution":"none"} repeats=false followup=false
+   B-SIT journey-deepening-r130-transcript-100017-day27-gen_oi1vu16.txt: branch=accept youTurns=7 wantFinal={"id":"ask_favor","stage":3,"resolution":"promised"} repeats=false followup=false
+   B-SIT journey-deepening-r130-transcript-100017-day45-gen_07m9y0g.txt: branch=decline youTurns=8 wantFinal={"id":"ask_favor","stage":3,"resolution":"stated"} repeats=false followup=false
+B-SIT PANEL: betrayalSittings=9 accept=5 decline=4 unanswered=0 transcripts=29
+B-FOLLOW PANEL: followupSittings=2 followupWithNewBetrayal=1
+   P-KEEP seed=100009 day=45 vid=gen_le2ucku want=ask_favor cls=SILENT oldNamed=false structOld=false reAsk=false laterDays=[60]
+   P-KEEP seed=100009 day=60 vid=gen_le2ucku want=ask_favor cls=DEAD oldNamed=false structOld=false reAsk=false laterDays=[]
+   P-KEEP seed=100010 day=12 vid=luis_fernandez want=ask_favor cls=NAMED oldNamed=true structOld=true reAsk=false laterDays=[27] evidence={"day":27,"line":"THEM: \"...Fine.\" They shake their head. \"It's done now. I keep turning it over anyway.\""}
+   P-KEEP seed=100010 day=14 vid=gen_qa08t4u want=ask_favor cls=NAMED oldNamed=true structOld=false reAsk=false laterDays=[31,34,45,60] evidence={"day":60,"line":"THEM: \"Wait — I'm away from Haven, out on the road. I can't promise a dawn meet while I'm out — find me when I'm back, and we'll set it then.\""}
+   P-KEEP seed=100010 day=45 vid=fatima_hassan want=ask_favor cls=DEAD oldNamed=false structOld=false reAsk=false laterDays=[]
+   P-KEEP seed=100010 day=45 vid=gen_qa08t4u want=ask_favor cls=NAMED oldNamed=true structOld=false reAsk=false laterDays=[60] evidence={"day":60,"line":"THEM: \"Wait — I'm away from Haven, out on the road. I can't promise a dawn meet while I'm out — find me when I'm back, and we'll set it then.\""}
+   P-KEEP seed=100010 day=80 vid=sanne_bakker want=ask_favor cls=NO-LATER-SITTING oldNamed=false structOld=false reAsk=false laterDays=[]
+   P-KEEP seed=100017 day=27 vid=gen_oi1vu16 want=ask_favor cls=DEAD oldNamed=false structOld=false reAsk=false laterDays=[]
+P-KEEP PANEL: threads=8 counts={"SILENT":1,"DEAD":3,"NAMED":3,"NO-LATER-SITTING":1}
+P-KEEP VERDICT (revised metric): NAMED=3 / revisited-alive=4 (old-regex NAMED=3) -> PRESENT
+P-KEEP RE-ASK (r109 adopted): RE-ASK threads=0 (Chloe class confirmed live iff >=1)
+P-KEEP OLD-RULE CONTINUITY: want-only structural hits now scoring SILENT under the revised rule=0 (Maeve-class over-counts)
+   RE-ASK-ORPHAN seed=100010 day=12 vid=luis_fernandez short="the pantry run" fromSeed=true line="THEM: \"About the pantry run — I hate to ask twice, but it's still open. Will you?\""
+   RE-ASK-ORPHAN seed=100010 day=60 vid=gen_qa08t4u short="the creek water run" fromSeed=true line="THEM: \"About the creek water run — I hate to ask twice, but it's still open. Will you?\""
+   RE-ASK-ORPHAN seed=100017 day=27 vid=gen_oi1vu16 short="the food I needed" fromSeed=true line="THEM: \"About the food I needed — still need hands. Are you in?\""
+RE-ASK-ORPHAN PANEL: orphans=3 fromSeed-origin=3 true-no-thread=0
+FIZZLE PANEL: drySittings=0 askFavor=0 other=0 totalDryLines=0 -> FIZZLE-FIX HOLDS in the wild
+   V-INIT journey-deepening-r130-transcript-100009-day16-somchai_prasert.txt: want=want: none (stage 0) bondLines=0 playerInviteOffered=false betrayalOffered=false
+   V-INIT journey-deepening-r130-transcript-100009-day19-somchai_prasert.txt: want=want: none (stage 0) bondLines=0 playerInviteOffered=false betrayalOffered=false
+   V-INIT journey-deepening-r130-transcript-100009-day26-tariq_mahmood.txt: want=want: curious (stage 0) bondLines=0 playerInviteOffered=true betrayalOffered=true
+   V-INIT journey-deepening-r130-transcript-100009-day44-gen_7w6p4pp.txt: want=want: none (stage 0) bondLines=0 playerInviteOffered=false betrayalOffered=false
+   V-INIT journey-deepening-r130-transcript-100009-day45-gen_2ev8f8n.txt: want=want: curious (stage 0) bondLines=0 playerInviteOffered=false betrayalOffered=false
+   V-INIT journey-deepening-r130-transcript-100009-day45-gen_7w6p4pp.txt: want=want: none (stage 0) bondLines=0 playerInviteOffered=false betrayalOffered=false
+   V-INIT journey-deepening-r130-transcript-100009-day45-gen_le2ucku.txt: want=want: ask_favor (stage 1) bondLines=0 playerInviteOffered=false betrayalOffered=false
+   V-INIT journey-deepening-r130-transcript-100009-day52-gen_7w6p4pp.txt: want=want: none (stage 0) bondLines=0 playerInviteOffered=false betrayalOffered=false
+   V-INIT journey-deepening-r130-transcript-100009-day60-gen_2ev8f8n.txt: want=want: curious (stage 0, fromSeed) bondLines=0 playerInviteOffered=false betrayalOffered=false
+   V-INIT journey-deepening-r130-transcript-100009-day60-gen_le2ucku.txt: want=want: ask_favor (stage 1) bondLines=0 playerInviteOffered=false betrayalOffered=true
+   V-INIT journey-deepening-r130-transcript-100009-day62-sari_wulandari.txt: want=want: ask_favor (stage 0, fromSeed) bondLines=0 playerInviteOffered=true betrayalOffered=true
+   V-INIT journey-deepening-r130-transcript-100010-day12-luis_fernandez.txt: want=want: ask_favor (stage 0, fromSeed) bondLines=0 playerInviteOffered=true betrayalOffered=false
+   V-INIT journey-deepening-r130-transcript-100010-day14-gen_qa08t4u.txt: want=want: ask_favor (stage 0) bondLines=0 playerInviteOffered=true betrayalOffered=false
+   V-INIT journey-deepening-r130-transcript-100010-day24-gen_xj87k62.txt: want=want: none (stage 0) bondLines=0 playerInviteOffered=false betrayalOffered=false
+   V-INIT journey-deepening-r130-transcript-100010-day27-luis_fernandez.txt: want=want: repay (stage 0) bondLines=0 playerInviteOffered=false betrayalOffered=false
+   V-INIT journey-deepening-r130-transcript-100010-day31-gen_qa08t4u.txt: want=want: seek_comfort (stage 0) bondLines=0 playerInviteOffered=true betrayalOffered=false
+   V-INIT journey-deepening-r130-transcript-100010-day34-gen_qa08t4u.txt: want=want: curious (stage 0) bondLines=0 playerInviteOffered=true betrayalOffered=true
+   V-INIT journey-deepening-r130-transcript-100010-day35-gen_xj87k62.txt: want=want: none (stage 0) bondLines=0 playerInviteOffered=false betrayalOffered=false
+   V-INIT journey-deepening-r130-transcript-100010-day45-fatima_hassan.txt: want=want: ask_favor (stage 0) bondLines=0 playerInviteOffered=true betrayalOffered=false
+   V-INIT journey-deepening-r130-transcript-100010-day45-gen_7drggm6.txt: want=want: curious (stage 0) bondLines=0 playerInviteOffered=true betrayalOffered=false
+   V-INIT journey-deepening-r130-transcript-100010-day45-gen_qa08t4u.txt: want=want: ask_favor (stage 1) bondLines=0 playerInviteOffered=false betrayalOffered=true
+   V-INIT journey-deepening-r130-transcript-100010-day60-gen_7drggm6.txt: want=want: ask_favor (stage 0) bondLines=0 playerInviteOffered=true betrayalOffered=false
+   V-INIT journey-deepening-r130-transcript-100010-day60-gen_qa08t4u.txt: want=want: ask_favor (stage 2, fromSeed) bondLines=0 playerInviteOffered=false betrayalOffered=false
+   V-INIT journey-deepening-r130-transcript-100010-day60-gen_xj87k62.txt: want=want: curious (stage 0, fromSeed) bondLines=0 playerInviteOffered=true betrayalOffered=true
+   V-INIT journey-deepening-r130-transcript-100010-day80-sanne_bakker.txt: want=want: ask_favor (stage 1) bondLines=0 playerInviteOffered=false betrayalOffered=true
+   V-INIT journey-deepening-r130-transcript-100010-day98-tashi_sherpa.txt: want=want: none (stage 0) bondLines=0 playerInviteOffered=false betrayalOffered=false
+   V-INIT journey-deepening-r130-transcript-100017-day13-tariq_mahmood.txt: want=want: none (stage 0) bondLines=0 playerInviteOffered=false betrayalOffered=false
+   V-INIT journey-deepening-r130-transcript-100017-day27-gen_oi1vu16.txt: want=want: ask_favor (stage 0, fromSeed) bondLines=0 playerInviteOffered=true betrayalOffered=true
+   V-INIT journey-deepening-r130-transcript-100017-day45-gen_07m9y0g.txt: want=want: ask_favor (stage 2, fromSeed) bondLines=0 playerInviteOffered=true betrayalOffered=true
+V-INIT PANEL: bondSittings=0 transcripts=29 playerInviteOfferedSittings=12 betrayalOfferedSittings=9
+B-LEAD PANEL: sittingsWithBetrayalLeadIn=4 detail=[{"file":"journey-deepening-r130-transcript-100010-day34-gen_qa08t4u.txt","lines":["THEM: \"Walk with me? I want another pair of eyes on something.\""]},{"file":"journey-deepening-r130-transcript-100010-day45-gen_qa08t4u.txt","lines":["THEM: \"Come get air with me. I need to think out loud.\""]},{"file":"journey-deepening-r130-transcript-100010-day80-sanne_bakker.txt","lines":["THEM: \"Come get air with me. I need to think out loud.\""]},{"file":"journey-deepening-r130-transcript-100017-day27-gen_oi1vu16.txt","lines":["THEM: \"Come see what I found. You won't believe it.\""]}]
+BOND-TELEMETRY PANEL: tele=48 proposals=19 decisions=9 accepts=5 acceptRate=0.56 linkRaises=7 scholarTargeted=12 initiatedBonds=5 instrumentErrors=0 -> PRESENT (merged code reaches the wild)
+Q1-REQUESTS PANEL: staged=20 decided=10 expired=9 expiredTalkableUntalked=1 expiredUntalkable=0 -> REACHED (talkability caveat: npcComm is not in the seed JSON — talkable = on-roster-at-staging + alive at staging)
+   BOND-CHOICE seed=100009 day=26 vid=tariq_mahmood offeredBond=false offeredLink=true picked=["link:accept"] answered=true lastPick="YOU: (leave)"
+   BOND-CHOICE seed=100009 day=52 vid=gen_7w6p4pp offeredBond=true offeredLink=false picked=["bond:decline"] answered=true lastPick="YOU: (leave)"
+   BOND-CHOICE seed=100009 day=62 vid=sari_wulandari offeredBond=false offeredLink=true picked=["link:accept"] answered=true lastPick="YOU: (leave)"
+   BOND-CHOICE seed=100010 day=12 vid=luis_fernandez offeredBond=false offeredLink=true picked=["link:decline"] answered=true lastPick="YOU: (leave)"
+   BOND-CHOICE seed=100010 day=14 vid=gen_qa08t4u offeredBond=false offeredLink=true picked=["link:accept"] answered=true lastPick="YOU: (leave)"
+   BOND-CHOICE seed=100010 day=27 vid=luis_fernandez offeredBond=true offeredLink=false picked=["bond:decline"] answered=true lastPick="YOU: (leave)"
+   BOND-CHOICE seed=100010 day=31 vid=gen_qa08t4u offeredBond=false offeredLink=true picked=["link:accept"] answered=true lastPick="YOU: (leave)"
+   BOND-CHOICE seed=100010 day=34 vid=gen_qa08t4u offeredBond=true offeredLink=false picked=["bond:decline"] answered=true lastPick="YOU: (leave)"
+   BOND-CHOICE seed=100010 day=35 vid=gen_xj87k62 offeredBond=false offeredLink=true picked=["link:accept"] answered=true lastPick="YOU: (leave)"
+   BOND-CHOICE seed=100017 day=27 vid=gen_oi1vu16 offeredBond=true offeredLink=false picked=["bond:accept"] answered=true lastPick="YOU: (leave)"
+BOND-CHOICE PANEL: sittingsOfferingBondOrLink=10 answered=10 unanswered=0 -> ANSWERED (the picker takes the choice)
+Q1-LANGGATE PANEL: offers=12 offersNone=0 decisions=10 decisionsNone=0 decisionsNonNone=10 decisionsUnknown=0 -> NOT-REPRODUCED
+Q1-LANGARC PANEL: sittings=9 grants=2 flips=2 postFlipDecisions=2 unmatchedFlips=0 -> ARC-FIRES
+MENU-FLIP PANEL: nonverbalSittings=9 flips=0 listenTurns=50 -> NO FLIPS (fix holds)
+Q1-LADDER PANEL: opens=3 late=0 silent=0 broken=0 mintedTracks=5/5 mintedPerTrack={"fight":2,"forage":3,"craft":3,"talk":3,"explore":3} holds=3/3 firstDays=[14,14,14] -> LADDER-OPENS + LADDER-MINTS + LADDER-HOLDS
+Q1-SECRET PANEL: openers=1 addressingPicked=1 teachPicks=0 wantEstablished=0 teachCrowdedSittings=0 wantOpenSittings=1 -> SECRET-HOLDS + WANT-OPEN
+Q1-WANT PANEL: answered=1 established=0 newlyEstablished=0 -> THIN-PROBE
+Q1-WANT-OUTCOME PANEL: established=0 landed=0 surfacedOnly=0 other=0 -> THIN-PROBE
+Q1-VARIETY PANEL: answered=1 distinctAnswers=1 maxRepeat=1 missingAnswer=0 teachPicks=0 maxSameFrame=0 -> THIN-PROBE
+Q1-TEACHFRAME PANEL: frames=0 sittingsWithFrames=0 distinctFrames=0 maxSameFrame=0 frameCounts={} -> NO-FRAMES
+Q2-CONFRONT PANEL: secretMenus=1 confrontRides=0
+Q2-POSTSECRET PANEL: answered=1 medianPostAnswerTurns=2 dryFirst=0 referencing=0 dryRate=0.00 refRate=0.00 -> POST-SECRET-MIXED
+Q2-TRUST PANEL: deaths=21 strangerGains=0 strangerTotal=0 lateGains=0 knownGains=27 nonDeathMoves=192 deadBearerDays=1 latencyMax=1 latencies=[1,0,0,0,0,0,0,0,0,0,0,0,0,1] -> CARRIED (computed=TRUST-EARNED-ONLY; r119 verdict stands, no new trust verdict this run)
+Q2-GOALJOIN PANEL: track=party_up tops=16 lined=4 indoorLined=0 departedLined=1 capture=124 -> HEALTHY
+Q2-GOALJOIN PANEL: track=gear_up tops=0 lined=0 indoorLined=0 departedLined=0 capture=0 -> NO-DATA
+Q2-GOALJOIN PANEL: track=bank_veterans tops=0 lined=0 indoorLined=0 departedLined=0 capture=4 -> HEALTHY
+Q2-GOALJOIN PANEL: track=build_standing tops=7 lined=1 indoorLined=0 departedLined=0 capture=32 -> HEALTHY
+Q2-GOALJOIN PANEL: track=food_security tops=22 lined=11 indoorLined=1 departedLined=0 capture=359 -> HEALTHY
+Q2-GOALJOIN PANEL: track=bonds tops=0 lined=0 indoorLined=0 departedLined=0 capture=0 -> NO-DATA
+Q2-GOALJOIN PANEL: track=knowledge tops=1 lined=0 indoorLined=0 departedLined=0 capture=0 -> GOALS-FAULT
+Q2-GOALJOIN PANEL: track=safety tops=1 lined=1 indoorLined=1 departedLined=0 capture=103 -> HEALTHY
+Q2-REPLAY PANEL: replays=0 decisionSittings~10 -> NOT-REPRODUCED
+   AWAY-LINE seed=100010 day=60 vid=gen_qa08t4u oldLine=0 newLine=1 actionAwayReason=0 adjacencyReason=0 lines=["THEM: \"Wait — I'm away from Haven, out on the road. I can't promise a dawn meet while I'm out — find me when I'm back, and we'll set it then.\""]
+   AWAY-LINE seed=100010 day=80 vid=sanne_bakker oldLine=0 newLine=0 actionAwayReason=0 adjacencyReason=1 lines=[]
+AWAY-LINE PANEL: oldLine=0 newLine=1 actionAwayReason=0 adjacencyReason=1 -> OLD LINE GONE (reword live)
+Q1-FAVORBLOCK PANEL: total=7 distinct=4 maxRepeat=3 patternCounts={"favorblock-theirside":3,"favorblock-rightnext":1,"favorblock-beside":2,"favorblock-nextto":1} -> VARIED
+   Q1-FAVORBLOCK-SIT seed=100009 day=45 vid=gen_le2ucku total=1 patternCounts={"favorblock-theirside":1} maxRepeat=1
+   Q1-FAVORBLOCK-SIT seed=100009 day=60 vid=gen_le2ucku total=1 patternCounts={"favorblock-rightnext":1} maxRepeat=1
+   Q1-FAVORBLOCK-SIT seed=100010 day=14 vid=gen_qa08t4u total=1 patternCounts={"favorblock-theirside":1} maxRepeat=1
+   Q1-FAVORBLOCK-SIT seed=100010 day=45 vid=fatima_hassan total=1 patternCounts={"favorblock-theirside":1} maxRepeat=1
+   Q1-FAVORBLOCK-SIT seed=100010 day=45 vid=gen_qa08t4u total=1 patternCounts={"favorblock-beside":1} maxRepeat=1
+   Q1-FAVORBLOCK-SIT seed=100010 day=80 vid=sanne_bakker total=1 patternCounts={"favorblock-nextto":1} maxRepeat=1
+   Q1-FAVORBLOCK-SIT seed=100017 day=27 vid=gen_oi1vu16 total=1 patternCounts={"favorblock-beside":1} maxRepeat=1
+Q1-PARTNERBLOCK PANEL: total=3 distinct=3 maxRepeat=1 patternCounts={"partnerblock-beside":1,"partnerblock-rightnext":1,"partnerblock-nextto":1} -> VARIED
+   Q1-PARTNERBLOCK-SIT seed=100010 day=12 vid=luis_fernandez total=1 patternCounts={"partnerblock-beside":1} maxRepeat=1
+   Q1-PARTNERBLOCK-SIT seed=100010 day=60 vid=gen_7drggm6 total=1 patternCounts={"partnerblock-rightnext":1} maxRepeat=1
+   Q1-PARTNERBLOCK-SIT seed=100010 day=60 vid=gen_qa08t4u total=1 patternCounts={"partnerblock-nextto":1} maxRepeat=1
+Q2-PLACEFRAME PANEL: frames=0 sittingsWithFrames=0 distinctFrames=0 maxSameFrame=0 frameCounts={} -> NO-FRAMES
+Q3-AWAY PANEL: total=2 distinct=2 maxRepeat=1 patternCounts={"awayline-rightnow":1,"awayline-wait":1} -> THIN-PROBE
+   Q3-AWAY-SIT seed=100010 day=60 vid=gen_7drggm6 total=1 patternCounts={"awayline-rightnow":1} maxRepeat=1
+   Q3-AWAY-SIT seed=100010 day=60 vid=gen_qa08t4u total=1 patternCounts={"awayline-wait":1} maxRepeat=1
+Q3-CISTERN PANEL: bad1Liters=0 good1Liter=0 -> CLEAN
+   DEBRIEF seed=100009 day=78 trigger=scholar-death-no-successor attributed=true
+DEBRIEF PANEL: villageLost=1 attributed=1 unclassified=0
+   D-THING seed=100009 day=52 vid=gen_7w6p4pp testable=false mentioned=false mentionedOld=false laterDays=[]
+   D-THING seed=100010 day=27 vid=luis_fernandez testable=false mentioned=false mentionedOld=false laterDays=[]
+   D-THING seed=100010 day=60 vid=gen_xj87k62 testable=false mentioned=false mentionedOld=false laterDays=[]
+   D-THING seed=100017 day=45 vid=gen_07m9y0g testable=false mentioned=false mentionedOld=false laterDays=[]
+D-THING PANEL: pocketed=4 testable=0 mentioned=0 mentionedOld=0 (of testable: 0 named, 0 old-rule)
+RAJ-PHOTO PANEL: plants=0 testable=0 returned=0 (of testable: 0)
+   SEED 100009 sittingsPerDay={"16":1,"19":1,"26":1,"44":1,"45":3,"52":1,"60":2,"62":1} inviters=[{"day":60,"vid":"gen_le2ucku","mode":"decline"}] blockedRevisits=[]
+   BLOCKED-AGREEMENT seed=100009 badBlocked=0 badRevisit=0
+   SEED 100010 sittingsPerDay={"12":1,"14":1,"24":1,"27":1,"31":1,"34":1,"35":1,"45":3,"60":3,"80":1,"98":1} inviters=[{"day":45,"vid":"gen_qa08t4u","mode":"accept"},{"day":60,"vid":"gen_xj87k62","mode":"decline"},{"day":80,"vid":"sanne_bakker","mode":"accept"}] blockedRevisits=[{"day":80,"vid":"gen_xj87k62","status":"blocked"}]
+   BLOCKED-AGREEMENT seed=100010 badBlocked=0 badRevisit=0
+   SEED 100017 sittingsPerDay={"13":1,"27":1,"45":1} inviters=[{"day":45,"vid":"gen_07m9y0g","mode":"decline"}] blockedRevisits=[]
+   BLOCKED-AGREEMENT seed=100017 badBlocked=0 badRevisit=0

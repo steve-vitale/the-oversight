@@ -1278,8 +1278,8 @@
                 if (short > 0) {
                   link.arrears += short;
                   link.trust = Math.max(0, link.trust - 6);
-                  self._linkNote(link, 'arrears', 'Tribute short ' + paidK.toLocaleString() + '/' + link.tributeKcalPerWeek.toLocaleString() + ' kcal. Arrears ' + link.arrears.toLocaleString() + ' kcal.');
-                  if (R() < 0.4) self.say(`⚠️ ${self._ovName(link.primary)} notices the missing tribute. Arrears: ${link.arrears.toLocaleString()} kcal. The air changes.`);
+                  self._linkNote(link, 'arrears', 'Tribute short ' + paidK.toLocaleString() + '/' + link.tributeKcalPerWeek.toLocaleString() + ' kcal. Arrears ' + link.arrears.toLocaleString() + ' kcal. (trust -6)');
+                  if (R() < 0.4) self.say(`⚠️ ${self._ovName(link.primary)} notices the missing tribute. Arrears: ${link.arrears.toLocaleString()} kcal. The air changes. (Trust -6.)`);
                 } else {
                   self._trustGain(link, 1);
                 }
@@ -1305,11 +1305,11 @@
                     var _half = Math.round(link.tributeKcalPerWeek / 2);
                     link.arrears += _half;
                     link.trust = Math.max(0, link.trust - 4);
-                    self._linkNote(link, 'sabotage', 'Tribute arrived light — grain "lost on the road." Arrears +' + _half.toLocaleString() + ' kcal.');
+                    self._linkNote(link, 'sabotage', 'Tribute arrived light — grain "lost on the road." Arrears +' + _half.toLocaleString() + ' kcal. (trust -4)');
                     // MEMDEPTH (2026-10-13): them→haven direction — a recallable
                     // event of what THEY did to Haven, not just arrears math.
                     try { if (self.ovEvent) self.ovEvent(link.subordinate, 'their tribute arrived light — grain "lost on the road"', 'sabotage', 'theirs'); } catch (e3) {}
-                    if (R() < 0.5) self.say(`🌾 ${self._ovName(link.subordinate)}'s tribute arrives light — half the grain "lost on the road." Nobody believes it. Sabotage wears a thin mask. (Arrears +${_half.toLocaleString()} kcal.)`);
+                    if (R() < 0.5) self.say(`🌾 ${self._ovName(link.subordinate)}'s tribute arrives light — half the grain "lost on the road." Nobody believes it. Sabotage wears a thin mask. (Arrears +${_half.toLocaleString()} kcal.) (Trust -4.)`);
                     return;
                   }
                 }
@@ -1615,7 +1615,7 @@
         this.say(`The obligation is honored. Trust with ${this._ovName(link.primary)}: ${link.trust}.`);
       } else {
         link.trust = Math.max(0, link.trust - 15);
-        this._linkNote(link, 'demand', 'REFUSED the call (' + d.kind + ').');
+        this._linkNote(link, 'demand', 'REFUSED the call (' + d.kind + ', trust -15).');
         this.say(`You refuse ${this._ovName(link.primary)}. The air changes — trust: ${link.trust}. Refusals are remembered longer than payments.`);
       }
       return true;
@@ -1938,11 +1938,11 @@
         link.trust = Math.max(0, link.trust - 8);
         if (!link.pendingRenegotiation) {
           link.pendingRenegotiation = { day: day0, sub: link.subordinate === HOME };
-          this._linkNote(link, 'succession', 'Young link: grief delays the verdict — a renegotiation is staged.');
+          this._linkNote(link, 'succession', 'Young link: grief delays the verdict — a renegotiation is staged. (trust -8)');
           if (link.subordinate === HOME) {
-            this.say(`With Haven grieving, ${this._ovName(other)} installs their own speaker at the table — but the bond is young, and they're still deciding what Haven is. The new speaker wants to talk before the tribute changes. Grief delays the verdict: send grain (1,500 kcal), send a speaker (2 days), or let the silence answer.`);
+            this.say(`With Haven grieving, ${this._ovName(other)} installs their own speaker at the table — but the bond is young, and they're still deciding what Haven is. The new speaker wants to talk before the tribute changes. Grief delays the verdict: send grain (1,500 kcal), send a speaker (2 days), or let the silence answer. (Trust -8.)`);
           } else {
-            this.say(`${this._ovName(other)} watches to see if Haven holds without its dead. The bond is young — they're still deciding what Haven is, and grief delays the verdict. They'll test the link — count on it, unless Haven answers first: send grain (1,500 kcal), send a speaker (2 days), or let the silence answer.`);
+            this.say(`${this._ovName(other)} watches to see if Haven holds without its dead. The bond is young — they're still deciding what Haven is, and grief delays the verdict. They'll test the link — count on it, unless Haven answers first: send grain (1,500 kcal), send a speaker (2 days), or let the silence answer. (Trust -8.)`);
           }
         }
         try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'succession-grace:' + other); } catch (e) {}
@@ -1953,11 +1953,11 @@
       if (link.subordinate === HOME) {
         // their leverage grows in our chaos: they install their own
         if (this._griefLeverage(link)) {
-          this._linkNote(link, 'succession', 'They installed their own speaker. Tribute up to ' + link.tributeKcalPerWeek.toLocaleString() + '.');
-          this.say(`With Haven grieving, ${this._ovName(other)} installs their own speaker at the table. Tribute rises to ${link.tributeKcalPerWeek.toLocaleString()} kcal/week. Grief is leverage, and they know it. The link holds — it was never with one person.`);
+          this._linkNote(link, 'succession', 'They installed their own speaker. Tribute up to ' + link.tributeKcalPerWeek.toLocaleString() + '. (trust -8)');
+          this.say(`With Haven grieving, ${this._ovName(other)} installs their own speaker at the table. Tribute rises to ${link.tributeKcalPerWeek.toLocaleString()} kcal/week. Grief is leverage, and they know it. The link holds — it was never with one person. (Trust -8.)`);
         } else {
-          this._linkNote(link, 'succession', 'They installed their own speaker — but the grief card is spent. Tribute unchanged at ' + link.tributeKcalPerWeek.toLocaleString() + '.');
-          this.say(`With Haven grieving again, ${this._ovName(other)} installs their own speaker at the table — and reaches for the grief card once more. The table has heard it before: the grief card is spent. Tribute stays at ${link.tributeKcalPerWeek.toLocaleString()} kcal/week. The link holds — it was never with one person.`);
+          this._linkNote(link, 'succession', 'They installed their own speaker — but the grief card is spent. Tribute unchanged at ' + link.tributeKcalPerWeek.toLocaleString() + '. (trust -8)');
+          this.say(`With Haven grieving again, ${this._ovName(other)} installs their own speaker at the table — and reaches for the grief card once more. The table has heard it before: the grief card is spent. Tribute stays at ${link.tributeKcalPerWeek.toLocaleString()} kcal/week. The link holds — it was never with one person. (Trust -8.)`);
         }
       } else {
         // our subordinate tests whether we hold — they smell the weakness
@@ -1965,8 +1965,8 @@
         // trust stack is gone with the old -15: one death doesn't wipe
         // weeks anymore; the test is leverage, not a wipe.
         link.tributeKcalPerWeek = Math.max(500, Math.round(link.tributeKcalPerWeek * 0.75));
-        this._linkNote(link, 'succession', this._ovName(other) + ' pressed tribute down in Haven\'s chaos.');
-        this.say(`${this._ovName(other)} watches to see if Haven holds without its dead — and presses the tribute down to ${link.tributeKcalPerWeek.toLocaleString()} kcal/week while the chair is empty. They'll test the link. Count on it.`);
+        this._linkNote(link, 'succession', this._ovName(other) + ' pressed tribute down in Haven\'s chaos. (trust -8)');
+        this.say(`${this._ovName(other)} watches to see if Haven holds without its dead — and presses the tribute down to ${link.tributeKcalPerWeek.toLocaleString()} kcal/week while the chair is empty. They'll test the link. Count on it. (Trust -8.)`);
       }
       try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'succession:' + other); } catch (e) {}
       if (link.trust < 20 && this._linkNeglected(link)) {
@@ -1989,8 +1989,8 @@
           !this._linkSeasoned(link, !!link.conquered, true) &&
           this.state.nationalLive && !this._havenPolity()) {
         link.pendingRenegotiation = { day: day0, sub: false, succgrace: true };
-        this._linkNote(link, 'succession', 'Sub-bar link at the funeral — grief delays the verdict: a renegotiation is staged.');
-        this.say(`${this._ovName(other)}'s new speaker sends word: the bond is fraying — trust ${link.trust}, below the 40 the realm stands on. The realm will come apart unless the new bearer answers: send grain (1,500 kcal), send a speaker (2 days), or let the silence answer. Grief delays the verdict — seven days.`);
+        this._linkNote(link, 'succession', 'Sub-bar link at the funeral — grief delays the verdict: a renegotiation is staged. (trust -8)');
+        this.say(`${this._ovName(other)}'s new speaker sends word: the bond is fraying — trust ${link.trust}, below the 40 the realm stands on. The realm will come apart unless the new bearer answers: send grain (1,500 kcal), send a speaker (2 days), or let the silence answer. Grief delays the verdict — seven days. (Trust -8.)`);
         try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'succession-grace:' + other); } catch (e) {}
         return 'grace';
       }
@@ -2031,15 +2031,15 @@
       var other = link.subordinate === HOME ? link.primary : link.subordinate;
       if (link.subordinate === HOME) {
         link.tributeKcalPerWeek = Math.max(500, Math.round(link.tributeKcalPerWeek * 0.75));
-        this._linkNote(link, 'succession', 'Their speaker died; Haven renegotiated in the chaos. The link holds to the village.');
-        this.say(`Word comes: ${this._ovName(other)}'s speaker is dead. In the chaos, Haven renegotiates — tribute down to ${link.tributeKcalPerWeek.toLocaleString()} kcal/week. The link holds: it was never with one person. They grieve; the gains wait.`);
+        this._linkNote(link, 'succession', 'Their speaker died; Haven renegotiated in the chaos. The link holds to the village. (trust -8)');
+        this.say(`Word comes: ${this._ovName(other)}'s speaker is dead. In the chaos, Haven renegotiates — tribute down to ${link.tributeKcalPerWeek.toLocaleString()} kcal/week. The link holds: it was never with one person. They grieve; the gains wait. (Trust -8.)`);
       } else {
         if (this._griefLeverage(link)) {
-          this._linkNote(link, 'succession', 'Haven installed its own speaker at their table. The link holds to the village.');
-          this.say(`Their speaker is dead. Haven installs its own at ${this._ovName(other)}'s table — the empire's manners. Tribute rises to ${link.tributeKcalPerWeek.toLocaleString()} kcal/week. They grieve; the link holds.`);
+          this._linkNote(link, 'succession', 'Haven installed its own speaker at their table. The link holds to the village. (trust -8)');
+          this.say(`Their speaker is dead. Haven installs its own at ${this._ovName(other)}'s table — the empire's manners. Tribute rises to ${link.tributeKcalPerWeek.toLocaleString()} kcal/week. They grieve; the link holds. (Trust -8.)`);
         } else {
-          this._linkNote(link, 'succession', 'Haven installed its own speaker — but the grief card is spent. Tribute unchanged at ' + link.tributeKcalPerWeek.toLocaleString() + '.');
-          this.say(`Their speaker is dead. Haven installs its own at ${this._ovName(other)}'s table — the empire's manners. But the grief card is spent; the table has heard it before. Tribute stays at ${link.tributeKcalPerWeek.toLocaleString()} kcal/week. They grieve; the link holds.`);
+          this._linkNote(link, 'succession', 'Haven installed its own speaker — but the grief card is spent. Tribute unchanged at ' + link.tributeKcalPerWeek.toLocaleString() + '. (trust -8)');
+          this.say(`Their speaker is dead. Haven installs its own at ${this._ovName(other)}'s table — the empire's manners. But the grief card is spent; the table has heard it before. Tribute stays at ${link.tributeKcalPerWeek.toLocaleString()} kcal/week. They grieve; the link holds. (Trust -8.)`);
         }
       }
       if (link.trust < 20 && this._linkNeglected(link)) {
@@ -3577,8 +3577,11 @@
         return 'sent';
       }
       var ls = this._peerLinks('covenant');
-      for (var i2 = 0; i2 < ls.length; i2++) ls[i2].trust = Math.max(0, ls[i2].trust - 10);
-      this._linkNote(link, 'defense', 'REFUSED the call — aloud.');
+      for (var i2 = 0; i2 < ls.length; i2++) {
+        ls[i2].trust = Math.max(0, ls[i2].trust - 10);
+        if (ls[i2] !== link) this._linkNote(ls[i2], 'defense', 'League defense refused — the war-pact remembers. (trust -10)');
+      }
+      this._linkNote(link, 'defense', 'REFUSED the call — aloud. (trust -10)');
       try { this.seedGossip('defense_refused_' + link.id, { loyal: -6 }, (this.npcIds ? this.npcIds().slice(0, 4) : [])); } catch (e) {}
       this.say(`🔥 Haven refuses ${onm}'s call — aloud, in council, no excuses dressed up. The war-pact remembers refusals longer than battles. (Trust -10 across the league.)`);
       try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'defense-refused:' + other); } catch (e) {}
@@ -3619,7 +3622,7 @@
         return 'sent';
       }
       link.trust = Math.max(0, link.trust - 4);
-      this._linkNote(link, 'favor', 'Refused aloud — the charter allows it.');
+      this._linkNote(link, 'favor', 'Refused aloud — the charter allows it. (trust -4)');
       this.say(`📜 Haven refuses ${onm} — aloud, and the charter backs it: no mutual defense, written plainly. They knew the terms when they signed. (Trust -4.)`);
       return 'refused';
     },

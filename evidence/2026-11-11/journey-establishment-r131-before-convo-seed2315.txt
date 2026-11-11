@@ -1,0 +1,81 @@
+=== r131-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Keisha (gen_vyerdea) occ=pottery instructor --
+OPENING: "About what happened to my taken kin — You talk to it -- the System. Have you ever asked? About the taken -- about Grace? …sorry."
+YOU: [gq:yn:yes] "Yes."
+THEM: "I see." They take a moment to think about your answer.
+YOU: [goon] "I'm listening."
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [goon] "I'm listening."
+THEM: "What's the kindest thing someone's done for you out here?"
+YOU: [ans:q_kindness:a_tell] "I've watched people share food they couldn't spare. Quiet. No performance. Just
+THEM: "That's the good stuff. Quiet generosity. It's holding this whole thing together."
+YOU: [goon] "I'm listening."
+THEM: "Someone saved me the last of the stew once. Didn't say anything, just put the bowl down and walked off. I think about that bowl more than I think about the monsters. You're doing fine."
+YOU: [dlg:more] "What do you remember?"
+THEM: "It's my younger sister, Grace. Went in the Taking. She was nineteen. Nineteen years of being interesting was not enough, apparently. The pods get into my sleep some nights. Row on row of them, humming like a held note -- and I wake up reaching for something that isn't there."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person."
+closing: "Take care of yourself."
+
+-- Landon (gen_erebf5w) occ=arborist --
+OPENING: "About this wound — I hate to ask twice, but it's still open. Will you?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: You need to be right next to them, same side of the Haven door, to help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [goon] "Go on."
+THEM: "Walk with me? I want another pair of eyes on something."
+INVITE-ANSWER trust=91
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Halfway to the tree line, Landon freezes. Fresh tracks — big. "We go back now. Quietly." You do. The wild, reminding you.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Look, forget it. You wanted something?"
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "I walked out of Duel. Alive. That's the whole story and it's enough."
+YOU: [goon] "Who told you that?"
+THEM: Something eases in their shoulders. They're really talking to you now.
+YOU: [goon] "Who told you that?"
+THEM: "They're already drifting away. "Later."
+
+-- Hong (gen_wldusls) occ=rail conductor --
+OPENING: "I dreamed about the pods again. Guizhen's face. Tell me I'm not the only one who hears the humming."
+YOU: [dlg:more] "What do you remember?"
+THEM: "It's my sister, Guizhen. Was taken at the Scattering. The boring half, they said — my sister, boring. I think about that every day. The pods get into my sleep some nights. Row on row of them, humming like a held note -- and I wake up reaching for something that isn't there."
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person."
+YOU: [goon] "Yeah?"
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Landon walked out of Duel. Alive. That's the whole story and it's enough. Not that it matters."
+YOU: [dlg:react] (listen)
+THEM: "People are talking about me. Take it for what it's worth."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Alright. But I'm not carrying your stuff."
+closing: "I'll think about what you said. Carefully. That's how I do things."
+
+-- Ntimama (gen_fkzaift) occ=Police officer --
+OPENING: Ntimama speaks only 🇷🇺 Russian. No shared words at all — just eyes, hands, and patience.
+«Эй... говоришь по-русски? Нет? ...чёрт.» (you catch 'Нет' — no)
+(They mime walking — pointing at themselves, then at you, then toward the tree line. The meaning is unmistakable: come with me.)
+YOU: [nv:nod] (nod slowly)
+THEM: «Соглашаюсь с тобой.» (you catch 'Соглашаюсь' — I agree) They nod back, a little quicker this time. "Food?" — they grin, proud of the one English they know.
+YOU: [nv:smile] (smile)
+THEM: «Спасибо. Правда, спасибо.» (you catch 'Спасибо' — thanks) A grin breaks through, quick and warm.
+YOU: [nv:pointself] (point: you, them, together)
+THEM: «Я не забуду.» You press a hand to your own chest, then point at them. Together — they get it.
+YOU: [nv:listen] (listen hard — catch words)
+THEM: You lean in, catching the rise and fall of it. «Где здесь спят?» (Where do people sleep here? — you're fairly sure)
+YOU: [speak_back] (try your Russian)
+THEM: Ntimama blinks. Then cracks up. "You said that BEAUTIFULLY. It means nothing like what you think it means." They teach you the right word, still laughing.
+YOU: [goon] (watch quietly)
+THEM: A warmth settles over the conversation — they lean in a little.
+(no pick)
+(stall menu: nv:nod|nv:smile|nv:pointself|nv:listen|leave)
+closing: They wave you off gently, already turning away. The conversation ends where language couldn't reach.

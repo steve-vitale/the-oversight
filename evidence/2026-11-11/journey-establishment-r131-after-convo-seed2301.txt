@@ -1,0 +1,82 @@
+=== r131-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Autumn (gen_d0kap3b) occ=librarian --
+OPENING: "About whether you've hurt someone — Have you ever hurt someone? Since all this started…"
+YOU: [ans:q_fight:a_tell] "Yes. I don't want to talk about the details. But yes."
+THEM: They nod, slow. "Okay. Thank you for telling me. That couldn't have been easy to say."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: The ease drains out of it, a little.
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "I don't keep score on that. Score-keeping is how you stop sleeping. I do what the day needs and I don't rehearse it after."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "...I should say, I trade in what I know. My knowledge for yours. Or food, if you're short on secrets."
+YOU: [ask:personal] "So... who are you? Like, really?"
+THEM: "You want to know about that? Okay." "As a librarian, I learned to improvise the hard way. Turns out 'hard way' was just practice."
+YOU: [dlg:more] "Tell me more."
+THEM: "My librarian training covered a lot. 'Post-apocalyptic foraging' was not on the syllabus."
+YOU: [dlg:react] (listen)
+THEM: "The others think I've got it together. Cute. Very cute."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on your story."
+closing: "Don't be a stranger."
+
+-- Mabel (gen_36z2bgd) occ=crossing guard --
+OPENING: "The cistern's nearly dry — 6 liters left. I can't carry enough alone. First light, the creek, you and me?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Finish the current event before hauling water.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That can wait — it isn't going anywhere. What's on your mind?"
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "Huh. Let me think about that." "Autumn? A librarian, back before. Solid person."
+YOU: [dlg:more] "Go on."
+THEM: "Mariana headed out to see what's out there."
+YOU: [dlg:react] (listen)
+THEM: "Anyway." A small smile.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the gossip."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "Can I trust you? I mean really."
+closing: "Later."
+
+-- Mariana (gen_w1c248c) occ=Veterinarian --
+OPENING: "Can I tell you something? I'm saving a candy bar for when things get better. I haven't told anyone."
+INVITE-ANSWER trust=91
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Mariana has been stockpiling where nobody looks. "Take half. You've got the hands for it." (+4 wood, +4 fiber to the village stash.)
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "a burned farmhouse — I'll show you on the map sometime. It's real."
+YOU: [secret:promise] "That stays between us."
+THEM: "Thank you. ...I needed someone to know, and I needed it to stop there. Sorry, what was the question."
+YOU: [alive:want:seek_taken] "About your taken kin — what do you need?"
+THEM: "You talk to it -- the System. Have you ever asked? About the taken -- about Sofia?"
+YOU: [gq:yn:yes] "Yes."
+THEM: "I see." They take a moment to think about your answer.
+YOU: [dlg:more] "Tell me about them."
+THEM: "It's my sister, Sofia. Was taken at the Scattering. The boring half, they said — my sister, boring. I think about that every day. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [goon] "Wait, what? Go on —"
+THEM: "I should get back to it."
+
+-- Clara (gen_i5ho4qj) occ=Butcher --
+OPENING: "About teaching them something — Teach me something. Anything you know that I don't."
+YOU: [ans:q_teach_me:a_tell] "I'd rather show you while we're working. It's easier that way."
+THEM: "All right. Show me when we work together."
+YOU: [goon] "Wait, what? Go on —"
+THEM: The warmth pulls back a notch. They're weighing something.
+YOU: [goon] "Wait, what? Go on —"
+THEM: "I'd like to learn something I can use today. Show me while you work, when you have a moment."
+YOU: [goon] "Wait, what? Go on —"
+THEM: "Walk with me? I want another pair of eyes on something."
+INVITE-ANSWER trust=91
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Clara has been stockpiling where nobody looks. "Take half. You've got the hands for it." (+4 wood, +4 fiber to the village stash.)
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on teaching them something. Makes sense to me."
+YOU: [goon] "Wait, what? Go on —"
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [goon] "Wait, what? Go on —"
+THEM: "I've been turning something over. What do YOU think actually happened to us?"
+closing: "Good talk."

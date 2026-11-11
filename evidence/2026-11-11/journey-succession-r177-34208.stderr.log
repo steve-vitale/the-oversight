@@ -1,0 +1,39 @@
+
+ORGANIC DEATH d15: Arturo -> Hermann, topTrust=[{"id":"Marvin","t":93},{"id":"Maya","t":57},{"id":"Ingrid","t":52},{"id":"Hermann","t":50}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=16 inheritedPlants=0 keptSkills=5 inheritedSkills=0 succTrustPre=87 succTrustPost=50
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","echo_location"] post=["beast_calm","echo_location"]
+DEATH d14 (organic (phase A)): Arturo -> Hermann | passed=true lin=true mo=true trust=50 vouchers=1
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Marvin (refused=false)
+  CONVO d+3 with Maya (refused=false)
+  STRANGER-PROBE d+3 with Ingrid (trust=54 refused=false)
+  BOND-CONVO d+3 with Tom (depth=0 v=22 refused=false)
+  CONVO d+7 with Marvin (refused=false)
+  CONVO d+7 with Tom (refused=false)
+  CONVO d+14 with Tom (refused=false)
+  CONVO d+14 with Marvin (refused=false)
+  CONVO d+30 with Tom (refused=false)
+  CONVO d+30 with Maya (refused=false)
+  CONVO d+45 with Tom (refused=false)
+  CONVO d+45 with Maya (refused=false)
+  CONVO d+53 with Tom (refused=false)
+  CONVO d+53 with Maya (refused=false)
+  CONVO d+64 with Tom (refused=false)
+  CONVO d+64 with Maya (refused=false)
+
+FUNERAL: deathBeat=8 recover=1 vouch=1 (eligible=1) echo=3 organicBurial={"respects":false,"bury":false} halfRation=3
+
+MEAL-GATE: audited=70 violations=0 noMealDays=11 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":116,"offerLines":74,"codexPlantsDelta":41,"codexSkillsDelta":24,"codexAbilitiesDelta":18,"xpDelta":238,"any":true} pantry 24155->105023
+TRUST-DIALS: office 50->91 (+41, climb) | villageMean 45.7->95.5 (+49.8, climb) | ge60 1->6 | movers>=5: [{"id":"Aroha","from":10,"to":91,"delta":81},{"id":"Ines","from":23,"to":90,"delta":67},{"id":"Jovan","from":47,"to":100,"delta":53},{"id":"Elif","from":50,"to":100,"delta":50},{"id":"Maya","from":57,"to":100,"delta":43},{"id":"Ingrid","from":52,"to":92,"delta":40}]
+DEED-LEDGER: calls=72 summary={"teachPlant":{"calls":25,"ok":25,"deltaSum":0,"deltaN":25,"positive":0,"meanDelta":0},"giveFood":{"calls":14,"ok":14,"deltaSum":10,"deltaN":14,"positive":8,"meanDelta":0.71},"donateToPantry":{"calls":33,"ok":33,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=3 (convo=3, say=0)) m4=true m5=manual | endDay=84 alive=7 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=72) trustVerdict={"readable":true,"officeMantle":50,"officeLast":91,"officeDelta":41,"officeClass":"climb","villageMantle":45.7,"villageLast":95.5,"villageDelta":49.8,"villageClass":"climb","villageGe60Mantle":1,"villageGe60Last":6,"movers":[{"id":"Aroha","from":10,"to":91,"delta":81},{"id":"Ines","from":23,"to":90,"delta":67},{"id":"Jovan","from":47,"to":100,"delta":53},{"id":"Elif","from":50,"to":100,"delta":50},{"id":"Maya","from":57,"to":100,"delta":43},{"id":"Ingrid","from":52,"to":92,"delta":40}]}
+E6/CALLCHECK: e6={"callMoves":18,"withCensus":18,"chainHandoffs":3,"trustMoves":15} callCheck={"dailyMoveDays":18,"callMoveDays":16,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=4 (v2=4, excludedLoot=0))
+E7/R47: e7={"trustMoves":15,"soloOffice":5,"soloOfficeDeltas":[2,2,2,-2,1],"soloBearerDeltaExact":[2,2,2,-2,1],"singleMoverBearer":3,"singleMoverOther":4,"eventClass":{"event-only":0,"deed-only":3,"both":12,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":3,"v2":4,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":3,"known":3,"unknown":0} e3={"dailyDays":71,"moves":18}

@@ -1244,7 +1244,7 @@
         (doubt.kind === 'behavior' || this.doubtIsLead(doubt));
       if (tentativeAsk) spoken = `"Something's been bothering me, ${first}. ${ev} — help me understand it."`;
       // beat 2 — their face, as it lands.
-      const face = this.drawTruthLine('accuseFace', vid);
+      let face = this.drawTruthLine('accuseFace', vid);
       // beat 3 — codex-gated coaching: only patterns the player has LIVED.
       const L = this.socialLedger();
       const priorDeflect = (doubt.evidence || []).some(e => /deflected/.test(String(e)));
@@ -1261,6 +1261,19 @@
       } else if ((L.confessed || 0) >= 1 && (doubt.evidence || []).length <= 1) {
         coach = this.drawTruthLine('coachConfess', vid);
       }
+      // r179: a face line must not repeat verbatim within one sitting.
+      // drawTruthLine's per-game no-repeat recycles the 6-line
+      // accuseFace pool after 6 draws, so a sitting that presses doubt
+      // 7+ times re-serves the same face (r179 panel: 'The easy manner
+      // evaporates' x3 in one sitting on seed 43503). If this sitting
+      // already heard this exact face line, say nothing instead of
+      // repeating it — the r167 coach-guard pattern, applied to the face.
+      let c = null;
+      try { c = this.convoGet(vid); } catch (e) {}
+      if (face && c && c.active && Array.isArray(c.transcript) &&
+          c.transcript.some(b => b && b.who === 'narr' && b.text === face)) {
+        face = null;
+      }
       const beats = [{ who: 'you', text: spoken }];
       if (face) beats.push({ who: 'narr', text: face });
       // r167: a coach line must not repeat verbatim within one sitting.
@@ -1270,8 +1283,6 @@
       // sitting, coachAttack x2 in Xavier's). If this sitting already
       // heard this exact coach line, say nothing instead of repeating
       // the hint — the System already told you.
-      let c = null;
-      try { c = this.convoGet(vid); } catch (e) {}
       if (coach && c && c.active && Array.isArray(c.transcript) &&
           c.transcript.some(b => b && b.who === 'narr' && b.text === `*${coach}*`)) {
         coach = null;
@@ -1570,10 +1581,29 @@
       const otherDoubts = this.getDoubts(vid).filter(d => !d.resolved && d.id !== doubtId).length;
       if (otherDoubts > 0) confessP += Math.min(0.20, otherDoubts * 0.10);
 
-      if (roll < confessP) {
+      // ONE CONFESSION PER SITTING (journey-social r172 2026-11-10): the
+      // flag lives on the convo object; startConvo resets it per sitting.
+      // Set by the confession branches below, by confrontTheft, and by
+      // the volunteered secret opener (conversation.js).
+      let confessedThisSitting = false;
+      try { const cc = this.convoGet(vid); confessedThisSitting = !!(cc && cc.confessedThisSitting); } catch (e) { console.warn('truth confess guard', e); }
+
+      if (confessedThisSitting) {
+        // Already bared one secret in this sitting — a second
+        // confess-candidate deflects instead. The panel's Benoit double
+        // (r172 s167) confessed twice with the identical windup frame;
+        // people don't do that. Same refusal voice as a re-pressed
+        // confessed lie. The accusation still landed (windup above);
+        // the doubt stays open and the evidence grows.
+        outcome = 'deflected';
+        line = this.drawTruthLine('staleConfessed', vid);
+        doubt.evidence.push(`confronted (day ${day()}) — already confessed this sitting`);
+        try { this.bumpTrust(vid, -3); this.remember(vid, 'deflected', 'would not confess twice in one sitting'); } catch (e) { console.warn('truth confess guard', e); }
+      } else if (roll < confessP) {
         // CONFESSION
         lie.confessed = true;
         outcome = 'confessed';
+        try { const cc = this.convoGet(vid); if (cc) cc.confessedThisSitting = true; } catch (e) { console.warn('truth confess guard', e); }
         // TABLE INPUT (coherence audit 2026-10-14): a lie you exposed counts
         // toward the Witness path (ledger 'exposed'). Recorded on the kept
         // list (exposure.js) — who confessed what to whom, when.
@@ -1702,12 +1732,27 @@ try { this.noteTrialDeed('catch_3_lies', 1); } catch (e2) {}
       const roll = Math.random();
       let line, outcome;
 
-      if (roll < confessP) {
+      // ONE CONFESSION PER SITTING (journey-social r172 2026-11-10): see
+      // confrontDoubt — the same sitting flag covers theft confessions,
+      // so a theft confession and a lie confession never land in the
+      // same sitting. (Panel s69 looked like a theft+doubt double but
+      // was the driver-wrap artifact — one press recorded twice; the
+      // guard still covers the real shape.)
+      let confessedThisSitting = false;
+      try { const cc = this.convoGet(vid); confessedThisSitting = !!(cc && cc.confessedThisSitting); } catch (e) { console.warn('truth confess guard', e); }
+
+      if (confessedThisSitting) {
+        outcome = 'deflected';
+        line = this.drawTruthLine('staleConfessed', vid);
+        doubt.evidence.push(`confronted (day ${day()}) — already confessed this sitting`);
+        try { this.bumpTrust(vid, -3); this.remember(vid, 'deflected', 'would not confess twice in one sitting'); } catch (e) { console.warn('truth confess guard', e); }
+      } else if (roll < confessP) {
         // CONFESSION — they did it, they say so. The food's gone (eaten days
         // ago); what you get is the truth, on the record, and the village
         // hears. Theft has a social price. Recorded on the kept list
         // (exposure.js).
         outcome = 'confessed';
+        try { const cc = this.convoGet(vid); if (cc) cc.confessedThisSitting = true; } catch (e) { console.warn('truth confess guard', e); }
         try {
           if (this.recordExposure) {
             this.recordExposure({

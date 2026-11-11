@@ -1,0 +1,90 @@
+=== r131-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Elijah (gen_248at3r) occ=exterminator --
+OPENING: "Never mind this wound — we got it handled. Thanks anyway."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "Tucumã. Remember the leaf, the stem, the smell — that's the whole of it."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Jujube. Leaf, stem, smell. You won't forget it now."
+YOU: [ask:goal] "What do you actually want?"
+THEM: "Good question." Watch what I do, not what I say. That's where the proof is.
+YOU: [dlg:more] "I’m listening."
+THEM: "I'm not asking for a medal. I'm asking for a chance to matter."
+YOU: [party_name] "We should name this. Us."
+THEM: "A name. Okay." You say it out loud, trying the shape of it:
+1. "PLOT ARMOR" (📺 the System suggests)
+2. "The Second Try" (Elijah suggests)
+3. "The Company" (or plain)
+(Which one? It'll stick.)
+YOU: [party_namepick:0] "PLOT ARMOR."
+THEM: 🤝 "PLOT ARMOR." It hangs in the air a moment — then Elijah grins. It's real now. It has a name, which means it can be lost.
+📺 PLOT ARMOR is official. Elijah. (The village watches the broadcast. Nobody blinks.)
+📓 Codex: We named us: PLOT ARMOR.
+YOU: [party_role] "Let's talk roles."
+THEM: "Roles. Not ranks — promises."
+🗡️ point — First in. Hits harder (+3 strike), draws the eye.
+🩹 healer — Carries the wounded, patches them up (+6 heal).
+🎒 carrier — Hauls. Carry order reaches further, steadier hands.
+🗣️ talker — The face. People join easier, leaving hurts less.
+👁️ scout — Sees trouble first. Warns the party on the road.
+(Which one is Elijah?)
+closing: "Don't be a stranger."
+
+-- Courtney (gen_fyv62us) occ=Fisherman --
+OPENING: "Can I tell you something? At night I cry quietly so no one hears."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "Birch Sap. Remember the leaf, the stem, the smell — that's the whole of it."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Lemongrass. Leaf, stem, smell. You won't forget it now."
+YOU: [secret:silence] (say nothing — just sit with them)
+THEM: "...Just sit with me a minute. ...That's enough, for now."
+YOU: [alive:event:table] "The table. We need to talk about the table."
+THEM: "Have you felt it? Like the air before a storm, but — bigger. Something's on its way."
+YOU: [gq:yn:yes] "Yes."
+THEM: They nod. "Okay."
+YOU: [teach] "Watch. This matters."
+THEM: You show them Hickory Nuts — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "The cistern's nearly dry — 7 liters left. I can't carry enough alone. First light, the creek, you and me?"
+YOU: [goon] "Hm. Let me think — go on, first."
+THEM: "Alright — I should get back to it."
+
+-- Priya (gen_tuy9atk) occ=pottery instructor --
+OPENING: "About needing to be alone — Do you ever just need to be alone? Like, really alone? ...if that makes sense."
+YOU: [ans:q_alone_time:a_tell] "Every day. I go for walks that don't need to happen. Just to breathe my own air
+THEM: "I get it. Solitude's a resource too. Scarcer than food, some days."
+YOU: [goon] "And?"
+THEM: The warmth pulls back a notch. They're weighing something.
+YOU: [goon] "And?"
+THEM: "I go to the treeline edge and count my breaths. Ten of them. That's my alone. Then I come back — alone is a luxury, and also a little bit a lie. Be kind to yourself, okay?"
+YOU: [goon] "Hm. Let me think — go on, first."
+THEM: "Walk with me? I want another pair of eyes on something."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: It's quiet at the tree line. Priya doesn't say much. Sometimes that's the whole point.
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "Colocasia (Arbi). Remember the leaf, the stem, the smell — that's the whole of it."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Poison Hemlock. Leaf, stem, smell. You won't forget it now."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on needing to be alone, as it were."
+closing: "I should go. Take care of yourself, okay?"
+
+-- Rune (gen_hphhvos) occ=paramedic --
+OPENING: Rune speaks only 🇳🇴 Norwegian. No shared words at all — just eyes, hands, and patience.
+«Hei! Du... hva heter du?» (you catch 'Hei' — hi) "Okay?" — they grin, proud of the one English they know.
+YOU: [nv:nod] (nod slowly)
+THEM: «Godt sagt. Helt riktig.» (you catch 'sagt' — said) They nod back, a little quicker this time.
+YOU: [nv:smile] (smile)
+THEM: «Takk for at du er her.» (you catch 'Takk' — thanks) They smile back, slower this time, like it just landed.
+YOU: [nv:pointself] (point: you, them, together)
+THEM: «Dette glemmer jeg deg aldri.» (This I'll never forget you for. — you're fairly sure) You tap your chest, then theirs. Us. They nod, emphatic.
+YOU: [nv:listen] (listen hard — catch words)
+THEM: You listen hard, watching their mouth shape the words. «Forstår du?» (Do you understand? — you're fairly sure)
+YOU: [goon] (watch quietly)
+THEM: A final shared look — you both feel the talk running its course.
+(no pick — winding down)
+(stall menu: leave|nv:nod)
+closing: They wave you off gently, already turning away. The conversation ends where language couldn't reach.

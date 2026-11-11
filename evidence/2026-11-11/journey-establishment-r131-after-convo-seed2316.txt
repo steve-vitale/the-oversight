@@ -1,0 +1,82 @@
+=== r131-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- August (gen_chwqi91) occ=Chef --
+OPENING: "Water's almost gone — 0 liters. Haul the creek with me at dawn? Two buckets each, there and back."
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Stand beside your partner first — same side of the Haven door — then help.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Yuki headed out for water."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "I can't. Not today. Ask me when the work's done."
+YOU: [dlg:more] "Go on."
+THEM: "Ablade headed out for water."
+YOU: [dlg:react] (listen)
+THEM: They nod slowly, not quite done, not quite continuing.
+YOU: [menu:more] More things to say (1/2)
+THEM: (menu page turned)
+closing: "Take care of yourself."
+
+-- Nicole (gen_p1rtkd4) occ=Mortician --
+OPENING: "I keep dreaming about rows of pods. Humming. Tell me I'm not the only one."
+YOU: [dlg:more] "Tell me about them."
+THEM: "It's my sister, Symbat. Was taken at the Scattering. The boring half, they said — my sister, boring. I think about that every day. The pods get into my sleep some nights. Row on row of them, humming like a held note -- and I wake up reaching for something that isn't there."
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [goon] "Go on."
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: It's quiet at the trap line. Nicole doesn't say much. Sometimes that's the whole point.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person."
+YOU: [goon] "Go on."
+THEM: "Can I trust you? I mean really."
+YOU: [ans:q_trust:a_earn] "I hope to earn it."
+THEM: "That's the right answer. The wrong one would've been 'yes' too fast."
+YOU: [goon] "Go on."
+THEM: "I'll tell you what I tell everyone: watch what I do when nobody's watching. That's the whole of me. The rest is just talking."
+closing: "Don't be a stranger."
+
+-- Ablade (gen_j53mlrq) occ=aquarium keeper --
+OPENING: "Never mind the pantry run — we got it handled. Thanks anyway. Water's almost gone — 0 liters. I can't carry enough alone. First light, the creek, you and me?"
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Out on the road, away from Haven. A dawn meet's not something I can promise while I'm out — when I'm back, find me, and we'll set it then."
+YOU: [goon] "Yeah?"
+THEM: "Come see what I found. You won't believe it."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: "Here. I made an extra." Ablade presses something into your hand — a decent tool, oiled and kept. (Useful. Keep it.)
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that water haul."
+YOU: [goon] "Yeah?"
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Look, forget it. You wanted something?"
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Nicole? A Mortician, back before. Solid person."
+YOU: [dlg:more] "Tell me more."
+THEM: "Yuki is back. Walked in like they'd never left."
+closing: "Later."
+
+-- Theo (theo_lindqvist) occ=trail crew lead --
+OPENING: "We're down to 0 liters of clean water. Haul the creek with me at dawn? Two buckets each, there and back."
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Wait — I'm away from Haven, out on the road. I can't promise a dawn meet while I'm out — find me when I'm back, and we'll set it then."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "Rubber Seeds. Remember the leaf, the stem, the smell — that's the whole of it."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Sweet Potato. Leaf, stem, smell. You won't forget it now."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that water haul."
+YOU: [goon] "Go on."
+THEM: "Has this changed you? Like, fundamentally?"
+YOU: [ans:q_change:a_tell] "I don't recognize the person in my head anymore. I think that's good? I don't k
+THEM: "The old you got you here. The new you keeps you here. Both count."
+YOU: [goon] "Go on."
+THEM: "I used to be a trail crew lead who worried about being on time. Now I worry about being alive. Same worry, bigger font. So yes — and also no."
+YOU: [goon] "Go on."
+THEM: "Okay I really have to move now or I'll explode — talk soon!"

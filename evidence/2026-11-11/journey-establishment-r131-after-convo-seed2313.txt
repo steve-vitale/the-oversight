@@ -1,0 +1,82 @@
+=== r131-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Jasper (gen_o5jxzg0) occ=pottery instructor --
+OPENING: "What's something from your old life that's actually useful here? Thank you for asking."
+YOU: [ans:q_before_skill:a_tell] "Patience. Sounds dumb. But waiting — really waiting, without fidgeting — that's
+THEM: "Not dumb at all. The people who can't wait are the ones who make mistakes. You're an asset. — or so they tell me."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Well. Being a pottery instructor taught me to read people fast — who's lying, who's scared, who needs a job. Turns out that's a survival skill. Who knew."
+YOU: [dlg:doubt] "That doesn't quite add up."
+THEM: "...What's that supposed to mean?" Their voice goes careful.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on your useful old-life skills."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: Their friendliness thins — still there, just held at arm's length.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up? Allegedly."
+YOU: [ask:personal] "Tell me who you are, child. The whole of it."
+THEM: "Good question." "I don't know you. But you're here, so... we figure it out. Extremely normal, all of it."
+YOU: [dlg:more] "I’m listening."
+THEM: "I've started noticing who eats first and who waits. Tells you everything about a person."
+closing: "Don't be a stranger."
+
+-- Hadeel (gen_2b4yj3r) occ=fishing guide --
+OPENING: "My wound needs a second pair of hands. Could you take a look?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Get to their side of the Haven door and stand next to them — then you can help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [goon] "Go on. I'm listening."
+THEM: "Come see what I found. You won't believe it."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: "Here. I made an extra." Hadeel presses something into your hand — a decent tool, oiled and kept. (Useful. Keep it.)
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "Woodland Strawberry — crush the leaf, smell it, taste the stem. That's how you know it."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Wild Strawberry. Remember the leaf, the stem, the smell — that's the whole of it."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Look, forget it. You wanted something?"
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Huh. Let me think about that." "Did you hear? You won The Moot on the cameras. People are still talking about it."
+closing: "Well. That happened."
+
+-- Nikos (nikos_papadopoulos) occ=aquarium keeper --
+OPENING: Broken isn't the same as ruined. Remember that.
+YOU: [dlg:more] "I’m listening."
+THEM: "Pain shared is pain halved. That's not science. It's better than science."
+YOU: [dlg:react] (listen)
+THEM: "I'm not a miracle worker. I'm a witness who brings bandages."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on wanting to fix what's broken. That is all."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "...Fine. This had better be worth it."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway — that's my cross to carry. What's on your mind?"
+YOU: [ask:personal] "Tell me who you are, child. The whole of it."
+THEM: "Good question." "I found a gray hair today. I'm choosing to call it wisdom frost."
+YOU: [silence] "..."
+THEM: You say nothing. Neither do they, for a while — and it's fine.
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "I should go. You know where to find me."
+
+-- Quinn (quinn_murphy) occ=bartender --
+OPENING: "About that news I was bursting to share — Okay, so — something happened this morning, friend."
+YOU: [dlg:more] "Go on."
+THEM: "The treeline, this morning — something moved out there, big. By the time I looked properly it was gone. But I saw it."
+YOU: [goon] "Go on. I'm listening."
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+INVITE-ANSWER trust=2
+YOU: [betrayal:decline] "Not this time."
+THEM: "Another time, then." A small thing, pocketed.
+YOU: [dlg:react] "I see."
+THEM: "That's everything I've got. You know as much as I do now."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that news. Worth considering."
+YOU: [goon] "Go on. I'm listening."
+THEM: The tension eases back to something ordinary.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Never mind me. What were you going to say?"
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Good question." "Did you hear? You won The Moot on the cameras. People are still talking about it."
+closing: "This was good. We should do this more. Not the apocalypse part — the talking part."

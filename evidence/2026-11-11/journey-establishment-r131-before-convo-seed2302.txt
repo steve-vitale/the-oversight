@@ -1,0 +1,80 @@
+=== r131-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Dylan (gen_bdcct9q) occ=blacksmith --
+OPENING: The System took a lot. It's not getting my sense of humor.
+YOU: [dlg:more] "I’m listening."
+THEM: "Surviving isn't enough. I want to remember what fun felt like."
+YOU: [dlg:react] (listen)
+THEM: "I ration my jokes like trail food. A bad day costs extra."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on wanting to laugh again, properly. Sorry, what was the question."
+YOU: [goon] "What would that look like?"
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Another time. The village needs me here."
+YOU: [goon] "What would that look like?"
+THEM: "I should get back to it."
+YOU: [more] "One more thing —"
+THEM: "I'm collecting jokes like firewood. We'll need them when it's dark."
+(ended by engine)
+
+-- Maureen (gen_pfg1tt8) occ=trail crew lead --
+OPENING: "About this wound — still on my mind. I keep coming back to it."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: You need to be right next to them, same side of the Haven door, to help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Did you hear? Nina won The Cache on the cameras. People are still talking about it."
+YOU: [goon] "Who told you that?"
+THEM: A neutral quiet returns, the kind where words land normally.
+YOU: [dlg:more] "I’m listening."
+THEM: "Did you hear? You won The Cache on the cameras. People are still talking about it."
+YOU: [dlg:react] (listen)
+THEM: "People are talking about Vyacheslav. Take it for what it's worth."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the gossip."
+closing: "Do try to stay alive. The paperwork otherwise is murder."
+
+-- Vyacheslav (gen_w3368ee) occ=emergency dispatcher --
+OPENING: People need to know someone's got a plan. Even if the plan is 'we'll figure it out.'
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "Muscadine Grapes — crush the leaf, smell it, taste the stem. That's how you know it."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Jackfruit. Remember the leaf, the stem, the smell — that's the whole of it."
+YOU: [dlg:more] "Tell me more."
+THEM: "Power's a trap. Responsibility's a duty. I know the difference."
+YOU: [dlg:react] (listen)
+THEM: "Someone asked me what we should do yesterday. I had an answer. That felt... right."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on wanting to be in charge."
+YOU: [goon] "What would that look like?"
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [goon] "What would that look like?"
+THEM: They let that thread drop — for now.
+YOU: [goon] "What would that look like?"
+THEM: "Do you believe in anything? Now, I mean. After everything."
+closing: "This matters. What we just said — it matters. Don't let it fade."
+
+-- Katarina (katarina_novak) occ=journalist --
+OPENING: "About what you did for fun — What did you do for fun? Before. The thing you'd do on a perfect Saturday."
+YOU: [ans:q_fun:a_people] "Nothing fancy. Just — people. Being around my people."
+THEM: "The free things. Turns out they were the expensive ones."
+YOU: [goon] "Yeah?"
+THEM: The ease drains out of it, a little.
+YOU: [goon] "Yeah?"
+THEM: "I was a journalist — fun was whatever I could steal between shifts. Now fun is watching the fire and not being afraid. It's a downgrade and an upgrade."
+YOU: [goon] "Yeah?"
+THEM: "Come see what I found. You won't believe it."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: On the way, Katarina stops and actually teaches you something — how they read a slope for water, how their grandmother did it. (Knowledge, freely given. The Codex notes it.)
+YOU: [goon] "Yeah?"
+THEM: "...I should say, I trade in what I know. My knowledge for yours. Or food, if you're short on secrets."
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Did you hear? Nina won The Cache on the cameras. People are still talking about it."
+YOU: [goon] "Who told you that?"
+THEM: They hear the warmth in it. They're not ready to let it in.
+closing: "Alright — I've got things to do and so do you. Make it count."

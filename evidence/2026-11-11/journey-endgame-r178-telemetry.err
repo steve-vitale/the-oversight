@@ -1,0 +1,22 @@
+node:fs:1630
+  const result = binding.readdir(
+                         ^
+
+Error: ENOENT: no such file or directory, scandir 'evidence/2026-11-11/perseed-endgame-r178{,-b,-c}'
+    at Object.readdirSync (node:fs:1630:26)
+    at expandGlob (/home/hatch/workspace/worktrees/journey2-endgame/scripts/telemetry-check.js:136:13)
+    at main (/home/hatch/workspace/worktrees/journey2-endgame/scripts/telemetry-check.js:143:17)
+    at Object.<anonymous> (/home/hatch/workspace/worktrees/journey2-endgame/scripts/telemetry-check.js:233:1)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: 'evidence/2026-11-11/perseed-endgame-r178{,-b,-c}'
+}
+
+Node.js v24.22.1

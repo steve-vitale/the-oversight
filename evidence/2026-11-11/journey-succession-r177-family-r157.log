@@ -1,0 +1,30 @@
+PASS teach-blocked: plants data present — n=187
+PASS teach-blocked: two villagers found — found=2
+PASS teach-blocked: scholar knows dandelion — plantKnown=true
+PASS teach-blocked: A convo opened — refused=false
+PASS teach-blocked: A speaks the teach narration — "Well. Can I tell you something? I've been skimming extra food. I'm ashamed and I can't stop." | "Let me show you something." | You show them Dandelion — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+PASS teach-blocked: A has no dry line — "Well. Can I tell you something? I've been skimming extra food. I'm ashamed and I can't stop." | "Let me show you something." | You show them Dandelion — where it grows, how to tell it apart. Their ey
+PASS teach-blocked: B convo opened — refused=false
+PASS teach-blocked: B speaks the teach narration — "Funny thing — Can I tell you something? I've been skimming extra food. I'm ashamed and I can't stop." | "Let me show you something." | You show them Dandelion — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+PASS teach-blocked: B has no dry line — "Funny thing — Can I tell you something? I've been skimming extra food. I'm ashamed and I can't stop." | "Let me show you something." | You show them Dandelion — where it grows, how to tell it apart. 
+PASS teach-blocked: B still learned the plant (lesson landed) — taughtByPlayer[B]=["dandelion"]
+PASS teach-blocked: B speaks the SAME composed line as A — A=You show them Dandelion — where it grows, how to tell it apart. Their eyes widen B=You show them Dandelion — where it grows, how to tell it apart. Their eyes widen
+PASS teach-control: plants data present — n=187
+PASS teach-control: two villagers found — found=2
+PASS teach-control: A convo opened — refused=false
+PASS teach-control: A speaks a teach narration — "I think — Can I tell you something? I've been skimming extra food. I'm ashamed and I can't stop." | "Let me show you something." | You show them Dandelion — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+PASS teach-control: B convo opened — refused=false
+PASS teach-control: B speaks the Y teach narration — "Look. Can I tell you something? I've been skimming extra food. I'm ashamed and I can't stop." | "Let me show you something." | You show them Cattail — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll reme
+PASS teach-control: B has no dry line — "Look. Can I tell you something? I've been skimming extra food. I'm ashamed and I can't stop." | "Let me show you something." | You show them Cattail — where it grows, how to tell it apart. "Huh." The
+PASS teach-window: plants data present — n=187
+PASS teach-window: two villagers found — found=2
+PASS teach-window: scholar knows dandelion — plantKnown=true
+PASS teach-window: A convo opened — refused=false
+PASS teach-window: A speaks the teach narration — "Honestly, Can I tell you something? I've been skimming extra food. I'm ashamed and I can't stop." | "Let me show you something." | You show them Dandelion — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+PASS teach-window: A has no dry line — "Honestly, Can I tell you something? I've been skimming extra food. I'm ashamed and I can't stop." | "Let me show you something." | You show them Dandelion — where it grows, how to tell it apart. Thei
+PASS teach-window: A line slid out of the ledger — ledger=48
+PASS teach-window: B convo opened — refused=false
+PASS teach-window: B speaks the teach narration — "Mm. Can I tell you something? I've been skimming extra food. I'm ashamed and I can't stop." | "Let me show you something." | You show them Dandelion — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+PASS teach-window: B has no dry line — "Mm. Can I tell you something? I've been skimming extra food. I'm ashamed and I can't stop." | "Let me show you something." | You show them Dandelion — where it grows, how to tell it apart. Their eyes
+
+ALL GREEN

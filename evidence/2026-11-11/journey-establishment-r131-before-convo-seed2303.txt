@@ -1,0 +1,82 @@
+=== r131-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Fernando (gen_kur1x9k) occ=bike messenger --
+OPENING: "Never mind the food I needed — we got it handled. Thanks anyway."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway — that's my problem, not yours. What did you want?"
+YOU: [ask:gossip] "Any good gossip? I'm bored."
+THEM: "Huh. Let me think about that." "The seedlings Diana touched are twice the size of mine. Same soil. Same water."
+YOU: [goon] "Do go on."
+THEM: The air goes tight. Their eyes narrow, just slightly.
+YOU: [dlg:more] "Go on."
+THEM: "Yuki found a lost knife by smell last week. By SMELL."
+YOU: [dlg:react] (listen)
+THEM: "Greta headed out to find someone."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the gossip."
+YOU: [goon] "Do go on."
+THEM: A neutral quiet returns, the kind where words land normally.
+YOU: [silence] "..."
+THEM: "You're a good listener, you know that?" A tired smile.
+closing: "Right then. Back to the business of surviving."
+
+-- Leo (gen_m9csk37) occ=dockworker --
+OPENING: "About who you left behind — Did you leave someone behind? ...Sorry. You don't have to answer that."
+YOU: [deflect_q] (change the subject)
+THEM: "Okay." Something shutters, just slightly.
+YOU: [goon] "Do go on."
+THEM: The conversation cools to something businesslike.
+YOU: [goon] "Do go on."
+THEM: "Are you angry? At whoever did this. At the sky. At anything."
+YOU: [ans:q_angry:a_deflect] "Anger doesn't help."
+THEM: "Maybe not. But it's honest. I'll take honest."
+YOU: [goon] "Do go on."
+THEM: "Anger's a fire — useful if you cook with it, deadly if you sleep next to it. I cook with mine. Most days."
+YOU: [dlg:doubt] "That doesn't quite add up."
+THEM: "...What's that supposed to mean?" Their voice goes careful.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Heh. Still on who you left behind."
+YOU: [goon] "Do go on."
+THEM: A small chill settles between you. They're choosing words more carefully.
+closing: "Don't be a stranger."
+
+-- Gert (gen_gy58g17) occ=Beekeeper --
+OPENING: "So what's your plan here? Just... get through it?"
+YOU: [deflect_q] (change the subject)
+THEM: "...Sorry, lost my train of thought."
+YOU: [goon] "Do go on."
+THEM: The warmth pulls back a notch. They're weighing something.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on your plan here."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Okay. Yeah. I trust you."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Never mind me. What were you going to say? No time to waste."
+YOU: [ask:personal] "So what's your deal?"
+THEM: "Huh. Let me think about that." "Being a beekeeper feels like a past life. Sometimes I wonder if I dreamed it. …if that makes sense."
+YOU: [dlg:more] "Tell me more."
+THEM: "I've started noticing who eats first and who waits. Tells you everything about a person."
+YOU: [dlg:react] (listen)
+THEM: "Gert says I talk too much. Gert is right. I'm still going to finish this story."
+closing: "Well. We'll see how it goes."
+
+-- Hassan (hassan_ali) occ=Butcher --
+OPENING: "About what you dream about — Do you dream about before? Or is it all — this — now? Makes sense to me."
+YOU: [ans:q_dream:a_before] "Before. Every night. It's the only place it still exists."
+THEM: "Then it's not gone. Not really. Keep going back. That's my read."
+YOU: [goon] "Do go on."
+THEM: The warmth pulls back a notch. They're weighing something.
+YOU: [goon] "Do go on."
+THEM: "Karachi, Pakistan, always. Same dream: I'm walking home and the street keeps getting longer. I wake up tired, like I actually walked it. That's the whole of it."
+YOU: [goon] "Do go on."
+THEM: "Walk with me? I want another pair of eyes on something."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: "All right —" Hassan starts to stand, then sinks back down. "Maybe not today. The fire's got me."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on what you dream about."
+YOU: [goon] "Do go on."
+THEM: "When's the last time you really laughed?"
+YOU: [deflect_q] (change the subject)
+THEM: "...Sorry, lost my train of thought."
+closing: "Alright. One thing at a time. That's how we get through."

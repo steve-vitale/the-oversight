@@ -8,6 +8,7 @@
 //   - convoMoodFlush(vid)
 //   - convoMoodBeat(from, to)
 //   - convoMoodSilence(vid)
+//   - convoMoodSilenceLines() -> all silence/closing lines (memory-quote gate)
 //   - convoMoodGoodbye(vid)
 //   - convoMoodMod(vid)
 //   - convoMoodReceptivity(vid)
@@ -220,13 +221,11 @@
   // precedent). Silence stays available (canon); it just stops narrating
   // itself in circles. Past the escalation, the honest line is the bare
   // "..." — the absence of speech, not a content beat.
-  Game.convoMoodSilence = function (vid) {
-    const c = this.convoGet(vid);
-    const band = this.convoMoodBand(vid);
-    c._msil = c._msil || {};
-    const n = (c._msil[band] || 0) + 1;
-    c._msil[band] = n;
-    const POOLS = {
+  // MOOD-SILENCE POOLS (journey-crisis r176 2026-11-10): hoisted to IIFE
+  // scope so convoMoodSilenceLines below can list them for the
+  // memory-quote gate. These lines are stage direction, not content
+  // (r25) — a resume must never quote one as the memory of a thread.
+  const MOOD_SILENCE_POOLS = {
       warm: {
         pool: [
           'A comfortable quiet settles. They smile a little, and let it be.',
@@ -261,6 +260,13 @@
         escalate: '"Anyway —" They laugh a little. "The quiet\'s getting to me. What\'s on your mind?"',
       },
     };
+  Game.convoMoodSilence = function (vid) {
+    const c = this.convoGet(vid);
+    const band = this.convoMoodBand(vid);
+    c._msil = c._msil || {};
+    const n = (c._msil[band] || 0) + 1;
+    c._msil[band] = n;
+    const POOLS = MOOD_SILENCE_POOLS;
     const key = (band === 'warm' || band === 'cool' || band === 'tense') ? band : 'fill';
     const def = POOLS[key];
     if (n <= def.pool.length) {
@@ -272,6 +278,21 @@
       return { shift: def.shift, line: def.escalate, spent: false };
     }
     return { shift: 0, line: '"..."', spent: true };
+  };
+
+  // convoMoodSilenceLines (journey-crisis r176 2026-11-10): every line
+  // the silence machinery can speak — pool lines and escalates, all
+  // bands. The memory-quote gate (conversation.js convoSnippetIsRealBeat)
+  // refuses to quote any of them as a thread's memory: they narrate the
+  // quiet itself, never the topic's content.
+  Game.convoMoodSilenceLines = function () {
+    const out = [];
+    for (const k of Object.keys(MOOD_SILENCE_POOLS)) {
+      const d = MOOD_SILENCE_POOLS[k];
+      for (const l of d.pool) out.push(l);
+      if (d.escalate) out.push(d.escalate);
+    }
+    return out;
   };
 
   // convoMoodGoodbye: the parting beat carries the temperature out the door.

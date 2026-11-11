@@ -1,0 +1,37 @@
+PASS engage-bothblocked: wounded villager set up — vid=gen_8i1cpt2
+PASS engage-bothblocked: need is heal_help — need=heal_help
+PASS convo opened — refused=false
+PASS want is ask_favor — want=ask_favor
+PASS opener states the ask (not dry) — "I can't reach this properly. Will you help me clean it?"
+PASS engage-bothblocked: beat is NOT a dry line — "I still need a hand with this wound."
+PASS engage-bothblocked: beat is NOT any blocked whyLine — "I still need a hand with this wound."
+PASS engage-bothblocked: beat is NOT the blocked v0 need-line — "I still need a hand with this wound."
+PASS engage-bothblocked: beat is the v1 phrasing (need a hand) — "I still need a hand with this wound."
+PASS engage-allblocked: wounded villager set up — vid=gen_mmfi9ve
+PASS engage-allblocked: need is heal_help — need=heal_help
+PASS convo opened — refused=false
+PASS want is ask_favor — want=ask_favor
+PASS opener states the ask (not dry) — "I can't reach this properly. Will you help me clean it?"
+PASS engage-allblocked: beat is null (exhaustion — callers fall back gracefully, r166)
+PASS details-bothblocked: wounded villager set up — vid=gen_oljzhcu
+PASS details-bothblocked: need is heal_help — need=heal_help
+PASS details-bothblocked: convo opened — refused=false
+PASS details-bothblocked: dlg:more offered — choices=dlg:more,dlg:react,teach,dlg:subject,leave,silence
+PASS details-bothblocked: favor built after more — favor=true
+PASS details-bothblocked: v0 computed — "I still need help with this wound."
+PASS details-bothblocked: dlg:details offered — choices=dlg:commit,dlg:favor_requirements,dlg:details,dlg:cant,dlg:subject,leave,silence
+PASS details-bothblocked: reply is NOT a dry line — "I still need a hand with this wound."
+PASS details-bothblocked: reply is the v1 phrasing (need a hand) — "I still need a hand with this wound."
+PASS details-bothblocked: want still live (not evaporated) — stage=2
+PASS control: wounded villager set up — vid=gen_e89utg5
+PASS control: need is heal_help — need=heal_help
+PASS convo opened — refused=false
+PASS want is ask_favor — want=ask_favor
+PASS opener states the ask (not dry) — "I can't reach this properly. Will you help me clean it?"
+PASS control: engageBeat returns the whyLine itself — "Every day it's angrier. I need it cleaned before it turns — I can't work a wound like this. Wrap it tight when you're d
+PASS control: need-line default (no variant arg) is v0 — "I still need help with this wound."
+PASS control: v1 is the hand phrasing — "I still need a hand with this wound."
+PASS control: v2 names the need as not going away — "This wound isn't going away — I need help."
+PASS control: all three variants distinct
+
+ALL GREEN

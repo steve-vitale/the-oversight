@@ -264,6 +264,22 @@
       const v = this.partyFormalState();
       if (!PARTY_ROLES[role]) return { ok: false, msg: 'No such role.' };
       if (!this.inParty || !this.inParty(vid)) return { ok: false, msg: 'They are not in your party.' };
+      // ARM THE DEATH RELEASE (journey crisis r176): a role now exists,
+      // so the registerDeath release must be installed (lazy — see
+      // installPartyDeathRelease; party-formal loads before corpses.js
+      // defines registerDeath).
+      try { installPartyDeathRelease(); } catch (e) {}
+      // ALREADY-HELD (journey crisis r176 2026-11-10): re-assigning a role
+      // the villager already holds used to narrate the assignment as if new
+      // ("Fatima is Scout now" twice in one sitting, r168 d27) — a role is
+      // a promise already kept, not a fresh one. Say so, and do not re-record
+      // the deed.
+      if (v.partyRoles[vid] === role) {
+        const nm = this.displayName(vid);
+        const R = PARTY_ROLES[role];
+        this.say(`🤝 ${nm} is already ${R.icon} ${R.name} — that promise is theirs.`);
+        return { ok: true, role, already: true };
+      }
       const holder = Object.keys(v.partyRoles).find(id => v.partyRoles[id] === role && id !== vid);
       if (holder) {
         const hname = this.displayName(holder);
@@ -581,10 +597,27 @@
     // the corpse and mantle systems do the mechanics. this is the grief.
 
     partyDeathBeat(vid) {
-      if (!this.inParty || !this.inParty(vid)) return;
       const v = this.state.village;
-      v.party = (v.party || []).filter(id => id !== vid);
       const st = this.partyFormalState();
+      // GUARD (journey crisis r176 2026-11-10): the old guard was
+      // inParty(), which requires roster membership — and every death
+      // path removes the villager from the roster BEFORE this beat can
+      // run (tbVillagerFalls base, _cxKillContestant), so the beat
+      // silently no-op'd for EVERY death and dead members kept their
+      // roles (r168: "scout (held by Fatima)" still showing d39/d51
+      // after her d38 arena death). Guard on the raw party array / role
+      // map instead: a member (even one the death itself already took
+      // off the roster) or a role-holder gets the beat. Idempotent: the
+      // role is deleted and the member removed below, so a second call
+      // for the same death no-ops.
+      const wasMember = (v.party || []).includes(vid) || !!(st.partyRoles && st.partyRoles[vid]);
+      if (!wasMember) return;
+      // ARM THE DEATH RELEASE (journey crisis r176): a beat is being
+      // said, so the registerDeath release must be installed for deaths
+      // that never route through tbVillagerFalls (lazy — see
+      // installPartyDeathRelease).
+      try { installPartyDeathRelease(); } catch (e) {}
+      v.party = (v.party || []).filter(id => id !== vid);
       const role = st.partyRoles[vid];
       delete st.partyRoles[vid];
       const nm = this.displayName(vid);
@@ -923,10 +956,71 @@
   const origTbVillagerFalls = Game.tbVillagerFalls;
   Game.tbVillagerFalls = function (t) {
     const wasInParty = !!(t && t.kind === 'villager' && t.villagerId && this.inParty && this.inParty(t.villagerId));
-    const r = origTbVillagerFalls.call(this, t);
+    // BEAT FIRST (journey crisis r176 2026-11-10): orig removes the
+    // villager from the roster (base) and the party (party.js wrapper),
+    // so a beat AFTER orig can no longer tell they were a member — the
+    // old order beat nobody. Beat while the membership is still
+    // readable; partyDeathBeat is idempotent, so the registerDeath
+    // wrapper's later call for the same death no-ops.
     try { if (wasInParty) this.partyDeathBeat(t.villagerId); } catch (e) {}
+    const r = origTbVillagerFalls.call(this, t);
     return r;
   };
+
+  // registerDeath: a dead member's role must not outlive them. (journey
+  // crisis r176 2026-11-10): the tbVillagerFalls wrapper above only covers
+  // field-fight deaths — Fatima died in the arena (r168: "scout (held by
+  // Fatima)" still showed d39/d51 after her d38 arena death) because
+  // arena/contest deaths remove the villager from the roster FIRST
+  // (_cxKillContestant) and only then call registerDeath, and wild /
+  // wound / thirst deaths never touch tbVillagerFalls at all. registerDeath
+  // is THE hook every villager death routes through (corpses.js), so the
+  // release lives here too. The guard is ROLE-based, not inParty-based:
+  // by registerDeath time the dead are already off the roster, so inParty
+  // is false for exactly the deaths this fixes (partyDeathBeat's own
+  // guard was fixed the same run, same reason). partyDeathBeat is
+  // idempotent, so a death that routes through BOTH tbVillagerFalls and
+  // registerDeath beats exactly once. The double-death guard inside
+  // registerDeath returns null on a second registration — the beat fires
+  // only on the first (r !== null), so a re-entrant kill cannot beat
+  // twice either.
+  // LAZY INSTALL (r176 proof caught this): party-formal.js loads BEFORE
+  // corpses.js defines registerDeath, so a load-time wrap finds
+  // Game.registerDeath undefined and silently never installs. The wrap
+  // installs on first assignRole (a role must exist before it can need
+  // releasing), on game load (a save can restore a role-holder without
+  // any assignRole in the session), and from partyDeathBeat (defense).
+  // The _pfPartyRelease flag on the wrapped function makes it once-only
+  // even if all three install points fire.
+  function installPartyDeathRelease() {
+    try {
+      const cur = Game.registerDeath;
+      if (!cur || cur._pfPartyRelease) return;
+      Game.registerDeath = function (opts) {
+        let heldRole = null;
+        try {
+          if (opts && (opts.kind === 'person' || opts.kind === 'villager') && opts.villagerId) {
+            const st = this.partyFormalState && this.partyFormalState();
+            heldRole = (st && st.partyRoles && st.partyRoles[opts.villagerId]) || null;
+          }
+        } catch (e) { heldRole = null; }
+        const r = cur.call(this, opts);
+        try {
+          if (heldRole && r !== null) this.partyDeathBeat(opts.villagerId);
+        } catch (e) {}
+        return r;
+      };
+      Game.registerDeath._pfPartyRelease = true;
+    } catch (e) { console.warn('[party] registerDeath release install', e); }
+  }
+  const origLoadPF = Game.load;
+  if (origLoadPF) {
+    Game.load = function () {
+      const r = origLoadPF.apply(this, arguments);
+      try { installPartyDeathRelease(); } catch (e) {}
+      return r;
+    };
+  }
 
   // checkEncounter: a scout traveling with the party sees trouble first.
   const origCheckEncounter = Game.checkEncounter;
