@@ -46,8 +46,10 @@ No prereg rewrite, no new seed band, no re-scored GO bar.
   src/js/contests.js` is EMPTY — neither instrumented file moved
   in the rebase range — so the existing corpus is judged as-is and
   no post-rebase re-run was needed. Master at adoption was
-  8445ab97f (journey-scale r131); the branch is rebased onto that
-  explicit SHA before the final commit, proof re-run green.
+  8445ab97f (journey-scale r131) and moved again during adoption;
+  the branch was rebased onto explicit SHA
+  488506a47aa5fc930444cfd504bd2e7c7f6fc6d7 before the final commit,
+  proof re-run green.
 - **Balanced panel (§15):** none — measurement arm with no lever
   change and no before/after arms, same position as
   sim-trustfirst-a / sim-abilityfirst-a / sim-titanfirst-a /
@@ -506,8 +508,10 @@ already works (packages, feed, trials, the favor engine).
 - Corpus judged on anchor base 28875b1b1: the rebase-range check
   found no movement in src/js/alienPlayers.js or
   src/js/contests.js, so no post-rebase pilot re-run was required
-  by the task's rule. The branch itself is rebased onto explicit
-  master SHA 8445ab97f before the final commit.
+  by the task's rule. The branch itself was rebased onto explicit
+  master SHA 488506a47aa5fc930444cfd504bd2e7c7f6fc6d7 before the
+  final commit (master moved from 8445ab97f during adoption, so
+  the rebase target was re-read immediately before rebasing).
 - The neutral legs for 190376–190378 were run by the adopter
   AFTER the control legs (same driver, same band, same base);
   neutrality still matched 8/8 exactly, so the ordering is
