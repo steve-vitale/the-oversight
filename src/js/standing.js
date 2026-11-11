@@ -200,6 +200,50 @@
         try { return (this.villageStanding().total | 0) || 0; } catch (e2) { return 0; }
       }
     },
+    // VETSHAPE instrument (sim-vetshape, 2026-10-17, scale-onramp):
+    // default OFF. OFF = pristine behavior (living killers only) —
+    // byte-identical; the det-gate in scripts/test-vetshape-20261017.js
+    // pins that. ON (VETSHAPE=1) = the "bar changes shape" instrument
+    // for Steve's #427 readiness-gate call (named next from
+    // evidence/2026-10-17/sim-wave4census.md): count DISTINCT KILLER
+    // VIDS with wave-(w-1)+ kills in the same waveKillLog the gate
+    // already reads, living-OR-DEAD. Demand now 1 for wave 4, 2 for
+    // wave 5 (2026-10-18 recalibration). NOT a game change: the
+    // default stays living-veterans until Steve rules. Under VETSHAPE
+    // the set never loses a member to death, so the hold beat's
+    // mourning (which diffs this set) stays silent — consistent with
+    // the instrument changing what the bar means.
+    livingVeteranIds(w) {
+      try {
+        const log = (this.state && this.state.waveKillLog) || [];
+        const roster = ((this.state && this.state.village && this.state.village.roster) || []);
+        const scholarId = this.villagerId;
+        const vpCache = {};
+        const vpOfId = (vid) => {
+          if (vid === scholarId) return null;
+          if (!(vid in vpCache)) {
+            let vp = null;
+            try { vp = (typeof this.vpOf === 'function') ? this.vpOf(vid) : null; } catch (e) { vp = null; }
+            vpCache[vid] = vp;
+          }
+          return vpCache[vid];
+        };
+        const isLiving = (vid) => {
+          if (vid === scholarId) return true;
+          if (roster.indexOf(vid) < 0) return false;
+          const vp = vpOfId(vid);
+          return !!(vp && !vp.dead);
+        };
+        const killShape = ((typeof process !== 'undefined' && process.env && process.env.VETSHAPE) === '1');
+        const seen = new Set();
+        for (const e of log) {
+          if (!e || !e.by || ((e.w | 0) < (w - 1))) continue;
+          if (!killShape && !isLiving(e.by)) continue;
+          seen.add(e.by);
+        }
+        return Array.from(seen);
+      } catch (e) { return []; }
+    },
     // waveCombatReadiness(w): the real combat-readiness representation
     // (design call #4, 2026-10-16). Standing opens the wave door; this
     // decides whether the village walks through. Four named bars, all read
@@ -281,27 +325,7 @@
           }
         } catch (e) { tricks = 0; }
         let veterans = 0;
-        try {
-          const log = (this.state && this.state.waveKillLog) || [];
-          const seen = new Set();
-          // VETSHAPE instrument (sim-vetshape, 2026-10-17, scale-onramp):
-          // default OFF. OFF = pristine behavior (living killers only) —
-          // byte-identical; the det-gate in scripts/test-vetshape-20261017.js
-          // pins that. ON (VETSHAPE=1) = the "bar changes shape" instrument
-          // for Steve's #427 readiness-gate call (named next from
-          // evidence/2026-10-17/sim-wave4census.md): count DISTINCT KILLER
-          // VIDS with wave-(w-1)+ kills in the same waveKillLog the gate
-          // already reads, living-OR-DEAD. Demand now 1 for wave 4, 2 for
-          // wave 5 (2026-10-18 recalibration). NOT a game change: the
-          // default stays living-veterans until Steve rules.
-          const killShape = ((typeof process !== 'undefined' && process.env && process.env.VETSHAPE) === '1');
-          for (const e of log) {
-            if (!e || !e.by || ((e.w | 0) < (w - 1))) continue;
-            if (!killShape && !isLiving(e.by)) continue;
-            seen.add(e.by);
-          }
-          veterans = seen.size;
-        } catch (e) { veterans = 0; }
+        try { veterans = (this.livingVeteranIds(w) || []).length; } catch (e) { veterans = 0; }
         const short = [];
         if (armored < (dem.armored | 0)) short.push('armor');
         if (armed < (dem.armed | 0)) short.push('weapons');
@@ -485,7 +509,102 @@
             ? `📡 The fifth draft stays in the wings. It wants a village that can fight — ${bars}.`
             : `📡 The fifth draft stays in the wings — ${bars}.`);
         }
+        // MOURNBLOODED (sim-mournblooded-b, 2026-11-11, backlog #472):
+        // the hold beat names the veteran bind honestly, then — when a
+        // blooded veteran died since the last beat — names the loss too.
+        // Never breaks the hold beat: a mourning failure stays silent.
+        try { this._standingMournFallen(key, key); } catch (e) {}
       } catch (e) {}
+    },
+    // _standingMournFallen(key, wave): MOURNBLOODED (sim-mournblooded-b,
+    // 2026-11-11, backlog #472 — sim-vetcompose sense #2/#3). The hold
+    // beat names the veteran bind honestly ("blood your fighters (1 of
+    // 2 veterans)") but when a blooded veteran died between beats it
+    // fell back to "(0 of 2 veterans)" with no fiction for the loss.
+    // This diffs the living-veteran set (livingVeteranIds) across
+    // hold-beat firings: a veteran present at the last beat and gone
+    // now is mourned — but ONLY with positive evidence of death.
+    // Death evidence is state.village.deathSeen (set by registerDeath,
+    // the one death hook — every villager death path calls it) OR a
+    // state.village.fallen memorial entry (every path mirrors the
+    // fallen push). A count drop with no death evidence — exile,
+    // flight, a roster move, snapshot noise — stays silent. The
+    // snapshot's scholar id is skipped: a scholar's death is
+    // succession fiction (playerDeath's own beat), not a hold-beat
+    // eulogy. The snapshot updates on EVERY firing, so a death is
+    // mourned exactly once, on the first hold beat after it. One
+    // short 📡 line per fallen veteran, in the hold beat's own voice,
+    // naming them and the beast they blooded (their latest qualifying
+    // kill in waveKillLog — the kill beat told the village to
+    // "REMEMBER the name"; the eulogy says the name stays remembered
+    // after the person is gone). The count logic, the readiness gate,
+    // and all win prices / deed gates are untouched. Returns the
+    // mourned vids (tests + telemetry); never throws.
+    _standingMournFallen(key, wave) {
+      try {
+        const st = this.state || {};
+        const day = ((st.scholar || {}).day || 0);
+        const current = (typeof this.livingVeteranIds === 'function') ? (this.livingVeteranIds(wave) || []) : [];
+        const curSet = new Set(current);
+        st._standingVeteranSet = st._standingVeteranSet || {};
+        const prev = st._standingVeteranSet[key] || null;
+        // Store the new snapshot BEFORE speaking, so a say-throw still
+        // advances it and the same death is never mourned twice.
+        st._standingVeteranSet[key] = { day: day, scholar: this.villagerId, vids: current.slice() };
+        if (!prev || !Array.isArray(prev.vids) || !prev.vids.length) return [];
+        const v = st.village || {};
+        const deathSeen = v.deathSeen || {};
+        const fallen = v.fallen || [];
+        const isDead = (vid) => {
+          if (deathSeen[vid] != null) return true;
+          for (const f of fallen) if (f && f.villagerId === vid) return true;
+          return false;
+        };
+        const mourned = [];
+        for (const vid of prev.vids) {
+          if (curSet.has(vid)) continue;
+          if (vid === prev.scholar || vid === this.villagerId) continue; // succession, not a mournable loss
+          if (!isDead(vid)) continue; // exile / flight / roster move / noise: silent
+          // Name the beast they blooded: their latest qualifying kill.
+          // monsterNoun is knowledge-gated — for a beast the village has
+          // not named it returns 'something', and "blooded the something"
+          // is not a sentence anyone would say. An unnameable beast
+          // takes the generic line (the veteran is still named).
+          let beast = null;
+          try {
+            const log = st.waveKillLog || [];
+            for (let i = log.length - 1; i >= 0; i--) {
+              const e = log[i];
+              if (e && e.by === vid && ((e.w | 0) >= (wave - 1))) { beast = e.mid; break; }
+            }
+          } catch (e) { beast = null; }
+          let bname = null;
+          if (beast) {
+            try { bname = this.monsterNoun ? this.monsterNoun(beast) : null; } catch (e) {}
+            if (!bname) { try { const d = (this.data.monsters || []).find(m => m.id === beast) || {}; bname = d.name || null; } catch (e) {} }
+          }
+          let mphrase = null;
+          if (bname && bname !== 'something') {
+            try { mphrase = (typeof this.articlePhrase === 'function') ? this.articlePhrase(bname, false) : bname; } catch (e) { mphrase = bname; }
+          }
+          // The name: npcName, the true name. displayName is the
+          // SCHOLAR's knowledge gate (a stranger is "A man, maybe 60s"
+          // until the scholar learns them) — but this is the System's
+          // broadcast about the VILLAGE's own blooded fighter: the
+          // village knows them by name (the kill beat told it to
+          // remember the name; the fire retells their kills by name),
+          // and "Remember the name" with no name is a nonsense line.
+          let nm = null;
+          try { nm = (typeof this.npcName === 'function' ? this.npcName(vid) : null) || (this.displayName ? this.displayName(vid) : null); } catch (e) {}
+          if (!nm) nm = 'Someone';
+          const line = mphrase
+            ? `📡 ${nm} blooded ${mphrase} — and the cameras lost them. One veteran fewer tonight. Remember the name.`
+            : `📡 ${nm} was blooded — and the cameras lost them. One veteran fewer tonight. Remember the name.`;
+          try { if (typeof this.sysSay === 'function') this.sysSay(line); } catch (e) {}
+          mourned.push(vid);
+        }
+        return mourned;
+      } catch (e) { return []; }
     },
     // _standingReleaseBeat(w): the draft opens — the world responds when
     // the village is ready, never before.
