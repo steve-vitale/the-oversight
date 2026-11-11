@@ -516,10 +516,23 @@ confirm earned its keep.
   `/tmp/ttc-gate-control.log`, `/tmp/ttc-rest-armed.log`,
   `/tmp/ttc-rest-control.log`, `/tmp/ttc-analyze16.log`
   (worktree-external scratch — not committed).
-- Zero src/js changed. Base at spawn ad6a04b27; master has not
-  moved during this run (re-verify at landing). Commits to be
+- Zero src/js changed. Base at spawn ad6a04b27; master moved
+  during this run — branch rebased onto the explicit current
+  master SHA (read in the main tree immediately before
+  rebasing), proof re-run green after the rebase. Commits to be
   merged locally by the coordinator; report 'committed in
   worktree, pending coordinator merge'.
+- Infrastructure incident (own goal, recovered): the confirm
+  proof's refuse-guard test planted its file on seed 150233 —
+  a real corpus cell. On the post-commit proof re-run it
+  overwrote then deleted the judged 150233-armed cell. The cell
+  was restored byte-identical from the corpus commit
+  (4fb33526; verified: seed 150233, armed, 140 days, 2 links,
+  0 instrument errors, anchor cc61e53b1e8e) and the test was
+  fixed to plant seed 150299, outside the band, so it can never
+  collide with a judged cell again. The summary JSON was
+  generated before the deletion and still describes the full
+  32-cell corpus.
 
 ## Convergence state
 

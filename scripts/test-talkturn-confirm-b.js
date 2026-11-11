@@ -188,15 +188,21 @@ ok('driver: confirm driver points at the confirm corpus dir and RUN, not the pil
 });
 
 ok('driver: refuses to overwrite an existing per-seed file (live spawn)', function () {
+  // Plant seed 150299 — OUTSIDE the confirm band (150233–150248) —
+  // so the planted file can never collide with a judged corpus cell.
+  // (An earlier version of this test planted 150233 and, on the
+  // post-commit proof re-run, overwrote then deleted the real
+  // 150233-armed cell; the cell was restored byte-identical from
+  // the corpus commit. The plant seed is outside the band now.)
   const repo = path.join(__dirname, '..');
   const dir = path.join(repo, 'evidence', '2026-11-10', 'perseed-talkturn-confirm-b');
-  const file = path.join(dir, 'talkturn-confirm-s150233-talkturn-confirm-armed.json');
+  const file = path.join(dir, 'talkturn-confirm-s150299-talkturn-confirm-armed.json');
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(file, '{}\n');
   try {
     const r = spawnSync(process.execPath, [path.join(__dirname, 'talkturn-confirm-driver-20261110.js')], {
       cwd: repo,
-      env: Object.assign({}, process.env, { SEEDS: '150233', RUN: 'talkturn-confirm', TALKTURN_MODE: 'armed', DAYS: '150' }),
+      env: Object.assign({}, process.env, { SEEDS: '150299', RUN: 'talkturn-confirm', TALKTURN_MODE: 'armed', DAYS: '150' }),
       encoding: 'utf8',
       timeout: 60000,
     });
