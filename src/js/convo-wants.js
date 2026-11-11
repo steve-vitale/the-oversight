@@ -1089,6 +1089,27 @@
         // DEFLECT POOL (journey landing 2026-10-12): same single-line class
         // as the other want deflectBeats — pooled like the favor commit/
         // close lines so the reaction isn't verbatim-identical every time.
+        // SETTLED-STATE BRANCH (journey crisis r176 2026-11-10): the pool
+        // below speaks of an UNPAID debt, but the want can still be live
+        // (stage < 3) after the favor itself is settled — r168 d50 Amara:
+        // "You came through on the sickness I'm fighting" and the closer
+        // "that sickness help, settled", yet dlg:cant served "Debts unpaid
+        // just sit there." A settled debt is not unpaid. When the favor's
+        // state is settled, serve the settled pool instead. Same state
+        // list the opener/staleOpener branch on (fulfilled/thanked kept,
+        // acknowledged/moot done-and-gone); the lines say "settled/done"
+        // without claiming gratitude, so they fit either shape.
+        try {
+          const c = this.convoGet(vid);
+          const favor = (c && c.want && c.want.favor) || (typeof this.convoGetFavor === 'function' && this.convoGetFavor(vid)) || null;
+          if (favor && ['fulfilled', 'thanked', 'acknowledged', 'moot', 'broken'].includes(favor.state)) {
+            return this.convoPickCycle(vid, 'deflect:repay:settled', [
+              '"Right. Forget it." A pause. "No — that one\'s settled. I just like saying it out loud."',
+              '"...Fine." They shake their head. "It\'s done now. I keep turning it over anyway."',
+              '"Okay. Your call." They file it away — settled, and counted.',
+            ]) || '"Right. Forget it." A pause. "No — that one\'s settled. I just like saying it out loud."';
+          }
+        } catch (e) { /* fall through to the unpaid pool */ }
         return this.convoPickCycle(vid, 'deflect:repay', [
           '"Right. Forget it." They won\'t forget. Debts unpaid just sit there.',
           '"...Fine. But I don\'t like owing." The debt stays on their face.',

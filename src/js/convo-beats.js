@@ -5,6 +5,7 @@
 //   - threadBeatTag(thread) -> beat tag for a conversation thread
 //   - Game.beatOf(vid) -> current beat {tag, topic, line}
 //   - Game.bridgeLine(vid, fromTopic) -> contextual bridge when leaving a topic
+//   - Game.convoBridgeLines() -> all bridge lines, flat (memory-quote gate)
 //   - Game.beatMenuResponses(vid) -> beat+topic aware replies with variation
 // rules:
 //   - tag_at_source: every NPC line is tagged when generated, not classified after the fact (code: convo-beats.js wrapOpening/wrapThreadBeat, Steve 2026-10-06)
@@ -207,6 +208,18 @@
     // Tag the bridge itself — it's a small beat, an invitation.
     c.lastBeat = { tag: 'small', topic: fromTopic || 'small', line: voiced };
     return voiced;
+  };
+
+  // convoBridgeLines (journey-crisis r176 2026-11-10): every
+  // subject-change bridge line, flat. The memory-quote gate
+  // (conversation.js convoSnippetIsRealBeat) refuses to quote any of
+  // them as a thread's memory: a bridge hands the floor back ("Look,
+  // forget it. You wanted something?") — it never carries the topic's
+  // proposition.
+  Game.convoBridgeLines = function () {
+    const out = [];
+    for (const k of Object.keys(BRIDGES)) for (const l of BRIDGES[k]) out.push(l);
+    return out;
   };
 
   // ============ TOPIC-AWARE REPLIES ============

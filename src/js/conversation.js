@@ -1268,6 +1268,33 @@
         return this.convoDeflectionLines().some(d => d.replace(/^"+|"+$/g, '') === t);
       } catch (e) { return false; }
     },
+    // convoIsSilenceLine / convoIsBridgeLine (journey-crisis r176
+    // 2026-11-10): membership in the silence pools (convo-mood.js) or
+    // the bridge pool (convo-beats.js). Normalization strips ALL double
+    // quotes from both sides: clipSnippet strips only leading/trailing
+    // quotes, so a stored snippet keeps inner ones ('They fill the
+    // quiet. "Anyway — where was I?') while the pool line keeps them
+    // all — quote-free comparison is the only form that matches both.
+    // A missing accessor (file not loaded) means "not a silence/bridge
+    // line" — the gate degrades to its pre-fix behavior, never a crash.
+    convoIsSilenceLine(text) {
+      try {
+        if (typeof this.convoMoodSilenceLines !== 'function') return false;
+        const norm = s => String(s == null ? '' : s).replace(/"/g, '').trim();
+        const t = norm(text);
+        if (!t) return false;
+        return this.convoMoodSilenceLines().some(l => norm(l) === t);
+      } catch (e) { return false; }
+    },
+    convoIsBridgeLine(text) {
+      try {
+        if (typeof this.convoBridgeLines !== 'function') return false;
+        const norm = s => String(s == null ? '' : s).replace(/"/g, '').trim();
+        const t = norm(text);
+        if (!t) return false;
+        return this.convoBridgeLines().some(l => norm(l) === t);
+      } catch (e) { return false; }
+    },
 
     // ACK LINES (journey-deepening r13 2026-10-16): thinking-aloud preamble
     // chunks the engine prepends to beats — topic acks (convo-wants.js),
@@ -1724,6 +1751,20 @@
       const t = String(sn).replace(/^["'“”\s]+|["'“”\s.,!?;:—-]+$/g, '').trim();
       if (!t || t.split(/\s+/).length < 4) return false;
       try { if (this.convoIsDeflectionLine(sn)) return false; } catch (e) {}
+      // R21 (journey-crisis r176 2026-11-10): a silence/closing line is
+      // stage direction, not thread content (convo-mood.js r25 says so
+      // outright) — the thread's last beat is often the sitting's closing
+      // silence, so the resume quoted it as the memory ("We never finished
+      // talking about what's been happening — 'You say nothing. Neither
+      // do they, for a while — and it's fine.'" — 6 sightings, r176
+      // panel, the fourth consecutive panel at >= 1). Same for a
+      // subject-change bridge ("Look, forget it. You wanted something?"):
+      // a floor-hander, never the topic's proposition. Both are rejected
+      // here so the plant walks back to substance (or plants nothing),
+      // and the resume-time guard drops quotes planted before the fix. A
+      // dropped quote is harmless — the resume still names the thread.
+      try { if (this.convoIsSilenceLine(sn)) return false; } catch (e) {}
+      try { if (this.convoIsBridgeLine(sn)) return false; } catch (e) {}
       if (/never (did )?finish(ed)? talking about|never did get back to|we left it|we wandered off|proper ending/i.test(sn)) return false;
       return true;
     },

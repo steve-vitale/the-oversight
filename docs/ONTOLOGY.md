@@ -364,7 +364,7 @@ Real back-and-forth dialogue. Player always has response choices.
 ### convo-beats (`convo-beats.js`)
 Beat-tagged conversation. Every NPC line is tagged at generation time with its beat (offer, question, news, feeling, small). Replies are generated from beat + topic, never a generic grab-bag. Topic changes carry explicit bridge lines.
 
-**Provides:** threadBeatTag(thread) -> beat tag for a conversation thread, Game.beatOf(vid) -> current beat {tag, topic, line}, Game.bridgeLine(vid, fromTopic) -> contextual bridge when leaving a topic, Game.beatMenuResponses(vid) -> beat+topic aware replies with variation
+**Provides:** threadBeatTag(thread) -> beat tag for a conversation thread, Game.beatOf(vid) -> current beat {tag, topic, line}, Game.bridgeLine(vid, fromTopic) -> contextual bridge when leaving a topic, Game.convoBridgeLines() -> all bridge lines, flat (memory-quote gate), Game.beatMenuResponses(vid) -> beat+topic aware replies with variation
 
 **Rules:**
 - tag_at_source: every NPC line is tagged when generated, not classified after the fact (code: convo-beats.js wrapOpening/wrapThreadBeat, Steve 2026-10-06)
@@ -396,7 +396,7 @@ Dialogue-driven conversation turn handling. Phase 1 (2026-10-08): the dead menu 
 ### convo-mood (`convo-mood.js`)
 Per-conversation emotional state (rapport). Warmth and tension shift as you talk; mood is derived from who they are now, never stored per villager.
 
-**Provides:** convoMoodInit(vid), convoMoodBand(vid), convoMoodShift(vid, delta), convoMoodFlush(vid), convoMoodBeat(from, to), convoMoodSilence(vid), convoMoodGoodbye(vid), convoMoodMod(vid), convoMoodReceptivity(vid)
+**Provides:** convoMoodInit(vid), convoMoodBand(vid), convoMoodShift(vid, delta), convoMoodFlush(vid), convoMoodBeat(from, to), convoMoodSilence(vid), convoMoodSilenceLines() -> all silence/closing lines (memory-quote gate), convoMoodGoodbye(vid), convoMoodMod(vid), convoMoodReceptivity(vid)
 
 **Rules:**
 - mood_derived: c.mood is -3..3, re-initialized every startConvo from current trust + current npcMood; nothing is stored per villager (code: convo-mood.js, convoMoodInit; Steve 2026-10-06 unique-person law)
