@@ -1,0 +1,81 @@
+=== r132-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Lucia (gen_b70b9gf) occ=Fisherman --
+OPENING: "I can't reach this properly. Could you clean it out for me? Please."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Stand beside them first — same side of the Haven door — then help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [goon] "And?"
+THEM: "Come see what I found. You won't believe it."
+INVITE-ANSWER trust=31
+YOU: [betrayal:decline] "Not this time."
+THEM: "Another time, then." A small thing, pocketed.
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Saw things with too many joints. Give them room. That's the whole lesson."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Never mind me. What were you going to say?"
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Good question." "The seedlings Elif touched are twice the size of mine. Same soil. Same water."
+YOU: [goon] "Keep going."
+THEM: They relax, a fraction. This is going well.
+closing: "Go. Think about what I said. Really think."
+
+-- Marvin (gen_0hlti5a) occ=locksmith --
+OPENING: "What do you make of all this? Really."
+YOU: [ans:q_think:a_end] "The world's ended. We're what's left."
+THEM: "Hah. Bleak. Probably true. I keep looking for the part where it's not."
+YOU: [goon] "And?"
+THEM: "I think we're an experiment someone forgot to label. And the unlabeled part is what scares me — it means nobody's coming to check the results."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on what you make of all this. Do you understand?"
+YOU: [gq:yn:yes] "Yes."
+THEM: "I see." They take a moment to think about your answer.
+YOU: [goon] "And?"
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "I can't. Not today. Ask me when the work's done."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+closing: "Later."
+
+-- Marta (gen_hutsll0) occ=interpreter --
+OPENING: "What do you miss most? From before."
+YOU: [ans:q_miss:a_food] "A real hot meal."
+THEM: "God. Yes. I dream about soup. Actual soup, with a spoon."
+YOU: [goon] "Keep going."
+THEM: "Sure — Hot showers. Not the big things — the small, stupid, perfect things. Columbus, Ohio in the morning, coffee going, nobody trying to kill me. I miss being bored."
+YOU: [goon] "Keep going."
+THEM: "Walk with me? I want another pair of eyes on something."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: You walk to the tree line with Marta. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "Watch for this: The hissing stops. Ducks in a row, every time. It hunts by day — watch the open ground."
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "a ridge with a view for miles — I'll show you on the map sometime. It's real."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Funny thing: Still on what you miss most."
+YOU: [goon] "Keep going."
+THEM: They hear the warmth in it. They're not ready to let it in.
+closing: "Okay! Moving again. Can't sit still."
+
+-- Guillermo (gen_avwrz90) occ=crossing guard --
+OPENING: Guillermo speaks only 🇪🇸 Spanish. No shared words at all — just eyes, hands, and patience.
+«No entiendo nada. ¡Nada!» (you catch 'nada' — nothing)
+(They mime walking — pointing at themselves, then at you, then toward the ridge. The meaning is unmistakable: come with me.)
+YOU: [nv:nod] (nod slowly)
+THEM: «Bien dicho. Exactamente.» (you catch 'dicho' — said) They nod, holding your gaze a beat longer.
+YOU: [nv:smile] (smile)
+THEM: «Gracias. De verdad, gracias.» (you catch 'Gracias' — thanks) A grin breaks through, quick and warm.
+YOU: [nv:pointself] (point: you, them, together)
+THEM: «Eres un sol, gracias de corazón.» (you catch 'sol' — sun, 'corazón' — heart) You point at yourself, then at them, then at the fire. Together. They get it.
+YOU: [nv:listen] (listen hard — catch words)
+THEM: You listen hard, watching their mouth shape the words. «¿Tienes comida? ¿Algo?» (Do you have food? Anything? — you're fairly sure)
+YOU: [goon] (watch quietly)
+THEM: They glance toward their own thoughts; the exchange is winding down.
+(no pick — winding down)
+(stall menu: leave|nv:nod)
+closing: A final nod. They touch their chest, then point at you — a promise without words.

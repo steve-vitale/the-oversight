@@ -1,0 +1,84 @@
+=== r132-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Tyrone (gen_kvdrp63) occ=Baker --
+OPENING: "The cistern's nearly dry — 6 liters left. Haul the creek with me at dawn? Two buckets each, there and back."
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "I'm out on the road, away from Haven — no dawn meet while I'm out, I'm afraid. Catch me when I'm back and we'll set it then."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that water haul."
+YOU: [goon] "Please, go on."
+THEM: "What's the worst thing you've done since the sky changed?"
+YOU: [ans:q_guilty:a_tell] "There's something I regret. I'm not ready to talk about it."
+THEM: No judgment in their face. "We're all doing math that doesn't add up. You're still here. That counts."
+YOU: [goon] "Please, go on."
+THEM: "I don't answer that one myself. Not yet. Maybe when I've decided whether surviving counts as an excuse or just a reason."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Look, forget it. You wanted something?"
+YOU: [ask:personal] "I'd like to know you better, if that's alright."
+THEM: "Huh. Let me think about that." "I don't pray, exactly. But I talk to the sky sometimes. It hasn't answered yet."
+YOU: [dlg:more] "I’m listening."
+THEM: "You know what's weird? I'm a baker — was a baker — and none of that prepared me for any of this."
+closing: "Later."
+
+-- Brayden (gen_gcsrx40) occ=tattoo artist --
+OPENING: "About what happened to my taken kin — I keep dreaming about rows of pods. Humming. Tell me I'm not the only one."
+YOU: [dlg:more] "Tell me about them."
+THEM: "It's my nephew, Michael. Went with his father in the Taking. The System says the little ones are cozy. I do not know what cozy means at that scale. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person."
+YOU: [goon] "I'm listening, I promise."
+THEM: Something eases in their shoulders. They're really talking to you now.
+YOU: [goon] "I'm listening, I promise."
+THEM: "Are you angry? At whoever did this. At the sky. At anything."
+YOU: [ans:q_angry:a_yes] "Furious. Most days."
+THEM: "Good. Anger's fuel. Just — point it somewhere useful."
+YOU: [goon] "I'm listening, I promise."
+THEM: "Can I just say — Anger's a fire — useful if you cook with it, deadly if you sleep next to it. I cook with mine. Most days."
+closing: "Good talk."
+
+-- Zhihao (gen_m97zwki) occ=mechanic --
+OPENING: "The cistern's nearly dry — 0 liters left. I can't carry enough alone. First light, the creek, you and me?"
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Your partner is inside the Haven hall. Go through the door to meet them.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Never mind me. What were you going to say?"
+YOU: [ask:personal] "I'd like to know you better, if that's alright."
+THEM: "Huh. Let me think about that." "I'm collecting skills like they're currency — making do today, something else tomorrow."
+YOU: [goon] "Please, go on."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:more] "I’m listening."
+THEM: "You ever notice how quiet it gets out here at night? Like the world's holding its breath."
+YOU: [dlg:react] (listen)
+THEM: "I taught myself making do. The System was no help — I asked for a sandwich. We don't always get what we ask for."
+YOU: [party_name] "We should name this. Us."
+THEM: "A name. Okay." You say it out loud, trying the shape of it:
+1. "THE NIGHT SHIFT" (📺 the System suggests)
+2. "The Hearth" (Tyrone suggests)
+3. "The Company" (or plain)
+(Which one? It'll stick.)
+closing: "This was good. We should do this more. Not the apocalypse part — the talking part."
+
+-- Matteo (gen_7owm6fw) occ=Midwife --
+OPENING: Matteo speaks only 🇮🇹 Italian. No shared words at all — just eyes, hands, and patience.
+«Che posto è questo? Dove siamo?» (you catch 'Dove' — where)
+YOU: [nv:nod] (nod slowly)
+THEM: «Sì, la penso allo stesso modo.» (you catch 'stesso' — same) They nod back, a little quicker this time. "Food?" — they grin, proud of the one English they know.
+YOU: [nv:smile] (smile)
+THEM: «Sei una brava persona.» (You're a good person. — you're fairly sure) A grin breaks through, quick and warm.
+YOU: [nv:pointself] (point: you, them, together)
+THEM: «Non dimenticherò questo.» (I won't forget this. — you're fairly sure) You press a hand to your own chest, then point at them. Together — they get it.
+YOU: [nv:listen] (listen hard — catch words)
+THEM: You hold still and let the sounds settle. «Hai da mangiare? Qualcosa?» (Do you have food? Anything? — you're fairly sure)
+YOU: [speak_back] (try your Italian)
+THEM: "Hm. Almost." Matteo corrects the one word, gently, like setting a bone. "Again." You say it right. They nod, satisfied with both of you.
+YOU: [goon] (watch quietly)
+THEM: "Alright. Catch you later."
+(no pick — winding down)
+(stall menu: leave|nv:nod)
+closing: They press their palms together — thanks, or goodbye, or both. Then turn back to their own thoughts.

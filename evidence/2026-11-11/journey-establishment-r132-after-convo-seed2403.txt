@@ -1,0 +1,80 @@
+=== r132-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Mai (gen_04ksgt2) occ=Social worker --
+OPENING: "Have you heard anything? About the taken. The pods. Anything at all."
+YOU: [gq:yn:yes] "Yes."
+THEM: "All right. Thank you for telling me."
+YOU: [goon] "Go on."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [goon] "Go on."
+THEM: "So what's your plan here? Just... get through it?"
+YOU: [ans:q_plan:a_survive] "One day at a time."
+THEM: "Honest. I can work with honest."
+YOU: [goon] "Go on."
+THEM: "Mine's simple: learn one useful thing a week. This week it's weather-reading. A plan's just a direction you argue with. Anyway, that's me."
+YOU: [dlg:more] "What do you remember?"
+THEM: "It's my uncle, Arturo. Was taken. He could fix anything. Anything. I wonder what they even measure. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [goon] "Go on."
+THEM: "Come get air with me. I need to think out loud."
+closing: "Talk later? I'm already thinking about three other things."
+
+-- Carmine (gen_w6tnf0z) occ=blacksmith --
+OPENING: "About whether you're angry — Are you angry? At whoever did this. At the sky. At anything."
+YOU: [ans:q_angry:a_yes] "Furious. Most days."
+THEM: "Good. Anger's fuel. Just — point it somewhere useful, friend."
+YOU: [goon] "Yeah?"
+THEM: The warmth pulls back a notch. They're weighing something.
+YOU: [goon] "Yeah?"
+THEM: "Anger's a fire — useful if you cook with it, deadly if you sleep next to it. I cook with mine. Most days."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on whether you're angry."
+YOU: [goon] "Yeah?"
+THEM: "Has this changed you? Like, fundamentally?"
+YOU: [ans:q_change:a_tell] "I don't recognize the person in my head anymore. I think that's good? I don't k
+THEM: "Heh. The old you got you here. The new you keeps you here. Both count."
+YOU: [goon] "Yeah?"
+THEM: "I used to be a blacksmith who worried about being on time. Now I worry about being alive. Same worry, bigger font. So yes — and also no."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+closing: "Later."
+
+-- Layla (gen_y1yw7i0) occ=Vintner --
+OPENING: "Water's almost gone — 4 liters. I can't carry enough alone. First light, the creek, you and me?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Finish the current event before hauling water.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Wait — I'm away from Haven right now, out on the road. I can't promise a dawn meet from out here — find me when I'm back and we'll set it then."
+YOU: [goon] "Yeah?"
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+INVITE-ANSWER trust=10
+YOU: [betrayal:decline] "Not this time."
+THEM: "Another time, then." A small thing, pocketed.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that water haul."
+YOU: [goon] "Yeah?"
+THEM: "We're done for now. Not done-done. For now."
+YOU: [agree] "You're right."
+THEM: "Exactly. Don't forget you said that."
+(ended by engine)
+
+-- Ae-ri (gen_ekm3wjy) occ=exterminator --
+OPENING: "Can we talk?" Ae-ri sits down near you. "Just... talk. Like people used to."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: "Here. I made an extra." Ae-ri presses something into your hand — a decent tool, oiled and kept. (Useful. Keep it.)
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Pokeweed — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+YOU: [dlg:more] "I’m listening."
+THEM: "Do you believe in anything? Now, I mean. After everything."
+YOU: [ans:q_believe:a_tell] "I believe we get through this. I have to. The alternative doesn't work."
+THEM: "That's not naive. That's load-bearing. Hold onto it. I mean it."
+YOU: [goon] "Yeah?"
+THEM: "I believe in breakfast. In people showing up. Small, provable things. The big beliefs all broke — the small ones held."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on what you believe in. Simple as that."
+YOU: [goon] "Yeah?"
+THEM: "Alright — I should get back to it."

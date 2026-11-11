@@ -1,0 +1,78 @@
+=== r132-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Emilio (gen_o4jxwqp) occ=tattoo artist --
+OPENING: "I can't reach this properly. Could you take a look?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to them, on the same side of the Haven door, to help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one is Poison Hemlock. Look at the leaf, feel the stem, breathe it in. It'll stick."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Sugar Maple. Leaf, stem, smell. You won't forget it now."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That can wait — it isn't going anywhere. What's on your mind?"
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Good question." "People are talking about me. Take it for what it's worth."
+YOU: [goon] "Go on. I'm listening."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:more] "Tell me more."
+THEM: "Seen Ines press a palm to a wound and the bleeding just... slows. Nobody taught that."
+closing: "Don't forget what we talked about. I won't."
+
+-- Amara (gen_rbb2w39) occ=hotel housekeeper --
+OPENING: "About who you don't trust — Is there someone here you don't trust? Be honest."
+YOU: [ans:q_someone:a_tell] "Yeah. I'm not saying who. But yeah."
+THEM: Their eyes flick, just for a second, toward the fire. "Noted. I'll watch too."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: The warmth pulls back a notch. They're weighing something.
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "I don't distrust anyone exactly — I just haven't finished trusting most of them yet. There's a difference. A slow one."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on who you don't trust."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Has this changed you? Like, fundamentally?"
+YOU: [ans:q_change:a_tell] "I don't recognize the person in my head anymore. I think that's good? I don't k
+THEM: "The old you got you here. The new you keeps you here. Both count."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "I used to be a hotel housekeeper who worried about being on time. Now I worry about being alive. Same worry, bigger font. So yes — and also no."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Never mind me. What were you going to say?"
+closing: "Take care of yourself."
+
+-- Gilberto (gen_81idipe) occ=dry cleaner --
+OPENING: "I hate to ask this, but whatever this is, it's getting worse — I'm achy and wrung out, barely keeping food down. I need help. Please."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: You need to be right next to them, same side of the Haven door, to help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Thank you. Just — thank you. I'll be here, resting."
+YOU: [goon] "Go on. I'm listening."
+THEM: "Walk with me? I want another pair of eyes on something."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: "All right —" Gilberto starts to stand, then sinks back down. "Maybe not today. The fire's got me."
+YOU: [goon] "Go on. I'm listening."
+THEM: "I should go. You know where to find me."
+YOU: [agree] "You're right."
+THEM: "Right? RIGHT? Finally someone says it."
+(ended by engine)
+
+-- Mogamad (gen_lspg32k) occ=Veterinarian --
+OPENING: "We're down to 9 liters of clean water. I need someone to haul water with me at first light. Two of us, half the trips. Will you come?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to your partner, on the same side of the Haven door.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Wait — I'm away from Haven, out on the road. I can't promise a dawn meet while I'm out — find me when I'm back, and we'll set it then."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "Cowpea — crush the leaf, smell it, taste the stem. That's how you know it."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Okra. Remember the leaf, the stem, the smell — that's the whole of it."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that water haul."
+YOU: [goon] "Go on. I'm listening."
+THEM: "Did you leave someone behind? ...Sorry. You don't have to answer that."
+YOU: [ans:q_left_behind:a_yes] "Yes."
+THEM: Just: "Yeah." A long quiet. "Me too."
+YOU: [goon] "Go on. I'm listening."
+THEM: "I don't talk about that. Not because it's secret — because saying it out loud makes it real in a way I can't afford yet. Someday. Not today."
+closing: "Alright. Back to work."

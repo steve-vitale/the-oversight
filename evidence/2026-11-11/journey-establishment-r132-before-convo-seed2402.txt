@@ -1,0 +1,81 @@
+=== r132-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Kyle (gen_z5t0hd8) occ=bartender --
+OPENING: "Do you dream about before? Or is it all — this — now?"
+YOU: [ans:q_dream:a_before] "Before. Every night. It's the only place it still exists."
+THEM: "Then it's not gone. Not really. Keep going back."
+YOU: [goon] "Yeah?"
+THEM: "Denver, always. Same dream: I'm walking home and the street keeps getting longer. I wake up tired, like I actually walked it."
+YOU: [dlg:doubt] "That doesn't quite add up."
+THEM: "...What's that supposed to mean?" Their voice goes careful.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on what you dream about."
+YOU: [goon] "Yeah?"
+THEM: A small chill settles between you. They're choosing words more carefully.
+YOU: [goon] "Yeah?"
+THEM: "What's the kindest thing someone's done for you out here?"
+YOU: [ans:q_kindness:a_tell] "I've watched people share food they couldn't spare. Quiet. No performance. Just
+THEM: "Hear me out — That's the good stuff. Quiet generosity. It's holding this whole thing together."
+YOU: [goon] "Yeah?"
+THEM: "Someone saved me the last of the stew once. Didn't say anything, just put the bowl down and walked off. I think about that bowl more than I think about the monsters. Good talking."
+closing: "Go. Think about what I said. Really think."
+
+-- Aurora (gen_6a9gt9b) occ=Midwife --
+OPENING: "The cistern's nearly dry — 2 liters left. I need someone to haul water with me at first light. Two of us, half the trips. Will you come?"
+YOU: [goon] "Hm. Let me think — go on, first."
+THEM: Their whole posture softens around you.
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Finish the current event before hauling water.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+YOU: [goon] "I'm listening."
+THEM: "Help me haul something back? Too much for one."
+INVITE-ANSWER trust=91
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Aurora shows you where they go to think. "Don't tell the others. Everyone needs one place."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:personal] "You never really told me your story."
+THEM: "Huh. Let me think about that." "We should name this place. 'Camp' is what you call somewhere you're leaving."
+YOU: [goon] "Go on."
+THEM: Something in them almost softens — then doesn't. Not yet.
+closing: "Later."
+
+-- Chadni (gen_btvjoud) occ=mason --
+OPENING: "About that news I was bursting to share — Have you heard? No? Good, I get to tell you first."
+YOU: [gq:yn:yes] "Yes."
+THEM: "All right. Thank you for telling me."
+YOU: [goon] "Go on."
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [dlg:more] "Go on."
+THEM: "Okay, so — Vasyl talks to the garden. The garden listens. I've seen it. Don't say I told you."
+YOU: [dlg:react] "I see."
+THEM: "Well." A breath. "That's where things stand."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that news."
+YOU: [goon] "Go on."
+THEM: "So what's your plan here? Just... get through it?"
+YOU: [ans:q_plan:a_survive] "One day at a time."
+THEM: "Honest. I can work with honest."
+YOU: [goon] "Go on."
+THEM: "Mine's simple: learn one useful thing a week. This week it's foraging. A plan's just a direction you argue with."
+closing: "Take care of yourself."
+
+-- Santiago (gen_rretxch) occ=ER nurse --
+OPENING: "Can I tell you something? I saw something in the woods I'm not telling anyone about."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Rosary Pea. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Kudzu Root. Remember the leaf, the stem, the smell — that's the whole of it."
+YOU: [secret:promise] "That stays between us."
+THEM: "Thank you for hearing it. I needed someone to know — and I needed it to stop with you."
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "Okay, real question: what's the funniest thing you've seen since we got here? I desperately need it."
+YOU: [gq:open:take] "I need a moment to think about that."
+THEM: "Take your time."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that question."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Someone should watch your back. Might as well be me."
+YOU: [goon] "I'm listening."
+THEM: "I should go. You know where to find me."

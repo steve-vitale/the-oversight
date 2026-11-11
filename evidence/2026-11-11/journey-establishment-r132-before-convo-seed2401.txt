@@ -1,0 +1,84 @@
+=== r132-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Jessica (gen_34ive70) occ=bike messenger --
+OPENING: "This cut — I can't clean it properly one-handed. Could you take a look?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to them, on the same side of the Haven door, to help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "Muscadine Grapes — crush the leaf, smell it, taste the stem. That's how you know it."
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "a ridge with a view for miles — I'll show you on the map sometime. It's real."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Look, forget it. You wanted something?"
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Good question." "People are talking about me. Take it for what it's worth."
+YOU: [goon] "Take your time."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [dlg:more] "I’m listening."
+THEM: "Nikos walked right up to that snarling stray. It went quiet. QUIET."
+closing: "I should — yeah. Later."
+
+-- DeAndre (gen_yyzm3xq) occ=musician --
+OPENING: "I can't reach this properly. Could you clean it out for me? Please."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Get to their side of the Haven door and stand next to them — then you can help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [goon] "I'm here. Go on."
+THEM: "Come see what I found. You won't believe it."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: It's quiet at the hollow. DeAndre doesn't say much. Sometimes that's the whole point.
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Saw things with too many joints. Give them room. That's the whole lesson."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Huh. Let me think about that." "Katarina? They're fine. We're all a little broken right now."
+YOU: [goon] "Take your time."
+THEM: A warmth settles over the conversation — they lean in a little.
+closing: "I'll be okay. Don't worry about me. Worry about... actually, don't worry at all."
+
+-- Dante (gen_td4bql7) occ=Mortician --
+OPENING: "We gave them a good burial. Doesn't feel like enough, does it?"
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: You walk to the cache spot with Dante. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+YOU: [dlg:comfort] "You alright?"
+THEM: A long exhale. "I'll get there. Just needed a minute where I didn't have to be fine."
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Good question." "Leave Katarina alone. They're harmless. Weird, but harmless."
+YOU: [goon] "Take your time."
+THEM: Something eases in their shoulders. They're really talking to you now.
+YOU: [dlg:more] "I’m listening."
+THEM: "Farid headed out to see what's out there."
+YOU: [dlg:react] (listen)
+THEM: They nod slowly, not quite done, not quite continuing.
+YOU: [goon] "Take your time."
+THEM: "I've got things to do. People to avoid. You know."
+YOU: [agree] "You're right."
+THEM: "Huh. We agree. Don't let it go to your head."
+(ended by engine)
+
+-- Farid (gen_adfwhhd) occ=HVAC tech --
+OPENING: "I don't know what to do with my hands today."
+INVITE-ANSWER trust=91
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: "I buried this before the Scattering. Seemed stupid to keep it secret." Farid digs up a wrapped bundle — food, still good. (+1231 kcal to the pantry.)
+YOU: [dlg:comfort] "You alright?"
+THEM: "Thanks. ...Thanks for saying that. Be kind to yourself, okay?"
+YOU: [ask:personal] "I'd like to know you. Properly, this time."
+THEM: "You want to know about that? Okay." "I've started rating sunsets. Tonight's a seven. Yesterday was a nine, no notes. I mean it."
+YOU: [goon] "You don't have to say it all at once."
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [dlg:more] "Go on."
+THEM: "I wonder if Winnipeg, Canada looks like this now. Empty. Quiet. Or if it's worse there."
+YOU: [dlg:react] (listen)
+THEM: "Anyway." A small smile.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on your story."
+YOU: [goon] "You don't have to say it all at once."
+THEM: "What's something you're good at that nobody here knows about?"
+closing: "...Thanks for being here. That's all."

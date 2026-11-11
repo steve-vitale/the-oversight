@@ -1,0 +1,80 @@
+=== r132-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Ursula (gen_nk6a6y3) occ=Rancher --
+OPENING: "What's something from your old life that's actually useful here?"
+YOU: [ans:q_before_skill:a_tell] "Patience. Sounds dumb. But waiting — really waiting, without fidgeting — that's
+THEM: "Not dumb at all. The people who can't wait are the ones who make mistakes. You're an asset."
+YOU: [goon] "Yeah?"
+THEM: "Being a rancher taught me to read people fast — who's lying, who's scared, who needs a job. Turns out that's a survival skill. Who knew."
+YOU: [goon] "Yeah?"
+THEM: "Help me haul something back? Too much for one."
+INVITE-ANSWER trust=16
+YOU: [betrayal:decline] "Not this time."
+THEM: "Another time, then." A small thing, pocketed.
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "Water Chestnut. Remember the leaf, the stem, the smell — that's the whole of it."
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "a ridge with a view for miles — I'll show you on the map sometime. It's real."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on your useful old-life skills."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "...Fine. This had better be worth it."
+closing: "Good talk. Now let's go be useful."
+
+-- Pablo (gen_88p6ny8) occ=electrician --
+OPENING: Joy is a resource. I'm foraging for it.
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "Banyan Fig — crush the leaf, smell it, taste the stem. That's how you know it."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Autumn Crocus. Remember the leaf, the stem, the smell — that's the whole of it."
+YOU: [dlg:more] "Go on."
+THEM: "I'm collecting jokes like firewood. We'll need them when it's dark."
+YOU: [dlg:react] (listen)
+THEM: "I laugh at the System's expense. It's the only currency it can't tax."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Alright. But I'm not carrying your stuff."
+YOU: [goon] "Say more about that."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [goon] "Say more about that."
+THEM: "Moving! But — good talk! More later!"
+YOU: [more] "One more thing —"
+THEM: "Watch — I'll get a real laugh out of this camp before the week is out."
+(ended by engine)
+
+-- Deirdre (gen_tjjrbe3) occ=radio DJ --
+OPENING: "About that news I was bursting to share — You'll never guess what I saw by the treeline."
+YOU: [dlg:more] "Tell me more."
+THEM: "The treeline, this morning — something moved out there, big. By the time I looked properly it was gone. But I saw it."
+YOU: [dlg:react] "No kidding."
+THEM: "Okay, so — Caleb hums at the beans and they climb faster. Laugh if you want. I've watched. Don't say I told you."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that news."
+YOU: [goon] "I'm listening."
+THEM: Something eases in their shoulders. They're really talking to you now.
+YOU: [goon] "I'm listening."
+THEM: "Any regrets? The real kind, not the small stuff."
+YOU: [ans:q_regret:a_tell] "I didn't say what I needed to say. To someone. Now I can't."
+THEM: Quiet. "Yeah. I think everyone's carrying one of those."
+YOU: [goon] "I'm listening."
+THEM: "I regret the ordinary days I rushed through. All those Columbus, Ohio mornings I spent annoyed at small things. I'd pay anything for one annoyed morning now."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Okay. Yeah. I trust you."
+closing: "Well. That happened."
+
+-- Abel (gen_169bzic) occ=taxi driver --
+OPENING: "You'll never guess what I saw by the treeline."
+YOU: [dlg:more] "What happened?"
+THEM: "That's... pretty much all of it, honestly."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway — that's my problem, not yours. What did you want?"
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Pablo headed out to find someone. It'll keep."
+YOU: [dlg:react] (listen)
+THEM: They nod slowly, not quite done, not quite continuing.
+YOU: [dlg:doubt] "That doesn't quite add up."
+THEM: "...What's that supposed to mean?" Their voice goes careful.
+YOU: [goon] "What else did you hear?"
+THEM: "I should go. You know where to find me."
+YOU: [joke] (crack a joke)
+THEM: "Huffs — which, for them, is hysterics."
+(ended by engine)

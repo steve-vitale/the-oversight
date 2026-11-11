@@ -1,0 +1,82 @@
+=== r132-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Logan (gen_x3ymjgy) occ=Veterinarian --
+OPENING: "Do you still count the days? I lost track days ago."
+YOU: [ans:q_name_day:a_count] "I count. Someone has to."
+THEM: "Good. Keep counting. The days need witnesses. Simple as that."
+YOU: [goon] "I'm listening."
+THEM: "I count meals, not days. Three meals since the rain. Two since the alarm. Days are for people with calendars. I have a stomach."
+YOU: [dlg:doubt] "That doesn't quite add up."
+THEM: "...What's that supposed to mean?" Their voice goes careful.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on what day it is."
+YOU: [goon] "I'm listening."
+THEM: The air goes tight. Their eyes narrow, just slightly.
+YOU: [goon] "I'm listening."
+THEM: "Did you sleep? I kept hearing things out past the treeline."
+YOU: [ans:q_night:a_yes] "I heard them too."
+THEM: They go still. "So it's not just me. Good. That's... good to know. Bad, but good."
+YOU: [goon] "I'm listening."
+THEM: "I sleep in shifts now — two hours, up, listen, two more. My body learned it before my head agreed. Columbus, Ohio never taught me that. The treeline did."
+closing: "Take care of yourself."
+
+-- Shanice (gen_qrs21cn) occ=ER nurse --
+OPENING: "Okay, so — something happened this morning."
+YOU: [dlg:more] "What happened?"
+THEM: "Okay, so — Onni sees in the dark. Not well — but better than you. Better than me. Don't say I told you."
+YOU: [goon] "Go on."
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: It's quiet at the trap line. Shanice doesn't say much. Sometimes that's the whole point.
+YOU: [dlg:react] "No kidding."
+THEM: "The treeline, this morning — something moved out there, big. By the time I looked properly it was gone. But I saw it."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that news."
+YOU: [goon] "Go on."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [goon] "Go on."
+THEM: "I should get back to it."
+YOU: [agree] "You're right."
+THEM: "Yeah. That's about right."
+(ended by engine)
+
+-- Willie (gen_zhwjmam) occ=radio DJ --
+OPENING: "Have you heard anything? About the taken. The pods. Anything at all."
+YOU: [gq:yn:yes] "Yes."
+THEM: They nod. "Okay."
+YOU: [goon] "Go on."
+THEM: "What scares you most about what's happening? The real answer."
+YOU: [ans:q_system_fear:a_tell] "That it's intentional. That someone's watching and this is all... on purpose."
+THEM: They go quiet. "Yeah. Me too. The randomness would almost be kinder."
+YOU: [goon] "Go on."
+THEM: "That we're interesting to it. Being watched means being kept. I'd rather be boring to the sky. Boring things get left alone."
+YOU: [dlg:more] "Tell me about them."
+THEM: "It's my best friend, Violet. Was taken at the Scattering. We had plans. Stupid, small, beautiful plans. The pods get into my sleep some nights. Row on row of them, humming like a held note -- and I wake up reaching for something that isn't there."
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [goon] "Go on."
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Willie shows you where they go to think. "Don't tell the others. Everyone needs one place."
+closing: "Alright. Same time tomorrow, if the world allows."
+
+-- Māui (gen_38p2jc0) occ=taxi driver --
+OPENING: "You talk to it -- the System. Have you ever asked? About the taken -- about Daniel?"
+YOU: [gq:yn:yes] "Yes."
+THEM: "I see." They take a moment to think about your answer.
+YOU: [dlg:more] "What do you remember?"
+THEM: "It's my nephew, Daniel. Went with his father in the Taking. The System says the little ones are cozy. I do not know what cozy means at that scale. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person."
+YOU: [goon] "I'm listening."
+THEM: "Do you still sing? ...Sorry — weird question. I just realized I haven't heard anyone sing."
+YOU: [ans:q_song:a_yes] "In the shower. Which is now the creek. So yes, badly."
+THEM: "Ha! The creek concerts. I've heard those. Keep going."
+YOU: [goon] "I'm listening."
+THEM: "Okay so — Under my breath, when I'm working. Old songs from Wellington, New Zealand. The words are half gone but the tune holds. Tunes outlast everything."
+YOU: [goon] "I'm listening."
+THEM: "Alright — I should get back to it."

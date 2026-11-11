@@ -1,0 +1,87 @@
+=== r132-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Jorge (gen_pm1e8l8) occ=blacksmith --
+OPENING: "About needing to be alone — Do you ever just need to be alone? Like, really alone?"
+YOU: [ans:q_alone_time:a_tell] "Every day. I go for walks that don't need to happen. Just to breathe my own air
+THEM: "I get it. Solitude's a resource too. Scarcer than food, some days."
+YOU: [goon] "Go on."
+THEM: A small chill settles between you. They're choosing words more carefully.
+YOU: [goon] "Go on."
+THEM: "I go to the treeline edge and count my breaths. Ten of them. That's my alone. Then I come back — alone is a luxury, and also a little bit a lie."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on needing to be alone."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Look, forget it. You wanted something?"
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "What's this about? People are talking about Henry. Take it for what it's worth."
+YOU: [gq:reason:understand] "I want to understand you better."
+THEM: "All right. Thank you for asking."
+YOU: [goon] "Whoa — go on."
+THEM: They hear the warmth in it. They're not ready to let it in.
+closing: "Right. Back to it."
+
+-- Caitlin (gen_chskg3g) occ=rail conductor --
+OPENING: "About that news I was bursting to share — You'll never guess what I saw by the treeline."
+YOU: [link:accept] "All right. Let's ask them."
+THEM: "All right — let's ask them." You carry the proposal to The Red Table.
+YOU: [dlg:more] "Tell me more."
+THEM: "The treeline, this morning — something moved out there, big. By the time I looked properly it was gone. But I saw it."
+YOU: [dlg:react] "No kidding."
+THEM: "Okay, so — The geese chase everyone but Theo. They part for Theo like water. Don't say I told you."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that news."
+YOU: [goon] "I'm listening."
+THEM: They give you the benefit of the doubt. This time.
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Okay. Yeah. I trust you."
+YOU: [goon] "I'm listening."
+THEM: "I should get back to it."
+YOU: [joke] (crack a joke)
+THEM: "Grins. "I'll give you that one."
+(ended by engine)
+
+-- Maeve (gen_qxx6pl4) occ=electrician --
+OPENING: "My cut needs a second pair of hands. Could you clean it out for me? Please."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Stand beside them first — same side of the Haven door — then help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:personal] "Talk to me. The real stuff."
+THEM: "Huh. Let me think about that." "I've decided the monsters are just wildlife with better PR. Don't quote me."
+YOU: [goon] "I'm listening."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:more] "Go on."
+THEM: "We should stick together. Twelve strangers is better than one stranger. Math."
+YOU: [party_name] "We should name this. Us."
+THEM: "A name. Okay." You say it out loud, trying the shape of it:
+1. "APEX SNACKS" (📺 the System suggests)
+2. "The Hearth" (Caitlin suggests)
+3. "The Company" (or plain)
+(Which one? It'll stick.)
+YOU: [party_namepick:0] "APEX SNACKS."
+THEM: 🤝 "APEX SNACKS." It hangs in the air a moment — then Martina grins. It's real now. It has a name, which means it can be lost.
+📺 APEX SNACKS is official. Martina, Maeve, Caitlin. (The village watches the broadcast. Nobody blinks.)
+📓 Codex: We named us: APEX SNACKS.
+closing: "Good talk. Now let's go be useful."
+
+-- Ermek (gen_f3ofsbx) occ=librarian --
+OPENING: "Mind if I just sit with you for a bit?"
+YOU: [dlg:react] "Sure. Sit."
+THEM: "This is nice. Just — being around people. I forget how much I need it."
+YOU: [dlg:more] "What's on your mind?"
+THEM: "That's the whole of it. Sorry."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway — that's my problem, not yours. What did you want?"
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "People are talking about Martina. Take it for what it's worth."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "We started on that visit, then got onto the gossip. That is all."
+YOU: [goon] "Whoa — go on."
+THEM: "What's your first memory? Like, ever. The earliest thing."
+YOU: [ans:q_first_memory:a_tell] "A kitchen. Morning light. I must've been three."
+THEM: "Permit me: Three. That's young. The brain keeps what it needs, I guess."
+YOU: [goon] "Whoa — go on."
+THEM: "Mine's Almaty, Kazakhstan, I think — heat on pavement, someone's hand huge around mine. Or I invented it. First memories are half real and half the story you needed. Anyway, that's me."
+closing: "Later."
