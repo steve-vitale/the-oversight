@@ -26,7 +26,9 @@
 //   (9) FEAR (addFear / fearWeakness / intimidate): every call —
 //       vid/target/n, before/after, returned value, collapse or not.
 //  (10) FOIL (trustGainProgressive): every call counted; drag events
-//       recorded in full (returned < base, scholar corruption at call).
+//       recorded only when the foil can apply (scholar corruption
+//       >= 30), with the corruption-attributable drag recovered from
+//       the final value (implied base = returned / (1 - c/250)).
 //  (11) JUSTICE HEAT (justiceHeat): every call — heat, norm at call.
 //  (12) SHOW (darkShowBeat): every call — kind.
 //  (13) MEMORY (remember): filtered to corruption keys only —
@@ -479,16 +481,32 @@ function install(Game) {
     return ret;
   });
 
-  // ---- (10) foil: trust drag (count all, record drags in full) ----
+  // ---- (10) foil: trust drag (count all, record true foil drags) ----
+  // The corruption wrap in corruption.js applies the foil AFTER the
+  // base progressive curve: final = round(n_base * (1 - c/250)) for
+  // c >= 30. The base curve ALSO returns less than the `base` arg on
+  // its own (trust gets harder to earn as it grows), so `returned <
+  // base` alone is NOT a corruption drag — the first two pilot seeds
+  // recorded 1,370–2,138 such events at corruption 0, all base-curve.
+  // Record only when the foil can apply (c >= 30) and recover the
+  // corruption-attributable drag from the final value: n_base is
+  // implied by final / (1 - c/250), drag = impliedBase - final.
+  // (Rounding makes this an estimate to the nearest unit; recorded
+  // as such. Calls at c < 30 are counted, never recorded as drags.)
   wrap('trustGainProgressive', function (vid, base) {
     mark('trustGainProgressive');
     t.trustGainCalls++;
+    const c = scholarCorr(Game);
     let ret = 0;
     try { ret = origs.trustGainProgressive.call(Game, vid, base); } catch (e) { err('trustGainProgressive-call', e.message); }
     try {
-      if (ret < base) {
+      if (c != null && c >= 30 && ret > 0) {
+        const factor = 1 - c / 250;
+        const impliedBase = factor > 0 ? (ret / factor) : ret;
         t.foilEvents.push({ seq: ++seq, day: dayOf(Game), vid: vid || null, base: base,
-          returned: ret, dragged: base - ret, scholarCorruption: scholarCorr(Game),
+          returned: ret, scholarCorruption: c,
+          impliedBase: Math.round(impliedBase * 100) / 100,
+          dragged: Math.round((impliedBase - ret) * 100) / 100,
           stack: stackText(2), via: 'trustGainProgressive' });
       }
     } catch (e) { err('trustGainProgressive-log', e.message); }
