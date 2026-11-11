@@ -19,6 +19,10 @@ const WRAPS = ['ladderTick', 'ladderStageBeat', 'ladderCapBeat',
 
 function inc(map, k, n) { map[k] = (map[k] || 0) + (n == null ? 1 : n); }
 
+// Deep-clone for snapshot copies (was used by summarizeSeed but never
+// defined — the analyzer crashed on first real use; adoption fix).
+function clone(o) { return JSON.parse(JSON.stringify(o == null ? {} : o)); }
+
 // classifyStandingEvent(ev, kind): every recorded standing event must
 // carry its track + stage + outcome, or it is unclassified.
 function classifyStandingEvent(ev, kind) {
