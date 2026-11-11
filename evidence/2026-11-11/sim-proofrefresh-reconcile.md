@@ -72,3 +72,28 @@ a second regeneration was required.
   stale-input negative checks still fail the b4/b2 panels as required.
 - Verdict: proof fresh, current, and neutral on the merge tip 793f097f3.
   Ready for gate #2.
+
+## Round 3 — r131 src/js touch (standing.js)
+Master moved again (dd28faecc → 8445ab97f: journey-scale r131 adoption
+closeout, phantom-veteran fix touching src/js/standing.js). Merged cleanly
+as `94f76882b` (no conflicts). The standing.js touch re-staled the proof
+(`validate()` → "Proof source inputs are not current"), so a third
+regeneration was required. A runtime restart at ~15:36Z killed the first
+r3 panel run at 6 cases; the run was resumed in the same out dir and the 6
+cached cases were reused (b4 precedent).
+- Command: `node scripts/balance-panel.js --out .proofrefresh-reconcile-panel-r3 --n 16 --days 150`
+- Ran 15:31–16:28Z (~57 min incl. the restart resume) under heavy load
+  (load avg peaked 21.3, later cleared to 2.3); no flap crash.
+- Result: `Saved .proofrefresh-reconcile-panel-r3; 64 cases, 6 cached jobs.`
+  64 rows, 64 distinct combos, `validity.sourcesStable: true`, neutrality
+  4/4 match, `sourceHeadStart == sourceHeadEnd == 94f76882b`.
+- Retained panel re-pointed (byte copy): `evidence/2026-11-11/neutral-reconcile.json.gz`,
+  sha256 `c0b5cc839dde6f0e453022412d129e66493d4b87f94d8509770a48d751ee53d3`.
+- `balance-proof-update.js` exit 0; digest matches.
+- Test `scripts/test-proofrefresh-reconcile.js`: **12 passed, 0 failed**
+  (cache-flags 4/4 included). Stale-input negative checks still fail the
+  b4/b2 panels as required.
+- Verdict: proof fresh, current, and neutral on the merge tip 94f76882b.
+  Master moved again during round 3 (488506a47, godpathfirst-a arm —
+  scripts/ + evidence/ only, no manifest inputs), so one more
+  merge-forward is owed; the proof survives it (validate re-checked after).
