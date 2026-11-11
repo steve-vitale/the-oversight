@@ -1244,7 +1244,7 @@
         (doubt.kind === 'behavior' || this.doubtIsLead(doubt));
       if (tentativeAsk) spoken = `"Something's been bothering me, ${first}. ${ev} — help me understand it."`;
       // beat 2 — their face, as it lands.
-      const face = this.drawTruthLine('accuseFace', vid);
+      let face = this.drawTruthLine('accuseFace', vid);
       // beat 3 — codex-gated coaching: only patterns the player has LIVED.
       const L = this.socialLedger();
       const priorDeflect = (doubt.evidence || []).some(e => /deflected/.test(String(e)));
@@ -1261,6 +1261,19 @@
       } else if ((L.confessed || 0) >= 1 && (doubt.evidence || []).length <= 1) {
         coach = this.drawTruthLine('coachConfess', vid);
       }
+      // r179: a face line must not repeat verbatim within one sitting.
+      // drawTruthLine's per-game no-repeat recycles the 6-line
+      // accuseFace pool after 6 draws, so a sitting that presses doubt
+      // 7+ times re-serves the same face (r179 panel: 'The easy manner
+      // evaporates' x3 in one sitting on seed 43503). If this sitting
+      // already heard this exact face line, say nothing instead of
+      // repeating it — the r167 coach-guard pattern, applied to the face.
+      let c = null;
+      try { c = this.convoGet(vid); } catch (e) {}
+      if (face && c && c.active && Array.isArray(c.transcript) &&
+          c.transcript.some(b => b && b.who === 'narr' && b.text === face)) {
+        face = null;
+      }
       const beats = [{ who: 'you', text: spoken }];
       if (face) beats.push({ who: 'narr', text: face });
       // r167: a coach line must not repeat verbatim within one sitting.
@@ -1270,8 +1283,6 @@
       // sitting, coachAttack x2 in Xavier's). If this sitting already
       // heard this exact coach line, say nothing instead of repeating
       // the hint — the System already told you.
-      let c = null;
-      try { c = this.convoGet(vid); } catch (e) {}
       if (coach && c && c.active && Array.isArray(c.transcript) &&
           c.transcript.some(b => b && b.who === 'narr' && b.text === `*${coach}*`)) {
         coach = null;
