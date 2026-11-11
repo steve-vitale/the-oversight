@@ -1,0 +1,19 @@
+(pre-talk seed: ask_favor planted d116; takenWantDay=0; convoCount=13)
+=== seed 131004 day 120 — conversation with Dominic (gen_qy0ux0s) ===
+occupation=carpenter temperament=bold trust=90 dead=false
+want: ask_favor (stage 2)
+open thread: want fromSeed=true
+picker: control
+
+THEM: "About the creek water run — the need hasn't gone anywhere. I'm still asking."
+(turn0 choices: dlg:commit, dlg:favor_requirements, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Wait — I'm away from Haven right now, out on the road. I can't promise a dawn meet from out here — find me when I'm back and we'll set it then."
+YOU: [goon] "Please, go on."
+THEM: "Come see what I found. You won't believe it."
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Halfway to the hollow, Dominic freezes. Fresh tracks — big. "We go back now. Quietly." You do. The wild, reminding you.
+YOU: (leave)
+pre-close: want ask_favor stage 3 thread want
+closing line: "See you at the fire."
+(gossip picks this sitting: 0)

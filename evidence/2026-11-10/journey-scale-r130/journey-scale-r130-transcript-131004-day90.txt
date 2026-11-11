@@ -1,0 +1,15 @@
+(pre-talk seed: ask_favor planted d77; takenWantDay=0; convoCount=9)
+=== seed 131004 day 90 — conversation with Dominic (gen_qy0ux0s) ===
+occupation=carpenter temperament=bold trust=90 dead=false
+want: ask_favor (stage 1)
+open thread: want fromSeed=false
+picker: control
+
+THEM: "The cistern's nearly dry — 4 liters left. Haul the creek with me at dawn? Two buckets each, there and back."
+(turn0 choices: dlg:commit, dlg:favor_requirements, dlg:details, dlg:cant, dlg:subject, leave, silence)
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+YOU: (leave)
+pre-close: want ask_favor stage 3 thread want
+closing line: "Good talk. Now let's go be useful."
+(gossip picks this sitting: 0)

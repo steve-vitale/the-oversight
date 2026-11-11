@@ -1177,10 +1177,11 @@
         link.trust = Math.max(0, (link.trust || 0) - hit);
         if (debt) {
           led.ingratitude = (led.ingratitude || 0) + 1;
-          try { this._linkNote(link, 'aid', 'REFUSED ' + vn + ' after taking their aid. Ingratitude noted.'); } catch (e) {}
+          try { this._linkNote(link, 'aid', 'REFUSED ' + vn + ' after taking their aid. Ingratitude noted. (trust -' + hit + ')'); } catch (e) {}
           this.say('You turn ' + beg.face + ' away — after ' + vn + ' fed YOU. The silence afterward is its own weather. (Trust -' + hit + '. Word travels: Haven forgot who fed them.)');
           try { if (this.leadShift) this.leadShift('unity', -1); } catch (e) {}
         } else {
+          try { this._linkNote(link, 'aid', 'REFUSED ' + vn + ' aid request. (trust -' + hit + ')'); } catch (e) {}
           this.say('You refuse ' + vn + ' — gently, honestly, aloud. ' + beg.face + ' nods like they expected it. (Trust -' + hit + '.)');
         }
       }
