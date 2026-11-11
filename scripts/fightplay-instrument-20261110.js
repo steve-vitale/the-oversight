@@ -100,13 +100,21 @@ function install(Game) {
   // (fieldFights.js): the equipped ranged weapon's ammo id, summed over
   // the fighter's own items. Returns {n, ammoId, rangedId} or
   // {n: 0, reason} when there is no ranged weapon / no ammo / no lookup.
+  // NOTE (instrument fix, 2026-11-11): the first pilot run read the
+  // equipment handle from globalThis.Scattering.S, which does not exist —
+  // equipment.js publishes S.equipment to globalThis.Scattering.equipment
+  // (namespace bridge, 2026-10-09). Every fight in that corpus recorded
+  // ammoBeforeReason 'no-S-equipment'; the corpus was re-run with this
+  // fix (see evidence). The volley data in the first corpus already
+  // proved archers carry and spend ammo (200 volley fights).
   function ammoBefore(vid) {
     try {
-      const S = (typeof globalThis !== 'undefined' && globalThis.Scattering && globalThis.Scattering.S) || null;
+      const EQ = (typeof globalThis !== 'undefined' && globalThis.Scattering && globalThis.Scattering.equipment)
+        || (typeof globalThis !== 'undefined' && globalThis.S && globalThis.S.equipment) || null;
       const vp = villagerPerson(vid);
       if (!vp) return { n: 0, reason: 'no-person' };
-      if (!S || !S.equipment || typeof S.equipment.rangedWeaponOf !== 'function') return { n: 0, reason: 'no-S-equipment' };
-      const rw = S.equipment.rangedWeaponOf(vp, (Game.data || {}).items || []);
+      if (!EQ || typeof EQ.rangedWeaponOf !== 'function') return { n: 0, reason: 'no-equipment' };
+      const rw = EQ.rangedWeaponOf(vp, (Game.data || {}).items || []);
       const rwId = rw ? (rw.itemId || rw.id) : null;
       if (!rwId) return { n: 0, reason: 'no-ranged-weapon' };
       let rdef = null;

@@ -58,7 +58,7 @@ function fight(over) {
 
   const row = synthRow({
     fights: [grounded, conjured, psycho, contest, aidGrounded,
-      fight({ seq: null, cls: 'other', outcome: 'vFlee', trickKnown: true, trickLog: ['shout'] }),
+      fight({ seq: null, cls: 'other', outcome: 'vFlee', trickKnown: true, trickLog: ['shout'], gateSeq: 1 }),
       fight({ seq: 3, cls: 'world', outcome: 'evade', partySize: 2, allyVid: 'v2', ffFired: [], trickKnown: true, foughtBefore: true, trickLog: ['shout'] }),
       fight({ seq: 11, cls: 'world', outcome: 'mFlee', trickKnown: true, trickLog: [] })],
     gateCalls: [{ gateSeq: 1, day: 10, vid: 'v1', mid: 'bulldozer', wave: 1, result: 'avoid', reason: 'outmatched', partySize: 1 }],
@@ -85,6 +85,11 @@ function fight(over) {
   check('trick-known no-exec counted', s.trickKnownFights === 2 && s.trickKnownNoExec === 1,
     JSON.stringify({ k: s.trickKnownFights, n: s.trickKnownNoExec }));
   check('gate results', s.gateResults.avoid === 1, JSON.stringify(s.gateResults));
+  check('gate join (agency only): avoid-gated agency fight counted', s.gateJoinedAgency.avoid === 1 && s.gateJoinedAgencyOutcomes.avoid.vFlee === 1,
+    JSON.stringify({ j: s.gateJoinedAgency, o: s.gateJoinedAgencyOutcomes }));
+  check('outcome by party x wave', s.outcomeByPartyWave['w1/party1'].fights === 3 && s.outcomeByPartyWave['w1/party1'].vKill === 2
+    && s.outcomeByPartyWave['w1/party2'].fights === 1 && s.outcomeByPartyWave['w1/party2'].evade === 1,
+    JSON.stringify(s.outcomeByPartyWave));
   check('byTrickKnown tab', s.byTrickKnown['trickKnown=true'].fights === 2 && s.byTrickKnown['trickKnown=false'].fights === 2, JSON.stringify(s.byTrickKnown));
   check('byFoughtBefore tab', s.byFoughtBefore['foughtBefore=true'].fights === 1, JSON.stringify(s.byFoughtBefore));
   check('byIntent tab', s.byIntent['intent=engage'].fights === 4, JSON.stringify(s.byIntent));
@@ -150,7 +155,7 @@ function fight(over) {
   check('leg corpora complete (3 seeds each)', Object.keys(on1).length === 3 && Object.keys(on2).length === 3 && Object.keys(off).length === 3,
     [Object.keys(on1).length, Object.keys(on2).length, Object.keys(off).length].join('/'));
 
-  let neutralOk = true, determOk = true, captureOk = true, captureDetail = '';
+  let neutralOk = true, determOk = true, captureOk = true, captureDetail = '', ammoSeen = false;
   Object.keys(on1).forEach(function (f) {
     const a = JSON.parse(on1[f]);
     const b = JSON.parse(on2[f]);
@@ -164,15 +169,21 @@ function fight(over) {
     if (!a.fights.length) { captureOk = false; captureDetail += f + ' zero fights; '; }
     // Every FIELD fight row carries its ammo + knowledge fields
     // (number or reason). Player-tb rows carry neither by design.
+    // The equipment lookup must actually resolve: zero fights may report
+    // 'no-S-equipment' / 'no-equipment', and at least one fight must
+    // carry real pocketed ammo (volleys fire in these legs).
     a.fights.forEach(function (fr) {
       if (fr.channel !== 'field') return;
       if (fr.ammoBefore == null && !fr.ammoBeforeReason) { captureOk = false; captureDetail += f + ' fight missing ammo fields; '; }
+      if (fr.ammoBeforeReason === 'no-S-equipment' || fr.ammoBeforeReason === 'no-equipment') { captureOk = false; captureDetail += f + ' equipment lookup failed; '; }
+      if (typeof fr.ammoBefore === 'number' && fr.ammoBefore > 0) ammoSeen = true;
       if (fr.trickKnown == null && fr.foughtBefore == null) { captureOk = false; captureDetail += f + ' fight missing knowledge fields; '; }
     });
   });
   check('neutrality leg: ON vs OFF digests identical (3 seeds)', neutralOk);
   check('determinism leg: ON repeat byte-identical (3 seeds)', determOk);
   check('capture smoke: fights recorded, 0 instrument errors, ammo/knowledge fields present', captureOk, captureDetail);
+  check('capture smoke: real pocketed ammo seen (equipment lookup resolves)', ammoSeen);
 })();
 
 console.log('\ntest-fightplay-b: ' + passed + ' passed, ' + failed + ' failed');

@@ -144,6 +144,13 @@ function analyzeSeed(row) {
   const intentCounts = {};
   grounded.forEach(function (f) { bump(intentCounts, String(f.intent) + '/' + String(f.intentWhy)); });
   // Gate outcome joined to fights: fights whose gateSeq names a gate call.
+  // CAUTION: the gate fires ONLY inside expeditionMonster, immediately
+  // before a (conjured) agency fight. A grounded fight's gateSeq is a
+  // STALE join (the last gate call for that vid, from an earlier
+  // expedition meeting) and must NOT be read as that fight's gate. The
+  // valid fight-side join is gateJoinedAgency (agency fights only);
+  // gateJoined (grounded) is reported for completeness and must be
+  // interpreted as stale.
   const gateBySeq = {};
   gates.forEach(function (g) { gateBySeq[g.gateSeq] = g; });
   const gateJoined = { avoid: 0, seek: 0, nullGate: 0, noGate: 0 };
@@ -154,6 +161,26 @@ function analyzeSeed(row) {
     bump(gateJoined, gr);
     gateJoinedOutcomes[gr] = gateJoinedOutcomes[gr] || {};
     bump(gateJoinedOutcomes[gr], String(f.outcome));
+  });
+  const gateJoinedAgency = { avoid: 0, seek: 0, nullGate: 0, noGate: 0 };
+  const gateJoinedAgencyOutcomes = {};
+  agencyFights.forEach(function (f) {
+    let gr = 'noGate';
+    if (f.gateSeq != null && gateBySeq[f.gateSeq]) gr = gateBySeq[f.gateSeq].result == null ? 'nullGate' : gateBySeq[f.gateSeq].result;
+    bump(gateJoinedAgency, gr);
+    gateJoinedAgencyOutcomes[gr] = gateJoinedAgencyOutcomes[gr] || {};
+    bump(gateJoinedAgencyOutcomes[gr], String(f.outcome));
+  });
+
+  // Outcome by party size x wave (grounded) — the table the party-size
+  // build's prereg needs: what size actually fights wave-4/5.
+  const outcomeByPartyWave = {};
+  grounded.forEach(function (f) {
+    const k = 'w' + ((f.wave | 0) || 0) + '/party' + String(f.partySize == null ? 'null' : f.partySize);
+    outcomeByPartyWave[k] = outcomeByPartyWave[k] || { fights: 0, evade: 0, vKill: 0, mFlee: 0, vFlee: 0, vDie: 0, other: 0 };
+    outcomeByPartyWave[k].fights++;
+    const o = f.outcome || 'null';
+    if (outcomeByPartyWave[k][o] != null) outcomeByPartyWave[k][o]++; else outcomeByPartyWave[k].other++;
   });
 
   // Trick use.
@@ -233,6 +260,8 @@ function analyzeSeed(row) {
     roundsWithAbility: roundsWithAbility, roundsTotal: roundsTotal,
     gateResults: gateResults, gateCalls: gates.length,
     gateJoined: gateJoined, gateJoinedOutcomes: gateJoinedOutcomes,
+    gateJoinedAgency: gateJoinedAgency, gateJoinedAgencyOutcomes: gateJoinedAgencyOutcomes,
+    outcomeByPartyWave: outcomeByPartyWave,
     byTrickKnown: byTrickKnown, byFoughtBefore: byFoughtBefore,
     byIntent: byIntent, intentCounts: intentCounts,
     trickUses: trickUses, trickUsesTotal: trickUsesTotal,
@@ -302,6 +331,14 @@ function analyzeDir(dir, run) {
     gateResults: mergeCounts('gateResults'),
     gateCalls: sum('gateCalls'),
     gateJoined: mergeCounts('gateJoined'),
+    gateJoinedAgency: mergeCounts('gateJoinedAgency'),
+    outcomeByPartyWave: perSeed.reduce(function (acc, s) {
+      Object.keys(s.outcomeByPartyWave).forEach(function (k) {
+        acc[k] = acc[k] || { fights: 0, evade: 0, vKill: 0, mFlee: 0, vFlee: 0, vDie: 0, other: 0 };
+        Object.keys(s.outcomeByPartyWave[k]).forEach(function (kk) { acc[k][kk] += s.outcomeByPartyWave[k][kk]; });
+      });
+      return acc;
+    }, {}),
     byTrickKnown: perSeed.reduce(function (acc, s) {
       Object.keys(s.byTrickKnown).forEach(function (k) {
         acc[k] = acc[k] || { fights: 0, evade: 0, vKill: 0, mFlee: 0, vFlee: 0, vDie: 0, other: 0 };
