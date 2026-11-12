@@ -50,10 +50,10 @@ try { ANCHOR = execSync('git rev-parse HEAD', { cwd: REPO }).toString().trim().s
 
 // The policy-swap leg guard: the on-disk competent.js must be the
 // OLD (5157782a4) version, swapped in uncommitted for this run.
-// The NEW (3f136f07e) version has a different sha, so an unswapped
+// The NEW (124a99389) version has a different sha, so an unswapped
 // run is refused loudly instead of being mislabeled.
 const EXPECTED_OLD_POLICY_SHA = '0801abd82e527dbe6f97ab56c8f0ddb55744998a04a22f332b4bb9b943ecca05';
-const CURRENT_POLICY_SHA = '3c40151e8dd4df69dde916a9df5d950da442b38b221752b148cded771887fb6d';
+const CURRENT_POLICY_SHA = '17f3e4555d01d8502b88cd00e44ce7879c89c75ed214da210150204c0ba99ede';
 const POLICY_VERSION = '5157782a4-competent';
 function legGuard(policyText) {
   if (typeof policyText !== 'string') return { ok: false, shaFull: null, sha: 'unknown' };
@@ -83,7 +83,7 @@ function readGuards() {
   const sg = standingGuard(standingText);
   if (MODE === 'control') { console.error('BISECTPOLICYSWAP STOP: bisect-policyswap has no control mode — the fix is on master.'); process.exit(2); }
   if (MODE === 'fix' && !pg.ok) {
-    if (pg.shaFull === CURRENT_POLICY_SHA) console.error('BISECTPOLICYSWAP STOP: competent.js is the NEW (3f136f07e) version sha ' + pg.sha + ' — perform the policy swap first (see prereg). Refusing to run unswapped.');
+    if (pg.shaFull === CURRENT_POLICY_SHA) console.error('BISECTPOLICYSWAP STOP: competent.js is the NEW (124a99389) version sha ' + pg.sha + ' — perform the policy swap first (see prereg). Refusing to run unswapped.');
     else console.error('BISECTPOLICYSWAP STOP: competent.js sha ' + pg.sha + ' is not the old (5157782a4) policy sha 0801abd82e52 — wrong swap.');
     process.exit(2);
   }

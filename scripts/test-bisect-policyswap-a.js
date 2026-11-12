@@ -25,7 +25,7 @@
 //      seeds answers nothing.
 //   3. Driver policy-swap leg guard — the driver's legGuard accepts
 //      ONLY the old (5157782a4) competent.js sha, refuses the new
-//      (3f136f07e) version and garbage, and the standing guard still
+//      (124a99389) version and garbage, and the standing guard still
 //      requires the roster-check fix (accepts the pinned fix text,
 //      refuses a wrong-sha marker text). All guard texts come from
 //      pinned commits, never live disk. An unswapped run is refused
@@ -134,11 +134,11 @@ function gday(Game) { try { return ((Game.state || {}).scholar || {}).day || 0; 
   // pinned commits, never live disk — and the standing text below the
   // same: on current master the on-disk standing.js carries the
   // marker but a later sha, which made the ACCEPTS leg fail.
-  const newPolicyText = execSync('git show 3f136f07e:scripts/policies/competent.js', { cwd: path.join(__dirname, '..') }).toString();
+  const newPolicyText = execSync('git show 124a99389:scripts/policies/competent.js', { cwd: path.join(__dirname, '..') }).toString();
   const gOld = DR.legGuard(oldPolicyText);
   T.ok('legGuard ACCEPTS the old (5157782a4) competent.js', gOld.ok === true && gOld.shaFull === DR.EXPECTED_OLD_POLICY_SHA, 'sha=' + gOld.sha);
   const gNew = DR.legGuard(newPolicyText);
-  T.ok('legGuard REFUSES the new (3f136f07e) competent.js', gNew.ok === false, 'sha=' + gNew.sha);
+  T.ok('legGuard REFUSES the new (124a99389) competent.js', gNew.ok === false, 'sha=' + gNew.sha);
   T.ok('legGuard new-policy sha is the recorded current sha', gNew.shaFull === DR.CURRENT_POLICY_SHA, 'sha=' + gNew.sha);
   T.ok('legGuard REFUSES garbage text', DR.legGuard('not a policy file').ok === false, 'garbage check');
   T.ok('standingGuard REFUSES a marker-bearing text with the wrong sha', DR.standingGuard('ROSTER CHECK\n' + newPolicyText).ok === false,
