@@ -188,10 +188,27 @@ async function fixtureGame(opts) {
 
   console.log('== E3 static audit ==');
   {
-    const stat = execSync('git diff --stat -- src scripts evidence', { cwd: path.join(__dirname, '..') }).toString();
-    const files = stat.split('\n').map(l => l.trim().split(/\s+/).pop()).filter(f => f && f.includes('.'));
-    const allowed = new Set(['src/js/table.js', 'scripts/test-tabledeed-20261021.js']);
-    const evOk = files.every(f => allowed.has(f) || f.startsWith('evidence/2026-10-21/'));
+    // The filename parse must be REAL: the old parse read
+    // `git diff --stat` and took `.split(/\s+/).pop()` — the +/- bar,
+    // never the filename — so `files` came out empty and the check
+    // passed vacuously (it passed with src/js/progression.js in the
+    // diff). `git diff --name-only` lists one filename per line: no
+    // parsing ambiguity at all. (sim-findings-a 2026-11-11.)
+    const filesConfined = (files) => {
+      const allowed = new Set(['src/js/table.js', 'scripts/test-tabledeed-20261021.js']);
+      return files.every(f => allowed.has(f) || f.startsWith('evidence/2026-10-21/'));
+    };
+    // Synthetic checks prove the predicate itself is real: it must FLAG
+    // a diff containing progression.js and PASS a clean/allowed diff.
+    // (The live check below runs against this worktree's real diff.)
+    ok(!filesConfined(['src/js/table.js', 'src/js/progression.js', 'scripts/test-tabledeed-20261021.js']),
+      'E3 predicate flags a diff containing progression.js', 'predicate passed a progression.js diff');
+    ok(filesConfined(['src/js/table.js', 'scripts/test-tabledeed-20261021.js', 'evidence/2026-10-21/foo.md']),
+      'E3 predicate passes an allowed-only diff');
+    ok(filesConfined([]), 'E3 predicate passes a clean (empty) diff');
+    const names = execSync('git diff --name-only -- src scripts evidence', { cwd: path.join(__dirname, '..') }).toString();
+    const files = names.split('\n').map(l => l.trim()).filter(Boolean);
+    const evOk = filesConfined(files);
     ok(evOk, 'E3 changed files confined to table.js + test + 2026-10-21 evidence', JSON.stringify(files));
     const diff = execSync('git diff -- src/js/table.js', { cwd: path.join(__dirname, '..') }).toString();
     const hunks = diff.split(/^@@/m).slice(1);
