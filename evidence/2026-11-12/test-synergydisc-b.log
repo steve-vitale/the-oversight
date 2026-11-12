@@ -1,0 +1,50 @@
+== (a) cornered_fury: simultaneous, both legs passive, triggerless ==
+  ok   cornered_fury starts at 0 attempts
+  ok   dawn 1: exactly 1 attempt
+  ok   dawn 1: not yet discovered
+  ok   dawn 1: tease1 spoken (System notices the pair)
+  ok   dawn note is a resonance check, not a use (no use-log entry for either leg)
+  ok   dawn 3: 3 attempts total
+  ok   dawn 3: cornered_fury DISCOVERED
+  ok   unlock line spoken
+== (a) owl_hours: sustained streak counts dawns ==
+  ok   dawn 1: streak day 1
+  ok   dawn 1: not yet discovered
+  ok   dawn 3: owl_hours DISCOVERED via 3-dawn streak
+== (a) all 10 triggerless synergies progress on one dawn ==
+  ok   critter_network: 1 dawn = 1 progress
+  ok   critter_network: not discovered after 1 dawn
+  ok   cornered_fury: 1 dawn = 1 progress
+  ok   cornered_fury: not discovered after 1 dawn
+  ok   polyglots_ledger: 1 dawn = 1 progress
+  ok   polyglots_ledger: not discovered after 1 dawn
+  ok   everybodys_friend: 1 dawn = 1 progress
+  ok   everybodys_friend: not discovered after 1 dawn
+  ok   farsight: 1 dawn = 1 progress
+  ok   farsight: not discovered after 1 dawn
+  ok   owl_hours: 1 dawn = 1 progress
+  ok   owl_hours: not discovered after 1 dawn
+  ok   tells: 1 dawn = 1 progress
+  ok   tells: not discovered after 1 dawn
+  ok   string_wall: 1 dawn = 1 progress
+  ok   string_wall: not discovered after 1 dawn
+  ok   airtight: 1 dawn = 1 progress
+  ok   airtight: not discovered after 1 dawn
+  ok   stand_together: 1 dawn = 1 progress
+  ok   stand_together: not discovered after 1 dawn
+== (a) war_chest: NOT dawn-covered (blood_magic legacy activation rescues it) ==
+  ok   blood_magic IS in the live activatable list (legacy activatable)
+  ok   war_chest: 3 dawns = 0 attempts (dawn must not cover it)
+  ok   war_chest: not discovered by dawn
+  ok   blood_magic activation fires (Blood Price)
+  ok   war_chest: 1 blood use = 1 attempt via its own trigger
+== (a) ringcraft: NOT dawn-covered (usable legs) ==
+  ok   ringcraft: 3 dawns = 0 attempts
+== (a) closed_loop: NOT dawn-covered (camp_cook XP-tick / compost_king button) ==
+  ok   closed_loop: 3 dawns = 0 attempts
+== (b) unheld legs: no progress ==
+  ok   cornered_fury: 3 dawns with only one leg = 0 attempts
+  ok   cornered_fury: not discovered with one leg
+  ok   cornered_fury: 1 dawn with no legs = 0 attempts
+
+41 passed, 0 failed

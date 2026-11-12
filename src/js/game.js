@@ -29476,6 +29476,95 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       this.checkSynergyDiscovery(abilityId, { day, part, target: context.target || null, synthetic: !!context.synthetic });
     },
 
+    // DAWN RESONANCE (sim-synergydisc-b 2026-11-12): the System notices a
+    // held double-passive pair overnight. Synergy discovery normally
+    // progresses only when a leg is "noted" (see checkSynergyDiscovery) —
+    // but a pair of pure-passive abilities has no button to press and no
+    // world event that ever notes either leg, so the pair could be held
+    // for a whole run with zero attempts (sim-synergystall-b: cornered_fury
+    // 0 attempts in 94 days while both legs were held). At dawn, for each
+    // undiscovered synergy with a path whose legs are ALL bare passive
+    // abilities currently held at minLevel AND with no other note path
+    // (no activation incl. legacy activatables, no ambient noteAbilityUse,
+    // no gainAbilityXP literal site, no treat: path), the System notes the
+    // first leg of that path — checkSynergyDiscovery runs, and the other
+    // leg resonates because it is passive-held (see _synergyPassiveLegHeld).
+    // One note per qualifying synergy per dawn: simultaneous/sequential =
+    // 1 attempt per dawn (3 dawns co-held = unlock); sustained = 1 streak
+    // day per dawn (3 consecutive dawns = unlock). The tease/unlock voice
+    // lines are the synergy's own — no new narration. The filter is
+    // computed from data + the trigger set at runtime (not a hardcoded
+    // list of ids), so a future data change that gives a pair a trigger
+    // automatically drops it from dawn resonance. The other synergies are
+    // untouched: their discovery paths do not change.
+    // Canon: synergies are System grants, never taught, never bought
+    // (docs/CANON.md human-skills-vs-alien-abilities law) — dawn resonance
+    // keeps discovery System-granted: the System notices the held pair
+    // overnight. No canon doc covers synergy discovery shape, so this is a
+    // documented design call, not canon implementation.
+    dawnSynergyResonance() {
+      const sch = this.state && this.state.scholar;
+      if (!sch) return;
+      const syns = this.data.synergies || [];
+      if (!syns.length) return;
+      // Legs that already get noted through a non-dawn, non-activation path.
+      // Ambient noteAbilityUse literals (game.js): leech, third_eye,
+      // second_wind, rain_dancer, rage, photosynthesis, phoenix_clause,
+      // molt, mediator, hollow_bones, grave_robber, cold_blooded,
+      // chitin_skin. gainAbilityXP literal sites: diplomat (conversation),
+      // tracker (encounters x2 + game.js), camp_cook, generous, scrounger,
+      // green_thumb. treat: buttons (app.js): herbal_remedy,
+      // field_medicine, triage. Keep this set in sync with those sites —
+      // a leg listed here already has a trigger and must NOT gain a dawn one.
+      const NOTED_WITHOUT_ACTIVATION = new Set([
+        'leech', 'third_eye', 'second_wind', 'rain_dancer', 'rage',
+        'photosynthesis', 'phoenix_clause', 'molt', 'mediator',
+        'hollow_bones', 'grave_robber', 'cold_blooded', 'chitin_skin',
+        'diplomat', 'tracker', 'camp_cook', 'generous', 'scrounger',
+        'green_thumb', 'herbal_remedy', 'field_medicine', 'triage',
+      ]);
+      // Activation is checked live (data-driven actions + legacy
+      // activatables in abilityActions.js) so a data migration that gives a
+      // leg a button automatically drops it from dawn resonance. If the
+      // live list cannot be read, skip the whole dawn note — a failed read
+      // must never invent a trigger for a pair that already has one.
+      let activatable;
+      try {
+        activatable = new Set((this.activatableAbilities() || []).map(a => a.abilityId || a.id).filter(Boolean));
+      } catch (e) { console.warn('[synergy] dawn resonance skipped: activatable list unreadable', e); return; }
+      const day = (this.state.village && this.state.village.day) || (sch.day || 1);
+      const defs = this.data.abilities || [];
+      for (const syn of syns) {
+        if ((sch.synergies || []).includes(syn.id)) continue;
+        if (!syn.discovery_method) continue;
+        const legLists = syn.requires_any || [syn.requires || []];
+        const minLvl = syn.minLevel || 1;
+        let noteLeg = null;
+        for (const path of legLists) {
+          const qualifies = path.every(rid => {
+            if (typeof rid !== 'string') return false;
+            // tech:/skill:/item: and synergy legs already have a path
+            // (synthetic events / discovery) — dawn resonance is for
+            // bare double-passive ability pairs only.
+            if (rid.startsWith('tech:') || rid.startsWith('skill:') || rid.startsWith('item:')) return false;
+            if (NOTED_WITHOUT_ACTIVATION.has(rid)) return false;
+            if (activatable.has(rid)) return false;
+            const def = defs.find(a => a.id === rid);
+            if (!def || (def.actions || []).length) return false;
+            return this.abilityLevel(rid) >= minLvl;
+          });
+          if (qualifies) { noteLeg = path[0]; break; }
+        }
+        if (!noteLeg) continue;
+        // A resonance check, not a use: call checkSynergyDiscovery
+        // directly (no use-log entry, no signature flash). The other leg
+        // resonates via _synergyPassiveLegHeld.
+        try {
+          this.checkSynergyDiscovery(noteLeg, { day, part: 0, target: null, synthetic: false });
+        } catch (e) { console.warn('[synergy] dawn resonance note failed for', syn.id, e); }
+      }
+    },
+
     // checkSynergyDiscovery: did this ability use complete a combined use?
     checkSynergyDiscovery(usedId, ctx) {
       const sch = this.state.scholar;
@@ -33909,6 +33998,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       this.dayPart = 0; this.ap = 1;
       scholar.dayTicks = 0; scholar.actionClock = 0; // action clock: new day, fresh budget
       this.say(`— DAY ${scholar.day} DAWN — ${DAY_PART_HINT.dawn}`);
+      // DAWN RESONANCE (sim-synergydisc-b 2026-11-12): the System notices a
+      // held double-passive pair overnight — see dawnSynergyResonance.
+      try { this.dawnSynergyResonance(); } catch (e) { console.warn('[synergy] dawn resonance', e); }
       // JOINT-FAVOR DAWN SIGNAL (r79): after the dawn header, dayPart is 0,
       // so the waiting predicates read true; after checkPromises, so a
       // promise that broke this dawn does not signal.

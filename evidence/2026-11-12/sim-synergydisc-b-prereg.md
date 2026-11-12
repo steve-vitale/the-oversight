@@ -176,4 +176,16 @@ for the after leg: starvation total ≤ 5, median ≥ 110.8d.
 
 ## Metric review
 
-(To be filled at run end. No metric re-scored mid-run.)
+(Filled at run end. No metric re-scored mid-run.)
+- GO bar MET: 2 of the corrected 10 discovered on the diagnostic seed
+  (cornered_fury, stand_together), cornered_fury attempts 3 > 0, cost bar
+  passed (starvation 4 ≤ 5, median 123.5d ≥ 110.8d). Full verdict in
+  `evidence/2026-11-12/sim-synergydisc-b.md`.
+- Corrections recorded during the run: the class is 10, not 11 (war_chest
+  rescued by blood_magic legacy activation); the secondary "36/57" count
+  does not reproduce (31 under the documented definition). Neither changes
+  the GO verdict (2 discovered clears the bar under either reading).
+- The panel compare's `review_required` (two exploratory regression
+  signals on 8 seeds) is disclosed and investigated in the evidence file;
+  it is not a prereg metric, and the prereg's binding regression leg (the
+  cost bar) passes. A 16-seed holdout is owed as follow-up.
