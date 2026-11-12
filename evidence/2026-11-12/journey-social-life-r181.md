@@ -214,6 +214,27 @@ are the known schema drift — the social driver never emits l3.*
 fields, so LOUD-disappeared lines are explained, not a bug.
 Baseline NOT rolled on a single 4-seed panel (prereg).
 
-## Gate / landing (adoption closeout — TBD)
+## Gate / landing (adoption closeout — main session, 2026-11-12)
 
-<!-- FILLED BY ADOPTION CLOSEOUT BELOW -->
+- Adoption run (loop2-20261112T0957Z-adopt-r181) timed out mid-gate; the main
+  session finished the adoption. No src/js change in this run.
+- Base at adoption: master `9f19007f0` (bisect round 5). Rebasing the branch
+  onto current master `ce89f2b77` (Loop B 0930Z coordinator evidence) was
+  clean, no quirk — new tip `153d8a214`, worktree clean.
+- Proofs re-run on the rebased tip: vendetta 30/30, propose-label 9/9 —
+  both green.
+- Gate `node scripts/check.js --quick` on the pre-rebase tree
+  (`a69c6566d`, base `9f19007f0`), run by the adoption waiter
+  2026-11-12 11:02–11:18Z: **331 passed, 9 failed in 1142s**. The 9: 5×
+  120s load timeouts (living-garden-deed-attainment, occupation-panels,
+  one-person-army-deed-attainment, trust-observer-neutrality,
+  capable-bot-20261014); measurement-proof staleness pair (proof-update +
+  workflow — b7 stale at that base, cured by the b8 re-point carried by
+  the rebase target); measurement-cache-flags 0/4 (known 30s
+  spawn-timeout artifact — 4/4 manually, 12/12 on the b8 coordinator
+  re-run); phone-frame-proof (pre-existing stale receipt). Zero
+  attributable to this branch. **Gate GO.**
+- Merged-master gate result (confirms the staleness pair is cured on the
+  final tree) and merge SHA follow in the closeout commit below.
+
+<!-- CLOSEOUT: merged-master gate + merge SHA -->
