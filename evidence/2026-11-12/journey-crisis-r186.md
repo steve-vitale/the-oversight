@@ -297,7 +297,10 @@ worktree tip:
   (defect-8) falls to the honest dry admission when engageBeat returns null.
 
 Rebased onto master 5c4361ccc at landing (eldergrammar a5b75cab8 +
-bisect-r7-cut 5c4361ccc landed after the run's base f1e603219).
+bisect-r7-cut 5c4361ccc landed after the run's base f1e603219), then rebased
+again onto 21d6f1fe1 when stallcut32-a landed mid-adoption (evidence-only,
+no src/js or scripts/policies changes, so the gate result stands; proofs
+re-run on the final tip).
 
 Gate: check.js --quick on the rebased tip **332 passed, 8 failed in 979s** (log
 hidden_files/journey-crisis-r186-gate.log). The 8: measurement-proof-update +
@@ -308,5 +311,5 @@ exact-120s timeouts, all standalone-green (living-garden 8/8, occupation-panels
 25/25, trust-observer-neutrality 6/6, one-person-army 7/7 — load artifacts under
 extreme load: proofrefresh-b9 panel children + cut7confirm driver + a fresh
 VM). Zero attributable to this change. **Gate GO.** Proofs re-run green on the
-rebased tip 1dc8ef3b5: warn-details 12/12, capable-bot 42/42. Merged
+rebased tip 0cb104ea9: warn-details 12/12, capable-bot 42/42. Merged
 ff-only to master; rotation-b 6→7; lock deleted at closeout.
