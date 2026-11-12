@@ -26,7 +26,9 @@
 //   3. Driver policy-swap leg guard — the driver's legGuard accepts
 //      ONLY the old (5157782a4) competent.js sha, refuses the new
 //      (3f136f07e) version and garbage, and the standing guard still
-//      requires the roster-check fix. An unswapped run is refused
+//      requires the roster-check fix (accepts the pinned fix text,
+//      refuses a wrong-sha marker text). All guard texts come from
+//      pinned commits, never live disk. An unswapped run is refused
 //      loudly, never mislabeled.
 //   4. Corpus completeness — the analyzer's loader reports 8/8
 //      complete on a full synthetic corpus and names the missing seed
@@ -127,18 +129,26 @@ function gday(Game) { try { return ((Game.state || {}).scholar || {}).day || 0; 
   T.section('3. Driver policy-swap leg guard — old competent.js sha only');
   T.ok('driver hardcodes MODE = fix (no control variant)', driverSrc.indexOf("const MODE = 'fix'") !== -1, 'MODE check');
   T.ok('driver refuses an unswapped run (new-policy message)', driverSrc.indexOf('Refusing to run unswapped') !== -1, 'refusal check');
-  T.ok('driver records the expected old policy sha', driverSrc.indexOf('0801abd82e527dbe6f97ab56c8f0ddb55744998a04a22f332b4bb9b943ecca05') !== -1, 'old sha constant check');
   const oldPolicyText = execSync('git show 5157782a4:scripts/policies/competent.js', { cwd: path.join(__dirname, '..') }).toString();
-  const newPolicyText = fs.readFileSync(path.join(__dirname, 'policies', 'competent.js'), 'utf8');
+  // HERMETIC (sim-findings-a 2026-11-11): both policy texts come from
+  // pinned commits, never live disk — and the standing text below the
+  // same: on current master the on-disk standing.js carries the
+  // marker but a later sha, which made the ACCEPTS leg fail.
+  const newPolicyText = execSync('git show 3f136f07e:scripts/policies/competent.js', { cwd: path.join(__dirname, '..') }).toString();
   const gOld = DR.legGuard(oldPolicyText);
   T.ok('legGuard ACCEPTS the old (5157782a4) competent.js', gOld.ok === true && gOld.shaFull === DR.EXPECTED_OLD_POLICY_SHA, 'sha=' + gOld.sha);
   const gNew = DR.legGuard(newPolicyText);
   T.ok('legGuard REFUSES the new (3f136f07e) competent.js', gNew.ok === false, 'sha=' + gNew.sha);
   T.ok('legGuard new-policy sha is the recorded current sha', gNew.shaFull === DR.CURRENT_POLICY_SHA, 'sha=' + gNew.sha);
   T.ok('legGuard REFUSES garbage text', DR.legGuard('not a policy file').ok === false, 'garbage check');
-  const standingSrc = fs.readFileSync(path.join(__dirname, '..', 'src', 'js', 'standing.js'), 'utf8');
-  T.ok('standing.js on this tree HAS the roster-check fix', standingSrc.indexOf('ROSTER CHECK') !== -1, 'fix present — the standing guard will pass');
-  T.ok('standingGuard ACCEPTS this tree standing.js', DR.standingGuard(standingSrc).ok === true, 'standing sha=' + DR.standingGuard(standingSrc).sha);
+  T.ok('standingGuard REFUSES a marker-bearing text with the wrong sha', DR.standingGuard('ROSTER CHECK\n' + newPolicyText).ok === false,
+    'wrong-sha marker text refused');
+  // HERMETIC: the standing text comes from the pinned vetphantom fix
+  // commit — on current master the on-disk standing.js carries the
+  // marker but a later sha.
+  const standingSrc = execSync('git show 5157782a4:src/js/standing.js', { cwd: path.join(__dirname, '..') }).toString();
+  T.ok('the vetphantom fix standing.js HAS the roster-check fix', standingSrc.indexOf('ROSTER CHECK') !== -1, 'fix present in the pinned text');
+  T.ok('standingGuard ACCEPTS the vetphantom fix standing.js', DR.standingGuard(standingSrc).ok === true, 'standing sha=' + DR.standingGuard(standingSrc).sha);
 
   // ---- 4. Corpus completeness on a synthetic corpus ----
   T.section('4. Corpus completeness — loader names missing seeds');

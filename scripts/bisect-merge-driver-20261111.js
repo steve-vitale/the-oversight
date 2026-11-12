@@ -62,19 +62,39 @@ function legGuard(standingText) {
   return { fix: fix, shaFull: shaFull, sha: shaFull.slice(0, 12), ok: fix && shaFull === EXPECTED_FIX_SHA };
 }
 const standingPath = path.join(REPO, 'src', 'js', 'standing.js');
-let STANDING_FIX = null, STANDING_SHA = 'unknown';
+// The leg guard is READ at require time (so oneRun records the swap
+// it ran under) but ENFORCED only at the run entry point: requiring
+// this module must never exit the process — the proof requires the
+// driver to assert on legGuard on any tree, including one whose
+// on-disk standing.js is not the fix swap. (sim-findings-a 2026-11-11:
+// the top-level process.exit(2) made the proof base-state-bound —
+// it died at require time on current master, whose standing.js
+// carries the marker but a later sha.)
+let STANDING_FIX = null, STANDING_SHA = 'unknown', STANDING_GUARD = null;
 try {
   const text = fs.readFileSync(standingPath, 'utf8');
   const g = legGuard(text);
   STANDING_FIX = g.fix;
   STANDING_SHA = g.sha;
-  if (MODE === 'fix' && !g.ok) {
-    if (!g.fix) console.error('BISECTMERGE STOP: mode=fix but standing.js LACKS the roster-check fix — perform the fix-swap first (see prereg).');
-    else console.error('BISECTMERGE STOP: standing.js has the marker but sha ' + g.shaFull.slice(0, 12) + ' is not the vetphantom fix sha f8fda4295a99 — wrong swap.');
+  STANDING_GUARD = g;
+} catch (e) {
+  STANDING_FIX = false;
+  STANDING_SHA = 'unknown';
+  STANDING_GUARD = { fix: false, shaFull: null, sha: 'unknown', ok: false, error: e && e.message };
+}
+// refuseUnlessSwapped(): the leg guard, enforced when the driver is
+// actually RUN — a wrong or missing swap exits loudly (exit 2, no
+// mislabeled run) instead of running.
+function refuseUnlessSwapped() {
+  const g = STANDING_GUARD;
+  if (MODE === 'control') { console.error('BISECTMERGE STOP: bisect-merge has no control mode — the fix is swapped in.'); process.exit(2); }
+  if (MODE === 'fix' && g && !g.ok) {
+    if (g.error) console.error('BISECTMERGE STOP: cannot read standing.js: ' + g.error);
+    else if (!g.fix) console.error('BISECTMERGE STOP: mode=fix but standing.js LACKS the roster-check fix — perform the fix-swap first (see prereg).');
+    else console.error('BISECTMERGE STOP: standing.js has the marker but sha ' + (g.shaFull || '').slice(0, 12) + ' is not the vetphantom fix sha f8fda4295a99 — wrong swap.');
     process.exit(2);
   }
-} catch (e) { if (e && e.code === 'ENOENT') { console.error('BISECTMERGE STOP: cannot read standing.js: ' + e.message); process.exit(2); } throw e; }
-if (MODE === 'control') { console.error('BISECTMERGE STOP: bisect-merge has no control mode — the fix is swapped in.'); process.exit(2); }
+}
 
 const outDir = path.join(REPO, 'evidence', '2026-11-11', 'perseed-bisect-merge-a');
 
@@ -235,6 +255,7 @@ async function oneRun(seed) {
 }
 
 if (require.main === module) (async function () {
+  refuseUnlessSwapped();
   if (!SEEDS.length) { console.error('BISECTMERGE STOP: SEEDS required.'); process.exit(2); }
   if (MODE !== 'control' && MODE !== 'fix') { console.error('BISECTMERGE STOP: mode is fixed to fix.'); process.exit(2); }
   fs.mkdirSync(outDir, { recursive: true });

@@ -34,18 +34,20 @@
 //      (merge vs ^1 ladder diff is empty). So after a TB fall the
 //      ladder still reads 1 (the vp record is not marked dead by
 //      tbVillagerFalls) while the swapped-in readiness gate and the
-//      instrument read 0. The test asserts that true base behavior
-//      and records the divergence; the survival read comes from the
-//      harness end state, not the ladder.
+//      instrument read 0. The test detects which rule the LOADED
+//      game carries (from _ladderLivingVeterans source) and asserts
+//      the matching count on either base; the survival read comes
+//      from the harness end state, not the ladder.
 //   2. Seed-band identity — driver + analyzer name exactly seeds
 //      190391–190398, the vetphantom band. A cut on the wrong seeds
 //      answers nothing.
 //   3. Driver leg guard (swap-aware) — legGuard accepts the swapped
-//      fix text (marker + exact fix sha f8fda4295a99) and refuses
-//      the pre-fix merge text (no marker, sha 75762cb2259d); the
-//      on-disk standing.js is the swapped fix; the driver source
-//      refuses a wrong-sha swap and never runs its main loop when
-//      required as a module.
+//      fix text (marker + exact fix sha f8fda4295a99, read from the
+//      pinned vetphantom commit, never live disk) and refuses the
+//      pre-fix merge text (no marker, sha 75762cb2259d); the driver
+//      refuses a wrong-sha swap at run entry (proven by a real
+//      subprocess run against a scratch repo) and never runs its
+//      main loop when required as a module.
 //   4. Corpus completeness — the analyzer's loader reports 8/8
 //      complete on a full synthetic corpus and names the missing seed
 //      on a partial one.
@@ -105,6 +107,15 @@ function gday(Game) { try { return ((Game.state || {}).scholar || {}).day || 0; 
 
   // ---- 1. Instrument validity: three-way agreement, alive + fallen ----
   T.section('1. Instrument validity — engine vs ladder vs instrument (fix swapped in)');
+  // LADDER RULE (hermetic, sim-findings-a 2026-11-11): the loaded
+  // _ladderLivingVeterans is either the shared countLivingVeterans
+  // rule (roster check — master) or the old inline rule (vp.dead
+  // only, no roster check — the e4dbe581b merge base). The fallen
+  // killer counts 0 under the first, 1 under the second. Detect it
+  // from the LOADED function source, never from disk — the test
+  // asserts the behavior of the code it actually runs, on either base.
+  const ladderRosterCheck = String(Game._ladderLivingVeterans).indexOf('countLivingVeterans') !== -1;
+  const ladderAfterFall = ladderRosterCheck ? 0 : 1;
   let f = fresh();
   giveKill(f.vidA, 3);
   let c = counts(Game);
@@ -116,20 +127,17 @@ function gday(Game) { try { return ((Game.state || {}).scholar || {}).day || 0; 
   T.ok('TB fall removes the villager from the roster', !onRoster(f.vidA), 'roster len ' + ((Game.state.village || {}).roster || []).length);
   c = counts(Game);
   T.ok('death day: readiness(4) = 0 (no phantom with the fix swapped in)', c.r4 === 0, fmt(c));
-  // BASE DIFFERENCE: ladder.js at e4dbe581b is the old inline rule
-  // (vp.dead only, no roster check) — it still counts the fallen
-  // killer. The gate (readiness) and the instrument agree at 0.
-  T.ok('death day: ladder(3) = 1 (OLD ladder rule at this base: no roster check)', c.l3 === 1, fmt(c));
+  T.ok('death day: ladder(3) = ' + ladderAfterFall + (ladderRosterCheck ? ' (roster-check rule: fallen killer not counted)' : ' (OLD ladder rule at this base: no roster check)'), c.l3 === ladderAfterFall, fmt(c));
   T.ok('death day: instrument(3) = 0', c.i3 === 0, fmt(c));
-  T.ok('death day: engine + instrument agree (ladder diverges by its old rule)', c.r4 === 0 && c.i3 === 0, fmt(c));
+  T.ok('death day: engine + instrument agree' + (ladderRosterCheck ? ' (ladder agrees too)' : ' (ladder diverges by its old rule)'), c.r4 === 0 && c.i3 === 0, fmt(c));
   const adv = await advanceOneDay();
   T.ok('day advanced by one', adv.error === null && adv.day === deathDay + 1,
     'from d' + deathDay + ' to d' + adv.day + (adv.error ? ' err=' + adv.error : ''));
   c = counts(Game);
   T.ok('day after: readiness(4) = 0 (phantom does not reappear)', c.r4 === 0, fmt(c));
-  T.ok('day after: ladder(3) = 1 (old ladder rule still counts the fallen killer)', c.l3 === 1, fmt(c));
+  T.ok('day after: ladder(3) = ' + ladderAfterFall + (ladderRosterCheck ? ' (roster-check rule still excludes the fallen killer)' : ' (old ladder rule still counts the fallen killer)'), c.l3 === ladderAfterFall, fmt(c));
   T.ok('day after: instrument(3) = 0', c.i3 === 0, fmt(c));
-  T.ok('day after: engine + instrument agree (ladder diverges by its old rule)', c.r4 === 0 && c.i3 === 0, fmt(c));
+  T.ok('day after: engine + instrument agree' + (ladderRosterCheck ? ' (ladder agrees too)' : ' (ladder diverges by its old rule)'), c.r4 === 0 && c.i3 === 0, fmt(c));
 
   // ---- 2. Seed-band identity: exactly the vetphantom band ----
   T.section('2. Seed-band identity — 190391–190398, the vetphantom band');
@@ -145,7 +153,12 @@ function gday(Game) { try { return ((Game.state || {}).scholar || {}).day || 0; 
 
   // ---- 3. Driver leg guard (swap-aware): accepts fix, refuses pre-fix ----
   T.section('3. Driver leg guard (swap-aware) — fix accepted, pre-fix refused');
-  const fixText = fs.readFileSync(path.join(__dirname, '..', 'src', 'js', 'standing.js'), 'utf8');
+  // HERMETIC (sim-findings-a 2026-11-11): the fix text comes from the
+  // pinned vetphantom commit, never from live on-disk standing.js —
+  // on current master the on-disk file carries the marker but a later
+  // sha, and the old read made this proof base-state-bound (the driver
+  // then also exited at require time; see the driver change).
+  const fixText = execSync('git show 5157782a4:src/js/standing.js', { cwd: path.join(__dirname, '..') }).toString();
   const preFixText = execSync('git show e4dbe581b:src/js/standing.js', { cwd: path.join(__dirname, '..') }).toString();
   const gFix = DR.legGuard(fixText);
   T.ok('legGuard accepts the swapped fix text', gFix.ok === true && gFix.fix === true, 'ok=' + gFix.ok + ' sha=' + gFix.sha);
@@ -158,9 +171,30 @@ function gday(Game) { try { return ((Game.state || {}).scholar || {}).day || 0; 
   T.ok('legGuard refuses a marker-bearing text with the wrong sha', DR.legGuard('ROSTER CHECK\n' + preFixText).ok === false,
     'wrong-sha marker text refused');
   T.ok('legGuard refuses a non-string', DR.legGuard(null).ok === false && DR.legGuard(undefined).ok === false, 'null/undefined refused');
-  T.ok('on-disk standing.js HAS the roster-check fix (swap in place)', fixText.indexOf('ROSTER CHECK') !== -1, 'swap present — the leg guard will pass');
-  T.ok('driver refuses a wrong-sha swap at load (exit path in source)', driverSrc.indexOf('is not the vetphantom fix sha') !== -1, 'wrong-sha exit check');
-  T.ok('driver refuses an unswapped run at load (exit path in source)', driverSrc.indexOf('perform the fix-swap first') !== -1, 'unswapped exit check');
+  T.ok('the pinned fix text HAS the roster-check marker', fixText.indexOf('ROSTER CHECK') !== -1, 'marker present in the pinned fix text');
+  // Real refusal: the driver run as a script against a scratch REPO
+  // whose standing.js carries the marker but a WRONG sha must exit 2
+  // with the BISECTMERGE STOP line — never a mislabeled run. The
+  // scratch repo is a scripts symlink + a wrong standing.js; nothing
+  // on the live tree is touched.
+  const scratchRepo = fs.mkdtempSync(path.join(os.tmpdir(), 'bisect-merge-refusal-'));
+  let refusal = null;
+  try {
+    fs.symlinkSync(path.join(__dirname), path.join(scratchRepo, 'scripts'), 'dir');
+    fs.mkdirSync(path.join(scratchRepo, 'src', 'js'), { recursive: true });
+    fs.writeFileSync(path.join(scratchRepo, 'src', 'js', 'standing.js'),
+      '// ROSTER CHECK — deliberately wrong swap for the refusal leg\nmodule.exports = {};\n');
+    try {
+      execSync('node ' + path.join(__dirname, 'bisect-merge-driver-20261111.js'),
+        { cwd: scratchRepo, env: Object.assign({}, process.env, { REPO: scratchRepo, SEEDS: '190391' }), stdio: 'pipe' });
+    } catch (e) { refusal = e; }
+  } finally {
+    fs.rmSync(scratchRepo, { recursive: true, force: true });
+  }
+  T.ok('driver run with a wrong-sha swap exits 2 with BISECTMERGE STOP', refusal !== null && refusal.status === 2 &&
+    /BISECTMERGE STOP: standing\.js has the marker but sha .* is not the vetphantom fix sha/.test(String((refusal.stderr || '') + (refusal.stdout || ''))),
+    refusal ? ('status=' + refusal.status + ' ' + String(refusal.stderr || '').slice(0, 160)) : 'driver did not refuse');
+  T.ok('driver refuses an unswapped run at run entry (exit path in source)', driverSrc.indexOf('perform the fix-swap first') !== -1, 'unswapped exit check');
   T.ok('driver main loop runs only as a script, not on require', driverSrc.indexOf('if (require.main === module) (async function ()') !== -1, 'require.main guard');
 
   // ---- 4. Corpus completeness on a synthetic corpus ----
