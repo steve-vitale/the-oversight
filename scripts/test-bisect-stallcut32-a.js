@@ -234,8 +234,8 @@ function gday(Game) { try { return ((Game.state || {}).scholar || {}).day || 0; 
   } finally {
     fs.rmSync(scratchRepo, { recursive: true, force: true });
   }
-  T.ok('driver run with a wrong-sha swap exits 2 with BISECTSTALLCUT STOP', refusal !== null && refusal.status === 2 &&
-    /BISECTSTALLCUT STOP: standing\.js has the marker but sha .* is not the vetphantom fix sha/.test(String((refusal.stderr || '') + (refusal.stdout || ''))),
+  T.ok('driver run with a wrong-sha swap exits 2 with BISECTSTALLCUT32 STOP', refusal !== null && refusal.status === 2 &&
+    /BISECTSTALLCUT32 STOP: standing\.js has the marker but sha .* is not the vetphantom fix sha/.test(String((refusal.stderr || '') + (refusal.stdout || ''))),
     refusal ? ('status=' + refusal.status + ' ' + String(refusal.stderr || '').slice(0, 160)) : 'driver did not refuse');
   T.ok('driver refuses an unswapped run at run entry (exit path in source)', driverSrc.indexOf('perform the fix-swap first') !== -1, 'unswapped exit check');
   T.ok('driver main loop runs only as a script, not on require', driverSrc.indexOf('if (require.main === module) (async function ()') !== -1, 'require.main guard');
