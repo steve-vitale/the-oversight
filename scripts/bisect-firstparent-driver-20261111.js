@@ -70,7 +70,7 @@ function legGuard(standingText) {
 // The policy guard (own-policy): the on-disk competent.js must be
 // 203a32775's OWN version — sha256 exactly a7ff5c516440... Any other
 // policy (vetphantom-base 0801abd82e52..., current master
-// 3c40151e8dd4...) is refused loudly at the run entry point, never
+// 17f3e4555d01...) is refused loudly at the run entry point, never
 // mislabeled. Read at require time, enforced only at run entry, same
 // hermeticity rule as the standing guard.
 const EXPECTED_POLICY_SHA = 'a7ff5c516440626621a2382e378e37704c2f5c56a69c4eab30f89461503a864a';

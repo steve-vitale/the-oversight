@@ -54,7 +54,7 @@
 //      75762cb2259d); legGuardPolicy accepts 203a32775's own
 //      competent.js (sha a7ff5c516440, read from the pinned first
 //      parent commit) and refuses the vetphantom-base policy
-//      (0801abd82e52) and the current branch policy (3c40151e8dd4);
+//      (0801abd82e52) and the current branch policy (17f3e4555d01);
 //      the driver refuses a wrong-sha swap AND a wrong-sha policy at
 //      run entry (proven by real subprocess runs against scratch
 //      repos built from SYMLINKS — no content writes, so the host
@@ -208,7 +208,7 @@ function gday(Game) { try { return ((Game.state || {}).scholar || {}).day || 0; 
   T.ok('legGuardPolicy refuses the vetphantom-base policy (0801abd82e52)', gVet.ok === false && gVet.sha === '0801abd82e52' && gVet.shaFull === DR.VETPHANTOM_POLICY_SHA,
     'ok=' + gVet.ok + ' sha=' + gVet.sha);
   const gCur = DR.legGuardPolicy(currentPolicyText);
-  T.ok('legGuardPolicy refuses the current branch policy (3c40151e8dd4)', gCur.ok === false && gCur.sha === '3c40151e8dd4',
+  T.ok('legGuardPolicy refuses the current branch policy (17f3e4555d01)', gCur.ok === false && gCur.sha === '17f3e4555d01',
     'ok=' + gCur.ok + ' sha=' + gCur.sha);
   T.ok('legGuardPolicy refuses a non-string', DR.legGuardPolicy(null).ok === false && DR.legGuardPolicy(undefined).ok === false, 'null/undefined refused');
   // Real refusal: the driver run as a script against a scratch REPO
@@ -253,7 +253,7 @@ function gday(Game) { try { return ((Game.state || {}).scholar || {}).day || 0; 
   // Real policy refusal: the driver run as a script against a scratch
   // REPO whose standing.js is the CORRECT fix text (standing guard
   // passes) but whose symlinked scripts dir carries the CURRENT
-  // competent.js (sha 3c40151e8dd4, not the first-parent own policy)
+  // competent.js (sha 17f3e4555d01, not the first-parent own policy)
   // must exit 2 with the POLICY STOP line — never a mislabeled run.
   // Same symlink setup: the fix text comes from the durable
   // vetphantom scratch copy (sha asserted to the pinned fix sha).
