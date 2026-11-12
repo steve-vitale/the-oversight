@@ -76,9 +76,18 @@ band, after the rebase, and on the adoption tip.
 
 ## Gate
 
-[PENDING — fill after the merged-master gate completes. Log:
+`check.js --quick` on merged master `2f796d59b`: **334 passed, 6 failed in 990s**
+— the standing set, gate GO on the standing adjudication. The 6: 2× 120s load
+timeouts (living-garden, one-person-army — CPU-starvation under load, the same
+signature as the 0930Z/0730Z gates), the staleness pair (proof-update +
+workflow — "Proof source inputs are not current", the ship-bump artifact;
+round 9 owed), cache-flags (the 30s spawn-timeout artifact — this run's own
+arm 2 measured the 100s candidate failing and the cap staying at 30s),
+phone-frame-proof (pre-existing stale receipt). Slowest: one-person-army 120s,
+living-garden 120s, occupation-panels 113s (passed). Zero attributable to
+either 1130Z arm (evidence/tooling only, no src change). Log:
 `hidden_files/sim-winnability-round-1130-gate.log`, cache
-`/tmp/jest-cache-adopt-1130`.]
+`/tmp/jest-cache-adopt-1130`.
 
 ## Telemetry
 
