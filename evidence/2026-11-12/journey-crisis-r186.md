@@ -299,4 +299,14 @@ worktree tip:
 Rebased onto master 5c4361ccc at landing (eldergrammar a5b75cab8 +
 bisect-r7-cut 5c4361ccc landed after the run's base f1e603219).
 
-Gate: check.js --quick on the rebased tip — [PENDING; filled below when it lands].
+Gate: check.js --quick on the rebased tip **332 passed, 8 failed in 979s** (log
+hidden_files/journey-crisis-r186-gate.log). The 8: measurement-proof-update +
+measurement-workflow (staleness pair — src/js changed, proof refresh round 9
+in flight); phone-frame-proof (pre-existing stale receipt); measurement-cache-flags
+(standalone-green 4/4 — 30s spawn-cap load artifact, cap stays 30s); four
+exact-120s timeouts, all standalone-green (living-garden 8/8, occupation-panels
+25/25, trust-observer-neutrality 6/6, one-person-army 7/7 — load artifacts under
+extreme load: proofrefresh-b9 panel children + cut7confirm driver + a fresh
+VM). Zero attributable to this change. **Gate GO.** Proofs re-run green on the
+rebased tip 1dc8ef3b5: warn-details 12/12, capable-bot 42/42. Merged
+ff-only to master; rotation-b 6→7; lock deleted at closeout.
