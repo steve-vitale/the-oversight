@@ -189,7 +189,7 @@ wave-4+ veterans per seed vs the bar of 2.
   snapshot, exactly as vetphantom-driver and mergebase-driver.
   Driver: `scripts/bisect-stallcut-driver-20261112.js` — a copy of
   bisect-r5-cut2-driver with the corpus dir changed to
-  `evidence/2026-11-12/perseed-stallcut-a/`, RUN =
+  `evidence/2026-11-12/perseed-bisect-stallcut-a/`, RUN =
   `bisect-stallcut-pilot`, arm = `bisect-stallcut`, mode fixed to
   `fix` only, plus the swap-aware leg guard (exported `legGuard`,
   exact-sha; pre-fix sha is this base's `98c8bfad70d7…`).
@@ -202,7 +202,7 @@ wave-4+ veterans per seed vs the bar of 2.
   capture. Said here, before any sim.
   Analyzer: `scripts/bisect-stallcut-analyze-20261112.js`. Proof:
   `scripts/test-bisect-stallcut-a.js`.
-- **Corpus:** `evidence/2026-11-12/perseed-stallcut-a/` — 8
+- **Corpus:** `evidence/2026-11-12/perseed-bisect-stallcut-a/` — 8
   per-seed JSONs; summary
   `evidence/2026-11-12/bisect-stallcut-a-summary.json`.
 
