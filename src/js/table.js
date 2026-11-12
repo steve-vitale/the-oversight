@@ -444,7 +444,10 @@
     // a dedicated mulberry32 seeded from stable run inputs, so the block
     // is byte-identical with the layer on vs off except the audit beats.
     // Test-only: Game._tableDeedVoiceOff skips the whole block.
-    tableDeedRecords() {
+    // seat (optional): the audit's already-computed tableSeat() result.
+    // On a full seat the readiness-bar bits stay silent (finding #2253);
+    // a bare call keeps the legacy bar voicing.
+    tableDeedRecords(seat) {
       const out = { kills: [], engagements: [], titans: [], bars: [] };
       try {
         const mdefs = (this.data && this.data.monsters) || [];
@@ -521,14 +524,25 @@
         // 4. readiness bars as they stand at audit time — voiced only when
         // unready. A ready bar is nothing to say aloud; the bar line names
         // exactly what the village lacks, in the village's own terms.
-        try {
+        // FULL-SEAT SILENCE (sim-finalvoice-b, 2026-11-11, finding
+        // #2253): on a priced full seat the bar-read muddies the win —
+        // the audit already said "every wave faced, the deeds complete",
+        // and the wave-5 combat bar can still stand short (1 of 2
+        // veterans) without the seat owing anything. The seat is passed
+        // in by tableScene, which already computed it; a bare call keeps
+        // the legacy voicing. This stays a pure render: tableSeat() is
+        // NOT called here — deedState() would CREATE pg.deeds, a state
+        // write (same reason the engagements block above reads
+        // prog.deeds directly).
+        const fullSeat = !!(seat && seat.seat === 'full');
+        if (!fullSeat) {
           for (const w of [4, 5]) {
             const rd = (typeof this.waveUnlockReady === 'function') ? this.waveUnlockReady(w) : null;
             if (rd && !rd.ready && typeof this._readinessBarLine === 'function') {
               out.bars.push({ wave: w, line: String(this._readinessBarLine(rd) || '') });
             }
           }
-        } catch (e2) {}
+        }
       } catch (e) {}
       return out;
     },
@@ -538,10 +552,12 @@
     // (silence, never padding). 4 variant framings; the pick is a
     // dedicated stream (mulberry32 over a hash of stable inputs), never
     // Math.random, so the pick cannot perturb the sim downstream.
-    tableDeedLines() {
+    // seat (optional): passed through to tableDeedRecords — a full seat
+    // silences the readiness-bar bits (finding #2253).
+    tableDeedLines(seat) {
       if (this._tableDeedVoiceOff) return [];
       let rec;
-      try { rec = this.tableDeedRecords(); } catch (e) { return []; }
+      try { rec = this.tableDeedRecords(seat); } catch (e) { return []; }
       const has = (rec.kills && rec.kills.length) || (rec.engagements && rec.engagements.length)
         || (rec.titans && rec.titans.length) || (rec.bars && rec.bars.length);
       if (!has) return [];
@@ -1084,9 +1100,11 @@
       // village's real wave-4+ deeds from its own logs (kills by name,
       // killer and day; titan encounters; readiness bars as they stood).
       // Silence when there is nothing war-shaped to say — never padding.
+      // The audit's seat rides along: on a full seat the bar-read stays
+      // silent (finding #2253).
       try {
         if (!this._tableDeedVoiceOff && typeof this.tableDeedLines === 'function') {
-          for (const _dl of this.tableDeedLines()) this.say(_dl);
+          for (const _dl of this.tableDeedLines(seat)) this.say(_dl);
         }
       } catch (e) { console.warn('table deed voice', e); }
       // NPC ASCENSION PRICING (journey-endgame r7 2026-10-13): the audit

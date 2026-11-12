@@ -440,10 +440,46 @@
           ? String(this.resolveKeepsakeText(me, def, rawMem)).trim()
           : rawMem;
         const knowsClause = mem ? ` ${mem}` : '';
+        // REFRAIN ROTATION + CAP (sim-finalvoice-b, 2026-11-11, finding
+        // #2252): the arming refrain printed byte-identical after EVERY
+        // held item, 3-4x per finale transcript — a refrain the third
+        // time, not a beat. Each lane's canonical closing prints ONCE
+        // per run; later armings rotate the other three variants on a
+        // per-run counter (no RNG — same house shape as the spoil-mutter
+        // rotation). The first hearing stays the canonical line; afterwards
+        // the gifts answer back differently, and the full sentence never
+        // repeats verbatim. The devotion lane keeps "Your gifts are not
+        // mastered — but they are lived-in" on every item (test-main67
+        // A-1 requires it per item, plus the FEASTED terms); the mastery
+        // lane keeps "The feast was the weapon" (A-1b). REVISED from a
+        // pure rotation after the live band showed rotation alone still
+        // repeats the canonical line every 4th arming (~25% verbatim).
+        const DEVOTION_TAILS = [
+          ', and they are with you. The feast was the weapon.',
+          ', and they know your hands. The feast was the weapon.',
+          ', and they have carried you this far. The feast was the weapon.',
+          ', and they are still yours. The feast was the weapon.',
+        ];
+        const MASTERY_TAILS = [
+          ' — and they are with you.',
+          ' — and they stand with you.',
+          ' — and they have not left your side.',
+          ' — and they answer to you now.',
+        ];
+        const nextRefrainTail = (lane, tails) => {
+          pg.surgeCanonSaid = pg.surgeCanonSaid || {};
+          if (!pg.surgeCanonSaid[lane]) {
+            pg.surgeCanonSaid[lane] = true;
+            return tails[0];
+          }
+          const n = (pg.surgeRefrainN | 0);
+          pg.surgeRefrainN = n + 1;
+          return tails[1 + (n % (tails.length - 1))];
+        };
         if (maxed >= 3) {
-          msg = armSurge(`You hold ${name}.${knowsClause} The feast was the weapon — and they are with you.${tip}`);
+          msg = armSurge(`You hold ${name}.${knowsClause} The feast was the weapon${nextRefrainTail('mastery', MASTERY_TAILS)}${tip}`);
         } else if (resonance >= RESONANCE_NEED) {
-          msg = armSurge(`You hold ${name}.${knowsClause} Your gifts are not mastered — but they are lived-in, and they are with you. The feast was the weapon.${tip}`);
+          msg = armSurge(`You hold ${name}.${knowsClause} Your gifts are not mastered — but they are lived-in${nextRefrainTail('devotion', DEVOTION_TAILS)}${tip}`);
         } else if (unmaxed.length) {
           // FOCUSED PRACTICE: the closest-to-complete gift gets the session.
           const needFor = (a) => ((a.level || 1) === 1 ? 10 : 25) - (a.xp || 0);
