@@ -155,12 +155,43 @@ forward: the AFTER panel is a fix-on panel on a fresh band, and the
 baseline stays the r132 control until a future run decides otherwise.
 
 ## Landing
-- Commit: [FILL hashes] — driver + analyzer + proof test + game.js
-  fix + 32 panel JSONs + 32 convo transcripts + this run note (prereg
-  was already committed by the r133 coordinator).
-- Rebase onto master [FILL SHA], proof + gate re-run [FILL], merged
-  locally pending ship (no version bump, no push — ship loop owns it).
+- Commit: `3d0032f2a` (original, on base a0039d484) — driver +
+  analyzer + proof test + game.js fix + 32 panel JSONs + 32 convo
+  transcripts + this run note (prereg was already committed by the
+  r133 coordinator). Index-clobber struck on the safe-commit (all 70
+  files staged-as-deleted); repaired via ls-tree -r + update-index
+  --index-info, verified status + diff HEAD empty.
+- Rebase onto master `fed635f1f` (bisect round-4 landings moved master
+  during the run; first rebase attempt onto 937f79040 hit the
+  documented stop-at-pick quirk — pick in both done and todo lists,
+  tree clean — aborted and re-targeted onto the fresh SHA): new tip
+  `6284f1ec1`, worktree clean. Proof re-run on the rebased tip 44/44.
+  Gate re-run on the rebased tip: first attempt 332/8 (flaky — two extra
+  120s timeouts under heavy parallel load, details lost to a piped
+  tail); re-run with durable log 335/5 in 591s, the identical
+  pre-existing set (measurement-proof-update, measurement-workflow,
+  living-garden timeout, phone-frame receipts, one-person-army
+  timeout) — see addendum.
 - Rotation 1→2 written. Lock deleted.
+
+## Addendum (adopting run, after rebase)
+- Gate re-run #2 (durable log
+  `goals/.../hidden_files/r134-gate2.log`): **335 passed, 5 failed** —
+  `test-measurement-proof-update` (balance-proof staleness),
+  `test-measurement-workflow` (8/9), `test-living-garden-deed-attainment`
+  (120s timeout), `test-phone-frame-proof` (receipts stale),
+  `test-one-person-army-deed-attainment` (120s timeout). Identical to
+  the pre-rebase run and to r185's master run: zero new failures from
+  the fix. The 332/8 first attempt was load flake (capable-bot and
+  occupation-panels also timed out that run; both pass on re-run).
+- Runtime restart mid-run wiped /tmp (gate log + hb loop lost); no work
+  lost — worktree intact at 6284f1ec1, only the run-note edit
+  uncommitted. Heartbeat + loop restarted; gate re-run written to a
+  durable path.
+- Master moved to 4a61100dd during the restart (Loop B 0730Z closeout:
+  proofrefresh b7 + synergydisc-b landed) — second rebase owed before
+  merge; see merge line below.
+- Merge: [FILL at merge time].
 - Measurement-proof refresh: still owed (no retained real
   observer-neutral panel exists; `balance-proof-update.js` validates
   and installs one, it does not generate one). This run lands src/js —
