@@ -35,7 +35,7 @@
   },
   "mergeLeg": {
     "survived": 1,
-    "seeds": 8,
+    "seeds": 16,
     "base": "e4dbe581b",
     "verdict": "COLLAPSE_INSIDE_MERGE"
   },
@@ -565,7 +565,7 @@
   "jointRule": {
     "rule": "CONFIRMED if merge survived <= control - 4 AND control >= 8/16; REFUTED if merge >= control - 1; INCONCLUSIVE otherwise",
     "mergeSurvived": 1,
-    "mergeSeeds": 8,
+    "mergeSeeds": 16,
     "controlSurvived": 5,
     "controlSeeds": 16,
     "jointVerdict": "COORDINATOR_READ — not claimed by this leg"

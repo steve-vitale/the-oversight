@@ -1,0 +1,197 @@
+{
+  "run": "mcconfirm-refresh-spawn",
+  "startedUtc": "2026-11-12T12:18:57.030Z",
+  "load": {
+    "command": "node scripts/balance-panel.js --root <worktree> --seeds 7,42,99,1234,555,777,2026,31337,1,2,3,4,5,6,8,9 --policies capable --days 150 --out /tmp/mcconfirm-refresh-load-panel[-rN]",
+    "restarts": [
+      {
+        "round": 1,
+        "startedUtc": "2026-11-12T12:18:57.052Z",
+        "outDir": "/tmp/mcconfirm-refresh-load-panel",
+        "pid": 19069
+      }
+    ]
+  },
+  "loadAvg": {
+    "start": "4.84 7.29 8.23",
+    "afterSpawns": "0.62 5.58 7.40",
+    "end": "12.13 13.90 10.75"
+  },
+  "spawns": [
+    {
+      "i": 0,
+      "simopt": "0",
+      "ms": 40806,
+      "seconds": 40.8,
+      "status": 0,
+      "timedOutOuter": false,
+      "over30s": true,
+      "loadAlive": true
+    },
+    {
+      "i": 1,
+      "simopt": "1",
+      "ms": 45189,
+      "seconds": 45.2,
+      "status": 0,
+      "timedOutOuter": false,
+      "over30s": true,
+      "loadAlive": true
+    },
+    {
+      "i": 2,
+      "simopt": "0",
+      "ms": 41601,
+      "seconds": 41.6,
+      "status": 0,
+      "timedOutOuter": false,
+      "over30s": true,
+      "loadAlive": true
+    },
+    {
+      "i": 3,
+      "simopt": "1",
+      "ms": 40594,
+      "seconds": 40.6,
+      "status": 0,
+      "timedOutOuter": false,
+      "over30s": true,
+      "loadAlive": true
+    },
+    {
+      "i": 4,
+      "simopt": "0",
+      "ms": 35002,
+      "seconds": 35,
+      "status": 0,
+      "timedOutOuter": false,
+      "over30s": true,
+      "loadAlive": true
+    },
+    {
+      "i": 5,
+      "simopt": "1",
+      "ms": 38199,
+      "seconds": 38.2,
+      "status": 0,
+      "timedOutOuter": false,
+      "over30s": true,
+      "loadAlive": true
+    },
+    {
+      "i": 6,
+      "simopt": "0",
+      "ms": 54690,
+      "seconds": 54.7,
+      "status": 0,
+      "timedOutOuter": false,
+      "over30s": true,
+      "loadAlive": true
+    },
+    {
+      "i": 7,
+      "simopt": "1",
+      "ms": 76213,
+      "seconds": 76.2,
+      "status": 0,
+      "timedOutOuter": false,
+      "over30s": true,
+      "loadAlive": true
+    },
+    {
+      "i": 8,
+      "simopt": "0",
+      "ms": 77523,
+      "seconds": 77.5,
+      "status": 0,
+      "timedOutOuter": false,
+      "over30s": true,
+      "loadAlive": true
+    },
+    {
+      "i": 9,
+      "simopt": "1",
+      "ms": 54069,
+      "seconds": 54.1,
+      "status": 0,
+      "timedOutOuter": false,
+      "over30s": true,
+      "loadAlive": true
+    },
+    {
+      "i": 10,
+      "simopt": "0",
+      "ms": 70201,
+      "seconds": 70.2,
+      "status": 0,
+      "timedOutOuter": false,
+      "over30s": true,
+      "loadAlive": true
+    },
+    {
+      "i": 11,
+      "simopt": "1",
+      "ms": 99790,
+      "seconds": 99.8,
+      "status": 0,
+      "timedOutOuter": false,
+      "over30s": true,
+      "loadAlive": true
+    }
+  ],
+  "testRuns": [
+    {
+      "k": 0,
+      "ms": 92835,
+      "seconds": 92.8,
+      "exitCode": 1,
+      "passed": 0,
+      "failed": 4,
+      "loadAlive": true
+    },
+    {
+      "k": 1,
+      "ms": 94693,
+      "seconds": 94.7,
+      "exitCode": 1,
+      "passed": 0,
+      "failed": 4,
+      "loadAlive": true
+    },
+    {
+      "k": 2,
+      "ms": 93781,
+      "seconds": 93.8,
+      "exitCode": 1,
+      "passed": 0,
+      "failed": 4,
+      "loadAlive": true
+    }
+  ],
+  "verdictInputs": {
+    "n": 12,
+    "samplesSeconds": [
+      40.8,
+      45.2,
+      41.6,
+      40.6,
+      35,
+      38.2,
+      54.7,
+      76.2,
+      77.5,
+      54.1,
+      70.2,
+      99.8
+    ],
+    "p50Seconds": 49.6,
+    "p95SecondsInterp": 87.5,
+    "p95SecondsNearestRank": 99.8,
+    "maxSeconds": 99.8,
+    "over30sCount": 12,
+    "testPassesOldCap": "0/3",
+    "loadAliveThroughout": true,
+    "loadRestarts": 1
+  },
+  "finishedUtc": "2026-11-12T12:35:07.324Z"
+}
