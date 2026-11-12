@@ -196,13 +196,54 @@ No real deviation; baseline NOT rolled forward.
 - **Q6 gorge-after** (crisis r181 carry): zero through r190 re-judge
   — untouched by this run.
 
-## Gate (TODO — adoption)
+## Gate (adoption r184 — on the rebased tip 1e5df4127)
 
-Full `node scripts/check.js --quick` on the rebased tip; adjudicate
-standing failures (measurement-proof staleness pair, phone-frame-proof
-stale receipt) vs load artifacts (re-run standalone green) per the
-r181 precedent. Family proofs (r146/r147/r151/r155/r157/r161/r166/
-r169/r170) re-run on the rebased tip.
+Family proofs on the rebased tip (ALL GREEN): r183 proof 21/21,
+inherited-thread-resume 6/6, resume-opener-quotes 3/3,
+succession-opener-coherence 9 checks × two arms, fusion-mantle 9/9,
+snippet-stage-direction PASS, resume-quote-hygiene 10/10,
+crisis-r176-resume-quote 15/15, resume-memory-sense ALL GREEN,
+resume-hook-quote 13 assertions.
+
+Standing failures, adjudicated (r181 precedent — identical failures on
+the rebased tip, re-run standalone above):
+- `test-measurement-proof-update.js` + `test-measurement-workflow.js`
+  (measurement-proof staleness pair): retained neutrality proof covers
+  pre-change Game/controller/harness inputs; any Game change (here
+  conversation.js) invalidates it until `balance-proof-update.js`
+  re-runs the maintenance proof. Standing, not blocking; refresh is a
+  separate maintenance step, not a journey-run fix.
+- `test-phone-frame-proof.js` (stale receipt): the branch touches NONE
+  of the 6 listed inputs (index.html, foreignSpeech.json, regions.json,
+  statusEffects.json, table-endings.json, alienPlayers.js) — the
+  receipt predates master's changes to those files. Pre-existing
+  staleness on master, not caused by this branch. Standing, not
+  blocking.
+
+Load artifacts (re-run standalone green — see below): the two deed
+tests time out at check.js's 120s cap but pass standalone:
+- `test-living-garden-deed-attainment.js`: standalone 8 passed,
+  0 failed (log /tmp/garden-standalone.log; ran ~5 min).
+- `test-one-person-army-deed-attainment.js`: standalone 7 passed,
+  0 failed (log /tmp/army-standalone.log; ran ~3 min).
+Both are slow suites, not defects. (Provenance note: the two
+standalone runs were executed at 03:00–03:08Z by an unidentified
+concurrent exec session in this worktree, not by this run's
+coordinator; the outputs were verified by reading the logs — both
+end with a complete JSON panel and an explicit "N passed, 0 failed"
+summary. The 120s check.js timeouts reproduce the same shape as the
+r183 gate log, so the verdict does not depend on who launched them.)
+
+Full `node scripts/check.js --quick` on the rebased tip: **334 passed,
+6 failed in 796s** (log
+evidence/2026-11-11/journey-succession-r184-gate.log; r183's gate on
+the old tip was 335/5 in 697s). All six failures adjudicated:
+- 3 standing (above): measurement-proof pair + phone-frame receipt.
+- 3 load artifacts, all green standalone: living-garden 8/8,
+  one-person-army 7/7, `test-capable-bot-20261014.js` 42/42 (exit 0,
+  76s standalone; it ran 91s on r183's gate and crossed the 120s cap
+  this time under the loaded box — killed mid-run with all assertions
+  so far ok, no failing assertion). GATE: GO.
 
 ## Metric review (DONE — coordinator, adoption to confirm)
 
