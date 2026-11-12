@@ -1,0 +1,27 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=0)
+=== seed 132103 day 120 — conversation with Thabo (thabo_maseko) ===
+occupation=taxi driver temperament=dry trust=43 dead=false
+want: curious (stage 0)
+open thread: grief fromSeed=false
+picker: control
+
+THEM: "I don't know what to do with my hands today."
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Thabo shows you where they go to think. "Don't tell the others. Everyone needs one place."
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: A long exhale. "I'll get there. Just needed a minute where I didn't have to be fine."
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "Do you dream about before? Or is it all — this — now?"
+YOU: [gq:yn:unsure] "I don't know."
+THEM: "It's all right if you don't know."
+YOU: [goon] "I'm here. Go on."
+THEM: "what you dream about — we hadn't finished. Give me a second."
+YOU: [ans:q_dream:a_before] "Before. Every night. It's the only place it still exists."
+THEM: "Then it's not gone. Not really. Keep going back."
+YOU: [goon] "I'm here. Go on."
+THEM: "Hah. Cape Town, South Africa, always. Same dream: I'm walking home and the street keeps getting longer. I wake up tired, like I actually walked it."
+YOU: (leave)
+pre-close: want curious stage 2 thread want
+closing line: "I'll be okay. Don't worry about me. Worry about... actually, don't worry at all."
+(gossip picks this sitting: 0)

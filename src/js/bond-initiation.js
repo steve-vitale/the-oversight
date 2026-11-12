@@ -992,11 +992,29 @@
       var comm = null;
       try { comm = (G.commLevel && G.commLevel(vid)) || null; } catch (e) { comm = null; }
       if (comm && comm.level === 'none') return out;
-      if (pendingBondProposal(vid)) {
+      // SPOKEN-ASK GATE (journey-scale r132, 2026-11-11): a bond/link
+      // answer is offered only once the ask has been HEARD in this
+      // sitting (c.linkRaiseSpoken / c.bondProposalSpoken, set in
+      // convoRecordSpokenBeat, reset per sitting in startConvo). Before
+      // this, bondChoices prepended the answers whenever the ask was
+      // pending — so a villager asking to forage could be answered with
+      // "All right. Let's ask them." and a link proposal carried to a
+      // village never mentioned (r131 Claudete, seed 131102 d120).
+      // Canon (docs/CONVERSATIONS.md): "Replies belong to the spoken
+      // exchange." The pending survives unanswered (3-day expiry,
+      // re-spoken next sitting); nothing here consumes it. Fail-open
+      // when there is no convo record at all (unknown caller, old
+      // behaviour); fail-closed when a record exists and the ask was
+      // not spoken this sitting.
+      var c = null;
+      try { c = (G.convoGet && G.convoGet(vid)) || null; } catch (e) { c = null; }
+      var linkSpoken = !c || !!c.linkRaiseSpoken;
+      var bondSpoken = !c || !!c.bondProposalSpoken;
+      if (pendingBondProposal(vid) && bondSpoken) {
         out.push({ id: 'bond:accept', label: '"Yes. Stick together."' });
         out.push({ id: 'bond:decline', label: '"Not like that. Not yet."' });
       }
-      if (pendingLinkRaise(vid)) {
+      if (pendingLinkRaise(vid) && linkSpoken) {
         out.push({ id: 'link:accept', label: '"All right. Let\'s ask them."' });
         out.push({ id: 'link:decline', label: '"Not them. Not now."' });
       }

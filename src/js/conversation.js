@@ -5551,6 +5551,11 @@
       c.active = true; c.exchanges = 0; c.budget = this.convoBudget(vid);
       c.thread = null; c.depth = 0; c.transcript = []; c.pendingQ = null;
       c.choosingSubject = false; c.lastBeat = null; c.spokenBeat = null; c.replyMenu = null; c.followUsed = {}; c.menuPage=0; c.menuPages=1;
+      // JOURNEY-SCALE R132 (2026-11-11): per-sitting "ask spoken" flags
+      // (set in convoRecordSpokenBeat when a bond proposal / link raise
+      // is actually heard) reset with the other sitting ledgers — the ask
+      // has to be heard again next sitting before its answer is offered.
+      c.linkRaiseSpoken = false; c.bondProposalSpoken = false;
       c.threadLog = []; c._beatThread = null; c._resumedOnce = false; c._resumeOwnsTid = null;
       // STALE INVITE HOLD (journey-social r40 2026-10-21): c.invitePending is
       // the intra-conversation hold for "opener owns the reply, queue the

@@ -1,0 +1,28 @@
+(pre-talk seed: seek_comfort planted d88; takenWantDay=0; convoCount=9)
+=== seed 132102 day 90 — conversation with Ella (ella_johnson) ===
+occupation=ESL teacher temperament=dry trust=30 dead=false
+want: seek_comfort (stage 1)
+open thread: want fromSeed=true
+picker: control
+
+THEM: "About whatever's been weighing on me — It's stupid. I'm alive, everyone's alive, and I can't stop shaking."
+(turn0 choices: dlg:cant, dlg:comfort, dlg:empathize, goon, dlg:subject, leave, silence)
+YOU: [dlg:comfort] "Hey — are you alright?"
+THEM: "Thanks. ...Thanks for saying that."
+YOU: [dlg:stay] "I'm not going anywhere."
+THEM: "Good. Company's company."
+YOU: [dlg:stay] "I'll stay a while."
+THEM: "Careful — that log's hotter than it looks." They shift it with a boot, making space.
+YOU: [dlg:stay] "I'm not going anywhere."
+THEM: They lean back on their hands. "Wind's up tonight. Good night to not be walking."
+YOU: [dlg:stay] "I'll stay a while."
+THEM: "...I keep thinking about them. About — everyone. Sorry. It just comes out, sitting here."
+YOU: [goon] "Do go on."
+THEM: "...I should say, I trade in what I know. My knowledge for yours. Or food, if you're short on secrets."
+YOU: [ask:gossip] "Any good gossip? I'm bored."
+THEM: "You want to know about that? Okay." "Funny thing: Liam headed out to check the snares."
+YOU: [dlg:more] "I’m listening."
+THEM: "Word is you're doing right by people. Keep it up."
+pre-close: want seek_comfort stage 3 thread gossip
+closing line: "Take care of yourself."
+(gossip picks this sitting: 1)

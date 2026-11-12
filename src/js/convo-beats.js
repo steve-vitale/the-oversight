@@ -150,6 +150,18 @@
     const topic = opts?.topic || c.thread || 'small';
     const tag = opts?.tag || (c.choosingSubject ? 'prompt' : threadBeatTag(c.thread, c));
     c.spokenBeat = { tag, topic, line: String(line) };
+    // JOURNEY-SCALE R132 (2026-11-11): a bond proposal / link raise is
+    // only answerable once the player has HEARD it in this sitting.
+    // Replies belong to the spoken exchange (docs/CONVERSATIONS.md) —
+    // the r131 Claudete defect was link:accept offered (and taken) while
+    // the NPC was asking to forage, the raise never spoken. The flags
+    // are set here because every speaking path funnels through this
+    // record: sayLine (beats and the goon-held beats), and
+    // recordStagedBeat for the opener-carried ask. A queued-but-unspoken
+    // beat sets no flag — queuing is not hearing. Reset per sitting in
+    // startConvo; gated in bond-initiation.js bondChoices.
+    if (tag === 'linkraise') c.linkRaiseSpoken = true;
+    if (tag === 'bondproposal') c.bondProposalSpoken = true;
   };
 
   // Tag transcript entries: every 'them' line carries its beat tag.
