@@ -271,11 +271,26 @@ baseline stays the r132 control until a future run decides otherwise
 (same call as r133).
 
 ## Landing
-- Gate: `node scripts/check.js --quick` — **335 passed, 5 failed in
-  813s**, the identical known pre-existing set as r133/r185
-  (balance-proof staleness; measurement-workflow 8/9; phone-frame
-  receipts; 2× 120s deed-attainment timeouts). Zero new failures from
-  the fix; proof test 23/23.
-- Commit: [FILL at commit time].
-- Rebase/merge: [FILL at merge time].
+- Gate (pre-rebase): `node scripts/check.js --quick` — **335 passed,
+  5 failed in 813s**, the identical known pre-existing set as
+  r133/r185 (balance-proof staleness; measurement-workflow 8/9;
+  phone-frame receipts; 2× 120s deed-attainment timeouts). Zero new
+  failures from the fix; proof test 23/23.
+- Commit: `eb44dd6c7` (70 files: fix + driver + analyzer + proof test
+  + prereg + run note + 64 panel files). Index-clobber struck on the
+  safe-commit (all 70 files staged-as-deleted + `MM` on
+  convo-mood.js); repaired via `git ls-tree HEAD` + `update-index
+  --add --index-info`, verified status + diff HEAD empty and
+  hash-object match.
+- Rebase onto local master `5f7250e26` (10 commits ahead of base
+  `ea1ef5a75`; convo-mood.js untouched on master): clean, no quirk;
+  new tip `88a3a8db7`. Proof re-run on the rebased tip 23/23.
+- Gate (rebased tip): **331 passed, 9 failed in 1265s** — the known
+  5 plus 4 extra 120s timeouts (trust-observer-neutrality,
+  synergy-stall, capable-bot-20261014, table-endings-20261014), all
+  pure timeouts with passing assertions to the cutoff, under heavy
+  parallel load. Each re-run alone: PASS (104s / 98s / 101s / 73s).
+  True verdict on the rebased tip: 335/5, the identical pre-existing
+  set. Zero new failures from the fix.
+- Merge: [FILL at merge time].
 - Rotation 1→2 written. Lock deleted.
