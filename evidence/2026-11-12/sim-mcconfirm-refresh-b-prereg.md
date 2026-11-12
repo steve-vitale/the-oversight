@@ -108,3 +108,24 @@ NO-GO branches (a miss is a miss, never re-scored):
 `evidence/2026-11-12/sim-mcconfirm-refresh-b.md` (with a "metric review"
 section). Records the analyzer's before/after summary values, the
 spawn-time measurements with the load applied, and the verdict per item.
+
+## Amendment 1 (pre-measurement, item (b) load shape — committed BEFORE any item (b) measurement runs)
+
+Reason: the b8 panel took 41 min for 64 rows at the panel's default
+`--par 4` (~2.5 min per row per worker), so the pre-registered 4-seed
+load panel would finish in ~2.5 min of wall time — far shorter than the
+~15 min the 12 timed spawns + 3 test runs need. A load that lapses
+mid-measurement would void the "under concurrent-panel load" condition
+for the later samples. The amendment strengthens the load, never
+weakens it; the command shape, policy, days, and out dir are unchanged.
+
+- Load panel seeds are the 16-seed b8 set
+  (`7,42,99,1234,555,777,2026,31337,1,2,3,4,5,6,8,9`), policy
+  `capable`, days 150 — 16 rows, ~10 min wall at `--par 4`.
+- The measurement script restarts the IDENTICAL load command if it
+  exits before the measurements complete, and records every restart
+  (timestamp + exit status) in the results JSON. The load condition
+  throughout is "a sibling panel of this command is running"; a
+  restart is the same load resuming, not a different load.
+- Nothing else in this prereg changes. Items (a) and (b) GO/NO-GO bars,
+  the cap rule, and the regression set are untouched.
