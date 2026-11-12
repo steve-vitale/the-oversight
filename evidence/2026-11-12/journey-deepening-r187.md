@@ -89,8 +89,8 @@ Per seed: 100032 survived d101 (4 alive, wave 4, standing 200, regional); 100033
 - **Gate (adopting run, full check.js through the flap, 20:27–20:44Z):** 325 passed, 15 failed in 1012s. All 15 adjudicated: 7 EPERM flap writes (human-combat-parity, measurement-flags, measurement-source-text, prepared-runner-custody, proof-text-identity, telemetry-check-recorder, sw-audio-cache); foodpower's ontology-green sub-check failed only because the flap had zeroed ONTOLOGY.md; occupation-panels CLI-workflow exit 1 (flap-suspect); 2 exact-120s deed-attainment timeouts (living-garden, one-person-army — load); 3 pre-existing staleness (measurement-proof-update, measurement-workflow, phone-frame-proof stale receipt). No src/ change in this run, so no failure is caused by it.
 - **Gate (adopting run, standalone re-runs after the flap cleared ~22:01Z + ONTOLOGY.md restored, hash-verified a66a3df19):** all 12 re-runnable failures re-run standalone — ALL exit 0 (the 7 EPERM + foodpower + occupation-panels + measurement-cache-flags + living-garden + one-person-army; logs `evidence/2026-11-12/rerun-*.log`). Cache-flags passed standalone; per the r187 Lane B lesson its scores track box load, not the change. The remaining 3 (staleness pair + phone-frame) are pre-existing receipts, not re-runnable. **Gate: GO.** Analyzer test 22 passed, 0 failed; `validate-ontology.js` — all 138 systems validated, release permitted.
 - **Telemetry:** re-run quiet (8 files, 4 metrics, no large deviations). Baseline NOT rolled forward (probe panel).
-- Commit: [FILL at commit time].
-- Merge: [FILL at merge time].
+- Commit: `152e77ef3` (18 files, evidence-only).
+- Merge: ff-only `bd29d8bd7..152e77ef3`, master advanced to `152e77ef3`.
 - Rotation 2→3 written at closeout. Lock deleted.
 
 ## Carried (not this run's to build)
