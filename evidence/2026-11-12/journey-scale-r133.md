@@ -259,4 +259,10 @@ concurrent sibling run; r132 ran uncontended.
 
 ## Landing
 
-**TBD — SHAs patched in after merge.**
+- **Fix commit:** `3cf9a4644` — "journey-scale r133: gesture accept/decline
+  for mimed invitations (trap-line fix)" — merged ff-only to local master.
+  Base at run start `ddb0a9101`; rebased clean onto the bisect-adoption
+  tip `693576fa5` before merging; proof test re-run 45/45 on the rebased
+  tip.
+- **Status: merged locally, pending ship.** No version bump, no push, no
+  live verification — the ship loop owns those.
