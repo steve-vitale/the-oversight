@@ -5,9 +5,15 @@
 //   days back. You're not Colin. Still on your mind?" — addressed to the
 //   third Bearer <redacted> never met Colin-in-that-conversation, reading as a fresh
 //   realization (transcript-caught journey-landing r16 2026-10-15).
-// GREEN (post-fix): names the dead, owns the gap, invites:
-//   "...that was 8 days back. You weren't there for that one — Colin was.
-//   Want to hear where it left off?"
+// GREEN (post-fix, r183): names the dead, owns the gap, invites:
+//   "...that was 8 days back. Want to hear where it left off?"
+// R183 (journey-succession 2026-11-11, crisis r181 Rafael defect): the
+// post-fix line no longer claims "You weren't there for that one —
+// Colin was" — false to the player, who WAS there in that conversation
+// as the predecessor (every open thread was planted in a conversation
+// with the player). The gap is owned by naming the dead and inviting,
+// not by asserting the new Bearer's absence.
+const path = require('path');
 function mulberry32(a) {
   return function () {
     a |= 0; a = (a + 0x6D2B79F5) | 0;
@@ -17,8 +23,8 @@ function mulberry32(a) {
   };
 }
 Math.random = mulberry32(7);
-process.chdir('/home/hatch/workspace/worktrees/journey-landing2');
-const { loadGame, setupGame } = require('/home/hatch/workspace/worktrees/journey-landing2/scripts/sim-harness');
+process.chdir(path.join(__dirname, '..'));
+const { loadGame, setupGame } = require('./sim-harness');
 
 let pass = 0, fail = 0;
 function check(name, cond, extra) {
@@ -61,7 +67,8 @@ function check(name, cond, extra) {
   check('names the dead predecessor', /Colin/.test(line), line.slice(0, 120));
   check('does NOT say "You\'re not Colin. Still on your mind?"',
     !/You're not Colin\. Still on your mind\?/.test(line), line.slice(0, 160));
-  check('owns the gap (new Bearer <redacted> there)', /weren't there for that one/i.test(line), line.slice(0, 160));
+  check('does NOT claim the player absent (r183: the player was there as the predecessor)',
+    !/weren't there for that one/i.test(line), line.slice(0, 160));
   check('invites instead of assuming', /want to hear where it left off/i.test(line), line.slice(0, 160));
   check('memory quote still attached', /Did you sleep\?/.test(line), line.slice(0, 220));
   console.log(`\nRESULT: ${pass} pass, ${fail} fail`);

@@ -33,13 +33,20 @@ async function main() {
 
   // plant a thread carrying a snippet (the last NPC-spoken beat, quotes
   // stripped at plant time per convoNoteBeat — the opener re-quotes it)
+  // R183 (journey-succession 2026-11-11): the planted snippet must be a
+  // REAL beat. Recap lines ("We started on that favor, then got onto the
+  // neighbors.") are conversation grammar, not remembered speech — the
+  // r183 fix stops quoting them as memories, so a recap snippet no longer
+  // survives the quote guard. This test pins the QUOTING (single quotes,
+  // no nested doubles), not the quotability of recaps; the snippet below
+  // is substantive content, which is what the guard is for.
   Game.startConvo(vid);
   try {
     const L = Game.convoTopicLedger(vid);
     L.open = [{
       tid: 'favor', label: 'that favor', day: Game.state.scholar.day,
       why: 'changed the subject',
-      snippet: 'We started on that favor, then got onto the neighbors.',
+      snippet: 'I saw lights over the ridge the night we walked back.',
     }, {
       tid: 'neighbors', label: 'the neighbors', day: Game.state.scholar.day,
       why: 'changed the subject', snippet: null,
@@ -57,7 +64,7 @@ async function main() {
   ok(typeof line === 'string' && line.length > 0, 'resume opener fires with a snippet thread');
   if (line) {
     console.log('  opener:', JSON.stringify(line.slice(0, 200)));
-    ok(line.indexOf('We started on that favor') !== -1, 'the snippet is quoted in the opener');
+    ok(line.indexOf('I saw lights over the ridge') !== -1, 'the snippet is quoted in the opener');
     // strip the opener's own outer quotes — no double quotes may remain
     // inside (nested "" is the defect, whether mid-sentence or doubled at
     // the seam as transcript-verified)

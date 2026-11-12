@@ -1900,6 +1900,17 @@
       // Recap / re-anchor meta is grammar, not remembered speech.
       if (/^Still on\b/i.test(s)) return true;
       if (/^Say it plain\.\s*Still on\b/i.test(s)) return true;
+      // RECAP REFRAMES (journey-succession r183 2026-11-11): the reframe
+      // and exit forms are the same grammar, not content — "X — that's
+      // still where we are.", "We're going in circles — still on X.",
+      // "We started on X, then got onto Y.", "We were talking about X."
+      // A recap restates the label; it shares nothing new, so it must
+      // never quote as a memory nor earn a "settled" (see convoCloseLine).
+      if (/^We started on\b/i.test(s)) return true;
+      if (/^We were (just )?talking about\b/i.test(s)) return true;
+      if (/\bthat's still where we are\b/i.test(s)) return true;
+      if (/\bgoing in circles\b/i.test(s)) return true;
+      if (/^(As|Like) I said —\s*(we'?re still on|we started on|we were talking about)/i.test(s)) return true;
       // Wind-down filler that is only stage direction (convo-dialogue wind pools).
       if (/^Anyway\.\s*A small smile\.?$/i.test(s)) return true;
       return false;
@@ -2137,6 +2148,24 @@
       // predecessor's — the NPC names them. The new Bearer can pick it
       // up, but never as if they were there.
       const pred = (typeof this.inheritedName === 'function') ? this.inheritedName(o) : null;
+      // INHERITED LABEL HONESTY (journey-succession r183 2026-11-11,
+      // crisis r181 Rafael defect): the base labels speak of the NPC in
+      // third person ("what they confided", "their past") — honest while
+      // the speaker is the only named person, but once the opener names
+      // the predecessor first ("{pred} and I..."), "they"/"their"
+      // re-binds to the predecessor and the NPC's own confession reads as
+      // the predecessor's (transcript-caught: Rafael's "Before the
+      // scattering, I froze when it mattered" resumed as what THEO
+      // confided). In the inherited branch, NPC-self threads take
+      // first-person labels: the confider is the speaker, the recipient
+      // is the predecessor. Other labels (the village, the gossip) name
+      // no person and need no re-anchoring.
+      let inheritLabel = label;
+      if (pred) {
+        if (o.tid === 'secret') inheritLabel = `what I confided in ${pred}`;
+        else if (o.tid === 'past') inheritLabel = 'my past';
+        else if (o.tid === 'personal') inheritLabel = 'my story';
+      }
       // RESUME OFFER (story-offer 2026-11-08): when the opener asks whether
       // to hear / pick up the unfinished thread, Yes must deliver that
       // thread — not a generic yn acknowledgment. Tagged on the return so
@@ -2152,13 +2181,23 @@
           // "You're not Colin. Still on your mind?" to the third Bearer on day 10).
           // Name the dead, own the gap, invite — the new Bearer can pick it
           // up, never as if they were there.
-          inner = `${pred} and I never did finish talking about ${label} — that was ${this.pluralize(ago, 'day')} back. You weren't there for that one — ${pred} was. Want to hear where it left off?`;
+          // R183 (journey-succession 2026-11-11, crisis r181 Rafael defect):
+          // the old line ALSO claimed "You weren't there for that one —
+          // {pred} was" — false to the player, who WAS there in that
+          // conversation as the predecessor (Rafael confided to Theo in
+          // d43; the d57 bearer is Theo's successor). Every open thread
+          // was planted in a conversation with the player (endConvo /
+          // subject-change only), so an inherited thread is always one
+          // the player sat in. No presence claim at all: name the dead,
+          // name the thread, invite — the same shape as the recent
+          // branches below, which never claimed absence.
+          inner = `${pred} and I never did finish talking about ${inheritLabel} — that was ${this.pluralize(ago, 'day')} back. Want to hear where it left off?`;
           resumeOffer = true;
         } else if (ago > 1) {
-          inner = `${pred} and I never finished talking about ${label} — ${whyLine}, ${this.pluralize(ago, 'day')} back. You're wearing ${pred}'s shoes now — want to pick it up?`;
+          inner = `${pred} and I never finished talking about ${inheritLabel} — ${whyLine}, ${this.pluralize(ago, 'day')} back. You're wearing ${pred}'s shoes now — want to pick it up?`;
           resumeOffer = true;
         } else {
-          inner = `${pred} and I never finished talking about ${label} — ${whyLine}. You're wearing ${pred}'s shoes now — want to pick it up?`;
+          inner = `${pred} and I never finished talking about ${inheritLabel} — ${whyLine}. You're wearing ${pred}'s shoes now — want to pick it up?`;
           resumeOffer = true;
         }
       } else if (ago > 7) {
@@ -2445,6 +2484,25 @@
         const c = this.convoGet(vid) || {};
         if (lc.convo !== c.count || lc.day !== day) return null;
         if (L.closeGiven === lc.tid + ':' + day) return null;
+        // NEW-CONTENT GATE (journey-succession r183 2026-11-11): "settled"
+        // is earned only by new content shared on the thread THIS sitting
+        // — a real beat in this sitting's thread log (threadLog resets at
+        // startConvo, so its entries are this sitting's only). A recap-only
+        // sitting restates the label ("Still on what they confided")
+        // without re-speaking the content, so the thread is not settled
+        // (transcript-caught: crisis r181 seed 14411 d57 Rafael — two
+        // recap loops, then "Good — what they confided, settled."). The
+        // resume opener itself never counts (its scaffolding fails
+        // convoSnippetIsRealBeat), nor do reframes or recap lines (rejected
+        // as stage direction/grammar in convoSnippetIsStageDirection).
+        // Without a real beat the closer is withheld and lastClosed cleared
+        // — the thread closes quietly, never declared settled on nothing.
+        const log = (c.threadLog || []).filter(e => e && e.thread === lc.tid);
+        let shared = false;
+        for (const e of log) {
+          try { if (e.snippet && this.convoSnippetIsRealBeat(e.snippet)) { shared = true; break; } } catch (err) {}
+        }
+        if (!shared) { L.lastClosed = null; return null; }
         L.closeGiven = lc.tid + ':' + day;
         L.lastClosed = null;
         const about = this.convoThreadAbout(vid, lc.tid, lc.label);
