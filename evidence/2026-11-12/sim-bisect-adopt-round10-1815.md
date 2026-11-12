@@ -1,8 +1,10 @@
 # Coordinator evidence — run fleshout-20261112T1815Z (Loop A, axis scale-onramp)
 
 STALE-LOCK RECOVERY + ADOPTION of the dead 1715Z run. Three arms
-LANDED, merged locally, pending ship. Master tip after this run:
-`1033f4e7b`.
+LANDED, merged locally, pending ship. Master tip after the three
+arms landed: `1033f4e7b`. A sibling Loop B commit (`70f6035ea`,
+Lane B r187 succession) landed on master before this coordinator
+evidence merged; this file was rebased onto it.
 
 ## Run start
 
