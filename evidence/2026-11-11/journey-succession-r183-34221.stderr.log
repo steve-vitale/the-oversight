@@ -1,0 +1,40 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Chester","t":92},{"id":"Dieter","t":90},{"id":"Clinton","t":90},{"id":"Gustavo","t":90}], roster=12
+INH readable=true scripted=true deadItems=13 distinct=12 transferred=0 vanished=1 keptPlants=21 inheritedPlants=0 keptSkills=4 inheritedSkills=7 succTrustPre=92 succTrustPost=56
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","turncoat"] post=["beast_calm","turncoat"]
+DEATH d41 (the expedition, scripted): Moshe -> Chester | passed=true lin=true mo=true trust=56 vouchers=8
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=7 vanished=1 of 12 distinct dead-bearer items
+  CONVO d+3 with Dieter (refused=false)
+  CONVO d+3 with Clinton (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Clinton (refused=false)
+  CONVO d+7 with Wei (refused=false)
+  CONVO d+14 with Sam (refused=false)
+  CONVO d+14 with Dieter (refused=false)
+  BOND-CONVO d+14 with Clinton (depth=1 v=26 refused=false)
+  CONVO d+30 with Sam (refused=false)
+  CONVO d+30 with Dieter (refused=false)
+  CONVO d+45 with Dieter (refused=false)
+  CONVO d+45 with Tom (refused=false)
+  CONVO d+53 with Dieter (refused=false)
+  CONVO d+53 with Tom (refused=false)
+  CONVO d+64 with Dieter (refused=false)
+  CONVO d+64 with Tom (refused=false)
+
+FUNERAL: deathBeat=5 recover=1 vouch=1 (eligible=8) echo=3 organicBurial={"respects":false,"bury":false} halfRation=6
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":51,"offerLines":32,"codexPlantsDelta":21,"codexSkillsDelta":12,"codexAbilitiesDelta":13,"xpDelta":67,"any":true} pantry 69673->11185
+TRUST-DIALS: office 56->90 (+34, climb) | villageMean 79.2->89.9 (+10.7, climb) | ge60 8->8 | movers>=5: [{"id":"Farid","from":56,"to":90,"delta":34},{"id":"Oliver","from":52,"to":84,"delta":32},{"id":"Dmitri","from":67,"to":90,"delta":23},{"id":"Tom","from":83,"to":91,"delta":8},{"id":"Sam","from":85,"to":90,"delta":5}]
+DEED-LEDGER: calls=30 summary={"giveFood":{"calls":11,"ok":11,"deltaSum":10,"deltaN":11,"positive":7,"meanDelta":0.91},"teachPlant":{"calls":15,"ok":15,"deltaSum":0,"deltaN":15,"positive":0,"meanDelta":0},"donateToPantry":{"calls":4,"ok":4,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=1 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=3 (convo=3, say=0)) m4=true m5=manual | endDay=111 alive=9 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+15,d+30,d+70) t2=true(deedCalls=30) trustVerdict={"readable":true,"officeMantle":56,"officeLast":90,"officeDelta":34,"officeClass":"climb","villageMantle":79.2,"villageLast":89.9,"villageDelta":10.7,"villageClass":"climb","villageGe60Mantle":8,"villageGe60Last":8,"movers":[{"id":"Farid","from":56,"to":90,"delta":34},{"id":"Oliver","from":52,"to":84,"delta":32},{"id":"Dmitri","from":67,"to":90,"delta":23},{"id":"Tom","from":83,"to":91,"delta":8},{"id":"Sam","from":85,"to":90,"delta":5}]}
+E6/CALLCHECK: e6={"callMoves":6,"withCensus":6,"chainHandoffs":2,"trustMoves":4} callCheck={"dailyMoveDays":6,"callMoveDays":6,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=4 (v2=4, excludedLoot=0))
+E7/R47: e7={"trustMoves":4,"soloOffice":3,"soloOfficeDeltas":[1,1,1],"soloBearerDeltaExact":[1,1,1],"singleMoverBearer":0,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":1,"both":3,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":3,"v2":4,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":2,"known":2,"unknown":0} e3={"dailyDays":71,"moves":6}

@@ -1,0 +1,39 @@
+
+ORGANIC DEATH d16: Alejandra -> Krishna, topTrust=[{"id":"Terry","t":91},{"id":"Carlos","t":79},{"id":"Jordan","t":69},{"id":"Krishna","t":55}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=11 inheritedPlants=0 keptSkills=3 inheritedSkills=0 succTrustPre=90 succTrustPost=55
+PARITY readable=true equal=true inherited=[] pre=["green_whisper"] post=["green_whisper"]
+DEATH d15 (organic (phase A)): Alejandra -> Krishna | passed=true lin=true mo=true trust=55 vouchers=3
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Terry (refused=false)
+  CONVO d+3 with Carlos (refused=false)
+  STRANGER-PROBE d+3 with Daniyar (trust=40 refused=false)
+  CONVO d+7 with Terry (refused=false)
+  CONVO d+7 with Jordan (refused=false)
+  CONVO d+14 with Terry (refused=false)
+  CONVO d+14 with Jordan (refused=false)
+  BOND-CONVO d+14 with Carlos (depth=0 v=14 refused=false)
+  CONVO d+30 with Terry (refused=false)
+  CONVO d+30 with Jordan (refused=false)
+  CONVO d+45 with Terry (refused=false)
+  CONVO d+45 with Jordan (refused=false)
+  CONVO d+53 with Terry (refused=false)
+  CONVO d+53 with Jordan (refused=false)
+  CONVO d+64 with Terry (refused=false)
+  CONVO d+64 with Jordan (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=1 (eligible=3) echo=7 organicBurial={"respects":false,"bury":false} halfRation=7
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":70,"offerLines":19,"codexPlantsDelta":24,"codexSkillsDelta":13,"codexAbilitiesDelta":15,"xpDelta":64,"any":true} pantry 22636->11097
+TRUST-DIALS: office 55->86 (+31, climb) | villageMean 48.2->90.4 (+42.2, climb) | ge60 3->8 | movers>=5: [{"id":"Aki","from":6,"to":90,"delta":84},{"id":"Daniyar","from":30,"to":90,"delta":60},{"id":"Grace","from":38,"to":90,"delta":52},{"id":"Leo","from":40,"to":90,"delta":50},{"id":"Julián","from":41,"to":90,"delta":49},{"id":"Nathan","from":42,"to":90,"delta":48},{"id":"Pavel","from":46,"to":90,"delta":44}]
+DEED-LEDGER: calls=0 summary={}
+
+IDENTITY TRIPS: raw=3 grief-excluded=2
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=7 (convo=7, say=0)) m4=true m5=manual | endDay=85 alive=9 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=false(deedCalls=0) trustVerdict={"readable":true,"officeMantle":55,"officeLast":86,"officeDelta":31,"officeClass":"climb","villageMantle":48.2,"villageLast":90.4,"villageDelta":42.2,"villageClass":"climb","villageGe60Mantle":3,"villageGe60Last":8,"movers":[{"id":"Aki","from":6,"to":90,"delta":84},{"id":"Daniyar","from":30,"to":90,"delta":60},{"id":"Grace","from":38,"to":90,"delta":52},{"id":"Leo","from":40,"to":90,"delta":50},{"id":"Julián","from":41,"to":90,"delta":49},{"id":"Nathan","from":42,"to":90,"delta":48},{"id":"Pavel","from":46,"to":90,"delta":44}]}
+E6/CALLCHECK: e6={"callMoves":4,"withCensus":4,"chainHandoffs":2,"trustMoves":2} callCheck={"dailyMoveDays":4,"callMoveDays":4,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=8 (v2=8, excludedLoot=0))
+E7/R47: e7={"trustMoves":2,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":0,"both":2,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":7,"v2":8,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":2,"known":2,"unknown":0} e3={"dailyDays":71,"moves":4}
