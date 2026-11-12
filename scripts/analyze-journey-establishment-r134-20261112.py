@@ -1,0 +1,1014 @@
+#!/usr/bin/env python3
+"""r134 analyzer: ladder-stall diagnosis (Q1) + mood-guard rewrite (Q2).
+Reads the BEFORE panel (r134-before files, all 16 seeds — band 2501-2516,
+the r134 driver on the fix-off tree, current master) and the AFTER panel
+(r134-after files, all 16 seeds), plus the matching -convo-seed{seed}.txt
+people-check transcripts. Amendment 1: the r133-after corpus is NOT the
+BEFORE — master moved since r133's panel, so trajectories diverged on
+2/4 pilot seeds for reasons confounded with the fix.
+- DRIVER-NEUTRALITY is proven by the proof test's det-gate (the SAME r134
+  driver on the guard-pool-fixed tree vs the unfixed tree, 5d seed 2501:
+  funnel keys + practice snapshots identical — the pool change draws one
+  RNG pick per guard beat either way, so trajectories cannot diverge on
+  the line text), not by this analyzer. The driver is the r133 driver
+  with a tag rename only.
+- Q1 (primary — LADDER STALL DIAGNOSIS, no new sims): why do specialist
+  moves per window fall 34 / 24 / 4 (r133 AFTER panel)? Computed from the
+  r133-after JSONs (the stall panel — loaded separately as js133; the
+  stall exists there and r133 already showed its BEFORE has the same shape). Per specialty per window: G (foodXp
+  gained), W (distinct villagers gaining), NEW (spec 0->positive),
+  RES (granting resolutions from the logs), pantry median at window start,
+  NEAR-MISS pool (1-4 foodXp at d28, never crossing 5 by dEnd). Verdict
+  rules (binding, prereg): SATIETY / SATURATION / RUNG-MATH / UNRESOLVED.
+- REGRESSION (the r133 ladder checks, re-scored as equality): the Q2 fix
+  changes spoken lines only, so every ladder metric on AFTER must equal
+  BEFORE seed by seed (spec0pos, foodXp0pos, foodXpEnd, pace03, win).
+  Any difference is a regression to investigate, not a re-score.
+- Q2 (people-check dial — CANNED GUARD LINES): guard-line occurrences
+  per convo + distinct lines used, BEFORE (r133-after transcripts: the
+  two old lines) vs AFTER (r134-after transcripts: the new 6-line pool).
+  Bars (binding): Q2a count within ±25% (mechanic unchanged); Q2b
+  distinct lines >= 4. Q2c honesty is a sense-read in the run note.
+- Q2d guards carried: INVITATIONS answered >=80% (denominator fix r118),
+  NULL LINES 0, M3 survival-42 >=12/16, M4 0 starvation deaths >=12/16,
+  SPOTTER foodXp total 0.
+Usage: python3 scripts/analyze-journey-establishment-r134-20261112.py [EVIDDIR]
+"""
+import json, os, re, sys
+from collections import Counter, defaultdict
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)
+EVID = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, 'evidence', '2026-11-12')
+SEEDS = list(range(2501, 2517))
+
+TASKS = ['hunt', 'forage', 'garden', 'fish', 'wood', 'stone', 'deadfall', 'water', 'scout', 'patrol', 'cook', 'tend', 'teach', 'mend']
+SPECS = ['butcher', 'cook', 'preserver', 'spotter', 'builder']
+# r132 Q2: invitation patterns are the r116/r118 shapes ("walk ... with
+# me", "come see", "come with", "come get", "join me", "walk with me")
+# plus any THEM line ending in '?' that contains 'with me' / 'come' /
+# 'join'.
+INVITE_RE = re.compile(r'(walk\b.*\bwith me|walk my trap line|help me haul|come get air|come see what i found|come with|come get|join me|come along|follow me)', re.I)
+
+abil2skill = {}
+abil_lane = {}
+try:
+    for a in json.load(open(os.path.join(ROOT, 'src', 'data', 'abilities.json'))):
+        if a and a.get('id'):
+            abil_lane[a['id']] = a.get('lane')
+            if a.get('lane') == 'skill':
+                abil2skill[a['id']] = a.get('skillId') or a['id']
+except Exception as e:
+    print('abilities map unavailable:', e)
+
+def load(tag, seed, d=None):
+    p = os.path.join(d or EVID, f'journey-establishment-{tag}-seed{seed}.json')
+    return json.load(open(p))
+
+def load_convo(tag, seed, d=None):
+    p = os.path.join(d or EVID, f'journey-establishment-{tag}-convo-seed{seed}.txt')
+    try:
+        return open(p).read()
+    except Exception as e:
+        return None
+
+INERT = {'diplomat', 'herbal_remedy', 'preserve_food', 'wound_care'}
+AWARE = {'field_dressing', 'triage'}
+SPLIT_WHY = {'teacher-away', 'teacher-unseeded', 'no-teacher-anywhere'}
+
+def parse_convos(text):
+    """Same as r110 (Amendment 1): a '(no pick — winding down)' is a clean
+    ending, NOT a stall. Only a plain '(no pick)' / '(choices empty)' while
+    open and not winding down counts."""
+    if text is None:
+        return {'convos': 0, 'stalls': 0, 'wound_down': 0, 'stall_menus': [], 'ended_engine': 0, 'names': [], 'missing': True}
+    names = re.findall(r'^-- (.+?) \([^)]+\) occ=', text, flags=re.M)
+    stalls = len(re.findall(r'^\(no pick\)$', text, flags=re.M)) + len(re.findall(r'^\(choices empty\)$', text, flags=re.M))
+    wound_down = len(re.findall(r'^\(no pick \u2014 winding down\)$', text, flags=re.M))
+    stall_menus = re.findall(r'^\(stall menu: (.*)\)$', text, flags=re.M)
+    ended_engine = len(re.findall(r'^\(ended by engine\)$', text, flags=re.M))
+    return {'convos': len(names), 'stalls': stalls, 'wound_down': wound_down, 'stall_menus': stall_menus,
+            'ended_engine': ended_engine, 'names': names, 'missing': False}
+
+def normalize_nav(body):
+    """Navigation turns: r110 logs THEM: (null) after a menu:more pick;
+    r111 logs THEM: (menu page turned). Both are the same event — a
+    pagination tap with no new NPC line — so they normalize to one token.
+    ONLY immediately after a menu:more pick; a (null) anywhere else is a
+    real difference and is NOT normalized (a genuine null line after any
+    other pick still diverges the compare)."""
+    lines = body.split('\n')
+    out = []
+    prev_pick = None
+    for ln in lines:
+        if ln.startswith('YOU: ['):
+            m = re.match(r'YOU: \[([^\]]+)\]', ln)
+            prev_pick = m.group(1) if m else None
+            out.append(ln)
+        elif ln in ('THEM: (null)', 'THEM: (menu page turned)') and prev_pick == 'menu:more':
+            out.append('THEM: (nav-turn)')
+            prev_pick = None
+        else:
+            if ln.startswith('THEM:'):
+                prev_pick = None
+            out.append(ln)
+    return '\n'.join(out)
+
+def snap_of(practice, key):
+    """practice[key] is {day, snap} or None. Returns (day, {id: villager})."""
+    if not practice:
+        return None, None
+    entry = practice.get(key)
+    if not entry or not entry.get('snap'):
+        return None, None
+    return entry.get('day'), {str(v['id']): v for v in entry['snap']}
+
+def count_moves(a, b):
+    """Moved competence cells between two snapshots (same villager id in
+    both; died/left excluded). Attributed iff practice reps > 0 in that
+    task at the later snapshot."""
+    moved = 0; attributed = 0; tasks = Counter(); lines = []
+    if a is None or b is None:
+        return {'moved': None, 'attributed': None, 'tasks': tasks, 'lines': lines, 'missing': True}
+    for vid, va in a.items():
+        vb = b.get(vid)
+        if not vb:
+            continue
+        for t in TASKS:
+            ca = (va.get('competence') or {}).get(t)
+            cb = (vb.get('competence') or {}).get(t)
+            if ca is None or cb is None or cb == ca:
+                continue
+            moved += 1
+            tasks[t] += 1
+            reps = ((vb.get('practice') or {}).get(t) or 0)
+            if reps > 0:
+                attributed += 1
+            lines.append(f"  {vb.get('name') or vid} {t}: {ca} -> {cb} (reps {reps})")
+    return {'moved': moved, 'attributed': attributed, 'tasks': tasks, 'lines': lines, 'missing': False}
+
+def skill_moves(a, b):
+    """Skill 0->positive moves + npcSkills gained between two snapshots.
+    r116: pos counts both kinds (unchanged); spec_pos counts specialist
+    0->positive only and fx_pos counts foodXp 0->positive only, so the
+    first-move window can be split (r113's line fired on foodXp moves
+    too and misled)."""
+    pos = 0; spec_pos = 0; fx_pos = 0; gained = []
+    if a is None or b is None:
+        return {'pos': None, 'spec_pos': None, 'fx_pos': None, 'gained': gained, 'missing': True}
+    for vid, va in a.items():
+        vb = b.get(vid)
+        if not vb:
+            continue
+        for t in SPECS:
+            sa = (va.get('specialist') or {}).get(t)
+            sb = (vb.get('specialist') or {}).get(t)
+            if sa == 0 and sb is not None and sb > 0:
+                pos += 1; spec_pos += 1; gained.append(f"{vb.get('name') or vid}:{t} specialist {sa}->{sb}")
+            fa = (va.get('foodXp') or {}).get(t) or 0
+            fb = (vb.get('foodXp') or {}).get(t) or 0
+            if fa == 0 and fb > 0:
+                pos += 1; fx_pos += 1; gained.append(f"{vb.get('name') or vid}:{t} foodXp 0->{fb}")
+        ka = set(va.get('npcSkills') or []); kb = (vb.get('npcSkills') or [])
+        for s in kb:
+            if s not in ka:
+                gained.append(f"{vb.get('name') or vid}: skill {s}")
+    return {'pos': pos, 'spec_pos': spec_pos, 'fx_pos': fx_pos, 'gained': gained, 'missing': False}
+
+def ladder_stats(a, b):
+    """Specialist-ladder moves between two snapshots (same villager id in
+    both; died/left excluded). spec0pos: specialist 0->positive; foodXp0pos:
+    foodXp 0->positive. plus1pool: (villager, task) cells with occupation
+    skill>0 AND foodXp>=5 at the later snapshot (the +1 rung's addressable
+    pool); stepped: pool cells whose skill actually rose. wastedXp:
+    0-skill cells holding foodXp>0 at the later snapshot — XP the gate can
+    never spend. foodXpEnd/occSkillCells are filled by the caller from the
+    later snapshot."""
+    out = {'spec0pos': 0, 'foodXp0pos': 0, 'plus1pool': 0, 'stepped': 0, 'wastedXp': 0, 'foodXpEnd': 0, 'occSkillCells': 0, 'specMoves': [], 'foodXpByTask': {}, 'pace03': 0, 'pace03Moves': [],
+           'spec0posByTask': {}, 'pace03ByTask': {}}
+    for t in SPECS:
+        out['foodXpByTask'][t] = 0
+        out['spec0posByTask'][t] = 0
+        out['pace03ByTask'][t] = 0
+    if a is None or b is None:
+        out['missing'] = True
+        return out
+    out['missing'] = False
+    for vid, va in a.items():
+        vb = b.get(vid)
+        if not vb:
+            continue
+        for t in SPECS:
+            sa = (va.get('specialist') or {}).get(t)
+            sb = (vb.get('specialist') or {}).get(t)
+            fa = (va.get('foodXp') or {}).get(t) or 0
+            fb = (vb.get('foodXp') or {}).get(t) or 0
+            if sa == 0 and sb is not None and sb > 0:
+                out['spec0pos'] += 1
+                out['spec0posByTask'][t] += 1
+                out['specMoves'].append(f"{vb.get('name') or vid}:{t} {sa}->{sb} (foodXp {fa}->{fb})")
+            if sa == 0 and sb == 3:
+                out['pace03'] += 1
+                out['pace03ByTask'][t] += 1
+                out['pace03Moves'].append(f"{vb.get('name') or vid}:{t} 0->3 (foodXp {fa}->{fb})")
+            out['foodXpByTask'][t] += max(0, fb - fa)
+            if fa == 0 and fb > 0:
+                out['foodXp0pos'] += 1
+            if (sa or 0) > 0 and fb >= 5:
+                out['plus1pool'] += 1
+                if (sb or 0) > (sa or 0):
+                    out['stepped'] += 1
+            if (sa or 0) == 0 and fb > 0:
+                out['wastedXp'] += 1
+    return out
+
+def invert_preserver_units(xp_before, carry_before, fx_delta):
+    """Invert one preserver grant event's fx delta back to units through
+    the grant math (first 5 XP 1:1, then 1 XP per 2 units, odd unit
+    carried in foodXpRemainder). Returns (units_low, units_high,
+    carry_low, carry_high): the 2:1 part's gain g means carry+u2 in
+    {2g, 2g+1}, so the true unit count lies in [low, high] and the
+    carry after is 0 on the low bound, 1 on the high bound. A delta
+    inside the 1:1 headroom inverts exactly (carry unchanged), except
+    on the boundary (delta == headroom, carry 0) where one more unit
+    can hide in the carry. Only called on granting rows (delta > 0):
+    a delta-0 row can hide 1 unit above the rung, but the driver row
+    cannot tell it from granting nothing, so both bounds count
+    fx-visible units only — the low bound stays a true lower bound."""
+    if fx_delta <= 0:
+        return (0, 0, carry_before, carry_before)
+    head = max(0, 5 - xp_before)
+    if fx_delta < head:
+        return (fx_delta, fx_delta, carry_before, carry_before)
+    if fx_delta == head:
+        # Boundary: the delta exactly fills the 1:1 headroom. One more
+        # unit can hide in the carry (a 1-unit spill at 2:1 with carry 0
+        # gains 0 XP but sets the carry) — so the count is head or head+1.
+        if carry_before == 0:
+            return (head, head + 1, 0, 1)
+        return (head, head, carry_before, carry_before)
+    g = fx_delta - head
+    u_low = head + 2 * g - carry_before
+    return (u_low, u_low + 1, 0, 1)
+
+def stall_window(a, b):
+    """r134 Q1: per-specialty stall measures between two snapshots (same
+    villager id in both; died/left excluded — the ladder_stats convention).
+    G = foodXp gained in the window; W = distinct villagers with G>0;
+    NEW = spec 0->positive crossings. Returns {task: {'G':, 'W':, 'NEW':}}."""
+    out = {t: {'G': 0, 'W': 0, 'NEW': 0} for t in SPECS}
+    if a is None or b is None:
+        return out
+    for vid, va in a.items():
+        vb = b.get(vid)
+        if not vb:
+            continue
+        for t in SPECS:
+            fa = (va.get('foodXp') or {}).get(t) or 0
+            fb = (vb.get('foodXp') or {}).get(t) or 0
+            if fb > fa:
+                out[t]['G'] += fb - fa
+                out[t]['W'] += 1
+            sa = (va.get('specialist') or {}).get(t)
+            sb = (vb.get('specialist') or {}).get(t)
+            if sa == 0 and sb is not None and sb > 0:
+                out[t]['NEW'] += 1
+    return out
+
+funnel_rows = []
+repro = {}
+practice_panel = {'seeds': 0, 'missing_snaps': [], 'win': {}}
+for w in ('d1-d14', 'd14-d28', 'd28-dEnd'):
+    practice_panel['win'][w] = {'moved': 0, 'attributed': 0, 'tasks': Counter(), 'seeds_with_move': 0, 'seeds_attributed': 0}
+practice_panel['skill_pos'] = 0
+practice_panel['skills_gained'] = []
+practice_panel['reps_end'] = 0
+ladder_panel = {}
+ladder_before = {}
+before_cook_practice = {}
+fx_task_after = {t: 0 for t in SPECS}
+fx_task_before = {t: 0 for t in SPECS}
+grant_events = {'rack': 0, 'rackKcal': 0, 'rackXp': 0, 'huntKill': 0, 'huntKillFx': 0, 'rackSeeds': set(), 'huntSeeds': set(),
+                'cook': 0, 'cookXp': 0, 'cookSeeds': set(), 'mend': 0, 'mendXp': 0, 'mendSeeds': set()}
+# r133 CAP CHECK: granted preserver units per (seed, vid, day) —
+# AFTER read off the driver's live foodXpDay.preserverUnits fields
+# (max unitsAfter over granting rows that day — the counter is
+# monotonic within the day and resets at the day roll, so the max is
+# the day's total; a stale Before on the first row of a new day makes
+# After-Before wrong, max does not care). BEFORE has no units fields
+# (unfixed engine), so its room is shown by inverting fx deltas back
+# to units through the grant math (first 5 XP 1:1, then 1 XP per 2
+# units, odd unit carried), with per-villager carry tracking in both
+# bounds. cap_after_units_max / cap_after_over are the AFTER verdict;
+# cap_before_over_low is the conservative (low-bound) room count.
+cap_after_units = defaultdict(int)
+cap_after_missing = 0
+cap_before_units_low = defaultdict(int)
+cap_before_units_high = defaultdict(int)
+first_move_window = {}
+first_move_window_spec = {}
+first_move_window_fx = {}
+ladder_win_after = {w: {'spec0pos': 0, 'seeds': 0} for w in ('d1-d14', 'd14-d28', 'd28-dEnd')}
+ladder_win_before = {w: {'spec0pos': 0, 'seeds': 0} for w in ('d1-d14', 'd14-d28', 'd28-dEnd')}
+skill_dist_end = {t: {0: 0, 1: 0, 2: 0, 3: 0} for t in SPECS}
+# r134 Q1 STALL: per-window G/W/NEW per specialty + RES (granting
+# resolutions) + pantry at window start + NEAR-MISS pool, all from the
+# BEFORE panel (r133-after JSONs — the stall lives there).
+stall = {w: {t: {'G': 0, 'W': 0, 'NEW': 0, 'RES': 0} for t in SPECS} for w in ('d1-d14', 'd14-d28', 'd28-dEnd')}
+stall_pantry = {'d1': [], 'd14': [], 'd28': []}
+stall_nearmiss = {t: 0 for t in SPECS}
+stall_nearmiss_rows = []
+q2panel = {'null_lines': 0, 'nav_turns': 0, 'rows': []}
+prep_panel = {'attempts': 0, 'lessons_ok': 0, 'already_holds': 0, 'no_teacher': 0,
+              'whys': Counter(), 'split_classes': Counter(), 'rows': []}
+hunt = {'prep_calls': 0, 'prep_kills': 0, 'prep_kills_held': 0, 'prep_kills_notheld': 0,
+        'prep_kcal_held': [], 'prep_kcal_notheld': [],
+        'by_aid': defaultdict(lambda: {'held': [], 'notheld': []})}
+held = defaultdict(list)
+uses = defaultdict(list)
+care = {'calls': 0, 'tends': 0, 'medics_seen': set(),
+        'triage_medics': [], 'herbal_medics': [], 'healer_rounds': [],
+        'treat_ticks': 0, 'treat_changed': 0, 'treat_healers': Counter()}
+cook = {'calls': 0, 'rack_events': 0, 'holder_cooks': [], 'holder_blind': 0,
+        'spec_cooks': 0, 'kept_weeks': 0, 'kept_couple': 0}
+m3_seeds = m4_seeds = 0
+panel_living = 0
+hunter_wound_deaths = []
+prep_fires_by_seed = {}
+
+for seed in SEEDS:
+    before_tag = 'r134-before'
+    try:
+        jb = load(before_tag, seed)
+    except Exception as e:
+        print(f'seed {seed}: BEFORE PANEL MISSING/UNREADABLE ({before_tag}) {e}'); jb = None
+    try:
+        js133 = load('r133-after', seed)
+    except Exception as e:
+        print(f'seed {seed}: STALL PANEL MISSING/UNREADABLE (r133-after) {e}'); js133 = None
+    try:
+        j = load('r134-after', seed)
+    except Exception as e:
+        print(f'seed {seed}: AFTER PANEL MISSING/UNREADABLE {e}'); continue
+    ca = parse_convos(load_convo('r134-after', seed))
+    jr = jb  # funnel_rows compare before vs after (aggregate, descriptive)
+    # DRIVER-NEUTRALITY is proven by the proof test's det-gate (same r133
+    # driver fix-off vs fix-on, 5d seed 2501: funnel keys + practice
+    # snapshots identical except foodXp preserver deltas), not here —
+    # the driver changes are a tag rename + the withDelegate layer +
+    # read-only wraps.
+    diffs = []
+    repro[seed] = diffs
+    tele = j.get('teleAll') or []
+    census = {str(c['id']): c for c in (j.get('census') or [])}
+    hold_end = j.get('holdingsEnd') or []
+    codex = j.get('playerCodexSkills') or {}
+    player_vid = None
+    for cid, c in census.items():
+        if c.get('skills') is not None and set(c['skills']) == set(codex.keys()) and len(codex) > 0:
+            player_vid = cid; break
+    hold_end_v = [h for h in hold_end if str(h['id']) != str(player_vid)] if player_vid else hold_end
+    def pantry_of(x):
+        g = (x or {}).get('guardrails') or {}
+        return g.get('pantryKcal') if g.get('pantryKcal') is not None else (x or {}).get('pantryKcalEnd')
+    funnel_rows.append({
+        'seed': seed,
+        'endDay_ref': jb.get('endDay') if jb else None, 'endDay': j.get('endDay'),
+        'alive_ref': jb.get('aliveEnd') if jb else None, 'alive': j.get('aliveEnd'),
+        'pantry_ref': pantry_of(jb), 'pantry': pantry_of(j),
+        'over_ref': jb.get('gameOver') if jb else None, 'over': j.get('gameOver'),
+    })
+    living = [h for h in hold_end_v if not h.get('dead')]
+    panel_living += len(living)
+    for h in living:
+        owned = set(h.get('owned') or [])
+        skills = set(h.get('skills') or [])
+        checks = {
+            'diplomat': 'diplomat' in owned,
+            'herbal_remedy': ('herbal_remedy' in owned) or ('herbal_medicine' in skills),
+            'field_dressing': ('field_dressing' in owned) or ('field_dressing' in skills),
+            'preserve_food': 'preserve_food' in skills,
+            'wound_care': 'wound_care' in skills,
+            'triage': 'triage' in owned,
+        }
+        for iid, has in checks.items():
+            if has:
+                held[iid].append((seed, h.get('name')))
+    for h in (j.get('huntLog') or []):
+        hunt['prep_calls'] += 1
+        if ((h.get('fxButcherAfter') or 0) > (h.get('fxButcherBefore') or 0)):
+            grant_events['huntKillFx'] += 1
+            grant_events['huntSeeds'].add(seed)
+        if (h.get('kcal') or 0) > 0:
+            grant_events['huntKill'] += 1
+        if (h.get('kcal') or 0) > 0:
+            hunt['prep_kills'] += 1
+            aid = h.get('aid') or '?'
+            if h.get('heldFieldDressing'):
+                hunt['prep_kills_held'] += 1
+                hunt['prep_kcal_held'].append(h['kcal'])
+                hunt['by_aid'][aid]['held'].append(h['kcal'])
+                uses['field_dressing'].append((seed, 'hunt-kill', f"{h.get('name')} {aid} {h['kcal']}kcal"))
+            else:
+                hunt['prep_kills_notheld'] += 1
+                hunt['prep_kcal_notheld'].append(h['kcal'])
+                hunt['by_aid'][aid]['notheld'].append(h['kcal'])
+    prep_fires_by_seed[seed] = sum(1 for h in (j.get('huntLog') or []) if (h.get('kcal') or 0) > 0 and h.get('heldFieldDressing'))
+    hs = j.get('huntStaff') or {}
+    for p in (hs.get('prepLog') or []):
+        prep_panel['rows'].append((seed, p.get('day'), p.get('hunterName'), p.get('teacherName'), p.get('kind'), p.get('ok'), p.get('why')))
+        if p.get('kind') == 'lesson':
+            prep_panel['attempts'] += 1
+            if p.get('ok'):
+                prep_panel['lessons_ok'] += 1
+            else:
+                prep_panel['whys'][str(p.get('why'))] += 1
+        elif p.get('kind') == 'already-holds':
+            prep_panel['already_holds'] += 1
+        elif p.get('kind') == 'no-teacher':
+            prep_panel['no_teacher'] += 1
+            w = str(p.get('why'))
+            prep_panel['whys'][w] += 1
+            if w in SPLIT_WHY:
+                prep_panel['split_classes'][w] += 1
+    for c in (j.get('careLog') or []):
+        care['calls'] += 1
+        care['tends'] += c.get('tends') or 0
+        meds = c.get('medics') or []
+        if len(meds) == 1 and meds[0].get('heldTriage') and (c.get('tends') or 0) >= 2:
+            uses['triage'].append((seed, 'care-reach-2', f"{meds[0].get('name')} tended 2 in one tick (reach 2)"))
+        for m in meds:
+            care['medics_seen'].add((seed, m.get('name')))
+            if m.get('heldTriage'):
+                care['triage_medics'].append((seed, m.get('name')))
+            if m.get('heldHerbalRemedy'):
+                care['herbal_medics'].append((seed, m.get('name')))
+    for hr in (j.get('healerLog') or []):
+        care['healer_rounds'].append((seed, hr.get('caregiverName'), hr.get('patientName'),
+                                       hr.get('hpBefore'), hr.get('hpAfter'),
+                                       hr.get('caregiverHeldHerbalRemedy'), hr.get('caregiverHeldTriage')))
+    for t in (j.get('treatLog') or []):
+        care['treat_ticks'] += 1
+        if t.get('changed'):
+            care['treat_changed'] += 1
+            care['treat_healers'][str(t.get('healer'))] += 1
+    for ck in (j.get('cookLog') or []):
+        cook['calls'] += 1
+        if ((ck.get('fxPreserverAfter') or 0) > (ck.get('fxPreserverBefore') or 0)):
+            # r133 CAP CHECK (AFTER): the day's granted units are the
+            # counter's max over granting rows that day (see the
+            # cap_after_units comment — max, not After-Before, because
+            # the first row of a new day still carries yesterday's
+            # counter in Before). Null units = the field is absent.
+            # Only After-null is missing data: Before-null is the
+            # counter not yet created (a villager's first-ever grant —
+            # zero units granted so far that day, by construction).
+            _ua = ck.get('fxPreserverUnitsAfter')
+            if _ua is None:
+                cap_after_missing += 1
+            else:
+                _k = (seed, ck.get('vid'), ck.get('day'))
+                cap_after_units[_k] = max(cap_after_units[_k], _ua)
+            grant_events['rack'] += 1
+            grant_events['rackKcal'] += max(0, (ck.get('preservedKcalAfter') or 0) - (ck.get('preservedKcalBefore') or 0))
+            grant_events['rackXp'] += (ck.get('fxPreserverAfter') or 0) - (ck.get('fxPreserverBefore') or 0)
+            grant_events['rackSeeds'].add(seed)
+        if ((ck.get('fxCookAfter') or 0) > (ck.get('fxCookBefore') or 0)):
+            grant_events['cook'] += 1
+            grant_events['cookXp'] += (ck.get('fxCookAfter') or 0) - (ck.get('fxCookBefore') or 0)
+            grant_events['cookSeeds'].add(seed)
+    for md in (j.get('mendLog') or []):
+        if ((md.get('fxBuilderAfter') or 0) > (md.get('fxBuilderBefore') or 0)):
+            grant_events['mend'] += 1
+            grant_events['mendXp'] += (md.get('fxBuilderAfter') or 0) - (md.get('fxBuilderBefore') or 0)
+            grant_events['mendSeeds'].add(seed)
+        rack = ck.get('rackLines') or []
+        if rack:
+            cook['rack_events'] += 1
+            for line in rack:
+                if 'for weeks' in line:
+                    cook['kept_weeks'] += 1
+                elif 'couple of weeks' in line:
+                    cook['kept_couple'] += 1
+        if ck.get('holdsPreserveFood'):
+            cook['holder_cooks'].append((seed, ck.get('name'), ck.get('specPreserver'), len(rack)))
+            if (ck.get('specPreserver') or 0) == 0:
+                cook['holder_blind'] += 1
+        if (ck.get('specPreserver') or 0) > 0:
+            cook['spec_cooks'] += 1
+    if not j.get('gameOver') and (j.get('aliveAt40') or 0) >= 1:
+        m3_seeds += 1
+    starv = [d for d in (j.get('deaths') or []) if any(w in str(d.get('cause') or '').lower() for w in ('starvat', 'hunger', 'thirst', 'dehydrat'))]
+    if not starv:
+        m4_seeds += 1
+    for d in (j.get('deaths') or []):
+        if not d.get('player') and 'hunt' in str(d.get('cause') or '').lower():
+            hunter_wound_deaths.append((seed, d.get('day'), d.get('who'), d.get('cause')))
+    # --- Q1 PRACTICE ---
+    practice = j.get('practice') or {}
+    d1day, m1 = snap_of(practice, 'd1')
+    d14day, m14 = snap_of(practice, 'd14')
+    d28day, m28 = snap_of(practice, 'd28')
+    dEndday, mEnd = snap_of(practice, 'dEnd')
+    practice_panel['seeds'] += 1
+    if m1 is None or m28 is None or mEnd is None:
+        practice_panel['missing_snaps'].append((seed, {'d1': d1day, 'd14': d14day, 'd28': d28day, 'dEnd': dEndday}))
+    win_results = {}
+    for wkey, a, b in (('d1-d14', m1, m14), ('d14-d28', m14, m28), ('d28-dEnd', m28, mEnd)):
+        r = count_moves(a, b)
+        win_results[wkey] = r
+        if not r['missing']:
+            practice_panel['win'][wkey]['moved'] += r['moved']
+            practice_panel['win'][wkey]['attributed'] += r['attributed']
+            for t, n in r['tasks'].items():
+                practice_panel['win'][wkey]['tasks'][t] += n
+            if r['moved'] > 0:
+                practice_panel['win'][wkey]['seeds_with_move'] += 1
+            if r['attributed'] > 0:
+                practice_panel['win'][wkey]['seeds_attributed'] += 1
+    for wkey, a, b in (('d1-d14', m1, m14), ('d14-d28', m14, m28), ('d28-dEnd', m28, mEnd)):
+        sm = skill_moves(a, b)
+        if not sm['missing']:
+            practice_panel['skill_pos'] += sm['pos']
+            for g in sm['gained']:
+                practice_panel['skills_gained'].append(f'seed {seed} {wkey}: {g}')
+    if mEnd:
+        for vid, v in mEnd.items():
+            for t in TASKS:
+                practice_panel['reps_end'] += ((v.get('practice') or {}).get(t) or 0)
+    # --- Q1 LADDER (r116): before + after specialist/foodXp moves.
+    lad = ladder_stats(m1, mEnd)
+    if mEnd:
+        lad['foodXpEnd'] = sum(sum((v.get('foodXp') or {}).values()) for v in mEnd.values())
+        lad['occSkillCells'] = sum(1 for v in mEnd.values() for t in SPECS if ((v.get('specialist') or {}).get(t) or 0) > 0)
+        for t in SPECS:
+            for v in mEnd.values():
+                skill_dist_end[t][min(3, max(0, ((v.get('specialist') or {}).get(t) or 0)))] += 1
+    ladder_panel[seed] = lad
+    for t in SPECS:
+        fx_task_after[t] += lad.get('foodXpByTask', {}).get(t, 0)
+    # first-move window, SPLIT (r116): earliest window with a specialist
+    # 0->positive move vs earliest window with a foodXp-only move.
+    for wkey, a, b in (('d1-d14', m1, m14), ('d14-d28', m14, m28), ('d28-dEnd', m28, mEnd)):
+        _sm = skill_moves(a, b)
+        if not _sm['missing'] and _sm['pos'] > 0 and seed not in first_move_window:
+            first_move_window[seed] = wkey
+        if not _sm['missing'] and (_sm['spec_pos'] or 0) > 0 and seed not in first_move_window_spec:
+            first_move_window_spec[seed] = wkey
+        if not _sm['missing'] and (_sm['fx_pos'] or 0) > 0 and seed not in first_move_window_fx:
+            first_move_window_fx[seed] = wkey
+    # ladder moves BY WINDOW (r116): a mid-leg move that dies with its
+    # mover still counts here, unlike the d1->dEnd survivor-filtered count.
+    _win_after = {}
+    for wkey, a, b in (('d1-d14', m1, m14), ('d14-d28', m14, m28), ('d28-dEnd', m28, mEnd)):
+        _wl = ladder_stats(a, b)
+        _win_after[wkey] = _wl.get('spec0pos', 0)
+        ladder_win_after[wkey]['spec0pos'] += _wl.get('spec0pos', 0)
+        if _wl.get('spec0pos', 0) >= 1:
+            ladder_win_after[wkey]['seeds'] += 1
+    lad['win'] = _win_after
+    # before-panel ladder (same snapshots; jb may be None on a missing file)
+    if jb is not None:
+        _bp = jb.get('practice') or {}
+        _b1d, _bm1 = snap_of(_bp, 'd1')
+        _bEd, _bmE = snap_of(_bp, 'dEnd')
+        _blad = ladder_stats(_bm1, _bmE)
+        if _bmE:
+            _blad['foodXpEnd'] = sum(sum((v.get('foodXp') or {}).values()) for v in _bmE.values())
+            _blad['occSkillCells'] = sum(1 for v in _bmE.values() for t in SPECS if ((v.get('specialist') or {}).get(t) or 0) > 0)
+        ladder_before[seed] = _blad
+        # r133 CAP CHECK (BEFORE): no units fields on the unfixed
+        # engine, so invert fx deltas back to units through the grant
+        # math, with per-villager carry tracking in both bounds (the
+        # low bound is the conservative room count).
+        _carry_low = {}
+        _carry_high = {}
+        for _ck in (jb.get('cookLog') or []):
+            _fxb = _ck.get('fxPreserverBefore') or 0
+            _fxa = _ck.get('fxPreserverAfter') or 0
+            if _fxa > _fxb:
+                _vid = _ck.get('vid')
+                _ul, _, _cl2, _ = invert_preserver_units(_fxb, _carry_low.get(_vid, 0), _fxa - _fxb)
+                _, _uh, _, _ch2 = invert_preserver_units(_fxb, _carry_high.get(_vid, 0), _fxa - _fxb)
+                _carry_low[_vid] = _cl2
+                _carry_high[_vid] = _ch2
+                _k = (seed, _vid, _ck.get('day'))
+                cap_before_units_low[_k] += _ul
+                cap_before_units_high[_k] += _uh
+        # r132 BEFORE-VALIDITY input: cook practice reps at dEnd on BEFORE
+        # (the work happens) — the gap is work-without-XP, not no-work.
+        if _bmE:
+            before_cook_practice[seed] = sum(((v.get('practice') or {}).get('cook') or 0) for v in _bmE.values())
+        for t in SPECS:
+            fx_task_before[t] += _blad.get('foodXpByTask', {}).get(t, 0)
+        _win_before = {}
+        _bbp = jb.get('practice') or {}
+        _bb1d, _bbm1 = snap_of(_bbp, 'd1')
+        _bb14d, _bbm14 = snap_of(_bbp, 'd14')
+        _bb28d, _bbm28 = snap_of(_bbp, 'd28')
+        for wkey, a, b in (('d1-d14', _bbm1, _bbm14), ('d14-d28', _bbm14, _bbm28), ('d28-dEnd', _bbm28, _bmE)):
+            _wl = ladder_stats(a, b)
+            _win_before[wkey] = _wl.get('spec0pos', 0)
+            ladder_win_before[wkey]['spec0pos'] += _wl.get('spec0pos', 0)
+            if _wl.get('spec0pos', 0) >= 1:
+                ladder_win_before[wkey]['seeds'] += 1
+        _blad['win'] = _win_before
+        # --- r134 Q1 STALL (stall panel = r133-after, committed):
+        # G/W/NEW per window per specialty from the snaps; RES from the
+        # logs by day (windows cut on this seed's actual snap days);
+        # pantry at window starts from the daily rows; NEAR-MISS from
+        # d28->dEnd. Reads js133, NOT jb: the stall was measured on the
+        # r133 panel; jb is the matched r134-before for the regression.
+        if js133 is None:
+            print(f'seed {seed}: STALL skipped (r133-after panel missing)')
+            _sm1 = _sm14 = _sm28 = _smE = None
+            _s1d = _s14d = _s28d = _sEd = None
+        else:
+            _sp = js133.get('practice') or {}
+            _s1d, _sm1 = snap_of(_sp, 'd1')
+            _s14d, _sm14 = snap_of(_sp, 'd14')
+            _s28d, _sm28 = snap_of(_sp, 'd28')
+            _sEd, _smE = snap_of(_sp, 'dEnd')
+        _d14 = _s14d or 14
+        _d28 = _s28d or 28
+        for wkey, a, b in (('d1-d14', _sm1, _sm14), ('d14-d28', _sm14, _sm28), ('d28-dEnd', _sm28, _smE)):
+            _sw = stall_window(a, b)
+            for t in SPECS:
+                stall[wkey][t]['G'] += _sw[t]['G']
+                stall[wkey][t]['W'] += _sw[t]['W']
+                stall[wkey][t]['NEW'] += _sw[t]['NEW']
+        def _wkey_of(day):
+            try:
+                d = int(day or 0)
+            except Exception:
+                return None
+            if d <= _d14:
+                return 'd1-d14'
+            if d <= _d28:
+                return 'd14-d28'
+            return 'd28-dEnd'
+        for _ck in ((js133 or {}).get('cookLog') or []):
+            _wk = _wkey_of(_ck.get('day'))
+            if _wk is None:
+                continue
+            if ((_ck.get('fxPreserverAfter') or 0) > (_ck.get('fxPreserverBefore') or 0)):
+                stall[_wk]['preserver']['RES'] += 1
+            if ((_ck.get('fxCookAfter') or 0) > (_ck.get('fxCookBefore') or 0)):
+                stall[_wk]['cook']['RES'] += 1
+        for _md in ((js133 or {}).get('mendLog') or []):
+            _wk = _wkey_of(_md.get('day'))
+            if _wk is None:
+                continue
+            if ((_md.get('fxBuilderAfter') or 0) > (_md.get('fxBuilderBefore') or 0)):
+                stall[_wk]['builder']['RES'] += 1
+        for _hl in ((js133 or {}).get('huntLog') or []):
+            _wk = _wkey_of(_hl.get('day'))
+            if _wk is None:
+                continue
+            if ((_hl.get('fxButcherAfter') or 0) > (_hl.get('fxButcherBefore') or 0)):
+                stall[_wk]['butcher']['RES'] += 1
+        _daily = {r.get('day'): r.get('pantryKcal') for r in ((js133 or {}).get('daily') or [])}
+        for _k, _day in (('d1', _s1d or 1), ('d14', _d14), ('d28', _d28)):
+            _pk = _daily.get(_day)
+            if _pk is None:
+                # daily rows start at day 2 on some seeds; take the nearest.
+                _near = [d for d in sorted(_daily) if d is not None and abs(d - _day) <= 2]
+                _pk = _daily.get(_near[0]) if _near else None
+            if _pk is not None:
+                stall_pantry[_k].append(_pk)
+        if _sm28 and _smE:
+            for _vid, _v28 in _sm28.items():
+                _vE = _smE.get(_vid)
+                if not _vE:
+                    continue
+                for t in SPECS:
+                    _f28 = (_v28.get('foodXp') or {}).get(t) or 0
+                    _fE = (_vE.get('foodXp') or {}).get(t) or 0
+                    _s28 = (_v28.get('specialist') or {}).get(t) or 0
+                    _sE = (_vE.get('specialist') or {}).get(t) or 0
+                    if 1 <= _f28 <= 4 and _s28 == 0 and _sE == 0:
+                        stall_nearmiss[t] += 1
+                        stall_nearmiss_rows.append((seed, _vE.get('name') or _vid, t, _f28, _fE))
+    # --- Q2 INVITATIONS (r132, denominator fix) + Q3 NULL LINES: count
+    # literal (null) THEM lines in the r134-after people-check transcripts
+    # (bar 0) + navigation turns; invitation lines are counted in the
+    # panel section below (invite_panel), where the following lines are
+    # also visible for the answered-vs-silence adjudication.
+    ca_txt = load_convo('r134-after', seed)
+    if ca_txt:
+        for ln in ca_txt.split('\n'):
+            if ln == 'THEM: (null)':
+                q2panel['null_lines'] += 1
+                q2panel['rows'].append((seed, ln))
+            elif ln == 'THEM: (menu page turned)':
+                q2panel['nav_turns'] += 1
+    print(f'\n=== seed {seed} (endDay {j.get("endDay")}, over {j.get("gameOver")}, aliveEnd {j.get("aliveEnd")}, wave {j.get("waveReached")}, pantryGuardrails {pantry_of(j)}, pantryEnd {j.get("pantryKcalEnd")}) ===')
+    _lb = ladder_before.get(seed) or {}
+    print(f'  LADDER before={before_tag}: spec0pos={_lb.get("spec0pos", 0)} foodXp0pos={_lb.get("foodXp0pos", 0)} foodXpEnd={_lb.get("foodXpEnd", 0)} | after: spec0pos={lad.get("spec0pos", 0)} foodXp0pos={lad.get("foodXp0pos", 0)} foodXpEnd={lad.get("foodXpEnd", 0)} firstMove={first_move_window.get(seed)} firstMoveSpec={first_move_window_spec.get(seed)} firstMoveFx={first_move_window_fx.get(seed)} winAfter={lad.get("win")} winBefore={_lb.get("win")}')
+    for _mv in lad.get('specMoves', []):
+        print(f'    move: {_mv}')
+    print(f'  convos: {ca["convos"]} (stalls {ca["stalls"]}, wound-down {ca["wound_down"]}, ended-engine {ca["ended_engine"]})')
+    for sm in ca['stall_menus']:
+        print(f'  STALL seed {seed} menu: {sm}')
+    print(f'  before/after (DESCRIPTIVE): endDay before {funnel_rows[-1]["endDay_ref"]} / after {funnel_rows[-1]["endDay"]} | alive before {funnel_rows[-1]["alive_ref"]} / after {funnel_rows[-1]["alive"]} | pantry(guardrails) before {funnel_rows[-1]["pantry_ref"]} / after {funnel_rows[-1]["pantry"]} | over before {funnel_rows[-1]["over_ref"]} / after {funnel_rows[-1]["over"]}')
+    print(f'  practice snaps: d1 day={d1day} n={len(m1) if m1 else None} | d14 day={d14day} n={len(m14) if m14 else None} | d28 day={d28day} n={len(m28) if m28 else None} | dEnd day={dEndday} n={len(mEnd) if mEnd else None}')
+    for wkey in ('d1-d14', 'd14-d28', 'd28-dEnd'):
+        r = win_results[wkey]
+        if r['missing']:
+            print(f'  practice {wkey}: MISSING SNAPSHOT (instrument gap)')
+        else:
+            print(f'  practice {wkey}: moved={r["moved"]} attributed={r["attributed"]} tasks={dict(r["tasks"])}')
+            for l in r['lines']:
+                print(l)
+    print(f'  huntStaff: assignments={(hs.get("assignments") or 0)} refusals={len(hs.get("refusalLog") or [])} wounds={len(hs.get("woundLog") or [])} huntLog={len(j.get("huntLog") or [])} fieldDressingKills={prep_fires_by_seed[seed]} prepLog={len(hs.get("prepLog") or [])}')
+    print(f'  guardrails={j.get("guardrails")} c3={j.get("c3")}')
+
+print(f'\nPANEL: livingVillagersEnd={panel_living}')
+print('  DRIVER-NEUTRALITY: proven by the proof-test det-gate (same r133 driver fix-off vs fix-on, 5d seed 2501: funnel keys + practice snapshots identical except foodXp preserver deltas) — see the proof test, not this analyzer.')
+print(f'  Q1 LADDER FIX (specialist 0->pos on the AFTER panel):')
+for seed in SEEDS:
+    L = ladder_panel.get(seed) or {}
+    B = ladder_before.get(seed) or {}
+    print(f"    ladder seed {seed}: BEFORE spec0pos={B.get('spec0pos', 0)} foodXp0pos={B.get('foodXp0pos', 0)} foodXpEnd={B.get('foodXpEnd', 0)} | AFTER spec0pos={L.get('spec0pos', 0)} foodXp0pos={L.get('foodXp0pos', 0)} foodXpEnd={L.get('foodXpEnd', 0)} plus1pool={L.get('plus1pool', 0)} stepped={L.get('stepped', 0)} wastedXp={L.get('wastedXp', 0)} occSkillCells={L.get('occSkillCells', 0)} firstMove={first_move_window.get(seed)} firstMoveSpec={first_move_window_spec.get(seed)} firstMoveFx={first_move_window_fx.get(seed)} winAfter={L.get('win')} winBefore={B.get('win')} pace03Before={B.get('pace03', 0)} pace03={L.get('pace03', 0)}")
+    for _mv in L.get('specMoves', []):
+        print(f'      move: {_mv}')
+for wkey in ('d1-d14', 'd14-d28', 'd28-dEnd'):
+    w = practice_panel['win'][wkey]
+    print(f'    {wkey}: moved={w["moved"]} attributed={w["attributed"]} seedsWithMove={w["seeds_with_move"]}/16 seedsAttributed={w["seeds_attributed"]}/16 tasks={dict(w["tasks"])}')
+print(f'    skill0->pos (all windows)={practice_panel["skill_pos"]} practiceReps(dEnd)={practice_panel["reps_end"]}')
+for g in practice_panel['skills_gained']:
+    print(f'    skill: {g}')
+if practice_panel['missing_snaps']:
+    print(f'    MISSING SNAPSHOTS (instrument gap): {practice_panel["missing_snaps"]}')
+ladder_seeds = sum(1 for seed in SEEDS if (ladder_panel.get(seed) or {}).get('spec0pos', 0) >= 1)
+tot_fx = sum((ladder_panel.get(x) or {}).get('foodXpEnd', 0) for x in SEEDS)
+tot_fx_b = sum((ladder_before.get(x) or {}).get('foodXpEnd', 0) for x in SEEDS)
+tot_pool = sum((ladder_panel.get(x) or {}).get('plus1pool', 0) for x in SEEDS)
+tot_step = sum((ladder_panel.get(x) or {}).get('stepped', 0) for x in SEEDS)
+tot_waste = sum((ladder_panel.get(x) or {}).get('wastedXp', 0) for x in SEEDS)
+pace03_after = sum((ladder_panel.get(x) or {}).get('pace03', 0) for x in SEEDS)
+pace03_before = sum((ladder_before.get(x) or {}).get('pace03', 0) for x in SEEDS)
+pace03_moves_after = [m for x in SEEDS for m in (ladder_panel.get(x) or {}).get('pace03Moves', [])]
+print(f'  Q1 ladder detail: foodXpEnd total BEFORE={tot_fx_b} AFTER={tot_fx} plus1pool={tot_pool} stepped={tot_step} wastedXp={tot_waste}')
+print(f'  Q1 PACE (specialist 0->3 in 42d): BEFORE={pace03_before} AFTER={pace03_after} (bar AFTER 0)')
+for _pm in pace03_moves_after:
+    print(f'    pace03: {_pm}')
+print(f'  Q1 foodXp by task AFTER: {fx_task_after} (BEFORE: {fx_task_before})')
+print(f'  Q1 grant events AFTER: rack resolutions granting preserver XP={grant_events["rack"]} (rack kcal {grant_events["rackKcal"]}, preserver XP granted via racks {grant_events["rackXp"]}, seeds {len(grant_events["rackSeeds"])}), hunt kills={grant_events["huntKill"]} of which granted butcher XP={grant_events["huntKillFx"]} (seeds {len(grant_events["huntSeeds"])}), cook resolutions granting cook XP={grant_events["cook"]} (cook XP granted {grant_events["cookXp"]}, seeds {len(grant_events["cookSeeds"])}), mend resolutions granting builder XP={grant_events["mend"]} (builder XP granted {grant_events["mendXp"]}, seeds {len(grant_events["mendSeeds"])})')
+print(f'  Q1 skill distribution at dEnd (AFTER, per task, skill 0/1/2/3): {skill_dist_end}')
+print(f'  Q1 first-move windows: {first_move_window}')
+print(f'  Q1 first-move windows (specialist-only): {first_move_window_spec}')
+print(f'  Q1 first-move windows (foodXp-only): {first_move_window_fx}')
+for wkey in ('d1-d14', 'd14-d28', 'd28-dEnd'):
+    print(f"  Q1 ladder moves by window {wkey}: AFTER spec0pos={ladder_win_after[wkey]['spec0pos']} on {ladder_win_after[wkey]['seeds']}/16 seeds | BEFORE spec0pos={ladder_win_before[wkey]['spec0pos']} on {ladder_win_before[wkey]['seeds']}/16 seeds")
+# r134 REGRESSION (binding, prereg): the Q2 fix changes spoken lines
+# only, so every ladder metric on AFTER must equal BEFORE seed by seed.
+# The r133 Q1a-Q1e numbers below are DESCRIPTIVE here (the cap still
+# holds on both panels); the verdict is equality, not the r133 GO bars.
+preserver_moves_seeds = sum(1 for x in SEEDS if ((ladder_panel.get(x) or {}).get('spec0posByTask') or {}).get('preserver', 0) >= 1)
+butcher_moves_seeds = sum(1 for x in SEEDS if ((ladder_panel.get(x) or {}).get('spec0posByTask') or {}).get('butcher', 0) >= 1)
+before_butcher_moves_seeds = sum(1 for x in SEEDS if ((ladder_before.get(x) or {}).get('spec0posByTask') or {}).get('butcher', 0) >= 1)
+preserver_pace03_after = sum(((ladder_panel.get(x) or {}).get('pace03ByTask') or {}).get('preserver', 0) for x in SEEDS)
+butcher_pace03_after = sum(((ladder_panel.get(x) or {}).get('pace03ByTask') or {}).get('butcher', 0) for x in SEEDS)
+cook_moves_seeds = sum(1 for x in SEEDS if ((ladder_panel.get(x) or {}).get('spec0posByTask') or {}).get('cook', 0) >= 1)
+builder_moves_seeds = sum(1 for x in SEEDS if ((ladder_panel.get(x) or {}).get('spec0posByTask') or {}).get('builder', 0) >= 1)
+pace03_cook_builder = sum(((ladder_panel.get(x) or {}).get('pace03ByTask') or {}).get('cook', 0) + ((ladder_panel.get(x) or {}).get('pace03ByTask') or {}).get('builder', 0) for x in SEEDS)
+spotter_fx_after = fx_task_after.get('spotter', 0)
+before_preserver_pace03 = sum(((ladder_before.get(x) or {}).get('pace03ByTask') or {}).get('preserver', 0) for x in SEEDS)
+cap_after_max = max(cap_after_units.values()) if cap_after_units else 0
+cap_after_over = sum(1 for v in cap_after_units.values() if v > 2)
+cap_before_over_low = sum(1 for v in cap_before_units_low.values() if v > 2)
+cap_before_over_high = sum(1 for v in cap_before_units_high.values() if v > 2)
+print(f'  LADDER (descriptive, both panels fix-on): preserver pace03 AFTER {preserver_pace03_after} (BEFORE {before_preserver_pace03}) | preserver moves AFTER {preserver_moves_seeds}/16 | butcher AFTER {butcher_moves_seeds}/16 vs BEFORE {before_butcher_moves_seeds}/16 pace03 {butcher_pace03_after} | cook {cook_moves_seeds}/16 builder {builder_moves_seeds}/16 pace03 cook+builder {pace03_cook_builder} | spotter foodXp AFTER {spotter_fx_after}')
+print(f'  CAP CHECK (descriptive): AFTER max granted preserver units/villager-day: {cap_after_max} (days over {cap_after_over}) | BEFORE inversion bounds: low {cap_before_over_low} high {cap_before_over_high} | AFTER granting rows missing unit data: {cap_after_missing}')
+print(f'  Q1 ladder-wide (descriptive): moves {ladder_seeds}/16, pace03 {pace03_after}')
+_reg_diffs = []
+for _x in SEEDS:
+    _L = ladder_panel.get(_x) or {}
+    _B = ladder_before.get(_x) or {}
+    for _k in ('spec0pos', 'foodXp0pos', 'foodXpEnd', 'pace03'):
+        if (_L.get(_k, 0) or 0) != (_B.get(_k, 0) or 0):
+            _reg_diffs.append((f'seed {_x}', _k, _B.get(_k, 0), _L.get(_k, 0)))
+    if ((_L.get('win') or {}) != (_B.get('win') or {})):
+        _reg_diffs.append((f'seed {_x}', 'win', _B.get('win'), _L.get('win')))
+    # Trajectory equality on the funnel keys too (endDay/alive/pantry/over).
+    for _r in funnel_rows:
+        if _r['seed'] == _x:
+            for _k, _rk in (('endDay', 'endDay_ref'), ('alive', 'alive_ref'), ('pantry', 'pantry_ref'), ('over', 'over_ref')):
+                if _r.get(_k) != _r.get(_rk):
+                    _reg_diffs.append((f'seed {_x}', 'funnel:' + _k, _r.get(_rk), _r.get(_k)))
+if not _reg_diffs:
+    print('  REGRESSION verdict: CLEAN (ladder + funnel keys identical BEFORE vs AFTER on all 16 seeds — the line-only fix moved nothing else)')
+else:
+    print(f'  REGRESSION verdict: DIVERGED ({len(_reg_diffs)} differing cells — investigate, do not re-score)')
+    for _d in _reg_diffs[:40]:
+        print(f'    regression: {_d}')
+print(f'  Q2 INVITATIONS (AFTER panel, denominator fix — offered = answers + spoken lines followed by silence):')
+invite_lines = 0
+invite_accepted = 0
+invite_declined = 0
+invite_unanswered_spoken = 0
+for seed in SEEDS:
+    p = os.path.join(EVID, f'journey-establishment-r134-after-convo-seed{seed}.txt')
+    try:
+        _lines = open(p).read().split('\n')
+    except Exception:
+        continue
+    for _ln in _lines:
+        if _ln.startswith('YOU: [betrayal:accept]'):
+            invite_accepted += 1
+        elif _ln.startswith('YOU: [betrayal:decline]'):
+            invite_declined += 1
+    for i, line in enumerate(_lines):
+        if not line.startswith('THEM:'):
+            continue
+        text = line[5:].strip().strip('"')
+        if INVITE_RE.search(text):
+            invite_lines += 1
+            nxt = _lines[i + 1:i + 3]
+            answered = any(l.startswith('YOU: [betrayal:accept]') or l.startswith('YOU: [betrayal:decline]') for l in nxt)
+            print(f"--- seed {seed} line {i + 1}: THEM: {text} [{'ANSWERED' if answered else 'UNANSWERED'}]")
+            for j in range(i + 1, min(i + 3, len(_lines))):
+                if _lines[j].strip():
+                    print(f'    {_lines[j].strip()[:160]}')
+            if not answered:
+                invite_unanswered_spoken += 1
+invite_offered = invite_accepted + invite_declined + invite_unanswered_spoken
+print(f'  Q2 invitations: spoken={invite_lines} answers accept={invite_accepted} decline={invite_declined} unanswered-spoken={invite_unanswered_spoken} offered={invite_offered}')
+if invite_offered == 0:
+    print('  Q2 verdict: NO-DATA (0 invitations offered — report, do not pass or fail)')
+elif (invite_accepted + invite_declined) * 5 >= invite_offered * 4:
+    print(f'  Q2 verdict: PASS (answered {invite_accepted + invite_declined}/{invite_offered} = {(invite_accepted + invite_declined) / invite_offered:.0%}, bar >=80%)')
+else:
+    print(f'  Q2 verdict: FAIL (answered {invite_accepted + invite_declined}/{invite_offered}, bar >=80%)')
+print(f'  Q3 NULL LINES: nullThemLines={q2panel["null_lines"]} navTurns={q2panel["nav_turns"]}')
+if q2panel['null_lines'] == 0:
+    print('  Q3 verdict: PASS (0 null THEM lines on the panel)')
+else:
+    print(f'  Q3 verdict: FAIL ({q2panel["null_lines"]} null THEM lines — see rows)')
+    for row in q2panel['rows']:
+        print(f'    null: seed {row[0]} line {row[1]}')
+print(f'  Q2 PREPLOG SPLIT (r134-after panel): no-teacher rows={prep_panel["no_teacher"]} split classes={dict(prep_panel["split_classes"])} whys={dict(prep_panel["whys"])}')
+print(f'    lesson attempts={prep_panel["attempts"]} lessons_ok={prep_panel["lessons_ok"]} already_holds={prep_panel["already_holds"]}')
+for r in prep_panel['rows']:
+    print(f'    prep: seed {r[0]} d{r[1]} hunter={r[2]} teacher={r[3]} kind={r[4]} ok={r[5]} why={r[6]}')
+print(f'  M1b USE-CLASSIFICATION:')
+verdict_classes = {}
+for iid in ['diplomat', 'herbal_remedy', 'field_dressing', 'preserve_food', 'wound_care', 'triage']:
+    holders = held.get(iid, [])
+    us = uses.get(iid, [])
+    cls = 'USED' if us else ('HELD-UNUSED' if holders else 'NEVER-HELD')
+    verdict_classes[iid] = cls
+    flag = 'STRUCTURALLY-INERT (no villager-aware read site)' if iid in INERT else 'villager-aware read site'
+    print(f'    {iid}: {cls} | {flag} | holders={len(holders)} {holders if holders else ""} | uses={len(us)}')
+    for u in us[:6]:
+        print(f'      use: {u}')
+print(f'  M2 CARE-VISIBILITY: careTicks={care["calls"]} tends={care["tends"]} medicsSeen={len(care["medics_seen"])} triageMedics={care["triage_medics"]} herbalMedics={care["herbal_medics"]}')
+print(f'    healerRounds={len(care["healer_rounds"])} treatTicks={care["treat_ticks"]} treatChanged={care["treat_changed"]} treatHealers={dict(care["treat_healers"])}')
+for hr in care['healer_rounds'][:10]:
+    print(f'    round: seed {hr[0]} {hr[1]} -> {hr[2]} {hr[3]}->{hr[4]}HP heldHerbal={hr[5]} heldTriage={hr[6]}')
+print(f'  cook/racks: cookDutyCalls={cook["calls"]} rackEvents={cook["rack_events"]} specCooks={cook["spec_cooks"]} holderCooks={len(cook["holder_cooks"])} holderBlind={cook["holder_blind"]} keepsWeeks={cook["kept_weeks"]} keepsCouple={cook["kept_couple"]}')
+_held_kcal = sum(hunt['prep_kcal_held']); _notheld_kcal = sum(hunt['prep_kcal_notheld'])
+_ratio = f"{_held_kcal / _notheld_kcal:.2f}" if _notheld_kcal else 'n/a (no notheld kills)'
+print(f'  held/notheld kcal ratio: held={_held_kcal} kcal ({hunt["prep_kills_held"]} kills) vs notheld={_notheld_kcal} kcal ({hunt["prep_kills_notheld"]} kills) → ratio {_ratio}')
+print(f'  M3 SURVIVAL-42 {m3_seeds}/16 (bar 12/16) | M4 PANTRY {m4_seeds}/16 (bar 12/16)')
+if hunter_wound_deaths:
+    print(f'  HUNTER-WOUND DEATHS (§14c): {hunter_wound_deaths}')
+
+# ================= r134 Q1 STALL DIAGNOSTIC (binding, prereg) =================
+# Instrument: the BEFORE panel (r133-after JSONs). Windows are snap-to-snap.
+print('\n  Q1 STALL DIAGNOSTIC (BEFORE panel = r133-after, 16 seeds):')
+def _med(xs):
+    xs = sorted(xs)
+    return xs[len(xs) // 2] if xs else None
+for _w in ('d1-d14', 'd14-d28', 'd28-dEnd'):
+    _parts = []
+    for _t in ('butcher', 'cook', 'preserver', 'builder'):
+        _d = stall[_w][_t]
+        _parts.append(f"{_t} G={_d['G']} W={_d['W']} NEW={_d['NEW']} RES={_d['RES']}")
+    print(f'    {_w}: ' + ' | '.join(_parts))
+print(f'    pantry median at window start: d1={_med(stall_pantry["d1"])} d14={_med(stall_pantry["d14"])} d28={_med(stall_pantry["d28"])} (n={len(stall_pantry["d1"])}/{len(stall_pantry["d14"])}/{len(stall_pantry["d28"])})')
+print(f'    NEAR-MISS (1-4 foodXp at d28, spec still 0 at dEnd): {stall_nearmiss}')
+for _r in stall_nearmiss_rows[:20]:
+    print(f'      near-miss: seed {_r[0]} {_r[1]} {_r[2]} foodXp d28={_r[3]} dEnd={_r[4]}')
+_satiety = (stall['d28-dEnd']['preserver']['RES'] <= 0.25 * max(1, stall['d1-d14']['preserver']['RES'])
+            and stall['d28-dEnd']['cook']['RES'] <= 0.25 * max(1, stall['d1-d14']['cook']['RES'])
+            and (_med(stall_pantry['d28']) or 0) >= 60000)
+_sat_count = sum(1 for _t in ('butcher', 'cook', 'preserver', 'builder') if stall['d28-dEnd'][_t]['W'] <= 0.5 * max(1, stall['d1-d14'][_t]['W']))
+# Saturation needs the w3-workers-already-moved share; recompute from the
+# BEFORE snaps here (cheap: one more pass over the 16 JSONs).
+_sat_moved_share = None
+try:
+    _w3_workers = 0
+    _w3_moved = 0
+    for _seed in SEEDS:
+        _jb = load('r133-after', _seed)
+        _bp = _jb.get('practice') or {}
+        _d28d, _m28 = snap_of(_bp, 'd28')
+        _dEd, _mE = snap_of(_bp, 'dEnd')
+        if not _m28 or not _mE:
+            continue
+        _sw = stall_window(_m28, _mE)
+        for _t in SPECS:
+            if _sw[_t]['G'] > 0:
+                pass
+        # distinct w3 workers = villagers with any foodXp gain in w3
+        _seen = set()
+        for _vid, _v28 in _m28.items():
+            _vE = _mE.get(_vid)
+            if not _vE:
+                continue
+            _gained = any(((_vE.get('foodXp') or {}).get(_t) or 0) > ((_v28.get('foodXp') or {}).get(_t) or 0) for _t in SPECS)
+            if _gained:
+                _seen.add(_vid)
+                if any(((_v28.get('specialist') or {}).get(_t) or 0) > 0 for _t in SPECS):
+                    _w3_moved += 1
+        _w3_workers += len(_seen)
+    _sat_moved_share = (_w3_moved / _w3_workers) if _w3_workers else None
+except Exception as _e:
+    print(f'    saturation share pass failed: {_e}')
+_saturation = (_sat_count >= 3 and _sat_moved_share is not None and _sat_moved_share >= 0.80)
+_new_w1 = sum(stall['d1-d14'][_t]['NEW'] for _t in SPECS)
+_new_w3 = sum(stall['d28-dEnd'][_t]['NEW'] for _t in SPECS)
+_res_w1 = sum(stall['d1-d14'][_t]['RES'] for _t in SPECS)
+_res_w3 = sum(stall['d28-dEnd'][_t]['RES'] for _t in SPECS)
+_rung = (not _satiety and not _saturation and _res_w3 > 0.5 * max(1, _res_w1) and _new_w3 <= 0.25 * max(1, _new_w1))
+print(f'    checks: SATIETY res-preserver w3/w1={stall["d28-dEnd"]["preserver"]["RES"]}/{stall["d1-d14"]["preserver"]["RES"]} res-cook w3/w1={stall["d28-dEnd"]["cook"]["RES"]}/{stall["d1-d14"]["cook"]["RES"]} pantry-d28-median={_med(stall_pantry["d28"])} -> {_satiety}')
+print(f'    checks: SATURATION W w3<=0.5*w1 on {_sat_count}/4 specialties, w3 workers already-moved share={_sat_moved_share} -> {_saturation}')
+print(f'    checks: RUNG-MATH res w3/w1={_res_w3}/{_res_w1} NEW w3/w1={_new_w3}/{_new_w1} -> {_rung}')
+_q1_mechs = []
+if _satiety:
+    _q1_mechs.append('SATIETY')
+if _saturation:
+    _q1_mechs.append('SATURATION')
+if _rung:
+    _q1_mechs.append('RUNG-MATH')
+if _q1_mechs:
+    print(f'  Q1 STALL verdict: {" + ".join(_q1_mechs)} (bars held — see checks above; the next dial follows in the run note metric review)')
+else:
+    print('  Q1 STALL verdict: UNRESOLVED (no rule\'s bars held — report the numbers, propose the next probe, do not force a mechanism)')
+
+# ================= r134 Q2 GUARD COUNTER (binding, prereg) =================
+OLD_GUARD = ['Something in them almost softens', 'They hear the warmth in it.']
+def _guard_counts(tag):
+    total = 0
+    per_convo = 0
+    convos = 0
+    distinct = Counter()
+    for _seed in SEEDS:
+        _txt = load_convo(tag, _seed)
+        if not _txt:
+            continue
+        _names = re.findall(r'^-- (.+?) \([^)]+\) occ=', _txt, flags=re.M)
+        convos += len(_names)
+        for _ln in _txt.split('\n'):
+            for _g in OLD_GUARD:
+                if _g in _ln:
+                    total += 1
+                    distinct[_g] += 1
+    return total, convos, distinct
+def _new_guard_counts(tag):
+    # AFTER panel: any THEM line that is a mood-guard beat. The new pool
+    # lines are counted by exact match against the pool in convo-mood.js;
+    # the counter below lists them explicitly so a pool change without a
+    # counter change fails loudly (0 found) instead of silently passing.
+    import importlib.util
+    total = 0
+    convos = 0
+    distinct = Counter()
+    try:
+        _src = open(os.path.join(ROOT, 'src', 'js', 'convo-mood.js')).read()
+        _m = re.search(r"convoPickCycle\(vid, 'moodguard', \[(.*?)\]\)", _src, flags=re.S)
+        _pool = re.findall(r"'((?:[^'\\]|\\.)*)'", _m.group(1)) if _m else []
+        _pool = [p.replace("\\'", "'") for p in _pool]
+    except Exception as _e:
+        print(f'    guard-pool read failed: {_e}')
+        _pool = []
+    for _seed in SEEDS:
+        _txt = load_convo(tag, _seed)
+        if not _txt:
+            continue
+        _names = re.findall(r'^-- (.+?) \([^)]+\) occ=', _txt, flags=re.M)
+        convos += len(_names)
+        for _ln in _txt.split('\n'):
+            for _p in _pool:
+                if _p and _p in _ln:
+                    total += 1
+                    distinct[_p] += 1
+    return total, convos, distinct, _pool
+print('\n  Q2 GUARD COUNTER:')
+_b_total, _b_convos, _b_distinct = _guard_counts('r134-before')
+print(f'    BEFORE (r134-before transcripts): guard lines={_b_total} over {_b_convos} convos ({(_b_total / _b_convos if _b_convos else 0):.2f}/convo); distinct={dict(_b_distinct)}')
+_a_total, _a_convos, _a_distinct, _a_pool = _new_guard_counts('r134-after')
+print(f'    AFTER (r134-after transcripts): guard lines={_a_total} over {_a_convos} convos ({(_a_total / _a_convos if _a_convos else 0):.2f}/convo); distinct={len(_a_distinct)} lines: {dict(_a_distinct)}')
+print(f'    AFTER pool ({len(_a_pool)} lines): {_a_pool}')
+print(f'    OLD lines surviving in AFTER transcripts: {sum(1 for _ln in open(os.path.join(EVID, "journey-establishment-r134-after-convo-seed2501.txt")).read().split(chr(10)) if any(_g in _ln for _g in OLD_GUARD)) if os.path.exists(os.path.join(EVID, "journey-establishment-r134-after-convo-seed2501.txt")) else "n/a (no AFTER transcripts yet)"} (spot check, seed 2501 only — full count is the BEFORE/AFTER table above)')
+if _b_convos and _a_convos:
+    _ratio = (_a_total / _a_convos) / (_b_total / _b_convos) if _b_total else 0
+    _q2a = 0.75 <= _ratio <= 1.25
+    _q2b = len(_a_distinct) >= 4
+    print(f'  Q2a GUARD COUNT: per-convo ratio AFTER/BEFORE={_ratio:.2f} (bar 0.75-1.25) -> {"GO" if _q2a else "NO-GO"}')
+    print(f'  Q2b BREADTH: distinct guard lines AFTER={len(_a_distinct)} (bar >=4) -> {"GO" if _q2b else "NO-GO"}')
+    print(f'  Q2 verdict: {"GO" if (_q2a and _q2b) else "NO-GO"} (Q2c honesty is a sense-read in the run note)')
+else:
+    print('  Q2 verdict: NO-DATA (missing convo transcripts on one side)')

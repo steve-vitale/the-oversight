@@ -1,0 +1,83 @@
+=== r134-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Maeve (gen_e956ujn) occ=chimney sweep --
+OPENING: "I've been turning something over. What do YOU think actually happened to us?"
+YOU: [ans:q_theory:a_aliens] "Something took us. Something big."
+THEM: "That's where I keep landing too. The question is what it wants."
+YOU: [goon] "Please, go on."
+THEM: "My theory changes weekly. This week's: we're the control group. Somewhere there's a village that got instructions, and we're the ones they just... watched. Cheerful thought, right?"
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on what you think happened to us. Rest when you can."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Alright. But I'm not carrying your stuff."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That can wait — it isn't going anywhere. What's on your mind?"
+YOU: [ask:personal] "I'd like to know you better, if that's alright."
+THEM: "You want to know about that? Okay." "You ever get a song stuck in your head with no way to play it? It's a special kind of torture."
+YOU: [gq:yn:yes] "Yes."
+THEM: "All right. Thank you for telling me."
+YOU: [goon] "Please, go on."
+THEM: They let the words sit there, unanswered.
+closing: "Don't be a stranger."
+
+-- Ayaka (gen_1i55g00) occ=piano tuner --
+OPENING: "Never mind the pantry run — we got it handled. Thanks anyway. We're down to 1 liter of clean water. I can't carry enough alone. First light, the creek, you and me?"
+YOU: [goon] "Good question. What do YOU think?"
+THEM: They grin when they spot you — unguarded, for once.
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Your partner is inside the Haven hall. Go through the door to meet them.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+YOU: [goon] "I'm listening, I promise."
+THEM: "Walk with me? I want another pair of eyes on something."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: It's quiet at the tree line. Ayaka doesn't say much. Sometimes that's the whole point.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Never mind me. What were you going to say?"
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "You want to know about that? Okay." "Someone should talk to Henry. Not me, though."
+YOU: [dlg:more] "Tell me more."
+THEM: "Did you hear? Carlos won Bring Us Something Interesting on the cameras. People are still talking about it."
+closing: "Good talk."
+
+-- Henry (henry_zhang) occ=emergency dispatcher --
+OPENING: "What's something from your old life that's actually useful here?"
+YOU: [ans:q_before_skill:a_tell] "Patience. Sounds dumb. But waiting — really waiting, without fidgeting — that's
+THEM: "Not dumb at all. The people who can't wait are the ones who make mistakes. You're an asset."
+YOU: [goon] "Please, go on."
+THEM: "Being an emergency dispatcher taught me to read people fast — who's lying, who's scared, who needs a job. Turns out that's a survival skill. Who knew."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on your useful old-life skills."
+YOU: [goon] "Please, go on."
+THEM: "Teach me something. Anything you know that I don't."
+YOU: [ans:q_teach_me:a_tell] "I'd rather show you while we're working. It's easier that way."
+THEM: "All right. Show me when we work together."
+YOU: [goon] "Please, go on."
+THEM: "I'd like to learn something I can use today. Show me while you work, when you have a moment."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Someone should watch your back. Might as well be me."
+closing: "See you at the fire."
+
+-- Nora (nora_wilson) occ=tailor --
+OPENING: "About whatever's been weighing on me — It's stupid. I'm alive, everyone's alive, and I can't stop shaking. No pressure, though."
+YOU: [goon] "Please, go on."
+THEM: They settle in like someone glad you're here.
+YOU: [dlg:comfort] "Are you okay?"
+THEM: They shake their head, then nod — both true at once. "Talk to me a bit. That helps more than anything."
+YOU: [dlg:stay] "I'm not going anywhere."
+THEM: They lean back on their hands. "Wind's up tonight. Good night to not be walking."
+YOU: [dlg:empathize] "I'm here."
+THEM: "I can breathe all the way down again. I couldn't, before you sat down."
+YOU: [goon] "Please, go on."
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: At the trap line the ground is torn up. Something was here, recently, and it wasn't careful. Nora's hand finds your sleeve. You leave together, faster than you came.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that hard time."
+YOU: [goon] "Please, go on."
+THEM: A warmth settles over the conversation — they lean in a little.
+closing: "I'll... I'll be around. If you need anything. Anything at all."

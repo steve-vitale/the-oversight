@@ -1,0 +1,83 @@
+=== r134-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Easton (gen_bnutvt4) occ=Beekeeper --
+OPENING: "We're down to 5 liters of clean water. Haul the creek with me at dawn? Two buckets each, there and back."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to your partner, on the same side of the Haven door.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Wait — I'm away from Haven right now, out on the road. I can't promise a dawn meet from out here — find me when I'm back and we'll set it then."
+YOU: [goon] "I'm listening, I promise."
+THEM: "Come see what I found. You won't believe it."
+INVITE-ANSWER trust=92
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: "Here. I made an extra." Easton presses something into your hand — a decent tool, oiled and kept. (Useful. Keep it.)
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "Cowpea — crush the leaf, smell it, taste the stem. That's how you know it."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that water haul."
+YOU: [goon] "I'm listening, I promise."
+THEM: They let the words sit there, unanswered.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Look, forget it. You wanted something?"
+closing: "Later."
+
+-- Luna (gen_td3tfqg) occ=Chef --
+OPENING: "About needing to be alone — Do you ever just need to be alone? Like, really alone?"
+YOU: [ans:q_alone_time:a_tell] "Every day. I go for walks that don't need to happen. Just to breathe my own air
+THEM: "Between us — I get it. Solitude's a resource too. Scarcer than food, some days."
+YOU: [goon] "I'm listening, I promise."
+THEM: The ease drains out of it, a little.
+YOU: [goon] "I'm listening, I promise."
+THEM: "I go to the treeline edge and count my breaths. Ten of them. That's my alone. Then I come back — alone is a luxury, and also a little bit a lie."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on needing to be alone."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Someone should watch your back. Might as well be me."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That can wait — it isn't going anywhere. What's on your mind?"
+YOU: [ask:personal] "I'd like to know you better, if that's alright."
+THEM: "Huh. Let me think about that." "My chef instincts keep firing at the wrong things. Old wiring, new world. That's the whole of it."
+YOU: [dlg:more] "I’m listening."
+THEM: "I think about who I was in Columbus, Ohio and it feels like reading about a stranger."
+closing: "Good. We've got a plan forming. I can feel it."
+
+-- Rafael (gen_w5pkfgy) occ=Sailor --
+OPENING: "Can I tell you something? At night I count the stars and name them after people."
+INVITE-ANSWER trust=92
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Rafael shows you where they go to think. "Don't tell the others. Everyone needs one place."
+YOU: [secret:promise] "That stays between us."
+THEM: "Thank you. ...I needed someone to know, and I needed it to stop there. Give it time."
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "So what's your plan here? Just... get through it?"
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "We started on what they confided, then got onto that question."
+YOU: [goon] "I'm listening, I promise."
+THEM: "Did you sleep? I kept hearing things out past the treeline."
+YOU: [ans:q_night:a_yes] "I heard them too."
+THEM: They go still. "So it's not just me. Good. That's... good to know. Bad, but good."
+YOU: [goon] "I'm listening, I promise."
+THEM: "I sleep in shifts now — two hours, up, listen, two more. My body learned it before my head agreed. Columbus, Ohio never taught me that. The treeline did."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+closing: "Take care of yourself."
+
+-- Torill (gen_b2cej63) occ=mechanic --
+OPENING: "Never mind the pantry run — we got it handled. Thanks anyway. Water's almost gone — 0 liters. I need someone to haul water with me at first light. Two of us, half the trips. Will you come?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Your partner is inside the Haven hall. Go through the door to meet them.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Never mind me. What were you going to say?"
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Good question." "Someone should talk to Yuki. Not me, though."
+YOU: [dlg:more] "Go on."
+THEM: "Luna? A Chef, back before. Solid person."
+YOU: [dlg:react] (listen)
+THEM: "Did you hear? You won The Vigil on the cameras. People are still talking about it."
+YOU: [goon] "Please, go on."
+THEM: "Alright — I should get back to it."
+YOU: [agree] "You're right."
+THEM: "Agreed. Solid ground, that."
+(ended by engine)

@@ -1,0 +1,80 @@
+=== r134-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Benjamin (gen_4m9reuh) occ=emergency dispatcher --
+OPENING: "Water's almost gone — 8 liters. I need someone to haul water with me at first light. Two of us, half the trips. Will you come?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to your partner, on the same side of the Haven door.
+YOU: [dlg:details] "Tell me why you need this."
+THEM: "Do the math with me: 8 liters, 12 people. That's not tomorrow's water. We walk together and each carry two liters back. Creek water still needs boiling."
+YOU: [dlg:cant] "I can’t right now."
+THEM: "...Okay. I'll figure it out." They won't ask twice. That much is clear.
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that water haul."
+YOU: [goon] "Keep going."
+THEM: They pull back half a step — not leaving, just... further.
+YOU: [goon] "Keep going."
+THEM: "What do you make of all this? Really."
+YOU: [deflect_q] (change the subject)
+THEM: "Okay." Something shutters, just slightly.
+closing: "Later."
+
+-- Ashanti (gen_snbn5ty) occ=Rancher --
+OPENING: "We're down to 8 liters of clean water. I can't carry enough alone. First light, the creek, you and me?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Stand beside your partner first — same side of the Haven door — then help.
+YOU: [dlg:details] "Tell me why you need this."
+THEM: "I checked the cistern three times hoping I misread it. 8 liters. We walk together and each carry two liters back. Creek water still needs boiling."
+YOU: [dlg:cant] "I can’t right now."
+THEM: "Right. I get it." A beat — and then the subject is closed. They won't raise it again.
+YOU: [goon] "And?"
+THEM: "Walk with me? I want another pair of eyes on something."
+INVITE-ANSWER trust=89
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: "Here. I made an extra." Ashanti presses something into your hand — a decent tool, oiled and kept. (Useful. Keep it.)
+YOU: [goon] "And?"
+THEM: "I should go. You know where to find me."
+YOU: [silence] (say nothing)
+THEM: You say nothing. Neither do they, for a while — and it's fine.
+(ended by engine)
+
+-- Priya (gen_a510ar6) occ=mason --
+OPENING: Did you see what I brought back? Tell the others. Please — tell them.
+YOU: [gq:yn:yes] "Yes."
+THEM: "I see." They take a moment to think about your answer.
+YOU: [goon] "And?"
+THEM: They take it in and give nothing back. Not yet.
+YOU: [goon] "And?"
+THEM: A beat. Then, as if shaking something off:
+YOU: [goon] "And?"
+THEM: "Are you going to stay? With us. For real."
+YOU: [deflect_q] (change the subject)
+THEM: "...Sorry, lost my train of thought."
+YOU: [goon] "And?"
+THEM: The warmth pulls back a notch. They're weighing something.
+YOU: [dlg:more] "Go on."
+THEM: "I never finished anything I started back home. Here, finishing is survival — and I'm going to finish things."
+YOU: [dlg:react] (listen)
+THEM: "I'm not asking for a medal. I'm asking for a chance to matter."
+closing: "Don't be a stranger."
+
+-- Eduardo (gen_ey7f6i9) occ=physical therapy aide --
+OPENING: "About whatever's been weighing on me — I'm not okay. I'm saying it out loud so it's real: I'm not okay."
+YOU: [dlg:cant] "I can't — I'm sorry."
+THEM: "It's nothing. Really." It isn't nothing. You both know it.
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That can wait — it isn't going anywhere. What's on your mind?"
+YOU: [ask:gossip] "What are people saying?"
+THEM: "You want to know about that? Okay." "I watched Tariq eat grey meat raw and walk away whistling. Don't try it."
+YOU: [goon] "Keep going."
+THEM: The conversation cools to something businesslike.
+YOU: [dlg:more] "I’m listening."
+THEM: "Jovan is back. Walked in like they'd never left. ...at least, that's how it looks to me."
+YOU: [dlg:react] (listen)
+THEM: "Something's off with Tariq. I mentioned it to the others and they went quiet, which tells you everything."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the gossip."
+closing: "Well. We'll see how it goes."

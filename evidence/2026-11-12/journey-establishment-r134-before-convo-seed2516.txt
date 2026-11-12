@@ -1,0 +1,81 @@
+=== r134-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Kevin (gen_d4vjncq) occ=emergency dispatcher --
+OPENING: "My cut needs a second pair of hands. Will you help me clean it?"
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one is Pineapple. Look at the leaf, feel the stem, breathe it in. It'll stick."
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "a ridge with a view for miles — I'll mark it on your map when we're back. It's real, I've stood there."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: You need to be right next to them, same side of the Haven door, to help.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Look, forget it. You wanted something?"
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "You want to know about that? Okay." "Joyce hums at the beans and they climb faster. Laugh if you want. I've watched."
+YOU: [goon] "Go on. I'm listening."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:more] "Go on."
+THEM: "People are talking about me. Take it for what it's worth."
+closing: "See you at the fire."
+
+-- Joyce (gen_yrqtwvi) occ=electrician --
+OPENING: "Never mind the sickness I'm fighting — we got it handled. Thanks anyway. We're eating through stores faster than we replace them. Come forage with me tomorrow — two of us can fill packs."
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Then it’s set. The ridge above the creek, dawn. Bring a pack."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: "I buried this before the Scattering. Seemed stupid to keep it secret." Joyce digs up a wrapped bundle — food, still good. (+1875 kcal to the pantry.)
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Your partner is inside the Haven hall. Go through the door to meet them.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That can wait — it isn't going anywhere. What's on your mind?"
+YOU: [ask:personal] "Tell me who you are, child. The whole of it."
+THEM: "Huh. Let me think about that." "I'm collecting skills like they're currency — making do today, something else tomorrow."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Anyway — I should get back to it. Good talking, though."
+
+-- Helga (gen_mhgtal1) occ=taxi driver --
+OPENING: "About that news I was bursting to share — Okay, so — something happened this morning."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "Senegal Date Palm — crush the leaf, smell it, taste the stem. That's how you know it."
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "a ridge with a view for miles — trace it with your finger. That's where it is, and it's real."
+YOU: [dlg:more] "Tell me more."
+THEM: "The treeline, this morning — something moved out there, big. By the time I looked properly it was gone. But I saw it."
+YOU: [dlg:react] "I see."
+THEM: "That's everything I've got. You know as much as I do now."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that news."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: That could have stung. They let it pass — you've been kind before.
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Did you leave someone behind? ...Sorry. You don't have to answer that."
+YOU: [ans:q_left_behind:a_yes] "Yes."
+THEM: Just: "Yeah." A long quiet. "Me too."
+closing: "Don't be a stranger."
+
+-- Lan (gen_6rkuzfx) occ=librarian --
+OPENING: "Can I tell you something? I've been hiding an injury. I'm ashamed and I can't stop."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one is Prickly Pear. Look at the leaf, feel the stem, breathe it in. It'll stick."
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "a cellar full of jars — remember the shape of it. It's real, and it's worth knowing."
+YOU: [secret:promise] "That stays between us."
+THEM: "Thank you for hearing it. I needed someone to know — and I needed it to stop with you."
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "What got you through the first week? The very first days."
+YOU: [gq:open:take] "I need a moment to think about that."
+THEM: "Take your time."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "I work alone. Nothing personal. ...It's a little personal."
+YOU: [dlg:doubt] "That doesn't quite add up."
+THEM: "...What's that supposed to mean?" Their voice goes careful.
+YOU: [menu:more] More things to say (1/2)
+THEM: (menu page turned)
+closing: "Later."

@@ -1,0 +1,82 @@
+=== r134-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Heidi (gen_hgypetl) occ=farmer --
+OPENING: "Can I tell you something? At night I talk to someone who isn't there anymore."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+YOU: [secret:promise] "That stays between us."
+THEM: "I needed someone to know — just one person. Thank you for being that person."
+YOU: [goon] "Keep going."
+THEM: They nod — and keep their distance, for now.
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "Teach me something. Anything you know that I don't."
+YOU: [goon] "And?"
+THEM: "Do you still count the days? I lost track days ago."
+YOU: [ans:q_name_day:a_count] "I count. Someone has to."
+THEM: "Good. Keep counting. The days need witnesses."
+YOU: [goon] "And?"
+THEM: "I count meals, not days. Three meals since the rain. Two since the alarm. Days are for people with calendars. I have a stomach."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that question."
+closing: "Don't be a stranger."
+
+-- Alejandra (gen_bnntmc8) occ=Midwife --
+OPENING: Alejandra: "I've heard good things about Thornfield. We should link with them — we'd be stronger together."
+YOU: [link:accept] "All right. Let's ask them."
+THEM: "All right — let's ask them." You carry the proposal to Thornfield.
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them White Oak Acorns — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+YOU: [goon] "And?"
+THEM: The moment passes without landing. Not yet.
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Alright. But I'm not carrying your stuff."
+YOU: [dlg:more] "I’m listening."
+THEM: "What scares you most about what's happening? The real answer."
+YOU: [ans:q_system_fear:a_tell] "That it's intentional. That someone's watching and this is all... on purpose."
+THEM: They go quiet. "Yeah. Me too. The randomness would almost be kinder."
+YOU: [goon] "Keep going."
+THEM: "That we're interesting to it. Being watched means being kept. I'd rather be boring to the sky. Boring things get left alone."
+YOU: [goon] "Keep going."
+THEM: "I should go. You know where to find me."
+
+-- Mabel (gen_lnzn11d) occ=paramedic --
+OPENING: "About what you think happened to us — I've been turning something over. What do YOU think actually happened to us?"
+YOU: [ans:q_theory:a_aliens] "Something took us. Something big."
+THEM: "That's where I keep landing too. The question is what it wants."
+YOU: [goon] "Keep going."
+THEM: They pull back half a step — not leaving, just... further.
+YOU: [goon] "Keep going."
+THEM: "My theory changes weekly. This week's: we're the control group. Somewhere there's a village that got instructions, and we're the ones they just... watched. Cheerful thought, right?"
+YOU: [goon] "Good question. What do YOU think?"
+THEM: "Help me haul something back? Too much for one."
+INVITE-ANSWER trust=25
+YOU: [betrayal:decline] "Not this time."
+THEM: "Another time, then." A small thing, pocketed.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on what you think happened to us."
+YOU: [goon] "Keep going."
+THEM: "Alright — I should get back to it."
+YOU: [silence] (say nothing)
+THEM: The silence stretches a beat too long. They study their hands.
+(ended by engine)
+
+-- Kirandeep (gen_jh08rh0) occ=glazier --
+OPENING: "Did you leave someone behind? ...Sorry. You don't have to answer that."
+YOU: [ans:q_left_behind:a_yes] "Yes."
+THEM: Just: "Yeah." A long quiet. "Me too."
+YOU: [goon] "Keep going."
+THEM: "I don't talk about that. Not because it's secret — because saying it out loud makes it real in a way I can't afford yet. Someday. Not today."
+YOU: [goon] "Keep going."
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: You walk to the trap line with Kirandeep. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on who you left behind. Rest when you can."
+YOU: [goon] "Keep going."
+THEM: They take it in and give nothing back. Not yet.
+YOU: [goon] "Keep going."
+THEM: "Do you ever just need to be alone? Like, really alone?"
+YOU: [ans:q_alone_time:a_tell] "Every day. I go for walks that don't need to happen. Just to breathe my own air
+THEM: "Look — I get it. Solitude's a resource too. Scarcer than food, some days."
+closing: "Later."

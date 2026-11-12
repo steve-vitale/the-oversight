@@ -1,0 +1,85 @@
+=== r134-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Dominic (gen_8408u7a) occ=programmer --
+OPENING: "About what happened to my taken kin — I keep dreaming about rows of pods. Humming. Tell me I'm not the only one."
+YOU: [dlg:more] "Tell me about them."
+THEM: "It's my brother, Brian. Went up in the Taking with the boring half. He was the funniest person I knew. Their metrics are broken. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person."
+YOU: [goon] "Go on."
+THEM: Something eases in their shoulders. They're really talking to you now.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "Farid? A locksmith, back before. Solid person."
+YOU: [dlg:react] (listen)
+THEM: "Did you hear? You won Lie Detector on the cameras. People are still talking about it."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "With you leading? ...Give me a day to think."
+closing: "Later."
+
+-- Deborah (gen_i4656h8) occ=Midwife --
+OPENING: "Can I tell you something? At night I count the stars and name them after people."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Deborah has been stockpiling where nobody looks. "Take half. You've got the hands for it." (+4 wood, +4 fiber to the village stash.)
+YOU: [secret:promise] "That stays between us."
+THEM: "I needed someone to know — just one person. Thank you for being that person."
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Groundnut — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+YOU: [alive:want:ask_favor] "Is there something you need? Really."
+THEM: "Water's almost gone — 9 liters. I can't carry enough alone. First light, the creek, you and me?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Get to your partner's side of the Haven door and stand next to them — then you can help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+YOU: [goon] "Go on."
+THEM: "I should get back to it."
+YOU: [silence] (say nothing)
+THEM: You say nothing. Neither do they, for a while — and it's fine.
+(ended by engine)
+
+-- Karl (gen_y09aq2x) occ=Mortician --
+OPENING: "What are you hoping for? Not the big stuff. The small thing."
+YOU: [ans:q_hope:a_tell] "A full night's sleep. Just one. Where I don't wake up listening."
+THEM: "God, yes. That's the dream now. Eight hours of not being afraid."
+YOU: [goon] "I'm listening."
+THEM: "A full night's sleep. Not safety, not answers — just eight hours where nothing needs me. That's my whole theology now. But what do I know."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Short version — Still on what you're hoping for."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway — that's my problem, not yours. What did you want?"
+YOU: [ask:personal] "You never really told me your story."
+THEM: "You want to know about that? Okay." "I think about who I was in Columbus, Ohio and it feels like reading about a stranger."
+YOU: [dlg:more] "Go on."
+THEM: "Don't mind me. I'm having a whole argument in my head and losing."
+YOU: [dlg:react] (listen)
+THEM: "I've decided the monsters are just wildlife with better PR. Don't quote me."
+YOU: [party_name] "We should name this. Us."
+THEM: "A name. Okay." You say it out loud, trying the shape of it:
+1. "THE PROTAGONISTS" (📺 the System suggests)
+2. "The Second Try" (Jovan suggests)
+3. "The Company" (or plain)
+(Which one? It'll stick.)
+closing: "Take care of yourself."
+
+-- Yakov (gen_y7wrngo) occ=postal worker --
+OPENING: "What's something from your old life that's actually useful here?"
+YOU: [ans:q_before_skill:a_tell] "Patience. Sounds dumb. But waiting — really waiting, without fidgeting — that's
+THEM: "Not dumb at all. The people who can't wait are the ones who make mistakes. You're an asset."
+YOU: [goon] "Go on."
+THEM: "Being a postal worker taught me to read people fast — who's lying, who's scared, who needs a job. Turns out that's a survival skill. Who knew."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on your useful old-life skills."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Another time. The village needs me here."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Look, forget it. You wanted something?"
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Groundnut — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+YOU: [goon] "Go on."
+THEM: Something in them stays shut, for now.
+YOU: [goon] "Go on."
+THEM: "I should go. You know where to find me."

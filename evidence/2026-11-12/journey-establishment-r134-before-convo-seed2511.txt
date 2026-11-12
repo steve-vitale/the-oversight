@@ -1,0 +1,83 @@
+=== r134-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Frank (gen_v4abt2i) occ=mason --
+OPENING: "Any regrets? The real kind, not the small stuff."
+YOU: [ans:q_regret:a_tell] "I didn't say what I needed to say. To someone. Now I can't."
+THEM: Quiet. "Yeah. I think everyone's carrying one of those."
+YOU: [goon] "Go on. I'm listening."
+THEM: "I regret the ordinary days I rushed through. All those Denver mornings I spent annoyed at small things. I'd pay anything for one annoyed morning now."
+YOU: [dlg:doubt] "That doesn't quite add up."
+THEM: "...What's that supposed to mean?" Their voice goes careful.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on your regrets."
+YOU: [goon] "Go on. I'm listening."
+THEM: Their friendliness thins — still there, just held at arm's length.
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "I'd love to. Lead the way." (They're already checking your pack.)
+YOU: [goon] "Go on. I'm listening."
+THEM: "Okay. We'll pick this up later."
+YOU: [agree] "You're right."
+THEM: "I keep coming back to the same conclusion. So: yes."
+(ended by engine)
+
+-- Mario (gen_4piieyb) occ=Pharmacist --
+OPENING: "Water's almost gone — 4 liters. I can't carry enough alone. First light, the creek, you and me?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Move next to your partner, on the same side of the Haven door.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Wait — I'm away from Haven, out on the road. I can't promise a dawn meet while I'm out — find me when I'm back, and we'll set it then."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that water haul."
+YOU: [goon] "Go on. I'm listening."
+THEM: "What's your first memory? Like, ever. The earliest thing."
+YOU: [ans:q_first_memory:a_tell] "A kitchen. Morning light. I must've been three."
+THEM: "Three. That's young. The brain keeps what it needs, I guess."
+YOU: [goon] "Go on. I'm listening."
+THEM: "Mine's Columbus, Ohio, I think — heat on pavement, someone's hand huge around mine. Or I invented it. First memories are half real and half the story you needed."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Never mind me. What were you going to say?"
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "Huh. Let me think about that." "Leo? A trail crew lead, back before. Solid person."
+closing: "Okay! Moving again. Can't sit still."
+
+-- Tanya (gen_lbi2fdb) occ=trail crew lead --
+OPENING: I've seen what happens when nobody stands between danger and the vulnerable. Never again.
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: You walk to the hollow with Tanya. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+YOU: [dlg:more] "Go on."
+THEM: "Protection looks boring when it works. I aim for boring."
+YOU: [dlg:react] (listen)
+THEM: "Being the shield means you take the hits. I've made my peace with that."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on wanting to protect the group."
+YOU: [goon] "Go on. I'm listening."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Okay. Yeah. I trust you."
+YOU: [goon] "Go on. I'm listening."
+THEM: "Go on, then. I'll be thinking good thoughts at you."
+YOU: [more] "One more thing —"
+THEM: "I couldn't protect — before. Not going to happen again. Not on my watch."
+(ended by engine)
+
+-- Miguel (gen_g0rtkfm) occ=librarian --
+OPENING: "What scares you most about what's happening? The real answer."
+YOU: [ans:q_system_fear:a_tell] "That it's intentional. That someone's watching and this is all... on purpose."
+THEM: They go quiet. "Yeah. Me too. The randomness would almost be kinder."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "That we're interesting to it. Being watched means being kept. I'd rather be boring to the sky. Boring things get left alone."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "Help me haul something back? Too much for one."
+INVITE-ANSWER trust=34
+YOU: [betrayal:decline] "Not this time."
+THEM: "Another time, then." A small thing, pocketed.
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "I've heard good things about Thornfield. We should link with them — we'd be stronger together."
+YOU: [link:accept] "All right. Let's ask them."
+THEM: "All right — let's ask them." You carry the proposal to Thornfield.
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "...I should say, I trade in what I know. My knowledge for yours. Or food, if you're short on secrets."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one is Staghorn Sumac. Look at the leaf, feel the stem, breathe it in. It'll stick."
+closing: "Don't be a stranger."

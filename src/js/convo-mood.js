@@ -110,10 +110,27 @@
     const rec = this.convoMoodReceptivity(vid);
     if (delta > 0 && rec < 0 && !c.moodGuardUsed) {
       c.moodGuardUsed = true;
+      // MOODGUARD POOL (journey-establishment r134 2026-11-12): the old
+      // 2-line pool ("Something in them almost softens — then doesn't.
+      // Not yet." / "They hear the warmth in it.") fired after ANY
+      // warming move — including a small agree on gossip — and claimed an
+      // emotional near-miss the scene hadn't earned; with 2 lines it
+      // recurred verbatim across villagers (11x each on the r133 panel).
+      // The new 6 lines describe the villager holding the moment at arm's
+      // length instead of claiming softening or warmth: they read honestly
+      // after a small agree AND after a real comfort, because they
+      // describe the guardedness, not the player's move. Same trigger,
+      // same once-per-conversation, same absorbed move — only the words
+      // change. The mechanic passes no weight, so no line claims a
+      // particular weight of feeling.
       c.moodBeat = this.convoPickCycle(vid, 'moodguard', [
-        'Something in them almost softens — then doesn\'t. Not yet.',
-        'They hear the warmth in it. They\'re not ready to let it in.',
-      ]) || 'They\'re not ready to let it in. Not yet.';
+        'They hear you out, but something in them stays guarded.',
+        'They nod — and keep their distance, for now.',
+        'The moment passes without landing. Not yet.',
+        'They take it in and give nothing back. Not yet.',
+        'Something in them stays shut, for now.',
+        'They let the words sit there, unanswered.',
+      ]) || 'Not yet. They keep their distance.';
       return this.convoMoodBand(vid);
     }
     if (delta < 0 && rec > 0 && !c.moodGraceUsed) {
