@@ -237,4 +237,5 @@ Baseline NOT rolled on a single 4-seed panel (prereg).
 - Merged-master gate result (confirms the staleness pair is cured on the
   final tree) and merge SHA follow in the closeout commit below.
 
-<!-- CLOSEOUT: merged-master gate + merge SHA -->
+- Merged ff-only to master `ddb0a9101` (from `ce89f2b77`); worktree released as done-merged, branch deleted. Rotation-b 5→6. Lock `playtest-loop-2.lock` deleted at closeout.
+- Merged-master gate `node scripts/check.js --quick` on tip `ddb0a9101` (2026-11-12 ~11:48–12:06Z): **334 passed, 6 failed in 1067s** — 3× 120s load timeouts, measurement-proof staleness pair, phone-frame-proof pre-existing stale. CORRECTION to the note above: the merged-master gate does NOT show the staleness pair cured — it fails again, for a new reason: the ship bump `9b3373853` stamped `src/js/build.js` + `index.html` (both manifest inputs; the only `src/` change since `9f19007f0`), so the b8 panel went stale again and proof refresh round 9 is owed. No failure attributable to this run. **Landing GO.**

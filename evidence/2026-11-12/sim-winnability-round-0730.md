@@ -165,7 +165,7 @@ not this run's).
 - Master moved twice under the run (proofrefresh merge `fefc29406`, A's round-4
   landing `fed635f1f`); synergy rebased once onto the explicit SHA, proofs
   re-run green, merged ff-only. No pipe masked any exit code.
-- `check.js --quick` on merged master: [PENDING — fill in before commit.]
+- `check.js --quick` on merged master `ddb0a9101` (2026-11-12 ~11:48–12:06Z, cache `/tmp/jest-cache-adopt-0730`): **334 passed, 6 failed in 1067s** — 3× 120s load timeouts (living-garden-deed-attainment, one-person-army-deed-attainment, trust-observer-neutrality), measurement-proof staleness pair (proof-update + workflow — "Proof source inputs are not current": the b8 panel went stale again when the ship bump `9b3373853` stamped `src/js/build.js` + `index.html`, both manifest inputs; the only `src/` change between `9f19007f0` and this tip is that stamp. Proof refresh round 9 owed — NOT a regression from this run's arms), phone-frame-proof (pre-existing stale receipt). Zero attributable to synergydisc-b or the r181 landing. Gate GO on the standing adjudication.
 
 ## Wall (this run's judged corpora)
 
