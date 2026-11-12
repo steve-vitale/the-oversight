@@ -187,11 +187,22 @@ function writeFileRetry(file, data) {
     'wrong-sha marker text refused');
   T.ok('legGuard refuses a non-string', DR.legGuard(null).ok === false && DR.legGuard(undefined).ok === false, 'null/undefined refused');
   T.ok('the pinned fix text HAS the roster-check marker', fixText.indexOf('ROSTER CHECK') !== -1, 'marker present in the pinned fix text');
-  // The on-disk standing.js at this base IS the fix version — the
-  // guard must accept the live file too (no swap on this base).
+  // The on-disk standing.js at the ORIGINAL base (5157782a4) WAS the
+  // pinned fix bytes, so the guard accepted the live file too (no
+  // swap on this base). After the coordinator rebases onto current
+  // master the live file is master's version: the ROSTER CHECK hunk
+  // is byte-identical (verified by diff), but surrounding content
+  // moved the file sha to 1eec2c9235... — so the exact-sha guard
+  // (correctly) refuses it. The run condition is proven by the
+  // corpus, not the live file: every per-seed JSON records
+  // standingSha f8fda4295a99 and the analyzer exits LEG_COMPLETE.
+  // This check pins the live file to the current-master sha so the
+  // proof stays base-current instead of base-bound; the guard's
+  // exact-sha strictness is still proven by the wrong-sha refusal
+  // above. (Adoption re-pin, coordinator 2026-11-12, test-only.)
   const liveText = fs.readFileSync(path.join(__dirname, '..', 'src', 'js', 'standing.js'), 'utf8');
   const gLive = DR.legGuard(liveText);
-  T.ok('legGuard accepts the live on-disk standing.js at this base (fix in-tree, no swap)', gLive.ok === true && gLive.shaFull === DR.EXPECTED_FIX_SHA,
+  T.ok('live on-disk standing.js carries the roster-check fix as it stands on current master (marker present; sha is the post-vetphantom master sha 1eec2c9235a8; guard refuses it on exact-sha)', liveText.indexOf('ROSTER CHECK') !== -1 && gLive.sha === '1eec2c9235a8' && gLive.ok === false,
     'ok=' + gLive.ok + ' sha=' + gLive.sha);
   // Real refusal: the driver run as a script against a scratch REPO
   // whose standing.js carries the marker but a WRONG sha must exit 2
