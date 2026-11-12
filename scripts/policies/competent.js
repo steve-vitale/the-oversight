@@ -2337,16 +2337,31 @@ function beastStrikeTarget(Game, f, ctx, p, px, py, tgt, endTurn) {
     if (d0 > (w.range || 1)) {
       const occupied = new Set(
         ((f.fighters || []).filter(x => x && x.alive && x.key !== 'p')).map(x => x.mx + ',' + x.my));
-      let bx = null, by = null, bd = 1e9;
+      // FALLBACK (journey-landing r127 2026-11-12): the old code picked ONE
+      // best adjacent tile, called tbPlayerMove, and IGNORED the result —
+      // a refused move (no path / too far for this turn's movement /
+      // destination blocked) still ended the turn as 'moved' and still
+      // counted ctx.closed. Next round the positions were unchanged, so
+      // the same tile was picked again: seed 1151 d28 vs The Focus Group,
+      // three identical failed steps to (6,6), zero strikes while the ally
+      // did all the damage. Try EVERY adjacent tile, nearest first, and
+      // accept a move only when the scholar's position actually changes
+      // (position check, not the return value — tbPlayerMove returns true
+      // without moving under the moderator's verb block). A failed move
+      // counts nothing; a turn where no tile is reachable is honestly
+      // 'stuck', recorded for the analyzer.
+      const cands = [];
       for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) {
         if (!dx && !dy) continue;
         const cx = tmx + dx, cy = tmy + dy;
         if (cx < 1 || cx > 7 || cy < 1 || cy > 7) continue;
         if (occupied.has(cx + ',' + cy)) continue;
-        const dd = Math.max(Math.abs(cx - px), Math.abs(cy - py));
-        if (dd < bd) { bd = dd; bx = cx; by = cy; }
+        cands.push([cx, cy, Math.max(Math.abs(cx - px), Math.abs(cy - py))]);
       }
-      if (bx != null) {
+      cands.sort((a, b) => (a[2] - b[2]) || (a[0] - b[0]) || (a[1] - b[1]));
+      let moved = false;
+      for (const [bx, by] of cands) {
+        if (!Game.tbIsPlayerTurn || !Game.tbIsPlayerTurn()) break;
         // STEP, DON'T TELEPORT (capable bot 2026-10-14): the main strike
         // path got this fix in r6, this one didn't — tbPlayerMove refuses a
         // destination past this turn's movement ("Too far"), so a far trick
@@ -2367,12 +2382,18 @@ function beastStrikeTarget(Game, f, ctx, p, px, py, tgt, endTurn) {
               if (idx >= 0) { dx = path[idx][0]; dy = path[idx][1]; }
             }
           }
+          const ox = p.mx, oy = p.my;
           Game.tbPlayerMove(dx, dy);
+          if (p.mx !== ox || p.my !== oy) { moved = true; break; }
         } catch (e) {}
-        ctx.closed = (ctx.closed || 0) + 1;
+      }
+      if (moved) ctx.closed = (ctx.closed || 0) + 1;
+      else {
+        ctx.stuckTurns = (ctx.stuckTurns || 0) + 1;
+        ctx._strikeStuck = { from: [px, py], target: [tmx, tmy] };
       }
       endTurn();
-      return 'moved';
+      return moved ? 'moved' : 'stuck';
     }
   } catch (e) {}
   try { Game.tbPlayerStrike(tgt.key); ctx.struck = (ctx.struck || 0) + 1; } catch (e) {}

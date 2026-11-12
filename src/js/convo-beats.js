@@ -219,7 +219,23 @@
       '"Look, forget it. You wanted something?"',
       '"Anyway — that\'s my problem, not yours. What did you want?"'],
     secret: ['"Don\'t tell anyone I told you. What\'s on your mind?"', '"...Anyway. What did you want to ask?"'],
-    small: ['"Sure — what\'s on your mind?"', '"Yeah? What\'s up?"'],
+    small: ['"Sure — what\'s on your mind?"', '"Yeah? What\'s up?"',
+      // r127 (journey-landing 2026-11-12): the pool held only the two lines
+      // above, so convoPickCycle's without-replacement cycle was strict
+      // alternation — a third small-bridge in one sitting repeated a line
+      // heard two turns earlier (1148 d9: "Sure — what's on your mind?" x3,
+      // "Yeah? What's up?" x2; 1142 d6: each x2). Six lines means a sitting
+      // would need seven small-bridges before any repeat, and the keep-3
+      // memory window keeps near repeats out. Same voice throughout: the
+      // villager steps back from chit-chat and hands the floor to the
+      // player. Note small is ALSO the fallback pool (bridgeLine falls back
+      // to it when fromTopic has no pool of its own — topic2 topics like
+      // lately/others/fears/you), which is why it serves 26x per 100
+      // sittings while grief/cheer/secret serve 0-1x.
+      '"Right — go on, I\'m listening."',
+      '"Okay, I\'m all ears."',
+      '"Go ahead — you\'ve got my attention."',
+      '"Alright, I\'m listening. What\'s next?"'],
   };
 
   Game.bridgeLine = function (vid, fromTopic) {
