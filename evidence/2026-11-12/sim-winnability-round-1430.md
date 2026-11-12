@@ -210,3 +210,10 @@ the wall numbers. winnability chain: the r7 collapse is confirmed, the
 rank stall is gone on fresh seeds, the wave-5 choke is exact a third
 time, the measurement proof is refreshed (stale-by-2 on landing).
 Claim deleted; lock deleted.
+
+## Correction (coordinator, same run)
+
+The Infrastructure section misstates the landing order: Loop A's
+coordinator evidence `1df1a506d` (16:57:42Z) is the parent of this
+file's commit `5c5fbafc2` (16:58:40Z) — A's commit landed first, this
+one on top of it. No interference either way; the substance stands.
