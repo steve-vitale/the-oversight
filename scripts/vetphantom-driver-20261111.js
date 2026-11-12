@@ -103,7 +103,7 @@ function shadowOldCount(Game, minWave) {
   } catch (e) { return null; }
 }
 
-const SAY_RE = /veteran|blooded|scarred|elder|pack-leader|put down|killing blow|veteran kill|remember the name|MIRROR DRAFT|PRODUCERS|FINAL DRAFT|blood your fighters/i;
+const SAY_RE = /veteran|blooded|scarred|\belder\b|pack-leader|put down|killing blow|veteran kill|remember the name|MIRROR DRAFT|PRODUCERS|FINAL DRAFT|blood your fighters/i;
 
 async function oneRun(seed) {
   const policy = competent;
