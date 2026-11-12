@@ -1,0 +1,621 @@
+SEEDS: 43701 d75, 43702 d48, 43703 d62, 43704 d111
+
+seed 43701: days=75 endReason=village-lost fullConvs=98 naturalEnds=87 feasts=10 moots=2
+  scattering: {"scattered":true,"hungryDays":5,"aliveEnd":2,"endReason":"village-lost"}
+  decisions: {"lure:accept":66,"lure:decline":58,"party:accept":3,"bond:decline":2}
+  BOND lure-by-inviter (scholar=Eamon initialBearer=Linh): {"NPC:lure:accept":66,"NPC:lure:decline":58,"player:party:accept":3,"NPC:bond:decline":2}
+  BOND successions: [{"day":47,"from":"Linh","to":"Eamon"}]
+  BOND proposeWrapped={"proposeLink":true,"proposeCovenant":true,"proposeTrade":true} proposeCalls=5 {"proposeLink:scholar":5}
+  COUNTER proposeLink=5 counter=1 fresh=5 freshCounter=1 blocked=0 blockedCounter=0 unknownPending=0 answerWrapped=true
+  COUNTER settles=1 linkFormed=1 failed=0 unknown=0 answers=1 byHow={"accept":1} answersLinkFormed=1 minPantryAtSettle=16900 tributes=[5000] pendingCounterEnd=null
+    SETTLE d13 target=village_3 tribute=5000 pantry=16900 linkFormed=true result={"id":"link_mgpspjd3529","primary":"village_3","subordinate":"haven","trust":30,"tributeKcalPerWeek":5000,"tributePaidWe
+    PROPOSE d12 proposeLink targetId=village_3 pendingBefore=false result="counter"
+    PROPOSE d24 proposeLink targetId=village_spl_18_12519 pendingBefore=false result={"id":"link_mgpsplk2236","primary":"haven","subordinate":"village_spl_18_12519","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":
+    PROPOSE d26 proposeLink targetId=village_0 pendingBefore=false result={"id":"link_mgpsplw0511","primary":"haven","subordinate":"village_0","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":26,"kind":"
+    PROPOSE d31 proposeLink targetId=village_2 pendingBefore=false result={"id":"link_mgpspmy0222","primary":"haven","subordinate":"village_2","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":31,"kind":"
+    PROPOSE d66 proposeLink targetId=village_spl_27_90328 pendingBefore=false result={"id":"link_mgpspsf3982","primary":"haven","subordinate":"village_spl_27_90328","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":
+  CONFESS confrontWrapped={"confrontDoubt":true,"confrontTheft":true} total=9 confessed=2 byOutcome={"confessed":2,"already-confessed":7} sittingsWithConfession=2 singleSittings=2 doubleSittings=0 outsideSittingConfessed=0
+  RECAP maxPresses=3 totalPresses=51 offeredAfterCap=0 capFailures=0
+  BOND proposed=40 byInitiatorKind={"villager":40} byKind={"link":30,"person":10} byOutcome={"staged":19,"expired":13,"accepted":6,"refused":2} villagerPerson=10 villagerPersonAccepted=1 linkRaises=30 linkAccepted=5 maxPerInitiator=16
+    PROPOSED d5 Hussein(villager)->village_2 kind=link outcome=staged chance=null
+    PROPOSED d8 Hussein(villager)->village_2 kind=link outcome=expired chance=null
+    PROPOSED d11 Hussein(villager)->village_3 kind=link outcome=staged chance=null
+    PROPOSED d12 Hussein(villager)->village_3 kind=link outcome=accepted chance=null
+    PROPOSED d12 Sofia(villager)->village_2 kind=link outcome=staged chance=null
+    PROPOSED d13 Vivian(villager)->village_2 kind=link outcome=staged chance=null
+    PROPOSED d15 Sofia(villager)->village_2 kind=link outcome=expired chance=null
+    PROPOSED d16 Hussein(villager)->Linh kind=person outcome=staged chance=null
+    PROPOSED d16 Vivian(villager)->village_2 kind=link outcome=expired chance=null
+    PROPOSED d19 Hussein(villager)->Linh kind=person outcome=expired chance=null
+    PROPOSED d19 Vivian(villager)->Sofia kind=person outcome=refused chance=44
+    PROPOSED d23 Hussein(villager)->village_spl_18_12519 kind=link outcome=staged chance=null
+    PROPOSED d24 Hussein(villager)->village_spl_18_12519 kind=link outcome=accepted chance=null
+    PROPOSED d25 Sofia(villager)->village_0 kind=link outcome=staged chance=null
+    PROPOSED d26 Sofia(villager)->village_0 kind=link outcome=accepted chance=null
+    PROPOSED d26 Kieran(villager)->Linh kind=person outcome=staged chance=null
+    PROPOSED d26 Hussein(villager)->village_1 kind=link outcome=staged chance=null
+    PROPOSED d27 Vivian(villager)->village_1 kind=link outcome=staged chance=null
+    PROPOSED d29 Kieran(villager)->Linh kind=person outcome=expired chance=null
+    PROPOSED d29 Hussein(villager)->village_1 kind=link outcome=expired chance=null
+    PROPOSED d30 Vivian(villager)->village_1 kind=link outcome=expired chance=null
+    PROPOSED d30 Hussein(villager)->village_2 kind=link outcome=staged chance=null
+    PROPOSED d31 Hussein(villager)->village_2 kind=link outcome=accepted chance=null
+    PROPOSED d34 Vivian(villager)->village_spl_27_90328 kind=link outcome=staged chance=null
+    PROPOSED d37 Vivian(villager)->village_spl_27_90328 kind=link outcome=expired chance=null
+    PROPOSED d43 Ella(villager)->Linh kind=person outcome=staged chance=null
+    PROPOSED d44 Ella(villager)->Linh kind=person outcome=accepted chance=null
+    PROPOSED d45 Salvatore(villager)->Eamon kind=person outcome=refused chance=58
+    PROPOSED d51 Vivian(villager)->Eamon kind=person outcome=staged chance=null
+    PROPOSED d53 Hussein(villager)->village_spl_27_90328 kind=link outcome=staged chance=null
+    PROPOSED d54 Vivian(villager)->Eamon kind=person outcome=expired chance=null
+    PROPOSED d56 Hussein(villager)->village_spl_27_90328 kind=link outcome=expired chance=null
+    PROPOSED d61 Hussein(villager)->village_spl_37_95391 kind=link outcome=staged chance=null
+    PROPOSED d63 Yara(villager)->village_spl_37_95391 kind=link outcome=staged chance=null
+    PROPOSED d64 Hussein(villager)->village_spl_37_95391 kind=link outcome=expired chance=null
+    PROPOSED d64 Vivian(villager)->village_spl_27_90328 kind=link outcome=staged chance=null
+    PROPOSED d66 Vivian(villager)->village_spl_27_90328 kind=link outcome=accepted chance=null
+    PROPOSED d66 Yara(villager)->village_spl_37_95391 kind=link outcome=expired chance=null
+    PROPOSED d66 Vivian(villager)->village_spl_37_95391 kind=link outcome=staged chance=null
+    PROPOSED d69 Vivian(villager)->village_spl_37_95391 kind=link outcome=expired chance=null
+  BOND end bonds=63 sample={"key":"gen_kjcj4gw|gen_v8sri1b","val":"{\"v\":100,\"depth\":3,\"day\":72,\"dayGain\":2}"}
+  plot plot_1 d7 leader=Vivian inviter=Elif target=Vasyl sprung=true gT->L=60 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_3 d11 leader=Vivian inviter=Sofia target=Vasyl sprung=true gT->L=60 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_5 d15 leader=Vivian inviter=Sofia target=Vasyl sprung=true gT->L=60 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_7 d25 leader=Vasyl inviter=Sofia target=Vivian sprung=true gT->L=0 gT->I=0 gA->Tmax=0 gI->T=0
+  armWrapped=true springWrapped=true
+  ARM d7 plot_1 Vivian->Vasyl inviter=Elif motive={"score":71.08000000000001,"reasons":["grievance","ambition"]} gT->L=57.6 gL->T=57.6 accMotives=[{"who":"Elif","score":0,"reasons":[],"grievance":0},{"who":"Sofia","score":0,"reasons":[],"grievance":0}] trust={"leader":11,"Elif":14,"Sofia":42} goal=lead
+  ARM d11 plot_3 Vivian->Vasyl inviter=Sofia motive={"score":68.52000000000001,"reasons":["grievance","ambition"]} gT->L=54.400000000000006 gL->T=54.400000000000006 accMotives=[{"who":"Elif","score":0,"reasons":[],"grievance":0},{"who":"Sofia","score":0,"reasons":[],"grievance":0}] trust={"leader":31,"Elif":28,"Sofia":54} goal=lead
+  ARM d15 plot_5 Vivian->Vasyl inviter=Sofia motive={"score":67.24000000000001,"reasons":["grievance","ambition"]} gT->L=52.800000000000004 gL->T=52.800000000000004 accMotives=[{"who":"Elif","score":0,"reasons":[],"grievance":0},{"who":"Sofia","score":0,"reasons":[],"grievance":0}] trust={"leader":34,"Elif":20,"Sofia":25} goal=lead
+  ARM d25 plot_7 Vasyl->Vivian inviter=Sofia motive={"score":48,"reasons":["grievance"]} gT->L=0 gL->T=60 accMotives=[{"who":"Elif","score":0,"reasons":[],"grievance":0},{"who":"Sofia","score":0,"reasons":[],"grievance":0}] trust={"leader":73,"Elif":18,"Sofia":30} goal=feed
+  SPRING d10 plot_1 Vivian->Vasyl outcome=escaped case=case_2 endCase=case_2 charge=ambush status=resolved heardDay=11 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=5
+  SPRING d12 plot_3 Vivian->Vasyl outcome=escaped case=case_4 endCase=case_4 charge=ambush status=acquitted heardDay=14 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=5
+  SPRING d16 plot_5 Vivian->Vasyl outcome=hurt case=case_6 endCase=case_6 charge=ambush status=acquitted heardDay=17 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=5
+  SPRING d27 plot_7 Vasyl->Vivian outcome=escaped case=case_8 endCase=case_8 charge=ambush status=resolved heardDay=28 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=5
+  expireWrapped=true expiredEvents=0
+  village fallen: 8 by cause: {"the wild":1,"monster":1,"a wound that wouldn't close":1,"starvation":4,"combat":1}
+  death clusters (>=3/day): d72x3
+  ambush-caused fallen: []
+  (samples.deaths, all recorded incl. outsiders: 49 — NOT village deaths)
+  census: seed 43701, day 75, alive 2 | - Eamon (aquarium_keeper, ?) trust=25 mood=warm npcAbilities=0
+  M6 nightlyNews: strandedDays=0 burst=54 settle=26 witness=7 tale=20 | emitted-AWAY(strict on-tile) burst=10 settle=0 witness=0 tale=0 | emitted-AWAY-GATE(radius-1) burst=0 settle=0 witness=0 tale=0 debatesKicked=27 settled=26 queuedAtEnd=0
+  M4 transcripts=93 naturalEnds=87 nearDupFlags=31
+  M4 FLAG jaccard>=0.5 [D-talk-request ella_johnson] :: You need to be right next to your partner, same side of the Haven door, to help. || Move next to your partner, on the same side of the Haven door.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_yee4u5a] :: Oh! Oh — Still on what you're hoping for. || we're still on what you're hoping for.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_v8sri1b] :: You need to be right next to your partner, same side of the Haven door, to help. || Move next to your partner, on the same side of the Haven door.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_v8sri1b] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_v8sri1b] :: Accept the forage request first. Meet at Haven at dawn on the following day. || We're going in circles — Accept the forage request first. Meet at Haven at dawn on the following day. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [D-talk-request vasyl_shevchenko] :: «Це правда. Абсолютна правда.» (you catch 'правда' — truth) They nod, holding your gaze a beat longer. || «Погоджуюся з тобою.» (I agree with you. — you're fairly sure) They nod, holding your gaze a beat longer.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_vvmtzr8] :: Move next to them, on the same side of the Haven door, to help. || You need to be right next to them, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_vvmtzr8] :: Move next to them, on the same side of the Haven door, to help. || Stand beside them first — same side of the Haven door — then help.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_vvmtzr8] :: You need to be right next to them, same side of the Haven door, to help. || Get to their side of the Haven door and stand next to them — then you can help.
+  M4 FLAG jaccard>=0.5 [C-friendship ella_johnson] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG same-opening [C-friendship yara_haddad] :: You say nothing. The silence sits at the fire with everyone else. || You say nothing. Neither do they, for a while — and it's fine.
+  M4 FLAG same-opening [C-friendship yara_haddad] :: We were just talking. Nothing important. || We were just talking. Nothing important. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [D-talk-request ella_johnson] :: Ella: "I've been thinking. You and me — we should be bonded. Not just neighbors. Will you stick with me? || I've been thinking. You and me — we should be bonded. Not just neighbors. Will you stick with me?
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_v8sri1b] :: You need edible, unspoiled food in your pack. Food in the pantry must be collected first. || We're going in circles — You need edible, unspoiled food in your pack. Food in the pantry must be collected first. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_v8sri1b] :: Move next to them, on the same side of the Haven door, to help. || You need to be right next to them, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_v8sri1b] :: Move next to them, on the same side of the Haven door, to help. || Stand beside them first — same side of the Haven door — then help.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_v8sri1b] :: You need to be right next to them, same side of the Haven door, to help. || Get to their side of the Haven door and stand next to them — then you can help.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_4o5xwcr] :: Get to their side of the Haven door and stand next to them — then you can help. || You need to be right next to them, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_4o5xwcr] :: Move next to them, on the same side of the Haven door, to help. || You need to be right next to them, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_4o5xwcr] :: Move next to them, on the same side of the Haven door, to help. || Stand beside them first — same side of the Haven door — then help.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_v8sri1b] :: You need to be right next to your partner, same side of the Haven door, to help. || Move next to your partner, on the same side of the Haven door.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_v8sri1b] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_v8sri1b] :: You need to be right next to your partner, same side of the Haven door, to help. || Move next to your partner, on the same side of the Haven door.
+  M4 FLAG same-opening [D-talk-request lucas_brown] :: Survival isn't pretty. It's not noble. It's just... continuing. || Survival isn't pretty. It's Tuesday. It's boring and relentless and I choose it.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_4o5xwcr] :: Vivian: "I've heard good things about The Hungry Road. We should link with them — we'd be stronger together. || I've heard good things about The Hungry Road. We should link with them — we'd be stronger together.
+  M4 FLAG jaccard>=0.5 [D-talk-request lucas_brown] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_yee4u5a] :: Ghost Pipe — crush the leaf, smell it, taste the stem. That's how you know it. || Giant Water Lily — crush the leaf, smell it, taste the stem. That's how you know it.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_yee4u5a] :: an old trapline — I'll mark it on your map when we're back. It's real, I've stood there. || a cellar full of jars — I'll mark it on your map when we're back. It's real, I've stood there.
+  M4 FLAG same-opening [D-talk-request lucas_brown] :: You show them Cacao — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks. || You show them Bittersweet Nightshade — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_v8sri1b] :: You need edible, unspoiled food in your pack. Food in the pantry must be collected first. || We're going in circles — You need edible, unspoiled food in your pack. Food in the pantry must be collected first. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_v8sri1b] :: You need edible, unspoiled food in your pack. Food in the pantry must be collected first. || We're going in circles — You need edible, unspoiled food in your pack. Food in the pantry must be collected first. Ask me something else if you want.
+  M4 CANDIDATE [C-friendship ella_johnson turns=11 naturalEnd=true]:
+    NPC: Arguments cost calories. I do the math out loud until people stop.
+    YOU: "Tell me more."
+    NPC: "You two sort it out, or I will, and nobody likes my version."
+    YOU: "I’m listening."
+    NPC: "Peace isn't the absence of fighting. It's the presence of dinner."
+    YOU: "Go on."
+    NPC: "Calm is a choice I make every morning. Some mornings it takes all day."
+    YOU: "Tell me more."
+    NPC: "Most fights start because nobody asked what the other person actually wanted. I ask."
+    YOU: "I’m listening."
+    NPC: "I don't pick sides. I pick the group. Every time."
+    YOU: "Go on."
+    NPC: "Hold it together. That's my whole philosophy. Hold it together."
+    YOU: "Tell me more."
+    NPC: "That's... pretty much all of it, honestly."
+    YOU: "Can I ask you something else?"
+    NPC: "Anyway — that's my cross to carry. What's on your mind?"
+    YOU: "The show — did you see it?"
+    NPC: "They took you — The Box, on the screens. The whole fire watched. Nobody knew where to look."
+    YOU: "Want to come with us?"
+    NPC: "...Fine. This had better be worth it."
+    NPC: "Okay. We'll pick this up later."
+    YOU: "..."
+    NPC: A comfortable quiet settles. They smile a little, and let it be.
+    NPC: "...Think about it? I'll be around."
+    NPC: "This was good." They mean it.
+
+seed 43702: days=48 endReason=village-lost fullConvs=47 naturalEnds=46 feasts=6 moots=1
+  scattering: {"scattered":false,"hungryDays":2,"aliveEnd":0,"endReason":"village-lost"}
+  decisions: {"lure:accept":36,"lure:decline":41,"bond:accept":1,"party:accept":4,"party:decline":2}
+  BOND lure-by-inviter (scholar=Gulzhan initialBearer=Roman): {"NPC:lure:accept":36,"NPC:lure:decline":41,"NPC:bond:accept":1,"player:party:accept":4,"player:party:decline":2}
+  BOND successions: [{"day":25,"from":"Roman","to":"Renee"},{"day":38,"from":"Renee","to":"Ethan"},{"day":41,"from":"Ethan","to":"Inti"},{"day":43,"from":"Inti","to":"Petra"},{"day":44,"from":"Petra","to":"Eduardo"},{"day":46,"from":"Eduardo","to":"Fadi"},{"day":47,"from":"Fadi","to":"Gulzhan"}]
+  BOND proposeWrapped={"proposeLink":true,"proposeCovenant":true,"proposeTrade":true} proposeCalls=4 {"proposeLink:scholar":4}
+  COUNTER proposeLink=4 counter=2 fresh=4 freshCounter=2 blocked=0 blockedCounter=0 unknownPending=0 answerWrapped=true
+  COUNTER settles=2 linkFormed=2 failed=0 unknown=0 answers=2 byHow={"accept":2} answersLinkFormed=2 minPantryAtSettle=12021 tributes=[5000,5000] pendingCounterEnd=null
+    SETTLE d10 target=village_2 tribute=5000 pantry=14418 linkFormed=true result={"id":"link_mgpspirr775","primary":"village_2","subordinate":"haven","trust":30,"tributeKcalPerWeek":5000,"tributePaidWe
+    SETTLE d19 target=village_1 tribute=5000 pantry=12021 linkFormed=true result={"id":"link_mgpspk3w251","primary":"village_1","subordinate":"haven","trust":30,"tributeKcalPerWeek":5000,"tributePaidWe
+    PROPOSE d10 proposeLink targetId=village_2 pendingBefore=false result="counter"
+    PROPOSE d15 proposeLink targetId=village_3 pendingBefore=false result={"id":"link_mgpspjgm909","primary":"haven","subordinate":"village_3","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":15,"kind":"
+    PROPOSE d19 proposeLink targetId=village_1 pendingBefore=false result="counter"
+    PROPOSE d24 proposeLink targetId=village_0 pendingBefore=false result={"id":"link_mgpspkx9704","primary":"haven","subordinate":"village_0","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":24,"kind":"
+  CONFESS confrontWrapped={"confrontDoubt":true,"confrontTheft":true} total=0 confessed=0 byOutcome={} sittingsWithConfession=0 singleSittings=0 doubleSittings=0 outsideSittingConfessed=0
+  RECAP maxPresses=3 totalPresses=14 offeredAfterCap=0 capFailures=0
+  BOND proposed=15 byInitiatorKind={"villager":15} byKind={"link":10,"person":5} byOutcome={"staged":7,"accepted":6,"expired":2} villagerPerson=5 villagerPersonAccepted=2 linkRaises=10 linkAccepted=4 maxPerInitiator=4
+    PROPOSED d9 Inti(villager)->village_2 kind=link outcome=staged chance=null
+    PROPOSED d10 Inti(villager)->village_2 kind=link outcome=accepted chance=null
+    PROPOSED d12 Ethan(villager)->village_3 kind=link outcome=staged chance=null
+    PROPOSED d15 Ethan(villager)->village_3 kind=link outcome=accepted chance=null
+    PROPOSED d18 Ethan(villager)->village_1 kind=link outcome=staged chance=null
+    PROPOSED d19 Ethan(villager)->village_1 kind=link outcome=accepted chance=null
+    PROPOSED d19 Renee(villager)->Boris kind=person outcome=accepted chance=47
+    PROPOSED d23 Inti(villager)->village_0 kind=link outcome=staged chance=null
+    PROPOSED d24 Inti(villager)->village_0 kind=link outcome=accepted chance=null
+    PROPOSED d26 Petra(villager)->Renee kind=person outcome=staged chance=null
+    PROPOSED d29 Petra(villager)->Renee kind=person outcome=expired chance=null
+    PROPOSED d33 Petra(villager)->Renee kind=person outcome=staged chance=null
+    PROPOSED d34 Petra(villager)->Renee kind=person outcome=accepted chance=null
+    PROPOSED d38 Boris(villager)->village_spl_26_43717 kind=link outcome=staged chance=null
+    PROPOSED d41 Boris(villager)->village_spl_26_43717 kind=link outcome=expired chance=null
+  BOND end bonds=60 sample={"key":"gen_c887qqr|gen_ld2vyly","val":"{\"v\":39,\"depth\":1,\"day\":23,\"dayGain\":2,\"combat\":0}"}
+  plot plot_1 d7 leader=Nadia inviter=Petra target=Boris sprung=true gT->L=60 gT->I=0 gA->Tmax=0 gI->T=0
+  armWrapped=true springWrapped=true
+  ARM d7 plot_1 Nadia->Boris inviter=Petra motive={"score":40.96000000000001,"reasons":["grievance"]} gT->L=51.2 gL->T=51.2 accMotives=[{"who":"Emilio","score":25,"reasons":["ambition"],"grievance":0},{"who":"Petra","score":0,"reasons":[],"grievance":0}] trust={"leader":20,"Emilio":7,"Petra":36} goal=heal
+  SPRING d9 plot_1 Nadia->Boris outcome=hurt case=case_2 endCase=case_2 charge=ambush status=acquitted heardDay=11 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=2
+  expireWrapped=true expiredEvents=0
+  village fallen: 15 by cause: {"the wild":12,"monster":3}
+  death clusters (>=3/day): none
+  ambush-caused fallen: []
+  (samples.deaths, all recorded incl. outsiders: 39 — NOT village deaths)
+  census: seed 43702, day 48, alive 0 | fallen: 15
+  M6 nightlyNews: strandedDays=3 burst=42 settle=20 witness=6 tale=12 | emitted-AWAY(strict on-tile) burst=4 settle=0 witness=0 tale=0 | emitted-AWAY-GATE(radius-1) burst=0 settle=0 witness=0 tale=0 debatesKicked=21 settled=21 queuedAtEnd=0
+  M4 transcripts=45 naturalEnds=46 nearDupFlags=12
+  M4 FLAG jaccard>=0.5 [C-friendship devon_okafor] :: You need to be right next to your partner, same side of the Haven door, to help. || Move next to your partner, on the same side of the Haven door.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_gl50oxt] :: …Still on that personal stuff. || we're still on that personal stuff.
+  M4 FLAG same-opening [C-friendship gen_gl50oxt] :: Something eases in their shoulders. They're really talking to you now. || Something eases in their shoulders. "Oh. Okay. That's... that's fine, then.
+  M4 FLAG same-opening [D-talk-request devon_okafor] :: I still need help with the pantry run. || I still need a hand with the pantry run.
+  M4 FLAG same-opening [D-talk-request devon_okafor] :: I oil boots on rest days. It doesn't bring anyone back. It just keeps my hands from shaking. || I oil boots on rest days for Roman, now. Feels right. Feels like the least I can do.
+  M4 FLAG jaccard>=0.5 [D-talk-request petra_novak] :: Petra: "I've been thinking. You and me — we should be bonded. Not just neighbors. Will you stick with me? || I've been thinking. You and me — we should be bonded. Not just neighbors. Will you stick with me?
+  M4 FLAG jaccard>=0.5 [D-talk-request boris_kowalski] :: «Tak, tak, dokładnie.» (you catch 'Tak' — yes) They nod, holding your gaze a beat longer. || «Tak, masz rację.» (Yes, you're right. — you're fairly sure) They nod, holding your gaze a beat longer.
+  M4 FLAG jaccard>=0.5 [D-talk-request boris_kowalski] :: «Tak, masz rację.» (Yes, you're right. — you're fairly sure) They nod back, slowly. || «Zgadza się.» (That's right. — you're fairly sure) They nod back, slowly.
+  M4 FLAG jaccard>=0.5 [D-talk-request boris_kowalski] :: «Tak, czuję to samo.» They nod, holding your gaze a beat longer. || «Dokładnie tak. W punkt.» (you catch 'Dokładnie' — exactly) They nod, holding your gaze a beat longer.
+  M4 FLAG jaccard>=0.5 [B-first-meeting app_mgpspi0s754] :: Move next to them, on the same side of the Haven door, to help. || You need to be right next to them, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [B-first-meeting app_mgpspi0s754] :: Move next to them, on the same side of the Haven door, to help. || Stand beside them first — same side of the Haven door — then help.
+  M4 FLAG jaccard>=0.5 [B-first-meeting app_mgpspi0s754] :: You need to be right next to them, same side of the Haven door, to help. || Get to their side of the Haven door and stand next to them — then you can help.
+  M4 CANDIDATE [D-talk-request devon_okafor turns=0 naturalEnd=true]:
+    NPC: I keep their faces in my head like photographs. If I stop looking, I might lose them.
+    YOU: "Tell me more."
+    NPC: "That's... pretty much all of it, honestly."
+    YOU: "Can I ask you something else?"
+    NPC: "Anyway — that's my cross to carry. What's on your mind?"
+    YOU: "Anything on your mind lately?"
+    NPC: "Huh. I answered that once — back when the answer was simpler." "Roman is gone and Emilio is gone. The fire doesn't care. That's what gets me — the fire doesn't care."
+    YOU: "I’m listening."
+    NPC: "That's the whole of it. Sorry."
+    YOU: "Can I ask you something else?"
+    NPC: "Go ahead — you've got my attention."
+    YOU: "Be straight with me. What am I to you?"
+    NPC: "You want to know about that? Okay." "You're one of the good ones. Don't make me regret saying that out loud." "That's where we are."
+    YOU: "I want to understand."
+    NPC: Their voice loosens. The guardedness thins.
+    YOU: "Go on."
+    NPC: "People here talk. What they say about you when you're not at the fire — that's the real answer to your question."
+    YOU: "I’m listening."
+    NPC: "I've changed my mind about people before. Usually it takes getting hurt first. You haven't hurt me yet."
+    YOU: "Tell me more."
+    NPC: "What do I want from you? Nothing fancy. Just — be the person you are when nobody's watching. Here."
+    YOU: "I want to understand."
+    NPC: "Alright. Catch you later."
+    YOU: "..."
+    NPC: A comfortable quiet settles. They smile a little, and let it be.
+    NPC: "...Think about it? I'll be around."
+    NPC: "This was good." They mean it.
+
+seed 43703: days=62 endReason=village-lost fullConvs=71 naturalEnds=67 feasts=8 moots=1
+  scattering: {"scattered":true,"hungryDays":3,"aliveEnd":8,"endReason":"village-lost"}
+  decisions: {"lure:accept":37,"lure:decline":41,"bond:accept":3,"party:accept":5,"party:decline":5,"bond:decline":1}
+  BOND lure-by-inviter (scholar=Boris initialBearer=Vito): {"NPC:lure:accept":37,"NPC:lure:decline":41,"NPC:bond:accept":3,"player:party:accept":5,"player:party:decline":5,"NPC:bond:decline":1}
+  BOND successions: [{"day":29,"from":"Vito","to":"Ricardo"},{"day":38,"from":"Ricardo","to":"Daniela"},{"day":52,"from":"Daniela","to":"Nina"},{"day":57,"from":"Nina","to":"Henry"},{"day":61,"from":"Henry","to":"Boris"}]
+  BOND proposeWrapped={"proposeLink":true,"proposeCovenant":true,"proposeTrade":true} proposeCalls=3 {"proposeLink:scholar":3}
+  COUNTER proposeLink=3 counter=2 fresh=3 freshCounter=2 blocked=0 blockedCounter=0 unknownPending=0 answerWrapped=true
+  COUNTER settles=2 linkFormed=2 failed=0 unknown=0 answers=2 byHow={"accept":2} answersLinkFormed=2 minPantryAtSettle=13250 tributes=[5000,5000] pendingCounterEnd=null
+    SETTLE d12 target=village_2 tribute=5000 pantry=13900 linkFormed=true result={"id":"link_mgpspj36942","primary":"village_2","subordinate":"haven","trust":30,"tributeKcalPerWeek":5000,"tributePaidWe
+    SETTLE d29 target=village_0 tribute=5000 pantry=13250 linkFormed=true result={"id":"link_mgpsplyv704","primary":"village_0","subordinate":"haven","trust":30,"tributeKcalPerWeek":5000,"tributePaidWe
+    PROPOSE d12 proposeLink targetId=village_2 pendingBefore=false result="counter"
+    PROPOSE d29 proposeLink targetId=village_0 pendingBefore=false result="counter"
+    PROPOSE d39 proposeLink targetId=village_spl_30_48959 pendingBefore=false result={"id":"link_mgpspnqp228","primary":"haven","subordinate":"village_spl_30_48959","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":
+  CONFESS confrontWrapped={"confrontDoubt":true,"confrontTheft":true} total=13 confessed=3 byOutcome={"attacked":2,"deflected":4,"confessed":3,"already-confessed":3,"cleared":1} sittingsWithConfession=3 singleSittings=3 doubleSittings=0 outsideSittingConfessed=0
+  RECAP maxPresses=3 totalPresses=24 offeredAfterCap=0 capFailures=0
+  BOND proposed=38 byInitiatorKind={"villager":37,"scholar":1} byKind={"link":22,"person":16} byOutcome={"staged":17,"accepted":10,"expired":10,"refused":1} villagerPerson=16 villagerPersonAccepted=7 linkRaises=22 linkAccepted=3 maxPerInitiator=8
+    PROPOSED d9 Ricardo(villager)->village_1 kind=link outcome=staged chance=null
+    PROPOSED d11 Daniela(villager)->village_2 kind=link outcome=staged chance=null
+    PROPOSED d12 Daniela(villager)->village_2 kind=link outcome=accepted chance=null
+    PROPOSED d12 Ricardo(villager)->village_1 kind=link outcome=expired chance=null
+    PROPOSED d12 Daniela(villager)->village_1 kind=link outcome=staged chance=null
+    PROPOSED d13 Theo(villager)->Sam kind=person outcome=accepted chance=63
+    PROPOSED d15 Yonggang(villager)->Vito kind=person outcome=staged chance=null
+    PROPOSED d15 Daniela(villager)->village_1 kind=link outcome=expired chance=null
+    PROPOSED d15 Daniela(villager)->village_0 kind=link outcome=staged chance=null
+    PROPOSED d16 Jamal(villager)->Vito kind=person outcome=staged chance=null
+    PROPOSED d18 Yonggang(villager)->Vito kind=person outcome=expired chance=null
+    PROPOSED d18 Yonggang(villager)->Vito kind=person outcome=staged chance=null
+    PROPOSED d18 Daniela(villager)->village_0 kind=link outcome=expired chance=null
+    PROPOSED d19 Jamal(villager)->Vito kind=person outcome=accepted chance=null
+    PROPOSED d19 Bridget(villager)->Sam kind=person outcome=accepted chance=74
+    PROPOSED d21 Yonggang(villager)->Vito kind=person outcome=expired chance=null
+    PROPOSED d23 Bridget(villager)->village_1 kind=link outcome=staged chance=null
+    PROPOSED d25 Theo(villager)->Bridget kind=person outcome=accepted chance=79
+    PROPOSED d26 Bridget(villager)->village_1 kind=link outcome=expired chance=null
+    PROPOSED d26 Bridget(villager)->village_0 kind=link outcome=staged chance=null
+    PROPOSED d27 Jamal(villager)->village_1 kind=link outcome=staged chance=null
+    PROPOSED d28 Ricardo(villager)->village_0 kind=link outcome=staged chance=null
+    PROPOSED d29 Bridget(villager)->village_0 kind=link outcome=accepted chance=null
+    PROPOSED d29 Daniela(villager)->village_1 kind=link outcome=staged chance=null
+    PROPOSED d30 Jamal(villager)->village_1 kind=link outcome=expired chance=null
+    PROPOSED d31 Ricardo(scholar)->village_0 kind=link outcome=expired chance=null
+    PROPOSED d32 Daniela(villager)->village_1 kind=link outcome=expired chance=null
+    PROPOSED d33 Nina(villager)->Ricardo kind=person outcome=staged chance=null
+    PROPOSED d33 Bridget(villager)->village_spl_30_48959 kind=link outcome=staged chance=null
+    PROPOSED d34 Nina(villager)->Ricardo kind=person outcome=accepted chance=null
+    PROPOSED d36 Bridget(villager)->village_spl_30_48959 kind=link outcome=expired chance=null
+    PROPOSED d38 Jovan(villager)->village_spl_30_48959 kind=link outcome=staged chance=null
+    PROPOSED d39 Jovan(villager)->village_spl_30_48959 kind=link outcome=accepted chance=null
+    PROPOSED d43 Nina(villager)->Daniela kind=person outcome=staged chance=null
+    PROPOSED d44 Nina(villager)->Daniela kind=person outcome=accepted chance=null
+    PROPOSED d45 Nina(villager)->Bridget kind=person outcome=refused chance=73
+    PROPOSED d51 Boris(villager)->Nina kind=person outcome=staged chance=null
+    PROPOSED d53 Boris(villager)->Nina kind=person outcome=accepted chance=null
+  BOND end bonds=84 sample={"key":"gen_c42h15x|gen_jbr5qmy","val":"{\"v\":27,\"depth\":1,\"day\":30,\"dayGain\":4}"}
+  plot plot_1 d6 leader=Nina inviter=Bridget target=Sam sprung=true gT->L=60 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_3 d7 leader=Sam inviter=Bridget target=Nina sprung=true gT->L=0 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_5 d13 leader=Sam inviter=Bridget target=Nina sprung=true gT->L=0 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_7 d16 leader=Sam inviter=Bridget target=Nina sprung=false gT->L=0 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_8 d23 leader=Sam inviter=Bridget target=Nina sprung=true gT->L=0 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_10 d25 leader=Sam inviter=Bridget target=Nina sprung=true gT->L=0 gT->I=0 gA->Tmax=0 gI->T=0
+  armWrapped=true springWrapped=true
+  ARM d6 plot_1 Nina->Sam inviter=Bridget motive={"score":40.32000000000001,"reasons":["grievance"]} gT->L=50.400000000000006 gL->T=50.400000000000006 accMotives=[{"who":"Bridget","score":25,"reasons":["ambition"],"grievance":0},{"who":"Boris","score":0,"reasons":[],"grievance":0}] trust={"leader":27,"Bridget":3,"Boris":41} goal=home
+  ARM d7 plot_3 Sam->Nina inviter=Bridget motive={"score":80,"reasons":["grievance"]} gT->L=51.2 gL->T=100 accMotives=[{"who":"Bridget","score":25,"reasons":["ambition"],"grievance":0},{"who":"Theo","score":0,"reasons":[],"grievance":0}] trust={"leader":39,"Bridget":12,"Theo":7} goal=home
+  ARM d13 plot_5 Sam->Nina inviter=Bridget motive={"score":80,"reasons":["grievance"]} gT->L=46.400000000000006 gL->T=100 accMotives=[{"who":"Bridget","score":25,"reasons":["ambition"],"grievance":0},{"who":"Theo","score":0,"reasons":[],"grievance":0}] trust={"leader":30,"Bridget":14,"Theo":1} goal=home
+  ARM d16 plot_7 Sam->Nina inviter=Bridget motive={"score":80,"reasons":["grievance"]} gT->L=49.6 gL->T=100 accMotives=[{"who":"Bridget","score":25,"reasons":["ambition"],"grievance":0},{"who":"Theo","score":0,"reasons":[],"grievance":0}] trust={"leader":34,"Bridget":17,"Theo":3} goal=home
+  ARM d23 plot_8 Sam->Nina inviter=Bridget motive={"score":80,"reasons":["grievance"]} gT->L=48 gL->T=100 accMotives=[{"who":"Bridget","score":25,"reasons":["ambition"],"grievance":0},{"who":"Theo","score":0,"reasons":[],"grievance":0}] trust={"leader":34,"Bridget":27,"Theo":6} goal=home
+  ARM d25 plot_10 Sam->Nina inviter=Bridget motive={"score":80,"reasons":["grievance"]} gT->L=46.400000000000006 gL->T=100 accMotives=[{"who":"Bridget","score":25,"reasons":["ambition"],"grievance":0},{"who":"Theo","score":0,"reasons":[],"grievance":0}] trust={"leader":34,"Bridget":29,"Theo":8} goal=home
+  SPRING d6 plot_1 Nina->Sam outcome=hurt case=case_2 endCase=case_2 charge=ambush status=acquitted heardDay=7 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=7
+  SPRING d8 plot_3 Sam->Nina outcome=escaped case=case_4 endCase=case_4 charge=ambush status=resolved heardDay=9 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=7
+  SPRING d13 plot_5 Sam->Nina outcome=escaped case=case_6 endCase=case_6 charge=ambush status=acquitted heardDay=14 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=7
+  SPRING d23 plot_8 Sam->Nina outcome=escaped case=case_9 endCase=case_9 charge=ambush status=resolved heardDay=25 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=7
+  SPRING d26 plot_10 Sam->Nina outcome=escaped case=case_11 endCase=case_11 charge=ambush status=resolved heardDay=27 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=7
+  expireWrapped=true expiredEvents=1
+  EXPIRED d21 plot_7 Sam->Nina armedD16 linesNamingPairAfterExpiry=3
+  village fallen: 9 by cause: {"monster":1,"the wild":6,"Big-Eyes":1,"a wound that wouldn't close":1}
+  death clusters (>=3/day): none
+  ambush-caused fallen: []
+  (samples.deaths, all recorded incl. outsiders: 53 — NOT village deaths)
+  census: seed 43703, day 62, alive 8 | - Bridget (hvac_tech, ?) trust=88 mood=neutral npcAbilities=5
+  M6 nightlyNews: strandedDays=7 burst=56 settle=29 witness=4 tale=22 | emitted-AWAY(strict on-tile) burst=10 settle=1 witness=0 tale=0 | emitted-AWAY-GATE(radius-1) burst=0 settle=0 witness=0 tale=0 debatesKicked=29 settled=29 queuedAtEnd=0
+  M4 transcripts=68 naturalEnds=67 nearDupFlags=24
+  M4 FLAG jaccard>=0.5 [A-day1-nudge james_okonkwo] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request james_okonkwo] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [B-first-meeting boris_kowalski] :: You need to be right next to them, same side of the Haven door, to help. || Move next to them, on the same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_m1btmh8] :: Between us — Still on whether you've hurt someone. || we're still on whether you've hurt someone.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_hh1egx5] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG same-opening [D-talk-request gen_i1cn6q5] :: You say nothing. The silence sits at the fire with everyone else. || You say nothing. Neither do they, for a while — and it's fine.
+  M4 FLAG jaccard>=0.5 [D-talk-request nina_petrova] :: Nina: "I've been thinking. You and me — we should be bonded. Not just neighbors. Will you stick with me? || I've been thinking. You and me — we should be bonded. Not just neighbors. Will you stick with me?
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_jbr5qmy] :: You need to be right next to them, same side of the Haven door, to help. || Get to their side of the Haven door and stand next to them — then you can help.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_jbr5qmy] :: You need to be right next to them, same side of the Haven door, to help. || Move next to them, on the same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_jbr5qmy] :: Stand beside them first — same side of the Haven door — then help. || Move next to them, on the same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship nina_petrova] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request nina_petrova] :: Nina: "I've been thinking. You and me — we should be bonded. Not just neighbors. Will you stick with me? || I've been thinking. You and me — we should be bonded. Not just neighbors. Will you stick with me?
+  M4 FLAG jaccard>=0.5 [D-talk-request nina_petrova] :: You need to be right next to them, same side of the Haven door, to help. || Move next to them, on the same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_jbr5qmy] :: You need to be right next to them, same side of the Haven door, to help. || Get to their side of the Haven door and stand next to them — then you can help.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_jbr5qmy] :: You need to be right next to them, same side of the Haven door, to help. || Move next to them, on the same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_jbr5qmy] :: Stand beside them first — same side of the Haven door — then help. || Move next to them, on the same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request henry_zhang] :: Accept the creek request first. Meet at Haven at dawn on the following day. || We're going in circles — Accept the creek request first. Meet at Haven at dawn on the following day. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [D-talk-request rosa_mendez] :: Stand beside them first — same side of the Haven door — then help. || Move next to them, on the same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request rosa_mendez] :: Get to their side of the Haven door and stand next to them — then you can help. || You need to be right next to them, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request rosa_mendez] :: You need to be right next to them, same side of the Haven door, to help. || Move next to them, on the same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_jbr5qmy] :: You need to be right next to them, same side of the Haven door, to help. || Get to their side of the Haven door and stand next to them — then you can help.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_jbr5qmy] :: You need to be right next to them, same side of the Haven door, to help. || Move next to them, on the same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_jbr5qmy] :: Stand beside them first — same side of the Haven door — then help. || Move next to them, on the same side of the Haven door, to help.
+  M4 FLAG same-opening [C-friendship rosa_mendez] :: I want to be part of the 'we' when people say 'we made it.' || I want to be someone's first call, not their last resort.
+  M4 CANDIDATE [C-friendship gen_hh1egx5 turns=10 naturalEnd=true]:
+    NPC: "We never finished talking about what's been happening — we got cut off, 3 days back. 'Done talking. Daniela turns away. Come back when you're not playing detective.'"
+    NPC: "There's still the matter of the ambush of Nina. Nobody's settled it."
+    YOU: Follow the food. Who bought whom? (investigate bribery)
+    NPC: You ask around the edges — who was carrying what, who stopped meeting whose eyes. Everyone suddenly has somewhere to be.
+    YOU: Follow the food. Who bought whom? (investigate bribery)
+    NPC: The ledger in your head doesn't balance: the favors went out, but nobody's living richer. Either nobody was bought — or the price was paid somewhere you can't see.
+    YOU: Follow the food. Who bought whom? (investigate bribery)
+    NPC: You watch the fire-circle that night. Laughter a beat too quick, a look that cuts away. Something's there. It isn't proof.
+    YOU: Follow the food. Who bought whom? (investigate bribery)
+    NPC: You retrace the whole day the deal would have been struck. Every story checks out. Either they're innocent, or they rehearsed.
+    YOU: Follow the food. Who bought whom? (investigate bribery)
+    NPC: You've been over this ground twice now. Nothing you can prove — the trail is going cold. Digging further just burns daylight.
+    YOU: ⚖️ VOTE: GUILTY
+    NPC: Counted.
+    YOU: "I've been watching. Things don't add up. Talk to me."
+    NARR: The easy manner evaporates. What's left is watching you back.
+    NARR: *They've deflected you before. The evidence needs to be heavier this time — one more thread before you speak.*
+    YOU: "I need to ask you something."
+    NPC: "Nope. No." Daniela shakes their head too fast. "I don't know where you're getting this."
+    YOU: "I've been watching. Things don't add up. Talk to me."
+    NARR: Something crosses their face — quick, then gone. The practiced expression clicks back into place.
+    NARR: *You've watched them deflect before — the same smooth sidestep. Thin evidence won't hold them. Gather one more thread first.*
+    YOU: "I need to ask you something."
+    NPC: "Ha." Not amused. "So you figured it out. Yeah, I took 1× Stick. What are you going to do about it?"
+    YOU: "What happened next?"
+    NPC: "Anyway — I should get back to it. Good talking, though."
+    NPC: "This was good." They mean it.
+
+seed 43704: days=111 endReason=village-lost fullConvs=128 naturalEnds=124 feasts=22 moots=3
+  scattering: {"scattered":true,"hungryDays":3,"aliveEnd":6,"endReason":"village-lost"}
+  decisions: {"lure:decline":83,"lure:accept":56,"party:decline":7,"party:accept":8,"bond:accept":3,"bond:decline":2}
+  BOND lure-by-inviter (scholar=Jerome initialBearer=Dominic): {"NPC:lure:decline":83,"NPC:lure:accept":56,"player:party:decline":7,"player:party:accept":8,"NPC:bond:accept":3,"NPC:bond:decline":2}
+  BOND successions: [{"day":43,"from":"Dominic","to":"Domingo"},{"day":47,"from":"Domingo","to":"Boris"},{"day":53,"from":"Boris","to":"Tashi"},{"day":56,"from":"Tashi","to":"Ruth"},{"day":73,"from":"Ruth","to":"Nikos"},{"day":79,"from":"Nikos","to":"Wanda"},{"day":103,"from":"Wanda","to":"Débora"},{"day":107,"from":"Débora","to":"Jerome"}]
+  BOND proposeWrapped={"proposeLink":true,"proposeCovenant":true,"proposeTrade":true} proposeCalls=3 {"proposeLink:scholar":3}
+  COUNTER proposeLink=3 counter=1 fresh=3 freshCounter=1 blocked=0 blockedCounter=0 unknownPending=0 answerWrapped=true
+  COUNTER settles=1 linkFormed=1 failed=0 unknown=0 answers=1 byHow={"accept":1} answersLinkFormed=1 minPantryAtSettle=10750 tributes=[5000] pendingCounterEnd=null
+    SETTLE d12 target=village_0 tribute=5000 pantry=10750 linkFormed=true result={"id":"link_mgpspj70552","primary":"village_0","subordinate":"haven","trust":30,"tributeKcalPerWeek":5000,"tributePaidWe
+    PROPOSE d12 proposeLink targetId=village_0 pendingBefore=false result="counter"
+    PROPOSE d18 proposeLink targetId=village_2 pendingBefore=false result={"id":"link_mgpspka1214","primary":"haven","subordinate":"village_2","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":18,"kind":"
+    PROPOSE d35 proposeLink targetId=village_spl_26_42316 pendingBefore=false result={"id":"link_mgpspnkm155","primary":"haven","subordinate":"village_spl_26_42316","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":
+  CONFESS confrontWrapped={"confrontDoubt":true,"confrontTheft":true} total=7 confessed=2 byOutcome={"confessed":2,"already-confessed":4,"deflected":1} sittingsWithConfession=2 singleSittings=2 doubleSittings=0 outsideSittingConfessed=0
+  RECAP maxPresses=3 totalPresses=230 offeredAfterCap=0 capFailures=0
+  BOND proposed=22 byInitiatorKind={"villager":22} byKind={"link":11,"person":11} byOutcome={"staged":9,"accepted":8,"expired":3,"refused":2} villagerPerson=11 villagerPersonAccepted=5 linkRaises=11 linkAccepted=3 maxPerInitiator=5
+    PROPOSED d11 Tashi(villager)->village_0 kind=link outcome=staged chance=null
+    PROPOSED d12 Tashi(villager)->village_0 kind=link outcome=accepted chance=null
+    PROPOSED d15 Boris(villager)->Dominic kind=person outcome=staged chance=null
+    PROPOSED d16 Priya(villager)->village_2 kind=link outcome=staged chance=null
+    PROPOSED d18 Priya(villager)->village_2 kind=link outcome=accepted chance=null
+    PROPOSED d18 Boris(villager)->Dominic kind=person outcome=expired chance=null
+    PROPOSED d19 Domingo(villager)->Priya kind=person outcome=accepted chance=57
+    PROPOSED d25 Olivia(villager)->Najwa kind=person outcome=accepted chance=66
+    PROPOSED d26 Domingo(villager)->Dominic kind=person outcome=staged chance=null
+    PROPOSED d29 Domingo(villager)->Dominic kind=person outcome=accepted chance=null
+    PROPOSED d33 Tashi(villager)->village_spl_26_42316 kind=link outcome=staged chance=null
+    PROPOSED d35 Tashi(villager)->village_spl_26_42316 kind=link outcome=accepted chance=null
+    PROPOSED d38 Olivia(villager)->Nikos kind=person outcome=refused chance=53
+    PROPOSED d45 Nikos(villager)->Tashi kind=person outcome=accepted chance=47
+    PROPOSED d51 Priya(villager)->Boris kind=person outcome=staged chance=null
+    PROPOSED d53 Priya(villager)->Tashi kind=person outcome=accepted chance=null
+    PROPOSED d86 Jerome(villager)->Omar kind=person outcome=refused chance=47
+    PROPOSED d97 Adaeze(villager)->village_spl_32_92496 kind=link outcome=staged chance=null
+    PROPOSED d100 Adaeze(villager)->village_spl_32_92496 kind=link outcome=expired chance=null
+    PROPOSED d101 Adaeze(villager)->village_spl_27_1476 kind=link outcome=staged chance=null
+    PROPOSED d104 Adaeze(villager)->village_spl_27_1476 kind=link outcome=expired chance=null
+    PROPOSED d110 Adaeze(villager)->village_1 kind=link outcome=staged chance=null
+  BOND end bonds=97 sample={"key":"gen_1rdwxv0|gen_tc36i7f","val":"{\"v\":79,\"depth\":3,\"day\":34,\"dayGain\":4}"}
+  armWrapped=true springWrapped=true
+  expireWrapped=true expiredEvents=0
+  village fallen: 17 by cause: {"the wild":10,"combat":1,"monster":5,"starvation":1}
+  death clusters (>=3/day): d72x3
+  ambush-caused fallen: []
+  (samples.deaths, all recorded incl. outsiders: 73 — NOT village deaths)
+  census: seed 43704, day 111, alive 6 | - Jerome (rail_conductor, ?) trust=66 mood=warm npcAbilities=0
+  M6 nightlyNews: strandedDays=3 burst=64 settle=31 witness=7 tale=22 | emitted-AWAY(strict on-tile) burst=6 settle=0 witness=0 tale=0 | emitted-AWAY-GATE(radius-1) burst=0 settle=0 witness=0 tale=0 debatesKicked=32 settled=31 queuedAtEnd=0
+  M4 transcripts=125 naturalEnds=124 nearDupFlags=59
+  M4 FLAG jaccard>=0.5 [D-talk-request boris_kowalski] :: Well, still on what you miss most. || we're still on what you miss most.
+  M4 FLAG same-opening [D-talk-request boris_kowalski] :: You show them Sassafras — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one. || You show them Staghorn Sumac — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks.
+  M4 FLAG same-opening [D-talk-request boris_kowalski] :: You show them Sassafras — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one. || You show them Blackberry — where it grows, how to tell it apart. Their eyes widen. "I never knew that.
+  M4 FLAG same-opening [D-talk-request boris_kowalski] :: You show them Staghorn Sumac — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks. || You show them Blackberry — where it grows, how to tell it apart. Their eyes widen. "I never knew that.
+  M4 FLAG jaccard>=0.5 [D-talk-request tashi_sherpa] :: we're still on what got you through the first week. || We're going in circles — still on what got you through the first week. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [D-talk-request ruth_goldstein] :: Meet at Haven at dawn on day 16. Two pairs of eyes, twice the ground. || We're going in circles — Meet at Haven at dawn on day 16. Two pairs of eyes, twice the ground. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [C-friendship boris_kowalski] :: We missed the promise. We still need to get home and unload what we have. || Get home with me. We still have to unload what we hauled.
+  M4 FLAG jaccard>=0.5 [D-talk-request priya_nair] :: Real talk — Still on your regrets. || we're still on your regrets.
+  M4 FLAG jaccard>=0.5 [D-talk-request ruth_goldstein] :: Now then — Still on your first memory. || we're still on your first memory.
+  M4 FLAG same-opening [C-friendship gen_tc36i7f] :: Every person I help is a vote for the world making sense again. || Every person I patch up is a vote for the world continuing.
+  M4 FLAG same-opening [D-talk-request gen_olov3h7] :: You show them Spicebush — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one. || You show them Sassafras — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks.
+  M4 FLAG jaccard>=0.5 [C-friendship boris_kowalski] :: We missed the promise. We still need to get home and unload what we have. || Get home with me. We still have to unload what we hauled.
+  M4 FLAG same-opening [D-talk-request gen_1rdwxv0] :: I still need help with the pantry run. || I still need a hand with the pantry run.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_1rdwxv0] :: I still need help with the pantry run. || The pantry run isn't going away — I need help.
+  M4 FLAG same-opening [D-talk-request nikos_papadopoulos] :: We were just talking. Nothing important. || We were just talking. Nothing important. Ask me something else if you want.
+  M4 FLAG same-opening [D-talk-request nikos_papadopoulos] :: We were just talking. Nothing important. That's still where we are. || We were just talking. Nothing important. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [D-talk-request tashi_sherpa] :: We need to — Still on the funniest thing you've seen. || we're still on the funniest thing you've seen.
+  M4 FLAG jaccard>=0.5 [C-friendship boris_kowalski] :: We missed the promise. We still need to get home and unload what we have. || Get home with me. We still have to unload what we hauled.
+  M4 FLAG same-opening [C-friendship gen_m7cfuo1] :: We were just talking. Nothing important. || We were just talking. Nothing important. That's still where we are.
+  M4 FLAG same-opening [C-friendship gen_m7cfuo1] :: We were just talking. Nothing important. || We were just talking. Nothing important. Ask me something else if you want.
+  M4 FLAG same-opening [C-friendship gen_m7cfuo1] :: We were just talking. Nothing important. That's still where we are. || We were just talking. Nothing important. Ask me something else if you want.
+  M4 FLAG same-opening [C-friendship gen_1rdwxv0] :: We were just talking. Nothing important. || We were just talking. Nothing important. Ask me something else if you want.
+  M4 FLAG same-opening [C-friendship gen_tc36i7f] :: We were just talking. Nothing important. || We were just talking. Nothing important. That's still where we are.
+  M4 FLAG same-opening [C-friendship gen_tc36i7f] :: We were just talking. Nothing important. || We were just talking. Nothing important. Ask me something else if you want.
+  M4 FLAG same-opening [C-friendship gen_tc36i7f] :: We were just talking. Nothing important. That's still where we are. || We were just talking. Nothing important. Ask me something else if you want.
+  M4 FLAG same-opening [D-talk-request nikos_papadopoulos] :: I still need help with the pantry run. || I still need a hand with the pantry run.
+  M4 FLAG jaccard>=0.5 [D-talk-request nikos_papadopoulos] :: I still need help with the pantry run. || The pantry run isn't going away — I need help.
+  M4 FLAG same-opening [D-talk-request nikos_papadopoulos] :: We were just talking. Nothing important. || We were just talking. Nothing important. Ask me something else if you want.
+  M4 FLAG same-opening [C-friendship nikos_papadopoulos] :: We were just talking. Nothing important. || We were just talking. Nothing important. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_m7cfuo1] :: Meet at Haven at dawn on day 65. Each of you will carry two liters back. || We're going in circles — Meet at Haven at dawn on day 65. Each of you will carry two liters back. Ask me something else if you want.
+  M4 FLAG same-opening [C-friendship gen_c56u7ak] :: We were just talking. Nothing important. || We were just talking. Nothing important. That's still where we are.
+  M4 FLAG same-opening [C-friendship gen_c56u7ak] :: We were just talking. Nothing important. || We were just talking. Nothing important. Ask me something else if you want.
+  M4 FLAG same-opening [C-friendship gen_c56u7ak] :: We were just talking. Nothing important. That's still where we are. || We were just talking. Nothing important. Ask me something else if you want.
+  M4 FLAG same-opening [D-talk-request gen_olov3h7] :: You show them Staghorn Sumac — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know. || You show them White Oak Acorns — where it grows, how to tell it apart. Their eyes widen. "I never knew that.
+  M4 FLAG same-opening [D-talk-request gen_olov3h7] :: You show them Staghorn Sumac — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know. || You show them American Ginseng — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one.
+  M4 FLAG same-opening [D-talk-request gen_olov3h7] :: You show them White Oak Acorns — where it grows, how to tell it apart. Their eyes widen. "I never knew that. || You show them American Ginseng — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one.
+  M4 FLAG same-opening [C-friendship olivia_bennett] :: We were just talking. Nothing important. || We were just talking. Nothing important. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [C-friendship nikos_papadopoulos] :: Meet at Haven at dawn on day 73. Each of you will carry two liters back. || We're going in circles — Meet at Haven at dawn on day 73. Each of you will carry two liters back. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_m7cfuo1] :: Meet at Haven at dawn on day 76. Each of you will carry two liters back. || We're going in circles — Meet at Haven at dawn on day 76. Each of you will carry two liters back. Ask me something else if you want.
+  M4 FLAG same-opening [D-talk-request gen_tc36i7f] :: We were just talking. Nothing important. || We were just talking. Nothing important. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [B-first-meeting app_mgpspiiq748] :: Okay so — Still on what you did for fun. || we're still on what you did for fun.
+  M4 FLAG same-opening [C-friendship gen_c56u7ak] :: We were just talking. Nothing important. || We were just talking. Nothing important. Ask me something else if you want.
+  M4 FLAG same-opening [C-friendship gen_c56u7ak] :: You show them Spicebush — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one. || You show them White Oak Acorns — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know.
+  M4 FLAG jaccard>=0.5 [C-friendship visjoin_74] :: Your partner is inside the Haven hall. Go through the door to meet them. || We're going in circles — Your partner is inside the Haven hall. Go through the door to meet them. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [C-friendship app_mgpspiiq748] :: You need to be right next to your partner, same side of the Haven door, to help. || Move next to your partner, on the same side of the Haven door.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_m7cfuo1] :: Practical view: Still on the big questions. || we're still on the big questions.
+  M4 FLAG same-opening [C-friendship visjoin_74] :: We were just talking. Nothing important. || We were just talking. Nothing important. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [C-friendship omar_farouk] :: «مضبوط، كلامك صحيح.» (Spot on, your words are true. — you're fairly sure) They nod, holding your gaze a beat longer. || «هذا صحيح.» (This is right. — you're fairly sure) They nod, holding your gaze a beat longer.
+  M4 FLAG jaccard>=0.5 [C-friendship omar_farouk] :: «نعم، نعم، بالضبط.» (Yes, yes, exactly. — you're fairly sure) They nod back, slowly. || «أحسنت القول. بالضبط.» (Well said. Exactly right. — you're fairly sure) They nod back, slowly.
+  M4 FLAG jaccard>=0.5 [C-friendship omar_farouk] :: «نعم، أشعر بنفس الشعور.» (Yes, I feel the same way. — you're fairly sure) They nod back, a little quicker this time. || «اتفقنا.» (Agreed. — you're fairly sure) They nod back, a little quicker this time.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_m7cfuo1] :: Here's what I think — Still on what you think happened to us. || what you think happened to us — that's still where we are.
+  M4 FLAG jaccard>=0.5 [C-friendship omar_farouk] :: «أوافقك الرأي.» (I agree with you. — you're fairly sure) They nod back, slowly. || «نعم، أشعر بنفس الشعور.» (Yes, I feel the same way. — you're fairly sure) They nod back, slowly.
+  M4 FLAG jaccard>=0.5 [C-friendship omar_farouk] :: «أحسنت القول. بالضبط.» (Well said. Exactly right. — you're fairly sure) They nod back, a little quicker this time. "Shit." — they grin, proud of the one English they know. || «نعم، نعم، بالضبط.» (Yes, yes, exactly. — you're fairly sure) They nod back, a little quicker this time.
+  M4 FLAG jaccard>=0.5 [D-talk-request adaeze_nwosu] :: You need to be right next to them, same side of the Haven door, to help. || Get to their side of the Haven door and stand next to them — then you can help.
+  M4 FLAG jaccard>=0.5 [D-talk-request adaeze_nwosu] :: You need to be right next to them, same side of the Haven door, to help. || Move next to them, on the same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request adaeze_nwosu] :: Move next to them, on the same side of the Haven door, to help. || Stand beside them first — same side of the Haven door — then help.
+  M4 FLAG jaccard>=0.5 [C-friendship omar_farouk] :: «مضبوط، كلامك صحيح.» (Spot on, your words are true. — you're fairly sure) They nod, holding your gaze a beat longer. || «أوافقك الرأي.» (I agree with you. — you're fairly sure) They nod, holding your gaze a beat longer.
+  M4 FLAG jaccard>=0.5 [C-friendship omar_farouk] :: «اتفقنا.» (Agreed. — you're fairly sure) They nod back, slowly. || «هذا صحيح.» (This is right. — you're fairly sure) They nod back, slowly.
+  M4 FLAG jaccard>=0.5 [C-friendship omar_farouk] :: «هذا صحيح. صحيح تماما.» (That's true. Absolutely true. — you're fairly sure) They nod back, a little quicker this time. || «أحسنت القول. بالضبط.» (Well said. Exactly right. — you're fairly sure) They nod back, a little quicker this time.
+  M4 CANDIDATE [D-talk-request nikos_papadopoulos turns=11 naturalEnd=true]:
+    NPC: Nikos: "You. Yeah, you. What do you make of this?"
+    YOU: "I need a moment to think about that."
+    NPC: "Take your time."
+    YOU: "I’m listening."
+    NPC: "I did the count twice. The count doesn't change. I know where the tucumã grows thick — come with me and we'll fill packs before dark."
+    YOU: "Tell me more."
+    NPC: "I still need help with the pantry run."
+    YOU: "Go on."
+    NPC: "I still need a hand with the pantry run."
+    YOU: "I’m listening."
+    NPC: "The pantry run isn't going away — I need help."
+    YOU: "Tell me more."
+    NPC: "That's the whole of it. Sorry."
+    YOU: "Go on."
+    NPC: "Come get air with me. I need to think out loud."
+    YOU: "All right. Let's go."
+    NPC: Nikos has been stockpiling where nobody looks. "Take half. You've got the hands for it." (+4 wood, +4 fiber to the village stash.)
+    YOU: (listen)
+    NPC: "Well." A breath. "That's where things stand."
+    YOU: (listen)
+    NPC: "So." They look at the fire for a moment.
+    NPC: "Rest when you can. We'll talk again soon."
+    YOU: "..."
+    NPC: You say nothing. Neither do they, for a while — and it's fine.
+    NPC: "...Think about it? I'll be around."
+    NPC: "This was good." They mean it.
+
+PANEL lure/party decisions: {"lure:accept":195,"lure:decline":223,"party:accept":20,"bond:decline":5,"bond:accept":7,"party:decline":14}
+PANEL lure-by-inviter: {"NPC:lure:accept":195,"NPC:lure:decline":223,"player:party:accept":20,"NPC:bond:decline":5,"NPC:bond:accept":7,"player:party:decline":14}
+PANEL successions: [{"day":47,"from":"Linh","to":"Eamon","seed":43701},{"day":25,"from":"Roman","to":"Renee","seed":43702},{"day":38,"from":"Renee","to":"Ethan","seed":43702},{"day":41,"from":"Ethan","to":"Inti","seed":43702},{"day":43,"from":"Inti","to":"Petra","seed":43702},{"day":44,"from":"Petra","to":"Eduardo","seed":43702},{"day":46,"from":"Eduardo","to":"Fadi","seed":43702},{"day":47,"from":"Fadi","to":"Gulzhan","seed":43702},{"day":29,"from":"Vito","to":"Ricardo","seed":43703},{"day":38,"from":"Ricardo","to":"Daniela","seed":43703},{"day":52,"from":"Daniela","to":"Nina","seed":43703},{"day":57,"from":"Nina","to":"Henry","seed":43703},{"day":61,"from":"Henry","to":"Boris","seed":43703},{"day":43,"from":"Dominic","to":"Domingo","seed":43704},{"day":47,"from":"Domingo","to":"Boris","seed":43704},{"day":53,"from":"Boris","to":"Tashi","seed":43704},{"day":56,"from":"Tashi","to":"Ruth","seed":43704},{"day":73,"from":"Ruth","to":"Nikos","seed":43704},{"day":79,"from":"Nikos","to":"Wanda","seed":43704},{"day":103,"from":"Wanda","to":"Débora","seed":43704},{"day":107,"from":"Débora","to":"Jerome","seed":43704}]
+PANEL propose* calls: 15 {"proposeLink:scholar":15}
+PANEL bond_proposed: total=115 byInitiatorKind={"villager":114,"scholar":1} byKind={"link":73,"person":42} byOutcome={"staged":52,"expired":28,"accepted":30,"refused":5} byKindOutcome={"link:staged":37,"link:expired":21,"link:accepted":15,"person:staged":15,"person:expired":7,"person:refused":5,"person:accepted":15}
+PANEL bond_proposed: villagerPerson=42 villagerPersonAccepted=15 scholarPerson=0 linkRaises=73 linkAccepted=15 maxPerInitiator=16 maxPerInitiatorPerson=5 personPerInitiator={"villager:Hussein":2,"villager:Vivian":3,"villager:Kieran":2,"villager:Ella":2,"villager:Salvatore":1,"villager:Renee":1,"villager:Petra":4,"villager:Theo":2,"villager:Yonggang":4,"villager:Jamal":2,"villager:Bridget":1,"villager:Nina":5,"villager:Boris":4,"villager:Domingo":3,"villager:Olivia":2,"villager:Nikos":1,"villager:Priya":2,"villager:Jerome":1} perInitiator={"villager:Hussein":16,"villager:Sofia":4,"villager:Vivian":13,"villager:Kieran":2,"villager:Ella":2,"villager:Salvatore":1,"villager:Yara":2,"villager:Inti":4,"villager:Ethan":4,"villager:Renee":1,"villager:Petra":4,"villager:Boris":6,"villager:Ricardo":3,"villager:Daniela":8,"villager:Theo":2,"villager:Yonggang":4,"villager:Jamal":4,"villager:Bridget":7,"scholar:Ricardo":1,"villager:Nina":5,"villager:Jovan":2,"villager:Tashi":4,"villager:Priya":4,"villager:Domingo":3,"villager:Olivia":2,"villager:Nikos":1,"villager:Jerome":1,"villager:Adaeze":5}
+PANEL bond_proposed verdict: ANSWERED — ≥1 villager-initiated bond proposal in the wild
+PANEL end bonds per seed: [63,60,84,97]
+PANEL bond initiator recorded by engine: NO — bond records carry no initiator field; NPC-initiated formation cannot be inferred from end bonds
+PANEL plots: 11 (late d30+: 0)
+PANEL plots with grievanceTargetToLeader > 0: 5
+PANEL grievance-holder -> later leader cases: 7
+  {"seed":43701,"plot":"plot_5","leader":"Vivian","plotDay":15,"grievances":["voted_guilty->Linh d14 sev22"]}
+  {"seed":43701,"plot":"plot_7","leader":"Vasyl","plotDay":25,"grievances":["ambushed->Vivian d16 sev60"]}
+  {"seed":43703,"plot":"plot_3","leader":"Sam","plotDay":7,"grievances":["ambushed->Nina d6 sev60"]}
+  {"seed":43703,"plot":"plot_5","leader":"Sam","plotDay":13,"grievances":["ambushed->Nina d6 sev60","voted_guilty->Vito d12 sev22"]}
+  {"seed":43703,"plot":"plot_7","leader":"Sam","plotDay":16,"grievances":["ambushed->Nina d6 sev60","voted_guilty->Vito d12 sev22"]}
+  {"seed":43703,"plot":"plot_8","leader":"Sam","plotDay":23,"grievances":["ambushed->Nina d6 sev60","voted_guilty->Vito d12 sev22","voted_guilty->Vito d17 sev22"]}
+  {"seed":43703,"plot":"plot_10","leader":"Sam","plotDay":25,"grievances":["ambushed->Nina d6 sev60","voted_guilty->Vito d12 sev22","voted_guilty->Vito d17 sev22"]}
+PANEL arms: 11 (late d30+: 0) grievance-linked at arming: 10
+PANEL vendetta: maxUnordered=6 maxDirected=5 topUnordered=[{"pair":"Nina<->Sam","n":6},{"pair":"Vasyl<->Vivian","n":4},{"pair":"Boris<->Nadia","n":1}] topDirected=[{"pair":"Sam->Nina","n":5},{"pair":"Vivian->Vasyl","n":3},{"pair":"Vasyl->Vivian","n":1},{"pair":"Nadia->Boris","n":1},{"pair":"Nina->Sam","n":1}]
+  VENDETTA pair=Nina<->Sam arms=6 d6-d25 span=19d
+  VENDETTA pair=Vasyl<->Vivian arms=4 d7-d25 span=18d
+PANEL springs: 10 outcomes: {"escaped":7,"hurt":3}
+PANEL escaped springs: 7
+PANEL expired plots: 1
+PANEL villages past d100: 1/4
+PANEL M6 haven-news: strandedDays=13 deliveredAtHaven burst=216 settle=106 witness=24 tale=76 | emittedAway(strict on-tile) burst=30 settle=1 witness=0 tale=0 | emittedAwayGate(radius-1) burst=0 settle=0 witness=0 tale=0 debatesKicked=109 namesSettled=107
+PANEL M6 verdict (RE-ALIGNED, gate definition): GO — no naming-beat line was emitted beyond radius-1 of Haven, debates alive
+PANEL M6 strict-definition note: strict on-tile away total=31 — reported as the known metric/gate definition discrepancy, does NOT fail M6 this run (prereg).
+PANEL M4: transcripts=331 nearDupFlags=126 candidatesPrinted=4/4 — verdict in run note from the printed candidates above
+PANEL goal-thread offers: moreOffered=0 reactOffered=2047 (agree=0 joke=0 silence=2047) followGoalOffered=0 longestContinuerRun=4
+PANEL COUNTER: proposeLink=15 counter=6 fresh=15 freshCounter=6 blocked=0 blockedCounter=0 settles=6 linkFormed=6 failed=0 pendingCounterEnd=[null,null,null,null]
+PANEL COUNTER re-raises after a link-forming settle (BLOCKED): 0 []
+PANEL COUNTER fresh re-links after a link-forming settle: 0 []
+PANEL M8 verdict: SETTLED — ≥1 link formed via a driver settle, no BLOCKED re-raise after it
+PANEL CONFESS: total=29 confessed=7 byOutcome={"confessed":7,"already-confessed":14,"attacked":2,"deflected":5,"cleared":1} sittingsWithConfession=7 singleSittings=7 doubleSittings=0 outsideSittingConfessed=0
+PANEL RE-OFFER: conversations=344 withReoffer=323 panelMax=12 panelMaxFurnitureFree=11
+  RE-OFFER [A-day1-nudge gen_yee4u5a] max=7 id=leave maxFF=5 idFF=dlg:subject perId={"dlg:more":1,"dlg:react":1,"teach":1,"dlg:subject":5,"confront:d_rwt183z":5,"leave":7,"silence":7,"ans:q_hands:a_tell":1,"ans:q_hands:a_vague":1,"ans:q_hands:a_deflect":1,"deflect_q":1,"goon":3,"recap":4}
+  RE-OFFER [A-day1-nudge gen_yee4u5a] max=6 id=leave maxFF=5 idFF=dlg:react perId={"dlg:react":5,"dlg:more":5,"dlg:subject":5,"confront:d_rwt183z":5,"leave":6,"silence":6,"recap":4,"goon":1}
+  RE-OFFER [D-talk-request gen_yee4u5a] max=6 id=leave maxFF=4 idFF=recap perId={"ans:q_dream:a_before":1,"ans:q_dream:a_now":1,"ans:q_dream:a_none":1,"deflect_q":1,"leave":6,"silence":6,"goon":2,"recap":4,"dlg:subject":4,"confront:d_rwt183z":4}
+  RE-OFFER [D-talk-request gen_yee4u5a] max=8 id=leave maxFF=6 idFF=dlg:doubt perId={"ans:q_miss:a_food":1,"ans:q_miss:a_people":1,"ans:q_miss:a_quiet":1,"ans:q_miss:a_home":1,"ans:q_miss:honest_pass":1,"deflect_q":1,"leave":8,"silence":8,"goon":3,"dlg:doubt":6,"recap":6,"dlg:subject":6,"confront:d_rwt183z":6}
+  RE-OFFER [B-first-meeting ella_johnson] max=2 id=teach maxFF=2 idFF=teach perId={"goon":1,"dlg:more":1,"dlg:react":1,"teach":2,"dlg:subject":1,"leave":2,"silence":2,"ask:others":1,"ask:gossip":1,"ask:spread_rumor":1,"skill_learn:read_people":1,"menu:more":1}
+  RE-OFFER [D-talk-request ella_johnson] max=8 id=leave maxFF=7 idFF=dlg:favor_requirements perId={"dlg:favor_requirements":7,"dlg:commit":7,"dlg:details":1,"dlg:cant":7,"dlg:subject":7,"leave":8,"silence":8,"goon":1}
+  RE-OFFER [D-talk-request gen_v8sri1b] max=9 id=leave maxFF=6 idFF=recap perId={"betrayal:accept":1,"betrayal:decline":1,"leave":9,"silence":9,"dlg:more":1,"dlg:react":1,"recap":6,"teach":1,"dlg:subject":6,"ans:q_laugh:a_story":1,"ans:q_laugh:a_nothing":1,"ans:q_laugh:a_dark":1,"deflect_q":1,"goon":3}
+  RE-OFFER [C-friendship gen_kjcj4gw] max=8 id=leave maxFF=7 idFF=dlg:more perId={"dlg:more":7,"dlg:react":7,"recap":7,"dlg:subject":7,"leave":8,"silence":8,"goon":1}
+  RE-OFFER [D-talk-request gen_v8sri1b] max=12 id=leave maxFF=10 idFF=teach perId={"dlg:react":2,"teach":10,"dlg:subject":10,"leave":12,"silence":12,"recap":9,"goon":6,"ans:q_first_memory:a_tell":1,"ans:q_first_memory:a_vague":1,"deflect_q":2,"ans:q_fight:a_tell":1,"ans:q_fight:a_vague":1,"ans:q_fight:honest_pass":1}
+  RE-OFFER [D-talk-request gen_yee4u5a] max=9 id=leave maxFF=7 idFF=teach perId={"betrayal:accept":1,"betrayal:decline":1,"leave":9,"silence":7,"confront:d_rwt183z":1,"dlg:invite":5,"teach":7,"goon":7,"menu:more":5,"dlg:subject":5,"confront:d_rg9wazg":1,"confront:d_ufqrxeg":1,"confront:d_q7ln7he":1,"dlg:more":3,"party_name":2,"dlg:react":2,"recap":2}
+  RE-OFFER [D-talk-request gen_yee4u5a] max=7 id=leave maxFF=5 idFF=recap perId={"ans:q_hope:a_tell":1,"ans:q_hope:a_vague":1,"ans:q_hope:honest_pass":1,"deflect_q":1,"leave":7,"silence":7,"goon":3,"recap":5,"dlg:subject":5,"party_name":5}
+  RE-OFFER [C-friendship gen_kjcj4gw] max=12 id=leave maxFF=8 idFF=recap perId={"ans:q_angry:a_yes":1,"ans:q_angry:a_tired":1,"ans:q_angry:honest_pass":1,"leave":12,"silence":12,"goon":6,"recap":8,"dlg:subject":8,"party_name":8,"betrayal:accept":1,"betrayal:decline":1,"ans:q_regret:a_tell":1,"ans:q_regret:a_vague":1,"deflect_q":1}
+PANEL DROPPED-THREAD: conversations=344 drops=9
+  DROP [D-talk-request gen_yee4u5a] :: "...Sorry, lost my train of thought."
+    ctx NPC: "Anyway." A small smile.
+    ctx YOU: "That doesn't quite add up."
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [D-talk-request turns=7]:
+      NPC: "Between us — We never finished talking about that personal stuff — we got cut off. 'Alright — I should get back to it.'"
+      NPC: "I've heard good things about Ashford. We should link with them — we'd be stronger together."
+      YOU: "All right. Let's ask them."
+  DROP [C-friendship gen_v8sri1b] :: "...Sorry, lost my train of thought."
+    ctx NPC: "Listen. I need you to hear this before you go back out there. ...if that makes sense."
+    ctx YOU: "Tell me."
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [D-talk-request turns=11]:
+      NPC: "Never mind the food I needed — we got it handled. Thanks anyway."
+      YOU: "Can I ask you something else?"
+      NPC: "That can wait — it isn't going anywhere. What's on your mind?"
+  DROP [C-friendship gen_kjcj4gw] :: "...Sorry, lost my train of thought."
+    ctx NPC: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+    ctx YOU: "Teach me something from the wild."
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting: NONE (no later conversation with this villager in the seed)
+  DROP [D-talk-request lucas_brown] :: "...Sorry, lost my train of thought."
+    ctx NPC: "About that warning — I keep turning it over. That's my read."
+    ctx YOU: "Tell me."
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [C-friendship turns=11]:
+      NPC: "Linh and I never finished talking about each other — we left it mid-thought, 5 days back. You're wearing Linh's shoes now — want to pick it up? 'Okay. We'll pi
+      NPC: "Walk with me? I want another pair of eyes on something."
+      YOU: "All right. Let's go."
+  DROP [D-talk-request gen_hh1egx5] :: "...Sorry, lost my train of thought."
+    ctx NPC: "Someone saved me the last of the stew once. Didn't say anything, just put the bowl down and walked off. I think about that bowl more than I think about the mon
+    ctx YOU: "That doesn't quite add up."
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [D-talk-request turns=4]:
+      NPC: "We never finished talking about what's been happening — we left it mid-thought. 'I've got things to see to. Don't be a stranger.' Take your time with it."
+      YOU: "I've been watching. Things don't add up. Talk to me."
+      NARR: Something crosses their face — quick, then gone. The practiced expression clicks back into place.
+  DROP [D-talk-request tashi_sherpa] :: "...Sorry, lost my train of thought."
+    ctx NPC: "Go ahead — you've got my attention."
+    ctx YOU: "What do you want to know? Ask me anything."
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [D-talk-request turns=6]:
+      NPC: "About that question — What got you through the first week? The very first days."
+      YOU: "Honestly? Shock. Just kept moving."
+      NPC: "Shock's underrated. It's the body's way of buying you time."
+  DROP [C-friendship boris_kowalski] :: "...Sorry, lost my train of thought."
+    ctx NPC: "We missed the promise. We still need to get home and unload what we have."
+    ctx YOU: "What do you need?"
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [C-friendship turns=8]:
+      NPC: "We missed the promise. We still need to get home and unload what we have."
+      YOU: "How can I help?"
+      NPC: "We still need to get this haul home. Come on."
+  DROP [D-talk-request priya_nair] :: "...Sorry, lost my train of thought."
+    ctx NPC: "Look, forget it. You wanted something?"
+    ctx YOU: "What do you want to know? Ask me anything."
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [D-talk-request turns=8]:
+      NPC: "Teach me something. Anything you know that I don't."
+      YOU: "I'd rather show you while we're working. It's easier that way."
+      NPC: "All right. Show me when we work together."
+  DROP [C-friendship gen_m7cfuo1] :: "...Sorry, lost my train of thought."
+    ctx NPC: "Okay, I'm all ears."
+    ctx YOU: "What do you want to know? Ask me anything."
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [C-friendship turns=8]:
+      NPC: "Hah. Teach me something. Anything you know that I don't."
+      YOU: "I'd rather show you while we're working. It's easier that way."
+      NPC: "Can I be honest? All right. Show me when we work together."
+PANEL RECAP: maxPresses=3 totalPresses=319 offeredAfterCap=0 capFailures=0
+PANEL M9 verdict: HOLDS — recap cap fires in the wild
+PANEL NARR-DUP: conversations=344 verbatimRepeats=0 coachVerbatim=0 faceVerbatim=0 panelMaxSameNarr=1 nearDupFlags=0
+PANEL M10 verdict: HOLDS — no NARR coach line repeats verbatim inside one sitting
+PANEL FACE verdict: HOLDS — no accuseFace line repeats verbatim inside one sitting (r179 face guard holds)
+PANEL SCATTERING: villages ended scattered=3/4 [{"seed":43701,"day":75,"hungryDays":5,"aliveEnd":2,"endReason":"village-lost"},{"seed":43703,"day":62,"hungryDays":3,"aliveEnd":8,"endReason":"village-lost"},{"seed":43704,"day":111,"hungryDays":3,"aliveEnd":6,"endReason":"village-lost"}]
