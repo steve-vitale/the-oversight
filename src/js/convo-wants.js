@@ -2973,19 +2973,72 @@
 
     // convoWantWarning: the actual warning behind a warn_you want. Real
     // content — recent attacks, monster knowledge, or an honest caution.
+    // POOL-PICKER (journey-crisis r182, warn-details defect from
+    // succession r183: Naran d94 — the 3 fixed strings meant the second
+    // dlg:details in a run hit the run-ledger no-repeat block and sayLine
+    // dry-replaced it with "...Sorry, lost my train of thought."). The
+    // pool holds the original 3 strings first (verbatim) plus variants:
+    // recent-attack variants, known-monster variants naming the monster,
+    // generic variants — 9-10 total. Selection is a deterministic
+    // per-villager ROTATION (r186: the first version shuffled with
+    // Math.random, which consumes the shared seeded stream and flipped a
+    // borderline capable-bot food-deed assertion — 42/42 without the fix,
+    // 41/42 with the shuffle, reproduced standalone both ways. The rotation
+    // spends no RNG at all, so a warning can never perturb combat, loot,
+    // or any other seeded draw). Start at the villager's cursor, take the
+    // first variant convoWouldBlock would NOT refuse, advance the cursor
+    // past the delivered line — so a villager with a blocked warning picks
+    // a different warning, never the dry line. Returns null when every
+    // variant is blocked, so the caller falls to its honest dry pool
+    // instead of a forced repeat. The cursor lives in game state (per-run,
+    // per-villager), so a seed replays identically.
     convoWantWarning(vid) {
       try {
         const vg = this.state.village || {};
-        if ((vg.recentAttacks || 0) > 0) {
-          return '"Whatever came through here last night — it\'ll come back. They always come back. Don\'t go out alone."';
-        }
         const codex = this.state.codex || {};
         const mids = Object.keys(codex.monsters || {});
+        let monsterName = null;
         if (mids.length) {
-          return '"You\'ve seen what\'s out there. I\'m just saying — the treeline at dusk. Don\'t."';
+          try { monsterName = this.monsterDisplayName(mids[0]) || mids[0]; } catch (e) { monsterName = mids[0]; }
         }
-      } catch (e) {}
-      return '"I don\'t know what\'s moving out there, but something is. Keep your eyes up past the treeline."';
+        const pool = [];
+        if ((vg.recentAttacks || 0) > 0) {
+          pool.push(
+            '"Whatever came through here last night — it\'ll come back. They always come back. Don\'t go out alone."',
+            '"Last night wasn\'t a one-off. Whatever it was, it knows the way in now. Stay where people can see you."',
+            '"It came through once, it\'ll come through again — that\'s how they work. Don\'t be out past the treeline at dusk."',
+          );
+          if (monsterName) pool.push(`"That ${monsterName} from last night? It\'s still out there. It\'ll come back for more. Don\'t go out alone."`);
+        }
+        if (mids.length && monsterName) {
+          pool.push(
+            '"You\'ve seen what\'s out there. I\'m just saying — the treeline at dusk. Don\'t."',
+            `"I keep thinking about that ${monsterName}. It knows this ground now. Keep your eyes up past the treeline."`,
+            `"If you see that ${monsterName} again, don\'t try to be clever. Get back inside the palisade."`,
+          );
+        }
+        pool.push(
+          '"I don\'t know what\'s moving out there, but something is. Keep your eyes up past the treeline."',
+          '"Something\'s been moving out past the treeline. I can\'t name it, but I can feel it. Don\'t go out alone."',
+          '"The woods don\'t feel empty tonight. They haven\'t for a while. Stay close to the fire."',
+        );
+        let cursor = 0;
+        try {
+          const cur = this.state.convoWarnCursor || (this.state.convoWarnCursor = {});
+          cursor = (cur[vid] | 0) % pool.length;
+        } catch (e) { cursor = 0; }
+        for (let k = 0; k < pool.length; k++) {
+          const idx = (cursor + k) % pool.length;
+          const line = pool[idx];
+          try { if (typeof this.convoWouldBlock === 'function' && this.convoWouldBlock(vid, line)) continue; } catch (e) {}
+          try {
+            const cur = this.state.convoWarnCursor || (this.state.convoWarnCursor = {});
+            cur[vid] = (idx + 1) % pool.length;
+          } catch (e) {}
+          return line;
+        }
+        return null;
+      } catch (e) { console.warn('[convo] convoWantWarning', e); return null; }
     },
 
     // convoPickUnaskedQuestion: a bespoke question they can genuinely ask
