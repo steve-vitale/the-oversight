@@ -80,8 +80,8 @@ const K = require('./godpath/lib');
 const H = require('./sim-harness');
 const { competent } = require('./policies/competent');
 const VF = require('./vetfirst-instrument-20261111');
-const SC = require('./bisect-r5-cut2-analyze-20261111');
-const DR = require('./bisect-r5-cut2-driver-20261111');
+const SC = require('./bisect-r5-cut2-analyze-20261112');
+const DR = require('./bisect-r5-cut2-driver-20261112');
 const T = K.reporter('bisect-r5-cut2-a');
 
 function counts(Game) {
@@ -179,11 +179,11 @@ function gday(Game) { try { return ((Game.state || {}).scholar || {}).day || 0; 
   T.section('2. Seed-band identity — 190391–190398, the vetphantom band');
   T.ok('analyzer SEEDS = 190391–190398', JSON.stringify(SC.SEEDS) === JSON.stringify([190391, 190392, 190393, 190394, 190395, 190396, 190397, 190398]),
     'SEEDS=' + JSON.stringify(SC.SEEDS));
-  const driverSrc = fs.readFileSync(path.join(__dirname, 'bisect-r5-cut2-driver-20261111.js'), 'utf8');
+  const driverSrc = fs.readFileSync(path.join(__dirname, 'bisect-r5-cut2-driver-20261112.js'), 'utf8');
   T.ok('driver writes to perseed-bisect-r5-cut2-a', driverSrc.indexOf('perseed-bisect-r5-cut2-a') !== -1, 'outDir check');
   T.ok('driver does NOT write to the vetphantom corpus', driverSrc.indexOf('perseed-vetphantom-b') === -1, 'no cross-corpus write');
   T.ok('driver does NOT write to the anchor corpus', driverSrc.indexOf('perseed-bisect-anchor-a') === -1, 'no cross-corpus write');
-  const analyzerSrc = fs.readFileSync(path.join(__dirname, 'bisect-r5-cut2-analyze-20261111.js'), 'utf8');
+  const analyzerSrc = fs.readFileSync(path.join(__dirname, 'bisect-r5-cut2-analyze-20261112.js'), 'utf8');
   T.ok('analyzer reads perseed-bisect-r5-cut2-a', analyzerSrc.indexOf('perseed-bisect-r5-cut2-a') !== -1, 'DIR check');
   T.ok('analyzer compares against vetphantom fix leg 6/8', analyzerSrc.indexOf('VETPHANTOM_SURVIVED = 6') !== -1, 'baseline check');
 
@@ -221,7 +221,7 @@ function gday(Game) { try { return ((Game.state || {}).scholar || {}).day || 0; 
     fs.writeFileSync(path.join(scratchRepo, 'src', 'js', 'standing.js'),
       '// ROSTER CHECK — deliberately wrong swap for the refusal leg\nmodule.exports = {};\n');
     try {
-      execSync('node ' + path.join(__dirname, 'bisect-r5-cut2-driver-20261111.js'),
+      execSync('node ' + path.join(__dirname, 'bisect-r5-cut2-driver-20261112.js'),
         { cwd: scratchRepo, env: Object.assign({}, process.env, { REPO: scratchRepo, SEEDS: '190391' }), stdio: 'pipe' });
     } catch (e) { refusal = e; }
   } finally {
