@@ -280,6 +280,20 @@ with its investigation and a 16-seed holdout owed as follow-up.
 - Loop A live trees untouched (sim-bisect-origin-a,
   sim-bisect-mergebase-a); main tree untouched; no push, no version bump.
 
+## Telemetry deviation check
+
+`node scripts/telemetry-check.js --baseline .../telemetry-baselines/
+scale-wall.json --current '<after-panel rows>' --metrics national,table,
+wins,exiled --sweep-rows`: `wall: table=7/8 entered=0/8 won=0/8`;
+`LOUD: national disappeared: baseline 12 -> current 0`;
+`LOUD: wins disappeared: baseline 16 -> current 0`. Both LOUD lines are
+the regime artifact the baseline itself warns about: the baseline is the
+winseat regime (win-stack flags on, 16/16 wins), while this panel is a
+competent-policy substrate with no win-stack flags, where national/wins
+are structurally 0 on BOTH legs (before: national 0/8, wins 0/8; after:
+0/8, 0/8). Not a change caused by this arm — the before leg reads
+identically.
+
 ## Proof (files)
 
 - `src/js/game.js` (+92, −0): `dawnSynergyResonance()` + `endDay()` hook.
