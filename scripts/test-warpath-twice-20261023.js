@@ -50,7 +50,15 @@ function ok(cond, name, detail) {
   const noun = firstSentence.split('put down ')[1] || '';
   const occurrences = noun ? warLine.split(noun).length - 1 : 0;
   ok(occurrences <= 2, 'monster noun not stuttered (named in "twice" + remainder only)', `occurrences=${occurrences}`);
-  ok(/3 more tooths after that/.test(warLine), 'remainder count honest (3 more)', warLine.slice(0, 200));
+  // (sim-findings-a 2026-11-11: the war line must NAME the monster —
+  // monsterNoun's verb guard used to kill congregation's relative-clause
+  // descriptor ("a church where the hymns are static") and voice it as
+  // "the something".)
+  ok(!/the something/.test(warLine), 'war line names the monster (no "the something" fallback)', warLine.slice(0, 200));
+  // "teeth", not "tooths": the r130 grammar fix (96ee2136a) changed the
+  // shipped wording but never updated this regex — the assertion failed
+  // on the stale literal, not on the count.
+  ok(/3 more teeth after that/.test(warLine), 'remainder count honest (3 more)', warLine.slice(0, 200));
 
   console.log('— 2. distinct kills: untouched —');
   Game.state.waveKillLog = [
