@@ -14171,7 +14171,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       this.tickAction(8);
       const KIND_CLASS = { antibiotics: 'bacterial', antiparasitic: 'parasitic', antimalarial: 'fever', cold_remedy: 'fever', bandage: 'bacterial', ors: 'parasitic' };
       const cls = KIND_CLASS[kind] || 'parasitic';
-      const kindName = kind === 'antibiotics' ? 'antibiotics' : 'antiparasitic';
+      // KIND NAME (finding #2274): the spoken pill is the pill taken.
+      // The old ternary named every non-antibiotics kind 'antiparasitic'
+      // in every say line (and in the cureStatus source). Singular kinds
+      // take singular verbs; antibiotics / antiparasitic / ORS are plural.
+      const KIND_NAME = { antibiotics: 'antibiotics', antiparasitic: 'antiparasitic', antimalarial: 'antimalarial', cold_remedy: 'cold remedy', bandage: 'bandage', ors: 'ORS' };
+      const kindName = KIND_NAME[kind] || 'antiparasitic';
+      const plural = kind === 'antibiotics' || kind === 'antiparasitic' || kind === 'ors';
       sick.sort((a, b) => {
         const da = this.isDiagnosed('scholar', a.id) ? 1 : 0, db = this.isDiagnosed('scholar', b.id) ? 1 : 0;
         return db - da || (b.dayPartsLeft || 0) - (a.dayPartsLeft || 0);
@@ -14185,11 +14191,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (eff === 'cure' && matchClass) {
         this.cureStatus('scholar', e.id, kindName);
         this.say(diagnosed
-          ? `The ${kindName} do exactly what they're for. The ${def.name.toLowerCase()} breaks within the day.`
-          : `The ${kindName} work anyway \u2014 the body doesn't need the name. The sickness breaks.`);
+          ? `The ${kindName} ${plural ? 'do' : 'does'} exactly what ${plural ? "they're" : "it's"} for. The ${def.name.toLowerCase()} breaks within the day.`
+          : `The ${kindName} ${plural ? 'work' : 'works'} anyway \u2014 the body doesn't need the name. The sickness breaks.`);
       } else if (eff === 'ease' && matchClass) {
         this.easeDisease('scholar', e.id, 3, null);
-        this.say(`The ${kindName} take the edge off, but don't end it.`);
+        this.say(`The ${kindName} ${plural ? 'take' : 'takes'} the edge off, but ${plural ? "don't" : "doesn't"} end it.`);
       } else {
         this.say(`Nothing. Wrong medicine \u2014 ${def['class'] === 'viral' ? 'no pill touches a virus' : 'this isn\'t ' + cls}. The dose is gone. (Specificity matters: diagnose first, or guess.)`);
       }

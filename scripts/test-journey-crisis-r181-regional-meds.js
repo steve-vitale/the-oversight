@@ -140,6 +140,106 @@ function check(name, fn) {
     s.inventory = (s.inventory || []).filter(i => !(i && i.medType === 'antibiotics'));
   });
 
+  // (6) NAMES (finding #2274): useMedicine must narrate the pill actually
+  // taken — antimalarial / cold remedy / bandage / ORS — never the
+  // pre-fix fallback 'antiparasitic' in any say line. Reachability per
+  // the cure tables: dry-swallow fires for every kind (undiagnosed use);
+  // the cure path is reachable only for antimalarial of the four
+  // (cold_remedy / bandage / ors only ease); the ease path only for the
+  // three easing kinds. So the matrix is: dry-swallow × all four,
+  // cure × antimalarial (diagnosed + undiagnosed variants),
+  // ease × cold_remedy / bandage / ors — plus antibiotics /
+  // antiparasitic cure controls proving the recorder sees real names.
+  // Order matters: undiagnosed cases run before the same disease is
+  // diagnosed (diagnosis persists across resetScholar).
+  const _origSay6 = Game.say.bind(Game);
+  const said6 = [];
+  Game.say = (t) => { said6.push(String(t)); return _origSay6(t); };
+  const medItem = (itemId, medType, name) => ({ itemId, medType, doses: 3, units: 1, kg: 0.1, name });
+  const useAndCapture = (kind, item) => {
+    s.inventory.push(item);
+    said6.length = 0;
+    Game.useMedicine(kind);
+    return said6.slice();
+  };
+  const noLeak = (lines, kind) => {
+    for (const ln of lines) {
+      if (kind !== 'antiparasitic' && /antiparasitic/i.test(ln)) {
+        throw new Error('say line names the wrong pill: ' + JSON.stringify(ln));
+      }
+    }
+  };
+  const spokenName = (lines, re, expected, path) => {
+    const ln = lines.find(l => re.test(l));
+    assert.ok(ln, 'no ' + path + ' line spoken; got ' + JSON.stringify(lines));
+    assert.ok(ln.toLowerCase().includes(expected.toLowerCase()),
+      path + ' line names the wrong pill: ' + JSON.stringify(ln));
+    return ln;
+  };
+
+  check('names: antimalarial dry-swallow + cure (undiagnosed Fever)', () => {
+    resetScholar();
+    assert.ok(Game.applyStatus('scholar', 'disease', { silent: true }), 'could not make the scholar feverish');
+    const lines = useAndCapture('antimalarial', medItem('med_antimalarial', 'antimalarial', 'Antimalarials (artemether)'));
+    spokenName(lines, /dry-swallow the/i, 'antimalarial', 'dry-swallow');
+    spokenName(lines, /sickness breaks/i, 'antimalarial', 'cure');
+    assert.ok(!Game.sickDiseases().some(e => e.id === 'disease'), 'Fever NOT cured by antimalarial');
+    noLeak(lines, 'antimalarial');
+  });
+  check('names: cold_remedy dry-swallow + ease (undiagnosed Fever)', () => {
+    resetScholar();
+    assert.ok(Game.applyStatus('scholar', 'disease', { silent: true }), 'could not make the scholar feverish');
+    const lines = useAndCapture('cold_remedy', medItem('med_kakkonto', 'cold_remedy', 'Cold medicine (kakkonto)'));
+    spokenName(lines, /dry-swallow the/i, 'cold remedy', 'dry-swallow');
+    spokenName(lines, /edge off/i, 'cold remedy', 'ease');
+    assert.ok(Game.sickDiseases().some(e => e.id === 'disease'), 'Fever vanished — an ease must not cure it');
+    noLeak(lines, 'cold_remedy');
+  });
+  check('names: bandage dry-swallow + ease (undiagnosed Wound Fever)', () => {
+    resetScholar();
+    assert.ok(Game.applyStatus('scholar', 'wound_fever', { silent: true }), 'could not give the scholar wound fever');
+    const lines = useAndCapture('bandage', medItem('med_bandage', 'bandage', 'Bandages (roll)'));
+    spokenName(lines, /dry-swallow the/i, 'bandage', 'dry-swallow');
+    spokenName(lines, /edge off/i, 'bandage', 'ease');
+    assert.ok(Game.sickDiseases().some(e => e.id === 'wound_fever'), 'Wound Fever vanished — an ease must not cure it');
+    noLeak(lines, 'bandage');
+  });
+  check('names: ors dry-swallow + ease (undiagnosed Gut Rot)', () => {
+    resetScholar();
+    assert.ok(Game.applyStatus('scholar', 'gutrot', { silent: true }), 'could not give the scholar gut rot');
+    const lines = useAndCapture('ors', medItem('ors_packets', 'ors', 'ORS packets'));
+    spokenName(lines, /dry-swallow the/i, 'ORS', 'dry-swallow');
+    spokenName(lines, /edge off/i, 'ORS', 'ease');
+    assert.ok(Game.sickDiseases().some(e => e.id === 'gutrot'), 'Gut Rot vanished — an ease must not cure it');
+    noLeak(lines, 'ors');
+  });
+  check('names: antimalarial cure line, diagnosed Fever (no dry-swallow)', () => {
+    resetScholar();
+    assert.ok(Game.applyStatus('scholar', 'disease', { silent: true }), 'could not make the scholar feverish');
+    assert.ok(Game.diagnoseDisease('scholar', 'disease', { silent: true, by: 'test' }), 'could not diagnose the Fever');
+    const lines = useAndCapture('antimalarial', medItem('med_antimalarial', 'antimalarial', 'Antimalarials (artemether)'));
+    assert.ok(!lines.some(l => /dry-swallow/i.test(l)), 'dry-swallow line spoken for a diagnosed sickness: ' + JSON.stringify(lines));
+    spokenName(lines, /breaks within the day/i, 'antimalarial', 'cure');
+    noLeak(lines, 'antimalarial');
+  });
+  check('names: antibiotics cure control still says antibiotics', () => {
+    resetScholar();
+    assert.ok(Game.applyStatus('scholar', 'wound_fever', { silent: true }), 'could not give the scholar wound fever');
+    assert.ok(Game.diagnoseDisease('scholar', 'wound_fever', { silent: true, by: 'test' }), 'could not diagnose Wound Fever');
+    const lines = useAndCapture('antibiotics', medItem('med_antibiotics', 'antibiotics', 'Antibiotics (amoxicillin)'));
+    spokenName(lines, /breaks within the day/i, 'antibiotics', 'cure');
+    assert.ok(!Game.sickDiseases().some(e => e.id === 'wound_fever'), 'Wound Fever NOT cured by antibiotics');
+  });
+  check('names: antiparasitic cure control still says antiparasitic', () => {
+    resetScholar();
+    assert.ok(Game.applyStatus('scholar', 'gutrot', { silent: true }), 'could not give the scholar gut rot');
+    assert.ok(Game.diagnoseDisease('scholar', 'gutrot', { silent: true, by: 'test' }), 'could not diagnose Gut Rot');
+    const lines = useAndCapture('antiparasitic', medItem('med_antiparasitic', 'antiparasitic', 'Antiparasitic (mebendazole)'));
+    spokenName(lines, /breaks within the day/i, 'antiparasitic', 'cure');
+    assert.ok(!Game.sickDiseases().some(e => e.id === 'gutrot'), 'Gut Rot NOT cured by antiparasitic');
+  });
+  Game.say = _origSay6;
+
   console.log(failures === 0 ? 'r181 regional-meds: ALL PASS' : 'r181 regional-meds: ' + failures + ' FAILURES');
   process.exit(failures === 0 ? 0 : 1);
 })().catch(e => { console.log('FATAL ' + (e && e.stack || e)); process.exit(2); });
