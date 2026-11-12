@@ -1172,7 +1172,7 @@
         } else if (taughtPlant) {
           lineText = this.convoTeachPlantLine(vid, taughtPlant);
         } else if (taughtPlace) {
-          lineText = `"${taughtPlace} — I'll show you on the map sometime. It's real."`;
+          lineText = this.convoTeachPlaceLine(vid, taughtPlace);
         } else if ((k.monsters || 0) >= 2) {
           lineText = `"Saw things with too many joints. Give them room. That's the whole lesson."`;
         }
@@ -1310,6 +1310,41 @@
       try {
         const c = this.convoGet ? this.convoGet(vid) : null;
         if (c) { c.teachFramesUsed = c.teachFramesUsed || []; used = c.teachFramesUsed; }
+      } catch (e) { used = null; }
+      if (!used) return frames[Math.floor(Math.random() * frames.length)];
+      const fresh = frames.map((_, i) => i).filter(i => used.indexOf(i) === -1);
+      if (!fresh.length) used.length = 0;
+      const pool = fresh.length ? fresh : frames.map((_, i) => i);
+      const idx = pool[Math.floor(Math.random() * pool.length)];
+      used.push(idx);
+      return frames[idx];
+    },
+    // convoTeachPlaceLine — VARIETY (journey-deepening r183 2026-11-11):
+    // the transcript line for a place lesson was ONE fixed frame ("<place>
+    // — I'll show you on the map sometime. It's real."), so a sitting with
+    // two place lessons repeated it verbatim with only the place swapped
+    // (r130: Brooklyn d45, 2x in one sitting). Four frames now, picked by
+    // FRAME-INDEX rotation on the villager's convo state — the same shape
+    // as convoTeachPlantLine (r125): an unused frame is picked at random,
+    // and the pool resets only once all four have been used. One sitting
+    // never repeats a frame until the pool cycles. The place name stays in
+    // every frame — the lesson stays specific. The four wordings are the
+    // ones the r129/r130 analyzer already normalizes (PLACE_FRAME_PATTERNS).
+    // Falls back to a random frame when the convo state is unavailable.
+    // A separate ledger key from the plant one (teachPlaceFramesUsed), so
+    // the two rotations never interfere.
+    convoTeachPlaceLine(vid, placeName) {
+      const place = placeName || 'a place';
+      const frames = [
+        `"${place} — trace it with your finger. That's where it is, and it's real."`,
+        `"${place} — I'll mark it on your map when we're back. It's real, I've stood there."`,
+        `"${place} — walk it with me sometime and you'll know the ground. It's real."`,
+        `"${place} — remember the shape of it. It's real, and it's worth knowing."`,
+      ];
+      let used = null;
+      try {
+        const c = this.convoGet ? this.convoGet(vid) : null;
+        if (c) { c.teachPlaceFramesUsed = c.teachPlaceFramesUsed || []; used = c.teachPlaceFramesUsed; }
       } catch (e) { used = null; }
       if (!used) return frames[Math.floor(Math.random() * frames.length)];
       const fresh = frames.map((_, i) => i).filter(i => used.indexOf(i) === -1);
