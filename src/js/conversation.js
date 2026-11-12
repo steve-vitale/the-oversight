@@ -4667,7 +4667,7 @@
       const silent=full.filter(ch=>ch.id==='silence' || ch.id==='nv:listen').slice(0,1);
       const navigation=full.filter(ch=>['leave','subject','dlg:subject'].includes(ch.id));
       const content=full.filter(ch=>!silent.includes(ch) && !navigation.includes(ch));
-      const rank=ch=>/^(betrayal:|confront:|agency:)/.test(ch.id)?0:
+      const rank=ch=>/^(betrayal:|confront:|agency:|nv:accept|nv:decline)/.test(ch.id)?0:
         /^(alive:|dlg:commit|dlg:cant|dlg:help|dlg:heed|dlg:stay)/.test(ch.id)?1:
         /^(ask:goal$|offer_help$)/.test(ch.id)?2:
         // R54 OTHERS RANK (journey-social r53 funnel fix): 'ask:others'
@@ -4960,6 +4960,24 @@
           { id: 'nv:pointself', label: '(point: you, them, together)' },
           { id: 'nv:listen', label: '(listen hard — catch words)' },
         ];
+        // TRAP-LINE ANSWER (journey-scale r133): a mimed invitation shown
+        // at open (nvOpen, inv.spoken) must be answerable in the same
+        // sitting. The verbal path's betrayal:accept/decline are stripped
+        // by convoMenuPage when the spoken beat isn't tagged 'invitation',
+        // and the gesture is never tagged — so the mime was unanswerable
+        // (Tarek r131, Mario r132). Gesture answers, offered only while
+        // the mime stands (pending invite, shown this sitting). An unshown
+        // ask is never answered (INVITATION HONESTY r7, same rule as the
+        // r132 raise-answer fix).
+        try {
+          const _inv = (this.pendingInvite && this.pendingInvite(vid)) || null;
+          if (_inv && _inv.spoken) {
+            out.unshift(
+              { id: 'nv:accept', label: '(follow their gesture — go with them)' },
+              { id: 'nv:decline', label: '(shake your head — not this time)' },
+            );
+          }
+        } catch (e) {}
         const lang = c.nativeLang || this.npcNativeLang(vid);
         const yid = this.findInterpreter(vid, lang);
         c.interpreter = yid || null;
@@ -8613,6 +8631,37 @@
       const c = this.convoGet(vid);
       if (!c.active) return null;
       if (choiceId === 'leave') return this.endConvo(vid, 'left');
+      // TRAP-LINE ANSWER (journey-scale r133): the mimed invitation's
+      // gesture answers resolve through the same handlers as the verbal
+      // betrayal:accept/decline (acceptInvite: plot-ambush spring, sick
+      // veto, resolveInvite walk; declineInvite: trust −1, decline line,
+      // pocketed thing) — but with gesture youSaid, never an English
+      // "Sure." in a no-words sitting. Mirrors betrayalTurn's finish
+      // (diegeticAct sayLine, exchanges++, convoMaybeWinddown tail) and
+      // marks the decision substantive like the verbal accept path.
+      if (choiceId === 'nv:accept' || choiceId === 'nv:decline') {
+        try { if (typeof this.convoMarkSubstantive === 'function') this.convoMarkSubstantive(vid, choiceId); } catch (e) {}
+        let line = null;
+        if (choiceId === 'nv:accept') {
+          const r = this.acceptInvite(vid);
+          line = (r && r.line) || 'You go.';
+          try { c.transcript.push({ who: 'you', text: '(follow their gesture)' }); } catch (e) {}
+        } else {
+          line = this.declineInvite(vid);
+          try { c.transcript.push({ who: 'you', text: '(shake your head)' }); } catch (e) {}
+        }
+        try {
+          line = this.sayLine(vid, line, { diegeticAct: true }) || line;
+          c.exchanges = (c.exchanges || 0) + 1;
+        } catch (e) {}
+        try {
+          if (typeof this.convoMaybeWinddown === 'function') {
+            const wd = this.convoMaybeWinddown(vid);
+            if (wd) return wd;
+          }
+        } catch (e) {}
+        return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
+      }
       // NV WINDDOWN DELIVERY (journey-scale r19 2026-10-21): the budget-landing
       // winddown beat queues in heldBeats, but the nonverbal thread offers no
       // 'goon' continuer (convoChoices excludes it for nonverbal), so the beat

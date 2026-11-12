@@ -1,0 +1,26 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=1)
+=== seed 133103 day 120 — conversation with Praskovya (app_mgpspkog20) ===
+occupation=farmer temperament=bold trust=23 dead=false
+want: seek_taken (stage 0)
+open thread: grief fromSeed=false
+picker: control
+
+THEM: "I'll tell you plain — It's quiet today. Wrong kind of quiet."
+(turn0 choices: dlg:comfort, dlg:empathize, dlg:askwhy, dlg:invite, dlg:subject, leave, silence)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: They shake their head, then nod — both true at once. "Talk to me a bit. That helps more than anything."
+YOU: [ask:gossip] "What are people saying when they think I'm not listening?"
+THEM: "Huh. Let me think about that." "Um — People are saying things. About you. ...I'd watch how you act around the fire."
+YOU: [dlg:more] "Go on."
+THEM: "Did you hear? You won The Sorting on the cameras. People are still talking about it."
+YOU: [dlg:react] (listen)
+THEM: "Word is you're doing right by people. Keep it up. That's the whole of it."
+YOU: [dlg:more] "Tell me more."
+THEM: "People are keeping to themselves."
+YOU: [dlg:react] (listen)
+THEM: "Well." A breath. "That's where things stand."
+YOU: [dlg:more] "Tell me more."
+THEM: "Right. Action time. You know where to find me."
+YOU: (leave)
+pre-close: want seek_taken stage 0 thread gossip
+(gossip picks this sitting: 1)

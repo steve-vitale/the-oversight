@@ -1,0 +1,17 @@
+(pre-talk seed: ask_favor planted d77; takenWantDay=0; convoCount=1)
+=== seed 133103 day 90 — conversation with Lucas (lucas_brown) ===
+occupation=Police officer temperament=steady trust=53 dead=false
+want: curious (stage 1)
+open thread: want fromSeed=false
+picker: control
+
+THEM: "What's the kindest thing someone's done for you out here?"
+(turn0 choices: ans:q_kindness:a_tell, ans:q_kindness:a_vague, ans:q_kindness:honest_pass, deflect_q, leave, silence)
+YOU: [ans:q_kindness:a_tell] "I've watched people share food they couldn't spare. Quiet. No performance. Just... did it."
+THEM: "Look — That's the good stuff. Quiet generosity. It's holding this whole thing together."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "Someone saved me the last of the stew once. Didn't say anything, just put the bowl down and walked off. I think about that bowl more than I think about the monsters."
+YOU: (leave)
+pre-close: want curious stage 2 thread want
+closing line: "Good talk. Onward, then."
+(gossip picks this sitting: 0)
