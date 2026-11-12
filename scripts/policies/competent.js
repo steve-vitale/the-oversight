@@ -2318,14 +2318,139 @@ function beastFreeTiles(Game, f, px, py) {
   } catch (e) {}
   return out;
 }
-// Closest free tile avoiding a set of "x,y" cells (a telegraph lane).
-function beastDodgeTile(Game, f, px, py, avoid) {
+// Dodge-step with fallback (journey-landing r128): try every free tile,
+// nearest first, skipping the avoid set, and
+// accept only a real position change (position check, not the return value
+// — tbPlayerMove returns true without moving under the moderator's verb
+// block). Returns 'moved' | 'stuck' | 'none': 'none' means no free tile
+// outside the avoid set exists at all (the caller continues to the next
+// monster's trick, as today); 'stuck' means candidates existed but none
+// moved (the caller records it and ends the turn WITHOUT counting the
+// trick — the trick didn't happen, so it must not be counted as performed).
+function beastDodgeMove(Game, f, p, px, py, avoid) {
   const cands = beastFreeTiles(Game, f, px, py);
   cands.sort((a, b) =>
     (Math.max(Math.abs(a[0] - px), Math.abs(a[1] - py)) - Math.max(Math.abs(b[0] - px), Math.abs(b[1] - py))) ||
     (a[0] - b[0]) || (a[1] - b[1]));
-  for (const c of cands) { if (!avoid || !avoid.has(c[0] + ',' + c[1])) return c; }
-  return cands[0] || null;
+  let any = false;
+  for (const c of cands) {
+    if (avoid && avoid.has(c[0] + ',' + c[1])) continue;
+    any = true;
+    if (Game.tbIsPlayerTurn && !Game.tbIsPlayerTurn()) break;
+    try {
+      const ox = p.mx, oy = p.my;
+      Game.tbPlayerMove(c[0], c[1]);
+      if (p.mx !== ox || p.my !== oy) return 'moved';
+    } catch (e) {}
+  }
+  return any ? 'stuck' : 'none';
+}
+// Legacy flee walk + stuck resolution (journey-landing r128).
+// The old walk passed the FAR edge tile in one call — tbPlayerMove refuses
+// it ("Too far") and the result was ignored, so the scholar stepped nowhere
+// for three turns running (fresh-band scan 1208 d29: three identical "Too
+// far" steps to (0,4) from (4,4); 1205 d20: two silent self-tile steps at
+// (8,0)). Step ONE tile toward the chosen edge, then the two diagonal
+// one-steps; accept only a real position change. A moved walk resets the
+// stuck count. A turn where no tile is reachable records a stuck turn; at
+// 3 consecutive no-progress flee turns on this fight, mark it unfleeable
+// and return 'unfleeable' — the caller returns false WITHOUT ending the
+// turn, so fight() falls through to tricks/strikes in the same turn (the
+// r37 gated-resolution shape, ungated for the legacy path; a real player
+// reads the room and fights). Already on the edge, the walk has nowhere
+// to step (dx 0) — that is a stuck turn too, not a silent no-op.
+// Returns 'moved' | 'stuck' | 'unfleeable'.
+function legacyFleeWalk(Game, f, ctx, p, px, py) {
+  if (ctx._fleeBlockedFor === f.id) return 'unfleeable';
+  const tx = px <= 4 ? 0 : 8;
+  const dx = tx > px ? 1 : tx < px ? -1 : 0;
+  const gridBefore = (p.mx != null ? p.mx : px) + ',' + (p.my != null ? p.my : py);
+  let mapBefore = null;
+  try { mapBefore = Game.map.px + ',' + Game.map.py; } catch (e) {}
+  const cands = [];
+  if (dx) {
+    cands.push([px + dx, py]);
+    cands.push([px + dx, py + 1]);
+    cands.push([px + dx, py - 1]);
+  }
+  let moved = false;
+  for (const [cx, cy] of cands) {
+    if (cx < 0 || cx > 8 || cy < 0 || cy > 8) continue;
+    if (Game.tbIsPlayerTurn && !Game.tbIsPlayerTurn()) break;
+    try {
+      const ox = p.mx, oy = p.my;
+      Game.tbPlayerMove(cx, cy);
+      if (p.mx !== ox || p.my !== oy) { moved = true; break; }
+    } catch (e) {}
+  }
+  if (moved) {
+    if (ctx._fleeWalkStuck && ctx._fleeWalkStuck.for === f.id) ctx._fleeWalkStuck.turns = 0;
+    return 'moved';
+  }
+  // No progress: grid AND map unchanged, fight still live. (A door step
+  // moves the map — that is progress, not a stuck turn.)
+  let gridNow = null, mapNow = null;
+  try { gridNow = (p.mx != null ? p.mx : px) + ',' + (p.my != null ? p.my : py); } catch (e) {}
+  try { mapNow = Game.map.px + ',' + Game.map.py; } catch (e) {}
+  const noProgress = gridNow === gridBefore && mapNow === mapBefore &&
+    Game.tbfight && !Game.tbfight.over;
+  if (!noProgress) return 'stuck';
+  let fst = ctx._fleeWalkStuck;
+  if (!fst || fst.for !== f.id) fst = ctx._fleeWalkStuck = { for: f.id, turns: 0 };
+  fst.turns += 1;
+  ctx.fleeStuckTurns = (ctx.fleeStuckTurns || 0) + 1;
+  ctx._fleeWalkStuckAt = { from: [px, py], target: [tx, py] };
+  if (fst.turns >= 3) {
+    ctx._fleeBlockedFor = f.id;
+    ctx.fleeBlocked = (ctx.fleeBlocked || 0) + 1;
+    return 'unfleeable';
+  }
+  return 'stuck';
+}
+// Close-step with fallback (journey-landing r128): try every tile adjacent
+// to the target, nearest first, stepping as far as moveLeft pays (the r6
+// rule), accepting only a real position change. This is fight()'s inline
+// close path — the generic approach used when no trick fires — which the
+// r127 strike fix did NOT cover (that fix was beastStrikeTarget, called
+// only from the strike tricks). The probe (stack trace on seed 1209 d13)
+// proved the live 4-identical-failed-steps case comes from HERE, not from
+// a dodge: the old code picked ONE best adjacent tile, called
+// tbPlayerMove once, IGNORED the result, and counted ctx.closed. Returns
+// 'moved' | 'stuck' | 'none' (no adjacent tile exists at all).
+function closeStep(Game, f, ctx, p, px, py, tmx, tmy) {
+  const occupied = new Set(
+    f.fighters.filter(x => x.alive && x.key !== 'p').map(x => x.mx + ',' + x.my));
+  const cands = [];
+  for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) {
+    if (!dx && !dy) continue;
+    const cx = tmx + dx, cy = tmy + dy;
+    if (cx < 0 || cx > 8 || cy < 0 || cy > 8) continue;
+    if (occupied.has(cx + ',' + cy)) continue;
+    cands.push({ cx: cx, cy: cy, dd: Math.max(Math.abs(cx - px), Math.abs(cy - py)) });
+  }
+  cands.sort((a, b) => a.dd - b.dd);
+  if (!cands.length) return 'none';
+  for (const c of cands) {
+    if (Game.tbIsPlayerTurn && !Game.tbIsPlayerTurn()) break;
+    try {
+      // STEP, DON'T TELEPORT (journey-endgame r6 2026-10-12): tbPlayerMove
+      // refuses destinations beyond moveLeft ("Too far"). Step as far
+      // toward the target as this turn allows instead.
+      let dx = c.cx, dy = c.cy;
+      const ml = (p.moveLeft || 0);
+      if (ml > 0 && typeof Game.findPath === 'function') {
+        const path = Game.findPath(px, py, c.cx, c.cy);
+        if (path && path.length > ml) {
+          const step = path[ml - 1];
+          dx = step[0]; dy = step[1];
+        }
+      }
+      const ox = p.mx, oy = p.my;
+      Game.tbPlayerMove(dx, dy);
+      if (p.mx !== ox || p.my !== oy) return 'moved';
+    } catch (e) {}
+  }
+  return 'stuck';
 }
 // Strike a chosen target: close the distance first (interior tiles only),
 // then strike. Returns 'moved', 'struck', or 'stuck'.
@@ -2526,11 +2651,16 @@ function beastTrickPlay(Game, f, ctx, p, endTurn) {
         if (!m.telegraph) continue;
         const cells = (m.telegraph && Array.isArray(m.telegraph.cells)) ? m.telegraph.cells : [];
         const avoid = new Set(cells.map(c => c.cx + ',' + c.cy));
-        const spot = beastDodgeTile(Game, f, px, py, avoid);
-        if (!spot) { tried[m.key] = 1; continue; }
+        // R128 DODGE-FALLBACK: the old code picked ONE tile and ignored the
+        // move result — the scan shows the same dodge refused four turns
+        // running (1209 d13: (8,0)->(5,3) "No path there." x3 + silent).
+        // Try every free tile, nearest first; count the trick only when the
+        // scholar actually moves.
+        const dm = beastDodgeMove(Game, f, p, px, py, avoid);
+        if (dm === 'none') { tried[m.key] = 1; continue; }
         tried[m.key] = 1;
-        try { Game.tbPlayerMove(spot[0], spot[1]); } catch (e) {}
-        trickDone();
+        if (dm === 'moved') trickDone();
+        else { ctx.dodgeStuckTurns = (ctx.dodgeStuckTurns || 0) + 1; ctx._dodgeStuck = { kind: 'move_windup', from: [px, py], monster: m.key }; }
         endTurn();
         return true;
       }
@@ -2575,11 +2705,13 @@ function beastTrickPlay(Game, f, ctx, p, endTurn) {
         if (!cells || !cells.length) continue;
         if (!cells.some(c => c.cx === px && c.cy === py)) continue;
         const lane = new Set(cells.map(c => c.cx + ',' + c.cy));
-        const spot = beastDodgeTile(Game, f, px, py, lane);
-        if (!spot || lane.has(spot[0] + ',' + spot[1])) { tried[m.key] = 1; continue; }
+        // R128 DODGE-FALLBACK: same shape as move_windup — try every free
+        // tile outside the lane, count the trick only on a real move.
+        const dm = beastDodgeMove(Game, f, p, px, py, lane);
+        if (dm === 'none') { tried[m.key] = 1; continue; }
         tried[m.key] = 1;
-        try { Game.tbPlayerMove(spot[0], spot[1]); } catch (e) {}
-        trickDone();
+        if (dm === 'moved') trickDone();
+        else { ctx.dodgeStuckTurns = (ctx.dodgeStuckTurns || 0) + 1; ctx._dodgeStuck = { kind: 'sidestep', from: [px, py], monster: m.key }; }
         endTurn();
         return true;
       }
@@ -2595,6 +2727,7 @@ function beastTrickPlay(Game, f, ctx, p, endTurn) {
         const need = (ctr.tiles | 0) || 3;
         const d = Math.max(Math.abs(m.mx - px), Math.abs(m.my - py));
         tried[m.key] = 1;
+        let kdMoved = (d === need); // already at the trick's distance: no move needed
         if (d !== need) {
           const cands = beastFreeTiles(Game, f, px, py);
           // prefer exactly `need` tiles out; fall back to closest to it
@@ -2603,6 +2736,10 @@ function beastTrickPlay(Game, f, ctx, p, endTurn) {
             const db = Math.abs(Math.max(Math.abs(b[0] - m.mx), Math.abs(b[1] - m.my)) - need);
             return (da - db) || (a[0] - b[0]) || (a[1] - b[1]);
           });
+          // R128 DODGE-FALLBACK: the old loop broke after the FIRST
+          // affordable candidate's move attempt regardless of result — a
+          // refused move still counted the trick. Break only on a real
+          // position change; try the next candidate otherwise.
           for (const c of cands) {
             let path = null;
             try { path = Game.findPath(px, py, c[0], c[1]) || []; } catch (e) { continue; }
@@ -2610,11 +2747,16 @@ function beastTrickPlay(Game, f, ctx, p, endTurn) {
             let cost = 0;
             try { cost = path.reduce((s, t) => s + Game.tbTerrainCost(t[0], t[1]), 0); } catch (e) { continue; }
             if (cost <= 0 || cost > (p.moveLeft || 0)) continue;
-            try { Game.tbPlayerMove(c[0], c[1]); } catch (e) {}
-            break;
+            if (Game.tbIsPlayerTurn && !Game.tbIsPlayerTurn()) break;
+            try {
+              const ox = p.mx, oy = p.my;
+              Game.tbPlayerMove(c[0], c[1]);
+              if (p.mx !== ox || p.my !== oy) { kdMoved = true; break; }
+            } catch (e) {}
           }
+          if (!kdMoved) { ctx.dodgeStuckTurns = (ctx.dodgeStuckTurns || 0) + 1; ctx._dodgeStuck = { kind: 'keep_distance', from: [px, py], monster: m.key }; }
         }
-        trickDone();
+        if (kdMoved) trickDone();
         endTurn();
         return true;
       }
@@ -3647,8 +3789,18 @@ const competent = {
           if (!pushed) {
             // Not on an edge yet (or lever gated off — legacy path): walk to
             // the nearest x-edge; the push happens on a later turn.
-            const tx = px <= 4 ? 0 : 8;
-            try { Game.tbPlayerMove(tx, py); } catch (e) {}
+            // R128 FLEE-FALLBACK (journey-landing r128): the old code passed
+            // the FAR edge tile in one call — tbPlayerMove refuses it ("Too
+            // far") and the result was ignored, so the scholar stepped
+            // nowhere for three turns running (fresh-band scan 1208 d29:
+            // three identical "Too far" steps to (0,4); 1205 d20: two silent
+            // self-tile steps at (8,0)). legacyFleeWalk steps one tile
+            // toward the edge, tries alternates, accepts only a real
+            // position change; at 3 stuck turns it returns 'unfleeable' and
+            // this branch returns false WITHOUT ending the turn, so fight()
+            // falls through to tricks/strikes in the same turn.
+            const wres = legacyFleeWalk(Game, f, ctx, p, px, py);
+            if (wres === 'unfleeable') return false;
           }
           if (exitVerifiedFleeOn()) {
             // STUCK-FLEE RESOLUTION (journey deepening r37): the flee turn
@@ -3932,25 +4084,21 @@ const competent = {
             if (dd < bd) { bd = dd; bx = cx; by = cy; }
           }
           if (bx != null) {
-            // STEP, DON'T TELEPORT (journey-endgame r6 2026-10-12):
-            // tbPlayerMove refuses destinations beyond moveLeft ("Too far").
-            // Walking the full path to a far target no-ops forever — the
-            // ducks_in_a_row standoff ran 4975 rounds with nobody moving and
-            // nobody bleeding. Step as far toward the target as this turn
-            // allows instead.
-            try {
-              let dx = bx, dy = by;
-              const ml = (p.moveLeft || 0);
-              if (ml > 0 && typeof Game.findPath === 'function') {
-                const path = Game.findPath(px, py, bx, by);
-                if (path && path.length > ml) {
-                  const step = path[ml - 1];
-                  dx = step[0]; dy = step[1];
-                }
-              }
-              Game.tbPlayerMove(dx, dy);
-            } catch (e) {}
-            ctx.closed = (ctx.closed || 0) + 1;
+            // R128 CLOSE-FALLBACK (journey-landing r128): the old code
+            // stepped toward the single best tile (bx,by) above, called
+            // tbPlayerMove once, IGNORED the result, and counted
+            // ctx.closed. The probe proved the live 4-identical-failed-
+            // steps case (scan 1209 d13: (8,0)->(5,3) "No path there." x4)
+            // comes from THIS path, not from a dodge. closeStep tries
+            // every adjacent tile, nearest first, and counts closed only
+            // on a real move. (bx,by) is kept for the gated approach-
+            // fallback bookkeeping below, which blacklists it on failure.
+            const cr = closeStep(Game, f, ctx, p, px, py, tmx, tmy);
+            if (cr === 'moved') ctx.closed = (ctx.closed || 0) + 1;
+            else if (cr === 'stuck') {
+              ctx.closeStuckTurns = (ctx.closeStuckTurns || 0) + 1;
+              ctx._closeStuck = { from: [px, py], target: [tmx, tmy] };
+            }
             // APPROACH FALLBACK bookkeeping (gate on only): a step that
             // moves nowhere counts toward the 3-stuck-turn mark; a step
             // that moves clears the state. Turns with no step attempt
@@ -3994,7 +4142,7 @@ const competent = {
   },
 };
 
-module.exports = { competent, competentEat, packEatOnce, beastStrikeTarget, walkTo, walkHome, thirstWalkHome, goHomeStanding, standingHomeOn, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, counterAnswerOn, answerPendingCounter, pantryKcalTotal, COUNTER_SWEETEN_PANTRY_MIN, COUNTER_SWEETEN_KCAL, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, keepPromises, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, fleeRepairOn, recoverOn, approachFallbackOn, approachMonsterSig, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE, armorWantsVine };
+module.exports = { competent, competentEat, packEatOnce, beastStrikeTarget, beastTrickPlay, legacyFleeWalk, beastDodgeMove, closeStep, walkTo, walkHome, thirstWalkHome, goHomeStanding, standingHomeOn, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, counterAnswerOn, answerPendingCounter, pantryKcalTotal, COUNTER_SWEETEN_PANTRY_MIN, COUNTER_SWEETEN_KCAL, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, keepPromises, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, fleeRepairOn, recoverOn, approachFallbackOn, approachMonsterSig, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE, armorWantsVine };
 
 
 // The public shared gearing routine, also used by prepared policy proofs.
