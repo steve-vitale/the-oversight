@@ -35281,7 +35281,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const vr = Math.random();
         veteranVariant = vr < 0.34 ? 'scarred' : (vr < 0.67 ? 'elder' : 'pack-leader');
         const vNames = { scarred: 'Scarred', elder: 'Elder', 'pack-leader': 'Pack-leader' };
-        this.say(`⚠ This one is different — ${veteranVariant === 'scarred' ? 'scarred, braced, waiting for your opening' : veteranVariant === 'elder' ? 'old, patient, unhurried — it has seen your kind before' : 'bigger, and it didn\'t come alone'}. A ${vNames[veteranVariant]} veteran.`);
+        this.say(`⚠ This one is different — ${veteranVariant === 'scarred' ? 'scarred, braced, waiting for your opening' : veteranVariant === 'elder' ? 'old, patient, unhurried — it has seen your kind before' : 'bigger, and it didn\'t come alone'}. ${veteranVariant === 'elder' ? 'An' : 'A'} ${vNames[veteranVariant]} veteran.`);
       }
       const detail = this.genDetail(this.map.px, this.map.py);
       const terrainBlocked = (x, y) => {
