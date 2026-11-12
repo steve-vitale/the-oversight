@@ -143,10 +143,11 @@ function check(name, fn) {
   // (6) NAMES (finding #2274): useMedicine must narrate the pill actually
   // taken — antimalarial / cold remedy / bandage / ORS — never the
   // pre-fix fallback 'antiparasitic' in any say line. Reachability per
-  // the cure tables: dry-swallow fires for every kind (undiagnosed use);
+  // the cure tables: the use verb fires for every kind (undiagnosed
+  // use) — dry-swallow for pills, apply for bandage, drink for ORS;
   // the cure path is reachable only for antimalarial of the four
   // (cold_remedy / bandage / ors only ease); the ease path only for the
-  // three easing kinds. So the matrix is: dry-swallow × all four,
+  // three easing kinds. So the matrix is: use-verb × all four,
   // cure × antimalarial (diagnosed + undiagnosed variants),
   // ease × cold_remedy / bandage / ors — plus antibiotics /
   // antiparasitic cure controls proving the recorder sees real names.
@@ -195,20 +196,20 @@ function check(name, fn) {
     assert.ok(Game.sickDiseases().some(e => e.id === 'disease'), 'Fever vanished — an ease must not cure it');
     noLeak(lines, 'cold_remedy');
   });
-  check('names: bandage dry-swallow + ease (undiagnosed Wound Fever)', () => {
+  check('names: bandage apply + ease (undiagnosed Wound Fever)', () => {
     resetScholar();
     assert.ok(Game.applyStatus('scholar', 'wound_fever', { silent: true }), 'could not give the scholar wound fever');
     const lines = useAndCapture('bandage', medItem('med_bandage', 'bandage', 'Bandages (roll)'));
-    spokenName(lines, /dry-swallow the/i, 'bandage', 'dry-swallow');
+    spokenName(lines, /apply the/i, 'bandage', 'use-verb');
     spokenName(lines, /edge off/i, 'bandage', 'ease');
     assert.ok(Game.sickDiseases().some(e => e.id === 'wound_fever'), 'Wound Fever vanished — an ease must not cure it');
     noLeak(lines, 'bandage');
   });
-  check('names: ors dry-swallow + ease (undiagnosed Gut Rot)', () => {
+  check('names: ors drink + ease (undiagnosed Gut Rot)', () => {
     resetScholar();
     assert.ok(Game.applyStatus('scholar', 'gutrot', { silent: true }), 'could not give the scholar gut rot');
     const lines = useAndCapture('ors', medItem('ors_packets', 'ors', 'ORS packets'));
-    spokenName(lines, /dry-swallow the/i, 'ORS', 'dry-swallow');
+    spokenName(lines, /drink the/i, 'ORS', 'use-verb');
     spokenName(lines, /edge off/i, 'ORS', 'ease');
     assert.ok(Game.sickDiseases().some(e => e.id === 'gutrot'), 'Gut Rot vanished — an ease must not cure it');
     noLeak(lines, 'ors');
@@ -238,6 +239,39 @@ function check(name, fn) {
     spokenName(lines, /breaks within the day/i, 'antiparasitic', 'cure');
     assert.ok(!Game.sickDiseases().some(e => e.id === 'gutrot'), 'Gut Rot NOT cured by antiparasitic');
   });
+  // (7) VERBS (sim-findings-a 2026-11-11): the undiagnosed-use line
+  // uses the verb for the kind — pills are dry-swallowed, a bandage is
+  // applied, ORS is drunk. Every kind the KIND_NAME map covers is
+  // asserted here. Trichinosis is the shared sickness: (6) never
+  // diagnosed it, so the use line fires for every kind; only
+  // antiparasitic cures it (the other kinds answer "Wrong medicine",
+  // which is fine — the verb line is what this section asserts).
+  const KIND_VERB_EXPECTED = [
+    ['antibiotics', 'dry-swallow', 'antibiotics', 'med_antibiotics', 'Antibiotics (amoxicillin)'],
+    ['antiparasitic', 'dry-swallow', 'antiparasitic', 'med_antiparasitic', 'Antiparasitic (mebendazole)'],
+    ['antimalarial', 'dry-swallow', 'antimalarial', 'med_antimalarial', 'Antimalarials (artemether)'],
+    ['cold_remedy', 'dry-swallow', 'cold remedy', 'med_kakkonto', 'Cold medicine (kakkonto)'],
+    ['bandage', 'apply', 'bandage', 'med_bandage', 'Bandages (roll)'],
+    ['ors', 'drink', 'ORS', 'ors_packets', 'ORS packets'],
+  ];
+  for (const [kind, verb, kindName, itemId, itemName] of KIND_VERB_EXPECTED) {
+    check(`verbs: undiagnosed use of ${kind} says "You ${verb} the ${kindName}"`, () => {
+      resetScholar();
+      assert.ok(Game.applyStatus('scholar', 'trichinosis', { silent: true }), 'could not give the scholar trichinosis');
+      assert.ok(!Game.isDiagnosed('scholar', 'trichinosis'), 'trichinosis already diagnosed — the use line would not fire');
+      const lines = useAndCapture(kind, medItem(itemId, kind, itemName));
+      const useLine = lines.find(l => /You (dry-swallow|apply|drink) the /i.test(l));
+      assert.ok(useLine, 'no use-verb line spoken; got ' + JSON.stringify(lines));
+      assert.ok(new RegExp(`You ${verb} the ${kindName}\\.`, 'i').test(useLine),
+        `wrong verb for ${kind}: ${JSON.stringify(useLine)}`);
+      for (const wrong of ['dry-swallow', 'apply', 'drink']) {
+        if (wrong === verb) continue;
+        assert.ok(!lines.some(l => new RegExp(`You ${wrong} the`, 'i').test(l)),
+          `wrong verb "${wrong}" spoken for ${kind}: ${JSON.stringify(lines)}`);
+      }
+      noLeak(lines, kind);
+    });
+  }
   Game.say = _origSay6;
 
   console.log(failures === 0 ? 'r181 regional-meds: ALL PASS' : 'r181 regional-meds: ' + failures + ' FAILURES');

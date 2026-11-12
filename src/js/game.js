@@ -14177,6 +14177,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // take singular verbs; antibiotics / antiparasitic / ORS are plural.
       const KIND_NAME = { antibiotics: 'antibiotics', antiparasitic: 'antiparasitic', antimalarial: 'antimalarial', cold_remedy: 'cold remedy', bandage: 'bandage', ors: 'ORS' };
       const kindName = KIND_NAME[kind] || 'antiparasitic';
+      // KIND VERB (sim-findings-a 2026-11-11): the use verb follows the
+      // kind — pills are swallowed, a bandage is applied, ORS is drunk.
+      // The old line said "You dry-swallow the bandage" for every kind:
+      // a bandage is applied, not swallowed.
+      const KIND_VERB = { antibiotics: 'dry-swallow', antiparasitic: 'dry-swallow', antimalarial: 'dry-swallow', cold_remedy: 'dry-swallow', bandage: 'apply', ors: 'drink' };
+      const kindVerb = KIND_VERB[kind] || 'dry-swallow';
       const plural = kind === 'antibiotics' || kind === 'antiparasitic' || kind === 'ors';
       sick.sort((a, b) => {
         const da = this.isDiagnosed('scholar', a.id) ? 1 : 0, db = this.isDiagnosed('scholar', b.id) ? 1 : 0;
@@ -14185,7 +14191,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const e = sick[0];
       const def = this.seDef(e.id);
       const diagnosed = this.isDiagnosed('scholar', e.id);
-      if (!diagnosed) this.say(`You dry-swallow the ${kindName}. You're guessing \u2014 nobody's named this sickness yet.`);
+      if (!diagnosed) this.say(`You ${kindVerb} the ${kindName}. You're guessing \u2014 nobody's named this sickness yet.`);
       const eff = this.cureEffectFor(e.id, kind);
       const matchClass = def['class'] === cls || def['class'] === 'fever';
       if (eff === 'cure' && matchClass) {
