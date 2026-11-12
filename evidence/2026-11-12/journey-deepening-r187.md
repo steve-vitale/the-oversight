@@ -1,0 +1,98 @@
+# journey-deepening r187 — deepening leg (days 40–80), Lane A
+
+- **Run:** `playtest-loop-a-20261112T1245CST`, scheduled Thu 2026-11-12 12:45 CST (18:45 UTC).
+- **Leg:** 2 — deepening (DAYCAP 100, death-aware stop). Rotation read `2` at run start; advance 2→3 owed after landing.
+- **Base:** local master `90f5d8298` (sim-fleerepair-adopt-b tip; verified in worktree: `git log` HEAD = 90f5d8298, branch `journey-deepening`, status clean). Origin divergence note: local master is 1 ahead of origin/master (50c6e7fc8, batch ship), 0 behind — `git pull` no-op, no reconciliation, no push; the ship loop owns pushes.
+- **Branch:** `journey-deepening`, worktree `~/workspace/worktrees/journey-deepening` (registered ~19:31Z; slow checkout ~13.5 min on loaded host; flap probe ALL-OK before it).
+- **Lock:** `~/workspace/goals/the-scattering-roguelite-survival-game/hidden_files/playtest-loop.lock`, run_id `2026-11-12T18:56:56Z` (created 18:56:56Z; no prior lock existed). **Delete at end, re-reading it first.**
+- **Heartbeat loop:** `~/workspace/goals/the-scattering-roguelite-survival-game/hidden_files/journey-deepening-hbloop-r187.sh`, 10-min cadence, started 19:34Z (PID 49379) — **DIED silently before its first cycle** (log empty; the nohup'd loop did not survive its parent exec session's cleanup). Restarted 20:09Z (PID 9681, PPID 1, verified alive + registry heartbeat 20:09:30Z active). Manual heartbeats throughout. Lesson: check the loop PROCESS is alive at each phase, not just that the script exists — a dead loop logs nothing.
+- **Policy:** competent. Seeds: fresh **100032–100039** (8-seed panel); smoke **100040**. Freshness verified: 0 hits in `*-prereg.md` files, 0 in `scripts/`, 0 filenames. DAYCAP=100. CONVO_DAYS [45, 60, 80].
+- **Single-seed-per-process (r183 adoption finding):** every seed ran as its own `node` invocation, parallel across processes.
+
+## Pre-flight notes (this run)
+
+- Main tree clean at run start (full `git status` took ~21 min on the loaded host; its single hit — `D` + `??` on `evidence/2026-11-12/sim-fleerepair-adopt-b.md` — was a transient index-clobber artifact from a sibling landing mid-scan: file is in HEAD at blob 435e1b24, worktree copy hashes identically, targeted re-check clean, second full status empty in 2.5s with warm index). Disk 40%.
+- Worktree reaper (pre-flight run): removed nothing; LOUD dirty trees all other agents' (build-ladder-leg4-baseline, sim-wideduty-a, sim-sametick-a, journey-scale-attr, sim-secondlink-a, sim-siegedesign-a, sim-redactor-a, sim-saycap-a, sim-siegedialog-a, journey2-succession, sim-pairarming-a, sim-proofrefresh-b10) — none mine, left alone. Active 13/16, cap has room.
+- Registration held the registry flock throughout (two other agents' heartbeats queued behind it; they proceeded after) — by design, registration holds the lock while the checkout runs.
+- **Combat-play gate (Steve 2026-11-10 17:52 CST):** no toughness/gear/ability tuning until the fight-play census lands. This run touches dialogue/instrument code only, so the gate does not bind it (same as r129/r130/r183/r184).
+
+## Q1 (PRIMARY) — SECRET-SILENT WATCH, 8-SEED PANEL (r184's named next step)
+
+**Verdict: FIRES. The confession path was never quiet — r184's 0/51 was the measurement missing the path, not the path missing.**
+
+Panel (8 seeds 100032–100039 + smoke seed 100040 in the analyzer read, 99 sittings; analyzer `scripts/analyze-journey-deepening-r187-20261112.js`):
+- **Q1-SECRETPROBE: sittings=99, trust≥40=92, eligible=40, branchReached=2, fired=2, sharedEnd=36, firedNotEligible=0 → FIRES.**
+
+**The funnel, precisely.** Trust is NOT the gate: 92/99 sittings sit at trust ≥ 40 (the scholar is deeply trusted by day 45–80). Of the 40 eligible sittings (trust≥40 + has a secret + not yet shared + no acute need):
+- **Displaced 38/40** — higher-priority openers eat the confession: request 55, want 28, grief 6 across all sittings. The two most human moments compete for the same opening: on the Chantal sitting the bond proposal (a `request` opener) displaced an eligible confession.
+- **sharedAlready 29** — the once-per-life secret was already spent before the driver sitting, fired earlier in policy play (see sharedEnd below).
+- **acuteTrue 20** — sickness / starving hunger / serious wounds owned the opening in 20 sittings (the acute-need rule working as designed).
+- **Branch reached 2, fired 2** — when the branch is reached, it fires (the 20% roll passed 2/2; n=2, a weak estimate, but no evidence of roll starvation).
+- **sharedEnd 36** — 36 villagers' secrets fired SOMEWHERE across the 9 seeds (2–6 per seed): the path fires roughly 4 times per 100-day run outside the driver's sittings.
+
+**Amendment A1 — the smoke finding that reframed the question (recorded after the smoke run, BEFORE the panel runs).** Smoke seed 100040: 0 confessions in 6 driver sittings, but `secretSharedBefore=true` for gen_b4r7tjm on days 34 and 45. The ONLY setter of `secretShared` is the secret branch itself (`conversation.js:3458`), so that villager's secret fired in a conversation the driver never transcribed: the competent policy calls `Game.talkTo` during daily play (`scripts/policies/competent.js`), and those policy conversations run the full opener logic including the secret branch. The driver-sitting count therefore UNDERCOUNTS the path. Added instrument (driver only, read-only): seed-end `secretSharedEnd` — the count of villagers whose secret fired ANYWHERE in the run — printed on the Q1-SECRETPROBE panel line. The prereg verdict still binds on the driver-sitting funnel; `sharedEnd` is the supporting read that answers "has the path gone quiet": with `sharedEnd=36` against 2 driver-sitting firings, the answer is no — it fires in policy play; driver sittings undercount it.
+
+**The two fired confessions (seed 100035, read in full).** Xavier d24 (lawyer, dry, trust 89): "Can I tell you something? Before the scattering, I said something cruel. I think about it every day." — answered `secret:promise`, "I needed someone to know — just one person. Thank you for being that person." Samuel d60 (beekeeper, bold, trust 94): "Can I tell you something? I'm practicing what I would say if I ever saw my family again. I haven't told anyone." — answered `secret:comfort`, "I carried that a long time. ...Thanks for not looking away." Both distinct secrets, distinct answers, both sittings live on after the answer (POSTSECRET 5 and 2 post-answer turns, dryFirst=false). Q1-VARIETY on 100035: answered 2, distinct 2 → VARIED. The Xavier sitting also shows the r124 shape (a betrayal menu precedes the secret menu; the driver declines it, then the secret menu follows) — reads fine.
+
+**No fix owed. The watch is CLOSED** — with a standing note: any future confession count must use `sharedEnd` (game-level), not driver sittings alone.
+
+**Instrument footnote.** `secretUnknown=10` (prototype never synthesized): 6 are `nonverbal`-thread sittings (no shared language — `nvOpen`, convoOpening never ran) and 4 are `request`-thread sittings (the talk-request branch returns before the prototype block). All 10 are sittings where the secret branch could not have run, so the eligible count is unbiased. `firedNotEligible=0`, `acuteUnknown=0`.
+
+## Q2 (SECONDARY, people-check dial) — V-INIT: DO VILLAGERS EVER INITIATE BONDS?
+
+**Verdict: FIRES (telemetry) — and the transcript scan is the broken instrument, not the game.**
+
+- **BOND-TELEMETRY (primary): tele=150, proposals=66, decisions=26, accepts=11 (0.42), linkRaises=23, scholarTargeted=30, initiatedBonds=13, instrumentErrors=0 → PRESENT.** NPC→scholar proposals stage and get answered: seed 100033, gen_md2zugo staged d26 (expired d29 unanswered), chantal_mukendi staged d33 → **ACCEPTED d34** in a driver sitting (transcript read in full — see People check).
+- **V-INIT transcript scan: bondSittings=2 — both false positives.** The `BOND_THEM` regex matches the word "outing": a water-haul outing ask (Greta d34, "I know the creek bend... come with me and we'll fill packs before dark") and an outing resume ("We still have the outing to finish"). Meanwhile the REAL staged-proposal line — "You and me — we should be bonded. Not just neighbors. Will you stick with me?" (Chantal d34) — does NOT match: "bonded" isn't in the regex. The scan missed the one true V-INIT on the panel (its row reads bondLines=0) and counted 2 outings.
+- **Fix owed (next run, analyzer-only):** add the staged-proposal line shapes to `BOND_THEM` (`bonded`, `stick with me`, the `bondProposalLine` shapes) and exclude bare "outing" resumes. The telemetry (`scholarTargeted`) is the authoritative count until then.
+- **Gate read (code, `src/js/bond-initiation.js`):** scholar proposals need `bondDriveLive` (a bond record with warmth 15–49, depth < 1 — no record means strangers, never live) + `trustOf(vid) ≥ 12` (the villager's OWN trust toward the scholar — a different map from the scholar's trust toward villagers, which ran 89–100 here) + a scorer win + the 18% daily lottery + the one-staging-per-day cap. NPC→NPC needs the same warmth window + perception + affinity ≥ 0 + an 8% lottery. The binding stage on this panel is the lottery/scorer/cap and the 2-day expiry — stagings happen (30 scholar-targeted events) but most expire unanswered before the driver's 3 fixed convo days reach them (REQUESTS expired 22 panel-wide; the d26 staging expired d29).
+
+## People check (transcripts read in full)
+
+- **Chantal d34 (seed 100033)** — the bond proposal, in full: she opens with it ("I've been thinking. You and me — we should be bonded. Not just neighbors. Will you stick with me?"), the player answers the generic yes/no ("Yes." → "They nod. 'Okay.'"), the conversation wanders into teaching, then the SAME line re-surfaces verbatim with the bond:accept/decline menu and the player accepts: "Stick together, then." They look steadier already. **One wrinkle:** the proposal speaks twice in one sitting because the generic yes didn't consume it — a real player who said yes would expect the bond to be formed. Reads slightly odd, resolves honestly. Minor roughness, not a defect — the bond DID form. Noted for the next dialogue pass (carried).
+- **Xavier + Samuel confessions (above):** real people, distinct secrets, real resolutions, sittings that live on.
+- **Guard lines (9 firings, all read in full):** every trigger pick is a genuine warming move — vulnerable self-disclosure ("I don't recognize the person in my head anymore"), shared laughter about creek concerts, a childhood memory ("A kitchen. Morning light. I must've been three."), trying their Hindi, asking about their expedition. **MISS 0/9.** The r134 6-line pool reads honestly after real warmth; the r184 mechanism verdict stands on the new pool. Counts: guard-shut 3, guard-passes 2, guard-nod 2, guard-nothing 1, guard-sit 1, guard-hear 0.
+- **Place lessons (4 frames, 3 distinct, maxSameFrame 1):** the rotation holds in the wild (Q2-PLACEFRAME VARIED).
+
+## Q3 (census) — the villages in plain words
+
+6/8 survived to day 100–101 (3–9 people alive); 2 lost (100034 scatter-hunger d96, pantry 0, 5 alive when it scattered; 100035 scholar-death-no-successor d91, 0 alive). Every village reached wave 4; standing 145–400, all regional; ladder stage 2–3; first standing day 14 everywhere. Deaths 50–103 per village, dominated by 'villager combat' (24–39) + 'combat' + expeditions + the wild — the survival-collapse shape (dying fighting, not hungry), carried, Loop B's hunt. Starvation 1 (100038), thirst 1 (100037), sickness 1 (100034) — hunger is not what's killing villages.
+
+The villages know things and use them. Plants known up to 41 per villager; the Codex grew 63–100 entries per village. Monster meat is hauled, tested, and cooked on every seed: 18–43 kills, 2–16 tests, 2–15 reveals, 1–18 dinners. **Places are THIN on this panel** — only 3/99 sittings with any place known (vs 15/51 on r184). No agency-code change between bases (verified: 0 commits touching `villager-agency.js` between 0436a04e0 and 90f5d8298), so this is seed variance in exploration, not a regression. The teaching still fires whenever knowledge exists: 4 place frames from the 3 known sittings. Bonds are alive: 66 proposals panel-wide, 26 decided, 11 accepted (42%), 23 link raises, 30 scholar-targeted. Requests staged 62, decided 40.
+
+Per seed: 100032 survived d101 (4 alive, wave 4, standing 200, regional); 100033 survived d101 (3 alive, wave 4, standing 400, regional, 5 feasts); 100034 lost d96 (scatter-hunger; wave 4; standing 150, regional); 100035 lost d91 (scholar-death-no-successor; wave 4; standing 175, regional); 100036 survived d101 (7 alive, wave 4, standing 145, regional); 100037 survived d101 (6 alive, wave 4, standing 220, regional); 100038 survived d101 (9 alive, wave 4, standing 270, regional, 6 feasts); 100039 survived d100 (7 alive, wave 4, standing 220, regional).
+
+## Q4 (carried, read-only)
+
+- LADDER: opens 9/9 (incl. smoke), mints 5/5 tracks (9/9 each), holds 8/9, firstDays all 14 → LADDER-OPENS + LADDER-MINTS + LADDER-HOLDS.
+- REQUESTS: staged 62, decided 40, expired 22 → REACHED. BOND-CHOICE answered. B-SIT: 44 betrayal sittings, accept 24 / decline 20 / unanswered 0. B-FOLLOW: 29 followups, 14 with new betrayal. P-KEEP: 20 threads (NAMED 9, DEAD 7, SILENT 1, NO-LATER-SITTING 3). RE-ASK 0. RE-ASK-ORPHAN 6, all fromSeed-origin, 0 true-no-thread. FIZZLE 0 — fix holds. MENU-FLIP 0. LANGGATE NOT-REPRODUCED (offers 40, 0 'none'). LANGARC ARC-UNEXERCISED (6 sittings, 0 grants). REPLAY 0. D-THING 15 pocketed / 9 testable / 3 named. RAJ-PHOTO 0.
+- GOALJOIN: HEALTHY on every track (party_up capture 459, food_security 1392, bonds 333, safety 333).
+- TRUST: TRUST-EARNED-ONLY (0 stranger gains, 92 non-death moves).
+- FAVOUR-BLOCK: VARIED (14 total, 4 distinct, maxRepeat 4). PARTNER-BLOCK: VARIED (9 total, 4 distinct, maxRepeat 4). AWAY: REPETITIVE panel-wide (6 total, 3 distinct, maxRepeat 4 — the `wait` variant) BUT per-sitting maxRepeat 1 on all 6 rows — the same small-sample first-pick shape r184 diagnosed; the per-villager guarantee holds, not a regression.
+- CISTERN clean (0 bad, 0 good). DEBRIEF 2/2 attributed (scatter-hunger, scholar-death-no-successor).
+
+## Metric review
+
+- Q1: the funnel named the stages (displacement 38 + already-shared 29 + acute 20), and the verdict FIRES came from the driver sittings (2) with the game-level count (36) as the supporting read. The prereg's NO-DATA/QUIET-PATH branches weren't hit. The instrument held: firedNotEligible=0, acuteUnknown=0, and the 10 secretUnknowns are fully explained (6 nonverbal + 4 request-early-return). The A1 amendment was the run's most valuable instrument change — without `sharedEnd`, the panel would have read as "2 confessions in 99 sittings" and the watch would have stayed open on a false thinness.
+- Q2: the verdict is FIRES by telemetry, but the transcript scan is broken (2 false positives on "outing", 1 miss on "bonded"). The prereg's "if 0, name the binding stage" branch didn't trigger — the count wasn't 0, but the scan's 2 are wrong, so the honest verdict is FIRES (telemetry) + scan fix owed next run. The gate code-read stands on its own: the lottery/scorer/cap + 2-day expiry is the binding stage, not eligibility.
+- The 8-seed panel was enough for Q1 (funnel stages well-populated: 92 trust≥40, 40 eligible) and Q2 (telemetry decisive). The smoke seed's inclusion in the analyzer read (99 sittings = 93 panel + 6 smoke) doesn't change any verdict — both firings are panel seed 100035, and sharedEnd=36 includes the smoke seed's 1.
+- Guard-lines re-read: MISS 0/9 on the new pool — the r134 mechanism verdict stands, and the old soft/warm lines correctly read 0 (gone from the game).
+- Place-knowledge thinness (3/99 sittings) is a census observation, not a verdict input — the Q1-PLACEPROBE funnel still reads FIRES (4 frames from 3 known sittings). Worth a watch next run, not a fix.
+
+## Telemetry
+
+`telemetry-check.js` vs the deepening baseline (guardrails.deaths, guardrails.popAlive, guardrails.pantryKcal, c3.starvationDeaths; 8 panel seed JSONs frozen in `hidden_files/evidence/2026-11-12/r187-panel/`): **quiet, no large deviations**. Baseline NOT rolled forward: the panel is a probe panel, and the baseline stays until a future run decides otherwise.
+
+## Landing (adopted by Lane A 15:45 CST run — stale-lock recovery, run_id 2026-11-12T21:47:00Z)
+
+- **Recovery:** the 12:45 CST run died mid-landing in the host write flap (episode 20:29–~21:57Z; last heartbeat 20:27:11Z, 76 min stale at recovery). Its note was complete except this section; the adopting run verified every number against the frozen panel + analysis log (see `hidden_files/journey-deepening-r187-adoption.md`), restored flap-emptied `docs/ONTOLOGY.md` from HEAD (2198 lines), and landed the work unchanged.
+- **Gate (adopting run, full check.js through the flap, 20:27–20:44Z):** 325 passed, 15 failed in 1012s. All 15 adjudicated: 7 EPERM flap writes (human-combat-parity, measurement-flags, measurement-source-text, prepared-runner-custody, proof-text-identity, telemetry-check-recorder, sw-audio-cache); foodpower's ontology-green sub-check failed only because the flap had zeroed ONTOLOGY.md; occupation-panels CLI-workflow exit 1 (flap-suspect); 2 exact-120s deed-attainment timeouts (living-garden, one-person-army — load); 3 pre-existing staleness (measurement-proof-update, measurement-workflow, phone-frame-proof stale receipt). No src/ change in this run, so no failure is caused by it.
+- **Gate (adopting run, standalone re-runs after the flap cleared ~22:01Z + ONTOLOGY.md restored, hash-verified a66a3df19):** all 12 re-runnable failures re-run standalone — ALL exit 0 (the 7 EPERM + foodpower + occupation-panels + measurement-cache-flags + living-garden + one-person-army; logs `evidence/2026-11-12/rerun-*.log`). Cache-flags passed standalone; per the r187 Lane B lesson its scores track box load, not the change. The remaining 3 (staleness pair + phone-frame) are pre-existing receipts, not re-runnable. **Gate: GO.** Analyzer test 22 passed, 0 failed; `validate-ontology.js` — all 138 systems validated, release permitted.
+- **Telemetry:** re-run quiet (8 files, 4 metrics, no large deviations). Baseline NOT rolled forward (probe panel).
+- Commit: [FILL at commit time].
+- Merge: [FILL at merge time].
+- Rotation 2→3 written at closeout. Lock deleted.
+
+## Carried (not this run's to build)
+
+V-INIT scan fix (`BOND_THEM`: add bonded/stick-with-me shapes, exclude bare outing resumes — analyzer-only, next run); Chantal double-ask roughness (generic yes doesn't consume a staged bond proposal); place-knowledge thinness watch (seed variance — re-check next deepening panel); Baraka unvoiced raise; Stella/Nathan trap-line invitation swallowed by raise-answer template; guest deaths (Bing) prereg; survival-collapse cause (combat side — Loop B bisect is the top job); scholar-payment open item (Steve-call); scale.json baseline regime re-label; preserve_food has no villager-side job; taken-kin pod sentence / deflect pivot / quiet-place walk / stockpile / night-thread repetition items (r128 counts); r171 M2b scholar-open proof still owed; measurement-proof refresh (fresh neutral panel + `balance-proof-update.js`) — this run's change is dialogue/instrument-only, so the pair is carried, not rebuilt; reaper-lock self-contention fix (Steve-approved 2026-11-12 — the alignment update records the approval; needs the build, not this run); heartbeat-loop death mode (nohup'd loop died silently with its parent exec session — re-check the loop process at each phase; consider a self-daemonizing loop or a cron-side watchdog).
