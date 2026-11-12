@@ -280,6 +280,7 @@ with the regime recorded (see metric review).
   timeouts on a loaded box; r127's gate had the same 2 slow-test
   timeouts). No regressions from this run; the five are other
   work, not a landing blocker for an evidence/scripts-only run.
-- Landing: evidence + run note committed as <COMMIT>; merged to
-  master as <MERGE-COMMIT>; rotation-b written 5 (social life) after
-  the verified merge; lock deleted. Merged locally, pending ship.
+- Landing: evidence + run note committed as 9081eba98 (worktree);
+  prereg + instruments as 6604c4187. Merged to master (ff-only);
+  rotation-b written 5 (social life) after the verified merge; lock
+  deleted. Merged locally, pending ship.
