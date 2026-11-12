@@ -180,3 +180,33 @@ current, and neutral. Ready to merge, pending ship.
   a finding for the winnability chain, not for this arm.
 - Nothing outside scope surfaced except the mid-run VM restart (no work
   lost — the case cache survived it).
+
+## Coordinator adoption addendum (Loop B run fleshout-loop-b-20261112T1630Z)
+
+The 1430Z coordinator died before landing; this arm was adopted, rebased,
+re-proved, and merged by the 1630Z run. The worker's GO verdict above
+stands **for its generation tip 5c4361ccc** (11/12 + manual cache-flags
+4/4 there). On the landing tip the picture is:
+
+- Rebased clean onto master `87f00547d` (journey-landing r128 + bisect
+  round 8 + crisis r186); new tip `b0f0ec909`. No conflicts.
+- Proof re-run on the rebased tree: `scripts/test-proofrefresh-b9.js`
+  **9 passed, 3 failed** — all three failures are one root cause, the
+  manifest staleness: `balance-proof-update validate` fails, the
+  proof-update test exits 1, and the workflow test reads 8/9. The panel
+  artifact itself is intact on the rebased tree: `sourcesStable` true,
+  neutrality matches on every proof case, 64/64 rows, neutrality
+  reproduces b8 and b7 identically, ontology 138 systems, cache-flags
+  4/4 inside the run this time.
+- Exactly **2 of 525 manifest keys** differ between the b9 panel and the
+  landing tip (`B.manifest` vs panel sources): `src/js/convo-wants.js`
+  (journey-crisis r186 warn-details pool-picker fix) and
+  `scripts/policies/competent.js` (journey-landing r128 tbPlayerMove
+  fixes). The b8 panel it replaces was stale by 6 keys on this tip, so
+  the re-point improves staleness 6 → 2; the proof-update and workflow
+  tests already failed on master before this landing and still fail
+  after it — no gate regression, only a smaller stale count.
+- **Proof refresh round 10 is owed** on the next manifest change, same
+  as always: regenerate a real panel on the then-current tip and
+  re-point. Do not hand-edit the manifest.
+
