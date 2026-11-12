@@ -414,6 +414,38 @@
       return line;
     },
 
+    // drawTruthLineUnblocked(poolKey, vid, vars): a confrontation answer
+    // must never dry-replace. drawTruthLine's per-game no-repeat and
+    // sayLine's 48-entry run ledger are independent dedupes: once a small
+    // pool recycles, a freshly drawn variant can already sit in the ledger
+    // (spoken by another villager recently) and sayLine answers the
+    // accusation with "...Sorry, lost my train of thought." — a
+    // non-sequitur right after a real confession (journey-succession r187:
+    // crisis r186 seed 14421 d124, second confront in one sitting).
+    // Same shape as the r186 warn-details fix (convoWantWarning
+    // pool-picker): draw variants and return the first convoWouldBlock
+    // would NOT refuse; null when every variant is blocked, so the caller
+    // falls to its honest hardcoded line instead of a forced repeat.
+    // RNG: the common path spends exactly one drawTruthLine call — the
+    // same as the code it replaces, so seeded trajectories are unchanged
+    // where nothing was blocked. Extra draws happen ONLY on the blocked
+    // path, i.e. only where the old code produced the dry line.
+    drawTruthLineUnblocked(poolKey, vid, vars) {
+      const pool = this.truthLinePools[poolKey];
+      if (!pool || !pool.length) return null;
+      const blocked = (line) => {
+        try {
+          return typeof this.convoWouldBlock === 'function' && this.convoWouldBlock(vid, line);
+        } catch (e) { return false; }
+      };
+      for (let k = 0; k < pool.length; k++) {
+        const line = this.drawTruthLine(poolKey, vid, vars);
+        if (!line) return null;
+        if (!blocked(line)) return line;
+      }
+      return null;
+    },
+
     // ---- lie generation ----
     // npcLies(vid): lazy. Returns vp.lies or generates. Most people are
     // honest; liars have reasons.
@@ -1453,7 +1485,8 @@
           if (fieldMatch || evidenceMatch) { stale = l; break; }
         }
         if (stale) {
-          line = this.drawTruthLine('staleConfessed', vid);
+          line = this.drawTruthLineUnblocked('staleConfessed', vid) ||
+            `"That one's told already. Ask me something else."`;
           outcome = 'already-confessed';
           this.resolveDoubt(doubtId, 'stale doubt — the lie was already confessed');
           try { this.bumpTrust(vid, -1); } catch (e) {}
@@ -1489,7 +1522,7 @@
           const corroborated = claimsOnField.length > 0 &&
             claimsOnField.every(c => c === String(lf.truth));
           if (!heardCover && corroborated) {
-            line = this.drawTruthLine('mootLead', vid) ||
+            line = this.drawTruthLineUnblocked('mootLead', vid) ||
               `"So you heard the talk." ${first} doesn't flinch. "And you heard my story yourself. That's the whole of it." Nothing left to press; the talk was stale.`;
             outcome = 'moot';
             this.resolveDoubt(doubtId, 'checked out — their story holds; the village talk was stale');
@@ -1512,7 +1545,7 @@
         const plotCase = this.plotBehindDoubt(doubt, vid);
         if (plotCase) {
           this.confrontWindup(vid, doubt, null);
-          line = this.drawTruthLine('pressed', vid) ||
+          line = this.drawTruthLineUnblocked('pressed', vid) ||
             `"${first} holds your gaze. Says nothing you don't already know."`;
           outcome = 'pressed';
           this.resolveDoubt(doubtId, 'pressed them on it — they held their story; the case record holds what you know');
@@ -1540,7 +1573,8 @@
         // doubts with nothing behind them) still sting: that WAS an offense.
         const tentative = doubt.kind === 'behavior' || this.doubtIsLead(doubt) || !!doubt.eventBacked;
         this.confrontWindup(vid, doubt, null);
-        line = this.drawTruthLine('clears', vid);
+        line = this.drawTruthLineUnblocked('clears', vid) ||
+          `"You've got it wrong — but I can see why you'd think that."`;
         outcome = 'cleared';
         this.resolveDoubt(doubtId, tentative ? 'talked it through — they explained it' : 'misunderstanding — they explained it');
         this.noteSocialLesson('cleared');
@@ -1596,7 +1630,8 @@
         // confessed lie. The accusation still landed (windup above);
         // the doubt stays open and the evidence grows.
         outcome = 'deflected';
-        line = this.drawTruthLine('staleConfessed', vid);
+        line = this.drawTruthLineUnblocked('staleConfessed', vid) ||
+          `"That one's told already. Ask me something else."`;
         doubt.evidence.push(`confronted (day ${day()}) — already confessed this sitting`);
         try { this.bumpTrust(vid, -3); this.remember(vid, 'deflected', 'would not confess twice in one sitting'); } catch (e) { console.warn('truth confess guard', e); }
       } else if (roll < confessP) {
@@ -1666,13 +1701,15 @@ try { this.noteTrialDeed('catch_3_lies', 1); } catch (e2) {}
         // DEFLECTION — smooth or clumsy depending on who they are
         outcome = 'deflected';
         const smooth = dark && dark.kind === 'malicious';
-        line = this.drawTruthLine(smooth ? 'deflectSmooth' : 'deflectClumsy', vid);
+        line = this.drawTruthLineUnblocked(smooth ? 'deflectSmooth' : 'deflectClumsy', vid) ||
+          `"I'm not getting into that."`;
         doubt.evidence.push(`confronted (day ${day()}) — deflected${smooth ? ', smoothly' : ''}`);
         try { this.bumpTrust(vid, -3); this.remember(vid, 'deflected', 'dodged a confrontation'); } catch (e) {}
       } else {
         // COUNTER-ATTACK
         outcome = 'attacked';
-        line = this.drawTruthLine('attacks', vid);
+        line = this.drawTruthLineUnblocked('attacks', vid) ||
+          `"Say that again and see what happens."`;
         doubt.evidence.push(`confronted (day ${day()}) — turned hostile`);
         // REFUSAL (detective break-it 2026-10-09, widened 2026-10-10): they
         // walk away from confrontation for 2 days — villager-level, not
@@ -1743,7 +1780,8 @@ try { this.noteTrialDeed('catch_3_lies', 1); } catch (e2) {}
 
       if (confessedThisSitting) {
         outcome = 'deflected';
-        line = this.drawTruthLine('staleConfessed', vid);
+        line = this.drawTruthLineUnblocked('staleConfessed', vid) ||
+          `"That one's told already. Ask me something else."`;
         doubt.evidence.push(`confronted (day ${day()}) — already confessed this sitting`);
         try { this.bumpTrust(vid, -3); this.remember(vid, 'deflected', 'would not confess twice in one sitting'); } catch (e) { console.warn('truth confess guard', e); }
       } else if (roll < confessP) {
@@ -1763,7 +1801,7 @@ try { this.noteTrialDeed('catch_3_lies', 1); } catch (e2) {}
             });
           } else if (this.ledgerAdd) this.ledgerAdd('exposed', 1);
         } catch (e) { console.warn('truth exposed ledger', e); }
-        line = this.drawTruthLine('theftConfess', vid, { first, what });
+        line = this.drawTruthLineUnblocked('theftConfess', vid, { first, what });
         if (!line) line = `"It was me. ${what} — I'm sorry."`;
         this.resolveDoubt(doubtId, `confessed: stole ${what} (day ${t.day})`);
 // TRIAL DEED (longsim abilities r4): you caught a lie — they confessed.
@@ -1781,13 +1819,15 @@ try { this.noteTrialDeed('catch_3_lies', 1); } catch (e2) {}
         // DEFLECTION — the doubt stays open; the evidence grows.
         outcome = 'deflected';
         const smooth = dark && dark.kind === 'malicious';
-        line = this.drawTruthLine(smooth ? 'deflectSmooth' : 'deflectClumsy', vid);
+        line = this.drawTruthLineUnblocked(smooth ? 'deflectSmooth' : 'deflectClumsy', vid) ||
+          `"I'm not getting into that."`;
         doubt.evidence.push(`confronted (day ${day()}) — deflected`);
         try { this.bumpTrust(vid, -3); this.remember(vid, 'deflected', 'dodged a theft accusation'); } catch (e) {}
       } else {
         // COUNTER-ATTACK
         outcome = 'attacked';
-        line = this.drawTruthLine('attacks', vid);
+        line = this.drawTruthLineUnblocked('attacks', vid) ||
+          `"Say that again and see what happens."`;
         doubt.evidence.push(`confronted (day ${day()}) — turned hostile`);
         // REFUSAL (detective break-it 2026-10-09, widened 2026-10-10 to
         // villager-level): see confrontDoubt.

@@ -1,0 +1,40 @@
+
+PRE-DEATH d40: bearer <redacted>, topTrust=[{"id":"Dakota","t":93},{"id":"Aldo","t":92},{"id":"Larry","t":90},{"id":"Maureen","t":90}], roster=12
+INH readable=true scripted=true deadItems=13 distinct=11 transferred=3 vanished=1 keptPlants=22 inheritedPlants=1 keptSkills=3 inheritedSkills=14 succTrustPre=93 succTrustPost=62
+PARITY readable=true equal=true inherited=[] pre=["bloodhound","lucky_rock","trophy_room"] post=["bloodhound","lucky_rock","trophy_room"]
+DEATH d40 (the expedition, scripted): Bessie -> Dakota | passed=true lin=true mo=true trust=62 vouchers=9
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=3 vanished=1 of 11 distinct dead-bearer items
+  CONVO d+3 with Larry (refused=false)
+  CONVO d+3 with Maureen (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Maureen (refused=false)
+  CONVO d+7 with Aldo (refused=false)
+  CONVO d+14 with Maureen (refused=false)
+  CONVO d+14 with Tashi (refused=false)
+  BOND-CONVO d+14 with Ines (depth=3 v=86 refused=false)
+  CONVO d+30 with Aldo (refused=false)
+  CONVO d+30 with Aroha (refused=false)
+  CONVO d+45 with Aldo (refused=false)
+  CONVO d+45 with Aroha (refused=false)
+  CONVO d+53 with Aroha (refused=false)
+  CONVO d+53 with Miguel (refused=false)
+  CONVO d+64 with Tashi (refused=false)
+  CONVO d+64 with Aroha (refused=false)
+
+FUNERAL: deathBeat=6 recover=1 vouch=1 (eligible=9) echo=0 organicBurial={"respects":false,"bury":false} halfRation=5
+
+MEAL-GATE: audited=70 violations=0 noMealDays=3 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=71 signals={"levelUp":true,"systemVoice":54,"offerLines":77,"codexPlantsDelta":38,"codexSkillsDelta":15,"codexAbilitiesDelta":5,"xpDelta":175,"any":true} pantry 91467->18970
+TRUST-DIALS: office 62->90 (+28, climb) | villageMean 74.8->91.3 (+16.5, climb) | ge60 9->9 | movers>=5: [{"id":"Ines","from":8,"to":66,"delta":58},{"id":"Aroha","from":72,"to":100,"delta":28},{"id":"Tashi","from":75,"to":100,"delta":25},{"id":"Miguel","from":78,"to":100,"delta":22},{"id":"Ava","from":70,"to":90,"delta":20},{"id":"Chloe","from":83,"to":92,"delta":9}]
+DEED-LEDGER: calls=23 summary={"donateToPantry":{"calls":16,"ok":16,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"giveFood":{"calls":7,"ok":7,"deltaSum":28,"deltaN":7,"positive":7,"meanDelta":4}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=false(echoMentions=0 (convo=0, say=0)) m4=true m5=manual | endDay=111 alive=10 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=71
+T-METRICS: t1=true(panels=d+0,d+8,d+14,d+30,d+71) t2=true(deedCalls=23) trustVerdict={"readable":true,"officeMantle":62,"officeLast":90,"officeDelta":28,"officeClass":"climb","villageMantle":74.8,"villageLast":91.3,"villageDelta":16.5,"villageClass":"climb","villageGe60Mantle":9,"villageGe60Last":9,"movers":[{"id":"Ines","from":8,"to":66,"delta":58},{"id":"Aroha","from":72,"to":100,"delta":28},{"id":"Tashi","from":75,"to":100,"delta":25},{"id":"Miguel","from":78,"to":100,"delta":22},{"id":"Ava","from":70,"to":90,"delta":20},{"id":"Chloe","from":83,"to":92,"delta":9}]}
+E6/CALLCHECK: e6={"callMoves":8,"withCensus":8,"chainHandoffs":1,"trustMoves":7} callCheck={"dailyMoveDays":8,"callMoveDays":8,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=2 (v2=2, excludedLoot=0))
+E7/R47: e7={"trustMoves":7,"soloOffice":5,"soloOfficeDeltas":[1,1,1,2,2],"soloBearerDeltaExact":[1,1,1,2,2],"singleMoverBearer":1,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":1,"both":6,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":0,"v2":2,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":1,"known":1,"unknown":0} e3={"dailyDays":71,"moves":8}

@@ -1,0 +1,44 @@
+
+PRE-DEATH d42: bearer <redacted>, topTrust=[{"id":"Declan","t":90},{"id":"Wanjiru","t":90},{"id":"Liam","t":90},{"id":"Gilberto","t":88}], roster=11
+INH readable=true scripted=true deadItems=17 distinct=16 transferred=2 vanished=3 keptPlants=19 inheritedPlants=3 keptSkills=9 inheritedSkills=9 succTrustPre=88 succTrustPost=62
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","echo_location"] post=["beast_calm","echo_location"]
+DEATH d42 (the expedition, scripted): Domingo -> Gilberto | passed=true lin=true mo=true trust=62 vouchers=7
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=12 vanished=3 of 16 distinct dead-bearer items
+  CONVO d+3 with Wanjiru (refused=false)
+  CONVO d+3 with Liam (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  BOND-CONVO d+3 with Tashi (depth=2 v=50 refused=false)
+  CONVO d+7 with Wanjiru (refused=false)
+  CONVO d+7 with Liam (refused=false)
+  CONVO d+14 with Wanjiru (refused=false)
+  CONVO d+14 with Liam (refused=false)
+  BOND-CONVO d+14 with Tashi (depth=2 v=50 refused=false)
+  CONVO d+30 with Wanjiru (refused=false)
+  CONVO d+30 with Liam (refused=false)
+  CONVO d+45 with Wanjiru (refused=false)
+  CONVO d+45 with Liam (refused=false)
+  CONVO d+53 with Tashi (refused=false)
+  CONVO d+53 with Declan (refused=false)
+  NEWCOMER-PROBE d+63 with Ivy (arrived d+63, trust=25 refused=false)
+  CONVO d+64 with Inci (refused=false)
+  CONVO d+64 with Wanjiru (refused=false)
+
+FUNERAL: deathBeat=10 recover=1 vouch=1 (eligible=7) echo=1 organicBurial={"respects":false,"bury":false} halfRation=4
+
+MEAL-GATE: audited=70 violations=1 noMealDays=2 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+  VIOLATION d+70: Chantal trust=81 kcal=1052 halfVoice=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":78,"offerLines":41,"codexPlantsDelta":34,"codexSkillsDelta":20,"codexAbilitiesDelta":13,"xpDelta":99,"any":true} pantry 29940->0
+TRUST-DIALS: office 62->81 (+19, climb) | villageMean 74.8->64.5 (-10.3, fall) | ge60 7->2 | movers>=5: [{"id":"Priya","from":73,"to":90,"delta":17},{"id":"Tashi","from":86,"to":91,"delta":5}]
+DEED-LEDGER: calls=3 summary={"giveFood":{"calls":3,"ok":3,"deltaSum":7,"deltaN":3,"positive":1,"meanDelta":2.33}}
+
+IDENTITY TRIPS: raw=1 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=false(echoMentions=1 (convo=1, say=0)) m4=true m5=manual | endDay=112 alive=5 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=false dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=3) trustVerdict={"readable":true,"officeMantle":62,"officeLast":81,"officeDelta":19,"officeClass":"climb","villageMantle":74.8,"villageLast":64.5,"villageDelta":-10.3,"villageClass":"fall","villageGe60Mantle":7,"villageGe60Last":2,"movers":[{"id":"Priya","from":73,"to":90,"delta":17},{"id":"Tashi","from":86,"to":91,"delta":5}]}
+E6/CALLCHECK: e6={"callMoves":5,"withCensus":5,"chainHandoffs":3,"trustMoves":2} callCheck={"dailyMoveDays":5,"callMoveDays":5,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=2 (v2=3, excludedLoot=1))
+E7/R47: e7={"trustMoves":2,"soloOffice":2,"soloOfficeDeltas":[1,1],"soloBearerDeltaExact":[1,1],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":1,"deed-only":0,"both":1,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":1,"v2":3,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":5,"known":5,"unknown":0} e3={"dailyDays":71,"moves":5}
+pilot exit=0
