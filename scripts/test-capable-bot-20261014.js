@@ -177,7 +177,14 @@ async function main() {
       equippedWeapon: () => ({ range: 1 }),
       findPath: (sx, sy, tx, ty) => { const out = []; let x = sx; while (x !== tx) { x += Math.sign(tx - x); out.push([x, sy]); } return out; },
       tbTerrainCost: () => 1,
-      tbPlayerMove: (x, y) => { moves.push([x, y]); return true; },
+      // r127 contract (journey-landing): beastStrikeTarget accepts a move
+      // only when the scholar's position actually changes, so the stub
+      // must move the player the way the real engine does — a tbPlayerMove
+      // that returns true without moving is the moderator-block case and
+      // correctly counts as no move. tbIsPlayerTurn present (it is the
+      // player's turn in this fixture).
+      tbIsPlayerTurn: () => true,
+      tbPlayerMove: (x, y) => { moves.push([x, y]); p.mx = x; p.my = y; return true; },
       tbPlayerStrike: () => true,
     };
     const f = { fighters: [{ key: 'm1', alive: true, mx: 7, my: 4 }] };

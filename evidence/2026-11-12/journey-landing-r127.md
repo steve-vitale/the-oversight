@@ -71,15 +71,23 @@ BEFORE movedCells 97, AFTER2 97 (wood 32→31, the only task delta — RNG-strea
 ## Village assessment (plain words)
 Ten villages, all still standing at day 28 (10–12 people each from 12 starters; 6 villagers lost across the ten, none to starvation). The System arrived on day 8 everywhere. People are learning: 40 villagers picked up a brand-new skill from nothing, and practice moved competence in 97 cells. Favors move: 32 asked, 6 kept, 7 delivered, 6 hauled from far ground. Pantries are thin on half the villages (5 of 10 under 2000 kcal per person at day 28) but nobody starved. The naming debate is alive; three monster meats tested safe in most villages (30 tests, no second-tasting of the same meat). On 1146, the scholar fought the redactor for 13 rounds, struck it seven times — and then spent the last three rounds stepping toward the edge tile (8,3) and going nowhere while the redactor kept hitting and the ally Wanjiru died beside them. The fight was lost; the scholar lived. That stuck walk is the run's one live combat wound, and it is not the one this run fixed.
 
-## People check (M5) — PENDING (read while the gate runs)
+## People check (M5) — read in full: PASS, senseless 0
+- **1148 d9, James (19 turns, 26 entries):** the worst repeat case on BEFORE, now clean on AFTER2 — FIVE subject changes, FIVE DIFFERENT bridge lines ("Yeah? What's up?", "Okay, I'm all ears.", "Right — go on, I'm listening.", "Alright, I'm listening. What's next?", "Sure — what's on your mind?"), zero repeats. The sitting itself: James opens "Can we talk? ... Like people used to."; sketches maps ("Don't go there after rain. And this one's worth the walk."); the party invite is refused honestly by the System ("You don't really KNOW James yet. Talk to them first — the party UI needs a person, not a stranger." Trust 19/20); the goal thread lands ("Ignorance got us here. Knowledge gets us out."); wind-down: "The scariest thing isn't what happened. It's that we don't know what happened." Naming debate at the end. Want stays curious stage 3, unestablished.
+- **1142 d6, Dmitri (24 turns, 31 entries):** SIX subject changes, SIX distinct bridges (three small — "Alright, I'm listening. What's next?", "Go ahead — you've got my attention.", "Yeah? What's up?", "Okay, I'm all ears." — plus two personal: "That's me, I guess. What's on your mind, as it were?" with a voice closer, "Enough about me — you've got something on your mind, I can tell."). Real content throughout: Dmitri misses "Denver rain. Specific rain. I'm allowed to be specific."; his fear: "Don't laugh. Being a burden."; his goal: "Hungry people make bad decisions. Fed people can think."; wind-down: "A hungry village makes bad decisions. I've seen it. Keep bellies full, keep heads clear." Coherent, human, no fabricated shared history. (The confront item — "You said something odd the other day" — is offered from turn 0 in both sittings and never taken; the driver never picks it. An open thread, not a defect.)
+- **Commit-offer (M-PR1/M-PR2):** AFTER2 sittings=20 (from the r107 analyzer): offered 16, picked 16, promised 12, stated refusals honest ("I'm out on the road, away from Haven — no dawn meet while I'm out"). M-PR1: per-seed never-offered ≤1 (1148 d8 + 1150 d10 unestablished). M-PR2: 100% of established offers resolve.
 
 ## Reachable / fun / winnable
 - **Reachable:** yes — System d8 on all seeds; 32 favors asked, 6 kept, 7 delivered; chains complete from far ground; practice moves; the naming debate fires; the small-pool repeats are gone.
-- **Fun:** yes — PENDING the transcript read; the numbers say sittings run clean (0 verbatim-repeat flags on AFTER2).
+- **Fun:** yes — the two worst repeat sittings now read like people (Dmitri's Denver rain, his fear of being a burden, his fed-people-think goal; James's map sketch and "the scariest thing is that we don't know"); 0 verbatim-repeat flags on AFTER2; the evening chain pays off instead of stranding.
 - **Winnable:** leg 0, no win expected; the chain toward it is intact (practice 97 cells, kills 24.6/seed, kept chains 6). The combat-play weakness is now precisely located (four unchecked `tbPlayerMove` call sites, one live stuck-flee reproduction) rather than vaguely "the scholar never strikes."
 
 ## Telemetry
-PENDING (run after the gate; baseline `telemetry-baselines/landing-split.json`, metrics systemDay,villagerDeaths,monsterKills,folTelemetry.fires,starvAutopsies).
+`node scripts/telemetry-check.js --baseline .../telemetry-baselines/landing-split.json --current '.../landing-r127-after/journey-landing-r62-census-*.json' --metrics systemDay,villagerDeaths,monsterKills,folTelemetry.fires,starvAutopsies`:
+- LOUD: systemDay 33 → 80 (+142%) — seed-count artifact: 80 is the sum over 10 seeds (mean 8.0; baseline 8.25 over 4 seeds). First contact d8 on every seed, unchanged.
+- LOUD: monsterKills 24 → 246 (+925%) — seed-count artifact (10 vs 4 seeds) on a baseline that predates the current driver's fight count. Per-seed mean 24.6 (r126: 33.4 — the base move lowered the kill rate; the strike-fix-only AFTER v1 was byte-identical to BEFORE, so this is not a fix effect).
+- LOUD: folTelemetry.fires 0 → 15 — the follow-volunteer signal postdates the r66 baseline. A new signal, not a regression.
+- villagerDeaths and starvAutopsies quiet.
+Same 3 LOUD lines as r123–r126, all explained. Baseline NOT rolled (panel-size-dependent sums; rolling would bake in a size mismatch).
 
 ## Metric review
 - **Q1's metric went vacuous on a moved base.** The defect (1151 d28) existed on r126's base and does not exist on this base — seed 1151 has no scholar fights at all now. The metric as written ("ZERO such fights on AFTER") cannot distinguish a working fix from an absent defect. Next run: the metric must require the defect to reproduce on BEFORE first (as r126's Q1 did with the pilot gate), or the fix must be judged by its unit proof + a targeted reproduction (a seed where the approach actually fails — the scan found none in 20 fights across two bands; the approach path fails rarely because the scholar usually strikes from range). The wider move-result finding (flee/dodge sites) is the live question now, not the approach path.
@@ -94,7 +102,8 @@ PENDING (run after the gate; baseline `telemetry-baselines/landing-split.json`, 
 - Pilot gate PASS (with the documented base-move deviation). Panels 10/10 both sides; scan 10/10 + focused AFTER 3/3.
 
 ## What changed (commit set)
-- `scripts/policies/competent.js` (Q1 fix)
+- `scripts/policies/competent.js` (Q1 fix; plus gate repair: `tbIsPlayerTurn` guard made existence-guarded, house pattern — a stub Game without the function no longer reads as "not the player's turn")
+- `scripts/test-capable-bot-20261014.js` (section-5 fixture updated for the r127 contract: stub `tbPlayerMove` now moves the player the way the real engine does, `tbIsPlayerTurn: () => true` declared; assertions UNCHANGED)
 - `scripts/policies/competent-r126.js` (new, frozen baseline)
 - `scripts/test-journey-landing-r127-strike-fallback.js` (new)
 - `scripts/test-journey-landing-r127-small-bridge.js` (new)
@@ -108,7 +117,8 @@ PENDING (run after the gate; baseline `telemetry-baselines/landing-split.json`, 
 No `[needs-eyes]` — the Q2 fix is dialogue wording (4 new bridge lines, same voice); the Q1 fix is sim-policy only. No game-rule change.
 
 ## Gate / merge (closeout)
-- Gate: PENDING — `node scripts/check.js --quick` in the worktree (see below).
+- Gate (first run): `node scripts/check.js --quick` in the worktree — **334 passed, 6 failed in 616s.** Failures: `test-measurement-proof-update.js` + `test-measurement-workflow.js` STANDING (identical assertions failed on r126's gate); `test-phone-frame-proof.js` STANDING (identical 3 assertions, r126 too); `test-living-garden-deed-attainment.js` + `test-one-person-army-deed-attainment.js` both killed at the 120s per-script cap (exit null, 120.1s) — slow-by-design multi-seed godpath tests, standalone living-garden still progressing through seeds at 300s (slow, not hung; same timeout class as r126's trust-observer); `test-capable-bot-20261014.js` **NEW, caused by my r127 fix** (section 5, 2 failures): (a) my `tbIsPlayerTurn` guard was written `!Game.tbIsPlayerTurn || !Game.tbIsPlayerTurn()` — a stub Game without the function reads as "not the player's turn", so the loop broke before the first move; (b) the section-5 fixture's `tbPlayerMove` returned true without moving the player — exactly the moderator-block case the new position check correctly rejects. Repair: guard → `Game.tbIsPlayerTurn && !Game.tbIsPlayerTurn()` (real-engine behavior unchanged); fixture's `tbPlayerMove` now moves `p` and declares `tbIsPlayerTurn: () => true`; assertions UNCHANGED (no loosening). Standalone re-run: **40 passed, 0 failed** (was 38/2). r127 proof tests re-run green after the guard change. Gate log: evidence/2026-11-12/journey-landing-r127-gate.log.
+- Gate (re-run after repair): PENDING — result below when it lands.
 - Merge: `git merge --ff-only journey-landing` in main tree (READ-ONLY); verify `git merge-base --is-ancestor journey-landing HEAD` before releasing. Release + reap + verify main tree clean. Do NOT bump/push/verify live — ship loop owns that. Report "merged locally, pending ship".
 
 ## Carried items (for r128 / owning runs)

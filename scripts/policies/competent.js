@@ -2361,7 +2361,12 @@ function beastStrikeTarget(Game, f, ctx, p, px, py, tgt, endTurn) {
       cands.sort((a, b) => (a[2] - b[2]) || (a[0] - b[0]) || (a[1] - b[1]));
       let moved = false;
       for (const [bx, by] of cands) {
-        if (!Game.tbIsPlayerTurn || !Game.tbIsPlayerTurn()) break;
+        // Existence-guarded (house pattern, cf. :3816): a harness/fake
+        // without tbIsPlayerTurn is NOT "not the player's turn" — break
+        // only when the engine says so. (r127 gate: the unguarded form
+        // broke the loop before the first move in test-capable-bot's stub
+        // Game, which has no tbIsPlayerTurn.)
+        if (Game.tbIsPlayerTurn && !Game.tbIsPlayerTurn()) break;
         // STEP, DON'T TELEPORT (capable bot 2026-10-14): the main strike
         // path got this fix in r6, this one didn't — tbPlayerMove refuses a
         // destination past this turn's movement ("Too far"), so a far trick
