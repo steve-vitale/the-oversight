@@ -1,0 +1,84 @@
+=== r133-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Luna (gen_td3tfqg) occ=Chef --
+OPENING: "I asked Wanjiru about whether you're angry — Wanjiru's gone. Are you angry? At whoever did this. At the sky. At anything."
+YOU: [ans:q_angry:a_yes] "Furious. Most days."
+THEM: "Good. Anger's fuel. Just — point it somewhere useful."
+YOU: [goon] "Take your time."
+THEM: Whatever warmth was building cools to politeness.
+YOU: [goon] "Take your time."
+THEM: "Anger's a fire — useful if you cook with it, deadly if you sleep next to it. I cook with mine. Most days. Just... be straight with me."
+YOU: [goon] "Take your time."
+THEM: "Come get air with me. I need to think out loud."
+INVITE-ANSWER trust=92
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: On the way, Luna stops and actually teaches you something — how they read a slope for water, how their grandmother did it. (Knowledge, freely given. The Codex notes it.)
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Between us — Still on whether you're angry."
+YOU: [goon] "Take your time."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [goon] "Take your time."
+THEM: "What's the most useful thing you've learned since we got here?"
+closing: "Sorry. I need a minute."
+
+-- Torill (gen_b2cej63) occ=mechanic --
+OPENING: "Don't mind me. Today's just heavy."
+YOU: [dlg:comfort] "You alright?"
+THEM: "Thanks. ...Thanks for saying that."
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "You want to know about that? Okay." "The seedlings Marcus touched are twice the size of mine. Same soil. Same water."
+YOU: [goon] "I'm here. Go on."
+THEM: Something eases in their shoulders. They're really talking to you now.
+YOU: [dlg:more] "Go on."
+THEM: "Did you hear? Luna won Gauntlet on the cameras. People are still talking about it."
+YOU: [dlg:react] (listen)
+THEM: They nod slowly, not quite done, not quite continuing.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the gossip."
+YOU: [goon] "I'm here. Go on."
+THEM: "Okay. We'll pick this up later."
+YOU: [agree] "You're right."
+THEM: "That's how I see it too."
+(ended by engine)
+
+-- Riku (gen_392mlaz) occ=crossing guard --
+OPENING: "They'd tell me to keep working. So I'm working. That's the whole plan."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: "I buried this before the Scattering. Seemed stupid to keep it secret." Riku digs up a wrapped bundle — food, still good. (+1189 kcal to the pantry.)
+YOU: [dlg:comfort] "Are you okay?"
+THEM: A long exhale. "I'll get there. Just needed a minute where I didn't have to be fine."
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Leave Yuki alone. They're harmless. Weird, but harmless."
+YOU: [goon] "Take your time."
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [dlg:more] "Go on."
+THEM: "Lucas hums at the beans and they climb faster. Laugh if you want. I've watched."
+YOU: [dlg:react] (listen)
+THEM: "Did you hear? Luna won Gauntlet on the cameras. People are still talking about it."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That's what I heard, anyway. What's up?"
+YOU: [ask:spread_rumor] "You'll want to hear this. It's about someone."
+THEM: "Huh. Let me think about that." Riku leans in. "Oh? Who are we talking about?"
+closing: "I'll be okay. Don't worry about me. Worry about... actually, don't worry at all."
+
+-- Lucas (lucas_brown) occ=Police officer --
+OPENING: "Never mind the creek water run — we got it handled. Thanks anyway."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Never mind me. What were you going to say?"
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Good question." "Amina? A Midwife, back before. Solid person."
+YOU: [goon] "I'm here. Go on."
+THEM: Their tone levels out — courteous, careful, further away.
+YOU: [goon] "I'm here. Go on."
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+INVITE-ANSWER trust=93
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: You walk to the trap line with Lucas. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+YOU: [dlg:more] "Tell me more."
+THEM: "Riku walked right up to that snarling stray. It went quiet. QUIET."
+YOU: [dlg:react] (listen)
+THEM: "So." They look at the fire for a moment.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the gossip."
+closing: "I need to walk a bit. I'll be by the fire when I'm ready."

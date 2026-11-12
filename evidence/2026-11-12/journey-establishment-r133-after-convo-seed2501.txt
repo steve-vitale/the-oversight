@@ -1,0 +1,78 @@
+=== r133-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Eric (gen_qbhy4gz) occ=ER nurse --
+OPENING: "About your useful old-life skills — What's something from your old life that's actually useful here?"
+YOU: [ans:q_before_skill:a_tell] "Patience. Sounds dumb. But waiting — really waiting, without fidgeting — that's
+THEM: "Not dumb at all. The people who can't wait are the ones who make mistakes. You're an asset."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: The ease drains out of it, a little.
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "Being an ER nurse taught me to read people fast — who's lying, who's scared, who needs a job. Turns out that's a survival skill. Who knew."
+YOU: [dlg:doubt] "That doesn't quite add up."
+THEM: "...What's that supposed to mean?" Their voice goes careful.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on your useful old-life skills. Good talking."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: The conversation cools to something businesslike.
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Okay. Yeah. I trust you."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "I should get back to it."
+
+-- DeShawn (gen_ojxwvw5) occ=fishing guide --
+OPENING: "About that warning — I keep turning it over."
+YOU: [dlg:details] "Tell me."
+THEM: "You've seen what's out there. I'm just saying — the treeline at dusk. Don't."
+YOU: [dlg:heed] "I hear you. I'll watch myself."
+THEM: "Good. I mean it — watch yourself out there."
+YOU: [dlg:react] "Noted."
+THEM: "So." They look at the fire for a moment.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Never mind me. What were you going to say?"
+YOU: [ask:gossip] "What's everyone saying? Give me everything."
+THEM: "You want to know about that? Okay." "Ivy is back. Walked in like they'd never left."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "Come see what I found. You won't believe it."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: DeShawn has been stockpiling where nobody looks. "Take half. You've got the hands for it." (+4 wood, +4 fiber to the village stash.)
+closing: "Take care of yourself."
+
+-- Larry (gen_9y2g2n8) occ=Dentist --
+OPENING: "Can I tell you something? Before the scattering, I froze when it mattered. I think about it every day."
+YOU: [secret:promise] "That stays between us."
+THEM: "I… I needed someone to know — just one person. Thank you for being that person."
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Wild Strawberry — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "Do you believe in anything? Now, I mean. After everything."
+YOU: [gq:yn:yes] "Yes."
+THEM: "I see." They take a moment to think about your answer.
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "I should go. You know where to find me."
+YOU: [silence] (say nothing)
+THEM: You say nothing. Neither do they, for a while — and it's fine.
+(ended by engine)
+
+-- Saengkaew (gen_bba2k9y) occ=dockworker --
+OPENING: "About what happened to my taken kin — You talk to it -- the System. Have you ever asked? About the taken -- about Aibek?"
+YOU: [gq:yn:yes] "Yes."
+THEM: They nod. "Okay."
+YOU: [goon] "Wait, what? Go on —"
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:more] "What do you remember?"
+THEM: "It's my son, Aibek. Asked if the taken ones were bad. I said no. He asked if they were boring. I did not answer. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [goon] "Wait, what? Go on —"
+THEM: "Come see what I found. You won't believe it."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: "I buried this before the Scattering. Seemed stupid to keep it secret." Saengkaew digs up a wrapped bundle — food, still good. (+1208 kcal to the pantry.)
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one is Water Chestnut. Look at the leaf, feel the stem, breathe it in. It'll stick."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Yaupon Holly — crush the leaf, smell it, taste the stem. That's how you know it."
+closing: "Good talk."

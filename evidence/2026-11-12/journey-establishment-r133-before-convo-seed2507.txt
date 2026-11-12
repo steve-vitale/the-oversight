@@ -1,0 +1,81 @@
+=== r133-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Easton (gen_bnutvt4) occ=Beekeeper --
+OPENING: "The cistern's nearly dry — 3 liters left. I need someone to haul water with me at first light. Two of us, half the trips. Will you come?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: You need to be right next to your partner, same side of the Haven door, to help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Out on the road, away from Haven. A dawn meet's not something I can promise while I'm out — when I'm back, find me, and we'll set it then."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one is Dog Rose Hip. Look at the leaf, feel the stem, breathe it in. It'll stick."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Hickory Nuts — crush the leaf, smell it, taste the stem. That's how you know it."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that water haul."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That can wait — it isn't going anywhere. What's on your mind?"
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "You want to know about that? Okay." "People are talking about me. Take it for what it's worth."
+YOU: [dlg:more] "Tell me more."
+THEM: "Marcus? An electrician, back before. Solid person."
+closing: "Steady as she goes. See you at dinner."
+
+-- Luna (gen_td3tfqg) occ=Chef --
+OPENING: "About whether you're staying — Are you going to stay? With us. For real."
+YOU: [ans:q_stay:a_tell] "Yeah. I am. I didn't expect to say that, but yeah."
+THEM: Something eases in their shoulders. "Good. We're better with you here. I mean that."
+YOU: [goon] "Go on. I'm listening."
+THEM: The warmth pulls back a notch. They're weighing something.
+YOU: [goon] "Go on. I'm listening."
+THEM: "I stay where I'm useful. Right now that's here. Columbus, Ohio is a direction, not a plan. Here is a plan, even if it's a hard one."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on whether you're staying."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Alright. But I'm not carrying your stuff."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Look, forget it. You wanted something?"
+YOU: [ask:personal] "I'd like to know you. Properly, this time."
+THEM: "Good question." "My chef instincts keep firing at the wrong things. Old wiring, new world."
+YOU: [dlg:more] "I’m listening."
+THEM: "I think about who I was in Columbus, Ohio and it feels like reading about a stranger."
+closing: "Good talking. We'll figure it out."
+
+-- Rafael (gen_w5pkfgy) occ=Sailor --
+OPENING: "About the creek water run — still need hands. Are you in?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Your partner is inside the Haven hall. Go through the door to meet them.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Never mind me. What were you going to say?"
+YOU: [ask:personal] "I'd like to know you. Properly, this time."
+THEM: "Good question." "The nights are the hardest. Days, you're busy. Nights, you're just... with it all."
+YOU: [goon] "Go on. I'm listening."
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [dlg:more] "I’m listening."
+THEM: "People ask what I did before. I was a sailor. Now I'm... whatever today needs."
+YOU: [dlg:react] (listen)
+THEM: "Anyway." A small smile.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on your story."
+closing: "Go easy today, okay? The world's hard enough."
+
+-- Torill (gen_b2cej63) occ=mechanic --
+OPENING: "About that news I was bursting to share — Have you heard? No? Good, I get to tell you first."
+YOU: [gq:yn:yes] "Yes."
+THEM: "All right. Thank you for telling me."
+YOU: [goon] "Go on. I'm listening."
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [dlg:more] "What happened?"
+THEM: "Okay, so — Rafael? A Sailor, back before. Solid person. Don't say I told you."
+YOU: [goon] "Go on. I'm listening."
+THEM: "Help me haul something back? Too much for one."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Halfway to the cache spot, Torill freezes. Fresh tracks — big. "We go back now. Quietly." You do. The wild, reminding you.
+YOU: [dlg:react] "No kidding."
+THEM: "You feel it too, right? The air around the fire. Something's building."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that news."
+YOU: [goon] "Go on. I'm listening."
+THEM: "I should go. You know where to find me."

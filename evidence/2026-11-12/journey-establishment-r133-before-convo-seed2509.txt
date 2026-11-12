@@ -1,0 +1,82 @@
+=== r133-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Benjamin (gen_4m9reuh) occ=emergency dispatcher --
+OPENING: "About the funniest thing you've seen — Okay, real question: what's the funniest thing you've seen since we got here? I desperately need it."
+YOU: [ans:q_laugh:a_story] (tell them something funny)
+THEM: They laugh — really laugh, the first real one you've heard in days. "Okay. Okay, that's good. I needed that."
+YOU: [goon] "Keep going."
+THEM: They pull back half a step — not leaving, just... further.
+YOU: [goon] "Keep going."
+THEM: "You know what — There's a laugh I keep hearing in my head — not anyone here, just from before. Sometimes I borrow it. I'll be hauling water and laugh at nothing, and for a second it's like the old world left the door open a crack."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the funniest thing you've seen."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway — that's my problem, not yours. What did you want?"
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Good question." "Sanne? A Vintner, back before. Solid person."
+YOU: [dlg:more] "Go on."
+THEM: "Nopparat walked right up to that snarling stray. It went quiet. QUIET."
+closing: "Right. Back to it."
+
+-- Ashanti (gen_snbn5ty) occ=Rancher --
+OPENING: "About the creek water run — I hate to ask twice, but it's still open. Will you?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Stand beside your partner first — same side of the Haven door — then help.
+YOU: [dlg:details] "Tell me why you need this."
+THEM: "0 liters. That's today's drinking water, and then we're boiling creek water and hoping. We walk together and each carry two liters back. Creek water still needs boiling."
+YOU: [dlg:cant] "I can’t right now."
+THEM: "Right. I get it." A beat — and then the subject is closed. They won't raise it again.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that water haul."
+YOU: [goon] "And?"
+THEM: Their tone levels out — courteous, careful, further away.
+YOU: [goon] "And?"
+THEM: "What got you through the first week? The very first days."
+YOU: [deflect_q] (change the subject)
+THEM: "Okay." Something shutters, just slightly.
+YOU: [goon] "And?"
+THEM: A small chill settles between you. They're choosing words more carefully.
+closing: "Good talking. We'll figure it out."
+
+-- Priya (gen_a510ar6) occ=mason --
+OPENING: "What do you miss most? From before."
+YOU: [ans:q_miss:a_food] "A real hot meal."
+THEM: "God. Yes. I dream about soup. Actual soup, with a spoon. — or so they tell me."
+YOU: [goon] "Keep going."
+THEM: "Hot showers. Not the big things — the small, stupid, perfect things. Columbus, Ohio in the morning, coffee going, nobody trying to kill me. I miss being bored."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Sure — Still on what you miss most."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Look, forget it. You wanted something?"
+YOU: [ask:personal] "Who are you, then?"
+THEM: "Good question." "I keep the good moments in a mental box. Today goes in the box. Just so you know."
+YOU: [dlg:more] "I’m listening."
+THEM: "The hardest part isn't the hunger or the cold. It's not knowing if anyone else made it."
+YOU: [dlg:react] (listen)
+THEM: "Someone has to stay hopeful, right? Might as well be me. I'm good at faking it till it's real."
+YOU: [silence] "..."
+THEM: A comfortable quiet settles. They smile a little, and let it be.
+closing: "Steady as she goes. See you at dinner."
+
+-- Eduardo (gen_ey7f6i9) occ=physical therapy aide --
+OPENING: "Can we talk?" Eduardo sits down near you. "Just... talk. Like people used to."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Eduardo has been stockpiling where nobody looks. "Take half. You've got the hands for it." (+4 wood, +4 fiber to the village stash.)
+YOU: [teach] "Watch. This matters."
+THEM: You show them Staghorn Sumac — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Out there? I'd rather not die today, thanks."
+YOU: [dlg:more] "I’m listening."
+THEM: "What's your first memory? Like, ever. The earliest thing."
+YOU: [deflect_q] (change the subject)
+THEM: "...Sorry, lost my train of thought."
+YOU: [goon] "And?"
+THEM: "When's the last time you really laughed?"
+YOU: [ans:q_laugh_memory:a_deflect] "Laughing feels wrong now."
+THEM: "It feels wrong because it matters. The wrong-feeling things are usually the important ones."
+YOU: [goon] "And?"
+THEM: "Maybe — Three days ago. Someone dropped a whole basket of tubers and we just stood there laughing. It wasn't even funny. It was the standing there."
+closing: "I'm glad we talked. I think. I'm still deciding."

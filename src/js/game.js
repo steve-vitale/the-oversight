@@ -7403,7 +7403,22 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             // across whoever cooks, so the grant now pays the work done,
             // not the visit. The same XP askSpecialist grants; the skill
             // it buys is specialistSkill's self-taught ladder (5 XP -> 1).
-            try { this.grantFoodXpCredit(person, 'preserver', n); } catch (e) {}
+            // r133 2026-11-12 unit cap (N=2; r132 judged the call-level
+            // cap NO-GO — the racer preserves ~3 batches on the FIRST
+            // resolution of most days, so fuel is units/day, not
+            // resolutions/day): only the first 2 units of preserver XP
+            // per villager per day count (foodXpDay.preserverUnits,
+            // reset when the day rolls via foodXpDay.preserver). Later
+            // batches still preserve food — only specialist XP is
+            // capped. A first resolution preserving nothing leaves the
+            // day's budget open (the cap is keyed to the grant event).
+            try {
+              const _pday = (this.state.scholar || {}).day || 1;
+              person.foodXpDay = person.foodXpDay || {};
+              if (person.foodXpDay.preserver !== _pday) { person.foodXpDay.preserver = _pday; person.foodXpDay.preserverUnits = 0; }
+              const _grant = Math.max(0, Math.min(n, 2 - (person.foodXpDay.preserverUnits || 0)));
+              if (_grant > 0) { person.foodXpDay.preserverUnits = (person.foodXpDay.preserverUnits || 0) + _grant; this.grantFoodXpCredit(person, 'preserver', _grant); }
+            } catch (e) {}
           } else if (racksFull && eligible.length) {
             // RACKSVOICE (establishment r20 2026-10-20): the cook resolves
             // ~3x/day, so the identical racks-full line fired per resolution

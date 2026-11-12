@@ -1,0 +1,82 @@
+=== r133-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Dominic (gen_8408u7a) occ=programmer --
+OPENING: "It's quiet today. Wrong kind of quiet."
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "You're kind. Don't let this place change that. That is all."
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Good question." "People are saying things. About you. ...I'd watch how you act around the fire."
+YOU: [goon] "I'm here. Go on."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [dlg:more] "Go on."
+THEM: "People are talking about Marcus. Take it for what it's worth. Not that it matters."
+YOU: [dlg:react] (listen)
+THEM: "Anyway." A small smile.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the gossip."
+YOU: [goon] "I'm here. Go on."
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "With you leading? ...Give me a day to think."
+closing: "I should — yeah. Later."
+
+-- Deborah (gen_i4656h8) occ=Midwife --
+OPENING: "Okay, but what about Every laugh out there feels wrong today. Then I feel wrong for thinking it."
+YOU: [dlg:comfort] "You alright?"
+THEM: "I… Most days I don't think about it. Today I am. Appreciate you noticing."
+YOU: [ask:gossip] "Any news around the fire? My ears aren't what they were."
+THEM: "You want to know about that? Okay." "Jovan drank the creek water straight. No boiling. Nothing happened. Nothing. …if that makes sense."
+YOU: [goon] "Take your time."
+THEM: Something eases in their shoulders. They're really talking to you now.
+YOU: [dlg:more] "I’m listening."
+THEM: "Between us — People are saying things. About you. ...I'd watch how you act around the fire."
+YOU: [dlg:react] (listen)
+THEM: "Did you hear? You won The Quiet Room on the cameras. People are still talking about it."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the gossip. No time to waste."
+YOU: [goon] "Take your time."
+THEM: "Anyway — I should get going."
+YOU: [agree] "You're right."
+THEM: "Can't argue with that."
+(ended by engine)
+
+-- Karl (gen_y09aq2x) occ=Mortician --
+OPENING: "I asked Stella about the worst thing you've done — Stella's gone. What's the worst thing you've done since the sky changed?"
+YOU: [ans:q_guilty:a_tell] "There's something I regret. I'm not ready to talk about it."
+THEM: No judgment in their face. "We're all doing math that doesn't add up. You're still here. That counts."
+YOU: [goon] "You don't have to say it all at once."
+THEM: Whatever warmth was building cools to politeness.
+YOU: [goon] "You don't have to say it all at once."
+THEM: "I don't answer that one myself. Not yet. Maybe when I've decided whether surviving counts as an excuse or just a reason."
+YOU: [goon] "You don't have to say it all at once."
+THEM: "Come get air with me. I need to think out loud."
+INVITE-ANSWER trust=89
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: You walk to the ridge with Karl. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the worst thing you've done. ...sorry."
+YOU: [goon] "You don't have to say it all at once."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+closing: "Thanks. I just... need some air."
+
+-- Yakov (gen_y7wrngo) occ=postal worker --
+OPENING: "I asked Stella about your plan here — Stella's gone. So what's your plan here? Just... get through it?"
+YOU: [ans:q_plan:a_survive] "One day at a time."
+THEM: "Right, so — Honest. I can work with honest."
+YOU: [goon] "I'm here. Go on."
+THEM: The conversation cools to something businesslike.
+YOU: [goon] "I'm here. Go on."
+THEM: "Mine's simple: learn one useful thing a week. This week it's carpentry. A plan's just a direction you argue with."
+YOU: [goon] "I'm here. Go on."
+THEM: "I've heard good things about Thornfield. We should link with them — we'd be stronger together."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on your plan here."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "...Fine. This had better be worth it."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Never mind me. What were you going to say?"
+YOU: [ask:gossip] "What are people saying? I hear less than I used to."
+THEM: "Good question." "Marcus headed out to find someone."
+closing: "...Thanks for being here. That's all."

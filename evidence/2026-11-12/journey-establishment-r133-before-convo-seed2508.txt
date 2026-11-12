@@ -1,0 +1,78 @@
+=== r133-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Natalia (gen_bgd2sq1) occ=dockworker --
+OPENING: "About this wound — I still haven't found anyone. Any chance?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Stand beside them first — same side of the Haven door — then help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [goon] "I'm listening."
+THEM: "Come see what I found. You won't believe it."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: It's quiet at the hollow. Natalia doesn't say much. Sometimes that's the whole point.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That can wait — it isn't going anywhere. What's on your mind?"
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "You ever notice Desmond? ...I don't know what to make of that. Nobody does."
+YOU: [gq:yn:yes] "Yes."
+THEM: They nod. "Okay."
+YOU: [goon] "Whoa — go on."
+THEM: "I should go. You know where to find me."
+
+-- Petra (petra_novak) occ=glazier --
+OPENING: Petra speaks only 🇵🇱 Polish. No shared words at all — just eyes, hands, and patience.
+«Hej... mówisz po polsku? Nie? ...cholera.»
+(They mime walking — pointing at themselves, then at you, then toward the trap line. The meaning is unmistakable: come with me.)
+YOU: [nv:nod] (nod slowly)
+THEM: «Dokładnie tak. W punkt.» (you catch 'Dokładnie' — exactly) They nod back, slowly.
+YOU: [nv:smile] (smile)
+THEM: «Tego ci nigdy nie zapomnę.» (you catch 'zapomnę' — forget) They smile back, slower this time, like it just landed.
+YOU: [nv:pointself] (point: you, them, together)
+THEM: «Dzięki, że jesteś.» (you catch 'Dzięki' — thanks) You tap your chest, then theirs. Us. They nod, emphatic.
+YOU: [nv:listen] (listen hard — catch words)
+THEM: You listen hard, watching their mouth shape the words. «To ty... jesteś tu szefem?» (you catch 'szefem' — boss)
+YOU: [goon] (watch quietly)
+THEM: A final shared look — you both feel the talk running its course.
+(no pick — winding down)
+(stall menu: leave|nv:nod)
+closing: They press their palms together — thanks, or goodbye, or both. Then turn back to their own thoughts.
+
+-- Xavier (xavier_dubois) occ=lawyer --
+OPENING: "Please — whatever this is, it's getting worse — I'm feverish, a cut gone hot and angry. Can you do anything?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: You need to be right next to them, same side of the Haven door, to help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Thank you. Just — thank you. I'll be here, resting."
+YOU: [goon] "Go on."
+THEM: "Walk with me? I want another pair of eyes on something."
+INVITE-ANSWER trust=3
+YOU: [betrayal:decline] "Not this time."
+THEM: "Another time, then." A small thing, pocketed.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway — that's my problem, not yours. What did you want?"
+YOU: [ask:gossip] "Give me the real gossip. All of it."
+THEM: "Huh. Let me think about that." "I'm not saying there's anything wrong with Desmond. I'm just saying I sleep better with them on the other side of the fire."
+YOU: [goon] "Who told you that?"
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [dlg:more] "I’m listening."
+THEM: "Amina ate something last month that should've killed them. They're fine."
+closing: "I'm going to go stare at something else now."
+
+-- Desmond (desmond_clarke) occ=sign painter --
+OPENING: "This cut — I can't clean it properly one-handed. Could you take a look?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Get to their side of the Haven door and stand next to them — then you can help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Good question." "Did you hear? Petra won Gauntlet on the cameras. People are still talking about it."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Someone should watch your back. Might as well be me."
+YOU: [goon] "Who told you that?"
+THEM: "Okay I really have to move now or I'll explode — talk soon!"
+YOU: [agree] "You're right."
+THEM: "Yes! Exactly! Okay, so what do we DO about it?"
+(ended by engine)

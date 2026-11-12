@@ -1,0 +1,83 @@
+=== r133-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Ray (gen_tshxsb4) occ=Wild food forager --
+OPENING: "About that news I was bursting to share — Have you heard? No? Good, I get to tell you first."
+YOU: [gq:yn:yes] "Yes."
+THEM: "I see." They take a moment to think about your answer.
+YOU: [goon] "Take your time."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "a ridge with a view for miles — walk it with me sometime and you'll know the ground. It's real."
+YOU: [dlg:more] "Go on."
+THEM: "Okay, so — Dante? A lawyer, back before. Solid person. Don't say I told you."
+YOU: [dlg:react] "Huh."
+THEM: "There's a real argument going about what to call that thing. People are heated."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that news. Famous last words."
+YOU: [goon] "Take your time."
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "I don't do parties. ...It's not you. It's the party."
+closing: "I should — yeah. Later."
+
+-- Dante (gen_gg8dt2y) occ=lawyer --
+OPENING: "What's this about? I keep expecting to see them by the fire. Then I remember."
+YOU: [gq:reason:understand] "I want to understand you better."
+THEM: "All right. Thank you for asking."
+YOU: [goon] "I'm here. Go on."
+THEM: Something in them almost softens — then doesn't. Not yet.
+YOU: [goon] "I'm here. Go on."
+THEM: "Come get air with me. I need to think out loud."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: You walk to the ridge with Dante. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+YOU: [dlg:comfort] "You alright?"
+THEM: "You're kind. Don't let this place change that. It'll be fun, probably."
+YOU: [ask:gossip] "Any good gossip? I'm bored."
+THEM: "Good question." "People are saying things. About you. ...I'd watch how you act around the fire. You'd know about that."
+YOU: [goon] "Take your time."
+THEM: Something eases in their shoulders. They're really talking to you now.
+YOU: [dlg:more] "Go on."
+THEM: "People are talking about Ray. Take it for what it's worth."
+closing: "I'll be okay. Don't worry about me. Worry about... actually, don't worry at all."
+
+-- Marama (gen_z93b7g2) occ=ER nurse --
+OPENING: "Every laugh out there feels wrong today. Then I feel wrong for thinking it."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: "Here. I made an extra." Marama presses something into your hand — a decent tool, oiled and kept. (Useful. Keep it.)
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: They shake their head, then nod — both true at once. "Talk to me a bit. That helps more than anything."
+YOU: [ask:gossip] "Any good gossip? I'm bored."
+THEM: "Good question." "The geese chase everyone but Ava. They part for Ava like water."
+YOU: [goon] "Take your time."
+THEM: Something eases in their shoulders. They're really talking to you now.
+YOU: [dlg:more] "Go on."
+THEM: "People are saying things. About you. ...I'd watch how you act around the fire."
+YOU: [dlg:react] (listen)
+THEM: "So." They look at the fire for a moment.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the gossip."
+YOU: [goon] "Take your time."
+THEM: "What's something from your old life that's actually useful here?"
+closing: "Talking helps. Then it hurts. Then it helps again. It's a cycle."
+
+-- Renato (gen_2sfht9j) occ=ESL teacher --
+OPENING: "We gave them a good burial. Doesn't feel like enough, does it?"
+YOU: [teach] "Here, I know this one — let me show you."
+THEM: You show them Wild Strawberry — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+YOU: [ask:gossip] "Any good gossip? I'm bored."
+THEM: "You want to know about that? Okay." "Let me be straight — People are saying things. About you. ...I'd watch how you act around the fire."
+YOU: [dlg:more] "I’m listening."
+THEM: "Marama? An ER nurse, back before. Solid person."
+YOU: [dlg:react] (listen)
+THEM: "Hassan is back. Walked in like they'd never left."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "I'll tell you plain — Still on the gossip."
+YOU: [goon] "I'm here. Go on."
+THEM: Their voice loosens. The guardedness thins.
+YOU: [goon] "I'm here. Go on."
+THEM: "What did you do for fun? Before. The thing you'd do on a perfect Saturday."
+YOU: [ans:q_fun:a_people] "Nothing fancy. Just — people. Being around my people."
+THEM: "The free things. Turns out they were the expensive ones. Anyway."
+closing: "I need to walk a bit. I'll be by the fire when I'm ready."

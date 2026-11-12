@@ -1,0 +1,79 @@
+=== r133-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Andres (gen_jw8p3q0) occ=mason --
+OPENING: "Can I tell you something? I've been skimming extra food. I'm ashamed and I can't stop."
+YOU: [secret:promise] "That stays between us."
+THEM: "Thank you. I needed someone to know, and now someone does. Please keep it there."
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Lamb's Quarters — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+YOU: [alive:want:curious] "What do you want to know? Ask me anything."
+THEM: "What's the kindest thing someone's done for you out here?"
+YOU: [gq:open:take] "I need a moment to think about that."
+THEM: "Take your time."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "I should go. You know where to find me."
+YOU: [agree] "You're right."
+THEM: Nods. "Yeah."
+(ended by engine)
+
+-- Darkhan (gen_6r22e3n) occ=Veterinarian --
+OPENING: You always share. People notice. I notice.
+INVITE-ANSWER trust=26
+YOU: [betrayal:decline] "Not this time."
+THEM: "Another time, then." A small thing, pocketed.
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Lamb's Quarters — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: Their voice loosens. The guardedness thins.
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "White Mulberry — crush the leaf, smell it, taste the stem. That's how you know it."
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "a burned farmhouse — trace it with your finger. That's where it is, and it's real."
+YOU: [dlg:react] (listen)
+THEM: "Anyway." A small smile.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "We were just talking. Nothing important."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: Something eases in their shoulders. They're really talking to you now.
+closing: "Good talk. Don't let it go to your head."
+
+-- Zoltan (zoltan_nagy) occ=Mushroom grower --
+OPENING: "Water's almost gone — 4 liters. I need someone to haul water with me at first light. Two of us, half the trips. Will you come?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Your partner is inside the Haven hall. Go through the door to meet them.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Dawn, then. Bring something to carry — and thank you."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That can wait — it isn't going anywhere. What's on your mind?"
+YOU: [ask:gossip] "Heard anything good? About anyone?"
+THEM: "Huh. Let me think about that." "Darkhan? A Veterinarian, back before. Solid person."
+YOU: [dlg:more] "Go on."
+THEM: "People are saying things. About you. ...I'd watch how you act around the fire."
+YOU: [dlg:react] (listen)
+THEM: "Chloe headed out for water."
+YOU: [goon] "Wait, what? Go on —"
+THEM: "Okay. We'll pick this up later."
+YOU: [silence] (say nothing)
+THEM: You say nothing. Neither do they, for a while — and it's fine.
+(ended by engine)
+
+-- Chloe (chloe_dubois) occ=interpreter --
+OPENING: "Do you ever just need to be alone? Like, really alone?"
+YOU: [ans:q_alone_time:a_tell] "Every day. I go for walks that don't need to happen. Just to breathe my own air
+THEM: "I get it. Solitude's a resource too. Scarcer than food, some days."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "I go to the treeline edge and count my breaths. Ten of them. That's my alone. Then I come back — alone is a luxury, and also a little bit a lie."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "Help me haul something back? Too much for one."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: On the way, Chloe stops and actually teaches you something — how they read a slope for water, how their grandmother did it. (Knowledge, freely given. The Codex notes it.)
+YOU: [dlg:doubt] "That doesn't quite add up."
+THEM: "...What's that supposed to mean?" Their voice goes careful.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on needing to be alone."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: The warmth pulls back a notch. They're weighing something.
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Alright. But I'm not carrying your stuff."
+closing: "Later."

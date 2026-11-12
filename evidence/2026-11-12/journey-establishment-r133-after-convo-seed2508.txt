@@ -1,0 +1,77 @@
+=== r133-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Ellie (gen_9bnfbyg) occ=Beekeeper --
+OPENING: "Have you — sorry. I keep thinking about them."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "Thanks. ...Thanks for saying that."
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "You want to know about that? Okay." "Natalia hums at the beans and they climb faster. Laugh if you want. I've watched. Doesn't matter now."
+YOU: [goon] "I'm here. Go on."
+THEM: They relax, a fraction. This is going well.
+YOU: [dlg:more] "Tell me more."
+THEM: "Did you hear? Natalia just walked away from Haven. Didn't look back."
+YOU: [dlg:react] (listen)
+THEM: "Can I be honest? Funny you should ask." Ellie glances over their shoulder. "Xavier's been polishing that story. The unpolished version: from Brussels, Belgium. Keep my name out of it."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the gossip."
+YOU: [goon] "I'm here. Go on."
+THEM: A warmth settles over the conversation — they lean in a little.
+closing: "Sorry. I need a minute."
+
+-- George (gen_u2fq5a1) occ=electrician --
+OPENING: "About this wound — I hate to ask twice, but it's still open. Will you?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Get to their side of the Haven door and stand next to them — then you can help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway — that's my problem, not yours. What did you want?"
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Huh. Let me think about that." "Did you hear? Natalia just walked away from Haven. Didn't look back."
+YOU: [goon] "Take your time."
+THEM: Their voice loosens. The guardedness thins.
+YOU: [dlg:more] "I’m listening."
+THEM: "Ella? They're fine. We're all a little broken right now."
+YOU: [dlg:react] (listen)
+THEM: "Xavier? A lawyer, back before. Solid person."
+YOU: [goon] "Take your time."
+THEM: "Okay. We'll pick this up later."
+
+-- Natalia (gen_bgd2sq1) occ=dockworker --
+OPENING: "I don't know what to do with my hands today. Do you understand?"
+YOU: [gq:yn:yes] "Yes."
+THEM: "All right. Thank you for telling me."
+YOU: [goon] "You don't have to say it all at once."
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I got lost in it for a second. What did you want to ask?"
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Vasyl always took the burnt piece. Said someone had to. I take it now."
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them White Oak Acorns — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Not right now. I've got my own things to handle."
+YOU: [goon] "What happened next?"
+THEM: "We're done for now. Not done-done. For now."
+
+-- Petra (petra_novak) occ=glazier --
+OPENING: Petra speaks only 🇵🇱 Polish. No shared words at all — just eyes, hands, and patience.
+«Hej... mówisz po polsku? Nie? ...cholera.»
+(They mime walking — pointing at themselves, then at you, then toward the trap line. The meaning is unmistakable: come with me.)
+YOU: [nv:nod] (nod slowly)
+THEM: «Zgadzam się z tobą.» They nod, holding your gaze a beat longer. "Hello?" — they grin, proud of the one English they know.
+YOU: [nv:smile] (smile)
+THEM: «Jesteś dobrym człowiekiem.» (you catch 'dobrym' — good) A grin breaks through, quick and warm.
+YOU: [nv:pointself] (point: you, them, together)
+THEM: «Tego ci nigdy nie zapomnę.» (you catch 'zapomnę' — forget) You press a hand to your own chest, then point at them. Together — they get it.
+YOU: [nv:listen] (listen hard — catch words)
+THEM: You hold still and let the sounds settle. «Masz coś do jedzenia? Cokolwiek?» (you catch 'jedzenia' — food)
+YOU: [goon] (watch quietly)
+THEM: Their gestures slow — the conversation thinning like light at dusk.
+(no pick — winding down)
+(stall menu: leave|nv:nod)
+closing: They press their palms together — thanks, or goodbye, or both. Then turn back to their own thoughts.

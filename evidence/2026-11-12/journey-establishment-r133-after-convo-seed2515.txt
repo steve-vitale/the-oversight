@@ -1,0 +1,81 @@
+=== r133-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Soo (gen_q2yw1p6) occ=piano tuner --
+OPENING: "About what happened to my taken kin — I keep dreaming about rows of pods. Humming. Tell me I'm not the only one."
+YOU: [dlg:more] "Tell me about them."
+THEM: "It's my brother, Heritier. Went up in the Taking with the boring half. He was the funniest person I knew. Their metrics are broken. Some nights I swear I hear them before I sleep -- the pods, rows deep, humming. Then morning comes and I can't say whether it was real."
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person."
+YOU: [goon] "Yeah?"
+THEM: Something eases in their shoulders. They're really talking to you now.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Luna headed out for water. Could be wrong, though."
+YOU: [dlg:react] (listen)
+THEM: "That was me — headed out for water."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Alright. But I'm not carrying your stuff."
+closing: "Good talk."
+
+-- Luna (gen_2en4yoi) occ=glazier --
+OPENING: "About that warning — I keep turning it over."
+YOU: [dlg:details] "Tell me."
+THEM: "You've seen what's out there. I'm just saying — the treeline at dusk. Don't."
+YOU: [dlg:heed] "I hear you. I'll watch myself."
+THEM: "Good. I mean it — watch yourself out there."
+YOU: [dlg:react] "Noted."
+THEM: They nod slowly, not quite done, not quite continuing.
+YOU: [dlg:doubt] "That doesn't quite add up."
+THEM: "...What's that supposed to mean?" Their voice goes careful.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Look, forget it. You wanted something?"
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "You want to know about that? Okay." "Greta? A Sailor, back before. Solid person."
+YOU: [goon] "Who told you that?"
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [goon] "Who told you that?"
+THEM: "I should get back to it."
+
+-- Cheryl (gen_zuyulzy) occ=comic shop owner --
+OPENING: "You talk to it -- the System. Have you ever asked? About the taken -- about Mapula?"
+YOU: [gq:yn:yes] "Yes."
+THEM: "All right. Thank you for telling me."
+YOU: [goon] "Yeah?"
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [dlg:more] "Tell me about them."
+THEM: "It's my older sister, Mapula. Was taken. She raised me more than our mother did. Boring. That is what they wrote down. The pods get into my sleep some nights. Row on row of them, humming like a held note -- and I wake up reaching for something that isn't there."
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person."
+YOU: [goon] "Yeah?"
+THEM: They relax, a fraction. This is going well.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That can wait — it isn't going anywhere. What's on your mind?"
+closing: "See you at the fire."
+
+-- Bilkisu (gen_7yz48t4) occ=Dentist --
+OPENING: "Never mind this wound — we got it handled. Thanks anyway."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Never mind me. What were you going to say?"
+YOU: [ask:personal] "You never really told me your story."
+THEM: "Good question." "Being a dentist feels like a past life. Sometimes I wonder if I dreamed it."
+YOU: [goon] "What else?"
+THEM: Their friendliness thins — still there, just held at arm's length.
+YOU: [goon] "What else?"
+THEM: "Come see what I found. You won't believe it."
+INVITE-ANSWER trust=92
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: You walk to the hollow with Bilkisu. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+YOU: [dlg:more] "Go on."
+THEM: "I've started talking to myself. Myself gives good advice, mostly."
+YOU: [dlg:react] (listen)
+THEM: "I wonder if Lagos, Nigeria looks like this now. Empty. Quiet. Or if it's worse there."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on your story."
+closing: "Alright. Back to work."

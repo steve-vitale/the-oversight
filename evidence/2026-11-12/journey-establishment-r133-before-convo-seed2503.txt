@@ -1,0 +1,83 @@
+=== r133-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Mai (gen_7kzniw9) occ=exterminator --
+OPENING: "Here's the thing: I don't want to be alone with my head right now. That's all. That's the whole thing."
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "I — yeah. It helps, hearing that."
+YOU: [dlg:stay] "I'm not going anywhere."
+THEM: "Careful — that log's hotter than it looks." They shift it with a boot, making space.
+YOU: [dlg:empathize] "I'm here."
+THEM: "Can I be honest? My hands stopped shaking. That's — that's something. Thank you for sitting here."
+YOU: [goon] "And?"
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: It's quiet at the trap line. Mai doesn't say much. Sometimes that's the whole point.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that hard time. Anyway — how are YOU doing?"
+YOU: [gq:howru:bad] "Honestly? Not great."
+THEM: "Yeah. Me too, if I'm honest." A small, real smile.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That can wait — it isn't going anywhere. What's on your mind?"
+closing: "I should get back to it — but this was nice."
+
+-- Otto (gen_vroj36x) occ=crossing guard --
+OPENING: "Got a read on anyone here yet? Who should I be watching?"
+YOU: [ans:q_read:a_honest] "Still figuring everyone out."
+THEM: "Same. But keep your eyes open — some people here are performing, not surviving."
+YOU: [goon] "Keep going."
+THEM: "Watch the quiet ones. Not the loud — the loud tell you everything. The quiet are either thinking or planning, and you can't tell which until it matters."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on your read on people here."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Alright. But I'm not carrying your stuff."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sorry — I shouldn't load that on you. What's up?"
+YOU: [ask:personal] "Who are you, then?"
+THEM: "You want to know about that? Okay." "I don't know you. But you're here, so... we figure it out."
+YOU: [dlg:more] "I’m listening."
+THEM: "If we get through this, I'm never complaining about Mondays again. Sworn oath."
+YOU: [dlg:react] (listen)
+THEM: They nod slowly, not quite done, not quite continuing.
+closing: "Alright. Back to work."
+
+-- Wilhelm (gen_frzzomi) occ=ER nurse --
+OPENING: "About what happened to my taken kin — Have you heard anything? About the taken. The pods. Anything at all."
+YOU: [gq:yn:yes] "Yes."
+THEM: They nod. "Okay."
+YOU: [goon] "And?"
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [dlg:more] "What do you remember?"
+THEM: "It's my brother, Sean. Went up in the Taking with the boring half. He was the funniest person I knew. Their metrics are broken. Some nights I dream about the pods -- rows of them, humming. I wake up and I can't tell if it was a dream or a broadcast."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [goon] "And?"
+THEM: "Walk with me? I want another pair of eyes on something."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: On the way, Wilhelm stops and actually teaches you something — how they read a slope for water, how their grandmother did it. (Knowledge, freely given. The Codex notes it.)
+YOU: [goon] "And?"
+THEM: "I should go. You know where to find me."
+YOU: [agree] "You're right."
+THEM: "Can't argue with that."
+(ended by engine)
+
+-- Laura (gen_84je2ae) occ=Mortician --
+OPENING: I don't want to be in charge. I want us to survive. Those look the same from the outside.
+YOU: [dlg:more] "Tell me more."
+THEM: "If I don't step up, someone worse will. That's not ambition, that's arithmetic."
+YOU: [dlg:react] (listen)
+THEM: "Power's a trap. Responsibility's a duty. I know the difference."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on wanting to be in charge. Think, then act."
+YOU: [goon] "Keep going."
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [goon] "Keep going."
+THEM: A beat. Then, as if shaking something off:
+YOU: [goon] "Keep going."
+THEM: "Do you dream about before? Or is it all — this — now?"
+YOU: [ans:q_dream:a_before] "Before. Every night. It's the only place it still exists."
+THEM: "Then it's not gone. Not really. Keep going back."
+YOU: [goon] "Keep going."
+THEM: "Monterrey, Mexico, always. Same dream: I'm walking home and the street keeps getting longer. I wake up tired, like I actually walked it…"
+closing: "Think about what I said."

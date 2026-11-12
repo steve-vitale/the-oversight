@@ -1,0 +1,76 @@
+=== r133-after PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Benjamin (gen_4m9reuh) occ=emergency dispatcher --
+OPENING: "They'd tell me to keep working. So I'm working. That's the whole plan."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+YOU: [dlg:comfort] "You alright?"
+THEM: "You're kind. Don't let this place change that."
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Huh. Let me think about that." "People are talking about Priya. Take it for what it's worth."
+YOU: [goon] "Take your time."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [dlg:more] "Go on."
+THEM: "Priya headed out to forage."
+YOU: [dlg:react] (listen)
+THEM: "Something's off with Tariq. I mentioned it to the others and they went quiet, which tells you everything."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the gossip."
+YOU: [goon] "Take your time."
+THEM: They relax, a fraction. This is going well.
+closing: "...Thanks for being here. That's all."
+
+-- Ashanti (gen_snbn5ty) occ=Rancher --
+OPENING: "Can we talk?" Ashanti sits down near you. "Just... talk. Like people used to."
+INVITE-ANSWER trust=91
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: At the ridge the ground is torn up. Something was here, recently, and it wasn't careful. Ashanti's hand finds your sleeve. You leave together, faster than you came.
+YOU: [teach] "Let me show you — I did this for a living."
+THEM: You show them Staghorn Sumac — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "There's more, but that's for another fire."
+YOU: [goon] "I'm here. Go on."
+THEM: Something eases in their shoulders. They're really talking to you now.
+YOU: [dlg:more] "Go on."
+THEM: "You talk to it -- the System. Have you ever asked? About the taken -- about Jessica?"
+YOU: [dlg:cant] "I don't know anything. I'm sorry."
+THEM: "Yeah. Sorry. It's -- never mind. Forget I said anything." They look away, embarrassed at having wanted something.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person. You'd know about that."
+YOU: [goon] "I'm here. Go on."
+THEM: "Alright. Catch you later."
+
+-- Priya (gen_a510ar6) occ=mason --
+OPENING: "Can I be honest? Every laugh out there feels wrong today. Then I feel wrong for thinking it."
+YOU: [dlg:comfort] "You alright?"
+THEM: "I — yeah. It helps, hearing that."
+YOU: [ask:personal] "I'd like to know you better, if that's alright."
+THEM: "Good question." "Someone has to stay hopeful, right? Might as well be me. I'm good at faking it till it's real."
+YOU: [goon] "Take your time."
+THEM: They hear the warmth in it. They're not ready to let it in.
+YOU: [dlg:more] "Go on."
+THEM: "I keep the good moments in a mental box. Today goes in the box. Just so you know."
+YOU: [dlg:react] (listen)
+THEM: They nod slowly, not quite done, not quite continuing.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Between us — Still on your story."
+YOU: [goon] "Take your time."
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [goon] "Take your time."
+THEM: "Alright — I should get back to it."
+
+-- Sanne (sanne_bakker) occ=Vintner --
+OPENING: Sanne speaks only 🇩🇪 German. You hear them in English — your extended mind translating live, cheerful and slightly off. They hear only your English, and understand none of it. Eyes, hands, and patience — one direction only.
+«Hallo! Du... wie heißt du?» → "Hi! You... what's your name?" "Okay?" — they grin, proud of the one English they know.
+(They mime walking — pointing at themselves, then at you, then toward the cache spot. The meaning is unmistakable: come with me.)
+YOU: [nv:nod] (nod slowly)
+THEM: «Richtig, du hast recht.» → "You're right." They nod, holding your gaze a beat longer. Something about the way you tilt your head — hearing them twice, once in their voice and once in the System’s. It unsettles them, a little.
+YOU: [nv:smile] (smile)
+THEM: «Du bist ein guter Mensch.» → "You're a good person. (Family units: IMPORTANT! The audience loves family!)" A smile, tired but real.
+YOU: [nv:pointself] (point: you, them, together)
+THEM: «Alles wird gut. Wirklich.» → "Everything will be okay. Really." You point at yourself, then at them, then at the fire. Together. They get it.
+YOU: [nv:listen] (listen hard — catch words)
+THEM: You lean in, catching the rise and fall of it. «Wo schlaft man hier? Ist es sicher?» → "Where does one sleep here? Is it safe?"
+(no pick)
+(stall menu: nv:nod|nv:smile|nv:pointself|nv:listen|leave)
+closing: They press their palms together — thanks, or goodbye, or both. Then turn back to their own thoughts.
