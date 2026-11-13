@@ -43249,7 +43249,21 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // stunned: no move, no new attack. (Pending telegraph was canceled by the scream.)
       if (m.stunned > 0) {
         m.stunned -= 1;
-        this.say(`${this.encSubject(m)} is still frozen from your scream.`);
+        // FREEZE-LINE DEDUP (sim-freezeline-a 2026-11-13): War Cry
+        // re-applies a 1-turn stun every round, so this line fired once
+        // per monster per round (9x in one day on 190396/190398, 64x on
+        // old-base 190407). The bellow already announces each fresh stun
+        // ("N of them flinch, losing their next turn"), so the skipped
+        // turn needs saying only once per monster per fight. The stun
+        // itself is untouched — the monster still loses the turn; only
+        // the narration dedups. Per-application dedup could not fix this:
+        // every stun source is 1 turn, so each round IS a fresh
+        // application. Flag lives on the fight object (fresh per fight),
+        // keyed by fighter key, so a new fight re-announces.
+        if (!f || !f._stunAnnounced || !f._stunAnnounced[m.key]) {
+          this.say(`${this.encSubject(m)} is still frozen from your scream.`);
+          if (f) { (f._stunAnnounced = f._stunAnnounced || {})[m.key] = true; }
+        }
         if (this.tbEndCheck()) return;
         return;
       }
