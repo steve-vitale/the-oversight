@@ -2256,12 +2256,22 @@
         if ((m.kind !== 'monster' && m.kind !== 'hostile') || !m.alive || m.fled) continue;
         var d = Math.abs((m.mx || 0) - (p.mx || 0)) + Math.abs((m.my || 0) - (p.my || 0));
         if (d <= 1) {
-          game.tbDamage(m.key, stored, 'your retribution', 'p', { quiet: true });
+          // RETRIBUTION-ORDER (sim-retribution-b 2026-11-13): same
+          // inversion class as #2303 (strike-after-fall) — the falls
+          // line tbDamage says inline lands BEFORE this shockwave's
+          // summary line. Defer the death narration out of tbDamage
+          // and flush it right after the RETRIBUTION say, so the blow
+          // precedes its kills. Mechanics untouched; the death-throes
+          // line stays inline deliberately (see tbDamage).
+          game.tbDamage(m.key, stored, 'your retribution', 'p', { quiet: true, deferDeathLines: true });
           hit++;
         }
       }
       if (!hit) game.say('The shockwave finds no one adjacent — the stored fury dissipates into the air.');
-      else game.say(`RETRIBUTION: ${stored} damage erupts outward — ${hit} ${hit === 1 ? 'enemy' : 'enemies'} caught in it.`);
+      else {
+        game.say(`RETRIBUTION: ${stored} damage erupts outward — ${hit} ${hit === 1 ? 'enemy' : 'enemies'} caught in it.`);
+        game.tbFlushDeathLines();
+      }
       try { game.audioEvent('buildaround', { path: 'shieldbearer', id: 'retribution' }); } catch (e) {}
       return true;
     },
