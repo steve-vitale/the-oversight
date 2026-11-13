@@ -1,0 +1,114 @@
+FAIL A gate-exists-mirrors-teach-block — agencyFieldTeachable must check teachable monsters, places, and the monsters>=2 fallback
+PASS B gate-checks-untaught-plant
+PASS C choices-calls-gate-before-field-ask
+FAIL D teachplant-spends-only-on-delivery — t.shift() must come AFTER the no-untaught-plant return, so a dry teach burns nothing
+PASS E expedition-path-untouched
+PASS F closer-pool-untouched
+PASS G npcfieldlessons-untouched
+PASS H driver-is-r134-clone-tag-rename
+PASS J analyzer-go-corpus-q2a
+PASS K analyzer-go-corpus-q2b
+PASS L analyzer-go-corpus-q2c
+PASS M analyzer-go-corpus-q2-verdict
+PASS N analyzer-nogo-corpus-q2a
+PASS O analyzer-nogo-corpus-q2-verdict
+FAIL P live-seed-2601-green — live-seed subprocess failed: Command failed: /usr/bin/node /home/hatch/workspace/worktrees/journey-establishment/scripts/test-journey-establishment-r135-fieldgate.js --live-seed 2601
+PASS live-seed-2601-loads
+PASS live-seed-2601-monster-teachable
+PASS live-seed-2601-monster-ask-offered
+PASS live-seed-2601-monster-lesson-taught
+MONSTER LESSON seed 2601: "Dog-shaped silence at the treeline — No telegraph you can hear. It hunts at night — give the dark a wide berth."
+PASS live-seed-2601-places-teachable
+PASS live-seed-2601-places-ask-offered
+PASS live-seed-2601-places-lesson-taught
+PLACE LESSON seed 2601: "a ridge with a view for miles — walk it with me sometime and you'll know the ground. It's real."
+FAIL live-seed-2601-plant-teachable
+FAIL live-seed-2601-plant-ask-offered
+PASS live-seed-2601-plant-lesson-taught
+PASS live-seed-2601-plant-entry-spent
+PLANT LESSON seed 2601: "Groundnut — crush the leaf, smell it, taste the stem. That's how you know it."
+PASS live-seed-2601-dry-not-teachable
+PASS live-seed-2601-dry-ask-not-offered
+PASS live-seed-2601-dry-entry-kept
+PASS live-seed-2601-dry-teachplant-false-no-burn
+PASS live-seed-2601-generic-teachable
+FAIL live-seed-2601-generic-ask-offered
+PASS live-seed-2601-generic-line-not-closer
+GENERIC LINE seed 2601: "Saw things with too many joints. Give them room. That's the whole lesson."
+PASS live-seed-2601-expedition-ask-offered
+PASS live-seed-2601-expedition-field-not-offered
+PASS live-seed-2601-expedition-not-teachable
+PASS live-seed-2601-nothing-not-teachable
+PASS live-seed-2601-nothing-ask-not-offered
+
+20 passed, 3 failed
+
+FAIL P live-seed-2602-green — live-seed subprocess failed: Command failed: /usr/bin/node /home/hatch/workspace/worktrees/journey-establishment/scripts/test-journey-establishment-r135-fieldgate.js --live-seed 2602
+PASS live-seed-2602-loads
+PASS live-seed-2602-monster-teachable
+PASS live-seed-2602-monster-ask-offered
+PASS live-seed-2602-monster-lesson-taught
+MONSTER LESSON seed 2602: "Dog-shaped silence at the treeline — No telegraph you can hear. It hunts at night — give the dark a wide berth."
+PASS live-seed-2602-places-teachable
+PASS live-seed-2602-places-ask-offered
+PASS live-seed-2602-places-lesson-taught
+PLACE LESSON seed 2602: "a ridge with a view for miles — remember the shape of it. It's real, and it's worth knowing."
+FAIL live-seed-2602-plant-teachable
+FAIL live-seed-2602-plant-ask-offered
+PASS live-seed-2602-plant-lesson-taught
+PASS live-seed-2602-plant-entry-spent
+PLANT LESSON seed 2602: "Pineapple — crush the leaf, smell it, taste the stem. That's how you know it."
+PASS live-seed-2602-dry-not-teachable
+PASS live-seed-2602-dry-ask-not-offered
+PASS live-seed-2602-dry-entry-kept
+PASS live-seed-2602-dry-teachplant-false-no-burn
+PASS live-seed-2602-generic-teachable
+FAIL live-seed-2602-generic-ask-offered
+PASS live-seed-2602-generic-line-not-closer
+GENERIC LINE seed 2602: "Saw things with too many joints. Give them room. That's the whole lesson."
+PASS live-seed-2602-expedition-ask-offered
+PASS live-seed-2602-expedition-field-not-offered
+PASS live-seed-2602-expedition-not-teachable
+PASS live-seed-2602-nothing-not-teachable
+PASS live-seed-2602-nothing-ask-not-offered
+
+20 passed, 3 failed
+
+FAIL P live-seed-2603-green — live-seed subprocess failed: Command failed: /usr/bin/node /home/hatch/workspace/worktrees/journey-establishment/scripts/test-journey-establishment-r135-fieldgate.js --live-seed 2603
+PASS live-seed-2603-loads
+PASS live-seed-2603-monster-teachable
+PASS live-seed-2603-monster-ask-offered
+PASS live-seed-2603-monster-lesson-taught
+MONSTER LESSON seed 2603: "Dog-shaped silence at the treeline — No telegraph you can hear. It hunts at night — give the dark a wide berth."
+PASS live-seed-2603-places-teachable
+PASS live-seed-2603-places-ask-offered
+PASS live-seed-2603-places-lesson-taught
+PLACE LESSON seed 2603: "a ridge with a view for miles — walk it with me sometime and you'll know the ground. It's real."
+FAIL live-seed-2603-plant-teachable
+FAIL live-seed-2603-plant-ask-offered
+PASS live-seed-2603-plant-lesson-taught
+PASS live-seed-2603-plant-entry-spent
+PLANT LESSON seed 2603: "Bamboo Shoot. Remember the leaf, the stem, the smell — that's the whole of it."
+PASS live-seed-2603-dry-not-teachable
+PASS live-seed-2603-dry-ask-not-offered
+PASS live-seed-2603-dry-entry-kept
+PASS live-seed-2603-dry-teachplant-false-no-burn
+PASS live-seed-2603-generic-teachable
+FAIL live-seed-2603-generic-ask-offered
+PASS live-seed-2603-generic-line-not-closer
+GENERIC LINE seed 2603: "Saw things with too many joints. Give them room. That's the whole lesson."
+PASS live-seed-2603-expedition-ask-offered
+PASS live-seed-2603-expedition-field-not-offered
+PASS live-seed-2603-expedition-not-teachable
+PASS live-seed-2603-nothing-not-teachable
+PASS live-seed-2603-nothing-ask-not-offered
+
+20 passed, 3 failed
+
+PASS Q det-gate-both-runs
+PASS R det-gate-outputs-identical
+PASS S det-gate-funnel-practice-logs-identical
+PASS T det-gate-snapshots-present
+PASS U det-gate-units-fields-present
+
+17 passed, 5 failed

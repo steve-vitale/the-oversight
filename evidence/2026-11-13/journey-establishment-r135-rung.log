@@ -1,0 +1,43 @@
+Q1 RUNG-2/3 VISIBILITY (rung panel = r134-after, 16/16 seeds):
+  rung math (code): rung1 foodXp>=5, rung2 >=15, rung3 >=30; above 5 XP accrues 2:1, so rung2 needs 25 granting units from 0, rung3 needs 55.
+  d1-d14: butcher R2X=0 R3X=0 fx15=0 fx30=0 XP/worker med=2 max=7 n=16 | cook R2X=0 R3X=5 fx15=0 fx30=0 XP/worker med=5 max=9 n=40 | preserver R2X=1 R3X=2 fx15=0 fx30=0 XP/worker med=4 max=6 n=21 | builder R2X=1 R3X=0 fx15=0 fx30=0 XP/worker med=8 max=8 n=6
+  d14-d28: butcher R2X=0 R3X=1 fx15=2 fx30=0 XP/worker med=3 max=19 n=20 | cook R2X=7 R3X=1 fx15=12 fx30=0 XP/worker med=7 max=8 n=41 | preserver R2X=2 R3X=7 fx15=3 fx30=0 XP/worker med=6 max=12 n=29 | builder R2X=1 R3X=0 fx15=2 fx30=0 XP/worker med=7 max=9 n=7
+  d28-dEnd: butcher R2X=1 R3X=0 fx15=1 fx30=0 XP/worker med=2 max=9 n=16 | cook R2X=13 R3X=0 fx15=14 fx30=0 XP/worker med=5 max=8 n=38 | preserver R2X=1 R3X=4 fx15=4 fx30=0 XP/worker med=3 max=9 n=23 | builder R2X=3 R3X=0 fx15=4 fx30=0 XP/worker med=7 max=8 n=7
+  panel totals: spec 1->2 R2X=30 | spec 2->3 R3X=20 | foodXp 15-crossings=42 | foodXp 30-crossings=0
+  NEAR-MISS-2 (5-14 foodXp at d28, still <15 at dEnd): {'butcher': 10, 'cook': 13, 'preserver': 16, 'spotter': 0, 'builder': 1} total=40
+    near-miss-2: seed 2501 DeShawn cook foodXp d28=7 dEnd=7
+    near-miss-2: seed 2502 Dominic cook foodXp d28=8 dEnd=8
+    near-miss-2: seed 2503 Mai butcher foodXp d28=5 dEnd=7
+    near-miss-2: seed 2503 Van preserver foodXp d28=6 dEnd=10
+    near-miss-2: seed 2503 Aki preserver foodXp d28=5 dEnd=5
+    near-miss-2: seed 2504 Dante cook foodXp d28=9 dEnd=9
+    near-miss-2: seed 2504 Dante preserver foodXp d28=9 dEnd=9
+    near-miss-2: seed 2504 Juan butcher foodXp d28=5 dEnd=8
+    near-miss-2: seed 2504 Wanjiru butcher foodXp d28=5 dEnd=6
+    near-miss-2: seed 2504 Hassan cook foodXp d28=6 dEnd=8
+    near-miss-2: seed 2504 Hassan preserver foodXp d28=7 dEnd=8
+    near-miss-2: seed 2505 Rocco cook foodXp d28=5 dEnd=5
+    near-miss-2: seed 2505 Dehua preserver foodXp d28=11 dEnd=13
+    near-miss-2: seed 2505 Carlos preserver foodXp d28=9 dEnd=10
+    near-miss-2: seed 2506 Sigrun butcher foodXp d28=6 dEnd=7
+    near-miss-2: seed 2507 Luna preserver foodXp d28=6 dEnd=6
+    near-miss-2: seed 2507 Lucas butcher foodXp d28=7 dEnd=7
+    near-miss-2: seed 2507 Marcus cook foodXp d28=12 dEnd=14
+    near-miss-2: seed 2507 Marcus builder foodXp d28=9 dEnd=11
+    near-miss-2: seed 2508 Natalia cook foodXp d28=7 dEnd=9
+  NEAREST to rung 2 at dEnd (5-14 foodXp, per specialty, top 5):
+    butcher: [(14, 2510, 'Vasyl'), (8, 2504, 'Juan'), (7, 2511, 'Lucas'), (7, 2509, 'Ashanti'), (7, 2507, 'Lucas')]
+    cook: [(14, 2507, 'Marcus'), (13, 2514, 'Darkhan'), (12, 2516, 'Joyce'), (12, 2510, 'Mabel'), (9, 2508, 'Natalia')]
+    preserver: [(14, 2514, 'Darkhan'), (13, 2505, 'Dehua'), (12, 2510, 'Mabel'), (12, 2509, 'Benjamin'), (11, 2512, 'Carlos')]
+    spotter: []
+    builder: [(11, 2507, 'Marcus')]
+  stall context (r134 panel, same windows):
+    d1-d14: butcher G=43 W=16 NEW=3 | cook G=224 W=40 NEW=24 | preserver G=81 W=21 NEW=4 | builder G=45 W=6 NEW=4
+    d14-d28: butcher G=93 W=20 NEW=10 | cook G=249 W=41 NEW=9 | preserver G=174 W=29 NEW=6 | builder G=50 W=7 NEW=1
+    d28-dEnd: butcher G=44 W=16 NEW=1 | cook G=184 W=38 NEW=2 | preserver G=92 W=23 NEW=2 | builder G=37 W=7 NEW=0
+  Q1 RUNG verdict: R2-REACHABLE (30 spec-2 crossings panel-wide)
+  Q1 R3 (descriptive): 20 spec-3 crossings (expected 0)
+R2X split: self-taught (foodXp>=15 at crossing)=28 | holder (+1 at 5 XP, foodXp<15)=2
+R3X split: self-taught (foodXp>=30 at crossing)=0 | holder (+1 at 5 XP, foodXp<30)=20
+R2 holder sample: [(2507, 'Torill', 'builder', 0, 7), (2514, 'Zoltan', 'preserver', 0, 5)]
+R3 holder sample: [(2501, 'Rosa', 'cook', 0, 7), (2501, 'Rosa', 'preserver', 0, 6), (2501, 'Jorge', 'preserver', 2, 6), (2502, 'Elena', 'cook', 0, 8), (2503, 'Van', 'preserver', 4, 6), (2504, 'Hassan', 'cook', 0, 6)]

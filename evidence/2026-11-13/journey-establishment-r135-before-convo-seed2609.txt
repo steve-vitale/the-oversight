@@ -1,0 +1,85 @@
+=== r135-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Anna (gen_viuw03x) occ=appliance repair tech --
+OPENING: "Never mind this wound — we got it handled. Thanks anyway."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Look, forget it. You wanted something?"
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Chickweed. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Bitter Manioc — crush the leaf, smell it, taste the stem. That's how you know it."
+YOU: [alive:event:show] "The show — did you see it?"
+THEM: "They took Aiman — Cooking With Teeth, on the screens. The whole fire watched. Nobody knew where to look."
+YOU: [goon] "What happened next?"
+THEM: The moment passes without landing. Not yet.
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Pawpaw — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+YOU: [goon] "What happened next?"
+THEM: Something eases in their shoulders. They're really talking to you now.
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "I can't. Not today. Ask me when the work's done."
+closing: "Don't be a stranger."
+
+-- Atlas (gen_0zv41oo) occ=paramedic --
+OPENING: "About what happened to my taken kin — You talk to it -- the System. Have you ever asked? About the taken -- about Joshua?"
+YOU: [gq:yn:yes] "Yes."
+THEM: "All right. Thank you for telling me."
+YOU: [goon] "Yeah?"
+THEM: They take it in and give nothing back. Not yet.
+YOU: [dlg:more] "What do you remember?"
+THEM: "It's my nephew, Joshua. Went with his father in the Taking. The System says the little ones are cozy. I do not know what cozy means at that scale. Some nights I swear I hear them before I sleep -- the pods, rows deep, humming. Then morning comes and I can't say whether it was real."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [goon] "Yeah?"
+THEM: "Come get air with me. I need to think out loud."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: It's quiet at the ridge. Atlas doesn't say much. Sometimes that's the whole point.
+YOU: [goon] "Yeah?"
+THEM: "I should get back to it."
+YOU: [agree] "You're right."
+THEM: "Yeah. That's about right."
+(ended by engine)
+
+-- Hendrik (gen_2ezq8wy) occ=journalist --
+OPENING: "Okay, real question: what's the funniest thing you've seen since we got here? I desperately need it."
+YOU: [ans:q_laugh:a_story] (tell them something funny)
+THEM: They laugh — really laugh, the first real one you've heard in days. "Okay. Okay, that's good. I needed that."
+YOU: [goon] "Go on."
+THEM: "I used to laugh easy, before. Now it has to climb over everything to get out. But when it does — when it actually gets out — it's the most honest thing I do all day. Everything else I'm performing a little. Not that."
+YOU: [goon] "Go on."
+THEM: "Help me haul something back? Too much for one."
+INVITE-ANSWER trust=15
+YOU: [betrayal:decline] "Not this time."
+THEM: "Another time, then." A small thing, pocketed.
+YOU: [goon] "Go on."
+THEM: "trading knowledge — we hadn't finished. Give me a second."
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Pawpaw — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+YOU: [ask:gossip] "What aren't people saying out loud?"
+THEM: "Huh. Let me think about that." "Did you hear? You won Cooking With Teeth on the cameras. People are still talking about it."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "Pedunculate Oak Acorn. Remember the leaf, the stem, the smell — that's the whole of it."
+closing: "Good talk."
+
+-- Aiman (gen_agp7t3n) occ=florist --
+OPENING: Aiman speaks only 🇷🇺 Russian. No shared words at all — just eyes, hands, and patience.
+«Эй... говоришь по-русски? Нет? ...чёрт.» (you catch 'Нет' — no) "Food?" — they grin, proud of the one English they know.
+(They mime walking — pointing at themselves, then at you, then toward the tree line. The meaning is unmistakable: come with me.)
+YOU: [nv:accept] (follow their gesture — go with them)
+THEM: Aiman has been stockpiling where nobody looks. "Take half. You've got the hands for it." (+4 wood, +4 fiber to the village stash.)
+YOU: [nv:nod] (nod slowly)
+THEM: «Это правда. Совершенно верно.» (you catch 'правда' — truth) They nod back, a little quicker this time.
+YOU: [nv:smile] (smile)
+THEM: «Спасибо. Правда, спасибо.» (you catch 'Спасибо' — thanks) A grin breaks through, quick and warm.
+YOU: [nv:pointself] (point: you, them, together)
+THEM: «Я не забуду.» You tap your chest, then theirs. Us. They nod, emphatic.
+YOU: [nv:listen] (listen hard — catch words)
+THEM: You lean in, catching the rise and fall of it. «Сколько дней мы здесь?» (How many days have we been here? — you're fairly sure)
+YOU: [speak_back] (try your Russian)
+THEM: Aiman blinks. Then cracks up. "You said that BEAUTIFULLY. It means nothing like what you think it means." They teach you the right word, still laughing.
+YOU: [goon] (watch quietly)
+THEM: "Alright — I should get back to it."
+(no pick — winding down)
+(stall menu: leave|nv:nod)
+closing: A final nod. They touch their chest, then point at you — a promise without words.

@@ -1094,6 +1094,38 @@
         return !(e.stage === 'observed' || e.stage === 'slain');
       });
     },
+    // agencyFieldTeachable — FIELD-ASK GATE (journey-establishment r135
+    // 2026-11-13): the field ask is offered only when the teach block can
+    // teach something right now. npcFieldLessons counts stale entries
+    // (teachable-plant entries whose plants the player already knows;
+    // fought species already observed/slain in the codex), so the ask
+    // used to fire dry and close with "There's more, but that's for
+    // another fire." — a promise of more when there is nothing more
+    // (r134 panel: 12x; r135-before: 6 of 13 asks). This mirrors the teach
+    // block in agencyTurn exactly (monster > plant > place > generic
+    // monsters>=2 fallback): a teachable monster, a teachable plant AND
+    // an untaught plant in the data pool, a known place, or 2+ fought
+    // species for the generic line. Pure reads, no RNG, no writes — the
+    // menu and the turn see the same state.
+    agencyFieldTeachable(vid) {
+      try {
+        if (this.agencyTeachableMonsters(vid).length) return true;
+        var st = this.agencyState();
+        var k = (st.know[vid] || {});
+        if ((k.places || []).length) return true;
+        if ((k.monsters || 0) >= 2) return true;
+        var t = st.teachable[vid] || [];
+        if (t.length) {
+          var plants = this.data.plants || [];
+          var cx = (this.state.codex || {}).plants || {};
+          for (var i = 0; i < plants.length; i++) {
+            var p = plants[i];
+            if (p && p.id && !((cx[p.id] || {}).level >= 1)) return true;
+          }
+        }
+        return false;
+      } catch (e) { return false; }
+    },
     agencyChoices(vid) {
       try {
         var lessons = this.npcFieldLessons(vid);
@@ -1102,6 +1134,11 @@
         if (v.explorerNews && v.explorerNews[vid] && v.explorerNews[vid].agency) {
           return [{ id: 'agency:ask_expedition', label: '"What did you see out there?"' }];
         }
+        // FIELD-ASK GATE (journey-establishment r135 2026-11-13): an
+        // exhausted topic offers a pivot or exit, not a filler choice
+        // (CONVERSATIONS.md). When nothing is teachable right now, the
+        // field ask is not offered — the villager's other choices stand.
+        if (!this.agencyFieldTeachable(vid)) return [];
         // LABEL HONESTY (journey-establishment r27 2026-10-23): the ask
         // teaches monster > plant > place in priority order, but the old
         // label always promised "from the wild" — a farmhouse or a cellar
@@ -1363,12 +1400,15 @@
       var t = st.teachable[vid] || [];
       st.lastTaughtPlantName = null; // read by agencyTurn for the spoken line
       if (!t.length) return false;
-      t.shift();
       var plants = this.data.plants || [];
       var cx = this.state.codex || {};
       cx.plants = cx.plants || {};
       var cands = plants.filter(function (p) { return p && p.id && !((cx.plants[p.id] || {}).level >= 1); });
       if (!cands.length) return false;
+      // SPEND-ON-DELIVERY (journey-establishment r135 2026-11-13): the
+      // entry is spent only when a lesson actually lands — the old order
+      // shifted first, so a dry teach burned an entry for nothing.
+      t.shift();
       var p = pick(cands);
       // READ THE PLAYER (longsim agency r6 2026-10-12): the teacher sees
       // who's in front of them — hurt, hungry, or green — and frames the

@@ -1,0 +1,84 @@
+=== r135-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Nicole (gen_48aot3c) occ=piano tuner --
+OPENING: "You talk to it -- the System. Have you ever asked? About the taken -- about Anthony?"
+YOU: [gq:yn:yes] "Yes."
+THEM: They nod. "Okay."
+YOU: [goon] "Yeah?"
+THEM: The moment passes without landing. Not yet.
+YOU: [dlg:more] "What do you remember?"
+THEM: "It's my younger brother, Anthony. Went up in the Taking. He cried when the dog died. Boring, they said. I keep his jacket. The pods get into my sleep some nights. Row on row of them, humming like a held note -- and I wake up reaching for something that isn't there."
+YOU: [dlg:commit] "I'll ask it. I promise."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [goon] "Yeah?"
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+INVITE-ANSWER trust=90
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Nicole has been stockpiling where nobody looks. "Take half. You've got the hands for it." (+4 wood, +4 fiber to the village stash.)
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "Lockpick — It sits up. It hunts at night — give the dark a wide berth."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Poison Hemlock. Leaf, stem, smell. You won't forget it now."
+closing: "See you at the fire."
+
+-- Madison (gen_9pde0ly) occ=Vintner --
+OPENING: "What's something you're good at that nobody here knows about?"
+YOU: [ans:q_skill:a_tell] "I'm better with my hands than people expect. You'll see."
+THEM: "Hah. Noted. Filing that under 'extremely useful.' The village needs that."
+YOU: [goon] "Go on."
+THEM: "Can I be honest? I can do husbandry. Not well — well enough that nobody's died from it yet. That's my whole résumé now: nobody's died from it yet."
+YOU: [goon] "Go on."
+THEM: "Come get air with me. I need to think out loud."
+INVITE-ANSWER trust=91
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: You walk to the ridge with Madison. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on what you're good at. Just... be straight with me."
+YOU: [goon] "Go on."
+THEM: They let the words sit there, unanswered.
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Alright. But I'm not carrying your stuff."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That can wait — it isn't going anywhere. What's on your mind?"
+closing: "Good talk. Onward, then."
+
+-- Chester (gen_5gtpmlo) occ=programmer --
+OPENING: "Are you going to stay? With us. For real."
+YOU: [ans:q_stay:a_tell] "Yeah. I am. I didn't expect to say that, but yeah."
+THEM: Something eases in their shoulders. "Good. We're better with you here. I mean that."
+YOU: [goon] "I'm listening."
+THEM: "I stay where I'm useful. Right now that's here. Columbus, Ohio is a direction, not a plan. Here is a plan, even if it's a hard one."
+YOU: [goon] "I'm listening."
+THEM: "Walk with me? I want another pair of eyes on something."
+INVITE-ANSWER trust=87
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: On the way, Chester stops and actually teaches you something — how they read a slope for water, how their grandmother did it. (Knowledge, freely given. The Codex notes it.)
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one is Egusi Melon. Look at the leaf, feel the stem, breathe it in. It'll stick."
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "a cellar full of jars — remember the shape of it. It's real, and it's worth knowing."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Don't laugh yet — Still on whether you're staying."
+YOU: [goon] "I'm listening."
+THEM: They take it in and give nothing back. Not yet.
+closing: "Good. We've got a plan forming. I can feel it."
+
+-- Tshepiso (gen_1rsguz4) occ=rail conductor --
+OPENING: "About this wound — the need hasn't gone anywhere. I'm still asking."
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Finish the fight before helping.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one — Bamboo Shoot. Leaf, stem, smell. You won't forget it now."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one is Gum Acacia. Look at the leaf, feel the stem, breathe it in. It'll stick."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Look, forget it. You wanted something?"
+YOU: [alive:event:show] "The show — did you see it?"
+THEM: "The Price. They just... took Chester. Came back like nothing happened. It wasn't nothing."
+YOU: [teach] "Come here, I want to show you this."
+THEM: You show them Jerusalem Artichoke — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Okay. Yeah. I trust you."
+closing: "Steady as she goes. We'll talk again."

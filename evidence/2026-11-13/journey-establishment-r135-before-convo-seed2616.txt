@@ -1,0 +1,78 @@
+=== r135-before PEOPLE CHECK (4 held convos, end of run; hunt-prep lessons are layer-side, not in these convos) ===
+
+-- Kieran (gen_x1rtssr) occ=lifeguard --
+OPENING: "About the help I asked you for — That night has passed. Let’s leave that request behind."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Forget I said anything. What did you want?"
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "Açaí. Remember the leaf, the stem, the smell — that's the whole of it."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Death Cap. Leaf, stem, smell. You won't forget it now."
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Alma is gone and the world just... continues. That's the part I can't stand."
+YOU: [goon] "And then?"
+THEM: Something in them stays shut, for now.
+YOU: [goon] "And then?"
+THEM: "Is there someone here you don't trust? Be honest."
+YOU: [ans:q_someone:a_tell] "Yeah. I'm not saying who. But yeah."
+THEM: Their eyes flick, just for a second, toward the fire. "Noted. I'll watch too."
+YOU: [goon] "And then?"
+THEM: "I don't distrust anyone exactly — I just haven't finished trusting most of them yet. There's a difference. A slow one."
+closing: "I need to walk a bit. I'll be by the fire when I'm ready."
+
+-- Amina (amina_diallo) occ=Midwife --
+OPENING: "Never mind the sickness I'm fighting — we got it handled. Thanks anyway."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "...Never mind me. What were you going to say?"
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "Since Alma died... I keep expecting to see Alma at the fire. Stupid."
+YOU: [goon] "Go on."
+THEM: Their voice loosens. The guardedness thins.
+YOU: [teach] "Watch. This matters."
+THEM: You show them White Oak Acorns — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+YOU: [goon] "Go on."
+THEM: A warmth settles over the conversation — they lean in a little.
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "I can't. Not today. Ask me when the work's done."
+YOU: [dlg:more] "Go on."
+THEM: "I count portions out loud before eating. It doesn't bring anyone back. It just keeps my hands from shaking."
+YOU: [menu:more] More things to say (1/2)
+THEM: (menu page turned)
+closing: "Talking helps. A little. Thank you."
+
+-- Benoit (benoit_lambert) occ=Baker --
+OPENING: "Have you — sorry. I keep thinking about them."
+YOU: [dlg:comfort] "Hey — you alright?"
+THEM: "You're kind. Don't let this place change that. ...sorry."
+YOU: [ask:gossip] "What are people saying?"
+THEM: "Huh. Let me think about that." "You walked out of The Blood Tithe. Alive. That's the whole story and it's enough."
+YOU: [goon] "You don't have to say it all at once."
+THEM: They hear you out, but something in them stays guarded.
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Yes. Absolutely. I've been hoping you'd ask." (A little too quickly.)
+YOU: [goon] "You don't have to say it all at once."
+THEM: "I've got things to do. People to avoid. You know."
+YOU: [joke] (crack a joke)
+THEM: Doesn't laugh — but something eases, a fraction. "Thanks for trying."
+(ended by engine)
+
+-- Victor (victor_lopez) occ=mason --
+OPENING: "I don't know what to do with my hands today."
+INVITE-ANSWER trust=92
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: Victor shows you where they go to think. "Don't tell the others. Everyone needs one place."
+YOU: [dlg:comfort] "You alright?"
+THEM: "What's this about? Heh. Nobody's asked me that in a while. ...I'm alright. Getting there."
+YOU: [ask:personal] "Your story. Go."
+THEM: "You want to know about that? Okay." "I keep my pack ready. Old mason habit — always be ready to leave the office."
+YOU: [goon] "I'm here. Go on."
+THEM: Something eases in their shoulders. They're really talking to you now.
+YOU: [dlg:more] "Go on."
+THEM: "Do you ever wonder what the aliens eat? Like, do they have potlucks?"
+YOU: [dlg:react] (listen)
+THEM: "Anyway." A small smile.
+YOU: [goon] "I'm here. Go on."
+THEM: "Alright, duty calls. This was a good pause."
+YOU: [joke] (crack a joke)
+THEM: "Almost smiles. "They would've laughed at that."
+(ended by engine)
