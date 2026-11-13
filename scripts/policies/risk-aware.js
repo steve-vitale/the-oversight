@@ -24,7 +24,8 @@
 // participations, FEWER contest deaths/injuries, and a LOWER-OR-EQUAL win rate
 // than competent on the same seeds — the player pays for safety with prizes.
 'use strict';
-const { competent } = require('./competent');
+// r194 COMPETENT_PIN: see capable.js — frozen r127 when pinned, live otherwise.
+const { competent } = require(process.env.COMPETENT_PIN === 'r127' ? './competent-r127' : './competent');
 
 const RISKY = { high: true, extreme: true };
 

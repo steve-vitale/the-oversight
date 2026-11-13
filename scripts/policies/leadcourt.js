@@ -13,7 +13,8 @@
 // it does not cheat: every verb goes through the same engine paths a player
 // clicks, with real pantry costs.
 'use strict';
-const { competent } = require('./competent');
+// r194 COMPETENT_PIN: see capable.js — frozen r127 when pinned, live otherwise.
+const { competent } = require(process.env.COMPETENT_PIN === 'r127' ? './competent-r127' : './competent');
 
 function pantryKcal(Game) {
   try {

@@ -21,7 +21,8 @@
 // competent to isolate "trying for deeds" from "just surviving". Pair with
 // winseek to isolate the table-gate pursuit overhead.
 'use strict';
-const { competent } = require('./competent');
+// r194 COMPETENT_PIN: see capable.js — frozen r127 when pinned, live otherwise.
+const { competent } = require(process.env.COMPETENT_PIN === 'r127' ? './competent-r127' : './competent');
 
 function deedPatrol(Game, ctx) {
   // Mirrors winseek's proven huntPatrol, minus the deed-gate check.

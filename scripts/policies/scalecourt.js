@@ -10,7 +10,8 @@
 // Exists so the day-40+ food economy AT SCALE can be measured: production by
 // source, pantry flow, tribute/pool/tariff in/out, spoilage, nightly draw.
 'use strict';
-const { competent } = require('./competent');
+// r194 COMPETENT_PIN: see capable.js — frozen r127 when pinned, live otherwise.
+const { competent } = require(process.env.COMPETENT_PIN === 'r127' ? './competent-r127' : './competent');
 
 // hop-by-hop honest walk toward (hx,hy): one travelTo per hop, no force,
 // bounded. travelTargets only reaches d<=3, so a single travelTo can't

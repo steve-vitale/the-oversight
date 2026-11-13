@@ -45,7 +45,8 @@
 'use strict';
 const { belongseek } = require('./belongseek');
 const { leadcourt } = require('./leadcourt');
-const { recentGives } = require('./competent');
+// r194 COMPETENT_PIN: see capable.js — frozen r127 when pinned, live otherwise.
+const { recentGives } = require(process.env.COMPETENT_PIN === 'r127' ? './competent-r127' : './competent');
 
 function layerOn() { return process.env.FEASTSCALE_R13 === '1'; }
 

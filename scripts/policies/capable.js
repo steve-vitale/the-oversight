@@ -50,7 +50,9 @@
 // with real fleeing, ability/build effects, Table reach and path spread.
 // Counters on ctx (cap*) are listed in capableSummary().
 'use strict';
-const C = require('./competent');
+// r194 COMPETENT_PIN: the endgame (l) A/B pins the frozen r127 policy.
+// Default (env unset) is the live competent.js — byte-identical behavior.
+const C = require(process.env.COMPETENT_PIN === 'r127' ? './competent-r127' : './competent');
 const {conversationDiagnostics}=require('./conversation-pages');
 const { leadfeast } = require('./feastscale');
 const { harmScore } = require('./risk-aware');
