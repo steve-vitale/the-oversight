@@ -5,3 +5,6 @@ s01 305ae6279 BAD 1/8 median 109d rank RANK_STALL errors 0 (per-seed 117/100/107
 s02 aa5d9ef92 bisect-pick-2 'Merge PR #24 heard-raid-danger-3a06' (38 revisions left, ~5 steps)
 s02 aa5d9ef92 AMBIGUOUS 2/8 median 112d rank RANK_STALL errors 0 (per-seed 71/150/112/54/97/150/112/97 — survivors 190392, 190396; regional 0/8; re-run required per prereg rule, adoption)
 s02r aa5d9ef92 AMBIGUOUS 2/8 median 112d rank RANK_STALL errors 0 (re-run of s02 — per-seed days BYTE-IDENTICAL to first pass 71/150/112/54/97/150/112/97, deaths 688; deterministic harness, so the re-run confirms 2/8 is structural, not noise; recorded AMBIGUOUS, bisect proceeds treating as BAD per prereg)
+s03 7688cb7a4 bisect-pick-3 'Merge PR #10 snippet-stage-direction-guard' (18 revisions left, ~4 steps; merge base d229b58f5 SKIPPED in git machinery — settled BAD 1/8 by mergebase-a, not re-tested; marking it bad inverts git's search to the main line, verified in a scratch repo)
+s03 7688cb7a4 AMBIGUOUS 2/8 median 112d rank RANK_STALL errors 0 (per-seed 71/150/112/54/97/150/112/97 — survivors 190392, 190396; regional 0/8; re-run required per prereg rule)
+s03r 7688cb7a4 AMBIGUOUS 2/8 median 112d rank RANK_STALL errors 0 (re-run of s03 — per-seed days identical, summary identical modulo step id, deaths 688; deterministic harness; recorded AMBIGUOUS, bisect proceeds treating as BAD per prereg)
