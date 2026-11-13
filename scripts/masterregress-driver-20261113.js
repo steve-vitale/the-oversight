@@ -152,7 +152,10 @@ try {
 function refuseUnlessLegOk() {
   const cfg = LEGS[LEG];
   if (!cfg) { console.error('MASTERREGRESS STOP: unknown LEG ' + JSON.stringify(LEG) + ' (want far|merge|near|mergeps|smoke).'); process.exit(2); }
-  if (cfg.anchor && ANCHOR !== cfg.anchor) {
+  // Anchor comparison is by prefix: ANCHOR is the 12-char HEAD while
+  // the leg anchors are 9-char abbreviations (203a32775 vs
+  // 203a327750a2 — a full-string comparison refuses the right base).
+  if (cfg.anchor && ANCHOR.slice(0, cfg.anchor.length) !== cfg.anchor) {
     console.error('MASTERREGRESS STOP: LEG=' + LEG + ' requires anchor ' + cfg.anchor + ' but HEAD is ' + ANCHOR + ' — check out the leg base first.');
     process.exit(2);
   }
