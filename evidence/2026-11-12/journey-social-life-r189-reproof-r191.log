@@ -1,0 +1,100 @@
+REPROOF r191 on rebased d270b1ba4 (master 85f9cbff6) — 2026-11-13T10:15:12Z
+== 14 carried social proof tests ==
+--- scripts/test-journey-social-r172.js ---
+RESULT: PASS — M6 strict/gate divergence exact on the radius-1 ring, bond summary splits correct, offered tally + continuer runs correct, counter fresh/blocked split + settle rollup correct, recap cap tally correct, re-offer + dropped-thread tallies correct, furniture-filtered re-offer + NARR near-dup scan correct
+exit=0
+--- scripts/test-journey-social-r172-narr.js ---
+PASS r172 driver maps transcripts through mapTranscriptEntry at 3 sites
+PASS r172 driver imports mapTranscriptEntry from the r172 helpers
+ALL NARR CHECKS PASSED
+exit=0
+--- scripts/test-journey-social-r172-coach.js ---
+PASS press 3: exactly one coach beat :: coach beats=1
+PASS 3 confrontWindup presses: 3 distinct coach beats (no verbatim repeat in one sitting) :: distinct=3 / 3 :: *You've watched them deflect before — the same smooth sidest | *They've deflected you before. The evidence needs to be heav | *They deflected you last time, and what you have hasn't grow
+ALL PASS
+exit=0
+--- scripts/test-journey-social-r172-coachrepeat.js ---
+PASS transcript holds no verbatim coach repeat in this sitting :: distinct=2 / total=2
+PASS transcript coach beats are exactly the 2 distinct pressed beats :: inTranscript=2 distinct=2
+ALL PASS
+exit=0
+--- scripts/test-journey-social-r172-agree.js ---
+PASS swahili: the 4 new English meanings are present :: missing=
+PASS swahili: every entry is {en,kw,t} and every kw key appears in its t
+ALL PASS
+exit=0
+--- scripts/test-journey-social-r172-confess.js ---
+test-journey-social-r172-confess: ALL PASS
+exit=0
+--- scripts/test-journey-social-r172-confessguard.js ---
+  ok   guard (5b) the confrontation after a volunteered secret deflects
+
+R172 one-confession-per-sitting guard (engine): 17 passed, 0 failed, 0 todo (phase 0)
+exit=0
+--- scripts/test-journey-social-r172-confesswrap.js ---
+  ok   wrap (3) no sitting counts a double confession from this press
+
+R172 confront-wrap records one event per press (driver): 4 passed, 0 failed, 0 todo (phase 0)
+exit=0
+--- scripts/test-journey-social-r179-faceguard.js ---
+  ok   guard (3) a fresh sitting shows a face again
+
+R179 one-face-line-per-sitting guard (engine): 9 passed, 0 failed, 0 todo (phase 0)
+exit=0
+--- scripts/test-journey-social-r180-narrsplit.js ---
+PASS r179 corpus: face verbatim (15)
+
+17 passed, 0 failed
+exit=0
+--- scripts/test-journey-social-r180-favorreq-exit.js ---
+  t6: We're going in circles — You need edible, unspoiled food in your pack. Food in the pantry must be co
+spent[dlg:favor_requirements] after exit: true
+RESULT: GREEN — favor-requirements exits instead of re-serving the escalation
+exit=0
+--- scripts/test-journey-social-r181-proposelabel.js ---
+PASS wrap cites bond-initiation.js:840 (true)
+
+9 passed, 0 failed
+exit=0
+--- scripts/test-journey-social-r181-vendetta.js ---
+PASS 43601: pairsGte4 (0)
+
+30 passed, 0 failed
+exit=0
+--- scripts/test-journey-social-r189-recapempty.js ---
+PASS r181 corpus: recap-empty flags (19)
+
+10 passed, 0 failed
+exit=0
+== 5 check-timeout tests, standalone ==
+--- scripts/godpath/test-living-garden-deed-attainment.js ---
+      }
+    }
+  ]
+}
+exit=0
+--- scripts/godpath/test-occupation-panels.js ---
+  ok   different occupation cohorts cannot be compared as one lever
+  ok   changed offer availability remains visible rather than a fake defeat
+
+occupation panels: 25 passed, 0 failed, 0 todo (phase 0)
+exit=0
+--- scripts/godpath/test-one-person-army-deed-attainment.js ---
+      }
+    }
+  ]
+}
+exit=0
+--- scripts/godpath/test-trust-observer-neutrality.js ---
+  ok   seed 42 random continuation stays exact
+  ok   seed 42 samples retain monotonic exact write boundaries
+
+trust observer neutrality: 6 passed, 0 failed, 0 todo (phase 0)
+exit=0
+--- scripts/test-capable-bot-20261014.js ---
+  ok   conversations held in-sim
+  ok   no policy-side errors
+
+test-capable-bot-20261014: 42 passed, 0 failed, 0 todo (phase 0)
+exit=0
+REPROOF DONE 2026-11-13T10:23:27Z

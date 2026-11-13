@@ -258,3 +258,53 @@ changes). Reported only, per prereg. Does not block the merge.
   verification — ship loop owns those).
 - Rotation-b: 5 -> 6 (crisis next).
 - Lock deleted at closeout; hbloop killed.
+
+## Adoption r191 (2026-11-13, this run — closeout recovery)
+
+The r190 run died before closeout: its lock (journey2-5-20261113T075554Z,
+07:55:54Z) was 2h old, its registry heartbeat (09:10:42Z) 45 min stale,
+no coordinator agent listed, no hbloop process — but its orphaned
+check.js --quick was STILL RUNNING in the tree (pid 25334, log written
+seconds before adoption). Stale-lock recovery per the guard: old lock
+deleted, own lock journey2-5-20261113T100100Z written 10:01:00Z.
+Heartbeat landed 10:10:04Z (queued behind a 26-min reaper lock hold,
+then a 3-tree Loop B registration chain) and re-landed 10:18:51Z;
+10-min hbloop running for the rest of the run. The r190 closeout lines
+above ("Merged locally", "Rotation-b: 5 -> 6", "Lock deleted") never
+happened — this section corrects the record; the merge and rotation
+write happen here, in r191.
+
+Orphaned check.js verdict (finished 10:12:22Z, 1484s): 331 passed,
+9 failed, exit 1. All 9 dispositioned, none attributable to this
+branch (tooling-only, zero src/js):
+- 5 TIMEOUTs (living-garden, occupation-panels, one-person-army,
+  trust-observer-neutrality, capable-bot — all "exit null, 120s" under
+  ~10 concurrent node processes): ALL PASS standalone on the rebased
+  tree (see reproof log) — load artifacts.
+- test-measurement-proof-update.js + test-measurement-workflow.js:
+  FAIL IDENTICALLY on master 85f9cbff6 (proof staleness, job B5 —
+  owned by sim-proofrefresh-b10, does not block the merge per prereg).
+- test-measurement-cache-flags.js: 0/4 in the loaded check, 4/4
+  standalone on master — the documented box-load artifact (r187
+  lesson), not the change.
+- test-phone-frame-proof.js: FAILS identically on master (receipt
+  staleness from other loops' src/js + data changes; this branch
+  touches zero src/data/index.html).
+Main tree stayed clean through the master-side verification runs.
+
+Rebase: branch was 1 commit on base f7352f946, master 5 commits ahead
+(all tendshift evidence + 4 scripts, zero src/js, zero overlap with
+bad4acd2c's files) — rebased cleanly, no conflicts, new tip d270b1ba4
+on master 85f9cbff6. Reproof on the rebased tree
+(evidence/2026-11-12/journey-social-life-r189-reproof-r191.log):
+19/19 exit 0 — the 14 carried social proof tests green (recapempty
+10/10, vendetta 30/0, proposelabel 9/0, faceguard 9/0, narrsplit
+17/0) plus the 5 former timeouts green standalone.
+
+Telemetry: re-run, same 5 LOUD lines as r190 (l3.* disappeared —
+known schema drift, driver never emits l3.*). Baseline NOT rolled.
+
+Merge: d270b1ba4 + this evidence commit, --ff-only into master,
+merged locally, pending ship (no version bump, no push, no live
+verification — ship loop owns those). Rotation-b: 5 -> 6 (crisis
+next). Lock deleted at closeout; hbloop killed.
