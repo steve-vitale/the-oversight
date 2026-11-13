@@ -1,7 +1,7 @@
 # sim-namelessadm-b — finding #2309, NAMELESS ADMISSION LINE (live-play verification + fix)
 
 Arm: sim-namelessadm-b. Base: master 48ed1ffd7 (Lane B journey succession
-r193 adoption) + prereg commit f5b685ee2. Proof test:
+r193 adoption) + prereg commit 36f66dafc. Proof test:
 scripts/test-namelessadm-b.js (20 assertions, proof seed 3). Probe driver:
 scripts/namelessadm-probe-20261113.js. Prereg:
 scripts/sim-namelessadm-b-prereg.md (committed BEFORE any judged sim).
@@ -265,7 +265,7 @@ drive is the proof — the prereg says so).
 ## 10. Run notes
 
 - safe-commit.sh clobbered the main index on the prereg commit (file
-  showed staged-deleted after a good commit f5b685ee2); repaired with
+  showed staged-deleted after a good commit 36f66dafc); repaired with
   the documented pipe (`git ls-tree -r HEAD -- <path> | git update-index
   --add --index-info`), verified `git status --short` empty and hashes
   match HEAD.

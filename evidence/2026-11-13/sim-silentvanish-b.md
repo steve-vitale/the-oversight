@@ -1,6 +1,6 @@
 # sim-silentvanish-b — CHECK-FIRST: finding #2308 VOICED JOIN, SILENT VANISHING
 
-Run `fleshout-loop-b-20261113T1430Z` (continuation), Loop B, axis winnability
+Run `fleshout-loop-b-20261113T1530Z` (continuation), Loop B, axis winnability
 chain. Check-first root-cause arm on finding #2308 (sim-findings.md):
 on seed 190392 d137 a curious wanderer is taken in via the visitor-invite
 path — both join lines fire, the roster grows 3→4 (`visjoin_136`) — yet
@@ -126,7 +126,7 @@ Corpora in `evidence/2026-11-13/perseed-silentvanish-b/` (8 files, 5.5 MB
 total). One mid-run instrument fix: the first band launch was killed
 before any seed completed when the `tbVillagerFalls` wrap was found to
 take a fighter object, not a vid string (nothing logged for that site);
-fixed, committed (76024e42), band re-run clean. No data lost.
+fixed, committed (3f26d316f), band re-run clean. No data lost.
 
 | seed | days | end | scale | maxWave | standing | joins | leaves | vanish ≤1d | silent |
 |---|---|---|---|---|---|---|---|---|---|
@@ -194,7 +194,7 @@ Nobody vanishes. Everybody is mourned by name.
 
 ## 7. Metric review
 
-Prereg (`scripts/sim-silentvanish-b-prereg.md`, committed be0efaf83
+Prereg (`scripts/sim-silentvanish-b-prereg.md`, committed 9e484ff92
 before any judged sim): primary metric = removal path named with code
 citation + instrument reproduction on current master; GO = path named
 + reproduced, and if a fix lands, after-leg join sticks or exit voiced
@@ -222,7 +222,7 @@ the tracer, not a snapshot diff.
   + digest by name. No code changed. Proposed annotation text for the
   coordinator (do NOT edit sim-findings.md from this arm — see §9):
   `[ANSWERED 2026-11-13 by Loop B arm sim-silentvanish-b, run
-  fleshout-loop-b-20261113T1430Z (continuation): the removal path is
+  fleshout-loop-b-20261113T1530Z (continuation): the removal path is
   named and reproduced on current master — the newcomer is Grace
   (visjoin_136, hydrated name), killed d138 by Loud-Eyes (the Eulogy,
   monsterId eulogy) in a wild encounter: hurtVillager (game.js:8358) ←
@@ -270,12 +270,12 @@ the sibling arm).
   themselves were always correct.
 - Instrument fix mid-run: the first band launch was killed before any
   seed completed (the `tbVillagerFalls` wrap took a fighter object, not
-  a vid string); fixed and committed (76024e42), band re-run clean.
+  a vid string); fixed and committed (3f26d316f), band re-run clean.
 - `check.js --quick`: not re-run — no `src/js` changed (check-first
   arm, same standing as sim-voicejoins-b); two sibling gates were live
   when checked (sim-namelessadm-b, sim-steeple-a), and the brief's rule
   is to never run two gates concurrently. The deliverables are scripts
   + evidence only, none on the green list.
-- Commit list (branch sim-silentvanish-b): be0efaf83 (prereg +
-  d137 instruments), ac927493b (band driver + d137 full-stream check),
-  76024e42 (band driver wrap fix). Evidence + corpora commit follows.
+- Commit list (branch sim-silentvanish-b): 9e484ff92 (prereg +
+  d137 instruments), 639b7e3bf (band driver + d137 full-stream check),
+  3f26d316f (band driver wrap fix), 05aa4ce5a (evidence + corpora).
