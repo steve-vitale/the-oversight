@@ -390,7 +390,16 @@
           // option. This is the structural kill for the phantom
           // "that lesson they offered (last time)".
           if (typeof this.convoThreadBacked === 'function' && !this.convoThreadBacked(vid, o.tid)) continue;
-          const label = o.label || o.tid;
+          // MENU LABEL (journey-landing r129, 2026-11-13): the ledger label
+          // 'themselves' (personal thread) breaks this frame — "We never
+          // finished — themselves." (seed 1142 d6, Dmitri). The resume
+          // spoken line and the closing frames already route through
+          // convoThreadAbout, which renders it 'your story'; the menu
+          // used the raw ledger label. Same function here, so the menu,
+          // the resume line, and the close all agree.
+          const label = (typeof this.convoThreadAbout === 'function')
+            ? this.convoThreadAbout(vid, o.tid, o.label || o.tid)
+            : (o.label || o.tid);
           const ago = Math.max(0, day - (o.day || day));
           // Honest timeline: "N days back" for stale threads, no leaked
           // internal "(last time)" note for recent ones.

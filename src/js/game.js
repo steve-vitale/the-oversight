@@ -12714,14 +12714,54 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // with zero grid moves (no step, no path, nothing adjacent to use).
       // Prefer the nearest walkable cell that has a way out; only fall back
       // to a pocket when the whole tile is pockets.
-      const hasExit = (cx, cy) => {
-        for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [1, -1], [-1, 1], [-1, -1]]) {
-          if (walkable(cx + dx, cy + dy)) return true;
-        }
-        return false;
+      // REGION (journey-landing r129, 2026-11-13): a walkable NEIGHBOR is
+      // not an exit. The old hasExit counted any walkable neighbor, so
+      // travelTo landed the scholar in a 6-cell pocket sealed by trees
+      // (seed 1209 d13: tile (2,1), scholar at (8,0), 4 stuck turns, 0
+      // moves — the neighbor (7,0) was walkable but inside the SAME sealed
+      // region). A cell has a way out only if its legal-move region is the
+      // tile's MAIN region: BFS the connected components once, with
+      // findPath's own step rules (orthogonal, or diagonal with both
+      // orthogonal sides clear — the movement code and this guard must
+      // agree on which steps are legal), and prefer the nearest walkable
+      // cell in the largest component. A sealed pocket is never the
+      // largest component on a real tile; the fallback (nearest walkable
+      // anywhere) only fires when the whole tile is pockets.
+      const DIRS8 = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [1, -1], [-1, 1], [-1, -1]];
+      const stepLegal = (x, y, nx, ny) => {
+        if (!walkable(nx, ny)) return false;
+        const dx = nx - x, dy = ny - y;
+        if (dx !== 0 && dy !== 0 && (!walkable(x, ny) || !walkable(nx, y))) return false;
+        return true;
       };
+      const comp = Array.from({ length: 9 }, () => Array(9).fill(-1));
+      const compSize = [];
+      for (let y = 0; y < 9; y++) for (let x = 0; x < 9; x++) {
+        if (!walkable(x, y) || comp[y][x] >= 0) continue;
+        const id = compSize.length;
+        let size = 0;
+        const q = [[x, y]];
+        comp[y][x] = id;
+        while (q.length) {
+          const [cx, cy] = q.shift();
+          size++;
+          for (const [dx, dy] of DIRS8) {
+            const nx = cx + dx, ny = cy + dy;
+            if (nx < 0 || nx > 8 || ny < 0 || ny > 8 || comp[ny][nx] >= 0) continue;
+            if (!stepLegal(cx, cy, nx, ny)) continue;
+            comp[ny][nx] = id;
+            q.push([nx, ny]);
+          }
+        }
+        compSize.push(size);
+      }
+      let mainComp = -1, mainSize = 0;
+      for (let i = 0; i < compSize.length; i++) {
+        if (compSize[i] > mainSize) { mainSize = compSize[i]; mainComp = i; }
+      }
+      const inMain = (cx, cy) => mainComp >= 0 && comp[cy] && comp[cy][cx] === mainComp;
       const sx = Math.max(0, Math.min(8, wantX)), sy = Math.max(0, Math.min(8, wantY));
-      if (walkable(sx, sy) && hasExit(sx, sy)) return { x: sx, y: sy };
+      if (walkable(sx, sy) && inMain(sx, sy)) return { x: sx, y: sy };
       let fallback = (walkable(sx, sy)) ? { x: sx, y: sy } : null;
       const seen = new Set([sy * 9 + sx]);
       const queue = [[sx, sy]];
@@ -12732,7 +12772,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (nx < 0 || ny < 0 || nx > 8 || ny > 8 || seen.has(k)) continue;
           seen.add(k);
           if (walkable(nx, ny)) {
-            if (hasExit(nx, ny)) return { x: nx, y: ny };
+            if (inMain(nx, ny)) return { x: nx, y: ny };
             if (!fallback) fallback = { x: nx, y: ny };
           }
           queue.push([nx, ny]);
@@ -35488,7 +35528,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           });
         }
       } else for (let i = 0; i < count; i++) {
-        const spot = i === 0 ? { x: srcMx, y: srcMy } : freeSpotNear(srcMx, srcMy, takenSpots);
+        // STACKED SPAWN (journey-landing r129, 2026-11-13): the world
+        // monster can stand ON the scholar's tile (it walked into you) —
+        // srcMx/srcMy then equals the scholar's cell, and the first
+        // monster spawned stacked on the player (seed 1209 d13: the kite
+        // at (8,0) = the scholar's tile). Two fighters never share a tile
+        // — the pack rule above says "No stacking". A terrain-blocked
+        // source cell is the same class: place the first monster on the
+        // nearest free cell instead of the source.
+        const spot = (i === 0 && ((srcMx === px && srcMy === py) || terrainBlocked(srcMx, srcMy)))
+          ? freeSpotNear(srcMx, srcMy, takenSpots)
+          : (i === 0 ? { x: srcMx, y: srcMy } : freeSpotNear(srcMx, srcMy, takenSpots));
         // MULTI-TILE (Steve 2026-10-06): reserve all occupied tiles.
         const msize = Math.max(1, Math.min(3, mdef.size || 1));
         // Validate the spawn block fits — find a valid 2x2 if needed.
