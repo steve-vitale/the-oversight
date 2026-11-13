@@ -290,3 +290,49 @@ converged.
   --index-info`), verified with `git status --short` + `git diff HEAD`
   (empty). The CONTROL leg was resumed for the remaining 6 seeds; the
   2 finished seeds verified complete before resuming.
+
+## 11. Adoption addendum (Loop B, run fleshout-loop-b-20261113T0330Z)
+
+The Loop A worker's "merged locally, pending ship" claim was false —
+verified by the adopting coordinator and re-verified here:
+`git merge-base --is-ancestor sim-voiceless-a master` returned
+NOT-ANCESTOR before the adoption. The branch was never merged; no
+work was lost, the tree was clean, and no live worker was running.
+
+- **Rebase:** onto explicit master SHA `3d731db13` (sim-optb-l4-a
+  coordinator addendum; 16 commits since the arm's base 247ee1c9a).
+  Clean, no conflicts, no stop-at-pick quirk. Rebased commits:
+  prereg `9b7e35827`, game change `2d9a07aa7`, evidence `4b82440b0`,
+  band corpus `c0bd576b5`.
+- **Master-side game code in the rebase:** one file only,
+  `src/js/havenGrowth.js` — a raid-defense fallen-wording fix
+  (Lane B r188). Zero overlap with this arm (no briefing /
+  playerDeath / standing / shortfall / scholarDeaths touch), and the
+  arm's own files (`standing.js`, `game.js`, `ledger.js`,
+  `ONTOLOGY.md`) were untouched by master. The band corpus was
+  therefore NOT re-run: the voice is say-only on a dedicated RNG
+  stream, and the proof test re-run below re-proves firing, silence,
+  and RNG neutrality on the rebased tip.
+- **Proof on the rebased tip:** `node scripts/test-voiceless-a.js`
+  — **123/123 green**, 0 failed. The fired lines read exactly as in
+  §3 (Ellie names Ivan and Dylan, "only 4 of us carry a weapon, and
+  the fifth draft waits until 6 of us do"; Yuki names Kebede and
+  Boris, "2 scholars dead in the wild while the fifth draft waits").
+  Silence legs (a)–(d) and the RNG-neutrality check all pass on the
+  rebased tip.
+- **Canon check (adoption):** the build matches MONSTER-WAVES.md
+  design call #4 — veterans are living roster members with a recorded
+  wave-(w-1)+ kill, wave-5 demand is armed 6 / veterans 2, the wave's
+  title is never named (numbered drafts only), cadence mirrors the
+  hold beat (first firing + every 7 days). No canon invented; no doc
+  gap found.
+- **Merge-readiness verdict:** READY TO MERGE. The arm is
+  converged for its mechanism (voice built, proven, wired, silent
+  when it should be, trajectory-neutral). Wall numbers unchanged from
+  §7: national 0, table 0, wins 0; wave-5 unlocks 0/8, wave-4 0/8;
+  median survival 150d.
+- **Owed, not this arm:** proof-refresh round 10 (measurement-proof
+  staleness noted in §4) belongs to the proofrefresh rotation; the
+  coordinator merges this arm via `--ff-only` — no push, no bump,
+  no live verification by this worker.
+
