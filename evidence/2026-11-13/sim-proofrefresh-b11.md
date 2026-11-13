@@ -280,5 +280,88 @@ for its conditional arm. Round 12 stays owed for the next B run.
 ## Commits (branch sim-proofrefresh-b11, base 89b9030f9)
 
 - ae3d6531c — prereg + proof test (12 legs modeled on b10)
-- [pending] — fresh real neutral panel (REGENERATED on 89b9030f9) +
-  proof re-point + evidence
+- 24cb2e543 — fresh real neutral panel (REGENERATED on 89b9030f9) +
+  proof re-point + evidence (GO 12/12 on the 89b9030f9 tip)
+
+## Closeout — FLAP-BLOCKED at the rebase (in progress)
+
+- The panel, the re-point, and all six GO legs are DONE and COMMITTED
+  (24cb2e543). What remains: rebase onto current master 5c2a5866f,
+  re-verify leg (a) + the proof test on the rebased tip, merge
+  --ff-only, release the tree.
+- **Host write flap started ~21:27:38Z** (flap-watch log: A/B/E FAIL,
+  errno=1 EPERM; same signature as the 2026-11-12 episodes). It killed
+  the closeout rebase at its first write: `git rebase 5c2a5866f...`
+  failed with `fatal: could not write to
+  '.../.git/worktrees/sim-proofrefresh-b11/rebase-merge/head-name':
+  Operation not permitted`. The branch is UNREBASED at 24cb2e543 on
+  89b9030f9; a `rebase-merge/` directory exists (head-name,
+  interactive) — the rebase is INTERRUPTED mid-flight, no pick applied.
+  **Do NOT `git rebase --abort` / `--continue` / `--skip` and do NOT
+  do any ref surgery until a probe passes.** The 5c2a5866f move is
+  evidence-only (2 files, no manifest file), so the panel stays valid
+  on the new tip: 0 stale keys either way, no regeneration needed.
+- During the flap, `scripts/test-proofrefresh-b11.js` re-ran 11/12:
+  the single failing leg is cache-flags (exit 1) — the flap breaking
+  its spawned panel runs, the known load-artifact mode compounded by
+  the flap. Leg (a) re-verified 9/9 exit 0 on the un-rebased tip
+  during the flap (read-only legs still run). Per prereg (c) the
+  cache-flags leg is RE-JUDGED standalone with generous time on the
+  final tip after the flap clears; the 30s cap is unchanged. The
+  pre-flap 12/12 stands as the GO verdict on the 89b9030f9 tip.
+- Probes FAIL 21:28Z, 21:37Z, 21:46Z, 21:56Z, 22:05Z (git ref write
+  EPERM every time; plain node writes EPERM too). ONTOLOGY.md was NOT
+  re-checked after the flap start — the validator was not running, so
+  the 2026-11-12 truncation mode cannot recur; re-verify 2198 lines
+  before committing anything in any case. Nothing is lost; both commits
+  are intact and verified (blobs match worktree hashes at commit time).
+- Heartbeat: last successful heartbeat 21:00Z (confirmed in
+  REGISTRY.json). The tree's heartbeat will go stale during a long
+  flap — the reaper threshold is ~4h, so the tree is safe until ~01:00Z;
+  re-heartbeat FIRST when the flap clears.
+
+## Resume commands for the next run (adoption handoff)
+
+Run in order, after the flap clears (probe passes). All paths are in
+the worktree `~/workspace/worktrees/sim-proofrefresh-b11` unless noted:
+
+1. Probe: `git update-ref refs/heads/probe HEAD` (must pass; delete the
+   probe ref after: `git update-ref -d refs/heads/probe`).
+2. Heartbeat the tree FIRST: `bash scripts/worktree-heartbeat.sh
+   sim-proofrefresh-b11` (from the main tree).
+3. Inspect the interrupted rebase: `git status` in the worktree. The
+   rebase died at its first write (head-name), no pick applied — expect
+   the sequencer to resume cleanly. Verify the worktree is clean and
+   each pick's changes are unapplied (`git diff <pick> -- <files>`
+   non-empty = unapplied) before `git rebase --continue`, per the repo
+   rebase-quirk lesson. If the sequencer state looks wrong, `git
+   rebase --abort` is safe (branch is still at 24cb2e543) and the
+   rebase can be retried onto the explicit master SHA.
+4. Re-read master in the main tree (`git rev-parse master`). If it has
+   moved past 5c2a5866f onto a manifest file, rebase onto the explicit
+   new SHA and regenerate the panel once on the new tip per the prereg
+   master-move rule; if the move is evidence-only (as 5c2a5866f is),
+   the panel stays valid and no regeneration is needed.
+5. Re-verify on the rebased tip: (a) `test-measurement-proof-update.js`
+   9/9 exit 0; (c) `test-measurement-cache-flags.js` 4/4 standalone
+   (the flap-failed leg — re-judge it here, generous time, cap
+   unchanged); full `scripts/test-proofrefresh-b11.js` 12/12; (f)
+   `validate-ontology.js` exit 0 + ONTOLOGY.md 2198 lines, no diff vs
+   HEAD. Any miss is NO-GO — judge only against the prereg.
+6. Append the closeout outcome to this evidence file (rebase SHA,
+   re-verified legs, merge SHA), then commit with the worktree's own
+   copy of `scripts/safe-commit.sh` — NEVER bare git commit, NEVER git
+   add, NEVER the main-tree copy of safe-commit.sh. Watch for the
+   safe-commit index clobber (it struck BOTH commits in this run);
+   repair with `git ls-tree -r HEAD -- <paths> | git update-index
+   --add --index-info` and verify `git status --short` empty +
+   `git diff HEAD` empty.
+7. Merge in the main tree: `git merge --ff-only sim-proofrefresh-b11`
+   (no pipe, strict && chain; verify `git merge-base --is-ancestor`
+   after), then `bash scripts/worktree-release.sh sim-proofrefresh-b11
+   merged`, remove the worktree + branch, `bash
+   scripts/worktree-reap.sh`, verify main tree clean. Do NOT push,
+   bump, or verify live — the ship loop owns deploys.
+8. Report "merged locally, pending ship" with the wall numbers:
+   national 13/64, wins 16/64, entered 16/64, table 56/64, wave-5
+   6/64, wave-4 63/64, median survival 90d.
