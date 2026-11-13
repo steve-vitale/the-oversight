@@ -271,13 +271,24 @@ function gday(Game) { try { return ((Game.state || {}).scholar || {}).day || 0; 
   const gLive = DR.candidateGuard('grants');
   T.ok('LIVE: candidateGuard(grants) passes on this tree (pick applied)', gLive.ok === true,
     'ok=' + gLive.ok + ' missing=' + JSON.stringify(gLive.missing || []));
-  const liveStanding = fs.readFileSync(path.join(__dirname, '..', 'src', 'js', 'standing.js'), 'utf8');
-  const gSwap = DR.legGuard(liveStanding);
-  T.ok('LIVE: legGuard passes on the swapped standing.js', gSwap.ok === true && gSwap.sha === 'f8fda4295a99',
+  // COORDINATOR ADDENDUM (2026-11-13, landing): the two legs below
+  // originally read the LIVE on-disk standing.js / competent.js and
+  // asserted the transient leg-time configuration (fix swapped in,
+  // far-end policy). That state cannot exist on a rebased/landed
+  // tree — master carries newer versions of both files — so the
+  // legs failed 72/74 after rebase while every judged result stood.
+  // The leg-time protection lives in the DRIVER (it refuses
+  // unswapped runs); the proof's post-landing job is to verify the
+  // guards accept the right texts, which the git-show legs below
+  // do (same shape as the parent proof's legGuard legs). The
+  // worker's 74/0 was run in the leg configuration, before restore.
+  const fixText = execSync('git show 5157782a4:src/js/standing.js', { cwd: path.join(__dirname, '..'), maxBuffer: 64 * 1024 * 1024 }).toString();
+  const gSwap = DR.legGuard(fixText);
+  T.ok('legGuard accepts the swapped fix text (git show 5157782a4)', gSwap.ok === true && gSwap.sha === 'f8fda4295a99',
     'ok=' + gSwap.ok + ' sha=' + gSwap.sha);
-  const livePolicy = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'policies', 'competent.js'), 'utf8');
-  const gPol = DR.legGuardPolicy(livePolicy);
-  T.ok('LIVE: legGuardPolicy passes on the far-end own policy', gPol.ok === true && gPol.sha === 'a7ff5c516440',
+  const farPolicyText = execSync('git show 203a32775:scripts/policies/competent.js', { cwd: path.join(__dirname, '..'), maxBuffer: 64 * 1024 * 1024 }).toString();
+  const gPol = DR.legGuardPolicy(farPolicyText);
+  T.ok('legGuardPolicy accepts the far-end own policy (git show 203a32775)', gPol.ok === true && gPol.sha === 'a7ff5c516440',
     'ok=' + gPol.ok + ' sha=' + gPol.sha);
 
   T.done();
