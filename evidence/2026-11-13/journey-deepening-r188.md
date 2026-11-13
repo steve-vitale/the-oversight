@@ -77,9 +77,9 @@ Per seed: 100041 survived d100 (9 alive, wave 4, standing 225, regional, ladder 
 
 ## Landing
 
-- **Gate (full check.js --quick, 2 runs):** run 1: 335 passed, 5 failed in 811s; run 2 (logged): 334 passed, 6 failed in 1075s. All 6 adjudicated: 3 exact-120s load timeouts (living-garden, one-person-army, capable-bot — all re-run standalone, ALL exit 0: capable-bot 42/0; logs `evidence/2026-11-13/rerun-*.log`) + 3 pre-existing staleness (measurement-proof-update, measurement-workflow, phone-frame-proof stale receipt — identical to r187's gate adjudication; this run touches no src/ files, so it cannot cause them). **Gate: GO.** Analyzer proof 29 passed, 0 failed (re-run in gate context); `validate-ontology.js` not re-run (no src/js module added or renamed — the change is scripts/ + evidence only).
-- **Commit:** TBD.
-- **Merge:** TBD.
+- **Gate (full check.js --quick, 2 runs):** run 1: 335 passed, 5 failed in 811s; run 2 (logged): 334 passed, 6 failed in 1075s. All 6 adjudicated: 3 exact-120s load timeouts (living-garden, one-person-army, capable-bot — all re-run standalone, ALL exit 0: capable-bot 42/0; logs `evidence/2026-11-13/rerun-*.log`) + 3 pre-existing staleness (measurement-proof-update, measurement-workflow, phone-frame-proof stale receipt — identical to r187's gate adjudication; this run touches no src/ files, so it cannot cause them). **Gate: GO.** Analyzer proof 29 passed, 0 failed (re-run in gate context and again post-rebase); `validate-ontology.js` not re-run (no src/js module added or renamed — the change is scripts/ + evidence only).
+- **Commit:** `6293eca0d` (5 files, rebased onto 88df218eb after Lane B's journey-endgame-r194 landed first; proof re-run 29/0 on the rebased tip).
+- **Merge:** ff-only `88df218eb..6293eca0d`, master advanced to `6293eca0d`, ancestor verified.
 - Rotation 2→3 written at closeout. Lock deleted.
 
 ## Carried (not this run's to build)
