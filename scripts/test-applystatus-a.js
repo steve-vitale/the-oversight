@@ -58,11 +58,11 @@ t('judge: group 1 kills the check (boundary)', A.judge(1) === 'KILLED-ON-CHECK')
 t('judge: group 0 kills the check', A.judge(0) === 'KILLED-ON-CHECK');
 
 // §5 — the anchor guard pins the check to the prereg commit
-// (77d468d8b = master tip 6a16152d5 + prereg md only, zero src changes).
-t('expected anchor is the prereg commit 77d468d8b', D.EXPECTED_ANCHOR.indexOf('77d468d8b') === 0);
+// (e7188607b = rebased prereg commit; original 77d468d8b rewritten by the rebase onto 42024a8de, prereg file content-identical).
+t('expected anchor is the prereg commit e7188607b', D.EXPECTED_ANCHOR.indexOf('e7188607b') === 0);
 let head = 'unknown', isAncestor = false;
 try { head = execSync('git rev-parse HEAD', { cwd: REPO }).toString().trim(); } catch (e) {}
-try { execSync('git merge-base --is-ancestor 77d468d8b HEAD', { cwd: REPO }); isAncestor = true; } catch (e) {}
+try { execSync('git merge-base --is-ancestor e7188607b HEAD', { cwd: REPO }); isAncestor = true; } catch (e) {}
 t('prereg commit is an ancestor of this HEAD', isAncestor, 'HEAD ' + head.slice(0, 12));
 
 // §6 — the emit site still exists: stun.applyText in statusEffects.json

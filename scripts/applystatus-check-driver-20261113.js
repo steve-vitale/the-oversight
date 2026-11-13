@@ -11,7 +11,7 @@
 // lines + veteran-kill lines as sense context. Per-seed JSON to
 // evidence/2026-11-13/perseed-applystatus-a-check/ (writeRobust,
 // flap-proof, refuse-overwrite). Refuses to run unless HEAD is
-// exactly the prereg commit 77d468d8b (= 6a16152d5 + prereg md only,
+// exactly the prereg commit e7188607b (= 42024a8de + prereg md only,
 // zero src changes), so a check on any other base can never be
 // mislabeled as a current-master check.
 // Usage:
@@ -32,7 +32,7 @@ const RUN = process.env.RUN || 'applystatus-check';
 // commit, not the prereg commit — pass EXPECTED_ANCHOR=<fix-sha>.
 // The guard still refuses any other HEAD; the per-seed JSON records
 // the anchor it actually ran on, so a mislabeled leg is impossible.
-const EXPECTED_ANCHOR = process.env.EXPECTED_ANCHOR || '77d468d8b922611c3c283b43c2226ff1a83b8123';
+const EXPECTED_ANCHOR = process.env.EXPECTED_ANCHOR || 'e7188607b3b7cc6a2202e857b82013add24de5a4';
 
 let ANCHOR = 'unknown';
 try { ANCHOR = execSync('git rev-parse HEAD', { cwd: REPO }).toString().trim(); } catch (e) {}

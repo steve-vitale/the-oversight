@@ -161,6 +161,20 @@ src/js file, statusEffects.js, narration-only):
   so it runs in the FULL check.js, not --quick; it was verified directly
   instead (23/23 + 19/19 game-level above).
 
+## Rebase onto master 42024a8de (adoption coordinator)
+
+Rebased cleanly (6 commits, no conflicts; new tip 9063a4f5b). One proof leg
+needed re-pointing, a rebase artifact not a fix change: the §5 anchor legs
+hardcode the prereg commit hash, and the rebase rewrote it (77d468d8b →
+e7188607b). Content-identity verified before re-pointing: prereg file,
+statusEffects.js fix, and the proof test are all 0-line diffs between the
+original and rebased commits. The check corpus still records its own anchor
+77d468d8b (the commit the check leg actually ran on); the re-pointed
+constants pin future driver runs to the prereg commit as it now exists on
+the branch. Post-rebase proof re-run: **23/23 instrument + 19/19 game**,
+green. Gate (335/5, above) was run on the pre-rebase tip; the rebase
+touched no game code beyond the already-gated fix.
+
 ## Metric review
 
 The analyzer (scripts/applystatus-check-analyze-20261113.js) prints
