@@ -15,6 +15,7 @@
 //   - _standingPeakWave()
 //   - _standingHoldBeat()
 //   - _standingReleaseBeat()
+//   - _standingShortfallVoice()
 // rules:
 //   - standing_village_level: true (code: standing.js — computed from village state: the ledger, the link roll, the feast log. Never the scholar alone; a new adventurer inherits the village's standing, like the ledger.)
 //   - standing_no_new_tracking: true (code: standing.js — reads waveLedgerPoints(), _linkSeasoned(), _linkRegionalPlus() (which itself reads only polityOf/_covenantPolity/_tradePolity), state.feastLog (written by hostFeast). No parallel counters.)
@@ -22,7 +23,7 @@
 //   - standing_villager_kills_count: true (code: standing.js — the war source reads waveLedgerPoints, which scores player AND villager kills (recordWaveKill). A mayor whose villagers do the killing earns war standing.)
 //   - standing_regional_plus: true (code: standing.js — the diplomacy source counts only SEASONED REGIONAL+ links: a link participates in a regional-scale polity (LEAD realm via polityOf('haven'), BELONG realm via polityOf(primary), seasoned covenant/trade league). A lone seasoned bond with a splinter village is courtship, not regional power — it scores 0. 2026-10-14 design call, Steve can overrule.)
 //   - standing_readiness_gate: true (code: standing.js — villageStandingTotal() gates the unlock number: (1) COMBAT-READINESS DEFERRAL (design call #4, 2026-10-16) — waveUnlockReady() reads waveCombatReadiness(): four named bars from LIVE village state — armor WORN (S.equipment.armorOf / armorBonus for the scholar), weapons TO HAND (meleeWeaponOf/rangedWeaponOf equipped or a weapon item carried), counters KNOWN (the monsterCounterKnown convention), VETERANS alive (living roster members with a wave-(w-1)+ kill in state.waveKillLog). The old faced-experience bar (distinct wave-(w-1) types faced, fleeing counted) measured EXPOSURE, not capability — a village could flee its way into a war it can't fight — so it was replaced, not stacked (Steve's 2026-10-10 reversal of 8730921c already said engagements don't unlock waves). Demands live in standingCfg().readyDemand — sim starting points, not canon; Steve can overrule. (2) plenty cap — plenty counts at most plentyCapT5 toward the T5 bar, else held at t5-1; (3) monotonic peak ratchet — _standingPeakWave floors the total at the released wave's threshold forever.)
-//   - standing_no_silent_gates: true (code: standing.js — every hold/cap is named: standingLine() appends HELD/capped notes, _standingHoldBeat() fires the System beat (initial + 7-day reminders for deferrals, one-time for the cap), _standingReleaseBeat() announces the opening.)
+//   - standing_no_silent_gates: true (code: standing.js — every hold/cap is named: standingLine() appends HELD/capped notes, _standingHoldBeat() fires the System beat (initial + 7-day reminders for deferrals, one-time for the cap), _standingReleaseBeat() announces the opening, and _standingShortfallVoice() has a living villager name the wave-5 armed shortfall at the morning briefing when a pair holds and the armed bar is short.)
 (function () {
   const Game = (globalThis.Scattering || {}).Game;
   if (!Game) return;
@@ -605,6 +606,117 @@
         }
         return mourned;
       } catch (e) { return []; }
+    },
+    // _standingShortfallVoice(): VOICELESS-SHORTFALL (sim-voiceless-a,
+    // 2026-11-12, backlog: the pairarming finding). The System hold beat
+    // names the short bars in System voice — but on the pairarming band
+    // it never fires in sims (the deferral condition never binds on this
+    // tree), and even where it fires it is the System talking, not the
+    // village. When the village is blocked on the wave-5 armed count
+    // with a pair held, a living villager says so at the morning
+    // briefing, in plain words: who blooded the beasts, how many hands
+    // carry weapons, how many the fifth draft waits for. Grounding
+    // (perception-first): the speaker is a living roster member — they
+    // live with the armed count and they saw the veteran kills on camera
+    // (companionKillBeat: "Everybody saw that"). Veterans are named by
+    // firstRef, the fireside form (same justification as
+    // _standingMournFallen's true-name use — the village knows its own
+    // blooded fighters). The wave's TITLE is never named (knowledge
+    // gate: numbered drafts only, matching the hold beat). Cadence:
+    // first firing + every 7 days, mirroring the hold beat. The
+    // scholar-churn line rides the same firing: scholars who died in
+    // the wild since the last voicing are named from the scholar-only
+    // memorial playerDeath writes (v.scholarDeaths) — v.fallen mixes
+    // scholar and villager deaths, so it cannot tell this story.
+    // DEDICATED STREAM: the speaker pick uses mulberry32 seeded from
+    // (day, veteran ids) — the voice never consumes the main
+    // Math.random stream, so trajectories are identical with the voice
+    // on or off (the band's no-perturbation leg proves it). Returns
+    // true when the voice fired; never throws — fiction never breaks
+    // the briefing.
+    _standingShortfallVoice() {
+      try {
+        const st = this.state || {};
+        const day = ((st.scholar || {}).day || 0);
+        // Condition: the wave-5 door is shut by the readiness deferral,
+        // the pair holds, and the armed bar is the short one.
+        let def5 = null, rd5 = null;
+        try { def5 = (typeof this.standingDeferral === 'function') ? this.standingDeferral(5) : null; } catch (e) { return false; }
+        if (!def5 || !def5.deferred) return false;
+        try { rd5 = (typeof this.waveCombatReadiness === 'function') ? this.waveCombatReadiness(5) : null; } catch (e) { return false; }
+        if (!rd5) return false;
+        const dem = rd5.demand || {};
+        const armedNeed = (dem.armed | 0) || 6;
+        if ((rd5.veterans | 0) < 2) return false; // no pair held: not this voice
+        if ((rd5.armed | 0) >= armedNeed) return false; // armed bar met: nothing to say
+        // Cadence: first firing, then every 7 days.
+        st._shortfallVoice = st._shortfallVoice || {};
+        const last = st._shortfallVoice[5];
+        if (last != null && day - last < 7) return false;
+        // Speaker: a living non-scholar roster member (perception: they
+        // live here; they saw the kills on camera; they see who carries
+        // a weapon). Prefer someone who is NOT one of the veterans — the
+        // village noticing reads better than a hero naming themself.
+        // No living speaker — a village of one says nothing.
+        const me = this.villagerId;
+        let ids = [];
+        try {
+          ids = (((st.village || {}).roster) || []).filter(id => {
+            if (!id || id === me) return false;
+            let p = null;
+            try { p = this.getPerson(id); } catch (e) { return false; }
+            return !!(p && !p.dead && p.name);
+          });
+        } catch (e) { ids = []; }
+        if (!ids.length) return false;
+        // Dedicated stream (companionKillBeat convention). If the
+        // dedicated helpers are ever missing, pick deterministically
+        // (first id) — never consume the main stream as a fallback.
+        let TR = null;
+        try {
+          const vets = (typeof this.livingVeteranIds === 'function') ? (this.livingVeteranIds(5) || []) : [];
+          TR = this.mulberry32(this._hashStr('shortfall|' + day + '|' + vets.slice().sort().join(',')));
+        } catch (e) { TR = null; }
+        const pick = (arr) => TR ? arr[Math.floor(TR() * arr.length)] : arr[0];
+        // Prefer a speaker who is not one of the veterans being named.
+        let vetsEarly = [];
+        try { vetsEarly = (typeof this.livingVeteranIds === 'function') ? (this.livingVeteranIds(5) || []) : []; } catch (e) { vetsEarly = []; }
+        const pool = ids.filter(id => vetsEarly.indexOf(id) < 0);
+        const speaker = pick(pool.length ? pool : ids);
+        const sname = (typeof this.firstRef === 'function' ? this.firstRef(speaker) : null) || 'Someone';
+        // Veterans, named: the pair the village is holding.
+        let vets = [];
+        try { vets = (typeof this.livingVeteranIds === 'function') ? (this.livingVeteranIds(5) || []) : []; } catch (e) { vets = []; }
+        const vnames = vets.slice(0, 2).map(vid => {
+          try { return (typeof this.firstRef === 'function' ? this.firstRef(vid) : null) || 'someone'; } catch (e) { return 'someone'; }
+        });
+        const pair = vnames.length >= 2 ? (vnames[0] + ' and ' + vnames[1]) : (vnames[0] || 'our blooded fighters');
+        const armed = rd5.armed | 0;
+        this.say(`${sname}: "${pair} blooded the fourth draft's beasts — we all saw it on the cameras. But only ${armed} of us carry a weapon, and the fifth draft waits until ${armedNeed} of us do. We need more hands armed, not more speeches."`);
+        // SCHOLAR CHURN: scholars who died in the wild since the last
+        // voicing are named in the same breath. Wild causes only
+        // ('the wild', 'the expedition'): a scholar who died at home is
+        // mourned elsewhere. First firing looks back 7 days so ancient
+        // deaths are never re-named; later firings name only deaths
+        // since the last voicing, so no death is named twice.
+        try {
+          const since = (last == null) ? (day - 7) : last;
+          const list = ((st.village || {}).scholarDeaths || []).filter(e => e && ((e.day | 0) > since) && ((e.day | 0) <= day) && (e.cause === 'the wild' || e.cause === 'the expedition'));
+          if (list.length) {
+            const names = list.map(e => {
+              try { return String(e.name || 'our scholar').split(' ')[0]; } catch (e2) { return 'our scholar'; }
+            });
+            const n = list.length;
+            const buried = names.length === 1 ? names[0]
+              : names.length === 2 ? (names[0] + ' and ' + names[1])
+              : (names.slice(0, -1).join(', ') + ' and ' + names[names.length - 1]);
+            this.say(`${sname}, quieter: "We buried ${buried} out there — ${n} scholar${n === 1 ? '' : 's'} dead in the wild while the fifth draft waits. We keep sending our reader out alone."`);
+          }
+        } catch (e) {}
+        st._shortfallVoice[5] = day;
+        try { if (typeof this.tele === 'function') this.tele('shortfall_voice', { wave: 5, armed: armed, need: armedNeed, veterans: (rd5.veterans | 0) }); } catch (e) {}
+        return true;
+      } catch (e) { return false; }
     },
     // _standingReleaseBeat(w): the draft opens — the world responds when
     // the village is ready, never before.

@@ -8688,6 +8688,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     villageBriefing() {
       if (!this.state.systemArrived) return;
       const flowed = this.flowVillageKnowledge();
+      // VOICELESS-SHORTFALL (sim-voiceless-a, 2026-11-12): the morning
+      // briefing is where the village names what blocks it — the wave-5
+      // armed shortfall, in a living villager's voice. Guarded: fiction
+      // never breaks the briefing.
+      try { this._standingShortfallVoice(); } catch (e) {}
       const asg = this.state.village.assignments || {};
       const ids = Object.keys(asg);
       if (ids.length && !this.state.village.briefingNoticed) {

@@ -754,6 +754,16 @@
         v.fallen = v.fallen || [];
         v.fallen.push({ villagerId: oldId, day: s.day || 0, cause: cause || 'the wild', name: this.fallenName(oldId) });
       } catch (e) {}
+      // SCHOLAR-DEATH MEMORIAL (sim-voiceless-a, 2026-11-12): the
+      // shortfall voice names scholars who died in the wild while the
+      // fifth draft waits. v.fallen mixes scholar and villager deaths,
+      // so the voice reads this scholar-only list (day, cause, name).
+      // Additive record only — no read of it changes any death,
+      // succession, or grief path.
+      try {
+        v.scholarDeaths = v.scholarDeaths || [];
+        v.scholarDeaths.push({ day: s.day || 0, cause: cause || 'the wild', name: oldName });
+      } catch (e) {}
       try { this.removeVillager(oldId, 'killed'); } catch (e) {}
       // (rogue P1 2026-10-22: the dead bearer's dominant playstyle axis is
       // filed here — the village remembers who led how. The new bearer's own
