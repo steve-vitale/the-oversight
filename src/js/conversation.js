@@ -2316,7 +2316,22 @@
       const labelOf = (t) => this.convoThreadAbout(vid, t);
       let line;
       if (!log.length) {
-        line = '"We were just talking. Nothing important."';
+        // RECAP-EMPTY POOL (journey-social r195 2026-11-13): the empty-
+        // thread recap was ONE fixed line, so pressing recap twice in a
+        // sitting re-served the same core and the M4 scan flagged it
+        // (r181: 19 flags; r189: 1; r195 panel: 16 of 185 flags — the
+        // >= 10 bar met, so the pool fix lands). Four honest variants
+        // via convoPickCycle ('recapempty' key): the cycle serves
+        // distinct lines, and M9's 3-press cap bounds a sitting, so all
+        // serves in one sitting stay distinct. Every variant stays
+        // honest: nothing to recap means nothing to recap — no variant
+        // invents a topic, a shared event, or a promise.
+        line = this.convoPickCycle(vid, 'recapempty', [
+          '"We were just talking. Nothing important."',
+          '"Just catching up, really. Nothing to sum up."',
+          '"Nothing in particular — we were only talking."',
+          '"Small talk, that\'s all. Nothing worth repeating."',
+        ]);
       } else {
         const last = log[log.length - 1];
         if (log.length >= 2) {
@@ -5741,7 +5756,7 @@
       // FAVOR-REQUIREMENTS REFRAMES (journey-social r35 2026-10-20):
       // per-sitting like the recap/silence counters — a new sitting, fresh
       // patience. _favorReqSaid stays persistent (they told you before).
-      c._favorReqReframes = 0; c._favorReqEscalations = 0; c._favorReqLastRaw = null;
+      c._favorReqReframes = 0; c._favorReqEscalations = 0; c._favorReqLastEscKey = null;
       // SILENCE-EXHAUSTION (journey-social r31 2026-10-20): per-sitting,
       // per-band silence count — a new sitting, fresh quiet.
       c._msil = {};

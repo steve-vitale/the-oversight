@@ -223,8 +223,16 @@
             // recap failure mode: the reframe became the repeat). Same
             // per-sitting discipline as the recap/dlg:help spend-outs: once
             // the escalation is itself re-served, the choice leaves the menu
-            // for this sitting. Keyed on the raw line so a state change (new
-            // rawReq — e.g. they moved next to you) re-arms honestly.
+            // for this sitting. Keyed on the BLOCK REASON (r195 — was the
+            // raw line): the r130 cycle rotates the raw line every ask
+            // (four door-block variants), so the raw-line key reset the
+            // counter every press and the spend-out could never fire for
+            // cycling pools (r189 wild case: 7 asks, the escalation 4×).
+            // reasonKey is stable per pool ('favorblock' /
+            // 'favorpartner'); blocks without one (food, wound care —
+            // stable single lines) fall back to the raw line, preserving
+            // the r35/r180 behavior exactly. A state change (new block
+            // reason, new raw line) still re-arms honestly.
             // r180: the spend-out fired one press late — the press that
             // re-served the escalation still voiced the byte-identical
             // "three times" line (Devon 43601 d40/d45: presses 5-6
@@ -233,8 +241,9 @@
             // re-serve press voices the honest exit instead of the repeat.
             let favorReqSpentOut = false;
             if (c._favorReqReframes > 3) {
-              if (c._favorReqLastRaw === rawReq) c._favorReqEscalations = (c._favorReqEscalations || 0) + 1;
-              else { c._favorReqLastRaw = rawReq; c._favorReqEscalations = 1; }
+              const escKey = status.reasonKey || rawReq;
+              if (c._favorReqLastEscKey === escKey) c._favorReqEscalations = (c._favorReqEscalations || 0) + 1;
+              else { c._favorReqLastEscKey = escKey; c._favorReqEscalations = 1; }
               if (c._favorReqEscalations >= 2) {
                 try { this.convoSpendChoice(vid, 'dlg:favor_requirements'); } catch (e) {}
                 c._favorReqEscalations = 0;
