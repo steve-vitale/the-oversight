@@ -141,6 +141,26 @@ each needs its own arm before any fix claim:
 The adoption coordinator did not independently re-verify these four;
 they are recorded as filed.
 
+## Gate (adoption coordinator)
+
+`node scripts/check.js --quick` in this tree: **335 passed, 5 failed
+in 678s** (log evidence/2026-11-13/sim-applystatus-a-gate.log). All 5 are
+pre-existing classes, 0 attributable to the fix (which touches one
+src/js file, statusEffects.js, narration-only):
+- test-measurement-proof-update + test-measurement-workflow — retained
+  neutrality proof stale ("Proof source inputs are not current"). Standing
+  gate failure set; fails identically without the fix.
+- test-phone-frame-proof — stale phone receipt (same input list as the
+  sibling inffight gate on unchanged game code: index.html,
+  foreignSpeech.json, regions.json, statusEffects.json,
+  table-endings.json, alienPlayers.js). Standing set.
+- test-living-garden-deed-attainment + test-one-person-army-deed-
+  attainment — exact-120s timeouts (load artifacts, known class).
+- Gate GO after adjudication. The proof test itself
+  (scripts/test-applystatus-a.js) is a green-list job with no quick tag,
+  so it runs in the FULL check.js, not --quick; it was verified directly
+  instead (23/23 + 19/19 game-level above).
+
 ## Metric review
 
 The analyzer (scripts/applystatus-check-analyze-20261113.js) prints
