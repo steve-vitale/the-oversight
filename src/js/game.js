@@ -40070,7 +40070,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           try { this.registerDeath({ kind: 'person', villagerId: t.villagerId, name: t.name, mx: t.mx, my: t.my, cause: 'combat', killerId: this.villagerId, witnesses: this.fightWitnesses(t.villagerId) }); } catch (e) {}
         }
         else {
-          this.say(`${this.encSubject(t)} falls.`);
+          // COMBATDEDUP (sim-combatdedup-b 2026-11-13): same-labelled
+          // monsters falling in one fight re-announced identically (x7
+          // snake heads on 190396 d26, x4 Big Ugly (2) on d58 — the
+          // label carries no distinguishing info, and the snake-split
+          // line already voices each reform). Once per exact text per
+          // fight; person falls (villager/ally/hostile above) are
+          // untouched — a named person falls once by definition.
+          this.sayOncePerFight(`${this.encSubject(t)} falls.`);
           // DRAMA (Steve 2026-10-07, B1): death is a moment — the soul leaves,
           // and the loot glints. (Loot is still a deliberate action; this is
           // just the glint that says "something's here.")
@@ -41141,7 +41148,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             try { const GPs = (globalThis.Scattering || {}).Godpath; if (GPs && GPs.villagerStrikeMult) dmg = Math.round(dmg * GPs.villagerStrikeMult(this, v, t)); }
             catch (e) { console.warn('[godpath] villager strike', e); }
           }
-          this.say(`${v.name} ${a.type === 'strike' ? 'strikes' : 'harries'} the ${this.encTheName(t)}.`);
+          // COMBATDEDUP (sim-combatdedup-b 2026-11-13): the strike line
+          // fired on EVERY villager strike with no damage and no
+          // variation (x18 in one fight on 190398 d138) while tbDamage
+          // voices each hit right after ("X hits Y for N"). Once per
+          // exact text per fight: the first strike announces, later
+          // identical strikes stay silent, a different attacker/target/
+          // verb still voices, a new fight re-announces.
+          this.sayOncePerFight(`${v.name} ${a.type === 'strike' ? 'strikes' : 'harries'} the ${this.encTheName(t)}.`);
           // sourceKey (2026-10-14): pass the striker's key so source-keyed
           // hooks see who hit — party-formal flank/point, War Cry rallyBuff.
           const _landed = this.tbDamage(t.key, dmg, v.name, v.key, { strike: a.type === 'strike' });
@@ -46137,16 +46151,33 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             const tuKnown = this.encTelegraphKnown(m);
             const tuKc = ((m.mdef || {}).encounter || {}).knownCue;
             const tuCoaching = (tuKnown && tuKc) ? ' ' + tuKc : '';
-            this.say((named
-              ? `💥 The ${m.name} SNAPS! Its head is suddenly somewhere else.`
-              : `💥 The boulder SNAPS — its head is suddenly somewhere else. No warning. There never is.`) + tuCoaching);
+            // COMBATDEDUP (sim-combatdedup-b 2026-11-13): the ambush snap
+            // fired every cycle the monster had an adjacent foe (x6 in
+            // one fight on 190398 d64, x7 on 190392 d140) while the snap
+            // DAMAGE is voiced separately by the tbDamage loop below.
+            // Once per monster per fight — same flag pattern as the
+            // freeze line (f._stunAnnounced, sim-freezeline-a), different
+            // namespace, so two same-named monsters each snap once.
+            // Only the SAY dedups: resolve audio + aggro audio below
+            // still fire every snap.
+            if (!f || !f._snapAnnounced || !f._snapAnnounced[m.key]) {
+              this.say((named
+                ? `💥 The ${m.name} SNAPS! Its head is suddenly somewhere else.`
+                : `💥 The boulder SNAPS — its head is suddenly somewhere else. No warning. There never is.`) + tuCoaching);
+              if (f) { (f._snapAnnounced = f._snapAnnounced || {})[m.key] = true; }
+            }
             const rsAudio = (this.encConfig(m) || {}).resolveAudio;
             if (rsAudio) this.audioEvent(rsAudio);
             // AGGRO (Steve 2026-10-08): the snap is the turtle's whole
             // declaration — it never telegraphs, so the boulder grinds here.
             this.tbAggroAudio(m);
           } else {
-            this.say(`💥 The ${this.encTheName(m)} SNAPS! No warning. There never is.`);
+            // COMBATDEDUP: see the turtle branch above — once per
+            // monster per fight; the damage below still voices every time.
+            if (!f || !f._snapAnnounced || !f._snapAnnounced[m.key]) {
+              this.say(`💥 The ${this.encTheName(m)} SNAPS! No warning. There never is.`);
+              if (f) { (f._snapAnnounced = f._snapAnnounced || {})[m.key] = true; }
+            }
           }
           const hitKeys = new Set(cells.map(c => c.cx + ',' + c.cy));
           for (const o of f.fighters) {
@@ -47443,17 +47474,25 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       this.say(msg);
       return true;
     },
-    // sayOncePerFight(msg): one voice per refusal TEXT per live fight
-    // (GAP-W4-NARR #577 not-mid-fight spam, ~30x/fight). Keyed on the
+    // sayOncePerFight(msg): one voice per exact TEXT per live fight.
+    // (GAP-W4-NARR #577 not-mid-fight spam, ~30x/fight — the original
+    // refusal use. COMBATDEDUP sim-combatdedup-b 2026-11-13 generalized
+    // it from refusal-only to the general per-fight combat-narration
+    // dedup: the villager strike/harry line (tbVillagerTurn) and the
+    // monster falls line (tbDamage death branch) route through here, so
+    // the same attacker striking the same target round after round, or
+    // the same-labelled segments falling in one fight, announce once.
+    // The store was renamed _midFightRefusals -> _oncePerFightSaid; the
+    // behavior is identical for every existing caller.) Keyed on the
     // fight object itself (like pickFresh's _fresh store), so a new fight
-    // gets a fresh voice and distinct refusals stay audible within a
+    // gets a fresh voice and distinct texts stay audible within a
     // fight. Outside combat it degrades to a plain say.
     sayOncePerFight(msg) {
       const f = this.tbfight;
       if (!f || f.over) { this.say(msg); return true; }
-      f._midFightRefusals = f._midFightRefusals || {};
-      if (f._midFightRefusals[msg]) return false;
-      f._midFightRefusals[msg] = true;
+      f._oncePerFightSaid = f._oncePerFightSaid || {};
+      if (f._oncePerFightSaid[msg]) return false;
+      f._oncePerFightSaid[msg] = true;
       this.say(msg);
       return true;
     },
