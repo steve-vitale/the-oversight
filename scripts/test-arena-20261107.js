@@ -175,11 +175,15 @@ function pFighter(Game) {
     T.ok('death names the gauntlet contest', deathA.activeContestId === 'gauntlet', 'contest=' + deathA.activeContestId);
     T.ok('death was on waveIdx 2 (third wave)', deathA.arenaContest && deathA.arenaContest.waveIdx === 2, 'waveIdx=' + (deathA.arenaContest && deathA.arenaContest.waveIdx));
     T.ok('death was in combat', deathA.inCombat === true);
-    // The Reunion mirrors the party (packSpawn {mirror:true, max:3}):
-    // with 3 allies in the fight the wave-3 pack is 3 beasts, as in the
-    // replay. The death capture reads the fighters live at playerDeath.
+    // The Reunion mirrors the party (packSpawn {mirror:true, max:3}) —
+    // CAPPED to 1 in arena fights by sim-mirrorcap (Steve 2026-11-07:
+    // "Probably cap mirror for arenas"; REUNION_ARENA_MIRROR_CAP = 1,
+    // partyTactics.js tbPackSpawnCount opts.arena). With 3 allies in
+    // the fight the wave-3 pack is now 1 beast, not 3 — the old
+    // expectation (3, as in the replay) is the pre-cap behavior. The
+    // death capture reads the fighters live at playerDeath.
     const packAtDeath = (deathA.fighters || []).filter(function (x) { return x && x.kind === 'monster' && x.monsterId === 'reunion'; });
-    T.ok('reunion pack is 3 (party mirror, as in the replay)', packAtDeath.length === 3, 'reunions=' + packAtDeath.length);
+    T.ok('reunion pack is 1 (arena mirror cap, sim-mirrorcap)', packAtDeath.length === 1, 'reunions=' + packAtDeath.length);
     const alliesAtDeath = (deathA.fighters || []).filter(function (x) { return x && x.kind === 'villager'; });
     T.ok('party fought beside the scholar (3+ allies, partyN 4+)', alliesAtDeath.length >= 3, 'allies=' + alliesAtDeath.length);
   }
