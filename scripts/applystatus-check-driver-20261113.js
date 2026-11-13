@@ -28,7 +28,11 @@ const { competent } = require(path.join(REPO, 'scripts', 'policies', 'competent'
 const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(function (s) { return parseInt(s.trim(), 10); }) : []).filter(Number.isFinite);
 const DAYS = parseInt(process.env.DAYS || '150', 10) || 150;
 const RUN = process.env.RUN || 'applystatus-check';
-const EXPECTED_ANCHOR = '77d468d8b922611c3c283b43c2226ff1a83b8123';
+// Anchor override for the AFTER leg: the after leg runs on the fix
+// commit, not the prereg commit — pass EXPECTED_ANCHOR=<fix-sha>.
+// The guard still refuses any other HEAD; the per-seed JSON records
+// the anchor it actually ran on, so a mislabeled leg is impossible.
+const EXPECTED_ANCHOR = process.env.EXPECTED_ANCHOR || '77d468d8b922611c3c283b43c2226ff1a83b8123';
 
 let ANCHOR = 'unknown';
 try { ANCHOR = execSync('git rev-parse HEAD', { cwd: REPO }).toString().trim(); } catch (e) {}
@@ -38,7 +42,7 @@ try { POLICY_SHA = crypto.createHash('sha256').update(fs.readFileSync(policyPath
 
 function refuseUnlessAnchor() {
   if (ANCHOR !== EXPECTED_ANCHOR) {
-    console.error('APPLYSTATUS STOP: HEAD ' + ANCHOR.slice(0, 12) + ' is not the preregistered anchor 77d468d8b — check out that commit first (see prereg).');
+    console.error('APPLYSTATUS STOP: HEAD ' + ANCHOR.slice(0, 12) + ' is not the expected anchor ' + EXPECTED_ANCHOR.slice(0, 12) + ' — check out that commit first (see prereg).');
     process.exit(2);
   }
 }
