@@ -935,24 +935,39 @@
         if (pet.vote && pet.vote.forId && !this.isPlayer(pet.vote.forId)) this.bumpTrust(pet.vote.forId, 2);
       } catch (e) {}
       var adNames = admitted.map(function (p) { return p.name; }).join(', ');
-      this.say(`The fire makes room. ${adNames} — said aloud, so the village learns the names. They're Haven's now, for better or worse.`);
-      if (pet.cause === 'cannibal' && newIds.length) {
-        this.say(`Nobody says it, but everyone thinks it: there are eaters at the fire now. The village will watch them. So will you.`);
+      var allNames = pet.petitioners.map(function (p) { return p.name; }).join(', ');
+      if (admitted.length) {
+        this.say(`The fire makes room. ${adNames} — said aloud, so the village learns the names. They're Haven's now, for better or worse.`);
+        if (pet.cause === 'cannibal' && newIds.length) {
+          this.say(`Nobody says it, but everyone thinks it: there are eaters at the fire now. The village will watch them. So will you.`);
+        }
+        if (left.length) {
+          var leftNames = left.map(function (p) { return firstOf(p.name); }).join(', ');
+          this.say(`${leftNames} — there's no room. Every bed's full. They nod like they expected it, and walk on into the dark.`);
+        }
+      } else {
+        // NAMELESS-ADMISSION FIX (sim-namelessadm-b 2026-11-13, finding
+        // #2309): the moot can vote yes at room > 0 and the beds fill
+        // before the vote lands — a visitor invite or an arrival takes the
+        // last bed, and the petition never expires once the moot is held
+        // (villageAgencyDaily only walks a petition with no vote). Admitting
+        // nobody must not claim the fire made room for blank names. Say the
+        // turn-away plainly, naming them; the left line would only repeat
+        // it, so it stays silent here.
+        this.say(`The moot said yes — but the beds filled while the count was taken. ${allNames} — there's no room after all. They nod like they expected it, and walk on into the dark.`);
       }
-      if (left.length) {
-        var leftNames = left.map(function (p) { return firstOf(p.name); }).join(', ');
-        this.say(`${leftNames} — there's no room. Every bed's full. They nod like they expected it, and walk on into the dark.`);
-      }
-      this._vaPetitionConsequences(pet, true);
+      // Consequences follow what actually happened, not the vote: nobody
+      // admitted means nobody harbored — the world reacts to a turn-away.
+      this._vaPetitionConsequences(pet, newIds.length > 0);
       this.state.pendingPetition = null;
       // the queue moves: one thing at a time at the fire
       try {
         var q = this.state.petitionQueue || [];
         if (q.length) this.openPetition(q.shift());
       } catch (e) {}
-      try { if (this.journalNote) this.journalNote('village', 'petition', `Admitted ${newIds.length}: ${adNames} (${pet.cause}).`); } catch (e) {}
+      try { if (this.journalNote) this.journalNote('village', 'petition', newIds.length ? `Admitted ${newIds.length}: ${adNames} (${pet.cause}).` : `Moot said yes but no room: ${allNames} turned away (${pet.cause}).`); } catch (e) {}
       try { if (this.ledgerAdd) this.ledgerAdd('villageAgency', 'petition-accepted:' + pet.id + ':' + pet.cause + ':' + newIds.length); } catch (e) {}
-      try { if (this.recordMoment) this.recordMoment(`Haven took in ${newIds.length} from ${pet.originName || 'another fire'}.`); } catch (e) {}
+      try { if (newIds.length && this.recordMoment) this.recordMoment(`Haven took in ${newIds.length} from ${pet.originName || 'another fire'}.`); } catch (e) {}
       return { accepted: true, admitted: newIds };
     },
 
