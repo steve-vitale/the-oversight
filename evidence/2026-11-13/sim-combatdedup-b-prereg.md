@@ -103,6 +103,16 @@ This is narration hygiene, not a canon change.
 - Horizon: 150d death-aware (§10: reachability-class; the filed
   observations sit at d26–d63).
 - Anchor: `85f9cbff6` (worktree base). The driver refuses any other HEAD.
+  **CORRECTION (before the check leg ran):** an exact-hash guard is
+  unworkable for a driver that lives in the repo — the prereg + driver
+  commits themselves moved HEAD past 85f9cbff6, so the guard as written
+  refused the very tree it was committed on (caught on the first smoke
+  run, no seeds run). The guard now proves what matters instead: HEAD
+  descends from 85f9cbff6 AND `git diff 85f9cbff6..HEAD -- src/js` is
+  empty AND no COMBATDEDUP marker is present. Verified at the time of
+  the correction: the diff touches ONLY the prereg and the two new
+  scripts, zero `src/js` changes — so the check leg runs on current
+  master 85f9cbff6 game code plus measurement tooling.
 - CHECK rule (pre-registered): REPRODUCES if any class (strike/harry,
   falls, SNAPS) has max identical line per (seed, day) ≥ 4 on any seed.
   KILLED-ON-CHECK if every class is ≤ 3 everywhere.

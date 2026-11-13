@@ -38,8 +38,12 @@ let POLICY_SHA = 'unknown';
 try { POLICY_SHA = crypto.createHash('sha256').update(fs.readFileSync(policyPath, 'utf8')).digest('hex'); } catch (e) {}
 
 function refuseUnlessAnchor() {
-  // Baseline leg: HEAD must be the preregistered anchor. After leg: HEAD
-  // must be a descendant of the anchor that carries the fix marker.
+  // Baseline leg: HEAD must carry NO game-code change vs the preregistered
+  // base 85f9cbff6 and no fix marker. An exact-hash guard is unworkable
+  // for a driver that lives in the repo (each tooling commit moves HEAD,
+  // including the commit that would record the hash); what the guard must
+  // prove is "current-master game code, fix absent", and the src/js diff
+  // proves exactly that. After leg: HEAD must carry the fix marker.
   const gameText = (function () { try { return fs.readFileSync(path.join(REPO, 'src', 'js', 'game.js'), 'utf8'); } catch (e) { return ''; } })();
   const fixPresent = gameText.indexOf('COMBATDEDUP') !== -1;
   if (RUN.indexOf('after') !== -1) {
@@ -49,8 +53,15 @@ function refuseUnlessAnchor() {
     }
     return;
   }
-  if (fixPresent || ANCHOR.slice(0, 9) !== BASE_ANCHOR_SHORT) {
-    console.error('COMBATDEDUP STOP: CHECK leg needs HEAD exactly ' + BASE_ANCHOR_SHORT + ' without the fix — got ' + ANCHOR.slice(0, 12) + (fixPresent ? ' (fix present)' : ''));
+  if (fixPresent) {
+    console.error('COMBATDEDUP STOP: CHECK leg needs the fix absent — HEAD ' + ANCHOR.slice(0, 12) + ' carries the COMBATDEDUP marker.');
+    process.exit(2);
+  }
+  let isDesc = false, jsDiff = null;
+  try { execSync('git merge-base --is-ancestor ' + BASE_ANCHOR_SHORT + ' HEAD', { cwd: REPO, stdio: 'ignore' }); isDesc = true; } catch (e) { isDesc = false; }
+  try { jsDiff = execSync('git diff ' + BASE_ANCHOR_SHORT + '..HEAD -- src/js', { cwd: REPO }).toString(); } catch (e) { jsDiff = null; }
+  if (!isDesc || jsDiff == null || jsDiff.trim() !== '') {
+    console.error('COMBATDEDUP STOP: CHECK leg needs HEAD descended from ' + BASE_ANCHOR_SHORT + ' with zero src/js diff — got HEAD ' + ANCHOR.slice(0, 12) + (isDesc ? '' : ' (not a descendant)') + (jsDiff && jsDiff.trim() !== '' ? ' (src/js differs)' : ''));
     process.exit(2);
   }
 }
