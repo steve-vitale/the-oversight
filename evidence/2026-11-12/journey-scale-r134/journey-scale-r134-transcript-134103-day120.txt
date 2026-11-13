@@ -1,0 +1,23 @@
+(pre-talk seed: curious planted d107; takenWantDay=0; convoCount=10)
+=== seed 134103 day 120 — conversation with Rosa (gen_wu6tu0c) ===
+occupation=radio DJ temperament=intense trust=90 dead=false
+want: curious (stage 0)
+open thread: request fromSeed=false
+picker: control
+
+THEM: "Can we talk?" Rosa doesn't wait for an answer. "We need to discuss how things are run here."
+(opening: 2 THEM lines spoken at open)
+THEM: "Walk my trap line with me? Extra hands, extra eyes."
+(turn0 choices: betrayal:accept, betrayal:decline, leave, silence)
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: It's quiet at the trap line. Rosa doesn't say much. Sometimes that's the whole point.
+YOU: [dlg:more] "Go on."
+THEM: "Okay, real question: what's the funniest thing you've seen since we got here? I desperately need it."
+YOU: [ans:q_laugh:a_story] (tell them something funny)
+THEM: They laugh — really laugh, the first real one you've heard in days. "Okay. Okay, that's good. I needed that."
+YOU: [goon] "Go on."
+THEM: They let the words sit there, unanswered.
+YOU: (leave)
+pre-close: want curious stage 2 thread want
+closing line: "See you at the fire."
+(gossip picks this sitting: 0)

@@ -1,0 +1,17 @@
+(pre-talk seed: none; takenWantDay=0; convoCount=0)
+=== seed 134104 day 120 — conversation with Stan (stan_kowalski) ===
+occupation=exterminator temperament=dry trust=20 dead=false
+want: curious (stage 1)
+open thread: want fromSeed=false
+picker: control
+
+THEM: "What's the most useful thing you've learned since we got here?"
+(turn0 choices: ans:q_useful:a_hunger, ans:q_useful:a_self, ans:q_useful:a_learning, deflect_q, leave, silence)
+YOU: [ans:q_useful:a_hunger] "How to be hungry and keep going anyway."
+THEM: "The fundamental skill. Everything else is decoration."
+YOU: [goon] "And?"
+THEM: "making do. Sounds small. But small useful things stack — and one day you look up and you're the person everyone asks. That's how it happens. Allegedly."
+YOU: (leave)
+pre-close: want curious stage 2 thread want
+closing line: "Do try to stay alive. The paperwork otherwise is murder."
+(gossip picks this sitting: 0)
