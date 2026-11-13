@@ -1,0 +1,105 @@
+
+== seed 34241: handoff d41 Oscar -> Blanca (scripted)
+   CAP-NC: second-handoff-before-deadline (newcomer-probe: Rafael arrived d+29 probe d+29 deadline d+43 trust=29 want=seek_comfort refused=false) bondedEver=true
+   CAP-D14 (descriptive): second-handoff-before-d14 (probe: Henry trust=19 want=curious refused=false) bondedEver=false
+   OPP talk-requests (distinct, d+0..d+30, self excluded): total=4 unbonded=0 selfReqDayEntries=0
+   OPP bonds d+0..d+30: NPC-NPC new=2 over 30 bond-days (median/day=0); FIRST-bearer new=0 (driven-days=0, undriven-days=0); LATER-bearer new=0
+   OPP newcomers: arrivals=1 first-arrival d+29; FIRST-bearer new bonds with newcomers=0 vs pre-existing=0
+   MANTLE-FINE #0: entry d41 return d41 cause=the expedition flippedImmediate=true fineLatency=0 coarseLatency=0 rollCover=true heldBriefly=false firstNewTag=scripted-kill class=SAMPLING-or-CLEAN
+   MANTLE-FINE #1: entry d53 return d53 cause=the arena flippedImmediate=true fineLatency=0 coarseLatency=null rollCover=false heldBriefly=false firstNewTag=post class=SAMPLING-or-CLEAN
+   MANTLE-FINE #2: entry d62 return d62 cause=the arena flippedImmediate=true fineLatency=0 coarseLatency=null rollCover=true heldBriefly=false firstNewTag=post class=SAMPLING-or-CLEAN
+   MANTLE-FINE #3: entry d64 return d64 cause=the arena flippedImmediate=true fineLatency=0 coarseLatency=null rollCover=true heldBriefly=false firstNewTag=post class=SAMPLING-or-CLEAN
+   MANTLE-FINE #4: entry d67 return d67 cause=the wild flippedImmediate=true fineLatency=0 coarseLatency=null rollCover=false heldBriefly=true firstNewTag=null class=SAMPLING-or-CLEAN
+   MANTLE-FINE #5: entry d67 return d67 cause=the wild flippedImmediate=true fineLatency=1 coarseLatency=null rollCover=true heldBriefly=false firstNewTag=sleep class=SAMPLING-or-CLEAN
+   MANTLE-FINE #6: entry d69 return d69 cause=the wild flippedImmediate=true fineLatency=1 coarseLatency=null rollCover=true heldBriefly=false firstNewTag=sleep class=SAMPLING-or-CLEAN
+   MANTLE-FINE #7: entry d70 return d70 cause=the wild flippedImmediate=true fineLatency=1 coarseLatency=null rollCover=true heldBriefly=false firstNewTag=sleep class=SAMPLING-or-CLEAN
+   MANTLE-FINE #8: entry d88 return d88 cause=the wild flippedImmediate=true fineLatency=1 coarseLatency=null rollCover=true heldBriefly=false firstNewTag=sleep class=SAMPLING-or-CLEAN
+   MANTLE-FINE #9: entry d89 return d89 cause=the wild flippedImmediate=true fineLatency=1 coarseLatency=null rollCover=true heldBriefly=false firstNewTag=sleep class=SAMPLING-or-CLEAN
+   MANTLE-FINE #10: entry d90 return d90 cause=the wild flippedImmediate=false fineLatency=0 coarseLatency=null rollCover=false heldBriefly=false firstNewTag=sleep class=VILLAGE-OVER
+   MANTLE-COARSE chain: Blanca -> Dieter detected d53 entry d53 coarseLatency=0
+   MANTLE-COARSE chain: Dieter -> Olivia detected d62 entry d62 coarseLatency=0
+   MANTLE-COARSE chain: Olivia -> Hunter detected d64 entry d64 coarseLatency=0
+   MANTLE-COARSE chain: Hunter -> Ramon detected d67 entry d67 coarseLatency=0
+   MANTLE-COARSE chain: Ramon -> Rosa detected d67 entry d67 coarseLatency=0
+   MANTLE-COARSE chain: Rosa -> Sanne detected d69 entry d69 coarseLatency=0
+   MANTLE-COARSE chain: Sanne -> Valeria detected d70 entry d70 coarseLatency=0
+   MANTLE-COARSE chain: Valeria -> David detected d88 entry d88 coarseLatency=0
+   MANTLE-COARSE chain: David -> Henry detected d89 entry d89 coarseLatency=0
+   MANTLE day-skips: none (sleep rolls: 89; 0-day no-advance sleeps: 9 — sleep called without rolling the day, not a skip)
+   CARRIED pick-time rank: 1 | funeral INCALL beat: true
+   relPost bonds=45 relD14=45 relD30=47 relEnd=48 relD14.selfId=gen_opj2y8x
+   DRY-CENSUS: dry hits 0 {} | honest fallbacks 0 | null-return silences 0
+
+== seed 34242: handoff d41 Gus -> Nikos (scripted)
+   CAP-NC: no-newcomer-arrival (newcomer-probe: no newcomer arrived) bondedEver=false
+   CAP-D14 (descriptive): bonded-d14 (probe: Carlos trust=90 want=curious refused=false) bondedEver=true
+   OPP talk-requests (distinct, d+0..d+30, self excluded): total=8 unbonded=0 selfReqDayEntries=0
+   OPP bonds d+0..d+30: NPC-NPC new=0 over 30 bond-days (median/day=0); FIRST-bearer new=1 (driven-days=0, undriven-days=1); LATER-bearer new=0
+   OPP newcomers: arrivals=0 first-arrival d+null; FIRST-bearer new bonds with newcomers=0 vs pre-existing=1
+   MANTLE-FINE #0: entry d41 return d41 cause=the expedition flippedImmediate=true fineLatency=0 coarseLatency=0 rollCover=true heldBriefly=false firstNewTag=scripted-kill class=SAMPLING-or-CLEAN
+   MANTLE-FINE #1: entry d65 return d65 cause=dehydration flippedImmediate=true fineLatency=1 coarseLatency=null rollCover=true heldBriefly=false firstNewTag=sleep class=SAMPLING-or-CLEAN
+   MANTLE-COARSE chain: Nikos -> Paul detected d65 entry d65 coarseLatency=0
+   MANTLE day-skips: none (sleep rolls: 110; 0-day no-advance sleeps: 27 — sleep called without rolling the day, not a skip)
+   CARRIED pick-time rank: 1 | funeral INCALL beat: true
+   relPost bonds=58 relD14=59 relD30=59 relEnd=59 relD14.selfId=nikos_papadopoulos
+   DRY-CENSUS: dry hits 0 {} | honest fallbacks 0 | null-return silences 0
+
+== seed 34243: handoff d41 Jasper -> Frieda (scripted)
+   CAP-NC: no-newcomer-arrival (newcomer-probe: no newcomer arrived) bondedEver=false
+   CAP-D14 (descriptive): no-stranger-pool (probe: no stranger pool) bondedEver=n/a
+   OPP talk-requests (distinct, d+0..d+30, self excluded): total=4 unbonded=0 selfReqDayEntries=0
+   OPP bonds d+0..d+30: NPC-NPC new=2 over 30 bond-days (median/day=0); FIRST-bearer new=0 (driven-days=0, undriven-days=0); LATER-bearer new=0
+   OPP newcomers: arrivals=0 first-arrival d+null; FIRST-bearer new bonds with newcomers=0 vs pre-existing=0
+   MANTLE-FINE #0: entry d41 return d41 cause=the expedition flippedImmediate=true fineLatency=0 coarseLatency=0 rollCover=true heldBriefly=false firstNewTag=scripted-kill class=SAMPLING-or-CLEAN
+   MANTLE-FINE #1: entry d78 return d78 cause=the wild flippedImmediate=true fineLatency=0 coarseLatency=null rollCover=false heldBriefly=false firstNewTag=sleep class=SAMPLING-or-CLEAN
+   MANTLE-FINE #2: entry d88 return d88 cause=the wild flippedImmediate=true fineLatency=0 coarseLatency=null rollCover=false heldBriefly=false firstNewTag=post class=SAMPLING-or-CLEAN
+   MANTLE-COARSE chain: Frieda -> Ruth detected d78 entry d78 coarseLatency=0
+   MANTLE-COARSE chain: Ruth -> Chloe detected d88 entry d88 coarseLatency=0
+   MANTLE day-skips: none (sleep rolls: 110; 0-day no-advance sleeps: 17 — sleep called without rolling the day, not a skip)
+   CARRIED pick-time rank: 1 | funeral INCALL beat: true
+   relPost bonds=59 relD14=61 relD30=61 relEnd=61 relD14.selfId=gen_tj5zd2c
+   DRY-CENSUS: dry hits 0 {} | honest fallbacks 0 | null-return silences 0
+
+== seed 34244: handoff d41 Hazel -> Minh (scripted)
+   CAP-NC: bonded-by-deadline (newcomer-probe: James arrived d+33 probe d+33 deadline d+47 trust=34 want=curious refused=false) bondedEver=true
+   CAP-D14 (descriptive): no-stranger-pool (probe: no stranger pool) bondedEver=n/a
+   OPP talk-requests (distinct, d+0..d+30, self excluded): total=18 unbonded=0 selfReqDayEntries=0
+   OPP bonds d+0..d+30: NPC-NPC new=0 over 30 bond-days (median/day=0); FIRST-bearer new=0 (driven-days=0, undriven-days=0); LATER-bearer new=0
+   OPP newcomers: arrivals=5 first-arrival d+33; FIRST-bearer new bonds with newcomers=0 vs pre-existing=0
+   MANTLE-FINE #0: entry d41 return d41 cause=the expedition flippedImmediate=true fineLatency=0 coarseLatency=0 rollCover=true heldBriefly=false firstNewTag=scripted-kill class=SAMPLING-or-CLEAN
+   MANTLE day-skips: none (sleep rolls: 110; 0-day no-advance sleeps: 17 — sleep called without rolling the day, not a skip)
+   CARRIED pick-time rank: 1 | funeral INCALL beat: true
+   relPost bonds=59 relD14=59 relD30=59 relEnd=93 relD14.selfId=gen_r30pb2z
+   DRY-CENSUS: dry hits 0 {} | honest fallbacks 0 | null-return silences 0
+
+== seed 33998: handoff d6 Heinrich -> Sofia (scripted)
+   CAP-NC: no-newcomer-arrival (newcomer-probe: no newcomer arrived) bondedEver=false
+   CAP-D14 (descriptive): bonded-d14 (probe: Ashanti trust=43 want=curious refused=false) bondedEver=true
+   OPP talk-requests (distinct, d+0..d+30, self excluded): total=6 unbonded=1 selfReqDayEntries=0
+       unbonded requesters: Esteban(d5)
+   OPP bonds d+0..d+30: NPC-NPC new=9 over 25 bond-days (median/day=0); FIRST-bearer new=2 (driven-days=1, undriven-days=1); LATER-bearer new=0
+   OPP newcomers: arrivals=0 first-arrival d+null; FIRST-bearer new bonds with newcomers=0 vs pre-existing=2
+   MANTLE-FINE #0: entry d6 return d6 cause=the expedition flippedImmediate=true fineLatency=0 coarseLatency=0 rollCover=false heldBriefly=false firstNewTag=scripted-kill class=SAMPLING-or-CLEAN
+   MANTLE day-skips: none (sleep rolls: 30; 0-day no-advance sleeps: 7 — sleep called without rolling the day, not a skip)
+   CARRIED pick-time rank: 1 | funeral INCALL beat: true
+   relPost bonds=30 relD14=46 relD30=0 relEnd=47 relD14.selfId=sofia_chen
+   DRY-CENSUS: dry hits 0 {} | honest fallbacks 0 | null-return silences 0
+
+=== PANEL ===
+{"seed":"34241","cap":"second-handoff-before-deadline","capEligible":false,"bondedEver":true,"probeVid":"Rafael","deadlineDplus":43,"arrivals":1,"firstArrivalDplus":29,"firstBearerNewcomer":0,"firstBearerPreexisting":0,"capD14":"second-handoff-before-d14","reqTotal":4,"reqUnbonded":0,"selfReqDayEntries":0,"npcNew":2,"firstBearerNew":0,"firstBearerNewUndriven":0,"laterBearerNew":0,"pickRank":1,"incall":true,"mantleRows":[{"i":0,"entryDay":41,"returnDay":41,"cause":"the expedition","flippedImmediate":true,"over":false,"sameDayCascade":false,"fineLatency":0,"coarseLatency":0,"rollCover":true,"heldBriefly":false,"firstNewTag":"scripted-kill","cls":"SAMPLING-or-CLEAN"},{"i":1,"entryDay":53,"returnDay":53,"cause":"the arena","flippedImmediate":true,"over":false,"sameDayCascade":false,"fineLatency":0,"coarseLatency":null,"rollCover":false,"heldBriefly":false,"firstNewTag":"post","cls":"SAMPLING-or-CLEAN"},{"i":2,"entryDay":62,"returnDay":62,"cause":"the arena","flippedImmediate":true,"over":false,"sameDayCascade":false,"fineLatency":0,"coarseLatency":null,"rollCover":true,"heldBriefly":false,"firstNewTag":"post","cls":"SAMPLING-or-CLEAN"},{"i":3,"entryDay":64,"returnDay":64,"cause":"the arena","flippedImmediate":true,"over":false,"sameDayCascade":false,"fineLatency":0,"coarseLatency":null,"rollCover":true,"heldBriefly":false,"firstNewTag":"post","cls":"SAMPLING-or-CLEAN"},{"i":4,"entryDay":67,"returnDay":67,"cause":"the wild","flippedImmediate":true,"over":false,"sameDayCascade":false,"fineLatency":0,"coarseLatency":null,"rollCover":false,"heldBriefly":true,"firstNewTag":null,"cls":"SAMPLING-or-CLEAN"},{"i":5,"entryDay":67,"returnDay":67,"cause":"the wild","flippedImmediate":true,"over":false,"sameDayCascade":true,"fineLatency":1,"coarseLatency":null,"rollCover":true,"heldBriefly":false,"firstNewTag":"sleep","cls":"SAMPLING-or-CLEAN"},{"i":6,"entryDay":69,"returnDay":69,"cause":"the wild","flippedImmediate":true,"over":false,"sameDayCascade":false,"fineLatency":1,"coarseLatency":null,"rollCover":true,"heldBriefly":false,"firstNewTag":"sleep","cls":"SAMPLING-or-CLEAN"},{"i":7,"entryDay":70,"returnDay":70,"cause":"the wild","flippedImmediate":true,"over":false,"sameDayCascade":false,"fineLatency":1,"coarseLatency":null,"rollCover":true,"heldBriefly":false,"firstNewTag":"sleep","cls":"SAMPLING-or-CLEAN"},{"i":8,"entryDay":88,"returnDay":88,"cause":"the wild","flippedImmediate":true,"over":false,"sameDayCascade":false,"fineLatency":1,"coarseLatency":null,"rollCover":true,"heldBriefly":false,"firstNewTag":"sleep","cls":"SAMPLING-or-CLEAN"},{"i":9,"entryDay":89,"returnDay":89,"cause":"the wild","flippedImmediate":true,"over":false,"sameDayCascade":false,"fineLatency":1,"coarseLatency":null,"rollCover":true,"heldBriefly":false,"firstNewTag":"sleep","cls":"SAMPLING-or-CLEAN"},{"i":10,"entryDay":90,"returnDay":90,"cause":"the wild","flippedImmediate":false,"over":true,"sameDayCascade":false,"fineLatency":0,"coarseLatency":null,"rollCover":false,"heldBriefly":false,"firstNewTag":"sleep","cls":"VILLAGE-OVER"}],"chainRows":[{"deadFirst":"Blanca","newFirst":"Dieter","detectedDay":53,"entryDay":53,"coarseLatency":0},{"deadFirst":"Dieter","newFirst":"Olivia","detectedDay":62,"entryDay":62,"coarseLatency":0},{"deadFirst":"Olivia","newFirst":"Hunter","detectedDay":64,"entryDay":64,"coarseLatency":0},{"deadFirst":"Hunter","newFirst":"Ramon","detectedDay":67,"entryDay":67,"coarseLatency":0},{"deadFirst":"Ramon","newFirst":"Rosa","detectedDay":67,"entryDay":67,"coarseLatency":0},{"deadFirst":"Rosa","newFirst":"Sanne","detectedDay":69,"entryDay":69,"coarseLatency":0},{"deadFirst":"Sanne","newFirst":"Valeria","detectedDay":70,"entryDay":70,"coarseLatency":0},{"deadFirst":"Valeria","newFirst":"David","detectedDay":88,"entryDay":88,"coarseLatency":0},{"deadFirst":"David","newFirst":"Henry","detectedDay":89,"entryDay":89,"coarseLatency":0}],"skips":0,"dryHits":[],"honestFallbacks":0,"nullReturns":0}
+{"seed":"34242","cap":"no-newcomer-arrival","capEligible":false,"bondedEver":false,"deadlineDplus":null,"arrivals":0,"firstArrivalDplus":null,"firstBearerNewcomer":0,"firstBearerPreexisting":1,"capD14":"bonded-d14","reqTotal":8,"reqUnbonded":0,"selfReqDayEntries":0,"npcNew":0,"firstBearerNew":1,"firstBearerNewUndriven":1,"laterBearerNew":0,"pickRank":1,"incall":true,"mantleRows":[{"i":0,"entryDay":41,"returnDay":41,"cause":"the expedition","flippedImmediate":true,"over":false,"sameDayCascade":false,"fineLatency":0,"coarseLatency":0,"rollCover":true,"heldBriefly":false,"firstNewTag":"scripted-kill","cls":"SAMPLING-or-CLEAN"},{"i":1,"entryDay":65,"returnDay":65,"cause":"dehydration","flippedImmediate":true,"over":false,"sameDayCascade":false,"fineLatency":1,"coarseLatency":null,"rollCover":true,"heldBriefly":false,"firstNewTag":"sleep","cls":"SAMPLING-or-CLEAN"}],"chainRows":[{"deadFirst":"Nikos","newFirst":"Paul","detectedDay":65,"entryDay":65,"coarseLatency":0}],"skips":0,"dryHits":[],"honestFallbacks":0,"nullReturns":0}
+{"seed":"34243","cap":"no-newcomer-arrival","capEligible":false,"bondedEver":false,"deadlineDplus":null,"arrivals":0,"firstArrivalDplus":null,"firstBearerNewcomer":0,"firstBearerPreexisting":0,"capD14":"no-stranger-pool","reqTotal":4,"reqUnbonded":0,"selfReqDayEntries":0,"npcNew":2,"firstBearerNew":0,"firstBearerNewUndriven":0,"laterBearerNew":0,"pickRank":1,"incall":true,"mantleRows":[{"i":0,"entryDay":41,"returnDay":41,"cause":"the expedition","flippedImmediate":true,"over":false,"sameDayCascade":false,"fineLatency":0,"coarseLatency":0,"rollCover":true,"heldBriefly":false,"firstNewTag":"scripted-kill","cls":"SAMPLING-or-CLEAN"},{"i":1,"entryDay":78,"returnDay":78,"cause":"the wild","flippedImmediate":true,"over":false,"sameDayCascade":false,"fineLatency":0,"coarseLatency":null,"rollCover":false,"heldBriefly":false,"firstNewTag":"sleep","cls":"SAMPLING-or-CLEAN"},{"i":2,"entryDay":88,"returnDay":88,"cause":"the wild","flippedImmediate":true,"over":false,"sameDayCascade":false,"fineLatency":0,"coarseLatency":null,"rollCover":false,"heldBriefly":false,"firstNewTag":"post","cls":"SAMPLING-or-CLEAN"}],"chainRows":[{"deadFirst":"Frieda","newFirst":"Ruth","detectedDay":78,"entryDay":78,"coarseLatency":0},{"deadFirst":"Ruth","newFirst":"Chloe","detectedDay":88,"entryDay":88,"coarseLatency":0}],"skips":0,"dryHits":[],"honestFallbacks":0,"nullReturns":0}
+{"seed":"34244","cap":"bonded-by-deadline","capEligible":true,"bondedEver":true,"probeVid":"James","deadlineDplus":47,"arrivals":5,"firstArrivalDplus":33,"firstBearerNewcomer":0,"firstBearerPreexisting":0,"capD14":"no-stranger-pool","reqTotal":18,"reqUnbonded":0,"selfReqDayEntries":0,"npcNew":0,"firstBearerNew":0,"firstBearerNewUndriven":0,"laterBearerNew":0,"pickRank":1,"incall":true,"mantleRows":[{"i":0,"entryDay":41,"returnDay":41,"cause":"the expedition","flippedImmediate":true,"over":false,"sameDayCascade":false,"fineLatency":0,"coarseLatency":0,"rollCover":true,"heldBriefly":false,"firstNewTag":"scripted-kill","cls":"SAMPLING-or-CLEAN"}],"chainRows":[],"skips":0,"dryHits":[],"honestFallbacks":0,"nullReturns":0}
+{"seed":"33998","cap":"no-newcomer-arrival","capEligible":false,"bondedEver":false,"deadlineDplus":null,"arrivals":0,"firstArrivalDplus":null,"firstBearerNewcomer":0,"firstBearerPreexisting":2,"capD14":"bonded-d14","reqTotal":6,"reqUnbonded":1,"selfReqDayEntries":0,"npcNew":9,"firstBearerNew":2,"firstBearerNewUndriven":1,"laterBearerNew":0,"pickRank":1,"incall":true,"mantleRows":[{"i":0,"entryDay":6,"returnDay":6,"cause":"the expedition","flippedImmediate":true,"over":false,"sameDayCascade":false,"fineLatency":0,"coarseLatency":0,"rollCover":false,"heldBriefly":false,"firstNewTag":"scripted-kill","cls":"SAMPLING-or-CLEAN"}],"chainRows":[],"skips":0,"dryHits":[],"honestFallbacks":0,"nullReturns":0}
+CAP-NC verdict: bonded-by-deadline 1/1 eligible seeds.
+CAP-NC binding verdict (r187 newcomer-channel bar): INSUFFICIENT-DATA (<3 eligible, or bonded fraction below the pass line)
+CAP-NC non-denominator: ["second-handoff-before-deadline","no-newcomer-arrival","no-newcomer-arrival","no-newcomer-arrival"]
+Descriptive bondedEver (probe pair bonded in ANY snapshot or bondDaily): 2/2 probe-opened seeds.
+Descriptive CAP-D14 (r142 stranger probe): ["second-handoff-before-d14","bonded-d14","no-stranger-pool","no-stranger-pool","bonded-d14"]
+OPP totals: unbonded talk-requests 1; FIRST-bearer new bonds on undriven days 2; NPC-NPC new bonds 13; newcomer arrivals 6; FIRST-bearer newcomer bonds 0 vs pre-existing 3; selfReqDayEntries total 0 (r133 purge regression check, expect 0).
+MANTLE-FINE verdict: deaths observed 18 (village-over excluded: 1; flippedImmediate=false: 0; fineLatency>=2: 0; fineLatency==1 unexplained: 0; held-briefly same-day cascade bearers: 1; coarse>fine sampling gaps: 0; day-skips total: 0).
+MANTLE-FINE binding verdict: PASS (mantle flips synchronously at every observed death with a living successor; any coarse latency is sampling)
+MANTLE-COARSE (reported): [{"d":41,"coarse":0,"fine":0,"cls":"SAMPLING-or-CLEAN"},{"d":53,"coarse":null,"fine":0,"cls":"SAMPLING-or-CLEAN"},{"d":62,"coarse":null,"fine":0,"cls":"SAMPLING-or-CLEAN"},{"d":64,"coarse":null,"fine":0,"cls":"SAMPLING-or-CLEAN"},{"d":67,"coarse":null,"fine":0,"cls":"SAMPLING-or-CLEAN"},{"d":67,"coarse":null,"fine":1,"cls":"SAMPLING-or-CLEAN"},{"d":69,"coarse":null,"fine":1,"cls":"SAMPLING-or-CLEAN"},{"d":70,"coarse":null,"fine":1,"cls":"SAMPLING-or-CLEAN"},{"d":88,"coarse":null,"fine":1,"cls":"SAMPLING-or-CLEAN"},{"d":89,"coarse":null,"fine":1,"cls":"SAMPLING-or-CLEAN"},{"d":90,"coarse":null,"fine":0,"cls":"VILLAGE-OVER"},{"d":41,"coarse":0,"fine":0,"cls":"SAMPLING-or-CLEAN"},{"d":65,"coarse":null,"fine":1,"cls":"SAMPLING-or-CLEAN"},{"d":41,"coarse":0,"fine":0,"cls":"SAMPLING-or-CLEAN"},{"d":78,"coarse":null,"fine":0,"cls":"SAMPLING-or-CLEAN"},{"d":88,"coarse":null,"fine":0,"cls":"SAMPLING-or-CLEAN"},{"d":41,"coarse":0,"fine":0,"cls":"SAMPLING-or-CLEAN"},{"d":6,"coarse":0,"fine":0,"cls":"SAMPLING-or-CLEAN"}]
+DRY-CENSUS verdict: dry hits 0 (binding-class 0; other-class 0; honest fallbacks 0; null-return silences 0).
+DRY-CENSUS binding verdict: PASS (zero dry lines on the panel)
+DRY-CENSUS r192 wild check (deflect_q + dlg:doubt; refusal has no sayTrace pick — covered by its proof test): deflect_q 0, dlg:doubt 0, other-class 0.
