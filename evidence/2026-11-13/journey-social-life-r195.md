@@ -291,8 +291,14 @@ per prereg. Does not block the merge.
   recapempty-pool).
 - Telemetry: 5 LOUD lines, all the explained l3.* schema drift;
   baseline NOT rolled (re-verified by adoption).
-- Commits (rebased onto master 6df2519b9): 6492e701d (fix +
-  tooling, [needs-eyes]), 3d388d59e (evidence).
+- Commits: 56655e81e (fix + tooling, [needs-eyes]), 7d4267acd
+  (evidence), b6683317b (adoption closeout). Rebased twice: first
+  onto master 6df2519b9 (proofrefresh-b11), then onto 2de59ab7f
+  (scale-onramp coordinator evidence — master moved during the
+  adoption, first ff-only merge refused as diverging); proofs
+  re-run 17/17 after each rebase. Merged ff-only
+  2de59ab7f..b6683317b; master HEAD b6683317b. (Coordinator
+  evidence: evidence/2026-11-13/sim-journey-social-r195-coordinator.md.)
 - Merged locally, pending ship (no version bump, no push, no live
   verification — ship loop owns those).
 - Rotation-b: 5 -> 6 (crisis next).
