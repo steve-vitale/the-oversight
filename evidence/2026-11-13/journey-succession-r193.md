@@ -272,12 +272,35 @@ fellBack=true, returned the dry line).
 - Evidence committed in full, r187 convention: fix + proof, driver +
   analyzer + runner, prereg + run note + analyzer + panel log +
   per-seed stdout/stderr + telemetry JSONs + transcripts.
+- Second rebase at adoption: master moved again (3f5191e4b, Loop B
+  1430Z coordinator evidence; the voicejoins arm was CHECK-FIRST,
+  no build). The range f3f3ea7ae..3f5191e4b has NO src/js changes
+  (4 files, scripts only) — no overlap with this run's fix. Proof
+  re-run 12/12 post-rebase (see Gate).
 
-## Gate — PENDING
+## Gate — DONE (adoption coordinator)
 
-Full `node scripts/check.js` with `--cacheDirectory=/tmp/jest-cache-playtest2`
-to be run after the sim-mirrorcap-geared-b `--quick` gate (PID 33152)
-finishes — never two check.js at once. To be filled on completion.
+`node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-playtest2`
+on the f3f3ea7ae-rebased tip (branch f6075c821): **333 passed,
+7 failed in 799s** — GO after adjudication, zero attributable to
+this run's fix. Log:
+evidence/2026-11-13/journey-succession-r193-check.log.
+
+- 3× exact-120s spawn timeouts (load artifacts, all green
+  standalone): living-garden-deed-attainment 8/0, occupation-panels
+  25/0, one-person-army-deed-attainment 7/0.
+- measurement-cache-flags 3/4 in gate → 4/4 standalone (load
+  artifact, tracks box load).
+- measurement-proof-update + measurement-workflow (staleness pair):
+  "Proof source inputs are not current" — pre-existing, fails
+  identically on master with and without the fix (finding #2299);
+  proof refresh rounds 11 + 12 owed.
+- phone-frame-proof: standing stale receipt.
+- The new proof test (12/12) and the r192 family proofs (deflectq
+  10/10, doubt 9/9, refusal 11/11) re-run green post-rebase
+  (12/12 on the final 3f5191e4b-rebased tip, branch 7439c7857);
+  the gate's dot-line shows no other failure, so all 333 passes
+  include the journey proof scripts in the quick list.
 
 ## Metric review
 
