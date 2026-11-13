@@ -13,10 +13,13 @@
 #   1. Refuses if any TRACKED file is dirty (untracked step corpora
 #      from earlier steps are fine).
 #   2. Checks out <commit> detached.
-#   3. Restores tooling scratch from branch sim-culpritbisect-a
+#   3. Restores tooling scratch from master
 #      (bisect driver + analyzer + masterregress analyzer, which the
 #      bisect analyzer requires, + vetfirst instrument — none of
-#      these exist in the old trees).
+#      these exist in the old trees). The tooling lives on master
+#      (landed with the round-11 merge); the old BRANCH
+#      sim-culpritbisect-a was deleted after that merge, so
+#      restoring from it fails. (Round 12 fix, 2026-11-13.)
 #   4. Swaps in the fix standing.js (sha f8fda429...), verifies the
 #      ROSTER CHECK marker + exact sha.
 #   5. Runs the bisect driver (8 seeds, 150d, competent verbatim)
@@ -32,7 +35,7 @@
 # On ANY failure it restores standing.js + deletes scratch before
 # exiting non-zero. It never commits anything.
 set -u
-BRANCH="sim-culpritbisect-a"
+BRANCH="master"
 FIX_SHA="f8fda4295a99720dcb54d0c69f5fa6836f55cf9d9c8c5d1e51e5f0aa49c43078"
 SEEDS="190391,190392,190393,190394,190395,190396,190397,190398"
 

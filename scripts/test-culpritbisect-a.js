@@ -54,6 +54,10 @@
 //      hook); the policy flips once on the origin range (91cb6fa20)
 //      between the far-end sha (a7ff5c51...) and the merge sha
 //      (26a87e49...).
+//   4b. Step-script restore source (round 12) — the BRANCH the step
+//      runner restores its tooling scratch from exists and carries
+//      all four scratch files (master, after sim-culpritbisect-a
+//      was deleted post-merge); the deleted branch is refused.
 //   5. Corpus completeness — the analyzer's per-seed filename
 //      pattern for a step corpus.
 //   6. Step classification + boundary judge — classifyStep maps
@@ -290,6 +294,33 @@ function driverForLeg(leg) {
   T.ok('the single policy change is the OVE-160 garden commit 91cb6fa20', policyCommits[0].indexOf('91cb6fa20') === 0, policyCommits[0]);
   const instrumentText = show('f7352f946', 'scripts/vetfirst-instrument-20261111.js');
   T.ok('vetfirst instrument sha is 311f105bc15f at the near end', sha256(instrumentText) === '311f105bc15f55544143354eceb74b81d03b95d542a5c1f87e824a2260c40d23', sha256(instrumentText).slice(0, 12));
+
+  // ---- 4b. Step-script restore source (round-12 fix) ----
+  // The step runner restores its tooling scratch from BRANCH at old
+  // checkouts. Branch sim-culpritbisect-a was deleted after the
+  // round-11 merge, so BRANCH must name a ref that exists AND
+  // carries all four scratch files — master does. A step that
+  // cannot restore its scratch fails before any judged sim.
+  T.section('4b. Step-script restore source — BRANCH exists and carries the tooling (round-12 fix)');
+  const stepSrc = fs.readFileSync(path.join(__dirname, 'culpritbisect-step.sh'), 'utf8');
+  const branchMatch = stepSrc.match(/^BRANCH="([^"]+)"/m);
+  T.ok('step script declares a BRANCH', branchMatch !== null, 'BRANCH=' + (branchMatch ? branchMatch[1] : 'none'));
+  const restoreBranch = branchMatch ? branchMatch[1] : '';
+  T.ok('step script BRANCH is NOT the deleted sim-culpritbisect-a', restoreBranch !== 'sim-culpritbisect-a', 'BRANCH=' + restoreBranch);
+  let restoreBranchExists = false;
+  try { execSync('git rev-parse --verify ' + restoreBranch, { cwd: path.join(__dirname, '..'), stdio: 'pipe' }); restoreBranchExists = true; } catch (e) { restoreBranchExists = false; }
+  T.ok('step script BRANCH resolves to a ref (' + restoreBranch + ')', restoreBranchExists, 'BRANCH=' + restoreBranch);
+  const scratchFiles = [
+    'scripts/culpritbisect-driver-20261113.js',
+    'scripts/culpritbisect-analyze-20261113.js',
+    'scripts/masterregress-analyze-20261113.js',
+    'scripts/vetfirst-instrument-20261111.js',
+  ];
+  for (const f of scratchFiles) {
+    let okScratch = false;
+    try { show(restoreBranch, f); okScratch = true; } catch (e) { okScratch = false; }
+    T.ok('restore source ' + restoreBranch + ' carries ' + f, okScratch, f);
+  }
 
   // ---- 5. Corpus completeness on a synthetic corpus ----
   T.section('5. Corpus completeness — loader names missing seeds');
