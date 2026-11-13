@@ -1,0 +1,7 @@
+ep-far 203a32775 GOOD 4/8 median 150d rank REGIONAL_INTACT errors 0 (endpoint verification; per-seed 86/144/150/43/150/87/150/150 = masterregress far exactly)
+ep-merge e4dbe581b BAD 1/8 median 126d rank REGIONAL_INTACT errors 0 (endpoint verification; per-seed 103/150/115/140/76/126/115/136 = masterregress merge exactly)
+s01 305ae6279 bisect-pick-1 'Refresh person-trust baseline for DUTY dawn pick' (78 revisions left, ~6 steps)
+s01 305ae6279 BAD 1/8 median 109d rank RANK_STALL errors 0 (per-seed 117/100/107/119/81/109/150/76 — sole survivor 190397; regional 0/8)
+s02 aa5d9ef92 bisect-pick-2 'Merge PR #24 heard-raid-danger-3a06' (38 revisions left, ~5 steps)
+s02 aa5d9ef92 AMBIGUOUS 2/8 median 112d rank RANK_STALL errors 0 (per-seed 71/150/112/54/97/150/112/97 — survivors 190392, 190396; regional 0/8; re-run required per prereg rule, adoption)
+s02r aa5d9ef92 AMBIGUOUS 2/8 median 112d rank RANK_STALL errors 0 (re-run of s02 — per-seed days BYTE-IDENTICAL to first pass 71/150/112/54/97/150/112/97, deaths 688; deterministic harness, so the re-run confirms 2/8 is structural, not noise; recorded AMBIGUOUS, bisect proceeds treating as BAD per prereg)
