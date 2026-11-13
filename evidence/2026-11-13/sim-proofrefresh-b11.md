@@ -277,15 +277,17 @@ for its conditional arm. Round 12 stays owed for the next B run.
   run. No work lost.
 - No metric revision proposed for the next run. The prereg held.
 
-## Commits (branch sim-proofrefresh-b11, base 89b9030f9 → rebased 5c2a5866f)
+## Commits (branch sim-proofrefresh-b11, base 89b9030f9 → rebased 5c2a5866f → rebased 941eecdce)
 
-- bae517528 — prereg + proof test (12 legs modeled on b10; was ae3d6531c)
-- 21f2b5f74 — fresh real neutral panel (REGENERATED on 89b9030f9) +
-  proof re-point + evidence (GO 12/12 on the 89b9030f9 tip; was 24cb2e543)
-- dc8ee91a0 — flap-blocked closeout note + adoption resume commands
-  (was 4567faae2)
-- [pending] — closeout addendum (rebase + re-verification + landing
-  record) + proof-test label fix
+- 3c781f9e8 — closeout addendum (flap cleared, rebase + re-verify,
+  proof-test label fix; was 8de789d60)
+- 08d2c115f — flap-blocked closeout note + adoption resume commands
+  (was dc8ee91a0)
+- [panel commit, rebased] — fresh real neutral panel (REGENERATED on
+  89b9030f9) + proof re-point + evidence (GO 12/12 on the 89b9030f9
+  tip; was 21f2b5f74)
+- [prereg commit, rebased] — prereg + proof test (12 legs modeled on
+  b10; was bae517528)
 
 ## Closeout — FLAP-BLOCKED at the rebase (RESOLVED, landed)
 
@@ -342,6 +344,18 @@ the record; no adoption needed. Round 12 stays owed for the next B run.]
 
 ## Closeout — LANDED
 
-- Merge: `git merge --ff-only sim-proofrefresh-b11` in the main tree
-  [TO BE COMPLETED: merge SHA, ancestry verification, release, main-tree
-  clean check].
+- Master moved AGAIN under the closeout: the culpritbisect-c landing
+  (941eecdce, evidence-only — corpora + logs, no manifest file) landed
+  while the first merge was attempted, so `git merge --ff-only`
+  refused cleanly ("Diverging branches can't be fast-forwarded", no
+  damage, no pipe involved). Branch rebased a second time onto the
+  explicit new SHA 941eecdce (4/4 picks clean), leg (a) re-verified
+  9/9 exit 0 on the new tip 3c781f9e8; the panel stays valid (manifest
+  identical, 0 stale keys). Merge (next step, this commit is the last one
+  on the branch): `git merge --ff-only sim-proofrefresh-b11` in the main
+  tree (no pipe, strict && chain; ancestry verified with
+  `git merge-base --is-ancestor` after). Then release:
+  `worktree-release.sh sim-proofrefresh-b11 merged`, worktree removed,
+  branch deleted, `worktree-reap.sh`, main tree verified clean. No push,
+  no bump, no live verification — the ship loop owns deploys.
+  "Merged locally, pending ship."
