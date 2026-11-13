@@ -205,5 +205,7 @@ prereg: far end 203a32775 4/8, merge e4dbe581b 1/8, on seeds
   NOT rolled.
 - Closeout: arm branch rebased onto master 95dbf07f3 (current tip at
   closeout; the brief's 2de59ab7f had been superseded by the Loop B
-  r195 landing), proofs re-run on the rebased tip. Final branch tip:
-  `302e8584a` (2 commits: prereg+test, conflict-STOP record).
+  r195 landing), proofs re-run on the rebased tip. Proof-verified
+  rebased tip: `302e8584a` (2 commits: prereg+test, conflict-STOP
+  record); one record-only commit follows it on the branch (this
+  file's tip-hash line itself).
