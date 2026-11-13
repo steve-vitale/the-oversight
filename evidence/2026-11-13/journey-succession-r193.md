@@ -301,6 +301,15 @@ evidence/2026-11-13/journey-succession-r193-check.log.
   (12/12 on the final 3f5191e4b-rebased tip, branch 7439c7857);
   the gate's dot-line shows no other failure, so all 333 passes
   include the journey proof scripts in the quick list.
+- Third rebase at adoption: master moved again (46cdc89cb, r135
+  adoption landing — field-ask gate in the SAME file,
+  villager-agency.js, lines ~1097–1141 + teach-block spend). No
+  conflict; both fixes coexist (closer pool-picker now line 1289).
+  Proof re-run on the final tip (branch 42f81e996): 12/12, plus
+  r192 trio 10/10 + 9/9 + 11/11 — all green. No gate re-run: the
+  r135 range adds no new game behavior this branch's gate did not
+  already cover (its own gate ran 335/5 GO on the same base), and
+  the proof re-run is the affected-path check.
 
 ## Metric review
 
