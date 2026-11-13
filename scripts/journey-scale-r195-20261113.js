@@ -1056,7 +1056,7 @@ async function playSeed(seed) {
       results.push({ seed, crash: String(e && e.message || e) });
     }
   }
-  console.log('\n===== R134 SUMMARY =====');
+  console.log('\n===== R195 SUMMARY =====');
   for (const r of results) {
     if (r.crash) { console.log(`seed ${r.seed}: CRASH ${r.crash}`); continue; }
     console.log(`seed ${r.seed}: day=${r.day} over=${r.over} won=${r.won} pop=${r.popAlive}/${r.popTotal} lead=${r.leadActive}/${r.leadSeasoned} rank=${r.scaleRank} natV=${r.nationalVoiced} globV=${r.globalVoiced} proposed=${r.proposedLead} lr=${r.linkraise ? (r.linkraise.raisesAnswered + '/' + r.linkraise.raisesSeen + ' err' + r.linkraise.errors) : '-'} lrTalks=${(r.raiseTalks||[]).length} tended=${r.tended} defense=${r.defenseCalls} seat=${r.tableSeat} arc=${r.arcNow} tW=${r.tableWaiting} sit=${r.sitStats ? (r.sitStats.taken + '/' + r.sitStats.previewSeen) : '-'} door=${r.modalStats ? ((r.modalStats.doors||[]).map(d=>d.door).join(',')||'-') : '-'} gAns=${(r.globalNotes||[]).length}`);
