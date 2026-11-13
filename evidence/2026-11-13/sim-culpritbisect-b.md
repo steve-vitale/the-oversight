@@ -15,28 +15,37 @@ BAD). Prior round: evidence/2026-11-13/sim-culpritbisect-a.md.
 This file is the round-12 prereg addendum + step record. It does
 NOT re-judge any prior verdict.
 
-## Verdict: BISECT NARROWED, NOT CLOSED (s03 done; s04 in progress below)
+## Verdict: BISECT NARROWED, NOT CLOSED (s03 + s04 done)
 
 s03 (7688cb7a4, PR #10 snippet-stage-direction-guard) is AMBIGUOUS
 2/8 on the first pass AND on the prereg-required re-run (summary
 identical modulo the step id — the harness is deterministic), so
 it is recorded AMBIGUOUS and the bisect proceeds treating it as
-BAD. The window narrows from (203a32775, aa5d9ef92] (39 revisions)
-to (203a32775, 7688cb7a4] (20 revisions). s03's per-seed days,
+BAD. s04 (7ddcdfff9, PR #6 raid-danger-heard-c0a3) is AMBIGUOUS
+2/8 on the first pass AND on its re-run (summary identical modulo
+the step id), recorded AMBIGUOUS, bisect treats as BAD. The
+window narrows from (203a32775, aa5d9ef92] (39 revisions) to
+(203a32775, 7ddcdfff9] (10 revisions). s03's per-seed days,
 standing, death causes, and wall numbers are IDENTICAL to s02's
 on every compared field — the 19 commits between s03 and s02
-(PRs #11–#24) change nothing measurable on this band. The
-collapse is still NOT (only) in standing.js: s03 stayed at 2/8
-with the roster-check fix swapped in.
+(PRs #11–#24) change nothing measurable on this band. s04 DOES
+move the trajectories (different survivors, 190393/190394 instead
+of 190392/190396; 592 deaths vs 688; standing range 120–370 vs
+180–385) yet still reads 2/8 — the raid-danger-heard change
+reshuffles which villages live without lifting the count. The
+collapse is still NOT (only) in standing.js: s03 and s04 both
+stayed at 2/8 with the roster-check fix swapped in.
 
 SHAPE WARNING (from the prereg, pre-registered): the origin
 endpoints are BOTH collapsed (merge-base d229b58f5 1/8, origin tip
 a628aeaf3 2/8), so this bisect may converge to the merge-base edge
 with no good→bad transition inside the origin line —
 DIAG-ORIGIN-COLLAPSED-AT-DIVERGENCE. s01 BAD + s02 AMBIGUOUS +
-s03 AMBIGUOUS are consistent with that shape so far; the next
-rounds will tell whether a single culprit commit exists or the
-origin line was already collapsed at divergence.
+s03 AMBIGUOUS + s04 AMBIGUOUS are consistent with that shape so
+far — three consecutive AMBIGUOUS picks, two distinct per-seed
+patterns, none reaching 3/8. The next rounds will tell whether
+a single culprit commit exists or the origin line was already
+collapsed at divergence.
 
 ## Round-12 fix (committed BEFORE any judged sim)
 
@@ -138,12 +147,65 @@ bisect was then `git bisect reset` and the branch checked back
 out; standing.js on the branch is byte-identical to HEAD
 (f9359976… — the fix is native on this branch).
 
+## s04 — 7ddcdfff9 'Merge PR #6 raid-danger-heard-c0a3': AMBIGUOUS
+
+- Candidate: 7ddcdfff96477b8a365aa3924b9a7232d2c71b58, first-parent
+  chain of the origin line (parents 21ae2d696 + dff2cd523),
+  2026-11-08, Cursor PR #6. Changes: `src/js/villager-objectives.js`
+  (+106/−~97, raid-danger heard → objectives), `src/js/game.js`
+  +8, `src/js/npc-triggers.js` +4, `src/js/villager-goals.js` +15,
+  plus docs (ONTOLOGY, VILLAGER-BRAIN), evidence, and test updates
+  (incl. a new 203-line raid-danger-heard test). The first
+  substantive game-code candidate in this bisect — unlike s02/s03,
+  it moves survival trajectories.
+- Split at pick time: 10 revisions below (mb..s04), 29 above
+  (s04..bad by rev-list — the bad side counts side-branch commits);
+  git reported 9 revisions left (~3 steps).
+- Survived 2/8, median 110d, rank RANK_STALL (regional 0/8),
+  errors 0. Per-seed days 79/97/150/150/77/122/110/63 —
+  survivors 190393 (150d) and 190394 (150d). Policy sha
+  a7ff5c516440 (far-end policy). Native standing 98c8bfad70d7;
+  fix f8fda4295a99 swapped in and verified, native restored
+  byte-identical afterwards (sha-verified by the step script).
+- Wall: wins 0, national 0, table 0, regional 0/8, village 8/8,
+  wave-5 2/8 (190394, 190396), wave-4 8/8, deaths 592
+  (villager combat 217, expedition 154, combat 99, the wild 75,
+  monster 9; starvation 5, sickness 8, wound 6, the rest single
+  digits), standing range 120–370 (per-seed 120/199/199/370/
+  175/365/199/120), blooded 2/8 (190392, 190397), tribute-ready
+  0/8 (all veterans-short; ready4 peak 1, ready5 peak 1 — the
+  wave-5 choke holds: no seed reaches 2 living wave-4+
+  veterans).
+- Contrast with s02/s03: different survivors, fewer deaths
+  (592 vs 688), lower standing floor (120 vs 180). The
+  raid-danger-heard change reshuffles outcomes but does not lift
+  survival off the 2/8 plateau.
+
+## s04 re-run — AMBIGUOUS again (2/8), recorded AMBIGUOUS, bisect treats as BAD
+
+Re-run (STEP=s04r-7ddcdfff9, same 8 seeds, same commit, fix
+swapped in): survived 2/8, median 110d, rank RANK_STALL,
+errors 0 — summary identical to the first pass modulo the step
+id. The harness is deterministic, so the re-run confirms the
+2/8 is structural, not noise. Per the prereg rule the re-run
+was supposed to decide; it reproduced AMBIGUOUS exactly, so
+s04 is recorded AMBIGUOUS and the bisect proceeds treating it
+as BAD (`git bisect bad` run; git advanced to the next pick).
+
+**Narrowed window: (203a32775, 7ddcdfff9], 10 revisions.**
+Next pick (from `git bisect bad`): c0a85b17e 'Merge
+origin/master into forager deed branch', 3 revisions left
+(~2 steps). The bisect was then `git bisect reset` and the
+branch checked back out.
+
 ## Wall numbers (this round's steps)
 
 | step | survived | median | regional | wave-5 | wins | national | table |
 |------|----------|--------|----------|--------|------|----------|-------|
 | s03 | 2/8 | 112d | 0/8 | 2/8 | 0 | 0 | 0 |
 | s03r | 2/8 | 112d | 0/8 | 2/8 | 0 | 0 | 0 |
+| s04 | 2/8 | 110d | 0/8 | 2/8 | 0 | 0 | 0 |
+| s04r | 2/8 | 110d | 0/8 | 2/8 | 0 | 0 | 0 |
 
 (Carried forward: ep-far 4/8 median 150d regional 8/8; ep-merge
 1/8 median 126d regional 8/8; s01 1/8 median 109d regional 0/8;
@@ -165,6 +227,12 @@ in any step of this bisect.)
 - evidence/2026-11-13/culpritbisect-a-{s03,s03r}-7688cb7a4-driver.log
   — driver logs.
 - evidence/2026-11-13/perseed-culpritbisect-a-{s03,s03r}-7688cb7a4/
+  — per-seed JSONs (8 each).
+- evidence/2026-11-13/culpritbisect-a-{s04,s04r}-7ddcdfff9-summary.json
+  — analyzer summaries.
+- evidence/2026-11-13/culpritbisect-a-{s04,s04r}-7ddcdfff9-driver.log
+  — driver logs.
+- evidence/2026-11-13/perseed-culpritbisect-a-{s04,s04r}-7ddcdfff9/
   — per-seed JSONs (8 each).
 
 ## Proof
@@ -189,13 +257,23 @@ steps are cheap to run and the AMBIGUOUS plateau may persist
 across several picks — the DIAG shape warning grows stronger
 with each identical read, and if s04–s06 also read 2/8 the
 round should say so plainly rather than grinding the whole
-remaining window one pick at a time.
+remaining window one pick at a time. (s04 update: s04 reads
+2/8 too, but with a DIFFERENT per-seed pattern — the plateau
+is not one frozen outcome, it is a band the origin line cannot
+climb out of. Three consecutive AMBIGUOUS picks now: s02, s03,
+s04. If s05 also reads 2/8, the round should weigh calling the
+DIAG outcome at the merge-base edge rather than spending
+further rounds on the last ~3 revisions — a coordinator call,
+not this arm's to make unilaterally.)
 
 ## Next pick (for round 13)
 
 `git bisect start aa5d9ef92 203a32775`, skip the merge base
 d229b58f5, mark s03 (7688cb7a4) bad (recorded AMBIGUOUS,
-treated as BAD), and git checks out 7ddcdfff9 'Merge PR #6
-raid-danger-heard-c0a3' — run it as s04-7ddcdfff9. 9 revisions
-left (~3 steps) after that pick; the window after s04 depends
-on its verdict.
+treated as BAD), mark s04 (7ddcdfff9) bad (recorded AMBIGUOUS,
+treated as BAD), and git checks out c0a85b17e 'Merge
+origin/master into forager deed branch' — run it as
+s05-c0a85b17e. 3 revisions left (~2 steps) after that pick; the
+window after s05 depends on its verdict. Note: c0a85b17e is a
+branch merge (parents c15b8c56 + fbb9c53e), not a PR merge —
+its content is the forager-deed branch merged with master.
