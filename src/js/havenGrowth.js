@@ -711,7 +711,19 @@
           if (fled) bits.push(`${fled} barely walked away`);
           const hurt = defenseReport.filter(r => (r.rec && (r.rec.vTaken || 0)) > 0 && (r.rec.outcome !== 'vDie'))
             .map(r => refName(r.vid));
-          let line = `🛡️ ${nameList} met them at the door — ${bits.join(', ') || 'met them and lived'}.`;
+          // FALLEN-WORDING (journey-endgame r188 2026-11-12): when the
+          // defenders earned no bit and one fell, the old fallback
+          // "met them and lived" contradicted the "didn't come back"
+          // that follows — one line said the sole defender both lived
+          // and died (r188 89703: "Tama met them at the door — met them
+          // and lived. Tama didn't come back."). The pick was correct
+          // (Tama was alive at the pick and died IN that raid fight);
+          // only the wording lied. Drop the lived-clause when someone
+          // fell and no bit was earned; the fallen sentence carries
+          // the cost. No-bit/no-fallen (already-dead monster) keeps
+          // "met them and lived".
+          const mid = bits.join(', ') || (fallen.length ? '' : 'met them and lived');
+          let line = `🛡️ ${nameList} met them at the door${mid ? ' — ' + mid : ''}.`;
           if (fallen.length) line += ` ${fallen.join(', ')} didn't come back.`;
           if (hurt.length) line += ` ${hurt.join(', ')} ${hurt.length === 1 ? 'is' : 'are'} hurt.`;
           // ENDDAYBEATS-FIX: defense report is raid news — relay,
