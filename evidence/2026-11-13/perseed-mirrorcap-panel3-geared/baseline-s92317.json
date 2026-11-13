@@ -1,0 +1,293 @@
+{
+  "seed": 92317,
+  "arm": "baseline",
+  "waves": [
+    "mirror_stag",
+    "landlord",
+    "reunion"
+  ],
+  "partyN": 3,
+  "perWave": [
+    {
+      "waveIdx": 0,
+      "mid": "mirror_stag",
+      "packAtStart": {
+        "mirror_stag": 1
+      },
+      "reunionCountAtStart": 0,
+      "partyN": 3,
+      "scholarHpAtStart": 1,
+      "outcome": "chained",
+      "steps": 3,
+      "scholarHpAtEnd": 1,
+      "monstersAtEnd": [
+        {
+          "id": "mirror_stag",
+          "hpFrac": -0.078,
+          "alive": false
+        }
+      ],
+      "tbEndResult": "won",
+      "rowOutcome": "won",
+      "rowRounds": 2
+    },
+    {
+      "waveIdx": 1,
+      "mid": "landlord",
+      "packAtStart": {
+        "landlord": 1
+      },
+      "reunionCountAtStart": 0,
+      "partyN": 3,
+      "scholarHpAtStart": 1,
+      "outcome": "chained",
+      "steps": 3,
+      "scholarHpAtEnd": 1,
+      "monstersAtEnd": [
+        {
+          "id": "landlord",
+          "hpFrac": -0.247,
+          "alive": false
+        }
+      ],
+      "tbEndResult": "won",
+      "rowOutcome": "won",
+      "rowRounds": 2
+    },
+    {
+      "waveIdx": 2,
+      "mid": "reunion",
+      "packAtStart": {
+        "reunion": 3
+      },
+      "reunionCountAtStart": 3,
+      "partyN": 2,
+      "scholarHpAtStart": 1,
+      "outcome": "died",
+      "steps": 4,
+      "scholarHpAtEnd": -0.17,
+      "monstersAtEnd": [
+        {
+          "id": "reunion",
+          "hpFrac": 0.903,
+          "alive": true
+        },
+        {
+          "id": "reunion",
+          "hpFrac": 1,
+          "alive": true
+        },
+        {
+          "id": "reunion",
+          "hpFrac": 1,
+          "alive": true
+        }
+      ],
+      "tbEndResult": "lost",
+      "rowOutcome": "lost",
+      "rowRounds": 3
+    }
+  ],
+  "outcome": "died",
+  "deaths": [
+    {
+      "scholarId": "gen_dm28ppi",
+      "causeArg": "the arena",
+      "waveIdx": 2,
+      "day": 30
+    }
+  ],
+  "fixture": {
+    "loadout": {
+      "scholar": {
+        "melee": "machete",
+        "torso": "wardens_cloak"
+      },
+      "allies": {
+        "ranged": "hunting_spear",
+        "torso": "bark_armor"
+      }
+    },
+    "scholarGear": {
+      "weaponBonus": 35,
+      "armorProtection": 25,
+      "slots": {
+        "acc1": {
+          "itemId": "dog_tags",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc2": {
+          "itemId": "dispatchers_headset",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc3": {
+          "itemId": "mixtape",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc4": {
+          "itemId": "knife_roll",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "melee": {
+          "itemId": "machete",
+          "weaponBonus": 35,
+          "armorProtection": 0
+        },
+        "torso": {
+          "itemId": "wardens_cloak",
+          "weaponBonus": 0,
+          "armorProtection": 25
+        }
+      }
+    },
+    "allyGear": [
+      {
+        "id": "gen_510x2gk",
+        "gear": {
+          "weaponBonus": 30,
+          "armorProtection": 15,
+          "slots": {
+            "head": {
+              "itemId": "winter_coat_button",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc1": {
+              "itemId": "trail_compass",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc2": {
+              "itemId": "dispatchers_headset",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc3": {
+              "itemId": "dead_phone",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc4": {
+              "itemId": "reading_glasses",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "ranged": {
+              "itemId": "hunting_spear",
+              "weaponBonus": 30,
+              "armorProtection": 0
+            },
+            "torso": {
+              "itemId": "bark_armor",
+              "weaponBonus": 0,
+              "armorProtection": 15
+            }
+          }
+        }
+      },
+      {
+        "id": "gen_ki2lf47",
+        "gear": {
+          "weaponBonus": 30,
+          "armorProtection": 15,
+          "slots": {
+            "head": {
+              "itemId": "mothers_ring",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc1": {
+              "itemId": "trail_compass",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc2": {
+              "itemId": "search_locket",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc3": {
+              "itemId": "knife_roll",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc4": {
+              "itemId": "tote_bag",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "ranged": {
+              "itemId": "hunting_spear",
+              "weaponBonus": 30,
+              "armorProtection": 0
+            },
+            "torso": {
+              "itemId": "bark_armor",
+              "weaponBonus": 0,
+              "armorProtection": 15
+            }
+          }
+        }
+      }
+    ],
+    "partyN": 3,
+    "scholarHp": 100
+  },
+  "capConstant": null,
+  "reunionWave": {
+    "reached": true,
+    "outcome": "died",
+    "reunionCount": 3,
+    "partyN": 2,
+    "scholarHpAtStart": 1,
+    "scholarHpAtEnd": -0.17,
+    "tbEndResult": "lost"
+  },
+  "instrumentErrors": [],
+  "logTail": [
+    "You STRIKE the everyone you've buried, standing up 1 for 41 (Machete).",
+    "A person, maybe 30s, with deep-set eyes runs for it!",
+    "👥 Faces surface on its body — your own snarl. It knows \"strike\" — it watched you do it 2 times. YOUR MOVE, back at you.",
+    "Armor absorbs 40.",
+    "A person, maybe 30s, with deep-set eyes shouts: \"Move! MOVE!\"",
+    "Your own move, returned hits you for 18.",
+    "👥 Faces surface on its body — your own snarl. It knows \"strike\" — it watched you do it 2 times. YOUR MOVE, back at you.",
+    "Armor absorbs 44.",
+    "Your own move, returned hits you for 19.",
+    "👥 Faces surface on its body — your own snarl. It knows \"strike\" — it watched you do it 2 times. YOUR MOVE, back at you.",
+    "Armor absorbs 43.",
+    "Your own move, returned hits you for 19.",
+    "(everyone you've buried, standing up 1's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up 1 for 48 (Machete).",
+    "(everyone you've buried, standing up 1's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up 1 for 45 (Machete).",
+    "💥 The attack finds you — no dodging it.",
+    "Armor absorbs 42.",
+    "The attack hits you for 18.",
+    "📖 Codex: Your Move — locks onto one target — moving won't dodge it. You won't forget this.",
+    "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)",
+    "💥 The Your Move finds you — no dodging it.",
+    "Armor absorbs 51.",
+    "The Your Move hits you for 22.",
+    "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)",
+    "💥 The Your Move finds you — no dodging it.",
+    "Armor absorbs 47.",
+    "The Your Move hits you for 21.",
+    "You go down.",
+    "Nobody's talking much. The fire feels smaller tonight.",
+    "🕯️ Dorothy Butler is dead — the arena. The village stops. Somebody screams. Somebody else starts digging.",
+    "What Dorothy kept close goes into the ground with them — keepsakes are buried, never taken from the body.",
+    "Easton picks up the journal. Their hands shake. Then they open it, and keep writing.",
+    "📖 LEARNED: Reading Tracks (Level 1). Fresh tracks have sharp edges. Old tracks crumble. You can tell how recently something passed.",
+    "📖 LEARNED: Patient Aim (Level 1). One shot. You don't take the shot unless it's the shot.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Dorothy Butler, 30 days. The mantle passes to Easton Barbieri.",
+    "🪞 You wake up somebody else. Easton Barbieri, 33 — a hunting guide. Their hands know different work now: Bloodhound."
+  ]
+}

@@ -1,0 +1,264 @@
+{
+  "seed": 92307,
+  "arm": "baseline",
+  "waves": [
+    "terms_of_service",
+    "reunion",
+    "reunion"
+  ],
+  "partyN": 3,
+  "perWave": [
+    {
+      "waveIdx": 0,
+      "mid": "terms_of_service",
+      "packAtStart": {
+        "terms_of_service": 1
+      },
+      "reunionCountAtStart": 0,
+      "partyN": 3,
+      "scholarHpAtStart": 1,
+      "outcome": "chained",
+      "steps": 8,
+      "scholarHpAtEnd": 0.8,
+      "monstersAtEnd": [
+        {
+          "id": "terms_of_service",
+          "hpFrac": -0.054,
+          "alive": false
+        }
+      ],
+      "tbEndResult": "won",
+      "rowOutcome": "won",
+      "rowRounds": 7
+    },
+    {
+      "waveIdx": 1,
+      "mid": "reunion",
+      "packAtStart": {
+        "reunion": 3
+      },
+      "reunionCountAtStart": 3,
+      "partyN": 3,
+      "scholarHpAtStart": 0.8,
+      "outcome": "died",
+      "steps": 5,
+      "scholarHpAtEnd": -0.2,
+      "monstersAtEnd": [
+        {
+          "id": "reunion",
+          "hpFrac": 0.829,
+          "alive": true
+        },
+        {
+          "id": "reunion",
+          "hpFrac": 1,
+          "alive": true
+        },
+        {
+          "id": "reunion",
+          "hpFrac": 1,
+          "alive": true
+        }
+      ],
+      "tbEndResult": "lost",
+      "rowOutcome": "lost",
+      "rowRounds": 4
+    }
+  ],
+  "outcome": "died",
+  "deaths": [
+    {
+      "scholarId": "gen_7w7fy2z",
+      "causeArg": "the arena",
+      "waveIdx": 1,
+      "day": 30
+    }
+  ],
+  "fixture": {
+    "loadout": {
+      "scholar": {
+        "melee": "machete",
+        "torso": "wardens_cloak"
+      },
+      "allies": {
+        "ranged": "hunting_spear",
+        "torso": "bark_armor"
+      }
+    },
+    "scholarGear": {
+      "weaponBonus": 35,
+      "armorProtection": 25,
+      "slots": {
+        "acc1": {
+          "itemId": "dispatchers_headset",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc2": {
+          "itemId": "trail_compass",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc3": {
+          "itemId": "paperback",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc4": {
+          "itemId": "home_key",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "melee": {
+          "itemId": "machete",
+          "weaponBonus": 35,
+          "armorProtection": 0
+        },
+        "torso": {
+          "itemId": "wardens_cloak",
+          "weaponBonus": 0,
+          "armorProtection": 25
+        }
+      }
+    },
+    "allyGear": [
+      {
+        "id": "gen_xaumd21",
+        "gear": {
+          "weaponBonus": 30,
+          "armorProtection": 15,
+          "slots": {
+            "head": {
+              "itemId": "buskers_harmonica",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc1": {
+              "itemId": "oath_ring",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc2": {
+              "itemId": "trail_compass",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc3": {
+              "itemId": "dead_phone",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc4": {
+              "itemId": "spare_socks",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "ranged": {
+              "itemId": "hunting_spear",
+              "weaponBonus": 30,
+              "armorProtection": 0
+            },
+            "torso": {
+              "itemId": "bark_armor",
+              "weaponBonus": 0,
+              "armorProtection": 15
+            }
+          }
+        }
+      },
+      {
+        "id": "gen_eimdyyj",
+        "gear": {
+          "weaponBonus": 30,
+          "armorProtection": 15,
+          "slots": {
+            "head": {
+              "itemId": "oath_ring",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc1": {
+              "itemId": "carpenters_square",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc2": {
+              "itemId": "search_locket",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc3": {
+              "itemId": "seed_packet",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc4": {
+              "itemId": "paperback",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "ranged": {
+              "itemId": "hunting_spear",
+              "weaponBonus": 30,
+              "armorProtection": 0
+            },
+            "torso": {
+              "itemId": "bark_armor",
+              "weaponBonus": 0,
+              "armorProtection": 15
+            }
+          }
+        }
+      }
+    ],
+    "partyN": 3,
+    "scholarHp": 100
+  },
+  "capConstant": null,
+  "reunionWave": {
+    "reached": false
+  },
+  "instrumentErrors": [],
+  "logTail": [
+    "Too close. It SNAPS toward A person, maybe 40s — proximity overrules patience.",
+    "👥 Faces surface on its body — your own snarl. It knows \"strike\" — it watched you do it 2 times. YOUR MOVE, back at you.",
+    "Armor absorbs 35.",
+    "Your own move, returned hits you for 15.",
+    "A person, maybe 60s runs for it!",
+    "A person, maybe 40s hits everyone you've buried, standing up 1 for 6.",
+    "(everyone you've buried, standing up 1's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up 1 for 53 (Machete).",
+    "A face goes still — released. The mass shudders.",
+    "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)",
+    "Too close. It SNAPS toward A person, maybe 40s — proximity overrules patience.",
+    "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)",
+    "A person, maybe 40s hits everyone you've buried, standing up 1 for 8.",
+    "(everyone you've buried, standing up 1's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up 1 for 53 (Machete).",
+    "A face goes still — released. The mass shudders.",
+    "Too close. It SNAPS toward A person, maybe 40s — proximity overrules patience.",
+    "A person, maybe 40s hits everyone you've buried, standing up 1 for 5.",
+    "(everyone you've buried, standing up 1's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up 1 for 50 (Machete).",
+    "A face goes still — released. The mass shudders.",
+    "💥 The attack finds you — no dodging it.",
+    "Armor absorbs 56.",
+    "The attack hits you for 24.",
+    "📖 Codex: Your Move — locks onto one target — moving won't dodge it. You won't forget this.",
+    "💥 The Your Move finds you — no dodging it.",
+    "Armor absorbs 58.",
+    "The Your Move hits you for 25.",
+    "You go down.",
+    "Nobody's talking much. The fire feels smaller tonight.",
+    "🕯️ Oscar Mazur is dead — the arena. The village stops. Somebody screams. Somebody else starts digging.",
+    "What Oscar kept close goes into the ground with them — keepsakes are buried, never taken from the body.",
+    "Salvatore picks up the journal. Their hands shake. Then they open it, and keep writing.",
+    "📖 LEARNED: Steady Hands (Level 1). Fine work under pressure. Dressing game, stitching wounds, tying snares — no shake.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Oscar Mazur, 30 days. The mantle passes to Salvatore Conti.",
+    "🪞 You wake up somebody else. Salvatore Conti, 42 — a carpenter. Their hands know different work now: Green Whisper."
+  ]
+}
