@@ -430,11 +430,14 @@ committed, no feel/combat/UI change exists to playtest.
 ## §9 — adoption note for the coordinator
 
 This worktree is on branch `sim-tendshift-a` at current master
-`f7352f946` + tooling commit `05924b87f`. The evidence commit is
-a second commit on the same branch (created by safe-commit.sh,
-which moves HEAD normally on a branch). Merge to local master
-via --ff-only from the branch, then release the tree per the loop
-body. Nothing here was merged, pushed, or version-bumped. The
+`f7352f946` + tooling commit `05924b87f`. The evidence text,
+summaries, and logs are in commit `77fa22f35`; the per-seed
+corpora (16 JSONs) follow in a second evidence commit on the same
+branch — safe-commit.sh does not accept directory paths (the two
+`perseed-*` dirs failed to add in the first evidence commit), so
+the corpora were committed by explicit file list. Merge to local
+master via --ff-only from the branch, then release the tree per
+the loop body. Nothing here was merged, pushed, or version-bumped. The
 worktree contains only committed work plus the evidence corpora
 in the evidence commit — EXCEPT the driver logs and the deepdiff
 log, which live in the worktree root as untracked files
