@@ -1265,15 +1265,31 @@
           // transcript can never disagree (sense-caught 2026-10-11: the old
           // fallback returned a ledger-blocked line, so the view showed it
           // while the transcript denied it).
+          // CLOSER POOL (journey-succession r193 2026-11-13): the loop used
+          // to call sayLine per closer and treat ANY truthy return as
+          // success — but sayLine RETURNS the dry line when the ledger
+          // blocks a closer, so a blocked first closer spoke "...Sorry,
+          // lost my train of thought." while the handler reported the
+          // closer as spoken (panel seed 34242, Carlos d48: preRun=true,
+          // fellBack=true — the exact split the comment above claims
+          // cannot happen). Same class as warn-details (r186), confront
+          // (r187), deflect_q (r192 F1) and dlg:doubt (r192 F3). The
+          // picker pre-checks each closer with convoWouldBlock and speaks
+          // the first one the ledger would NOT refuse; all blocked falls
+          // through to the honest noop below, never the dry line. Ordered
+          // pool, original first, no RNG — the clean-ledger common path
+          // still speaks the original closer verbatim.
           var closers = [
             '"There\'s more, but that\'s for another fire."',
             '"That\'s everything I brought back. The rest is just walking."',
             '"I\'ve told you everything I know about that."',
           ];
+          var closerLine = null;
           for (var ci = 0; ci < closers.length; ci++) {
-            var em2 = null;
-            try { em2 = this.sayLine(vid, closers[ci]); } catch (e) { em2 = null; }
-            if (em2) { spokenText = closers[ci]; closedOut = true; break; }
+            try { if (!this.convoWouldBlock(vid, closers[ci])) { closerLine = closers[ci]; break; } } catch (e) { closerLine = closers[ci]; break; }
+          }
+          if (closerLine) {
+            try { if (this.sayLine(vid, closerLine)) { spokenText = closerLine; closedOut = true; } } catch (e) {}
           }
         }
         if (!spokenText) {
