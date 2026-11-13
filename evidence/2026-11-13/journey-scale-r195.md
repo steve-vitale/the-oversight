@@ -227,11 +227,18 @@ change properly.
 
 - Proof test `test-journey-scale-r195-analyzer-20261113.js`: 29/29 green
   (re-run after every analyzer change).
-- `check.js --quick`: [TO FILL — started in background at closeout;
-  see status below.]
+- `check.js --quick`: **335/5 GO after adjudication (adoption re-run,
+  750s; log `evidence/2026-11-13/journey-scale-r195-gate.log`).** The 5
+  failures are 0 attributable — this run changed no `src/js`:
+  measurement-proof-update + measurement-workflow (staleness pair, fail
+  identically on master by read-only runs — proof refresh rounds 11+12
+  owed); phone-frame-proof (3/3, stale receipt, fails identically on
+  master); living-garden + one-person-army (120s load timeouts in the
+  gate, exit 0 standalone). Adjudicated at adoption; no re-run of the
+  panel was needed.
 - Commits on branch `journey-scale`: 52e2a4805 (instruments + prereg),
-  2c69b0097 (R134→R195 summary label), [TO FILL — analyzer fixes +
-  run note].
+  2c69b0097 (R134→R195 summary label), cf3df8488 (analyzer fixes + run
+  note), plus the adoption commit (gate log + this section).
 - Merge/release/rotation: [TO FILL at closeout.]
 
 ## Carried (not this run's to build)
