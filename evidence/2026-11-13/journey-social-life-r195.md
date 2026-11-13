@@ -242,11 +242,16 @@ Explained, not a bug. Baseline NOT rolled.
 
 ## Measurement-proof gate (job B5)
 
-`node scripts/godpath/test-measurement-proof-update.js` — NOT RUN
-YET this run (gate pending; see Closeout). Expected: still fails on
-manifest staleness (proof refresh rounds 11 + 12 owed — r192 + r193
-changed src/js since b10's panel). Reported only, per prereg. Does
-not block the merge.
+`node scripts/godpath/test-measurement-proof-update.js` — RUN by
+adoption (gate log
+evidence/2026-11-13/journey-social-life-r195-gate-adoption.log):
+fails on manifest staleness, as pre-registered. Proof refresh b11
+landed while this run was timing out (master 6df2519b9), but this
+branch's two src/js changes (conversation.js, convo-dialogue.js)
+re-stale the proof on the rebased tip — re-verified standalone
+post-rebase (exit 1, "Proof source inputs are not current").
+Proof refresh round 12 now owes r195's changes too. Reported only,
+per prereg. Does not block the merge.
 
 ## Verdicts
 
@@ -263,13 +268,33 @@ not block the merge.
   reading says the survival floor is still the binding constraint,
   owned elsewhere.
 
-## Closeout
+## Closeout (adoption, 2026-11-13 ~22:15Z)
 
-- [GATE PENDING] check.js --quick not yet run (Lane A
-  journey-scale r195's gate ran 20:17Z in its own tree; the slot
-  is free at note time — gate to run before merge, or by adoption).
-- Commits: [TO BE FILLED — tooling + fixes + evidence].
+- Gate (adoption re-run, full output saved):
+  `check.js --quick` 332 passed, 8 failed in 1276s (log
+  evidence/2026-11-13/journey-social-life-r195-gate-adoption.log).
+  Adjudication — 0 attributable: 4× exact-120s load timeouts
+  (living-garden, occupation-panels, one-person-army,
+  trust-observer-neutrality) all green standalone; measurement
+  staleness pair pre-existing (proof stale at base: 18 manifest
+  files changed since b10's panel; still stale post-rebase on the
+  branch's 2 src/js changes); phone-frame stale receipt
+  pre-existing; cache-flags 0/4 in-gate was the write flap (EPERM
+  in balance-panel workers, flap 21:27–22:15Z) — re-ran 4/4
+  standalone on the clear box (log
+  evidence/2026-11-13/journey-social-life-r195-cacheflags-standalone.log).
+  The timed-out run's partial gate log
+  (journey-social-life-r195-gate.log, 163 bytes) is NOT a result.
+- Proofs: all 17 green on the rebased tip (r172 ×8, r179
+  faceguard, r180 narrsplit + favorreq-exit, r181 proposelabel +
+  vendetta, r189 recapempty, r195 doorreq + favorreq-cycle +
+  recapempty-pool).
+- Telemetry: 5 LOUD lines, all the explained l3.* schema drift;
+  baseline NOT rolled (re-verified by adoption).
+- Commits (rebased onto master 6df2519b9): 6492e701d (fix +
+  tooling, [needs-eyes]), 3d388d59e (evidence).
 - Merged locally, pending ship (no version bump, no push, no live
   verification — ship loop owns those).
 - Rotation-b: 5 -> 6 (crisis next).
-- Lock deleted at closeout; hbloop killed.
+- Lock deleted at closeout; no orphan hbloop found (the run's
+  hbloop was already dead at adoption).
