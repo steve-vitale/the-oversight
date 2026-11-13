@@ -273,7 +273,14 @@ drive is the proof — the prereg says so).
 - check.js --quick took 1743s under heavy sibling load; three 120s
   timeouts are load artifacts, and the three petition-area crashes were
   proven pre-existing by re-running them on the reverted base.
-- Commits in this arm: prereg (f5b685ee2); fix + proof test; probe
-  driver + before/after corpora + this evidence. Merge --ff-only to
-  local master by the coordinator; no push, no bump, no live
-  verification (ship loop owns it).
+- Commits in this arm: prereg; fix + proof test; probe driver +
+  before/after corpora + this evidence. Merged locally via --ff-only;
+  no push, no bump, no live verification (ship loop owns it).
+- Rebase at closeout: a sibling arm (sim-silentvanish-b) landed on
+  local master after this arm's base, so the branch was rebased onto
+  05aa4ce5a (clean, no conflicts) and the proof test re-run GREEN
+  (20/20, seed 3) on the rebased tip before the --ff-only merge. The
+  probe-band before/after comparison stands on the pre-rebase base
+  48ed1ffd7, where it isolates this arm's fix; the rebase changed no
+  line this arm's fix touches (the corpora's anchorCommit
+  f5b685ee2728 is the probe-time HEAD, pre-rebase).
