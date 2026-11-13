@@ -326,12 +326,31 @@ against in this run; still owed.
     `test-one-person-army-deed-attainment.js`,
     `test-occupation-panels.js`, `test-trust-observer-neutrality.js`,
     `test-capable-bot-20261014.js`, `test-synergy-stall.js`.
-  - Adjudication: the same 4 timeout tests (trust-observer-neutrality,
-    synergy-stall, capable-bot, deed-attainment) timed out on r134's
-    rebased tip and passed standalone — the established load-artifact
-    pattern for exactly these tests. This run adds occupation-panels
-    (same sim-heavy class). The fix cannot slow sims (menu gate,
-    pure reads; BEFORE/AFTER trajectories byte-identical on 16
-    seeds). Standalone anchor: living-garden re-run with a 900s
-    timeout [FILL: result]. [FILL: commit, rebase, merge, rotation,
+  - Adjudication (adoption, 2026-11-13 ~07:06 CST): the same 4
+    timeout tests (trust-observer-neutrality, synergy-stall,
+    capable-bot, deed-attainment) timed out on r134's rebased tip
+    and passed standalone — the established load-artifact pattern
+    for exactly these tests. This run adds occupation-panels (same
+    sim-heavy class; its shown assertions all pass before the
+    120s cut). The fix cannot slow sims (menu gate, pure reads;
+    BEFORE/AFTER trajectories byte-identical on 16 seeds).
+    Standalone anchors, run by the adoption coordinator:
+    living-garden FULL re-run with a 900s timeout — **PASS 8/8
+    in ~609s** (`journey-establishment-r135-livinggarden-rerun.log`);
+    cache-flags A/B — gate run at the 30s cap 0/4, re-run with
+    300s timeouts **4/4** (`journey-establishment-r135-cacheflags-300s.log`),
+    the documented load artifact (AGENTS.md 2026-11-12); the 30s
+    cap stays, no code change. The 4 non-timeouts: proof-update +
+    workflow 8/9 are the measurement-proof staleness pair
+    (pre-existing since r133; refresh round 11 still owed);
+    phone-frame is the stale-receipt class (pre-existing). **None
+    of the 10 is attributable to the villager-agency.js fix.
+    Gate: GO after adjudication.**
+  - Commit: `bf245117c` (96 files: the fix in
+    `src/js/villager-agency.js`, proof test, driver, analyzers,
+    prereg, run note, panels, gate log). Safe-commit index
+    clobber struck (all 95 new files staged-as-deleted + MM on
+    the fix); repaired with `git ls-tree -r HEAD` +
+    `update-index --add --index-info`; status empty, diff HEAD
+    empty, hashes match HEAD. [FILL: rebase, merge, rotation,
     lock.]
