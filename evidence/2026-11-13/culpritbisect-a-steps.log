@@ -11,3 +11,5 @@ s03r 7688cb7a4 AMBIGUOUS 2/8 median 112d rank RANK_STALL errors 0 (re-run of s03
 s04 7ddcdfff9 bisect-pick-4 'Merge PR #6 raid-danger-heard-c0a3' (9 revisions left, ~3 steps)
 s04 7ddcdfff9 AMBIGUOUS 2/8 median 110d rank RANK_STALL errors 0 (per-seed 79/97/150/150/77/122/110/63 — survivors 190393, 190394; regional 0/8; re-run required per prereg rule)
 s04r 7ddcdfff9 AMBIGUOUS 2/8 median 110d rank RANK_STALL errors 0 (re-run of s04 — summary identical modulo step id, deaths 592; deterministic harness; recorded AMBIGUOUS, bisect proceeds treating as BAD per prereg)
+s05 c0a85b17e bisect-pick-5 'Merge origin/master into forager deed branch' (3 revisions left, ~2 steps; merge base d229b58f5 SKIPPED in git machinery — settled BAD 1/8 by mergebase-a, not re-tested)
+s05 c0a85b17e BAD 1/8 median 125d rank RANK_STALL errors 0 (per-seed 136/145/125/111/100/121/115/150 — sole survivor 190398; regional 0/8; wave-5 0/8 — first bisect step with zero wave-5 unlocks; deaths 716; standing 150–199; blooded 1/8; no re-run — ≤1/8 is BAD per prereg, not AMBIGUOUS)
