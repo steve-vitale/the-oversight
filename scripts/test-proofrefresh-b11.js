@@ -89,13 +89,13 @@ leg('panel rows complete (64 observed cases)',
 // (f) neutrality verdict reproduces the previous RETAINED panel (b9).
 const old = readPanel(OLD);
 const oldNeut = old.validity && old.validity.neutrality || [];
-leg('neutrality verdict reproduces the retained panel (b9)',
+leg('neutrality verdict reproduces the retained panel (b10)',
   neutTuple(fresh) === neutTuple(old),
   'retained ' + oldNeut.map(n => n.policy + ':' + (n.match ? 'match' : 'MISMATCH')).join(', '));
 
-// (g) neutrality verdict also reproduces the b8 panel (second reference).
+// (g) neutrality verdict also reproduces the b9 panel (second reference).
 const old6 = readPanel(OLD6);
-leg('neutrality verdict reproduces the b8 panel',
+leg('neutrality verdict reproduces the b9 panel',
   neutTuple(fresh) === neutTuple(old6),
   'b8 ' + (old6.validity.neutrality || []).map(n => n.policy + ':' + (n.match ? 'match' : 'MISMATCH')).join(', '));
 
@@ -107,19 +107,19 @@ leg('validity.sourcesStable true', fresh.validity && fresh.validity.sourcesStabl
 // detects stale source inputs.
 try {
   require('./balance-proof-update').validate(root, old);
-  leg('stale-input negative check (retained panel b9 fails validate)', false, 'validate passed on a stale panel');
+  leg('stale-input negative check (retained panel b10 fails validate)', false, 'validate passed on a stale panel');
 } catch (e) {
-  leg('stale-input negative check (retained panel b9 fails validate)',
+  leg('stale-input negative check (retained panel b10 fails validate)',
     /Proof source inputs are not current/.test(e.message), e.message);
 }
 
-// (j) stale-input negative check, second reference: the b8 panel must
+// (j) stale-input negative check, second reference: the b9 panel must
 // also FAIL validate on this tip.
 try {
   require('./balance-proof-update').validate(root, old6);
-  leg('stale-input negative check (b8 panel fails validate)', false, 'validate passed on a stale panel');
+  leg('stale-input negative check (b9 panel fails validate)', false, 'validate passed on a stale panel');
 } catch (e) {
-  leg('stale-input negative check (b8 panel fails validate)',
+  leg('stale-input negative check (b9 panel fails validate)',
     /Proof source inputs are not current/.test(e.message), e.message);
 }
 
