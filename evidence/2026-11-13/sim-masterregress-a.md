@@ -258,3 +258,24 @@ follow-up arm.
   CACHE-FLAGS lesson — this arm changed zero `src/js`, so none of the 9 can
   be mine. The full failure list was not captured (output piped through
   `tail -5`); the count match to the morning's run is the check.
+
+## Gate (adoption coordinator)
+
+`node scripts/check.js --quick` in this tree, full list captured:
+**333 passed, 7 failed in 975s** (log
+evidence/2026-11-13/sim-masterregress-a-gate.log). All 7 are pre-existing
+classes, 0 attributable — this arm changes zero `src/js` (diagnostic only):
+- test-measurement-proof-update + test-measurement-workflow — retained
+  neutrality proof stale ("Proof source inputs are not current"). Standing
+  gate failure set.
+- test-phone-frame-proof — stale phone receipt (same input list as the
+  sibling gates on unchanged game code). Standing set.
+- test-living-garden-deed-attainment + test-one-person-army-deed-
+  attainment + test-synergy-stall + test-capable-bot-20261014 — exact-120s
+  timeouts (load artifacts, known class).
+- Gate GO after adjudication. The arm's own proof
+  (scripts/test-masterregress-a.js, 130/0) is a green-list job with no
+  quick tag, so it runs in the FULL check.js, not --quick; it was
+  verified directly instead (see Rebase section below).
+
+## Rebase onto master <PENDING> (adoption coordinator)
