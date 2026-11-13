@@ -135,6 +135,15 @@ on the rebased tip, `check.js --quick` **335 passed, 5 failed in 609s**
 r135 gate: measurement-proof staleness pair (pre-existing; refresh
 rounds 11+12 owed), phone-frame stale receipt (pre-existing), and the
 two exact-120s timeouts (living-garden, one-person-army), both re-run
-standalone on this tip and green — living-garden **8/8**, one-person-army
-**7/7**. **Gate: GO after adjudication, zero attributable to the
-conversation.js fix.** Merge: ff-only to master (see below).
+standalone on that tip and green — living-garden **8/8**, one-person-army
+**7/7**. Master then moved to `48ed1ffd7` (the r193 succession landing,
+whose agency-closer fix touches `src/js/villager-agency.js` — a real
+src change, so the gate had to cover the new tip): re-rebased
+(`ddab8a13a`, proof 14/14 again) and re-ran the gate: **334 passed, 6
+failed in 991s** (`journey-establishment-r85-gate-adopt2.log`) — the
+same 5 plus `test-capable-bot-20261014.js` at exactly 120.2s (heavier
+load window; it was in the r135 original gate's timeout set). All three
+timeouts re-run standalone on the final tip and green — living-garden
+**8/8**, one-person-army **7/7**, capable-bot **42/42**. **Gate: GO
+after adjudication, zero attributable to the conversation.js fix.**
+Merge: ff-only to master (see below).
