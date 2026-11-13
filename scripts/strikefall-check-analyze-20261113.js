@@ -63,10 +63,26 @@ function judgeOne(seed, d) {
     if (f.person) continue; // villager/ally falls — different line, out of scope
     const nxt = strikesBySeq[f.seq + 1];
     if (nxt) {
+      // Snapshot classification: the strike line's live-fight snapshot
+      // names the struck fighter (via its shortName). If the struck
+      // fighter is DEAD in that snapshot, this strike killed it — the
+      // immediately-preceding falls line is this kill's announcement
+      // (M1: same monster, the tbDamage-then-compose ordering). If the
+      // struck fighter is ALIVE, the strike did not kill — the falls
+      // line was some other death (villager kill, DoT, throes) that
+      // happened to precede the player's next strike (M2: honest order,
+      // not this glitch). Label-token matching alone undercounts M1:
+      // encSubject (falls) and encShortLabel (strike) differ by
+      // descriptor/veteran prefixes ("The Ugly-Eyes" vs "the moth").
+      const tgt = strikeTokens(nxt.line);
+      const cands = findStrikeTarget(nxt.fighters, tgt);
+      const cls = !cands.length ? 'unknown'
+        : cands.some(function (o) { return !o.alive; }) ? 'M1-same-kill' : 'M2-other-death';
       pairs.push({
         day: f.day, fight: f.fight, fallsSeq: f.seq,
         falls: f.line, strike: nxt.line,
         matched: labelsMatch(fallsTokens(f.line), strikeTokens(nxt.line)),
+        cls: cls,
       });
     }
   }
@@ -100,6 +116,9 @@ function judgeOne(seed, d) {
     standing: d.standing, scaleRank: d.scaleRank,
     fallsCount: d.fallsCount, strikeCount: d.strikeCount,
     strikeAfterFall: pairs.filter(function (p) { return p.matched; }).length,
+    strikeAfterFallM1: pairs.filter(function (p) { return p.cls === 'M1-same-kill'; }).length,
+    strikeAfterFallM2: pairs.filter(function (p) { return p.cls === 'M2-other-death'; }).length,
+    strikeAfterFallUnknown: pairs.filter(function (p) { return p.cls === 'unknown'; }).length,
     strikeAfterFallPairs: pairs,
     dipCount: d.dipCount, dipShortCount: d.dipShortCount,
     dupDipGroups: dupGroups.length,
@@ -118,12 +137,45 @@ function summarize(corpus) {
     seeds: seeds, rows: rows,
     totals: {
       strikeAfterFall: tot('strikeAfterFall'),
+      strikeAfterFallM1: tot('strikeAfterFallM1'),
+      strikeAfterFallM2: tot('strikeAfterFallM2'),
+      strikeAfterFallUnknown: tot('strikeAfterFallUnknown'),
       dipCount: tot('dipCount'), dupDipGroups: tot('dupDipGroups'),
       fallsCount: tot('fallsCount'), strikeCount: tot('strikeCount'),
       freezelineCount: tot('freezelineCount'), applyCount: tot('applyCount'),
       bellowCount: tot('bellowCount'),
     },
   };
+}
+
+// Strike-target lookup from a fighter snapshot: the strike line names
+// the target by encShortLabel (mdef.encounter.shortName in
+// src/data/monsters.json); the snapshot carries monsterId + display
+// name. Match on either token set (subset either way, as labelsMatch).
+let shortNameById = null;
+function shortNameMap() {
+  if (shortNameById) return shortNameById;
+  shortNameById = {};
+  try {
+    const list = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'src', 'data', 'monsters.json'), 'utf8'));
+    for (const m of list) {
+      const sn = (m.encounter || {}).shortName;
+      if (m.id && sn) shortNameById[m.id] = String(sn).toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
+    }
+  } catch (e) { /* no map: name-token matching only */ }
+  return shortNameById;
+}
+function findStrikeTarget(fighters, targetTokens) {
+  if (!Array.isArray(fighters) || !targetTokens.length) return [];
+  const map = shortNameMap();
+  return fighters.filter(function (o) {
+    if (o.kind !== 'monster') return false;
+    const cands = [];
+    if (o.monsterId && map[o.monsterId]) cands.push(map[o.monsterId]);
+    if (o.monsterId) cands.push(String(o.monsterId).toLowerCase().split(/[^a-z0-9]+/).filter(Boolean));
+    if (o.name) cands.push(String(o.name).toLowerCase().split(/[^a-z0-9]+/).filter(Boolean));
+    return cands.some(function (c) { return labelsMatch(c, targetTokens); });
+  });
 }
 
 const SURVIVAL_FIELDS = ['days', 'gameDays', 'endReason', 'won', 'over', 'villageLost', 'scaleRank', 'maxWave', 'unlockedWave', 'standing', 'endPantryKcal', 'deaths'];
@@ -151,6 +203,7 @@ if (require.main === module) (function () {
     console.log(JSON.stringify({
       seed: r.seed, days: r.days, end: r.endReason, maxWave: r.maxWave, standing: r.standing,
       falls: r.fallsCount, strikes: r.strikeCount, strikeAfterFall: r.strikeAfterFall,
+      m1: r.strikeAfterFallM1, m2: r.strikeAfterFallM2, unknown: r.strikeAfterFallUnknown,
       dips: r.dipCount, dupDipGroups: r.dupDipGroups,
       freezeline: r.freezelineCount, apply: r.applyCount, bellow: r.bellowCount,
       errors: r.errors,
@@ -159,7 +212,7 @@ if (require.main === module) (function () {
   console.log('TOTALS ' + JSON.stringify(sumA.totals));
   for (const r of sumA.rows) {
     for (const p of r.strikeAfterFallPairs) {
-      console.log('PAIR seed ' + r.seed + ' d' + p.day + ' fight ' + p.fight + ' matched=' + p.matched + ' :: ' + p.falls + ' || ' + p.strike);
+      console.log('PAIR seed ' + r.seed + ' d' + p.day + ' fight ' + p.fight + ' matched=' + p.matched + ' cls=' + p.cls + ' :: ' + p.falls + ' || ' + p.strike);
     }
     for (const g of r.dupDipDetail) {
       console.log('DUPDIP seed ' + r.seed + ' ' + g.key + ' size=' + g.size + ' adjacent=' + g.adjacent + ' seqs=' + g.seqs.join(',') + ' kiteCounts=' + g.kiteCounts.join(',') + ' kiteKeys=' + JSON.stringify(g.kiteKeys));
@@ -194,4 +247,4 @@ if (require.main === module) (function () {
   }
 })();
 
-module.exports = { loadCorpus: loadCorpus, judgeOne: judgeOne, summarize: summarize, compareSurvival: compareSurvival, fallsTokens: fallsTokens, strikeTokens: strikeTokens, labelsMatch: labelsMatch };
+module.exports = { loadCorpus: loadCorpus, judgeOne: judgeOne, summarize: summarize, compareSurvival: compareSurvival, fallsTokens: fallsTokens, strikeTokens: strikeTokens, labelsMatch: labelsMatch, findStrikeTarget: findStrikeTarget };
