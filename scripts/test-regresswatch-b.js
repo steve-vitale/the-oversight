@@ -14,15 +14,16 @@
 // as regression_signal; watch or no-signal is NO-GO (noise) and the
 // run stops there — no 16-seed confirm.
 //
-// WHAT THIS TEST PROVES (from the committed corpora only — no sims):
+// WHAT THIS TEST PROVES (from the committed corpora only — no sims,
+// no cases/ caches: those were deleted at closeout per the prereg and
+// the panel.json.gz files are the retained artifacts):
 //   1. The compare's classAccess row is no_material_signal, 0.875 ->
 //      0.875, delta 0, interval [0, 0], 8 pairs, 8/8 tied — NOT a
 //      signal, so the prereg NO-GO rule fires and no confirm is owed.
-//   2. Both panels carry the prereg legs: before panel source heads
-//      are fed635f1f..., after panel source heads are ad2bd13fd...;
-//      each panel holds exactly the 8 distinct competent seeds
-//      190525-190532 (the 9th case file per panel is a duplicate
-//      190525 write from a retried job — recorded, not paired).
+//   2. Both panels carry the prereg legs (source heads fed635f1f /
+//      ad2bd13fd) and exactly the 8 distinct competent seeds
+//      190525-190532 at 150d; the panel rows themselves hold the
+//      per-seed classes (190531 class-less on both legs).
 //   3. Wall numbers match the evidence file: before 7/8 village-lost,
 //      1 survived, median 124d; after 4/8 survived, 4 lost, median
 //      150d; wins / national / table 0 on both legs.
@@ -50,26 +51,9 @@ function leg(name, ok, detail) {
   else { fail++; console.log('  FAIL ' + name + (detail ? ' — ' + detail : '')); }
 }
 function readJson(file) { return JSON.parse(fs.readFileSync(file, 'utf8')); }
-function readPanelMeta(dir) {
+function readPanel(dir) {
   const bytes = fs.readFileSync(path.join(dir, 'panel.json.gz'));
   return JSON.parse(zlib.gunzipSync(bytes).toString('utf8'));
-}
-function panelCases(dir) {
-  const out = [];
-  for (const f of fs.readdirSync(path.join(dir, 'cases'))) {
-    if (!f.endsWith('.json')) continue;
-    const d = readJson(path.join(dir, 'cases', f));
-    out.push(d);
-  }
-  return out;
-}
-function distinctSeeds(cases) {
-  const seen = {};
-  for (const c of cases) {
-    const r = (c.result || {}).row || {};
-    if (r.seed != null) seen[r.seed] = (seen[r.seed] || 0) + 1;
-  }
-  return seen;
 }
 
 const compare = readJson(COMPARE);
@@ -96,50 +80,52 @@ leg('classAccess tied 8/8, none increased or decreased',
 leg('prereg NO-GO rule fires: status is not regression_signal',
   ca.status !== 'regression_signal', 'status ' + ca.status);
 
-// 2. Panel legs + seeds.
-const beforeMeta = readPanelMeta(BEFORE_DIR);
-const afterMeta = readPanelMeta(AFTER_DIR);
+// 2. Panel legs + seeds, from the retained panel.json.gz rows.
+const beforePanel = readPanel(BEFORE_DIR);
+const afterPanel = readPanel(AFTER_DIR);
 leg('before panel source heads are the prereg before leg fed635f1f',
-  beforeMeta.sourceHeadStart === BEFORE_SHA && beforeMeta.sourceHeadEnd === BEFORE_SHA,
-  'heads ' + String(beforeMeta.sourceHeadStart).slice(0, 8));
+  beforePanel.sourceHeadStart === BEFORE_SHA && beforePanel.sourceHeadEnd === BEFORE_SHA,
+  'heads ' + String(beforePanel.sourceHeadStart).slice(0, 8));
 leg('after panel source heads are the prereg after leg ad2bd13fd',
-  afterMeta.sourceHeadStart === AFTER_SHA && afterMeta.sourceHeadEnd === AFTER_SHA,
-  'heads ' + String(afterMeta.sourceHeadStart).slice(0, 8));
-for (const side of [['before', BEFORE_DIR], ['after', AFTER_DIR]]) {
-  const cases = panelCases(side[1]);
-  const seeds = distinctSeeds(cases);
-  const keys = Object.keys(seeds).map(Number).sort(function (a, b) { return a - b; });
-  leg(side[0] + ' panel holds exactly the 8 distinct band seeds 190525-190532',
-    JSON.stringify(keys) === JSON.stringify(BAND), 'seeds ' + keys.join(','));
-  leg(side[0] + ' panel duplicate 190525 file recorded (9 files, 8 seeds)',
-    cases.length === 9 && seeds[190525] === 2, 'files ' + cases.length);
-  const allCompetent = cases.every(function (c) {
-    return (((c.result || {}).row || {}).policy) === 'competent';
-  });
-  leg(side[0] + ' panel cases are all competent policy', allCompetent, '');
-}
-leg('compare pairs 8 competent cases', comp.cases === 8 || (comp.metrics || []).length > 0 && ca.pairs === 8,
-  'compare cases ' + comp.cases);
-
-// 3. Wall numbers from the deduped case rows.
-function wall(dir) {
-  const cases = panelCases(dir);
+  afterPanel.sourceHeadStart === AFTER_SHA && afterPanel.sourceHeadEnd === AFTER_SHA,
+  'heads ' + String(afterPanel.sourceHeadStart).slice(0, 8));
+for (const side of [['before', beforePanel], ['after', afterPanel]]) {
+  const panel = side[1];
+  const prow = panel.rows || [];
+  const seeds = prow.map(function (c) { return (c.row || {}).seed; }).sort(function (a, b) { return a - b; });
+  leg(side[0] + ' panel holds exactly the 8 band seeds 190525-190532',
+    JSON.stringify(seeds) === JSON.stringify(BAND), 'seeds ' + seeds.join(','));
+  leg(side[0] + ' panel rows are all competent policy at 150d',
+    prow.every(function (c) { return (c.row || {}).policy === 'competent'; }) &&
+    (panel.options || {}).days === 150, 'options days ' + ((panel.options || {}).days));
+  leg(side[0] + ' panel options name the band seeds',
+    JSON.stringify((panel.options || {}).seeds) === JSON.stringify(BAND), '');
   const bySeed = {};
-  for (const c of cases) {
-    const r = (c.result || {}).row || {};
-    if (r.seed != null && !bySeed[r.seed]) bySeed[r.seed] = r;
-  }
-  const rows = Object.keys(bySeed).map(function (k) { return bySeed[k]; });
-  const days = rows.map(function (r) { return r.days || 0; }).sort(function (a, b) { return a - b; });
+  for (const c of prow) bySeed[(c.row || {}).seed] = c;
+  leg(side[0] + ' seed 190531 has no player class (the one miss)',
+    bySeed[190531] && Array.isArray((bySeed[190531].classes || {}).player) &&
+    bySeed[190531].classes.player.length === 0,
+    'player classes ' + JSON.stringify((bySeed[190531].classes || {}).player));
+  leg(side[0] + ' seed 190525 has a player class (not the miss)',
+    bySeed[190525] && Array.isArray((bySeed[190525].classes || {}).player) &&
+    bySeed[190525].classes.player.length > 0,
+    'player classes ' + JSON.stringify((bySeed[190525].classes || {}).player));
+}
+leg('compare pairs 8 competent cases', comp.cases === 8, 'compare cases ' + comp.cases);
+
+// 3. Wall numbers from the panel rows.
+function wall(panel) {
+  const prow = panel.rows || [];
+  const days = prow.map(function (c) { return (c.row || {}).days || 0; }).sort(function (a, b) { return a - b; });
   return {
-    n: rows.length,
-    survived: rows.filter(function (r) { return r.endReason === 'survived'; }).length,
-    lost: rows.filter(function (r) { return r.endReason === 'village-lost'; }).length,
+    n: prow.length,
+    survived: prow.filter(function (c) { return (c.row || {}).endReason === 'survived'; }).length,
+    lost: prow.filter(function (c) { return (c.row || {}).endReason === 'village-lost'; }).length,
     medianDays: days[Math.floor(days.length / 2)],
   };
 }
-const wBefore = wall(BEFORE_DIR);
-const wAfter = wall(AFTER_DIR);
+const wBefore = wall(beforePanel);
+const wAfter = wall(afterPanel);
 leg('before wall: 1/8 survived, 7/8 village-lost',
   wBefore.survived === 1 && wBefore.lost === 7, wBefore.survived + '/' + wBefore.lost);
 leg('before wall: median 124d', wBefore.medianDays === 124, 'median ' + wBefore.medianDays);
