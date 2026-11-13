@@ -903,11 +903,39 @@
           }
         } catch (e) {}
         // The fiction tracks the pressure: repeated prods visibly rattle them.
-        const line = prods <= 1
-          ? '"...What\'s that supposed to mean?" Their voice goes careful.'
-          : prods === 2
-          ? '"What are you getting at?" A glance away, then back. They\'re choosing their words now.'
-          : 'They\'re rattled — hands busy, eyes everywhere but on you. "I\'ve told you what I\'ve told you."';
+        // LEDGER-AWARE PROBE LINES (journey-crisis r192): each prod branch
+        // used to be ONE fixed line — a run-ledger block dry-replaced the
+        // probe with "...Sorry, lost my train of thought." (pilot seed
+        // 14432 d26, June Cohen) even though the probe's consequences had
+        // already fired. Same class as warn-details (r186), confront
+        // (r187), deflect_q (r192 F1) and refusal (r192 F2). Ordered pools,
+        // original first, first variant convoWouldBlock would NOT refuse;
+        // null when every variant is blocked, so the handler falls to the
+        // honest stonewall fallback below. No RNG on any path — ordered
+        // picks and pure-read checks only.
+        const probePools = {
+          1: [
+            '"...What\'s that supposed to mean?" Their voice goes careful.',
+            '"What?" They go still. "Say that again — slower."',
+            '"Hm?" Their brow furrows. "What are you saying, exactly?"',
+          ],
+          2: [
+            '"What are you getting at?" A glance away, then back. They\'re choosing their words now.',
+            '"Getting at what?" A pause. "You\'re going to have to spell it out."',
+            '"What do you want me to say?" They weigh each word. "I\'m being straight with you."',
+          ],
+          3: [
+            'They\'re rattled — hands busy, eyes everywhere but on you. "I\'ve told you what I\'ve told you."',
+            'Their hands won\'t keep still. "I\'ve said what I\'ve said. That\'s all there is."',
+            '"I\'ve told you everything I\'m going to tell you." They won\'t meet your eyes. "Leave it there."',
+          ],
+        };
+        const probePool = probePools[prods <= 1 ? 1 : prods === 2 ? 2 : 3];
+        let line = null;
+        for (const cand of probePool) {
+          try { if (!this.convoWouldBlock(vid, cand)) { line = cand; break; } } catch (e) { line = cand; break; }
+        }
+        line = line || 'They shake their head — not no, not yes. Done talking about it.';
         // FALLBACK (journey-social 2026-10-11): the no-repeat ledger blocks
         // the only branch line once it's been said (per-conversation or
         // run-wide) — without a fallback the probe lands in total silence

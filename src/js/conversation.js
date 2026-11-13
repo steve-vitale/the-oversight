@@ -1167,6 +1167,40 @@
       try { return this.fillTalkLine('"Huh. Okay."', this.vpOf(vid)); }
       catch (e) { return '"Huh. Okay."'; }
     },
+    // convoDeflectQLine (journey-crisis r192 2026-11-13): the dodge answer
+    // for deflect_q ("(change the subject)"). The handler used to speak ONE
+    // fixed line ('"Okay." Something shutters, just slightly.') — whenever
+    // that line already sat in the 48-entry run ledger (spoken by any
+    // villager recently), sayLine dry-replaced it with "...Sorry, lost my
+    // train of thought." right after the dodge's consequences fired
+    // (succession r187, seed 34234, Desmond d48: preRun=true, fellBack=true).
+    // Same class as the warn-details (r186) and confront (r187) defects,
+    // new surface. The pool is ORDERED, original first, and the picker
+    // returns the first variant convoWouldBlock would NOT refuse; null when
+    // every variant is blocked, so the handler falls to its honest '"..."'
+    // (a shuttered silence, not amnesia). No RNG on any path — ordered
+    // picks and pure-read checks only — so the common path (original
+    // unblocked) is trajectory-neutral, same discipline as r187's
+    // drawTruthLineUnblocked. Variants are short shuttering reactions in
+    // the original's register; none invents history or a new fact.
+    convoDeflectQLine(vid) {
+      const pool = [
+        '"Okay." Something shutters, just slightly.',
+        '"Fine." Their face closes like a door.',
+        '"Right." They look away, and the question dies where it stood.',
+        '"Sure." The warmth drains out of their eyes.',
+        '"Okay." A small silence, and then they move on.',
+        '"Mm." They fold their arms and the subject is gone.',
+        '"Fine." Something in them steps back from you.',
+        '"Right." They nod once, and the door between you shuts a little.',
+      ];
+      for (const line of pool) {
+        try {
+          if (!this.convoWouldBlock(vid, line)) return line;
+        } catch (e) { return line; }
+      }
+      return null;
+    },
     // convoWouldBlock (journey-social r19 2026-10-16): PURE predicate — would
     // sayLine no-repeat-block this line right now? Mirrors sayLine's block
     // decision (self ledger + run ledger, first-chunk key) without emitting
@@ -2462,10 +2496,19 @@
     // The ledger label 'themselves' (personal) breaks third-person frames
     // ("talking about themselves") — rendered as 'your story'. The ledger
     // label itself is untouched (sibling proof tests pin it verbatim).
+    // QUESTION-SHAPED LABELS (journey-crisis r192 2026-11-13): ask:*
+    // threads are labeled by their question text ("What season is it here,
+    // do you think?"), and the closing frames are noun frames — "We still
+    // owe X a proper ending", "Good — X, settled", "Still on X". Quoting
+    // the question raw garbles them (pilot seed 14433 d24: "We still owe
+    // What season is it here, do you think? a proper ending, too."). A
+    // question renders as 'that question' — grammatical in every frame.
     convoThreadAbout(vid, tid, label) {
       try {
         const l = label || this.convoTopicLabel(vid, tid);
-        return l === 'themselves' ? 'your story' : l;
+        if (l === 'themselves') return 'your story';
+        if (typeof l === 'string' && l.trim().endsWith('?')) return 'that question';
+        return l;
       } catch (e) { return label || tid || 'that'; }
     },
 
@@ -6607,7 +6650,11 @@
           trust: -1, mood: -1, temper: 'cruel', disposition: -0.5,
           escalate: true, name: 'deflect_q',
         });
-        done('"Okay." Something shutters, just slightly.', '(change the subject)');
+        // LEDGER-AWARE DODGE (journey-crisis r192): the single fixed line
+        // dry-replaced whenever the run ledger already held it (r187
+        // Desmond d48). Pick the first shutter variant sayLine would not
+        // block; all-blocked falls to an honest shuttered silence.
+        done(this.convoDeflectQLine(vid) || '"..."', '(change the subject)');
       } else if (choiceId.indexOf('react:') === 0) {
         // REACTIVE ANSWER: engaged their direct question. The outcome must
         // read as a RESPONSE to what they asked — never a canned pivot.

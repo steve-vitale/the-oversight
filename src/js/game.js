@@ -23160,8 +23160,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // (sim-findings-a 2026-11-11: the unscoped check killed exactly
         // two genuine noun phrases — congregation, network_tower — and
         // the war-path audit voiced them as "the something".)
+        // PAST-TENSE ACTION VERBS (journey-crisis r192 2026-11-13): the
+        // list only covered be/have/do/modal forms, so clause heads with
+        // a past-tense verb slipped through as nouns — living_wire's
+        // "the creek went still, and your arm-hairs stood up" composed
+        // as "I put down creek went still at the treeline" (pilot seed
+        // 14432 d8). "went" is a finite verb exactly like "was"; the
+        // guard must catch it. Audit 2026-11-13: this extension flips
+        // exactly one of 72 monster defs (living_wire) — nothing else
+        // in current content carries a clause verb in its head.
         const head = n.split(/\b(where|when|that|who|which|whose)\b/i)[0];
-        if (/\b(am|is|are|was|were|has|have|had|do|does|did|will|would|shall|should|can|could|may|might|must)\b/i.test(head)) return 'something';
+        if (/\b(am|is|are|was|were|has|have|had|do|does|did|will|would|shall|should|can|could|may|might|must|went|came|stood|moved|ran|fell|rose|sank|crept|crawled|walked|stopped|started|turned|looked|sounded|smelled|felt|hung|lay|sat)\b/i.test(head)) return 'something';
         const stripped = n.replace(/^((an?)|the)\s+/i, '');
         const base = stripped !== n ? stripped : n;
         return base.charAt(0).toLowerCase() + base.slice(1);

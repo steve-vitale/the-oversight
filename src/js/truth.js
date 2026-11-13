@@ -133,6 +133,29 @@
         `"Say that again where everyone can hear." A thin smile. "Or don't. Your call."`,
         `"Wow." {first} looks hurt, then angry. "I share my food with you and this is what I get?"`,
       ],
+      // refused: the post-blowup refusal (confrontDoubt + confrontTheft
+      // guards, journey-crisis r192 2026-11-13). The refusal used to be
+      // ONE fixed line — whenever it already sat in the 48-entry run
+      // ledger, sayLine dry-replaced it with "...Sorry, lost my train of
+      // thought." (same-sitting re-press went SILENT instead: self-block
+      // with no fallback). Same class as warn-details (r186), confront
+      // (r187) and deflect_q (r192 F1). First entry is the original line,
+      // verbatim; the rest refuse in the same register — turning away,
+      // no invented durations, no new claims. Drawn via
+      // drawTruthLineUnblocked so a blocked variant is skipped for a
+      // fresh one. NOTE: the menu hides refused doubts by design
+      // (2026-10-09/10), so the guard is a backstop for direct/unfiltered
+      // calls — this pool is defense-in-depth for a latent surface.
+      refused: [
+        `"Not this again." {first} turns away. "We're done with that."`,
+        `"I said no." {first} plants their feet. "The answer isn't changing."`,
+        `"No." {first} folds their arms. "You had your answer. I'm not giving another."`,
+        `"Drop it." {first} looks past you, jaw set. "I'm done talking about this."`,
+        `"You're not hearing me." {first} steps back. "The answer was no. It's still no."`,
+        `"Again? No." {first} shakes their head. "I told you. We're finished here."`,
+        `"Stop." {first} holds up a hand. "I won't be interrogated twice."`,
+        `"We did this already." {first} turns away. "Ask someone else. I'm done."`,
+      ],
       // watching someone: quiet observation beats. No-repeat via drawTruthLine —
       // a player who watches the same person repeatedly shouldn't read the
       // same three sentences on loop.
@@ -1419,7 +1442,11 @@
       // (new evidence) are new business — refusalBlocks lets those through.
       if ((doubt.refusedUntil && day() < doubt.refusedUntil) || this.refusalBlocks(vid, doubt)) {
         const first = this.firstRef(vid);
-        return { ok: false, outcome: 'refused', line: `"Not this again." ${first} turns away. "We're done with that."` };
+        // LEDGER-AWARE REFUSAL (journey-crisis r192): the single fixed line
+        // dry-replaced (or went silent on a same-sitting re-press) whenever
+        // the run ledger already held it. Draw from the refused pool; the
+        // original line is the all-blocked fallback.
+        return { ok: false, outcome: 'refused', line: this.drawTruthLineUnblocked('refused', vid) || `"Not this again." ${first} turns away. "We're done with that."` };
       }
       const vp = this.vpOf(vid);
       const temp = this.npcTemper(vid);
@@ -1749,7 +1776,8 @@ try { this.noteTrialDeed('catch_3_lies', 1); } catch (e2) {}
       } catch (e) {}
       if ((doubt.refusedUntil && day() < doubt.refusedUntil) || this.refusalBlocks(vid, doubt)) {
         const first = this.firstRef(vid);
-        return { ok: false, outcome: 'refused', line: `"Not this again." ${first} turns away. "We're done with that."` };
+        // LEDGER-AWARE REFUSAL (journey-crisis r192): see confrontDoubt.
+        return { ok: false, outcome: 'refused', line: this.drawTruthLineUnblocked('refused', vid) || `"Not this again." ${first} turns away. "We're done with that."` };
       }
       // the accusation lands first (windup owns the tension beat) — then the reaction.
       this.confrontWindup(vid, doubt, null);
