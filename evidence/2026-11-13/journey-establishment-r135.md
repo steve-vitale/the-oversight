@@ -352,5 +352,22 @@ against in this run; still owed.
     clobber struck (all 95 new files staged-as-deleted + MM on
     the fix); repaired with `git ls-tree -r HEAD` +
     `update-index --add --index-info`; status empty, diff HEAD
-    empty, hashes match HEAD. [FILL: rebase, merge, rotation,
-    lock.]
+    empty, hashes match HEAD.
+  - Adoption (2026-11-13 ~09:46–11:00 CST, coordinator 05223aca):
+    the r135 adoption first stood down to the live Lane A r85 run
+    (takeover rule), then the r85 run timed out and this adoption
+    took both pieces. Rebased onto explicit master `f3f3ea7ae`
+    (fix `41377393c`, proof test 22/22 on the rebased tip), gate
+    335/5 — same 5 as the original run (staleness pair,
+    phone-frame, living-garden + one-person-army exact-120s
+    timeouts); standalone re-runs on that tip: living-garden
+    **8/8**, one-person-army **7/7**. Master then moved to
+    `3f5191e4b` (farendcell evidence + voicejoins proof, zero
+    src/js changes), so re-rebased (`a717031ce`, proof 22/22
+    again) and re-ran the gate on the new tip: **335/5, the
+    identical 5 failures** (`journey-establishment-r135-gate-adopt2.log`;
+    the two timeouts carry their standalone greens — the rebase
+    delta touched no src/js). **Gate: GO after adjudication, zero
+    attributable to the villager-agency.js fix.** Rotation-a
+    already reads 2 (advanced by the r85 run) — no double-advance.
+    Merge: ff-only to master (see commit record below).
