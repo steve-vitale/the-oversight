@@ -278,4 +278,12 @@ classes, 0 attributable — this arm changes zero `src/js` (diagnostic only):
   quick tag, so it runs in the FULL check.js, not --quick; it was
   verified directly instead (see Rebase section below).
 
-## Rebase onto master <PENDING> (adoption coordinator)
+## Rebase onto master 7ffbecad4 (adoption coordinator)
+
+Rebased cleanly (5 commits, no conflicts; new tip fa2ac212f). The proof
+test pins only HISTORICAL commits (203a32775, e4dbe581b, f7352f946 via
+`git show` / `git diff`), so the rebase needed no re-pointing — unlike
+the sibling applystatus arm, whose test pinned its own prereg commit.
+Post-rebase proof re-run: **130 passed, 0 failed**. Gate (333/7, above)
+was run on the pre-rebase tip; the rebase touched no game code (this arm
+changes zero `src/js` anywhere).
