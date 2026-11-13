@@ -1,0 +1,52 @@
+=== CHAIN START 2026-11-13T17:52:25Z ===
+=== PASS a START 2026-11-13T17:52:25Z seeds=89701,89702,89703,89704,89705 extra=[] outdir=perseed-endgame-r194 ===
+=== PASS a PROBE EXIT 0 2026-11-13T18:07:45Z ===
+=== PASS a ANALYZE START 2026-11-13T18:07:45Z ===
+=== PASS a ANALYZE EXIT 0 2026-11-13T18:07:47Z ===
+GO   M2c-engine-coverage: 4/4: 89701:fights=19 opens=19(engDistinct=19+pol=0) errs=0 | 89702:fights=12 opens=12(engDistinct=12+pol=0) errs=0 | 89703:fights=6 opens=6(engDistinct=6+pol=0) errs=0 | 89705:fights=7 opens=7(engDistinct=7+pol=0) errs=0
+GO   CORPUS-PURITY: 5/5 seeds project clean, file set exact
+PRIMARY-BINDINGS GO | PRIMARY GO | ALL GO
+=== PASS a-frozen START 2026-11-13T18:07:47Z seeds=89701,89702,89703,89704,89705 extra=[COMPETENT_PIN=r127] outdir=perseed-endgame-r194-frozen ===
+=== PASS a-frozen PROBE EXIT 0 2026-11-13T18:18:21Z ===
+=== PASS a-frozen ANALYZE START 2026-11-13T18:18:21Z ===
+=== PASS a-frozen ANALYZE EXIT 0 2026-11-13T18:18:23Z ===
+GO   M2c-engine-coverage: 4/4: 89701:fights=19 opens=19(engDistinct=19+pol=0) errs=0 | 89702:fights=12 opens=12(engDistinct=12+pol=0) errs=0 | 89703:fights=6 opens=6(engDistinct=6+pol=0) errs=0 | 89705:fights=3 opens=3(engDistinct=3+pol=0) errs=0
+GO   CORPUS-PURITY: 5/5 seeds project clean, file set exact
+PRIMARY-BINDINGS GO | PRIMARY GO | ALL GO
+=== PASS b START 2026-11-13T18:18:23Z seeds=89701,89702,89703,89704,89705 extra=[CAPSTONE=1 BUYOUT=1] outdir=perseed-endgame-r194-b ===
+=== PASS b PROBE EXIT 0 2026-11-13T18:21:49Z ===
+=== PASS b ANALYZE START 2026-11-13T18:21:49Z ===
+=== PASS b ANALYZE EXIT 1 2026-11-13T18:21:50Z ===
+GO   M2c-engine-coverage: 4/4: 89701:fights=19 opens=19(engDistinct=19+pol=0) errs=0 | 89702:fights=12 opens=12(engDistinct=12+pol=0) errs=0 | 89703:fights=6 opens=6(engDistinct=6+pol=0) errs=0 | 89705:fights=7 opens=7(engDistinct=7+pol=0) errs=0
+GO   CORPUS-PURITY: 5/5 seeds project clean, file set exact
+PRIMARY-BINDINGS NO-GO | PRIMARY NO-GO | ALL NO-GO
+=== PASS c START 2026-11-13T18:21:50Z seeds=89701,89702,89703,89704,89705 extra=[CAPSTONE=1 BUYOUT=1 BUYOUT_EARLY=1] outdir=perseed-endgame-r194-c ===
+=== PASS c PROBE EXIT 0 2026-11-13T18:23:11Z ===
+=== PASS c ANALYZE START 2026-11-13T18:23:11Z ===
+=== PASS c ANALYZE EXIT 0 2026-11-13T18:23:12Z ===
+GO   M2c-engine-coverage: 4/4: 89701:fights=9 opens=9(engDistinct=9+pol=0) errs=0 | 89702:fights=6 opens=6(engDistinct=6+pol=0) errs=0 | 89703:fights=16 opens=16(engDistinct=16+pol=0) errs=0 | 89705:fights=9 opens=9(engDistinct=9+pol=0) errs=0
+GO   CORPUS-PURITY: 5/5 seeds project clean, file set exact
+PRIMARY-BINDINGS GO | PRIMARY GO | ALL GO
+=== PASS c-wide START 2026-11-13T18:23:12Z seeds=89706,89707,89708,89709,89710,89711,89712,89713 extra=[CAPSTONE=1 BUYOUT=1 BUYOUT_EARLY=1] outdir=perseed-endgame-r194-cwide ===
+=== PASS c-wide PROBE EXIT 0 2026-11-13T18:24:55Z ===
+=== PASS c-wide ANALYZE START 2026-11-13T18:24:55Z ===
+=== PASS c-wide ANALYZE EXIT 0 2026-11-13T18:24:55Z ===
+GO   CORPUS-PURITY: 8/8 seeds project clean, file set exact
+WIDE-VERDICT GO | M25c + purity (wide pass: M25c + starvation tally)
+=== DARK PROBE START 2026-11-13T18:24:55Z ===
+=== DARK PROBE EXIT 0 2026-11-13T18:24:59Z ===
+v1a-loss-transcript.txt
+v1a-loss.json
+v1b-honest-transcript.txt
+v1b-honest.json
+v1c-tank-transcript.txt
+v1c-tank.json
+v2-notrial-transcript.txt
+v2-notrial.json
+v3-sitter-transcript.txt
+v3-sitter.json
+v4-conscript-transcript.txt
+v4-conscript.json
+v5-dayfloor-transcript.txt
+v5-dayfloor.json
+=== CHAIN DONE 2026-11-13T18:24:59Z ===
