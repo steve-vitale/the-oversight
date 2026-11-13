@@ -1,0 +1,143 @@
+check.js: 340 scripts, 4 parallel (quick)
+.................................................................................................................F.............F..F....F............FF..F.......F.................F..........F.........F..............................................F........................................................F....................................
+
+  FAIL scripts/godpath/test-living-garden-deed-attainment.js (exit null, 120.1s)
+      seed 7...
+      seed 42...
+      seed 99...
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-measurement-proof-update.js (exit 1, 8.6s)
+      Error: Proof source inputs are not current
+          at Object.validate (/home/hatch/workspace/worktrees/journey2-crisis/scripts/balance-proof-update.js:8:76)
+          at Object.<anonymous> (/home/hatch/workspace/worktrees/journey2-crisis/scripts/godpath/test-measurement-proof-update.js:4:40)
+          at Module._compile (node:internal/modules/cjs/loader:1929:14)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47
+      
+      Node.js v24.22.1
+
+  FAIL scripts/godpath/test-measurement-workflow.js (exit 1, 13.1s)
+      ok   metric IDs are unique and every contract declares units, direction and tolerance
+        ok   sampling and confirmation settings remain valid
+        ok   retained real panel matches its proof digest
+        FAIL retained neutrality proof covers the current Game/controller/harness inputs
+        ok   proof declares every collector and contract input rather than silently omitting one
+        ok   collector and contract have a current proof (see SIMULATING.md: Maintaining measurement)
+        ok   every retained real observation emits exactly the contracted metrics, with explicit unknowns
+        ok   all retained policy cohorts have passing sampled observer neutrality and stable sources
+        ok   retained NPC proof has eligible actor/day evidence and a reproducible class denominator
+      
+      measurement-workflow: 8 passed, 1 failed, 0 todo (phase 0)
+      failing: retained neutrality proof covers the current Game/controller/harness inputs
+
+  FAIL scripts/godpath/test-measurement-cache-flags.js (exit 1, 90.1s)
+      FAIL both actual CLI configurations complete valid neutral panels
+        FAIL two flags create four independent observer-on/off cache entries
+        FAIL cache identities retain each actual SIMOPT value
+        FAIL repeating the same setting reuses its two verified cases
+      
+      measurement cache flag isolation: 0 passed, 4 failed, 0 todo (phase 0)
+      failing: both actual CLI configurations complete valid neutral panels | two flags create four independent observer-on/off cache entries | cache identities retain each actual SIMOPT value | repeating t
+
+  FAIL scripts/godpath/test-occupation-panels.js (exit null, 120.1s)
+      ok   real CLI retains one actual campaign and both absent offers
+        ok   played bearer retains the actual non-first occupation card
+        ok   campaign neutrality and deterministic exclusions are separate
+        ok   excluded jobs contain no synthetic loss, usage or exposure
+        ok   unchanged settings reuse only their six exact on/off cases
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-phone-frame-proof.js (exit 1, 22.0s)
+      ok   both actual target phone sizes are retained
+        FAIL every retained browser input matches current source — index.html,src/data/foreignSpeech.json,src/data/regions.json,src/data/statusEffects.json,src/data/table-endings.json,src/js/alienPlayers.js
+        FAIL all current boot inputs are covered
+        ok   receipt identity declares portable text normalization
+        ok   retained receipt hash 736
+        FAIL current phone evidence is required; follow MOBILE-PLAYTEST.md — Phone receipt source is stale or missing: index.html
+      
+      Phone frame proof: 3 passed, 3 failed, 0 todo (phase 0)
+      failing: every retained browser input matches current source | all current boot inputs are covered | current phone evidence is required; follow MOBILE-PLAYTEST.md
+
+  FAIL scripts/godpath/test-one-person-army-deed-attainment.js (exit null, 120.2s)
+      seed 7...
+      seed 42...
+      seed 99...
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-phase-shawl.js (exit null, 120.1s)
+        ok   same actual cold dawn still damages an unprotected living NPC
+        ok   actual beam phase returns zero and preserves both player HP pools
+        ok   real tbDamage beam wrapper grants one phase and no second settlement roll
+        ok   unprotected beam prices actual fighter capacity and syncs canonical health
+        ok   actual NPC beam phases against its own worn item
+        ok   NPC beam cannot borrow bearer resistance or capacity or horror state
+        ok   NPC beam resistance uses its own canonical worn armor including ID saves
+        ok   an echoed body cannot borrow the living persons shawl or beam armor
+        ok   missing beam target returns zero without random draws or a phantom hit
+        ok   fallen beam target returns zero without draws or resurrection
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-solo-campaign-endings.js (exit null, 120.1s)
+        ok   unknown population reads cannot become measured survival
+        ok   actual engine community loss survives unknown observation coverage
+        ok   a malformed or missing current history is an observer error
+        ok   old village-dead records retain explicit historical-rule coverage
+        ok   the living solo bearer continues beyond the former ten-iteration cutoff
+        ok   the longer solo observation remains active at its explicit cap
+        ok   sustained empty-community history remains distinct from an active game
+        ok   a controlled roster-recovery fixture preserves collapse history
+        ok   a real death path without successors stops immediately at an engine ending
+        ok   real runner rows forward current stop/history and collector coverage
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-time-save-crashes.js (exit null, 120.3s)
+      Recovered precore-request day2
+      Recovered postcore-request day2
+      Recovered commit-before day2
+      Recovered commit-after day3
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-trust-observer-neutrality.js (exit 1, 111.1s)
+      Error
+          at /home/hatch/workspace/worktrees/journey2-crisis/scripts/godpath/test-trust-observer-neutrality.js:16:265
+          at Array.map (<anonymous>)
+          at /home/hatch/workspace/worktrees/journey2-crisis/scripts/godpath/test-trust-observer-neutrality.js:16:27
+          at Object.<anonymous> (/home/hatch/workspace/worktrees/journey2-crisis/scripts/godpath/test-trust-observer-neutrality.js:22:3)
+          at Module._compile (node:internal/modules/cjs/loader:1929:14)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+
+  FAIL scripts/test-synergy-stall.js (exit null, 120.1s)
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/test-capable-bot-20261014.js (exit null, 120.1s)
+        ok   earned food deed persists through combat settlement
+        ok   combat spends devotion only on actual use
+        ok   food chain has no policy errors
+        ok   online reactor refuses the otherwise armed grant honestly
+        ok   reactor refusal invents neither feast buff nor food deed
+      
+      short sims: 2 seeds x 40 days
+        ok   seed 42: qualified observed feast plans receive an actual host attempt
+        ok   seed 42: host attempts return a real feast or explicit refusal
+        INFO original campaign seed=42 foodDeeds=true grants=[{"day":14,"granted":true},{"day":32,"granted":true},{"day":40,"granted":true}]
+      
+      [check.js] TIMEOUT after 120s
+
+  slowest: scripts/godpath/test-time-save-crashes.js 120s, scripts/godpath/test-one-person-army-deed-attainment.js 120s, scripts/godpath/test-occupation-panels.js 120s
+
+check.js: 327 passed, 13 failed in 1799s
