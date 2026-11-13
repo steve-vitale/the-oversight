@@ -38060,7 +38060,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (_bam > 1) { d = Math.round(d * _bam); this.say(`(Build-around ×${_bam.toFixed(2)}.)`); }
         }
       } catch (e) {}
-      const dealt = this.tbDamage(t.key, d, 'you', null, { quiet: true });
+      // STRIKEFALL (sim-strikefall-a 2026-11-13, finding #2303): defer
+      // the death narration — this strike's own line is composed below,
+      // AFTER tbDamage, and must precede the kill it caused. Flushed
+      // right after the STRIKE say, below.
+      const dealt = this.tbDamage(t.key, d, 'you', null, { quiet: true, deferDeathLines: true });
       // BUILD-AROUND HOOKS: blood_frenzy tracks consecutive hits/misses.
       try {
         const BA2 = (globalThis.Scattering || {}).buildarounds;
@@ -38077,6 +38081,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (!isHuman) {
         const wtxt2 = w.unarmed ? '' : ` (${w.name})`;
         this.say(`You STRIKE the ${this.encShortLabel(t) || this.encTheName(t)} for ${shown}${wtxt2}.`);
+        // STRIKEFALL: the blow first, its kill second — flush the death
+        // narration tbDamage queued (falls, lockpick return, wolf/rep
+        // consequence lines) before anything else narrates.
+        this.tbFlushDeathLines();
         // WEAPON AUDIO (Steve 2026-10-12): the hit lands — impact placeholder.
         try { this.audioEvent('weaponHit', {}); } catch (e) {}
         this.tbStyle(5, 'solid hit');
@@ -40070,6 +40078,31 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           try { this.registerDeath({ kind: 'person', villagerId: t.villagerId, name: t.name, mx: t.mx, my: t.my, cause: 'combat', killerId: this.villagerId, witnesses: this.fightWitnesses(t.villagerId) }); } catch (e) {}
         }
         else {
+          // STRIKEFALL (sim-strikefall-a 2026-11-13, finding #2303): the
+          // player strike composes its "You STRIKE for N" line AFTER
+          // tbDamage returns (honesty: the number stated is the number
+          // that LANDED, after tbDamage's modifiers) — so a falls line
+          // said here lands BEFORE the blow that caused it (110
+          // instances on the 8-seed check band). When the caller opts
+          // in (opts.deferDeathLines), queue this branch's narration
+          // on the live fight instead of saying it; the caller flushes
+          // it right after its own line (tbFlushDeathLines). Mechanics
+          // stay inline — drama, registerDeath, snake split, flee
+          // flags, the death-throes tick. Only the say()s defer. The
+          // death-throes line is the one exception: its tick is
+          // mechanical damage with its own say lines, so deferring the
+          // text alone would split one beat in two — it stays inline.
+          // Fail-open: no live fight, or a fight already over, says
+          // immediately — a kill is never silent.
+          const _deferDeath = !!(opts && opts.deferDeathLines);
+          const _df = this.tbfight;
+          const _deathSay = function (text, once) {
+            if (_deferDeath && _df && !_df.over) {
+              (_df._deathLines = _df._deathLines || []).push({ text: text, once: !!once });
+              return;
+            }
+            if (once) this.sayOncePerFight(text); else this.say(text);
+          }.bind(this);
           // COMBATDEDUP (sim-combatdedup-b 2026-11-13): same-labelled
           // monsters falling in one fight re-announced identically (x7
           // snake heads on 190396 d26, x4 Big Ugly (2) on d58 — the
@@ -40077,7 +40110,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // line already voices each reform). Once per exact text per
           // fight; person falls (villager/ally/hostile above) are
           // untouched — a named person falls once by definition.
-          this.sayOncePerFight(`${this.encSubject(t)} falls.`);
+          _deathSay(`${this.encSubject(t)} falls.`, true);
           // DRAMA (Steve 2026-10-07, B1): death is a moment — the soul leaves,
           // and the loot glints. (Loot is still a deliberate action; this is
           // just the glint that says "something's here.")
@@ -40089,7 +40122,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // your things — the loot is still in its hands.
           if (t.stolen) {
             const got = this.tbLockpickReturn(t);
-            this.say(`Your ${got} is still clutched in its clever hands. You take it back.`);
+            _deathSay(`Your ${got} is still clutched in its clever hands. You take it back.`);
           }
           try { t._deathCorpse = this.registerDeath({ kind: 'monster', monsterId: (t.mdef || {}).id, monsterName: t.name, name: t.name, mx: t.mx, my: t.my, cause: 'combat', killerId: this.villagerId, witnesses: this.fightWitnesses() }); } catch (e) {}
           const tdCfg = ((t.mdef || {}).encounter) || {};
@@ -40104,7 +40137,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               if (((o.mdef || {}).id) !== 'hushwolf') continue;
               if (Math.random() < 0.6) {
                 o.fled = true;
-                this.say('Without the lead, another wolf melts back between the trees.');
+                _deathSay('Without the lead, another wolf melts back between the trees.');
               } else {
                 o.wolfBroken = true;
               }
@@ -40118,14 +40151,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           // silently and the per-ally urDmgBonus fields were write-only dead
           // code; the line itself never broke.)
           if (this.urIs(t) && this.tbfight) {
-            this.say('The clipboard drops. The chanting falters, then stops.');
+            _deathSay('The clipboard drops. The chanting falters, then stops.');
             for (const o of this.tbfight.fighters) {
               if (o.kind !== 'monster' || !o.alive || o.fled || o.key === t.key) continue;
               // Only the summoned picket line scatters — monsters that were
               // already in the fight stay, uncoordinated.
               if (String(o.key || '').indexOf('m_ur_') === 0) {
                 o.fled = true;
-                this.say(`${o.name} drops its tiny sign and scatters — without the rep, the picket line dissolves.`);
+                _deathSay(`${o.name} drops its tiny sign and scatters — without the rep, the picket line dissolves.`);
               }
             }
           }
@@ -43674,7 +43707,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             else if (this.glasswingIs(m)) this.say('💥 The shadow lands — wings screaming out of the sun.');
             else if (this.nevermoreIs(m)) this.say('💥 It strafes through — talons out, beak split four ways!');
             else if (this.nightcourtIs(m)) this.say('💥 It lands — silent, out of nowhere. No warning. There never is.');
-            else if (this.statickiteIs(m)) this.say('💥 The square SCREAMS — static made solid.');
+            // STRIKEFALL (sim-strikefall-a 2026-11-13, finding #2304):
+            // the kite says NOTHING here. The dip block below voices the
+            // scream in the same resolve ("The square SCREAMS — static
+            // made solid. And the kite DIPS...") — saying it here too
+            // repeats the phrase twice in one resolve whenever the attack
+            // is unnamed (4x on the 8-seed check band). The dip block
+            // always follows: this branch is non-direct telegraphs only,
+            // the kite's only non-direct attack is the Broadcast (burst
+            // -> squares), and the dip block runs for every squares
+            // resolve, hit or miss. (The kite's other attack, the Dip,
+            // is a direct telegraph and never reaches this branch.)
+            else if (this.statickiteIs(m)) { /* the dip speaks next */ }
             else if (ptype === 'charge') this.say('💥 It slams through!');
             else if (ptype === 'burst') this.say('💥 It erupts!');
             else if (ptype === 'beam' || ptype === 'line') this.say('💥 The light hits!');
@@ -47495,6 +47539,22 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       f._oncePerFightSaid[msg] = true;
       this.say(msg);
       return true;
+    },
+    // STRIKEFALL (sim-strikefall-a 2026-11-13, finding #2303): drain the
+    // death narration tbDamage queued for a deferDeathLines caller, in
+    // order. Falls lines keep their once-per-exact-text-per-fight dedup
+    // (sayOncePerFight); consequence lines say plainly. Called by
+    // tbPlayerStrike right after its STRIKE line so the blow precedes
+    // its kill. Fail-open: any error falls back to saying the queued
+    // lines directly — a kill is never silent.
+    tbFlushDeathLines() {
+      const f = this.tbfight;
+      if (!f || !f._deathLines || !f._deathLines.length) return;
+      const q = f._deathLines; f._deathLines = [];
+      for (const e of q) {
+        try { if (e.once) this.sayOncePerFight(e.text); else this.say(e.text); }
+        catch (err) { try { this.say(e.text); } catch (e2) {} }
+      }
     },
     // pickFresh(pool, key): cycle through narration lines without repeating
     // until every line has been used once. Repeating the same horror line

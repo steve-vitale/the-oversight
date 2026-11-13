@@ -60,6 +60,28 @@ t('judge: adjacent but different monster counts 0 (listed, unmatched)',
 t('judge: person falls (☠) never counts',
   A.judgeOne(1, synthCorpus(5, 6, '☠ Ava falls.', 'You STRIKE the kite for 89 (Machete).')).strikeAfterFall === 0);
 
+// §3b — snapshot classification: label-token matching undercounts M1
+// (encSubject vs encShortLabel differ by descriptor). The strike
+// snapshot decides: struck fighter dead => M1 (this strike killed it);
+// struck fighter alive => M2 (the falls line was another death).
+function synthPairCorpus(strikeFighters) {
+  const c = synthCorpus(5, 6, 'The Ugly-Eyes falls.', 'You STRIKE the moth for 63 (Hunting spear).');
+  c.strikeLines[0].fighters = strikeFighters;
+  return c;
+}
+t('judge: label-mismatch but struck moth dead in snapshot => M1',
+  A.judgeOne(1, synthPairCorpus([
+    { key: 'm_0', kind: 'monster', monsterId: 'flashbulb_moth', name: 'The Ugly-Eyes', alive: false, fled: false },
+    { key: 'm_1', kind: 'monster', monsterId: 'hushwolf', name: 'The Hushwolf', alive: true, fled: false },
+  ])).strikeAfterFallM1 === 1);
+t('judge: struck moth alive in snapshot => M2 (other death first)',
+  A.judgeOne(1, synthPairCorpus([
+    { key: 'm_0', kind: 'monster', monsterId: 'flashbulb_moth', name: 'The Ugly-Eyes', alive: true, fled: false },
+    { key: 'm_1', kind: 'monster', monsterId: 'hushwolf', name: 'The Hushwolf', alive: false, fled: false },
+  ])).strikeAfterFallM2 === 1);
+t('judge: no snapshot (null fighters) => unknown, not M1/M2',
+  (function () { const j = A.judgeOne(1, synthPairCorpus(null)); return j.strikeAfterFallUnknown === 1 && j.strikeAfterFallM1 === 0 && j.strikeAfterFallM2 === 0; })());
+
 // §4 — DIP grouping: two DIP lines in one fight group; one line does not.
 function synthDipCorpus(lines) {
   return {
@@ -166,8 +188,62 @@ async function gameLevel() {
     lines.restore();
   }
 
-  // G3 (Static Kite dip): added once the check leg names the mechanism
-  // (two kites in one fight vs one kite resolving twice) — see prereg.
+  // G3 (Static Kite dip, finding #2304): one unnamed-attack resolve says
+  // the SCREAMS phrase ONCE (in the DIP line). Pre-fix it said it twice
+  // in one resolve — the generic fallback's short line ("💥 The square
+  // SCREAMS — static made solid.") plus the DIP line that repeats the
+  // phrase as its opening. The diag replay (pre-fix code, seed 190396
+  // d89) is the RED evidence: seq 10399 short line + seq 10402 DIP line
+  // in one resolve. The DIP line itself must still fire once per
+  // resolve — the dip is the melee window, and silencing it would hide
+  // a real opportunity. Two honest dips in one fight (a fresh declare
+  // between them) are NOT a defect and are not deduped here.
+  {
+    const Game = await newGame(7);
+    const lines = K.captureSays(Game);
+    const mf = K.fight(Game, 'statickite');
+    gok('G3 kite fight started', !!Game.tbfight && !!mf, 'no fight/monster');
+    if (mf) {
+      // Drive the kite's own turns: declare (turnsLeft 2) -> countdown
+      // -> resolve + dip. The attack is unnamed on a fresh game, so the
+      // pre-fix fallback fires the short SCREAMS line before the dip.
+      await quietLog(async () => {
+        for (let i = 0; i < 3; i++) { try { Game.tbMonsterTurn(mf); } catch (e) {} }
+      });
+      const screams = lines.filter(function (l) { return /square SCREAMS \u2014 static made solid/i.test(l); }).length;
+      const dips = lines.filter(function (l) { return /And the kite DIPS/i.test(l); }).length;
+      gok('G3 kite resolved + dipped once', dips === 1, 'dips=' + dips + ' lines=' + JSON.stringify(lines.slice(-8)));
+      gok('G3 SCREAMS phrase fires once per resolve (not twice)', screams === 1, 'screams=' + screams);
+    }
+    lines.restore();
+  }
+
+  // G4 (deferral mechanism): tbDamage with deferDeathLines queues the
+  // falls line instead of saying it, and tbFlushDeathLines emits it
+  // exactly once — the never-silent property holds across the deferral.
+  {
+    const Game = await newGame(7);
+    const lines = K.captureSays(Game);
+    const mf = K.fight(Game, 'hushwolf', { mx: 3, my: 4 });
+    gok('G4 fight started', !!Game.tbfight && !!mf, 'no fight/monster');
+    if (mf) {
+      mf.hp = 1;
+      let dealt = -1;
+      await quietLog(async () => { dealt = Game.tbDamage(mf.key, 50, 'you', null, { quiet: true, deferDeathLines: true }); });
+      const fallsBefore = lines.filter(function (l) { return / falls\.$/.test(l); }).length;
+      const queued = (Game.tbfight && Game.tbfight._deathLines) ? Game.tbfight._deathLines.length : -1;
+      gok('G4 deferred damage kills', dealt > 0 && !mf.alive, 'dealt=' + dealt + ' alive=' + mf.alive);
+      gok('G4 no falls line before the flush', fallsBefore === 0, 'falls=' + fallsBefore);
+      gok('G4 one line queued', queued === 1, 'queued=' + queued);
+      await quietLog(async () => { Game.tbFlushDeathLines(); });
+      const fallsAfter = lines.filter(function (l) { return / falls\.$/.test(l); }).length;
+      gok('G4 flush announces the fall exactly once', fallsAfter === 1, 'falls=' + fallsAfter);
+      await quietLog(async () => { Game.tbFlushDeathLines(); });
+      const fallsTwice = lines.filter(function (l) { return / falls\.$/.test(l); }).length;
+      gok('G4 second flush is a no-op (no double announcement)', fallsTwice === 1, 'falls=' + fallsTwice);
+    }
+    lines.restore();
+  }
 
   console.log('test-strikefall-a(game): ' + gpass + ' passed, ' + gfail + ' failed');
   return gfail;
