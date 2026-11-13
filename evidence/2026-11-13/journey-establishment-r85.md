@@ -146,4 +146,9 @@ load window; it was in the r135 original gate's timeout set). All three
 timeouts re-run standalone on the final tip and green — living-garden
 **8/8**, one-person-army **7/7**, capable-bot **42/42**. **Gate: GO
 after adjudication, zero attributable to the conversation.js fix.**
+Final rebase: master moved to `de4a749d0` (ship-loop version bump —
+`build.js` version string + `index.html` `?v=` cache-busters only, no
+game code). Re-rebased onto it (proof 14/14 again); the stamp-sensitive
+test `test-boot-data-version.js` re-verified standalone **6/6** on the
+final tip. The full gate stands on byte-identical game inputs.
 Merge: ff-only to master (see below).
