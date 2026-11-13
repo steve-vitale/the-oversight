@@ -42,7 +42,9 @@ if [ "$#" -ne 2 ]; then
 fi
 COMMIT="$1"
 STEP="$2"
-REPO="$(cd "$(dirname "$0")/.." && pwd)"
+# REPO may be passed in (run the script from a /tmp copy so the
+# detached checkout cannot unlink the running script itself).
+REPO="${REPO:-$(cd "$(dirname "$0")/.." && pwd)}"
 cd "$REPO" || exit 2
 
 restore() {
