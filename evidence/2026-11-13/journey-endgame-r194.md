@@ -367,10 +367,27 @@ re-seed only if a later panel moves the sums by more than this.
 
 ## Landing
 
-- Evidence/tooling commit: (to fill)
-- Rebase base: master (to fill — read at rebase time)
-- Proof re-run after rebase: (to fill)
-- Gate: (to fill)
-- Merge commit: (to fill)
+- Evidence/tooling commits: `b6dc15b6c` (instruments + prereg + proof
+  tests), `4930e8d09` (evidence — all six passes + run note). Post-rebase
+  SHAs on master `02433d959` (sim-strikefall-a adoption). (Pre-rebase SHAs
+  were `0e4a6426e` + `1d2ec7013`; rebased twice cleanly — first onto
+  `fe4b01cd0`, then onto `02433d959` — no conflicts, no stop-at-pick
+  quirk.)
+- Rebase base: master `02433d959926ca86857540e6cbf0c3dcf5323060` (read
+  immediately before the final rebase).
+- Proof re-run after final rebase: test-competent-pin-r194 6/6 PASS,
+  test-corpus-purity-r194 ALL PASS, test-m2c-adopted-refs-r194 ALL PASS;
+  tree status clean.
+- Gate: `node scripts/check.js --quick` in the tree — **334 passed, 6
+  failed, GO after adjudication** (log
+  `evidence/2026-11-13/journey-endgame-r194-gate.log`, 1080s). The 6:
+  3 exact-120s load timeouts (living-garden, one-person-army,
+  capable-bot) — all re-ran green standalone (capable-bot 42/42); 3
+  staleness failures (measurement-proof-update, measurement-workflow,
+  phone-frame-proof) — all three confirmed failing identically on master
+  `02433d959` by read-only runs (pre-existing: proof stale since the
+  strikefall-a src/js landing, phone receipt stale). **0 failures
+  attributable to this branch.**
+- Merge commit: (to fill — after the ff-only merge)
 - Rotation-b: 4 → 5
 - Lock `playtest-loop-2.lock` (run_id journey2-4-20261113-1655): deleted at closeout
