@@ -48,7 +48,7 @@ check('bond_proposed tele: villager-initiated', villagerTele, 114);
 
 // Source guard: the driver wrap must label the execution step 'engine',
 // not the proposal's proposer 'scholar'.
-const src = fs.readFileSync(path.join(__dirname, 'journey-social-life-r181-20261112.js'), 'utf8');
+const src = fs.readFileSync(path.join(__dirname, 'journey-social-life-r189-20261112.js'), 'utf8');
 const wrapStart = src.indexOf('// r141 (j) BOND INSTRUMENT');
 const wrapEnd = src.indexOf('} catch (e) { ctxShared.proposeWrapped', wrapStart);
 const wrapSrc = src.slice(wrapStart, wrapEnd);

@@ -1,5 +1,8 @@
-// journey-social-r181-helpers.js -- pure helpers shared by the r181 social
-// driver and analyzer (Lane B, 2026-11-12). r181 = r172 helpers verbatim
+// journey-social-r189-helpers.js -- pure helpers shared by the r189 social
+// driver and analyzer (Lane B, 2026-11-12). r189 = r181 helpers verbatim
+// EXCEPT: tallyRecapEmpty is new (M11, recap-empty tally — how many M4
+// near-dup flags carry the empty-thread recap core "We were just talking.
+// Nothing important.", a ONE-line pool on r181: 19 of 126 flags).
 // EXCEPT: tallyConfessions is new (B1, double-confession tally —
 // sittings with >=2 'confessed' confrontation outcomes). tallyReoffers
 // carries the furniture filter (C2) and tallyNarrDup the NARR near-dup
@@ -295,7 +298,27 @@ function tallyVendetta(armEvents) {
   return { total: evs.length, directed, unordered, maxDirected, maxUnordered, topDirected: top(directed), topUnordered: top(unordered), pairsGte4 };
 }
 
-module.exports = { aggregateNightlyNews, summarizeBondProposed, tallyOffered, summarizeCounters, tallyRecap, mapTranscriptEntry, tallyReoffers, tallyDroppedThreads, tallyNarrDup, tallyConfessions, tallyVendetta };
+module.exports = { aggregateNightlyNews, summarizeBondProposed, tallyOffered, summarizeCounters, tallyRecap, mapTranscriptEntry, tallyReoffers, tallyDroppedThreads, tallyNarrDup, tallyConfessions, tallyVendetta, tallyRecapEmpty };
+
+// r189 (M11) RECAP-EMPTY TALLY: count M4 near-dup flags carrying the
+// empty-thread recap core "We were just talking. Nothing important."
+// (convoRecapLine, empty thread log). The r181 panel showed 19 of 126
+// flags carry this ONE line: pressing recap twice in one sitting re-serves
+// the same core with a reframe prefix ("As I said — ..."), and the M4 scan
+// flags the pair. Either side matching counts the flag once (a flag is one
+// printed line). Cores arrive prefix-stripped by the analyzer; normalize
+// (lowercase, punctuation-insensitive) and match the core's start, so the
+// clearer-exit suffix ("... Ask me something else if you want.") still
+// counts. A near-miss ("We were just talking about the harvest.") does not.
+function tallyRecapEmpty(flags) {
+  const norm = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+  const isRecapEmpty = (core) => norm(core).indexOf('we were just talking nothing important') === 0;
+  let count = 0;
+  for (const f of (flags || [])) {
+    if (f && (isRecapEmpty(f.a) || isRecapEmpty(f.b))) count++;
+  }
+  return count;
+}
 
 // r181 (B1) DOUBLE-CONFESSION TALLY: group 'confessed' confrontation
 // outcomes by sitting (the driver's sitting stamp; null = fired outside

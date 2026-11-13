@@ -11,7 +11,7 @@
 // 43601: two reciprocal pairs at 2 each, no pair >= 4).
 'use strict';
 const fs = require('fs'), path = require('path');
-const { tallyVendetta } = require('./journey-social-r181-helpers');
+const { tallyVendetta } = require('./journey-social-r189-helpers');
 
 let pass = 0, fail = 0;
 function check(name, got, want) {

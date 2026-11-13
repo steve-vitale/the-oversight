@@ -1,6 +1,6 @@
-// journey-social-life-r181-20261112.js — LEG 5 SOCIAL LIFE r181 (lane B).
-// r181 = r172 driver verbatim EXCEPT: fresh seeds 43701-43704, OUTDIR
-// evidence/2026-11-12, filenames r181. The r172 (B1) confront wraps are
+// journey-social-life-r189-20261112.js — LEG 5 SOCIAL LIFE r189 (lane B).
+// r189 = r181 driver verbatim EXCEPT: fresh seeds 43801-43804, OUTDIR
+// evidence/2026-11-12, filenames r189. The r172 (B1) confront wraps are
 // carried verbatim (read-only instrument; the guard they measure is now in the base).
 // Game.confrontDoubt / Game.confrontTheft wrapped (read-only) recording
 // {sitting, vid, day, method, outcome} into confrontEvents, so the
@@ -10,7 +10,7 @@
 // scattered / hungryDays / aliveEnd so a scattered-with-people-alive
 // ending is confirmed from the record, not by elimination (r159's
 // 42703 question).
-// Pre-registration: evidence/2026-11-12/journey-social-life-r181-prereg.md
+// Pre-registration: evidence/2026-11-12/journey-social-life-r189-prereg.md
 //   (B) COUNTER-SETTLE EXPERIMENT (r149 finding): the driver settles a
 //       pending link counter once per day via Game.answerCounter('accept')
 //       (a real player answers the counter through the app.js buttons;
@@ -81,14 +81,14 @@
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
-const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(s => parseInt(s, 10)) : [43701, 43702, 43703, 43704]);
+const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(s => parseInt(s, 10)) : [43801, 43802, 43803, 43804]);
 const DAYCAP = parseInt(process.env.DAYCAP || '140', 10);
 
 const { loadGame, setupGame, runDays } = require('./sim-harness');
 const { competent } = require('./policies/competent');
 const { socialite } = require('./policies/socialite');
 const gc = require('./policies/gossipcensus-diag'); // r141 M6 classifiers (read-only)
-const { aggregateNightlyNews, mapTranscriptEntry } = require('./journey-social-r181-helpers');
+const { aggregateNightlyNews, mapTranscriptEntry } = require('./journey-social-r189-helpers');
 
 const OUTDIR = process.env.OUTDIR ? path.resolve(process.env.OUTDIR) : path.join(ROOT, 'evidence', '2026-11-12');
 function vname(Game, vid) { try { return Game.displayName(vid) || String(vid); } catch (e) { return String(vid); } }
@@ -359,7 +359,7 @@ function census(Game, seed) {
 
 async function oneSeed(seed) {
   const t0 = process.hrtime.bigint();
-  const { Game, manifest } = await loadGame({ seed, mode: 'journey-social-life-r181', fullTelemetry: true, narration: true });
+  const { Game, manifest } = await loadGame({ seed, mode: 'journey-social-life-r189', fullTelemetry: true, narration: true });
   // text capture ON (emit = the one text stream)
   const captured = [];
   let capDropped = 0; // r141 M6: emit-trim accounting (see below)
@@ -933,7 +933,7 @@ async function oneSeed(seed) {
     const { evidence, ctxShared } = await oneSeed(seed);
     seedsOut.push(evidence);
     // transcript records live OUTSIDE evidence JSON? No — keep them in, capped.
-    fs.writeFileSync(path.join(OUTDIR, `journey-social-life-r181-${seed}.json`), JSON.stringify(evidence, null, 1));
+    fs.writeFileSync(path.join(OUTDIR, `journey-social-life-r189-${seed}.json`), JSON.stringify(evidence, null, 1));
     console.log(`day ${evidence.gameDay} endReason=${evidence.endReason} ms=${evidence.ms}`);
     console.log(evidence.census.slice(0, 6).join('\n'));
   }

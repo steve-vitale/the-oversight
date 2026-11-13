@@ -1,5 +1,5 @@
-// analyze-journey-social-r181-20261112.js -- r181 panel analyzer (Lane B).
-// Reads worktree evidence/2026-11-12/journey-social-life-r181-*.json and
+// analyze-journey-social-r189-20261112.js -- r189 panel analyzer (Lane B).
+// Reads worktree evidence/2026-11-12/journey-social-life-r189-*.json and
 // prints: lure/party decision counts by kind, dark-channel verdict inputs
 // (plots with corrected grievance pairs, grievance-holder -> later leader),
 // death-cluster census, social volume, and the BOND section (r141):
@@ -9,10 +9,10 @@
 // Usage: node scripts/analyze-journey-social-r154-20261107.js
 'use strict';
 const fs = require('fs'), path = require('path');
-const { summarizeBondProposed, tallyOffered, summarizeCounters, tallyRecap, tallyReoffers, tallyDroppedThreads, tallyNarrDup, tallyConfessions, tallyVendetta } = require('./journey-social-r181-helpers');
+const { summarizeBondProposed, tallyOffered, summarizeCounters, tallyRecap, tallyReoffers, tallyDroppedThreads, tallyNarrDup, tallyConfessions, tallyVendetta, tallyRecapEmpty } = require('./journey-social-r189-helpers');
 const DIR = path.join(__dirname, '..', 'evidence', '2026-11-12');
-const files = fs.readdirSync(DIR).filter(f => /^journey-social-life-r181-\d+\.json$/.test(f)).sort();
-if (!files.length) { console.error('no r181 per-seed JSONs in ' + DIR); process.exit(1); }
+const files = fs.readdirSync(DIR).filter(f => /^journey-social-life-r189-\d+\.json$/.test(f)).sort();
+if (!files.length) { console.error('no r189 per-seed JSONs in ' + DIR); process.exit(1); }
 const seeds = files.map(f => JSON.parse(fs.readFileSync(path.join(DIR, f), 'utf8')));
 const count = (rows, key) => { const o = {}; for (const r of rows) { const k = key(r); o[k] = (o[k] || 0) + 1; } return o; };
 console.log('SEEDS: ' + seeds.map(s => (s.seed || '?') + ' d' + (s.gameDay || s.days)).join(', '));
@@ -165,12 +165,16 @@ for (const s of seeds) {
   }
   console.log('  M4 transcripts=' + tss.length + ' naturalEnds=' + ((s.social || {}).naturalEnds) + ' nearDupFlags=' + m4flags.length);
   for (const f of m4flags) console.log('  M4 FLAG ' + f.kind + ' [' + f.tag + ' ' + f.vid + '] :: ' + f.a + (f.b ? ' || ' + f.b : ''));
+  // r189 (M11) recap-empty tally: how many M4 flags carry the empty-thread
+  // recap core (ONE-line pool on r181: 19 of 126 flags). Anchor: r181 = 19.
+  const recapEmpty = tallyRecapEmpty(m4flags);
+  console.log('  M11 recap-empty flags=' + recapEmpty + ' of ' + m4flags.length + ' (bar: >=10 panel-wide lands the job-B1 pool fix)');
   if (best) {
     console.log('  M4 CANDIDATE [' + best.tag + ' ' + best.vid + ' turns=' + best.turns + ' naturalEnd=' + best.naturalEnd + ']:');
     for (const e of (best.transcript || [])) console.log('    ' + e.who + ': ' + e.text);
   } else console.log('  M4 CANDIDATE: none (no transcript >= 4 lines)');
   // stash for the panel M4 summary
-  s._m4 = { best: best ? { tag: best.tag, vid: best.vid, turns: best.turns, naturalEnd: best.naturalEnd, transcript: best.transcript } : null, flags: m4flags, nTranscripts: tss.length };
+  s._m4 = { best: best ? { tag: best.tag, vid: best.vid, turns: best.turns, naturalEnd: best.naturalEnd, transcript: best.transcript } : null, flags: m4flags, nTranscripts: tss.length, recapEmpty };
 }
 console.log('\nPANEL lure/party decisions: ' + JSON.stringify(count(allLures, d => (d.kind || '?') + ':' + (d.accept ? 'accept' : 'decline'))));
 // r141 BOND panel: lure split needs each decision's recorded flag.
@@ -238,6 +242,9 @@ console.log('PANEL M6 strict-definition note: strict on-tile away total=' + (m6B
 const m4TotalFlags = seeds.reduce((n, s) => n + ((s._m4 || {}).flags || []).length, 0);
 const m4TotalTs = seeds.reduce((n, s) => n + ((s._m4 || {}).nTranscripts || 0), 0);
 console.log('PANEL M4: transcripts=' + m4TotalTs + ' nearDupFlags=' + m4TotalFlags + ' candidatesPrinted=' + seeds.filter(s => (s._m4 || {}).best).length + '/' + seeds.length + ' — verdict in run note from the printed candidates above');
+// r189 (M11) recap-empty panel tally: r181 anchor 19; bar >= 10 lands the job-B1 pool fix.
+const m11Total = seeds.reduce((n, s) => n + ((s._m4 || {}).recapEmpty || 0), 0);
+console.log('PANEL M11: recap-empty flags=' + m11Total + ' of ' + m4TotalFlags + ' near-dup flags (r181 anchor 19; bar >= 10 lands the job-B1 pool fix)');
 // r154 (C) goal-thread react surfacing: offered-id tally across all
 // transcripts + longest consecutive continuer-press run.
 const allTs = seeds.flatMap(s => ((s.social || {}).transcripts || []));
