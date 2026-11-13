@@ -4629,14 +4629,34 @@
       let owns = null;
       if (c.thread === 'ambush') owns = id => /^(betrayal:run|betrayal:talk|betrayal:fight)$/.test(id);
       else if (c.windingDown || c.spokenBeat?.tag === 'closing') owns = id => id === 'leave' || id === 'silence';
-      else if (c.spokenBeat?.tag === 'invitation' && this.pendingInvite?.(vid)) owns = id => /^betrayal:(accept|decline)$/.test(id) || id === 'leave' || id === 'silence';
-      // BOND-INITIATION (2026-11-05): a spoken bond proposal / link raise
-      // owns its answers, like a spoken invitation. No stripping branch
-      // for bond:/link: choices: the talk-request opener carries the
-      // ask verbatim, so the answer stays offered whenever the pending
-      // exists — the proposal is why they came to talk.
-      else if (c.spokenBeat?.tag === 'bondproposal' && this.pendingBondProposal?.(vid)) owns = id => /^bond:(accept|decline)$/.test(id) || id === 'leave' || id === 'silence';
-      else if (c.spokenBeat?.tag === 'linkraise' && this.pendingLinkRaise?.(vid)) owns = id => /^link:(accept|decline)$/.test(id) || id === 'leave' || id === 'silence';
+      // JOURNEY-SCALE R134 (2026-11-12): ASK UNION — branches 3–5 were
+      // keyed on the LAST-BEAT tag, so a follow-on beat overwriting the
+      // tag silently un-owned a spoken ask, and two asks spoken in one
+      // sitting could never both own. The union keys on the per-sitting
+      // spoken flags instead (inviteSpoken / bondProposalSpoken /
+      // linkRaiseSpoken, each AND its pending) — set only when the ask's
+      // line was actually heard in this sitting (convoRecordSpokenBeat).
+      // A single spoken ask behaves exactly as its old branch did. The
+      // bond:/link: answers themselves arrive via the bond prepend (which
+      // bypasses this filter); the union's job for them is exclusivity —
+      // competing base choices are stripped so the spoken ask owns its
+      // menu. For betrayal: the union also preserves: an invite spoken
+      // first, its tag overwritten by a later beat, keeps its answers
+      // instead of being stripped by the else-if below. Nonverbal
+      // sittings never reach this branch: the mime answers through
+      // nv:accept/nv:decline (r133) and no flag is set there.
+      else if (c.thread !== 'nonverbal' && (
+        (c.inviteSpoken && this.pendingInvite?.(vid)) ||
+        (c.bondProposalSpoken && this.pendingBondProposal?.(vid)) ||
+        (c.linkRaiseSpoken && this.pendingLinkRaise?.(vid)))) {
+        const keepInvite = c.inviteSpoken && this.pendingInvite?.(vid);
+        const keepBond = c.bondProposalSpoken && this.pendingBondProposal?.(vid);
+        const keepLink = c.linkRaiseSpoken && this.pendingLinkRaise?.(vid);
+        owns = id => (keepInvite && /^betrayal:(accept|decline)$/.test(id)) ||
+          (keepBond && /^bond:(accept|decline)$/.test(id)) ||
+          (keepLink && /^link:(accept|decline)$/.test(id)) ||
+          id === 'leave' || id === 'silence';
+      }
       else if (c.pendingQ) owns = id => id.startsWith('ans:') || ['deflect_q','leave','silence'].includes(id);
       else if (c.reactiveQ) owns = id => id.startsWith('react:') || ['leave','silence'].includes(id);
       else if (c.genericQ) owns = id => id.startsWith('gq:') || ['leave','silence'].includes(id);
@@ -5631,7 +5651,8 @@
       // (set in convoRecordSpokenBeat when a bond proposal / link raise
       // is actually heard) reset with the other sitting ledgers — the ask
       // has to be heard again next sitting before its answer is offered.
-      c.linkRaiseSpoken = false; c.bondProposalSpoken = false;
+      // R134 adds the invite to the same flags (c.inviteSpoken).
+      c.linkRaiseSpoken = false; c.bondProposalSpoken = false; c.inviteSpoken = false;
       c.threadLog = []; c._beatThread = null; c._resumedOnce = false; c._resumeOwnsTid = null;
       // STALE INVITE HOLD (journey-social r40 2026-10-21): c.invitePending is
       // the intra-conversation hold for "opener owns the reply, queue the
@@ -5978,8 +5999,15 @@
         if (lr) linkBeat = (lr.line || (this.linkRaiseLine ? this.linkRaiseLine(vid) : null));
       } catch (e) {}
       if (bondBeat) {
-        if (openerOwnsReply || inviteBeat) c.bondPending = bondBeat;
-        else if (openerCarriedBond) recordStagedBeat(bondBeat, 'bondproposal');
+        // JOURNEY-SCALE R134 (2026-11-12): the opener-carried check comes
+        // FIRST — the line was already spoken verbatim as the opener, so
+        // the flag must say so whatever other beats exist. Holding it
+        // instead left the flag false (the Henry defect: raise spoken as
+        // the opener, invite spoken after, flag never set) and let the
+        // continuer re-speak it verbatim later (the double-serve the
+        // r153 OPENER-CARRIED SKIP guards against).
+        if (openerCarriedBond) recordStagedBeat(bondBeat, 'bondproposal');
+        else if (openerOwnsReply || inviteBeat) c.bondPending = bondBeat;
         // OPENER SKIP (journey-succession r155 2026-11-07): a run-blocked
         // staged proposal must not go dry here — the talk-request opener
         // (convoOpening #1, r19) already skipped it for the same block,
@@ -5993,8 +6021,13 @@
         else this.sayLine(vid, bondBeat, { bondBeat: true, tag: 'bondproposal' });
       }
       if (linkBeat) {
-        if (openerOwnsReply || inviteBeat || bondBeat) c.linkPending = linkBeat;
-        else if (openerCarriedLink) recordStagedBeat(linkBeat, 'linkraise');
+        // JOURNEY-SCALE R134 (2026-11-12): opener-carried first — see the
+        // bond beat above. The r153 skip intends this record; the hold
+        // below it shadowed the record whenever an invite/bond beat
+        // also existed, so the raise stayed unanswerable in the sitting
+        // where it was heard (Henry 133101 d10).
+        if (openerCarriedLink) recordStagedBeat(linkBeat, 'linkraise');
+        else if (openerOwnsReply || inviteBeat || bondBeat) c.linkPending = linkBeat;
         // OPENER SKIP (journey-succession r155 2026-11-07): same shape as
         // the bond beat above — the staged link line is one fixed
         // phrasing per village+how, and a second villager raising the

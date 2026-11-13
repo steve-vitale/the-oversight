@@ -160,8 +160,16 @@
     // recordStagedBeat for the opener-carried ask. A queued-but-unspoken
     // beat sets no flag — queuing is not hearing. Reset per sitting in
     // startConvo; gated in bond-initiation.js bondChoices.
+    // JOURNEY-SCALE R134 (2026-11-12): the invitation joins the same
+    // per-sitting flags (tag 'invitation' sets c.inviteSpoken) so the
+    // ask-union in convoMenuPage can tell a SPOKEN invite from a HELD
+    // one. The existing inv.spoken cannot serve: it is set at label
+    // resolution, BEFORE the hold-or-speak decision, so a queued,
+    // unheard invite already carries it. The nonverbal mime never goes
+    // through sayLine, so the flag stays false there (r133 untouched).
     if (tag === 'linkraise') c.linkRaiseSpoken = true;
     if (tag === 'bondproposal') c.bondProposalSpoken = true;
+    if (tag === 'invitation') c.inviteSpoken = true;
   };
 
   // Tag transcript entries: every 'them' line carries its beat tag.
