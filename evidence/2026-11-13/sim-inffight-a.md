@@ -180,6 +180,39 @@ changed test file; the game code it loads is pristine master):
 - scripts/probe-inffight-a.js — DELETED before landing (temporary
   diagnostic per its own header; results quoted above).
 
+## Gate (adoption coordinator)
+
+`node scripts/check.js --quick` in this tree: **326 passed, 14 failed
+in 1185s** (log evidence/2026-11-13/sim-inffight-a-gate.log). Adjudication
+— 0 failures attributable to this arm (test-only change; the changed
+file is not run by --quick at all):
+- 4× exact-120s timeouts (load artifacts, known class):
+  test-living-garden-deed-attainment, test-one-person-army-deed-
+  attainment, test-trust-observer-neutrality, test-synergy-stall.
+- 4× EPERM write failures (write-flap window, see below):
+  test-prepared-runner-custody, test-proof-text-identity,
+  test-telemetry-check-recorder, test-sw-audio-cache (copyfile EPERM).
+- 4× pre-existing staleness (standing gate failure set):
+  test-measurement-proof-update + test-measurement-workflow (retained
+  neutrality proof stale), test-occupation-panels ("real CLI workflow
+  completed"), test-phone-frame-proof (stale phone receipt).
+- 1× test-measurement-cache-flags (load artifact class; cap stays 30s).
+- 1× test-foodpower-20261014 (ontology validator sub-check failed in
+  the gate run) — PASSES standalone on re-run (30 passed, 0 failed),
+  flap artifact.
+- Gate GO after adjudication. The changed test file
+  (scripts/test-inffight-20261014.js) is a green-list job with no quick
+  tag, so it runs in the FULL check.js, not --quick; it was verified
+  directly instead (16/16 above, plus the 9/12 reproduction).
+
+Flap window during this gate: the flap watcher logged A/B/E EPERM
+failures 2026-11-13T14:22–14:28Z (boot f8eff984 — another VM
+replacement); the gate's 4 EPERM failures fall in that window. Two
+standalone foodpower re-runs at 14:29Z exited 1 with EMPTY output
+(flap signature); a third run minutes later passed 30/30 — the flap
+had cleared. Nothing was lost; no git writes were attempted during
+the window.
+
 ## Finding
 
 sim-findings.md #2298 marked [fixed 2026-11-13 by Loop A arm
