@@ -100,8 +100,11 @@ echo "step $STEP: fix standing.js swapped in (f8fda4295a99)"
 POLICY_SHA="$(sha256sum scripts/policies/competent.js | cut -d' ' -f1)"
 echo "step $STEP: own policy sha ${POLICY_SHA:0:12}"
 
-# 5. Driver + analyzer. The log captures both.
+# 5. Driver + analyzer. The log captures both. (The dated evidence
+# dir does not exist at old commits — create it first, or the
+# shell redirect itself fails before node starts.)
 LOG="evidence/2026-11-13/culpritbisect-a-$STEP-driver.log"
+mkdir -p "$(dirname "$LOG")"
 LEG=bisect STEP="$STEP" DAYS=150 SEEDS="$SEEDS" RUN=culpritbisect-pilot node scripts/culpritbisect-driver-20261113.js > "$LOG" 2>&1 || fail "bisect driver failed (see $LOG)"
 STEP="$STEP" node scripts/culpritbisect-analyze-20261113.js >> "$LOG" 2>&1
 ANALYZER_RC=$?
