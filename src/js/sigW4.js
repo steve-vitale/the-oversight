@@ -168,7 +168,22 @@
     }
     // After the invitation resolves (accepted/refused/expired), the absolve attack.
     C.offered = false; C.refused = false; C.phase = 'absolve';
-    say(game, '🔔 The steeple RINGS — the bell is the telegraph. ABSOLUTION falls like a beam.');
+    // STEEPLE DEDUP (sim-steeple-a 2026-11-13, findings #2302): this hook
+    // runs every Congregation monster-turn, so the line fired up to 19x
+    // per (fight, monster) while the beam only ignited ~7x in the same
+    // fight — per-monster-turn, not per-beam. Announce once per (fight,
+    // monster); the mechanic is untouched (beam, geas, invitation all
+    // behave exactly as before), and each beam cycle still telegraphs
+    // via its "💥 Absolution!" ignition beat.
+    var announceSteeple = true;
+    try {
+      if (f && !f.over) {
+        f._steepleAnnounced = f._steepleAnnounced || {};
+        if (f._steepleAnnounced[m.key]) announceSteeple = false;
+        else f._steepleAnnounced[m.key] = true;
+      }
+    } catch (e) { announceSteeple = true; }
+    if (announceSteeple) say(game, '🔔 The steeple RINGS — the bell is the telegraph. ABSOLUTION falls like a beam.');
     try { game.audioEvent('congregationAbsolve'); } catch (e7) {}
     try { if (game.encSetPhase) game.encSetPhase(m, 'absolve'); } catch (e8) {}
     return false; // let the generic Absolution beam [50,70] run

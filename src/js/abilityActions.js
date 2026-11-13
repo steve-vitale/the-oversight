@@ -1625,7 +1625,21 @@
       // not rounds (decremented in _applyAbilityActionMods per strike) —
       // "for 3 rounds" was wrong when a round passed without a strike.
       s.rageActive = { rounds: 3, dmgMult: 2.0 };
-      game.say('The red comes down. Your next 3 strikes deal +100% damage. (Unleash Rage — hold on.)');
+      // RAGE DEDUP (sim-steeple-a 2026-11-13, findings #2301): the
+      // competent policy presses rage every winning turn, re-applying a
+      // wholly unspent buff — 221/242 presses on the check band were
+      // refreshes at rounds=3, and the line fired up to 32x in one
+      // fight. Announce once per fight; the mechanic is untouched (the
+      // refresh still applies, the turn + 60 kcal are still paid).
+      var announceRage = true;
+      try {
+        var rf = game.tbfight;
+        if (rf && !rf.over) {
+          if (rf._rageAnnounced) announceRage = false;
+          else rf._rageAnnounced = true;
+        }
+      } catch (e) { announceRage = true; }
+      if (announceRage) game.say('The red comes down. Your next 3 strikes deal +100% damage. (Unleash Rage — hold on.)');
       return true;
     },
 
