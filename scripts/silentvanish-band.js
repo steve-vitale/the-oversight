@@ -118,12 +118,15 @@ async function oneRun(seed) {
   wrapJoin('_vaAdmitPetitioners', '_vaAdmitPetitioners');
 
   // --- removal call-site wraps ---
+  // tbVillagerFalls takes a fighter object (t.villagerId), the others take
+  // a vid string as the first arg.
   function wrapRemoval(fnName, via) {
     try {
       const orig = Game[fnName];
       if (typeof orig !== 'function') { errors.push('wrap-missing: ' + fnName); return; }
-      Game[fnName] = function (vid, how) {
+      Game[fnName] = function (a0, how) {
         try {
+          const vid = (a0 && typeof a0 === 'object') ? a0.villagerId : a0;
           if (typeof vid === 'string') {
             removals.push({ day: gday(Game), vid: vid, name: displayName(Game, vid), how: (how == null ? null : String(how)), site: stackSite(), via: via });
           }
@@ -182,7 +185,14 @@ async function oneRun(seed) {
   eventDaysSay.sort(function (a, b) { return a.day - b.day; });
 
   // --- classify removals: vanish-within-a-day? voiced? ---
-  const leaves = removals.filter(function (r) { return r.via === 'removeVillager'; }).map(function (r) {
+  // Dedupe by vid+day (a contest kill logs both removeVillager and the
+  // direct filter); prefer the removeVillager entry for the path.
+  const seenRemoval = {};
+  removals.forEach(function (r) {
+    const k = r.vid + '@' + r.day;
+    if (!seenRemoval[k] || r.via === 'removeVillager') seenRemoval[k] = r;
+  });
+  const leaves = Object.keys(seenRemoval).map(function (k) { return seenRemoval[k]; }).map(function (r) {
     const jd = joinDay[r.vid];
     const window = [];
     for (let dd = r.day - 1; dd <= r.day + 1; dd++) (sayByDay[dd] || []).forEach(function (line) { window.push({ day: dd, line: line }); });
