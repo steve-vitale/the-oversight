@@ -128,4 +128,13 @@ favor menu stay reachable during a betrayal thread?
 
 ## Gate
 
-Gate runs after rebase onto current master — see Landing section below.
+Adoption gate (coordinator 05223aca, 2026-11-13): rebased onto master
+`46cdc89cb` (after the r135 landing; fix `469ddf87c`), proof test 14/14
+on the rebased tip, `check.js --quick` **335 passed, 5 failed in 609s**
+(`journey-establishment-r85-gate-adopt.log`) — the identical 5 as the
+r135 gate: measurement-proof staleness pair (pre-existing; refresh
+rounds 11+12 owed), phone-frame stale receipt (pre-existing), and the
+two exact-120s timeouts (living-garden, one-person-army), both re-run
+standalone on this tip and green — living-garden **8/8**, one-person-army
+**7/7**. **Gate: GO after adjudication, zero attributable to the
+conversation.js fix.** Merge: ff-only to master (see below).
