@@ -4932,6 +4932,7 @@
         return uncapped?menu:this.convoMenuPage(vid,menu);};
       if (c.windingDown || c.spokenBeat?.tag === 'closing') return finish([{ id: 'leave', label: '"See you."' }]);
       if (c.thread === 'want' && (c.want?.favor?.state === 'promised' ||
+          (c.want?.favor?.forageRun && !c.want.favor.forageRun.returned) ||
           (c.want?.favor?.waterRun && !c.want.favor.waterRun.returned)) && !c.choosingSubject &&
           !c.pendingQ && !c.reactiveQ && !c.genericQ) {
         const favorMenu = this.convoFavorActionMenu(vid, c.want.favor, false).map(o => ({ id: o.id, label: o.labels[0], temper: o.temper }));

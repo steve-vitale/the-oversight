@@ -1,0 +1,40 @@
+
+-- Stanley (gen_iuyrike) occ=Wild food forager --
+OPENING: "Practical view: Have you — sorry. I keep thinking about them."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Palmyra Palm. Remember the leaf, the stem, the smell — that's the whole of it."
+YOU: [confront:d_rw4dnv4] "Someone said something about you. I wanted to hear your side."
+THEM: "We went over this," Stanley says, a little tired. "I already told you the truth about that."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "I work alone. Nothing personal. ...It's a little personal."
+YOU: [dlg:comfort] "Are you okay?"
+THEM: "Thanks. ...Thanks for saying that."
+YOU: [alive:event:mourning] "How are you holding up? About... them."
+THEM: "You asked me that before. It's a different question now." "Miles is gone and Carlos is gone. The fire doesn't care. That's what gets me — the fire doesn't care."
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Blackberry — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+YOU: [dlg:more] "Tell me more."
+THEM: "My part? I remember them. Someone has to do it properly."
+YOU: [menu:more] More things to say (1/2)
+THEM: "My part? I remember them. Someone has to do it properly."
+closing: "I need to walk a bit. I'll be by the fire when I'm ready."
+
+-- Colleen (gen_eq5s0n5) occ=roofer --
+OPENING: "Can we talk?" Colleen sits down near you. "Just... talk. Like people used to."
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: On the way, Colleen stops and actually teaches you something — how they read a slope for water, how their grandmother did it. (Knowledge, freely given. The Codex notes it.)
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Daylily Bud — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know."
+YOU: [goon] "Take your time."
+THEM: Something eases in their shoulders. They're really talking to you now.
+YOU: [dlg:more] "I’m listening."
+THEM: "I'm not okay. I'm saying it out loud so it's real: I'm not okay."
+YOU: [dlg:stay] "I'm not going anywhere."
+THEM: They lean back on their hands. "Wind's up tonight. Good night to not be walking."
+YOU: [dlg:empathize] "I'm here."
+THEM: "Oh! My hands stopped shaking. That's — that's something. Thank you for sitting here."
+YOU: [goon] "You don't have to say it all at once."
+THEM: "I should go. You know where to find me."
+YOU: [agree] "You're right."
+THEM: "Can't argue with that."
+(ended by engine)
