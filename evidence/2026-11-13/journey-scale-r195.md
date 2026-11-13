@@ -239,7 +239,13 @@ change properly.
 - Commits on branch `journey-scale`: 52e2a4805 (instruments + prereg),
   2c69b0097 (R134→R195 summary label), cf3df8488 (analyzer fixes + run
   note), plus the adoption commit (gate log + this section).
-- Merge/release/rotation: [TO FILL at closeout.]
+- Merge/release/rotation (adoption closeout): merged `--ff-only`
+  `340c6679a..7982d7ba4` (HEAD `7982d7ba4`); tree released done-merged,
+  worktree removed, branch deleted; rotation-a 3→0; lock
+  `playtest-loop.lock` (run_id `2026-11-13T19:27:31Z`) deleted; orphan
+  hbloop PID 167724 killed. Gate adjudication + adoption record in
+  `evidence/2026-11-13/journey-scale-r195-coordinator.md`. Merged
+  locally, pending ship.
 
 ## Carried (not this run's to build)
 
