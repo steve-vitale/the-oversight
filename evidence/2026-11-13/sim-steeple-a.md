@@ -181,6 +181,22 @@ case). Rage presses unchanged per seed (mechanic untouched).
 `node scripts/test-steeple-a.js` — **31 passed, 0 failed**
 (instrument legs: regexes, grouping/judge boundaries, anchor,
 emit-site + no-rage-precheck facts).
+
+### Adoption addendum (2026-11-13, coordinator)
+
+The worker's 31/31 was measured pre-rebase. On the rebased tip
+(7f16a2f88, base 05aa4ce5a) the proof ran **30/1**: only the §5
+anchor-ancestry assertion failed — the rebase had rewritten the
+prereg commit 05b9bb45 as 6ae69b5d6 (arm files byte-identical,
+verified by `git diff 05b9bb45 6ae69b5d6 -- <arm files>`, empty),
+orphaning the hardcoded hash the test pinned. The fix (committed
+with this addendum): §5 now resolves the prereg commit by its exact
+message on the branch and verifies the prereg file it carries is
+byte-identical to the working file — same check, rebase-proof; a
+dropped or altered prereg still fails. Proof on the final tip:
+**32/32 instrument + 23/23 game-level** (32 = 31 + the new
+prereg-content leg). The game legs were re-run, not carried: R1–R3
++ S1–S3 all green on this tip.
 `node scripts/test-steeple-a.js --game` — **23 passed, 0 failed**
 (game-level legs: R1 three presses → one line + buff refreshed +
 60 kcal paid per press; R2 second fight re-announces once; R3

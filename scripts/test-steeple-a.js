@@ -67,13 +67,29 @@ t('judge steeple: 9 lines vs 2 ignitions -> GO-FIX', steepleGoFix(9, 2));
 t('judge steeple: 7 lines vs 7 ignitions (one per beam) -> CHECK-NO-GO', !steepleGoFix(7, 7));
 t('judge steeple: 1 line vs 1 ignition -> CHECK-NO-GO', !steepleGoFix(1, 1));
 
-// §5 — the anchor guard pins the check to the prereg commit
-// (05b9bb45 = prereg commit on branch sim-steeple-a, base master 48ed1ffd7).
+// §5 — the anchor guard pins the check to the prereg commit.
+// The check leg ran when HEAD was the prereg commit 05b9bb45 (base
+// master 48ed1ffd7; D.EXPECTED_ANCHOR still records that hash).
+// A rebase rewrites the prereg commit's hash (05b9bb45 ->
+// 6ae69b5d6 on the rebase onto 05aa4ce5a) without changing its
+// content, so the ancestry check resolves the prereg commit by its
+// exact message on this branch instead of pinning the pre-rebase
+// hash — and verifies the prereg file it carries is byte-identical
+// to the working prereg file, so a dropped or altered prereg still
+// fails. (Adoption fix 2026-11-13: the hardcoded hash failed 30/1
+// on the rebased tip although every other leg was green.)
 t('expected anchor is the prereg commit 05b9bb45', D.EXPECTED_ANCHOR.indexOf('05b9bb45') === 0);
-let head = 'unknown', isAncestor = false;
+let head = 'unknown', preregSha = '', isAncestor = false, preregSame = false;
 try { head = execSync('git rev-parse HEAD', { cwd: REPO }).toString().trim(); } catch (e) {}
-try { execSync('git merge-base --is-ancestor 05b9bb4553d1acab5490245508f4191746114d2a HEAD', { cwd: REPO }); isAncestor = true; } catch (e) {}
-t('prereg commit is an ancestor of this HEAD', isAncestor, 'HEAD ' + head.slice(0, 12));
+try { preregSha = execSync("git log --format=%H --grep='^sim-steeple-a: prereg' -1 HEAD", { cwd: REPO }).toString().trim(); } catch (e) {}
+try { execSync('git merge-base --is-ancestor ' + preregSha + ' HEAD', { cwd: REPO }); isAncestor = true; } catch (e) {}
+try {
+  const atCommit = execSync('git rev-parse ' + preregSha + ':evidence/2026-11-13/sim-steeple-a-prereg.md', { cwd: REPO }).toString().trim();
+  const working = execSync('git hash-object evidence/2026-11-13/sim-steeple-a-prereg.md', { cwd: REPO }).toString().trim();
+  preregSame = !!preregSha && atCommit === working;
+} catch (e) {}
+t('prereg commit (by message) is an ancestor of this HEAD', !!preregSha && isAncestor, 'prereg ' + preregSha.slice(0, 12) + ' HEAD ' + head.slice(0, 12));
+t('prereg file at that commit matches the working prereg file', preregSame);
 
 // §6 — the emit sites still exist, and the measured mechanism is what
 // the check leg assumed: rage has NO precheck (re-press while live is
