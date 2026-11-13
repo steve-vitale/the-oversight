@@ -169,6 +169,55 @@ corpora, no staged game).
 - Q2: the guards as written.
 - Q3/Q4/Q5: as written.
 
+## CLOSEOUT — run 2026-11-13T1927Z (this run)
+
+**Panel (seeds 135101–135104, DAYCAP=140):** 135101 alive d141 (10/10,
+regional, peak stage 3, lesser d71, wave-4 kills 4); 135102 over d96;
+135103 over d62 (pantry 10,650 at pop 0/0); 135104 over d93. Lived-days
+392 vs r134 band 471 (-16.8%, HOLD). Lesser 4/4. Books close, unattributed
+0, teleOnly 0. Wave-5 fights 0 on all seeds.
+
+**Q1 — NO-GO on the wall, blocker named per seed (informative):** national
+0/4. 135101: LEAD 2/3 seasoned (needs 1 more); BELONG good but realm null.
+135102/135103/135104: COLLAPSE (over d96/d62/d93). Wall stands on a fresh
+band: survived 1/4, national/table/wins 0/4. Deaths combat-driven (37/51
+"the wild"), not food-driven.
+
+**Q2 — all GO/HOLD (exit 0):** raise 6 talks (5 answered, 1 counter, 0
+defects); vetbar 0 disagreements; trap HOLD (Boris 135102 d90 mime
+answered, stockpile gifted); betrayal HOLD; lived-days HOLD; lesser 4/4.
+
+**Q3 — RECORDED:** daily-play mimes 26, daily accepts proven 0; Boris
+(Polish-only) answered in the driver sitting. Lane decision still owed.
+
+**Q4 — PASS:** all d90/d120 transcripts + all 6 raise talks read in full.
+Senseless 0. Carried observations: "Yeah?" 2× (Benjamin d128); flat
+closer "Well. That happened." (LaToya d90); attribution split (file-level).
+
+**Q5 — census in the run note** (`evidence/2026-11-13/journey-scale-r195.md`).
+
+**Analyzer fixes (the blank filled):** three instrument bugs found by
+reading the corpus against the analyzer — natgate booleans (first draft
+parsed nothing), trap-line glob (missed regular-transcript mimes),
+header scan + Baraka filter (filename fallback; English speakers in the
+map) — plus the COLLAPSE blocker rule (dead villages' road state is
+detail, not cause). Proof test 29/29 green. No src/js change; the
+tribute-ready-but-undelivered shape is the endgame leg's question.
+
+**Telemetry:** 2 LOUD lines (fightsTotal -75%, fightsByWave.4 -75%) —
+investigated same-run: explained as collapse + flee-behavior + band
+noise (wild encounters still stage at volume, 231 on the alive seed; no
+landing since r134 touches combat initiation). Baseline NOT rolled.
+Metric-review proposal: re-base scale.json on a larger panel or widen
+the fightsTotal LOUD bar.
+
+**Verdicts:** reachable YES, fun YES, winnable NO (this leg).
+
+**Gate / landing:** see the run note's Gate/landing section (filled at
+closeout). Full record: `evidence/2026-11-13/journey-scale-r195.md`.
+Corpus: `hidden_files/evidence/2026-11-13/journey-scale-r195-*` (goal
+store, 159 files).
+
 ## Carried (not this run's to build)
 
 Daily-play chooser never takes invites — lane decision owed (see Q3);

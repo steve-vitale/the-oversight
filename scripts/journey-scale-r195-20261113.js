@@ -51,7 +51,7 @@ const GOSSIP_FIRST = process.env.GOSSIP_FIRST === '1';
 const PROBE_VID = process.env.PROBE_VID || null;
 const PROBE_DAYS = (process.env.PROBE_DAYS || '').split(',').map(s => parseInt(s, 10)).filter(n => !isNaN(n));
 const PROBE_SEED = parseInt(process.env.PROBE_SEED || '85003', 10);
-const EVIDIR = process.env.EVIDIR ? path.resolve(process.env.EVIDIR) : path.join(ROOT, 'evidence', '2026-11-13', 'journey-scale-r195');
+const EVIDIR = process.env.EVIDIR ? path.resolve(process.env.EVIDIR) : path.join(ROOT, '..', '..', 'goals', 'the-scattering-roguelite-survival-game', 'hidden_files', 'evidence', '2026-11-13');
 const PELLET_DECLINE = process.env.PELLET_DECLINE === '1';
 const TEND_PEER = process.env.TEND_PEER === '1'; // r92 Q2b: press tendLink on below-40 peer links after courtship (offered verb only)
 fs.mkdirSync(EVIDIR, { recursive: true });

@@ -17,6 +17,11 @@
 //       guardrail BREACH, exit 1.
 //   (7) a natgate file missing on one seed -> ERROR row printed, exit 0
 //       (guards hold; the pilot gates own corpus completeness).
+//   (8) a -nv transcript with the pre-talk line first and the header on
+//       line 1, mime shown and answered -> trap HOLD and the villager
+//       named from the header (not the filename).
+//   (9) a -nv transcript with a mime shown, offered, never answered ->
+//       trap guard BREACH, exit 1.
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
@@ -35,7 +40,8 @@ function natgateLines(spec) {
   for (let d = 1; d <= spec.lastDay; d++) {
     const nat = (spec.firstNat != null && d >= spec.firstNat) ? 1 : 0;
     const rank = nat === 1 ? 'national' : (d >= 31 ? 'regional' : 'village');
-    lines.push(`d${d} rank=${rank} nat=${nat} glob=0 netLive=1 netDay=28 rung=1 exiled=0 refused=0 pend=${spec.pend || '-@-'} lead=${spec.lead[0]}/${spec.lead[1]} cov=${spec.cov[0]}/${spec.cov[1]} trade=${spec.trade[0]}/${spec.trade[1]} belong=${spec.belong || '-'} foreignMax=0 polities={"lead":null,"belong":null,"cov":null,"trade":null} defer={} view=0`);
+    // Real natgate values are booleans (nat=true/false), not 0/1.
+    lines.push(`d${d} rank=${rank} nat=${nat === 1 ? 'true' : 'false'} glob=false netLive=true netDay=28 rung=true exiled=false refused=false pend=${spec.pend || '-@-'} lead=${spec.lead[0]}/${spec.lead[1]} cov=${spec.cov[0]}/${spec.cov[1]} trade=${spec.trade[0]}/${spec.trade[1]} belong=${spec.belong || '-'} foreignMax=0 polities={"lead":null,"belong":null,"cov":null,"trade":null} defer={} view=0`);
   }
   return lines.join('\n');
 }
@@ -64,6 +70,52 @@ function seedFiles(dir, seed, spec) {
       `seed ${seed} talk 1 outcome not-offered\n` +
       `THEM: "I've heard good things about Stonebridge. We should link with them — we'd be stronger together."\n` +
       `THEM: "Right. Go on, then."\n`);
+  }
+  if (spec.nvTranscript) {
+    const nv = spec.nvTranscript;
+    fs.writeFileSync(path.join(dir, `journey-scale-r195-transcript-${seed}-day90-nv.txt`),
+      `(pre-talk seed: none; takenWantDay=0; convoCount=14)\n` +
+      `=== seed ${seed} day 90 — conversation with ${nv.name} (${nv.vid}) ===\n` +
+      `occupation=blacksmith temperament=steady trust=90 dead=false\n` +
+      `want: none (stage 0)\n` +
+      `open thread: nonverbal fromSeed=false\n` +
+      `picker: control\n\n` +
+      `THEM: ${nv.name} speaks only Polish. No shared words at all — just eyes, hands, and patience.\n` +
+      (nv.mime ? `(They mime walking — come with me, they seem to say.)\n` : ``) +
+      `(turn0 choices: nv:accept, nv:decline, nv:nod, leave)\n` +
+      (nv.answered ? `YOU: [nv:accept] (nod and follow)\n` : `YOU: [nv:nod] (nod slowly)\n`));
+  }
+  if (spec.dayTranscript) {
+    // A REGULAR day90 transcript (not -nv) whose thread is nonverbal:
+    // the trap guard must count it too (r195 fix — Boris 135102 d90).
+    const nv = spec.dayTranscript;
+    fs.writeFileSync(path.join(dir, `journey-scale-r195-transcript-${seed}-day90.txt`),
+      `(pre-talk seed: none; takenWantDay=0; convoCount=13)\n` +
+      `=== seed ${seed} day 90 — conversation with ${nv.name} (${nv.vid}) ===\n` +
+      `occupation=blacksmith temperament=steady trust=90 dead=false\n` +
+      `want: none (stage 0)\n` +
+      `open thread: nonverbal fromSeed=false\n` +
+      `picker: control\n\n` +
+      `THEM: ${nv.name} speaks only Polish. No shared words at all — just eyes, hands, and patience.\n` +
+      (nv.mime ? `(They mime walking — pointing at themselves, then at you, then toward the tree line. The meaning is unmistakable: come with me.)\n` : ``) +
+      `(turn0 choices: nv:accept, nv:decline, nv:nod, nv:smile, nv:pointself, nv:listen, speak_back, leave)\n` +
+      (nv.answered ? `YOU: [nv:accept] (follow their gesture — go with them)\n` : `YOU: [nv:nod] (nod slowly)\n`));
+  }
+  if (spec.verbalTranscript) {
+    // A VERBAL day120 transcript (open thread: want): it must NOT enter
+    // the Baraka re-check map (r195 fix — the broadened glob would
+    // otherwise count English-speaking villagers as comm-'none').
+    const v = spec.verbalTranscript;
+    fs.writeFileSync(path.join(dir, `journey-scale-r195-transcript-${seed}-day120.txt`),
+      `(pre-talk seed: none; takenWantDay=0; convoCount=1)\n` +
+      `=== seed ${seed} day 120 — conversation with ${v.name} (${v.vid}) ===\n` +
+      `occupation=dockworker temperament=intense trust=27 dead=false\n` +
+      `want: curious (stage 1)\n` +
+      `open thread: want fromSeed=false\n` +
+      `picker: control\n\n` +
+      `THEM: "What's something from your old life that's actually useful here?"\n` +
+      `(turn0 choices: ans:q_before_skill:a_tell, leave, silence)\n` +
+      `YOU: [ans:q_before_skill:a_tell] "Patience."\n`);
   }
 }
 function baseSpecs() {
@@ -101,7 +153,7 @@ function runAnalyzer(dir) {
   const r = runAnalyzer(dir);
   ok('(1) national 1/4 exit 0', r.code === 0, 'code=' + r.code + '\n' + r.out.slice(-600));
   ok('(1) Q1 NATIONAL GO printed', /Q1 NATIONAL: GO — on-ramp open \(1\/4/.test(r.out), r.out);
-  ok('(1) collapse blocker named for 135104', /135104: .*COLLAPSE before the national window \(last natgate day d59\)/.test(r.out), r.out);
+  ok('(1) collapse blocker named for 135104', /135104: .*COLLAPSE — village over d59 before national \(final: LEAD 0\/3 seasoned, COV 0\/3, TRADE 0\/3\)/.test(r.out), r.out);
   ok('(1) LEAD blocker named for 135102', /135102: .*closest road LEAD 2\/3 seasoned/.test(r.out), r.out);
   ok('(1) raise guard GO', /Q1 SPOKEN-RAISE VERDICT: GO/.test(r.out), r.out);
 }
@@ -149,6 +201,44 @@ function runAnalyzer(dir) {
   const r = runAnalyzer(dir);
   ok('(7) missing natgate exit 0', r.code === 0, 'code=' + r.code);
   ok('(7) ERROR row printed', /seed 135103: ERROR \(no natgate file\)/.test(r.out), r.out);
+}
+// (8) -nv transcript: pre-talk line first, header on line 1, mime shown
+// and answered -> trap HOLD, villager named (not the filename).
+{
+  const dir = buildCorpus((s) => { s[135102].nvTranscript = { name: 'Boris', vid: 'boris_kowalski', mime: true, answered: true }; });
+  const r = runAnalyzer(dir);
+  ok('(8) -nv mime answered exit 0', r.code === 0, 'code=' + r.code);
+  ok('(8) trap guard HOLD', /Q4 TRAP-LINE GUARD: HOLD/.test(r.out), r.out);
+  ok('(8) villager named from header, not filename', /Boris \(boris_kowalski\): mime shown=yes, answered=yes/.test(r.out), r.out);
+}
+// (9) -nv transcript: mime shown, offered, never answered -> guard BREACH.
+{
+  const dir = buildCorpus((s) => { s[135103].nvTranscript = { name: 'Boris', vid: 'boris_kowalski', mime: true, answered: false }; });
+  const r = runAnalyzer(dir);
+  ok('(9) -nv mime unanswered exit 1', r.code === 1, 'code=' + r.code);
+  ok('(9) trap guard BREACH printed', /Q4 TRAP-LINE GUARD: BREACH/.test(r.out), r.out);
+}
+// (10) REGULAR day90 transcript (not -nv) with a mime shown and answered
+// -> the trap guard counts it (r195 fix — the Boris 135102 d90 shape).
+{
+  const dir = buildCorpus((s) => { s[135101].dayTranscript = { name: 'Boris', vid: 'boris_kowalski', mime: true, answered: true }; });
+  const r = runAnalyzer(dir);
+  ok('(10) regular-transcript mime counted exit 0', r.code === 0, 'code=' + r.code);
+  ok('(10) trap sittings 1 answered 1', /trap-line sittings \(driver transcripts\): 1 \(answered 1, defect 0\)/.test(r.out), r.out);
+  ok('(10) trap guard HOLD', /Q4 TRAP-LINE GUARD: HOLD/.test(r.out), r.out);
+}
+// (11) a VERBAL sitting (open thread: want) must not enter the Baraka
+// re-check map — only nonverbal sittings count as comm-'none'.
+{
+  const dir = buildCorpus((s) => {
+    s[135102].nvTranscript = { name: 'Boris', vid: 'boris_kowalski', mime: true, answered: true };
+    s[135101].verbalTranscript = { name: 'Miguel', vid: 'miguel_santos' };
+  });
+  const r = runAnalyzer(dir);
+  ok('(11) verbal sitting excluded exit 0', r.code === 0, 'code=' + r.code);
+  ok('(11) Baraka map counts 1 villager', /comm-'none' villagers seen in driver transcripts: 1/.test(r.out), r.out);
+  ok('(11) Miguel not in the Baraka map', !/Miguel \(miguel_santos\): mime/.test(r.out), r.out);
+  ok('(11) Boris in the Baraka map', /Boris \(boris_kowalski\): mime shown=yes, answered=yes/.test(r.out), r.out);
 }
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail === 0 ? 0 : 1);

@@ -37,7 +37,7 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
-const EVIDIR = process.argv[2] ? path.resolve(process.argv[2]) : path.join(__dirname, '..', 'evidence', '2026-11-13', 'journey-scale-r195');
+const EVIDIR = process.argv[2] ? path.resolve(process.argv[2]) : path.join(__dirname, '..', '..', '..', 'goals', 'the-scattering-roguelite-survival-game', 'hidden_files', 'evidence', '2026-11-13');
 const SEEDS = [135101, 135102, 135103, 135104];
 const R134_LIVED_DAYS = 471; // r134 band total (lived-days per the r134 run note), prereg Q3 control
 let fail = 0;
@@ -100,12 +100,17 @@ console.log('\n=== journey-scale r195 — Q1 NATIONAL ON-RAMP (measurement, not 
 //   rung={rungReady} pend={shape}@{day} lead={s}/{a} cov={s}/{a}
 //   trade={s}/{a} belong={other:t{trust}/a{arrears}/age{age}/realm{realm}/good{0|1}|-}
 //   ...). national = any nat=1 day (a polity lives, not just points).
-// Blocker (when natDays == 0) is diagnosed from the FINAL natgate line:
-//   - village dead before d60 (last natgate day < 60): COLLAPSE.
-//   - else the closest road by seasoned count, and what it lacks
-//     (3 - seasoned more seasoned links; active count shows whether
-//     links exist but are unseasoned/low-trust); pending shape named
-//     when a road is staged but unsealed; belong good flag named.
+// Blocker (when natDays == 0) is diagnosed from the census + the FINAL
+// natgate line:
+//   - village OVER (dead/scattered) before national: COLLAPSE — the
+//     frozen road state is detail, not the cause (a dead village's
+//     links can never season).
+//   - alive past d60: the closest road by seasoned count, and what it
+//     lacks (3 - seasoned more seasoned links; active count shows
+//     whether links exist but are unseasoned/low-trust); pending shape
+//     named when a road is staged but unsealed; belong good flag named.
+//   - alive but last natgate day < 60: COLLAPSE before the national
+//     window (should not happen — the pilot gates catch short corpora).
 // A seed with no natgate file at all is an ERROR row (corpus gap — the
 // pilot gates should have caught it; it does not set fail here).
 const RANK_ORDER = ['village', 'regional', 'national', 'global'];
@@ -118,9 +123,11 @@ for (const seed of SEEDS) {
   if (lines.length === 0) { natRowsMissing += 1; natDiag.push({ seed, error: true }); console.log(`seed ${seed}: ERROR (no natgate file)`); continue; }
   let natDays = 0, firstNat = null, maxRankIdx = 0, lastDay = 0, last = '';
   for (const l of lines) {
-    const m = l.match(/^d(\d+) rank=(\S+) nat=(\d)/);
+    // Real natgate values are booleans (nat=true/false), not 0/1 — the
+    // first r195 analyzer draft matched nat=(\d) and parsed nothing.
+    const m = l.match(/^d(\d+) rank=(\S+) nat=(true|false|1|0)/);
     if (!m) continue;
-    const day = parseInt(m[1], 10), rank = m[2], nat = parseInt(m[3], 10);
+    const day = parseInt(m[1], 10), rank = m[2], nat = (m[3] === 'true' || m[3] === '1') ? 1 : 0;
     lastDay = day; last = l;
     const ri = RANK_ORDER.indexOf(rank);
     if (ri > maxRankIdx) maxRankIdx = ri;
@@ -137,8 +144,14 @@ for (const seed of SEEDS) {
   const belongGood = /\/good1$/.test(bm[1] || '');
   const pend = pm[1] || '-@-';
   let blocker = null;
+  const censusRow = rows.find(r => r.seed === seed);
   if (natDays === 0) {
-    if (lastDay < 60) {
+    if (censusRow && censusRow.over) {
+      // The village ended before national — death/scatter is the binding
+      // constraint, not the frozen road state (a dead village's links
+      // can never season). The final road state is detail, not the cause.
+      blocker = `COLLAPSE — village over d${censusRow.days} before national (final: LEAD ${leadS}/3 seasoned, COV ${covS}/3, TRADE ${tradeS}/3${pend !== '-@-' ? ', pending ' + pend : ''})`;
+    } else if (lastDay < 60) {
       blocker = `COLLAPSE before the national window (last natgate day d${lastDay})`;
     } else {
       const roads = [['LEAD', leadS, leadA], ['COVENANT', covS, covA], ['TRADE', tradeS, tradeA]];
@@ -244,9 +257,16 @@ const NV_ANSWER_RX = /^YOU: \[(nv:accept|nv:decline)\]/;
 let trapTotal = 0, trapAnswered = 0, trapDefect = [];
 let mimeInCapture = 0;
 const mimeBySeed = {}; // Q2: per-seed {capture, nv} mime counts (daily-play estimate = capture - nv)
+// NOTE (r195 fix): the glob MUST cover both transcript classes. A
+// nonverbal-threaded sitting can land in the regular day90/day120 file
+// (Boris 135102 d90: mime shown, nv:accept taken, stockpile gifted —
+// the fix live in a driver sitting), while the -nv file holds only the
+// extra nonverbal sitting. The first r195 draft globbed *-nv.txt only
+// and reported SILENT on a band with a live answered mime.
+const TRAP_GLOB = (seed) => (f) => f.startsWith(`journey-scale-r195-transcript-${seed}-day`) && f.endsWith('.txt');
 for (const seed of SEEDS) {
   let files = [];
-  try { files = fs.readdirSync(EVIDIR).filter(f => f.startsWith(`journey-scale-r195-transcript-${seed}-day`) && f.endsWith('-nv.txt')).sort(); } catch (e) { files = []; }
+  try { files = fs.readdirSync(EVIDIR).filter(TRAP_GLOB(seed)).sort(); } catch (e) { files = []; }
   let nvMimes = 0;
   for (const f of files) {
     let text = '';
@@ -269,7 +289,7 @@ for (const seed of SEEDS) {
     mimeBySeed[seed] = { capture: capMimes, nv: nvMimes };
   } catch (e) { mimeBySeed[seed] = { capture: 0, nv: nvMimes }; }
 }
-console.log(`trap-line sittings (nonverbal transcripts): ${trapTotal} (answered ${trapAnswered}, defect ${trapDefect.length}); mimes anywhere in the say-capture: ${mimeInCapture}`);
+console.log(`trap-line sittings (driver transcripts): ${trapTotal} (answered ${trapAnswered}, defect ${trapDefect.length}); mimes anywhere in the say-capture: ${mimeInCapture}`);
 for (const d of trapDefect) console.log('  DEFECT: ' + d);
 if (trapTotal === 0) {
   // GUARD, not the r195 bar: no mime in the band means nothing to
@@ -322,11 +342,22 @@ for (const seed of SEEDS) {
   try { capText = fs.readFileSync(path.join(EVIDIR, `journey-scale-r195-capture-${seed}.txt`), 'utf8'); } catch (e) {}
   walkLines += capText.split('\n').filter(l => WALK_RX.test(l)).length;
   let files = [];
-  try { files = fs.readdirSync(EVIDIR).filter(f => f.startsWith(`journey-scale-r195-transcript-${seed}-day`) && f.endsWith('-nv.txt')).sort(); } catch (e) { files = []; }
+  try { files = fs.readdirSync(EVIDIR).filter(TRAP_GLOB(seed)).sort(); } catch (e) { files = []; }
   for (const f of files) {
     let text = '';
     try { text = fs.readFileSync(path.join(EVIDIR, f), 'utf8'); } catch (e) { continue; }
-    const hm = (text.split('\n')[0] || '').match(/conversation with (.+) \(([^)]+)\)/);
+    // Only NONVERBAL sittings belong in the Baraka re-check map: the
+    // glob now covers both transcript classes, so a verbal sitting
+    // (open thread: want) would otherwise inflate the count with
+    // villagers who speak English. Nonverbal sittings carry
+    // 'open thread: nonverbal'.
+    if (!/open thread: nonverbal/.test(text)) continue;
+    // The header is NOT line 0: the transcript opens with a pre-talk
+    // line, the '=== seed … — conversation with NAME (vid) ===' header
+    // is line 1. Scan for it (the first r195 draft read line 0 and fell
+    // back to the filename as the villager's name).
+    const hmLine = text.split('\n').find(l => /conversation with (.+) \(([^)]+)\)/.test(l)) || '';
+    const hm = hmLine.match(/conversation with (.+) \(([^)]+)\)/);
     const nm = hm ? hm[1] : f, vid = hm ? hm[2] : f;
     const mime = MIME_RX.test(text);
     const answered = text.split('\n').some(l => NV_ANSWER_RX.test(l.trim()));
@@ -345,11 +376,11 @@ for (const seed of SEEDS) {
   } catch (e) {}
 }
 const dailyAcceptLower = Math.max(0, walkLines - driverAccepts);
-console.log(`daily-play mimes (capture minus driver -nv): ${dailyMimes} (capture ${mimeInCapture}, driver -nv ${trapTotal})`);
+console.log(`daily-play mimes (capture minus driver sittings with mimes): ${dailyMimes} (capture ${mimeInCapture}, driver sittings with mimes ${trapTotal})`);
 console.log(`driver-sitting accepts (betray watch): ${driverAccepts}; accept events on non-driver days: ${dailyAcceptEvents.length}`);
 for (const d of dailyAcceptEvents) console.log('  DAILY ACCEPT: ' + d);
 console.log(`resolveInvite walk lines in capture: ${walkLines}; daily-play accept LOWER bound (walk lines minus driver accepts): ${dailyAcceptLower}`);
-console.log(`comm-'none' villagers seen in -nv transcripts: ${Object.keys(nvVillagers).length}`);
+console.log(`comm-'none' villagers seen in driver transcripts: ${Object.keys(nvVillagers).length}`);
 for (const vid of Object.keys(nvVillagers)) {
   const v = nvVillagers[vid];
   console.log(`  ${v.name} (${vid}): mime shown=${v.mime ? 'yes' : 'no'}, answered=${v.answered ? 'yes' : 'no'}`);
