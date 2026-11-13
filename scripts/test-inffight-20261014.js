@@ -38,6 +38,24 @@
 //   R1 (gate OFF): strike-weakest duel — the fight must STALL (50k round cap
 //      hit, over=false, lead HP frozen, zero net damage window). Proves the
 //      test can see the bug.
+//   (2026-11-13 refresh, sim-inffight-a: verdict BIT-ROTTED, not regressed.
+//    The test went 9/3 on master a1288c5c4 with the game code intact —
+//    encWantRange still calibrates (G3 green), and a true 1v1 still closes
+//    in and lands Deliberation on the scholar (probe-inffight-a.js,
+//    PROBE_SOLO=1: lead 6,4→5,3, Deliberation 97 on the scholar, scholar
+//    falls). What broke was the fixture's isolation: it parked villagers
+//    at 0,0, but gap-phase2 W1 (9eb619326, 2026-10-24) re-positions
+//    villagers at fight start (ensureVillagerPositions in startCombat)
+//    and the nearest-4 join rule pulls them in — so the duel became a
+//    party fight: an adjacent villager satisfies the lead's want-range
+//    (it never steps toward the scholar) and eats the Deliberation (the
+//    test counts only hits on 'p'). Fix: flee the joined villagers back
+//    out after startCombat (restores the 1v1 the net was written for),
+//    and add G4, which measures the live party context instead of
+//    pretending it away. Steve 2026-11-13 encounter-gear rule noted:
+//    this net keeps its 1v1 staging deliberately — it is a regression
+//    net for the engine stall, not a balance panel; G4 is the
+//    geared/party leg.)
 //   G1 (gate ON):  same duel — the fight MUST resolve (over=true) in < 500
 //      rounds. The heads close in, Deliberation lands, the scholar falls or
 //      flees. The stalemate is gone.
@@ -48,6 +66,13 @@
 //   G3 (gate ON):  no collateral — encWantRange for hummice/toad bursts is
 //      unchanged, and a bulldozer duel resolves identically (the engine's
 //      honest fights are untouched).
+//   G4 (gate ON):  party context — villagers join (gap-phase2 W1:
+//      ensureVillagerPositions + nearest-4 join), the lead's want-range
+//      is satisfied by an adjacent villager and Deliberation lands on the
+//      party, not the scholar. The fight must still resolve in < 500
+//      rounds with mouth damage and a Deliberation landing on SOMEONE.
+//      (sim-inffight-a 2026-11-13: the party context is the live game;
+//      G1/G2 keep the 1v1 net because the stall only reproduces solo.)
 //
 // Usage: node scripts/test-inffight-20261014.js
 //        FOCUSGROUP_CLOSE=0 node scripts/test-inffight-20261014.js  (RED: R1 must STALL (both gates off internally),
@@ -103,13 +128,18 @@ async function duel(Game, playerFn, roundCap) {
   tele.scholarHp0 = p0 ? Math.round(p0.hp) : null;
   tele.leadMoved = false;
   tele.mouthsDamaged = false;
-  // track Deliberation damage on the scholar at the source
+  // track Deliberation damage on the scholar at the source, plus on ANY
+  // fighter (G4 party context: the burst lands on the nearest fighter).
   let deliberationLanded = 0;
+  let deliberationAny = 0;
   const origDmg = Game.tbDamage.bind(Game);
   Game.tbDamage = function (tk, dmg, sl, sk, opts) {
     const r = origDmg(tk, dmg, sl, sk, opts);
     try {
-      if (tk === 'p' && r > 0 && /deliberation/i.test(String(sl || ''))) deliberationLanded += r;
+      if (r > 0 && /deliberation/i.test(String(sl || ''))) {
+        deliberationAny += r;
+        if (tk === 'p') deliberationLanded += r;
+      }
     } catch (e) {}
     return r;
   };
@@ -159,29 +189,36 @@ async function duel(Game, playerFn, roundCap) {
   const p = Game.tbFighter('p');
   tele.scholarHp = p ? Math.round(p.hp) : null;
   tele.deliberationLanded = Math.round(deliberationLanded);
+  tele.deliberationAny = Math.round(deliberationAny);
   tele.scholarHpDrop = (tele.scholarHp0 != null && tele.scholarHp != null) ? tele.scholarHp0 - tele.scholarHp : null;
   return tele;
 }
 
-async function newDuelGame(seed) {
+async function newDuelGame(seed, opts) {
+  const solo = !(opts && opts.solo === false);
   const { Game } = await loadGame({ seed, mode: 'inffight-proof' });
   await setupGame(Game);
   const s = Game.state.scholar;
   s.health = 100;
   giveWeapon(Game, 'fire_hardened_spear');
   giveArmor(Game, 'hide_armor');
-  // 1v1: villagers far away
-  try {
-    for (const rid of Object.keys((Game.state.village || {}).positions || {})) {
-      Game.state.village.positions[rid] = { mx: 0, my: 0 };
-    }
-  } catch (e) {}
+  // 1v1 ISOLATION (sim-inffight-a 2026-11-13): the fixture used to isolate
+  // the duel by parking villagers at 0,0 — that no longer works. The
+  // positions map is empty at this point (setupGame leaves it for
+  // ensureVillagerPositions), and startCombat re-positions same-node
+  // villagers next to the scholar and joins the nearest 4 anyway
+  // (gap-phase2 W1, 9eb619326). So isolate AFTER startCombat: flee the
+  // joined villagers back out of the fight. G4 opts out (solo:false) and
+  // keeps the live party context.
   Game.dayPart = 3;
   Game.genDetail = function () { return Array.from({ length: 9 }, () => Array(9).fill('grass')); };
   s.mx = 4; s.my = 4;
   s.monster = { id: 'focus_group', mx: 6, my: 4 };
   await quietLog(async () => { Game.startCombat('focus_group'); });
   if (!Game.tbfight) throw new Error('no fight started');
+  if (solo) {
+    for (const x of Game.tbfight.fighters) if (x.kind === 'villager') x.fled = true;
+  }
   const p0 = Game.tbFighter('p');
   if (p0) { p0.mx = 4; p0.my = 4; }
   const lead = Game.tbfight.fighters.find(x => x.kind === 'monster' && x.mdef && x.mdef.id === 'focus_group');
@@ -254,6 +291,24 @@ async function newDuelGame(seed) {
     } else {
       console.log('G2 on RED: lead still dies (scholar out-damages the inert burst); the fix changes the threat, not the kill');
     }
+  }
+
+  // G4: party context (sim-inffight-a 2026-11-13) — the live game: villagers
+  // join, an adjacent villager satisfies the lead's want-range, and
+  // Deliberation lands on the party. The fight must still resolve with
+  // mouth damage and a Deliberation landing on SOMEONE. No stall, no free
+  // kill. (On RED this scenario is not run — the 1v1 RED is the stall
+  // proof; the party leg is a fix-ON behavior check.)
+  if (FIX_ON) {
+    const Game = await newDuelGame(44, { solo: false });
+    const t = await duel(Game, strikeWeakest, ROUND_CAP);
+    console.log(`G4: endResult=${t.endResult} maxRound=${t.maxRound} over=${t.over} mouths=${t.mouths} deliberationAny=${t.deliberationAny} deliberationOnScholar=${t.deliberationLanded}`);
+    ok('G4 party: fight ends', t.over === true, 'over=' + t.over);
+    ok('G4 party: within sane budget', t.maxRound < RESOLVE_BUDGET, 'maxRound=' + t.maxRound);
+    ok('G4 party: mouths take damage (the party hurts the group)', t.mouthsDamaged === true, `mouths ${t.mouths0} -> ${t.mouths}`);
+    ok('G4 party: Deliberation lands on someone (the monster fights)', t.deliberationAny > 0, 'landedAny=' + t.deliberationAny);
+  } else {
+    console.log('G4 skipped (RED — party leg is a fix-ON behavior check)');
   }
 
   // G3: no collateral — other bursts keep their want-range; honest engine fights untouched.
