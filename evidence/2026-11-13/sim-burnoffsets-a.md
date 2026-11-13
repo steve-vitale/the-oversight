@@ -233,11 +233,18 @@ below).
   failed MODULE_NOT_FOUND). Recreated from the pre-restart design; corpora
   are in the repo, so no data was lost. The recreated script's output is the
   log committed here.
-- **Safe-commit index clobber (known pattern).** On the tooling commit,
-  safe-commit.sh created the commit but left the 4 files staged-as-deleted in
-  the index. Repaired with `git ls-tree -r HEAD -- <paths> | git update-index
-  --add --index-info`; verified `git status --short` empty + `git diff HEAD`
-  empty. Commit content verified correct.
+- **Safe-commit index clobber (known pattern) — struck TWICE on this arm.**
+  On the tooling commit, safe-commit.sh created the commit but left the 4 files
+  staged-as-deleted in the index. It struck again on the evidence commit
+  (dc81849c6): all 63 files showed staged-as-deleted + untracked after a
+  correct commit. First repair attempt failed silently — filename-prefix
+  pathspecs (`burnoffsets-a-`) match nothing in `git ls-tree` (it takes exact
+  paths or directories, not prefixes), so the pipe applied zero entries and
+  exited 0. Second repair with the exact 63-file list from `git diff
+  --name-only HEAD~1 HEAD` worked; verified `git status --short` empty +
+  `git diff HEAD` empty. Commit content verified correct both times. Lesson
+  for the next arm: verify the ls-tree pipe actually emits N lines before
+  trusting it, and check status after EVERY safe-commit.
 - **Heartbeat slow under lock contention** (~150s per beat) but lands; beats at
   07:41:14Z, 07:57:40Z, 08:55:52Z, 09:10Z (post-restart recovery), 09:26:13Z.
   Flap-watch log ALL-OK throughout; 163 historical FAIL lines predate this run.
