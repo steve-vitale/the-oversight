@@ -244,8 +244,38 @@
 
       if (!opts.silent) {
         try {
-          this.say(this.seFill(def.applyText || ('{name} {verb} afflicted: ' + def.name + '.'), target, { source: opts.source || 'something in the dark', stacks: entry.stacks || 1 }));
-          this.audioEvent('statusApplied', { id: effectId });
+          // APPLYSTATUS DEDUP (sim-applystatus-a 2026-11-13): the stun
+          // application line ("X is frozen — War Cry. (stunned: no
+          // movement)") fired once per bellow per monster (~10x per
+          // fight on 190396 d89/d130) — the same repetition class as
+          // the tbMonsterTurn freeze line fixed by sim-freezeline-a,
+          // one layer down. Announce once per monster per fight; the
+          // bellow itself announces each fresh stun ("N of them
+          // flinch, losing their next turn"), so the player is told at
+          // application time. Per-application dedup could not fix
+          // this: every stun source is 1 turn, so each round IS a
+          // fresh application. The stun MECHANIC is untouched — the
+          // entry refresh + legacy bridge above already ran; only the
+          // narration dedups. Flag lives on the fight object (fresh
+          // per fight: startCombat assigns a new tbfight literal),
+          // keyed by fighter key + effect, and only when the target
+          // is actually a fighter in the live fight. Out-of-combat /
+          // scholar applications narrate every time (never_silent).
+          // Fail-open: any error here announces, never silences.
+          var _dedup = false;
+          try {
+            if ((effectId === 'stun' || effectId === 'stun_full') && t && typeof t === 'object' && this.tbfight && Array.isArray(this.tbfight.fighters) && this.tbfight.fighters.indexOf(t) !== -1) {
+              var _f = this.tbfight;
+              var _k = (t.key || t.name || 'it') + ':' + effectId;
+              _f._seApplyAnnounced = _f._seApplyAnnounced || {};
+              if (_f._seApplyAnnounced[_k]) _dedup = true;
+              else _f._seApplyAnnounced[_k] = true;
+            }
+          } catch (e0dd) {}
+          if (!_dedup) {
+            this.say(this.seFill(def.applyText || ('{name} {verb} afflicted: ' + def.name + '.'), target, { source: opts.source || 'something in the dark', stacks: entry.stacks || 1 }));
+            this.audioEvent('statusApplied', { id: effectId });
+          }
         } catch (e) {}
       }
       // SIM TELEMETRY (2026-10-09): disease contractions are analysis-grade —
