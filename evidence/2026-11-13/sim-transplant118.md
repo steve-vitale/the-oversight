@@ -74,23 +74,135 @@ family on the origin line (8 src/js files).
 
 ## Subject (filled after the cherry-pick)
 
-- Subject branch: `transplant-118-subject`
-- Subject commit: (TBD)
-- Cherry-pick: (TBD — clean / conflict)
+- Subject branch: `transplant-118-subject` — LEFT at the far end
+  `203a32775` (no subject commit exists).
+- Subject commit: NONE — see §Cherry-pick conflict (STOP) below.
+
+## Cherry-pick conflict — STOP (no judged sim run)
+
+`git checkout transplant-118-subject` (from `203a32775`) +
+`git cherry-pick -m 1 1ec04e167` CONFLICTED. Per the transplant prereg
+("On ANY conflict: STOP, report the conflict, do not hand-resolve game
+code") the run STOPPED here. No subject commit was created, no step
+was run, no survival number exists for this family. The cherry-pick
+was aborted (`git cherry-pick --abort`), the arm branch checked back
+out, the tree verified clean. The conflict is reproducible from the
+recorded SHAs alone.
+
+14 unmerged files (live `git status` at the conflict, verbatim):
+
+- UU (both modified, content conflict) — 8 files:
+  - `docs/ONTOLOGY.md`, `docs/ROADMAP.md`
+  - `scripts/balance-proof.json`, `scripts/green-list.txt`,
+    `scripts/phone-frame-proof.json`
+  - `src/js/conversation.js`, `src/js/game.js`,
+    `src/js/villager-objectives.js`
+- DU (deleted on the far end, modified by the family) — 6 files:
+  - `evidence/2026-11-08/person-trust-prereg.md`
+  - `scripts/probe-phase6-role-census-20261108.js`,
+    `scripts/test-duty-dawn-candidates.js`,
+    `scripts/test-person-trust-20261108.js`,
+    `scripts/test-snippet-stage-direction.js`
+  - `src/js/villager-brain.js`
+
+Why it conflicts (verified, not assumed): the two lines diverged in
+content, not just in commits. The far end `203a32775` is on the local
+line; the family's merge base `3339c0195` is on the origin line, and
+the origin line created files the local line never had — all six DU
+files are ABSENT at the far end (`git ls-tree 203a32775` = 0) and
+PRESENT at the base (`git ls-tree 3339c0195` = 1). The most
+consequential is `src/js/villager-brain.js`: the family's game-code
+delta touches a whole brain module that does not exist on the far
+end, so the family cannot be a pure addition there — it presumes
+origin-line substrate (the OVE-51/52 brain work and the phase-6
+role-census probes). The three game-code UU files (game.js,
+conversation.js, villager-objectives.js) changed on both lines since
+the divergence in overlapping hunks.
+
+Independent confirmation (no worktree touch): `git merge-tree
+3339c0195 203a32775 1ec04e167` reproduces the same 8 content
+conflicts (ONTOLOGY 6 markers, ROADMAP 3, balance-proof 3,
+green-list 3, phone-frame-proof 15, conversation.js 3, game.js 6,
+villager-objectives.js 3) and shows `src/data/godpaths.json` as
+changed-in-both with ZERO markers — the one family file both lines
+touched that merges cleanly.
+
+## What this means for the H1 transplant program
+
+The transplant premise — "apply the family diff onto the far end" —
+fails for family 1 at the mechanical step: the family is not
+transplantable by cherry-pick because the far end and the origin
+line disagree about the tree itself (missing substrate + overlapping
+game-code edits). This is a property of the transplant method, not a
+verdict on the family: NO verdict (CARRIER / AMBIGUOUS / NOT-CARRIER)
+can be read, because no subject was ever measured. Options for the
+coordinator (no call made here):
+
+1. Narrow the family: transplant only the 8 src/js files' hunks that
+   apply (or only the lean wires in godverbs.js/titans.js/
+   contestEngine.js), excluding the files that need missing
+   substrate — but any such selection is a NEW family definition, not
+   the prereg's family 1, and needs its own prereg.
+2. Change the base: transplant onto a base that HAS the substrate
+   (e.g. the merge base `d229b58f5` plus the brain files, or the
+   origin tip `a628aeaf3` minus the other families) — also a new
+   prereg, and it no longer isolates "the family alone on the far
+   end".
+3. Skip family 1 and run families 2–16 in table order; family 1's
+   carrier question stays open. (Note: families 2, 3, 4, 13 sit on
+   the SAME origin first-parent chain, so they may hit the same
+   missing-substrate wall — the next arm should check `git ls-tree
+   203a32775` for its family's files BEFORE cutting a step.)
 
 ## Results (filled after the step)
 
-(TBD)
+NONE — the run stopped at the cherry-pick; no step ran, no corpus
+exists, no survival number was measured. The transplant verdict for
+family 1 is UNMEASURED (not CARRIER, not NOT-CARRIER).
 
 ## Sense-testing (SENSE-TESTING LAW)
 
-(TBD — read vetSays transcripts from the band; judge meaning,
-coherence, relevance, consequences, never just counts.)
+NONE — no sim ran, so no transcripts exist to read. The family
+content itself was not sense-tested; its OVE-129..154 leans are
+contest/army-advance wires with STD16 rematches, described in the
+family-identity section from their commit subjects only.
 
 ## Metric review (§14)
 
-(TBD)
+- The primary metric (survived/8) was never measured: the run
+  stopped before any sim. The metric itself held (nothing in the
+  conflict impeaches it); the transplant METHOD failed at the
+  mechanical step. No re-score, no threshold change proposed.
+- Prereg gap worth carrying forward: the transplant prereg assumes
+  cherry-pickability. The NEXT transplant arm should pre-check, as a
+  substrate gate before cutting a step: (a) every file in the family
+  diff exists at the far end, (b) `git merge-tree` reports zero
+  content conflicts. That check costs seconds and would have caught
+  this stop before the branch was cut.
 
 ## Wall numbers
 
-(TBD)
+NONE — no judged corpus. Reference points carried from the bisect
+prereg: far end 203a32775 4/8, merge e4dbe581b 1/8, on seeds
+190391–190398, 150d, competent verbatim own-policy, fix swapped in.
+
+## Proof results
+
+- `node scripts/test-transplant118.js`: **39 passed, 0 failed** (run
+  after the STOP; the merge-tree parser leg was fixed first — the
+  first run read 36/39 because a new 'changed in both' section
+  overwrote the previous one before it was recorded; parser fixed,
+  re-run 39/39).
+- `node scripts/test-culpritbisect-a.js`: **116 passed, 0 failed**
+  (reused bisect tooling, re-run on this branch).
+- Safe-commit index clobber struck once on the prereg commit
+  (c08a53f4d): files showed staged-as-deleted after a correct
+  commit; repaired with the documented `git ls-tree -r HEAD |
+  git update-index --add --index-info` pipe and verified (status
+  empty, diff HEAD empty, hash-object matches ls-tree).
+- No telemetry deviation check run: no corpus exists to check, and
+  the tool refuses recorder-corpus class anyway — recorded, baseline
+  NOT rolled.
+- Closeout: arm branch rebased onto master 95dbf07f3 (current tip at
+  closeout; the brief's 2de59ab7f had been superseded by the Loop B
+  r195 landing), proofs re-run on the rebased tip.
