@@ -1,0 +1,177 @@
+=== LEG r125 vs FIRSTPARENT (far end 203a32775) ===
+seed 190391 r125 vs firstparent: end [86d village-lost standing 199 maxWave 4] vs [86d village-lost standing 199 maxWave 4] IDENTICAL-END
+  first signature divergence: NONE (signatures identical over 84 shared days)
+  first deep-diff day: NONE (daily snapshots identical over 84 shared days) | snap counts leg=84 firstparent=84
+seed 190392 r125 vs firstparent: end [144d village-lost standing 199 maxWave 4] vs [144d village-lost standing 199 maxWave 4] IDENTICAL-END
+  first signature divergence: NONE (signatures identical over 142 shared days)
+  first deep-diff day: NONE (daily snapshots identical over 142 shared days) | snap counts leg=142 firstparent=142
+seed 190393 r125 vs firstparent: end [150d survived standing 325 maxWave 5] vs [150d survived standing 325 maxWave 5] IDENTICAL-END
+  first signature divergence: NONE (signatures identical over 149 shared days)
+  first deep-diff day: NONE (daily snapshots identical over 149 shared days) | snap counts leg=149 firstparent=149
+seed 190394 r125 vs firstparent: end [43d village-lost standing 150 maxWave 4] vs [43d village-lost standing 150 maxWave 4] IDENTICAL-END
+  first signature divergence: NONE (signatures identical over 41 shared days)
+  first deep-diff day: NONE (daily snapshots identical over 41 shared days) | snap counts leg=41 firstparent=41
+seed 190395 r125 vs firstparent: end [150d survived standing 199 maxWave 4] vs [150d survived standing 199 maxWave 4] IDENTICAL-END
+  first signature divergence: NONE (signatures identical over 148 shared days)
+  first deep-diff day: NONE (daily snapshots identical over 148 shared days) | snap counts leg=148 firstparent=148
+seed 190396 r125 vs firstparent: end [87d village-lost standing 199 maxWave 4] vs [87d village-lost standing 199 maxWave 4] IDENTICAL-END
+  first signature divergence: NONE (signatures identical over 85 shared days)
+  first deep-diff day: NONE (daily snapshots identical over 85 shared days) | snap counts leg=85 firstparent=85
+seed 190397 r125 vs firstparent: end [150d survived standing 275 maxWave 5] vs [150d survived standing 275 maxWave 5] IDENTICAL-END
+  first signature divergence: NONE (signatures identical over 149 shared days)
+  first deep-diff day: NONE (daily snapshots identical over 149 shared days) | snap counts leg=149 firstparent=149
+seed 190398 r125 vs firstparent: end [150d survived standing 199 maxWave 4] vs [150d survived standing 199 maxWave 4] IDENTICAL-END
+  first signature divergence: NONE (signatures identical over 149 shared days)
+  first deep-diff day: NONE (daily snapshots identical over 149 shared days) | snap counts leg=149 firstparent=149
+=== LEG r125 vs VETPHANTOM FIX (healthy pole 5157782a4) ===
+seed 190391 r125 vs vetphantom: end [86d village-lost standing 199 maxWave 4] vs [150d survived standing 199 maxWave 4] END-DIFFERS
+  first signature divergence: d81 | leg: vetsW3=1 vetsW4=1 kills=71 roster=4 | vetphantom: vetsW3=1 vetsW4=1 kills=71 roster=3
+  first deep-diff day: d73 fields: waveKills | snap counts leg=84 vetphantom=149
+seed 190392 r125 vs vetphantom: end [144d village-lost standing 199 maxWave 4] vs [150d survived standing 199 maxWave 4] END-DIFFERS
+  first signature divergence: d37 | leg: vetsW3=1 vetsW4=0 kills=35 roster=11 | vetphantom: vetsW3=0 vetsW4=0 kills=34 roster=11
+  first deep-diff day: d37 fields: waveKillLog,waveKills,vetsW3,veteranRows,ready4,shadow | snap counts leg=142 vetphantom=149
+seed 190393 r125 vs vetphantom: end [150d survived standing 325 maxWave 5] vs [150d survived standing 325 maxWave 5] IDENTICAL-END
+  first signature divergence: NONE (signatures identical over 149 shared days)
+  first deep-diff day: d64 fields: waveKills | snap counts leg=149 vetphantom=149
+seed 190394 r125 vs vetphantom: end [43d village-lost standing 150 maxWave 4] vs [150d survived standing 199 maxWave 4] END-DIFFERS
+  first signature divergence: d40 | leg: vetsW3=2 vetsW4=0 kills=39 roster=8 | vetphantom: vetsW3=2 vetsW4=0 kills=38 roster=8
+  first deep-diff day: d17 fields: waveKills | snap counts leg=41 vetphantom=149
+seed 190395 r125 vs vetphantom: end [150d survived standing 199 maxWave 4] vs [109d village-lost standing 199 maxWave 4] END-DIFFERS
+  first signature divergence: d79 | leg: vetsW3=4 vetsW4=1 kills=66 roster=5 | vetphantom: vetsW3=3 vetsW4=0 kills=65 roster=5
+  first deep-diff day: d17 fields: waveKills | snap counts leg=148 vetphantom=107
+seed 190396 r125 vs vetphantom: end [87d village-lost standing 199 maxWave 4] vs [85d village-lost standing 199 maxWave 4] END-DIFFERS
+  first signature divergence: d45 | leg: vetsW3=4 vetsW4=0 kills=55 roster=11 | vetphantom: vetsW3=4 vetsW4=0 kills=54 roster=11
+  first deep-diff day: d44 fields: waveKills,veteranRows | snap counts leg=85 vetphantom=83
+seed 190397 r125 vs vetphantom: end [150d survived standing 275 maxWave 5] vs [150d survived standing 325 maxWave 5] END-DIFFERS
+  first signature divergence: d40 | leg: vetsW3=0 vetsW4=0 kills=34 roster=11 | vetphantom: vetsW3=0 vetsW4=0 kills=36 roster=11
+  first deep-diff day: d40 fields: waveKillLog,waveKills,ready4,ready5 | snap counts leg=149 vetphantom=148
+seed 190398 r125 vs vetphantom: end [150d survived standing 199 maxWave 4] vs [150d survived standing 375 maxWave 5] END-DIFFERS
+  first signature divergence: d74 | leg: vetsW3=5 vetsW4=1 kills=40 roster=7 | vetphantom: vetsW3=6 vetsW4=1 kills=40 roster=8
+  first deep-diff day: d19 fields: waveKills | snap counts leg=149 vetphantom=148
+=== LEG r125 SECONDARY FIELDS ===
+seed 190391 r125: days=86 village-lost rank=regional maxWave=4 standing=199 endPantry=0 peakVetsW4=1 peakVetsW3=3 phantomDays=0 blooded=true tribute={"kind":"military_tribute","ready":false,"veterans":0,"need":2,"reason":"veterans-short"} ready4vets=1 ready5vets=1 ladderVets4=0 wave4SlainEnd=2 logLen=71 counterSum=0 waveKillsKeys={"1":37,"2":28,"3":6,"4":2}
+seed 190392 r125: days=144 village-lost rank=regional maxWave=4 standing=199 endPantry=0 peakVetsW4=1 peakVetsW3=3 phantomDays=0 blooded=false tribute={"kind":"military_tribute","ready":false,"veterans":0,"need":2,"reason":"veterans-short"} ready4vets=0 ready5vets=0 ladderVets4=0 wave4SlainEnd=2 logLen=62 counterSum=0 waveKillsKeys={"1":33,"2":19,"3":8,"4":2}
+seed 190393 r125: days=150 survived rank=regional maxWave=5 standing=325 endPantry=8200 peakVetsW4=2 peakVetsW3=4 phantomDays=0 blooded=true tribute={"kind":"military_tribute","ready":false,"veterans":1,"need":2,"reason":"veterans-short"} ready4vets=3 ready5vets=2 ladderVets4=1 wave4SlainEnd=4 logLen=57 counterSum=0 waveKillsKeys={"1":31,"2":15,"3":7,"4":4,"5":4}
+seed 190394 r125: days=43 village-lost rank=village maxWave=4 standing=150 endPantry=0 peakVetsW4=0 peakVetsW3=2 phantomDays=5 blooded=false tribute={"kind":"military_tribute","ready":false,"veterans":0,"need":2,"reason":"veterans-short"} ready4vets=0 ready5vets=0 ladderVets4=0 wave4SlainEnd=0 logLen=40 counterSum=0 waveKillsKeys={"1":19,"2":17,"3":6}
+seed 190395 r125: days=150 survived rank=regional maxWave=4 standing=199 endPantry=0 peakVetsW4=1 peakVetsW3=5 phantomDays=0 blooded=false tribute={"kind":"military_tribute","ready":false,"veterans":0,"need":2,"reason":"veterans-short"} ready4vets=1 ready5vets=0 ladderVets4=0 wave4SlainEnd=2 logLen=75 counterSum=0 waveKillsKeys={"1":44,"2":20,"3":11,"4":2}
+seed 190396 r125: days=87 village-lost rank=regional maxWave=4 standing=199 endPantry=0 peakVetsW4=1 peakVetsW3=5 phantomDays=0 blooded=false tribute={"kind":"military_tribute","ready":false,"veterans":0,"need":2,"reason":"veterans-short"} ready4vets=0 ready5vets=0 ladderVets4=0 wave4SlainEnd=1 logLen=67 counterSum=0 waveKillsKeys={"1":40,"2":22,"3":7,"4":1}
+seed 190397 r125: days=150 survived rank=regional maxWave=5 standing=275 endPantry=5798 peakVetsW4=2 peakVetsW3=5 phantomDays=0 blooded=true tribute={"kind":"military_tribute","ready":true,"veterans":2,"need":2,"reason":"ready"} ready4vets=4 ready5vets=2 ladderVets4=2 wave4SlainEnd=3 logLen=68 counterSum=0 waveKillsKeys={"1":32,"2":27,"3":9,"4":3}
+seed 190398 r125: days=150 survived rank=regional maxWave=4 standing=199 endPantry=0 peakVetsW4=2 peakVetsW3=6 phantomDays=0 blooded=true tribute={"kind":"military_tribute","ready":false,"veterans":0,"need":2,"reason":"veterans-short"} ready4vets=2 ready5vets=1 ladderVets4=0 wave4SlainEnd=12 logLen=69 counterSum=0 waveKillsKeys={"1":32,"2":16,"3":13,"4":12}
+=== LEG favor vs FIRSTPARENT (far end 203a32775) ===
+seed 190391 favor vs firstparent: end [86d village-lost standing 199 maxWave 4] vs [86d village-lost standing 199 maxWave 4] IDENTICAL-END
+  first signature divergence: NONE (signatures identical over 84 shared days)
+  first deep-diff day: NONE (daily snapshots identical over 84 shared days) | snap counts leg=84 firstparent=84
+seed 190392 favor vs firstparent: end [144d village-lost standing 199 maxWave 4] vs [144d village-lost standing 199 maxWave 4] IDENTICAL-END
+  first signature divergence: NONE (signatures identical over 142 shared days)
+  first deep-diff day: NONE (daily snapshots identical over 142 shared days) | snap counts leg=142 firstparent=142
+seed 190393 favor vs firstparent: end [150d survived standing 325 maxWave 5] vs [150d survived standing 325 maxWave 5] IDENTICAL-END
+  first signature divergence: NONE (signatures identical over 149 shared days)
+  first deep-diff day: NONE (daily snapshots identical over 149 shared days) | snap counts leg=149 firstparent=149
+seed 190394 favor vs firstparent: end [43d village-lost standing 150 maxWave 4] vs [43d village-lost standing 150 maxWave 4] IDENTICAL-END
+  first signature divergence: NONE (signatures identical over 41 shared days)
+  first deep-diff day: NONE (daily snapshots identical over 41 shared days) | snap counts leg=41 firstparent=41
+seed 190395 favor vs firstparent: end [150d survived standing 199 maxWave 4] vs [150d survived standing 199 maxWave 4] IDENTICAL-END
+  first signature divergence: NONE (signatures identical over 148 shared days)
+  first deep-diff day: NONE (daily snapshots identical over 148 shared days) | snap counts leg=148 firstparent=148
+seed 190396 favor vs firstparent: end [87d village-lost standing 199 maxWave 4] vs [87d village-lost standing 199 maxWave 4] IDENTICAL-END
+  first signature divergence: NONE (signatures identical over 85 shared days)
+  first deep-diff day: NONE (daily snapshots identical over 85 shared days) | snap counts leg=85 firstparent=85
+seed 190397 favor vs firstparent: end [150d survived standing 275 maxWave 5] vs [150d survived standing 275 maxWave 5] IDENTICAL-END
+  first signature divergence: NONE (signatures identical over 149 shared days)
+  first deep-diff day: NONE (daily snapshots identical over 149 shared days) | snap counts leg=149 firstparent=149
+seed 190398 favor vs firstparent: end [150d survived standing 199 maxWave 4] vs [150d survived standing 199 maxWave 4] IDENTICAL-END
+  first signature divergence: NONE (signatures identical over 149 shared days)
+  first deep-diff day: NONE (daily snapshots identical over 149 shared days) | snap counts leg=149 firstparent=149
+=== LEG favor vs VETPHANTOM FIX (healthy pole 5157782a4) ===
+seed 190391 favor vs vetphantom: end [86d village-lost standing 199 maxWave 4] vs [150d survived standing 199 maxWave 4] END-DIFFERS
+  first signature divergence: d81 | leg: vetsW3=1 vetsW4=1 kills=71 roster=4 | vetphantom: vetsW3=1 vetsW4=1 kills=71 roster=3
+  first deep-diff day: d73 fields: waveKills | snap counts leg=84 vetphantom=149
+seed 190392 favor vs vetphantom: end [144d village-lost standing 199 maxWave 4] vs [150d survived standing 199 maxWave 4] END-DIFFERS
+  first signature divergence: d37 | leg: vetsW3=1 vetsW4=0 kills=35 roster=11 | vetphantom: vetsW3=0 vetsW4=0 kills=34 roster=11
+  first deep-diff day: d37 fields: waveKillLog,waveKills,vetsW3,veteranRows,ready4,shadow | snap counts leg=142 vetphantom=149
+seed 190393 favor vs vetphantom: end [150d survived standing 325 maxWave 5] vs [150d survived standing 325 maxWave 5] IDENTICAL-END
+  first signature divergence: NONE (signatures identical over 149 shared days)
+  first deep-diff day: d64 fields: waveKills | snap counts leg=149 vetphantom=149
+seed 190394 favor vs vetphantom: end [43d village-lost standing 150 maxWave 4] vs [150d survived standing 199 maxWave 4] END-DIFFERS
+  first signature divergence: d40 | leg: vetsW3=2 vetsW4=0 kills=39 roster=8 | vetphantom: vetsW3=2 vetsW4=0 kills=38 roster=8
+  first deep-diff day: d17 fields: waveKills | snap counts leg=41 vetphantom=149
+seed 190395 favor vs vetphantom: end [150d survived standing 199 maxWave 4] vs [109d village-lost standing 199 maxWave 4] END-DIFFERS
+  first signature divergence: d79 | leg: vetsW3=4 vetsW4=1 kills=66 roster=5 | vetphantom: vetsW3=3 vetsW4=0 kills=65 roster=5
+  first deep-diff day: d17 fields: waveKills | snap counts leg=148 vetphantom=107
+seed 190396 favor vs vetphantom: end [87d village-lost standing 199 maxWave 4] vs [85d village-lost standing 199 maxWave 4] END-DIFFERS
+  first signature divergence: d45 | leg: vetsW3=4 vetsW4=0 kills=55 roster=11 | vetphantom: vetsW3=4 vetsW4=0 kills=54 roster=11
+  first deep-diff day: d44 fields: waveKills,veteranRows | snap counts leg=85 vetphantom=83
+seed 190397 favor vs vetphantom: end [150d survived standing 275 maxWave 5] vs [150d survived standing 325 maxWave 5] END-DIFFERS
+  first signature divergence: d40 | leg: vetsW3=0 vetsW4=0 kills=34 roster=11 | vetphantom: vetsW3=0 vetsW4=0 kills=36 roster=11
+  first deep-diff day: d40 fields: waveKillLog,waveKills,ready4,ready5 | snap counts leg=149 vetphantom=148
+seed 190398 favor vs vetphantom: end [150d survived standing 199 maxWave 4] vs [150d survived standing 375 maxWave 5] END-DIFFERS
+  first signature divergence: d74 | leg: vetsW3=5 vetsW4=1 kills=40 roster=7 | vetphantom: vetsW3=6 vetsW4=1 kills=40 roster=8
+  first deep-diff day: d19 fields: waveKills | snap counts leg=149 vetphantom=148
+=== LEG favor SECONDARY FIELDS ===
+seed 190391 favor: days=86 village-lost rank=regional maxWave=4 standing=199 endPantry=0 peakVetsW4=1 peakVetsW3=3 phantomDays=0 blooded=true tribute={"kind":"military_tribute","ready":false,"veterans":0,"need":2,"reason":"veterans-short"} ready4vets=1 ready5vets=1 ladderVets4=0 wave4SlainEnd=2 logLen=71 counterSum=0 waveKillsKeys={"1":37,"2":28,"3":6,"4":2}
+seed 190392 favor: days=144 village-lost rank=regional maxWave=4 standing=199 endPantry=0 peakVetsW4=1 peakVetsW3=3 phantomDays=0 blooded=false tribute={"kind":"military_tribute","ready":false,"veterans":0,"need":2,"reason":"veterans-short"} ready4vets=0 ready5vets=0 ladderVets4=0 wave4SlainEnd=2 logLen=62 counterSum=0 waveKillsKeys={"1":33,"2":19,"3":8,"4":2}
+seed 190393 favor: days=150 survived rank=regional maxWave=5 standing=325 endPantry=8200 peakVetsW4=2 peakVetsW3=4 phantomDays=0 blooded=true tribute={"kind":"military_tribute","ready":false,"veterans":1,"need":2,"reason":"veterans-short"} ready4vets=3 ready5vets=2 ladderVets4=1 wave4SlainEnd=4 logLen=57 counterSum=0 waveKillsKeys={"1":31,"2":15,"3":7,"4":4,"5":4}
+seed 190394 favor: days=43 village-lost rank=village maxWave=4 standing=150 endPantry=0 peakVetsW4=0 peakVetsW3=2 phantomDays=5 blooded=false tribute={"kind":"military_tribute","ready":false,"veterans":0,"need":2,"reason":"veterans-short"} ready4vets=0 ready5vets=0 ladderVets4=0 wave4SlainEnd=0 logLen=40 counterSum=0 waveKillsKeys={"1":19,"2":17,"3":6}
+seed 190395 favor: days=150 survived rank=regional maxWave=4 standing=199 endPantry=0 peakVetsW4=1 peakVetsW3=5 phantomDays=0 blooded=false tribute={"kind":"military_tribute","ready":false,"veterans":0,"need":2,"reason":"veterans-short"} ready4vets=1 ready5vets=0 ladderVets4=0 wave4SlainEnd=2 logLen=75 counterSum=0 waveKillsKeys={"1":44,"2":20,"3":11,"4":2}
+seed 190396 favor: days=87 village-lost rank=regional maxWave=4 standing=199 endPantry=0 peakVetsW4=1 peakVetsW3=5 phantomDays=0 blooded=false tribute={"kind":"military_tribute","ready":false,"veterans":0,"need":2,"reason":"veterans-short"} ready4vets=0 ready5vets=0 ladderVets4=0 wave4SlainEnd=1 logLen=67 counterSum=0 waveKillsKeys={"1":40,"2":22,"3":7,"4":1}
+seed 190397 favor: days=150 survived rank=regional maxWave=5 standing=275 endPantry=5798 peakVetsW4=2 peakVetsW3=5 phantomDays=0 blooded=true tribute={"kind":"military_tribute","ready":true,"veterans":2,"need":2,"reason":"ready"} ready4vets=4 ready5vets=2 ladderVets4=2 wave4SlainEnd=3 logLen=68 counterSum=0 waveKillsKeys={"1":32,"2":27,"3":9,"4":3}
+seed 190398 favor: days=150 survived rank=regional maxWave=4 standing=199 endPantry=0 peakVetsW4=2 peakVetsW3=6 phantomDays=0 blooded=true tribute={"kind":"military_tribute","ready":false,"veterans":0,"need":2,"reason":"veterans-short"} ready4vets=2 ready5vets=1 ladderVets4=0 wave4SlainEnd=12 logLen=69 counterSum=0 waveKillsKeys={"1":32,"2":16,"3":13,"4":12}
+=== LEG tendexact vs FIRSTPARENT (far end 203a32775) ===
+seed 190391 tendexact vs firstparent: end [150d survived standing 199 maxWave 4] vs [86d village-lost standing 199 maxWave 4] END-DIFFERS
+  first signature divergence: d81 | leg: vetsW3=1 vetsW4=1 kills=71 roster=3 | firstparent: vetsW3=1 vetsW4=1 kills=71 roster=4
+  first deep-diff day: d81 fields: roster,ready4,ready5 | snap counts leg=148 firstparent=84
+seed 190392 tendexact vs firstparent: end [136d village-lost standing 199 maxWave 4] vs [144d village-lost standing 199 maxWave 4] END-DIFFERS
+  first signature divergence: d37 | leg: vetsW3=0 vetsW4=0 kills=34 roster=11 | firstparent: vetsW3=1 vetsW4=0 kills=35 roster=11
+  first deep-diff day: d37 fields: waveKillLog,waveKills,vetsW3,veteranRows,ready4,shadow | snap counts leg=134 firstparent=142
+seed 190393 tendexact vs firstparent: end [150d survived standing 325 maxWave 5] vs [150d survived standing 325 maxWave 5] IDENTICAL-END
+  first signature divergence: NONE (signatures identical over 149 shared days)
+  first deep-diff day: NONE (daily snapshots identical over 149 shared days) | snap counts leg=149 firstparent=149
+seed 190394 tendexact vs firstparent: end [43d village-lost standing 150 maxWave 4] vs [43d village-lost standing 150 maxWave 4] IDENTICAL-END
+  first signature divergence: NONE (signatures identical over 41 shared days)
+  first deep-diff day: NONE (daily snapshots identical over 41 shared days) | snap counts leg=41 firstparent=41
+seed 190395 tendexact vs firstparent: end [150d survived standing 410 maxWave 5] vs [150d survived standing 199 maxWave 4] END-DIFFERS
+  first signature divergence: d92 | leg: vetsW3=3 vetsW4=0 kills=68 roster=10 | firstparent: vetsW3=2 vetsW4=0 kills=68 roster=8
+  first deep-diff day: d92 fields: scholarId,vetsW3,roster,veteranRows,ready4,ready5,shadow | snap counts leg=148 firstparent=148
+seed 190396 tendexact vs firstparent: end [85d village-lost standing 199 maxWave 4] vs [87d village-lost standing 199 maxWave 4] END-DIFFERS
+  first signature divergence: d45 | leg: vetsW3=4 vetsW4=0 kills=54 roster=11 | firstparent: vetsW3=4 vetsW4=0 kills=55 roster=11
+  first deep-diff day: d44 fields: veteranRows | snap counts leg=83 firstparent=85
+seed 190397 tendexact vs firstparent: end [150d survived standing 275 maxWave 5] vs [150d survived standing 275 maxWave 5] IDENTICAL-END
+  first signature divergence: NONE (signatures identical over 149 shared days)
+  first deep-diff day: NONE (daily snapshots identical over 149 shared days) | snap counts leg=149 firstparent=149
+seed 190398 tendexact vs firstparent: end [150d survived standing 375 maxWave 5] vs [150d survived standing 199 maxWave 4] END-DIFFERS
+  first signature divergence: d74 | leg: vetsW3=6 vetsW4=1 kills=40 roster=8 | firstparent: vetsW3=5 vetsW4=1 kills=40 roster=7
+  first deep-diff day: d74 fields: waveKillLog,waveKills,wave4Slain,vetsW3,vetsW4,roster,veteranRows,ready4,ready5,shadow | snap counts leg=148 firstparent=149
+=== LEG tendexact vs VETPHANTOM FIX (healthy pole 5157782a4) ===
+seed 190391 tendexact vs vetphantom: end [150d survived standing 199 maxWave 4] vs [150d survived standing 199 maxWave 4] IDENTICAL-END
+  first signature divergence: d130 | leg: vetsW3=0 vetsW4=0 kills=77 roster=7 | vetphantom: vetsW3=1 vetsW4=0 kills=77 roster=6
+  first deep-diff day: d73 fields: waveKills | snap counts leg=148 vetphantom=149
+seed 190392 tendexact vs vetphantom: end [136d village-lost standing 199 maxWave 4] vs [150d survived standing 199 maxWave 4] END-DIFFERS
+  first signature divergence: d78 | leg: vetsW3=1 vetsW4=0 kills=59 roster=8 | vetphantom: vetsW3=1 vetsW4=0 kills=60 roster=8
+  first deep-diff day: d52 fields: waveKills | snap counts leg=134 vetphantom=149
+seed 190393 tendexact vs vetphantom: end [150d survived standing 325 maxWave 5] vs [150d survived standing 325 maxWave 5] IDENTICAL-END
+  first signature divergence: NONE (signatures identical over 149 shared days)
+  first deep-diff day: d64 fields: waveKills | snap counts leg=149 vetphantom=149
+seed 190394 tendexact vs vetphantom: end [43d village-lost standing 150 maxWave 4] vs [150d survived standing 199 maxWave 4] END-DIFFERS
+  first signature divergence: d40 | leg: vetsW3=2 vetsW4=0 kills=39 roster=8 | vetphantom: vetsW3=2 vetsW4=0 kills=38 roster=8
+  first deep-diff day: d17 fields: waveKills | snap counts leg=41 vetphantom=149
+seed 190395 tendexact vs vetphantom: end [150d survived standing 410 maxWave 5] vs [109d village-lost standing 199 maxWave 4] END-DIFFERS
+  first signature divergence: d79 | leg: vetsW3=4 vetsW4=1 kills=66 roster=5 | vetphantom: vetsW3=3 vetsW4=0 kills=65 roster=5
+  first deep-diff day: d17 fields: waveKills | snap counts leg=148 vetphantom=107
+seed 190396 tendexact vs vetphantom: end [85d village-lost standing 199 maxWave 4] vs [85d village-lost standing 199 maxWave 4] IDENTICAL-END
+  first signature divergence: NONE (signatures identical over 83 shared days)
+  first deep-diff day: d44 fields: waveKills | snap counts leg=83 vetphantom=83
+seed 190397 tendexact vs vetphantom: end [150d survived standing 275 maxWave 5] vs [150d survived standing 325 maxWave 5] END-DIFFERS
+  first signature divergence: d40 | leg: vetsW3=0 vetsW4=0 kills=34 roster=11 | vetphantom: vetsW3=0 vetsW4=0 kills=36 roster=11
+  first deep-diff day: d40 fields: waveKillLog,waveKills,ready4,ready5 | snap counts leg=149 vetphantom=148
+seed 190398 tendexact vs vetphantom: end [150d survived standing 375 maxWave 5] vs [150d survived standing 375 maxWave 5] IDENTICAL-END
+  first signature divergence: NONE (signatures identical over 148 shared days)
+  first deep-diff day: d19 fields: waveKills | snap counts leg=148 vetphantom=148
+=== LEG tendexact SECONDARY FIELDS ===
+seed 190391 tendexact: days=150 survived rank=regional maxWave=4 standing=199 endPantry=21975 peakVetsW4=1 peakVetsW3=3 phantomDays=0 blooded=true tribute={"kind":"military_tribute","ready":false,"veterans":0,"need":2,"reason":"veterans-short"} ready4vets=2 ready5vets=1 ladderVets4=0 wave4SlainEnd=3 logLen=83 counterSum=0 waveKillsKeys={"1":41,"2":33,"3":8,"4":3}
+seed 190392 tendexact: days=136 village-lost rank=regional maxWave=4 standing=199 endPantry=0 peakVetsW4=2 peakVetsW3=4 phantomDays=0 blooded=false tribute={"kind":"military_tribute","ready":false,"veterans":0,"need":2,"reason":"veterans-short"} ready4vets=1 ready5vets=0 ladderVets4=0 wave4SlainEnd=2 logLen=72 counterSum=0 waveKillsKeys={"1":38,"2":27,"3":7,"4":2}
+seed 190393 tendexact: days=150 survived rank=regional maxWave=5 standing=325 endPantry=8200 peakVetsW4=2 peakVetsW3=4 phantomDays=0 blooded=true tribute={"kind":"military_tribute","ready":false,"veterans":1,"need":2,"reason":"veterans-short"} ready4vets=3 ready5vets=2 ladderVets4=1 wave4SlainEnd=4 logLen=57 counterSum=0 waveKillsKeys={"1":31,"2":15,"3":7,"4":4,"5":4}
+seed 190394 tendexact: days=43 village-lost rank=village maxWave=4 standing=150 endPantry=0 peakVetsW4=0 peakVetsW3=2 phantomDays=5 blooded=false tribute={"kind":"military_tribute","ready":false,"veterans":0,"need":2,"reason":"veterans-short"} ready4vets=0 ready5vets=0 ladderVets4=0 wave4SlainEnd=0 logLen=40 counterSum=0 waveKillsKeys={"1":19,"2":17,"3":6}
+seed 190395 tendexact: days=150 survived rank=regional maxWave=5 standing=410 endPantry=9893 peakVetsW4=1 peakVetsW3=5 phantomDays=0 blooded=false tribute={"kind":"military_tribute","ready":false,"veterans":0,"need":2,"reason":"veterans-short"} ready4vets=0 ready5vets=0 ladderVets4=0 wave4SlainEnd=3 logLen=81 counterSum=0 waveKillsKeys={"1":44,"2":21,"3":13,"4":3,"5":1}
+seed 190396 tendexact: days=85 village-lost rank=regional maxWave=4 standing=199 endPantry=0 peakVetsW4=1 peakVetsW3=4 phantomDays=0 blooded=false tribute={"kind":"military_tribute","ready":false,"veterans":0,"need":2,"reason":"veterans-short"} ready4vets=0 ready5vets=0 ladderVets4=0 wave4SlainEnd=1 logLen=65 counterSum=0 waveKillsKeys={"1":40,"2":21,"3":7,"4":1}
+seed 190397 tendexact: days=150 survived rank=regional maxWave=5 standing=275 endPantry=5798 peakVetsW4=2 peakVetsW3=5 phantomDays=0 blooded=true tribute={"kind":"military_tribute","ready":true,"veterans":2,"need":2,"reason":"ready"} ready4vets=4 ready5vets=2 ladderVets4=2 wave4SlainEnd=3 logLen=68 counterSum=0 waveKillsKeys={"1":32,"2":27,"3":9,"4":3}
+seed 190398 tendexact: days=150 survived rank=regional maxWave=5 standing=375 endPantry=1000 peakVetsW4=3 peakVetsW3=6 phantomDays=0 blooded=true tribute={"kind":"military_tribute","ready":false,"veterans":1,"need":2,"reason":"veterans-short"} ready4vets=1 ready5vets=1 ladderVets4=1 wave4SlainEnd=5 logLen=56 counterSum=0 waveKillsKeys={"1":25,"2":16,"3":10,"4":5,"5":2}
