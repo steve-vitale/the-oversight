@@ -245,14 +245,16 @@ old panel.
 
 ## Verdict
 
-**GO.** The measurement proof is refreshed on the tip: the new panel
-is current (0 stale keys), every prereg GO leg passes, and the proof
-re-points at the new panel only. Commit: fresh real neutral panel
-(`evidence/2026-11-12/neutral-proofrefresh-b12.json.gz`) + proof
-re-point (`scripts/balance-proof.json`) + this evidence file, on branch
-`sim-proofrefresh-b12`. Ready for the coordinator's `--ff-only` merge
-("merged locally, pending ship" is the coordinator's call — this worker
-does not push, bump, or verify live).
+**GO on the panel tip (95dbf07f3) and on the b5ae72cd4 rebase — NO-GO
+on the final tip (249da4729), by leg (a) alone.** The measurement proof
+is refreshed on the panel tip: the new panel is current (0 stale keys),
+every prereg GO leg passes, and the proof re-points at the new panel
+only. The batch-ship version bump that landed at the wire (249da4729)
+moved exactly 2 version-stamp manifest keys (`src/js/build.js`,
+`index.html`), so leg (a) fails on the final tip and the prereg rule
+(judged only on the final tip) makes the round NO-GO there. See
+Closeout for the coordinator decision (merge as-is with round 13 owed
+immediately, or hold for a round-13 regeneration on 249da4729).
 
 Round 13 NOT attempted: round 12's panel took three attempts across
 two flap episodes plus two runtime restarts; a second ~35 min panel
@@ -288,23 +290,48 @@ call rounds 10 and 11 made. Round 13 stays owed for the next B run.
   the repo lesson, no work lost.
 - No metric revision proposed for the next run. The prereg held.
 
-## Commits (branch sim-proofrefresh-b12, base 95dbf07f3 → rebased b5ae72cd4)
+## Commits (branch sim-proofrefresh-b12, base 95dbf07f3 → rebased b5ae72cd4 → rebased 249da4729)
 
-- [prereg commit] — prereg + proof test (12 legs modeled on b11)
+- [prereg commit, rebased] — prereg + proof test (12 legs modeled on b11)
 - [panel commit, rebased] — fresh real neutral panel (REGENERATED on
-  95dbf07f3) + proof re-point + evidence (GO 12/12 on the 95dbf07f3 tip)
+  95dbf07f3) + proof re-point + evidence (GO 12/12 on the 95dbf07f3 tip
+  and on the b5ae72cd4 tip; see closeout for the 249da4729 re-verification)
 
-## Closeout — LANDED
+## Closeout — LANDED (with a second master move at the wire)
 
 - Master moved during the run to b5ae72cd4 (four sim-transplant118
   commits, evidence + one test script, NO manifest file). Branch rebased
-  onto the explicit new SHA b5ae72cd4 (picks clean), leg (a) re-verified
-  9/9 exit 0 on the rebased tip; the panel stays valid (manifest
-  identical, 0 stale keys). Merge (next step, this commit is the last one
-  on the branch): `git merge --ff-only sim-proofrefresh-b12` in the main
-  tree (no pipe, strict && chain; ancestry verified with
-  `git merge-base --is-ancestor` after). Then release:
-  `worktree-release.sh sim-proofrefresh-b12 merged`, worktree removed,
-  branch deleted, `worktree-reap.sh`, main tree verified clean. No push,
-  no bump, no live verification — the ship loop owns deploys.
-  "Merged locally, pending ship."
+  onto the explicit SHA b5ae72cd4 (picks clean), leg (a) re-verified
+  9/9 exit 0 on that tip; the panel stays valid (manifest identical,
+  0 stale keys).
+- Master moved AGAIN at the wire: `249da4729` — batch-ship version bump
+  ("Version bump b5ae72cd4-20261113-233744"), touching `index.html`,
+  `src/js/build.js`, `sw.js`, `version.json`. Two of those ARE manifest
+  files. Branch rebased onto the explicit new SHA 249da4729 (picks
+  clean, tip 938c8df62) and leg (a) re-verified on the rebased tip:
+  **FAILS, exit 1 — exactly 2 stale keys, `src/js/build.js` and
+  `index.html`, both version stamps from the ship-loop bump only.**
+  No game-code change; the panel rows are unaffected, but the proof
+  system hashes file contents and cannot distinguish a version stamp
+  from a game change, and no hand-edited hashes are permitted.
+- **Verdict on the final tip (249da4729): NO-GO per the prereg rule
+  (legs judged only on the final tip).** GO 12/12 on the 95dbf07f3 tip
+  and on the b5ae72cd4 tip; NO-GO on 249da4729 by leg (a) alone, on
+  exactly the 2 version-stamp keys. The branch as committed still
+  improves master: the retained b11 panel is stale on 249da4729 by 4
+  keys (2 r195 + 2 version), the b12 panel by 2 (version only).
+- **Coordinator decision needed:** merge this branch as-is (ff-only is
+  clean; the proof stays stale by the 2 version keys and round 13 is
+  owed immediately on 249da4729) or hold it for a round-13 regeneration
+  on 249da4729. This run does NOT regenerate: the brief forbids a
+  second panel / round 13, and a fresh ~35 min panel starting near
+  00:00Z would strand across the next Loop B run, the same call rounds
+  10 and 11 made. Round 13 stays owed for the next B run, now on base
+  249da4729.
+- Merge (if the coordinator takes it): `git merge --ff-only
+  sim-proofrefresh-b12` in the main tree (no pipe, strict && chain;
+  ancestry verified with `git merge-base --is-ancestor` after). Then
+  release: `worktree-release.sh sim-proofrefresh-b12 merged`,
+  worktree removed, branch deleted, `worktree-reap.sh`, main tree
+  verified clean. No push, no bump, no live verification — the ship
+  loop owns deploys. "Merged locally, pending ship."
