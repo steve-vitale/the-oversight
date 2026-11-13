@@ -97,7 +97,7 @@ leg('neutrality verdict reproduces the retained panel (b10)',
 const old6 = readPanel(OLD6);
 leg('neutrality verdict reproduces the b9 panel',
   neutTuple(fresh) === neutTuple(old6),
-  'b8 ' + (old6.validity.neutrality || []).map(n => n.policy + ':' + (n.match ? 'match' : 'MISMATCH')).join(', '));
+  'b9 ' + (old6.validity.neutrality || []).map(n => n.policy + ':' + (n.match ? 'match' : 'MISMATCH')).join(', '));
 
 // (h) validity.sourcesStable true.
 leg('validity.sourcesStable true', fresh.validity && fresh.validity.sourcesStable === true);
