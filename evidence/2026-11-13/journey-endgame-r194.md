@@ -367,14 +367,15 @@ re-seed only if a later panel moves the sums by more than this.
 
 ## Landing
 
-- Evidence/tooling commits: `b6dc15b6c` (instruments + prereg + proof
-  tests), `4930e8d09` (evidence — all six passes + run note). Post-rebase
-  SHAs on master `02433d959` (sim-strikefall-a adoption). (Pre-rebase SHAs
-  were `0e4a6426e` + `1d2ec7013`; rebased twice cleanly — first onto
-  `fe4b01cd0`, then onto `02433d959` — no conflicts, no stop-at-pick
-  quirk.)
-- Rebase base: master `02433d959926ca86857540e6cbf0c3dcf5323060` (read
-  immediately before the final rebase).
+- Evidence/tooling commits (FINAL, post-rebase): `7fa48db5b` (instruments +
+  prereg + proof tests), `1d25af984` (evidence — all six passes + run
+  note), `88df218eb` (gate log + run-note landing section). Rebased three
+  times cleanly (onto `fe4b01cd0`, then `02433d959`, then `c8941ab14`) —
+  no conflicts, no stop-at-pick quirk. Pre-rebase SHAs were `0e4a6426e` /
+  `1d2ec7013` / `a00e3fe61` / `e19ecf0f3` / `b6dc15b6c` / `4930e8d09` /
+  `9107f8005`.
+- Rebase base: master `c8941ab14286b00d746ac48995ee059cd721b3d6`
+  (sim-culpritbisect-a adoption; read immediately before the final rebase).
 - Proof re-run after final rebase: test-competent-pin-r194 6/6 PASS,
   test-corpus-purity-r194 ALL PASS, test-m2c-adopted-refs-r194 ALL PASS;
   tree status clean.
@@ -388,6 +389,8 @@ re-seed only if a later panel moves the sums by more than this.
   `02433d959` by read-only runs (pre-existing: proof stale since the
   strikefall-a src/js landing, phone receipt stale). **0 failures
   attributable to this branch.**
-- Merge commit: (to fill — after the ff-only merge)
-- Rotation-b: 4 → 5
-- Lock `playtest-loop-2.lock` (run_id journey2-4-20261113-1655): deleted at closeout
+- Merge: ff-only `c8941ab14..88df218eb` into master; master HEAD is now
+  `88df218eb`; branch verified an ancestor of master in a separate check.
+  Tree released as done-merged, worktree removed, branch deleted.
+- Rotation-b: 4 → 5 (done at closeout).
+- Lock `playtest-loop-2.lock` (run_id journey2-4-20261113-1655): deleted at closeout (run_id verified first).
