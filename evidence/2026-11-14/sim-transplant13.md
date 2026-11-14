@@ -272,9 +272,10 @@ NOT rolled. (Same refusal as all prior bisect/transplant arms.)
   national 0, table 0, wins 0 on the collapse band.
 - Measured families now include: 2b AMBIGUOUS (2/8 twice, suspect
   list), 4b NOT-CARRIER (3/8), 5b NOT-CARRIER (4/8), 9
-  NOT-CARRIER (4/8), 10b NOT-CARRIER (3/8), 13 NOT-CARRIER (4/8).
+  NOT-CARRIER (4/8), 10b NOT-CARRIER (3/8), 11 NOT-CARRIER (5/8,
+  sibling arm sim-transplant11-a, d985a4323), 13 NOT-CARRIER (4/8).
   Unmeasured: 1, 2, 3, 6, 7, 8, 10 (10 measured via narrowed
-  10b), 11, 12, 14, 15, 16. No carrier identified.
+  10b), 12, 14, 15, 16. No carrier identified.
 
 scale-onramp stays converging (NOT converged): one more family
 measured NOT-CARRIER — and this one reproduces the far end
