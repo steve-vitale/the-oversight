@@ -195,7 +195,79 @@ objectives); the brain-side change is the align function itself.
 
 ## Cherry-pick conflict — STOP (no judged sim run)
 
-(to fill after the live pick)
+`git checkout transplant-7-subject` (from `203a32775`) +
+`git cherry-pick -m 1 23245d5d6` CONFLICTED (rc=1). Per the transplant prereg
+("On ANY conflict: STOP, report the conflict, do not hand-resolve game
+code") the run STOPPED here. No subject commit was created, no step
+was run, no survival number exists for this family. The cherry-pick
+was aborted (see the abort-retry note below), the arm branch checked back
+out, the tree verified clean. The conflict is reproducible from the
+recorded SHAs alone.
+
+FOUR unmerged paths (live `git status` at the conflict, verbatim):
+
+- UU (both modified, content conflict) — 2 files:
+  - `docs/ONTOLOGY.md` — 1 marker block, live lines 1977–1994
+    (`<<<<<<< HEAD` 1977, `=======` 1978, `>>>>>>> 23245d5d6 ...`
+    1994; theirs inserts the whole `### villager-brain` section
+    with `vbrainAlignObjective` in `**Provides:**` and the
+    `vbrain_materialize_matches_commit` rule; ours has nothing at
+    that anchor).
+  - `scripts/green-list.txt` — 1 marker block, live lines 803–807.
+    Ours side EMPTY; theirs adds the 2 test lines
+    (`test-villager-brain-dawn.js`, `test-dawn-materialize-honesty.js`).
+    No other line touched.
+- DU (deleted by us, modified by them) — 2 files:
+  - `src/js/villager-brain.js` — unmerged stages 1 (base blob
+    `d2882bba9…`) + 3 (theirs blob `2f99c9e51…`) only, no stage 2.
+    The file is ABSENT at the far end (`git ls-tree 203a32775 --
+    src/js/villager-brain.js` = empty) and PRESENT at the first
+    parent (`7041e1bfb`, blob `d2882bba9…`). The family modifies a
+    whole brain module the far end never had — the family-6
+    missing-substrate wall, repeated.
+  - `scripts/test-villager-brain-dawn.js` — unmerged stages 1 (base
+    blob `0ffc7a868…`) + 3 (theirs blob `06eb5ce89…`) only, no
+    stage 2. ABSENT at the far end, PRESENT at the first parent.
+    Same wall, test file.
+
+The other two family files staged cleanly (A:
+`scripts/test-dawn-materialize-honesty.js`; M:
+`src/js/villager-objectives.js` — all 5 hunks auto-merged, 0 markers).
+
+Why the STOP stands, twice over: (a) the narrowed-tooling rule does
+NOT apply to this arm (task brief, explicit — family 7 is a
+full-family attempt; even a tooling-only conflict would stop it);
+(b) the conflicts are NOT tooling-only in any case — one is a
+game-code file (`villager-brain.js`, DU), one is docs (`ONTOLOGY.md`).
+No carve-out exists to invoke, and none was invoked.
+
+Abort retry (recorded because the first attempt failed loudly): the
+first `git cherry-pick --abort` failed with "error: Entry
+'src/js/villager-objectives.js' not uptodate. Cannot merge. fatal:
+Could not reset index file to revision '203a32775...'" — a racy
+index stat on the auto-merged file, not a content problem.
+`git update-index --refresh` (which itself reported the four
+unmerged paths as "needs merge", rc=1) followed by a second
+`git cherry-pick --abort` succeeded (rc=0); status empty afterwards.
+The arm branch was checked back out and verified clean (status
+empty, diff HEAD empty, standing.js == HEAD).
+
+What this means for the H1 transplant program: family 7 is the
+fifth cherry-pick in the program to stop on divergence (families 1,
+2, 3, 6 before it; 2b measured only through the narrowed union
+route; 4b/5b narrowed attempts are the coordinator's follow-ups).
+The pattern is now the program's dominant outcome, not the
+exception: the origin line's brain-module work (villager-brain.js
+did not exist on the local line at the far end) cannot be
+transplanted onto the far end by cherry-pick at all — and family 7
+shows the wall extends to the module's test file too. A narrowed
+family 7b — the villager-objectives.js hunks alone (which staged
+cleanly) — is mechanically possible and would isolate the objPick-side
+alignment from the missing brain module, but that is a NEW family
+definition needing its own prereg and a coordinator decision, not
+this arm's call. The objectives-side change is the survival-relevant
+half (it is the code that rewrites live objectives to the dawn
+commitment); the brain-side change is the align function itself.
 
 ## Results (filled after the step)
 
@@ -235,23 +307,40 @@ prereg: far end 203a32775 4/8, merge e4dbe581b 1/8, on seeds
 
 ## Proof results
 
-- `node scripts/test-transplant7.js`: **(to fill — pre-pick run
-  count + post-pick run count)**.
+- `node scripts/test-transplant7.js`: **72 passed, 0 failed** (run
+  after the STOP; the 13 live-conflict legs in §7 were added after
+  the pick — the pre-pick run was 59/59).
 - `node scripts/test-culpritbisect-a.js`: **116 passed, 0 failed**
   (reused bisect tooling, re-run on this branch after the pick).
+- Safe-commit index clobber struck once on the prereg commit
+  (d1f565a32): the files showed staged-as-deleted after a correct
+  commit; repaired with the documented `git ls-tree -r HEAD |
+  git update-index --add --index-info` pipe and verified (status
+  empty, diff HEAD empty, hash-object matches ls-tree). The clobber
+  is what made the first `git checkout transplant-7-subject` refuse
+  ("untracked working tree files would be removed") — the repair
+  preceded the successful pick.
 - No telemetry deviation check run: no corpus exists to check, and
   the tool refuses recorder-corpus class anyway — recorded, baseline
   NOT rolled.
 - Closeout: arm branch `sim-transplant7-a`, proof-verified tip
-  (to fill); subject branch `transplant-7-subject` LEFT at the far
-  end `203a32775` (no subject commit); worktree verified clean at
-  closeout (tracked tree empty, standing.js == HEAD, no swap
-  residue — no swap ever ran).
+  (to fill: see record-only commit below); subject branch
+  `transplant-7-subject` LEFT at the far end `203a32775` (no subject
+  commit); worktree verified clean at closeout (tracked tree empty,
+  standing.js == HEAD, no swap residue — no swap ever ran).
 
 ## Infrastructure
 
-- Host write flap: (to fill at closeout).
-- Safe-commit index clobber: (to fill at closeout — watch for it;
-  repair is the documented `git ls-tree -r HEAD | git update-index
-  --add --index-info` pipe).
-- Heartbeats succeeded throughout (run start; pre-pick; post-pick).
+- Host write flap: no EPERM failure struck this arm's git or file
+  writes directly. Git operations ran slow at points (the post-pick
+  verification `git checkout` + `git status` + `git diff` took
+  ~92s, dominated by the full-tree restat) — the same flap-era
+  slowness the 2b/6 arms recorded. One service restart interrupted
+  a duplicated test invocation mid-run; a single sequential re-run
+  completed clean (72/72), no work lost.
+- Safe-commit index clobber: struck on the prereg commit (see §Proof
+  results); repaired with the documented pipe.
+- (to fill at closeout: final heartbeat, tree state)
+- Heartbeats succeeded throughout (run start, pre-pick, post-pick).
+  Final tree state verified clean before the closeout commit (see
+  §Proof results).

@@ -292,6 +292,30 @@ function mergeTreeRemovedInLocal() {
   T.ok('evidence prereg names the same band', ev.indexOf('190391') !== -1 && ev.indexOf('190398') !== -1, 'band in prereg');
   T.ok('evidence prereg names the STEP id t7-23245d5d6', ev.indexOf('t7-23245d5d6') !== -1, 'STEP id present');
 
+  // ---- 7. Live conflict record ----
+  T.section('7. Live conflict record — four unmerged paths, no subject commit');
+  let subject = null;
+  try { subject = git('rev-parse ' + SUBJECT_BRANCH); } catch (e) { subject = null; }
+  T.ok('subject branch exists', subject !== null && subject.length === 40, subject ? subject.slice(0, 12) : '(missing)');
+  if (subject) {
+    T.ok('subject branch points at the far end (no subject commit)', subject === FAR_FULL, subject.slice(0, 12));
+  }
+  T.ok('evidence file records the verdict as UNMEASURED', ev.indexOf('UNMEASURED') !== -1, 'UNMEASURED present');
+  T.ok('evidence file records FOUR unmerged paths', ev.indexOf('FOUR unmerged paths') !== -1, 'four paths named');
+  T.ok('evidence file records the DU on villager-brain.js', ev.indexOf('DU') !== -1 && ev.indexOf('villager-brain.js') !== -1, 'DU present');
+  T.ok('evidence file records the DU on test-villager-brain-dawn.js', ev.indexOf('test-villager-brain-dawn.js') !== -1 && ev.indexOf('Same wall, test file') !== -1, 'test-file DU present');
+  T.ok('evidence file records the live ONTOLOGY hunk lines (1977, 1994)', ev.indexOf('1977') !== -1 && ev.indexOf('1994') !== -1, 'hunk lines present');
+  T.ok('evidence file records the live green-list hunk lines (803)', ev.indexOf('803') !== -1, 'hunk line present');
+  T.ok('evidence file records villager-brain.js ABSENT at the far end', ev.indexOf('ABSENT at the far end') !== -1, 'absent recorded');
+  T.ok('evidence file records the abort retry (not-uptodate, refresh, rc=0)',
+    ev.indexOf('not uptodate') !== -1 && ev.indexOf('update-index --refresh') !== -1, 'abort retry recorded');
+  T.ok('evidence file records that the cherry-pick was aborted and the tree verified clean',
+    ev.indexOf('cherry-pick --abort') !== -1 && ev.indexOf('verified clean') !== -1, 'abort + clean recorded');
+  T.ok('evidence file proposes the narrowed 7b route as a coordinator decision, not this arm\'s call',
+    ev.indexOf('narrowed') !== -1 && ev.indexOf('coordinator decision') !== -1, '7b note present');
+  T.ok('evidence file records that the conflicts are NOT tooling-only',
+    ev.indexOf('NOT tooling-only') !== -1, 'tooling-only analysis present');
+
   // ---- 8. No corpus ----
   T.section('8. No corpus — no judged sim ran');
   const sumPath = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-summary.json');
