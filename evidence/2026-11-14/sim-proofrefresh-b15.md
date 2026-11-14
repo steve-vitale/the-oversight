@@ -321,3 +321,53 @@ per the brief.
   verified clean. No push, no bump, no live verification — the ship
   loop owns deploys. "Merged locally, pending ship."
 - Round 16 stays owed for the next B run, on the next manifest change.
+
+## Addendum — panel regenerated on the rebased tip (coordinator adoption, run fleshout-loop-b-20261114T1030Z)
+
+The 0730Z run died before merging (last tree heartbeat 09:25:56Z, lock
+2.5h stale at this run's start); this run adopted the branch. Master had
+moved since the panel tip 2de44bad8 — journey-deepening r191 Q1 changed
+src/js/conversation.js, a manifest key — so the b15 panel as committed was
+1 stale key on current master, and test-measurement-proof-update.js was
+verified FAILING on the rebased tip with "Proof source inputs are not
+current". Per the arm's own procedure (regen + re-point, never hand-edit)
+and the prereg's master-move rule, the panel was regenerated on the
+rebased tip instead of merging a stale proof.
+
+- Rebase: branch rebased onto master b81fde1c5 (tip 37267f43e); the
+  stop-at-pick quirk struck twice (picks 890d50400 and 303783836),
+  recovered per the documented rule (verified unapplied with
+  `git diff <pick>`, then `git rebase --continue`).
+- Regen: `node scripts/balance-panel.js --out .proofrefresh-b15-panel
+  --n 16 --days 150 --par 4` (same spec: 16 seeds x 4 policies, 150d,
+  Columbus). First attempt killed by SIGTERM after ~32 min (agent-service
+  restart wiped /tmp — same signature as the 09:07Z restart in the b15
+  run); 65 case files were already banked in the worktree cache. Re-launch
+  from the cache completed in ~2 min: "Saved .proofrefresh-b15-panel;
+  64 cases, 65 cached jobs."
+- New panel: sourceHeadStart == sourceHeadEnd == 37267f43e; manifest 526
+  keys, panel sources 526 keys, STALE 0; sourcesStable true; 64 rows;
+  neutrality 4/4 match, warnings 0; sha256
+  70831cb459bed5627b7279337221e888e10f8dad30cfeb5ceda949fa5f027a67 (old
+  panel fd0d5beb).
+- Row movement vs the old b15 panel: 0/64 rows differ — the
+  conversation.js change moved no verdict. Wall identical: national
+  11/64, wins 16/64, entered 16/64, table 55/64.
+- GO legs re-judged on the new final tip 37267f43e: (a) proof-update 9/9
+  exit 0; (b) workflow 9/9; (c) cache-flags 4/4 outright, first attempt;
+  (d) neutrality reproduces b14 + b13, warnings 0; (e)
+  test-proofrefresh-b15.js 12/12 incl. stale-input negatives (b14 and
+  b13 fail validate); (f) ontology exit 0, 138 systems validated.
+  Verdict: GO on the new tip.
+- Cases cache deleted at closeout (not committed); the retained .gz is
+  the artifact. Telemetry deviation check: not applicable (same known
+  parser limitation as b11-b14 — telemetry-check.js cannot parse a .gz
+  panel; neutrality reproduction is the instrument check). Round 16 stays
+  owed after the next manifest change.
+
+## Commits (adoption)
+
+- 890d50400 / 303783836 (rebased to cd12f852e / 37267f43e) — worker
+  commits (prereg + panel + re-point + test + evidence).
+- (this commit) — coordinator adoption: regenerated panel on the rebased
+  tip (sha 70831cb4), re-point, GO legs re-judged, this addendum.
