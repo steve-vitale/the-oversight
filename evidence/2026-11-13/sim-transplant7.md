@@ -324,10 +324,12 @@ prereg: far end 203a32775 4/8, merge e4dbe581b 1/8, on seeds
   the tool refuses recorder-corpus class anyway — recorded, baseline
   NOT rolled.
 - Closeout: arm branch `sim-transplant7-a`, proof-verified tip
-  (to fill: see record-only commit below); subject branch
-  `transplant-7-subject` LEFT at the far end `203a32775` (no subject
-  commit); worktree verified clean at closeout (tracked tree empty,
-  standing.js == HEAD, no swap residue — no swap ever ran).
+  `6ec6fe2a0` (2 commits: prereg+test, conflict-STOP record);
+  subject branch `transplant-7-subject` LEFT at the far end
+  `203a32775` (no subject commit); worktree verified clean at
+  closeout (tracked tree empty, standing.js == HEAD, no swap
+  residue — no swap ever ran). One record-only commit follows the
+  proof-verified tip (this file's tip-hash line itself).
 
 ## Infrastructure
 
