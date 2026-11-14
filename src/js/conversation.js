@@ -4048,6 +4048,27 @@
       if (scared > 2) bits.push('people are scared');
       const heat = Object.values(vg.heat || {}).filter(h => h > 0).length;
       if (heat) bits.push("there's tension about who's in charge");
+      // INJURED (journey-landing r130, D3): the ask:village label for a
+      // medicinal speaker is "How are the injured doing?" — but this
+      // composer had no injured bit at all, so the question was answered
+      // with whatever other bit was live (1150 d6: tension only, nobody
+      // mentioned as hurt or well). The injured status leads: sick
+      // (v.sick) or low-health (v.health < 100, the combat-wound pool
+      // tbSyncHumanHealth writes) villagers count as hurt. When nobody
+      // is hurt the line says so — but only when other news exists; on
+      // a quiet day with no live bits the temperament idle pool still
+      // answers, so the village line keeps its flavor.
+      const hurt = (vg.roster || []).filter(id => {
+        if (id === this.villagerId) return false;
+        if ((vg.sick || {})[id]) return true;
+        const h = (vg.health || {})[id];
+        return h !== undefined && h < 100;
+      }).length;
+      if (hurt > 0) {
+        bits.unshift(hurt === 1 ? '1 person is injured' : hurt + ' people are injured');
+      } else if (bits.length) {
+        bits.unshift("nobody's injured right now");
+      }
       // TEMPERAMENT-SPECIFIC (Steve 2026-10-05): the same generic pool made
       // every villager sound identical ("better than yesterday" x3). Now the
       // idle lines reflect who's talking.
