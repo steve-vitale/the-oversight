@@ -291,12 +291,13 @@ prereg: far end 203a32775 4/8, merge e4dbe581b 1/8, on seeds
 - No telemetry deviation check run: no corpus exists to check, and
   the tool refuses recorder-corpus class anyway — recorded, baseline
   NOT rolled.
-- Closeout: arm branch `sim-transplant6-a`, tip (to fill: second
-  commit hash — this file's tip-hash line itself is record-only);
+- Closeout: arm branch `sim-transplant6-a`, proof-verified tip
+  `bcf134d80` (2 commits: prereg+test, conflict-STOP record);
   subject branch `transplant-6-subject` LEFT at the far end
   `203a32775` (no subject commit); worktree verified clean at
   closeout (tracked tree empty, standing.js == HEAD, no swap
-  residue — no swap ever ran).
+  residue — no swap ever ran). One record-only commit follows the
+  proof-verified tip (this file's tip-hash line itself).
 
 ## Infrastructure
 
