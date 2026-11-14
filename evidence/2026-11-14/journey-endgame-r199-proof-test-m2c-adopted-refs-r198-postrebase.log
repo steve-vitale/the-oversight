@@ -1,0 +1,11 @@
+seed 89705 (a-89705): fights=6 distinctOpens=6 callOpens=6 errs=0
+PASS 89705: fights == distinct opens — fights=6 distinct=6
+PASS 89705: censusErrors == 0 — errs=0
+PASS 89705: distinct <= calls — distinct=6 calls=6
+NOTE 89705: no re-entrant double-count on this substrate (calls == distinct)
+seed 89701 (c-89701): fights=8 distinctOpens=8 callOpens=8 errs=0
+PASS 89701: fights == distinct opens — fights=8 distinct=8
+PASS 89701: censusErrors == 0 — errs=0
+PASS 89701: distinct <= calls — distinct=8 calls=8
+NOTE 89701: no re-entrant double-count on this substrate (calls == distinct)
+test-m2c-adopted-refs-r198: ALL PASS

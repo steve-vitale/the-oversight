@@ -147,13 +147,45 @@ advances to 5 (social life) ONLY after the verified landing below.
   committed core A+B+C is complete; fresh band 89714–89721 stays
   unused for a later run).
 
-## Closeout — PENDING (landing section filled after the merge)
+## Post-rebase verification (on master tip 7b1f10c18)
 
-- Landing plan: safe-commit r199 work (prereg + fix + proof test +
-  proof/analyzer logs + run note + hb.log), rebase the 3-commit branch
-  onto the master tip, re-run all five proof tests after the rebase,
-  ff-only merge, release the tree, rotation-b 4→5 (social life next),
-  delete the lock, telemetry check, memory-log append.
+- Rebase: 4 commits replayed cleanly onto 7b1f10c18, zero conflicts,
+  no stop-at-pick quirk. New hashes: 96a3aa11e (r198 prereg),
+  02a67fdc7 (r198 completion), 3efaf0a21 (r199 M23 fix), ebedbdde8
+  (r199 hb log final). Master had moved by 3 transplant commits
+  (2687ae91f, 03139ea47, 7b1f10c18) since the run start; none touches
+  any r198/r199 file. `git fetch origin master` verified before the
+  rebase: origin/master (249da4729, batch ship) is an ancestor of the
+  local master — local is current.
+- Proof re-run AFTER the rebase (all green): test-m23-mixed-r199 ALL
+  PASS; test-m23-revision-r198 ALL PASS; test-m2c-adopted-refs-r198
+  ALL PASS; test-corpus-purity-r198 ALL PASS; test-competent-pin-r198
+  6/6 PASS. Direct analyzer re-scores: pass A RC=0 (42 GO lines),
+  pass B RC=0 (42 GO lines), pass C RC=0 (42 GO lines); zero NO-GO
+  lines on any pass. Logs: journey-endgame-r199-proof-*-postrebase.log
+  and journey-endgame-r199-analyzer*-postrebase.log.
+- The safe-commit index clobber struck twice this run (after the r199
+  commit and after the hb-log commit): committed files showed as
+  staged-deleted in the main index while the commits were correct.
+  Repaired both times with the `git ls-tree -r HEAD -- <paths> |
+  git update-index --add --index-info` pipe; verified with
+  `git status --short` empty + `git diff HEAD` empty + hash-object ==
+  HEAD blob. A `git read-tree HEAD` resync was started once and
+  killed after ~9 min under load (no index.lock left behind); the
+  ls-tree pipe is the faster repair — prefer it.
+- Flap window 3 (~5 min) and the REGISTRY.lock contention (Lane A
+  journey-deepening registration) are recorded above; neither blocked
+  the landing.
+
+## Closeout — LANDING (merge record in the memory log)
+
+- Landing: ff-only merge of journey2-endgame into master, tree
+  released via worktree-release.sh, rotation-b 4→5 (social life
+  next), lock deleted, telemetry check run. The merge hash, master
+  HEAD, and rotation confirmation are recorded in the memory log
+  (~/memory/2026-11-14.md, Lane B r199 entry) — the run note's
+  Closeout section is written before the merge, so the merge itself
+  cannot be named here.
 
 ## Files
 

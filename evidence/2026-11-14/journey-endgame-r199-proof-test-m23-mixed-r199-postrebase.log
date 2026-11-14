@@ -1,0 +1,13 @@
+B: GO   M23-capstone: 2 eligible: delivered 1/2, none-ready 0, exempt-refused 3, NON-EXEMPT-refused-despite-ready 0, pricedFull 1/2 — 89704:none | 89705:feast_embassy@d68/FULL
+PASS B: analyzer RC=0 (ALL GO after the fix) — rc=0
+PASS B: M23 GO (mixed case: one delivered, one exempt-undelivered) — GO   M23-capstone: 2 eligible: delivered 1/2, none-ready 0, exempt-refused 3, NON-EXEMPT-refused-despite-ready 0, pricedFull 1/2 — 89704:none | 89705:feast_embassy@d68/FULL
+PASS B: M23 names 89705 delivered feast_embassy@d68/FULL — GO   M23-capstone: 2 eligible: delivered 1/2, none-ready 0, exempt-refused 3, NON-EXEMPT-refused-despite-ready 0, pricedFull 1/2 — 89704:none | 89705:feast_embassy@d68/FULL
+PASS B: M23 names 89704 none (eligible, undelivered, all refusals exempt) — GO   M23-capstone: 2 eligible: delivered 1/2, none-ready 0, exempt-refused 3, NON-EXEMPT-refused-despite-ready 0, pricedFull 1/2 — 89704:none | 89705:feast_embassy@d68/FULL
+PASS B: M23 counts delivered 1/2 — GO   M23-capstone: 2 eligible: delivered 1/2, none-ready 0, exempt-refused 3, NON-EXEMPT-refused-despite-ready 0, pricedFull 1/2 — 89704:none | 89705:feast_embassy@d68/FULL
+PASS B: M23 counts NON-EXEMPT-refused-despite-ready 0 — GO   M23-capstone: 2 eligible: delivered 1/2, none-ready 0, exempt-refused 3, NON-EXEMPT-refused-despite-ready 0, pricedFull 1/2 — 89704:none | 89705:feast_embassy@d68/FULL
+C: GO   M23-capstone: 2 eligible: delivered 2/2, none-ready 0, exempt-refused 0, NON-EXEMPT-refused-despite-ready 0, pricedFull 2/2 — 89703:feast_embassy@d87/FULL | 89704:feast_embassy@d69/FULL
+PASS C: analyzer RC=0 (ALL GO, unchanged) — rc=0
+PASS C: M23 GO with delivered 2/2 — GO   M23-capstone: 2 eligible: delivered 2/2, none-ready 0, exempt-refused 0, NON-EXEMPT-refused-despite-ready 0, pricedFull 2/2 — 89703:feast_embassy@d87/FULL | 89704:feast_embassy@d69/FULL
+A: GO   M23-capstone: pass A: capstone leg disabled (see pass B)
+PASS A: analyzer RC=0 (ALL GO, unchanged) — rc=0
+test-m23-mixed-r199: ALL PASS
