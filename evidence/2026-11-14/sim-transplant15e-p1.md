@@ -269,8 +269,8 @@ this arm decides neither.
 
 ## Closeout
 
-- Arm branch `sim-transplant15e-p1-a` tip TBD (stage-2 commit;
-  proof TBD/TBD, culpritbisect-a 116/116); subject branch
+- Arm branch `sim-transplant15e-p1-a` tip c7297bd0c (stage-2 commit;
+  proof 123/123, culpritbisect-a 116/116); subject branch
   `transplant-15e-subject` LEFT at
   `f541e4cd14eec841a7d2b0808d34376af98184ca` (far end + pick 1,
   never committed to the arm branch); worktree verified clean at
