@@ -301,7 +301,8 @@ per the brief.
 
 ## Commits (branch sim-proofrefresh-b15, base 2de44bad8)
 
-- (TO BE FILLED at closeout — prereg + panel + proof re-point + test + evidence in one closeout commit; the flap blocked the separate prereg commit.)
+- 890d50400 — prereg + fresh neutral panel + proof re-point + test + evidence (GO 12/12, panel fd0d5beb)
+- (closeout commit — this section; evidence Commits section filled here)
 
 ## Closeout — GO ON FINAL TIP (round 16 owed after next manifest change)
 
