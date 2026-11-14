@@ -339,3 +339,34 @@ next manifest change — not started here, per the brief.
   `git ls-tree -r HEAD -- <paths> | git update-index --add
   --index-info` pipe; both commits verified correct (hash-object ==
   HEAD blob per file, status/diff clean after repair).
+
+## Addendum — third master move, re-verified on the final tip 28a5cacaf
+
+After the closeout commit, master moved a third time, 3a60ceb10 →
+28a5cacaf (sim-transplant15f-a landing). The move touches NO manifest
+file (evidence + scripts/test-transplant15f.js only, verified with
+`git diff --name-only` filtered to the manifest paths — empty). Per
+the prereg's master-move rule the panel stays valid: the manifest on
+28a5cacaf is identical to the manifest on 3a60ceb10.
+
+- Rebase: branch rebased onto 28a5cacaf (3/3 picks, clean, no
+  stop-at-pick quirk). New branch tip dc9a3770f.
+- Leg (a) re-verified on the new final tip: **PASSES, exit 0, 9/9**.
+- `scripts/test-proofrefresh-b16.js` re-run on the new final tip:
+  **12/12**, all legs identical (including both stale-input negatives).
+- Staleness on the new final tip: **b16 0 stale** (verified with
+  `B.manifest` vs panel sources).
+- **Verdict on the final tip (28a5cacaf): GO.** The "final tip" named
+  in the sections above (3a60ceb10) is superseded by this addendum;
+  the GO verdict and all leg results carry over unchanged because the
+  move touched no manifest file.
+- **Coordinator decision:** merge as-is — `git merge --ff-only
+  sim-proofrefresh-b16` in the main tree (ancestry verified with
+  `git merge-base --is-ancestor` after). Then release:
+  `worktree-release.sh sim-proofrefresh-b16 merged`, worktree removed,
+  branch deleted, `worktree-reap.sh`, main tree verified clean. No push,
+  no bump, no live verification — the ship loop owns deploys.
+  "Merged locally, pending ship."
+- The safe-commit index clobber struck a third time on the closeout
+  commit (MM on both files) — repaired with the same pipe; the commit
+  was verified correct before this rebase.
