@@ -332,15 +332,24 @@ fix item, if any, waits for a panel that actually produces one.
   Telemetry verdict stands (panel byte-identical; baseline NOT
   rolled, means-vs-sum mismatch unsettled).
 - Merge: `git merge --ff-only journey2-succession` in the main
-  tree (READ-ONLY for the merge). [FILL: merge result + new HEAD.]
+  tree (READ-ONLY for the merge). DONE by the adoption
+  coordinator: ff-only 443255263..bb9e63e7b, MERGE_EXIT=0, new
+  HEAD bb9e63e7 (92 files, 152,184 insertions). Branch verified
+  ancestor of HEAD; main tree clean after (status empty, diff
+  HEAD empty).
 - Release: `bash scripts/worktree-release.sh journey2-succession
-  merged`, worktree removed, branch deleted, final reap.
-  [FILL at closeout.]
-- Main tree verified clean after landing. [FILL at closeout.]
+  merged`, worktree removed, branch deleted, final reap. DONE:
+  released as done-merged (a runtime restart interrupted the
+  first release attempt mid-queue — verified nothing had been
+  removed, then re-ran clean); worktree removed (REMOVE_EXIT=0),
+  branch deleted (was bb9e63e7b); registry entry tombstoned
+  done-merged.
+- Main tree verified clean after landing. DONE (git status empty,
+  git diff HEAD empty, post-merge).
 - Merged locally, pending ship — no version bump, no push, no live
   verification (the ship loop owns those).
 
 ## Rotation
 
 - journey-rotation-b.txt: 7 at run start → 4 at closeout
-  (verify the file reads 4 afterwards).
+  (verified: file reads 4).
