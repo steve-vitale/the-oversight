@@ -1,0 +1,40 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Enzo","t":90},{"id":"Vikram","t":90},{"id":"Irving","t":90},{"id":"Diana","t":90}], roster=10
+INH readable=true scripted=true deadItems=17 distinct=17 transferred=2 vanished=0 keptPlants=23 inheritedPlants=3 keptSkills=5 inheritedSkills=5 succTrustPre=90 succTrustPost=73
+PARITY readable=true equal=true inherited=[] pre=["green_whisper","green_thumb"] post=["green_whisper","green_thumb"]
+DEATH d41 (the expedition, scripted): Luis -> Irving | passed=true lin=true mo=true trust=73 vouchers=7
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=13 vanished=0 of 17 distinct dead-bearer items
+  CONVO d+3 with Vikram (refused=false)
+  CONVO d+3 with Mmesoma (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Vikram (refused=false)
+  CONVO d+7 with Enzo (refused=false)
+  CONVO d+14 with Vikram (refused=false)
+  CONVO d+14 with Enzo (refused=false)
+  CONVO d+30 with Vikram (refused=false)
+  CONVO d+30 with Vasyl (refused=false)
+  NEWCOMER-PROBE d+44 with Sam (arrived d+44, trust=30 refused=false)
+  CONVO d+45 with Adaeze (refused=false)
+  CONVO d+45 with Nikolai (refused=false)
+  CONVO d+53 with Adaeze (refused=false)
+  CONVO d+53 with Nikolai (refused=false)
+  CONVO d+64 with Diana (refused=false)
+  CONVO d+64 with Adaeze (refused=false)
+
+FUNERAL: deathBeat=3 recover=1 vouch=1 (eligible=7) echo=2 organicBurial={"respects":false,"bury":false} halfRation=9
+
+MEAL-GATE: audited=70 violations=0 noMealDays=1 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":53,"offerLines":32,"codexPlantsDelta":28,"codexSkillsDelta":33,"codexAbilitiesDelta":13,"xpDelta":70,"any":true} pantry 18585->3221
+TRUST-DIALS: office 73->90 (+17, climb) | villageMean 78.1->82.9 (+4.8, climb) | ge60 7->6 | movers>=5: [{"id":"Ines","from":43,"to":89,"delta":46},{"id":"Adaeze","from":74,"to":91,"delta":17},{"id":"Nikolai","from":73,"to":90,"delta":17},{"id":"Mmesoma","from":87,"to":79,"delta":-8}]
+DEED-LEDGER: calls=14 summary={"giveFood":{"calls":11,"ok":11,"deltaSum":11,"deltaN":11,"positive":8,"meanDelta":1},"teachPlant":{"calls":3,"ok":3,"deltaSum":0,"deltaN":3,"positive":0,"meanDelta":0}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=2 (convo=2, say=0)) m4=true m5=manual | endDay=111 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=14) trustVerdict={"readable":true,"officeMantle":73,"officeLast":90,"officeDelta":17,"officeClass":"climb","villageMantle":78.1,"villageLast":82.9,"villageDelta":4.8,"villageClass":"climb","villageGe60Mantle":7,"villageGe60Last":6,"movers":[{"id":"Ines","from":43,"to":89,"delta":46},{"id":"Adaeze","from":74,"to":91,"delta":17},{"id":"Nikolai","from":73,"to":90,"delta":17},{"id":"Mmesoma","from":87,"to":79,"delta":-8}]}
+E6/CALLCHECK: e6={"callMoves":3,"withCensus":3,"chainHandoffs":2,"trustMoves":1} callCheck={"dailyMoveDays":3,"callMoveDays":3,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=3 (v2=4, excludedLoot=1))
+E7/R47: e7={"trustMoves":1,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":0,"both":1,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":2,"v2":4,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":3,"known":3,"unknown":0} e3={"dailyDays":71,"moves":3}

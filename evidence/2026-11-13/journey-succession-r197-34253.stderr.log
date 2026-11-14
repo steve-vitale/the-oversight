@@ -1,0 +1,40 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Amy","t":92},{"id":"Deirdre","t":91},{"id":"Rahul","t":90},{"id":"Kirollos","t":90}], roster=12
+INH readable=true scripted=true deadItems=9 distinct=9 transferred=0 vanished=3 keptPlants=19 inheritedPlants=0 keptSkills=7 inheritedSkills=13 succTrustPre=92 succTrustPost=87
+PARITY readable=true equal=true inherited=[] pre=["the_touch","purify","dowsing","leech","green_thumb"] post=["the_touch","purify","dowsing","leech","green_thumb"]
+DEATH d41 (the expedition, scripted): Darnell -> Amy | passed=true lin=true mo=true trust=87 vouchers=9
+  BURIAL d+4: corpse found=true respects=true bury=true
+  INH d+4: transferred=4 vanished=3 of 9 distinct dead-bearer items
+  CONVO d+3 with Pavel (refused=false)
+  CONVO d+3 with Deirdre (refused=false)
+  STRANGER-PROBE d+3 with Fatima (trust=16 refused=false)
+  CONVO d+7 with Deirdre (refused=false)
+  CONVO d+7 with Rahul (refused=false)
+  CONVO d+14 with Deirdre (refused=false)
+  CONVO d+14 with Rahul (refused=false)
+  CONVO d+30 with Deirdre (refused=false)
+  CONVO d+30 with Rahul (refused=false)
+  CONVO d+45 with Rahul (refused=false)
+  CONVO d+45 with Deirdre (refused=false)
+  CONVO d+53 with Rahul (refused=false)
+  CONVO d+53 with Deirdre (refused=false)
+  CONVO d+64 with Lena (refused=false)
+  CONVO d+64 with Tariq (refused=false)
+  NEWCOMER-PROBE d+68 with Sreejith (arrived d+68, trust=40 refused=false)
+
+FUNERAL: deathBeat=5 recover=1 vouch=1 (eligible=9) echo=3 organicBurial={"respects":false,"bury":false} halfRation=5
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":72,"offerLines":54,"codexPlantsDelta":17,"codexSkillsDelta":19,"codexAbilitiesDelta":13,"xpDelta":71,"any":true} pantry 87426->2589
+TRUST-DIALS: office 87->100 (+13, climb) | villageMean 76.7->77.6 (+0.9, flat) | ge60 9->5 | movers>=5: [{"id":"Lena","from":61,"to":95,"delta":34},{"id":"Meera","from":66,"to":92,"delta":26},{"id":"Fatima","from":18,"to":32,"delta":14},{"id":"Tariq","from":87,"to":94,"delta":7}]
+DEED-LEDGER: calls=44 summary={"donateToPantry":{"calls":29,"ok":29,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"giveFood":{"calls":15,"ok":15,"deltaSum":12,"deltaN":15,"positive":12,"meanDelta":0.8}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=3 (convo=3, say=0)) m4=true m5=manual | endDay=111 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+8,d+14,d+30,d+70) t2=true(deedCalls=44) trustVerdict={"readable":true,"officeMantle":87,"officeLast":100,"officeDelta":13,"officeClass":"climb","villageMantle":76.7,"villageLast":77.6,"villageDelta":0.9,"villageClass":"flat","villageGe60Mantle":9,"villageGe60Last":5,"movers":[{"id":"Lena","from":61,"to":95,"delta":34},{"id":"Meera","from":66,"to":92,"delta":26},{"id":"Fatima","from":18,"to":32,"delta":14},{"id":"Tariq","from":87,"to":94,"delta":7}]}
+E6/CALLCHECK: e6={"callMoves":9,"withCensus":9,"chainHandoffs":3,"trustMoves":6} callCheck={"dailyMoveDays":8,"callMoveDays":9,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=4 (v2=5, excludedLoot=1))
+E7/R47: e7={"trustMoves":6,"soloOffice":4,"soloOfficeDeltas":[1,1,1,1],"soloBearerDeltaExact":[1,1,1,1],"singleMoverBearer":0,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":1,"both":5,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":3,"v2":5,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":4,"known":4,"unknown":0} e3={"dailyDays":71,"moves":8}

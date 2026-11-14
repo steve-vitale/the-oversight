@@ -1,0 +1,39 @@
+
+PRE-DEATH d40: bearer <redacted>, topTrust=[{"id":"Alejandro","t":90},{"id":"James","t":90},{"id":"Isabella","t":90},{"id":"Giulia","t":90}], roster=11
+INH readable=true scripted=true deadItems=8 distinct=8 transferred=0 vanished=1 keptPlants=24 inheritedPlants=0 keptSkills=4 inheritedSkills=12 succTrustPre=90 succTrustPost=60
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","lucky_rock"] post=["beast_calm","lucky_rock"]
+DEATH d40 (the expedition, scripted): Penelope -> James | passed=true lin=true mo=true trust=60 vouchers=8
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=0 vanished=1 of 8 distinct dead-bearer items
+  CONVO d+3 with Alejandro (refused=false)
+  CONVO d+3 with Isabella (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Alejandro (refused=false)
+  CONVO d+7 with Isabella (refused=false)
+  CONVO d+14 with Alejandro (refused=false)
+  CONVO d+14 with Isabella (refused=false)
+  CONVO d+30 with Kahukura (refused=false)
+  CONVO d+30 with Isabella (refused=false)
+  CONVO d+45 with Kahukura (refused=false)
+  CONVO d+45 with Alejandro (refused=false)
+  CONVO d+53 with Kahukura (refused=false)
+  CONVO d+53 with Isabella (refused=false)
+  CONVO d+64 with Isabella (refused=false)
+  CONVO d+64 with Kahukura (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=1 (eligible=8) echo=1 organicBurial={"respects":false,"bury":false} halfRation=7
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=71 signals={"levelUp":true,"systemVoice":56,"offerLines":25,"codexPlantsDelta":20,"codexSkillsDelta":5,"codexAbilitiesDelta":4,"xpDelta":140,"any":true} pantry 59749->12142
+TRUST-DIALS: office 60->60 (+0, flat) | villageMean 77.9->87.2 (+9.3, climb) | ge60 8->8 | movers>=5: [{"id":"Kahukura","from":67,"to":92,"delta":25},{"id":"Yuki","from":68,"to":91,"delta":23},{"id":"Daniyar","from":74,"to":90,"delta":16},{"id":"Emma","from":45,"to":59,"delta":14}]
+DEED-LEDGER: calls=14 summary={"giveFood":{"calls":14,"ok":14,"deltaSum":9,"deltaN":14,"positive":9,"meanDelta":0.64}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=false(echoMentions=1 (convo=1, say=0)) m4=true m5=manual | endDay=111 alive=10 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=71
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+71) t2=true(deedCalls=14) trustVerdict={"readable":true,"officeMantle":60,"officeLast":60,"officeDelta":0,"officeClass":"flat","villageMantle":77.9,"villageLast":87.2,"villageDelta":9.3,"villageClass":"climb","villageGe60Mantle":8,"villageGe60Last":8,"movers":[{"id":"Kahukura","from":67,"to":92,"delta":25},{"id":"Yuki","from":68,"to":91,"delta":23},{"id":"Daniyar","from":74,"to":90,"delta":16},{"id":"Emma","from":45,"to":59,"delta":14}]}
+E6/CALLCHECK: e6={"callMoves":0,"withCensus":0,"chainHandoffs":0,"trustMoves":0} callCheck={"dailyMoveDays":0,"callMoveDays":0,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=3 (v2=3, excludedLoot=0))
+E7/R47: e7={"trustMoves":0,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":0,"both":0,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":1,"v2":3,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":0,"known":0,"unknown":0} e3={"dailyDays":71,"moves":0}
