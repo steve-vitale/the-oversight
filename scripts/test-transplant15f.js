@@ -411,7 +411,7 @@ function sortedNumstat(a, b) {
     ev.indexOf('Ordering note') !== -1, 'ordering note present');
 
   // ---- 7. Base state ----
-  T.section('7. Base state — arm branch clean, subject not cut, sim not run');
+  T.section('7. Base state — arm branch clean, subject cut (picks 1-6), sim not run');
   const headBranch = git('rev-parse --abbrev-ref HEAD');
   // worktreeOnly: branch-identity legs are meaningful only in the
   // worker tree. On merged master HEAD is 'master' by design (the
@@ -435,9 +435,13 @@ function sortedNumstat(a, b) {
   const stepSrc = fs.readFileSync(path.join(REPO, 'scripts', 'culpritbisect-step.sh'), 'utf8');
   T.ok('step script names the band 190391..190398',
     stepSrc.indexOf('190391,190392,190393,190394,190395,190396,190397,190398') !== -1, 'band literal present');
+  // Stage 2: the subject branch now exists (cut after the prereg
+  // commit); its tip is the pick-6 commit 4eca36017 (OVE-57).
   let subjectExists = true;
   try { git('rev-parse ' + SUBJECT_BRANCH); } catch (e) { subjectExists = false; }
-  T.ok('subject branch does NOT exist yet (cut after the prereg commit)', subjectExists === false, SUBJECT_BRANCH + ' absent');
+  T.ok('subject branch exists (cut after the prereg commit; stage 2)', subjectExists === true, SUBJECT_BRANCH + ' present');
+  T.ok('subject tip is the pick-6 commit 4eca36017 (OVE-57)',
+    git('rev-parse ' + SUBJECT_BRANCH).startsWith('4eca36017') && git('log -1 --format=%s ' + SUBJECT_BRANCH) === 'OVE-57: refresh proofs on tip 134a3d0ab after rebase', git('log -1 --format=%h\\ %s ' + SUBJECT_BRANCH).slice(0, 80));
   const t15fSummary = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-summary.json');
   T.ok('no step summary exists for t15f-proofs (no judged sim ran)', fs.existsSync(t15fSummary) === false, STEP);
   const t15fDriver = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-driver.log');
@@ -453,6 +457,92 @@ function sortedNumstat(a, b) {
     return ln && !allowed.some(function (a) { return ln === a; });
   }).join('\n');
   T.ok('tracked tree is clean apart from this proof + the prereg + the evidence file (uncommitted until this proof passes)', dirtyOther === '', dirtyOther.slice(0, 200) || '(only allowed files)');
+
+  // ---- 8. Live picks 1-6 — tooling conflicts resolved, trees equal predictions ----
+  T.section('8. Live picks 1-6 — tooling conflicts resolved --ours, trees equal predictions');
+  const LIVE = [
+    { sha: 'c833d182d1f3197288c05da2508c6a0fff431606', subject: 'OVE-37: refresh phone/balance proofs on master tip',
+      files: ['evidence/2026-11-08/neutral-ove37-master-port.json.gz', 'evidence/2026-11-08/phone-ove37-master-frame-736-r1.json', 'evidence/2026-11-08/phone-ove37-master-frame-844-r1.json'] },
+    { sha: '1654a4f67a003adc4746227013453e16aefdce1a', subject: 'OVE-47: refresh phone-frame proof on master tip',
+      files: ['evidence/2026-11-08/phone-fun-reverify-frame-736-r2.json', 'evidence/2026-11-08/phone-fun-reverify-frame-844-r2.json', 'evidence/2026-11-08/phone-fun-reverify-r1.md'] },
+    { sha: 'e59dfa2620d3fdaa57268f46352732e76f7b5b3d', subject: 'OVE-53: refresh phone-frame proof after favor thresholds',
+      files: ['evidence/2026-11-08/phone-favor-frame-736-r1.json', 'evidence/2026-11-08/phone-favor-frame-844-r1.json', 'evidence/2026-11-08/phone-favor-frame-r1.md'] },
+    { sha: 'bc5fbf7521a91aa2114462fbad0d1303e6f69ed8', subject: 'OVE-56: refresh phone-frame proof after bond dawn',
+      files: ['evidence/2026-11-08/phone-bond-frame-736-r1.json', 'evidence/2026-11-08/phone-bond-frame-844-r1.json', 'evidence/2026-11-08/phone-bond-frame-r1.md'] },
+    { sha: '952d4cf048055927df885a18b0b13dbb32c32e70', subject: 'OVE-55: Phase 4 social rates screen on tip 748cce3b8',
+      files: ['evidence/2026-11-08/phase4-social-rates-analysis.json', 'evidence/2026-11-08/phase4-social-rates-analysis.md', 'evidence/2026-11-08/phase4-social-rates-panel.json', 'scripts/probe-phase4-social-rates-20261108.js'] },
+    { sha: '4eca36017f5f2cd76d255afc85cf98af307d630b', subject: 'OVE-57: refresh proofs on tip 134a3d0ab after rebase',
+      files: ['evidence/2026-11-08/neutral-ove57-tip-134a3d0ab.json.gz', 'evidence/2026-11-08/phone-ove57-frame-736-r1.json', 'evidence/2026-11-08/phone-ove57-frame-844-r1.json', 'evidence/2026-11-08/phone-ove57-frame-r1.md'] },
+  ];
+  for (let i = 0; i < LIVE.length; i++) {
+    const c = LIVE[i];
+    const m = MT[i];
+    T.ok('live pick-' + (i + 1) + ' commit exists (' + c.sha.slice(0, 9) + ', ' + c.subject.slice(0, 30) + '…)',
+      git('rev-parse ' + c.sha).length === 40 && git('log -1 --format=%s ' + c.sha) === c.subject, git('log -1 --format=%h\\ %s ' + c.sha).slice(0, 80));
+    T.ok('live pick-' + (i + 1) + ' tree is ' + m.resolved.slice(0, 12) + '… (the predicted pick-' + (i + 1) + '-resolved tree)',
+      git('rev-parse ' + c.sha + '^{tree}') === m.resolved, git('rev-parse ' + c.sha + '^{tree}').slice(0, 12));
+    const liveFiles = git('diff --name-only ' + c.sha + '^1 ' + c.sha).split('\n').filter(Boolean).sort();
+    T.ok('live pick-' + (i + 1) + ' commit touches exactly the ' + c.files.length + ' non-tooling files (no proof JSON, no green-list)',
+      JSON.stringify(liveFiles) === JSON.stringify(c.files.slice().sort()), liveFiles.join(', '));
+    const parent = i === 0 ? FAR_FULL : LIVE[i - 1].sha;
+    T.ok('live pick-' + (i + 1) + ' parent is ' + (i === 0 ? 'the far end' : 'live pick-' + i),
+      git('rev-parse ' + c.sha + '^1') === parent, 'parent=' + git('rev-parse ' + c.sha + '^1').slice(0, 9));
+  }
+  T.ok('subject has exactly 6 commits on top of the far end (picks 1-6 only)',
+    git('rev-list --count ' + FAR + '..' + SUBJECT_BRANCH) === '6', 'count=6');
+  T.ok('no pick-7 commit exists on the subject (OVE-61 never landed)',
+    git('log --format=%s ' + FAR + '..' + SUBJECT_BRANCH).indexOf('OVE-61') === -1, 'no OVE-61 commit');
+  const subjNumstat = sortedNumstat(FAR, SUBJECT_BRANCH);
+  T.ok('subject diff vs far end is exactly picks 1-6 minus tooling (20 files)',
+    subjNumstat === CUMUL6.slice().sort().join('\n'), subjNumstat.replace(/\n/g, ' | ').slice(0, 300));
+  for (const f of TOOLING_FILES) {
+    T.ok('subject tip keeps ' + f + ' byte-identical to the far end (checkout --ours kept it)',
+      sha256(gitShow(SUBJECT_BRANCH, f)) === sha256(gitShow(FAR, f)), f + ' == far end');
+  }
+  T.ok('neutral-ove57-tip-6e53adc62.json.gz is ABSENT from the subject tip (both-sides-deleted, clean)',
+    git('ls-tree ' + SUBJECT_BRANCH + ' -- evidence/2026-11-08/neutral-ove57-tip-6e53adc62.json.gz') === '', '(absent)');
+  T.ok('neutral-ove57-tip-134a3d0ab.json.gz IS present at the subject tip (the replacement panel)',
+    git('ls-tree ' + SUBJECT_BRANCH + ' -- evidence/2026-11-08/neutral-ove57-tip-134a3d0ab.json.gz') !== '', 'replacement present');
+
+  // ---- 9. STOP outcome — pick-7 conflict reported, nothing resolved, nothing measured ----
+  T.section('9. STOP outcome — pick-7 conflict reported, nothing hand-resolved, nothing measured');
+  const ev15fPath = path.join(REPO, 'evidence', '2026-11-14', 'sim-transplant15f.md');
+  const ev15f = fs.existsSync(ev15fPath) ? fs.readFileSync(ev15fPath, 'utf8') : '';
+  T.ok('evidence file exists', ev15f.length > 0, ev15fPath);
+  T.ok('evidence file records the outcome as UNMEASURED-BY-CONFLICT', ev15f.indexOf('UNMEASURED-BY-CONFLICT') !== -1, 'outcome present');
+  T.ok('evidence file records the exact conflict list (DU person-trust-prereg.md, DU test-person-trust-20261108.js)',
+    ev15f.indexOf('DU evidence/2026-11-08/person-trust-prereg.md') !== -1 && ev15f.indexOf('DU scripts/test-person-trust-20261108.js') !== -1, 'conflict list present');
+  T.ok('evidence file records the modify/delete wording (deleted in HEAD and modified in 74a16306c)',
+    ev15f.indexOf('CONFLICT (modify/delete)') !== -1 && ev15f.indexOf('deleted in HEAD and modified in 74a16306c') !== -1, 'modify/delete present');
+  T.ok('evidence file records stages 1 + 3 only, no stage 2 (base blobs cadcb6e4…/1e5037c2…, theirs 06c4d95a…/d9cfe464…)',
+    ev15f.indexOf('stages 1 + 3 only') !== -1 && ev15f.indexOf('cadcb6e4') !== -1 && ev15f.indexOf('06c4d95a') !== -1, 'stages present');
+  T.ok('evidence file records the subject tip 4eca36017 and the predicted tree 7bee7b39…',
+    ev15f.indexOf('4eca36017') !== -1 && ev15f.indexOf('7bee7b39') !== -1, 'subject tip present');
+  T.ok('evidence file records the live pick-1 tree 67eb5c37… and pick-2 tree 875ce641…',
+    ev15f.indexOf('67eb5c37') !== -1 && ev15f.indexOf('875ce641') !== -1, 'live trees present');
+  T.ok('evidence file records the resolutions (checkout --ours, picks 1-4 and 6, far-end version kept byte-identical)',
+    ev15f.indexOf('checkout --ours') !== -1 && ev15f.indexOf('Resolutions recorded') !== -1, 'resolutions present');
+  T.ok('evidence file records that no judged sim ran', ev15f.indexOf('No judged sim ran') !== -1, 'no-sim note present');
+  T.ok('evidence file records the pick-7 mechanism (458811411, person-trust, side-branch)',
+    ev15f.indexOf('458811411') !== -1 && ev15f.indexOf('person-trust') !== -1, 'mechanism present');
+  T.ok('evidence file records the coordinator decision owed (picks 1-6 alone / person-trust first / record unmeasurable)',
+    ev15f.indexOf('Coordinator decision owed') !== -1, 'coordinator note present');
+  T.ok('evidence file records the infrastructure (flap ALL-OK, index clobber, telemetry NOT RUN)',
+    ev15f.indexOf('HOST WRITE FLAP') !== -1 && ev15f.indexOf('INDEX CLOBBER') !== -1 &&
+    ev15f.indexOf('Telemetry deviation check: NOT RUN') !== -1, 'infrastructure present');
+  // Prereg-commit ancestry by MESSAGE, not hash (0608Z lesson: an
+  // adoption rebase rewrites hashes).
+  const logSubjects = git('log --format=%s HEAD');
+  T.ok('prereg commit is an ancestor of HEAD (resolved by message, not hash)',
+    logSubjects.indexOf('sim-transplant15f-a: prereg + stage-1 proof (236 legs; picks 1-4/6 tooling-only, pick 5 clean, pick 7 non-tooling STOP predicted)') !== -1, 'prereg message present');
+  const headBranch2 = git('rev-parse --abbrev-ref HEAD');
+  T.ok('HEAD is back on the arm branch sim-transplant15f-a after the live picks (worktree-only)', worktreeOnly(headBranch2 === 'sim-transplant15f-a'), 'HEAD=' + headBranch2);
+  let cherryPickHead2 = true;
+  try { execSync('git rev-parse --verify CHERRY_PICK_HEAD', { cwd: REPO, stdio: 'pipe' }); } catch (e) { cherryPickHead2 = false; }
+  T.ok('no cherry-pick is in progress (pick 7 was aborted)', cherryPickHead2 === false, 'CHERRY_PICK_HEAD absent');
+  T.ok('no verdict (CARRIER/AMBIGUOUS/NOT-CARRIER) is claimed anywhere in the evidence file',
+    ev15f.indexOf('VERDICT: CARRIER') === -1 && ev15f.indexOf('VERDICT: AMBIGUOUS') === -1 && ev15f.indexOf('VERDICT: NOT-CARRIER') === -1, 'no verdict claimed');
+  T.ok('evidence file records Verdict: NONE', ev15f.indexOf('Verdict: NONE') !== -1, 'verdict NONE present');
 
   T.done();
 })().catch(function (e) { console.error('HARNESS ERROR', e); process.exit(1); });
