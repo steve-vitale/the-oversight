@@ -221,9 +221,9 @@ REFUSED as recorder-corpus class, per the prereg.)
   git update-index --add --index-info` pipe, verified (status
   empty, diff empty, hash-object == HEAD blob per file).
 - No flap EPERM hit on this arm's writes. No pushes, no version
-  bumps, no live verification (ship loop owns deploys). Arm
-  branch tip: STAGE2-TIP-PLACEHOLDER (stage-2 commit; proof
-  92/92, culpritbisect 116/116). Subject branch
+  bumps, no live verification (ship loop owns deploys). Stage-2
+  commit: 3e6decf6a9a6b8c7d3ef882bd58e4eccb3c4fb67 (proof 92/92,
+  culpritbisect 116/116). Subject branch
   transplant-12-subject left in place at
   203a327750a223e0a1465dc51f5409787efdfaae (the far end, 0 commits
   ahead, no subject commit).
