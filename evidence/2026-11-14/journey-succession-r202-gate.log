@@ -1,0 +1,70 @@
+check.js: 340 scripts, 4 parallel (quick)
+.......................................................................................................................F...............F............F..F.F...........................................................................................................F.............................................F................................
+
+  FAIL scripts/godpath/test-living-garden-deed-attainment.js (exit null, 120.1s)
+      seed 7...
+      seed 42...
+      seed 99...
+      seed 1234...
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-measurement-cache-flags.js (exit 1, 70.7s)
+      FAIL both actual CLI configurations complete valid neutral panels
+        FAIL two flags create four independent observer-on/off cache entries
+        FAIL cache identities retain each actual SIMOPT value
+        ok   repeating the same setting reuses its two verified cases
+      
+      measurement cache flag isolation: 1 passed, 3 failed, 0 todo (phase 0)
+      failing: both actual CLI configurations complete valid neutral panels | two flags create four independent observer-on/off cache entries | cache identities retain each actual SIMOPT value
+
+  FAIL scripts/godpath/test-phone-frame-proof.js (exit 1, 10.1s)
+      ok   both actual target phone sizes are retained
+        FAIL every retained browser input matches current source — index.html,src/data/foreignSpeech.json,src/data/regions.json,src/data/statusEffects.json,src/data/table-endings.json,src/js/abilityActions.
+        FAIL all current boot inputs are covered
+        ok   receipt identity declares portable text normalization
+        ok   retained receipt hash 736
+        FAIL current phone evidence is required; follow MOBILE-PLAYTEST.md — Phone receipt source is stale or missing: index.html
+      
+      Phone frame proof: 3 passed, 3 failed, 0 todo (phase 0)
+      failing: every retained browser input matches current source | all current boot inputs are covered | current phone evidence is required; follow MOBILE-PLAYTEST.md
+
+  FAIL scripts/godpath/test-occupation-panels.js (exit null, 120.2s)
+      ok   real CLI retains one actual campaign and both absent offers
+        ok   played bearer retains the actual non-first occupation card
+        ok   campaign neutrality and deterministic exclusions are separate
+        ok   excluded jobs contain no synthetic loss, usage or exposure
+        ok   unchanged settings reuse only their six exact on/off cases
+        ok   changed shared cohort observer invalidates every cached case
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-one-person-army-deed-attainment.js (exit null, 120.1s)
+      seed 7...
+      seed 42...
+      seed 99...
+      seed 1234...
+      seed 555...
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/test-synergy-stall.js (exit null, 120.1s)
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/test-capable-bot-20261014.js (exit null, 120.1s)
+        ok   earned food deed persists through combat settlement
+        ok   combat spends devotion only on actual use
+        ok   food chain has no policy errors
+        ok   online reactor refuses the otherwise armed grant honestly
+        ok   reactor refusal invents neither feast buff nor food deed
+      
+      short sims: 2 seeds x 40 days
+        ok   seed 42: qualified observed feast plans receive an actual host attempt
+        ok   seed 42: host attempts return a real feast or explicit refusal
+        INFO original campaign seed=42 foodDeeds=true grants=[{"day":14,"granted":true},{"day":32,"granted":true},{"day":40,"granted":true}]
+      
+      [check.js] TIMEOUT after 120s
+
+  slowest: scripts/godpath/test-occupation-panels.js 120s, scripts/godpath/test-living-garden-deed-attainment.js 120s, scripts/test-synergy-stall.js 120s
+
+check.js: 333 passed, 7 failed in 1280s

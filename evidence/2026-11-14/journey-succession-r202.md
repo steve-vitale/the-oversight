@@ -333,3 +333,7 @@ alive. Adoption must heartbeat FIRST before any work in the tree
 (long-idle-tree rule) and should release promptly — the
 journey2-succession slug/branch is still held by this run until
 release, so a fresh Lane B run before adoption would collide on it.
+
+## Adoption closeout (second attempt, 2026-11-14 ~10:40 CST)
+
+First adoption coordinator (spawned 09:50) was killed by a VM replacement mid-gate (SIGTERM at 129/340 scripts; agent errored "restart drain in progress"). Nothing merged; no work lost. Second adoption: heartbeated first, rebased onto 3263ddb1f (r138 landed after the first rebase), re-ran the gate from scratch on the rebased tip: **333 passed, 7 failed in 1280s — GO, 0 attributable**. Failures: 5× exact-120s timeouts (occupation-panels, living-garden-deed-attainment, one-person-army-deed-attainment, synergy-stall, capable-bot — known intermittent load artifacts), phone-frame-proof (standing stale receipt), measurement-cache-flags 1/4 in-gate → **4/4 standalone in 34s** (load artifact, confirmed). Branch is evidence-only (zero src/js, zero scripts), so no failure can be attributed to it. Gate log: evidence/2026-11-14/journey-succession-r202-gate.log. Merged --ff-only; worktree released; rotation-b 7→4.
