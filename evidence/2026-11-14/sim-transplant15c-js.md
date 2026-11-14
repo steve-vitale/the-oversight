@@ -247,7 +247,7 @@ backlog entry; the open item stands.
   fast (≤7s). The step script's two status calls each cost ~5
   min of wall time inside its ~8.7-min run; the driver itself
   (8 seeds) ran at normal speed once the checkout landed.
-- **Safe-commit index clobber (struck THREE times, repaired each
+- **Safe-commit index clobber (struck FOUR times, repaired each
   time).** The stage-1 commit (054c493f6) is correct — both files
   present, 244 + 198 lines — but the worktree's main index showed
   them as staged-deleted with the worktree copies byte-identical
@@ -257,10 +257,12 @@ backlog entry; the open item stands.
   HEAD blob). The stage-2 commit (83157c1c) clobbered in a new
   variant: the evidence file's entry purged, the proof file's entry
   left STALE at the stage-1 blob (cached diff showed the whole
-  stage-2 addition as deletions). All three repaired with the
-  documented pipe (`git ls-tree -r HEAD -- <paths> |
-  git update-index --add --index-info`); verified `git diff
-  --cached --quiet` + disk blobs equal HEAD blobs after each
+  stage-2 addition as deletions). The addendum commit (5a011850c)
+  clobbered the same stale way (both entries held the previous
+  blobs; disk files already matched the new HEAD blobs). All four
+  repaired with the documented pipe (`git ls-tree -r HEAD --
+  <paths> | git update-index --add --index-info`); verified `git
+  diff --cached --quiet` + disk blobs equal HEAD blobs after each
   repair. No work lost; every commit was verified correct first.
   The clobber hits every safe-commit on this tree under load —
   future arms should run the hash-object + cached-diff check after
