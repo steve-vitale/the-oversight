@@ -93,7 +93,8 @@
 //      byte-identical to the far end.
 //  12. Live pick 4 outcome (conflict list, STOP since a src/js
 //      file conflicted) and the evidence file records the verdict
-//      (or UNMEASURED-BY-CONFLICT), the per-seed table, and the
+//      (UNMEASURED-BY-CONFLICT), the unmeasured per-seed table, the
+//      (a2)-route finding, the coordinator decision owed, and the
 //      telemetry refusal.
 //
 // Usage: node scripts/test-transplant15e-1412.js
@@ -135,6 +136,10 @@ const MT3_TREE = '9f0ee83bbc349c07ca16811689236df66836f144';
 const MT3RES_TREE = 'e6fab8999c9039e0cf987dccdefcab63a2f154b8';
 const PRED3_COMMIT = 'a7180fc9a6482feec46d0bfae4a2b82b617dda9e';
 const MT4_TREE = '627f198ea6376f82ea7042ef4081e298b8c9a4b3';
+const LIVE0 = 'abd8d575433bd2557467f7789f32c643567184c4';
+const LIVE1 = '588f054d1d0855fb76197de10bab26180288216b';
+const LIVE2 = 'e0af0163ad89e2d8d25cf237e1fe3f506fd1fe30';
+const LIVE3 = '312647db088a2cd0dcd8800f014f4722863668e6';
 const BRIEF_BASE_TREE = '015568e3a827c624e12968dc896160b95397164c';
 const BAL_OURS_BLOB = 'd0c6a42ff2395a49672f235f0218a3f969619dee';
 const PHONE_OURS_BLOB = 'b06910148b2bb567ca3941b2ac3245872f74f632';
@@ -607,7 +612,7 @@ function mergeTree(base, ours, theirs) {
     stepSrc.indexOf('190391,190392,190393,190394,190395,190396,190397,190398') !== -1, 'band literal present');
   let subjectExists = true;
   try { git('rev-parse ' + SUBJECT_BRANCH); } catch (e) { subjectExists = false; }
-  T.ok('subject branch does NOT exist yet (stage 1 — cut after this prereg commits)', subjectExists === false, SUBJECT_BRANCH + ' absent');
+  T.ok('subject branch exists at the pick-3-resolved tip 312647db0 (stage 2)', subjectExists === true && git('rev-parse ' + SUBJECT_BRANCH).startsWith('312647db0'), SUBJECT_BRANCH + ' at 312647db0');
   const t15eSummary = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-summary.json');
   T.ok('no step summary exists for t15e-on1412 (no judged sim ran)', fs.existsSync(t15eSummary) === false, STEP);
   const t15eDriver = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-driver.log');
@@ -623,6 +628,141 @@ function mergeTree(base, ours, theirs) {
     return ln && !allowed.some(function (a) { return ln === a; });
   }).join('\n');
   T.ok('tracked tree is clean apart from this proof + the prereg + the evidence file (uncommitted until this proof passes)', dirtyOther === '', dirtyOther.slice(0, 200) || '(only allowed files)');
+
+  // ---- 10. Live picks 0-3 — clean applies (pick 3 tooling-only), trees equal predictions ----
+  T.section('10. Live picks 0-3 — clean applies, trees equal the predicted trees');
+  let subjectExists2 = true;
+  try { git('rev-parse ' + SUBJECT_BRANCH); } catch (e) { subjectExists2 = false; }
+  T.ok('subject branch exists', subjectExists2 === true, SUBJECT_BRANCH + ' present');
+  T.ok('subject tip is the pick-3 commit 312647db0 (OVE-33)',
+    git('rev-parse ' + SUBJECT_BRANCH) === LIVE3 && git('log -1 --format=%s ' + SUBJECT_BRANCH) === 'OVE-33: refresh stale quick proofs and fix outside-Muse fails', git('log -1 --format=%h\\ %s ' + SUBJECT_BRANCH).slice(0, 80));
+  T.ok('subject tip tree is e6fab899… (the predicted pick-3-resolved tree)',
+    git('rev-parse ' + SUBJECT_BRANCH + '^{tree}') === MT3RES_TREE, git('rev-parse ' + SUBJECT_BRANCH + '^{tree}').slice(0, 12));
+  T.ok('subject has exactly 4 commits on top of the far end (picks 0-3)',
+    git('rev-list --count ' + FAR + '..' + SUBJECT_BRANCH) === '4', 'count=4');
+  T.ok('pick-0 commit is abd8d5754 (family 14 merge message)',
+    git('rev-parse ' + SUBJECT_BRANCH + '^1^1^1') === LIVE0 && git('log -1 --format=%s ' + LIVE0) === 'Merge pull request #10 from steve-vitale/cursor/snippet-stage-direction-guard', git('log -1 --format=%h\\ %s ' + LIVE0).slice(0, 80));
+  T.ok('pick-0 commit tree is bc52919e… (the predicted pick-0-resolved tree)',
+    git('rev-parse ' + LIVE0 + '^{tree}') === MT0_TREE, git('rev-parse ' + LIVE0 + '^{tree}').slice(0, 12));
+  const pick0Files = git('diff --name-only ' + FAR + ' ' + LIVE0).split('\n').sort();
+  T.ok('pick-0 commit touches exactly the 2 family-14 files (no tooling file in the commit)',
+    JSON.stringify(pick0Files) === JSON.stringify(['scripts/test-snippet-stage-direction.js', 'src/js/conversation.js']), pick0Files.join(', '));
+  T.ok('pick-0 commit numstat is exactly family 14 (test +21, conversation +12)',
+    git('diff --numstat ' + FAR + ' ' + LIVE0).split('\n').sort().join('\n') === ['21\t0\tscripts/test-snippet-stage-direction.js', '12\t0\tsrc/js/conversation.js'].sort().join('\n'), git('diff --numstat ' + FAR + ' ' + LIVE0).replace(/\n/g, ' | '));
+  T.ok('pick-1 commit is 588f054d1 (family 12 merge message)',
+    git('rev-parse ' + LIVE1) === LIVE1 && git('log -1 --format=%s ' + LIVE1) === 'Merge pull request #25 from steve-vitale/cursor/dialog-residual-sampler-f726', git('log -1 --format=%h\\ %s ' + LIVE1).slice(0, 80));
+  T.ok('pick-1 commit tree is e78fac42… (the predicted pick-1-resolved tree)',
+    git('rev-parse ' + LIVE1 + '^{tree}') === MT1_TREE, git('rev-parse ' + LIVE1 + '^{tree}').slice(0, 12));
+  const pick1Files = git('diff --name-only ' + LIVE0 + ' ' + LIVE1).split('\n').sort();
+  T.ok('pick-1 commit touches exactly the 2 family-12 files (no tooling file in the commit)',
+    JSON.stringify(pick1Files) === JSON.stringify(['scripts/test-snippet-stage-direction.js', 'src/js/conversation.js']), pick1Files.join(', '));
+  T.ok('pick-1 commit numstat is exactly family 12 (test +55/-2, conversation +18/-3)',
+    git('diff --numstat ' + LIVE0 + ' ' + LIVE1).split('\n').sort().join('\n') === ['55\t2\tscripts/test-snippet-stage-direction.js', '18\t3\tsrc/js/conversation.js'].sort().join('\n'), git('diff --numstat ' + LIVE0 + ' ' + LIVE1).replace(/\n/g, ' | '));
+  T.ok('pick-2 commit is e0af0163a (resume-offer Yes)',
+    git('rev-parse ' + LIVE2) === LIVE2 && git('log -1 --format=%s ' + LIVE2) === 'Deliver unfinished thread on resume-offer Yes', git('log -1 --format=%h\\ %s ' + LIVE2).slice(0, 80));
+  T.ok('pick-2 commit tree is 45f64b03… (the predicted pick-2-resolved tree)',
+    git('rev-parse ' + LIVE2 + '^{tree}') === MT2_TREE, git('rev-parse ' + LIVE2 + '^{tree}').slice(0, 12));
+  const pick2Files = git('diff --name-only ' + LIVE1 + ' ' + LIVE2).split('\n').sort();
+  T.ok('pick-2 commit touches exactly the 3 pick-2 files (no tooling file in the commit)',
+    JSON.stringify(pick2Files) === JSON.stringify(['evidence/2026-11-08/story-offer-yes-followthrough.md', 'scripts/test-story-offer-yes-20261108.js', 'src/js/conversation.js']), pick2Files.join(', '));
+  T.ok('pick-2 commit numstat is exactly pick 2 (evidence +29, test +73, conversation +46/-4)',
+    git('diff --numstat ' + LIVE1 + ' ' + LIVE2).split('\n').sort().join('\n') === ['29\t0\tevidence/2026-11-08/story-offer-yes-followthrough.md', '73\t0\tscripts/test-story-offer-yes-20261108.js', '46\t4\tsrc/js/conversation.js'].sort().join('\n'), git('diff --numstat ' + LIVE1 + ' ' + LIVE2).replace(/\n/g, ' | '));
+  T.ok('pick-3 commit is 312647db0 (OVE-33)',
+    git('rev-parse ' + LIVE3) === LIVE3 && git('log -1 --format=%s ' + LIVE3) === 'OVE-33: refresh stale quick proofs and fix outside-Muse fails', git('log -1 --format=%h\\ %s ' + LIVE3).slice(0, 80));
+  const pick3Files = git('diff --name-only ' + LIVE2 + ' ' + LIVE3).split('\n').sort();
+  T.ok('pick-3 commit touches exactly pick 3 MINUS the two tooling files (10 files)',
+    JSON.stringify(pick3Files) === JSON.stringify(['evidence/2026-11-08/neutral-ove33-master-quick.json.gz', 'evidence/2026-11-08/phone-ove33-frame-736-r1.json', 'evidence/2026-11-08/phone-ove33-frame-844-r1.json', 'scripts/godpath/test-mobile-combat-cadence.js', 'scripts/godpath/test-occupation-panels.js', 'scripts/godpath/test-time-save-crashes.js', 'scripts/test-establishment-r20-fixes-20261020.js', 'scripts/test-snippet-stage-direction.js', 'src/js/conversation.js', 'sw.js']), pick3Files.join(', '));
+  const subjNumstat = git('diff --numstat ' + FAR + ' ' + SUBJECT_BRANCH);
+  T.ok('subject diff vs far end is exactly picks 0-3 net (conversation.js +77/-4; no other src/js file)',
+    git('diff --numstat ' + FAR + ' ' + SUBJECT_BRANCH + ' -- src/js') === '77\t4\tsrc/js/conversation.js', git('diff --numstat ' + FAR + ' ' + SUBJECT_BRANCH + ' -- src/js').replace(/\n/g, ' | '));
+  T.ok('villager-objectives.js is byte-identical between the far end and the subject (no pick 0-3 touches it)',
+    git('diff --stat ' + FAR + ' ' + SUBJECT_BRANCH + ' -- src/js/villager-objectives.js') === '', 'identical');
+  T.ok('green-list.txt is byte-identical between the far end and the subject',
+    git('diff --stat ' + FAR + ' ' + SUBJECT_BRANCH + ' -- scripts/green-list.txt') === '', 'identical');
+  T.ok('no pick-4 commit exists on the subject (OVE-57 never landed)',
+    git('log --format=%s ' + FAR + '..' + SUBJECT_BRANCH).indexOf('OVE-57') === -1, 'no OVE-57 commit');
+
+  // ---- 11. Live pick 3 tooling resolution — --ours per file, far-end version kept ----
+  T.section('11. Live pick 3 tooling resolution — checkout --ours per file, far-end version kept');
+  T.ok('pick 3\'s own diff (vs its first parent) DOES touch balance-proof.json +2/-2 (the resolution dropped it)',
+    git('diff --numstat ' + PICK3 + '^1 ' + PICK3 + ' -- scripts/balance-proof.json') === '2\t2\tscripts/balance-proof.json', 'pick-3 diff 2/2');
+  T.ok('pick 3\'s own diff (vs its first parent) DOES touch phone-frame-proof.json +6/-6 (the resolution dropped it)',
+    git('diff --numstat ' + PICK3 + '^1 ' + PICK3 + ' -- scripts/phone-frame-proof.json') === '6\t6\tscripts/phone-frame-proof.json', 'pick-3 diff 6/6');
+  T.ok('the live pick-3 commit does NOT touch balance-proof.json',
+    git('diff --name-only ' + LIVE2 + ' ' + LIVE3 + ' -- scripts/balance-proof.json') === '', '(absent)');
+  T.ok('the live pick-3 commit does NOT touch phone-frame-proof.json',
+    git('diff --name-only ' + LIVE2 + ' ' + LIVE3 + ' -- scripts/phone-frame-proof.json') === '', '(absent)');
+  T.ok('subject balance-proof blob is the OURS blob d0c6a42f (far-end version)',
+    git('ls-tree ' + SUBJECT_BRANCH + ' -- scripts/balance-proof.json').indexOf(BAL_OURS_BLOB) !== -1, 'balance-proof blob = ours');
+  T.ok('subject phone-frame-proof blob is the OURS blob b0691014 (far-end version)',
+    git('ls-tree ' + SUBJECT_BRANCH + ' -- scripts/phone-frame-proof.json').indexOf(PHONE_OURS_BLOB) !== -1, 'phone-frame-proof blob = ours');
+  T.ok('subject balance-proof blob equals the FAR-END blob (byte-identical)',
+    git('ls-tree ' + FAR + ' -- scripts/balance-proof.json').indexOf(BAL_OURS_BLOB) !== -1, 'balance-proof = far end');
+  T.ok('subject phone-frame-proof blob equals the FAR-END blob (byte-identical)',
+    git('ls-tree ' + FAR + ' -- scripts/phone-frame-proof.json').indexOf(PHONE_OURS_BLOB) !== -1, 'phone-frame-proof = far end');
+  T.ok('subject tree equals the predicted pick-3-resolved tree e6fab899… (the --ours resolution reproduces the temp-index tree)',
+    git('rev-parse ' + SUBJECT_BRANCH + '^{tree}') === MT3RES_TREE, git('rev-parse ' + SUBJECT_BRANCH + '^{tree}').slice(0, 12));
+  T.ok('the live pick-3 commit carries the OVE-33 quote check in conversation.js (game-code hunk landed)',
+    gitShow(LIVE3, 'src/js/conversation.js').indexOf('if (/"/.test(s)) return false;') !== -1, 'quote check landed');
+  T.ok('the live pick-3 commit carries the OVE-33 assertions in the test file ("They go still.")',
+    gitShow(LIVE3, 'scripts/test-snippet-stage-direction.js').indexOf('They go still.') !== -1, 'OVE-33 assertions landed');
+
+  // ---- 12. STOP outcome — pick-4 conflict reported, nothing hand-resolved, nothing measured ----
+  T.section('12. STOP outcome — pick-4 conflict reported, nothing hand-resolved, nothing measured');
+  const ev1412Path = path.join(REPO, 'evidence', '2026-11-14', 'sim-transplant15e-1412.md');
+  const ev1412 = fs.existsSync(ev1412Path) ? fs.readFileSync(ev1412Path, 'utf8') : '';
+  T.ok('evidence file exists', ev1412.length > 0, ev1412Path);
+  T.ok('evidence file records the outcome as UNMEASURED-BY-CONFLICT', ev1412.indexOf('UNMEASURED-BY-CONFLICT') !== -1, 'outcome present');
+  T.ok('evidence file records the exact conflict list (UU balance-proof, UU villager-objectives.js)',
+    ev1412.indexOf('UU scripts/balance-proof.json') !== -1 && ev1412.indexOf('UU src/js/villager-objectives.js') !== -1, 'conflict list present');
+  T.ok('evidence file records that conversation.js auto-merged (M, not UU) on the live pick 4',
+    ev1412.indexOf('M src/js/conversation.js') !== -1, 'conversation.js merged note present');
+  T.ok('evidence file records the balance-proof marker lines 3/6/9',
+    ev1412.indexOf('3/6/9') !== -1, 'balance-proof markers present');
+  T.ok('evidence file records the villager-objectives.js marker lines 23/25/29',
+    ev1412.indexOf('23/25/29') !== -1, 'objectives markers (region 1) present');
+  T.ok('evidence file records the villager-objectives.js marker lines 957/972/1039',
+    ev1412.indexOf('957/972/1039') !== -1, 'objectives markers (region 2) present');
+  T.ok('evidence file records the subject tip 312647db0 and the predicted trees bc52919e… / e78fac42… / 45f64b03… / e6fab899…',
+    ev1412.indexOf('312647db0') !== -1 && ev1412.indexOf('bc52919e') !== -1 && ev1412.indexOf('e78fac42') !== -1 && ev1412.indexOf('45f64b03') !== -1 && ev1412.indexOf('e6fab899') !== -1, 'subject tip + trees present');
+  T.ok('evidence file records the live pick commits abd8d5754 / 588f054d1 / e0af0163a / 312647db0',
+    ev1412.indexOf('abd8d5754') !== -1 && ev1412.indexOf('588f054d1') !== -1 && ev1412.indexOf('e0af0163a') !== -1 && ev1412.indexOf('312647db0') !== -1, 'live commits present');
+  T.ok('evidence file records the pick-3 resolutions (both tooling files, checkout --ours)',
+    ev1412.indexOf('Resolutions recorded (file, pick, method): pick 3') !== -1 && ev1412.indexOf('scripts/balance-proof.json, `git checkout --ours`') !== -1 && ev1412.indexOf('scripts/phone-frame-proof.json, `git checkout --ours`') !== -1, 'pick-3 resolutions present');
+  T.ok('evidence file records that pick 4 resolved NOTHING (tooling file NOT resolved --ours)',
+    ev1412.indexOf('Pick 4 — NONE') !== -1 && ev1412.indexOf('the tooling file was NOT resolved --ours') !== -1, 'pick-4 no-resolution note present');
+  T.ok('evidence file records that no judged sim ran', ev1412.indexOf('No judged sim ran') !== -1, 'no-sim note present');
+  T.ok('evidence file records that no STEP t15e-on1412 summary/driver/corpus exists',
+    ev1412.indexOf('STEP t15e-on1412: never run') !== -1, 'no-STEP note present');
+  T.ok('evidence file records the pick-4 mechanism (Phase 4, objCommitGuardOffer, direct-write guard)',
+    ev1412.indexOf('objCommitGuardOffer') !== -1 && ev1412.indexOf('direct-write') !== -1, 'mechanism present');
+  T.ok('evidence file records that the (a2) route does NOT unblock 15E as a unit',
+    ev1412.indexOf('does NOT unblock 15E as a unit') !== -1, '(a2)-route finding present');
+  T.ok('evidence file records the coordinator decision owed with candidates (b) pick 2 alone / (c) picks 2+3 / (d) record unmeasurable / (e) conversation.js-only',
+    ev1412.indexOf('Coordinator decision owed') !== -1 && ev1412.indexOf('(b)') !== -1 && ev1412.indexOf('(c)') !== -1 && ev1412.indexOf('(d)') !== -1 && ev1412.indexOf('(e)') !== -1, 'coordinator note present');
+  T.ok('evidence file records the telemetry deviation check NOT RUN (no corpus; recorder-corpus refusal)',
+    ev1412.indexOf('Telemetry deviation check: NOT RUN') !== -1 && ev1412.indexOf('Baseline NOT\n  rolled') !== -1, 'telemetry note present');
+  T.ok('evidence file records the sense-testing note (pick-4 hunks read, trader deferral sensible, Phase 4 dependency not a dialogue defect)',
+    ev1412.indexOf('SENSE-TESTING NOTE') !== -1 && ev1412.indexOf('not a dialogue\ndefect') !== -1, 'sense note present');
+  T.ok('evidence file records the slow checkout (~150s, index restat, not a denied write)',
+    ev1412.indexOf('~150s') !== -1, 'checkout note present');
+  const logSubjects = git('log --format=%s HEAD');
+  T.ok('prereg commit is an ancestor of HEAD (resolved by message, not hash)',
+    logSubjects.indexOf('sim-transplant15e-1412-a: prereg + stage-1 proof (224 legs; picks 0-2 clean, pick-3 tooling-only, pick-4 src/js conflict predicted on the 14+12 tree)') !== -1, 'prereg message present');
+  const headBranch2 = git('rev-parse --abbrev-ref HEAD');
+  T.ok('HEAD is back on the arm branch sim-transplant15e-1412-a after the live picks (worktree-only)', worktreeOnly(headBranch2 === 'sim-transplant15e-1412-a'), 'HEAD=' + headBranch2);
+  let cherryPickHead2 = true;
+  try { execSync('git rev-parse --verify CHERRY_PICK_HEAD', { cwd: REPO, stdio: 'pipe' }); } catch (e) { cherryPickHead2 = false; }
+  T.ok('no cherry-pick is in progress (pick 4 was aborted)', cherryPickHead2 === false, 'CHERRY_PICK_HEAD absent');
+  T.ok('no verdict (CARRIER/AMBIGUOUS/NOT-CARRIER) is claimed anywhere in the evidence file',
+    ev1412.indexOf('VERDICT: CARRIER') === -1 && ev1412.indexOf('VERDICT: AMBIGUOUS') === -1 && ev1412.indexOf('VERDICT: NOT-CARRIER') === -1, 'no verdict claimed');
+  T.ok('evidence file records Verdict: NONE', ev1412.indexOf('Verdict: NONE') !== -1, 'verdict NONE present');
+  const t1412Summary2 = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-summary.json');
+  T.ok('no step summary exists for t15e-on1412 (no judged sim ran)', fs.existsSync(t1412Summary2) === false, STEP);
+  const t1412Driver2 = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-driver.log');
+  T.ok('no step driver log exists for t15e-on1412 (no judged sim ran)', fs.existsSync(t1412Driver2) === false, STEP);
+  const corpusDir2 = path.join(REPO, 'evidence', '2026-11-13', 'perseed-culpritbisect-a-' + STEP);
+  T.ok('no step corpus exists for t15e-on1412 (no judged sim ran)', fs.existsSync(corpusDir2) === false, STEP);
 
   T.done();
 })().catch(function (e) { console.error('HARNESS ERROR', e); process.exit(1); });
