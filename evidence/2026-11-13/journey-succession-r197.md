@@ -307,6 +307,28 @@ fix item, if any, waits for a panel that actually produces one.
   retribution src change moves no succession output. Gate re-run
   on the final tip: 333 passed, 7 failed, GO, 0 attributable
   (see Gate).
+- Adoption, second rebase (master moved again during adoption,
+  62c19318e → 443255263: proofrefresh-b13 + journey-deepening
+  r189): the range holds NO src/ or scripts/policies/ change
+  (`git diff --name-only … -- src/ scripts/policies/` is empty)
+  and touches no journey-succession-* script — the panel's inputs
+  (src/js via sim-harness + its own driver, same seeds) are
+  identical, so the byte-identical proof from 62c19318e carries
+  by determinism (the panel already reproduced byte-identical
+  across three tips). No third panel re-run: re-running a 14-min
+  panel to re-prove an empty diff would restart the rebase
+  treadmill while other loops keep landing. The rebase stop-at-pick
+  quirk struck on the 4th pick (127545da1 in both done + todo,
+  tree clean, pick verified unapplied via `git diff <pick>`) —
+  recovered with `git rebase --continue` per AGENTS.md; new tip
+  3d070d1df, 4 commits on 443255263, tree clean. The two
+  measurement tests were re-checked standalone on the final tip
+  (they are the only gate inputs the range changed, via
+  balance-proof.json): both still exit 1 with the same staleness
+  reason ("Proof source inputs are not current" / "retained
+  neutrality proof covers the current inputs") — b13's own
+  closeout records leg (a) failing on the abilityActions.js key.
+  Gate verdict carries to the final tip: GO, 0 attributable.
   Telemetry verdict stands (panel byte-identical; baseline NOT
   rolled, means-vs-sum mismatch unsettled).
 - Merge: `git merge --ff-only journey2-succession` in the main
