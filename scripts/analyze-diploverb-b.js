@@ -107,18 +107,22 @@ function attribute(rec) {
     const t = trajs[id];
     const es = t.entries;
     let seasonedDay = null, countedDay = null, crossedVerb = null;
+    let trust40Day = null;
     for (const e of es) {
       if (seasonedDay === null && e.seasoned) seasonedDay = e.d;
       if (countedDay === null && e.counted) countedDay = e.d;
+      if (trust40Day === null && e.trust >= 40) trust40Day = e.d;
     }
-    if (seasonedDay !== null) {
-      // the verb that carried it across 40 within ±1 day of the crossing
+    if (trust40Day !== null) {
+      // the verb that carried it across 40 within ±1 day of the trust-40
+      // day (NOT the seasoned day — seasoning also needs age 30, so a
+      // link can sit at 40+ for weeks before it seasons).
       for (const ev of evs) {
         if (ev.linkId !== id) continue;
         if ((ev.verb !== 'tendLink' && ev.verb !== 'answerAccord' &&
           ev.verb !== 'answerRenegotiation' && ev.verb !== 'answerDemand') ||
           ev.before === null || ev.after === null) continue;
-        if (Math.abs(ev.day - seasonedDay) <= 1 && ev.before < 40 && ev.after >= 40) {
+        if (Math.abs(ev.day - trust40Day) <= 1 && ev.before < 40 && ev.after >= 40) {
           crossedVerb = ev.verb + ':' + ev.caller;
           break;
         }
@@ -135,6 +139,7 @@ function attribute(rec) {
       conquered: t.conquered, formedDay: t.formedDay,
       cls: classifyLink(t, rec),
       seasonedDay: seasonedDay, countedDay: countedDay,
+      trust40Day: trust40Day,
       crossedVerb: crossedVerb,
       endTrust: es[es.length - 1].trust,
       endAge: es[es.length - 1].age,
