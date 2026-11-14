@@ -143,7 +143,17 @@ sibling balance panels); all five pass alone. Gate verdict: **GO**.
 
 ## Landing
 
-- (To fill at closeout: rebase/merge, release, lock deletion.)
+- Rebased onto master `fb8b84267` (sim-transplant-round-2115 landed under this
+  run); proof tests re-run on the rebased tip: zero-DMG invariant PASS (7
+  fights, 0 violations), nodloop analyzer LOOP=0 on panel + pilot.
+- ff-only merged; fix commit verified an ancestor of the new HEAD.
+- Worktree released (worktree-release.sh merged), worktree removed, branch
+  `journey-landing-r134` deleted. Main tree clean.
+- Rotation `journey-rotation-a.txt`: read 0, wrote 0→1 at run start (read back).
+  Next leg: establishment.
+- Lock `playtest-loop.lock` (run_id `loop-a-20261114T164500Z`) deleted at
+  closeout after run_id verification.
+- Merged locally, pending ship (no bump/push — ship loop owns that).
 
 ## Metric review
 
