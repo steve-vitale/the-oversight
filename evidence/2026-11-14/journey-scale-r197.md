@@ -327,16 +327,15 @@ re-base on a larger panel is still owed, not this run.
   trust-observer-neutrality — ALL exit 0 standalone: living-garden rc=0,
   occupation-panels 25/25, one-person-army rc=0, trust-observer-neutrality
   6/6). This run changed no `src/js` (scripts + evidence only).
-- Commits on branch `journey-scale`: fae9feb25 (prereg + instruments),
-  f04a8fa6e (caps-render fix + proof), 5bb57af95 (run note + prereg
-  closeout) + this addendum — rebased clean onto eb6360801 (Lane B r200
-  adoption) and then e7c6861bf (Loop B capable-win-path DIAG), both proofs
-  re-run green on the final tip (analyzer 29/29, caps 8/8).
-- Merge/release/rotation: merged `--ff-only` onto e7c6861bf; tree released
-  done-merged, worktree removed, branch deleted; rotation-a 3→0; lock
-  deleted; hbloop killed. Merged locally, pending ship. (This section
-  filled by the addendum commit on the same branch, merged ff-only right
-  after; final tip hash in the memory log.)
+- Commits on branch `journey-scale`: prereg + instruments, caps-render
+  fix + proof, run note + prereg closeout, addendum, addendum correction
+  — rebased clean onto current master at merge time (three rebases as
+  Lane B / lever-loop arms landed under the run), both proofs re-run
+  green on the final tip (analyzer 29/29, caps 8/8). Final tip hash in
+  the memory log.
+- Merge/release/rotation: merged `--ff-only` onto current master; tree
+  released done-merged, worktree removed, branch deleted; rotation-a
+  3→0; lock deleted; hbloop killed. Merged locally, pending ship.
 
 ## Carried (not this run's to build)
 
