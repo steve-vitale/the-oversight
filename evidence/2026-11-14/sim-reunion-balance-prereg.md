@@ -199,3 +199,47 @@ seed per arm.
 - The fix balances the ARENA Reunion only. The wild Reunion
   mirror pack stays as-is (separate surface, separate call
   if Steve wants it touched).
+
+## CORRECTION 1 (2026-11-14, after the sweep, before the panel)
+
+Sweep result: the frozen grid's easiest point is 2/6 wins; NO point lands the
+selection target (4–5/8, i.e. 3–4/6 on valid seeds). The grid does not span
+the bar. The probe (scripts/reunion-ally-probe-20261114.js, seed 86009,
+H=0.5 D=0.6) shows WHY the party loses by ~1.5 rounds at the easiest point:
+the Reunion sits adjacent to the scholar and hits him ~2/3 of rounds
+(~19 net on Your Move at D=0.6; the other ~1/3 is a wasted rally turn),
+the scholar dies at round 11, while the party needs ~12.6 rounds to burn
+656 HP at ~52/round (scholar ~46, the one ally who stays ~4–6 — the
+Reunion's armor 12 eats most of a spear hit — and the second ally flees at
+round 2 at full HP). In winning seeds no ally flees and one ally absorbs
+enough hits to end at 0.22–0.24 HP; in losing seeds both allies end at
+~1.0 HP, untouched, while the scholar dies.
+
+So the grid is extended by four points — H=0.4 and D=0.5, the one step the
+sweep says the answer is beyond: (0.4,0.6), (0.4,0.5), (0.5,0.5), (0.4,0.7),
+same 8 seeds, same fixture, same driver. NOTHING else changes: the GO bar
+(M2 = 3–5 Reunion-wave wins of ≥6 reached, two-sided), the selection rule
+(win share 4–5/8, i.e. 3–4/6 on the 6 valid seeds; tie-break longer median
+rounds, then H ≥ 0.5), the fixture, the panel design, and the "record the
+panel may miss" rule all stand. The correction extends the search space
+only; it does not move the bar. If no extended point lands 3–4/6 either,
+the closest point is picked and the panel may miss, as the prereg says.
+
+## CORRECTION 2 (2026-11-14, after the sweep extension, before the panel)
+
+SELECTION: the sweep's only point in the literal "4–5 of 8" band (scaled to
+the 6 valid seeds: 3–4/6) is (H=0.4, D=0.6) at 3/6. The pick is instead
+(H=0.4, D=0.5) at 5/6. Reason, from the data: the parenthetical intent of
+the selection rule is that the sweep point sits in the UPPER half of the
+panel GO range (3–5 wins) because chain attrition pulls the panel DOWN
+from full-HP entry — panel 3 shows entry HP into wave 3 at 0.80–1.00, i.e.
+up to 20% of the scholar's survival window is already gone before the
+Reunion wave. (0.4,0.6) at 3/6 sits at the BOTTOM of the panel GO range in
+the sweep, so the panel can only fall below it (predicted ~1–2/6, a miss);
+(0.4,0.5) at 5/6 sits at the TOP, so attrition lands the panel inside the
+bar (predicted ~3–4/6). The two wins at (0.4,0.5) with scholar end HP 0.04
+and 0.08 are the ones attrition is most likely to flip, which is exactly
+the predicted pull-down. The pick is (H=0.4, D=0.5). The GO bar itself is
+unchanged: the panel still has to land 3–5 wins of ≥6 reached, or the
+change does not land. If the panel misses, this correction does not rescue
+it — a miss is a miss.
