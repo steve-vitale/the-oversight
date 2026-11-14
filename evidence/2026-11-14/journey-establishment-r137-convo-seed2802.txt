@@ -1,0 +1,40 @@
+
+-- George (gen_gun4fjn) occ=dockworker --
+OPENING: "About the most useful thing you've learned — What's the most useful thing you've learned since we got here?"
+YOU: [ans:q_useful:a_hunger] "How to be hungry and keep going anyway."
+THEM: "The fundamental skill. Everything else is decoration."
+YOU: [goon] "Go on. I'm listening."
+THEM: Their friendliness thins — still there, just held at arm's length.
+YOU: [goon] "Go on. I'm listening."
+THEM: "field medicine. Sounds small. But small useful things stack — and one day you look up and you're the person everyone asks. That's how it happens."
+YOU: [goon] "Go on. I'm listening."
+THEM: "Come see what I found. You won't believe it."
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: On the way, George stops and actually teaches you something — how they read a slope for water, how their grandmother did it. (Knowledge, freely given. The Codex notes it.)
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the most useful thing you've learned!"
+YOU: [goon] "Go on. I'm listening."
+THEM: Something in them stays shut, for now.
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Another time. The village needs me here."
+closing: "Good talk."
+
+-- Godelive (gen_mswc5wf) occ=Social worker --
+OPENING: "You said there was something you needed to say, to someone, and now you can't. Found another way to say it yet?"
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Goldenrod — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: They nod — and keep their distance, for now.
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "a spring that runs clear — trace it with your finger. That's where it is, and it's real."
+YOU: [dlg:react] (listen)
+THEM: "Well." A breath. "That's where things stand."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that personal stuff. Worth considering."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Alright. But I'm not carrying your stuff."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Okay, I'm all ears."
+YOU: [ask:personal] "I'd like to know you. Properly, this time."
+THEM: "You want to know about that? Okay." "My hands know things my brain hasn't caught up to yet. Muscle memory from social worker days. I mean it."
+closing: "Alright. One thing at a time. That's how we get through."

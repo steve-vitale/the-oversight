@@ -1,0 +1,40 @@
+
+-- Riley (gen_ye70nl0) occ=tailor --
+OPENING: "What are you hoping for? Not the big stuff. The small thing."
+YOU: [ans:q_hope:a_deflect] "Hope's a big word for small things."
+THEM: "Then let's call it 'looking forward to.' Same thing, less pressure. I don't know, though."
+YOU: [goon] "And?"
+THEM: "Um — A full night's sleep. Not safety, not answers — just eight hours where nothing needs me. That's my whole theology now."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "This one is Thorn Apple. Look at the leaf, feel the stem, breathe it in. It'll stick."
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Chanterelle — crush the leaf, smell it, taste the stem. That's how you know it."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on what you're hoping for."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Someone should watch your back. Might as well be me."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway — that's my problem, not yours. What did you want?"
+YOU: [ask:goal] "Endgame. What is it?"
+THEM: "You want to know about that? Okay." I want to look it in the eye — whatever it uses for eyes — and get one straight answer.
+closing: "Right then. Back to the business of surviving."
+
+-- Tyler (gen_86kdb9t) occ=night security guard --
+OPENING: "We never finished talking about what's been happening — we left it mid-thought, 4 days back. 'Have you heard what they're calling Lockpick? Riley is pushing 'Big Loud'. Everyone's got a name for it and…'"
+YOU: [dlg:more] "Tell me more."
+THEM: "That's... pretty much all of it, honestly."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Sure — what's on your mind?"
+YOU: [ask:gossip] "What are people saying?"
+THEM: "You want to know about that? Okay." "Fatima walked out of Hardened The Wrong Map. Alive. That's the whole story and it's enough."
+YOU: [agency:ask_expedition] "What did you see out there?"
+THEM: "an old trapline — I'll mark it on your map when we're back. It's real, I've stood there."
+YOU: [agency:ask_field] "What places have you found out there?"
+THEM: "a spring that runs clear — walk it with me sometime and you'll know the ground. It's real."
+YOU: [dlg:react] (listen)
+THEM: "Caleb? A Firefighter, back before. Solid person."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the gossip."
+YOU: [goon] "And?"
+THEM: Something in them stays shut, for now.
+closing: "Good talking. We'll figure it out."
