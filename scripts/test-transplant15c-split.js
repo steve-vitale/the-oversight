@@ -25,12 +25,16 @@
 //      STOP procedure before the pick.
 //   5. No subject cut yet — branch transplant-15c-split-subject does
 //      not exist.
-// STAGE 2 (after the pick attempt / step — added by a later commit):
-//   subject identity, pick tree equality, verdict, evidence records,
-//   standing restored, corpus + driver-log match, culpritbisect-a
-//   116-leg re-run. If the pick stops on the predicted conflict, the
-//   stage-2 legs assert the STOP state instead (no subject, no step,
-//   no corpus, evidence records STOPPED-BY-CONFLICT).
+// STAGE 2 (this commit, after the pick attempt — the pick STOPPED):
+//   The live pick confirmed the pre-check prediction exactly
+//   (modify/delete on scripts/test-fight-brain-knowledge-probe.js,
+//   everything else auto-merged), the cherry-pick was aborted per
+//   the coordinator's tooling-resolution rule, and the scratch
+//   branch was deleted (it pointed at the bare far end — no subject
+//   was cut). Stage-2 legs assert the STOP state: no subject branch,
+//   no corpus, no driver log, evidence records STOPPED-BY-CONFLICT
+//   with the exact conflict list, tree clean, culpritbisect-a
+//   116/116. No survival verdict exists for OVE-52 alone.
 //
 // Usage: node scripts/test-transplant15c-split.js
 'use strict';
@@ -150,10 +154,32 @@ T.section('4. Prereg — prediction, thresholds, and STOP procedure recorded fir
   T.ok('prereg records the subject branch name', pre.indexOf(SUBJECT_BRANCH) !== -1, SUBJECT_BRANCH);
 })();
 
-T.section('5. No subject cut yet');
+T.section('5. STOP state — no subject, no step, no corpus (stage 2)');
 (function () {
-  T.ok('subject branch does not exist yet', branchExists(SUBJECT_BRANCH) === false, 'absent');
-  T.ok('no t15c-split corpus exists yet', fs.existsSync(path.join(REPO, 'evidence', '2026-11-13', 'perseed-culpritbisect-a-t15c-split')) === false, 'absent');
+  T.ok('subject branch does not exist (deleted after the abort)', branchExists(SUBJECT_BRANCH) === false, 'absent');
+  T.ok('no t15c-split corpus exists (no step ran)', fs.existsSync(path.join(REPO, 'evidence', '2026-11-13', 'perseed-culpritbisect-a-t15c-split')) === false, 'absent');
+  T.ok('no t15c-split driver log exists', fs.existsSync(path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-t15c-split-driver.log')) === false, 'absent');
+  const ev = fs.readFileSync(path.join(REPO, 'evidence', '2026-11-14', 'sim-transplant15c-split.md'), 'utf8');
+  T.ok('evidence states STOPPED-BY-CONFLICT', ev.indexOf('Verdict: STOPPED-BY-CONFLICT') !== -1, 'STOPPED-BY-CONFLICT present');
+  T.ok('evidence records the exact conflict list (one file)', ev.indexOf('Exact conflict list') !== -1 && ev.indexOf(CONFLICT_FILE) !== -1 && ev.indexOf('one file only') !== -1, 'conflict list present');
+  T.ok('evidence records the pick was aborted per the rule', ev.indexOf('git cherry-pick --abort') !== -1 && ev.indexOf('no hand-resolution') !== -1, 'abort recorded');
+  T.ok('evidence records the subject branch was deleted', ev.indexOf('was deleted') !== -1 && ev.indexOf('no subject branch') !== -1, 'deletion recorded');
+  T.ok('evidence states there is no CARRIER / NOT-CARRIER read', ev.indexOf('no CARRIER / NOT-CARRIER read') !== -1, 'no-verdict statement present');
+  T.ok('evidence records the safe-commit index clobber + repair', ev.indexOf('Safe-commit index clobber') !== -1 && ev.indexOf('git ls-tree -r') !== -1, 'clobber recorded');
+  const pre = fs.readFileSync(path.join(REPO, 'evidence', '2026-11-14', 'sim-transplant15c-split-prereg.md'), 'utf8');
+  T.ok('prereg prediction matches the observed pick conflict', pre.indexOf('deleted in 203a32775 and modified in 1c1b23482') !== -1 && ev.indexOf('deleted in HEAD and modified in 1c1b23482') !== -1, 'prediction == observation');
+  T.ok('evidence records no narrowed re-run decided by this arm', ev.indexOf('That is a coordinator') !== -1 && ev.indexOf('not this arm') !== -1, 'coordinator-decides recorded');
+})();
+
+T.section('6. Closeout — tree clean, no game code, culpritbisect-a green');
+(function () {
+  T.ok('on-disk standing.js equals HEAD blob', fs.readFileSync(path.join(REPO, 'src', 'js', 'standing.js'), 'utf8') === gitShow('HEAD', 'src/js/standing.js'), 'byte-identical to HEAD');
+  T.ok('no src/js file differs from HEAD', git('status --short -- src/js') === '', git('status --short -- src/js') || '(clean)');
+  T.ok('tracked tree is clean', git('status --porcelain --untracked-files=no') === '', git('status --porcelain --untracked-files=no') || '(clean)');
+  const ev = fs.readFileSync(path.join(REPO, 'evidence', '2026-11-14', 'sim-transplant15c-split.md'), 'utf8');
+  T.ok('evidence records culpritbisect-a 116/116', ev.indexOf('116 passed, 0 failed') !== -1, '116/116 present');
+  T.ok('evidence records telemetry N/A (no corpus)', ev.indexOf('Telemetry deviation check: N/A') !== -1, 'telemetry N/A present');
+  T.ok('evidence carries the Blooded check forward unmeasured', ev.indexOf('Not measured') !== -1 && ev.indexOf('Blooded beat vs end-state') !== -1, 'Blooded carried forward');
 })();
 
 T.done();
