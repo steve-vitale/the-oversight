@@ -18,10 +18,11 @@
 // national 0, table 0, wins 0.
 //
 // WHAT THIS TEST PROVES:
-//   1. Subject chain — HEAD's history 203a32775..HEAD is EXACTLY the
+//   1. Subject chain — the subject's history 203a32775..12fd9d694 is EXACTLY the
 //      two single-parent 15C picks (OVE-49 7183c942e, then OVE-52
 //      12fd9d694), with the right parents and the right js footprint
-//      (OVE-49 test-only, OVE-52 js=4, combined +740/-35 over 6 files).
+//      (OVE-49 test-only, OVE-52 js=4, combined +740/-35 over 6 files),
+//      and the evidence commit sits on top of the subject.
 //   2. Corpus — 8/8 per-seed JSONs parse, seeds match 190391–190398,
 //      STEP is t15c-narrowed, fix swapped in (standingSha f8fda429...,
 //      anchor 12fd9d694d3f, policy a7ff5c516440), 0 instrument errors,
@@ -86,8 +87,8 @@ function classifyTransplant(n) {
 
 T.section('1. Subject chain — exactly the two 15C picks on the far end');
 (function () {
-  const range = git('log --format=%H\\ %P\\ %s ' + FAR + '..HEAD').split('\n').filter(Boolean);
-  T.ok('range far end..HEAD is exactly 2 commits', range.length === 2, range.length + ' commits');
+  const range = git('log --format=%H\\ %P\\ %s ' + FAR + '..' + OVE52).split('\n').filter(Boolean);
+  T.ok('range far end..OVE-52 is exactly 2 commits', range.length === 2, range.length + ' commits');
   const first = range[1].split(' '); // oldest first in git log order is last
   const second = range[0].split(' ');
   T.ok('first pick is OVE-49 7183c942e', first[0] === OVE49, first[0].slice(0, 12));
@@ -96,18 +97,19 @@ T.section('1. Subject chain — exactly the two 15C picks on the far end');
   T.ok('second pick is OVE-52 12fd9d694', second[0] === OVE52, second[0].slice(0, 12));
   T.ok('OVE-52 parent is OVE-49', second[1] === OVE49, second[1].slice(0, 12));
   T.ok('OVE-52 subject names fighterState', range[0].indexOf('OVE-52') !== -1, range[0].slice(0, 100));
-  T.ok('HEAD is the OVE-52 commit', git('rev-parse HEAD') === OVE52, git('rev-parse --short HEAD'));
+  T.ok('subject tip is the OVE-52 commit', git('rev-parse ' + OVE52) === OVE52, git('rev-parse --short ' + OVE52));
+  T.ok('evidence commit sits on top of the subject', git('rev-parse HEAD^1') === OVE52, git('rev-parse --short HEAD') + ' on ' + git('rev-parse --short HEAD^1'));
   const js49 = git('diff --name-only ' + OVE49 + '^1 ' + OVE49 + ' -- src/js');
   T.ok('OVE-49 touches no src/js file (test-only)', js49 === '', js49 || '(none)');
   const files49 = git('diff --name-only ' + OVE49 + '^1 ' + OVE49).split('\n').filter(Boolean);
   T.ok('OVE-49 touches exactly the probe test file', files49.length === 1 && files49[0] === 'scripts/test-fight-brain-knowledge-probe.js', files49.join(', '));
-  const jsFiles = git('diff --name-only ' + FAR + ' HEAD -- src/js').split('\n').filter(Boolean).sort();
+  const jsFiles = git('diff --name-only ' + FAR + ' ' + OVE52 + ' -- src/js').split('\n').filter(Boolean).sort();
   T.ok('family touches exactly the 4 expected src/js files', JSON.stringify(jsFiles) === JSON.stringify(EXPECTED_JS.slice().sort()), jsFiles.join(', '));
-  const numstat = git('diff --numstat ' + FAR + ' HEAD').split('\n').filter(Boolean)
+  const numstat = git('diff --numstat ' + FAR + ' ' + OVE52).split('\n').filter(Boolean)
     .reduce(function (acc, line) { const p = line.split('\t'); return { ins: acc.ins + parseInt(p[0], 10), del: acc.del + parseInt(p[1], 10) }; }, { ins: 0, del: 0 });
   T.ok('family diff is +740/-35 over 6 files', numstat.ins === 740 && numstat.del === 35, '+' + numstat.ins + '/-' + numstat.del);
-  T.ok('family touches no policy file', git('diff --name-only ' + FAR + ' HEAD -- scripts/policies') === '', '(none)');
-  T.ok('family does not touch standing.js', git('diff --name-only ' + FAR + ' HEAD -- src/js/standing.js') === '', '(absent)');
+  T.ok('family touches no policy file', git('diff --name-only ' + FAR + ' ' + OVE52 + ' -- scripts/policies') === '', '(none)');
+  T.ok('family does not touch standing.js', git('diff --name-only ' + FAR + ' ' + OVE52 + ' -- src/js/standing.js') === '', '(absent)');
 })();
 
 T.section('2. Corpus — 8/8 parse, seeds + STEP + fix, driver-log match');
