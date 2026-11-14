@@ -287,10 +287,45 @@ stays owed for the next B run, now on base 62c19318e.
 
 ## Commits (branch sim-proofrefresh-b13, base 102853490 → rebased 62c19318e)
 
-- d65a1bb9c — prereg + proof test (round 13, base 102853490, owed-check
-  3 stale keys)
-- [panel commit, rebased] — fresh real neutral panel (REGENERATED on
+- f8a952e42 (was d65a1bb9c) — prereg + proof test (round 13, base
+  102853490, owed-check 3 stale keys)
+- 515006842 (was 197bc56d5) — fresh real neutral panel (REGENERATED on
   102853490) + proof re-point + evidence (GO 12/12 on the 102853490 tip;
   see closeout for the 62c19318e re-verification)
+- [closeout commit] — closeout record (this section)
 
-## Closeout — (to be filled after the rebase + leg (a) re-verification)
+## Closeout — REBASED, NO-GO ON FINAL TIP (round 14 owed)
+
+- Master moved during the run to 62c19318e (sim-transplant 4/5/6 +
+  sim-retribution-b, evidence + test/driver scripts, exactly ONE
+  manifest file: `src/js/abilityActions.js`). Branch rebased onto the
+  explicit SHA 62c19318e (picks clean after the documented rebase
+  stop-at-pick quirk on pick 2 — worktree clean, pick unapplied,
+  `git rebase --continue` sailed through; final log shows each commit
+  exactly once, tip 515006842).
+- Leg (a) re-verified on the rebased tip: **FAILS, exit 1 — exactly 1
+  stale key, `src/js/abilityActions.js`** (sim-retribution-b game-code
+  change: defer retribution death lines until after the RETRIBUTION
+  summary). No version-stamp-only move this time — a real game-code
+  change, confirmed by hash (tip fabd5737… vs panel b32275f5…).
+- **Verdict on the final tip (62c19318e): NO-GO per the prereg rule
+  (legs judged only on the final tip).** GO 12/12 on the 102853490 tip;
+  NO-GO on 62c19318e by leg (a) alone, on exactly the 1 abilityActions
+  key. The branch as committed still improves master: the retained b12
+  panel is stale on 62c19318e by 4 keys (2 version + conversation.js +
+  abilityActions.js), the b13 panel by 1 (abilityActions.js only).
+- **Coordinator decision needed:** merge this branch as-is (ff-only is
+  clean on 62c19318e; the proof stays stale by the 1 abilityActions key
+  and round 14 is owed immediately on 62c19318e) or hold it for a
+  round-14 regeneration on 62c19318e. This run does NOT regenerate: the
+  brief forbids a second panel / round 14 in one round, and a fresh
+  ~30 min panel starting near 02:35Z would strand across the next Loop B
+  run, the same call rounds 10, 11, and 12 made. Round 14 stays owed
+  for the next B run, now on base 62c19318e.
+- Merge (if the coordinator takes it): `git merge --ff-only
+  sim-proofrefresh-b13` in the main tree (no pipe, strict && chain;
+  ancestry verified with `git merge-base --is-ancestor` after). Then
+  release: `worktree-release.sh sim-proofrefresh-b13 merged`,
+  worktree removed, branch deleted, `worktree-reap.sh`, main tree
+  verified clean. No push, no bump, no live verification — the ship
+  loop owns deploys. "Merged locally, pending ship."
