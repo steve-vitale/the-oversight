@@ -362,9 +362,11 @@ function buildPick1Tree() {
 
   // ---- 7. Base state ----
   // NOTE (stage 2): the subject-branch leg below was 'does NOT exist
-  // yet' at the stage-1 commit and is superseded once the subject is
-  // cut and the live picks run — it asserts the stage-2 state
+  // yet' at the stage-1 commit and is superseded now that the subject
+  // is cut and the live picks ran — it asserts the stage-2 state
   // instead (subject exists with 2 commits, tip tree e78fac42…).
+  // The summary/driver-log legs stay 'does NOT exist' at stage 1
+  // and flip in §8 (step artifacts now exist).
   T.section('7. Base state — arm branch clean, subject not cut yet, sim not run');
   const headBranch = git('rev-parse --abbrev-ref HEAD');
   // worktreeOnly: branch-identity legs are meaningful only in the
@@ -392,11 +394,98 @@ function buildPick1Tree() {
     stepSrc.indexOf('190391,190392,190393,190394,190395,190396,190397,190398') !== -1, 'band literal present');
   let subjectExists = true;
   try { git('rev-parse ' + SUBJECT_BRANCH); } catch (e) { subjectExists = false; }
-  T.ok('subject branch does NOT exist yet (cut after the stage-1 commit)', subjectExists === false, SUBJECT_BRANCH);
+  T.ok('subject branch exists (cut after the stage-1 commit)', subjectExists === true, SUBJECT_BRANCH);
   const t1214Summary = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-summary.json');
-  T.ok('step summary does NOT exist yet (no judged sim has run)', fs.existsSync(t1214Summary) === false, STEP);
+  T.ok('step summary exists (judged sim has run — stage-2 state)', fs.existsSync(t1214Summary) === true, STEP);
   const t1214Driver = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-driver.log');
-  T.ok('step driver log does NOT exist yet (no judged sim has run)', fs.existsSync(t1214Driver) === false, STEP);
+  T.ok('step driver log exists (judged sim has run — stage-2 state)', fs.existsSync(t1214Driver) === true, STEP);
+
+  // ---- 8. Live picks clean + step verdict NOT-CARRIER (stage 2) ----
+  T.section('8. Live picks clean, subject holds both families, step reads NOT-CARRIER');
+  const SUBJECT_TIP = 'c8655548f4be892c7722f2bbb46910c3c7262d5c';
+  const PICK1_COMMIT = 'ec6b03f42';
+  let subjectTip = null;
+  try { subjectTip = git('rev-parse ' + SUBJECT_BRANCH); } catch (e) { subjectTip = null; }
+  T.ok('subject branch tip is c8655548f4be892c7722f2bbb46910c3c7262d5c', subjectTip === SUBJECT_TIP, subjectTip ? subjectTip.slice(0, 12) : '(missing)');
+  const aheadCount = parseInt(git('rev-list --count ' + FAR + '..' + SUBJECT_BRANCH), 10);
+  T.ok('subject branch is 2 commits ahead of the far end (both picks)', aheadCount === 2, 'ahead=' + aheadCount);
+  const pick1Tip = git('rev-parse ' + SUBJECT_BRANCH + '^1');
+  T.ok('first pick commit is ec6b03f42 (family 14)', pick1Tip.startsWith(PICK1_COMMIT), pick1Tip.slice(0, 12));
+  const pick1Tree = git('rev-parse ' + SUBJECT_BRANCH + '^1^{tree}');
+  T.ok('pick-1 tree equals the predicted tree bc52919e…', pick1Tree === TREE_PICK1, pick1Tree.slice(0, 12));
+  const tipTree = git('rev-parse ' + SUBJECT_BRANCH + '^{tree}');
+  T.ok('subject tip tree equals the predicted pick-2 tree e78fac42…', tipTree === TREE_PICK2, tipTree.slice(0, 12));
+  const subjFiles = git('diff --name-only ' + FAR + ' ' + SUBJECT_BRANCH).split('\n').sort();
+  T.ok('subject diff vs far end touches exactly the 2 family files',
+    JSON.stringify(subjFiles) === JSON.stringify(['scripts/test-snippet-stage-direction.js', 'src/js/conversation.js']), subjFiles.join(', '));
+  const subjConvStat = git('diff --numstat ' + FAR + ' ' + SUBJECT_BRANCH + ' -- src/js/conversation.js');
+  T.ok('subject conversation.js vs far end is +27/-0 (12 + 18 - 3)', subjConvStat === '27\t0\tsrc/js/conversation.js', subjConvStat);
+  const subjTestStat = git('diff --numstat ' + FAR + ' ' + SUBJECT_BRANCH + ' -- ' + TEST_FILE);
+  T.ok('subject test file vs far end is +74/-0 (21 + 55 - 2)', subjTestStat === '74\t0\t' + TEST_FILE, subjTestStat);
+  const subjConv = gitShow(SUBJECT_BRANCH, 'src/js/conversation.js');
+  T.ok('subject conversation.js carries the widened guard + assent guard',
+    subjConv.indexOf('Your silence|You say nothing') !== -1 && subjConv.indexOf('had better be worth it') !== -1, 'both guards present');
+  const subjTest = gitShow(SUBJECT_BRANCH, 'scripts/test-snippet-stage-direction.js');
+  T.ok('subject test file carries the OVE-29 assertions',
+    (subjTest.match(/OVE-29/g) || []).length === 4, 'OVE-29 mentions=' + ((subjTest.match(/OVE-29/g) || []).length));
+  // Step artifacts.
+  const summaryPath = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-summary.json');
+  T.ok('step summary exists', fs.existsSync(summaryPath), STEP);
+  const summary = JSON.parse(fs.readFileSync(summaryPath, 'utf8'));
+  T.ok('step summary survived is 4/8', summary.survived === 4, 'survived=' + summary.survived);
+  T.ok('step summary verdict is GOOD', summary.verdict === 'GOOD', summary.verdict);
+  T.ok('step summary rank is REGIONAL_INTACT', summary.rankVerdict === 'REGIONAL_INTACT', summary.rankVerdict);
+  T.ok('step summary median is 150d', summary.wall.medianDays === 150, 'median=' + summary.wall.medianDays);
+  T.ok('step summary wave-5 is 2/8', summary.wall.wave5 === 2, 'wave5=' + summary.wall.wave5);
+  T.ok('step summary instrument errors are 0', summary.instrumentErrors === 0, 'errors=' + summary.instrumentErrors);
+  T.ok('step summary anchor is the subject tip c8655548f4be',
+    summary.perSeed.every(function (s) { return s.anchorCommit === 'c8655548f4be'; }), 'anchors match');
+  const farDays = { '190391': 86, '190392': 144, '190393': 150, '190394': 43, '190395': 150, '190396': 87, '190397': 150, '190398': 150 };
+  T.ok('per-seed days equal the far-end baseline on all 8 seeds',
+    summary.perSeed.every(function (s) { return s.days === farDays[String(s.seed)]; }),
+    summary.perSeed.map(function (s) { return s.seed + ':' + s.days; }).join(', '));
+  T.ok('survived 4 maps to NOT-CARRIER for the pair', classifyTransplant(summary.survived) === 'NOT-CARRIER', classifyTransplant(summary.survived));
+  const corpusDir = path.join(REPO, 'evidence', '2026-11-13', 'perseed-culpritbisect-a-' + STEP);
+  const corpusFiles = fs.existsSync(corpusDir) ? fs.readdirSync(corpusDir).filter(function (f) { return f.endsWith('.json'); }) : [];
+  T.ok('step corpus exists with 8 per-seed JSONs', corpusFiles.length === 8, 'files=' + corpusFiles.length);
+  const driverPath = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-driver.log');
+  const driverLog = fs.existsSync(driverPath) ? fs.readFileSync(driverPath, 'utf8') : '';
+  T.ok('step driver log exists with 8 per-seed lines',
+    (driverLog.match(/"step":"t12-14-combined"/g) || []).length === 8, 'lines=' + ((driverLog.match(/"step":"t12-14-combined"/g) || []).length));
+  T.ok('step driver log records GOOD (survived 4/8)', driverLog.indexOf('GOOD (survived 4/8)') !== -1, 'GOOD present');
+  // Evidence file records the verdict.
+  const ev1214Path = path.join(REPO, 'evidence', '2026-11-14', 'sim-transplant12-14.md');
+  const ev1214 = fs.existsSync(ev1214Path) ? fs.readFileSync(ev1214Path, 'utf8') : '';
+  T.ok('evidence file exists', ev1214.length > 0, ev1214Path);
+  T.ok('evidence file records the verdict as NOT-CARRIER', ev1214.indexOf('VERDICT: NOT-CARRIER') !== -1, 'NOT-CARRIER present');
+  T.ok('evidence file records survived 4/8', ev1214.indexOf('Survived: 4/8') !== -1, '4/8 present');
+  T.ok('evidence file records the subject tip c8655548f', ev1214.indexOf('c8655548f') !== -1, 'subject tip present');
+  T.ok('evidence file records the runtime restart + discard + re-run',
+    ev1214.indexOf('RUNTIME RESTART') !== -1 && ev1214.indexOf('DISCARDED') !== -1, 'restart note present');
+  T.ok('evidence file records the flap window (~08:07-09:00Z)',
+    ev1214.indexOf('HOST WRITE FLAP') !== -1 && ev1214.indexOf('08:07') !== -1, 'flap note present');
+  // Prereg-commit ancestry by MESSAGE, not hash (0608Z lesson: an
+  // adoption rebase rewrites hashes).
+  const logSubjects = git('log --format=%s HEAD');
+  T.ok('prereg commit is an ancestor of HEAD (resolved by message, not hash)',
+    logSubjects.indexOf('sim-transplant12-14-a: prereg + stage-1 proof') !== -1, 'prereg message present');
+  // Base restored: back on the arm branch, clean, standing.js == HEAD.
+  const headBranch2 = git('rev-parse --abbrev-ref HEAD');
+  T.ok('HEAD is back on the arm branch sim-transplant12-14-a after the step (worktree-only)', worktreeOnly(headBranch2 === 'sim-transplant12-14-a'), 'HEAD=' + headBranch2);
+  const dirtyAfter = git('status --porcelain --untracked-files=no');
+  // The step left no residue: the ONLY tracked modification allowed
+  // here is this proof file itself (the stage-2 §8 edit, uncommitted
+  // until this proof passes). Standing/scratch/conflict residue
+  // would show as any other line.
+  const dirtyOther = dirtyAfter.split('\n').filter(function (ln) { return ln && ln.indexOf('scripts/test-transplant12-14.js') === -1; }).join('\n');
+  T.ok('tracked tree is clean after the step apart from this proof file (the stage-2 edit)', dirtyOther === '', dirtyOther.slice(0, 200) || '(only the proof file)');
+  const onDiskStanding2 = sha256(fs.readFileSync(path.join(REPO, 'src', 'js', 'standing.js'), 'utf8'));
+  const headStanding2 = sha256(gitShow('HEAD', 'src/js/standing.js'));
+  T.ok('on-disk standing.js is byte-identical to HEAD (fix swap restored)', onDiskStanding2 === headStanding2, onDiskStanding2.slice(0, 12));
+  let cherryPickHead = true;
+  try { execSync('git rev-parse --verify CHERRY_PICK_HEAD', { cwd: REPO, stdio: 'pipe' }); } catch (e) { cherryPickHead = false; }
+  T.ok('no cherry-pick is in progress', cherryPickHead === false, 'CHERRY_PICK_HEAD absent');
+  T.ok('subject branch is LEFT in place (not merged, not deleted)', subjectTip === SUBJECT_TIP, subjectTip ? subjectTip.slice(0, 12) : '(missing)');
 
   T.done();
 })().catch(function (e) { console.error('HARNESS ERROR', e); process.exit(1); });
