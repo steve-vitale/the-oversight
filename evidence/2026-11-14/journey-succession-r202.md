@@ -305,10 +305,31 @@ on the final tip and adjudicates. This run changed no src/js
 (tooling + evidence only), so no failure can be attributed to it;
 the standing known failures from r197's gate are expected
 (measurement-staleness pair, phone-frame stale receipt, load
-timeouts).
+timeouts). NOTE: proofrefresh-b17 LANDED during this run (master
+e500f1956 → c8211b756 includes 76e741f5f + 39aad0e4c, GO 12/12,
+panel eadc86c3) — the measurement-staleness pair may now be
+resolved on the final tip; adoption's gate will show it.
 
 ## Landing
 
-NOT LANDED this run — adoption owns: gate on final tip, commit
-(if not already committed below), rebase if master moved, --ff-only
-merge, release, rotation-b 7→4 verify, lock delete.
+PARTIAL — committed, not merged. Commit 7bb3a809b on branch
+journey2-succession (93 files: prereg, run note, driver/analyzer/
+runner, panel evidence). Safe-commit index clobber struck (all 93
+files showed staged-deleted); repaired via `git ls-tree -r HEAD |
+git update-index --add --index-info`, verified status empty +
+diff HEAD empty + commit intact.
+Master moved during the run (e500f1956 → c8211b756: proofrefresh-b17
+×2 + sim-standing99107-b ×4). The range holds NO src/ or
+scripts/policies/ change (verified empty diff) — the panel's inputs
+are identical, so the byte-identical proof carries by determinism
+(r197 second-rebase precedent); adoption rebases cleanly, re-runs
+the gate on the final tip, then --ff-only merges, releases the
+worktree, writes rotation-b 7→4 (VERIFY by re-read), and deletes
+the lock. Rotation-b is LEFT AT 7 for adoption (this run did not
+merge, so it does not advance the rotation). The lock is DELETED at
+closeout per the body rule; the hbloop was killed at closeout so the
+registry heartbeat goes stale and no later run mistakes this run for
+alive. Adoption must heartbeat FIRST before any work in the tree
+(long-idle-tree rule) and should release promptly — the
+journey2-succession slug/branch is still held by this run until
+release, so a fresh Lane B run before adoption would collide on it.
