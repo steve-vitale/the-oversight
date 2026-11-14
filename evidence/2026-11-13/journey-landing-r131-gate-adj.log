@@ -1,0 +1,42 @@
+===== scripts/godpath/test-living-garden-deed-attainment.js =====
+===== CLOSEOUT ADJUDICATION (2026-11-14T06:20-06:36Z, clear window after flap 05:17-~06:12Z) =====
+Gate re-run in worktree: 332 passed, 8 failed in 850s. Each failure re-run standalone
+below (node <test>, worktree journey-landing-r131). Verdict: GO — 0 attributable.
+
+--- proof test (not a gate failure; re-verified post-rebase-readiness) ---
+scripts/test-journey-landing-r131-heed-engage.js: exit 0, PASS 22/22 heed-engage checks.
+
+--- load timeouts (check.js 120s spawn cap) ---
+scripts/godpath/test-living-garden-deed-attainment.js: gate 120.1s timeout.
+  Standalone 300s budget: killed at 300s (exit 124), 13/16 seeds done, steady progress.
+  Standalone 600s budget: exit 0, full 16-seed panel complete (~224s).
+  Verdict: LOAD ARTIFACT, non-regression (standing load-artifact set).
+scripts/godpath/test-one-person-army-deed-attainment.js: gate 120.0s timeout.
+  Standalone: exit 0. Verdict: LOAD ARTIFACT, non-regression (standing load-artifact set).
+
+--- pre-existing staleness trio (standing set; proof refresh round 12 owed) ---
+scripts/godpath/test-measurement-proof-update.js: gate "Proof source inputs are not current".
+  Standalone: exit 1, same assertion. Manifest-vs-panel diff (retained b13 panel):
+  exactly 2 files differ — src/js/abilityActions.js (retribution fix, landed before
+  r131) and src/js/conversation.js (this run's HEED fix). The test fails on the
+  pristine base via abilityActions.js alone, so the failure is PRE-EXISTING, not
+  attributable to r131. Verdict: NOT ATTRIBUTABLE.
+scripts/godpath/test-measurement-workflow.js: gate "retained neutrality proof covers
+  the current Game/controller/harness inputs" (8 passed, 1 failed).
+  Standalone: exit 1, same assertion. Verdict: NOT ATTRIBUTABLE (same shape as
+  r130's master-verified failure).
+scripts/godpath/test-phone-frame-proof.js: gate 3 passed, 3 failed (same 3 assertions).
+  Standalone: exit 1, same 3 assertions. Verdict: NOT ATTRIBUTABLE (stale phone
+  receipt; same shape as r130's master-verified failure).
+
+--- flap artifacts (EPERM / zeroed ONTOLOGY.md during the 05:17-~06:12Z window) ---
+scripts/godpath/test-telemetry-check-recorder.js: gate EPERM write.
+  Standalone (clear window): exit 0, 8 passed, 0 failed. Verdict: FLAP ARTIFACT.
+scripts/test-sw-audio-cache-20261012.js: gate EPERM copyfile.
+  Standalone: exit 0, 7/7 checks passed. Verdict: FLAP ARTIFACT.
+scripts/test-foodpower-20261014.js: gate ontology step (worktree ONTOLOGY.md truncated
+  to 0 bytes at 05:18:31Z by the flap). Worktree ONTOLOGY.md restored from HEAD
+  (hash-object == HEAD blob, 353061 bytes) before the standalone run.
+  Standalone: exit 0, 30 passed, 0 failed. Verdict: FLAP ARTIFACT.
+
+FINAL: gate 332/8 adjudicated — 0 attributable failures. Verdict GO.

@@ -6845,6 +6845,14 @@
           c.thread = akey; c.depth = 1;
           this.resolveConsequence(vid, { trust: 1, temper: 'kind', name: 'alive:thread' });
           const beat = (typeof this.convoThreadBeat === 'function') ? this.convoThreadBeat(vid) : null;
+          // HEED-ENGAGE (journey-landing r131 2026-11-13): resuming the
+          // 'want' thread speaks the want's engageBeat — the player picked
+          // up the warning thread by name ("We never finished — that
+          // warning.") and heard the warning. Engage the want (same
+          // transition dlg:more makes on the want thread); a null beat
+          // falls through to the generic resume line and never engages.
+          // Other threads never touch the want.
+          if (akey === 'want' && beat && typeof this.convoWantEngage === 'function') this.convoWantEngage(vid, 'engage');
           // SPENT (journey-succession 2026-10-12): resumed once — the
           // thread is live now; the subject-change replant must not re-offer
           // the identical "we never finished" line this sitting.
@@ -6990,6 +6998,16 @@
               // and the t==='want' thread continuation, which already routes
               // to engageBeat.
               wline = c.want.def.engageBeat.call(this, vid);
+              // HEED-ENGAGE (journey-landing r131 2026-11-13): re-asking
+              // ENGAGES the want — the player asked for the want's content
+              // by name and heard it. The old code spoke engageBeat but left
+              // the want at stage 1, so the menu kept offering dlg:details
+              // as if the warning had never been told and the sitting could
+              // only end 'unresolved' (1150 d6: warning delivered twice,
+              // want stuck stage 1, 21 turns). Same transition dlg:details
+              // performs; a null beat (all variants ledger-blocked) never
+              // engages.
+              if (wline && typeof this.convoWantEngage === 'function') this.convoWantEngage(vid, 'engage');
             } else {
               const opener = this.convoWantOpener ? this.convoWantOpener(vid, c.want) : null;
               wline = opener && opener.line;
