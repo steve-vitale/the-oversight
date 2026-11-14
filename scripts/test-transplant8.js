@@ -312,5 +312,50 @@ function mergeTreeConflicts() {
   T.ok('prereg names the STEP id t8-713eb7545', prereg.indexOf('t8-713eb7545') !== -1, 'STEP id present');
   T.ok('prereg names the subject branch transplant-8-subject', prereg.indexOf('transplant-8-subject') !== -1, 'branch name present');
 
+  // ---- 7. Live conflict record ----
+  T.section('7. Live conflict record — two UU paths, one clean add, no subject commit');
+  let subject = null;
+  try { subject = git('rev-parse ' + SUBJECT_BRANCH); } catch (e) { subject = null; }
+  T.ok('subject branch exists', subject !== null && subject.length === 40, subject ? subject.slice(0, 12) : '(missing)');
+  if (subject) {
+    T.ok('subject branch points at the far end (no subject commit)', subject === FAR_FULL, subject.slice(0, 12));
+  }
+  const evPath = path.join(REPO, 'evidence', '2026-11-13', 'sim-transplant8.md');
+  const ev = fs.existsSync(evPath) ? fs.readFileSync(evPath, 'utf8') : '';
+  T.ok('evidence file exists', ev !== '', evPath);
+  T.ok('evidence file records the verdict as UNMEASURED', ev.indexOf('UNMEASURED') !== -1, 'UNMEASURED present');
+  T.ok('evidence file records FOUR unmerged paths', ev.indexOf('FOUR unmerged paths') !== -1, 'four paths named');
+  T.ok('evidence file records the UU on conversation.js', ev.indexOf('UU `src/js/conversation.js`') !== -1, 'UU conversation.js present');
+  T.ok('evidence file records the UU on convo-dialogue.js', ev.indexOf('UU `src/js/convo-dialogue.js`') !== -1, 'UU convo-dialogue.js present');
+  T.ok('evidence file records the clean add of the test file', ev.indexOf('A `scripts/test-live-thread-engage-dry-20261108.js`') !== -1, 'clean add present');
+  T.ok('evidence file records the conversation.js marker lines (7239, 7249, 7258)',
+    ev.indexOf('7239') !== -1 && ev.indexOf('7249') !== -1 && ev.indexOf('7258') !== -1, 'marker lines present');
+  T.ok('evidence file records the convo-dialogue.js marker lines (482, 556, 590)',
+    ev.indexOf('482') !== -1 && ev.indexOf('556') !== -1 && ev.indexOf('590') !== -1, 'marker lines present');
+  T.ok('evidence file records the second hunk marker lines (486, 558, 592)',
+    ev.indexOf('486') !== -1 && ev.indexOf('558') !== -1 && ev.indexOf('592') !== -1, 'marker lines present');
+  T.ok('evidence file records the third hunk marker lines (509, 582, 617)',
+    ev.indexOf('509') !== -1 && ev.indexOf('582') !== -1 && ev.indexOf('617') !== -1, 'marker lines present');
+  T.ok('evidence file records that there is NO DU', ev.indexOf('No DU') !== -1, 'no DU recorded');
+  T.ok('evidence file records the abort (refresh, abort_rc=0, tree verified clean)',
+    ev.indexOf('update-index --refresh') !== -1 && ev.indexOf('cherry-pick') !== -1 && ev.indexOf('abort') !== -1 && ev.indexOf('verified clean') !== -1, 'abort recorded');
+  T.ok('evidence file proposes the narrowed 8b route as a coordinator decision, not this arm\'s call',
+    ev.indexOf('narrowed 8b') !== -1 && ev.indexOf('coordinator decision') !== -1, '8b note present');
+  T.ok('evidence file records that the conflicts are NOT tooling-only',
+    ev.indexOf('NOT tooling-only') !== -1, 'tooling-only analysis present');
+  T.ok('evidence file names the same-lines-rewritten wall', ev.indexOf('same-lines-rewritten wall') !== -1, 'wall named');
+  T.ok('evidence file records the subject branch hash (far end, left in place)',
+    ev.indexOf(FAR_FULL) !== -1, 'subject hash present');
+
+  // ---- 8. No corpus ----
+  T.section('8. No corpus — no judged sim ran');
+  const sumPath = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-summary.json');
+  const logPath = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-driver.log');
+  const corpusDir = path.join(REPO, 'evidence', '2026-11-13', 'perseed-culpritbisect-a-' + STEP);
+  T.ok('no step summary exists for t8-713eb7545', !fs.existsSync(sumPath), 'absent');
+  T.ok('no driver log exists for t8-713eb7545', !fs.existsSync(logPath), 'absent');
+  T.ok('no per-seed corpus exists for t8-713eb7545', !fs.existsSync(corpusDir), 'absent');
+  T.ok('evidence file records that no telemetry check ran (no corpus)', ev.indexOf('step corpus exists') !== -1 && ev.indexOf('did not run') !== -1 && ev.indexOf('NOT rolled') !== -1, 'telemetry note present');
+
   T.done();
 })().catch(function (e) { console.error('HARNESS ERROR', e); process.exit(1); });
