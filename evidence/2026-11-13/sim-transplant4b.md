@@ -229,24 +229,168 @@ measurement-only commit on its scratch branch).
 
 ## Results (filled after the cherry-pick + sim)
 
-**VERDICT: [TBD — stage 2]**
+**VERDICT: NOT-CARRIER (survived 3/8).**
 
-[Stage 2 fills: subject branch + hash, live pick record, resolutions
-applied, byte-identical diff verification, step summary numbers,
-wall numbers, sense-testing, metric review, telemetry refusal note.]
+- Subject branch: `transplant-4b-subject` LEFT at
+  `c054bef81b808c5ecfae8d0c31c96c1bfefb74fa`, parent the far end
+  `203a32775`. Never committed to the arm branch.
+- Live pick (`git cherry-pick -m 1 c0a85b17e`, exit 1) reproduced the
+  merge-tree pre-check EXACTLY — same three files, same hunks, 3
+  markers each (live lines: balance-proof.json 3–9, validate.js
+  91–103, green-list.txt 916–921). 16 of 19 family files staged
+  cleanly, including all three src/js files (bond-initiation.js M,
+  godpath.js M, person-trust.js A). No src/js conflict, no DU.
+  Resolutions applied per the narrowed definition: balance-proof.json
+  OURS, validate.js THEIRS, green-list.txt UNION (all three lines:
+  pellet-boost, pellet-q4, person-trust). Zero markers left; the pick
+  continued cleanly (`GIT_EDITOR=true git cherry-pick --continue`).
+- Byte-identical verification (recorded, proof §7): the measured
+  family diff (src/js + policies) is CONTENT-identical between
+  subject-vs-far-end and family-vs-first-parent — only blob hashes and
+  hunk line numbers differ (the far-end godpath.js base sits 1 line
+  off the first-parent base). balance-proof.json subject sha ==
+  far-end sha (`01531bce…`); validate.js subject sha == merge sha
+  (`bf172886…`); green-list subject == far-end + exactly the
+  person-trust line. Subject godpath.js: `outmatched_kill` ×3
+  (including the `Game.tele` emission at line 288), `harvest_fed`
+  ×0 — confirming the prereg's nuance that harvest_fed rides in the
+  first parent, outside the family diff. No conflict markers anywhere
+  in the subject tree.
+- Step `t4b-c0a85b17e` (driver + analyzer, 10m41s): **GOOD
+  (survived 3/8, rank REGIONAL_INTACT, median 132d, errors 0)**.
+  Standing fix swapped in (`f8fda4295a99`), native restored
+  (`75762cb2259d`, sha-verified by the step script, STEP-EXIT 0),
+  own policy sha `a7ff5c516440` (far-end competent.js). Per-seed days:
+  190391: 132d lost, 190392: 120d lost, 190393: 130d lost, 190394:
+  102d lost, 190395: 150d survived, 190396: 150d survived, 190397:
+  150d survived, 190398: 93d lost. Survivors: 190395, 190396, 190397.
+- Secondaries (diagnostic only): wave-5 5/8 (190391, 190392, 190393,
+  190395, 190396) — UP from the far end's 2/8; wave-4 8/8; regional
+  8/8; national 0; table 0; wins 0. Deaths 708: villager combat 271,
+  expedition 179, combat 139, the wild 80, monster 18, arena 6,
+  contest 3, stranger 2, ambush 2, wound 2, singles (The Redactor,
+  The Eater, Gavel, The Ugly Thing, lockjaw, thirst). Standing
+  199–470 (highest 190391 at 470, which still lost its village at
+  132d); blooded 3/8; tribute ready 1/8 (190396: veterans 2/2,
+  ready4 5, ready5 3 — the only seed with a live tribute road).
+
+## What this means for the H1 transplant program
+
+Narrowed family 4b does NOT carry the collapse: the far end stays
+GOOD with the whole family applied (3/8 vs 4/8 — within one step of
+the far end, and two steps clear of the merge's 1/8). The
+person-trust module plus the brawler deed, transplanted together,
+do not collapse survival. The collapse carrier is still
+unidentified; 4b joins 2b (AMBIGUOUS 2/8 twice) on the
+measured-not-carrier list, and the program moves to narrowed 5b,
+then family 7.
+
+The wave-5 read is the interesting wrinkle: unlocks ROSE 2/8 → 5/8
+while survival dipped 4/8 → 3/8. Villages reach further into the
+late game and die fighting there — the lost villages still had food
+in the pantry at the end (190391: 17,225 kcal at 132d; 190393:
+12,260 kcal at 130d), and 589/708 deaths (83%) are combat or
+expedition. The family makes villages bolder or better at unlocking
+without making them live longer; that is a diagnostic observation,
+not a lever — no balance verdict is drawn from a measurement arm.
+
+## Sense-testing (SENSE-TESTING LAW)
+
+Read from the per-seed corpora
+(`evidence/2026-11-13/perseed-culpritbisect-a-t4b-c0a85b17e/`,
+seeds 190391 + 190396 sampled; vetSays 25–64 per seed, sayCount up
+to 17,252 lines).
+
+- Narration is coherent, named, and consequential: veteran kills are
+  called out on camera by name ("Reagan just put down Chorus
+  Line... on CAMERA. That's a veteran kill, folks. REMEMBER the
+  name."), the Blooded milestone is voiced with its mechanical
+  meaning, and monster introductions carry personality ("The
+  producers name it: the Nielsen. Ratings embodied. It fights
+  boring — and the crowd adores it for that."). Door-defense reports
+  repeat a template ("Niamh, Colleen, Reagan, Ayan and Fulvio met
+  them at the door — 5 put down... hurt") but report real fights
+  with real wounds, not filler.
+- The wave-kill shape is sensible and shows the wave-4 wall plainly:
+  wave-1 41–47 kills, wave-2 31–35, wave-3 10–11, wave-4 3, wave-5
+  0–1 — even the surviving villages only ever land 3 wave-4 kills.
+- Two diagnostic caveats, not verdicts: (1) `partyMembers` is EMPTY
+  at mid and final daily on both sampled seeds — the scholar's party
+  never forms in these sims, despite the transplanted module
+  unblocking the bonds drive's trustedAnyone gate; the competent
+  policy may simply never pursue bonds, so this says nothing about
+  the module itself. (2) The recorder corpus carries NO trust/bond
+  telemetry rows, so bond formation under the transplanted
+  person-trust module is not visible in this measurement at all —
+  the survival verdict stands (it rests on survived/8), but the
+  mechanism question (did the module change bonds?) stays open.
+  Logged as an open item in sim-findings.md.
 
 ## Metric review (§14)
 
-[Stage 2.]
+- The primary metric (survived/8) was judged exactly as
+  pre-registered: 3/8 → NOT-CARRIER. No re-score, no threshold
+  change. The AMBIGUOUS re-run rule was not exercised (3/8 is
+  decisive under the thresholds).
+- One definition note, not a metric failure: the analyzer's median
+  (132d) differs by 1d from a plain middle-two average of the
+  per-seed days (sorted 93, 102, 120, 130, 132, 150, 150, 150 →
+  (130+132)/2 = 131). The analyzer's figure is reported as-is; the
+  gap is a median-definition artifact. No revision proposed.
+- Wave-5 (a secondary) moved opposite to survival (up 2/8 → 5/8
+  while survival dipped 4/8 → 3/8). Secondaries are diagnostic only;
+  no threshold change proposed. The 2/8 re-run note from the 2215Z
+  metric review stands (a re-run on a deterministic driver is a
+  stability check, not fresh evidence) — not exercised here.
+- Telemetry: deviation check REFUSED — recorder-corpus class
+  ("refusing recorder-corpus input: all 8 --current rows carry
+  top-level anchorCommit, so they are sweep recorder rows, not
+  runs"). Baseline NOT rolled, exactly as the prereg requires.
 
 ## Wall numbers
 
-[Stage 2. This run's judged corpus: TBD. Reference: far end
-203a32775 4/8 (median 150d, wave-5 2/8), merge e4dbe581b 1/8, on the
-same seeds 190391–190398, 150d, competent verbatim own-policy, fix
-swapped in. Bisect s05 (this merge, cumulative) 1/8, median 125d,
-wave-5 0/8.]
+This run's judged corpus (narrowed family 4b, subject
+c054bef81, STEP t4b-c0a85b17e): survived 3/8, wave-5 5/8, wave-4
+8/8, regional 8/8, national 0, table 0, wins 0, median 132d,
+deaths 708, standing 199–470, blooded 3/8, tribute-ready 1/8.
+Reference: far end 203a32775 4/8 (median 150d, wave-5 2/8), merge
+e4dbe581b 1/8, on the same seeds 190391–190398, 150d, competent
+verbatim own-policy, fix swapped in. Bisect s05 (this merge,
+cumulative) 1/8, median 125d, wave-5 0/8.
 
 ## Proof results
 
-[Stage 2.]
+- `node scripts/test-transplant4b.js`: **129 passed, 0 failed**
+  (90/90 at stage 1; +39 subject + sim legs at stage 2. Pre-commit
+  run read 128/1 with the single failure being the clean-tree leg
+  tripping on the uncommitted stage-2 edits themselves — the same
+  pre-commit artifact the family-4 arm recorded; it passes on the
+  committed tree, verified by the post-commit re-run.)
+- `node scripts/test-culpritbisect-a.js`: **116 passed, 0 failed**
+  (reused bisect tooling, re-run on this branch; writes nothing).
+- Step mechanics: the step script ran from a /tmp copy
+  (`/tmp/culpritbisect-step-4b.sh`, restored from master — the
+  script is absent at the far-end-era subject checkout, and the
+  script's own header prescribes the /tmp-copy route so the detached
+  checkout cannot unlink the running script). Step runtime 10m41s.
+- Safe-commit index clobber struck the stage-1 commit (ad9bf7055):
+  the two committed files showed staged-as-deleted after a correct
+  commit; repaired with the documented `git ls-tree -r HEAD |
+  git update-index --add --index-info` pipe and verified (status
+  empty, diff HEAD empty, hash-object matches ls-tree for both
+  files). No clobber on the stage-2 commit.
+- Heartbeat: one `worktree-heartbeat.sh` attempt timed out at 50s
+  (exit 124, slow restat — same hang the family-4 arm saw); the
+  registry heartbeat is stale while the tree is LIVE and worked in,
+  and the coordinator owns its release; recorded so a stale
+  heartbeat is not misread as a dead run. No flap EPERM was observed
+  on this arm's git or file writes (all commits/writes succeeded).
+- No telemetry deviation check beyond the recorded refusal:
+  recorder-corpus class — baseline NOT rolled.
+- Closeout: arm branch `sim-transplant4b-a` tip ad9bf7055 (stage 1)
+  + the stage-2 commit below (this file's tip-hash line itself is
+  record-only); subject branch `transplant-4b-subject` LEFT at
+  `c054bef81b808c5ecfae8d0c31c96c1bfefb74fa` (the transplant commit,
+  kept for reproducibility); worktree verified clean at closeout
+  (tracked tree empty, standing.js == HEAD, no swap residue — the
+  swap ran only inside the step and was restored by it).
