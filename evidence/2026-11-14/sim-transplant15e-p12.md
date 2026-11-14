@@ -285,6 +285,27 @@ instrument resume openers directly.
   repaired the same way (with `-r` for the corpus directory),
   same verification, all 12 hashes matching HEAD blobs. No work
   lost either time.
+- STEP-DETACHED-CHECKOUT DOCS TRANSIENT (not a driver side-effect):
+  during STEP t15e-p12 the worktree's HEAD was detached at the
+  subject tip 312647db0 (18:28–18:48Z), so the worktree held the
+  subject's far-end-era versions of docs/DISEASES.md,
+  docs/INTAKE-TELEMETRY.md, docs/ONTOLOGY.md, docs/ROADMAP.md,
+  docs/VILLAGER-BRAIN.md — exactly the five files that differ
+  between the subject and the arm branch (166 insertions / 51
+  deletions) — and .proofrefresh-b2-panel.log was absent (it does
+  not exist at the subject). Any status/diff taken against the arm
+  branch during that window shows those five docs as modified.
+  The driver never writes to docs/ (the step script touches only
+  standing.js, the four tooling scratch files, and the evidence
+  corpus). Checking the arm branch back out at step end
+  (18:48:07Z) restored all six files byte-identical to HEAD
+  (hash-verified per file; `git status --porcelain` count 0).
+  The log file is a TRACKED file at HEAD (blob 03e94a14…, from the
+  proofrefresh-b2 arm) — it must not be deleted or committed
+  separately; it is already part of HEAD. The same transient hit
+  the p1 arm's tree during its STEP. No restore was needed here:
+  the checkout-back is the restore, and it is verified, not
+  assumed.
 - No runtime restart struck this arm. No safe-commit refusal.
 - Sibling arms ran concurrently in their own trees (sim-transplant15e-p1-a
   step t15e-p1, cheaptend-b driver) — not touched: no sibling tree,
