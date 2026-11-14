@@ -5884,6 +5884,9 @@
       c._interpThanks = false;
       c.traderMentioned = false; c.pendingTrade = null;
       c.reactiveQ = null; c.windingDown = false; c.winddownQueued = false; c.winddownSpurns = 0; c.pastDeflected = false;
+      // NOD-LOOP (journey-landing r132 2026-11-14): per-conversation repeat
+      // tracking for nv: react gestures — reset here like windingDown.
+      c.nvLastGesture = null; c.nvSameStreak = 0; c.nvRepeatThin = false;
       // MOOD (convo-mood.js): every conversation starts at a temperature
       // derived from the relationship as it stands and who they are right
       // now — never stored, re-derived fresh each time (Steve 2026-10-06).
@@ -8885,6 +8888,22 @@
         c.exchanges++;
         return { line: wline, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
+      // NOD-LOOP (journey-landing r132 2026-11-14): a repeated identical react
+      // gesture (nod/smile/pointself) is a bare acknowledgment with no
+      // progression — 4-5x in a row is a filler loop (canon: nonverbal =
+      // "gesture choices with varying outcomes"; r197 Mariko 4x nv:nod).
+      // nv:listen is excluded: it progresses (language exposure, caught
+      // words, speak_back unlock). After the 2nd consecutive identical react
+      // gesture, arm the thin-out: the budget branch below queues the
+      // winddown beat, so the sitting thins on the next gesture and ends
+      // naturally after it (r19 contract). A player who varies gestures
+      // never repeats and is unaffected.
+      const _rk = choiceId.slice(3);
+      if (_rk === 'nod' || _rk === 'smile' || _rk === 'pointself') {
+        if (_rk === c.nvLastGesture) c.nvSameStreak = (c.nvSameStreak || 1) + 1;
+        else { c.nvLastGesture = _rk; c.nvSameStreak = 1; }
+        if (c.nvSameStreak >= 2) c.nvRepeatThin = true;
+      } else { c.nvLastGesture = null; c.nvSameStreak = 0; }
       const kind = choiceId.slice(3);
       const line = this.nvRespond(vid, kind);
       c.transcript.push({ who: 'you', text: '(gesture)' });
@@ -8894,7 +8913,10 @@
       // Wind-down, not a chop: the budget landing gets a gesture beat first,
       // same as the verbal path. ONE-BEAT TURNS (Steve 2026-10-05): queued —
       // the gestural continuer reveals it.
-      if (!c.pendingQ && c.exchanges >= c.budget) {
+      // NOD-LOOP (journey-landing r132): nvRepeatThin (2nd consecutive
+      // identical react gesture) queues the winddown exactly like the
+      // budget landing — same pool, same heldBeats path, same r19 delivery.
+      if (!c.pendingQ && (c.exchanges >= c.budget || c.nvRepeatThin)) {
         if (!c.windingDown && !c.winddownQueued) {
           c.winddownQueued = true;
           const wd = this.convoPickCycle(vid, 'nvwinddown', [
