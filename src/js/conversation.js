@@ -7031,17 +7031,45 @@
                   this.convoWouldBlock(vid, wline)) {
                 const fav = (c.want && c.want.favor) ||
                   (typeof this.convoGetFavor === 'function' ? this.convoGetFavor(vid) : null);
-                let alt = null;
-                try { if (fav && typeof this.convoFavorFollowup === 'function') alt = this.convoFavorFollowup(vid, fav); } catch (e) { alt = null; }
-                if (alt && !this.convoWouldBlock(vid, alt)) wline = alt;
-                else if (fav && fav.whyLine && !this.convoWouldBlock(vid, fav.whyLine)) wline = fav.whyLine;
-                // FINAL RUNG (journey-succession r146): opener, followup
-                // and why are all ledger-blocked — the ask would dry and
-                // the player would never hear it. Name the live need
-                // fresh instead of losing the ask.
-                else if (fav && typeof this.convoFavorNeedLine === 'function') {
-                  const needLine = this.convoFavorNeedLine(vid, fav, false);
-                  if (needLine && !this.convoWouldBlock(vid, needLine)) wline = needLine;
+                // FRESH-FAVOR REORDER (journey-deepening r191 2026-11-14):
+                // a stage-0 favor built in this sitting was never spoken —
+                // a re-ask phrasing ("I'm still asking") would fabricate
+                // a prior ask (H1, probe test-journey-deepening-r191-
+                // stage0-h1). For a fresh favor the need speaks fresh
+                // (whyLine, then needLine) BEFORE the followup rung, which
+                // presupposes a prior ask. Seeded and inherited favors keep
+                // the old order: their ask is established, so the followup
+                // is honest there. Fresh = built today by this turn's
+                // opener (not fromSeed); a seeded favor predates the
+                // sitting, an inherited one predates the bearer. The
+                // followup stays as the fresh favor's last rung, so the
+                // ask still speaks when the fresh-need lines are blocked
+                // too (r53 invariant holds).
+                const today = (this.state.scholar || {}).day || 1;
+                const freshFavor = !!(fav && !(c.want && c.want.fromSeed) && fav.askedDay === today);
+                if (freshFavor) {
+                  if (fav && fav.whyLine && !this.convoWouldBlock(vid, fav.whyLine)) wline = fav.whyLine;
+                  else if (fav && typeof this.convoFavorNeedLine === 'function') {
+                    const needLine = this.convoFavorNeedLine(vid, fav, false);
+                    if (needLine && !this.convoWouldBlock(vid, needLine)) wline = needLine;
+                  } else {
+                    let alt = null;
+                    try { if (fav && typeof this.convoFavorFollowup === 'function') alt = this.convoFavorFollowup(vid, fav); } catch (e) { alt = null; }
+                    if (alt && !this.convoWouldBlock(vid, alt)) wline = alt;
+                  }
+                } else {
+                  let alt = null;
+                  try { if (fav && typeof this.convoFavorFollowup === 'function') alt = this.convoFavorFollowup(vid, fav); } catch (e) { alt = null; }
+                  if (alt && !this.convoWouldBlock(vid, alt)) wline = alt;
+                  else if (fav && fav.whyLine && !this.convoWouldBlock(vid, fav.whyLine)) wline = fav.whyLine;
+                  // FINAL RUNG (journey-succession r146): opener, followup
+                  // and why are all ledger-blocked — the ask would dry and
+                  // the player would never hear it. Name the live need
+                  // fresh instead of losing the ask.
+                  else if (fav && typeof this.convoFavorNeedLine === 'function') {
+                    const needLine = this.convoFavorNeedLine(vid, fav, false);
+                    if (needLine && !this.convoWouldBlock(vid, needLine)) wline = needLine;
+                  }
                 }
               }
             }
