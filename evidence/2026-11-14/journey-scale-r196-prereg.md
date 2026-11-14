@@ -189,5 +189,49 @@ confirmed before the panel runs. No game fixture seed is needed this run
 
 ## CLOSEOUT — run 2026-11-14T0258Z (this run)
 
-[TO FILL at closeout: panel table, Q1–Q5 verdicts, analyzer fixes if any,
-telemetry, metric review, verdicts, gate/landing.]
+**Panel (seeds 135201–135204, DAYCAP=140):** 135201 over d82; 135202 over
+d97; 135203 alive d141 (4/4, lesser d34, military_tribute delivered d140
+1/11 attempts); 135204 alive d140 (4/4, lesser d107, 3 active subs, 0
+seasoned). Lived-days 460 vs r195 band 392 (+17.3%, HOLD). Lesser 4/4.
+Books close, unattributed 0, teleOnly 0. Wave-5 fights 0 on all seeds.
+
+**Q1 — NO-GO on the wall, blocker named per seed (informative):** national
+0/4. 135201/135202: COLLAPSE (over d82/d97). 135203: LEAD 0/3 (1 active,
+trust 26). 135204: LEAD 0/3 (3 active, 0 seasoned — trust decay: oldest
+link 54→35 after a succession crisis; one link trust 7; third formed
+d125). Wall stands on a fresh band: survived 2/4, national/table/wins
+0/4. Deaths combat-driven (39/62 "the wild"), not food-driven.
+
+**Q2 — all GO/HOLD (exit 0):** raise 6 talks (5 answered, 1
+not-offered-unspoken correct hold, 0 defects); vetbar 0 disagreements;
+trap SILENT (0 mime sittings — no regression check this band); betrayal
+HOLD (3 turn-0 offers, all labeled); lived-days HOLD; lesser 4/4.
+
+**Q3 — RECORDED:** daily-play mimes 21, daily accepts proven 0; Herve
+(French-only, trust 92) nod loop in the driver sitting. Lane decision
+still owed.
+
+**Q4 — PASS:** all d90/d120 transcripts + all 6 raise talks read in full.
+Senseless 0. Strongest: Wolfgang d125 ("Did you leave someone behind?
+... 'Me too.'"). Observations: Herve 5× nod loop; ask_favor stage 2
+never surfaces the favor (Morris d90, Wolfgang d120 — 2/2); Gisele heed
+line twice; formulaic raise closers. New surfaces (r130 injured
+question, r195-social favor spend-out) not exercised in this band.
+
+**Q5 — census in the run note** (`evidence/2026-11-14/journey-scale-r196.md`).
+
+**The blank filled:** driver R195 SUMMARY label fixed at pilot (commit
+8c7b802f1); ladder-line caps display observed (all three read delivered
+after one delivery — follow-up, not built). No src/js change; the nod
+loop, ask_favor pattern, and formulaic closers are carried observations.
+
+**Telemetry:** QUIET (0 LOUD lines) — fightsTotal -51.8%, w4 -46.4%,
+maxGameDay -28.8% vs baseline, all under the 60% bar. Baseline NOT
+rolled.
+
+**Verdicts:** reachable YES, fun YES, winnable NO (this leg).
+
+**Gate / landing:** see the run note's Gate/landing section (filled at
+closeout). Full record: `evidence/2026-11-14/journey-scale-r196.md`.
+Corpus: `hidden_files/evidence/2026-11-14/journey-scale-r196-*` (goal
+store).
