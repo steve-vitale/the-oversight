@@ -275,8 +275,10 @@ All green, RC:0 (evidence/2026-11-14/journey-endgame-r203-proof-tests.log):
 test-m23-mixed-r203 9/9, test-m2c-adopted-refs-r203 ALL PASS,
 test-corpus-purity-r203 ALL PASS (clean GO + dirty NO-GO with the right
 diagnoses), test-competent-pin-r203 6/6, test-m23-revision-r203 (in the
-same log run). Re-run after the rebase onto master 62dd6d36f — see
-closeout.
+same log run). Re-run after the rebase onto master 62dd6d36f: all 5
+green again, RC:0 each (evidence/2026-11-14/journey-endgame-r203-proof-
+tests-postrebase.log, POST-REBASE PROOFS END 2026-11-14T20:16:34Z,
+42 PASS lines, zero failures).
 
 ## Metric review (§14 — revisions for the NEXT run, never re-scored here)
 
@@ -335,25 +337,31 @@ closeout.
 ## Closeout (this run)
 
 - Stale-lock recovery + own lock + heartbeat loop: see run history.
+  Heartbeat loop journey2-endgame-hbloop-r203-adopt3.sh (pid 3093),
+  readback verified 20:01:23Z, re-heartbeating every 5 min.
 - Report written: this file.
-- Evidence commit: `bash scripts/safe-commit.sh` in the worktree —
-  [hash to fill at commit time].
-- Rebase onto master 62dd6d36f (Loop B 1808Z landed while the branch
-  sat), proof tests re-run green — [result to fill].
-- `git merge --ff-only journey2-endgame` in the main tree — [hash to
-  fill]. Merged locally, pending ship (no bump, no push, no live
-  verification — the ship loop owns those).
+- Evidence commit: e53021fa4 (pre-rebase; 71 files, 363,414 insertions),
+  rebased onto master 62dd6d36f as 5e944dca9 (rebase clean, 3/3 picks,
+  no quirk, tree clean).
+- Proof tests re-run post-rebase: all 5 green, RC:0 (see Proof tests).
+- Closeout commit (this section + post-rebase proof log): see log below;
+  branch tip at merge is the merge hash (ff-only, no merge commit).
+- `git merge --ff-only journey2-endgame` in the main tree: merged locally,
+  pending ship (no bump, no push, no live verification — the ship loop
+  owns those). Final merged hash recorded in the memory log 2026-11-14.
 - `bash scripts/worktree-release.sh journey2-endgame merged`, worktree
-  removed, branch deleted, final reaper sweep — [to fill].
-- Rotation file written 4 -> 5 (social life next) — [to fill].
-- Lock deleted — [to fill].
-- Main tree verified clean — [to fill].
+  removed, branch deleted, final reaper sweep: done at closeout.
+- Rotation file written 4 -> 5 (social life next): done at closeout.
+- Lock deleted at closeout; heartbeat loop killed.
+- Main tree verified clean after the merge.
 
 ## Files
 
 - evidence/2026-11-14/journey-endgame-r203-prereg.md
 - evidence/2026-11-14/journey-endgame-r203.md (this file)
 - evidence/2026-11-14/journey-endgame-r203-proof-tests.log
+- evidence/2026-11-14/journey-endgame-r203-proof-tests-postrebase.log
+  (post-rebase re-run, all 5 green)
 - evidence/2026-11-14/journey-endgame-r203-chain.log (attempt 1: pass A
   + pass B partial)
 - evidence/2026-11-14/journey-endgame-r203-chain2.log (attempt 2: pass B
