@@ -170,7 +170,16 @@ Establishment-r20-fixes and mobile-combat-cadence did not fail. Gate GO.
 
 ## Landing
 
-[FILLED AT CLOSEOUT — see below.]
+Adoption closeout by the Lane B closeout coordinator (run
+loop2-20261114T115724Z timed out at the 2h cron deadline).
+- Gate: 334/340 passed, 6 failed, 0 attributable (see Gate above).
+- Commit 924bc616e (worktree) rebased onto master fbd6d9ce9
+  (proofrefresh-b16 tip) as f1871e37b — arm files byte-identical
+  across the rebase; proof test 9/9 re-run green on the rebased tip.
+- Merged ff-only to master: HEAD f1871e37b. Worktree released,
+  branch deleted. Main tree clean.
+- Rotation-b advanced 6→7 (succession next).
+- Lock playtest-loop-2.lock deleted at closeout.
 
 ## Metric review
 
