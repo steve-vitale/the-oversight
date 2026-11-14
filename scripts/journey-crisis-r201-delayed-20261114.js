@@ -1,0 +1,1333 @@
+#!/usr/bin/env node
+// journey-crisis-r201-delayed-20261114.js — CRISIS LEG (6) r201: DELAYED-SORTIE
+// R201 (r192 verbatim EXCEPT): seeds 14441-14445, EVID 2026-11-14; ORIGINS map
+// keys FIXED to all five r201 seeds (r192's map still keyed 14422-14425, so
+// 14432-14435 silently fell back to St. Louis); RUINROAD arm PARKED this run
+// (env RUINROAD stays off — cumulative 0/301 is a proven constraint, lever (h)
+// not landed; see prereg). No behavior change otherwise.
+// R182 (r181 verbatim EXCEPT): (1) STRANGER DECOMPOSITION — record-only
+// registerDeath / apPlaygroundKill / sysSay wraps count alien-kill events
+// (cause 'alien', fightLive false) and stranger-fight deaths (cause
+// 'a stranger', fightLive true), the feed line, the fear-gossip line and
+// the retaliation line in the 0-2d window after each kill, plus a 7-day
+// moot/investigation/warning/guard beat scan — the endgame r185 seed
+// 89708 cluster (5 "a stranger" deaths d31-47) decomposed into its two
+// channels and judged on legibility, not the label (canon: the record
+// says "a stranger", never "an alien"). (2) RUINROAD ARM (env RUINROAD=1,
+// descriptive only): once per day, when the bot is at Haven with no
+// crisis pending, it routes to the nearest known ruin/building tile and
+// searches it (modeled on livelihood.js study()) — the r52
+// gorge-intervention precedent, a measurement intervention in the driver,
+// NOT a change to the shared oracleV2 policy. Seeds 14441-14443, same
+// driver, same days. Answers whether the r181 regional-medicine fix is
+// reachable end-to-end (search -> rare roll -> acquisition -> deposit ->
+// cure) through any existing play pattern. (3) SEEDS 14441-14445 (fresh
+// band, prereg-checked), ORIGINS Seattle/Boston/Austin/Chicago/Phoenix —
+// the r181 copy's ORIGINS map still keyed the r180 seeds (14401-14405),
+// so every r181 seed silently fell back to St. Louis; the keys are now
+// the r201 seeds. W1 carried count 66/4/4/1 (unchanged), EVID path
+// 2026-11-14, DAYS 150. (4) R57 D3 DRIVER FIX carried (deathsDuringLeader).
+// PRE-REGISTRATION: goal hidden_files/evidence/2026-11-14/journey-crisis-r201-prereg.md
+// PRE-REGISTRATION: goal hidden_files/evidence/2026-11-14/journey-crisis-r201-prereg.md
+// R88 (r85 verbatim EXCEPT): (1) TICK-PART LINGER SAMPLER — Game.doAction
+// wrapped record-only (original called first, return preserved); after
+// every call the driver records the lingering set + Game day. Samples
+// join to the boundary lingerBook at each boundary (see
+// convertTickSamples), so tick-part nightsWaited uses the boundary
+// book's firstSeenDay — conservative: any reported waited>=3 window is
+// CERTAIN. The sampler never answers a sortie and never mutates game
+// state. (2) pantryDaily from runDays samples (pure read).
+// (3) drift records carry lastSeenDay for the skipped-window analysis.
+// PRE-REGISTRATION: goal hidden_files/evidence/2026-11-14/journey-crisis-r201-prereg.md
+// CRISIS SNAPSHOT + DRIFT CLASSIFICATION. Direct handoff from r52's metric
+// review §1-§2: r52 left D4 inconclusive (no aidCrisis snapshot at sortie
+// time) and its "drift" bucket conflated three exits. This driver is the r52
+// driver verbatim EXCEPT: (1) snapCrisis() at every day boundary and
+// before/after every sortie call; (2) resolveAidCrisis resolutions tagged
+// 'sortie-call' vs 'tick'; (3) every drift classified melts-line /
+// moved-on-valve / player-drawn-off / unknown; (4) removal records carry
+// object identity + context. No src/js change; the game is untouched.
+// The gorge text offers a sortie nobody has ever taken in a measured run,
+// so this run INTERVENES: whenever a lingerer set is present at a day
+// boundary, the driver answers it with Game.answerLingerer('sortie') —
+// the exact beat-panel call app.js makes (kind 'lingerer', spec 'sortie').
+// Up to twice per lingerer object (second only if it still lingers 3+
+// days after the first). Endure is the control only where a sortie is
+// refused (no fighters) or a set is truncated by horizon/village death.
+//
+// R58 (r57 verbatim EXCEPT): (1) lingerBook sorties increment gated on ret.ok, so a
+// refused sortie no longer consumes a slot; (2) DEATH_SAY_RE died/dead word-boundaried,
+// so 'bloodied' stare-down survivors stop landing in deathsDuringSay.
+// PRE-REGISTRATION: goal hidden_files/evidence/2026-11-14/journey-crisis-r201-prereg.md
+// Usage: SEED=14441 node scripts/journey-crisis-r201-delayed-20261114.js
+// Output: JSON record to stdout; narrative to stderr (driver redirects).
+// Per-seed transcripts: $EVID/journey-crisis-r201-seed<SEED>-*.txt
+'use strict';
+const path = require('path');
+const fs = require('fs');
+const ROOT = path.join(__dirname, '..');
+const { loadGame, setupGame, runDays } = require('./sim-harness');
+const { oracleV2 } = require('./policies/oracleV2');
+
+const SEED = parseInt(process.env.SEED || '14441', 10);
+const DAYS = parseInt(process.env.DAYS || '150', 10);
+const EVID = process.env.EVID || '/home/hatch/workspace/goals/the-scattering-roguelite-survival-game/hidden_files/evidence/2026-11-14';
+
+const RAID_RE = /🐗 RAID —/;
+const DEFENSE_BEAT_RE = /🛡️ .* met them at the door/;
+const UNMET_RE = /Nobody met .* — it's still out there at the treeline/;
+const GORGE_RE = /🌙 Night\. The lingering .* gorges at the treeline/;
+const SORTIE_RE = /⚔️ SORTIE —/;
+const MELTS_RE = /melts back into the dark/;
+const DRAWN_RE = /It followed you|You're on your own|won't follow much further|flagging — it won't follow/i;
+const MOURN_RE = /mourn|grief|griev|grave|burial|funeral|fire feels smaller|Nobody's talking much|The village mourns|first grave|we buried|laid to rest|succumbed to|didn't come back/i;
+const FABRIC_RE = /we've always|since the beginning|you remember when|like old times|remember the old|back when we|for as long as/i;
+// R182 STRANGER: the alien-kill reaction lines. FEAR_RE is apVillagerFear's
+// gossip ("X is dead. That stranger did it. We're not safe."); RETAL_RE is
+// apVillagerRetaliate's fight-back line; FEED_RE is the System feed's
+// treeline death report (also caught by the sysSay wrap — the say wrapper
+// is the backstop in case sysSay routes elsewhere).
+const FEAR_RE = /is dead\. .* did it\. We're not safe/i;
+const RETAL_RE = /grab weapons and go after/i;
+const FEED_RE = /was found dead near the treeline/i;
+
+function dayOf(Game) { try { return Game.state.scholar.day || 0; } catch (e) { return 0; } }
+function pantryKcal(Game) {
+  try { return Math.round(Game.pantryKcalLive(Game.state.village)); } catch (e) {
+    try { return Math.round((Game.state.village.pantry || []).reduce((t, i) => t + (i.kcalEach || 0) * (i.units || 1), 0)); } catch (e2) { return 0; }
+  }
+}
+function rawName(Game, vid) {
+  try { const rc = ((Game.state.village || {}).rosterChars || {})[vid]; if (rc && rc.name) return rc.name; } catch (e) {}
+  try { return Game.displayName(vid); } catch (e) {}
+  return String(vid).slice(0, 12);
+}
+function livingCount(Game) {
+  try {
+    return (Game.state.village.roster || []).filter(id => { try { const vp = Game.vpOf(id); return vp && !vp.dead; } catch (e) { return true; } }).length;
+  } catch (e) { return 1; }
+}
+function aliveSet(Game) {
+  const s = new Set();
+  try {
+    for (const id of (Game.state.village.roster || [])) {
+      try { const vp = Game.vpOf(id); if (vp && !vp.dead) s.add(String(id)); } catch (e) {}
+    }
+  } catch (e) {}
+  return s;
+}
+// R128 BENCH: pure-read snapshot of the fighter bench at a sortie attempt,
+// taken BEFORE the call (the decision-relevant state). Reuses the game's own
+// availability predicates — Game._musterAway is a pure scan (hierarchy.js),
+// travelingWith / isEngaged / isMember / _isAwayVid / vpOf are reads — so
+// this cannot move the trajectory; the determinism re-run proves it.
+// musterAvailable: what _musterAway(3,'defense') returns (gate needs >=2).
+// livingBesidesPlayer: living roster besides the player. excluded: why each
+// living non-player roster member is NOT on the bench (first reason only,
+// in _musterAway's own order): away = loaned / away-party / wounded-until
+// (_isAwayVid), nodeAway = out on node-travel business, withYou = traveling
+// with the player, engaged = mid-conversation, nonMember = not a member.
+function benchSnapshot(Game) {
+  const snap = { livingBesidesPlayer: 0, musterAvailable: null, excluded: { away: 0, nodeAway: 0, withYou: 0, engaged: 0, nonMember: 0, dead: 0 } };
+  try {
+    const me = Game.villagerId;
+    const roster = (Game.state.village || {}).roster || [];
+    try { snap.musterAvailable = (Game._musterAway ? Game._musterAway(3, 'defense') : []).length; } catch (e) { snap.musterAvailable = null; }
+    const nodeAway = {};
+    try { const va = (Game.state.village || {}).away || {}; for (const k in va) nodeAway[k] = 1; } catch (e) {}
+    const withYou = {};
+    try { const tw = Game.travelingWith ? Game.travelingWith() : []; for (const id of tw) withYou[id] = 1; } catch (e) {}
+    for (const id of roster) {
+      if (id === me) continue;
+      let vp = null; try { vp = Game.vpOf(id); } catch (e) {}
+      if (!vp || vp.dead) { snap.excluded.dead++; continue; }
+      snap.livingBesidesPlayer++;
+      let ex = false;
+      try { if (Game.isMember && !Game.isMember(id)) { snap.excluded.nonMember++; ex = true; } } catch (e) {}
+      if (!ex) { try { if (Game._isAwayVid && Game._isAwayVid(id)) { snap.excluded.away++; ex = true; } } catch (e) {} }
+      if (!ex && nodeAway[id]) { snap.excluded.nodeAway++; ex = true; }
+      if (!ex && withYou[id]) { snap.excluded.withYou++; ex = true; }
+      if (!ex) { try { if (Game.isEngaged && Game.isEngaged(id)) { snap.excluded.engaged++; ex = true; } } catch (e) {} }
+    }
+  } catch (e) { snap.error = String(e && e.message || e); }
+  return snap;
+}
+function displayNameOf(Game, obj) {
+  try { return (Game.monsterDisplayName && Game.monsterDisplayName(obj.id)) || obj.id; } catch (e) { return obj.id; }
+}
+
+// R53: pure snapshot of the live aid crisis (comms.js aidCrisis() is a
+// plain getter over state.aidCrisis — no mutation, verified by reading the
+// source). Null means "no live crisis" and is itself data.
+function snapCrisis(Game) {
+  try {
+    const c = Game.aidCrisis ? Game.aidCrisis() : null;
+    if (!c) return null;
+    return {
+      name: c.name || null, wave: c.wave || null, sinceDay: c.sinceDay ?? null,
+      raiders: !!c.raiders, ageParts: c.ageParts || 0,
+      calls: (c.calls || []).length, helpAtDoor: (c.helpAtDoor || []).length,
+      attracted: c.attracted || 0,
+    };
+  } catch (e) { return { error: String(e && e.message || e) }; }
+}
+
+let probeActive = false; // R82: true only while the post-convo probe calls convoFavorAction
+
+// R154 NO-REPEAT PICK RULE (r132 metric review): the driver never re-picks
+// the same choice id consecutively when a non-leave alternative exists.
+// Pure function of (choices, ctx) so the proof test can unit-test it without
+// the game: returns { pick, latelyOffered, latelyFired, subjectNavs,
+// redirected, forced }. The priority chain is the r132 chain verbatim
+// (steer lately / subject pivot, t===0 lately, gq:, dlg:help|details|want:,
+// crisis keywords, first non-leave); the only addition is the last step,
+// which swaps a repeated pick for the next-best alternative.
+// A repeat is FORCED only when every non-leave choice offered carries the
+// same id as the last pick (the menu itself offers no alternative) — the
+// engine's escalating-prefix answers then describe the loop honestly, and
+// the forced count lets the C3 reader tell a menu loop from a driver loop.
+const LEAVE_RE = /^(leave|bye|goodbye)/;
+function pickConvoChoice(choices, ctx) {
+  const t = ctx.t, steerLately = !!ctx.steerLately;
+  let latelyFired = !!ctx.latelyFired, subjectNavs = ctx.subjectNavs || 0;
+  let latelyOffered = false;
+  function generic(excludeId) {
+    let p = null;
+    if (t === 0) p = choices.find(c => c.id === 'ask:lately' && c.id !== excludeId);
+    if (!p) p = choices.find(c => /^gq:/.test(c.id) && c.id !== excludeId);
+    if (!p) p = choices.find(c => /^(dlg:help|dlg:details|want:)/.test(c.id) && c.id !== excludeId);
+    if (!p) p = choices.find(c => /raid|siege|treeline|muster|afraid|worried|dead|died|gone|mourn|fight|defend|monster|shelter/i.test(c.text || '') && c.id !== excludeId);
+    if (!p) p = choices.find(c => !LEAVE_RE.test(c.id) && c.id !== excludeId);
+    return p || null;
+  }
+  let pick = null, pickedPivot = false;
+  // R180 BETRAYAL:SITE FORCE-ONCE (Q11): the first time a betrayal:site
+  // choice is offered in the panel, take it (recorded on the result) so
+  // the watch is exercised — r168 never saw the beat (the driver picked
+  // betrayal:accept only). Pure driver change; the engine beat is
+  // unchanged. Returns early: the betrayal menu carries no other pick.
+  // (r176 correction, post-panel: the real ids are suffixed with the case
+  // id — 'betrayal:site:case_2', not bare 'betrayal:site' — so the first
+  // pass never matched and the force never fired. Match the prefix.)
+  const betrayalSite = choices.find(c => c.id.indexOf('betrayal:site:') === 0);
+  if (betrayalSite && !ctx.betrayalSiteDone) {
+    return { pick: betrayalSite, latelyOffered, latelyFired, subjectNavs, redirected: false, forced: false, betrayalSiteForced: true };
+  }
+  // R168 PARTY-NAME PICK (r164 driver gap b): when the party-name
+  // sub-menu is open, take the party_namepick:* choices first and pick
+  // index ctx.partyPickIndex (SEED % 3 from driveConvo) — the old
+  // first-non-leave fallback always landed on index 2 because
+  // partyConvoChoices splices the three picks in at index 1 one at a
+  // time, reversing their order, so "The Company" won on three
+  // straight panels. A missing index falls back to the first pick.
+  const partyPicks = choices.filter(c => /^party_namepick:/.test(c.id));
+  if (partyPicks.length) {
+    const idx = (typeof ctx.partyPickIndex === 'number') ? ctx.partyPickIndex : 2;
+    pick = partyPicks.find(c => c.id === 'party_namepick:' + idx) || partyPicks[0];
+  }
+  if (!pick && steerLately && !latelyFired) {
+    const lately = choices.find(c => c.id === 'ask:lately');
+    if (lately) { latelyOffered = true; latelyFired = true; pick = lately; }
+    else if (subjectNavs < 2) {
+      const subj = choices.find(c => c.id === 'dlg:subject' || c.id === 'subject');
+      if (subj) { pickedPivot = true; pick = subj; }
+    }
+  }
+  if (!pick) pick = generic(null);
+  // R180 PARTY_ROLE SKIP (r168 driver gap d): the driver re-picked
+  // party_role three times after the assignment (r168 d27 loop) — once a
+  // role is assigned in this sitting, the role menu is spent. If the last
+  // pick was a rolepick and the generic pick is party_role, take the
+  // next-best alternative instead (counted as a redirect, like the
+  // no-repeat rule below). The engine half (F3: re-assign narrates as if
+  // new) is fixed in assignRole this run.
+  let redirected = false, forced = false;
+  if (pick && pick.id === 'party_role' && ctx.lastPickId && ctx.lastPickId.indexOf('party_rolepick:') === 0) {
+    const alt = generic('party_role');
+    if (alt) { pick = alt; redirected = true; }
+  }
+  if (pick && ctx.lastPickId && pick.id === ctx.lastPickId) {
+    const alt = generic(pick.id);
+    if (alt) { pick = alt; redirected = true; pickedPivot = false; }
+    else forced = true;
+  }
+  // A redirected pivot is a navigation NOT taken: it must not consume the
+  // 2-navigation budget, or the steer could never reach lately at all.
+  if (pickedPivot) subjectNavs++;
+  return { pick, latelyOffered, latelyFired, subjectNavs, redirected, forced };
+}
+
+function driveConvo(Game, vid, tag, out, opts) {
+  let convoEndMarked = false; // R128: every loop exit carries an explicit end marker
+  const steerLately = !!(opts && opts.steerLately);
+  let latelyOffered = false, latelyFired = false, subjectNavs = 0;
+  out.push(`## ${tag} — talking to ${rawName(Game, vid)} (d${dayOf(Game)})`);
+  const npcLines = [];
+  let prevLen = 0; // R132: dump every transcript entry added by each turn
+  // (slice(prevLen)), not slice(-2) — a turn that produces 2+ NPC lines
+  // after the player's line dropped the YOU line from the file on 48/237
+  // picks on the r132 panel. Display-only: out/npcLines only, no Game call.
+  let lastPickId = null, noRepeatRedirects = 0, forcedRepeats = 0; // R154 no-repeat rule
+  let betrayalSiteDone = false, betrayalSiteForced = false; // R180 Q11 force-once
+  let opened;
+  try { opened = Game.startConvo(vid); } catch (e) { out.push(`(startConvo threw: ${e.message})`); return npcLines; }
+  if (!opened || opened.refused || opened.ended) { out.push(`(conversation refused/ended)`); return npcLines; }
+  for (let t = 0; t < 16; t++) {
+    let choices;
+    try { choices = Game.convoChoices(vid) || []; } catch (e) { out.push(`(convoChoices threw: ${e.message})`); convoEndMarked = true; break; }
+    if (!choices.length) { out.push('(no choices offered)'); convoEndMarked = true; break; }
+    // R82 STEER: on the steered convo, ask:lately wins on ANY turn, not
+    // just t=0 — r71 never fired it first because it is often not
+    // offered at convo open. PILOT AMENDMENT (seed 9407 v1): the driver
+    // never even REACHES a menu offering ask:lately — its picks stay on
+    // beats (betrayal/confront/comfort) and never take the subject pivot
+    // ('dlg:subject'/'subject', which opens the topic menu where
+    // ask:lately lives). So while steering, if lately is not offered,
+    // take the subject pivot (max 2 navigations) to open that menu.
+    // If the subject menu still offers no lately, the gate is closed
+    // (t2LatelyEvent false) — recorded, not forced.
+    // R154 NO-REPEAT PICK RULE: pickConvoChoice never returns the same id
+    // twice in a row while a non-leave alternative exists (see helper).
+    // Redirects and forced repeats are counted onto npcLines and into the
+    // JSON, so the C3 read can tell a driver loop from a menu loop. The
+    // leave-break below is unchanged.
+    const chosen = pickConvoChoice(choices, { t, steerLately, latelyFired, subjectNavs, lastPickId, partyPickIndex: SEED % 3, betrayalSiteDone });
+    let pick = chosen.pick;
+    latelyOffered = latelyOffered || chosen.latelyOffered;
+    latelyFired = chosen.latelyFired;
+    subjectNavs = chosen.subjectNavs;
+    if (chosen.redirected) noRepeatRedirects++;
+    if (chosen.forced) forcedRepeats++;
+    if (chosen.betrayalSiteForced) { betrayalSiteDone = true; betrayalSiteForced = true; }
+    if (!pick || /^(leave|bye|goodbye)/.test(pick.id)) { out.push('(driver leave break: only leave offered)'); convoEndMarked = true; break; }
+    lastPickId = pick.id;
+    // R82 RECORD FIX (post-panel, corrected placement): latelyOffered/
+    // Fired reflect ANY ask:lately pick, steered or not — the first fix
+    // sat before the generic fallback that actually selects lately on
+    // most turns, so it still missed. Record-only: no Game call, no
+    // RNG, no trajectory change. Panel re-run verifies byte-identical
+    // transcripts.
+    if (pick.id === 'ask:lately') { latelyOffered = true; latelyFired = true; }
+    out.push(`> YOU PICK [${pick.id}] ${(pick.text || '').slice(0, 90)}`);
+    try { Game.convoTurn(vid, pick.id); } catch (e) { out.push(`(turn threw: ${e.message})`); convoEndMarked = true; break; }
+    let c;
+    try { c = Game.convoGet(vid); } catch (e) { out.push(`(convoGet threw: ${e.message})`); convoEndMarked = true; break; }
+    // R90 TRANSCRIPT FIX (r88 FLAG 1): a turn that ends the conversation
+    // must dump its final transcript lines BEFORE the ended marker,
+    // same slice(prevLen) as the normal path (R132), npcLines included — otherwise
+    // the turn's outcome line (e.g. an invite accept) is swallowed.
+    // Display-only: touches only out/npcLines, no Game call, no RNG.
+    if (!c || !c.active) {
+      if (c) for (const e of (c.transcript || []).slice(prevLen)) {
+        // R180 TRANSCRIPT FIX (2026-11-14): the 420-char bound cut
+        // multi-line transcript entries mid-sentence — a party-naming
+        // turn (naming + broadcast + rider gossip + Codex) is one
+        // entry of ~600 chars, so the tail was lost in two r180
+        // transcripts while the game text stayed complete in the JSON
+        // sayLines. 2000 covers the longest observed entry ~3x and
+        // still bounds the file. Output-only; no Game call, no RNG.
+        out.push(`${e.who === 'you' ? 'YOU' : 'NPC'}: ${String(e.text).slice(0, 2000)}`);
+        if (e.who !== 'you') npcLines.push(String(e.text));
+      }
+      if (c) prevLen = (c.transcript || []).length;
+      out.push('(conversation ended by the engine)'); convoEndMarked = true; break;
+    }
+    for (const e of (c.transcript || []).slice(prevLen)) {
+      out.push(`${e.who === 'you' ? 'YOU' : 'NPC'}: ${String(e.text).slice(0, 2000)}`);
+      if (e.who !== 'you') npcLines.push(String(e.text));
+    }
+    prevLen = (c.transcript || []).length;
+  }
+  if (!convoEndMarked) out.push('(driver cap break: 16 turns reached)');
+  // R71 FAVOR-AVAILABILITY PROBE (r70 blank 2, read-only): dump every
+  // disjunct of convoFavorAction's 'no longer available' line plus the
+  // proximity components of the next check, so any occurrence of that
+  // line in this transcript has a named cause in the same file.
+  try {
+    const fav = (typeof Game.convoGetFavor === 'function') ? Game.convoGetFavor(vid) : null;
+    probeActive = true;
+    let st = null;
+    try { st = (typeof Game.convoFavorAction === 'function') ? Game.convoFavorAction(vid, fav) : null; } finally { probeActive = false; }
+    const vv = Game.state.village || {}, ss = Game.state.scholar || {};
+    let person = null, personDead = null, vpDead = null;
+    try { person = Game.getPerson ? Game.getPerson(vid) : null; personDead = person ? !!person.dead : null; } catch (e) {}
+    try { const vp = Game.vpOf ? Game.vpOf(vid) : null; vpDead = vp ? !!vp.dead : null; } catch (e) {}
+    const node = vv.nodePos?.[vid] || { nx: vv.px ?? 4, ny: vv.py ?? 4 }, pos = vv.positions?.[vid];
+    const haven = Game.map ? (Game.map.px === (vv.px ?? 4) && Game.map.py === (vv.py ?? 4)) : null;
+    let cheb = null;
+    try { if (pos && [pos.mx, pos.my, ss.mx, ss.my].every(Number.isFinite)) cheb = Math.max(Math.abs(pos.mx - ss.mx), Math.abs(pos.my - ss.my)); } catch (e) {}
+    out.push('[FAVOR-PROBE] ' + JSON.stringify({ favorKind: fav ? fav.kind : null, favorState: fav ? fav.state : null, favorVid: fav ? fav.vid : null, statusReady: st ? !!st.ready : null, statusReason: st ? (st.reason || null) : null, rosterIncludes: (vv.roster || []).includes(vid), isPlayer: String(vid) === String(Game.villagerId), personExists: !!person, personDead, vpDead, away: !!(vv.away && vv.away[vid]), nodeNx: node.nx, nodeNy: node.ny, mapPx: Game.map ? Game.map.px : null, mapPy: Game.map ? Game.map.py : null, haven, npcInside: vv.npcInside ? !!vv.npcInside[vid] : null, scholarInside: ss.insideHaven !== false, posFinite: !!(pos && [pos.mx, pos.my, ss.mx, ss.my].every(Number.isFinite)), cheb }));
+  } catch (e) { out.push('[FAVOR-PROBE error: ' + String(e && e.message || e) + ']'); }
+  try { Game.endConvo(vid, 'left'); } catch (e) {}
+  npcLines.latelyOffered = latelyOffered; npcLines.latelyFired = latelyFired; npcLines.subjectNavs = subjectNavs;
+  npcLines.noRepeatRedirects = noRepeatRedirects; npcLines.forcedRepeats = forcedRepeats; // R154 no-repeat rule
+  npcLines.betrayalSiteForced = betrayalSiteForced; // R180 Q11 force-once
+  return npcLines;
+}
+
+async function main() {
+  const { Game } = await loadGame({ seed: SEED, mode: 'crisis-delayed-r70', fullTelemetry: true });
+  // R131 (prereg instrument change): vary the sim scholar's origin per seed.
+  // genRoster gives the first four villagers the scholar's origin, so a fixed
+  // Columbus scholar makes every sim transcript read as parroting (r129 C3
+  // note). Origin is flavor data; no crisis metric reads it. Determinism
+  // proof (re-run seed 13301 byte-identical) covers the change.
+  const ORIGINS = { 14441: 'Seattle, Washington', 14442: 'Boston, Massachusetts', 14443: 'Austin, Texas', 14444: 'Chicago, Illinois', 14445: 'Phoenix, Arizona' };
+  const PLACE = ORIGINS[SEED] || 'St. Louis, Missouri';
+  await setupGame(Game, PLACE);
+  const rec = {
+    seed: SEED, days: 0, endReason: '',
+    raids: [], defenseBeats: [], defendedFights: [], unmetRaiders: [],
+    gorgeNights: [], sorties: [], aidResolutions: [],
+    deaths: [], sayLines: [], convosDriven: [], fabricHits: [], mournLines: [],
+    removals: [], lingerDaily: [], census: null, crisisDaily: [],
+    lingerTickParts: [], // R88: tick-part linger samples, boundary-joined
+    pantryDaily: [], // R88: {iter, gameDay, kcal} per loop iteration
+    sortieFights: [], // fieldFight wrap, sortie-flagged only
+    phoenixBurns: [], // R70: phoenixResolveBurn wrap, fight-grouped
+    favorNoLongerCalls: [], // R82: convoFavorAction call-time 'no longer available' log
+    instrumentErrors: [],
+    supply: { ruinSearches: 0, forageByTile: {}, scavengeItems: [], medAcquisitions: [], pharmacyDeposits: [] }, // R181 Q2 supply decomposition
+    stranger: { alienKills: [], strangerFightDeaths: [], feedLines: [], fearLines: [], retalLines: [], apKillCalls: [], eligibility: [], ruinRoad: { searches: 0, trips: 0, bridges: 0, skips: { dayDone: 0, guardKcal: 0, guardHealth: 0, guardTicks: 0, guardCrisis: 0, guardEncounter: 0, noTarget: 0, travelBlocked: 0, bridgeNoWood: 0 } } }, // R182 stranger decomposition + ruin-road arm; R186 eligibility sampler (r186 adoption)
+  };
+  let sortieFlag = false;
+  let wildFlag = false;
+  let aidCtx = null; // R59: {m, outcome} while inside an aidFight call
+  // R53 runtime-only logs (object identity cannot survive JSON.stringify).
+  const removalLog = []; // {obj, day, id, name, hp, lingering, ctx}
+  // R164 MEDIC DUTY SPAN sampler (prereg Q2): once per main-loop
+  // iteration, sample the LIVE medicDutyHolder() (pure reads — the
+  // function documents itself as trajectory-neutral for recorders)
+  // and accumulate first/last day per holder id. Serialized at census.
+  const medicDutySpanMap = new Map(); // id -> {firstDay, lastDay}
+  let stashMidTaken = false; // R168: day-60 stash sample taken once
+  // R180 MED SUPPLY (prereg Q2): daily pure-read pharmacy + pack doses.
+  const medSupply = { days: 0, daysWithPharmacy: 0, daysWithPack: 0, maxPharmacy: 0, maxPack: 0, firstPharmacyDay: null };
+  const recordErr = (where, e) => { try { rec.instrumentErrors.push({ where, err: String(e && e.message || e) }); } catch (e2) {} };
+
+  // R122: capture-time gorge attribution. The say wrapper is installed
+  // before lingerBook exists, so it reads through this ref (assigned
+  // when the book is created) instead of the book itself — no TDZ risk,
+  // and a null ref simply yields attribution 'none'.
+  let lingerBookRef = null;
+
+  const _say = Game.say.bind(Game);
+  Game.say = function (t) {
+    try {
+      const day = dayOf(Game), line = String(t);
+      rec.sayLines.push({ day, line });
+      if (RAID_RE.test(line)) rec.raids.push({ day, line: line.slice(0, 200) });
+      if (DEFENSE_BEAT_RE.test(line)) rec.defenseBeats.push({ day, line: line.slice(0, 300) });
+      if (UNMET_RE.test(line)) rec.unmetRaiders.push({ day, line: line.slice(0, 200) });
+      if (GORGE_RE.test(line)) {
+        const g = { day, line: line.slice(0, 200) };
+        rec.gorgeNights.push(g);
+        // R122 CAPTURE-TIME GORGE ATTRIBUTION (read-only: never mutates
+        // the book or the game). A gorge line carries only a display
+        // name, and names collide across kinds ('The Ugly Beast' =
+        // hushwolf + giant_mosquito, r117) while book ids are kind ids
+        // that repeat — so neither identifies an individual. Attribute
+        // here, while the lingering set is live.
+        // V2 (pilot correction, seed 12201 v1 evidence): candidates
+        // are the CURRENTLY-LINGERING world monsters whose display
+        // name matches the line, joined to book entries by object
+        // identity. V1 enumerated all book entries, including ones
+        // already cleared (lingering false) — seed 12201's d101 Loud
+        // Beast run listed the d78-cleared callback among its
+        // candidates, inflating ambiguity with an entry that cannot
+        // gorge. A live lingerer with no book entry yet (arrived
+        // mid-iteration before any boundary, e.g. 12201 d109 Eulogy /
+        // Algorithm, firstSeen d110) is a candidate with key null:
+        // exactly one such candidate -> 'single-unbooked' (honest:
+        // no key exists to id-match later); it never yields an
+        // attributedKey. worldMonsters failure -> 'error', counted
+        // separately, never a silent fallback to v1.
+        try {
+          const nm = /The lingering (.+?) gorges at the treeline/.exec(line);
+          g.name = nm ? nm[1] : null;
+          let live = null;
+          try { live = (Game.worldMonsters() || []).filter(m => m && m.lingering && (m.hp || 0) > 0); } catch (e) { live = null; }
+          if (!g.name || !live) {
+            g.candidates = []; g.attribution = live ? 'none' : 'error';
+          } else {
+            const cands = [];
+            for (const m of live) {
+              try {
+                if (displayNameOf(Game, m) !== g.name) continue;
+                const b = lingerBookRef ? lingerBookRef.get(m) : undefined;
+                cands.push(b ? { key: b.key, id: b.id, episode: b.episode, firstSeenDay: b.firstSeenDay, clearedBySortieDay: b.clearedBySortieDay, clearedEpisode: b.clearedEpisode } : { key: null, id: m.id, episode: null, firstSeenDay: null, clearedBySortieDay: null, clearedEpisode: null });
+              } catch (e) {}
+            }
+            g.candidates = cands;
+            if (cands.length === 0) g.attribution = 'none';
+            else if (cands.length > 1) g.attribution = 'ambiguous';
+            else if (cands[0].key === null) g.attribution = 'single-unbooked';
+            else { g.attribution = 'single'; g.attributedKey = cands[0].key; g.attributedEpisode = cands[0].episode; }
+          }
+        } catch (e) { recordErr('gorge-attribute', e); }
+      }
+      if (MOURN_RE.test(line)) rec.mournLines.push({ day, line: line.slice(0, 200) });
+      if (FABRIC_RE.test(line)) rec.fabricHits.push({ day, line: line.slice(0, 160) });
+      // R182 STRANGER: tag the alien-kill reaction lines (record-only).
+      if (FEAR_RE.test(line)) rec.stranger.fearLines.push({ day, line: line.slice(0, 200) });
+      if (RETAL_RE.test(line)) rec.stranger.retalLines.push({ day, line: line.slice(0, 200) });
+      if (FEED_RE.test(line)) rec.stranger.feedLines.push({ day, line: line.slice(0, 200), via: 'say' });
+    } catch (e) {}
+    return _say(t);
+  };
+
+  // R71 (=r70): fight-invocation stack for phoenix burn grouping (outermost
+  // push/pop; burns outside any fight record fight=null).
+  const fightStack = [];
+  const _ff = Game.fieldFight ? Game.fieldFight.bind(Game) : null;
+  if (_ff) {
+    Game.fieldFight = function (leader, mdef, m, opts) {
+      let r = null;
+      fightStack.push((Game.__r71FightSeq = (Game.__r71FightSeq || 0) + 1));
+      try { r = _ff(leader, mdef, m, opts); } catch (e) { r = null; }
+      fightStack.pop();
+      try {
+        if (sortieFlag && r) rec.sortieFights.push({
+          day: dayOf(Game), leader: String(leader), leaderName: rawName(Game, leader),
+          monster: (mdef && mdef.id) || (m && m.id) || '?',
+          outcome: r.outcome || '?', vTaken: r.vTaken || 0,
+        });
+      } catch (e) {}
+      return r;
+    };
+  } else rec.fieldFightWrapMissing = true;
+
+  // R59 CORPSE-COUNT CORRECTION: fieldFight writes wounds back onto
+  // m.hp only when the monster lives; on vKill the world object keeps
+  // pre-fight hp until the CALLER removes it after aidFight returns.
+  // A lingeringRaiders() count taken inside aidFight therefore counts
+  // the corpse. Track the fought monster + outcome so the resolve
+  // wrap can report the TRUE count (corpse excluded on vKill).
+  const _af = Game.aidFight ? Game.aidFight.bind(Game) : null;
+  if (_af) {
+    Game.aidFight = function (vid, mdef, m, opts) {
+      aidCtx = { m: m || null, outcome: null };
+      const _ffHere = Game.fieldFight;
+      Game.fieldFight = function () {
+        let r = null;
+        try { r = _ffHere.apply(this, arguments); } catch (e) { r = null; }
+        try { if (aidCtx && arguments[2] === aidCtx.m && r) aidCtx.outcome = r.outcome || null; } catch (e) {}
+        return r;
+      };
+      let r;
+      try { r = _af(vid, mdef, m, opts); } catch (e) { r = null; }
+      Game.fieldFight = _ffHere;
+      aidCtx = null;
+      return r;
+    };
+  }
+
+  const _rwm = Game.removeWorldMonster ? Game.removeWorldMonster.bind(Game) : null;
+  if (_rwm) {
+    Game.removeWorldMonster = function (m) {
+      try {
+        removalLog.push({
+          obj: m, day: dayOf(Game), id: m && m.id, name: m ? displayNameOf(Game, m) : null,
+          hp: m && (m.hp || 0), lingering: !!(m && m.lingering),
+          ctx: sortieFlag ? 'sortie' : (wildFlag ? 'wild' : 'other'),
+        });
+      } catch (e) { recordErr('removeWorldMonster-wrap', e); }
+      return _rwm(m);
+    };
+  } else rec.fieldFightWrapMissing = rec.fieldFightWrapMissing || false;
+  const _rac = Game.resolveAidCrisis ? Game.resolveAidCrisis.bind(Game) : null;
+  if (_rac) {
+    Game.resolveAidCrisis = function (how) {
+      let before = null, lingeringAtResolution = null;
+      try { before = snapCrisis(Game); } catch (e) { recordErr('resolveAidCrisis-before', e); }
+      // R54 RESOLUTION CENSUS: lingerers alive at the moment of
+      // resolution. 'fought' with lingerers remaining is an
+      // EARLY-RESOLUTION instance (aidFight's unconditional path).
+      // lingeringAtResolution is the legacy r57/r58 count (it counts
+      // the not-yet-removed corpse on a vKill inside aidFight);
+      // lingeringAtResolutionTrue excludes that corpse by identity
+      // when the resolution fires inside an aidFight vKill.
+      try { lingeringAtResolution = (Game.lingeringRaiders ? Game.lingeringRaiders() : []).length; } catch (e) { recordErr('lingeringAtResolution', e); }
+      let lingeringAtResolutionTrue = lingeringAtResolution;
+      try {
+        if (aidCtx && aidCtx.outcome === 'vKill' && aidCtx.m && Game.lingeringRaiders) {
+          lingeringAtResolutionTrue = Game.lingeringRaiders().filter(x => x && x !== aidCtx.m && (x.hp || 0) > 0).length;
+        }
+      } catch (e) { recordErr('lingeringAtResolutionTrue', e); }
+      let r;
+      try { r = _rac(how); } catch (e) { r = null; }
+      try {
+        rec.aidResolutions.push({
+          day: dayOf(Game), how: String(how), via: 'wrap',
+          during: sortieFlag ? 'sortie-call' : 'tick',
+          crisisBefore: before, lingeringAtResolution, lingeringAtResolutionTrue,
+          returned: (r === null ? null : String(r)),
+        });
+      } catch (e) { recordErr('resolveAidCrisis-wrap', e); }
+      return r;
+    };
+  }
+  const _rwme = Game.resolveWildMonsterEncounter ? Game.resolveWildMonsterEncounter.bind(Game) : null;
+  if (_rwme) {
+    Game.resolveWildMonsterEncounter = function (vid, m, opts) {
+      let rec2 = null;
+      const prevWild = wildFlag;
+      wildFlag = true;
+      try { rec2 = _rwme(vid, m, opts); } catch (e) { rec2 = null; }
+      wildFlag = prevWild;
+      try {
+        if (opts && opts.raid && rec2) rec.defendedFights.push({
+          day: dayOf(Game), vid: String(vid), name: rawName(Game, vid),
+          monster: (m && (m.id || m.name)) || '?', outcome: rec2.outcome || '?', vTaken: rec2.vTaken || 0,
+        });
+      } catch (e) { recordErr('resolveWildMonsterEncounter-wrap', e); }
+      return rec2;
+    };
+  }
+
+  // R71 (=r70) PHOENIX BURN RECORDER: phoenixResolveBurn is the actual burn
+  // (LinkBeat narration alone overcounts: a 'protest' beat starts a
+  // struggle, not a burn). fight = enclosing fieldFight invocation id,
+  // or null outside a fight.
+  const _prb = Game.phoenixResolveBurn ? Game.phoenixResolveBurn.bind(Game) : null;
+  if (_prb) {
+    Game.phoenixResolveBurn = function (bearerIsPlayer, bearerVid, victimVid, opts) {
+      try {
+        rec.phoenixBurns.push({
+          day: dayOf(Game),
+          bearerIsPlayer: !!bearerIsPlayer,
+          bearer: bearerIsPlayer ? 'player' : rawName(Game, bearerVid),
+          victim: rawName(Game, victimVid),
+          willing: !!(opts && opts.willing),
+          fight: fightStack.length ? fightStack[fightStack.length - 1] : null,
+        });
+      } catch (e) { recordErr('phoenixBurn-wrap', e); }
+      return _prb(bearerIsPlayer, bearerVid, victimVid, opts);
+    };
+  } else rec.phoenixBurnWrapMissing = true;
+
+  // R82 FAVOR CALL-TIME WRAP (r71 D2 blank): convoFavorAction is a
+  // read-only readiness getter, so wrapping it changes no game
+  // behavior — it only logs calls returning 'They are no longer
+  // available to receive help.' with the four disjuncts computed AT
+  // CALL TIME (the post-convo probe loses this for favors closed
+  // in-convo). Dedupe by (day, vid, favorId): first call + count,
+  // since the engine calls it several times per menu.
+  const _cfa = Game.convoFavorAction ? Game.convoFavorAction.bind(Game) : null;
+  if (_cfa) {
+    const _favorSeen = new Map();
+    Game.convoFavorAction = function (vid, favor) {
+      let st;
+      try { st = _cfa(vid, favor); } catch (e) { throw e; }
+      try {
+        if (st && st.reason === 'They are no longer available to receive help.') {
+          const vv = Game.state.village || {};
+          let person = null, personDead = null;
+          try { person = Game.getPerson ? Game.getPerson(vid) : null; personDead = person ? !!person.dead : null; } catch (e) {}
+          const key = dayOf(Game) + '|' + String(vid) + '|' + (favor && favor.id);
+          if (_favorSeen.has(key)) { _favorSeen.get(key).calls++; }
+          else {
+            const entry = { day: dayOf(Game), vid: String(vid), name: rawName(Game, vid), favorKind: favor ? favor.kind : null, favorState: favor ? favor.state : null, favorId: favor ? favor.id : null, source: probeActive ? 'probe' : 'engine', rosterIncludes: (vv.roster || []).includes(vid), isPlayer: String(vid) === String(Game.villagerId), personExists: !!person, personDead, calls: 1 };
+            _favorSeen.set(key, entry); rec.favorNoLongerCalls.push(entry);
+          }
+        }
+      } catch (e) { recordErr('favorNoLonger-wrap', e); }
+      return st;
+    };
+  } else rec.favorNoLongerWrapMissing = true;
+
+  // R88 TICK-PART LINGER SAMPLER (record-only): the boundary sampler
+  // (r85) missed a day-16 sortie decision when the Game day jumped
+  // 15 -> 17 between boundaries. After every doAction call, snapshot
+  // the lingering set + Game day into a runtime log (object refs kept
+  // here, joined to lingerBook at each boundary by convertTickSamples).
+  // The original is called first and its return/throw preserved; the
+  // snapshot is a pure getter read (worldMonsters), so trajectories
+  // must not change. driveFights/driveContests do not go through
+  // doAction('wait'), so samples are effectively per day-part.
+  const tickPartLog = []; // runtime-only: {day, verb, objs}
+  // R181 SUPPLY (record-only): snapshot playerTile type + medType
+  // inventory before each doAction; after, count forage calls by tile
+  // type and diff medType items (acquisition {day, id, doses, tile}).
+  // Original called first, return/throw preserved; pure reads only.
+  const _medSnap = () => { const m = {}; try { for (const i of (Game.state.scholar.inventory || [])) { if (i && i.medType) m[i.itemId || i.id || i.name] = (m[i.itemId || i.id || i.name] || 0) + ((i.doses) || 0); } } catch (e) {} return m; };
+  const _tileType = () => { try { const t = Game.playerTile ? Game.playerTile() : null; return (t && t.type) || null; } catch (e) { return null; } };
+  const _da = Game.doAction ? Game.doAction.bind(Game) : null;
+  if (_da) {
+    Game.doAction = function () {
+      const verb = String(arguments[0]);
+      const tileBefore = _tileType();
+      const medsBefore = _medSnap();
+      let r;
+      try { r = _da.apply(this, arguments); } catch (e) { throw e; }
+      try {
+        let lingering = [];
+        try { lingering = (Game.worldMonsters() || []).filter(m => m && m.lingering && (m.hp || 0) > 0); } catch (e) {}
+        tickPartLog.push({ day: dayOf(Game), verb: verb, objs: lingering.slice() });
+      } catch (e) { recordErr('lingerTickPart', e); }
+      try {
+        if (verb === 'forage') {
+          const tt = tileBefore || 'unknown';
+          rec.supply.forageByTile[tt] = (rec.supply.forageByTile[tt] || 0) + 1;
+          if (tt === 'ruin' || tt === 'building' || tt === 'cache') rec.supply.ruinSearches++;
+          const after = _medSnap();
+          for (const k of Object.keys(after)) {
+            const gain = (after[k] || 0) - (medsBefore[k] || 0);
+            if (gain > 0) rec.supply.medAcquisitions.push({ day: dayOf(Game), id: k, doses: gain, tileType: tt });
+          }
+        }
+      } catch (e) { recordErr('supplyForage', e); }
+      return r;
+    };
+  } else rec.doActionWrapMissing = true;
+  // R181 SUPPLY tele wrap (record-only): scavenge tele events carry the
+  // item name; rare flag resolved via scavengeItem at analysis time.
+  const _tele = Game.tele ? Game.tele.bind(Game) : null;
+  if (_tele) {
+    Game.tele = function (ev, data) {
+      let r;
+      try { r = _tele.apply(this, arguments); } catch (e) { throw e; }
+      try { if (ev === 'scavenge' && data) rec.supply.scavengeItems.push({ day: dayOf(Game), item: data.item || null, kcal: data.kcal || 0, lootLeft: (data.lootLeft === undefined ? null : data.lootLeft) }); } catch (e) { recordErr('supplyTele', e); }
+      return r;
+    };
+  } else rec.supplyTeleWrapMissing = true;
+  // R181 SUPPLY donateMedicine wrap (record-only): count pharmacy deposits.
+  const _dm = Game.donateMedicine ? Game.donateMedicine.bind(Game) : null;
+  if (_dm) {
+    Game.donateMedicine = function (idx) {
+      let before = null;
+      try { const inv = Game.state.scholar.inventory || []; const it = inv[idx]; if (it) before = { id: it.itemId || it.id, medType: it.medType || null, name: it.name }; } catch (e) {}
+      let r = null;
+      try { r = _dm.apply(this, arguments); } catch (e) { throw e; }
+      try { if (r && before) rec.supply.pharmacyDeposits.push({ day: dayOf(Game), id: before.id, medType: before.medType, name: before.name }); } catch (e) { recordErr('supplyDonate', e); }
+      return r;
+    };
+  } else rec.supplyDonateWrapMissing = true;
+  // R182 STRANGER wraps (record-only): registerDeath records every death
+  // with cause 'alien' (off-screen alien kill) or 'a stranger' (fight
+  // death via tbFightDeathCause) with the fight state at registration;
+  // apPlaygroundKill counts kill calls by persona (rate vs the 5-day
+  // shared cooldown); sysSay records the treeline feed line with the
+  // named killer (known name vs 'a stranger'). Originals called first,
+  // returns preserved; missing functions are recorded, never fatal.
+  const _rd = Game.registerDeath ? Game.registerDeath.bind(Game) : null;
+  if (_rd) {
+    Game.registerDeath = function (opts) {
+      let r;
+      try { r = _rd.apply(this, arguments); } catch (e) { throw e; }
+      try {
+        const cause = String((opts && opts.cause) || '');
+        if (cause === 'alien' || cause === 'a stranger') {
+          const entry = { day: dayOf(Game), name: (opts && opts.name) || null, cause,
+            killerId: (opts && opts.killerId) || null, villagerId: (opts && opts.villagerId) || null,
+            fightLive: !!(Game.tbfight && !Game.tbfight.over), fightOver: !!(Game.tbfight && Game.tbfight.over),
+            systemArrived: !!(Game.state && Game.state.systemArrived) };
+          if (cause === 'alien') rec.stranger.alienKills.push(entry);
+          else rec.stranger.strangerFightDeaths.push(entry);
+        }
+      } catch (e) { recordErr('strangerRegisterDeath', e); }
+      return r;
+    };
+  } else rec.strangerRegisterDeathWrapMissing = true;
+  const _apk = Game.apPlaygroundKill ? Game.apPlaygroundKill.bind(Game) : null;
+  if (_apk) {
+    Game.apPlaygroundKill = function (pid, target) {
+      let r;
+      try { r = _apk.apply(this, arguments); } catch (e) { throw e; }
+      try { if (target === 'villager') rec.stranger.apKillCalls.push({ day: dayOf(Game), pid: String(pid), returned: !!r }); } catch (e) { recordErr('strangerApKill', e); }
+      return r;
+    };
+  } else rec.strangerApKillWrapMissing = true;
+  const _ss = Game.sysSay ? Game.sysSay.bind(Game) : null;
+  if (_ss) {
+    Game.sysSay = function (t) {
+      let r;
+      try { r = _ss.apply(this, arguments); } catch (e) { throw e; }
+      try {
+        const line = String(t || '');
+        if (FEED_RE.test(line)) {
+          const vm = /"(.+?) was found dead near the treeline\. (.+?) was seen in the area/.exec(line);
+          rec.stranger.feedLines.push({ day: dayOf(Game), line: line.slice(0, 200), via: 'sysSay', victim: vm ? vm[1] : null, who: vm ? vm[2] : null });
+        }
+      } catch (e) { recordErr('strangerSysSay', e); }
+      return r;
+    };
+  } else rec.strangerSysSayWrapMissing = true;
+
+  // R182 RUINROAD ARM (env RUINROAD=1, descriptive only): once per day,
+  // when the bot is at Haven with no crisis pending, route to the nearest
+  // known ruin/building tile and search it, then return — modeled on
+  // livelihood.js study(). A measurement intervention in the driver, NOT
+  // a change to the shared oracleV2 policy. Runs from the policy upkeep
+  // hook (start of each day-part, dayTicks low — see the policy def
+  // below) so the search happens ahead of the day's normal actions.
+  const RUINROAD = process.env.RUINROAD === '1';
+  let ruinRoadDay = 0;
+  function ruinRoad() {
+    if (!RUINROAD) return;
+    try {
+      const s = Game.state.scholar || {};
+      const day = s.day || 0;
+      const sk = rec.stranger.ruinRoad.skips;
+      if (ruinRoadDay === day) { sk.dayDone++; return; }
+      if (Game.over || Game.tbfight || Game.pendingEncounter || Game.state.activeContest) { sk.guardEncounter++; return; }
+      if ((s.kcal || 0) < 800) { sk.guardKcal++; return; }
+      if (s.health < 30) { sk.guardHealth++; return; }
+      if ((s.dayTicks || 0) > 256) { sk.guardTicks++; return; }
+      try { if (Game.aidCrisis && Game.aidCrisis()) { sk.guardCrisis++; return; } } catch (e) {}
+      const here = { x: Game.map.px, y: Game.map.py, d: 0 };
+      let reachable = [];
+      try { reachable = (Game.travelTargets() || []); } catch (e) { return; }
+      // Known ruins first (seen + type ruin/building), else explore one
+      // nearby UNSEEN tile — the home board holds ~1 ruin tile and it
+      // starts unseen (probe: seed 14441 d16, 1 ruin on 9x9, seen=0),
+      // so a known-only road never fires. The exploration fallback is
+      // livelihood.js study()'s shape: travel, look, search if ruin.
+      // CANDIDATE WALK (r201 smoke: 27/30 attempts travelBlocked — the
+      // nearest unseen tile is usually across the creek or behind a
+      // fallen tree, and travelTo refuses honestly). Try up to 5
+      // candidates per day, nearest first — a player taps another tile
+      // when the first is blocked; the road gives up only when the
+      // batch is exhausted.
+      const seen = reachable.filter(t => { try { return Game.mapSeen(t.x, t.y); } catch (e) { return false; } });
+      const knownRuins = [here].concat(seen).sort((a, b) => ((a.d || 0) - (b.d || 0))).filter(t => { try { const tt = Game.tileAt(t.x, t.y); return tt && (tt.type === 'ruin' || tt.type === 'building'); } catch (e) { return false; } });
+      const unseen = reachable.filter(t => { try { return !Game.mapSeen(t.x, t.y); } catch (e) { return false; } }).sort((a, b) => ((a.d || 0) - (b.d || 0)));
+      const candidates = knownRuins.concat(unseen).slice(0, 5);
+      if (!candidates.length) { sk.noTarget++; return; }
+      ruinRoadDay = day;
+      let arrived = false;
+      for (const target of candidates) {
+        if (Game.over || Game.tbfight || Game.pendingEncounter) return;
+        const isRuin = (() => { try { const tt = Game.tileAt(target.x, target.y); return tt && (tt.type === 'ruin' || tt.type === 'building'); } catch (e) { return false; } })();
+        if (target.d) {
+          let res = Game.travelTo(target.x, target.y);
+          // CREEK WALL (r201 smoke: 115/115 blocks were the creek — the
+          // ruin sits behind water the bot cannot cross). A player builds
+          // a bridge (4 wood, permanent, game.js buildBridge) — the arm
+          // does the same when it holds the wood, then retries once.
+          // No wood is recorded, never faked with force-travel.
+          if (res && res.blockType === 'creek' && res.x !== undefined && res.y !== undefined) {
+            try {
+              if (Game.woodCount && Game.woodCount() >= 4) {
+                const built = Game.buildBridge(res.x, res.y);
+                if (built) { rec.stranger.ruinRoad.bridges++; res = Game.travelTo(target.x, target.y); }
+              } else {
+                rec.stranger.ruinRoad.skips.bridgeNoWood++;
+              }
+            } catch (e) { recordErr('ruinRoadBridge', e); }
+          }
+        }
+        if (Game.over || Game.tbfight || Game.pendingEncounter) return;
+        if (Game.map.px !== target.x || Game.map.py !== target.y) { sk.travelBlocked++; continue; }
+        arrived = true;
+        let tileType = null;
+        try { tileType = Game.playerTile ? (Game.playerTile() || {}).type : null; } catch (e) {}
+        if (tileType === 'ruin' || tileType === 'building') {
+          try { Game.doAction('forage'); rec.stranger.ruinRoad.searches++; rec.stranger.ruinRoad.trips++; } catch (e) { recordErr('ruinRoadForage', e); }
+        } else if (!isRuin) {
+          // Explored a non-ruin tile: the look itself is the trip's work.
+          rec.stranger.ruinRoad.trips++;
+        }
+        break;
+      }
+      if (arrived && candidates.length) { try { Game.travelTo(here.x, here.y); } catch (e) {} }
+    } catch (e) { recordErr('ruinRoad', e); }
+  }
+
+  const policy = {
+    id: 'crisis-journey-r70',
+    setup: oracleV2.setup ? oracleV2.setup.bind(oracleV2) : undefined,
+    // R182 RUINROAD hook: upkeep runs at the START of each day-part (the
+    // harness calls it 3x/day before the waits), when dayTicks is low —
+    // the daily hook runs at end of day (dayTicks ~384) and the road's
+    // dayTicks<=128 guard blocked it every day (smoke: 0 trips in 30d).
+    // livelihood.js study() fires from upkeep for the same reason. The
+    // ruinRoadDay guard keeps it once per day; oracleV2.upkeep runs after.
+    upkeep: function (G, ctx) {
+      try { ruinRoad(); } catch (e) {}
+      try { if (oracleV2.upkeep) oracleV2.upkeep.call(oracleV2, G, ctx); } catch (e) {}
+    },
+    daily: function (G, ctx) {
+      try { if (oracleV2.daily) oracleV2.daily.call(oracleV2, G, ctx); } catch (e) {}
+    },
+    fight: oracleV2.fight ? oracleV2.fight.bind(oracleV2) : undefined,
+    contest: oracleV2.contest ? oracleV2.contest.bind(oracleV2) : undefined,
+  };
+
+  // Per-lingerer-object sortie bookkeeping (object identity: ids repeat).
+  const lingerBook = new Map(); // obj -> {key, id, firstSeenDay, sorties, lastSortieDay, clearedBySortieDay, clearedEpisode}
+  let lingerKeySeq = 0; // R122: per-entry runtime key — the only individual identity (ids repeat, names collide)
+  lingerBookRef = lingerBook;
+  let convosThisRun = 0, raidConvoDone = new Set(), defenderSteered = false;
+  let prevLingering = []; // [{obj, id, name, firstSeenDay}] from previous day-boundary
+  rec.drifts = [];
+  rec.driftDupesSkipped = 0; // R154: identical drift records are skipped, not double-counted (r132's 13304 d70 eater double-count)
+  const driftSeen = new Set(); // R154: (id|episode|day|label) already recorded
+  // R53 drift-window cursors: say/resolution/removal indices at the last
+  // drift check, so each vanished object is classified from exactly one
+  // window of evidence (previous boundary's sortie + this day's runDays).
+  let lastSayIdx = 0, lastResIdx = 0, lastRemIdx = 0;
+  let deadTail = 0, endReason = 'horizon', seenDeaths = 0;
+  // R154 FROZEN-DAY state (detector below): last gameDay seen + how many
+  // consecutive iterations it stayed put + say-line count when it froze.
+  let lastGameDay = null, frozenIters = 0, frozenSayMark = 0;
+
+  // R88: join runtime tick-part samples to the boundary lingerBook and
+  // serialize plain. Samples convert in boundary order (cursor), so a
+  // sample always joins the episode live at its boundary. An object
+  // whose episode RESET at this boundary (re-linger after drift) joins
+  // the NEW episode with the NEW firstSeenDay — conservative for its
+  // own samples (they belong to the new episode, waited <= 0) and
+  // harmless for old-episode samples (already converted at earlier
+  // boundaries). Objects never booked (appeared mid-iteration, gone
+  // before any boundary) keep nulls: such an episode lasts < 1 day
+  // and cannot carry a >=3-night window, so nulls never hide one.
+  let lastTickIdx = 0;
+  function convertTickSamples() {
+    try {
+      for (let i = lastTickIdx; i < tickPartLog.length; i++) {
+        const s = tickPartLog[i];
+        // One entry per sample even when nothing lingers (id null) —
+        // otherwise an empty lingerTickParts cannot distinguish "wrap
+        // never ran" from "no lingerer ever appeared". Null entries
+        // never match the id+episode window filters in the analyzer.
+        if (!s.objs.length) { rec.lingerTickParts.push({ day: s.day, verb: s.verb, id: null, name: null, episode: null, firstSeenDay: null, nightsWaited: null }); continue; }
+        for (const obj of s.objs) {
+          const b = lingerBook.get(obj);
+          rec.lingerTickParts.push({ day: s.day, verb: s.verb, id: obj && obj.id, name: obj ? displayNameOf(Game, obj) : null, episode: b ? b.episode : null, firstSeenDay: b ? b.firstSeenDay : null, nightsWaited: b ? (s.day - b.firstSeenDay) : null });
+        }
+      }
+      lastTickIdx = tickPartLog.length;
+    } catch (e) { recordErr('tickPart-convert', e); }
+  }
+
+  for (let d = 1; d <= DAYS; d++) {
+    let res;
+    const sayMark = rec.sayLines.length;
+    const fightsMark = rec.sortieFights.length;
+    try { res = await runDays(Game, policy, { days: 1, sampleEvery: 1 }); }
+    catch (e) { endReason = 'threw:' + e.message; break; }
+    rec.days = d;
+    // R164: medic-duty span sample (pure read).
+    try { const hid = (typeof Game.medicDutyHolder === 'function') ? Game.medicDutyHolder() : null; if (hid) { const gd = dayOf(Game); const sp = medicDutySpanMap.get(hid) || { firstDay: gd, lastDay: gd }; sp.lastDay = gd; medicDutySpanMap.set(hid, sp); } } catch (e) { recordErr('medicDutySpan', e); }
+    // R180 MED SUPPLY (prereg Q2): daily pure-read pharmacy + pack doses.
+    try {
+      const st = (typeof Game.stashState === 'function') ? Game.stashState() : null;
+      const pharm = ((st && st.medicine) || []).reduce((t, m) => t + ((m && m.doses) || 0), 0);
+      const pack = ((Game.state.scholar.inventory || []).filter(i => i && i.medType).reduce((t, i) => t + ((i.doses) || 0), 0));
+      medSupply.days++;
+      if (pharm > 0) medSupply.daysWithPharmacy++;
+      if (pack > 0) medSupply.daysWithPack++;
+      if (pharm > medSupply.maxPharmacy) medSupply.maxPharmacy = pharm;
+      if (pack > medSupply.maxPack) medSupply.maxPack = pack;
+      if (pharm > 0 && !medSupply.firstPharmacyDay) medSupply.firstPharmacyDay = dayOf(Game);
+    } catch (e) { recordErr('medSupply', e); }
+    // R168 MID-RUN STASH (prereg Q2 refinement): at day 60, sample the
+    // Haven stash pharmacy (doses by medType) into rec.stashMid — pure
+    // read, so a mid-run spend can't hide behind an empty census-time
+    // stash. Taken once; a run that ends before day 60 leaves it unset
+    // and the analyzer reports it absent.
+    if (!stashMidTaken && dayOf(Game) >= 60) {
+      stashMidTaken = true;
+      try { const st = (typeof Game.stashState === 'function') ? Game.stashState() : null; const meds = (st && st.medicine) || []; const byType = {}; for (const m of meds) { const k = (m && m.medType) || (m && m.name) || 'unknown'; byType[k] = (byType[k] || 0) + ((m && m.doses) || 0); } rec.stashMid = { day: dayOf(Game), medicine: byType }; } catch (e) { recordErr('stashMid', e); }
+    }
+    // R88 pantryDaily (pure read of this iteration's runDays samples).
+    try { const prow = (res && res.samples && res.samples.pantry) || []; rec.pantryDaily.push({ iter: d, gameDay: dayOf(Game), kcal: prow.length ? prow[prow.length - 1][1] : null }); } catch (e) { recordErr('pantryDaily', e); }
+    // R154 FROZEN-DAY DETECTOR (r150 filed instrument item): the r150
+    // betrayal softlock froze gameDay at 18 for 106 iterations while say
+    // lines kept coming ("No path there." + Wren stall lines). If gameDay
+    // is unchanged across 10 consecutive iterations AND say lines grew
+    // during the freeze (stall evidence) AND the village is still alive
+    // and the game is not over, stop with endReason 'softlock' and
+    // snapshot the frozen fight state. The detector never changes picks
+    // — it only stops a run the old driver burned 100+ iterations on.
+    // (The death tail is excluded by the alive>0 guard: a dead village
+    // also holds gameDay still, but says nothing and ends 'village-dead'.)
+    {
+      const gd = dayOf(Game);
+      let aliveNow = 0; try { aliveNow = livingCount(Game); } catch (e) {}
+      const overNow = !!Game.over;
+      if (lastGameDay === null) { lastGameDay = gd; frozenIters = 0; frozenSayMark = rec.sayLines.length; }
+      else if (gd === lastGameDay) {
+        frozenIters++;
+        if (frozenIters >= 10 && rec.sayLines.length > frozenSayMark && aliveNow > 0 && !overNow) {
+          endReason = 'softlock';
+          const snap = { frozenGameDay: gd, iterationsAtFreeze: d, frozenIters, sayLinesTotal: rec.sayLines.length, lastSayLines: rec.sayLines.slice(-20).map(s => s.line) };
+          try { const sc = Game.state && Game.state.scholar; snap.player = sc ? { vid: Game.villagerId, mx: sc.mx, my: sc.my } : { vid: Game.villagerId }; } catch (e) { snap.player = { err: String(e && e.message || e) }; }
+          try {
+            const f = Game.tbfight;
+            snap.fight = f ? { over: !!f.over, betrayal: !!f.betrayal, round: f.round || null, turn: f.turn || null, fighters: (f.fighters || []).map(x => ({ key: x.key, kind: x.kind, name: x.name || null, mx: x.mx, my: x.my, hp: x.hp, alive: !!x.alive, fled: !!x.fled, moveLeft: x.moveLeft, acted: !!x.acted, pursuit: x._pursuit === undefined ? null : x._pursuit })) } : null;
+          } catch (e) { snap.fight = { err: String(e && e.message || e) }; }
+          try { snap.inCombat = (typeof Game.inCombat === 'function') ? !!Game.inCombat() : null; } catch (e) { snap.inCombat = null; }
+          try { snap.worldMonsters = (Game.worldMonsters() || []).map(m => ({ id: m.id, name: (m.name || null), hp: m.hp, lingering: !!m.lingering, mx: m.mx, my: m.my })); } catch (e) { snap.worldMonsters = { err: String(e && e.message || e) }; }
+          rec.softlock = snap;
+          break;
+        }
+      } else { lastGameDay = gd; frozenIters = 0; frozenSayMark = rec.sayLines.length; }
+    }
+    try {
+      const ds = (res.samples && res.samples.deaths) || [];
+      for (const de of ds.slice(seenDeaths)) {
+        seenDeaths++;
+        rec.deaths.push({ day: dayOf(Game), name: rawName(Game, de.who), cause: String(de.cause || de.how || ''), player: !!de.player });
+      }
+    } catch (e) {}
+
+    // ---- DAY-BOUNDARY SORTIE DECISION ----
+    try {
+      const day = dayOf(Game);
+      let lingering = [];
+      try { lingering = (Game.worldMonsters() || []).filter(m => m && m.lingering && (m.hp || 0) > 0); } catch (e) {}
+      rec.lingerDaily.push({ day, n: lingering.length });
+      try { rec.crisisDaily.push({ day, crisis: snapCrisis(Game), lingering: lingering.length }); } catch (e) { recordErr('crisisDaily', e); }
+      // R186 ELIGIBILITY SAMPLER (adoption: pilot showed 0 alien kills on
+      // 3 seeds — record-only): once per day boundary, sample the alien
+      // playground gates so A7 can tell "channel never eligible" from
+      // "eligible but unlucky". Pure reads; never mutates game state.
+      try {
+        let apEl = null, encEl = null, wave = null, tileType = null, readiness = null;
+        try { apEl = (typeof Game.apEligible === 'function') ? !!Game.apEligible() : null; } catch (e) {}
+        try { encEl = (typeof Game.apEncounterEligible === 'function') ? !!Game.apEncounterEligible() : null; } catch (e) {}
+        try { wave = (typeof Game.unlockedWave === 'function') ? Game.unlockedWave() : null; } catch (e) {}
+        try { const t = Game.tileAt(Game.map.px, Game.map.py); tileType = t ? t.type : null; } catch (e) {}
+        // R186 readiness read (same adoption): the encounter gate wraps
+        // apEncounterEligible with apReadinessCheck (score>=100: party 25
+        // each, threat, day30+ 25, sysInt 25, beam-resist 15 each). Pure
+        // read — the check itself is side-effect-free.
+        try { const rc = (typeof Game.apReadinessCheck === 'function') ? Game.apReadinessCheck() : null; readiness = rc ? { ready: !!rc.ready, score: rc.score, reasons: rc.reasons || [] } : null; } catch (e) {}
+        rec.stranger.eligibility.push({ day, apEligible: apEl, encounterEligible: encEl,
+          systemArrived: !!((Game.state || {}).systemArrived), wave, px: Game.map.px, py: Game.map.py, tileType, readiness });
+      } catch (e) { recordErr('eligibility', e); }
+      // R54 EPISODE RESET (r53 metric review §2): an object absent from
+      // >=1 day-boundary set whose previous episode ENDED (cleared by a
+      // sortie, or drifted away and recorded) starts a NEW episode on
+      // reappearance: firstSeenDay resets, sorties reset. firstSeenEver
+      // is kept so old-vs-new nightsWaited can be compared. A mid-fight
+      // lift across one boundary can also split an episode (it drifts
+      // 'unknown' first) — visible via resetReason, not hidden.
+      const todaySet = new Set(lingering);
+      for (const m of lingering) {
+        if (!lingerBook.has(m)) lingerBook.set(m, { key: ++lingerKeySeq, id: m.id, name: displayNameOf(Game, m), firstSeenDay: day, firstSeenEver: day, episode: 1, sorties: 0, lastSortieDay: null, clearedBySortieDay: null, clearedEpisode: null, draftHp: m.hp || 0, absentBoundaries: 0, drifted: false, lastSeenDay: day, resetReason: null });
+        else {
+          const b = lingerBook.get(m);
+          if (b.absentBoundaries > 0 && (b.clearedBySortieDay !== null || b.drifted)) {
+            const wasCleared = b.clearedBySortieDay !== null;
+            b.episode++; b.firstSeenDay = day; b.sorties = 0; b.lastSortieDay = null; b.clearedBySortieDay = null; b.clearedEpisode = null; b.drifted = false;
+            b.resetReason = wasCleared ? 're-linger-after-clear' : 're-linger-after-drift';
+          }
+          b.lastSeenDay = day; b.absentBoundaries = 0;
+        }
+      }
+      for (const [obj, b] of lingerBook) if (!todaySet.has(obj)) b.absentBoundaries++;
+      // R53 drift classification: objects lingering yesterday, gone today,
+      // not cleared by a sortie on this boundary (sorties run below, so a
+      // disappearance recorded here predates today's sortie). Exactly one
+      // label per object, priority-ordered; 'unknown' is a finding.
+      try {
+        const sayWindow = rec.sayLines.slice(lastSayIdx);
+        const resWindow = rec.aidResolutions.slice(lastResIdx);
+        const remWindow = removalLog.slice(lastRemIdx);
+        for (const prev of prevLingering) {
+          if (todaySet.has(prev.obj)) continue;
+          const b = lingerBook.get(prev.obj);
+          const names = [prev.name, prev.id].filter(Boolean);
+          let label = 'unknown', evidence = null;
+          if (b && b.clearedBySortieDay !== null) {
+            label = 'sortie-clear'; evidence = 'clearedBySortieDay=' + b.clearedBySortieDay;
+          } else {
+            const melts = sayWindow.find(s => MELTS_RE.test(s.line) && names.some(nm => s.line.indexOf(nm) !== -1));
+            if (melts) { label = 'melts-line'; evidence = melts.line.slice(0, 160); }
+            else {
+              const moved = resWindow.find(r => r.how === 'moved-on');
+              if (moved) { label = 'moved-on-valve'; evidence = 'resolution day ' + moved.day + ' during ' + moved.during; }
+              else {
+                const drawnLine = sayWindow.find(s => DRAWN_RE.test(s.line) && names.some(nm => s.line.indexOf(nm) !== -1));
+                const drawnRem = remWindow.find(r => r.obj === prev.obj && r.ctx !== 'sortie');
+                if (drawnLine || drawnRem) { label = 'player-drawn-off'; evidence = drawnLine ? drawnLine.line.slice(0, 160) : ('removal ctx ' + drawnRem.ctx + ' id ' + drawnRem.id); }
+              }
+            }
+          }
+          if (b && label !== 'sortie-clear') b.drifted = true;
+          // R154 DRIFT DEDUPE: the lingering list can carry the same
+          // monster object twice, which recorded one drift per copy.
+          // Same (id, episode, day, label) twice is one event, not two.
+          const dupeKey = prev.id + '|' + (b ? b.episode : null) + '|' + day + '|' + label;
+          if (driftSeen.has(dupeKey)) { rec.driftDupesSkipped++; continue; }
+          driftSeen.add(dupeKey);
+          rec.drifts.push({ day, id: prev.id, name: prev.name || null, firstSeenDay: prev.firstSeenDay, firstSeenEver: b ? b.firstSeenEver : null, episode: b ? b.episode : null, lastSeenDay: b ? b.lastSeenDay : null, nightsWaited: day - prev.firstSeenDay, nightsWaitedOld: b ? (day - b.firstSeenEver) : null, sortiesBefore: b ? b.sorties : null, clearedBySortieDay: b ? b.clearedBySortieDay : null, label, evidence });
+        }
+        lastSayIdx = rec.sayLines.length; lastResIdx = rec.aidResolutions.length; lastRemIdx = removalLog.length;
+      } catch (e) { recordErr('drift-classify', e); }
+      prevLingering = lingering.map(m => ({ obj: m, id: m.id, name: lingerBook.get(m).name, firstSeenDay: lingerBook.get(m).firstSeenDay, firstSeenEver: lingerBook.get(m).firstSeenEver, episode: lingerBook.get(m).episode }));
+      // R88: convert this iteration's tick-part samples now that the
+      // book reflects this boundary (see convertTickSamples note).
+      convertTickSamples();
+      // R52 DELAYED RULE: first sortie only at >=3 nights waited; second
+      // only if still lingering 3+ days after the first (r50 rule).
+      const needsSortie = lingering.filter(m => {
+        const b = lingerBook.get(m);
+        if (!b) return false;
+        if (b.sorties === 0) return day - b.firstSeenDay >= 3;
+        if (b.sorties < 2 && b.lastSortieDay !== null && day - b.lastSortieDay >= 3) return true;
+        return false;
+      });
+      if (needsSortie.length && typeof Game.answerLingerer === 'function') {
+        const pantryBefore = pantryKcal(Game);
+        const aliveBefore = aliveSet(Game);
+        const deadBeforeNames = new Set();
+        try {
+          for (const id of (Game.state.village.roster || [])) {
+            const vp = Game.vpOf(id);
+            if (vp && vp.dead) deadBeforeNames.add(rawName(Game, id));
+          }
+        } catch (e) {}
+        const beforeSnap = lingering.map(m => ({ obj: m, id: m.id, name: displayNameOf(Game, m), hp: m.hp || 0 }));
+        const sayBefore = rec.sayLines.length;
+        let ret = null, retErr = null;
+        // R53: crisis snapshot around the sortie call (D4 instrument fix).
+        const crisisBefore = snapCrisis(Game);
+        // R128 BENCH: snapshot the fighter bench BEFORE the call (pure reads).
+        const bench = benchSnapshot(Game);
+        const resBefore = rec.aidResolutions.length;
+        sortieFlag = true;
+        try { ret = Game.answerLingerer('sortie'); } catch (e) { retErr = String(e && e.message || e); }
+        sortieFlag = false;
+        const crisisAfter = snapCrisis(Game);
+        const resolutionsDuring = rec.aidResolutions.slice(resBefore);
+        const pantryAfter = pantryKcal(Game);
+        const callLines = rec.sayLines.slice(sayBefore).map(s => s.line);
+        const sortieLine = callLines.find(l => SORTIE_RE.test(l)) || null;
+        // R57 MUSTER PARSING (r54 metric review §2): the sortie line
+        // names the muster ("SORTIE — Dina, Yawo take up arms"), so
+        // death lines are matched against roster ∪ muster, not the
+        // roster alone. A death line matching neither stays visible
+        // as an unattributed line in the analyzer.
+        let musterNames = [];
+        if (sortieLine) {
+          const mm = /SORTIE — (.+?) take up arms/.exec(sortieLine);
+          if (mm) musterNames = mm[1].split(/,\s*|\s+and\s+/).map(s => s.trim()).filter(Boolean);
+        }
+        const worldAfter = (() => { try { return Game.worldMonsters() || []; } catch (e) { return []; } })();
+        const afterSnap = beforeSnap.map(b => {
+          const still = worldAfter.find(w => w === b.obj);
+          return {
+            id: b.id, name: b.name, hpBefore: b.hp,
+            removed: !still, lingeringAfter: still ? !!still.lingering : null, hpAfter: still ? (still.hp || 0) : null,
+          };
+        });
+        const deadAfter = [];
+        try {
+          for (const id of (Game.state.village.roster || [])) {
+            const vp = Game.vpOf(id);
+            if (vp && vp.dead && aliveBefore.has(String(id))) deadAfter.push(rawName(Game, id));
+          }
+        } catch (e) {}
+        const musterSize = (ret && typeof ret.paid === 'number' && ret.paid > 0) ? Math.round(ret.paid / 2000) : null;
+        const deadInMusterLine = sortieLine ? [...deadBeforeNames].filter(nm => sortieLine.indexOf(nm) !== -1) : [];
+        // R54 SAY-LINE DEATH ACCOUNTING (r53 metric review §4): the
+        // roster diff misses non-roster muster deaths (r53 9406 Dina).
+        // Scan the sortie call's own say lines for death language and
+        // attribute villager names found in them.
+        const DEATH_SAY_RE = /didn't come back|carries the body|goes down|fell at|fell in|\bdied\b|\bdead\b|buried|laid to rest|succumbed|didn't make it|mourn|grief|grave/i;
+        const rosterNames = [];
+        try {
+          for (const id of (Game.state.village.roster || [])) {
+            const nm = rawName(Game, id);
+            if (nm) rosterNames.push(nm);
+          }
+        } catch (e) {}
+        const deathsDuringSay = [];
+        for (const l of callLines) {
+          if (!DEATH_SAY_RE.test(l)) continue;
+          const namesRoster = rosterNames.filter(nm => nm && l.indexOf(nm) !== -1);
+          const namesMuster = musterNames.filter(nm => nm && l.indexOf(nm) !== -1);
+          const names = [...new Set([...namesRoster, ...namesMuster])];
+          deathsDuringSay.push({ line: l.slice(0, 300), names, namesRoster, namesMuster });
+        }
+        const episodeInfo = lingering.filter(m => lingerBook.get(m)).map(m => {
+          const b = lingerBook.get(m);
+          return { id: b.id, episode: b.episode, firstSeenDay: b.firstSeenDay, firstSeenEver: b.firstSeenEver };
+        });
+        const entry = {
+          day, attempt: rec.sorties.length + 1,
+          nightsWaited: Math.max(...lingering.filter(m=>lingerBook.get(m)).map(m=>day - lingerBook.get(m).firstSeenDay), 0),
+          targets: beforeSnap.map(b => ({ id: b.id, name: b.name, hp: b.hp })),
+          ret: ret ? { ok: !!ret.ok, cleared: ret.cleared, broke: !!ret.broke, remaining: ret.remaining, paid: ret.paid, why: ret.why || null } : null,
+          bench,
+          retErr, crisisBefore, crisisAfter, resolutionsDuring,
+          pantryBefore, pantryAfter, pantryDelta: pantryAfter - pantryBefore,
+          musterSize, musterNames, sortieLine: sortieLine ? sortieLine.slice(0, 300) : null,
+          callLines: callLines.map(l => l.slice(0, 300)),
+          fights: rec.sortieFights.slice(fightsMark),
+          after: afterSnap, deathsDuring: deadAfter, deadInMusterLine,
+          deathsDuringLeader: (rec.sortieFights.slice(fightsMark)).filter(f => /vDie/.test(f.outcome || '')).map(f => ({ leader: f.leaderName, monster: f.monster, vTaken: f.vTaken })),
+          deathsDuringSay, episodeInfo,
+        };
+        rec.sorties.push(entry);
+        for (const m of lingering) {
+          const b = lingerBook.get(m);
+          if (b && ret && ret.ok) { b.sorties++; b.lastSortieDay = day; } // R58: refused calls consume no slot
+        }
+        // Mark cleared objects (removed, or lingering=false) for the gorge-after check.
+        for (let i = 0; i < beforeSnap.length; i++) {
+          const a = afterSnap[i];
+          if (a.removed || a.lingeringAfter === false) {
+            const b = lingerBook.get(beforeSnap[i].obj);
+            if (b) { b.clearedBySortieDay = day; b.clearedEpisode = b.episode; }
+          }
+        }
+      }
+    } catch (e) { rec.sortieDecisionError = String(e && e.message || e); }
+
+    // ---- convos: defender-after-resolution + day+2 sheltered witness, cap 8 ----
+    // R71 DEFENDER FIX (r70 blank 1): the day-boundary block runs the
+    // morning AFTER a raid day, so a raid-day check never fires here.
+    // defendedFights are recorded with the raid day, so the defender
+    // convo triggers when yesterday's boundary-day-minus-1 fights exist
+    // (first convo opportunity after the resolution), and the speaker
+    // MUST be a recorded defender of that fight day, never a fallback
+    // roster member (a fallback would fake the D1 speaker-fought bar).
+    try {
+      const day = dayOf(Game);
+      const defendedYesterday = rec.defendedFights.filter(f => f.day === day - 1 && String(f.vid) !== String(Game.villagerId));
+      const raidDayMinus2 = rec.raids.some(r => day - r.day === 2);
+      if ((defendedYesterday.length > 0 || raidDayMinus2) && convosThisRun < 8 && !raidConvoDone.has(day)) {
+        raidConvoDone.add(day);
+        const v = Game.state.village || {};
+        let target = null, tag = '';
+        if (defendedYesterday.length > 0) {
+          const def = defendedYesterday[0];
+          target = def ? def.vid : null;
+          tag = 'DEFENDER-after-resolution';
+        } else {
+          let sh = [];
+          try { sh = Game.shelteredVillagers ? Game.shelteredVillagers() : []; } catch (e) {}
+          // R116 SELF-CONVO GUARD (11601 d102): shelteredVillagers()
+          // returned the current bearer (shelter flag surviving
+          // succession — fixed in ledger.js this run), and this pick
+          // took sh[0] with no player exclusion, driving a conversation
+          // with the player character as NPC. The defender branch above
+          // already excludes the player; this branch now does too, so
+          // a future stale flag can never produce a self-convo again.
+          const shNotPlayer = (sh || []).filter(id => String(id) !== String(Game.villagerId));
+          target = (shNotPlayer.length ? shNotPlayer[0] : (v.roster || []).find(r => String(r) !== String(Game.villagerId)));
+          tag = 'SHELTERED-two-days-after';
+        }
+        if (target) {
+          const lines = [];
+          const steerThis = (tag === 'DEFENDER-after-resolution' && !defenderSteered);
+          if (steerThis) defenderSteered = true;
+          const npc = driveConvo(Game, target, `seed${SEED} d${day} ${tag}`, lines, steerThis ? { steerLately: true } : null);
+          const f = `journey-crisis-r201-seed${SEED}-d${day}-${tag.toLowerCase().replace(/[^a-z]+/g, '-')}.txt`;
+          fs.writeFileSync(path.join(EVID, f), lines.join('\n'), 'utf8');
+          // R54 CONTEST HISTORY (r53 metric review §3): snapshot the
+          // player's contest history with the convo, so lines that
+          // reference contests become verifiable instead of plausible.
+          let playerContests = null;
+          try {
+            playerContests = {
+              held: (Game.state && Game.state.contestsHeld) || 0,
+              seen: Object.keys((Game.state && Game.state.contestsSeen) || {}),
+            };
+          } catch (e) { recordErr('playerContests-snapshot', e); }
+          rec.convosDriven.push({ day, tag, file: f, vid: String(target), npcLines: npc.length, playerContests, latelySteered: steerThis, latelyOffered: !!npc.latelyOffered, latelyFired: !!npc.latelyFired, subjectNavs: npc.subjectNavs || 0, noRepeatRedirects: npc.noRepeatRedirects || 0, forcedRepeats: npc.forcedRepeats || 0, betrayalSiteForced: !!npc.betrayalSiteForced });
+          convosThisRun++;
+        }
+      }
+    } catch (e) {}
+
+    if (Game.over) { endReason = 'game-over'; break; }
+    try {
+      const alive = livingCount(Game);
+      if (alive <= 0) { if (++deadTail >= 10) { endReason = 'village-dead'; break; } }
+      else deadTail = 0;
+    } catch (e) {}
+  }
+  rec.endReason = endReason;
+  rec.medSupply = medSupply; // R180 Q2 supply-origin probe summary
+
+  // R88: convert any straggler tick-part samples (e.g. a 'threw' break
+  // skipped the boundary conversion) before analysis reads the record.
+  try { convertTickSamples(); } catch (e) {}
+
+  // ---- gorge-after check (name-matched, secondary — r48 trap acknowledged) ----
+  // R122 adds the id-matched verdict alongside: same runtime key AND
+  // the cleared episode, from capture-time attribution. Same key in a
+  // LATER episode is a return, not a clear failure; a name match with
+  // a different key (or ambiguous/none attribution) is the r117
+  // collision class, not a game event.
+  try {
+    const cleared = [];
+    for (const [obj, b] of lingerBook) {
+      if (b.clearedBySortieDay !== null) {
+        const names = [];
+        try { names.push(displayNameOf(Game, obj)); } catch (e) {}
+        if (b.id) names.push(b.id);
+        const afterLines = rec.sayLines.filter(s => s.day > b.clearedBySortieDay && GORGE_RE.test(s.line) && names.some(nm => nm && s.line.indexOf(nm) !== -1));
+        const afterId = (rec.gorgeNights || []).filter(g => g.day > b.clearedBySortieDay && g.attributedKey === b.key && g.attributedEpisode === b.clearedEpisode);
+        const afterReturn = (rec.gorgeNights || []).filter(g => g.day > b.clearedBySortieDay && g.attributedKey === b.key && typeof g.attributedEpisode === 'number' && b.clearedEpisode !== null && g.attributedEpisode > b.clearedEpisode);
+        cleared.push({ key: b.key, id: b.id, clearedDay: b.clearedBySortieDay, clearedEpisode: b.clearedEpisode, gorgeAfterNameMatched: afterLines.map(s => ({ day: s.day, line: s.line.slice(0, 160) })), gorgeAfterIdMatched: afterId.map(g => ({ day: g.day, name: g.name || null, line: g.line.slice(0, 160) })), gorgeAfterReturn: afterReturn.map(g => ({ day: g.day, name: g.name || null, episode: g.attributedEpisode, line: g.line.slice(0, 160) })) });
+      }
+    }
+    rec.clearedGorgeAfter = cleared;
+    rec.lingerBook = [...lingerBook.values()].map(b => ({ key: b.key, id: b.id, name: b.name || null, firstSeenDay: b.firstSeenDay, firstSeenEver: b.firstSeenEver, episode: b.episode, sorties: b.sorties, lastSortieDay: b.lastSortieDay, clearedBySortieDay: b.clearedBySortieDay, clearedEpisode: b.clearedEpisode, draftHp: b.draftHp, absentBoundaries: b.absentBoundaries, drifted: b.drifted, resetReason: b.resetReason }));
+    // Serialize the runtime removal log without object refs.
+    try { rec.removals = removalLog.map(r => ({ day: r.day, id: r.id, name: r.name, hp: r.hp, lingering: r.lingering, ctx: r.ctx })); } catch (e) { recordErr('removals-serialize', e); }
+  } catch (e) { rec.gorgeAfterError = String(e && e.message || e); }
+
+  // ---- end-of-run census ----
+  try {
+    const v = Game.state.village || {};
+    const alive = [], dead = [];
+    for (const id of (v.roster || [])) {
+      let p = null; try { p = Game.vpOf(id); } catch (e) {}
+      let nm = id; try { nm = Game.displayName(id) || id; } catch (e) {}
+      if (p && !p.dead) alive.push(nm); else dead.push(nm);
+    }
+    let corpses = [];
+    try {
+      const cs = (typeof Game.corpses === 'function') ? Game.corpses() : (Game.state.corpses || []);
+      corpses = cs.filter(c => c && ((typeof Game.corpseIsPerson === 'function' && Game.corpseIsPerson(c)) || c.kind === 'person' || c.kind === 'villager'))
+        .map(c => ({ name: c.name || c.villagerId, cause: String(c.cause || ''), day: c.dayDied, player: !!c.player }));
+    } catch (e) {}
+    // R164 MEDIC DUTY recorder (prereg Q2; r156 Q12): first wild measurement of
+    // the Haven Medic Duty build — holder, blocked departures, cures.
+    // Pure read of village state; no game mutation.
+    let medicDuty = null;
+    try {
+      // R164 (prereg Q2): read the LIVE holder — the raw v.medicDuty
+      // field goes stale after the holder dies or departs (r156: 13905
+      // "holder Fatima, holderAlive false"). Keep the raw field in the
+      // record so a stale-field case stays visible.
+      let holderId = null;
+      try { holderId = (typeof Game.medicDutyHolder === 'function') ? Game.medicDutyHolder() : null; } catch (e) {}
+      let holderName = null, holderAlive = null;
+      if (holderId) {
+        try { holderName = Game.displayName(holderId) || holderId; } catch (e) { holderName = holderId; }
+        try { const hp = Game.vpOf(holderId); holderAlive = !!(hp && !hp.dead); } catch (e) {}
+      }
+      const spans = [...medicDutySpanMap.entries()].map(([id, sp]) => { let nm = id; try { nm = Game.displayName(id) || id; } catch (e) {} return { holder: nm, firstDay: sp.firstDay, lastDay: sp.lastDay }; });
+      let stashMedicine = null;
+      try { const st = (typeof Game.stashState === 'function') ? Game.stashState() : null; const meds = (st && st.medicine) || []; const byType = {}; for (const m of meds) { const k = (m && m.medType) || (m && m.name) || 'unknown'; byType[k] = (byType[k] || 0) + ((m && m.doses) || 0); } stashMedicine = byType; } catch (e) { stashMedicine = { error: String(e && e.message || e) }; }
+      medicDuty = { holder: holderName, holderAlive, holderId, rawField: v.medicDuty || null, spans, stashMedicine, blocked: (v.medicDutyBlocked || 0), cures: v.medicDutyCures || { ability: 0, medicine: 0 } };
+    } catch (e) { medicDuty = { error: String(e && e.message || e) }; }
+    rec.census = {
+      scattered: !!v.scattered, extinct: !!v.extinct,
+      aliveCount: alive.length, alive, dead, corpses, pantryKcal: pantryKcal(Game),
+      medicDuty,
+    };
+  } catch (e) { rec.census = { error: e.message }; }
+
+  console.log(JSON.stringify(rec));
+}
+
+// R164: guarded so the proof test can require this module and unit-test
+// pickConvoChoice without running a sim (node scripts/... still runs main).
+if (typeof module !== 'undefined') module.exports = { pickConvoChoice };
+if (require.main === module) {
+  (async () => {
+    try { fs.mkdirSync(EVID, { recursive: true }); } catch (e) {}
+    try { await main(); }
+    catch (e) { console.log(JSON.stringify({ seed: SEED, error: String(e && e.message || e) })); }
+  })();
+}

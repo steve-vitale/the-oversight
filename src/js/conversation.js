@@ -2561,6 +2561,42 @@
           try { if (e.snippet && this.convoSnippetIsRealBeat(e.snippet)) { shared = true; break; } } catch (err) {}
         }
         if (!shared) { L.lastClosed = null; return null; }
+        // FAVOR-WANT GATE (journey-crisis r201 2026-11-14): the `want`
+        // thread is labeled by the favor it names ("that wound care"),
+        // but the threadLog attributes every beat of a want-driven
+        // sitting to `want` whatever the subject — regrets, kindness,
+        // stew — so the real-beat gate above passes on beats that never
+        // touched the favor (transcript-caught: crisis r201 seed 14445
+        // d10 Ella — favor still 'asked', close line declared the wound
+        // care settled). A favor want is settled only when the favor
+        // itself is done (fulfilled / thanked); a promise is not a
+        // settlement, and a broken or lapsed favor is not one either.
+        // Withheld exactly like the no-real-beat fallback above: the
+        // thread closes quietly, never declared settled on nothing.
+        // ANCHOR (r201 postfix correction): the close line keys on the
+        // LEDGER thread, which outlives the sitting that planted it —
+        // by d10 the sitting's want was a link proposal, not the favor,
+        // so gating on the sitting's want misses the wild case. The
+        // anchor is the villager's favor ledger (one current favor per
+        // villager, surviving across conversations): the thread is a
+        // favor thread only when its label IS that favor's label (same
+        // kind->label map as convoTopicLabel's ask_favor branch), so a
+        // pending favor never blocks an unrelated want thread.
+        if (lc.tid === 'want') {
+          try {
+            const fav = (typeof this.convoGetFavor === 'function') ? this.convoGetFavor(vid) : null;
+            const favorLabels = {
+              food_share: 'that food share', forage_help: 'that foraging help',
+              sick_help: 'that sickness help', heal_help: 'that wound care',
+              water_haul: 'that water haul', watch_shift: 'that watch shift',
+              stay_close: 'that night together', snare_mend: 'that snare mending',
+            };
+            if (fav && fav.kind && favorLabels[fav.kind] === lc.label &&
+                !(fav.state === 'fulfilled' || fav.state === 'thanked')) {
+              L.lastClosed = null; return null;
+            }
+          } catch (e) {}
+        }
         L.closeGiven = lc.tid + ':' + day;
         L.lastClosed = null;
         const about = this.convoThreadAbout(vid, lc.tid, lc.label);
