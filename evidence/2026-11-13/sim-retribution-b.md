@@ -312,10 +312,10 @@ to move it.
 
 ## Commits (branch sim-retribution-b, base master 95dbf07f3)
 
-- 53659af89 — prereg + check driver/analyzer + proof test (RED: G1
+- 9e16c0b40 — prereg + check driver/analyzer + proof test (RED: G1
   summary@11 falls@10, G2 summary@12 falls@10,11).
-- 59fa40913 — the fix [needs-eyes] + proof test GREEN (18/18 + 29/29).
-- (to come) check/fresh/after corpora + this evidence file + gate log.
+- 75f37133d — the fix [needs-eyes] + proof test GREEN (18/18 + 29/29).
+- 63aaf56e2 — check/fresh/after corpora + this evidence file + gate log.
 - Note: the safe-commit index clobber struck on both commits (first:
   all 4 files staged-as-deleted; second: MM on abilityActions.js);
   each was repaired with the `git ls-tree -r HEAD -- <paths> |
@@ -329,3 +329,41 @@ to move it.
   recovered by deterministic re-run, 190448 recovered from the
   persisted driver log; the first driver run was killed by a service
   restart mid-seed-190398, re-run cleanly after). No data lost.
+
+## Adoption (Loop B run fleshout-loop-b-20261114T0130Z, 2026-11-14)
+
+The 2230Z run died mid-flight; this arm was adopted, verified
+independently, and rebased — not re-run from scratch.
+
+- Hash mapping (verified by the adopter): the run record above cites
+  the original commit hashes 53659af89 (prereg) and 59fa40913 (fix).
+  The branch as recovered carries the same work under 9e16c0b40 and
+  75f37133d — the abilityActions.js fix diff is byte-identical
+  (md5 eb521a3ee685c8f86666d01be97cdf7a for both), the prereg commit
+  touches the same 4 files with the same line counts. The Commits
+  section above now lists the branch's actual hashes.
+- Rebase: branch replayed cleanly (no stops, no conflicts) onto
+  current master a1d201e8e (sim-transplant-round-2215 coordinator
+  evidence), producing ef46c7d87 (prereg) + bdbb40393 (fix
+  [needs-eyes]) + e26016b2a (corpora + evidence + gate log).
+  origin/master 249da4729 was already an ancestor of the branch,
+  so the rebase moved only onto the local-master coordinator
+  commits. This adoption record is committed on top of e26016b2a
+  as the final tip (see git log).
+- Proof re-run on the rebased tree e26016b2a:
+  `node scripts/test-retribution-b.js` 18 passed, 0 failed;
+  `node scripts/test-retribution-b.js --game` 29 passed, 0 failed.
+  Same counts as on the pre-rebase tip 63aaf56e2.
+- Mechanism re-verified by reading the code (not just the test):
+  `deferDeathLines` queues falls lines on the live fight and
+  `tbFlushDeathLines()` drains them in order, fail-open
+  (src/js/game.js:40097, 47550) — the fix in abilityActions.js
+  (defer on the tbDamage calls, flush right after the RETRIBUTION
+  summary say) does exactly what the prereg claims.
+- Finding #2313 confirmed in sim-findings.md line 2313
+  (RETRIBUTION NARRATED AFTER ITS KILL, filed by Loop A arm
+  sim-strikefall-a) — this arm fixes it; coordinator marks [fixed]
+  at merge. The carried finding (retribution never exercised by
+  competent play) is filed separately — see the adoption report.
+- Status: READY TO MERGE, pending coordinator merge. No push, no
+  version bump, no live verification (ship loop owns those).
