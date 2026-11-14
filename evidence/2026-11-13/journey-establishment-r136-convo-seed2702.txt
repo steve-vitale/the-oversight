@@ -1,0 +1,40 @@
+
+-- Angela (gen_2151vki) occ=mechanic --
+OPENING: Angela: "Don't just stand there — you've got opinions, right?"
+YOU: [dlg:more] "I’m listening."
+THEM: "My cut needs a second pair of hands. Will you help me clean it?"
+YOU: [dlg:favor_requirements] Why can’t I do this now?
+THEM: Get to their side of the Haven door and stand next to them — then you can help.
+YOU: [dlg:commit] "I’ll come back to help."
+THEM: "Careful with it. And — thank you."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "That can wait — it isn't going anywhere. What's on your mind?"
+YOU: [ask:personal] "Tell me who you are, child. The whole of it."
+THEM: "Good question." "The nights are the hardest. Days, you're busy. Nights, you're just... with it all."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: They hear you out, but something in them stays guarded.
+YOU: [dlg:react] (listen)
+THEM: "The trick to making do is confidence. The trick to confidence is making do. Circular, but it works."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on your story."
+closing: "I should get back to it — but this was nice."
+
+-- Erin (gen_lsazrjs) occ=welder --
+OPENING: "You said yes — you left someone behind. I never asked who. I won't. But I'm still here, asking nothing, if that helps."
+YOU: [teach] "Watch — this is useful."
+THEM: You show them Wild Ginger — where it grows, how to tell it apart. Their eyes widen. "I never knew that."
+YOU: [goon] "Go on. I'm listening."
+THEM: They hear you out, but something in them stays guarded.
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "This one — Purslane. Leaf, stem, smell. You won't forget it now."
+YOU: [dlg:react] (listen)
+THEM: "Anyway." A small smile.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that personal stuff."
+YOU: [goon] "Go on. I'm listening."
+THEM: A pause. When they speak again, it's about something else entirely.
+YOU: [goon] "Go on. I'm listening."
+THEM: "What scares you most about what's happening? The real answer."
+YOU: [ans:q_system_fear:a_tell] "That it's intentional. That someone's watching and this is all... on purpose."
+THEM: They go quiet. "Yeah. Me too. The randomness would almost be kinder."
+closing: "Don't be a stranger."

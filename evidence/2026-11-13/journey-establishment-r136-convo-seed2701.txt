@@ -1,0 +1,40 @@
+
+-- Fritz (gen_y84mb7s) occ=librarian --
+OPENING: "We never finished talking about that personal stuff — we wandered off it. 'Okay, I'm all ears. Just... be straight with me.'"
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Alright. But I'm not carrying your stuff."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "that personal stuff — that's still where we are."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Alright, I'm listening. What's next?"
+YOU: [agency:ask_field] "Teach me something from the wild."
+THEM: "Thorn Apple — crush the leaf, smell it, taste the stem. That's how you know it."
+YOU: [ask:personal] "I don't even know your story. Tell me?"
+THEM: "Huh. Let me think about that." "The trick to making do is confidence. The trick to confidence is making do. Circular, but it works."
+YOU: [dlg:more] "I’m listening."
+THEM: "What's this about? I keep a mental list of everyone who's still kind. It's longer than you'd think."
+YOU: [dlg:react] (listen)
+THEM: "Anyway." A small smile.
+YOU: [silence] "..."
+THEM: A comfortable quiet settles. They smile a little, and let it be.
+closing: "Good talk."
+
+-- Salvador (gen_dxwe5o9) occ=community gardener --
+OPENING: "You missed a real hot meal. Soup, you said — with a spoon. Any of that turn up?"
+YOU: [betrayal:accept] "All right. Let's go."
+THEM: You walk to the ridge with Salvador. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Pawpaw — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that personal stuff."
+YOU: [dlg:invite] "Want to come with us?"
+THEM: "Alright. But I'm not carrying your stuff."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Okay, I'm all ears."
+YOU: [ask:personal] "So... who are you? Like, really?"
+THEM: "Huh. Let me think about that." "I wonder if Manila, Philippines looks like this now. Empty. Quiet. Or if it's worse there."
+YOU: [goon] "Hold on, back up. Then what?"
+THEM: "Alright — I should get back to it."
+YOU: [silence] (say nothing)
+THEM: A comfortable quiet settles. They smile a little, and let it be.
+(ended by engine)
