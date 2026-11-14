@@ -263,10 +263,13 @@ function mergeTreeConflicts() {
   T.ok('prereg records the origin-only mechanism (0 occurrences at the far end)', ev.indexOf('0 occurrences') !== -1 || ev.indexOf('ORIGIN-ONLY') !== -1, 'mechanism present');
 
   // ---- 6. Base state ----
-  // NOTE (stage 2): the two 'not yet' legs below were true at the
-  // stage-1 commit and are superseded once the subject is cut and
-  // the live pick runs — they assert the stage-2 state instead.
-  T.section('6. Base state — arm branch clean, subject not yet cut, sim not yet run');
+  // NOTE (stage 2): the subject-branch leg below was 'does NOT exist
+  // yet' at the stage-1 commit and is superseded now that the subject
+  // is cut and the live pick ran — it asserts the stage-2 state
+  // instead. The summary/driver-log legs stay 'does NOT exist': no
+  // judged sim ran (conflict-STOP), so no step artifacts exist, by
+  // design.
+  T.section('6. Base state — arm branch clean, subject cut, sim not run (conflict-STOP)');
   const headBranch = git('rev-parse --abbrev-ref HEAD');
   // worktreeOnly: branch-identity legs are meaningful only in the
   // worker tree. On merged master HEAD is 'master' by design (the
@@ -291,11 +294,52 @@ function mergeTreeConflicts() {
     stepSrc.indexOf('190391,190392,190393,190394,190395,190396,190397,190398') !== -1, 'band literal present');
   let subjectExists = true;
   try { git('rev-parse ' + SUBJECT_BRANCH); } catch (e) { subjectExists = false; }
-  T.ok('subject branch does NOT exist yet (cut after the stage-1 commit)', subjectExists === false, SUBJECT_BRANCH);
+  T.ok('subject branch exists (cut after the stage-1 commit)', subjectExists === true, SUBJECT_BRANCH);
   const t12Summary = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-summary.json');
   T.ok('step summary does NOT exist yet (no judged sim has run)', fs.existsSync(t12Summary) === false, STEP);
   const t12Driver = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-driver.log');
   T.ok('step driver log does NOT exist yet (no judged sim has run)', fs.existsSync(t12Driver) === false, STEP);
+
+  // ---- 7. Live pick conflicted — STOP, UNMEASURED (stage 2) ----
+  T.section('7. Live pick conflicted exactly as predicted — UNMEASURED, no sim ran');
+  const STAGE1 = 'd711579363a2696a4a6b9b7c52aba63697a90f8b';
+  let subjectTip = null;
+  try { subjectTip = git('rev-parse ' + SUBJECT_BRANCH); } catch (e) { subjectTip = null; }
+  T.ok('subject branch is LEFT in place at the far end (no subject commit)', subjectTip === FAR_FULL, subjectTip ? subjectTip.slice(0, 12) : '(missing)');
+  const aheadCount = parseInt(git('rev-list --count ' + FAR + '..' + SUBJECT_BRANCH), 10);
+  T.ok('subject branch is 0 commits ahead of the far end', aheadCount === 0, 'ahead=' + aheadCount);
+  T.ok('stage-1 commit is an ancestor of HEAD', (function () { try { execSync('git merge-base --is-ancestor ' + STAGE1 + ' HEAD', { cwd: REPO, stdio: 'pipe' }); return true; } catch (e) { return false; } })(), STAGE1.slice(0, 12));
+  // The live conflict list, as recorded in the evidence file.
+  const ev12Path = path.join(REPO, 'evidence', '2026-11-14', 'sim-transplant12.md');
+  const ev12 = fs.existsSync(ev12Path) ? fs.readFileSync(ev12Path, 'utf8') : '';
+  T.ok('evidence file exists', ev12.length > 0, ev12Path);
+  T.ok('evidence file records the verdict as UNMEASURED', ev12.indexOf('VERDICT: UNMEASURED') !== -1, 'UNMEASURED present');
+  T.ok('evidence file records UU src/js/conversation.js', ev12.indexOf('UU src/js/conversation.js') !== -1, 'UU present');
+  T.ok('evidence file records DU scripts/test-snippet-stage-direction.js', ev12.indexOf('DU scripts/test-snippet-stage-direction.js') !== -1, 'DU present');
+  T.ok('evidence file records the conflict marker lines 1728 / 1731 / 1761', ev12.indexOf('1728') !== -1 && ev12.indexOf('1731') !== -1 && ev12.indexOf('1761') !== -1, 'marker lines present');
+  T.ok('evidence file records pick_rc=1', ev12.indexOf('pick_rc=1') !== -1, 'pick_rc present');
+  T.ok('evidence file records the live conflict list mapping to UNMEASURED',
+    conflictStop12(['src/js/conversation.js', 'scripts/test-snippet-stage-direction.js']) === 'UNMEASURED', 'conflict rule applied');
+  T.ok('evidence file records the subject branch left at the far end', ev12.indexOf('transplant-12-subject') !== -1 && ev12.indexOf('203a32775') !== -1, 'subject branch present');
+  T.ok('evidence file records that no step ran (no summary, no corpus)', ev12.indexOf('no step ran') !== -1 || ev12.indexOf('No step ran') !== -1, 'no-step note present');
+  // No step artifacts exist anywhere.
+  T.ok('step summary does NOT exist (no judged sim ran)', fs.existsSync(t12Summary) === false, STEP);
+  T.ok('step driver log does NOT exist (no judged sim ran)', fs.existsSync(t12Driver) === false, STEP);
+  const corpusDir = path.join(REPO, 'evidence', '2026-11-13', 'perseed-culpritbisect-a-' + STEP);
+  T.ok('step corpus does NOT exist (no judged sim ran)', fs.existsSync(corpusDir) === false, STEP);
+  // No cherry-pick in progress.
+  let cherryPickHead = true;
+  try { execSync('git rev-parse --verify CHERRY_PICK_HEAD', { cwd: REPO, stdio: 'pipe' }); } catch (e) { cherryPickHead = false; }
+  T.ok('no cherry-pick is in progress (abort clean)', cherryPickHead === false, 'CHERRY_PICK_HEAD absent');
+  // Base restored: back on the arm branch, clean, standing.js == HEAD.
+  const headBranch2 = git('rev-parse --abbrev-ref HEAD');
+  T.ok('HEAD is back on the arm branch sim-transplant12-a after the pick (worktree-only)', worktreeOnly(headBranch2 === 'sim-transplant12-a'), 'HEAD=' + headBranch2);
+  const dirtyAfter = git('status --porcelain --untracked-files=no');
+  T.ok('tracked tree is clean after the pick', dirtyAfter === '', dirtyAfter.slice(0, 200) || '(clean)');
+  const onDiskStanding2 = sha256(fs.readFileSync(path.join(REPO, 'src', 'js', 'standing.js'), 'utf8'));
+  const headStanding2 = sha256(gitShow('HEAD', 'src/js/standing.js'));
+  T.ok('on-disk standing.js is byte-identical to HEAD (no swap residue — no swap ever ran)', onDiskStanding2 === headStanding2, onDiskStanding2.slice(0, 12));
+  T.ok('subject branch is LEFT in place (not merged, not deleted)', subjectTip === FAR_FULL, subjectTip ? subjectTip.slice(0, 12) : '(missing)');
 
   T.done();
 })().catch(function (e) { console.error('HARNESS ERROR', e); process.exit(1); });
