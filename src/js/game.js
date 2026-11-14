@@ -25869,6 +25869,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // the mime show. Reactive offer, idempotent: no offer while one is pending,
     // none when held, none when the slots are full, none before the System arrives,
     // none without a pellet in the pack. (Pattern: maybeOfferPurify.)
+    // FUSION DEFERRAL (findings #2326, sim-fusionoffer-b 2026-11-14): the
+    // offer WAITS while ANY sheet is pending — it used to check only for a
+    // pending fusion_reactor choice and overwrite whatever the scholar was
+    // still deciding on (a 3-choice prize sheet, twice on the retribution
+    // band). Deferral loses nothing: the day-part tick and the pellet
+    // arrival both call this again, so the offer lands the moment the
+    // sheet clears. Same shape as pumpLevelUps / _cxPrizeAbilityOffer.
     maybeOfferFusionReactor() {
       try {
         const s = this.state.scholar;
@@ -25880,7 +25887,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (this.hasAbility('fusion_reactor')) return false;
         if (!this.hasFusionPellet()) return false;
         if ((s.abilities || []).length >= this.abilitySlots()) return false;
-        if ((s.abilityChoices || []).some(c => ((c && c.id) || c) === 'fusion_reactor')) return false;
+        if ((s.abilityChoices || []).length) return false;
         const def = (this.data.abilities || []).find(a => a.id === 'fusion_reactor');
         if (!def) return false;
         s.abilityChoices = [{

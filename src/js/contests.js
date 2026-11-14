@@ -5052,7 +5052,13 @@
     const bag = all.filter(a => !owned.has(a.id) && ['utility', 'wacky', 'underpowered', 'uncommon', 'rare', 'combat', 'social'].indexOf(a.tier) >= 0
       // FUSION SINGULARITY (Steve 2026-10-12): one reactor per world — never
       // a prize when it's taken (offering it would be a taunt, not a gift).
-      && !(a.id === 'fusion_reactor' && this.state.fusionReactorHolder));
+      && !(a.id === 'fusion_reactor' && this.state.fusionReactorHolder)
+      // FUSION PELLET GATE (finding #2327, sim-fusionoffer-b 2026-11-14):
+      // never a prize without a pellet to install — abilityOnAcquire
+      // revokes the grant when no pellet is found, so offering it is a
+      // taunt the install dissolves. Same possession condition the
+      // install uses (hasFusionPellet).
+      && !(a.id === 'fusion_reactor' && !this.hasFusionPellet()));
     if (!bag.length) return false;
     // Weighted by _steerW (set below; 1 when unset), one Math.random per
     // draw. It was a uniform splice, so the steering weights below did
