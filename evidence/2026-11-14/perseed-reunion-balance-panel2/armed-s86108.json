@@ -1,0 +1,271 @@
+{
+  "seed": 86108,
+  "arm": "armed",
+  "waves": [
+    "strike",
+    "anaconda_empress",
+    "reunion"
+  ],
+  "partyN": 3,
+  "perWave": [
+    {
+      "waveIdx": 0,
+      "mid": "strike",
+      "packAtStart": {
+        "strike": 1
+      },
+      "reunionCountAtStart": 0,
+      "partyN": 3,
+      "scholarHpAtStart": 1,
+      "outcome": "chained",
+      "steps": 19,
+      "scholarHpAtEnd": 1,
+      "monstersAtEnd": [
+        {
+          "id": "strike",
+          "hpFrac": -0.04,
+          "alive": false
+        }
+      ],
+      "tbEndResult": "won",
+      "rowOutcome": "won",
+      "rowRounds": 18
+    },
+    {
+      "waveIdx": 1,
+      "mid": "anaconda_empress",
+      "packAtStart": {
+        "anaconda_empress": 1
+      },
+      "reunionCountAtStart": 0,
+      "partyN": 3,
+      "scholarHpAtStart": 1,
+      "outcome": "chained",
+      "steps": 3,
+      "scholarHpAtEnd": 1,
+      "monstersAtEnd": [
+        {
+          "id": "anaconda_empress",
+          "hpFrac": -0.351,
+          "alive": false
+        }
+      ],
+      "tbEndResult": "won",
+      "rowOutcome": "won",
+      "rowRounds": 2
+    },
+    {
+      "waveIdx": 2,
+      "mid": "reunion",
+      "packAtStart": {
+        "reunion": 1
+      },
+      "reunionCountAtStart": 1,
+      "partyN": 3,
+      "scholarHpAtStart": 1,
+      "outcome": "ended",
+      "steps": 11,
+      "scholarHpAtEnd": 0.57,
+      "monstersAtEnd": [
+        {
+          "id": "reunion",
+          "hpFrac": -0.051,
+          "alive": false
+        }
+      ],
+      "tbEndResult": "won",
+      "rowOutcome": "won",
+      "rowRounds": 10
+    }
+  ],
+  "outcome": "won",
+  "deaths": [],
+  "fixture": {
+    "loadout": {
+      "scholar": {
+        "melee": "machete",
+        "torso": "wardens_cloak"
+      },
+      "allies": {
+        "ranged": "hunting_spear",
+        "torso": "bark_armor"
+      }
+    },
+    "scholarGear": {
+      "weaponBonus": 35,
+      "armorProtection": 25,
+      "slots": {
+        "acc1": {
+          "itemId": "dog_tags",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc2": {
+          "itemId": "dispatchers_headset",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc3": {
+          "itemId": "hard_candy",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc4": {
+          "itemId": "trail_compass",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "melee": {
+          "itemId": "machete",
+          "weaponBonus": 35,
+          "armorProtection": 0
+        },
+        "torso": {
+          "itemId": "wardens_cloak",
+          "weaponBonus": 0,
+          "armorProtection": 25
+        }
+      }
+    },
+    "allyGear": [
+      {
+        "id": "gen_d0v0tyy",
+        "gear": {
+          "weaponBonus": 30,
+          "armorProtection": 15,
+          "slots": {
+            "acc1": {
+              "itemId": "field_suture_kit",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc2": {
+              "itemId": "trail_compass",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc3": {
+              "itemId": "seed_packet",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc4": {
+              "itemId": "reading_glasses",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "ranged": {
+              "itemId": "hunting_spear",
+              "weaponBonus": 30,
+              "armorProtection": 0
+            },
+            "torso": {
+              "itemId": "bark_armor",
+              "weaponBonus": 0,
+              "armorProtection": 15
+            }
+          }
+        }
+      },
+      {
+        "id": "gen_jna3mdm",
+        "gear": {
+          "weaponBonus": 30,
+          "armorProtection": 15,
+          "slots": {
+            "head": {
+              "itemId": "trail_compass",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc1": {
+              "itemId": "knife_roll",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc2": {
+              "itemId": "search_locket",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc3": {
+              "itemId": "reading_glasses",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc4": {
+              "itemId": "photo_album",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "ranged": {
+              "itemId": "hunting_spear",
+              "weaponBonus": 30,
+              "armorProtection": 0
+            },
+            "torso": {
+              "itemId": "bark_armor",
+              "weaponBonus": 0,
+              "armorProtection": 15
+            }
+          }
+        }
+      }
+    ],
+    "partyN": 3,
+    "scholarHp": 100
+  },
+  "capConstant": 1,
+  "reunionWave": {
+    "reached": true,
+    "outcome": "ended",
+    "reunionCount": 1,
+    "partyN": 3,
+    "scholarHpAtStart": 1,
+    "scholarHpAtEnd": 0.57,
+    "tbEndResult": "won"
+  },
+  "instrumentErrors": [],
+  "logTail": [
+    "You STRIKE the everyone you've buried, standing up for 48 (Machete).",
+    "A face goes still — released. The mass shudders.",
+    "Too close. It SNAPS toward A person, maybe 20s — proximity overrules patience.",
+    "💥 The Your Move finds A person, maybe 20s — no dodging it.",
+    "A person, maybe 20s's gear absorbs 25.",
+    "The Your Move hits A person, maybe 20s for 16.",
+    "A man, maybe 60s holds position, watching for an opening.",
+    "A person, maybe 20s runs for it!",
+    "(everyone you've buried, standing up's hide absorbs 12.)",
+    "💪 Your Agility grows — 8. The work is changing you.",
+    "✨ Footwork — Your feet know the ground. (tier 2)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up for 55 (Machete).",
+    "A face goes still — released. The mass shudders.",
+    "💥 The Your Move finds A person, maybe 20s — no dodging it.",
+    "A person, maybe 20s's gear absorbs 22.",
+    "The Your Move hits A person, maybe 20s for 14.",
+    "A man, maybe 60s stands ready, watching.",
+    "(everyone you've buried, standing up's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up for 55 (Machete).",
+    "💥 The Your Move finds you — no dodging it.",
+    "Armor absorbs 28.",
+    "The Your Move hits you for 12.",
+    "A man, maybe 60s keeps their distance and watches.",
+    "(everyone you've buried, standing up's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up for 49 (Machete).",
+    "👥 Faces surface on its body — your own snarl. It knows \"strike\" — it watched you do it 10 times. YOUR MOVE, back at you.",
+    "Armor absorbs 38.",
+    "Your own move, returned hits you for 16.",
+    "A man, maybe 60s holds and watches.",
+    "(everyone you've buried, standing up's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up for 51 (Machete).",
+    "The everyone you've buried, standing up falls.",
+    "A man, maybe 60s laughs, disbelieving. \"Did you SEE that?\"",
+    "It is everyone you've buried. Do not eat everyone you've buried.",
+    "You came back bloody. Nobody asks. Someone saves you the good seat by the fire.",
+    "You clutch your Grandma's Tin Cup, Dog Tags, Dispatcher's headset, Hard Candy, Trail compass. You're still here."
+  ]
+}

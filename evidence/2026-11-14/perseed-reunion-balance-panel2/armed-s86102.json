@@ -1,0 +1,298 @@
+{
+  "seed": 86102,
+  "arm": "armed",
+  "waves": [
+    "belltoad",
+    "dustboar",
+    "reunion"
+  ],
+  "partyN": 3,
+  "perWave": [
+    {
+      "waveIdx": 0,
+      "mid": "belltoad",
+      "packAtStart": {
+        "belltoad": 1
+      },
+      "reunionCountAtStart": 0,
+      "partyN": 3,
+      "scholarHpAtStart": 1,
+      "outcome": "chained",
+      "steps": 14,
+      "scholarHpAtEnd": 0.8,
+      "monstersAtEnd": [
+        {
+          "id": "belltoad",
+          "hpFrac": -0.036,
+          "alive": false
+        },
+        {
+          "id": "belltoad",
+          "hpFrac": -0.932,
+          "alive": false
+        },
+        {
+          "id": "belltoad",
+          "hpFrac": -0.132,
+          "alive": false
+        },
+        {
+          "id": "belltoad",
+          "hpFrac": -0.224,
+          "alive": false
+        }
+      ],
+      "tbEndResult": "won",
+      "rowOutcome": "won",
+      "rowRounds": 13
+    },
+    {
+      "waveIdx": 1,
+      "mid": "dustboar",
+      "packAtStart": {
+        "dustboar": 1
+      },
+      "reunionCountAtStart": 0,
+      "partyN": 3,
+      "scholarHpAtStart": 0.8,
+      "outcome": "chained",
+      "steps": 3,
+      "scholarHpAtEnd": 0.8,
+      "monstersAtEnd": [
+        {
+          "id": "dustboar",
+          "hpFrac": -0.608,
+          "alive": false
+        }
+      ],
+      "tbEndResult": "won",
+      "rowOutcome": "won",
+      "rowRounds": 2
+    },
+    {
+      "waveIdx": 2,
+      "mid": "reunion",
+      "packAtStart": {
+        "reunion": 1
+      },
+      "reunionCountAtStart": 1,
+      "partyN": 3,
+      "scholarHpAtStart": 0.8,
+      "outcome": "died",
+      "steps": 12,
+      "scholarHpAtEnd": -0.06,
+      "monstersAtEnd": [
+        {
+          "id": "reunion",
+          "hpFrac": 0.012,
+          "alive": true
+        }
+      ],
+      "tbEndResult": "lost",
+      "rowOutcome": "lost",
+      "rowRounds": 11
+    }
+  ],
+  "outcome": "died",
+  "deaths": [
+    {
+      "scholarId": "gen_bft2qwp",
+      "causeArg": "the arena",
+      "waveIdx": 2,
+      "day": 30
+    }
+  ],
+  "fixture": {
+    "loadout": {
+      "scholar": {
+        "melee": "machete",
+        "torso": "wardens_cloak"
+      },
+      "allies": {
+        "ranged": "hunting_spear",
+        "torso": "bark_armor"
+      }
+    },
+    "scholarGear": {
+      "weaponBonus": 35,
+      "armorProtection": 25,
+      "slots": {
+        "acc1": {
+          "itemId": "dispatchers_headset",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc2": {
+          "itemId": "tin_cup",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc3": {
+          "itemId": "carpenters_square",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc4": {
+          "itemId": "hoodie",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "melee": {
+          "itemId": "machete",
+          "weaponBonus": 35,
+          "armorProtection": 0
+        },
+        "torso": {
+          "itemId": "wardens_cloak",
+          "weaponBonus": 0,
+          "armorProtection": 25
+        }
+      }
+    },
+    "allyGear": [
+      {
+        "id": "gen_m8olw2k",
+        "gear": {
+          "weaponBonus": 30,
+          "armorProtection": 15,
+          "slots": {
+            "head": {
+              "itemId": "reading_glasses",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc1": {
+              "itemId": "wedding_ring",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc2": {
+              "itemId": "carpenters_square",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc3": {
+              "itemId": "knife_roll",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc4": {
+              "itemId": "paperback",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "ranged": {
+              "itemId": "hunting_spear",
+              "weaponBonus": 30,
+              "armorProtection": 0
+            },
+            "torso": {
+              "itemId": "bark_armor",
+              "weaponBonus": 0,
+              "armorProtection": 15
+            }
+          }
+        }
+      },
+      {
+        "id": "gen_z2zi610",
+        "gear": {
+          "weaponBonus": 30,
+          "armorProtection": 15,
+          "slots": {
+            "head": {
+              "itemId": "dispatchers_headset",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc1": {
+              "itemId": "daughters_drawing",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc2": {
+              "itemId": "trail_compass",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc3": {
+              "itemId": "bus_map",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc4": {
+              "itemId": "photo_album",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "ranged": {
+              "itemId": "hunting_spear",
+              "weaponBonus": 30,
+              "armorProtection": 0
+            },
+            "torso": {
+              "itemId": "bark_armor",
+              "weaponBonus": 0,
+              "armorProtection": 15
+            }
+          }
+        }
+      }
+    ],
+    "partyN": 3,
+    "scholarHp": 100
+  },
+  "capConstant": 1,
+  "reunionWave": {
+    "reached": true,
+    "outcome": "died",
+    "reunionCount": 1,
+    "partyN": 3,
+    "scholarHpAtStart": 0.8,
+    "scholarHpAtEnd": -0.06,
+    "tbEndResult": "lost"
+  },
+  "instrumentErrors": [],
+  "logTail": [
+    "(everyone you've buried, standing up's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up for 44 (Machete).",
+    "A person, maybe 40s holds and watches.",
+    "💥 It erupts!",
+    "Armor absorbs 27.",
+    "The attack hits you for 12.",
+    "📖 Codex: Family Photo — hits everything close around it. You won't forget this.",
+    "A person, maybe 60s waits, eyes on the beast.",
+    "(everyone you've buried, standing up's hide absorbs 12.)",
+    "💪 Your Strength grows — 8. The work is changing you.",
+    "✨ True Swing — Your strikes land cleaner. (tier 1)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up for 41 (Machete).",
+    "A person, maybe 40s holds position, watching for an opening.",
+    "👥 Faces surface on its body — your own snarl. It knows \"strike\" — it watched you do it 10 times. YOUR MOVE, back at you.",
+    "Armor absorbs 35.",
+    "Your own move, returned hits you for 15.",
+    "A person, maybe 60s stands ready, watching.",
+    "(everyone you've buried, standing up's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up for 55 (Machete).",
+    "A person, maybe 40s keeps their distance and watches.",
+    "A person, maybe 60s holds and watches.",
+    "(everyone you've buried, standing up's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up for 53 (Machete).",
+    "A person, maybe 40s waits, eyes on the beast.",
+    "💥 Family Photo!",
+    "Armor absorbs 28.",
+    "The Family Photo hits you for 12.",
+    "You go down.",
+    "Nobody's talking much. The fire feels smaller tonight.",
+    "🕯️ Emily Henry is dead — the arena. The village stops. Somebody screams. Somebody else starts digging.",
+    "What Emily kept close goes into the ground with them — keepsakes are buried, never taken from the body.",
+    "Luigi picks up the journal. Their hands shake. Then they open it, and keep writing.",
+    "📖 LEARNED: Diplomatic Incident (Level 1). Trust builds 2x faster. You're TOO good though — once per week you can start a diplomatic incident: villagers argue, you pick the winner (+trust with them, -trust with the loser).",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Emily Henry, 30 days. The mantle passes to Luigi Pascual.",
+    "🪞 You wake up somebody else. Luigi Pascual, 60 — a sign painter. Their hands know different work now: Green Whisper."
+  ]
+}
