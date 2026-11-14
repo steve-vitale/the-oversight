@@ -283,4 +283,25 @@ around it, but a player who opens the ledger still sees a dead
 person's outing sitting there with no way to close it.
 
 ## Landing
-[PENDING — to be filled after the gate]
+- Commit (worktree, via safe-commit.sh): `b7371257d` — 24 files
+  (driver, analyzer, proof test, prereg, run note, 5 seed JSONs,
+  5 convo txts, pilot/panel/analysis/gate logs, 6 standalone re-run
+  logs). No src/js touched; no `[needs-eyes]` (driver-only, no
+  player-facing change).
+- Safe-commit index clobber struck (21 evidence files
+  staged-as-deleted in the main index; commit itself correct,
+  41,670 insertions); repaired with the `git ls-tree -r HEAD --
+  evidence/2026-11-14/ | grep r138 | git update-index --add
+  --index-info` pipe — note the filename-prefix pathspec matches
+  nothing in ls-tree, only the directory pathspec repairs —
+  verified: status empty, diff HEAD empty, hashes match.
+- Master moved twice during the run (792f4570d → `0d5335730`
+  sim-scaleclimb-b evidence, then → `d903ccf0e`
+  sim-winnability-round-1430 Loop B evidence). Branch rebased
+  cleanly onto the final tip; proof test re-run post-rebase:
+  **30/30**.
+- Merge: `git merge --ff-only journey-establishment` in the main
+  tree; on success master HEAD = `8e7ffffb9`. Merged locally,
+  pending ship (ship loop owns bump/push/live verification).
+  (This section filled by the addendum commit on the same branch,
+  merged ff-only right after.)
