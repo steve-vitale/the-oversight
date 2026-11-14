@@ -226,7 +226,7 @@ here, per the brief.
 ## Commits (branch sim-proofrefresh-b14, base 8c83b6a9a)
 
 - 97929b5d3 — prereg + proof test (round 14, base 8c83b6a9a, owed-check 1 stale key)
-- [panel commit — to be filled at closeout]
+- 683072466 — fresh neutral panel + proof re-point + evidence (GO 12/12, panel 63351ce6)
 - [closeout commit — this section]
 
 ## Closeout — GO ON FINAL TIP (round 15 owed after next manifest change)
