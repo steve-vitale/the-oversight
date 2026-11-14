@@ -255,6 +255,18 @@ fix item, if any, waits for a panel that actually produces one.
   4. test-phone-frame-proof.js — standing stale receipt
      (index.html etc. changed since the receipt); non-attributable,
      refresh owed by the proof-refresh round.
+- Adoption re-gate (final tip 62c19318e, 02:33–02:51Z, log
+  evidence/2026-11-13/journey-succession-r197-check.log — same file,
+  overwritten): **333 passed, 7 failed in 1075s — GO after
+  adjudication, 0 attributable.** Same 5 as above, plus 2 new
+  exact-120s load timeouts, both green standalone:
+  test-synergy-stall.js (120.1s in-gate, exit 0 standalone) and
+  test-capable-bot-20261014.js (120.2s in-gate, exit 0 standalone,
+  42 passed, 0 failed). The phone-frame stale list now also names
+  src/js/abilityActions.js (the retribution landing) — same standing
+  failure, refresh still owed by the proof-refresh round (b13 in
+  flight). This run changed no src/js, so no failure can be
+  attributed to it.
 - Heartbeat note: the 01:13Z heartbeat queued ~10 min behind two
   sibling registrations on REGISTRY.lock, then failed with
   EPERM (host write flap) on its registry write; re-heartbeat
@@ -265,17 +277,38 @@ fix item, if any, waits for a panel that actually produces one.
 
 ## Landing
 
-- Commits (branch journey2-succession): 77999ccb8 (driver/analyzer/
-  runner + panel evidence, 92 files) + f3870b3c8-after-rebase run
-  note. Note: the run-note commit's hash changed across the rebase
-  (56a8d6385 → f3870b3c8); this landing paragraph is a third commit
-  on the rebased tip.
-- Rebase: master moved during the run (5f83ca93d → a1d201e8e: 7
-  commits — sim-transplant2b corpora/test + journey-establishment
+- Commits (branch journey2-succession, after the adoption rebase
+  onto 62c19318e): 117f78987 (driver/analyzer/runner + panel
+  evidence) + 494e9eefc (run note) + b75bc24fe (Landing fill,
+  first-rebase proof). This paragraph is updated by the adoption
+  fill commit below.
+- Rebase (run): master moved during the run (5f83ca93d → a1d201e8e:
+  7 commits — sim-transplant2b corpora/test + journey-establishment
   r136). No src/ changes in that range (evidence + scripts only),
   so no game-code drift. Rebasing was clean; the full panel was
-  re-run on the rebased tip (01:43:29Z) and produced BYTE-IDENTICAL
-  outputs — 0 changed files. Proof re-run confirmed.
+  re-run on the rebased tip from 01:43:29Z — seeds 34251–34253
+  finished byte-identical, seed 34254 was killed mid-run by the
+  cron's 1-hour timeout (0-byte stdout.json, transcripts to d+30).
+- Adoption (closeout coordinator, run loop2-20261114T005537Z timed
+  out at ~01:54Z with the re-run incomplete; no live process
+  remained in the tree): heartbeat first, then seed 34254 re-run to
+  completion on the a1d201e8e tip (exit 0, 575,253 bytes,
+  byte-identical), smoke 33998 re-run (exit 0, 428,408 bytes,
+  byte-identical), analyzer re-run (exit 0, byte-identical) — the
+  first-rebase proof now complete, 0 changed files. Master had
+  moved again (a1d201e8e → 62c19318e: retribution-b, transplant4/5/6
+  + coordinator evidence). The only src/ change in that range is
+  src/js/abilityActions.js (retribution death-line deferral,
+  855764c3b). Rebased clean onto 62c19318e (3 commits replayed,
+  no conflicts); the FULL panel + analyzer were re-run on the
+  final tip 02:09–02:23Z — all 5 seeds exit 0 with byte counts
+  identical to the original panel (489884 / 599702 / 794095 /
+  575253 / 428408), analyzer exit 0, **0 changed files**. The
+  retribution src change moves no succession output. Gate re-run
+  on the final tip: 333 passed, 7 failed, GO, 0 attributable
+  (see Gate).
+  Telemetry verdict stands (panel byte-identical; baseline NOT
+  rolled, means-vs-sum mismatch unsettled).
 - Merge: `git merge --ff-only journey2-succession` in the main
   tree (READ-ONLY for the merge). [FILL: merge result + new HEAD.]
 - Release: `bash scripts/worktree-release.sh journey2-succession
