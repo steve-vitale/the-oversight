@@ -298,4 +298,17 @@ work, not a game defect. Design note: game.js:11911 already reasons
 about a second homeward axis — the wedge should use it.
 
 ## Landing
-[TO FILL — commit/merge after gate]
+- Commit (worktree, via safe-commit.sh): `9a0219854` — 18 files
+  (driver, analyzer, proof test, prereg, run note, 5 seed JSONs,
+  5 convo txts, gate log, 2 standalone re-run logs). No src/js
+  touched; no `[needs-eyes]` (driver-only, no player-facing change).
+- Safe-commit index clobber struck (all 18 files staged-as-deleted
+  in the main index; commit itself correct, 40391 insertions);
+  repaired with `git read-tree HEAD` + verified status empty +
+  diff HEAD empty.
+- Master moved during the run (249da4729 → `5f83ca93d`, reaper
+  flock guard). Branch rebased cleanly onto 5f83ca93d; rebased tip
+  `c9528209a`. Proof test re-run post-rebase: **27/27**.
+- Merge: `git merge --ff-only journey-establishment` in the main
+  tree; on success master HEAD = `c9528209a`. Merged locally,
+  pending ship (ship loop owns bump/push/live verification).
