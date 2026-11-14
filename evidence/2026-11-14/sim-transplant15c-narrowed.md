@@ -221,3 +221,11 @@ the survival verdict.
   of master; on-disk standing.js still equals the HEAD blob, so the
   landing changes no game code). Proof re-run 112/0 on the rebased tip;
   `test-culpritbisect-a.js` 116/116.
+- CORRECTION (same run, fix branch sim-transplant15c-countfix-a): the
+  addendum commit itself made the "exactly 4 commits on top of master"
+  leg false (5 commits), so the final pre-merge re-run read 111/1 — the
+  merge had already landed by the time the failure was seen. The leg is
+  corrected to a merge-safe form (the 4 rebased arm commits are ancestors
+  of HEAD), which passes on the branch and on merged master alike. Proof
+  re-run 112/0 on the fix branch before its merge. The measurement is
+  unchanged; only the landing-shape leg was wrong.

@@ -106,7 +106,12 @@ T.section('1. Subject chain — exactly the two 15C picks on the far end');
   T.ok('OVE-52 subject names fighterState', range[0].indexOf('OVE-52') !== -1, range[0].slice(0, 100));
   T.ok('subject tip is the OVE-52 commit', git('rev-parse ' + OVE52) === OVE52, git('rev-parse --short ' + OVE52));
   T.ok('subject branch points at OVE-52', git('rev-parse ' + SUBJECT_BRANCH) === OVE52, git('rev-parse --short ' + SUBJECT_BRANCH));
-  T.ok('arm branch holds exactly 4 evidence commits on top of master', parseInt(git('rev-list --count master..HEAD'), 10) === 4, git('rev-list --count master..HEAD') + ' commits');
+  // Merge-safe: the count form (master..HEAD === 4) broke the moment the
+  // coordinator addendum became a 5th commit, and can never pass on merged
+  // master (HEAD == master). Ancestry of the 4 rebased arm commits proves
+  // the same fact on the branch and on merged master alike.
+  var ARM_COMMITS = ['f26bad4e8ad27c87cc55d6a06318ab33914298e5', '520ab0df2e121c9628f308922f1e22be46b49a96', '4c682e639cf3bd0fc58dc2bc1de60c46405c7057', 'bc679ec4ca804427ae7499a0a2788a259bc08f46'];
+  T.ok('the 4 evidence commits are ancestors of HEAD', ARM_COMMITS.every(function (c) { return git('merge-base --is-ancestor ' + c + ' HEAD; echo $?') === '0'; }), 'all 4 ancestors');
   const js49 = git('diff --name-only ' + OVE49 + '^1 ' + OVE49 + ' -- src/js');
   T.ok('OVE-49 touches no src/js file (test-only)', js49 === '', js49 || '(none)');
   const files49 = git('diff --name-only ' + OVE49 + '^1 ' + OVE49).split('\n').filter(Boolean);
