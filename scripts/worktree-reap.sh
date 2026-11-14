@@ -38,8 +38,20 @@ DRY=0
 [ "${1:-}" = "--dry-run" ] && DRY=1
 STALE_H=4
 
+SKIPCOUNT="$WTBASE/reaper-skip.count"
 exec 200>"$LOCK"
-flock -x 200
+# GUARD (2026-11-13, executive decision #18): never queue on the lock. The
+# reaper holds REGISTRY.lock for its whole run (scans run 9-14 min) while the
+# cron fires every 10 min, so overlapping runs stacked up and one SIGTERM'd
+# after ~14 min; a held lock also blocked a worktree registration for ~9 min
+# (r196, 2026-11-13). Non-blocking: skip, count consecutive skips, alert at 3.
+if ! flock -n 200; then
+  n=$(cat "$SKIPCOUNT" 2>/dev/null | tr -dc '0-9'); n=${n:-0}; n=$((n + 1))
+  echo "$n" > "$SKIPCOUNT" 2>/dev/null || true
+  echo "SKIP: registry lock held by another reaper run (consecutive skips: $n) — no cleanup this run."
+  if [ "$n" -ge 3 ]; then echo "ALERT: reaper skipped $n consecutive runs on a held registry lock — investigate the holder."; fi
+  exit 0
+fi
 python3 - "$REPO" "$WTBASE" "$REG" "$DRY" "$STALE_H" <<'EOF'
 import json, os, subprocess, sys, datetime
 
@@ -157,4 +169,6 @@ if not removed and not loud:
 EOF
 rc=$?
 flock -u 200
+# Guard reset: a completed run clears the consecutive-skip count.
+if [ "$rc" -eq 0 ]; then echo 0 > "$SKIPCOUNT" 2>/dev/null || true; fi
 exit $rc
