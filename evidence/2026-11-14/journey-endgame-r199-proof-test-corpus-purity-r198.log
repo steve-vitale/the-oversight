@@ -1,0 +1,8 @@
+clean: GO   CORPUS-PURITY: 2/2 seeds project clean, file set exact
+PASS clean corpus: CORPUS-PURITY GO — GO   CORPUS-PURITY: 2/2 seeds project clean, file set exact
+dirty: NO-GO CORPUS-PURITY: 89702: buyout d41 pantryAfter=10000 != pantry-spent=2000 | 89703: ladder counted header=999 != JSON 45 | unexpected files in /tmp/purity-r198-dirty: probe-diag-stray.json
+PASS dirty corpus: CORPUS-PURITY NO-GO — NO-GO CORPUS-PURITY: 89702: buyout d41 pantryAfter=10000 != pantry-spent=2000 | 89703: ladder counted header=999 != JSON 45 | unexpected files in /tmp/purity-r198-dirty: probe-diag-stray.json
+PASS dirty note names the pantryAfter echo — NO-GO CORPUS-PURITY: 89702: buyout d41 pantryAfter=10000 != pantry-spent=2000 | 89703: ladder counted header=999 != JSON 45 | unexpected files in /tmp/purity-r198-dirty: probe-diag-stray.json
+PASS dirty note names the stray file — NO-GO CORPUS-PURITY: 89702: buyout d41 pantryAfter=10000 != pantry-spent=2000 | 89703: ladder counted header=999 != JSON 45 | unexpected files in /tmp/purity-r198-dirty: probe-diag-stray.json
+PASS dirty note names the ladder mismatch — NO-GO CORPUS-PURITY: 89702: buyout d41 pantryAfter=10000 != pantry-spent=2000 | 89703: ladder counted header=999 != JSON 45 | unexpected files in /tmp/purity-r198-dirty: probe-diag-stray.json
+test-corpus-purity-r198: ALL PASS

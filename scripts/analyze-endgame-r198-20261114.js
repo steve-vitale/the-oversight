@@ -1269,7 +1269,7 @@ const capRows = recs.map(r => {
 });
 const capPassB = recs.some(r => (r.capstone || {}).enabled);
 const capEligible = capRows.filter(x => x.eligible);
-const capNoRefusal = capEligible.every(x => x.refusedNonExempt === 0 && x.delivered);
+const capNoRefusal = capEligible.every(x => x.refusedNonExempt === 0);
 const capDelivered = capEligible.filter(x => x.delivered).length;
 const capAllExempt = capEligible.every(x => x.refusedNonExempt === 0);
 const capPriced = capEligible.some(x => x.pricedFull);

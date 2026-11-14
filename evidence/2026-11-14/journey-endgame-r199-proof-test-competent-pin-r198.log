@@ -1,0 +1,7 @@
+PASS pin loads competent-r127.js — {"r127":true,"live":false,"capable":true}
+PASS pin does NOT load live competent.js — {"r127":true,"live":false,"capable":true}
+PASS pin composes capable — {"r127":true,"live":false,"capable":true}
+PASS default loads live competent.js — {"r127":false,"live":true,"capable":true}
+PASS default does NOT load competent-r127.js — {"r127":false,"live":true,"capable":true}
+PASS default composes capable — {"r127":false,"live":true,"capable":true}
+test-competent-pin-r198: 6/6 PASS

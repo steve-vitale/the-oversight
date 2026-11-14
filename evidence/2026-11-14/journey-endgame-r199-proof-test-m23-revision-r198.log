@@ -1,0 +1,18 @@
+smoke: SMOKE seed=89704 plan=forcedrift announceDay=90 satDay=90 seat=lesser path=relay/dark won=true end=over-other alive=8
+PASS smoke wrote the per-seed JSON
+PASS smoke wrote the transcript
+PASS zero over attempts (guard held) — over=0 of 3 attempts
+PASS capstone.refusalVoicing is an array
+PASS one voicing entry per refused-despite-ready attempt — voicing=3 refused=3
+PASS every voicing entry names its day + reason + lines array — [{"day":87,"reason":"veterans-short","lines":0},{"day":88,"reason":"veterans-short","lines":0},{"day":89,"reason":"veterans-short","lines":0}]
+PASS firstRefusalCapIdx is set — firstRefusalCapIdx=14144
+PASS transcript header names the first refusal day — first refusal d87
+PASS transcript window starts at the first refusal day — refusal d87 < announce d90
+V (r194 pass-B): NO-GO M23-capstone: VACUOUS: 1 eligible, delivered 0/1, every refusal exempt (none-ready 0, exempt-refused 4) — full-seat question unanswered on this pass; M24b carries the verdict — 89704:none
+PASS V: M23 NO-GO with VACUOUS note (scholar+1 only, all refusals exempt) — NO-GO M23-capstone: VACUOUS: 1 eligible, delivered 0/1, every refusal exempt (none-ready 0, exempt-refused 4) — full-seat question unanswered on this pass; M24b carries the verdict — 89704:none
+PASS V: M24b still GO on the same corpus — M24b carries the scholar+1 verdict
+G (r194 pass-C): GO   M23-capstone: 2 eligible: delivered 2/2, none-ready 0, exempt-refused 0, NON-EXEMPT-refused-despite-ready 0, pricedFull 2/2 — 89704:feast_embassy@d69/FULL | 89705:feast_embassy@d72/FULL
+PASS G: M23 GO (deliveries priced full, zero non-exempt refusals) — GO   M23-capstone: 2 eligible: delivered 2/2, none-ready 0, exempt-refused 0, NON-EXEMPT-refused-despite-ready 0, pricedFull 2/2 — 89704:feast_embassy@d69/FULL | 89705:feast_embassy@d72/FULL
+N (mutated pass-B): NO-GO M23-capstone: 1 eligible: delivered 0/1, none-ready 0, exempt-refused 3, NON-EXEMPT-refused-despite-ready 1, pricedFull 0/1 — 89704:none
+PASS N: M23 NO-GO naming a NON-EXEMPT refusal — NO-GO M23-capstone: 1 eligible: delivered 0/1, none-ready 0, exempt-refused 3, NON-EXEMPT-refused-despite-ready 1, pricedFull 0/1 — 89704:none
+test-m23-revision-r198: ALL PASS
