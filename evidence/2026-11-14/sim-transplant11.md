@@ -260,7 +260,8 @@ narrowed 10b.
 
 ## Closeout
 
-- Arm branch `sim-transplant11-a` tip (this commit); subject branch
+- Arm branch `sim-transplant11-a` tip d985a4323 (stage-2 commit;
+  proof 116/116, culpritbisect-a 116/116); subject branch
   `transplant-11-subject` LEFT at
   `3b8ba98b0f8b88f2d42861058163b11ac73b8b5e` (far end + family 11,
   never committed to the arm branch); worktree verified clean at
