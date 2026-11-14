@@ -89,6 +89,18 @@
   // number the code applies, never a second copy.
   var REUNION_ARENA_MIRROR_CAP = 1;
 
+  // REUNION ARENA BALANCE (sim-reunion-balance 2026-11-14, Steve-ordered
+  // 2026-11-14: the arena Reunion is horribly balanced — a geared party
+  // won 0/7 Reunion waves at full stats, panel 3). The ARENA spawn is
+  // scaled: HP x0.4 (1200–1400 -> 480–560), damage x0.5 (Your Move 60–80
+  // -> 30–40, Family Photo 48–68 -> 24–34). Pinned by
+  // evidence/2026-11-14/sim-reunion-balance-prereg.md (sweep pick
+  // H=0.4 D=0.5; panel is the judge) — do not change without a new prereg.
+  // Exposed as G.REUNION_ARENA_HP_SCALE / G.REUNION_ARENA_DMG_SCALE so
+  // proof tests read the same numbers the code applies, never a copy.
+  var REUNION_ARENA_HP_SCALE = 0.4;
+  var REUNION_ARENA_DMG_SCALE = 0.5;
+
   function cheb(ax, ay, bx, by) { return Math.max(Math.abs(ax - bx), Math.abs(ay - by)); }
   function sideOf(o) { return o && (o.kind === 'player' || o.kind === 'villager'); }
   function aliveSide(f) {
@@ -122,6 +134,31 @@
       }
       if ((partyN || 1) >= 3) return (t.party != null ? t.party : (mdef.pack || 1));
       return (t.solo != null ? t.solo : (mdef.pack || 1));
+    },
+
+    // REUNION ARENA BALANCE (sim-reunion-balance 2026-11-14): the arena
+    // Reunion's spawn def — a per-fight CLONE with HP x REUNION_ARENA_HP_SCALE
+    // and every damage range x REUNION_ARENA_DMG_SCALE (attack + attacks).
+    // Arena-only by construction: startCombat calls this only when
+    // state.arenaContest was live at entry. The wild Reunion shares the
+    // same def in monsters.json, so the clone is the scope — the shared def
+    // is never mutated, and a field fight after an arena fight still spawns
+    // full HP/damage. Non-Reunion defs pass through untouched (same object).
+    // Plus One has no damage field, so the rally turn is unchanged.
+    tbArenaReunionMdef: function (mdef) {
+      if (!mdef || mdef.id !== 'reunion') return mdef;
+      var c = JSON.parse(JSON.stringify(mdef));
+      c.hp = [Math.round(mdef.hp[0] * REUNION_ARENA_HP_SCALE),
+              Math.round(mdef.hp[1] * REUNION_ARENA_HP_SCALE)];
+      var scale = function (a) {
+        if (a && a.damage) {
+          a.damage = [Math.round(a.damage[0] * REUNION_ARENA_DMG_SCALE),
+                      Math.round(a.damage[1] * REUNION_ARENA_DMG_SCALE)];
+        }
+      };
+      scale(c.attack);
+      (c.attacks || []).forEach(scale);
+      return c;
     },
 
     // Living packmates of m (same species), excluding m itself.
@@ -471,6 +508,8 @@
   // The cap constant, readable from the Game object so the proof test
   // asserts the number the code applies (same binding, not a copy).
   G.REUNION_ARENA_MIRROR_CAP = REUNION_ARENA_MIRROR_CAP;
+  G.REUNION_ARENA_HP_SCALE = REUNION_ARENA_HP_SCALE;
+  G.REUNION_ARENA_DMG_SCALE = REUNION_ARENA_DMG_SCALE;
 
   // Pre-turn hook registrations (run via mbRunPreTurn; declared per monster
   // in src/data/monsterBehaviors.json). Non-consuming unless noted.

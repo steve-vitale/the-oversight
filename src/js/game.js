@@ -35272,12 +35272,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // pendingMonsterId, not the default bulldozer. The panel names it right;
       // the fight must spawn it right.
       const mid = monsterId || this.pendingMonsterId || 'bulldozer';
-      const mdef = this.data.monsters.find(m => m.id === mid);
+      let mdef = this.data.monsters.find(m => m.id === mid);
       // NO SILENT FALLBACK (Steve 2026-10-06): an explicit unknown id used to
       // silently spawn monsters[0] (bulldozer) with the wrong intro text —
       // that's how deleted wave-2 ids hid in debug scenarios for a full wave.
       // Fail loudly so the lie surfaces at the call site, not in play.
       if (!mdef) throw new Error(`startCombat: unknown monster id "${mid}" — no silent fallback`);
+      // REUNION ARENA BALANCE (sim-reunion-balance 2026-11-14): the arena
+      // Reunion spawns scaled (HP x0.4, damage x0.5) via a per-fight clone
+      // — see partyTactics.tbArenaReunionMdef. _raidContestAtEntry is true
+      // exactly when state.arenaContest was live at entry, so field fights
+      // (and the wild Reunion mirror pack) keep the full def.
+      if (mdef.id === 'reunion' && _raidContestAtEntry && this.tbArenaReunionMdef) {
+        mdef = this.tbArenaReunionMdef(mdef);
+      }
       // FIRST-CONTACT FLASH (Steve 2026-10-05): after the System comes online,
       // the first encounter with a monster species flashes a freaky pixelated
       // rendition on the HUD. Horror beyond emoji. Triggered here, rendered by app.js.
