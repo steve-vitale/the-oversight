@@ -287,7 +287,7 @@ side-branch commits, not just tooling adjacency.
   (committed with the prereg, b831a3ec7); stage 2: 316 passed, 0
   failed total (26 stage-2 legs: live pick-1 STOP outcome,
   subject left at the far end with zero picks, evidence records).
-- scripts/test-culpritbisect-a.js — 116 legs (not re-run: the step
-  tooling was untouched by this arm, and no judged sim ran; the
-  15F arm's post-pick re-run stands as the shared-harness check
-  on this tree — recorded, not waived).
+- scripts/test-culpritbisect-a.js — 116 legs, re-run on the branch
+  tip after the live pick: 116 passed, 0 failed (the step tooling
+  was untouched by this arm and no judged sim ran, but the shared
+  harness is confirmed green on this tree).
