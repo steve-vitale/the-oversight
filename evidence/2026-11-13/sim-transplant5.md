@@ -257,14 +257,24 @@ competent verbatim own-policy, fix swapped in.
 
 ## Proof results
 
-- `node scripts/test-transplant5.js`: **(count filled after run)**
+- `node scripts/test-transplant5.js`: **54 passed, 0 failed** (run
+  after the pick + abort; one leg was fixed first — the family-total
+  reduce treated the binary panel's `- -` numstat row as NaN, and the
+  step-script scratch leg wrongly asserted `scripts/policies` never
+  appears in the step script, when it legitimately appears for the
+  policy-sha recording; both corrected before the prereg commit).
 - `node scripts/test-culpritbisect-a.js`: **116 passed, 0 failed**
   (reused bisect tooling, re-run on this branch).
-- Host write flap: (filled at closeout).
+- Host write flap: no EPERM failure struck this arm's git or file
+  writes directly. Safe-commit index clobber struck the prereg commit
+  (d6148b2ca): both files showed staged-as-deleted after a correct
+  commit; repaired with the documented `git ls-tree -r HEAD |
+  git update-index --add --index-info` pipe and verified (status
+  empty, diff HEAD empty, hash-object matches ls-tree).
 - No telemetry deviation check run: no corpus exists to check — the
   recorder-corpus refusal is N/A (nothing to refuse); baseline NOT
   rolled.
-- Closeout: arm branch `sim-transplant5-a` tip (filled at closeout);
+- Closeout: arm branch `sim-transplant5-a` tip (this commit);
   subject branch `transplant-5-subject` LEFT at the far end
   `203a327750a223e0a1465dc51f5409787efdfaae` (no subject commit);
   worktree verified clean at closeout (tracked tree empty, standing.js
