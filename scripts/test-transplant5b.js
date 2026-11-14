@@ -32,10 +32,12 @@
 //      ZERO readers in src/ (git grep), the merge-tree predicts the
 //      conflict confined to that one file, the prereg records the
 //      narrowed definition, and no src/js file is in the family.
-//   2. No subject yet — the scratch branch transplant-5b-subject
-//      does NOT exist yet, the panel corpus is absent at the far end
-//      AND at the first parent, present at the merge (clean
-//      addition, not missing substrate).
+//   2. Subject built — the scratch branch transplant-5b-subject
+//      exists on top of the far end (the live pick conflicted ONLY
+//      on balance-proof.json, resolved ours per the narrowed
+//      definition); the panel corpus is absent at the far end AND
+//      at the first parent, present at the merge (clean addition,
+//      not missing substrate).
 //   2b. Conflict predicted by merge-tree (read-only) — `git
 //      merge-tree da153118c 203a32775 abb3c2db2` reports exactly the
 //      same ONE content conflict (balance-proof.json, 3 markers)
@@ -47,14 +49,19 @@
 //      band, and the nofallback-variants-unmeasured note.
 //   4. Verdict mapping — classifyTransplant maps every survived
 //      count to CARRIER / AMBIGUOUS / NOT-CARRIER / UNCLASSIFIABLE.
-//   5. No corpus — no step corpus and no summary exist for STEP
-//      t5b-abb3c2db2 (the run has not measured yet).
+//   5. Corpus exists — the step corpus + summary exist for STEP
+//      t5b-abb3c2db2 (detail checked in §9).
 //   6. Base restored — HEAD is on sim-transplant5b-a, no src/js
 //      file differs from HEAD, on-disk standing.js is byte-identical
 //      to HEAD, and the step-script tooling source (master) still
 //      carries all four scratch files.
 //   7. Seed-band identity — the step script and the prereg name
 //      exactly seeds 190391–190398.
+//
+// MEASURED OUTCOME (evidence/2026-11-13/sim-transplant5b.md):
+// subject c3e2970e85d51d117c94cf97bd0d14933c2b650f, STEP
+// t5b-abb3c2db2, survived 4/8 → NOT-CARRIER. The garden-keeper
+// reorder alone does not collapse the far end.
 //
 // POST-STEP SECTIONS (added after the step runs; the evidence file
 // evidence/2026-11-13/sim-transplant5b.md records the verdict):
@@ -86,6 +93,8 @@ const FAR_FULL = '203a327750a223e0a1465dc51f5409787efdfaae';
 const MERGE = 'abb3c2db2';
 const MERGE_BASE = 'da153118c';
 const SUBJECT_BRANCH = 'transplant-5b-subject';
+const SUBJECT_FULL = 'c3e2970e85d51d117c94cf97bd0d14933c2b650f';
+const SUBJECT_POLICY_SHA = '26a87e493578';
 const STEP = 't5b-abb3c2db2';
 const FIX_SHA = 'f8fda4295a99720dcb54d0c69f5fa6836f55cf9d9c8c5d1e51e5f0aa49c43078';
 const SEEDS = [190391, 190392, 190393, 190394, 190395, 190396, 190397, 190398];
@@ -249,11 +258,15 @@ function mergeTreeConflicts() {
   T.ok('prereg records the STOP rule for any conflict outside balance-proof.json',
     prereg.indexOf('If ANY conflict appears outside') !== -1, 'STOP rule present');
 
-  // ---- 2. No subject yet (prereg stage) ----
-  T.section('2. No subject yet — branch not cut, family NOT applied');
+  // ---- 2. Subject built (post-step state) ----
+  T.section('2. Subject built — branch on top of the far end, family applied');
   let subject = null;
   try { subject = git('rev-parse ' + SUBJECT_BRANCH); } catch (e) { subject = null; }
-  T.ok('subject branch does NOT exist yet (no subject commit)', subject === null, subject ? subject.slice(0, 12) : '(absent)');
+  T.ok('subject branch exists', subject !== null && subject.length === 40, subject ? subject.slice(0, 12) : '(missing)');
+  if (subject) {
+    T.ok('subject branch points at the recorded subject commit c3e2970e85d5', subject === SUBJECT_FULL, subject.slice(0, 12));
+    T.ok('subject parent is the far end 203a32775', git('rev-parse ' + SUBJECT_BRANCH + '^1') === FAR_FULL, git('rev-parse ' + SUBJECT_BRANCH + '^1').slice(0, 12));
+  }
   let addOk = true, addBad = null;
   for (const f of ADDED_CLEAN) {
     const atFar = git('ls-tree ' + FAR + ' -- ' + f);
@@ -309,12 +322,12 @@ function mergeTreeConflicts() {
     T.ok('survived ' + pair[0] + ' -> ' + pair[1], classifyTransplant(pair[0]) === pair[1], classifyTransplant(pair[0]));
   }
 
-  // ---- 5. No corpus (not measured yet) ----
-  T.section('5. No corpus — the run has not measured yet');
+  // ---- 5. Corpus exists (detail in §9) ----
+  T.section('5. Corpus exists — the step ran');
   const corpusDir = path.join(REPO, 'evidence', '2026-11-13', 'perseed-culpritbisect-a-' + STEP);
   const summaryPath = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-summary.json');
-  T.ok('no step corpus directory exists', !fs.existsSync(corpusDir), corpusDir);
-  T.ok('no step summary exists', !fs.existsSync(summaryPath), summaryPath);
+  T.ok('step corpus directory exists', fs.existsSync(corpusDir), corpusDir);
+  T.ok('step summary exists', fs.existsSync(summaryPath), summaryPath);
 
   // ---- 6. Base restored ----
   T.section('6. Base restored — arm branch clean, no swap residue');
@@ -336,6 +349,75 @@ function mergeTreeConflicts() {
   T.ok('step script names the band 190391..190398',
     stepSrc.indexOf('190391,190392,190393,190394,190395,190396,190397,190398') !== -1, 'band literal present');
   T.ok('prereg names the same band', prereg.indexOf('190391') !== -1 && prereg.indexOf('190398') !== -1, 'band in prereg');
+
+  // ---- 8. Subject state — narrowed resolution verified ----
+  T.section('8. Subject state — measured policy diff byte-identical, balance-proof ours');
+  const subjPolDiff = execSync('git diff ' + FAR + ' ' + SUBJECT_FULL + ' -- scripts/policies/', { cwd: REPO, stdio: 'pipe' }).toString();
+  const famPolDiff = execSync('git diff ' + MERGE + '^1 ' + MERGE + ' -- scripts/policies/', { cwd: REPO, stdio: 'pipe' }).toString();
+  T.ok('subject-vs-far-end policy diff is BYTE-IDENTICAL to the family diff', subjPolDiff === famPolDiff, 'subject ' + subjPolDiff.length + ' bytes vs family ' + famPolDiff.length + ' bytes');
+  const subjPolicy = sha256(gitShow(SUBJECT_FULL, 'scripts/policies/competent.js'));
+  T.ok('subject competent.js sha is the merge policy sha 26a87e49...', subjPolicy.startsWith(SUBJECT_POLICY_SHA), subjPolicy.slice(0, 12));
+  const subjBpBlob = git('ls-tree ' + SUBJECT_FULL + ' -- scripts/balance-proof.json').split(/\s+/)[2];
+  const farBpBlob = git('ls-tree ' + FAR + ' -- scripts/balance-proof.json').split(/\s+/)[2];
+  T.ok('subject balance-proof.json blob equals the far-end blob (ours)', subjBpBlob === farBpBlob, (subjBpBlob || '').slice(0, 12));
+  const subjBp = gitShow(SUBJECT_FULL, 'scripts/balance-proof.json');
+  T.ok('subject balance-proof.json carries the far-end r167 panel pointer (ours)', subjBp.indexOf(OURS_PANEL) !== -1 && subjBp.indexOf(THEIRS_PANEL) === -1, OURS_PANEL);
+  const subjFixBlob = git('ls-tree ' + SUBJECT_FULL + ' -- scripts/godpath/occupation-fixtures.json').split(/\s+/)[2];
+  const mergeFixBlob = git('ls-tree ' + MERGE + ' -- scripts/godpath/occupation-fixtures.json').split(/\s+/)[2];
+  T.ok('subject occupation-fixtures.json blob equals the merge blob (theirs)', subjFixBlob === mergeFixBlob, (subjFixBlob || '').slice(0, 12));
+  const subjCorpusBlob = git('ls-tree ' + SUBJECT_FULL + ' -- ' + ADDED_CLEAN[0]).split(/\s+/)[2];
+  const mergeCorpusBlob = git('ls-tree ' + MERGE + ' -- ' + ADDED_CLEAN[0]).split(/\s+/)[2];
+  T.ok('subject panel corpus blob equals the merge blob (theirs)', subjCorpusBlob === mergeCorpusBlob, (subjCorpusBlob || '').slice(0, 12));
+  const subjStandingBlob = git('ls-tree ' + SUBJECT_FULL + ' -- src/js/standing.js').split(/\s+/)[2];
+  const farStandingBlob = git('ls-tree ' + FAR + ' -- src/js/standing.js').split(/\s+/)[2];
+  T.ok('subject standing.js blob equals the far-end native blob (no standing change in family)', subjStandingBlob === farStandingBlob, (subjStandingBlob || '').slice(0, 12));
+  const subjStat = git('diff --numstat ' + FAR + ' ' + SUBJECT_FULL).split('\n')
+    .reduce(function (acc, line) { const p = line.split('\t'); const ins = parseInt(p[0], 10), del = parseInt(p[1], 10); return { ins: acc.ins + (Number.isFinite(ins) ? ins : 0), del: acc.del + (Number.isFinite(del) ? del : 0), n: acc.n + 1 }; }, { ins: 0, del: 0, n: 0 });
+  T.ok('subject diff vs far end is 5 files, +33/-10 (family +35/-12 minus the ours pointer)', subjStat.n === 5 && subjStat.ins === 33 && subjStat.del === 10, subjStat.n + ' files, +' + subjStat.ins + '/-' + subjStat.del);
+
+  // ---- 9. Step corpus — subject policy measured on all 8 seeds ----
+  T.section('9. Step corpus — STEP t5b-abb3c2db2 measured the SUBJECT policy');
+  const summary = JSON.parse(fs.readFileSync(summaryPath, 'utf8'));
+  T.ok('summary step id is t5b-abb3c2db2', summary.step === STEP, summary.step);
+  T.ok('summary seeds are exactly 190391..190398', JSON.stringify(summary.seeds) === JSON.stringify(SEEDS), (summary.seeds || []).join(','));
+  T.ok('summary survived is 4/8', summary.survived === 4, 'survived=' + summary.survived);
+  T.ok('summary verdict is GOOD', summary.verdict === 'GOOD', summary.verdict);
+  T.ok('summary rankVerdict is REGIONAL_INTACT', summary.rankVerdict === 'REGIONAL_INTACT', summary.rankVerdict);
+  T.ok('summary instrument errors are 0', summary.instrumentErrors === 0, 'errors=' + summary.instrumentErrors);
+  T.ok('summary wall wave-5 is 2/8', summary.wall && summary.wall.wave5 === 2, 'wave5=' + (summary.wall && summary.wall.wave5));
+  T.ok('summary wall wins/national/table are all 0', summary.wall && summary.wall.wins === 0 && summary.wall.national === 0 && summary.wall.table === 0, 'wins=' + (summary.wall && summary.wall.wins));
+  const corpusFiles = fs.readdirSync(corpusDir).filter(function (f) { return f.slice(-5) === '.json'; }).sort();
+  T.ok('per-seed corpus has exactly 8 files', corpusFiles.length === 8, corpusFiles.length + ' files');
+  let perSeedOk = true, perSeedBad = null;
+  for (const f of corpusFiles) {
+    const j = JSON.parse(fs.readFileSync(path.join(corpusDir, f), 'utf8'));
+    if (j.policySha !== SUBJECT_POLICY_SHA || j.anchorCommit !== SUBJECT_FULL.slice(0, 12) || j.standingFix !== true || j.standingSha !== 'f8fda4295a99' || j.step !== STEP) { perSeedOk = false; perSeedBad = f; break; }
+  }
+  T.ok('every per-seed JSON records the SUBJECT policySha, subject anchor, fix standing, STEP id', perSeedOk, perSeedBad ? 'fails: ' + perSeedBad : '8/8');
+  const driverLog = fs.readFileSync(path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-driver.log'), 'utf8');
+  // NOTE: the step script's echo lines (HEAD / fix swap / own policy
+  // sha) go to the step's stdout, NOT into this log file — the log
+  // holds the driver's per-seed JSON lines + the analyzer output.
+  // The per-seed lines are the log's record of the subject policy.
+  T.ok('driver log per-seed lines record the SUBJECT policySha + fix standingSha on all 8 seeds',
+    (driverLog.match(/"policySha":"26a87e493578"/g) || []).length === 8 && (driverLog.match(/"standingSha":"f8fda4295a99"/g) || []).length === 8 && (driverLog.match(/"standingFix":true/g) || []).length === 8, '8/8 per-seed lines');
+  T.ok('driver log records GOOD (survived 4/8', driverLog.indexOf('GOOD (survived 4/8') !== -1, 'classification present');
+  const evPath = path.join(REPO, 'evidence', '2026-11-13', 'sim-transplant5b.md');
+  const ev = fs.existsSync(evPath) ? fs.readFileSync(evPath, 'utf8') : '';
+  T.ok('evidence file records the verdict NOT-CARRIER', ev.indexOf('NOT-CARRIER') !== -1, 'NOT-CARRIER present');
+  T.ok('evidence file records the subject commit hash', ev.indexOf(SUBJECT_FULL) !== -1, 'subject hash present');
+  T.ok('evidence file records the telemetry refusal (not a deviation)', ev.indexOf('refusing') !== -1 && ev.indexOf('NOT rolled') !== -1, 'refusal note present');
+
+  // ---- 10. Base restored (post-step) ----
+  T.section('10. Base restored — arm branch clean after the step, no swap residue');
+  const headBranch2 = git('rev-parse --abbrev-ref HEAD');
+  T.ok('HEAD is back on the arm branch sim-transplant5b-a', headBranch2 === 'sim-transplant5b-a', 'HEAD=' + headBranch2);
+  const dirtyJs2 = git('status --porcelain --untracked-files=no -- src/js');
+  T.ok('no src/js file differs from HEAD', dirtyJs2 === '', dirtyJs2.slice(0, 200) || '(clean)');
+  const onDiskStanding2 = sha256(fs.readFileSync(path.join(REPO, 'src', 'js', 'standing.js'), 'utf8'));
+  const headStanding2 = sha256(gitShow('HEAD', 'src/js/standing.js'));
+  T.ok('on-disk standing.js is byte-identical to HEAD (no swap residue)', onDiskStanding2 === headStanding2, onDiskStanding2.slice(0, 12) + ' vs HEAD ' + headStanding2.slice(0, 12));
+  T.ok('subject branch still points at the recorded subject commit (left in place)', git('rev-parse ' + SUBJECT_BRANCH) === SUBJECT_FULL, 'branch kept');
 
   T.done();
 })().catch(function (e) { console.error('HARNESS ERROR', e); process.exit(1); });
