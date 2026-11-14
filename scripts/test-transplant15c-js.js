@@ -195,4 +195,110 @@ T.section('5. No subject cut yet (stage 1)');
   T.ok('no t15c-split-js driver log exists', fs.existsSync(path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-t15c-split-js-driver.log')) === false, 'absent');
 })();
 
+T.section('6. Subject identity — js-only, verified (stage 2)');
+(function () {
+  const SUBJ = 'd56206f70e53f909c7271a776ecce4dad07a3cf4';
+  const SUBJ_TREE = '009173473853d4dd5a33cb9448fd256b95a351aa';
+  T.ok('subject branch exists (left in place)', branchExists(SUBJECT_BRANCH) === true, SUBJECT_BRANCH);
+  T.ok('subject hash is d56206f7...', git('rev-parse ' + SUBJECT_BRANCH) === SUBJ, git('rev-parse --short ' + SUBJECT_BRANCH));
+  T.ok('subject parent is the far end', git('rev-parse ' + SUBJECT_BRANCH + '^1') === FAR_FULL, git('rev-parse --short ' + SUBJECT_BRANCH + '^1'));
+  T.ok('subject has exactly one parent', (function () { try { git('rev-parse ' + SUBJECT_BRANCH + '^2'); return false; } catch (e) { return true; } })(), 'single-parent');
+  T.ok('subject tree is 00917347...', git('rev-parse ' + SUBJECT_BRANCH + '^{tree}') === SUBJ_TREE, SUBJ_TREE.slice(0, 8));
+  const subjNumstat = {};
+  git('diff --numstat ' + FAR + ' ' + SUBJECT_BRANCH + ' -- src/js').split('\n').filter(Boolean).forEach(function (line) {
+    const p = line.split('\t'); subjNumstat[p[2]] = [parseInt(p[0], 10), parseInt(p[1], 10)];
+  });
+  Object.keys(EXPECTED_JS_NUMSTAT).forEach(function (f) {
+    const want = EXPECTED_JS_NUMSTAT[f];
+    const got = subjNumstat[f] || [-1, -1];
+    T.ok('subject numstat ' + f + ' equals the pick (+' + want[0] + '/-' + want[1] + ')', got[0] === want[0] && got[1] === want[1], '+' + got[0] + '/-' + got[1]);
+  });
+  // Content-line identity (the prereg's "exactly equal" leg, corrected:
+  // raw diff text differs only in hunk headers — line numbers and base
+  // blob hashes — so compare the added/removed content lines, in order).
+  const contentA = execSync('git diff ' + FAR + ' ' + SUBJECT_BRANCH + ' -- src/js | grep \'^[+-][^+-]\'', { cwd: REPO }).toString();
+  const contentB = execSync('git diff ' + OVE52_PARENT + ' ' + OVE52 + ' -- src/js | grep \'^[+-][^+-]\'', { cwd: REPO }).toString();
+  T.ok('subject js content lines equal the pick js content lines (370 lines)', contentA === contentB && contentA.split('\n').filter(Boolean).length === 370, contentA.split('\n').filter(Boolean).length + ' lines');
+  const statFiles = git('diff --name-only ' + FAR + ' ' + SUBJECT_BRANCH).split('\n').filter(Boolean).sort();
+  T.ok('subject stat names ONLY the 4 src/js files', JSON.stringify(statFiles) === JSON.stringify(EXPECTED_JS.slice().sort()), statFiles.join(', '));
+  const subjTotals = git('diff --numstat ' + FAR + ' ' + SUBJECT_BRANCH).split('\n').filter(Boolean)
+    .reduce(function (acc, line) { const p = line.split('\t'); return { ins: acc.ins + parseInt(p[0], 10), del: acc.del + parseInt(p[1], 10) }; }, { ins: 0, del: 0 });
+  T.ok('subject total is +347/-34', subjTotals.ins === 347 && subjTotals.del === 34, '+' + subjTotals.ins + '/-' + subjTotals.del);
+  T.ok('probe test is absent at the subject', fileExistsAt(SUBJECT_BRANCH, PROBE_FILE) === false, 'absent');
+  T.ok('ONTOLOGY at the subject is byte-identical to the far end', git('diff ' + FAR + ' ' + SUBJECT_BRANCH + ' -- ' + ONTOLOGY_FILE) === '', '(empty diff)');
+  T.ok('standing.js at the subject equals the far end', git('diff ' + FAR + ' ' + SUBJECT_BRANCH + ' -- src/js/standing.js') === '', '(empty diff)');
+  T.ok('policy at the subject equals the far end', git('diff ' + FAR + ' ' + SUBJECT_BRANCH + ' -- scripts/policies/competent.js') === '', '(empty diff)');
+  T.ok('subject message names the pick and the two drops', git('log -1 --format=%B ' + SUBJECT_BRANCH).indexOf('1c1b23482') !== -1 && git('log -1 --format=%B ' + SUBJECT_BRANCH).indexOf('probe-test') !== -1 && git('log -1 --format=%B ' + SUBJECT_BRANCH).indexOf('ONTOLOGY') !== -1, 'pick + drops named');
+})();
+
+T.section('7. STEP verdict — CARRIER 1/8, group-identical (stage 2)');
+(function () {
+  const sumPath = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-summary.json');
+  T.ok('STEP summary exists', fs.existsSync(sumPath), 'summary present');
+  const s = JSON.parse(fs.readFileSync(sumPath, 'utf8'));
+  T.ok('summary step is t15c-split-js', s.step === STEP, s.step);
+  T.ok('summary survived is 1/8', s.survived === 1, 'survived ' + s.survived + '/8');
+  T.ok('summary verdict is BAD (transplant CARRIER)', s.verdict === 'BAD', s.verdict);
+  T.ok('classifyTransplant(1) is CARRIER', classifyTransplant(s.survived) === 'CARRIER', classifyTransplant(s.survived));
+  T.ok('summary rank is REGIONAL_INTACT', s.rankVerdict === 'REGIONAL_INTACT', s.rankVerdict);
+  T.ok('summary median is 121d', s.wall.medianDays === 121, s.wall.medianDays + 'd');
+  T.ok('summary instrument errors are 0', s.instrumentErrors === 0, 'errors ' + s.instrumentErrors);
+  T.ok('summary wall wins/national/table are 0', s.wall.wins === 0 && s.wall.national === 0 && s.wall.table === 0, 'wins ' + s.wall.wins + ' national ' + s.wall.national + ' table ' + s.wall.table);
+  T.ok('summary wave-5 is 2/8, wave-4 8/8', s.wall.wave5 === 2 && s.wall.wave4 === 8, 'wave5 ' + s.wall.wave5 + '/8 wave4 ' + s.wall.wave4 + '/8');
+  T.ok('summary deaths total 690', s.wall.deaths === 690, 'deaths ' + s.wall.deaths);
+  const wantDays = { 190391: 60, 190392: 75, 190393: 115, 190394: 150, 190395: 106, 190396: 128, 190397: 121, 190398: 149 };
+  s.perSeed.forEach(function (r) {
+    T.ok('seed ' + r.seed + ' ran ' + wantDays[r.seed] + 'd', r.days === wantDays[r.seed], r.days + 'd ' + r.endReason);
+    T.ok('seed ' + r.seed + ' used the fix standing.js', r.standingFix === true && r.standingSha === 'f8fda4295a99', r.standingSha);
+    T.ok('seed ' + r.seed + ' used the far-end policy', r.policySha === POLICY_SHA, r.policySha);
+    T.ok('seed ' + r.seed + ' ran on the subject', r.anchorCommit === 'd56206f70e53', r.anchorCommit);
+    T.ok('seed ' + r.seed + ' has zero errors', r.errors === 0, 'errors ' + r.errors);
+  });
+  T.ok('only 190394 survived', s.perSeed.filter(function (r) { return r.days === 150 && r.endReason === 'survived'; }).map(function (r) { return r.seed; }).join(',') === '190394', '190394 only');
+  T.ok('blooded is false on all 8 end states', s.perSeed.every(function (r) { return r.blooded === false; }), '0/8 blooded');
+  T.ok('tribute veterans-short on all 8', s.perSeed.every(function (r) { return r.tribute && r.tribute.reason === 'veterans-short' && r.tribute.veterans === 0; }), '0/2 everywhere');
+  const corpusDir = path.join(REPO, 'evidence', '2026-11-13', 'perseed-culpritbisect-a-' + STEP);
+  const corpusFiles = fs.readdirSync(corpusDir).filter(function (f) { return f.slice(-5) === '.json'; });
+  T.ok('corpus holds 8 per-seed JSONs', corpusFiles.length === 8, corpusFiles.length + ' files');
+  const logPath = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-driver.log');
+  T.ok('driver log exists and records BAD 1/8', fs.existsSync(logPath) && fs.readFileSync(logPath, 'utf8').indexOf('BAD (survived 1/8') !== -1, 'BAD 1/8 in log');
+  // Group identity: every per-seed JSON equals the group arm's corpus
+  // modulo the step/anchorCommit labels (OVE-49 contributes nothing).
+  const groupDir = path.join(REPO, 'evidence', '2026-11-13', 'perseed-culpritbisect-a-t15c-narrowed');
+  let identical = 0;
+  SEEDS.forEach(function (seed) {
+    const jf = path.join(corpusDir, 'culpritbisect-s' + seed + '-culpritbisect-pilot-fix.json');
+    const gf = path.join(groupDir, 'culpritbisect-s' + seed + '-culpritbisect-pilot-fix.json');
+    const j = JSON.parse(fs.readFileSync(jf, 'utf8'));
+    const g = JSON.parse(fs.readFileSync(gf, 'utf8'));
+    delete j.step; delete j.anchorCommit; delete g.step; delete g.anchorCommit;
+    if (JSON.stringify(j) === JSON.stringify(g)) identical += 1;
+  });
+  T.ok('js-only corpus is field-identical to the group corpus (8/8)', identical === 8, identical + '/8 identical');
+})();
+
+T.section('8. Evidence records (stage 2)');
+(function () {
+  const ev = fs.readFileSync(path.join(REPO, 'evidence', '2026-11-14', 'sim-transplant15c-js.md'), 'utf8');
+  T.ok('evidence states CARRIER', ev.indexOf('Verdict: CARRIER') !== -1, 'CARRIER present');
+  T.ok('evidence records the subject hash', ev.indexOf('d56206f70e53f909c7271a776ecce4dad07a3cf4') !== -1, 'subject hash present');
+  T.ok('evidence records the subject tree', ev.indexOf('009173473853d4dd5a33cb9448fd256b95a351aa') !== -1, 'subject tree present');
+  T.ok('evidence records the group identity 8/8', ev.indexOf('8/8 IDENTICAL') !== -1, '8/8 present');
+  T.ok('evidence records the telemetry refusal', ev.indexOf('Telemetry deviation check: REFUSED') !== -1 && ev.indexOf('baseline NOT rolled') !== -1, 'refusal recorded');
+  T.ok('evidence records the Blooded check', ev.indexOf('Secondary check (Blooded beat vs end-state)') !== -1 && ev.indexOf('days 133 AND 142') !== -1, 'Blooded recorded');
+  T.ok('evidence carries a metric review', ev.indexOf('## Metric review') !== -1 && ev.indexOf('Median convention note') !== -1, 'metric review present');
+  T.ok('evidence records the plumbing construction deviation', ev.indexOf('Construction-method deviation') !== -1 && ev.indexOf('merge-tree') !== -1, 'deviation recorded');
+  T.ok('evidence records the safe-commit index clobber + repair', ev.indexOf('Safe-commit index clobber') !== -1 && ev.indexOf('git ls-tree -r') !== -1, 'clobber recorded');
+  T.ok('evidence records culpritbisect-a 116/116', ev.indexOf('116 passed, 0 failed') !== -1, '116/116 present');
+  T.ok('evidence records the per-seed table', ev.indexOf('| 190394 | 150 | survived | 5 | regional | 350 | 130 | false |') !== -1, '190394 row present');
+})();
+
+T.section('9. Closeout — tree state, no game code (stage 2)');
+(function () {
+  T.ok('on-disk standing.js equals HEAD blob', fs.readFileSync(path.join(REPO, 'src', 'js', 'standing.js'), 'utf8') === gitShow('HEAD', 'src/js/standing.js'), 'byte-identical to HEAD');
+  T.ok('no src/js file differs from HEAD', git('diff HEAD -- src/js') === '', git('diff --stat HEAD -- src/js') || '(clean)');
+  T.ok('subject branch still in place', branchExists(SUBJECT_BRANCH) === true && git('rev-parse ' + SUBJECT_BRANCH).indexOf('d56206f70e53') === 0, 'd56206f7');
+  T.ok('on the arm branch', git('branch --show-current') === 'sim-transplant15c-js-a', git('branch --show-current'));
+})();
+
 T.done();
