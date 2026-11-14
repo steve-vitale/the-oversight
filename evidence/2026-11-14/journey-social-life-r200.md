@@ -247,7 +247,24 @@ rolled on a single 4-seed panel.
 - **Door-req flag rate** fell 60% → 58% → 42% across r189/r195/r200. The spend-out fix is
   doing what it was meant to do (freeing the driver from the door). No bar change.
 
-## Landing
+## Landing (adoption, Loop B r201, 2026-11-14)
 
-[TO UPDATE — commit hash, merge result, deed-test re-run results.]
+- **Branch rebased onto master b2b50c2cd** (sim-proofrefresh-b15 adoption landed
+  mid-adoption; first rebase target 2042cb96c superseded). The live `git rebase`
+  crawled >14 min under box load (load avg ~19) and was killed after a runtime
+  restart left a stale index.lock; the rebase was completed via plumbing
+  (private-index `read-tree` + `commit-tree`, verified: diff vs master =
+  exactly the 13 r200 files, diff vs old tip = exactly the 19 master-move
+  files, all 13 blobs byte-identical). Rebased commit **26bcf8802** (parent
+  b2b50c2cd, same message, author date preserved).
+- **Deed-test re-runs** (standalone, main tree, master = tip's src/js exactly):
+  test-one-person-army-deed-attainment **7 passed, 0 failed** (exit 0, 316s);
+  test-living-garden-deed-attainment **rc=124 at 500s** (13/16 seeds printed,
+  assertions never reached) — inconclusive, same load class as the r195/r200
+  in-gate 120s timeouts, not an assertion failure. The r200 gate's other 7
+  failures were already adjudicated 0-attributable in the gate section above.
+- **Merge:** [TO UPDATE — ff-merge result, HEAD after merge.]
+- **Release:** [TO UPDATE — worktree-release result.]
+- Rotation-b: 5 → 6 written by r200; this adoption does not move it (crisis
+  r201 writes 6 → 7 at its closeout).
 
