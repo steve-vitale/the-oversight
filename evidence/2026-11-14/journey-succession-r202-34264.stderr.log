@@ -1,0 +1,40 @@
+
+ORGANIC DEATH d14: Kayden -> Esteban, topTrust=[{"id":"Andre","t":61},{"id":"Tariq","t":61},{"id":"Esteban","t":50},{"id":"Ines","t":47}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=13 inheritedPlants=0 keptSkills=8 inheritedSkills=0 succTrustPre=90 succTrustPost=50
+PARITY readable=true equal=true inherited=[] pre=["beast_calm"] post=["beast_calm"]
+DEATH d14 (organic (phase A)): Kayden -> Esteban | passed=true lin=true mo=true trust=50 vouchers=2
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Andre (refused=false)
+  CONVO d+3 with Tariq (refused=false)
+  STRANGER-PROBE d+3 with Vasyl (trust=17 refused=false)
+  CONVO d+7 with Tariq (refused=false)
+  CONVO d+7 with Andre (refused=false)
+  CONVO d+14 with Andre (refused=false)
+  CONVO d+14 with Carol (refused=false)
+  BOND-CONVO d+14 with Maeve (depth=1 v=30 refused=false)
+  CONVO d+30 with Wei (refused=false)
+  CONVO d+30 with Ines (refused=false)
+  NEWCOMER-PROBE d+40 with Priya (arrived d+40, trust=33 refused=false)
+  CONVO d+45 with Ines (refused=false)
+  CONVO d+45 with Lena (refused=false)
+  CONVO d+53 with Lena (refused=false)
+  CONVO d+53 with Ines (refused=false)
+  CONVO d+64 with Lena (refused=false)
+  CONVO d+64 with Ines (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=1 (eligible=2) echo=3 organicBurial={"respects":false,"bury":false} halfRation=6
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":87,"offerLines":25,"codexPlantsDelta":23,"codexSkillsDelta":15,"codexAbilitiesDelta":11,"xpDelta":63,"any":true} pantry 27991->8998
+TRUST-DIALS: office 50->67 (+17, climb) | villageMean 34.3->71 (+36.7, climb) | ge60 2->5 | movers>=5: [{"id":"Mia","from":23,"to":90,"delta":67},{"id":"Benoit","from":15,"to":73,"delta":58},{"id":"Lena","from":38,"to":93,"delta":55},{"id":"Ines","from":47,"to":90,"delta":43},{"id":"Maeve","from":21,"to":59,"delta":38},{"id":"Vasyl","from":9,"to":2,"delta":-7}]
+DEED-LEDGER: calls=14 summary={"teachPlant":{"calls":9,"ok":9,"deltaSum":0,"deltaN":9,"positive":0,"meanDelta":0},"giveFood":{"calls":5,"ok":5,"deltaSum":26,"deltaN":5,"positive":5,"meanDelta":5.2}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=3 (convo=3, say=0)) m4=true m5=manual | endDay=84 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=14) trustVerdict={"readable":true,"officeMantle":50,"officeLast":67,"officeDelta":17,"officeClass":"climb","villageMantle":34.3,"villageLast":71,"villageDelta":36.7,"villageClass":"climb","villageGe60Mantle":2,"villageGe60Last":5,"movers":[{"id":"Mia","from":23,"to":90,"delta":67},{"id":"Benoit","from":15,"to":73,"delta":58},{"id":"Lena","from":38,"to":93,"delta":55},{"id":"Ines","from":47,"to":90,"delta":43},{"id":"Maeve","from":21,"to":59,"delta":38},{"id":"Vasyl","from":9,"to":2,"delta":-7}]}
+E6/CALLCHECK: e6={"callMoves":4,"withCensus":4,"chainHandoffs":1,"trustMoves":3} callCheck={"dailyMoveDays":4,"callMoveDays":4,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=4 (v2=4, excludedLoot=0))
+E7/R47: e7={"trustMoves":3,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":1,"deed-only":0,"both":1,"neither":1},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":3,"v2":4,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":1,"known":1,"unknown":0} e3={"dailyDays":71,"moves":4}
