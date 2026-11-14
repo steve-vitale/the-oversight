@@ -217,4 +217,6 @@ NOT rolled. (Same refusal as all prior bisect/transplant arms.)
   file tree restat under load) — slow, not stuck.
 - No flap EPERM hit on this arm's writes. No pushes, no version
   bumps, no live verification (ship loop owns deploys). Arm branch
-  tip after this run: (to fill at commit time).
+  tip: e28b49fd6 (stage-2 commit; proof 113/113, culpritbisect-a
+  116/116). Subject branch transplant-9-subject left in place at
+  291934f7e3ac18c6081f8ad5976e17b2c6b9947f.
