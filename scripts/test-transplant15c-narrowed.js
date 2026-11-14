@@ -21,8 +21,11 @@
 //   1. Subject chain — the subject's history 203a32775..12fd9d694 is EXACTLY the
 //      two single-parent 15C picks (OVE-49 7183c942e, then OVE-52
 //      12fd9d694), with the right parents and the right js footprint
-//      (OVE-49 test-only, OVE-52 js=4, combined +740/-35 over 6 files),
-//      and the evidence commit sits on top of the subject.
+//      (OVE-49 test-only, OVE-52 js=4, combined +740/-35 over 6 files).
+//      LANDING SHAPE (coordinator addendum): the evidence commits were
+//      rebased --onto master so the landing is evidence-only; the subject
+//      lives on branch transplant-15c-narrowed-subject at 12fd9d694 and the
+//      arm branch holds exactly the 4 evidence commits on top of master.
 //   2. Corpus — 8/8 per-seed JSONs parse, seeds match 190391–190398,
 //      STEP is t15c-narrowed, fix swapped in (standingSha f8fda429...,
 //      anchor 12fd9d694d3f, policy a7ff5c516440), 0 instrument errors,
@@ -31,9 +34,12 @@
 //   3. Verdict — classifyTransplant maps every survived count to
 //      CARRIER / AMBIGUOUS / NOT-CARRIER per the binding thresholds,
 //      and the corpus's 1/8 reads CARRIER; the evidence file states it.
-//   4. Standing restored — on-disk src/js/standing.js is byte-identical
-//      to the far-end native (sha256 75762cb2..., verified from the
-//      far-end blob, not from a note), and `git diff` is empty for src/js.
+//   4. Standing restored — the SUBJECT branch's src/js/standing.js is
+//      byte-identical to the far-end native (sha256 75762cb2..., verified
+//      from the far-end blob, not from a note); the step's fix swap was
+//      restored before commit (attested in the evidence). The landing
+//      branch itself changes no game code: on-disk standing.js equals the
+//      HEAD blob and `git diff` is empty for src/js.
 //   5. Prior files unchanged — the 7 per-seed files left by the
 //      cancelled worker still hash to the sha256 recorded in the prereg
 //      before the fill seed ran (the fill touched only seed 190398).
@@ -55,6 +61,7 @@ const FAR = '203a32775';
 const FAR_FULL = '203a327750a223e0a1465dc51f5409787efdfaae';
 const OVE49 = '7183c942e07561bdcbea0b6a281a1d680b404e52';
 const OVE52 = '12fd9d694d3fde3a4d274cdee948f409c77f4462';
+const SUBJECT_BRANCH = 'transplant-15c-narrowed-subject';
 const STEP = 't15c-narrowed';
 const FIX_SHA = 'f8fda4295a99720dcb54d0c69f5fa6836f55cf9d9c8c5d1e51e5f0aa49c43078';
 const FAR_NATIVE_STANDING_SHA = '75762cb2259da3d4d51c57de1548404b45d8269d36a4503341507ed807540e7c';
@@ -98,8 +105,8 @@ T.section('1. Subject chain — exactly the two 15C picks on the far end');
   T.ok('OVE-52 parent is OVE-49', second[1] === OVE49, second[1].slice(0, 12));
   T.ok('OVE-52 subject names fighterState', range[0].indexOf('OVE-52') !== -1, range[0].slice(0, 100));
   T.ok('subject tip is the OVE-52 commit', git('rev-parse ' + OVE52) === OVE52, git('rev-parse --short ' + OVE52));
-  T.ok('subject is an ancestor of the arm branch HEAD', git('merge-base --is-ancestor ' + OVE52 + ' HEAD; echo $?') === '0', 'ancestor');
-  T.ok('arm branch has at least 1 commit on top of the subject', parseInt(git('rev-list --count ' + OVE52 + '..HEAD'), 10) >= 1, git('rev-list --count ' + OVE52 + '..HEAD') + ' commits');
+  T.ok('subject branch points at OVE-52', git('rev-parse ' + SUBJECT_BRANCH) === OVE52, git('rev-parse --short ' + SUBJECT_BRANCH));
+  T.ok('arm branch holds exactly 4 evidence commits on top of master', parseInt(git('rev-list --count master..HEAD'), 10) === 4, git('rev-list --count master..HEAD') + ' commits');
   const js49 = git('diff --name-only ' + OVE49 + '^1 ' + OVE49 + ' -- src/js');
   T.ok('OVE-49 touches no src/js file (test-only)', js49 === '', js49 || '(none)');
   const files49 = git('diff --name-only ' + OVE49 + '^1 ' + OVE49).split('\n').filter(Boolean);
@@ -155,9 +162,16 @@ T.section('3. Verdict — binding thresholds, corpus reads CARRIER');
 
 T.section('4. Standing restored — byte-identical to the far-end native');
 (function () {
+  // LANDING SHAPE (coordinator addendum 2026-11-14): the evidence commits
+  // were rebased --onto master so the landing is evidence-only; the subject
+  // is no longer an ancestor of HEAD. The native-standing facts are therefore
+  // proven against the subject BRANCH (which the picks never touched —
+  // the family does not touch standing.js, leg above), and the no-game-code
+  // fact against the on-disk file vs HEAD.
+  const subjectStanding = gitShow(SUBJECT_BRANCH, 'src/js/standing.js');
+  T.ok('subject-branch standing.js sha is 75762cb2...', sha256(subjectStanding) === FAR_NATIVE_STANDING_SHA, sha256(subjectStanding).slice(0, 12));
+  T.ok('subject-branch standing.js equals the far-end blob', subjectStanding === gitShow(FAR, 'src/js/standing.js'), 'byte-identical to far end');
   const onDisk = fs.readFileSync(path.join(REPO, 'src', 'js', 'standing.js'), 'utf8');
-  T.ok('on-disk standing.js sha is 75762cb2...', sha256(onDisk) === FAR_NATIVE_STANDING_SHA, sha256(onDisk).slice(0, 12));
-  T.ok('on-disk standing.js equals the far-end blob', onDisk === gitShow(FAR, 'src/js/standing.js'), 'byte-identical to far end');
   T.ok('on-disk standing.js equals HEAD blob', onDisk === gitShow('HEAD', 'src/js/standing.js'), 'byte-identical to HEAD');
   T.ok('no src/js file differs from HEAD', git('status --short -- src/js') === '', git('status --short -- src/js') || '(clean)');
   T.ok('fix file sha is f8fda429...', sha256(gitShow('5157782a4', 'src/js/standing.js')) === FIX_SHA, FIX_SHA.slice(0, 12));

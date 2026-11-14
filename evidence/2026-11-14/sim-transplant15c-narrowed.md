@@ -203,3 +203,21 @@ the survival verdict.
   (8 per-seed JSONs) + driver log
   `evidence/2026-11-13/culpritbisect-a-t15c-narrowed-driver.log`
 - Proof: `scripts/test-transplant15c-narrowed.js`
+
+## Coordinator landing addendum (run fleshout-20261114T1215Z)
+
+- The worker committed the evidence on top of the subject (the tree was
+  checked out detached at 12fd9d694, a leftover of the superseded
+  52-alone plan). Landing evidence-only required a `git rebase --onto
+  master 12fd9d694` of the 4 arm commits; the subject is kept reachable
+  on branch `transplant-15c-narrowed-subject` at 12fd9d694.
+- That rebase broke 3 proof legs that assumed the branch sits on the
+  subject ("subject is an ancestor of HEAD", the two on-disk standing.js
+  vs far-end legs) — landing-shape artifacts, not measurement defects:
+  the on-disk file on the rebased branch is master's standing.js. The
+  legs were rewritten in place to their landing-shape equivalents
+  (subject branch points at OVE-52; subject-branch standing.js is the
+  far-end native; arm branch holds exactly the 4 evidence commits on top
+  of master; on-disk standing.js still equals the HEAD blob, so the
+  landing changes no game code). Proof re-run 112/0 on the rebased tip;
+  `test-culpritbisect-a.js` 116/116.
