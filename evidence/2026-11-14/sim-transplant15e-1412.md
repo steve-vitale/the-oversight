@@ -397,9 +397,16 @@ villager-objectives.js past the far end's form.
   heartbeat run — the coordinator heartbeated the tree at
   16:54Z before handing the arm over; the run finished within
   the hour, so no reaper risk).
-- SAFE-COMMIT INDEX CLOBBER: (recorded after the final commit —
-  see below; none struck the stage-1 prereg commit per the
-  coordinator's handoff).
+- SAFE-COMMIT INDEX CLOBBER: struck on the stage-2 commit
+  (ec27985f5) — `git status` showed the committed evidence file
+  as staged-deleted and the proof as MM although the commit was
+  correct (worktree hashes matched the HEAD blobs exactly).
+  Repaired with the documented pipe (`git ls-tree -r HEAD --
+  <paths> | git update-index --add --index-info`); verified
+  `git status --short` empty + `git diff HEAD` empty +
+  `git diff --cached` empty + hash-object == HEAD blob per file
+  afterwards. No work lost. No clobber struck the stage-1
+  prereg commit per the coordinator's handoff.
 - No runtime restart struck this arm. No safe-commit refusal.
 - Telemetry deviation check: NOT RUN — no corpus exists to check
   (no judged sim ran; recorder-corpus class would refuse it
