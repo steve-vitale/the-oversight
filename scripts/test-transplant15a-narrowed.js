@@ -376,7 +376,9 @@ function mergeTree(base, ours, theirs) {
     stepSrc.indexOf('190391,190392,190393,190394,190395,190396,190397,190398') !== -1, 'band literal present');
   let subjectExists = true;
   try { git('rev-parse ' + SUBJECT_BRANCH); } catch (e) { subjectExists = false; }
-  T.ok('subject branch does NOT exist yet (not cut — prereg stage)', subjectExists === false, SUBJECT_BRANCH + ' absent');
+  T.ok('subject branch exists (cut after the prereg commit; stage 2)', subjectExists === true, SUBJECT_BRANCH + ' present');
+  T.ok('subject tip is the pick-1 commit 493d7a975 (OVE-48)',
+    git('rev-parse ' + SUBJECT_BRANCH).startsWith('493d7a975') && git('log -1 --format=%s ' + SUBJECT_BRANCH) === 'OVE-48: convoSelectWant reads dawn commitment and top drive', git('log -1 --format=%h\\ %s ' + SUBJECT_BRANCH).slice(0, 80));
   const t15aSummary = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-summary.json');
   T.ok('no step summary exists for t15a-narrowed (no judged sim ran)', fs.existsSync(t15aSummary) === false, STEP);
   const t15aDriver = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-driver.log');
@@ -387,11 +389,68 @@ function mergeTree(base, ours, theirs) {
   try { execSync('git rev-parse --verify CHERRY_PICK_HEAD', { cwd: REPO, stdio: 'pipe' }); } catch (e) { cherryPickHead = false; }
   T.ok('no cherry-pick is in progress', cherryPickHead === false, 'CHERRY_PICK_HEAD absent');
   const dirtyTracked = git('diff --name-only HEAD');
-  const allowed = ['scripts/test-transplant15a-narrowed.js', 'evidence/2026-11-14/sim-transplant15a-narrowed-prereg.md'];
+  const allowed = ['scripts/test-transplant15a-narrowed.js', 'evidence/2026-11-14/sim-transplant15a-narrowed-prereg.md', 'evidence/2026-11-14/sim-transplant15a-narrowed.md'];
   const dirtyOther = dirtyTracked.split('\n').filter(function (ln) {
     return ln && !allowed.some(function (a) { return ln === a; });
   }).join('\n');
-  T.ok('tracked tree is clean apart from this proof + the prereg (both uncommitted until this proof passes)', dirtyOther === '', dirtyOther.slice(0, 200) || '(only allowed files)');
+  T.ok('tracked tree is clean apart from this proof + the prereg + the evidence file (uncommitted until this proof passes)', dirtyOther === '', dirtyOther.slice(0, 200) || '(only allowed files)');
+
+  // ---- 8. Live pick 1 — tooling conflict resolved, tree equals prediction ----
+  T.section('8. Live pick 1 — green-list resolved --ours, tree equals the predicted pick-1-resolved tree');
+  T.ok('subject tip tree is 6d6216e3… (the predicted pick-1-resolved tree)',
+    git('rev-parse ' + SUBJECT_BRANCH + '^{tree}') === PRED1_TREE, git('rev-parse ' + SUBJECT_BRANCH + '^{tree}').slice(0, 12));
+  T.ok('subject green-list.txt is byte-identical to the far end (checkout --ours kept it)',
+    sha256(gitShow(SUBJECT_BRANCH, 'scripts/green-list.txt')) === sha256(gitShow(FAR, 'scripts/green-list.txt')), 'green-list == far end');
+  const subjNumstat = git('diff --numstat ' + FAR + ' ' + SUBJECT_BRANCH);
+  T.ok('subject diff vs far end is exactly pick 1 minus green-list (3 files, +320/-3)',
+    subjNumstat.split('\n').sort().join('\n') === ['3\t2\tdocs/ONTOLOGY.md', '206\t0\tscripts/test-convo-dawn-priorities.js', '111\t1\tsrc/js/convo-wants.js'].sort().join('\n'), subjNumstat.replace(/\n/g, ' | '));
+  const pick1Files = git('diff --name-only ' + SUBJECT_BRANCH + '^1 ' + SUBJECT_BRANCH).split('\n').sort();
+  T.ok('pick-1 commit touches exactly the 3 non-tooling files (green-list.txt NOT in the commit)',
+    JSON.stringify(pick1Files) === JSON.stringify(['docs/ONTOLOGY.md', 'scripts/test-convo-dawn-priorities.js', 'src/js/convo-wants.js']), pick1Files.join(', '));
+  T.ok('subject has exactly 1 commit on top of the far end (pick 1 only)',
+    git('rev-list --count ' + FAR + '..' + SUBJECT_BRANCH) === '1', 'count=1');
+  T.ok('no pick-2 commit exists on the subject (OVE-50 never landed)',
+    git('log --format=%s ' + FAR + '..' + SUBJECT_BRANCH).indexOf('OVE-50') === -1, 'no OVE-50 commit');
+  T.ok('no pick-3 commit exists on the subject (OVE-51 never attempted)',
+    git('log --format=%s ' + FAR + '..' + SUBJECT_BRANCH).indexOf('OVE-51') === -1, 'no OVE-51 commit');
+
+  // ---- 9. STOP outcome — pick-2 conflict reported, nothing resolved, nothing measured ----
+  T.section('9. STOP outcome — pick-2 conflict reported, nothing hand-resolved, nothing measured');
+  const ev15aPath = path.join(REPO, 'evidence', '2026-11-14', 'sim-transplant15a-narrowed.md');
+  const ev15a = fs.existsSync(ev15aPath) ? fs.readFileSync(ev15aPath, 'utf8') : '';
+  T.ok('evidence file exists', ev15a.length > 0, ev15aPath);
+  T.ok('evidence file records the outcome as UNMEASURED-BY-CONFLICT', ev15a.indexOf('UNMEASURED-BY-CONFLICT') !== -1, 'outcome present');
+  T.ok('evidence file records the exact conflict list (UU scripts/green-list.txt, UU src/js/convo-wants.js)',
+    ev15a.indexOf('UU scripts/green-list.txt') !== -1 && ev15a.indexOf('UU src/js/convo-wants.js') !== -1, 'conflict list present');
+  T.ok('evidence file records the convo-wants.js marker lines 1868/1876/1885',
+    ev15a.indexOf('1868') !== -1 && ev15a.indexOf('1876') !== -1 && ev15a.indexOf('1885') !== -1, 'convo-wants.js markers present');
+  T.ok('evidence file records the green-list marker lines 803/804/810',
+    ev15a.indexOf('803') !== -1 && ev15a.indexOf('810') !== -1, 'green-list markers present');
+  T.ok('evidence file records the subject tip 493d7a975 and the predicted tree 6d6216e3…',
+    ev15a.indexOf('493d7a975') !== -1 && ev15a.indexOf('6d6216e3') !== -1, 'subject tip present');
+  T.ok('evidence file records the resolution (checkout --ours, sha 138a5e86…, pick 1 only)',
+    ev15a.indexOf('checkout --ours') !== -1 && ev15a.indexOf('138a5e86') !== -1, 'resolution present');
+  T.ok('evidence file records that no judged sim ran', ev15a.indexOf('No judged sim ran') !== -1, 'no-sim note present');
+  T.ok('evidence file records the pick-2 mechanism (believed pantry 03436c1bc, 15D dependency)',
+    ev15a.indexOf('03436c1bc') !== -1 && ev15a.indexOf('15D') !== -1, 'mechanism present');
+  T.ok('evidence file records the coordinator decision owed (15D-first / pick-1-alone / record unmeasurable)',
+    ev15a.indexOf('Coordinator decision owed') !== -1, 'coordinator note present');
+  T.ok('evidence file records the infrastructure (flap ALL-OK, lock contention, index clobber, telemetry NOT RUN)',
+    ev15a.indexOf('HOST WRITE FLAP') !== -1 && ev15a.indexOf('REGISTRY LOCK CONTENTION') !== -1 &&
+    ev15a.indexOf('INDEX CLOBBER') !== -1 && ev15a.indexOf('Telemetry deviation check: NOT RUN') !== -1, 'infrastructure present');
+  // Prereg-commit ancestry by MESSAGE, not hash (0608Z lesson: an
+  // adoption rebase rewrites hashes).
+  const logSubjects = git('log --format=%s HEAD');
+  T.ok('prereg commit is an ancestor of HEAD (resolved by message, not hash)',
+    logSubjects.indexOf('sim-transplant15a-narrowed-a: prereg + stage-1 proof (131 legs; pick-1 tooling-only, pick-2 src/js conflict predicted)') !== -1, 'prereg message present');
+  const headBranch2 = git('rev-parse --abbrev-ref HEAD');
+  T.ok('HEAD is back on the arm branch sim-transplant15a-narrowed-a after the live picks (worktree-only)', worktreeOnly(headBranch2 === 'sim-transplant15a-narrowed-a'), 'HEAD=' + headBranch2);
+  let cherryPickHead2 = true;
+  try { execSync('git rev-parse --verify CHERRY_PICK_HEAD', { cwd: REPO, stdio: 'pipe' }); } catch (e) { cherryPickHead2 = false; }
+  T.ok('no cherry-pick is in progress (pick 2 was aborted)', cherryPickHead2 === false, 'CHERRY_PICK_HEAD absent');
+  T.ok('no verdict (CARRIER/AMBIGUOUS/NOT-CARRIER) is claimed anywhere in the evidence file',
+    ev15a.indexOf('VERDICT: CARRIER') === -1 && ev15a.indexOf('VERDICT: AMBIGUOUS') === -1 && ev15a.indexOf('VERDICT: NOT-CARRIER') === -1, 'no verdict claimed');
+  T.ok('evidence file records Verdict: NONE', ev15a.indexOf('Verdict: NONE') !== -1, 'verdict NONE present');
 
   T.done();
 })().catch(function (e) { console.error('HARNESS ERROR', e); process.exit(1); });
