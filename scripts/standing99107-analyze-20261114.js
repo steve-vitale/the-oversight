@@ -146,10 +146,17 @@ function summarizeSeed(out) {
   }
 
   // --- per-delta event attribution (war/diplomacy/plenty changes) ---
+  // Windows are INCLUSIVE on both ends [prev.day, cur.day]: a kill or
+  // feast stamped prev.day may have happened AFTER that day's snapshot
+  // (snapshots run inside policy.daily; kills/feasts can land later
+  // the same day) and only shows in the NEXT snapshot. The strict
+  // check is the ledger/log delta equality; the event presence check
+  // is belt-and-braces, so an inclusive window can only over-attribute
+  // an already-explained event, never hide an unexplained delta.
   const kills = out.killEvents || [];
   const feasts = out.feastEvents || [];
-  function killsIn(a, b) { return kills.filter(function (k) { return k.day > a && k.day <= b; }); }
-  function feastsIn(a, b) { return feasts.filter(function (f) { return f.day > a && f.day <= b; }); }
+  function killsIn(a, b) { return kills.filter(function (k) { return k.day >= a && k.day <= b; }); }
+  function feastsIn(a, b) { return feasts.filter(function (f) { return f.day >= a && f.day <= b; }); }
   for (let i = 1; i < daily.length; i++) {
     const prev = daily[i - 1], cur = daily[i];
     if (!prev.standing || !cur.standing) continue;
@@ -248,19 +255,23 @@ function summarizeSeed(out) {
   s.tributeMarkers = Object.keys(trib).map(function (k) { return trib[k]; });
 
   // --- door classification ---
+  // Wave-5 release lines ONLY: the wave-2/3/4 releases all say
+  // "RATINGS ARE UP ... talent has been released", so the filter must
+  // name the fifth draft, never the generic RATINGS phrase.
+  const RELEASE_RE = /greenlit the fifth|Wave 5 talent has been released/i;
   const lines = out.standingLines || [];
   let prevPeak = 0;
   for (const d of daily) {
     const pk = (d.peak | 0) || 0;
     if (pk > prevPeak && pk >= 5) {
-      const dayLines = lines.filter(function (L) { return L.day === d.day && /RATINGS ARE UP|greenlit the fifth/i.test(L.line); });
+      const dayLines = lines.filter(function (L) { return L.day === d.day && RELEASE_RE.test(L.line); });
       if (dayLines.length) s.doorOpenDay = d.day;
       else s.unclassifiedReleases.push({ day: d.day, kind: 'peak-to-5-no-line' });
     }
     prevPeak = Math.max(prevPeak, pk);
   }
   for (const L of lines) {
-    if (/RATINGS ARE UP|greenlit the fifth/i.test(L.line)) s.releaseLines.push(L);
+    if (RELEASE_RE.test(L.line)) s.releaseLines.push(L);
     if (/stays in the wings|still waiting|next act|bread alone/i.test(L.line)) s.holdLineCount++;
   }
   // A release line with no door-open day is unclassified unless it is

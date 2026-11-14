@@ -192,6 +192,27 @@ ok('unclassified war delta (ledger moved, no kill) is flagged', function () {
   assert.strictEqual(s.unclassifiedDeltas.length, 1);
   assert.strictEqual(s.unclassifiedDeltas[0].kind, 'war-no-kill-event');
 });
+ok('kill stamped on prev.day (after that day\'s snapshot) explains the next-day delta', function () {
+  const s = AN.summarizeSeed(seed({ daily: [
+    snap(10),
+    snap(11, { standing: { total: 50, war: 50, diplomacy: 0, plenty: 0 }, capped: 50,
+      ledger: { 3: { points: 2, perType: { gavel: 1, ad_break: 1 }, perTypeX: {} }, 4: { points: 0, perType: {}, perTypeX: {} }, 5: { points: 0, perType: {}, perTypeX: {} } } }),
+  ], killEvents: [
+    { day: 10, fn: 'recordWaveKill', mid: 'gavel', wave: 3, by: 'v_a', via: 'wild', entryAdded: true },
+    { day: 10, fn: 'recordWaveKill', mid: 'ad_break', wave: 3, by: 'v_b', via: 'wild', entryAdded: true },
+  ] }));
+  assert.deepStrictEqual(s.unclassifiedDeltas, [], 'same-day-after-snapshot kills are valid explanations, not orphans');
+});
+ok('wave-2/3/4 RATINGS lines are not wave-5 releases', function () {
+  const s = AN.summarizeSeed(seed({ daily: [snap(10, { peak: 4 })],
+    standingLines: [
+      { day: 8, via: 'sysSay', line: '📺 RATINGS ARE UP! The producers are pleased. New casting directives incoming — Wave 2 talent has been released into your sector.' },
+      { day: 10, via: 'sysSay', line: '📡 RATINGS ARE UP... Wave 4 talent has been released. The Mirror Draft opens.' },
+    ] }));
+  assert.strictEqual(s.releaseLines.length, 0);
+  assert.deepStrictEqual(s.unclassifiedReleases, []);
+  assert.strictEqual(s.doorOpenDay, null);
+});
 
 // --- live harness smoke ---
 (async function () {
