@@ -82,10 +82,17 @@
 //      pick 2 minus the two tooling files; both tooling files are
 //      byte-identical to the 14+12 base; conversation.js and the
 //      snippet test carry the OVE-33 content.
-//   9. The step verdict (survived/8, per-seed days, wave-5,
-//      median, death causes) and the evidence file records it,
-//      the subject hash, the telemetry refusal, and the
-//      pick-2-alone isolation note.
+//   9. The step verdict (survived 4/8, NOT-CARRIER, per-seed days
+//      seed-for-seed identical to the far end) and the evidence
+//      file records it, the subject hash, the telemetry refusal,
+//      the pick-2-alone isolation note, and the write-flap
+//      recovery (fallback extraction + analyzer re-run).
+//   7 (rewritten in stage 2). Base state — HEAD is back on
+//      sim-transplant15e-p2-a, the subject branch exists at the
+//      live pick acdbc793f, the step summary / driver log / corpus
+//      exist (8 per-seed JSONs), no cherry-pick is in progress,
+//      the tracked tree is clean apart from this proof + the
+//      prereg + the evidence file.
 //
 // Usage: node scripts/test-transplant15e-p2-a.js
 'use strict';
@@ -409,8 +416,8 @@ function mergeTree(base, ours, theirs) {
     ev.indexOf('git cherry-pick 7041e1bfb') !== -1 && ev.indexOf('git checkout --ours') !== -1, 'build method present');
   T.ok('prereg records the fix sha f8fda4295a99', ev.indexOf('f8fda4295a99') !== -1, 'fix sha present');
 
-  // ---- 7. Base state (stage 1) ----
-  T.section('7. Base state — arm branch clean, subject NOT yet cut, step t15e-p2 NOT yet run');
+  // ---- 7. Base state (stage 2) ----
+  T.section('7. Base state — arm branch clean, subject cut at acdbc793f, step t15e-p2 ran');
   const headBranch = git('rev-parse --abbrev-ref HEAD');
   // worktreeOnly: branch-identity legs are meaningful only in the
   // worker tree. On merged master HEAD is 'master' by design (the
@@ -435,22 +442,148 @@ function mergeTree(base, ours, theirs) {
     stepSrc.indexOf('190391,190392,190393,190394,190395,190396,190397,190398') !== -1, 'band literal present');
   let subjectExists = true;
   try { git('rev-parse ' + SUBJECT_BRANCH); } catch (e) { subjectExists = false; }
-  T.ok('subject branch does NOT exist yet (stage 1 — cut after this prereg commits)', subjectExists === false, SUBJECT_BRANCH + ' absent');
+  T.ok('subject branch exists at the live pick acdbc793f (stage 2)', subjectExists === true && git('rev-parse ' + SUBJECT_BRANCH).startsWith('acdbc793f'), SUBJECT_BRANCH + ' at acdbc793f');
   const tSummary = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-summary.json');
-  T.ok('step summary does NOT exist for t15e-p2 (stage 1 — no judged sim has run)', fs.existsSync(tSummary) === false, STEP);
+  T.ok('step summary EXISTS for t15e-p2 (stage 2 — the judged sim ran)', fs.existsSync(tSummary) === true, STEP);
   const tDriver = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-driver.log');
-  T.ok('step driver log does NOT exist for t15e-p2 (stage 1 — no judged sim has run)', fs.existsSync(tDriver) === false, STEP);
+  T.ok('step driver log EXISTS for t15e-p2 (stage 2 — the judged sim ran)', fs.existsSync(tDriver) === true, STEP);
   const corpusDir = path.join(REPO, 'evidence', '2026-11-13', 'perseed-culpritbisect-a-' + STEP);
-  T.ok('step corpus does NOT exist for t15e-p2 (stage 1 — no judged sim has run)', fs.existsSync(corpusDir) === false, STEP);
+  T.ok('step corpus EXISTS for t15e-p2 (stage 2 — the judged sim ran)', fs.existsSync(corpusDir) === true, STEP);
+  T.ok('step corpus holds exactly 8 per-seed JSONs', fs.existsSync(corpusDir) && fs.readdirSync(corpusDir).filter(function (f) { return f.endsWith('.json'); }).length === 8, '8 seeds');
   let cherryPickHead = true;
   try { execSync('git rev-parse --verify CHERRY_PICK_HEAD', { cwd: REPO, stdio: 'pipe' }); } catch (e) { cherryPickHead = false; }
   T.ok('no cherry-pick is in progress', cherryPickHead === false, 'CHERRY_PICK_HEAD absent');
   const dirtyTracked = git('diff --name-only HEAD');
-  const allowed = ['scripts/test-transplant15e-p2-a.js', 'evidence/2026-11-14/sim-transplant15e-p2-prereg.md'];
+  const allowed = ['scripts/test-transplant15e-p2-a.js', 'evidence/2026-11-14/sim-transplant15e-p2-prereg.md', 'evidence/2026-11-14/sim-transplant15e-p2.md'];
   const dirtyOther = dirtyTracked.split('\n').filter(function (ln) {
     return ln && !allowed.some(function (a) { return ln === a; });
   }).join('\n');
-  T.ok('tracked tree is clean apart from this proof + the prereg (uncommitted until this proof passes)', dirtyOther === '', dirtyOther.slice(0, 200) || '(only allowed files)');
+  T.ok('tracked tree is clean apart from this proof + the prereg + the evidence file (uncommitted until this proof passes)', dirtyOther === '', dirtyOther.slice(0, 200) || '(only allowed files)');
+
+  // ---- 8. Live pick — exactly the two predicted conflicts, resolved --ours, tree equals prediction ----
+  T.section('8. Live pick — two predicted conflicts, --ours resolutions, tree equals prediction');
+  const LIVE_SUBJECT = 'acdbc793f07bdb02609353be0d5543dd583efab3';
+  T.ok('subject branch exists', (function () { try { git('rev-parse ' + SUBJECT_BRANCH); return true; } catch (e) { return false; } })(), SUBJECT_BRANCH + ' present');
+  T.ok('subject tip is the live pick acdbc793f (OVE-33)',
+    git('rev-parse ' + SUBJECT_BRANCH) === LIVE_SUBJECT && git('log -1 --format=%s ' + SUBJECT_BRANCH) === 'OVE-33: refresh stale quick proofs and fix outside-Muse fails', git('log -1 --format=%h\\ %s ' + SUBJECT_BRANCH).slice(0, 80));
+  T.ok('subject tip tree is 35857b15… (the predicted subject tree)',
+    git('rev-parse ' + SUBJECT_BRANCH + '^{tree}') === PRED_TREE, git('rev-parse ' + SUBJECT_BRANCH + '^{tree}').slice(0, 12));
+  T.ok('subject has exactly 1 commit on top of the 14+12 base (the single pick)',
+    git('rev-list --count ' + BASE + '..' + SUBJECT_BRANCH) === '1', 'count=1');
+  T.ok('subject parent is the 14+12 base c8655548f',
+    git('rev-parse ' + SUBJECT_BRANCH + '^1') === git('rev-parse ' + BASE), 'parent = 14+12 base');
+  const subjNumstat = git('diff --numstat ' + BASE + ' ' + SUBJECT_BRANCH);
+  T.ok('subject diff vs the 14+12 base is EXACTLY pick 2 minus the two tooling files (10 files)',
+    subjNumstat.split('\n').sort().join('\n') === ['-\t-\tevidence/2026-11-08/neutral-ove33-master-quick.json.gz', '2585\t0\tevidence/2026-11-08/phone-ove33-frame-736-r1.json', '2686\t0\tevidence/2026-11-08/phone-ove33-frame-844-r1.json', '4\t0\tscripts/godpath/test-mobile-combat-cadence.js', '1\t1\tscripts/godpath/test-occupation-panels.js', '3\t2\tscripts/godpath/test-time-save-crashes.js', '3\t0\tscripts/test-establishment-r20-fixes-20261020.js', '4\t0\tscripts/test-snippet-stage-direction.js', '4\t0\tsrc/js/conversation.js', '1\t0\tsw.js'].sort().join('\n'), subjNumstat.replace(/\n/g, ' | '));
+  T.ok('subject conversation.js blob is the merge-tree merged blob 6e095015…',
+    git('ls-tree ' + SUBJECT_BRANCH + ' -- src/js/conversation.js').indexOf(MT_CONV_BLOB) !== -1, 'blob matches');
+  T.ok('subject conversation.js diff vs the base is +4/-0 (exactly the pick\'s game-code hunk)',
+    git('diff --numstat ' + BASE + ' ' + SUBJECT_BRANCH + ' -- src/js/conversation.js') === '4\t0\tsrc/js/conversation.js', 'conversation 4/0');
+  T.ok('subject test-snippet-stage-direction.js blob is the merge-tree merged blob 92e4b9fe…',
+    git('ls-tree ' + SUBJECT_BRANCH + ' -- scripts/test-snippet-stage-direction.js').indexOf(MT_TEST_BLOB) !== -1, 'blob matches');
+  T.ok('subject balance-proof.json blob is the 14+12-base blob d0c6a42f… (byte-identical to the base)',
+    git('ls-tree ' + SUBJECT_BRANCH + ' -- scripts/balance-proof.json').indexOf(BAL_OURS_BLOB) !== -1, 'balance-proof = base');
+  T.ok('subject balance-proof.json is byte-identical to the 14+12 base (no diff)',
+    git('diff --stat ' + BASE + ' ' + SUBJECT_BRANCH + ' -- scripts/balance-proof.json') === '', 'identical');
+  T.ok('subject phone-frame-proof.json blob is the 14+12-base blob b0691014… (byte-identical to the base)',
+    git('ls-tree ' + SUBJECT_BRANCH + ' -- scripts/phone-frame-proof.json').indexOf(PHONE_OURS_BLOB) !== -1, 'phone-frame-proof = base');
+  T.ok('subject phone-frame-proof.json is byte-identical to the 14+12 base (no diff)',
+    git('diff --stat ' + BASE + ' ' + SUBJECT_BRANCH + ' -- scripts/phone-frame-proof.json') === '', 'identical');
+  T.ok('the pick\'s own diff DOES touch balance-proof.json +2/-2 (the resolution dropped it)',
+    git('diff --numstat ' + PICK2 + '^1 ' + PICK2 + ' -- scripts/balance-proof.json') === '2\t2\tscripts/balance-proof.json', 'pick diff 2/2');
+  T.ok('the pick\'s own diff DOES touch phone-frame-proof.json +6/-6 (the resolution dropped it)',
+    git('diff --numstat ' + PICK2 + '^1 ' + PICK2 + ' -- scripts/phone-frame-proof.json') === '6\t6\tscripts/phone-frame-proof.json', 'pick diff 6/6');
+  T.ok('the live subject carries the OVE-33 quote check in conversation.js',
+    gitShow(SUBJECT_BRANCH, 'src/js/conversation.js').indexOf('if (/"/.test(s)) return false;') !== -1, 'quote check landed');
+  T.ok('the live subject carries the OVE-33 assertions in the snippet test',
+    gitShow(SUBJECT_BRANCH, 'scripts/test-snippet-stage-direction.js').indexOf("They go still.") !== -1, 'assertions landed');
+  T.ok('the live subject carries the villager-brain asset line in sw.js',
+    gitShow(SUBJECT_BRANCH, 'sw.js').indexOf('villager-brain.js?v=2294ef815-20261108-112829') !== -1, 'sw.js line landed');
+  const headBranch2 = git('rev-parse --abbrev-ref HEAD');
+  T.ok('HEAD is back on the arm branch sim-transplant15e-p2-a after the live pick (worktree-only)', worktreeOnly(headBranch2 === 'sim-transplant15e-p2-a'), 'HEAD=' + headBranch2);
+  let cherryPickHead2 = true;
+  try { execSync('git rev-parse --verify CHERRY_PICK_HEAD', { cwd: REPO, stdio: 'pipe' }); } catch (e) { cherryPickHead2 = false; }
+  T.ok('no cherry-pick is in progress (the pick was continued, not aborted)', cherryPickHead2 === false, 'CHERRY_PICK_HEAD absent');
+
+  // ---- 9. Step verdict — survived 4/8, NOT-CARRIER, far-end days reproduced seed-for-seed ----
+  T.section('9. Step verdict — t15e-p2 survived 4/8, NOT-CARRIER');
+  const sumPath = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-summary.json');
+  const sum = JSON.parse(fs.readFileSync(sumPath, 'utf8'));
+  T.ok('step summary step id is t15e-p2', sum.step === STEP, sum.step);
+  T.ok('step summary anchor commit is the subject acdbc793f07b', sum.perSeed.every(function (s) { return s.anchorCommit === 'acdbc793f07b'; }), 'anchor ok');
+  T.ok('step summary survived is 4/8', sum.survived === 4, 'survived=' + sum.survived);
+  T.ok('step summary verdict is GOOD (bisect-rule classification)', sum.verdict === 'GOOD', sum.verdict);
+  T.ok('step summary rank is REGIONAL_INTACT', sum.rankVerdict === 'REGIONAL_INTACT', sum.rankVerdict);
+  T.ok('step summary median is 150d', sum.wall.medianDays === 150, 'median=' + sum.wall.medianDays);
+  T.ok('step summary instrument errors are 0', sum.instrumentErrors === 0, 'errors=' + sum.instrumentErrors);
+  T.ok('step summary wave-5 is 2/8', sum.wall.wave5 === 2, 'wave5=' + sum.wall.wave5);
+  T.ok('step summary wave-4 is 8/8', sum.wall.wave4 === 8, 'wave4=' + sum.wall.wave4);
+  T.ok('step summary regional is 7/8, village 1/8', sum.wall.regional === 7 && sum.wall.village === 1, 'regional=' + sum.wall.regional + ' village=' + sum.wall.village);
+  T.ok('step summary national is 0, table 0, wins 0', sum.wall.national === 0 && sum.wall.table === 0 && sum.wall.wins === 0, 'national/table/wins 0');
+  T.ok('step summary deaths total 629', sum.wall.deaths === 629, 'deaths=' + sum.wall.deaths);
+  T.ok('step summary standing range is 150–325', sum.wall.standingRange[0] === 150 && sum.wall.standingRange[1] === 325, sum.wall.standingRange.join('–'));
+  const perSeedDays = sum.perSeed.map(function (s) { return s.days; }).join('/');
+  T.ok('per-seed days are 86/144/150/43/150/87/150/150 — EXACTLY the far-end days, seed for seed',
+    perSeedDays === '86/144/150/43/150/87/150/150', perSeedDays);
+  T.ok('per-seed days match the summary endpoints.far.days exactly',
+    JSON.stringify(sum.perSeed.map(function (s) { return s.days; })) === JSON.stringify([86, 144, 150, 43, 150, 87, 150, 150]), 'matches far endpoint');
+  T.ok('survivors are exactly 190393, 190395, 190397, 190398 (the far end\'s survivors)',
+    JSON.stringify(sum.perSeed.filter(function (s) { return s.endReason === 'survived'; }).map(function (s) { return s.seed; })) === JSON.stringify([190393, 190395, 190397, 190398]), 'survivors match');
+  T.ok('every seed ran with the fix swapped in (standingSha f8fda4295a99, standingFix true)',
+    sum.perSeed.every(function (s) { return s.standingFix === true && s.standingSha === 'f8fda4295a99'; }), 'fix on all seeds');
+  T.ok('every seed ran the far-end own policy (policySha a7ff5c516440, 12-char recorded form)',
+    sum.perSeed.every(function (s) { return s.policySha === 'a7ff5c516440'; }), 'policy ok');
+  T.ok('every seed ran with 0 instrument errors',
+    sum.perSeed.every(function (s) { return s.errors === 0; }), 'errors 0 on all seeds');
+  T.ok('classifyTransplant(4) = NOT-CARRIER (the step verdict)', classifyTransplant(sum.survived) === 'NOT-CARRIER', '4/8 → NOT-CARRIER');
+  T.ok('no AMBIGUOUS re-run is owed (4/8 is not 2/8)', sum.survived !== 2, 'no re-run');
+  T.ok('tribute-ready is 1/8 (190397, veterans 2)',
+    sum.perSeed.filter(function (s) { return s.tribute && s.tribute.ready; }).length === 1, 'tribute-ready 1/8');
+  const driverLog = fs.readFileSync(path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-driver.log'), 'utf8');
+  T.ok('driver log records the analyzer classification GOOD (survived 4/8) and rank REGIONAL_INTACT',
+    driverLog.indexOf('culpritbisect-a t15e-p2: GOOD (survived 4/8)') !== -1 && driverLog.indexOf('rank: REGIONAL_INTACT') !== -1, 'analyzer classification present');
+  T.ok('driver log records the fix sha f8fda4295a99 on all 8 seed result lines (compact form)',
+    (driverLog.match(/"standingSha":"f8fda4295a99"/g) || []).length === 8, 'fix sha on 8 result lines');
+  T.ok('driver log records the flap-hit INCOMPLETE line AND the recovered GOOD line (both stay on record)',
+    driverLog.indexOf('INCOMPLETE corpus — missing seeds: 190395, 190396, 190397, 190398') !== -1 && driverLog.indexOf('culpritbisect-a t15e-p2: GOOD (survived 4/8)') !== -1, 'both lines present');
+  T.ok('driver log carries the four @@FALLBACK blocks the corpus was recovered from',
+    (driverLog.match(/@@FALLBACK /g) || []).length === 4, '4 fallback blocks');
+  T.ok('on-disk standing.js is byte-identical to the arm-branch HEAD (native restored after the step)',
+    sha256(fs.readFileSync(path.join(REPO, 'src', 'js', 'standing.js'), 'utf8')) === sha256(gitShow('HEAD', 'src/js/standing.js')), 'standing.js restored');
+  // The four scratch files are TRACKED on the arm branch (the step
+  // tooling lives there), so "no scratch left" means: none of them
+  // shows as untracked or modified after the step — the tracked
+  // files are intact and byte-identical to HEAD.
+  const statusNow = git('status --porcelain');
+  let scratchLeft = false;
+  for (const f of ['scripts/culpritbisect-driver-20261113.js', 'scripts/culpritbisect-analyze-20261113.js', 'scripts/masterregress-analyze-20261113.js', 'scripts/vetfirst-instrument-20261111.js']) {
+    if (statusNow.indexOf(f) !== -1) scratchLeft = true;
+  }
+  T.ok('no step tooling scratch residue in git status (tracked files untouched)', scratchLeft === false, 'status clean of scratch');
+  const evMdPath = path.join(REPO, 'evidence', '2026-11-14', 'sim-transplant15e-p2.md');
+  const evMd = fs.existsSync(evMdPath) ? fs.readFileSync(evMdPath, 'utf8') : '';
+  T.ok('evidence file exists', evMd.length > 0, evMdPath);
+  T.ok('evidence file records the verdict NOT-CARRIER', evMd.indexOf('VERDICT: NOT-CARRIER') !== -1, 'verdict present');
+  T.ok('evidence file records survived 4/8 and the per-seed days 86/144/150/43/150/87/150/150',
+    evMd.indexOf('4/8') !== -1 && evMd.indexOf('86/144/150/43/150/87/150/150') !== -1, 'survival present');
+  T.ok('evidence file records the subject hash acdbc793f and the predicted tree 35857b15…',
+    evMd.indexOf('acdbc793f') !== -1 && evMd.indexOf('35857b15') !== -1, 'subject present');
+  T.ok('evidence file records wave-5 2/8, median 150d, deaths 629',
+    evMd.indexOf('wave-5 2/8') !== -1 && evMd.indexOf('150d') !== -1 && evMd.indexOf('629') !== -1, 'secondaries present');
+  T.ok('evidence file records the telemetry deviation check refusal (recorder-corpus, baseline NOT rolled)',
+    evMd.indexOf('Telemetry deviation check') !== -1 && evMd.indexOf('Baseline NOT') !== -1, 'telemetry note present');
+  T.ok('evidence file records the pick-2-alone isolation (no pick 1 in the subject)',
+    evMd.indexOf('pick 2 alone') !== -1 || evMd.indexOf('pick 2 ALONE') !== -1, 'isolation note present');
+  T.ok('evidence file records the sense-test (resume opener never offered: 0 matches in the corpus)',
+    evMd.indexOf('SENSE-TESTING') !== -1 && evMd.indexOf('0 resume-opener') !== -1, 'sense note present');
+  T.ok('evidence file records the seed-for-seed far-end identity (same days on all 8 seeds)',
+    evMd.indexOf('seed-for-seed') !== -1 || evMd.indexOf('seed for seed') !== -1, 'identity note present');
+  T.ok('evidence file records the step duration and STEP id t15e-p2',
+    evMd.indexOf('t15e-p2') !== -1, 'STEP present');
+  T.ok('evidence file records the metric review section',
+    evMd.indexOf('Metric review') !== -1, 'metric review present');
+  T.ok('evidence file records the write-flap recovery (window, fallback extraction, analyzer re-run)',
+    (evMd.indexOf('WRITE FLAP') !== -1 || evMd.indexOf('write flap') !== -1) && evMd.indexOf('FALLBACK') !== -1 && evMd.indexOf('21:39') !== -1, 'flap note present');
 
   T.done();
 })().catch(function (e) { console.error('HARNESS ERROR', e); process.exit(1); });
