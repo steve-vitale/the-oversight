@@ -1,0 +1,40 @@
+
+-- Greta (gen_6p1uwcx) occ=florist --
+OPENING: "About what happened to my taken kin — I keep dreaming about rows of pods. Humming. Tell me I'm not the only one."
+YOU: [goon] "Please, go on."
+THEM: They settle in like someone glad you're here.
+YOU: [dlg:cant] "I don't know anything. I'm sorry."
+THEM: "Yeah. Sorry. It's -- never mind. Forget I said anything." They look away, embarrassed at having wanted something.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on that taken person."
+YOU: [goon] "Please, go on."
+THEM: They pull back half a step — not leaving, just... further.
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway — that's my problem, not yours. What did you want?"
+YOU: [ask:gossip] "Has anyone told you anything — about anyone?"
+THEM: "Good question." "Oliver talks to the garden. The garden listens. I've seen it."
+YOU: [dlg:more] "Tell me more."
+THEM: "Lucas asked me about you. A lot of questions. Friendly ones. Too friendly. ...never mind."
+YOU: [dlg:react] (listen)
+THEM: "Boris? A blacksmith, back before. Solid person."
+closing: "Good talk."
+
+-- Hugo (gen_synn4b0) occ=Dentist --
+OPENING: "What's the most useful thing you've learned since we got here?"
+YOU: [deflect_q] (change the subject)
+THEM: "Okay." A small silence, and then they move on.
+YOU: [goon] "Please, go on."
+THEM: The warmth pulls back a notch. They're weighing something.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Still on the most useful thing you've learned."
+YOU: [goon] "Please, go on."
+THEM: "Did you sleep? I kept hearing things out past the treeline."
+YOU: [ans:q_night:a_yes] "I heard them too."
+THEM: They go still. "So it's not just me. Good. That's... good to know. Bad, but good."
+YOU: [goon] "Please, go on."
+THEM: "I sleep in shifts now — two hours, up, listen, two more. My body learned it before my head agreed. Columbus, Ohio never taught me that. The treeline did."
+YOU: [goon] "Please, go on."
+THEM: "Moving! But — good talk! More later!"
+YOU: [agree] "You're right."
+THEM: Nods along.
+(ended by engine)

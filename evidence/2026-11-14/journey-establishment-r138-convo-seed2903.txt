@@ -1,0 +1,40 @@
+
+-- Arnold (gen_uyehyj5) occ=locksmith --
+OPENING: "Interesting — We never finished talking about that wound care — we left it mid-thought. '...Okay. I'll figure it out. They won't ask twice. That much is clear.'"
+YOU: [dlg:help] "How can I help?"
+THEM: "Still nothing on Karen. I told you about the pods -- I keep thinking about them. The humming. Some nights I'm sure it's a dream. Other nights I'm sure it's not."
+YOU: [dlg:commit] "I'll ask the System about the pods."
+THEM: "You'd do that? Ask it? ...Thank you. Really. Even asking is more than the silence."
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "that taken person — that's still where we are."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: They nod — and keep their distance, for now.
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "What's the most useful thing you've learned since we got here?"
+YOU: [ans:q_useful:a_hunger] "How to be hungry and keep going anyway."
+THEM: "The fundamental skill. Everything else is decoration."
+YOU: [goon] "Take your time. I've got nowhere to be."
+THEM: "butchery. Sounds small. But small useful things stack — and one day you look up and you're the person everyone asks. That's how it happens."
+YOU: [dlg:subject] "Can I ask you something else?"
+THEM: "Anyway — that's my problem, not yours. What did you want?"
+closing: "Good talking. We'll figure it out."
+
+-- Brianna (gen_8q1g92c) occ=paramedic --
+OPENING: "You told me yes, once. No details. I haven't forgotten. I just don't ask."
+YOU: [teach] "Can I show you something? It might help."
+THEM: You show them Jewelweed — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks."
+YOU: [goon] "Go on. I'm listening."
+THEM: They hear you out, but something in them stays guarded.
+YOU: [dlg:react] (listen)
+THEM: "Anyway." A small smile.
+YOU: [recap] "Wait — what were we talking about?"
+THEM: "Like I said — we're still on that personal stuff."
+YOU: [goon] "Go on. I'm listening."
+THEM: They glance away, then back. Different subject, same worry:
+YOU: [goon] "Go on. I'm listening."
+THEM: "What scares you most about what's happening? The real answer."
+YOU: [ans:q_system_fear:a_tell] "That it's intentional. That someone's watching and this is all... on purpose."
+THEM: They go quiet. "Yeah. Me too. The randomness would almost be kinder."
+YOU: [goon] "Go on. I'm listening."
+THEM: "That we're interesting to it. Being watched means being kept. I'd rather be boring to the sky. Boring things get left alone."
+closing: "That's enough sharing for one day. Maybe one week."
