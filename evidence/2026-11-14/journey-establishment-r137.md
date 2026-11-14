@@ -263,4 +263,22 @@ should the game release a dead bearer's outing on succession, or
 should it linger in the successor's ledger forever?
 
 ## Landing
-(LANDING SECTION — filled at closeout.)
+- Commit (worktree, via safe-commit.sh): `a754b02de` — 24 files
+  (driver, analyzer, proof test, prereg, run note, 5 seed JSONs,
+  5 convo txts, pilot/panel/gate logs, 6 standalone re-run logs).
+  No src/js touched; no `[needs-eyes]` (driver-only, no
+  player-facing change).
+- Safe-commit index clobber struck (all 24 files staged-as-deleted
+  in the main index; commit itself correct, 42127 insertions);
+  repaired with the `git ls-tree -r HEAD | git update-index --add
+  --index-info` pipe, verified: status empty, diff HEAD empty,
+  hashes match.
+- Master moved during the run (63c051206 → `e3a5a9053`,
+  sim-rageprecheck-b Stage 2). Branch rebased cleanly onto
+  e3a5a9053; rebased tip `b48fa97f1`. Proof test re-run post-rebase:
+  **37/37**.
+- Merge: `git merge --ff-only journey-establishment` in the main
+  tree; on success master HEAD = `b48fa97f1`. Merged locally,
+  pending ship (ship loop owns bump/push/live verification).
+  (This section filled by the addendum commit on the same branch,
+  merged ff-only right after.)
