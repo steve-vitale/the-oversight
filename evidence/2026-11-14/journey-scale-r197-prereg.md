@@ -205,7 +205,59 @@ game).
 
 ## CLOSEOUT — run 2026-11-14T1032Z (this run)
 
-*(To fill at closeout: panel table, Q1 verdict, Q2 guards, Q3 counts, Q4
-people check, Q5 census, blank filled, telemetry, verdicts, gate/landing.
-Full record: `evidence/2026-11-14/journey-scale-r197.md`. Corpus:
-`hidden_files/evidence/2026-11-14/journey-scale-r197-*` (goal store).)*
+**Panel (seeds 135301–135304, DAYCAP=140):** 135301 alive d141 (3/3,
+regional, lesser d40, tribute ready d138 undelivered); 135302 alive d141
+(8/8, lesser d37, military_tribute delivered d96, 1 wave-5 kill — Editor
+d87); 135303 alive d140 (8/8, lesser d51, 140 fights, 124 wave-4, 0
+wave-5); 135304 over d104 (SCATTERED from hunger, 11 alive when they
+walked, 7 wave-5 fights, 4 kills). Lived-days 526 vs r196 band 460
+(+14.3%, HOLD). Lesser 4/4. Books close, unattributed 0, teleOnly 0.
+Wave-5 fights 8 (door opened on 2/4 seeds, 5 kills — first time on the
+scale leg in recent bands).
+
+**Q1 — NO-GO on the wall, blocker named per seed (informative):** national
+0/4. 135301: LEAD 2/3 (needs 1 more seasoned). 135302: TRADE 1/3 (needs
+2). 135303: LEAD 2/3 (needs 1). 135304: COLLAPSE (hunger scatter d104).
+Wall stands on a fresh band: survived 3/4, national/table/wins 0/4. The
+binding constraint is still trust held above 40 for a season; the
+fourth seed adds a hunger-scatter collapse flavor.
+
+**Q2 — all GO/HOLD (exit 0):** raise 6 talks (3 answered, 3
+not-offered-unspoken correct holds, 0 defects); vetbar 0 disagreements
+(phantomDays d96–d140 on 135302 — shadow tracks kill history, stays
+elevated after the tribute delivery removed 2 veterans); trap HOLD (Xue
+d120-nv mime shown + answered — r134 fix re-proven); betrayal HOLD (3
+turn-0 offers, all labeled); lived-days HOLD; lesser 4/4.
+
+**Q3 — RECORDED:** daily-play mimes 25, daily accepts proven 0; Xue
+(Mandarin-only, trust 90) mime shown + nv:accept taken in the driver
+sitting; Mariko (Japanese-only, trust 90) no mime, 4× nod. Lane decision
+still owed.
+
+**Q4 — PASS:** all d90/d120 transcripts + all 6 raise talks read in full.
+Senseless 0. Strongest: Ho-jun d120 ("Did you leave someone behind? ...
+'Me too.'"). Observations: Mariko 4× nod loop (no mime); Xue 3× nod
+after a real exchange; ask_favor surfaces on the want thread (Ava d90,
+Fernando d120) but not the goal thread (Fernando d90); Omar raised 3
+days running with no shared words (correct holds); first-memory +
+"left someone behind" line-pool reuse; formulaic raise closers. New
+surfaces (r191 stage-0 guard, r131 HEED fix) not exercised in this band.
+
+**Q5 — census in the run note** (`evidence/2026-11-14/journey-scale-r197.md`).
+
+**The blank filled:** ladder-line caps display diagnosed + fixed —
+the caps field collapses after any delivery (engine's 'delivered' reason
+is global, one-shot by design; the other two never delivered — census is
+authoritative). Fix: `scripts/ladder-caps-render.js` (new) + driver
+wiring; proof 8/8. No src/js change.
+
+**Telemetry:** QUIET (0 LOUD lines) — fightsTotal -17.0%, w4 +6.6%,
+maxGameDay -18.6% vs baseline, all under the 60% bar. Baseline NOT
+rolled.
+
+**Verdicts:** reachable YES, fun YES, winnable NO (this leg).
+
+**Gate / landing:** see the run note's Gate/landing section (filled at
+closeout). Full record: `evidence/2026-11-14/journey-scale-r197.md`.
+Corpus: `hidden_files/evidence/2026-11-14/journey-scale-r197-*` (goal
+store).
