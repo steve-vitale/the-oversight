@@ -279,8 +279,12 @@ instrument resume openers directly.
   the documented pipe (`git ls-tree -r HEAD -- <paths> |
   git update-index --add --index-info`); verified `git status
   --short` empty + `git diff HEAD` empty + `git diff --cached`
-  empty + hash-object == HEAD blob per file afterwards. No work
-  lost.
+  empty + hash-object == HEAD blob per file afterwards. It struck
+  AGAIN on the stage-2 commit (793c27a02) — all 11 committed
+  files showed staged-deleted + untracked, the proof MM —
+  repaired the same way (with `-r` for the corpus directory),
+  same verification, all 12 hashes matching HEAD blobs. No work
+  lost either time.
 - No runtime restart struck this arm. No safe-commit refusal.
 - Sibling arms ran concurrently in their own trees (sim-transplant15e-p1-a
   step t15e-p1, cheaptend-b driver) — not touched: no sibling tree,
