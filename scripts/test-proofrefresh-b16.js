@@ -100,9 +100,9 @@ leg('validity.sourcesStable true', fresh.validity && fresh.validity.sourcesStabl
 // detects stale source inputs.
 try {
   require('./balance-proof-update').validate(root, old);
-  leg('stale-input negative check (retained panel b14 fails validate)', false, 'validate passed on a stale panel');
+  leg('stale-input negative check (retained panel b15 fails validate)', false, 'validate passed on a stale panel');
 } catch (e) {
-  leg('stale-input negative check (retained panel b14 fails validate)',
+  leg('stale-input negative check (retained panel b15 fails validate)',
     /Proof source inputs are not current/.test(e.message), e.message);
 }
 

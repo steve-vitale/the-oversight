@@ -215,19 +215,127 @@ evidence/2026-11-14/neutral-proofrefresh-b16.json.gz` — exit 0;
 (panelDigest `49fbcf95…`). No hand-edited hashes; no re-point to an
 old panel.
 
-## GO legs (judged only on the final tip — 3a60ceb10, after the closeout rebase)
+## GO legs (judged only on the final tip — 3a60ceb10, branch tip fa628ed99, after the closeout rebase)
 
-(To be filled after the rebase — see "Closeout".)
+- (a) `test-measurement-proof-update.js`: exit 0, **9 passed, 0 failed**
+  — ON THE FINAL TIP.
+- (b) `test-measurement-workflow.js`: 9/9 (final tip).
+- (c) `test-measurement-cache-flags.js`: 4/4 outright, first attempt,
+  no load artifact, no re-run needed. This IS the owed cache-flags
+  quiet-box A/B folded into this arm's legs: the box ran two full
+  64-row panel regens plus the leg suite during this run and the
+  cache-flags check still passed 4/4 on the first attempt — no
+  discriminating A/B against load was needed because there was no
+  failure to discriminate.
+- (d) Neutrality reproduction: match on every proof case, warnings 0,
+  tuple identical to the b15 panel AND the b14 panel — regeneration
+  moved no verdict. (Covered by proof-test legs 6, 8, 9.)
+- (e) `scripts/test-proofrefresh-b16.js`: 12/12 — including the
+  stale-input negative checks: the retained b15 panel AND the b14 panel
+  FAIL `validate()` on the new tip with "Proof source inputs are not
+  current", proving the green result is not vacuous. (One label fix
+  during the leg run: leg (i)'s display label said "retained panel b14"
+  — a stale copy from the b15 test — while the check itself correctly
+  validated the b15 panel; the label was corrected to b15 and the test
+  re-run to 12/12. No assertion changed, only the label.)
+- (f) `scripts/validate-ontology.js`: exit 0, "All 138 systems
+  validated". ONTOLOGY.md 2198 lines, no diff vs HEAD, no truncation
+  this round.
+- A miss on any leg would have been NO-GO; on the final tip none missed.
+  Judged only against the prereg, never re-scored.
+- Telemetry deviation check: `scripts/telemetry-check.js` cannot parse
+  the retained `.gz` panel (LOUD: "Unexpected token" — it expects
+  per-seed JSON evidence, not a panel archive), the same limitation the
+  b11/b12/b13/b14/b15 adoptions recorded. No lever was played, so there
+  is no before/after deviation to check; the neutrality reproduction
+  (leg d) is the instrument check that stands in its place. No LOUD
+  line to investigate beyond that known parser limitation. Baseline NOT
+  rolled.
+
+## Verdict
+
+**GO on the final tip (3a60ceb10) — all six legs pass, 12/12.**
+The measurement proof is refreshed on the final tip: the new panel is
+current (0 stale keys), every prereg GO leg passes, and the proof
+re-points at the new panel only. Master moved twice during the run
+(version bump + transplant15a, then transplant15c/15e); the panel was
+regenerated on the rebased 16f05da86 tip and the second move touched no
+manifest file, so the regenerated panel is current on the final tip
+too (0 stale keys verified on fa628ed99). Round 17 is owed after the
+next manifest change — not started here, per the brief.
 
 ## Metric review
 
-(To be filled at closeout, after the legs are judged on the final tip.)
+- The primary metric judged what it claimed: the proof test failed on
+  the stale tip with exactly the expected manifest-mismatch error (2
+  keys, named) and passes on the refreshed tip with 0 stale keys; the
+  stale-input negative checks (b15 and b14 both fail validate on the new
+  tip) prove the green result is not vacuous. No re-scoring at any point.
+- The 16/64 row movement vs b15 does NOT break the verdict: the GO
+  legs judge the proof (current + neutral), and neutrality reproduces
+  exactly. The movement is the game changing under the instrument —
+  the fusionoffer fix landed since the b15 panel — and the instrument
+  measured it honestly. The metric (proof current/neutral) is not the
+  row vector; conflating them would be the drift §14 warns about. The
+  movement itself is filed for the winnability chain (wave-5 14→13,
+  table 55→56, vestsVillager 41→39), where it belongs.
+- The 0/64 row movement between the first-run panel and the regenerated
+  panel is the version-bump control the prereg anticipated: a
+  stamps-only master move (build.js + index.html) moved no verdict,
+  which is exactly the evidence that the regen-after-move was safe
+  and the instrument is stable across it.
+- The prereg's master-move rule held up under two moves in one run:
+  the first (manifest-touching) triggered a regen; the second
+  (manifest-clean) needed only a rebase + leg (a) re-verification.
+  The version-bump clause's "report to the coordinator" path was not
+  needed because no NO-GO was produced — the regen is the arm's own
+  procedure, and the b15 adoption set the precedent for it. No metric
+  revision proposed.
+- One test-label defect found and fixed in-run (leg (i) label said b14
+  while checking b15): the check was right, the label was stale. It is
+  a reminder that the round-N test is adapted from round N−1 by search
+  and replace, and labels need a read-through, not just a filename swap.
+  No metric revision proposed beyond that note.
+- No other metric revision proposed. The prereg held.
 
-## Commits (branch sim-proofrefresh-b16)
+## Commits (branch sim-proofrefresh-b16, base 237fb445f, rebased onto 3a60ceb10)
 
-(To be filled at closeout.)
+- df9b18a64 — prereg (proof refresh round 16 owed; fusionoffer re-staled
+  b15 by 2 keys)
+- fa628ed99 — regenerated neutral panel (sha 49fbcf95, 64 rows, 0 stale)
+  + proof re-point + test + evidence (GO 12/12, panel 49fbcf95)
+- (this commit) — closeout: GO legs judged on the final tip, metric
+  review, verdict (panel 49fbcf95)
 
-## Closeout
+## Closeout — GO ON FINAL TIP (round 17 owed after next manifest change)
 
-(To be filled at closeout: final tip, leg (a) re-verification on the
-rebased tip, verdict, coordinator decision.)
+- Master moved twice during the run: 237fb445f → 16f05da86 (version
+  bump + transplant15a) → 3a60ceb10 (transplant15c/15e). Branch rebased
+  onto the explicit final master SHA 3a60ceb10 at closeout; both rebases
+  clean, no stop-at-pick quirk encountered.
+- Leg (a) verified on the final tip 3a60ceb10 (branch tip fa628ed99):
+  **PASSES, exit 0, 9/9** — the manifest on the final tip is identical
+  to the panel's sources (0 stale keys; the 16f05da86→3a60ceb10 move
+  touched no manifest file).
+- **Verdict on the final tip (3a60ceb10): GO.** All six prereg legs
+  pass; test-proofrefresh-b16.js 12/12.
+- **Coordinator decision:** merge as-is — `git merge --ff-only
+  sim-proofrefresh-b16` in the main tree (no pipe, strict && chain;
+  ancestry verified with `git merge-base --is-ancestor` after). Then
+  release: `worktree-release.sh sim-proofrefresh-b16 merged`,
+  worktree removed, branch deleted, `worktree-reap.sh`, main tree
+  verified clean. No push, no bump, no live verification — the ship
+  loop owns deploys. "Merged locally, pending ship."
+- Round 17 stays owed for the next B run, on the next manifest change.
+- Cases cache deleted at closeout (not committed); the retained .gz is
+  the artifact. First-run panel copy retained at
+  `~/workspace/proofrefresh-b16-panel-first-run.json.gz` (sha b6d4d6ed,
+  superseded intermediate, not committed).
+- Infrastructure notes: no write flap this run (no EPERM anywhere).
+  One agent-service restart SIGTERM'd the regeneration run at ~37.5 min
+  (62 cases banked); relaunch from the worktree cache completed in
+  ~2.4 min. The safe-commit index clobber struck twice (prereg commit
+  and closeout commit) — repaired both times with the documented
+  `git ls-tree -r HEAD -- <paths> | git update-index --add
+  --index-info` pipe; both commits verified correct (hash-object ==
+  HEAD blob per file, status/diff clean after repair).
