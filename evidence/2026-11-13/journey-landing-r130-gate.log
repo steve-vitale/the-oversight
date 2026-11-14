@@ -1,0 +1,141 @@
+check.js: 340 scripts, 4 parallel (quick)
+.............................................................................................F................................FFFFF...F.............F.F...................F.........................................................................................................................................................................
+
+  FAIL scripts/godpath/test-human-combat-parity.js (exit 1, 6.4s)
+          at Object.writeFileSync (node:fs:2482:20)
+          at /home/hatch/workspace/worktrees/journey-landing-r130/scripts/lib/human-parity-callers.js:76:13
+      
+          at /home/hatch/workspace/worktrees/journey-landing-r130/scripts/godpath/test-human-combat-parity.js:10:29
+          at Object.<anonymous> (/home/hatch/workspace/worktrees/journey-landing-r130/scripts/godpath/test-human-combat-parity.js:109:3)
+          at Module._compile (node:internal/modules/cjs/loader:1929:14)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47
+
+  FAIL scripts/godpath/test-measurement-proof-update.js (exit 1, 3.2s)
+      Error: Proof source inputs are not current
+          at Object.validate (/home/hatch/workspace/worktrees/journey-landing-r130/scripts/balance-proof-update.js:8:76)
+          at Object.<anonymous> (/home/hatch/workspace/worktrees/journey-landing-r130/scripts/godpath/test-measurement-proof-update.js:4:40)
+          at Module._compile (node:internal/modules/cjs/loader:1929:14)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47
+      
+      Node.js v24.22.1
+
+  FAIL scripts/godpath/test-measurement-flags.js (exit 1, 4.0s)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47 {
+        errno: -1,
+        code: 'EPERM',
+        syscall: 'write'
+      }
+      
+      Node.js v24.22.1
+
+  FAIL scripts/godpath/test-measurement-source-text.js (exit 1, 0.5s)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47 {
+        errno: -1,
+        syscall: 'write',
+        code: 'EPERM'
+      }
+      
+      Node.js v24.22.1
+
+  FAIL scripts/godpath/test-measurement-cache-flags.js (exit 1, 14.6s)
+          at async run (/home/hatch/workspace/worktrees/journey-landing-r130/scripts/balance-panel.js:332:3)
+      
+          at Object.<anonymous> (/home/hatch/workspace/worktrees/journey-landing-r130/scripts/godpath/test-measurement-cache-flags.js:4:157)
+          at Module._compile (node:internal/modules/cjs/loader:1929:14)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47
+      
+      Node.js v24.22.1
+
+  FAIL scripts/godpath/test-measurement-workflow.js (exit 1, 2.1s)
+      ok   metric IDs are unique and every contract declares units, direction and tolerance
+        ok   sampling and confirmation settings remain valid
+        ok   retained real panel matches its proof digest
+        FAIL retained neutrality proof covers the current Game/controller/harness inputs
+        ok   proof declares every collector and contract input rather than silently omitting one
+        ok   collector and contract have a current proof (see SIMULATING.md: Maintaining measurement)
+        ok   every retained real observation emits exactly the contracted metrics, with explicit unknowns
+        ok   all retained policy cohorts have passing sampled observer neutrality and stable sources
+        ok   retained NPC proof has eligible actor/day evidence and a reproducible class denominator
+      
+      measurement-workflow: 8 passed, 1 failed, 0 todo (phase 0)
+      failing: retained neutrality proof covers the current Game/controller/harness inputs
+
+  FAIL scripts/godpath/test-occupation-panels.js (exit 1, 0.6s)
+          at Object.<anonymous> (/home/hatch/workspace/worktrees/journey-landing-r130/scripts/godpath/test-occupation-panels.js:11:101)
+          at Module._compile (node:internal/modules/cjs/loader:1929:14)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47
+        FAIL real CLI workflow completed
+      
+      occupation panels: 0 passed, 1 failed, 0 todo (phase 0)
+      failing: real CLI workflow completed
+
+  FAIL scripts/godpath/test-phone-frame-proof.js (exit 1, 2.5s)
+      ok   both actual target phone sizes are retained
+        FAIL every retained browser input matches current source — index.html,src/data/foreignSpeech.json,src/data/regions.json,src/data/statusEffects.json,src/data/table-endings.json,src/js/abilityActions.
+        FAIL all current boot inputs are covered
+        ok   receipt identity declares portable text normalization
+        ok   retained receipt hash 736
+        FAIL current phone evidence is required; follow MOBILE-PLAYTEST.md — Phone receipt source is stale or missing: index.html
+      
+      Phone frame proof: 3 passed, 3 failed, 0 todo (phase 0)
+      failing: every retained browser input matches current source | all current boot inputs are covered | current phone evidence is required; follow MOBILE-PLAYTEST.md
+
+  FAIL scripts/godpath/test-living-garden-deed-attainment.js (exit null, 120.1s)
+      seed 7...
+      seed 42...
+      seed 99...
+      seed 1234...
+      seed 555...
+      seed 777...
+      seed 2026...
+      seed 31337...
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-one-person-army-deed-attainment.js (exit null, 120.0s)
+      seed 7...
+      seed 42...
+      seed 99...
+      seed 1234...
+      seed 555...
+      seed 777...
+      seed 2026...
+      seed 31337...
+      seed 1...
+      
+      [check.js] TIMEOUT after 120s
+
+  slowest: scripts/godpath/test-living-garden-deed-attainment.js 120s, scripts/godpath/test-one-person-army-deed-attainment.js 120s, scripts/godpath/test-trust-observer-neutrality.js 91s
+
+check.js: 330 passed, 10 failed in 816s
+gate-exit:1
