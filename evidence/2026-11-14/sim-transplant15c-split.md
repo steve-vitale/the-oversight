@@ -133,7 +133,11 @@ against.
   verified `git status --short` empty, `git diff HEAD` empty,
   disk blobs equal HEAD blobs for both files
   (c1d01f49… / 841f10a1…). No work lost; the commit was never in
-  doubt.
+  doubt. **Second strike, same class:** the stage-2 commit
+  (7416d1fa8) clobbered the index the same way (evidence file
+  staged-deleted, proof file `MM`); same pipe repair, same
+  verification (status empty, diff HEAD empty, disk blobs equal
+  HEAD blobs for all three arm files).
 - **No write flap struck this run.** All writes (prereg, proof,
   evidence) landed first try. Worktree heartbeat landed at arm
   start (registry `heartbeat_at` 2026-11-14T14:15:06Z, exit 0)
