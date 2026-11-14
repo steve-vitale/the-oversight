@@ -1,0 +1,276 @@
+{
+  "seed": 86110,
+  "arm": "armed",
+  "waves": [
+    "giant_mosquito",
+    "glasswing",
+    "reunion"
+  ],
+  "partyN": 3,
+  "perWave": [
+    {
+      "waveIdx": 0,
+      "mid": "giant_mosquito",
+      "packAtStart": {
+        "giant_mosquito": 1
+      },
+      "reunionCountAtStart": 0,
+      "partyN": 3,
+      "scholarHpAtStart": 1,
+      "outcome": "chained",
+      "steps": 3,
+      "scholarHpAtEnd": 0.97,
+      "monstersAtEnd": [
+        {
+          "id": "giant_mosquito",
+          "hpFrac": -1.317,
+          "alive": false
+        }
+      ],
+      "tbEndResult": "won",
+      "rowOutcome": "won",
+      "rowRounds": 2
+    },
+    {
+      "waveIdx": 1,
+      "mid": "glasswing",
+      "packAtStart": {
+        "glasswing": 1
+      },
+      "reunionCountAtStart": 0,
+      "partyN": 3,
+      "scholarHpAtStart": 0.97,
+      "outcome": "chained",
+      "steps": 2,
+      "scholarHpAtEnd": 0.97,
+      "monstersAtEnd": [
+        {
+          "id": "glasswing",
+          "hpFrac": -2.833,
+          "alive": false
+        }
+      ],
+      "tbEndResult": "won",
+      "rowOutcome": "won",
+      "rowRounds": 1
+    },
+    {
+      "waveIdx": 2,
+      "mid": "reunion",
+      "packAtStart": {
+        "reunion": 1
+      },
+      "reunionCountAtStart": 1,
+      "partyN": 3,
+      "scholarHpAtStart": 0.97,
+      "outcome": "ended",
+      "steps": 13,
+      "scholarHpAtEnd": 0.09,
+      "monstersAtEnd": [
+        {
+          "id": "reunion",
+          "hpFrac": -0.046,
+          "alive": false
+        }
+      ],
+      "tbEndResult": "won",
+      "rowOutcome": "won",
+      "rowRounds": 12
+    }
+  ],
+  "outcome": "won",
+  "deaths": [],
+  "fixture": {
+    "loadout": {
+      "scholar": {
+        "melee": "machete",
+        "torso": "wardens_cloak"
+      },
+      "allies": {
+        "ranged": "hunting_spear",
+        "torso": "bark_armor"
+      }
+    },
+    "scholarGear": {
+      "weaponBonus": 35,
+      "armorProtection": 25,
+      "slots": {
+        "acc1": {
+          "itemId": "unnamed_photo",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc2": {
+          "itemId": "photo_album",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc3": {
+          "itemId": "knife_roll",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc4": {
+          "itemId": "wedding_ring",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "melee": {
+          "itemId": "machete",
+          "weaponBonus": 35,
+          "armorProtection": 0
+        },
+        "torso": {
+          "itemId": "wardens_cloak",
+          "weaponBonus": 0,
+          "armorProtection": 25
+        }
+      }
+    },
+    "allyGear": [
+      {
+        "id": "gen_w17xz15",
+        "gear": {
+          "weaponBonus": 30,
+          "armorProtection": 15,
+          "slots": {
+            "head": {
+              "itemId": "hoodie",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc1": {
+              "itemId": "dispatchers_headset",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc2": {
+              "itemId": "dog_tags",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc3": {
+              "itemId": "trail_compass",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc4": {
+              "itemId": "hard_candy",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "ranged": {
+              "itemId": "hunting_spear",
+              "weaponBonus": 30,
+              "armorProtection": 0
+            },
+            "torso": {
+              "itemId": "bark_armor",
+              "weaponBonus": 0,
+              "armorProtection": 15
+            }
+          }
+        }
+      },
+      {
+        "id": "gen_49ccd8a",
+        "gear": {
+          "weaponBonus": 30,
+          "armorProtection": 15,
+          "slots": {
+            "head": {
+              "itemId": "photo_album",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc1": {
+              "itemId": "knife_roll",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc2": {
+              "itemId": "dispatchers_headset",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc3": {
+              "itemId": "mixtape",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc4": {
+              "itemId": "notebook",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "ranged": {
+              "itemId": "hunting_spear",
+              "weaponBonus": 30,
+              "armorProtection": 0
+            },
+            "torso": {
+              "itemId": "bark_armor",
+              "weaponBonus": 0,
+              "armorProtection": 15
+            }
+          }
+        }
+      }
+    ],
+    "partyN": 3,
+    "scholarHp": 100
+  },
+  "capConstant": 1,
+  "reunionWave": {
+    "reached": true,
+    "outcome": "ended",
+    "reunionCount": 1,
+    "partyN": 3,
+    "scholarHpAtStart": 0.97,
+    "scholarHpAtEnd": 0.09,
+    "tbEndResult": "won"
+  },
+  "instrumentErrors": [],
+  "logTail": [
+    "(everyone you've buried, standing up's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up for 46 (Machete).",
+    "💥 It erupts!",
+    "Armor absorbs 18.",
+    "The attack hits you for 8.",
+    "📖 Codex: Family Photo — hits everything close around it. You won't forget this.",
+    "A person, maybe 60s stands ready, watching.",
+    "A person, maybe 20s keeps their distance and watches.",
+    "(everyone you've buried, standing up's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up for 46 (Machete).",
+    "👥 Faces surface on its body — your own snarl. It knows \"strike\" — it watched you do it 10 times. YOUR MOVE, back at you.",
+    "Armor absorbs 34.",
+    "Your own move, returned hits you for 15.",
+    "A person, maybe 60s holds and watches.",
+    "A person, maybe 20s waits, eyes on the beast.",
+    "(everyone you've buried, standing up's hide absorbs 12.)",
+    "💪 Your Strength grows — 7. The work is changing you.",
+    "✨ True Swing — Your strikes land cleaner. (tier 1)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up for 48 (Machete).",
+    "A person, maybe 60s holds position, watching for an opening.",
+    "A person, maybe 20s stands ready, watching.",
+    "(everyone you've buried, standing up's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up for 55 (Machete).",
+    "💥 Family Photo!",
+    "Armor absorbs 21.",
+    "The Family Photo hits you for 9.",
+    "A person, maybe 60s keeps their distance and watches.",
+    "A person, maybe 20s holds and watches.",
+    "(everyone you've buried, standing up's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up for 51 (Machete).",
+    "The everyone you've buried, standing up falls.",
+    "A person, maybe 20s claps once, slow. \"That's how it's done.\"",
+    "It is everyone you've buried. Do not eat everyone you've buried.",
+    "You came back bloody. Nobody asks. Someone saves you the good seat by the fire.",
+    "You clutch your Oath Ring, Unnamed photograph, Photo Album, Knife roll, Wedding Ring. You're still here."
+  ]
+}

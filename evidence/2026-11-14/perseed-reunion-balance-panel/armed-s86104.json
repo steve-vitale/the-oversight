@@ -1,0 +1,283 @@
+{
+  "seed": 86104,
+  "arm": "armed",
+  "waves": [
+    "cliffhanger",
+    "mirror_stag",
+    "reunion"
+  ],
+  "partyN": 3,
+  "perWave": [
+    {
+      "waveIdx": 0,
+      "mid": "cliffhanger",
+      "packAtStart": {
+        "cliffhanger": 1
+      },
+      "reunionCountAtStart": 0,
+      "partyN": 3,
+      "scholarHpAtStart": 1,
+      "outcome": "chained",
+      "steps": 3,
+      "scholarHpAtEnd": 1,
+      "monstersAtEnd": [
+        {
+          "id": "cliffhanger",
+          "hpFrac": -0.429,
+          "alive": false
+        }
+      ],
+      "tbEndResult": "won",
+      "rowOutcome": "won",
+      "rowRounds": 2
+    },
+    {
+      "waveIdx": 1,
+      "mid": "mirror_stag",
+      "packAtStart": {
+        "mirror_stag": 1
+      },
+      "reunionCountAtStart": 0,
+      "partyN": 3,
+      "scholarHpAtStart": 1,
+      "outcome": "chained",
+      "steps": 4,
+      "scholarHpAtEnd": 1,
+      "monstersAtEnd": [
+        {
+          "id": "mirror_stag",
+          "hpFrac": -0.518,
+          "alive": false
+        }
+      ],
+      "tbEndResult": "won",
+      "rowOutcome": "won",
+      "rowRounds": 3
+    },
+    {
+      "waveIdx": 2,
+      "mid": "reunion",
+      "packAtStart": {
+        "reunion": 1
+      },
+      "reunionCountAtStart": 1,
+      "partyN": 3,
+      "scholarHpAtStart": 1,
+      "outcome": "died",
+      "steps": 10,
+      "scholarHpAtEnd": -0.02,
+      "monstersAtEnd": [
+        {
+          "id": "reunion",
+          "hpFrac": 0.186,
+          "alive": true
+        }
+      ],
+      "tbEndResult": "lost",
+      "rowOutcome": "lost",
+      "rowRounds": 9
+    }
+  ],
+  "outcome": "died",
+  "deaths": [
+    {
+      "scholarId": "gen_cclt1bx",
+      "causeArg": "the arena",
+      "waveIdx": 2,
+      "day": 30
+    }
+  ],
+  "fixture": {
+    "loadout": {
+      "scholar": {
+        "melee": "machete",
+        "torso": "wardens_cloak"
+      },
+      "allies": {
+        "ranged": "hunting_spear",
+        "torso": "bark_armor"
+      }
+    },
+    "scholarGear": {
+      "weaponBonus": 35,
+      "armorProtection": 25,
+      "slots": {
+        "acc1": {
+          "itemId": "knife_roll",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc2": {
+          "itemId": "mixtape",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc3": {
+          "itemId": "carpenters_square",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc4": {
+          "itemId": "wedding_ring",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "melee": {
+          "itemId": "machete",
+          "weaponBonus": 35,
+          "armorProtection": 0
+        },
+        "torso": {
+          "itemId": "wardens_cloak",
+          "weaponBonus": 0,
+          "armorProtection": 25
+        }
+      }
+    },
+    "allyGear": [
+      {
+        "id": "gen_pd0oiiw",
+        "gear": {
+          "weaponBonus": 30,
+          "armorProtection": 15,
+          "slots": {
+            "head": {
+              "itemId": "carpenters_square",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "torso": {
+              "itemId": "bark_armor",
+              "weaponBonus": 0,
+              "armorProtection": 15
+            },
+            "acc1": {
+              "itemId": "field_suture_kit",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc2": {
+              "itemId": "winter_coat_button",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc3": {
+              "itemId": "bus_schedule",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc4": {
+              "itemId": "tasting_spoon",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "ranged": {
+              "itemId": "hunting_spear",
+              "weaponBonus": 30,
+              "armorProtection": 0
+            }
+          }
+        }
+      },
+      {
+        "id": "gen_dyvcny9",
+        "gear": {
+          "weaponBonus": 30,
+          "armorProtection": 15,
+          "slots": {
+            "head": {
+              "itemId": "locket",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "torso": {
+              "itemId": "bark_armor",
+              "weaponBonus": 0,
+              "armorProtection": 15
+            },
+            "acc1": {
+              "itemId": "dispatchers_headset",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc2": {
+              "itemId": "carpenters_square",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc3": {
+              "itemId": "seed_packet",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc4": {
+              "itemId": "photo_album",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "ranged": {
+              "itemId": "hunting_spear",
+              "weaponBonus": 30,
+              "armorProtection": 0
+            }
+          }
+        }
+      }
+    ],
+    "partyN": 3,
+    "scholarHp": 100
+  },
+  "capConstant": 1,
+  "reunionWave": {
+    "reached": true,
+    "outcome": "died",
+    "reunionCount": 1,
+    "partyN": 3,
+    "scholarHpAtStart": 1,
+    "scholarHpAtEnd": -0.02,
+    "tbEndResult": "lost"
+  },
+  "instrumentErrors": [],
+  "logTail": [
+    "everyone you've buried, standing up is BLEEDING — and it likes it. Louder, faster, no more feints.",
+    "You STRIKE the everyone you've buried, standing up for 41 (Machete).",
+    "A woman, maybe 50s holds and watches.",
+    "💥 The Your Move finds you — no dodging it.",
+    "Armor absorbs 23.",
+    "The Your Move hits you for 10.",
+    "A man, maybe 40s waits, eyes on the beast.",
+    "(everyone you've buried, standing up's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up for 45 (Machete).",
+    "A woman, maybe 50s holds position, watching for an opening.",
+    "💥 The Your Move finds you — no dodging it.",
+    "Armor absorbs 21.",
+    "The Your Move hits you for 9.",
+    "A man, maybe 40s stands ready, watching.",
+    "(everyone you've buried, standing up's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up for 41 (Machete).",
+    "A woman, maybe 50s keeps their distance and watches.",
+    "💥 The Your Move finds you — no dodging it.",
+    "Armor absorbs 25.",
+    "The Your Move hits you for 11.",
+    "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)",
+    "A man, maybe 40s holds and watches.",
+    "(everyone you've buried, standing up's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up for 48 (Machete).",
+    "A woman, maybe 50s waits, eyes on the beast.",
+    "👥 Faces surface on its body — your own snarl. It knows \"strike\" — it watched you do it 10 times. YOUR MOVE, back at you.",
+    "Armor absorbs 40.",
+    "Your own move, returned hits you for 18.",
+    "You go down.",
+    "Nobody's talking much. The fire feels smaller tonight.",
+    "🕯️ Chen Patel is dead — the arena. The village stops. Somebody screams. Somebody else starts digging.",
+    "What Chen kept close goes into the ground with them — keepsakes are buried, never taken from the body.",
+    "Kate picks up the journal. Their hands shake. Then they open it, and keep writing.",
+    "📖 LEARNED: Diplomatic Incident (Level 1). Trust builds 2x faster. You're TOO good though — once per week you can start a diplomatic incident: villagers argue, you pick the winner (+trust with them, -trust with the loser).",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Chen Patel, 30 days. The mantle passes to Kate Gupta.",
+    "🪞 You wake up somebody else. Kate Gupta, 54 — a sign painter. Her hands know different work now: Iron Stomach."
+  ]
+}

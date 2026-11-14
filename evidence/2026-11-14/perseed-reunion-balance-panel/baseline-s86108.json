@@ -1,0 +1,288 @@
+{
+  "seed": 86108,
+  "arm": "baseline",
+  "waves": [
+    "strike",
+    "anaconda_empress",
+    "reunion"
+  ],
+  "partyN": 3,
+  "perWave": [
+    {
+      "waveIdx": 0,
+      "mid": "strike",
+      "packAtStart": {
+        "strike": 1
+      },
+      "reunionCountAtStart": 0,
+      "partyN": 3,
+      "scholarHpAtStart": 1,
+      "outcome": "chained",
+      "steps": 19,
+      "scholarHpAtEnd": 1,
+      "monstersAtEnd": [
+        {
+          "id": "strike",
+          "hpFrac": -0.04,
+          "alive": false
+        }
+      ],
+      "tbEndResult": "won",
+      "rowOutcome": "won",
+      "rowRounds": 18
+    },
+    {
+      "waveIdx": 1,
+      "mid": "anaconda_empress",
+      "packAtStart": {
+        "anaconda_empress": 1
+      },
+      "reunionCountAtStart": 0,
+      "partyN": 3,
+      "scholarHpAtStart": 1,
+      "outcome": "chained",
+      "steps": 3,
+      "scholarHpAtEnd": 1,
+      "monstersAtEnd": [
+        {
+          "id": "anaconda_empress",
+          "hpFrac": -0.351,
+          "alive": false
+        }
+      ],
+      "tbEndResult": "won",
+      "rowOutcome": "won",
+      "rowRounds": 2
+    },
+    {
+      "waveIdx": 2,
+      "mid": "reunion",
+      "packAtStart": {
+        "reunion": 3
+      },
+      "reunionCountAtStart": 3,
+      "partyN": 3,
+      "scholarHpAtStart": 1,
+      "outcome": "died",
+      "steps": 6,
+      "scholarHpAtEnd": -0.11,
+      "monstersAtEnd": [
+        {
+          "id": "reunion",
+          "hpFrac": 0.811,
+          "alive": true
+        },
+        {
+          "id": "reunion",
+          "hpFrac": 0.988,
+          "alive": true
+        },
+        {
+          "id": "reunion",
+          "hpFrac": 1,
+          "alive": true
+        }
+      ],
+      "tbEndResult": "lost",
+      "rowOutcome": "lost",
+      "rowRounds": 5
+    }
+  ],
+  "outcome": "died",
+  "deaths": [
+    {
+      "scholarId": "gen_nkxgejp",
+      "causeArg": "the arena",
+      "waveIdx": 2,
+      "day": 30
+    }
+  ],
+  "fixture": {
+    "loadout": {
+      "scholar": {
+        "melee": "machete",
+        "torso": "wardens_cloak"
+      },
+      "allies": {
+        "ranged": "hunting_spear",
+        "torso": "bark_armor"
+      }
+    },
+    "scholarGear": {
+      "weaponBonus": 35,
+      "armorProtection": 25,
+      "slots": {
+        "acc1": {
+          "itemId": "dog_tags",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc2": {
+          "itemId": "dispatchers_headset",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc3": {
+          "itemId": "hard_candy",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc4": {
+          "itemId": "trail_compass",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "melee": {
+          "itemId": "machete",
+          "weaponBonus": 35,
+          "armorProtection": 0
+        },
+        "torso": {
+          "itemId": "wardens_cloak",
+          "weaponBonus": 0,
+          "armorProtection": 25
+        }
+      }
+    },
+    "allyGear": [
+      {
+        "id": "gen_d0v0tyy",
+        "gear": {
+          "weaponBonus": 30,
+          "armorProtection": 15,
+          "slots": {
+            "acc1": {
+              "itemId": "field_suture_kit",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc2": {
+              "itemId": "trail_compass",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc3": {
+              "itemId": "seed_packet",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc4": {
+              "itemId": "reading_glasses",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "ranged": {
+              "itemId": "hunting_spear",
+              "weaponBonus": 30,
+              "armorProtection": 0
+            },
+            "torso": {
+              "itemId": "bark_armor",
+              "weaponBonus": 0,
+              "armorProtection": 15
+            }
+          }
+        }
+      },
+      {
+        "id": "gen_jna3mdm",
+        "gear": {
+          "weaponBonus": 30,
+          "armorProtection": 15,
+          "slots": {
+            "head": {
+              "itemId": "trail_compass",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc1": {
+              "itemId": "knife_roll",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc2": {
+              "itemId": "search_locket",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc3": {
+              "itemId": "reading_glasses",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc4": {
+              "itemId": "photo_album",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "ranged": {
+              "itemId": "hunting_spear",
+              "weaponBonus": 30,
+              "armorProtection": 0
+            },
+            "torso": {
+              "itemId": "bark_armor",
+              "weaponBonus": 0,
+              "armorProtection": 15
+            }
+          }
+        }
+      }
+    ],
+    "partyN": 3,
+    "scholarHp": 100
+  },
+  "capConstant": null,
+  "reunionWave": {
+    "reached": true,
+    "outcome": "died",
+    "reunionCount": 3,
+    "partyN": 3,
+    "scholarHpAtStart": 1,
+    "scholarHpAtEnd": -0.11,
+    "tbEndResult": "lost"
+  },
+  "instrumentErrors": [],
+  "logTail": [
+    "Armor absorbs 42.",
+    "The attack hits you for 18.",
+    "📖 Codex: Your Move — locks onto one target — moving won't dodge it. You won't forget this.",
+    "💥 The Your Move finds A person, maybe 20s — no dodging it.",
+    "A person, maybe 20s's gear absorbs 49.",
+    "The Your Move hits A person, maybe 20s for 31.",
+    "💥 The Your Move finds A person, maybe 20s — no dodging it.",
+    "A person, maybe 20s's gear absorbs 40.",
+    "The Your Move hits A person, maybe 20s for 25.",
+    "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)",
+    "A person, maybe 20s runs for it!",
+    "(everyone you've buried, standing up 1's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up 1 for 50 (Machete).",
+    "💥 The Your Move finds you — no dodging it.",
+    "Armor absorbs 55.",
+    "The Your Move hits you for 24.",
+    "💥 The Your Move finds A person, maybe 20s — no dodging it.",
+    "A person, maybe 20s's gear absorbs 44.",
+    "The Your Move hits A person, maybe 20s for 28.",
+    "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)",
+    "(everyone you've buried, standing up 1's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up 1 for 48 (Machete).",
+    "👥 Faces surface on its body — your own snarl. It knows \"strike\" — it watched you do it 6 times. YOUR MOVE, back at you.",
+    "Armor absorbs 41.",
+    "Your own move, returned hits you for 18.",
+    "👥 Faces surface on its body — your own snarl. It knows \"strike\" — it watched you do it 6 times. YOUR MOVE, back at you.",
+    "Armor absorbs 40.",
+    "Your own move, returned hits you for 18.",
+    "You go down.",
+    "Nobody's talking much. The fire feels smaller tonight.",
+    "🕯️ Valentina Rizzo is dead — the arena. The village stops. Somebody screams. Somebody else starts digging.",
+    "What Valentina kept close goes into the ground with them — keepsakes are buried, never taken from the body.",
+    "Tom picks up the journal. Their hands shake. Then they open it, and keep writing.",
+    "📖 LEARNED: Steady Hands (Level 1). Fine work under pressure. Dressing game, stitching wounds, tying snares — no shake.",
+    "📖 LEARNED: Patient Aim (Level 1). One shot. You don't take the shot unless it's the shot.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Valentina Rizzo, 30 days. The mantle passes to Tom Smith.",
+    "🪞 You wake up somebody else. Tom Smith, 62 — a Dentist. His hands know different work now: Green Whisper."
+  ]
+}

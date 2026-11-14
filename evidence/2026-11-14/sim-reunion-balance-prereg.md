@@ -243,3 +243,21 @@ the predicted pull-down. The pick is (H=0.4, D=0.5). The GO bar itself is
 unchanged: the panel still has to land 3–5 wins of ≥6 reached, or the
 change does not land. If the panel misses, this correction does not rescue
 it — a miss is a miss.
+
+## CORRECTION 3 (2026-11-14, after panel 1, before panel 2)
+
+PANEL 1 VERDICT: M1 PASS (cap 1 on 8/8 reached), M2 NO-GO — TOO EASY
+(6 wins, 8 reached; the frozen bar says wins >= 6 = too easy, do not
+land, re-tune down). The (H=0.4, D=0.5) tuning does NOT land.
+RE-TUNE: the scale moves to the next sweep point, (H=0.4, D=0.6) —
+sweep 3/6, median 10.5 rounds, winners' scholar end HP 0.07–0.55. HP
+scale stays 0.4; damage scale 0.5 -> 0.6 (Your Move [36,48], Family
+Photo [29,41]). Predicted panel ~3-4 wins of 8 reached (panel 1 ran
+~8 points below its sweep point: 83% -> 75%; the same pull-down on
+50% gives ~42%). Panel 2 runs the SAME band (86102-86117) into
+perseed-reunion-balance-panel2/ — identical seeds, so the only
+difference from panel 1 is the damage scale. The GO bar is UNCHANGED
+(M2 still 3-5 wins, >= 6 reached). If panel 2 misses, the build stops
+and reports NO-GO; there is no second re-tune in this build. The
+constants and proof-test damage assertions update to the new scale;
+the proof test must go green again before panel 2 runs.

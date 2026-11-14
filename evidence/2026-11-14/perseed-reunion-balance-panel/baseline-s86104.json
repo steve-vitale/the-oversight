@@ -1,0 +1,293 @@
+{
+  "seed": 86104,
+  "arm": "baseline",
+  "waves": [
+    "cliffhanger",
+    "mirror_stag",
+    "reunion"
+  ],
+  "partyN": 3,
+  "perWave": [
+    {
+      "waveIdx": 0,
+      "mid": "cliffhanger",
+      "packAtStart": {
+        "cliffhanger": 1
+      },
+      "reunionCountAtStart": 0,
+      "partyN": 3,
+      "scholarHpAtStart": 1,
+      "outcome": "chained",
+      "steps": 3,
+      "scholarHpAtEnd": 1,
+      "monstersAtEnd": [
+        {
+          "id": "cliffhanger",
+          "hpFrac": -0.429,
+          "alive": false
+        }
+      ],
+      "tbEndResult": "won",
+      "rowOutcome": "won",
+      "rowRounds": 2
+    },
+    {
+      "waveIdx": 1,
+      "mid": "mirror_stag",
+      "packAtStart": {
+        "mirror_stag": 1
+      },
+      "reunionCountAtStart": 0,
+      "partyN": 3,
+      "scholarHpAtStart": 1,
+      "outcome": "chained",
+      "steps": 4,
+      "scholarHpAtEnd": 1,
+      "monstersAtEnd": [
+        {
+          "id": "mirror_stag",
+          "hpFrac": -0.518,
+          "alive": false
+        }
+      ],
+      "tbEndResult": "won",
+      "rowOutcome": "won",
+      "rowRounds": 3
+    },
+    {
+      "waveIdx": 2,
+      "mid": "reunion",
+      "packAtStart": {
+        "reunion": 3
+      },
+      "reunionCountAtStart": 3,
+      "partyN": 3,
+      "scholarHpAtStart": 1,
+      "outcome": "died",
+      "steps": 5,
+      "scholarHpAtEnd": -0.16,
+      "monstersAtEnd": [
+        {
+          "id": "reunion",
+          "hpFrac": 0.858,
+          "alive": true
+        },
+        {
+          "id": "reunion",
+          "hpFrac": 1,
+          "alive": true
+        },
+        {
+          "id": "reunion",
+          "hpFrac": 1,
+          "alive": true
+        }
+      ],
+      "tbEndResult": "lost",
+      "rowOutcome": "lost",
+      "rowRounds": 4
+    }
+  ],
+  "outcome": "died",
+  "deaths": [
+    {
+      "scholarId": "gen_cclt1bx",
+      "causeArg": "the arena",
+      "waveIdx": 2,
+      "day": 30
+    }
+  ],
+  "fixture": {
+    "loadout": {
+      "scholar": {
+        "melee": "machete",
+        "torso": "wardens_cloak"
+      },
+      "allies": {
+        "ranged": "hunting_spear",
+        "torso": "bark_armor"
+      }
+    },
+    "scholarGear": {
+      "weaponBonus": 35,
+      "armorProtection": 25,
+      "slots": {
+        "acc1": {
+          "itemId": "knife_roll",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc2": {
+          "itemId": "mixtape",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc3": {
+          "itemId": "carpenters_square",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc4": {
+          "itemId": "wedding_ring",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "melee": {
+          "itemId": "machete",
+          "weaponBonus": 35,
+          "armorProtection": 0
+        },
+        "torso": {
+          "itemId": "wardens_cloak",
+          "weaponBonus": 0,
+          "armorProtection": 25
+        }
+      }
+    },
+    "allyGear": [
+      {
+        "id": "gen_pd0oiiw",
+        "gear": {
+          "weaponBonus": 30,
+          "armorProtection": 15,
+          "slots": {
+            "head": {
+              "itemId": "carpenters_square",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "torso": {
+              "itemId": "bark_armor",
+              "weaponBonus": 0,
+              "armorProtection": 15
+            },
+            "acc1": {
+              "itemId": "field_suture_kit",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc2": {
+              "itemId": "winter_coat_button",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc3": {
+              "itemId": "bus_schedule",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc4": {
+              "itemId": "tasting_spoon",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "ranged": {
+              "itemId": "hunting_spear",
+              "weaponBonus": 30,
+              "armorProtection": 0
+            }
+          }
+        }
+      },
+      {
+        "id": "gen_dyvcny9",
+        "gear": {
+          "weaponBonus": 30,
+          "armorProtection": 15,
+          "slots": {
+            "head": {
+              "itemId": "locket",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "torso": {
+              "itemId": "bark_armor",
+              "weaponBonus": 0,
+              "armorProtection": 15
+            },
+            "acc1": {
+              "itemId": "dispatchers_headset",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc2": {
+              "itemId": "carpenters_square",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc3": {
+              "itemId": "seed_packet",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc4": {
+              "itemId": "photo_album",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "ranged": {
+              "itemId": "hunting_spear",
+              "weaponBonus": 30,
+              "armorProtection": 0
+            }
+          }
+        }
+      }
+    ],
+    "partyN": 3,
+    "scholarHp": 100
+  },
+  "capConstant": null,
+  "reunionWave": {
+    "reached": true,
+    "outcome": "died",
+    "reunionCount": 3,
+    "partyN": 3,
+    "scholarHpAtStart": 1,
+    "scholarHpAtEnd": -0.16,
+    "tbEndResult": "lost"
+  },
+  "instrumentErrors": [],
+  "logTail": [
+    "Your own move, returned hits you for 19.",
+    "👥 Faces surface on its body — your own snarl. It knows \"strike\" — it watched you do it 2 times. YOUR MOVE, back at you.",
+    "Armor absorbs 37.",
+    "Your own move, returned hits you for 16.",
+    "👥 Faces surface on its body — your own snarl. It knows \"strike\" — it watched you do it 2 times. YOUR MOVE, back at you.",
+    "Armor absorbs 43.",
+    "Your own move, returned hits you for 19.",
+    "A man, maybe 40s runs for it!",
+    "(everyone you've buried, standing up 1's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up 1 for 43 (Machete).",
+    "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)",
+    "(everyone you've buried, standing up 1's hide absorbs 12.)",
+    "💪 Your Agility grows — 6. The work is changing you.",
+    "✨ Footwork — You move without thinking. (tier 1)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up 1 for 45 (Machete).",
+    "💥 The attack finds you — no dodging it.",
+    "Armor absorbs 46.",
+    "The attack hits you for 20.",
+    "📖 Codex: Your Move — locks onto one target — moving won't dodge it. You won't forget this.",
+    "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)",
+    "(everyone you've buried, standing up 1's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up 1 for 45 (Machete).",
+    "💥 The Your Move finds you — no dodging it.",
+    "Armor absorbs 45.",
+    "The Your Move hits you for 19.",
+    "💥 The Your Move finds you — no dodging it.",
+    "Armor absorbs 52.",
+    "The Your Move hits you for 23.",
+    "You go down.",
+    "Nobody's talking much. The fire feels smaller tonight.",
+    "🕯️ Chen Patel is dead — the arena. The village stops. Somebody screams. Somebody else starts digging.",
+    "What Chen kept close goes into the ground with them — keepsakes are buried, never taken from the body.",
+    "Kate picks up the journal. Their hands shake. Then they open it, and keep writing.",
+    "📖 LEARNED: Diplomatic Incident (Level 1). Trust builds 2x faster. You're TOO good though — once per week you can start a diplomatic incident: villagers argue, you pick the winner (+trust with them, -trust with the loser).",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Chen Patel, 30 days. The mantle passes to Kate Gupta.",
+    "🪞 You wake up somebody else. Kate Gupta, 54 — a sign painter. Her hands know different work now: Iron Stomach."
+  ]
+}

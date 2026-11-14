@@ -1,0 +1,276 @@
+{
+  "seed": 86116,
+  "arm": "armed",
+  "waves": [
+    "dustboar",
+    "giant_mosquito",
+    "reunion"
+  ],
+  "partyN": 3,
+  "perWave": [
+    {
+      "waveIdx": 0,
+      "mid": "dustboar",
+      "packAtStart": {
+        "dustboar": 1
+      },
+      "reunionCountAtStart": 0,
+      "partyN": 3,
+      "scholarHpAtStart": 1,
+      "outcome": "chained",
+      "steps": 3,
+      "scholarHpAtEnd": 1,
+      "monstersAtEnd": [
+        {
+          "id": "dustboar",
+          "hpFrac": -0.039,
+          "alive": false
+        }
+      ],
+      "tbEndResult": "won",
+      "rowOutcome": "won",
+      "rowRounds": 3
+    },
+    {
+      "waveIdx": 1,
+      "mid": "giant_mosquito",
+      "packAtStart": {
+        "giant_mosquito": 1
+      },
+      "reunionCountAtStart": 0,
+      "partyN": 3,
+      "scholarHpAtStart": 1,
+      "outcome": "chained",
+      "steps": 3,
+      "scholarHpAtEnd": 0.97,
+      "monstersAtEnd": [
+        {
+          "id": "giant_mosquito",
+          "hpFrac": -2.091,
+          "alive": false
+        }
+      ],
+      "tbEndResult": "won",
+      "rowOutcome": "won",
+      "rowRounds": 2
+    },
+    {
+      "waveIdx": 2,
+      "mid": "reunion",
+      "packAtStart": {
+        "reunion": 1
+      },
+      "reunionCountAtStart": 1,
+      "partyN": 3,
+      "scholarHpAtStart": 0.97,
+      "outcome": "ended",
+      "steps": 12,
+      "scholarHpAtEnd": 0.45,
+      "monstersAtEnd": [
+        {
+          "id": "reunion",
+          "hpFrac": -0.079,
+          "alive": false
+        }
+      ],
+      "tbEndResult": "won",
+      "rowOutcome": "won",
+      "rowRounds": 11
+    }
+  ],
+  "outcome": "won",
+  "deaths": [],
+  "fixture": {
+    "loadout": {
+      "scholar": {
+        "melee": "machete",
+        "torso": "wardens_cloak"
+      },
+      "allies": {
+        "ranged": "hunting_spear",
+        "torso": "bark_armor"
+      }
+    },
+    "scholarGear": {
+      "weaponBonus": 35,
+      "armorProtection": 25,
+      "slots": {
+        "acc1": {
+          "itemId": "mixtape",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc2": {
+          "itemId": "hoodie",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc3": {
+          "itemId": "dispatchers_headset",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc4": {
+          "itemId": "dog_tags",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "melee": {
+          "itemId": "machete",
+          "weaponBonus": 35,
+          "armorProtection": 0
+        },
+        "torso": {
+          "itemId": "wardens_cloak",
+          "weaponBonus": 0,
+          "armorProtection": 25
+        }
+      }
+    },
+    "allyGear": [
+      {
+        "id": "gen_dd8af0f",
+        "gear": {
+          "weaponBonus": 30,
+          "armorProtection": 15,
+          "slots": {
+            "head": {
+              "itemId": "lucky_coin",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc1": {
+              "itemId": "field_suture_kit",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc2": {
+              "itemId": "home_key",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc3": {
+              "itemId": "carpenters_square",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc4": {
+              "itemId": "mothers_ring",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "ranged": {
+              "itemId": "hunting_spear",
+              "weaponBonus": 30,
+              "armorProtection": 0
+            },
+            "torso": {
+              "itemId": "bark_armor",
+              "weaponBonus": 0,
+              "armorProtection": 15
+            }
+          }
+        }
+      },
+      {
+        "id": "gen_3z35j8q",
+        "gear": {
+          "weaponBonus": 30,
+          "armorProtection": 15,
+          "slots": {
+            "head": {
+              "itemId": "dead_phone",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc1": {
+              "itemId": "trail_compass",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc2": {
+              "itemId": "dispatchers_headset",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc3": {
+              "itemId": "bus_schedule",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc4": {
+              "itemId": "spare_socks",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "ranged": {
+              "itemId": "hunting_spear",
+              "weaponBonus": 30,
+              "armorProtection": 0
+            },
+            "torso": {
+              "itemId": "bark_armor",
+              "weaponBonus": 0,
+              "armorProtection": 15
+            }
+          }
+        }
+      }
+    ],
+    "partyN": 3,
+    "scholarHp": 100
+  },
+  "capConstant": 1,
+  "reunionWave": {
+    "reached": true,
+    "outcome": "ended",
+    "reunionCount": 1,
+    "partyN": 3,
+    "scholarHpAtStart": 0.97,
+    "scholarHpAtEnd": 0.45,
+    "tbEndResult": "won"
+  },
+  "instrumentErrors": [],
+  "logTail": [
+    "💥 The Your Move finds A man, maybe 40s — no dodging it.",
+    "A man, maybe 40s's gear absorbs 21.",
+    "The Your Move hits A man, maybe 40s for 14.",
+    "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)",
+    "A person, maybe 60s keeps their distance and watches.",
+    "A man, maybe 40s hits everyone you've buried, standing up for 5.",
+    "(everyone you've buried, standing up's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up for 55 (Machete).",
+    "A face goes still — released. The mass shudders.",
+    "Too close. It SNAPS toward A man, maybe 40s — proximity overrules patience.",
+    "A person, maybe 60s holds and watches.",
+    "A man, maybe 40s hits everyone you've buried, standing up for 4.",
+    "(everyone you've buried, standing up's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up for 53 (Machete).",
+    "A face goes still — released. The mass shudders.",
+    "Too close. It SNAPS toward A man, maybe 40s — proximity overrules patience.",
+    "👥 Faces surface on its body — your own snarl. It knows \"strike\" — it watched you do it 10 times. YOUR MOVE, back at you.",
+    "Armor absorbs 41.",
+    "Your own move, returned hits you for 18.",
+    "A person, maybe 60s waits, eyes on the beast.",
+    "A man, maybe 40s hits everyone you've buried, standing up for 7.",
+    "(everyone you've buried, standing up's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up for 51 (Machete).",
+    "A face goes still — released. The mass shudders.",
+    "Too close. It SNAPS toward A man, maybe 40s — proximity overrules patience.",
+    "A person, maybe 60s holds position, watching for an opening.",
+    "A man, maybe 40s hits everyone you've buried, standing up for 4.",
+    "(everyone you've buried, standing up's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up for 50 (Machete).",
+    "The everyone you've buried, standing up falls.",
+    "A face goes still — released. The mass shudders.",
+    "A man, maybe 40s whoops. \"That's how it's done!\"",
+    "It is everyone you've buried. Do not eat everyone you've buried.",
+    "✨ ALIEN LOOT: Wildmark Wraps. Scent-marks of every pack you've run with. Animals read your hands like a resume. It's on the body — search it.",
+    "You came back bloody. Nobody asks. Someone saves you the good seat by the fire.",
+    "You clutch your Beat-up Paperback, Mixtape, Hoodie, Dispatcher's headset, Dog Tags. You're still here."
+  ]
+}

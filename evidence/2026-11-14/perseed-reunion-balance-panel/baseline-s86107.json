@@ -1,0 +1,293 @@
+{
+  "seed": 86107,
+  "arm": "baseline",
+  "waves": [
+    "paparazzo",
+    "voice_mimic_radio",
+    "reunion"
+  ],
+  "partyN": 3,
+  "perWave": [
+    {
+      "waveIdx": 0,
+      "mid": "paparazzo",
+      "packAtStart": {
+        "paparazzo": 1
+      },
+      "reunionCountAtStart": 0,
+      "partyN": 3,
+      "scholarHpAtStart": 1,
+      "outcome": "chained",
+      "steps": 4,
+      "scholarHpAtEnd": 0.93,
+      "monstersAtEnd": [
+        {
+          "id": "paparazzo",
+          "hpFrac": -0.404,
+          "alive": false
+        }
+      ],
+      "tbEndResult": "won",
+      "rowOutcome": "won",
+      "rowRounds": 3
+    },
+    {
+      "waveIdx": 1,
+      "mid": "voice_mimic_radio",
+      "packAtStart": {
+        "voice_mimic_radio": 1
+      },
+      "reunionCountAtStart": 0,
+      "partyN": 3,
+      "scholarHpAtStart": 0.93,
+      "outcome": "chained",
+      "steps": 3,
+      "scholarHpAtEnd": 0.93,
+      "monstersAtEnd": [
+        {
+          "id": "voice_mimic_radio",
+          "hpFrac": -0.597,
+          "alive": false
+        }
+      ],
+      "tbEndResult": "won",
+      "rowOutcome": "won",
+      "rowRounds": 2
+    },
+    {
+      "waveIdx": 2,
+      "mid": "reunion",
+      "packAtStart": {
+        "reunion": 3
+      },
+      "reunionCountAtStart": 3,
+      "partyN": 2,
+      "scholarHpAtStart": 0.93,
+      "outcome": "died",
+      "steps": 4,
+      "scholarHpAtEnd": -0.08,
+      "monstersAtEnd": [
+        {
+          "id": "reunion",
+          "hpFrac": 0.889,
+          "alive": true
+        },
+        {
+          "id": "reunion",
+          "hpFrac": 1,
+          "alive": true
+        },
+        {
+          "id": "reunion",
+          "hpFrac": 1,
+          "alive": true
+        }
+      ],
+      "tbEndResult": "lost",
+      "rowOutcome": "lost",
+      "rowRounds": 3
+    }
+  ],
+  "outcome": "died",
+  "deaths": [
+    {
+      "scholarId": "gen_siayzwv",
+      "causeArg": "the arena",
+      "waveIdx": 2,
+      "day": 30
+    }
+  ],
+  "fixture": {
+    "loadout": {
+      "scholar": {
+        "melee": "machete",
+        "torso": "wardens_cloak"
+      },
+      "allies": {
+        "ranged": "hunting_spear",
+        "torso": "bark_armor"
+      }
+    },
+    "scholarGear": {
+      "weaponBonus": 35,
+      "armorProtection": 25,
+      "slots": {
+        "acc1": {
+          "itemId": "winter_coat_button",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc2": {
+          "itemId": "search_locket",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc3": {
+          "itemId": "mixtape",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc4": {
+          "itemId": "dispatchers_headset",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "melee": {
+          "itemId": "machete",
+          "weaponBonus": 35,
+          "armorProtection": 0
+        },
+        "torso": {
+          "itemId": "wardens_cloak",
+          "weaponBonus": 0,
+          "armorProtection": 25
+        }
+      }
+    },
+    "allyGear": [
+      {
+        "id": "gen_xkro3fh",
+        "gear": {
+          "weaponBonus": 30,
+          "armorProtection": 15,
+          "slots": {
+            "head": {
+              "itemId": "spare_socks",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "torso": {
+              "itemId": "bark_armor",
+              "weaponBonus": 0,
+              "armorProtection": 15
+            },
+            "acc1": {
+              "itemId": "mixtape",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc2": {
+              "itemId": "dispatchers_headset",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc3": {
+              "itemId": "carpenters_square",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc4": {
+              "itemId": "locket",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "ranged": {
+              "itemId": "hunting_spear",
+              "weaponBonus": 30,
+              "armorProtection": 0
+            }
+          }
+        }
+      },
+      {
+        "id": "gen_sqh6uuw",
+        "gear": {
+          "weaponBonus": 30,
+          "armorProtection": 15,
+          "slots": {
+            "head": {
+              "itemId": "dog_tags",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "torso": {
+              "itemId": "bark_armor",
+              "weaponBonus": 0,
+              "armorProtection": 15
+            },
+            "acc1": {
+              "itemId": "trail_compass",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc2": {
+              "itemId": "search_locket",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc3": {
+              "itemId": "field_suture_kit",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc4": {
+              "itemId": "mixtape",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "ranged": {
+              "itemId": "hunting_spear",
+              "weaponBonus": 30,
+              "armorProtection": 0
+            }
+          }
+        }
+      }
+    ],
+    "partyN": 3,
+    "scholarHp": 100
+  },
+  "capConstant": null,
+  "reunionWave": {
+    "reached": true,
+    "outcome": "died",
+    "reunionCount": 3,
+    "partyN": 2,
+    "scholarHpAtStart": 0.93,
+    "scholarHpAtEnd": -0.08,
+    "tbEndResult": "lost"
+  },
+  "instrumentErrors": [],
+  "logTail": [
+    "A person, maybe 20s runs for it!",
+    "⚠️ 1 threats: everyone you've buried, standing up 1 (×3) — all here, all now.\nYour party: just you. You are outnumbered — fight like it.",
+    "(everyone you've buried, standing up 1's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up 1 for 44 (Machete).",
+    "A woman, maybe 40s runs for it!",
+    "👥 Faces surface on its body — your own snarl. It knows \"strike\" — it watched you do it 2 times. YOUR MOVE, back at you.",
+    "Armor absorbs 42.",
+    "A woman, maybe 40s gasps. \"You're hit — move!\"",
+    "Your own move, returned hits you for 19.",
+    "👥 Faces surface on its body — your own snarl. It knows \"strike\" — it watched you do it 2 times. YOUR MOVE, back at you.",
+    "Armor absorbs 40.",
+    "Your own move, returned hits you for 17.",
+    "👥 Faces surface on its body — your own snarl. It knows \"strike\" — it watched you do it 2 times. YOUR MOVE, back at you.",
+    "Armor absorbs 40.",
+    "Your own move, returned hits you for 18.",
+    "(everyone you've buried, standing up 1's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up 1 for 49 (Machete).",
+    "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)",
+    "(everyone you've buried, standing up 1's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up 1 for 45 (Machete).",
+    "💥 The attack finds you — no dodging it.",
+    "Armor absorbs 56.",
+    "The attack hits you for 25.",
+    "📖 Codex: Your Move — locks onto one target — moving won't dodge it. You won't forget this.",
+    "Another face surfaces — someone you brought, or someone who brought you. ‘You didn’t think we’d come alone?’ The dead gather. (Allied monsters +4 damage, 2 turns.)",
+    "💥 The Your Move finds you — no dodging it.",
+    "Armor absorbs 49.",
+    "The Your Move hits you for 22.",
+    "You go down.",
+    "Nobody's talking much. The fire feels smaller tonight.",
+    "🕯️ Hank Deng is dead — the arena. The village stops. Somebody screams. Somebody else starts digging.",
+    "What Hank kept close goes into the ground with them — keepsakes are buried, never taken from the body.",
+    "Emmett picks up the journal. Their hands shake. Then they open it, and keep writing.",
+    "📖 LEARNED: Tireless Stride (Level 1). You walk like water downhill — no wasted steps, no wasted breath. Every mile costs 15% less.",
+    "🌟 \"MANTLE TRANSFER DETECTED. ...Oh! New face! Same job! Whole new set of tricks. We hardly noticed. (That is a lie. We noticed. The audience CRIED.)\"",
+    "📖 The Codex turns a page: Hank Deng, 30 days. The mantle passes to Emmett Graham.",
+    "🪞 You wake up somebody else. Emmett Graham, 21 — a truck driver. Their hands know different work now: Bloodhound."
+  ]
+}

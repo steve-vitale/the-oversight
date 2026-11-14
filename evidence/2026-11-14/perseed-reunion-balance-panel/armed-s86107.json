@@ -1,0 +1,276 @@
+{
+  "seed": 86107,
+  "arm": "armed",
+  "waves": [
+    "paparazzo",
+    "voice_mimic_radio",
+    "reunion"
+  ],
+  "partyN": 3,
+  "perWave": [
+    {
+      "waveIdx": 0,
+      "mid": "paparazzo",
+      "packAtStart": {
+        "paparazzo": 1
+      },
+      "reunionCountAtStart": 0,
+      "partyN": 3,
+      "scholarHpAtStart": 1,
+      "outcome": "chained",
+      "steps": 4,
+      "scholarHpAtEnd": 0.93,
+      "monstersAtEnd": [
+        {
+          "id": "paparazzo",
+          "hpFrac": -0.404,
+          "alive": false
+        }
+      ],
+      "tbEndResult": "won",
+      "rowOutcome": "won",
+      "rowRounds": 3
+    },
+    {
+      "waveIdx": 1,
+      "mid": "voice_mimic_radio",
+      "packAtStart": {
+        "voice_mimic_radio": 1
+      },
+      "reunionCountAtStart": 0,
+      "partyN": 3,
+      "scholarHpAtStart": 0.93,
+      "outcome": "chained",
+      "steps": 3,
+      "scholarHpAtEnd": 0.93,
+      "monstersAtEnd": [
+        {
+          "id": "voice_mimic_radio",
+          "hpFrac": -0.597,
+          "alive": false
+        }
+      ],
+      "tbEndResult": "won",
+      "rowOutcome": "won",
+      "rowRounds": 2
+    },
+    {
+      "waveIdx": 2,
+      "mid": "reunion",
+      "packAtStart": {
+        "reunion": 1
+      },
+      "reunionCountAtStart": 1,
+      "partyN": 3,
+      "scholarHpAtStart": 0.93,
+      "outcome": "ended",
+      "steps": 12,
+      "scholarHpAtEnd": 0.07,
+      "monstersAtEnd": [
+        {
+          "id": "reunion",
+          "hpFrac": -0.09,
+          "alive": false
+        }
+      ],
+      "tbEndResult": "won",
+      "rowOutcome": "won",
+      "rowRounds": 11
+    }
+  ],
+  "outcome": "won",
+  "deaths": [],
+  "fixture": {
+    "loadout": {
+      "scholar": {
+        "melee": "machete",
+        "torso": "wardens_cloak"
+      },
+      "allies": {
+        "ranged": "hunting_spear",
+        "torso": "bark_armor"
+      }
+    },
+    "scholarGear": {
+      "weaponBonus": 35,
+      "armorProtection": 25,
+      "slots": {
+        "acc1": {
+          "itemId": "winter_coat_button",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc2": {
+          "itemId": "search_locket",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc3": {
+          "itemId": "mixtape",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "acc4": {
+          "itemId": "dispatchers_headset",
+          "weaponBonus": 0,
+          "armorProtection": 0
+        },
+        "melee": {
+          "itemId": "machete",
+          "weaponBonus": 35,
+          "armorProtection": 0
+        },
+        "torso": {
+          "itemId": "wardens_cloak",
+          "weaponBonus": 0,
+          "armorProtection": 25
+        }
+      }
+    },
+    "allyGear": [
+      {
+        "id": "gen_xkro3fh",
+        "gear": {
+          "weaponBonus": 30,
+          "armorProtection": 15,
+          "slots": {
+            "head": {
+              "itemId": "spare_socks",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "torso": {
+              "itemId": "bark_armor",
+              "weaponBonus": 0,
+              "armorProtection": 15
+            },
+            "acc1": {
+              "itemId": "mixtape",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc2": {
+              "itemId": "dispatchers_headset",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc3": {
+              "itemId": "carpenters_square",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc4": {
+              "itemId": "locket",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "ranged": {
+              "itemId": "hunting_spear",
+              "weaponBonus": 30,
+              "armorProtection": 0
+            }
+          }
+        }
+      },
+      {
+        "id": "gen_sqh6uuw",
+        "gear": {
+          "weaponBonus": 30,
+          "armorProtection": 15,
+          "slots": {
+            "head": {
+              "itemId": "dog_tags",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "torso": {
+              "itemId": "bark_armor",
+              "weaponBonus": 0,
+              "armorProtection": 15
+            },
+            "acc1": {
+              "itemId": "trail_compass",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc2": {
+              "itemId": "search_locket",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc3": {
+              "itemId": "field_suture_kit",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "acc4": {
+              "itemId": "mixtape",
+              "weaponBonus": 0,
+              "armorProtection": 0
+            },
+            "ranged": {
+              "itemId": "hunting_spear",
+              "weaponBonus": 30,
+              "armorProtection": 0
+            }
+          }
+        }
+      }
+    ],
+    "partyN": 3,
+    "scholarHp": 100
+  },
+  "capConstant": 1,
+  "reunionWave": {
+    "reached": true,
+    "outcome": "ended",
+    "reunionCount": 1,
+    "partyN": 3,
+    "scholarHpAtStart": 0.93,
+    "scholarHpAtEnd": 0.07,
+    "tbEndResult": "won"
+  },
+  "instrumentErrors": [],
+  "logTail": [
+    "The Your Move hits you for 10.",
+    "A person, maybe 20s holds and watches.",
+    "(everyone you've buried, standing up's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up for 50 (Machete).",
+    "A woman, maybe 40s waits, eyes on the beast.",
+    "A person, maybe 20s holds position, watching for an opening.",
+    "(everyone you've buried, standing up's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up for 48 (Machete).",
+    "A woman, maybe 40s stands ready, watching.",
+    "💥 It erupts!",
+    "Armor absorbs 18.",
+    "The attack hits you for 8.",
+    "📖 Codex: Family Photo — hits everything close around it. You won't forget this.",
+    "A person, maybe 20s keeps their distance and watches.",
+    "(everyone you've buried, standing up's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up for 54 (Machete).",
+    "A woman, maybe 40s holds and watches.",
+    "👥 Faces surface on its body — your own snarl. It knows \"strike\" — it watched you do it 10 times. YOUR MOVE, back at you.",
+    "Armor absorbs 36.",
+    "Your own move, returned hits you for 15.",
+    "A person, maybe 20s waits, eyes on the beast.",
+    "(everyone you've buried, standing up's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up for 50 (Machete).",
+    "A woman, maybe 40s holds position, watching for an opening.",
+    "💥 The Your Move finds you — no dodging it.",
+    "Armor absorbs 25.",
+    "The Your Move hits you for 11.",
+    "A person, maybe 20s stands ready, watching.",
+    "(everyone you've buried, standing up's hide absorbs 12.)",
+    "OVERCHARGED ×1.25 (well-fed): food is fuel.",
+    "You STRIKE the everyone you've buried, standing up for 48 (Machete).",
+    "The everyone you've buried, standing up falls.",
+    "A woman, maybe 40s whoops. \"That's how it's done!\"",
+    "It is everyone you've buried. Do not eat everyone you've buried.",
+    "You came back bloody. Nobody asks. Someone saves you the good seat by the fire.",
+    "You clutch your Dog Tags, Coat button, Search locket, Mixtape, Dispatcher's headset. You're still here."
+  ]
+}
