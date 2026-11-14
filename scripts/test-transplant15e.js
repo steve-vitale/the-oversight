@@ -61,9 +61,9 @@
 //      differs from HEAD, on-disk standing.js is byte-identical to
 //      HEAD, the step-script tooling source (master) still carries
 //      all four scratch files; the step script names the band
-//      190391-190398; no subject branch exists; no STEP t15e-resume
-//      summary/driver log/corpus exists; no cherry-pick is in
-//      progress.
+//      190391-190398; the subject branch EXISTS at the pick-1 commit
+//      f541e4cd1 (stage 2); no STEP t15e-resume summary/driver
+//      log/corpus exists; no cherry-pick is in progress.
 // STAGE 2 (appended after the live picks) proves the live sequence:
 //   8. Live pick 1 applies cleanly and its tree equals the
 //      predicted pick-1-resolved tree; the subject's game-code diff
@@ -398,7 +398,9 @@ function mergeTree(base, ours, theirs) {
     stepSrc.indexOf('190391,190392,190393,190394,190395,190396,190397,190398') !== -1, 'band literal present');
   let subjectExists = true;
   try { git('rev-parse ' + SUBJECT_BRANCH); } catch (e) { subjectExists = false; }
-  T.ok('no subject branch exists yet (cut after the prereg commit; stage 2)', subjectExists === false, SUBJECT_BRANCH + ' absent');
+  T.ok('subject branch exists (cut after the prereg commit; stage 2)', subjectExists === true, SUBJECT_BRANCH + ' present');
+  T.ok('subject tip is the pick-1 commit f541e4cd1 (resume-offer Yes)',
+    git('rev-parse ' + SUBJECT_BRANCH).startsWith('f541e4cd1') && git('log -1 --format=%s ' + SUBJECT_BRANCH) === 'Deliver unfinished thread on resume-offer Yes', git('log -1 --format=%h\\ %s ' + SUBJECT_BRANCH).slice(0, 80));
   const t15eSummary = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-summary.json');
   T.ok('no step summary exists for t15e-resume (no judged sim ran)', fs.existsSync(t15eSummary) === false, STEP);
   const t15eDriver = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-driver.log');
@@ -409,11 +411,66 @@ function mergeTree(base, ours, theirs) {
   try { execSync('git rev-parse --verify CHERRY_PICK_HEAD', { cwd: REPO, stdio: 'pipe' }); } catch (e) { cherryPickHead = false; }
   T.ok('no cherry-pick is in progress', cherryPickHead === false, 'CHERRY_PICK_HEAD absent');
   const dirtyTracked = git('diff --name-only HEAD');
-  const allowed = ['scripts/test-transplant15e.js', 'evidence/2026-11-14/sim-transplant15e-prereg.md'];
+  const allowed = ['scripts/test-transplant15e.js', 'evidence/2026-11-14/sim-transplant15e-prereg.md', 'evidence/2026-11-14/sim-transplant15e.md'];
   const dirtyOther = dirtyTracked.split('\n').filter(function (ln) {
     return ln && !allowed.some(function (a) { return ln === a; });
   }).join('\n');
-  T.ok('tracked tree is clean apart from this proof + the prereg (uncommitted until this proof passes)', dirtyOther === '', dirtyOther.slice(0, 200) || '(only allowed files)');
+  T.ok('tracked tree is clean apart from this proof + the prereg + the evidence file (uncommitted until this proof passes)', dirtyOther === '', dirtyOther.slice(0, 200) || '(only allowed files)');
+
+  // ---- 8. Live pick 1 — clean apply, tree equals prediction ----
+  T.section('8. Live pick 1 — clean apply, tree equals the predicted pick-1-resolved tree');
+  T.ok('subject tip tree is f9e9b8b8… (the predicted pick-1-resolved tree)',
+    git('rev-parse ' + SUBJECT_BRANCH + '^{tree}') === PRED1_TREE, git('rev-parse ' + SUBJECT_BRANCH + '^{tree}').slice(0, 12));
+  const subjNumstat = git('diff --numstat ' + FAR + ' ' + SUBJECT_BRANCH);
+  T.ok('subject diff vs far end is exactly pick 1 (3 files, +148/-4)',
+    subjNumstat.split('\n').sort().join('\n') === ['29\t0\tevidence/2026-11-08/story-offer-yes-followthrough.md', '73\t0\tscripts/test-story-offer-yes-20261108.js', '46\t4\tsrc/js/conversation.js'].sort().join('\n'), subjNumstat.replace(/\n/g, ' | '));
+  const pick1Files = git('diff --name-only ' + SUBJECT_BRANCH + '^1 ' + SUBJECT_BRANCH).split('\n').sort();
+  T.ok('pick-1 commit touches exactly the 3 files (no tooling file in the commit)',
+    JSON.stringify(pick1Files) === JSON.stringify(['evidence/2026-11-08/story-offer-yes-followthrough.md', 'scripts/test-story-offer-yes-20261108.js', 'src/js/conversation.js']), pick1Files.join(', '));
+  T.ok('subject has exactly 1 commit on top of the far end (pick 1 only)',
+    git('rev-list --count ' + FAR + '..' + SUBJECT_BRANCH) === '1', 'count=1');
+  T.ok('no pick-2 commit exists on the subject (OVE-33 never landed)',
+    git('log --format=%s ' + FAR + '..' + SUBJECT_BRANCH).indexOf('OVE-33') === -1, 'no OVE-33 commit');
+  T.ok('no pick-3 commit exists on the subject (OVE-57 never attempted)',
+    git('log --format=%s ' + FAR + '..' + SUBJECT_BRANCH).indexOf('OVE-57') === -1, 'no OVE-57 commit');
+
+  // ---- 9. STOP outcome — pick-2 conflict reported, nothing resolved, nothing measured ----
+  T.section('9. STOP outcome — pick-2 conflict reported, nothing hand-resolved, nothing measured');
+  const ev15ePath = path.join(REPO, 'evidence', '2026-11-14', 'sim-transplant15e.md');
+  const ev15e = fs.existsSync(ev15ePath) ? fs.readFileSync(ev15ePath, 'utf8') : '';
+  T.ok('evidence file exists', ev15e.length > 0, ev15ePath);
+  T.ok('evidence file records the outcome as UNMEASURED-BY-CONFLICT', ev15e.indexOf('UNMEASURED-BY-CONFLICT') !== -1, 'outcome present');
+  T.ok('evidence file records the exact conflict list (UU balance-proof, UU phone-frame-proof, DU test-snippet, UU conversation.js)',
+    ev15e.indexOf('UU scripts/balance-proof.json') !== -1 && ev15e.indexOf('UU scripts/phone-frame-proof.json') !== -1 && ev15e.indexOf('DU scripts/test-snippet-stage-direction.js') !== -1 && ev15e.indexOf('UU src/js/conversation.js') !== -1, 'conflict list present');
+  T.ok('evidence file records the conversation.js marker lines 1730/1731/1754',
+    ev15e.indexOf('1730') !== -1 && ev15e.indexOf('1731') !== -1 && ev15e.indexOf('1754') !== -1, 'conversation.js markers present');
+  T.ok('evidence file records the balance-proof marker lines 3/6/9',
+    ev15e.indexOf('3/6/9') !== -1, 'balance-proof markers present');
+  T.ok('evidence file records the phone-frame-proof marker lines 7/15/23 and 81/91/101',
+    ev15e.indexOf('7/15/23') !== -1 && ev15e.indexOf('81/91/101') !== -1, 'phone-frame markers present');
+  T.ok('evidence file records the subject tip f541e4cd1 and the predicted tree f9e9b8b8…',
+    ev15e.indexOf('f541e4cd1') !== -1 && ev15e.indexOf('f9e9b8b8') !== -1, 'subject tip present');
+  T.ok('evidence file records that NO file was resolved (no checkout --ours on pick 2)',
+    ev15e.indexOf('Resolutions recorded (file, pick, method): NONE') !== -1, 'no-resolution note present');
+  T.ok('evidence file records that no judged sim ran', ev15e.indexOf('No judged sim ran') !== -1, 'no-sim note present');
+  T.ok('evidence file records the pick-2 mechanism (family 14 7688cb7a4)',
+    ev15e.indexOf('7688cb7a4') !== -1, 'mechanism present');
+  T.ok('evidence file records the coordinator decision owed (family 14 first / pick-1-alone / record unmeasurable)',
+    ev15e.indexOf('Coordinator decision owed') !== -1, 'coordinator note present');
+  T.ok('evidence file records the infrastructure (flap, lock contention, index clobber, telemetry NOT RUN)',
+    ev15e.indexOf('HOST WRITE FLAP') !== -1 && ev15e.indexOf('REGISTRY LOCK CONTENTION') !== -1 &&
+    ev15e.indexOf('INDEX CLOBBER') !== -1 && ev15e.indexOf('Telemetry deviation check: NOT RUN') !== -1, 'infrastructure present');
+  const logSubjects = git('log --format=%s HEAD');
+  T.ok('prereg commit is an ancestor of HEAD (resolved by message, not hash)',
+    logSubjects.indexOf('sim-transplant15e-a: prereg + stage-1 proof (129 legs; pick-1 clean, pick-2 src/js conflict predicted)') !== -1, 'prereg message present');
+  const headBranch2 = git('rev-parse --abbrev-ref HEAD');
+  T.ok('HEAD is back on the arm branch sim-transplant15e-a after the live picks (worktree-only)', worktreeOnly(headBranch2 === 'sim-transplant15e-a'), 'HEAD=' + headBranch2);
+  let cherryPickHead2 = true;
+  try { execSync('git rev-parse --verify CHERRY_PICK_HEAD', { cwd: REPO, stdio: 'pipe' }); } catch (e) { cherryPickHead2 = false; }
+  T.ok('no cherry-pick is in progress (pick 2 was aborted)', cherryPickHead2 === false, 'CHERRY_PICK_HEAD absent');
+  T.ok('no verdict (CARRIER/AMBIGUOUS/NOT-CARRIER) is claimed anywhere in the evidence file',
+    ev15e.indexOf('VERDICT: CARRIER') === -1 && ev15e.indexOf('VERDICT: AMBIGUOUS') === -1 && ev15e.indexOf('VERDICT: NOT-CARRIER') === -1, 'no verdict claimed');
+  T.ok('evidence file records Verdict: NONE', ev15e.indexOf('Verdict: NONE') !== -1, 'verdict NONE present');
 
   T.done();
 })().catch(function (e) { console.error('HARNESS ERROR', e); process.exit(1); });
