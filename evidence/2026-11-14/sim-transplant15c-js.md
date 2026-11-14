@@ -247,15 +247,24 @@ backlog entry; the open item stands.
   fast (≤7s). The step script's two status calls each cost ~5
   min of wall time inside its ~8.7-min run; the driver itself
   (8 seeds) ran at normal speed once the checkout landed.
-- **Safe-commit index clobber (struck, repaired).** The stage-1
-  commit (054c493f6) is correct — both files present, 244 + 198
-  lines — but the worktree's main index showed them as
-  staged-deleted with the worktree copies byte-identical to HEAD
-  (hash-object == HEAD blob for both, verified BEFORE repair).
-  Repaired with the documented pipe (`git ls-tree -r HEAD --
-  <paths> | git update-index --add --index-info`); verified
-  `git diff HEAD -- <paths>` empty + disk blobs equal HEAD blobs.
-  No work lost; the commit was never in doubt.
+- **Safe-commit index clobber (struck THREE times, repaired each
+  time).** The stage-1 commit (054c493f6) is correct — both files
+  present, 244 + 198 lines — but the worktree's main index showed
+  them as staged-deleted with the worktree copies byte-identical
+  to HEAD (hash-object == HEAD blob for both, verified BEFORE
+  repair). The corpus commit (f9549c2ec) clobbered the same way
+  (all 10 index entries purged; disk files intact, hash-object ==
+  HEAD blob). The stage-2 commit (83157c1c) clobbered in a new
+  variant: the evidence file's entry purged, the proof file's entry
+  left STALE at the stage-1 blob (cached diff showed the whole
+  stage-2 addition as deletions). All three repaired with the
+  documented pipe (`git ls-tree -r HEAD -- <paths> |
+  git update-index --add --index-info`); verified `git diff
+  --cached --quiet` + disk blobs equal HEAD blobs after each
+  repair. No work lost; every commit was verified correct first.
+  The clobber hits every safe-commit on this tree under load —
+  future arms should run the hash-object + cached-diff check after
+  EVERY safe-commit, not just the first.
 - **Heartbeat.** First attempt timed out at 240s (REGISTRY.lock
   contention); retry landed ("heartbeat sim-transplant15c-js-a",
   rc=0). Registry heartbeat is fresh at closeout.
@@ -285,8 +294,8 @@ backlog entry; the open item stands.
 - Evidence (this file):
   `evidence/2026-11-14/sim-transplant15c-js.md`
 - Proof: `scripts/test-transplant15c-js.js` (stage 1: 64/0 with
-  the prereg; stage 2: subject identity, STEP verdict, group
-  identity 8/8, evidence records, closeout)
+  the prereg; stage 2: 153/153 — subject identity, STEP verdict,
+  group identity 8/8, evidence records, closeout)
 - Corpus: `evidence/2026-11-13/perseed-culpritbisect-a-t15c-split-js/`
   (8 per-seed JSONs) + driver log
   `evidence/2026-11-13/culpritbisect-a-t15c-split-js-driver.log` +

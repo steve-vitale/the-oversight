@@ -34,8 +34,10 @@
 //   4. Prereg — carries the prediction, the thresholds, the exact
 //      subject-construction method with both drops, and the STOP
 //      procedure before the pick.
-//   5. No subject cut yet — branch transplant-15c-split-js-subject
-//      does not exist.
+//   5. No subject cut yet — asserted live at stage 1; in stage 2
+//      this section asserts the ordering facts that remain checkable
+//      (prereg commit predates the subject commit), since the live
+//      absence assertions are false by design once the subject is cut.
 // STAGE 2 (added after the pick + step — see the evidence file):
 //   subject identity (js diff equals the pick's js diff exactly;
 //   probe test absent at subject as at far end; ONTOLOGY
@@ -188,11 +190,20 @@ T.section('4. Prereg — prediction, thresholds, construction method, STOP proce
   T.ok('prereg records the STEP-script hazard (/tmp copy)', pre.indexOf('Copy') !== -1 && pre.indexOf('culpritbisect-step.sh') !== -1 && pre.indexOf('/tmp') !== -1, 'hazard recorded');
 })();
 
-T.section('5. No subject cut yet (stage 1)');
+T.section('5. Stage-1 snapshot — verified at commit 054c493f6, superseded by §6–7 (stage 2)');
 (function () {
-  T.ok('subject branch does not exist yet', branchExists(SUBJECT_BRANCH) === false, 'absent');
-  T.ok('no t15c-split-js corpus exists (no step ran)', fs.existsSync(path.join(REPO, 'evidence', '2026-11-13', 'perseed-culpritbisect-a-t15c-split-js')) === false, 'absent');
-  T.ok('no t15c-split-js driver log exists', fs.existsSync(path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-t15c-split-js-driver.log')) === false, 'absent');
+  // At stage 1 (commit 054c493f6) the subject branch did not exist and
+  // no corpus/driver log existed — the 64/64 stage-1 run asserted
+  // exactly that. Those live assertions are now false by design (the
+  // subject was cut and the STEP ran), so this section asserts the
+  // ordering facts that remain checkable instead of re-asserting a
+  // past absence.
+  T.ok('stage-1 commit 054c493f6 is an ancestor of HEAD', git('merge-base --is-ancestor 054c493f6 HEAD; echo $?') === '0', 'ancestor');
+  const preTs = parseInt(git('log -1 --format=%ct 054c493f6'), 10);
+  const subjTs = parseInt(git('log -1 --format=%ct ' + SUBJECT_BRANCH), 10);
+  T.ok('prereg commit predates the subject commit (prereg before subject)', subjTs > preTs, 'prereg ' + preTs + ' < subject ' + subjTs);
+  const ev = fs.readFileSync(path.join(REPO, 'evidence', '2026-11-14', 'sim-transplant15c-js.md'), 'utf8');
+  T.ok('evidence records the stage-1 proof ran 64/64', ev.indexOf('stage-1 proof 64/64') !== -1, '64/64 recorded');
 })();
 
 T.section('6. Subject identity — js-only, verified (stage 2)');
@@ -250,7 +261,7 @@ T.section('7. STEP verdict — CARRIER 1/8, group-identical (stage 2)');
   s.perSeed.forEach(function (r) {
     T.ok('seed ' + r.seed + ' ran ' + wantDays[r.seed] + 'd', r.days === wantDays[r.seed], r.days + 'd ' + r.endReason);
     T.ok('seed ' + r.seed + ' used the fix standing.js', r.standingFix === true && r.standingSha === 'f8fda4295a99', r.standingSha);
-    T.ok('seed ' + r.seed + ' used the far-end policy', r.policySha === POLICY_SHA, r.policySha);
+    T.ok('seed ' + r.seed + ' used the far-end policy', r.policySha === POLICY_SHA.slice(0, 12), r.policySha);
     T.ok('seed ' + r.seed + ' ran on the subject', r.anchorCommit === 'd56206f70e53', r.anchorCommit);
     T.ok('seed ' + r.seed + ' has zero errors', r.errors === 0, 'errors ' + r.errors);
   });
