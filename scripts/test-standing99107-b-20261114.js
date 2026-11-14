@@ -173,6 +173,28 @@ ok('peak-to-5 without any release line is unclassified', function () {
   assert.strictEqual(s.unclassifiedReleases.length, 1);
   assert.strictEqual(s.unclassifiedReleases[0].day, 11);
 });
+ok('peak-to-5 with the line stamped the day before still opens the door', function () {
+  const s = AN.summarizeSeed(seed({ daily: [snap(10, { peak: 4 }), readySnap(11, 200, 5)],
+    standingLines: [{ day: 10, via: 'sysSay', line: '📡 RATINGS ARE UP... the Producers have greenlit the fifth draft. Wave 5 talent has been released.' }] }));
+  assert.strictEqual(s.doorOpenDay, 11);
+  assert.deepStrictEqual(s.unclassifiedReleases, []);
+});
+ok('peak-to-5 with the line capture capped before the transition is an explained artifact, not unclassified', function () {
+  const capped = [];
+  for (let i = 0; i < 400; i++) capped.push({ day: 96, via: 'sysSay', line: '📡 The fifth draft stays in the wings.' });
+  const s = AN.summarizeSeed(seed({ daily: [snap(10, { peak: 4 }), readySnap(117, 200, 5)], standingLines: capped }));
+  assert.strictEqual(s.doorOpenDay, 117);
+  assert.deepStrictEqual(s.unclassifiedReleases, []);
+  assert.strictEqual(s.cappedReleaseLines.length, 1);
+  assert.strictEqual(s.cappedReleaseLines[0].kind, 'peak-to-5-line-capped');
+});
+ok('faced flags: unlock without engagement is not facing', function () {
+  const s = AN.summarizeSeed(seed({ daily: [snap(10, { peak: 5, w4faced: 3, w5faced: 0 })], killEvents: [] }));
+  assert.strictEqual(s.wave4Faced, true);
+  assert.strictEqual(s.wave5Faced, false);
+  const s2 = AN.summarizeSeed(seed({ daily: [snap(10, { peak: 5, w4faced: 3, w5faced: 1 })], killEvents: [] }));
+  assert.strictEqual(s2.wave5Faced, true);
+});
 
 // --- veteran reconciliation ---
 ok('veteran reconciles to kill log; dead killer is not a veteran', function () {

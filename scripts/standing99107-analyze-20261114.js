@@ -70,7 +70,8 @@ function summarizeSeed(out) {
     standingOkNotReadyDays: 0, shortBarDays: {},
     bestCapped: 0, bestRaw: 0, bestSplit: { war: 0, diplomacy: 0, plenty: 0 },
     bestDay: null, bestShort: [], bestLedger: null, bestLinks: null, bestFeasts: null,
-    doorOpenDay: null, unclassifiedReleases: [], releaseLines: [], holdLineCount: 0,
+    doorOpenDay: null, unclassifiedReleases: [], releaseLines: [], cappedReleaseLines: [], holdLineCount: 0,
+    wave4Faced: false, wave5Faced: false,
     mismatchDays: [], vetWithoutKill: [], killersNotVeterans: [], logW4Count: 0,
     reconMismatches: [], unclassifiedDeltas: [],
     warFirstDay: null, warKills: 0, warKillsByWave: { 3: 0, 4: 0, 5: 0 },
@@ -258,14 +259,29 @@ function summarizeSeed(out) {
   // Wave-5 release lines ONLY: the wave-2/3/4 releases all say
   // "RATINGS ARE UP ... talent has been released", so the filter must
   // name the fifth draft, never the generic RATINGS phrase.
+  // A release line may be stamped the day BEFORE the peak transition
+  // snapshot (the release can fire after that day's snapshot), so
+  // the transition day and the day before both count. If no line is
+  // found at all AND the line capture hit its 400 cap before the
+  // transition day (last captured line earlier than the transition),
+  // the absence is an explained capture-cap artifact, not a missing
+  // engine beat: the peak transition itself, the ready+capped state
+  // that day, and the end-call check (peakBeforeEndCall, never an
+  // end-call move) are the release evidence.
   const RELEASE_RE = /greenlit the fifth|Wave 5 talent has been released/i;
   const lines = out.standingLines || [];
+  const LINE_CAP = 400;
+  const lastLineDay = lines.length ? lines[lines.length - 1].day : null;
   let prevPeak = 0;
   for (const d of daily) {
     const pk = (d.peak | 0) || 0;
     if (pk > prevPeak && pk >= 5) {
-      const dayLines = lines.filter(function (L) { return L.day === d.day && RELEASE_RE.test(L.line); });
-      if (dayLines.length) s.doorOpenDay = d.day;
+      const dayLines = lines.filter(function (L) { return (L.day === d.day || L.day === d.day - 1) && RELEASE_RE.test(L.line); });
+      if (dayLines.length) { s.doorOpenDay = d.day; }
+      else if (lines.length >= LINE_CAP && lastLineDay != null && lastLineDay < d.day) {
+        s.doorOpenDay = d.day;
+        s.cappedReleaseLines.push({ day: d.day, kind: 'peak-to-5-line-capped', lastLineDay: lastLineDay });
+      }
       else s.unclassifiedReleases.push({ day: d.day, kind: 'peak-to-5-no-line' });
     }
     prevPeak = Math.max(prevPeak, pk);
@@ -279,6 +295,11 @@ function summarizeSeed(out) {
   if (s.releaseLines.length && s.doorOpenDay == null && !out.endCallMovedPeak) {
     for (const L of s.releaseLines) s.unclassifiedReleases.push({ day: L.day, kind: 'release-line-no-peak' });
   }
+  // --- faced flags: unlock is not facing. Wave w counts as FACED only
+  // when waveEngaged(w) > 0 on some snapshot or a wave-w kill is logged.
+  s.wave4Faced = daily.some(function (d) { return (d.w4faced | 0) > 0; });
+  s.wave5Faced = daily.some(function (d) { return (d.w5faced | 0) > 0; }) ||
+    (out.killEvents || []).some(function (k) { return (k.wave | 0) === 5; });
   // death causes
   for (const e of (out.deathEvents || [])) {
     const c = e.cause || 'unknown';
@@ -302,8 +323,8 @@ function summarizeAll(seeds) {
   const days = [];
   for (const s of per) {
     days.push(s.days);
-    if (s.maxWave >= 4) pooled.wave4faced++;
-    if (s.maxWave >= 5) pooled.wave5faced++;
+    if (s.wave4Faced) pooled.wave4faced++;
+    if (s.wave5Faced) pooled.wave5faced++;
     if (s.endUnlockedWave >= 5) pooled.wave5unlock++;
     pooled.readyDaysTotal += s.readyDayCount;
     if (s.doorOpenDay != null) pooled.doorOpens++;
