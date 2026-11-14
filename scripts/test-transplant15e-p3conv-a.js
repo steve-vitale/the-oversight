@@ -113,6 +113,7 @@ const PRED_COMMIT = 'dcbc30fba002d2c8a2772e36a45b0050b4b5eb09';
 const BAL_OURS_BLOB = 'd0c6a42ff2395a49672f235f0218a3f969619dee';
 const OBJ_OURS_BLOB = '9afc522b0a4a2d57719cbcd4254f611c95f290a2';
 const RECEIPT = 'evidence/2026-11-08/neutral-ove57-tip-6e53adc62.json.gz';
+const LIVE_SUBJECT = '740c9ab963da5434dd6166885020adb1143c2ae6';
 const TOOLING_FILES = ['scripts/green-list.txt', 'scripts/balance-proof.json', 'scripts/phone-frame-proof.json'];
 const NARROWED_FILES = ['scripts/balance-proof.json', 'src/js/villager-objectives.js'];
 
@@ -352,7 +353,7 @@ function mergeTree(base, ours, theirs) {
   T.ok('prereg records the fix sha f8fda4295a99', ev.indexOf('f8fda4295a99') !== -1, 'fix sha present');
 
   // ---- 7. Base state ----
-  T.section('7. Base state — arm branch clean, subject not cut, sim not run');
+  T.section('7. Base state — arm branch clean, subject cut at 740c9ab96, sim not run');
   const headBranch = git('rev-parse --abbrev-ref HEAD');
   // worktreeOnly: branch-identity legs are meaningful only in the
   // worker tree. On merged master HEAD is 'master' by design (the
@@ -377,7 +378,7 @@ function mergeTree(base, ours, theirs) {
     stepSrc.indexOf('190391,190392,190393,190394,190395,190396,190397,190398') !== -1, 'band literal present');
   let subjectExists = true;
   try { git('rev-parse ' + SUBJECT_BRANCH); } catch (e) { subjectExists = false; }
-  T.ok('subject branch does NOT exist yet (stage 1)', subjectExists === false, SUBJECT_BRANCH + ' absent');
+  T.ok('subject branch exists at the live pick 740c9ab96 (stage 2)', subjectExists === true && git('rev-parse ' + SUBJECT_BRANCH).startsWith('740c9ab96'), SUBJECT_BRANCH + ' at 740c9ab96');
   const tSummary = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-summary.json');
   T.ok('no step summary exists for t15e-p3conv (no judged sim ran)', fs.existsSync(tSummary) === false, STEP);
   const tDriver = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-driver.log');
@@ -393,6 +394,48 @@ function mergeTree(base, ours, theirs) {
     return ln && !allowed.some(function (a) { return ln === a; });
   }).join('\n');
   T.ok('tracked tree is clean apart from this proof + the prereg (uncommitted until this proof passes)', dirtyOther === '', dirtyOther.slice(0, 200) || '(only allowed files)');
+
+  // ---- 8. Live pick — exactly the two predicted conflicts, resolved --ours, tree equals prediction ----
+  T.section('8. Live pick — two predicted conflicts, --ours resolutions, tree equals prediction');
+  T.ok('subject branch exists', (function () { try { git('rev-parse ' + SUBJECT_BRANCH); return true; } catch (e) { return false; } })(), SUBJECT_BRANCH + ' present');
+  T.ok('subject tip is the live pick 740c9ab96 (OVE-57)',
+    git('rev-parse ' + SUBJECT_BRANCH) === LIVE_SUBJECT && git('log -1 --format=%s ' + SUBJECT_BRANCH) === 'OVE-57: triage tip quick-check after bond dawn', git('log -1 --format=%h\\ %s ' + SUBJECT_BRANCH).slice(0, 80));
+  T.ok('subject tip tree is 6ab07a5d… (the predicted narrowed-subject tree)',
+    git('rev-parse ' + SUBJECT_BRANCH + '^{tree}') === PRED_TREE, git('rev-parse ' + SUBJECT_BRANCH + '^{tree}').slice(0, 12));
+  T.ok('subject has exactly 1 commit on top of the far end (the single pick)',
+    git('rev-list --count ' + FAR + '..' + SUBJECT_BRANCH) === '1', 'count=1');
+  T.ok('subject parent is the far end 203a32775',
+    git('rev-parse ' + SUBJECT_BRANCH + '^1') === git('rev-parse ' + FAR), 'parent = far end');
+  const subjNumstat = git('diff --numstat ' + FAR + ' ' + SUBJECT_BRANCH);
+  T.ok('subject diff vs far end is EXACTLY conversation.js +21/-2 (nothing else)',
+    subjNumstat === '21\t2\tsrc/js/conversation.js', subjNumstat.replace(/\n/g, ' | '));
+  T.ok('subject conversation.js blob is the merge-tree merged blob 8a20a5ec…',
+    git('ls-tree ' + SUBJECT_BRANCH + ' -- src/js/conversation.js').indexOf(MT_CONV_BLOB) !== -1, 'blob matches');
+  T.ok('subject villager-objectives.js blob is the far-end blob 9afc522b… (byte-identical to the far end)',
+    git('ls-tree ' + SUBJECT_BRANCH + ' -- src/js/villager-objectives.js').indexOf(OBJ_OURS_BLOB) !== -1, 'objectives = far end');
+  T.ok('subject villager-objectives.js is byte-identical to the far end (no diff)',
+    git('diff --stat ' + FAR + ' ' + SUBJECT_BRANCH + ' -- src/js/villager-objectives.js') === '', 'identical');
+  T.ok('subject balance-proof.json blob is the far-end blob d0c6a42f… (byte-identical to the far end)',
+    git('ls-tree ' + SUBJECT_BRANCH + ' -- scripts/balance-proof.json').indexOf(BAL_OURS_BLOB) !== -1, 'balance-proof = far end');
+  T.ok('subject balance-proof.json is byte-identical to the far end (no diff)',
+    git('diff --stat ' + FAR + ' ' + SUBJECT_BRANCH + ' -- scripts/balance-proof.json') === '', 'identical');
+  T.ok('subject has NO evidence receipt (absent at the far end, removed from the subject)',
+    (function () { try { execSync('git cat-file -e ' + SUBJECT_BRANCH + ':' + RECEIPT, { cwd: REPO, stdio: 'pipe' }); return false; } catch (e) { return true; } })(), 'receipt absent');
+  T.ok('the pick\'s own diff DOES touch villager-objectives.js +21/-2 (the narrowing dropped it)',
+    git('diff --numstat ' + PICK3 + '^1 ' + PICK3 + ' -- src/js/villager-objectives.js') === '21\t2\tsrc/js/villager-objectives.js', 'pick diff 21/2');
+  T.ok('the pick\'s own diff DOES touch balance-proof.json +2/-2 (the narrowing dropped it)',
+    git('diff --numstat ' + PICK3 + '^1 ' + PICK3 + ' -- scripts/balance-proof.json') === '2\t2\tscripts/balance-proof.json', 'pick diff 2/2');
+  T.ok('the live subject carries tradeIntroDeferred in conversation.js (the deferred intro)',
+    gitShow(SUBJECT_BRANCH, 'src/js/conversation.js').indexOf('tradeIntroDeferred') !== -1, 'tradeIntroDeferred landed');
+  T.ok('the live subject carries the stage >= 1 gate in queueTraderIntro',
+    gitShow(SUBJECT_BRANCH, 'src/js/conversation.js').indexOf('if (stage < 1) return;') !== -1, 'stage gate landed');
+  T.ok('the live subject carries NO objCommitGuardOffer in villager-objectives.js (the objectives half was dropped)',
+    grepCount(SUBJECT_BRANCH, 'objCommitGuardOffer', 'src/js/villager-objectives.js') === 0, '0 hits on subject');
+  const headBranch2 = git('rev-parse --abbrev-ref HEAD');
+  T.ok('HEAD is back on the arm branch sim-transplant15e-p3conv-a after the live pick (worktree-only)', worktreeOnly(headBranch2 === 'sim-transplant15e-p3conv-a'), 'HEAD=' + headBranch2);
+  let cherryPickHead2 = true;
+  try { execSync('git rev-parse --verify CHERRY_PICK_HEAD', { cwd: REPO, stdio: 'pipe' }); } catch (e) { cherryPickHead2 = false; }
+  T.ok('no cherry-pick is in progress (the pick was continued, not aborted)', cherryPickHead2 === false, 'CHERRY_PICK_HEAD absent');
 
   T.done();
 })().catch(function (e) { console.error('HARNESS ERROR', e); process.exit(1); });
