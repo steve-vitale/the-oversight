@@ -22,6 +22,41 @@ be built on an unmeasured mechanism.
 Grounding: evidence/2026-11-14/sim-capablewinpath-b.md §3 and
 evidence/2026-11-14/perseed-capablewinpath-b/ (32 per-seed JSONs).
 
+## CORRECTION (2026-11-14, before the pilot judged — background fact, bars unchanged)
+
+The "already known" section above misstates the engine mail drive: it
+says `_answermailDriveDaily()` auto-answers the accord and auto-tends
+Haven-primary links "for EVERY policy". WRONG. The drive is DEFAULT-OFF
+(`src/js/hierarchy.js:3892-3894`: fires ONLY when `ANSWERMAIL_DRIVE=1`;
+sim-diplo-a 2026-11-10, sim-findings line 2091: "the only engine caller,
+_answermailDriveDaily, fires only when ANSWERMAIL_DRIVE=1 (off by
+default). In default play the Regional Dawn's opening gift never
+happens"). This pilot runs env defaults (ANSWERMAIL_DRIVE unset), so
+there are NO engine tends and NO auto-accord answers on either leg —
+`state.answermailDrive` will be null throughout, and every tend / accord
+answer the recorder sees is policy-side (capable) vs none (competent).
+Consequences for the guesses:
+- H4's premise is FALSE under default env: the first link does NOT get
+  +10 at formation for both policies — it gets it only if the POLICY
+  answers the accord (capable's leadCourtship does; competent never
+  does). If competent's first link never reaches 40, the missing accord
+  gift is part of the mechanism, not a shared baseline.
+- H3's "engine auto-tend both policies get" is FALSE — delete it. The
+  pantry-gated auto-tend exists only when the drive is armed; under
+  defaults the ONLY tend source is the policy (leadfeast, pantry >
+  20,000 kcal). Competent's zero is then a pure policy gap: no propose,
+  no tend, no accord answer — plus whatever the formation side shows.
+- Prior art agrees: sim-trustgrowth-b (2026-11-09/10, sim-findings line
+  2032) attributed trust growth under competent play to aid + tribute
+  ONLY (tend 0, accord 0, renegotiation 0); sim-secondlink-a (line 2061)
+  proved the first link comes from the meta-progression ladder stage-3
+  reward (`_ladderRewardLink` → `_formLink`), not from a raise — the
+  recorder's formation `via` field must confirm or refute that on this
+  band (ladder reward logs as `engine-direct`).
+No GO bar moves: G1/G2 still require full attribution and a named
+mechanism; the correction only fixes which side of the ledger the
+accord/tend verbs sit on.
+
 ## What is already known (read before the run — code, not guess)
 
 - Diplomacy arithmetic (`src/js/standing.js` `villageStanding()`):
