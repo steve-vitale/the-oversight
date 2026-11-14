@@ -190,7 +190,7 @@ T.section('4. Prereg — prediction, thresholds, construction method, STOP proce
   T.ok('prereg records the STEP-script hazard (/tmp copy)', pre.indexOf('Copy') !== -1 && pre.indexOf('culpritbisect-step.sh') !== -1 && pre.indexOf('/tmp') !== -1, 'hazard recorded');
 })();
 
-T.section('5. Stage-1 snapshot — verified at commit 054c493f6, superseded by §6–7 (stage 2)');
+T.section('5. Stage-1 snapshot — verified at commit 054c493f6, rebased as 96aedd769 on the 2026-11-14 landing, superseded by §6–7 (stage 2)');
 (function () {
   // At stage 1 (commit 054c493f6) the subject branch did not exist and
   // no corpus/driver log existed — the 64/64 stage-1 run asserted
@@ -198,10 +198,16 @@ T.section('5. Stage-1 snapshot — verified at commit 054c493f6, superseded by �
   // subject was cut and the STEP ran), so this section asserts the
   // ordering facts that remain checkable instead of re-asserting a
   // past absence.
-  T.ok('stage-1 commit 054c493f6 is an ancestor of HEAD', git('merge-base --is-ancestor 054c493f6 HEAD; echo $?') === '0', 'ancestor');
-  const preTs = parseInt(git('log -1 --format=%ct 054c493f6'), 10);
-  const subjTs = parseInt(git('log -1 --format=%ct ' + SUBJECT_BRANCH), 10);
-  T.ok('prereg commit predates the subject commit (prereg before subject)', subjTs > preTs, 'prereg ' + preTs + ' < subject ' + subjTs);
+  // LANDING NOTE (2026-11-14, coordinator): the rebase onto master
+  // rewrote 054c493f6 as 96aedd769 — the two patches are byte-identical
+  // (verified: diff of each commit against its own parent is empty).
+  // The leg below names the rebased hash. Ordering is judged on AUTHOR
+  // dates (%at), which rebase preserves; committer dates (%ct) are the
+  // rebase time and would invert the order.
+  T.ok('stage-1 commit 96aedd769 is an ancestor of HEAD', git('merge-base --is-ancestor 96aedd769 HEAD; echo $?') === '0', 'ancestor');
+  const preTs = parseInt(git('log -1 --format=%at 96aedd769'), 10);
+  const subjTs = parseInt(git('log -1 --format=%at ' + SUBJECT_BRANCH), 10);
+  T.ok('prereg commit predates the subject commit (prereg before subject, author dates)', subjTs > preTs, 'prereg ' + preTs + ' < subject ' + subjTs);
   const ev = fs.readFileSync(path.join(REPO, 'evidence', '2026-11-14', 'sim-transplant15c-js.md'), 'utf8');
   T.ok('evidence records the stage-1 proof ran 64/64', ev.indexOf('stage-1 proof 64/64') !== -1, '64/64 recorded');
 })();
