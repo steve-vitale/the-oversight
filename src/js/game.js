@@ -35279,7 +35279,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // Fail loudly so the lie surfaces at the call site, not in play.
       if (!mdef) throw new Error(`startCombat: unknown monster id "${mid}" — no silent fallback`);
       // REUNION ARENA BALANCE (sim-reunion-balance 2026-11-14): the arena
-      // Reunion spawns scaled (HP x0.4, damage x0.5) via a per-fight clone
+      // Reunion spawns scaled (HP x0.4, damage x0.6) via a per-fight clone
       // — see partyTactics.tbArenaReunionMdef. _raidContestAtEntry is true
       // exactly when state.arenaContest was live at entry, so field fights
       // (and the wild Reunion mirror pack) keep the full def.

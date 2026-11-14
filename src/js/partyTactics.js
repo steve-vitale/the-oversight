@@ -92,14 +92,16 @@
   // REUNION ARENA BALANCE (sim-reunion-balance 2026-11-14, Steve-ordered
   // 2026-11-14: the arena Reunion is horribly balanced — a geared party
   // won 0/7 Reunion waves at full stats, panel 3). The ARENA spawn is
-  // scaled: HP x0.4 (1200–1400 -> 480–560), damage x0.5 (Your Move 60–80
-  // -> 30–40, Family Photo 48–68 -> 24–34). Pinned by
-  // evidence/2026-11-14/sim-reunion-balance-prereg.md (sweep pick
-  // H=0.4 D=0.5; panel is the judge) — do not change without a new prereg.
+  // scaled: HP x0.4 (1200–1400 -> 480–560), damage x0.6 (Your Move 60–80
+  // -> 36–48, Family Photo 48–68 -> 29–41). Pinned by
+  // evidence/2026-11-14/sim-reunion-balance-prereg.md — panel 1 at damage
+  // x0.5 won 6/8 (TOO EASY by the frozen bar); CORRECTION 3 re-tuned the
+  // damage scale to 0.6 (sweep point H=0.4 D=0.6, 3/6). Do not change
+  // without a new prereg.
   // Exposed as G.REUNION_ARENA_HP_SCALE / G.REUNION_ARENA_DMG_SCALE so
   // proof tests read the same numbers the code applies, never a copy.
   var REUNION_ARENA_HP_SCALE = 0.4;
-  var REUNION_ARENA_DMG_SCALE = 0.5;
+  var REUNION_ARENA_DMG_SCALE = 0.6;
 
   function cheb(ax, ay, bx, by) { return Math.max(Math.abs(ax - bx), Math.abs(ay - by)); }
   function sideOf(o) { return o && (o.kind === 'player' || o.kind === 'villager'); }

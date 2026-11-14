@@ -2,10 +2,12 @@
 //
 // The change (prereg evidence/2026-11-14/sim-reunion-balance-prereg.md,
 // sweep pick H=0.4 D=0.5, Steve-ordered 2026-11-14):
-//   REUNION_ARENA_HP_SCALE = 0.4, REUNION_ARENA_DMG_SCALE = 0.5.
+//   REUNION_ARENA_HP_SCALE = 0.4, REUNION_ARENA_DMG_SCALE = 0.6
+//   (panel 1 at damage x0.5 won 6/8 — TOO EASY by the frozen bar;
+//   CORRECTION 3 re-tuned the damage scale to 0.6).
 //   In ARENA fights the Reunion spawns from a per-fight CLONE of its def:
-//   HP 1200–1400 -> 480–560, Your Move 60–80 -> 30–40, Family Photo
-//   48–68 -> 24–34. Plus One has no damage field, so the rally turn is
+//   HP 1200–1400 -> 480–560, Your Move 60–80 -> 36–48, Family Photo
+//   48–68 -> 29–41. Plus One has no damage field, so the rally turn is
 //   unchanged. The mirror cap (1) is unchanged.
 //   Field fights keep the full def — the wild Reunion shares the same
 //   monsters.json entry, so the clone is the scope: the shared def is
@@ -103,16 +105,16 @@ function playWave(Game, cap, deathsBefore, mid, mode) {
   T.section('leg 0: scaler pins + the preregged constants');
   T.ok('HP scale constant is the preregged number (0.4)', Game.REUNION_ARENA_HP_SCALE === 0.4,
     'got=' + Game.REUNION_ARENA_HP_SCALE);
-  T.ok('damage scale constant is the preregged number (0.5)', Game.REUNION_ARENA_DMG_SCALE === 0.5,
+  T.ok('damage scale constant is the preregged number (0.6)', Game.REUNION_ARENA_DMG_SCALE === 0.6,
     'got=' + Game.REUNION_ARENA_DMG_SCALE);
   T.ok('mirror cap constant is still 1 (unchanged)', Game.REUNION_ARENA_MIRROR_CAP === 1,
     'got=' + Game.REUNION_ARENA_MIRROR_CAP);
   const scaled = Game.tbArenaReunionMdef(mdefs.reunion);
   T.ok('scaler returns a clone, not the shared def', scaled !== mdefs.reunion);
   T.ok('scaled HP is [480,560]', JSON.stringify(scaled.hp) === '[480,560]', 'got=' + JSON.stringify(scaled.hp));
-  T.ok('scaled Your Move is [30,40]', JSON.stringify((scaled.attack || {}).damage) === '[30,40]',
+  T.ok('scaled Your Move is [36,48]', JSON.stringify((scaled.attack || {}).damage) === '[36,48]',
     'got=' + JSON.stringify((scaled.attack || {}).damage));
-  T.ok('scaled Family Photo is [24,34]', JSON.stringify((photoOf(scaled) || {}).damage) === '[24,34]',
+  T.ok('scaled Family Photo is [29,41]', JSON.stringify((photoOf(scaled) || {}).damage) === '[29,41]',
     'got=' + JSON.stringify((photoOf(scaled) || {}).damage));
   T.ok('Plus One is unchanged (no damage field)', (scaled.attacks || []).find(function (a) { return a && a.name === 'Plus One'; }) &&
     !((scaled.attacks || []).find(function (a) { return a && a.name === 'Plus One'; }) || {}).damage);
@@ -147,9 +149,9 @@ function playWave(Game, cap, deathsBefore, mid, mode) {
   T.ok('arena Reunion mdef is the scaled clone', mA && mA.mdef !== mdefs.reunion &&
     JSON.stringify((mA.mdef || {}).hp) === '[480,560]',
     'mdef.hp=' + JSON.stringify((mA.mdef || {}).hp));
-  T.ok('arena Reunion Your Move is [30,40]', mA && JSON.stringify(((mA.mdef || {}).attack || {}).damage) === '[30,40]',
+  T.ok('arena Reunion Your Move is [36,48]', mA && JSON.stringify(((mA.mdef || {}).attack || {}).damage) === '[36,48]',
     'got=' + JSON.stringify(((mA.mdef || {}).attack || {}).damage));
-  T.ok('arena Reunion Family Photo is [24,34]', mA && JSON.stringify((photoOf(mA.mdef) || {}).damage) === '[24,34]',
+  T.ok('arena Reunion Family Photo is [29,41]', mA && JSON.stringify((photoOf(mA.mdef) || {}).damage) === '[29,41]',
     'got=' + JSON.stringify((photoOf(mA.mdef) || {}).damage));
   T.ok('shared def still full after the arena spawn', JSON.stringify(mdefs.reunion.hp) === '[1200,1400]' &&
     JSON.stringify((mdefs.reunion.attack || {}).damage) === '[60,80]',
@@ -201,8 +203,8 @@ function playWave(Game, cap, deathsBefore, mid, mode) {
     'reunions=' + countMonsters(Game, 'reunion'));
   T.ok('chained wave-3 Reunion HP is scaled [480,560]', mC && mC.maxHp >= 480 && mC.maxHp <= 560,
     'maxHp=' + (mC && mC.maxHp));
-  T.ok('chained wave-3 Reunion Your Move is [30,40]',
-    mC && JSON.stringify(((mC.mdef || {}).attack || {}).damage) === '[30,40]',
+  T.ok('chained wave-3 Reunion Your Move is [36,48]',
+    mC && JSON.stringify(((mC.mdef || {}).attack || {}).damage) === '[36,48]',
     'got=' + JSON.stringify(((mC.mdef || {}).attack || {}).damage));
   try { Game.tbEnd('fled'); } catch (e) {}
   try { Game.state.arenaContest = null; } catch (e) {}
