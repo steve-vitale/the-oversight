@@ -410,11 +410,19 @@ function mergeTree(base, ours, theirs) {
   const stepSrc = fs.readFileSync(path.join(REPO, 'scripts', 'culpritbisect-step.sh'), 'utf8');
   T.ok('step script names the band 190391..190398',
     stepSrc.indexOf('190391,190392,190393,190394,190395,190396,190397,190398') !== -1, 'band literal present');
-  // Stage 2: the subject branch is cut AFTER the prereg commit; at
-  // stage-1 time it must NOT exist yet.
+  // Stage 2: the subject branch was cut after the prereg commit;
+  // its tip is the far end (zero picks applied — pick 1 STOPPED).
   let subjectExists = true;
   try { git('rev-parse ' + SUBJECT_BRANCH); } catch (e) { subjectExists = false; }
-  T.ok('subject branch does NOT exist yet (cut after the prereg commit; stage 1)', subjectExists === false, SUBJECT_BRANCH + ' absent');
+  T.ok('subject branch exists (cut after the prereg commit; stage 2)', subjectExists === true, SUBJECT_BRANCH + ' present');
+  T.ok('subject tip is the far end 203a32775 (zero picks applied)',
+    git('rev-parse ' + SUBJECT_BRANCH) === FAR_FULL, git('rev-parse ' + SUBJECT_BRANCH).slice(0, 12));
+  T.ok('subject has exactly 0 commits on top of the far end (pick 1 never landed)',
+    git('rev-list --count ' + FAR + '..' + SUBJECT_BRANCH) === '0', 'count=0');
+  T.ok('subject tip subject is the far-end subject (sim-wave5kill-a)',
+    git('log -1 --format=%s ' + SUBJECT_BRANCH) === 'sim-wave5kill-a: blooded damage/survivability lever for wave-5 kills [needs-eyes] — pilot GO (6 kills from 0) + confirm GO (6 vs 2 control) on fresh band 99867-99882; proof 35/0; panel review_required (village-deaths watch, see evidence)', git('log -1 --format=%s ' + SUBJECT_BRANCH).slice(0, 80));
+  T.ok('subject tree equals the far-end tree (nothing applied)',
+    git('rev-parse ' + SUBJECT_BRANCH + '^{tree}') === git('rev-parse ' + FAR + '^{tree}'), 'trees equal');
   const t16Summary = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-summary.json');
   T.ok('no step summary exists for t16-merges (no judged sim ran)', fs.existsSync(t16Summary) === false, STEP);
   const t16Driver = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-driver.log');
@@ -425,11 +433,61 @@ function mergeTree(base, ours, theirs) {
   try { execSync('git rev-parse --verify CHERRY_PICK_HEAD', { cwd: REPO, stdio: 'pipe' }); } catch (e) { cherryPickHead = false; }
   T.ok('no cherry-pick is in progress', cherryPickHead === false, 'CHERRY_PICK_HEAD absent');
   const dirtyTracked = git('diff --name-only HEAD -- scripts evidence/2026-11-14 src/js');
-  const allowed = ['scripts/test-transplant16.js', 'evidence/2026-11-14/sim-transplant16-prereg.md'];
+  const allowed = ['scripts/test-transplant16.js', 'evidence/2026-11-14/sim-transplant16-prereg.md', 'evidence/2026-11-14/sim-transplant16.md'];
   const dirtyOther = dirtyTracked.split('\n').filter(function (ln) {
     return ln && !allowed.some(function (a) { return ln === a; });
   }).join('\n');
   T.ok('tracked tree is clean apart from this proof + the prereg (uncommitted until this proof passes)', dirtyOther === '', dirtyOther.slice(0, 200) || '(only allowed files)');
+
+  // ---- 8. Live pick 1 — STOP outcome, nothing resolved, nothing measured ----
+  T.section('8. STOP outcome — pick-1 conflict reported, nothing hand-resolved, nothing measured');
+  const ev16Path = path.join(REPO, 'evidence', '2026-11-14', 'sim-transplant16.md');
+  const ev16 = fs.existsSync(ev16Path) ? fs.readFileSync(ev16Path, 'utf8') : '';
+  T.ok('evidence file exists', ev16.length > 0, ev16Path);
+  T.ok('evidence file records the outcome as UNMEASURED-BY-CONFLICT', ev16.indexOf('UNMEASURED-BY-CONFLICT') !== -1, 'outcome present');
+  T.ok('evidence file records the exact conflict list (DU evidence/2026-11-08/prove-out-holdout.md)',
+    ev16.indexOf('DU evidence/2026-11-08/prove-out-holdout.md') !== -1, 'conflict list present');
+  T.ok('evidence file records the modify/delete wording (deleted in HEAD and modified in b9f64660c)',
+    ev16.indexOf('CONFLICT (modify/delete)') !== -1 && ev16.indexOf('deleted in HEAD and modified in b9f64660c') !== -1, 'modify/delete present');
+  T.ok('evidence file records stages 1 + 3 only, no stage 2 (base blob aff0d5ec…, theirs d1b27ea5…)',
+    ev16.indexOf('stages 1 + 3') !== -1 && ev16.indexOf('aff0d5ec') !== -1 && ev16.indexOf('d1b27ea5') !== -1, 'stages present');
+  T.ok('evidence file records the subject left at the far end 203a32775 with zero picks applied',
+    ev16.indexOf('LEFT in place at 203a32775') !== -1 && ev16.indexOf('ZERO picks') !== -1, 'subject tip present');
+  T.ok('evidence file records the live pick-1 merge tree 7c338f19…',
+    ev16.indexOf('7c338f19') !== -1, 'live tree present');
+  T.ok('evidence file records that no judged sim ran', ev16.indexOf('No judged sim ran') !== -1, 'no-sim note present');
+  T.ok('evidence file records the pick-1 mechanism (0ee7b3a39, ef7383bc0, prove-out holdout note)',
+    ev16.indexOf('0ee7b3a39') !== -1 && ev16.indexOf('ef7383bc0') !== -1, 'mechanism present');
+  T.ok('evidence file records the coordinator decision owed (drop pick 1 / land the note first / record unmeasurable)',
+    ev16.indexOf('Coordinator decision owed') !== -1, 'coordinator note present');
+  T.ok('evidence file records the infrastructure (flap ALL-OK, index clobber, telemetry NOT RUN)',
+    ev16.indexOf('HOST WRITE FLAP') !== -1 && ev16.indexOf('INDEX CLOBBER') !== -1 &&
+    ev16.indexOf('Telemetry deviation check: NOT RUN') !== -1, 'infrastructure present');
+  T.ok('evidence file records that no file was resolved (Resolutions recorded: NONE)',
+    ev16.indexOf('Resolutions recorded: NONE') !== -1, 'no-resolution note present');
+  T.ok('evidence file records Verdict: NONE', ev16.indexOf('Verdict: NONE') !== -1, 'verdict NONE present');
+  T.ok('evidence file records STEP t16-merges never ran (no corpus, summary, or driver log)',
+    ev16.indexOf('STEP t16-merges: never run') !== -1, 'STEP note present');
+  T.ok('no verdict (CARRIER/AMBIGUOUS/NOT-CARRIER) is claimed anywhere in the evidence file',
+    ev16.indexOf('VERDICT: CARRIER') === -1 && ev16.indexOf('VERDICT: AMBIGUOUS') === -1 && ev16.indexOf('VERDICT: NOT-CARRIER') === -1, 'no verdict claimed');
+  T.ok('evidence file records the informational reads (NOT predictions, #119 tooling-only, #121 test conflict)',
+    ev16.indexOf('INFORMATIONAL ONLY') !== -1 && ev16.indexOf('#119') !== -1 && ev16.indexOf('#121') !== -1, 'informational reads present');
+  T.ok('evidence file records the sense-testing note (no transcripts — no judged sim ran)',
+    ev16.indexOf('Sense-testing') !== -1 && ev16.indexOf('no transcripts exist') !== -1, 'sense-testing present');
+  // Prereg-commit ancestry by MESSAGE, not hash (0608Z lesson: an
+  // adoption rebase rewrites hashes).
+  const logSubjects = git('log --format=%s HEAD');
+  T.ok('prereg commit is an ancestor of HEAD (resolved by message, not hash)',
+    logSubjects.indexOf('sim-transplant16-a: prereg + stage-1 proof (290 legs; pick 1 non-tooling STOP predicted, picks 2-12 informational only)') !== -1, 'prereg message present');
+  const headBranch2 = git('rev-parse --abbrev-ref HEAD');
+  T.ok('HEAD is back on the arm branch sim-transplant16-a after the live pick (worktree-only)', worktreeOnly(headBranch2 === 'sim-transplant16-a'), 'HEAD=' + headBranch2);
+  let cherryPickHead2 = true;
+  try { execSync('git rev-parse --verify CHERRY_PICK_HEAD', { cwd: REPO, stdio: 'pipe' }); } catch (e) { cherryPickHead2 = false; }
+  T.ok('no cherry-pick is in progress (pick 1 was aborted)', cherryPickHead2 === false, 'CHERRY_PICK_HEAD absent');
+  T.ok('no pick-1 commit exists on the subject (holdout-tradeoff never landed)',
+    git('log --format=%s ' + FAR + '..' + SUBJECT_BRANCH).indexOf('holdout-tradeoff') === -1, 'no pick-1 commit');
+  T.ok('subject diff vs far end is empty (nothing applied)',
+    git('diff --name-only ' + FAR + ' ' + SUBJECT_BRANCH) === '', '(empty diff)');
 
   T.done();
 })().catch(function (e) { console.error('HARNESS ERROR', e); process.exit(1); });
