@@ -829,6 +829,24 @@
         return { ok: false, why: 'Already wound up — swing to release it.' };
       return { ok: true };
     },
+    'rage.unleash_rage': function (game) {
+      // RAGE IS LIVE (sim-rageprecheck-b 2026-11-14, run
+      // fleshout-loop-b-20261114T0330Z): re-pressing Unleash Rage while
+      // the buff is live re-armed an unspent buff for a turn + 60 kcal —
+      // 221/242 presses on the steeple check band were refreshes at
+      // rounds=3, worst fight 32 presses. A policy-side guard (A) zeroed
+      // competent (62 -> 0) but capable's fallback into competent's
+      // fight code pressed a second time through a separate once-per-
+      // fight map (117 -> 7), so no policy map can close it. The engine
+      // is the single choke point — every caller goes through
+      // useAbility — so refuse here, before payment, while any live
+      // buff remains (rounds > 0; the engine counts STRIKES, and the
+      // buff is deleted at 0 and at fight end). Strike to spend it.
+      var ra = game.state.scholar.rageActive;
+      if (ra && (ra.rounds || 0) > 0)
+        return { ok: false, why: 'The red is already down — your next strikes are already doubled. Strike to spend it.' };
+      return { ok: true };
+    },
     'retribution.unleash': function (game) {
       // REFUSED TAPS COST NOTHING (2026-10-14): BA.unleash empties the
       // battery and takes the 25% self-hit, and the turn + 30 kcal are paid,
