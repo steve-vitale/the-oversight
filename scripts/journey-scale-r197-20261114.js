@@ -60,6 +60,7 @@ fs.mkdirSync(EVIDIR, { recursive: true });
 const { mulberry32, loadGame, setupGame, runDays } = require('./sim-harness');
 const REGINST = require('./regionalstep-instrument-20261107'); // r107 Q1: regional-gate recorder (require, not a copy)
 const LIINST = require('./ladder-instrument-20261109'); // r112 Q1: Standing-ladder trace (require, not a copy)
+const CAPSRENDER = require('./ladder-caps-render'); // r197: honest caps column (delivered vs seat-open, not a collapsed 'delivered')
 const TRINST = require('./traderoad-instrument-20261109'); // r122 Q1+Q2: trade-road trace + wild wave-4 watch (require, not a copy)
 const DCINST = require('./deathcensus-instrument-20261110'); // r125 Q2: death-cause census (require, not a copy)
 const SCINST = require('./scholarcount-a-driver'); // r130 Q1/Q3: scholar-counts census (require, not a copy; main() is require.main-guarded, so requiring it runs nothing)
@@ -984,7 +985,7 @@ async function playSeed(seed) {
   fs.writeFileSync(path.join(EVIDIR, `journey-scale-r197-ladder-${seed}.txt`), (liFin.daily || []).map(d => {
     const tr = d.tracks ? `fight=${d.tracks.fight} forage=${d.tracks.forage} craft=${d.tracks.craft} talk=${d.tracks.talk} explore=${d.tracks.explore}` : 'tracks=-';
     const ct = d.countedTracks ? `cfight=${d.countedTracks.fight} cforage=${d.countedTracks.forage} ccraft=${d.countedTracks.craft} ctalk=${d.countedTracks.talk} cexplore=${d.countedTracks.explore}` : 'ctracks=-';
-    const caps = d.capstones ? Object.keys(d.capstones).map(k => `${k}=${d.capstones[k] ? (d.capstones[k].ready ? 'ready' : d.capstones[k].reason) : '?'}`).join(',') : 'caps=-';
+    const caps = CAPSRENDER.renderCaps(d); // r197: 'delivered' only for the delivered kind; other kinds read 'seat-open'
     // Mechanism counts (r122 fix — the pilot showed the reasons alone
     // cannot say HOW short the tribute/charter are): living wave-4+
     // veterans on hand, sealed chartered trade links, bundle done.
